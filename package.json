@@ -4,6 +4,7 @@
   "description": "Testing frameworks on testing frameworks",
   "private": true,
   "scripts": {
+    "repo:clean-merged-branches": "git remote update origin --prune && git branch --merged | grep --regexp=\"^(\\*|main)$\" | xargs --no-run-if-empty git branch -d"
   },
   "repository": {
     "type": "git",
