@@ -65,7 +65,7 @@ A test concept is anything that a test framework declares to clarify its interna
 
 #### Abstracting Test Concepts
 
-[Test concepts](#test-concept) have already been defined to aid in the definition of [layers](#layers). However, test concepts play different roles in different layers:
+On top of [identifying test concepts](#defining-test-concepts), defining data structures for test concepts can help separate concerns between layers.
 
 - **agnostic**: holds the schemas for test concepts to allow other layers to only have to interact via a contract
 - **syntactic**: the code you write to instantiate a test concept
