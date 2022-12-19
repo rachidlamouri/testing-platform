@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/rachidlamouri/testing-platform/issues"
   },
-  "homepage": "https://github.com/rachidlamouri/testing-platform#readme"
+  "homepage": "https://github.com/rachidlamouri/testing-platform#readme",
+  "devDependencies": {
+    "markdownlint-cli": "^0.32.2"
+  }
 }
