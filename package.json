@@ -1,0 +1,18 @@
+{
+  "name": "@testing-platform/testing-platform",
+  "version": "0.0.0",
+  "description": "Testing frameworks on testing frameworks",
+  "private": true,
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rachidlamouri/testing-platform.git"
+  },
+  "author": "rachidlamouri@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rachidlamouri/testing-platform/issues"
+  },
+  "homepage": "https://github.com/rachidlamouri/testing-platform#readme"
+}
