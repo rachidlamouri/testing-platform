@@ -12,3 +12,5 @@ jobs:
           node-version-file: '.nvmrc'
       - name: Install Dependencies
         run: npm clean-install
+      - name: Lint
+        run: npm run lint:md
