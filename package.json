@@ -4,7 +4,8 @@
   "description": "Testing frameworks on testing frameworks",
   "private": true,
   "scripts": {
-    "repo:clean-merged-branches": "git remote update origin --prune && git branch --merged | grep --regexp=\"^(\\*|main)$\" | xargs --no-run-if-empty git branch -d"
+    "repo:clean-merged-branches": "git remote update origin --prune; npm run --silent repo:list-merged-branches | xargs --no-run-if-empty git branch -d; echo Done",
+    "repo:list-merged-branches": "git branch --merged | grep --invert-match --extended-regexp \"(^\\*|main)\""
   },
   "repository": {
     "type": "git",
