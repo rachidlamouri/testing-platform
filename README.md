@@ -49,7 +49,7 @@ framework.
   undocumented conventions, but those conventions won't be considered standard until they can be enforced through
   tooling. Don't waste time trying to check something the computer can check for you.
 - **Identify and separate testing concerns**: To accomplish the [core goal](#description) of this project, we want to
-  identify and separate the [high level concerns](#concerns-and-terminology-related-to-testing) that go into building a
+  identify and separate the [framework concerns](./docs/frameworkConcerns.md) that go into building a
   testing framework
 - **A sound monorepo**: Ideally the testing platform will contain a lot of tooling to aid in the development process.
   There should be a definitive sequence in which to perform all checks so that any developer can pinpoint which system
@@ -59,104 +59,6 @@ framework.
   we have to build the ESLint rules for a test framework with the framework itself, then the rules can't be run against
   the framework until the framework tests have run to completion without errors. This helps us have a workable solution
   to what is otherwise a chicken and an egg problem.
-
-## Concerns and Terminology Related to Testing
-
-### Test Framework
-
-A test framework is a set of tooling, patterns, and processes for testing code.
-
-### Layers
-
-A layer encompasses a set of related concerns that should be orthogonal to other layers. So far, the testing-platform
-has identified four layers:
-
-- **syntactic**: Concerns related to writing tests
-- **architectural**: Concerns related to running and processing tests
-- **presentational**: Concerns related to displaying test results
-- **agnostic**: This is a meta-layer to hold code that can be abstracted away from the concerns of the other layers. For
-  example, this library introduces tooling to assert that something did or did not throw an error, which is not bound by
-  the concerns of the other layers.
-
-**note**: IMO the following should not be considered "layers". I'm documenting them as part of the current definition of
-"layer", so I can iterate on it. My reasoning is that the four layers above can all exist within the two not-layers
-below.
-
-- **shell**: Concerns related to files and processes including process streams and exit codes
-- **node**: Concerns related to the node runtime environment. This overlaps with some of the "shell" layer concerns, but
-  with how they exist in the node runtime environment.
-
-**note**: The following item was not included in the original scope of "layers", but in working on the testing platform
-I wanted to capture its definition so I can figure out where it belongs
-
-- **test**: There is a set of tools that are made for the tests of tooling that are made for specific layers. For
-  example "normalizeErrorStack" is a utility for removing dynamic error information from an Error message, such as the
-  filepath and line number in the stack trace. This utility is only used to test utilities that modify error messages
-  (yes it's hacky, but that's a separate issue). So I wanted to capture the set of concerns that are "testing platform
-  test file concerns" and should not be included in published code.
-
-### High Level Test Concerns
-
-This project identifies multiple high level concerns related to building a [test framework](#test-framework) that can
-manifest in one or more [layers](#layers).
-
-#### Defining Test Concepts
-
-A test concept is anything that a test framework declares to clarify its internal processes. This includes, but is not
-limited to (and does not necessarily have to include):
-
-- a test file
-- a test case
-- a test subject
-- a test hook
-- ...etc
-
-#### Abstracting Test Concepts
-
-On top of [identifying test concepts](#defining-test-concepts), defining data structures for test concepts can help
-separate concerns between layers.
-
-- **agnostic**: holds the schemas for test concepts to allow other layers to only have to interact via a contract
-- **syntactic**: the code you write to instantiate a test concept
-- **architectural**: all of the functions that transform and process test concepts
-- **presentational**: formats serializeable information about a test concept
-
-#### Signaling
-
-Signaling is the formal process of identifying the state of a test concept
-
-- **agnostic**: Can hold schemas for abstracting converting signal states between layers
-- **syntactic**: how a test developer indicates the pass/fail (or other) state of a test. This is usually done with an
-  errorable assertion, however this could also be done by returning a boolean, an enum, a nullable error object etc.
-- **architectural**: Can introduce conventions for how a test will be processed and how the result implies the status of
-  a test concept
-- **presentational**: Formats the status into something that is easy to consume
-
-#### Reporting
-
-Reporting means providing serializeable information about a test concept including the signaled status.
-
-- **agnostic**: Can abstract stream or other messaging APIs
-- **syntactic**: Defines how a test developer can include domain-specific information that will be added to the test
-  output
-- **architectural**: Can add conventions that result in additional information getting added to a serializeable test
-  concept
-- **presentational**: Consumes information reported by other layers to produce a readable output
-
-#### Orchestration
-
-- **agnostic**: Any tooling that abstracts processing code. For example, promise utilities that make it easy to sequence
-  asynchronous processes.
-- **syntactic**: Determines how a test developer can control the order in which tests are run
-- **architectural**: Dictates how test concepts are processed at runtime
-- **presentational**: Should be able to output test results without affecting the patterns that the architectural layer
-  uses
-
-### A Testing-Platform Test Framework
-
-A testing platform test framework is a [test framework](#test-framework) that intersects one or more [layers](#layers)
-with one or more [high level test concerns](#high-level-test-concerns) in the spirit of iterating towards the [driving
-goal](#description) of the testing platform.
 
 ## Monorepo Packages
 
@@ -174,8 +76,8 @@ to write TypeScript tests. Includes a bash script to run multiple test files, bu
 
 ### Rat Test
 
-This is a facade on the built-in utilities to introduce some of the terminology defined in [high level test
-concerns](#high-level-test-concerns).
+This is a facade on the built-in utilities to introduce some of the terminology defined in [framework
+concerns](./docs//frameworkConcerns.md)
 
 ### Mouse Test
 
