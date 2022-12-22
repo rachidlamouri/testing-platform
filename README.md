@@ -109,3 +109,10 @@ TBD
 **note**: I want to make sure I do more thorough research before I explain the pros and cons of the testing-platform. So
 far I have only used [mocha](https://mochajs.org/) and [jest](https://jestjs.io/), and I've done some brief research
 into [node-tap](https://www.npmjs.com/package/tap).
+
+### Frameworks to Research
+
+- Various [xUnit](https://en.wikipedia.org/wiki/XUnit) frameworks
+  - [SUnit](https://en.wikipedia.org/wiki/SUnit)
+- [Jasmine](https://jasmine.github.io/)
+- [Karma](https://karma-runner.github.io/latest/index.html)
