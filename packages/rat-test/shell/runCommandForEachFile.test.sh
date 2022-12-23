@@ -1,7 +1,7 @@
 DIRECTORY_NAME=`dirname $BASH_SOURCE`
-source "$DIRECTORY_NAME/../../ikaria-test/shell/report.sh"
+source "$DIRECTORY_NAME/../../ikaria-test/bash/report.sh"
 source "$DIRECTORY_NAME/assertEqual.sh"
-source "$DIRECTORY_NAME/../../ikaria-test/shell/underline.sh"
+source "$DIRECTORY_NAME/../../ikaria-test/bash/underline.sh"
 
 TEMPORARY_DIRECTORY_NAME="tmp"
 
