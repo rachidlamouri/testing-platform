@@ -20,5 +20,8 @@
   "homepage": "https://github.com/rachidlamouri/testing-platform#readme",
   "devDependencies": {
     "markdownlint-cli": "^0.32.2"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

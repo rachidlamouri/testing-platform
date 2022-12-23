@@ -1,0 +1,12 @@
+{
+  "name": "rat-test",
+  "scripts": {
+    "super:test-bash": "npm run --silent framework:test-bash --workspace ikaria-test",
+    "test:framework": "bash ./scripts/testFramework.sh",
+    "framework:test-bash": "bash ./shell/runCommandForEachFile.sh bash \\.test\\.sh\"",
+    "framework:test-node": "bash ./shell/runCommandForEachFile.sh ts-node \\.test\\.ts\""
+  },
+  "devDependencies": {
+    "ikaria-test": "*"
+  }
+}

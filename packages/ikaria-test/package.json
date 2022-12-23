@@ -1,0 +1,6 @@
+{
+  "name": "ikaria-test",
+  "scripts": {
+    "framework:test-bash": "cd $INIT_CWD && bash $1"
+  }
+}
