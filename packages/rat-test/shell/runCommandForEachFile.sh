@@ -1,5 +1,5 @@
 DIRECTORY_NAME=`dirname $BASH_SOURCE`
-source "$DIRECTORY_NAME/../../ikaria-test/shell/underline.sh"
+source "$DIRECTORY_NAME/../../ikaria-test/bash/underline.sh"
 
 set -e
 
