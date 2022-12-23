@@ -14,3 +14,5 @@ jobs:
         run: npm clean-install
       - name: Lint
         run: npm run lint:md
+      - name: Test Rat
+        run: npm run test:framework --workspace rat-test
