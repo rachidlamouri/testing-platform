@@ -1,12 +1,16 @@
 {
   "name": "rat-test",
   "scripts": {
+    "lint:types": "tsc",
     "super:test-bash": "npm run --silent framework:test-bash --workspace ikaria-test",
+    "super:test-type-script": "npm run --silent framework:test-type-script --workspace ikaria-test",
     "test:framework": "bash ./scripts/testFramework.sh",
-    "framework:test-bash": "bash ./shell/runCommandForEachFile.sh bash \\.test\\.sh\"",
-    "framework:test-node": "bash ./shell/runCommandForEachFile.sh ts-node \\.test\\.ts\""
+    "framework:test-bash": "RAT_DIR=`pwd` && cd $INIT_CWD && bash \"$RAT_DIR/shell/runCommandForEachFile.sh\" bash \\.test\\.sh\"",
+    "framework:test-type-script": "RAT_DIR=`pwd` && cd $INIT_CWD && bash \"$RAT_DIR/shell/runCommandForEachFile.sh\" ts-node \\.test\\.ts"
   },
   "devDependencies": {
-    "ikaria-test": "*"
+    "ikaria-test": "*",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
   }
 }
