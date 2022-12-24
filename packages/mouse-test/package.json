@@ -1,0 +1,12 @@
+{
+  "name": "mouse-test",
+  "scripts": {
+    "lint:types": "tsc",
+    "super:test-bash": "npm run --silent --workspace rat-test framework:test-bash",
+    "super:test-type-script": "npm run --silent --workspace rat-test framework:test-type-script",
+    "test:framework": "bash ./scripts/testFramework.sh"
+  },
+  "devDependencies": {
+    "rat-test": "*"
+  }
+}
