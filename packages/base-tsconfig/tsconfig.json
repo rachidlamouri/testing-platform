@@ -1,0 +1,9 @@
+{
+  "ts-node": {
+    "transpileOnly": true
+  },
+  "extends": "@tsconfig/node16",
+  "compilerOptions": {
+    "noEmit": true
+  }
+}
