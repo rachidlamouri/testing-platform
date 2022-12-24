@@ -7,6 +7,7 @@
     "test:framework": "bash ./scripts/testFramework.sh"
   },
   "devDependencies": {
+    "base-tsconfig": "*",
     "rat-test": "*"
   }
 }

@@ -1,10 +1,4 @@
 {
-  "ts-node": {
-    "transpileOnly": true
-  },
-  "extends": "@tsconfig/node16",
-  "include": ["type-script/"],
-  "compilerOptions": {
-    "noEmit": true
-  }
+  "extends": "base-tsconfig",
+  "include": ["type-script/"]
 }
