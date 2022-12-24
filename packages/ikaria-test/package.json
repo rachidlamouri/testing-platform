@@ -1,6 +1,12 @@
 {
   "name": "ikaria-test",
   "scripts": {
-    "framework:test-bash": "cd $INIT_CWD && bash $1"
+    "lint:types": "tsc",
+    "framework:test-bash": "cd $INIT_CWD && bash $1",
+    "framework:test-type-script": "cd $INIT_CWD && ts-node $1"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
   }
 }

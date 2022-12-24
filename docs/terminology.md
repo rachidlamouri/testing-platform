@@ -15,6 +15,8 @@ has identified four layers:
 - **agnostic**: This is a meta-layer to hold code that can be abstracted away from the concerns of the other layers. For
   example, this library introduces tooling to assert that something did or did not throw an error, which is not bound by
   the concerns of the other layers.
+- **transgressing**: This is a meta-layer for code that crosses the boundaries of other layers. Earlier frameworks will
+  have conventions that cross layer boundaries, but later frameworks will separate these concerns.
 
 **note**: IMO the following should not be considered "layers". I'm documenting them as part of the current definition of
 "layer", so I can iterate on it. My reasoning is that the four layers above can all exist within the two not-layers

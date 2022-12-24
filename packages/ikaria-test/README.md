@@ -21,6 +21,10 @@ platform is designed to support a tree of branching frameworks that tackle vario
 
 A file containing a Bash script that follows the ikaria [Bash conventions](#bash-conventions).
 
+#### TypeScript Test File
+
+A file containing TypeScript code that follows the ikaria [TypeScript conventions](#typescript-conventions).
+
 ### Shell Orchestration
 
 For Bash tests, run the Bash test file with `bash`. For TypeScript tests, run the TypeScript test file with `ts-node`.
@@ -49,3 +53,23 @@ Use the Bash [test](https://linuxcommand.org/lc3_man_pages/testh.html) utility t
 `[<test command> ] || exit n`, where n is greater than 0. It is recommended that all `exit` commands of this form
 increment `n` to help identify the source of a failure. By design, this convention will cause a test file to fail on the
 first error.
+
+## TypeScript Conventions
+
+### TypeScript Orchestration
+
+Uses the Node runtime model to execute a script from start to finish. Use the [orchestrator](./type-script/index.ts),
+an alias for `Promise`, to create a promise chain to group scenarios into separate blocks of code via
+`Promise.prototype.then`. This enables the execution of both synchronous and asynchronous code. Do not introduce
+branching logic with `Promise.prototype.catch` since, as of Node 16, Node will error immediately on an unhandled promise
+rejection. By design, this convention will cause a test file to fail on the first error.
+
+### TypeScript Reporting
+
+Use the [reporter](./type-script/index.ts), an alias for `console`, to send information to standard out.
+
+### TypeScript Signaling
+
+Use the [signaler](./type-script/index.ts), an alias of an [alias](./type-script/assertUtil.ts) of `assert`, to make
+assertions. Node's `assert` utility throws Errors which will cause the [orchestrator](#typescript-orchestration) to kill
+the process. By design, this convention will cause a test file to fail on the first error.
