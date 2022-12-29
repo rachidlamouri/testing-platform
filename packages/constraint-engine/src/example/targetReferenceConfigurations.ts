@@ -20,7 +20,6 @@ import {
   TestingPlatformPackageTypedTarget,
   TestingPlatformTargetTypeId,
 } from '../customTargets/testingPlatformPackage/targets';
-import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 
 export const targetReferenceConfigurations = [
   buildRootTargetReferenceConfiguration<
@@ -59,4 +58,4 @@ export const targetReferenceConfigurations = [
     normalizedOutputTargetPath:
       'testingPlatformPackageDirectorySet/:directoryName',
   }),
-] as unknown as UnknownTargetReferenceConfiguration[];
+] as const;

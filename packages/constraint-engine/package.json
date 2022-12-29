@@ -17,6 +17,7 @@
   },
   "scripts": {
     "lint:ts": "eslint --color --ext ts,js .",
-    "test": "npm run --silent --workspace rat-test framework:test-type-script"
+    "test": "npm run --silent --workspace rat-test framework:test-type-script",
+    "run-example": "ts-node src/example/run.ts"
   }
 }

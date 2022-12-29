@@ -28,6 +28,12 @@ module.exports = {
           { enums: true, ignoreTypeReferences: false, typedefs: true },
         ],
         'import/prefer-default-export': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'error',
+        'consistent-return': 'off',
+        'default-case': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'error',
+        '@typescript-eslint/switch-exhaustiveness-check': 'error',
+        'no-use-before-define': 'off',
       },
       parser: '@typescript-eslint/parser',
       parserOptions: {

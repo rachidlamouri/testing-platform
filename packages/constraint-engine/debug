@@ -1,0 +1,41 @@
+[
+  {
+    "loopCount": 0,
+    "currentNormalizedPath": null,
+    "referenceBuilderResult": {
+      "references": [],
+      "errors": [
+        {
+          "configuration": {
+            "typeId": "RootTargetReferenceConfiguration",
+            "inputData": {
+              "rootDirectoryRelativeToCurrentWorkingDirectory": "packages"
+            },
+            "normalizedInputTargetPath": "",
+            "outputTargetTypeId": "PackageDirectorySet",
+            "normalizedOutputTargetPath": "testingPlatformPackageDirectorySet"
+          },
+          "error": {
+            "errno": -2,
+            "syscall": "scandir",
+            "code": "ENOENT",
+            "path": "packages"
+          },
+          "originalTrace": [
+            "Error: ENOENT: no such file or directory, scandir 'packages'",
+            "    at Object.readdirSync (node:fs:1405:3)",
+            "    at Object.buildTestingPlatformPackageDirectorySetReference [as buildReference] (/home/rachid/projects/testing-platform/packages/constraint-engine/src/customTargets/testingPlatformPackage/buildTestingPlatformPackageDirectorySetReference.ts:35:6)",
+            "    at buildNormalizedRootTargetReference (/home/rachid/projects/testing-platform/packages/constraint-engine/src/engine/normalizedReferenceBuilders/buildNormalizedRootTargetReference.ts:11:56)",
+            "    at buildNormalizedTargetReferencesForConfiguration (/home/rachid/projects/testing-platform/packages/constraint-engine/src/engine/normalizedReferenceBuilders/buildNormalizedTargetReferencesForConfiguration.ts:21:43)",
+            "    at /home/rachid/projects/testing-platform/packages/constraint-engine/src/engine/normalizedReferenceBuilders/buildNormalizedTargetReferencesForPath.ts:45:77",
+            "    at Array.forEach (<anonymous>)",
+            "    at buildNormalizedTargetReferencesForPath (/home/rachid/projects/testing-platform/packages/constraint-engine/src/engine/normalizedReferenceBuilders/buildNormalizedTargetReferencesForPath.ts:43:25)",
+            "    at Object.run (/home/rachid/projects/testing-platform/packages/constraint-engine/src/engine/run.ts:28:74)",
+            "    at Object.<anonymous> (/home/rachid/projects/testing-platform/packages/constraint-engine/src/example/run.ts:4:18)",
+            "    at Module._compile (node:internal/modules/cjs/loader:1105:14)"
+          ]
+        }
+      ]
+    }
+  }
+]
