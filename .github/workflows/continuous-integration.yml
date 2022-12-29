@@ -18,3 +18,6 @@ jobs:
         run: npm run test:framework --workspace rat-test
       - name: Test Mouse
         run: npm run test:framework --workspace mouse-test
+      - name: Check Constraints
+        run: npx ts-node packages/constraint-engine/src/example/run.ts
+
