@@ -1,4 +1,5 @@
-export type RootTargetPath = '';
+export const ROOT_TARGET_PATH = '' as const;
+export type RootTargetPath = typeof ROOT_TARGET_PATH;
 export type UnknownTargetPath = string;
 
 export type PrefixedTargetPath<
