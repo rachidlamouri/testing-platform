@@ -1,15 +1,24 @@
 import fs from 'fs';
-import { orchestrate, report, signaler } from "rat-test/type-script/transgressing";
+import {
+  orchestrate,
+  report,
+  signaler,
+} from 'rat-test/type-script/transgressing';
 import { errorUtil } from '../../agnostic/errorUtils';
-import { createDirectory, DirectoryHelper, RootDirectoryHelper, USE_CWD } from './createDirectory';
+import {
+  createDirectory,
+  RootDirectoryHelper,
+  USE_CWD,
+} from './createDirectory';
 import { removeFileSystemObject } from './removeFileSystemObject';
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
   .then(() => {
-    report('• createDirectory')
+    report('• createDirectory');
   })
   .then(() => {
-    report('  ⇀ Testing a directory that does not exist')
+    report('  ⇀ Testing a directory that does not exist');
 
     const directoryPath = 'foo';
     removeFileSystemObject(directoryPath);
@@ -21,7 +30,7 @@ orchestrate()
         relativePath: directoryPath,
       });
     });
-    const isOnDiskAfter = fs.existsSync(directoryPath)
+    const isOnDiskAfter = fs.existsSync(directoryPath);
     removeFileSystemObject(directoryPath);
 
     signaler.isTrue(!isOnDiskBefore);
@@ -31,11 +40,11 @@ orchestrate()
         directoryPath: 'foo',
         teardown: (result.value as RootDirectoryHelper).teardown,
       },
-    })
+    });
     signaler.isTrue(isOnDiskAfter);
   })
   .then(() => {
-    report('  ⇀ Testing a directory that exists')
+    report('  ⇀ Testing a directory that exists');
 
     const directoryPath = 'foo';
     removeFileSystemObject(directoryPath);
@@ -48,7 +57,7 @@ orchestrate()
         relativePath: directoryPath,
       });
     });
-    const isOnDiskAfter = fs.existsSync(directoryPath)
+    const isOnDiskAfter = fs.existsSync(directoryPath);
     removeFileSystemObject(directoryPath);
 
     signaler.isTrue(isOnDiskBefore);
@@ -58,11 +67,11 @@ orchestrate()
         directoryPath: 'foo',
         teardown: (result.value as RootDirectoryHelper).teardown,
       },
-    })
+    });
     signaler.isTrue(isOnDiskAfter);
   })
   .then(() => {
-    report('  ⇀ Testing a nested directory')
+    report('  ⇀ Testing a nested directory');
 
     const inputDirectoryPath1 = 'foo';
     const inputDirectoryPath2 = 'bar';
@@ -80,7 +89,7 @@ orchestrate()
         relativePath: inputDirectoryPath2,
       });
     });
-    const isOnDiskAfter = fs.existsSync(outputDirectoryPath2)
+    const isOnDiskAfter = fs.existsSync(outputDirectoryPath2);
     removeFileSystemObject(inputDirectoryPath1);
 
     signaler.isTrue(!isOnDiskBefore);
@@ -89,11 +98,11 @@ orchestrate()
       value: {
         directoryPath: 'foo/bar',
       },
-    })
+    });
     signaler.isTrue(isOnDiskAfter);
   })
   .then(() => {
-    report('  • teardown')
+    report('  • teardown');
   })
   .then(() => {
     report('    ⇀ Testing a root directory');
@@ -109,18 +118,18 @@ orchestrate()
     const result = errorUtil.tryThrowable(() => {
       helper.teardown();
     });
-    const isOnDiskAfter = fs.existsSync(directoryPath)
+    const isOnDiskAfter = fs.existsSync(directoryPath);
     removeFileSystemObject(directoryPath);
 
     signaler.isTrue(!isOnDiskBefore);
     signaler.isDeepEqual(result, {
       didThrow: false,
       value: undefined,
-    })
+    });
     signaler.isTrue(!isOnDiskAfter);
   })
   .then(() => {
-    report('    ⇀ Testing the root of a nested directory')
+    report('    ⇀ Testing the root of a nested directory');
 
     const inputDirectoryPath1 = 'foo';
     const inputDirectoryPath2 = 'bar';
@@ -134,19 +143,18 @@ orchestrate()
     createDirectory({
       root: rootHelper,
       relativePath: inputDirectoryPath2,
-    })
+    });
 
     const result = errorUtil.tryThrowable(() => {
       rootHelper.teardown();
     });
-    const isOnDiskAfter = fs.existsSync(outputDirectoryPath2)
+    const isOnDiskAfter = fs.existsSync(outputDirectoryPath2);
     removeFileSystemObject(inputDirectoryPath1);
 
     signaler.isTrue(!isOnDiskBefore);
     signaler.isDeepEqual(result, {
       didThrow: false,
       value: undefined,
-    })
+    });
     signaler.isTrue(!isOnDiskAfter);
-  })
-
+  });

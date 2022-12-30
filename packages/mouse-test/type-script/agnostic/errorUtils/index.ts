@@ -1,1 +1,1 @@
-export { errorUtil } from './errorUtil'
+export { errorUtil } from './errorUtil';

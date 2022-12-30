@@ -1,12 +1,12 @@
 export type NonErrorResult<T> = {
   didThrow: false;
   value: T;
-}
+};
 
 export type ErrorResult = {
   didThrow: true;
   value: unknown;
-}
+};
 
 export type ThrowableResult<T> = NonErrorResult<T> | ErrorResult;
 

@@ -5,12 +5,12 @@ export type FileCreatorParameter = {
   root: DirectoryHelper;
   relativePath: string;
   contents: string;
-}
+};
 
 export type FileHelper = {
   filePath: string;
   contents: string;
-}
+};
 
 export const createFile = ({
   root,
@@ -18,10 +18,10 @@ export const createFile = ({
   contents,
 }: FileCreatorParameter): FileHelper => {
   const filePath = `${root.directoryPath}/${relativePath}`;
-  fs.writeFileSync(filePath, contents)
+  fs.writeFileSync(filePath, contents);
 
   return {
     filePath,
     contents,
-  }
-}
+  };
+};

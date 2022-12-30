@@ -1,5 +1,5 @@
-import { tryThrowable } from "./tryThrowable";
+import { tryThrowable } from './tryThrowable';
 
 export const errorUtil = {
-  tryThrowable
-}
+  tryThrowable,
+};

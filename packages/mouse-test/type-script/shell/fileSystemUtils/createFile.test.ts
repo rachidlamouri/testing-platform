@@ -1,15 +1,20 @@
 import fs from 'fs';
-import { orchestrate, report, signaler } from "rat-test/type-script/transgressing";
+import {
+  orchestrate,
+  report,
+  signaler,
+} from 'rat-test/type-script/transgressing';
 import { errorUtil } from '../../agnostic/errorUtils';
 import { createFile } from './createFile';
 import { createDirectory, USE_CWD } from './createDirectory';
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
   .then(() => {
-    report('• createMockFile')
+    report('• createMockFile');
   })
   .then(() => {
-    report('  ⇀ Testing creating a file')
+    report('  ⇀ Testing creating a file');
 
     const outputFilePath = 'foo/bar';
     const rootHelper = createDirectory({
@@ -25,10 +30,10 @@ orchestrate()
         contents: 'Hello!',
       });
     });
-    const isOnDiskAfter = fs.existsSync(outputFilePath)
+    const isOnDiskAfter = fs.existsSync(outputFilePath);
     const fileContentsResult = errorUtil.tryThrowable(() => {
       return fs.readFileSync(outputFilePath, 'utf8');
-    })
+    });
 
     rootHelper.teardown();
 
@@ -39,10 +44,10 @@ orchestrate()
         filePath: 'foo/bar',
         contents: 'Hello!',
       },
-    })
+    });
     signaler.isTrue(isOnDiskAfter);
     signaler.isDeepEqual(fileContentsResult, {
       didThrow: false,
-      value: 'Hello!'
+      value: 'Hello!',
     });
-  })
+  });
