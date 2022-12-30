@@ -12,8 +12,10 @@ jobs:
           node-version-file: '.nvmrc'
       - name: Install Dependencies
         run: npm clean-install
-      - name: Lint
+      - name: Lint Markdown
         run: npm run lint:md
+      - name: Lint TypeScript
+        run: npm run lint:ts:all
       - name: Test Rat
         run: npm run test:framework --workspace rat-test
       - name: Test Mouse
