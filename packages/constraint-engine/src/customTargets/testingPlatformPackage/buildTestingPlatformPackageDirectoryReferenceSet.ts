@@ -27,7 +27,7 @@ export const buildTestingPlatformPackageDirectoryReferenceSet = (<
     TestingPlatformPackageDirectorySetTypedTarget,
     TPrefix
   >,
-) => {
+): TestingPlatformPackageDirectoryTargetReference<TPrefix>[] => {
   const targetReferences: TestingPlatformPackageDirectoryTargetReference<TPrefix>[] =
     directorySetReference.instance.map(
       (

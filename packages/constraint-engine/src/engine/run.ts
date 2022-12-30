@@ -19,6 +19,8 @@ export type ConstraintEngineRunner = (
   input: ConstraintEngineRunnerInput,
 ) => void;
 
+const { log } = console;
+
 export const run: ConstraintEngineRunner = ({
   targetReferenceConfigurations,
   ruleConfigurations,
@@ -76,21 +78,21 @@ export const run: ConstraintEngineRunner = ({
     allRuleResults.every((result) => result.isTargetValid);
 
   allTargetReferenceConfigurationErrors.forEach((error, index) => {
-    console.log(`Target Configuration Error ${index}`);
-    console.log(JSON.stringify(error, null, 2));
-    console.log();
+    log(`Target Configuration Error ${index}`);
+    log(JSON.stringify(error, null, 2));
+    log();
   });
 
   allRuleResults
     .filter((result) => !result.isTargetValid)
     .forEach((result, index) => {
-      console.log(`Rule Failure ${index}`);
-      console.log(JSON.stringify(result, null, 2));
-      console.log();
+      log(`Rule Failure ${index}`);
+      log(JSON.stringify(result, null, 2));
+      log();
     });
 
   if (isEverythingValid) {
-    console.log(`All ${allRuleResults.length} checks passed`);
+    log(`All ${allRuleResults.length} checks passed`);
   }
 
   const exitCode = isEverythingValid ? 0 : 1;

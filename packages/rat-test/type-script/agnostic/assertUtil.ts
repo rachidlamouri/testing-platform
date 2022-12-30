@@ -1,10 +1,7 @@
-import { ikariaAssertUtil } from 'ikaria-test/type-script/agnostic/assertUtil'
+import { ikariaAssertUtil } from 'ikaria-test/type-script/agnostic/assertUtil';
 
 export type AssertUtil = {
-  isStrictEqual: <T = unknown>(
-    actual: T,
-    expected: T,
-  ) => void;
+  isStrictEqual: <T = unknown>(actual: T, expected: T) => void;
   isDeepEqual: <T = unknown>(actual: T, expected: T) => void;
   isTrue: (actual: boolean) => void;
 };

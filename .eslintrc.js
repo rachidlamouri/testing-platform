@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { posix } = require('path');
 
 module.exports = {
@@ -34,10 +35,18 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'error',
         '@typescript-eslint/switch-exhaustiveness-check': 'error',
         'no-use-before-define': 'off',
+        'import/no-extraneous-dependencies': [
+          'error',
+          { devDependencies: true },
+        ],
       },
       parser: '@typescript-eslint/parser',
       parserOptions: {
-        project: posix.join(__dirname, 'tsconfig.json'),
+        project: fs
+          .readdirSync('packages')
+          .map((directoryName) =>
+            posix.join(__dirname, 'packages', directoryName, 'tsconfig.json'),
+          ),
       },
     },
   ],

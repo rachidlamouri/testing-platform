@@ -1,10 +1,15 @@
 import { Rule } from './rule';
-import { NormalizedTargetPath, UnknownTargetPath } from './targetPath';
+import { AnyTargetInstance } from './targetInstance';
+import {
+  AnyTargetPath,
+  NormalizedTargetPath,
+  UnknownTargetPath,
+} from './targetPath';
 import { DerivedTargetReferenceConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
 import { DerivedTargetReferenceSetConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
 import { RootTargetReferenceConfiguration } from './targetReferenceConfiguration/rootTargetReferenceConfiguration';
 import { UnknownTargetReferenceConfiguration } from './targetReferenceConfiguration/unknownTargetReferenceConfiguration';
-import { UnknownTypedTarget } from './typedTarget';
+import { AnyTypedTarget, UnknownTypedTarget } from './typedTarget';
 
 export type RuleConfiguration<
   TTypedTarget extends UnknownTypedTarget,
@@ -23,7 +28,7 @@ export type UnknownRuleConfiguration = RuleConfiguration<
 type RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfiguration extends UnknownTargetReferenceConfiguration,
 > = TTargetReferenceConfiguration extends RootTargetReferenceConfiguration<
-  any,
+  AnyTargetInstance,
   infer TOutputTypedTarget,
   infer TOutputTargetPath
 >
@@ -32,8 +37,8 @@ type RuleConfigurationFromTargetReferenceConfiguration<
       NormalizedTargetPath<TOutputTargetPath>
     >
   : TTargetReferenceConfiguration extends DerivedTargetReferenceConfiguration<
-      any,
-      any,
+      AnyTypedTarget,
+      AnyTargetPath,
       infer TOutputTypedTarget,
       infer TOutputTargetPath
     >
@@ -42,8 +47,8 @@ type RuleConfigurationFromTargetReferenceConfiguration<
       NormalizedTargetPath<TOutputTargetPath>
     >
   : TTargetReferenceConfiguration extends DerivedTargetReferenceSetConfiguration<
-      any,
-      any,
+      AnyTypedTarget,
+      AnyTargetPath,
       infer TOutputTypedTarget,
       infer TOutputTargetPath
     >
@@ -54,6 +59,7 @@ type RuleConfigurationFromTargetReferenceConfiguration<
   : never;
 
 export type RuleConfigurationFromTargetReferenceConfigurations<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TTargetReferenceConfigurations extends readonly any[],
 > = RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfigurations[number]

@@ -1,6 +1,11 @@
-import { orchestrate, report, signaler } from 'rat-test/type-script/transgressing';
+import {
+  orchestrate,
+  report,
+  signaler,
+} from 'rat-test/type-script/transgressing';
 import { tryThrowable } from './tryThrowable';
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
   .then(() => {
     report('• tryThrowable');
@@ -38,7 +43,7 @@ orchestrate()
     });
   })
   .then(() => {
-    report('  ⇀ Testing a closure that throws a non-Error')
+    report('  ⇀ Testing a closure that throws a non-Error');
 
     const result = tryThrowable(() => {
       // eslint-disable-next-line @typescript-eslint/no-throw-literal
