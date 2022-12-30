@@ -6,7 +6,7 @@
   "scripts": {
     "lint:ts:all": "npm run --silent lint:ts .",
     "lint:ts:fix-all": "npm run --silent lint:ts -- --fix .",
-    "lint:ts": "eslint --color --ext ts,js",
+    "lint:ts": "eslint --color --max-warnings 0 --ext ts,js",
     "lint:md": "markdownlint '**/*.md' --ignore node_modules",
     "repo:clean-merged-branches": "git remote update origin --prune; npm run --silent repo:list-merged-branches | xargs --no-run-if-empty git branch -d; echo Done",
     "repo:list-merged-branches": "git branch --merged | grep --invert-match --extended-regexp \"(^\\*|main)\""
