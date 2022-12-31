@@ -4,6 +4,7 @@
   "description": "Testing frameworks on testing frameworks",
   "private": true,
   "scripts": {
+    "lint:constraints": "npx ts-node packages/constraint-engine/src/example/run.ts",
     "lint:ts:all": "npm run --silent lint:ts .",
     "lint:ts:fix-all": "npm run --silent lint:ts -- --fix .",
     "lint:ts": "eslint --color --max-warnings 0 --ext ts,js",
