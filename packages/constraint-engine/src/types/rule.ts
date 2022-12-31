@@ -13,5 +13,6 @@ export type UnknownNormalizedAppliedRuleResult = {
   targetTypeId: UnknownTargetTypeId;
   normalizedTargetPath: UnknownTargetPath;
   targetInstancePath: UnknownTargetPath;
+  targetInstance: UnknownTargetInstance;
   isTargetValid: boolean;
 };
