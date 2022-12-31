@@ -9,5 +9,8 @@
   },
   "scripts": {
     "test": "npm run --silent --workspace rat-test framework:test-type-script"
+  },
+  "testingPlatformConfiguration": {
+    "typeId": "NonTestFramework"
   }
 }
