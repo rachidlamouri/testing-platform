@@ -9,5 +9,8 @@
   "devDependencies": {
     "base-tsconfig": "*",
     "rat-test": "*"
+  },
+  "testingPlatformConfiguration": {
+    "typeId": "TestFramework"
   }
 }

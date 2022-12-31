@@ -1,3 +1,6 @@
 {
-  "name": "base-tsconfig"
+  "name": "base-tsconfig",
+  "testingPlatformConfiguration": {
+    "typeId": "NonTestFramework"
+  }
 }
