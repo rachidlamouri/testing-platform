@@ -1,4 +1,5 @@
 import { listIsNotEmpty } from '../customRules/listIsNotEmpty';
+import { packageExtendsBaseTypeScriptConfiguration } from '../customRules/packageExtendsBaseTypeScriptConfiguration';
 import { packageHasPackageFile } from '../customRules/packageHasPackagefile';
 import { packageHasTestingPlatformConfiguration } from '../customRules/packageHasTestingPlatformConfiguration';
 import { packageHasTypeScriptConfigFile } from '../customRules/packageHasTypeScriptConfigFile';
@@ -31,5 +32,10 @@ export const ruleConfigurations: CustomRuleConfiguration[] = [
     targetTypeId: TestingPlatformTargetTypeId.Package,
     normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageHasTestingPlatformConfiguration,
+  },
+  {
+    targetTypeId: TestingPlatformTargetTypeId.Package,
+    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
+    rule: packageExtendsBaseTypeScriptConfiguration,
   },
 ];
