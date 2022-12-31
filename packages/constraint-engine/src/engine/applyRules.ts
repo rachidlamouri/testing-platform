@@ -29,6 +29,7 @@ export const applyRules = ({
             targetTypeId: targetReference.typeId,
             normalizedTargetPath: targetReference.normalizedPath,
             targetInstancePath: targetReference.instancePath,
+            targetInstance: targetReference.instance,
             isTargetValid,
           } satisfies UnknownNormalizedAppliedRuleResult;
         });
