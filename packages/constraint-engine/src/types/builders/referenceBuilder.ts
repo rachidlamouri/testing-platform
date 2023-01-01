@@ -10,3 +10,12 @@ export type ReferenceBuilder<
 > = (
   inputData: TInputData,
 ) => TargetReference<TOutputTypedTarget, TOutputTargetPath>;
+
+export type PartiallyKnownReferenceBuilder<
+  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTargetPath extends UnknownTargetPath,
+> = ReferenceBuilder<
+  UnknownTargetInstance,
+  TOutputTypedTarget,
+  TOutputTargetPath
+>;
