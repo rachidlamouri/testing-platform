@@ -1,29 +1,61 @@
-import { DerivedReferenceBuilder } from '../builders/derivedReferenceBuilder';
+import { KnownDerivedReferenceBuilder } from '../builders/derivedReferenceBuilder';
 import { NormalizedTargetPath, UnknownTargetPath } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
 import { TargetReferenceConfigurationTypeId } from './typeId';
 
-export type DerivedTargetReferenceConfiguration<
-  TInputTypedTarget extends UnknownTypedTarget,
-  TInputTargetPath extends UnknownTargetPath,
+type DerivedTargetReferenceConfiguration<
+  TActualInputTypedTarget extends UnknownTypedTarget,
+  TActualInputTargetPath extends UnknownTargetPath,
+  TExpectedInputTypedTarget extends UnknownTypedTarget,
+  TExpectedInputTargetPath extends UnknownTargetPath,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
 > = {
   typeId: TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration;
-  buildReference: DerivedReferenceBuilder<
-    TInputTypedTarget,
-    TInputTargetPath,
+  buildReference: KnownDerivedReferenceBuilder<
+    TActualInputTypedTarget,
+    TActualInputTargetPath,
     TOutputTypedTarget,
     TOutputTargetPath
   >;
-  inputTargetTypeId: TInputTypedTarget['typeId'];
-  normalizedInputTargetPath: NormalizedTargetPath<TInputTargetPath>;
+  inputTargetTypeId: TExpectedInputTypedTarget['typeId'];
+  normalizedInputTargetPath: NormalizedTargetPath<TExpectedInputTargetPath>;
   outputTargetTypeId: TOutputTypedTarget['typeId'];
   normalizedOutputTargetPath: NormalizedTargetPath<TOutputTargetPath>;
 };
 
+export type KnownDerivedTargetReferenceConfiguration<
+  TInputTypedTarget extends UnknownTypedTarget,
+  TInputTargetPath extends UnknownTargetPath,
+  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTargetPath extends UnknownTargetPath,
+> = DerivedTargetReferenceConfiguration<
+  TInputTypedTarget,
+  TInputTargetPath,
+  TInputTypedTarget,
+  TInputTargetPath,
+  TOutputTypedTarget,
+  TOutputTargetPath
+>;
+
+export type PartiallyKnownDerivedTargetReferenceConfiguration<
+  TInputTypedTarget extends UnknownTypedTarget,
+  TInputTargetPath extends UnknownTargetPath,
+  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTargetPath extends UnknownTargetPath,
+> = DerivedTargetReferenceConfiguration<
+  UnknownTypedTarget,
+  UnknownTargetPath,
+  TInputTypedTarget,
+  TInputTargetPath,
+  TOutputTypedTarget,
+  TOutputTargetPath
+>;
+
 export type UnknownDerivedTargetReferenceConfiguration =
   DerivedTargetReferenceConfiguration<
+    UnknownTypedTarget,
+    UnknownTargetPath,
     UnknownTypedTarget,
     UnknownTargetPath,
     UnknownTypedTarget,

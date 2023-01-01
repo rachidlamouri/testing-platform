@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { DerivedReferenceBuilder } from '../../types/builders/derivedReferenceBuilder';
+import { KnownDerivedReferenceBuilder } from '../../types/builders/derivedReferenceBuilder';
 import { UnknownTargetPath } from '../../types/targetPath';
 import { TargetReference } from '../../types/targetReference';
 import { buildJsonFileInstance } from '../file/buildJsonFileInstance';
@@ -51,7 +51,7 @@ export const buildTestingPlatformPackageReference = (<
     instance,
     path: targetPath,
   };
-}) satisfies DerivedReferenceBuilder<
+}) satisfies KnownDerivedReferenceBuilder<
   TestingPlatformPackageDirectoryTypedTarget,
   TestingPlatformPackageTargetPath<string>,
   TestingPlatformPackageTypedTarget,

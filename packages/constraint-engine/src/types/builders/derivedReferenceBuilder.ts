@@ -2,7 +2,7 @@ import { UnknownTargetPath } from '../targetPath';
 import { TargetReference } from '../targetReference';
 import { UnknownTypedTarget } from '../typedTarget';
 
-export type DerivedReferenceBuilder<
+export type KnownDerivedReferenceBuilder<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTarget extends UnknownTypedTarget,
@@ -10,3 +10,13 @@ export type DerivedReferenceBuilder<
 > = (
   inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
 ) => TargetReference<TOutputTypedTarget, TOutputTargetPath>;
+
+export type PartiallyKnownDerivedReferenceBuilder<
+  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTargetPath extends UnknownTargetPath,
+> = KnownDerivedReferenceBuilder<
+  UnknownTypedTarget,
+  UnknownTargetPath,
+  TOutputTypedTarget,
+  TOutputTargetPath
+>;
