@@ -1,5 +1,9 @@
+import { PartiallyKnownDerivedReferenceSetBuilder } from '../types/builders/derivedReferenceSetBuilder';
 import { UnknownTargetPath } from '../types/targetPath';
-import { DerivedTargetReferenceSetConfiguration } from '../types/targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
+import {
+  KnownDerivedTargetReferenceSetConfiguration,
+  PartiallyKnownDerivedTargetReferenceSetConfiguration,
+} from '../types/targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
 import { UnknownTypedTarget } from '../types/typedTarget';
 
@@ -15,14 +19,14 @@ export const buildDerivedTargetReferenceSetConfiguration = <
   normalizedOutputTargetPath,
   buildReferenceSet,
 }: Omit<
-  DerivedTargetReferenceSetConfiguration<
+  KnownDerivedTargetReferenceSetConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
     TOutputTypedTarget,
     TOutputTargetPath
   >,
   'typeId'
->): DerivedTargetReferenceSetConfiguration<
+>): PartiallyKnownDerivedTargetReferenceSetConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
   TOutputTypedTarget,
@@ -34,5 +38,9 @@ export const buildDerivedTargetReferenceSetConfiguration = <
   normalizedInputTargetPath,
   outputTargetTypeId,
   normalizedOutputTargetPath,
-  buildReferenceSet,
+  buildReferenceSet:
+    buildReferenceSet as PartiallyKnownDerivedReferenceSetBuilder<
+      TOutputTypedTarget,
+      TOutputTargetPath
+    >,
 });

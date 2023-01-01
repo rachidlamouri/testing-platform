@@ -10,3 +10,13 @@ export type DerivedReferenceSetBuilder<
 > = (
   inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
 ) => TargetReference<TOutputTypedTarget, TOutputTargetPath>[];
+
+export type PartiallyKnownDerivedReferenceSetBuilder<
+  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTargetPath extends UnknownTargetPath,
+> = DerivedReferenceSetBuilder<
+  UnknownTypedTarget,
+  UnknownTargetPath,
+  TOutputTypedTarget,
+  TOutputTargetPath
+>;
