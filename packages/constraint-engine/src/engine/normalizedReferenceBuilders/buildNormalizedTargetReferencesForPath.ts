@@ -17,7 +17,7 @@ export class TargetReferenceConfigurationError extends Error {
 }
 
 export type NormalizedTargetReferencesBuilderInput = {
-  targetReferenceConfigurations: UnknownTargetReferenceConfiguration[];
+  targetReferenceConfigurations: readonly UnknownTargetReferenceConfiguration[];
   normalizedTargetReferenceMap: NormalizedTargetReferenceMap;
   currentNormalizedPath: string;
 };
