@@ -1,6 +1,10 @@
+import { PartiallyKnownReferenceBuilder } from '../types/builders/referenceBuilder';
 import { UnknownTargetInstance } from '../types/targetInstance';
 import { UnknownTargetPath } from '../types/targetPath';
-import { RootTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/rootTargetReferenceConfiguration';
+import {
+  KnownRootTargetReferenceConfiguration,
+  PartiallyKnownRootTargetReferenceConfiguration,
+} from '../types/targetReferenceConfiguration/rootTargetReferenceConfiguration';
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
 import { UnknownTypedTarget } from '../types/typedTarget';
 
@@ -15,13 +19,13 @@ export const buildRootTargetReferenceConfiguration = <
   normalizedOutputTargetPath,
   buildReference,
 }: Omit<
-  RootTargetReferenceConfiguration<
+  KnownRootTargetReferenceConfiguration<
     TInputData,
     TOutputTypedTarget,
     TOutputTargetPath
   >,
   'typeId'
->): RootTargetReferenceConfiguration<
+>): PartiallyKnownRootTargetReferenceConfiguration<
   TInputData,
   TOutputTypedTarget,
   TOutputTargetPath
@@ -31,5 +35,8 @@ export const buildRootTargetReferenceConfiguration = <
   normalizedInputTargetPath,
   outputTargetTypeId,
   normalizedOutputTargetPath,
-  buildReference,
+  buildReference: buildReference as PartiallyKnownReferenceBuilder<
+    TOutputTypedTarget,
+    TOutputTargetPath
+  >,
 });

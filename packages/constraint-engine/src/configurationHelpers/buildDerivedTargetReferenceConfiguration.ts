@@ -1,5 +1,9 @@
+import { PartiallyKnownDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
 import { UnknownTargetPath } from '../types/targetPath';
-import { DerivedTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/derivedTargetReferenceConfiguration';
+import {
+  KnownDerivedTargetReferenceConfiguration,
+  PartiallyKnownDerivedTargetReferenceConfiguration,
+} from '../types/targetReferenceConfiguration/derivedTargetReferenceConfiguration';
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
 import { UnknownTypedTarget } from '../types/typedTarget';
 
@@ -15,14 +19,14 @@ export const buildDerivedTargetReferenceConfiguration = <
   normalizedOutputTargetPath,
   buildReference,
 }: Omit<
-  DerivedTargetReferenceConfiguration<
+  KnownDerivedTargetReferenceConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
     TOutputTypedTarget,
     TOutputTargetPath
   >,
   'typeId'
->): DerivedTargetReferenceConfiguration<
+>): PartiallyKnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
   TOutputTypedTarget,
@@ -34,5 +38,8 @@ export const buildDerivedTargetReferenceConfiguration = <
   normalizedInputTargetPath,
   outputTargetTypeId,
   normalizedOutputTargetPath,
-  buildReference,
+  buildReference: buildReference as PartiallyKnownDerivedReferenceBuilder<
+    TOutputTypedTarget,
+    TOutputTargetPath
+  >,
 });

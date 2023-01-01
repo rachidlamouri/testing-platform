@@ -3,6 +3,7 @@ import {
   report,
   signaler,
 } from 'rat-test/type-script/transgressing';
+import { UnknownTargetReference } from '../../types/targetReference';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { NormalizedTargetReferenceMap } from '../normalizedTargetReferenceMap';
 import { buildNormalizedDerivedTargetReferences } from './buildNormalizedDerivedTargetReferences';
@@ -34,7 +35,7 @@ orchestrate()
       targetReferenceConfiguration: {
         typeId:
           TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration,
-        buildReference: (inputReference) => ({
+        buildReference: (inputReference: UnknownTargetReference) => ({
           typeId: 'Bar',
           instance: inputReference.instance,
           path: `${inputReference.path}/bar`,

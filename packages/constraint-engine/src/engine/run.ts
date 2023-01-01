@@ -11,8 +11,8 @@ import { NormalizedTargetReferenceMap } from './normalizedTargetReferenceMap';
 import { RuleConfigurationMap } from './ruleConfigurationMap';
 
 export type ConstraintEngineRunnerInput = {
-  targetReferenceConfigurations: UnknownTargetReferenceConfiguration[];
-  ruleConfigurations: UnknownRuleConfiguration[];
+  targetReferenceConfigurations: readonly UnknownTargetReferenceConfiguration[];
+  ruleConfigurations: readonly UnknownRuleConfiguration[];
 };
 
 export type ConstraintEngineRunner = (

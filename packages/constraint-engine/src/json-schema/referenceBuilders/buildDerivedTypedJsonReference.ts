@@ -1,4 +1,4 @@
-import { DerivedReferenceBuilder } from '../../types/builder';
+import { KnownDerivedReferenceBuilder } from '../../types/builders/derivedReferenceBuilder';
 import { UnknownTargetPath } from '../../types/targetPath';
 import { TargetReference } from '../../types/targetReference';
 import { JsonMetaTargetTypeId } from '../types/constants';
@@ -29,7 +29,7 @@ export const buildDerivedTypedJsonReference = (<
   };
 
   return outputReference;
-}) satisfies DerivedReferenceBuilder<
+}) satisfies KnownDerivedReferenceBuilder<
   JsonMetaUnknownTypedTarget,
   UnknownTargetPath,
   JsonMetaKnownTypedTarget,

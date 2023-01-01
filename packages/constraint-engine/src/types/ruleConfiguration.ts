@@ -1,66 +1,74 @@
 import { Rule } from './rule';
-import { AnyTargetInstance } from './targetInstance';
-import {
-  AnyTargetPath,
-  NormalizedTargetPath,
-  UnknownTargetPath,
-} from './targetPath';
-import { DerivedTargetReferenceConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
-import { DerivedTargetReferenceSetConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
-import { RootTargetReferenceConfiguration } from './targetReferenceConfiguration/rootTargetReferenceConfiguration';
+import { UnknownTargetInstance } from './targetInstance';
+import { NormalizedTargetPath, UnknownTargetPath } from './targetPath';
+import { PartiallyKnownDerivedTargetReferenceConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
+import { PartiallyKnownDerivedTargetReferenceSetConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
+import { PartiallyKnownRootTargetReferenceConfiguration } from './targetReferenceConfiguration/rootTargetReferenceConfiguration';
 import { UnknownTargetReferenceConfiguration } from './targetReferenceConfiguration/unknownTargetReferenceConfiguration';
-import { AnyTypedTarget, UnknownTypedTarget } from './typedTarget';
+import { UnknownTypedTarget } from './typedTarget';
 
-export type RuleConfiguration<
-  TTypedTarget extends UnknownTypedTarget,
+type RuleConfiguration<
+  TActualTypedTarget extends UnknownTypedTarget,
+  TExpectedTypedTarget extends UnknownTypedTarget,
   TNormalizedPath extends UnknownTargetPath,
 > = {
-  rule: Rule<TTypedTarget['instance']>;
-  targetTypeId: TTypedTarget['typeId'];
+  rule: Rule<TActualTypedTarget['instance']>;
+  targetTypeId: TExpectedTypedTarget['typeId'];
   normalizedTargetPath: TNormalizedPath;
 };
 
+export type KnownRuleConfiguration<
+  TTypedTarget extends UnknownTypedTarget,
+  TNormalizedPath extends UnknownTargetPath,
+> = RuleConfiguration<TTypedTarget, TTypedTarget, TNormalizedPath>;
+
+export type PartiallyKnownRuleConfiguration<
+  TTypedTarget extends UnknownTypedTarget,
+  TNormalizedPath extends UnknownTargetPath,
+> = RuleConfiguration<UnknownTypedTarget, TTypedTarget, TNormalizedPath>;
+
 export type UnknownRuleConfiguration = RuleConfiguration<
+  UnknownTypedTarget,
   UnknownTypedTarget,
   UnknownTargetPath
 >;
 
 type RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfiguration extends UnknownTargetReferenceConfiguration,
-> = TTargetReferenceConfiguration extends RootTargetReferenceConfiguration<
-  AnyTargetInstance,
-  infer TOutputTypedTarget,
-  infer TOutputTargetPath
->
-  ? RuleConfiguration<
-      TOutputTypedTarget,
-      NormalizedTargetPath<TOutputTargetPath>
-    >
-  : TTargetReferenceConfiguration extends DerivedTargetReferenceConfiguration<
-      AnyTypedTarget,
-      AnyTargetPath,
-      infer TOutputTypedTarget,
-      infer TOutputTargetPath
-    >
-  ? RuleConfiguration<
-      TOutputTypedTarget,
-      NormalizedTargetPath<TOutputTargetPath>
-    >
-  : TTargetReferenceConfiguration extends DerivedTargetReferenceSetConfiguration<
-      AnyTypedTarget,
-      AnyTargetPath,
-      infer TOutputTypedTarget,
-      infer TOutputTargetPath
-    >
-  ? RuleConfiguration<
-      TOutputTypedTarget,
-      NormalizedTargetPath<TOutputTargetPath>
-    >
-  : never;
+> =
+  TTargetReferenceConfiguration extends PartiallyKnownRootTargetReferenceConfiguration<
+    UnknownTargetInstance,
+    infer TOutputTypedTarget,
+    infer TOutputTargetPath
+  >
+    ? KnownRuleConfiguration<
+        TOutputTypedTarget,
+        NormalizedTargetPath<TOutputTargetPath>
+      >
+    : TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceConfiguration<
+        UnknownTypedTarget,
+        UnknownTargetPath,
+        infer TOutputTypedTarget,
+        infer TOutputTargetPath
+      >
+    ? KnownRuleConfiguration<
+        TOutputTypedTarget,
+        NormalizedTargetPath<TOutputTargetPath>
+      >
+    : TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceSetConfiguration<
+        UnknownTypedTarget,
+        UnknownTargetPath,
+        infer TOutputTypedTarget,
+        infer TOutputTargetPath
+      >
+    ? KnownRuleConfiguration<
+        TOutputTypedTarget,
+        NormalizedTargetPath<TOutputTargetPath>
+      >
+    : never;
 
 export type RuleConfigurationFromTargetReferenceConfigurations<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  TTargetReferenceConfigurations extends readonly any[],
+  TTargetReferenceConfigurations extends readonly UnknownTargetReferenceConfiguration[],
 > = RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfigurations[number]
 >;

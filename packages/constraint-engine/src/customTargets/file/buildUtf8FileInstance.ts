@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { InstanceBuilder } from '../../types/builder';
+import { InstanceBuilder } from '../../types/builders/instanceBuilder';
 import {
   NotOnDiskUtf8FileTarget,
   OnDiskUtf8FileTarget,
