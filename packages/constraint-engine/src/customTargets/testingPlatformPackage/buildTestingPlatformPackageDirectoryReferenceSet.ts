@@ -5,9 +5,9 @@ import {
   TestingPlatformPackageDirectoryTarget,
 } from './targets';
 import { TestingPlatformPackageDirectorySetTargetPath } from './buildTestingPlatformPackageDirectorySetReference';
-import { DerivedReferenceSetBuilder } from '../../types/builder';
 import { PrefixedTargetPath, UnknownTargetPath } from '../../types/targetPath';
 import { TargetReference } from '../../types/targetReference';
+import { DerivedReferenceSetBuilder } from '../../types/builders/derivedReferenceSetBuilder';
 
 export type TestingPlatformPackageDirectoryTargetPath<
   TPrefix extends UnknownTargetPath,

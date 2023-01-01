@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { DerivedReferenceBuilder } from '../../types/builder';
+import { DerivedReferenceBuilder } from '../../types/builders/derivedReferenceBuilder';
 import { UnknownTargetPath } from '../../types/targetPath';
 import { TargetReference } from '../../types/targetReference';
 import { buildJsonFileInstance } from '../file/buildJsonFileInstance';

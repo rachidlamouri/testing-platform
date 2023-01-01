@@ -1,4 +1,4 @@
-import { ReferenceBuilder } from '../../types/builder';
+import { ReferenceBuilder } from '../../types/builders/referenceBuilder';
 import { JsonMetaTargetTypeId } from '../types/constants';
 import { JsonTarget } from '../types/targets';
 import { JsonMetaUnknownTypedTarget } from '../types/typedTargets';

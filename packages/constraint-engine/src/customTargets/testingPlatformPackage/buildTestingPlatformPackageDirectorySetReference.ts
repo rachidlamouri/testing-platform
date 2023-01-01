@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { ReferenceBuilder } from '../../types/builder';
+import { ReferenceBuilder } from '../../types/builders/referenceBuilder';
 import { TargetReference } from '../../types/targetReference';
 import {
   TestingPlatformPackageDirectorySetTarget,

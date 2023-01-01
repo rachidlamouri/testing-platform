@@ -5,7 +5,7 @@ import {
   UnparseableOnDiskJsonFileTarget,
 } from './jsonFileTarget';
 import { buildUtf8FileInstance } from './buildUtf8FileInstance';
-import { InstanceBuilder } from '../../types/builder';
+import { InstanceBuilder } from '../../types/builders/instanceBuilder';
 
 export type JsonFileInstanceBuilderInput = {
   filePath: string;

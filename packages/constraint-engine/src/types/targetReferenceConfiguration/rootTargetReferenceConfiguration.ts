@@ -1,4 +1,4 @@
-import { ReferenceBuilder } from '../builder';
+import { ReferenceBuilder } from '../builders/referenceBuilder';
 import { UnknownTargetInstance } from '../targetInstance';
 import {
   NormalizedTargetPath,
