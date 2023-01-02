@@ -3,10 +3,15 @@ import { getTargetReferenceConfigurationsFromJson } from '../utils/getTargetRefe
 import { getRuleConfigurationsFromJsonSchema } from '../utils/getRuleConfigurationsFromJsonSchema';
 import { JsonTarget } from '../types/targets';
 
-const inputData: JsonTarget = 'hello!';
+const inputData: JsonTarget = {
+  potato: 'foo',
+  tomato: 'bar',
+  something: 'abc',
+};
 
 const inputSchema: JsonTarget = {
-  type: 'boolean',
+  type: 'object',
+  required: ['potato', 'tomato'],
 };
 
 const targetReferenceConfigurations =

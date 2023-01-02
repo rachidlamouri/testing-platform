@@ -1,13 +1,54 @@
 import { TypedTarget } from '../../types/typedTarget';
-import { JsonMetaTargetTypeId } from './constants';
-import { JsonTarget, JsonTypedTargetTarget } from './targets';
+import { JsonTargetTypeId } from './constants';
+import {
+  JsonArrayTarget,
+  JsonBooleanTarget,
+  JsonNullTarget,
+  JsonNumberTarget,
+  JsonObjectTarget,
+  JsonStringTarget,
+  JsonTarget,
+} from './targets';
 
-export type JsonMetaUnknownTypedTarget = TypedTarget<
-  JsonMetaTargetTypeId.UnknownType,
+export type JsonUnknownTypedTarget = TypedTarget<
+  JsonTargetTypeId.Unknown,
   JsonTarget
 >;
 
-export type JsonMetaKnownTypedTarget = TypedTarget<
-  JsonMetaTargetTypeId.KnownType,
-  JsonTypedTargetTarget
+export type JsonStringTypedTarget = TypedTarget<
+  JsonTargetTypeId.String,
+  JsonStringTarget
 >;
+
+export type JsonNumberTypedTarget = TypedTarget<
+  JsonTargetTypeId.Number,
+  JsonNumberTarget
+>;
+
+export type JsonBooleanTypedTarget = TypedTarget<
+  JsonTargetTypeId.Boolean,
+  JsonBooleanTarget
+>;
+
+export type JsonNullTypedTarget = TypedTarget<
+  JsonTargetTypeId.Null,
+  JsonNullTarget
+>;
+
+export type JsonArrayTypedTarget = TypedTarget<
+  JsonTargetTypeId.Array,
+  JsonArrayTarget
+>;
+
+export type JsonObjectTypedTarget = TypedTarget<
+  JsonTargetTypeId.Object,
+  JsonObjectTarget
+>;
+
+export type JsonKnownTypedTarget =
+  | JsonStringTypedTarget
+  | JsonNumberTypedTarget
+  | JsonBooleanTypedTarget
+  | JsonNullTypedTarget
+  | JsonArrayTypedTarget
+  | JsonObjectTypedTarget;

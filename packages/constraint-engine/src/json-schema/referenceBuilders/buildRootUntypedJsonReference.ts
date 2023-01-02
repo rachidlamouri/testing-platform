@@ -1,18 +1,18 @@
 import { ReferenceBuilder } from '../../types/builders/referenceBuilder';
-import { JsonMetaTargetTypeId } from '../types/constants';
+import { JsonTargetTypeId } from '../types/constants';
 import { JsonTarget } from '../types/targets';
-import { JsonMetaUnknownTypedTarget } from '../types/typedTargets';
+import { JsonUnknownTypedTarget } from '../types/typedTargets';
 
 const ROOT_JSON_TARGET_PATH = 'data' as const;
 type RootJsonTargetPath = typeof ROOT_JSON_TARGET_PATH;
 
 export const buildRootJsonReference: ReferenceBuilder<
   JsonTarget,
-  JsonMetaUnknownTypedTarget,
+  JsonUnknownTypedTarget,
   RootJsonTargetPath
 > = (inputData) => {
   return {
-    typeId: JsonMetaTargetTypeId.UnknownType,
+    typeId: JsonTargetTypeId.Unknown,
     instance: inputData,
     path: ROOT_JSON_TARGET_PATH,
   };
