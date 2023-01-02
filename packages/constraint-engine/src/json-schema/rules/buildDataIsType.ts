@@ -1,12 +1,13 @@
 import { Rule } from '../../types/rule';
 import { JsonDataType } from '../types/constants';
-import { JsonTypedTargetTarget } from '../types/targets';
+import { JsonTarget } from '../types/targets';
+import { getJsonDataType } from '../utils/getJsonDataType';
 
 export const buildDataIsType = (
   expectedJsonDataType: JsonDataType,
-): Rule<JsonTypedTargetTarget> => {
-  const dataIsType: Rule<JsonTypedTargetTarget> = (target) => {
-    return target.typeId === expectedJsonDataType;
+): Rule<JsonTarget> => {
+  const dataIsType: Rule<JsonTarget> = (target) => {
+    return getJsonDataType(target) === expectedJsonDataType;
   };
 
   Object.defineProperty(dataIsType, 'name', {

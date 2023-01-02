@@ -3,14 +3,11 @@ import { buildRootTargetReferenceConfiguration } from '../../configurationHelper
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { buildDerivedTypedJsonReference } from '../referenceBuilders/buildDerivedTypedJsonReference';
 import { buildRootJsonReference } from '../referenceBuilders/buildRootUntypedJsonReference';
-import {
-  RootJsonDataTargetPath,
-  JsonMetaTargetTypeId,
-} from '../types/constants';
+import { JsonTargetTypeId, RootJsonDataTargetPath } from '../types/constants';
 import { JsonTarget } from '../types/targets';
 import {
-  JsonMetaUnknownTypedTarget,
-  JsonMetaKnownTypedTarget,
+  JsonKnownTypedTarget,
+  JsonUnknownTypedTarget,
 } from '../types/typedTargets';
 
 export const getTargetReferenceConfigurationsFromJson = (
@@ -19,25 +16,26 @@ export const getTargetReferenceConfigurationsFromJson = (
   return [
     buildRootTargetReferenceConfiguration<
       JsonTarget,
-      JsonMetaUnknownTypedTarget,
+      JsonUnknownTypedTarget,
       RootJsonDataTargetPath
     >({
       buildReference: buildRootJsonReference,
       inputData: data,
       normalizedInputTargetPath: '',
-      outputTargetTypeId: JsonMetaTargetTypeId.UnknownType,
+      outputTargetTypeId: JsonTargetTypeId.Unknown,
       normalizedOutputTargetPath: 'data',
     }),
     buildDerivedTargetReferenceConfiguration<
-      JsonMetaUnknownTypedTarget,
+      JsonUnknownTypedTarget,
       RootJsonDataTargetPath,
-      JsonMetaKnownTypedTarget,
+      JsonKnownTypedTarget,
       RootJsonDataTargetPath
     >({
       buildReference: buildDerivedTypedJsonReference,
-      inputTargetTypeId: JsonMetaTargetTypeId.UnknownType,
+      inputTargetTypeId: JsonTargetTypeId.Unknown,
       normalizedInputTargetPath: 'data',
-      outputTargetTypeId: JsonMetaTargetTypeId.KnownType,
+      // FIXME: outputTargetTypeId should be a list
+      outputTargetTypeId: JsonTargetTypeId.Object,
       normalizedOutputTargetPath: 'data',
     }),
   ] as unknown as UnknownTargetReferenceConfiguration[];
