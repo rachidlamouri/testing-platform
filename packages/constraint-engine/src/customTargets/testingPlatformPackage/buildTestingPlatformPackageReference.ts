@@ -54,6 +54,6 @@ export const buildTestingPlatformPackageReference = (<
 }) satisfies KnownDerivedReferenceBuilder<
   TestingPlatformPackageDirectoryTypedTarget,
   TestingPlatformPackageTargetPath<string>,
-  TestingPlatformPackageTypedTarget,
+  [TestingPlatformPackageTypedTarget],
   UnknownTargetPath
 >;

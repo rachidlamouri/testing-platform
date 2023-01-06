@@ -45,10 +45,13 @@ export type JsonObjectTypedTarget = TypedTarget<
   JsonObjectTarget
 >;
 
-export type JsonKnownTypedTarget =
-  | JsonStringTypedTarget
-  | JsonNumberTypedTarget
-  | JsonBooleanTypedTarget
-  | JsonNullTypedTarget
-  | JsonArrayTypedTarget
-  | JsonObjectTypedTarget;
+export type JsonKnownTypedTargetOptions = readonly [
+  JsonStringTypedTarget,
+  JsonNumberTypedTarget,
+  JsonBooleanTypedTarget,
+  JsonNullTypedTarget,
+  JsonArrayTypedTarget,
+  JsonObjectTypedTarget,
+];
+
+export type JsonKnownTypedTarget = JsonKnownTypedTargetOptions[number];

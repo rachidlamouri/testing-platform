@@ -10,7 +10,7 @@ import { UnknownTypedTarget } from '../types/typedTarget';
 export const buildDerivedTargetReferenceConfiguration = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
   TOutputTargetPath extends UnknownTargetPath,
 >({
   inputTargetTypeId,
@@ -22,14 +22,14 @@ export const buildDerivedTargetReferenceConfiguration = <
   KnownDerivedTargetReferenceConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
-    TOutputTypedTarget,
+    TOutputTypedTargetOptions,
     TOutputTargetPath
   >,
   'typeId'
 >): PartiallyKnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
-  TOutputTypedTarget,
+  TOutputTypedTargetOptions,
   TOutputTargetPath
 > => ({
   typeId:
@@ -39,7 +39,7 @@ export const buildDerivedTargetReferenceConfiguration = <
   outputTargetTypeId,
   normalizedOutputTargetPath,
   buildReference: buildReference as PartiallyKnownDerivedReferenceBuilder<
-    TOutputTypedTarget,
+    TOutputTypedTargetOptions,
     TOutputTargetPath
   >,
 });
