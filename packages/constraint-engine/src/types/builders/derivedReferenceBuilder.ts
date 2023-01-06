@@ -5,18 +5,18 @@ import { UnknownTypedTarget } from '../typedTarget';
 export type KnownDerivedReferenceBuilder<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
   TOutputTargetPath extends UnknownTargetPath,
 > = (
   inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
-) => TargetReference<TOutputTypedTarget, TOutputTargetPath>;
+) => TargetReference<TOutputTypedTargetOptions[number], TOutputTargetPath>;
 
 export type PartiallyKnownDerivedReferenceBuilder<
-  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
   TOutputTargetPath extends UnknownTargetPath,
 > = KnownDerivedReferenceBuilder<
   UnknownTypedTarget,
   UnknownTargetPath,
-  TOutputTypedTarget,
+  TOutputTypedTargetOptions,
   TOutputTargetPath
 >;

@@ -48,11 +48,11 @@ type RuleConfigurationFromTargetReferenceConfiguration<
     : TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceConfiguration<
         UnknownTypedTarget,
         UnknownTargetPath,
-        infer TOutputTypedTarget,
+        infer TOutputTypedTargetOptions,
         infer TOutputTargetPath
       >
     ? KnownRuleConfiguration<
-        TOutputTypedTarget,
+        TOutputTypedTargetOptions[number],
         NormalizedTargetPath<TOutputTargetPath>
       >
     : TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceSetConfiguration<

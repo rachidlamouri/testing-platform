@@ -42,7 +42,7 @@ orchestrate()
         }),
         inputTargetTypeId: 'Foo',
         normalizedInputTargetPath: 'foo/:index',
-        outputTargetTypeId: 'Bar',
+        outputTargetTypeId: ['Bar'],
         normalizedOutputTargetPath: 'foo/:index/bar',
       },
       normalizedTargetReferenceMap,

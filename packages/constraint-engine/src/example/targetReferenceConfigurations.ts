@@ -49,13 +49,13 @@ export const targetReferenceConfigurations = [
   buildDerivedTargetReferenceConfiguration<
     TestingPlatformPackageDirectoryTypedTarget,
     TestingPlatformPackageDirectoryTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
-    TestingPlatformPackageTypedTarget,
+    [TestingPlatformPackageTypedTarget],
     TestingPlatformPackageTargetPath<TestingPlatformPackageDirectorySetTargetPath>
   >({
     buildReference: buildTestingPlatformPackageReference,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
     normalizedInputTargetPath: 'testingPlatformPackageDirectorySet/:index',
-    outputTargetTypeId: TestingPlatformTargetTypeId.Package,
+    outputTargetTypeId: [TestingPlatformTargetTypeId.Package],
     normalizedOutputTargetPath:
       'testingPlatformPackageDirectorySet/:directoryName',
   }),

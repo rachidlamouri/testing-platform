@@ -8,47 +8,49 @@ type DerivedTargetReferenceConfiguration<
   TActualInputTargetPath extends UnknownTargetPath,
   TExpectedInputTypedTarget extends UnknownTypedTarget,
   TExpectedInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
   TOutputTargetPath extends UnknownTargetPath,
 > = {
   typeId: TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration;
   buildReference: KnownDerivedReferenceBuilder<
     TActualInputTypedTarget,
     TActualInputTargetPath,
-    TOutputTypedTarget,
+    TOutputTypedTargetOptions,
     TOutputTargetPath
   >;
   inputTargetTypeId: TExpectedInputTypedTarget['typeId'];
   normalizedInputTargetPath: NormalizedTargetPath<TExpectedInputTargetPath>;
-  outputTargetTypeId: TOutputTypedTarget['typeId'];
+  outputTargetTypeId: {
+    [Index in keyof TOutputTypedTargetOptions]: TOutputTypedTargetOptions[Index]['typeId'];
+  };
   normalizedOutputTargetPath: NormalizedTargetPath<TOutputTargetPath>;
 };
 
 export type KnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
   TOutputTargetPath extends UnknownTargetPath,
 > = DerivedTargetReferenceConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
   TInputTypedTarget,
   TInputTargetPath,
-  TOutputTypedTarget,
+  TOutputTypedTargetOptions,
   TOutputTargetPath
 >;
 
 export type PartiallyKnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
   TOutputTargetPath extends UnknownTargetPath,
 > = DerivedTargetReferenceConfiguration<
   UnknownTypedTarget,
   UnknownTargetPath,
   TInputTypedTarget,
   TInputTargetPath,
-  TOutputTypedTarget,
+  TOutputTypedTargetOptions,
   TOutputTargetPath
 >;
 
@@ -58,6 +60,6 @@ export type UnknownDerivedTargetReferenceConfiguration =
     UnknownTargetPath,
     UnknownTypedTarget,
     UnknownTargetPath,
-    UnknownTypedTarget,
+    [UnknownTypedTarget],
     UnknownTargetPath
   >;
