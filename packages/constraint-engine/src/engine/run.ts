@@ -1,3 +1,4 @@
+import fs from 'fs';
 import { UnknownNormalizedAppliedRuleResult } from '../types/rule';
 import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
 import { ROOT_TARGET_PATH } from '../types/targetPath';
@@ -25,6 +26,8 @@ export const run: ConstraintEngineRunner = ({
   targetReferenceConfigurations,
   ruleConfigurations,
 }): void => {
+  const debugInfo: Record<string, unknown>[] = [];
+
   const allRuleResults: UnknownNormalizedAppliedRuleResult[] = [];
   const allTargetReferenceConfigurationErrors: TargetReferenceConfigurationError[] =
     [];
@@ -34,6 +37,7 @@ export const run: ConstraintEngineRunner = ({
     ruleConfigurationMap.setRuleConfiguration(ruleConfiguration);
   });
 
+  let loopCount = 0;
   let currentNormalizedPath: string | null = null;
   let nextNormalizedPath: string | null = ROOT_TARGET_PATH;
   let currentNormalizedTargetReferenceMap: NormalizedTargetReferenceMap =
@@ -71,7 +75,19 @@ export const run: ConstraintEngineRunner = ({
     // TODO: traverse all paths, and not just the first
     nextNormalizedPath =
       referenceBuilderResult.references[0]?.normalizedPath ?? null;
+
+    debugInfo.push({
+      loopCount,
+      currentNormalizedPath,
+      nextNormalizedPath,
+      referenceBuilderResult,
+      nextRuleResults,
+    });
+
+    loopCount += 1;
   }
+
+  fs.writeFileSync('debug', JSON.stringify(debugInfo, null, 2));
 
   const isEverythingValid =
     allTargetReferenceConfigurationErrors.length === 0 &&

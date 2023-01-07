@@ -23,13 +23,20 @@ export const buildNormalizedDerivedTargetReferences = ({
     );
 
   const normalizedOutputTargetReferences: UnknownNormalizedTargetReference[] =
-    normalizedInputTargetReferences.flatMap(
-      (normalizedInputTargetReference): UnknownNormalizedTargetReference => {
-        const inputReference: UnknownTargetReference = {
+    normalizedInputTargetReferences
+      .map(
+        (normalizedInputTargetReference): UnknownTargetReference => ({
           typeId: normalizedInputTargetReference.typeId,
           instance: normalizedInputTargetReference.instance,
           path: normalizedInputTargetReference.instancePath,
-        };
+        }),
+      )
+      .filter((inputReference) => {
+        return targetReferenceConfiguration.conditions.every((condition) =>
+          condition(inputReference.instance),
+        );
+      })
+      .flatMap((inputReference): UnknownNormalizedTargetReference => {
         const outputReference =
           targetReferenceConfiguration.buildReference(inputReference);
 
@@ -40,8 +47,7 @@ export const buildNormalizedDerivedTargetReferences = ({
           normalizedPath:
             targetReferenceConfiguration.normalizedOutputTargetPath,
         };
-      },
-    );
+      });
 
   return normalizedOutputTargetReferences;
 };

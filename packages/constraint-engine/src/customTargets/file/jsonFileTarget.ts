@@ -2,12 +2,13 @@ type BaseJsonFileTarget<T> = {
   filePath: string;
 } & T;
 
-export type ParseableOnDiskJsonFileTarget = BaseJsonFileTarget<{
-  isOnDisk: true;
-  stringContents: string;
-  isParseable: true;
-  parsedContents: unknown;
-}>;
+export type ParseableOnDiskJsonFileTarget<TParsedContents = unknown> =
+  BaseJsonFileTarget<{
+    isOnDisk: true;
+    stringContents: string;
+    isParseable: true;
+    parsedContents: TParsedContents;
+  }>;
 
 export type UnparseableOnDiskJsonFileTarget = BaseJsonFileTarget<{
   isOnDisk: true;

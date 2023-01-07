@@ -4,6 +4,12 @@ Testing frameworks on testing frameworks.
 
 **note**: This project is under active development and is subject to change. It has not been officially released yet.
 
+## Constraint Engine Demo
+
+```bash
+npm run lint:constraints && code debug
+```
+
 ## Description
 
 This project is an exercise in building a testing framework from the ground up with as few production and developer

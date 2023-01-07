@@ -5,12 +5,12 @@ import {
 } from 'rat-test/type-script/transgressing';
 import { fileSystemUtil } from 'mouse-test/type-script/shell';
 import { TestingPlatformTargetTypeId } from './targets';
-import { buildTestingPlatformPackageReference } from './buildTestingPlatformPackageReference';
+import { buildTestingPlatformPackageAReference } from './buildTestingPlatformPackageAReference';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
   .then(() => {
-    report('• buildTestingPlatformPackageReference');
+    report('• buildTestingPlatformPackageAReference');
   })
   .then(() => {
     report('  ⇀ Testing a package with the expected files');
@@ -30,7 +30,7 @@ orchestrate()
       contents: '{}',
     });
 
-    const result = buildTestingPlatformPackageReference({
+    const result = buildTestingPlatformPackageAReference({
       typeId: TestingPlatformTargetTypeId.PackageDirectory,
       instance: {
         directoryPath: 'tmp',
@@ -42,7 +42,7 @@ orchestrate()
     rootHelper.teardown();
 
     signaler.isDeepEqual(result, {
-      typeId: TestingPlatformTargetTypeId.Package,
+      typeId: TestingPlatformTargetTypeId.PackageA,
       instance: {
         directoryName: 'tmp',
         packageFile: {

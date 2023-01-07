@@ -11,16 +11,23 @@ import {
   TestingPlatformPackageDirectorySetTargetPath,
 } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageDirectorySetReference';
 import {
-  buildTestingPlatformPackageReference,
-  TestingPlatformPackageTargetPath,
-} from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageReference';
+  buildTestingPlatformPackageAReference,
+  TestingPlatformPackageATargetPath,
+} from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageAReference';
 import {
   TestingPlatformPackageDirectorySetTypedTarget,
   TestingPlatformPackageDirectoryTypedTarget,
-  TestingPlatformPackageTypedTarget,
+  TestingPlatformPackageATypedTarget,
   TestingPlatformTargetTypeId,
+  TestingPlatformPackageBTypedTarget,
+  TestingPlatformPackageCTypedTarget,
 } from '../customTargets/testingPlatformPackage/targets';
 import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
+import { buildTestingPlatformPackageBReference } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageBReference';
+import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
+import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
+import { buildTestingPlatformPackageCReference } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageC';
+import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 
 export const targetReferenceConfigurations = [
   buildRootTargetReferenceConfiguration<
@@ -49,14 +56,44 @@ export const targetReferenceConfigurations = [
   buildDerivedTargetReferenceConfiguration<
     TestingPlatformPackageDirectoryTypedTarget,
     TestingPlatformPackageDirectoryTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
-    [TestingPlatformPackageTypedTarget],
-    TestingPlatformPackageTargetPath<TestingPlatformPackageDirectorySetTargetPath>
+    [TestingPlatformPackageATypedTarget],
+    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>
   >({
-    buildReference: buildTestingPlatformPackageReference,
+    buildReference: buildTestingPlatformPackageAReference,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
     normalizedInputTargetPath: 'testingPlatformPackageDirectorySet/:index',
-    outputTargetTypeId: [TestingPlatformTargetTypeId.Package],
+    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageA],
     normalizedOutputTargetPath:
       'testingPlatformPackageDirectorySet/:directoryName',
+  }),
+  buildDerivedTargetReferenceConfiguration<
+    TestingPlatformPackageATypedTarget,
+    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
+    [TestingPlatformPackageBTypedTarget],
+    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>
+  >({
+    buildReference: buildTestingPlatformPackageBReference,
+    inputTargetTypeId: TestingPlatformTargetTypeId.PackageA,
+    normalizedInputTargetPath:
+      'testingPlatformPackageDirectorySet/:directoryName',
+    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageB],
+    normalizedOutputTargetPath:
+      'testingPlatformPackageDirectorySet/:directoryName',
+    conditions: [packageAHasPackageFile, packageAHasTypeScriptConfigFile],
+  }),
+  buildDerivedTargetReferenceConfiguration<
+    TestingPlatformPackageBTypedTarget,
+    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
+    [TestingPlatformPackageCTypedTarget],
+    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>
+  >({
+    buildReference: buildTestingPlatformPackageCReference,
+    inputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
+    normalizedInputTargetPath:
+      'testingPlatformPackageDirectorySet/:directoryName',
+    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageC],
+    normalizedOutputTargetPath:
+      'testingPlatformPackageDirectorySet/:directoryName',
+    conditions: [packageBHasTestingPlatformConfiguration],
   }),
 ] as const satisfies readonly UnknownTargetReferenceConfiguration[];

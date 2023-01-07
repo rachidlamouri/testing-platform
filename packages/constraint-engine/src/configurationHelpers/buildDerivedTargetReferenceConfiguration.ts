@@ -7,6 +7,9 @@ import {
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
 import { UnknownTypedTarget } from '../types/typedTarget';
 
+type PartialKeys<TObject, TKey extends keyof TObject> = Omit<TObject, TKey> &
+  Partial<Pick<TObject, TKey>>;
+
 export const buildDerivedTargetReferenceConfiguration = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
@@ -18,14 +21,18 @@ export const buildDerivedTargetReferenceConfiguration = <
   outputTargetTypeId,
   normalizedOutputTargetPath,
   buildReference,
-}: Omit<
-  KnownDerivedTargetReferenceConfiguration<
-    TInputTypedTarget,
-    TInputTargetPath,
-    TOutputTypedTargetOptions,
-    TOutputTargetPath
+  conditions = [],
+}: PartialKeys<
+  Omit<
+    KnownDerivedTargetReferenceConfiguration<
+      TInputTypedTarget,
+      TInputTargetPath,
+      TOutputTypedTargetOptions,
+      TOutputTargetPath
+    >,
+    'typeId'
   >,
-  'typeId'
+  'conditions'
 >): PartiallyKnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
@@ -42,4 +49,5 @@ export const buildDerivedTargetReferenceConfiguration = <
     TOutputTypedTargetOptions,
     TOutputTargetPath
   >,
+  conditions,
 });
