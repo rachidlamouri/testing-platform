@@ -27,7 +27,6 @@ import { buildTestingPlatformPackageBReference } from '../customTargets/testingP
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { buildTestingPlatformPackageCReference } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageC';
-import { packageBExtendsBaseTypeScriptConfiguration } from '../customRules/packageBExtendsBaseTypeScriptConfiguration';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 
 export const targetReferenceConfigurations = [
@@ -95,9 +94,6 @@ export const targetReferenceConfigurations = [
     outputTargetTypeId: [TestingPlatformTargetTypeId.PackageC],
     normalizedOutputTargetPath:
       'testingPlatformPackageDirectorySet/:directoryName',
-    conditions: [
-      packageBHasTestingPlatformConfiguration,
-      packageBExtendsBaseTypeScriptConfiguration,
-    ],
+    conditions: [packageBHasTestingPlatformConfiguration],
   }),
 ] as const satisfies readonly UnknownTargetReferenceConfiguration[];

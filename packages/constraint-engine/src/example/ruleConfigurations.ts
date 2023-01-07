@@ -1,6 +1,6 @@
 import { buildRuleConfiguration } from '../configurationHelpers/buildRuleConfiguration';
 import { listIsNotEmpty } from '../customRules/listIsNotEmpty';
-import { packageBExtendsBaseTypeScriptConfiguration } from '../customRules/packageBExtendsBaseTypeScriptConfiguration';
+import { packageCExtendsBaseTypeScriptConfiguration } from '../customRules/packageCExtendsBaseTypeScriptConfiguration';
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
@@ -32,8 +32,8 @@ export const ruleConfigurations = [
     rule: packageBHasTestingPlatformConfiguration,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.PackageB,
+    targetTypeId: TestingPlatformTargetTypeId.PackageC,
     normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
-    rule: packageBExtendsBaseTypeScriptConfiguration,
+    rule: packageCExtendsBaseTypeScriptConfiguration,
   }),
 ] as const satisfies readonly UnknownRuleConfiguration[];
