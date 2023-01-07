@@ -1,4 +1,5 @@
 import { KnownDerivedReferenceBuilder } from '../builders/derivedReferenceBuilder';
+import { Rule } from '../rule';
 import { NormalizedTargetPath, UnknownTargetPath } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
 import { TargetReferenceConfigurationTypeId } from './typeId';
@@ -24,6 +25,7 @@ type DerivedTargetReferenceConfiguration<
     [Index in keyof TOutputTypedTargetOptions]: TOutputTypedTargetOptions[Index]['typeId'];
   };
   normalizedOutputTargetPath: NormalizedTargetPath<TOutputTargetPath>;
+  conditions: Rule<TActualInputTypedTarget['instance']>[];
 };
 
 export type KnownDerivedTargetReferenceConfiguration<
