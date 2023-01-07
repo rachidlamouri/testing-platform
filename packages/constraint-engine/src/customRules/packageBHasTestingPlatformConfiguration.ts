@@ -1,13 +1,15 @@
 import {
   PackageConfigurationTypeId,
   TestingPlatformPackageBTarget,
+  TestingPlatformPackageCTarget,
 } from '../customTargets/testingPlatformPackage/targets';
-import { Rule } from '../types/rule';
+import { GuardRule } from '../types/rule';
 import { isObject } from './isObject';
 
-export const packageBHasTestingPlatformConfiguration: Rule<
-  TestingPlatformPackageBTarget
-> = (target) => {
+export const packageBHasTestingPlatformConfiguration: GuardRule<
+  TestingPlatformPackageBTarget,
+  TestingPlatformPackageCTarget
+> = (target): target is TestingPlatformPackageCTarget => {
   const packageFileContents = target.packageFile.parsedContents;
 
   if (!('testingPlatformConfiguration' in packageFileContents)) {

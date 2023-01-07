@@ -73,7 +73,7 @@ export type PackageCPackageFileTarget =
 export type TestingPlatformPackageCTarget = {
   directoryName: string;
   packageFile: PackageCPackageFileTarget;
-  typeScriptConfigFile: ParseableOnDiskJsonFileTarget;
+  typeScriptConfigFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
 };
 
 export type TestingPlatformPackageCTypedTarget = TypedTarget<

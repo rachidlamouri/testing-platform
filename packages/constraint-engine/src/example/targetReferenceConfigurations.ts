@@ -23,11 +23,10 @@ import {
   TestingPlatformPackageCTypedTarget,
 } from '../customTargets/testingPlatformPackage/targets';
 import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
-import { buildTestingPlatformPackageBReference } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageBReference';
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
-import { buildTestingPlatformPackageCReference } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageC';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
+import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildNarrowedReferenceBuilder';
 
 export const targetReferenceConfigurations = [
   buildRootTargetReferenceConfiguration<
@@ -72,7 +71,12 @@ export const targetReferenceConfigurations = [
     [TestingPlatformPackageBTypedTarget],
     TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>
   >({
-    buildReference: buildTestingPlatformPackageBReference,
+    buildReference: buildNarrowedReferenceBuilder<
+      TestingPlatformPackageATypedTarget,
+      TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
+      [typeof packageAHasPackageFile, typeof packageAHasTypeScriptConfigFile],
+      TestingPlatformPackageBTypedTarget
+    >(TestingPlatformTargetTypeId.PackageB),
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageA,
     normalizedInputTargetPath:
       'testingPlatformPackageDirectorySet/:directoryName',
@@ -87,7 +91,12 @@ export const targetReferenceConfigurations = [
     [TestingPlatformPackageCTypedTarget],
     TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>
   >({
-    buildReference: buildTestingPlatformPackageCReference,
+    buildReference: buildNarrowedReferenceBuilder<
+      TestingPlatformPackageBTypedTarget,
+      TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
+      [typeof packageBHasTestingPlatformConfiguration],
+      TestingPlatformPackageCTypedTarget
+    >(TestingPlatformTargetTypeId.PackageC),
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
     normalizedInputTargetPath:
       'testingPlatformPackageDirectorySet/:directoryName',
