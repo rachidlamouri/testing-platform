@@ -40,10 +40,12 @@ export type TestingPlatformPackageATypedTarget = TypedTarget<
   TestingPlatformPackageATarget
 >;
 
+export type ObjectTarget = Record<string, unknown>;
+
 export type TestingPlatformPackageBTarget = {
   directoryName: string;
-  packageFile: ParseableOnDiskJsonFileTarget;
-  typeScriptConfigFile: ParseableOnDiskJsonFileTarget;
+  packageFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
+  typeScriptConfigFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
 };
 
 export type TestingPlatformPackageBTypedTarget = TypedTarget<
@@ -60,11 +62,18 @@ export type TestingPlatformConfigurationTarget = {
   typeId: PackageConfigurationTypeId;
 };
 
+export type PackageCPackageFileContentsTarget = {
+  testingPlatformConfiguration: TestingPlatformConfigurationTarget;
+  [key: string]: unknown;
+};
+
+export type PackageCPackageFileTarget =
+  ParseableOnDiskJsonFileTarget<PackageCPackageFileContentsTarget>;
+
 export type TestingPlatformPackageCTarget = {
   directoryName: string;
-  packageFile: ParseableOnDiskJsonFileTarget;
+  packageFile: PackageCPackageFileTarget;
   typeScriptConfigFile: ParseableOnDiskJsonFileTarget;
-  testingPlatformConfiguration: TestingPlatformConfigurationTarget;
 };
 
 export type TestingPlatformPackageCTypedTarget = TypedTarget<

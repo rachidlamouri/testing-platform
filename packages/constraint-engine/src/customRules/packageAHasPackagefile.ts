@@ -1,5 +1,6 @@
 import { TestingPlatformPackageATarget } from '../customTargets/testingPlatformPackage/targets';
 import { Rule } from '../types/rule';
+import { isObject } from './isObject';
 
 export const packageAHasPackageFile: Rule<TestingPlatformPackageATarget> = (
   target,
@@ -8,8 +9,6 @@ export const packageAHasPackageFile: Rule<TestingPlatformPackageATarget> = (
   return (
     packageFile.isOnDisk &&
     packageFile.isParseable &&
-    typeof packageFile.parsedContents === 'object' &&
-    packageFile.parsedContents !== null &&
-    !Array.isArray(packageFile.parsedContents)
+    isObject(packageFile.parsedContents)
   );
 };
