@@ -1,12 +1,12 @@
 import { errorUtil, assertUtil } from 'mouse-test/type-script/agnostic';
 import { ThrowableResult } from 'mouse-test/type-script/agnostic/errorUtils/tryThrowable';
 import { ParseableOnDiskJsonFileTarget } from '../customTargets/file/jsonFileTarget';
-import { TestingPlatformPackageTarget } from '../customTargets/testingPlatformPackage/targets';
+import { TestingPlatformPackageATarget } from '../customTargets/testingPlatformPackage/targets';
 import { Rule } from '../types/rule';
-import { packageHasTestingPlatformConfiguration } from './packageHasTestingPlatformConfiguration';
+import { packageAHasTestingPlatformConfiguration } from './packageAHasTestingPlatformConfiguration';
 
-export const packageExtendsBaseTypeScriptConfiguration: Rule<
-  TestingPlatformPackageTarget
+export const packageAExtendsBaseTypeScriptConfiguration: Rule<
+  TestingPlatformPackageATarget
 > = (target) => {
   if (target.directoryName === 'base-tsconfig') {
     return true;
@@ -16,7 +16,7 @@ export const packageExtendsBaseTypeScriptConfiguration: Rule<
     return true;
   }
 
-  if (!packageHasTestingPlatformConfiguration(target)) {
+  if (!packageAHasTestingPlatformConfiguration(target)) {
     return true;
   }
 

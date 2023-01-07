@@ -11,13 +11,13 @@ import {
   TestingPlatformPackageDirectorySetTargetPath,
 } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageDirectorySetReference';
 import {
-  buildTestingPlatformPackageReference,
-  TestingPlatformPackageTargetPath,
-} from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageReference';
+  buildTestingPlatformPackageAReference,
+  TestingPlatformPackageATargetPath,
+} from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageAReference';
 import {
   TestingPlatformPackageDirectorySetTypedTarget,
   TestingPlatformPackageDirectoryTypedTarget,
-  TestingPlatformPackageTypedTarget,
+  TestingPlatformPackageATypedTarget,
   TestingPlatformTargetTypeId,
 } from '../customTargets/testingPlatformPackage/targets';
 import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
@@ -49,13 +49,13 @@ export const targetReferenceConfigurations = [
   buildDerivedTargetReferenceConfiguration<
     TestingPlatformPackageDirectoryTypedTarget,
     TestingPlatformPackageDirectoryTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
-    [TestingPlatformPackageTypedTarget],
-    TestingPlatformPackageTargetPath<TestingPlatformPackageDirectorySetTargetPath>
+    [TestingPlatformPackageATypedTarget],
+    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>
   >({
-    buildReference: buildTestingPlatformPackageReference,
+    buildReference: buildTestingPlatformPackageAReference,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
     normalizedInputTargetPath: 'testingPlatformPackageDirectorySet/:index',
-    outputTargetTypeId: [TestingPlatformTargetTypeId.Package],
+    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageA],
     normalizedOutputTargetPath:
       'testingPlatformPackageDirectorySet/:directoryName',
   }),

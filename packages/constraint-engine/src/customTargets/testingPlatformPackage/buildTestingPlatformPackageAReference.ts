@@ -6,32 +6,32 @@ import { buildJsonFileInstance } from '../file/buildJsonFileInstance';
 import { TestingPlatformPackageDirectoryTargetReference } from './buildTestingPlatformPackageDirectoryReferenceSet';
 import {
   TestingPlatformPackageDirectoryTypedTarget,
-  TestingPlatformPackageTarget,
-  TestingPlatformPackageTypedTarget,
+  TestingPlatformPackageATarget,
+  TestingPlatformPackageATypedTarget,
   TestingPlatformTargetTypeId,
 } from './targets';
 
-export type TestingPlatformPackageTargetPath<
+export type TestingPlatformPackageATargetPath<
   TPrefix extends UnknownTargetPath,
 > = `${TPrefix}/${string}`;
 
-export type TestingPlatformPackageTargetReference<
+export type TestingPlatformPackageATargetReference<
   TTargetPath extends UnknownTargetPath,
 > = TargetReference<
-  TestingPlatformPackageTypedTarget,
-  TestingPlatformPackageTargetPath<TTargetPath>
+  TestingPlatformPackageATypedTarget,
+  TestingPlatformPackageATargetPath<TTargetPath>
 >;
 
-export const buildTestingPlatformPackageReference = (<
+export const buildTestingPlatformPackageAReference = (<
   TPrefix extends UnknownTargetPath,
 >(
   directoryTargetReference: TestingPlatformPackageDirectoryTargetReference<TPrefix>,
-): TestingPlatformPackageTargetReference<TPrefix> => {
+): TestingPlatformPackageATargetReference<TPrefix> => {
   const { directoryPath } = directoryTargetReference.instance;
 
   const directoryName = posix.basename(directoryPath);
 
-  const instance: TestingPlatformPackageTarget = {
+  const instance: TestingPlatformPackageATarget = {
     directoryName,
     packageFile: buildJsonFileInstance({
       filePath: `${directoryPath}/package.json`,
@@ -44,16 +44,16 @@ export const buildTestingPlatformPackageReference = (<
   const targetPath = directoryTargetReference.path.replace(
     /\d+$/,
     directoryName,
-  ) as TestingPlatformPackageTargetPath<TPrefix>;
+  ) as TestingPlatformPackageATargetPath<TPrefix>;
 
   return {
-    typeId: TestingPlatformTargetTypeId.Package,
+    typeId: TestingPlatformTargetTypeId.PackageA,
     instance,
     path: targetPath,
   };
 }) satisfies KnownDerivedReferenceBuilder<
   TestingPlatformPackageDirectoryTypedTarget,
-  TestingPlatformPackageTargetPath<string>,
-  [TestingPlatformPackageTypedTarget],
+  TestingPlatformPackageATargetPath<string>,
+  [TestingPlatformPackageATypedTarget],
   UnknownTargetPath
 >;

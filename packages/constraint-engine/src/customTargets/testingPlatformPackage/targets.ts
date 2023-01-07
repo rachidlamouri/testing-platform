@@ -1,10 +1,15 @@
 import { TypedTarget } from '../../types/typedTarget';
-import { JsonFileTarget } from '../file/jsonFileTarget';
+import {
+  JsonFileTarget,
+  ParseableOnDiskJsonFileTarget,
+} from '../file/jsonFileTarget';
 
 export enum TestingPlatformTargetTypeId {
   PackageDirectorySet = 'PackageDirectorySet',
   PackageDirectory = 'PackageDirectory',
-  Package = 'Package',
+  PackageA = 'PackageA',
+  PackageB = 'PackageB',
+  PackageC = 'PackageC',
 }
 
 export type TestingPlatformPackageDirectorySetTarget = string[];
@@ -24,13 +29,45 @@ export type TestingPlatformPackageDirectoryTypedTarget = TypedTarget<
   TestingPlatformPackageDirectoryTarget
 >;
 
-export type TestingPlatformPackageTarget = {
+export type TestingPlatformPackageATarget = {
   directoryName: string;
   packageFile: JsonFileTarget;
   typeScriptConfigFile: JsonFileTarget;
 };
 
-export type TestingPlatformPackageTypedTarget = TypedTarget<
-  TestingPlatformTargetTypeId.Package,
-  TestingPlatformPackageTarget
+export type TestingPlatformPackageATypedTarget = TypedTarget<
+  TestingPlatformTargetTypeId.PackageA,
+  TestingPlatformPackageATarget
+>;
+
+export type TestingPlatformPackageBTarget = {
+  directoryName: string;
+  packageFile: ParseableOnDiskJsonFileTarget;
+  typeScriptConfigFile: ParseableOnDiskJsonFileTarget;
+};
+
+export type TestingPlatformPackageBTypedTarget = TypedTarget<
+  TestingPlatformTargetTypeId.PackageB,
+  TestingPlatformPackageBTarget
+>;
+
+export enum PackageConfigurationTypeId {
+  TestFramework = 'TestFramework',
+  NonTestFramework = 'NonTestFramework',
+}
+
+export type TestingPlatformConfigurationTarget = {
+  typeId: PackageConfigurationTypeId;
+};
+
+export type TestingPlatformPackageCTarget = {
+  directoryName: string;
+  packageFile: ParseableOnDiskJsonFileTarget;
+  typeScriptConfigFile: ParseableOnDiskJsonFileTarget;
+  testingPlatformConfiguration: TestingPlatformConfigurationTarget;
+};
+
+export type TestingPlatformPackageCTypedTarget = TypedTarget<
+  TestingPlatformTargetTypeId.PackageC,
+  TestingPlatformPackageCTarget
 >;

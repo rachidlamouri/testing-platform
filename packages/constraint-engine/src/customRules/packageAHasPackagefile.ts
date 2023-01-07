@@ -1,7 +1,7 @@
-import { TestingPlatformPackageTarget } from '../customTargets/testingPlatformPackage/targets';
+import { TestingPlatformPackageATarget } from '../customTargets/testingPlatformPackage/targets';
 import { Rule } from '../types/rule';
 
-export const packageHasPackageFile: Rule<TestingPlatformPackageTarget> = (
+export const packageAHasPackageFile: Rule<TestingPlatformPackageATarget> = (
   target,
 ) => {
   const { packageFile } = target;

@@ -1,9 +1,9 @@
 import { ParseableOnDiskJsonFileTarget } from '../customTargets/file/jsonFileTarget';
-import { TestingPlatformPackageTarget } from '../customTargets/testingPlatformPackage/targets';
+import { TestingPlatformPackageATarget } from '../customTargets/testingPlatformPackage/targets';
 import { Rule } from '../types/rule';
 
-export const packageHasTestingPlatformConfiguration: Rule<
-  TestingPlatformPackageTarget
+export const packageAHasTestingPlatformConfiguration: Rule<
+  TestingPlatformPackageATarget
 > = (target) => {
   const packageFile = (target.packageFile as ParseableOnDiskJsonFileTarget)
     .parsedContents as Record<string, unknown>;

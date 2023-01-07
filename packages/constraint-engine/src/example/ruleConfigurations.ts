@@ -1,9 +1,9 @@
 import { buildRuleConfiguration } from '../configurationHelpers/buildRuleConfiguration';
 import { listIsNotEmpty } from '../customRules/listIsNotEmpty';
-import { packageExtendsBaseTypeScriptConfiguration } from '../customRules/packageExtendsBaseTypeScriptConfiguration';
-import { packageHasPackageFile } from '../customRules/packageHasPackagefile';
-import { packageHasTestingPlatformConfiguration } from '../customRules/packageHasTestingPlatformConfiguration';
-import { packageHasTypeScriptConfigFile } from '../customRules/packageHasTypeScriptConfigFile';
+import { packageAExtendsBaseTypeScriptConfiguration } from '../customRules/packageAExtendsBaseTypeScriptConfiguration';
+import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
+import { packageAHasTestingPlatformConfiguration } from '../customRules/packageAHasTestingPlatformConfiguration';
+import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { TestingPlatformTargetTypeId } from '../customTargets/testingPlatformPackage/targets';
 import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
 import { targetReferenceConfigurations } from './targetReferenceConfigurations';
@@ -17,23 +17,23 @@ export const ruleConfigurations = [
     rule: listIsNotEmpty,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.Package,
+    targetTypeId: TestingPlatformTargetTypeId.PackageA,
     normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
-    rule: packageHasPackageFile,
+    rule: packageAHasPackageFile,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.Package,
+    targetTypeId: TestingPlatformTargetTypeId.PackageA,
     normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
-    rule: packageHasTypeScriptConfigFile,
+    rule: packageAHasTypeScriptConfigFile,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.Package,
+    targetTypeId: TestingPlatformTargetTypeId.PackageA,
     normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
-    rule: packageHasTestingPlatformConfiguration,
+    rule: packageAHasTestingPlatformConfiguration,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.Package,
+    targetTypeId: TestingPlatformTargetTypeId.PackageA,
     normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
-    rule: packageExtendsBaseTypeScriptConfiguration,
+    rule: packageAExtendsBaseTypeScriptConfiguration,
   }),
 ] as const satisfies readonly UnknownRuleConfiguration[];
