@@ -19,8 +19,12 @@ import {
   TestingPlatformPackageDirectoryTypedTarget,
   TestingPlatformPackageATypedTarget,
   TestingPlatformTargetTypeId,
+  TestingPlatformPackageBTypedTarget,
 } from '../customTargets/testingPlatformPackage/targets';
 import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
+import { buildTestingPlatformPackageBReference } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageBReference';
+import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
+import { packageAHasTypeScriptConfigFile } from '../customRules/packageHasTypeScriptConfigFile';
 
 export const targetReferenceConfigurations = [
   buildRootTargetReferenceConfiguration<
@@ -58,5 +62,20 @@ export const targetReferenceConfigurations = [
     outputTargetTypeId: [TestingPlatformTargetTypeId.PackageA],
     normalizedOutputTargetPath:
       'testingPlatformPackageDirectorySet/:directoryName',
+  }),
+  buildDerivedTargetReferenceConfiguration<
+    TestingPlatformPackageATypedTarget,
+    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
+    [TestingPlatformPackageBTypedTarget],
+    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>
+  >({
+    buildReference: buildTestingPlatformPackageBReference,
+    inputTargetTypeId: TestingPlatformTargetTypeId.PackageA,
+    normalizedInputTargetPath:
+      'testingPlatformPackageDirectorySet/:directoryName',
+    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageB],
+    normalizedOutputTargetPath:
+      'testingPlatformPackageDirectorySet/:directoryName',
+    conditions: [packageAHasPackageFile, packageAHasTypeScriptConfigFile],
   }),
 ] as const satisfies readonly UnknownTargetReferenceConfiguration[];
