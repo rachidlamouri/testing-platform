@@ -1,10 +1,19 @@
-import { TestingPlatformPackageATarget } from '../customTargets/testingPlatformPackage/targets';
-import { Rule } from '../types/rule';
+import { ParseableOnDiskJsonFileTarget } from '../customTargets/file/jsonFileTarget';
+import {
+  ObjectTarget,
+  TestingPlatformPackageATarget,
+} from '../customTargets/testingPlatformPackage/targets';
+import { GuardRule } from '../types/rule';
 import { isObject } from './isObject';
 
-export const packageAHasPackageFile: Rule<TestingPlatformPackageATarget> = (
-  target,
-) => {
+type NarrowedPackageATarget = TestingPlatformPackageATarget & {
+  packageFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
+};
+
+export const packageAHasPackageFile: GuardRule<
+  TestingPlatformPackageATarget,
+  NarrowedPackageATarget
+> = (target): target is NarrowedPackageATarget => {
   const { packageFile } = target;
   return (
     packageFile.isOnDisk &&
