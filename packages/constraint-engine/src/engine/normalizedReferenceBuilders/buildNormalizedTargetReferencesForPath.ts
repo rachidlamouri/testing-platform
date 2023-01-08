@@ -1,3 +1,4 @@
+import { UnkownTargetPathSet } from '../../types/targetPath';
 import { UnknownNormalizedTargetReference } from '../../types/targetReference';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { NormalizedTargetReferenceMap } from '../normalizedTargetReferenceMap';
@@ -19,7 +20,7 @@ export class TargetReferenceConfigurationError extends Error {
 export type NormalizedTargetReferencesBuilderInput = {
   targetReferenceConfigurations: readonly UnknownTargetReferenceConfiguration[];
   normalizedTargetReferenceMap: NormalizedTargetReferenceMap;
-  currentNormalizedPath: string;
+  currentTargetPaths: UnkownTargetPathSet;
 };
 
 export type NormalizedTargetReferencesBuilderResult = {
@@ -30,14 +31,14 @@ export type NormalizedTargetReferencesBuilderResult = {
 export const buildNormalizedTargetReferencesForPath = ({
   targetReferenceConfigurations,
   normalizedTargetReferenceMap,
-  currentNormalizedPath,
+  currentTargetPaths,
 }: NormalizedTargetReferencesBuilderInput): NormalizedTargetReferencesBuilderResult => {
   const references: UnknownNormalizedTargetReference[] = [];
   const errors: TargetReferenceConfigurationError[] = [];
 
   const configurationsToBuild = targetReferenceConfigurations.filter(
     (configuration) =>
-      configuration.normalizedInputTargetPath === currentNormalizedPath,
+      currentTargetPaths.has(configuration.normalizedInputTargetPath),
   );
 
   configurationsToBuild.forEach((targetReferenceConfiguration) => {

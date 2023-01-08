@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { UnknownNormalizedAppliedRuleResult } from '../types/rule';
 import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
-import { ROOT_TARGET_PATH } from '../types/targetPath';
+import { ROOT_TARGET_PATH, UnkownTargetPathSet } from '../types/targetPath';
 import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { applyRules } from './applyRules';
 import {
@@ -38,21 +38,21 @@ export const run: ConstraintEngineRunner = ({
   });
 
   let loopCount = 0;
-  let currentNormalizedPath: string | null = null;
-  let nextNormalizedPath: string | null = ROOT_TARGET_PATH;
+  let currentTargetPaths: UnkownTargetPathSet = new Set();
+  let nextTargetPaths: UnkownTargetPathSet = new Set([ROOT_TARGET_PATH]);
   let currentNormalizedTargetReferenceMap: NormalizedTargetReferenceMap =
     new NormalizedTargetReferenceMap();
   let nextNormalizedTargetReferenceMap: NormalizedTargetReferenceMap =
     new NormalizedTargetReferenceMap();
 
-  while (nextNormalizedPath !== null) {
-    currentNormalizedPath = nextNormalizedPath;
+  while (nextTargetPaths.size !== 0) {
+    currentTargetPaths = nextTargetPaths;
     currentNormalizedTargetReferenceMap = nextNormalizedTargetReferenceMap;
 
     const referenceBuilderResult = buildNormalizedTargetReferencesForPath({
       targetReferenceConfigurations,
       normalizedTargetReferenceMap: currentNormalizedTargetReferenceMap,
-      currentNormalizedPath,
+      currentTargetPaths,
     });
 
     allTargetReferenceConfigurationErrors.push(
@@ -72,14 +72,14 @@ export const run: ConstraintEngineRunner = ({
 
     allRuleResults.push(...nextRuleResults);
 
-    // TODO: traverse all paths, and not just the first
-    nextNormalizedPath =
-      referenceBuilderResult.references[0]?.normalizedPath ?? null;
+    nextTargetPaths = new Set(
+      referenceBuilderResult.references.map((r) => r.normalizedPath),
+    );
 
     debugInfo.push({
       loopCount,
-      currentNormalizedPath,
-      nextNormalizedPath,
+      currentTargetPaths,
+      nextTargetPaths,
       referenceBuilderResult,
       nextRuleResults,
     });
