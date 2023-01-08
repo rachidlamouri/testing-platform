@@ -9,20 +9,20 @@ type DerivedTargetReferenceConfiguration<
   TActualInputTargetPath extends UnknownTargetPath,
   TExpectedInputTypedTarget extends UnknownTypedTarget,
   TExpectedInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
+  TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
   TOutputTargetPath extends UnknownTargetPath,
 > = {
   typeId: TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration;
   buildReference: KnownDerivedReferenceBuilder<
     TActualInputTypedTarget,
     TActualInputTargetPath,
-    TOutputTypedTargetOptions,
+    TOutputTypedTargetOptionsTuple,
     TOutputTargetPath
   >;
   inputTargetTypeId: TExpectedInputTypedTarget['typeId'];
   normalizedInputTargetPath: NormalizedTargetPath<TExpectedInputTargetPath>;
   outputTargetTypeId: {
-    [Index in keyof TOutputTypedTargetOptions]: TOutputTypedTargetOptions[Index]['typeId'];
+    [Index in keyof TOutputTypedTargetOptionsTuple]: TOutputTypedTargetOptionsTuple[Index]['typeId'];
   };
   normalizedOutputTargetPath: NormalizedTargetPath<TOutputTargetPath>;
   conditions: Rule<TActualInputTypedTarget['instance']>[];
@@ -31,28 +31,28 @@ type DerivedTargetReferenceConfiguration<
 export type KnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
+  TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
   TOutputTargetPath extends UnknownTargetPath,
 > = DerivedTargetReferenceConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
   TInputTypedTarget,
   TInputTargetPath,
-  TOutputTypedTargetOptions,
+  TOutputTypedTargetOptionsTuple,
   TOutputTargetPath
 >;
 
 export type PartiallyKnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
+  TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
   TOutputTargetPath extends UnknownTargetPath,
 > = DerivedTargetReferenceConfiguration<
   UnknownTypedTarget,
   UnknownTargetPath,
   TInputTypedTarget,
   TInputTargetPath,
-  TOutputTypedTargetOptions,
+  TOutputTypedTargetOptionsTuple,
   TOutputTargetPath
 >;
 

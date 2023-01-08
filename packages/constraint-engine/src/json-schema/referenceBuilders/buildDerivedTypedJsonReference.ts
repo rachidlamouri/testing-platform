@@ -4,7 +4,7 @@ import { TargetReference } from '../../types/targetReference';
 import { JSON_DATA_TYPE_TO_TARGET_TYPE_ID } from '../types/constants';
 import {
   JsonKnownTypedTarget,
-  JsonKnownTypedTargetOptions,
+  JsonKnownTypedTargetOptionsTuple,
   JsonUnknownTypedTarget,
 } from '../types/typedTargets';
 import { getJsonDataType } from '../utils/getJsonDataType';
@@ -29,6 +29,6 @@ export const buildDerivedTypedJsonReference = (<
 }) satisfies KnownDerivedReferenceBuilder<
   JsonUnknownTypedTarget,
   UnknownTargetPath,
-  JsonKnownTypedTargetOptions,
+  JsonKnownTypedTargetOptionsTuple,
   UnknownTargetPath
 >;

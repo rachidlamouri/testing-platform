@@ -6,7 +6,7 @@ import { buildRootJsonReference } from '../referenceBuilders/buildRootUntypedJso
 import { JsonTargetTypeId, RootJsonDataTargetPath } from '../types/constants';
 import { JsonTarget } from '../types/targets';
 import {
-  JsonKnownTypedTargetOptions,
+  JsonKnownTypedTargetOptionsTuple,
   JsonUnknownTypedTarget,
 } from '../types/typedTargets';
 
@@ -28,7 +28,7 @@ export const getTargetReferenceConfigurationsFromJson = (
     buildDerivedTargetReferenceConfiguration<
       JsonUnknownTypedTarget,
       RootJsonDataTargetPath,
-      JsonKnownTypedTargetOptions,
+      JsonKnownTypedTargetOptionsTuple,
       RootJsonDataTargetPath
     >({
       buildReference: buildDerivedTypedJsonReference,

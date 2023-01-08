@@ -13,7 +13,7 @@ type PartialKeys<TObject, TKey extends keyof TObject> = Omit<TObject, TKey> &
 export const buildDerivedTargetReferenceConfiguration = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
+  TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
   TOutputTargetPath extends UnknownTargetPath,
 >({
   inputTargetTypeId,
@@ -27,7 +27,7 @@ export const buildDerivedTargetReferenceConfiguration = <
     KnownDerivedTargetReferenceConfiguration<
       TInputTypedTarget,
       TInputTargetPath,
-      TOutputTypedTargetOptions,
+      TOutputTypedTargetOptionsTuple,
       TOutputTargetPath
     >,
     'typeId'
@@ -36,7 +36,7 @@ export const buildDerivedTargetReferenceConfiguration = <
 >): PartiallyKnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
-  TOutputTypedTargetOptions,
+  TOutputTypedTargetOptionsTuple,
   TOutputTargetPath
 > => ({
   typeId:
@@ -46,7 +46,7 @@ export const buildDerivedTargetReferenceConfiguration = <
   outputTargetTypeId,
   normalizedOutputTargetPath,
   buildReference: buildReference as PartiallyKnownDerivedReferenceBuilder<
-    TOutputTypedTargetOptions,
+    TOutputTypedTargetOptionsTuple,
     TOutputTargetPath
   >,
   conditions,
