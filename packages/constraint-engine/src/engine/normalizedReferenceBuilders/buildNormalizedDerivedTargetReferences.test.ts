@@ -44,6 +44,7 @@ orchestrate()
         normalizedInputTargetPath: 'foo/:index',
         outputTargetTypeId: ['Bar'],
         normalizedOutputTargetPath: 'foo/:index/bar',
+        conditions: [],
       },
       normalizedTargetReferenceMap,
     });
