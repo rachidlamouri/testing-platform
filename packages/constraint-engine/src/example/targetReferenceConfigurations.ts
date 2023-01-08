@@ -26,7 +26,7 @@ import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceCon
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
-import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildNarrowedReferenceBuilder';
+import { buildNarrowedTargetReferenceConfiguration } from '../configurationHelpers/buildNarrowedTargetReferenceConfiguration';
 
 export const targetReferenceConfigurations = [
   buildRootTargetReferenceConfiguration<
@@ -65,44 +65,26 @@ export const targetReferenceConfigurations = [
     normalizedOutputTargetPath:
       'testingPlatformPackageDirectorySet/:directoryName',
   }),
-  buildDerivedTargetReferenceConfiguration<
+  buildNarrowedTargetReferenceConfiguration<
     TestingPlatformPackageATypedTarget,
     TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
-    [TestingPlatformPackageBTypedTarget],
-    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>
+    [typeof packageAHasPackageFile, typeof packageAHasTypeScriptConfigFile],
+    TestingPlatformPackageBTypedTarget
   >({
-    buildReference: buildNarrowedReferenceBuilder<
-      TestingPlatformPackageATypedTarget,
-      TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
-      [typeof packageAHasPackageFile, typeof packageAHasTypeScriptConfigFile],
-      TestingPlatformPackageBTypedTarget
-    >(TestingPlatformTargetTypeId.PackageB),
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageA,
-    normalizedInputTargetPath:
-      'testingPlatformPackageDirectorySet/:directoryName',
-    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageB],
-    normalizedOutputTargetPath:
-      'testingPlatformPackageDirectorySet/:directoryName',
+    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     conditions: [packageAHasPackageFile, packageAHasTypeScriptConfigFile],
+    outputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
   }),
-  buildDerivedTargetReferenceConfiguration<
+  buildNarrowedTargetReferenceConfiguration<
     TestingPlatformPackageBTypedTarget,
     TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
-    [TestingPlatformPackageCTypedTarget],
-    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>
+    [typeof packageBHasTestingPlatformConfiguration],
+    TestingPlatformPackageCTypedTarget
   >({
-    buildReference: buildNarrowedReferenceBuilder<
-      TestingPlatformPackageBTypedTarget,
-      TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
-      [typeof packageBHasTestingPlatformConfiguration],
-      TestingPlatformPackageCTypedTarget
-    >(TestingPlatformTargetTypeId.PackageC),
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
-    normalizedInputTargetPath:
-      'testingPlatformPackageDirectorySet/:directoryName',
-    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageC],
-    normalizedOutputTargetPath:
-      'testingPlatformPackageDirectorySet/:directoryName',
+    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     conditions: [packageBHasTestingPlatformConfiguration],
+    outputTargetTypeId: TestingPlatformTargetTypeId.PackageC,
   }),
 ] as const satisfies readonly UnknownTargetReferenceConfiguration[];
