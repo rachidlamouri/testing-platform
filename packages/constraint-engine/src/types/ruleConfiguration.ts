@@ -1,3 +1,4 @@
+import { CustomSet } from '../utils/customSet';
 import { Rule } from './rule';
 import { UnknownTargetInstance } from './targetInstance';
 import { NormalizedTargetPath, UnknownTargetPath } from './targetPath';
@@ -32,6 +33,8 @@ export type UnknownRuleConfiguration = RuleConfiguration<
   UnknownTypedTarget,
   UnknownTargetPath
 >;
+
+export type UnknownRuleConfigurationSet = CustomSet<UnknownRuleConfiguration>;
 
 type RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfiguration extends UnknownTargetReferenceConfiguration,

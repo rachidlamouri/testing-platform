@@ -1,57 +1,60 @@
-import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
+import {
+  UnknownRuleConfiguration,
+  UnknownRuleConfigurationSet,
+} from '../types/ruleConfiguration';
 import { UnknownTargetPath } from '../types/targetPath';
-import { UnknownNormalizedTargetReference } from '../types/targetReference';
+import { UnknownTargetReference } from '../types/targetReference';
 import { UnknownTargetTypeId } from '../types/typedTarget';
+import { CustomSet } from '../utils/customSet';
 
-export type RuleConfigurationsByNormalizedTargetPath = Map<
+export type RuleConfigurationsByTargetPath = Map<
   UnknownTargetPath,
-  UnknownRuleConfiguration[]
+  UnknownRuleConfigurationSet
 >;
 
-export type RuleConfigurationsByNormalizedTargetPathByTargetTypeId = Map<
+export type RuleConfigurationsByTargetPathByTargetTypeId = Map<
   UnknownTargetTypeId,
-  RuleConfigurationsByNormalizedTargetPath
+  RuleConfigurationsByTargetPath
 >;
 
 export class RuleConfigurationMap {
-  private ruleConfigurationsByNormalizedTargetPathByTargetTypeId: RuleConfigurationsByNormalizedTargetPathByTargetTypeId =
+  private ruleConfigurationsByTargetPathByTargetTypeId: RuleConfigurationsByTargetPathByTargetTypeId =
     new Map();
 
   setRuleConfiguration(ruleConfiguration: UnknownRuleConfiguration): void {
-    const ruleConfigurationsByNormalizedTargetPath: RuleConfigurationsByNormalizedTargetPath =
-      this.ruleConfigurationsByNormalizedTargetPathByTargetTypeId.get(
+    const ruleConfigurationsByTargetPath: RuleConfigurationsByTargetPath =
+      this.ruleConfigurationsByTargetPathByTargetTypeId.get(
         ruleConfiguration.targetTypeId,
-      ) ?? (new Map() as RuleConfigurationsByNormalizedTargetPath);
+      ) ?? (new Map() as RuleConfigurationsByTargetPath);
 
-    const ruleConfigurationList: UnknownRuleConfiguration[] =
-      ruleConfigurationsByNormalizedTargetPath.get(
+    const ruleConfigurationList: UnknownRuleConfigurationSet =
+      ruleConfigurationsByTargetPath.get(
         ruleConfiguration.normalizedTargetPath,
-      ) ?? [];
+      ) ?? new CustomSet();
 
-    ruleConfigurationList.push(ruleConfiguration);
-    ruleConfigurationsByNormalizedTargetPath.set(
+    ruleConfigurationList.add(ruleConfiguration);
+    ruleConfigurationsByTargetPath.set(
       ruleConfiguration.normalizedTargetPath,
       ruleConfigurationList,
     );
-    this.ruleConfigurationsByNormalizedTargetPathByTargetTypeId.set(
+    this.ruleConfigurationsByTargetPathByTargetTypeId.set(
       ruleConfiguration.targetTypeId,
-      ruleConfigurationsByNormalizedTargetPath,
+      ruleConfigurationsByTargetPath,
     );
   }
 
   getRules(
-    targetReference: UnknownNormalizedTargetReference,
-  ): UnknownRuleConfiguration[] {
-    const ruleConfigurationsByNormalizedTargetPath: RuleConfigurationsByNormalizedTargetPath =
-      this.ruleConfigurationsByNormalizedTargetPathByTargetTypeId.get(
+    targetReference: UnknownTargetReference,
+  ): UnknownRuleConfigurationSet {
+    const ruleConfigurationsByTargetPath: RuleConfigurationsByTargetPath =
+      this.ruleConfigurationsByTargetPathByTargetTypeId.get(
         targetReference.typeId,
-      ) ?? (new Map() as RuleConfigurationsByNormalizedTargetPath);
+      ) ?? (new Map() as RuleConfigurationsByTargetPath);
 
-    const ruleConfigurationList: UnknownRuleConfiguration[] =
-      ruleConfigurationsByNormalizedTargetPath.get(
-        targetReference.normalizedPath,
-      ) ?? [];
+    const ruleConfigurationSet: UnknownRuleConfigurationSet =
+      ruleConfigurationsByTargetPath.get(targetReference.path) ??
+      new CustomSet();
 
-    return ruleConfigurationList;
+    return ruleConfigurationSet;
   }
 }

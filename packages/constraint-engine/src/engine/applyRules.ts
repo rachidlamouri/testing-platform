@@ -1,11 +1,11 @@
 import { UnknownAppliedRuleResult } from '../types/rule';
-import { UnknownNormalizedTargetReference } from '../types/targetReference';
+import { UnknownTargetReference } from '../types/targetReference';
 import { getRuleConfigurationTypeId } from './getRuleConfigurationTypeId';
 import { RuleConfigurationMap } from './ruleConfigurationMap';
 
 export type RuleApplierInput = {
   ruleConfigurationMap: RuleConfigurationMap;
-  targetReferences: UnknownNormalizedTargetReference[];
+  targetReferences: UnknownTargetReference[];
 };
 
 export type RuleApplierResult = UnknownAppliedRuleResult[];
@@ -18,22 +18,19 @@ export const applyRules = ({
     (targetReference) => {
       const ruleConfigurations = ruleConfigurationMap.getRules(targetReference);
 
-      const ruleResults: UnknownAppliedRuleResult[] = ruleConfigurations.map(
-        (ruleConfiguration) => {
+      const ruleResults: UnknownAppliedRuleResult[] = ruleConfigurations
+        .toArray()
+        .map((ruleConfiguration): UnknownAppliedRuleResult => {
           const isTargetValid = ruleConfiguration.rule(
             targetReference.instance,
           );
 
           return {
             ruleTypeId: getRuleConfigurationTypeId(ruleConfiguration),
-            targetTypeId: targetReference.typeId,
-            normalizedTargetPath: targetReference.normalizedPath,
-            targetInstancePath: targetReference.instancePath,
-            targetInstance: targetReference.instance,
+            targetReference,
             isTargetValid,
-          } satisfies UnknownAppliedRuleResult;
-        },
-      );
+          };
+        });
 
       return ruleResults;
     },

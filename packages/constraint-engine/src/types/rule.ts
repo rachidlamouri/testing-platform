@@ -2,8 +2,7 @@ import {
   InferableTargetInstance,
   UnknownTargetInstance,
 } from './targetInstance';
-import { UnknownTargetPath } from './targetPath';
-import { UnknownTargetTypeId } from './typedTarget';
+import { UnknownTargetReference } from './targetReference';
 
 export type UnknownRuleTypeId = string;
 
@@ -23,9 +22,6 @@ export type InferableGuardRule = GuardRule<
 
 export type UnknownAppliedRuleResult = {
   ruleTypeId: UnknownRuleTypeId;
-  targetTypeId: UnknownTargetTypeId;
-  normalizedTargetPath: UnknownTargetPath;
-  targetInstancePath: UnknownTargetPath;
-  targetInstance: UnknownTargetInstance;
+  targetReference: UnknownTargetReference;
   isTargetValid: boolean;
 };
