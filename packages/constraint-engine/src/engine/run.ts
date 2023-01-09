@@ -10,6 +10,7 @@ import {
 } from './referenceBuilders/buildTargetReferencesForPath';
 import { TargetReferenceMap } from './targetReferenceMap';
 import { RuleConfigurationMap } from './ruleConfigurationMap';
+import { CustomSet } from '../utils/customSet';
 
 export type ConstraintEngineRunnerInput = {
   targetReferenceConfigurations: readonly UnknownTargetReferenceConfiguration[];
@@ -38,8 +39,8 @@ export const run: ConstraintEngineRunner = ({
   });
 
   let loopCount = 0;
-  let currentTargetPaths: UnkownTargetPathSet = new Set();
-  let nextTargetPaths: UnkownTargetPathSet = new Set([ROOT_TARGET_PATH]);
+  let currentTargetPaths: UnkownTargetPathSet = new CustomSet();
+  let nextTargetPaths: UnkownTargetPathSet = new CustomSet([ROOT_TARGET_PATH]);
   let currentTargetReferenceMap: TargetReferenceMap = new TargetReferenceMap();
   let nextTargetReferenceMap: TargetReferenceMap = new TargetReferenceMap();
 
@@ -70,14 +71,14 @@ export const run: ConstraintEngineRunner = ({
 
     allRuleResults.push(...nextRuleResults);
 
-    nextTargetPaths = new Set(
+    nextTargetPaths = new CustomSet(
       referenceBuilderResult.references.map((reference) => reference.path),
     );
 
     debugInfo.push({
       loopCount,
-      currentTargetPaths,
-      nextTargetPaths,
+      currentTargetPaths: currentTargetPaths.toArray(),
+      nextTargetPaths: nextTargetPaths.toArray(),
       referenceBuilderResult,
       nextRuleResults,
     });

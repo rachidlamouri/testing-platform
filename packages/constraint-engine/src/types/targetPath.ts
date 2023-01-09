@@ -1,8 +1,10 @@
+import { CustomSet } from '../utils/customSet';
+
 export const ROOT_TARGET_PATH = '' as const;
 export type RootTargetPath = typeof ROOT_TARGET_PATH;
 export type UnknownTargetPath = string;
 
-export type UnkownTargetPathSet = Set<UnknownTargetPath>;
+export type UnkownTargetPathSet = CustomSet<UnknownTargetPath>;
 
 export type UnknownTargetPathTuple = readonly UnknownTargetPath[];
 
