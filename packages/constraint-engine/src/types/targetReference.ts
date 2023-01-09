@@ -1,5 +1,5 @@
 import { UnknownTypedTarget } from './typedTarget';
-import { UnknownTargetPath } from './targetPath';
+import { UnknownTargetPath, UnknownTargetPathTuple } from './targetPath';
 import { CustomSet } from '../utils/customSet';
 
 export type TargetReference<
@@ -9,6 +9,16 @@ export type TargetReference<
   typeId: TTypedTarget['typeId'];
   instance: TTypedTarget['instance'];
   path: TTargetPath;
+};
+
+export type TargetReferenceTuple<
+  TTypedTarget extends UnknownTypedTarget,
+  TTargetPathTuple extends UnknownTargetPathTuple,
+> = {
+  [Index in keyof TTargetPathTuple]: TargetReference<
+    TTypedTarget,
+    TTargetPathTuple[Index]
+  >;
 };
 
 export type UnknownTargetReference = TargetReference<

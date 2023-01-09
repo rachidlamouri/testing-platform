@@ -33,15 +33,17 @@ orchestrate()
       targetReferenceConfiguration: {
         typeId:
           TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration,
-        buildReference: (inputReference: UnknownTargetReference) => ({
-          typeId: 'Bar',
-          instance: inputReference.instance,
-          path: `${inputReference.path}/bar`,
-        }),
+        buildReference: (inputReference: UnknownTargetReference) => [
+          {
+            typeId: 'Bar',
+            instance: inputReference.instance,
+            path: `${inputReference.path}/bar`,
+          },
+        ],
         inputTargetTypeId: 'Foo',
         inputTargetPath: 'foo/:index',
         outputTargetTypeId: ['Bar'],
-        outputTargetPath: 'foo/:index/bar',
+        outputTargetPath: ['foo/:index/bar'],
         conditions: [],
       },
       targetReferenceMap: targtReferenceMap,

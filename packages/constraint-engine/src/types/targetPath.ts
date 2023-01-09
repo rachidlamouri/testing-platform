@@ -4,6 +4,8 @@ export type UnknownTargetPath = string;
 
 export type UnkownTargetPathSet = Set<UnknownTargetPath>;
 
+export type UnknownTargetPathTuple = readonly UnknownTargetPath[];
+
 export type PrefixedTargetPath<
   TPrefix extends UnknownTargetPath,
   TSuffix extends UnknownTargetPath,

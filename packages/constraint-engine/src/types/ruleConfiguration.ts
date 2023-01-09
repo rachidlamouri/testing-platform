@@ -49,11 +49,12 @@ type RuleConfigurationFromTargetReferenceConfiguration<
         UnknownTypedTarget,
         UnknownTargetPath,
         infer TOutputTypedTargetOptionsTuple,
-        infer TOutputTargetPath
+        infer TOutputTargetPathTuple
       >
-    ? KnownRuleConfiguration<
+    ? // TODO: check if all permutations of target tuple and path tuple make sense
+      KnownRuleConfiguration<
         TOutputTypedTargetOptionsTuple[number],
-        TOutputTargetPath
+        TOutputTargetPathTuple[number]
       >
     : TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceSetConfiguration<
         UnknownTypedTarget,

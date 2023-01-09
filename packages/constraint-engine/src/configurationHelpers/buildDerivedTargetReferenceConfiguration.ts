@@ -1,5 +1,5 @@
 import { PartiallyKnownDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
-import { UnknownTargetPath } from '../types/targetPath';
+import { UnknownTargetPath, UnknownTargetPathTuple } from '../types/targetPath';
 import {
   KnownDerivedTargetReferenceConfiguration,
   PartiallyKnownDerivedTargetReferenceConfiguration,
@@ -14,7 +14,7 @@ export const buildDerivedTargetReferenceConfiguration = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
-  TOutputTargetPath extends UnknownTargetPath,
+  TOutputTargetPathTuple extends UnknownTargetPathTuple,
 >({
   inputTargetTypeId,
   inputTargetPath,
@@ -28,7 +28,7 @@ export const buildDerivedTargetReferenceConfiguration = <
       TInputTypedTarget,
       TInputTargetPath,
       TOutputTypedTargetOptionsTuple,
-      TOutputTargetPath
+      TOutputTargetPathTuple
     >,
     'typeId'
   >,
@@ -37,7 +37,7 @@ export const buildDerivedTargetReferenceConfiguration = <
   TInputTypedTarget,
   TInputTargetPath,
   TOutputTypedTargetOptionsTuple,
-  TOutputTargetPath
+  TOutputTargetPathTuple
 > => ({
   typeId:
     TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration,
@@ -47,7 +47,7 @@ export const buildDerivedTargetReferenceConfiguration = <
   outputTargetPath,
   buildReference: buildReference as PartiallyKnownDerivedReferenceBuilder<
     TOutputTypedTargetOptionsTuple,
-    TOutputTargetPath
+    TOutputTargetPathTuple
   >,
   conditions,
 });

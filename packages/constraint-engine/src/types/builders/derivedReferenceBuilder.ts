@@ -1,22 +1,25 @@
-import { UnknownTargetPath } from '../targetPath';
-import { TargetReference } from '../targetReference';
+import { UnknownTargetPath, UnknownTargetPathTuple } from '../targetPath';
+import { TargetReference, TargetReferenceTuple } from '../targetReference';
 import { UnknownTypedTarget } from '../typedTarget';
 
 export type KnownDerivedReferenceBuilder<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
-  TOutputTargetPath extends UnknownTargetPath,
+  TOutputTargetPathTuple extends UnknownTargetPathTuple,
 > = (
   inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
-) => TargetReference<TOutputTypedTargetOptionsTuple[number], TOutputTargetPath>;
+) => TargetReferenceTuple<
+  TOutputTypedTargetOptionsTuple[number],
+  TOutputTargetPathTuple
+>;
 
 export type PartiallyKnownDerivedReferenceBuilder<
   TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
-  TOutputTargetPath extends UnknownTargetPath,
+  TOutputTargetPathTuple extends UnknownTargetPathTuple,
 > = KnownDerivedReferenceBuilder<
   UnknownTypedTarget,
   UnknownTargetPath,
   TOutputTypedTargetOptionsTuple,
-  TOutputTargetPath
+  TOutputTargetPathTuple
 >;

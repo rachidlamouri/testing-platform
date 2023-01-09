@@ -25,7 +25,7 @@ export const buildDerivedTargetReferences = ({
           condition(inputReference.instance),
         );
       })
-      .flatMap((inputReference): UnknownTargetReference => {
+      .flatMap((inputReference): readonly UnknownTargetReference[] => {
         const outputReference =
           targetReferenceConfiguration.buildReference(inputReference);
 

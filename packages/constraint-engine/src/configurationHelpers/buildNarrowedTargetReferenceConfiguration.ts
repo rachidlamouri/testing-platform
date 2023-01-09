@@ -26,7 +26,7 @@ export type NarrowedTargetReferenceConfigurationBuilderInput<
     TInputTypedTarget,
     TInputTargetPath,
     [TOutputTypedTarget],
-    TInputTargetPath
+    [TInputTargetPath]
   >,
   'inputTargetTypeId' | 'conditions'
 > & {
@@ -57,18 +57,18 @@ export const buildNarrowedTargetReferenceConfiguration = <
   TInputTypedTarget,
   TInputTargetPath,
   [TOutputTypedTarget],
-  TInputTargetPath
+  [TInputTargetPath]
 > =>
   buildDerivedTargetReferenceConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
     [TOutputTypedTarget],
-    TInputTargetPath
+    [TInputTargetPath]
   >({
     inputTargetTypeId,
     inputTargetPath,
     outputTargetTypeId: [outputTargetTypeId],
-    outputTargetPath: inputTargetPath,
+    outputTargetPath: [inputTargetPath],
     buildReference: buildNarrowedReferenceBuilder<
       TInputTypedTarget,
       TInputTargetPath,

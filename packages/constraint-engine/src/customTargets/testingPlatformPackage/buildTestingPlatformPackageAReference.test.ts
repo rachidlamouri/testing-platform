@@ -41,25 +41,48 @@ orchestrate()
 
     rootHelper.teardown();
 
-    signaler.isDeepEqual(result, {
-      typeId: TestingPlatformTargetTypeId.PackageA,
-      instance: {
-        directoryName: 'tmp',
-        packageFile: {
-          filePath: 'tmp/package.json',
-          isOnDisk: true,
-          isParseable: true,
-          stringContents: '{}',
-          parsedContents: {},
+    signaler.isDeepEqual(result, [
+      {
+        typeId: TestingPlatformTargetTypeId.PackageA,
+        instance: {
+          directoryName: 'tmp',
+          packageFile: {
+            filePath: 'tmp/package.json',
+            isOnDisk: true,
+            isParseable: true,
+            stringContents: '{}',
+            parsedContents: {},
+          },
+          typeScriptConfigFile: {
+            filePath: 'tmp/tsconfig.json',
+            isOnDisk: true,
+            isParseable: true,
+            stringContents: '{}',
+            parsedContents: {},
+          },
         },
-        typeScriptConfigFile: {
-          filePath: 'tmp/tsconfig.json',
-          isOnDisk: true,
-          isParseable: true,
-          stringContents: '{}',
-          parsedContents: {},
-        },
+        path: 'abc/:directoryName',
       },
-      path: 'abc/tmp',
-    });
+      {
+        typeId: TestingPlatformTargetTypeId.PackageA,
+        instance: {
+          directoryName: 'tmp',
+          packageFile: {
+            filePath: 'tmp/package.json',
+            isOnDisk: true,
+            isParseable: true,
+            stringContents: '{}',
+            parsedContents: {},
+          },
+          typeScriptConfigFile: {
+            filePath: 'tmp/tsconfig.json',
+            isOnDisk: true,
+            isParseable: true,
+            stringContents: '{}',
+            parsedContents: {},
+          },
+        },
+        path: 'abc/tmp',
+      },
+    ]);
   });

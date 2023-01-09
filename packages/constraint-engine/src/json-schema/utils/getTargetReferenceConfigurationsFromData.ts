@@ -29,7 +29,7 @@ export const getTargetReferenceConfigurationsFromJson = (
       JsonUnknownTypedTarget,
       RootJsonDataTargetPath,
       JsonKnownTypedTargetOptionsTuple,
-      RootJsonDataTargetPath
+      [RootJsonDataTargetPath]
     >({
       buildReference: buildDerivedTypedJsonReference,
       inputTargetTypeId: JsonTargetTypeId.Unknown,
@@ -42,7 +42,7 @@ export const getTargetReferenceConfigurationsFromJson = (
         JsonTargetTypeId.Array,
         JsonTargetTypeId.Object,
       ],
-      outputTargetPath: 'data',
+      outputTargetPath: ['data'],
     }),
   ] as unknown as UnknownTargetReferenceConfiguration[];
 };

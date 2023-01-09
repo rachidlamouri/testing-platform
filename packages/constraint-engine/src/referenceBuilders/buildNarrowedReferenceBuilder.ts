@@ -31,11 +31,13 @@ export const buildNarrowedReferenceBuilder = <
     TInputTargetPath,
     TGuardRuleTuple,
     TOutputTypedTarget
-  > = (inputReference) => ({
-    typeId: outputTargetTypeId,
-    instance: inputReference.instance as TOutputTypedTarget['instance'],
-    path: inputReference.path,
-  });
+  > = (inputReference) => [
+    {
+      typeId: outputTargetTypeId,
+      instance: inputReference.instance as TOutputTypedTarget['instance'],
+      path: inputReference.path,
+    },
+  ];
 
   return buildNarrowedReference;
 };

@@ -1,7 +1,7 @@
 import { InferableGuardRule, GuardRule } from '../rule';
 import { InferableTargetInstance } from '../targetInstance';
 import { UnknownTargetPath } from '../targetPath';
-import { TargetReference } from '../targetReference';
+import { TargetReference, TargetReferenceTuple } from '../targetReference';
 import {
   TypedTarget,
   UnknownTargetTypeId,
@@ -41,4 +41,4 @@ export type NarrowedReferenceBuilder<
   >,
 > = (
   inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
-) => TargetReference<TOutputTypedTarget, TInputTargetPath>;
+) => TargetReferenceTuple<TOutputTypedTarget, [TInputTargetPath]>;
