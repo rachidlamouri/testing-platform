@@ -11,31 +11,26 @@ export const buildDerivedTargetReferences = ({
   targetReferenceConfiguration,
   targetReferenceMap,
 }: DerivedTargetReferencesBuilderInput): UnknownTargetReference[] => {
-  const inputTargetReferences =
-    targetReferenceMap.getTargetReferenceListByTypeIdAndNormalizedPath({
-      typeId: targetReferenceConfiguration.inputTargetTypeId,
-      normalizedPath: targetReferenceConfiguration.normalizedInputTargetPath,
+  const inputTargetReferenceSet =
+    targetReferenceMap.getTargetReferenceSetByTargetTypeIdAndTargetPath({
+      targetTypeId: targetReferenceConfiguration.inputTargetTypeId,
+      targetPath: targetReferenceConfiguration.normalizedInputTargetPath,
     });
 
-  const outputTargetReferences: UnknownTargetReference[] = inputTargetReferences
-    .map(
-      (inputTargetReference): UnknownTargetReference => ({
-        typeId: inputTargetReference.typeId,
-        instance: inputTargetReference.instance,
-        path: inputTargetReference.instancePath,
-      }),
-    )
-    .filter((inputReference) => {
-      return targetReferenceConfiguration.conditions.every((condition) =>
-        condition(inputReference.instance),
-      );
-    })
-    .flatMap((inputReference): UnknownTargetReference => {
-      const outputReference =
-        targetReferenceConfiguration.buildReference(inputReference);
+  const outputTargetReferences: UnknownTargetReference[] =
+    inputTargetReferenceSet
+      .toArray()
+      .filter((inputReference) => {
+        return targetReferenceConfiguration.conditions.every((condition) =>
+          condition(inputReference.instance),
+        );
+      })
+      .flatMap((inputReference): UnknownTargetReference => {
+        const outputReference =
+          targetReferenceConfiguration.buildReference(inputReference);
 
-      return outputReference;
-    });
+        return outputReference;
+      });
 
   return outputTargetReferences;
 };

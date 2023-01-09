@@ -1,70 +1,60 @@
 import { UnknownTargetPath } from '../types/targetPath';
-import { UnknownNormalizedTargetReference } from '../types/targetReference';
+import {
+  UnknownTargetReference,
+  UnknownTargetReferenceSet,
+} from '../types/targetReference';
 import { UnknownTargetTypeId } from '../types/typedTarget';
+import { CustomSet } from '../utils/customSet';
 
-export type TargetReferencesByInstancePath = Map<
+export type TargetReferenceSetsByTargetPath = Map<
   UnknownTargetPath,
-  UnknownNormalizedTargetReference
+  UnknownTargetReferenceSet
 >;
 
-export type TargetReferencesByInstancePathByNormalizedPath = Map<
-  UnknownTargetPath,
-  TargetReferencesByInstancePath
->;
-
-export type TargetReferencesByInstancePathByNormalizedPathByTargetTypeId = Map<
+export type TargetReferenceSetsByTargetPathByTargetTypeId = Map<
   UnknownTargetTypeId,
-  TargetReferencesByInstancePathByNormalizedPath
+  TargetReferenceSetsByTargetPath
 >;
 
 export class TargetReferenceMap {
-  private targetReferencesByInstancePathByNormalizedPathByTargetTypeId: TargetReferencesByInstancePathByNormalizedPathByTargetTypeId =
+  private targetReferenceSetsByTargetPathByTargetTypeId: TargetReferenceSetsByTargetPathByTargetTypeId =
     new Map();
 
-  setTargetReference(targetReference: UnknownNormalizedTargetReference): void {
-    const targetReferencesByInstancePathByNormalizedPath: TargetReferencesByInstancePathByNormalizedPath =
-      this.targetReferencesByInstancePathByNormalizedPathByTargetTypeId.get(
+  setTargetReference(targetReference: UnknownTargetReference): void {
+    const targetReferenceSetsByTargetPath: TargetReferenceSetsByTargetPath =
+      this.targetReferenceSetsByTargetPathByTargetTypeId.get(
         targetReference.typeId,
-      ) ?? (new Map() as TargetReferencesByInstancePathByNormalizedPath);
+      ) ?? (new Map() as TargetReferenceSetsByTargetPath);
 
-    const targetReferencesByInstancePath: TargetReferencesByInstancePath =
-      targetReferencesByInstancePathByNormalizedPath.get(
-        targetReference.normalizedPath,
-      ) ?? (new Map() as TargetReferencesByInstancePath);
+    const targetReferenceSet: UnknownTargetReferenceSet =
+      targetReferenceSetsByTargetPath.get(targetReference.path) ??
+      new CustomSet();
 
-    targetReferencesByInstancePath.set(
-      targetReference.instancePath,
-      targetReference,
+    targetReferenceSet.add(targetReference);
+    targetReferenceSetsByTargetPath.set(
+      targetReference.path,
+      targetReferenceSet,
     );
-    targetReferencesByInstancePathByNormalizedPath.set(
-      targetReference.normalizedPath,
-      targetReferencesByInstancePath,
-    );
-    this.targetReferencesByInstancePathByNormalizedPathByTargetTypeId.set(
+    this.targetReferenceSetsByTargetPathByTargetTypeId.set(
       targetReference.typeId,
-      targetReferencesByInstancePathByNormalizedPath,
+      targetReferenceSetsByTargetPath,
     );
   }
 
-  getTargetReferenceListByTypeIdAndNormalizedPath({
-    typeId,
-    normalizedPath,
-  }: Omit<
-    UnknownNormalizedTargetReference,
-    'instance' | 'instancePath'
-  >): UnknownNormalizedTargetReference[] {
-    const targetReferencesByInstancePathByNormalizedPath: TargetReferencesByInstancePathByNormalizedPath =
-      this.targetReferencesByInstancePathByNormalizedPathByTargetTypeId.get(
-        typeId,
-      ) ?? (new Map() as TargetReferencesByInstancePathByNormalizedPath);
+  getTargetReferenceSetByTargetTypeIdAndTargetPath({
+    targetTypeId,
+    targetPath,
+  }: {
+    targetTypeId: UnknownTargetTypeId;
+    targetPath: UnknownTargetPath;
+  }): UnknownTargetReferenceSet {
+    const targetReferenceSetsByTargetPath: TargetReferenceSetsByTargetPath =
+      this.targetReferenceSetsByTargetPathByTargetTypeId.get(targetTypeId) ??
+      (new Map() as TargetReferenceSetsByTargetPath);
 
-    const targetReferencesByInstancePath: TargetReferencesByInstancePath =
-      targetReferencesByInstancePathByNormalizedPath.get(normalizedPath) ??
-      (new Map() as TargetReferencesByInstancePath);
+    const targetReferenceSet: UnknownTargetReferenceSet =
+      targetReferenceSetsByTargetPath.get(targetPath) ?? new CustomSet();
 
-    const list: UnknownNormalizedTargetReference[] = [
-      ...targetReferencesByInstancePath.values(),
-    ];
-    return list;
+    return targetReferenceSet;
   }
 }

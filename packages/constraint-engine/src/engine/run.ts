@@ -71,7 +71,7 @@ export const run: ConstraintEngineRunner = ({
     allRuleResults.push(...nextRuleResults);
 
     nextTargetPaths = new Set(
-      referenceBuilderResult.references.map((r) => r.normalizedPath),
+      referenceBuilderResult.references.map((reference) => reference.path),
     );
 
     debugInfo.push({

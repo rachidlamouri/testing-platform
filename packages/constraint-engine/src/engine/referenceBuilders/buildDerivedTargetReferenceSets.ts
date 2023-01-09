@@ -11,27 +11,20 @@ export const buildDerivedTargetReferenceSets = ({
   targetReferenceConfiguration,
   targetReferenceMap,
 }: DerivedTargetReferenceSetsBuilderInput): UnknownTargetReference[] => {
-  const inputTargetReferences =
-    targetReferenceMap.getTargetReferenceListByTypeIdAndNormalizedPath({
-      typeId: targetReferenceConfiguration.inputTargetTypeId,
-      normalizedPath: targetReferenceConfiguration.normalizedInputTargetPath,
+  const inputTargetReferenceSet =
+    targetReferenceMap.getTargetReferenceSetByTargetTypeIdAndTargetPath({
+      targetTypeId: targetReferenceConfiguration.inputTargetTypeId,
+      targetPath: targetReferenceConfiguration.normalizedInputTargetPath,
     });
 
-  const outputReferenceSets: UnknownTargetReference[] =
-    inputTargetReferences.flatMap(
-      (inputReferenceA): UnknownTargetReference[] => {
-        const inputReferenceB: UnknownTargetReference = {
-          typeId: inputReferenceA.typeId,
-          instance: inputReferenceA.instance,
-          path: inputReferenceA.instancePath,
-        };
+  const outputReferenceSets: UnknownTargetReference[] = inputTargetReferenceSet
+    .toArray()
+    .flatMap((inputReference): UnknownTargetReference[] => {
+      const outputReferenceSet: UnknownTargetReference[] =
+        targetReferenceConfiguration.buildReferenceSet(inputReference);
 
-        const outputReferenceSet: UnknownTargetReference[] =
-          targetReferenceConfiguration.buildReferenceSet(inputReferenceB);
-
-        return outputReferenceSet;
-      },
-    );
+      return outputReferenceSet;
+    });
 
   return outputReferenceSets;
 };

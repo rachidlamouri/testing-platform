@@ -18,15 +18,13 @@ orchestrate()
     const targetReferenceMap = new TargetReferenceMap();
     targetReferenceMap.setTargetReference({
       typeId: 'Foo',
-      instancePath: 'foo/0',
+      path: 'foo/:index',
       instance: 'foo 0',
-      normalizedPath: 'foo/:index',
     });
     targetReferenceMap.setTargetReference({
       typeId: 'Foo',
-      instancePath: 'foo/1',
+      path: 'foo/:index',
       instance: 'foo 1',
-      normalizedPath: 'foo/:index',
     });
 
     const result = buildDerivedTargetReferenceSets({
