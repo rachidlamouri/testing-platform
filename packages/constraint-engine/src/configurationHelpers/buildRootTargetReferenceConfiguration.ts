@@ -14,9 +14,9 @@ export const buildRootTargetReferenceConfiguration = <
   TOutputTargetPath extends UnknownTargetPath,
 >({
   inputData,
-  normalizedInputTargetPath,
+  inputTargetPath,
   outputTargetTypeId,
-  normalizedOutputTargetPath,
+  outputTargetPath,
   buildReference,
 }: Omit<
   KnownRootTargetReferenceConfiguration<
@@ -32,9 +32,9 @@ export const buildRootTargetReferenceConfiguration = <
 > => ({
   typeId: TargetReferenceConfigurationTypeId.RootTargetReferenceConfiguration,
   inputData,
-  normalizedInputTargetPath,
+  inputTargetPath,
   outputTargetTypeId,
-  normalizedOutputTargetPath,
+  outputTargetPath,
   buildReference: buildReference as PartiallyKnownReferenceBuilder<
     TOutputTypedTarget,
     TOutputTargetPath

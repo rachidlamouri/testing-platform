@@ -8,12 +8,12 @@ export const buildRuleConfiguration = <
   TTargetReferenceConfigurations extends readonly UnknownTargetReferenceConfiguration[],
 >({
   targetTypeId,
-  normalizedTargetPath,
+  targetPath,
   rule,
 }: RuleConfigurationFromTargetReferenceConfigurations<TTargetReferenceConfigurations>): UnknownRuleConfiguration => {
   return {
     targetTypeId,
-    normalizedTargetPath,
+    targetPath,
     rule,
   };
 };

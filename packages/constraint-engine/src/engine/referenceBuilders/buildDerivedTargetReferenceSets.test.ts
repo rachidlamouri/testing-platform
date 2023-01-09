@@ -46,9 +46,9 @@ orchestrate()
           ];
         },
         inputTargetTypeId: 'Foo',
-        normalizedInputTargetPath: 'foo/:index',
+        inputTargetPath: 'foo/:index',
         outputTargetTypeId: 'Bar',
-        normalizedOutputTargetPath: 'foo/:index/:barIndex',
+        outputTargetPath: 'foo/:index/:barIndex',
       },
       targetReferenceMap,
     });

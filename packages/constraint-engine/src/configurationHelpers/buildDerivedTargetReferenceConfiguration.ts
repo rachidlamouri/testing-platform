@@ -17,9 +17,9 @@ export const buildDerivedTargetReferenceConfiguration = <
   TOutputTargetPath extends UnknownTargetPath,
 >({
   inputTargetTypeId,
-  normalizedInputTargetPath,
+  inputTargetPath,
   outputTargetTypeId,
-  normalizedOutputTargetPath,
+  outputTargetPath,
   buildReference,
   conditions = [],
 }: PartialKeys<
@@ -42,9 +42,9 @@ export const buildDerivedTargetReferenceConfiguration = <
   typeId:
     TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration,
   inputTargetTypeId,
-  normalizedInputTargetPath,
+  inputTargetPath,
   outputTargetTypeId,
-  normalizedOutputTargetPath,
+  outputTargetPath,
   buildReference: buildReference as PartiallyKnownDerivedReferenceBuilder<
     TOutputTypedTargetOptionsTuple,
     TOutputTargetPath

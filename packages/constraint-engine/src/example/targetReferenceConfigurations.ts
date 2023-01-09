@@ -36,9 +36,9 @@ export const targetReferenceConfigurations = [
   >({
     buildReference: buildTestingPlatformPackageDirectorySetReference,
     inputData: { rootDirectoryRelativeToCurrentWorkingDirectory: 'packages' },
-    normalizedInputTargetPath: '',
+    inputTargetPath: '',
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
-    normalizedOutputTargetPath: 'testingPlatformPackageDirectorySet',
+    outputTargetPath: 'testingPlatformPackageDirectorySet',
   }),
   buildDerivedTargetReferenceSetConfiguration<
     TestingPlatformPackageDirectorySetTypedTarget,
@@ -48,9 +48,9 @@ export const targetReferenceConfigurations = [
   >({
     buildReferenceSet: buildTestingPlatformPackageDirectoryReferenceSet,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
-    normalizedInputTargetPath: 'testingPlatformPackageDirectorySet',
+    inputTargetPath: 'testingPlatformPackageDirectorySet',
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
-    normalizedOutputTargetPath: 'testingPlatformPackageDirectorySet/:index',
+    outputTargetPath: 'testingPlatformPackageDirectorySet/:index',
   }),
   buildDerivedTargetReferenceConfiguration<
     TestingPlatformPackageDirectoryTypedTarget,
@@ -60,10 +60,9 @@ export const targetReferenceConfigurations = [
   >({
     buildReference: buildTestingPlatformPackageAReference,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
-    normalizedInputTargetPath: 'testingPlatformPackageDirectorySet/:index',
+    inputTargetPath: 'testingPlatformPackageDirectorySet/:index',
     outputTargetTypeId: [TestingPlatformTargetTypeId.PackageA],
-    normalizedOutputTargetPath:
-      'testingPlatformPackageDirectorySet/:directoryName',
+    outputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
   }),
   buildNarrowedTargetReferenceConfiguration<
     TestingPlatformPackageATypedTarget,
@@ -72,7 +71,7 @@ export const targetReferenceConfigurations = [
     TestingPlatformPackageBTypedTarget
   >({
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageA,
-    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
+    inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     conditions: [packageAHasPackageFile, packageAHasTypeScriptConfigFile],
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
   }),
@@ -83,7 +82,7 @@ export const targetReferenceConfigurations = [
     TestingPlatformPackageCTypedTarget
   >({
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
-    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
+    inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     conditions: [packageBHasTestingPlatformConfiguration],
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageC,
   }),

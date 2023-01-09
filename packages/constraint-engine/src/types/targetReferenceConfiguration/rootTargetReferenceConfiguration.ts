@@ -1,10 +1,6 @@
 import { ReferenceBuilder } from '../builders/referenceBuilder';
 import { UnknownTargetInstance } from '../targetInstance';
-import {
-  NormalizedTargetPath,
-  RootTargetPath,
-  UnknownTargetPath,
-} from '../targetPath';
+import { RootTargetPath, UnknownTargetPath } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
 import { TargetReferenceConfigurationTypeId } from './typeId';
 
@@ -21,9 +17,9 @@ type RootTargetReferenceConfiguration<
     TOutputTargetPath
   >;
   inputData: TExpectedInputData;
-  normalizedInputTargetPath: RootTargetPath;
+  inputTargetPath: RootTargetPath;
   outputTargetTypeId: TOutputTypedTarget['typeId'];
-  normalizedOutputTargetPath: NormalizedTargetPath<TOutputTargetPath>;
+  outputTargetPath: TOutputTargetPath;
 };
 
 export type KnownRootTargetReferenceConfiguration<

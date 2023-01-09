@@ -37,8 +37,7 @@ export const buildTargetReferencesForPath = ({
   const errors: TargetReferenceConfigurationError[] = [];
 
   const configurationsToBuild = targetReferenceConfigurations.filter(
-    (configuration) =>
-      currentTargetPaths.has(configuration.normalizedInputTargetPath),
+    (configuration) => currentTargetPaths.has(configuration.inputTargetPath),
   );
 
   configurationsToBuild.forEach((targetReferenceConfiguration) => {

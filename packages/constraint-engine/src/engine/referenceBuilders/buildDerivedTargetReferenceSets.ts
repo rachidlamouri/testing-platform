@@ -14,7 +14,7 @@ export const buildDerivedTargetReferenceSets = ({
   const inputTargetReferenceSet =
     targetReferenceMap.getTargetReferenceSetByTargetTypeIdAndTargetPath({
       targetTypeId: targetReferenceConfiguration.inputTargetTypeId,
-      targetPath: targetReferenceConfiguration.normalizedInputTargetPath,
+      targetPath: targetReferenceConfiguration.inputTargetPath,
     });
 
   const outputReferenceSets: UnknownTargetReference[] = inputTargetReferenceSet

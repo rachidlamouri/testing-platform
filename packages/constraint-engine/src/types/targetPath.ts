@@ -13,8 +13,3 @@ export type UnknownDerivedTargetPath = PrefixedTargetPath<
   UnknownTargetPath,
   UnknownTargetPath
 >;
-
-export type NormalizedTargetPath<TTargetPath extends UnknownTargetPath> =
-  TTargetPath extends PrefixedTargetPath<infer TPrefix, infer TSuffix>
-    ? `${TPrefix}/:${TSuffix}`
-    : TTargetPath;

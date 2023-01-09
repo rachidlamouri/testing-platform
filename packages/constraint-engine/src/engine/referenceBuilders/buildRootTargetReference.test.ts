@@ -24,9 +24,9 @@ orchestrate()
           path: 'bar',
         }),
         inputData: 2,
-        normalizedInputTargetPath: '',
+        inputTargetPath: '',
         outputTargetTypeId: 'foo',
-        normalizedOutputTargetPath: 'bar',
+        outputTargetPath: 'bar',
       },
     });
 

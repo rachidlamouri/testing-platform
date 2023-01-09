@@ -1,5 +1,5 @@
 import { DerivedReferenceSetBuilder } from '../builders/derivedReferenceSetBuilder';
-import { NormalizedTargetPath, UnknownTargetPath } from '../targetPath';
+import { UnknownTargetPath } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
 import { TargetReferenceConfigurationTypeId } from './typeId';
 
@@ -19,9 +19,9 @@ type DerivedTargetReferenceSetConfiguration<
     TOutputTargetPath
   >;
   inputTargetTypeId: TExpectedInputTypedTarget['typeId'];
-  normalizedInputTargetPath: NormalizedTargetPath<TExpectedInputTargetPath>;
+  inputTargetPath: TExpectedInputTargetPath;
   outputTargetTypeId: TOutputTypedTarget['typeId'];
-  normalizedOutputTargetPath: NormalizedTargetPath<TOutputTargetPath>;
+  outputTargetPath: TOutputTargetPath;
 };
 
 export type KnownDerivedTargetReferenceSetConfiguration<

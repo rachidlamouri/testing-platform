@@ -1,6 +1,5 @@
-import { UnknownTargetTypeId, UnknownTypedTarget } from './typedTarget';
+import { UnknownTypedTarget } from './typedTarget';
 import { UnknownTargetPath } from './targetPath';
-import { UnknownTargetInstance } from './targetInstance';
 import { CustomSet } from '../utils/customSet';
 
 export type TargetReference<
@@ -18,10 +17,3 @@ export type UnknownTargetReference = TargetReference<
 >;
 
 export type UnknownTargetReferenceSet = CustomSet<UnknownTargetReference>;
-
-export type UnknownNormalizedTargetReference = {
-  typeId: UnknownTargetTypeId;
-  instance: UnknownTargetInstance;
-  instancePath: UnknownTargetPath;
-  normalizedPath: UnknownTargetPath;
-};
