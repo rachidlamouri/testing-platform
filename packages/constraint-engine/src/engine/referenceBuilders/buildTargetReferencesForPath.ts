@@ -1,8 +1,8 @@
 import { UnkownTargetPathSet } from '../../types/targetPath';
 import { UnknownNormalizedTargetReference } from '../../types/targetReference';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
-import { NormalizedTargetReferenceMap } from '../targetReferenceMap';
-import { buildNormalizedTargetReferencesForConfiguration } from './buildTargetReferencesForConfiguration';
+import { TargetReferenceMap } from '../targetReferenceMap';
+import { buildTargetReferencesForConfiguration } from './buildTargetReferencesForConfiguration';
 
 export class TargetReferenceConfigurationError extends Error {
   public readonly originalTrace: string[];
@@ -17,22 +17,22 @@ export class TargetReferenceConfigurationError extends Error {
   }
 }
 
-export type NormalizedTargetReferencesBuilderInput = {
+export type TargetReferencesBuilderInput = {
   targetReferenceConfigurations: readonly UnknownTargetReferenceConfiguration[];
-  normalizedTargetReferenceMap: NormalizedTargetReferenceMap;
+  targetReferenceMap: TargetReferenceMap;
   currentTargetPaths: UnkownTargetPathSet;
 };
 
-export type NormalizedTargetReferencesBuilderResult = {
+export type TargetReferencesBuilderResult = {
   references: UnknownNormalizedTargetReference[];
   errors: TargetReferenceConfigurationError[];
 };
 
-export const buildNormalizedTargetReferencesForPath = ({
+export const buildTargetReferencesForPath = ({
   targetReferenceConfigurations,
-  normalizedTargetReferenceMap,
+  targetReferenceMap,
   currentTargetPaths,
-}: NormalizedTargetReferencesBuilderInput): NormalizedTargetReferencesBuilderResult => {
+}: TargetReferencesBuilderInput): TargetReferencesBuilderResult => {
   const references: UnknownNormalizedTargetReference[] = [];
   const errors: TargetReferenceConfigurationError[] = [];
 
@@ -43,9 +43,9 @@ export const buildNormalizedTargetReferencesForPath = ({
 
   configurationsToBuild.forEach((targetReferenceConfiguration) => {
     try {
-      const nextReferences = buildNormalizedTargetReferencesForConfiguration({
+      const nextReferences = buildTargetReferencesForConfiguration({
         targetReferenceConfiguration,
-        normalizedTargetReferenceMap,
+        targetReferenceMap,
       });
 
       references.push(...nextReferences);

@@ -1,13 +1,13 @@
 import { UnknownNormalizedTargetReference } from '../../types/targetReference';
 import { UnknownRootTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/rootTargetReferenceConfiguration';
 
-export type NormalizedRootTargetReferenceBuilderInput = {
+export type RootTargetReferenceBuilderInput = {
   targetReferenceConfiguration: UnknownRootTargetReferenceConfiguration;
 };
 
-export const buildNormalizedRootTargetReference = ({
+export const buildRootTargetReference = ({
   targetReferenceConfiguration,
-}: NormalizedRootTargetReferenceBuilderInput): UnknownNormalizedTargetReference => {
+}: RootTargetReferenceBuilderInput): UnknownNormalizedTargetReference => {
   const outputReference = targetReferenceConfiguration.buildReference(
     targetReferenceConfiguration.inputData,
   );

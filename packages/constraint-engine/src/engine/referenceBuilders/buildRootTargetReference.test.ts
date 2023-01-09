@@ -4,17 +4,17 @@ import {
   signaler,
 } from 'rat-test/type-script/transgressing';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
-import { buildNormalizedRootTargetReference } from './buildRootTargetReference';
+import { buildRootTargetReference } from './buildRootTargetReference';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
   .then(() => {
-    report('• buildNormalizedRootTargetReference');
+    report('• buildRootTargetReference');
   })
   .then(() => {
     report('  ⇀ Testing a root target reference configuration');
 
-    const result = buildNormalizedRootTargetReference({
+    const result = buildRootTargetReference({
       targetReferenceConfiguration: {
         typeId:
           TargetReferenceConfigurationTypeId.RootTargetReferenceConfiguration,

@@ -1,14 +1,14 @@
 import fs from 'fs';
-import { UnknownNormalizedAppliedRuleResult } from '../types/rule';
+import { UnknownAppliedRuleResult } from '../types/rule';
 import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
 import { ROOT_TARGET_PATH, UnkownTargetPathSet } from '../types/targetPath';
 import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { applyRules } from './applyRules';
 import {
-  buildNormalizedTargetReferencesForPath,
+  buildTargetReferencesForPath,
   TargetReferenceConfigurationError,
 } from './referenceBuilders/buildTargetReferencesForPath';
-import { NormalizedTargetReferenceMap } from './targetReferenceMap';
+import { TargetReferenceMap } from './targetReferenceMap';
 import { RuleConfigurationMap } from './ruleConfigurationMap';
 
 export type ConstraintEngineRunnerInput = {
@@ -28,7 +28,7 @@ export const run: ConstraintEngineRunner = ({
 }): void => {
   const debugInfo: Record<string, unknown>[] = [];
 
-  const allRuleResults: UnknownNormalizedAppliedRuleResult[] = [];
+  const allRuleResults: UnknownAppliedRuleResult[] = [];
   const allTargetReferenceConfigurationErrors: TargetReferenceConfigurationError[] =
     [];
 
@@ -40,18 +40,16 @@ export const run: ConstraintEngineRunner = ({
   let loopCount = 0;
   let currentTargetPaths: UnkownTargetPathSet = new Set();
   let nextTargetPaths: UnkownTargetPathSet = new Set([ROOT_TARGET_PATH]);
-  let currentNormalizedTargetReferenceMap: NormalizedTargetReferenceMap =
-    new NormalizedTargetReferenceMap();
-  let nextNormalizedTargetReferenceMap: NormalizedTargetReferenceMap =
-    new NormalizedTargetReferenceMap();
+  let currentTargetReferenceMap: TargetReferenceMap = new TargetReferenceMap();
+  let nextTargetReferenceMap: TargetReferenceMap = new TargetReferenceMap();
 
   while (nextTargetPaths.size !== 0) {
     currentTargetPaths = nextTargetPaths;
-    currentNormalizedTargetReferenceMap = nextNormalizedTargetReferenceMap;
+    currentTargetReferenceMap = nextTargetReferenceMap;
 
-    const referenceBuilderResult = buildNormalizedTargetReferencesForPath({
+    const referenceBuilderResult = buildTargetReferencesForPath({
       targetReferenceConfigurations,
-      normalizedTargetReferenceMap: currentNormalizedTargetReferenceMap,
+      targetReferenceMap: currentTargetReferenceMap,
       currentTargetPaths,
     });
 
@@ -59,10 +57,10 @@ export const run: ConstraintEngineRunner = ({
       ...referenceBuilderResult.errors,
     );
 
-    nextNormalizedTargetReferenceMap = new NormalizedTargetReferenceMap();
+    nextTargetReferenceMap = new TargetReferenceMap();
     // eslint-disable-next-line @typescript-eslint/no-loop-func
     referenceBuilderResult.references.forEach((targetReference) => {
-      nextNormalizedTargetReferenceMap.setNormalizedReference(targetReference);
+      nextTargetReferenceMap.setTargetReference(targetReference);
     });
 
     const nextRuleResults = applyRules({

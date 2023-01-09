@@ -2,74 +2,68 @@ import { UnknownTargetPath } from '../types/targetPath';
 import { UnknownNormalizedTargetReference } from '../types/targetReference';
 import { UnknownTargetTypeId } from '../types/typedTarget';
 
-export type NormalizedTargetReferencesByInstancePath = Map<
+export type TargetReferencesByInstancePath = Map<
   UnknownTargetPath,
   UnknownNormalizedTargetReference
 >;
 
-export type NormalizedTargetReferencesByInstancePathByNormalizedPath = Map<
+export type TargetReferencesByInstancePathByNormalizedPath = Map<
   UnknownTargetPath,
-  NormalizedTargetReferencesByInstancePath
+  TargetReferencesByInstancePath
 >;
 
-export type NormalizedTargetReferencesByInstancePathByNormalizedPathByTargetTypeId =
-  Map<
-    UnknownTargetTypeId,
-    NormalizedTargetReferencesByInstancePathByNormalizedPath
-  >;
+export type TargetReferencesByInstancePathByNormalizedPathByTargetTypeId = Map<
+  UnknownTargetTypeId,
+  TargetReferencesByInstancePathByNormalizedPath
+>;
 
-export class NormalizedTargetReferenceMap {
-  private normalizedTargetReferencesByInstancePathByNormalizedPathByTargetTypeId: NormalizedTargetReferencesByInstancePathByNormalizedPathByTargetTypeId =
+export class TargetReferenceMap {
+  private targetReferencesByInstancePathByNormalizedPathByTargetTypeId: TargetReferencesByInstancePathByNormalizedPathByTargetTypeId =
     new Map();
 
-  setNormalizedReference(
-    targetReference: UnknownNormalizedTargetReference,
-  ): void {
-    const normalizedTargetReferencesByInstancePathByNormalizedPath: NormalizedTargetReferencesByInstancePathByNormalizedPath =
-      this.normalizedTargetReferencesByInstancePathByNormalizedPathByTargetTypeId.get(
+  setTargetReference(targetReference: UnknownNormalizedTargetReference): void {
+    const targetReferencesByInstancePathByNormalizedPath: TargetReferencesByInstancePathByNormalizedPath =
+      this.targetReferencesByInstancePathByNormalizedPathByTargetTypeId.get(
         targetReference.typeId,
-      ) ??
-      (new Map() as NormalizedTargetReferencesByInstancePathByNormalizedPath);
+      ) ?? (new Map() as TargetReferencesByInstancePathByNormalizedPath);
 
-    const normalizedTargetReferencesByInstancePath: NormalizedTargetReferencesByInstancePath =
-      normalizedTargetReferencesByInstancePathByNormalizedPath.get(
+    const targetReferencesByInstancePath: TargetReferencesByInstancePath =
+      targetReferencesByInstancePathByNormalizedPath.get(
         targetReference.normalizedPath,
-      ) ?? (new Map() as NormalizedTargetReferencesByInstancePath);
+      ) ?? (new Map() as TargetReferencesByInstancePath);
 
-    normalizedTargetReferencesByInstancePath.set(
+    targetReferencesByInstancePath.set(
       targetReference.instancePath,
       targetReference,
     );
-    normalizedTargetReferencesByInstancePathByNormalizedPath.set(
+    targetReferencesByInstancePathByNormalizedPath.set(
       targetReference.normalizedPath,
-      normalizedTargetReferencesByInstancePath,
+      targetReferencesByInstancePath,
     );
-    this.normalizedTargetReferencesByInstancePathByNormalizedPathByTargetTypeId.set(
+    this.targetReferencesByInstancePathByNormalizedPathByTargetTypeId.set(
       targetReference.typeId,
-      normalizedTargetReferencesByInstancePathByNormalizedPath,
+      targetReferencesByInstancePathByNormalizedPath,
     );
   }
 
-  getNormalizedTargetReferenceListByTypeIdAndNormalizedPath({
+  getTargetReferenceListByTypeIdAndNormalizedPath({
     typeId,
     normalizedPath,
   }: Omit<
     UnknownNormalizedTargetReference,
     'instance' | 'instancePath'
   >): UnknownNormalizedTargetReference[] {
-    const normalizedTargetReferencesByInstancePathByNormalizedPath: NormalizedTargetReferencesByInstancePathByNormalizedPath =
-      this.normalizedTargetReferencesByInstancePathByNormalizedPathByTargetTypeId.get(
+    const targetReferencesByInstancePathByNormalizedPath: TargetReferencesByInstancePathByNormalizedPath =
+      this.targetReferencesByInstancePathByNormalizedPathByTargetTypeId.get(
         typeId,
-      ) ??
-      (new Map() as NormalizedTargetReferencesByInstancePathByNormalizedPath);
+      ) ?? (new Map() as TargetReferencesByInstancePathByNormalizedPath);
 
-    const normalizedTargetReferencesByInstancePath: NormalizedTargetReferencesByInstancePath =
-      normalizedTargetReferencesByInstancePathByNormalizedPath.get(
-        normalizedPath,
-      ) ?? (new Map() as NormalizedTargetReferencesByInstancePath);
+    const targetReferencesByInstancePath: TargetReferencesByInstancePath =
+      targetReferencesByInstancePathByNormalizedPath.get(normalizedPath) ??
+      (new Map() as TargetReferencesByInstancePath);
 
     const list: UnknownNormalizedTargetReference[] = [
-      ...normalizedTargetReferencesByInstancePath.values(),
+      ...targetReferencesByInstancePath.values(),
     ];
     return list;
   }

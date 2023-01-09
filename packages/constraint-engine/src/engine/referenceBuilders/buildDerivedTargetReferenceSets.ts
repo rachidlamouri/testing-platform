@@ -3,39 +3,37 @@ import {
   UnknownTargetReference,
 } from '../../types/targetReference';
 import { UnknownDerivedTargetReferenceSetConfiguration } from '../../types/targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
-import { NormalizedTargetReferenceMap } from '../targetReferenceMap';
+import { TargetReferenceMap } from '../targetReferenceMap';
 
-export type NormalizedDerivedTargetReferenceSetsBuilderInput = {
+export type DerivedTargetReferenceSetsBuilderInput = {
   targetReferenceConfiguration: UnknownDerivedTargetReferenceSetConfiguration;
-  normalizedTargetReferenceMap: NormalizedTargetReferenceMap;
+  targetReferenceMap: TargetReferenceMap;
 };
 
-export const buildNormalizedDerivedTargetReferenceSets = ({
+export const buildDerivedTargetReferenceSets = ({
   targetReferenceConfiguration,
-  normalizedTargetReferenceMap,
-}: NormalizedDerivedTargetReferenceSetsBuilderInput): UnknownNormalizedTargetReference[] => {
-  const normalizedInputTargetReferences =
-    normalizedTargetReferenceMap.getNormalizedTargetReferenceListByTypeIdAndNormalizedPath(
-      {
-        typeId: targetReferenceConfiguration.inputTargetTypeId,
-        normalizedPath: targetReferenceConfiguration.normalizedInputTargetPath,
-      },
-    );
+  targetReferenceMap,
+}: DerivedTargetReferenceSetsBuilderInput): UnknownNormalizedTargetReference[] => {
+  const inputTargetReferences =
+    targetReferenceMap.getTargetReferenceListByTypeIdAndNormalizedPath({
+      typeId: targetReferenceConfiguration.inputTargetTypeId,
+      normalizedPath: targetReferenceConfiguration.normalizedInputTargetPath,
+    });
 
-  const normalizedOutputReferenceSets: UnknownNormalizedTargetReference[] =
-    normalizedInputTargetReferences.flatMap(
-      (normalizedInputReference): UnknownNormalizedTargetReference[] => {
-        const inputReference: UnknownTargetReference = {
-          typeId: normalizedInputReference.typeId,
-          instance: normalizedInputReference.instance,
-          path: normalizedInputReference.instancePath,
+  const outputReferenceSets: UnknownNormalizedTargetReference[] =
+    inputTargetReferences.flatMap(
+      (inputReferenceA): UnknownNormalizedTargetReference[] => {
+        const inputReferenceB: UnknownTargetReference = {
+          typeId: inputReferenceA.typeId,
+          instance: inputReferenceA.instance,
+          path: inputReferenceA.instancePath,
         };
 
-        const outputReferenceSet: UnknownTargetReference[] =
-          targetReferenceConfiguration.buildReferenceSet(inputReference);
+        const outputReferenceSetA: UnknownTargetReference[] =
+          targetReferenceConfiguration.buildReferenceSet(inputReferenceB);
 
-        const normalizedOutputReferenceSet: UnknownNormalizedTargetReference[] =
-          outputReferenceSet.flatMap(
+        const outputReferenceSetB: UnknownNormalizedTargetReference[] =
+          outputReferenceSetA.map(
             (outputReference): UnknownNormalizedTargetReference => {
               return {
                 typeId: outputReference.typeId,
@@ -47,9 +45,9 @@ export const buildNormalizedDerivedTargetReferenceSets = ({
             },
           );
 
-        return normalizedOutputReferenceSet;
+        return outputReferenceSetB;
       },
     );
 
-  return normalizedOutputReferenceSets;
+  return outputReferenceSets;
 };

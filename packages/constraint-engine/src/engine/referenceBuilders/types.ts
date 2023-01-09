@@ -1,7 +1,7 @@
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
-import { NormalizedTargetReferenceMap } from '../normalizedTargetReferenceMap';
+import { TargetReferenceMap } from '../targetReferenceMap';
 
-export type NormalizedTargetReferenceBuilderInput = {
+export type TargetReferenceBuilderInput = {
   targetReferenceConfiguration: UnknownTargetReferenceConfiguration;
-  normalizedTargetReferenceMap: NormalizedTargetReferenceMap;
+  targetReferenceMap: TargetReferenceMap;
 };

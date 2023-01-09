@@ -21,7 +21,7 @@ export type InferableGuardRule = GuardRule<
   InferableTargetInstance
 >;
 
-export type UnknownNormalizedAppliedRuleResult = {
+export type UnknownAppliedRuleResult = {
   ruleTypeId: UnknownRuleTypeId;
   targetTypeId: UnknownTargetTypeId;
   normalizedTargetPath: UnknownTargetPath;

@@ -1,4 +1,4 @@
-import { UnknownNormalizedAppliedRuleResult } from '../types/rule';
+import { UnknownAppliedRuleResult } from '../types/rule';
 import { UnknownNormalizedTargetReference } from '../types/targetReference';
 import { getRuleConfigurationTypeId } from './getRuleConfigurationTypeId';
 import { RuleConfigurationMap } from './ruleConfigurationMap';
@@ -8,18 +8,18 @@ export type RuleApplierInput = {
   targetReferences: UnknownNormalizedTargetReference[];
 };
 
-export type RuleApplierResult = UnknownNormalizedAppliedRuleResult[];
+export type RuleApplierResult = UnknownAppliedRuleResult[];
 
 export const applyRules = ({
   ruleConfigurationMap,
   targetReferences,
-}: RuleApplierInput): UnknownNormalizedAppliedRuleResult[] => {
-  const allRuleResults: UnknownNormalizedAppliedRuleResult[] =
-    targetReferences.flatMap((targetReference) => {
+}: RuleApplierInput): UnknownAppliedRuleResult[] => {
+  const allRuleResults: UnknownAppliedRuleResult[] = targetReferences.flatMap(
+    (targetReference) => {
       const ruleConfigurations = ruleConfigurationMap.getRules(targetReference);
 
-      const ruleResults: UnknownNormalizedAppliedRuleResult[] =
-        ruleConfigurations.map((ruleConfiguration) => {
+      const ruleResults: UnknownAppliedRuleResult[] = ruleConfigurations.map(
+        (ruleConfiguration) => {
           const isTargetValid = ruleConfiguration.rule(
             targetReference.instance,
           );
@@ -31,11 +31,13 @@ export const applyRules = ({
             targetInstancePath: targetReference.instancePath,
             targetInstance: targetReference.instance,
             isTargetValid,
-          } satisfies UnknownNormalizedAppliedRuleResult;
-        });
+          } satisfies UnknownAppliedRuleResult;
+        },
+      );
 
       return ruleResults;
-    });
+    },
+  );
 
   return allRuleResults;
 };

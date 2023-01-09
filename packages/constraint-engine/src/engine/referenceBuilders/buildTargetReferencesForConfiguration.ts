@@ -1,37 +1,37 @@
 import { UnknownNormalizedTargetReference } from '../../types/targetReference';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
-import { NormalizedTargetReferenceMap } from '../targetReferenceMap';
-import { buildNormalizedDerivedTargetReferences } from './buildDerivedTargetReferences';
-import { buildNormalizedDerivedTargetReferenceSets } from './buildDerivedTargetReferenceSets';
-import { buildNormalizedRootTargetReference } from './buildRootTargetReference';
+import { TargetReferenceMap } from '../targetReferenceMap';
+import { buildDerivedTargetReferences } from './buildDerivedTargetReferences';
+import { buildDerivedTargetReferenceSets } from './buildDerivedTargetReferenceSets';
+import { buildRootTargetReference } from './buildRootTargetReference';
 
-export type NormalizedTargetReferencesBuilderInput = {
+export type TargetReferencesBuilderInput = {
   targetReferenceConfiguration: UnknownTargetReferenceConfiguration;
-  normalizedTargetReferenceMap: NormalizedTargetReferenceMap;
+  targetReferenceMap: TargetReferenceMap;
 };
 
-export const buildNormalizedTargetReferencesForConfiguration = ({
+export const buildTargetReferencesForConfiguration = ({
   targetReferenceConfiguration,
-  normalizedTargetReferenceMap,
-}: NormalizedTargetReferencesBuilderInput): UnknownNormalizedTargetReference[] => {
+  targetReferenceMap,
+}: TargetReferencesBuilderInput): UnknownNormalizedTargetReference[] => {
   switch (targetReferenceConfiguration.typeId) {
     case TargetReferenceConfigurationTypeId.RootTargetReferenceConfiguration:
       return [
-        buildNormalizedRootTargetReference({
+        buildRootTargetReference({
           targetReferenceConfiguration,
         }),
       ];
     case TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration: {
-      return buildNormalizedDerivedTargetReferences({
+      return buildDerivedTargetReferences({
         targetReferenceConfiguration,
-        normalizedTargetReferenceMap,
+        targetReferenceMap,
       });
     }
     case TargetReferenceConfigurationTypeId.DerivedTargetReferenceSetConfiguration: {
-      return buildNormalizedDerivedTargetReferenceSets({
+      return buildDerivedTargetReferenceSets({
         targetReferenceConfiguration,
-        normalizedTargetReferenceMap,
+        targetReferenceMap,
       });
     }
   }

@@ -5,33 +5,33 @@ import {
 } from 'rat-test/type-script/transgressing';
 import { UnknownTargetReference } from '../../types/targetReference';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
-import { NormalizedTargetReferenceMap } from '../targetReferenceMap';
-import { buildNormalizedDerivedTargetReferences } from './buildDerivedTargetReferences';
+import { TargetReferenceMap } from '../targetReferenceMap';
+import { buildDerivedTargetReferences } from './buildDerivedTargetReferences';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
   .then(() => {
-    report('• buildNormalizedDerivedTargetReferences');
+    report('• buildDerivedTargetReferences');
   })
   .then(() => {
     report('  ⇀ Testing a derived target reference configuration');
 
-    const normalizedTargetReferenceMap = new NormalizedTargetReferenceMap();
+    const targtReferenceMap = new TargetReferenceMap();
 
-    normalizedTargetReferenceMap.setNormalizedReference({
+    targtReferenceMap.setTargetReference({
       typeId: 'Foo',
       instancePath: 'foo/0',
       instance: 'foo 0',
       normalizedPath: 'foo/:index',
     });
-    normalizedTargetReferenceMap.setNormalizedReference({
+    targtReferenceMap.setTargetReference({
       typeId: 'Foo',
       instancePath: 'foo/1',
       instance: 'foo 1',
       normalizedPath: 'foo/:index',
     });
 
-    const result = buildNormalizedDerivedTargetReferences({
+    const result = buildDerivedTargetReferences({
       targetReferenceConfiguration: {
         typeId:
           TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration,
@@ -46,7 +46,7 @@ orchestrate()
         normalizedOutputTargetPath: 'foo/:index/bar',
         conditions: [],
       },
-      normalizedTargetReferenceMap,
+      targetReferenceMap: targtReferenceMap,
     });
 
     signaler.isDeepEqual(result, [

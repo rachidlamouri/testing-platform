@@ -3,32 +3,30 @@ import {
   UnknownTargetReference,
 } from '../../types/targetReference';
 import { UnknownDerivedTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/derivedTargetReferenceConfiguration';
-import { NormalizedTargetReferenceMap } from '../targetReferenceMap';
+import { TargetReferenceMap } from '../targetReferenceMap';
 
-export type NormalizedDerivedTargetReferencesBuilderInput = {
+export type DerivedTargetReferencesBuilderInput = {
   targetReferenceConfiguration: UnknownDerivedTargetReferenceConfiguration;
-  normalizedTargetReferenceMap: NormalizedTargetReferenceMap;
+  targetReferenceMap: TargetReferenceMap;
 };
 
-export const buildNormalizedDerivedTargetReferences = ({
+export const buildDerivedTargetReferences = ({
   targetReferenceConfiguration,
-  normalizedTargetReferenceMap,
-}: NormalizedDerivedTargetReferencesBuilderInput): UnknownNormalizedTargetReference[] => {
-  const normalizedInputTargetReferences =
-    normalizedTargetReferenceMap.getNormalizedTargetReferenceListByTypeIdAndNormalizedPath(
-      {
-        typeId: targetReferenceConfiguration.inputTargetTypeId,
-        normalizedPath: targetReferenceConfiguration.normalizedInputTargetPath,
-      },
-    );
+  targetReferenceMap,
+}: DerivedTargetReferencesBuilderInput): UnknownNormalizedTargetReference[] => {
+  const inputTargetReferences =
+    targetReferenceMap.getTargetReferenceListByTypeIdAndNormalizedPath({
+      typeId: targetReferenceConfiguration.inputTargetTypeId,
+      normalizedPath: targetReferenceConfiguration.normalizedInputTargetPath,
+    });
 
-  const normalizedOutputTargetReferences: UnknownNormalizedTargetReference[] =
-    normalizedInputTargetReferences
+  const outputTargetReferences: UnknownNormalizedTargetReference[] =
+    inputTargetReferences
       .map(
-        (normalizedInputTargetReference): UnknownTargetReference => ({
-          typeId: normalizedInputTargetReference.typeId,
-          instance: normalizedInputTargetReference.instance,
-          path: normalizedInputTargetReference.instancePath,
+        (inputTargetReference): UnknownTargetReference => ({
+          typeId: inputTargetReference.typeId,
+          instance: inputTargetReference.instance,
+          path: inputTargetReference.instancePath,
         }),
       )
       .filter((inputReference) => {
@@ -49,5 +47,5 @@ export const buildNormalizedDerivedTargetReferences = ({
         };
       });
 
-  return normalizedOutputTargetReferences;
+  return outputTargetReferences;
 };
