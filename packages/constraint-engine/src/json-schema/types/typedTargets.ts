@@ -45,7 +45,7 @@ export type JsonObjectTypedTarget = TypedTarget<
   JsonObjectTarget
 >;
 
-export type JsonKnownTypedTargetOptions = readonly [
+export type JsonKnownTypedTargetOptionsTuple = readonly [
   JsonStringTypedTarget,
   JsonNumberTypedTarget,
   JsonBooleanTypedTarget,
@@ -54,4 +54,4 @@ export type JsonKnownTypedTargetOptions = readonly [
   JsonObjectTypedTarget,
 ];
 
-export type JsonKnownTypedTarget = JsonKnownTypedTargetOptions[number];
+export type JsonKnownTypedTarget = JsonKnownTypedTargetOptionsTuple[number];

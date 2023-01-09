@@ -1,9 +1,12 @@
 import { posix } from 'path';
 import { KnownDerivedReferenceBuilder } from '../../types/builders/derivedReferenceBuilder';
 import { UnknownTargetPath } from '../../types/targetPath';
-import { TargetReference } from '../../types/targetReference';
+import { TargetReferenceTuple } from '../../types/targetReference';
 import { buildJsonFileInstance } from '../file/buildJsonFileInstance';
-import { TestingPlatformPackageDirectoryTargetReference } from './buildTestingPlatformPackageDirectoryReferenceSet';
+import {
+  TestingPlatformPackageDirectoryTargetPath,
+  TestingPlatformPackageDirectoryTargetReference,
+} from './buildTestingPlatformPackageDirectoryReferenceSet';
 import {
   TestingPlatformPackageDirectoryTypedTarget,
   TestingPlatformPackageATarget,
@@ -11,22 +14,22 @@ import {
   TestingPlatformTargetTypeId,
 } from './targets';
 
-export type TestingPlatformPackageATargetPath<
+export type TestingPlatformPackageTargetPath<
   TPrefix extends UnknownTargetPath,
-> = `${TPrefix}/${string}`;
+> = TestingPlatformPackageDirectoryTargetPath<TPrefix>;
 
-export type TestingPlatformPackageATargetReference<
-  TTargetPath extends UnknownTargetPath,
-> = TargetReference<
-  TestingPlatformPackageATypedTarget,
-  TestingPlatformPackageATargetPath<TTargetPath>
->;
+export type TestingPlatformPackageTargetPathTuple<
+  TPrefix extends UnknownTargetPath,
+> = [TestingPlatformPackageTargetPath<TPrefix>];
 
 export const buildTestingPlatformPackageAReference = (<
   TPrefix extends UnknownTargetPath,
 >(
   directoryTargetReference: TestingPlatformPackageDirectoryTargetReference<TPrefix>,
-): TestingPlatformPackageATargetReference<TPrefix> => {
+): TargetReferenceTuple<
+  TestingPlatformPackageATypedTarget,
+  [TestingPlatformPackageTargetPath<TPrefix>]
+> => {
   const { directoryPath } = directoryTargetReference.instance;
 
   const directoryName = posix.basename(directoryPath);
@@ -41,19 +44,16 @@ export const buildTestingPlatformPackageAReference = (<
     }),
   };
 
-  const targetPath = directoryTargetReference.path.replace(
-    /\d+$/,
-    directoryName,
-  ) as TestingPlatformPackageATargetPath<TPrefix>;
-
-  return {
-    typeId: TestingPlatformTargetTypeId.PackageA,
-    instance,
-    path: targetPath,
-  };
+  return [
+    {
+      typeId: TestingPlatformTargetTypeId.PackageA,
+      instance,
+      path: directoryTargetReference.path,
+    },
+  ];
 }) satisfies KnownDerivedReferenceBuilder<
   TestingPlatformPackageDirectoryTypedTarget,
-  TestingPlatformPackageATargetPath<string>,
+  TestingPlatformPackageDirectoryTargetPath<UnknownTargetPath>,
   [TestingPlatformPackageATypedTarget],
-  UnknownTargetPath
+  [TestingPlatformPackageTargetPath<UnknownTargetPath>]
 >;

@@ -1,6 +1,6 @@
 import { KnownDerivedReferenceBuilder } from '../builders/derivedReferenceBuilder';
 import { Rule } from '../rule';
-import { NormalizedTargetPath, UnknownTargetPath } from '../targetPath';
+import { UnknownTargetPath, UnknownTargetPathTuple } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
 import { TargetReferenceConfigurationTypeId } from './typeId';
 
@@ -9,51 +9,52 @@ type DerivedTargetReferenceConfiguration<
   TActualInputTargetPath extends UnknownTargetPath,
   TExpectedInputTypedTarget extends UnknownTypedTarget,
   TExpectedInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
-  TOutputTargetPath extends UnknownTargetPath,
+  TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
+  TOutputTargetPathTuple extends UnknownTargetPathTuple,
 > = {
   typeId: TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration;
   buildReference: KnownDerivedReferenceBuilder<
     TActualInputTypedTarget,
     TActualInputTargetPath,
-    TOutputTypedTargetOptions,
-    TOutputTargetPath
+    TOutputTypedTargetOptionsTuple,
+    TOutputTargetPathTuple
   >;
   inputTargetTypeId: TExpectedInputTypedTarget['typeId'];
-  normalizedInputTargetPath: NormalizedTargetPath<TExpectedInputTargetPath>;
+  inputTargetPath: TExpectedInputTargetPath;
   outputTargetTypeId: {
-    [Index in keyof TOutputTypedTargetOptions]: TOutputTypedTargetOptions[Index]['typeId'];
+    [Index in keyof TOutputTypedTargetOptionsTuple]: TOutputTypedTargetOptionsTuple[Index]['typeId'];
   };
-  normalizedOutputTargetPath: NormalizedTargetPath<TOutputTargetPath>;
+  // TODO: make this plural "outputTargetPaths"
+  outputTargetPath: TOutputTargetPathTuple;
   conditions: Rule<TActualInputTypedTarget['instance']>[];
 };
 
 export type KnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
-  TOutputTargetPath extends UnknownTargetPath,
+  TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
+  TOutputTargetPathTuple extends UnknownTargetPathTuple,
 > = DerivedTargetReferenceConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
   TInputTypedTarget,
   TInputTargetPath,
-  TOutputTypedTargetOptions,
-  TOutputTargetPath
+  TOutputTypedTargetOptionsTuple,
+  TOutputTargetPathTuple
 >;
 
 export type PartiallyKnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
-  TOutputTargetPath extends UnknownTargetPath,
+  TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
+  TOutputTargetPathTuple extends UnknownTargetPathTuple,
 > = DerivedTargetReferenceConfiguration<
   UnknownTypedTarget,
   UnknownTargetPath,
   TInputTypedTarget,
   TInputTargetPath,
-  TOutputTypedTargetOptions,
-  TOutputTargetPath
+  TOutputTypedTargetOptionsTuple,
+  TOutputTargetPathTuple
 >;
 
 export type UnknownDerivedTargetReferenceConfiguration =
@@ -63,5 +64,5 @@ export type UnknownDerivedTargetReferenceConfiguration =
     UnknownTypedTarget,
     UnknownTargetPath,
     [UnknownTypedTarget],
-    UnknownTargetPath
+    UnknownTargetPathTuple
   >;

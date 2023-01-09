@@ -6,7 +6,7 @@ import { buildRootJsonReference } from '../referenceBuilders/buildRootUntypedJso
 import { JsonTargetTypeId, RootJsonDataTargetPath } from '../types/constants';
 import { JsonTarget } from '../types/targets';
 import {
-  JsonKnownTypedTargetOptions,
+  JsonKnownTypedTargetOptionsTuple,
   JsonUnknownTypedTarget,
 } from '../types/typedTargets';
 
@@ -21,19 +21,19 @@ export const getTargetReferenceConfigurationsFromJson = (
     >({
       buildReference: buildRootJsonReference,
       inputData: data,
-      normalizedInputTargetPath: '',
+      inputTargetPath: '',
       outputTargetTypeId: JsonTargetTypeId.Unknown,
-      normalizedOutputTargetPath: 'data',
+      outputTargetPath: 'data',
     }),
     buildDerivedTargetReferenceConfiguration<
       JsonUnknownTypedTarget,
       RootJsonDataTargetPath,
-      JsonKnownTypedTargetOptions,
-      RootJsonDataTargetPath
+      JsonKnownTypedTargetOptionsTuple,
+      [RootJsonDataTargetPath]
     >({
       buildReference: buildDerivedTypedJsonReference,
       inputTargetTypeId: JsonTargetTypeId.Unknown,
-      normalizedInputTargetPath: 'data',
+      inputTargetPath: 'data',
       outputTargetTypeId: [
         JsonTargetTypeId.String,
         JsonTargetTypeId.Number,
@@ -42,7 +42,7 @@ export const getTargetReferenceConfigurationsFromJson = (
         JsonTargetTypeId.Array,
         JsonTargetTypeId.Object,
       ],
-      normalizedOutputTargetPath: 'data',
+      outputTargetPath: ['data'],
     }),
   ] as unknown as UnknownTargetReferenceConfiguration[];
 };

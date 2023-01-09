@@ -12,7 +12,8 @@ import {
 } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageDirectorySetReference';
 import {
   buildTestingPlatformPackageAReference,
-  TestingPlatformPackageATargetPath,
+  TestingPlatformPackageTargetPath,
+  TestingPlatformPackageTargetPathTuple,
 } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageAReference';
 import {
   TestingPlatformPackageDirectorySetTypedTarget,
@@ -36,9 +37,9 @@ export const targetReferenceConfigurations = [
   >({
     buildReference: buildTestingPlatformPackageDirectorySetReference,
     inputData: { rootDirectoryRelativeToCurrentWorkingDirectory: 'packages' },
-    normalizedInputTargetPath: '',
+    inputTargetPath: '',
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
-    normalizedOutputTargetPath: 'testingPlatformPackageDirectorySet',
+    outputTargetPath: 'testingPlatformPackageDirectorySet',
   }),
   buildDerivedTargetReferenceSetConfiguration<
     TestingPlatformPackageDirectorySetTypedTarget,
@@ -48,42 +49,41 @@ export const targetReferenceConfigurations = [
   >({
     buildReferenceSet: buildTestingPlatformPackageDirectoryReferenceSet,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
-    normalizedInputTargetPath: 'testingPlatformPackageDirectorySet',
+    inputTargetPath: 'testingPlatformPackageDirectorySet',
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
-    normalizedOutputTargetPath: 'testingPlatformPackageDirectorySet/:index',
+    outputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
   }),
   buildDerivedTargetReferenceConfiguration<
     TestingPlatformPackageDirectoryTypedTarget,
     TestingPlatformPackageDirectoryTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
     [TestingPlatformPackageATypedTarget],
-    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>
+    TestingPlatformPackageTargetPathTuple<TestingPlatformPackageDirectorySetTargetPath>
   >({
     buildReference: buildTestingPlatformPackageAReference,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
-    normalizedInputTargetPath: 'testingPlatformPackageDirectorySet/:index',
+    inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     outputTargetTypeId: [TestingPlatformTargetTypeId.PackageA],
-    normalizedOutputTargetPath:
-      'testingPlatformPackageDirectorySet/:directoryName',
+    outputTargetPath: ['testingPlatformPackageDirectorySet/:directoryName'],
   }),
   buildNarrowedTargetReferenceConfiguration<
     TestingPlatformPackageATypedTarget,
-    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
+    TestingPlatformPackageTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
     [typeof packageAHasPackageFile, typeof packageAHasTypeScriptConfigFile],
     TestingPlatformPackageBTypedTarget
   >({
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageA,
-    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
+    inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     conditions: [packageAHasPackageFile, packageAHasTypeScriptConfigFile],
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
   }),
   buildNarrowedTargetReferenceConfiguration<
     TestingPlatformPackageBTypedTarget,
-    TestingPlatformPackageATargetPath<TestingPlatformPackageDirectorySetTargetPath>,
+    TestingPlatformPackageTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
     [typeof packageBHasTestingPlatformConfiguration],
     TestingPlatformPackageCTypedTarget
   >({
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
-    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
+    inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     conditions: [packageBHasTestingPlatformConfiguration],
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageC,
   }),

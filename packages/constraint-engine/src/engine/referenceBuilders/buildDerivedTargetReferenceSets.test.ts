@@ -4,32 +4,30 @@ import {
   signaler,
 } from 'rat-test/type-script/transgressing';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
-import { NormalizedTargetReferenceMap } from '../normalizedTargetReferenceMap';
-import { buildNormalizedDerivedTargetReferenceSets } from './buildNormalizedDerivedTargetReferenceSets';
+import { TargetReferenceMap } from '../targetReferenceMap';
+import { buildDerivedTargetReferenceSets } from './buildDerivedTargetReferenceSets';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
   .then(() => {
-    report('• buildNormalizedDerivedTargetReferenceSets');
+    report('• buildDerivedTargetReferenceSets');
   })
   .then(() => {
     report('  ⇀ Testing a derived target reference configuration');
 
-    const normalizedTargetReferenceMap = new NormalizedTargetReferenceMap();
-    normalizedTargetReferenceMap.setNormalizedReference({
+    const targetReferenceMap = new TargetReferenceMap();
+    targetReferenceMap.setTargetReference({
       typeId: 'Foo',
-      instancePath: 'foo/0',
+      path: 'foo/:index',
       instance: 'foo 0',
-      normalizedPath: 'foo/:index',
     });
-    normalizedTargetReferenceMap.setNormalizedReference({
+    targetReferenceMap.setTargetReference({
       typeId: 'Foo',
-      instancePath: 'foo/1',
+      path: 'foo/:index',
       instance: 'foo 1',
-      normalizedPath: 'foo/:index',
     });
 
-    const result = buildNormalizedDerivedTargetReferenceSets({
+    const result = buildDerivedTargetReferenceSets({
       targetReferenceConfiguration: {
         typeId:
           TargetReferenceConfigurationTypeId.DerivedTargetReferenceSetConfiguration,
@@ -48,37 +46,33 @@ orchestrate()
           ];
         },
         inputTargetTypeId: 'Foo',
-        normalizedInputTargetPath: 'foo/:index',
+        inputTargetPath: 'foo/:index',
         outputTargetTypeId: 'Bar',
-        normalizedOutputTargetPath: 'foo/:index/:barIndex',
+        outputTargetPath: 'foo/:index/:barIndex',
       },
-      normalizedTargetReferenceMap,
+      targetReferenceMap,
     });
 
     signaler.isDeepEqual(result, [
       {
         typeId: 'Bar',
         instance: 'foo 0',
-        instancePath: 'foo/0/bar1',
-        normalizedPath: 'foo/:index/:barIndex',
+        path: 'foo/0/bar1',
       },
       {
         typeId: 'Bar',
         instance: 'foo 0',
-        instancePath: 'foo/0/bar2',
-        normalizedPath: 'foo/:index/:barIndex',
+        path: 'foo/0/bar2',
       },
       {
         typeId: 'Bar',
         instance: 'foo 1',
-        instancePath: 'foo/1/bar1',
-        normalizedPath: 'foo/:index/:barIndex',
+        path: 'foo/1/bar1',
       },
       {
         typeId: 'Bar',
         instance: 'foo 1',
-        instancePath: 'foo/1/bar2',
-        normalizedPath: 'foo/:index/:barIndex',
+        path: 'foo/1/bar2',
       },
     ]);
   });

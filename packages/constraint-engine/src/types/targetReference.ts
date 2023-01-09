@@ -1,6 +1,6 @@
-import { UnknownTargetTypeId, UnknownTypedTarget } from './typedTarget';
-import { UnknownTargetPath } from './targetPath';
-import { UnknownTargetInstance } from './targetInstance';
+import { UnknownTypedTarget } from './typedTarget';
+import { UnknownTargetPath, UnknownTargetPathTuple } from './targetPath';
+import { CustomSet } from '../utils/customSet';
 
 export type TargetReference<
   TTypedTarget extends UnknownTypedTarget,
@@ -11,14 +11,19 @@ export type TargetReference<
   path: TTargetPath;
 };
 
+export type TargetReferenceTuple<
+  TTypedTarget extends UnknownTypedTarget,
+  TTargetPathTuple extends UnknownTargetPathTuple,
+> = {
+  [Index in keyof TTargetPathTuple]: TargetReference<
+    TTypedTarget,
+    TTargetPathTuple[Index]
+  >;
+};
+
 export type UnknownTargetReference = TargetReference<
   UnknownTypedTarget,
   UnknownTargetPath
 >;
 
-export type UnknownNormalizedTargetReference = {
-  typeId: UnknownTargetTypeId;
-  instance: UnknownTargetInstance;
-  instancePath: UnknownTargetPath;
-  normalizedPath: UnknownTargetPath;
-};
+export type UnknownTargetReferenceSet = CustomSet<UnknownTargetReference>;

@@ -1,5 +1,5 @@
 import { PartiallyKnownDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
-import { UnknownTargetPath } from '../types/targetPath';
+import { UnknownTargetPath, UnknownTargetPathTuple } from '../types/targetPath';
 import {
   KnownDerivedTargetReferenceConfiguration,
   PartiallyKnownDerivedTargetReferenceConfiguration,
@@ -13,13 +13,13 @@ type PartialKeys<TObject, TKey extends keyof TObject> = Omit<TObject, TKey> &
 export const buildDerivedTargetReferenceConfiguration = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTargetOptions extends readonly UnknownTypedTarget[],
-  TOutputTargetPath extends UnknownTargetPath,
+  TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
+  TOutputTargetPathTuple extends UnknownTargetPathTuple,
 >({
   inputTargetTypeId,
-  normalizedInputTargetPath,
+  inputTargetPath,
   outputTargetTypeId,
-  normalizedOutputTargetPath,
+  outputTargetPath,
   buildReference,
   conditions = [],
 }: PartialKeys<
@@ -27,8 +27,8 @@ export const buildDerivedTargetReferenceConfiguration = <
     KnownDerivedTargetReferenceConfiguration<
       TInputTypedTarget,
       TInputTargetPath,
-      TOutputTypedTargetOptions,
-      TOutputTargetPath
+      TOutputTypedTargetOptionsTuple,
+      TOutputTargetPathTuple
     >,
     'typeId'
   >,
@@ -36,18 +36,18 @@ export const buildDerivedTargetReferenceConfiguration = <
 >): PartiallyKnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
-  TOutputTypedTargetOptions,
-  TOutputTargetPath
+  TOutputTypedTargetOptionsTuple,
+  TOutputTargetPathTuple
 > => ({
   typeId:
     TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration,
   inputTargetTypeId,
-  normalizedInputTargetPath,
+  inputTargetPath,
   outputTargetTypeId,
-  normalizedOutputTargetPath,
+  outputTargetPath,
   buildReference: buildReference as PartiallyKnownDerivedReferenceBuilder<
-    TOutputTypedTargetOptions,
-    TOutputTargetPath
+    TOutputTypedTargetOptionsTuple,
+    TOutputTargetPathTuple
   >,
   conditions,
 });

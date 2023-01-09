@@ -1,15 +1,16 @@
 import fs from 'fs';
-import { UnknownNormalizedAppliedRuleResult } from '../types/rule';
+import { UnknownAppliedRuleResult } from '../types/rule';
 import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
-import { ROOT_TARGET_PATH } from '../types/targetPath';
+import { ROOT_TARGET_PATH, UnkownTargetPathSet } from '../types/targetPath';
 import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { applyRules } from './applyRules';
 import {
-  buildNormalizedTargetReferencesForPath,
+  buildTargetReferencesForPath,
   TargetReferenceConfigurationError,
-} from './normalizedReferenceBuilders/buildNormalizedTargetReferencesForPath';
-import { NormalizedTargetReferenceMap } from './normalizedTargetReferenceMap';
+} from './referenceBuilders/buildTargetReferencesForPath';
+import { TargetReferenceMap } from './targetReferenceMap';
 import { RuleConfigurationMap } from './ruleConfigurationMap';
+import { CustomSet } from '../utils/customSet';
 
 export type ConstraintEngineRunnerInput = {
   targetReferenceConfigurations: readonly UnknownTargetReferenceConfiguration[];
@@ -28,7 +29,7 @@ export const run: ConstraintEngineRunner = ({
 }): void => {
   const debugInfo: Record<string, unknown>[] = [];
 
-  const allRuleResults: UnknownNormalizedAppliedRuleResult[] = [];
+  const allRuleResults: UnknownAppliedRuleResult[] = [];
   const allTargetReferenceConfigurationErrors: TargetReferenceConfigurationError[] =
     [];
 
@@ -38,31 +39,29 @@ export const run: ConstraintEngineRunner = ({
   });
 
   let loopCount = 0;
-  let currentNormalizedPath: string | null = null;
-  let nextNormalizedPath: string | null = ROOT_TARGET_PATH;
-  let currentNormalizedTargetReferenceMap: NormalizedTargetReferenceMap =
-    new NormalizedTargetReferenceMap();
-  let nextNormalizedTargetReferenceMap: NormalizedTargetReferenceMap =
-    new NormalizedTargetReferenceMap();
+  let currentTargetPaths: UnkownTargetPathSet = new CustomSet();
+  let nextTargetPaths: UnkownTargetPathSet = new CustomSet([ROOT_TARGET_PATH]);
+  let currentTargetReferenceMap: TargetReferenceMap = new TargetReferenceMap();
+  let nextTargetReferenceMap: TargetReferenceMap = new TargetReferenceMap();
 
-  while (nextNormalizedPath !== null) {
-    currentNormalizedPath = nextNormalizedPath;
-    currentNormalizedTargetReferenceMap = nextNormalizedTargetReferenceMap;
+  while (nextTargetPaths.size !== 0) {
+    currentTargetPaths = nextTargetPaths;
+    currentTargetReferenceMap = nextTargetReferenceMap;
 
-    const referenceBuilderResult = buildNormalizedTargetReferencesForPath({
+    const referenceBuilderResult = buildTargetReferencesForPath({
       targetReferenceConfigurations,
-      normalizedTargetReferenceMap: currentNormalizedTargetReferenceMap,
-      currentNormalizedPath,
+      targetReferenceMap: currentTargetReferenceMap,
+      currentTargetPaths,
     });
 
     allTargetReferenceConfigurationErrors.push(
       ...referenceBuilderResult.errors,
     );
 
-    nextNormalizedTargetReferenceMap = new NormalizedTargetReferenceMap();
+    nextTargetReferenceMap = new TargetReferenceMap();
     // eslint-disable-next-line @typescript-eslint/no-loop-func
     referenceBuilderResult.references.forEach((targetReference) => {
-      nextNormalizedTargetReferenceMap.setNormalizedReference(targetReference);
+      nextTargetReferenceMap.setTargetReference(targetReference);
     });
 
     const nextRuleResults = applyRules({
@@ -72,14 +71,14 @@ export const run: ConstraintEngineRunner = ({
 
     allRuleResults.push(...nextRuleResults);
 
-    // TODO: traverse all paths, and not just the first
-    nextNormalizedPath =
-      referenceBuilderResult.references[0]?.normalizedPath ?? null;
+    nextTargetPaths = new CustomSet(
+      referenceBuilderResult.references.map((reference) => reference.path),
+    );
 
     debugInfo.push({
       loopCount,
-      currentNormalizedPath,
-      nextNormalizedPath,
+      currentTargetPaths: currentTargetPaths.toArray(),
+      nextTargetPaths: nextTargetPaths.toArray(),
       referenceBuilderResult,
       nextRuleResults,
     });

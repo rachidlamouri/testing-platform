@@ -13,27 +13,27 @@ type CustomTargetReferenceConfigurations = typeof targetReferenceConfigurations;
 export const ruleConfigurations = [
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
     targetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
-    normalizedTargetPath: 'testingPlatformPackageDirectorySet',
+    targetPath: 'testingPlatformPackageDirectorySet',
     rule: listIsNotEmpty,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
     targetTypeId: TestingPlatformTargetTypeId.PackageA,
-    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
+    targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageAHasPackageFile,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
     targetTypeId: TestingPlatformTargetTypeId.PackageA,
-    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
+    targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageAHasTypeScriptConfigFile,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
     targetTypeId: TestingPlatformTargetTypeId.PackageB,
-    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
+    targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageBHasTestingPlatformConfiguration,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
     targetTypeId: TestingPlatformTargetTypeId.PackageC,
-    normalizedTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
+    targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageCExtendsBaseTypeScriptConfiguration,
   }),
 ] as const satisfies readonly UnknownRuleConfiguration[];

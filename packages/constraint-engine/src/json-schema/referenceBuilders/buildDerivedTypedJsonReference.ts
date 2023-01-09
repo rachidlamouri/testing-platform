@@ -1,10 +1,16 @@
 import { KnownDerivedReferenceBuilder } from '../../types/builders/derivedReferenceBuilder';
-import { UnknownTargetPath } from '../../types/targetPath';
-import { TargetReference } from '../../types/targetReference';
+import {
+  UnknownTargetPath,
+  UnknownTargetPathTuple,
+} from '../../types/targetPath';
+import {
+  TargetReference,
+  TargetReferenceTuple,
+} from '../../types/targetReference';
 import { JSON_DATA_TYPE_TO_TARGET_TYPE_ID } from '../types/constants';
 import {
   JsonKnownTypedTarget,
-  JsonKnownTypedTargetOptions,
+  JsonKnownTypedTargetOptionsTuple,
   JsonUnknownTypedTarget,
 } from '../types/typedTargets';
 import { getJsonDataType } from '../utils/getJsonDataType';
@@ -13,7 +19,7 @@ export const buildDerivedTypedJsonReference = (<
   TInputTargetPath extends UnknownTargetPath,
 >(
   inputReference: TargetReference<JsonUnknownTypedTarget, TInputTargetPath>,
-): TargetReference<JsonKnownTypedTarget, TInputTargetPath> => {
+): TargetReferenceTuple<JsonKnownTypedTarget, [TInputTargetPath]> => {
   const jsonDataType = getJsonDataType(inputReference.instance);
 
   const outputReference: TargetReference<
@@ -25,10 +31,10 @@ export const buildDerivedTypedJsonReference = (<
     path: inputReference.path,
   };
 
-  return outputReference;
+  return [outputReference];
 }) satisfies KnownDerivedReferenceBuilder<
   JsonUnknownTypedTarget,
   UnknownTargetPath,
-  JsonKnownTypedTargetOptions,
-  UnknownTargetPath
+  JsonKnownTypedTargetOptionsTuple,
+  UnknownTargetPathTuple
 >;

@@ -14,7 +14,7 @@ export const getRuleConfigurationsFromJsonSchema = (
     ruleConfigurations.push({
       rule: buildDataIsType(inputSchema.type as JsonDataType) as Rule<unknown>,
       targetTypeId: JsonTargetTypeId.Unknown,
-      normalizedTargetPath: 'data',
+      targetPath: 'data',
     });
   }
 
@@ -24,7 +24,7 @@ export const getRuleConfigurationsFromJsonSchema = (
         inputSchema.required as string[],
       ) as Rule<unknown>,
       targetTypeId: JsonTargetTypeId.Object,
-      normalizedTargetPath: 'data',
+      targetPath: 'data',
     });
   }
 

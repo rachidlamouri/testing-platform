@@ -4,17 +4,17 @@ import {
   signaler,
 } from 'rat-test/type-script/transgressing';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
-import { buildNormalizedRootTargetReference } from './buildNormalizedRootTargetReference';
+import { buildRootTargetReference } from './buildRootTargetReference';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
   .then(() => {
-    report('• buildNormalizedRootTargetReference');
+    report('• buildRootTargetReference');
   })
   .then(() => {
     report('  ⇀ Testing a root target reference configuration');
 
-    const result = buildNormalizedRootTargetReference({
+    const result = buildRootTargetReference({
       targetReferenceConfiguration: {
         typeId:
           TargetReferenceConfigurationTypeId.RootTargetReferenceConfiguration,
@@ -24,16 +24,15 @@ orchestrate()
           path: 'bar',
         }),
         inputData: 2,
-        normalizedInputTargetPath: '',
+        inputTargetPath: '',
         outputTargetTypeId: 'foo',
-        normalizedOutputTargetPath: 'bar',
+        outputTargetPath: 'bar',
       },
     });
 
     signaler.isDeepEqual(result, {
       typeId: 'foo',
       instance: 'hello',
-      instancePath: 'bar',
-      normalizedPath: 'bar',
+      path: 'bar',
     });
   });

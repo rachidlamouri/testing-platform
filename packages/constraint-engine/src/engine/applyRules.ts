@@ -1,41 +1,40 @@
-import { UnknownNormalizedAppliedRuleResult } from '../types/rule';
-import { UnknownNormalizedTargetReference } from '../types/targetReference';
+import { UnknownAppliedRuleResult } from '../types/rule';
+import { UnknownTargetReference } from '../types/targetReference';
 import { getRuleConfigurationTypeId } from './getRuleConfigurationTypeId';
 import { RuleConfigurationMap } from './ruleConfigurationMap';
 
 export type RuleApplierInput = {
   ruleConfigurationMap: RuleConfigurationMap;
-  targetReferences: UnknownNormalizedTargetReference[];
+  targetReferences: UnknownTargetReference[];
 };
 
-export type RuleApplierResult = UnknownNormalizedAppliedRuleResult[];
+export type RuleApplierResult = UnknownAppliedRuleResult[];
 
 export const applyRules = ({
   ruleConfigurationMap,
   targetReferences,
-}: RuleApplierInput): UnknownNormalizedAppliedRuleResult[] => {
-  const allRuleResults: UnknownNormalizedAppliedRuleResult[] =
-    targetReferences.flatMap((targetReference) => {
+}: RuleApplierInput): UnknownAppliedRuleResult[] => {
+  const allRuleResults: UnknownAppliedRuleResult[] = targetReferences.flatMap(
+    (targetReference) => {
       const ruleConfigurations = ruleConfigurationMap.getRules(targetReference);
 
-      const ruleResults: UnknownNormalizedAppliedRuleResult[] =
-        ruleConfigurations.map((ruleConfiguration) => {
+      const ruleResults: UnknownAppliedRuleResult[] = ruleConfigurations
+        .toArray()
+        .map((ruleConfiguration): UnknownAppliedRuleResult => {
           const isTargetValid = ruleConfiguration.rule(
             targetReference.instance,
           );
 
           return {
             ruleTypeId: getRuleConfigurationTypeId(ruleConfiguration),
-            targetTypeId: targetReference.typeId,
-            normalizedTargetPath: targetReference.normalizedPath,
-            targetInstancePath: targetReference.instancePath,
-            targetInstance: targetReference.instance,
+            targetReference,
             isTargetValid,
-          } satisfies UnknownNormalizedAppliedRuleResult;
+          };
         });
 
       return ruleResults;
-    });
+    },
+  );
 
   return allRuleResults;
 };

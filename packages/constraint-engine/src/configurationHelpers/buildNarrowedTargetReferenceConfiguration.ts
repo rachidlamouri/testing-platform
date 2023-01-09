@@ -1,7 +1,7 @@
 import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildNarrowedReferenceBuilder';
 import { GuardRuleTupleNarrowedTargetIntersection } from '../types/builders/narrowedReferenceBuilder';
 import { InferableGuardRule } from '../types/rule';
-import { NormalizedTargetPath, UnknownTargetPath } from '../types/targetPath';
+import { UnknownTargetPath } from '../types/targetPath';
 import {
   KnownDerivedTargetReferenceConfiguration,
   PartiallyKnownDerivedTargetReferenceConfiguration,
@@ -26,11 +26,11 @@ export type NarrowedTargetReferenceConfigurationBuilderInput<
     TInputTypedTarget,
     TInputTargetPath,
     [TOutputTypedTarget],
-    TInputTargetPath
+    [TInputTargetPath]
   >,
   'inputTargetTypeId' | 'conditions'
 > & {
-  normalizedTargetPath: NormalizedTargetPath<TInputTargetPath>;
+  inputTargetPath: TInputTargetPath;
   conditions: TGuardRuleTuple;
   outputTargetTypeId: TOutputTypedTarget['typeId'];
 };
@@ -45,7 +45,7 @@ export const buildNarrowedTargetReferenceConfiguration = <
   >,
 >({
   inputTargetTypeId,
-  normalizedTargetPath,
+  inputTargetPath,
   outputTargetTypeId,
   conditions,
 }: NarrowedTargetReferenceConfigurationBuilderInput<
@@ -57,18 +57,18 @@ export const buildNarrowedTargetReferenceConfiguration = <
   TInputTypedTarget,
   TInputTargetPath,
   [TOutputTypedTarget],
-  TInputTargetPath
+  [TInputTargetPath]
 > =>
   buildDerivedTargetReferenceConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
     [TOutputTypedTarget],
-    TInputTargetPath
+    [TInputTargetPath]
   >({
     inputTargetTypeId,
-    normalizedInputTargetPath: normalizedTargetPath,
+    inputTargetPath,
     outputTargetTypeId: [outputTargetTypeId],
-    normalizedOutputTargetPath: normalizedTargetPath,
+    outputTargetPath: [inputTargetPath],
     buildReference: buildNarrowedReferenceBuilder<
       TInputTypedTarget,
       TInputTargetPath,

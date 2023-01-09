@@ -11,7 +11,7 @@ import { DerivedReferenceSetBuilder } from '../../types/builders/derivedReferenc
 
 export type TestingPlatformPackageDirectoryTargetPath<
   TPrefix extends UnknownTargetPath,
-> = PrefixedTargetPath<TPrefix, string>;
+> = PrefixedTargetPath<TPrefix, ':directoryName'>;
 
 export type TestingPlatformPackageDirectoryTargetReference<
   TPrefix extends UnknownTargetPath,
@@ -40,7 +40,7 @@ export const buildTestingPlatformPackageDirectoryReferenceSet = (<
         };
 
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        const targetPath: TestingPlatformPackageDirectoryTargetPath<TPrefix> = `${directorySetReference.path}/${index}`;
+        const targetPath: TestingPlatformPackageDirectoryTargetPath<TPrefix> = `${directorySetReference.path}/:directoryName`;
 
         return {
           typeId: TestingPlatformTargetTypeId.PackageDirectory,
