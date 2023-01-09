@@ -12,7 +12,7 @@ import {
 } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageDirectorySetReference';
 import {
   buildTestingPlatformPackageAReference,
-  TestingPlatformPackageInstanceTargetPath,
+  TestingPlatformPackageTargetPath,
   TestingPlatformPackageTargetPathTuple,
 } from '../customTargets/testingPlatformPackage/buildTestingPlatformPackageAReference';
 import {
@@ -51,7 +51,7 @@ export const targetReferenceConfigurations = [
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
-    outputTargetPath: 'testingPlatformPackageDirectorySet/:index',
+    outputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
   }),
   buildDerivedTargetReferenceConfiguration<
     TestingPlatformPackageDirectoryTypedTarget,
@@ -61,17 +61,13 @@ export const targetReferenceConfigurations = [
   >({
     buildReference: buildTestingPlatformPackageAReference,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
-    inputTargetPath: 'testingPlatformPackageDirectorySet/:index',
+    inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     outputTargetTypeId: [TestingPlatformTargetTypeId.PackageA],
-    outputTargetPath: [
-      'testingPlatformPackageDirectorySet/:directoryName',
-      // TODO: evaluate how to declare the instance path or if we need to:
-      'testingPlatformPackageDirectorySet/:directoryName',
-    ],
+    outputTargetPath: ['testingPlatformPackageDirectorySet/:directoryName'],
   }),
   buildNarrowedTargetReferenceConfiguration<
     TestingPlatformPackageATypedTarget,
-    TestingPlatformPackageInstanceTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
+    TestingPlatformPackageTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
     [typeof packageAHasPackageFile, typeof packageAHasTypeScriptConfigFile],
     TestingPlatformPackageBTypedTarget
   >({
@@ -82,7 +78,7 @@ export const targetReferenceConfigurations = [
   }),
   buildNarrowedTargetReferenceConfiguration<
     TestingPlatformPackageBTypedTarget,
-    TestingPlatformPackageInstanceTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
+    TestingPlatformPackageTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
     [typeof packageBHasTestingPlatformConfiguration],
     TestingPlatformPackageCTypedTarget
   >({

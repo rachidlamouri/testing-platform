@@ -36,7 +36,7 @@ orchestrate()
         directoryPath: 'tmp',
         index: 0,
       },
-      path: 'abc/0',
+      path: 'abc/:directoryName',
     });
 
     rootHelper.teardown();
@@ -62,27 +62,6 @@ orchestrate()
           },
         },
         path: 'abc/:directoryName',
-      },
-      {
-        typeId: TestingPlatformTargetTypeId.PackageA,
-        instance: {
-          directoryName: 'tmp',
-          packageFile: {
-            filePath: 'tmp/package.json',
-            isOnDisk: true,
-            isParseable: true,
-            stringContents: '{}',
-            parsedContents: {},
-          },
-          typeScriptConfigFile: {
-            filePath: 'tmp/tsconfig.json',
-            isOnDisk: true,
-            isParseable: true,
-            stringContents: '{}',
-            parsedContents: {},
-          },
-        },
-        path: 'abc/tmp',
       },
     ]);
   });
