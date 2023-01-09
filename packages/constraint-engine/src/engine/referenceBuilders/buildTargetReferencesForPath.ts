@@ -1,5 +1,5 @@
 import { UnkownTargetPathSet } from '../../types/targetPath';
-import { UnknownNormalizedTargetReference } from '../../types/targetReference';
+import { UnknownTargetReference } from '../../types/targetReference';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { TargetReferenceMap } from '../targetReferenceMap';
 import { buildTargetReferencesForConfiguration } from './buildTargetReferencesForConfiguration';
@@ -24,7 +24,7 @@ export type TargetReferencesBuilderInput = {
 };
 
 export type TargetReferencesBuilderResult = {
-  references: UnknownNormalizedTargetReference[];
+  references: UnknownTargetReference[];
   errors: TargetReferenceConfigurationError[];
 };
 
@@ -33,7 +33,7 @@ export const buildTargetReferencesForPath = ({
   targetReferenceMap,
   currentTargetPaths,
 }: TargetReferencesBuilderInput): TargetReferencesBuilderResult => {
-  const references: UnknownNormalizedTargetReference[] = [];
+  const references: UnknownTargetReference[] = [];
   const errors: TargetReferenceConfigurationError[] = [];
 
   const configurationsToBuild = targetReferenceConfigurations.filter(

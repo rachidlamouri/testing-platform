@@ -53,14 +53,12 @@ orchestrate()
       {
         typeId: 'Bar',
         instance: 'foo 0',
-        instancePath: 'foo/0/bar',
-        normalizedPath: 'foo/:index/bar',
+        path: 'foo/0/bar',
       },
       {
         typeId: 'Bar',
         instance: 'foo 1',
-        instancePath: 'foo/1/bar',
-        normalizedPath: 'foo/:index/bar',
+        path: 'foo/1/bar',
       },
     ]);
   });

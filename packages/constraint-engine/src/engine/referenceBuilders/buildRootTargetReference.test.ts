@@ -33,7 +33,6 @@ orchestrate()
     signaler.isDeepEqual(result, {
       typeId: 'foo',
       instance: 'hello',
-      instancePath: 'bar',
-      normalizedPath: 'bar',
+      path: 'bar',
     });
   });

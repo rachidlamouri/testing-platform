@@ -1,4 +1,4 @@
-import { UnknownNormalizedTargetReference } from '../../types/targetReference';
+import { UnknownTargetReference } from '../../types/targetReference';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { TargetReferenceMap } from '../targetReferenceMap';
@@ -14,7 +14,7 @@ export type TargetReferencesBuilderInput = {
 export const buildTargetReferencesForConfiguration = ({
   targetReferenceConfiguration,
   targetReferenceMap,
-}: TargetReferencesBuilderInput): UnknownNormalizedTargetReference[] => {
+}: TargetReferencesBuilderInput): UnknownTargetReference[] => {
   switch (targetReferenceConfiguration.typeId) {
     case TargetReferenceConfigurationTypeId.RootTargetReferenceConfiguration:
       return [

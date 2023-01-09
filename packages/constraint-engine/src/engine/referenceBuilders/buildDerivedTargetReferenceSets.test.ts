@@ -59,26 +59,22 @@ orchestrate()
       {
         typeId: 'Bar',
         instance: 'foo 0',
-        instancePath: 'foo/0/bar1',
-        normalizedPath: 'foo/:index/:barIndex',
+        path: 'foo/0/bar1',
       },
       {
         typeId: 'Bar',
         instance: 'foo 0',
-        instancePath: 'foo/0/bar2',
-        normalizedPath: 'foo/:index/:barIndex',
+        path: 'foo/0/bar2',
       },
       {
         typeId: 'Bar',
         instance: 'foo 1',
-        instancePath: 'foo/1/bar1',
-        normalizedPath: 'foo/:index/:barIndex',
+        path: 'foo/1/bar1',
       },
       {
         typeId: 'Bar',
         instance: 'foo 1',
-        instancePath: 'foo/1/bar2',
-        normalizedPath: 'foo/:index/:barIndex',
+        path: 'foo/1/bar2',
       },
     ]);
   });

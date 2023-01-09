@@ -1,7 +1,4 @@
-import {
-  UnknownNormalizedTargetReference,
-  UnknownTargetReference,
-} from '../../types/targetReference';
+import { UnknownTargetReference } from '../../types/targetReference';
 import { UnknownDerivedTargetReferenceSetConfiguration } from '../../types/targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
 import { TargetReferenceMap } from '../targetReferenceMap';
 
@@ -13,39 +10,26 @@ export type DerivedTargetReferenceSetsBuilderInput = {
 export const buildDerivedTargetReferenceSets = ({
   targetReferenceConfiguration,
   targetReferenceMap,
-}: DerivedTargetReferenceSetsBuilderInput): UnknownNormalizedTargetReference[] => {
+}: DerivedTargetReferenceSetsBuilderInput): UnknownTargetReference[] => {
   const inputTargetReferences =
     targetReferenceMap.getTargetReferenceListByTypeIdAndNormalizedPath({
       typeId: targetReferenceConfiguration.inputTargetTypeId,
       normalizedPath: targetReferenceConfiguration.normalizedInputTargetPath,
     });
 
-  const outputReferenceSets: UnknownNormalizedTargetReference[] =
+  const outputReferenceSets: UnknownTargetReference[] =
     inputTargetReferences.flatMap(
-      (inputReferenceA): UnknownNormalizedTargetReference[] => {
+      (inputReferenceA): UnknownTargetReference[] => {
         const inputReferenceB: UnknownTargetReference = {
           typeId: inputReferenceA.typeId,
           instance: inputReferenceA.instance,
           path: inputReferenceA.instancePath,
         };
 
-        const outputReferenceSetA: UnknownTargetReference[] =
+        const outputReferenceSet: UnknownTargetReference[] =
           targetReferenceConfiguration.buildReferenceSet(inputReferenceB);
 
-        const outputReferenceSetB: UnknownNormalizedTargetReference[] =
-          outputReferenceSetA.map(
-            (outputReference): UnknownNormalizedTargetReference => {
-              return {
-                typeId: outputReference.typeId,
-                instance: outputReference.instance,
-                instancePath: outputReference.path,
-                normalizedPath:
-                  targetReferenceConfiguration.normalizedOutputTargetPath,
-              };
-            },
-          );
-
-        return outputReferenceSetB;
+        return outputReferenceSet;
       },
     );
 
