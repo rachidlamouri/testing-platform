@@ -1,8 +1,8 @@
 import { UnkownTargetPathSet } from '../../types/targetPath';
 import { UnknownNormalizedTargetReference } from '../../types/targetReference';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
-import { NormalizedTargetReferenceMap } from '../normalizedTargetReferenceMap';
-import { buildNormalizedTargetReferencesForConfiguration } from './buildNormalizedTargetReferencesForConfiguration';
+import { NormalizedTargetReferenceMap } from '../targetReferenceMap';
+import { buildNormalizedTargetReferencesForConfiguration } from './buildTargetReferencesForConfiguration';
 
 export class TargetReferenceConfigurationError extends Error {
   public readonly originalTrace: string[];

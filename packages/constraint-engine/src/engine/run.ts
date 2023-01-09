@@ -7,8 +7,8 @@ import { applyRules } from './applyRules';
 import {
   buildNormalizedTargetReferencesForPath,
   TargetReferenceConfigurationError,
-} from './normalizedReferenceBuilders/buildNormalizedTargetReferencesForPath';
-import { NormalizedTargetReferenceMap } from './normalizedTargetReferenceMap';
+} from './referenceBuilders/buildTargetReferencesForPath';
+import { NormalizedTargetReferenceMap } from './targetReferenceMap';
 import { RuleConfigurationMap } from './ruleConfigurationMap';
 
 export type ConstraintEngineRunnerInput = {

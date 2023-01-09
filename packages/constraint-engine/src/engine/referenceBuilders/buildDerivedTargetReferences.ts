@@ -3,7 +3,7 @@ import {
   UnknownTargetReference,
 } from '../../types/targetReference';
 import { UnknownDerivedTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/derivedTargetReferenceConfiguration';
-import { NormalizedTargetReferenceMap } from '../normalizedTargetReferenceMap';
+import { NormalizedTargetReferenceMap } from '../targetReferenceMap';
 
 export type NormalizedDerivedTargetReferencesBuilderInput = {
   targetReferenceConfiguration: UnknownDerivedTargetReferenceConfiguration;

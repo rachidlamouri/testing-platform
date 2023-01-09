@@ -4,7 +4,7 @@ import {
   signaler,
 } from 'rat-test/type-script/transgressing';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
-import { buildNormalizedRootTargetReference } from './buildNormalizedRootTargetReference';
+import { buildNormalizedRootTargetReference } from './buildRootTargetReference';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
