@@ -1,7 +1,7 @@
 import { CustomSet } from '../utils/customSet';
 import { Rule } from './rule';
 import { UnknownTargetInstance } from './targetInstance';
-import { NormalizedTargetPath, UnknownTargetPath } from './targetPath';
+import { UnknownTargetPath } from './targetPath';
 import { PartiallyKnownDerivedTargetReferenceConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
 import { PartiallyKnownDerivedTargetReferenceSetConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
 import { PartiallyKnownRootTargetReferenceConfiguration } from './targetReferenceConfiguration/rootTargetReferenceConfiguration';
@@ -11,22 +11,22 @@ import { UnknownTypedTarget } from './typedTarget';
 type RuleConfiguration<
   TActualTypedTarget extends UnknownTypedTarget,
   TExpectedTypedTarget extends UnknownTypedTarget,
-  TNormalizedPath extends UnknownTargetPath,
+  TTargetPath extends UnknownTargetPath,
 > = {
   rule: Rule<TActualTypedTarget['instance']>;
   targetTypeId: TExpectedTypedTarget['typeId'];
-  normalizedTargetPath: TNormalizedPath;
+  targetPath: TTargetPath;
 };
 
 export type KnownRuleConfiguration<
   TTypedTarget extends UnknownTypedTarget,
-  TNormalizedPath extends UnknownTargetPath,
-> = RuleConfiguration<TTypedTarget, TTypedTarget, TNormalizedPath>;
+  TTargetPath extends UnknownTargetPath,
+> = RuleConfiguration<TTypedTarget, TTypedTarget, TTargetPath>;
 
 export type PartiallyKnownRuleConfiguration<
   TTypedTarget extends UnknownTypedTarget,
-  TNormalizedPath extends UnknownTargetPath,
-> = RuleConfiguration<UnknownTypedTarget, TTypedTarget, TNormalizedPath>;
+  TTargetPath extends UnknownTargetPath,
+> = RuleConfiguration<UnknownTypedTarget, TTypedTarget, TTargetPath>;
 
 export type UnknownRuleConfiguration = RuleConfiguration<
   UnknownTypedTarget,
@@ -44,10 +44,7 @@ type RuleConfigurationFromTargetReferenceConfiguration<
     infer TOutputTypedTarget,
     infer TOutputTargetPath
   >
-    ? KnownRuleConfiguration<
-        TOutputTypedTarget,
-        NormalizedTargetPath<TOutputTargetPath>
-      >
+    ? KnownRuleConfiguration<TOutputTypedTarget, TOutputTargetPath>
     : TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceConfiguration<
         UnknownTypedTarget,
         UnknownTargetPath,
@@ -56,7 +53,7 @@ type RuleConfigurationFromTargetReferenceConfiguration<
       >
     ? KnownRuleConfiguration<
         TOutputTypedTargetOptionsTuple[number],
-        NormalizedTargetPath<TOutputTargetPath>
+        TOutputTargetPath
       >
     : TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceSetConfiguration<
         UnknownTypedTarget,
@@ -64,10 +61,7 @@ type RuleConfigurationFromTargetReferenceConfiguration<
         infer TOutputTypedTarget,
         infer TOutputTargetPath
       >
-    ? KnownRuleConfiguration<
-        TOutputTypedTarget,
-        NormalizedTargetPath<TOutputTargetPath>
-      >
+    ? KnownRuleConfiguration<TOutputTypedTarget, TOutputTargetPath>
     : never;
 
 export type RuleConfigurationFromTargetReferenceConfigurations<

@@ -28,13 +28,12 @@ export class RuleConfigurationMap {
       ) ?? (new Map() as RuleConfigurationsByTargetPath);
 
     const ruleConfigurationList: UnknownRuleConfigurationSet =
-      ruleConfigurationsByTargetPath.get(
-        ruleConfiguration.normalizedTargetPath,
-      ) ?? new CustomSet();
+      ruleConfigurationsByTargetPath.get(ruleConfiguration.targetPath) ??
+      new CustomSet();
 
     ruleConfigurationList.add(ruleConfiguration);
     ruleConfigurationsByTargetPath.set(
-      ruleConfiguration.normalizedTargetPath,
+      ruleConfiguration.targetPath,
       ruleConfigurationList,
     );
     this.ruleConfigurationsByTargetPathByTargetTypeId.set(
