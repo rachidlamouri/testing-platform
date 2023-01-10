@@ -3,6 +3,7 @@ import { KnownDerivedReferenceBuilder } from '../../types/builders/derivedRefere
 import { UnknownTargetPath } from '../../types/targetPath';
 import { TargetReferenceTuple } from '../../types/targetReference';
 import { buildJsonFileInstance } from '../file/buildJsonFileInstance';
+import { buildUtf8FileInstance } from '../file/buildUtf8FileInstance';
 import {
   TestingPlatformPackageDirectoryTargetPath,
   TestingPlatformPackageDirectoryTargetReference,
@@ -36,6 +37,9 @@ export const buildTestingPlatformPackageAReference = (<
 
   const instance: TestingPlatformPackageATarget = {
     directoryName,
+    runTestsScript: buildUtf8FileInstance({
+      filePath: `${directoryPath}/scripts/runTests.sh`,
+    }),
     packageFile: buildJsonFileInstance({
       filePath: `${directoryPath}/package.json`,
     }),

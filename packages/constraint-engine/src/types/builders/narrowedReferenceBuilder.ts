@@ -31,14 +31,50 @@ export type GuardRuleTupleNarrowedTargetIntersection<
   TGuardRuleTuple extends readonly InferableGuardRule[],
 > = TupleToIntersection<GuardRuleTupleToNarrowedTargetTuple<TGuardRuleTuple>>;
 
+export type EvaluateGuardRuleTuple<
+  TInputTypedTarget extends UnknownTypedTarget,
+  TGuardRuleTuple extends readonly InferableGuardRule[],
+  TOutputTargetInstance extends TInputTypedTarget['instance'],
+  TNarrowOption,
+  TIdentityOption,
+> = GuardRuleTupleNarrowedTargetIntersection<TGuardRuleTuple> extends TOutputTargetInstance
+  ? TNarrowOption
+  : TIdentityOption;
+
 export type NarrowedReferenceBuilder<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule[],
-  TOutputTypedTarget extends TypedTarget<
-    UnknownTargetTypeId,
-    GuardRuleTupleNarrowedTargetIntersection<TGuardRuleTuple>
-  >,
+  TOutputTargetTypeId extends UnknownTargetTypeId,
+  TOutputTargetInstance extends TInputTypedTarget['instance'],
 > = (
   inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
-) => TargetReferenceTuple<TOutputTypedTarget, [TInputTargetPath]>;
+) => TargetReferenceTuple<
+  TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>,
+  [TInputTargetPath]
+>;
+
+export type IdentityReferenceBuilder<
+  TTypedTarget extends UnknownTypedTarget,
+  TTargetPath extends UnknownTargetPath,
+> = (
+  inputReference: TargetReference<TTypedTarget, TTargetPath>,
+) => TargetReferenceTuple<TTypedTarget, [TTargetPath]>;
+
+export type CastReferenceBuilder<
+  TInputTypedTarget extends UnknownTypedTarget,
+  TInputTargetPath extends UnknownTargetPath,
+  TGuardRuleTuple extends readonly InferableGuardRule[],
+  TOutputTargetTypeId extends UnknownTargetTypeId,
+  TOutputTargetInstance extends TInputTypedTarget['instance'],
+> = EvaluateGuardRuleTuple<
+  TInputTypedTarget,
+  TGuardRuleTuple,
+  TOutputTargetInstance,
+  NarrowedReferenceBuilder<
+    TInputTypedTarget,
+    TInputTargetPath,
+    TOutputTargetTypeId,
+    TOutputTargetInstance
+  >,
+  IdentityReferenceBuilder<TInputTypedTarget, TInputTargetPath>
+>;

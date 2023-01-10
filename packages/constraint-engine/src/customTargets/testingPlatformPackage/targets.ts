@@ -3,6 +3,7 @@ import {
   JsonFileTarget,
   ParseableOnDiskJsonFileTarget,
 } from '../file/jsonFileTarget';
+import { OnDiskUtf8FileTarget, Utf8FileTarget } from '../file/utf8FileTarget';
 
 export enum TestingPlatformTargetTypeId {
   PackageDirectorySet = 'PackageDirectorySet',
@@ -31,6 +32,7 @@ export type TestingPlatformPackageDirectoryTypedTarget = TypedTarget<
 
 export type TestingPlatformPackageATarget = {
   directoryName: string;
+  runTestsScript: Utf8FileTarget;
   packageFile: JsonFileTarget;
   typeScriptConfigFile: JsonFileTarget;
 };
@@ -44,6 +46,7 @@ export type ObjectTarget = Record<string, unknown>;
 
 export type TestingPlatformPackageBTarget = {
   directoryName: string;
+  runTestsScript: OnDiskUtf8FileTarget;
   packageFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
   typeScriptConfigFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
 };
@@ -72,6 +75,7 @@ export type PackageCPackageFileTarget =
 
 export type TestingPlatformPackageCTarget = {
   directoryName: string;
+  runTestsScript: OnDiskUtf8FileTarget;
   packageFile: PackageCPackageFileTarget;
   typeScriptConfigFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
 };

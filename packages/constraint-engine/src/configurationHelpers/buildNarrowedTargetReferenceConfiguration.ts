@@ -1,5 +1,6 @@
 import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildNarrowedReferenceBuilder';
-import { GuardRuleTupleNarrowedTargetIntersection } from '../types/builders/narrowedReferenceBuilder';
+import { PartiallyKnownDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
+import { EvaluateGuardRuleTuple } from '../types/builders/narrowedReferenceBuilder';
 import { InferableGuardRule } from '../types/rule';
 import { UnknownTargetPath } from '../types/targetPath';
 import {
@@ -17,32 +18,34 @@ export type NarrowedTargetReferenceConfigurationBuilderInput<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TGuardRuleTuple extends readonly InferableGuardRule[],
-  TOutputTypedTarget extends TypedTarget<
-    UnknownTargetTypeId,
-    GuardRuleTupleNarrowedTargetIntersection<TGuardRuleTuple>
-  >,
+  TOutputTargetTypeId extends UnknownTargetTypeId,
+  TOutputTargetInstance extends TInputTypedTarget['instance'],
 > = Pick<
   KnownDerivedTargetReferenceConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
-    [TOutputTypedTarget],
+    [TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>],
     [TInputTargetPath]
   >,
   'inputTargetTypeId' | 'conditions'
 > & {
   inputTargetPath: TInputTargetPath;
   conditions: TGuardRuleTuple;
-  outputTargetTypeId: TOutputTypedTarget['typeId'];
+  outputTargetTypeId: EvaluateGuardRuleTuple<
+    TInputTypedTarget,
+    TGuardRuleTuple,
+    TOutputTargetInstance,
+    TOutputTargetTypeId,
+    TInputTypedTarget['typeId']
+  >;
 };
 
 export const buildNarrowedTargetReferenceConfiguration = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TGuardRuleTuple extends readonly InferableGuardRule[],
-  TOutputTypedTarget extends TypedTarget<
-    UnknownTargetTypeId,
-    GuardRuleTupleNarrowedTargetIntersection<TGuardRuleTuple>
-  >,
+  TOutputTargetTypeId extends UnknownTargetTypeId,
+  TOutputTargetInstance extends TInputTypedTarget['instance'],
 >({
   inputTargetTypeId,
   inputTargetPath,
@@ -52,17 +55,34 @@ export const buildNarrowedTargetReferenceConfiguration = <
   TInputTypedTarget,
   TInputTargetPath,
   TGuardRuleTuple,
-  TOutputTypedTarget
+  TOutputTargetTypeId,
+  TOutputTargetInstance
 >): PartiallyKnownDerivedTargetReferenceConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
-  [TOutputTypedTarget],
+  [
+    EvaluateGuardRuleTuple<
+      TInputTypedTarget,
+      TGuardRuleTuple,
+      TOutputTargetInstance,
+      TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>,
+      TInputTypedTarget
+    >,
+  ],
   [TInputTargetPath]
 > =>
   buildDerivedTargetReferenceConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
-    [TOutputTypedTarget],
+    [
+      EvaluateGuardRuleTuple<
+        TInputTypedTarget,
+        TGuardRuleTuple,
+        TOutputTargetInstance,
+        TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>,
+        TInputTypedTarget
+      >,
+    ],
     [TInputTargetPath]
   >({
     inputTargetTypeId,
@@ -73,7 +93,19 @@ export const buildNarrowedTargetReferenceConfiguration = <
       TInputTypedTarget,
       TInputTargetPath,
       TGuardRuleTuple,
-      TOutputTypedTarget
-    >(outputTargetTypeId),
+      TOutputTargetTypeId,
+      TOutputTargetInstance
+    >(conditions, outputTargetTypeId) as PartiallyKnownDerivedReferenceBuilder<
+      [
+        EvaluateGuardRuleTuple<
+          TInputTypedTarget,
+          TGuardRuleTuple,
+          TOutputTargetInstance,
+          TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>,
+          TInputTypedTarget
+        >,
+      ],
+      [TInputTargetPath]
+    >,
     conditions,
   });
