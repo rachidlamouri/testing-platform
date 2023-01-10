@@ -21,13 +21,15 @@ import {
   TestingPlatformPackageATypedTarget,
   TestingPlatformTargetTypeId,
   TestingPlatformPackageBTypedTarget,
-  TestingPlatformPackageCTypedTarget,
+  TestingPlatformPackageBTarget,
+  TestingPlatformPackageCTarget,
 } from '../customTargets/testingPlatformPackage/targets';
 import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { buildNarrowedTargetReferenceConfiguration } from '../configurationHelpers/buildNarrowedTargetReferenceConfiguration';
+import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
 
 export const targetReferenceConfigurations = [
   buildRootTargetReferenceConfiguration<
@@ -68,19 +70,29 @@ export const targetReferenceConfigurations = [
   buildNarrowedTargetReferenceConfiguration<
     TestingPlatformPackageATypedTarget,
     TestingPlatformPackageTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
-    [typeof packageAHasPackageFile, typeof packageAHasTypeScriptConfigFile],
-    TestingPlatformPackageBTypedTarget
+    [
+      typeof packageAHasPackageFile,
+      typeof packageAHasTypeScriptConfigFile,
+      typeof packageAHasRunTestsScript,
+    ],
+    TestingPlatformTargetTypeId.PackageB,
+    TestingPlatformPackageBTarget
   >({
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageA,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
-    conditions: [packageAHasPackageFile, packageAHasTypeScriptConfigFile],
+    conditions: [
+      packageAHasPackageFile,
+      packageAHasTypeScriptConfigFile,
+      packageAHasRunTestsScript,
+    ],
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
   }),
   buildNarrowedTargetReferenceConfiguration<
     TestingPlatformPackageBTypedTarget,
     TestingPlatformPackageTargetPath<TestingPlatformPackageDirectorySetTargetPath>,
     [typeof packageBHasTestingPlatformConfiguration],
-    TestingPlatformPackageCTypedTarget
+    TestingPlatformTargetTypeId.PackageC,
+    TestingPlatformPackageCTarget
   >({
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
