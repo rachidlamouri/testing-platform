@@ -4,17 +4,17 @@ import { buildRootTargetReferenceConfiguration } from '../configurationHelpers/b
 import {
   buildTestingPlatformPackageDirectoryReferenceSet,
   TestingPlatformPackageDirectoryTargetPath,
-} from '../customTargets/testingPlatform/buildTestingPlatformPackageDirectoryReferenceSet';
+} from '../customTargets/testingPlatform/packageDirectory/buildTestingPlatformPackageDirectoryReferenceSet';
 import {
   buildTestingPlatformPackageDirectorySetReference,
   TestingPlatformPackageDirectorySetReferenceBuilderInput,
   TestingPlatformPackageDirectorySetTargetPath,
-} from '../customTargets/testingPlatform/buildTestingPlatformPackageDirectorySetReference';
+} from '../customTargets/testingPlatform/packageDirectorySet/buildTestingPlatformPackageDirectorySetReference';
 import {
   buildTestingPlatformPackageAReference,
   TestingPlatformPackageTargetPath,
   TestingPlatformPackageTargetPathTuple,
-} from '../customTargets/testingPlatform/buildTestingPlatformPackageAReference';
+} from '../customTargets/testingPlatform/packageA/buildTestingPlatformPackageAReference';
 import {
   TestingPlatformPackageDirectorySetTypedTarget,
   TestingPlatformPackageDirectoryTypedTarget,

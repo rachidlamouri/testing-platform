@@ -1,11 +1,11 @@
 import fs from 'fs';
-import { ReferenceBuilder } from '../../types/builders/referenceBuilder';
-import { TargetReference } from '../../types/targetReference';
+import { ReferenceBuilder } from '../../../types/builders/referenceBuilder';
+import { TargetReference } from '../../../types/targetReference';
 import {
   TestingPlatformPackageDirectorySetTarget,
   TestingPlatformPackageDirectorySetTypedTarget,
   TestingPlatformTargetTypeId,
-} from './targets';
+} from '../targets';
 
 export type TestingPlatformPackageDirectorySetReferenceBuilderInput = {
   rootDirectoryRelativeToCurrentWorkingDirectory: string;

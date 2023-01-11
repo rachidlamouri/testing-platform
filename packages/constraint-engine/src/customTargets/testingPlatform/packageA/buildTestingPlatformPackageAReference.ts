@@ -1,19 +1,19 @@
 import { posix } from 'path';
-import { KnownDerivedReferenceBuilder } from '../../types/builders/derivedReferenceBuilder';
-import { UnknownTargetPath } from '../../types/targetPath';
-import { TargetReferenceTuple } from '../../types/targetReference';
-import { buildJsonFileInstance } from '../file/buildJsonFileInstance';
-import { buildUtf8FileInstance } from '../file/buildUtf8FileInstance';
+import { KnownDerivedReferenceBuilder } from '../../../types/builders/derivedReferenceBuilder';
+import { UnknownTargetPath } from '../../../types/targetPath';
+import { TargetReferenceTuple } from '../../../types/targetReference';
+import { buildJsonFileInstance } from '../../file/buildJsonFileInstance';
+import { buildUtf8FileInstance } from '../../file/buildUtf8FileInstance';
 import {
   TestingPlatformPackageDirectoryTargetPath,
   TestingPlatformPackageDirectoryTargetReference,
-} from './buildTestingPlatformPackageDirectoryReferenceSet';
+} from '../packageDirectory/buildTestingPlatformPackageDirectoryReferenceSet';
 import {
   TestingPlatformPackageDirectoryTypedTarget,
   TestingPlatformPackageATarget,
   TestingPlatformPackageATypedTarget,
   TestingPlatformTargetTypeId,
-} from './targets';
+} from '../targets';
 
 export type TestingPlatformPackageTargetPath<
   TPrefix extends UnknownTargetPath,
