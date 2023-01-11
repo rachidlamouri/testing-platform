@@ -1,4 +1,4 @@
-import { OnDiskUtf8FileTarget } from '../customTargets/file/utf8FileTarget';
+import { OnDiskUtf8FileTarget } from '../customTargets/file/utf8File/utf8FileTarget';
 import { TestingPlatformPackageATarget } from '../customTargets/testingPlatform/packageA/packageATarget';
 import { GuardRule } from '../types/rule';
 

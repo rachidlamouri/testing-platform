@@ -1,6 +1,6 @@
 import { TypedTarget } from '../../../types/typedTarget';
-import { ParseableOnDiskJsonFileTarget } from '../../file/jsonFileTarget';
-import { OnDiskUtf8FileTarget } from '../../file/utf8FileTarget';
+import { ParseableOnDiskJsonFileTarget } from '../../file/jsonFile/jsonFileTarget';
+import { OnDiskUtf8FileTarget } from '../../file/utf8File/utf8FileTarget';
 import { ObjectTarget } from '../../type-script/objectTarget';
 import { TestingPlatformTargetTypeId } from '../targetTypeIds';
 import { TestingPlatformConfigurationTarget } from './packageConfigurationTarget';

@@ -1,6 +1,6 @@
 import { TypedTarget } from '../../../types/typedTarget';
-import { JsonFileTarget } from '../../file/jsonFileTarget';
-import { Utf8FileTarget } from '../../file/utf8FileTarget';
+import { JsonFileTarget } from '../../file/jsonFile/jsonFileTarget';
+import { Utf8FileTarget } from '../../file/utf8File/utf8FileTarget';
 import { TestingPlatformTargetTypeId } from '../targetTypeIds';
 
 export type TestingPlatformPackageATarget = {

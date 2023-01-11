@@ -1,4 +1,4 @@
-import { ParseableOnDiskJsonFileTarget } from '../customTargets/file/jsonFileTarget';
+import { ParseableOnDiskJsonFileTarget } from '../customTargets/file/jsonFile/jsonFileTarget';
 import { TestingPlatformPackageATarget } from '../customTargets/testingPlatform/packageA/packageATarget';
 import { ObjectTarget } from '../customTargets/type-script/objectTarget';
 import { GuardRule } from '../types/rule';
