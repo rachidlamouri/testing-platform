@@ -1,9 +1,3 @@
-import {
-  TestingPlatformPackageDirectoryTypedTarget,
-  TestingPlatformPackageDirectorySetTypedTarget,
-  TestingPlatformTargetTypeId,
-  TestingPlatformPackageDirectoryTarget,
-} from '../targets';
 import { TestingPlatformPackageDirectorySetTargetPath } from '../packageDirectorySet/buildTestingPlatformPackageDirectorySetReference';
 import {
   PrefixedTargetPath,
@@ -11,6 +5,12 @@ import {
 } from '../../../types/targetPath';
 import { TargetReference } from '../../../types/targetReference';
 import { DerivedReferenceSetBuilder } from '../../../types/builders/derivedReferenceSetBuilder';
+import { TestingPlatformPackageDirectorySetTypedTarget } from '../packageDirectorySet/packageDirectorySetTarget';
+import { TestingPlatformTargetTypeId } from '../targetTypeIds';
+import {
+  TestingPlatformPackageDirectoryTypedTarget,
+  TestingPlatformPackageDirectoryTarget,
+} from './packageDirectoryTarget';
 
 export type TestingPlatformPackageDirectoryTargetPath<
   TPrefix extends UnknownTargetPath,

@@ -4,10 +4,10 @@ import { packageCExtendsBaseTypeScriptConfiguration } from '../customRules/packa
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
-import { TestingPlatformTargetTypeId } from '../customTargets/testingPlatform/targets';
 import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
 import { targetReferenceConfigurations } from './targetReferenceConfigurations';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
+import { TestingPlatformTargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
 
 type CustomTargetReferenceConfigurations = typeof targetReferenceConfigurations;
 

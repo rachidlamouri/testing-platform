@@ -15,21 +15,21 @@ import {
   TestingPlatformPackageTargetPath,
   TestingPlatformPackageTargetPathTuple,
 } from '../customTargets/testingPlatform/packageA/buildTestingPlatformPackageAReference';
-import {
-  TestingPlatformPackageDirectorySetTypedTarget,
-  TestingPlatformPackageDirectoryTypedTarget,
-  TestingPlatformPackageATypedTarget,
-  TestingPlatformTargetTypeId,
-  TestingPlatformPackageBTypedTarget,
-  TestingPlatformPackageBTarget,
-  TestingPlatformPackageCTarget,
-} from '../customTargets/testingPlatform/targets';
 import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { buildNarrowedTargetReferenceConfiguration } from '../configurationHelpers/buildNarrowedTargetReferenceConfiguration';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
+import { TestingPlatformPackageDirectorySetTypedTarget } from '../customTargets/testingPlatform/packageDirectorySet/packageDirectorySetTarget';
+import { TestingPlatformPackageDirectoryTypedTarget } from '../customTargets/testingPlatform/packageDirectory/packageDirectoryTarget';
+import { TestingPlatformTargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
+import { TestingPlatformPackageATypedTarget } from '../customTargets/testingPlatform/packageA/packageATarget';
+import {
+  TestingPlatformPackageBTarget,
+  TestingPlatformPackageBTypedTarget,
+} from '../customTargets/testingPlatform/packageB/packageBTarget';
+import { TestingPlatformPackageCTarget } from '../customTargets/testingPlatform/packageC/packageCTarget';
 
 export const targetReferenceConfigurations = [
   buildRootTargetReferenceConfiguration<

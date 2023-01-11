@@ -1,9 +1,7 @@
 import { errorUtil, assertUtil } from 'mouse-test/type-script/agnostic';
 import { ThrowableResult } from 'mouse-test/type-script/agnostic/errorUtils/tryThrowable';
-import {
-  PackageConfigurationTypeId,
-  TestingPlatformPackageCTarget,
-} from '../customTargets/testingPlatform/targets';
+import { PackageConfigurationTypeId } from '../customTargets/testingPlatform/packageC/packageConfigurationTarget';
+import { TestingPlatformPackageCTarget } from '../customTargets/testingPlatform/packageC/packageCTarget';
 import { Rule } from '../types/rule';
 
 export const packageCExtendsBaseTypeScriptConfiguration: Rule<

@@ -1,8 +1,6 @@
-import {
-  PackageConfigurationTypeId,
-  TestingPlatformPackageBTarget,
-  TestingPlatformPackageCTarget,
-} from '../customTargets/testingPlatform/targets';
+import { TestingPlatformPackageBTarget } from '../customTargets/testingPlatform/packageB/packageBTarget';
+import { PackageConfigurationTypeId } from '../customTargets/testingPlatform/packageC/packageConfigurationTarget';
+import { TestingPlatformPackageCTarget } from '../customTargets/testingPlatform/packageC/packageCTarget';
 import { GuardRule } from '../types/rule';
 import { isObject } from './isObject';
 

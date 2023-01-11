@@ -4,8 +4,8 @@ import {
   signaler,
 } from 'rat-test/type-script/transgressing';
 import { fileSystemUtil } from 'mouse-test/type-script/shell';
-import { TestingPlatformTargetTypeId } from '../targets';
 import { buildTestingPlatformPackageAReference } from './buildTestingPlatformPackageAReference';
+import { TestingPlatformTargetTypeId } from '../targetTypeIds';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()

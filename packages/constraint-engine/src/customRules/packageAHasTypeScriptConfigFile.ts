@@ -1,8 +1,6 @@
 import { ParseableOnDiskJsonFileTarget } from '../customTargets/file/jsonFileTarget';
-import {
-  ObjectTarget,
-  TestingPlatformPackageATarget,
-} from '../customTargets/testingPlatform/targets';
+import { TestingPlatformPackageATarget } from '../customTargets/testingPlatform/packageA/packageATarget';
+import { ObjectTarget } from '../customTargets/type-script/objectTarget';
 import { GuardRule } from '../types/rule';
 import { isObject } from './isObject';
 

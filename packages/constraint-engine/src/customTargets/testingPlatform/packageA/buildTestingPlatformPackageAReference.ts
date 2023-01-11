@@ -8,12 +8,12 @@ import {
   TestingPlatformPackageDirectoryTargetPath,
   TestingPlatformPackageDirectoryTargetReference,
 } from '../packageDirectory/buildTestingPlatformPackageDirectoryReferenceSet';
+import { TestingPlatformPackageDirectoryTypedTarget } from '../packageDirectory/packageDirectoryTarget';
+import { TestingPlatformTargetTypeId } from '../targetTypeIds';
 import {
-  TestingPlatformPackageDirectoryTypedTarget,
   TestingPlatformPackageATarget,
   TestingPlatformPackageATypedTarget,
-  TestingPlatformTargetTypeId,
-} from '../targets';
+} from './packageATarget';
 
 export type TestingPlatformPackageTargetPath<
   TPrefix extends UnknownTargetPath,
