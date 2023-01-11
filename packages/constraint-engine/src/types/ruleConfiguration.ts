@@ -1,10 +1,8 @@
 import { CustomSet } from '../utils/customSet';
 import { Rule } from './rule';
-import { UnknownTargetInstance } from './targetInstance';
 import { UnknownTargetPath } from './targetPath';
 import { PartiallyKnownDerivedTargetReferenceConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
 import { PartiallyKnownDerivedTargetReferenceSetConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
-import { PartiallyKnownRootTargetReferenceConfiguration } from './targetReferenceConfiguration/rootTargetReferenceConfiguration';
 import { UnknownTargetReferenceConfiguration } from './targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { UnknownTypedTarget } from './typedTarget';
 
@@ -39,18 +37,12 @@ export type UnknownRuleConfigurationSet = CustomSet<UnknownRuleConfiguration>;
 type RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfiguration extends UnknownTargetReferenceConfiguration,
 > =
-  TTargetReferenceConfiguration extends PartiallyKnownRootTargetReferenceConfiguration<
-    UnknownTargetInstance,
-    infer TOutputTypedTarget,
-    infer TOutputTargetPath
+  TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceConfiguration<
+    UnknownTypedTarget,
+    UnknownTargetPath,
+    infer TOutputTypedTargetOptionsTuple,
+    infer TOutputTargetPathTuple
   >
-    ? KnownRuleConfiguration<TOutputTypedTarget, TOutputTargetPath>
-    : TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceConfiguration<
-        UnknownTypedTarget,
-        UnknownTargetPath,
-        infer TOutputTypedTargetOptionsTuple,
-        infer TOutputTargetPathTuple
-      >
     ? // TODO: check if all permutations of target tuple and path tuple make sense
       KnownRuleConfiguration<
         TOutputTypedTargetOptionsTuple[number],

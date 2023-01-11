@@ -1,4 +1,5 @@
 export enum TargetTypeId {
+  PackageDirectorySetConfiguration = 'PackageDirectorySetConfiguration',
   PackageDirectorySet = 'PackageDirectorySet',
   PackageDirectory = 'PackageDirectory',
   PackageA = 'PackageA',

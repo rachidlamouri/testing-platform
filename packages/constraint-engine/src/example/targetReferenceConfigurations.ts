@@ -1,13 +1,11 @@
 import { buildDerivedTargetReferenceConfiguration } from '../configurationHelpers/buildDerivedTargetReferenceConfiguration';
 import { buildDerivedTargetReferenceSetConfiguration } from '../configurationHelpers/buildDerivedTargetReferenceSetConfiguration';
-import { buildRootTargetReferenceConfiguration } from '../configurationHelpers/buildRootTargetReferenceConfiguration';
 import {
   buildTestingPlatformPackageDirectoryReferenceSet,
   TestingPlatformPackageDirectoryTargetPath,
 } from '../customTargets/testingPlatform/packageDirectory/buildPackageDirectoryReferenceSet';
 import {
   buildPackageDirectorySetReference,
-  PackageDirectorySetReferenceBuilderInput,
   PackageDirectorySetTargetPath,
 } from '../customTargets/testingPlatform/packageDirectorySet/buildPackageDirectorySetReference';
 import {
@@ -30,20 +28,34 @@ import {
   PackageBTypedTarget,
 } from '../customTargets/testingPlatform/packageB/packageBTarget';
 import { PackageCTarget } from '../customTargets/testingPlatform/packageC/packageCTarget';
+import { buildStaticTargetReferenceConfiguration } from '../configurationHelpers/buildStaticTargetReferenceConfiguration';
+import { PackageDirectorySetConfigurationTypedTarget } from '../customTargets/testingPlatform/packageDirectorySet/packageDirectorySetConfigurationTarget';
+import { RootTargetPath } from '../types/targetPath';
 
 export const targetReferenceConfigurations = [
-  buildRootTargetReferenceConfiguration<
-    PackageDirectorySetReferenceBuilderInput,
-    PackageDirectorySetTypedTarget,
+  buildStaticTargetReferenceConfiguration<
+    RootTargetPath,
+    PackageDirectorySetConfigurationTypedTarget,
     PackageDirectorySetTargetPath
   >({
-    buildReference: buildPackageDirectorySetReference,
-    inputInstance: {
-      rootDirectoryRelativeToCurrentWorkingDirectory: 'packages',
-    },
     inputTargetPath: '',
-    outputTargetTypeId: TargetTypeId.PackageDirectorySet,
-    outputTargetPath: 'testingPlatformPackageDirectorySet',
+    outputTargetReference: {
+      typeId: TargetTypeId.PackageDirectorySetConfiguration,
+      instance: { rootDirectoryRelativeToCurrentWorkingDirectory: 'packages' },
+      path: 'testingPlatformPackageDirectorySet',
+    },
+  }),
+  buildDerivedTargetReferenceConfiguration<
+    PackageDirectorySetConfigurationTypedTarget,
+    PackageDirectorySetTargetPath,
+    [PackageDirectorySetTypedTarget],
+    [PackageDirectorySetTargetPath]
+  >({
+    buildReference: buildPackageDirectorySetReference,
+    inputTargetTypeId: TargetTypeId.PackageDirectorySetConfiguration,
+    inputTargetPath: 'testingPlatformPackageDirectorySet',
+    outputTargetTypeId: [TargetTypeId.PackageDirectorySet],
+    outputTargetPath: ['testingPlatformPackageDirectorySet'],
   }),
   buildDerivedTargetReferenceSetConfiguration<
     PackageDirectorySetTypedTarget,

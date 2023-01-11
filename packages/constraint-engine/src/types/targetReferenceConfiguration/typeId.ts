@@ -1,5 +1,5 @@
 export enum TargetReferenceConfigurationTypeId {
-  RootTargetReferenceConfiguration = 'RootTargetReferenceConfiguration',
+  StaticTargetReferenceConfiguration = 'StaticTargetReferenceConfiguration',
   DerivedTargetReferenceConfiguration = 'DerivedTargetReferenceConfiguration',
   DerivedTargetReferenceSetConfiguration = 'DerivedTargetReferenceSetConfiguration',
 }
