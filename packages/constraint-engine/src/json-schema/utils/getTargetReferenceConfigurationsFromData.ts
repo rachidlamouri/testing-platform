@@ -1,8 +1,8 @@
 import { buildDerivedTargetReferenceConfiguration } from '../../configurationHelpers/buildDerivedTargetReferenceConfiguration';
-import { buildRootTargetReferenceConfiguration } from '../../configurationHelpers/buildRootTargetReferenceConfiguration';
+import { buildStaticTargetReferenceConfiguration } from '../../configurationHelpers/buildStaticTargetReferenceConfiguration';
+import { RootTargetPath } from '../../types/targetPath';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { buildDerivedTypedJsonReference } from '../referenceBuilders/buildDerivedTypedJsonReference';
-import { buildRootJsonReference } from '../referenceBuilders/buildRootUntypedJsonReference';
 import { JsonTargetTypeId, RootJsonDataTargetPath } from '../types/constants';
 import { JsonTarget } from '../types/targets';
 import {
@@ -14,16 +14,17 @@ export const getTargetReferenceConfigurationsFromJson = (
   data: JsonTarget,
 ): UnknownTargetReferenceConfiguration[] => {
   return [
-    buildRootTargetReferenceConfiguration<
-      JsonTarget,
+    buildStaticTargetReferenceConfiguration<
+      RootTargetPath,
       JsonUnknownTypedTarget,
       RootJsonDataTargetPath
     >({
-      buildReference: buildRootJsonReference,
-      inputInstance: data,
       inputTargetPath: '',
-      outputTargetTypeId: JsonTargetTypeId.Unknown,
-      outputTargetPath: 'data',
+      outputTargetReference: {
+        typeId: JsonTargetTypeId.Unknown,
+        instance: data,
+        path: 'data',
+      },
     }),
     buildDerivedTargetReferenceConfiguration<
       JsonUnknownTypedTarget,
