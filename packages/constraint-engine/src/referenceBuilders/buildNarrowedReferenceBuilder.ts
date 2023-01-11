@@ -36,7 +36,7 @@ const evaluateInputTargetReference = <
   TIdentityOption
 > => {
   return (
-    conditions.every((condition) => condition(inputReference))
+    conditions.every((condition) => condition(inputReference.instance))
       ? narrowedOutput
       : identityOutput
   ) as EvaluateGuardRuleTuple<
