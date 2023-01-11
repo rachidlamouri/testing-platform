@@ -17,7 +17,9 @@ import {
 const evaluateInputTargetReference = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule[],
+  TGuardRuleTuple extends readonly InferableGuardRule<
+    TInputTypedTarget['instance']
+  >[],
   TOutputTargetInstance extends TInputTypedTarget['instance'],
   TNarrowedOption,
   TIdentityOption,
@@ -32,21 +34,26 @@ const evaluateInputTargetReference = <
   TOutputTargetInstance,
   TNarrowedOption,
   TIdentityOption
-> =>
-  (conditions.every((condition) => condition(inputReference))
-    ? narrowedOutput
-    : identityOutput) as EvaluateGuardRuleTuple<
+> => {
+  return (
+    conditions.every((condition) => condition(inputReference))
+      ? narrowedOutput
+      : identityOutput
+  ) as EvaluateGuardRuleTuple<
     TInputTypedTarget,
     TGuardRuleTuple,
     TOutputTargetInstance,
     TNarrowedOption,
     TIdentityOption
   >;
+};
 
 export const buildNarrowedReferenceBuilder = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule[],
+  TGuardRuleTuple extends readonly InferableGuardRule<
+    TInputTypedTarget['instance']
+  >[],
   TOutputTargetTypeId extends UnknownTargetTypeId,
   TOutputTargetInstance extends TInputTypedTarget['instance'],
 >(

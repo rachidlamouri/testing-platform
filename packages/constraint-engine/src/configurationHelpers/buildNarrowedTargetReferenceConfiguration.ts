@@ -17,7 +17,9 @@ import { buildDerivedTargetReferenceConfiguration } from './buildDerivedTargetRe
 export type NarrowedTargetReferenceConfigurationBuilderInput<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule[],
+  TGuardRuleTuple extends readonly InferableGuardRule<
+    TInputTypedTarget['instance']
+  >[],
   TOutputTargetTypeId extends UnknownTargetTypeId,
   TOutputTargetInstance extends TInputTypedTarget['instance'],
 > = Pick<
@@ -43,7 +45,9 @@ export type NarrowedTargetReferenceConfigurationBuilderInput<
 export const buildNarrowedTargetReferenceConfiguration = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule[],
+  TGuardRuleTuple extends readonly InferableGuardRule<
+    TInputTypedTarget['instance']
+  >[],
   TOutputTargetTypeId extends UnknownTargetTypeId,
   TOutputTargetInstance extends TInputTypedTarget['instance'],
 >({

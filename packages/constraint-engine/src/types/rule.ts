@@ -15,10 +15,8 @@ export type GuardRule<
   TNarrowTargetInstance extends TTargetInstance,
 > = (instance: TTargetInstance) => instance is TNarrowTargetInstance;
 
-export type InferableGuardRule = GuardRule<
-  InferableTargetInstance,
-  InferableTargetInstance
->;
+export type InferableGuardRule<TTargetInstance extends UnknownTargetInstance> =
+  GuardRule<TTargetInstance, InferableTargetInstance>;
 
 export type UnknownAppliedRuleResult = {
   ruleTypeId: UnknownRuleTypeId;
