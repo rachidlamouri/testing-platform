@@ -1,34 +1,34 @@
 import fs from 'fs';
 import { ReferenceBuilder } from '../../../types/builders/referenceBuilder';
 import { TargetReference } from '../../../types/targetReference';
-import { TestingPlatformTargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeIds';
 import {
-  TestingPlatformPackageDirectorySetTypedTarget,
-  TestingPlatformPackageDirectorySetTarget,
+  PackageDirectorySetTypedTarget,
+  PackageDirectorySetTarget,
 } from './packageDirectorySetTarget';
 
-export type TestingPlatformPackageDirectorySetReferenceBuilderInput = {
+export type PackageDirectorySetReferenceBuilderInput = {
   rootDirectoryRelativeToCurrentWorkingDirectory: string;
 };
 
 export const TESTING_PLATFORM_PACKAGE_DIRECTORY_SET_TARGET_PATH =
   'testingPlatformPackageDirectorySet';
 
-export type TestingPlatformPackageDirectorySetTargetPath =
+export type PackageDirectorySetTargetPath =
   typeof TESTING_PLATFORM_PACKAGE_DIRECTORY_SET_TARGET_PATH;
 
-export type TestingPlatformPackageDirectorySetTargetReference = TargetReference<
-  TestingPlatformPackageDirectorySetTypedTarget,
-  TestingPlatformPackageDirectorySetTargetPath
+export type PackageDirectorySetTargetReference = TargetReference<
+  PackageDirectorySetTypedTarget,
+  PackageDirectorySetTargetPath
 >;
 
-export const buildTestingPlatformPackageDirectorySetReference: ReferenceBuilder<
-  TestingPlatformPackageDirectorySetReferenceBuilderInput,
-  TestingPlatformPackageDirectorySetTypedTarget,
-  TestingPlatformPackageDirectorySetTargetPath
+export const buildPackageDirectorySetReference: ReferenceBuilder<
+  PackageDirectorySetReferenceBuilderInput,
+  PackageDirectorySetTypedTarget,
+  PackageDirectorySetTargetPath
 > = ({
   rootDirectoryRelativeToCurrentWorkingDirectory,
-}): TestingPlatformPackageDirectorySetTargetReference => {
+}): PackageDirectorySetTargetReference => {
   const relativeRootDirectory = rootDirectoryRelativeToCurrentWorkingDirectory;
 
   const packageDirectoryPaths = fs
@@ -36,11 +36,10 @@ export const buildTestingPlatformPackageDirectorySetReference: ReferenceBuilder<
     .map((objectName) => `${relativeRootDirectory}/${objectName}`)
     .filter((objectPath) => fs.statSync(objectPath).isDirectory());
 
-  const instance: TestingPlatformPackageDirectorySetTarget =
-    packageDirectoryPaths;
+  const instance: PackageDirectorySetTarget = packageDirectoryPaths;
 
   return {
-    typeId: TestingPlatformTargetTypeId.PackageDirectorySet,
+    typeId: TargetTypeId.PackageDirectorySet,
     instance,
     path: TESTING_PLATFORM_PACKAGE_DIRECTORY_SET_TARGET_PATH,
   };

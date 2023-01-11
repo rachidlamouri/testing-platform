@@ -7,38 +7,38 @@ import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeS
 import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
 import { targetReferenceConfigurations } from './targetReferenceConfigurations';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
-import { TestingPlatformTargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
+import { TargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
 
 type CustomTargetReferenceConfigurations = typeof targetReferenceConfigurations;
 
 export const ruleConfigurations = [
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
+    targetTypeId: TargetTypeId.PackageDirectorySet,
     targetPath: 'testingPlatformPackageDirectorySet',
     rule: listIsNotEmpty,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.PackageA,
+    targetTypeId: TargetTypeId.PackageA,
     targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageAHasPackageFile,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.PackageA,
+    targetTypeId: TargetTypeId.PackageA,
     targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageAHasTypeScriptConfigFile,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.PackageA,
+    targetTypeId: TargetTypeId.PackageA,
     targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageAHasRunTestsScript,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.PackageB,
+    targetTypeId: TargetTypeId.PackageB,
     targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageBHasTestingPlatformConfiguration,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
-    targetTypeId: TestingPlatformTargetTypeId.PackageC,
+    targetTypeId: TargetTypeId.PackageC,
     targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageCExtendsBaseTypeScriptConfiguration,
   }),

@@ -1,15 +1,15 @@
-import { TestingPlatformPackageDirectorySetTargetPath } from '../packageDirectorySet/buildPackageDirectorySetReference';
+import { PackageDirectorySetTargetPath } from '../packageDirectorySet/buildPackageDirectorySetReference';
 import {
   PrefixedTargetPath,
   UnknownTargetPath,
 } from '../../../types/targetPath';
 import { TargetReference } from '../../../types/targetReference';
 import { DerivedReferenceSetBuilder } from '../../../types/builders/derivedReferenceSetBuilder';
-import { TestingPlatformPackageDirectorySetTypedTarget } from '../packageDirectorySet/packageDirectorySetTarget';
-import { TestingPlatformTargetTypeId } from '../targetTypeIds';
+import { PackageDirectorySetTypedTarget } from '../packageDirectorySet/packageDirectorySetTarget';
+import { TargetTypeId } from '../targetTypeIds';
 import {
-  TestingPlatformPackageDirectoryTypedTarget,
-  TestingPlatformPackageDirectoryTarget,
+  PackageDirectoryTypedTarget,
+  PackageDirectoryTarget,
 } from './packageDirectoryTarget';
 
 export type TestingPlatformPackageDirectoryTargetPath<
@@ -19,7 +19,7 @@ export type TestingPlatformPackageDirectoryTargetPath<
 export type TestingPlatformPackageDirectoryTargetReference<
   TPrefix extends UnknownTargetPath,
 > = TargetReference<
-  TestingPlatformPackageDirectoryTypedTarget,
+  PackageDirectoryTypedTarget,
   TestingPlatformPackageDirectoryTargetPath<TPrefix>
 >;
 
@@ -27,7 +27,7 @@ export const buildTestingPlatformPackageDirectoryReferenceSet = (<
   TPrefix extends UnknownTargetPath,
 >(
   directorySetReference: TargetReference<
-    TestingPlatformPackageDirectorySetTypedTarget,
+    PackageDirectorySetTypedTarget,
     TPrefix
   >,
 ): TestingPlatformPackageDirectoryTargetReference<TPrefix>[] => {
@@ -37,7 +37,7 @@ export const buildTestingPlatformPackageDirectoryReferenceSet = (<
         directoryPath,
         index,
       ): TestingPlatformPackageDirectoryTargetReference<TPrefix> => {
-        const instance: TestingPlatformPackageDirectoryTarget = {
+        const instance: PackageDirectoryTarget = {
           directoryPath,
           index,
         };
@@ -46,7 +46,7 @@ export const buildTestingPlatformPackageDirectoryReferenceSet = (<
         const targetPath: TestingPlatformPackageDirectoryTargetPath<TPrefix> = `${directorySetReference.path}/:directoryName`;
 
         return {
-          typeId: TestingPlatformTargetTypeId.PackageDirectory,
+          typeId: TargetTypeId.PackageDirectory,
           instance,
           path: targetPath,
         };
@@ -55,8 +55,8 @@ export const buildTestingPlatformPackageDirectoryReferenceSet = (<
 
   return targetReferences;
 }) satisfies DerivedReferenceSetBuilder<
-  TestingPlatformPackageDirectorySetTypedTarget,
-  TestingPlatformPackageDirectorySetTargetPath,
-  TestingPlatformPackageDirectoryTypedTarget,
+  PackageDirectorySetTypedTarget,
+  PackageDirectorySetTargetPath,
+  PackageDirectoryTypedTarget,
   TestingPlatformPackageDirectoryTargetPath<string>
 >;

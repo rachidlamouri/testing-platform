@@ -1,15 +1,15 @@
 import { ParseableOnDiskJsonFileTarget } from '../customTargets/file/jsonFile/jsonFileTarget';
-import { TestingPlatformPackageATarget } from '../customTargets/testingPlatform/packageA/packageATarget';
+import { PackageATarget } from '../customTargets/testingPlatform/packageA/packageATarget';
 import { ObjectTarget } from '../customTargets/type-script/objectTarget';
 import { GuardRule } from '../types/rule';
 import { isObject } from './isObject';
 
-type NarrowedPackageATarget = TestingPlatformPackageATarget & {
+type NarrowedPackageATarget = PackageATarget & {
   typeScriptConfigFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
 };
 
 export const packageAHasTypeScriptConfigFile: GuardRule<
-  TestingPlatformPackageATarget,
+  PackageATarget,
   NarrowedPackageATarget
 > = (target): target is NarrowedPackageATarget => {
   const { typeScriptConfigFile } = target;

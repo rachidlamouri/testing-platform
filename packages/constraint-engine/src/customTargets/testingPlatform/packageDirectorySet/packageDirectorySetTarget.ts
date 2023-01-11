@@ -1,9 +1,9 @@
 import { TypedTarget } from '../../../types/typedTarget';
-import { TestingPlatformTargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeIds';
 
-export type TestingPlatformPackageDirectorySetTarget = string[];
+export type PackageDirectorySetTarget = string[];
 
-export type TestingPlatformPackageDirectorySetTypedTarget = TypedTarget<
-  TestingPlatformTargetTypeId.PackageDirectorySet,
-  TestingPlatformPackageDirectorySetTarget
+export type PackageDirectorySetTypedTarget = TypedTarget<
+  TargetTypeId.PackageDirectorySet,
+  PackageDirectorySetTarget
 >;

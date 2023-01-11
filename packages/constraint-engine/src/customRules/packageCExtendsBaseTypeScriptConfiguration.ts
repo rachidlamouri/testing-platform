@@ -1,11 +1,11 @@
 import { errorUtil, assertUtil } from 'mouse-test/type-script/agnostic';
 import { ThrowableResult } from 'mouse-test/type-script/agnostic/errorUtils/tryThrowable';
 import { PackageConfigurationTypeId } from '../customTargets/testingPlatform/packageC/packageConfigurationTarget';
-import { TestingPlatformPackageCTarget } from '../customTargets/testingPlatform/packageC/packageCTarget';
+import { PackageCTarget } from '../customTargets/testingPlatform/packageC/packageCTarget';
 import { Rule } from '../types/rule';
 
 export const packageCExtendsBaseTypeScriptConfiguration: Rule<
-  TestingPlatformPackageCTarget
+  PackageCTarget
 > = (target) => {
   if (target.directoryName === 'base-tsconfig') {
     return true;

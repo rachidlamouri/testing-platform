@@ -8,12 +8,9 @@ import {
   TestingPlatformPackageDirectoryTargetPath,
   TestingPlatformPackageDirectoryTargetReference,
 } from '../packageDirectory/buildPackageDirectoryReferenceSet';
-import { TestingPlatformPackageDirectoryTypedTarget } from '../packageDirectory/packageDirectoryTarget';
-import { TestingPlatformTargetTypeId } from '../targetTypeIds';
-import {
-  TestingPlatformPackageATarget,
-  TestingPlatformPackageATypedTarget,
-} from './packageATarget';
+import { PackageDirectoryTypedTarget } from '../packageDirectory/packageDirectoryTarget';
+import { TargetTypeId } from '../targetTypeIds';
+import { PackageATarget, PackageATypedTarget } from './packageATarget';
 
 export type TestingPlatformPackageTargetPath<
   TPrefix extends UnknownTargetPath,
@@ -23,19 +20,17 @@ export type TestingPlatformPackageTargetPathTuple<
   TPrefix extends UnknownTargetPath,
 > = [TestingPlatformPackageTargetPath<TPrefix>];
 
-export const buildTestingPlatformPackageAReference = (<
-  TPrefix extends UnknownTargetPath,
->(
+export const buildPackageAReference = (<TPrefix extends UnknownTargetPath>(
   directoryTargetReference: TestingPlatformPackageDirectoryTargetReference<TPrefix>,
 ): TargetReferenceTuple<
-  TestingPlatformPackageATypedTarget,
+  PackageATypedTarget,
   [TestingPlatformPackageTargetPath<TPrefix>]
 > => {
   const { directoryPath } = directoryTargetReference.instance;
 
   const directoryName = posix.basename(directoryPath);
 
-  const instance: TestingPlatformPackageATarget = {
+  const instance: PackageATarget = {
     directoryName,
     runTestsScript: buildUtf8FileInstance({
       filePath: `${directoryPath}/scripts/runTests.sh`,
@@ -50,14 +45,14 @@ export const buildTestingPlatformPackageAReference = (<
 
   return [
     {
-      typeId: TestingPlatformTargetTypeId.PackageA,
+      typeId: TargetTypeId.PackageA,
       instance,
       path: directoryTargetReference.path,
     },
   ];
 }) satisfies KnownDerivedReferenceBuilder<
-  TestingPlatformPackageDirectoryTypedTarget,
+  PackageDirectoryTypedTarget,
   TestingPlatformPackageDirectoryTargetPath<UnknownTargetPath>,
-  [TestingPlatformPackageATypedTarget],
+  [PackageATypedTarget],
   [TestingPlatformPackageTargetPath<UnknownTargetPath>]
 >;

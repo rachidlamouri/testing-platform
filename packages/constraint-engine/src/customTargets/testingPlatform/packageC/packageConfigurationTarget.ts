@@ -3,6 +3,6 @@ export enum PackageConfigurationTypeId {
   NonTestFramework = 'NonTestFramework',
 }
 
-export type TestingPlatformConfigurationTarget = {
+export type PackageConfigurationTarget = {
   typeId: PackageConfigurationTypeId;
 };
