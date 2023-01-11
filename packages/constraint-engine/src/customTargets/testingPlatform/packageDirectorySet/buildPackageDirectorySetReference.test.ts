@@ -7,7 +7,7 @@ import { fileSystemUtil } from 'mouse-test/type-script/shell';
 import {
   buildTestingPlatformPackageDirectorySetReference,
   TESTING_PLATFORM_PACKAGE_DIRECTORY_SET_TARGET_PATH,
-} from './buildTestingPlatformPackageDirectorySetReference';
+} from './buildPackageDirectorySetReference';
 import { TestingPlatformTargetTypeId } from '../targetTypeIds';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises

@@ -1,4 +1,4 @@
-import { TestingPlatformPackageDirectorySetTargetPath } from '../packageDirectorySet/buildTestingPlatformPackageDirectorySetReference';
+import { TestingPlatformPackageDirectorySetTargetPath } from '../packageDirectorySet/buildPackageDirectorySetReference';
 import {
   PrefixedTargetPath,
   UnknownTargetPath,

@@ -7,7 +7,7 @@ import { buildUtf8FileInstance } from '../../file/utf8File/buildUtf8FileInstance
 import {
   TestingPlatformPackageDirectoryTargetPath,
   TestingPlatformPackageDirectoryTargetReference,
-} from '../packageDirectory/buildTestingPlatformPackageDirectoryReferenceSet';
+} from '../packageDirectory/buildPackageDirectoryReferenceSet';
 import { TestingPlatformPackageDirectoryTypedTarget } from '../packageDirectory/packageDirectoryTarget';
 import { TestingPlatformTargetTypeId } from '../targetTypeIds';
 import {

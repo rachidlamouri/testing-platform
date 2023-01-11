@@ -4,17 +4,17 @@ import { buildRootTargetReferenceConfiguration } from '../configurationHelpers/b
 import {
   buildTestingPlatformPackageDirectoryReferenceSet,
   TestingPlatformPackageDirectoryTargetPath,
-} from '../customTargets/testingPlatform/packageDirectory/buildTestingPlatformPackageDirectoryReferenceSet';
+} from '../customTargets/testingPlatform/packageDirectory/buildPackageDirectoryReferenceSet';
 import {
   buildTestingPlatformPackageDirectorySetReference,
   TestingPlatformPackageDirectorySetReferenceBuilderInput,
   TestingPlatformPackageDirectorySetTargetPath,
-} from '../customTargets/testingPlatform/packageDirectorySet/buildTestingPlatformPackageDirectorySetReference';
+} from '../customTargets/testingPlatform/packageDirectorySet/buildPackageDirectorySetReference';
 import {
   buildTestingPlatformPackageAReference,
   TestingPlatformPackageTargetPath,
   TestingPlatformPackageTargetPathTuple,
-} from '../customTargets/testingPlatform/packageA/buildTestingPlatformPackageAReference';
+} from '../customTargets/testingPlatform/packageA/buildPackageAReference';
 import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
