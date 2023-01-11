@@ -30,8 +30,23 @@ import {
   PackageBTypedTarget,
 } from '../customTargets/testingPlatform/packageB/packageBTarget';
 import { PackageCTarget } from '../customTargets/testingPlatform/packageC/packageCTarget';
+import { buildStaticTargetReferenceConfiguration } from '../configurationHelpers/buildStaticTargetReferenceConfiguration';
+import { PackageDirectorySetConfigurationTypedTarget } from '../customTargets/testingPlatform/packageDirectorySet/packageDirectorySetConfigurationTarget';
+import { RootTargetPath } from '../types/targetPath';
 
 export const targetReferenceConfigurations = [
+  buildStaticTargetReferenceConfiguration<
+    RootTargetPath,
+    PackageDirectorySetConfigurationTypedTarget,
+    PackageDirectorySetTargetPath
+  >({
+    inputTargetPath: '',
+    outputTargetReference: {
+      typeId: TargetTypeId.PackageDirectorySetConfiguration,
+      instance: { rootDirectoryRelativeToCurrentWorkingDirectory: 'packages' },
+      path: 'testingPlatformPackageDirectorySet',
+    },
+  }),
   buildRootTargetReferenceConfiguration<
     PackageDirectorySetReferenceBuilderInput,
     PackageDirectorySetTypedTarget,
