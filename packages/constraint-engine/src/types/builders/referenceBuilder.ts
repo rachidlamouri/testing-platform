@@ -4,11 +4,11 @@ import { TargetReference } from '../targetReference';
 import { UnknownTypedTarget } from '../typedTarget';
 
 export type ReferenceBuilder<
-  TInputData extends UnknownTargetInstance,
+  TInputInstance extends UnknownTargetInstance,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
 > = (
-  inputData: TInputData,
+  inputInstance: TInputInstance,
 ) => TargetReference<TOutputTypedTarget, TOutputTargetPath>;
 
 export type PartiallyKnownReferenceBuilder<

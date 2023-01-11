@@ -9,29 +9,29 @@ import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConf
 import { UnknownTypedTarget } from '../types/typedTarget';
 
 export const buildRootTargetReferenceConfiguration = <
-  TInputData extends UnknownTargetInstance,
+  TInputInstance extends UnknownTargetInstance,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
 >({
-  inputData,
+  inputInstance,
   inputTargetPath,
   outputTargetTypeId,
   outputTargetPath,
   buildReference,
 }: Omit<
   KnownRootTargetReferenceConfiguration<
-    TInputData,
+    TInputInstance,
     TOutputTypedTarget,
     TOutputTargetPath
   >,
   'typeId'
 >): PartiallyKnownRootTargetReferenceConfiguration<
-  TInputData,
+  TInputInstance,
   TOutputTypedTarget,
   TOutputTargetPath
 > => ({
   typeId: TargetReferenceConfigurationTypeId.RootTargetReferenceConfiguration,
-  inputData,
+  inputInstance,
   inputTargetPath,
   outputTargetTypeId,
   outputTargetPath,

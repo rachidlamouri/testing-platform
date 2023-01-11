@@ -3,7 +3,7 @@ import { getTargetReferenceConfigurationsFromJson } from '../utils/getTargetRefe
 import { getRuleConfigurationsFromJsonSchema } from '../utils/getRuleConfigurationsFromJsonSchema';
 import { JsonTarget } from '../types/targets';
 
-const inputData: JsonTarget = {
+const inputInstance: JsonTarget = {
   potato: 'foo',
   tomato: 'bar',
   something: 'abc',
@@ -15,7 +15,7 @@ const inputSchema: JsonTarget = {
 };
 
 const targetReferenceConfigurations =
-  getTargetReferenceConfigurationsFromJson(inputData);
+  getTargetReferenceConfigurationsFromJson(inputInstance);
 
 const ruleConfigurations = getRuleConfigurationsFromJsonSchema(inputSchema);
 

@@ -5,41 +5,41 @@ import { UnknownTypedTarget } from '../typedTarget';
 import { TargetReferenceConfigurationTypeId } from './typeId';
 
 type RootTargetReferenceConfiguration<
-  TActualInputData extends UnknownTargetInstance,
-  TExpectedInputData extends UnknownTargetInstance,
+  TActualInputInstance extends UnknownTargetInstance,
+  TExpectedInputInstance extends UnknownTargetInstance,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
 > = {
   typeId: TargetReferenceConfigurationTypeId.RootTargetReferenceConfiguration;
   buildReference: ReferenceBuilder<
-    TActualInputData,
+    TActualInputInstance,
     TOutputTypedTarget,
     TOutputTargetPath
   >;
-  inputData: TExpectedInputData;
+  inputInstance: TExpectedInputInstance;
   inputTargetPath: RootTargetPath;
   outputTargetTypeId: TOutputTypedTarget['typeId'];
   outputTargetPath: TOutputTargetPath;
 };
 
 export type KnownRootTargetReferenceConfiguration<
-  TInputData extends UnknownTargetInstance,
+  TInputInstance extends UnknownTargetInstance,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
 > = RootTargetReferenceConfiguration<
-  TInputData,
-  TInputData,
+  TInputInstance,
+  TInputInstance,
   TOutputTypedTarget,
   TOutputTargetPath
 >;
 
 export type PartiallyKnownRootTargetReferenceConfiguration<
-  TInputData extends UnknownTargetInstance,
+  TInputInstance extends UnknownTargetInstance,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
 > = RootTargetReferenceConfiguration<
   UnknownTargetInstance,
-  TInputData,
+  TInputInstance,
   TOutputTypedTarget,
   TOutputTargetPath
 >;

@@ -38,7 +38,9 @@ export const targetReferenceConfigurations = [
     PackageDirectorySetTargetPath
   >({
     buildReference: buildPackageDirectorySetReference,
-    inputData: { rootDirectoryRelativeToCurrentWorkingDirectory: 'packages' },
+    inputInstance: {
+      rootDirectoryRelativeToCurrentWorkingDirectory: 'packages',
+    },
     inputTargetPath: '',
     outputTargetTypeId: TargetTypeId.PackageDirectorySet,
     outputTargetPath: 'testingPlatformPackageDirectorySet',
