@@ -1,5 +1,5 @@
 import { InferableGuardRule, GuardRule } from '../rule';
-import { InferableTargetInstance } from '../targetInstance';
+import { UnknownTargetInstance } from '../targetInstance';
 import { UnknownTargetPath } from '../targetPath';
 import { TargetReference, TargetReferenceTuple } from '../targetReference';
 import {
@@ -17,10 +17,11 @@ type TupleToIntersection<TTuple extends readonly unknown[]> = TTuple extends [
   : never;
 
 type GuardRuleTupleToNarrowedTargetTuple<
-  TGuardRuleTuple extends readonly InferableGuardRule[],
+  TInputTargetInstance extends UnknownTargetInstance,
+  TGuardRuleTuple extends readonly InferableGuardRule<TInputTargetInstance>[],
 > = {
   [Index in keyof TGuardRuleTuple]: TGuardRuleTuple[Index] extends GuardRule<
-    InferableTargetInstance,
+    TInputTargetInstance,
     infer TNarrowedTargetInstance
   >
     ? TNarrowedTargetInstance
@@ -28,16 +29,24 @@ type GuardRuleTupleToNarrowedTargetTuple<
 };
 
 export type GuardRuleTupleNarrowedTargetIntersection<
-  TGuardRuleTuple extends readonly InferableGuardRule[],
-> = TupleToIntersection<GuardRuleTupleToNarrowedTargetTuple<TGuardRuleTuple>>;
+  TInputTargetInstance extends UnknownTargetInstance,
+  TGuardRuleTuple extends readonly InferableGuardRule<TInputTargetInstance>[],
+> = TupleToIntersection<
+  GuardRuleTupleToNarrowedTargetTuple<TInputTargetInstance, TGuardRuleTuple>
+>;
 
 export type EvaluateGuardRuleTuple<
   TInputTypedTarget extends UnknownTypedTarget,
-  TGuardRuleTuple extends readonly InferableGuardRule[],
+  TGuardRuleTuple extends readonly InferableGuardRule<
+    TInputTypedTarget['instance']
+  >[],
   TOutputTargetInstance extends TInputTypedTarget['instance'],
   TNarrowOption,
   TIdentityOption,
-> = GuardRuleTupleNarrowedTargetIntersection<TGuardRuleTuple> extends TOutputTargetInstance
+> = GuardRuleTupleNarrowedTargetIntersection<
+  TInputTypedTarget['instance'],
+  TGuardRuleTuple
+> extends TOutputTargetInstance
   ? TNarrowOption
   : TIdentityOption;
 
@@ -63,7 +72,9 @@ export type IdentityReferenceBuilder<
 export type CastReferenceBuilder<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule[],
+  TGuardRuleTuple extends readonly InferableGuardRule<
+    TInputTypedTarget['instance']
+  >[],
   TOutputTargetTypeId extends UnknownTargetTypeId,
   TOutputTargetInstance extends TInputTypedTarget['instance'],
 > = EvaluateGuardRuleTuple<
