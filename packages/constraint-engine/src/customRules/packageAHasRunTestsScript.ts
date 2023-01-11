@@ -1,5 +1,5 @@
 import { OnDiskUtf8FileTarget } from '../customTargets/file/utf8FileTarget';
-import { TestingPlatformPackageATarget } from '../customTargets/testingPlatformPackage/targets';
+import { TestingPlatformPackageATarget } from '../customTargets/testingPlatform/targets';
 import { GuardRule } from '../types/rule';
 
 type NarrowedPackageATarget = TestingPlatformPackageATarget & {

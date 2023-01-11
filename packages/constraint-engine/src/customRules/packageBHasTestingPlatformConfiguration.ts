@@ -2,7 +2,7 @@ import {
   PackageConfigurationTypeId,
   TestingPlatformPackageBTarget,
   TestingPlatformPackageCTarget,
-} from '../customTargets/testingPlatformPackage/targets';
+} from '../customTargets/testingPlatform/targets';
 import { GuardRule } from '../types/rule';
 import { isObject } from './isObject';
 

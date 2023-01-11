@@ -1,4 +1,4 @@
-import { ObjectTarget } from '../customTargets/testingPlatformPackage/targets';
+import { ObjectTarget } from '../customTargets/testingPlatform/targets';
 import { Rule } from '../types/rule';
 
 export const isObject = ((target: unknown): target is ObjectTarget => {

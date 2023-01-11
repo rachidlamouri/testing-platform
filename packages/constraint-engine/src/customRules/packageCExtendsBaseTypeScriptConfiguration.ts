@@ -3,7 +3,7 @@ import { ThrowableResult } from 'mouse-test/type-script/agnostic/errorUtils/tryT
 import {
   PackageConfigurationTypeId,
   TestingPlatformPackageCTarget,
-} from '../customTargets/testingPlatformPackage/targets';
+} from '../customTargets/testingPlatform/targets';
 import { Rule } from '../types/rule';
 
 export const packageCExtendsBaseTypeScriptConfiguration: Rule<
