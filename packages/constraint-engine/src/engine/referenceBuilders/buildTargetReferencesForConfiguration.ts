@@ -16,6 +16,8 @@ export const buildTargetReferencesForConfiguration = ({
   targetReferenceMap,
 }: TargetReferencesBuilderInput): UnknownTargetReference[] => {
   switch (targetReferenceConfiguration.typeId) {
+    case TargetReferenceConfigurationTypeId.StaticTargetReferenceConfiguration:
+      return [targetReferenceConfiguration.outputTargetReference];
     case TargetReferenceConfigurationTypeId.RootTargetReferenceConfiguration:
       return [
         buildRootTargetReference({
