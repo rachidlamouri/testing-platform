@@ -9,7 +9,7 @@ export const buildRootTargetReference = ({
   targetReferenceConfiguration,
 }: RootTargetReferenceBuilderInput): UnknownTargetReference => {
   const outputReference = targetReferenceConfiguration.buildReference(
-    targetReferenceConfiguration.inputData,
+    targetReferenceConfiguration.inputInstance,
   );
 
   return outputReference;

@@ -20,7 +20,7 @@ export const getTargetReferenceConfigurationsFromJson = (
       RootJsonDataTargetPath
     >({
       buildReference: buildRootJsonReference,
-      inputData: data,
+      inputInstance: data,
       inputTargetPath: '',
       outputTargetTypeId: JsonTargetTypeId.Unknown,
       outputTargetPath: 'data',

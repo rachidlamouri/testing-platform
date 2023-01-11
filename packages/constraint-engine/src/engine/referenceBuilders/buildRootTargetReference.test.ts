@@ -23,7 +23,7 @@ orchestrate()
           instance: 'hello',
           path: 'bar',
         }),
-        inputData: 2,
+        inputInstance: 2,
         inputTargetPath: '',
         outputTargetTypeId: 'foo',
         outputTargetPath: 'bar',

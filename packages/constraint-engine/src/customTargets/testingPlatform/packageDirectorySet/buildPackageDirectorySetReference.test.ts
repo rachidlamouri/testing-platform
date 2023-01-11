@@ -5,10 +5,10 @@ import {
 } from 'rat-test/type-script/transgressing';
 import { fileSystemUtil } from 'mouse-test/type-script/shell';
 import {
-  buildTestingPlatformPackageDirectorySetReference,
+  buildPackageDirectorySetReference,
   TESTING_PLATFORM_PACKAGE_DIRECTORY_SET_TARGET_PATH,
-} from './buildTestingPlatformPackageDirectorySetReference';
-import { TestingPlatformTargetTypeId } from './targets';
+} from './buildPackageDirectorySetReference';
+import { TargetTypeId } from '../targetTypeIds';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
@@ -36,14 +36,14 @@ orchestrate()
       contents: '',
     });
 
-    const result = buildTestingPlatformPackageDirectorySetReference({
+    const result = buildPackageDirectorySetReference({
       rootDirectoryRelativeToCurrentWorkingDirectory: 'tmp',
     });
 
     rootHelper.teardown();
 
     signaler.isDeepEqual(result, {
-      typeId: TestingPlatformTargetTypeId.PackageDirectorySet,
+      typeId: TargetTypeId.PackageDirectorySet,
       instance: ['tmp/bar', 'tmp/foo'],
       path: TESTING_PLATFORM_PACKAGE_DIRECTORY_SET_TARGET_PATH,
     });

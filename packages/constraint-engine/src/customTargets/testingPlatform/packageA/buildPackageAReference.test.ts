@@ -4,8 +4,8 @@ import {
   signaler,
 } from 'rat-test/type-script/transgressing';
 import { fileSystemUtil } from 'mouse-test/type-script/shell';
-import { TestingPlatformTargetTypeId } from './targets';
-import { buildTestingPlatformPackageAReference } from './buildTestingPlatformPackageAReference';
+import { buildPackageAReference } from './buildPackageAReference';
+import { TargetTypeId } from '../targetTypeIds';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
@@ -30,8 +30,8 @@ orchestrate()
       contents: '{}',
     });
 
-    const result = buildTestingPlatformPackageAReference({
-      typeId: TestingPlatformTargetTypeId.PackageDirectory,
+    const result = buildPackageAReference({
+      typeId: TargetTypeId.PackageDirectory,
       instance: {
         directoryPath: 'tmp',
         index: 0,
@@ -43,7 +43,7 @@ orchestrate()
 
     signaler.isDeepEqual(result, [
       {
-        typeId: TestingPlatformTargetTypeId.PackageA,
+        typeId: TargetTypeId.PackageA,
         instance: {
           directoryName: 'tmp',
           packageFile: {

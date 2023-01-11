@@ -3,8 +3,8 @@ import {
   report,
   signaler,
 } from 'rat-test/type-script/transgressing';
-import { buildTestingPlatformPackageDirectoryReferenceSet } from './buildTestingPlatformPackageDirectoryReferenceSet';
-import { TestingPlatformTargetTypeId } from './targets';
+import { TargetTypeId } from '../targetTypeIds';
+import { buildTestingPlatformPackageDirectoryReferenceSet } from './buildPackageDirectoryReferenceSet';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
@@ -15,14 +15,14 @@ orchestrate()
     report('  ⇀ Testing multiple directories');
 
     const result = buildTestingPlatformPackageDirectoryReferenceSet({
-      typeId: TestingPlatformTargetTypeId.PackageDirectorySet,
+      typeId: TargetTypeId.PackageDirectorySet,
       instance: ['tmp/bar', 'tmp/foo'],
       path: 'some-prefix',
     });
 
     signaler.isDeepEqual(result, [
       {
-        typeId: TestingPlatformTargetTypeId.PackageDirectory,
+        typeId: TargetTypeId.PackageDirectory,
         instance: {
           directoryPath: 'tmp/bar',
           index: 0,
@@ -30,7 +30,7 @@ orchestrate()
         path: `some-prefix/0`,
       },
       {
-        typeId: TestingPlatformTargetTypeId.PackageDirectory,
+        typeId: TargetTypeId.PackageDirectory,
         instance: {
           directoryPath: 'tmp/foo',
           index: 1,

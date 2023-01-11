@@ -10,10 +10,10 @@ export const buildRootJsonReference: ReferenceBuilder<
   JsonTarget,
   JsonUnknownTypedTarget,
   RootJsonTargetPath
-> = (inputData) => {
+> = (inputInstance) => {
   return {
     typeId: JsonTargetTypeId.Unknown,
-    instance: inputData,
+    instance: inputInstance,
     path: ROOT_JSON_TARGET_PATH,
   };
 };

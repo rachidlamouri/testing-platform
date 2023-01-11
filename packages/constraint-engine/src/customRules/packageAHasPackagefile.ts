@@ -1,17 +1,15 @@
-import { ParseableOnDiskJsonFileTarget } from '../customTargets/file/jsonFileTarget';
-import {
-  ObjectTarget,
-  TestingPlatformPackageATarget,
-} from '../customTargets/testingPlatformPackage/targets';
+import { ParseableOnDiskJsonFileTarget } from '../customTargets/file/jsonFile/jsonFileTarget';
+import { PackageATarget } from '../customTargets/testingPlatform/packageA/packageATarget';
+import { ObjectTarget } from '../customTargets/type-script/objectTarget';
 import { GuardRule } from '../types/rule';
 import { isObject } from './isObject';
 
-type NarrowedPackageATarget = TestingPlatformPackageATarget & {
+type NarrowedPackageATarget = PackageATarget & {
   packageFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
 };
 
 export const packageAHasPackageFile: GuardRule<
-  TestingPlatformPackageATarget,
+  PackageATarget,
   NarrowedPackageATarget
 > = (target): target is NarrowedPackageATarget => {
   const { packageFile } = target;
