@@ -5,6 +5,7 @@ import {
 import { UnknownTargetPath } from '../types/targetPath';
 import { UnknownTargetReference } from '../types/targetReference';
 import { UnknownTargetTypeId } from '../types/typedTarget';
+import { CustomMap } from '../utils/customMap';
 import { CustomSet } from '../utils/customSet';
 
 export type RuleConfigurationsByTargetPath = Map<
@@ -17,15 +18,11 @@ export type RuleConfigurationsByTargetPathByTargetTypeId = Map<
   RuleConfigurationsByTargetPath
 >;
 
-export class RuleConfigurationMap {
-  private ruleConfigurationsByTargetPathByTargetTypeId: RuleConfigurationsByTargetPathByTargetTypeId =
-    new Map();
-
+export class RuleConfigurationMap extends CustomMap<RuleConfigurationsByTargetPathByTargetTypeId> {
   setRuleConfiguration(ruleConfiguration: UnknownRuleConfiguration): void {
     const ruleConfigurationsByTargetPath: RuleConfigurationsByTargetPath =
-      this.ruleConfigurationsByTargetPathByTargetTypeId.get(
-        ruleConfiguration.targetTypeId,
-      ) ?? (new Map() as RuleConfigurationsByTargetPath);
+      this.get(ruleConfiguration.targetTypeId) ??
+      (new Map() as RuleConfigurationsByTargetPath);
 
     const ruleConfigurationList: UnknownRuleConfigurationSet =
       ruleConfigurationsByTargetPath.get(ruleConfiguration.targetPath) ??
@@ -36,19 +33,15 @@ export class RuleConfigurationMap {
       ruleConfiguration.targetPath,
       ruleConfigurationList,
     );
-    this.ruleConfigurationsByTargetPathByTargetTypeId.set(
-      ruleConfiguration.targetTypeId,
-      ruleConfigurationsByTargetPath,
-    );
+    this.set(ruleConfiguration.targetTypeId, ruleConfigurationsByTargetPath);
   }
 
   getRules(
     targetReference: UnknownTargetReference,
   ): UnknownRuleConfigurationSet {
     const ruleConfigurationsByTargetPath: RuleConfigurationsByTargetPath =
-      this.ruleConfigurationsByTargetPathByTargetTypeId.get(
-        targetReference.typeId,
-      ) ?? (new Map() as RuleConfigurationsByTargetPath);
+      this.get(targetReference.typeId) ??
+      (new Map() as RuleConfigurationsByTargetPath);
 
     const ruleConfigurationSet: UnknownRuleConfigurationSet =
       ruleConfigurationsByTargetPath.get(targetReference.path) ??

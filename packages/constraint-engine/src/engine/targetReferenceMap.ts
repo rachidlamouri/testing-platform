@@ -4,6 +4,7 @@ import {
   UnknownTargetReferenceSet,
 } from '../types/targetReference';
 import { UnknownTargetTypeId } from '../types/typedTarget';
+import { CustomMap } from '../utils/customMap';
 import { CustomSet } from '../utils/customSet';
 
 export type TargetReferenceSetsByTargetPath = Map<
@@ -16,15 +17,11 @@ export type TargetReferenceSetsByTargetPathByTargetTypeId = Map<
   TargetReferenceSetsByTargetPath
 >;
 
-export class TargetReferenceMap {
-  private targetReferenceSetsByTargetPathByTargetTypeId: TargetReferenceSetsByTargetPathByTargetTypeId =
-    new Map();
-
+export class TargetReferenceMap extends CustomMap<TargetReferenceSetsByTargetPathByTargetTypeId> {
   setTargetReference(targetReference: UnknownTargetReference): void {
     const targetReferenceSetsByTargetPath: TargetReferenceSetsByTargetPath =
-      this.targetReferenceSetsByTargetPathByTargetTypeId.get(
-        targetReference.typeId,
-      ) ?? (new Map() as TargetReferenceSetsByTargetPath);
+      this.get(targetReference.typeId) ??
+      (new Map() as TargetReferenceSetsByTargetPath);
 
     const targetReferenceSet: UnknownTargetReferenceSet =
       targetReferenceSetsByTargetPath.get(targetReference.path) ??
@@ -35,10 +32,7 @@ export class TargetReferenceMap {
       targetReference.path,
       targetReferenceSet,
     );
-    this.targetReferenceSetsByTargetPathByTargetTypeId.set(
-      targetReference.typeId,
-      targetReferenceSetsByTargetPath,
-    );
+    this.set(targetReference.typeId, targetReferenceSetsByTargetPath);
   }
 
   getTargetReferenceSetByTargetTypeIdAndTargetPath({
@@ -49,8 +43,7 @@ export class TargetReferenceMap {
     targetPath: UnknownTargetPath;
   }): UnknownTargetReferenceSet {
     const targetReferenceSetsByTargetPath: TargetReferenceSetsByTargetPath =
-      this.targetReferenceSetsByTargetPathByTargetTypeId.get(targetTypeId) ??
-      (new Map() as TargetReferenceSetsByTargetPath);
+      this.get(targetTypeId) ?? (new Map() as TargetReferenceSetsByTargetPath);
 
     const targetReferenceSet: UnknownTargetReferenceSet =
       targetReferenceSetsByTargetPath.get(targetPath) ?? new CustomSet();
