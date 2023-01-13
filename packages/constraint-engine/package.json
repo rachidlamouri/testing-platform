@@ -2,7 +2,9 @@
   "name": "constraint-engine",
   "devDependencies": {
     "@tsconfig/node16": "^1.0.3",
+    "@types/glob": "^8.0.0",
     "@types/node": "^18.11.17",
+    "glob": "^8.0.3",
     "mouse-test": "*",
     "rat-test": "*",
     "typescript": "^4.9.4"
