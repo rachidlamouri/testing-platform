@@ -24,8 +24,7 @@ type BaseDerivedTargetReferenceConfiguration<
   outputTargetTypeId: {
     [Index in keyof TOutputTypedTargetOptionsTuple]: TOutputTypedTargetOptionsTuple[Index]['typeId'];
   };
-  // TODO: make this plural "outputTargetPaths"
-  outputTargetPath: TOutputTargetPathTuple;
+  outputTargetPaths: TOutputTargetPathTuple;
   conditions: Rule<TActualInputTypedTarget['instance']>[];
 };
 

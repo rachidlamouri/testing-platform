@@ -55,7 +55,7 @@ export const targetReferenceConfigurations = [
     inputTargetTypeId: TargetTypeId.PackageDirectorySetConfiguration,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
     outputTargetTypeId: [TargetTypeId.PackageDirectorySet],
-    outputTargetPath: ['testingPlatformPackageDirectorySet'],
+    outputTargetPaths: ['testingPlatformPackageDirectorySet'],
   }),
   buildDerivedTargetReferenceSetConfiguration<
     PackageDirectorySetTypedTarget,
@@ -79,7 +79,7 @@ export const targetReferenceConfigurations = [
     inputTargetTypeId: TargetTypeId.PackageDirectory,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     outputTargetTypeId: [TargetTypeId.PackageA],
-    outputTargetPath: ['testingPlatformPackageDirectorySet/:directoryName'],
+    outputTargetPaths: ['testingPlatformPackageDirectorySet/:directoryName'],
   }),
   buildNarrowedTargetReferenceConfiguration<
     PackageATypedTarget,

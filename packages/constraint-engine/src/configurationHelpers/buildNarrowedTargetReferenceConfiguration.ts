@@ -92,7 +92,7 @@ export const buildNarrowedTargetReferenceConfiguration = <
     inputTargetTypeId,
     inputTargetPath,
     outputTargetTypeId: [outputTargetTypeId],
-    outputTargetPath: [inputTargetPath],
+    outputTargetPaths: [inputTargetPath],
     buildReference: buildNarrowedReferenceBuilder<
       TInputTypedTarget,
       TInputTargetPath,

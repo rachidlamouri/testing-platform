@@ -43,7 +43,7 @@ export const getTargetReferenceConfigurationsFromJson = (
         JsonTargetTypeId.Array,
         JsonTargetTypeId.Object,
       ],
-      outputTargetPath: ['data'],
+      outputTargetPaths: ['data'],
     }),
   ] as unknown as UnknownTargetReferenceConfiguration[];
 };

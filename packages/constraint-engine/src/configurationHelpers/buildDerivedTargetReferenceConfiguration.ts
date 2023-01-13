@@ -19,7 +19,7 @@ export const buildDerivedTargetReferenceConfiguration = <
   inputTargetTypeId,
   inputTargetPath,
   outputTargetTypeId,
-  outputTargetPath,
+  outputTargetPaths,
   buildReference,
   conditions = [],
 }: PartialKeys<
@@ -44,7 +44,7 @@ export const buildDerivedTargetReferenceConfiguration = <
   inputTargetTypeId,
   inputTargetPath,
   outputTargetTypeId,
-  outputTargetPath,
+  outputTargetPaths,
   buildReference: buildReference as PartiallyKnownDerivedReferenceBuilder<
     TOutputTypedTargetOptionsTuple,
     TOutputTargetPathTuple
