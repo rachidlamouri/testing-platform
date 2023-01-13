@@ -1,4 +1,4 @@
-import { KnownDerivedReferenceBuilder } from '../builders/derivedReferenceBuilder';
+import { DerivedReferenceBuilder } from '../builders/derivedReferenceBuilder';
 import { Rule } from '../rule';
 import { UnknownTargetPath, UnknownTargetPathTuple } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
@@ -13,7 +13,7 @@ type BaseDerivedTargetReferenceConfiguration<
   TOutputTargetPathTuple extends UnknownTargetPathTuple,
 > = {
   typeId: TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration;
-  buildReference: KnownDerivedReferenceBuilder<
+  buildReference: DerivedReferenceBuilder<
     TActualInputTypedTarget,
     TActualInputTargetPath,
     TOutputTypedTargetOptionsTuple,

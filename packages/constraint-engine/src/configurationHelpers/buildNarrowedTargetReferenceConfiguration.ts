@@ -1,5 +1,5 @@
 import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildNarrowedReferenceBuilder';
-import { PartiallyKnownDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
+import { NormalizedDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
 import { EvaluateGuardRuleTuple } from '../types/builders/narrowedReferenceBuilder';
 import { InferableGuardRule } from '../types/rule';
 import { UnknownTargetPath } from '../types/targetPath';
@@ -99,7 +99,7 @@ export const buildNarrowedTargetReferenceConfiguration = <
       TGuardRuleTuple,
       TOutputTargetTypeId,
       TOutputTargetInstance
-    >(conditions, outputTargetTypeId) as PartiallyKnownDerivedReferenceBuilder<
+    >(conditions, outputTargetTypeId) as NormalizedDerivedReferenceBuilder<
       [
         EvaluateGuardRuleTuple<
           TInputTypedTarget,

@@ -1,4 +1,4 @@
-import { KnownDerivedReferenceBuilder } from '../../types/builders/derivedReferenceBuilder';
+import { DerivedReferenceBuilder } from '../../types/builders/derivedReferenceBuilder';
 import {
   UnknownTargetPath,
   UnknownTargetPathTuple,
@@ -32,7 +32,7 @@ export const buildDerivedTypedJsonReference = (<
   };
 
   return [outputReference];
-}) satisfies KnownDerivedReferenceBuilder<
+}) satisfies DerivedReferenceBuilder<
   JsonUnknownTypedTarget,
   UnknownTargetPath,
   JsonKnownTypedTargetOptionsTuple,

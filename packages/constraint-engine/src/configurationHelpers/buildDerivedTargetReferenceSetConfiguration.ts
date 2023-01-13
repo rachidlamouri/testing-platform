@@ -1,4 +1,4 @@
-import { PartiallyKnownDerivedReferenceSetBuilder } from '../types/builders/derivedReferenceSetBuilder';
+import { NormalizedDerivedReferenceSetBuilder } from '../types/builders/derivedReferenceSetBuilder';
 import { UnknownTargetPath } from '../types/targetPath';
 import {
   DerivedTargetReferenceSetConfiguration,
@@ -38,9 +38,8 @@ export const buildDerivedTargetReferenceSetConfiguration = <
   inputTargetPath,
   outputTargetTypeId,
   outputTargetPath,
-  buildReferenceSet:
-    buildReferenceSet as PartiallyKnownDerivedReferenceSetBuilder<
-      TOutputTypedTarget,
-      TOutputTargetPath
-    >,
+  buildReferenceSet: buildReferenceSet as NormalizedDerivedReferenceSetBuilder<
+    TOutputTypedTarget,
+    TOutputTargetPath
+  >,
 });

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { KnownDerivedReferenceBuilder } from '../../../types/builders/derivedReferenceBuilder';
+import { DerivedReferenceBuilder } from '../../../types/builders/derivedReferenceBuilder';
 import { TargetReference } from '../../../types/targetReference';
 import { TargetTypeId } from '../targetTypeIds';
 import { PackageDirectorySetConfigurationTypedTarget } from './packageDirectorySetConfigurationTarget';
@@ -19,7 +19,7 @@ export type PackageDirectorySetTargetReference = TargetReference<
   PackageDirectorySetTargetPath
 >;
 
-export const buildPackageDirectorySetReference: KnownDerivedReferenceBuilder<
+export const buildPackageDirectorySetReference: DerivedReferenceBuilder<
   PackageDirectorySetConfigurationTypedTarget,
   PackageDirectorySetTargetPath,
   [PackageDirectorySetTypedTarget],
