@@ -12,6 +12,11 @@ import { PackageDirectoryTypedTarget } from '../packageDirectory/packageDirector
 import { TargetTypeId } from '../targetTypeIds';
 import { PackageATarget, PackageATypedTarget } from './packageATarget';
 import { buildUtf8FileMetadataInstanceSet } from '../../file/utf8File/buildUtf8FileMetdataInstanceSet';
+import {
+  CategorizedTestFileMetadataTarget,
+  fileTypesByExtension,
+  SupportedTestFileType,
+} from '../categorizedTestFileMetadata';
 
 export type TestingPlatformPackageTargetPath<
   TPrefix extends UnknownTargetPath,
@@ -45,7 +50,19 @@ export const buildPackageAReference = (<TPrefix extends UnknownTargetPath>(
     }),
     testFileMetadataSet: buildUtf8FileMetadataInstanceSet({
       fileGlob: testFilePathGlob,
-    }),
+    }).map(
+      (
+        metadata,
+      ): CategorizedTestFileMetadataTarget<{
+        fileType: SupportedTestFileType | null;
+      }> => ({
+        ...metadata,
+        fileType:
+          (fileTypesByExtension[
+            posix.extname(metadata.filePath).replace(/\./, '')
+          ] as SupportedTestFileType) ?? null,
+      }),
+    ),
   };
 
   return [
