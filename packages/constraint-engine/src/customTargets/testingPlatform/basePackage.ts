@@ -1,5 +1,8 @@
 import { JsonFileTarget } from '../file/jsonFile/jsonFileTarget';
-import { Utf8FileTarget } from '../file/utf8File/utf8FileTarget';
+import {
+  Utf8FileMetadataTarget,
+  Utf8FileTarget,
+} from '../file/utf8File/utf8FileTarget';
 
 type ConfigurablePackageProperties = {
   packageFile: JsonFileTarget;
@@ -14,4 +17,5 @@ export type BasePackage<
   packageFile: TPackageProperties['packageFile'];
   typeScriptConfigFile: TPackageProperties['typeScriptConfigFile'];
   runTestsScript: TPackageProperties['runTestsScript'];
+  testFileMetadataSet: Utf8FileMetadataTarget[];
 };

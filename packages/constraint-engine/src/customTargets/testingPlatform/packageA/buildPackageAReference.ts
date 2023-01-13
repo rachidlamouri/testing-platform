@@ -11,6 +11,7 @@ import {
 import { PackageDirectoryTypedTarget } from '../packageDirectory/packageDirectoryTarget';
 import { TargetTypeId } from '../targetTypeIds';
 import { PackageATarget, PackageATypedTarget } from './packageATarget';
+import { buildUtf8FileMetadataInstanceSet } from '../../file/utf8File/buildUtf8FileMetdataInstanceSet';
 
 export type TestingPlatformPackageTargetPath<
   TPrefix extends UnknownTargetPath,
@@ -29,6 +30,7 @@ export const buildPackageAReference = (<TPrefix extends UnknownTargetPath>(
   const { directoryPath } = directoryTargetReference.instance;
 
   const directoryName = posix.basename(directoryPath);
+  const testFilePathGlob = `${directoryPath}/**/*.test.{sh,ts}`;
 
   const instance: PackageATarget = {
     directoryName,
@@ -40,6 +42,9 @@ export const buildPackageAReference = (<TPrefix extends UnknownTargetPath>(
     }),
     typeScriptConfigFile: buildJsonFileInstance({
       filePath: `${directoryPath}/tsconfig.json`,
+    }),
+    testFileMetadataSet: buildUtf8FileMetadataInstanceSet({
+      fileGlob: testFilePathGlob,
     }),
   };
 
