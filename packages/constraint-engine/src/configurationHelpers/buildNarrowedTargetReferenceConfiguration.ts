@@ -1,11 +1,11 @@
 import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildNarrowedReferenceBuilder';
-import { PartiallyKnownDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
+import { NormalizedDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
 import { EvaluateGuardRuleTuple } from '../types/builders/narrowedReferenceBuilder';
 import { InferableGuardRule } from '../types/rule';
 import { UnknownTargetPath } from '../types/targetPath';
 import {
-  KnownDerivedTargetReferenceConfiguration,
-  PartiallyKnownDerivedTargetReferenceConfiguration,
+  DerivedTargetReferenceConfiguration,
+  DerivedTargetReferenceConfigurationWithNormalizedBuilder,
 } from '../types/targetReferenceConfiguration/derivedTargetReferenceConfiguration';
 import {
   TypedTarget,
@@ -23,7 +23,7 @@ export type NarrowedTargetReferenceConfigurationBuilderInput<
   TOutputTargetTypeId extends UnknownTargetTypeId,
   TOutputTargetInstance extends TInputTypedTarget['instance'],
 > = Pick<
-  KnownDerivedTargetReferenceConfiguration<
+  DerivedTargetReferenceConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
     [TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>],
@@ -61,7 +61,7 @@ export const buildNarrowedTargetReferenceConfiguration = <
   TGuardRuleTuple,
   TOutputTargetTypeId,
   TOutputTargetInstance
->): PartiallyKnownDerivedTargetReferenceConfiguration<
+>): DerivedTargetReferenceConfigurationWithNormalizedBuilder<
   TInputTypedTarget,
   TInputTargetPath,
   [
@@ -92,14 +92,14 @@ export const buildNarrowedTargetReferenceConfiguration = <
     inputTargetTypeId,
     inputTargetPath,
     outputTargetTypeId: [outputTargetTypeId],
-    outputTargetPath: [inputTargetPath],
+    outputTargetPaths: [inputTargetPath],
     buildReference: buildNarrowedReferenceBuilder<
       TInputTypedTarget,
       TInputTargetPath,
       TGuardRuleTuple,
       TOutputTargetTypeId,
       TOutputTargetInstance
-    >(conditions, outputTargetTypeId) as PartiallyKnownDerivedReferenceBuilder<
+    >(conditions, outputTargetTypeId) as NormalizedDerivedReferenceBuilder<
       [
         EvaluateGuardRuleTuple<
           TInputTypedTarget,

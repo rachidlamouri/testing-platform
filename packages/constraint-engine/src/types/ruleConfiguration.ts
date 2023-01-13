@@ -1,12 +1,12 @@
 import { CustomSet } from '../utils/customSet';
 import { Rule } from './rule';
 import { UnknownTargetPath } from './targetPath';
-import { PartiallyKnownDerivedTargetReferenceConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
-import { PartiallyKnownDerivedTargetReferenceSetConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
+import { DerivedTargetReferenceConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
+import { DerivedTargetReferenceSetConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
 import { UnknownTargetReferenceConfiguration } from './targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { UnknownTypedTarget } from './typedTarget';
 
-type RuleConfiguration<
+type BaseRuleConfiguration<
   TActualTypedTarget extends UnknownTypedTarget,
   TExpectedTypedTarget extends UnknownTypedTarget,
   TTargetPath extends UnknownTargetPath,
@@ -16,17 +16,12 @@ type RuleConfiguration<
   targetPath: TTargetPath;
 };
 
-export type KnownRuleConfiguration<
+export type RuleConfiguration<
   TTypedTarget extends UnknownTypedTarget,
   TTargetPath extends UnknownTargetPath,
-> = RuleConfiguration<TTypedTarget, TTypedTarget, TTargetPath>;
+> = BaseRuleConfiguration<TTypedTarget, TTypedTarget, TTargetPath>;
 
-export type PartiallyKnownRuleConfiguration<
-  TTypedTarget extends UnknownTypedTarget,
-  TTargetPath extends UnknownTargetPath,
-> = RuleConfiguration<UnknownTypedTarget, TTypedTarget, TTargetPath>;
-
-export type UnknownRuleConfiguration = RuleConfiguration<
+export type UnknownRuleConfiguration = BaseRuleConfiguration<
   UnknownTypedTarget,
   UnknownTypedTarget,
   UnknownTargetPath
@@ -37,24 +32,24 @@ export type UnknownRuleConfigurationSet = CustomSet<UnknownRuleConfiguration>;
 type RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfiguration extends UnknownTargetReferenceConfiguration,
 > =
-  TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceConfiguration<
+  TTargetReferenceConfiguration extends DerivedTargetReferenceConfigurationWithNormalizedBuilder<
     UnknownTypedTarget,
     UnknownTargetPath,
     infer TOutputTypedTargetOptionsTuple,
     infer TOutputTargetPathTuple
   >
     ? // TODO: check if all permutations of target tuple and path tuple make sense
-      KnownRuleConfiguration<
+      RuleConfiguration<
         TOutputTypedTargetOptionsTuple[number],
         TOutputTargetPathTuple[number]
       >
-    : TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceSetConfiguration<
+    : TTargetReferenceConfiguration extends DerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
         UnknownTypedTarget,
         UnknownTargetPath,
         infer TOutputTypedTarget,
         infer TOutputTargetPath
       >
-    ? KnownRuleConfiguration<TOutputTypedTarget, TOutputTargetPath>
+    ? RuleConfiguration<TOutputTypedTarget, TOutputTargetPath>
     : never;
 
 export type RuleConfigurationFromTargetReferenceConfigurations<

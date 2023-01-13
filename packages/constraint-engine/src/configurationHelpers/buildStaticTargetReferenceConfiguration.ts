@@ -1,6 +1,6 @@
 import { UnknownTargetPath } from '../types/targetPath';
 import {
-  KnownStaticTargetReferenceConfiguration,
+  StaticTargetReferenceConfiguration,
   UnknownStaticTargetReferenceConfiguration,
 } from '../types/targetReferenceConfiguration/staticTargetReferenceConfiguration';
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
@@ -14,7 +14,7 @@ export const buildStaticTargetReferenceConfiguration = <
   inputTargetPath,
   outputTargetReference,
 }: Omit<
-  KnownStaticTargetReferenceConfiguration<
+  StaticTargetReferenceConfiguration<
     TInputTargetReference,
     TOutputTypedTarget,
     TOutputTargetReference

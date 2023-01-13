@@ -3,7 +3,7 @@ import { UnknownTargetPath } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
 import { TargetReferenceConfigurationTypeId } from './typeId';
 
-type DerivedTargetReferenceSetConfiguration<
+type BaseDerivedTargetReferenceSetConfiguration<
   TActualInputTypedTarget extends UnknownTypedTarget,
   TActualInputTargetPath extends UnknownTargetPath,
   TExpectedInputTypedTarget extends UnknownTypedTarget,
@@ -24,12 +24,12 @@ type DerivedTargetReferenceSetConfiguration<
   outputTargetPath: TOutputTargetPath;
 };
 
-export type KnownDerivedTargetReferenceSetConfiguration<
+export type DerivedTargetReferenceSetConfiguration<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
-> = DerivedTargetReferenceSetConfiguration<
+> = BaseDerivedTargetReferenceSetConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
   TInputTypedTarget,
@@ -38,12 +38,12 @@ export type KnownDerivedTargetReferenceSetConfiguration<
   TOutputTargetPath
 >;
 
-export type PartiallyKnownDerivedTargetReferenceSetConfiguration<
+export type DerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
-> = DerivedTargetReferenceSetConfiguration<
+> = BaseDerivedTargetReferenceSetConfiguration<
   UnknownTypedTarget,
   UnknownTargetPath,
   TInputTypedTarget,
@@ -53,7 +53,7 @@ export type PartiallyKnownDerivedTargetReferenceSetConfiguration<
 >;
 
 export type UnknownDerivedTargetReferenceSetConfiguration =
-  DerivedTargetReferenceSetConfiguration<
+  BaseDerivedTargetReferenceSetConfiguration<
     UnknownTypedTarget,
     UnknownTargetPath,
     UnknownTypedTarget,

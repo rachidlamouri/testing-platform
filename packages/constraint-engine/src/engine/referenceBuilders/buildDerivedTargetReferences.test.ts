@@ -43,7 +43,7 @@ orchestrate()
         inputTargetTypeId: 'Foo',
         inputTargetPath: 'foo/:index',
         outputTargetTypeId: ['Bar'],
-        outputTargetPath: ['foo/:index/bar'],
+        outputTargetPaths: ['foo/:index/bar'],
         conditions: [],
       },
       targetReferenceMap: targtReferenceMap,

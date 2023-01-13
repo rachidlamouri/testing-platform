@@ -11,7 +11,7 @@ export type ReferenceBuilder<
   inputInstance: TInputInstance,
 ) => TargetReference<TOutputTypedTarget, TOutputTargetPath>;
 
-export type PartiallyKnownReferenceBuilder<
+export type NormalizedReferenceBuilder<
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
 > = ReferenceBuilder<

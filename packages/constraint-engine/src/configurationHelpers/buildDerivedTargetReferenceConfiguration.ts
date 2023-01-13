@@ -1,8 +1,8 @@
-import { PartiallyKnownDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
+import { NormalizedDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
 import { UnknownTargetPath, UnknownTargetPathTuple } from '../types/targetPath';
 import {
-  KnownDerivedTargetReferenceConfiguration,
-  PartiallyKnownDerivedTargetReferenceConfiguration,
+  DerivedTargetReferenceConfiguration,
+  DerivedTargetReferenceConfigurationWithNormalizedBuilder,
 } from '../types/targetReferenceConfiguration/derivedTargetReferenceConfiguration';
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
 import { UnknownTypedTarget } from '../types/typedTarget';
@@ -19,12 +19,12 @@ export const buildDerivedTargetReferenceConfiguration = <
   inputTargetTypeId,
   inputTargetPath,
   outputTargetTypeId,
-  outputTargetPath,
+  outputTargetPaths,
   buildReference,
   conditions = [],
 }: PartialKeys<
   Omit<
-    KnownDerivedTargetReferenceConfiguration<
+    DerivedTargetReferenceConfiguration<
       TInputTypedTarget,
       TInputTargetPath,
       TOutputTypedTargetOptionsTuple,
@@ -33,7 +33,7 @@ export const buildDerivedTargetReferenceConfiguration = <
     'typeId'
   >,
   'conditions'
->): PartiallyKnownDerivedTargetReferenceConfiguration<
+>): DerivedTargetReferenceConfigurationWithNormalizedBuilder<
   TInputTypedTarget,
   TInputTargetPath,
   TOutputTypedTargetOptionsTuple,
@@ -44,8 +44,8 @@ export const buildDerivedTargetReferenceConfiguration = <
   inputTargetTypeId,
   inputTargetPath,
   outputTargetTypeId,
-  outputTargetPath,
-  buildReference: buildReference as PartiallyKnownDerivedReferenceBuilder<
+  outputTargetPaths,
+  buildReference: buildReference as NormalizedDerivedReferenceBuilder<
     TOutputTypedTargetOptionsTuple,
     TOutputTargetPathTuple
   >,
