@@ -31,6 +31,7 @@ import { PackageCTarget } from '../customTargets/testingPlatform/packageC/packag
 import { buildStaticTargetReferenceConfiguration } from '../configurationHelpers/buildStaticTargetReferenceConfiguration';
 import { PackageDirectorySetConfigurationTypedTarget } from '../customTargets/testingPlatform/packageDirectorySet/packageDirectorySetConfigurationTarget';
 import { RootTargetPath } from '../types/targetPath';
+import { packageAHasKnownTestFileTypes } from '../customRules/packageAHasKnownTestFileTypes';
 
 export const targetReferenceConfigurations = [
   buildStaticTargetReferenceConfiguration<
@@ -88,6 +89,7 @@ export const targetReferenceConfigurations = [
       typeof packageAHasPackageFile,
       typeof packageAHasTypeScriptConfigFile,
       typeof packageAHasRunTestsScript,
+      typeof packageAHasKnownTestFileTypes,
     ],
     TargetTypeId.PackageB,
     PackageBTarget
@@ -98,6 +100,7 @@ export const targetReferenceConfigurations = [
       packageAHasPackageFile,
       packageAHasTypeScriptConfigFile,
       packageAHasRunTestsScript,
+      packageAHasKnownTestFileTypes,
     ],
     outputTargetTypeId: TargetTypeId.PackageB,
   }),
