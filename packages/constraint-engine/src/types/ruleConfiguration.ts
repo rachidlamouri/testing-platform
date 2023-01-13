@@ -1,8 +1,8 @@
 import { CustomSet } from '../utils/customSet';
 import { Rule } from './rule';
 import { UnknownTargetPath } from './targetPath';
-import { PartiallyKnownDerivedTargetReferenceConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
-import { PartiallyKnownDerivedTargetReferenceSetConfiguration } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
+import { DerivedTargetReferenceConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
+import { DerivedTargetReferenceSetConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
 import { UnknownTargetReferenceConfiguration } from './targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { UnknownTypedTarget } from './typedTarget';
 
@@ -37,7 +37,7 @@ export type UnknownRuleConfigurationSet = CustomSet<UnknownRuleConfiguration>;
 type RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfiguration extends UnknownTargetReferenceConfiguration,
 > =
-  TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceConfiguration<
+  TTargetReferenceConfiguration extends DerivedTargetReferenceConfigurationWithNormalizedBuilder<
     UnknownTypedTarget,
     UnknownTargetPath,
     infer TOutputTypedTargetOptionsTuple,
@@ -48,7 +48,7 @@ type RuleConfigurationFromTargetReferenceConfiguration<
         TOutputTypedTargetOptionsTuple[number],
         TOutputTargetPathTuple[number]
       >
-    : TTargetReferenceConfiguration extends PartiallyKnownDerivedTargetReferenceSetConfiguration<
+    : TTargetReferenceConfiguration extends DerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
         UnknownTypedTarget,
         UnknownTargetPath,
         infer TOutputTypedTarget,
