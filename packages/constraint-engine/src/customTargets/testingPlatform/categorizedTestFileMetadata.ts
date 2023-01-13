@@ -14,6 +14,11 @@ export const fileTypesByExtension = Object.fromEntries(
   Object.entries(fileExtensionsByType).map(([k, v]) => [v, k]),
 );
 
+export const runCommandsByFileType = {
+  [SupportedTestFileType.Bash]: 'bash',
+  [SupportedTestFileType.TypeScript]: 'npx ts-node',
+} satisfies Record<SupportedTestFileType, string>;
+
 export type ConfigurableCategorizedTestFileMetadataProperties = {
   fileType: SupportedTestFileType | null;
 };

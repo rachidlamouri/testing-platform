@@ -9,6 +9,7 @@ import { targetReferenceConfigurations } from './targetReferenceConfigurations';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
 import { TargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
 import { packageAHasKnownTestFileTypes } from '../customRules/packageAHasKnownTestFileTypes';
+import { packageBRunsAllTestFiles } from '../customRules/packageBRunsAllTestFiles';
 
 type CustomTargetReferenceConfigurations = typeof targetReferenceConfigurations;
 
@@ -42,6 +43,11 @@ export const ruleConfigurations = [
     targetTypeId: TargetTypeId.PackageB,
     targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageBHasTestingPlatformConfiguration,
+  }),
+  buildRuleConfiguration<CustomTargetReferenceConfigurations>({
+    targetTypeId: TargetTypeId.PackageB,
+    targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
+    rule: packageBRunsAllTestFiles,
   }),
   buildRuleConfiguration<CustomTargetReferenceConfigurations>({
     targetTypeId: TargetTypeId.PackageC,
