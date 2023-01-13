@@ -1,10 +1,17 @@
 import { JsonFileTarget } from '../file/jsonFile/jsonFileTarget';
 import { Utf8FileTarget } from '../file/utf8File/utf8FileTarget';
+import {
+  CategorizedTestFileMetadataTarget,
+  SupportedTestFileType,
+} from './categorizedTestFileMetadata';
 
 type ConfigurablePackageProperties = {
   packageFile: JsonFileTarget;
   runTestsScript: Utf8FileTarget;
   typeScriptConfigFile: JsonFileTarget;
+  testFileMetadataSet: CategorizedTestFileMetadataTarget<{
+    fileType: SupportedTestFileType | null;
+  }>[];
 };
 
 export type BasePackage<
@@ -14,4 +21,5 @@ export type BasePackage<
   packageFile: TPackageProperties['packageFile'];
   typeScriptConfigFile: TPackageProperties['typeScriptConfigFile'];
   runTestsScript: TPackageProperties['runTestsScript'];
+  testFileMetadataSet: TPackageProperties['testFileMetadataSet'];
 };

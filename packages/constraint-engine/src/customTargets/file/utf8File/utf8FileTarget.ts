@@ -1,6 +1,13 @@
-type BaseUtf8FileTarget<T> = {
+type ConfigurableFileProperties = {
+  isOnDisk: boolean;
+  stringContents?: string;
+};
+
+type BaseUtf8FileTarget<TFileProperties extends ConfigurableFileProperties> = {
   filePath: string;
-} & T;
+  isOnDisk: TFileProperties['isOnDisk'];
+  stringContents: TFileProperties['stringContents'];
+};
 
 export type OnDiskUtf8FileTarget = BaseUtf8FileTarget<{
   isOnDisk: true;
@@ -13,3 +20,5 @@ export type NotOnDiskUtf8FileTarget = BaseUtf8FileTarget<{
 }>;
 
 export type Utf8FileTarget = OnDiskUtf8FileTarget | NotOnDiskUtf8FileTarget;
+
+export type Utf8FileMetadataTarget = Omit<Utf8FileTarget, 'stringContents'>;
