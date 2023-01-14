@@ -1,16 +1,18 @@
 import { UnknownTargetReference } from '../../types/targetReference';
-import { UnknownDerivedTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
+import { UnknownDeprecatedDerivedTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
 import { TargetReferenceMap } from '../targetReferenceMap';
 
-export type DerivedTargetReferencesBuilderInput = {
-  targetReferenceConfiguration: UnknownDerivedTargetReferenceConfiguration;
+/** @deprecated */
+export type DeprecatedDerivedTargetReferencesBuilderInput = {
+  targetReferenceConfiguration: UnknownDeprecatedDerivedTargetReferenceConfiguration;
   targetReferenceMap: TargetReferenceMap;
 };
 
-export const buildDerivedTargetReferences = ({
+/** @deprecated */
+export const buildDerivedDerivedTargetReferences = ({
   targetReferenceConfiguration,
   targetReferenceMap,
-}: DerivedTargetReferencesBuilderInput): UnknownTargetReference[] => {
+}: DeprecatedDerivedTargetReferencesBuilderInput): UnknownTargetReference[] => {
   const inputTargetReferenceSet =
     targetReferenceMap.getTargetReferenceSetByTargetTypeIdAndTargetPath({
       targetTypeId: targetReferenceConfiguration.inputTargetTypeId,

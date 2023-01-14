@@ -1,8 +1,8 @@
-import { NormalizedDerivedReferenceSetBuilder } from '../types/builders/deprecatedDerivedReferenceSetBuilder';
+import { NormalizedDeprecatedDerivedReferenceSetBuilder } from '../types/builders/deprecatedDerivedReferenceSetBuilder';
 import { UnknownTargetPath } from '../types/targetPath';
 import {
-  DerivedTargetReferenceSetConfiguration,
-  DerivedTargetReferenceSetConfigurationWithNormalizedBuilder,
+  DeprecatedDerivedTargetReferenceSetConfiguration,
+  DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder,
 } from '../types/targetReferenceConfiguration/deprecatedDerivedTargetReferenceSetConfiguration';
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
 import { UnknownTypedTarget } from '../types/typedTarget';
@@ -19,26 +19,26 @@ export const buildDerivedTargetReferenceSetConfiguration = <
   outputTargetPath,
   buildReferenceSet,
 }: Omit<
-  DerivedTargetReferenceSetConfiguration<
+  DeprecatedDerivedTargetReferenceSetConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
     TOutputTypedTarget,
     TOutputTargetPath
   >,
   'typeId'
->): DerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
+>): DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
   TInputTypedTarget,
   TInputTargetPath,
   TOutputTypedTarget,
   TOutputTargetPath
 > => ({
   typeId:
-    TargetReferenceConfigurationTypeId.DerivedTargetReferenceSetConfiguration,
+    TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceSetConfiguration,
   inputTargetTypeId,
   inputTargetPath,
   outputTargetTypeId,
   outputTargetPath,
-  buildReferenceSet: buildReferenceSet as NormalizedDerivedReferenceSetBuilder<
+  buildReferenceSet: buildReferenceSet as NormalizedDeprecatedDerivedReferenceSetBuilder<
     TOutputTypedTarget,
     TOutputTargetPath
   >,

@@ -2,8 +2,8 @@ import { UnknownTargetReference } from '../../types/targetReference';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { TargetReferenceMap } from '../targetReferenceMap';
-import { buildDerivedTargetReferences } from './buildDeprecatedDerivedTargetReferences';
-import { buildDerivedTargetReferenceSets } from './buildDeprecatedDerivedTargetReferenceSets';
+import { buildDerivedDerivedTargetReferences } from './buildDeprecatedDerivedTargetReferences';
+import { buildDeprecatedDerivedTargetReferenceSets } from './buildDeprecatedDerivedTargetReferenceSets';
 
 export type TargetReferencesBuilderInput = {
   targetReferenceConfiguration: UnknownTargetReferenceConfiguration;
@@ -17,14 +17,14 @@ export const buildTargetReferencesForConfiguration = ({
   switch (targetReferenceConfiguration.typeId) {
     case TargetReferenceConfigurationTypeId.StaticTargetReferenceConfiguration:
       return [targetReferenceConfiguration.outputTargetReference];
-    case TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration: {
-      return buildDerivedTargetReferences({
+    case TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceConfiguration: {
+      return buildDerivedDerivedTargetReferences({
         targetReferenceConfiguration,
         targetReferenceMap,
       });
     }
-    case TargetReferenceConfigurationTypeId.DerivedTargetReferenceSetConfiguration: {
-      return buildDerivedTargetReferenceSets({
+    case TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceSetConfiguration: {
+      return buildDeprecatedDerivedTargetReferenceSets({
         targetReferenceConfiguration,
         targetReferenceMap,
       });

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { DerivedReferenceBuilder } from '../../../types/builders/deprecatedDerivedReferenceBuilder';
+import { DeprecatedDerivedReferenceBuilder } from '../../../types/builders/deprecatedDerivedReferenceBuilder';
 import { TargetReference } from '../../../types/targetReference';
 import { TargetTypeId } from '../targetTypeIds';
 import { PackageDirectorySetConfigurationTypedTarget } from './packageDirectorySetConfigurationTarget';
@@ -19,7 +19,7 @@ export type PackageDirectorySetTargetReference = TargetReference<
   PackageDirectorySetTargetPath
 >;
 
-export const buildPackageDirectorySetReference: DerivedReferenceBuilder<
+export const buildPackageDirectorySetReference: DeprecatedDerivedReferenceBuilder<
   PackageDirectorySetConfigurationTypedTarget,
   PackageDirectorySetTargetPath,
   [PackageDirectorySetTypedTarget],

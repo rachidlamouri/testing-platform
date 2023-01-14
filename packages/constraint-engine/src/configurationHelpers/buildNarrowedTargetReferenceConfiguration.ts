@@ -1,18 +1,18 @@
 import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildNarrowedReferenceBuilder';
-import { NormalizedDerivedReferenceBuilder } from '../types/builders/deprecatedDerivedReferenceBuilder';
+import { NormalizedDeprecatedDerivedReferenceBuilder } from '../types/builders/deprecatedDerivedReferenceBuilder';
 import { EvaluateGuardRuleTuple } from '../types/builders/narrowedReferenceBuilder';
 import { InferableGuardRule } from '../types/rule';
 import { UnknownTargetPath } from '../types/targetPath';
 import {
-  DerivedTargetReferenceConfiguration,
-  DerivedTargetReferenceConfigurationWithNormalizedBuilder,
+  DeprecatedDerivedTargetReferenceConfiguration,
+  DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder,
 } from '../types/targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
 import {
   TypedTarget,
   UnknownTargetTypeId,
   UnknownTypedTarget,
 } from '../types/typedTarget';
-import { buildDerivedTargetReferenceConfiguration } from './buildDeprecatedDerivedTargetReferenceConfiguration';
+import { buildDeprecatedDerivedTargetReferenceConfiguration } from './buildDeprecatedDerivedTargetReferenceConfiguration';
 
 export type NarrowedTargetReferenceConfigurationBuilderInput<
   TInputTypedTarget extends UnknownTypedTarget,
@@ -23,7 +23,7 @@ export type NarrowedTargetReferenceConfigurationBuilderInput<
   TOutputTargetTypeId extends UnknownTargetTypeId,
   TOutputTargetInstance extends TInputTypedTarget['instance'],
 > = Pick<
-  DerivedTargetReferenceConfiguration<
+  DeprecatedDerivedTargetReferenceConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
     [TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>],
@@ -61,7 +61,7 @@ export const buildNarrowedTargetReferenceConfiguration = <
   TGuardRuleTuple,
   TOutputTargetTypeId,
   TOutputTargetInstance
->): DerivedTargetReferenceConfigurationWithNormalizedBuilder<
+>): DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder<
   TInputTypedTarget,
   TInputTargetPath,
   [
@@ -75,7 +75,7 @@ export const buildNarrowedTargetReferenceConfiguration = <
   ],
   [TInputTargetPath]
 > =>
-  buildDerivedTargetReferenceConfiguration<
+  buildDeprecatedDerivedTargetReferenceConfiguration<
     TInputTypedTarget,
     TInputTargetPath,
     [
@@ -99,7 +99,7 @@ export const buildNarrowedTargetReferenceConfiguration = <
       TGuardRuleTuple,
       TOutputTargetTypeId,
       TOutputTargetInstance
-    >(conditions, outputTargetTypeId) as NormalizedDerivedReferenceBuilder<
+    >(conditions, outputTargetTypeId) as NormalizedDeprecatedDerivedReferenceBuilder<
       [
         EvaluateGuardRuleTuple<
           TInputTypedTarget,

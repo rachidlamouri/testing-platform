@@ -2,7 +2,8 @@ import { UnknownTargetPath } from '../targetPath';
 import { TargetReference } from '../targetReference';
 import { UnknownTypedTarget } from '../typedTarget';
 
-export type DerivedReferenceSetBuilder<
+/** @deprecated */
+export type DeprecatedDerivedReferenceSetBuilder<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTarget extends UnknownTypedTarget,
@@ -11,10 +12,11 @@ export type DerivedReferenceSetBuilder<
   inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
 ) => TargetReference<TOutputTypedTarget, TOutputTargetPath>[];
 
-export type NormalizedDerivedReferenceSetBuilder<
+/** @deprecated */
+export type NormalizedDeprecatedDerivedReferenceSetBuilder<
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
-> = DerivedReferenceSetBuilder<
+> = DeprecatedDerivedReferenceSetBuilder<
   UnknownTypedTarget,
   UnknownTargetPath,
   TOutputTypedTarget,

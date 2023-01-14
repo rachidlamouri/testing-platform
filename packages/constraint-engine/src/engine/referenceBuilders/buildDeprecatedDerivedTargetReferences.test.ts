@@ -6,7 +6,7 @@ import {
 import { UnknownTargetReference } from '../../types/targetReference';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { TargetReferenceMap } from '../targetReferenceMap';
-import { buildDerivedTargetReferences } from './buildDeprecatedDerivedTargetReferences';
+import { buildDerivedDerivedTargetReferences } from './buildDeprecatedDerivedTargetReferences';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
@@ -14,7 +14,7 @@ orchestrate()
     report('• buildDerivedTargetReferences');
   })
   .then(() => {
-    report('  ⇀ Testing a derived target reference configuration');
+    report('  ⇀ Testing a deprecated derived target reference configuration');
 
     const targtReferenceMap = new TargetReferenceMap();
 
@@ -29,10 +29,10 @@ orchestrate()
       instance: 'foo 1',
     });
 
-    const result = buildDerivedTargetReferences({
+    const result = buildDerivedDerivedTargetReferences({
       targetReferenceConfiguration: {
         typeId:
-          TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration,
+          TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceConfiguration,
         buildReference: (inputReference: UnknownTargetReference) => [
           {
             typeId: 'Bar',

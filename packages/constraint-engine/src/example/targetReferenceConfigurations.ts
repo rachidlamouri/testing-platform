@@ -1,4 +1,4 @@
-import { buildDerivedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceConfiguration';
+import { buildDeprecatedDerivedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceConfiguration';
 import { buildDerivedTargetReferenceSetConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceSetConfiguration';
 import {
   buildTestingPlatformPackageDirectoryReferenceSet,
@@ -123,7 +123,7 @@ export const targetReferenceConfigurations = [
       path: '.github/workflows/continuous-integration.yml',
     },
   }),
-  buildDerivedTargetReferenceConfiguration<
+  buildDeprecatedDerivedTargetReferenceConfiguration<
     CiYamlFileContentsConfigurationTypedTarget,
     CiYamlFileTargetPath,
     [ExpectedCiYamlFileContentsTypedTarget],
@@ -138,7 +138,7 @@ export const targetReferenceConfigurations = [
     ],
     outputTargetPaths: ['.github/workflows/continuous-integration.yml'],
   }),
-  buildDerivedTargetReferenceConfiguration<
+  buildDeprecatedDerivedTargetReferenceConfiguration<
     PackageDirectorySetConfigurationTypedTarget,
     PackageDirectorySetTargetPath,
     [PackageDirectorySetTypedTarget],
@@ -163,7 +163,7 @@ export const targetReferenceConfigurations = [
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
     outputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
   }),
-  buildDerivedTargetReferenceConfiguration<
+  buildDeprecatedDerivedTargetReferenceConfiguration<
     PackageDirectoryTypedTarget,
     TestingPlatformPackageDirectoryTargetPath<PackageDirectorySetTargetPath>,
     [PackageATypedTarget],

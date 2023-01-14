@@ -4,7 +4,7 @@ import {
   UnknownTargetPath,
 } from '../../../types/targetPath';
 import { TargetReference } from '../../../types/targetReference';
-import { DerivedReferenceSetBuilder } from '../../../types/builders/deprecatedDerivedReferenceSetBuilder';
+import { DeprecatedDerivedReferenceSetBuilder } from '../../../types/builders/deprecatedDerivedReferenceSetBuilder';
 import { PackageDirectorySetTypedTarget } from '../packageDirectorySet/packageDirectorySetTarget';
 import { TargetTypeId } from '../targetTypeIds';
 import {
@@ -54,7 +54,7 @@ export const buildTestingPlatformPackageDirectoryReferenceSet = (<
     );
 
   return targetReferences;
-}) satisfies DerivedReferenceSetBuilder<
+}) satisfies DeprecatedDerivedReferenceSetBuilder<
   PackageDirectorySetTypedTarget,
   PackageDirectorySetTargetPath,
   PackageDirectoryTypedTarget,

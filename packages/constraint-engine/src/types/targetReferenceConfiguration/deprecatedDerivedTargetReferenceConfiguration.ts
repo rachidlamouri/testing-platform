@@ -1,10 +1,11 @@
-import { DerivedReferenceBuilder } from '../builders/deprecatedDerivedReferenceBuilder';
+import { DeprecatedDerivedReferenceBuilder } from '../builders/deprecatedDerivedReferenceBuilder';
 import { Rule } from '../rule';
 import { UnknownTargetPath, UnknownTargetPathTuple } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
 import { TargetReferenceConfigurationTypeId } from './typeId';
 
-type BaseDerivedTargetReferenceConfiguration<
+/** @deprecated */
+type BaseDeprecatedDerivedTargetReferenceConfiguration<
   TActualInputTypedTarget extends UnknownTypedTarget,
   TActualInputTargetPath extends UnknownTargetPath,
   TExpectedInputTypedTarget extends UnknownTypedTarget,
@@ -12,8 +13,8 @@ type BaseDerivedTargetReferenceConfiguration<
   TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
   TOutputTargetPathTuple extends UnknownTargetPathTuple,
 > = {
-  typeId: TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration;
-  buildReference: DerivedReferenceBuilder<
+  typeId: TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceConfiguration;
+  buildReference: DeprecatedDerivedReferenceBuilder<
     TActualInputTypedTarget,
     TActualInputTargetPath,
     TOutputTypedTargetOptionsTuple,
@@ -28,12 +29,13 @@ type BaseDerivedTargetReferenceConfiguration<
   conditions: Rule<TActualInputTypedTarget['instance']>[];
 };
 
-export type DerivedTargetReferenceConfiguration<
+/** @deprecated */
+export type DeprecatedDerivedTargetReferenceConfiguration<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
   TOutputTargetPathTuple extends UnknownTargetPathTuple,
-> = BaseDerivedTargetReferenceConfiguration<
+> = BaseDeprecatedDerivedTargetReferenceConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
   TInputTypedTarget,
@@ -42,12 +44,13 @@ export type DerivedTargetReferenceConfiguration<
   TOutputTargetPathTuple
 >;
 
-export type DerivedTargetReferenceConfigurationWithNormalizedBuilder<
+/** @deprecated */
+export type DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
   TOutputTargetPathTuple extends UnknownTargetPathTuple,
-> = BaseDerivedTargetReferenceConfiguration<
+> = BaseDeprecatedDerivedTargetReferenceConfiguration<
   UnknownTypedTarget,
   UnknownTargetPath,
   TInputTypedTarget,
@@ -56,8 +59,9 @@ export type DerivedTargetReferenceConfigurationWithNormalizedBuilder<
   TOutputTargetPathTuple
 >;
 
-export type UnknownDerivedTargetReferenceConfiguration =
-  BaseDerivedTargetReferenceConfiguration<
+/** @deprecated */
+export type UnknownDeprecatedDerivedTargetReferenceConfiguration =
+  BaseDeprecatedDerivedTargetReferenceConfiguration<
     UnknownTypedTarget,
     UnknownTargetPath,
     UnknownTypedTarget,

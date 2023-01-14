@@ -1,9 +1,10 @@
-import { DerivedReferenceSetBuilder } from '../builders/deprecatedDerivedReferenceSetBuilder';
+import { DeprecatedDerivedReferenceSetBuilder } from '../builders/deprecatedDerivedReferenceSetBuilder';
 import { UnknownTargetPath } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
 import { TargetReferenceConfigurationTypeId } from './typeId';
 
-type BaseDerivedTargetReferenceSetConfiguration<
+/** @deprecated */
+type BaseDeprecatedDerivedTargetReferenceSetConfiguration<
   TActualInputTypedTarget extends UnknownTypedTarget,
   TActualInputTargetPath extends UnknownTargetPath,
   TExpectedInputTypedTarget extends UnknownTypedTarget,
@@ -11,8 +12,8 @@ type BaseDerivedTargetReferenceSetConfiguration<
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
 > = {
-  typeId: TargetReferenceConfigurationTypeId.DerivedTargetReferenceSetConfiguration;
-  buildReferenceSet: DerivedReferenceSetBuilder<
+  typeId: TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceSetConfiguration;
+  buildReferenceSet: DeprecatedDerivedReferenceSetBuilder<
     TActualInputTypedTarget,
     TActualInputTargetPath,
     TOutputTypedTarget,
@@ -24,12 +25,13 @@ type BaseDerivedTargetReferenceSetConfiguration<
   outputTargetPath: TOutputTargetPath;
 };
 
-export type DerivedTargetReferenceSetConfiguration<
+/** @deprecated */
+export type DeprecatedDerivedTargetReferenceSetConfiguration<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
-> = BaseDerivedTargetReferenceSetConfiguration<
+> = BaseDeprecatedDerivedTargetReferenceSetConfiguration<
   TInputTypedTarget,
   TInputTargetPath,
   TInputTypedTarget,
@@ -38,12 +40,13 @@ export type DerivedTargetReferenceSetConfiguration<
   TOutputTargetPath
 >;
 
-export type DerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
+/** @deprecated */
+export type DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
-> = BaseDerivedTargetReferenceSetConfiguration<
+> = BaseDeprecatedDerivedTargetReferenceSetConfiguration<
   UnknownTypedTarget,
   UnknownTargetPath,
   TInputTypedTarget,
@@ -52,8 +55,9 @@ export type DerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
   TOutputTargetPath
 >;
 
-export type UnknownDerivedTargetReferenceSetConfiguration =
-  BaseDerivedTargetReferenceSetConfiguration<
+/** @deprecated */
+export type UnknownDeprecatedDerivedTargetReferenceSetConfiguration =
+  BaseDeprecatedDerivedTargetReferenceSetConfiguration<
     UnknownTypedTarget,
     UnknownTargetPath,
     UnknownTypedTarget,

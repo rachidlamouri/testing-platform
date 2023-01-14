@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { posix } from 'path';
-import { DerivedReferenceBuilder } from '../../../types/builders/deprecatedDerivedReferenceBuilder';
+import { DeprecatedDerivedReferenceBuilder } from '../../../types/builders/deprecatedDerivedReferenceBuilder';
 import { TargetTypeId } from '../targetTypeIds';
 import {
   CiYamlFileContentsConfigurationTypedTarget,
@@ -12,7 +12,7 @@ import {
   ExpectedCiYamlFileContentsTypedTarget,
 } from './expectedCiYamlFileContentsTarget';
 
-export const buildExpectedCiYamlFileContentsReference: DerivedReferenceBuilder<
+export const buildExpectedCiYamlFileContentsReference: DeprecatedDerivedReferenceBuilder<
   CiYamlFileContentsConfigurationTypedTarget,
   CiYamlFileTargetPath,
   [ExpectedCiYamlFileContentsTypedTarget],
