@@ -1,3 +1,6 @@
+import { TypedTarget } from '../../../types/typedTarget';
+import { TargetTypeId } from '../targetTypeIds';
+
 type BaseJsonFileTarget<T> = {
   filePath: string;
 } & T;
@@ -27,3 +30,8 @@ export type JsonFileTarget =
   | ParseableOnDiskJsonFileTarget
   | UnparseableOnDiskJsonFileTarget
   | NotOnDiskJsonFileTarget;
+
+export type JsonFileTypedTarget = TypedTarget<
+  TargetTypeId.JsonFile,
+  JsonFileTarget
+>;
