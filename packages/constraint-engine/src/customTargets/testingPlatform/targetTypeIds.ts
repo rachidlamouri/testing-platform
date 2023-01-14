@@ -1,4 +1,6 @@
 export enum TargetTypeId {
+  CiYamlFileContentsConfiguration = 'CiYamlFileContentsConfiguration',
+  CiYamlFile = 'CiYamlFile',
   PackageDirectorySetConfiguration = 'PackageDirectorySetConfiguration',
   PackageDirectorySet = 'PackageDirectorySet',
   PackageDirectory = 'PackageDirectory',

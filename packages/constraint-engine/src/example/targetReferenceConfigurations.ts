@@ -34,6 +34,11 @@ import { RootTargetPath } from '../types/targetPath';
 import { JsonFileTypedTarget } from '../customTargets/file/jsonFile/jsonFileTarget';
 import { buildJsonFileInstanceFromYaml } from '../customTargets/file/jsonFile/buildBuildJsonFileInstance';
 import { TargetTypeId as FileTargetTypeId } from '../customTargets/file/targetTypeIds';
+import {
+  CiYamlFileContentsConfigurationTypedTarget,
+  CiYamlFileTargetPath,
+  CI_YAML_FILE_TARGET_PATH,
+} from '../customTargets/testingPlatform/ciYamlFile/ciYamlFileContentsConfigurationTarget';
 import { packageAHasKnownTestFileTypes } from '../customRules/packageAHasKnownTestFileTypes';
 
 export const targetReferenceConfigurations = [
@@ -51,14 +56,67 @@ export const targetReferenceConfigurations = [
   }),
   buildStaticTargetReferenceConfiguration<
     RootTargetPath,
+    CiYamlFileContentsConfigurationTypedTarget,
+    CiYamlFileTargetPath
+  >({
+    inputTargetPath: '',
+    outputTargetReference: {
+      typeId: TestingPlatformTargetTypeId.CiYamlFileContentsConfiguration,
+      instance: {
+        name: 'Continuous Integration',
+        on: ['push'],
+        jobs: {
+          'Continuous-Integration': {
+            'runs-on': 'ubuntu-latest',
+            steps: {
+              beforePackageRunSteps: [
+                {
+                  name: 'Check Out Code',
+                  uses: 'actions/checkout@v3',
+                },
+                {
+                  name: 'Install Node',
+                  uses: 'actions/setup-node@v3',
+                  with: {
+                    'node-version-file': '.nvmrc',
+                  },
+                },
+                {
+                  name: 'Install Dependencies',
+                  run: 'npm clean-install',
+                },
+                {
+                  name: 'Lint Markdown',
+                  run: 'npm run lint:md',
+                },
+                {
+                  name: 'Lint TypeScript',
+                  run: 'npm run lint:ts:all',
+                },
+              ],
+              afterPackageRunSteps: [
+                {
+                  name: 'Lint Constraints',
+                  run: 'npm run lint:constraints',
+                },
+              ],
+            },
+          },
+        },
+      },
+      path: '.github/workflows/continuous-integration.yml',
+    },
+  }),
+  buildStaticTargetReferenceConfiguration<
+    RootTargetPath,
     JsonFileTypedTarget,
-    '.github/workflows/continuous-integration.yml'
+    CiYamlFileTargetPath
   >({
     inputTargetPath: '',
     outputTargetReference: {
       typeId: FileTargetTypeId.JsonFile,
       instance: buildJsonFileInstanceFromYaml({
-        filePath: '.github/workflows/continuous-integration.yml',
+        filePath: CI_YAML_FILE_TARGET_PATH,
       }),
       path: '.github/workflows/continuous-integration.yml',
     },
