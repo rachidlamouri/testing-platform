@@ -21,7 +21,7 @@ import { buildNarrowedTargetReferenceConfiguration } from '../configurationHelpe
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
 import { PackageDirectorySetTypedTarget } from '../customTargets/testingPlatform/packageDirectorySet/packageDirectorySetTarget';
 import { PackageDirectoryTypedTarget } from '../customTargets/testingPlatform/packageDirectory/packageDirectoryTarget';
-import { TargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
+import { TargetTypeId as TestingPlatformTargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
 import { PackageATypedTarget } from '../customTargets/testingPlatform/packageA/packageATarget';
 import {
   PackageBTarget,
@@ -31,6 +31,9 @@ import { PackageCTarget } from '../customTargets/testingPlatform/packageC/packag
 import { buildStaticTargetReferenceConfiguration } from '../configurationHelpers/buildStaticTargetReferenceConfiguration';
 import { PackageDirectorySetConfigurationTypedTarget } from '../customTargets/testingPlatform/packageDirectorySet/packageDirectorySetConfigurationTarget';
 import { RootTargetPath } from '../types/targetPath';
+import { JsonFileTypedTarget } from '../customTargets/file/jsonFile/jsonFileTarget';
+import { buildJsonFileInstanceFromYaml } from '../customTargets/file/jsonFile/buildBuildJsonFileInstance';
+import { TargetTypeId as FileTargetTypeId } from '../customTargets/file/targetTypeIds';
 import { packageAHasKnownTestFileTypes } from '../customRules/packageAHasKnownTestFileTypes';
 
 export const targetReferenceConfigurations = [
@@ -41,9 +44,23 @@ export const targetReferenceConfigurations = [
   >({
     inputTargetPath: '',
     outputTargetReference: {
-      typeId: TargetTypeId.PackageDirectorySetConfiguration,
+      typeId: TestingPlatformTargetTypeId.PackageDirectorySetConfiguration,
       instance: { rootDirectoryRelativeToCurrentWorkingDirectory: 'packages' },
       path: 'testingPlatformPackageDirectorySet',
+    },
+  }),
+  buildStaticTargetReferenceConfiguration<
+    RootTargetPath,
+    JsonFileTypedTarget,
+    '.github/workflows/continuous-integration.yml'
+  >({
+    inputTargetPath: '',
+    outputTargetReference: {
+      typeId: FileTargetTypeId.JsonFile,
+      instance: buildJsonFileInstanceFromYaml({
+        filePath: '.github/workflows/continuous-integration.yml',
+      }),
+      path: '.github/workflows/continuous-integration.yml',
     },
   }),
   buildDerivedTargetReferenceConfiguration<
@@ -53,9 +70,10 @@ export const targetReferenceConfigurations = [
     [PackageDirectorySetTargetPath]
   >({
     buildReference: buildPackageDirectorySetReference,
-    inputTargetTypeId: TargetTypeId.PackageDirectorySetConfiguration,
+    inputTargetTypeId:
+      TestingPlatformTargetTypeId.PackageDirectorySetConfiguration,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
-    outputTargetTypeId: [TargetTypeId.PackageDirectorySet],
+    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageDirectorySet],
     outputTargetPaths: ['testingPlatformPackageDirectorySet'],
   }),
   buildDerivedTargetReferenceSetConfiguration<
@@ -65,9 +83,9 @@ export const targetReferenceConfigurations = [
     TestingPlatformPackageDirectoryTargetPath<PackageDirectorySetTargetPath>
   >({
     buildReferenceSet: buildTestingPlatformPackageDirectoryReferenceSet,
-    inputTargetTypeId: TargetTypeId.PackageDirectorySet,
+    inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
-    outputTargetTypeId: TargetTypeId.PackageDirectory,
+    outputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
     outputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
   }),
   buildDerivedTargetReferenceConfiguration<
@@ -77,9 +95,9 @@ export const targetReferenceConfigurations = [
     TestingPlatformPackageTargetPathTuple<PackageDirectorySetTargetPath>
   >({
     buildReference: buildPackageAReference,
-    inputTargetTypeId: TargetTypeId.PackageDirectory,
+    inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
-    outputTargetTypeId: [TargetTypeId.PackageA],
+    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageA],
     outputTargetPaths: ['testingPlatformPackageDirectorySet/:directoryName'],
   }),
   buildNarrowedTargetReferenceConfiguration<
@@ -91,10 +109,10 @@ export const targetReferenceConfigurations = [
       typeof packageAHasRunTestsScript,
       typeof packageAHasKnownTestFileTypes,
     ],
-    TargetTypeId.PackageB,
+    TestingPlatformTargetTypeId.PackageB,
     PackageBTarget
   >({
-    inputTargetTypeId: TargetTypeId.PackageA,
+    inputTargetTypeId: TestingPlatformTargetTypeId.PackageA,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     conditions: [
       packageAHasPackageFile,
@@ -102,18 +120,18 @@ export const targetReferenceConfigurations = [
       packageAHasRunTestsScript,
       packageAHasKnownTestFileTypes,
     ],
-    outputTargetTypeId: TargetTypeId.PackageB,
+    outputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
   }),
   buildNarrowedTargetReferenceConfiguration<
     PackageBTypedTarget,
     TestingPlatformPackageTargetPath<PackageDirectorySetTargetPath>,
     [typeof packageBHasTestingPlatformConfiguration],
-    TargetTypeId.PackageC,
+    TestingPlatformTargetTypeId.PackageC,
     PackageCTarget
   >({
-    inputTargetTypeId: TargetTypeId.PackageB,
+    inputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     conditions: [packageBHasTestingPlatformConfiguration],
-    outputTargetTypeId: TargetTypeId.PackageC,
+    outputTargetTypeId: TestingPlatformTargetTypeId.PackageC,
   }),
 ] as const satisfies readonly UnknownTargetReferenceConfiguration[];
