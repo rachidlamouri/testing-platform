@@ -1,4 +1,5 @@
 export enum TargetTypeId {
+  ExpectedCiYamlFileContentsTarget = 'ExpectedCiYamlFileContentsTarget',
   CiYamlFileContentsConfiguration = 'CiYamlFileContentsConfiguration',
   CiYamlFile = 'CiYamlFile',
   PackageDirectorySetConfiguration = 'PackageDirectorySetConfiguration',

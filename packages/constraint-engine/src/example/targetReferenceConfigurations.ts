@@ -39,6 +39,8 @@ import {
   CiYamlFileTargetPath,
   CI_YAML_FILE_TARGET_PATH,
 } from '../customTargets/testingPlatform/ciYamlFile/ciYamlFileContentsConfigurationTarget';
+import { ExpectedCiYamlFileContentsTypedTarget } from '../customTargets/testingPlatform/ciYamlFile/expectedCiYamlFileContentsTarget';
+import { buildExpectedCiYamlFileContentsReference } from '../customTargets/testingPlatform/ciYamlFile/buildExpectedCiYamlFileContentsReference';
 import { packageAHasKnownTestFileTypes } from '../customRules/packageAHasKnownTestFileTypes';
 
 export const targetReferenceConfigurations = [
@@ -120,6 +122,21 @@ export const targetReferenceConfigurations = [
       }),
       path: '.github/workflows/continuous-integration.yml',
     },
+  }),
+  buildDerivedTargetReferenceConfiguration<
+    CiYamlFileContentsConfigurationTypedTarget,
+    CiYamlFileTargetPath,
+    [ExpectedCiYamlFileContentsTypedTarget],
+    [CiYamlFileTargetPath]
+  >({
+    buildReference: buildExpectedCiYamlFileContentsReference,
+    inputTargetTypeId:
+      TestingPlatformTargetTypeId.CiYamlFileContentsConfiguration,
+    inputTargetPath: '.github/workflows/continuous-integration.yml',
+    outputTargetTypeId: [
+      TestingPlatformTargetTypeId.ExpectedCiYamlFileContentsTarget,
+    ],
+    outputTargetPaths: ['.github/workflows/continuous-integration.yml'],
   }),
   buildDerivedTargetReferenceConfiguration<
     PackageDirectorySetConfigurationTypedTarget,

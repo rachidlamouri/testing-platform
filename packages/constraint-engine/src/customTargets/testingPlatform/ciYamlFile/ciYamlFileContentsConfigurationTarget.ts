@@ -13,19 +13,21 @@ export type CiYamlFileContentsRunStep = {
   run: string;
 };
 
-export type CiYamlFileContentsConfigurationTarget = {
+export type CiYamlFileContents<TSteps> = {
   name: 'Continuous Integration';
   on: ['push'];
   jobs: {
     'Continuous-Integration': {
       'runs-on': 'ubuntu-latest';
-      steps: {
-        beforePackageRunSteps: CiYamlFileContentsStep[];
-        afterPackageRunSteps: CiYamlFileContentsStep[];
-      };
+      steps: TSteps;
     };
   };
 };
+
+export type CiYamlFileContentsConfigurationTarget = CiYamlFileContents<{
+  beforePackageRunSteps: CiYamlFileContentsStep[];
+  afterPackageRunSteps: CiYamlFileContentsStep[];
+}>;
 
 export type CiYamlFileContentsConfigurationTypedTarget = TypedTarget<
   TargetTypeId.CiYamlFileContentsConfiguration,
