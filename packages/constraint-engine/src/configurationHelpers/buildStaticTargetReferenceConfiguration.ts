@@ -7,17 +7,17 @@ import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConf
 import { UnknownTypedTarget } from '../types/typedTarget';
 
 export const buildStaticTargetReferenceConfiguration = <
-  TInputTargetReference extends UnknownTargetPath,
+  TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTarget extends UnknownTypedTarget,
-  TOutputTargetReference extends UnknownTargetPath,
+  TOutputTargetPath extends UnknownTargetPath,
 >({
   inputTargetPath,
   outputTargetReference,
 }: Omit<
   StaticTargetReferenceConfiguration<
-    TInputTargetReference,
+    TInputTargetPath,
     TOutputTypedTarget,
-    TOutputTargetReference
+    TOutputTargetPath
   >,
   'typeId'
 >): UnknownStaticTargetReferenceConfiguration => ({
