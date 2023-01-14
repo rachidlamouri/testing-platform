@@ -5,7 +5,7 @@ import {
 } from 'rat-test/type-script/transgressing';
 import { fileSystemUtil } from 'mouse-test/type-script/shell';
 import { USE_CWD } from 'mouse-test/type-script/shell/fileSystemUtils/createDirectory';
-import { buildJsonFileInstance } from './buildJsonFileInstance';
+import { buildJsonFileInstance } from './buildBuildJsonFileInstance';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()

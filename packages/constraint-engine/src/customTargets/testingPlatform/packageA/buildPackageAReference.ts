@@ -2,7 +2,7 @@ import { posix } from 'path';
 import { DerivedReferenceBuilder } from '../../../types/builders/derivedReferenceBuilder';
 import { UnknownTargetPath } from '../../../types/targetPath';
 import { TargetReferenceTuple } from '../../../types/targetReference';
-import { buildJsonFileInstance } from '../../file/jsonFile/buildJsonFileInstance';
+import { buildJsonFileInstance } from '../../file/jsonFile/buildBuildJsonFileInstance';
 import { buildUtf8FileInstance } from '../../file/utf8File/buildUtf8FileInstance';
 import {
   TestingPlatformPackageDirectoryTargetPath,
