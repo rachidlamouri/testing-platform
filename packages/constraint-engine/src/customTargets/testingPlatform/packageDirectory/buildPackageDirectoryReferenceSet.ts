@@ -4,7 +4,7 @@ import {
   UnknownTargetPath,
 } from '../../../types/targetPath';
 import { TargetReference } from '../../../types/targetReference';
-import { DerivedReferenceSetBuilder } from '../../../types/builders/derivedReferenceSetBuilder';
+import { DerivedReferenceSetBuilder } from '../../../types/builders/deprecatedDerivedReferenceSetBuilder';
 import { PackageDirectorySetTypedTarget } from '../packageDirectorySet/packageDirectorySetTarget';
 import { TargetTypeId } from '../targetTypeIds';
 import {

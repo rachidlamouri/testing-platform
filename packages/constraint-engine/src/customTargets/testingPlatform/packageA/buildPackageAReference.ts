@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { DerivedReferenceBuilder } from '../../../types/builders/derivedReferenceBuilder';
+import { DerivedReferenceBuilder } from '../../../types/builders/deprecatedDerivedReferenceBuilder';
 import { UnknownTargetPath } from '../../../types/targetPath';
 import { TargetReferenceTuple } from '../../../types/targetReference';
 import { buildJsonFileInstance } from '../../file/jsonFile/buildBuildJsonFileInstance';

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { DerivedReferenceBuilder } from '../../../types/builders/derivedReferenceBuilder';
+import { DerivedReferenceBuilder } from '../../../types/builders/deprecatedDerivedReferenceBuilder';
 import { TargetReference } from '../../../types/targetReference';
 import { TargetTypeId } from '../targetTypeIds';
 import { PackageDirectorySetConfigurationTypedTarget } from './packageDirectorySetConfigurationTarget';

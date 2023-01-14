@@ -5,7 +5,7 @@ import {
 } from 'rat-test/type-script/transgressing';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { TargetReferenceMap } from '../targetReferenceMap';
-import { buildDerivedTargetReferenceSets } from './buildDerivedTargetReferenceSets';
+import { buildDerivedTargetReferenceSets } from './buildDeprecatedDerivedTargetReferenceSets';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()

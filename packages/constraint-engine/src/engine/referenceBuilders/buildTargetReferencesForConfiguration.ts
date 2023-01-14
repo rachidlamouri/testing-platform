@@ -2,8 +2,8 @@ import { UnknownTargetReference } from '../../types/targetReference';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { TargetReferenceMap } from '../targetReferenceMap';
-import { buildDerivedTargetReferences } from './buildDerivedTargetReferences';
-import { buildDerivedTargetReferenceSets } from './buildDerivedTargetReferenceSets';
+import { buildDerivedTargetReferences } from './buildDeprecatedDerivedTargetReferences';
+import { buildDerivedTargetReferenceSets } from './buildDeprecatedDerivedTargetReferenceSets';
 
 export type TargetReferencesBuilderInput = {
   targetReferenceConfiguration: UnknownTargetReferenceConfiguration;

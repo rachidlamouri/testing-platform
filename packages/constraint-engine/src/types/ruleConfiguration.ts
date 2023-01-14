@@ -1,8 +1,8 @@
 import { CustomSet } from '../utils/customSet';
 import { Rule } from './rule';
 import { UnknownTargetPath } from './targetPath';
-import { DerivedTargetReferenceConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
-import { DerivedTargetReferenceSetConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
+import { DerivedTargetReferenceConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
+import { DerivedTargetReferenceSetConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceSetConfiguration';
 import { UnknownTargetReferenceConfiguration } from './targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { UnknownTypedTarget } from './typedTarget';
 

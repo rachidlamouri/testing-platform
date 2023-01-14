@@ -1,9 +1,9 @@
-import { NormalizedDerivedReferenceSetBuilder } from '../types/builders/derivedReferenceSetBuilder';
+import { NormalizedDerivedReferenceSetBuilder } from '../types/builders/deprecatedDerivedReferenceSetBuilder';
 import { UnknownTargetPath } from '../types/targetPath';
 import {
   DerivedTargetReferenceSetConfiguration,
   DerivedTargetReferenceSetConfigurationWithNormalizedBuilder,
-} from '../types/targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
+} from '../types/targetReferenceConfiguration/deprecatedDerivedTargetReferenceSetConfiguration';
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
 import { UnknownTypedTarget } from '../types/typedTarget';
 

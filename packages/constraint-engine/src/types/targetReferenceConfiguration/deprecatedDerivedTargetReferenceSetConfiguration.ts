@@ -1,4 +1,4 @@
-import { DerivedReferenceSetBuilder } from '../builders/derivedReferenceSetBuilder';
+import { DerivedReferenceSetBuilder } from '../builders/deprecatedDerivedReferenceSetBuilder';
 import { UnknownTargetPath } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
 import { TargetReferenceConfigurationTypeId } from './typeId';

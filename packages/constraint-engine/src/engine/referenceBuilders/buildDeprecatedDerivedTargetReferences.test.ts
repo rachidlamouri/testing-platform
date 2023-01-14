@@ -6,7 +6,7 @@ import {
 import { UnknownTargetReference } from '../../types/targetReference';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { TargetReferenceMap } from '../targetReferenceMap';
-import { buildDerivedTargetReferences } from './buildDerivedTargetReferences';
+import { buildDerivedTargetReferences } from './buildDeprecatedDerivedTargetReferences';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()

@@ -1,18 +1,18 @@
 import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildNarrowedReferenceBuilder';
-import { NormalizedDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
+import { NormalizedDerivedReferenceBuilder } from '../types/builders/deprecatedDerivedReferenceBuilder';
 import { EvaluateGuardRuleTuple } from '../types/builders/narrowedReferenceBuilder';
 import { InferableGuardRule } from '../types/rule';
 import { UnknownTargetPath } from '../types/targetPath';
 import {
   DerivedTargetReferenceConfiguration,
   DerivedTargetReferenceConfigurationWithNormalizedBuilder,
-} from '../types/targetReferenceConfiguration/derivedTargetReferenceConfiguration';
+} from '../types/targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
 import {
   TypedTarget,
   UnknownTargetTypeId,
   UnknownTypedTarget,
 } from '../types/typedTarget';
-import { buildDerivedTargetReferenceConfiguration } from './buildDerivedTargetReferenceConfiguration';
+import { buildDerivedTargetReferenceConfiguration } from './buildDeprecatedDerivedTargetReferenceConfiguration';
 
 export type NarrowedTargetReferenceConfigurationBuilderInput<
   TInputTypedTarget extends UnknownTypedTarget,

@@ -1,5 +1,5 @@
-import { UnknownDerivedTargetReferenceConfiguration } from './derivedTargetReferenceConfiguration';
-import { UnknownDerivedTargetReferenceSetConfiguration } from './derivedTargetReferenceSetConfiguration';
+import { UnknownDerivedTargetReferenceConfiguration } from './deprecatedDerivedTargetReferenceConfiguration';
+import { UnknownDerivedTargetReferenceSetConfiguration } from './deprecatedDerivedTargetReferenceSetConfiguration';
 import { UnknownStaticTargetReferenceConfiguration } from './staticTargetReferenceConfiguration';
 
 export type UnknownTargetReferenceConfiguration =

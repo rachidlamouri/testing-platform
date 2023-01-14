@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { posix } from 'path';
-import { DerivedReferenceBuilder } from '../../../types/builders/derivedReferenceBuilder';
+import { DerivedReferenceBuilder } from '../../../types/builders/deprecatedDerivedReferenceBuilder';
 import { TargetTypeId } from '../targetTypeIds';
 import {
   CiYamlFileContentsConfigurationTypedTarget,

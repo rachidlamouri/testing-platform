@@ -1,4 +1,4 @@
-import { buildDerivedTargetReferenceConfiguration } from '../../configurationHelpers/buildDerivedTargetReferenceConfiguration';
+import { buildDerivedTargetReferenceConfiguration } from '../../configurationHelpers/buildDeprecatedDerivedTargetReferenceConfiguration';
 import { buildStaticTargetReferenceConfiguration } from '../../configurationHelpers/buildStaticTargetReferenceConfiguration';
 import { RootTargetPath } from '../../types/targetPath';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';

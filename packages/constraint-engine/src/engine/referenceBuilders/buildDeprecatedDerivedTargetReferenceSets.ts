@@ -1,5 +1,5 @@
 import { UnknownTargetReference } from '../../types/targetReference';
-import { UnknownDerivedTargetReferenceSetConfiguration } from '../../types/targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
+import { UnknownDerivedTargetReferenceSetConfiguration } from '../../types/targetReferenceConfiguration/deprecatedDerivedTargetReferenceSetConfiguration';
 import { TargetReferenceMap } from '../targetReferenceMap';
 
 export type DerivedTargetReferenceSetsBuilderInput = {

@@ -1,4 +1,4 @@
-import { DerivedReferenceBuilder } from '../builders/derivedReferenceBuilder';
+import { DerivedReferenceBuilder } from '../builders/deprecatedDerivedReferenceBuilder';
 import { Rule } from '../rule';
 import { UnknownTargetPath, UnknownTargetPathTuple } from '../targetPath';
 import { UnknownTypedTarget } from '../typedTarget';
