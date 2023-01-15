@@ -7,14 +7,7 @@ import {
   UnknownTargetTypeId,
   UnknownTypedTarget,
 } from '../typedTarget';
-
-type TupleToIntersection<TTuple extends readonly unknown[]> = TTuple extends [
-  infer TOnlyItem,
-]
-  ? TOnlyItem
-  : TTuple extends [infer TFirstItem, ...infer TRestItems]
-  ? TFirstItem & TupleToIntersection<TRestItems>
-  : never;
+import { MergeTuple } from '../utilityTypes/merge/mergeTuple';
 
 type GuardRuleTupleToNarrowedTargetTuple<
   TInputTargetInstance extends UnknownTargetInstance,
@@ -31,7 +24,7 @@ type GuardRuleTupleToNarrowedTargetTuple<
 export type GuardRuleTupleNarrowedTargetIntersection<
   TInputTargetInstance extends UnknownTargetInstance,
   TGuardRuleTuple extends readonly InferableGuardRule<TInputTargetInstance>[],
-> = TupleToIntersection<
+> = MergeTuple<
   GuardRuleTupleToNarrowedTargetTuple<TInputTargetInstance, TGuardRuleTuple>
 >;
 
