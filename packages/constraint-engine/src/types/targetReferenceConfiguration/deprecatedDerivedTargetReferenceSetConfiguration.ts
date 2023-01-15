@@ -5,22 +5,22 @@ import { TargetReferenceConfigurationTypeId } from './typeId';
 
 /** @deprecated */
 type BaseDeprecatedDerivedTargetReferenceSetConfiguration<
-  TActualInputTypedTarget extends UnknownTypedTarget,
-  TActualInputTargetPath extends UnknownTargetPath,
-  TExpectedInputTypedTarget extends UnknownTypedTarget,
-  TExpectedInputTargetPath extends UnknownTargetPath,
+  TEngineInputTypedTarget extends UnknownTypedTarget,
+  TEngineInputTargetPath extends UnknownTargetPath,
+  TConfigurationInputTypedTarget extends UnknownTypedTarget,
+  TConfigurationInputTargetPath extends UnknownTargetPath,
   TOutputTypedTarget extends UnknownTypedTarget,
   TOutputTargetPath extends UnknownTargetPath,
 > = {
   typeId: TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceSetConfiguration;
   buildReferenceSet: DeprecatedDerivedReferenceSetBuilder<
-    TActualInputTypedTarget,
-    TActualInputTargetPath,
+    TEngineInputTypedTarget,
+    TEngineInputTargetPath,
     TOutputTypedTarget,
     TOutputTargetPath
   >;
-  inputTargetTypeId: TExpectedInputTypedTarget['typeId'];
-  inputTargetPath: TExpectedInputTargetPath;
+  inputTargetTypeId: TConfigurationInputTypedTarget['typeId'];
+  inputTargetPath: TConfigurationInputTargetPath;
 };
 
 /** @deprecated */
@@ -54,10 +54,19 @@ export type DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilde
 >;
 
 /** @deprecated */
+export type DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedInput<
+  TOutputTypedTarget extends UnknownTypedTarget,
+  TOutputTargetPath extends UnknownTargetPath,
+> = DeprecatedDerivedTargetReferenceSetConfiguration<
+  UnknownTypedTarget,
+  UnknownTargetPath,
+  TOutputTypedTarget,
+  TOutputTargetPath
+>;
+
+/** @deprecated */
 export type UnknownDeprecatedDerivedTargetReferenceSetConfiguration =
-  BaseDeprecatedDerivedTargetReferenceSetConfiguration<
-    UnknownTypedTarget,
-    UnknownTargetPath,
+  DeprecatedDerivedTargetReferenceSetConfiguration<
     UnknownTypedTarget,
     UnknownTargetPath,
     UnknownTypedTarget,

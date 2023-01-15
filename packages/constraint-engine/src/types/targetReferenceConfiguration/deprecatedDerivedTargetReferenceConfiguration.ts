@@ -6,23 +6,23 @@ import { TargetReferenceConfigurationTypeId } from './typeId';
 
 /** @deprecated */
 type BaseDeprecatedDerivedTargetReferenceConfiguration<
-  TActualInputTypedTarget extends UnknownTypedTarget,
-  TActualInputTargetPath extends UnknownTargetPath,
-  TExpectedInputTypedTarget extends UnknownTypedTarget,
-  TExpectedInputTargetPath extends UnknownTargetPath,
+  TEngineInputTypedTarget extends UnknownTypedTarget,
+  TEngineInputTargetPath extends UnknownTargetPath,
+  TConfigurationInputTypedTarget extends UnknownTypedTarget,
+  TConfigurationInputTargetPath extends UnknownTargetPath,
   TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
   TOutputTargetPathTuple extends UnknownTargetPathTuple,
 > = {
   typeId: TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceConfiguration;
   buildReference: DeprecatedDerivedReferenceBuilder<
-    TActualInputTypedTarget,
-    TActualInputTargetPath,
+    TEngineInputTypedTarget,
+    TEngineInputTargetPath,
     TOutputTypedTargetOptionsTuple,
     TOutputTargetPathTuple
   >;
-  inputTargetTypeId: TExpectedInputTypedTarget['typeId'];
-  inputTargetPath: TExpectedInputTargetPath;
-  conditions: Rule<TActualInputTypedTarget['instance']>[];
+  inputTargetTypeId: TConfigurationInputTypedTarget['typeId'];
+  inputTargetPath: TConfigurationInputTargetPath;
+  conditions: Rule<TEngineInputTypedTarget['instance']>[];
 };
 
 /** @deprecated */
@@ -56,10 +56,19 @@ export type DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder<
 >;
 
 /** @deprecated */
+export type DeprecatedDerivedTargetReferenceConfigurationWithNormalizedInput<
+  TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
+  TOutputTargetPathTuple extends UnknownTargetPathTuple,
+> = DeprecatedDerivedTargetReferenceConfiguration<
+  UnknownTypedTarget,
+  UnknownTargetPath,
+  TOutputTypedTargetOptionsTuple,
+  TOutputTargetPathTuple
+>;
+
+/** @deprecated */
 export type UnknownDeprecatedDerivedTargetReferenceConfiguration =
-  BaseDeprecatedDerivedTargetReferenceConfiguration<
-    UnknownTypedTarget,
-    UnknownTargetPath,
+  DeprecatedDerivedTargetReferenceConfiguration<
     UnknownTypedTarget,
     UnknownTargetPath,
     [UnknownTypedTarget],
