@@ -1,8 +1,8 @@
 import { constraintEngine } from '../engine/constraintEngine';
 import { ruleConfigurations } from './ruleConfigurations';
-import { targetReferenceConfigurations } from './targetReferenceConfigurations';
+import { targetReferenceConfigurationTuple } from './targetReferenceConfigurations';
 
 constraintEngine.run({
-  targetReferenceConfigurations,
+  targetReferenceConfigurationTuple,
   ruleConfigurations,
 });

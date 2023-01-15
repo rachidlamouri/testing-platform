@@ -3,7 +3,10 @@ import { Rule } from './rule';
 import { UnknownTargetPath } from './targetPath';
 import { DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
 import { DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceSetConfiguration';
-import { UnknownTargetReferenceConfiguration } from './targetReferenceConfiguration/unknownTargetReferenceConfiguration';
+import {
+  UnknownTargetReferenceConfiguration,
+  UnknownTargetReferenceConfigurationTuple,
+} from './targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { UnknownTypedTarget } from './typedTarget';
 
 type BaseRuleConfiguration<
@@ -52,8 +55,8 @@ type RuleConfigurationFromTargetReferenceConfiguration<
     ? RuleConfiguration<TOutputTypedTarget, TOutputTargetPath>
     : never;
 
-export type RuleConfigurationFromTargetReferenceConfigurations<
-  TTargetReferenceConfigurations extends readonly UnknownTargetReferenceConfiguration[],
+export type RuleConfigurationFromTargetReferenceConfigurationTuple<
+  TTargetReferenceConfigurationTuple extends UnknownTargetReferenceConfigurationTuple,
 > = RuleConfigurationFromTargetReferenceConfiguration<
-  TTargetReferenceConfigurations[number]
+  TTargetReferenceConfigurationTuple[number]
 >;

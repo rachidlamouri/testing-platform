@@ -1,6 +1,9 @@
 import { UnkownTargetPathSet } from '../../types/targetPath';
 import { UnknownTargetReference } from '../../types/targetReference';
-import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
+import {
+  UnknownTargetReferenceConfiguration,
+  UnknownTargetReferenceConfigurationTuple,
+} from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { TargetReferenceMap } from '../targetReferenceMap';
 import { buildTargetReferencesForConfiguration } from './buildTargetReferencesForConfiguration';
 
@@ -18,7 +21,7 @@ export class TargetReferenceConfigurationError extends Error {
 }
 
 export type TargetReferencesBuilderInput = {
-  targetReferenceConfigurations: readonly UnknownTargetReferenceConfiguration[];
+  targetReferenceConfigurationTuple: UnknownTargetReferenceConfigurationTuple;
   targetReferenceMap: TargetReferenceMap;
   currentTargetPaths: UnkownTargetPathSet;
 };
@@ -29,14 +32,14 @@ export type TargetReferencesBuilderResult = {
 };
 
 export const buildTargetReferencesForPath = ({
-  targetReferenceConfigurations,
+  targetReferenceConfigurationTuple,
   targetReferenceMap,
   currentTargetPaths,
 }: TargetReferencesBuilderInput): TargetReferencesBuilderResult => {
   const references: UnknownTargetReference[] = [];
   const errors: TargetReferenceConfigurationError[] = [];
 
-  const configurationsToBuild = targetReferenceConfigurations.filter(
+  const configurationsToBuild = targetReferenceConfigurationTuple.filter(
     (configuration) => currentTargetPaths.has(configuration.inputTargetPath),
   );
 

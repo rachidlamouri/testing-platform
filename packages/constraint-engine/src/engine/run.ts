@@ -2,7 +2,7 @@ import fs from 'fs';
 import { UnknownAppliedRuleResult } from '../types/rule';
 import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
 import { ROOT_TARGET_PATH, UnkownTargetPathSet } from '../types/targetPath';
-import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
+import { UnknownTargetReferenceConfigurationTuple } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { applyRules } from './applyRules';
 import {
   buildTargetReferencesForPath,
@@ -13,7 +13,7 @@ import { RuleConfigurationMap } from './ruleConfigurationMap';
 import { CustomSet } from '../utils/customSet';
 
 export type ConstraintEngineRunnerInput = {
-  targetReferenceConfigurations: readonly UnknownTargetReferenceConfiguration[];
+  targetReferenceConfigurationTuple: UnknownTargetReferenceConfigurationTuple;
   ruleConfigurations: readonly UnknownRuleConfiguration[];
 };
 
@@ -24,7 +24,7 @@ export type ConstraintEngineRunner = (
 const { log } = console;
 
 export const run: ConstraintEngineRunner = ({
-  targetReferenceConfigurations,
+  targetReferenceConfigurationTuple,
   ruleConfigurations,
 }): void => {
   const debugInfo: Record<string, unknown>[] = [];
@@ -49,7 +49,7 @@ export const run: ConstraintEngineRunner = ({
     currentTargetReferenceMap = nextTargetReferenceMap;
 
     const referenceBuilderResult = buildTargetReferencesForPath({
-      targetReferenceConfigurations,
+      targetReferenceConfigurationTuple,
       targetReferenceMap: currentTargetReferenceMap,
       currentTargetPaths,
     });

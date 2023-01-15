@@ -6,3 +6,6 @@ export type UnknownTargetReferenceConfiguration =
   | UnknownStaticTargetReferenceConfiguration
   | UnknownDeprecatedDerivedTargetReferenceConfiguration
   | UnknownDeprecatedDerivedTargetReferenceSetConfiguration;
+
+export type UnknownTargetReferenceConfigurationTuple =
+  readonly UnknownTargetReferenceConfiguration[];

@@ -10,7 +10,7 @@ import {
   JsonUnknownTypedTarget,
 } from '../types/typedTargets';
 
-export const getTargetReferenceConfigurationsFromJson = (
+export const getTargetReferenceConfigurationTupleFromJson = (
   data: JsonTarget,
 ): UnknownTargetReferenceConfiguration[] => {
   return [

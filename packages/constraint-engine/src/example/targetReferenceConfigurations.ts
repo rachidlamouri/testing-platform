@@ -13,7 +13,7 @@ import {
   TestingPlatformPackageTargetPath,
   TestingPlatformPackageTargetPathTuple,
 } from '../customTargets/testingPlatform/packageA/buildPackageAReference';
-import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
+import { UnknownTargetReferenceConfigurationTuple } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
@@ -43,7 +43,7 @@ import { ExpectedCiYamlFileContentsTypedTarget } from '../customTargets/testingP
 import { buildExpectedCiYamlFileContentsReference } from '../customTargets/testingPlatform/ciYamlFile/buildExpectedCiYamlFileContentsReference';
 import { packageAHasKnownTestFileTypes } from '../customRules/packageAHasKnownTestFileTypes';
 
-export const targetReferenceConfigurations = [
+export const targetReferenceConfigurationTuple = [
   buildStaticTargetReferenceConfiguration<
     RootTargetPath,
     PackageDirectorySetConfigurationTypedTarget,
@@ -209,4 +209,4 @@ export const targetReferenceConfigurations = [
     conditions: [packageBHasTestingPlatformConfiguration],
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageC,
   }),
-] as const satisfies readonly UnknownTargetReferenceConfiguration[];
+] as const satisfies UnknownTargetReferenceConfigurationTuple;
