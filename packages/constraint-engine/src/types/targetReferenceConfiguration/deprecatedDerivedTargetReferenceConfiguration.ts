@@ -22,10 +22,6 @@ type BaseDeprecatedDerivedTargetReferenceConfiguration<
   >;
   inputTargetTypeId: TExpectedInputTypedTarget['typeId'];
   inputTargetPath: TExpectedInputTargetPath;
-  outputTargetTypeId: {
-    [Index in keyof TOutputTypedTargetOptionsTuple]: TOutputTypedTargetOptionsTuple[Index]['typeId'];
-  };
-  outputTargetPaths: TOutputTargetPathTuple;
   conditions: Rule<TActualInputTypedTarget['instance']>[];
 };
 

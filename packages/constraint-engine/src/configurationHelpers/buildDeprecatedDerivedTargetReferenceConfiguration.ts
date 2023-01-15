@@ -19,8 +19,6 @@ export const buildDeprecatedDerivedTargetReferenceConfiguration = <
 >({
   inputTargetTypeId,
   inputTargetPath,
-  outputTargetTypeId,
-  outputTargetPaths,
   buildReference,
   conditions = [],
 }: PartialKeys<
@@ -44,8 +42,6 @@ export const buildDeprecatedDerivedTargetReferenceConfiguration = <
     TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceConfiguration,
   inputTargetTypeId,
   inputTargetPath,
-  outputTargetTypeId,
-  outputTargetPaths,
   buildReference: buildReference as NormalizedDeprecatedDerivedReferenceBuilder<
     TOutputTypedTargetOptionsTuple,
     TOutputTargetPathTuple

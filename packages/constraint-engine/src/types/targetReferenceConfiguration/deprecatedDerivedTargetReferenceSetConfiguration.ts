@@ -21,8 +21,6 @@ type BaseDeprecatedDerivedTargetReferenceSetConfiguration<
   >;
   inputTargetTypeId: TExpectedInputTypedTarget['typeId'];
   inputTargetPath: TExpectedInputTargetPath;
-  outputTargetTypeId: TOutputTypedTarget['typeId'];
-  outputTargetPath: TOutputTargetPath;
 };
 
 /** @deprecated */

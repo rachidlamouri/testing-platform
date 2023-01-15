@@ -47,8 +47,6 @@ orchestrate()
         },
         inputTargetTypeId: 'Foo',
         inputTargetPath: 'foo/:index',
-        outputTargetTypeId: 'Bar',
-        outputTargetPath: 'foo/:index/:barIndex',
       },
       targetReferenceMap,
     });

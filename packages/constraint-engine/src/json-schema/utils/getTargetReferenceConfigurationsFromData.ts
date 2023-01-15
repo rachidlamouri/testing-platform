@@ -35,15 +35,6 @@ export const getTargetReferenceConfigurationTupleFromJson = (
       buildReference: buildDerivedTypedJsonReference,
       inputTargetTypeId: JsonTargetTypeId.Unknown,
       inputTargetPath: 'data',
-      outputTargetTypeId: [
-        JsonTargetTypeId.String,
-        JsonTargetTypeId.Number,
-        JsonTargetTypeId.Boolean,
-        JsonTargetTypeId.Null,
-        JsonTargetTypeId.Array,
-        JsonTargetTypeId.Object,
-      ],
-      outputTargetPaths: ['data'],
     }),
   ] as unknown as UnknownTargetReferenceConfiguration[];
 };

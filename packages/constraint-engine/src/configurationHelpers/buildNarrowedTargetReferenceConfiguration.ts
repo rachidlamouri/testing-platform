@@ -91,15 +91,16 @@ export const buildNarrowedTargetReferenceConfiguration = <
   >({
     inputTargetTypeId,
     inputTargetPath,
-    outputTargetTypeId: [outputTargetTypeId],
-    outputTargetPaths: [inputTargetPath],
     buildReference: buildNarrowedReferenceBuilder<
       TInputTypedTarget,
       TInputTargetPath,
       TGuardRuleTuple,
       TOutputTargetTypeId,
       TOutputTargetInstance
-    >(conditions, outputTargetTypeId) as NormalizedDeprecatedDerivedReferenceBuilder<
+    >(
+      conditions,
+      outputTargetTypeId,
+    ) as NormalizedDeprecatedDerivedReferenceBuilder<
       [
         EvaluateGuardRuleTuple<
           TInputTypedTarget,

@@ -15,8 +15,6 @@ export const buildDerivedTargetReferenceSetConfiguration = <
 >({
   inputTargetTypeId,
   inputTargetPath,
-  outputTargetTypeId,
-  outputTargetPath,
   buildReferenceSet,
 }: Omit<
   DeprecatedDerivedTargetReferenceSetConfiguration<
@@ -36,10 +34,9 @@ export const buildDerivedTargetReferenceSetConfiguration = <
     TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceSetConfiguration,
   inputTargetTypeId,
   inputTargetPath,
-  outputTargetTypeId,
-  outputTargetPath,
-  buildReferenceSet: buildReferenceSet as NormalizedDeprecatedDerivedReferenceSetBuilder<
-    TOutputTypedTarget,
-    TOutputTargetPath
-  >,
+  buildReferenceSet:
+    buildReferenceSet as NormalizedDeprecatedDerivedReferenceSetBuilder<
+      TOutputTypedTarget,
+      TOutputTargetPath
+    >,
 });

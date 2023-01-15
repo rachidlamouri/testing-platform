@@ -133,10 +133,6 @@ export const targetReferenceConfigurationTuple = [
     inputTargetTypeId:
       TestingPlatformTargetTypeId.CiYamlFileContentsConfiguration,
     inputTargetPath: '.github/workflows/continuous-integration.yml',
-    outputTargetTypeId: [
-      TestingPlatformTargetTypeId.ExpectedCiYamlFileContentsTarget,
-    ],
-    outputTargetPaths: ['.github/workflows/continuous-integration.yml'],
   }),
   buildDeprecatedDerivedTargetReferenceConfiguration<
     PackageDirectorySetConfigurationTypedTarget,
@@ -148,8 +144,6 @@ export const targetReferenceConfigurationTuple = [
     inputTargetTypeId:
       TestingPlatformTargetTypeId.PackageDirectorySetConfiguration,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
-    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageDirectorySet],
-    outputTargetPaths: ['testingPlatformPackageDirectorySet'],
   }),
   buildDerivedTargetReferenceSetConfiguration<
     PackageDirectorySetTypedTarget,
@@ -160,8 +154,6 @@ export const targetReferenceConfigurationTuple = [
     buildReferenceSet: buildTestingPlatformPackageDirectoryReferenceSet,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
-    outputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
-    outputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
   }),
   buildDeprecatedDerivedTargetReferenceConfiguration<
     PackageDirectoryTypedTarget,
@@ -172,8 +164,6 @@ export const targetReferenceConfigurationTuple = [
     buildReference: buildPackageAReference,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
-    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageA],
-    outputTargetPaths: ['testingPlatformPackageDirectorySet/:directoryName'],
   }),
   buildNarrowedTargetReferenceConfiguration<
     PackageATypedTarget,
