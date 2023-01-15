@@ -1,16 +1,16 @@
 import {
-  RuleConfigurationFromTargetReferenceConfigurations,
+  RuleConfigurationFromTargetReferenceConfigurationTuple,
   UnknownRuleConfiguration,
 } from '../types/ruleConfiguration';
-import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
+import { UnknownTargetReferenceConfigurationTuple } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 
 export const buildRuleConfiguration = <
-  TTargetReferenceConfigurations extends readonly UnknownTargetReferenceConfiguration[],
+  TTargetReferenceConfigurationTuple extends UnknownTargetReferenceConfigurationTuple,
 >({
   targetTypeId,
   targetPath,
   rule,
-}: RuleConfigurationFromTargetReferenceConfigurations<TTargetReferenceConfigurations>): UnknownRuleConfiguration => {
+}: RuleConfigurationFromTargetReferenceConfigurationTuple<TTargetReferenceConfigurationTuple>): UnknownRuleConfiguration => {
   return {
     targetTypeId,
     targetPath,

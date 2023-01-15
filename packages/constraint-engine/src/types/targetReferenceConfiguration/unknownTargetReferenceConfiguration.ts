@@ -1,8 +1,11 @@
-import { UnknownDerivedTargetReferenceConfiguration } from './derivedTargetReferenceConfiguration';
-import { UnknownDerivedTargetReferenceSetConfiguration } from './derivedTargetReferenceSetConfiguration';
+import { UnknownDeprecatedDerivedTargetReferenceConfiguration } from './deprecatedDerivedTargetReferenceConfiguration';
+import { UnknownDeprecatedDerivedTargetReferenceSetConfiguration } from './deprecatedDerivedTargetReferenceSetConfiguration';
 import { UnknownStaticTargetReferenceConfiguration } from './staticTargetReferenceConfiguration';
 
 export type UnknownTargetReferenceConfiguration =
   | UnknownStaticTargetReferenceConfiguration
-  | UnknownDerivedTargetReferenceConfiguration
-  | UnknownDerivedTargetReferenceSetConfiguration;
+  | UnknownDeprecatedDerivedTargetReferenceConfiguration
+  | UnknownDeprecatedDerivedTargetReferenceSetConfiguration;
+
+export type UnknownTargetReferenceConfigurationTuple =
+  readonly UnknownTargetReferenceConfiguration[];

@@ -1,5 +1,5 @@
-import { buildDerivedTargetReferenceConfiguration } from '../configurationHelpers/buildDerivedTargetReferenceConfiguration';
-import { buildDerivedTargetReferenceSetConfiguration } from '../configurationHelpers/buildDerivedTargetReferenceSetConfiguration';
+import { buildDeprecatedDerivedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceConfiguration';
+import { buildDerivedTargetReferenceSetConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceSetConfiguration';
 import {
   buildTestingPlatformPackageDirectoryReferenceSet,
   TestingPlatformPackageDirectoryTargetPath,
@@ -13,7 +13,7 @@ import {
   TestingPlatformPackageTargetPath,
   TestingPlatformPackageTargetPathTuple,
 } from '../customTargets/testingPlatform/packageA/buildPackageAReference';
-import { UnknownTargetReferenceConfiguration } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
+import { UnknownTargetReferenceConfigurationTuple } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
@@ -43,7 +43,7 @@ import { ExpectedCiYamlFileContentsTypedTarget } from '../customTargets/testingP
 import { buildExpectedCiYamlFileContentsReference } from '../customTargets/testingPlatform/ciYamlFile/buildExpectedCiYamlFileContentsReference';
 import { packageAHasKnownTestFileTypes } from '../customRules/packageAHasKnownTestFileTypes';
 
-export const targetReferenceConfigurations = [
+export const targetReferenceConfigurationTuple = [
   buildStaticTargetReferenceConfiguration<
     RootTargetPath,
     PackageDirectorySetConfigurationTypedTarget,
@@ -123,7 +123,7 @@ export const targetReferenceConfigurations = [
       path: '.github/workflows/continuous-integration.yml',
     },
   }),
-  buildDerivedTargetReferenceConfiguration<
+  buildDeprecatedDerivedTargetReferenceConfiguration<
     CiYamlFileContentsConfigurationTypedTarget,
     CiYamlFileTargetPath,
     [ExpectedCiYamlFileContentsTypedTarget],
@@ -133,12 +133,8 @@ export const targetReferenceConfigurations = [
     inputTargetTypeId:
       TestingPlatformTargetTypeId.CiYamlFileContentsConfiguration,
     inputTargetPath: '.github/workflows/continuous-integration.yml',
-    outputTargetTypeId: [
-      TestingPlatformTargetTypeId.ExpectedCiYamlFileContentsTarget,
-    ],
-    outputTargetPaths: ['.github/workflows/continuous-integration.yml'],
   }),
-  buildDerivedTargetReferenceConfiguration<
+  buildDeprecatedDerivedTargetReferenceConfiguration<
     PackageDirectorySetConfigurationTypedTarget,
     PackageDirectorySetTargetPath,
     [PackageDirectorySetTypedTarget],
@@ -148,8 +144,6 @@ export const targetReferenceConfigurations = [
     inputTargetTypeId:
       TestingPlatformTargetTypeId.PackageDirectorySetConfiguration,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
-    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageDirectorySet],
-    outputTargetPaths: ['testingPlatformPackageDirectorySet'],
   }),
   buildDerivedTargetReferenceSetConfiguration<
     PackageDirectorySetTypedTarget,
@@ -160,10 +154,8 @@ export const targetReferenceConfigurations = [
     buildReferenceSet: buildTestingPlatformPackageDirectoryReferenceSet,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
-    outputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
-    outputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
   }),
-  buildDerivedTargetReferenceConfiguration<
+  buildDeprecatedDerivedTargetReferenceConfiguration<
     PackageDirectoryTypedTarget,
     TestingPlatformPackageDirectoryTargetPath<PackageDirectorySetTargetPath>,
     [PackageATypedTarget],
@@ -172,8 +164,6 @@ export const targetReferenceConfigurations = [
     buildReference: buildPackageAReference,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
-    outputTargetTypeId: [TestingPlatformTargetTypeId.PackageA],
-    outputTargetPaths: ['testingPlatformPackageDirectorySet/:directoryName'],
   }),
   buildNarrowedTargetReferenceConfiguration<
     PackageATypedTarget,
@@ -209,4 +199,4 @@ export const targetReferenceConfigurations = [
     conditions: [packageBHasTestingPlatformConfiguration],
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageC,
   }),
-] as const satisfies readonly UnknownTargetReferenceConfiguration[];
+] as const satisfies UnknownTargetReferenceConfigurationTuple;

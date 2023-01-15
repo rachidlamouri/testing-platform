@@ -1,16 +1,17 @@
-import { NormalizedDerivedReferenceBuilder } from '../types/builders/derivedReferenceBuilder';
+import { NormalizedDeprecatedDerivedReferenceBuilder } from '../types/builders/deprecatedDerivedReferenceBuilder';
 import { UnknownTargetPath, UnknownTargetPathTuple } from '../types/targetPath';
 import {
-  DerivedTargetReferenceConfiguration,
-  DerivedTargetReferenceConfigurationWithNormalizedBuilder,
-} from '../types/targetReferenceConfiguration/derivedTargetReferenceConfiguration';
+  DeprecatedDerivedTargetReferenceConfiguration,
+  DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder,
+} from '../types/targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
 import { UnknownTypedTarget } from '../types/typedTarget';
 
 type PartialKeys<TObject, TKey extends keyof TObject> = Omit<TObject, TKey> &
   Partial<Pick<TObject, TKey>>;
 
-export const buildDerivedTargetReferenceConfiguration = <
+/** @deprecated */
+export const buildDeprecatedDerivedTargetReferenceConfiguration = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
@@ -18,13 +19,11 @@ export const buildDerivedTargetReferenceConfiguration = <
 >({
   inputTargetTypeId,
   inputTargetPath,
-  outputTargetTypeId,
-  outputTargetPaths,
   buildReference,
   conditions = [],
 }: PartialKeys<
   Omit<
-    DerivedTargetReferenceConfiguration<
+    DeprecatedDerivedTargetReferenceConfiguration<
       TInputTypedTarget,
       TInputTargetPath,
       TOutputTypedTargetOptionsTuple,
@@ -33,19 +32,17 @@ export const buildDerivedTargetReferenceConfiguration = <
     'typeId'
   >,
   'conditions'
->): DerivedTargetReferenceConfigurationWithNormalizedBuilder<
+>): DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder<
   TInputTypedTarget,
   TInputTargetPath,
   TOutputTypedTargetOptionsTuple,
   TOutputTargetPathTuple
 > => ({
   typeId:
-    TargetReferenceConfigurationTypeId.DerivedTargetReferenceConfiguration,
+    TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceConfiguration,
   inputTargetTypeId,
   inputTargetPath,
-  outputTargetTypeId,
-  outputTargetPaths,
-  buildReference: buildReference as NormalizedDerivedReferenceBuilder<
+  buildReference: buildReference as NormalizedDeprecatedDerivedReferenceBuilder<
     TOutputTypedTargetOptionsTuple,
     TOutputTargetPathTuple
   >,

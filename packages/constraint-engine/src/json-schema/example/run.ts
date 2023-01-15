@@ -1,6 +1,6 @@
 import { constraintEngine } from '../../engine/constraintEngine';
-import { getTargetReferenceConfigurationsFromJson } from '../utils/getTargetReferenceConfigurationsFromData';
-import { getRuleConfigurationsFromJsonSchema } from '../utils/getRuleConfigurationsFromJsonSchema';
+import { getTargetReferenceConfigurationTupleFromJson } from '../utils/getTargetReferenceConfigurationsFromData';
+import { getRuleConfigurationTupleFromJsonSchema } from '../utils/getRuleConfigurationsFromJsonSchema';
 import { JsonTarget } from '../types/targets';
 
 const inputInstance: JsonTarget = {
@@ -14,12 +14,13 @@ const inputSchema: JsonTarget = {
   required: ['potato', 'tomato'],
 };
 
-const targetReferenceConfigurations =
-  getTargetReferenceConfigurationsFromJson(inputInstance);
+const targetReferenceConfigurationTuple =
+  getTargetReferenceConfigurationTupleFromJson(inputInstance);
 
-const ruleConfigurations = getRuleConfigurationsFromJsonSchema(inputSchema);
+const ruleConfigurationTuple =
+  getRuleConfigurationTupleFromJsonSchema(inputSchema);
 
 constraintEngine.run({
-  targetReferenceConfigurations,
-  ruleConfigurations,
+  targetReferenceConfigurationTuple,
+  ruleConfigurationTuple,
 });

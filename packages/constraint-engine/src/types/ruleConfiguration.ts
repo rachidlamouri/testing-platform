@@ -1,9 +1,12 @@
 import { CustomSet } from '../utils/customSet';
 import { Rule } from './rule';
 import { UnknownTargetPath } from './targetPath';
-import { DerivedTargetReferenceConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/derivedTargetReferenceConfiguration';
-import { DerivedTargetReferenceSetConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/derivedTargetReferenceSetConfiguration';
-import { UnknownTargetReferenceConfiguration } from './targetReferenceConfiguration/unknownTargetReferenceConfiguration';
+import { DeprecatedDerivedTargetReferenceConfigurationWithNormalizedInput } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
+import { DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedInput } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceSetConfiguration';
+import {
+  UnknownTargetReferenceConfiguration,
+  UnknownTargetReferenceConfigurationTuple,
+} from './targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { UnknownTypedTarget } from './typedTarget';
 
 type BaseRuleConfiguration<
@@ -27,14 +30,14 @@ export type UnknownRuleConfiguration = BaseRuleConfiguration<
   UnknownTargetPath
 >;
 
+export type UnknownRuleConfigurationTuple = readonly UnknownRuleConfiguration[];
+
 export type UnknownRuleConfigurationSet = CustomSet<UnknownRuleConfiguration>;
 
 type RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfiguration extends UnknownTargetReferenceConfiguration,
 > =
-  TTargetReferenceConfiguration extends DerivedTargetReferenceConfigurationWithNormalizedBuilder<
-    UnknownTypedTarget,
-    UnknownTargetPath,
+  TTargetReferenceConfiguration extends DeprecatedDerivedTargetReferenceConfigurationWithNormalizedInput<
     infer TOutputTypedTargetOptionsTuple,
     infer TOutputTargetPathTuple
   >
@@ -43,17 +46,22 @@ type RuleConfigurationFromTargetReferenceConfiguration<
         TOutputTypedTargetOptionsTuple[number],
         TOutputTargetPathTuple[number]
       >
-    : TTargetReferenceConfiguration extends DerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
-        UnknownTypedTarget,
-        UnknownTargetPath,
+    : TTargetReferenceConfiguration extends DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedInput<
         infer TOutputTypedTarget,
         infer TOutputTargetPath
       >
     ? RuleConfiguration<TOutputTypedTarget, TOutputTargetPath>
     : never;
 
-export type RuleConfigurationFromTargetReferenceConfigurations<
-  TTargetReferenceConfigurations extends readonly UnknownTargetReferenceConfiguration[],
-> = RuleConfigurationFromTargetReferenceConfiguration<
-  TTargetReferenceConfigurations[number]
->;
+export type RuleConfigurationTupleFromTargetReferenceConfigurationTuple<
+  TTargetReferenceConfigurationTuple extends UnknownTargetReferenceConfigurationTuple,
+> = {
+  [Index in keyof TTargetReferenceConfigurationTuple]: RuleConfigurationFromTargetReferenceConfiguration<
+    TTargetReferenceConfigurationTuple[Index]
+  >;
+};
+
+export type RuleConfigurationFromTargetReferenceConfigurationTuple<
+  TTargetReferenceConfigurationTuple extends UnknownTargetReferenceConfigurationTuple,
+> =
+  RuleConfigurationTupleFromTargetReferenceConfigurationTuple<TTargetReferenceConfigurationTuple>[number];

@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { DerivedReferenceBuilder } from '../../../types/builders/derivedReferenceBuilder';
+import { DeprecatedDerivedReferenceBuilder } from '../../../types/builders/deprecatedDerivedReferenceBuilder';
 import { UnknownTargetPath } from '../../../types/targetPath';
 import { TargetReferenceTuple } from '../../../types/targetReference';
 import { buildJsonFileInstance } from '../../file/jsonFile/buildBuildJsonFileInstance';
@@ -72,7 +72,7 @@ export const buildPackageAReference = (<TPrefix extends UnknownTargetPath>(
       path: directoryTargetReference.path,
     },
   ];
-}) satisfies DerivedReferenceBuilder<
+}) satisfies DeprecatedDerivedReferenceBuilder<
   PackageDirectoryTypedTarget,
   TestingPlatformPackageDirectoryTargetPath<UnknownTargetPath>,
   [PackageATypedTarget],

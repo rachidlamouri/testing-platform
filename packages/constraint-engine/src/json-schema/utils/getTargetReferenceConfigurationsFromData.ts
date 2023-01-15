@@ -1,4 +1,4 @@
-import { buildDerivedTargetReferenceConfiguration } from '../../configurationHelpers/buildDerivedTargetReferenceConfiguration';
+import { buildDeprecatedDerivedTargetReferenceConfiguration } from '../../configurationHelpers/buildDeprecatedDerivedTargetReferenceConfiguration';
 import { buildStaticTargetReferenceConfiguration } from '../../configurationHelpers/buildStaticTargetReferenceConfiguration';
 import { RootTargetPath } from '../../types/targetPath';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
@@ -10,7 +10,7 @@ import {
   JsonUnknownTypedTarget,
 } from '../types/typedTargets';
 
-export const getTargetReferenceConfigurationsFromJson = (
+export const getTargetReferenceConfigurationTupleFromJson = (
   data: JsonTarget,
 ): UnknownTargetReferenceConfiguration[] => {
   return [
@@ -26,7 +26,7 @@ export const getTargetReferenceConfigurationsFromJson = (
         path: 'data',
       },
     }),
-    buildDerivedTargetReferenceConfiguration<
+    buildDeprecatedDerivedTargetReferenceConfiguration<
       JsonUnknownTypedTarget,
       RootJsonDataTargetPath,
       JsonKnownTypedTargetOptionsTuple,
@@ -35,15 +35,6 @@ export const getTargetReferenceConfigurationsFromJson = (
       buildReference: buildDerivedTypedJsonReference,
       inputTargetTypeId: JsonTargetTypeId.Unknown,
       inputTargetPath: 'data',
-      outputTargetTypeId: [
-        JsonTargetTypeId.String,
-        JsonTargetTypeId.Number,
-        JsonTargetTypeId.Boolean,
-        JsonTargetTypeId.Null,
-        JsonTargetTypeId.Array,
-        JsonTargetTypeId.Object,
-      ],
-      outputTargetPaths: ['data'],
     }),
   ] as unknown as UnknownTargetReferenceConfiguration[];
 };

@@ -5,7 +5,7 @@ import {
 } from 'rat-test/type-script/transgressing';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { TargetReferenceMap } from '../targetReferenceMap';
-import { buildDerivedTargetReferenceSets } from './buildDerivedTargetReferenceSets';
+import { buildDeprecatedDerivedTargetReferenceSets } from './buildDeprecatedDerivedTargetReferenceSets';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
@@ -13,7 +13,7 @@ orchestrate()
     report('• buildDerivedTargetReferenceSets');
   })
   .then(() => {
-    report('  ⇀ Testing a derived target reference configuration');
+    report('  ⇀ Testing a deprecated derived target reference configuration');
 
     const targetReferenceMap = new TargetReferenceMap();
     targetReferenceMap.setTargetReference({
@@ -27,10 +27,10 @@ orchestrate()
       instance: 'foo 1',
     });
 
-    const result = buildDerivedTargetReferenceSets({
+    const result = buildDeprecatedDerivedTargetReferenceSets({
       targetReferenceConfiguration: {
         typeId:
-          TargetReferenceConfigurationTypeId.DerivedTargetReferenceSetConfiguration,
+          TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceSetConfiguration,
         buildReferenceSet: (inputReference) => {
           return [
             {
@@ -47,8 +47,6 @@ orchestrate()
         },
         inputTargetTypeId: 'Foo',
         inputTargetPath: 'foo/:index',
-        outputTargetTypeId: 'Bar',
-        outputTargetPath: 'foo/:index/:barIndex',
       },
       targetReferenceMap,
     });

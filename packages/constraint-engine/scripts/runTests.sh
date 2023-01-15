@@ -13,8 +13,8 @@ printf "\n"
 npx ts-node packages/constraint-engine/src/customTargets/testingPlatform/packageDirectorySet/buildPackageDirectorySetReference.test.ts
 printf "\n"
 
-npx ts-node packages/constraint-engine/src/engine/referenceBuilders/buildDerivedTargetReferences.test.ts
+npx ts-node packages/constraint-engine/src/engine/referenceBuilders/buildDeprecatedDerivedTargetReferences.test.ts
 printf "\n"
 
-npx ts-node packages/constraint-engine/src/engine/referenceBuilders/buildDerivedTargetReferenceSets.test.ts
+npx ts-node packages/constraint-engine/src/engine/referenceBuilders/buildDeprecatedDerivedTargetReferenceSets.test.ts
 printf "\n"
