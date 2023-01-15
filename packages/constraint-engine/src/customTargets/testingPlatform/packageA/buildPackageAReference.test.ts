@@ -60,6 +60,12 @@ orchestrate()
             stringContents: '{}',
             parsedContents: {},
           },
+          runTestsScript: {
+            filePath: 'tmp/tsconfig.json',
+            isOnDisk: true,
+            stringContents: '{}',
+          },
+          testFileMetadataSet: [],
         },
         path: 'abc/:directoryName',
       },

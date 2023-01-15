@@ -37,14 +37,20 @@ orchestrate()
     });
 
     const result = buildPackageDirectorySetReference({
-      rootDirectoryRelativeToCurrentWorkingDirectory: 'tmp',
+      typeId: TargetTypeId.PackageDirectorySetConfiguration,
+      instance: {
+        rootDirectoryRelativeToCurrentWorkingDirectory: 'tmp',
+      },
+      path: 'testingPlatformPackageDirectorySet',
     });
 
     rootHelper.teardown();
 
-    signaler.isDeepEqual(result, {
-      typeId: TargetTypeId.PackageDirectorySet,
-      instance: ['tmp/bar', 'tmp/foo'],
-      path: TESTING_PLATFORM_PACKAGE_DIRECTORY_SET_TARGET_PATH,
-    });
+    signaler.isDeepEqual(result, [
+      {
+        typeId: TargetTypeId.PackageDirectorySet,
+        instance: ['tmp/bar', 'tmp/foo'],
+        path: TESTING_PLATFORM_PACKAGE_DIRECTORY_SET_TARGET_PATH,
+      },
+    ]);
   });

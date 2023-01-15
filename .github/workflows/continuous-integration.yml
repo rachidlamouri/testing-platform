@@ -16,6 +16,8 @@ jobs:
         run: npm run lint:md
       - name: Lint TypeScript
         run: npm run lint:ts:all
+      - name: Type Check Constraint-Engine
+        run: cd packages/constraint-engine && npx tsc
       - name: Test Rat
         run: npm run test:framework --workspace rat-test
       - name: Test Mouse
