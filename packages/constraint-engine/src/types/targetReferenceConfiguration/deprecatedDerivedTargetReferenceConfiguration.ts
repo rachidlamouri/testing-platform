@@ -56,17 +56,6 @@ export type DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder<
 >;
 
 /** @deprecated */
-export type DeprecatedDerivedTargetReferenceConfigurationWithNormalizedInput<
-  TOutputTypedTargetOptionsTuple extends readonly UnknownTypedTarget[],
-  TOutputTargetPathTuple extends UnknownTargetPathTuple,
-> = DeprecatedDerivedTargetReferenceConfiguration<
-  UnknownTypedTarget,
-  UnknownTargetPath,
-  TOutputTypedTargetOptionsTuple,
-  TOutputTargetPathTuple
->;
-
-/** @deprecated */
 export type UnknownDeprecatedDerivedTargetReferenceConfiguration =
   DeprecatedDerivedTargetReferenceConfiguration<
     UnknownTypedTarget,

@@ -54,17 +54,6 @@ export type DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilde
 >;
 
 /** @deprecated */
-export type DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedInput<
-  TOutputTypedTarget extends UnknownTypedTarget,
-  TOutputTargetPath extends UnknownTargetPath,
-> = DeprecatedDerivedTargetReferenceSetConfiguration<
-  UnknownTypedTarget,
-  UnknownTargetPath,
-  TOutputTypedTarget,
-  TOutputTargetPath
->;
-
-/** @deprecated */
 export type UnknownDeprecatedDerivedTargetReferenceSetConfiguration =
   DeprecatedDerivedTargetReferenceSetConfiguration<
     UnknownTypedTarget,
