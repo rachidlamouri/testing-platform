@@ -7,6 +7,7 @@ import {
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
 import { UnknownTypedTarget } from '../types/typedTarget';
 
+/** @deprecated */
 export const buildDerivedTargetReferenceSetConfiguration = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
