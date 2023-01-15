@@ -5,13 +5,13 @@ import { buildObjectHasRequiredProperties } from '../rules/buildObjectHasRequire
 import { JsonDataType, JsonTargetTypeId } from '../types/constants';
 import { JsonObjectTarget } from '../types/targets';
 
-export const getRuleConfigurationsFromJsonSchema = (
+export const getRuleConfigurationTupleFromJsonSchema = (
   inputSchema: JsonObjectTarget,
 ): UnknownRuleConfiguration[] => {
-  const ruleConfigurations: UnknownRuleConfiguration[] = [];
+  const ruleConfigurationTuple: UnknownRuleConfiguration[] = [];
 
   if ('type' in inputSchema) {
-    ruleConfigurations.push({
+    ruleConfigurationTuple.push({
       rule: buildDataIsType(inputSchema.type as JsonDataType) as Rule<unknown>,
       targetTypeId: JsonTargetTypeId.Unknown,
       targetPath: 'data',
@@ -19,7 +19,7 @@ export const getRuleConfigurationsFromJsonSchema = (
   }
 
   if ('required' in inputSchema) {
-    ruleConfigurations.push({
+    ruleConfigurationTuple.push({
       rule: buildObjectHasRequiredProperties(
         inputSchema.required as string[],
       ) as Rule<unknown>,
@@ -28,5 +28,5 @@ export const getRuleConfigurationsFromJsonSchema = (
     });
   }
 
-  return ruleConfigurations;
+  return ruleConfigurationTuple;
 };

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { UnknownAppliedRuleResult } from '../types/rule';
-import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
+import { UnknownRuleConfigurationTuple } from '../types/ruleConfiguration';
 import { ROOT_TARGET_PATH, UnkownTargetPathSet } from '../types/targetPath';
 import { UnknownTargetReferenceConfigurationTuple } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { applyRules } from './applyRules';
@@ -14,7 +14,7 @@ import { CustomSet } from '../utils/customSet';
 
 export type ConstraintEngineRunnerInput = {
   targetReferenceConfigurationTuple: UnknownTargetReferenceConfigurationTuple;
-  ruleConfigurations: readonly UnknownRuleConfiguration[];
+  ruleConfigurationTuple: UnknownRuleConfigurationTuple;
 };
 
 export type ConstraintEngineRunner = (
@@ -25,7 +25,7 @@ const { log } = console;
 
 export const run: ConstraintEngineRunner = ({
   targetReferenceConfigurationTuple,
-  ruleConfigurations,
+  ruleConfigurationTuple,
 }): void => {
   const debugInfo: Record<string, unknown>[] = [];
 
@@ -34,7 +34,7 @@ export const run: ConstraintEngineRunner = ({
     [];
 
   const ruleConfigurationMap = new RuleConfigurationMap();
-  ruleConfigurations.forEach((ruleConfiguration) => {
+  ruleConfigurationTuple.forEach((ruleConfiguration) => {
     ruleConfigurationMap.setRuleConfiguration(ruleConfiguration);
   });
 

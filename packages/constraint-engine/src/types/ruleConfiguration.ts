@@ -30,6 +30,8 @@ export type UnknownRuleConfiguration = BaseRuleConfiguration<
   UnknownTargetPath
 >;
 
+export type UnknownRuleConfigurationTuple = readonly UnknownRuleConfiguration[];
+
 export type UnknownRuleConfigurationSet = CustomSet<UnknownRuleConfiguration>;
 
 type RuleConfigurationFromTargetReferenceConfiguration<

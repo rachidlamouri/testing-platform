@@ -1,6 +1,6 @@
 import { constraintEngine } from '../../engine/constraintEngine';
 import { getTargetReferenceConfigurationTupleFromJson } from '../utils/getTargetReferenceConfigurationsFromData';
-import { getRuleConfigurationsFromJsonSchema } from '../utils/getRuleConfigurationsFromJsonSchema';
+import { getRuleConfigurationTupleFromJsonSchema } from '../utils/getRuleConfigurationsFromJsonSchema';
 import { JsonTarget } from '../types/targets';
 
 const inputInstance: JsonTarget = {
@@ -17,9 +17,10 @@ const inputSchema: JsonTarget = {
 const targetReferenceConfigurationTuple =
   getTargetReferenceConfigurationTupleFromJson(inputInstance);
 
-const ruleConfigurations = getRuleConfigurationsFromJsonSchema(inputSchema);
+const ruleConfigurationTuple =
+  getRuleConfigurationTupleFromJsonSchema(inputSchema);
 
 constraintEngine.run({
   targetReferenceConfigurationTuple,
-  ruleConfigurations,
+  ruleConfigurationTuple,
 });

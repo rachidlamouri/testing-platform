@@ -4,7 +4,7 @@ import { packageCExtendsBaseTypeScriptConfiguration } from '../customRules/packa
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
-import { UnknownRuleConfiguration } from '../types/ruleConfiguration';
+import { UnknownRuleConfigurationTuple } from '../types/ruleConfiguration';
 import { targetReferenceConfigurationTuple } from './targetReferenceConfigurations';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
 import { TargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
@@ -14,7 +14,7 @@ import { packageBRunsAllTestFiles } from '../customRules/packageBRunsAllTestFile
 type CustomTargetReferenceConfigurationTuple =
   typeof targetReferenceConfigurationTuple;
 
-export const ruleConfigurations = [
+export const ruleConfigurationTuple = [
   buildRuleConfiguration<CustomTargetReferenceConfigurationTuple>({
     targetTypeId: TargetTypeId.PackageDirectorySet,
     targetPath: 'testingPlatformPackageDirectorySet',
@@ -55,4 +55,4 @@ export const ruleConfigurations = [
     targetPath: 'testingPlatformPackageDirectorySet/:directoryName',
     rule: packageCExtendsBaseTypeScriptConfiguration,
   }),
-] as const satisfies readonly UnknownRuleConfiguration[];
+] as const satisfies UnknownRuleConfigurationTuple;
