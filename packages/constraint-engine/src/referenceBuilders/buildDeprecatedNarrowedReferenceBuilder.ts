@@ -48,7 +48,8 @@ const evaluateInputTargetReference = <
   >;
 };
 
-export const buildNarrowedReferenceBuilder = <
+/** @deprecated */
+export const buildDeprecatedNarrowedReferenceBuilder = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TGuardRuleTuple extends readonly InferableGuardRule<
@@ -77,7 +78,8 @@ export const buildNarrowedReferenceBuilder = <
     TOutputTargetInstance
   >;
 
-  const buildNarrowedReference = (
+  /** @deprecated */
+  const buildDeprecatedNarrowedReference = (
     inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
   ): TargetReferenceTuple<
     TOutputTypedTarget | TInputTypedTarget,
@@ -110,7 +112,7 @@ export const buildNarrowedReferenceBuilder = <
     return [outputReference];
   };
 
-  return buildNarrowedReference as CastReferenceBuilder<
+  return buildDeprecatedNarrowedReference as CastReferenceBuilder<
     TInputTypedTarget,
     TInputTargetPath,
     TGuardRuleTuple,

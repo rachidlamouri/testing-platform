@@ -17,7 +17,7 @@ import { UnknownTargetReferenceConfigurationTuple } from '../types/targetReferen
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
-import { buildNarrowedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedNarrowedTargetReferenceConfiguration';
+import { buildDeprecatedNarrowedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedNarrowedTargetReferenceConfiguration';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
 import { PackageDirectorySetTypedTarget } from '../customTargets/testingPlatform/packageDirectorySet/packageDirectorySetTarget';
 import { PackageDirectoryTypedTarget } from '../customTargets/testingPlatform/packageDirectory/packageDirectoryTarget';
@@ -165,7 +165,7 @@ export const targetReferenceConfigurationTuple = [
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
   }),
-  buildNarrowedTargetReferenceConfiguration<
+  buildDeprecatedNarrowedTargetReferenceConfiguration<
     PackageATypedTarget,
     TestingPlatformPackageTargetPath<PackageDirectorySetTargetPath>,
     [
@@ -187,7 +187,7 @@ export const targetReferenceConfigurationTuple = [
     ],
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
   }),
-  buildNarrowedTargetReferenceConfiguration<
+  buildDeprecatedNarrowedTargetReferenceConfiguration<
     PackageBTypedTarget,
     TestingPlatformPackageTargetPath<PackageDirectorySetTargetPath>,
     [typeof packageBHasTestingPlatformConfiguration],

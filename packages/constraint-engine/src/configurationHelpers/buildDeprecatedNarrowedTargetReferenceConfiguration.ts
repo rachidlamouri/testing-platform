@@ -1,4 +1,4 @@
-import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildDeprecatedNarrowedReferenceBuilder';
+import { buildDeprecatedNarrowedReferenceBuilder } from '../referenceBuilders/buildDeprecatedNarrowedReferenceBuilder';
 import { NormalizedDeprecatedDerivedReferenceBuilder } from '../types/builders/deprecatedDerivedReferenceBuilder';
 import { EvaluateGuardRuleTuple } from '../types/builders/deprecatedNarrowedReferenceBuilder';
 import { InferableGuardRule } from '../types/rule';
@@ -14,7 +14,8 @@ import {
 } from '../types/typedTarget';
 import { buildDeprecatedDerivedTargetReferenceConfiguration } from './buildDeprecatedDerivedTargetReferenceConfiguration';
 
-export type NarrowedTargetReferenceConfigurationBuilderInput<
+/** @deprecated */
+export type DeprecatedNarrowedTargetReferenceConfigurationBuilderInput<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TGuardRuleTuple extends readonly InferableGuardRule<
@@ -42,7 +43,8 @@ export type NarrowedTargetReferenceConfigurationBuilderInput<
   >;
 };
 
-export const buildNarrowedTargetReferenceConfiguration = <
+/** @deprecated */
+export const buildDeprecatedNarrowedTargetReferenceConfiguration = <
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TGuardRuleTuple extends readonly InferableGuardRule<
@@ -55,7 +57,7 @@ export const buildNarrowedTargetReferenceConfiguration = <
   inputTargetPath,
   outputTargetTypeId,
   conditions,
-}: NarrowedTargetReferenceConfigurationBuilderInput<
+}: DeprecatedNarrowedTargetReferenceConfigurationBuilderInput<
   TInputTypedTarget,
   TInputTargetPath,
   TGuardRuleTuple,
@@ -91,7 +93,7 @@ export const buildNarrowedTargetReferenceConfiguration = <
   >({
     inputTargetTypeId,
     inputTargetPath,
-    buildReference: buildNarrowedReferenceBuilder<
+    buildReference: buildDeprecatedNarrowedReferenceBuilder<
       TInputTypedTarget,
       TInputTargetPath,
       TGuardRuleTuple,

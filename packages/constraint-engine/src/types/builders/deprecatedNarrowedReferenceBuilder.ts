@@ -50,7 +50,7 @@ export type EvaluateGuardRuleTuple<
   ? TNarrowOption
   : TIdentityOption;
 
-export type NarrowedReferenceBuilder<
+export type DeprecatedNarrowedReferenceBuilder<
   TInputTypedTarget extends UnknownTypedTarget,
   TInputTargetPath extends UnknownTargetPath,
   TOutputTargetTypeId extends UnknownTargetTypeId,
@@ -81,7 +81,7 @@ export type CastReferenceBuilder<
   TInputTypedTarget,
   TGuardRuleTuple,
   TOutputTargetInstance,
-  NarrowedReferenceBuilder<
+  DeprecatedNarrowedReferenceBuilder<
     TInputTypedTarget,
     TInputTargetPath,
     TOutputTargetTypeId,
