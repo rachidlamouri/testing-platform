@@ -12,12 +12,12 @@ import {
   ExpectedCiYamlFileContentsTypedTarget,
 } from './expectedCiYamlFileContentsTarget';
 
-export const buildExpectedCiYamlFileContentsReference: DeprecatedDerivedReferenceBuilder<
-  CiYamlFileContentsConfigurationTypedTarget,
-  CiYamlFileTargetPath,
-  [ExpectedCiYamlFileContentsTypedTarget],
-  [CiYamlFileTargetPath]
-> = (inputReference) => {
+export const buildExpectedCiYamlFileContentsReference: DeprecatedDerivedReferenceBuilder<{
+  InputTypedTarget: CiYamlFileContentsConfigurationTypedTarget;
+  InputTargetPath: CiYamlFileTargetPath;
+  OutputTypedTargetOptionsTuple: [ExpectedCiYamlFileContentsTypedTarget];
+  OutputTargetPathTuple: [CiYamlFileTargetPath];
+}> = (inputReference) => {
   const { path } = inputReference;
 
   const outputInstance: ExpectedCiYamlFileContentsTarget = {

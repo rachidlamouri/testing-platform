@@ -1,9 +1,5 @@
 import { buildDeprecatedDerivedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceConfiguration';
-import { buildDerivedTargetReferenceSetConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceSetConfiguration';
-import {
-  buildTestingPlatformPackageDirectoryReferenceSet,
-  TestingPlatformPackageDirectoryTargetPath,
-} from '../customTargets/testingPlatform/packageDirectory/buildPackageDirectoryReferenceSet';
+import { TestingPlatformPackageDirectoryTargetPath } from '../customTargets/testingPlatform/packageDirectory/buildPackageDirectoryReferenceSet';
 import {
   buildPackageDirectorySetReference,
   PackageDirectorySetTargetPath,
@@ -17,7 +13,7 @@ import { UnknownTargetReferenceConfigurationTuple } from '../types/targetReferen
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
-import { buildNarrowedTargetReferenceConfiguration } from '../configurationHelpers/buildNarrowedTargetReferenceConfiguration';
+import { buildDeprecatedNarrowedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedNarrowedTargetReferenceConfiguration';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
 import { PackageDirectorySetTypedTarget } from '../customTargets/testingPlatform/packageDirectorySet/packageDirectorySetTarget';
 import { PackageDirectoryTypedTarget } from '../customTargets/testingPlatform/packageDirectory/packageDirectoryTarget';
@@ -123,59 +119,53 @@ export const targetReferenceConfigurationTuple = [
       path: '.github/workflows/continuous-integration.yml',
     },
   }),
-  buildDeprecatedDerivedTargetReferenceConfiguration<
-    CiYamlFileContentsConfigurationTypedTarget,
-    CiYamlFileTargetPath,
-    [ExpectedCiYamlFileContentsTypedTarget],
-    [CiYamlFileTargetPath]
-  >({
+  buildDeprecatedDerivedTargetReferenceConfiguration<{
+    InputTypedTarget: CiYamlFileContentsConfigurationTypedTarget;
+    InputTargetPath: CiYamlFileTargetPath;
+    OutputTypedTargetOptionsTuple: [ExpectedCiYamlFileContentsTypedTarget];
+    OutputTargetPathTuple: [CiYamlFileTargetPath];
+  }>({
     buildReference: buildExpectedCiYamlFileContentsReference,
     inputTargetTypeId:
       TestingPlatformTargetTypeId.CiYamlFileContentsConfiguration,
     inputTargetPath: '.github/workflows/continuous-integration.yml',
   }),
-  buildDeprecatedDerivedTargetReferenceConfiguration<
-    PackageDirectorySetConfigurationTypedTarget,
-    PackageDirectorySetTargetPath,
-    [PackageDirectorySetTypedTarget],
-    [PackageDirectorySetTargetPath]
-  >({
+  buildDeprecatedDerivedTargetReferenceConfiguration<{
+    InputTypedTarget: PackageDirectorySetConfigurationTypedTarget;
+    InputTargetPath: PackageDirectorySetTargetPath;
+    OutputTypedTargetOptionsTuple: [PackageDirectorySetTypedTarget];
+    OutputTargetPathTuple: [PackageDirectorySetTargetPath];
+  }>({
     buildReference: buildPackageDirectorySetReference,
     inputTargetTypeId:
       TestingPlatformTargetTypeId.PackageDirectorySetConfiguration,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
   }),
-  buildDerivedTargetReferenceSetConfiguration<
-    PackageDirectorySetTypedTarget,
-    PackageDirectorySetTargetPath,
-    PackageDirectoryTypedTarget,
-    TestingPlatformPackageDirectoryTargetPath<PackageDirectorySetTargetPath>
-  >({
-    buildReferenceSet: buildTestingPlatformPackageDirectoryReferenceSet,
-    inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
-    inputTargetPath: 'testingPlatformPackageDirectorySet',
-  }),
-  buildDeprecatedDerivedTargetReferenceConfiguration<
-    PackageDirectoryTypedTarget,
-    TestingPlatformPackageDirectoryTargetPath<PackageDirectorySetTargetPath>,
-    [PackageATypedTarget],
-    TestingPlatformPackageTargetPathTuple<PackageDirectorySetTargetPath>
-  >({
+  buildDeprecatedDerivedTargetReferenceConfiguration<{
+    InputTypedTarget: PackageDirectoryTypedTarget;
+    InputTargetPath: TestingPlatformPackageDirectoryTargetPath<PackageDirectorySetTargetPath>;
+    OutputTypedTargetOptionsTuple: [PackageATypedTarget];
+    OutputTargetPathTuple: TestingPlatformPackageTargetPathTuple<PackageDirectorySetTargetPath>;
+  }>({
     buildReference: buildPackageAReference,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectory,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
   }),
-  buildNarrowedTargetReferenceConfiguration<
-    PackageATypedTarget,
-    TestingPlatformPackageTargetPath<PackageDirectorySetTargetPath>,
-    [
-      typeof packageAHasPackageFile,
-      typeof packageAHasTypeScriptConfigFile,
-      typeof packageAHasRunTestsScript,
-      typeof packageAHasKnownTestFileTypes,
-    ],
-    TestingPlatformTargetTypeId.PackageB,
-    PackageBTarget
+  buildDeprecatedNarrowedTargetReferenceConfiguration<
+    {
+      InputTypedTarget: PackageATypedTarget;
+      InputTargetPath: TestingPlatformPackageTargetPath<PackageDirectorySetTargetPath>;
+    },
+    {
+      GuardRuleTuple: [
+        typeof packageAHasPackageFile,
+        typeof packageAHasTypeScriptConfigFile,
+        typeof packageAHasRunTestsScript,
+        typeof packageAHasKnownTestFileTypes,
+      ];
+      OutputTargetTypeId: TestingPlatformTargetTypeId.PackageB;
+      OutputTargetInstance: PackageBTarget;
+    }
   >({
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageA,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',
@@ -187,12 +177,16 @@ export const targetReferenceConfigurationTuple = [
     ],
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
   }),
-  buildNarrowedTargetReferenceConfiguration<
-    PackageBTypedTarget,
-    TestingPlatformPackageTargetPath<PackageDirectorySetTargetPath>,
-    [typeof packageBHasTestingPlatformConfiguration],
-    TestingPlatformTargetTypeId.PackageC,
-    PackageCTarget
+  buildDeprecatedNarrowedTargetReferenceConfiguration<
+    {
+      InputTypedTarget: PackageBTypedTarget;
+      InputTargetPath: TestingPlatformPackageTargetPath<PackageDirectorySetTargetPath>;
+    },
+    {
+      GuardRuleTuple: [typeof packageBHasTestingPlatformConfiguration];
+      OutputTargetTypeId: TestingPlatformTargetTypeId.PackageC;
+      OutputTargetInstance: PackageCTarget;
+    }
   >({
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageB,
     inputTargetPath: 'testingPlatformPackageDirectorySet/:directoryName',

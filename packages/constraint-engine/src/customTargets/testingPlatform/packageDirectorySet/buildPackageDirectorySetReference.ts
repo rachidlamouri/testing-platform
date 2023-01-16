@@ -19,12 +19,12 @@ export type PackageDirectorySetTargetReference = TargetReference<
   PackageDirectorySetTargetPath
 >;
 
-export const buildPackageDirectorySetReference: DeprecatedDerivedReferenceBuilder<
-  PackageDirectorySetConfigurationTypedTarget,
-  PackageDirectorySetTargetPath,
-  [PackageDirectorySetTypedTarget],
-  [PackageDirectorySetTargetPath]
-> = (inputReference) => {
+export const buildPackageDirectorySetReference: DeprecatedDerivedReferenceBuilder<{
+  InputTypedTarget: PackageDirectorySetConfigurationTypedTarget;
+  InputTargetPath: PackageDirectorySetTargetPath;
+  OutputTypedTargetOptionsTuple: [PackageDirectorySetTypedTarget];
+  OutputTargetPathTuple: [PackageDirectorySetTargetPath];
+}> = (inputReference) => {
   const relativeRootDirectory =
     inputReference.instance.rootDirectoryRelativeToCurrentWorkingDirectory;
 

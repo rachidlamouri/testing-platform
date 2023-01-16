@@ -72,9 +72,9 @@ export const buildPackageAReference = (<TPrefix extends UnknownTargetPath>(
       path: directoryTargetReference.path,
     },
   ];
-}) satisfies DeprecatedDerivedReferenceBuilder<
-  PackageDirectoryTypedTarget,
-  TestingPlatformPackageDirectoryTargetPath<UnknownTargetPath>,
-  [PackageATypedTarget],
-  [TestingPlatformPackageTargetPath<UnknownTargetPath>]
->;
+}) satisfies DeprecatedDerivedReferenceBuilder<{
+  InputTypedTarget: PackageDirectoryTypedTarget;
+  InputTargetPath: TestingPlatformPackageDirectoryTargetPath<UnknownTargetPath>;
+  OutputTypedTargetOptionsTuple: [PackageATypedTarget];
+  OutputTargetPathTuple: [TestingPlatformPackageTargetPath<UnknownTargetPath>];
+}>;

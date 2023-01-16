@@ -32,9 +32,9 @@ export const buildDerivedTypedJsonReference = (<
   };
 
   return [outputReference];
-}) satisfies DeprecatedDerivedReferenceBuilder<
-  JsonUnknownTypedTarget,
-  UnknownTargetPath,
-  JsonKnownTypedTargetOptionsTuple,
-  UnknownTargetPathTuple
->;
+}) satisfies DeprecatedDerivedReferenceBuilder<{
+  InputTypedTarget: JsonUnknownTypedTarget;
+  InputTargetPath: UnknownTargetPath;
+  OutputTypedTargetOptionsTuple: JsonKnownTypedTargetOptionsTuple;
+  OutputTargetPathTuple: UnknownTargetPathTuple;
+}>;

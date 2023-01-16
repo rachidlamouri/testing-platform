@@ -26,12 +26,12 @@ export const getTargetReferenceConfigurationTupleFromJson = (
         path: 'data',
       },
     }),
-    buildDeprecatedDerivedTargetReferenceConfiguration<
-      JsonUnknownTypedTarget,
-      RootJsonDataTargetPath,
-      JsonKnownTypedTargetOptionsTuple,
-      [RootJsonDataTargetPath]
-    >({
+    buildDeprecatedDerivedTargetReferenceConfiguration<{
+      InputTypedTarget: JsonUnknownTypedTarget;
+      InputTargetPath: RootJsonDataTargetPath;
+      OutputTypedTargetOptionsTuple: JsonKnownTypedTargetOptionsTuple;
+      OutputTargetPathTuple: [RootJsonDataTargetPath];
+    }>({
       buildReference: buildDerivedTypedJsonReference,
       inputTargetTypeId: JsonTargetTypeId.Unknown,
       inputTargetPath: 'data',

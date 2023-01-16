@@ -1,74 +1,128 @@
-import { DeprecatedDerivedReferenceSetBuilder } from '../builders/deprecatedDerivedReferenceSetBuilder';
-import { UnknownTargetPath } from '../targetPath';
-import { UnknownTypedTarget } from '../typedTarget';
+import { DeprecatedDerivedReferenceBuilderInput } from '../builders/deprecatedDerivedReferenceBuilder';
+import {
+  DeprecatedDerivedReferenceSetBuilder,
+  DeprecatedDerivedReferenceSetBuilderOutput,
+  DeprecatedDerivedReferenceSetBuilderInputAndOutput,
+} from '../builders/deprecatedDerivedReferenceSetBuilder';
+import { Merge } from '../utilityTypes/merge/merge';
+import { MergeTuple } from '../utilityTypes/merge/mergeTuple';
+import { RekeyConstrainedObject } from '../utilityTypes/rekeyObject/rekeyConstrainedObject';
+import { RekeyObject } from '../utilityTypes/rekeyObject/rekeyObject';
 import { TargetReferenceConfigurationTypeId } from './typeId';
 
 /** @deprecated */
+type DeprecatedDerivedTargetReferenceSetConfigurationEngineInput = RekeyObject<
+  { Object: DeprecatedDerivedReferenceBuilderInput },
+  {
+    KeyMap: {
+      InputTypedTarget: 'EngineInputTypedTarget';
+      InputTargetPath: 'EngineInputTargetPath';
+    };
+  }
+>;
+
+/** @deprecated */
+type DeprecatedDerivedTargetReferenceSetConfigurationConfigurationInput =
+  RekeyObject<
+    { Object: DeprecatedDerivedReferenceBuilderInput },
+    {
+      KeyMap: {
+        InputTypedTarget: 'ConfigurationInputTypedTarget';
+        InputTargetPath: 'ConfigurationInputTargetPath';
+      };
+    }
+  >;
+
+/** @deprecated */
+type DeprecatedDerivedTargetReferenceSetConfigurationInputsAndOutput =
+  MergeTuple<
+    [
+      DeprecatedDerivedTargetReferenceSetConfigurationEngineInput,
+      DeprecatedDerivedTargetReferenceSetConfigurationConfigurationInput,
+      DeprecatedDerivedReferenceSetBuilderOutput,
+    ]
+  >;
+
+/** @deprecated */
 type BaseDeprecatedDerivedTargetReferenceSetConfiguration<
-  TEngineInputTypedTarget extends UnknownTypedTarget,
-  TEngineInputTargetPath extends UnknownTargetPath,
-  TConfigurationInputTypedTarget extends UnknownTypedTarget,
-  TConfigurationInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTarget extends UnknownTypedTarget,
-  TOutputTargetPath extends UnknownTargetPath,
+  T extends DeprecatedDerivedTargetReferenceSetConfigurationInputsAndOutput,
 > = {
   typeId: TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceSetConfiguration;
   buildReferenceSet: DeprecatedDerivedReferenceSetBuilder<
-    TEngineInputTypedTarget,
-    TEngineInputTargetPath,
-    TOutputTypedTarget,
-    TOutputTargetPath
+    RekeyConstrainedObject<
+      {
+        OldConstraintObject: DeprecatedDerivedTargetReferenceSetConfigurationInputsAndOutput;
+        NewConstraintObject: DeprecatedDerivedReferenceSetBuilderInputAndOutput;
+      },
+      {
+        ConstrainedObject: T;
+        KeyMap: {
+          EngineInputTypedTarget: 'InputTypedTarget';
+          EngineInputTargetPath: 'InputTargetPath';
+        };
+      }
+    >
   >;
-  inputTargetTypeId: TConfigurationInputTypedTarget['typeId'];
-  inputTargetPath: TConfigurationInputTargetPath;
+  inputTargetTypeId: T['ConfigurationInputTypedTarget']['typeId'];
+  inputTargetPath: T['ConfigurationInputTargetPath'];
 };
 
 /** @deprecated */
 export type DeprecatedDerivedTargetReferenceSetConfiguration<
-  TInputTypedTarget extends UnknownTypedTarget,
-  TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTarget extends UnknownTypedTarget,
-  TOutputTargetPath extends UnknownTargetPath,
+  TDeprecatedDerivedReferenceSetBuilderInputAndOutput extends DeprecatedDerivedReferenceSetBuilderInputAndOutput,
 > = BaseDeprecatedDerivedTargetReferenceSetConfiguration<
-  TInputTypedTarget,
-  TInputTargetPath,
-  TInputTypedTarget,
-  TInputTargetPath,
-  TOutputTypedTarget,
-  TOutputTargetPath
+  Merge<
+    RekeyConstrainedObject<
+      {
+        OldConstraintObject: DeprecatedDerivedReferenceSetBuilderInputAndOutput;
+        NewConstraintObject: DeprecatedDerivedTargetReferenceSetConfigurationInputsAndOutput;
+      },
+      {
+        ConstrainedObject: TDeprecatedDerivedReferenceSetBuilderInputAndOutput;
+        KeyMap: {
+          InputTypedTarget: 'EngineInputTypedTarget';
+          InputTargetPath: 'EngineInputTargetPath';
+        };
+      }
+    >,
+    RekeyConstrainedObject<
+      {
+        OldConstraintObject: DeprecatedDerivedReferenceSetBuilderInputAndOutput;
+        NewConstraintObject: DeprecatedDerivedTargetReferenceSetConfigurationInputsAndOutput;
+      },
+      {
+        ConstrainedObject: TDeprecatedDerivedReferenceSetBuilderInputAndOutput;
+        KeyMap: {
+          InputTypedTarget: 'ConfigurationInputTypedTarget';
+          InputTargetPath: 'ConfigurationInputTargetPath';
+        };
+      }
+    >
+  >
 >;
 
 /** @deprecated */
 export type DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
-  TInputTypedTarget extends UnknownTypedTarget,
-  TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTarget extends UnknownTypedTarget,
-  TOutputTargetPath extends UnknownTargetPath,
+  TDeprecatedDerivedReferenceSetBuilderInputAndOutput extends DeprecatedDerivedReferenceSetBuilderInputAndOutput,
 > = BaseDeprecatedDerivedTargetReferenceSetConfiguration<
-  UnknownTypedTarget,
-  UnknownTargetPath,
-  TInputTypedTarget,
-  TInputTargetPath,
-  TOutputTypedTarget,
-  TOutputTargetPath
->;
-
-/** @deprecated */
-export type DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedInput<
-  TOutputTypedTarget extends UnknownTypedTarget,
-  TOutputTargetPath extends UnknownTargetPath,
-> = DeprecatedDerivedTargetReferenceSetConfiguration<
-  UnknownTypedTarget,
-  UnknownTargetPath,
-  TOutputTypedTarget,
-  TOutputTargetPath
+  Merge<
+    DeprecatedDerivedTargetReferenceSetConfigurationEngineInput,
+    RekeyConstrainedObject<
+      {
+        OldConstraintObject: DeprecatedDerivedReferenceSetBuilderInputAndOutput;
+        NewConstraintObject: DeprecatedDerivedTargetReferenceSetConfigurationInputsAndOutput;
+      },
+      {
+        ConstrainedObject: TDeprecatedDerivedReferenceSetBuilderInputAndOutput;
+        KeyMap: {
+          InputTypedTarget: 'ConfigurationInputTypedTarget';
+          InputTargetPath: 'ConfigurationInputTargetPath';
+        };
+      }
+    >
+  >
 >;
 
 /** @deprecated */
 export type UnknownDeprecatedDerivedTargetReferenceSetConfiguration =
-  DeprecatedDerivedTargetReferenceSetConfiguration<
-    UnknownTypedTarget,
-    UnknownTargetPath,
-    UnknownTypedTarget,
-    UnknownTargetPath
-  >;
+  DeprecatedDerivedTargetReferenceSetConfiguration<DeprecatedDerivedReferenceSetBuilderInputAndOutput>;

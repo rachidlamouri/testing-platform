@@ -1,8 +1,10 @@
 import { CustomSet } from '../utils/customSet';
+import { DeprecatedDerivedReferenceBuilderInputAndOutput } from './builders/deprecatedDerivedReferenceBuilder';
+import { DeprecatedDerivedReferenceSetBuilderInputAndOutput } from './builders/deprecatedDerivedReferenceSetBuilder';
 import { Rule } from './rule';
 import { UnknownTargetPath } from './targetPath';
-import { DeprecatedDerivedTargetReferenceConfigurationWithNormalizedInput } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
-import { DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedInput } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceSetConfiguration';
+import { DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
+import { DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceSetConfiguration';
 import {
   UnknownTargetReferenceConfiguration,
   UnknownTargetReferenceConfigurationTuple,
@@ -19,7 +21,7 @@ type BaseRuleConfiguration<
   targetPath: TTargetPath;
 };
 
-export type RuleConfiguration<
+type RuleConfiguration<
   TTypedTarget extends UnknownTypedTarget,
   TTargetPath extends UnknownTargetPath,
 > = BaseRuleConfiguration<TTypedTarget, TTypedTarget, TTargetPath>;
@@ -37,20 +39,18 @@ export type UnknownRuleConfigurationSet = CustomSet<UnknownRuleConfiguration>;
 type RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfiguration extends UnknownTargetReferenceConfiguration,
 > =
-  TTargetReferenceConfiguration extends DeprecatedDerivedTargetReferenceConfigurationWithNormalizedInput<
-    infer TOutputTypedTargetOptionsTuple,
-    infer TOutputTargetPathTuple
+  TTargetReferenceConfiguration extends DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder<
+    infer T extends DeprecatedDerivedReferenceBuilderInputAndOutput
   >
     ? // TODO: check if all permutations of target tuple and path tuple make sense
       RuleConfiguration<
-        TOutputTypedTargetOptionsTuple[number],
-        TOutputTargetPathTuple[number]
+        T['OutputTypedTargetOptionsTuple'][number],
+        T['OutputTargetPathTuple'][number]
       >
-    : TTargetReferenceConfiguration extends DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedInput<
-        infer TOutputTypedTarget,
-        infer TOutputTargetPath
+    : TTargetReferenceConfiguration extends DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
+        infer T extends DeprecatedDerivedReferenceSetBuilderInputAndOutput
       >
-    ? RuleConfiguration<TOutputTypedTarget, TOutputTargetPath>
+    ? RuleConfiguration<T['OutputTypedTarget'], T['OutputTargetPath']>
     : never;
 
 export type RuleConfigurationTupleFromTargetReferenceConfigurationTuple<
