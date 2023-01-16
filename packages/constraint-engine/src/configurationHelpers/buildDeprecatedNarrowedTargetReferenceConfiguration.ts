@@ -1,6 +1,6 @@
-import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildNarrowedReferenceBuilder';
+import { buildNarrowedReferenceBuilder } from '../referenceBuilders/buildDeprecatedNarrowedReferenceBuilder';
 import { NormalizedDeprecatedDerivedReferenceBuilder } from '../types/builders/deprecatedDerivedReferenceBuilder';
-import { EvaluateGuardRuleTuple } from '../types/builders/narrowedReferenceBuilder';
+import { EvaluateGuardRuleTuple } from '../types/builders/deprecatedNarrowedReferenceBuilder';
 import { InferableGuardRule } from '../types/rule';
 import { UnknownTargetPath } from '../types/targetPath';
 import {

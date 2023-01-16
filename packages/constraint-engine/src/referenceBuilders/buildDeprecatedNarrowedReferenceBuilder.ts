@@ -1,7 +1,7 @@
 import {
   CastReferenceBuilder,
   EvaluateGuardRuleTuple,
-} from '../types/builders/narrowedReferenceBuilder';
+} from '../types/builders/deprecatedNarrowedReferenceBuilder';
 import { InferableGuardRule } from '../types/rule';
 import { UnknownTargetPath } from '../types/targetPath';
 import {
