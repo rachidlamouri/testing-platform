@@ -1,118 +1,112 @@
 import { buildDeprecatedNarrowedReferenceBuilder } from '../referenceBuilders/buildDeprecatedNarrowedReferenceBuilder';
 import { NormalizedDeprecatedDerivedReferenceBuilder } from '../types/builders/deprecatedDerivedReferenceBuilder';
-import { EvaluateGuardRuleTuple } from '../types/builders/deprecatedNarrowedReferenceBuilder';
-import { InferableGuardRule } from '../types/rule';
-import { UnknownTargetPath } from '../types/targetPath';
+import {
+  DeprecatedNarrowedReferenceBuilderConstrainedOutput,
+  DeprecatedNarrowedReferenceBuilderInput,
+  EvaluateGuardRuleTuple,
+} from '../types/builders/deprecatedNarrowedReferenceBuilder';
 import {
   DeprecatedDerivedTargetReferenceConfiguration,
   DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder,
 } from '../types/targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
-import {
-  TypedTarget,
-  UnknownTargetTypeId,
-  UnknownTypedTarget,
-} from '../types/typedTarget';
+import { TypedTarget } from '../types/typedTarget';
 import { buildDeprecatedDerivedTargetReferenceConfiguration } from './buildDeprecatedDerivedTargetReferenceConfiguration';
 
 /** @deprecated */
 export type DeprecatedNarrowedTargetReferenceConfigurationBuilderInput<
-  TInputTypedTarget extends UnknownTypedTarget,
-  TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule<
-    TInputTypedTarget['instance']
-  >[],
-  TOutputTargetTypeId extends UnknownTargetTypeId,
-  TOutputTargetInstance extends TInputTypedTarget['instance'],
+  T1 extends DeprecatedNarrowedReferenceBuilderInput,
+  T2 extends DeprecatedNarrowedReferenceBuilderConstrainedOutput<T1>,
 > = Pick<
-  DeprecatedDerivedTargetReferenceConfiguration<
-    TInputTypedTarget,
-    TInputTargetPath,
-    [TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>],
-    [TInputTargetPath]
-  >,
+  DeprecatedDerivedTargetReferenceConfiguration<{
+    InputTypedTarget: T1['InputTypedTarget'];
+    InputTargetPath: T1['InputTargetPath'];
+    OutputTypedTargetOptionsTuple: [
+      TypedTarget<T2['OutputTargetTypeId'], T2['OutputTargetInstance']>,
+    ];
+    OutputTargetPathTuple: [T1['InputTargetPath']];
+  }>,
   'inputTargetTypeId' | 'conditions'
 > & {
-  inputTargetPath: TInputTargetPath;
-  conditions: TGuardRuleTuple;
+  inputTargetPath: T1['InputTargetPath'];
+  conditions: T2['GuardRuleTuple'];
   outputTargetTypeId: EvaluateGuardRuleTuple<
-    TInputTypedTarget,
-    TGuardRuleTuple,
-    TOutputTargetInstance,
-    TOutputTargetTypeId,
-    TInputTypedTarget['typeId']
+    T1,
+    T2,
+    {
+      IdentityOption: T1['InputTypedTarget']['typeId'];
+      NarrowedOption: T2['OutputTargetTypeId'];
+    }
   >;
 };
 
 /** @deprecated */
 export const buildDeprecatedNarrowedTargetReferenceConfiguration = <
-  TInputTypedTarget extends UnknownTypedTarget,
-  TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule<
-    TInputTypedTarget['instance']
-  >[],
-  TOutputTargetTypeId extends UnknownTargetTypeId,
-  TOutputTargetInstance extends TInputTypedTarget['instance'],
+  T1 extends DeprecatedNarrowedReferenceBuilderInput,
+  T2 extends DeprecatedNarrowedReferenceBuilderConstrainedOutput<T1>,
 >({
   inputTargetTypeId,
   inputTargetPath,
   outputTargetTypeId,
   conditions,
 }: DeprecatedNarrowedTargetReferenceConfigurationBuilderInput<
-  TInputTypedTarget,
-  TInputTargetPath,
-  TGuardRuleTuple,
-  TOutputTargetTypeId,
-  TOutputTargetInstance
->): DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder<
-  TInputTypedTarget,
-  TInputTargetPath,
-  [
+  T1,
+  T2
+>): DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder<{
+  InputTypedTarget: T1['InputTypedTarget'];
+  InputTargetPath: T1['InputTargetPath'];
+  OutputTypedTargetOptionsTuple: [
     EvaluateGuardRuleTuple<
-      TInputTypedTarget,
-      TGuardRuleTuple,
-      TOutputTargetInstance,
-      TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>,
-      TInputTypedTarget
+      T1,
+      T2,
+      {
+        IdentityOption: T1['InputTypedTarget'];
+        NarrowedOption: TypedTarget<
+          T2['OutputTargetTypeId'],
+          T2['OutputTargetInstance']
+        >;
+      }
     >,
-  ],
-  [TInputTargetPath]
-> =>
-  buildDeprecatedDerivedTargetReferenceConfiguration<
-    TInputTypedTarget,
-    TInputTargetPath,
-    [
+  ];
+  OutputTargetPathTuple: [T1['InputTargetPath']];
+}> =>
+  buildDeprecatedDerivedTargetReferenceConfiguration<{
+    InputTypedTarget: T1['InputTypedTarget'];
+    InputTargetPath: T1['InputTargetPath'];
+    OutputTypedTargetOptionsTuple: [
       EvaluateGuardRuleTuple<
-        TInputTypedTarget,
-        TGuardRuleTuple,
-        TOutputTargetInstance,
-        TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>,
-        TInputTypedTarget
+        T1,
+        T2,
+        {
+          IdentityOption: T1['InputTypedTarget'];
+          NarrowedOption: TypedTarget<
+            T2['OutputTargetTypeId'],
+            T2['OutputTargetInstance']
+          >;
+        }
       >,
-    ],
-    [TInputTargetPath]
-  >({
+    ];
+    OutputTargetPathTuple: [T1['InputTargetPath']];
+  }>({
     inputTargetTypeId,
     inputTargetPath,
-    buildReference: buildDeprecatedNarrowedReferenceBuilder<
-      TInputTypedTarget,
-      TInputTargetPath,
-      TGuardRuleTuple,
-      TOutputTargetTypeId,
-      TOutputTargetInstance
-    >(
+    buildReference: buildDeprecatedNarrowedReferenceBuilder<T1, T2>(
       conditions,
       outputTargetTypeId,
-    ) as NormalizedDeprecatedDerivedReferenceBuilder<
-      [
+    ) as NormalizedDeprecatedDerivedReferenceBuilder<{
+      OutputTypedTargetOptionsTuple: [
         EvaluateGuardRuleTuple<
-          TInputTypedTarget,
-          TGuardRuleTuple,
-          TOutputTargetInstance,
-          TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>,
-          TInputTypedTarget
+          T1,
+          T2,
+          {
+            IdentityOption: T1['InputTypedTarget'];
+            NarrowedOption: TypedTarget<
+              T2['OutputTargetTypeId'],
+              T2['OutputTargetInstance']
+            >;
+          }
         >,
-      ],
-      [TInputTargetPath]
-    >,
+      ];
+      OutputTargetPathTuple: [T1['InputTargetPath']];
+    }>,
     conditions,
   });

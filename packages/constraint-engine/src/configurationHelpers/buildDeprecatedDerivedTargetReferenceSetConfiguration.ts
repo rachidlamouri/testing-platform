@@ -1,43 +1,28 @@
-import { NormalizedDeprecatedDerivedReferenceSetBuilder } from '../types/builders/deprecatedDerivedReferenceSetBuilder';
-import { UnknownTargetPath } from '../types/targetPath';
+import {
+  DeprecatedDerivedReferenceSetBuilderInputAndOutput,
+  NormalizedDeprecatedDerivedReferenceSetBuilder,
+} from '../types/builders/deprecatedDerivedReferenceSetBuilder';
 import {
   DeprecatedDerivedTargetReferenceSetConfiguration,
   DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder,
 } from '../types/targetReferenceConfiguration/deprecatedDerivedTargetReferenceSetConfiguration';
 import { TargetReferenceConfigurationTypeId } from '../types/targetReferenceConfiguration/typeId';
-import { UnknownTypedTarget } from '../types/typedTarget';
 
 /** @deprecated */
-export const buildDerivedTargetReferenceSetConfiguration = <
-  TInputTypedTarget extends UnknownTypedTarget,
-  TInputTargetPath extends UnknownTargetPath,
-  TOutputTypedTarget extends UnknownTypedTarget,
-  TOutputTargetPath extends UnknownTargetPath,
+export const buildDeprecatedDerivedTargetReferenceSetConfiguration = <
+  TDeprecatedDerivedReferenceSetBuilderInputAndOutput extends DeprecatedDerivedReferenceSetBuilderInputAndOutput,
 >({
   inputTargetTypeId,
   inputTargetPath,
   buildReferenceSet,
 }: Omit<
-  DeprecatedDerivedTargetReferenceSetConfiguration<
-    TInputTypedTarget,
-    TInputTargetPath,
-    TOutputTypedTarget,
-    TOutputTargetPath
-  >,
+  DeprecatedDerivedTargetReferenceSetConfiguration<TDeprecatedDerivedReferenceSetBuilderInputAndOutput>,
   'typeId'
->): DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
-  TInputTypedTarget,
-  TInputTargetPath,
-  TOutputTypedTarget,
-  TOutputTargetPath
-> => ({
+>): DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder<TDeprecatedDerivedReferenceSetBuilderInputAndOutput> => ({
   typeId:
     TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceSetConfiguration,
   inputTargetTypeId,
   inputTargetPath,
   buildReferenceSet:
-    buildReferenceSet as NormalizedDeprecatedDerivedReferenceSetBuilder<
-      TOutputTypedTarget,
-      TOutputTargetPath
-    >,
+    buildReferenceSet as NormalizedDeprecatedDerivedReferenceSetBuilder<TDeprecatedDerivedReferenceSetBuilderInputAndOutput>,
 });
