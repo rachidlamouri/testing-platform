@@ -54,9 +54,9 @@ export const buildTestingPlatformPackageDirectoryReferenceSet = (<
     );
 
   return targetReferences;
-}) satisfies DeprecatedDerivedReferenceSetBuilder<
-  PackageDirectorySetTypedTarget,
-  PackageDirectorySetTargetPath,
-  PackageDirectoryTypedTarget,
-  TestingPlatformPackageDirectoryTargetPath<string>
->;
+}) satisfies DeprecatedDerivedReferenceSetBuilder<{
+  InputTypedTarget: PackageDirectorySetTypedTarget;
+  InputTargetPath: PackageDirectorySetTargetPath;
+  OutputTypedTarget: PackageDirectoryTypedTarget;
+  OutputTargetPath: TestingPlatformPackageDirectoryTargetPath<UnknownTargetPath>;
+}>;
