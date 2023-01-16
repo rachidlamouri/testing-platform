@@ -1,4 +1,6 @@
 import { CustomSet } from '../utils/customSet';
+import { DeprecatedDerivedReferenceBuilderInputAndOutput } from './builders/deprecatedDerivedReferenceBuilder';
+import { DeprecatedDerivedReferenceSetBuilderInputAndOutput } from './builders/deprecatedDerivedReferenceSetBuilder';
 import { Rule } from './rule';
 import { UnknownTargetPath } from './targetPath';
 import { DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder } from './targetReferenceConfiguration/deprecatedDerivedTargetReferenceConfiguration';
@@ -19,7 +21,7 @@ type BaseRuleConfiguration<
   targetPath: TTargetPath;
 };
 
-export type RuleConfiguration<
+type RuleConfiguration<
   TTypedTarget extends UnknownTypedTarget,
   TTargetPath extends UnknownTargetPath,
 > = BaseRuleConfiguration<TTypedTarget, TTypedTarget, TTargetPath>;
@@ -38,23 +40,17 @@ type RuleConfigurationFromTargetReferenceConfiguration<
   TTargetReferenceConfiguration extends UnknownTargetReferenceConfiguration,
 > =
   TTargetReferenceConfiguration extends DeprecatedDerivedTargetReferenceConfigurationWithNormalizedBuilder<
-    UnknownTypedTarget,
-    UnknownTargetPath,
-    infer TOutputTypedTargetOptionsTuple,
-    infer TOutputTargetPathTuple
+    infer T extends DeprecatedDerivedReferenceBuilderInputAndOutput
   >
     ? // TODO: check if all permutations of target tuple and path tuple make sense
       RuleConfiguration<
-        TOutputTypedTargetOptionsTuple[number],
-        TOutputTargetPathTuple[number]
+        T['OutputTypedTargetOptionsTuple'][number],
+        T['OutputTargetPathTuple'][number]
       >
     : TTargetReferenceConfiguration extends DeprecatedDerivedTargetReferenceSetConfigurationWithNormalizedBuilder<
-        UnknownTypedTarget,
-        UnknownTargetPath,
-        infer TOutputTypedTarget,
-        infer TOutputTargetPath
+        infer T extends DeprecatedDerivedReferenceSetBuilderInputAndOutput
       >
-    ? RuleConfiguration<TOutputTypedTarget, TOutputTargetPath>
+    ? RuleConfiguration<T['OutputTypedTarget'], T['OutputTargetPath']>
     : never;
 
 export type RuleConfigurationTupleFromTargetReferenceConfigurationTuple<
