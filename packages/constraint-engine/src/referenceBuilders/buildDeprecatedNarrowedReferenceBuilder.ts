@@ -1,109 +1,100 @@
 import {
   CastReferenceBuilder,
   EvaluateGuardRuleTuple,
+  EvaluationResultOptions,
+  DeprecatedNarrowedReferenceBuilderInput,
+  DeprecatedNarrowedReferenceBuilderConstrainedOutput,
 } from '../types/builders/deprecatedNarrowedReferenceBuilder';
-import { InferableGuardRule } from '../types/rule';
-import { UnknownTargetPath } from '../types/targetPath';
 import {
   TargetReference,
   TargetReferenceTuple,
 } from '../types/targetReference';
-import {
-  TypedTarget,
-  UnknownTargetTypeId,
-  UnknownTypedTarget,
-} from '../types/typedTarget';
+import { TypedTarget } from '../types/typedTarget';
 
 const evaluateInputTargetReference = <
-  TInputTypedTarget extends UnknownTypedTarget,
-  TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule<
-    TInputTypedTarget['instance']
-  >[],
-  TOutputTargetInstance extends TInputTypedTarget['instance'],
-  TNarrowedOption,
-  TIdentityOption,
+  T1 extends DeprecatedNarrowedReferenceBuilderInput,
+  T2 extends DeprecatedNarrowedReferenceBuilderConstrainedOutput<T1>,
+  T3 extends EvaluationResultOptions,
 >(
-  inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
-  conditions: TGuardRuleTuple,
-  narrowedOutput: TNarrowedOption,
-  identityOutput: TIdentityOption,
-): EvaluateGuardRuleTuple<
-  TInputTypedTarget,
-  TGuardRuleTuple,
-  TOutputTargetInstance,
-  TNarrowedOption,
-  TIdentityOption
-> => {
+  inputReference: TargetReference<
+    T1['InputTypedTarget'],
+    T1['InputTargetPath']
+  >,
+  conditions: T2['GuardRuleTuple'],
+  narrowedOutput: T3['NarrowedOption'],
+  identityOutput: T3['IdentityOption'],
+): EvaluateGuardRuleTuple<T1, T2, T3> => {
   return (
     conditions.every((condition) => condition(inputReference.instance))
       ? narrowedOutput
       : identityOutput
-  ) as EvaluateGuardRuleTuple<
-    TInputTypedTarget,
-    TGuardRuleTuple,
-    TOutputTargetInstance,
-    TNarrowedOption,
-    TIdentityOption
-  >;
+  ) as EvaluateGuardRuleTuple<T1, T2, T3>;
 };
 
 /** @deprecated */
 export const buildDeprecatedNarrowedReferenceBuilder = <
-  TInputTypedTarget extends UnknownTypedTarget,
-  TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule<
-    TInputTypedTarget['instance']
-  >[],
-  TOutputTargetTypeId extends UnknownTargetTypeId,
-  TOutputTargetInstance extends TInputTypedTarget['instance'],
+  T1 extends DeprecatedNarrowedReferenceBuilderInput,
+  T2 extends DeprecatedNarrowedReferenceBuilderConstrainedOutput<T1>,
 >(
-  conditions: TGuardRuleTuple,
+  conditions: T2['GuardRuleTuple'],
   outputTargetTypeId: EvaluateGuardRuleTuple<
-    TInputTypedTarget,
-    TGuardRuleTuple,
-    TOutputTargetInstance,
-    TOutputTargetTypeId,
-    TInputTypedTarget['typeId']
+    T1,
+    T2,
+    {
+      IdentityOption: T1['InputTypedTarget']['typeId'];
+      NarrowedOption: T2['OutputTargetTypeId'];
+    }
   >,
-): CastReferenceBuilder<
-  TInputTypedTarget,
-  TInputTargetPath,
-  TGuardRuleTuple,
-  TOutputTargetTypeId,
-  TOutputTargetInstance
-> => {
-  type TOutputTypedTarget = TypedTarget<
-    TOutputTargetTypeId,
-    TOutputTargetInstance
-  >;
+): CastReferenceBuilder<T1, T2> => {
+  type T4 = {
+    OutputTypedTarget: TypedTarget<
+      T2['OutputTargetTypeId'],
+      T2['OutputTargetInstance']
+    >;
+  };
 
   /** @deprecated */
   const buildDeprecatedNarrowedReference = (
-    inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
+    inputReference: TargetReference<
+      T1['InputTypedTarget'],
+      T1['InputTargetPath']
+    >,
   ): TargetReferenceTuple<
-    TOutputTypedTarget | TInputTypedTarget,
-    [TInputTargetPath]
+    T4['OutputTypedTarget'] | T1['InputTypedTarget'],
+    [T1['InputTargetPath']]
   > => {
     const outputReference: EvaluateGuardRuleTuple<
-      TInputTypedTarget,
-      TGuardRuleTuple,
-      TOutputTargetInstance,
-      TargetReference<TOutputTypedTarget, TInputTargetPath>,
-      TargetReference<TInputTypedTarget, TInputTargetPath>
+      T1,
+      T2,
+      {
+        IdentityOption: TargetReference<
+          T1['InputTypedTarget'],
+          T1['InputTargetPath']
+        >;
+        NarrowedOption: TargetReference<
+          T4['OutputTypedTarget'],
+          T1['InputTargetPath']
+        >;
+      }
     > = evaluateInputTargetReference<
-      TInputTypedTarget,
-      TInputTargetPath,
-      TGuardRuleTuple,
-      TOutputTargetInstance,
-      TargetReference<TOutputTypedTarget, TInputTargetPath>,
-      TargetReference<TInputTypedTarget, TInputTargetPath>
+      T1,
+      T2,
+      {
+        IdentityOption: TargetReference<
+          T1['InputTypedTarget'],
+          T1['InputTargetPath']
+        >;
+        NarrowedOption: TargetReference<
+          T4['OutputTypedTarget'],
+          T1['InputTargetPath']
+        >;
+      }
     >(
       inputReference,
       conditions,
       {
-        typeId: outputTargetTypeId as TOutputTargetTypeId,
-        instance: inputReference.instance as TOutputTargetInstance,
+        typeId: outputTargetTypeId as T2['OutputTargetTypeId'],
+        instance: inputReference.instance as T2['OutputTargetInstance'],
         path: inputReference.path,
       },
       inputReference,
@@ -112,11 +103,5 @@ export const buildDeprecatedNarrowedReferenceBuilder = <
     return [outputReference];
   };
 
-  return buildDeprecatedNarrowedReference as CastReferenceBuilder<
-    TInputTypedTarget,
-    TInputTargetPath,
-    TGuardRuleTuple,
-    TOutputTargetTypeId,
-    TOutputTargetInstance
-  >;
+  return buildDeprecatedNarrowedReference as CastReferenceBuilder<T1, T2>;
 };

@@ -28,31 +28,48 @@ export type GuardRuleTupleNarrowedTargetIntersection<
   GuardRuleTupleToNarrowedTargetTuple<TInputTargetInstance, TGuardRuleTuple>
 >;
 
+export type DeprecatedNarrowedReferenceBuilderInput = {
+  InputTypedTarget: UnknownTypedTarget;
+  InputTargetPath: UnknownTargetPath;
+};
+
+export type DeprecatedNarrowedReferenceBuilderConstrainedOutput<
+  T extends DeprecatedNarrowedReferenceBuilderInput,
+> = {
+  GuardRuleTuple: readonly InferableGuardRule<
+    T['InputTypedTarget']['instance']
+  >[];
+  OutputTargetTypeId: UnknownTargetTypeId;
+  OutputTargetInstance: T['InputTypedTarget']['instance'];
+};
+
+export type EvaluationResultOptions = {
+  IdentityOption: unknown;
+  NarrowedOption: unknown;
+};
+
 export type EvaluateGuardRuleTuple<
-  TInputTypedTarget extends UnknownTypedTarget,
-  TGuardRuleTuple extends readonly InferableGuardRule<
-    TInputTypedTarget['instance']
-  >[],
-  TOutputTargetInstance extends TInputTypedTarget['instance'],
-  TNarrowOption,
-  TIdentityOption,
+  T1 extends DeprecatedNarrowedReferenceBuilderInput,
+  T2 extends DeprecatedNarrowedReferenceBuilderConstrainedOutput<T1>,
+  T3 extends EvaluationResultOptions,
 > = GuardRuleTupleNarrowedTargetIntersection<
-  TInputTypedTarget['instance'],
-  TGuardRuleTuple
-> extends TOutputTargetInstance
-  ? TNarrowOption
-  : TIdentityOption;
+  T1['InputTypedTarget']['instance'],
+  T2['GuardRuleTuple']
+> extends T2['OutputTargetInstance']
+  ? T3['NarrowedOption']
+  : T3['IdentityOption'];
 
 export type DeprecatedNarrowedReferenceBuilder<
-  TInputTypedTarget extends UnknownTypedTarget,
-  TInputTargetPath extends UnknownTargetPath,
-  TOutputTargetTypeId extends UnknownTargetTypeId,
-  TOutputTargetInstance extends TInputTypedTarget['instance'],
+  T1 extends DeprecatedNarrowedReferenceBuilderInput,
+  T2 extends DeprecatedNarrowedReferenceBuilderConstrainedOutput<T1>,
 > = (
-  inputReference: TargetReference<TInputTypedTarget, TInputTargetPath>,
+  inputReference: TargetReference<
+    T1['InputTypedTarget'],
+    T1['InputTargetPath']
+  >,
 ) => TargetReferenceTuple<
-  TypedTarget<TOutputTargetTypeId, TOutputTargetInstance>,
-  [TInputTargetPath]
+  TypedTarget<T2['OutputTargetTypeId'], T2['OutputTargetInstance']>,
+  [T1['InputTargetPath']]
 >;
 
 export type IdentityReferenceBuilder<
@@ -63,22 +80,16 @@ export type IdentityReferenceBuilder<
 ) => TargetReferenceTuple<TTypedTarget, [TTargetPath]>;
 
 export type CastReferenceBuilder<
-  TInputTypedTarget extends UnknownTypedTarget,
-  TInputTargetPath extends UnknownTargetPath,
-  TGuardRuleTuple extends readonly InferableGuardRule<
-    TInputTypedTarget['instance']
-  >[],
-  TOutputTargetTypeId extends UnknownTargetTypeId,
-  TOutputTargetInstance extends TInputTypedTarget['instance'],
+  T1 extends DeprecatedNarrowedReferenceBuilderInput,
+  T2 extends DeprecatedNarrowedReferenceBuilderConstrainedOutput<T1>,
 > = EvaluateGuardRuleTuple<
-  TInputTypedTarget,
-  TGuardRuleTuple,
-  TOutputTargetInstance,
-  DeprecatedNarrowedReferenceBuilder<
-    TInputTypedTarget,
-    TInputTargetPath,
-    TOutputTargetTypeId,
-    TOutputTargetInstance
-  >,
-  IdentityReferenceBuilder<TInputTypedTarget, TInputTargetPath>
+  T1,
+  T2,
+  {
+    IdentityOption: IdentityReferenceBuilder<
+      T1['InputTypedTarget'],
+      T1['InputTargetPath']
+    >;
+    NarrowedOption: DeprecatedNarrowedReferenceBuilder<T1, T2>;
+  }
 >;
