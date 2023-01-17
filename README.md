@@ -4,10 +4,10 @@ Testing frameworks on testing frameworks.
 
 **note**: This project is under active development and is subject to change. It has not been officially released yet.
 
-## Constraint Engine Demo
+## Open Schema Implementation Demo
 
 ```bash
-npm run lint:constraints && code debug
+npx ts-node packages/open-schema-type-script/src/example/index.ts && code debug
 ```
 
 ## Description
