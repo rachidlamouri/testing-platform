@@ -1,5 +1,8 @@
 import { buildDeprecatedDerivedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceConfiguration';
-import { TestingPlatformPackageDirectoryTargetPath } from '../customTargets/testingPlatform/packageDirectory/buildPackageDirectoryReferenceSet';
+import {
+  buildTestingPlatformPackageDirectoryReferenceSet,
+  TestingPlatformPackageDirectoryTargetPath,
+} from '../customTargets/testingPlatform/packageDirectory/buildPackageDirectoryReferenceSet';
 import {
   buildPackageDirectorySetReference,
   PackageDirectorySetTargetPath,
@@ -9,7 +12,6 @@ import {
   TestingPlatformPackageTargetPath,
   TestingPlatformPackageTargetPathTuple,
 } from '../customTargets/testingPlatform/packageA/buildPackageAReference';
-import { UnknownTargetReferenceConfigurationTuple } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
@@ -38,6 +40,8 @@ import {
 import { ExpectedCiYamlFileContentsTypedTarget } from '../customTargets/testingPlatform/ciYamlFile/expectedCiYamlFileContentsTarget';
 import { buildExpectedCiYamlFileContentsReference } from '../customTargets/testingPlatform/ciYamlFile/buildExpectedCiYamlFileContentsReference';
 import { packageAHasKnownTestFileTypes } from '../customRules/packageAHasKnownTestFileTypes';
+import { buildDeprecatedDerivedTargetReferenceSetConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceSetConfiguration';
+import { UnknownTargetReferenceConfigurationTuple } from '../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 
 export const targetReferenceConfigurationTuple = [
   buildStaticTargetReferenceConfiguration<
@@ -194,3 +198,18 @@ export const targetReferenceConfigurationTuple = [
     outputTargetTypeId: TestingPlatformTargetTypeId.PackageC,
   }),
 ] as const satisfies UnknownTargetReferenceConfigurationTuple;
+
+export const modifiedTargetReferenceConfigurations = [
+  ...targetReferenceConfigurationTuple,
+  // Note: there is something wrong with the following configuration that stops "satisfies UnknownTargetReferenceConfigurationTuple" from working. It's deprecated so its not worth investigating.
+  buildDeprecatedDerivedTargetReferenceSetConfiguration<{
+    InputTypedTarget: PackageDirectorySetTypedTarget;
+    InputTargetPath: PackageDirectorySetTargetPath;
+    OutputTypedTarget: PackageDirectoryTypedTarget;
+    OutputTargetPath: TestingPlatformPackageDirectoryTargetPath<PackageDirectorySetTargetPath>;
+  }>({
+    buildReferenceSet: buildTestingPlatformPackageDirectoryReferenceSet,
+    inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
+    inputTargetPath: 'testingPlatformPackageDirectorySet',
+  }),
+] as UnknownTargetReferenceConfigurationTuple;
