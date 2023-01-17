@@ -27,3 +27,5 @@ export type UnknownTargetReference = TargetReference<
 >;
 
 export type UnknownTargetReferenceSet = CustomSet<UnknownTargetReference>;
+
+export type UnknownTargetReferenceTuple = readonly UnknownTargetReference[];

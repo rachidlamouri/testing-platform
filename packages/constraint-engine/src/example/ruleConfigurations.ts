@@ -4,7 +4,10 @@ import { packageCExtendsBaseTypeScriptConfiguration } from '../customRules/packa
 import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
-import { UnknownRuleConfigurationTuple } from '../types/ruleConfiguration';
+import {
+  RuleConfigurationTupleFromTargetReferenceConfigurationTuple,
+  UnknownRuleConfigurationTuple,
+} from '../types/ruleConfiguration';
 import { targetReferenceConfigurationTuple } from './targetReferenceConfigurations';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
 import { TargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
@@ -13,6 +16,9 @@ import { packageBRunsAllTestFiles } from '../customRules/packageBRunsAllTestFile
 
 type CustomTargetReferenceConfigurationTuple =
   typeof targetReferenceConfigurationTuple;
+
+type A =
+  RuleConfigurationTupleFromTargetReferenceConfigurationTuple<CustomTargetReferenceConfigurationTuple>;
 
 export const ruleConfigurationTuple = [
   buildRuleConfiguration<CustomTargetReferenceConfigurationTuple>({
