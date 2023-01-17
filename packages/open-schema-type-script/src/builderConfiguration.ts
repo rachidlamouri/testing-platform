@@ -63,7 +63,7 @@ type BaseBuilderConfiguration<
       }
     >
   >;
-  inputCollectionLocatorTuple: DatumInstanceConfigurationTupleToInstanceIdentifierTuple<
+  inputCollectionLocatorCollection: DatumInstanceConfigurationTupleToInstanceIdentifierTuple<
     T['ConfigurationInputDatumInstanceConfigurationCollection']
   >;
 };
@@ -135,3 +135,6 @@ export type BuilderConfigurationWithNormalizedInput<
 
 export type UnknownBuilderConfiguration =
   BaseBuilderConfiguration<UnknownBaseBuilderConfigurationInputAndOutput>;
+
+export type UnknownBuilderConfigurationTuple =
+  readonly UnknownBuilderConfiguration[];
