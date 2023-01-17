@@ -78,9 +78,9 @@ export const run: ConstraintEngineRunner = ({
     debugInfo.push({
       loopCount,
       currentTargetPaths: currentTargetPaths.toArray(),
-      nextTargetPaths: nextTargetPaths.toArray(),
       referenceBuilderResult,
       nextRuleResults,
+      nextTargetPaths: nextTargetPaths.toArray(),
     });
 
     loopCount += 1;
