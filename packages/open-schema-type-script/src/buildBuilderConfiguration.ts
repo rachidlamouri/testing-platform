@@ -1,0 +1,9 @@
+import { BuilderConfigurationWithNormalizedInput } from './builderConfiguration';
+import { UnknownDatumInstanceConfigurationCollectionBuilderInputAndOutput } from './datumInstanceConfigurationCollectionBuilder';
+
+export const buildBuilderConfiguration = <
+  TUnknownDatumInstanceConfigurationCollectionBuilderInputAndOutput extends UnknownDatumInstanceConfigurationCollectionBuilderInputAndOutput,
+>(
+  builderConfiguration: BuilderConfigurationWithNormalizedInput<TUnknownDatumInstanceConfigurationCollectionBuilderInputAndOutput>,
+): BuilderConfigurationWithNormalizedInput<TUnknownDatumInstanceConfigurationCollectionBuilderInputAndOutput> =>
+  builderConfiguration;
