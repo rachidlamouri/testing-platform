@@ -1,20 +1,48 @@
+import { buildBuilderConfiguration } from '../buildBuilderConfiguration';
 import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
-import { ROOT_DATUM_INSTANCE_LOCATOR } from '../collectionLocator';
-import { UnknownDatumInstanceConfigurationTuple } from '../datumInstanceConfiguration';
+import {
+  RootDatumInstanceLocator,
+  ROOT_DATUM_INSTANCE_LOCATOR,
+} from '../collectionLocator';
+import { RootDatumInstance } from '../datumInstance';
 import { run } from '../representation-engine/run';
 
 const builderConfigurationCollection = [
-  {
-    buildCollection: (): UnknownDatumInstanceConfigurationTuple => [
+  buildBuilderConfiguration<{
+    InputDatumInstanceConfigurationCollection: [
+      {
+        instanceIdentifier: RootDatumInstanceLocator;
+        datumInstance: RootDatumInstance;
+      },
+    ];
+    OutputDatumInstanceConfigurationCollection: [
+      { instanceIdentifier: 'instance-1'; datumInstance: string },
+    ];
+  }>({
+    buildCollection: () => [
       {
         instanceIdentifier: 'instance-1',
         datumInstance: 'hello',
       },
     ],
     inputCollectionLocatorCollection: [ROOT_DATUM_INSTANCE_LOCATOR],
-  },
-  {
-    buildCollection: (): UnknownDatumInstanceConfigurationTuple => [
+  }),
+  buildBuilderConfiguration<{
+    InputDatumInstanceConfigurationCollection: [
+      { instanceIdentifier: 'instance-1'; datumInstance: string },
+    ];
+    OutputDatumInstanceConfigurationCollection: [
+      {
+        instanceIdentifier: 'instance-1/instance-2';
+        datumInstance: number;
+      },
+      {
+        instanceIdentifier: 'instance-1/instance-3';
+        datumInstance: number;
+      },
+    ];
+  }>({
+    buildCollection: () => [
       {
         instanceIdentifier: 'instance-1/instance-2',
         datumInstance: 2,
@@ -25,7 +53,7 @@ const builderConfigurationCollection = [
       },
     ],
     inputCollectionLocatorCollection: ['instance-1'],
-  },
+  }),
 ] as const satisfies UnknownBuilderConfigurationTuple;
 
 run({
