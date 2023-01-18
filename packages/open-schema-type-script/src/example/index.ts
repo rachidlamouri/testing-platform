@@ -1,23 +1,31 @@
 import { buildBuilderConfiguration } from '../buildBuilderConfiguration';
 import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
+import { ROOT_DATUM_INSTANCE_LOCATOR } from '../collectionLocator';
 import {
-  RootDatumInstanceLocator,
-  ROOT_DATUM_INSTANCE_LOCATOR,
-} from '../collectionLocator';
-import { RootDatumInstance } from '../datumInstance';
+  DatumInstanceConfiguration,
+  RootDatumInstanceConfiguration,
+} from '../datumInstanceConfiguration';
 import { run } from '../representation-engine/run';
+
+type Instance1Configuration = DatumInstanceConfiguration<{
+  instanceIdentifier: 'instance-1';
+  datumInstance: string;
+}>;
+
+type Instance2Configuration = DatumInstanceConfiguration<{
+  instanceIdentifier: 'instance-1/instance-2';
+  datumInstance: number;
+}>;
+
+type Instance3Configuration = DatumInstanceConfiguration<{
+  instanceIdentifier: 'instance-1/instance-3';
+  datumInstance: number;
+}>;
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
-    InputDatumInstanceConfigurationCollection: [
-      {
-        instanceIdentifier: RootDatumInstanceLocator;
-        datumInstance: RootDatumInstance;
-      },
-    ];
-    OutputDatumInstanceConfigurationCollection: [
-      { instanceIdentifier: 'instance-1'; datumInstance: string },
-    ];
+    InputDatumInstanceConfigurationCollection: [RootDatumInstanceConfiguration];
+    OutputDatumInstanceConfigurationCollection: [Instance1Configuration];
   }>({
     buildCollection: () => [
       {
@@ -28,18 +36,10 @@ const builderConfigurationCollection = [
     inputCollectionLocatorCollection: [ROOT_DATUM_INSTANCE_LOCATOR],
   }),
   buildBuilderConfiguration<{
-    InputDatumInstanceConfigurationCollection: [
-      { instanceIdentifier: 'instance-1'; datumInstance: string },
-    ];
+    InputDatumInstanceConfigurationCollection: [Instance1Configuration];
     OutputDatumInstanceConfigurationCollection: [
-      {
-        instanceIdentifier: 'instance-1/instance-2';
-        datumInstance: number;
-      },
-      {
-        instanceIdentifier: 'instance-1/instance-3';
-        datumInstance: number;
-      },
+      Instance2Configuration,
+      Instance3Configuration,
     ];
   }>({
     buildCollection: () => [

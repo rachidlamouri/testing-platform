@@ -1,11 +1,11 @@
 import fs from 'fs';
 import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
+import { UnknownCollectionLocator } from '../collectionLocator';
+import { UnknownDatumInstance } from '../datumInstance';
 import {
-  ROOT_DATUM_INSTANCE_LOCATOR,
-  UnknownCollectionLocator,
-} from '../collectionLocator';
-import { ROOT_DATUM_INSTANCE, UnknownDatumInstance } from '../datumInstance';
-import { UnknownDatumInstanceConfiguration } from '../datumInstanceConfiguration';
+  ROOT_DATUM_INSTANCE_CONFIGURATION,
+  UnknownDatumInstanceConfiguration,
+} from '../datumInstanceConfiguration';
 
 export type RepresentationEngineInput = {
   builderConfigurationCollection: UnknownBuilderConfigurationTuple;
@@ -27,10 +27,13 @@ export const run: RepresentationEngine = ({
   let currentDatumInstanceLocatorCollection: Set<UnknownCollectionLocator> =
     new Set();
   let nextDatumInstanceLocatorCollection: Set<UnknownCollectionLocator> =
-    new Set([ROOT_DATUM_INSTANCE_LOCATOR]);
+    new Set([ROOT_DATUM_INSTANCE_CONFIGURATION.instanceIdentifier]);
 
   const instanceMap: DatumInstancesByIdentifier = new Map([
-    [ROOT_DATUM_INSTANCE_LOCATOR, ROOT_DATUM_INSTANCE],
+    [
+      ROOT_DATUM_INSTANCE_CONFIGURATION.instanceIdentifier,
+      ROOT_DATUM_INSTANCE_CONFIGURATION.datumInstance,
+    ],
   ]);
 
   while (nextDatumInstanceLocatorCollection.size > 0) {
