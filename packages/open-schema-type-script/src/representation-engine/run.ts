@@ -59,6 +59,8 @@ export const run: RepresentationEngine = ({
               return {
                 instanceIdentifier: inputLocator,
                 datumInstance: instanceMap.get(inputLocator),
+                // TODO: figure out what to do with these predicate identifiers
+                predicateIdentifiers: [],
               };
             },
           );

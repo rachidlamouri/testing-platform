@@ -8,6 +8,7 @@ import {
   ROOT_DATUM_INSTANCE,
   UnknownDatumInstance,
 } from './datumInstance';
+import { TypeSemanticsIdentifier } from './example/typeSemanticsIdentifier';
 import { ConstrainObject } from './utilityTypes/constrainObject';
 
 export type UnknownDatumInstanceConfiguration = {
@@ -15,7 +16,7 @@ export type UnknownDatumInstanceConfiguration = {
   datumInstance: UnknownDatumInstance;
   // TOOD: we aren't do anything with these, so disabling them for now
   // aliases: UnknownCollectionLocator[];
-  // predicateIdentifiers: UnknownCollectionLocator[];
+  predicateIdentifiers: UnknownCollectionLocator[];
 };
 
 export type DatumInstanceConfiguration<
@@ -37,10 +38,12 @@ export type DatumInstanceConfigurationTupleToInstanceIdentifierTuple<
 export type RootDatumInstanceConfiguration = DatumInstanceConfiguration<{
   instanceIdentifier: RootDatumInstanceLocator;
   datumInstance: RootDatumInstance;
+  predicateIdentifiers: [TypeSemanticsIdentifier.null];
 }>;
 
 export const ROOT_DATUM_INSTANCE_CONFIGURATION: RootDatumInstanceConfiguration =
   {
     instanceIdentifier: ROOT_DATUM_INSTANCE_LOCATOR,
     datumInstance: ROOT_DATUM_INSTANCE,
+    predicateIdentifiers: [TypeSemanticsIdentifier.null],
   };
