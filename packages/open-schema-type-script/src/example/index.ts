@@ -1,10 +1,9 @@
 import { buildBuilderConfiguration } from '../buildBuilderConfiguration';
 import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
 import { ROOT_DATUM_INSTANCE_LOCATOR } from '../collectionLocator';
-import { RootDatumInstanceConfiguration } from '../datumInstanceConfiguration';
 import {
-  DatumInstanceConfigurationFromTypeScriptConfiguration,
   DatumInstanceTypeScriptConfiguration,
+  RootDatumInstanceTypeScriptConfiguration,
 } from '../datumInstanceTypeScriptConfiguration';
 import { run } from '../representation-engine/run';
 import { TypeSemanticsIdentifier } from './typeSemanticsIdentifier';
@@ -12,34 +11,25 @@ import { TypeSemanticsIdentifier } from './typeSemanticsIdentifier';
 type Instance1TypeScriptConfiguration = DatumInstanceTypeScriptConfiguration<{
   datumInstanceIdentifier: 'instance-1';
   datumInstance: string;
-  typeSemanticsIdentifier: 'TypeScript:string';
+  typeSemanticsIdentifier: TypeSemanticsIdentifier.string;
 }>;
-
-type Instance1Configuration =
-  DatumInstanceConfigurationFromTypeScriptConfiguration<Instance1TypeScriptConfiguration>;
 
 type Instance2TypeScriptConfiguration = DatumInstanceTypeScriptConfiguration<{
   datumInstanceIdentifier: 'instance-1/instance-2';
   datumInstance: number;
-  typeSemanticsIdentifier: 'TypeScript:number';
+  typeSemanticsIdentifier: TypeSemanticsIdentifier.number;
 }>;
 
 type Instance3TypeScriptConfiguration = DatumInstanceTypeScriptConfiguration<{
   datumInstanceIdentifier: 'instance-1/instance-3';
   datumInstance: number;
-  typeSemanticsIdentifier: 'TypeScript:number';
+  typeSemanticsIdentifier: TypeSemanticsIdentifier.number;
 }>;
-
-type Instance2Configuration =
-  DatumInstanceConfigurationFromTypeScriptConfiguration<Instance2TypeScriptConfiguration>;
-
-type Instance3Configuration =
-  DatumInstanceConfigurationFromTypeScriptConfiguration<Instance3TypeScriptConfiguration>;
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
-    InputDatumInstanceConfigurationCollection: [RootDatumInstanceConfiguration];
-    OutputDatumInstanceConfigurationCollection: [Instance1Configuration];
+    InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+    OutputCollection: [Instance1TypeScriptConfiguration];
   }>({
     buildCollection: () => [
       {
@@ -51,10 +41,10 @@ const builderConfigurationCollection = [
     inputCollectionLocatorCollection: [ROOT_DATUM_INSTANCE_LOCATOR],
   }),
   buildBuilderConfiguration<{
-    InputDatumInstanceConfigurationCollection: [Instance1Configuration];
-    OutputDatumInstanceConfigurationCollection: [
-      Instance2Configuration,
-      Instance3Configuration,
+    InputCollection: [Instance1TypeScriptConfiguration];
+    OutputCollection: [
+      Instance2TypeScriptConfiguration,
+      Instance3TypeScriptConfiguration,
     ];
   }>({
     buildCollection: () => [
