@@ -1,14 +1,5 @@
-import {
-  RootDatumInstanceLocator,
-  ROOT_DATUM_INSTANCE_LOCATOR,
-  UnknownCollectionLocator,
-} from './collectionLocator';
-import {
-  RootDatumInstance,
-  ROOT_DATUM_INSTANCE,
-  UnknownDatumInstance,
-} from './datumInstance';
-import { TypeSemanticsIdentifier } from './example/typeSemanticsIdentifier';
+import { UnknownCollectionLocator } from './collectionLocator';
+import { UnknownDatumInstance } from './datumInstance';
 import { ConstrainObject } from './utilityTypes/constrainObject';
 
 export type UnknownDatumInstanceConfiguration = {
@@ -34,16 +25,3 @@ export type DatumInstanceConfigurationTupleToInstanceIdentifierTuple<
 > = {
   [Index in keyof T]: T[Index]['instanceIdentifier'];
 };
-
-export type RootDatumInstanceConfiguration = DatumInstanceConfiguration<{
-  instanceIdentifier: RootDatumInstanceLocator;
-  datumInstance: RootDatumInstance;
-  predicateIdentifiers: [TypeSemanticsIdentifier.null];
-}>;
-
-export const ROOT_DATUM_INSTANCE_CONFIGURATION: RootDatumInstanceConfiguration =
-  {
-    instanceIdentifier: ROOT_DATUM_INSTANCE_LOCATOR,
-    datumInstance: ROOT_DATUM_INSTANCE,
-    predicateIdentifiers: [TypeSemanticsIdentifier.null],
-  };
