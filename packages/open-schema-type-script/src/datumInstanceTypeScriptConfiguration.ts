@@ -9,7 +9,7 @@ import {
   UnknownDatumInstance,
 } from './datumInstance';
 import { DatumInstanceConfiguration } from './datumInstanceConfiguration';
-import { TypeSemanticsIdentifier } from './example/typeSemanticsIdentifier';
+import { TypeSemanticsIdentifier } from './example/typeScriptSemanticsIdentifier';
 import { ConstrainObject } from './utilityTypes/constrainObject';
 
 export type UnknownDatumInstanceTypeScriptConfiguration = {

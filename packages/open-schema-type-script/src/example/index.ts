@@ -6,7 +6,7 @@ import {
   RootDatumInstanceTypeScriptConfiguration,
 } from '../datumInstanceTypeScriptConfiguration';
 import { run } from '../representation-engine/run';
-import { TypeSemanticsIdentifier } from './typeSemanticsIdentifier';
+import { TypeSemanticsIdentifier } from './typeScriptSemanticsIdentifier';
 
 type Instance1TypeScriptConfiguration = DatumInstanceTypeScriptConfiguration<{
   datumInstanceIdentifier: 'instance-1';
