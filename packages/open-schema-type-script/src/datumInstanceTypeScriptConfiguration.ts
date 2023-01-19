@@ -9,7 +9,7 @@ import {
   UnknownDatumInstance,
 } from './datumInstance';
 import { DatumInstanceConfiguration } from './datumInstanceConfiguration';
-import { TypeSemanticsIdentifier } from './example/typeScriptSemanticsIdentifier';
+import { TypeScriptSemanticsIdentifier } from './example/typeScriptSemanticsIdentifier';
 import { ConstrainObject } from './utilityTypes/constrainObject';
 
 export type UnknownDatumInstanceTypeScriptConfiguration = {
@@ -49,7 +49,7 @@ export type DatumInstanceTypeScriptConfigurationTupleToDatumInstanceConfiguratio
 export type RootDatumInstanceTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
     datumInstanceIdentifier: RootDatumInstanceLocator;
-    typeSemanticsIdentifier: TypeSemanticsIdentifier.null;
+    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.null;
     datumInstance: RootDatumInstance;
   }>;
 
@@ -57,5 +57,5 @@ export const ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION: RootDatumInstanceTyp
   {
     datumInstanceIdentifier: ROOT_DATUM_INSTANCE_LOCATOR,
     datumInstance: ROOT_DATUM_INSTANCE,
-    typeSemanticsIdentifier: TypeSemanticsIdentifier.null,
+    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.null,
   };
