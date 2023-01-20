@@ -59,3 +59,15 @@ export const ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION: RootDatumInstanceTyp
     datumInstance: ROOT_DATUM_INSTANCE,
     typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.null,
   };
+
+export const getDatumInstanceConfiguration = <
+  T extends UnknownDatumInstanceTypeScriptConfiguration,
+>({
+  typeSemanticsIdentifier,
+  datumInstanceIdentifier,
+  datumInstance,
+}: T): DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<T> => ({
+  predicateIdentifiers: [typeSemanticsIdentifier],
+  instanceIdentifier: datumInstanceIdentifier,
+  datumInstance,
+});
