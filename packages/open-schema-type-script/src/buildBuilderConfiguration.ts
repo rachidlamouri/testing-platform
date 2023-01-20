@@ -1,4 +1,7 @@
-import { BuilderConfigurationWithNormalizedInput } from './builderConfiguration';
+import {
+  BuilderConfiguration,
+  BuilderConfigurationWithNormalizedInput,
+} from './builderConfiguration';
 import {
   DatumInstanceTypeScriptConfigurationTupleToDatumInstanceConfigurationTuple,
   UnknownDatumInstanceTypeScriptConfigurationTuple,
@@ -24,9 +27,12 @@ export type TypeScriptConfigurationCollectionToConfigurationCollection<
 export const buildBuilderConfiguration = <
   T extends UnknownDatumInstanceTypeScriptConfigurationCollectionBuilderInputAndOutput,
 >(
-  builderConfiguration: BuilderConfigurationWithNormalizedInput<
+  builderConfiguration: BuilderConfiguration<
     TypeScriptConfigurationCollectionToConfigurationCollection<T>
   >,
 ): BuilderConfigurationWithNormalizedInput<
   TypeScriptConfigurationCollectionToConfigurationCollection<T>
-> => builderConfiguration;
+> =>
+  builderConfiguration as BuilderConfigurationWithNormalizedInput<
+    TypeScriptConfigurationCollectionToConfigurationCollection<T>
+  >;
