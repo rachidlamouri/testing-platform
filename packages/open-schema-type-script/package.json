@@ -1,5 +1,8 @@
 {
   "testingPlatformConfiguration": {
     "typeId": "NonTestFramework"
+  },
+  "dependencies": {
+    "yaml": "^2.2.1"
   }
 }
