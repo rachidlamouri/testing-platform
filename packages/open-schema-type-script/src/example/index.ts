@@ -93,4 +93,11 @@ const builderConfigurationCollection = [
 
 run({
   builderConfigurationCollection,
+  onDatumInstanceConfiguration: (configuration) => {
+    /* eslint-disable no-console */
+    console.log(`Built ${configuration.instanceIdentifier}`);
+    console.log(JSON.stringify(configuration, null, 2));
+    console.log();
+    /* eslint-enable no-console */
+  },
 });

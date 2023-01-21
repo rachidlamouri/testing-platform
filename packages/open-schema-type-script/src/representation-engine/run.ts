@@ -5,11 +5,14 @@ import { UnknownDatumInstance } from '../datumInstance';
 import { UnknownDatumInstanceConfiguration } from '../datumInstanceConfiguration';
 import { ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION } from '../datumInstanceTypeScriptConfiguration';
 import { CustomSet } from '../utilities/customSet';
+import { DatumHandler } from '../utilities/datumEmitter';
+import { DatumInstanceConfigurationEmitter } from './datumInstanceConfigurationEmitter';
 import { MutableBuilderConfiguration } from './mutableBuilderConfiguration';
 import { MutableBuilderConfigurationCollectionsByInputLocator } from './mutableBuilderConfigurationCollectionsByInputLocator';
 
 export type RepresentationEngineInput = {
   builderConfigurationCollection: UnknownBuilderConfigurationTuple;
+  onDatumInstanceConfiguration: DatumHandler<UnknownDatumInstanceConfiguration>;
 };
 
 export type RepresentationEngine = (input: RepresentationEngineInput) => void;
@@ -21,8 +24,12 @@ type DatumInstancesByIdentifier = Map<
 
 export const run: RepresentationEngine = ({
   builderConfigurationCollection,
+  onDatumInstanceConfiguration,
 }) => {
   const debug: unknown[] = [];
+
+  const datumInstanceConfigurationEmitter =
+    new DatumInstanceConfigurationEmitter(onDatumInstanceConfiguration);
 
   let loopCount = 0;
   let currentDatumInstanceLocatorCollection: CustomSet<UnknownCollectionLocator> =
@@ -102,21 +109,21 @@ export const run: RepresentationEngine = ({
     );
 
     const outputDatumConfigurationTuple =
-      outputDatumConfigurationTupleCollection
-        .flat()
-        .map(
-          (outputDatumConfiguration) =>
-            [
-              outputDatumConfiguration.instanceIdentifier,
-              outputDatumConfiguration.datumInstance,
-            ] as const,
-        );
+      outputDatumConfigurationTupleCollection.flat();
 
     outputDatumConfigurationTuple.forEach(
       // eslint-disable-next-line @typescript-eslint/no-loop-func
-      ([instanceIdentifier, datumInstance]) => {
-        nextDatumInstanceLocatorCollection.add(instanceIdentifier);
-        instanceMap.set(instanceIdentifier, datumInstance);
+      (datumInstanceConfiguration) => {
+        nextDatumInstanceLocatorCollection.add(
+          datumInstanceConfiguration.instanceIdentifier,
+        );
+
+        instanceMap.set(
+          datumInstanceConfiguration.instanceIdentifier,
+          datumInstanceConfiguration.datumInstance,
+        );
+
+        datumInstanceConfigurationEmitter.emitDatum(datumInstanceConfiguration);
       },
     );
 
@@ -135,7 +142,13 @@ export const run: RepresentationEngine = ({
 
       //     return acc;
       //   }, {}),
-      outputDatumConfigurationTuple,
+      builtDatum: outputDatumConfigurationTuple.map(
+        (outputDatumConfiguration) =>
+          [
+            outputDatumConfiguration.instanceIdentifier,
+            outputDatumConfiguration.datumInstance,
+          ] as const,
+      ),
       nextDatumInstanceLocatorCollection:
         nextDatumInstanceLocatorCollection.asArray(),
     });
