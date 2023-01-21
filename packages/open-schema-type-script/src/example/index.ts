@@ -1,7 +1,7 @@
 import { buildBuilderConfiguration } from '../buildBuilderConfiguration';
 import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
 import { RootDatumInstanceTypeScriptConfiguration } from '../datumInstanceTypeScriptConfiguration';
-import { run } from '../representation-engine/run';
+import { representationEngine } from '../representation-engine';
 import {
   ActualCiYamlFileTypeScriptConfiguration,
   buildActualCiYamlFileContents,
@@ -91,7 +91,7 @@ const builderConfigurationCollection = [
   }),
 ] as const satisfies UnknownBuilderConfigurationTuple;
 
-run({
+representationEngine.run({
   builderConfigurationCollection,
   onDatumInstanceConfiguration: (configuration) => {
     /* eslint-disable no-console */
