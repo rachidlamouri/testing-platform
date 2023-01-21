@@ -22,6 +22,6 @@ jobs:
         run: npm run test:framework --workspace rat-test
       - name: Test Mouse
         run: npm run test:framework --workspace mouse-test
-      - name: Lint Constraints
-        run: npm run lint:constraints
+      - name: Lint Repository
+        run: npm run lint:repository
 

@@ -7,7 +7,7 @@ Testing frameworks on testing frameworks.
 ## Open Schema Implementation Demo
 
 ```bash
-npx ts-node packages/open-schema-type-script/src/example/index.ts && code debug
+npm run lint:repository && code debug
 ```
 
 ## Description
