@@ -4,6 +4,9 @@ import { UnknownCollectionLocator } from '../collectionLocator';
 import { UnknownDatumInstance } from '../datumInstance';
 import { UnknownDatumInstanceConfiguration } from '../datumInstanceConfiguration';
 import { ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION } from '../datumInstanceTypeScriptConfiguration';
+import { CustomSet } from '../utilities/customSet';
+import { MutableBuilderConfiguration } from './mutableBuilderConfiguration';
+import { MutableBuilderConfigurationCollectionsByInputLocator } from './mutableBuilderConfigurationCollectionsByInputLocator';
 
 export type RepresentationEngineInput = {
   builderConfigurationCollection: UnknownBuilderConfigurationTuple;
@@ -22,10 +25,10 @@ export const run: RepresentationEngine = ({
   const debug: unknown[] = [];
 
   let loopCount = 0;
-  let currentDatumInstanceLocatorCollection: Set<UnknownCollectionLocator> =
-    new Set();
-  let nextDatumInstanceLocatorCollection: Set<UnknownCollectionLocator> =
-    new Set([
+  let currentDatumInstanceLocatorCollection: CustomSet<UnknownCollectionLocator> =
+    new CustomSet();
+  let nextDatumInstanceLocatorCollection: CustomSet<UnknownCollectionLocator> =
+    new CustomSet([
       ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION.datumInstanceIdentifier,
     ]);
 
@@ -36,23 +39,52 @@ export const run: RepresentationEngine = ({
     ],
   ]);
 
+  const mutableBuilderConfigurationCollectionsByInputLocator =
+    new MutableBuilderConfigurationCollectionsByInputLocator();
+
+  const mutableBuilderConfigurationColection =
+    builderConfigurationCollection.map((builderConfiguration) => {
+      return new MutableBuilderConfiguration(builderConfiguration);
+    });
+
+  mutableBuilderConfigurationCollectionsByInputLocator.indexMutableBuilderConfigurationCollection(
+    mutableBuilderConfigurationColection,
+  );
+
   while (nextDatumInstanceLocatorCollection.size > 0) {
     currentDatumInstanceLocatorCollection = nextDatumInstanceLocatorCollection;
-    nextDatumInstanceLocatorCollection = new Set();
+    nextDatumInstanceLocatorCollection = new CustomSet();
 
-    const configurationsToBuild = builderConfigurationCollection.filter(
-      // eslint-disable-next-line @typescript-eslint/no-loop-func
-      (builderConfiguration) => {
-        return builderConfiguration.inputCollectionLocatorCollection.every(
-          (inputLocator) => {
-            return currentDatumInstanceLocatorCollection.has(inputLocator);
+    const configurationsToBuild = currentDatumInstanceLocatorCollection
+      .asArray()
+      .flatMap((currentLocator) => {
+        const mutableBuilderConfigurationCollection =
+          mutableBuilderConfigurationCollectionsByInputLocator.get(
+            currentLocator,
+          );
+
+        mutableBuilderConfigurationCollection.forEach(
+          (mutableBuilderConfiguration) => {
+            // eslint-disable-next-line no-param-reassign
+            mutableBuilderConfiguration.builtInputCount += 1;
           },
         );
-      },
-    );
+
+        const readyConfigurations = mutableBuilderConfigurationCollection
+          .asArray()
+          .filter((mutableBuilderConfiguration) => {
+            return (
+              mutableBuilderConfiguration.builtInputCount ===
+              mutableBuilderConfiguration.builderConfiguration
+                .inputCollectionLocatorCollection.length
+            );
+          });
+
+        return readyConfigurations;
+      });
 
     const outputDatumConfigurationTupleCollection = configurationsToBuild.map(
-      (builderConfiguration) => {
+      ({ builderConfiguration }) => {
         const inputCollection =
           builderConfiguration.inputCollectionLocatorCollection.map(
             (inputLocator): UnknownDatumInstanceConfiguration => {
@@ -90,13 +122,22 @@ export const run: RepresentationEngine = ({
 
     debug.push({
       loopCount,
-      currentDatumInstanceLocatorCollection: [
-        ...currentDatumInstanceLocatorCollection,
-      ],
+      currentDatumInstanceLocatorCollection:
+        currentDatumInstanceLocatorCollection.asArray(),
+      // mutableState: mutableBuilderConfigurationCollectionsByInputLocator
+      //   .asEntries()
+      //   .reduce((acc: Record<string, unknown>, [k, v]) => {
+      //     acc[k] = v.asArray().map((d) => ({
+      //       inputLocators:
+      //         d.builderConfiguration.inputCollectionLocatorCollection,
+      //       builtInputCount: d.builtInputCount,
+      //     }));
+
+      //     return acc;
+      //   }, {}),
       outputDatumConfigurationTuple,
-      nextDatumInstanceLocatorCollection: [
-        ...nextDatumInstanceLocatorCollection,
-      ],
+      nextDatumInstanceLocatorCollection:
+        nextDatumInstanceLocatorCollection.asArray(),
     });
 
     loopCount += 1;
