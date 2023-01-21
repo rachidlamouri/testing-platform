@@ -16,3 +16,8 @@ export type DatumSemanticsProcessorTypeParameter = {
 export type DatumSemanticsProcessor<
   T extends DatumSemanticsProcessorTypeParameter,
 > = (instance: T['Instance']) => T['Result'];
+
+export type UnknownDatumSemanticsProcessor = DatumSemanticsProcessor<{
+  Instance: UnknownDatumInstance;
+  Result: KnownDatumSemanticsProcessorResult;
+}>;
