@@ -1,12 +1,15 @@
+import assert from 'assert';
 import { buildBuilderConfiguration } from '../buildBuilderConfiguration';
 import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
 import { RootDatumInstanceTypeScriptConfiguration } from '../datumInstanceTypeScriptConfiguration';
 import { representationEngine } from '../representation-engine';
+import { validationEngine } from '../validation-engine';
 import {
   ActualCiYamlFileTypeScriptConfiguration,
   buildActualCiYamlFileContents,
 } from './testingPlatform/ciYamlFile/actualCiYamlFile';
 import {
+  AssertableCiYamlFile,
   AssertableCiYamlFileTypeScriptConfiguration,
   buildAssertableCiYamlFileContentsConfiguration,
 } from './testingPlatform/ciYamlFile/assertableCiYamlFile';
@@ -94,10 +97,30 @@ const builderConfigurationCollection = [
 representationEngine.run({
   builderConfigurationCollection,
   onDatumInstanceConfiguration: (configuration) => {
-    /* eslint-disable no-console */
-    console.log(`Built ${configuration.instanceIdentifier}`);
-    console.log(JSON.stringify(configuration, null, 2));
-    console.log();
-    /* eslint-enable no-console */
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    configuration;
+    // /* eslint-disable no-console */
+    // console.log(`Built ${configuration.instanceIdentifier}`);
+    // console.log(JSON.stringify(configuration, null, 2));
+    // console.log();
+    // /* eslint-enable no-console */
   },
+});
+
+validationEngine.run({
+  builderConfigurationCollection,
+  semanticsConfigurationCollection: [
+    {
+      semanticsIdentifier: 'example',
+      collectionLocator: 'assertable-ci-yaml-file',
+      processDatum: (instance: unknown): true => {
+        const { actualStringContents, expectedStringContents } =
+          instance as AssertableCiYamlFile;
+
+        assert.strictEqual(actualStringContents, expectedStringContents);
+
+        return true;
+      },
+    },
+  ],
 });
