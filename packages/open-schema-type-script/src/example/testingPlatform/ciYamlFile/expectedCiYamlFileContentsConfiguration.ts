@@ -75,8 +75,8 @@ export const CI_YAML_FILE_CONTENTS_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: Expe
             ],
             afterPackageRunSteps: [
               {
-                name: 'Lint Constraints',
-                run: 'npm run lint:constraints',
+                name: 'Lint Repository',
+                run: 'npm run lint:repository',
               },
             ],
           },

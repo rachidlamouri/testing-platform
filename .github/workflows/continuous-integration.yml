@@ -1,5 +1,6 @@
 name: Continuous Integration
-on: [push]
+on:
+  - push
 jobs:
   Continuous-Integration:
     runs-on: ubuntu-latest
@@ -9,19 +10,24 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: .nvmrc
       - name: Install Dependencies
         run: npm clean-install
       - name: Lint Markdown
         run: npm run lint:md
       - name: Lint TypeScript
         run: npm run lint:ts:all
-      - name: Type Check Constraint-Engine
-        run: cd packages/constraint-engine && npx tsc
-      - name: Test Rat
-        run: npm run test:framework --workspace rat-test
-      - name: Test Mouse
-        run: npm run test:framework --workspace mouse-test
+      - name: Run base-tsconfig Tests
+        run: bash packages/base-tsconfig/scripts/runTests.sh
+      - name: Run constraint-engine Tests
+        run: bash packages/constraint-engine/scripts/runTests.sh
+      - name: Run ikaria-test Tests
+        run: bash packages/ikaria-test/scripts/runTests.sh
+      - name: Run mouse-test Tests
+        run: bash packages/mouse-test/scripts/runTests.sh
+      - name: Run open-schema-type-script Tests
+        run: bash packages/open-schema-type-script/scripts/runTests.sh
+      - name: Run rat-test Tests
+        run: bash packages/rat-test/scripts/runTests.sh
       - name: Lint Repository
         run: npm run lint:repository
-
