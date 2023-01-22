@@ -16,6 +16,9 @@ export const run = ({
   builderConfigurationCollection,
   semanticsConfigurationCollection,
 }: ValidationEngineInput): void => {
+  // eslint-disable-next-line no-console
+  console.log('Starting Validation');
+
   const semanticsByDatumLocator = new Map<
     string,
     Set<UnknownDatumSemanticsConfiguration>
@@ -52,12 +55,12 @@ export const run = ({
       if (result) {
         // eslint-disable-next-line no-console
         console.log(
-          `Datum instance "${instanceIdentifier}" matches semantics "${semanticsIdentifier}"!`,
+          `    Datum instance "${instanceIdentifier}" matches semantics "${semanticsIdentifier}"!`,
         );
       } else {
         // eslint-disable-next-line no-console
         console.log(
-          `Datum instance "${instanceIdentifier}" does not match semantics "${semanticsIdentifier}"!`,
+          `    Datum instance "${instanceIdentifier}" does not match semantics "${semanticsIdentifier}"!`,
         );
       }
     });
