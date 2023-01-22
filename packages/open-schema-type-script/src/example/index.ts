@@ -7,28 +7,28 @@ import { validationEngine } from '../core/validation-engine';
 import {
   ActualCiYamlFileTypeScriptConfiguration,
   buildActualCiYamlFileContents,
-} from './testingPlatform/ciYamlFile/actualCiYamlFile';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/actualCiYamlFile';
 import {
   AssertableCiYamlFile,
   AssertableCiYamlFileTypeScriptConfiguration,
   buildAssertableCiYamlFileContentsConfiguration,
-} from './testingPlatform/ciYamlFile/assertableCiYamlFile';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/assertableCiYamlFile';
 import {
   buildExpectedCiYamlContents,
   ExpectedCiYamlFileContentsTypeScriptConfiguration,
-} from './testingPlatform/ciYamlFile/expectedCiYamlFileContents';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/expectedCiYamlFileContents';
 import {
   buildExpectedCiYamlFileContentsConfiguration,
   ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
-} from './testingPlatform/ciYamlFile/expectedCiYamlFileContentsConfiguration';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/expectedCiYamlFileContentsConfiguration';
 import {
   buildPackageDirectoryNameSet,
   PackageDirectoryNameSetTypeScriptConfiguration,
-} from './testingPlatform/packageDirectoryNameSet/packageDirectoryNameSet';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectoryNameSet/packageDirectoryNameSet';
 import {
   buildPackageDirectoryNameSetConfiguration,
   PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
-} from './testingPlatform/packageDirectoryNameSet/packageDirectoryNameSetConfiguration';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectoryNameSet/packageDirectoryNameSetConfiguration';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
