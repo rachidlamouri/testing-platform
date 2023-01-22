@@ -5,24 +5,10 @@ import {
 } from '../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
-
-export type CiYamlFileContentsStep = Record<string, unknown>;
-
-export type CiYamlFileContentsRunStep = {
-  name: string;
-  run: string;
-};
-
-export type CiYamlFileContents<TSteps> = {
-  name: 'Continuous Integration';
-  on: ['push'];
-  jobs: {
-    'Continuous-Integration': {
-      'runs-on': 'ubuntu-latest';
-      steps: TSteps;
-    };
-  };
-};
+import {
+  CiYamlFileContents,
+  CiYamlFileContentsStep,
+} from './ciYamlFileContents';
 
 export type ExpectedCiYamlFileContentsConfiguration = CiYamlFileContents<{
   beforePackageRunSteps: CiYamlFileContentsStep[];

@@ -6,12 +6,11 @@ import {
 } from '../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
+import { ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration } from './expectedCiYamlFileContentsConfiguration';
 import {
   CiYamlFileContents,
-  CiYamlFileContentsRunStep,
   CiYamlFileContentsStep,
-  ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
-} from './expectedCiYamlFileContentsConfiguration';
+} from './ciYamlFileContents';
 
 export type ExpectedCiYamlFileContents = CiYamlFileContents<
   CiYamlFileContentsStep[]
