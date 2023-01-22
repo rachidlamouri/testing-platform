@@ -9,11 +9,14 @@ import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
 import { ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration } from './expectedCiYamlFileContentsConfiguration';
 import {
   CiYamlFileContents,
+  CiYamlFileContentsCommentPlaceHolder,
   CiYamlFileContentsStep,
+  CommentedSteps,
+  CommentPlaceHolderKey,
 } from './ciYamlFileContents';
 
 export type ExpectedCiYamlFileContents = CiYamlFileContents<
-  CiYamlFileContentsStep[]
+  [...CommentedSteps]
 >;
 
 export type ExpectedCiYamlFileContentsTypeScriptConfiguration =
@@ -50,21 +53,31 @@ export const buildExpectedCiYamlContents: DatumInstanceTypeScriptConfigurationCo
                   directoryName,
                   directoryPath: posix.join('packages', directoryName),
                 }))
-                .map(
+                .flatMap(
                   ({
                     directoryName,
                     directoryPath,
-                  }): CiYamlFileContentsRunStep => {
+                  }): [
+                    CiYamlFileContentsCommentPlaceHolder,
+                    CiYamlFileContentsStep,
+                  ] => {
                     const runTestsScriptPath = posix.join(
                       directoryPath,
                       'scripts',
                       'runTests.sh',
                     );
 
-                    return {
-                      name: `Run ${directoryName} Tests`,
-                      run: `bash ${runTestsScriptPath}`,
-                    };
+                    const commentPlaceHolderKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${directoryName}`;
+
+                    return [
+                      {
+                        [commentPlaceHolderKey]: '',
+                      },
+                      {
+                        name: `Run ${directoryName} Tests`,
+                        run: `bash ${runTestsScriptPath}`,
+                      },
+                    ];
                   },
                 ),
               ...inputConfiguration.datumInstance.jobs['Continuous-Integration']
