@@ -2,15 +2,15 @@ import {
   RootDatumInstanceLocator,
   ROOT_DATUM_INSTANCE_LOCATOR,
   UnknownCollectionLocator,
-} from './collectionLocator';
+} from '../core/collectionLocator';
 import {
   RootDatumInstance,
   ROOT_DATUM_INSTANCE,
   UnknownDatumInstance,
-} from './datumInstance';
-import { DatumInstanceConfiguration } from './datumInstanceConfiguration';
+} from '../core/datumInstance';
+import { DatumInstanceConfiguration } from '../core/datumInstanceConfiguration';
 import { TypeScriptSemanticsIdentifier } from './typeScriptSemanticsIdentifier';
-import { ConstrainObject } from './utilityTypes/constrainObject';
+import { ConstrainObject } from '../utilities/types/constrainObject';
 
 export type UnknownDatumInstanceTypeScriptConfiguration = {
   datumInstanceIdentifier: UnknownCollectionLocator;

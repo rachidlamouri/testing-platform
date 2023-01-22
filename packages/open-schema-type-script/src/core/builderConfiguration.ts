@@ -5,10 +5,10 @@ import {
   UnknownDatumInstanceConfigurationCollectionBuilderInputAndOutput,
   UnknownDatumInstanceConfigurationCollectionBuilderOutput,
 } from './datumInstanceConfigurationCollectionBuilder';
-import { ConstrainObject } from './utilityTypes/constrainObject';
-import { MergeTuple } from './utilityTypes/merge/mergeTuple';
-import { RekeyConstrainedObject } from './utilityTypes/rekeyObject/rekeyConstrainedObject';
-import { RekeyObject } from './utilityTypes/rekeyObject/rekeyObject';
+import { ConstrainObject } from '../utilities/types/constrainObject';
+import { MergeTuple } from '../utilities/types/merge/mergeTuple';
+import { RekeyConstrainedObject } from '../utilities/types/rekeyObject/rekeyConstrainedObject';
+import { RekeyObject } from '../utilities/types/rekeyObject/rekeyObject';
 
 type EngineInputKeyMap = {
   InputDatumInstanceConfigurationCollection: 'EngineInputDatumInstanceConfigurationCollection';

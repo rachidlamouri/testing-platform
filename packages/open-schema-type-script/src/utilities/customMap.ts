@@ -1,4 +1,4 @@
-import { StringKeys } from '../utilityTypes/stringKeys';
+import { StringKeys } from './types/stringKeys';
 
 export type CustomMapTypeParameter = {
   Key: unknown;

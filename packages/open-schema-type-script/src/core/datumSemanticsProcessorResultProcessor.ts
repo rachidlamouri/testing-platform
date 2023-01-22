@@ -1,5 +1,5 @@
 import { DatumSemanticsProcessorResult } from './datumSemanticsProcessor';
-import { getIdentity } from './utilities/getIdentity';
+import { getIdentity } from '../utilities/getIdentity';
 
 export type DatumSemanticsProcessorResultProcessor = (
   value: DatumSemanticsProcessorResult,

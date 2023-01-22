@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import { UnknownDatumInstance } from '../datumInstance';
+import { UnknownDatumInstance } from '../core/datumInstance';
 
 const DATUM_EVENT_NAME = 'datum' as const;
 

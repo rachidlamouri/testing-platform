@@ -5,7 +5,7 @@ import {
   UnknownDatumSemanticsConfigurationTuple,
 } from '../datumSemanticsConfiguration';
 import { representationEngine } from '../representation-engine';
-import { DatumHandler } from '../utilities/datumEmitter';
+import { DatumHandler } from '../../utilities/datumEmitter';
 
 export type ValidationEngineInput = {
   builderConfigurationCollection: UnknownBuilderConfigurationTuple;
