@@ -9,8 +9,7 @@ import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
 import { ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration } from './expectedCiYamlFileContentsConfiguration';
 import {
   CiYamlFileContents,
-  CiYamlFileContentsCommentPlaceHolder,
-  CiYamlFileContentsStep,
+  CiYamlFileContentsRunStep,
   CommentedSteps,
   CommentPlaceHolderKey,
 } from './ciYamlFileContents';
@@ -54,13 +53,7 @@ export const buildExpectedCiYamlContents: DatumInstanceTypeScriptConfigurationCo
                   directoryPath: posix.join('packages', directoryName),
                 }))
                 .flatMap(
-                  ({
-                    directoryName,
-                    directoryPath,
-                  }): [
-                    CiYamlFileContentsCommentPlaceHolder,
-                    CiYamlFileContentsStep,
-                  ] => {
+                  ({ directoryName, directoryPath }): [...CommentedSteps] => {
                     const runTestsScriptPath = posix.join(
                       directoryPath,
                       'scripts',
@@ -69,13 +62,25 @@ export const buildExpectedCiYamlContents: DatumInstanceTypeScriptConfigurationCo
 
                     const commentPlaceHolderKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${directoryName}`;
 
+                    // TODO: either use the testing-platform configuration object in package.json to control this or check the file system to control this
+                    const typeCheckStep: [CiYamlFileContentsRunStep] | [] =
+                      directoryName !== 'base-tsconfig'
+                        ? [
+                            {
+                              name: `Lint ${directoryName} Types`,
+                              run: `pwd && cd packages/${directoryName} && pwd && npx tsc`,
+                            },
+                          ]
+                        : [];
+
                     return [
                       {
                         [commentPlaceHolderKey]: '',
                       },
+                      ...typeCheckStep,
                       {
                         name: `Run ${directoryName} Tests`,
-                        run: `bash ${runTestsScriptPath}`,
+                        run: `pwd && bash ${runTestsScriptPath}`,
                       },
                     ];
                   },
