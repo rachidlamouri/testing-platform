@@ -1,5 +1,5 @@
 import { UnknownBuilderConfiguration } from '../builderConfiguration';
-import { CustomSet } from '../utilities/customSet';
+import { CustomSet } from '../../utilities/customSet';
 import { MutableBuilderConfiguration } from './mutableBuilderConfiguration';
 
 export type MutableBuilderCollectionConstructorParameter = {

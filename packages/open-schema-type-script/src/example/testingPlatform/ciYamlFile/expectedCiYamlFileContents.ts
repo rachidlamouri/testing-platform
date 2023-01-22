@@ -3,8 +3,8 @@ import { posix } from 'path';
 import {
   DatumInstanceTypeScriptConfiguration,
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
-} from '../../../datumInstanceTypeScriptConfiguration';
-import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../datumInstanceTypeScriptConfigurationCollectionBuilder';
+} from '../../../type-script/datumInstanceTypeScriptConfiguration';
+import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
 import {
   CiYamlFileContents,

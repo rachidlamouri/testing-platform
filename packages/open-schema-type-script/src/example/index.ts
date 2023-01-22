@@ -1,9 +1,9 @@
 import assert from 'assert';
-import { buildBuilderConfiguration } from '../buildBuilderConfiguration';
-import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
-import { RootDatumInstanceTypeScriptConfiguration } from '../datumInstanceTypeScriptConfiguration';
-import { representationEngine } from '../representation-engine';
-import { validationEngine } from '../validation-engine';
+import { buildBuilderConfiguration } from '../type-script/buildBuilderConfiguration';
+import { UnknownBuilderConfigurationTuple } from '../core/builderConfiguration';
+import { RootDatumInstanceTypeScriptConfiguration } from '../type-script/datumInstanceTypeScriptConfiguration';
+import { representationEngine } from '../core/representation-engine';
+import { validationEngine } from '../core/validation-engine';
 import {
   ActualCiYamlFileTypeScriptConfiguration,
   buildActualCiYamlFileContents,

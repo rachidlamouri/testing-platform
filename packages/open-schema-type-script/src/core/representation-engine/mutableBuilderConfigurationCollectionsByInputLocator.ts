@@ -1,5 +1,5 @@
 import { UnknownCollectionLocator } from '../collectionLocator';
-import { CustomMap } from '../utilities/customMap';
+import { CustomMap } from '../../utilities/customMap';
 import {
   MutableBuilderConfiguration,
   MutableBuilderConfigurationTuple,

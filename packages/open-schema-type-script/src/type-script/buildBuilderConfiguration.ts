@@ -1,7 +1,7 @@
 import {
   BuilderConfiguration,
   BuilderConfigurationWithNormalizedInput,
-} from './builderConfiguration';
+} from '../core/builderConfiguration';
 import {
   DatumInstanceTypeScriptConfigurationTupleToDatumInstanceConfigurationTuple,
   UnknownDatumInstanceTypeScriptConfigurationTuple,

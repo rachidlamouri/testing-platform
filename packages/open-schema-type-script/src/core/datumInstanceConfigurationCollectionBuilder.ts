@@ -1,5 +1,5 @@
 import { UnknownDatumInstanceConfigurationTuple } from './datumInstanceConfiguration';
-import { Merge } from './utilityTypes/merge/merge';
+import { Merge } from '../utilities/types/merge/merge';
 
 export type UnknownDatumInstanceConfigurationCollectionBuilderInput = {
   InputDatumInstanceConfigurationCollection: UnknownDatumInstanceConfigurationTuple;

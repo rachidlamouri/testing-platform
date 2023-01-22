@@ -1,4 +1,4 @@
-import { UnknownString } from './utilityTypes/unknownHelpers';
+import { UnknownString } from '../utilities/types/unknownHelpers';
 
 export type UnknownCollectionLocator = UnknownString;
 

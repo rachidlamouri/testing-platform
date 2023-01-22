@@ -1,6 +1,6 @@
 import { UnknownCollectionLocator } from './collectionLocator';
 import { DatumSemanticsProcessorResult } from './datumSemanticsProcessor';
-import { ConstrainObject } from './utilityTypes/constrainObject';
+import { ConstrainObject } from '../utilities/types/constrainObject';
 
 export type UnknownIdentifiableDatumInstance = {
   Identifier: UnknownCollectionLocator;

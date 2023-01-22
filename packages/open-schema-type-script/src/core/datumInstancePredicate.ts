@@ -1,5 +1,5 @@
 import { UnknownCollectionLocator } from './collectionLocator';
-import { ConstrainObject } from './utilityTypes/constrainObject';
+import { ConstrainObject } from '../utilities/types/constrainObject';
 
 export type UnknownDatumInstancePredicate = {
   datumInstanceIdentifier: UnknownCollectionLocator;
