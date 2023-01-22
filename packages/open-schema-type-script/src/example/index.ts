@@ -24,11 +24,11 @@ import {
 import {
   buildPackageDirectoryNameSet,
   PackageDirectoryNameSetTypeScriptConfiguration,
-} from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectoryNameSet/packageDirectoryNameSet';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectory/packageDirectoryASet';
 import {
   buildPackageDirectoryNameSetConfiguration,
   PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
-} from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectoryNameSet/packageDirectoryNameSetConfiguration';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectory/packageDirectoryASetConfiguration';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{

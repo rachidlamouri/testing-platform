@@ -4,7 +4,7 @@ import {
   RootDatumInstanceTypeScriptConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
+import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
 
 export type PackageDirectoryNameSetConfiguration = {
   rootDirectoryRelativeToCurrentWorkingDirectory: string;

@@ -5,7 +5,7 @@ import {
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
+import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
 import { ActualCiYamlFileTypeScriptConfiguration } from './actualCiYamlFile';
 import { ExpectedCiYamlFileContentsTypeScriptConfiguration } from './expectedCiYamlFileContents';
 
