@@ -5,6 +5,8 @@ jobs:
   Continuous-Integration:
     runs-on: ubuntu-latest
     steps:
+
+      # Pre-Package Steps
       - name: Check Out Code
         uses: actions/checkout@v3
       - name: Install Node
@@ -17,17 +19,31 @@ jobs:
         run: npm run lint:md
       - name: Lint TypeScript
         run: npm run lint:ts:all
+
+      # base-tsconfig
       - name: Run base-tsconfig Tests
         run: bash packages/base-tsconfig/scripts/runTests.sh
+
+      # constraint-engine
       - name: Run constraint-engine Tests
         run: bash packages/constraint-engine/scripts/runTests.sh
+
+      # ikaria-test
       - name: Run ikaria-test Tests
         run: bash packages/ikaria-test/scripts/runTests.sh
+
+      # mouse-test
       - name: Run mouse-test Tests
         run: bash packages/mouse-test/scripts/runTests.sh
+
+      # open-schema-type-script
       - name: Run open-schema-type-script Tests
         run: bash packages/open-schema-type-script/scripts/runTests.sh
+
+      # rat-test
       - name: Run rat-test Tests
         run: bash packages/rat-test/scripts/runTests.sh
+
+      # Post-Package Steps
       - name: Lint Repository
         run: npm run lint:repository
