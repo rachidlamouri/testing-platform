@@ -6,15 +6,16 @@ import {
 } from '../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
+import { ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration } from './expectedCiYamlFileContentsConfiguration';
 import {
   CiYamlFileContents,
   CiYamlFileContentsRunStep,
-  CiYamlFileContentsStep,
-  ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
-} from './expectedCiYamlFileContentsConfiguration';
+  CommentedSteps,
+  CommentPlaceHolderKey,
+} from './ciYamlFileContents';
 
 export type ExpectedCiYamlFileContents = CiYamlFileContents<
-  CiYamlFileContentsStep[]
+  [...CommentedSteps]
 >;
 
 export type ExpectedCiYamlFileContentsTypeScriptConfiguration =
@@ -51,21 +52,37 @@ export const buildExpectedCiYamlContents: DatumInstanceTypeScriptConfigurationCo
                   directoryName,
                   directoryPath: posix.join('packages', directoryName),
                 }))
-                .map(
-                  ({
-                    directoryName,
-                    directoryPath,
-                  }): CiYamlFileContentsRunStep => {
+                .flatMap(
+                  ({ directoryName, directoryPath }): [...CommentedSteps] => {
                     const runTestsScriptPath = posix.join(
                       directoryPath,
                       'scripts',
                       'runTests.sh',
                     );
 
-                    return {
-                      name: `Run ${directoryName} Tests`,
-                      run: `bash ${runTestsScriptPath}`,
-                    };
+                    const commentPlaceHolderKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${directoryName}`;
+
+                    // TODO: either use the testing-platform configuration object in package.json to control this or check the file system to control this
+                    const typeCheckStep: [CiYamlFileContentsRunStep] | [] =
+                      directoryName !== 'base-tsconfig'
+                        ? [
+                            {
+                              name: `Lint ${directoryName} Types`,
+                              run: `pwd && cd packages/${directoryName} && pwd && npx tsc`,
+                            },
+                          ]
+                        : [];
+
+                    return [
+                      {
+                        [commentPlaceHolderKey]: '',
+                      },
+                      ...typeCheckStep,
+                      {
+                        name: `Run ${directoryName} Tests`,
+                        run: `pwd && bash ${runTestsScriptPath}`,
+                      },
+                    ];
                   },
                 ),
               ...inputConfiguration.datumInstance.jobs['Continuous-Integration']

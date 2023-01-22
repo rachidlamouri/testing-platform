@@ -26,6 +26,8 @@ export const run: RepresentationEngine = ({
   builderConfigurationCollection,
   onDatumInstanceConfiguration,
 }) => {
+  // eslint-disable-next-line no-console
+  console.log('Starting Representation');
   const debug: unknown[] = [];
 
   const datumInstanceConfigurationEmitter =
@@ -114,6 +116,11 @@ export const run: RepresentationEngine = ({
     outputDatumConfigurationTuple.forEach(
       // eslint-disable-next-line @typescript-eslint/no-loop-func
       (datumInstanceConfiguration) => {
+        // eslint-disable-next-line no-console
+        console.log(
+          `  Built: ${datumInstanceConfiguration.instanceIdentifier}`,
+        );
+
         nextDatumInstanceLocatorCollection.add(
           datumInstanceConfiguration.instanceIdentifier,
         );

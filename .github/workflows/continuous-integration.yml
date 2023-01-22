@@ -5,6 +5,8 @@ jobs:
   Continuous-Integration:
     runs-on: ubuntu-latest
     steps:
+
+      # Pre-Package Steps
       - name: Check Out Code
         uses: actions/checkout@v3
       - name: Install Node
@@ -17,17 +19,41 @@ jobs:
         run: npm run lint:md
       - name: Lint TypeScript
         run: npm run lint:ts:all
+
+      # base-tsconfig
       - name: Run base-tsconfig Tests
-        run: bash packages/base-tsconfig/scripts/runTests.sh
+        run: pwd && bash packages/base-tsconfig/scripts/runTests.sh
+
+      # constraint-engine
+      - name: Lint constraint-engine Types
+        run: pwd && cd packages/constraint-engine && pwd && npx tsc
       - name: Run constraint-engine Tests
-        run: bash packages/constraint-engine/scripts/runTests.sh
+        run: pwd && bash packages/constraint-engine/scripts/runTests.sh
+
+      # ikaria-test
+      - name: Lint ikaria-test Types
+        run: pwd && cd packages/ikaria-test && pwd && npx tsc
       - name: Run ikaria-test Tests
-        run: bash packages/ikaria-test/scripts/runTests.sh
+        run: pwd && bash packages/ikaria-test/scripts/runTests.sh
+
+      # mouse-test
+      - name: Lint mouse-test Types
+        run: pwd && cd packages/mouse-test && pwd && npx tsc
       - name: Run mouse-test Tests
-        run: bash packages/mouse-test/scripts/runTests.sh
+        run: pwd && bash packages/mouse-test/scripts/runTests.sh
+
+      # open-schema-type-script
+      - name: Lint open-schema-type-script Types
+        run: pwd && cd packages/open-schema-type-script && pwd && npx tsc
       - name: Run open-schema-type-script Tests
-        run: bash packages/open-schema-type-script/scripts/runTests.sh
+        run: pwd && bash packages/open-schema-type-script/scripts/runTests.sh
+
+      # rat-test
+      - name: Lint rat-test Types
+        run: pwd && cd packages/rat-test && pwd && npx tsc
       - name: Run rat-test Tests
-        run: bash packages/rat-test/scripts/runTests.sh
+        run: pwd && bash packages/rat-test/scripts/runTests.sh
+
+      # Post-Package Steps
       - name: Lint Repository
         run: npm run lint:repository

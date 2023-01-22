@@ -5,28 +5,15 @@ import {
 } from '../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
-
-export type CiYamlFileContentsStep = Record<string, unknown>;
-
-export type CiYamlFileContentsRunStep = {
-  name: string;
-  run: string;
-};
-
-export type CiYamlFileContents<TSteps> = {
-  name: 'Continuous Integration';
-  on: ['push'];
-  jobs: {
-    'Continuous-Integration': {
-      'runs-on': 'ubuntu-latest';
-      steps: TSteps;
-    };
-  };
-};
+import {
+  CiYamlFileContents,
+  CommentedSteps,
+  CommentPlaceHolderKey,
+} from './ciYamlFileContents';
 
 export type ExpectedCiYamlFileContentsConfiguration = CiYamlFileContents<{
-  beforePackageRunSteps: CiYamlFileContentsStep[];
-  afterPackageRunSteps: CiYamlFileContentsStep[];
+  beforePackageRunSteps: CommentedSteps;
+  afterPackageRunSteps: CommentedSteps;
 }>;
 
 export type ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration =
@@ -35,6 +22,9 @@ export type ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration =
     datumInstanceIdentifier: 'expected-ci-yaml-file-contents-configuration';
     datumInstance: ExpectedCiYamlFileContentsConfiguration;
   }>;
+
+const beforeCommentKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${'Pre-Package Steps'}`;
+const afterCommentKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${'Post-Package Steps'}`;
 
 export const CI_YAML_FILE_CONTENTS_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration =
   {
@@ -49,6 +39,9 @@ export const CI_YAML_FILE_CONTENTS_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: Expe
           'runs-on': 'ubuntu-latest',
           steps: {
             beforePackageRunSteps: [
+              {
+                [beforeCommentKey]: '',
+              },
               {
                 name: 'Check Out Code',
                 uses: 'actions/checkout@v3',
@@ -74,6 +67,9 @@ export const CI_YAML_FILE_CONTENTS_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: Expe
               },
             ],
             afterPackageRunSteps: [
+              {
+                [afterCommentKey]: '',
+              },
               {
                 name: 'Lint Repository',
                 run: 'npm run lint:repository',

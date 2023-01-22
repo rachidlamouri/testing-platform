@@ -94,33 +94,44 @@ const builderConfigurationCollection = [
   }),
 ] as const satisfies UnknownBuilderConfigurationTuple;
 
-representationEngine.run({
-  builderConfigurationCollection,
-  onDatumInstanceConfiguration: (configuration) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    configuration;
-    // /* eslint-disable no-console */
-    // console.log(`Built ${configuration.instanceIdentifier}`);
-    // console.log(JSON.stringify(configuration, null, 2));
-    // console.log();
-    // /* eslint-enable no-console */
-  },
-});
+const [task] = process.argv.slice(2);
 
-validationEngine.run({
-  builderConfigurationCollection,
-  semanticsConfigurationCollection: [
-    {
-      semanticsIdentifier: 'example',
-      collectionLocator: 'assertable-ci-yaml-file',
-      processDatum: (instance: unknown): true => {
-        const { actualStringContents, expectedStringContents } =
-          instance as AssertableCiYamlFile;
-
-        assert.strictEqual(actualStringContents, expectedStringContents);
-
-        return true;
-      },
+if (task === 'r') {
+  representationEngine.run({
+    builderConfigurationCollection,
+    onDatumInstanceConfiguration: (configuration) => {
+      /* eslint-disable no-console */
+      console.log(`Built ${configuration.instanceIdentifier}`);
+      console.log(JSON.stringify(configuration, null, 2));
+      console.log();
+      /* eslint-enable no-console */
     },
-  ],
-});
+  });
+
+  process.exit();
+}
+
+if (task === 'v') {
+  validationEngine.run({
+    builderConfigurationCollection,
+    semanticsConfigurationCollection: [
+      {
+        semanticsIdentifier: 'example',
+        collectionLocator: 'assertable-ci-yaml-file',
+        processDatum: (instance: unknown): true => {
+          const { actualStringContents, expectedStringContents } =
+            instance as AssertableCiYamlFile;
+
+          assert.strictEqual(actualStringContents, expectedStringContents);
+
+          return true;
+        },
+      },
+    ],
+  });
+
+  process.exit();
+}
+
+// TODO: make an open-schema CLI
+throw Error('Missing argv <task>. See this file for more details');

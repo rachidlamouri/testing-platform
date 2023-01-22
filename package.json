@@ -4,7 +4,9 @@
   "description": "Testing frameworks on testing frameworks",
   "private": true,
   "scripts": {
-    "lint:repository": "npx ts-node packages/open-schema-type-script/src/example/index.ts",
+    "open-schema-example": "npx ts-node packages/open-schema-type-script/src/example/index.ts",
+    "describe:repository": "npm run open-schema-example -- r",
+    "lint:repository": "npm run open-schema-example -- v",
     "lint:ts:all": "npm run --silent lint:ts .",
     "lint:ts:fix-all": "npm run --silent lint:ts -- --fix .",
     "lint:ts": "eslint --color --max-warnings 0 --ext ts,js",
