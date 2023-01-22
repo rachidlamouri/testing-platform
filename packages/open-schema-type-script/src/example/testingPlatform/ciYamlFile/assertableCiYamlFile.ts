@@ -1,4 +1,5 @@
 import yaml from 'yaml';
+import fs from 'fs';
 import {
   DatumInstanceTypeScriptConfiguration,
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
@@ -51,6 +52,9 @@ export const buildAssertableCiYamlFileContentsConfiguration: DatumInstanceTypeSc
         expectedStringContents: expectedText,
       },
     };
+
+  // TODO: move this to the generator-engine when we have one
+  fs.writeFileSync(actualCiYamlFile.filePath, expectedText);
 
   return [outputConfiguration];
 };
