@@ -7,28 +7,36 @@ import { validationEngine } from '../core/validation-engine';
 import {
   ActualCiYamlFileTypeScriptConfiguration,
   buildActualCiYamlFileContents,
-} from './testingPlatform/ciYamlFile/actualCiYamlFile';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/actualCiYamlFile';
 import {
   AssertableCiYamlFile,
   AssertableCiYamlFileTypeScriptConfiguration,
   buildAssertableCiYamlFileContentsConfiguration,
-} from './testingPlatform/ciYamlFile/assertableCiYamlFile';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/assertableCiYamlFile';
 import {
   buildExpectedCiYamlContents,
   ExpectedCiYamlFileContentsTypeScriptConfiguration,
-} from './testingPlatform/ciYamlFile/expectedCiYamlFileContents';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/expectedCiYamlFileContents';
 import {
   buildExpectedCiYamlFileContentsConfiguration,
   ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
-} from './testingPlatform/ciYamlFile/expectedCiYamlFileContentsConfiguration';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/expectedCiYamlFileContentsConfiguration';
 import {
   buildPackageDirectoryNameSet,
   PackageDirectoryNameSetTypeScriptConfiguration,
-} from './testingPlatform/packageDirectoryNameSet/packageDirectoryNameSet';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectory/packageDirectoryASet';
 import {
   buildPackageDirectoryNameSetConfiguration,
   PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
-} from './testingPlatform/packageDirectoryNameSet/packageDirectoryNameSetConfiguration';
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectory/packageDirectoryASetConfiguration';
+import {
+  buildFileATuple,
+  FileATypeScriptConfiguration,
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileA';
+// import {
+//   buildTypeScriptFile,
+//   TypeScriptFileTypeScriptConfiguration,
+// } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFile';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
@@ -92,6 +100,23 @@ const builderConfigurationCollection = [
       'expected-ci-yaml-file-contents',
     ],
   }),
+
+  buildBuilderConfiguration<{
+    InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+    OutputCollection: FileATypeScriptConfiguration[];
+  }>({
+    buildCollection: buildFileATuple,
+    inputCollectionLocatorCollection: [''],
+  }),
+
+  // TODO: use aliases and semantics to handle this transformation
+  // buildBuilderConfiguration<{
+  //   InputCollection: [FileATypeScriptConfiguration];
+  //   OutputCollection: TypeScriptFileTypeScriptConfiguration[];
+  // }>({
+  //   buildCollection: buildTypeScriptFile,
+  //   inputCollectionLocatorCollection: [''],
+  // }),
 ] as const satisfies UnknownBuilderConfigurationTuple;
 
 const [task] = process.argv.slice(2);
@@ -100,11 +125,13 @@ if (task === 'r') {
   representationEngine.run({
     builderConfigurationCollection,
     onDatumInstanceConfiguration: (configuration) => {
-      /* eslint-disable no-console */
-      console.log(`Built ${configuration.instanceIdentifier}`);
-      console.log(JSON.stringify(configuration, null, 2));
-      console.log();
-      /* eslint-enable no-console */
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      configuration;
+      // /* eslint-disable no-console */
+      // console.log(`Built ${configuration.instanceIdentifier}`);
+      // console.log(JSON.stringify(configuration, null, 2));
+      // console.log();
+      // /* eslint-enable no-console */
     },
   });
 

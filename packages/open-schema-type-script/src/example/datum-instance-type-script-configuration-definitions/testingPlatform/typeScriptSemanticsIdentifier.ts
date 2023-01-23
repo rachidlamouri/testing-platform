@@ -6,4 +6,7 @@ export enum TypeScriptSemanticsIdentifier {
   ExpectedCiYamlFileContents = 'TestingPlatform:ExpectedCiYamlFileContents',
   ActualCiYamlFileType = 'TestingPlatform:ActualCiYamlFileType',
   AssertableCiYamlFile = 'TestingPlatform:AssertableCiYamlFile',
+
+  FileA = 'TestingPlatform:FileA',
+  TypeScriptFile = 'TestingPlatform:TypeScriptFile',
 }

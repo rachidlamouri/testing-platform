@@ -3,9 +3,9 @@ import {
   DatumInstanceTypeScriptConfiguration,
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
   RootDatumInstanceTypeScriptConfiguration,
-} from '../../../type-script/datumInstanceTypeScriptConfiguration';
-import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
+} from '../../../../type-script/datumInstanceTypeScriptConfiguration';
+import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
+import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
 
 export type ActualCiYamlFile = {
   filePath: '.github/workflows/continuous-integration.yml';

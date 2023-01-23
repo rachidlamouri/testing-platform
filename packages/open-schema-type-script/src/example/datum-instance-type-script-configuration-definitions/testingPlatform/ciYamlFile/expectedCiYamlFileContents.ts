@@ -3,9 +3,9 @@ import { posix } from 'path';
 import {
   DatumInstanceTypeScriptConfiguration,
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
-} from '../../../type-script/datumInstanceTypeScriptConfiguration';
-import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
+} from '../../../../type-script/datumInstanceTypeScriptConfiguration';
+import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
+import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
 import { ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration } from './expectedCiYamlFileContentsConfiguration';
 import {
   CiYamlFileContents,

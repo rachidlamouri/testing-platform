@@ -2,10 +2,10 @@ import fs from 'fs';
 import {
   DatumInstanceTypeScriptConfiguration,
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
-} from '../../../type-script/datumInstanceTypeScriptConfiguration';
-import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifer';
-import { PackageDirectoryNameSetConfigurationTypeScriptConfiguration } from './packageDirectoryNameSetConfiguration';
+} from '../../../../type-script/datumInstanceTypeScriptConfiguration';
+import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
+import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
+import { PackageDirectoryNameSetConfigurationTypeScriptConfiguration } from './packageDirectoryASetConfiguration';
 
 export type PackageDirectoryNameSet = {
   directoryPaths: string[];
