@@ -8,4 +8,5 @@ export enum TypeScriptSemanticsIdentifier {
   AssertableCiYamlFile = 'TestingPlatform:AssertableCiYamlFile',
 
   FileA = 'TestingPlatform:FileA',
+  TypeScriptFile = 'TestingPlatform:TypeScriptFile',
 }

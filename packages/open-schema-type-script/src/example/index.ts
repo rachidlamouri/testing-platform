@@ -33,6 +33,10 @@ import {
   buildFileATuple,
   FileATypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileA';
+// import {
+//   buildTypeScriptFile,
+//   TypeScriptFileTypeScriptConfiguration,
+// } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFile';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
@@ -104,6 +108,15 @@ const builderConfigurationCollection = [
     buildCollection: buildFileATuple,
     inputCollectionLocatorCollection: [''],
   }),
+
+  // TODO: use aliases and semantics to handle this transformation
+  // buildBuilderConfiguration<{
+  //   InputCollection: [FileATypeScriptConfiguration];
+  //   OutputCollection: TypeScriptFileTypeScriptConfiguration[];
+  // }>({
+  //   buildCollection: buildTypeScriptFile,
+  //   inputCollectionLocatorCollection: [''],
+  // }),
 ] as const satisfies UnknownBuilderConfigurationTuple;
 
 const [task] = process.argv.slice(2);
