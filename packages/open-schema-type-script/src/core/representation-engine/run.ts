@@ -1,4 +1,5 @@
 import fs from 'fs';
+import posix from 'path';
 import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
 import { UnknownCollectionLocator } from '../collectionLocator';
 import { UnknownDatumInstance } from '../datumInstance';
@@ -22,13 +23,34 @@ type DatumInstancesByIdentifier = Map<
   UnknownDatumInstance
 >;
 
+const DEBUG_DIR_PATH = './debug/' as const;
+const LOOP_PATH = posix.join(DEBUG_DIR_PATH, 'loop');
+const CACHE_PATH = posix.join(DEBUG_DIR_PATH, 'cache');
+
+const getCacheFilePath = (
+  datumInstanceConfiguration: UnknownDatumInstanceConfiguration,
+): string => {
+  const typeName =
+    datumInstanceConfiguration.predicateIdentifiers[0] ?? 'MISSING_TYPE';
+
+  const fileName = datumInstanceConfiguration.instanceIdentifier.replaceAll(
+    '/',
+    '__',
+  );
+
+  return `./${posix.join(CACHE_PATH, typeName, `${fileName}.json`)}`;
+};
+
 export const run: RepresentationEngine = ({
   builderConfigurationCollection,
   onDatumInstanceConfiguration,
 }) => {
   // eslint-disable-next-line no-console
   console.log('Starting Representation');
-  const debug: unknown[] = [];
+
+  fs.rmSync(DEBUG_DIR_PATH, { recursive: true, force: true });
+  fs.mkdirSync(LOOP_PATH, { recursive: true });
+  fs.mkdirSync(CACHE_PATH, { recursive: true });
 
   const datumInstanceConfigurationEmitter =
     new DatumInstanceConfigurationEmitter(onDatumInstanceConfiguration);
@@ -121,6 +143,13 @@ export const run: RepresentationEngine = ({
           `  Built: ${datumInstanceConfiguration.instanceIdentifier}`,
         );
 
+        const filePath = getCacheFilePath(datumInstanceConfiguration);
+        fs.mkdirSync(posix.dirname(filePath), { recursive: true });
+        fs.writeFileSync(
+          filePath,
+          JSON.stringify(datumInstanceConfiguration, null, 2),
+        );
+
         nextDatumInstanceLocatorCollection.add(
           datumInstanceConfiguration.instanceIdentifier,
         );
@@ -134,31 +163,29 @@ export const run: RepresentationEngine = ({
       },
     );
 
-    debug.push({
-      loopCount,
-      currentDatumInstanceLocatorCollection:
-        currentDatumInstanceLocatorCollection.asArray(),
-      // mutableState: mutableBuilderConfigurationCollectionsByInputLocator
-      //   .asEntries()
-      //   .reduce((acc: Record<string, unknown>, [k, v]) => {
-      //     acc[k] = v.asArray().map((d) => ({
-      //       inputLocators:
-      //         d.builderConfiguration.inputCollectionLocatorCollection,
-      //       builtInputCount: d.builtInputCount,
-      //     }));
-
-      //     return acc;
-      //   }, {}),
-      builtDatum: outputDatumConfigurationTuple.map(
-        (outputDatumConfiguration) =>
-          [
-            outputDatumConfiguration.instanceIdentifier,
-            outputDatumConfiguration.datumInstance,
-          ] as const,
-      ),
-      nextDatumInstanceLocatorCollection:
-        nextDatumInstanceLocatorCollection.asArray(),
-    });
+    fs.writeFileSync(
+      posix.join(LOOP_PATH, `loop-${loopCount}.txt`),
+      [
+        `Loop: ${loopCount}`,
+        '',
+        'Current Collection:',
+        ...currentDatumInstanceLocatorCollection
+          .asArray()
+          .map((x) => (x === '' ? '""' : x))
+          .map((x) => `    ${x}`),
+        '',
+        'Output Data:',
+        ...outputDatumConfigurationTuple.flatMap((outputDatumConfiguration) => {
+          return [
+            `    ${outputDatumConfiguration.instanceIdentifier}`,
+            '    ----------------------------------------------------------------------------------------------------',
+          ];
+        }),
+        '',
+        'Next Collection:',
+        ...nextDatumInstanceLocatorCollection.asArray().map((x) => `    ${x}`),
+      ].join('\n'),
+    );
 
     loopCount += 1;
   }
@@ -167,6 +194,4 @@ export const run: RepresentationEngine = ({
 
   // eslint-disable-next-line no-console
   console.log(`Built ${numberOfDataBuilt} instances`);
-
-  fs.writeFileSync('debug', JSON.stringify(debug, null, 2));
 };
