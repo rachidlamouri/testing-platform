@@ -29,6 +29,10 @@ import {
   buildPackageDirectoryNameSetConfiguration,
   PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectory/packageDirectoryASetConfiguration';
+import {
+  buildFileATuple,
+  FileATypeScriptConfiguration,
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileA';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
@@ -91,6 +95,14 @@ const builderConfigurationCollection = [
       'actual-ci-yaml-file',
       'expected-ci-yaml-file-contents',
     ],
+  }),
+
+  buildBuilderConfiguration<{
+    InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+    OutputCollection: FileATypeScriptConfiguration[];
+  }>({
+    buildCollection: buildFileATuple,
+    inputCollectionLocatorCollection: [''],
   }),
 ] as const satisfies UnknownBuilderConfigurationTuple;
 
