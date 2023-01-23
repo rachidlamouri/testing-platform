@@ -8,28 +8,9 @@ import {
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
+import { File, FileTypeIdentifier, fileTypesByExtension } from './file';
 
-enum FileTypeIdentifier {
-  JSON = 'JSON',
-  TypeScript = 'TypeScript',
-  Unknown = 'Unknown',
-}
-
-const extensionsByFileType = {
-  [FileTypeIdentifier.JSON]: '.json',
-  [FileTypeIdentifier.TypeScript]: '.ts',
-  [FileTypeIdentifier.Unknown]: '.:shrug:',
-} satisfies Record<FileTypeIdentifier, string>;
-
-// TODO: make a util for swapping keys and values
-const fileTypesByExtension = Object.fromEntries(
-  Object.entries(extensionsByFileType).map(([k, v]) => [v, k]),
-) as Record<string, FileTypeIdentifier>;
-
-export type FileA = {
-  filePath: string;
-  fileTypeIdentifier: FileTypeIdentifier;
-};
+export type FileA = File;
 
 export type FileATypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
