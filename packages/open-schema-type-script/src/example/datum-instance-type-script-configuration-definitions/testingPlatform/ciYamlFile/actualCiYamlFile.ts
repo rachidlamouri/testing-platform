@@ -2,7 +2,6 @@ import fs from 'fs';
 import {
   DatumInstanceTypeScriptConfiguration,
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
-  RootDatumInstanceTypeScriptConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
@@ -20,7 +19,7 @@ export type ActualCiYamlFileTypeScriptConfiguration =
   }>;
 
 export const buildActualCiYamlFileContents: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
-  InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+  InputCollection: [];
   OutputCollection: [ActualCiYamlFileTypeScriptConfiguration];
 }> = () => {
   const filePath = '.github/workflows/continuous-integration.yml';

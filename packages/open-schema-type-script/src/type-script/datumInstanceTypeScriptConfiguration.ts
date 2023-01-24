@@ -1,15 +1,6 @@
-import {
-  RootDatumInstanceLocator,
-  ROOT_DATUM_INSTANCE_LOCATOR,
-  UnknownCollectionLocator,
-} from '../core/collectionLocator';
-import {
-  RootDatumInstance,
-  ROOT_DATUM_INSTANCE,
-  UnknownDatumInstance,
-} from '../core/datumInstance';
+import { UnknownCollectionLocator } from '../core/collectionLocator';
+import { UnknownDatumInstance } from '../core/datumInstance';
 import { DatumInstanceConfiguration } from '../core/datumInstanceConfiguration';
-import { TypeScriptSemanticsIdentifier } from './typeScriptSemanticsIdentifier';
 import { ConstrainObject } from '../utilities/types/constrainObject';
 
 export type UnknownDatumInstanceTypeScriptConfiguration = {
@@ -45,20 +36,6 @@ export type DatumInstanceTypeScriptConfigurationTupleToDatumInstanceConfiguratio
       >;
     }
   : never;
-
-export type RootDatumInstanceTypeScriptConfiguration =
-  DatumInstanceTypeScriptConfiguration<{
-    datumInstanceIdentifier: RootDatumInstanceLocator;
-    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.null;
-    datumInstance: RootDatumInstance;
-  }>;
-
-export const ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION: RootDatumInstanceTypeScriptConfiguration =
-  {
-    datumInstanceIdentifier: ROOT_DATUM_INSTANCE_LOCATOR,
-    datumInstance: ROOT_DATUM_INSTANCE,
-    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.null,
-  };
 
 export const getDatumInstanceConfiguration = <
   T extends UnknownDatumInstanceTypeScriptConfiguration,

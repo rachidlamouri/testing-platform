@@ -4,7 +4,6 @@ import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
 import { UnknownCollectionLocator } from '../collectionLocator';
 import { UnknownDatumInstance } from '../datumInstance';
 import { UnknownDatumInstanceConfiguration } from '../datumInstanceConfiguration';
-import { ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION } from '../../type-script/datumInstanceTypeScriptConfiguration';
 import { CustomSet } from '../../utilities/customSet';
 import { DatumHandler } from '../../utilities/datumEmitter';
 import { DatumInstanceConfigurationEmitter } from './datumInstanceConfigurationEmitter';
@@ -59,16 +58,9 @@ export const run: RepresentationEngine = ({
   let currentDatumInstanceLocatorCollection: CustomSet<UnknownCollectionLocator> =
     new CustomSet();
   let nextDatumInstanceLocatorCollection: CustomSet<UnknownCollectionLocator> =
-    new CustomSet([
-      ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION.datumInstanceIdentifier,
-    ]);
+    new CustomSet();
 
-  const instanceMap: DatumInstancesByIdentifier = new Map([
-    [
-      ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION.datumInstanceIdentifier,
-      ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION.datumInstance,
-    ],
-  ]);
+  const instanceMap: DatumInstancesByIdentifier = new Map();
 
   const mutableBuilderConfigurationCollectionsByInputLocator =
     new MutableBuilderConfigurationCollectionsByInputLocator();
@@ -82,6 +74,7 @@ export const run: RepresentationEngine = ({
     mutableBuilderConfigurationColection,
   );
 
+  // TODO: instead of tracking recently created instances, track builders that are ready to build. A builder with 0 inputs is ready immediately
   while (nextDatumInstanceLocatorCollection.size > 0) {
     currentDatumInstanceLocatorCollection = nextDatumInstanceLocatorCollection;
     nextDatumInstanceLocatorCollection = new CustomSet();
