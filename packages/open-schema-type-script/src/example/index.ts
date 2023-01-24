@@ -1,7 +1,10 @@
 import assert from 'assert';
 import { buildBuilderConfiguration } from '../type-script/buildBuilderConfiguration';
 import { UnknownBuilderConfigurationTuple } from '../core/builderConfiguration';
-import { RootDatumInstanceTypeScriptConfiguration } from '../type-script/datumInstanceTypeScriptConfiguration';
+import {
+  DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
+  RootDatumInstanceTypeScriptConfiguration,
+} from '../type-script/datumInstanceTypeScriptConfiguration';
 import { representationEngine } from '../core/representation-engine';
 import { validationEngine } from '../core/validation-engine';
 import {
@@ -28,15 +31,42 @@ import {
 import {
   buildPackageDirectoryNameSetConfiguration,
   PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
-} from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectory/packageDirectoryASetConfiguration';
-import {
-  buildFileATuple,
-  FileATypeScriptConfiguration,
-} from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileA';
-// import {
-//   buildTypeScriptFile,
-//   TypeScriptFileTypeScriptConfiguration,
-// } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFile';
+} from './testingPlatform/packageDirectoryNameSet/packageDirectoryNameSetConfiguration';
+import { ROOT_DATUM_INSTANCE_LOCATOR } from '../core/collectionLocator';
+import { TypeScriptSemanticsIdentifier as TypeScriptIds } from '../type-script/typeScriptSemanticsIdentifier';
+
+// type A = DatumInstanceConfigurationToDatumInstancePredicateTuple<
+//   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<RootDatumInstanceTypeScriptConfiguration>
+// >;
+
+// type B = DatumInstanceConfigurationTupleToDatumInstancePredicateTuple<
+//   [
+//     DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<RootDatumInstanceTypeScriptConfiguration>,
+//   ]
+// >;
+
+// type B =
+//   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<RootDatumInstanceTypeScriptConfiguration>;
+
+// type G<T extends readonly unknown[], X extends object> = {
+//   [Index in keyof T]: Merge<{ a: T[Index] }, X>;
+// };
+
+// type C = G<B['predicateIdentifiers'], { x: 2 }>;
+
+// type Q = C[0];
+
+// type A = DatumInstanceConfigurationToDatumInstancePredicateTuple<
+//   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<RootDatumInstanceTypeScriptConfiguration>
+// >;
+
+// type A = DatumInstanceConfigurationTupleToDatumInstancePredicateTuple<
+//   [
+//     DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<RootDatumInstanceTypeScriptConfiguration>,
+//   ]
+// >;
+
+// type B = A[0][0];
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
@@ -46,76 +76,64 @@ const builderConfigurationCollection = [
     ];
   }>({
     buildCollection: buildPackageDirectoryNameSetConfiguration,
-    inputCollectionLocatorCollection: [''],
-  }),
-  buildBuilderConfiguration<{
-    InputCollection: [
-      PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
-    ];
-    OutputCollection: [PackageDirectoryNameSetTypeScriptConfiguration];
-  }>({
-    buildCollection: buildPackageDirectoryNameSet,
-    inputCollectionLocatorCollection: [
-      'package-directory-name-set-configuration',
+    inputPredicateCollection: [
+      {
+        instanceIdentifier: ROOT_DATUM_INSTANCE_LOCATOR,
+        predicateIdentifiers: [TypeScriptIds.null],
+      },
     ],
   }),
-
-  buildBuilderConfiguration<{
-    InputCollection: [RootDatumInstanceTypeScriptConfiguration];
-    OutputCollection: [ActualCiYamlFileTypeScriptConfiguration];
-  }>({
-    buildCollection: buildActualCiYamlFileContents,
-    inputCollectionLocatorCollection: [''],
-  }),
-  buildBuilderConfiguration<{
-    InputCollection: [RootDatumInstanceTypeScriptConfiguration];
-    OutputCollection: [
-      ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
-    ];
-  }>({
-    buildCollection: buildExpectedCiYamlFileContentsConfiguration,
-    inputCollectionLocatorCollection: [''],
-  }),
-  buildBuilderConfiguration<{
-    InputCollection: [
-      ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
-    ];
-    OutputCollection: [ExpectedCiYamlFileContentsTypeScriptConfiguration];
-  }>({
-    buildCollection: buildExpectedCiYamlContents,
-    inputCollectionLocatorCollection: [
-      'expected-ci-yaml-file-contents-configuration',
-    ],
-  }),
-  buildBuilderConfiguration<{
-    InputCollection: [
-      ActualCiYamlFileTypeScriptConfiguration,
-      ExpectedCiYamlFileContentsTypeScriptConfiguration,
-    ];
-    OutputCollection: [AssertableCiYamlFileTypeScriptConfiguration];
-  }>({
-    buildCollection: buildAssertableCiYamlFileContentsConfiguration,
-    inputCollectionLocatorCollection: [
-      'actual-ci-yaml-file',
-      'expected-ci-yaml-file-contents',
-    ],
-  }),
-
-  buildBuilderConfiguration<{
-    InputCollection: [RootDatumInstanceTypeScriptConfiguration];
-    OutputCollection: FileATypeScriptConfiguration[];
-  }>({
-    buildCollection: buildFileATuple,
-    inputCollectionLocatorCollection: [''],
-  }),
-
-  // TODO: use aliases and semantics to handle this transformation
   // buildBuilderConfiguration<{
-  //   InputCollection: [FileATypeScriptConfiguration];
-  //   OutputCollection: TypeScriptFileTypeScriptConfiguration[];
+  //   InputCollection: [
+  //     PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
+  //   ];
+  //   OutputCollection: [PackageDirectoryNameSetTypeScriptConfiguration];
   // }>({
-  //   buildCollection: buildTypeScriptFile,
-  //   inputCollectionLocatorCollection: [''],
+  //   buildCollection: buildPackageDirectoryNameSet,
+  //   inputPredicateCollection: [
+  //     {
+  //       datumInstanceIdentifier: 'package-directory-name-set-configuration',
+  //       semanticsIdentifier: '',
+  //     },
+  //   ],
+  // }),
+  // buildBuilderConfiguration<{
+  //   InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+  //   OutputCollection: [ActualCiYamlFileTypeScriptConfiguration];
+  // }>({
+  //   buildCollection: buildActualCiYamlFileContents,
+  //   inputPredicateCollection: [''],
+  // }),
+  // buildBuilderConfiguration<{
+  //   InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+  //   OutputCollection: [
+  //     ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
+  //   ];
+  // }>({
+  //   buildCollection: buildExpectedCiYamlFileContentsConfiguration,
+  //   inputPredicateCollection: [''],
+  // }),
+  // buildBuilderConfiguration<{
+  //   InputCollection: [
+  //     ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
+  //   ];
+  //   OutputCollection: [ExpectedCiYamlFileContentsTypeScriptConfiguration];
+  // }>({
+  //   buildCollection: buildExpectedCiYamlContents,
+  //   inputPredicateCollection: ['expected-ci-yaml-file-contents-configuration'],
+  // }),
+  // buildBuilderConfiguration<{
+  //   InputCollection: [
+  //     ActualCiYamlFileTypeScriptConfiguration,
+  //     ExpectedCiYamlFileContentsTypeScriptConfiguration,
+  //   ];
+  //   OutputCollection: [AssertableCiYamlFileTypeScriptConfiguration];
+  // }>({
+  //   buildCollection: buildAssertableCiYamlFileContentsConfiguration,
+  //   inputPredicateCollection: [
+  //     'actual-ci-yaml-file',
+  //     'expected-ci-yaml-file-contents',
+  //   ],
   // }),
 ] as const satisfies UnknownBuilderConfigurationTuple;
 

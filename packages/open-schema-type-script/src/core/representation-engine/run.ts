@@ -2,9 +2,11 @@ import fs from 'fs';
 import posix from 'path';
 import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
 import { UnknownCollectionLocator } from '../collectionLocator';
-import { UnknownDatumInstance } from '../datumInstance';
 import { UnknownDatumInstanceConfiguration } from '../datumInstanceConfiguration';
-import { ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION } from '../../type-script/datumInstanceTypeScriptConfiguration';
+import {
+  getDatumInstanceConfiguration,
+  ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION,
+} from '../../type-script/datumInstanceTypeScriptConfiguration';
 import { CustomSet } from '../../utilities/customSet';
 import { DatumHandler } from '../../utilities/datumEmitter';
 import { DatumInstanceConfigurationEmitter } from './datumInstanceConfigurationEmitter';
@@ -18,9 +20,9 @@ export type RepresentationEngineInput = {
 
 export type RepresentationEngine = (input: RepresentationEngineInput) => void;
 
-type DatumInstancesByIdentifier = Map<
+type DatumConfigurationsByIdentifier = Map<
   UnknownCollectionLocator,
-  UnknownDatumInstance
+  UnknownDatumInstanceConfiguration
 >;
 
 const DEBUG_DIR_PATH = './debug/' as const;
@@ -63,10 +65,12 @@ export const run: RepresentationEngine = ({
       ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION.datumInstanceIdentifier,
     ]);
 
-  const instanceMap: DatumInstancesByIdentifier = new Map([
+  const configurationMap: DatumConfigurationsByIdentifier = new Map([
     [
       ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION.datumInstanceIdentifier,
-      ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION.datumInstance,
+      getDatumInstanceConfiguration(
+        ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION,
+      ),
     ],
   ]);
 
@@ -94,21 +98,10 @@ export const run: RepresentationEngine = ({
             currentLocator,
           );
 
-        mutableBuilderConfigurationCollection.forEach(
-          (mutableBuilderConfiguration) => {
-            // eslint-disable-next-line no-param-reassign
-            mutableBuilderConfiguration.builtInputCount += 1;
-          },
-        );
-
         const readyConfigurations = mutableBuilderConfigurationCollection
           .asArray()
-          .filter((mutableBuilderConfiguration) => {
-            return (
-              mutableBuilderConfiguration.builtInputCount ===
-              mutableBuilderConfiguration.builderConfiguration
-                .inputCollectionLocatorCollection.length
-            );
+          .filter((builderConfiguration) => {
+            return builderConfiguration.isReady();
           });
 
         return readyConfigurations;
@@ -116,17 +109,16 @@ export const run: RepresentationEngine = ({
 
     const outputDatumConfigurationTupleCollection = configurationsToBuild.map(
       ({ builderConfiguration }) => {
-        const inputCollection =
-          builderConfiguration.inputCollectionLocatorCollection.map(
-            (inputLocator): UnknownDatumInstanceConfiguration => {
-              return {
-                instanceIdentifier: inputLocator,
-                datumInstance: instanceMap.get(inputLocator),
-                // TODO: figure out what to do with these predicate identifiers
-                predicateIdentifiers: [],
-              };
-            },
-          );
+        const inputCollection = builderConfiguration.inputPredicateCollection
+          .map((normalizedPredicateCollection) => ({
+            normalizedPredicateCollection,
+            inputConfiguration: configurationMap.get(
+              normalizedPredicateCollection.instanceIdentifier,
+            ) as UnknownDatumInstanceConfiguration,
+          }))
+          .map(({ inputConfiguration }) => {
+            return inputConfiguration;
+          });
 
         return builderConfiguration.buildCollection(...inputCollection);
       },
@@ -154,12 +146,21 @@ export const run: RepresentationEngine = ({
           datumInstanceConfiguration.instanceIdentifier,
         );
 
-        instanceMap.set(
+        configurationMap.set(
           datumInstanceConfiguration.instanceIdentifier,
-          datumInstanceConfiguration.datumInstance,
+          datumInstanceConfiguration,
         );
 
         datumInstanceConfigurationEmitter.emitDatum(datumInstanceConfiguration);
+
+        const builders =
+          mutableBuilderConfigurationCollectionsByInputLocator.get(
+            datumInstanceConfiguration.instanceIdentifier,
+          );
+
+        builders.forEach((builder) => {
+          builder.updateInputStatus(datumInstanceConfiguration);
+        });
       },
     );
 
@@ -190,7 +191,8 @@ export const run: RepresentationEngine = ({
     loopCount += 1;
   }
 
-  const numberOfDataBuilt = [...instanceMap].reduce((sum) => sum + 1, 0) - 1;
+  const numberOfDataBuilt =
+    [...configurationMap].reduce((sum) => sum + 1, 0) - 1;
 
   // eslint-disable-next-line no-console
   console.log(`Built ${numberOfDataBuilt} instances`);

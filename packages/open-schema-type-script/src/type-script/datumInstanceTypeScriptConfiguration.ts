@@ -11,6 +11,7 @@ import {
 import { DatumInstanceConfiguration } from '../core/datumInstanceConfiguration';
 import { TypeScriptSemanticsIdentifier } from './typeScriptSemanticsIdentifier';
 import { ConstrainObject } from '../utilities/types/constrainObject';
+import { Merge } from '../utilities/types/merge/merge';
 
 export type UnknownDatumInstanceTypeScriptConfiguration = {
   datumInstanceIdentifier: UnknownCollectionLocator;
@@ -45,6 +46,27 @@ export type DatumInstanceTypeScriptConfigurationTupleToDatumInstanceConfiguratio
       >;
     }
   : never;
+
+// export type ABC<T extends Unknown> = {
+//   [Key in keyof T['typeSemanticsIdentifier']]
+// };
+
+// export type IDK<T extends readonly object[], X extends object> = {
+//   [Index in keyof T]: Merge<T[Index], X>;
+// };
+
+// export type DatumInstanceTypeScriptConfigurationTupleToDatumInstanceConfigurationTuple<
+//   TTuple extends UnknownDatumInstanceTypeScriptConfigurationTuple,
+// > = {
+
+// }
+// TTuple extends readonly unknown[]
+//   ? {
+//       [Index in keyof TTuple]: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<
+//         TTuple[Index]
+//       >;
+//     }
+//   : never;
 
 export type RootDatumInstanceTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
