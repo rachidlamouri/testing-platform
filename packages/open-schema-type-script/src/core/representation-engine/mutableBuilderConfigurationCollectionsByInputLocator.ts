@@ -24,9 +24,12 @@ export class MutableBuilderConfigurationCollectionsByInputLocator extends Custom
   private indexMutableBuilderConfiguration(
     mutableBuilderConfiguration: MutableBuilderConfiguration,
   ): void {
-    mutableBuilderConfiguration.builderConfiguration.inputCollectionLocatorCollection.forEach(
-      (inputCollectionLocator) => {
-        this.setInputValue(inputCollectionLocator, mutableBuilderConfiguration);
+    mutableBuilderConfiguration.builderConfiguration.inputPredicateLocatorTuple.forEach(
+      (inputPredicateLocator) => {
+        this.setInputValue(
+          inputPredicateLocator.instanceIdentifier,
+          mutableBuilderConfiguration,
+        );
       },
     );
   }

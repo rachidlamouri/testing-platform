@@ -32,6 +32,7 @@ import {
   buildFileATuple,
   FileATypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileA';
+import { TypeScriptSemanticsIdentifier as TestingPlatformSemanticsIds } from './datum-instance-type-script-configuration-definitions/testingPlatform/typeScriptSemanticsIdentifier';
 // import {
 //   buildTypeScriptFile,
 //   TypeScriptFileTypeScriptConfiguration,
@@ -45,7 +46,7 @@ const builderConfigurationCollection = [
     ];
   }>({
     buildCollection: buildPackageDirectoryNameSetConfiguration,
-    inputCollectionLocatorCollection: [],
+    inputPredicateLocatorTuple: [],
   }),
   buildBuilderConfiguration<{
     InputCollection: [
@@ -54,8 +55,13 @@ const builderConfigurationCollection = [
     OutputCollection: [PackageDirectoryNameSetTypeScriptConfiguration];
   }>({
     buildCollection: buildPackageDirectoryNameSet,
-    inputCollectionLocatorCollection: [
-      'package-directory-name-set-configuration',
+    inputPredicateLocatorTuple: [
+      {
+        instanceIdentifier: 'package-directory-name-set-configuration',
+        predicateIdentifiers: [
+          TestingPlatformSemanticsIds.PackageDirectoryNameSetConfiguration,
+        ],
+      },
     ],
   }),
 
@@ -64,7 +70,7 @@ const builderConfigurationCollection = [
     OutputCollection: [ActualCiYamlFileTypeScriptConfiguration];
   }>({
     buildCollection: buildActualCiYamlFileContents,
-    inputCollectionLocatorCollection: [],
+    inputPredicateLocatorTuple: [],
   }),
   buildBuilderConfiguration<{
     InputCollection: [];
@@ -73,7 +79,7 @@ const builderConfigurationCollection = [
     ];
   }>({
     buildCollection: buildExpectedCiYamlFileContentsConfiguration,
-    inputCollectionLocatorCollection: [],
+    inputPredicateLocatorTuple: [],
   }),
   buildBuilderConfiguration<{
     InputCollection: [
@@ -82,8 +88,13 @@ const builderConfigurationCollection = [
     OutputCollection: [ExpectedCiYamlFileContentsTypeScriptConfiguration];
   }>({
     buildCollection: buildExpectedCiYamlContents,
-    inputCollectionLocatorCollection: [
-      'expected-ci-yaml-file-contents-configuration',
+    inputPredicateLocatorTuple: [
+      {
+        instanceIdentifier: 'expected-ci-yaml-file-contents-configuration',
+        predicateIdentifiers: [
+          TestingPlatformSemanticsIds.ExpectedCiYamlFileContentsConfiguration,
+        ],
+      },
     ],
   }),
   buildBuilderConfiguration<{
@@ -94,9 +105,19 @@ const builderConfigurationCollection = [
     OutputCollection: [AssertableCiYamlFileTypeScriptConfiguration];
   }>({
     buildCollection: buildAssertableCiYamlFileContentsConfiguration,
-    inputCollectionLocatorCollection: [
-      'actual-ci-yaml-file',
-      'expected-ci-yaml-file-contents',
+    inputPredicateLocatorTuple: [
+      {
+        instanceIdentifier: 'actual-ci-yaml-file',
+        predicateIdentifiers: [
+          TestingPlatformSemanticsIds.ActualCiYamlFileType,
+        ],
+      },
+      {
+        instanceIdentifier: 'expected-ci-yaml-file-contents',
+        predicateIdentifiers: [
+          TestingPlatformSemanticsIds.ExpectedCiYamlFileContents,
+        ],
+      },
     ],
   }),
 
@@ -105,7 +126,7 @@ const builderConfigurationCollection = [
     OutputCollection: FileATypeScriptConfiguration[];
   }>({
     buildCollection: buildFileATuple,
-    inputCollectionLocatorCollection: [],
+    inputPredicateLocatorTuple: [],
   }),
 
   // TODO: use aliases and semantics to handle this transformation
