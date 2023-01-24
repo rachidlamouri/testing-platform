@@ -157,21 +157,21 @@ export const run: RepresentationEngine = ({
 
     const uniqueMutableBuilderConfigurations =
       new CustomSet<MutableBuilderConfiguration>();
-    pairedThings.forEach(({ mutableBuilderConfiguration }) => {
-      // eslint-disable-next-line no-param-reassign
-      mutableBuilderConfiguration.builtInputCount += 1;
+    pairedThings.forEach(
+      ({ datumInstanceConfiguration, mutableBuilderConfiguration }) => {
+        // eslint-disable-next-line no-param-reassign
+        mutableBuilderConfiguration.updateInputStatus(
+          datumInstanceConfiguration,
+        );
 
-      uniqueMutableBuilderConfigurations.add(mutableBuilderConfiguration);
-    });
+        uniqueMutableBuilderConfigurations.add(mutableBuilderConfiguration);
+      },
+    );
 
     const readyMutableBuilderConfigurations = uniqueMutableBuilderConfigurations
       .asArray()
       .filter((mutableBuilderConfiguration) => {
-        return (
-          mutableBuilderConfiguration.builtInputCount ===
-          mutableBuilderConfiguration.builderConfiguration
-            .inputCollectionLocatorCollection.length
-        );
+        return mutableBuilderConfiguration.isReady();
       });
 
     const readyBuilderConfigurations =

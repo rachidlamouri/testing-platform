@@ -6,8 +6,9 @@ export type CustomMapTypeParameter = {
   StoredValue: unknown;
 };
 
-export type DefaultStoredValueInstantiator<T extends CustomMapTypeParameter> =
-  () => T['StoredValue'];
+export type DefaultStoredValueInstantiator<T extends CustomMapTypeParameter> = (
+  key: T['Key'],
+) => T['StoredValue'];
 
 export type StoredValueMutator<T extends CustomMapTypeParameter> = (parameter: {
   [TKey in StringKeys<
@@ -20,6 +21,7 @@ export type CustomMapConstructorParameter<
 > = {
   createDefaultStoredValue: DefaultStoredValueInstantiator<TCustomMapTypeParameter>;
   mutateStoredValue: StoredValueMutator<TCustomMapTypeParameter>;
+  initialKeys?: readonly TCustomMapTypeParameter['Key'][];
 };
 
 export class CustomMap<T extends CustomMapTypeParameter> extends Map<
@@ -33,15 +35,21 @@ export class CustomMap<T extends CustomMapTypeParameter> extends Map<
   constructor({
     createDefaultStoredValue,
     mutateStoredValue,
+    initialKeys = [],
   }: CustomMapConstructorParameter<T>) {
     super();
 
     this.createDefaultStoredValue = createDefaultStoredValue;
     this.mutateStoredValue = mutateStoredValue;
+
+    initialKeys.forEach((key) => {
+      const initialValue = this.get(key);
+      this.setInputValue(key, initialValue);
+    });
   }
 
   get(key: T['Key']): T['StoredValue'] {
-    return super.get(key) ?? this.createDefaultStoredValue();
+    return super.get(key) ?? this.createDefaultStoredValue(key);
   }
 
   setInputValue(key: T['Key'], inputValue: T['InputValue']): void {
