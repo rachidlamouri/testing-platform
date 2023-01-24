@@ -1,7 +1,6 @@
 import assert from 'assert';
 import { buildBuilderConfiguration } from '../type-script/buildBuilderConfiguration';
 import { UnknownBuilderConfigurationTuple } from '../core/builderConfiguration';
-import { RootDatumInstanceTypeScriptConfiguration } from '../type-script/datumInstanceTypeScriptConfiguration';
 import { representationEngine } from '../core/representation-engine';
 import { validationEngine } from '../core/validation-engine';
 import {
@@ -40,13 +39,13 @@ import {
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
-    InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+    InputCollection: [];
     OutputCollection: [
       PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
     ];
   }>({
     buildCollection: buildPackageDirectoryNameSetConfiguration,
-    inputCollectionLocatorCollection: [''],
+    inputCollectionLocatorCollection: [],
   }),
   buildBuilderConfiguration<{
     InputCollection: [
@@ -61,20 +60,20 @@ const builderConfigurationCollection = [
   }),
 
   buildBuilderConfiguration<{
-    InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+    InputCollection: [];
     OutputCollection: [ActualCiYamlFileTypeScriptConfiguration];
   }>({
     buildCollection: buildActualCiYamlFileContents,
-    inputCollectionLocatorCollection: [''],
+    inputCollectionLocatorCollection: [],
   }),
   buildBuilderConfiguration<{
-    InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+    InputCollection: [];
     OutputCollection: [
       ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
     ];
   }>({
     buildCollection: buildExpectedCiYamlFileContentsConfiguration,
-    inputCollectionLocatorCollection: [''],
+    inputCollectionLocatorCollection: [],
   }),
   buildBuilderConfiguration<{
     InputCollection: [
@@ -102,11 +101,11 @@ const builderConfigurationCollection = [
   }),
 
   buildBuilderConfiguration<{
-    InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+    InputCollection: [];
     OutputCollection: FileATypeScriptConfiguration[];
   }>({
     buildCollection: buildFileATuple,
-    inputCollectionLocatorCollection: [''],
+    inputCollectionLocatorCollection: [],
   }),
 
   // TODO: use aliases and semantics to handle this transformation

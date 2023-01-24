@@ -1,7 +1,6 @@
 import {
   DatumInstanceTypeScriptConfiguration,
   getDatumInstanceConfiguration,
-  RootDatumInstanceTypeScriptConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
@@ -82,7 +81,7 @@ export const CI_YAML_FILE_CONTENTS_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: Expe
   };
 
 export const buildExpectedCiYamlFileContentsConfiguration: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
-  InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+  InputCollection: [];
   OutputCollection: [
     ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
   ];

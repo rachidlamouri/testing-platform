@@ -4,7 +4,6 @@ import { UnknownCollectionLocator } from '../../../../core/collectionLocator';
 import {
   DatumInstanceTypeScriptConfiguration,
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
-  RootDatumInstanceTypeScriptConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
@@ -56,7 +55,7 @@ const accumulateFilePaths = (
 };
 
 export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
-  InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+  InputCollection: [];
   OutputCollection: FileATypeScriptConfiguration[];
 }> = () => {
   const mutableFilePathList: string[] = [];

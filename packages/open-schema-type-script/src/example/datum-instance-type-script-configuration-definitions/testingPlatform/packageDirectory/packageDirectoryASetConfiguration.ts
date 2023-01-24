@@ -1,7 +1,6 @@
 import {
   DatumInstanceTypeScriptConfiguration,
   getDatumInstanceConfiguration,
-  RootDatumInstanceTypeScriptConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
@@ -28,7 +27,7 @@ export const PACKAGE_DIRECTORY_NAME_SET_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION:
   };
 
 export const buildPackageDirectoryNameSetConfiguration: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
-  InputCollection: [RootDatumInstanceTypeScriptConfiguration];
+  InputCollection: [];
   OutputCollection: [
     PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
   ];

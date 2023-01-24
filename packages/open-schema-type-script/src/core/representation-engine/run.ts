@@ -1,10 +1,12 @@
 import fs from 'fs';
 import posix from 'path';
-import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
+import {
+  UnknownBuilderConfiguration,
+  UnknownBuilderConfigurationTuple,
+} from '../builderConfiguration';
 import { UnknownCollectionLocator } from '../collectionLocator';
 import { UnknownDatumInstance } from '../datumInstance';
 import { UnknownDatumInstanceConfiguration } from '../datumInstanceConfiguration';
-import { ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION } from '../../type-script/datumInstanceTypeScriptConfiguration';
 import { CustomSet } from '../../utilities/customSet';
 import { DatumHandler } from '../../utilities/datumEmitter';
 import { DatumInstanceConfigurationEmitter } from './datumInstanceConfigurationEmitter';
@@ -55,73 +57,50 @@ export const run: RepresentationEngine = ({
   const datumInstanceConfigurationEmitter =
     new DatumInstanceConfigurationEmitter(onDatumInstanceConfiguration);
 
-  let loopCount = 0;
-  let currentDatumInstanceLocatorCollection: CustomSet<UnknownCollectionLocator> =
-    new CustomSet();
-  let nextDatumInstanceLocatorCollection: CustomSet<UnknownCollectionLocator> =
-    new CustomSet([
-      ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION.datumInstanceIdentifier,
-    ]);
+  const initialBuilderConfigurations = builderConfigurationCollection.filter(
+    (builderConfiguration) =>
+      builderConfiguration.inputCollectionLocatorCollection.length === 0,
+  );
 
-  const instanceMap: DatumInstancesByIdentifier = new Map([
-    [
-      ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION.datumInstanceIdentifier,
-      ROOT_DATUM_INSTANCE_TYPE_SCRIPT_CONFIGURATION.datumInstance,
-    ],
-  ]);
+  const derivedBuilderConfigurations = builderConfigurationCollection.filter(
+    (builderConfiguration) =>
+      builderConfiguration.inputCollectionLocatorCollection.length > 0,
+  );
+
+  const derivedMutableBuilderConfigurationCollection =
+    derivedBuilderConfigurations.map((builderConfiguration) => {
+      return new MutableBuilderConfiguration(builderConfiguration);
+    });
 
   const mutableBuilderConfigurationCollectionsByInputLocator =
     new MutableBuilderConfigurationCollectionsByInputLocator();
 
-  const mutableBuilderConfigurationColection =
-    builderConfigurationCollection.map((builderConfiguration) => {
-      return new MutableBuilderConfiguration(builderConfiguration);
-    });
-
   mutableBuilderConfigurationCollectionsByInputLocator.indexMutableBuilderConfigurationCollection(
-    mutableBuilderConfigurationColection,
+    derivedMutableBuilderConfigurationCollection,
   );
 
-  while (nextDatumInstanceLocatorCollection.size > 0) {
-    currentDatumInstanceLocatorCollection = nextDatumInstanceLocatorCollection;
-    nextDatumInstanceLocatorCollection = new CustomSet();
+  const createdInstancesMap: DatumInstancesByIdentifier = new Map();
 
-    const configurationsToBuild = currentDatumInstanceLocatorCollection
+  let loopCount = 0;
+  let currentBuildersToRun: CustomSet<UnknownBuilderConfiguration> =
+    new CustomSet();
+  let nextBuildersToRun: CustomSet<UnknownBuilderConfiguration> = new CustomSet(
+    initialBuilderConfigurations,
+  );
+
+  while (nextBuildersToRun.size > 0) {
+    currentBuildersToRun = nextBuildersToRun;
+    nextBuildersToRun = new CustomSet();
+
+    const outputDatumConfigurationTupleCollection = currentBuildersToRun
       .asArray()
-      .flatMap((currentLocator) => {
-        const mutableBuilderConfigurationCollection =
-          mutableBuilderConfigurationCollectionsByInputLocator.get(
-            currentLocator,
-          );
-
-        mutableBuilderConfigurationCollection.forEach(
-          (mutableBuilderConfiguration) => {
-            // eslint-disable-next-line no-param-reassign
-            mutableBuilderConfiguration.builtInputCount += 1;
-          },
-        );
-
-        const readyConfigurations = mutableBuilderConfigurationCollection
-          .asArray()
-          .filter((mutableBuilderConfiguration) => {
-            return (
-              mutableBuilderConfiguration.builtInputCount ===
-              mutableBuilderConfiguration.builderConfiguration
-                .inputCollectionLocatorCollection.length
-            );
-          });
-
-        return readyConfigurations;
-      });
-
-    const outputDatumConfigurationTupleCollection = configurationsToBuild.map(
-      ({ builderConfiguration }) => {
+      .map((builderConfiguration) => {
         const inputCollection =
           builderConfiguration.inputCollectionLocatorCollection.map(
             (inputLocator): UnknownDatumInstanceConfiguration => {
               return {
                 instanceIdentifier: inputLocator,
-                datumInstance: instanceMap.get(inputLocator),
+                datumInstance: createdInstancesMap.get(inputLocator),
                 // TODO: figure out what to do with these predicate identifiers
                 predicateIdentifiers: [],
               };
@@ -129,8 +108,7 @@ export const run: RepresentationEngine = ({
           );
 
         return builderConfiguration.buildCollection(...inputCollection);
-      },
-    );
+      });
 
     const outputDatumConfigurationTuple =
       outputDatumConfigurationTupleCollection.flat();
@@ -138,11 +116,11 @@ export const run: RepresentationEngine = ({
     outputDatumConfigurationTuple.forEach(
       // eslint-disable-next-line @typescript-eslint/no-loop-func
       (datumInstanceConfiguration) => {
+        // debug
         // eslint-disable-next-line no-console
         console.log(
           `  Built: ${datumInstanceConfiguration.instanceIdentifier}`,
         );
-
         const filePath = getCacheFilePath(datumInstanceConfiguration);
         fs.mkdirSync(posix.dirname(filePath), { recursive: true });
         fs.writeFileSync(
@@ -150,29 +128,66 @@ export const run: RepresentationEngine = ({
           JSON.stringify(datumInstanceConfiguration, null, 2),
         );
 
-        nextDatumInstanceLocatorCollection.add(
-          datumInstanceConfiguration.instanceIdentifier,
-        );
-
-        instanceMap.set(
+        // cache
+        createdInstancesMap.set(
           datumInstanceConfiguration.instanceIdentifier,
           datumInstanceConfiguration.datumInstance,
         );
 
+        // emit
         datumInstanceConfigurationEmitter.emitDatum(datumInstanceConfiguration);
       },
     );
+
+    const pairedThings = outputDatumConfigurationTuple.flatMap(
+      (datumInstanceConfiguration) => {
+        const mutableBuilderConfigurationCollection =
+          mutableBuilderConfigurationCollectionsByInputLocator.get(
+            datumInstanceConfiguration.instanceIdentifier,
+          );
+
+        return mutableBuilderConfigurationCollection
+          .asArray()
+          .map((mutableBuilderConfiguration) => ({
+            datumInstanceConfiguration,
+            mutableBuilderConfiguration,
+          }));
+      },
+    );
+
+    const uniqueMutableBuilderConfigurations =
+      new CustomSet<MutableBuilderConfiguration>();
+    pairedThings.forEach(
+      ({ datumInstanceConfiguration, mutableBuilderConfiguration }) => {
+        // eslint-disable-next-line no-param-reassign
+        mutableBuilderConfiguration.updateInputStatus(
+          datumInstanceConfiguration,
+        );
+
+        uniqueMutableBuilderConfigurations.add(mutableBuilderConfiguration);
+      },
+    );
+
+    const readyMutableBuilderConfigurations = uniqueMutableBuilderConfigurations
+      .asArray()
+      .filter((mutableBuilderConfiguration) => {
+        return mutableBuilderConfiguration.isReady();
+      });
+
+    const readyBuilderConfigurations =
+      new CustomSet<UnknownBuilderConfiguration>();
+    readyMutableBuilderConfigurations.forEach((mutableBuilderConfiguration) => {
+      readyBuilderConfigurations.add(
+        mutableBuilderConfiguration.builderConfiguration,
+      );
+    });
+
+    nextBuildersToRun = readyBuilderConfigurations;
 
     fs.writeFileSync(
       posix.join(LOOP_PATH, `loop-${loopCount}.txt`),
       [
         `Loop: ${loopCount}`,
-        '',
-        'Current Collection:',
-        ...currentDatumInstanceLocatorCollection
-          .asArray()
-          .map((x) => (x === '' ? '""' : x))
-          .map((x) => `    ${x}`),
         '',
         'Output Data:',
         ...outputDatumConfigurationTuple.flatMap((outputDatumConfiguration) => {
@@ -182,16 +197,12 @@ export const run: RepresentationEngine = ({
           ];
         }),
         '',
-        'Next Collection:',
-        ...nextDatumInstanceLocatorCollection.asArray().map((x) => `    ${x}`),
       ].join('\n'),
     );
 
     loopCount += 1;
   }
 
-  const numberOfDataBuilt = [...instanceMap].reduce((sum) => sum + 1, 0) - 1;
-
   // eslint-disable-next-line no-console
-  console.log(`Built ${numberOfDataBuilt} instances`);
+  console.log(`Built ${createdInstancesMap.size} instances`);
 };
