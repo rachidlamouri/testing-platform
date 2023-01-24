@@ -5,7 +5,6 @@ import {
   UnknownBuilderConfigurationTuple,
 } from '../builderConfiguration';
 import { UnknownCollectionLocator } from '../collectionLocator';
-import { UnknownDatumInstance } from '../datumInstance';
 import { UnknownDatumInstanceConfiguration } from '../datumInstanceConfiguration';
 import { CustomSet } from '../../utilities/customSet';
 import { DatumHandler } from '../../utilities/datumEmitter';
@@ -20,9 +19,9 @@ export type RepresentationEngineInput = {
 
 export type RepresentationEngine = (input: RepresentationEngineInput) => void;
 
-type DatumInstancesByIdentifier = Map<
+type DatumInstanceConfigurationsByIdentifier = Map<
   UnknownCollectionLocator,
-  UnknownDatumInstance
+  UnknownDatumInstanceConfiguration
 >;
 
 const DEBUG_DIR_PATH = './debug/' as const;
@@ -59,12 +58,12 @@ export const run: RepresentationEngine = ({
 
   const initialBuilderConfigurations = builderConfigurationCollection.filter(
     (builderConfiguration) =>
-      builderConfiguration.inputCollectionLocatorCollection.length === 0,
+      builderConfiguration.inputPredicateLocatorTuple.length === 0,
   );
 
   const derivedBuilderConfigurations = builderConfigurationCollection.filter(
     (builderConfiguration) =>
-      builderConfiguration.inputCollectionLocatorCollection.length > 0,
+      builderConfiguration.inputPredicateLocatorTuple.length > 0,
   );
 
   const derivedMutableBuilderConfigurationCollection =
@@ -79,7 +78,8 @@ export const run: RepresentationEngine = ({
     derivedMutableBuilderConfigurationCollection,
   );
 
-  const createdInstancesMap: DatumInstancesByIdentifier = new Map();
+  const createdDatumInstanceConfigurationMap: DatumInstanceConfigurationsByIdentifier =
+    new Map();
 
   let loopCount = 0;
   let currentBuildersToRun: CustomSet<UnknownBuilderConfiguration> =
@@ -96,14 +96,11 @@ export const run: RepresentationEngine = ({
       .asArray()
       .map((builderConfiguration) => {
         const inputCollection =
-          builderConfiguration.inputCollectionLocatorCollection.map(
-            (inputLocator): UnknownDatumInstanceConfiguration => {
-              return {
-                instanceIdentifier: inputLocator,
-                datumInstance: createdInstancesMap.get(inputLocator),
-                // TODO: figure out what to do with these predicate identifiers
-                predicateIdentifiers: [],
-              };
+          builderConfiguration.inputPredicateLocatorTuple.map(
+            (inputPredicateLocator): UnknownDatumInstanceConfiguration => {
+              return createdDatumInstanceConfigurationMap.get(
+                inputPredicateLocator.instanceIdentifier,
+              ) as UnknownDatumInstanceConfiguration;
             },
           );
 
@@ -129,9 +126,9 @@ export const run: RepresentationEngine = ({
         );
 
         // cache
-        createdInstancesMap.set(
+        createdDatumInstanceConfigurationMap.set(
           datumInstanceConfiguration.instanceIdentifier,
-          datumInstanceConfiguration.datumInstance,
+          datumInstanceConfiguration,
         );
 
         // emit
@@ -139,7 +136,7 @@ export const run: RepresentationEngine = ({
       },
     );
 
-    const pairedThings = outputDatumConfigurationTuple.flatMap(
+    const datumAndBuilderPairs = outputDatumConfigurationTuple.flatMap(
       (datumInstanceConfiguration) => {
         const mutableBuilderConfigurationCollection =
           mutableBuilderConfigurationCollectionsByInputLocator.get(
@@ -157,7 +154,7 @@ export const run: RepresentationEngine = ({
 
     const uniqueMutableBuilderConfigurations =
       new CustomSet<MutableBuilderConfiguration>();
-    pairedThings.forEach(
+    datumAndBuilderPairs.forEach(
       ({ datumInstanceConfiguration, mutableBuilderConfiguration }) => {
         // eslint-disable-next-line no-param-reassign
         mutableBuilderConfiguration.updateInputStatus(
@@ -204,5 +201,5 @@ export const run: RepresentationEngine = ({
   }
 
   // eslint-disable-next-line no-console
-  console.log(`Built ${createdInstancesMap.size} instances`);
+  console.log(`Built ${createdDatumInstanceConfigurationMap.size} instances`);
 };

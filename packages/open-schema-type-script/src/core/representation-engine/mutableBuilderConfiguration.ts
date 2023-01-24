@@ -1,10 +1,17 @@
 import { CustomMap } from '../../utilities/customMap';
 import { UnknownBuilderConfiguration } from '../builderConfiguration';
-import { UnknownCollectionLocator } from '../collectionLocator';
-import { UnknownDatumInstanceConfiguration } from '../datumInstanceConfiguration';
+import {
+  UnknownCollectionLocator,
+  UnknownCollectionLocatorTuple,
+} from '../collectionLocator';
+import {
+  UnknownDatumInstanceConfiguration,
+  UnknownNormalizedDatumInstancePredicateLocatorCollection,
+} from '../datumInstanceConfiguration';
 
 type MutableInputStatus = {
   locator: UnknownCollectionLocator;
+  semantics: UnknownCollectionLocatorTuple;
   isReady: boolean;
 };
 
@@ -18,6 +25,20 @@ export class MutableBuilderConfiguration {
   constructor(
     public readonly builderConfiguration: UnknownBuilderConfiguration,
   ) {
+    // TODO: update Custom map to allow for this pattern
+    const tempMap = new Map<
+      UnknownCollectionLocator,
+      UnknownNormalizedDatumInstancePredicateLocatorCollection
+    >();
+    builderConfiguration.inputPredicateLocatorTuple.forEach(
+      (predicateLocatorCollection) => {
+        tempMap.set(
+          predicateLocatorCollection.instanceIdentifier,
+          predicateLocatorCollection,
+        );
+      },
+    );
+
     this.mutableInputStatusesByLocator = new CustomMap<{
       Key: UnknownCollectionLocator;
       InputValue: MutableInputStatus;
@@ -27,10 +48,18 @@ export class MutableBuilderConfiguration {
       createDefaultStoredValue: (inputLocator): MutableInputStatus => {
         return {
           locator: inputLocator,
+          semantics: (
+            tempMap.get(
+              inputLocator,
+            ) as UnknownNormalizedDatumInstancePredicateLocatorCollection
+          ).predicateIdentifiers,
           isReady: false,
         };
       },
-      initialKeys: builderConfiguration.inputCollectionLocatorCollection,
+      initialKeys: builderConfiguration.inputPredicateLocatorTuple.map(
+        (predicateLocatorCollection) =>
+          predicateLocatorCollection.instanceIdentifier,
+      ),
     });
   }
 
@@ -45,7 +74,11 @@ export class MutableBuilderConfiguration {
       return;
     }
 
-    mutableInputStatus.isReady = true;
+    const currentSemantics = new Set(inputConfiguration.predicateIdentifiers);
+
+    mutableInputStatus.isReady = mutableInputStatus.semantics.every(
+      (semanticsIdentifier) => currentSemantics.has(semanticsIdentifier),
+    );
   }
 
   isReady(): boolean {

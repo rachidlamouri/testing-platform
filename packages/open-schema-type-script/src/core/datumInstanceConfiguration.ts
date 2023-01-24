@@ -20,6 +20,24 @@ export type DatumInstanceConfiguration<
 export type UnknownDatumInstanceConfigurationTuple =
   readonly UnknownDatumInstanceConfiguration[];
 
+export type NormalizedDatumInstancePredicateLocatorCollection<
+  T extends UnknownDatumInstanceConfiguration,
+> = Pick<
+  DatumInstanceConfiguration<T>,
+  'instanceIdentifier' | 'predicateIdentifiers'
+>;
+
+export type UnknownNormalizedDatumInstancePredicateLocatorCollection =
+  NormalizedDatumInstancePredicateLocatorCollection<UnknownDatumInstanceConfiguration>;
+
+export type DatumInstanceConfigurationTupleToNormalizedPredicateLocatorCollectionTuple<
+  T extends UnknownDatumInstanceConfigurationTuple,
+> = {
+  [Index in keyof T]: NormalizedDatumInstancePredicateLocatorCollection<
+    T[Index]
+  >;
+};
+
 export type DatumInstanceConfigurationTupleToInstanceIdentifierTuple<
   T extends UnknownDatumInstanceConfigurationTuple,
 > = {

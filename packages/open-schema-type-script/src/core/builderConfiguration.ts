@@ -1,4 +1,4 @@
-import { DatumInstanceConfigurationTupleToInstanceIdentifierTuple } from './datumInstanceConfiguration';
+import { DatumInstanceConfigurationTupleToNormalizedPredicateLocatorCollectionTuple } from './datumInstanceConfiguration';
 import {
   DatumInstanceConfigurationCollectionBuilder,
   UnknownDatumInstanceConfigurationCollectionBuilderInput,
@@ -63,7 +63,7 @@ type BaseBuilderConfiguration<
       }
     >
   >;
-  inputCollectionLocatorCollection: DatumInstanceConfigurationTupleToInstanceIdentifierTuple<
+  inputPredicateLocatorTuple: DatumInstanceConfigurationTupleToNormalizedPredicateLocatorCollectionTuple<
     T['ConfigurationInputDatumInstanceConfigurationCollection']
   >;
 };
