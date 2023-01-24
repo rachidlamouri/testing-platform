@@ -139,7 +139,7 @@ export const run: RepresentationEngine = ({
       },
     );
 
-    const pairedThings = outputDatumConfigurationTuple.flatMap(
+    const datumAndBuilderPairs = outputDatumConfigurationTuple.flatMap(
       (datumInstanceConfiguration) => {
         const mutableBuilderConfigurationCollection =
           mutableBuilderConfigurationCollectionsByInputLocator.get(
@@ -157,7 +157,7 @@ export const run: RepresentationEngine = ({
 
     const uniqueMutableBuilderConfigurations =
       new CustomSet<MutableBuilderConfiguration>();
-    pairedThings.forEach(
+    datumAndBuilderPairs.forEach(
       ({ datumInstanceConfiguration, mutableBuilderConfiguration }) => {
         // eslint-disable-next-line no-param-reassign
         mutableBuilderConfiguration.updateInputStatus(
