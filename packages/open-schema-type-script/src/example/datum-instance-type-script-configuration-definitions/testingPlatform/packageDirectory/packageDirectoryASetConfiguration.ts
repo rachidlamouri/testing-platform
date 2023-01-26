@@ -16,6 +16,7 @@ export type PackageDirectoryNameSetConfigurationTypeScriptConfiguration =
     ];
     datumInstanceIdentifier: 'package-directory-name-set-configuration';
     datumInstance: PackageDirectoryNameSetConfiguration;
+    datumInstanceAliases: [];
   }>;
 
 export const PACKAGE_DIRECTORY_NAME_SET_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: PackageDirectoryNameSetConfigurationTypeScriptConfiguration =
@@ -27,6 +28,7 @@ export const PACKAGE_DIRECTORY_NAME_SET_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION:
     datumInstance: {
       rootDirectoryRelativeToCurrentWorkingDirectory: 'packages',
     },
+    datumInstanceAliases: [],
   };
 
 export const buildPackageDirectoryNameSetConfiguration: DatumInstanceTypeScriptConfigurationCollectionBuilder<{

@@ -25,6 +25,7 @@ export type ExpectedCiYamlFileContentsTypeScriptConfiguration =
     ];
     datumInstanceIdentifier: 'expected-ci-yaml-file-contents';
     datumInstance: ExpectedCiYamlFileContents;
+    datumInstanceAliases: [];
   }>;
 
 export const buildExpectedCiYamlContents: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
@@ -93,6 +94,7 @@ export const buildExpectedCiYamlContents: DatumInstanceTypeScriptConfigurationCo
           },
         },
       },
+      aliases: [],
     };
 
   return [outputConfiguration];

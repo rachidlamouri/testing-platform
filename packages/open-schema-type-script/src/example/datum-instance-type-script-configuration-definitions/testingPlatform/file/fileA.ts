@@ -23,6 +23,8 @@ export type FileATypeScriptConfiguration =
     ];
     datumInstanceIdentifier: UnknownCollectionLocator;
     datumInstance: FileA;
+    // TODO: consider not using the semantics identifier since that could be confusing; and we don't want people to look up the semantics from an alias; they are indirectly related
+    datumInstanceAliases: [FileSemanticsIdentifier];
   }>;
 
 const accumulateFilePaths = (
@@ -93,6 +95,7 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
           FileSemanticsIdentifier.A,
           fileSemanticsIdentifier,
         ],
+        aliases: [fileSemanticsIdentifier],
       };
     },
   );

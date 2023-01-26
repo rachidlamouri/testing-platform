@@ -21,6 +21,7 @@ export type AssertableCiYamlFileTypeScriptConfiguration =
     ];
     datumInstanceIdentifier: 'assertable-ci-yaml-file';
     datumInstance: AssertableCiYamlFile;
+    datumInstanceAliases: [];
   }>;
 
 export const buildAssertableCiYamlFileContentsConfiguration: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
@@ -53,6 +54,7 @@ export const buildAssertableCiYamlFileContentsConfiguration: DatumInstanceTypeSc
         actualStringContents: actualCiYamlFile.stringContents,
         expectedStringContents: expectedText,
       },
+      aliases: [],
     };
 
   // TODO: move this to the generator-engine when we have one

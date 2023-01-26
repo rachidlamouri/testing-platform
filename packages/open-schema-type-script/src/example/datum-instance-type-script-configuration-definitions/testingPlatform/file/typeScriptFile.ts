@@ -23,6 +23,7 @@ export type TypeScriptFileTypeScriptConfiguration =
     ];
     datumInstanceIdentifier: UnknownCollectionLocator;
     datumInstance: TypeScriptFile;
+    datumInstanceAliases: [FileSemanticsIdentifier.TypeScript];
   }>;
 
 export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
@@ -41,6 +42,8 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
         FileSemanticsIdentifier.A,
         FileSemanticsIdentifier.TypeScript,
       ],
+      // TODO: figure out how to tie this alias to the one from FileA, so you can just do inputFileConfiguration.aliases
+      aliases: [FileSemanticsIdentifier.TypeScript],
     };
 
   return [outputConfiguration];

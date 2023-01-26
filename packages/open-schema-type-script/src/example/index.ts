@@ -136,8 +136,8 @@ const builderConfigurationCollection = [
     buildCollection: buildTypeScriptFile,
     inputPredicateLocatorTuple: [
       {
-        // TODO: handle aliases
-        instanceIdentifier: 'some-alias',
+        // TODO: rename "instanceIdentifier" to "instanceLocator"
+        instanceIdentifier: FileSemanticsIdentifier.TypeScript,
         predicateIdentifiers: [
           FileSemanticsIdentifier.A,
           FileSemanticsIdentifier.TypeScript,
