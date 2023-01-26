@@ -1,4 +1,5 @@
 import { CustomMap } from '../../utilities/customMap';
+import { CustomSet } from '../../utilities/customSet';
 import { UnknownBuilderConfiguration } from '../builderConfiguration';
 import {
   UnknownCollectionLocator,
@@ -16,6 +17,10 @@ type MutableInputStatus = {
 };
 
 export class MutableBuilderConfiguration {
+  public readonly isRetriggerable: boolean;
+
+  public triggeredIdentifierSet = new CustomSet<UnknownCollectionLocator>();
+
   public mutableInputStatusesByLocator: CustomMap<{
     Key: UnknownCollectionLocator;
     InputValue: MutableInputStatus;
@@ -25,6 +30,9 @@ export class MutableBuilderConfiguration {
   constructor(
     public readonly builderConfiguration: UnknownBuilderConfiguration,
   ) {
+    this.isRetriggerable =
+      builderConfiguration.inputPredicateLocatorTuple.length === 1;
+
     // TODO: update Custom map to allow for this pattern
     const tempMap = new Map<
       UnknownCollectionLocator,
