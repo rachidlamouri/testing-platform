@@ -18,8 +18,8 @@ export type TypeScriptFile = Merge<
 export type TypeScriptFileTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
     typeSemanticsIdentifiers: [
-      FileSemanticsIdentifier.A,
       FileSemanticsIdentifier.TypeScript,
+      FileSemanticsIdentifier.A,
     ];
     datumInstanceIdentifier: UnknownCollectionLocator;
     datumInstance: TypeScriptFile;
@@ -32,15 +32,15 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
 }> = (inputFileConfiguration) => {
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileTypeScriptConfiguration> =
     {
-      instanceIdentifier: `${Math.random()}`,
+      instanceIdentifier: `TS:${inputFileConfiguration.datumInstance.filePath}`,
       datumInstance: {
         fileSemanticsIdentifier: FileSemanticsIdentifier.TypeScript,
         filePath: inputFileConfiguration.datumInstance.filePath,
         ast: null,
       },
       predicateIdentifiers: [
-        FileSemanticsIdentifier.A,
         FileSemanticsIdentifier.TypeScript,
+        FileSemanticsIdentifier.A,
       ],
       // TODO: figure out how to tie this alias to the one from FileA, so you can just do inputFileConfiguration.aliases
       aliases: [FileSemanticsIdentifier.TypeScript],
