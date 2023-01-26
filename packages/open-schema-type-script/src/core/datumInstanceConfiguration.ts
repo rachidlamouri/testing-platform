@@ -5,9 +5,8 @@ import { ConstrainObject } from '../utilities/types/constrainObject';
 export type UnknownDatumInstanceConfiguration = {
   instanceIdentifier: UnknownCollectionLocator;
   datumInstance: UnknownDatumInstance;
-  // TOOD: we aren't do anything with these, so disabling them for now
-  // aliases: UnknownCollectionLocator[];
   predicateIdentifiers: UnknownCollectionLocator[];
+  aliases: UnknownCollectionLocator[];
 };
 
 export type DatumInstanceConfiguration<

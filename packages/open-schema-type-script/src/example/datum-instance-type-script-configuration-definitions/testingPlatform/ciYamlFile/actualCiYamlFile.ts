@@ -18,6 +18,7 @@ export type ActualCiYamlFileTypeScriptConfiguration =
     ];
     datumInstanceIdentifier: 'actual-ci-yaml-file';
     datumInstance: ActualCiYamlFile;
+    datumInstanceAliases: [];
   }>;
 
 export const buildActualCiYamlFileContents: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
@@ -37,6 +38,7 @@ export const buildActualCiYamlFileContents: DatumInstanceTypeScriptConfiguration
         filePath,
         stringContents,
       },
+      aliases: [],
     };
 
   return [outputConfiguration];

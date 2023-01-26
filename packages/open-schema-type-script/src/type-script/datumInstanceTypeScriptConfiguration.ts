@@ -7,6 +7,7 @@ export type UnknownDatumInstanceTypeScriptConfiguration = {
   datumInstanceIdentifier: UnknownCollectionLocator;
   typeSemanticsIdentifiers: UnknownCollectionLocator[];
   datumInstance: UnknownDatumInstance;
+  datumInstanceAliases: UnknownCollectionLocator[];
 };
 
 export type UnknownDatumInstanceTypeScriptConfigurationTuple =
@@ -25,6 +26,7 @@ export type DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<
   instanceIdentifier: T['datumInstanceIdentifier'];
   datumInstance: T['datumInstance'];
   predicateIdentifiers: T['typeSemanticsIdentifiers'];
+  aliases: T['datumInstanceAliases'];
 }>;
 
 export type DatumInstanceTypeScriptConfigurationTupleToDatumInstanceConfigurationTuple<
@@ -43,8 +45,10 @@ export const getDatumInstanceConfiguration = <
   typeSemanticsIdentifiers,
   datumInstanceIdentifier,
   datumInstance,
+  datumInstanceAliases,
 }: T): DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<T> => ({
   predicateIdentifiers: typeSemanticsIdentifiers,
   instanceIdentifier: datumInstanceIdentifier,
   datumInstance,
+  aliases: datumInstanceAliases,
 });

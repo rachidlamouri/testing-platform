@@ -81,11 +81,20 @@ export const run: RepresentationEngine = ({
   const createdDatumInstanceConfigurationMap: DatumInstanceConfigurationsByIdentifier =
     new Map();
 
+  // TODO: naming stuff is hard
+  // TODO: this data structure kind of obfuscates the relationship between a retriggerable builder and its input; can we fix that?
+  type RuntimeElement = {
+    builderConfiguration: UnknownBuilderConfiguration;
+    inputInstanceIdentifier: UnknownCollectionLocator | null;
+  };
+
   let loopCount = 0;
-  let currentBuildersToRun: CustomSet<UnknownBuilderConfiguration> =
-    new CustomSet();
-  let nextBuildersToRun: CustomSet<UnknownBuilderConfiguration> = new CustomSet(
-    initialBuilderConfigurations,
+  let currentBuildersToRun: CustomSet<RuntimeElement> = new CustomSet();
+  let nextBuildersToRun: CustomSet<RuntimeElement> = new CustomSet(
+    initialBuilderConfigurations.map((builderConfiguration) => ({
+      builderConfiguration,
+      inputInstanceIdentifier: null,
+    })),
   );
 
   while (nextBuildersToRun.size > 0) {
@@ -94,15 +103,21 @@ export const run: RepresentationEngine = ({
 
     const outputDatumConfigurationTupleCollection = currentBuildersToRun
       .asArray()
-      .map((builderConfiguration) => {
-        const inputCollection =
-          builderConfiguration.inputPredicateLocatorTuple.map(
-            (inputPredicateLocator): UnknownDatumInstanceConfiguration => {
-              return createdDatumInstanceConfigurationMap.get(
-                inputPredicateLocator.instanceIdentifier,
-              ) as UnknownDatumInstanceConfiguration;
-            },
-          );
+      .map(({ builderConfiguration, inputInstanceIdentifier }) => {
+        const inputIdentifierTuple =
+          inputInstanceIdentifier !== null
+            ? [inputInstanceIdentifier]
+            : builderConfiguration.inputPredicateLocatorTuple.map(
+                (x) => x.instanceIdentifier,
+              );
+
+        const inputCollection = inputIdentifierTuple.map(
+          (inputIdentifier): UnknownDatumInstanceConfiguration => {
+            return createdDatumInstanceConfigurationMap.get(
+              inputIdentifier,
+            ) as UnknownDatumInstanceConfiguration;
+          },
+        );
 
         return builderConfiguration.buildCollection(...inputCollection);
       });
@@ -138,48 +153,93 @@ export const run: RepresentationEngine = ({
 
     const datumAndBuilderPairs = outputDatumConfigurationTuple.flatMap(
       (datumInstanceConfiguration) => {
-        const mutableBuilderConfigurationCollection =
-          mutableBuilderConfigurationCollectionsByInputLocator.get(
-            datumInstanceConfiguration.instanceIdentifier,
-          );
+        // TODO: naming things is hard
+        const mutableBuilderConfigurationCollectionA = [
+          datumInstanceConfiguration.instanceIdentifier,
+          ...datumInstanceConfiguration.aliases,
+        ].flatMap((locator) => {
+          const mutableBuilderConfigurationCollectionB =
+            mutableBuilderConfigurationCollectionsByInputLocator
+              .get(locator)
+              .asArray();
 
-        return mutableBuilderConfigurationCollection
-          .asArray()
-          .map((mutableBuilderConfiguration) => ({
+          return mutableBuilderConfigurationCollectionB;
+        });
+
+        return mutableBuilderConfigurationCollectionA.map(
+          (mutableBuilderConfiguration) => ({
             datumInstanceConfiguration,
             mutableBuilderConfiguration,
-          }));
+          }),
+        );
       },
     );
 
-    const uniqueMutableBuilderConfigurations =
-      new CustomSet<MutableBuilderConfiguration>();
-    datumAndBuilderPairs.forEach(
-      ({ datumInstanceConfiguration, mutableBuilderConfiguration }) => {
-        // eslint-disable-next-line no-param-reassign
-        mutableBuilderConfiguration.updateInputStatus(
-          datumInstanceConfiguration,
+    const retriggerable = datumAndBuilderPairs.filter(
+      ({ mutableBuilderConfiguration }) =>
+        mutableBuilderConfiguration.isRetriggerable,
+    );
+
+    const nonRetriggerable = datumAndBuilderPairs.filter(
+      ({ mutableBuilderConfiguration }) =>
+        !mutableBuilderConfiguration.isRetriggerable,
+    );
+
+    nextBuildersToRun = new CustomSet<RuntimeElement>();
+    // eslint-disable-next-line @typescript-eslint/no-loop-func
+    retriggerable.forEach(
+      // eslint-disable-next-line @typescript-eslint/no-loop-func
+      ({ mutableBuilderConfiguration, datumInstanceConfiguration }) => {
+        if (
+          mutableBuilderConfiguration.triggeredIdentifierSet.has(
+            datumInstanceConfiguration.instanceIdentifier,
+          )
+        ) {
+          // A retriggerable builder must only trigger on a datum instance once
+          return;
+        }
+
+        // TODO: encapsulate this in the mutable builder configuration
+        mutableBuilderConfiguration.triggeredIdentifierSet.add(
+          datumInstanceConfiguration.instanceIdentifier,
         );
 
-        uniqueMutableBuilderConfigurations.add(mutableBuilderConfiguration);
+        nextBuildersToRun.add({
+          builderConfiguration:
+            mutableBuilderConfiguration.builderConfiguration,
+          inputInstanceIdentifier:
+            datumInstanceConfiguration.instanceIdentifier,
+        });
       },
     );
 
-    const readyMutableBuilderConfigurations = uniqueMutableBuilderConfigurations
-      .asArray()
-      .filter((mutableBuilderConfiguration) => {
-        return mutableBuilderConfiguration.isReady();
-      });
-
-    const readyBuilderConfigurations =
-      new CustomSet<UnknownBuilderConfiguration>();
-    readyMutableBuilderConfigurations.forEach((mutableBuilderConfiguration) => {
-      readyBuilderConfigurations.add(
-        mutableBuilderConfiguration.builderConfiguration,
+    nonRetriggerable.forEach((datumAndBuilderPair) => {
+      datumAndBuilderPair.mutableBuilderConfiguration.updateInputStatus(
+        datumAndBuilderPair.datumInstanceConfiguration,
       );
     });
 
-    nextBuildersToRun = readyBuilderConfigurations;
+    const readyNonRetriggerable = nonRetriggerable.filter(
+      (datumAndBuilderPair) =>
+        datumAndBuilderPair.mutableBuilderConfiguration.isReady(),
+    );
+
+    const uniqueReadyNonRetriggerableBuilders =
+      new CustomSet<UnknownBuilderConfiguration>(
+        readyNonRetriggerable.map(
+          (x) => x.mutableBuilderConfiguration.builderConfiguration,
+        ),
+      );
+
+    uniqueReadyNonRetriggerableBuilders
+      .asArray()
+      // eslint-disable-next-line @typescript-eslint/no-loop-func
+      .forEach((builderConfiguration) => {
+        nextBuildersToRun.add({
+          builderConfiguration,
+          inputInstanceIdentifier: null,
+        });
+      });
 
     fs.writeFileSync(
       posix.join(LOOP_PATH, `loop-${loopCount}.txt`),

@@ -22,6 +22,7 @@ export type ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration =
     ];
     datumInstanceIdentifier: 'expected-ci-yaml-file-contents-configuration';
     datumInstance: ExpectedCiYamlFileContentsConfiguration;
+    datumInstanceAliases: [];
   }>;
 
 const beforeCommentKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${'Pre-Package Steps'}`;
@@ -81,6 +82,7 @@ export const CI_YAML_FILE_CONTENTS_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: Expe
         },
       },
     },
+    datumInstanceAliases: [],
   };
 
 export const buildExpectedCiYamlFileContentsConfiguration: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
