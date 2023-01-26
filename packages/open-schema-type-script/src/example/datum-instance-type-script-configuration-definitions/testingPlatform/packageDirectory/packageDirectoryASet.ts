@@ -13,7 +13,9 @@ export type PackageDirectoryNameSet = {
 
 export type PackageDirectoryNameSetTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
-    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.PackageDirectoryNameSet;
+    typeSemanticsIdentifiers: [
+      TypeScriptSemanticsIdentifier.PackageDirectoryNameSet,
+    ];
     datumInstanceIdentifier: 'package-directory-name-set';
     datumInstance: PackageDirectoryNameSet;
   }>;

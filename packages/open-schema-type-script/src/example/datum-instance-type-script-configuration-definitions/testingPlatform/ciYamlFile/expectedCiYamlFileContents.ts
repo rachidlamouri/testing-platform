@@ -20,7 +20,9 @@ export type ExpectedCiYamlFileContents = CiYamlFileContents<
 
 export type ExpectedCiYamlFileContentsTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
-    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.ExpectedCiYamlFileContents;
+    typeSemanticsIdentifiers: [
+      TypeScriptSemanticsIdentifier.ExpectedCiYamlFileContents,
+    ];
     datumInstanceIdentifier: 'expected-ci-yaml-file-contents';
     datumInstance: ExpectedCiYamlFileContents;
   }>;

@@ -10,13 +10,17 @@ import {
   File,
   FileSemanticsIdentifier,
   fileSemanticsByExtension,
+  FileExtensionSemanticsIdentifier,
 } from './file';
 
 export type FileA = File;
 
 export type FileATypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
-    typeSemanticsIdentifier: FileSemanticsIdentifier.A;
+    typeSemanticsIdentifiers: [
+      FileSemanticsIdentifier.A,
+      FileExtensionSemanticsIdentifier,
+    ];
     datumInstanceIdentifier: UnknownCollectionLocator;
     datumInstance: FileA;
   }>;
@@ -85,7 +89,10 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
           filePath,
           fileSemanticsIdentifier,
         },
-        predicateIdentifiers: [FileSemanticsIdentifier.A],
+        predicateIdentifiers: [
+          FileSemanticsIdentifier.A,
+          fileSemanticsIdentifier,
+        ],
       };
     },
   );
