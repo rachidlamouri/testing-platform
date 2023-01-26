@@ -1,21 +1,28 @@
-export enum FileTypeIdentifier {
-  JSON = 'JSON',
-  TypeScript = 'TypeScript',
-  Unknown = 'Unknown',
+export enum FileSemanticsIdentifier {
+  A = 'File:A',
+  TypeScript = 'File:TypeScript',
+  Json = 'File:Json',
+  Unknown = 'File:Unknown',
 }
 
-const extensionsByFileType = {
-  [FileTypeIdentifier.JSON]: '.json',
-  [FileTypeIdentifier.TypeScript]: '.ts',
-  [FileTypeIdentifier.Unknown]: '.:shrug:',
-} satisfies Record<FileTypeIdentifier, string>;
+export type FileExtensionSemanticsIdentifier = Exclude<
+  FileSemanticsIdentifier,
+  FileSemanticsIdentifier.A
+>;
+
+const extensionsByFileSemantics = {
+  [FileSemanticsIdentifier.Json]: '.json',
+  [FileSemanticsIdentifier.TypeScript]: '.ts',
+  [FileSemanticsIdentifier.Unknown]: '.:shrug:',
+} satisfies Record<FileExtensionSemanticsIdentifier, string>;
 
 // TODO: make a util for swapping keys and values
-export const fileTypesByExtension = Object.fromEntries(
-  Object.entries(extensionsByFileType).map(([k, v]) => [v, k]),
-) as Record<string, FileTypeIdentifier>;
+export const fileSemanticsByExtension = Object.fromEntries(
+  Object.entries(extensionsByFileSemantics).map(([k, v]) => [v, k]),
+) as Record<string, FileExtensionSemanticsIdentifier>;
 
-export type File<T extends FileTypeIdentifier = FileTypeIdentifier> = {
-  filePath: string;
-  fileTypeIdentifier: T;
-};
+export type File<T extends FileSemanticsIdentifier = FileSemanticsIdentifier> =
+  {
+    filePath: string;
+    fileSemanticsIdentifier: T;
+  };
