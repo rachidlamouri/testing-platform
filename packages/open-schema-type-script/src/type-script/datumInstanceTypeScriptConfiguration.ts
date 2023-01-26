@@ -5,7 +5,7 @@ import { ConstrainObject } from '../utilities/types/constrainObject';
 
 export type UnknownDatumInstanceTypeScriptConfiguration = {
   datumInstanceIdentifier: UnknownCollectionLocator;
-  typeSemanticsIdentifier: UnknownCollectionLocator;
+  typeSemanticsIdentifiers: UnknownCollectionLocator[];
   datumInstance: UnknownDatumInstance;
 };
 
@@ -24,7 +24,7 @@ export type DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<
 > = DatumInstanceConfiguration<{
   instanceIdentifier: T['datumInstanceIdentifier'];
   datumInstance: T['datumInstance'];
-  predicateIdentifiers: [T['typeSemanticsIdentifier']];
+  predicateIdentifiers: T['typeSemanticsIdentifiers'];
 }>;
 
 export type DatumInstanceTypeScriptConfigurationTupleToDatumInstanceConfigurationTuple<
@@ -40,11 +40,11 @@ export type DatumInstanceTypeScriptConfigurationTupleToDatumInstanceConfiguratio
 export const getDatumInstanceConfiguration = <
   T extends UnknownDatumInstanceTypeScriptConfiguration,
 >({
-  typeSemanticsIdentifier,
+  typeSemanticsIdentifiers,
   datumInstanceIdentifier,
   datumInstance,
 }: T): DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<T> => ({
-  predicateIdentifiers: [typeSemanticsIdentifier],
+  predicateIdentifiers: typeSemanticsIdentifiers,
   instanceIdentifier: datumInstanceIdentifier,
   datumInstance,
 });
