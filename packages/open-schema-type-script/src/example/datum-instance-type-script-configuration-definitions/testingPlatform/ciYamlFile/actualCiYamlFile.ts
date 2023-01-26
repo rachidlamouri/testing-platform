@@ -13,7 +13,9 @@ export type ActualCiYamlFile = {
 
 export type ActualCiYamlFileTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
-    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.ActualCiYamlFileType;
+    typeSemanticsIdentifiers: [
+      TypeScriptSemanticsIdentifier.ActualCiYamlFileType,
+    ];
     datumInstanceIdentifier: 'actual-ci-yaml-file';
     datumInstance: ActualCiYamlFile;
   }>;

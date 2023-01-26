@@ -4,32 +4,44 @@ import {
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
-import { File, FileTypeIdentifier } from './file';
+import { Merge } from '../../../../utilities/types/merge/merge';
+import { File, FileSemanticsIdentifier } from './file';
 import { FileATypeScriptConfiguration } from './fileA';
 
-export type TypeScriptFile = File<FileTypeIdentifier.TypeScript>;
+export type TypeScriptFile = Merge<
+  File<FileSemanticsIdentifier.TypeScript>,
+  {
+    ast: unknown;
+  }
+>;
 
 export type TypeScriptFileTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
-    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.FileA;
+    typeSemanticsIdentifiers: [
+      FileSemanticsIdentifier.A,
+      FileSemanticsIdentifier.TypeScript,
+    ];
     datumInstanceIdentifier: UnknownCollectionLocator;
     datumInstance: TypeScriptFile;
   }>;
 
-// TODO: use semantics to drive this kind of conditional transformation
 export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [FileATypeScriptConfiguration];
-  OutputCollection: TypeScriptFileTypeScriptConfiguration[];
-}> = (inputConfiguration) => {
-  if (
-    inputConfiguration.datumInstance.fileTypeIdentifier ===
-    FileTypeIdentifier.TypeScript
-  ) {
-    return [
-      inputConfiguration as DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileTypeScriptConfiguration>,
-    ];
-  }
+  OutputCollection: [TypeScriptFileTypeScriptConfiguration];
+}> = (inputFileConfiguration) => {
+  const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileTypeScriptConfiguration> =
+    {
+      instanceIdentifier: `${Math.random()}`,
+      datumInstance: {
+        fileSemanticsIdentifier: FileSemanticsIdentifier.TypeScript,
+        filePath: inputFileConfiguration.datumInstance.filePath,
+        ast: null,
+      },
+      predicateIdentifiers: [
+        FileSemanticsIdentifier.A,
+        FileSemanticsIdentifier.TypeScript,
+      ],
+    };
 
-  return [];
+  return [outputConfiguration];
 };

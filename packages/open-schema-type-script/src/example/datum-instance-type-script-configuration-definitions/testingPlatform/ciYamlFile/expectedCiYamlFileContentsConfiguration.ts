@@ -17,7 +17,9 @@ export type ExpectedCiYamlFileContentsConfiguration = CiYamlFileContents<{
 
 export type ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
-    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.ExpectedCiYamlFileContentsConfiguration;
+    typeSemanticsIdentifiers: [
+      TypeScriptSemanticsIdentifier.ExpectedCiYamlFileContentsConfiguration,
+    ];
     datumInstanceIdentifier: 'expected-ci-yaml-file-contents-configuration';
     datumInstance: ExpectedCiYamlFileContentsConfiguration;
   }>;
@@ -27,8 +29,9 @@ const afterCommentKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${'Post-Pac
 
 export const CI_YAML_FILE_CONTENTS_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration =
   {
-    typeSemanticsIdentifier:
+    typeSemanticsIdentifiers: [
       TypeScriptSemanticsIdentifier.ExpectedCiYamlFileContentsConfiguration,
+    ],
     datumInstanceIdentifier: 'expected-ci-yaml-file-contents-configuration',
     datumInstance: {
       name: 'Continuous Integration',

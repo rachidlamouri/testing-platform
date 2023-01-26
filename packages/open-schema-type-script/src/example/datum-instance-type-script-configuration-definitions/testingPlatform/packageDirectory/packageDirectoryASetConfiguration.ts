@@ -11,15 +11,18 @@ export type PackageDirectoryNameSetConfiguration = {
 
 export type PackageDirectoryNameSetConfigurationTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
-    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.PackageDirectoryNameSetConfiguration;
+    typeSemanticsIdentifiers: [
+      TypeScriptSemanticsIdentifier.PackageDirectoryNameSetConfiguration,
+    ];
     datumInstanceIdentifier: 'package-directory-name-set-configuration';
     datumInstance: PackageDirectoryNameSetConfiguration;
   }>;
 
 export const PACKAGE_DIRECTORY_NAME_SET_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: PackageDirectoryNameSetConfigurationTypeScriptConfiguration =
   {
-    typeSemanticsIdentifier:
+    typeSemanticsIdentifiers: [
       TypeScriptSemanticsIdentifier.PackageDirectoryNameSetConfiguration,
+    ],
     datumInstanceIdentifier: 'package-directory-name-set-configuration',
     datumInstance: {
       rootDirectoryRelativeToCurrentWorkingDirectory: 'packages',

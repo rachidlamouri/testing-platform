@@ -33,10 +33,11 @@ import {
   FileATypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileA';
 import { TypeScriptSemanticsIdentifier as TestingPlatformSemanticsIds } from './datum-instance-type-script-configuration-definitions/testingPlatform/typeScriptSemanticsIdentifier';
-// import {
-//   buildTypeScriptFile,
-//   TypeScriptFileTypeScriptConfiguration,
-// } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFile';
+import {
+  buildTypeScriptFile,
+  TypeScriptFileTypeScriptConfiguration,
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFile';
+import { FileSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/file';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
@@ -128,15 +129,22 @@ const builderConfigurationCollection = [
     buildCollection: buildFileATuple,
     inputPredicateLocatorTuple: [],
   }),
-
-  // TODO: use aliases and semantics to handle this transformation
-  // buildBuilderConfiguration<{
-  //   InputCollection: [FileATypeScriptConfiguration];
-  //   OutputCollection: TypeScriptFileTypeScriptConfiguration[];
-  // }>({
-  //   buildCollection: buildTypeScriptFile,
-  //   inputCollectionLocatorCollection: [''],
-  // }),
+  buildBuilderConfiguration<{
+    InputCollection: [FileATypeScriptConfiguration];
+    OutputCollection: [TypeScriptFileTypeScriptConfiguration];
+  }>({
+    buildCollection: buildTypeScriptFile,
+    inputPredicateLocatorTuple: [
+      {
+        // TODO: handle aliases
+        instanceIdentifier: 'some-alias',
+        predicateIdentifiers: [
+          FileSemanticsIdentifier.A,
+          FileSemanticsIdentifier.TypeScript,
+        ],
+      },
+    ],
+  }),
 ] as const satisfies UnknownBuilderConfigurationTuple;
 
 const [task] = process.argv.slice(2);

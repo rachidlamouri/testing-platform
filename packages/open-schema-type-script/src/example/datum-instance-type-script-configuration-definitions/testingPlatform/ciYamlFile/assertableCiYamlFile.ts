@@ -16,7 +16,9 @@ export type AssertableCiYamlFile = {
 
 export type AssertableCiYamlFileTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
-    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.AssertableCiYamlFile;
+    typeSemanticsIdentifiers: [
+      TypeScriptSemanticsIdentifier.AssertableCiYamlFile,
+    ];
     datumInstanceIdentifier: 'assertable-ci-yaml-file';
     datumInstance: AssertableCiYamlFile;
   }>;

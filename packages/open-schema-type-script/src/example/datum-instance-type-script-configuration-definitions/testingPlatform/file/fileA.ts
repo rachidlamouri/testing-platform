@@ -6,14 +6,21 @@ import {
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
-import { File, FileTypeIdentifier, fileTypesByExtension } from './file';
+import {
+  File,
+  FileSemanticsIdentifier,
+  fileSemanticsByExtension,
+  FileExtensionSemanticsIdentifier,
+} from './file';
 
 export type FileA = File;
 
 export type FileATypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
-    typeSemanticsIdentifier: TypeScriptSemanticsIdentifier.FileA;
+    typeSemanticsIdentifiers: [
+      FileSemanticsIdentifier.A,
+      FileExtensionSemanticsIdentifier,
+    ];
     datumInstanceIdentifier: UnknownCollectionLocator;
     datumInstance: FileA;
   }>;
@@ -72,14 +79,20 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
     ): DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<FileATypeScriptConfiguration> => {
       const extension = posix.extname(filePath);
 
+      // TODO: encapsulate this default behavior in a function
+      const fileSemanticsIdentifier =
+        fileSemanticsByExtension[extension] ?? FileSemanticsIdentifier.Unknown;
+
       return {
         instanceIdentifier: filePath,
         datumInstance: {
           filePath,
-          fileTypeIdentifier:
-            fileTypesByExtension[extension] ?? FileTypeIdentifier.Unknown,
+          fileSemanticsIdentifier,
         },
-        predicateIdentifiers: [TypeScriptSemanticsIdentifier.FileA],
+        predicateIdentifiers: [
+          FileSemanticsIdentifier.A,
+          fileSemanticsIdentifier,
+        ],
       };
     },
   );
