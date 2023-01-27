@@ -39,10 +39,19 @@ export const run = ({
   const onDatumInstanceConfiguration: DatumHandler<
     UnknownDatumInstanceConfiguration
   > = (datumInstanceConfiguration) => {
-    const semanticsSet =
-      semanticsByDatumLocator.get(
-        datumInstanceConfiguration.instanceIdentifier,
-      ) ?? new Set();
+    const locators = [
+      datumInstanceConfiguration.instanceIdentifier,
+      ...datumInstanceConfiguration.aliases,
+    ];
+
+    const semanticsSet = new Set<UnknownDatumSemanticsConfiguration>();
+    locators.forEach((locator) => {
+      const nextSet = semanticsByDatumLocator.get(locator) ?? new Set();
+
+      [...nextSet].forEach((nextSemantics) => {
+        semanticsSet.add(nextSemantics);
+      });
+    });
 
     [...semanticsSet].forEach((semanticsConfiguraton) => {
       const result = semanticsConfiguraton.processDatum(

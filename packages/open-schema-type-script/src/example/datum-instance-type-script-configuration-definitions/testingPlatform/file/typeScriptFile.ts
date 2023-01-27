@@ -1,3 +1,6 @@
+import * as parser from '@typescript-eslint/parser';
+import type { TSESTree } from '@typescript-eslint/types';
+import fs from 'fs';
 import { UnknownCollectionLocator } from '../../../../core/collectionLocator';
 import {
   DatumInstanceTypeScriptConfiguration,
@@ -11,7 +14,7 @@ import { FileATypeScriptConfiguration } from './fileA';
 export type TypeScriptFile = Merge<
   File<FileSemanticsIdentifier.TypeScript>,
   {
-    ast: unknown;
+    ast: TSESTree.Program | Error;
   }
 >;
 
@@ -30,13 +33,23 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
   InputCollection: [FileATypeScriptConfiguration];
   OutputCollection: [TypeScriptFileTypeScriptConfiguration];
 }> = (inputFileConfiguration) => {
+  const { filePath } = inputFileConfiguration.datumInstance;
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+
+  let ast: TSESTree.Program | Error;
+  try {
+    ast = parser.parse(fileContents);
+  } catch (error) {
+    ast = error as Error;
+  }
+
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileTypeScriptConfiguration> =
     {
-      instanceIdentifier: `TS:${inputFileConfiguration.datumInstance.filePath}`,
+      instanceIdentifier: `TS:${filePath}`,
       datumInstance: {
         fileSemanticsIdentifier: FileSemanticsIdentifier.TypeScript,
-        filePath: inputFileConfiguration.datumInstance.filePath,
-        ast: null,
+        filePath,
+        ast,
       },
       predicateIdentifiers: [
         FileSemanticsIdentifier.TypeScript,
