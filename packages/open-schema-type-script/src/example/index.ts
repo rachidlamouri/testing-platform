@@ -183,21 +183,15 @@ if (task === 'v') {
           return true;
         },
       },
-      // TODO: Update our datum instance configurations to link each TypeScript file to its tsconfig.json file
       {
         semanticsIdentifier: 'example-2',
         // TODO: see? this is confusing because we're using a semantics identifier as a datum instance locator
         collectionLocator: FileSemanticsIdentifier.TypeScript,
-        processDatum: (unknownInstance: unknown): boolean => {
+        processDatum: (unknownInstance: unknown): true => {
           const instance = unknownInstance as TypeScriptFile;
 
           if (instance.ast instanceof Error) {
-            /* eslint-disable no-console */
-            console.log(instance.ast.message);
-            console.log(instance.ast.stack);
-            console.log({ ...instance.ast });
-            /* eslint-enable no-console */
-            return false;
+            throw instance.ast;
           }
 
           return true;
