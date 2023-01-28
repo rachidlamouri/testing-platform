@@ -21,10 +21,12 @@ export type UnknownDatumInstanceConfigurationTuple =
 
 export type NormalizedDatumInstancePredicateLocatorCollection<
   T extends UnknownDatumInstanceConfiguration,
-> = Pick<
-  DatumInstanceConfiguration<T>,
-  'instanceIdentifier' | 'predicateIdentifiers'
->;
+> = {
+  instanceIdentifier:
+    | DatumInstanceConfiguration<T>['instanceIdentifier']
+    | DatumInstanceConfiguration<T>['aliases'][number];
+  predicateIdentifiers: DatumInstanceConfiguration<T>['predicateIdentifiers'];
+};
 
 export type UnknownNormalizedDatumInstancePredicateLocatorCollection =
   NormalizedDatumInstancePredicateLocatorCollection<UnknownDatumInstanceConfiguration>;
