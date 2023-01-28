@@ -35,7 +35,6 @@ import {
 import { TypeScriptSemanticsIdentifier as TestingPlatformSemanticsIds } from './datum-instance-type-script-configuration-definitions/testingPlatform/typeScriptSemanticsIdentifier';
 import {
   buildTypeScriptFile,
-  TypeScriptFile,
   TypeScriptFileTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFileA';
 import { FileTypeScriptSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileTypeScriptSemanticsIdentifier';
@@ -177,19 +176,6 @@ if (task === 'v') {
             instance as AssertableCiYamlFile;
 
           assert.strictEqual(actualStringContents, expectedStringContents);
-
-          return true;
-        },
-      },
-      {
-        semanticsIdentifier: 'example-2',
-        collectionLocator: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`,
-        processDatum: (unknownInstance: unknown): true => {
-          const instance = unknownInstance as TypeScriptFile;
-
-          if (instance.ast instanceof Error) {
-            throw instance.ast;
-          }
 
           return true;
         },
