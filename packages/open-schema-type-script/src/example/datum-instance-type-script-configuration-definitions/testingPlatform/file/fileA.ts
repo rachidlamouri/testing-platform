@@ -79,7 +79,11 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
     (
       filePath,
     ): DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<FileATypeScriptConfiguration> => {
-      const extension = posix.extname(filePath);
+      const {
+        ext: extension,
+        // TODO: enable configuring this builder so we don't have to assume the file name is camel case
+        name: camelCaseFileName,
+      } = posix.parse(filePath);
 
       // TODO: encapsulate this default behavior in a function
       const fileExtensionSemanticsIdentifier =
@@ -92,7 +96,17 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
         instanceIdentifier: `${FileTypeScriptSemanticsIdentifier.FileA}:${filePath}`,
         datumInstance: {
           filePath,
-          fileExtensionSemanticsIdentifier,
+          fileName: {
+            camelCase: camelCaseFileName,
+            pascalCase: `${camelCaseFileName
+              .slice(0, 1)
+              .toUpperCase()}${camelCaseFileName.slice(1)}`,
+          },
+          extension: {
+            value: extension,
+            semanticsIdentifier: fileExtensionSemanticsIdentifier,
+          },
+          additionalMetadata: null,
         },
         predicateIdentifiers: [FileTypeScriptSemanticsIdentifier.FileA],
         aliases: [alias],
