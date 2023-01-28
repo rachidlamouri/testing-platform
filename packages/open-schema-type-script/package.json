@@ -3,6 +3,7 @@
     "typeId": "NonTestFramework"
   },
   "dependencies": {
+    "@typescript-eslint/typescript-estree": "^5.49.0",
     "yaml": "^2.2.1"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
-import * as parser from '@typescript-eslint/parser';
+import * as parser from '@typescript-eslint/typescript-estree';
 import type { TSESTree } from '@typescript-eslint/types';
 import fs from 'fs';
+import { posix } from 'path';
 import { UnknownCollectionLocator } from '../../../../core/collectionLocator';
 import {
   DatumInstanceTypeScriptConfiguration,
@@ -15,6 +16,8 @@ export type TypeScriptFile = Merge<
   File<FileSemanticsIdentifier.TypeScript>,
   {
     ast: TSESTree.Program | Error;
+    configFilePath: string;
+    tsconfigRootDir: string;
   }
 >;
 
@@ -29,6 +32,27 @@ export type TypeScriptFileTypeScriptConfiguration =
     datumInstanceAliases: [FileSemanticsIdentifier.TypeScript];
   }>;
 
+const getConfigFilePath = (filePath: string): string => {
+  let configFilePath: string | null = null;
+
+  let nextPath = filePath;
+  while (configFilePath === null && nextPath !== '.') {
+    nextPath = posix.dirname(nextPath);
+
+    const files = fs.readdirSync(nextPath);
+    configFilePath = files.find((x) => x === 'tsconfig.json') ?? null;
+    if (configFilePath !== null) {
+      configFilePath = posix.join(nextPath, configFilePath);
+    }
+  }
+
+  if (configFilePath === null) {
+    throw Error('No config found');
+  }
+
+  return configFilePath;
+};
+
 export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [FileATypeScriptConfiguration];
   OutputCollection: [TypeScriptFileTypeScriptConfiguration];
@@ -36,11 +60,18 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
   const { filePath } = inputFileConfiguration.datumInstance;
   const fileContents = fs.readFileSync(filePath, 'utf8');
 
+  const configFilePath = getConfigFilePath(filePath);
+  const tsconfigRootDir = posix.dirname(configFilePath);
+
   let ast: TSESTree.Program | Error;
   try {
-    ast = parser.parse(fileContents);
+    ast = parser.parse(fileContents, {
+      project: './tsconfig.json',
+      tsconfigRootDir,
+    });
   } catch (error) {
     ast = error as Error;
+    throw error;
   }
 
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileTypeScriptConfiguration> =
@@ -49,7 +80,9 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
       datumInstance: {
         fileSemanticsIdentifier: FileSemanticsIdentifier.TypeScript,
         filePath,
+        configFilePath,
         ast,
+        tsconfigRootDir,
       },
       predicateIdentifiers: [
         FileSemanticsIdentifier.TypeScript,
