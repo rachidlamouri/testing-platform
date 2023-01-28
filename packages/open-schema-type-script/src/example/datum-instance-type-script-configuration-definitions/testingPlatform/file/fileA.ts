@@ -1,30 +1,30 @@
 import fs from 'fs';
 import { posix } from 'path';
-import { UnknownCollectionLocator } from '../../../../core/collectionLocator';
+import { UnknownCollectionLocatorPart } from '../../../../core/collectionLocator';
 import {
   DatumInstanceTypeScriptConfiguration,
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import {
-  File,
-  FileSemanticsIdentifier,
-  fileSemanticsByExtension,
-  FileExtensionSemanticsIdentifier,
-} from './file';
+import { File, fileExtensionSemanticsIdentifiersByExtension } from './file';
+import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
+import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
 
 export type FileA = File;
 
+export type FileADatumInstanceIdentifier =
+  `${FileTypeScriptSemanticsIdentifier.FileA}:${UnknownCollectionLocatorPart}`;
+
+export type FileADatumInstanceAlias =
+  `${FileExtensionSemanticsIdentifier}:${FileTypeScriptSemanticsIdentifier.FileA}`;
+
 export type FileATypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
-    typeSemanticsIdentifiers: [
-      FileSemanticsIdentifier.A,
-      FileExtensionSemanticsIdentifier,
-    ];
-    datumInstanceIdentifier: UnknownCollectionLocator;
+    typeSemanticsIdentifiers: [FileTypeScriptSemanticsIdentifier.FileA];
+    datumInstanceIdentifier: FileADatumInstanceIdentifier;
     datumInstance: FileA;
     // TODO: consider not using the semantics identifier since that could be confusing; and we don't want people to look up the semantics from an alias; they are indirectly related
-    datumInstanceAliases: [FileSemanticsIdentifier];
+    datumInstanceAliases: [FileADatumInstanceAlias];
   }>;
 
 const accumulateFilePaths = (
@@ -82,20 +82,20 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
       const extension = posix.extname(filePath);
 
       // TODO: encapsulate this default behavior in a function
-      const fileSemanticsIdentifier =
-        fileSemanticsByExtension[extension] ?? FileSemanticsIdentifier.Unknown;
+      const fileExtensionSemanticsIdentifier =
+        fileExtensionSemanticsIdentifiersByExtension[extension] ??
+        FileExtensionSemanticsIdentifier.Unknown;
+
+      const alias: FileADatumInstanceAlias = `${fileExtensionSemanticsIdentifier}:${FileTypeScriptSemanticsIdentifier.FileA}`;
 
       return {
-        instanceIdentifier: filePath,
+        instanceIdentifier: `${FileTypeScriptSemanticsIdentifier.FileA}:${filePath}`,
         datumInstance: {
           filePath,
-          fileSemanticsIdentifier,
+          fileExtensionSemanticsIdentifier,
         },
-        predicateIdentifiers: [
-          FileSemanticsIdentifier.A,
-          fileSemanticsIdentifier,
-        ],
-        aliases: [fileSemanticsIdentifier],
+        predicateIdentifiers: [FileTypeScriptSemanticsIdentifier.FileA],
+        aliases: [alias],
       };
     },
   );

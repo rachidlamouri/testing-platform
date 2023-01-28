@@ -2,18 +2,23 @@ import * as parser from '@typescript-eslint/typescript-estree';
 import type { TSESTree } from '@typescript-eslint/types';
 import fs from 'fs';
 import { posix } from 'path';
-import { UnknownCollectionLocator } from '../../../../core/collectionLocator';
+import {
+  UnknownCollectionLocator,
+  UnknownCollectionLocatorPart,
+} from '../../../../core/collectionLocator';
 import {
   DatumInstanceTypeScriptConfiguration,
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { Merge } from '../../../../utilities/types/merge/merge';
-import { File, FileSemanticsIdentifier } from './file';
+import { File } from './file';
 import { FileATypeScriptConfiguration } from './fileA';
+import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
+import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
 
 export type TypeScriptFile = Merge<
-  File<FileSemanticsIdentifier.TypeScript>,
+  File<FileExtensionSemanticsIdentifier.TypeScript>,
   {
     ast: TSESTree.Program | Error;
     configFilePath: string;
@@ -21,15 +26,20 @@ export type TypeScriptFile = Merge<
   }
 >;
 
+export type TypeScriptFileADatumInstanceIdentifier =
+  `${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}:${UnknownCollectionLocatorPart}`;
+
+export type TypeScriptFileADatumInstancAlias =
+  `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`;
+
 export type TypeScriptFileTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
     typeSemanticsIdentifiers: [
-      FileSemanticsIdentifier.TypeScript,
-      FileSemanticsIdentifier.A,
+      FileTypeScriptSemanticsIdentifier.TypeScriptFileA,
     ];
     datumInstanceIdentifier: UnknownCollectionLocator;
     datumInstance: TypeScriptFile;
-    datumInstanceAliases: [FileSemanticsIdentifier.TypeScript];
+    datumInstanceAliases: [TypeScriptFileADatumInstancAlias];
   }>;
 
 const getConfigFilePath = (filePath: string): string => {
@@ -74,22 +84,21 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
     throw error;
   }
 
+  const alias: TypeScriptFileADatumInstancAlias = `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`;
+
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileTypeScriptConfiguration> =
     {
-      instanceIdentifier: `TS:${filePath}`,
+      instanceIdentifier: `${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}:${filePath}`,
       datumInstance: {
-        fileSemanticsIdentifier: FileSemanticsIdentifier.TypeScript,
+        fileExtensionSemanticsIdentifier:
+          FileExtensionSemanticsIdentifier.TypeScript,
         filePath,
         configFilePath,
         ast,
         tsconfigRootDir,
       },
-      predicateIdentifiers: [
-        FileSemanticsIdentifier.TypeScript,
-        FileSemanticsIdentifier.A,
-      ],
-      // TODO: figure out how to tie this alias to the one from FileA, so you can just do inputFileConfiguration.aliases
-      aliases: [FileSemanticsIdentifier.TypeScript],
+      predicateIdentifiers: [FileTypeScriptSemanticsIdentifier.TypeScriptFileA],
+      aliases: [alias],
     };
 
   return [outputConfiguration];

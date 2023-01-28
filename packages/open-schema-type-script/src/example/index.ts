@@ -38,7 +38,8 @@ import {
   TypeScriptFile,
   TypeScriptFileTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFile';
-import { FileSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/file';
+import { FileTypeScriptSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileTypeScriptSemanticsIdentifier';
+import { FileExtensionSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileExtensionSemanticsIdentifier';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
@@ -138,11 +139,8 @@ const builderConfigurationCollection = [
     inputPredicateLocatorTuple: [
       {
         // TODO: rename "instanceIdentifier" to "instanceLocator"
-        instanceIdentifier: FileSemanticsIdentifier.TypeScript,
-        predicateIdentifiers: [
-          FileSemanticsIdentifier.A,
-          FileSemanticsIdentifier.TypeScript,
-        ],
+        instanceIdentifier: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.FileA}`,
+        predicateIdentifiers: [FileTypeScriptSemanticsIdentifier.FileA],
       },
     ],
   }),
@@ -185,8 +183,7 @@ if (task === 'v') {
       },
       {
         semanticsIdentifier: 'example-2',
-        // TODO: see? this is confusing because we're using a semantics identifier as a datum instance locator
-        collectionLocator: FileSemanticsIdentifier.TypeScript,
+        collectionLocator: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`,
         processDatum: (unknownInstance: unknown): true => {
           const instance = unknownInstance as TypeScriptFile;
 
