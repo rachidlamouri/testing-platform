@@ -219,6 +219,39 @@ if (task === 'v') {
           return true;
         },
       },
+      {
+        semanticsIdentifier: 'example-2',
+        collectionLocator: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`,
+        processDatum: (instance: unknown): boolean => {
+          const tsFileC = instance as TypeScriptFileC;
+
+          const hasNamedExport = tsFileC.additionalMetadata.declarations.some(
+            (enhancedDeclaration): boolean => {
+              switch (enhancedDeclaration.typeName) {
+                case 'code':
+                  return (
+                    enhancedDeclaration.identifier ===
+                    tsFileC.fileName.camelCase
+                  );
+                case 'hybrid':
+                case 'type':
+                  return (
+                    enhancedDeclaration.identifier ===
+                    tsFileC.fileName.pascalCase
+                  );
+                case null:
+                  return Object.values(tsFileC.fileName).includes(
+                    enhancedDeclaration.identifier,
+                  );
+                default:
+                  return false;
+              }
+            },
+          );
+
+          return hasNamedExport;
+        },
+      },
     ],
   });
 
