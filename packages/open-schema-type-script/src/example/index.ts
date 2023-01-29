@@ -236,16 +236,16 @@ if (task === 'v') {
                 case 'code':
                   return (
                     enhancedDeclaration.identifier ===
-                    tsFileC.fileName.camelCase
+                    tsFileC.inMemoryFileName.camelCase
                   );
                 case 'hybrid':
                 case 'type':
                   return (
                     enhancedDeclaration.identifier ===
-                    tsFileC.fileName.pascalCase
+                    tsFileC.inMemoryFileName.pascalCase
                   );
                 case null:
-                  return Object.values(tsFileC.fileName).includes(
+                  return Object.values(tsFileC.inMemoryFileName).includes(
                     enhancedDeclaration.identifier,
                   );
                 default:
