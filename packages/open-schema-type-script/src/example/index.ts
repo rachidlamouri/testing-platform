@@ -212,7 +212,7 @@ if (task === 'v') {
     builderConfigurationCollection,
     semanticsConfigurationCollection: [
       {
-        semanticsIdentifier: 'example-1',
+        semanticsIdentifier: 'actual-ci-yaml-file-matches-expected',
         collectionLocator: 'assertable-ci-yaml-file',
         processDatum: (instance: unknown): true => {
           const { actualStringContents, expectedStringContents } =
@@ -224,7 +224,8 @@ if (task === 'v') {
         },
       },
       {
-        semanticsIdentifier: 'example-2',
+        semanticsIdentifier:
+          'type-script-file-has-named-export-matching-file-name',
         collectionLocator: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`,
         processDatum: (instance: unknown): boolean => {
           const tsFileC = instance as TypeScriptFileC;
