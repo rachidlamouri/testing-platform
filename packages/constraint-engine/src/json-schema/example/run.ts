@@ -1,6 +1,6 @@
 import { constraintEngine } from '../../engine/constraintEngine';
-import { getTargetReferenceConfigurationTupleFromJson } from '../utils/getTargetReferenceConfigurationsFromData';
-import { getRuleConfigurationTupleFromJsonSchema } from '../utils/getRuleConfigurationsFromJsonSchema';
+import { getTargetReferenceConfigurationTupleFromJson } from '../utils/getTargetReferenceConfigurationTupleFromJson';
+import { getRuleConfigurationTupleFromJsonSchema } from '../utils/getRuleConfigurationTupleFromJsonSchema';
 import { JsonTarget } from '../types/targets';
 
 const inputInstance: JsonTarget = {
