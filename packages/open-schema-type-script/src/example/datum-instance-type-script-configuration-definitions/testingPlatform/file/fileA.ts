@@ -7,7 +7,7 @@ import {
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { File, fileExtensionSemanticsIdentifiersByExtension } from './file';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
+import { FileExtensionSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
 
 export type FileA = File;

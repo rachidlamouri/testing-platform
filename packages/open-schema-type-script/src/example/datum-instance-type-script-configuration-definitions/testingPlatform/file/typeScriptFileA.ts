@@ -14,7 +14,7 @@ import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../
 import { File } from './file';
 import { FileATypeScriptConfiguration } from './fileA';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
+import { FileExtensionSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 
 export type TypeScriptFile = File<{
   FileExtensionSemanticsIdentifier: FileExtensionSemanticsIdentifier.TypeScript;

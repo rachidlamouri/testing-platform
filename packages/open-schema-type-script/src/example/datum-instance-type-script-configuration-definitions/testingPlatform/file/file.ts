@@ -1,5 +1,5 @@
 import { UnknownObject } from '../../../../utilities/types/unknownHelpers';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
+import { FileExtensionSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 
 const extensionsByFileExtensionSemanticsIdentifer = {
   [FileExtensionSemanticsIdentifier.Json]: '.json',

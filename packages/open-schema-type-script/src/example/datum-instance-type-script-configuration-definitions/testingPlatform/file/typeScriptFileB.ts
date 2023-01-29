@@ -6,7 +6,7 @@ import {
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { File } from './file';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
+import { FileExtensionSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 import { UnknownString } from '../../../../utilities/types/unknownHelpers';
 import { TypeScriptFileTypeScriptConfiguration } from './typeScriptFileA';
 

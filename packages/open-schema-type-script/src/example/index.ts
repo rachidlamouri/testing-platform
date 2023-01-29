@@ -38,7 +38,7 @@ import {
   TypeScriptFileTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFileA';
 import { FileTypeScriptSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileTypeScriptSemanticsIdentifier';
-import { FileExtensionSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileExtensionSemanticsIdentifier';
+import { FileExtensionSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileExtensionSuffixSemanticsIdentifier';
 import {
   buildTypeScriptFileB,
   TypeScriptFileBTypeScriptConfiguration,
