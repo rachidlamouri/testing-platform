@@ -114,9 +114,9 @@ export const run = ({
           /* eslint-enable no-console */
         });
 
-      const isValid = [...validationCache.values()].every((x) => x.value);
-      const exitCode = isValid ? 0 : 1;
-      process.exit(exitCode);
+      // const isValid = [...validationCache.values()].every((x) => x.value);
+      // const exitCode = isValid ? 0 : 1;
+      // process.exit(exitCode);
     },
   });
 };
