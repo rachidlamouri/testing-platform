@@ -26,9 +26,10 @@ export type File<T extends FileTypeParameter = FileTypeParameter> = {
     pascalCase: string;
     camelCase: string;
   };
-  extensionSuffix: {
-    value: string;
-    semanticsIdentifier: T['FileExtensionSuffixSemanticsIdentifier'];
+  extension: {
+    complete: string;
+    suffix: string;
+    suffixSemanticsIdentifier: T['FileExtensionSuffixSemanticsIdentifier'];
   };
   additionalMetadata: T['AdditionalMetadata'];
 };

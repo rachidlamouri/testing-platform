@@ -121,16 +121,19 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
     (
       filePath,
     ): DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<FileATypeScriptConfiguration> => {
-      const {
-        ext: extension,
-        // TODO: enable configuring this builder so we don't have to assume the file name is camel case
-        name: camelCaseFileName,
-      } = posix.parse(filePath);
+      const { base: fileNameWithExtension, ext: extensionSuffix } =
+        posix.parse(filePath);
+
+      // TODO: enable configuring this builder so we don't have to assume the file name is camel case
+      const [camelCaseFileName, ...extensionParts] =
+        fileNameWithExtension.split('.');
+      const completeExtension = extensionParts.join('.');
 
       // TODO: encapsulate this default behavior in a function
       const fileExtensionSemanticsIdentifier =
-        fileExtensionSuffixSemanticsIdentifiersByExtensionSuffix[extension] ??
-        FileExtensionSuffixSemanticsIdentifier.Unknown;
+        fileExtensionSuffixSemanticsIdentifiersByExtensionSuffix[
+          extensionSuffix
+        ] ?? FileExtensionSuffixSemanticsIdentifier.Unknown;
 
       const alias: FileADatumInstanceAlias = `${fileExtensionSemanticsIdentifier}:${FileTypeScriptSemanticsIdentifier.FileA}`;
 
@@ -144,9 +147,10 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
               .slice(0, 1)
               .toUpperCase()}${camelCaseFileName.slice(1)}`,
           },
-          extensionSuffix: {
-            value: extension,
-            semanticsIdentifier: fileExtensionSemanticsIdentifier,
+          extension: {
+            complete: completeExtension,
+            suffix: extensionSuffix,
+            suffixSemanticsIdentifier: fileExtensionSemanticsIdentifier,
           },
           additionalMetadata: null,
         },

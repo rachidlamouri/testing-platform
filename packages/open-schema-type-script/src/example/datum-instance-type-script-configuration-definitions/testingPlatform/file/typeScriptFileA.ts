@@ -91,9 +91,9 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
       instanceIdentifier: `${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}:${filePath}`,
       datumInstance: {
         ...inputFileConfiguration.datumInstance,
-        extensionSuffix: {
-          value: inputFileConfiguration.datumInstance.extensionSuffix.value,
-          semanticsIdentifier:
+        extension: {
+          ...inputFileConfiguration.datumInstance.extension,
+          suffixSemanticsIdentifier:
             FileExtensionSuffixSemanticsIdentifier.TypeScript,
         },
         additionalMetadata: {
