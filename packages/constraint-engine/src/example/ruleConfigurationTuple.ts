@@ -5,7 +5,7 @@ import { packageAHasPackageFile } from '../customRules/packageAHasPackageFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { UnknownRuleConfigurationTuple } from '../types/ruleConfiguration';
-import { targetReferenceConfigurationTuple } from './targetReferenceConfigurations';
+import { targetReferenceConfigurationTuple } from './targetReferenceConfigurationTuple';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
 import { TargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
 import { packageAHasKnownTestFileTypes } from '../customRules/packageAHasKnownTestFileTypes';

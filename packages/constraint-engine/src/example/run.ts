@@ -1,6 +1,6 @@
 import { constraintEngine } from '../engine/constraintEngine';
-import { ruleConfigurationTuple } from './ruleConfigurations';
-import { modifiedTargetReferenceConfigurations } from './targetReferenceConfigurations';
+import { ruleConfigurationTuple } from './ruleConfigurationTuple';
+import { modifiedTargetReferenceConfigurations } from './targetReferenceConfigurationTuple';
 
 constraintEngine.run({
   targetReferenceConfigurationTuple: modifiedTargetReferenceConfigurations,
