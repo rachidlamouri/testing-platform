@@ -9,7 +9,7 @@ export type DeprecatedDerivedTargetReferencesBuilderInput = {
 };
 
 /** @deprecated */
-export const buildDerivedDerivedTargetReferences = ({
+export const buildDeprecatedDerivedTargetReferences = ({
   targetReferenceConfiguration,
   targetReferenceMap,
 }: DeprecatedDerivedTargetReferencesBuilderInput): UnknownTargetReference[] => {

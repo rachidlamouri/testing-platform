@@ -2,7 +2,7 @@ import { UnknownTargetReference } from '../../types/targetReference';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { UnknownTargetReferenceConfiguration } from '../../types/targetReferenceConfiguration/unknownTargetReferenceConfiguration';
 import { TargetReferenceMap } from '../targetReferenceMap';
-import { buildDerivedDerivedTargetReferences } from './buildDeprecatedDerivedTargetReferences';
+import { buildDeprecatedDerivedTargetReferences } from './buildDeprecatedDerivedTargetReferences';
 import { buildDeprecatedDerivedTargetReferenceSets } from './buildDeprecatedDerivedTargetReferenceSets';
 
 export type TargetReferencesBuilderInput = {
@@ -18,7 +18,7 @@ export const buildTargetReferencesForConfiguration = ({
     case TargetReferenceConfigurationTypeId.StaticTargetReferenceConfiguration:
       return [targetReferenceConfiguration.outputTargetReference];
     case TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceConfiguration: {
-      return buildDerivedDerivedTargetReferences({
+      return buildDeprecatedDerivedTargetReferences({
         targetReferenceConfiguration,
         targetReferenceMap,
       });
