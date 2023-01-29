@@ -5,7 +5,7 @@ import {
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
 
-export type PackageDirectoryNameSetConfiguration = {
+export type PackageDirectoryASetConfiguration = {
   rootDirectoryRelativeToCurrentWorkingDirectory: string;
 };
 
@@ -15,7 +15,7 @@ export type PackageDirectoryNameSetConfigurationTypeScriptConfiguration =
       TypeScriptSemanticsIdentifier.PackageDirectoryNameSetConfiguration,
     ];
     datumInstanceIdentifier: 'package-directory-name-set-configuration';
-    datumInstance: PackageDirectoryNameSetConfiguration;
+    datumInstance: PackageDirectoryASetConfiguration;
     datumInstanceAliases: [];
   }>;
 

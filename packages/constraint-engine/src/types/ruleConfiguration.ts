@@ -21,7 +21,7 @@ type BaseRuleConfiguration<
   targetPath: TTargetPath;
 };
 
-type RuleConfiguration<
+export type RuleConfiguration<
   TTypedTarget extends UnknownTypedTarget,
   TTargetPath extends UnknownTargetPath,
 > = BaseRuleConfiguration<TTypedTarget, TTypedTarget, TTargetPath>;

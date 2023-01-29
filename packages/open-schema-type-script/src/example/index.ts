@@ -38,7 +38,7 @@ import {
   TypeScriptFileTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFileA';
 import { FileTypeScriptSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileTypeScriptSemanticsIdentifier';
-import { FileExtensionSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileExtensionSemanticsIdentifier';
+import { FileExtensionSuffixSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileExtensionSuffixSemanticsIdentifier';
 import {
   buildTypeScriptFileB,
   TypeScriptFileBTypeScriptConfiguration,
@@ -147,7 +147,7 @@ const builderConfigurationCollection = [
     inputPredicateLocatorTuple: [
       {
         // TODO: rename "instanceIdentifier" to "instanceLocator"
-        instanceIdentifier: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.FileA}`,
+        instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.FileA}`,
         predicateIdentifiers: [FileTypeScriptSemanticsIdentifier.FileA],
       },
     ],
@@ -160,7 +160,7 @@ const builderConfigurationCollection = [
     inputPredicateLocatorTuple: [
       {
         // TODO: rename "instanceIdentifier" to "instanceLocator"
-        instanceIdentifier: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`,
+        instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`,
         predicateIdentifiers: [
           FileTypeScriptSemanticsIdentifier.TypeScriptFileA,
         ],
@@ -175,7 +175,7 @@ const builderConfigurationCollection = [
     inputPredicateLocatorTuple: [
       {
         // TODO: rename "instanceIdentifier" to "instanceLocator"
-        instanceIdentifier: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`,
+        instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`,
         predicateIdentifiers: [
           FileTypeScriptSemanticsIdentifier.TypeScriptFileB,
         ],
@@ -212,7 +212,7 @@ if (task === 'v') {
     builderConfigurationCollection,
     semanticsConfigurationCollection: [
       {
-        semanticsIdentifier: 'example-1',
+        semanticsIdentifier: 'actual-ci-yaml-file-matches-expected',
         collectionLocator: 'assertable-ci-yaml-file',
         processDatum: (instance: unknown): true => {
           const { actualStringContents, expectedStringContents } =
@@ -224,10 +224,15 @@ if (task === 'v') {
         },
       },
       {
-        semanticsIdentifier: 'example-2',
-        collectionLocator: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`,
+        semanticsIdentifier:
+          'type-script-file-has-named-export-matching-file-name',
+        collectionLocator: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`,
         processDatum: (instance: unknown): boolean => {
           const tsFileC = instance as TypeScriptFileC;
+          if (tsFileC.additionalMetadata.declarations.length === 0) {
+            // Ignore files that don't export anything
+            return true;
+          }
 
           const hasNamedExport = tsFileC.additionalMetadata.declarations.some(
             (enhancedDeclaration): boolean => {
@@ -235,16 +240,16 @@ if (task === 'v') {
                 case 'code':
                   return (
                     enhancedDeclaration.identifier ===
-                    tsFileC.fileName.camelCase
+                    tsFileC.inMemoryFileName.camelCase
                   );
                 case 'hybrid':
                 case 'type':
                   return (
                     enhancedDeclaration.identifier ===
-                    tsFileC.fileName.pascalCase
+                    tsFileC.inMemoryFileName.pascalCase
                   );
                 case null:
-                  return Object.values(tsFileC.fileName).includes(
+                  return Object.values(tsFileC.inMemoryFileName).includes(
                     enhancedDeclaration.identifier,
                   );
                 default:
@@ -264,3 +269,6 @@ if (task === 'v') {
 
 // TODO: make an open-schema CLI
 throw Error('Missing argv <task>. See this file for more details');
+
+// TODO: figure out what to do so we don't have to make an extraneous export
+export type Example = symbol;

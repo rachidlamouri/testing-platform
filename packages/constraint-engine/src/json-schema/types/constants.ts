@@ -28,3 +28,6 @@ export const JSON_DATA_TYPE_TO_TARGET_TYPE_ID = {
   [JsonDataType.Array]: JsonTargetTypeId.Array,
   [JsonDataType.Object]: JsonTargetTypeId.Object,
 } satisfies Record<JsonDataType, JsonTargetTypeId>;
+
+// TODO: figure out what to do so we don't have to make an extraneous export
+export type Constants = symbol;

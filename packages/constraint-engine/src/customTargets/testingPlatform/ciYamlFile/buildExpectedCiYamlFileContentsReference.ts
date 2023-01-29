@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { posix } from 'path';
 import { DeprecatedDerivedReferenceBuilder } from '../../../types/builders/deprecatedDerivedReferenceBuilder';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 import {
   CiYamlFileContentsConfigurationTypedTarget,
   CiYamlFileContentsRunStep,

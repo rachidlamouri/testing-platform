@@ -7,7 +7,7 @@ import {
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { File } from './file';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
+import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 import { UnknownString } from '../../../../utilities/types/unknownHelpers';
 import { TypeScriptFileBTypeScriptConfiguration } from './typeScriptFileB';
 
@@ -19,7 +19,7 @@ type EnhancedDeclaration = {
 };
 
 export type TypeScriptFileC = File<{
-  FileExtensionSemanticsIdentifier: FileExtensionSemanticsIdentifier.TypeScript;
+  FileExtensionSuffixSemanticsIdentifier: FileExtensionSuffixSemanticsIdentifier.TypeScript;
   AdditionalMetadata: {
     declarations: EnhancedDeclaration[];
   };
@@ -31,7 +31,7 @@ type TypeScriptFileCDatumInstanceIdentifier =
   `${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}:${UnknownFilePath}`;
 
 type TypeScriptFileCDatumInstancAlias =
-  `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
+  `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
 
 export type TypeScriptFileCTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
@@ -47,7 +47,7 @@ export const buildTypeScriptFileC: DatumInstanceTypeScriptConfigurationCollectio
   InputCollection: [TypeScriptFileBTypeScriptConfiguration];
   OutputCollection: [TypeScriptFileCTypeScriptConfiguration];
 }> = (inputConfiguration) => {
-  const alias: TypeScriptFileCDatumInstancAlias = `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
+  const alias: TypeScriptFileCDatumInstancAlias = `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
 
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileCTypeScriptConfiguration> =
     {
@@ -57,9 +57,22 @@ export const buildTypeScriptFileC: DatumInstanceTypeScriptConfigurationCollectio
         additionalMetadata: {
           declarations:
             inputConfiguration.datumInstance.additionalMetadata.declarations.flatMap<EnhancedDeclaration>(
-              (exportNamedDeclaration) => {
-                if (exportNamedDeclaration.declaration === null) {
-                  return exportNamedDeclaration.specifiers.map<EnhancedDeclaration>(
+              (statement) => {
+                if (statement.type === AST_NODE_TYPES.ExportAllDeclaration) {
+                  if (statement.exported === null) {
+                    throw Error(
+                      `Unhandled scenario: null exported in ${inputConfiguration.datumInstance.filePath}`,
+                    );
+                  }
+
+                  return {
+                    typeName: null,
+                    identifier: statement.exported.name,
+                  };
+                }
+
+                if (statement.declaration === null) {
+                  return statement.specifiers.map<EnhancedDeclaration>(
                     (specifier) => {
                       return {
                         typeName: null,
@@ -69,26 +82,26 @@ export const buildTypeScriptFileC: DatumInstanceTypeScriptConfigurationCollectio
                   );
                 }
 
-                switch (exportNamedDeclaration.declaration.type) {
+                switch (statement.declaration.type) {
                   case AST_NODE_TYPES.TSTypeAliasDeclaration:
                     return {
                       typeName: 'type',
-                      identifier: exportNamedDeclaration.declaration.id.name,
+                      identifier: statement.declaration.id.name,
                     } satisfies EnhancedDeclaration;
                   case AST_NODE_TYPES.TSEnumDeclaration:
                   case AST_NODE_TYPES.ClassDeclaration:
-                    if (exportNamedDeclaration.declaration.id === null) {
+                    if (statement.declaration.id === null) {
                       throw Error(
-                        `Null identifier for ${exportNamedDeclaration.declaration.type} in ${inputConfiguration.datumInstance.filePath}`,
+                        `Null identifier for ${statement.declaration.type} in ${inputConfiguration.datumInstance.filePath}`,
                       );
                     }
 
                     return {
                       typeName: 'hybrid',
-                      identifier: exportNamedDeclaration.declaration.id.name,
+                      identifier: statement.declaration.id.name,
                     } satisfies EnhancedDeclaration;
                   case AST_NODE_TYPES.VariableDeclaration: {
-                    return exportNamedDeclaration.declaration.declarations
+                    return statement.declaration.declarations
                       .filter(
                         (x): x is typeof x & { id: TSESTree.Identifier } => {
                           return x.id.type === AST_NODE_TYPES.Identifier;
@@ -103,7 +116,7 @@ export const buildTypeScriptFileC: DatumInstanceTypeScriptConfigurationCollectio
                   }
                   default:
                     throw Error(
-                      `Unhandled export named declaration declaration type: ${exportNamedDeclaration.declaration.type} for file: ${inputConfiguration.datumInstance.filePath}`,
+                      `Unhandled export named declaration declaration type: ${statement.declaration.type} for file: ${inputConfiguration.datumInstance.filePath}`,
                     );
                 }
               },

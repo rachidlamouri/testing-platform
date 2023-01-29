@@ -6,8 +6,8 @@ import {
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import { File, fileExtensionSemanticsIdentifiersByExtension } from './file';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
+import { File, getFileExtensionSuffixSemanticsIdentifier } from './file';
+import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
 
 export type FileA = File;
@@ -16,7 +16,7 @@ export type FileADatumInstanceIdentifier =
   `${FileTypeScriptSemanticsIdentifier.FileA}:${UnknownCollectionLocatorPart}`;
 
 export type FileADatumInstanceAlias =
-  `${FileExtensionSemanticsIdentifier}:${FileTypeScriptSemanticsIdentifier.FileA}`;
+  `${FileExtensionSuffixSemanticsIdentifier}:${FileTypeScriptSemanticsIdentifier.FileA}`;
 
 export type FileATypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
@@ -89,6 +89,98 @@ const accumulateFilePaths = (
   });
 };
 
+const getCamelCaseNameParts = (camelCaseName: string): string[] => {
+  const letters = camelCaseName.split('');
+
+  const segmentIndicies: number[] = [0];
+  letters.forEach((letter, index) => {
+    const isUpperCase = letter === letter.toUpperCase();
+    if (isUpperCase) {
+      segmentIndicies.push(index);
+    }
+  });
+  segmentIndicies.push(letters.length);
+
+  const thingyPairs = segmentIndicies
+    .slice(0, segmentIndicies.length - 1)
+    .map((someIndex, someIndiciesIndex): [number, number] => {
+      return [someIndex, segmentIndicies[someIndiciesIndex + 1]];
+    });
+
+  const stuff = thingyPairs.map(([start, end]) =>
+    letters.slice(start, end).join(''),
+  );
+
+  const normalizedStuff = stuff.map((x) => x.toLowerCase());
+
+  return normalizedStuff;
+};
+
+const partsToCamel = (x: string[]): string => {
+  return x
+    .map((word, index) => {
+      if (index === 0) {
+        return word;
+      }
+
+      return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`;
+    })
+    .join('');
+};
+
+const partsToPascal = (x: string[]): string => {
+  return x
+    .map((word) => {
+      return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`;
+    })
+    .join('');
+};
+
+type FileStuff = {
+  filePath: string;
+  parentDirectoryNameParts: string[];
+  onDiskFileNameParts: string[];
+  inMemoryFileNameParts: string[];
+  extensionParts: string[];
+  extensionSuffix: string;
+};
+
+// TODO: update this so we don't have to assume that files are in camel case and directories are in kebab case
+const getFileStuff = (filePath: string): FileStuff => {
+  const { dir: parentDirectoryNodePath, base: legalFileName } =
+    posix.parse(filePath);
+
+  const parentDirectoryPathParts = parentDirectoryNodePath.split('/');
+  const parentDirectoryName =
+    parentDirectoryPathParts[parentDirectoryPathParts.length - 1];
+  const parentDirectoryNameParts = parentDirectoryName
+    .split('-')
+    .map((x) => x.toLowerCase());
+
+  const [onDiskFileName, ...fileExtensionParts] = legalFileName.split('.');
+  const normalizedFileExtensionParts = fileExtensionParts.map((x) =>
+    x.toLowerCase(),
+  );
+  const fileExtensionSuffix: string =
+    fileExtensionParts[fileExtensionParts.length - 1];
+
+  const onDiskFileNameParts = getCamelCaseNameParts(onDiskFileName);
+
+  const isIndexFile = onDiskFileName === 'index';
+  const inMemoryFileNameParts = isIndexFile
+    ? parentDirectoryNameParts
+    : onDiskFileNameParts;
+
+  return {
+    filePath,
+    parentDirectoryNameParts,
+    onDiskFileNameParts,
+    inMemoryFileNameParts,
+    extensionParts: normalizedFileExtensionParts,
+    extensionSuffix: fileExtensionSuffix,
+  } satisfies FileStuff;
+};
+
 export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [];
   OutputCollection: FileATypeScriptConfiguration[];
@@ -118,16 +210,10 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
     (
       filePath,
     ): DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<FileATypeScriptConfiguration> => {
-      const {
-        ext: extension,
-        // TODO: enable configuring this builder so we don't have to assume the file name is camel case
-        name: camelCaseFileName,
-      } = posix.parse(filePath);
+      const fileStuff = getFileStuff(filePath);
 
-      // TODO: encapsulate this default behavior in a function
       const fileExtensionSemanticsIdentifier =
-        fileExtensionSemanticsIdentifiersByExtension[extension] ??
-        FileExtensionSemanticsIdentifier.Unknown;
+        getFileExtensionSuffixSemanticsIdentifier(fileStuff.extensionSuffix);
 
       const alias: FileADatumInstanceAlias = `${fileExtensionSemanticsIdentifier}:${FileTypeScriptSemanticsIdentifier.FileA}`;
 
@@ -135,15 +221,18 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
         instanceIdentifier: `${FileTypeScriptSemanticsIdentifier.FileA}:${filePath}`,
         datumInstance: {
           filePath,
-          fileName: {
-            camelCase: camelCaseFileName,
-            pascalCase: `${camelCaseFileName
-              .slice(0, 1)
-              .toUpperCase()}${camelCaseFileName.slice(1)}`,
+          onDiskFileName: {
+            camelCase: partsToCamel(fileStuff.onDiskFileNameParts),
+            pascalCase: partsToPascal(fileStuff.onDiskFileNameParts),
+          },
+          inMemoryFileName: {
+            camelCase: partsToCamel(fileStuff.inMemoryFileNameParts),
+            pascalCase: partsToPascal(fileStuff.inMemoryFileNameParts),
           },
           extension: {
-            value: extension,
-            semanticsIdentifier: fileExtensionSemanticsIdentifier,
+            parts: fileStuff.extensionParts,
+            suffix: fileStuff.extensionSuffix,
+            suffixSemanticsIdentifier: fileExtensionSemanticsIdentifier,
           },
           additionalMetadata: null,
         },

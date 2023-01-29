@@ -1,5 +1,5 @@
 import { TypedTarget } from '../../../types/typedTarget';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 
 export const CI_YAML_FILE_TARGET_PATH =
   '.github/workflows/continuous-integration.yml' as const;

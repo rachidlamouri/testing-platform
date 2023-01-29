@@ -1,6 +1,6 @@
 import { buildDeprecatedDerivedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceConfiguration';
 import {
-  buildTestingPlatformPackageDirectoryReferenceSet,
+  buildPackageDirectoryReferenceSet,
   TestingPlatformPackageDirectoryTargetPath,
 } from '../customTargets/testingPlatform/packageDirectory/buildPackageDirectoryReferenceSet';
 import {
@@ -12,14 +12,14 @@ import {
   TestingPlatformPackageTargetPath,
   TestingPlatformPackageTargetPathTuple,
 } from '../customTargets/testingPlatform/packageA/buildPackageAReference';
-import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
+import { packageAHasPackageFile } from '../customRules/packageAHasPackageFile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { buildDeprecatedNarrowedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedNarrowedTargetReferenceConfiguration';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
 import { PackageDirectorySetTypedTarget } from '../customTargets/testingPlatform/packageDirectorySet/packageDirectorySetTarget';
 import { PackageDirectoryTypedTarget } from '../customTargets/testingPlatform/packageDirectory/packageDirectoryTarget';
-import { TargetTypeId as TestingPlatformTargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
+import { TargetTypeId as TestingPlatformTargetTypeId } from '../customTargets/testingPlatform/targetTypeId';
 import { PackageATypedTarget } from '../customTargets/testingPlatform/packageA/packageATarget';
 import {
   PackageBTarget,
@@ -31,7 +31,7 @@ import { PackageDirectorySetConfigurationTypedTarget } from '../customTargets/te
 import { RootTargetPath } from '../types/targetPath';
 import { JsonFileTypedTarget } from '../customTargets/file/jsonFile/jsonFileTarget';
 import { buildJsonFileInstanceFromYaml } from '../customTargets/file/jsonFile/buildBuildJsonFileInstance';
-import { TargetTypeId as FileTargetTypeId } from '../customTargets/file/targetTypeIds';
+import { TargetTypeId as FileTargetTypeId } from '../customTargets/file/targetTypeId';
 import {
   CiYamlFileContentsConfigurationTypedTarget,
   CiYamlFileTargetPath,
@@ -208,7 +208,7 @@ export const modifiedTargetReferenceConfigurations = [
     OutputTypedTarget: PackageDirectoryTypedTarget;
     OutputTargetPath: TestingPlatformPackageDirectoryTargetPath<PackageDirectorySetTargetPath>;
   }>({
-    buildReferenceSet: buildTestingPlatformPackageDirectoryReferenceSet,
+    buildReferenceSet: buildPackageDirectoryReferenceSet,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
   }),

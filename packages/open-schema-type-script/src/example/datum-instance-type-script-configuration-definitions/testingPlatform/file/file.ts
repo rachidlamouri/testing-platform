@@ -1,34 +1,58 @@
 import { UnknownObject } from '../../../../utilities/types/unknownHelpers';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
+import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 
-const extensionsByFileExtensionSemanticsIdentifer = {
-  [FileExtensionSemanticsIdentifier.Json]: '.json',
-  [FileExtensionSemanticsIdentifier.TypeScript]: '.ts',
-  [FileExtensionSemanticsIdentifier.Unknown]: '.:shrug:',
-} satisfies Record<FileExtensionSemanticsIdentifier, string>;
+const extensionSuffixesByFileExtensionSuffixSemanticsIdentifer = {
+  [FileExtensionSuffixSemanticsIdentifier.Json]: 'json',
+  [FileExtensionSuffixSemanticsIdentifier.TypeScript]: 'ts',
+} satisfies Record<
+  Exclude<
+    FileExtensionSuffixSemanticsIdentifier,
+    FileExtensionSuffixSemanticsIdentifier.Unknown
+  >,
+  string
+>;
 
 // TODO: make a util for swapping keys and values
-export const fileExtensionSemanticsIdentifiersByExtension = Object.fromEntries(
-  Object.entries(extensionsByFileExtensionSemanticsIdentifer).map(([k, v]) => [
-    v,
-    k,
-  ]),
-) as Record<string, FileExtensionSemanticsIdentifier>;
+const fileExtensionSuffixSemanticsIdentifiersByExtensionSuffix =
+  Object.fromEntries(
+    Object.entries(
+      extensionSuffixesByFileExtensionSuffixSemanticsIdentifer,
+    ).map(([k, v]) => [v, k]),
+  ) as Record<
+    string,
+    Exclude<
+      FileExtensionSuffixSemanticsIdentifier,
+      FileExtensionSuffixSemanticsIdentifier.Unknown
+    >
+  >;
+
+export const getFileExtensionSuffixSemanticsIdentifier = (
+  extensionSuffix: string,
+): FileExtensionSuffixSemanticsIdentifier => {
+  return (
+    fileExtensionSuffixSemanticsIdentifiersByExtensionSuffix[extensionSuffix] ??
+    FileExtensionSuffixSemanticsIdentifier.Unknown
+  );
+};
 
 export type FileTypeParameter = {
-  FileExtensionSemanticsIdentifier: FileExtensionSemanticsIdentifier;
+  FileExtensionSuffixSemanticsIdentifier: FileExtensionSuffixSemanticsIdentifier;
   AdditionalMetadata: UnknownObject | null;
+};
+
+type FileName = {
+  pascalCase: string;
+  camelCase: string;
 };
 
 export type File<T extends FileTypeParameter = FileTypeParameter> = {
   filePath: string;
-  fileName: {
-    pascalCase: string;
-    camelCase: string;
-  };
+  onDiskFileName: FileName;
+  inMemoryFileName: FileName;
   extension: {
-    value: string;
-    semanticsIdentifier: T['FileExtensionSemanticsIdentifier'];
+    parts: string[];
+    suffix: string;
+    suffixSemanticsIdentifier: T['FileExtensionSuffixSemanticsIdentifier'];
   };
   additionalMetadata: T['AdditionalMetadata'];
 };

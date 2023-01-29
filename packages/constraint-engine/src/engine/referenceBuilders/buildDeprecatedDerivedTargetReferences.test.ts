@@ -6,7 +6,7 @@ import {
 import { UnknownTargetReference } from '../../types/targetReference';
 import { TargetReferenceConfigurationTypeId } from '../../types/targetReferenceConfiguration/typeId';
 import { TargetReferenceMap } from '../targetReferenceMap';
-import { buildDerivedDerivedTargetReferences } from './buildDeprecatedDerivedTargetReferences';
+import { buildDeprecatedDerivedTargetReferences } from './buildDeprecatedDerivedTargetReferences';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
@@ -29,7 +29,7 @@ orchestrate()
       instance: 'foo 1',
     });
 
-    const result = buildDerivedDerivedTargetReferences({
+    const result = buildDeprecatedDerivedTargetReferences({
       targetReferenceConfiguration: {
         typeId:
           TargetReferenceConfigurationTypeId.DeprecatedDerivedTargetReferenceConfiguration,

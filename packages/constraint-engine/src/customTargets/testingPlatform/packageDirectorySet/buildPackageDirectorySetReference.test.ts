@@ -8,7 +8,7 @@ import {
   buildPackageDirectorySetReference,
   TESTING_PLATFORM_PACKAGE_DIRECTORY_SET_TARGET_PATH,
 } from './buildPackageDirectorySetReference';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()

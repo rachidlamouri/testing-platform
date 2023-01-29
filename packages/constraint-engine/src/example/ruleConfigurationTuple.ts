@@ -1,13 +1,13 @@
 import { buildRuleConfiguration } from '../configurationHelpers/buildRuleConfiguration';
 import { listIsNotEmpty } from '../customRules/listIsNotEmpty';
 import { packageCExtendsBaseTypeScriptConfiguration } from '../customRules/packageCExtendsBaseTypeScriptConfiguration';
-import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
+import { packageAHasPackageFile } from '../customRules/packageAHasPackageFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { UnknownRuleConfigurationTuple } from '../types/ruleConfiguration';
-import { targetReferenceConfigurationTuple } from './targetReferenceConfigurations';
+import { targetReferenceConfigurationTuple } from './targetReferenceConfigurationTuple';
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
-import { TargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
+import { TargetTypeId } from '../customTargets/testingPlatform/targetTypeId';
 import { packageAHasKnownTestFileTypes } from '../customRules/packageAHasKnownTestFileTypes';
 import { packageBRunsAllTestFiles } from '../customRules/packageBRunsAllTestFiles';
 

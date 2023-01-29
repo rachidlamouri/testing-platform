@@ -23,7 +23,7 @@ export type ConfigurableCategorizedTestFileMetadataProperties = {
   fileType: SupportedTestFileType | null;
 };
 
-export type CategorizedTestFileMetadataTarget<
+export type CategorizedTestFileMetadata<
   TProperties extends ConfigurableCategorizedTestFileMetadataProperties,
 > = Utf8FileMetadataTarget & {
   fileType: TProperties['fileType'];
