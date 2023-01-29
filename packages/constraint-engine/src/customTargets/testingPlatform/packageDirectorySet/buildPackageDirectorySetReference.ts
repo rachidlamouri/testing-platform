@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { DeprecatedDerivedReferenceBuilder } from '../../../types/builders/deprecatedDerivedReferenceBuilder';
 import { TargetReference } from '../../../types/targetReference';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 import { PackageDirectorySetConfigurationTypedTarget } from './packageDirectorySetConfigurationTarget';
 import {
   PackageDirectorySetTypedTarget,

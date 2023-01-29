@@ -6,7 +6,7 @@ import {
 import { TargetReference } from '../../../types/targetReference';
 import { DeprecatedDerivedReferenceSetBuilder } from '../../../types/builders/deprecatedDerivedReferenceSetBuilder';
 import { PackageDirectorySetTypedTarget } from '../packageDirectorySet/packageDirectorySetTarget';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 import {
   PackageDirectoryTypedTarget,
   PackageDirectoryTarget,

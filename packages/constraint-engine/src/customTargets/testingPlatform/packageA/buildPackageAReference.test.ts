@@ -5,7 +5,7 @@ import {
 } from 'rat-test/type-script/transgressing';
 import { fileSystemUtil } from 'mouse-test/type-script/shell';
 import { buildPackageAReference } from './buildPackageAReference';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()

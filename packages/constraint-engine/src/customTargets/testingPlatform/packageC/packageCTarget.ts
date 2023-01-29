@@ -7,7 +7,7 @@ import {
   CategorizedTestFileMetadataTarget,
   SupportedTestFileType,
 } from '../categorizedTestFileMetadata';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 import { PackageConfigurationTarget } from './packageConfigurationTarget';
 
 export type PackageCPackageFileContentsTarget = {

@@ -7,7 +7,7 @@ import {
   CategorizedTestFileMetadataTarget,
   SupportedTestFileType,
 } from '../categorizedTestFileMetadata';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 
 export type PackageBTarget = BasePackage<{
   packageFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;

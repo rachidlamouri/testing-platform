@@ -9,7 +9,7 @@ import {
   TestingPlatformPackageDirectoryTargetReference,
 } from '../packageDirectory/buildPackageDirectoryReferenceSet';
 import { PackageDirectoryTypedTarget } from '../packageDirectory/packageDirectoryTarget';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 import { PackageATarget, PackageATypedTarget } from './packageATarget';
 import { buildUtf8FileMetadataInstanceSet } from '../../file/utf8File/buildUtf8FileMetdataInstanceSet';
 import {

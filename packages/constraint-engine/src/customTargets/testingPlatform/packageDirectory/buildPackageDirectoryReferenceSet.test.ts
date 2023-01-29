@@ -3,7 +3,7 @@ import {
   report,
   signaler,
 } from 'rat-test/type-script/transgressing';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 import { buildTestingPlatformPackageDirectoryReferenceSet } from './buildPackageDirectoryReferenceSet';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises

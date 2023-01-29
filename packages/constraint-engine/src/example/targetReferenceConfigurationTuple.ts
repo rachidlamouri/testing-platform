@@ -19,7 +19,7 @@ import { buildDeprecatedNarrowedTargetReferenceConfiguration } from '../configur
 import { packageAHasRunTestsScript } from '../customRules/packageAHasRunTestsScript';
 import { PackageDirectorySetTypedTarget } from '../customTargets/testingPlatform/packageDirectorySet/packageDirectorySetTarget';
 import { PackageDirectoryTypedTarget } from '../customTargets/testingPlatform/packageDirectory/packageDirectoryTarget';
-import { TargetTypeId as TestingPlatformTargetTypeId } from '../customTargets/testingPlatform/targetTypeIds';
+import { TargetTypeId as TestingPlatformTargetTypeId } from '../customTargets/testingPlatform/targetTypeId';
 import { PackageATypedTarget } from '../customTargets/testingPlatform/packageA/packageATarget';
 import {
   PackageBTarget,
