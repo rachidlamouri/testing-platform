@@ -269,3 +269,6 @@ if (task === 'v') {
 
 // TODO: make an open-schema CLI
 throw Error('Missing argv <task>. See this file for more details');
+
+// TODO: figure out what to do so we don't have to make an extraneous export
+export type Example = symbol;

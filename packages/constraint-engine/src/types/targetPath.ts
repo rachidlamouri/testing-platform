@@ -17,3 +17,6 @@ export type UnknownDerivedTargetPath = PrefixedTargetPath<
   UnknownTargetPath,
   UnknownTargetPath
 >;
+
+// TODO: figure out what to do so we don't have to make an extraneous export
+export type TargetPath = symbol;

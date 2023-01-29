@@ -55,3 +55,6 @@ export type JsonKnownTypedTargetOptionsTuple = readonly [
 ];
 
 export type JsonKnownTypedTarget = JsonKnownTypedTargetOptionsTuple[number];
+
+// TODO: figure out what to do so we don't have to make an extraneous export
+export type TypedTargets = symbol;
