@@ -1,3 +1,4 @@
+import { UnknownObject } from '../../../../utilities/types/unknownHelpers';
 import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
 
 const extensionsByFileExtensionSemanticsIdentifer = {
@@ -14,9 +15,20 @@ export const fileExtensionSemanticsIdentifiersByExtension = Object.fromEntries(
   ]),
 ) as Record<string, FileExtensionSemanticsIdentifier>;
 
-export type File<
-  TFileExtensionSemanticsIdentifier extends FileExtensionSemanticsIdentifier = FileExtensionSemanticsIdentifier,
-> = {
+export type FileTypeParameter = {
+  FileExtensionSemanticsIdentifier: FileExtensionSemanticsIdentifier;
+  AdditionalMetadata: UnknownObject | null;
+};
+
+export type File<T extends FileTypeParameter = FileTypeParameter> = {
   filePath: string;
-  fileExtensionSemanticsIdentifier: TFileExtensionSemanticsIdentifier;
+  fileName: {
+    pascalCase: string;
+    camelCase: string;
+  };
+  extension: {
+    value: string;
+    semanticsIdentifier: T['FileExtensionSemanticsIdentifier'];
+  };
+  additionalMetadata: T['AdditionalMetadata'];
 };

@@ -11,20 +11,19 @@ import {
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import { Merge } from '../../../../utilities/types/merge/merge';
 import { File } from './file';
 import { FileATypeScriptConfiguration } from './fileA';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
 import { FileExtensionSemanticsIdentifier } from './fileExtensionSemanticsIdentifier';
 
-export type TypeScriptFile = Merge<
-  File<FileExtensionSemanticsIdentifier.TypeScript>,
-  {
-    ast: TSESTree.Program | Error;
+export type TypeScriptFile = File<{
+  FileExtensionSemanticsIdentifier: FileExtensionSemanticsIdentifier.TypeScript;
+  AdditionalMetadata: {
+    ast: TSESTree.Program;
     configFilePath: string;
     tsconfigRootDir: string;
-  }
->;
+  };
+}>;
 
 export type TypeScriptFileADatumInstanceIdentifier =
   `${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}:${UnknownCollectionLocatorPart}`;
@@ -63,6 +62,7 @@ const getConfigFilePath = (filePath: string): string => {
   return configFilePath;
 };
 
+// TODO: this builder, as is, does not guarantee that the input FileA corresponds to a TypeScript file
 export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [FileATypeScriptConfiguration];
   OutputCollection: [TypeScriptFileTypeScriptConfiguration];
@@ -90,12 +90,16 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
     {
       instanceIdentifier: `${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}:${filePath}`,
       datumInstance: {
-        fileExtensionSemanticsIdentifier:
-          FileExtensionSemanticsIdentifier.TypeScript,
-        filePath,
-        configFilePath,
-        ast,
-        tsconfigRootDir,
+        ...inputFileConfiguration.datumInstance,
+        extension: {
+          value: inputFileConfiguration.datumInstance.extension.value,
+          semanticsIdentifier: FileExtensionSemanticsIdentifier.TypeScript,
+        },
+        additionalMetadata: {
+          configFilePath,
+          ast,
+          tsconfigRootDir,
+        },
       },
       predicateIdentifiers: [FileTypeScriptSemanticsIdentifier.TypeScriptFileA],
       aliases: [alias],
