@@ -13,7 +13,10 @@ import { TypeScriptFileTypeScriptConfiguration } from './typeScriptFileA';
 export type TypeScriptFileB = File<{
   FileExtensionSuffixSemanticsIdentifier: FileExtensionSuffixSemanticsIdentifier.TypeScript;
   AdditionalMetadata: {
-    declarations: TSESTree.ExportNamedDeclaration[];
+    declarations: (
+      | TSESTree.ExportNamedDeclaration
+      | TSESTree.ExportAllDeclaration
+    )[];
   };
 }>;
 
@@ -49,8 +52,15 @@ export const buildTypeScriptFileB: DatumInstanceTypeScriptConfigurationCollectio
         additionalMetadata: {
           declarations:
             inputConfiguration.datumInstance.additionalMetadata.ast.body.filter(
-              (statement): statement is TSESTree.ExportNamedDeclaration => {
-                return statement.type === AST_NODE_TYPES.ExportNamedDeclaration;
+              (
+                statement,
+              ): statement is
+                | TSESTree.ExportNamedDeclaration
+                | TSESTree.ExportAllDeclaration => {
+                return (
+                  statement.type === AST_NODE_TYPES.ExportNamedDeclaration ||
+                  statement.type === AST_NODE_TYPES.ExportAllDeclaration
+                );
               },
             ),
         },
