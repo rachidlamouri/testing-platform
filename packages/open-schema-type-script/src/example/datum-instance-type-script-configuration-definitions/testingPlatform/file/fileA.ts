@@ -27,9 +27,25 @@ export type FileATypeScriptConfiguration =
     datumInstanceAliases: [FileADatumInstanceAlias];
   }>;
 
+type ComparisonConfiguration = {
+  name: 'Equals' | 'EndsWith';
+  value: string;
+};
+
+const comparisonImplementationsByName: Record<
+  ComparisonConfiguration['name'],
+  (
+    nodePath: string,
+    comparisonConfiguration: ComparisonConfiguration,
+  ) => boolean
+> = {
+  Equals: (nodePath, thing) => nodePath === thing.value,
+  EndsWith: (nodePath, thing) => nodePath.endsWith(thing.value),
+};
+
 const accumulateFilePaths = (
   directoryPath: string,
-  ignoredPaths: Set<string>,
+  configurationsForIgnoring: ComparisonConfiguration[],
   mutableFilePathList: string[],
   iterationCount: number,
 ): void => {
@@ -40,7 +56,17 @@ const accumulateFilePaths = (
   const statuses = fs
     .readdirSync(directoryPath)
     .map((nodeName) => posix.join(directoryPath, nodeName))
-    .filter((nodePath) => !ignoredPaths.has(nodePath))
+    .filter((nodePath) => {
+      const isIgnored = configurationsForIgnoring.some(
+        (comparisonConfiguration) => {
+          const performComparison =
+            comparisonImplementationsByName[comparisonConfiguration.name];
+          return performComparison(nodePath, comparisonConfiguration);
+        },
+      );
+
+      return !isIgnored;
+    })
     .map((nodePath) => {
       const status = fs.statSync(nodePath);
       return {
@@ -53,7 +79,7 @@ const accumulateFilePaths = (
     if (status.isDirectory) {
       accumulateFilePaths(
         status.nodePath,
-        ignoredPaths,
+        configurationsForIgnoring,
         mutableFilePathList,
         iterationCount + 1,
       );
@@ -70,7 +96,20 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
   const mutableFilePathList: string[] = [];
   accumulateFilePaths(
     '.',
-    new Set(['.git', 'debug', 'node_modules']),
+    [
+      {
+        name: 'Equals',
+        value: '.git',
+      },
+      {
+        name: 'Equals',
+        value: 'debug',
+      },
+      {
+        name: 'EndsWith',
+        value: 'node_modules',
+      },
+    ],
     mutableFilePathList,
     0,
   );
