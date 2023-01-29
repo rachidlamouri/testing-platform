@@ -198,6 +198,10 @@ if (task === 'r') {
       // console.log();
       // /* eslint-enable no-console */
     },
+    onFinish: () => {
+      // eslint-disable-next-line no-console
+      console.log('All Done!');
+    },
   });
 
   process.exit();

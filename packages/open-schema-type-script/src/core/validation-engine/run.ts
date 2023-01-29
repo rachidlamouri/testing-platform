@@ -6,6 +6,9 @@ import {
 } from '../datumSemanticsConfiguration';
 import { representationEngine } from '../representation-engine';
 import { DatumHandler } from '../../utilities/datumEmitter';
+import { IdentifiableDatumSemanticsProcessorResult } from '../identifiableDatumSemanticsProcessorResult';
+import { UnknownCollectionLocator } from '../collectionLocator';
+import { Merge } from '../../utilities/types/merge/merge';
 
 export type ValidationEngineInput = {
   builderConfigurationCollection: UnknownBuilderConfigurationTuple;
@@ -16,6 +19,17 @@ export const run = ({
   builderConfigurationCollection,
   semanticsConfigurationCollection,
 }: ValidationEngineInput): void => {
+  const validationCache = new Map<
+    string,
+    Merge<
+      { instanceIdentifier: UnknownCollectionLocator },
+      IdentifiableDatumSemanticsProcessorResult<{
+        semanticsIdentifier: UnknownCollectionLocator;
+        value: boolean;
+      }>
+    >
+  >();
+
   // eslint-disable-next-line no-console
   console.log('Starting Validation');
 
@@ -72,11 +86,37 @@ export const run = ({
           `    Datum instance "${instanceIdentifier}" does not match semantics "${semanticsIdentifier}"!`,
         );
       }
+
+      validationCache.set(instanceIdentifier, {
+        instanceIdentifier,
+        semanticsIdentifier,
+        value: result,
+      });
     });
   };
 
   representationEngine.run({
     builderConfigurationCollection,
     onDatumInstanceConfiguration,
+    onFinish: () => {
+      /* eslint-disable no-console */
+      console.log();
+      console.log();
+      [...validationCache.values()]
+        .filter((x) => {
+          return !x.value;
+        })
+        .forEach((x, index) => {
+          console.log(`Failure ${index}`);
+          console.log(`    D Id: ${x.instanceIdentifier}`);
+          console.log(`    S Id: ${x.semanticsIdentifier}`);
+          console.log();
+          /* eslint-enable no-console */
+        });
+
+      // const isValid = [...validationCache.values()].every((x) => x.value);
+      // const exitCode = isValid ? 0 : 1;
+      // process.exit(exitCode);
+    },
   });
 };
