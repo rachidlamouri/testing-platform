@@ -15,6 +15,7 @@ import { MutableBuilderConfigurationCollectionsByInputLocator } from './mutableB
 export type RepresentationEngineInput = {
   builderConfigurationCollection: UnknownBuilderConfigurationTuple;
   onDatumInstanceConfiguration: DatumHandler<UnknownDatumInstanceConfiguration>;
+  onFinish: () => void;
 };
 
 export type RepresentationEngine = (input: RepresentationEngineInput) => void;
@@ -45,6 +46,7 @@ const getCacheFilePath = (
 export const run: RepresentationEngine = ({
   builderConfigurationCollection,
   onDatumInstanceConfiguration,
+  onFinish,
 }) => {
   // eslint-disable-next-line no-console
   console.log('Starting Representation');
@@ -262,4 +264,6 @@ export const run: RepresentationEngine = ({
 
   // eslint-disable-next-line no-console
   console.log(`Built ${createdDatumInstanceConfigurationMap.size} instances`);
+
+  onFinish();
 };

@@ -78,5 +78,9 @@ export const run = ({
   representationEngine.run({
     builderConfigurationCollection,
     onDatumInstanceConfiguration,
+    onFinish: () => {
+      // eslint-disable-next-line no-console
+      console.log('All Done!');
+    },
   });
 };
