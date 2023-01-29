@@ -229,6 +229,10 @@ if (task === 'v') {
         collectionLocator: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`,
         processDatum: (instance: unknown): boolean => {
           const tsFileC = instance as TypeScriptFileC;
+          if (tsFileC.additionalMetadata.declarations.length === 0) {
+            // Ignore files that don't export anything
+            return true;
+          }
 
           const hasNamedExport = tsFileC.additionalMetadata.declarations.some(
             (enhancedDeclaration): boolean => {
