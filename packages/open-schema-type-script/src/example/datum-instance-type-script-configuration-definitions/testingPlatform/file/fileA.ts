@@ -6,8 +6,11 @@ import {
   DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration,
 } from '../../../../type-script/datumInstanceTypeScriptConfiguration';
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
-import { File, fileExtensionSemanticsIdentifiersByExtension } from './file';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
+import {
+  File,
+  fileExtensionSuffixSemanticsIdentifiersByExtensionSuffix,
+} from './file';
+import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
 
 export type FileA = File;
@@ -16,7 +19,7 @@ export type FileADatumInstanceIdentifier =
   `${FileTypeScriptSemanticsIdentifier.FileA}:${UnknownCollectionLocatorPart}`;
 
 export type FileADatumInstanceAlias =
-  `${FileExtensionSemanticsIdentifier}:${FileTypeScriptSemanticsIdentifier.FileA}`;
+  `${FileExtensionSuffixSemanticsIdentifier}:${FileTypeScriptSemanticsIdentifier.FileA}`;
 
 export type FileATypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
@@ -126,8 +129,8 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
 
       // TODO: encapsulate this default behavior in a function
       const fileExtensionSemanticsIdentifier =
-        fileExtensionSemanticsIdentifiersByExtension[extension] ??
-        FileExtensionSemanticsIdentifier.Unknown;
+        fileExtensionSuffixSemanticsIdentifiersByExtensionSuffix[extension] ??
+        FileExtensionSuffixSemanticsIdentifier.Unknown;
 
       const alias: FileADatumInstanceAlias = `${fileExtensionSemanticsIdentifier}:${FileTypeScriptSemanticsIdentifier.FileA}`;
 
@@ -141,7 +144,7 @@ export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuil
               .slice(0, 1)
               .toUpperCase()}${camelCaseFileName.slice(1)}`,
           },
-          extension: {
+          extensionSuffix: {
             value: extension,
             semanticsIdentifier: fileExtensionSemanticsIdentifier,
           },

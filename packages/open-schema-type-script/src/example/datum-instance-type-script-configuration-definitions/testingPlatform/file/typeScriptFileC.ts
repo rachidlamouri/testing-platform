@@ -7,7 +7,7 @@ import {
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { File } from './file';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
+import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 import { UnknownString } from '../../../../utilities/types/unknownHelpers';
 import { TypeScriptFileBTypeScriptConfiguration } from './typeScriptFileB';
 
@@ -19,7 +19,7 @@ type EnhancedDeclaration = {
 };
 
 export type TypeScriptFileC = File<{
-  FileExtensionSemanticsIdentifier: FileExtensionSemanticsIdentifier.TypeScript;
+  FileExtensionSuffixSemanticsIdentifier: FileExtensionSuffixSemanticsIdentifier.TypeScript;
   AdditionalMetadata: {
     declarations: EnhancedDeclaration[];
   };
@@ -31,7 +31,7 @@ type TypeScriptFileCDatumInstanceIdentifier =
   `${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}:${UnknownFilePath}`;
 
 type TypeScriptFileCDatumInstancAlias =
-  `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
+  `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
 
 export type TypeScriptFileCTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
@@ -47,7 +47,7 @@ export const buildTypeScriptFileC: DatumInstanceTypeScriptConfigurationCollectio
   InputCollection: [TypeScriptFileBTypeScriptConfiguration];
   OutputCollection: [TypeScriptFileCTypeScriptConfiguration];
 }> = (inputConfiguration) => {
-  const alias: TypeScriptFileCDatumInstancAlias = `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
+  const alias: TypeScriptFileCDatumInstancAlias = `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
 
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileCTypeScriptConfiguration> =
     {

@@ -14,10 +14,10 @@ import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../
 import { File } from './file';
 import { FileATypeScriptConfiguration } from './fileA';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
+import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 
 export type TypeScriptFile = File<{
-  FileExtensionSemanticsIdentifier: FileExtensionSemanticsIdentifier.TypeScript;
+  FileExtensionSuffixSemanticsIdentifier: FileExtensionSuffixSemanticsIdentifier.TypeScript;
   AdditionalMetadata: {
     ast: TSESTree.Program;
     configFilePath: string;
@@ -29,7 +29,7 @@ export type TypeScriptFileADatumInstanceIdentifier =
   `${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}:${UnknownCollectionLocatorPart}`;
 
 export type TypeScriptFileADatumInstancAlias =
-  `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`;
+  `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`;
 
 export type TypeScriptFileTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
@@ -84,16 +84,17 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
     throw error;
   }
 
-  const alias: TypeScriptFileADatumInstancAlias = `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`;
+  const alias: TypeScriptFileADatumInstancAlias = `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`;
 
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileTypeScriptConfiguration> =
     {
       instanceIdentifier: `${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}:${filePath}`,
       datumInstance: {
         ...inputFileConfiguration.datumInstance,
-        extension: {
-          value: inputFileConfiguration.datumInstance.extension.value,
-          semanticsIdentifier: FileExtensionSemanticsIdentifier.TypeScript,
+        extensionSuffix: {
+          value: inputFileConfiguration.datumInstance.extensionSuffix.value,
+          semanticsIdentifier:
+            FileExtensionSuffixSemanticsIdentifier.TypeScript,
         },
         additionalMetadata: {
           configFilePath,

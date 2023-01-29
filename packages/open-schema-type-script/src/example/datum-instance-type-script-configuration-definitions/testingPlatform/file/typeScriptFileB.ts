@@ -6,12 +6,12 @@ import {
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { File } from './file';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
+import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 import { UnknownString } from '../../../../utilities/types/unknownHelpers';
 import { TypeScriptFileTypeScriptConfiguration } from './typeScriptFileA';
 
 export type TypeScriptFileB = File<{
-  FileExtensionSemanticsIdentifier: FileExtensionSemanticsIdentifier.TypeScript;
+  FileExtensionSuffixSemanticsIdentifier: FileExtensionSuffixSemanticsIdentifier.TypeScript;
   AdditionalMetadata: {
     declarations: TSESTree.ExportNamedDeclaration[];
   };
@@ -23,7 +23,7 @@ type TypeScriptFileBDatumInstanceIdentifier =
   `${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}:${UnknownFilePath}`;
 
 type TypeScriptFileADatumInstancAlias =
-  `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`;
+  `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`;
 
 export type TypeScriptFileBTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
@@ -39,7 +39,7 @@ export const buildTypeScriptFileB: DatumInstanceTypeScriptConfigurationCollectio
   InputCollection: [TypeScriptFileTypeScriptConfiguration];
   OutputCollection: [TypeScriptFileBTypeScriptConfiguration];
 }> = (inputConfiguration) => {
-  const alias: TypeScriptFileADatumInstancAlias = `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`;
+  const alias: TypeScriptFileADatumInstancAlias = `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`;
 
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileBTypeScriptConfiguration> =
     {

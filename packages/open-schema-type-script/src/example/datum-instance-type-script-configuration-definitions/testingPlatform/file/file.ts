@@ -1,22 +1,22 @@
 import { UnknownObject } from '../../../../utilities/types/unknownHelpers';
-import { FileExtensionSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
+import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 
-const extensionsByFileExtensionSemanticsIdentifer = {
-  [FileExtensionSemanticsIdentifier.Json]: '.json',
-  [FileExtensionSemanticsIdentifier.TypeScript]: '.ts',
-  [FileExtensionSemanticsIdentifier.Unknown]: '.:shrug:',
-} satisfies Record<FileExtensionSemanticsIdentifier, string>;
+const extensionSuffixesByFileExtensionSuffixSemanticsIdentifer = {
+  [FileExtensionSuffixSemanticsIdentifier.Json]: '.json',
+  [FileExtensionSuffixSemanticsIdentifier.TypeScript]: '.ts',
+  [FileExtensionSuffixSemanticsIdentifier.Unknown]: '.:shrug:',
+} satisfies Record<FileExtensionSuffixSemanticsIdentifier, string>;
 
 // TODO: make a util for swapping keys and values
-export const fileExtensionSemanticsIdentifiersByExtension = Object.fromEntries(
-  Object.entries(extensionsByFileExtensionSemanticsIdentifer).map(([k, v]) => [
-    v,
-    k,
-  ]),
-) as Record<string, FileExtensionSemanticsIdentifier>;
+export const fileExtensionSuffixSemanticsIdentifiersByExtensionSuffix =
+  Object.fromEntries(
+    Object.entries(
+      extensionSuffixesByFileExtensionSuffixSemanticsIdentifer,
+    ).map(([k, v]) => [v, k]),
+  ) as Record<string, FileExtensionSuffixSemanticsIdentifier>;
 
 export type FileTypeParameter = {
-  FileExtensionSemanticsIdentifier: FileExtensionSemanticsIdentifier;
+  FileExtensionSuffixSemanticsIdentifier: FileExtensionSuffixSemanticsIdentifier;
   AdditionalMetadata: UnknownObject | null;
 };
 
@@ -26,9 +26,9 @@ export type File<T extends FileTypeParameter = FileTypeParameter> = {
     pascalCase: string;
     camelCase: string;
   };
-  extension: {
+  extensionSuffix: {
     value: string;
-    semanticsIdentifier: T['FileExtensionSemanticsIdentifier'];
+    semanticsIdentifier: T['FileExtensionSuffixSemanticsIdentifier'];
   };
   additionalMetadata: T['AdditionalMetadata'];
 };

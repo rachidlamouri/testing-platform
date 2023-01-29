@@ -38,7 +38,7 @@ import {
   TypeScriptFileTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFileA';
 import { FileTypeScriptSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileTypeScriptSemanticsIdentifier';
-import { FileExtensionSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileExtensionSuffixSemanticsIdentifier';
+import { FileExtensionSuffixSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileExtensionSuffixSemanticsIdentifier';
 import {
   buildTypeScriptFileB,
   TypeScriptFileBTypeScriptConfiguration,
@@ -147,7 +147,7 @@ const builderConfigurationCollection = [
     inputPredicateLocatorTuple: [
       {
         // TODO: rename "instanceIdentifier" to "instanceLocator"
-        instanceIdentifier: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.FileA}`,
+        instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.FileA}`,
         predicateIdentifiers: [FileTypeScriptSemanticsIdentifier.FileA],
       },
     ],
@@ -160,7 +160,7 @@ const builderConfigurationCollection = [
     inputPredicateLocatorTuple: [
       {
         // TODO: rename "instanceIdentifier" to "instanceLocator"
-        instanceIdentifier: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`,
+        instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`,
         predicateIdentifiers: [
           FileTypeScriptSemanticsIdentifier.TypeScriptFileA,
         ],
@@ -175,7 +175,7 @@ const builderConfigurationCollection = [
     inputPredicateLocatorTuple: [
       {
         // TODO: rename "instanceIdentifier" to "instanceLocator"
-        instanceIdentifier: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`,
+        instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`,
         predicateIdentifiers: [
           FileTypeScriptSemanticsIdentifier.TypeScriptFileB,
         ],
@@ -226,7 +226,7 @@ if (task === 'v') {
       {
         semanticsIdentifier:
           'type-script-file-has-named-export-matching-file-name',
-        collectionLocator: `${FileExtensionSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`,
+        collectionLocator: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`,
         processDatum: (instance: unknown): boolean => {
           const tsFileC = instance as TypeScriptFileC;
 
