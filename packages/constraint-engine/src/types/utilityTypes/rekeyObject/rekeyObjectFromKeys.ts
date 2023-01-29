@@ -1,5 +1,5 @@
 import { Merge } from '../merge/merge';
-import { StringKeys } from '../stringkeys';
+import { StringKeys } from '../stringKeys';
 import { UnknownObject, UnknownString } from '../unknownHelpers';
 
 export type UnknownKey = UnknownString;

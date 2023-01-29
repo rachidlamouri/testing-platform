@@ -1,6 +1,6 @@
 import { ConstrainObject } from '../constrainObject';
 import { SimplifyObject } from '../simplify/simplifyObject';
-import { StringKeys } from '../stringkeys';
+import { StringKeys } from '../stringKeys';
 import { UnknownObject } from '../unknownHelpers';
 import { RekeyObjectFromKeys } from './rekeyObjectFromKeys';
 
