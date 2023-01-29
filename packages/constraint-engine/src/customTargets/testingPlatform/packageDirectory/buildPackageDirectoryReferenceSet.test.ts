@@ -4,7 +4,7 @@ import {
   signaler,
 } from 'rat-test/type-script/transgressing';
 import { TargetTypeId } from '../targetTypeId';
-import { buildTestingPlatformPackageDirectoryReferenceSet } from './buildPackageDirectoryReferenceSet';
+import { buildPackageDirectoryReferenceSet } from './buildPackageDirectoryReferenceSet';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 orchestrate()
@@ -14,7 +14,7 @@ orchestrate()
   .then(() => {
     report('  ⇀ Testing multiple directories');
 
-    const result = buildTestingPlatformPackageDirectoryReferenceSet({
+    const result = buildPackageDirectoryReferenceSet({
       typeId: TargetTypeId.PackageDirectorySet,
       instance: ['tmp/bar', 'tmp/foo'],
       path: 'some-prefix',

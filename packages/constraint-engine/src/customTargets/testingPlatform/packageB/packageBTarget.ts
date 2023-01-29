@@ -4,7 +4,7 @@ import { OnDiskUtf8FileTarget } from '../../file/utf8File/utf8FileTarget';
 import { ObjectTarget } from '../../type-script/objectTarget';
 import { BasePackage } from '../basePackage';
 import {
-  CategorizedTestFileMetadataTarget,
+  CategorizedTestFileMetadata,
   SupportedTestFileType,
 } from '../categorizedTestFileMetadata';
 import { TargetTypeId } from '../targetTypeId';
@@ -13,7 +13,7 @@ export type PackageBTarget = BasePackage<{
   packageFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
   typeScriptConfigFile: ParseableOnDiskJsonFileTarget<ObjectTarget>;
   runTestsScript: OnDiskUtf8FileTarget;
-  testFileMetadataSet: CategorizedTestFileMetadataTarget<{
+  testFileMetadataSet: CategorizedTestFileMetadata<{
     fileType: SupportedTestFileType;
   }>[];
 }>;

@@ -1,5 +1,5 @@
 import { TypedTarget } from '../../../types/typedTarget';
-import { TargetTypeId } from '../targetTypeIds';
+import { TargetTypeId } from '../targetTypeId';
 
 type BaseJsonFileTarget<T> = {
   filePath: string;

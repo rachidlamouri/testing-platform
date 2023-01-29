@@ -1,7 +1,7 @@
 import { JsonFileTarget } from '../file/jsonFile/jsonFileTarget';
 import { Utf8FileTarget } from '../file/utf8File/utf8FileTarget';
 import {
-  CategorizedTestFileMetadataTarget,
+  CategorizedTestFileMetadata,
   SupportedTestFileType,
 } from './categorizedTestFileMetadata';
 
@@ -9,7 +9,7 @@ type ConfigurablePackageProperties = {
   packageFile: JsonFileTarget;
   runTestsScript: Utf8FileTarget;
   typeScriptConfigFile: JsonFileTarget;
-  testFileMetadataSet: CategorizedTestFileMetadataTarget<{
+  testFileMetadataSet: CategorizedTestFileMetadata<{
     fileType: SupportedTestFileType | null;
   }>[];
 };

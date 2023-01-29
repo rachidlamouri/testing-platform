@@ -11,9 +11,9 @@ import {
 import { PackageDirectoryTypedTarget } from '../packageDirectory/packageDirectoryTarget';
 import { TargetTypeId } from '../targetTypeId';
 import { PackageATarget, PackageATypedTarget } from './packageATarget';
-import { buildUtf8FileMetadataInstanceSet } from '../../file/utf8File/buildUtf8FileMetdataInstanceSet';
+import { buildUtf8FileMetadataInstanceSet } from '../../file/utf8File/buildUtf8FileMetadataInstanceSet';
 import {
-  CategorizedTestFileMetadataTarget,
+  CategorizedTestFileMetadata,
   fileTypesByExtension,
   SupportedTestFileType,
 } from '../categorizedTestFileMetadata';
@@ -53,7 +53,7 @@ export const buildPackageAReference = (<TPrefix extends UnknownTargetPath>(
     }).map(
       (
         metadata,
-      ): CategorizedTestFileMetadataTarget<{
+      ): CategorizedTestFileMetadata<{
         fileType: SupportedTestFileType | null;
       }> => ({
         ...metadata,

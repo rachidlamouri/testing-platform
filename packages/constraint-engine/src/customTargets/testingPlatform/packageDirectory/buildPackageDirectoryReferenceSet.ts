@@ -23,7 +23,7 @@ export type TestingPlatformPackageDirectoryTargetReference<
   TestingPlatformPackageDirectoryTargetPath<TPrefix>
 >;
 
-export const buildTestingPlatformPackageDirectoryReferenceSet = (<
+export const buildPackageDirectoryReferenceSet = (<
   TPrefix extends UnknownTargetPath,
 >(
   directorySetReference: TargetReference<

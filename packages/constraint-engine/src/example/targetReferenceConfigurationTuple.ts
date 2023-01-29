@@ -1,6 +1,6 @@
 import { buildDeprecatedDerivedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedDerivedTargetReferenceConfiguration';
 import {
-  buildTestingPlatformPackageDirectoryReferenceSet,
+  buildPackageDirectoryReferenceSet,
   TestingPlatformPackageDirectoryTargetPath,
 } from '../customTargets/testingPlatform/packageDirectory/buildPackageDirectoryReferenceSet';
 import {
@@ -31,7 +31,7 @@ import { PackageDirectorySetConfigurationTypedTarget } from '../customTargets/te
 import { RootTargetPath } from '../types/targetPath';
 import { JsonFileTypedTarget } from '../customTargets/file/jsonFile/jsonFileTarget';
 import { buildJsonFileInstanceFromYaml } from '../customTargets/file/jsonFile/buildBuildJsonFileInstance';
-import { TargetTypeId as FileTargetTypeId } from '../customTargets/file/targetTypeIds';
+import { TargetTypeId as FileTargetTypeId } from '../customTargets/file/targetTypeId';
 import {
   CiYamlFileContentsConfigurationTypedTarget,
   CiYamlFileTargetPath,
@@ -208,7 +208,7 @@ export const modifiedTargetReferenceConfigurations = [
     OutputTypedTarget: PackageDirectoryTypedTarget;
     OutputTargetPath: TestingPlatformPackageDirectoryTargetPath<PackageDirectorySetTargetPath>;
   }>({
-    buildReferenceSet: buildTestingPlatformPackageDirectoryReferenceSet,
+    buildReferenceSet: buildPackageDirectoryReferenceSet,
     inputTargetTypeId: TestingPlatformTargetTypeId.PackageDirectorySet,
     inputTargetPath: 'testingPlatformPackageDirectorySet',
   }),
