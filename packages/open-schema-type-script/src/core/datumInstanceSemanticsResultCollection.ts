@@ -10,7 +10,7 @@ export type UnknownDatumSemanticsResultCollection = {
   >;
 };
 
-export type DatumSemanticsResultCollection<
+export type DatumInstanceSemanticsResultCollection<
   TUnknownDatumSemanticsResultCollection extends UnknownDatumSemanticsResultCollection,
 > = ConstrainObject<
   { ConstraintObject: UnknownDatumSemanticsResultCollection },

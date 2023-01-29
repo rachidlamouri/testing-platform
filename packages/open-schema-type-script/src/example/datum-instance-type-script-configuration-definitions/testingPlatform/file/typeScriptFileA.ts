@@ -16,7 +16,7 @@ import { FileATypeScriptConfiguration } from './fileA';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
 import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 
-export type TypeScriptFile = File<{
+export type TypeScriptFileA = File<{
   FileExtensionSuffixSemanticsIdentifier: FileExtensionSuffixSemanticsIdentifier.TypeScript;
   AdditionalMetadata: {
     ast: TSESTree.Program;
@@ -37,7 +37,7 @@ export type TypeScriptFileTypeScriptConfiguration =
       FileTypeScriptSemanticsIdentifier.TypeScriptFileA,
     ];
     datumInstanceIdentifier: UnknownCollectionLocator;
-    datumInstance: TypeScriptFile;
+    datumInstance: TypeScriptFileA;
     datumInstanceAliases: [TypeScriptFileADatumInstancAlias];
   }>;
 
