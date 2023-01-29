@@ -1,7 +1,7 @@
 import { buildRuleConfiguration } from '../configurationHelpers/buildRuleConfiguration';
 import { listIsNotEmpty } from '../customRules/listIsNotEmpty';
 import { packageCExtendsBaseTypeScriptConfiguration } from '../customRules/packageCExtendsBaseTypeScriptConfiguration';
-import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
+import { packageAHasPackageFile } from '../customRules/packageAHasPackageFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { UnknownRuleConfigurationTuple } from '../types/ruleConfiguration';

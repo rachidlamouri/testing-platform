@@ -12,7 +12,7 @@ import {
   TestingPlatformPackageTargetPath,
   TestingPlatformPackageTargetPathTuple,
 } from '../customTargets/testingPlatform/packageA/buildPackageAReference';
-import { packageAHasPackageFile } from '../customRules/packageAHasPackagefile';
+import { packageAHasPackageFile } from '../customRules/packageAHasPackageFile';
 import { packageAHasTypeScriptConfigFile } from '../customRules/packageAHasTypeScriptConfigFile';
 import { packageBHasTestingPlatformConfiguration } from '../customRules/packageBHasTestingPlatformConfiguration';
 import { buildDeprecatedNarrowedTargetReferenceConfiguration } from '../configurationHelpers/buildDeprecatedNarrowedTargetReferenceConfiguration';
