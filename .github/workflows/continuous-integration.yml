@@ -14,7 +14,8 @@ jobs:
         with:
           node-version-file: .nvmrc
       - name: Install Dependencies
-        run: npm clean-install
+        run: npm clean-install && cd packages/vscode-language-server/client && npm
+          install && cd ../server && npm install
       - name: Lint Markdown
         run: npm run lint:md
       - name: Lint TypeScript
@@ -53,6 +54,16 @@ jobs:
         run: pwd && cd packages/rat-test && pwd && npx tsc
       - name: Run rat-test Tests
         run: pwd && bash packages/rat-test/scripts/runTests.sh
+
+      # vscode-extension-command
+      - name: Lint vscode-extension-command Types
+        run: pwd && cd packages/vscode-extension-command && pwd && npx tsc
+      - name: Run vscode-extension-command Tests
+        run: pwd && bash packages/vscode-extension-command/scripts/runTests.sh
+
+      # vscode-language-server
+      - name: Run vscode-language-server Tests
+        run: pwd && bash packages/vscode-language-server/scripts/runTests.sh
 
       # Post-Package Steps
       - name: Lint Repository

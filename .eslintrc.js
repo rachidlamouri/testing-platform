@@ -42,11 +42,30 @@ module.exports = {
       },
       parser: '@typescript-eslint/parser',
       parserOptions: {
-        project: fs
-          .readdirSync('packages')
-          .map((directoryName) =>
-            posix.join(__dirname, 'packages', directoryName, 'tsconfig.json'),
+        project: [
+          ...fs
+            .readdirSync('packages')
+            .filter(
+              (directoryName) => directoryName !== 'vscode-language-server',
+            )
+            .map((directoryName) =>
+              posix.join(__dirname, 'packages', directoryName, 'tsconfig.json'),
+            ),
+          posix.join(
+            __dirname,
+            'packages',
+            'vscode-language-server',
+            'client',
+            'tsconfig.json',
           ),
+          posix.join(
+            __dirname,
+            'packages',
+            'vscode-language-server',
+            'server',
+            'tsconfig.json',
+          ),
+        ],
       },
     },
   ],

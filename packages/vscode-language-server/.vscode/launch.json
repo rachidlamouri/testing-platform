@@ -1,0 +1,16 @@
+{
+  "configurations": [
+    {
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ],
+      "name": "Testing Platform VSCode Extension Language Server",
+      "outFiles": [
+        "${workspaceFolder}/client/build/**/*.js",
+        "${workspaceFolder}/server/build/**/*.js"
+      ],
+      "request": "launch",
+      "type": "extensionHost"
+    },
+  ]
+}
