@@ -54,6 +54,12 @@ jobs:
       - name: Run rat-test Tests
         run: pwd && bash packages/rat-test/scripts/runTests.sh
 
+      # vscode-extension-command
+      - name: Lint vscode-extension-command Types
+        run: pwd && cd packages/vscode-extension-command && pwd && npx tsc
+      - name: Run vscode-extension-command Tests
+        run: pwd && bash packages/vscode-extension-command/scripts/runTests.sh
+
       # Post-Package Steps
       - name: Lint Repository
         run: npm run lint:repository
