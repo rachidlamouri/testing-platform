@@ -18,3 +18,6 @@ export const activate = (context: vscode.ExtensionContext): void => {
 
   context.subscriptions.push(disposable);
 };
+
+// TODO: figure out what to do so we don't have to make an extraneous export
+export type Src = symbol;

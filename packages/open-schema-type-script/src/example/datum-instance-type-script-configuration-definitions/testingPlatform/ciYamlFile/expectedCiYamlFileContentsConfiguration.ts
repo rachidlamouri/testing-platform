@@ -58,7 +58,7 @@ export const CI_YAML_FILE_CONTENTS_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: Expe
               },
               {
                 name: 'Install Dependencies',
-                run: 'npm clean-install',
+                run: 'npm clean-install && cd packages/vscode-language-server/client && npm install && cd ../server && npm install',
               },
               {
                 name: 'Lint Markdown',

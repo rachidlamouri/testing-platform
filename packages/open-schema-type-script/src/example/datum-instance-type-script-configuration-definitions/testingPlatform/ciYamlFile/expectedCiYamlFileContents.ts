@@ -67,7 +67,8 @@ export const buildExpectedCiYamlContents: DatumInstanceTypeScriptConfigurationCo
 
                     // TODO: either use the testing-platform configuration object in package.json to control this or check the file system to control this
                     const typeCheckStep: [CiYamlFileContentsRunStep] | [] =
-                      directoryName !== 'base-tsconfig'
+                      directoryName !== 'base-tsconfig' &&
+                      directoryName !== 'vscode-language-server'
                         ? [
                             {
                               name: `Lint ${directoryName} Types`,
