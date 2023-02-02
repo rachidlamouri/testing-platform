@@ -54,6 +54,11 @@ import {
   ExampleFileATypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFileA';
 import { ExampleFileFileCommentText } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFile';
+import { ExampleFileBTypeScriptConfiguration } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFileB';
+import {
+  buildExampleFileBDatumInstanceTypeScriptConfiguration,
+  ExampleFileBDatumInstanceTypeScriptConfigurationTypeScriptConfiguration,
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFileBDatumInstanceTypeScriptConfiguration';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
@@ -201,6 +206,23 @@ const builderConfigurationCollection = [
         predicateIdentifiers: [
           FileTypeScriptSemanticsIdentifier.TypeScriptFileA,
         ],
+      },
+    ],
+  }),
+  buildBuilderConfiguration<{
+    InputCollection: [ExampleFileBTypeScriptConfiguration];
+    OutputCollection:
+      | []
+      | [
+          ExampleFileBDatumInstanceTypeScriptConfigurationTypeScriptConfiguration,
+        ];
+  }>({
+    buildCollection: buildExampleFileBDatumInstanceTypeScriptConfiguration,
+    inputPredicateLocatorTuple: [
+      {
+        // TODO: rename "instanceIdentifier" to "instanceLocator"
+        instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.ExampleFileA}`,
+        predicateIdentifiers: [FileTypeScriptSemanticsIdentifier.ExampleFileB],
       },
     ],
   }),

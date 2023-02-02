@@ -7,4 +7,5 @@ export enum FileTypeScriptSemanticsIdentifier {
   TypeScriptFileC = 'TypeScriptType=TypeScriptFileC',
   ExampleFileA = 'TypeScriptType=ExampleFileA',
   ExampleFileB = 'TypeScriptType=ExampleFileB',
+  ExampleFileBDatumInstanceTypeScriptConfiguration = 'TypeScriptType=ExampleFileBDatumInstanceTypeScriptConfiguration',
 }
