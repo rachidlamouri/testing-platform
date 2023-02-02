@@ -50,8 +50,10 @@ import {
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFileC';
 import {
   buildExampleFileA,
+  ExampleFileA,
   ExampleFileATypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFileA';
+import { ExampleFileFileCommentText } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFile';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
@@ -279,6 +281,19 @@ if (task === 'v') {
           );
 
           return hasNamedExport;
+        },
+      },
+      {
+        semanticsIdentifier: 'example-file-a-has-file-comment',
+        collectionLocator: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.ExampleFileA}`,
+        processDatum: (instance: unknown): boolean => {
+          const exampleFileA = instance as ExampleFileA;
+
+          const hasComment = Object.values<string>(
+            ExampleFileFileCommentText,
+          ).includes(exampleFileA.additionalMetadata.fileCommentText.trim());
+
+          return hasComment;
         },
       },
     ],

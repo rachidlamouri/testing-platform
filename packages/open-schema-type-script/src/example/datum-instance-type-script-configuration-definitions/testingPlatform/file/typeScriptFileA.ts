@@ -78,6 +78,7 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
     ast = parser.parse(fileContents, {
       project: './tsconfig.json',
       tsconfigRootDir,
+      comment: true,
     });
   } catch (error) {
     ast = error as Error;
