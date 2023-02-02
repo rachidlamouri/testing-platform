@@ -57,6 +57,7 @@ import { ExampleFileFileCommentText } from './datum-instance-type-script-configu
 import { ExampleFileBTypeScriptConfiguration } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFileB';
 import {
   buildExampleFileBDatumInstanceTypeScriptConfiguration,
+  ExampleFileBDatumInstanceTypeScriptConfiguration,
   ExampleFileBDatumInstanceTypeScriptConfigurationTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFileBDatumInstanceTypeScriptConfiguration';
 
@@ -324,6 +325,47 @@ if (task === 'v') {
         additionalPredicateIdentifiers: [
           FileTypeScriptSemanticsIdentifier.ExampleFileB,
         ],
+      },
+      {
+        semanticsIdentifier:
+          'type-script-configuration-definition-defines-types',
+        collectionLocator: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.ExampleFileBDatumInstanceTypeScriptConfiguration}`,
+        processDatum: (instance: unknown): boolean => {
+          const exampleFile =
+            instance as ExampleFileBDatumInstanceTypeScriptConfiguration;
+
+          let hasAll = true;
+          Object.entries(
+            exampleFile.additionalMetadata.expectedTypeNames,
+          ).forEach(([key, { typeName, identifier }]) => {
+            const hasNext =
+              exampleFile.additionalMetadata.declarations.find(
+                (declaration) => {
+                  return (
+                    declaration.typeName === typeName &&
+                    declaration.identifier === identifier
+                  );
+                },
+              ) !== undefined;
+
+            if (!hasNext) {
+              /* eslint-disable no-console */
+              console.log('---');
+              console.log(
+                `Missing "${key}" ${
+                  typeName ?? 'MISSING'
+                } reference named "${identifier}" in ${exampleFile.filePath}`,
+              );
+              console.log('---');
+              /* eslint-enable no-console */
+            }
+
+            hasAll = hasAll && hasNext;
+          });
+
+          return hasAll;
+        },
+        additionalPredicateIdentifiers: [],
       },
     ],
   });
