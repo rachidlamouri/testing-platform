@@ -7,14 +7,16 @@ import {
 import { UnknownCollectionLocator } from '../collectionLocator';
 import { UnknownDatumInstanceConfiguration } from '../datumInstanceConfiguration';
 import { CustomSet } from '../../utilities/customSet';
-import { DatumHandler } from '../../utilities/datumEmitter';
-import { DatumInstanceConfigurationEmitter } from './datumInstanceConfigurationEmitter';
 import { MutableBuilderConfiguration } from './mutableBuilderConfiguration';
 import { MutableBuilderConfigurationCollectionsByInputLocator } from './mutableBuilderConfigurationCollectionsByInputLocator';
 
+export type DatumInstanceConfigurationEnhancer = (
+  datum: UnknownDatumInstanceConfiguration,
+) => UnknownCollectionLocator[];
+
 export type RepresentationEngineInput = {
   builderConfigurationCollection: UnknownBuilderConfigurationTuple;
-  onDatumInstanceConfiguration: DatumHandler<UnknownDatumInstanceConfiguration>;
+  onDatumInstanceConfiguration: DatumInstanceConfigurationEnhancer;
   onFinish: () => void;
 };
 
@@ -54,9 +56,6 @@ export const run: RepresentationEngine = ({
   fs.rmSync(DEBUG_DIR_PATH, { recursive: true, force: true });
   fs.mkdirSync(LOOP_PATH, { recursive: true });
   fs.mkdirSync(CACHE_PATH, { recursive: true });
-
-  const datumInstanceConfigurationEmitter =
-    new DatumInstanceConfigurationEmitter(onDatumInstanceConfiguration);
 
   const initialBuilderConfigurations = builderConfigurationCollection.filter(
     (builderConfiguration) =>
@@ -125,7 +124,22 @@ export const run: RepresentationEngine = ({
       });
 
     const outputDatumConfigurationTuple =
-      outputDatumConfigurationTupleCollection.flat();
+      outputDatumConfigurationTupleCollection
+        .flat()
+        .map((datumInstanceConfiguration) => {
+          // emit and enhance
+          const newPredicateIdentifiers = onDatumInstanceConfiguration(
+            datumInstanceConfiguration,
+          );
+
+          return {
+            ...datumInstanceConfiguration,
+            predicateIdentifiers: [
+              ...datumInstanceConfiguration.predicateIdentifiers,
+              ...newPredicateIdentifiers,
+            ],
+          };
+        });
 
     outputDatumConfigurationTuple.forEach(
       // eslint-disable-next-line @typescript-eslint/no-loop-func
@@ -147,9 +161,6 @@ export const run: RepresentationEngine = ({
           datumInstanceConfiguration.instanceIdentifier,
           datumInstanceConfiguration,
         );
-
-        // emit
-        datumInstanceConfigurationEmitter.emitDatum(datumInstanceConfiguration);
       },
     );
 

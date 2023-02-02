@@ -1,14 +1,13 @@
 import { UnknownBuilderConfigurationTuple } from '../builderConfiguration';
-import { UnknownDatumInstanceConfiguration } from '../datumInstanceConfiguration';
 import {
   UnknownDatumSemanticsConfiguration,
   UnknownDatumSemanticsConfigurationTuple,
 } from '../datumSemanticsConfiguration';
 import { representationEngine } from '../representation-engine';
-import { DatumHandler } from '../../utilities/datumEmitter';
 import { IdentifiableDatumSemanticsProcessorResult } from '../identifiableDatumSemanticsProcessorResult';
 import { UnknownCollectionLocator } from '../collectionLocator';
 import { Merge } from '../../utilities/types/merge/merge';
+import { DatumInstanceConfigurationEnhancer } from '../representation-engine/run';
 
 export type ValidationEngineInput = {
   builderConfigurationCollection: UnknownBuilderConfigurationTuple;
@@ -50,9 +49,9 @@ export const run = ({
     );
   });
 
-  const onDatumInstanceConfiguration: DatumHandler<
-    UnknownDatumInstanceConfiguration
-  > = (datumInstanceConfiguration) => {
+  const onDatumInstanceConfiguration: DatumInstanceConfigurationEnhancer = (
+    datumInstanceConfiguration,
+  ) => {
     const locators = [
       datumInstanceConfiguration.instanceIdentifier,
       ...datumInstanceConfiguration.aliases,
@@ -67,32 +66,46 @@ export const run = ({
       });
     });
 
-    [...semanticsSet].forEach((semanticsConfiguraton) => {
-      const result = semanticsConfiguraton.processDatum(
-        datumInstanceConfiguration.datumInstance,
-      );
-
-      const { instanceIdentifier } = datumInstanceConfiguration;
-      const { semanticsIdentifier } = semanticsConfiguraton;
-
-      if (result) {
-        // eslint-disable-next-line no-console
-        console.log(
-          `    Datum instance "${instanceIdentifier}" matches semantics "${semanticsIdentifier}"!`,
+    const newPredicateIdentifiers = [...semanticsSet]
+      .map((semanticsConfiguraton) => {
+        const result = semanticsConfiguraton.processDatum(
+          datumInstanceConfiguration.datumInstance,
         );
-      } else {
-        // eslint-disable-next-line no-console
-        console.log(
-          `    Datum instance "${instanceIdentifier}" does not match semantics "${semanticsIdentifier}"!`,
-        );
-      }
 
-      validationCache.set(instanceIdentifier, {
-        instanceIdentifier,
-        semanticsIdentifier,
-        value: result,
-      });
-    });
+        const { instanceIdentifier } = datumInstanceConfiguration;
+        const { semanticsIdentifier, additionalPredicateIdentifiers } =
+          semanticsConfiguraton;
+
+        if (result) {
+          // eslint-disable-next-line no-console
+          console.log(
+            `    Datum instance "${instanceIdentifier}" matches semantics "${semanticsIdentifier}"!`,
+          );
+        } else {
+          // eslint-disable-next-line no-console
+          console.log(
+            `    Datum instance "${instanceIdentifier}" does not match semantics "${semanticsIdentifier}"!`,
+          );
+        }
+
+        validationCache.set(instanceIdentifier, {
+          instanceIdentifier,
+          semanticsIdentifier,
+          value: result,
+        });
+
+        return {
+          result,
+          predicateIdentifiers: [
+            semanticsIdentifier,
+            ...additionalPredicateIdentifiers,
+          ],
+        };
+      })
+      .filter(({ result }) => result)
+      .flatMap(({ predicateIdentifiers }) => predicateIdentifiers);
+
+    return newPredicateIdentifiers;
   };
 
   representationEngine.run({

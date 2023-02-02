@@ -219,6 +219,8 @@ if (task === 'r') {
       // console.log(JSON.stringify(configuration, null, 2));
       // console.log();
       // /* eslint-enable no-console */
+
+      return [];
     },
     onFinish: () => {
       // eslint-disable-next-line no-console
@@ -244,6 +246,7 @@ if (task === 'v') {
 
           return true;
         },
+        additionalPredicateIdentifiers: [],
       },
       {
         semanticsIdentifier:
@@ -282,6 +285,7 @@ if (task === 'v') {
 
           return hasNamedExport;
         },
+        additionalPredicateIdentifiers: [],
       },
       {
         semanticsIdentifier: 'example-file-a-has-file-comment',
@@ -295,6 +299,9 @@ if (task === 'v') {
 
           return hasComment;
         },
+        additionalPredicateIdentifiers: [
+          FileTypeScriptSemanticsIdentifier.ExampleFileB,
+        ],
       },
     ],
   });
