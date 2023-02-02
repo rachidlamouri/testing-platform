@@ -3,4 +3,5 @@ export enum FileTypeScriptSemanticsIdentifier {
   TypeScriptFileA = 'TypeScriptType=TypeScriptFileA',
   TypeScriptFileB = 'TypeScriptType=TypeScriptFileB',
   TypeScriptFileC = 'TypeScriptType=TypeScriptFileC',
+  ExampleFileA = 'TypeScriptType=ExampleFileA',
 }

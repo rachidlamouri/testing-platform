@@ -48,6 +48,10 @@ import {
   TypeScriptFileC,
   TypeScriptFileCTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFileC';
+import {
+  buildExampleFileA,
+  ExampleFileATypeScriptConfiguration,
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFileA';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
@@ -178,6 +182,22 @@ const builderConfigurationCollection = [
         instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`,
         predicateIdentifiers: [
           FileTypeScriptSemanticsIdentifier.TypeScriptFileB,
+        ],
+      },
+    ],
+  }),
+
+  buildBuilderConfiguration<{
+    InputCollection: [TypeScriptFileTypeScriptConfiguration];
+    OutputCollection: [ExampleFileATypeScriptConfiguration] | [];
+  }>({
+    buildCollection: buildExampleFileA,
+    inputPredicateLocatorTuple: [
+      {
+        // TODO: rename "instanceIdentifier" to "instanceLocator"
+        instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`,
+        predicateIdentifiers: [
+          FileTypeScriptSemanticsIdentifier.TypeScriptFileA,
         ],
       },
     ],
