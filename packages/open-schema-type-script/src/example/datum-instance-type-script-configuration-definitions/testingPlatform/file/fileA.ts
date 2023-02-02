@@ -183,7 +183,7 @@ const getFileStuff = (filePath: string): FileStuff => {
   } satisfies FileStuff;
 };
 
-export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
+export const buildFileA: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [];
   OutputCollection: FileATypeScriptConfiguration[];
 }> = () => {

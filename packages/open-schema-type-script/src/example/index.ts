@@ -5,15 +5,15 @@ import { representationEngine } from '../core/representation-engine';
 import { validationEngine } from '../core/validation-engine';
 import {
   ActualCiYamlFileTypeScriptConfiguration,
-  buildActualCiYamlFileContents,
+  buildActualCiYamlFile,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/actualCiYamlFile';
 import {
   AssertableCiYamlFile,
   AssertableCiYamlFileTypeScriptConfiguration,
-  buildAssertableCiYamlFileContentsConfiguration,
+  buildAssertableCiYamlFile,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/assertableCiYamlFile';
 import {
-  buildExpectedCiYamlContents,
+  buildExpectedCiYamlFileContents,
   ExpectedCiYamlFileContentsTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/expectedCiYamlFileContents';
 import {
@@ -21,21 +21,21 @@ import {
   ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/expectedCiYamlFileContentsConfiguration';
 import {
-  buildPackageDirectoryNameSet,
-  PackageDirectoryNameSetTypeScriptConfiguration,
+  buildPackageDirectoryASet,
+  PackageDirectoryASetTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectory/packageDirectoryASet';
 import {
-  buildPackageDirectoryNameSetConfiguration,
-  PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
+  buildPackageDirectoryASetConfiguration,
+  PackageDirectoryASetConfigurationTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectory/packageDirectoryASetConfiguration';
 import {
-  buildFileATuple,
+  buildFileA,
   FileATypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileA';
 import { TypeScriptSemanticsIdentifier as TestingPlatformSemanticsIds } from './datum-instance-type-script-configuration-definitions/testingPlatform/typeScriptSemanticsIdentifier';
 import {
-  buildTypeScriptFile,
-  TypeScriptFileTypeScriptConfiguration,
+  buildTypeScriptFileA,
+  TypeScriptFileATypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFileA';
 import { FileTypeScriptSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileTypeScriptSemanticsIdentifier';
 import { FileExtensionSuffixSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileExtensionSuffixSemanticsIdentifier';
@@ -65,19 +65,17 @@ const builderConfigurationCollection = [
   buildBuilderConfiguration<{
     InputCollection: [];
     OutputCollection: [
-      PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
+      PackageDirectoryASetConfigurationTypeScriptConfiguration,
     ];
   }>({
-    buildCollection: buildPackageDirectoryNameSetConfiguration,
+    buildCollection: buildPackageDirectoryASetConfiguration,
     inputPredicateLocatorTuple: [],
   }),
   buildBuilderConfiguration<{
-    InputCollection: [
-      PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
-    ];
-    OutputCollection: [PackageDirectoryNameSetTypeScriptConfiguration];
+    InputCollection: [PackageDirectoryASetConfigurationTypeScriptConfiguration];
+    OutputCollection: [PackageDirectoryASetTypeScriptConfiguration];
   }>({
-    buildCollection: buildPackageDirectoryNameSet,
+    buildCollection: buildPackageDirectoryASet,
     inputPredicateLocatorTuple: [
       {
         instanceIdentifier: 'package-directory-name-set-configuration',
@@ -92,7 +90,7 @@ const builderConfigurationCollection = [
     InputCollection: [];
     OutputCollection: [ActualCiYamlFileTypeScriptConfiguration];
   }>({
-    buildCollection: buildActualCiYamlFileContents,
+    buildCollection: buildActualCiYamlFile,
     inputPredicateLocatorTuple: [],
   }),
   buildBuilderConfiguration<{
@@ -110,7 +108,7 @@ const builderConfigurationCollection = [
     ];
     OutputCollection: [ExpectedCiYamlFileContentsTypeScriptConfiguration];
   }>({
-    buildCollection: buildExpectedCiYamlContents,
+    buildCollection: buildExpectedCiYamlFileContents,
     inputPredicateLocatorTuple: [
       {
         instanceIdentifier: 'expected-ci-yaml-file-contents-configuration',
@@ -127,7 +125,7 @@ const builderConfigurationCollection = [
     ];
     OutputCollection: [AssertableCiYamlFileTypeScriptConfiguration];
   }>({
-    buildCollection: buildAssertableCiYamlFileContentsConfiguration,
+    buildCollection: buildAssertableCiYamlFile,
     inputPredicateLocatorTuple: [
       {
         instanceIdentifier: 'actual-ci-yaml-file',
@@ -148,14 +146,14 @@ const builderConfigurationCollection = [
     InputCollection: [];
     OutputCollection: FileATypeScriptConfiguration[];
   }>({
-    buildCollection: buildFileATuple,
+    buildCollection: buildFileA,
     inputPredicateLocatorTuple: [],
   }),
   buildBuilderConfiguration<{
     InputCollection: [FileATypeScriptConfiguration];
-    OutputCollection: [TypeScriptFileTypeScriptConfiguration];
+    OutputCollection: [TypeScriptFileATypeScriptConfiguration];
   }>({
-    buildCollection: buildTypeScriptFile,
+    buildCollection: buildTypeScriptFileA,
     inputPredicateLocatorTuple: [
       {
         // TODO: rename "instanceIdentifier" to "instanceLocator"
@@ -165,7 +163,7 @@ const builderConfigurationCollection = [
     ],
   }),
   buildBuilderConfiguration<{
-    InputCollection: [TypeScriptFileTypeScriptConfiguration];
+    InputCollection: [TypeScriptFileATypeScriptConfiguration];
     OutputCollection: [TypeScriptFileBTypeScriptConfiguration];
   }>({
     buildCollection: buildTypeScriptFileB,
@@ -196,7 +194,7 @@ const builderConfigurationCollection = [
   }),
 
   buildBuilderConfiguration<{
-    InputCollection: [TypeScriptFileTypeScriptConfiguration];
+    InputCollection: [TypeScriptFileATypeScriptConfiguration];
     OutputCollection: [ExampleFileATypeScriptConfiguration] | [];
   }>({
     buildCollection: buildExampleFileA,

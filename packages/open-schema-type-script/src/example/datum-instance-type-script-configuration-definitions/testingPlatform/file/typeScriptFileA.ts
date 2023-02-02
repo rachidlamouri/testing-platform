@@ -30,17 +30,17 @@ export type TypeScriptFileA = File<{
 export type TypeScriptFileADatumInstanceIdentifier =
   `${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}:${UnknownCollectionLocatorPart}`;
 
-export type TypeScriptFileADatumInstancAlias =
+export type TypeScriptFileADatumInstanceAlias =
   `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`;
 
-export type TypeScriptFileTypeScriptConfiguration =
+export type TypeScriptFileATypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
     typeSemanticsIdentifiers: [
       FileTypeScriptSemanticsIdentifier.TypeScriptFileA,
     ];
     datumInstanceIdentifier: UnknownCollectionLocator;
     datumInstance: TypeScriptFileA;
-    datumInstanceAliases: [TypeScriptFileADatumInstancAlias];
+    datumInstanceAliases: [TypeScriptFileADatumInstanceAlias];
   }>;
 
 const getConfigFilePath = (filePath: string): string => {
@@ -65,9 +65,9 @@ const getConfigFilePath = (filePath: string): string => {
 };
 
 // TODO: this builder, as is, does not guarantee that the input FileA corresponds to a TypeScript file
-export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
+export const buildTypeScriptFileA: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [FileATypeScriptConfiguration];
-  OutputCollection: [TypeScriptFileTypeScriptConfiguration];
+  OutputCollection: [TypeScriptFileATypeScriptConfiguration];
 }> = (inputFileConfiguration) => {
   const { filePath } = inputFileConfiguration.datumInstance;
   const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -87,9 +87,9 @@ export const buildTypeScriptFile: DatumInstanceTypeScriptConfigurationCollection
     throw error;
   }
 
-  const alias: TypeScriptFileADatumInstancAlias = `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`;
+  const alias: TypeScriptFileADatumInstanceAlias = `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`;
 
-  const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileTypeScriptConfiguration> =
+  const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileATypeScriptConfiguration> =
     {
       instanceIdentifier: `${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}:${filePath}`,
       datumInstance: {

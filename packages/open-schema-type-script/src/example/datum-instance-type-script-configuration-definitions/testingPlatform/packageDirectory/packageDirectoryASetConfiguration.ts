@@ -11,17 +11,23 @@ export type PackageDirectoryASetConfiguration = {
   rootDirectoryRelativeToCurrentWorkingDirectory: string;
 };
 
-export type PackageDirectoryNameSetConfigurationTypeScriptConfiguration =
+export type PackageDirectoryASetConfigurationDatumInstanceIdentifier =
+  'package-directory-name-set-configuration';
+
+export type PackageDirectoryASetConfigurationTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
     typeSemanticsIdentifiers: [
       TypeScriptSemanticsIdentifier.PackageDirectoryNameSetConfiguration,
     ];
-    datumInstanceIdentifier: 'package-directory-name-set-configuration';
+    datumInstanceIdentifier: PackageDirectoryASetConfigurationDatumInstanceIdentifier;
     datumInstance: PackageDirectoryASetConfiguration;
     datumInstanceAliases: [];
   }>;
 
-export const PACKAGE_DIRECTORY_NAME_SET_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: PackageDirectoryNameSetConfigurationTypeScriptConfiguration =
+// TODO: make the file comment configurable to mark which types are not needed
+export type PackageDirectoryASetConfigurationDatumInstanceAlias = symbol;
+
+export const PACKAGE_DIRECTORY_NAME_SET_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION: PackageDirectoryASetConfigurationTypeScriptConfiguration =
   {
     typeSemanticsIdentifiers: [
       TypeScriptSemanticsIdentifier.PackageDirectoryNameSetConfiguration,
@@ -33,11 +39,9 @@ export const PACKAGE_DIRECTORY_NAME_SET_CONFIGURATION_TYPE_SCRIPT_CONFIGURATION:
     datumInstanceAliases: [],
   };
 
-export const buildPackageDirectoryNameSetConfiguration: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
+export const buildPackageDirectoryASetConfiguration: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [];
-  OutputCollection: [
-    PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
-  ];
+  OutputCollection: [PackageDirectoryASetConfigurationTypeScriptConfiguration];
 }> = () => {
   return [
     getDatumInstanceConfiguration(

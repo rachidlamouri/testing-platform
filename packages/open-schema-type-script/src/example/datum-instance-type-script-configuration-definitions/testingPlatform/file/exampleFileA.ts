@@ -12,7 +12,7 @@ import {
 import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../../type-script/datumInstanceTypeScriptConfigurationCollectionBuilder';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
 import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
-import { TypeScriptFileTypeScriptConfiguration } from './typeScriptFileA';
+import { TypeScriptFileATypeScriptConfiguration } from './typeScriptFileA';
 import { ExampleFile } from './exampleFile';
 
 export type ExampleFileA<TFileCommentText extends string = string> =
@@ -33,7 +33,7 @@ export type ExampleFileATypeScriptConfiguration =
   }>;
 
 export const buildExampleFileA: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
-  InputCollection: [TypeScriptFileTypeScriptConfiguration];
+  InputCollection: [TypeScriptFileATypeScriptConfiguration];
   OutputCollection: [] | [ExampleFileATypeScriptConfiguration];
 }> = (inputConfiguration) => {
   const typeScriptFileA = inputConfiguration.datumInstance;

@@ -25,3 +25,6 @@ export type ExampleFileBTypeScriptConfiguration =
     datumInstance: ExampleFileB;
     datumInstanceAliases: [ExampleFileBDatumInstanceAlias];
   }>;
+
+// TODO: make the file comment configurable to ignore this
+export const buildExampleFileB = (): void => {};

@@ -13,17 +13,22 @@ export type ActualCiYamlFile = {
   stringContents: string;
 };
 
+export type ActualCiYamlFileDatumInstanceIdentifier = 'actual-ci-yaml-file';
+
+// TODO: make the file comment configurable to ignore this
+export type ActualCiYamlFileDatumInstanceAlias = symbol;
+
 export type ActualCiYamlFileTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
     typeSemanticsIdentifiers: [
       TypeScriptSemanticsIdentifier.ActualCiYamlFileType,
     ];
-    datumInstanceIdentifier: 'actual-ci-yaml-file';
+    datumInstanceIdentifier: ActualCiYamlFileDatumInstanceIdentifier;
     datumInstance: ActualCiYamlFile;
     datumInstanceAliases: [];
   }>;
 
-export const buildActualCiYamlFileContents: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
+export const buildActualCiYamlFile: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [];
   OutputCollection: [ActualCiYamlFileTypeScriptConfiguration];
 }> = () => {
