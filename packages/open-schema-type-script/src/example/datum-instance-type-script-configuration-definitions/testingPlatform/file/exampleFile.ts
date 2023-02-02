@@ -1,3 +1,5 @@
+// Skip
+
 import { Merge } from '../../../../utilities/types/merge/merge';
 import { File } from './file';
 import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';

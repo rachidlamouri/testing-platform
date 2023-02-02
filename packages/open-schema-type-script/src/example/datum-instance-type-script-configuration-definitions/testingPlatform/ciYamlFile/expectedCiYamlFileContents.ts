@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import fs from 'fs';
 import { posix } from 'path';
 import {

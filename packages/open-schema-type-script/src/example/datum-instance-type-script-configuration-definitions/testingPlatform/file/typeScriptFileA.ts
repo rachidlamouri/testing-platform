@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import * as parser from '@typescript-eslint/typescript-estree';
 import type { TSESTree } from '@typescript-eslint/types';
 import fs from 'fs';

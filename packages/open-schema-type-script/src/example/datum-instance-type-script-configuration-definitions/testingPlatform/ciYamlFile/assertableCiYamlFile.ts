@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import yaml from 'yaml';
 import fs from 'fs';
 import {

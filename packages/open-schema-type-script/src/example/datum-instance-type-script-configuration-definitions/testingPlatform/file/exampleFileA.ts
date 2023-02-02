@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import {
   UnknownCollectionLocator,

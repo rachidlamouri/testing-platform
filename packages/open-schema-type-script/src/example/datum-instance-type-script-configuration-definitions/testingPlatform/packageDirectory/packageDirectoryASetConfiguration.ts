@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import {
   DatumInstanceTypeScriptConfiguration,
   getDatumInstanceConfiguration,

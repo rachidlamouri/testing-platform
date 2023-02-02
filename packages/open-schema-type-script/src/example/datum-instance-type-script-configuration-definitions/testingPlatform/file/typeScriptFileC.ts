@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 // TODO: map the named export declarations to a data structure that's easier to lint
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import {

@@ -1,3 +1,5 @@
+// Skip
+
 export type CiYamlFileContentsStep = Record<string, unknown>;
 
 export type CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${string}`;

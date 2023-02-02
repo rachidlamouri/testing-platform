@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import fs from 'fs';
 import {
   DatumInstanceTypeScriptConfiguration,
