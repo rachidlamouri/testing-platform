@@ -5,15 +5,15 @@ import { representationEngine } from '../core/representation-engine';
 import { validationEngine } from '../core/validation-engine';
 import {
   ActualCiYamlFileTypeScriptConfiguration,
-  buildActualCiYamlFileContents,
+  buildActualCiYamlFile,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/actualCiYamlFile';
 import {
   AssertableCiYamlFile,
   AssertableCiYamlFileTypeScriptConfiguration,
-  buildAssertableCiYamlFileContentsConfiguration,
+  buildAssertableCiYamlFile,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/assertableCiYamlFile';
 import {
-  buildExpectedCiYamlContents,
+  buildExpectedCiYamlFileContents,
   ExpectedCiYamlFileContentsTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/expectedCiYamlFileContents';
 import {
@@ -21,21 +21,21 @@ import {
   ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/ciYamlFile/expectedCiYamlFileContentsConfiguration';
 import {
-  buildPackageDirectoryNameSet,
-  PackageDirectoryNameSetTypeScriptConfiguration,
+  buildPackageDirectoryASet,
+  PackageDirectoryASetTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectory/packageDirectoryASet';
 import {
-  buildPackageDirectoryNameSetConfiguration,
-  PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
+  buildPackageDirectoryASetConfiguration,
+  PackageDirectoryASetConfigurationTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/packageDirectory/packageDirectoryASetConfiguration';
 import {
-  buildFileATuple,
+  buildFileA,
   FileATypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileA';
 import { TypeScriptSemanticsIdentifier as TestingPlatformSemanticsIds } from './datum-instance-type-script-configuration-definitions/testingPlatform/typeScriptSemanticsIdentifier';
 import {
-  buildTypeScriptFile,
-  TypeScriptFileTypeScriptConfiguration,
+  buildTypeScriptFileA,
+  TypeScriptFileATypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFileA';
 import { FileTypeScriptSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileTypeScriptSemanticsIdentifier';
 import { FileExtensionSuffixSemanticsIdentifier } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/fileExtensionSuffixSemanticsIdentifier';
@@ -48,24 +48,34 @@ import {
   TypeScriptFileC,
   TypeScriptFileCTypeScriptConfiguration,
 } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/typeScriptFileC';
+import {
+  buildExampleFileA,
+  ExampleFileA,
+  ExampleFileATypeScriptConfiguration,
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFileA';
+import { ExampleFileFileCommentText } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFile';
+import { ExampleFileBTypeScriptConfiguration } from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFileB';
+import {
+  buildExampleFileBDatumInstanceTypeScriptConfiguration,
+  ExampleFileBDatumInstanceTypeScriptConfiguration,
+  ExampleFileBDatumInstanceTypeScriptConfigurationTypeScriptConfiguration,
+} from './datum-instance-type-script-configuration-definitions/testingPlatform/file/exampleFileBDatumInstanceTypeScriptConfiguration';
 
 const builderConfigurationCollection = [
   buildBuilderConfiguration<{
     InputCollection: [];
     OutputCollection: [
-      PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
+      PackageDirectoryASetConfigurationTypeScriptConfiguration,
     ];
   }>({
-    buildCollection: buildPackageDirectoryNameSetConfiguration,
+    buildCollection: buildPackageDirectoryASetConfiguration,
     inputPredicateLocatorTuple: [],
   }),
   buildBuilderConfiguration<{
-    InputCollection: [
-      PackageDirectoryNameSetConfigurationTypeScriptConfiguration,
-    ];
-    OutputCollection: [PackageDirectoryNameSetTypeScriptConfiguration];
+    InputCollection: [PackageDirectoryASetConfigurationTypeScriptConfiguration];
+    OutputCollection: [PackageDirectoryASetTypeScriptConfiguration];
   }>({
-    buildCollection: buildPackageDirectoryNameSet,
+    buildCollection: buildPackageDirectoryASet,
     inputPredicateLocatorTuple: [
       {
         instanceIdentifier: 'package-directory-name-set-configuration',
@@ -80,7 +90,7 @@ const builderConfigurationCollection = [
     InputCollection: [];
     OutputCollection: [ActualCiYamlFileTypeScriptConfiguration];
   }>({
-    buildCollection: buildActualCiYamlFileContents,
+    buildCollection: buildActualCiYamlFile,
     inputPredicateLocatorTuple: [],
   }),
   buildBuilderConfiguration<{
@@ -98,7 +108,7 @@ const builderConfigurationCollection = [
     ];
     OutputCollection: [ExpectedCiYamlFileContentsTypeScriptConfiguration];
   }>({
-    buildCollection: buildExpectedCiYamlContents,
+    buildCollection: buildExpectedCiYamlFileContents,
     inputPredicateLocatorTuple: [
       {
         instanceIdentifier: 'expected-ci-yaml-file-contents-configuration',
@@ -115,7 +125,7 @@ const builderConfigurationCollection = [
     ];
     OutputCollection: [AssertableCiYamlFileTypeScriptConfiguration];
   }>({
-    buildCollection: buildAssertableCiYamlFileContentsConfiguration,
+    buildCollection: buildAssertableCiYamlFile,
     inputPredicateLocatorTuple: [
       {
         instanceIdentifier: 'actual-ci-yaml-file',
@@ -136,14 +146,14 @@ const builderConfigurationCollection = [
     InputCollection: [];
     OutputCollection: FileATypeScriptConfiguration[];
   }>({
-    buildCollection: buildFileATuple,
+    buildCollection: buildFileA,
     inputPredicateLocatorTuple: [],
   }),
   buildBuilderConfiguration<{
     InputCollection: [FileATypeScriptConfiguration];
-    OutputCollection: [TypeScriptFileTypeScriptConfiguration];
+    OutputCollection: [TypeScriptFileATypeScriptConfiguration];
   }>({
-    buildCollection: buildTypeScriptFile,
+    buildCollection: buildTypeScriptFileA,
     inputPredicateLocatorTuple: [
       {
         // TODO: rename "instanceIdentifier" to "instanceLocator"
@@ -153,7 +163,7 @@ const builderConfigurationCollection = [
     ],
   }),
   buildBuilderConfiguration<{
-    InputCollection: [TypeScriptFileTypeScriptConfiguration];
+    InputCollection: [TypeScriptFileATypeScriptConfiguration];
     OutputCollection: [TypeScriptFileBTypeScriptConfiguration];
   }>({
     buildCollection: buildTypeScriptFileB,
@@ -182,6 +192,39 @@ const builderConfigurationCollection = [
       },
     ],
   }),
+
+  buildBuilderConfiguration<{
+    InputCollection: [TypeScriptFileATypeScriptConfiguration];
+    OutputCollection: [ExampleFileATypeScriptConfiguration] | [];
+  }>({
+    buildCollection: buildExampleFileA,
+    inputPredicateLocatorTuple: [
+      {
+        // TODO: rename "instanceIdentifier" to "instanceLocator"
+        instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileA}`,
+        predicateIdentifiers: [
+          FileTypeScriptSemanticsIdentifier.TypeScriptFileA,
+        ],
+      },
+    ],
+  }),
+  buildBuilderConfiguration<{
+    InputCollection: [ExampleFileBTypeScriptConfiguration];
+    OutputCollection:
+      | []
+      | [
+          ExampleFileBDatumInstanceTypeScriptConfigurationTypeScriptConfiguration,
+        ];
+  }>({
+    buildCollection: buildExampleFileBDatumInstanceTypeScriptConfiguration,
+    inputPredicateLocatorTuple: [
+      {
+        // TODO: rename "instanceIdentifier" to "instanceLocator"
+        instanceIdentifier: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.ExampleFileA}`,
+        predicateIdentifiers: [FileTypeScriptSemanticsIdentifier.ExampleFileB],
+      },
+    ],
+  }),
 ] as const satisfies UnknownBuilderConfigurationTuple;
 
 const [task] = process.argv.slice(2);
@@ -197,6 +240,8 @@ if (task === 'r') {
       // console.log(JSON.stringify(configuration, null, 2));
       // console.log();
       // /* eslint-enable no-console */
+
+      return [];
     },
     onFinish: () => {
       // eslint-disable-next-line no-console
@@ -222,6 +267,7 @@ if (task === 'v') {
 
           return true;
         },
+        additionalPredicateIdentifiers: [],
       },
       {
         semanticsIdentifier:
@@ -260,6 +306,64 @@ if (task === 'v') {
 
           return hasNamedExport;
         },
+        additionalPredicateIdentifiers: [],
+      },
+      {
+        semanticsIdentifier: 'example-file-a-has-file-comment',
+        collectionLocator: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.ExampleFileA}`,
+        processDatum: (instance: unknown): boolean => {
+          const exampleFileA = instance as ExampleFileA;
+
+          const hasComment = Object.values<string>(
+            ExampleFileFileCommentText,
+          ).includes(exampleFileA.additionalMetadata.fileCommentText.trim());
+
+          return hasComment;
+        },
+        additionalPredicateIdentifiers: [
+          FileTypeScriptSemanticsIdentifier.ExampleFileB,
+        ],
+      },
+      {
+        semanticsIdentifier:
+          'type-script-configuration-definition-defines-types',
+        collectionLocator: `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.ExampleFileBDatumInstanceTypeScriptConfiguration}`,
+        processDatum: (instance: unknown): boolean => {
+          const exampleFile =
+            instance as ExampleFileBDatumInstanceTypeScriptConfiguration;
+
+          let hasAll = true;
+          Object.entries(
+            exampleFile.additionalMetadata.expectedTypeNames,
+          ).forEach(([key, { typeName, identifier }]) => {
+            const hasNext =
+              exampleFile.additionalMetadata.declarations.find(
+                (declaration) => {
+                  return (
+                    declaration.typeName === typeName &&
+                    declaration.identifier === identifier
+                  );
+                },
+              ) !== undefined;
+
+            if (!hasNext) {
+              /* eslint-disable no-console */
+              console.log('---');
+              console.log(
+                `Missing "${key}" ${
+                  typeName ?? 'MISSING'
+                } reference named "${identifier}" in ${exampleFile.filePath}`,
+              );
+              console.log('---');
+              /* eslint-enable no-console */
+            }
+
+            hasAll = hasAll && hasNext;
+          });
+
+          return hasAll;
+        },
+        additionalPredicateIdentifiers: [],
       },
     ],
   });

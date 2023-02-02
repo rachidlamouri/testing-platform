@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import {
   DatumInstanceTypeScriptConfiguration,
@@ -8,7 +10,7 @@ import { File } from './file';
 import { FileTypeScriptSemanticsIdentifier } from './fileTypeScriptSemanticsIdentifier';
 import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 import { UnknownString } from '../../../../utilities/types/unknownHelpers';
-import { TypeScriptFileTypeScriptConfiguration } from './typeScriptFileA';
+import { TypeScriptFileATypeScriptConfiguration } from './typeScriptFileA';
 
 export type TypeScriptFileB = File<{
   FileExtensionSuffixSemanticsIdentifier: FileExtensionSuffixSemanticsIdentifier.TypeScript;
@@ -22,10 +24,10 @@ export type TypeScriptFileB = File<{
 
 type UnknownFilePath = UnknownString;
 
-type TypeScriptFileBDatumInstanceIdentifier =
+export type TypeScriptFileBDatumInstanceIdentifier =
   `${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}:${UnknownFilePath}`;
 
-type TypeScriptFileADatumInstancAlias =
+export type TypeScriptFileBDatumInstanceAlias =
   `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`;
 
 export type TypeScriptFileBTypeScriptConfiguration =
@@ -35,14 +37,14 @@ export type TypeScriptFileBTypeScriptConfiguration =
     ];
     datumInstanceIdentifier: TypeScriptFileBDatumInstanceIdentifier;
     datumInstance: TypeScriptFileB;
-    datumInstanceAliases: [TypeScriptFileADatumInstancAlias];
+    datumInstanceAliases: [TypeScriptFileBDatumInstanceAlias];
   }>;
 
 export const buildTypeScriptFileB: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
-  InputCollection: [TypeScriptFileTypeScriptConfiguration];
+  InputCollection: [TypeScriptFileATypeScriptConfiguration];
   OutputCollection: [TypeScriptFileBTypeScriptConfiguration];
 }> = (inputConfiguration) => {
-  const alias: TypeScriptFileADatumInstancAlias = `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`;
+  const alias: TypeScriptFileBDatumInstanceAlias = `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileB}`;
 
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileBTypeScriptConfiguration> =
     {

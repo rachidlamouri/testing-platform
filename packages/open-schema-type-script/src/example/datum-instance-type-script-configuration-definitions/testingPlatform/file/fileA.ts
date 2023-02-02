@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import fs from 'fs';
 import { posix } from 'path';
 import { UnknownCollectionLocatorPart } from '../../../../core/collectionLocator';
@@ -181,7 +183,7 @@ const getFileStuff = (filePath: string): FileStuff => {
   } satisfies FileStuff;
 };
 
-export const buildFileATuple: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
+export const buildFileA: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [];
   OutputCollection: FileATypeScriptConfiguration[];
 }> = () => {

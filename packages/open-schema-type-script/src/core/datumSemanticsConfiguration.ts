@@ -1,4 +1,7 @@
-import { UnknownCollectionLocator } from './collectionLocator';
+import {
+  UnknownCollectionLocator,
+  UnknownCollectionLocatorTuple,
+} from './collectionLocator';
 import { UnknownDatumSemanticsProcessor } from './datumSemanticsProcessor';
 import { ConstrainObject } from '../utilities/types/constrainObject';
 
@@ -6,6 +9,7 @@ export type UnknownDatumSemanticsConfiguration = {
   semanticsIdentifier: UnknownCollectionLocator;
   collectionLocator: UnknownCollectionLocator;
   processDatum: UnknownDatumSemanticsProcessor;
+  additionalPredicateIdentifiers: UnknownCollectionLocatorTuple;
 };
 
 export type DatumSemanticsConfiguration<

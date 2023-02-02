@@ -1,3 +1,5 @@
+// Skip
+
 import { UnknownObject } from '../../../../utilities/types/unknownHelpers';
 import { FileExtensionSuffixSemanticsIdentifier } from './fileExtensionSuffixSemanticsIdentifier';
 

@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import fs from 'fs';
 import { posix } from 'path';
 import {
@@ -18,17 +20,23 @@ export type ExpectedCiYamlFileContents = CiYamlFileContents<
   [...CommentedSteps]
 >;
 
+export type ExpectedCiYamlFileContentsDatumInstanceIdentifier =
+  'expected-ci-yaml-file-contents';
+
+// TODO: make the comment file configurable so that we don't need this placeholder
+export type ExpectedCiYamlFileContentsDatumInstanceAlias = symbol;
+
 export type ExpectedCiYamlFileContentsTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
     typeSemanticsIdentifiers: [
       TypeScriptSemanticsIdentifier.ExpectedCiYamlFileContents,
     ];
-    datumInstanceIdentifier: 'expected-ci-yaml-file-contents';
+    datumInstanceIdentifier: ExpectedCiYamlFileContentsDatumInstanceIdentifier;
     datumInstance: ExpectedCiYamlFileContents;
     datumInstanceAliases: [];
   }>;
 
-export const buildExpectedCiYamlContents: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
+export const buildExpectedCiYamlFileContents: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [
     ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration,
   ];

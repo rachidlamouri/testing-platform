@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 // TODO: map the named export declarations to a data structure that's easier to lint
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import {
@@ -13,7 +15,7 @@ import { TypeScriptFileBTypeScriptConfiguration } from './typeScriptFileB';
 
 type ReferenceTypeName = 'code' | 'type' | 'hybrid';
 
-type EnhancedDeclaration = {
+export type EnhancedDeclaration = {
   typeName: ReferenceTypeName | null;
   identifier: string;
 };
@@ -27,10 +29,10 @@ export type TypeScriptFileC = File<{
 
 type UnknownFilePath = UnknownString;
 
-type TypeScriptFileCDatumInstanceIdentifier =
+export type TypeScriptFileCDatumInstanceIdentifier =
   `${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}:${UnknownFilePath}`;
 
-type TypeScriptFileCDatumInstancAlias =
+export type TypeScriptFileCDatumInstanceAlias =
   `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
 
 export type TypeScriptFileCTypeScriptConfiguration =
@@ -40,14 +42,14 @@ export type TypeScriptFileCTypeScriptConfiguration =
     ];
     datumInstanceIdentifier: TypeScriptFileCDatumInstanceIdentifier;
     datumInstance: TypeScriptFileC;
-    datumInstanceAliases: [TypeScriptFileCDatumInstancAlias];
+    datumInstanceAliases: [TypeScriptFileCDatumInstanceAlias];
   }>;
 
 export const buildTypeScriptFileC: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [TypeScriptFileBTypeScriptConfiguration];
   OutputCollection: [TypeScriptFileCTypeScriptConfiguration];
 }> = (inputConfiguration) => {
-  const alias: TypeScriptFileCDatumInstancAlias = `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
+  const alias: TypeScriptFileCDatumInstanceAlias = `${FileExtensionSuffixSemanticsIdentifier.TypeScript}:${FileTypeScriptSemanticsIdentifier.TypeScriptFileC}`;
 
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<TypeScriptFileCTypeScriptConfiguration> =
     {

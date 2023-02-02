@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import yaml from 'yaml';
 import fs from 'fs';
 import {
@@ -14,17 +16,23 @@ export type AssertableCiYamlFile = {
   expectedStringContents: string;
 };
 
+export type AssertableCiYamlFileDatumInstanceIdentifier =
+  'assertable-ci-yaml-file';
+
+// TODO: make the file comment configurable to ignore this
+export type AssertableCiYamlFileDatumInstanceAlias = symbol;
+
 export type AssertableCiYamlFileTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
     typeSemanticsIdentifiers: [
       TypeScriptSemanticsIdentifier.AssertableCiYamlFile,
     ];
-    datumInstanceIdentifier: 'assertable-ci-yaml-file';
+    datumInstanceIdentifier: AssertableCiYamlFileDatumInstanceIdentifier;
     datumInstance: AssertableCiYamlFile;
     datumInstanceAliases: [];
   }>;
 
-export const buildAssertableCiYamlFileContentsConfiguration: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
+export const buildAssertableCiYamlFile: DatumInstanceTypeScriptConfigurationCollectionBuilder<{
   InputCollection: [
     ActualCiYamlFileTypeScriptConfiguration,
     ExpectedCiYamlFileContentsTypeScriptConfiguration,

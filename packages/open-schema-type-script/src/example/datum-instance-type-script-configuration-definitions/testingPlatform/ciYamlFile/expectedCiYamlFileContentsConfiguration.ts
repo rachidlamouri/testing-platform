@@ -1,3 +1,5 @@
+// DatumInstanceTypeScriptConfiguration
+
 import {
   DatumInstanceTypeScriptConfiguration,
   getDatumInstanceConfiguration,
@@ -15,12 +17,18 @@ export type ExpectedCiYamlFileContentsConfiguration = CiYamlFileContents<{
   afterPackageRunSteps: CommentedSteps;
 }>;
 
+export type ExpectedCiYamlFileContentsConfigurationDatumInstanceIdentifier =
+  'expected-ci-yaml-file-contents-configuration';
+
+// TODO: configurable file comment yada yada
+export type ExpectedCiYamlFileContentsConfigurationDatumInstanceAlias = symbol;
+
 export type ExpectedCiYamlFileContentsConfigurationTypeScriptConfiguration =
   DatumInstanceTypeScriptConfiguration<{
     typeSemanticsIdentifiers: [
       TypeScriptSemanticsIdentifier.ExpectedCiYamlFileContentsConfiguration,
     ];
-    datumInstanceIdentifier: 'expected-ci-yaml-file-contents-configuration';
+    datumInstanceIdentifier: ExpectedCiYamlFileContentsConfigurationDatumInstanceIdentifier;
     datumInstance: ExpectedCiYamlFileContentsConfiguration;
     datumInstanceAliases: [];
   }>;
