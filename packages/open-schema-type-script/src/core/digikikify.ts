@@ -1,3 +1,4 @@
+import { logger } from '../utilities/logger';
 import { Estinant } from './estinant';
 import { Platomity } from './platomity';
 import { Quirm } from './quirm';
@@ -34,6 +35,10 @@ export const digikikify = ({
     };
   });
 
+  logger.logText('Tabilly (After Registering Estinants)');
+  logger.logJson(tabilly.debugData);
+  logger.feedLine();
+
   const initialQuirmAndGippPairs = initialQuirmTuple.flatMap((quirm) => {
     return quirm.gippTuple.map((gipp) => {
       return {
@@ -47,13 +52,38 @@ export const digikikify = ({
     tabilly.addQuirmByGipp(quirm, gipp);
   });
 
+  logger.logText('Tabilly (After Initial Quirms)');
+  logger.logJson(tabilly.debugData);
+  logger.feedLine();
+
   platomities.forEach((platomity) => {
     platomity.lanbe.advance();
+
+    logger.logText(
+      `Evaluating Gipp "${platomity.estinant.inputGipp}" for Trapoignant "${platomity.estinant.tropoignant.name}"`,
+    );
 
     const nextQuirm = platomity.lanbe.dereference();
     if (nextQuirm !== NULL_STRALINE) {
       const inputHubblepup = nextQuirm.hubblepup;
-      platomity.estinant.tropoignant(inputHubblepup);
+      const outputHubblepup = platomity.estinant.tropoignant(inputHubblepup);
+
+      logger.logText(
+        `  Input: ${logger.stringifyAsSingleLine(inputHubblepup)}`,
+      );
+      logger.logText(
+        `  Output: ${logger.stringifyAsSingleLine(outputHubblepup)}`,
+      );
+    } else {
+      logger.logText('  Input: NullStralin');
     }
+
+    logger.feedLine();
   });
+
+  logger.logText('Tabilly (On Finish)');
+  logger.logJson(tabilly.debugData);
+  logger.feedLine();
+
+  logger.logText('All done!');
 };

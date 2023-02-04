@@ -1,6 +1,11 @@
 import { Gipp } from './gipp';
 import { Quirm } from './quirm';
-import { Voictent } from './voictent';
+import { Voictent, VoictentDebugData } from './voictent';
+
+export type TabillyDebugData = {
+  gipp: Gipp;
+  voictent: VoictentDebugData<Quirm>;
+}[];
 
 /**
  * A cache of Voictents by Gipp.
@@ -30,5 +35,14 @@ export class Tabilly extends Map<Gipp, Voictent<Quirm>> {
     const voictent = this.getOrInstantiateAndGetVoictent(gipp);
     voictent.addStraline(quirm);
     this.set(gipp, voictent);
+  }
+
+  get debugData(): TabillyDebugData {
+    return [...this.entries()].map(([gipp, voictent]) => {
+      return {
+        gipp,
+        voictent: voictent.debugData,
+      };
+    });
   }
 }
