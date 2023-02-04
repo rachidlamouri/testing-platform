@@ -68,5 +68,10 @@ module.exports = {
         ],
       },
     },
+    {
+      files: './packages/open-schema-type-script/src/**/*.ts',
+      plugins: ['jsdoc'],
+      extends: ['plugin:jsdoc/recommended'],
+    },
   ],
 };
