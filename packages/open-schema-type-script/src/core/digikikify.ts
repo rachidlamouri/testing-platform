@@ -1,9 +1,18 @@
-import { logger } from '../utilities/logger';
 import { Estinant } from './estinant';
+import { Hubblepup } from './hubblepup';
 import { Platomity } from './platomity';
 import { Quirm } from './quirm';
 import { NULL_STRALINE } from './straline';
 import { Tabilly } from './tabilly';
+import {
+  EngineEventName,
+  OnEstinantResultEvent,
+  OnEstinantsRegisteredEvent,
+  OnFinishEvent,
+  OnInitialQuirmsCachedEvent,
+  OnTabillyInitializedEvent,
+  yek,
+} from './yek';
 
 export type DigikikifierInput = {
   initialQuirmTuple: Quirm[];
@@ -23,6 +32,12 @@ export const digikikify = ({
 }: DigikikifierInput): void => {
   const tabilly = new Tabilly();
 
+  yek.emitEvent<OnTabillyInitializedEvent>({
+    eventName: EngineEventName.OnTabillyInitialized,
+    tabilly: tabilly.debugData,
+    data: {},
+  });
+
   const platomities = estinantTuple.map<Platomity>((estinant) => {
     const voictent = tabilly.getOrInstantiateAndGetVoictent(estinant.inputGipp);
 
@@ -35,9 +50,11 @@ export const digikikify = ({
     };
   });
 
-  logger.logText('Tabilly (After Registering Estinants)');
-  logger.logJson(tabilly.debugData);
-  logger.feedLine();
+  yek.emitEvent<OnEstinantsRegisteredEvent>({
+    eventName: EngineEventName.OnEstinantsRegistered,
+    tabilly: tabilly.debugData,
+    data: {},
+  });
 
   const initialQuirmAndGippPairs = initialQuirmTuple.flatMap((quirm) => {
     return quirm.gippTuple.map((gipp) => {
@@ -52,38 +69,42 @@ export const digikikify = ({
     tabilly.addQuirmByGipp(quirm, gipp);
   });
 
-  logger.logText('Tabilly (After Initial Quirms)');
-  logger.logJson(tabilly.debugData);
-  logger.feedLine();
+  yek.emitEvent<OnInitialQuirmsCachedEvent>({
+    eventName: EngineEventName.OnInitialQuirmsCached,
+    tabilly: tabilly.debugData,
+    data: {},
+  });
 
   platomities.forEach((platomity) => {
     platomity.lanbe.advance();
 
-    logger.logText(
-      `Evaluating Gipp "${platomity.estinant.inputGipp}" for Trapoignant "${platomity.estinant.tropoignant.name}"`,
-    );
+    const inputHubblepups: Hubblepup[] = [];
+    const outputHubblepups: Hubblepup[] = [];
 
     const nextQuirm = platomity.lanbe.dereference();
     if (nextQuirm !== NULL_STRALINE) {
       const inputHubblepup = nextQuirm.hubblepup;
       const outputHubblepup = platomity.estinant.tropoignant(inputHubblepup);
 
-      logger.logText(
-        `  Input: ${logger.stringifyAsSingleLine(inputHubblepup)}`,
-      );
-      logger.logText(
-        `  Output: ${logger.stringifyAsSingleLine(outputHubblepup)}`,
-      );
-    } else {
-      logger.logText('  Input: NullStralin');
+      inputHubblepups.push(inputHubblepup);
+      outputHubblepups.push(outputHubblepup);
     }
 
-    logger.feedLine();
+    yek.emitEvent<OnEstinantResultEvent>({
+      eventName: EngineEventName.OnEstinantResult,
+      data: {
+        tropoignantName: platomity.estinant.tropoignant.name,
+        inputGipp: platomity.estinant.inputGipp,
+        inputs: inputHubblepups,
+        outputs: outputHubblepups,
+      },
+      tabilly: tabilly.debugData,
+    });
   });
 
-  logger.logText('Tabilly (On Finish)');
-  logger.logJson(tabilly.debugData);
-  logger.feedLine();
-
-  logger.logText('All done!');
+  yek.emitEvent<OnFinishEvent>({
+    eventName: EngineEventName.OnFinish,
+    tabilly: tabilly.debugData,
+    data: {},
+  });
 };
