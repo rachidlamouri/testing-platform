@@ -4,7 +4,7 @@
   "description": "Testing frameworks on testing frameworks",
   "private": true,
   "scripts": {
-    "open-schema-example": "ts-node packages/open-schema-type-script/src/example/index.ts",
+    "open-schema-example": "ts-node packages/open-schema-type-script/src/v1/example/index.ts",
     "describe:repository": "npm run open-schema-example -- r",
     "lint:repository": "npm run open-schema-example -- v",
     "lint:ts:all": "npm run --silent lint:ts .",
