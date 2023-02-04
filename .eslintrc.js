@@ -74,6 +74,8 @@ module.exports = {
       extends: ['plugin:jsdoc/recommended'],
       rules: {
         'jsdoc/check-indentation': 'warn',
+        'jsdoc/require-param-type': 'off',
+        'jsdoc/require-returns-type': 'off',
       },
     },
   ],
