@@ -9,7 +9,7 @@ export type TabillyDebugData = {
 
 /**
  * A cache of Voictents by Gipp.
- * The engine uses this to connect Trapoignant's to their input Voictents,
+ * The engine uses this to connect Tropoignant's to their input Voictents,
  * and to add Quirms to their corresponding Voictents.
  */
 export class Tabilly extends Map<Gipp, Voictent<Quirm>> {

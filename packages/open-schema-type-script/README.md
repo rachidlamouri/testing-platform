@@ -46,13 +46,13 @@ TODO: Generate these digrams from the code base
 
 ### Abstract Programmer Concerns
 
-A Programmer wants to process some data (Hubblepups), and they want to define how that data is processed (Trapoignants).
-Therefore they can define a stream of Hubblepups and a Trapoignant to proccess that stream.
+A Programmer wants to process some data (Hubblepups), and they want to define how that data is processed (Tropoignants).
+Therefore they can define a stream of Hubblepups and a Tropoignant to proccess that stream.
 
 ```mermaid
 flowchart LR
 S1(Input Hubblepup Stream)
-S2(Trapoignant)
+S2(Tropoignant)
 S3(Output Hubblepup Stream)
 
 S1 --> S2
@@ -61,7 +61,7 @@ S2 --> S3
 
 ### Abstract Programmable Units
 
-The Programmer programs the Engine by defining Quirms (wrappers on Hubblepups), and Estinants (wrappers on Trapoignants)
+The Programmer programs the Engine by defining Quirms (wrappers on Hubblepups), and Estinants (wrappers on Tropoignants)
 
 ```mermaid
 flowchart LR
@@ -94,9 +94,9 @@ S2 --> S3
 
 - A Gipp allows the Engine to find a Voictent for various needs
   - A Quirm contains multiple Gipps and a Hubblepup
-  - An Estinant contains a Gipp and a Trapoignant
+  - An Estinant contains a Gipp and a Tropoignant
 - Quirms allow the Engine to add a Hubblepup to multiple Voictents based on the Quirm's Gipps
-- Estinants allow the Engine to feed a Voictent into a Trapoignant based on the Estinant's Gipp
+- Estinants allow the Engine to feed a Voictent into a Tropoignant based on the Estinant's Gipp
 
 #### Lanbes
 
@@ -106,7 +106,7 @@ S2 --> S3
 #### Platomities
 
 - The Engine uses Platomities (collections of Estinants and Lanbes) to feed Quirms into Estinants, and subsequently,
-  Hubblepups into Trapoignants
+  Hubblepups into Tropoignants
 - The Engine uses the Platomity's Lanbe to keep track of which Quirm to process next
 - The Engine is done processing a Platomity when the Lanbe reaches the end of the stream
   - **Note**: This behavior is subject to change as I iterate on the Engine
@@ -128,7 +128,7 @@ state E {
   state MainLoop <<fork>>
   state "Advance Platomity Lanbes" as L1
   state "Filter out Platomities <br> with Null Lanbe Pointers" as L2
-  state "Evaluate Platomity Trapoignants <br> with Dereferenced <br> Lanbe Pointer Values" as L3
+  state "Evaluate Platomity Tropoignants <br> with Dereferenced <br> Lanbe Pointer Values" as L3
   state While <<choice>>
 
   [*] --> E1
@@ -165,7 +165,7 @@ sequenceDiagram
   end
 
   T ->> E: Voictent
-  E ->> V: createPointer(estinant.trapoignant.name)
+  E ->> V: createPointer(estinant.tropoignant.name)
   V ->> E: Lanbe
   E ->> E: Create a Platomity <br> from the Estinant and Lanbe
 ```
