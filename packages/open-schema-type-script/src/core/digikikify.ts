@@ -41,7 +41,7 @@ export const digikikify = ({
     const voictent = tabilly.getOrInstantiateAndGetVoictent(estinant.inputGipp);
 
     // TODO: consider using an estinant identifier instead of the tropoignant name
-    const lanbe = voictent.addPointer(estinant.tropoignant.name);
+    const lanbe = voictent.createPointer(estinant.tropoignant.name);
 
     return {
       estinant,

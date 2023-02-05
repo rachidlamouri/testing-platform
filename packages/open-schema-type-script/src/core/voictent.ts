@@ -15,7 +15,7 @@ export type VoictentDebugData<TStraline> = {
  * A stream-like data structure for managing pointers to Stralines.
  * It encapsulates pointer indices that can range from -1 to the length of the Straline "stream" (inclusive).
  * A pointer that is out of bounds of the "stream" will dereference to the NULL_STRALINE.
- * It is primarily used by the engine to connect Quirms to Tropoignants, but it is decoupled from those specific data types.
+ * It is primarily used by the Engine to connect Quirms to Estinants, but it is decoupled from those specific data types.
  */
 export class Voictent<TStraline> {
   stralineArray: TStraline[] = [];
@@ -32,7 +32,7 @@ export class Voictent<TStraline> {
     this.stralineArray.push(straline);
   }
 
-  addPointer(debugText: string): Lanbe<TStraline> {
+  createPointer(debugText: string): Lanbe<TStraline> {
     const pointer = Symbol(debugText);
 
     this.indicesByPointer[pointer] = Voictent.minimumInclusiveIndex;

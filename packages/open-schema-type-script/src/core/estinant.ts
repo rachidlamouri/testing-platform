@@ -2,7 +2,8 @@ import { Gipp } from './gipp';
 import { Tropoignant } from './tropoignant';
 
 /**
- * The thing that allows the engine to connect a Tropoignant to a Voictent
+ * One of the two programmable units of the Engine (see Quirm).
+ * It allows the Progammer to register a Trapoignant to a Voictent via a Gipp.
  */
 export type Estinant = {
   tropoignant: Tropoignant;

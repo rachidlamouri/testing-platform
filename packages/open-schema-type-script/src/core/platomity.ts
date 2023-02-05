@@ -3,7 +3,8 @@ import { Lanbe } from './lanbe';
 import { Quirm } from './quirm';
 
 /**
- * A thing that the engine uses to stream Hubblepups (via a Voictent of Quirms) into a Tropoignant (via an Estinant)
+ * The primary thing that the engine operates on in the main loop.
+ * The Lanbe allows the Engine to resolve Quirms, and subsequently Hubblepups, to be sent to the Trapoignant that is saved to the Estinant.
  */
 export type Platomity = {
   estinant: Estinant;

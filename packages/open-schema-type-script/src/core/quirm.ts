@@ -2,7 +2,10 @@ import { Gipp } from './gipp';
 import { Hubblepup } from './hubblepup';
 
 /**
- * The thing that the engine operates on. It wraps a Hubblepup.
+ * One of the two programmable units of the Engine (see Estinant). It allows the Programmer to register
+ * a Hubblepup to zero or more Voictents via Gipps.
+ *
+ * Note: I currently don't have a use case for defining zero Gipps, but that's irrelevent to the Engine
  */
 export type Quirm = {
   gippTuple: Gipp[];
