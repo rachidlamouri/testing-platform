@@ -1,5 +1,4 @@
 import { Estinant } from './estinant';
-import { Hubblepup } from './hubblepup';
 import { Platomity } from './platomity';
 import { Quirm } from './quirm';
 import { NULL_STRALINE } from './straline';
@@ -75,32 +74,34 @@ export const digikikify = ({
     data: {},
   });
 
-  platomities.forEach((platomity) => {
-    platomity.lanbe.advance();
+  let nextPlatomities = platomities.slice();
 
-    const inputHubblepups: Hubblepup[] = [];
-    const outputHubblepups: Hubblepup[] = [];
+  do {
+    nextPlatomities.forEach((platomity) => {
+      platomity.lanbe.advance();
+    });
 
-    const nextQuirm = platomity.lanbe.dereference();
-    if (nextQuirm !== NULL_STRALINE) {
+    nextPlatomities = nextPlatomities.filter((platomity) => {
+      return platomity.lanbe.dereference() !== NULL_STRALINE;
+    });
+
+    nextPlatomities.forEach((platomity) => {
+      const nextQuirm = platomity.lanbe.dereference() as Quirm;
       const inputHubblepup = nextQuirm.hubblepup;
       const outputHubblepup = platomity.estinant.tropoignant(inputHubblepup);
 
-      inputHubblepups.push(inputHubblepup);
-      outputHubblepups.push(outputHubblepup);
-    }
-
-    yek.emitEvent<OnEstinantResultEvent>({
-      eventName: EngineEventName.OnEstinantResult,
-      data: {
-        tropoignantName: platomity.estinant.tropoignant.name,
-        inputGipp: platomity.estinant.inputGipp,
-        inputs: inputHubblepups,
-        outputs: outputHubblepups,
-      },
-      tabilly: tabilly.debugData,
+      yek.emitEvent<OnEstinantResultEvent>({
+        eventName: EngineEventName.OnEstinantResult,
+        data: {
+          tropoignantName: platomity.estinant.tropoignant.name,
+          inputGipp: platomity.estinant.inputGipp,
+          inputs: [inputHubblepup],
+          outputs: [outputHubblepup],
+        },
+        tabilly: tabilly.debugData,
+      });
     });
-  });
+  } while (nextPlatomities.length > 0);
 
   yek.emitEvent<OnFinishEvent>({
     eventName: EngineEventName.OnFinish,
