@@ -1,6 +1,6 @@
-import { Estinant } from './estinant';
+import { EstinantTuple } from './estinant';
 import { Platomity } from './platomity';
-import { Quirm } from './quirm';
+import { Quirm, QuirmTuple } from './quirm';
 import { NULL_STRALINE } from './straline';
 import { Tabilly } from './tabilly';
 import {
@@ -14,8 +14,8 @@ import {
 } from './yek';
 
 export type DigikikifierInput = {
-  initialQuirmTuple: Quirm[];
-  estinantTuple: Estinant[];
+  initialQuirmTuple: QuirmTuple;
+  estinantTuple: EstinantTuple;
 };
 
 /**
