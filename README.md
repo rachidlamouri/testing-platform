@@ -6,9 +6,7 @@ Testing frameworks on testing frameworks.
 
 ## Open Schema Implementation Demo
 
-```bash
-npm run lint:repository && code debug
-```
+See the [Open Schema TypeScript package README](./packages/open-schema-type-script/README.md)
 
 ## Description
 
