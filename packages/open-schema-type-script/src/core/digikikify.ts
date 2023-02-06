@@ -88,7 +88,7 @@ export const digikikify = ({
     nextPlatomities.forEach((platomity) => {
       const nextQuirm = platomity.lanbe.dereference() as Quirm;
       const inputHubblepup = nextQuirm.hubblepup;
-      const outputHubblepup = platomity.estinant.tropoignant(inputHubblepup);
+      const outputQuirmTuple = platomity.estinant.tropoignant(inputHubblepup);
 
       yek.emitEvent<OnEstinantResultEvent>({
         eventName: EngineEventName.OnEstinantResult,
@@ -96,7 +96,7 @@ export const digikikify = ({
           tropoignantName: platomity.estinant.tropoignant.name,
           inputGipp: platomity.estinant.inputGipp,
           inputs: [inputHubblepup],
-          outputs: [outputHubblepup],
+          outputs: outputQuirmTuple,
         },
         tabilly: tabilly.debugData,
       });

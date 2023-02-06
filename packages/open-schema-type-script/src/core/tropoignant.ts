@@ -1,17 +1,18 @@
 import { Hubblepup } from './hubblepup';
+import { QuirmTuple } from './quirm';
 
 /**
  * A Tropoignant that creates an output Hubblepup for every input Hubblepup
  */
 export type Onama<
   TInputHubblepup extends Hubblepup = Hubblepup,
-  TOutputHubblepup extends Hubblepup = Hubblepup,
-> = (input: TInputHubblepup) => TOutputHubblepup;
+  TOutputQuirmTuple extends QuirmTuple = QuirmTuple,
+> = (input: TInputHubblepup) => TOutputQuirmTuple;
 
 /**
  * The thing that a programmer creates to process a Hubblepup. The engine manages them at runtime.
  */
 export type Tropoignant<
   TInputHubblepup extends Hubblepup = Hubblepup,
-  TOutputHubblepup extends Hubblepup = Hubblepup,
-> = Onama<TInputHubblepup, TOutputHubblepup>;
+  TOutputQuirmTuple extends QuirmTuple = QuirmTuple,
+> = Onama<TInputHubblepup, TOutputQuirmTuple>;

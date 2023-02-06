@@ -1,5 +1,6 @@
 import { Gipp } from './gipp';
 import { Hubblepup } from './hubblepup';
+import { QuirmTuple } from './quirm';
 import { Tropoignant } from './tropoignant';
 
 /**
@@ -8,13 +9,13 @@ import { Tropoignant } from './tropoignant';
  */
 export type Estinant<
   TInputHubblepup extends Hubblepup = Hubblepup,
-  TOutputHubblepup extends Hubblepup = Hubblepup,
+  TOutputQuirmTuple extends QuirmTuple = QuirmTuple,
 > = {
-  tropoignant: Tropoignant<TInputHubblepup, TOutputHubblepup>;
+  tropoignant: Tropoignant<TInputHubblepup, TOutputQuirmTuple>;
   inputGipp: Gipp;
 };
 
 export type EstinantTuple<
   TInputHubblepup extends Hubblepup = Hubblepup,
-  TOutputHubblepup extends Hubblepup = Hubblepup,
-> = readonly Estinant<TInputHubblepup, TOutputHubblepup>[];
+  TOutputQuirmTuple extends QuirmTuple = QuirmTuple,
+> = readonly Estinant<TInputHubblepup, TOutputQuirmTuple>[];

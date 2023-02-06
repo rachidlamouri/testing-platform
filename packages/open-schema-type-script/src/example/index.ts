@@ -1,7 +1,7 @@
 import { digikikify } from '../core/digikikify';
 import { Estinant } from '../core/estinant';
 import { Gipp } from '../core/gipp';
-import { Quirm } from '../core/quirm';
+import { Quirm, QuirmTuple } from '../core/quirm';
 import { JsonString } from '../utilities/json';
 import { blindCastEstinants } from './blindCastEstinants';
 
@@ -19,16 +19,26 @@ const myQuirm2: Quirm<JsonString> = {
   hubblepup: 'someone else',
 };
 
-const myEstinant1: Estinant<JsonString, JsonString> = {
+const myEstinant1: Estinant<JsonString, QuirmTuple<JsonString>> = {
   tropoignant: function sayHello(input) {
-    return `Hello ${input}`;
+    return [
+      {
+        gippTuple: ['hello'],
+        hubblepup: `Hello ${input}`,
+      },
+    ];
   },
   inputGipp: myGipp1,
 };
 
-const myEstinant2: Estinant<JsonString, JsonString> = {
+const myEstinant2: Estinant<JsonString, QuirmTuple<JsonString>> = {
   tropoignant: function sayGoodbye(input) {
-    return `Goodbye ${input}`;
+    return [
+      {
+        gippTuple: ['goodbye'],
+        hubblepup: `Goodbye ${input}`,
+      },
+    ];
   },
   inputGipp: myGipp3,
 };
