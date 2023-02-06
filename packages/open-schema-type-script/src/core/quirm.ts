@@ -7,7 +7,10 @@ import { Hubblepup } from './hubblepup';
  *
  * Note: I currently don't have a use case for defining zero Gipps, but that's irrelevent to the Engine
  */
-export type Quirm = {
+export type Quirm<THubblepup extends Hubblepup = Hubblepup> = {
   gippTuple: Gipp[];
-  hubblepup: Hubblepup;
+  hubblepup: THubblepup;
 };
+
+export type QuirmTuple<THubblepup extends Hubblepup = Hubblepup> =
+  readonly Quirm<THubblepup>[];

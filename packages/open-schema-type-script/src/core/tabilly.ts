@@ -1,5 +1,5 @@
 import { Gipp } from './gipp';
-import { Quirm } from './quirm';
+import { Quirm, QuirmTuple } from './quirm';
 import { Voictent, VoictentDebugData } from './voictent';
 
 export type TabillyDebugData = {
@@ -9,7 +9,7 @@ export type TabillyDebugData = {
 
 /**
  * A cache of Voictents by Gipp.
- * The engine uses this to connect Trapoignant's to their input Voictents,
+ * The engine uses this to connect Tropoignant's to their input Voictents,
  * and to add Quirms to their corresponding Voictents.
  */
 export class Tabilly extends Map<Gipp, Voictent<Quirm>> {
@@ -31,7 +31,22 @@ export class Tabilly extends Map<Gipp, Voictent<Quirm>> {
     return voictent;
   }
 
-  addQuirmByGipp(quirm: Quirm, gipp: Gipp): void {
+  addQuirmsToVoictents(quirmTuple: QuirmTuple): void {
+    const quirmAndGippPairs = quirmTuple.flatMap((quirm) => {
+      return quirm.gippTuple.map((gipp) => {
+        return {
+          quirm,
+          gipp,
+        };
+      });
+    });
+
+    quirmAndGippPairs.forEach(({ quirm, gipp }) => {
+      this.addQuirmByGipp(quirm, gipp);
+    });
+  }
+
+  private addQuirmByGipp(quirm: Quirm, gipp: Gipp): void {
     const voictent = this.getOrInstantiateAndGetVoictent(gipp);
     voictent.addStraline(quirm);
     this.set(gipp, voictent);

@@ -4,6 +4,7 @@ import { JsonObject, JsonString } from '../utilities/json';
 import { logger } from '../utilities/logger';
 import { Gipp } from './gipp';
 import { Hubblepup } from './hubblepup';
+import { QuirmTuple } from './quirm';
 import { TabillyDebugData } from './tabilly';
 
 export enum EngineEventName {
@@ -38,7 +39,7 @@ export type OnEstinantResultEvent = Event<
     tropoignantName: JsonString;
     inputGipp: Gipp;
     inputs: Hubblepup[];
-    outputs: Hubblepup[];
+    outputs: QuirmTuple;
   }
 >;
 

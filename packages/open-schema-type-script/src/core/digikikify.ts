@@ -1,6 +1,6 @@
-import { Estinant } from './estinant';
+import { EstinantTuple } from './estinant';
 import { Platomity } from './platomity';
-import { Quirm } from './quirm';
+import { Quirm, QuirmTuple } from './quirm';
 import { NULL_STRALINE } from './straline';
 import { Tabilly } from './tabilly';
 import {
@@ -14,8 +14,8 @@ import {
 } from './yek';
 
 export type DigikikifierInput = {
-  initialQuirmTuple: Quirm[];
-  estinantTuple: Estinant[];
+  initialQuirmTuple: QuirmTuple;
+  estinantTuple: EstinantTuple;
 };
 
 /**
@@ -55,18 +55,7 @@ export const digikikify = ({
     data: {},
   });
 
-  const initialQuirmAndGippPairs = initialQuirmTuple.flatMap((quirm) => {
-    return quirm.gippTuple.map((gipp) => {
-      return {
-        quirm,
-        gipp,
-      };
-    });
-  });
-
-  initialQuirmAndGippPairs.forEach(({ quirm, gipp }) => {
-    tabilly.addQuirmByGipp(quirm, gipp);
-  });
+  tabilly.addQuirmsToVoictents(initialQuirmTuple);
 
   yek.emitEvent<OnInitialQuirmsCachedEvent>({
     eventName: EngineEventName.OnInitialQuirmsCached,
@@ -88,7 +77,9 @@ export const digikikify = ({
     nextPlatomities.forEach((platomity) => {
       const nextQuirm = platomity.lanbe.dereference() as Quirm;
       const inputHubblepup = nextQuirm.hubblepup;
-      const outputHubblepup = platomity.estinant.tropoignant(inputHubblepup);
+      const outputQuirmTuple = platomity.estinant.tropoignant(inputHubblepup);
+
+      tabilly.addQuirmsToVoictents(outputQuirmTuple);
 
       yek.emitEvent<OnEstinantResultEvent>({
         eventName: EngineEventName.OnEstinantResult,
@@ -96,7 +87,7 @@ export const digikikify = ({
           tropoignantName: platomity.estinant.tropoignant.name,
           inputGipp: platomity.estinant.inputGipp,
           inputs: [inputHubblepup],
-          outputs: [outputHubblepup],
+          outputs: outputQuirmTuple,
         },
         tabilly: tabilly.debugData,
       });

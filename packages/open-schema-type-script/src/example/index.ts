@@ -1,37 +1,53 @@
 import { digikikify } from '../core/digikikify';
 import { Estinant } from '../core/estinant';
 import { Gipp } from '../core/gipp';
-import { Quirm } from '../core/quirm';
+import { Quirm, QuirmTuple } from '../core/quirm';
+import { JsonString } from '../utilities/json';
+import { blindCastEstinants } from './blindCastEstinants';
+import { fileAEstinant } from './file/fileA';
+import { SIMPLE_FILE_A_CONFIGURATION_QUIRM } from './file/fileAConfiguration';
 
-const myGipp1: Gipp = 'foo';
-const myGipp2: Gipp = 'bar';
-const myGipp3: Gipp = 'baz';
+const myGippA: Gipp = 'example-1';
+const myGippB: Gipp = 'example-2';
+const myGippC: Gipp = 'example-3';
+const myGippHello: Gipp = 'example-hello';
+const myGippGoodbye: Gipp = 'example-goodbye';
 
-const myQuirm1: Quirm = {
-  gippTuple: [myGipp1, myGipp2],
+const myQuirm1: Quirm<JsonString> = {
+  gippTuple: [myGippA, myGippB],
   hubblepup: 'myself!',
 };
 
-const myQuirm2: Quirm = {
-  gippTuple: [myGipp1, myGipp3],
+const myQuirm2: Quirm<JsonString> = {
+  gippTuple: [myGippA, myGippC],
   hubblepup: 'someone else',
 };
 
-const myEstinant1: Estinant = {
+const myEstinant1: Estinant<JsonString, QuirmTuple<JsonString>> = {
+  inputGipp: myGippA,
   tropoignant: function sayHello(input) {
-    return `Hello ${input as string}`;
+    return [
+      {
+        gippTuple: [myGippHello],
+        hubblepup: `Hello ${input}`,
+      },
+    ];
   },
-  inputGipp: myGipp1,
 };
 
-const myEstinant2: Estinant = {
+const myEstinant2: Estinant<JsonString, QuirmTuple<JsonString>> = {
+  inputGipp: myGippC,
   tropoignant: function sayGoodbye(input) {
-    return `Goodbye ${input as string}`;
+    return [
+      {
+        gippTuple: [myGippGoodbye],
+        hubblepup: `Goodbye ${input}`,
+      },
+    ];
   },
-  inputGipp: myGipp3,
 };
 
 digikikify({
-  initialQuirmTuple: [myQuirm1, myQuirm2],
-  estinantTuple: [myEstinant1, myEstinant2],
+  initialQuirmTuple: [myQuirm1, myQuirm2, SIMPLE_FILE_A_CONFIGURATION_QUIRM],
+  estinantTuple: blindCastEstinants([myEstinant1, myEstinant2, fileAEstinant]),
 });
