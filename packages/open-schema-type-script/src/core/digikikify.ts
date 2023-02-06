@@ -55,18 +55,7 @@ export const digikikify = ({
     data: {},
   });
 
-  const initialQuirmAndGippPairs = initialQuirmTuple.flatMap((quirm) => {
-    return quirm.gippTuple.map((gipp) => {
-      return {
-        quirm,
-        gipp,
-      };
-    });
-  });
-
-  initialQuirmAndGippPairs.forEach(({ quirm, gipp }) => {
-    tabilly.addQuirmByGipp(quirm, gipp);
-  });
+  tabilly.addQuirmsToVoictents(initialQuirmTuple);
 
   yek.emitEvent<OnInitialQuirmsCachedEvent>({
     eventName: EngineEventName.OnInitialQuirmsCached,
@@ -89,6 +78,8 @@ export const digikikify = ({
       const nextQuirm = platomity.lanbe.dereference() as Quirm;
       const inputHubblepup = nextQuirm.hubblepup;
       const outputQuirmTuple = platomity.estinant.tropoignant(inputHubblepup);
+
+      tabilly.addQuirmsToVoictents(outputQuirmTuple);
 
       yek.emitEvent<OnEstinantResultEvent>({
         eventName: EngineEventName.OnEstinantResult,

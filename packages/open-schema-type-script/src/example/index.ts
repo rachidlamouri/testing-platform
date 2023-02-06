@@ -5,42 +5,44 @@ import { Quirm, QuirmTuple } from '../core/quirm';
 import { JsonString } from '../utilities/json';
 import { blindCastEstinants } from './blindCastEstinants';
 
-const myGipp1: Gipp = 'foo';
-const myGipp2: Gipp = 'bar';
-const myGipp3: Gipp = 'baz';
+const myGippA: Gipp = 'example-1';
+const myGippB: Gipp = 'example-2';
+const myGippC: Gipp = 'example-3';
+const myGippHello: Gipp = 'example-hello';
+const myGippGoodbye: Gipp = 'example-goodbye';
 
 const myQuirm1: Quirm<JsonString> = {
-  gippTuple: [myGipp1, myGipp2],
+  gippTuple: [myGippA, myGippB],
   hubblepup: 'myself!',
 };
 
 const myQuirm2: Quirm<JsonString> = {
-  gippTuple: [myGipp1, myGipp3],
+  gippTuple: [myGippA, myGippC],
   hubblepup: 'someone else',
 };
 
 const myEstinant1: Estinant<JsonString, QuirmTuple<JsonString>> = {
+  inputGipp: myGippA,
   tropoignant: function sayHello(input) {
     return [
       {
-        gippTuple: ['hello'],
+        gippTuple: [myGippHello],
         hubblepup: `Hello ${input}`,
       },
     ];
   },
-  inputGipp: myGipp1,
 };
 
 const myEstinant2: Estinant<JsonString, QuirmTuple<JsonString>> = {
+  inputGipp: myGippC,
   tropoignant: function sayGoodbye(input) {
     return [
       {
-        gippTuple: ['goodbye'],
+        gippTuple: [myGippGoodbye],
         hubblepup: `Goodbye ${input}`,
       },
     ];
   },
-  inputGipp: myGipp3,
 };
 
 digikikify({
