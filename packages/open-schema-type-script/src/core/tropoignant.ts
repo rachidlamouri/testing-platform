@@ -2,7 +2,7 @@ import { Hubblepup } from './hubblepup';
 import { QuirmTuple } from './quirm';
 
 /**
- * A Tropoignant that creates an output Hubblepup for every input Hubblepup
+ * A Tropoignant that creates an output Quirm tuple for every input Hubblepup
  */
 export type Onama<
   TInputHubblepup extends Hubblepup = Hubblepup,
