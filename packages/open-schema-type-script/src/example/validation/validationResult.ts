@@ -15,11 +15,11 @@ export type ValidationResultOdeshin = Odeshin<
   ValidationResult
 >;
 
-export const VALIDATION_RESULT_GIPP = 'validation-result';
+export const VALIDATION_RESULT_GEPP = 'validation-result';
 
-export type ValidationResultGipp = typeof VALIDATION_RESULT_GIPP;
+export type ValidationResultGepp = typeof VALIDATION_RESULT_GEPP;
 
 export type ValidationResultQuirm = Quirm<
   ValidationResultOdeshin,
-  [ValidationResultGipp]
+  [ValidationResultGepp]
 >;

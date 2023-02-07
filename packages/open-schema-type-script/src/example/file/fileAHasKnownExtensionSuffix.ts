@@ -3,9 +3,9 @@ import { Validation, ValidationEstinant } from '../validation/validation';
 import {
   ValidationResultOdeshin,
   ValidationResultQuirm,
-  VALIDATION_RESULT_GIPP,
+  VALIDATION_RESULT_GEPP,
 } from '../validation/validationResult';
-import { FileAOdeshin, FILE_A_GIPP } from './fileA';
+import { FileAOdeshin, FILE_A_GEPP } from './fileA';
 
 export const fileAHasKnownExtensionSuffix: Validation<FileAOdeshin> = (
   inputOdeshin,
@@ -22,7 +22,7 @@ export const fileAHasKnownExtensionSuffix: Validation<FileAOdeshin> = (
   };
 
   const outputQuirm: ValidationResultQuirm = {
-    gippTuple: [VALIDATION_RESULT_GIPP],
+    geppTuple: [VALIDATION_RESULT_GEPP],
     hubblepup,
   };
 
@@ -31,6 +31,6 @@ export const fileAHasKnownExtensionSuffix: Validation<FileAOdeshin> = (
 
 export const fileAHasKnownExtensionSuffixEstinant: ValidationEstinant<FileAOdeshin> =
   {
-    inputGipp: FILE_A_GIPP,
+    inputGepp: FILE_A_GEPP,
     tropoignant: fileAHasKnownExtensionSuffix,
   };

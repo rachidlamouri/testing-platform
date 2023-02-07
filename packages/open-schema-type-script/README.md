@@ -98,15 +98,15 @@ S2 --> S3
 #### Voictents and the Tabilly
 
 - A Voictent is an implementation of a "stream"
-- The Engine has a Tabilly which is an index of Voictents by Gipp
+- The Engine has a Tabilly which is an index of Voictents by Gepp
 
-#### Gipps
+#### Gepps
 
-- A Gipp allows the Engine to find a Voictent for various needs
-  - A Quirm contains multiple Gipps and a Hubblepup
-  - An Estinant contains a Gipp and a Tropoignant
-- Quirms allow the Engine to add a Hubblepup to multiple Voictents based on the Quirm's Gipps
-- Estinants allow the Engine to feed a Voictent into a Tropoignant based on the Estinant's Gipp
+- A Gepp allows the Engine to find a Voictent for various needs
+  - A Quirm contains multiple Gepps and a Hubblepup
+  - An Estinant contains a Gepp and a Tropoignant
+- Quirms allow the Engine to add a Hubblepup to multiple Voictents based on the Quirm's Gepps
+- Estinants allow the Engine to feed a Voictent into a Tropoignant based on the Estinant's Gepp
 
 #### Lanbes
 
@@ -163,15 +163,15 @@ state E {
 sequenceDiagram
   participant P as Concrete Programmer
   participant E as Engine
-  participant T as Tabilly <br> (Map<Gipp, Voictent>)
+  participant T as Tabilly <br> (Map<Gepp, Voictent>)
   participant V as Voictent
 
   P ->> E: estinant
-  E ->> T: estinant.inputGipp
-  T ->> T: lookup Voictent by Gipp
+  E ->> T: estinant.inputGepp
+  T ->> T: lookup Voictent by Gepp
 
   alt Voictent does not exist
-    T ->> T: Initialize and cache <br> the Voictent by Gipp
+    T ->> T: Initialize and cache <br> the Voictent by Gepp
   end
 
   T ->> E: Voictent
@@ -186,17 +186,17 @@ sequenceDiagram
 sequenceDiagram
   participant P as Concrete Programmer
   participant E as Engine
-  participant T as Tabilly <br> (Map<Gipp, Voictent>)
+  participant T as Tabilly <br> (Map<Gepp, Voictent>)
   participant V as Voictent
 
   P ->> E: quirm
 
-  loop for each Gipp in quirm.gipps
-    E ->> T: lookup Voictent by Gipp
+  loop for each Gepp in quirm.gepps
+    E ->> T: lookup Voictent by Gepp
   end
 
   alt Voictent does not exist
-    T ->> T: Initialize and cache <br> the Voictent by Gipp
+    T ->> T: Initialize and cache <br> the Voictent by Gepp
   end
 
   T ->> E: Voictent

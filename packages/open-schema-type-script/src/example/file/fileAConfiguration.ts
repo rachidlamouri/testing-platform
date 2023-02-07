@@ -20,10 +20,10 @@ export type FileAConfigurationOdeshin = Odeshin<
 
 export type FileAConfigurationQuirm = Quirm<FileAConfigurationOdeshin>;
 
-export const FILE_A_CONFIGURATION_GIPP = FILE_A_CONFIGURATION_IDENTIFIER;
+export const FILE_A_CONFIGURATION_GEPP = FILE_A_CONFIGURATION_IDENTIFIER;
 
 export const FULL_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
-  gippTuple: [FILE_A_CONFIGURATION_GIPP],
+  geppTuple: [FILE_A_CONFIGURATION_GEPP],
   hubblepup: {
     identifier: FILE_A_CONFIGURATION_IDENTIFIER,
     grition: {
@@ -47,7 +47,7 @@ export const FULL_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
 };
 
 export const SIMPLE_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
-  gippTuple: [FILE_A_CONFIGURATION_GIPP],
+  geppTuple: [FILE_A_CONFIGURATION_GEPP],
   hubblepup: {
     identifier: FILE_A_CONFIGURATION_IDENTIFIER,
     grition: {

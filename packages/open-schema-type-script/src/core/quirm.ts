@@ -1,17 +1,17 @@
-import { Gipp } from './gipp';
+import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
 
 /**
  * One of the two programmable units of the Engine (see Estinant). It allows the Concrete Programmer to register
- * a Hubblepup to zero or more Voictents via Gipps.
+ * a Hubblepup to zero or more Voictents via Gepps.
  *
- * Note: I currently don't have a use case for defining zero Gipps, but that's irrelevent to the Engine
+ * Note: I currently don't have a use case for defining zero Gepps, but that's irrelevent to the Engine
  */
 export type Quirm<
   THubblepup extends Hubblepup = Hubblepup,
-  TGippTuple extends Gipp[] = Gipp[],
+  TGeppTuple extends Gepp[] = Gepp[],
 > = {
-  gippTuple: TGippTuple;
+  geppTuple: TGeppTuple;
   hubblepup: THubblepup;
 };
 
