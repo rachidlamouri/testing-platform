@@ -1,6 +1,6 @@
-import { Quirm } from '../../core/quirm';
 import { Grition } from '../core/grition';
 import { Odeshin, OdeshinIdentifier } from '../core/odeshin';
+import { Plifal } from '../core/plifal';
 
 export type ValidationResult = Grition<{
   identifier: OdeshinIdentifier;
@@ -19,7 +19,7 @@ export const VALIDATION_RESULT_GEPP = 'validation-result';
 
 export type ValidationResultGepp = typeof VALIDATION_RESULT_GEPP;
 
-export type ValidationResultQuirm = Quirm<
-  ValidationResultOdeshin,
-  [ValidationResultGepp]
+export type ValidationResultQuirm = Plifal<
+  [ValidationResultGepp],
+  ValidationResultOdeshin
 >;

@@ -1,5 +1,4 @@
 import { Estinant } from '../../core/estinant';
-import { Quirm, QuirmTuple } from '../../core/quirm';
 import { TropoignantTypeName } from '../../core/tropoignant';
 import { File } from '../../utilities/file/file';
 import {
@@ -9,7 +8,8 @@ import {
 import { getFileMetadata } from '../../utilities/file/getFileMetadata';
 import { getNestedFilePaths } from '../../utilities/file/getNestedFilePaths';
 import { Grition } from '../core/grition';
-import { Odeshin } from '../core/odeshin';
+import { Odeshin, ODESHIN_GEPP } from '../core/odeshin';
+import { Plifal } from '../core/plifal';
 import {
   FileAConfigurationOdeshin,
   FILE_A_CONFIGURATION_GEPP,
@@ -21,9 +21,13 @@ export type FileAIdentifier = `file-a:${string}`;
 
 export type FileAOdeshin = Odeshin<FileAIdentifier, FileA>;
 
-export type FileAQuirm = Quirm<FileAOdeshin>;
+export const FILE_A_GEPP = 'file-a';
 
-export type FileAQuirmTuple = QuirmTuple<FileAOdeshin>;
+export type FileAGepp = typeof FILE_A_GEPP;
+
+export type FileAPlifal = Plifal<[FileAGepp], FileAOdeshin>;
+
+export type FileAPlifalTuple = readonly FileAPlifal[];
 
 const partsToCamel = (x: string[]): string => {
   return x
@@ -45,11 +49,9 @@ const partsToPascal = (x: string[]): string => {
     .join('');
 };
 
-export const FILE_A_GEPP = 'file-a';
-
 export const fileAEstinant: Estinant<
   FileAConfigurationOdeshin,
-  FileAQuirmTuple
+  FileAPlifalTuple
 > = {
   inputGepp: FILE_A_CONFIGURATION_GEPP,
   tropoignant: {
@@ -57,7 +59,7 @@ export const fileAEstinant: Estinant<
     process: function buildFileA(inputOdeshin) {
       const filePaths = getNestedFilePaths(inputOdeshin.grition);
 
-      const fileAQuirmTuple: FileAQuirmTuple = filePaths.map((filePath) => {
+      const fileAQuirmTuple: FileAPlifalTuple = filePaths.map((filePath) => {
         const {
           onDiskFileNameParts,
           inMemoryFileNameParts,
@@ -86,12 +88,12 @@ export const fileAEstinant: Estinant<
         const identifier: FileAIdentifier = `file-a:${filePath}`;
 
         return {
-          geppTuple: [FILE_A_GEPP],
+          geppTuple: [ODESHIN_GEPP, FILE_A_GEPP],
           hubblepup: {
             identifier,
             grition,
           },
-        } satisfies FileAQuirm;
+        } satisfies FileAPlifal;
       });
 
       return fileAQuirmTuple;

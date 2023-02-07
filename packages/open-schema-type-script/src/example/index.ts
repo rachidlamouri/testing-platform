@@ -5,6 +5,7 @@ import { Quirm, QuirmTuple } from '../core/quirm';
 import { TropoignantTypeName } from '../core/tropoignant';
 import { blindCastEstinants } from './blindCastEstinants';
 import { eventLogger } from './debugger/eventLogger';
+import { odeshinLogger } from './debugger/odeshinLogger';
 import { fileAEstinant } from './file/fileA';
 import { SIMPLE_FILE_A_CONFIGURATION_QUIRM } from './file/fileAConfiguration';
 import { fileAHasKnownExtensionSuffixEstinant } from './file/fileAHasKnownExtensionSuffix';
@@ -66,5 +67,6 @@ digikikify({
     validator.validatorExecutor,
     validator.validatorStreamer,
     eventLogger,
+    odeshinLogger,
   ]),
 });

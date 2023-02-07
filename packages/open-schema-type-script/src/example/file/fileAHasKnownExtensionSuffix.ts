@@ -1,5 +1,6 @@
 import { TropoignantTypeName } from '../../core/tropoignant';
 import { FileExtensionSuffixIdentifier } from '../../utilities/file/fileExtensionSuffixIdentifier';
+import { ODESHIN_GEPP } from '../core/odeshin';
 import { Validation, ValidationEstinant } from '../validation/validation';
 import {
   ValidationResultOdeshin,
@@ -12,7 +13,7 @@ export const fileAHasKnownExtensionSuffix: Validation<FileAOdeshin> = {
   typeName: TropoignantTypeName.Onama,
   process: function fileAHasKnownExtensionSuffix(inputOdeshin) {
     const hubblepup: ValidationResultOdeshin = {
-      identifier: `validation-result:${inputOdeshin.identifier}`,
+      identifier: `validation-result:${fileAHasKnownExtensionSuffix.name}:${inputOdeshin.identifier}`,
       grition: {
         identifier: inputOdeshin.identifier,
         predicate: 'fileAHasKnownExtensionSuffix',
@@ -23,7 +24,7 @@ export const fileAHasKnownExtensionSuffix: Validation<FileAOdeshin> = {
     };
 
     const outputQuirm: ValidationResultQuirm = {
-      geppTuple: [VALIDATION_RESULT_GEPP],
+      geppTuple: [ODESHIN_GEPP, VALIDATION_RESULT_GEPP],
       hubblepup,
     };
 
