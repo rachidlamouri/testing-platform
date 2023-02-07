@@ -1,4 +1,4 @@
-import { getNamedSerialization } from './getNamedSerialization';
+import { serialize } from './serialize';
 
 export const logger = {
   logText: (text: string): void => {
@@ -14,6 +14,6 @@ export const logger = {
     console.log();
   },
   stringifyAsMultipleLines: (data: unknown): string => {
-    return getNamedSerialization(data).text;
+    return serialize(data);
   },
 };

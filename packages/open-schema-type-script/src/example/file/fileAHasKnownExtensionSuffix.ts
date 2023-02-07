@@ -1,3 +1,4 @@
+import { TropoignantTypeName } from '../../core/tropoignant';
 import { FileExtensionSuffixIdentifier } from '../../utilities/file/fileExtensionSuffixIdentifier';
 import { Validation, ValidationEstinant } from '../validation/validation';
 import {
@@ -7,26 +8,27 @@ import {
 } from '../validation/validationResult';
 import { FileAOdeshin, FILE_A_GEPP } from './fileA';
 
-export const fileAHasKnownExtensionSuffix: Validation<FileAOdeshin> = (
-  inputOdeshin,
-) => {
-  const hubblepup: ValidationResultOdeshin = {
-    identifier: `validation-result:${inputOdeshin.identifier}`,
-    grition: {
-      identifier: inputOdeshin.identifier,
-      predicate: fileAHasKnownExtensionSuffix.name,
-      isValid:
-        inputOdeshin.grition.extension.suffixIdentifier !==
-        FileExtensionSuffixIdentifier.Unknown,
-    },
-  };
+export const fileAHasKnownExtensionSuffix: Validation<FileAOdeshin> = {
+  typeName: TropoignantTypeName.Onama,
+  process: function fileAHasKnownExtensionSuffix(inputOdeshin) {
+    const hubblepup: ValidationResultOdeshin = {
+      identifier: `validation-result:${inputOdeshin.identifier}`,
+      grition: {
+        identifier: inputOdeshin.identifier,
+        predicate: 'fileAHasKnownExtensionSuffix',
+        isValid:
+          inputOdeshin.grition.extension.suffixIdentifier !==
+          FileExtensionSuffixIdentifier.Unknown,
+      },
+    };
 
-  const outputQuirm: ValidationResultQuirm = {
-    geppTuple: [VALIDATION_RESULT_GEPP],
-    hubblepup,
-  };
+    const outputQuirm: ValidationResultQuirm = {
+      geppTuple: [VALIDATION_RESULT_GEPP],
+      hubblepup,
+    };
 
-  return [outputQuirm];
+    return [outputQuirm];
+  },
 };
 
 export const fileAHasKnownExtensionSuffixEstinant: ValidationEstinant<FileAOdeshin> =
