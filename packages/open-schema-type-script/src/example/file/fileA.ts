@@ -8,12 +8,22 @@ import {
 import { getFileMetadata } from '../../utilities/file/getFileMetadata';
 import { getNestedFilePaths } from '../../utilities/file/getNestedFilePaths';
 import { JsonNull } from '../../utilities/json';
+import { Grition } from '../core/grition';
+import { Odeshin } from '../core/odeshin';
 import {
-  FileAConfiguration,
+  FileAConfigurationOdeshin,
   FILE_A_CONFIGURATION_GIPP,
 } from './fileAConfiguration';
 
-export type FileA = File<FileExtensionSuffixIdentifier, JsonNull>;
+export type FileA = Grition<File<FileExtensionSuffixIdentifier, JsonNull>>;
+
+export type FileAIdentifier = `file-a:${string}`;
+
+export type FileAOdeshin = Odeshin<FileAIdentifier, FileA>;
+
+export type FileAQuirm = Quirm<FileAOdeshin>;
+
+export type FileAQuirmTuple = QuirmTuple<FileAOdeshin>;
 
 const partsToCamel = (x: string[]): string => {
   return x
@@ -37,12 +47,15 @@ const partsToPascal = (x: string[]): string => {
 
 export const FILE_A_GIPP = 'file-a';
 
-export const fileAEstinant: Estinant<FileAConfiguration, QuirmTuple<FileA>> = {
+export const fileAEstinant: Estinant<
+  FileAConfigurationOdeshin,
+  FileAQuirmTuple
+> = {
   inputGipp: FILE_A_CONFIGURATION_GIPP,
-  tropoignant: function buildFileA(fileAConfiguration) {
-    const filePaths = getNestedFilePaths(fileAConfiguration);
+  tropoignant: function buildFileA(inputOdeshin) {
+    const filePaths = getNestedFilePaths(inputOdeshin.grition);
 
-    const fileAQuirmTuple: QuirmTuple<FileA> = filePaths.map((filePath) => {
+    const fileAQuirmTuple: FileAQuirmTuple = filePaths.map((filePath) => {
       const {
         onDiskFileNameParts,
         inMemoryFileNameParts,
@@ -50,7 +63,7 @@ export const fileAEstinant: Estinant<FileAConfiguration, QuirmTuple<FileA>> = {
         extensionParts,
       } = getFileMetadata(filePath);
 
-      const hubblepup: FileA = {
+      const grition: FileA = {
         filePath,
         onDiskFileName: {
           camelCase: partsToCamel(onDiskFileNameParts),
@@ -68,10 +81,15 @@ export const fileAEstinant: Estinant<FileAConfiguration, QuirmTuple<FileA>> = {
         additionalMetadata: null,
       };
 
+      const identifier: FileAIdentifier = `file-a:${filePath}`;
+
       return {
         gippTuple: [FILE_A_GIPP],
-        hubblepup,
-      } satisfies Quirm<FileA>;
+        hubblepup: {
+          identifier,
+          grition,
+        },
+      } satisfies FileAQuirm;
     });
 
     return fileAQuirmTuple;
