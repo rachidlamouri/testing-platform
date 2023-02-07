@@ -1,4 +1,4 @@
-export const serialize = (datum: unknown): string => {
+export const serialize = (datum: unknown, cache = new Set()): string => {
   if (datum === null) {
     return 'NULL|null';
   }
@@ -21,8 +21,15 @@ export const serialize = (datum: unknown): string => {
     default:
   }
 
+  if (cache.has(datum)) {
+    // TODO: create a local identifier that we can use to provide a path to the referenced item
+    return 'CIRC: ???';
+  }
+
+  cache.add(datum);
+
   if (Array.isArray(datum)) {
-    const elementSerializations = datum.map(serialize);
+    const elementSerializations = datum.map((item) => serialize(item, cache));
 
     return [
       'ARRA: [',
@@ -56,8 +63,8 @@ export const serialize = (datum: unknown): string => {
   };
 
   const properties: Property[] = entries.map<Property>(([key, value]) => ({
-    serializedKey: serialize(key),
-    serializedValue: serialize(value),
+    serializedKey: serialize(key, cache),
+    serializedValue: serialize(value, cache),
   }));
 
   const constructorId = constructorName.toUpperCase().slice(0, 4);

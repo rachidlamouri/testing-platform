@@ -5,6 +5,7 @@ import { NullStraline, NULL_STRALINE } from './straline';
 import { Tabilly } from './tabilly';
 import { TropoignantTypeName } from './tropoignant';
 import {
+  digikikifierGeppsByIdentifer,
   EngineEventName,
   OnEstinantResultEvent,
   OnEstinantsRegisteredEvent,
@@ -32,11 +33,13 @@ export const digikikify = ({
 }: DigikikifierInput): void => {
   const tabilly = new Tabilly();
 
-  yek.emitEvent<OnTabillyInitializedEvent>({
-    eventName: EngineEventName.OnTabillyInitialized,
-    tabilly,
-    data: null,
-  });
+  tabilly.addQuirmsToVoictents([
+    yek.createEventQuirm<OnTabillyInitializedEvent>({
+      name: EngineEventName.OnTabillyInitialized,
+      tabilly,
+      data: null,
+    }),
+  ]);
 
   const platomities = estinantTuple.map<Platomity>((estinant) => {
     const voictent = tabilly.getOrInstantiateAndGetVoictent(estinant.inputGepp);
@@ -50,61 +53,97 @@ export const digikikify = ({
     };
   });
 
-  yek.emitEvent<OnEstinantsRegisteredEvent>({
-    eventName: EngineEventName.OnEstinantsRegistered,
-    tabilly,
-    data: null,
-  });
+  tabilly.addQuirmsToVoictents([
+    yek.createEventQuirm<OnEstinantsRegisteredEvent>({
+      name: EngineEventName.OnEstinantsRegistered,
+      tabilly,
+      data: null,
+    }),
+  ]);
 
   tabilly.addQuirmsToVoictents(initialQuirmTuple);
 
-  yek.emitEvent<OnInitialQuirmsCachedEvent>({
-    eventName: EngineEventName.OnInitialQuirmsCached,
-    tabilly,
-    data: null,
-  });
+  tabilly.addQuirmsToVoictents([
+    yek.createEventQuirm<OnInitialQuirmsCachedEvent>({
+      name: EngineEventName.OnInitialQuirmsCached,
+      tabilly,
+      data: null,
+    }),
+  ]);
+
+  const executePlatomity = (platomity: Platomity): void => {
+    platomity.lanbe.advance();
+
+    const nextQuirm = platomity.lanbe.dereference() as Quirm;
+    const inputHubblepup = nextQuirm.hubblepup;
+
+    let outputQuirmTuple: QuirmTuple | NullStraline = NULL_STRALINE;
+
+    switch (platomity.estinant.tropoignant.typeName) {
+      case TropoignantTypeName.Onama:
+        outputQuirmTuple =
+          platomity.estinant.tropoignant.process(inputHubblepup);
+        break;
+      case TropoignantTypeName.Wortinator:
+        platomity.estinant.tropoignant.process(inputHubblepup);
+        break;
+    }
+
+    if (outputQuirmTuple !== NULL_STRALINE) {
+      tabilly.addQuirmsToVoictents(outputQuirmTuple);
+    }
+
+    if (platomity.estinant.inputGepp !== digikikifierGeppsByIdentifer.OnEvent) {
+      tabilly.addQuirmsToVoictents([
+        yek.createEventQuirm<OnEstinantResultEvent>({
+          name: EngineEventName.OnEstinantResult,
+          data: {
+            tropoignant: platomity.estinant.tropoignant,
+            inputGepp: platomity.estinant.inputGepp.toString(),
+            inputs: [inputHubblepup],
+            outputs: outputQuirmTuple,
+          },
+          tabilly,
+        }),
+      ]);
+    }
+  };
 
   while (platomities.some((platomity) => platomity.lanbe.canAdvance())) {
     platomities
       .filter((platomity) => platomity.lanbe.canAdvance())
       .forEach((platomity) => {
-        platomity.lanbe.advance();
-
-        const nextQuirm = platomity.lanbe.dereference() as Quirm;
-        const inputHubblepup = nextQuirm.hubblepup;
-
-        let outputQuirmTuple: QuirmTuple | NullStraline = NULL_STRALINE;
-
-        switch (platomity.estinant.tropoignant.typeName) {
-          case TropoignantTypeName.Onama:
-            outputQuirmTuple =
-              platomity.estinant.tropoignant.process(inputHubblepup);
-            break;
-          case TropoignantTypeName.Wortinator:
-            platomity.estinant.tropoignant.process(inputHubblepup);
-            break;
-        }
-
-        if (outputQuirmTuple !== NULL_STRALINE) {
-          tabilly.addQuirmsToVoictents(outputQuirmTuple);
-        }
-
-        yek.emitEvent<OnEstinantResultEvent>({
-          eventName: EngineEventName.OnEstinantResult,
-          data: {
-            tropoignant: platomity.estinant.tropoignant,
-            inputGepp: platomity.estinant.inputGepp,
-            inputs: [inputHubblepup],
-            outputs: outputQuirmTuple,
-          },
-          tabilly,
-        });
+        executePlatomity(platomity);
       });
   }
 
-  yek.emitEvent<OnFinishEvent>({
-    eventName: EngineEventName.OnFinish,
-    tabilly,
-    data: null,
-  });
+  tabilly.addQuirmsToVoictents([
+    yek.createEventQuirm<OnFinishEvent>({
+      name: EngineEventName.OnFinish,
+      tabilly,
+      data: null,
+    }),
+    {
+      geppTuple: [digikikifierGeppsByIdentifer.OnFinish],
+      hubblepup: null,
+    },
+  ]);
+
+  platomities
+    .filter(
+      (platomity) =>
+        platomity.estinant.inputGepp === digikikifierGeppsByIdentifer.OnEvent,
+    )
+    .forEach((platomity) => {
+      executePlatomity(platomity);
+    });
+
+  platomities
+    .filter(
+      (platomity) =>
+        platomity.estinant.inputGepp === digikikifierGeppsByIdentifer.OnFinish,
+    )
+    .forEach((platomity) => {
+      executePlatomity(platomity);
+    });
 };

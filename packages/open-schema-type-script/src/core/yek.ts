@@ -1,11 +1,25 @@
-import fs from 'fs';
-import { posix } from 'path';
-import { logger } from '../utilities/logger';
 import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
-import { QuirmTuple } from './quirm';
+import { Quirm, QuirmTuple } from './quirm';
 import { Tabilly } from './tabilly';
 import { Tropoignant } from './tropoignant';
+
+export enum DigikikifierGeppIdentifer {
+  OnEvent = 'OnEvent',
+  OnFinish = 'OnFinish',
+}
+
+export const digikikifierGeppsByIdentifer: Record<
+  DigikikifierGeppIdentifer,
+  symbol
+> = {
+  [DigikikifierGeppIdentifer.OnEvent]: Symbol(
+    DigikikifierGeppIdentifer.OnEvent,
+  ),
+  [DigikikifierGeppIdentifer.OnFinish]: Symbol(
+    DigikikifierGeppIdentifer.OnFinish,
+  ),
+};
 
 export enum EngineEventName {
   OnTabillyInitialized = 'OnTabillyInitialized',
@@ -16,9 +30,10 @@ export enum EngineEventName {
 }
 
 type Event<TEventName extends EngineEventName, TEventData = null> = {
-  eventName: TEventName;
+  name: TEventName;
   tabilly: Tabilly;
   data: TEventData;
+  time: string;
 };
 
 export type OnTabillyInitializedEvent =
@@ -42,30 +57,29 @@ export type OnEstinantResultEvent = Event<
 
 export type OnFinishEvent = Event<EngineEventName.OnFinish>;
 
-export type EngineEvent =
+export type DigikikifierEvent = Hubblepup<
   | OnTabillyInitializedEvent
   | OnEstinantsRegisteredEvent
   | OnInitialQuirmsCachedEvent
   | OnEstinantResultEvent
-  | OnFinishEvent;
-
-const DEBUG_DIR_PATH = './debug/' as const;
-const ENGINE_EVENTS_PATH = posix.join(DEBUG_DIR_PATH, 'engine-events');
-
-fs.rmSync(DEBUG_DIR_PATH, { recursive: true, force: true });
-fs.mkdirSync(ENGINE_EVENTS_PATH, { recursive: true });
+  | OnFinishEvent
+>;
 
 /**
  * A debugger that writes to the file system for funsies
  */
 export const yek = {
-  emitEvent: <TEngineEvent extends EngineEvent>(event: TEngineEvent): void => {
-    const time = process.hrtime.bigint();
-    const eventId = `${time}--${event.eventName}`;
+  createEventQuirm: <TPartialDigikikifierEvent extends DigikikifierEvent>(
+    partialEvent: Pick<TPartialDigikikifierEvent, 'name' | 'tabilly' | 'data'>,
+  ): Quirm<DigikikifierEvent> => {
+    const event = {
+      ...partialEvent,
+      time: process.hrtime.bigint().toString(),
+    } as TPartialDigikikifierEvent;
 
-    const eventFilePath = posix.join(ENGINE_EVENTS_PATH, `${eventId}.txt`);
-    fs.writeFileSync(eventFilePath, logger.stringifyAsMultipleLines(event));
-
-    logger.logText(eventFilePath);
+    return {
+      geppTuple: [digikikifierGeppsByIdentifer.OnEvent],
+      hubblepup: event,
+    };
   },
 };
