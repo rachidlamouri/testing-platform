@@ -3,41 +3,61 @@ import {
   ComparisonConfigurationTypeName,
   FilePathAccessorInput,
 } from '../../utilities/file/getNestedFilePaths';
+import { Grition } from '../core/grition';
+import { Odeshin } from '../core/odeshin';
 
-export const FILE_A_CONFIGURATION_GIPP = 'file-a-configuration';
+export const FILE_A_CONFIGURATION_IDENTIFIER = 'file-a-configuration' as const;
 
-export type FileAConfiguration = FilePathAccessorInput;
+export type FileAConfigurationIdentifier =
+  typeof FILE_A_CONFIGURATION_IDENTIFIER;
 
-export const FULL_FILE_A_CONFIGURATION_QUIRM: Quirm<FileAConfiguration> = {
+export type FileAConfiguration = Grition<FilePathAccessorInput>;
+
+export type FileAConfigurationOdeshin = Odeshin<
+  FileAConfigurationIdentifier,
+  FilePathAccessorInput
+>;
+
+export type FileAConfigurationQuirm = Quirm<FileAConfigurationOdeshin>;
+
+export const FILE_A_CONFIGURATION_GIPP = FILE_A_CONFIGURATION_IDENTIFIER;
+
+export const FULL_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
   gippTuple: [FILE_A_CONFIGURATION_GIPP],
   hubblepup: {
-    directoryPath: '.',
-    ignoredNodePathConfigurations: [
-      {
-        typeName: ComparisonConfigurationTypeName.Equals,
-        value: '.git',
-      },
-      {
-        typeName: ComparisonConfigurationTypeName.Equals,
-        value: 'debug',
-      },
-      {
-        typeName: ComparisonConfigurationTypeName.EndsWith,
-        value: 'node_modules',
-      },
-    ],
+    identifier: FILE_A_CONFIGURATION_IDENTIFIER,
+    grition: {
+      directoryPath: '.',
+      ignoredNodePathConfigurations: [
+        {
+          typeName: ComparisonConfigurationTypeName.Equals,
+          value: '.git',
+        },
+        {
+          typeName: ComparisonConfigurationTypeName.Equals,
+          value: 'debug',
+        },
+        {
+          typeName: ComparisonConfigurationTypeName.EndsWith,
+          value: 'node_modules',
+        },
+      ],
+    },
   },
 };
 
-export const SIMPLE_FILE_A_CONFIGURATION_QUIRM: Quirm<FileAConfiguration> = {
+export const SIMPLE_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
   gippTuple: [FILE_A_CONFIGURATION_GIPP],
   hubblepup: {
-    directoryPath: 'packages/open-schema-type-script/src',
-    ignoredNodePathConfigurations: [
-      {
-        typeName: ComparisonConfigurationTypeName.Equals,
-        value: 'packages/open-schema-type-script/src/v1',
-      },
-    ],
+    identifier: FILE_A_CONFIGURATION_IDENTIFIER,
+    grition: {
+      directoryPath: 'packages/open-schema-type-script/src',
+      ignoredNodePathConfigurations: [
+        {
+          typeName: ComparisonConfigurationTypeName.Equals,
+          value: 'packages/open-schema-type-script/src/v1',
+        },
+      ],
+    },
   },
 };

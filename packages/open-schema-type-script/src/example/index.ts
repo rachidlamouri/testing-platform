@@ -6,6 +6,7 @@ import { JsonString } from '../utilities/json';
 import { blindCastEstinants } from './blindCastEstinants';
 import { fileAEstinant } from './file/fileA';
 import { SIMPLE_FILE_A_CONFIGURATION_QUIRM } from './file/fileAConfiguration';
+import { fileAHasKnownExtensionSuffixEstinant } from './file/fileAHasKnownExtensionSuffix';
 
 const myGippA: Gipp = 'example-1';
 const myGippB: Gipp = 'example-2';
@@ -49,5 +50,10 @@ const myEstinant2: Estinant<JsonString, QuirmTuple<JsonString>> = {
 
 digikikify({
   initialQuirmTuple: [myQuirm1, myQuirm2, SIMPLE_FILE_A_CONFIGURATION_QUIRM],
-  estinantTuple: blindCastEstinants([myEstinant1, myEstinant2, fileAEstinant]),
+  estinantTuple: blindCastEstinants([
+    myEstinant1,
+    myEstinant2,
+    fileAEstinant,
+    fileAHasKnownExtensionSuffixEstinant,
+  ]),
 });
