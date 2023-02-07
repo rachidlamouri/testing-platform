@@ -1,6 +1,6 @@
 import { digikikify } from '../core/digikikify';
 import { Estinant } from '../core/estinant';
-import { Gipp } from '../core/gipp';
+import { Gepp } from '../core/gepp';
 import { Quirm, QuirmTuple } from '../core/quirm';
 import { JsonString } from '../utilities/json';
 import { blindCastEstinants } from './blindCastEstinants';
@@ -8,28 +8,28 @@ import { fileAEstinant } from './file/fileA';
 import { SIMPLE_FILE_A_CONFIGURATION_QUIRM } from './file/fileAConfiguration';
 import { fileAHasKnownExtensionSuffixEstinant } from './file/fileAHasKnownExtensionSuffix';
 
-const myGippA: Gipp = 'example-1';
-const myGippB: Gipp = 'example-2';
-const myGippC: Gipp = 'example-3';
-const myGippHello: Gipp = 'example-hello';
-const myGippGoodbye: Gipp = 'example-goodbye';
+const myGeppA: Gepp = 'example-1';
+const myGeppB: Gepp = 'example-2';
+const myGeppC: Gepp = 'example-3';
+const myGeppHello: Gepp = 'example-hello';
+const myGeppGoodbye: Gepp = 'example-goodbye';
 
 const myQuirm1: Quirm<JsonString> = {
-  gippTuple: [myGippA, myGippB],
+  geppTuple: [myGeppA, myGeppB],
   hubblepup: 'myself!',
 };
 
 const myQuirm2: Quirm<JsonString> = {
-  gippTuple: [myGippA, myGippC],
+  geppTuple: [myGeppA, myGeppC],
   hubblepup: 'someone else',
 };
 
 const myEstinant1: Estinant<JsonString, QuirmTuple<JsonString>> = {
-  inputGipp: myGippA,
+  inputGepp: myGeppA,
   tropoignant: function sayHello(input) {
     return [
       {
-        gippTuple: [myGippHello],
+        geppTuple: [myGeppHello],
         hubblepup: `Hello ${input}`,
       },
     ];
@@ -37,11 +37,11 @@ const myEstinant1: Estinant<JsonString, QuirmTuple<JsonString>> = {
 };
 
 const myEstinant2: Estinant<JsonString, QuirmTuple<JsonString>> = {
-  inputGipp: myGippC,
+  inputGepp: myGeppC,
   tropoignant: function sayGoodbye(input) {
     return [
       {
-        gippTuple: [myGippGoodbye],
+        geppTuple: [myGeppGoodbye],
         hubblepup: `Goodbye ${input}`,
       },
     ];

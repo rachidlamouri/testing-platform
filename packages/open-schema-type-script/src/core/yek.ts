@@ -2,7 +2,7 @@ import fs from 'fs';
 import { posix } from 'path';
 import { JsonObject, JsonString } from '../utilities/json';
 import { logger } from '../utilities/logger';
-import { Gipp } from './gipp';
+import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
 import { QuirmTuple } from './quirm';
 import { TabillyDebugData } from './tabilly';
@@ -37,7 +37,7 @@ export type OnEstinantResultEvent = Event<
   EngineEventName.OnEstinantResult,
   {
     tropoignantName: JsonString;
-    inputGipp: Gipp;
+    inputGepp: Gepp;
     inputs: Hubblepup[];
     outputs: QuirmTuple;
   }

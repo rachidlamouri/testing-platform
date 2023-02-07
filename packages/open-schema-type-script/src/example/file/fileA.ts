@@ -12,7 +12,7 @@ import { Grition } from '../core/grition';
 import { Odeshin } from '../core/odeshin';
 import {
   FileAConfigurationOdeshin,
-  FILE_A_CONFIGURATION_GIPP,
+  FILE_A_CONFIGURATION_GEPP,
 } from './fileAConfiguration';
 
 export type FileA = Grition<File<FileExtensionSuffixIdentifier, JsonNull>>;
@@ -45,13 +45,13 @@ const partsToPascal = (x: string[]): string => {
     .join('');
 };
 
-export const FILE_A_GIPP = 'file-a';
+export const FILE_A_GEPP = 'file-a';
 
 export const fileAEstinant: Estinant<
   FileAConfigurationOdeshin,
   FileAQuirmTuple
 > = {
-  inputGipp: FILE_A_CONFIGURATION_GIPP,
+  inputGepp: FILE_A_CONFIGURATION_GEPP,
   tropoignant: function buildFileA(inputOdeshin) {
     const filePaths = getNestedFilePaths(inputOdeshin.grition);
 
@@ -84,7 +84,7 @@ export const fileAEstinant: Estinant<
       const identifier: FileAIdentifier = `file-a:${filePath}`;
 
       return {
-        gippTuple: [FILE_A_GIPP],
+        geppTuple: [FILE_A_GEPP],
         hubblepup: {
           identifier,
           grition,

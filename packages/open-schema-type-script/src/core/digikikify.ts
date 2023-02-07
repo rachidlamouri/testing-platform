@@ -38,7 +38,7 @@ export const digikikify = ({
   });
 
   const platomities = estinantTuple.map<Platomity>((estinant) => {
-    const voictent = tabilly.getOrInstantiateAndGetVoictent(estinant.inputGipp);
+    const voictent = tabilly.getOrInstantiateAndGetVoictent(estinant.inputGepp);
 
     // TODO: consider using an estinant identifier instead of the tropoignant name
     const lanbe = voictent.createPointer(estinant.tropoignant.name);
@@ -83,7 +83,7 @@ export const digikikify = ({
           eventName: EngineEventName.OnEstinantResult,
           data: {
             tropoignantName: platomity.estinant.tropoignant.name,
-            inputGipp: platomity.estinant.inputGipp,
+            inputGepp: platomity.estinant.inputGepp,
             inputs: [inputHubblepup],
             outputs: outputQuirmTuple,
           },
