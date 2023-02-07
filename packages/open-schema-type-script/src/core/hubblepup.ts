@@ -5,4 +5,4 @@ import { Json } from '../utilities/json';
  *
  * @todo change this back to "unknown"
  */
-export type Hubblepup = Json;
+export type Hubblepup<TJson extends Json = Json> = TJson;
