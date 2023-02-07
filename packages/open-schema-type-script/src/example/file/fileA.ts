@@ -7,7 +7,6 @@ import {
 } from '../../utilities/file/fileExtensionSuffixIdentifier';
 import { getFileMetadata } from '../../utilities/file/getFileMetadata';
 import { getNestedFilePaths } from '../../utilities/file/getNestedFilePaths';
-import { JsonNull } from '../../utilities/json';
 import { Grition } from '../core/grition';
 import { Odeshin } from '../core/odeshin';
 import {
@@ -15,7 +14,7 @@ import {
   FILE_A_CONFIGURATION_GEPP,
 } from './fileAConfiguration';
 
-export type FileA = Grition<File<FileExtensionSuffixIdentifier, JsonNull>>;
+export type FileA = Grition<File<FileExtensionSuffixIdentifier, null>>;
 
 export type FileAIdentifier = `file-a:${string}`;
 

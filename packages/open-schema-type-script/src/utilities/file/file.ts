@@ -1,4 +1,3 @@
-import { JsonNull, JsonObject } from '../json';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 
 export type FileName = {
@@ -8,7 +7,7 @@ export type FileName = {
 
 export type File<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier,
-  TAdditionalMetadata extends JsonObject | JsonNull,
+  TAdditionalMetadata extends object | null,
 > = {
   filePath: string;
   onDiskFileName: FileName;
