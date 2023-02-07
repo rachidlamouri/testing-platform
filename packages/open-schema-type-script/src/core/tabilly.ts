@@ -1,11 +1,6 @@
 import { Gepp } from './gepp';
 import { Quirm, QuirmTuple } from './quirm';
-import { Voictent, VoictentDebugData } from './voictent';
-
-export type TabillyDebugData = {
-  gepp: Gepp;
-  voictent: VoictentDebugData<Quirm>;
-}[];
+import { Voictent } from './voictent';
 
 /**
  * A cache of Voictents by Gepp.
@@ -50,14 +45,5 @@ export class Tabilly extends Map<Gepp, Voictent<Quirm>> {
     const voictent = this.getOrInstantiateAndGetVoictent(gepp);
     voictent.addStraline(quirm);
     this.set(gepp, voictent);
-  }
-
-  get debugData(): TabillyDebugData {
-    return [...this.entries()].map(([gepp, voictent]) => {
-      return {
-        gepp,
-        voictent: voictent.debugData,
-      };
-    });
   }
 }

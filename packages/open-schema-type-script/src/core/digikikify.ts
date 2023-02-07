@@ -33,8 +33,8 @@ export const digikikify = ({
 
   yek.emitEvent<OnTabillyInitializedEvent>({
     eventName: EngineEventName.OnTabillyInitialized,
-    tabilly: tabilly.debugData,
-    data: {},
+    tabilly,
+    data: null,
   });
 
   const platomities = estinantTuple.map<Platomity>((estinant) => {
@@ -51,16 +51,16 @@ export const digikikify = ({
 
   yek.emitEvent<OnEstinantsRegisteredEvent>({
     eventName: EngineEventName.OnEstinantsRegistered,
-    tabilly: tabilly.debugData,
-    data: {},
+    tabilly,
+    data: null,
   });
 
   tabilly.addQuirmsToVoictents(initialQuirmTuple);
 
   yek.emitEvent<OnInitialQuirmsCachedEvent>({
     eventName: EngineEventName.OnInitialQuirmsCached,
-    tabilly: tabilly.debugData,
-    data: {},
+    tabilly,
+    data: null,
   });
 
   do {
@@ -82,12 +82,12 @@ export const digikikify = ({
         yek.emitEvent<OnEstinantResultEvent>({
           eventName: EngineEventName.OnEstinantResult,
           data: {
-            tropoignantName: platomity.estinant.tropoignant.name,
+            tropoignant: platomity.estinant.tropoignant,
             inputGepp: platomity.estinant.inputGepp,
             inputs: [inputHubblepup],
             outputs: outputQuirmTuple,
           },
-          tabilly: tabilly.debugData,
+          tabilly,
         });
       });
   } while (
@@ -98,7 +98,7 @@ export const digikikify = ({
 
   yek.emitEvent<OnFinishEvent>({
     eventName: EngineEventName.OnFinish,
-    tabilly: tabilly.debugData,
-    data: {},
+    tabilly,
+    data: null,
   });
 };
