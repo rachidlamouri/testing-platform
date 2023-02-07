@@ -37,6 +37,21 @@ export type Wortinator<TInputHubblepup extends Hubblepup = Hubblepup> =
     void
   >;
 
+// /**
+//  * Rudimentary two to one cross product signature
+//  */
+// export type Cortmum = (inputA: unknown, inputB: unknown) => unknown;
+
+// /**
+//  * Rudimentary filter signature
+//  */
+// export type Mentursection = (input: unknown) => unknown;
+
+// /**
+//  * The things that process information within an open-schema engine
+//  */
+// export type Troporigniant = Onama | Cortmum | Mentursection | Wortinator;
+
 /**
  * The thing that a Programmer creates to process a Hubblepup. The engine manages them at runtime.
  */
