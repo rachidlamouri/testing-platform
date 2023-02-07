@@ -1,5 +1,6 @@
 import { Estinant } from '../../core/estinant';
 import { Quirm, QuirmTuple } from '../../core/quirm';
+import { TropoignantTypeName } from '../../core/tropoignant';
 import { File } from '../../utilities/file/file';
 import {
   FileExtensionSuffixIdentifier,
@@ -51,46 +52,49 @@ export const fileAEstinant: Estinant<
   FileAQuirmTuple
 > = {
   inputGepp: FILE_A_CONFIGURATION_GEPP,
-  tropoignant: function buildFileA(inputOdeshin) {
-    const filePaths = getNestedFilePaths(inputOdeshin.grition);
+  tropoignant: {
+    typeName: TropoignantTypeName.Onama,
+    process: function buildFileA(inputOdeshin) {
+      const filePaths = getNestedFilePaths(inputOdeshin.grition);
 
-    const fileAQuirmTuple: FileAQuirmTuple = filePaths.map((filePath) => {
-      const {
-        onDiskFileNameParts,
-        inMemoryFileNameParts,
-        extensionSuffix,
-        extensionParts,
-      } = getFileMetadata(filePath);
+      const fileAQuirmTuple: FileAQuirmTuple = filePaths.map((filePath) => {
+        const {
+          onDiskFileNameParts,
+          inMemoryFileNameParts,
+          extensionSuffix,
+          extensionParts,
+        } = getFileMetadata(filePath);
 
-      const grition: FileA = {
-        filePath,
-        onDiskFileName: {
-          camelCase: partsToCamel(onDiskFileNameParts),
-          pascalCase: partsToPascal(onDiskFileNameParts),
-        },
-        inMemoryFileName: {
-          camelCase: partsToCamel(inMemoryFileNameParts),
-          pascalCase: partsToPascal(inMemoryFileNameParts),
-        },
-        extension: {
-          parts: extensionParts,
-          suffix: extensionSuffix,
-          suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
-        },
-        additionalMetadata: null,
-      };
+        const grition: FileA = {
+          filePath,
+          onDiskFileName: {
+            camelCase: partsToCamel(onDiskFileNameParts),
+            pascalCase: partsToPascal(onDiskFileNameParts),
+          },
+          inMemoryFileName: {
+            camelCase: partsToCamel(inMemoryFileNameParts),
+            pascalCase: partsToPascal(inMemoryFileNameParts),
+          },
+          extension: {
+            parts: extensionParts,
+            suffix: extensionSuffix,
+            suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
+          },
+          additionalMetadata: null,
+        };
 
-      const identifier: FileAIdentifier = `file-a:${filePath}`;
+        const identifier: FileAIdentifier = `file-a:${filePath}`;
 
-      return {
-        geppTuple: [FILE_A_GEPP],
-        hubblepup: {
-          identifier,
-          grition,
-        },
-      } satisfies FileAQuirm;
-    });
+        return {
+          geppTuple: [FILE_A_GEPP],
+          hubblepup: {
+            identifier,
+            grition,
+          },
+        } satisfies FileAQuirm;
+      });
 
-    return fileAQuirmTuple;
+      return fileAQuirmTuple;
+    },
   },
 };

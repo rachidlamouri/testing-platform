@@ -36,7 +36,7 @@ export type OnEstinantResultEvent = Event<
     tropoignant: Tropoignant;
     inputGepp: Gepp;
     inputs: Hubblepup[];
-    outputs: QuirmTuple;
+    outputs: QuirmTuple | symbol;
   }
 >;
 

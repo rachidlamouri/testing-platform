@@ -1,7 +1,9 @@
 import { EstinantTuple } from './estinant';
 import { Platomity } from './platomity';
 import { Quirm, QuirmTuple } from './quirm';
+import { NullStraline, NULL_STRALINE } from './straline';
 import { Tabilly } from './tabilly';
+import { TropoignantTypeName } from './tropoignant';
 import {
   EngineEventName,
   OnEstinantResultEvent,
@@ -40,7 +42,7 @@ export const digikikify = ({
     const voictent = tabilly.getOrInstantiateAndGetVoictent(estinant.inputGepp);
 
     // TODO: consider using an estinant identifier instead of the tropoignant name
-    const lanbe = voictent.createPointer(estinant.tropoignant.name);
+    const lanbe = voictent.createPointer(estinant.tropoignant.process.name);
 
     return {
       estinant,
@@ -70,9 +72,22 @@ export const digikikify = ({
 
         const nextQuirm = platomity.lanbe.dereference() as Quirm;
         const inputHubblepup = nextQuirm.hubblepup;
-        const outputQuirmTuple = platomity.estinant.tropoignant(inputHubblepup);
 
-        tabilly.addQuirmsToVoictents(outputQuirmTuple);
+        let outputQuirmTuple: QuirmTuple | NullStraline = NULL_STRALINE;
+
+        switch (platomity.estinant.tropoignant.typeName) {
+          case TropoignantTypeName.Onama:
+            outputQuirmTuple =
+              platomity.estinant.tropoignant.process(inputHubblepup);
+            break;
+          case TropoignantTypeName.Wortinator:
+            platomity.estinant.tropoignant.process(inputHubblepup);
+            break;
+        }
+
+        if (outputQuirmTuple !== NULL_STRALINE) {
+          tabilly.addQuirmsToVoictents(outputQuirmTuple);
+        }
 
         yek.emitEvent<OnEstinantResultEvent>({
           eventName: EngineEventName.OnEstinantResult,

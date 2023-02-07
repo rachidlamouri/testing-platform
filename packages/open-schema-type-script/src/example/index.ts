@@ -2,6 +2,7 @@ import { digikikify } from '../core/digikikify';
 import { Estinant } from '../core/estinant';
 import { Gepp } from '../core/gepp';
 import { Quirm, QuirmTuple } from '../core/quirm';
+import { TropoignantTypeName } from '../core/tropoignant';
 import { blindCastEstinants } from './blindCastEstinants';
 import { fileAEstinant } from './file/fileA';
 import { SIMPLE_FILE_A_CONFIGURATION_QUIRM } from './file/fileAConfiguration';
@@ -25,25 +26,31 @@ const myQuirm2: Quirm<string> = {
 
 const myEstinant1: Estinant<string, QuirmTuple<string>> = {
   inputGepp: myGeppA,
-  tropoignant: function sayHello(input) {
-    return [
-      {
-        geppTuple: [myGeppHello],
-        hubblepup: `Hello ${input}`,
-      },
-    ];
+  tropoignant: {
+    typeName: TropoignantTypeName.Onama,
+    process: function sayHello(input) {
+      return [
+        {
+          geppTuple: [myGeppHello],
+          hubblepup: `Hello ${input}`,
+        },
+      ];
+    },
   },
 };
 
 const myEstinant2: Estinant<string, QuirmTuple<string>> = {
   inputGepp: myGeppC,
-  tropoignant: function sayGoodbye(input) {
-    return [
-      {
-        geppTuple: [myGeppGoodbye],
-        hubblepup: `Goodbye ${input}`,
-      },
-    ];
+  tropoignant: {
+    typeName: TropoignantTypeName.Onama,
+    process: function sayGoodbye(input) {
+      return [
+        {
+          geppTuple: [myGeppGoodbye],
+          hubblepup: `Goodbye ${input}`,
+        },
+      ];
+    },
   },
 };
 
