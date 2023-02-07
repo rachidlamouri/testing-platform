@@ -1,11 +1,11 @@
 import fs from 'fs';
 import { posix } from 'path';
-import { JsonObject, JsonString } from '../utilities/json';
 import { logger } from '../utilities/logger';
 import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
 import { QuirmTuple } from './quirm';
-import { TabillyDebugData } from './tabilly';
+import { Tabilly } from './tabilly';
+import { Tropoignant } from './tropoignant';
 
 export enum EngineEventName {
   OnTabillyInitialized = 'OnTabillyInitialized',
@@ -15,12 +15,9 @@ export enum EngineEventName {
   OnFinish = 'OnFinish',
 }
 
-type Event<
-  TEventName extends EngineEventName,
-  TEventData extends JsonObject = JsonObject,
-> = {
+type Event<TEventName extends EngineEventName, TEventData = null> = {
   eventName: TEventName;
-  tabilly: TabillyDebugData;
+  tabilly: Tabilly;
   data: TEventData;
 };
 
@@ -36,7 +33,7 @@ export type OnInitialQuirmsCachedEvent =
 export type OnEstinantResultEvent = Event<
   EngineEventName.OnEstinantResult,
   {
-    tropoignantName: JsonString;
+    tropoignant: Tropoignant;
     inputGepp: Gepp;
     inputs: Hubblepup[];
     outputs: QuirmTuple;
@@ -66,7 +63,7 @@ export const yek = {
     const time = process.hrtime.bigint();
     const eventId = `${time}--${event.eventName}`;
 
-    const eventFilePath = posix.join(ENGINE_EVENTS_PATH, `${eventId}.json`);
+    const eventFilePath = posix.join(ENGINE_EVENTS_PATH, `${eventId}.txt`);
     fs.writeFileSync(eventFilePath, logger.stringifyAsMultipleLines(event));
 
     logger.logText(eventFilePath);

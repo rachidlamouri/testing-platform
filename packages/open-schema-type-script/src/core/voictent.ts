@@ -1,16 +1,6 @@
 import { Lanbe } from './lanbe';
 import { NullStraline, NULL_STRALINE } from './straline';
 
-type PointerDebugData<TStraline> = {
-  index: number;
-  straline: TStraline | '--NULL--';
-};
-
-export type VoictentDebugData<TStraline> = {
-  stralineArray: TStraline[];
-  pointers: Record<string, PointerDebugData<TStraline>>;
-};
-
 /**
  * A stream-like data structure for managing pointers to Stralines.
  * It encapsulates pointer indices that can range from -1 to the length of the Straline "stream" (inclusive).
@@ -100,26 +90,5 @@ export class Voictent<TStraline> {
     }
 
     return this.stralineArray[this.size - 1];
-  }
-
-  get debugData(): VoictentDebugData<TStraline> {
-    return {
-      stralineArray: this.stralineArray,
-      pointers: Object.fromEntries(
-        Object.getOwnPropertySymbols(this.indicesByPointer).map<
-          [string, PointerDebugData<TStraline>]
-        >((pointer) => {
-          const straline = this.dereferencePointer(pointer);
-
-          return [
-            pointer.toString(),
-            {
-              index: this.indicesByPointer[pointer],
-              straline: straline === NULL_STRALINE ? '--NULL--' : straline,
-            },
-          ];
-        }),
-      ),
-    };
   }
 }

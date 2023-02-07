@@ -2,7 +2,6 @@ import { digikikify } from '../core/digikikify';
 import { Estinant } from '../core/estinant';
 import { Gepp } from '../core/gepp';
 import { Quirm, QuirmTuple } from '../core/quirm';
-import { JsonString } from '../utilities/json';
 import { blindCastEstinants } from './blindCastEstinants';
 import { fileAEstinant } from './file/fileA';
 import { SIMPLE_FILE_A_CONFIGURATION_QUIRM } from './file/fileAConfiguration';
@@ -14,17 +13,17 @@ const myGeppC: Gepp = 'example-3';
 const myGeppHello: Gepp = 'example-hello';
 const myGeppGoodbye: Gepp = 'example-goodbye';
 
-const myQuirm1: Quirm<JsonString> = {
+const myQuirm1: Quirm<string> = {
   geppTuple: [myGeppA, myGeppB],
   hubblepup: 'myself!',
 };
 
-const myQuirm2: Quirm<JsonString> = {
+const myQuirm2: Quirm<string> = {
   geppTuple: [myGeppA, myGeppC],
   hubblepup: 'someone else',
 };
 
-const myEstinant1: Estinant<JsonString, QuirmTuple<JsonString>> = {
+const myEstinant1: Estinant<string, QuirmTuple<string>> = {
   inputGepp: myGeppA,
   tropoignant: function sayHello(input) {
     return [
@@ -36,7 +35,7 @@ const myEstinant1: Estinant<JsonString, QuirmTuple<JsonString>> = {
   },
 };
 
-const myEstinant2: Estinant<JsonString, QuirmTuple<JsonString>> = {
+const myEstinant2: Estinant<string, QuirmTuple<string>> = {
   inputGepp: myGeppC,
   tropoignant: function sayGoodbye(input) {
     return [

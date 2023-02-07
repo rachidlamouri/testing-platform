@@ -1,11 +1,11 @@
-import { Json } from './json';
+import { getNamedSerialization } from './getNamedSerialization';
 
 export const logger = {
   logText: (text: string): void => {
     // eslint-disable-next-line no-console
     console.log(text);
   },
-  logJson: (data: Json): void => {
+  logData: (data: unknown): void => {
     // eslint-disable-next-line no-console
     console.log(logger.stringifyAsMultipleLines(data));
   },
@@ -13,10 +13,7 @@ export const logger = {
     // eslint-disable-next-line no-console
     console.log();
   },
-  stringifyAsSingleLine: (data: Json): string => {
-    return JSON.stringify(data);
-  },
-  stringifyAsMultipleLines: (data: Json): string => {
-    return JSON.stringify(data, null, 2);
+  stringifyAsMultipleLines: (data: unknown): string => {
+    return getNamedSerialization(data).text;
   },
 };
