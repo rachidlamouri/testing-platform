@@ -30,6 +30,16 @@ The Open Schema runtime environment.
 
 Someone or something that inputs information into an Open Schema engine.
 
+#### Concrete Programmer
+
+Someone or something that inputs information directly into an Open Schema engine.
+
+#### Abstract Programmer
+
+Someone or something that inputs information indirectly into an Open Schema engine. For example, a Concrete Programmer
+can create adapter utilities to an Open Schema engine to make it easier for an Abstract Programmer to model their
+problems and solutions.
+
 ## Folder Structure
 
 ### src/core
@@ -44,9 +54,9 @@ An example program for demonstrating the behavior of the `open-schema` engine.
 
 TODO: Generate these digrams from the code base
 
-### Abstract Programmer Concerns
+### Abstract Concrete Programmer Concerns
 
-A Programmer wants to process some data (Hubblepups), and they want to define how that data is processed (Tropoignants).
+A Concrete Programmer wants to process some data (Hubblepups), and they want to define how that data is processed (Tropoignants).
 Therefore they can define a stream of Hubblepups and a Tropoignant to proccess that stream.
 
 ```mermaid
@@ -61,7 +71,7 @@ S2 --> S3
 
 ### Abstract Programmable Units
 
-The Programmer programs the Engine by defining Quirms (wrappers on Hubblepups), and Estinants (wrappers on Tropoignants)
+The Concrete Programmer programs the Engine by defining Quirms (wrappers on Hubblepups), and Estinants (wrappers on Tropoignants)
 
 ```mermaid
 flowchart LR
@@ -111,14 +121,14 @@ S2 --> S3
 - The Engine is done processing a Platomity when the Lanbe reaches the end of the stream
   - **Note**: This behavior is subject to change as I iterate on the Engine
 
-### The Programmer and the Engine
+### The Concrete Programmer and the Engine
 
 ```mermaid
 stateDiagram-v2
 
 state "Engine (Digikikify)" as E
 
-[*] --> E: Programmer sends Estinants <br> and initial Quirms
+[*] --> E: Concrete Programmer sends Estinants <br> and initial Quirms
 
 state E {
   state "Initialize Tabilly" as E1
@@ -151,7 +161,7 @@ state E {
 
 ```mermaid
 sequenceDiagram
-  participant P as Programmer
+  participant P as Concrete Programmer
   participant E as Engine
   participant T as Tabilly <br> (Map<Gipp, Voictent>)
   participant V as Voictent
@@ -174,7 +184,7 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-  participant P as Programmer
+  participant P as Concrete Programmer
   participant E as Engine
   participant T as Tabilly <br> (Map<Gipp, Voictent>)
   participant V as Voictent

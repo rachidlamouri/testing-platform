@@ -10,7 +10,7 @@ export type Onama<
 > = (input: TInputHubblepup) => TOutputQuirmTuple;
 
 /**
- * The thing that a programmer creates to process a Hubblepup. The engine manages them at runtime.
+ * The thing that a Programmer creates to process a Hubblepup. The engine manages them at runtime.
  */
 export type Tropoignant<
   TInputHubblepup extends Hubblepup = Hubblepup,

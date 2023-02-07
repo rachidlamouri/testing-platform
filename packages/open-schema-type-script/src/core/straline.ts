@@ -6,7 +6,7 @@ export type Straline = unknown;
 /**
  * The engine's specific implementation of "null".
  * This prevents the engine from conflating the purpose of TypeScript's "null" and "undefined" with the engine's need to know if something is "null".
- * This value should not be used by the programmer.
+ * This value should not be used by a Programmer.
  */
 export const NULL_STRALINE = Symbol('null-straline');
 
