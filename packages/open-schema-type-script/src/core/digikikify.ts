@@ -63,36 +63,38 @@ export const digikikify = ({
     data: {},
   });
 
-  let nextPlatomities = platomities.slice();
-
   do {
-    nextPlatomities.forEach((platomity) => {
+    platomities.forEach((platomity) => {
       platomity.lanbe.advance();
     });
 
-    nextPlatomities = nextPlatomities.filter((platomity) => {
-      return platomity.lanbe.dereference() !== NULL_STRALINE;
-    });
+    platomities
+      .filter((platomity) => {
+        return platomity.lanbe.dereference() !== NULL_STRALINE;
+      })
+      .forEach((platomity) => {
+        const nextQuirm = platomity.lanbe.dereference() as Quirm;
+        const inputHubblepup = nextQuirm.hubblepup;
+        const outputQuirmTuple = platomity.estinant.tropoignant(inputHubblepup);
 
-    nextPlatomities.forEach((platomity) => {
-      const nextQuirm = platomity.lanbe.dereference() as Quirm;
-      const inputHubblepup = nextQuirm.hubblepup;
-      const outputQuirmTuple = platomity.estinant.tropoignant(inputHubblepup);
+        tabilly.addQuirmsToVoictents(outputQuirmTuple);
 
-      tabilly.addQuirmsToVoictents(outputQuirmTuple);
-
-      yek.emitEvent<OnEstinantResultEvent>({
-        eventName: EngineEventName.OnEstinantResult,
-        data: {
-          tropoignantName: platomity.estinant.tropoignant.name,
-          inputGipp: platomity.estinant.inputGipp,
-          inputs: [inputHubblepup],
-          outputs: outputQuirmTuple,
-        },
-        tabilly: tabilly.debugData,
+        yek.emitEvent<OnEstinantResultEvent>({
+          eventName: EngineEventName.OnEstinantResult,
+          data: {
+            tropoignantName: platomity.estinant.tropoignant.name,
+            inputGipp: platomity.estinant.inputGipp,
+            inputs: [inputHubblepup],
+            outputs: outputQuirmTuple,
+          },
+          tabilly: tabilly.debugData,
+        });
       });
-    });
-  } while (nextPlatomities.length > 0);
+  } while (
+    platomities.some(
+      (platomity) => platomity.lanbe.dereference() !== NULL_STRALINE,
+    )
+  );
 
   yek.emitEvent<OnFinishEvent>({
     eventName: EngineEventName.OnFinish,
