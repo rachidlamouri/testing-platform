@@ -1,7 +1,6 @@
 import { EstinantTuple } from './estinant';
 import { Platomity } from './platomity';
 import { Quirm, QuirmTuple } from './quirm';
-import { NULL_STRALINE } from './straline';
 import { Tabilly } from './tabilly';
 import {
   EngineEventName,
@@ -63,16 +62,12 @@ export const digikikify = ({
     data: null,
   });
 
-  do {
-    platomities.forEach((platomity) => {
-      platomity.lanbe.advance();
-    });
-
+  while (platomities.some((platomity) => platomity.lanbe.canAdvance())) {
     platomities
-      .filter((platomity) => {
-        return platomity.lanbe.dereference() !== NULL_STRALINE;
-      })
+      .filter((platomity) => platomity.lanbe.canAdvance())
       .forEach((platomity) => {
+        platomity.lanbe.advance();
+
         const nextQuirm = platomity.lanbe.dereference() as Quirm;
         const inputHubblepup = nextQuirm.hubblepup;
         const outputQuirmTuple = platomity.estinant.tropoignant(inputHubblepup);
@@ -90,11 +85,7 @@ export const digikikify = ({
           tabilly,
         });
       });
-  } while (
-    platomities.some(
-      (platomity) => platomity.lanbe.dereference() !== NULL_STRALINE,
-    )
-  );
+  }
 
   yek.emitEvent<OnFinishEvent>({
     eventName: EngineEventName.OnFinish,

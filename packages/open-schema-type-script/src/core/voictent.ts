@@ -3,7 +3,7 @@ import { NullStraline, NULL_STRALINE } from './straline';
 
 /**
  * A stream-like data structure for managing pointers to Stralines.
- * It encapsulates pointer indices that can range from -1 to the length of the Straline "stream" (inclusive).
+ * It encapsulates pointer indices that can range from -1 to the length of the Straline "stream" minus 1 (inclusive).
  * A pointer that is out of bounds of the "stream" will dereference to the NULL_STRALINE.
  * It is primarily used by the Engine to connect Quirms to Estinants, but it is decoupled from those specific data types.
  */
@@ -15,7 +15,7 @@ export class Voictent<TStraline> {
   static minimumInclusiveIndex = -1;
 
   private get maximumInclusiveIndex(): number {
-    return this.size;
+    return this.size - 1;
   }
 
   addStraline(straline: TStraline): void {
@@ -27,6 +27,10 @@ export class Voictent<TStraline> {
 
     this.indicesByPointer[pointer] = Voictent.minimumInclusiveIndex;
 
+    const canAdvancePointer = (): boolean => {
+      return this.canAdvance(pointer);
+    };
+
     const advancePointer = (): void => {
       this.advancePointer(pointer);
     };
@@ -37,6 +41,7 @@ export class Voictent<TStraline> {
 
     return {
       pointer,
+      canAdvance: canAdvancePointer,
       advance: advancePointer,
       dereference: dereferencePointer,
     };
@@ -48,10 +53,7 @@ export class Voictent<TStraline> {
     }
 
     const index = this.indicesByPointer[pointer];
-    if (
-      index === Voictent.minimumInclusiveIndex ||
-      index === this.maximumInclusiveIndex
-    ) {
+    if (index === Voictent.minimumInclusiveIndex) {
       return NULL_STRALINE;
     }
 
@@ -65,11 +67,14 @@ export class Voictent<TStraline> {
       throw Error(`Pointer "${pointer.toString()}" does not exist`);
     }
 
-    const currentIndex = this.indicesByPointer[pointer];
-
-    if (currentIndex < this.size) {
+    if (this.canAdvance(pointer)) {
       this.indicesByPointer[pointer] += 1;
     }
+  }
+
+  canAdvance(pointer: symbol): boolean {
+    const currentIndex = this.indicesByPointer[pointer];
+    return this.size > 0 && currentIndex < this.maximumInclusiveIndex;
   }
 
   get size(): number {

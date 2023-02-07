@@ -7,6 +7,10 @@ import { NullStraline } from './straline';
 export type Lanbe<TStraline> = {
   pointer: symbol;
   /**
+   * @returns Whether the pointer can advance or not
+   */
+  canAdvance: () => boolean;
+  /**
    * @modifies the index of the pointer within the Voictent by incrementing it
    */
   advance: () => void;
