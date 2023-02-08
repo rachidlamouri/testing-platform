@@ -6,10 +6,15 @@ import { TropoignantTypeName } from '../core/tropoignant';
 import { blindCastEstinants } from './blindCastEstinants';
 import { eventLogger } from './debugger/eventLogger';
 import { odeshinLogger } from './debugger/odeshinLogger';
+import { fileAMentursection } from './file/fileAMentursection';
 import { fileAEstinant } from './file/fileA';
 import { SIMPLE_FILE_A_CONFIGURATION_QUIRM } from './file/fileAConfiguration';
 import { fileAHasKnownExtensionSuffixEstinant } from './file/fileAHasKnownExtensionSuffix';
+import { typeScriptFileBEstinant } from './file/typeScriptFileB';
 import { validator } from './validation/validator';
+import { typeScriptFileCEstinant } from './file/typeScriptFileC';
+import { typeScriptFileDEstinant } from './file/typeScriptFileD';
+import { typeScriptFileDHasProperlyNamedExportValidation } from './file/typeScriptFileDHasProperlyNamedExportValidation';
 
 const myGeppA: Gepp = 'example-1';
 const myGeppB: Gepp = 'example-2';
@@ -68,5 +73,13 @@ digikikify({
     validator.validatorStreamer,
     eventLogger,
     odeshinLogger,
+    fileAMentursection,
+    typeScriptFileBEstinant,
+    typeScriptFileCEstinant,
+    typeScriptFileDEstinant,
+    typeScriptFileDHasProperlyNamedExportValidation,
   ]),
 });
+
+// TODO: figure out how to not have to do this
+export type Example = symbol;

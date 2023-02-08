@@ -1,9 +1,11 @@
+import { GeppTuple } from './gepp';
 import { Hubblepup } from './hubblepup';
 import { QuirmTuple } from './quirm';
 
 export enum TropoignantTypeName {
   Onama = 'Onama',
   Wortinator = 'Wortinator',
+  Mentursection = 'Mentursection',
 }
 
 type BaseTropoignant<
@@ -38,9 +40,21 @@ export type Wortinator<TInputHubblepup extends Hubblepup = Hubblepup> =
   >;
 
 /**
+ * A Tropoignant that applies zero or more additional Gepps to a Quirm
+ */
+export type Mentursection<TInputHubblepup extends Hubblepup = Hubblepup> =
+  BaseTropoignant<
+    TropoignantTypeName.Mentursection,
+    [input: TInputHubblepup],
+    GeppTuple
+  >;
+/**
  * The thing that a Programmer creates to process a Hubblepup. The engine manages them at runtime.
  */
 export type Tropoignant<
   TInputHubblepup extends Hubblepup = Hubblepup,
   TOutputQuirmTuple extends QuirmTuple = QuirmTuple,
-> = Onama<TInputHubblepup, TOutputQuirmTuple> | Wortinator<TInputHubblepup>;
+> =
+  | Onama<TInputHubblepup, TOutputQuirmTuple>
+  | Wortinator<TInputHubblepup>
+  | Mentursection<TInputHubblepup>;

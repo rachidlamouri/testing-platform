@@ -1,8 +1,7 @@
-import { Gepp } from '../../core/gepp';
 import { Hubblepup } from '../../core/hubblepup';
 import { Grition } from './grition';
 
-export const ODESHIN_GEPP = Symbol('odeshin') satisfies Gepp;
+export const ODESHIN_GEPP = Symbol('odeshin');
 
 export type OdeshinGepp = typeof ODESHIN_GEPP;
 

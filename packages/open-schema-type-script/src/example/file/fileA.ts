@@ -1,4 +1,5 @@
 import { Estinant } from '../../core/estinant';
+import { GeppTuple } from '../../core/gepp';
 import { TropoignantTypeName } from '../../core/tropoignant';
 import { File } from '../../utilities/file/file';
 import {
@@ -15,17 +16,25 @@ import {
   FILE_A_CONFIGURATION_GEPP,
 } from './fileAConfiguration';
 
-export type FileA = Grition<File<FileExtensionSuffixIdentifier, null>>;
+export type FileA<
+  TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
+> = Grition<File<TFileExtensionSuffixIdentifier, null>>;
 
 export type FileAIdentifier = `file-a:${string}`;
 
-export type FileAOdeshin = Odeshin<FileAIdentifier, FileA>;
+export type FileAOdeshin<TFileA extends FileA = FileA> = Odeshin<
+  FileAIdentifier,
+  TFileA
+>;
 
 export const FILE_A_GEPP = 'file-a';
 
 export type FileAGepp = typeof FILE_A_GEPP;
 
-export type FileAPlifal = Plifal<[FileAGepp], FileAOdeshin>;
+export type FileAPlifal<TGeppTuple extends GeppTuple = []> = Plifal<
+  [FileAGepp, ...TGeppTuple],
+  FileAOdeshin
+>;
 
 export type FileAPlifalTuple = readonly FileAPlifal[];
 

@@ -87,6 +87,18 @@ export const digikikify = ({
       case TropoignantTypeName.Wortinator:
         platomity.estinant.tropoignant.process(inputHubblepup);
         break;
+      case TropoignantTypeName.Mentursection: {
+        const additionalGepps =
+          platomity.estinant.tropoignant.process(inputHubblepup);
+
+        // TODO: evaluate the repercussions of mutating this state
+        nextQuirm.geppTuple.push(...additionalGepps);
+
+        additionalGepps.forEach((nextGepp) => {
+          tabilly.addQuirmByGepp(nextQuirm, nextGepp);
+        });
+        break;
+      }
     }
 
     if (outputQuirmTuple !== NULL_STRALINE) {

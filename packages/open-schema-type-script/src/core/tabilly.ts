@@ -41,7 +41,7 @@ export class Tabilly extends Map<Gepp, Voictent<Quirm>> {
     });
   }
 
-  private addQuirmByGepp(quirm: Quirm, gepp: Gepp): void {
+  addQuirmByGepp(quirm: Quirm, gepp: Gepp): void {
     const voictent = this.getOrInstantiateAndGetVoictent(gepp);
     voictent.addStraline(quirm);
     this.set(gepp, voictent);
