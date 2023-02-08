@@ -1,7 +1,7 @@
 import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
 import { QuirmTuple } from './quirm';
-import { Onama, Tropoignant, Wortinator } from './tropoignant';
+import { Mentursection, Onama, Tropoignant, Wortinator } from './tropoignant';
 
 type BaseEstinant<
   TInputHubblepup extends Hubblepup,
@@ -24,6 +24,10 @@ export type OnamaEstinant<
 export type WortinatorEstinant<TInputHubblepup extends Hubblepup = Hubblepup> =
   BaseEstinant<TInputHubblepup, [], Wortinator<TInputHubblepup>>;
 
+export type MentursectionEstinant<
+  TInputHubblepup extends Hubblepup = Hubblepup,
+> = BaseEstinant<TInputHubblepup, [], Mentursection<TInputHubblepup>>;
+
 /**
  * One of the two programmable units of the Engine (see Quirm).
  * It allows the Progammer to register a Tropoignant to a Voictent via a Gepp.
@@ -33,7 +37,8 @@ export type Estinant<
   TOutputQuirmTuple extends QuirmTuple = QuirmTuple,
 > =
   | OnamaEstinant<TInputHubblepup, TOutputQuirmTuple>
-  | WortinatorEstinant<TInputHubblepup>;
+  | WortinatorEstinant<TInputHubblepup>
+  | MentursectionEstinant<TInputHubblepup>;
 
 export type EstinantTuple<
   TInputHubblepup extends Hubblepup = Hubblepup,
