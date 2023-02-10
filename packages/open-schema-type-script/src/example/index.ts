@@ -20,6 +20,8 @@ import { typeScriptFileDEstinant } from './file/typeScriptFileD';
 import { typeScriptFileDHasProperlyNamedExportValidation } from './file/typeScriptFileDHasProperlyNamedExportValidation';
 import { yamlFileBEstinant } from './file/yamlFileB';
 import { actualCiYamlFileMentursection } from './ciYamlFile/actualCiYamlFile';
+import { EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM } from './ciYamlFile/expectedCiYamlFileContentsConfiguration';
+import { expectedCiYamlFileContentsOnama } from './ciYamlFile/expectedCiYamlFileContents';
 
 const myGeppA: Gepp = 'example-1';
 const myGeppB: Gepp = 'example-2';
@@ -73,6 +75,7 @@ digikikify({
     myQuirm2,
     SIMPLE_FILE_A_CONFIGURATION_QUIRM,
     CI_FILE_A_CONFIGURATION_QUIRM,
+    EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM,
   ],
   estinantTuple: blindCastEstinants([
     myEstinant1,
@@ -90,6 +93,7 @@ digikikify({
     typeScriptFileDHasProperlyNamedExportValidation,
     yamlFileBEstinant,
     actualCiYamlFileMentursection,
+    expectedCiYamlFileContentsOnama,
   ]),
 });
 
