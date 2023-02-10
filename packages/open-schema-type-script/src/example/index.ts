@@ -8,7 +8,10 @@ import { eventLogger } from './debugger/eventLogger';
 import { odeshinLogger } from './debugger/odeshinLogger';
 import { fileAMentursection } from './file/fileAMentursection';
 import { fileAEstinant } from './file/fileA';
-import { SIMPLE_FILE_A_CONFIGURATION_QUIRM } from './file/fileAConfiguration';
+import {
+  CI_FILE_A_CONFIGURATION_QUIRM,
+  SIMPLE_FILE_A_CONFIGURATION_QUIRM,
+} from './file/fileAConfiguration';
 import { fileAHasKnownExtensionSuffixEstinant } from './file/fileAHasKnownExtensionSuffix';
 import { typeScriptFileBEstinant } from './file/typeScriptFileB';
 import { validator } from './validation/validator';
@@ -63,7 +66,12 @@ const myEstinant2: Estinant<string, QuirmTuple<string>> = {
 };
 
 digikikify({
-  initialQuirmTuple: [myQuirm1, myQuirm2, SIMPLE_FILE_A_CONFIGURATION_QUIRM],
+  initialQuirmTuple: [
+    myQuirm1,
+    myQuirm2,
+    SIMPLE_FILE_A_CONFIGURATION_QUIRM,
+    CI_FILE_A_CONFIGURATION_QUIRM,
+  ],
   estinantTuple: blindCastEstinants([
     myEstinant1,
     myEstinant2,

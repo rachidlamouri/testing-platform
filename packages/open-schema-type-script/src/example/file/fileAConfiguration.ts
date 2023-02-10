@@ -66,3 +66,14 @@ export const SIMPLE_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
     },
   },
 };
+
+export const CI_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
+  geppTuple: [ODESHIN_GEPP, FILE_A_CONFIGURATION_GEPP],
+  hubblepup: {
+    identifier: FILE_A_CONFIGURATION_IDENTIFIER,
+    grition: {
+      directoryPath: '.github',
+      ignoredNodePathConfigurations: [],
+    },
+  },
+};
