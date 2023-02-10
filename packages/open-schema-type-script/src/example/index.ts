@@ -18,6 +18,7 @@ import { validator } from './validation/validator';
 import { typeScriptFileCEstinant } from './file/typeScriptFileC';
 import { typeScriptFileDEstinant } from './file/typeScriptFileD';
 import { typeScriptFileDHasProperlyNamedExportValidation } from './file/typeScriptFileDHasProperlyNamedExportValidation';
+import { yamlFileBEstinant } from './file/yamlFileB';
 
 const myGeppA: Gepp = 'example-1';
 const myGeppB: Gepp = 'example-2';
@@ -86,6 +87,7 @@ digikikify({
     typeScriptFileCEstinant,
     typeScriptFileDEstinant,
     typeScriptFileDHasProperlyNamedExportValidation,
+    yamlFileBEstinant,
   ]),
 });
 
