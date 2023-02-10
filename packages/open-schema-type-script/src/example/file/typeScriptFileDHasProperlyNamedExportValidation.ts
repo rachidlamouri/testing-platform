@@ -22,32 +22,35 @@ export const typeScriptFileDHasProperlyNamedExportValidation: ValidationEstinant
           identifier: `validation-result:${typeScriptFileDHasProperlyNamedExport.name}:${inputOdeshin.identifier}`,
           grition: {
             identifier: inputOdeshin.identifier,
-            predicate: 'fileAHasKnownExtensionSuffix',
-            isValid: inputOdeshin.grition.additionalMetadata.declarations.some(
-              (declaration): boolean => {
-                switch (declaration.referenceTypeName) {
-                  case DeclarationReferenceTypeName.Code:
-                    return (
-                      declaration.identifier ===
-                      inputOdeshin.grition.inMemoryFileName.camelCase
-                    );
-                  case DeclarationReferenceTypeName.Type:
-                    return (
-                      declaration.identifier ===
-                      inputOdeshin.grition.inMemoryFileName.pascalCase
-                    );
-                  case DeclarationReferenceTypeName.Hybrid:
-                    return (
-                      declaration.identifier ===
-                        inputOdeshin.grition.inMemoryFileName.camelCase ||
-                      declaration.identifier ===
+            predicate: 'typeScriptFileDHasProperlyNamedExport',
+            isValid:
+              inputOdeshin.grition.additionalMetadata.declarations.length ===
+                0 ||
+              inputOdeshin.grition.additionalMetadata.declarations.some(
+                (declaration): boolean => {
+                  switch (declaration.referenceTypeName) {
+                    case DeclarationReferenceTypeName.Code:
+                      return (
+                        declaration.identifier ===
+                        inputOdeshin.grition.inMemoryFileName.camelCase
+                      );
+                    case DeclarationReferenceTypeName.Type:
+                      return (
+                        declaration.identifier ===
                         inputOdeshin.grition.inMemoryFileName.pascalCase
-                    );
-                }
+                      );
+                    case DeclarationReferenceTypeName.Hybrid:
+                      return (
+                        declaration.identifier ===
+                          inputOdeshin.grition.inMemoryFileName.camelCase ||
+                        declaration.identifier ===
+                          inputOdeshin.grition.inMemoryFileName.pascalCase
+                      );
+                  }
 
-                throw Error('Not Implemented');
-              },
-            ),
+                  throw Error('Not Implemented');
+                },
+              ),
           },
         };
 
