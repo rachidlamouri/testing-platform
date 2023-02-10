@@ -8,13 +8,20 @@ import { eventLogger } from './debugger/eventLogger';
 import { odeshinLogger } from './debugger/odeshinLogger';
 import { fileAMentursection } from './file/fileAMentursection';
 import { fileAEstinant } from './file/fileA';
-import { SIMPLE_FILE_A_CONFIGURATION_QUIRM } from './file/fileAConfiguration';
+import {
+  CI_FILE_A_CONFIGURATION_QUIRM,
+  SIMPLE_FILE_A_CONFIGURATION_QUIRM,
+} from './file/fileAConfiguration';
 import { fileAHasKnownExtensionSuffixEstinant } from './file/fileAHasKnownExtensionSuffix';
 import { typeScriptFileBEstinant } from './file/typeScriptFileB';
 import { validator } from './validation/validator';
 import { typeScriptFileCEstinant } from './file/typeScriptFileC';
 import { typeScriptFileDEstinant } from './file/typeScriptFileD';
 import { typeScriptFileDHasProperlyNamedExportValidation } from './file/typeScriptFileDHasProperlyNamedExportValidation';
+import { yamlFileBEstinant } from './file/yamlFileB';
+import { actualCiYamlFileMentursection } from './ciYamlFile/actualCiYamlFile';
+import { EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM } from './ciYamlFile/expectedCiYamlFileContentsConfiguration';
+import { expectedCiYamlFileContentsOnama } from './ciYamlFile/expectedCiYamlFileContents';
 
 const myGeppA: Gepp = 'example-1';
 const myGeppB: Gepp = 'example-2';
@@ -63,7 +70,13 @@ const myEstinant2: Estinant<string, QuirmTuple<string>> = {
 };
 
 digikikify({
-  initialQuirmTuple: [myQuirm1, myQuirm2, SIMPLE_FILE_A_CONFIGURATION_QUIRM],
+  initialQuirmTuple: [
+    myQuirm1,
+    myQuirm2,
+    SIMPLE_FILE_A_CONFIGURATION_QUIRM,
+    CI_FILE_A_CONFIGURATION_QUIRM,
+    EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM,
+  ],
   estinantTuple: blindCastEstinants([
     myEstinant1,
     myEstinant2,
@@ -78,6 +91,9 @@ digikikify({
     typeScriptFileCEstinant,
     typeScriptFileDEstinant,
     typeScriptFileDHasProperlyNamedExportValidation,
+    yamlFileBEstinant,
+    actualCiYamlFileMentursection,
+    expectedCiYamlFileContentsOnama,
   ]),
 });
 
