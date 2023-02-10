@@ -9,7 +9,7 @@ import { DatumInstanceTypeScriptConfigurationCollectionBuilder } from '../../../
 import { TypeScriptSemanticsIdentifier } from '../typeScriptSemanticsIdentifier';
 
 export type ActualCiYamlFile = {
-  filePath: '.github/workflows/continuous-integration.yml';
+  filePath: '.github/workflows/continuous-integration.yaml';
   stringContents: string;
 };
 
@@ -32,7 +32,7 @@ export const buildActualCiYamlFile: DatumInstanceTypeScriptConfigurationCollecti
   InputCollection: [];
   OutputCollection: [ActualCiYamlFileTypeScriptConfiguration];
 }> = () => {
-  const filePath = '.github/workflows/continuous-integration.yml';
+  const filePath = '.github/workflows/continuous-integration.yaml';
   const stringContents = fs.readFileSync(filePath, 'utf8');
 
   const outputConfiguration: DatumInstanceTypeScriptConfigurationToDatumInstanceConfiguration<ActualCiYamlFileTypeScriptConfiguration> =

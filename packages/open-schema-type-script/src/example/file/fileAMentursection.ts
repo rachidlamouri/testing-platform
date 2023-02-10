@@ -12,6 +12,8 @@ export const fileAMentursection: MentursectionEstinant<FileAOdeshin> = {
       switch (inputOdeshin.grition.extension.suffixIdentifier) {
         case FileExtensionSuffixIdentifier.TypeScript:
           return [TYPE_SCRIPT_FILE_A_GEPP];
+        case FileExtensionSuffixIdentifier.Yaml:
+          return [];
         case FileExtensionSuffixIdentifier.Json:
           return [];
         case FileExtensionSuffixIdentifier.Unknown:
