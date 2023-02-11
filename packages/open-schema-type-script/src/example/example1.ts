@@ -1,66 +1,87 @@
 import { digikikify } from '../core/digikikify';
-import { Estinant } from '../core/estinant';
+import { MentursectionEstinant, OnamaEstinant } from '../core/estinant';
 import { Gepp } from '../core/gepp';
-import { Quirm, QuirmTuple } from '../core/quirm';
+import { Quirm } from '../core/quirm';
 import { TropoignantTypeName } from '../core/tropoignant';
 import { blindCastEstinants } from './blindCastEstinants';
 import { eventLogger } from './debugger/eventLogger';
 
-const myGeppA: Gepp = 'example-1';
-const myGeppB: Gepp = 'example-2';
-const myGeppC: Gepp = 'example-3';
-const myGeppHello: Gepp = 'example-hello';
-const myGeppGoodbye: Gepp = 'example-goodbye';
+const exampleGeppInitialInput: Gepp = 'gepp-initial-input';
+const exampleGeppA: Gepp = 'gepp-a';
+const exampleGeppB: Gepp = 'gepp-b';
 
-const myQuirm1: Quirm<string> = {
-  geppTuple: [myGeppA, myGeppB],
-  hubblepup: 'myself!',
+const exampleGeppHello: Gepp = 'gepp-hello';
+const exampleGeppDash1: Gepp = 'gepp-dash-1';
+const exampleGeppDash2: Gepp = 'gepp-dash-2';
+
+type ExampleHubblepup = string;
+
+type ExampleQuirm = Quirm<ExampleHubblepup>;
+
+const exampleQuirmA1: ExampleQuirm = {
+  geppTuple: [exampleGeppInitialInput, exampleGeppA],
+  hubblepup: 'a-1',
 };
 
-const myQuirm2: Quirm<string> = {
-  geppTuple: [myGeppA, myGeppC],
-  hubblepup: 'someone else',
+const exampleQuirmA2: ExampleQuirm = {
+  geppTuple: [exampleGeppInitialInput, exampleGeppA],
+  hubblepup: 'a-2',
 };
 
-const myEstinant1: Estinant<string, QuirmTuple<string>> = {
-  inputGepp: myGeppA,
+const exampleQuirmB1: ExampleQuirm = {
+  geppTuple: [exampleGeppInitialInput, exampleGeppB],
+  hubblepup: 'b-1',
+};
+
+const exampleQuirmB2: ExampleQuirm = {
+  geppTuple: [exampleGeppInitialInput, exampleGeppB],
+  hubblepup: 'b-2',
+};
+
+const exampleOnamaEstinant: OnamaEstinant<ExampleHubblepup, [ExampleQuirm]> = {
+  inputGepp: exampleGeppInitialInput,
   tropoignant: {
     typeName: TropoignantTypeName.Onama,
-    process: function sayHello(input) {
-      return [
-        {
-          geppTuple: [myGeppHello],
-          hubblepup: `Hello ${input}`,
-        },
-      ];
+    process: function sayHello(input: ExampleHubblepup) {
+      const output: ExampleQuirm = {
+        geppTuple: [exampleGeppHello],
+        hubblepup: `Hello: ${input}`,
+      };
+
+      return [output];
     },
   },
 };
 
-const myEstinant2: Estinant<string, QuirmTuple<string>> = {
-  inputGepp: myGeppC,
+const exampleMentursectionEstinant: MentursectionEstinant<ExampleHubblepup> = {
+  inputGepp: exampleGeppInitialInput,
   tropoignant: {
-    typeName: TropoignantTypeName.Onama,
-    process: function sayGoodbye(input) {
-      return [
-        {
-          geppTuple: [myGeppGoodbye],
-          hubblepup: `Goodbye ${input}`,
-        },
-      ];
+    typeName: TropoignantTypeName.Mentursection,
+    process: function categorizeByDash(input: ExampleHubblepup) {
+      const [, numberText] = input.split('-') as [string, '1' | '2'];
+
+      if (numberText === '1') {
+        return [exampleGeppDash1];
+      }
+
+      return [exampleGeppDash2];
     },
   },
 };
+
+const exampleWortinatorEstinant = eventLogger;
 
 digikikify({
   initialQuirmTuple: [
-    myQuirm1,
-    myQuirm2,
+    exampleQuirmA1,
+    exampleQuirmA2,
+    exampleQuirmB1,
+    exampleQuirmB2,
   ],
   estinantTuple: blindCastEstinants([
-    myEstinant1,
-    myEstinant2,
-    eventLogger,
+    exampleOnamaEstinant,
+    exampleWortinatorEstinant,
+    exampleMentursectionEstinant,
   ]),
 });
 
