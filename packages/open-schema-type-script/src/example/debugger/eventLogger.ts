@@ -8,21 +8,17 @@ import {
 import { logger } from '../../utilities/logger';
 import { fileUtilities } from './fileUtilities';
 
-let eventCount = 0;
-
 export const eventLogger: WortinatorEstinant<DigikikifierEvent> = {
   inputGepp: digikikifierGeppsByIdentifer.OnEvent,
   tropoignant: {
     typeName: TropoignantTypeName.Wortinator,
     process: function logEvent(event) {
-      eventCount += 1;
       const eventId = `${event.time}--${event.name}`;
-
       const eventFilePath = fileUtilities.getEventFilePath(eventId);
 
       if (
-        event.name !== EngineEventName.OnEstinantResult ||
-        eventCount % 50 === 0
+        event.name !== EngineEventName.OnEstinantResult &&
+        event.name !== EngineEventName.OnEstinant2Result
       ) {
         fileUtilities.writeFile(
           eventFilePath,
