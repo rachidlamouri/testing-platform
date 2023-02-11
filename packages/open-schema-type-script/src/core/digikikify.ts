@@ -1,5 +1,8 @@
-import { EstinantTuple } from './estinant';
-import { Platomity } from './platomity';
+import { Cology } from './cology';
+import { Dreanor } from './dreanor';
+import { Estinant2, Estinant2Tuple, EstinantTuple } from './estinant';
+import { Platomity, Platomity2 } from './platomity';
+import { Procody } from './procody';
 import { Quirm, QuirmTuple } from './quirm';
 import { NullStraline, NULL_STRALINE } from './straline';
 import { Tabilly } from './tabilly';
@@ -7,6 +10,7 @@ import { TropoignantTypeName } from './tropoignant';
 import {
   digikikifierGeppsByIdentifer,
   EngineEventName,
+  OnEstinant2ResultEvent,
   OnEstinantResultEvent,
   OnEstinantsRegisteredEvent,
   OnFinishEvent,
@@ -15,9 +19,21 @@ import {
   yek,
 } from './yek';
 
+type DigikikifierEstinantTuple = EstinantTuple | Estinant2Tuple;
+
+const isEstinant2 = (
+  estinant: DigikikifierEstinantTuple[number],
+): estinant is Estinant2 => 'inputGeppTuple' in estinant;
+
+type DigikikifierPlatomity = Platomity | Platomity2;
+
+const isPlatomity2 = (
+  platomity: DigikikifierPlatomity,
+): platomity is Platomity2 => 'lanbeTuple' in platomity;
+
 export type DigikikifierInput = {
   initialQuirmTuple: QuirmTuple;
-  estinantTuple: EstinantTuple;
+  estinantTuple: DigikikifierEstinantTuple;
 };
 
 /**
@@ -41,7 +57,28 @@ export const digikikify = ({
     }),
   ]);
 
-  const platomities = estinantTuple.map<Platomity>((estinant) => {
+  const platomities = estinantTuple.map<DigikikifierPlatomity>((estinant) => {
+    if (isEstinant2(estinant)) {
+      const dreanorTuple = estinant.inputGeppTuple.map<Dreanor>((inputGepp) => {
+        const voictent = tabilly.getOrInstantiateAndGetVoictent(inputGepp);
+        const lanbe = voictent.createPointer(estinant.tropoig.name);
+        const dreanor: Dreanor = {
+          gepp: inputGepp,
+          lanbe,
+        };
+
+        return dreanor;
+      });
+
+      const platomity: Platomity2 = {
+        estinant,
+        dreanorTuple,
+        procody: new Procody(),
+      };
+
+      return platomity;
+    }
+
     const voictent = tabilly.getOrInstantiateAndGetVoictent(estinant.inputGepp);
 
     // TODO: consider using an estinant identifier instead of the tropoignant name
@@ -71,7 +108,71 @@ export const digikikify = ({
     }),
   ]);
 
-  const executePlatomity = (platomity: Platomity): void => {
+  const canPlatomityAdvance = (platomity: DigikikifierPlatomity): boolean => {
+    if (isPlatomity2(platomity)) {
+      return platomity.dreanorTuple.some((dreanor) =>
+        dreanor.lanbe.canAdvance(),
+      );
+    }
+
+    return platomity.lanbe.canAdvance();
+  };
+
+  const executePlatomity = (platomity: DigikikifierPlatomity): void => {
+    if (isPlatomity2(platomity)) {
+      const readyCologies: Cology[] = [];
+
+      platomity.dreanorTuple
+        .filter((dreanor) => dreanor.lanbe.canAdvance())
+        .forEach((dreanor) => {
+          dreanor.lanbe.advance();
+
+          const nextQuirm = dreanor.lanbe.dereference() as Quirm;
+          const zorn = platomity.estinant.croard(nextQuirm.hubblepup);
+          const cology =
+            platomity.procody.get(zorn) ??
+            new Cology(platomity.estinant.inputGeppTuple);
+
+          cology.set(dreanor.gepp, nextQuirm);
+          platomity.procody.set(zorn, cology);
+
+          if (cology.isReady()) {
+            readyCologies.push(cology);
+          }
+        });
+
+      readyCologies.forEach((cology) => {
+        const inputHubblepupTuple = platomity.estinant.inputGeppTuple.map(
+          (gepp) => {
+            const quirm = cology.get(gepp) as Quirm;
+            const { hubblepup } = quirm;
+            return hubblepup;
+          },
+        );
+
+        const outputQuirmTuple = platomity.estinant.tropoig(
+          ...inputHubblepupTuple,
+        );
+
+        tabilly.addQuirmsToVoictents(outputQuirmTuple);
+
+        tabilly.addQuirmsToVoictents([
+          yek.createEventQuirm<OnEstinant2ResultEvent>({
+            name: EngineEventName.OnEstinant2Result,
+            data: {
+              tropoignant: platomity.estinant.tropoig,
+              inputGeppTuple: platomity.estinant.inputGeppTuple,
+              inputTuple: inputHubblepupTuple,
+              outputTuple: outputQuirmTuple,
+            },
+            tabilly,
+          }),
+        ]);
+      });
+
+      return;
+    }
+
     platomity.lanbe.advance();
 
     const nextQuirm = platomity.lanbe.dereference() as Quirm;
@@ -121,12 +222,10 @@ export const digikikify = ({
     }
   };
 
-  while (platomities.some((platomity) => platomity.lanbe.canAdvance())) {
-    platomities
-      .filter((platomity) => platomity.lanbe.canAdvance())
-      .forEach((platomity) => {
-        executePlatomity(platomity);
-      });
+  while (platomities.some(canPlatomityAdvance)) {
+    platomities.filter(canPlatomityAdvance).forEach((platomity) => {
+      executePlatomity(platomity);
+    });
   }
 
   tabilly.addQuirmsToVoictents([
@@ -144,6 +243,7 @@ export const digikikify = ({
   platomities
     .filter(
       (platomity) =>
+        !isPlatomity2(platomity) &&
         platomity.estinant.inputGepp === digikikifierGeppsByIdentifer.OnEvent,
     )
     .forEach((platomity) => {
@@ -153,6 +253,7 @@ export const digikikify = ({
   platomities
     .filter(
       (platomity) =>
+        !isPlatomity2(platomity) &&
         platomity.estinant.inputGepp === digikikifierGeppsByIdentifer.OnFinish,
     )
     .forEach((platomity) => {

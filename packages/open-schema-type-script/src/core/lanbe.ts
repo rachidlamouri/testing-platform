@@ -19,3 +19,5 @@ export type Lanbe<TStraline> = {
    */
   dereference: () => TStraline | NullStraline;
 };
+
+export type LanbeTuple<TStraline> = readonly Lanbe<TStraline>[];

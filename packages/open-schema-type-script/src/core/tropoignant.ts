@@ -1,5 +1,5 @@
 import { GeppTuple } from './gepp';
-import { Hubblepup } from './hubblepup';
+import { Hubblepup, HubblepupTuple } from './hubblepup';
 import { QuirmTuple } from './quirm';
 
 export enum TropoignantTypeName {
@@ -48,6 +48,7 @@ export type Mentursection<TInputHubblepup extends Hubblepup = Hubblepup> =
     [input: TInputHubblepup],
     GeppTuple
   >;
+
 /**
  * The thing that a Programmer creates to process a Hubblepup. The engine manages them at runtime.
  */
@@ -58,3 +59,11 @@ export type Tropoignant<
   | Onama<TInputHubblepup, TOutputQuirmTuple>
   | Wortinator<TInputHubblepup>
   | Mentursection<TInputHubblepup>;
+
+/**
+ * The thing that a Programmer creates to process one or more Hubblepups. The engine manages them at runtime.
+ */
+export type Tropoignant2<
+  TInputHubblepupTuple extends HubblepupTuple = HubblepupTuple,
+  TOutputQuirmTuple extends QuirmTuple = QuirmTuple,
+> = (...inputs: TInputHubblepupTuple) => TOutputQuirmTuple;

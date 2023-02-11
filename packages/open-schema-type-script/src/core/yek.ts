@@ -1,8 +1,8 @@
-import { Gepp } from './gepp';
+import { Gepp, GeppTuple } from './gepp';
 import { Hubblepup } from './hubblepup';
 import { Quirm, QuirmTuple } from './quirm';
 import { Tabilly } from './tabilly';
-import { Tropoignant } from './tropoignant';
+import { Tropoignant, Tropoignant2 } from './tropoignant';
 
 export enum DigikikifierGeppIdentifer {
   OnEvent = 'OnEvent',
@@ -26,6 +26,7 @@ export enum EngineEventName {
   OnEstinantsRegistered = 'OnEstinantsRegistered',
   OnInitialQuirmsCached = 'OnInitialQuirmsCached',
   OnEstinantResult = 'OnEstinantResult',
+  OnEstinant2Result = 'OnEstinant2Result',
   OnFinish = 'OnFinish',
 }
 
@@ -55,6 +56,16 @@ export type OnEstinantResultEvent = Event<
   }
 >;
 
+export type OnEstinant2ResultEvent = Event<
+  EngineEventName.OnEstinant2Result,
+  {
+    tropoignant: Tropoignant2;
+    inputGeppTuple: GeppTuple;
+    inputTuple: Hubblepup[];
+    outputTuple: QuirmTuple;
+  }
+>;
+
 export type OnFinishEvent = Event<EngineEventName.OnFinish>;
 
 export type DigikikifierEvent = Hubblepup<
@@ -62,6 +73,7 @@ export type DigikikifierEvent = Hubblepup<
   | OnEstinantsRegisteredEvent
   | OnInitialQuirmsCachedEvent
   | OnEstinantResultEvent
+  | OnEstinant2ResultEvent
   | OnFinishEvent
 >;
 
