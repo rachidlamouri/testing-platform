@@ -1,8 +1,9 @@
 import { NullStraline } from './straline';
 
 /**
- * A data structure that encapsulates pointer operations on a Voictent.
- * This allows an external entity to consume a Voictent without needing a direct reference to it.
+ * A data structure that facilitates streaming Stralines form a voictent.
+ * It encapsulates pointer operations on a Voictent.
+ * This allows an external entity to read a Voictent without needing a direct reference to it.
  */
 export type Lanbe<TStraline> = {
   pointer: symbol;

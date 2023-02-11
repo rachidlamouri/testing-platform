@@ -57,16 +57,16 @@ TODO: Generate these digrams from the code base
 ### Abstract Concrete Programmer Concerns
 
 A Concrete Programmer wants to process some data (Hubblepups), and they want to define how that data is processed (Tropoignants).
-Therefore they can define a stream of Hubblepups and a Tropoignant to proccess that stream.
+Therefore they can define a collection of Hubblepups and a Tropoignant to proccess that collection via a stream.
 
 ```mermaid
 flowchart LR
-S1(Input Hubblepup Stream)
+S1(Input Hubblepup Collection)
 S2(Tropoignant)
-S3(Output Hubblepup Stream)
+S3(Output Hubblepup Collection)
 
-S1 --> S2
-S2 --> S3
+S1 -->|stream| S2
+S2 -->|stream| S3
 ```
 
 ### Abstract Programmable Units
@@ -75,12 +75,12 @@ The Concrete Programmer programs the Engine by defining Quirms (wrappers on Hubb
 
 ```mermaid
 flowchart LR
-S1(Input Quirm Stream)
+S1(Input Quirm Collecion)
 S2(Estinant)
-S3(Output Quirm Stream)
+S3(Output Quirm Collecion)
 
-S1 --> S2
-S2 --> S3
+S1 -->|stream| S2
+S2 -->|stream| S3
 ```
 
 ### Abstract Engine Concerns
@@ -91,13 +91,13 @@ S1(Input Quirm Voictant)
 S2(Estinant)
 S3(Output Quirm Voictant)
 
-S1 --> S2
-S2 --> S3
+S1 -->|Lanbe| S2
+S2 -->|Lanbe| S3
 ```
 
 #### Voictents and the Tabilly
 
-- A Voictent is an implementation of a "stream"
+- A Voictent is a collection of anything (Stralines)
 - The Engine has a Tabilly which is an index of Voictents by Gepp
 
 #### Gepps
@@ -110,15 +110,15 @@ S2 --> S3
 
 #### Lanbes
 
-- A Voictent can have multiple pointers to various entities in the "stream"
-- A Lanbe is an abstraction of one of these pointers and its operations
+- A Voictent can have multiple pointers to various entities in the collection
+- A Lanbe is an abstraction of one of these pointers and its operations, which allows it to stream entities to and from Voictents
 
 #### Platomities
 
 - The Engine uses Platomities (collections of Estinants and Lanbes) to feed Quirms into Estinants, and subsequently,
   Hubblepups into Tropoignants
 - The Engine uses the Platomity's Lanbe to keep track of which Quirm to process next
-- The Engine is done processing a Platomity when the Lanbe reaches the end of the stream
+- The Engine is done processing a Platomity when the Lanbe reaches the end of the Voictent
   - **Note**: This behavior is subject to change as I iterate on the Engine
 
 ### The Concrete Programmer and the Engine

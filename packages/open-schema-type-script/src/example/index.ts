@@ -83,7 +83,7 @@ digikikify({
     fileAEstinant,
     fileAHasKnownExtensionSuffixEstinant,
     validator.validatorExecutor,
-    validator.validatorStreamer,
+    validator.validationAggregator,
     eventLogger,
     odeshinLogger,
     fileAMentursection,
