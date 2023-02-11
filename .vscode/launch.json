@@ -1,0 +1,17 @@
+{
+  "configurations": [
+    {
+      "name": "Open Schema Example 1",
+      "request": "launch",
+      "runtimeArgs": [
+        "ts-node",
+        "${workspaceFolder}/packages/open-schema-type-script/src/example/example1.ts"
+      ],
+      "runtimeExecutable": "npx",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    }
+  ]
+}
