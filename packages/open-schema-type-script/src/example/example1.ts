@@ -1,5 +1,9 @@
 import { digikikify } from '../core/digikikify';
-import { MentursectionEstinant, OnamaEstinant } from '../core/estinant';
+import {
+  Estinant2,
+  MentursectionEstinant,
+  OnamaEstinant,
+} from '../core/estinant';
 import { Gepp } from '../core/gepp';
 import { Quirm } from '../core/quirm';
 import { TropoignantTypeName } from '../core/tropoignant';
@@ -13,6 +17,8 @@ const exampleGeppB: Gepp = 'gepp-b';
 const exampleGeppHello: Gepp = 'gepp-hello';
 const exampleGeppDash1: Gepp = 'gepp-dash-1';
 const exampleGeppDash2: Gepp = 'gepp-dash-2';
+
+const exampleGeppC: Gepp = 'gepp-c';
 
 type ExampleHubblepup = string;
 
@@ -71,6 +77,26 @@ const exampleMentursectionEstinant: MentursectionEstinant<ExampleHubblepup> = {
 
 const exampleWortinatorEstinant = eventLogger;
 
+const exampleCortmumEstinant2: Estinant2<[ExampleQuirm, ExampleQuirm], string> =
+  {
+    inputGeppTuple: [exampleGeppA, exampleGeppB],
+    croard: function getId(input) {
+      const [, numberText] = input.split('-') as [string, '1' | '2'];
+      return numberText;
+    },
+    tropoig: function join(hubblepupA, hubblepupB) {
+      const outputQuirm: Quirm = {
+        geppTuple: [exampleGeppC],
+        hubblepup: {
+          hubblepupA,
+          hubblepupB,
+        },
+      };
+
+      return [outputQuirm];
+    },
+  };
+
 digikikify({
   initialQuirmTuple: [
     exampleQuirmA1,
@@ -82,6 +108,7 @@ digikikify({
     exampleOnamaEstinant,
     exampleWortinatorEstinant,
     exampleMentursectionEstinant,
+    exampleCortmumEstinant2,
   ]),
 });
 
