@@ -14,7 +14,7 @@ import {
 } from './expectedCiYamlFileContents';
 
 export const ASSERTABLE_CI_YAML_FILE_CONTENTS_IDENTIFIER =
-  'assertable-ci-yaml-file' as const;
+  'assertable-ci-yaml-file-contents' as const;
 
 export type AssertableCiYamlFileContentsIdentifier =
   typeof ASSERTABLE_CI_YAML_FILE_CONTENTS_IDENTIFIER;
