@@ -19,6 +19,9 @@ const exampleGeppDash1: Gepp = 'gepp-dash-1';
 const exampleGeppDash2: Gepp = 'gepp-dash-2';
 
 const exampleGeppC: Gepp = 'gepp-c';
+const exampleGeppWhattup: Gepp = 'gepp-whattup';
+const exampleGeppA2: Gepp = 'gepp-aa';
+const exampleGeppB2: Gepp = 'gepp-bb';
 
 type ExampleHubblepup = string;
 
@@ -97,6 +100,51 @@ const exampleCortmumEstinant2: Estinant2<[ExampleQuirm, ExampleQuirm], string> =
     },
   };
 
+const exampleOnamaEstinant2: Estinant2<[ExampleQuirm], symbol> = {
+  inputGeppTuple: [exampleGeppInitialInput],
+  croard: function getId(input) {
+    return Symbol(input);
+  },
+  tropoig: function sayWhattup(input) {
+    const output: ExampleQuirm = {
+      geppTuple: [exampleGeppWhattup],
+      hubblepup: `Whattup: ${input}`,
+    };
+
+    return [output];
+  },
+};
+
+const exampleWortinatorEstinant2: Estinant2<[ExampleQuirm], symbol> = {
+  inputGeppTuple: [exampleGeppInitialInput],
+  croard: function getId(input) {
+    return Symbol(input);
+  },
+  tropoig: function sayWhattup(input) {
+    // eslint-disable-next-line no-console
+    console.log(`Wort Wort Wort: ${input}`);
+
+    return [];
+  },
+};
+
+const exampleMentursectionEstinant2: Estinant2<[ExampleQuirm], symbol> = {
+  inputGeppTuple: [exampleGeppInitialInput],
+  croard: function getId(input) {
+    return Symbol(input);
+  },
+  tropoig: function sayWhattup(input) {
+    const isA = input.startsWith('a');
+
+    const output: ExampleQuirm = {
+      geppTuple: [isA ? exampleGeppA2 : exampleGeppB2],
+      hubblepup: input,
+    };
+
+    return [output];
+  },
+};
+
 digikikify({
   initialQuirmTuple: [
     exampleQuirmA1,
@@ -109,6 +157,9 @@ digikikify({
     exampleWortinatorEstinant,
     exampleMentursectionEstinant,
     exampleCortmumEstinant2,
+    exampleOnamaEstinant2,
+    exampleWortinatorEstinant2,
+    exampleMentursectionEstinant2,
   ]),
 });
 
