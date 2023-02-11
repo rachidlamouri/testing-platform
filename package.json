@@ -6,7 +6,7 @@
   "scripts": {
     "open-schema-example": "ts-node packages/open-schema-type-script/src/v1/example/index.ts",
     "describe:repository": "npm run open-schema-example -- r",
-    "lint:repository": "npm run open-schema-example -- v",
+    "lint:repository": "ts-node packages/open-schema-type-script/src/example/example2.ts",
     "lint:ts:all": "npm run --silent lint:ts .",
     "lint:ts:fix-all": "npm run --silent lint:ts -- --fix .",
     "lint:ts": "eslint --color --max-warnings 0 --ext ts,js",

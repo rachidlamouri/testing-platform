@@ -1,7 +1,6 @@
 import { Gepp, GeppTuple } from './gepp';
 import { Hubblepup } from './hubblepup';
 import { Quirm, QuirmTuple } from './quirm';
-import { Tabilly } from './tabilly';
 import { Tropoignant, Tropoignant2 } from './tropoignant';
 
 export enum DigikikifierGeppIdentifer {
@@ -32,7 +31,6 @@ export enum EngineEventName {
 
 type Event<TEventName extends EngineEventName, TEventData = null> = {
   name: TEventName;
-  tabilly: Tabilly;
   data: TEventData;
   time: string;
 };
@@ -82,7 +80,7 @@ export type DigikikifierEvent = Hubblepup<
  */
 export const yek = {
   createEventQuirm: <TPartialDigikikifierEvent extends DigikikifierEvent>(
-    partialEvent: Pick<TPartialDigikikifierEvent, 'name' | 'tabilly' | 'data'>,
+    partialEvent: Pick<TPartialDigikikifierEvent, 'name' | 'data'>,
   ): Quirm<DigikikifierEvent> => {
     const event = {
       ...partialEvent,

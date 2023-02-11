@@ -52,7 +52,6 @@ export const digikikify = ({
   tabilly.addQuirmsToVoictents([
     yek.createEventQuirm<OnTabillyInitializedEvent>({
       name: EngineEventName.OnTabillyInitialized,
-      tabilly,
       data: null,
     }),
   ]);
@@ -93,7 +92,6 @@ export const digikikify = ({
   tabilly.addQuirmsToVoictents([
     yek.createEventQuirm<OnEstinantsRegisteredEvent>({
       name: EngineEventName.OnEstinantsRegistered,
-      tabilly,
       data: null,
     }),
   ]);
@@ -103,7 +101,6 @@ export const digikikify = ({
   tabilly.addQuirmsToVoictents([
     yek.createEventQuirm<OnInitialQuirmsCachedEvent>({
       name: EngineEventName.OnInitialQuirmsCached,
-      tabilly,
       data: null,
     }),
   ]);
@@ -165,7 +162,6 @@ export const digikikify = ({
               inputTuple: inputHubblepupTuple,
               outputTuple: outputQuirmTuple,
             },
-            tabilly,
           }),
         ]);
       });
@@ -216,7 +212,6 @@ export const digikikify = ({
             inputs: [inputHubblepup],
             outputs: outputQuirmTuple,
           },
-          tabilly,
         }),
       ]);
     }
@@ -231,7 +226,6 @@ export const digikikify = ({
   tabilly.addQuirmsToVoictents([
     yek.createEventQuirm<OnFinishEvent>({
       name: EngineEventName.OnFinish,
-      tabilly,
       data: null,
     }),
     {
