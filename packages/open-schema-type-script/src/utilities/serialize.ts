@@ -1,4 +1,12 @@
-export const serialize = (datum: unknown, cache = new Set()): string => {
+type CachedDatum = {
+  datum: unknown;
+  serialization: string;
+};
+
+export const serialize = (
+  datum: unknown,
+  cache = new Map<unknown, CachedDatum | null>(),
+): string => {
   if (datum === null) {
     return 'NULL|null';
   }
@@ -23,15 +31,23 @@ export const serialize = (datum: unknown, cache = new Set()): string => {
 
   if (cache.has(datum)) {
     // TODO: create a local identifier that we can use to provide a path to the referenced item
-    return 'CIRC: ???';
+
+    const cachedValue = cache.get(datum) as CachedDatum | null;
+
+    if (cachedValue === null) {
+      // TODO: investigate how this happens further
+      return 'CIRC: ???';
+    }
+
+    return cachedValue.serialization;
   }
 
-  cache.add(datum);
+  cache.set(datum, null);
 
   if (Array.isArray(datum)) {
     const elementSerializations = datum.map((item) => serialize(item, cache));
 
-    return [
+    const serialization = [
       'ARRA: [',
       ...elementSerializations.map((text) =>
         text
@@ -41,6 +57,10 @@ export const serialize = (datum: unknown, cache = new Set()): string => {
       ),
       ']',
     ].join('\n');
+
+    cache.set(datum, { datum, serialization });
+
+    return serialization;
   }
 
   let entries: [unknown, unknown][];
@@ -69,7 +89,7 @@ export const serialize = (datum: unknown, cache = new Set()): string => {
 
   const constructorId = constructorName.toUpperCase().slice(0, 4);
 
-  return [
+  const serialization = [
     `${constructorId}: {`,
     ...properties.map(({ serializedKey, serializedValue }) => {
       return [
@@ -79,4 +99,8 @@ export const serialize = (datum: unknown, cache = new Set()): string => {
     }),
     '}',
   ].join('\n');
+
+  cache.set(datum, { datum, serialization });
+
+  return serialization;
 };

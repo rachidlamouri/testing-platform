@@ -1,7 +1,20 @@
+import { Croarder } from './croarder';
 import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
-import { QuirmTuple } from './quirm';
-import { Mentursection, Onama, Tropoignant, Wortinator } from './tropoignant';
+import {
+  QuirmTuple,
+  QuirmTupleToGeppTuple,
+  QuirmTupleToHubblepupTuple,
+  QuirmTupleToHubblepupTupleElement,
+} from './quirm';
+import { Straline } from './straline';
+import {
+  Mentursection,
+  Onama,
+  Tropoignant,
+  Tropoignant2,
+  Wortinator,
+} from './tropoignant';
 
 type BaseEstinant<
   TInputHubblepup extends Hubblepup,
@@ -44,3 +57,24 @@ export type EstinantTuple<
   TInputHubblepup extends Hubblepup = Hubblepup,
   TOutputQuirmTuple extends QuirmTuple = QuirmTuple,
 > = readonly Estinant<TInputHubblepup, TOutputQuirmTuple>[];
+
+/**
+ * One of the two programmable units of the Engine (see Quirm).
+ * It allows the Progammer to register a Tropoignant to one or more Voictents via a tuple of Gepps.
+ */
+export type Estinant2<
+  TInputQuirmTuple extends QuirmTuple = QuirmTuple,
+  TIntersectionIdentity extends Straline = Straline,
+> = {
+  inputGeppTuple: QuirmTupleToGeppTuple<TInputQuirmTuple>;
+  tropoig: Tropoignant2<QuirmTupleToHubblepupTuple<TInputQuirmTuple>>;
+  croard: Croarder<
+    QuirmTupleToHubblepupTupleElement<TInputQuirmTuple>,
+    TIntersectionIdentity
+  >;
+};
+
+export type Estinant2Tuple<
+  TInputQuirmTuple extends QuirmTuple = QuirmTuple,
+  TIntersectionIdentity extends Straline = Straline,
+> = readonly Estinant2<TInputQuirmTuple, TIntersectionIdentity>[];

@@ -17,3 +17,14 @@ export type Quirm<
 
 export type QuirmTuple<THubblepup extends Hubblepup = Hubblepup> =
   readonly Quirm<THubblepup>[];
+
+export type QuirmTupleToGeppTuple<TQuirmTuple extends QuirmTuple> = {
+  [Index in keyof TQuirmTuple]: TQuirmTuple[Index]['geppTuple'][number];
+};
+
+export type QuirmTupleToHubblepupTuple<TQuirmTuple extends QuirmTuple> = {
+  [Index in keyof TQuirmTuple]: TQuirmTuple[Index]['hubblepup'];
+};
+
+export type QuirmTupleToHubblepupTupleElement<TQuirmTuple extends QuirmTuple> =
+  QuirmTupleToHubblepupTuple<TQuirmTuple>[number];
