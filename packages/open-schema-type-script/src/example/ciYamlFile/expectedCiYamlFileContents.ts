@@ -38,11 +38,11 @@ export const EXPECTED_CI_YAML_FILE_CONTENTS_GEPPP = Symbol(
   EXPECTED_CI_YAML_FILE_CONTENTS_IDENTIFIER,
 );
 
-export type ExpectedCiYamlFileGepp =
+export type ExpectedCiYamlFileContentsGepp =
   typeof EXPECTED_CI_YAML_FILE_CONTENTS_GEPPP;
 
 export type ExpectedCiYamlFileContentsPlifal = Plifal<
-  [ExpectedCiYamlFileGepp],
+  [ExpectedCiYamlFileContentsGepp],
   ExpectedCiYamlFileContentsOdeshin
 >;
 

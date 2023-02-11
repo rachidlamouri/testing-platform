@@ -18,6 +18,9 @@ import { yamlFileBEstinant } from './file/yamlFileB';
 import { actualCiYamlFileMentursection } from './ciYamlFile/actualCiYamlFile';
 import { EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM } from './ciYamlFile/expectedCiYamlFileContentsConfiguration';
 import { expectedCiYamlFileContentsOnama } from './ciYamlFile/expectedCiYamlFileContents';
+import { assertableCiYamlFileCortmumEstinant } from './ciYamlFile/assertableCiYamlFileContents';
+import { assertableCiYamlFileContentsDifferenceOnama } from './ciYamlFile/assertableCiYamlFileContentsDifference';
+import { ciYamlFileValidationEstinant } from './ciYamlFile/ciYamlFileValidationEstinant';
 
 digikikify({
   initialQuirmTuple: [
@@ -40,6 +43,9 @@ digikikify({
     yamlFileBEstinant,
     actualCiYamlFileMentursection,
     expectedCiYamlFileContentsOnama,
+    assertableCiYamlFileCortmumEstinant,
+    assertableCiYamlFileContentsDifferenceOnama,
+    ciYamlFileValidationEstinant,
   ]),
 });
 
