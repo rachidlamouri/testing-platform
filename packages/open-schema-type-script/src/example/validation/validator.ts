@@ -61,6 +61,6 @@ const validatorExecutor: WortinatorEstinant<null> = {
 };
 
 export const validator = {
-  validatorStreamer: validationAggregator,
+  validationAggregator,
   validatorExecutor,
 };
