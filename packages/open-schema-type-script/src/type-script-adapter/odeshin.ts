@@ -15,3 +15,8 @@ export type Odeshin<
   TIdentifier extends OdeshinIdentifier = OdeshinIdentifier,
   TGrition extends Grition = Grition,
 > = Hubblepup<{ identifier: TIdentifier; grition: TGrition }>;
+
+export type OdeshinTuple<
+  TIdentifier extends OdeshinIdentifier = OdeshinIdentifier,
+  TGrition extends Grition = Grition,
+> = readonly Odeshin<TIdentifier, TGrition>[];
