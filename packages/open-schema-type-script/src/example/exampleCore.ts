@@ -8,7 +8,7 @@ import { Gepp } from '../core/gepp';
 import { Quirm } from '../core/quirm';
 import { TropoignantTypeName } from '../core/tropoignant';
 import { blindCastEstinants } from './blindCastEstinants';
-import { eventLogger } from './debugger/eventLogger';
+import { eventLogger } from '../type-script-adapter/debugger/eventLogger';
 
 const exampleGeppInitialInput: Gepp = 'gepp-initial-input';
 const exampleGeppA: Gepp = 'gepp-a';
@@ -164,4 +164,4 @@ digikikify({
 });
 
 // TODO: figure out how to not have to do this
-export type Example1 = symbol;
+export type ExampleCore = symbol;

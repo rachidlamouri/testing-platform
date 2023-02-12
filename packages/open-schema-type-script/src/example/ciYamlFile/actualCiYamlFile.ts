@@ -1,8 +1,8 @@
 import { MentursectionEstinant } from '../../core/estinant';
 import { TropoignantTypeName } from '../../core/tropoignant';
-import { Grition } from '../core/grition';
-import { Odeshin } from '../core/odeshin';
-import { Plifal } from '../core/plifal';
+import { Grition } from '../../type-script-adapter/grition';
+import { Odeshin } from '../../type-script-adapter/odeshin';
+import { Plifal } from '../../type-script-adapter/plifal';
 import { YamlFileB, YAML_FILE_B_GEPP } from '../file/yamlFileB';
 import { CiYamlFileContents, CommentedSteps } from './ciYamlFileContents';
 

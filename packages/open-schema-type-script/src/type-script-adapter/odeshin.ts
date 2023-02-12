@@ -1,4 +1,4 @@
-import { Hubblepup } from '../../core/hubblepup';
+import { Hubblepup } from '../core/hubblepup';
 import { Grition } from './grition';
 
 export const ODESHIN_GEPP = Symbol('odeshin');
@@ -15,3 +15,8 @@ export type Odeshin<
   TIdentifier extends OdeshinIdentifier = OdeshinIdentifier,
   TGrition extends Grition = Grition,
 > = Hubblepup<{ identifier: TIdentifier; grition: TGrition }>;
+
+export type OdeshinTuple<
+  TIdentifier extends OdeshinIdentifier = OdeshinIdentifier,
+  TGrition extends Grition = Grition,
+> = readonly Odeshin<TIdentifier, TGrition>[];
