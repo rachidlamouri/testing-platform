@@ -50,4 +50,4 @@ digikikify({
 });
 
 // TODO: figure out how to not have to do this
-export type Example2 = symbol;
+export type ExampleCustom = symbol;

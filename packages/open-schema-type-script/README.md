@@ -14,8 +14,8 @@ An Open Schema implementation that is used to iterate on the Open Schema specifi
 npm ci
 
 # Run the Open Schema example(s): They will output files that contain engine event information
-npx ts-node packages/open-schema-type-script/src/example/example1.ts
-npx ts-node packages/open-schema-type-script/src/example/example2.ts
+npx ts-node packages/open-schema-type-script/src/example/exampleCore.ts
+npx ts-node packages/open-schema-type-script/src/example/exampleCustom.ts
 ```
 
 ## Terminology

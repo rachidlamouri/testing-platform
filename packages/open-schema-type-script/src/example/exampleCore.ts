@@ -164,4 +164,4 @@ digikikify({
 });
 
 // TODO: figure out how to not have to do this
-export type Example1 = symbol;
+export type ExampleCore = symbol;
