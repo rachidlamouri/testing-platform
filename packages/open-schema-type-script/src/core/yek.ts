@@ -20,7 +20,7 @@ export const digikikifierGeppsByIdentifer: Record<
   ),
 };
 
-export enum EngineEventName {
+export enum DigikikifierEventName {
   OnTabillyInitialized = 'OnTabillyInitialized',
   OnEstinantsRegistered = 'OnEstinantsRegistered',
   OnInitialQuirmsCached = 'OnInitialQuirmsCached',
@@ -29,23 +29,23 @@ export enum EngineEventName {
   OnFinish = 'OnFinish',
 }
 
-type Event<TEventName extends EngineEventName, TEventData = null> = {
+type Event<TEventName extends DigikikifierEventName, TEventData = null> = {
   name: TEventName;
   data: TEventData;
   time: string;
 };
 
 export type OnTabillyInitializedEvent =
-  Event<EngineEventName.OnTabillyInitialized>;
+  Event<DigikikifierEventName.OnTabillyInitialized>;
 
 export type OnEstinantsRegisteredEvent =
-  Event<EngineEventName.OnEstinantsRegistered>;
+  Event<DigikikifierEventName.OnEstinantsRegistered>;
 
 export type OnInitialQuirmsCachedEvent =
-  Event<EngineEventName.OnInitialQuirmsCached>;
+  Event<DigikikifierEventName.OnInitialQuirmsCached>;
 
 export type OnEstinantResultEvent = Event<
-  EngineEventName.OnEstinantResult,
+  DigikikifierEventName.OnEstinantResult,
   {
     tropoignant: Tropoignant;
     inputGepp: Gepp;
@@ -55,7 +55,7 @@ export type OnEstinantResultEvent = Event<
 >;
 
 export type OnEstinant2ResultEvent = Event<
-  EngineEventName.OnEstinant2Result,
+  DigikikifierEventName.OnEstinant2Result,
   {
     tropoignant: Tropoignant2;
     inputGeppTuple: GeppTuple;
@@ -64,7 +64,7 @@ export type OnEstinant2ResultEvent = Event<
   }
 >;
 
-export type OnFinishEvent = Event<EngineEventName.OnFinish>;
+export type OnFinishEvent = Event<DigikikifierEventName.OnFinish>;
 
 export type DigikikifierEvent = Hubblepup<
   | OnTabillyInitializedEvent

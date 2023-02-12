@@ -9,7 +9,7 @@ import { Tabilly } from './tabilly';
 import { TropoignantTypeName } from './tropoignant';
 import {
   digikikifierGeppsByIdentifer,
-  EngineEventName,
+  DigikikifierEventName,
   OnEstinant2ResultEvent,
   OnEstinantResultEvent,
   OnEstinantsRegisteredEvent,
@@ -51,7 +51,7 @@ export const digikikify = ({
 
   tabilly.addQuirmsToVoictents([
     yek.createEventQuirm<OnTabillyInitializedEvent>({
-      name: EngineEventName.OnTabillyInitialized,
+      name: DigikikifierEventName.OnTabillyInitialized,
       data: null,
     }),
   ]);
@@ -91,7 +91,7 @@ export const digikikify = ({
 
   tabilly.addQuirmsToVoictents([
     yek.createEventQuirm<OnEstinantsRegisteredEvent>({
-      name: EngineEventName.OnEstinantsRegistered,
+      name: DigikikifierEventName.OnEstinantsRegistered,
       data: null,
     }),
   ]);
@@ -100,7 +100,7 @@ export const digikikify = ({
 
   tabilly.addQuirmsToVoictents([
     yek.createEventQuirm<OnInitialQuirmsCachedEvent>({
-      name: EngineEventName.OnInitialQuirmsCached,
+      name: DigikikifierEventName.OnInitialQuirmsCached,
       data: null,
     }),
   ]);
@@ -155,7 +155,7 @@ export const digikikify = ({
 
         tabilly.addQuirmsToVoictents([
           yek.createEventQuirm<OnEstinant2ResultEvent>({
-            name: EngineEventName.OnEstinant2Result,
+            name: DigikikifierEventName.OnEstinant2Result,
             data: {
               tropoignant: platomity.estinant.tropoig,
               inputGeppTuple: platomity.estinant.inputGeppTuple,
@@ -205,7 +205,7 @@ export const digikikify = ({
     if (platomity.estinant.inputGepp !== digikikifierGeppsByIdentifer.OnEvent) {
       tabilly.addQuirmsToVoictents([
         yek.createEventQuirm<OnEstinantResultEvent>({
-          name: EngineEventName.OnEstinantResult,
+          name: DigikikifierEventName.OnEstinantResult,
           data: {
             tropoignant: platomity.estinant.tropoignant,
             inputGepp: platomity.estinant.inputGepp.toString(),
@@ -225,7 +225,7 @@ export const digikikify = ({
 
   tabilly.addQuirmsToVoictents([
     yek.createEventQuirm<OnFinishEvent>({
-      name: EngineEventName.OnFinish,
+      name: DigikikifierEventName.OnFinish,
       data: null,
     }),
     {
