@@ -15,6 +15,7 @@ npm ci
 
 # Run the Open Schema example(s): They will output files that contain engine event information
 npx ts-node packages/open-schema-type-script/src/example/exampleCore.ts
+npx ts-node packages/open-schema-type-script/src/example/exampleAdapter.ts
 npx ts-node packages/open-schema-type-script/src/example/exampleCustom.ts
 ```
 
