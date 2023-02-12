@@ -1,26 +1,22 @@
-import { WortinatorEstinant } from '../../core/estinant';
-import { TropoignantTypeName } from '../../core/tropoignant';
 import { logger } from '../../utilities/logger';
-import { Odeshin, ODESHIN_GEPP } from '../odeshin';
+import { buildWortinatorHamletive, Haqueler } from '../hamletive/wortinator';
+import { ODESHIN_GEPP } from '../odeshin';
+import { Plifal } from '../plifal';
 import { fileUtilities } from './fileUtilities';
 
-export const odeshinLogger: WortinatorEstinant<Odeshin> = {
-  inputGepp: ODESHIN_GEPP,
-  tropoignant: {
-    typeName: TropoignantTypeName.Wortinator,
-    process: function cacheOdeshin(odeshin) {
-      // TODO: standardize this convention somehow
-      const typeName = odeshin.identifier.split(':')[0];
+const cacheOdeshin: Haqueler<Plifal> = (odeshin) => {
+  // TODO: standardize this convention somehow
+  const typeName = odeshin.identifier.split(':')[0];
 
-      const filePath = fileUtilities.getCacheFilePath(
-        typeName,
-        odeshin.identifier.replaceAll(/\//g, '_'),
-      );
+  const filePath = fileUtilities.getCacheFilePath(
+    typeName,
+    odeshin.identifier.replaceAll(/\//g, '_'),
+  );
 
-      fileUtilities.writeFile(
-        filePath,
-        logger.stringifyAsMultipleLines(odeshin),
-      );
-    },
-  },
+  fileUtilities.writeFile(filePath, logger.stringifyAsMultipleLines(odeshin));
 };
+
+export const odeshinLogger = buildWortinatorHamletive({
+  inputGepp: ODESHIN_GEPP,
+  haquel: cacheOdeshin,
+});
