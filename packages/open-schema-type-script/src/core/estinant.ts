@@ -1,12 +1,7 @@
 import { Croarder } from './croarder';
 import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
-import {
-  QuirmTuple,
-  QuirmTupleToGeppTuple,
-  QuirmTupleToHubblepupTuple,
-  QuirmTupleToHubblepupTupleElement,
-} from './quirm';
+import { QuirmTuple, QuirmTupleToGeppTuple } from './quirm';
 import { Straline } from './straline';
 import {
   Mentursection,
@@ -67,11 +62,8 @@ export type Estinant2<
   TIntersectionIdentity extends Straline = Straline,
 > = {
   inputGeppTuple: QuirmTupleToGeppTuple<TInputQuirmTuple>;
-  tropoig: Tropoignant2<QuirmTupleToHubblepupTuple<TInputQuirmTuple>>;
-  croard: Croarder<
-    QuirmTupleToHubblepupTupleElement<TInputQuirmTuple>,
-    TIntersectionIdentity
-  >;
+  tropoig: Tropoignant2<TInputQuirmTuple>;
+  croard: Croarder<TInputQuirmTuple[number], TIntersectionIdentity>;
 };
 
 export type Estinant2Tuple<

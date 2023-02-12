@@ -1,12 +1,12 @@
 import * as uuid from 'uuid';
 import { Croarder } from '../core/croarder';
-import { Dalph } from '../utilities/dalph';
+import { QuirmDalph } from '../core/quirm';
 import { Struss } from '../utilities/struss';
 
 /**
  * A Croarder that always returns something unique, regardless of the input
  */
-export type Kodataring = Croarder<Dalph, Struss>;
+export type Kodataring = Croarder<QuirmDalph, Struss>;
 
 /**
  * A Croarder that always returns something unique, regardless of the input

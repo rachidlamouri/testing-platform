@@ -59,12 +59,12 @@ export const assertableCiYamlFileCortmumEstinant: Estinant2<
   },
   tropoig: function merge(actual, expected) {
     const actualStringContents: string = fs.readFileSync(
-      actual.grition.filePath,
+      actual.hubblepup.grition.filePath,
       'utf8',
     );
 
     const expectedStringContentsWithPlaceholders = yaml.stringify(
-      expected.grition,
+      expected.hubblepup.grition,
     );
 
     // TODO: learn how to properly manage comments with the yaml library and remove this hack

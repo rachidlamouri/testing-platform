@@ -125,7 +125,7 @@ export const digikikify = ({
           dreanor.lanbe.advance();
 
           const nextQuirm = dreanor.lanbe.dereference() as Quirm;
-          const zorn = platomity.estinant.croard(nextQuirm.hubblepup);
+          const zorn = platomity.estinant.croard(nextQuirm);
           const cology =
             platomity.procody.get(zorn) ??
             new Cology(platomity.estinant.inputGeppTuple);
@@ -139,17 +139,14 @@ export const digikikify = ({
         });
 
       readyCologies.forEach((cology) => {
-        const inputHubblepupTuple = platomity.estinant.inputGeppTuple.map(
+        const inputQuirmTuple = platomity.estinant.inputGeppTuple.map(
           (gepp) => {
             const quirm = cology.get(gepp) as Quirm;
-            const { hubblepup } = quirm;
-            return hubblepup;
+            return quirm;
           },
         );
 
-        const outputQuirmTuple = platomity.estinant.tropoig(
-          ...inputHubblepupTuple,
-        );
+        const outputQuirmTuple = platomity.estinant.tropoig(...inputQuirmTuple);
 
         tabilly.addQuirmsToVoictents(outputQuirmTuple);
 
@@ -165,7 +162,7 @@ export const digikikify = ({
               data: {
                 tropoignant: platomity.estinant.tropoig,
                 inputGeppTuple: platomity.estinant.inputGeppTuple,
-                inputTuple: inputHubblepupTuple,
+                inputTuple: inputQuirmTuple,
                 outputTuple: outputQuirmTuple,
               },
             }),
@@ -195,11 +192,13 @@ export const digikikify = ({
         const additionalGepps =
           platomity.estinant.tropoignant.process(inputHubblepup);
 
-        // TODO: evaluate the repercussions of mutating this state
-        nextQuirm.geppTuple.push(...additionalGepps);
+        const outputQuirm: Quirm = {
+          geppTuple: [...nextQuirm.geppTuple, ...additionalGepps],
+          hubblepup: nextQuirm.hubblepup,
+        };
 
         additionalGepps.forEach((nextGepp) => {
-          tabilly.addQuirmByGepp(nextQuirm, nextGepp);
+          tabilly.addQuirmByGepp(outputQuirm, nextGepp);
         });
         break;
       }

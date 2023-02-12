@@ -84,7 +84,7 @@ export type DigikikifierEventQuirmTuple =
   QuirmTuple<DigikikifierEventHubblepup>;
 
 export type EventTropoignant<TOutputQuirmTuple extends QuirmTuple> =
-  Tropoignant2<[input: DigikikifierEventHubblepup], TOutputQuirmTuple | []>;
+  Tropoignant2<[input: DigikikifierEventQuirm], TOutputQuirmTuple | []>;
 
 /**
  * A debugger that writes to the file system for funsies

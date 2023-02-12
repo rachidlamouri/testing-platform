@@ -52,7 +52,7 @@ const examplePlifalB2 = buildPlifal<'b2', ExampleGrition, BInitialGeppTuple>({
 
 const worWortWort: Haqueler<ExampleAPlifal | ExampleBPlifal> = (input) => {
   // eslint-disable-next-line no-console
-  console.log(`Wort Wort Wort: ${input.grition}`);
+  console.log(`Wort Wort Wort: ${input.hubblepup.grition}`);
 };
 
 const exampleWortinatorHamletive = buildWortinatorHamletive<

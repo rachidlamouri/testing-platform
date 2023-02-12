@@ -85,8 +85,8 @@ const exampleWortinatorEstinant = eventLogger;
 const exampleCortmumEstinant2: Estinant2<[ExampleQuirm, ExampleQuirm], string> =
   {
     inputGeppTuple: [exampleGeppA, exampleGeppB],
-    croard: function getId(input) {
-      const [, numberText] = input.split('-') as [string, '1' | '2'];
+    croard: function getId(quirm) {
+      const [, numberText] = quirm.hubblepup.split('-') as [string, '1' | '2'];
       return numberText;
     },
     tropoig: function join(hubblepupA, hubblepupB) {
@@ -104,13 +104,13 @@ const exampleCortmumEstinant2: Estinant2<[ExampleQuirm, ExampleQuirm], string> =
 
 const exampleOnamaEstinant2: Estinant2<[ExampleQuirm], symbol> = {
   inputGeppTuple: [exampleGeppInitialInput],
-  croard: function getId(input) {
-    return Symbol(input);
+  croard: function getId(quirm) {
+    return Symbol(quirm.hubblepup);
   },
-  tropoig: function sayWhattup(input) {
+  tropoig: function sayWhattup(quirm) {
     const output: ExampleQuirm = {
       geppTuple: [exampleGeppWhattup],
-      hubblepup: `Whattup: ${input}`,
+      hubblepup: `Whattup: ${quirm.hubblepup}`,
     };
 
     return [output];
@@ -119,12 +119,12 @@ const exampleOnamaEstinant2: Estinant2<[ExampleQuirm], symbol> = {
 
 const exampleWortinatorEstinant2: Estinant2<[ExampleQuirm], symbol> = {
   inputGeppTuple: [exampleGeppInitialInput],
-  croard: function getId(input) {
-    return Symbol(input);
+  croard: function getId(quirm) {
+    return Symbol(quirm.hubblepup);
   },
-  tropoig: function sayWhattup(input) {
+  tropoig: function sayWhattup(quirm) {
     // eslint-disable-next-line no-console
-    console.log(`Wort Wort Wort: ${input}`);
+    console.log(`Wort Wort Wort: ${quirm.hubblepup}`);
 
     return [];
   },
@@ -132,15 +132,15 @@ const exampleWortinatorEstinant2: Estinant2<[ExampleQuirm], symbol> = {
 
 const exampleMentursectionEstinant2: Estinant2<[ExampleQuirm], symbol> = {
   inputGeppTuple: [exampleGeppInitialInput],
-  croard: function getId(input) {
-    return Symbol(input);
+  croard: function getId(quirm) {
+    return Symbol(quirm.hubblepup);
   },
-  tropoig: function sayWhattup(input) {
-    const isA = input.startsWith('a');
+  tropoig: function sayWhattup(quirm) {
+    const isA = quirm.hubblepup.startsWith('a');
 
     const output: ExampleQuirm = {
       geppTuple: [isA ? exampleGeppA2 : exampleGeppB2],
-      hubblepup: input,
+      hubblepup: quirm.hubblepup,
     };
 
     return [output];

@@ -1,4 +1,5 @@
-import { Gepp } from './gepp';
+import { Dalph } from '../utilities/dalph';
+import { GeppTuple } from './gepp';
 import { Hubblepup } from './hubblepup';
 
 /**
@@ -9,7 +10,7 @@ import { Hubblepup } from './hubblepup';
  */
 export type Quirm<
   THubblepup extends Hubblepup = Hubblepup,
-  TGeppTuple extends Gepp[] = Gepp[],
+  TGeppTuple extends GeppTuple = GeppTuple,
 > = {
   geppTuple: TGeppTuple;
   hubblepup: THubblepup;
@@ -22,9 +23,7 @@ export type QuirmTupleToGeppTuple<TQuirmTuple extends QuirmTuple> = {
   [Index in keyof TQuirmTuple]: TQuirmTuple[Index]['geppTuple'][number];
 };
 
-export type QuirmTupleToHubblepupTuple<TQuirmTuple extends QuirmTuple> = {
-  [Index in keyof TQuirmTuple]: TQuirmTuple[Index]['hubblepup'];
-};
-
-export type QuirmTupleToHubblepupTupleElement<TQuirmTuple extends QuirmTuple> =
-  QuirmTupleToHubblepupTuple<TQuirmTuple>[number];
+/**
+ * A Quirm that is not meant to be used. This is used in the definition of a Kodataring
+ */
+export type QuirmDalph = Quirm<Dalph, GeppTuple>;

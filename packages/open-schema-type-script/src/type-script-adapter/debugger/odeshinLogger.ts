@@ -4,7 +4,9 @@ import { ODESHIN_GEPP } from '../odeshin';
 import { Plifal } from '../plifal';
 import { fileUtilities } from './fileUtilities';
 
-const cacheOdeshin: Haqueler<Plifal> = (odeshin) => {
+const cacheOdeshin: Haqueler<Plifal> = (plifal) => {
+  const odeshin = plifal.hubblepup;
+
   // TODO: standardize this convention somehow
   const typeName = odeshin.identifier.split(':')[0];
 

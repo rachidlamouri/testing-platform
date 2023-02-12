@@ -1,6 +1,7 @@
 import { Estinant2 } from '../../core/estinant';
 import { Quirm } from '../../core/quirm';
 import {
+  DigikikifierEvent,
   DigikikifierEventName,
   DigikikifierEventQuirm,
   digikikifierGeppsByIdentifer,
@@ -17,7 +18,7 @@ const debugQuirm = (quirm: Quirm): void => {
 };
 
 const debugOutputQuirmTuple: EventTropoignant<[]> = (input) => {
-  const event = input;
+  const event: DigikikifierEvent = input.hubblepup;
 
   if (event.name !== DigikikifierEventName.OnEstinant2Result) {
     return [];

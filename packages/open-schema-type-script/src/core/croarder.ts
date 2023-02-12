@@ -1,10 +1,10 @@
-import { Hubblepup } from './hubblepup';
+import { Quirm } from './quirm';
 import { Zorn } from './zorn';
 
 /**
- * A function that converts a Hubblepup to an identifying Zorn.
- * This is use by the Engine to associate Hubblepups from different Voictents when processing Estinants with multiple inputs.
+ * A function that converts a Quirm to an identifying Zorn.
+ * This is used by the Engine to associate Quirms from different Voictents when processing Estinants with multiple inputs.
  */
-export type Croarder<TInputHubblepup extends Hubblepup, TZorn extends Zorn> = (
-  hubblepup: TInputHubblepup,
+export type Croarder<TInputQuirm extends Quirm, TZorn extends Zorn> = (
+  hubblepup: TInputQuirm,
 ) => TZorn;
