@@ -9,6 +9,8 @@ import { Quirm } from '../core/quirm';
 import { TropoignantTypeName } from '../core/tropoignant';
 import { blindCastEstinants } from './blindCastEstinants';
 import { eventLogger } from '../type-script-adapter/debugger/eventLogger';
+import { quirmDebuggerEstinant } from './core-debugger/quirmDebuggerEstinant';
+import { eventDebuggerEstinant } from './core-debugger/eventDebuggerEstinant';
 
 const exampleGeppInitialInput: Gepp = 'gepp-initial-input';
 const exampleGeppA: Gepp = 'gepp-a';
@@ -153,6 +155,8 @@ digikikify({
     exampleQuirmB2,
   ],
   estinantTuple: blindCastEstinants([
+    eventDebuggerEstinant,
+    quirmDebuggerEstinant,
     exampleOnamaEstinant,
     exampleWortinatorEstinant,
     exampleMentursectionEstinant,

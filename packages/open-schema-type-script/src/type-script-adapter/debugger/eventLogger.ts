@@ -1,14 +1,14 @@
 import { WortinatorEstinant } from '../../core/estinant';
 import { TropoignantTypeName } from '../../core/tropoignant';
 import {
-  DigikikifierEvent,
+  DigikikifierEventHubblepup,
   digikikifierGeppsByIdentifer,
   DigikikifierEventName,
 } from '../../core/yek';
 import { logger } from '../../utilities/logger';
 import { fileUtilities } from './fileUtilities';
 
-export const eventLogger: WortinatorEstinant<DigikikifierEvent> = {
+export const eventLogger: WortinatorEstinant<DigikikifierEventHubblepup> = {
   inputGepp: digikikifierGeppsByIdentifer.OnEvent,
   tropoignant: {
     typeName: TropoignantTypeName.Wortinator,

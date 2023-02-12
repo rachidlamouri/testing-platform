@@ -1,5 +1,5 @@
 import { Gepp, GeppTuple } from './gepp';
-import { Hubblepup } from './hubblepup';
+import { Hubblepup, HubblepupTuple } from './hubblepup';
 import { Quirm, QuirmTuple } from './quirm';
 import { Tropoignant, Tropoignant2 } from './tropoignant';
 
@@ -66,22 +66,35 @@ export type OnEstinant2ResultEvent = Event<
 
 export type OnFinishEvent = Event<DigikikifierEventName.OnFinish>;
 
-export type DigikikifierEvent = Hubblepup<
+export type DigikikifierEvent =
   | OnTabillyInitializedEvent
   | OnEstinantsRegisteredEvent
   | OnInitialQuirmsCachedEvent
   | OnEstinantResultEvent
   | OnEstinant2ResultEvent
-  | OnFinishEvent
->;
+  | OnFinishEvent;
+
+export type DigikikifierEventHubblepup = Hubblepup<DigikikifierEvent>;
+
+export type DigikikifierEventHubblepupTuple = HubblepupTuple<DigikikifierEvent>;
+
+export type DigikikifierEventQuirm = Quirm<DigikikifierEventHubblepup>;
+
+export type DigikikifierEventQuirmTuple =
+  QuirmTuple<DigikikifierEventHubblepup>;
+
+export type EventTropoignant<TOutputQuirmTuple extends QuirmTuple> =
+  Tropoignant2<[input: DigikikifierEventHubblepup], TOutputQuirmTuple | []>;
 
 /**
  * A debugger that writes to the file system for funsies
  */
 export const yek = {
-  createEventQuirm: <TPartialDigikikifierEvent extends DigikikifierEvent>(
+  createEventQuirm: <
+    TPartialDigikikifierEvent extends DigikikifierEventHubblepup,
+  >(
     partialEvent: Pick<TPartialDigikikifierEvent, 'name' | 'data'>,
-  ): Quirm<DigikikifierEvent> => {
+  ): Quirm<DigikikifierEventHubblepup> => {
     const event = {
       ...partialEvent,
       time: process.hrtime.bigint().toString(),
