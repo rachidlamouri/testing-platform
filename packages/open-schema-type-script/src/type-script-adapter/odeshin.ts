@@ -1,4 +1,4 @@
-import { Hubblepup } from '../../core/hubblepup';
+import { Hubblepup } from '../core/hubblepup';
 import { Grition } from './grition';
 
 export const ODESHIN_GEPP = Symbol('odeshin');

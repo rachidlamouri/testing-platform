@@ -1,6 +1,6 @@
-import { Grition } from '../core/grition';
-import { Odeshin, OdeshinIdentifier } from '../core/odeshin';
-import { Plifal } from '../core/plifal';
+import { Grition } from '../../type-script-adapter/grition';
+import { Odeshin, OdeshinIdentifier } from '../../type-script-adapter/odeshin';
+import { Plifal } from '../../type-script-adapter/plifal';
 
 export type ValidationResult = Grition<{
   identifier: OdeshinIdentifier;

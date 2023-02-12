@@ -1,5 +1,5 @@
 import { TropoignantTypeName } from '../../core/tropoignant';
-import { ODESHIN_GEPP } from '../core/odeshin';
+import { ODESHIN_GEPP } from '../../type-script-adapter/odeshin';
 import { ValidationEstinant } from '../validation/validation';
 import {
   ValidationResultOdeshin,

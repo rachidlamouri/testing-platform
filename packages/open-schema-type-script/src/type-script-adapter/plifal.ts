@@ -1,5 +1,5 @@
-import { Gepp } from '../../core/gepp';
-import { Quirm } from '../../core/quirm';
+import { Gepp } from '../core/gepp';
+import { Quirm } from '../core/quirm';
 import { Odeshin, OdeshinGepp } from './odeshin';
 
 /**

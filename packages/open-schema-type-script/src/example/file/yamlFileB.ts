@@ -4,9 +4,9 @@ import { OnamaEstinant } from '../../core/estinant';
 import { TropoignantTypeName } from '../../core/tropoignant';
 import { File } from '../../utilities/file/file';
 import { FileExtensionSuffixIdentifier } from '../../utilities/file/fileExtensionSuffixIdentifier';
-import { Grition } from '../core/grition';
-import { Odeshin, ODESHIN_GEPP } from '../core/odeshin';
-import { Plifal } from '../core/plifal';
+import { Grition } from '../../type-script-adapter/grition';
+import { Odeshin, ODESHIN_GEPP } from '../../type-script-adapter/odeshin';
+import { Plifal } from '../../type-script-adapter/plifal';
 import { YamlFileAOdeshin, YAML_FILE_A_GEPP } from './yamlFileA';
 
 export type YamlFileB<TParsedContents = unknown> = File<

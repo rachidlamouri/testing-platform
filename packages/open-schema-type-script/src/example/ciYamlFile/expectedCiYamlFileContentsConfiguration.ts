@@ -1,6 +1,6 @@
-import { Grition } from '../core/grition';
-import { Odeshin, ODESHIN_GEPP } from '../core/odeshin';
-import { Plifal } from '../core/plifal';
+import { Grition } from '../../type-script-adapter/grition';
+import { Odeshin, ODESHIN_GEPP } from '../../type-script-adapter/odeshin';
+import { Plifal } from '../../type-script-adapter/plifal';
 import {
   CiYamlFileContents,
   CommentedSteps,
