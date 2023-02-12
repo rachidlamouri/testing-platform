@@ -1,7 +1,7 @@
 import { digikikify } from '../core/digikikify';
 import { blindCastEstinants } from './blindCastEstinants';
-import { eventLogger } from './debugger/eventLogger';
-import { odeshinLogger } from './debugger/odeshinLogger';
+import { eventLogger } from '../type-script-adapter/debugger/eventLogger';
+import { odeshinLogger } from '../type-script-adapter/debugger/odeshinLogger';
 import { fileAMentursection } from './file/fileAMentursection';
 import { fileAEstinant } from './file/fileA';
 import {

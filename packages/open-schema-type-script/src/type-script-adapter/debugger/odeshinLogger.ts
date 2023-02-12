@@ -1,7 +1,7 @@
 import { WortinatorEstinant } from '../../core/estinant';
 import { TropoignantTypeName } from '../../core/tropoignant';
 import { logger } from '../../utilities/logger';
-import { Odeshin, ODESHIN_GEPP } from '../../type-script-adapter/odeshin';
+import { Odeshin, ODESHIN_GEPP } from '../odeshin';
 import { fileUtilities } from './fileUtilities';
 
 export const odeshinLogger: WortinatorEstinant<Odeshin> = {
