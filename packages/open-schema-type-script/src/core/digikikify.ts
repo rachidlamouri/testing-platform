@@ -153,17 +153,24 @@ export const digikikify = ({
 
         tabilly.addQuirmsToVoictents(outputQuirmTuple);
 
-        tabilly.addQuirmsToVoictents([
-          yek.createEventQuirm<OnEstinant2ResultEvent>({
-            name: DigikikifierEventName.OnEstinant2Result,
-            data: {
-              tropoignant: platomity.estinant.tropoig,
-              inputGeppTuple: platomity.estinant.inputGeppTuple,
-              inputTuple: inputHubblepupTuple,
-              outputTuple: outputQuirmTuple,
-            },
-          }),
-        ]);
+        // TODO: Reevaluate this fix. It was kind of half-baked
+        if (
+          platomity.estinant.inputGeppTuple.length !== 1 ||
+          platomity.estinant.inputGeppTuple[0] !==
+            digikikifierGeppsByIdentifer.OnEvent
+        ) {
+          tabilly.addQuirmsToVoictents([
+            yek.createEventQuirm<OnEstinant2ResultEvent>({
+              name: DigikikifierEventName.OnEstinant2Result,
+              data: {
+                tropoignant: platomity.estinant.tropoig,
+                inputGeppTuple: platomity.estinant.inputGeppTuple,
+                inputTuple: inputHubblepupTuple,
+                outputTuple: outputQuirmTuple,
+              },
+            }),
+          ]);
+        }
       });
 
       return;
