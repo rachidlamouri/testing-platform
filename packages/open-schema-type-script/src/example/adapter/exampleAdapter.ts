@@ -6,6 +6,7 @@ import { exampleAQuirmTuple } from './constructs/exampleA';
 import { exampleBQuirmTuple } from './constructs/exampleB';
 import { exampleWortinatorHamletive } from './constructs/exampleWortinatorHamletive';
 import { exampleOnamaHamletive } from './constructs/exampleOnamaHamletive';
+import { exampleMentursectionHamletive } from './constructs/exampleMentursectionHamletive';
 
 digikikify({
   initialQuirmTuple: [...exampleAQuirmTuple, ...exampleBQuirmTuple],
@@ -14,6 +15,7 @@ digikikify({
     quirmDebuggerEstinant,
     exampleWortinatorHamletive,
     exampleOnamaHamletive,
+    exampleMentursectionHamletive,
   ]),
 });
 
