@@ -5,6 +5,7 @@ import { quirmDebuggerEstinant } from '../core/debugger/quirmDebuggerEstinant';
 import { exampleAQuirmTuple } from './constructs/exampleA';
 import { exampleBQuirmTuple } from './constructs/exampleB';
 import { exampleWortinatorHamletive } from './constructs/exampleWortinatorHamletive';
+import { exampleOnamaHamletive } from './constructs/exampleOnamaHamletive';
 
 digikikify({
   initialQuirmTuple: [...exampleAQuirmTuple, ...exampleBQuirmTuple],
@@ -12,6 +13,7 @@ digikikify({
     eventDebuggerEstinant,
     quirmDebuggerEstinant,
     exampleWortinatorHamletive,
+    exampleOnamaHamletive,
   ]),
 });
 
