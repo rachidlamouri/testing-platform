@@ -1,7 +1,7 @@
 import { digikikify } from '../core/digikikify';
+import { eventDebuggerEstinant } from './core-debugger/eventDebuggerEstinant';
+import { quirmDebuggerEstinant } from './core-debugger/quirmDebuggerEstinant';
 import { blindCastEstinants } from './blindCastEstinants';
-import { eventLogger } from './custom-debugger/eventLogger';
-import { odeshinLogger } from './custom-debugger/odeshinLogger';
 import { fileAMentursection } from './file/fileAMentursection';
 import { fileAEstinant } from './file/fileA';
 import {
@@ -29,12 +29,12 @@ digikikify({
     EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM,
   ],
   estinantTuple: blindCastEstinants([
+    eventDebuggerEstinant,
+    quirmDebuggerEstinant,
     fileAEstinant,
     fileAHasKnownExtensionSuffixEstinant,
     validator.validatorExecutor,
     validator.validationAggregator,
-    eventLogger,
-    odeshinLogger,
     fileAMentursection,
     typeScriptFileBEstinant,
     typeScriptFileCEstinant,

@@ -8,8 +8,8 @@ import {
 import { Odeshin } from '../type-script-adapter/odeshin';
 import { Grition } from '../type-script-adapter/grition';
 import { buildPlifal, Plifal } from '../type-script-adapter/plifal';
-import { odeshinLogger } from './custom-debugger/odeshinLogger';
-import { eventLogger } from './custom-debugger/eventLogger';
+import { eventDebuggerEstinant } from './core-debugger/eventDebuggerEstinant';
+import { quirmDebuggerEstinant } from './core-debugger/quirmDebuggerEstinant';
 
 type InitialInputGepp = Gepp<'initial-input'>;
 
@@ -70,9 +70,9 @@ digikikify({
     examplePlifalB2,
   ],
   estinantTuple: blindCastEstinants([
-    eventLogger,
+    eventDebuggerEstinant,
+    quirmDebuggerEstinant,
     exampleWortinatorHamletive,
-    odeshinLogger,
   ]),
 });
 
