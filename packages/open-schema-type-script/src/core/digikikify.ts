@@ -10,13 +10,14 @@ import { TropoignantTypeName } from './tropoignant';
 import {
   digikikifierGeppsByIdentifer,
   DigikikifierEventName,
-  OnEstinant2ResultEvent,
   OnEstinantResultEvent,
   OnEstinantsRegisteredEvent,
   OnFinishEvent,
   OnInitialQuirmsCachedEvent,
   OnTabillyInitializedEvent,
   yek,
+  QuirmTupleQuirm,
+  OnEstinant2ResultEvent,
 } from './yek';
 
 type DigikikifierEstinantTuple = readonly (Estinant | Estinant2)[];
@@ -49,7 +50,22 @@ export const digikikify = ({
 }: DigikikifierInput): void => {
   const tabilly = new Tabilly();
 
-  tabilly.addQuirmsToVoictents([
+  const addToTabilly = (quirmTuple: QuirmTuple): void => {
+    if (quirmTuple.length === 0) {
+      return;
+    }
+
+    const quirmTupleQuirm: QuirmTupleQuirm = {
+      geppTuple: [digikikifierGeppsByIdentifer.OnQuirmTuple],
+      hubblepup: [],
+    };
+    quirmTupleQuirm.hubblepup = [quirmTupleQuirm, ...quirmTuple];
+
+    tabilly.addQuirmsToVoictents([quirmTupleQuirm]);
+    tabilly.addQuirmsToVoictents(quirmTuple);
+  };
+
+  addToTabilly([
     yek.createEventQuirm<OnTabillyInitializedEvent>({
       name: DigikikifierEventName.OnTabillyInitialized,
       data: null,
@@ -89,16 +105,16 @@ export const digikikify = ({
     };
   });
 
-  tabilly.addQuirmsToVoictents([
+  addToTabilly([
     yek.createEventQuirm<OnEstinantsRegisteredEvent>({
       name: DigikikifierEventName.OnEstinantsRegistered,
       data: null,
     }),
   ]);
 
-  tabilly.addQuirmsToVoictents(initialQuirmTuple);
+  addToTabilly(initialQuirmTuple);
 
-  tabilly.addQuirmsToVoictents([
+  addToTabilly([
     yek.createEventQuirm<OnInitialQuirmsCachedEvent>({
       name: DigikikifierEventName.OnInitialQuirmsCached,
       data: null,
@@ -148,15 +164,23 @@ export const digikikify = ({
 
         const outputQuirmTuple = platomity.estinant.tropoig(...inputQuirmTuple);
 
-        tabilly.addQuirmsToVoictents(outputQuirmTuple);
+        if (
+          platomity.estinant.inputGeppTuple.length !== 0 &&
+          platomity.estinant.inputGeppTuple[0] !==
+            digikikifierGeppsByIdentifer.OnEvent
+        ) {
+          addToTabilly(outputQuirmTuple);
+        }
 
         // TODO: Reevaluate this fix. It was kind of half-baked
         if (
           platomity.estinant.inputGeppTuple.length !== 1 ||
-          platomity.estinant.inputGeppTuple[0] !==
-            digikikifierGeppsByIdentifer.OnEvent
+          (platomity.estinant.inputGeppTuple[0] !==
+            digikikifierGeppsByIdentifer.OnQuirmTuple &&
+            platomity.estinant.inputGeppTuple[0] !==
+              digikikifierGeppsByIdentifer.OnEvent)
         ) {
-          tabilly.addQuirmsToVoictents([
+          addToTabilly([
             yek.createEventQuirm<OnEstinant2ResultEvent>({
               name: DigikikifierEventName.OnEstinant2Result,
               data: {
@@ -205,11 +229,11 @@ export const digikikify = ({
     }
 
     if (outputQuirmTuple !== NULL_STRALINE) {
-      tabilly.addQuirmsToVoictents(outputQuirmTuple);
+      addToTabilly(outputQuirmTuple);
     }
 
     if (platomity.estinant.inputGepp !== digikikifierGeppsByIdentifer.OnEvent) {
-      tabilly.addQuirmsToVoictents([
+      addToTabilly([
         yek.createEventQuirm<OnEstinantResultEvent>({
           name: DigikikifierEventName.OnEstinantResult,
           data: {
@@ -229,7 +253,7 @@ export const digikikify = ({
     });
   }
 
-  tabilly.addQuirmsToVoictents([
+  addToTabilly([
     yek.createEventQuirm<OnFinishEvent>({
       name: DigikikifierEventName.OnFinish,
       data: null,

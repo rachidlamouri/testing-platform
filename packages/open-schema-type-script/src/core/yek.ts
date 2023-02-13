@@ -5,6 +5,7 @@ import { Tropoignant, Tropoignant2 } from './tropoignant';
 
 export enum DigikikifierGeppIdentifer {
   OnEvent = 'OnEvent',
+  OnQuirmTuple = 'OnQuirmTuple',
   OnFinish = 'OnFinish',
 }
 
@@ -15,6 +16,9 @@ export const digikikifierGeppsByIdentifer: Record<
   [DigikikifierGeppIdentifer.OnEvent]: Symbol(
     DigikikifierGeppIdentifer.OnEvent,
   ),
+  [DigikikifierGeppIdentifer.OnQuirmTuple]: Symbol(
+    DigikikifierGeppIdentifer.OnQuirmTuple,
+  ),
   [DigikikifierGeppIdentifer.OnFinish]: Symbol(
     DigikikifierGeppIdentifer.OnFinish,
   ),
@@ -24,6 +28,7 @@ export enum DigikikifierEventName {
   OnTabillyInitialized = 'OnTabillyInitialized',
   OnEstinantsRegistered = 'OnEstinantsRegistered',
   OnInitialQuirmsCached = 'OnInitialQuirmsCached',
+  OnQuirmTuple = 'OnQuirmTuple',
   OnEstinantResult = 'OnEstinantResult',
   OnEstinant2Result = 'OnEstinant2Result',
   OnFinish = 'OnFinish',
@@ -34,6 +39,11 @@ type Event<TEventName extends DigikikifierEventName, TEventData = null> = {
   data: TEventData;
   time: string;
 };
+
+export type OnQuirmTupleEvent = Event<
+  DigikikifierEventName.OnQuirmTuple,
+  { quirmTuple: QuirmTuple }
+>;
 
 export type OnTabillyInitializedEvent =
   Event<DigikikifierEventName.OnTabillyInitialized>;
@@ -70,6 +80,7 @@ export type DigikikifierEvent =
   | OnTabillyInitializedEvent
   | OnEstinantsRegisteredEvent
   | OnInitialQuirmsCachedEvent
+  | OnQuirmTupleEvent
   | OnEstinantResultEvent
   | OnEstinant2ResultEvent
   | OnFinishEvent;
@@ -85,6 +96,13 @@ export type DigikikifierEventQuirmTuple =
 
 export type EventTropoignant<TOutputQuirmTuple extends QuirmTuple> =
   Tropoignant2<[input: DigikikifierEventQuirm], TOutputQuirmTuple | []>;
+
+export type QuirmTupleHubblepup = Hubblepup<QuirmTuple>;
+
+export type QuirmTupleQuirm = Quirm<QuirmTupleHubblepup>;
+
+export type QuirmTupleTropoignant<TOutputQuirmTuple extends QuirmTuple> =
+  Tropoignant2<[input: QuirmTupleQuirm], TOutputQuirmTuple | []>;
 
 /**
  * A debugger that writes to the file system for funsies

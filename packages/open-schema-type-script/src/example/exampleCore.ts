@@ -8,7 +8,6 @@ import { Gepp } from '../core/gepp';
 import { Quirm } from '../core/quirm';
 import { TropoignantTypeName } from '../core/tropoignant';
 import { blindCastEstinants } from './blindCastEstinants';
-import { eventLogger } from '../type-script-adapter/debugger/eventLogger';
 import { quirmDebuggerEstinant } from './core-debugger/quirmDebuggerEstinant';
 import { eventDebuggerEstinant } from './core-debugger/eventDebuggerEstinant';
 
@@ -79,8 +78,6 @@ const exampleMentursectionEstinant: MentursectionEstinant<ExampleHubblepup> = {
     },
   },
 };
-
-const exampleWortinatorEstinant = eventLogger;
 
 const exampleCortmumEstinant2: Estinant2<[ExampleQuirm, ExampleQuirm], string> =
   {
@@ -158,7 +155,6 @@ digikikify({
     eventDebuggerEstinant,
     quirmDebuggerEstinant,
     exampleOnamaEstinant,
-    exampleWortinatorEstinant,
     exampleMentursectionEstinant,
     exampleCortmumEstinant2,
     exampleOnamaEstinant2,

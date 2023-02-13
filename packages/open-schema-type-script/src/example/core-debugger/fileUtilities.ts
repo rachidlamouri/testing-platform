@@ -13,8 +13,8 @@ export const fileUtilities = {
   getEventFilePath: (fileName: string): string => {
     return posix.join(ENGINE_EVENTS_PATH, `${fileName}.txt`);
   },
-  getCacheFilePath: (): string => {
-    return posix.join(CACHE_PATH, `${uuid.v4()}.txt`);
+  getCacheFilePath: (directoryName: string): string => {
+    return posix.join(CACHE_PATH, directoryName, `${uuid.v4()}.txt`);
   },
   writeFile: (filePath: string, text: string): void => {
     fs.mkdirSync(posix.dirname(filePath), { recursive: true });
