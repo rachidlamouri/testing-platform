@@ -16,6 +16,9 @@ export type Quirm<
   hubblepup: THubblepup;
 };
 
+export type QuirmToGeppUnion<TQuirm extends Quirm> =
+  TQuirm['geppTuple'][number];
+
 export type QuirmTuple<THubblepup extends Hubblepup = Hubblepup> =
   readonly Quirm<THubblepup>[];
 

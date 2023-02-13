@@ -6,9 +6,9 @@ import {
   CommentedSteps,
   CommentPlaceHolderKey,
 } from './ciYamlFileContents';
-import { Grition } from '../../type-script-adapter/grition';
-import { Odeshin, ODESHIN_GEPP } from '../../type-script-adapter/odeshin';
-import { Plifal } from '../../type-script-adapter/plifal';
+import { Grition } from '../custom-constructs/grition';
+import { Odeshin, ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import { Plifal } from '../custom-constructs/plifal';
 import { OnamaEstinant } from '../../core/estinant';
 import {
   ExpectedCiYamlFileContentsConfigurationOdeshin,

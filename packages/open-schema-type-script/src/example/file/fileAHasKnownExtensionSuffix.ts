@@ -1,6 +1,6 @@
 import { TropoignantTypeName } from '../../core/tropoignant';
 import { FileExtensionSuffixIdentifier } from '../../utilities/file/fileExtensionSuffixIdentifier';
-import { ODESHIN_GEPP } from '../../type-script-adapter/odeshin';
+import { ODESHIN_GEPP } from '../custom-constructs/odeshin';
 import { Validation, ValidationEstinant } from '../validation/validation';
 import {
   ValidationResultOdeshin,

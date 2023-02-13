@@ -1,44 +1,42 @@
 import { Estinant2 } from '../../core/estinant';
+import { Quirm, QuirmToGeppUnion } from '../../core/quirm';
 import { Tropoignant2 } from '../../core/tropoignant';
 import { Struss } from '../../utilities/struss';
 import { kodatar } from '../kodataring';
-import { Plifal, PlifalToGeppUnion } from '../plifal';
 
-export type Haqueler<TInputPlifal extends Plifal> = (
-  input: TInputPlifal,
-) => void;
+export type Haqueler<TInputQuirm extends Quirm> = (input: TInputQuirm) => void;
 
 /**
  * A one to zero Tropoignant
  */
-export type Wortinator<TInputPlifal extends Plifal> = Tropoignant2<
-  [TInputPlifal],
+export type Wortinator<TInputQuirm extends Quirm> = Tropoignant2<
+  [TInputQuirm],
   []
 >;
 
 /**
  * A one to zero Estinant
  */
-export type WortinatorHamletive<TInputPlifal extends Plifal> = Estinant2<
-  [TInputPlifal],
+export type WortinatorHamletive<TInputQuirm extends Quirm> = Estinant2<
+  [TInputQuirm],
   Struss
 >;
 
-export type WortinatorHamletiveBuilderInput<TInputPlifal extends Plifal> = {
-  inputGepp: PlifalToGeppUnion<TInputPlifal>;
-  haquel: Haqueler<TInputPlifal>;
+export type WortinatorHamletiveBuilderInput<TInputQuirm extends Quirm> = {
+  inputGepp: QuirmToGeppUnion<TInputQuirm>;
+  haquel: Haqueler<TInputQuirm>;
 };
 
-export const buildWortinatorHamletive = <TInputPlifal extends Plifal>({
+export const buildWortinatorHamletive = <TInputQuirm extends Quirm>({
   inputGepp,
   haquel,
-}: WortinatorHamletiveBuilderInput<TInputPlifal>): WortinatorHamletive<TInputPlifal> => {
-  const tropoig: Wortinator<TInputPlifal> = (input) => {
+}: WortinatorHamletiveBuilderInput<TInputQuirm>): WortinatorHamletive<TInputQuirm> => {
+  const tropoig: Wortinator<TInputQuirm> = (input) => {
     haquel(input);
     return [];
   };
 
-  const hamletive: WortinatorHamletive<TInputPlifal> = {
+  const hamletive: WortinatorHamletive<TInputQuirm> = {
     inputGeppTuple: [inputGepp],
     tropoig,
     croard: kodatar,

@@ -8,8 +8,8 @@ import { Gepp } from '../core/gepp';
 import { Quirm } from '../core/quirm';
 import { TropoignantTypeName } from '../core/tropoignant';
 import { blindCastEstinants } from './blindCastEstinants';
-import { quirmDebuggerEstinant } from './core-debugger/quirmDebuggerEstinant';
 import { eventDebuggerEstinant } from './core-debugger/eventDebuggerEstinant';
+import { quirmDebuggerEstinant } from './core-debugger/quirmDebuggerEstinant';
 
 const exampleGeppInitialInput: Gepp = 'gepp-initial-input';
 const exampleGeppA: Gepp = 'gepp-a';

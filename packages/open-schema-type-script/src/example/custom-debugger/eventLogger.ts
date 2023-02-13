@@ -3,7 +3,6 @@ import { TropoignantTypeName } from '../../core/tropoignant';
 import {
   DigikikifierEventHubblepup,
   digikikifierGeppsByIdentifer,
-  DigikikifierEventName,
 } from '../../core/yek';
 import { logger } from '../../utilities/logger';
 import { fileUtilities } from './fileUtilities';
@@ -16,16 +15,11 @@ export const eventLogger: WortinatorEstinant<DigikikifierEventHubblepup> = {
       const eventId = `${event.time}--${event.name}`;
       const eventFilePath = fileUtilities.getEventFilePath(eventId);
 
-      if (
-        event.name !== DigikikifierEventName.OnEstinantResult &&
-        event.name !== DigikikifierEventName.OnEstinant2Result
-      ) {
-        fileUtilities.writeFile(
-          eventFilePath,
-          logger.stringifyAsMultipleLines(event),
-        );
-        logger.logText(eventFilePath);
-      }
+      fileUtilities.writeFile(
+        eventFilePath,
+        logger.stringifyAsMultipleLines(event),
+      );
+      logger.logText(eventFilePath);
     },
   },
 };
