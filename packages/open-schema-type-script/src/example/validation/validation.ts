@@ -1,6 +1,6 @@
 import { Estinant } from '../../core/estinant';
 import { Tropoignant } from '../../core/tropoignant';
-import { Odeshin } from '../../type-script-adapter/odeshin';
+import { Odeshin } from '../custom-constructs/odeshin';
 import { ValidationResultQuirm } from './validationResult';
 
 export type Validation<TOdeshin extends Odeshin> = Tropoignant<

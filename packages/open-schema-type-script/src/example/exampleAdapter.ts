@@ -5,9 +5,9 @@ import {
   buildWortinatorHamletive,
   Haqueler,
 } from '../type-script-adapter/hamletive/wortinator';
-import { Odeshin } from '../type-script-adapter/odeshin';
-import { Grition } from '../type-script-adapter/grition';
-import { buildPlifal, Plifal } from '../type-script-adapter/plifal';
+import { Odeshin } from './custom-constructs/odeshin';
+import { Grition } from './custom-constructs/grition';
+import { buildPlifal, Plifal } from './custom-constructs/plifal';
 import { eventDebuggerEstinant } from './core-debugger/eventDebuggerEstinant';
 import { quirmDebuggerEstinant } from './core-debugger/quirmDebuggerEstinant';
 

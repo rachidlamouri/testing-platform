@@ -1,4 +1,4 @@
-import { Plifal } from '../plifal';
+import { Plifal } from '../../example/custom-constructs/plifal';
 import { WortinatorHamletive } from './wortinator';
 
 /**

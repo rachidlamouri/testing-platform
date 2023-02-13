@@ -3,8 +3,8 @@ import {
   buildWortinatorHamletive,
   Haqueler,
 } from '../../type-script-adapter/hamletive/wortinator';
-import { ODESHIN_GEPP } from '../../type-script-adapter/odeshin';
-import { Plifal } from '../../type-script-adapter/plifal';
+import { ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import { Plifal } from '../custom-constructs/plifal';
 import { fileUtilities } from './fileUtilities';
 
 const cacheOdeshin: Haqueler<Plifal> = (plifal) => {

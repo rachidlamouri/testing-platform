@@ -2,7 +2,10 @@ import { Estinant2 } from '../../core/estinant';
 import { Tropoignant2 } from '../../core/tropoignant';
 import { Struss } from '../../utilities/struss';
 import { kodatar } from '../kodataring';
-import { Plifal, PlifalToGeppUnion } from '../plifal';
+import {
+  Plifal,
+  PlifalToGeppUnion,
+} from '../../example/custom-constructs/plifal';
 
 export type Haqueler<TInputPlifal extends Plifal> = (
   input: TInputPlifal,
