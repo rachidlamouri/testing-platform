@@ -8,8 +8,8 @@ import {
 import { Odeshin } from '../type-script-adapter/odeshin';
 import { Grition } from '../type-script-adapter/grition';
 import { buildPlifal, Plifal } from '../type-script-adapter/plifal';
-import { odeshinLogger } from '../type-script-adapter/debugger/odeshinLogger';
-import { eventLogger } from '../type-script-adapter/debugger/eventLogger';
+import { odeshinLogger } from './custom-debugger/odeshinLogger';
+import { eventLogger } from './custom-debugger/eventLogger';
 
 type InitialInputGepp = Gepp<'initial-input'>;
 
