@@ -5,70 +5,58 @@ import {
   buildWortinatorHamletive,
   Haqueler,
 } from '../../type-script-adapter/hamletive/wortinator';
-import { Odeshin } from '../custom/custom-constructs/odeshin';
-import { Grition } from '../custom/custom-constructs/grition';
-import { buildPlifal, Plifal } from '../custom/custom-constructs/plifal';
 import { eventDebuggerEstinant } from '../core/debugger/eventDebuggerEstinant';
 import { quirmDebuggerEstinant } from '../core/debugger/quirmDebuggerEstinant';
+import { Hubblepup } from '../../core/hubblepup';
+import { Quirm2 } from '../../core/quirm';
 
 type InitialInputGepp = Gepp<'initial-input'>;
 
 type AGepp = Gepp<'a'>;
 type BGepp = Gepp<'b'>;
 
-type ExampleGrition = Grition<string>;
-
-type ExampleOdeshin = Odeshin<string, ExampleGrition>;
+type ExampleHubblepup = Hubblepup<string>;
 
 type AInitialGeppTuple = [InitialInputGepp, AGepp];
-type ExampleAPlifal = Plifal<AInitialGeppTuple, ExampleOdeshin>;
+type ExampleAQuirm = Quirm2<AInitialGeppTuple, ExampleHubblepup>;
 
-const examplePlifalA1 = buildPlifal<'a1', ExampleGrition, AInitialGeppTuple>({
+const quirmA1: ExampleAQuirm = {
   geppTuple: ['initial-input', 'a'],
-  identifier: 'a1',
-  grition: 'a-1',
-});
+  hubblepup: 'a-1',
+};
 
-const examplePlifalA2 = buildPlifal<'a2', ExampleGrition, AInitialGeppTuple>({
+const quirmA2: ExampleAQuirm = {
   geppTuple: ['initial-input', 'a'],
-  identifier: 'a2',
-  grition: 'a-2',
-});
+  hubblepup: 'a-2',
+};
 
 type BInitialGeppTuple = [InitialInputGepp, BGepp];
-type ExampleBPlifal = Plifal<BInitialGeppTuple, ExampleOdeshin>;
+type ExampleBQuirm = Quirm2<BInitialGeppTuple, ExampleHubblepup>;
 
-const examplePlifalB1 = buildPlifal<'b1', ExampleGrition, BInitialGeppTuple>({
+const quirmB1: ExampleBQuirm = {
   geppTuple: ['initial-input', 'b'],
-  identifier: 'b1',
-  grition: 'b-1',
-});
+  hubblepup: 'b-1',
+};
 
-const examplePlifalB2 = buildPlifal<'b2', ExampleGrition, BInitialGeppTuple>({
+const examplePlifalB2: ExampleBQuirm = {
   geppTuple: ['initial-input', 'b'],
-  identifier: 'b2',
-  grition: 'b-2',
-});
+  hubblepup: 'b-2',
+};
 
-const worWortWort: Haqueler<ExampleAPlifal | ExampleBPlifal> = (input) => {
+const worWortWort: Haqueler<ExampleAQuirm | ExampleBQuirm> = (input) => {
   // eslint-disable-next-line no-console
-  console.log(`Wort Wort Wort: ${input.hubblepup.grition}`);
+  console.log(`Wort Wort Wort: ${input.hubblepup}`);
 };
 
 const exampleWortinatorHamletive = buildWortinatorHamletive<
-  ExampleAPlifal | ExampleBPlifal
+  ExampleAQuirm | ExampleBQuirm
 >({
   inputGepp: 'initial-input',
   haquel: worWortWort,
 });
 
 digikikify({
-  initialQuirmTuple: [
-    examplePlifalA1,
-    examplePlifalA2,
-    examplePlifalB1,
-    examplePlifalB2,
-  ],
+  initialQuirmTuple: [quirmA1, quirmA2, quirmB1, examplePlifalB2],
   estinantTuple: blindCastEstinants([
     eventDebuggerEstinant,
     quirmDebuggerEstinant,
