@@ -9,14 +9,15 @@ import { Tabilly } from './tabilly';
 import { TropoignantTypeName } from './tropoignant';
 import {
   digikikifierGeppsByIdentifer,
-  EngineEventName,
-  OnEstinant2ResultEvent,
+  DigikikifierEventName,
   OnEstinantResultEvent,
   OnEstinantsRegisteredEvent,
   OnFinishEvent,
   OnInitialQuirmsCachedEvent,
   OnTabillyInitializedEvent,
   yek,
+  QuirmTupleQuirm,
+  OnEstinant2ResultEvent,
 } from './yek';
 
 type DigikikifierEstinantTuple = readonly (Estinant | Estinant2)[];
@@ -49,9 +50,24 @@ export const digikikify = ({
 }: DigikikifierInput): void => {
   const tabilly = new Tabilly();
 
-  tabilly.addQuirmsToVoictents([
+  const addToTabilly = (quirmTuple: QuirmTuple): void => {
+    if (quirmTuple.length === 0) {
+      return;
+    }
+
+    const quirmTupleQuirm: QuirmTupleQuirm = {
+      geppTuple: [digikikifierGeppsByIdentifer.OnQuirmTuple],
+      hubblepup: [],
+    };
+    quirmTupleQuirm.hubblepup = [quirmTupleQuirm, ...quirmTuple];
+
+    tabilly.addQuirmsToVoictents([quirmTupleQuirm]);
+    tabilly.addQuirmsToVoictents(quirmTuple);
+  };
+
+  addToTabilly([
     yek.createEventQuirm<OnTabillyInitializedEvent>({
-      name: EngineEventName.OnTabillyInitialized,
+      name: DigikikifierEventName.OnTabillyInitialized,
       data: null,
     }),
   ]);
@@ -89,18 +105,18 @@ export const digikikify = ({
     };
   });
 
-  tabilly.addQuirmsToVoictents([
+  addToTabilly([
     yek.createEventQuirm<OnEstinantsRegisteredEvent>({
-      name: EngineEventName.OnEstinantsRegistered,
+      name: DigikikifierEventName.OnEstinantsRegistered,
       data: null,
     }),
   ]);
 
-  tabilly.addQuirmsToVoictents(initialQuirmTuple);
+  addToTabilly(initialQuirmTuple);
 
-  tabilly.addQuirmsToVoictents([
+  addToTabilly([
     yek.createEventQuirm<OnInitialQuirmsCachedEvent>({
-      name: EngineEventName.OnInitialQuirmsCached,
+      name: DigikikifierEventName.OnInitialQuirmsCached,
       data: null,
     }),
   ]);
@@ -125,7 +141,7 @@ export const digikikify = ({
           dreanor.lanbe.advance();
 
           const nextQuirm = dreanor.lanbe.dereference() as Quirm;
-          const zorn = platomity.estinant.croard(nextQuirm.hubblepup);
+          const zorn = platomity.estinant.croard(nextQuirm);
           const cology =
             platomity.procody.get(zorn) ??
             new Cology(platomity.estinant.inputGeppTuple);
@@ -139,31 +155,43 @@ export const digikikify = ({
         });
 
       readyCologies.forEach((cology) => {
-        const inputHubblepupTuple = platomity.estinant.inputGeppTuple.map(
+        const inputQuirmTuple = platomity.estinant.inputGeppTuple.map(
           (gepp) => {
             const quirm = cology.get(gepp) as Quirm;
-            const { hubblepup } = quirm;
-            return hubblepup;
+            return quirm;
           },
         );
 
-        const outputQuirmTuple = platomity.estinant.tropoig(
-          ...inputHubblepupTuple,
-        );
+        const outputQuirmTuple = platomity.estinant.tropoig(...inputQuirmTuple);
 
-        tabilly.addQuirmsToVoictents(outputQuirmTuple);
+        if (
+          platomity.estinant.inputGeppTuple.length !== 0 &&
+          platomity.estinant.inputGeppTuple[0] !==
+            digikikifierGeppsByIdentifer.OnEvent
+        ) {
+          addToTabilly(outputQuirmTuple);
+        }
 
-        tabilly.addQuirmsToVoictents([
-          yek.createEventQuirm<OnEstinant2ResultEvent>({
-            name: EngineEventName.OnEstinant2Result,
-            data: {
-              tropoignant: platomity.estinant.tropoig,
-              inputGeppTuple: platomity.estinant.inputGeppTuple,
-              inputTuple: inputHubblepupTuple,
-              outputTuple: outputQuirmTuple,
-            },
-          }),
-        ]);
+        // TODO: Reevaluate this fix. It was kind of half-baked
+        if (
+          platomity.estinant.inputGeppTuple.length !== 1 ||
+          (platomity.estinant.inputGeppTuple[0] !==
+            digikikifierGeppsByIdentifer.OnQuirmTuple &&
+            platomity.estinant.inputGeppTuple[0] !==
+              digikikifierGeppsByIdentifer.OnEvent)
+        ) {
+          addToTabilly([
+            yek.createEventQuirm<OnEstinant2ResultEvent>({
+              name: DigikikifierEventName.OnEstinant2Result,
+              data: {
+                tropoignant: platomity.estinant.tropoig,
+                inputGeppTuple: platomity.estinant.inputGeppTuple,
+                inputTuple: inputQuirmTuple,
+                outputTuple: outputQuirmTuple,
+              },
+            }),
+          ]);
+        }
       });
 
       return;
@@ -188,24 +216,26 @@ export const digikikify = ({
         const additionalGepps =
           platomity.estinant.tropoignant.process(inputHubblepup);
 
-        // TODO: evaluate the repercussions of mutating this state
-        nextQuirm.geppTuple.push(...additionalGepps);
+        const outputQuirm: Quirm = {
+          geppTuple: [...nextQuirm.geppTuple, ...additionalGepps],
+          hubblepup: nextQuirm.hubblepup,
+        };
 
         additionalGepps.forEach((nextGepp) => {
-          tabilly.addQuirmByGepp(nextQuirm, nextGepp);
+          tabilly.addQuirmByGepp(outputQuirm, nextGepp);
         });
         break;
       }
     }
 
     if (outputQuirmTuple !== NULL_STRALINE) {
-      tabilly.addQuirmsToVoictents(outputQuirmTuple);
+      addToTabilly(outputQuirmTuple);
     }
 
     if (platomity.estinant.inputGepp !== digikikifierGeppsByIdentifer.OnEvent) {
-      tabilly.addQuirmsToVoictents([
+      addToTabilly([
         yek.createEventQuirm<OnEstinantResultEvent>({
-          name: EngineEventName.OnEstinantResult,
+          name: DigikikifierEventName.OnEstinantResult,
           data: {
             tropoignant: platomity.estinant.tropoignant,
             inputGepp: platomity.estinant.inputGepp.toString(),
@@ -223,9 +253,9 @@ export const digikikify = ({
     });
   }
 
-  tabilly.addQuirmsToVoictents([
+  addToTabilly([
     yek.createEventQuirm<OnFinishEvent>({
-      name: EngineEventName.OnFinish,
+      name: DigikikifierEventName.OnFinish,
       data: null,
     }),
     {

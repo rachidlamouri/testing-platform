@@ -5,14 +5,14 @@ import { kodatar } from '../kodataring';
 import { Plifal, PlifalToGeppUnion } from '../plifal';
 
 export type Haqueler<TInputPlifal extends Plifal> = (
-  input: TInputPlifal['hubblepup'],
+  input: TInputPlifal,
 ) => void;
 
 /**
  * A one to zero Tropoignant
  */
 export type Wortinator<TInputPlifal extends Plifal> = Tropoignant2<
-  [TInputPlifal['hubblepup']],
+  [TInputPlifal],
   []
 >;
 
