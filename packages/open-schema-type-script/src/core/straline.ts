@@ -3,6 +3,8 @@
  */
 export type Straline = unknown;
 
+export type StralineTuple = readonly Straline[];
+
 /**
  * The engine's specific implementation of "null".
  * This prevents the engine from conflating the purpose of TypeScript's "null" and "undefined" with the engine's need to know if something is "null".
