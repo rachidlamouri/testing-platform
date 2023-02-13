@@ -6,8 +6,9 @@ import {
 import { ODESHIN_GEPP } from '../custom-constructs/odeshin';
 import { Plifal } from '../custom-constructs/plifal';
 import { fileUtilities } from './fileUtilities';
+import { QuirmOptionTuple } from '../../../type-script-adapter/quirmOptionTuple';
 
-const cacheOdeshin: Haqueler<Plifal> = (plifal) => {
+const cacheOdeshin: Haqueler<QuirmOptionTuple<[Plifal]>> = (plifal) => {
   const odeshin = plifal.hubblepup;
 
   // TODO: standardize this convention somehow
