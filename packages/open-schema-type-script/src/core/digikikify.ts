@@ -10,14 +10,13 @@ import { TropoignantTypeName } from './tropoignant';
 import {
   digikikifierGeppsByIdentifer,
   DigikikifierEventName,
-  OnEstinantResultEvent,
   OnEstinantsRegisteredEvent,
   OnFinishEvent,
   OnInitialQuirmsCachedEvent,
   OnTabillyInitializedEvent,
   yek,
   QuirmTupleQuirm,
-  OnEstinant2ResultEvent,
+  OnLoopStartEvent,
 } from './yek';
 
 type DigikikifierEstinantTuple = readonly (Estinant | Estinant2)[];
@@ -171,27 +170,6 @@ export const digikikify = ({
         ) {
           addToTabilly(outputQuirmTuple);
         }
-
-        // TODO: Reevaluate this fix. It was kind of half-baked
-        if (
-          platomity.estinant.inputGeppTuple.length !== 1 ||
-          (platomity.estinant.inputGeppTuple[0] !==
-            digikikifierGeppsByIdentifer.OnQuirmTuple &&
-            platomity.estinant.inputGeppTuple[0] !==
-              digikikifierGeppsByIdentifer.OnEvent)
-        ) {
-          addToTabilly([
-            yek.createEventQuirm<OnEstinant2ResultEvent>({
-              name: DigikikifierEventName.OnEstinant2Result,
-              data: {
-                tropoignant: platomity.estinant.tropoig,
-                inputGeppTuple: platomity.estinant.inputGeppTuple,
-                inputTuple: inputQuirmTuple,
-                outputTuple: outputQuirmTuple,
-              },
-            }),
-          ]);
-        }
       });
 
       return;
@@ -231,21 +209,14 @@ export const digikikify = ({
     if (outputQuirmTuple !== NULL_STRALINE) {
       addToTabilly(outputQuirmTuple);
     }
-
-    if (platomity.estinant.inputGepp !== digikikifierGeppsByIdentifer.OnEvent) {
-      addToTabilly([
-        yek.createEventQuirm<OnEstinantResultEvent>({
-          name: DigikikifierEventName.OnEstinantResult,
-          data: {
-            tropoignant: platomity.estinant.tropoignant,
-            inputGepp: platomity.estinant.inputGepp.toString(),
-            inputs: [inputHubblepup],
-            outputs: outputQuirmTuple,
-          },
-        }),
-      ]);
-    }
   };
+
+  addToTabilly([
+    yek.createEventQuirm<OnLoopStartEvent>({
+      name: DigikikifierEventName.OnLoopStart,
+      data: null,
+    }),
+  ]);
 
   while (platomities.some(canPlatomityAdvance)) {
     platomities.filter(canPlatomityAdvance).forEach((platomity) => {
