@@ -13,10 +13,10 @@ An Open Schema implementation that is used to iterate on the Open Schema specifi
 # One time install
 npm ci
 
-# Run the Open Schema example(s): They will output files that contain engine event information
-packages/open-schema-type-script/src/example/core/exampleCore.ts
-packages/open-schema-type-script/src/example/adapter/exampleAdapter.ts
-packages/open-schema-type-script/src/example/custom/exampleCustom.ts
+# Run the Open Schema example(s): They will output files that contain engine event information. See the debug/ directory
+npm run example-core
+npm run example-adapter
+npm run example-custom
 ```
 
 ## Terminology
