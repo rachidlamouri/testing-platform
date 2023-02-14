@@ -31,10 +31,12 @@ export const FILE_A_GEPP = 'file-a';
 
 export type FileAGepp = typeof FILE_A_GEPP;
 
-export type FileAPlifal<TGeppTuple extends GeppTuple = []> = Plifal<
-  [FileAGepp, ...TGeppTuple],
-  FileAOdeshin
->;
+export type BaseFileAPlifal<
+  TGeppTuple extends GeppTuple,
+  TFileAOdeshin extends FileAOdeshin,
+> = Plifal<TGeppTuple, TFileAOdeshin>;
+
+export type FileAPlifal = BaseFileAPlifal<[FileAGepp], FileAOdeshin>;
 
 export type FileAPlifalTuple = readonly FileAPlifal[];
 

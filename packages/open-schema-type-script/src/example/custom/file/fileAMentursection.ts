@@ -1,25 +1,53 @@
-import { MentursectionEstinant } from '../../../core/estinant';
-import { TropoignantTypeName } from '../../../core/tropoignant';
+import {
+  buildMentursectionHamletive,
+  Paraker,
+} from '../../../type-script-adapter/hamletive/mentursection';
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
-import { FileAOdeshin, FILE_A_GEPP } from './fileA';
-import { TYPE_SCRIPT_FILE_A_GEPP } from './typeScriptFileA';
-import { YAML_FILE_A_GEPP } from './yamlFileA';
+import { OptionTuple } from '../../../utilities/optionTuple';
+import { FileAPlifal, FILE_A_GEPP } from './fileA';
+import {
+  TypeScriptFileAOdeshin,
+  TypeScriptFileAPlifal,
+  TYPE_SCRIPT_FILE_A_GEPP,
+} from './typeScriptFileA';
+import {
+  YamlFileAOdeshin,
+  YamlFileAPlifal,
+  YAML_FILE_A_GEPP,
+} from './yamlFileA';
 
-export const fileAMentursection: MentursectionEstinant<FileAOdeshin> = {
+type InputOptionTuple = OptionTuple<[FileAPlifal]>;
+type OutputOptionTuple = OptionTuple<[TypeScriptFileAPlifal, YamlFileAPlifal]>;
+
+const isTypeScriptFileA: Paraker<
+  InputOptionTuple,
+  OutputOptionTuple,
+  TypeScriptFileAPlifal
+> = (input): input is TypeScriptFileAOdeshin =>
+  input.grition.extension.suffixIdentifier ===
+  FileExtensionSuffixIdentifier.TypeScript;
+
+const isYamlFileA: Paraker<
+  InputOptionTuple,
+  OutputOptionTuple,
+  YamlFileAPlifal
+> = (input): input is YamlFileAOdeshin =>
+  input.grition.extension.suffixIdentifier ===
+  FileExtensionSuffixIdentifier.Yaml;
+
+export const fileAMentursection = buildMentursectionHamletive<
+  InputOptionTuple,
+  OutputOptionTuple
+>({
   inputGepp: FILE_A_GEPP,
-  tropoignant: {
-    typeName: TropoignantTypeName.Mentursection,
-    process: function categorizeFileA(inputOdeshin) {
-      switch (inputOdeshin.grition.extension.suffixIdentifier) {
-        case FileExtensionSuffixIdentifier.TypeScript:
-          return [TYPE_SCRIPT_FILE_A_GEPP];
-        case FileExtensionSuffixIdentifier.Yaml:
-          return [YAML_FILE_A_GEPP];
-        case FileExtensionSuffixIdentifier.Json:
-          return [];
-        case FileExtensionSuffixIdentifier.Unknown:
-          return [];
-      }
+  kerzTuple: [
+    {
+      outputGeppTuple: [TYPE_SCRIPT_FILE_A_GEPP],
+      parak: isTypeScriptFileA,
     },
-  },
-};
+    {
+      outputGeppTuple: [YAML_FILE_A_GEPP],
+      parak: isYamlFileA,
+    },
+  ],
+});
