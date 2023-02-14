@@ -2,7 +2,6 @@ import { Croarder } from './croarder';
 import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
 import { QuirmTuple, QuirmTupleToGeppTuple } from './quirm';
-import { Straline } from './straline';
 import {
   Mentursection,
   Onama,
@@ -10,6 +9,7 @@ import {
   Tropoignant2,
   Wortinator,
 } from './tropoignant';
+import { Zorn } from './zorn';
 
 type BaseEstinant<
   TInputHubblepup extends Hubblepup,
@@ -59,14 +59,14 @@ export type EstinantTuple<
  */
 export type Estinant2<
   TInputQuirmTuple extends QuirmTuple = QuirmTuple,
-  TIntersectionIdentity extends Straline = Straline,
+  TZorn extends Zorn = Zorn,
 > = {
   inputGeppTuple: QuirmTupleToGeppTuple<TInputQuirmTuple>;
   tropoig: Tropoignant2<TInputQuirmTuple>;
-  croard: Croarder<TInputQuirmTuple[number], TIntersectionIdentity>;
+  croard: Croarder<TInputQuirmTuple[number], TZorn>;
 };
 
 export type Estinant2Tuple<
   TInputQuirmTuple extends QuirmTuple = QuirmTuple,
-  TIntersectionIdentity extends Straline = Straline,
-> = readonly Estinant2<TInputQuirmTuple, TIntersectionIdentity>[];
+  TZorn extends Zorn = Zorn,
+> = readonly Estinant2<TInputQuirmTuple, TZorn>[];
