@@ -1,4 +1,4 @@
-import { QuirmTuple } from '../core/quirm';
+import { QuirmTuple, QuirmTupleTuple } from '../core/quirm';
 import { MergeTuple } from '../utilities/mergeTuple';
 import { OptionTuple } from '../utilities/optionTuple';
 
@@ -20,3 +20,26 @@ export type QuirmOptionTupleToGeppOptionTuple<
 export type QuirmOptionTupleToGeppOptionIntersection<
   TQuirmOptionTuple extends QuirmOptionTuple,
 > = MergeTuple<QuirmOptionTupleToGeppOptionTuple<TQuirmOptionTuple>>;
+
+/**
+ * A collection of collections where only one Quirm in each collection is expected to be used, and not each collection as a whole
+ */
+export type QuirmOptionTupleTuple<
+  TQuirmTupleTuple extends QuirmTupleTuple = QuirmTupleTuple,
+> = TQuirmTupleTuple;
+
+export type QuirmOptionTupleTupleToQuirmTuple<
+  TQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
+> = {
+  [Index in keyof TQuirmOptionTupleTuple]: QuirmOption<
+    TQuirmOptionTupleTuple[Index]
+  >;
+};
+
+export type QuirmOptionTupleTupleToGeppOptionIntersectionTuple<
+  TQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
+> = {
+  [Index in keyof TQuirmOptionTupleTuple]: QuirmOptionTupleToGeppOptionIntersection<
+    TQuirmOptionTupleTuple[Index]
+  >;
+};
