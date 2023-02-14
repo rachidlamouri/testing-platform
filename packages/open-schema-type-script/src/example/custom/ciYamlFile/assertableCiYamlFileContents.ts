@@ -2,7 +2,7 @@ import fs from 'fs';
 import yaml from 'yaml';
 import { Estinant2 } from '../../../core/estinant';
 import { Grition } from '../custom-constructs/grition';
-import { Odeshin, ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import { Odeshin } from '../custom-constructs/odeshin';
 import { Plifal } from '../custom-constructs/plifal';
 import {
   ActualCiYamlFilePlifal,
@@ -75,7 +75,7 @@ export const assertableCiYamlFileCortmumEstinant: Estinant2<
       );
 
     const output: AssertableCiYamlFileContentsPlifal = {
-      geppTuple: [ODESHIN_GEPP, ASSERTABLE_CI_YAML_FILE_CONTENTS_GEPPP],
+      geppTuple: [ASSERTABLE_CI_YAML_FILE_CONTENTS_GEPPP],
       hubblepup: {
         identifier: ASSERTABLE_CI_YAML_FILE_CONTENTS_IDENTIFIER,
         grition: {

@@ -2,7 +2,7 @@ import assert from 'assert';
 import { OnamaEstinant } from '../../../core/estinant';
 import { TropoignantTypeName } from '../../../core/tropoignant';
 import { Grition } from '../custom-constructs/grition';
-import { Odeshin, ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import { Odeshin } from '../custom-constructs/odeshin';
 import { Plifal } from '../custom-constructs/plifal';
 import {
   AssertableCiYamlFileContentsOdeshin,
@@ -68,10 +68,7 @@ export const assertableCiYamlFileContentsDifferenceOnama: OnamaEstinant<
       }
 
       const output: AssertableCiYamlFileContentsDifferencePlifal = {
-        geppTuple: [
-          ODESHIN_GEPP,
-          ASSERTABLE_CI_YAML_FILE_CONTENTS_DIFFERENCE_GEPPP,
-        ],
+        geppTuple: [ASSERTABLE_CI_YAML_FILE_CONTENTS_DIFFERENCE_GEPPP],
         hubblepup: {
           identifier: ASSERTABLE_CI_YAML_FILE_CONTENTS_DIFFERENCE_IDENTIFIER,
           grition: outputGrition,

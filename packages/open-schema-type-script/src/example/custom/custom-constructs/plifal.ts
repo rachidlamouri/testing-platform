@@ -1,6 +1,6 @@
 import { GeppTuple } from '../../../core/gepp';
 import { Quirm } from '../../../core/quirm';
-import { Odeshin, OdeshinGepp, ODESHIN_GEPP } from './odeshin';
+import { Odeshin } from './odeshin';
 
 /**
  * A Quirm that wraps an Odeshin
@@ -8,7 +8,7 @@ import { Odeshin, OdeshinGepp, ODESHIN_GEPP } from './odeshin';
 export type Plifal<
   TGeppTuple extends GeppTuple = GeppTuple,
   TOdeshin extends Odeshin = Odeshin,
-> = Quirm<TOdeshin, [OdeshinGepp, ...TGeppTuple]>;
+> = Quirm<TOdeshin, TGeppTuple>;
 
 export type PlifalTuple<
   TGeppTuple extends GeppTuple = GeppTuple,
@@ -46,7 +46,7 @@ export const buildPlifal = <
   };
 
   return {
-    geppTuple: [ODESHIN_GEPP, ...geppTuple],
+    geppTuple,
     hubblepup: odeshin,
   };
 };

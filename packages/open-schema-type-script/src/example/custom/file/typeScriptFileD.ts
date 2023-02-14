@@ -4,7 +4,7 @@ import { TropoignantTypeName } from '../../../core/tropoignant';
 import { File } from '../../../utilities/file/file';
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
 import { Grition } from '../custom-constructs/grition';
-import { Odeshin, ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import { Odeshin } from '../custom-constructs/odeshin';
 import { Plifal } from '../custom-constructs/plifal';
 import {
   TypeScriptFileCOdeshin,
@@ -58,7 +58,7 @@ export const typeScriptFileDEstinant: OnamaEstinant<
     typeName: TropoignantTypeName.Onama,
     process: function createTypeScriptFileD(input) {
       const output: TypeScriptFileDPlifal = {
-        geppTuple: [ODESHIN_GEPP, TYPE_SCRIPT_FILE_D_GEPP],
+        geppTuple: [TYPE_SCRIPT_FILE_D_GEPP],
         hubblepup: {
           identifier: `type-script-file-d:${input.grition.filePath}`,
           grition: {

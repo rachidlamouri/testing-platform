@@ -7,7 +7,7 @@ import {
   CommentPlaceHolderKey,
 } from './ciYamlFileContents';
 import { Grition } from '../custom-constructs/grition';
-import { Odeshin, ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import { Odeshin } from '../custom-constructs/odeshin';
 import { Plifal } from '../custom-constructs/plifal';
 import { OnamaEstinant } from '../../../core/estinant';
 import {
@@ -114,7 +114,7 @@ export const expectedCiYamlFileContentsOnama: OnamaEstinant<
       };
 
       const plifal: ExpectedCiYamlFileContentsPlifal = {
-        geppTuple: [ODESHIN_GEPP, EXPECTED_CI_YAML_FILE_CONTENTS_GEPPP],
+        geppTuple: [EXPECTED_CI_YAML_FILE_CONTENTS_GEPPP],
         hubblepup: odeshin,
       };
 
