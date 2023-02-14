@@ -9,7 +9,7 @@ import {
 import { getFileMetadata } from '../../../utilities/file/getFileMetadata';
 import { getNestedFilePaths } from '../../../utilities/file/getNestedFilePaths';
 import { Grition } from '../custom-constructs/grition';
-import { Odeshin, ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import { Odeshin } from '../custom-constructs/odeshin';
 import { Plifal } from '../custom-constructs/plifal';
 import {
   FileAConfigurationOdeshin,
@@ -31,10 +31,12 @@ export const FILE_A_GEPP = 'file-a';
 
 export type FileAGepp = typeof FILE_A_GEPP;
 
-export type FileAPlifal<TGeppTuple extends GeppTuple = []> = Plifal<
-  [FileAGepp, ...TGeppTuple],
-  FileAOdeshin
->;
+export type BaseFileAPlifal<
+  TGeppTuple extends GeppTuple,
+  TFileAOdeshin extends FileAOdeshin,
+> = Plifal<TGeppTuple, TFileAOdeshin>;
+
+export type FileAPlifal = BaseFileAPlifal<[FileAGepp], FileAOdeshin>;
 
 export type FileAPlifalTuple = readonly FileAPlifal[];
 
@@ -97,7 +99,7 @@ export const fileAEstinant: Estinant<
         const identifier: FileAIdentifier = `file-a:${filePath}`;
 
         return {
-          geppTuple: [ODESHIN_GEPP, FILE_A_GEPP],
+          geppTuple: [FILE_A_GEPP],
           hubblepup: {
             identifier,
             grition,

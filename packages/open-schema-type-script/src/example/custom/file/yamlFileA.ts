@@ -1,5 +1,5 @@
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
-import { FileA, FileAOdeshin, FileAPlifal } from './fileA';
+import { FileA, FileAOdeshin, BaseFileAPlifal } from './fileA';
 
 export type YamlFileA = FileA<FileExtensionSuffixIdentifier.Yaml>;
 
@@ -9,6 +9,9 @@ export const YAML_FILE_A_GEPP = Symbol('yaml-file-a');
 
 export type YamlFileAGepp = typeof YAML_FILE_A_GEPP;
 
-export type YamlFileAPlifal = FileAPlifal<[YamlFileAGepp]>;
+export type YamlFileAPlifal = BaseFileAPlifal<
+  [YamlFileAGepp],
+  YamlFileAOdeshin
+>;
 
 export type YamlFileAPlifalTuple = readonly YamlFileAPlifal[];

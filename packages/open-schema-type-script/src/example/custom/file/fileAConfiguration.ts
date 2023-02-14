@@ -3,7 +3,7 @@ import {
   FilePathAccessorInput,
 } from '../../../utilities/file/getNestedFilePaths';
 import { Grition } from '../custom-constructs/grition';
-import { Odeshin, ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import { Odeshin } from '../custom-constructs/odeshin';
 import { Plifal } from '../custom-constructs/plifal';
 
 export const FILE_A_CONFIGURATION_IDENTIFIER = 'file-a-configuration' as const;
@@ -28,7 +28,7 @@ export type FileAConfigurationQuirm = Plifal<
 >;
 
 export const FULL_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
-  geppTuple: [ODESHIN_GEPP, FILE_A_CONFIGURATION_GEPP],
+  geppTuple: [FILE_A_CONFIGURATION_GEPP],
   hubblepup: {
     identifier: FILE_A_CONFIGURATION_IDENTIFIER,
     grition: {
@@ -52,7 +52,7 @@ export const FULL_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
 };
 
 export const SIMPLE_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
-  geppTuple: [ODESHIN_GEPP, FILE_A_CONFIGURATION_GEPP],
+  geppTuple: [FILE_A_CONFIGURATION_GEPP],
   hubblepup: {
     identifier: FILE_A_CONFIGURATION_IDENTIFIER,
     grition: {
@@ -68,7 +68,7 @@ export const SIMPLE_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
 };
 
 export const CI_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
-  geppTuple: [ODESHIN_GEPP, FILE_A_CONFIGURATION_GEPP],
+  geppTuple: [FILE_A_CONFIGURATION_GEPP],
   hubblepup: {
     identifier: FILE_A_CONFIGURATION_IDENTIFIER,
     grition: {

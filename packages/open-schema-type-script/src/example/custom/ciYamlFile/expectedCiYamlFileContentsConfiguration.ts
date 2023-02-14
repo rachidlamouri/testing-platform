@@ -1,5 +1,5 @@
 import { Grition } from '../custom-constructs/grition';
-import { Odeshin, ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import { Odeshin } from '../custom-constructs/odeshin';
 import { Plifal } from '../custom-constructs/plifal';
 import {
   CiYamlFileContents,
@@ -43,10 +43,7 @@ const afterCommentKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${'Post-Pac
 
 export const EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM: ExpectedCiYamlFileConfigurationQuirm =
   {
-    geppTuple: [
-      ODESHIN_GEPP,
-      EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_GEPPP,
-    ],
+    geppTuple: [EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_GEPPP],
     hubblepup: {
       identifier: EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_IDENTIFIER,
       grition: {

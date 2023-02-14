@@ -1,10 +1,6 @@
 import { Hubblepup } from '../../../core/hubblepup';
 import { Grition } from './grition';
 
-export const ODESHIN_GEPP = Symbol('odeshin');
-
-export type OdeshinGepp = typeof ODESHIN_GEPP;
-
 export type OdeshinIdentifier<TIdentifier extends string = string> =
   TIdentifier;
 

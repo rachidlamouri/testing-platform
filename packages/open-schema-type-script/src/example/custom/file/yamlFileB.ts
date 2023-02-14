@@ -5,7 +5,7 @@ import { TropoignantTypeName } from '../../../core/tropoignant';
 import { File } from '../../../utilities/file/file';
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
 import { Grition } from '../custom-constructs/grition';
-import { Odeshin, ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import { Odeshin } from '../custom-constructs/odeshin';
 import { Plifal } from '../custom-constructs/plifal';
 import { YamlFileAOdeshin, YAML_FILE_A_GEPP } from './yamlFileA';
 
@@ -41,7 +41,7 @@ export const yamlFileBEstinant: OnamaEstinant<
       const parsedContents: unknown = yaml.parse(fileContents);
 
       const output: YamlFileBPlifal = {
-        geppTuple: [ODESHIN_GEPP, YAML_FILE_B_GEPP],
+        geppTuple: [YAML_FILE_B_GEPP],
         hubblepup: {
           identifier: `yaml-file-b:${input.grition.filePath}`,
           grition: {

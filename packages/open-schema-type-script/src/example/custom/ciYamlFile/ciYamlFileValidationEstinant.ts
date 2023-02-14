@@ -1,5 +1,5 @@
 import { TropoignantTypeName } from '../../../core/tropoignant';
-import { ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import {} from '../custom-constructs/odeshin';
 import { ValidationEstinant } from '../validation/validation';
 import {
   ValidationResultQuirm,
@@ -17,7 +17,7 @@ export const ciYamlFileValidationEstinant: ValidationEstinant<AssertableCiYamlFi
       typeName: TropoignantTypeName.Onama,
       process: function isCiYamlFileUpToDate(input) {
         const result: ValidationResultQuirm = {
-          geppTuple: [ODESHIN_GEPP, VALIDATION_RESULT_GEPP],
+          geppTuple: [VALIDATION_RESULT_GEPP],
           hubblepup: {
             identifier: `validation-result:${isCiYamlFileUpToDate.name}`,
             grition: {

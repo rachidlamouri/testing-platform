@@ -1,5 +1,5 @@
 import { TropoignantTypeName } from '../../../core/tropoignant';
-import { ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import {} from '../custom-constructs/odeshin';
 import { ValidationEstinant } from '../validation/validation';
 import {
   ValidationResultOdeshin,
@@ -55,7 +55,7 @@ export const typeScriptFileDHasProperlyNamedExportValidation: ValidationEstinant
         };
 
         const outputQuirm: ValidationResultQuirm = {
-          geppTuple: [ODESHIN_GEPP, VALIDATION_RESULT_GEPP],
+          geppTuple: [VALIDATION_RESULT_GEPP],
           hubblepup,
         };
 

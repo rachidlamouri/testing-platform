@@ -1,6 +1,6 @@
 import { TropoignantTypeName } from '../../../core/tropoignant';
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
-import { ODESHIN_GEPP } from '../custom-constructs/odeshin';
+import {} from '../custom-constructs/odeshin';
 import { Validation, ValidationEstinant } from '../validation/validation';
 import {
   ValidationResultOdeshin,
@@ -24,7 +24,7 @@ export const fileAHasKnownExtensionSuffix: Validation<FileAOdeshin> = {
     };
 
     const outputQuirm: ValidationResultQuirm = {
-      geppTuple: [ODESHIN_GEPP, VALIDATION_RESULT_GEPP],
+      geppTuple: [VALIDATION_RESULT_GEPP],
       hubblepup,
     };
 
