@@ -1,4 +1,4 @@
-import { Straline } from '../../../core/straline';
+import { Straline } from '../core/straline';
 
 /**
  * A thing that an Abstract Programmer wants to operate on.

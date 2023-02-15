@@ -1,6 +1,6 @@
 import { TropoignantTypeName } from '../../../core/tropoignant';
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
-import {} from '../custom-constructs/odeshin';
+import {} from '../../../custom-adapter/odeshin';
 import { Validation, ValidationEstinant } from '../validation/validation';
 import {
   ValidationResultOdeshin,

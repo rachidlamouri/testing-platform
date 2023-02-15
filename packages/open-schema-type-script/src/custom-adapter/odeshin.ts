@@ -1,4 +1,4 @@
-import { Hubblepup } from '../../../core/hubblepup';
+import { Hubblepup } from '../core/hubblepup';
 import { Grition } from './grition';
 
 export type OdeshinIdentifier<TIdentifier extends string = string> =

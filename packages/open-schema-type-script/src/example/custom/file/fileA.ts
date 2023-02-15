@@ -8,9 +8,9 @@ import {
 } from '../../../utilities/file/fileExtensionSuffixIdentifier';
 import { getFileMetadata } from '../../../utilities/file/getFileMetadata';
 import { getNestedFilePaths } from '../../../utilities/file/getNestedFilePaths';
-import { Grition } from '../custom-constructs/grition';
-import { Odeshin } from '../custom-constructs/odeshin';
-import { Plifal } from '../custom-constructs/plifal';
+import { Grition } from '../../../custom-adapter/grition';
+import { Odeshin } from '../../../custom-adapter/odeshin';
+import { Plifal } from '../../../custom-adapter/plifal';
 import {
   FileAConfigurationOdeshin,
   FILE_A_CONFIGURATION_GEPP,

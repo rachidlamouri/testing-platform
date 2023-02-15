@@ -1,5 +1,5 @@
 import { TropoignantTypeName } from '../../../core/tropoignant';
-import {} from '../custom-constructs/odeshin';
+import {} from '../../../custom-adapter/odeshin';
 import { ValidationEstinant } from '../validation/validation';
 import {
   ValidationResultQuirm,

@@ -2,9 +2,9 @@ import {
   ComparisonConfigurationTypeName,
   FilePathAccessorInput,
 } from '../../../utilities/file/getNestedFilePaths';
-import { Grition } from '../custom-constructs/grition';
-import { Odeshin } from '../custom-constructs/odeshin';
-import { Plifal } from '../custom-constructs/plifal';
+import { Grition } from '../../../custom-adapter/grition';
+import { Odeshin } from '../../../custom-adapter/odeshin';
+import { Plifal } from '../../../custom-adapter/plifal';
 
 export const FILE_A_CONFIGURATION_IDENTIFIER = 'file-a-configuration' as const;
 

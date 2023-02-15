@@ -1,5 +1,5 @@
-import { GeppTuple } from '../../../core/gepp';
-import { Quirm } from '../../../core/quirm';
+import { GeppTuple } from '../core/gepp';
+import { Quirm } from '../core/quirm';
 import { Odeshin } from './odeshin';
 
 /**

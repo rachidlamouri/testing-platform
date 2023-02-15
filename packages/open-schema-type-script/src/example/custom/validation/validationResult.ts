@@ -1,6 +1,6 @@
-import { Grition } from '../custom-constructs/grition';
-import { Odeshin, OdeshinIdentifier } from '../custom-constructs/odeshin';
-import { Plifal } from '../custom-constructs/plifal';
+import { Grition } from '../../../custom-adapter/grition';
+import { Odeshin, OdeshinIdentifier } from '../../../custom-adapter/odeshin';
+import { Plifal } from '../../../custom-adapter/plifal';
 
 export type ValidationResult = Grition<{
   identifier: OdeshinIdentifier;
