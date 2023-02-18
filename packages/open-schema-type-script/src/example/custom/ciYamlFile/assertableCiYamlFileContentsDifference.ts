@@ -1,9 +1,9 @@
 import assert from 'assert';
 import { OnamaEstinant } from '../../../core/estinant';
 import { TropoignantTypeName } from '../../../core/tropoignant';
-import { Grition } from '../custom-constructs/grition';
-import { Odeshin } from '../custom-constructs/odeshin';
-import { Plifal } from '../custom-constructs/plifal';
+import { Grition } from '../../../custom-adapter/grition';
+import { Odeshin } from '../../../custom-adapter/odeshin';
+import { Plifal } from '../../../custom-adapter/plifal';
 import {
   AssertableCiYamlFileContentsOdeshin,
   ASSERTABLE_CI_YAML_FILE_CONTENTS_GEPPP,

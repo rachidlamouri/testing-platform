@@ -21,7 +21,7 @@ export const serialize = (
     case 'boolean':
       return `BOOL|${datum ? 'true' : 'false'}`;
     case 'symbol':
-      return `SYMB|${datum.toString()}`;
+      return `SYMB|${datum.description ?? ''}`;
     case 'undefined':
       return 'UNDE|undefined';
     case 'function':

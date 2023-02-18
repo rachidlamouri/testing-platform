@@ -6,9 +6,9 @@ import { OnamaEstinant } from '../../../core/estinant';
 import { TropoignantTypeName } from '../../../core/tropoignant';
 import { File } from '../../../utilities/file/file';
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
-import { Grition } from '../custom-constructs/grition';
-import { Odeshin } from '../custom-constructs/odeshin';
-import { Plifal } from '../custom-constructs/plifal';
+import { Grition } from '../../../custom-adapter/grition';
+import { Odeshin } from '../../../custom-adapter/odeshin';
+import { Plifal } from '../../../custom-adapter/plifal';
 import {
   TypeScriptFileAOdeshin,
   TYPE_SCRIPT_FILE_A_GEPP,

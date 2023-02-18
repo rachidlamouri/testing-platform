@@ -21,6 +21,7 @@ import { expectedCiYamlFileContentsOnama } from './ciYamlFile/expectedCiYamlFile
 import { assertableCiYamlFileCortmumEstinant } from './ciYamlFile/assertableCiYamlFileContents';
 import { assertableCiYamlFileContentsDifferenceOnama } from './ciYamlFile/assertableCiYamlFileContentsDifference';
 import { ciYamlFileValidationEstinant } from './ciYamlFile/ciYamlFileValidationEstinant';
+import { identifiableQuirmDebuggerEstinant } from '../../custom-adapter/identifiableQuirmDebuggerEstinant';
 
 digikikify({
   initialQuirmTuple: [
@@ -29,6 +30,7 @@ digikikify({
     EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM,
   ],
   estinantTuple: blindCastEstinants([
+    identifiableQuirmDebuggerEstinant,
     eventDebuggerEstinant,
     quirmDebuggerEstinant,
     fileAEstinant,
