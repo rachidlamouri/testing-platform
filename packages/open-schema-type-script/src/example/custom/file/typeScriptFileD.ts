@@ -65,7 +65,7 @@ export const typeScriptFileDEstinant: OnamaEstinant<
             ...input.grition,
             additionalMetadata: {
               declarations:
-                input.grition.additionalMetadata.declarations.flatMap<EnhancedDeclaration>(
+                input.grition.additionalMetadata.exportDeclarationList.flatMap<EnhancedDeclaration>(
                   (statement) => {
                     if (
                       statement.type === AST_NODE_TYPES.ExportAllDeclaration
