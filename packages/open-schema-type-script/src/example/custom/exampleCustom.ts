@@ -22,6 +22,7 @@ import { assertableCiYamlFileCortmumEstinant } from './ciYamlFile/assertableCiYa
 import { assertableCiYamlFileContentsDifferenceOnama } from './ciYamlFile/assertableCiYamlFileContentsDifference';
 import { ciYamlFileValidationEstinant } from './ciYamlFile/ciYamlFileValidationEstinant';
 import { identifiableQuirmDebuggerEstinant } from '../../custom-adapter/identifiableQuirmDebuggerEstinant';
+import { typeScriptFileD2Estinant } from './program/typeScriptFileD2';
 
 digikikify({
   initialQuirmTuple: [
@@ -48,6 +49,7 @@ digikikify({
     assertableCiYamlFileCortmumEstinant,
     assertableCiYamlFileContentsDifferenceOnama,
     ciYamlFileValidationEstinant,
+    typeScriptFileD2Estinant,
   ]),
 });
 
