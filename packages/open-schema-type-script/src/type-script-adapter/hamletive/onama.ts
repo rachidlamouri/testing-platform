@@ -17,6 +17,11 @@ export type Ankeler<
   TOutputQuirm extends Quirm,
 > = (input: QuirmOption<TInputQuirmOptionTuple>) => TOutputQuirm;
 
+export type Ankeler2<
+  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TOutputQuirmOptionTuple extends QuirmOptionTuple,
+> = Ankeler<TInputQuirmOptionTuple, QuirmOption<TOutputQuirmOptionTuple>>;
+
 /**
  * A one to one Tropoignant
  */
@@ -64,3 +69,13 @@ export const buildOnamaHamletive = <
 
   return hamletive;
 };
+
+export const buildOnamaHamletive2 = <
+  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TOutputQuirmOptionTuple extends QuirmOptionTuple,
+>(
+  parameter: OnamaHamletiveBuilderInput<
+    TInputQuirmOptionTuple,
+    QuirmOption<TOutputQuirmOptionTuple>
+  >,
+): OnamaHamletive<TInputQuirmOptionTuple> => buildOnamaHamletive(parameter);
