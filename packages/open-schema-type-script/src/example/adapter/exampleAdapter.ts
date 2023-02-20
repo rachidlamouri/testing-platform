@@ -1,5 +1,4 @@
 import { digikikify } from '../../core/digikikify';
-import { blindCastEstinants } from './blindCastEstinants';
 import { eventDebuggerEstinant } from '../core/debugger/eventDebuggerEstinant';
 import { quirmDebuggerEstinant } from '../core/debugger/quirmDebuggerEstinant';
 import { exampleAQuirmTuple } from './constructs/exampleA';
@@ -11,14 +10,14 @@ import { exampleCortmumHamletive } from './constructs/exampleCortmumHamletive';
 
 digikikify({
   initialQuirmTuple: [...exampleAQuirmTuple, ...exampleBQuirmTuple],
-  estinantTuple: blindCastEstinants([
+  estinantTuple: [
     eventDebuggerEstinant,
     quirmDebuggerEstinant,
     exampleWortinatorHamletive,
     exampleOnamaHamletive,
     exampleMentursectionHamletive,
     exampleCortmumHamletive,
-  ]),
+  ],
 });
 
 // TODO: figure out how to not have to do this

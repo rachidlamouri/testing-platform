@@ -19,7 +19,8 @@ import {
   OnLoopStartEvent,
 } from './yek';
 
-type DigikikifierEstinantTuple = readonly (Estinant | Estinant2)[];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type DigikikifierEstinantTuple = readonly (Estinant<any> | Estinant2<any>)[];
 
 const isEstinant2 = (
   estinant: DigikikifierEstinantTuple[number],
@@ -45,8 +46,10 @@ export type DigikikifierInput = {
  */
 export const digikikify = ({
   initialQuirmTuple,
-  estinantTuple,
+  estinantTuple: inputEstinantTuple,
 }: DigikikifierInput): void => {
+  const estinantTuple: readonly (Estinant | Estinant2)[] = inputEstinantTuple;
+
   const tabilly = new Tabilly();
 
   const addToTabilly = (quirmTuple: QuirmTuple): void => {

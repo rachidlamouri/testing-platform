@@ -7,7 +7,6 @@ import {
 import { Gepp } from '../../core/gepp';
 import { Quirm } from '../../core/quirm';
 import { TropoignantTypeName } from '../../core/tropoignant';
-import { blindCastEstinants } from '../adapter/blindCastEstinants';
 import { eventDebuggerEstinant } from './debugger/eventDebuggerEstinant';
 import { quirmDebuggerEstinant } from './debugger/quirmDebuggerEstinant';
 
@@ -151,7 +150,7 @@ digikikify({
     exampleQuirmB1,
     exampleQuirmB2,
   ],
-  estinantTuple: blindCastEstinants([
+  estinantTuple: [
     eventDebuggerEstinant,
     quirmDebuggerEstinant,
     exampleOnamaEstinant,
@@ -160,7 +159,7 @@ digikikify({
     exampleOnamaEstinant2,
     exampleWortinatorEstinant2,
     exampleMentursectionEstinant2,
-  ]),
+  ],
 });
 
 // TODO: figure out how to not have to do this

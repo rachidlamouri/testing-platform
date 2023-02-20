@@ -1,7 +1,6 @@
 import { digikikify } from '../../core/digikikify';
 import { eventDebuggerEstinant } from '../core/debugger/eventDebuggerEstinant';
 import { quirmDebuggerEstinant } from '../core/debugger/quirmDebuggerEstinant';
-import { blindCastEstinants } from '../adapter/blindCastEstinants';
 import { fileAMentursection } from './file/fileAMentursection';
 import { fileAEstinant } from './file/fileA';
 import {
@@ -10,7 +9,10 @@ import {
 } from './file/fileAConfiguration';
 import { fileAHasKnownExtensionSuffixEstinant } from './file/fileAHasKnownExtensionSuffix';
 import { typeScriptFileBEstinant } from './file/typeScriptFileB';
-import { validator } from './validation/validator';
+import {
+  validationAggregator,
+  validatorExecutor,
+} from './validation/validator';
 import { typeScriptFileCEstinant } from './file/typeScriptFileC';
 import { typeScriptFileDEstinant } from './file/typeScriptFileD';
 import { typeScriptFileDHasProperlyNamedExportValidation } from './file/typeScriptFileDHasProperlyNamedExportValidation';
@@ -22,6 +24,14 @@ import { assertableCiYamlFileCortmumEstinant } from './ciYamlFile/assertableCiYa
 import { assertableCiYamlFileContentsDifferenceOnama } from './ciYamlFile/assertableCiYamlFileContentsDifference';
 import { ciYamlFileValidationEstinant } from './ciYamlFile/ciYamlFileValidationEstinant';
 import { identifiableQuirmDebuggerEstinant } from '../../custom-adapter/identifiableQuirmDebuggerEstinant';
+import { typeScriptFileD2Estinant } from './program/typeScriptFileD2';
+import { programFileAEstinant } from './program/programFileA';
+import { programFileBEstinant } from './program/programFileB';
+import {
+  programFileCEstinant1,
+  programFileCEstinant2,
+} from './program/programFileC';
+import { programFileRendererEstinant } from './program/programFileRendererEstinant';
 
 digikikify({
   initialQuirmTuple: [
@@ -29,14 +39,14 @@ digikikify({
     CI_FILE_A_CONFIGURATION_QUIRM,
     EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM,
   ],
-  estinantTuple: blindCastEstinants([
+  estinantTuple: [
     identifiableQuirmDebuggerEstinant,
     eventDebuggerEstinant,
     quirmDebuggerEstinant,
     fileAEstinant,
     fileAHasKnownExtensionSuffixEstinant,
-    validator.validatorExecutor,
-    validator.validationAggregator,
+    validatorExecutor,
+    validationAggregator,
     fileAMentursection,
     typeScriptFileBEstinant,
     typeScriptFileCEstinant,
@@ -48,7 +58,13 @@ digikikify({
     assertableCiYamlFileCortmumEstinant,
     assertableCiYamlFileContentsDifferenceOnama,
     ciYamlFileValidationEstinant,
-  ]),
+    typeScriptFileD2Estinant,
+    programFileAEstinant,
+    programFileBEstinant,
+    programFileCEstinant1,
+    programFileCEstinant2,
+    programFileRendererEstinant,
+  ],
 });
 
 // TODO: figure out how to not have to do this
