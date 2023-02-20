@@ -1,16 +1,15 @@
 import { Estinant2 } from '../../core/estinant';
 import { GeppTuple } from '../../core/gepp';
-import { QuirmTupleToGeppTuple } from '../../core/quirm';
+import {
+  Quirm,
+  QuirmToGeppUnion,
+  QuirmTupleToGeppTuple,
+} from '../../core/quirm';
 import { Straline } from '../../core/straline';
 import { Tropoignant2 } from '../../core/tropoignant';
 import { Struss } from '../../utilities/struss';
 import { kodatar } from '../kodataring';
-import {
-  QuirmOption,
-  QuirmOptionTuple,
-  QuirmOptionTupleToGeppOptionIntersection,
-  QuirmOptionTupleTupleToQuirmTuple,
-} from '../quirmOptionTuple';
+import { QuirmOption, QuirmOptionTuple } from '../quirmOptionTuple';
 
 type Predicate = (input: Straline) => boolean;
 
@@ -18,14 +17,12 @@ type Predicate = (input: Straline) => boolean;
  * A function to check if a Hubblepup can be recategorized
  */
 export type Paraker<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirmOptionTuple extends QuirmOptionTuple,
   TOutputQuirm extends QuirmOption<TOutputQuirmOptionTuple>,
-> = TOutputQuirm['hubblepup'] extends QuirmOption<TInputQuirmOptionTuple>['hubblepup']
-  ? (
-      input: QuirmOption<TInputQuirmOptionTuple>['hubblepup'],
-    ) => input is TOutputQuirm['hubblepup']
-  : (input: QuirmOption<TInputQuirmOptionTuple>['hubblepup']) => false;
+> = TOutputQuirm['hubblepup'] extends TInputQuirm['hubblepup']
+  ? (input: TInputQuirm['hubblepup']) => input is TOutputQuirm['hubblepup']
+  : (input: TInputQuirm['hubblepup']) => false;
 
 type BaseKerz<TOutputGeppTuple extends GeppTuple, TParak extends Predicate> = {
   outputGeppTuple: TOutputGeppTuple;
@@ -43,22 +40,22 @@ const NULL_KERZ: NullKerz = {
  * A collection of a Paraker, and the Gepp tuple that will recategorize a Quirm, if the Quirm's Hubblepup passes the Paraker
  */
 export type Kerz<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirmOptionTuple extends QuirmOptionTuple,
   TOutputQuirm extends QuirmOption<TOutputQuirmOptionTuple>,
-> = TOutputQuirm['hubblepup'] extends QuirmOption<TInputQuirmOptionTuple>['hubblepup']
+> = TOutputQuirm['hubblepup'] extends TInputQuirm['hubblepup']
   ? BaseKerz<
       TOutputQuirm['geppTuple'],
-      Paraker<TInputQuirmOptionTuple, TOutputQuirmOptionTuple, TOutputQuirm>
+      Paraker<TInputQuirm, TOutputQuirmOptionTuple, TOutputQuirm>
     >
   : NullKerz;
 
 export type KerzTuple<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirmOptionTuple extends QuirmOptionTuple,
 > = {
   [Index in keyof TOutputQuirmOptionTuple]: Kerz<
-    TInputQuirmOptionTuple,
+    TInputQuirm,
     TOutputQuirmOptionTuple,
     TOutputQuirmOptionTuple[Index]
   >;
@@ -68,47 +65,39 @@ export type KerzTuple<
  * A one to one Tropoignant that is used to recategorize a Quirm via zero or more Gepps
  */
 export type Mentursection<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirmOptionTuple extends QuirmOptionTuple,
-> = Tropoignant2<
-  [QuirmOption<TInputQuirmOptionTuple>],
-  [QuirmOption<TOutputQuirmOptionTuple>]
->;
+> = Tropoignant2<[TInputQuirm], [QuirmOption<TOutputQuirmOptionTuple>]>;
 
 /**
  * A one to one Estinant that is used to recategorize a Quirm via zero or more Gepps
  */
 export type MentursectionHamletive<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirmOptionTuple extends QuirmOptionTuple,
-> = Estinant2<
-  [QuirmOption<TInputQuirmOptionTuple>],
-  QuirmOptionTupleTupleToQuirmTuple<[TOutputQuirmOptionTuple]>,
-  Struss
->;
+> = Estinant2<[TInputQuirm], [QuirmOption<TOutputQuirmOptionTuple>], Struss>;
 
 export type MentursectionHamletiveBuilderInput<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirmOptionTuple extends QuirmOptionTuple,
 > = {
-  inputGepp: QuirmOptionTupleToGeppOptionIntersection<TInputQuirmOptionTuple>;
-  kerzTuple: KerzTuple<TInputQuirmOptionTuple, TOutputQuirmOptionTuple>;
+  inputGepp: QuirmToGeppUnion<TInputQuirm>;
+  kerzTuple: KerzTuple<TInputQuirm, TOutputQuirmOptionTuple>;
 };
 
 export const buildMentursectionHamletive = <
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirmOptionTuple extends QuirmOptionTuple,
 >({
   inputGepp,
   kerzTuple,
 }: MentursectionHamletiveBuilderInput<
-  TInputQuirmOptionTuple,
+  TInputQuirm,
   TOutputQuirmOptionTuple
->): MentursectionHamletive<TInputQuirmOptionTuple, TOutputQuirmOptionTuple> => {
-  const tropoig: Mentursection<
-    TInputQuirmOptionTuple,
-    TOutputQuirmOptionTuple
-  > = (input) => {
+>): MentursectionHamletive<TInputQuirm, TOutputQuirmOptionTuple> => {
+  const tropoig: Mentursection<TInputQuirm, TOutputQuirmOptionTuple> = (
+    input,
+  ) => {
     const { outputGeppTuple } =
       kerzTuple.find((kerz) => kerz.parak(input.hubblepup)) ?? NULL_KERZ;
 
@@ -134,12 +123,10 @@ export const buildMentursectionHamletive = <
   };
 
   const hamletive: MentursectionHamletive<
-    TInputQuirmOptionTuple,
+    TInputQuirm,
     TOutputQuirmOptionTuple
   > = {
-    inputGeppTuple: [inputGepp] as QuirmTupleToGeppTuple<
-      [QuirmOption<TInputQuirmOptionTuple>]
-    >,
+    inputGeppTuple: [inputGepp] as QuirmTupleToGeppTuple<[TInputQuirm]>,
     tropoig,
     croard: kodatar,
   };

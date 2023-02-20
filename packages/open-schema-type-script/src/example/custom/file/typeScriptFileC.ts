@@ -12,7 +12,6 @@ import {
   Ankeler,
   buildOnamaHamletive,
 } from '../../../type-script-adapter/hamletive/onama';
-import { QuirmOptionTuple } from '../../../type-script-adapter/quirmOptionTuple';
 
 type ImportDeclaration = TSESTree.ImportDeclaration;
 
@@ -49,9 +48,9 @@ export type TypeScriptFileCPlifal = Plifal<
 
 export type TypeScriptFileCPlifalTuple = readonly TypeScriptFileCPlifal[];
 
-type InputOptionTuple = QuirmOptionTuple<[TypeScriptFileBPlifal]>;
+type InputPlifal = TypeScriptFileBPlifal;
 
-const buildTypeScriptFileC: Ankeler<InputOptionTuple, TypeScriptFileCPlifal> = (
+const buildTypeScriptFileC: Ankeler<InputPlifal, TypeScriptFileCPlifal> = (
   input,
 ) => {
   const { program } = input.hubblepup.grition.additionalMetadata;

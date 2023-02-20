@@ -6,7 +6,6 @@ import {
   Cortmum,
   CortmumCroader,
 } from '../../../type-script-adapter/hamletive/cortmum';
-import { QuirmOptionTupleTuple } from '../../../type-script-adapter/quirmOptionTuple';
 import { Grition } from '../../../custom-adapter/grition';
 import { Odeshin } from '../../../custom-adapter/odeshin';
 import { Plifal } from '../../../custom-adapter/plifal';
@@ -50,24 +49,23 @@ export type AssertableCiYamlFileContentsPlifal = Plifal<
   AssertableCiYamlFileContentsOdeshin
 >;
 
-type InputQuirmOptionTupleTuple = QuirmOptionTupleTuple<
-  [[ActualCiYamlFilePlifal], [ExpectedCiYamlFileContentsPlifal]]
->;
-type OutputQuirmOptionTupleTuple = QuirmOptionTupleTuple<
-  [[AssertableCiYamlFileContentsPlifal]]
->;
+type InputPlifalTuple = [
+  ActualCiYamlFilePlifal,
+  ExpectedCiYamlFileContentsPlifal,
+];
+type OutputPlifalTuple = [AssertableCiYamlFileContentsPlifal];
 
 type InputZorn = Zorn;
 
 // Each input collection only has one item, so any arbitrary Zorn will do
 const CI_YAML_FILE_ZORN = Symbol('ci-yaml-file');
-const croard: CortmumCroader<InputQuirmOptionTupleTuple, InputZorn> = () => {
+const croard: CortmumCroader<InputPlifalTuple, InputZorn> = () => {
   return CI_YAML_FILE_ZORN;
 };
 
 const buildAssertableCiYamlFileContents: Cortmum<
-  InputQuirmOptionTupleTuple,
-  OutputQuirmOptionTupleTuple
+  InputPlifalTuple,
+  OutputPlifalTuple
 > = (actual, expected) => {
   const actualStringContents: string = fs.readFileSync(
     actual.hubblepup.grition.filePath,
@@ -100,8 +98,8 @@ const buildAssertableCiYamlFileContents: Cortmum<
 };
 
 export const assertableCiYamlFileCortmumEstinant = buildCortmumHamletive<
-  InputQuirmOptionTupleTuple,
-  OutputQuirmOptionTupleTuple,
+  InputPlifalTuple,
+  OutputPlifalTuple,
   InputZorn
 >({
   inputGeppTuple: [

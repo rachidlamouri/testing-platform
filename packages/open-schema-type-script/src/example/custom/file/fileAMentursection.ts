@@ -16,28 +16,30 @@ import {
   YAML_FILE_A_GEPP,
 } from './yamlFileA';
 
-type InputOptionTuple = OptionTuple<[FileAPlifal]>;
-type OutputOptionTuple = OptionTuple<[TypeScriptFileAPlifal, YamlFileAPlifal]>;
+type InputPlifal = FileAPlifal;
+type OutputPlifalOptionTuple = OptionTuple<
+  [TypeScriptFileAPlifal, YamlFileAPlifal]
+>;
 
 const isTypeScriptFileA: Paraker<
-  InputOptionTuple,
-  OutputOptionTuple,
+  InputPlifal,
+  OutputPlifalOptionTuple,
   TypeScriptFileAPlifal
 > = (input): input is TypeScriptFileAOdeshin =>
   input.grition.extension.suffixIdentifier ===
   FileExtensionSuffixIdentifier.TypeScript;
 
 const isYamlFileA: Paraker<
-  InputOptionTuple,
-  OutputOptionTuple,
+  InputPlifal,
+  OutputPlifalOptionTuple,
   YamlFileAPlifal
 > = (input): input is YamlFileAOdeshin =>
   input.grition.extension.suffixIdentifier ===
   FileExtensionSuffixIdentifier.Yaml;
 
 export const fileAMentursection = buildMentursectionHamletive<
-  InputOptionTuple,
-  OutputOptionTuple
+  InputPlifal,
+  OutputPlifalOptionTuple
 >({
   inputGepp: FILE_A_GEPP,
   kerzTuple: [

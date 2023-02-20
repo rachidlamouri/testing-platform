@@ -3,24 +3,19 @@ import {
   Cortmum,
   CortmumCroader,
 } from '../../../type-script-adapter/hamletive/cortmum';
-import { QuirmOptionTupleTuple } from '../../../type-script-adapter/quirmOptionTuple';
 import { ExampleAQuirm } from './exampleA';
 import { ExampleAggregateQuirm } from './exampleAggregate';
 import { ExampleBQuirm } from './exampleB';
 
-type InputQuirmOptionTupleTuple = QuirmOptionTupleTuple<
-  [[ExampleAQuirm], [ExampleBQuirm]]
->;
-type OutputQuirmOptionTupleTuple = QuirmOptionTupleTuple<
-  [[ExampleAggregateQuirm]]
->;
+type InputQuirmTuple = [ExampleAQuirm, ExampleBQuirm];
+type OutputQuirmTuple = [ExampleAggregateQuirm];
 
 type InputZorn = number;
 
-const aggregateByNumber: Cortmum<
-  InputQuirmOptionTupleTuple,
-  OutputQuirmOptionTupleTuple
-> = (inputA, inputB) => {
+const aggregateByNumber: Cortmum<InputQuirmTuple, OutputQuirmTuple> = (
+  inputA,
+  inputB,
+) => {
   const output: ExampleAggregateQuirm = {
     geppTuple: ['example-aggregate'],
     hubblepup: {
@@ -32,16 +27,14 @@ const aggregateByNumber: Cortmum<
   return [output];
 };
 
-const croard: CortmumCroader<InputQuirmOptionTupleTuple, InputZorn> = (
-  input,
-) => {
+const croard: CortmumCroader<InputQuirmTuple, InputZorn> = (input) => {
   const zorn: InputZorn = parseInt(input.hubblepup.split('-')[1], 10);
   return zorn;
 };
 
 export const exampleCortmumHamletive = buildCortmumHamletive<
-  InputQuirmOptionTupleTuple,
-  OutputQuirmOptionTupleTuple,
+  InputQuirmTuple,
+  OutputQuirmTuple,
   InputZorn
 >({
   inputGeppTuple: ['example-a', 'example-b'],

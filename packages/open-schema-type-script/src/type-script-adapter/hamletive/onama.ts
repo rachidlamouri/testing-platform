@@ -1,70 +1,61 @@
 import { Estinant2 } from '../../core/estinant';
-import { Quirm, QuirmTupleToGeppTuple } from '../../core/quirm';
+import {
+  Quirm,
+  QuirmToGeppUnion,
+  QuirmTupleToGeppTuple,
+} from '../../core/quirm';
 import { Tropoignant2 } from '../../core/tropoignant';
 import { Struss } from '../../utilities/struss';
 import { kodatar } from '../kodataring';
-import {
-  QuirmOption,
-  QuirmOptionTuple,
-  QuirmOptionTupleToGeppOptionIntersection,
-} from '../quirmOptionTuple';
 
 /**
  * Like an Onama, but it's return value is abstracted from the Engine's concerns
  */
-export type Ankeler<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
-  TOutputQuirm extends Quirm,
-> = (input: QuirmOption<TInputQuirmOptionTuple>) => TOutputQuirm;
-
-export type Ankeler2<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
-  TOutputQuirmOptionTuple extends QuirmOptionTuple,
-> = Ankeler<TInputQuirmOptionTuple, QuirmOption<TOutputQuirmOptionTuple>>;
+export type Ankeler<TInputQuirm extends Quirm, TOutputQuirm extends Quirm> = (
+  input: TInputQuirm,
+) => TOutputQuirm;
 
 /**
  * A one to one Tropoignant
  */
 export type Onama<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirm extends Quirm,
-> = Tropoignant2<[QuirmOption<TInputQuirmOptionTuple>], [TOutputQuirm]>;
+> = Tropoignant2<[TInputQuirm], [TOutputQuirm]>;
 
 /**
  * A one to one Estinant
  */
 export type OnamaHamletive<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirm extends Quirm,
-> = Estinant2<[QuirmOption<TInputQuirmOptionTuple>], [TOutputQuirm], Struss>;
+> = Estinant2<[TInputQuirm], [TOutputQuirm], Struss>;
 
 export type OnamaHamletiveBuilderInput<
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirm extends Quirm,
 > = {
-  inputGepp: QuirmOptionTupleToGeppOptionIntersection<TInputQuirmOptionTuple>;
-  ankel: Ankeler<TInputQuirmOptionTuple, TOutputQuirm>;
+  inputGepp: QuirmToGeppUnion<TInputQuirm>;
+  ankel: Ankeler<TInputQuirm, TOutputQuirm>;
 };
 
 export const buildOnamaHamletive = <
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
   TOutputQuirm extends Quirm,
 >({
   inputGepp,
   ankel,
-}: OnamaHamletiveBuilderInput<
-  TInputQuirmOptionTuple,
+}: OnamaHamletiveBuilderInput<TInputQuirm, TOutputQuirm>): OnamaHamletive<
+  TInputQuirm,
   TOutputQuirm
->): OnamaHamletive<TInputQuirmOptionTuple, TOutputQuirm> => {
-  const tropoig: Onama<TInputQuirmOptionTuple, TOutputQuirm> = (input) => {
+> => {
+  const tropoig: Onama<TInputQuirm, TOutputQuirm> = (input) => {
     const output = ankel(input);
     return [output];
   };
 
-  const hamletive: OnamaHamletive<TInputQuirmOptionTuple, TOutputQuirm> = {
-    inputGeppTuple: [inputGepp] as QuirmTupleToGeppTuple<
-      [QuirmOption<TInputQuirmOptionTuple>]
-    >,
+  const hamletive: OnamaHamletive<TInputQuirm, TOutputQuirm> = {
+    inputGeppTuple: [inputGepp] as QuirmTupleToGeppTuple<[TInputQuirm]>,
     tropoig,
     croard: kodatar,
   };
@@ -73,14 +64,8 @@ export const buildOnamaHamletive = <
 };
 
 export const buildOnamaHamletive2 = <
-  TInputQuirmOptionTuple extends QuirmOptionTuple,
-  TOutputQuirmOptionTuple extends QuirmOptionTuple,
+  TInputQuirm extends Quirm,
+  TOutputQuirm extends Quirm,
 >(
-  parameter: OnamaHamletiveBuilderInput<
-    TInputQuirmOptionTuple,
-    QuirmOption<TOutputQuirmOptionTuple>
-  >,
-): OnamaHamletive<
-  TInputQuirmOptionTuple,
-  QuirmOption<TOutputQuirmOptionTuple>
-> => buildOnamaHamletive(parameter);
+  parameter: OnamaHamletiveBuilderInput<TInputQuirm, TOutputQuirm>,
+): OnamaHamletive<TInputQuirm, TOutputQuirm> => buildOnamaHamletive(parameter);

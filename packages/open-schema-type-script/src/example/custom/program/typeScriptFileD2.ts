@@ -7,7 +7,6 @@ import {
   Ankeler,
   buildOnamaHamletive,
 } from '../../../type-script-adapter/hamletive/onama';
-import { QuirmOptionTuple } from '../../../type-script-adapter/quirmOptionTuple';
 import { File } from '../../../utilities/file/file';
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
 import { Merge } from '../../../utilities/merge';
@@ -67,12 +66,10 @@ export type TypeScriptFileD2Plifal = Plifal<
   TypeScriptFileD2Odeshin
 >;
 
-type InputOptionTuple = QuirmOptionTuple<[TypeScriptFileCPlifal]>;
+type InputPlifal = TypeScriptFileCPlifal;
+type OutputPlifal = TypeScriptFileD2Plifal;
 
-const buildTypeScriptFileD2: Ankeler<
-  InputOptionTuple,
-  TypeScriptFileD2Plifal
-> = (input) => {
+const buildTypeScriptFileD2: Ankeler<InputPlifal, OutputPlifal> = (input) => {
   const output: TypeScriptFileD2Plifal = {
     geppTuple: [TYPE_SCRIPT_FILE_D2_GEPP],
     hubblepup: {
@@ -127,8 +124,8 @@ const buildTypeScriptFileD2: Ankeler<
 };
 
 export const typeScriptFileD2Estinant = buildOnamaHamletive<
-  InputOptionTuple,
-  TypeScriptFileD2Plifal
+  InputPlifal,
+  OutputPlifal
 >({
   inputGepp: TYPE_SCRIPT_FILE_C_GEPP,
   ankel: buildTypeScriptFileD2,

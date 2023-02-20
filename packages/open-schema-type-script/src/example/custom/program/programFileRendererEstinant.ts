@@ -9,9 +9,9 @@ import {
   PROGRAM_FILE_C_GEPP,
 } from './programFileC';
 
-type InputOptionTuple = [ProgramFileCPlifal];
+type InputPlifal = ProgramFileCPlifal;
 
-const renderProgram: Haqueler<InputOptionTuple> = (input) => {
+const renderProgram: Haqueler<InputPlifal> = (input) => {
   const { programName, programNodeSet, relationships } =
     input.hubblepup.grition.additionalMetadata;
 
@@ -62,7 +62,7 @@ ${mermaid}
 };
 
 export const programFileRendererEstinant =
-  buildWortinatorHamletive<InputOptionTuple>({
+  buildWortinatorHamletive<InputPlifal>({
     inputGepp: PROGRAM_FILE_C_GEPP,
     haquel: renderProgram,
   });
