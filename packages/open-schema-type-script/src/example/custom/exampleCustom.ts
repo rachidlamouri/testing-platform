@@ -31,6 +31,7 @@ import {
   programFileCEstinant1,
   programFileCEstinant2,
 } from './program/programFileC';
+import { programFileRendererEstinant } from './program/programFileRendererEstinant';
 
 digikikify({
   initialQuirmTuple: [
@@ -62,6 +63,7 @@ digikikify({
     programFileBEstinant,
     programFileCEstinant1,
     programFileCEstinant2,
+    programFileRendererEstinant,
   ],
 });
 

@@ -6,6 +6,7 @@ const DEBUG_DIR_PATH = './debug/' as const;
 const ENGINE_EVENTS_PATH = posix.join(DEBUG_DIR_PATH, 'engine-events');
 const CACHE_PATH = posix.join(DEBUG_DIR_PATH, 'cache');
 const IDENTITY_CACHE_PATH = posix.join(DEBUG_DIR_PATH, 'identity-cache');
+const OUTPUT_PATH = posix.join(DEBUG_DIR_PATH, 'output');
 
 fs.rmSync(DEBUG_DIR_PATH, { recursive: true, force: true });
 fs.mkdirSync(ENGINE_EVENTS_PATH, { recursive: true });
@@ -22,6 +23,9 @@ export const fileUtilities = {
     identifier: string,
   ): string => {
     return posix.join(IDENTITY_CACHE_PATH, directoryName, `${identifier}.txt`);
+  },
+  getOutputFilePath(directoryName: string, fileName: string): string {
+    return posix.join(OUTPUT_PATH, fileName);
   },
   writeFile: (filePath: string, text: string): void => {
     fs.mkdirSync(posix.dirname(filePath), { recursive: true });
