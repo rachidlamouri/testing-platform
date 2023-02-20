@@ -9,21 +9,22 @@ import {
 
 let totalValidationCount = 0;
 const errorMessages: string[] = [];
-const validationAggregator: WortinatorEstinant<ValidationResultOdeshin> = {
-  inputGepp: VALIDATION_RESULT_GEPP,
-  tropoignant: {
-    typeName: TropoignantTypeName.Wortinator,
-    process: function onValidationResult(inputOdeshin) {
-      totalValidationCount += 1;
+export const validationAggregator: WortinatorEstinant<ValidationResultOdeshin> =
+  {
+    inputGepp: VALIDATION_RESULT_GEPP,
+    tropoignant: {
+      typeName: TropoignantTypeName.Wortinator,
+      process: function onValidationResult(inputOdeshin) {
+        totalValidationCount += 1;
 
-      if (!inputOdeshin.grition.isValid) {
-        errorMessages.push(
-          `"${inputOdeshin.grition.identifier}" does not satisfy "${inputOdeshin.grition.predicate}"`,
-        );
-      }
+        if (!inputOdeshin.grition.isValid) {
+          errorMessages.push(
+            `"${inputOdeshin.grition.identifier}" does not satisfy "${inputOdeshin.grition.predicate}"`,
+          );
+        }
+      },
     },
-  },
-};
+  };
 
 const serializeValidationResults = (): string => {
   const failedValidationCount = errorMessages.length;
@@ -45,7 +46,7 @@ const serializeValidationResults = (): string => {
   return lines.join('\n');
 };
 
-const validatorExecutor: WortinatorEstinant<null> = {
+export const validatorExecutor: WortinatorEstinant<null> = {
   inputGepp: digikikifierGeppsByIdentifer.OnFinish,
   tropoignant: {
     typeName: TropoignantTypeName.Wortinator,
@@ -60,7 +61,5 @@ const validatorExecutor: WortinatorEstinant<null> = {
   },
 };
 
-export const validator = {
-  validationAggregator,
-  validatorExecutor,
-};
+// TODO: remove this
+export type Validator = symbol;

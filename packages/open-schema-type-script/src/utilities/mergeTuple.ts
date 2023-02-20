@@ -1,4 +1,5 @@
 import { StralineTuple } from '../core/straline';
+import { Simplify } from './simplify';
 
 type RecursivelyMergeTuple<TTuple extends StralineTuple> = TTuple extends [
   infer TOnlyItem,
@@ -8,5 +9,6 @@ type RecursivelyMergeTuple<TTuple extends StralineTuple> = TTuple extends [
   ? TFirstItem & RecursivelyMergeTuple<TRestItems>
   : never;
 
-export type MergeTuple<TTuple extends StralineTuple> =
-  RecursivelyMergeTuple<TTuple>;
+export type MergeTuple<TTuple extends StralineTuple> = Simplify<
+  RecursivelyMergeTuple<TTuple>
+>;

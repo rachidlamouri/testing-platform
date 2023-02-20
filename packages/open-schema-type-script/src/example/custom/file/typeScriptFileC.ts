@@ -24,6 +24,7 @@ export type TypeScriptFileC = Grition<
   File<
     FileExtensionSuffixIdentifier.TypeScript,
     {
+      program: TSESTree.Program;
       importDeclarationList: ImportDeclaration[];
       exportDeclarationList: ExportDeclaration[];
     }
@@ -76,6 +77,7 @@ const buildTypeScriptFileC: Ankeler<InputOptionTuple, TypeScriptFileCPlifal> = (
       grition: {
         ...input.hubblepup.grition,
         additionalMetadata: {
+          program: input.hubblepup.grition.additionalMetadata.program,
           importDeclarationList: importDeclarations,
           exportDeclarationList: exportDeclarations,
         },

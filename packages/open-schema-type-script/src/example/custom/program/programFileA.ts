@@ -38,7 +38,7 @@ const isProgramFileA: Paraker<
       return (
         importDeclaration.typeName === CustomImportDeclarationTypeName.Local &&
         importDeclaration.filePath ===
-          'packages/open-schema-type-script/src/core/digikikify' &&
+          'packages/open-schema-type-script/src/core/digikikify.ts' &&
         importDeclaration.specifierList.includes('digikikify')
       );
     },

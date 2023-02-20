@@ -1,3 +1,4 @@
+import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { posix } from 'path';
 import { Grition } from '../../../custom-adapter/grition';
 import { Odeshin } from '../../../custom-adapter/odeshin';
@@ -14,6 +15,7 @@ import {
   TypeScriptFileCPlifal,
   TYPE_SCRIPT_FILE_C_GEPP,
 } from '../file/typeScriptFileC';
+import { resolveModuleFilePath } from '../../../utilities/file/resolveModuleFilePath';
 
 export enum CustomImportDeclarationTypeName {
   Local = 'Local',
@@ -25,17 +27,17 @@ type BaseCustomImportDeclaration<
   TProperties extends object,
 > = Merge<{ typeName: TTypeName; specifierList: string[] }, TProperties>;
 
-type LocalImportDeclaration = BaseCustomImportDeclaration<
+export type LocalImportDeclaration = BaseCustomImportDeclaration<
   CustomImportDeclarationTypeName.Local,
   { filePath: string }
 >;
 
-type ExternalImportDeclaration = BaseCustomImportDeclaration<
+export type ExternalImportDeclaration = BaseCustomImportDeclaration<
   CustomImportDeclarationTypeName.External,
   { moduleName: string }
 >;
 
-type CustomImportDeclaration =
+export type CustomImportDeclaration =
   | LocalImportDeclaration
   | ExternalImportDeclaration;
 
@@ -43,6 +45,7 @@ export type TypeScriptFileD2 = File<
   FileExtensionSuffixIdentifier.TypeScript,
   {
     importDeclarationList: CustomImportDeclaration[];
+    typeScriptProgram: TSESTree.Program;
   }
 >;
 
@@ -77,6 +80,7 @@ const buildTypeScriptFileD2: Ankeler<
       grition: {
         ...input.hubblepup.grition,
         additionalMetadata: {
+          typeScriptProgram: input.hubblepup.grition.additionalMetadata.program,
           importDeclarationList:
             input.hubblepup.grition.additionalMetadata.importDeclarationList.map<CustomImportDeclaration>(
               (inputImportDeclaration) => {
@@ -91,12 +95,18 @@ const buildTypeScriptFileD2: Ankeler<
                   );
 
                 if (isRelative) {
+                  const extensionlessSourceFilePath = posix.join(
+                    posix.dirname(input.hubblepup.grition.filePath),
+                    sourcePath,
+                  );
+
+                  const sourceFilePath = resolveModuleFilePath(
+                    extensionlessSourceFilePath,
+                  );
+
                   return {
                     typeName: CustomImportDeclarationTypeName.Local,
-                    filePath: posix.join(
-                      posix.dirname(input.hubblepup.grition.filePath),
-                      sourcePath,
-                    ),
+                    filePath: sourceFilePath,
                     specifierList,
                   } satisfies LocalImportDeclaration;
                 }
