@@ -27,7 +27,7 @@ export type Wortinator<TInputQuirmOptionTuple extends QuirmOptionTuple> =
  */
 export type WortinatorHamletive<
   TInputQuirmOptionTuple extends QuirmOptionTuple,
-> = Estinant2<[QuirmOption<TInputQuirmOptionTuple>], Struss>;
+> = Estinant2<[QuirmOption<TInputQuirmOptionTuple>], [], Struss>;
 
 export type WortinatorHamletiveBuilderInput<
   TInputQuirmOptionTuple extends QuirmOptionTuple,

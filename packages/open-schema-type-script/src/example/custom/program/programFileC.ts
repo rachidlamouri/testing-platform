@@ -460,14 +460,16 @@ const cacheFiles: Tropoignant2<InputTuple, OutputTuple> = (input) => {
   return outputPlifals;
 };
 
-export const programFileCEstinant1: Estinant2<InputTuple, Struss> = {
-  inputGeppTuple: [PROGRAM_FILE_B_GEPP],
-  croard: kodatar,
-  tropoig: cacheFiles,
-};
+export const programFileCEstinant1: Estinant2<InputTuple, OutputTuple, Struss> =
+  {
+    inputGeppTuple: [PROGRAM_FILE_B_GEPP],
+    croard: kodatar,
+    tropoig: cacheFiles,
+  };
 
-export const programFileCEstinant2: Estinant2<InputTuple, Struss> = {
-  inputGeppTuple: [TYPE_SCRIPT_FILE_D2_GEPP],
-  croard: kodatar,
-  tropoig: cacheFiles,
-};
+export const programFileCEstinant2: Estinant2<InputTuple, OutputTuple, Struss> =
+  {
+    inputGeppTuple: [TYPE_SCRIPT_FILE_D2_GEPP],
+    croard: kodatar,
+    tropoig: cacheFiles,
+  };

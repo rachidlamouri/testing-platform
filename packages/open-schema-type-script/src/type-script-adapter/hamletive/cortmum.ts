@@ -39,9 +39,11 @@ export type Cortmum<
  */
 export type CortmumHamletive<
   TInputQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
+  TOutputQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
   TZorn extends Zorn,
 > = Estinant2<
   QuirmOptionTupleTupleToQuirmTuple<TInputQuirmOptionTupleTuple>,
+  QuirmOptionTupleTupleToQuirmTuple<TOutputQuirmOptionTupleTuple>,
   TZorn
 >;
 
@@ -67,8 +69,16 @@ export const buildCortmumHamletive = <
   TInputQuirmOptionTupleTuple,
   TOutputQuirmOptionTupleTuple,
   TZorn
->): CortmumHamletive<TInputQuirmOptionTupleTuple, TZorn> => {
-  const hamletive: CortmumHamletive<TInputQuirmOptionTupleTuple, TZorn> = {
+>): CortmumHamletive<
+  TInputQuirmOptionTupleTuple,
+  TOutputQuirmOptionTupleTuple,
+  TZorn
+> => {
+  const hamletive: CortmumHamletive<
+    TInputQuirmOptionTupleTuple,
+    TOutputQuirmOptionTupleTuple,
+    TZorn
+  > = {
     inputGeppTuple: inputGeppTuple as QuirmTupleToGeppTuple<
       QuirmOptionTupleTupleToQuirmTuple<TInputQuirmOptionTupleTuple>
     >,

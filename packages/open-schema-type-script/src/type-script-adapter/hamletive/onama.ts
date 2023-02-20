@@ -33,8 +33,10 @@ export type Onama<
 /**
  * A one to one Estinant
  */
-export type OnamaHamletive<TInputQuirmOptionTuple extends QuirmOptionTuple> =
-  Estinant2<[QuirmOption<TInputQuirmOptionTuple>], Struss>;
+export type OnamaHamletive<
+  TInputQuirmOptionTuple extends QuirmOptionTuple,
+  TOutputQuirm extends Quirm,
+> = Estinant2<[QuirmOption<TInputQuirmOptionTuple>], [TOutputQuirm], Struss>;
 
 export type OnamaHamletiveBuilderInput<
   TInputQuirmOptionTuple extends QuirmOptionTuple,
@@ -53,13 +55,13 @@ export const buildOnamaHamletive = <
 }: OnamaHamletiveBuilderInput<
   TInputQuirmOptionTuple,
   TOutputQuirm
->): OnamaHamletive<TInputQuirmOptionTuple> => {
+>): OnamaHamletive<TInputQuirmOptionTuple, TOutputQuirm> => {
   const tropoig: Onama<TInputQuirmOptionTuple, TOutputQuirm> = (input) => {
     const output = ankel(input);
     return [output];
   };
 
-  const hamletive: OnamaHamletive<TInputQuirmOptionTuple> = {
+  const hamletive: OnamaHamletive<TInputQuirmOptionTuple, TOutputQuirm> = {
     inputGeppTuple: [inputGepp] as QuirmTupleToGeppTuple<
       [QuirmOption<TInputQuirmOptionTuple>]
     >,
@@ -78,4 +80,7 @@ export const buildOnamaHamletive2 = <
     TInputQuirmOptionTuple,
     QuirmOption<TOutputQuirmOptionTuple>
   >,
-): OnamaHamletive<TInputQuirmOptionTuple> => buildOnamaHamletive(parameter);
+): OnamaHamletive<
+  TInputQuirmOptionTuple,
+  QuirmOption<TOutputQuirmOptionTuple>
+> => buildOnamaHamletive(parameter);

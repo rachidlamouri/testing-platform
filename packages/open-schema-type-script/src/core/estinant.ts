@@ -59,14 +59,16 @@ export type EstinantTuple<
  */
 export type Estinant2<
   TInputQuirmTuple extends QuirmTuple = QuirmTuple,
+  TOutputQuirmTuple extends QuirmTuple = QuirmTuple,
   TZorn extends Zorn = Zorn,
 > = {
   inputGeppTuple: QuirmTupleToGeppTuple<TInputQuirmTuple>;
-  tropoig: Tropoignant2<TInputQuirmTuple>;
+  tropoig: Tropoignant2<TInputQuirmTuple, TOutputQuirmTuple>;
   croard: Croarder<TInputQuirmTuple[number], TZorn>;
 };
 
 export type Estinant2Tuple<
   TInputQuirmTuple extends QuirmTuple = QuirmTuple,
+  TOutputQuirmTuple extends QuirmTuple = QuirmTuple,
   TZorn extends Zorn = Zorn,
-> = readonly Estinant2<TInputQuirmTuple, TZorn>[];
+> = readonly Estinant2<TInputQuirmTuple, TOutputQuirmTuple, TZorn>[];

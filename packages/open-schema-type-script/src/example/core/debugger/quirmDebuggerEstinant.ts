@@ -28,7 +28,7 @@ const debugQuirmTuple: QuirmTupleTropoignant<[]> = (quirmTupleQuirm) => {
   return [];
 };
 
-export const quirmDebuggerEstinant: Estinant2<[QuirmTupleQuirm], Struss> = {
+export const quirmDebuggerEstinant: Estinant2<[QuirmTupleQuirm], [], Struss> = {
   inputGeppTuple: [digikikifierGeppsByIdentifer.OnQuirmTuple],
   croard: kodatar,
   tropoig: debugQuirmTuple,

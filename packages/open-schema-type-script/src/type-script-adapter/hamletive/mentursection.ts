@@ -9,6 +9,7 @@ import {
   QuirmOption,
   QuirmOptionTuple,
   QuirmOptionTupleToGeppOptionIntersection,
+  QuirmOptionTupleTupleToQuirmTuple,
 } from '../quirmOptionTuple';
 
 type Predicate = (input: Straline) => boolean;
@@ -79,7 +80,12 @@ export type Mentursection<
  */
 export type MentursectionHamletive<
   TInputQuirmOptionTuple extends QuirmOptionTuple,
-> = Estinant2<[QuirmOption<TInputQuirmOptionTuple>], Struss>;
+  TOutputQuirmOptionTuple extends QuirmOptionTuple,
+> = Estinant2<
+  [QuirmOption<TInputQuirmOptionTuple>],
+  QuirmOptionTupleTupleToQuirmTuple<[TOutputQuirmOptionTuple]>,
+  Struss
+>;
 
 export type MentursectionHamletiveBuilderInput<
   TInputQuirmOptionTuple extends QuirmOptionTuple,
@@ -98,7 +104,7 @@ export const buildMentursectionHamletive = <
 }: MentursectionHamletiveBuilderInput<
   TInputQuirmOptionTuple,
   TOutputQuirmOptionTuple
->): MentursectionHamletive<TInputQuirmOptionTuple> => {
+>): MentursectionHamletive<TInputQuirmOptionTuple, TOutputQuirmOptionTuple> => {
   const tropoig: Mentursection<
     TInputQuirmOptionTuple,
     TOutputQuirmOptionTuple
@@ -127,7 +133,10 @@ export const buildMentursectionHamletive = <
     return [outputQuirm];
   };
 
-  const hamletive: MentursectionHamletive<TInputQuirmOptionTuple> = {
+  const hamletive: MentursectionHamletive<
+    TInputQuirmOptionTuple,
+    TOutputQuirmOptionTuple
+  > = {
     inputGeppTuple: [inputGepp] as QuirmTupleToGeppTuple<
       [QuirmOption<TInputQuirmOptionTuple>]
     >,
