@@ -22,12 +22,12 @@ export const FILE_A_CONFIGURATION_GEPP = FILE_A_CONFIGURATION_IDENTIFIER;
 
 export type FileAConfigurationGepp = typeof FILE_A_CONFIGURATION_GEPP;
 
-export type FileAConfigurationQuirm = Plifal<
+export type FileAConfigurationPlifal = Plifal<
   [FileAConfigurationGepp],
   FileAConfigurationOdeshin
 >;
 
-export const FULL_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
+export const FULL_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationPlifal = {
   geppTuple: [FILE_A_CONFIGURATION_GEPP],
   hubblepup: {
     identifier: FILE_A_CONFIGURATION_IDENTIFIER,
@@ -51,7 +51,7 @@ export const FULL_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
   },
 };
 
-export const SIMPLE_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
+export const SIMPLE_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationPlifal = {
   geppTuple: [FILE_A_CONFIGURATION_GEPP],
   hubblepup: {
     identifier: FILE_A_CONFIGURATION_IDENTIFIER,
@@ -67,7 +67,7 @@ export const SIMPLE_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
   },
 };
 
-export const CI_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationQuirm = {
+export const CI_FILE_A_CONFIGURATION_QUIRM: FileAConfigurationPlifal = {
   geppTuple: [FILE_A_CONFIGURATION_GEPP],
   hubblepup: {
     identifier: FILE_A_CONFIGURATION_IDENTIFIER,

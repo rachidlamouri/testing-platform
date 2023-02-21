@@ -1,6 +1,6 @@
-import { TropoignantTypeName } from '../../../core/tropoignant';
 import {} from '../../../custom-adapter/odeshin';
-import { ValidationEstinant } from '../validation/validation';
+import { kodatar } from '../../../type-script-adapter/kodataring';
+import { ValidationEstinant2 } from '../validation/validation';
 import {
   ValidationResultOdeshin,
   ValidationResultQuirm,
@@ -8,58 +8,56 @@ import {
 } from '../validation/validationResult';
 import {
   DeclarationReferenceTypeName,
-  TypeScriptFileDOdeshin,
+  TypeScriptFileDPlifal,
   TYPE_SCRIPT_FILE_D_GEPP,
 } from './typeScriptFileD';
 
-export const typeScriptFileDHasProperlyNamedExportValidation: ValidationEstinant<TypeScriptFileDOdeshin> =
+export const typeScriptFileDHasProperlyNamedExportValidation: ValidationEstinant2<TypeScriptFileDPlifal> =
   {
-    inputGepp: TYPE_SCRIPT_FILE_D_GEPP,
-    tropoignant: {
-      typeName: TropoignantTypeName.Onama,
-      process: function typeScriptFileDHasProperlyNamedExport(inputOdeshin) {
-        const hubblepup: ValidationResultOdeshin = {
-          identifier: `validation-result:${typeScriptFileDHasProperlyNamedExport.name}:${inputOdeshin.identifier}`,
-          grition: {
-            identifier: inputOdeshin.identifier,
-            predicate: 'typeScriptFileDHasProperlyNamedExport',
-            isValid:
-              inputOdeshin.grition.additionalMetadata.declarations.length ===
-                0 ||
-              inputOdeshin.grition.additionalMetadata.declarations.some(
-                (declaration): boolean => {
-                  switch (declaration.referenceTypeName) {
-                    case DeclarationReferenceTypeName.Code:
-                      return (
-                        declaration.identifier ===
-                        inputOdeshin.grition.inMemoryFileName.camelCase
-                      );
-                    case DeclarationReferenceTypeName.Type:
-                      return (
-                        declaration.identifier ===
-                        inputOdeshin.grition.inMemoryFileName.pascalCase
-                      );
-                    case DeclarationReferenceTypeName.Hybrid:
-                      return (
-                        declaration.identifier ===
-                          inputOdeshin.grition.inMemoryFileName.camelCase ||
-                        declaration.identifier ===
-                          inputOdeshin.grition.inMemoryFileName.pascalCase
-                      );
-                  }
+    inputGeppTuple: [TYPE_SCRIPT_FILE_D_GEPP],
+    croard: kodatar,
+    tropoig: function typeScriptFileDHasProperlyNamedExport(input) {
+      const hubblepup: ValidationResultOdeshin = {
+        identifier: `validation-result:${typeScriptFileDHasProperlyNamedExport.name}:${input.hubblepup.identifier}`,
+        grition: {
+          identifier: input.hubblepup.identifier,
+          predicate: 'typeScriptFileDHasProperlyNamedExport',
+          isValid:
+            input.hubblepup.grition.additionalMetadata.declarations.length ===
+              0 ||
+            input.hubblepup.grition.additionalMetadata.declarations.some(
+              (declaration): boolean => {
+                switch (declaration.referenceTypeName) {
+                  case DeclarationReferenceTypeName.Code:
+                    return (
+                      declaration.identifier ===
+                      input.hubblepup.grition.inMemoryFileName.camelCase
+                    );
+                  case DeclarationReferenceTypeName.Type:
+                    return (
+                      declaration.identifier ===
+                      input.hubblepup.grition.inMemoryFileName.pascalCase
+                    );
+                  case DeclarationReferenceTypeName.Hybrid:
+                    return (
+                      declaration.identifier ===
+                        input.hubblepup.grition.inMemoryFileName.camelCase ||
+                      declaration.identifier ===
+                        input.hubblepup.grition.inMemoryFileName.pascalCase
+                    );
+                }
 
-                  throw Error('Not Implemented');
-                },
-              ),
-          },
-        };
+                throw Error('Not Implemented');
+              },
+            ),
+        },
+      };
 
-        const outputQuirm: ValidationResultQuirm = {
-          geppTuple: [VALIDATION_RESULT_GEPP],
-          hubblepup,
-        };
+      const outputQuirm: ValidationResultQuirm = {
+        geppTuple: [VALIDATION_RESULT_GEPP],
+        hubblepup,
+      };
 
-        return [outputQuirm];
-      },
+      return [outputQuirm];
     },
   };

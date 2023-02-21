@@ -9,12 +9,11 @@ import {
 import { Grition } from '../../../custom-adapter/grition';
 import { Odeshin } from '../../../custom-adapter/odeshin';
 import { Plifal } from '../../../custom-adapter/plifal';
-import { OnamaEstinant } from '../../../core/estinant';
 import {
-  ExpectedCiYamlFileContentsConfigurationOdeshin,
+  ExpectedCiYamlFileConfigurationPlifal,
   EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_GEPPP,
 } from './expectedCiYamlFileContentsConfiguration';
-import { TropoignantTypeName } from '../../../core/tropoignant';
+import { buildOnamaHamletive } from '../../../type-script-adapter/hamletive/onama';
 
 export const EXPECTED_CI_YAML_FILE_CONTENTS_IDENTIFIER =
   'expected-ci-yaml-file-contents' as const;
@@ -46,79 +45,78 @@ export type ExpectedCiYamlFileContentsPlifal = Plifal<
   ExpectedCiYamlFileContentsOdeshin
 >;
 
-export const expectedCiYamlFileContentsOnama: OnamaEstinant<
-  ExpectedCiYamlFileContentsConfigurationOdeshin,
-  [ExpectedCiYamlFileContentsPlifal]
-> = {
+export const expectedCiYamlFileContentsOnama = buildOnamaHamletive<
+  ExpectedCiYamlFileConfigurationPlifal,
+  ExpectedCiYamlFileContentsPlifal
+>({
   inputGepp: EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_GEPPP,
-  tropoignant: {
-    typeName: TropoignantTypeName.Onama,
-    process: function buildExpectedCiYamlFileContents(inputOdeshin) {
-      const odeshin: ExpectedCiYamlFileContentsOdeshin = {
-        identifier: EXPECTED_CI_YAML_FILE_CONTENTS_IDENTIFIER,
-        grition: {
-          ...inputOdeshin.grition,
-          jobs: {
-            'Continuous-Integration': {
-              'runs-on': 'ubuntu-latest',
-              steps: [
-                ...inputOdeshin.grition.jobs['Continuous-Integration'].steps
-                  .beforePackageRunSteps,
-                // TODO: separate concerns for this logic once we can aggregate multiple targets into one
-                ...fs
-                  .readdirSync('packages')
-                  .map((directoryName) => ({
-                    directoryName,
-                    directoryPath: posix.join('packages', directoryName),
-                  }))
-                  .flatMap(
-                    ({ directoryName, directoryPath }): [...CommentedSteps] => {
-                      const runTestsScriptPath = posix.join(
-                        directoryPath,
-                        'scripts',
-                        'runTests.sh',
-                      );
+  ankel: function buildExpectedCiYamlFileContents(
+    input: ExpectedCiYamlFileConfigurationPlifal,
+  ): ExpectedCiYamlFileContentsPlifal {
+    const odeshin: ExpectedCiYamlFileContentsOdeshin = {
+      identifier: EXPECTED_CI_YAML_FILE_CONTENTS_IDENTIFIER,
+      grition: {
+        ...input.hubblepup.grition,
+        jobs: {
+          'Continuous-Integration': {
+            'runs-on': 'ubuntu-latest',
+            steps: [
+              ...input.hubblepup.grition.jobs['Continuous-Integration'].steps
+                .beforePackageRunSteps,
+              // TODO: separate concerns for this logic once we can aggregate multiple targets into one
+              ...fs
+                .readdirSync('packages')
+                .map((directoryName) => ({
+                  directoryName,
+                  directoryPath: posix.join('packages', directoryName),
+                }))
+                .flatMap(
+                  ({ directoryName, directoryPath }): [...CommentedSteps] => {
+                    const runTestsScriptPath = posix.join(
+                      directoryPath,
+                      'scripts',
+                      'runTests.sh',
+                    );
 
-                      const commentPlaceHolderKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${directoryName}`;
+                    const commentPlaceHolderKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${directoryName}`;
 
-                      // TODO: either use the testing-platform configuration object in package.json to control this or check the file system to control this
-                      const typeCheckStep: [CiYamlFileContentsRunStep] | [] =
-                        directoryName !== 'base-tsconfig' &&
-                        directoryName !== 'vscode-language-server'
-                          ? [
-                              {
-                                name: `Lint ${directoryName} Types`,
-                                run: `pwd && cd packages/${directoryName} && pwd && npx tsc`,
-                              },
-                            ]
-                          : [];
+                    // TODO: either use the testing-platform configuration object in package.json to control this or check the file system to control this
+                    const typeCheckStep: [CiYamlFileContentsRunStep] | [] =
+                      directoryName !== 'base-tsconfig' &&
+                      directoryName !== 'vscode-language-server'
+                        ? [
+                            {
+                              name: `Lint ${directoryName} Types`,
+                              run: `pwd && cd packages/${directoryName} && pwd && npx tsc`,
+                            },
+                          ]
+                        : [];
 
-                      return [
-                        {
-                          [commentPlaceHolderKey]: '',
-                        },
-                        ...typeCheckStep,
-                        {
-                          name: `Run ${directoryName} Tests`,
-                          run: `pwd && bash ${runTestsScriptPath}`,
-                        },
-                      ];
-                    },
-                  ),
-                ...inputOdeshin.grition.jobs['Continuous-Integration'].steps
-                  .afterPackageRunSteps,
-              ],
-            },
+                    return [
+                      {
+                        [commentPlaceHolderKey]: '',
+                      },
+                      ...typeCheckStep,
+                      {
+                        name: `Run ${directoryName} Tests`,
+                        run: `pwd && bash ${runTestsScriptPath}`,
+                      },
+                    ];
+                  },
+                ),
+              ...input.hubblepup.grition.jobs['Continuous-Integration'].steps
+                .afterPackageRunSteps,
+            ],
           },
         },
-      };
+      },
+    };
 
-      const plifal: ExpectedCiYamlFileContentsPlifal = {
-        geppTuple: [EXPECTED_CI_YAML_FILE_CONTENTS_GEPPP],
-        hubblepup: odeshin,
-      };
+    const plifal: ExpectedCiYamlFileContentsPlifal = {
+      geppTuple: [EXPECTED_CI_YAML_FILE_CONTENTS_GEPPP],
+      hubblepup: odeshin,
+    };
 
-      return [plifal];
-    },
+    return plifal;
   },
-};
+});

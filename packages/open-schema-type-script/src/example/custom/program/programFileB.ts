@@ -12,7 +12,7 @@ import {
 import { Merge } from '../../../utilities/merge';
 import {
   Ankeler,
-  buildOnamaHamletive2,
+  buildOnamaHamletive,
 } from '../../../type-script-adapter/hamletive/onama';
 import { buildBuildErrorPlifal, ErrorPlifal } from '../error/errorPlifal';
 import {
@@ -182,7 +182,7 @@ const buildProgramFileB: Ankeler<InputPlifal, OutputPlifal> = (input) => {
   return output;
 };
 
-export const programFileBEstinant = buildOnamaHamletive2<
+export const programFileBEstinant = buildOnamaHamletive<
   InputPlifal,
   OutputPlifal
 >({

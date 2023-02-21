@@ -62,10 +62,3 @@ export const buildOnamaHamletive = <
 
   return hamletive;
 };
-
-export const buildOnamaHamletive2 = <
-  TInputQuirm extends Quirm,
-  TOutputQuirm extends Quirm,
->(
-  parameter: OnamaHamletiveBuilderInput<TInputQuirm, TOutputQuirm>,
-): OnamaHamletive<TInputQuirm, TOutputQuirm> => buildOnamaHamletive(parameter);

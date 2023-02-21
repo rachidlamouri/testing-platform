@@ -1,6 +1,6 @@
-import { Estinant } from '../../../core/estinant';
+import { Estinant2 } from '../../../core/estinant';
 import { GeppTuple } from '../../../core/gepp';
-import { TropoignantTypeName } from '../../../core/tropoignant';
+import { Tropoignant2 } from '../../../core/tropoignant';
 import { File } from '../../../utilities/file/file';
 import {
   FileExtensionSuffixIdentifier,
@@ -12,9 +12,10 @@ import { Grition } from '../../../custom-adapter/grition';
 import { Odeshin } from '../../../custom-adapter/odeshin';
 import { Plifal } from '../../../custom-adapter/plifal';
 import {
-  FileAConfigurationOdeshin,
+  FileAConfigurationPlifal,
   FILE_A_CONFIGURATION_GEPP,
 } from './fileAConfiguration';
+import { kodatar } from '../../../type-script-adapter/kodataring';
 
 export type FileA<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
@@ -60,54 +61,56 @@ const partsToPascal = (x: string[]): string => {
     .join('');
 };
 
-export const fileAEstinant: Estinant<
-  FileAConfigurationOdeshin,
-  FileAPlifalTuple
-> = {
-  inputGepp: FILE_A_CONFIGURATION_GEPP,
-  tropoignant: {
-    typeName: TropoignantTypeName.Onama,
-    process: function buildFileA(inputOdeshin) {
-      const filePaths = getNestedFilePaths(inputOdeshin.grition);
+type InputPlifalTuple = [FileAConfigurationPlifal];
+type OutputPlifalTuple = FileAPlifalTuple;
 
-      const fileAQuirmTuple: FileAPlifalTuple = filePaths.map((filePath) => {
-        const {
-          onDiskFileNameParts,
-          inMemoryFileNameParts,
-          extensionSuffix,
-          extensionParts,
-        } = getFileMetadata(filePath);
+const buildFileA: Tropoignant2<InputPlifalTuple, OutputPlifalTuple> = (
+  input,
+) => {
+  const filePaths = getNestedFilePaths(input.hubblepup.grition);
 
-        const grition: FileA = {
-          filePath,
-          onDiskFileName: {
-            camelCase: partsToCamel(onDiskFileNameParts),
-            pascalCase: partsToPascal(onDiskFileNameParts),
-          },
-          inMemoryFileName: {
-            camelCase: partsToCamel(inMemoryFileNameParts),
-            pascalCase: partsToPascal(inMemoryFileNameParts),
-          },
-          extension: {
-            parts: extensionParts,
-            suffix: extensionSuffix,
-            suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
-          },
-          additionalMetadata: null,
-        };
+  const fileAQuirmTuple: FileAPlifalTuple = filePaths.map((filePath) => {
+    const {
+      onDiskFileNameParts,
+      inMemoryFileNameParts,
+      extensionSuffix,
+      extensionParts,
+    } = getFileMetadata(filePath);
 
-        const identifier: FileAIdentifier = `file-a:${filePath}`;
+    const grition: FileA = {
+      filePath,
+      onDiskFileName: {
+        camelCase: partsToCamel(onDiskFileNameParts),
+        pascalCase: partsToPascal(onDiskFileNameParts),
+      },
+      inMemoryFileName: {
+        camelCase: partsToCamel(inMemoryFileNameParts),
+        pascalCase: partsToPascal(inMemoryFileNameParts),
+      },
+      extension: {
+        parts: extensionParts,
+        suffix: extensionSuffix,
+        suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
+      },
+      additionalMetadata: null,
+    };
 
-        return {
-          geppTuple: [FILE_A_GEPP],
-          hubblepup: {
-            identifier,
-            grition,
-          },
-        } satisfies FileAPlifal;
-      });
+    const identifier: FileAIdentifier = `file-a:${filePath}`;
 
-      return fileAQuirmTuple;
-    },
-  },
+    return {
+      geppTuple: [FILE_A_GEPP],
+      hubblepup: {
+        identifier,
+        grition,
+      },
+    } satisfies FileAPlifal;
+  });
+
+  return fileAQuirmTuple;
+};
+
+export const fileAEstinant: Estinant2<InputPlifalTuple, OutputPlifalTuple> = {
+  inputGeppTuple: [FILE_A_CONFIGURATION_GEPP],
+  croard: kodatar,
+  tropoig: buildFileA,
 };

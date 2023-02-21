@@ -49,10 +49,9 @@ export type TypeScriptFileCPlifal = Plifal<
 export type TypeScriptFileCPlifalTuple = readonly TypeScriptFileCPlifal[];
 
 type InputPlifal = TypeScriptFileBPlifal;
+type OutputPlifal = TypeScriptFileCPlifal;
 
-const buildTypeScriptFileC: Ankeler<InputPlifal, TypeScriptFileCPlifal> = (
-  input,
-) => {
+const buildTypeScriptFileC: Ankeler<InputPlifal, OutputPlifal> = (input) => {
   const { program } = input.hubblepup.grition.additionalMetadata;
 
   const importDeclarations: ImportDeclaration[] = [];
@@ -87,7 +86,10 @@ const buildTypeScriptFileC: Ankeler<InputPlifal, TypeScriptFileCPlifal> = (
   return output;
 };
 
-export const typeScriptFileCEstinant = buildOnamaHamletive({
+export const typeScriptFileCEstinant = buildOnamaHamletive<
+  InputPlifal,
+  OutputPlifal
+>({
   inputGepp: TYPE_SCRIPT_FILE_B_GEPP,
   ankel: buildTypeScriptFileC,
 });

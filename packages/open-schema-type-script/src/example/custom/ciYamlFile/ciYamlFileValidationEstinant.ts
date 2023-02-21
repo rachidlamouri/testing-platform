@@ -1,34 +1,31 @@
-import { TropoignantTypeName } from '../../../core/tropoignant';
-import {} from '../../../custom-adapter/odeshin';
-import { ValidationEstinant } from '../validation/validation';
+import { kodatar } from '../../../type-script-adapter/kodataring';
+import { ValidationEstinant2 } from '../validation/validation';
 import {
   ValidationResultQuirm,
   VALIDATION_RESULT_GEPP,
 } from '../validation/validationResult';
 import {
-  AssertableCiYamlFileContentsDifferenceOdeshin,
+  AssertableCiYamlFileContentsDifferencePlifal,
   ASSERTABLE_CI_YAML_FILE_CONTENTS_DIFFERENCE_GEPPP,
 } from './assertableCiYamlFileContentsDifference';
 
-export const ciYamlFileValidationEstinant: ValidationEstinant<AssertableCiYamlFileContentsDifferenceOdeshin> =
+export const ciYamlFileValidationEstinant: ValidationEstinant2<AssertableCiYamlFileContentsDifferencePlifal> =
   {
-    inputGepp: ASSERTABLE_CI_YAML_FILE_CONTENTS_DIFFERENCE_GEPPP,
-    tropoignant: {
-      typeName: TropoignantTypeName.Onama,
-      process: function isCiYamlFileUpToDate(input) {
-        const result: ValidationResultQuirm = {
-          geppTuple: [VALIDATION_RESULT_GEPP],
-          hubblepup: {
-            identifier: `validation-result:${isCiYamlFileUpToDate.name}`,
-            grition: {
-              identifier: input.identifier,
-              predicate: isCiYamlFileUpToDate.name,
-              isValid: input.grition.isSame,
-            },
+    inputGeppTuple: [ASSERTABLE_CI_YAML_FILE_CONTENTS_DIFFERENCE_GEPPP],
+    croard: kodatar,
+    tropoig: function isCiYamlFileUpToDate(input) {
+      const result: ValidationResultQuirm = {
+        geppTuple: [VALIDATION_RESULT_GEPP],
+        hubblepup: {
+          identifier: `validation-result:${isCiYamlFileUpToDate.name}`,
+          grition: {
+            identifier: input.hubblepup.identifier,
+            predicate: isCiYamlFileUpToDate.name,
+            isValid: input.hubblepup.grition.isSame,
           },
-        };
+        },
+      };
 
-        return [result];
-      },
+      return [result];
     },
   };

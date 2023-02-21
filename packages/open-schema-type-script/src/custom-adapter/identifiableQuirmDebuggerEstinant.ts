@@ -51,7 +51,8 @@ const debugIdentifiableQuirms: Haqueler<InputQuirm> = (quirmTupleQuirm) => {
   return [];
 };
 
-export const identifiableQuirmDebuggerEstinant = buildWortinatorHamletive({
-  inputGepp: digikikifierGeppsByIdentifer.OnQuirmTuple,
-  haquel: debugIdentifiableQuirms,
-});
+export const identifiableQuirmDebuggerEstinant =
+  buildWortinatorHamletive<InputQuirm>({
+    inputGepp: digikikifierGeppsByIdentifer.OnQuirmTuple,
+    haquel: debugIdentifiableQuirms,
+  });
