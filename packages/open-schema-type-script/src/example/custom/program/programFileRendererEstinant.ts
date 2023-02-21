@@ -4,12 +4,13 @@ import {
 } from '../../../type-script-adapter/hamletive/wortinator';
 import { fileUtilities } from '../../core/debugger/fileUtilities';
 import {
-  ProgramFileCPlifal,
   ProgramNode,
-  PROGRAM_FILE_C_GEPP,
-} from './programFileC';
+  ProgramFileC2Plifal,
+  ProgramNodeTypeName,
+  PROGRAM_FILE_C2_GEPP,
+} from './programFileC2';
 
-type InputPlifal = ProgramFileCPlifal;
+type InputPlifal = ProgramFileC2Plifal;
 
 const renderProgram: Haqueler<InputPlifal> = (input) => {
   const { programName, programNodeSet, relationships } =
@@ -31,16 +32,23 @@ const renderProgram: Haqueler<InputPlifal> = (input) => {
     renderDataByNode.get(node)?.stateId ?? 'SUnknown';
 
   const stateDeclarationList = [...programNodeSet]
-    .map((node, index) => `state "${node.name}" as S${index}`)
+    .map((node, index) => {
+      if (node.typeName === ProgramNodeTypeName.Estinant) {
+        return `S${index}>${node.name}]`;
+      }
+      return `S${index}[${node.name}]`;
+    })
     .join('\n');
 
   const renderedRelationshipList = relationships
-    .map(({ from, to }) => `${getStateId(from)}-->${getStateId(to)}`)
+    .map(({ from, to }) => {
+      return `${getStateId(from)}-->${getStateId(to)}`;
+    })
     .join('\n');
 
   const mermaid = `
-    stateDiagram-v2
-    state "~~~" as SUnknown
+    flowchart LR
+    SUnknown[UNKNOWN]
     ${stateDeclarationList}
 
     ${renderedRelationshipList}
@@ -63,6 +71,6 @@ ${mermaid}
 
 export const programFileRendererEstinant =
   buildWortinatorHamletive<InputPlifal>({
-    inputGepp: PROGRAM_FILE_C_GEPP,
+    inputGepp: PROGRAM_FILE_C2_GEPP,
     haquel: renderProgram,
   });
