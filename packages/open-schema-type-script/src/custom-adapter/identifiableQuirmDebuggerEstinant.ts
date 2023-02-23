@@ -1,7 +1,10 @@
 import { GeppTuple } from '../core/gepp';
 import { Hubblepup } from '../core/hubblepup';
 import { Quirm2 } from '../core/quirm';
-import { digikikifierGeppsByIdentifer, QuirmTupleQuirm } from '../core/yek';
+import {
+  digikikifierGeppsByIdentifer,
+  DigikikifierQuirmTupleEventQuirm,
+} from '../core/yek';
 import { fileUtilities } from '../example/core/debugger/fileUtilities';
 import {
   buildWortinatorHamletive,
@@ -17,7 +20,7 @@ type IdentifiableHubblepup = Hubblepup<Identifiable>;
 
 type IdentifiableQuirm = Quirm2<GeppTuple, IdentifiableHubblepup>;
 
-type InputQuirm = QuirmTupleQuirm;
+type InputQuirm = DigikikifierQuirmTupleEventQuirm;
 
 const debugIdentifiableQuirm = (quirm: IdentifiableQuirm): void => {
   const rawIdentifier = quirm.hubblepup.identifier;

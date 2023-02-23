@@ -2,7 +2,7 @@ import { Estinant2 } from '../../../core/estinant';
 import { Quirm } from '../../../core/quirm';
 import {
   digikikifierGeppsByIdentifer,
-  QuirmTupleQuirm,
+  DigikikifierQuirmTupleEventQuirm,
   QuirmTupleTropoignant,
 } from '../../../core/yek';
 import { kodatar } from '../../../type-script-adapter/kodataring';
@@ -28,7 +28,7 @@ const debugQuirmTuple: QuirmTupleTropoignant<[]> = (quirmTupleQuirm) => {
   return [];
 };
 
-export const quirmDebuggerEstinant: Estinant2<[QuirmTupleQuirm], [], Struss> = {
+export const quirmDebuggerEstinant: Estinant2<[DigikikifierQuirmTupleEventQuirm], [], Struss> = {
   inputGeppTuple: [digikikifierGeppsByIdentifer.OnQuirmTuple],
   croard: kodatar,
   tropoig: debugQuirmTuple,
