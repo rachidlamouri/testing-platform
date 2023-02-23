@@ -3,7 +3,7 @@ import {
   Paraker,
 } from '../../../type-script-adapter/hamletive/mentursection';
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
-import { OptionTuple } from '../../../utilities/optionTuple';
+import { QuirmOptionTuple } from '../../../type-script-adapter/quirmOptionTuple';
 import { FileAPlifal, FILE_A_GEPP } from './fileA';
 import {
   TypeScriptFileAOdeshin,
@@ -17,7 +17,7 @@ import {
 } from './yamlFileA';
 
 type InputPlifal = FileAPlifal;
-type OutputPlifalOptionTuple = OptionTuple<
+type OutputPlifalOptionTuple = QuirmOptionTuple<
   [TypeScriptFileAPlifal, YamlFileAPlifal]
 >;
 

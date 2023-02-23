@@ -1,5 +1,7 @@
-import { Quirm } from '../../../core/quirm';
-import { digikikifierGeppsByIdentifer } from '../../../core/yek';
+import {
+  digikikifierGeppsByIdentifer,
+  DigikikifierOnFinishEventQuirm,
+} from '../../../core/yek';
 import {
   buildWortinatorHamletive,
   Haqueler,
@@ -49,7 +51,7 @@ const serializeValidationResults = (): string => {
   return lines.join('\n');
 };
 
-const executeValidation: Haqueler<Quirm> = () => {
+const executeValidation: Haqueler<DigikikifierOnFinishEventQuirm> = () => {
   logger.feedLine();
 
   const text = serializeValidationResults();
@@ -58,10 +60,11 @@ const executeValidation: Haqueler<Quirm> = () => {
   process.exit(errorMessages.length === 0 ? 0 : 1);
 };
 
-export const validatorExecutor = buildWortinatorHamletive<Quirm>({
-  inputGepp: digikikifierGeppsByIdentifer.OnFinish,
-  haquel: executeValidation,
-});
+export const validatorExecutor =
+  buildWortinatorHamletive<DigikikifierOnFinishEventQuirm>({
+    inputGepp: digikikifierGeppsByIdentifer.OnFinish,
+    haquel: executeValidation,
+  });
 
 // TODO: remove this
 export type Validator = symbol;

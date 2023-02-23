@@ -1,5 +1,5 @@
 import { Hubblepup, HubblepupTuple } from './hubblepup';
-import { Quirm, QuirmTuple } from './quirm';
+import { Quirm, Quirm2, QuirmTuple } from './quirm';
 import { Tropoignant2 } from './tropoignant';
 
 export enum DigikikifierGeppIdentifer {
@@ -8,20 +8,19 @@ export enum DigikikifierGeppIdentifer {
   OnFinish = 'OnFinish',
 }
 
-export const digikikifierGeppsByIdentifer: Record<
-  DigikikifierGeppIdentifer,
-  symbol
-> = {
+export const DIGIKIKIFIER_ON_FINISH_EVENT_GEPP = Symbol(
+  DigikikifierGeppIdentifer.OnFinish,
+);
+
+export const digikikifierGeppsByIdentifer = {
   [DigikikifierGeppIdentifer.OnEvent]: Symbol(
     DigikikifierGeppIdentifer.OnEvent,
   ),
   [DigikikifierGeppIdentifer.OnQuirmTuple]: Symbol(
     DigikikifierGeppIdentifer.OnQuirmTuple,
   ),
-  [DigikikifierGeppIdentifer.OnFinish]: Symbol(
-    DigikikifierGeppIdentifer.OnFinish,
-  ),
-};
+  [DigikikifierGeppIdentifer.OnFinish]: DIGIKIKIFIER_ON_FINISH_EVENT_GEPP,
+} as const satisfies Record<DigikikifierGeppIdentifer, symbol>;
 
 export enum DigikikifierEventName {
   OnTabillyInitialized = 'OnTabillyInitialized',
@@ -78,10 +77,18 @@ export type EventTropoignant<TOutputQuirmTuple extends QuirmTuple> =
 
 export type QuirmTupleHubblepup = Hubblepup<QuirmTuple>;
 
-export type QuirmTupleQuirm = Quirm<QuirmTupleHubblepup>;
+export type DigikikifierQuirmTupleEventQuirm = Quirm<QuirmTupleHubblepup>;
+
+export type DigikikifierOnFinishEventQuirm = Quirm2<
+  [typeof DIGIKIKIFIER_ON_FINISH_EVENT_GEPP],
+  null
+>;
 
 export type QuirmTupleTropoignant<TOutputQuirmTuple extends QuirmTuple> =
-  Tropoignant2<[input: QuirmTupleQuirm], TOutputQuirmTuple | []>;
+  Tropoignant2<
+    [input: DigikikifierQuirmTupleEventQuirm],
+    TOutputQuirmTuple | []
+  >;
 
 /**
  * A debugger that writes to the file system for funsies
