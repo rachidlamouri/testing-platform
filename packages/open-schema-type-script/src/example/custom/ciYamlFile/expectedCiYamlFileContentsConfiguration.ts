@@ -33,7 +33,7 @@ export const EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_GEPPP = Symbol(
 export type ExpectedCiYamlFileConfigurationGepp =
   typeof EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_GEPPP;
 
-export type ExpectedCiYamlFileConfigurationQuirm = Plifal<
+export type ExpectedCiYamlFileConfigurationPlifal = Plifal<
   [ExpectedCiYamlFileConfigurationGepp],
   ExpectedCiYamlFileContentsConfigurationOdeshin
 >;
@@ -41,7 +41,7 @@ export type ExpectedCiYamlFileConfigurationQuirm = Plifal<
 const beforeCommentKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${'Pre-Package Steps'}`;
 const afterCommentKey: CommentPlaceHolderKey = `COMMENT_PLACE_HOLDER:${'Post-Package Steps'}`;
 
-export const EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM: ExpectedCiYamlFileConfigurationQuirm =
+export const EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_QUIRM: ExpectedCiYamlFileConfigurationPlifal =
   {
     geppTuple: [EXPECTED_CI_YAML_FILE_CONTENTS_CONFIGURATION_GEPPP],
     hubblepup: {

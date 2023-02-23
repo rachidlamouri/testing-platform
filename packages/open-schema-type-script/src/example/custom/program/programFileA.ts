@@ -25,12 +25,12 @@ export type ProgramFileAPlifal = Plifal<
   ProgramFileAOdeshin
 >;
 
-type InputOptionTuple = QuirmOptionTuple<[TypeScriptFileD2Plifal]>;
-type OutputOptionTuple = QuirmOptionTuple<[ProgramFileAPlifal]>;
+type InputPlifal = TypeScriptFileD2Plifal;
+type OutputPlifalOptionTuple = QuirmOptionTuple<[ProgramFileAPlifal]>;
 
 const isProgramFileA: Paraker<
-  InputOptionTuple,
-  OutputOptionTuple,
+  InputPlifal,
+  OutputPlifalOptionTuple,
   ProgramFileAPlifal
 > = (input): input is ProgramFileAOdeshin => {
   const hasImport = input.grition.additionalMetadata.importDeclarationList.some(
@@ -48,8 +48,8 @@ const isProgramFileA: Paraker<
 };
 
 export const programFileAEstinant = buildMentursectionHamletive<
-  InputOptionTuple,
-  OutputOptionTuple
+  InputPlifal,
+  OutputPlifalOptionTuple
 >({
   inputGepp: TYPE_SCRIPT_FILE_D2_GEPP,
   kerzTuple: [

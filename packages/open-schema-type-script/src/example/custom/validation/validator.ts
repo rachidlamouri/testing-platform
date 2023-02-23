@@ -1,30 +1,35 @@
-import { WortinatorEstinant } from '../../../core/estinant';
-import { TropoignantTypeName } from '../../../core/tropoignant';
-import { digikikifierGeppsByIdentifer } from '../../../core/yek';
+import {
+  digikikifierGeppsByIdentifer,
+  DigikikifierOnFinishEventQuirm,
+} from '../../../core/yek';
+import {
+  buildWortinatorHamletive,
+  Haqueler,
+} from '../../../type-script-adapter/hamletive/wortinator';
 import { logger } from '../../../utilities/logger';
 import {
-  ValidationResultOdeshin,
+  ValidationResultQuirm,
   VALIDATION_RESULT_GEPP,
 } from './validationResult';
 
 let totalValidationCount = 0;
 const errorMessages: string[] = [];
-export const validationAggregator: WortinatorEstinant<ValidationResultOdeshin> =
-  {
-    inputGepp: VALIDATION_RESULT_GEPP,
-    tropoignant: {
-      typeName: TropoignantTypeName.Wortinator,
-      process: function onValidationResult(inputOdeshin) {
-        totalValidationCount += 1;
 
-        if (!inputOdeshin.grition.isValid) {
-          errorMessages.push(
-            `"${inputOdeshin.grition.identifier}" does not satisfy "${inputOdeshin.grition.predicate}"`,
-          );
-        }
-      },
-    },
-  };
+const onValidationResult: Haqueler<ValidationResultQuirm> = (input) => {
+  totalValidationCount += 1;
+
+  if (!input.hubblepup.grition.isValid) {
+    errorMessages.push(
+      `"${input.hubblepup.grition.identifier}" does not satisfy "${input.hubblepup.grition.predicate}"`,
+    );
+  }
+};
+
+export const validationAggregator =
+  buildWortinatorHamletive<ValidationResultQuirm>({
+    inputGepp: VALIDATION_RESULT_GEPP,
+    haquel: onValidationResult,
+  });
 
 const serializeValidationResults = (): string => {
   const failedValidationCount = errorMessages.length;
@@ -46,20 +51,20 @@ const serializeValidationResults = (): string => {
   return lines.join('\n');
 };
 
-export const validatorExecutor: WortinatorEstinant<null> = {
-  inputGepp: digikikifierGeppsByIdentifer.OnFinish,
-  tropoignant: {
-    typeName: TropoignantTypeName.Wortinator,
-    process: function executeValidation() {
-      logger.feedLine();
+const executeValidation: Haqueler<DigikikifierOnFinishEventQuirm> = () => {
+  logger.feedLine();
 
-      const text = serializeValidationResults();
-      logger.logText(text);
+  const text = serializeValidationResults();
+  logger.logText(text);
 
-      process.exit(errorMessages.length === 0 ? 0 : 1);
-    },
-  },
+  process.exit(errorMessages.length === 0 ? 0 : 1);
 };
+
+export const validatorExecutor =
+  buildWortinatorHamletive<DigikikifierOnFinishEventQuirm>({
+    inputGepp: digikikifierGeppsByIdentifer.OnFinish,
+    haquel: executeValidation,
+  });
 
 // TODO: remove this
 export type Validator = symbol;

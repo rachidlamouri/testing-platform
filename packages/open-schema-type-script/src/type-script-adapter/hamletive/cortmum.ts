@@ -1,14 +1,8 @@
 import { Croarder } from '../../core/croarder';
 import { Estinant2 } from '../../core/estinant';
-import { QuirmTupleToGeppTuple } from '../../core/quirm';
+import { QuirmTuple, QuirmTupleToGeppTuple } from '../../core/quirm';
 import { Tropoignant2 } from '../../core/tropoignant';
 import { Zorn } from '../../core/zorn';
-import {
-  QuirmOption,
-  QuirmOptionTupleTuple,
-  QuirmOptionTupleTupleToGeppOptionIntersectionTuple,
-  QuirmOptionTupleTupleToQuirmTuple,
-} from '../quirmOptionTuple';
 
 /**
  * A Croarder that can take any input Quirm
@@ -16,62 +10,56 @@ import {
  * @todo this should probably live somewhere else
  */
 export type CortmumCroader<
-  TInputQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
+  TInputQuirmTuple extends QuirmTuple,
   TZorn extends Zorn,
-> = Croarder<
-  QuirmOption<QuirmOptionTupleTupleToQuirmTuple<TInputQuirmOptionTupleTuple>>,
-  TZorn
->;
+> = Croarder<TInputQuirmTuple[number], TZorn>;
 
 /**
  * A many to many Tropoignant (ie a Tropoignant)
  */
 export type Cortmum<
-  TInputQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
-  TOutputQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
-> = Tropoignant2<
-  QuirmOptionTupleTupleToQuirmTuple<TInputQuirmOptionTupleTuple>,
-  QuirmOptionTupleTupleToQuirmTuple<TOutputQuirmOptionTupleTuple>
->;
+  TInputQuirmTuple extends QuirmTuple,
+  TOutputQuirmTuple extends QuirmTuple,
+> = Tropoignant2<TInputQuirmTuple, TOutputQuirmTuple>;
 
 /**
  * A many to many Estinant (ie an Estinant)
  */
 export type CortmumHamletive<
-  TInputQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
+  TInputQuirmTuple extends QuirmTuple,
+  TOutputQuirmTuple extends QuirmTuple,
   TZorn extends Zorn,
-> = Estinant2<
-  QuirmOptionTupleTupleToQuirmTuple<TInputQuirmOptionTupleTuple>,
-  TZorn
->;
+> = Estinant2<TInputQuirmTuple, TOutputQuirmTuple, TZorn>;
 
 export type CortmumHamletiveBuilderInput<
-  TInputQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
-  TOutputQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
+  TInputQuirmTuple extends QuirmTuple,
+  TOutputQuirmTuple extends QuirmTuple,
   TZorn extends Zorn,
 > = {
-  inputGeppTuple: QuirmOptionTupleTupleToGeppOptionIntersectionTuple<TInputQuirmOptionTupleTuple>;
-  croard: CortmumCroader<TInputQuirmOptionTupleTuple, TZorn>;
-  tropoig: Cortmum<TInputQuirmOptionTupleTuple, TOutputQuirmOptionTupleTuple>;
+  inputGeppTuple: QuirmTupleToGeppTuple<TInputQuirmTuple>;
+  croard: CortmumCroader<TInputQuirmTuple, TZorn>;
+  tropoig: Cortmum<TInputQuirmTuple, TOutputQuirmTuple>;
 };
 
 export const buildCortmumHamletive = <
-  TInputQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
-  TOutputQuirmOptionTupleTuple extends QuirmOptionTupleTuple,
+  TInputQuirmTuple extends QuirmTuple,
+  TOutputQuirmTuple extends QuirmTuple,
   TZorn extends Zorn,
 >({
   inputGeppTuple,
   croard,
   tropoig,
 }: CortmumHamletiveBuilderInput<
-  TInputQuirmOptionTupleTuple,
-  TOutputQuirmOptionTupleTuple,
+  TInputQuirmTuple,
+  TOutputQuirmTuple,
   TZorn
->): CortmumHamletive<TInputQuirmOptionTupleTuple, TZorn> => {
-  const hamletive: CortmumHamletive<TInputQuirmOptionTupleTuple, TZorn> = {
-    inputGeppTuple: inputGeppTuple as QuirmTupleToGeppTuple<
-      QuirmOptionTupleTupleToQuirmTuple<TInputQuirmOptionTupleTuple>
-    >,
+>): CortmumHamletive<TInputQuirmTuple, TOutputQuirmTuple, TZorn> => {
+  const hamletive: CortmumHamletive<
+    TInputQuirmTuple,
+    TOutputQuirmTuple,
+    TZorn
+  > = {
+    inputGeppTuple,
     croard,
     tropoig,
   };

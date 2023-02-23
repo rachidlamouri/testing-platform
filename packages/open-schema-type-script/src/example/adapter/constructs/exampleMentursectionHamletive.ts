@@ -8,26 +8,26 @@ import { ExampleBQuirm } from './exampleB';
 import { ExampleDash1, ExampleDash1Quirm } from './exampleDash1';
 import { ExampleDash2Quirm } from './exampleDash2';
 
-type InputOptionTuple = QuirmOptionTuple<[ExampleAQuirm, ExampleBQuirm]>;
-type OutputOptionTuple = QuirmOptionTuple<
+type InputQuirmTuple = ExampleAQuirm | ExampleBQuirm;
+type OutputQuirmOptionTuple = QuirmOptionTuple<
   [ExampleDash1Quirm, ExampleDash2Quirm]
 >;
 
 const isDash1: Paraker<
-  InputOptionTuple,
-  OutputOptionTuple,
+  InputQuirmTuple,
+  OutputQuirmOptionTuple,
   ExampleDash1Quirm
 > = (input): input is ExampleDash1 => input.endsWith('-1');
 
 const isDash2: Paraker<
-  InputOptionTuple,
-  OutputOptionTuple,
+  InputQuirmTuple,
+  OutputQuirmOptionTuple,
   ExampleDash2Quirm
 > = (input): input is ExampleDash1 => input.endsWith('-2');
 
 export const exampleMentursectionHamletive = buildMentursectionHamletive<
-  InputOptionTuple,
-  OutputOptionTuple
+  InputQuirmTuple,
+  OutputQuirmOptionTuple
 >({
   inputGepp: 'initial-input',
   kerzTuple: [

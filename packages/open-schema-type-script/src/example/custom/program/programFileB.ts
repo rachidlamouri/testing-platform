@@ -4,7 +4,6 @@ import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExten
 import { Grition } from '../../../custom-adapter/grition';
 import { Odeshin } from '../../../custom-adapter/odeshin';
 import { Plifal } from '../../../custom-adapter/plifal';
-import { QuirmOptionTuple } from '../../../type-script-adapter/quirmOptionTuple';
 import {
   ProgramFileA,
   ProgramFileAPlifal,
@@ -12,8 +11,8 @@ import {
 } from './programFileA';
 import { Merge } from '../../../utilities/merge';
 import {
-  Ankeler2,
-  buildOnamaHamletive2,
+  Ankeler,
+  buildOnamaHamletive,
 } from '../../../type-script-adapter/hamletive/onama';
 import { buildBuildErrorPlifal, ErrorPlifal } from '../error/errorPlifal';
 import {
@@ -62,13 +61,10 @@ export type ProgramFileBPlifal = Plifal<
   ProgramFileBOdeshin
 >;
 
-type InputOptionTuple = QuirmOptionTuple<[ProgramFileAPlifal]>;
+type InputPlifal = ProgramFileAPlifal;
+type OutputPlifal = ProgramFileBPlifal | ErrorPlifal;
 
-type OutputOptionTuple = QuirmOptionTuple<[ProgramFileBPlifal, ErrorPlifal]>;
-
-const buildProgramFileB: Ankeler2<InputOptionTuple, OutputOptionTuple> = (
-  input,
-) => {
+const buildProgramFileB: Ankeler<InputPlifal, OutputPlifal> = (input) => {
   const buildErrorPlifal = buildBuildErrorPlifal(input.hubblepup.identifier);
 
   const programStartStatement =
@@ -186,9 +182,9 @@ const buildProgramFileB: Ankeler2<InputOptionTuple, OutputOptionTuple> = (
   return output;
 };
 
-export const programFileBEstinant = buildOnamaHamletive2<
-  InputOptionTuple,
-  OutputOptionTuple
+export const programFileBEstinant = buildOnamaHamletive<
+  InputPlifal,
+  OutputPlifal
 >({
   inputGepp: PROGRAM_FILE_A_GEPP,
   ankel: buildProgramFileB,

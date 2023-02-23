@@ -4,43 +4,54 @@ import {
 } from '../../../type-script-adapter/hamletive/wortinator';
 import { fileUtilities } from '../../core/debugger/fileUtilities';
 import {
-  ProgramFileCPlifal,
-  ProgramNode,
-  PROGRAM_FILE_C_GEPP,
-} from './programFileC';
+  ProgramFileC2Plifal,
+  ProgramNodeTypeName,
+  PROGRAM_FILE_C2_GEPP,
+} from './programFileC2';
 
-type InputOptionTuple = [ProgramFileCPlifal];
+type InputPlifal = ProgramFileC2Plifal;
 
-const renderProgram: Haqueler<InputOptionTuple> = (input) => {
+const renderProgram: Haqueler<InputPlifal> = (input) => {
   const { programName, programNodeSet, relationships } =
     input.hubblepup.grition.additionalMetadata;
 
-  type RenderData = {
-    node: ProgramNode;
-    stateId: string;
-  };
+  // type RenderData = {
+  //   node: ProgramNode;
+  //   stateId: string;
+  // };
 
-  const renderDataByNode = new Map<ProgramNode, RenderData>();
-  [...programNodeSet].forEach((node, index) => {
-    const stateId = `S${index}`;
+  // const renderDataByNode = new Map<ProgramNode, RenderData>();
+  // [...programNodeSet].forEach((node, index) => {
+  //   const stateId = `S${index}`;
 
-    renderDataByNode.set(node, { node, stateId });
-  });
+  //   renderDataByNode.set(node, { node, stateId });
+  // });
 
-  const getStateId = (node: ProgramNode): string =>
-    renderDataByNode.get(node)?.stateId ?? 'SUnknown';
+  // const getStateId = (node: ProgramNode): string =>
+  //   renderDataByNode.get(node)?.stateId ?? 'SUnknown';
 
   const stateDeclarationList = [...programNodeSet]
-    .map((node, index) => `state "${node.name}" as S${index}`)
+    .map((node) => {
+      if (node.typeName === ProgramNodeTypeName.Estinant) {
+        return `${node.id}>${node.name}]`;
+      }
+
+      if (node.typeName === ProgramNodeTypeName.Input) {
+        return `${node.id}{${node.name}}`;
+      }
+
+      return `${node.id}[${node.name}]`;
+    })
     .join('\n');
 
   const renderedRelationshipList = relationships
-    .map(({ from, to }) => `${getStateId(from)}-->${getStateId(to)}`)
+    .map(({ from, to }) => {
+      return `${from.id}-->${to.id}`;
+    })
     .join('\n');
 
   const mermaid = `
-    stateDiagram-v2
-    state "~~~" as SUnknown
+    flowchart TD
     ${stateDeclarationList}
 
     ${renderedRelationshipList}
@@ -62,7 +73,7 @@ ${mermaid}
 };
 
 export const programFileRendererEstinant =
-  buildWortinatorHamletive<InputOptionTuple>({
-    inputGepp: PROGRAM_FILE_C_GEPP,
+  buildWortinatorHamletive<InputPlifal>({
+    inputGepp: PROGRAM_FILE_C2_GEPP,
     haquel: renderProgram,
   });

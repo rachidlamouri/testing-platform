@@ -2,17 +2,19 @@ import { TSESTree } from '@typescript-eslint/typescript-estree';
 import * as parser from '@typescript-eslint/typescript-estree';
 import { posix } from 'path';
 import fs from 'fs';
-import { OnamaEstinant } from '../../../core/estinant';
-import { TropoignantTypeName } from '../../../core/tropoignant';
 import { File } from '../../../utilities/file/file';
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
 import { Grition } from '../../../custom-adapter/grition';
 import { Odeshin } from '../../../custom-adapter/odeshin';
 import { Plifal } from '../../../custom-adapter/plifal';
 import {
-  TypeScriptFileAOdeshin,
+  TypeScriptFileAPlifal,
   TYPE_SCRIPT_FILE_A_GEPP,
 } from './typeScriptFileA';
+import {
+  Ankeler,
+  buildOnamaHamletive,
+} from '../../../type-script-adapter/hamletive/onama';
 
 export type TypeScriptFileB = Grition<
   File<
@@ -64,45 +66,50 @@ const getConfigFilePath = (filePath: string): string => {
   return configFilePath;
 };
 
-export const typeScriptFileBEstinant: OnamaEstinant<
-  TypeScriptFileAOdeshin,
-  TypeScriptFileBPlifalTuple
-> = {
-  inputGepp: TYPE_SCRIPT_FILE_A_GEPP,
-  tropoignant: {
-    typeName: TropoignantTypeName.Onama,
-    process: function createTypeScriptFileB(input) {
-      const fileContents = fs.readFileSync(input.grition.filePath, 'utf8');
+const createTypeScriptFileB: Ankeler<
+  TypeScriptFileAPlifal,
+  TypeScriptFileBPlifal
+> = (input) => {
+  const fileContents = fs.readFileSync(
+    input.hubblepup.grition.filePath,
+    'utf8',
+  );
 
-      const typeScriptConfigurationFilePath = getConfigFilePath(
-        input.grition.filePath,
-      );
-      const typeScriptConfigurationRootDirectoryPath = posix.dirname(
-        typeScriptConfigurationFilePath,
-      );
+  const typeScriptConfigurationFilePath = getConfigFilePath(
+    input.hubblepup.grition.filePath,
+  );
+  const typeScriptConfigurationRootDirectoryPath = posix.dirname(
+    typeScriptConfigurationFilePath,
+  );
 
-      const program: TSESTree.Program = parser.parse(fileContents, {
-        project: './tsconfig.json',
-        tsconfigRootDir: typeScriptConfigurationRootDirectoryPath,
-        comment: true,
-      });
+  const program: TSESTree.Program = parser.parse(fileContents, {
+    project: './tsconfig.json',
+    tsconfigRootDir: typeScriptConfigurationRootDirectoryPath,
+    comment: true,
+  });
 
-      const output: TypeScriptFileBPlifal = {
-        geppTuple: [TYPE_SCRIPT_FILE_B_GEPP],
-        hubblepup: {
-          identifier: `type-script-file-b:${input.grition.filePath}`,
-          grition: {
-            ...input.grition,
-            additionalMetadata: {
-              program,
-              tsconfigRootDir: typeScriptConfigurationRootDirectoryPath,
-              configFilePath: typeScriptConfigurationFilePath,
-            },
-          },
+  const output: TypeScriptFileBPlifal = {
+    geppTuple: [TYPE_SCRIPT_FILE_B_GEPP],
+    hubblepup: {
+      identifier: `type-script-file-b:${input.hubblepup.grition.filePath}`,
+      grition: {
+        ...input.hubblepup.grition,
+        additionalMetadata: {
+          program,
+          tsconfigRootDir: typeScriptConfigurationRootDirectoryPath,
+          configFilePath: typeScriptConfigurationFilePath,
         },
-      };
-
-      return [output];
+      },
     },
-  },
+  };
+
+  return output;
 };
+
+export const typeScriptFileBEstinant = buildOnamaHamletive<
+  TypeScriptFileAPlifal,
+  TypeScriptFileBPlifal
+>({
+  inputGepp: TYPE_SCRIPT_FILE_A_GEPP,
+  ankel: createTypeScriptFileB,
+});

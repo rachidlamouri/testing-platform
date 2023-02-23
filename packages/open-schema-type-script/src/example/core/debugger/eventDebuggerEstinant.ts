@@ -26,6 +26,7 @@ const debugEvent: EventTropoignant<[]> = (input) => {
 
 export const eventDebuggerEstinant: Estinant2<
   [DigikikifierEventQuirm],
+  [],
   Struss
 > = {
   inputGeppTuple: [digikikifierGeppsByIdentifer.OnEvent],

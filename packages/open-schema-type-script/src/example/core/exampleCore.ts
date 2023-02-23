@@ -78,27 +78,30 @@ const exampleMentursectionEstinant: MentursectionEstinant<ExampleHubblepup> = {
   },
 };
 
-const exampleCortmumEstinant2: Estinant2<[ExampleQuirm, ExampleQuirm], string> =
-  {
-    inputGeppTuple: [exampleGeppA, exampleGeppB],
-    croard: function getId(quirm) {
-      const [, numberText] = quirm.hubblepup.split('-') as [string, '1' | '2'];
-      return numberText;
-    },
-    tropoig: function join(hubblepupA, hubblepupB) {
-      const outputQuirm: Quirm = {
-        geppTuple: [exampleGeppC],
-        hubblepup: {
-          hubblepupA,
-          hubblepupB,
-        },
-      };
+const exampleCortmumEstinant2: Estinant2<
+  [ExampleQuirm, ExampleQuirm],
+  [Quirm],
+  string
+> = {
+  inputGeppTuple: [exampleGeppA, exampleGeppB],
+  croard: function getId(quirm) {
+    const [, numberText] = quirm.hubblepup.split('-') as [string, '1' | '2'];
+    return numberText;
+  },
+  tropoig: function join(hubblepupA, hubblepupB) {
+    const outputQuirm: Quirm = {
+      geppTuple: [exampleGeppC],
+      hubblepup: {
+        hubblepupA,
+        hubblepupB,
+      },
+    };
 
-      return [outputQuirm];
-    },
-  };
+    return [outputQuirm];
+  },
+};
 
-const exampleOnamaEstinant2: Estinant2<[ExampleQuirm], symbol> = {
+const exampleOnamaEstinant2: Estinant2<[ExampleQuirm], [Quirm], symbol> = {
   inputGeppTuple: [exampleGeppInitialInput],
   croard: function getId(quirm) {
     return Symbol(quirm.hubblepup);
@@ -113,7 +116,7 @@ const exampleOnamaEstinant2: Estinant2<[ExampleQuirm], symbol> = {
   },
 };
 
-const exampleWortinatorEstinant2: Estinant2<[ExampleQuirm], symbol> = {
+const exampleWortinatorEstinant2: Estinant2<[ExampleQuirm], [], symbol> = {
   inputGeppTuple: [exampleGeppInitialInput],
   croard: function getId(quirm) {
     return Symbol(quirm.hubblepup);
@@ -126,7 +129,11 @@ const exampleWortinatorEstinant2: Estinant2<[ExampleQuirm], symbol> = {
   },
 };
 
-const exampleMentursectionEstinant2: Estinant2<[ExampleQuirm], symbol> = {
+const exampleMentursectionEstinant2: Estinant2<
+  [ExampleQuirm],
+  [Quirm],
+  symbol
+> = {
   inputGeppTuple: [exampleGeppInitialInput],
   croard: function getId(quirm) {
     return Symbol(quirm.hubblepup);

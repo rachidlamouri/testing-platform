@@ -1,39 +1,38 @@
-import { TropoignantTypeName } from '../../../core/tropoignant';
 import { FileExtensionSuffixIdentifier } from '../../../utilities/file/fileExtensionSuffixIdentifier';
-import {} from '../../../custom-adapter/odeshin';
-import { Validation, ValidationEstinant } from '../validation/validation';
+import { Validation2, ValidationEstinant2 } from '../validation/validation';
 import {
   ValidationResultOdeshin,
   ValidationResultQuirm,
   VALIDATION_RESULT_GEPP,
 } from '../validation/validationResult';
-import { FileAOdeshin, FILE_A_GEPP } from './fileA';
+import { FileAPlifal, FILE_A_GEPP } from './fileA';
+import { kodatar } from '../../../type-script-adapter/kodataring';
 
-export const fileAHasKnownExtensionSuffix: Validation<FileAOdeshin> = {
-  typeName: TropoignantTypeName.Onama,
-  process: function fileAHasKnownExtensionSuffix(inputOdeshin) {
-    const hubblepup: ValidationResultOdeshin = {
-      identifier: `validation-result:${fileAHasKnownExtensionSuffix.name}:${inputOdeshin.identifier}`,
-      grition: {
-        identifier: inputOdeshin.identifier,
-        predicate: 'fileAHasKnownExtensionSuffix',
-        isValid:
-          inputOdeshin.grition.extension.suffixIdentifier !==
-          FileExtensionSuffixIdentifier.Unknown,
-      },
-    };
+export const fileAHasKnownExtensionSuffix: Validation2<FileAPlifal> = (
+  input,
+) => {
+  const hubblepup: ValidationResultOdeshin = {
+    identifier: `validation-result:${fileAHasKnownExtensionSuffix.name}:${input.hubblepup.identifier}`,
+    grition: {
+      identifier: input.hubblepup.identifier,
+      predicate: 'fileAHasKnownExtensionSuffix',
+      isValid:
+        input.hubblepup.grition.extension.suffixIdentifier !==
+        FileExtensionSuffixIdentifier.Unknown,
+    },
+  };
 
-    const outputQuirm: ValidationResultQuirm = {
-      geppTuple: [VALIDATION_RESULT_GEPP],
-      hubblepup,
-    };
+  const outputQuirm: ValidationResultQuirm = {
+    geppTuple: [VALIDATION_RESULT_GEPP],
+    hubblepup,
+  };
 
-    return [outputQuirm];
-  },
+  return [outputQuirm];
 };
 
-export const fileAHasKnownExtensionSuffixEstinant: ValidationEstinant<FileAOdeshin> =
+export const fileAHasKnownExtensionSuffixEstinant: ValidationEstinant2<FileAPlifal> =
   {
-    inputGepp: FILE_A_GEPP,
-    tropoignant: fileAHasKnownExtensionSuffix,
+    inputGeppTuple: [FILE_A_GEPP],
+    croard: kodatar,
+    tropoig: fileAHasKnownExtensionSuffix,
   };

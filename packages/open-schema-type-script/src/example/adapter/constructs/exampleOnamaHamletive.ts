@@ -5,7 +5,6 @@ import {
   Ankeler,
   buildOnamaHamletive,
 } from '../../../type-script-adapter/hamletive/onama';
-import { QuirmOptionTuple } from '../../../type-script-adapter/quirmOptionTuple';
 import { ExampleAQuirm } from './exampleA';
 import { ExampleBQuirm } from './exampleB';
 
@@ -15,11 +14,9 @@ type HelloHubblepup = Hubblepup<string>;
 
 type HelloQuirm = Quirm2<[HelloGepp], HelloHubblepup>;
 
-type SayHelloQuirmOptionTuple = QuirmOptionTuple<
-  [ExampleAQuirm, ExampleBQuirm]
->;
+type InputQuirm = ExampleAQuirm | ExampleBQuirm;
 
-const sayHello: Ankeler<SayHelloQuirmOptionTuple, HelloQuirm> = (input) => {
+const sayHello: Ankeler<InputQuirm, HelloQuirm> = (input) => {
   const output: HelloQuirm = {
     geppTuple: ['hello'],
     hubblepup: `Hello: ${input.hubblepup}`,
@@ -29,7 +26,7 @@ const sayHello: Ankeler<SayHelloQuirmOptionTuple, HelloQuirm> = (input) => {
 };
 
 export const exampleOnamaHamletive = buildOnamaHamletive<
-  SayHelloQuirmOptionTuple,
+  InputQuirm,
   HelloQuirm
 >({
   inputGepp: 'initial-input',

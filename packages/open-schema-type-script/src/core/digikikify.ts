@@ -15,8 +15,9 @@ import {
   OnInitialQuirmsCachedEvent,
   OnTabillyInitializedEvent,
   yek,
-  QuirmTupleQuirm,
+  DigikikifierQuirmTupleEventQuirm,
   OnLoopStartEvent,
+  DigikikifierOnFinishEventQuirm,
 } from './yek';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -57,7 +58,7 @@ export const digikikify = ({
       return;
     }
 
-    const quirmTupleQuirm: QuirmTupleQuirm = {
+    const quirmTupleQuirm: DigikikifierQuirmTupleEventQuirm = {
       geppTuple: [digikikifierGeppsByIdentifer.OnQuirmTuple],
       hubblepup: [],
     };
@@ -227,15 +228,17 @@ export const digikikify = ({
     });
   }
 
+  const onFinishQuirm: DigikikifierOnFinishEventQuirm = {
+    geppTuple: [digikikifierGeppsByIdentifer.OnFinish],
+    hubblepup: null,
+  };
+
   addToTabilly([
     yek.createEventQuirm<OnFinishEvent>({
       name: DigikikifierEventName.OnFinish,
       data: null,
     }),
-    {
-      geppTuple: [digikikifierGeppsByIdentifer.OnFinish],
-      hubblepup: null,
-    },
+    onFinishQuirm,
   ]);
 
   platomities

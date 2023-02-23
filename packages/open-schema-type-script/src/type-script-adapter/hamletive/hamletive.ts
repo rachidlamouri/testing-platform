@@ -1,8 +1,6 @@
-import { Quirm } from '../../core/quirm';
-import { QuirmOptionTuple } from '../quirmOptionTuple';
-import { WortinatorHamletive } from './wortinator';
-
 /**
  * An Estinant that takes TypeScript concerns into consideration
+ *
+ * @todo do something with this type
  */
-export type Hamletive = WortinatorHamletive<QuirmOptionTuple<[Quirm]>>;
+export type Hamletive = symbol;
