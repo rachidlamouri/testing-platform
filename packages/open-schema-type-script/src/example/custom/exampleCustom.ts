@@ -27,10 +27,6 @@ import { identifiableQuirmDebuggerEstinant } from '../../custom-adapter/identifi
 import { typeScriptFileD2Estinant } from './program/typeScriptFileD2';
 import { programFileAEstinant } from './program/programFileA';
 import { programFileBEstinant } from './program/programFileB';
-import {
-  programFileCEstinant1,
-  programFileCEstinant2,
-} from './program/programFileC';
 import { programFileRendererEstinant } from './program/programFileRendererEstinant';
 import {
   programFileC2Estinant1,
@@ -65,8 +61,6 @@ digikikify({
     typeScriptFileD2Estinant,
     programFileAEstinant,
     programFileBEstinant,
-    programFileCEstinant1,
-    programFileCEstinant2,
     programFileRendererEstinant,
     programFileC2Estinant1,
     programFileC2Estinant2,
