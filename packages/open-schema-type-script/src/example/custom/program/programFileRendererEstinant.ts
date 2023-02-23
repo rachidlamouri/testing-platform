@@ -4,7 +4,6 @@ import {
 } from '../../../type-script-adapter/hamletive/wortinator';
 import { fileUtilities } from '../../core/debugger/fileUtilities';
 import {
-  ProgramNode,
   ProgramFileC2Plifal,
   ProgramNodeTypeName,
   PROGRAM_FILE_C2_GEPP,
@@ -16,39 +15,43 @@ const renderProgram: Haqueler<InputPlifal> = (input) => {
   const { programName, programNodeSet, relationships } =
     input.hubblepup.grition.additionalMetadata;
 
-  type RenderData = {
-    node: ProgramNode;
-    stateId: string;
-  };
+  // type RenderData = {
+  //   node: ProgramNode;
+  //   stateId: string;
+  // };
 
-  const renderDataByNode = new Map<ProgramNode, RenderData>();
-  [...programNodeSet].forEach((node, index) => {
-    const stateId = `S${index}`;
+  // const renderDataByNode = new Map<ProgramNode, RenderData>();
+  // [...programNodeSet].forEach((node, index) => {
+  //   const stateId = `S${index}`;
 
-    renderDataByNode.set(node, { node, stateId });
-  });
+  //   renderDataByNode.set(node, { node, stateId });
+  // });
 
-  const getStateId = (node: ProgramNode): string =>
-    renderDataByNode.get(node)?.stateId ?? 'SUnknown';
+  // const getStateId = (node: ProgramNode): string =>
+  //   renderDataByNode.get(node)?.stateId ?? 'SUnknown';
 
   const stateDeclarationList = [...programNodeSet]
-    .map((node, index) => {
+    .map((node) => {
       if (node.typeName === ProgramNodeTypeName.Estinant) {
-        return `S${index}>${node.name}]`;
+        return `${node.id}>${node.name}]`;
       }
-      return `S${index}[${node.name}]`;
+
+      if (node.typeName === ProgramNodeTypeName.Input) {
+        return `${node.id}{${node.name}}`;
+      }
+
+      return `${node.id}[${node.name}]`;
     })
     .join('\n');
 
   const renderedRelationshipList = relationships
     .map(({ from, to }) => {
-      return `${getStateId(from)}-->${getStateId(to)}`;
+      return `${from.id}-->${to.id}`;
     })
     .join('\n');
 
   const mermaid = `
-    flowchart LR
-    SUnknown[UNKNOWN]
+    flowchart TD
     ${stateDeclarationList}
 
     ${renderedRelationshipList}
