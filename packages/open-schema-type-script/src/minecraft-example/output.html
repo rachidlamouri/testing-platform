@@ -1,0 +1,266 @@
+<body>
+  <canvas id="my-canvas" width="3000" height="3000" style="border: 1px solid black; margin:20px;"></canvas>
+</body>
+
+<script>
+  const canvas = document.getElementById('my-canvas');
+  const context = document.getElementById("my-canvas").getContext("2d");
+
+  // Replace this with const inputJson = '<json>';
+  const inputJson = `{
+  "locationTuple": [
+    {
+      "name": "Josh's Crabs' Shack",
+      "inputCoordinates": {
+        "x": -165,
+        "y": "125",
+        "z": 180
+      },
+      "namedInputCoordinates": {
+        "east": -165,
+        "south": 180
+      },
+      "adjustedCoordinates": {
+        "east": 2035,
+        "south": 1651
+      }
+    },
+    {
+      "name": "Bee Hives",
+      "inputCoordinates": {
+        "x": -650,
+        "y": "Surface",
+        "z": 1050
+      },
+      "namedInputCoordinates": {
+        "east": -650,
+        "south": 1050
+      },
+      "adjustedCoordinates": {
+        "east": 1550,
+        "south": 2521
+      }
+    },
+    {
+      "name": "Nick and Rachid Cave",
+      "inputCoordinates": {
+        "x": -155,
+        "y": "16",
+        "z": 1284
+      },
+      "namedInputCoordinates": {
+        "east": -155,
+        "south": 1284
+      },
+      "adjustedCoordinates": {
+        "east": 2045,
+        "south": 2755
+      }
+    },
+    {
+      "name": "Zombie Spawner",
+      "inputCoordinates": {
+        "x": -151,
+        "y": "-30",
+        "z": 1426
+      },
+      "namedInputCoordinates": {
+        "east": -151,
+        "south": 1426
+      },
+      "adjustedCoordinates": {
+        "east": 2049,
+        "south": 2897
+      }
+    },
+    {
+      "name": "Josh's Crabs' Harbor",
+      "inputCoordinates": {
+        "x": -200,
+        "y": "63",
+        "z": 150
+      },
+      "namedInputCoordinates": {
+        "east": -200,
+        "south": 150
+      },
+      "adjustedCoordinates": {
+        "east": 2000,
+        "south": 1621
+      }
+    },
+    {
+      "name": "Cow!",
+      "inputCoordinates": {
+        "x": -400,
+        "y": "Surface",
+        "z": 416
+      },
+      "namedInputCoordinates": {
+        "east": -400,
+        "south": 416
+      },
+      "adjustedCoordinates": {
+        "east": 1800,
+        "south": 1887
+      }
+    },
+    {
+      "name": "Cow!!!!",
+      "inputCoordinates": {
+        "x": -760,
+        "y": "Surface",
+        "z": -125
+      },
+      "namedInputCoordinates": {
+        "east": -760,
+        "south": -125
+      },
+      "adjustedCoordinates": {
+        "east": 1440,
+        "south": 1346
+      }
+    },
+    {
+      "name": "The Pam and Anne's Canal",
+      "inputCoordinates": {
+        "x": -71,
+        "y": "Sea level",
+        "z": 50
+      },
+      "namedInputCoordinates": {
+        "east": -71,
+        "south": 50
+      },
+      "adjustedCoordinates": {
+        "east": 2129,
+        "south": 1521
+      }
+    },
+    {
+      "name": "Ocean Monument",
+      "inputCoordinates": {
+        "x": -190,
+        "y": "Sea level",
+        "z": -175
+      },
+      "namedInputCoordinates": {
+        "east": -190,
+        "south": -175
+      },
+      "adjustedCoordinates": {
+        "east": 2010,
+        "south": 1296
+      }
+    },
+    {
+      "name": "Beehive",
+      "inputCoordinates": {
+        "x": -960,
+        "y": "Surface",
+        "z": -155
+      },
+      "namedInputCoordinates": {
+        "east": -960,
+        "south": -155
+      },
+      "adjustedCoordinates": {
+        "east": 1240,
+        "south": 1316
+      }
+    },
+    {
+      "name": "Wolves",
+      "inputCoordinates": {
+        "x": -1240,
+        "y": "Surface",
+        "z": 162
+      },
+      "namedInputCoordinates": {
+        "east": -1240,
+        "south": 162
+      },
+      "adjustedCoordinates": {
+        "east": 960,
+        "south": 1633
+      }
+    },
+    {
+      "name": "Foxes!",
+      "inputCoordinates": {
+        "x": -2100,
+        "y": "Surface",
+        "z": -563
+      },
+      "namedInputCoordinates": {
+        "east": -2100,
+        "south": -563
+      },
+      "adjustedCoordinates": {
+        "east": 100,
+        "south": 908
+      }
+    },
+    {
+      "name": "Abandoned Mineshaft?",
+      "inputCoordinates": {
+        "x": -81,
+        "y": "-17",
+        "z": 100
+      },
+      "namedInputCoordinates": {
+        "east": -81,
+        "south": 100
+      },
+      "adjustedCoordinates": {
+        "east": 2119,
+        "south": 1571
+      }
+    },
+    {
+      "name": "Zombie Spawner",
+      "inputCoordinates": {
+        "x": -180,
+        "y": "31",
+        "z": 320
+      },
+      "namedInputCoordinates": {
+        "east": -180,
+        "south": 320
+      },
+      "adjustedCoordinates": {
+        "east": 2020,
+        "south": 1791
+      }
+    },
+    {
+      "name": "Witch Hut",
+      "inputCoordinates": {
+        "x": -156,
+        "y": "66",
+        "z": -1371
+      },
+      "namedInputCoordinates": {
+        "east": -156,
+        "south": -1371
+      },
+      "adjustedCoordinates": {
+        "east": 2044,
+        "south": 100
+      }
+    }
+  ]
+}`
+
+  const { locationTuple } = JSON.parse(inputJson);
+
+  locationTuple.forEach((location) => {
+    context.beginPath();
+    context.arc(location.adjustedCoordinates.east, location.adjustedCoordinates.south, 1, 0, 2 * Math.PI, false);
+    context.lineWidth = 2;
+    context.strokeStyle = '#000000';
+    context.stroke();
+
+    context.fillText(location.name, location.adjustedCoordinates.east, location.adjustedCoordinates.south);
+  })
+</script>

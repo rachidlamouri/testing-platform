@@ -1,0 +1,432 @@
+{
+  "locationTuple": [
+    {
+      "name": "Josh's Crabs' Shack",
+      "inputCoordinates": {
+        "x": 0,
+        "y": "0ish",
+        "z": 0
+      },
+      "namedInputCoordinates": {
+        "east": 0,
+        "south": 0
+      },
+      "normalizedDirectionCoordinates": {
+        "east": 0,
+        "north": 0
+      },
+      "normalizedCoordinates": {
+        "east": 2100,
+        "north": 1426
+      },
+      "canvasCoordinates": {
+        "left": 2100,
+        "top": 1371
+      },
+      "scaledCanvasCoordinates": {
+        "left": 1050,
+        "top": 685.5
+      }
+    },
+    {
+      "name": "Bee Hives",
+      "inputCoordinates": {
+        "x": -650,
+        "y": "Surface",
+        "z": 1050
+      },
+      "namedInputCoordinates": {
+        "east": -650,
+        "south": 1050
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -650,
+        "north": -1050
+      },
+      "normalizedCoordinates": {
+        "east": 1450,
+        "north": 376
+      },
+      "canvasCoordinates": {
+        "left": 1450,
+        "top": 2421
+      },
+      "scaledCanvasCoordinates": {
+        "left": 725,
+        "top": 1210.5
+      }
+    },
+    {
+      "name": "Nick and Rachid Cave",
+      "inputCoordinates": {
+        "x": -155,
+        "y": "16",
+        "z": 1284
+      },
+      "namedInputCoordinates": {
+        "east": -155,
+        "south": 1284
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -155,
+        "north": -1284
+      },
+      "normalizedCoordinates": {
+        "east": 1945,
+        "north": 142
+      },
+      "canvasCoordinates": {
+        "left": 1945,
+        "top": 2655
+      },
+      "scaledCanvasCoordinates": {
+        "left": 972.5,
+        "top": 1327.5
+      }
+    },
+    {
+      "name": "Zombie Spawner",
+      "inputCoordinates": {
+        "x": -151,
+        "y": "-30",
+        "z": 1426
+      },
+      "namedInputCoordinates": {
+        "east": -151,
+        "south": 1426
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -151,
+        "north": -1426
+      },
+      "normalizedCoordinates": {
+        "east": 1949,
+        "north": 0
+      },
+      "canvasCoordinates": {
+        "left": 1949,
+        "top": 2797
+      },
+      "scaledCanvasCoordinates": {
+        "left": 974.5,
+        "top": 1398.5
+      }
+    },
+    {
+      "name": "Josh's Crabs' Harbor",
+      "inputCoordinates": {
+        "x": -200,
+        "y": "63",
+        "z": 150
+      },
+      "namedInputCoordinates": {
+        "east": -200,
+        "south": 150
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -200,
+        "north": -150
+      },
+      "normalizedCoordinates": {
+        "east": 1900,
+        "north": 1276
+      },
+      "canvasCoordinates": {
+        "left": 1900,
+        "top": 1521
+      },
+      "scaledCanvasCoordinates": {
+        "left": 950,
+        "top": 760.5
+      }
+    },
+    {
+      "name": "Cow!",
+      "inputCoordinates": {
+        "x": -400,
+        "y": "Surface",
+        "z": 416
+      },
+      "namedInputCoordinates": {
+        "east": -400,
+        "south": 416
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -400,
+        "north": -416
+      },
+      "normalizedCoordinates": {
+        "east": 1700,
+        "north": 1010
+      },
+      "canvasCoordinates": {
+        "left": 1700,
+        "top": 1787
+      },
+      "scaledCanvasCoordinates": {
+        "left": 850,
+        "top": 893.5
+      }
+    },
+    {
+      "name": "Cow!!!!",
+      "inputCoordinates": {
+        "x": -760,
+        "y": "Surface",
+        "z": -125
+      },
+      "namedInputCoordinates": {
+        "east": -760,
+        "south": -125
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -760,
+        "north": 125
+      },
+      "normalizedCoordinates": {
+        "east": 1340,
+        "north": 1551
+      },
+      "canvasCoordinates": {
+        "left": 1340,
+        "top": 1246
+      },
+      "scaledCanvasCoordinates": {
+        "left": 670,
+        "top": 623
+      }
+    },
+    {
+      "name": "The Pam and Anne's Canal",
+      "inputCoordinates": {
+        "x": -71,
+        "y": "Sea level",
+        "z": 50
+      },
+      "namedInputCoordinates": {
+        "east": -71,
+        "south": 50
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -71,
+        "north": -50
+      },
+      "normalizedCoordinates": {
+        "east": 2029,
+        "north": 1376
+      },
+      "canvasCoordinates": {
+        "left": 2029,
+        "top": 1421
+      },
+      "scaledCanvasCoordinates": {
+        "left": 1014.5,
+        "top": 710.5
+      }
+    },
+    {
+      "name": "Ocean Monument",
+      "inputCoordinates": {
+        "x": -190,
+        "y": "Sea level",
+        "z": -175
+      },
+      "namedInputCoordinates": {
+        "east": -190,
+        "south": -175
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -190,
+        "north": 175
+      },
+      "normalizedCoordinates": {
+        "east": 1910,
+        "north": 1601
+      },
+      "canvasCoordinates": {
+        "left": 1910,
+        "top": 1196
+      },
+      "scaledCanvasCoordinates": {
+        "left": 955,
+        "top": 598
+      }
+    },
+    {
+      "name": "Beehive",
+      "inputCoordinates": {
+        "x": -960,
+        "y": "Surface",
+        "z": -155
+      },
+      "namedInputCoordinates": {
+        "east": -960,
+        "south": -155
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -960,
+        "north": 155
+      },
+      "normalizedCoordinates": {
+        "east": 1140,
+        "north": 1581
+      },
+      "canvasCoordinates": {
+        "left": 1140,
+        "top": 1216
+      },
+      "scaledCanvasCoordinates": {
+        "left": 570,
+        "top": 608
+      }
+    },
+    {
+      "name": "Wolves",
+      "inputCoordinates": {
+        "x": -1240,
+        "y": "Surface",
+        "z": 162
+      },
+      "namedInputCoordinates": {
+        "east": -1240,
+        "south": 162
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -1240,
+        "north": -162
+      },
+      "normalizedCoordinates": {
+        "east": 860,
+        "north": 1264
+      },
+      "canvasCoordinates": {
+        "left": 860,
+        "top": 1533
+      },
+      "scaledCanvasCoordinates": {
+        "left": 430,
+        "top": 766.5
+      }
+    },
+    {
+      "name": "Foxes!",
+      "inputCoordinates": {
+        "x": -2100,
+        "y": "Surface",
+        "z": -563
+      },
+      "namedInputCoordinates": {
+        "east": -2100,
+        "south": -563
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -2100,
+        "north": 563
+      },
+      "normalizedCoordinates": {
+        "east": 0,
+        "north": 1989
+      },
+      "canvasCoordinates": {
+        "left": 0,
+        "top": 808
+      },
+      "scaledCanvasCoordinates": {
+        "left": 0,
+        "top": 404
+      }
+    },
+    {
+      "name": "Abandoned Mineshaft?",
+      "inputCoordinates": {
+        "x": -81,
+        "y": "-17",
+        "z": 100
+      },
+      "namedInputCoordinates": {
+        "east": -81,
+        "south": 100
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -81,
+        "north": -100
+      },
+      "normalizedCoordinates": {
+        "east": 2019,
+        "north": 1326
+      },
+      "canvasCoordinates": {
+        "left": 2019,
+        "top": 1471
+      },
+      "scaledCanvasCoordinates": {
+        "left": 1009.5,
+        "top": 735.5
+      }
+    },
+    {
+      "name": "Zombie Spawner",
+      "inputCoordinates": {
+        "x": -180,
+        "y": "31",
+        "z": 320
+      },
+      "namedInputCoordinates": {
+        "east": -180,
+        "south": 320
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -180,
+        "north": -320
+      },
+      "normalizedCoordinates": {
+        "east": 1920,
+        "north": 1106
+      },
+      "canvasCoordinates": {
+        "left": 1920,
+        "top": 1691
+      },
+      "scaledCanvasCoordinates": {
+        "left": 960,
+        "top": 845.5
+      }
+    },
+    {
+      "name": "Witch Hut",
+      "inputCoordinates": {
+        "x": -156,
+        "y": "66",
+        "z": -1371
+      },
+      "namedInputCoordinates": {
+        "east": -156,
+        "south": -1371
+      },
+      "normalizedDirectionCoordinates": {
+        "east": -156,
+        "north": 1371
+      },
+      "normalizedCoordinates": {
+        "east": 1944,
+        "north": 2797
+      },
+      "canvasCoordinates": {
+        "left": 1944,
+        "top": 0
+      },
+      "scaledCanvasCoordinates": {
+        "left": 972,
+        "top": 0
+      }
+    }
+  ],
+  "canvasSize": {
+    "width": 2100,
+    "height": 2797
+  },
+  "scaledCanvasSize": {
+    "width": 1050,
+    "height": 1398.5
+  }
+}

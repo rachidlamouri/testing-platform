@@ -1,0 +1,23 @@
+<body>
+  <canvas id="my-canvas" width="3000" height="3000" style="border: 1px solid black; margin:20px;"></canvas>
+</body>
+
+<script>
+  const canvas = document.getElementById('my-canvas');
+  const context = document.getElementById("my-canvas").getContext("2d");
+
+  // Replace this with const inputJson = '<json>';
+  // TODO: REPLACE ME
+
+  const { locationTuple } = JSON.parse(inputJson);
+
+  locationTuple.forEach((location) => {
+    context.beginPath();
+    context.arc(location.adjustedCoordinates.east, location.adjustedCoordinates.south, 1, 0, 2 * Math.PI, false);
+    context.lineWidth = 2;
+    context.strokeStyle = '#000000';
+    context.stroke();
+
+    context.fillText(location.name, location.adjustedCoordinates.east, location.adjustedCoordinates.south);
+  })
+</script>

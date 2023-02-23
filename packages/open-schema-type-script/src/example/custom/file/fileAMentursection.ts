@@ -15,10 +15,17 @@ import {
   YamlFileAPlifal,
   YAML_FILE_A_GEPP,
 } from './yamlFileA';
+import { TsvFileAOdeshin, TsvFileAPlifal, TSV_FILE_A_GEPP } from './tsvFileA';
+import {
+  HtmlFileA,
+  HtmlFileAOdeshin,
+  HtmlFileAPlifal,
+  HTML_FILE_A_GEPP,
+} from './htmlFileA';
 
 type InputPlifal = FileAPlifal;
 type OutputPlifalOptionTuple = QuirmOptionTuple<
-  [TypeScriptFileAPlifal, YamlFileAPlifal]
+  [TypeScriptFileAPlifal, YamlFileAPlifal, TsvFileAPlifal, HtmlFileAPlifal]
 >;
 
 const isTypeScriptFileA: Paraker<
@@ -37,6 +44,22 @@ const isYamlFileA: Paraker<
   input.grition.extension.suffixIdentifier ===
   FileExtensionSuffixIdentifier.Yaml;
 
+const isTsvFileA: Paraker<
+  InputPlifal,
+  OutputPlifalOptionTuple,
+  TsvFileAPlifal
+> = (input): input is TsvFileAOdeshin =>
+  input.grition.extension.suffixIdentifier ===
+  FileExtensionSuffixIdentifier.TabSeparatedValues;
+
+const isHtmlFileA: Paraker<
+  InputPlifal,
+  OutputPlifalOptionTuple,
+  TsvFileAPlifal
+> = (input): input is HtmlFileAOdeshin =>
+  input.grition.extension.suffixIdentifier ===
+  FileExtensionSuffixIdentifier.Html;
+
 export const fileAMentursection = buildMentursectionHamletive<
   InputPlifal,
   OutputPlifalOptionTuple
@@ -50,6 +73,14 @@ export const fileAMentursection = buildMentursectionHamletive<
     {
       outputGeppTuple: [YAML_FILE_A_GEPP],
       parak: isYamlFileA,
+    },
+    {
+      outputGeppTuple: [TSV_FILE_A_GEPP],
+      parak: isTsvFileA,
+    },
+    {
+      outputGeppTuple: [HTML_FILE_A_GEPP],
+      parak: isHtmlFileA,
     },
   ],
 });
