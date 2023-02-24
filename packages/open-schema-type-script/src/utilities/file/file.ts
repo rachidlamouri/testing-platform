@@ -3,6 +3,8 @@ import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 export type FileName = {
   pascalCase: string;
   camelCase: string;
+  screamingSnakeCase: string;
+  kebabCase: string;
 };
 
 export type File<

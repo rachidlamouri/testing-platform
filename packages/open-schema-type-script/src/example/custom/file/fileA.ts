@@ -61,6 +61,18 @@ const partsToPascal = (x: string[]): string => {
     .join('');
 };
 
+const partsToScreamingSnake = (x: string[]): string => {
+  return x
+    .map((word) => {
+      return word.toUpperCase();
+    })
+    .join('_');
+};
+
+const partsToKebabCase = (x: string[]): string => {
+  return x.join('-');
+};
+
 type InputPlifalTuple = [FileAConfigurationPlifal];
 type OutputPlifalTuple = FileAPlifalTuple;
 
@@ -82,10 +94,14 @@ const buildFileA: Tropoignant2<InputPlifalTuple, OutputPlifalTuple> = (
       onDiskFileName: {
         camelCase: partsToCamel(onDiskFileNameParts),
         pascalCase: partsToPascal(onDiskFileNameParts),
+        screamingSnakeCase: partsToScreamingSnake(onDiskFileNameParts),
+        kebabCase: partsToKebabCase(onDiskFileNameParts),
       },
       inMemoryFileName: {
         camelCase: partsToCamel(inMemoryFileNameParts),
         pascalCase: partsToPascal(inMemoryFileNameParts),
+        screamingSnakeCase: partsToScreamingSnake(inMemoryFileNameParts),
+        kebabCase: partsToKebabCase(inMemoryFileNameParts),
       },
       extension: {
         parts: extensionParts,
