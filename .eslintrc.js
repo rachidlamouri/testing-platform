@@ -35,6 +35,7 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'error',
         '@typescript-eslint/switch-exhaustiveness-check': 'error',
         'no-use-before-define': 'off',
+        'max-classes-per-file': 'off',
         'import/no-extraneous-dependencies': [
           'error',
           { devDependencies: true },
