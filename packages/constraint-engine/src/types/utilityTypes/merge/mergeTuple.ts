@@ -7,7 +7,7 @@ type RecursivelyMergedTuple<TTuple extends UnknownTuple> = TTuple extends [
   ? TOnlyItem
   : TTuple extends [infer TFirstItem, ...infer TRestItems]
   ? TFirstItem & RecursivelyMergedTuple<TRestItems>
-  : never;
+  : object;
 
 export type MergeTuple<TTuple extends UnknownTuple> = Simplify<
   RecursivelyMergedTuple<TTuple>

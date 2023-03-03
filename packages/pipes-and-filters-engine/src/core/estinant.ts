@@ -8,8 +8,8 @@ import { Tropoignant } from './tropoignant';
  */
 export type Estinant = {
   inputGeppTuple: GeppTuple;
-  tropoig: Tropoignant;
   croard: Croarder;
+  tropoig: Tropoignant;
 };
 
 export type EstinantTuple = readonly Estinant[];
