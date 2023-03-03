@@ -1,15 +1,12 @@
-import { Gepp, GeppTuple } from './gepp';
 import { Hubblepup } from './hubblepup';
+import { Mabz } from './mabz';
 
 /**
- * A cache of Hubblepups, where each Hubblepup is keyed by one of its Gepps. This is used by a Procody.
+ * A left Hubblepup and a respective Mabz
  */
-export class Cology extends Map<Gepp, Hubblepup> {
-  constructor(public readonly geppTuple: GeppTuple) {
-    super();
-  }
+export type Cology = {
+  leftHubblepup: Hubblepup;
+  mabz: Mabz;
+};
 
-  isReady(): boolean {
-    return this.geppTuple.every((gepp) => this.has(gepp));
-  }
-}
+export class CologySet extends Set<Cology> {}

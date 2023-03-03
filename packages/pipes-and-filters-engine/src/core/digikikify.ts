@@ -1,8 +1,14 @@
-import { Cology } from './cology';
-import { Dreanor } from './dreanor';
-import { EstinantTuple } from './estinant';
+import { ZornTuple } from '../utilities/semantic-types/zorn';
+import { Ajorken } from './ajorken';
+import { Cology, CologySet } from './cology';
+import { LeftDreanor, RightDreanor } from './dreanor';
+import { Estinant, EstinantTuple } from './estinant';
+import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
-import { Platomity } from './platomity';
+import { Lanbe } from './lanbe';
+import { Mabz } from './mabz';
+import { Platomity2 } from './platomity';
+import { Prected } from './prected';
 import { Procody } from './procody';
 import { Quirm, QuirmTuple } from './quirm';
 import { Tabilly } from './tabilly';
@@ -37,21 +43,38 @@ export const digikikify = ({
     });
   };
 
-  const platomities = estinantTuple.map<Platomity>((estinant) => {
-    const dreanorTuple = estinant.inputGeppTuple.map<Dreanor>((inputGepp) => {
-      const voictent = tabilly.getOrInstantiateAndGetVoictent(inputGepp);
-      const lanbe = voictent.createLanbe(estinant.tropoig.name);
-      const dreanor: Dreanor = {
-        gepp: inputGepp,
-        lanbe,
-      };
+  const createLanbe = (estinant: Estinant, gepp: Gepp): Lanbe => {
+    const voictent = tabilly.getOrInstantiateAndGetVoictent(gepp);
+    const lanbe = voictent.createLanbe(estinant.tropoig.name);
+    return lanbe;
+  };
 
-      return dreanor;
-    });
+  const platomities = estinantTuple.map<Platomity2>((estinant) => {
+    const { leftAppreffinge, rightAppreffingeTuple } = estinant;
 
-    const platomity: Platomity = {
+    const leftDreanor: LeftDreanor = {
+      isLeft: true,
+      gepp: leftAppreffinge.gepp,
+      lanbe: createLanbe(estinant, leftAppreffinge.gepp),
+    };
+
+    const rightDreanorTuple = rightAppreffingeTuple.map<RightDreanor>(
+      (rightAppreffinge) => {
+        return {
+          isLeft: false,
+          gepp: rightAppreffinge.gepp,
+          framate: rightAppreffinge.framate,
+          lanbe: createLanbe(estinant, rightAppreffinge.gepp),
+          croard: rightAppreffinge.croard,
+          prected: new Prected(),
+        };
+      },
+    );
+
+    const platomity: Platomity2 = {
       estinant,
-      dreanorTuple,
+      leftDreanor,
+      rightDreanorTuple,
       procody: new Procody(),
     };
 
@@ -60,42 +83,92 @@ export const digikikify = ({
 
   addToTabilly(initialQuirmTuple);
 
-  const canPlatomityAdvance = (platomity: Platomity): boolean => {
-    return platomity.dreanorTuple.some((dreanor) => dreanor.lanbe.hasNext());
+  const canPlatomityAdvance = (platomity: Platomity2): boolean => {
+    return [platomity.leftDreanor, ...platomity.rightDreanorTuple].some(
+      (dreanor) => dreanor.lanbe.hasNext(),
+    );
   };
 
-  const executePlatomity = (platomity: Platomity): void => {
-    const readyCologies: Cology[] = [];
+  const executePlatomity = (platomity: Platomity2): void => {
+    // const readyCologies: Cology[] = [];
 
-    platomity.dreanorTuple
+    const touchedCologySet = new CologySet();
+
+    [platomity.leftDreanor, ...platomity.rightDreanorTuple]
       .filter((dreanor) => dreanor.lanbe.hasNext())
       .forEach((dreanor) => {
         dreanor.lanbe.advance();
 
-        const nextHubblepup = dreanor.lanbe.dereference() as Hubblepup;
-        const zorn = platomity.estinant.croard(nextHubblepup);
-        const cology =
-          platomity.procody.get(zorn) ??
-          new Cology(platomity.estinant.inputGeppTuple);
+        if (dreanor.isLeft) {
+          const leftHubblepup = dreanor.lanbe.dereference() as Hubblepup;
 
-        cology.set(dreanor.gepp, nextHubblepup);
-        platomity.procody.set(zorn, cology);
+          const leftCologyEntry: [Gepp, ZornTuple] = [
+            dreanor.gepp,
+            [leftHubblepup],
+          ];
 
-        if (cology.isReady()) {
-          readyCologies.push(cology);
+          const rightCologyEntries: [Gepp, ZornTuple][] =
+            platomity.rightDreanorTuple.map((rightDreanor) => {
+              return [rightDreanor.gepp, rightDreanor.framate(leftHubblepup)];
+            });
+
+          const cologyEntries = [leftCologyEntry, ...rightCologyEntries];
+          const cology: Cology = {
+            leftHubblepup,
+            mabz: new Mabz(rightCologyEntries),
+          };
+
+          cologyEntries.forEach(([gepp, zornTuple]) => {
+            const ajorken = platomity.procody.get(gepp) ?? new Ajorken();
+
+            zornTuple.forEach((zorn) => {
+              const cologySet = ajorken.get(zorn) ?? new CologySet();
+
+              cologySet.add(cology);
+              ajorken.set(zorn, cologySet);
+            });
+
+            platomity.procody.set(gepp, ajorken);
+          });
+
+          touchedCologySet.add(cology);
+        } else {
+          const rightHubblepup = dreanor.lanbe.dereference() as Hubblepup;
+
+          const zorn = dreanor.croard(rightHubblepup);
+          dreanor.prected.set(zorn, rightHubblepup);
+
+          const ajorken = platomity.procody.get(dreanor.gepp) ?? new Ajorken();
+          const cologySet = ajorken.get(zorn) ?? new CologySet();
+
+          [...cologySet].forEach((cology) => {
+            touchedCologySet.add(cology);
+          });
         }
       });
 
-    readyCologies.forEach((cology) => {
-      const inputHubblepupTuple = platomity.estinant.inputGeppTuple.map(
-        (gepp) => {
-          const hubblepup = cology.get(gepp) as Hubblepup;
-          return hubblepup;
+    const readyCologies = [...touchedCologySet].filter((cology) => {
+      const isReady = platomity.rightDreanorTuple.every(
+        (dreanor: RightDreanor) => {
+          const zornTuple = cology.mabz.get(dreanor.gepp) as ZornTuple;
+          return zornTuple.every((zorn) => dreanor.prected.has(zorn));
         },
       );
 
+      return isReady;
+    });
+
+    readyCologies.forEach((cology) => {
+      const leftInput = cology.leftHubblepup;
+
+      const rightInputTuple = platomity.rightDreanorTuple.map((dreanor) => {
+        const zornTuple = cology.mabz.get(dreanor.gepp) as ZornTuple;
+        return zornTuple.map((zorn) => dreanor.prected.get(zorn) as Hubblepup);
+      });
+
       const outputQuirmTuple = platomity.estinant.tropoig(
-        ...inputHubblepupTuple,
+        leftInput,
+        ...rightInputTuple,
       );
       addToTabilly(outputQuirmTuple);
     });

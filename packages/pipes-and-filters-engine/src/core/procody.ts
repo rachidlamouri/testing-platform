@@ -1,8 +1,7 @@
-import { Cology } from './cology';
-import { Zorn } from '../utilities/semantic-types/zorn';
+import { Gepp } from './gepp';
+import { Ajorken } from './ajorken';
 
 /**
- * Cologies cached by Zorns. This is stored in a Platomity.
- * The Engine finds a Cology where every item cached in the Cology resolves to the same Zorn
+ * Cologies cached by their left Hubblepups
  */
-export class Procody extends Map<Zorn, Cology> {}
+export class Procody extends Map<Gepp, Ajorken> {}

@@ -1,5 +1,4 @@
-import { Croarder } from './croarder';
-import { GeppTuple } from './gepp';
+import { LeftAppreffinge, RightAppreffingeTuple } from './appreffinge';
 import { Tropoignant } from './tropoignant';
 
 /**
@@ -7,8 +6,8 @@ import { Tropoignant } from './tropoignant';
  * It allows the Progammer to register a Tropoignant to one or more Voictents via a tuple of Gepps.
  */
 export type Estinant = {
-  inputGeppTuple: GeppTuple;
-  croard: Croarder;
+  leftAppreffinge: LeftAppreffinge;
+  rightAppreffingeTuple: RightAppreffingeTuple;
   tropoig: Tropoignant;
 };
 

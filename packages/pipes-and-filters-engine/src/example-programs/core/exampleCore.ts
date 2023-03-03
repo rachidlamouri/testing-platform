@@ -3,7 +3,6 @@ import { Estinant } from '../../core/estinant';
 import { Gepp } from '../../core/gepp';
 import { Hubblepup } from '../../core/hubblepup';
 import { Quirm } from '../../core/quirm';
-import { passthrough } from '../../utilities/passthrough';
 import { debugHubblepup } from './debugHubblepup';
 
 const exampleGeppInitialInput: Gepp = 'gepp-initial-input';
@@ -19,8 +18,8 @@ const hubblepupB2: Hubblepup = { b: 2 };
 const initialCollection = [hubblepupA1, hubblepupA2, hubblepupB1, hubblepupB2];
 
 const exampleOnamaEstinant: Estinant = {
-  inputGeppTuple: [exampleGeppInitialInput],
-  croard: passthrough,
+  leftAppreffinge: { gepp: exampleGeppInitialInput },
+  rightAppreffingeTuple: [],
   tropoig: function serialize(input) {
     const output: Quirm = {
       gepp: exampleGeppSerialized,
@@ -34,8 +33,8 @@ const exampleOnamaEstinant: Estinant = {
 };
 
 const exampleMentursectionEstinant: Estinant = {
-  inputGeppTuple: [exampleGeppInitialInput],
-  croard: passthrough,
+  leftAppreffinge: { gepp: exampleGeppInitialInput },
+  rightAppreffingeTuple: [],
   tropoig: function categorizeByValue(input) {
     const firstEntry: [unknown, unknown] = Object.entries(input)[0] ?? [
       undefined,
@@ -59,17 +58,24 @@ const exampleMentursectionEstinant: Estinant = {
 };
 
 const exampleCortmumEstinant: Estinant = {
-  inputGeppTuple: ['key-category-"a"', 'key-category-"b"'],
-  croard: function getNumber(input) {
-    const value = parseInt(JSON.stringify(Object.values(input)[0]), 10);
-    return value;
-  },
-  tropoig: function join(inputA, inputB) {
+  leftAppreffinge: { gepp: 'key-category-"a"' },
+  rightAppreffingeTuple: [
+    {
+      gepp: 'key-category-"b"',
+      croard: (inputB): unknown => {
+        return Object.values(inputB)[0];
+      },
+      framate: (): number[] => {
+        return [2, 1];
+      },
+    },
+  ],
+  tropoig: function join(inputA, inputBTuple) {
     const outputQuirm: Quirm = {
       gepp: exampleGeppJoined,
       hubblepup: {
         inputA,
-        inputB,
+        inputBTuple,
       },
     };
 
@@ -78,8 +84,8 @@ const exampleCortmumEstinant: Estinant = {
 };
 
 const exampleWortinatorEstinant: Estinant = {
-  inputGeppTuple: [exampleGeppInitialInput],
-  croard: passthrough,
+  leftAppreffinge: { gepp: exampleGeppInitialInput },
+  rightAppreffingeTuple: [],
   tropoig: function wortWortWort(input) {
     // eslint-disable-next-line no-console
     console.log(`Wort Wort Wort: ${JSON.stringify(input)}`);
