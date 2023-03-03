@@ -7,10 +7,12 @@ import { Procody } from './procody';
 import { Quirm, QuirmTuple } from './quirm';
 import { Tabilly } from './tabilly';
 
+export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
+
 export type DigikikifierInput = {
   initialQuirmTuple: QuirmTuple;
   estinantTuple: EstinantTuple;
-  onHubblepupAddedToVoictents: (quirm: Quirm) => void;
+  onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler;
 };
 
 /**

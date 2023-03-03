@@ -1,7 +1,7 @@
 import { HubblepupTuple } from './hubblepup';
-import { QuirmTuple } from './quirm';
+import { QuirmList } from './quirm';
 
 /**
  * The thing that a Programmer creates to process one or more Quirms. The engine manages them at runtime.
  */
-export type Tropoignant = (...inputs: HubblepupTuple) => QuirmTuple;
+export type Tropoignant = (...inputs: HubblepupTuple) => QuirmList;

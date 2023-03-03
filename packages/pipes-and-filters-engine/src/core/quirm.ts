@@ -1,3 +1,4 @@
+import { List } from '../utilities/semantic-types/list';
 import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
 
@@ -11,3 +12,5 @@ export type Quirm = {
 };
 
 export type QuirmTuple = readonly Quirm[];
+
+export type QuirmList = List<Quirm>;
