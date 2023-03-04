@@ -5,20 +5,12 @@ import {
 import { EstinantTuple as CoreEstinantTuple } from '../core/estinant';
 import { Quirm } from '../core/quirm';
 import { StralineTuple } from '../utilities/semantic-types/straline';
-import { Zorn } from '../utilities/semantic-types/zorn';
-import { Croarder } from './croarder';
 import { Estinant } from './estinant/estinant';
-import { Gepp } from './gepp';
-import { Tropoignant } from './tropoignant';
+import { VickenTupleToVoictentTuple } from './vicken';
 import { Voictent, VoictentArrayToVoictentItem } from './voictent';
 
-type AnyEstinant = {
-  inputGeppTuple: Gepp[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  croard: Croarder<any, Zorn>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  tropoig: Tropoignant<any, any>;
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyEstinant = Estinant<any, any>;
 
 type AnyEstinantTuple = readonly AnyEstinant[];
 
@@ -29,12 +21,13 @@ type EstinantTupleToCombinedVoictentTuple<
   TEstinantTuple extends AnyEstinantTuple,
 > = {
   [Index in keyof TEstinantTuple]: TEstinantTuple[Index] extends Estinant<
-    infer TInputVoictentTuple,
-    infer TOutputVoictentTuple,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    any
+    infer TInputVition,
+    infer TOutputVoictentTuple
   >
-    ? TInputVoictentTuple[number] | TOutputVoictentTuple[number]
+    ?
+        | TInputVition['leftVoictent']
+        | VickenTupleToVoictentTuple<TInputVition['rightVickenTuple']>[number]
+        | TOutputVoictentTuple[number]
     : never;
 };
 

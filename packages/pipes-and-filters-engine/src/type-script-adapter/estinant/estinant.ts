@@ -1,14 +1,13 @@
-import { Zorn } from '../../utilities/semantic-types/zorn';
-import { Croarder } from '../croarder';
+import { LeftAppreffinge, RightAppreffingeTuple } from '../appreffinge';
 import { Tropoignant } from '../tropoignant';
-import { VoictentTuple, VoictentTupleToGeppTuple } from '../voictent';
+import { Vition } from '../vition';
+import { VoictentTuple } from '../voictent';
 
 export type Estinant<
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictentTuple extends VoictentTuple,
-  TZorn extends Zorn,
 > = {
-  inputGeppTuple: VoictentTupleToGeppTuple<TInputVoictentTuple>;
-  croard: Croarder<TInputVoictentTuple, TZorn>;
-  tropoig: Tropoignant<TInputVoictentTuple, TOutputVoictentTuple>;
+  leftAppreffinge: LeftAppreffinge<TInputVition>;
+  rightAppreffingeTuple: RightAppreffingeTuple<TInputVition>;
+  tropoig: Tropoignant<TInputVition, TOutputVoictentTuple>;
 };

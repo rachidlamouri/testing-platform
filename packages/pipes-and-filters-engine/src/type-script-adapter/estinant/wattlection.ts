@@ -1,68 +1,56 @@
 import { Estinant } from './estinant';
 import { Tropoignant } from '../tropoignant';
-import {
-  Voictent,
-  VoictentToHubblepup,
-  VoictentToQuirm,
-  VoictentTuple,
-  VoictentTupleToGeppTuple,
-  VoictentTupleToHubblepupTuple,
-} from '../voictent';
-import { Zorn } from '../../utilities/semantic-types/zorn';
-import { Croarder } from '../croarder';
+import { Voictent, VoictentToHubblepup, VoictentToQuirm } from '../voictent';
 import { Pinbetunf } from '../pinbetunf';
+import { RightAppreffingeTuple } from '../appreffinge';
+import { Vition, VitionToHubblepupInputList } from '../vition';
 
 export type WattlectionPinbetunf<
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictent extends Voictent,
 > = Pinbetunf<
-  VoictentTupleToHubblepupTuple<TInputVoictentTuple>,
+  VitionToHubblepupInputList<TInputVition>,
   VoictentToHubblepup<TOutputVoictent>
 >;
 
 export type WattlectionTropoignant<
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictent extends Voictent,
-> = Tropoignant<TInputVoictentTuple, [TOutputVoictent]>;
+> = Tropoignant<TInputVition, [TOutputVoictent]>;
 
 /**
  * A many to one estinant
  */
 export type Wattlection<
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictent extends Voictent,
-  TZorn extends Zorn,
-> = Estinant<TInputVoictentTuple, [TOutputVoictent], TZorn>;
+> = Estinant<TInputVition, [TOutputVoictent]>;
 
 export type WattlectionBuilderInput<
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictent extends Voictent,
-  TZorn extends Zorn,
 > = {
-  inputGeppTuple: VoictentTupleToGeppTuple<TInputVoictentTuple>;
+  leftGepp: TInputVition['leftVoictent']['gepp'];
+  rightAppreffingeTuple: RightAppreffingeTuple<TInputVition>;
   outputGepp: TOutputVoictent['gepp'];
-  croard: Croarder<TInputVoictentTuple, TZorn>;
-  pinbe: WattlectionPinbetunf<TInputVoictentTuple, TOutputVoictent>;
+  pinbe: WattlectionPinbetunf<TInputVition, TOutputVoictent>;
 };
 
 export const buildWattlection = <
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictent extends Voictent,
-  TZorn extends Zorn,
 >({
-  inputGeppTuple,
+  leftGepp,
+  rightAppreffingeTuple,
   outputGepp,
-  croard,
   pinbe,
-}: WattlectionBuilderInput<
-  TInputVoictentTuple,
-  TOutputVoictent,
-  TZorn
->): Wattlection<TInputVoictentTuple, TOutputVoictent, TZorn> => {
-  const tropoig: WattlectionTropoignant<
-    TInputVoictentTuple,
-    TOutputVoictent
-  > = (...inputs) => {
+}: WattlectionBuilderInput<TInputVition, TOutputVoictent>): Wattlection<
+  TInputVition,
+  TOutputVoictent
+> => {
+  const tropoig: WattlectionTropoignant<TInputVition, TOutputVoictent> = (
+    ...inputs
+  ) => {
     const output = pinbe(...inputs);
 
     const outputQuirm: VoictentToQuirm<TOutputVoictent> = {
@@ -73,9 +61,9 @@ export const buildWattlection = <
     return [outputQuirm];
   };
 
-  const estinant: Wattlection<TInputVoictentTuple, TOutputVoictent, TZorn> = {
-    inputGeppTuple,
-    croard,
+  const estinant: Wattlection<TInputVition, TOutputVoictent> = {
+    leftAppreffinge: { gepp: leftGepp },
+    rightAppreffingeTuple,
     tropoig,
   };
 

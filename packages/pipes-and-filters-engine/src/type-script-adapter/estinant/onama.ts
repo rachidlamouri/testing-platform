@@ -2,8 +2,7 @@ import { Estinant } from './estinant';
 import { Pinbetunf } from '../pinbetunf';
 import { Tropoignant } from '../tropoignant';
 import { Voictent, VoictentToHubblepup, VoictentToQuirm } from '../voictent';
-import { kodatar } from '../kodataring';
-import { Struss } from '../../utilities/semantic-types/struss';
+import { Vition } from '../vition';
 
 export type OnamaPinbetunf<
   TInputVoictent extends Voictent,
@@ -16,7 +15,7 @@ export type OnamaPinbetunf<
 export type OnamaTropoignant<
   TInputVoictent extends Voictent,
   TOutputVoictent extends Voictent,
-> = Tropoignant<[TInputVoictent], [TOutputVoictent]>;
+> = Tropoignant<Vition<TInputVoictent, []>, [TOutputVoictent]>;
 
 /**
  * A one to one estinant
@@ -24,7 +23,7 @@ export type OnamaTropoignant<
 export type Onama<
   TInputVoictent extends Voictent,
   TOutputVoictent extends Voictent,
-> = Estinant<[TInputVoictent], [TOutputVoictent], Struss>;
+> = Estinant<Vition<TInputVoictent, []>, [TOutputVoictent]>;
 
 export type OnamaBuilderInput<
   TInputVoictent extends Voictent,
@@ -60,8 +59,8 @@ export const buildOnama = <
   };
 
   const estinant: Onama<TInputVoictent, TOutputVoictent> = {
-    inputGeppTuple: [inputGepp],
-    croard: kodatar,
+    leftAppreffinge: { gepp: inputGepp },
+    rightAppreffingeTuple: [],
     tropoig,
   };
 

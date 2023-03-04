@@ -1,7 +1,5 @@
-import { Zorn } from '../utilities/semantic-types/zorn';
-import { VoictentTuple } from './voictent';
+import { Vicken } from './vicken';
 
-export type Croarder<
-  TInputVoictentTuple extends VoictentTuple,
-  TZorn extends Zorn,
-> = (hubblepup: TInputVoictentTuple[number]['hubblepupTuple'][number]) => TZorn;
+export type Croarder<TVicken extends Vicken> = (
+  hubblepup: TVicken['voictentTuple'][number]['hubblepupTuple'][number],
+) => TVicken['zorn'];
