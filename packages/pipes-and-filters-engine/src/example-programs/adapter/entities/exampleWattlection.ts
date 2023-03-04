@@ -1,5 +1,7 @@
 import { buildWattlection } from '../../../type-script-adapter/estinant/wattlection';
 import { Gepp } from '../../../type-script-adapter/gepp';
+import { Vicken } from '../../../type-script-adapter/vicken';
+import { Vition } from '../../../type-script-adapter/vition';
 import { Voictent } from '../../../type-script-adapter/voictent';
 import { ExampleHubblepupA, ExampleAVoictent } from './exampleAVoictent';
 import { ExampleHubblepupB, ExampleBVoictent } from './exampleBVoictent';
@@ -14,16 +16,24 @@ type Joined = {
 type JoinedVoictent = Voictent<GeppJoined, Joined>;
 
 export const exampleWattlection = buildWattlection<
-  [ExampleAVoictent, ExampleBVoictent],
-  JoinedVoictent,
-  number
+  Vition<
+    ExampleAVoictent,
+    [Vicken<ExampleBVoictent, [ExampleBVoictent], number>]
+  >,
+  JoinedVoictent
 >({
-  inputGeppTuple: ['a', 'b'],
+  leftGepp: 'a',
+  rightAppreffingeTuple: [
+    {
+      gepp: 'b',
+      framate: (inputA): [number] => {
+        return [inputA.value];
+      },
+      croard: (inputB): number => inputB.value,
+    },
+  ],
   outputGepp: 'joined',
-  croard: (input) => {
-    return input.value;
-  },
-  pinbe: (inputA, inputB) => {
+  pinbe: (inputA, [inputB]) => {
     const output: Joined = {
       inputA,
       inputB,

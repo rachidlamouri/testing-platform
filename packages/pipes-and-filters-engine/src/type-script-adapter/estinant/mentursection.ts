@@ -8,9 +8,9 @@ import {
   VoictentTupleToGeppTuple,
 } from '../voictent';
 import { Pinbetunf } from '../pinbetunf';
-import { kodatar } from '../kodataring';
-import { Struss } from '../../utilities/semantic-types/struss';
 import { HubblepupTuple } from '../hubblepup';
+import { StralineObject } from '../../utilities/semantic-types/straline';
+import { Vition } from '../vition';
 
 export type MentursectionPinbetunf<
   TInputVoictent extends Voictent,
@@ -23,7 +23,7 @@ export type MentursectionPinbetunf<
 export type MentursectionTropoignant<
   TInputVoictent extends Voictent,
   TOutputVoictentTuple extends VoictentTuple,
-> = Tropoignant<[TInputVoictent], TOutputVoictentTuple>;
+> = Tropoignant<Vition<TInputVoictent, []>, TOutputVoictentTuple>;
 
 /**
  * A one to many estinant
@@ -31,7 +31,7 @@ export type MentursectionTropoignant<
 export type Mentursection<
   TInputVoictent extends Voictent,
   TOutputVoictentTuple extends VoictentTuple,
-> = Estinant<[TInputVoictent], TOutputVoictentTuple, Struss>;
+> = Estinant<Vition<TInputVoictent, []>, TOutputVoictentTuple>;
 
 export type MentursectionBuilderInput<
   TInputVoictent extends Voictent,
@@ -57,12 +57,9 @@ export const buildMentursection = <
     TInputVoictent,
     TOutputVoictentTuple
   > = (input) => {
-    const outputAggregateVoictentRecord: Record<
-      string | number | symbol,
-      unknown
-    > = pinbe(input);
+    const outputAggregateVoictentRecord = pinbe(input) as StralineObject;
 
-    const outputCache = new Map<string | number | symbol, unknown>();
+    const outputCache = new Map<unknown, unknown>();
     Object.entries(outputAggregateVoictentRecord).forEach(([key, value]) => {
       outputCache.set(key, value);
     });
@@ -80,8 +77,8 @@ export const buildMentursection = <
   };
 
   const estinant: Mentursection<TInputVoictent, TOutputVoictentTuple> = {
-    inputGeppTuple: [inputGepp],
-    croard: kodatar,
+    leftAppreffinge: { gepp: inputGepp },
+    rightAppreffingeTuple: [],
     tropoig,
   };
 

@@ -1,12 +1,9 @@
-import {
-  VoictentTuple,
-  VoictentTupleToHubblepupTuple,
-  VoictentTupleToQuirmList,
-} from './voictent';
+import { Vition, VitionToHubblepupInputList } from './vition';
+import { VoictentTuple, VoictentTupleToQuirmList } from './voictent';
 
 export type Tropoignant<
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictentTuple extends VoictentTuple,
 > = (
-  ...inputTuple: VoictentTupleToHubblepupTuple<TInputVoictentTuple>
+  ...inputTuple: VitionToHubblepupInputList<TInputVition>
 ) => VoictentTupleToQuirmList<TOutputVoictentTuple>;

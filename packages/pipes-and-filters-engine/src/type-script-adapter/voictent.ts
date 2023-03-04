@@ -35,6 +35,8 @@ export type VoictentArrayToVoictentItem<TVoictentArray extends Voictent[]> =
 
 export type VoictentTuple = Tuple<Voictent>;
 
+export type VoictentTupleTuple = Tuple<VoictentTuple>;
+
 export type VoictentList = List<Voictent>;
 
 export type VoictentToHubblepup<TVoictent extends Voictent> =
@@ -88,3 +90,23 @@ export type VoictentTupleToVoictentRecordTuple<
 export type VoictentTupleToAggregateVoictentRecord<
   TVoictentTuple extends VoictentTuple,
 > = MergeTuple<VoictentTupleToVoictentRecordTuple<TVoictentTuple>>;
+
+export type VoictentTupleTupleToHubblepupTupleTuple<
+  TVoictentTupleTuple extends VoictentTupleTuple,
+> = {
+  [Index in keyof TVoictentTupleTuple]: VoictentTupleToHubblepupTuple<
+    TVoictentTupleTuple[Index]
+  >;
+};
+
+export type VoictentTupleToGeppIntersection<
+  TVoictentTuple extends VoictentTuple,
+> = MergeTuple<VoictentTupleToGeppTuple<TVoictentTuple>>;
+
+export type VoictentTupleTupleToGeppIntersectionTuple<
+  TVoictentTupleTuple extends VoictentTupleTuple,
+> = {
+  [Index in keyof TVoictentTupleTuple]: VoictentTupleToGeppIntersection<
+    TVoictentTupleTuple[Index]
+  >;
+};

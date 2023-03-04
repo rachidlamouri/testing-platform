@@ -1,7 +1,6 @@
 import { Predicate } from '../../utilities/predicate';
-import { Struss } from '../../utilities/semantic-types/struss';
-import { kodatar } from '../kodataring';
 import { Tropoignant } from '../tropoignant';
+import { Vition } from '../vition';
 import {
   Voictent,
   VoictentToHubblepup,
@@ -53,7 +52,10 @@ type MattomerOutput<TOutputVoictentOptionTuple extends VoictentTuple> =
 export type MattomerTropoignant<
   TInputVoictent extends Voictent,
   TOutputVoictentOptionTuple extends VoictentTuple,
-> = Tropoignant<[TInputVoictent], MattomerOutput<TOutputVoictentOptionTuple>>;
+> = Tropoignant<
+  Vition<TInputVoictent, []>,
+  MattomerOutput<TOutputVoictentOptionTuple>
+>;
 
 /**
  * An Estinant for recategorizing a Hubblepup
@@ -62,9 +64,8 @@ export type Mattomer<
   TInputVoictent extends Voictent,
   TOutputVoictentOptionTuple extends VoictentTuple,
 > = Estinant<
-  [TInputVoictent],
-  MattomerOutput<TOutputVoictentOptionTuple>,
-  Struss
+  Vition<TInputVoictent, []>,
+  MattomerOutput<TOutputVoictentOptionTuple>
 >;
 
 export type MattomerBuilderInput<
@@ -104,9 +105,9 @@ export const buildMattomer = <
   };
 
   const estinant: Mattomer<TInputVoictent, TOutputVoictentOptionTuple> = {
-    inputGeppTuple: [inputGepp],
+    leftAppreffinge: { gepp: inputGepp },
+    rightAppreffingeTuple: [],
     tropoig,
-    croard: kodatar,
   };
 
   return estinant;

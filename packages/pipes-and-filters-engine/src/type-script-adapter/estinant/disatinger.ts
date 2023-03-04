@@ -1,56 +1,46 @@
 import { Estinant } from './estinant';
 import { Pinbetunf } from '../pinbetunf';
 import { Tropoignant } from '../tropoignant';
-import {
-  VoictentTuple,
-  VoictentTupleToGeppTuple,
-  VoictentTupleToHubblepupTuple,
-} from '../voictent';
-import { Croarder } from '../croarder';
-import { Zorn } from '../../utilities/semantic-types/zorn';
+import { Vition, VitionToHubblepupInputList } from '../vition';
+import { RightAppreffingeTuple } from '../appreffinge';
 
-export type DisatingerPinbetunf<TInputVoictentTuple extends VoictentTuple> =
-  Pinbetunf<VoictentTupleToHubblepupTuple<TInputVoictentTuple>, void>;
+export type DisatingerPinbetunf<TInputVition extends Vition> = Pinbetunf<
+  VitionToHubblepupInputList<TInputVition>,
+  void
+>;
 
-export type DisatingerTropoignant<TInputVoictentTuple extends VoictentTuple> =
-  Tropoignant<TInputVoictentTuple, []>;
+export type DisatingerTropoignant<TInputVition extends Vition> = Tropoignant<
+  TInputVition,
+  []
+>;
 
 /**
  * A many to zero estinant
  */
-export type Disatinger<
-  TInputVoictentTuple extends VoictentTuple,
-  TZorn extends Zorn,
-> = Estinant<TInputVoictentTuple, [], TZorn>;
+export type Disatinger<TInputVition extends Vition> = Estinant<
+  TInputVition,
+  []
+>;
 
-export type DisatingerBuilderInput<
-  TInputVoictentTuple extends VoictentTuple,
-  TZorn extends Zorn,
-> = {
-  inputGeppTuple: VoictentTupleToGeppTuple<TInputVoictentTuple>;
-  croard: Croarder<TInputVoictentTuple, TZorn>;
-  pinbe: DisatingerPinbetunf<TInputVoictentTuple>;
+export type DisatingerBuilderInput<TInputVition extends Vition> = {
+  leftGepp: TInputVition['leftVoictent']['gepp'];
+  rightAppreffingeTuple: RightAppreffingeTuple<TInputVition>;
+  pinbe: DisatingerPinbetunf<TInputVition>;
 };
 
-export const buildDisatinger = <
-  TInputVoictentTuple extends VoictentTuple,
-  TZorn extends Zorn,
->({
-  inputGeppTuple,
-  croard,
+export const buildDisatinger = <TInputVition extends Vition>({
+  leftGepp,
+  rightAppreffingeTuple,
   pinbe,
-}: DisatingerBuilderInput<TInputVoictentTuple, TZorn>): Disatinger<
-  TInputVoictentTuple,
-  TZorn
-> => {
-  const tropoig: DisatingerTropoignant<TInputVoictentTuple> = (...inputs) => {
+}: DisatingerBuilderInput<TInputVition>): Disatinger<TInputVition> => {
+  const tropoig: DisatingerTropoignant<TInputVition> = (...inputs) => {
     pinbe(...inputs);
     return [];
   };
 
-  const estinant: Disatinger<TInputVoictentTuple, TZorn> = {
-    inputGeppTuple,
-    croard,
+  const estinant: Disatinger<TInputVition> = {
+    leftAppreffinge: { gepp: leftGepp },
+    rightAppreffingeTuple,
     tropoig,
   };
 

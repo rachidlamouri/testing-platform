@@ -4,70 +4,65 @@ import {
   VoictentTuple,
   VoictentTupleToAggregateVoictentRecord,
   VoictentTupleToGeppTuple,
-  VoictentTupleToHubblepupTuple,
 } from '../voictent';
-import { Zorn } from '../../utilities/semantic-types/zorn';
-import { Croarder } from '../croarder';
 import { Pinbetunf } from '../pinbetunf';
 import { HubblepupTuple } from '../hubblepup';
+import { Vition, VitionToHubblepupInputList } from '../vition';
+import { RightAppreffingeTuple } from '../appreffinge';
+import { Gepp } from '../gepp';
 
 export type CortmumPinbetunf<
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictentTuple extends VoictentTuple,
 > = Pinbetunf<
-  VoictentTupleToHubblepupTuple<TInputVoictentTuple>,
+  VitionToHubblepupInputList<TInputVition>,
   VoictentTupleToAggregateVoictentRecord<TOutputVoictentTuple>
 >;
 
 export type CortmumTropoignant<
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictentTuple extends VoictentTuple,
-> = Tropoignant<TInputVoictentTuple, TOutputVoictentTuple>;
+> = Tropoignant<TInputVition, TOutputVoictentTuple>;
 
 /**
  * A many to many estinant
  */
 export type Cortmum<
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictentTuple extends VoictentTuple,
-  TZorn extends Zorn,
-> = Estinant<TInputVoictentTuple, TOutputVoictentTuple, TZorn>;
+> = Estinant<TInputVition, TOutputVoictentTuple>;
 
 export type CortmumBuilderInput<
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictentTuple extends VoictentTuple,
-  TZorn extends Zorn,
 > = {
-  inputGeppTuple: VoictentTupleToGeppTuple<TInputVoictentTuple>;
+  leftGepp: TInputVition['leftVoictent']['gepp'];
+  rightAppreffingeTuple: RightAppreffingeTuple<TInputVition>;
   outputGeppTuple: VoictentTupleToGeppTuple<TOutputVoictentTuple>;
-  croard: Croarder<TInputVoictentTuple, TZorn>;
-  pinbe: CortmumPinbetunf<TInputVoictentTuple, TOutputVoictentTuple>;
+  pinbe: CortmumPinbetunf<TInputVition, TOutputVoictentTuple>;
 };
 
 export const buildCortmum = <
-  TInputVoictentTuple extends VoictentTuple,
+  TInputVition extends Vition,
   TOutputVoictentTuple extends VoictentTuple,
-  TZorn extends Zorn,
 >({
-  inputGeppTuple,
+  leftGepp,
+  rightAppreffingeTuple,
   outputGeppTuple,
-  croard,
   pinbe,
-}: CortmumBuilderInput<
-  TInputVoictentTuple,
-  TOutputVoictentTuple,
-  TZorn
->): Cortmum<TInputVoictentTuple, TOutputVoictentTuple, TZorn> => {
-  const tropoig: CortmumTropoignant<
-    TInputVoictentTuple,
-    TOutputVoictentTuple
-  > = (...inputs) => {
-    const outputAggregateVoictentRecord: Record<
-      string | number | symbol,
-      unknown
-    > = pinbe(...inputs);
+}: CortmumBuilderInput<TInputVition, TOutputVoictentTuple>): Cortmum<
+  TInputVition,
+  TOutputVoictentTuple
+> => {
+  const tropoig: CortmumTropoignant<TInputVition, TOutputVoictentTuple> = (
+    ...inputTuple
+  ) => {
+    const outputAggregateVoictentRecord = pinbe(...inputTuple) as Record<
+      Gepp,
+      HubblepupTuple
+    >;
 
-    const outputCache = new Map<string | number | symbol, unknown>();
+    const outputCache = new Map<Gepp, HubblepupTuple>();
     Object.entries(outputAggregateVoictentRecord).forEach(([key, value]) => {
       outputCache.set(key, value);
     });
@@ -84,9 +79,11 @@ export const buildCortmum = <
     return outputQuirmList;
   };
 
-  const estinant: Cortmum<TInputVoictentTuple, TOutputVoictentTuple, TZorn> = {
-    inputGeppTuple,
-    croard,
+  const estinant: Cortmum<TInputVition, TOutputVoictentTuple> = {
+    leftAppreffinge: {
+      gepp: leftGepp,
+    },
+    rightAppreffingeTuple,
     tropoig,
   };
 

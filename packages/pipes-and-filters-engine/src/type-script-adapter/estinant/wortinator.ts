@@ -2,8 +2,7 @@ import { Estinant } from './estinant';
 import { Pinbetunf } from '../pinbetunf';
 import { Tropoignant } from '../tropoignant';
 import { Voictent, VoictentToHubblepup } from '../voictent';
-import { kodatar } from '../kodataring';
-import { Struss } from '../../utilities/semantic-types/struss';
+import { Vition } from '../vition';
 
 export type WortinatorPinbetunf<TInputVoictent extends Voictent> = Pinbetunf<
   [VoictentToHubblepup<TInputVoictent>],
@@ -11,15 +10,14 @@ export type WortinatorPinbetunf<TInputVoictent extends Voictent> = Pinbetunf<
 >;
 
 export type WortinatorTropoignant<TInputVoictent extends Voictent> =
-  Tropoignant<[TInputVoictent], []>;
+  Tropoignant<Vition<TInputVoictent, []>, []>;
 
 /**
  * A one to zero estinant
  */
 export type Wortinator<TInputVoictent extends Voictent> = Estinant<
-  [TInputVoictent],
-  [],
-  Struss
+  Vition<TInputVoictent, []>,
+  []
 >;
 
 export type WortinatorBuilderInput<TInputVoictent extends Voictent> = {
@@ -37,8 +35,8 @@ export const buildWortinator = <TInputVoictent extends Voictent>({
   };
 
   const estinant: Wortinator<TInputVoictent> = {
-    inputGeppTuple: [inputGepp],
-    croard: kodatar,
+    leftAppreffinge: { gepp: inputGepp },
+    rightAppreffingeTuple: [],
     tropoig,
   };
 
