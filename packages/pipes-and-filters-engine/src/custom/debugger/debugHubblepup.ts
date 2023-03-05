@@ -2,6 +2,8 @@ import * as uuid from 'uuid';
 import { Hubblepup } from '../../core/hubblepup';
 import { Quirm } from '../../core/quirm';
 import { fileUtilities } from '../../utilities/debugger/fileUtilities';
+// import { buildStruss } from '../../utilities/semantic-types/struss';
+import { isOdeshin } from '../adapter/odeshin';
 
 type IdentifiableHubblepup = {
   identifier: string;
@@ -10,11 +12,16 @@ type IdentifiableHubblepup = {
 
 const hubblepupCache = new Map<Hubblepup, IdentifiableHubblepup>();
 
+const escapePathSeparator = (text: string): string =>
+  text.replaceAll(/\//g, '|');
+
 const getOrInstantiateAndCacheIdentifiableHubblepup = (
   quirm: Quirm,
 ): IdentifiableHubblepup => {
   const identifiableHubblepup = hubblepupCache.get(quirm.hubblepup) ?? {
-    identifier: uuid.v4(),
+    identifier: isOdeshin(quirm.hubblepup)
+      ? quirm.hubblepup.identifier
+      : uuid.v4(),
     hubblepup: quirm.hubblepup,
   };
 
@@ -29,7 +36,7 @@ export const debugHubblepup = (quirm: Quirm): void => {
 
   fileUtilities.writeCacheFile({
     directoryName: quirm.gepp,
-    fileName: identifier,
+    fileName: escapePathSeparator(identifier),
     data: hubblepup,
   });
 };

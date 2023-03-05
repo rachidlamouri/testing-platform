@@ -1,106 +1,195 @@
-type CachedDatum = {
+import * as uuid from 'uuid';
+
+import {
+  CustomNotation,
+  CustomNotationBigInt,
+  CustomNotationBoolean,
+  CustomNotationCircularReference,
+  CustomNotationList,
+  CustomNotationMultilineString,
+  CustomNotationNull,
+  CustomNotationNumber,
+  CustomNotationObject,
+  CustomNotationObjectEntries,
+  CustomNotationObjectEntry,
+  CustomNotationObjectEntryRecord,
+  CustomNotationObjectEntryTuple,
+  CustomNotationRoot,
+  CustomNotationSingleLineString,
+  CustomNotationSymbol,
+  CustomNotationTypeName,
+  CustomNotationUndefined,
+  ReferenceableCustomNotation,
+} from './customNotation';
+import { getPrototypeNameTuple } from './getPrototypeNameTuple';
+import { jsonUtils } from './json';
+
+type CachedDatumWithCustomNotation = {
   datum: unknown;
-  serialization: string;
+  customNotation: ReferenceableCustomNotation;
 };
 
-export const serialize = (
+type CachedPlaceholderUuid = string;
+
+type CachedDatum = CachedDatumWithCustomNotation | CachedPlaceholderUuid;
+
+class DatumCache extends Map<unknown, CachedDatum> {}
+
+const undefinedCustomNotation: CustomNotationUndefined = {
+  typeName: CustomNotationTypeName.UNDEFINED,
+};
+
+const toCustomNotation = (
   datum: unknown,
-  cache = new Map<unknown, CachedDatum | null>(),
-): string => {
+  cache: DatumCache,
+): CustomNotation => {
   if (datum === null) {
-    return 'NULL|null';
+    return datum satisfies CustomNotationNull;
   }
 
   switch (typeof datum) {
     case 'string':
-      return `STRI|${datum}`;
+      if (datum.includes('\n')) {
+        return {
+          typeName: CustomNotationTypeName.MULTILINE_STRING,
+          lines: datum.split('\n'),
+        } satisfies CustomNotationMultilineString;
+      }
+
+      return datum satisfies CustomNotationSingleLineString;
+    case 'symbol': {
+      const customNotation = cache.has(datum)
+        ? ((cache.get(datum) as CachedDatumWithCustomNotation)
+            .customNotation as CustomNotationSymbol)
+        : ({
+            typeName: CustomNotationTypeName.SYMBOL,
+            uuid: uuid.v4(),
+            description: datum.description ?? '',
+          } satisfies CustomNotationSymbol);
+
+      cache.set(datum, {
+        datum,
+        customNotation,
+      });
+
+      return customNotation;
+    }
     case 'number':
-      return `NUMB|${datum}`;
+      return datum satisfies CustomNotationNumber;
     case 'bigint':
-      return `BIGI|${datum}`;
+      return {
+        typeName: CustomNotationTypeName.BIG_INT,
+        value: datum.toString(),
+      } satisfies CustomNotationBigInt;
     case 'boolean':
-      return `BOOL|${datum ? 'true' : 'false'}`;
-    case 'symbol':
-      return `SYMB|${datum.description ?? ''}`;
-    case 'undefined':
-      return 'UNDE|undefined';
+      return datum satisfies CustomNotationBoolean;
+    case 'undefined': {
+      return undefinedCustomNotation;
+    }
     case 'function':
-      return `FUNC|${datum.name}`;
+      throw Error('Function is not supported');
     default:
   }
 
   if (cache.has(datum)) {
-    // TODO: create a local identifier that we can use to provide a path to the referenced item
+    const cached = cache.get(datum) as CachedDatum;
 
-    const cachedValue = cache.get(datum) as CachedDatum | null;
-
-    if (cachedValue === null) {
-      // TODO: investigate how this happens further
-      return 'CIRC: ???';
+    if (typeof cached === 'string') {
+      /**
+       * This happens when we attempt to serialize an array or object again, before we finish serializing it the first time.
+       * This might seem obvious, but I kept forgetting how this happens, so keep that in mind before you delete this note.
+       * Maybe we don't need a note on why we should keep a note, but if we deleted the previous line then we'd wonder why we have the first line.
+       */
+      return {
+        typeName: CustomNotationTypeName.CIRCULAR_REFERENCE,
+        uuid: cached,
+      } satisfies CustomNotationCircularReference;
     }
 
-    return cachedValue.serialization;
+    return cached.customNotation;
   }
 
-  cache.set(datum, null);
+  const referenceUuid = uuid.v4();
+  let customNotation: CustomNotation;
+
+  cache.set(datum, referenceUuid);
 
   if (Array.isArray(datum)) {
-    const elementSerializations = datum.map((item) => serialize(item, cache));
+    const values = datum.map((item) => toCustomNotation(item, cache));
 
-    const serialization = [
-      'ARRA: [',
-      ...elementSerializations.map((text) =>
-        text
-          .split('\n')
-          .map((line) => `  ${line}`)
-          .join('\n'),
-      ),
-      ']',
-    ].join('\n');
-
-    cache.set(datum, { datum, serialization });
-
-    return serialization;
-  }
-
-  let entries: [unknown, unknown][];
-
-  const constructorName = datum.constructor.name;
-
-  if (datum instanceof Map) {
-    entries = [...datum.entries()];
+    customNotation = {
+      typeName: CustomNotationTypeName.LIST,
+      uuid: referenceUuid,
+      values,
+    } satisfies CustomNotationList;
   } else {
-    entries = Reflect.ownKeys(datum).map((key) => {
-      const value = (datum as Record<string | symbol, unknown>)[key];
+    let unknownEntries: [unknown, unknown][];
 
-      return [key, value];
-    });
+    if (datum instanceof Map) {
+      unknownEntries = [...datum.entries()];
+    } else {
+      unknownEntries = Reflect.ownKeys(datum).map((key) => {
+        const value = (datum as Record<string | symbol, unknown>)[key];
+        return [key, value];
+      });
+    }
+
+    let entries: CustomNotationObjectEntries;
+
+    const originalEntries: CustomNotationObjectEntryTuple =
+      unknownEntries.map<CustomNotationObjectEntry>(([key, value]) => [
+        toCustomNotation(key, cache),
+        toCustomNotation(value, cache),
+      ]);
+
+    if (originalEntries.every(([key]) => typeof key === 'string')) {
+      entries = Object.fromEntries(
+        originalEntries,
+      ) as CustomNotationObjectEntryRecord;
+    } else {
+      entries = originalEntries;
+    }
+
+    // Removing the last item because every object has "Object" in its prototype chain
+    const prototypeNameTuple = getPrototypeNameTuple(datum);
+    prototypeNameTuple.pop();
+
+    customNotation = {
+      typeName: CustomNotationTypeName.OBJECT,
+      uuid: referenceUuid,
+      prototypeNameTuple,
+      entries,
+    } satisfies CustomNotationObject;
+
+    if (prototypeNameTuple.length === 0) {
+      delete customNotation.prototypeNameTuple;
+    }
   }
 
-  type Property = {
-    serializedKey: string;
-    serializedValue: string;
+  cache.set(datum, { datum, customNotation });
+
+  return customNotation;
+};
+
+export const serialize = (datum: unknown): string => {
+  const cache = new DatumCache();
+  const customNotation = toCustomNotation(datum, cache);
+
+  const root: CustomNotationRoot = {
+    datum: customNotation,
+    // TODO: store a path to the original referenced item and not a duplicate of the item
+    // TODO: only use the reference map for items that are stored multiple times
+    referenceMap: Object.fromEntries(
+      [...cache.values()]
+        .filter((cached): cached is CachedDatumWithCustomNotation => {
+          return typeof cached === 'object';
+        })
+        .map<[string, ReferenceableCustomNotation]>((cached) => [
+          cached.customNotation.uuid,
+          cached.customNotation,
+        ]),
+    ),
   };
 
-  const properties: Property[] = entries.map<Property>(([key, value]) => ({
-    serializedKey: serialize(key, cache),
-    serializedValue: serialize(value, cache),
-  }));
-
-  const constructorId = constructorName.toUpperCase().slice(0, 4);
-
-  const serialization = [
-    `${constructorId}: {`,
-    ...properties.map(({ serializedKey, serializedValue }) => {
-      return [
-        `  [${serializedKey}]:`,
-        ...serializedValue.split('\n').map((line) => `    ${line}`),
-      ].join('\n');
-    }),
-    '}',
-  ].join('\n');
-
-  cache.set(datum, { datum, serialization });
-
-  return serialization;
+  return jsonUtils.multilineSerialize(root);
 };

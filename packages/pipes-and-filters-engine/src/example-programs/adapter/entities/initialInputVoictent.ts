@@ -2,13 +2,14 @@ import { Gepp } from '../../../type-script-adapter/gepp';
 import { Voictent } from '../../../type-script-adapter/voictent';
 import { ExampleHubblepup } from './exampleHubblepup';
 
-export type InitialInputGepp = Gepp<'initial-input'>;
+export const INITIAL_INPUT_GEPP = 'initial-input';
+
+export type InitialInputGepp = Gepp<typeof INITIAL_INPUT_GEPP>;
 
 export type InitialInputVoictent = Voictent<InitialInputGepp, ExampleHubblepup>;
 
-export const initialInputVoictent: InitialInputVoictent = {
-  gepp: 'initial-input',
-  hubblepupTuple: [
+export const initialInputHubblepupTuple: InitialInputVoictent['hubblepupTuple'] =
+  [
     {
       key: 'a',
       value: 1,
@@ -25,5 +26,4 @@ export const initialInputVoictent: InitialInputVoictent = {
       key: 'b',
       value: 2,
     },
-  ],
-};
+  ];
