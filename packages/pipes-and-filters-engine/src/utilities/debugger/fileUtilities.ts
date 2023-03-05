@@ -9,8 +9,8 @@ fs.rmSync(DEBUG_DIR_PATH, { recursive: true, force: true });
 fs.mkdirSync(CACHE_PATH, { recursive: true });
 
 export type FileCacheWriterInput = {
-  directoryName: string | symbol;
-  fileName: string | symbol;
+  directoryName: string;
+  fileName: string;
   data: unknown;
 };
 

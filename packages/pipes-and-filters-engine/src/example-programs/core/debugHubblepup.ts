@@ -4,7 +4,7 @@ import { fileUtilities } from '../../utilities/debugger/fileUtilities';
 import { buildStruss } from '../../utilities/semantic-types/struss';
 
 type IdentifiableHubblepup = {
-  identifier: symbol;
+  identifier: string;
   hubblepup: Hubblepup;
 };
 
