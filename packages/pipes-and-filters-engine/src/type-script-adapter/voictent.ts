@@ -110,3 +110,10 @@ export type VoictentTupleTupleToGeppIntersectionTuple<
     TVoictentTupleTuple[Index]
   >;
 };
+
+export type VoictentUnionToAggregateVoictentRecord<
+  TVoictentUnion extends Voictent,
+> = {
+  [TVoictent in TVoictentUnion as TVoictent['gepp'] &
+    string]: TVoictent['hubblepupTuple'];
+};
