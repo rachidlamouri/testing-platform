@@ -3,6 +3,6 @@ import * as uuid from 'uuid';
 /**
  * This is for references that are meant to be unique.
  */
-export type Struss = symbol;
+export type Struss = string;
 
-export const buildStruss = (): Struss => Symbol(uuid.v4());
+export const buildStruss = (): Struss => uuid.v4();

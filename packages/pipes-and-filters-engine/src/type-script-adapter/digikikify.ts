@@ -7,7 +7,12 @@ import { Quirm } from '../core/quirm';
 import { StralineTuple } from '../utilities/semantic-types/straline';
 import { Estinant } from './estinant/estinant';
 import { VickenTupleToVoictentTuple } from './vicken';
-import { Voictent, VoictentArrayToVoictentItem } from './voictent';
+import {
+  VoictentArrayToVoictentItem,
+  VoictentUnionToAggregateVoictentRecord,
+} from './voictent';
+import { Gepp } from './gepp';
+import { HubblepupTuple } from './hubblepup';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyEstinant = Estinant<any, any>;
@@ -31,8 +36,19 @@ type EstinantTupleToCombinedVoictentTuple<
     : never;
 };
 
+type EstinantTupleToVoictentUnion<TEstinantTuple extends AnyEstinantTuple> =
+  EstinantTupleToCombinedVoictentTuple<TEstinantTuple>[number];
+
 type EstinantTupleToVoictentArray<TEstinantTuple extends AnyEstinantTuple> =
-  EstinantTupleToCombinedVoictentTuple<TEstinantTuple>[number][];
+  EstinantTupleToVoictentUnion<TEstinantTuple>[];
+
+type EstinantTupleToPartialAggregateVoictentRecord<
+  TEstinantTuple extends AnyEstinantTuple,
+> = Partial<
+  VoictentUnionToAggregateVoictentRecord<
+    EstinantTupleToVoictentUnion<TEstinantTuple>
+  >
+>;
 
 type OnHubblepupAddedToVoictentsHandler<
   TEstinantTuple extends AnyEstinantTuple,
@@ -43,8 +59,8 @@ type OnHubblepupAddedToVoictentsHandler<
 ) => void;
 
 type DigikikifyInput<TEstinantTuple extends AnyEstinantTuple> = {
+  initialVoictentsByGepp: EstinantTupleToPartialAggregateVoictentRecord<TEstinantTuple>;
   estinantTuple: TEstinantTuple;
-  initialVoictentsList: EstinantTupleToVoictentArray<TEstinantTuple>;
   onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler<TEstinantTuple>;
 };
 
@@ -58,21 +74,21 @@ type InferredDigikikifyInput<TPotentialEstinantTuple> =
  * is not an EstinantTuple then all inputs get inferred to empty lists.
  */
 export const digikikify = <TPotentialEstinantTuple extends StralineTuple>({
+  initialVoictentsByGepp,
   estinantTuple,
-  initialVoictentsList,
   onHubblepupAddedToVoictents,
 }: InferredDigikikifyInput<TPotentialEstinantTuple>): void => {
   coreDigikikify({
-    initialQuirmTuple: (initialVoictentsList as Voictent[]).flatMap<Quirm>(
-      (voictent) => {
-        return voictent.hubblepupTuple.map<Quirm>((hubblepup) => {
-          return {
-            gepp: voictent.gepp,
-            hubblepup,
-          };
-        });
-      },
-    ),
+    initialQuirmTuple: Object.entries(
+      initialVoictentsByGepp as Record<Gepp, HubblepupTuple>,
+    ).flatMap<Quirm>(([gepp, hubblepupTuple]) => {
+      return hubblepupTuple.map<Quirm>((hubblepup) => {
+        return {
+          gepp,
+          hubblepup,
+        };
+      });
+    }),
     estinantTuple: estinantTuple as CoreEstinantTuple,
     onHubblepupAddedToVoictents:
       onHubblepupAddedToVoictents as CoreOnHubblepupAddedToVoictentsHandler,
