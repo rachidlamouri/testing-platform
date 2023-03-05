@@ -11,21 +11,33 @@ fs.mkdirSync(CACHE_PATH, { recursive: true });
 export type FileCacheWriterInput = {
   directoryName: string;
   fileName: string;
-  data: unknown;
-};
+  fileExtensionSuffix?: string;
+} & ({ data: unknown } | { text: string });
+
+const hasData = (
+  input: FileCacheWriterInput,
+): input is Extract<FileCacheWriterInput, { data: unknown }> => 'data' in input;
 
 export const fileUtilities = {
-  writeCacheFile: ({
-    directoryName,
-    fileName,
-    data,
-  }: FileCacheWriterInput): void => {
+  writeCacheFile: (input: FileCacheWriterInput): void => {
+    let fileExtensionSuffix: string;
+    if (input.fileExtensionSuffix !== undefined) {
+      fileExtensionSuffix = input.fileExtensionSuffix;
+    } else if (hasData(input)) {
+      fileExtensionSuffix = 'json';
+    } else {
+      fileExtensionSuffix = 'txt';
+    }
+
     const filePath = posix.join(
       CACHE_PATH,
-      serialize(directoryName),
-      `${serialize(fileName)}.txt`,
+      input.directoryName.toString(),
+      `${input.fileName.toString()}.${fileExtensionSuffix}`,
     );
     fs.mkdirSync(posix.dirname(filePath), { recursive: true });
-    fs.writeFileSync(filePath, serialize(data));
+
+    const text: string = hasData(input) ? serialize(input.data) : input.text;
+
+    fs.writeFileSync(filePath, text);
   },
 };
