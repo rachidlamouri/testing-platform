@@ -3,23 +3,19 @@ import {
   CustomNotationBigInt,
   CustomNotationBoolean,
   CustomNotationCircularReference,
-  CustomNotationList,
   CustomNotationMultilineString,
   CustomNotationNull,
   CustomNotationNumber,
-  CustomNotationObject,
   CustomNotationObjectEntries,
   CustomNotationObjectEntry,
   CustomNotationObjectEntryRecord,
   CustomNotationObjectEntryTuple,
-  CustomNotationRoot,
   CustomNotationSingleLineString,
   CustomNotationSymbol,
   CustomNotationTypeName,
   CustomNotationUndefined,
   ReferenceableCustomNotation,
 } from './customNotation';
-import { getPrototypeNameTuple } from './getPrototypeNameTuple';
 import { jsonUtils } from './json';
 import { buildStruss } from './semantic-types/struss';
 
@@ -109,86 +105,47 @@ const toCustomNotation = (
   }
 
   const referenceUuid = buildStruss();
-  let customNotation: CustomNotation;
 
   cache.set(datum, referenceUuid);
 
   if (Array.isArray(datum)) {
     const values = datum.map((item) => toCustomNotation(item, cache));
 
-    customNotation = {
-      typeName: CustomNotationTypeName.LIST,
-      uuid: referenceUuid,
-      values,
-    } satisfies CustomNotationList;
+    return values;
+  }
+  let unknownEntries: [unknown, unknown][];
+
+  if (datum instanceof Map) {
+    unknownEntries = [...datum.entries()];
   } else {
-    let unknownEntries: [unknown, unknown][];
-
-    if (datum instanceof Map) {
-      unknownEntries = [...datum.entries()];
-    } else {
-      unknownEntries = Reflect.ownKeys(datum).map((key) => {
-        const value = (datum as Record<string | symbol, unknown>)[key];
-        return [key, value];
-      });
-    }
-
-    let entries: CustomNotationObjectEntries;
-
-    const originalEntries: CustomNotationObjectEntryTuple =
-      unknownEntries.map<CustomNotationObjectEntry>(([key, value]) => [
-        toCustomNotation(key, cache),
-        toCustomNotation(value, cache),
-      ]);
-
-    if (originalEntries.every(([key]) => typeof key === 'string')) {
-      entries = Object.fromEntries(
-        originalEntries,
-      ) as CustomNotationObjectEntryRecord;
-    } else {
-      entries = originalEntries;
-    }
-
-    // Removing the last item because every object has "Object" in its prototype chain
-    const prototypeNameTuple = getPrototypeNameTuple(datum);
-    prototypeNameTuple.pop();
-
-    customNotation = {
-      typeName: CustomNotationTypeName.OBJECT,
-      uuid: referenceUuid,
-      prototypeNameTuple,
-      entries,
-    } satisfies CustomNotationObject;
-
-    if (prototypeNameTuple.length === 0) {
-      delete customNotation.prototypeNameTuple;
-    }
+    unknownEntries = Reflect.ownKeys(datum).map((key) => {
+      const value = (datum as Record<string | symbol, unknown>)[key];
+      return [key, value];
+    });
   }
 
-  cache.set(datum, { datum, customNotation });
+  let entries: CustomNotationObjectEntries;
 
-  return customNotation;
+  const originalEntries: CustomNotationObjectEntryTuple =
+    unknownEntries.map<CustomNotationObjectEntry>(([key, value]) => [
+      toCustomNotation(key, cache),
+      toCustomNotation(value, cache),
+    ]);
+
+  if (originalEntries.every(([key]) => typeof key === 'string')) {
+    entries = Object.fromEntries(
+      originalEntries,
+    ) as CustomNotationObjectEntryRecord;
+  } else {
+    entries = originalEntries;
+  }
+
+  return entries;
 };
 
 export const serialize = (datum: unknown): string => {
   const cache = new DatumCache();
   const customNotation = toCustomNotation(datum, cache);
 
-  const root: CustomNotationRoot = {
-    datum: customNotation,
-    // TODO: store a path to the original referenced item and not a duplicate of the item
-    // TODO: only use the reference map for items that are stored multiple times
-    referenceMap: Object.fromEntries(
-      [...cache.values()]
-        .filter((cached): cached is CachedDatumWithCustomNotation => {
-          return typeof cached === 'object';
-        })
-        .map<[string, ReferenceableCustomNotation]>((cached) => [
-          cached.customNotation.uuid,
-          cached.customNotation,
-        ]),
-    ),
-  };
-
-  return jsonUtils.multilineSerialize(root);
+  return jsonUtils.multilineSerialize(customNotation);
 };
