@@ -1,5 +1,6 @@
 import {
   Json,
+  JsonArray,
   JsonBoolean,
   JsonNull,
   JsonNumber,
@@ -86,11 +87,16 @@ type CustomNotationArray = CustomNotationWithMetadata<
 
 type CustomNotationTuple = CustomNotationWithMetadata<
   CustomNotationTypeName.LIST,
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  Referenceable<{ values: readonly CustomNotation[] }>
+  Referenceable<{
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    values: readonly CustomNotation[];
+  }>
 >;
 
-export type CustomNotationList = CustomNotationArray | CustomNotationTuple;
+export type CustomNotationList =
+  | CustomNotationArray
+  | CustomNotationTuple
+  | JsonArray;
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 export type CustomNotationObjectEntry = [CustomNotation, CustomNotation];
@@ -107,13 +113,16 @@ export type CustomNotationObjectEntries =
   | CustomNotationObjectEntryTuple
   | CustomNotationObjectEntryRecord;
 
-export type CustomNotationObject = CustomNotationWithMetadata<
-  CustomNotationTypeName.OBJECT,
-  Referenceable<{
-    prototypeNameTuple?: JsonString[];
-    entries: CustomNotationObjectEntries;
-  }>
->;
+export type CustomNotationObject =
+  | CustomNotationWithMetadata<
+      CustomNotationTypeName.OBJECT,
+      Referenceable<{
+        prototypeNameTuple?: JsonString[];
+        entries: CustomNotationObjectEntries;
+      }>
+    >
+  | CustomNotationObjectEntryTuple
+  | JsonObject;
 
 export type CustomNotationCircularReference = CustomNotationWithMetadata<
   CustomNotationTypeName.CIRCULAR_REFERENCE,

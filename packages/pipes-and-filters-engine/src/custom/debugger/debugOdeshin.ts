@@ -10,7 +10,7 @@ type IdentifiableHubblepup = {
 const odeshinCache = new Map<Odeshin, IdentifiableHubblepup>();
 
 const escapePathSeparator = (text: string): string =>
-  text.replaceAll(/\//g, '|');
+  text.replaceAll(/\//g, ' | ');
 
 const getOrInstantiateAndCacheIdentifiableHubblepup = (
   plifal: Plifal,
