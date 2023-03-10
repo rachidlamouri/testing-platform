@@ -17,7 +17,7 @@ export const exampleOutputEstinant = buildOnama<
   outputGepp: 'example-output',
   pinbe: (input) => {
     return {
-      identifier: input.identifier,
+      zorn: input.zorn,
       grition: input.grition + 1,
     };
   },

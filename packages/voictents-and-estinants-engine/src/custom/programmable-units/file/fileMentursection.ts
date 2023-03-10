@@ -80,7 +80,7 @@ export const fileMentursection = buildMentursection<
       };
 
       return {
-        identifier: filePath,
+        zorn: filePath,
         grition,
       };
     });

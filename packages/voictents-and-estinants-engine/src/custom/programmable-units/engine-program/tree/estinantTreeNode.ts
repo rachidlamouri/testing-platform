@@ -62,12 +62,12 @@ export const estinantTreeNodeWattlection = buildWattlection<
   rightAppreffingeTuple: [
     {
       gepp: ESTINANT_INPUT_LIST_GEPP,
-      croard: (rightInput): string => rightInput.identifier,
+      croard: (rightInput): string => rightInput.zorn,
       framate: (leftInput) => [leftInput.grition.inputListIdentifier] as const,
     },
     {
       gepp: ESTINANT_OUTPUT_LIST_GEPP,
-      croard: (rightInput): string => rightInput.identifier,
+      croard: (rightInput): string => rightInput.zorn,
       framate: (leftInput) => [leftInput.grition.outputListIdentifier] as const,
     },
   ],
@@ -76,7 +76,7 @@ export const estinantTreeNodeWattlection = buildWattlection<
     const estinantParent = leftInput.grition;
 
     return {
-      identifier: leftInput.identifier,
+      zorn: leftInput.zorn,
       grition: {
         programName: estinantParent.programName,
         estinantName: estinantParent.estinantName,

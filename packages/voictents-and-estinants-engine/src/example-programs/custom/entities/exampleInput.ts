@@ -8,6 +8,6 @@ export type ExampleInputGepp = typeof EXAMPLE_INPUT_GEPP;
 export type ExampleInputVoictent = Voictent<ExampleInputGepp, ExampleOdeshin>;
 
 export const exampleInputOdeshin: ExampleOdeshin = {
-  identifier: 'example',
+  zorn: 'example',
   grition: 1,
 };

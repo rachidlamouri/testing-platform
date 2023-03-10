@@ -114,6 +114,6 @@ export const SERIALIZE_TEST_CASE_INPUT_TUPLE = [
   ...circularReferenceTestCases,
   collectionOfCollectionsTestCase,
 ].map<SerializeTestInputCaseHubblepup>((testCase) => ({
-  identifier: testCase.description,
+  zorn: testCase.description,
   grition: testCase.input,
 }));

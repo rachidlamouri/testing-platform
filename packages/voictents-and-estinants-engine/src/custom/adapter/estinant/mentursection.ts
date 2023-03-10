@@ -52,7 +52,7 @@ export const buildMentursection = <
     inputGepp,
     outputGeppTuple,
     pinbe: (input) => {
-      const { identifier, grition: inputGrition } = input;
+      const { zorn, grition: inputGrition } = input;
 
       const odeshinVoictentRecord = pinbe(
         inputGrition,
@@ -62,7 +62,7 @@ export const buildMentursection = <
         (gepp) => {
           const hubblepupTuple = odeshinVoictentRecord[gepp].map<Hubblepup>(
             (outputGrition) => ({
-              identifier,
+              identifier: zorn,
               grition: outputGrition,
             }),
           );

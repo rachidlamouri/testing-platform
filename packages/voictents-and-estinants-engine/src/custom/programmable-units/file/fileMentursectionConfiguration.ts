@@ -46,7 +46,7 @@ export const FULL_FILE_MENTURSECTION_CONFIGURATION: FileMentursectionConfigurati
 
 export const PIPES_AND_FILTERS_FILE_MENTURSECTION_CONFIGURATION: FileMentursectionConfigurationHubblepup =
   {
-    directoryPath: 'packages/pipes-and-filters-engine/src',
+    directoryPath: 'packages/voictents-and-estinants-engine/src',
     ignoredNodePathConfigurations: [],
   };
 

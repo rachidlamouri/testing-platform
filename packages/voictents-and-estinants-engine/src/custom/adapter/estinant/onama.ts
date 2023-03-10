@@ -36,8 +36,8 @@ export const buildOnama = <
   buildTypeScriptAdaptedOnama<TInputVoictent, TOutputVoictent>({
     inputGepp,
     outputGepp,
-    pinbe: ({ identifier, grition }) => ({
-      identifier,
+    pinbe: ({ zorn, grition }) => ({
+      zorn,
       grition: pinbe(grition),
     }),
   });
