@@ -7,6 +7,18 @@ const CACHE_PATH = posix.join(DEBUG_DIR_PATH, 'cache');
 const OUTPUT_PATH = posix.join(DEBUG_DIR_PATH, 'output');
 
 fs.rmSync(DEBUG_DIR_PATH, { recursive: true, force: true });
+
+// TODO: decide if we want this logging here
+const directoryLoggingShenanigans = (directoryPath: string): void => {
+  if (!fs.existsSync(directoryPath)) {
+    // eslint-disable-next-line no-console
+    console.log('NEW:', directoryPath);
+  }
+};
+
+directoryLoggingShenanigans(CACHE_PATH);
+directoryLoggingShenanigans(OUTPUT_PATH);
+
 fs.mkdirSync(CACHE_PATH, { recursive: true });
 fs.mkdirSync(OUTPUT_PATH, { recursive: true });
 
@@ -36,7 +48,11 @@ export const fileUtilities = {
       input.directoryName.toString(),
       `${input.fileName.toString()}.${fileExtensionSuffix}`,
     );
-    fs.mkdirSync(posix.dirname(filePath), { recursive: true });
+
+    const directoryPath = posix.dirname(filePath);
+    directoryLoggingShenanigans(directoryPath);
+
+    fs.mkdirSync(directoryPath, { recursive: true });
 
     const text: string = hasData(input) ? serialize(input.data) : input.text;
 
