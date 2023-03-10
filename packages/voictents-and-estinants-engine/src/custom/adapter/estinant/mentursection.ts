@@ -3,15 +3,13 @@ import {
   Mentursection,
   buildMentursection as buildTypeScriptAdaptedMentursection,
 } from '../../../type-script-adapter/estinant/mentursection';
-import {
-  Hubblepup,
-  HubblepupTuple,
-} from '../../../type-script-adapter/hubblepup';
+import { HubblepupTuple } from '../../../type-script-adapter/hubblepup';
 import { Pinbetunf } from '../../../type-script-adapter/pinbetunf';
 import {
   VoictentTupleToAggregateVoictentRecord,
   VoictentTupleToGeppTuple,
 } from '../../../type-script-adapter/voictent';
+import { Odeshin } from '../odeshin';
 import {
   OdeshinVoictent,
   OdeshinVoictentRecord,
@@ -60,9 +58,9 @@ export const buildMentursection = <
 
       const outputEntries = outputGeppTuple.map<[Gepp, HubblepupTuple]>(
         (gepp) => {
-          const hubblepupTuple = odeshinVoictentRecord[gepp].map<Hubblepup>(
+          const hubblepupTuple = odeshinVoictentRecord[gepp].map<Odeshin>(
             (outputGrition) => ({
-              identifier: zorn,
+              zorn,
               grition: outputGrition,
             }),
           );

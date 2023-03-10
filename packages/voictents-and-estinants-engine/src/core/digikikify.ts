@@ -1,5 +1,6 @@
 import { ZornTuple } from '../utilities/semantic-types/zorn';
 import { Ajorken } from './ajorken';
+import { Appreffinge, getIsWibiz } from './appreffinge';
 import { Cology, CologySet } from './cology';
 import { LeftDreanor, RightDreanor } from './dreanor';
 import { Estinant, EstinantTuple } from './estinant';
@@ -7,7 +8,7 @@ import { Gepp } from './gepp';
 import { Hubblepup } from './hubblepup';
 import { Lanbe } from './lanbe';
 import { Mabz } from './mabz';
-import { Platomity2 } from './platomity';
+import { Platomity } from './platomity';
 import { Prected } from './prected';
 import { Procody } from './procody';
 import { Quirm, QuirmTuple } from './quirm';
@@ -43,19 +44,21 @@ export const digikikify = ({
     });
   };
 
-  const createLanbe = (estinant: Estinant, gepp: Gepp): Lanbe => {
-    const voictent = tabilly.getOrInstantiateAndGetVoictent(gepp);
-    const lanbe = voictent.createLanbe(estinant.tropoig.name);
+  const createLanbe = (estinant: Estinant, appreffinge: Appreffinge): Lanbe => {
+    const voictent = tabilly.getOrInstantiateAndGetVoictent(appreffinge.gepp);
+    const lanbe = getIsWibiz(appreffinge)
+      ? voictent.createVoictentLanbe(estinant.tropoig.name)
+      : voictent.createVoictentItemLanbe(estinant.tropoig.name);
     return lanbe;
   };
 
-  const platomities = estinantTuple.map<Platomity2>((estinant) => {
+  const platomityList = estinantTuple.map<Platomity>((estinant) => {
     const { leftAppreffinge, rightAppreffingeTuple } = estinant;
 
     const leftDreanor: LeftDreanor = {
       isLeft: true,
       gepp: leftAppreffinge.gepp,
-      lanbe: createLanbe(estinant, leftAppreffinge.gepp),
+      lanbe: createLanbe(estinant, leftAppreffinge),
     };
 
     const rightDreanorTuple = rightAppreffingeTuple.map<RightDreanor>(
@@ -64,14 +67,14 @@ export const digikikify = ({
           isLeft: false,
           gepp: rightAppreffinge.gepp,
           framate: rightAppreffinge.framate,
-          lanbe: createLanbe(estinant, rightAppreffinge.gepp),
+          lanbe: createLanbe(estinant, rightAppreffinge),
           croard: rightAppreffinge.croard,
           prected: new Prected(),
         };
       },
     );
 
-    const platomity: Platomity2 = {
+    const platomity: Platomity = {
       estinant,
       leftDreanor,
       rightDreanorTuple,
@@ -83,15 +86,13 @@ export const digikikify = ({
 
   addToTabilly(initialQuirmTuple);
 
-  const canPlatomityAdvance = (platomity: Platomity2): boolean => {
+  const canPlatomityAdvance = (platomity: Platomity): boolean => {
     return [platomity.leftDreanor, ...platomity.rightDreanorTuple].some(
       (dreanor) => dreanor.lanbe.hasNext(),
     );
   };
 
-  const executePlatomity = (platomity: Platomity2): void => {
-    // const readyCologies: Cology[] = [];
-
+  const executePlatomity = (platomity: Platomity): void => {
     const touchedCologySet = new CologySet();
 
     [platomity.leftDreanor, ...platomity.rightDreanorTuple]
@@ -174,8 +175,12 @@ export const digikikify = ({
     });
   };
 
-  while (platomities.some(canPlatomityAdvance)) {
-    platomities.filter(canPlatomityAdvance).forEach((platomity) => {
+  while (platomityList.some(canPlatomityAdvance)) {
+    [...tabilly.values()].forEach((voictent) => {
+      voictent.onTickStart();
+    });
+
+    platomityList.filter(canPlatomityAdvance).forEach((platomity) => {
       executePlatomity(platomity);
     });
   }
