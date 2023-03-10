@@ -9,6 +9,7 @@ const exampleGeppInitialInput: Gepp = 'gepp-initial-input';
 
 const exampleGeppSerialized: Gepp = 'gepp-serialized';
 const exampleGeppJoined: Gepp = 'gepp-joined';
+const exampleWibixGepp: Gepp = 'gepp-accumulated';
 
 const hubblepupA1: Hubblepup = { a: 1 };
 const hubblepupA2: Hubblepup = { a: 2 };
@@ -94,6 +95,22 @@ const exampleWortinatorEstinant: Estinant = {
   },
 };
 
+const exampleWibixEstinant: Estinant = {
+  leftAppreffinge: {
+    gepp: exampleGeppInitialInput,
+    isWibiz: true,
+  },
+  rightAppreffingeTuple: [],
+  tropoig: (leftInput) => {
+    return [
+      {
+        gepp: exampleWibixGepp,
+        hubblepup: leftInput,
+      },
+    ];
+  },
+};
+
 digikikify({
   initialQuirmTuple: [
     ...initialCollection.map((hubblepup): Quirm => {
@@ -108,6 +125,7 @@ digikikify({
     exampleOnamaEstinant,
     exampleMentursectionEstinant,
     exampleCortmumEstinant,
+    exampleWibixEstinant,
   ],
   onHubblepupAddedToVoictents: debugHubblepup,
 });
