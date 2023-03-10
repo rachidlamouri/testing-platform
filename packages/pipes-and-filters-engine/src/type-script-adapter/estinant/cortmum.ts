@@ -1,15 +1,14 @@
 import { Estinant } from './estinant';
 import { Tropoignant } from '../tropoignant';
 import {
+  VoictentRecord,
   VoictentTuple,
   VoictentTupleToAggregateVoictentRecord,
   VoictentTupleToGeppTuple,
 } from '../voictent';
 import { Pinbetunf } from '../pinbetunf';
-import { HubblepupTuple } from '../hubblepup';
 import { Vition, VitionToHubblepupInputList } from '../vition';
 import { RightAppreffingeTuple } from '../appreffinge';
-import { Gepp } from '../gepp';
 
 export type CortmumPinbetunf<
   TInputVition extends Vition,
@@ -57,18 +56,12 @@ export const buildCortmum = <
   const tropoig: CortmumTropoignant<TInputVition, TOutputVoictentTuple> = (
     ...inputTuple
   ) => {
-    const outputAggregateVoictentRecord = pinbe(...inputTuple) as Record<
-      Gepp,
-      HubblepupTuple
-    >;
-
-    const outputCache = new Map<Gepp, HubblepupTuple>();
-    Object.entries(outputAggregateVoictentRecord).forEach(([key, value]) => {
-      outputCache.set(key, value);
-    });
+    const outputAggregateVoictentRecord = pinbe(
+      ...inputTuple,
+    ) as VoictentRecord;
 
     const outputQuirmList = outputGeppTuple.flatMap((gepp) => {
-      const hubblepupTuple = outputCache.get(gepp) as HubblepupTuple;
+      const hubblepupTuple = outputAggregateVoictentRecord[gepp];
 
       return hubblepupTuple.map((hubblepup) => ({
         gepp,

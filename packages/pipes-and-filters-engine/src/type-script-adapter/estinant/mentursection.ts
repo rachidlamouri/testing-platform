@@ -2,14 +2,13 @@ import { Estinant } from './estinant';
 import { Tropoignant } from '../tropoignant';
 import {
   Voictent,
+  VoictentRecord,
   VoictentToHubblepup,
   VoictentTuple,
   VoictentTupleToAggregateVoictentRecord,
   VoictentTupleToGeppTuple,
 } from '../voictent';
 import { Pinbetunf } from '../pinbetunf';
-import { HubblepupTuple } from '../hubblepup';
-import { StralineObject } from '../../utilities/semantic-types/straline';
 import { Vition } from '../vition';
 
 export type MentursectionPinbetunf<
@@ -57,15 +56,10 @@ export const buildMentursection = <
     TInputVoictent,
     TOutputVoictentTuple
   > = (input) => {
-    const outputAggregateVoictentRecord = pinbe(input) as StralineObject;
-
-    const outputCache = new Map<unknown, unknown>();
-    Object.entries(outputAggregateVoictentRecord).forEach(([key, value]) => {
-      outputCache.set(key, value);
-    });
+    const outputAggregateVoictentRecord = pinbe(input) as VoictentRecord;
 
     const outputQuirmList = outputGeppTuple.flatMap((gepp) => {
-      const hubblepupTuple = outputCache.get(gepp) as HubblepupTuple;
+      const hubblepupTuple = outputAggregateVoictentRecord[gepp];
 
       return hubblepupTuple.map((hubblepup) => ({
         gepp,
