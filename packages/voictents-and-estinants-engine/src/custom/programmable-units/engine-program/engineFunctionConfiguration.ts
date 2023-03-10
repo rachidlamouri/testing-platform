@@ -28,7 +28,7 @@ export type EngineFunctionConfigurationVoictent = Voictent<
 export const ENGINE_FUNCTION_CONFIGURATION: EngineFunctionConfigurationHubblepup =
   {
     filePath:
-      'packages/pipes-and-filters-engine/src/type-script-adapter/digikikify.ts',
+      'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts',
     exportedIdentifier: 'digikikify',
     estinantListKeyIdentifierName: 'estinantTuple',
   };
