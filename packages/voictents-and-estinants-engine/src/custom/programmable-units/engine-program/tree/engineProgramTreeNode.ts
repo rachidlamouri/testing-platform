@@ -47,7 +47,7 @@ export const engineProgramTreeNodeWattlection = buildWattlection<
   rightAppreffingeTuple: [
     {
       gepp: ESTINANT_TREE_NODE_GEPP,
-      croard: (rightInput): string => rightInput.identifier,
+      croard: (rightInput): string => rightInput.zorn,
       framate: (leftInput): string[] =>
         leftInput.grition.estinantIdentifierList,
     },
@@ -59,7 +59,7 @@ export const engineProgramTreeNodeWattlection = buildWattlection<
     const estinantTreeNodeList = rightInputList.map(({ grition }) => grition);
 
     return {
-      identifier: leftInput.identifier,
+      zorn: leftInput.zorn,
       grition: {
         programName: engineProgram.programName,
         estinantList: estinantTreeNodeList.map<EngineProgramEstinantTreeNode>(

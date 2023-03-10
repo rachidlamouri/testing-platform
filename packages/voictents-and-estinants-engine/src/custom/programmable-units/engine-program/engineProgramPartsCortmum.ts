@@ -85,13 +85,13 @@ export const engineProgramPartsCortmum = buildCortmum<
   rightAppreffingeTuple: [
     {
       gepp: TYPE_SCRIPT_FILE_GEPP,
-      croard: (rightInput): string => rightInput.identifier,
-      framate: (leftInput) => [leftInput.identifier] as const,
+      croard: (rightInput): string => rightInput.zorn,
+      framate: (leftInput) => [leftInput.zorn] as const,
     },
     {
       gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-      croard: (rightInput): string => rightInput.identifier,
-      framate: (leftInput) => [leftInput.identifier] as const,
+      croard: (rightInput): string => rightInput.zorn,
+      framate: (leftInput) => [leftInput.zorn] as const,
     },
     {
       gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
@@ -187,7 +187,7 @@ export const engineProgramPartsCortmum = buildCortmum<
 
     const outputEstinantList = importedEstinantList.map<EngineEstinantOdeshin>(
       (importedEstinant) => ({
-        identifier: getEngineEstinantIdentifier(
+        zorn: getEngineEstinantIdentifier(
           programName,
           importedEstinant.identifier,
         ),
@@ -201,12 +201,10 @@ export const engineProgramPartsCortmum = buildCortmum<
     );
 
     const outputProgram: EngineProgramOdeshin = {
-      identifier: leftInput.identifier,
+      zorn: leftInput.zorn,
       grition: {
         programName,
-        estinantIdentifierList: outputEstinantList.map(
-          ({ identifier }) => identifier,
-        ),
+        estinantIdentifierList: outputEstinantList.map(({ zorn }) => zorn),
       },
     };
 

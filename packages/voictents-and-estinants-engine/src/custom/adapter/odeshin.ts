@@ -2,10 +2,10 @@ import { Hubblepup } from '../../type-script-adapter/hubblepup';
 import { Grition } from './grition';
 
 export type Odeshin<
-  TIdentifier extends string = string,
+  TZorn extends string = string,
   TGrition extends Grition = Grition,
 > = Hubblepup<{
-  identifier: TIdentifier;
+  zorn: TZorn;
   grition: TGrition;
 }>;
 

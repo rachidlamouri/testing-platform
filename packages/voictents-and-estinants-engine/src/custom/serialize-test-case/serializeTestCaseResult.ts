@@ -33,7 +33,7 @@ export const serializeTestCaseResultEstinant = buildOnama<
   outputGepp: SERIALIZE_TEST_CASE_RESULT_GEPP,
   pinbe: (input) => {
     const output: SerializeTestCaseResultHubblepup = {
-      identifier: input.identifier,
+      zorn: input.zorn,
       grition: serialize(input.grition),
     };
 

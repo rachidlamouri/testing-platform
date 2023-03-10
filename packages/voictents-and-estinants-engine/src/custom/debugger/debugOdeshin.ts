@@ -16,7 +16,7 @@ const getOrInstantiateAndCacheIdentifiableHubblepup = (
   plifal: Plifal,
 ): IdentifiableHubblepup => {
   const identifiableOdeshin = odeshinCache.get(plifal.hubblepup) ?? {
-    identifier: plifal.hubblepup.identifier,
+    identifier: plifal.hubblepup.zorn,
     odeshin: plifal.hubblepup,
   };
 

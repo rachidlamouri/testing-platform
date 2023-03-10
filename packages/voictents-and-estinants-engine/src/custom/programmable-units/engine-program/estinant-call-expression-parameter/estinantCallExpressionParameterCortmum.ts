@@ -53,7 +53,7 @@ export const estinantCallExpressionParameterCortmum = buildCortmum<
   rightAppreffingeTuple: [
     {
       gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
-      croard: (rightInput): string => rightInput.identifier,
+      croard: (rightInput): string => rightInput.zorn,
       framate: (leftInput) => [leftInput.grition.estinantFilePath] as const,
     },
   ],
@@ -87,13 +87,13 @@ export const estinantCallExpressionParameterCortmum = buildCortmum<
     ) {
       const { programName, estinantName } = engineEstinant;
 
-      const inputListIdentifier = `${engineEstinantInput.identifier}/input`;
-      const outputListIdentifier = `${engineEstinantInput.identifier}/output`;
+      const inputListIdentifier = `${engineEstinantInput.zorn}/input`;
+      const outputListIdentifier = `${engineEstinantInput.zorn}/output`;
 
       return {
         [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [
           {
-            identifier: engineEstinantInput.identifier,
+            zorn: engineEstinantInput.zorn,
             grition: {
               programName,
               estinantName,
@@ -104,7 +104,7 @@ export const estinantCallExpressionParameterCortmum = buildCortmum<
         ],
         [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [
           {
-            identifier: inputListIdentifier,
+            zorn: inputListIdentifier,
             grition: {
               programName,
               estinantName,
@@ -115,7 +115,7 @@ export const estinantCallExpressionParameterCortmum = buildCortmum<
         ],
         [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [
           {
-            identifier: outputListIdentifier,
+            zorn: outputListIdentifier,
             grition: {
               programName,
               estinantName,
@@ -134,7 +134,7 @@ export const estinantCallExpressionParameterCortmum = buildCortmum<
       [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
       [ERROR_GEPP]: [
         {
-          identifier: engineEstinantInput.identifier,
+          zorn: engineEstinantInput.zorn,
           grition: {
             hasNode: node !== undefined,
             hasInitExpression: initExpression !== null,
