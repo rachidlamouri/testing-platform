@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/typescript-estree": "^5.54.0"
   }
 }

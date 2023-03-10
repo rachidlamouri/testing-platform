@@ -10,6 +10,6 @@ digikikify({
   initialVoictentsByGepp: {
     [SERIALIZE_TEST_CASE_INPUT_GEPP]: SERIALIZE_TEST_CASE_INPUT_TUPLE,
   },
-  estinantTuple: [serializeTestCaseResultEstinant] as const,
+  estinantTuple: [serializeTestCaseResultEstinant],
   onHubblepupAddedToVoictents: debugOdeshin,
 });

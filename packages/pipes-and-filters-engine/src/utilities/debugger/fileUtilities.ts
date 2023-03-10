@@ -4,9 +4,11 @@ import { serialize } from '../serialize';
 
 const DEBUG_DIR_PATH = './debug/' as const;
 const CACHE_PATH = posix.join(DEBUG_DIR_PATH, 'cache');
+const OUTPUT_PATH = posix.join(DEBUG_DIR_PATH, 'output');
 
 fs.rmSync(DEBUG_DIR_PATH, { recursive: true, force: true });
 fs.mkdirSync(CACHE_PATH, { recursive: true });
+fs.mkdirSync(OUTPUT_PATH, { recursive: true });
 
 export type FileCacheWriterInput = {
   directoryName: string;
@@ -39,5 +41,10 @@ export const fileUtilities = {
     const text: string = hasData(input) ? serialize(input.data) : input.text;
 
     fs.writeFileSync(filePath, text);
+  },
+  writeOutputFile: (fileNameWithExtension: string, data: string): void => {
+    const filePath = posix.join(OUTPUT_PATH, fileNameWithExtension);
+
+    fs.writeFileSync(filePath, data);
   },
 };

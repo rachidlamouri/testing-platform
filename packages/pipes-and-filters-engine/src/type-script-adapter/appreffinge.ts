@@ -8,8 +8,8 @@ export type LeftAppreffinge<TInputVition extends Vition> = {
 };
 
 export type RightAppreffinge<
-  TInputVition extends Vition,
-  TVicken extends Vicken,
+  TInputVition extends Vition = Vition,
+  TVicken extends Vicken = Vicken,
 > = {
   gepp: TVicken['voictent']['gepp'];
   croard: Croarder<TVicken>;

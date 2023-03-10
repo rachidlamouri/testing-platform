@@ -2,7 +2,7 @@ import { MergeTuple } from '../utilities/mergeTuple';
 import { List } from '../utilities/semantic-types/list';
 import { Tuple } from '../utilities/semantic-types/tuple';
 import { Gepp } from './gepp';
-import { Hubblepup } from './hubblepup';
+import { Hubblepup, HubblepupTuple } from './hubblepup';
 import { Quirm } from './quirm';
 
 export type VoictentItem<
@@ -74,6 +74,8 @@ export type VoictentTupleToQuirmTuple<TVoictentTuple extends VoictentTuple> = {
 export type VoictentTupleToGeppTuple<TVoictentTuple extends VoictentTuple> = {
   [Index in keyof TVoictentTuple]: TVoictentTuple[Index]['gepp'];
 };
+
+export type VoictentRecord = Record<Gepp, HubblepupTuple>;
 
 export type VoictentToVoictentRecord<TVoictent extends Voictent> = {
   [Key in TVoictent['gepp']]: TVoictent['hubblepupTuple'];
