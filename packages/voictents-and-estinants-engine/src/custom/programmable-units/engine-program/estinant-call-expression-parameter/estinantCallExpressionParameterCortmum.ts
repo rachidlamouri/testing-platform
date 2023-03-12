@@ -13,6 +13,7 @@ import {
   ENGINE_ESTINANT_GEPP,
 } from '../engineEstinant';
 import { isCortmumCallExpression } from '../estinant-call-expression/cortmumCallExpression';
+import { isDisatingerCallExpression } from '../estinant-call-expression/disatingerCallExpression';
 import { isMattomerCallExpression } from '../estinant-call-expression/mattomerCallExpression';
 import { isMentursectionCallExpression } from '../estinant-call-expression/mentursectionCallExpression';
 import { isOnamaCallExpression } from '../estinant-call-expression/onamaCallExpression';
@@ -83,7 +84,8 @@ export const estinantCallExpressionParameterCortmum = buildCortmum<
       isOnamaCallExpression(callExpression) ||
       isMattomerCallExpression(callExpression) ||
       isWattlectionCallExpression(callExpression) ||
-      isWortinatorCallExpression(callExpression)
+      isWortinatorCallExpression(callExpression) ||
+      isDisatingerCallExpression(callExpression)
     ) {
       const { programName, estinantName } = engineEstinant;
 

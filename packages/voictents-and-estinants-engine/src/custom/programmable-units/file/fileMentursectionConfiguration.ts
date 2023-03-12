@@ -28,7 +28,7 @@ export type FileMentursectionConfigurationVoictent = Voictent<
 export const FULL_FILE_MENTURSECTION_CONFIGURATION: FileMentursectionConfigurationHubblepup =
   {
     directoryPath: '.',
-    ignoredNodePathConfigurations: [
+    ignoredNodePathConfigurationList: [
       {
         typeName: ComparisonConfigurationTypeName.Equals,
         value: '.git',
@@ -44,14 +44,14 @@ export const FULL_FILE_MENTURSECTION_CONFIGURATION: FileMentursectionConfigurati
     ],
   };
 
-export const PIPES_AND_FILTERS_FILE_MENTURSECTION_CONFIGURATION: FileMentursectionConfigurationHubblepup =
+export const VOICTENTS_AND_ESTINANTS_FILE_MENTURSECTION_CONFIGURATION: FileMentursectionConfigurationHubblepup =
   {
     directoryPath: 'packages/voictents-and-estinants-engine/src',
-    ignoredNodePathConfigurations: [],
+    ignoredNodePathConfigurationList: [],
   };
 
 export const CI_FILE_MENTURSECTION_CONFIGURATION: FileMentursectionConfigurationHubblepup =
   {
     directoryPath: '.github',
-    ignoredNodePathConfigurations: [],
+    ignoredNodePathConfigurationList: [],
   };

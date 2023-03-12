@@ -5,6 +5,7 @@ import { Vition } from './vition';
 
 export type LeftAppreffinge<TInputVition extends Vition> = {
   gepp: TInputVition['leftVoictent']['gepp'];
+  isWibiz?: boolean;
 };
 
 export type RightAppreffinge<
@@ -12,6 +13,7 @@ export type RightAppreffinge<
   TVicken extends Vicken = Vicken,
 > = {
   gepp: TVicken['voictent']['gepp'];
+  isWibiz?: boolean;
   croard: Croarder<TVicken>;
   framate: Framation<TInputVition, TVicken>;
 };

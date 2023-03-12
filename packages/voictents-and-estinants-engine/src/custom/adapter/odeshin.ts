@@ -15,4 +15,4 @@ export type OdeshinFromGrition<TGrition extends Grition = Grition> = Odeshin<
 >;
 
 export const isOdeshin = (hubblepup: Hubblepup): hubblepup is Odeshin =>
-  'identifier' in hubblepup && typeof hubblepup.identifier === 'string';
+  'zorn' in hubblepup && typeof hubblepup.zorn === 'string';
