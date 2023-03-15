@@ -36,6 +36,7 @@ export type CortmumBuilderInput<
   TOutputVoictentTuple extends VoictentTuple,
 > = {
   leftGepp: TInputVition['leftVoictent']['gepp'];
+  isWibiz?: boolean;
   rightAppreffingeTuple: RightAppreffingeTuple<TInputVition>;
   outputGeppTuple: VoictentTupleToGeppTuple<TOutputVoictentTuple>;
   pinbe: CortmumPinbetunf<TInputVition, TOutputVoictentTuple>;
@@ -46,6 +47,7 @@ export const buildCortmum = <
   TOutputVoictentTuple extends VoictentTuple,
 >({
   leftGepp,
+  isWibiz,
   rightAppreffingeTuple,
   outputGeppTuple,
   pinbe,
@@ -75,6 +77,7 @@ export const buildCortmum = <
   const estinant: Cortmum<TInputVition, TOutputVoictentTuple> = {
     leftAppreffinge: {
       gepp: leftGepp,
+      isWibiz,
     },
     rightAppreffingeTuple,
     tropoig,

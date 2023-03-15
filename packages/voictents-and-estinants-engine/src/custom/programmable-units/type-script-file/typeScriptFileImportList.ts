@@ -35,6 +35,11 @@ export type TypeScriptFileImport =
   | LocalTypeScriptFileImport
   | ExternalTypeScriptFileImport;
 
+export const getSourcePath = (importItem: TypeScriptFileImport): string =>
+  importItem.typeName === TypeScriptFileImportTypeName.Local
+    ? importItem.filePath
+    : importItem.moduleName;
+
 export type TypeScriptFileImportList = TypeScriptFileImport[];
 
 export type TypeScriptFileImportListGrition = Grition<TypeScriptFileImportList>;

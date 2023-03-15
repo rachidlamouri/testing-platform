@@ -1,0 +1,19 @@
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.5.0/dist/svg-pan-zoom.min.js"></script>
+<body>
+  <!-- SVG_PLACEHOLDER -->
+</body>
+<script>
+  svgPanZoom('svg', {
+    zoomScaleSensitivity: .3,
+    minZoom: .2,
+    maxZoom: 20,
+  })
+
+  const nodeList = [...document.getElementsByClassName('node')];
+
+  nodeList.forEach((node) => {
+    node.addEventListener('click', () => {
+      console.log(node.textContent.trim())
+    })
+  })
+</script>

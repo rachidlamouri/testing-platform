@@ -15,6 +15,7 @@ export type File<
   TAdditionalMetadata extends object | null = null,
 > = {
   filePath: string;
+  directoryPath: string;
   onDiskFileName: FileName;
   inMemoryFileName: FileName;
   extension: {
