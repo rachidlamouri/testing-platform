@@ -1,4 +1,4 @@
-import { debugOdeshin } from '../../custom/debugger/debugOdeshin';
+import { buildBasicQuirmDebugger } from '../../custom/debugger/quirmDebugger';
 import { digikikify } from '../../type-script-adapter/digikikify';
 import {
   exampleInputOdeshin,
@@ -11,5 +11,5 @@ digikikify({
     [EXAMPLE_INPUT_GEPP]: [exampleInputOdeshin],
   },
   estinantTuple: [exampleOutputEstinant],
-  onHubblepupAddedToVoictents: debugOdeshin,
+  quirmDebugger: buildBasicQuirmDebugger('exampleCustom'),
 });

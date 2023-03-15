@@ -1,14 +1,14 @@
-import {
-  digikikify as coreDigikikify,
-  OnHubblepupAddedToVoictentsHandler as CoreOnHubblepupAddedToVoictentsHandler,
-} from '../core/digikikify';
+import { digikikify as coreDigikikify } from '../core/digikikify';
 import { EstinantTuple as CoreEstinantTuple } from '../core/estinant';
 import { Quirm } from '../core/quirm';
 import { StralineTuple } from '../utilities/semantic-types/straline';
 import { Estinant } from './estinant/estinant';
 import { VickenTupleToVoictentTuple } from './vicken';
 import {
+  Voictent,
   VoictentArrayToVoictentItem,
+  VoictentToQuirm,
+  VoictentUnionToAggregateVoictentItemRecord,
   VoictentUnionToAggregateVoictentRecord,
 } from './voictent';
 import { Gepp } from './gepp';
@@ -50,6 +50,19 @@ type EstinantTupleToPartialAggregateVoictentRecord<
   >
 >;
 
+type EstinantTupleToPartialAggregateQuirmHandler<
+  TEstinantTuple extends AnyEstinantTuple,
+> = {
+  [Key in keyof VoictentUnionToAggregateVoictentItemRecord<
+    EstinantTupleToVoictentUnion<TEstinantTuple>
+  >]?: (quirm: {
+    gepp: Key;
+    hubblepup: VoictentUnionToAggregateVoictentItemRecord<
+      EstinantTupleToVoictentUnion<TEstinantTuple>
+    >[Key];
+  }) => void;
+};
+
 type OnHubblepupAddedToVoictentsHandler<
   TEstinantTuple extends AnyEstinantTuple,
 > = (
@@ -58,10 +71,22 @@ type OnHubblepupAddedToVoictentsHandler<
   >,
 ) => void;
 
+export type QuirmDebugger<TVoictent extends Voictent> = {
+  handlerByGepp: {
+    [Key in TVoictent['gepp']]?: (quirm: VoictentToQuirm<TVoictent>) => void;
+  };
+  defaultHandler: (quirm: Quirm) => void;
+};
+
+type QuirmDebuggerFromEstinantTuple<TEstinantTuple extends AnyEstinantTuple> = {
+  handlerByGepp: EstinantTupleToPartialAggregateQuirmHandler<TEstinantTuple>;
+  defaultHandler: OnHubblepupAddedToVoictentsHandler<TEstinantTuple>;
+};
+
 type DigikikifyInput<TEstinantTuple extends AnyEstinantTuple> = {
   initialVoictentsByGepp: EstinantTupleToPartialAggregateVoictentRecord<TEstinantTuple>;
   estinantTuple: TEstinantTuple;
-  onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler<TEstinantTuple>;
+  quirmDebugger?: QuirmDebuggerFromEstinantTuple<TEstinantTuple>;
 };
 
 type InferredDigikikifyInput<TPotentialEstinantTuple> =
@@ -76,7 +101,7 @@ type InferredDigikikifyInput<TPotentialEstinantTuple> =
 export const digikikify = <TPotentialEstinantTuple extends StralineTuple>({
   initialVoictentsByGepp,
   estinantTuple,
-  onHubblepupAddedToVoictents,
+  quirmDebugger: inputDebugger,
 }: InferredDigikikifyInput<TPotentialEstinantTuple>): void => {
   coreDigikikify({
     initialQuirmTuple: Object.entries(
@@ -90,7 +115,17 @@ export const digikikify = <TPotentialEstinantTuple extends StralineTuple>({
       });
     }),
     estinantTuple: estinantTuple as CoreEstinantTuple,
-    onHubblepupAddedToVoictents:
-      onHubblepupAddedToVoictents as CoreOnHubblepupAddedToVoictentsHandler,
+    onHubblepupAddedToVoictents: (quirm) => {
+      const quirmDebugger = inputDebugger as QuirmDebugger<Voictent>;
+
+      if (!quirmDebugger) {
+        return;
+      }
+
+      const handler =
+        quirmDebugger.handlerByGepp[quirm.gepp] ?? quirmDebugger.defaultHandler;
+
+      handler(quirm);
+    },
   });
 };

@@ -119,3 +119,10 @@ export type VoictentUnionToAggregateVoictentRecord<
   [TVoictent in TVoictentUnion as TVoictent['gepp'] &
     string]: TVoictent['hubblepupTuple'];
 };
+
+export type VoictentUnionToAggregateVoictentItemRecord<
+  TVoictentUnion extends Voictent,
+> = {
+  [TVoictent in TVoictentUnion as TVoictent['gepp'] &
+    string]: TVoictent['hubblepupTuple'][number];
+};

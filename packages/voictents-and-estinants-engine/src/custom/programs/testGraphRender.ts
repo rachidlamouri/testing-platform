@@ -1,5 +1,5 @@
 import { digikikify } from '../../type-script-adapter/digikikify';
-import { debugHubblepup } from '../debugger/debugHubblepup';
+import { buildBasicQuirmDebugger } from '../debugger/quirmDebugger';
 import { fileMattomer } from '../programmable-units/file/fileMattomer';
 import { fileMentursection } from '../programmable-units/file/fileMentursection';
 import { FILE_MENTURSECTION_CONFIGURATION_GEPP } from '../programmable-units/file/fileMentursectionConfiguration';
@@ -88,5 +88,5 @@ digikikify({
     graphvizCodeToSvgDocument,
     svgDocumentToInteractivePage,
   ],
-  onHubblepupAddedToVoictents: debugHubblepup,
+  quirmDebugger: buildBasicQuirmDebugger('testGraphRender'),
 });
