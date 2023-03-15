@@ -1,5 +1,14 @@
 import { buildMentursection } from '../../../type-script-adapter/estinant/mentursection';
-import { getNestedFilePaths } from '../../../utilities/file/getNestedFilePaths';
+import {
+  FileSystemNodeMetadata,
+  getNestedFileSystemNodeMetadataList,
+} from '../../../utilities/file/getNestedFilePaths';
+import { splitList } from '../../../utilities/splitList';
+import {
+  DirectoryOdeshin,
+  DirectoryVoictent,
+  DIRECTORY_GEPP,
+} from './directory';
 import { FileVoictent, FILE_GEPP, FileOdeshin, FileGrition } from './file';
 import { getFileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import {
@@ -42,51 +51,80 @@ const partsToKebabCase = (x: string[]): string => {
 
 export const fileMentursection = buildMentursection<
   FileMentursectionConfigurationVoictent,
-  [FileVoictent]
+  [DirectoryVoictent, FileVoictent]
 >({
   inputGepp: FILE_MENTURSECTION_CONFIGURATION_GEPP,
-  outputGeppTuple: [FILE_GEPP],
+  outputGeppTuple: [DIRECTORY_GEPP, FILE_GEPP],
   pinbe: (input) => {
-    const filePaths = getNestedFilePaths(input);
+    const nodeMetadataList = getNestedFileSystemNodeMetadataList(input);
 
-    const fileAOdeshinTuple = filePaths.map<FileOdeshin>((filePath) => {
-      const {
-        onDiskFileNameParts,
-        inMemoryFileNameParts,
-        extensionSuffix,
-        extensionParts,
-      } = getFileMetadata(filePath);
-
-      const grition: FileGrition = {
-        filePath,
-        onDiskFileName: {
-          camelCase: partsToCamel(onDiskFileNameParts),
-          pascalCase: partsToPascal(onDiskFileNameParts),
-          screamingSnakeCase: partsToScreamingSnake(onDiskFileNameParts),
-          kebabCase: partsToKebabCase(onDiskFileNameParts),
-        },
-        inMemoryFileName: {
-          camelCase: partsToCamel(inMemoryFileNameParts),
-          pascalCase: partsToPascal(inMemoryFileNameParts),
-          screamingSnakeCase: partsToScreamingSnake(inMemoryFileNameParts),
-          kebabCase: partsToKebabCase(inMemoryFileNameParts),
-        },
-        extension: {
-          parts: extensionParts,
-          suffix: extensionSuffix,
-          suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
-        },
-        additionalMetadata: null,
-      };
-
-      return {
-        zorn: filePath,
-        grition,
-      };
+    const directoryMetadataList: FileSystemNodeMetadata[] = [];
+    const fileMetadataList: FileSystemNodeMetadata[] = [];
+    splitList({
+      list: nodeMetadataList,
+      isElementA: (
+        element,
+      ): element is FileSystemNodeMetadata & { isDirectory: true } => {
+        return element.isDirectory;
+      },
+      accumulatorA: directoryMetadataList,
+      accumulatorB: fileMetadataList,
     });
 
+    const directoryOutputTuple = directoryMetadataList.map<DirectoryOdeshin>(
+      ({ nodePath }) => {
+        return {
+          zorn: nodePath,
+          grition: {
+            directoryPath: nodePath,
+            directoryPathPartList: nodePath.split('/'),
+          },
+        };
+      },
+    );
+
+    const fileOutputTuple = fileMetadataList.map<FileOdeshin>(
+      ({ nodePath, directoryPath }) => {
+        const {
+          onDiskFileNameParts,
+          inMemoryFileNameParts,
+          extensionSuffix,
+          extensionParts,
+        } = getFileMetadata(nodePath);
+
+        const grition: FileGrition = {
+          filePath: nodePath,
+          directoryPath,
+          onDiskFileName: {
+            camelCase: partsToCamel(onDiskFileNameParts),
+            pascalCase: partsToPascal(onDiskFileNameParts),
+            screamingSnakeCase: partsToScreamingSnake(onDiskFileNameParts),
+            kebabCase: partsToKebabCase(onDiskFileNameParts),
+          },
+          inMemoryFileName: {
+            camelCase: partsToCamel(inMemoryFileNameParts),
+            pascalCase: partsToPascal(inMemoryFileNameParts),
+            screamingSnakeCase: partsToScreamingSnake(inMemoryFileNameParts),
+            kebabCase: partsToKebabCase(inMemoryFileNameParts),
+          },
+          extension: {
+            parts: extensionParts,
+            suffix: extensionSuffix,
+            suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
+          },
+          additionalMetadata: null,
+        };
+
+        return {
+          zorn: nodePath,
+          grition,
+        };
+      },
+    );
+
     return {
-      [FILE_GEPP]: fileAOdeshinTuple,
+      [DIRECTORY_GEPP]: directoryOutputTuple,
+      [FILE_GEPP]: fileOutputTuple,
     };
   },
 });
