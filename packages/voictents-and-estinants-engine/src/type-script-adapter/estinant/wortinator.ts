@@ -20,13 +20,21 @@ export type Wortinator<TInputVoictent extends Voictent> = Estinant<
   []
 >;
 
-export type WortinatorBuilderInput<TInputVoictent extends Voictent> = {
-  inputGepp: TInputVoictent['gepp'];
-  pinbe: WortinatorPinbetunf<TInputVoictent>;
-};
+export type WortinatorBuilderInput<TInputVoictent extends Voictent> =
+  | {
+      inputGepp: TInputVoictent['gepp'];
+      isWibiz?: never;
+      pinbe: WortinatorPinbetunf<TInputVoictent>;
+    }
+  | {
+      inputGepp: TInputVoictent['gepp'];
+      isWibiz: boolean;
+      pinbe: WortinatorPinbetunf<TInputVoictent>;
+    };
 
 export const buildWortinator = <TInputVoictent extends Voictent>({
   inputGepp,
+  isWibiz,
   pinbe,
 }: WortinatorBuilderInput<TInputVoictent>): Wortinator<TInputVoictent> => {
   const tropoig: WortinatorTropoignant<TInputVoictent> = (input) => {
@@ -35,7 +43,7 @@ export const buildWortinator = <TInputVoictent extends Voictent>({
   };
 
   const estinant: Wortinator<TInputVoictent> = {
-    leftAppreffinge: { gepp: inputGepp },
+    leftAppreffinge: { gepp: inputGepp, isWibiz },
     rightAppreffingeTuple: [],
     tropoig,
   };

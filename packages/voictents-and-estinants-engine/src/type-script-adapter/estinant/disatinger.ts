@@ -24,12 +24,14 @@ export type Disatinger<TInputVition extends Vition> = Estinant<
 
 export type DisatingerBuilderInput<TInputVition extends Vition> = {
   leftGepp: TInputVition['leftVoictent']['gepp'];
+  isWibiz?: boolean;
   rightAppreffingeTuple: RightAppreffingeTuple<TInputVition>;
   pinbe: DisatingerPinbetunf<TInputVition>;
 };
 
 export const buildDisatinger = <TInputVition extends Vition>({
   leftGepp,
+  isWibiz,
   rightAppreffingeTuple,
   pinbe,
 }: DisatingerBuilderInput<TInputVition>): Disatinger<TInputVition> => {
@@ -39,7 +41,7 @@ export const buildDisatinger = <TInputVition extends Vition>({
   };
 
   const estinant: Disatinger<TInputVition> = {
-    leftAppreffinge: { gepp: leftGepp },
+    leftAppreffinge: { gepp: leftGepp, isWibiz },
     rightAppreffingeTuple,
     tropoig,
   };
