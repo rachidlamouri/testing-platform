@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { posix } from 'path';
-import { serialize } from '../serialize';
+import { serialize } from '../typed-datum/serializer/serialize';
 
 const DEBUG_DIR_PATH = './debug/' as const;
 const CACHE_PATH = posix.join(DEBUG_DIR_PATH, 'cache');
@@ -38,7 +38,7 @@ export const fileUtilities = {
     if (input.fileExtensionSuffix !== undefined) {
       fileExtensionSuffix = input.fileExtensionSuffix;
     } else if (hasData(input)) {
-      fileExtensionSuffix = 'json';
+      fileExtensionSuffix = 'yml';
     } else {
       fileExtensionSuffix = 'txt';
     }
