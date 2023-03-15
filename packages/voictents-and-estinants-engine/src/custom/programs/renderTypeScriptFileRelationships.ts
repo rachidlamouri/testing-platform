@@ -1,5 +1,5 @@
 import { digikikify } from '../../type-script-adapter/digikikify';
-import { debugHubblepup } from '../debugger/debugHubblepup';
+import { buildQuirmDebugger } from '../debugger/quirmDebugger';
 import { fileMattomer } from '../programmable-units/file/fileMattomer';
 import { fileMentursection } from '../programmable-units/file/fileMentursection';
 import {
@@ -35,7 +35,6 @@ digikikify({
     directedGraphToGraphvizCode,
     graphvizCodeToSvgDocument,
     svgDocumentToInteractivePage,
-    // relationshipRendererWortinator,
   ],
-  onHubblepupAddedToVoictents: debugHubblepup,
+  quirmDebugger: buildQuirmDebugger('renderTypeScriptFileRelationships'),
 });

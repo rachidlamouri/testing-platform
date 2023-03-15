@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { digikikify } from '../../core/digikikify';
-import { debugHubblepup } from '../../example-programs/core/debugHubblepup';
+import { buildDefaultHandler } from '../debugger/quirmDebugger';
 import { getFileMetadata } from '../programmable-units/file/getFileMetadata';
 
 const [filePath] = process.argv.slice(2);
@@ -94,5 +94,5 @@ digikikify({
       },
     },
   ],
-  onHubblepupAddedToVoictents: debugHubblepup,
+  onHubblepupAddedToVoictents: buildDefaultHandler('scaffoldVoictentFile'),
 });

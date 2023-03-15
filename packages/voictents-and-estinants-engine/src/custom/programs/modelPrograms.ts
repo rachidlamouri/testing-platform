@@ -1,5 +1,4 @@
 import { digikikify } from '../../type-script-adapter/digikikify';
-import { debugHubblepup } from '../debugger/debugHubblepup';
 import {
   FILE_MENTURSECTION_CONFIGURATION_GEPP,
   VOICTENTS_AND_ESTINANTS_FILE_MENTURSECTION_CONFIGURATION,
@@ -22,7 +21,8 @@ import { estinantOutputMentursection } from '../programmable-units/engine-progra
 import { estinantInputMentursection } from '../programmable-units/engine-program/estinant-input-output/estinantInputList';
 import { estinantTreeNodeWattlection } from '../programmable-units/engine-program/tree/estinantTreeNode';
 import { engineProgramTreeNodeWattlection } from '../programmable-units/engine-program/tree/engineProgramTreeNode';
-import { engineProgramRendererWortinator } from '../programmable-units/engine-program/engineProgramRendererWortinator';
+import { engineProgramTreeToOutputFile } from '../programmable-units/engine-program/engineProgramRendererWortinator';
+import { buildQuirmDebugger } from '../debugger/quirmDebugger';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -47,7 +47,7 @@ digikikify({
     estinantOutputMentursection,
     estinantTreeNodeWattlection,
     engineProgramTreeNodeWattlection,
-    engineProgramRendererWortinator,
+    engineProgramTreeToOutputFile,
   ],
-  onHubblepupAddedToVoictents: debugHubblepup,
+  quirmDebugger: buildQuirmDebugger('modelPrograms'),
 });

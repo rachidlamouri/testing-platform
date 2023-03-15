@@ -1,5 +1,4 @@
 import { digikikify } from '../../type-script-adapter/digikikify';
-import { debugHubblepup } from '../core/debugHubblepup';
 import { exampleWattlection } from './entities/exampleWattlection';
 import { exampleOnama } from './entities/exampleOnama';
 import {
@@ -11,6 +10,7 @@ import { exampleMattomer } from './entities/exampleMattomer';
 import { exampleCortmum } from './entities/exampleCortmum';
 import { exampleDisatinger } from './entities/exampleDisatinger';
 import { exampleMentursection } from './entities/exampleMentursection';
+import { buildBasicQuirmDebugger } from '../../custom/debugger/quirmDebugger';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -25,5 +25,5 @@ digikikify({
     exampleDisatinger,
     exampleMentursection,
   ] as const,
-  onHubblepupAddedToVoictents: debugHubblepup,
+  quirmDebugger: buildBasicQuirmDebugger('exampleAdapter'),
 });

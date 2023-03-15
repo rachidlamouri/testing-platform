@@ -3,7 +3,7 @@ import { Estinant } from '../../core/estinant';
 import { Gepp } from '../../core/gepp';
 import { Hubblepup } from '../../core/hubblepup';
 import { Quirm } from '../../core/quirm';
-import { debugHubblepup } from './debugHubblepup';
+import { buildDefaultHandler } from '../../custom/debugger/quirmDebugger';
 
 const exampleGeppInitialInput: Gepp = 'gepp-initial-input';
 
@@ -127,7 +127,7 @@ digikikify({
     exampleCortmumEstinant,
     exampleWibixEstinant,
   ],
-  onHubblepupAddedToVoictents: debugHubblepup,
+  onHubblepupAddedToVoictents: buildDefaultHandler('exampleCore'),
 });
 
 // TODO: figure out how to not have to do this
