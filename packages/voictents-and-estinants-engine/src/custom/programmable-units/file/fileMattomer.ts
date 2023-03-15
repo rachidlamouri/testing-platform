@@ -11,10 +11,15 @@ import {
   YamlFile,
 } from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
+import {
+  HtmlFile,
+  HtmlFileVoictent,
+  HTML_FILE_GEPP,
+} from '../html-file/htmlFile';
 
 export const fileMattomer = buildMattomer<
   FileVoictent,
-  [TypeScriptFileVoictent, YamlFileVoictent]
+  [TypeScriptFileVoictent, YamlFileVoictent, HtmlFileVoictent]
 >({
   inputGepp: FILE_GEPP,
   kerzTuple: [
@@ -28,6 +33,11 @@ export const fileMattomer = buildMattomer<
       gepp: YAML_FILE_GEPP,
       pinbe: (input): input is YamlFile =>
         input.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Yaml,
+    },
+    {
+      gepp: HTML_FILE_GEPP,
+      pinbe: (input): input is HtmlFile =>
+        input.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Html,
     },
   ],
 });
