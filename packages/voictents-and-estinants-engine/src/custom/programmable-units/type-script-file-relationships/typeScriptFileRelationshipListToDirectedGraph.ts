@@ -164,16 +164,16 @@ export const typeScriptFileRelationshipListToDirectedGraph = buildCortmum<
     };
 
     relationshipList.forEach(({ node, importedNode }) => {
-      const tailId = node.nodePath;
-      const headId = importedNode.nodePath;
+      const tailId = importedNode.nodePath;
+      const headId = node.nodePath;
       const edgeId = `${tailId}:${headId}`;
 
       const edge: DirectedGraphEdge = {
         attributeByKey: {
           id: edgeId,
         },
-        tailId: node.nodePath,
-        headId: importedNode.nodePath,
+        tailId,
+        headId,
       };
 
       rootGraph.edgeList.push(edge);
