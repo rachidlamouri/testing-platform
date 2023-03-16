@@ -27,7 +27,26 @@ export const graphvizCodeToSvgDocument = buildMentursection<
     $svg.attr('width', '100%');
     $svg.attr('height', '100%');
 
-    // $svg.find('title').remove();
+    const escapePathSeparator = (x: string): string =>
+      x.replaceAll(/(\/|\.)/g, '_');
+
+    $svg.find('.node').each((index, element) => {
+      const $element = $(element);
+      const id = $element.attr('id') ?? '';
+      $element.attr('id', escapePathSeparator(id));
+      const [tailId, headId] = id.split(':');
+      $element.addClass(`tail-${tailId}`);
+      $element.addClass(`head-${headId}`);
+    });
+
+    $svg.find('.edge').each((index, element) => {
+      const $element = $(element);
+      const id = $element.attr('id') ?? '';
+      $element.removeAttr('id');
+      const [tailId, headId] = id.split(':');
+      $element.addClass(`tail-${escapePathSeparator(tailId)}`);
+      $element.addClass(`head-${escapePathSeparator(headId)}`);
+    });
 
     $svg.find('.edge > path').attr('stroke', 'gray');
     $svg.find('.edge > polygon').attr('stroke', 'gray');

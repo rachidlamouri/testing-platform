@@ -1,76 +1,113 @@
 import { DirectedGraphEdge } from './directedGraphEdge';
-import { DirectedGraph } from './directedGraph';
+import { DirectedGraph, DirectedSubgraph } from './directedGraph';
 import { DirectedGraphNode } from './directedGraphNode';
-
-export type DirectedGraphCodeLineListAccessorInput = {
-  graph: DirectedGraph;
-  isRoot: boolean;
-};
 
 const indent = '  ' as const;
 
-const getEdgeCodeLine = (edge: DirectedGraphEdge): string => {
-  return `"${edge.tailId}" -> "${edge.headId}"`;
+type QuotedText = `"${string}"`;
+
+type AttributeStatement = `${QuotedText}=${QuotedText};`;
+
+// This should be a recursive template literal of "AttributeStatement", but that feature is not supported
+type AttributeListStatement = `[ ${AttributeStatement} ]`;
+
+const quote = (text: string): QuotedText => `"${text}"`;
+
+// TODO: update graph ids to be uuids that are easy to map to other data
+const escapeId = (text: string): string => text.replaceAll(/(\/|@|\.)/g, '__');
+const quoteId = (text: string): QuotedText => quote(escapeId(text));
+
+const getAttributeStatementList = (
+  node: DirectedGraph | DirectedGraphNode | DirectedGraphEdge,
+): AttributeStatement[] => {
+  return Object.entries(node.attributeByKey)
+    .filter(([, value]) => value !== undefined)
+    .map(([key, value]): AttributeStatement => {
+      const quotedKey = quote(key);
+      const quotedValue = key === 'id' ? quoteId(value) : quote(value);
+
+      return `${quotedKey}=${quotedValue};`;
+    });
 };
 
-const getNodeCodeLine = (node: DirectedGraphNode): string => {
-  return `"${node.id}" [ "label"="${node.label}"; "shape"="rounded" ]`;
+const joinAttributeListSingleLine = (list: string[]): AttributeListStatement =>
+  `[ ${list.join(' ')} ]` as AttributeListStatement;
+
+type EdgeRelationshipStatement = `${QuotedText} -> ${QuotedText}`;
+
+type EdgeStatement = `${EdgeRelationshipStatement} ${AttributeListStatement}`;
+
+const getEdgeStatement = (edge: DirectedGraphEdge): EdgeStatement => {
+  const attributeStatementList = getAttributeStatementList(edge);
+
+  const attributeListStatement = joinAttributeListSingleLine(
+    attributeStatementList,
+  );
+
+  const quotedTailId = quoteId(edge.tailId);
+  const quotedHeadId = quoteId(edge.headId);
+  const edgeRelationshipStatement: EdgeRelationshipStatement = `${quotedTailId} -> ${quotedHeadId}`;
+
+  const edgeStatement: EdgeStatement = `${edgeRelationshipStatement} ${attributeListStatement}`;
+  return edgeStatement;
 };
 
-const getDirectedGraphCodeLineList = ({
-  graph,
-  isRoot,
-}: DirectedGraphCodeLineListAccessorInput): string[] => {
-  const graphKeyword = isRoot ? 'digraph' : 'subgraph';
-  const id = isRoot ? graph.id : `cluster_${graph.id}`;
+type NodeStatement = `${QuotedText} ${AttributeListStatement}`;
 
-  const linesA = [`${graphKeyword} "${id}" {`];
+const getNodeStatement = (node: DirectedGraphNode): string => {
+  const attributeStatementList = getAttributeStatementList(node);
 
-  const linesB = isRoot
-    ? ['  "rankdir"="LR"', '  "fontname"="sans-serif"']
-    : [];
+  const attributeListStatement = joinAttributeListSingleLine(
+    attributeStatementList,
+  );
 
-  const linesL = [`  "label"="${graph.label}"`, '  "labelloc"="t"'];
+  const quotedId = quoteId(node.attributeByKey.id);
+  const nodeStatement: NodeStatement = `${quotedId} ${attributeListStatement}`;
+  return nodeStatement;
+};
 
-  const linesN = graph.nodeList.map((node) => {
-    return `${indent}${getNodeCodeLine(node)}`;
+const getDirectedGraphCodeLineList = (
+  graph: DirectedGraph | DirectedSubgraph,
+): string[] => {
+  const graphKeyword = graph.isRoot ? 'digraph' : 'subgraph';
+
+  const quotedId = quoteId(graph.attributeByKey.id ?? '');
+
+  const attributeStatementList = getAttributeStatementList(graph).map(
+    (line) => {
+      return `${indent}${line}`;
+    },
+  );
+
+  const nodeStatementList = graph.nodeList.map((node) => {
+    return `${indent}${getNodeStatement(node)}`;
   });
 
-  const linesE = graph.edgeList.map((edge) => {
-    return `${indent}${getEdgeCodeLine(edge)}`;
+  const edgeStatementList = graph.edgeList.map((edge) => {
+    return `${indent}${getEdgeStatement(edge)}`;
   });
 
-  const linesS = graph.subgraphList
+  const subgraphLineList = graph.subgraphList
     .map((subgraph) => {
-      return getDirectedGraphCodeLineList({
-        graph: subgraph,
-        isRoot: false,
-      });
+      return getDirectedGraphCodeLineList(subgraph);
     })
     .flat()
     .map((line) => `${indent}${line}`);
 
-  const linesZ = [`}`];
-
   return [
-    ...linesA,
-    ...linesB,
-    ...linesL,
+    `${graphKeyword} ${quotedId} {`,
+    ...attributeStatementList,
     '',
-    ...linesN,
+    ...nodeStatementList,
+    ...edgeStatementList,
     '',
-    ...linesE,
-    '',
-    ...linesS,
-    ...linesZ,
+    ...subgraphLineList,
+    '}',
   ];
 };
 
 export const getGraphvizCode = (graph: DirectedGraph): string => {
-  const lines = getDirectedGraphCodeLineList({
-    graph,
-    isRoot: true,
-  });
+  const lines = getDirectedGraphCodeLineList(graph);
 
   const code = lines.join('\n');
 

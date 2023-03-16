@@ -4,6 +4,7 @@
   },
   "devDependencies": {
     "@typescript-eslint/typescript-estree": "^5.54.0",
-    "cheerio": "^1.0.0-rc.12"
+    "cheerio": "^1.0.0-rc.12",
+    "type-fest": "^3.6.1"
   }
 }

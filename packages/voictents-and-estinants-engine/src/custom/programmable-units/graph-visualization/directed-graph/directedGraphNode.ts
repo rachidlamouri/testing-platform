@@ -1,4 +1,5 @@
+import { PartialAttributeByKey } from './attribute';
+
 export type DirectedGraphNode = {
-  id: string;
-  label: string;
+  attributeByKey: PartialAttributeByKey;
 };
