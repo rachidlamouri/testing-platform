@@ -10,11 +10,11 @@ export type DirectedGraphCodeLineListAccessorInput = {
 const indent = '  ' as const;
 
 const getEdgeCodeLine = (edge: DirectedGraphEdge): string => {
-  return `"${edge.tailId}" -> "${edge.headId}"`;
+  return `"${edge.tailId}" -> "${edge.headId}" ["id"="${edge.tailId}:${edge.headId}"]`;
 };
 
 const getNodeCodeLine = (node: DirectedGraphNode): string => {
-  return `"${node.id}" [ "label"="${node.label}"; "shape"="rounded" ]`;
+  return `"${node.id}" ["id"="${node.id}" "label"="${node.label}"; "shape"="rounded" ]`;
 };
 
 const getDirectedGraphCodeLineList = ({

@@ -11,9 +11,40 @@
 
   const nodeList = [...document.getElementsByClassName('node')];
 
+  const setEdgeColor = (element, color) => {
+    element.setAttribute('stroke', color)
+
+    if (element.tagName === 'polygon') {
+      element.setAttribute('fill', color)
+    }
+  }
+
   nodeList.forEach((node) => {
     node.addEventListener('click', () => {
-      console.log(node.textContent.trim())
+      const id = node.getAttribute('id');
+
+      console.log(id)
+
+      const allEdgeList = document.querySelectorAll('.edge > path, .edge > polygon');
+
+      const incomingEdgeList = document.querySelectorAll(`.edge.head-${id} > path, .edge.head-${id} > polygon`)
+      const outgoingEdgeList = document.querySelectorAll(`.edge.tail-${id} > path, .edge.tail-${id} > polygon`)
+
+      allEdgeList.forEach((element) => {
+        setEdgeColor(element, 'gray');
+      })
+
+      incomingEdgeList.forEach((element) => {
+        setEdgeColor(element, 'green');
+      })
+
+      outgoingEdgeList.forEach((element) => {
+        setEdgeColor(element, 'blue');
+      })
+
+      console.log(incomingEdgeList);
+      console.log(outgoingEdgeList);
+      console.log('---')
     })
   })
 </script>
