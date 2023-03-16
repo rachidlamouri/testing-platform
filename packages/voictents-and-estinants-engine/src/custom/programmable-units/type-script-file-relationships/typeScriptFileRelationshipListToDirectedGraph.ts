@@ -200,6 +200,7 @@ export const typeScriptFileRelationshipListToDirectedGraph = buildCortmum<
           attributeByKey: {
             id: nodePath,
             label: nodePath,
+            shape: Shape.Box,
           },
         }),
       ),

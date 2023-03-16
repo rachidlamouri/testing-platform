@@ -11,8 +11,11 @@ type AttributeStatement = `${QuotedText}=${QuotedText};`;
 // This should be a recursive template literal of "AttributeStatement", but that feature is not supported
 type AttributeListStatement = `[ ${AttributeStatement} ]`;
 
-// TODO: escape all values before serializing between quotes
 const quote = (text: string): QuotedText => `"${text}"`;
+
+// TODO: update graph ids to be uuids that are easy to map to other data
+const escapeId = (text: string): string => text.replaceAll(/(\/|@|\.)/g, '__');
+const quoteId = (text: string): QuotedText => quote(escapeId(text));
 
 const getAttributeStatementList = (
   node: DirectedGraph | DirectedGraphNode | DirectedGraphEdge,
@@ -20,7 +23,10 @@ const getAttributeStatementList = (
   return Object.entries(node.attributeByKey)
     .filter(([, value]) => value !== undefined)
     .map(([key, value]): AttributeStatement => {
-      return `${quote(key)}=${quote(value)};`;
+      const quotedKey = quote(key);
+      const quotedValue = key === 'id' ? quoteId(value) : quote(value);
+
+      return `${quotedKey}=${quotedValue};`;
     });
 };
 
@@ -38,8 +44,8 @@ const getEdgeStatement = (edge: DirectedGraphEdge): EdgeStatement => {
     attributeStatementList,
   );
 
-  const quotedTailId = quote(edge.tailId);
-  const quotedHeadId = quote(edge.headId);
+  const quotedTailId = quoteId(edge.tailId);
+  const quotedHeadId = quoteId(edge.headId);
   const edgeRelationshipStatement: EdgeRelationshipStatement = `${quotedTailId} -> ${quotedHeadId}`;
 
   const edgeStatement: EdgeStatement = `${edgeRelationshipStatement} ${attributeListStatement}`;
@@ -55,7 +61,7 @@ const getNodeStatement = (node: DirectedGraphNode): string => {
     attributeStatementList,
   );
 
-  const quotedId = quote(node.attributeByKey.id);
+  const quotedId = quoteId(node.attributeByKey.id);
   const nodeStatement: NodeStatement = `${quotedId} ${attributeListStatement}`;
   return nodeStatement;
 };
@@ -65,7 +71,7 @@ const getDirectedGraphCodeLineList = (
 ): string[] => {
   const graphKeyword = graph.isRoot ? 'digraph' : 'subgraph';
 
-  const quotedId = quote(graph.attributeByKey.id ?? '');
+  const quotedId = quoteId(graph.attributeByKey.id ?? '');
 
   const attributeStatementList = getAttributeStatementList(graph).map(
     (line) => {
