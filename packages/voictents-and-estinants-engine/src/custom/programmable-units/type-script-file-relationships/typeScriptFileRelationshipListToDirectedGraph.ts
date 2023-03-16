@@ -8,9 +8,12 @@ import {
   DirectoryVoictent,
   DIRECTORY_GEPP,
 } from '../file/directory';
+import { Shape } from '../graph-visualization/directed-graph/attribute';
 import {
   DirectedGraph,
+  DirectedGraphRankDirection,
   DirectedGraphVoictent,
+  DirectedSubgraph,
   DIRECTED_GRAPH_GEPP,
 } from '../graph-visualization/directed-graph/directedGraph';
 import { DirectedGraphEdge } from '../graph-visualization/directed-graph/directedGraphEdge';
@@ -89,22 +92,29 @@ export const typeScriptFileRelationshipListToDirectedGraph = buildCortmum<
     const isRoot = (directoryPath: string): boolean =>
       directoryPath === rootDirectoryPath;
 
-    const graphByDirectoryPath = new Map<string, DirectedGraph>();
+    const graphByDirectoryPath = new Map<string, DirectedSubgraph>();
 
-    const getOrInstantiateGraph = (directoryPath: string): DirectedGraph => {
+    const getOrInstantiateSubgraph = (
+      directoryPath: string,
+    ): DirectedSubgraph => {
       const directoryName = posix.basename(directoryPath);
 
-      const graph: DirectedGraph = graphByDirectoryPath.get(directoryPath) ?? {
-        id: directoryPath,
-        label: isRoot(directoryPath) ? directoryPath : directoryName,
+      const subgraph: DirectedSubgraph = graphByDirectoryPath.get(
+        directoryPath,
+      ) ?? {
+        isRoot: false,
+        attributeByKey: {
+          id: `cluster_${directoryPath}`,
+          label: isRoot(directoryPath) ? directoryPath : directoryName,
+        },
         nodeList: [],
         edgeList: [],
         subgraphList: [],
       };
 
-      graphByDirectoryPath.set(directoryPath, graph);
+      graphByDirectoryPath.set(directoryPath, subgraph);
 
-      return graph;
+      return subgraph;
     };
 
     directoryList.forEach((directory) => {
@@ -112,40 +122,53 @@ export const typeScriptFileRelationshipListToDirectedGraph = buildCortmum<
       const { directoryPath } = directory;
       const parentDirectoryPath = posix.dirname(directoryPath);
 
-      const graph = getOrInstantiateGraph(directoryPath);
+      const graph = getOrInstantiateSubgraph(directoryPath);
 
       if (!isRoot(directoryPath)) {
-        const parentGraph = getOrInstantiateGraph(parentDirectoryPath);
+        const parentGraph = getOrInstantiateSubgraph(parentDirectoryPath);
         parentGraph.subgraphList.push(graph);
       }
     });
 
     typeScriptFileList.forEach((file) => {
       const node: DirectedGraphNode = {
-        id: file.filePath,
-        label: posix.basename(file.filePath),
+        attributeByKey: {
+          id: file.filePath,
+          label: posix.basename(file.filePath),
+          shape: Shape.Box,
+        },
       };
 
       const graph = graphByDirectoryPath.get(
         posix.dirname(file.filePath),
-      ) as DirectedGraph;
+      ) as DirectedSubgraph;
       graph.nodeList.push(node);
     });
 
     const rootDirectoryGraph = graphByDirectoryPath.get(
       rootDirectoryPath,
-    ) as DirectedGraph;
+    ) as DirectedSubgraph;
 
     const rootGraph: DirectedGraph = {
-      id: '',
-      label: 'TypeScript File Relationships',
+      isRoot: true,
+      attributeByKey: {
+        label: 'TypeScript File Relationships',
+        rankdir: DirectedGraphRankDirection.LeftRight,
+      },
       nodeList: [],
       edgeList: [],
       subgraphList: [rootDirectoryGraph],
     };
 
     relationshipList.forEach(({ node, importedNode }) => {
+      const tailId = node.nodePath;
+      const headId = importedNode.nodePath;
+      const edgeId = `${tailId}:${headId}`;
+
       const edge: DirectedGraphEdge = {
+        attributeByKey: {
+          id: edgeId,
+        },
         tailId: node.nodePath,
         headId: importedNode.nodePath,
       };
@@ -166,20 +189,25 @@ export const typeScriptFileRelationshipListToDirectedGraph = buildCortmum<
         externalNodeByNodePath.set(importedNode.nodePath, node);
       });
 
-    const externalSubGraph: DirectedGraph = {
-      id: 'Node Modules',
-      label: 'Node Modules',
+    const externalSubgraph: DirectedSubgraph = {
+      isRoot: false,
+      attributeByKey: {
+        id: 'cluster_Node Modules',
+        label: 'Node Modules',
+      },
       nodeList: [...externalNodeByNodePath.values()].map<DirectedGraphNode>(
         ({ nodePath }) => ({
-          id: nodePath,
-          label: nodePath,
+          attributeByKey: {
+            id: nodePath,
+            label: nodePath,
+          },
         }),
       ),
       edgeList: [],
       subgraphList: [],
     };
 
-    rootGraph.subgraphList.unshift(externalSubGraph);
+    rootGraph.subgraphList.unshift(externalSubgraph);
 
     return {
       [DIRECTED_GRAPH_GEPP]: [
