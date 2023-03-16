@@ -106,6 +106,7 @@ export const typeScriptFileRelationshipListToDirectedGraph = buildCortmum<
         attributeByKey: {
           id: `cluster_${directoryPath}`,
           label: isRoot(directoryPath) ? directoryPath : directoryName,
+          fontname: 'sans-serif',
         },
         nodeList: [],
         edgeList: [],
@@ -136,6 +137,7 @@ export const typeScriptFileRelationshipListToDirectedGraph = buildCortmum<
           id: file.filePath,
           label: posix.basename(file.filePath),
           shape: Shape.Box,
+          fontname: 'sans-serif',
         },
       };
 
@@ -154,6 +156,7 @@ export const typeScriptFileRelationshipListToDirectedGraph = buildCortmum<
       attributeByKey: {
         label: 'TypeScript File Relationships',
         rankdir: DirectedGraphRankDirection.LeftRight,
+        fontname: 'sans-serif',
       },
       nodeList: [],
       edgeList: [],
@@ -201,6 +204,7 @@ export const typeScriptFileRelationshipListToDirectedGraph = buildCortmum<
             id: nodePath,
             label: nodePath,
             shape: Shape.Box,
+            fontname: 'sans-serif',
           },
         }),
       ),
