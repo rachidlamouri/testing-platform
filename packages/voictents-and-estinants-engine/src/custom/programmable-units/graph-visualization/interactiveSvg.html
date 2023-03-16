@@ -21,6 +21,12 @@
 
   nodeList.forEach((node) => {
     node.addEventListener('click', () => {
+      nodeList.forEach((node) => {
+        node.querySelector('polygon').setAttribute('stroke', 'black');
+      })
+
+      node.querySelector('polygon').setAttribute('stroke', 'orange');
+
       const id = node.getAttribute('id');
 
       console.log(id)
@@ -29,6 +35,28 @@
 
       const incomingEdgeList = document.querySelectorAll(`.edge.head-${id} > path, .edge.head-${id} > polygon`)
       const outgoingEdgeList = document.querySelectorAll(`.edge.tail-${id} > path, .edge.tail-${id} > polygon`)
+
+      // TODO: make this trigger once per edge, not twice
+      Array.from(incomingEdgeList).forEach((element) => {
+        const classNameList = element.parentElement.getAttribute('class').split(' ');
+
+        const tailClass = classNameList.find((className) => className.startsWith('tail-'));
+        const tailId = tailClass.split('tail-')[1]
+
+        const tailElement = document.getElementById(tailId);
+        tailElement.querySelector('polygon').setAttribute('stroke', 'green');
+      })
+
+      // TODO: make this trigger once per edge, not twice
+      Array.from(outgoingEdgeList).forEach((element) => {
+        const classNameList = element.parentElement.getAttribute('class').split(' ');
+
+        const tailClass = classNameList.find((className) => className.startsWith('head-'));
+        const headId = tailClass.split('head-')[1]
+
+        const headElement = document.getElementById(headId);
+        headElement.querySelector('polygon').setAttribute('stroke', 'blue');
+      })
 
       allEdgeList.forEach((element) => {
         setEdgeColor(element, 'gray');
