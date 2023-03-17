@@ -1,3 +1,5 @@
+// TODO: rename this to GraphvizDirectedGraph
+
 import { Merge, SetOptional } from 'type-fest';
 import { Grition } from '../../../adapter/grition';
 import { OdeshinFromGrition } from '../../../adapter/odeshin';
@@ -51,6 +53,12 @@ export type DirectedGraph = {
   edgeList: DirectedGraphEdge[];
   subgraphList: DirectedSubgraph[];
 };
+
+export type DirectedGraphElement =
+  | DirectedGraph
+  | DirectedSubgraph
+  | DirectedGraphEdge
+  | DirectedGraphNode;
 
 export type DirectedGraphGrition = Grition<DirectedGraph>;
 

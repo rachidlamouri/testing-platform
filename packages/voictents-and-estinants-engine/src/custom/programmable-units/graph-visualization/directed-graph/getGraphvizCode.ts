@@ -1,6 +1,7 @@
 import { DirectedGraphEdge } from './directedGraphEdge';
 import { DirectedGraph, DirectedSubgraph } from './directedGraph';
 import { DirectedGraphNode } from './directedGraphNode';
+import { AttributeByKey } from './attribute';
 
 const indent = '  ' as const;
 
@@ -11,7 +12,7 @@ type AttributeStatement = `${QuotedText}=${QuotedText};`;
 // This should be a recursive template literal of "AttributeStatement", but that feature is not supported
 type AttributeListStatement = `[ ${AttributeStatement} ]`;
 
-const quote = (text: string): QuotedText => `"${text}"`;
+const quote = (text: string | number): QuotedText => `"${text}"`;
 
 // TODO: update graph ids to be uuids that are easy to map to other data
 const escapeId = (text: string): string => text.replaceAll(/(\/|@|\.)/g, '__');
@@ -24,7 +25,8 @@ const getAttributeStatementList = (
     .filter(([, value]) => value !== undefined)
     .map(([key, value]): AttributeStatement => {
       const quotedKey = quote(key);
-      const quotedValue = key === 'id' ? quoteId(value) : quote(value);
+      const quotedValue =
+        key === 'id' ? quoteId(value as AttributeByKey['id']) : quote(value);
 
       return `${quotedKey}=${quotedValue};`;
     });
@@ -99,9 +101,10 @@ const getDirectedGraphCodeLineList = (
     ...attributeStatementList,
     '',
     ...nodeStatementList,
-    ...edgeStatementList,
     '',
     ...subgraphLineList,
+    '',
+    ...edgeStatementList,
     '}',
   ];
 };
