@@ -1,3 +1,9 @@
+import {
+  LeftContext,
+  RightContext,
+  RightContextTuple,
+  TropoignantInput,
+} from '../custom/adapter/estinant-builder/estinantBuilderContext';
 import { Croarder } from './croarder';
 import { Framation } from './framation';
 import { Vicken, VickenTuple } from './vicken';
@@ -33,3 +39,23 @@ export type RightAppreffingeTuple<TInputVition extends Vition> =
     TInputVition,
     TInputVition['rightVickenTuple']
   >;
+
+// export type LeftAppreffinge2<TLeftContext extends LeftContext> = {
+//   gepp: TLeftContext['gepp'];
+//   isWibiz: TLeftContext['isWibiz'];
+// };
+
+// export type RightAppreffinge2<TRightContext extends RightContext> = {
+//   gepp: TRightContext['gepp'];
+//   isWibiz: TRightContext['isWibiz'];
+//   framate: TRightContext['tropoigFramate'];
+//   croard: TRightContext['tropoigCroard'];
+// };
+
+// export type RightAppreffingeTuple2<
+//   TRightContextTuple extends RightContextTuple,
+// > = {
+//   [Index in keyof TRightContextTuple]: RightAppreffinge2<
+//     TRightContextTuple[Index]
+//   >;
+// };

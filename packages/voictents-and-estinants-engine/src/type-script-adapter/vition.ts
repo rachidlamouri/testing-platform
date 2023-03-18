@@ -1,8 +1,10 @@
 import { HubblepupTupleTuple } from './hubblepup';
 import {
+  Vicken2Tuple,
   VickenTuple,
   VickenTupleToHubblepupTuple as VickenTupleToHubblepupTupleTuple,
 } from './vicken';
+import { Virm } from './virm';
 import { Voictent, VoictentToHubblepup } from './voictent';
 
 export type Vition<
@@ -21,3 +23,11 @@ export type VitionToHubblepupInputList<TVition extends Vition> = [
     VickenTupleToHubblepupTupleTuple<TVition['rightVickenTuple']>
   >,
 ];
+
+export type Vition2<
+  TLeftVirm extends Virm = Virm,
+  TRightVickenTuple extends Vicken2Tuple = Vicken2Tuple,
+> = {
+  leftVirm: TLeftVirm;
+  rightVickenTuple: TRightVickenTuple;
+};

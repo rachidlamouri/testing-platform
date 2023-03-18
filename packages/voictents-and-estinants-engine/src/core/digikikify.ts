@@ -84,8 +84,6 @@ export const digikikify = ({
     return platomity;
   });
 
-  addToTabilly(initialQuirmTuple);
-
   const canPlatomityAdvance = (platomity: Platomity): boolean => {
     return [platomity.leftDreanor, ...platomity.rightDreanorTuple].some(
       (dreanor) => dreanor.lanbe.hasNext(),
@@ -175,7 +173,10 @@ export const digikikify = ({
     });
   };
 
-  while (platomityList.some(canPlatomityAdvance)) {
+  addToTabilly(initialQuirmTuple);
+
+  // This must be a dowhile so that when "isWibiz" is true, it triggers for at a Voictent with 1 item
+  do {
     [...tabilly.values()].forEach((voictent) => {
       voictent.onTickStart();
     });
@@ -183,5 +184,5 @@ export const digikikify = ({
     platomityList.filter(canPlatomityAdvance).forEach((platomity) => {
       executePlatomity(platomity);
     });
-  }
+  } while (platomityList.some(canPlatomityAdvance));
 };

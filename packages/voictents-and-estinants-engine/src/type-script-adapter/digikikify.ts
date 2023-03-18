@@ -15,7 +15,7 @@ import { Gepp } from './gepp';
 import { HubblepupTuple } from './hubblepup';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AnyEstinant = Estinant<any, any>;
+export type AnyEstinant = Estinant<any, any>;
 
 type AnyEstinantTuple = readonly AnyEstinant[];
 

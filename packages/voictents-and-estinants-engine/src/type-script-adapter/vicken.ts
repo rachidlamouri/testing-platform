@@ -28,7 +28,7 @@ export type VickenTupleToVoictentTuple<TVickenTuple extends VickenTuple> = {
   [Index in keyof TVickenTuple]: TVickenTuple[Index]['voictent'];
 };
 
-type VickenVoictentTupleToZornTuple<
+export type VickenVoictentTupleToZornTuple<
   TVoictentTuple extends VoictentTuple,
   TZorn extends Zorn,
 > = {
@@ -38,3 +38,10 @@ type VickenVoictentTupleToZornTuple<
 export type VickenZornTuple<TVicken extends Vicken> = Readonly<
   VickenVoictentTupleToZornTuple<TVicken['voictentTuple'], TVicken['zorn']>
 >;
+
+// export type Vicken2<TVirm extends Virm, TZornTuple extends ZornTuple> = {
+//   virm: TVirm;
+//   zornTuple: TZornTuple;
+// };
+
+// export type Vicken2Tuple = Tuple<Vicken2>;

@@ -1,4 +1,5 @@
 import { Hubblepup } from '../../type-script-adapter/hubblepup';
+import { Tuple } from '../../utilities/semantic-types/tuple';
 import { Grition } from './grition';
 
 export type Odeshin<
@@ -8,6 +9,8 @@ export type Odeshin<
   zorn: TZorn;
   grition: TGrition;
 }>;
+
+export type OdeshinTuple = Tuple<Odeshin>;
 
 export type OdeshinFromGrition<TGrition extends Grition = Grition> = Odeshin<
   string,
