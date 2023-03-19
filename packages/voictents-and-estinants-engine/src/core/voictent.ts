@@ -1,4 +1,4 @@
-import { VoictentItemLanbe, VoictentLanbe } from './lanbe';
+import { LanbeTypeName, VoictentItemLanbe, VoictentLanbe } from './lanbe';
 import { Hubblepup } from './hubblepup';
 
 class MissingLanbeError extends Error {
@@ -50,6 +50,7 @@ export class Voictent {
 
   createVoictentLanbe(debugName: string): VoictentLanbe {
     const lanbe: VoictentLanbe = {
+      typeName: LanbeTypeName.VoictentLanbe,
       debugName,
       hasNext: () => {
         return this.didStopAccumulating;
@@ -65,6 +66,7 @@ export class Voictent {
 
   createVoictentItemLanbe(debugName: string): VoictentItemLanbe {
     const lanbe: VoictentItemLanbe = {
+      typeName: LanbeTypeName.VoictentItemLanbe,
       debugName,
       hasNext: () => {
         return this.hasNext(lanbe);

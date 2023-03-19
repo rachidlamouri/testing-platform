@@ -1,34 +1,43 @@
-import { Merge } from '../utilities/merge';
-import { MergeTuple } from '../utilities/mergeTuple';
 import { Croarder } from './croarder';
 import { Framation } from './framation';
 import { Gepp } from './gepp';
-import { Lanbe } from './lanbe';
+import { Lanbe, VoictentItemLanbe, VoictentLanbe } from './lanbe';
 import { Prected } from './prected';
 
-type Dreanor = {
-  gepp: Gepp;
-  lanbe: Lanbe;
-};
+export enum DreanorTypeName {
+  LeftDreanor = 'LeftDreanor',
+  RightVoictentDreanor = 'RightVoictentDreanor',
+  RightVoictentItemDreanor = 'RightVoictentItemDreanor',
+}
 
 /**
  * Contains the information needed to identify a Voictent, and to stream its Hubblepups
  */
-export type LeftDreanor = Merge<{ isLeft: true }, Dreanor>;
+export type LeftDreanor = {
+  typeName: DreanorTypeName.LeftDreanor;
+  gepp: Gepp;
+  lanbe: Lanbe;
+};
+
+export type RightVoictentDreanor = {
+  typeName: DreanorTypeName.RightVoictentDreanor;
+  gepp: Gepp;
+  lanbe: VoictentLanbe;
+  isReady: boolean;
+};
+
+export type RightVoictentItemDreanor = {
+  typeName: DreanorTypeName.RightVoictentItemDreanor;
+  gepp: Gepp;
+  lanbe: VoictentItemLanbe;
+  framate: Framation;
+  croard: Croarder;
+  prected: Prected;
+};
 
 /**
  * Contains the information needed to identify a Voictent, and to stream and cache its Hubblepups
  */
-export type RightDreanor = MergeTuple<
-  [
-    { isLeft: false },
-    Dreanor,
-    {
-      framate: Framation;
-      croard: Croarder;
-      prected: Prected;
-    },
-  ]
->;
+export type RightDreanor = RightVoictentDreanor | RightVoictentItemDreanor;
 
 export type RightDreanorTuple = readonly RightDreanor[];
