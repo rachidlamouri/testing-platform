@@ -1,19 +1,34 @@
 import { Hubblepup, HubblepupTuple } from './hubblepup';
 
-type BaseLanbe<TOutput extends Hubblepup | HubblepupTuple> = {
+export enum LanbeTypeName {
+  VoictentLanbe = 'VoictentLanbe',
+  VoictentItemLanbe = 'VoictentItemLanbe',
+}
+
+type BaseLanbe<
+  TTypeName extends LanbeTypeName,
+  TOutput extends Hubblepup | HubblepupTuple,
+> = {
+  typeName: TTypeName;
   debugName: string;
   hasNext: () => boolean;
   advance: () => void;
   dereference: () => TOutput | null;
 };
 
-export type VoictentItemLanbe = BaseLanbe<Hubblepup>;
+export type VoictentLanbe = BaseLanbe<
+  LanbeTypeName.VoictentLanbe,
+  HubblepupTuple
+>;
 
-export type VoictentLanbe = BaseLanbe<HubblepupTuple>;
+export type VoictentItemLanbe = BaseLanbe<
+  LanbeTypeName.VoictentItemLanbe,
+  Hubblepup
+>;
 
 /**
  * A data structure that facilitates streaming Hubblepups from a voictent or the entire tuple from the Voictent at once.
  * It encapsulates stream operations on a Voictent.
  * This allows an external entity to read a Voictent without needing a direct reference to it.
  */
-export type Lanbe = VoictentItemLanbe | VoictentLanbe;
+export type Lanbe = VoictentLanbe | VoictentItemLanbe;

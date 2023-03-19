@@ -59,7 +59,7 @@ export const typeScriptFileRelationshipListToDirectedGraph = buildCortmum<
     },
   ],
   outputGeppTuple: [DIRECTED_GRAPH_GEPP],
-  pinbe: (leftInput, [rightInput1], [rightInput2]) => {
+  pinbe: (leftInput, rightInput1, rightInput2) => {
     // TODO: update the type adapter layer to provide type safety for "isWibiz"
     const typedLeftInput =
       leftInput as unknown as TypeScriptFileRelationshipListOdeshin[];
