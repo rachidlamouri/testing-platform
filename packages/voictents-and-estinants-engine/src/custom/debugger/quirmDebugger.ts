@@ -68,7 +68,7 @@ export const buildQuirmDebugger = (
         ? escapePathSeparator(hubblepup.zorn)
         : uuid.v4();
 
-      writeHubblepupFile(gepp, fileName, '.yml', serialize(hubblepup));
+      writeHubblepupFile(gepp, fileName, 'yml', serialize(hubblepup));
     },
   };
 
