@@ -17,7 +17,7 @@ import {
   HTML_FILE_GEPP,
 } from '../html-file/htmlFile';
 
-export const fileMattomer = buildMattomer<
+export const categorizeFiles = buildMattomer<
   FileVoictent,
   [TypeScriptFileVoictent, YamlFileVoictent, HtmlFileVoictent]
 >({

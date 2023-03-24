@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import { buildOnama } from '../../../type-script-adapter/estinant/onama';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   OutputFile,
   OutputFileVoictent,
@@ -36,13 +36,14 @@ type IdentifiableRenderableNode = {
   right: IdentifiableEntityNode;
 };
 
-export const engineProgramTreeToOutputFile = buildOnama<
-  EngineProgramTreeNodeVoictent,
-  OutputFileVoictent
->({
-  inputGepp: ENGINE_PROGRAM_TREE_NODE_GEPP,
-  outputGepp: OUTPUT_FILE_GEPP,
-  pinbe: ({ grition: input }) => {
+export const constructEngineProgramTreeOutputFile = buildEstinant()
+  .fromGrition<EngineProgramTreeNodeVoictent>({
+    gepp: ENGINE_PROGRAM_TREE_NODE_GEPP,
+  })
+  .toHubblepup<OutputFileVoictent>({
+    gepp: OUTPUT_FILE_GEPP,
+  })
+  .onPinbe((input) => {
     const endEntityNode: EntityNode = {
       typeName: EntityNodeTypeName.VOICTENT,
       name: 'END',
@@ -178,5 +179,5 @@ ${allLineList.join('\n')}
     };
 
     return outputFile;
-  },
-});
+  })
+  .assemble();

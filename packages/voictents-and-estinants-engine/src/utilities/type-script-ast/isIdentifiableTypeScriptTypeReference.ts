@@ -1,5 +1,6 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import { Identifier, isIdentifier } from './isIdentifier';
+import { isNode, TypeScriptNode } from './isNode';
 
 export type IdentifiableTypeScriptTypeReference<TName extends string = string> =
   TSESTree.TSTypeReference & {
@@ -7,9 +8,11 @@ export type IdentifiableTypeScriptTypeReference<TName extends string = string> =
   };
 
 export const isIdentifiableTypeScriptTypeReference = (
-  node: TSESTree.Node,
+  node: TypeScriptNode,
 ): node is IdentifiableTypeScriptTypeReference =>
-  node.type === AST_NODE_TYPES.TSTypeReference && isIdentifier(node.typeName);
+  isNode(node) &&
+  node.type === AST_NODE_TYPES.TSTypeReference &&
+  isIdentifier(node.typeName);
 
 export const isSpecificIdentifiableTypeScriptTypeReference = <
   TName extends string,

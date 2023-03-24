@@ -1,7 +1,5 @@
-import { buildWattlection } from '../../../../type-script-adapter/estinant/wattlection';
-import { Vicken } from '../../../../type-script-adapter/vicken';
-import { Vition } from '../../../../type-script-adapter/vition';
 import { Tuple } from '../../../../utilities/semantic-types/tuple';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { Grition } from '../../../adapter/grition';
 import { OdeshinFromGrition } from '../../../adapter/odeshin';
 import { Voictent } from '../../../adapter/voictent';
@@ -36,40 +34,35 @@ export type EngineProgramTreeNodeVoictent = Voictent<
   EngineProgramTreeNodeOdeshin
 >;
 
-export const engineProgramTreeNodeWattlection = buildWattlection<
-  Vition<
-    EngineProgramVoictent,
-    [Vicken<EstinantTreeNodeVoictent, Tuple<EstinantTreeNodeVoictent>, string>]
-  >,
-  EngineProgramTreeNodeVoictent
->({
-  leftGepp: ENGINE_PROGRAM_GEPP,
-  rightAppreffingeTuple: [
-    {
-      gepp: ESTINANT_TREE_NODE_GEPP,
-      croard: (rightInput): string => rightInput.zorn,
-      framate: (leftInput): string[] =>
-        leftInput.grition.estinantIdentifierList,
-    },
-  ],
-  outputGepp: ENGINE_PROGRAM_TREE_NODE_GEPP,
-  pinbe: (leftInput, rightInputList) => {
-    const engineProgram = leftInput.grition;
-
+export const constructEngineProgramTree = buildEstinant()
+  .fromGrition<EngineProgramVoictent>({
+    gepp: ENGINE_PROGRAM_GEPP,
+  })
+  .andFromHubblepupTuple<
+    EstinantTreeNodeVoictent,
+    Tuple<EstinantTreeNodeVoictent>,
+    string
+  >({
+    gepp: ESTINANT_TREE_NODE_GEPP,
+    framate: (leftInput) => leftInput.grition.estinantIdentifierList,
+    croard: (rightInput) => rightInput.zorn,
+  })
+  .toGrition<EngineProgramTreeNodeVoictent>({
+    gepp: ENGINE_PROGRAM_TREE_NODE_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
+  })
+  .onPinbe((engineProgram, rightInputList) => {
     const estinantTreeNodeList = rightInputList.map(({ grition }) => grition);
 
     return {
-      zorn: leftInput.zorn,
-      grition: {
-        programName: engineProgram.programName,
-        estinantList: estinantTreeNodeList.map<EngineProgramEstinantTreeNode>(
-          ({ estinantName, inputList, outputList }) => ({
-            estinantName,
-            inputList,
-            outputList,
-          }),
-        ),
-      },
+      programName: engineProgram.programName,
+      estinantList: estinantTreeNodeList.map<EngineProgramEstinantTreeNode>(
+        ({ estinantName, inputList, outputList }) => ({
+          estinantName,
+          inputList,
+          outputList,
+        }),
+      ),
     };
-  },
-});
+  })
+  .assemble();

@@ -3,25 +3,25 @@ import {
   FILE_MENTURSECTION_CONFIGURATION_GEPP,
   VOICTENTS_AND_ESTINANTS_FILE_MENTURSECTION_CONFIGURATION,
 } from '../programmable-units/file/fileMentursectionConfiguration';
-import { fileMattomer } from '../programmable-units/file/fileMattomer';
-import { fileMentursection } from '../programmable-units/file/fileMentursection';
-import { typeScriptFileConfigurationOnama } from '../programmable-units/type-script-file/typeScriptFileConfiguration';
-import { parsedTypeScriptFileMentursection } from '../programmable-units/type-script-file/parsedTypeScriptFile';
-import { typeScriptFileExportListOnama } from '../programmable-units/type-script-file/typeScriptFileExportList';
+import { categorizeFiles } from '../programmable-units/file/fileMattomer';
+import { enumerateFileSystemObjects } from '../programmable-units/file/fileMentursection';
+import { associateTypeScriptFileToTypescriptConfiguration } from '../programmable-units/type-script-file/typeScriptFileConfiguration';
+import { parseTypeScriptFile } from '../programmable-units/type-script-file/parsedTypeScriptFile';
+import { getTypeScriptFileExportList } from '../programmable-units/type-script-file/typeScriptFileExportList';
 
-import { typeScriptFileImportListOnama } from '../programmable-units/type-script-file/typeScriptFileImportList';
+import { getTypeScriptFileImportList } from '../programmable-units/type-script-file/typeScriptFileImportList';
 import {
   ENGINE_FUNCTION_CONFIGURATION,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
 } from '../programmable-units/engine-program/engineFunctionConfiguration';
-import { engineProgramPartsCortmum } from '../programmable-units/engine-program/engineProgramPartsCortmum';
-import { programBodyDeclarationsByIdentifierOnama } from '../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
-import { estinantCallExpressionParameterCortmum } from '../programmable-units/engine-program/estinant-call-expression-parameter/estinantCallExpressionParameterCortmum';
-import { estinantOutputMentursection } from '../programmable-units/engine-program/estinant-input-output/estinantOutputList';
-import { estinantInputMentursection } from '../programmable-units/engine-program/estinant-input-output/estinantInputList';
-import { estinantTreeNodeWattlection } from '../programmable-units/engine-program/tree/estinantTreeNode';
-import { engineProgramTreeNodeWattlection } from '../programmable-units/engine-program/tree/engineProgramTreeNode';
-import { engineProgramTreeToOutputFile } from '../programmable-units/engine-program/engineProgramRendererWortinator';
+import { getEngineProgramParts } from '../programmable-units/engine-program/engineProgramPartsCortmum';
+import { getProgramBodyDeclarationsByIdentifier } from '../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
+import { getEstinantCallExpressionParts } from '../programmable-units/engine-program/estinant-call-expression-parameter/estinantCallExpressionParameterCortmum';
+import { getEstinantOutputList } from '../programmable-units/engine-program/estinant-input-output/estinantOutputList';
+import { getEstinantInputList } from '../programmable-units/engine-program/estinant-input-output/estinantInputList';
+import { constructEstinantTreeNode } from '../programmable-units/engine-program/tree/estinantTreeNode';
+import { constructEngineProgramTree } from '../programmable-units/engine-program/tree/engineProgramTreeNode';
+import { constructEngineProgramTreeOutputFile } from '../programmable-units/engine-program/engineProgramRendererWortinator';
 import { buildQuirmDebugger } from '../debugger/quirmDebugger';
 
 digikikify({
@@ -32,22 +32,22 @@ digikikify({
     [ENGINE_FUNCTION_CONFIGURATION_GEPP]: [ENGINE_FUNCTION_CONFIGURATION],
   },
   estinantTuple: [
-    fileMentursection,
-    fileMattomer,
+    enumerateFileSystemObjects,
+    categorizeFiles,
 
-    typeScriptFileConfigurationOnama,
-    parsedTypeScriptFileMentursection,
-    programBodyDeclarationsByIdentifierOnama,
-    typeScriptFileExportListOnama,
-    typeScriptFileImportListOnama,
+    associateTypeScriptFileToTypescriptConfiguration,
+    parseTypeScriptFile,
+    getProgramBodyDeclarationsByIdentifier,
+    getTypeScriptFileExportList,
+    getTypeScriptFileImportList,
 
-    engineProgramPartsCortmum,
-    estinantCallExpressionParameterCortmum,
-    estinantInputMentursection,
-    estinantOutputMentursection,
-    estinantTreeNodeWattlection,
-    engineProgramTreeNodeWattlection,
-    engineProgramTreeToOutputFile,
+    getEngineProgramParts,
+    getEstinantCallExpressionParts,
+    getEstinantInputList,
+    getEstinantOutputList,
+    constructEstinantTreeNode,
+    constructEngineProgramTree,
+    constructEngineProgramTreeOutputFile,
   ],
   quirmDebugger: buildQuirmDebugger('modelPrograms'),
 });

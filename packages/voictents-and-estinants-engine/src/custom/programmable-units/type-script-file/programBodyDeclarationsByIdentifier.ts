@@ -8,7 +8,6 @@ import {
   isIdentifiableTypeDeclaration,
   IdentifiableTypeDeclaration,
 } from '../../../utilities/type-script-ast/isIdentifiableTypeDeclaration';
-import { buildOnama } from '../../adapter/estinant/onama';
 import { Grition } from '../../adapter/grition';
 import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
@@ -16,6 +15,7 @@ import {
   ParsedTypeScriptFileVoictent,
   PARSED_TYPE_SCRIPT_FILE_GEPP,
 } from './parsedTypeScriptFile';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 
 export type ProgramBodyDeclarationsByIdentifier = Map<
   string,
@@ -39,13 +39,15 @@ export type ProgramBodyDeclarationsByIdentifierVoictent = Voictent<
   ProgramBodyDeclarationsByIdentifierOdeshin
 >;
 
-export const programBodyDeclarationsByIdentifierOnama = buildOnama<
-  ParsedTypeScriptFileVoictent,
-  ProgramBodyDeclarationsByIdentifierVoictent
->({
-  inputGepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
-  outputGepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
-  pinbe: (input) => {
+export const getProgramBodyDeclarationsByIdentifier = buildEstinant()
+  .fromGrition<ParsedTypeScriptFileVoictent>({
+    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  })
+  .toGrition<ProgramBodyDeclarationsByIdentifierVoictent>({
+    gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
+  })
+  .onPinbe((input) => {
     const output: ProgramBodyDeclarationsByIdentifier = new Map();
 
     input.program.body.forEach((statement) => {
@@ -67,5 +69,5 @@ export const programBodyDeclarationsByIdentifierOnama = buildOnama<
     });
 
     return output;
-  },
-});
+  })
+  .assemble();

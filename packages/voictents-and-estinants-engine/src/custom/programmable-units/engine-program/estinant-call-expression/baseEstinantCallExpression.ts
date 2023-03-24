@@ -1,4 +1,4 @@
-import { isSpecificCallExpression } from '../../../../utilities/type-script-ast/isCallExpression';
+import { isSpecificIdentifiableCallExpression } from '../../../../utilities/type-script-ast/isCallExpression';
 import { IdentifiableCallExpression } from '../../../../utilities/type-script-ast/isIdentifiableCallExpression';
 import {
   isNode,
@@ -48,7 +48,7 @@ export const buildIsEstinantCallExpression = <
   > => {
     return (
       isNode(node) &&
-      isSpecificCallExpression(node, calleeName) &&
+      isSpecificIdentifiableCallExpression(node, calleeName) &&
       isTypeScriptTypeParameterInstantiationWithParameterTuple(
         node.typeParameters,
         parameterNodeTypeTuple,
