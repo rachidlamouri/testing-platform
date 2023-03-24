@@ -1,16 +1,17 @@
 import childProcessUtilities from 'child_process';
 import * as cheerio from 'cheerio';
-import { buildMentursection } from '../../../type-script-adapter/estinant/mentursection';
 import { GraphvizCodeVoictent, GRAPHVIZ_CODE_GEPP } from './graphvizCode';
 import { SvgDocumentVoictent, SVG_DOCUMENT_GEPP } from './svgDocument';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 
-export const graphvizCodeToSvgDocument = buildMentursection<
-  GraphvizCodeVoictent,
-  [SvgDocumentVoictent]
->({
-  inputGepp: GRAPHVIZ_CODE_GEPP,
-  outputGeppTuple: [SVG_DOCUMENT_GEPP],
-  pinbe: ({ zorn, grition }) => {
+export const renderGraphvizCodeToSvgDocument = buildEstinant()
+  .fromHubblepup<GraphvizCodeVoictent>({
+    gepp: GRAPHVIZ_CODE_GEPP,
+  })
+  .toHubblepupTuple<SvgDocumentVoictent>({
+    gepp: SVG_DOCUMENT_GEPP,
+  })
+  .onPinbe(({ zorn, grition }) => {
     const result = childProcessUtilities.spawnSync('dot', ['-Tsvg'], {
       encoding: 'utf8',
       input: grition,
@@ -54,17 +55,15 @@ export const graphvizCodeToSvgDocument = buildMentursection<
 
     const modifiedDocument = $svg.toString() ?? '';
 
-    return {
-      [SVG_DOCUMENT_GEPP]: [
-        {
-          zorn: `${zorn}/original`,
-          grition: originalDocument,
-        },
-        {
-          zorn: `${zorn}/modified`,
-          grition: modifiedDocument,
-        },
-      ],
-    };
-  },
-});
+    return [
+      {
+        zorn: `${zorn}/original`,
+        grition: originalDocument,
+      },
+      {
+        zorn: `${zorn}/modified`,
+        grition: modifiedDocument,
+      },
+    ];
+  })
+  .assemble();
