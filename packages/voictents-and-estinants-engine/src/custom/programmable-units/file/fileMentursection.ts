@@ -1,9 +1,9 @@
-import { buildMentursection } from '../../../type-script-adapter/estinant/mentursection';
 import {
   FileSystemNodeMetadata,
   getNestedFileSystemNodeMetadataList,
 } from '../../../utilities/file/getNestedFilePaths';
 import { splitList } from '../../../utilities/splitList';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   DirectoryOdeshin,
   DirectoryVoictent,
@@ -12,7 +12,7 @@ import {
 import { FileVoictent, FILE_GEPP, FileOdeshin, FileGrition } from './file';
 import { getFileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import {
-  FileMentursectionConfigurationVoictent,
+  FileSystemObjectEnumeratorConfigurationVoictent,
   FILE_MENTURSECTION_CONFIGURATION_GEPP,
 } from './fileMentursectionConfiguration';
 import { getFileMetadata } from './getFileMetadata';
@@ -49,13 +49,17 @@ const partsToKebabCase = (x: string[]): string => {
   return x.join('-');
 };
 
-export const fileMentursection = buildMentursection<
-  FileMentursectionConfigurationVoictent,
-  [DirectoryVoictent, FileVoictent]
->({
-  inputGepp: FILE_MENTURSECTION_CONFIGURATION_GEPP,
-  outputGeppTuple: [DIRECTORY_GEPP, FILE_GEPP],
-  pinbe: (input) => {
+export const enumerateFileSystemObjects = buildEstinant()
+  .fromHubblepup<FileSystemObjectEnumeratorConfigurationVoictent>({
+    gepp: FILE_MENTURSECTION_CONFIGURATION_GEPP,
+  })
+  .toHubblepupTuple<DirectoryVoictent>({
+    gepp: DIRECTORY_GEPP,
+  })
+  .andToHubblepupTuple<FileVoictent>({
+    gepp: FILE_GEPP,
+  })
+  .onPinbe((input) => {
     const nodeMetadataList = getNestedFileSystemNodeMetadataList(input);
 
     const directoryMetadataList: FileSystemNodeMetadata[] = [];
@@ -126,5 +130,5 @@ export const fileMentursection = buildMentursection<
       [DIRECTORY_GEPP]: directoryOutputTuple,
       [FILE_GEPP]: fileOutputTuple,
     };
-  },
-});
+  })
+  .assemble();

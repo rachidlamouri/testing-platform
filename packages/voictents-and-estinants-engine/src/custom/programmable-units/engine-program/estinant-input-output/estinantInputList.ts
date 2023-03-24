@@ -10,7 +10,7 @@ import {
   isTypeScriptTypeParameterInstantiation,
   TypeScriptTypeParameterInstantiation,
 } from '../../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
-import { buildMentursection } from '../../../adapter/estinant/mentursection';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { Grition } from '../../../adapter/grition';
 import { OdeshinFromGrition } from '../../../adapter/odeshin';
 import { Voictent } from '../../../adapter/voictent';
@@ -79,15 +79,23 @@ const isVitionInstantiation = (
       isIdentifiableTypeScriptTypeReference(subNode.typeParameters.params[0]),
   );
 
-export const estinantInputMentursection = buildMentursection<
-  EstinantCallExpressionInputParameterVoictent,
-  [EstinantInputListVoictent, ErrorVoictent]
->({
-  inputGepp: ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
-  outputGeppTuple: [ESTINANT_INPUT_LIST_GEPP, ERROR_GEPP],
-  pinbe: (input) => {
-    const identifiableNode = isIdentifiableTypeScriptTypeReference(input.node)
-      ? input.node
+export const getEstinantInputList = buildEstinant()
+  .fromHubblepup<EstinantCallExpressionInputParameterVoictent>({
+    gepp: ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
+  })
+  .toHubblepup<EstinantInputListVoictent>({
+    gepp: ESTINANT_INPUT_LIST_GEPP,
+  })
+  .andToHubblepupTuple<ErrorVoictent>({
+    gepp: ERROR_GEPP,
+  })
+  .onPinbe((input) => {
+    const callExpressionInputParameter = input.grition;
+
+    const identifiableNode = isIdentifiableTypeScriptTypeReference(
+      callExpressionInputParameter.node,
+    )
+      ? callExpressionInputParameter.node
       : null;
 
     let voictentNameList: string[] | [];
@@ -119,11 +127,11 @@ export const estinantInputMentursection = buildMentursection<
           ]
         : [];
 
-    const outputList = voictentNameList.map<EstinantInput>(
+    const inputList = voictentNameList.map<EstinantInput>(
       (voictentName, index) => {
         return {
-          programName: input.programName,
-          estinantName: input.estinantName,
+          programName: callExpressionInputParameter.programName,
+          estinantName: callExpressionInputParameter.estinantName,
           voictentName,
           isInput: true,
           index,
@@ -132,8 +140,16 @@ export const estinantInputMentursection = buildMentursection<
     );
 
     return {
-      [ESTINANT_INPUT_LIST_GEPP]: [outputList],
-      [ERROR_GEPP]: errorList,
+      [ESTINANT_INPUT_LIST_GEPP]: {
+        zorn: input.zorn,
+        grition: inputList,
+      },
+      [ERROR_GEPP]: errorList.map((error, index) => {
+        return {
+          zorn: `${input.zorn}/${index}`,
+          grition: error,
+        };
+      }),
     };
-  },
-});
+  })
+  .assemble();

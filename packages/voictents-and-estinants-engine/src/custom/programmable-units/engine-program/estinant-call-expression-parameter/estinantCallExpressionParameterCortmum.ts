@@ -1,8 +1,20 @@
-import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
-import { buildCortmum } from '../../../../type-script-adapter/estinant/cortmum';
-import { Vicken } from '../../../../type-script-adapter/vicken';
-import { Vition } from '../../../../type-script-adapter/vition';
-import { isIdentifiableCallExpression } from '../../../../utilities/type-script-ast/isIdentifiableCallExpression';
+import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
+import { splitList } from '../../../../utilities/splitList';
+import {
+  flattenCallExpressionChain,
+  FlattenedCallExpressionOrError,
+} from '../../../../utilities/type-script-ast/flattenIdentifiableCallExpressionChain';
+import { isCallExpression } from '../../../../utilities/type-script-ast/isCallExpression';
+import {
+  IdentifiableCallExpression,
+  isIdentifiableCallExpression,
+} from '../../../../utilities/type-script-ast/isIdentifiableCallExpression';
+import {
+  IdentifiableTypeScriptTypeReference,
+  isIdentifiableTypeScriptTypeReference,
+} from '../../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
+import { IdentifiableMemberExpressionCallExpression } from '../../../../utilities/type-script-ast/isMemberExpressionCallExpression';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { ErrorVoictent, ERROR_GEPP } from '../../error/error';
 import {
   ProgramBodyDeclarationsByIdentifierVoictent,
@@ -20,6 +32,16 @@ import { isOnamaCallExpression } from '../estinant-call-expression/onamaCallExpr
 import { isWattlectionCallExpression } from '../estinant-call-expression/wattlectionCallExpression';
 import { isWortinatorCallExpression } from '../estinant-call-expression/wortinatorCallExpression';
 import {
+  EstinantInput,
+  EstinantInputListVoictent,
+  ESTINANT_INPUT_LIST_GEPP,
+} from '../estinant-input-output/estinantInputList';
+import {
+  EstinantOutput,
+  EstinantOutputListVoictent,
+  ESTINANT_OUTPUT_LIST_GEPP,
+} from '../estinant-input-output/estinantOutputList';
+import {
   EstinantCallExpressionInputParameterVoictent,
   ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
 } from './estinantCallExpressionInputParameter';
@@ -32,65 +54,371 @@ import {
   ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
 } from './estinantInputOutputParent';
 
-export const estinantCallExpressionParameterCortmum = buildCortmum<
-  Vition<
-    EngineEstinantVoictent,
-    [
-      Vicken<
-        ProgramBodyDeclarationsByIdentifierVoictent,
-        [ProgramBodyDeclarationsByIdentifierVoictent],
-        string
-      >,
-    ]
-  >,
-  [
-    EstinantInputOutputParentVoictent,
-    EstinantCallExpressionInputParameterVoictent,
-    EstinantCallExpressionOutputParameterVoictent,
-    ErrorVoictent,
-  ]
->({
-  leftGepp: ENGINE_ESTINANT_GEPP,
-  rightAppreffingeTuple: [
-    {
-      gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
-      croard: (rightInput): string => rightInput.zorn,
-      framate: (leftInput) => [leftInput.grition.estinantFilePath] as const,
-    },
-  ],
-  outputGeppTuple: [
-    ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
-    ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
-    ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
-    ERROR_GEPP,
-  ],
-  pinbe: (engineEstinantInput, [{ grition: bodyDeclarationsByIdentifier }]) => {
-    const engineEstinant = engineEstinantInput.grition;
+export const getEstinantCallExpressionParts = buildEstinant()
+  .fromHubblepup<EngineEstinantVoictent>({
+    gepp: ENGINE_ESTINANT_GEPP,
+  })
+  .andFromHubblepupTuple<
+    ProgramBodyDeclarationsByIdentifierVoictent,
+    [ProgramBodyDeclarationsByIdentifierVoictent],
+    string
+  >({
+    gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
+    croard: (rightInput) => rightInput.zorn,
+    framate: (leftInput) => [leftInput.grition.estinantFilePath],
+  })
+  .toHubblepupTuple<EstinantInputOutputParentVoictent>({
+    gepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
+  })
+  .andToHubblepupTuple<EstinantCallExpressionInputParameterVoictent>({
+    gepp: ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
+  })
+  .andToHubblepupTuple<EstinantCallExpressionOutputParameterVoictent>({
+    gepp: ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
+  })
+  .andToHubblepupTuple<EstinantInputListVoictent>({
+    gepp: ESTINANT_INPUT_LIST_GEPP,
+  })
+  .andToHubblepupTuple<EstinantOutputListVoictent>({
+    gepp: ESTINANT_OUTPUT_LIST_GEPP,
+  })
+  .andToHubblepupTuple<ErrorVoictent>({
+    gepp: ERROR_GEPP,
+  })
+  .onPinbe(
+    (engineEstinantInput, [{ grition: bodyDeclarationsByIdentifier }]) => {
+      const errorZorn = `estinantCallExpressionParameterCortmum/${engineEstinantInput.zorn}`;
 
-    const node = bodyDeclarationsByIdentifier.get(
-      engineEstinant.exportedIdentifierName,
-    );
-
-    const initExpression =
-      node?.type === AST_NODE_TYPES.VariableDeclarator ? node.init : null;
-
-    const callExpression = isIdentifiableCallExpression(initExpression)
-      ? initExpression
-      : null;
-
-    if (
-      isCortmumCallExpression(callExpression) ||
-      isMentursectionCallExpression(callExpression) ||
-      isOnamaCallExpression(callExpression) ||
-      isMattomerCallExpression(callExpression) ||
-      isWattlectionCallExpression(callExpression) ||
-      isWortinatorCallExpression(callExpression) ||
-      isDisatingerCallExpression(callExpression)
-    ) {
+      const engineEstinant = engineEstinantInput.grition;
       const { programName, estinantName } = engineEstinant;
 
-      const inputListIdentifier = `${engineEstinantInput.zorn}/input`;
-      const outputListIdentifier = `${engineEstinantInput.zorn}/output`;
+      const node = bodyDeclarationsByIdentifier.get(
+        engineEstinant.exportedIdentifierName,
+      );
+
+      const initExpression =
+        node?.type === AST_NODE_TYPES.VariableDeclarator ? node.init : null;
+
+      const callExpression = isCallExpression(initExpression)
+        ? initExpression
+        : null;
+
+      if (callExpression === null) {
+        return {
+          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
+          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
+          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
+          [ESTINANT_INPUT_LIST_GEPP]: [],
+          [ESTINANT_OUTPUT_LIST_GEPP]: [],
+          [ERROR_GEPP]: [
+            {
+              zorn: errorZorn,
+              grition: {
+                message: 'Export declaration is missing a call expression',
+                hasNode: node !== undefined,
+                hasInitExpression: initExpression !== null,
+                hasCallExpression: callExpression !== null,
+                initExpression,
+              },
+            },
+          ],
+        };
+      }
+
+      if (
+        isIdentifiableCallExpression(callExpression) &&
+        (isCortmumCallExpression(callExpression) ||
+          isMentursectionCallExpression(callExpression) ||
+          isOnamaCallExpression(callExpression) ||
+          isMattomerCallExpression(callExpression) ||
+          isWattlectionCallExpression(callExpression) ||
+          isWortinatorCallExpression(callExpression) ||
+          isDisatingerCallExpression(callExpression))
+      ) {
+        const inputListIdentifier = `${engineEstinantInput.zorn}/input`;
+        const outputListIdentifier = `${engineEstinantInput.zorn}/output`;
+
+        return {
+          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [
+            {
+              zorn: engineEstinantInput.zorn,
+              grition: {
+                programName,
+                estinantName,
+                inputListIdentifier,
+                outputListIdentifier,
+              },
+            },
+          ],
+          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [
+            {
+              zorn: inputListIdentifier,
+              grition: {
+                programName,
+                estinantName,
+                isInput: true,
+                node: callExpression.typeParameters.params[0],
+              },
+            },
+          ],
+          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [
+            {
+              zorn: outputListIdentifier,
+              grition: {
+                programName,
+                estinantName,
+                isInput: false,
+                node: callExpression.typeParameters.params[1],
+              },
+            },
+          ],
+          [ESTINANT_INPUT_LIST_GEPP]: [],
+          [ESTINANT_OUTPUT_LIST_GEPP]: [],
+          [ERROR_GEPP]: [],
+        };
+      }
+
+      // const estinantBuilderCallExpression = isSpecificIdentifiableCallExpression(
+      //   callExpression,
+      //   // TODO:
+      //   'assemble',
+      // )
+      //   ? callExpression
+      //   : null;
+
+      const flattenedCallExpressionAndErrorList =
+        flattenCallExpressionChain(callExpression);
+
+      const errorList: Error[] = [];
+
+      const flattenedCallExpressionList: Exclude<
+        FlattenedCallExpressionOrError,
+        Error
+      >[] = [];
+
+      splitList({
+        list: flattenedCallExpressionAndErrorList,
+        isElementA: (element): element is Error => element instanceof Error,
+        accumulatorA: errorList,
+        accumulatorB: flattenedCallExpressionList,
+      });
+
+      if (errorList.length > 0) {
+        return {
+          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
+          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
+          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
+          [ESTINANT_INPUT_LIST_GEPP]: [],
+          [ESTINANT_OUTPUT_LIST_GEPP]: [],
+          [ERROR_GEPP]: errorList.map((error, index) => {
+            return {
+              zorn: `${errorZorn}/${index}`,
+              grition: error,
+            };
+          }),
+        };
+      }
+
+      // const functionNameList = flattenedCallExpressionList.map((expression) => {
+      //   if (expression.type === AST_NODE_TYPES.CallExpression) {
+      //     return expression.callee.name;
+      //   }
+
+      //   return expression.property.name;
+      // });
+
+      // const inputOutputCallExpressionList = flattenedCallExpressionList.slice(
+      //   1,
+      //   -2,
+      // );
+
+      type ParsedExpression1 = {
+        functionName: string;
+        isInput: boolean | null;
+        typeNode: TSESTree.TypeNode | null;
+      };
+
+      type ParsedExpression2 = {
+        functionName: string;
+        isInput: boolean;
+        typeNode: IdentifiableTypeScriptTypeReference;
+      };
+
+      const getTypeParameterList = (
+        expression:
+          | IdentifiableCallExpression
+          | IdentifiableMemberExpressionCallExpression
+          | undefined,
+      ): TSESTree.TypeNode[] | undefined => {
+        if (expression === undefined) {
+          return undefined;
+        }
+
+        if (expression.type === AST_NODE_TYPES.CallExpression) {
+          return expression.typeParameters?.params;
+        }
+
+        return expression.object.typeParameters?.params;
+      };
+
+      const parsedFlattenedCallExpressionList =
+        flattenedCallExpressionList.map<ParsedExpression1>(
+          (expression, index) => {
+            // TODO: clean up the logic for a flattened call expression list. The type parameters are on the next element's node which is confusing
+            const typeParameterNodeList = getTypeParameterList(
+              flattenedCallExpressionList[index + 1],
+            );
+
+            const typeNode: TSESTree.TypeNode | null =
+              (typeParameterNodeList ?? [])[0] ?? null;
+
+            let functionName: string;
+            if (expression.type === AST_NODE_TYPES.CallExpression) {
+              functionName = expression.callee.name;
+            } else {
+              functionName = expression.property.name;
+            }
+
+            let isInput: boolean | null;
+            if (
+              functionName.startsWith('from') ||
+              functionName.startsWith('andFrom')
+            ) {
+              isInput = true;
+            } else if (
+              functionName.startsWith('to') ||
+              functionName.startsWith('andTo')
+            ) {
+              isInput = false;
+            } else {
+              isInput = null;
+            }
+
+            return {
+              functionName,
+              isInput,
+              typeNode,
+            };
+          },
+        );
+
+      if (
+        parsedFlattenedCallExpressionList[0].functionName !== buildEstinant.name
+      ) {
+        return {
+          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
+          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
+          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
+          [ESTINANT_INPUT_LIST_GEPP]: [],
+          [ESTINANT_OUTPUT_LIST_GEPP]: [],
+          [ERROR_GEPP]: [
+            {
+              zorn: errorZorn,
+              grition: {
+                message: `Call expression chain does not start with "${buildEstinant.name}"`,
+                parsedFlattenedCallExpressionList,
+              },
+            },
+          ],
+        };
+      }
+
+      // TODO: tie these function names back to the estinant builder function names
+      if (
+        parsedFlattenedCallExpressionList[
+          parsedFlattenedCallExpressionList.length - 2
+        ]?.functionName !== 'onPinbe' ||
+        parsedFlattenedCallExpressionList[
+          parsedFlattenedCallExpressionList.length - 1
+        ]?.functionName !== 'assemble'
+      ) {
+        return {
+          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
+          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
+          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
+          [ESTINANT_INPUT_LIST_GEPP]: [],
+          [ESTINANT_OUTPUT_LIST_GEPP]: [],
+          [ERROR_GEPP]: [
+            {
+              zorn: errorZorn,
+              grition: {
+                message:
+                  'Estinant builder call expression chain does not end in "onPinbe" and on "assemble"',
+                parsedFlattenedCallExpressionList,
+              },
+            },
+          ],
+        };
+      }
+
+      const inputOutputCallExpressionList: ParsedExpression2[] = [];
+      const errorParsedExpressionList: ParsedExpression1[] = [];
+      splitList({
+        list: parsedFlattenedCallExpressionList.slice(1, -2),
+        isElementA: (element): element is ParsedExpression2 =>
+          element.isInput !== null &&
+          isIdentifiableTypeScriptTypeReference(element.typeNode),
+        accumulatorA: inputOutputCallExpressionList,
+        accumulatorB: errorParsedExpressionList,
+      });
+
+      if (errorParsedExpressionList.length > 0) {
+        return {
+          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
+          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
+          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
+          [ESTINANT_INPUT_LIST_GEPP]: [],
+          [ESTINANT_OUTPUT_LIST_GEPP]: [],
+          [ERROR_GEPP]: errorParsedExpressionList.map(
+            (parsedExpression, index) => {
+              return {
+                zorn: `${errorZorn}/${index}`,
+                grition: {
+                  message: `Estinant builder expression "${parsedExpression.functionName}" is missing a type parameter`,
+                  parsedExpression,
+                },
+              };
+            },
+          ),
+        };
+      }
+
+      const inputListZorn = `${engineEstinantInput.zorn}/input`;
+      const outputListZorn = `${engineEstinantInput.zorn}/output`;
+
+      const estinantInputOutputList = inputOutputCallExpressionList.map<
+        EstinantInput | EstinantOutput
+      >(({ isInput, typeNode }, index) => {
+        // TODO: make the convention where we chop off the suffix more discoverable
+        const voictentName = typeNode.typeName.name.replace(/Voictent$/, '');
+
+        if (isInput) {
+          return {
+            programName,
+            estinantName,
+            voictentName,
+            isInput,
+            index,
+          } satisfies EstinantInput;
+        }
+
+        return {
+          programName,
+          estinantName,
+          voictentName,
+          isInput,
+          index: null,
+        } satisfies EstinantOutput;
+      });
+
+      const inputList = estinantInputOutputList.filter<EstinantInput>(
+        (inputOrOutput): inputOrOutput is EstinantInput =>
+          inputOrOutput.isInput,
+      );
+      const outputList = estinantInputOutputList.filter<EstinantOutput>(
+        (inputOrOutput): inputOrOutput is EstinantOutput =>
+          !inputOrOutput.isInput,
+      );
 
       return {
         [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [
@@ -99,52 +427,27 @@ export const estinantCallExpressionParameterCortmum = buildCortmum<
             grition: {
               programName,
               estinantName,
-              inputListIdentifier,
-              outputListIdentifier,
+              inputListIdentifier: inputListZorn,
+              outputListIdentifier: outputListZorn,
             },
           },
         ],
-        [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [
+        [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
+        [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
+        [ESTINANT_INPUT_LIST_GEPP]: [
           {
-            zorn: inputListIdentifier,
-            grition: {
-              programName,
-              estinantName,
-              isInput: true,
-              node: callExpression.typeParameters.params[0],
-            },
+            zorn: inputListZorn,
+            grition: inputList,
           },
         ],
-        [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [
+        [ESTINANT_OUTPUT_LIST_GEPP]: [
           {
-            zorn: outputListIdentifier,
-            grition: {
-              programName,
-              estinantName,
-              isInput: false,
-              node: callExpression.typeParameters.params[1],
-            },
+            zorn: outputListZorn,
+            grition: outputList,
           },
         ],
         [ERROR_GEPP]: [],
       };
-    }
-
-    return {
-      [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-      [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-      [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
-      [ERROR_GEPP]: [
-        {
-          zorn: engineEstinantInput.zorn,
-          grition: {
-            hasNode: node !== undefined,
-            hasInitExpression: initExpression !== null,
-            hasCallExpression: callExpression !== null,
-            callExpression,
-          },
-        },
-      ],
-    };
-  },
-});
+    },
+  )
+  .assemble();

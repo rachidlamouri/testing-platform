@@ -2,8 +2,8 @@ import { digikikify as coreDigikikify } from '../core/digikikify';
 import { EstinantTuple as CoreEstinantTuple } from '../core/estinant';
 import { Quirm } from '../core/quirm';
 import { StralineTuple } from '../utilities/semantic-types/straline';
-import { Estinant } from './estinant/estinant';
-import { VickenTupleToVoictentTuple } from './vicken';
+import { Estinant, Estinant2 } from './estinant/estinant';
+import { RightVickenTuple, VickenTupleToVoictentTuple } from './vicken';
 import {
   Voictent,
   VoictentArrayToVoictentItem,
@@ -15,9 +15,13 @@ import { Gepp } from './gepp';
 import { HubblepupTuple } from './hubblepup';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AnyEstinant = Estinant<any, any>;
+export type AnyEstinant = Estinant<any, any> | Estinant2<any, any, any>;
 
 type AnyEstinantTuple = readonly AnyEstinant[];
+
+type IDK<TRightVickenTuple extends RightVickenTuple> = {
+  [Index in keyof TRightVickenTuple]: TRightVickenTuple[Index]['voictent'];
+};
 
 /**
  * Combines the input and output VoictentTuple types for each each estinant individually
@@ -32,6 +36,15 @@ type EstinantTupleToCombinedVoictentTuple<
     ?
         | TInputVition['leftVoictent']
         | VickenTupleToVoictentTuple<TInputVition['rightVickenTuple']>[number]
+        | TOutputVoictentTuple[number]
+    : TEstinantTuple[Index] extends Estinant2<
+        infer TLeftVicken,
+        infer TRightVickenTuple,
+        infer TOutputVoictentTuple
+      >
+    ?
+        | TLeftVicken['voictent']
+        | IDK<TRightVickenTuple>[number]
         | TOutputVoictentTuple[number]
     : never;
 };

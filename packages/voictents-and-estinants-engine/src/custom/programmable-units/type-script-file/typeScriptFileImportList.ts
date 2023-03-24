@@ -2,7 +2,7 @@ import { posix } from 'path';
 import { resolveModuleFilePath } from '../../../utilities/file/resolveModuleFilePath';
 import { Merge } from '../../../utilities/merge';
 import { isImportDeclaration } from '../../../utilities/type-script-ast/isImportDeclaration';
-import { buildOnama } from '../../adapter/estinant/onama';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { Grition } from '../../adapter/grition';
 import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
@@ -57,13 +57,15 @@ export type TypeScriptFileImportListVoictent = Voictent<
   TypeScriptFileImportListOdeshin
 >;
 
-export const typeScriptFileImportListOnama = buildOnama<
-  ParsedTypeScriptFileVoictent,
-  TypeScriptFileImportListVoictent
->({
-  inputGepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
-  outputGepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-  pinbe: (input) => {
+export const getTypeScriptFileImportList = buildEstinant()
+  .fromGrition<ParsedTypeScriptFileVoictent>({
+    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  })
+  .toGrition<TypeScriptFileImportListVoictent>({
+    gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
+  })
+  .onPinbe((input) => {
     const importList = input.program.body
       .filter(isImportDeclaration)
       .map<TypeScriptFileImport>((inputImportDeclaration) => {
@@ -101,5 +103,5 @@ export const typeScriptFileImportListOnama = buildOnama<
       });
 
     return importList;
-  },
-});
+  })
+  .assemble();

@@ -7,7 +7,7 @@ import {
   ExportNamedVariableDeclaration,
   isExportNamedVariableDeclaration,
 } from '../../../utilities/type-script-ast/isExportNamedVariableDeclaration';
-import { buildOnama } from '../../adapter/estinant/onama';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { Grition } from '../../adapter/grition';
 import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
@@ -43,13 +43,15 @@ export type TypeScriptFileExportListVoictent = Voictent<
   TypeScriptFileExportListOdeshin
 >;
 
-export const typeScriptFileExportListOnama = buildOnama<
-  ParsedTypeScriptFileVoictent,
-  TypeScriptFileExportListVoictent
->({
-  inputGepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
-  outputGepp: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
-  pinbe: (input) => {
+export const getTypeScriptFileExportList = buildEstinant()
+  .fromGrition<ParsedTypeScriptFileVoictent>({
+    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  })
+  .toGrition<TypeScriptFileExportListVoictent>({
+    gepp: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
+  })
+  .onPinbe((input) => {
     const exportList = input.program.body
       .filter(
         (
@@ -75,5 +77,5 @@ export const typeScriptFileExportListOnama = buildOnama<
       });
 
     return exportList;
-  },
-});
+  })
+  .assemble();

@@ -1,3 +1,4 @@
+import { OdeshinVoictent } from '../custom/adapter/odeshinVoictent';
 import { Tuple } from '../utilities/semantic-types/tuple';
 import { Zorn } from '../utilities/semantic-types/zorn';
 import {
@@ -28,7 +29,7 @@ export type VickenTupleToVoictentTuple<TVickenTuple extends VickenTuple> = {
   [Index in keyof TVickenTuple]: TVickenTuple[Index]['voictent'];
 };
 
-type VickenVoictentTupleToZornTuple<
+export type VickenVoictentTupleToZornTuple<
   TVoictentTuple extends VoictentTuple,
   TZorn extends Zorn,
 > = {
@@ -38,3 +39,78 @@ type VickenVoictentTupleToZornTuple<
 export type VickenZornTuple<TVicken extends Vicken> = Readonly<
   VickenVoictentTupleToZornTuple<TVicken['voictentTuple'], TVicken['zorn']>
 >;
+
+export type LeftVoictentVicken<TVoictent extends Voictent = Voictent> = {
+  voictent: TVoictent;
+  tropoignantInput: TVoictent['hubblepupTuple'];
+};
+
+export type LeftHubblepupVicken<TVoictent extends Voictent = Voictent> = {
+  voictent: TVoictent;
+  tropoignantInput: TVoictent['hubblepupTuple'][number];
+};
+
+export type LeftVicken = LeftVoictentVicken | LeftHubblepupVicken;
+
+export type RightVoictentVicken<TVoictent extends Voictent = Voictent> = {
+  voictent: TVoictent;
+  tropoignantInput: TVoictent['hubblepupTuple'];
+};
+
+export type RightHubblepupVicken<
+  TVoictent extends Voictent = Voictent,
+  TVoictentTuple extends Tuple<TVoictent> = Tuple<TVoictent>,
+  TZorn extends Zorn = Zorn,
+> = {
+  voictent: TVoictent;
+  voictentTuple: TVoictentTuple;
+  zorn: TZorn;
+  tropoignantInput: TVoictent['hubblepupTuple'][number];
+};
+
+export type RightVicken = RightVoictentVicken | RightHubblepupVicken;
+
+export type RightVickenTuple = Tuple<RightVicken>;
+
+export type AppendRightVickenToTuple<
+  TRightVickenTuple extends RightVickenTuple,
+  TNextRightVicken extends RightVicken,
+> = [...TRightVickenTuple, TNextRightVicken];
+
+// I DONT THINK VICKEN IS THE RIGHT TERM HERE, BUT WE'LL DEAL WITH THAT LATER(tm)
+export type OutputVoictentVicken<TVoictent extends Voictent = Voictent> = {
+  voictent: TVoictent;
+  pinbeOutput: TVoictent['hubblepupTuple'];
+};
+
+export type OutputOdeshinVoictentVicken<
+  TVoictent extends OdeshinVoictent = OdeshinVoictent,
+> = {
+  voictent: TVoictent;
+  pinbeOutput: TVoictent['hubblepupTuple'][number]['grition'][];
+};
+
+export type OutputHubblepupVicken<TVoictent extends Voictent = Voictent> = {
+  voictent: TVoictent;
+  pinbeOutput: TVoictent['hubblepupTuple'][number];
+};
+
+export type OutputGritionVicken<
+  TVoictent extends OdeshinVoictent = OdeshinVoictent,
+> = {
+  voictent: TVoictent;
+  pinbeOutput: TVoictent['hubblepupTuple'][number]['grition'];
+};
+
+export type OutputVicken =
+  | OutputVoictentVicken
+  | OutputOdeshinVoictentVicken
+  | OutputHubblepupVicken
+  | OutputGritionVicken;
+
+export type OutputVickenTuple = Tuple<OutputVicken>;
+
+export type AppendOutputVickenToTuple<
+  TOutputVickenTuple extends OutputVickenTuple,
+  TNextOutputVicken extends OutputVicken,
+> = [...TOutputVickenTuple, TNextOutputVicken];

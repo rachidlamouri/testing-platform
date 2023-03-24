@@ -6,8 +6,8 @@ import {
   TypeScriptFileVoictent,
   TYPE_SCRIPT_FILE_GEPP,
 } from './typeScriptFile';
-import { buildOnama } from '../../adapter/estinant/onama';
 import { Voictent } from '../../adapter/voictent';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 
 export type TypeScriptFileConfiguration = {
   sourceFilePath: string;
@@ -53,13 +53,15 @@ const getConfigurationFilePath = (filePath: string): string => {
   return configFilePath;
 };
 
-export const typeScriptFileConfigurationOnama = buildOnama<
-  TypeScriptFileVoictent,
-  TypeScriptFileConfigurationVoictent
->({
-  inputGepp: TYPE_SCRIPT_FILE_GEPP,
-  outputGepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
-  pinbe: (input) => {
+export const associateTypeScriptFileToTypescriptConfiguration = buildEstinant()
+  .fromGrition<TypeScriptFileVoictent>({
+    gepp: TYPE_SCRIPT_FILE_GEPP,
+  })
+  .toGrition<TypeScriptFileConfigurationVoictent>({
+    gepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
+    getZorn: (input) => input.zorn,
+  })
+  .onPinbe((input) => {
     const configurationFilePath = getConfigurationFilePath(input.filePath);
     const configurationRootDirectory = posix.dirname(configurationFilePath);
 
@@ -70,5 +72,5 @@ export const typeScriptFileConfigurationOnama = buildOnama<
     };
 
     return configuration;
-  },
-});
+  })
+  .assemble();

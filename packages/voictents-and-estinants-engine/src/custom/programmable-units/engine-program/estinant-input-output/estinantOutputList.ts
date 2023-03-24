@@ -1,7 +1,7 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import { splitList } from '../../../../utilities/splitList';
 import { isIdentifiableTypeScriptTypeReference } from '../../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
-import { buildMentursection } from '../../../adapter/estinant/mentursection';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { Grition } from '../../../adapter/grition';
 import { OdeshinFromGrition } from '../../../adapter/odeshin';
 import { Voictent } from '../../../adapter/voictent';
@@ -34,20 +34,28 @@ export type EstinantOutputListVoictent = Voictent<
   EstinantOutputListOdeshin
 >;
 
-export const estinantOutputMentursection = buildMentursection<
-  EstinantCallExpressionOutputParameterVoictent,
-  [EstinantOutputListVoictent, ErrorVoictent]
->({
-  inputGepp: ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
-  outputGeppTuple: [ESTINANT_OUTPUT_LIST_GEPP, ERROR_GEPP],
-  pinbe: (input) => {
+export const getEstinantOutputList = buildEstinant()
+  .fromHubblepup<EstinantCallExpressionOutputParameterVoictent>({
+    gepp: ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
+  })
+  .toHubblepupTuple<EstinantOutputListVoictent>({
+    gepp: ESTINANT_OUTPUT_LIST_GEPP,
+  })
+  .andToHubblepupTuple<ErrorVoictent>({
+    gepp: ERROR_GEPP,
+  })
+  .onPinbe((input) => {
+    const callExpressionOutputParameter = input.grition;
+
     let nodeList: TSESTree.TypeNode[];
-    if (input.node === undefined) {
+    if (callExpressionOutputParameter.node === undefined) {
       nodeList = [];
-    } else if (input.node.type === AST_NODE_TYPES.TSTupleType) {
-      nodeList = input.node.elementTypes;
+    } else if (
+      callExpressionOutputParameter.node.type === AST_NODE_TYPES.TSTupleType
+    ) {
+      nodeList = callExpressionOutputParameter.node.elementTypes;
     } else {
-      nodeList = [input.node];
+      nodeList = [callExpressionOutputParameter.node];
     }
 
     const voictentNameList: string[] = [];
@@ -72,8 +80,8 @@ export const estinantOutputMentursection = buildMentursection<
 
     const outputList = voictentNameList.map<EstinantOutput>((voictentName) => {
       return {
-        programName: input.programName,
-        estinantName: input.estinantName,
+        programName: callExpressionOutputParameter.programName,
+        estinantName: callExpressionOutputParameter.estinantName,
         voictentName,
         isInput: false,
         index: null,
@@ -81,8 +89,18 @@ export const estinantOutputMentursection = buildMentursection<
     });
 
     return {
-      [ESTINANT_OUTPUT_LIST_GEPP]: [outputList],
-      [ERROR_GEPP]: errorList,
+      [ESTINANT_OUTPUT_LIST_GEPP]: [
+        {
+          zorn: input.zorn,
+          grition: outputList,
+        },
+      ],
+      [ERROR_GEPP]: errorList.map((error, index) => {
+        return {
+          zorn: `${input.zorn}/${index}`,
+          grition: error,
+        };
+      }),
     };
-  },
-});
+  })
+  .assemble();

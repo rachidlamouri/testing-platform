@@ -9,7 +9,7 @@ import {
 } from './typeScriptFileConfiguration';
 import { ErrorVoictent, ERROR_GEPP } from '../error/error';
 import { Voictent } from '../../adapter/voictent';
-import { buildMentursection } from '../../adapter/estinant/mentursection';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 
 export type ParsedTypeScriptFile = {
   filePath: string;
@@ -30,27 +30,36 @@ export type ParsedTypeScriptFileVoictent = Voictent<
   ParsedTypeScriptFileOdeshin
 >;
 
-export const parsedTypeScriptFileMentursection = buildMentursection<
-  TypeScriptFileConfigurationVoictent,
-  [ParsedTypeScriptFileVoictent, ErrorVoictent]
->({
-  inputGepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
-  outputGeppTuple: [PARSED_TYPE_SCRIPT_FILE_GEPP, ERROR_GEPP],
-  pinbe: (input) => {
-    const fileContents = fs.readFileSync(input.sourceFilePath, 'utf8');
+export const parseTypeScriptFile = buildEstinant()
+  .fromHubblepup<TypeScriptFileConfigurationVoictent>({
+    gepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
+  })
+  .toHubblepupTuple<ParsedTypeScriptFileVoictent>({
+    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  })
+  .andToHubblepupTuple<ErrorVoictent>({
+    gepp: ERROR_GEPP,
+  })
+  .onPinbe((input) => {
+    const inputGrition = input.grition;
+
+    const fileContents = fs.readFileSync(inputGrition.sourceFilePath, 'utf8');
 
     try {
       const program: TSESTree.Program = parser.parse(fileContents, {
         project: './tsconfig.json',
-        tsconfigRootDir: input.rootDirectory,
+        tsconfigRootDir: inputGrition.rootDirectory,
         comment: true,
       });
 
       return {
         [PARSED_TYPE_SCRIPT_FILE_GEPP]: [
           {
-            filePath: input.sourceFilePath,
-            program,
+            zorn: input.zorn,
+            grition: {
+              filePath: inputGrition.sourceFilePath,
+              program,
+            },
           },
         ],
         [ERROR_GEPP]: [],
@@ -58,8 +67,13 @@ export const parsedTypeScriptFileMentursection = buildMentursection<
     } catch (error) {
       return {
         [PARSED_TYPE_SCRIPT_FILE_GEPP]: [],
-        [ERROR_GEPP]: [error],
+        [ERROR_GEPP]: [
+          {
+            zorn: input.zorn,
+            grition: error,
+          },
+        ],
       };
     }
-  },
-});
+  })
+  .assemble();

@@ -20,7 +20,7 @@ export const FILE_MENTURSECTION_CONFIGURATION_GEPP =
 export type FileMentursectionConfigurationGepp =
   typeof FILE_MENTURSECTION_CONFIGURATION_GEPP;
 
-export type FileMentursectionConfigurationVoictent = Voictent<
+export type FileSystemObjectEnumeratorConfigurationVoictent = Voictent<
   FileMentursectionConfigurationGepp,
   FileMentursectionConfigurationHubblepup
 >;

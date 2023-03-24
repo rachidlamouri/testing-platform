@@ -1,6 +1,4 @@
-import { buildWattlection } from '../../../type-script-adapter/estinant/wattlection';
-import { Vicken } from '../../../type-script-adapter/vicken';
-import { Vition } from '../../../type-script-adapter/vition';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { Grition } from '../../adapter/grition';
 import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
@@ -54,34 +52,27 @@ export type TypeScriptFileRelationshipListVoictent = Voictent<
   TypeScriptFileRelationshipListOdeshin
 >;
 
-export const typeScriptFileRelationshipWattlection = buildWattlection<
-  Vition<
-    TypeScriptFileVoictent,
-    [
-      Vicken<
-        TypeScriptFileImportListVoictent,
-        [TypeScriptFileImportListVoictent],
-        string
-      >,
-    ]
-  >,
-  TypeScriptFileRelationshipListVoictent
->({
-  leftGepp: TYPE_SCRIPT_FILE_GEPP,
-  rightAppreffingeTuple: [
-    {
-      gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-      framate: (leftInput): [string] => [leftInput.zorn],
-      croard: (rightInput): string => rightInput.zorn,
-    },
-  ],
-  outputGepp: TYPE_SCRIPT_FILE_RELATIONSHIP_LIST_GEPP,
-  pinbe: (leftInput, [{ grition: importList }]) => {
-    const typeScriptFile = leftInput.grition;
-
-    return {
-      zorn: leftInput.zorn,
-      grition: importList.map<TypeScriptFileRelationship>((importedItem) => {
+export const getTypeScriptFileRelationshipList = buildEstinant()
+  .fromGrition<TypeScriptFileVoictent>({
+    gepp: TYPE_SCRIPT_FILE_GEPP,
+  })
+  // TODO: change to "andFromOdeshinTuple"
+  .andFromHubblepupTuple<
+    TypeScriptFileImportListVoictent,
+    [TypeScriptFileImportListVoictent],
+    string
+  >({
+    gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+    framate: (leftInput): [string] => [leftInput.zorn],
+    croard: (rightInput): string => rightInput.zorn,
+  })
+  .toGrition<TypeScriptFileRelationshipListVoictent>({
+    gepp: TYPE_SCRIPT_FILE_RELATIONSHIP_LIST_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
+  })
+  .onPinbe((typeScriptFile, [{ grition: importList }]) => {
+    const relationshipList = importList.map<TypeScriptFileRelationship>(
+      (importedItem) => {
         return {
           node: {
             typeName: TypeScriptFileImportTypeName.Local,
@@ -93,7 +84,9 @@ export const typeScriptFileRelationshipWattlection = buildWattlection<
             nodePath: getSourcePath(importedItem),
           },
         };
-      }),
-    };
-  },
-});
+      },
+    );
+
+    return relationshipList;
+  })
+  .assemble();

@@ -1,7 +1,4 @@
-// TODO: make a custom adapter wattlection
-import { buildWattlection } from '../../../../type-script-adapter/estinant/wattlection';
-import { Vicken } from '../../../../type-script-adapter/vicken';
-import { Vition } from '../../../../type-script-adapter/vition';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { Grition } from '../../../adapter/grition';
 import { OdeshinFromGrition } from '../../../adapter/odeshin';
 import { Voictent } from '../../../adapter/voictent';
@@ -48,36 +45,35 @@ export type EstinantTreeNodeVoictent = Voictent<
   EstinantTreeNodeOdeshin
 >;
 
-export const estinantTreeNodeWattlection = buildWattlection<
-  Vition<
-    EstinantInputOutputParentVoictent,
-    [
-      Vicken<EstinantInputListVoictent, [EstinantInputListVoictent], string>,
-      Vicken<EstinantOutputListVoictent, [EstinantOutputListVoictent], string>,
-    ]
-  >,
-  EstinantTreeNodeVoictent
->({
-  leftGepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
-  rightAppreffingeTuple: [
-    {
-      gepp: ESTINANT_INPUT_LIST_GEPP,
-      croard: (rightInput): string => rightInput.zorn,
-      framate: (leftInput) => [leftInput.grition.inputListIdentifier] as const,
-    },
-    {
-      gepp: ESTINANT_OUTPUT_LIST_GEPP,
-      croard: (rightInput): string => rightInput.zorn,
-      framate: (leftInput) => [leftInput.grition.outputListIdentifier] as const,
-    },
-  ],
-  outputGepp: ESTINANT_TREE_NODE_GEPP,
-  pinbe: (leftInput, [{ grition: inputList }], [{ grition: outputList }]) => {
-    const estinantParent = leftInput.grition;
-
-    return {
-      zorn: leftInput.zorn,
-      grition: {
+export const constructEstinantTreeNode = buildEstinant()
+  .fromGrition<EstinantInputOutputParentVoictent>({
+    gepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
+  })
+  .andFromHubblepupTuple<
+    EstinantInputListVoictent,
+    [EstinantInputListVoictent],
+    string
+  >({
+    gepp: ESTINANT_INPUT_LIST_GEPP,
+    framate: (leftInput) => [leftInput.grition.inputListIdentifier],
+    croard: (rightInput) => rightInput.zorn,
+  })
+  .andFromHubblepupTuple<
+    EstinantOutputListVoictent,
+    [EstinantOutputListVoictent],
+    string
+  >({
+    gepp: ESTINANT_OUTPUT_LIST_GEPP,
+    framate: (leftInput) => [leftInput.grition.outputListIdentifier],
+    croard: (rightInput) => rightInput.zorn,
+  })
+  .toGrition<EstinantTreeNodeVoictent>({
+    gepp: ESTINANT_TREE_NODE_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
+  })
+  .onPinbe(
+    (estinantParent, [{ grition: inputList }], [{ grition: outputList }]) => {
+      return {
         programName: estinantParent.programName,
         estinantName: estinantParent.estinantName,
         inputList: inputList.map(({ voictentName, index }) => ({
@@ -87,7 +83,7 @@ export const estinantTreeNodeWattlection = buildWattlection<
         outputList: outputList.map(({ voictentName }) => ({
           voictentName,
         })),
-      },
-    };
-  },
-});
+      };
+    },
+  )
+  .assemble();
