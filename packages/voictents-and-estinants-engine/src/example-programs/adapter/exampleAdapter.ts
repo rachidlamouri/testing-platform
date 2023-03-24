@@ -24,6 +24,6 @@ digikikify({
     exampleCortmum,
     exampleDisatinger,
     exampleMentursection,
-  ] as const,
+  ],
   quirmDebugger: buildBasicQuirmDebugger('exampleAdapter'),
 });
