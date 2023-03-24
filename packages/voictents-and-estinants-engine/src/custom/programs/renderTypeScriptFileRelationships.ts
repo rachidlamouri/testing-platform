@@ -1,19 +1,19 @@
 import { digikikify } from '../../type-script-adapter/digikikify';
 import { buildQuirmDebugger } from '../debugger/quirmDebugger';
-import { fileMattomer } from '../programmable-units/file/fileMattomer';
-import { fileMentursection } from '../programmable-units/file/fileMentursection';
+import { categorizeFiles } from '../programmable-units/file/fileMattomer';
+import { enumerateFileSystemObjects } from '../programmable-units/file/fileMentursection';
 import {
   FILE_MENTURSECTION_CONFIGURATION_GEPP,
   VOICTENTS_AND_ESTINANTS_FILE_MENTURSECTION_CONFIGURATION,
 } from '../programmable-units/file/fileMentursectionConfiguration';
-import { directedGraphToGraphvizCode } from '../programmable-units/graph-visualization/directedGraphToGraphvizCode';
-import { graphvizCodeToSvgDocument } from '../programmable-units/graph-visualization/graphvizCodeToSvgDocument';
-import { svgDocumentToInteractivePage } from '../programmable-units/graph-visualization/svgDocumentToInteractivePage';
-import { typeScriptFileRelationshipWattlection } from '../programmable-units/type-script-file-relationships/typeScriptFileRelationshipList';
-import { typeScriptFileRelationshipListToDirectedGraph } from '../programmable-units/type-script-file-relationships/typeScriptFileRelationshipListToDirectedGraph';
-import { parsedTypeScriptFileMentursection } from '../programmable-units/type-script-file/parsedTypeScriptFile';
-import { typeScriptFileConfigurationOnama } from '../programmable-units/type-script-file/typeScriptFileConfiguration';
-import { typeScriptFileImportListOnama } from '../programmable-units/type-script-file/typeScriptFileImportList';
+import { encodeDirectedGraphAsGraphvizCode } from '../programmable-units/graph-visualization/directedGraphToGraphvizCode';
+import { renderGraphvizCodeToSvgDocument } from '../programmable-units/graph-visualization/graphvizCodeToSvgDocument';
+import { addInteractivityToSvgDocument } from '../programmable-units/graph-visualization/svgDocumentToInteractivePage';
+import { getTypeScriptFileRelationshipList } from '../programmable-units/type-script-file-relationships/typeScriptFileRelationshipList';
+import { digraphificateTypeScriptFileRelationshipList } from '../programmable-units/type-script-file-relationships/typeScriptFileRelationshipListToDirectedGraph';
+import { parseTypeScriptFile } from '../programmable-units/type-script-file/parsedTypeScriptFile';
+import { associateTypeScriptFileToTypescriptConfiguration } from '../programmable-units/type-script-file/typeScriptFileConfiguration';
+import { getTypeScriptFileImportList } from '../programmable-units/type-script-file/typeScriptFileImportList';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -22,19 +22,19 @@ digikikify({
     ],
   },
   estinantTuple: [
-    fileMentursection,
-    fileMattomer,
+    enumerateFileSystemObjects,
+    categorizeFiles,
 
-    typeScriptFileConfigurationOnama,
-    parsedTypeScriptFileMentursection,
-    typeScriptFileImportListOnama,
+    associateTypeScriptFileToTypescriptConfiguration,
+    parseTypeScriptFile,
+    getTypeScriptFileImportList,
 
-    typeScriptFileRelationshipWattlection,
-    typeScriptFileRelationshipListToDirectedGraph,
+    getTypeScriptFileRelationshipList,
+    digraphificateTypeScriptFileRelationshipList,
 
-    directedGraphToGraphvizCode,
-    graphvizCodeToSvgDocument,
-    svgDocumentToInteractivePage,
+    encodeDirectedGraphAsGraphvizCode,
+    renderGraphvizCodeToSvgDocument,
+    addInteractivityToSvgDocument,
   ],
   quirmDebugger: buildQuirmDebugger('renderTypeScriptFileRelationships'),
 });
