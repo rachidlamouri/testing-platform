@@ -40,12 +40,12 @@ type EstinantTupleToCombinedVoictentTuple<
     : TEstinantTuple[Index] extends Estinant2<
         infer TLeftVicken,
         infer TRightVickenTuple,
-        infer TOutputVoictentTuple
+        infer TOutputVickenTuple
       >
     ?
         | TLeftVicken['voictent']
         | IDK<TRightVickenTuple>[number]
-        | TOutputVoictentTuple[number]
+        | TOutputVickenTuple[number]['voictent']
     : never;
 };
 

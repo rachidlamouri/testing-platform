@@ -3,28 +3,28 @@ import { Estinant2 } from '../../../type-script-adapter/estinant/estinant';
 import { QuirmList } from '../../../type-script-adapter/quirm';
 import {
   LeftVicken,
+  OutputVickenTuple,
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
-import { VoictentTuple } from '../../../type-script-adapter/voictent';
 import { AssemblerContext } from './estinantBuilderContext';
 
 export type EstinantAssembler<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TOutputVoictentTuple extends VoictentTuple,
-> = () => Estinant2<TLeftVicken, TRightVickenTuple, TOutputVoictentTuple>;
+  TOutputVickenTuple extends OutputVickenTuple,
+> = () => Estinant2<TLeftVicken, TRightVickenTuple, TOutputVickenTuple>;
 
 export const buildEstinantAssembler = <
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TOutputVoictentTuple extends VoictentTuple,
+  TOutputVickenTuple extends OutputVickenTuple,
 >(
   assemblerContext: AssemblerContext,
-): EstinantAssembler<TLeftVicken, TRightVickenTuple, TOutputVoictentTuple> => {
+): EstinantAssembler<TLeftVicken, TRightVickenTuple, TOutputVickenTuple> => {
   const assembleEstinant: EstinantAssembler<
     TLeftVicken,
     TRightVickenTuple,
-    TOutputVoictentTuple
+    TOutputVickenTuple
   > = () => {
     const {
       inputContext: { leftInputContext, rightInputContextTuple },
@@ -86,7 +86,7 @@ export const buildEstinantAssembler = <
     } satisfies CoreEstinant as Estinant2<
       TLeftVicken,
       TRightVickenTuple,
-      TOutputVoictentTuple
+      TOutputVickenTuple
     >;
     return estinant;
   };
@@ -97,11 +97,11 @@ export const buildEstinantAssembler = <
 export type EstinantAssemblerParent<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TOutputVoictentTuple extends VoictentTuple,
+  TOutputVickenTuple extends OutputVickenTuple,
 > = {
   assemble: EstinantAssembler<
     TLeftVicken,
     TRightVickenTuple,
-    TOutputVoictentTuple
+    TOutputVickenTuple
   >;
 };

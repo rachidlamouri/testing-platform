@@ -3,6 +3,7 @@ import { LeftAppreffinge, RightAppreffingeTuple } from '../appreffinge';
 import { Tropoignant, Tropoignant2 } from '../tropoignant';
 import {
   LeftVicken,
+  OutputVickenTuple,
   RightHubblepupVicken,
   RightVicken,
   RightVickenTuple,
@@ -56,7 +57,7 @@ export type RightVickenTupleToAppreffingeTuple<
 export type Estinant2<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TOutputVoictentTuple extends VoictentTuple,
+  TOutputVickenTuple extends OutputVickenTuple,
 > = {
   leftAppreffinge: {
     gepp: TLeftVicken['voictent']['gepp'];
@@ -66,5 +67,5 @@ export type Estinant2<
     TLeftVicken,
     TRightVickenTuple
   >;
-  tropoig: Tropoignant2<TLeftVicken, TRightVickenTuple, TOutputVoictentTuple>;
+  tropoig: Tropoignant2<TLeftVicken, TRightVickenTuple, TOutputVickenTuple>;
 };

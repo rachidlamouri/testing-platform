@@ -1,6 +1,10 @@
-import { LeftVicken, RightVickenTuple } from './vicken';
+import { LeftVicken, OutputVickenTuple, RightVickenTuple } from './vicken';
 import { Vition, VitionToHubblepupInputList } from './vition';
-import { VoictentTuple, VoictentTupleToQuirmList } from './voictent';
+import {
+  VoictentToQuirm,
+  VoictentTuple,
+  VoictentTupleToQuirmList,
+} from './voictent';
 
 export type Tropoignant<
   TInputVition extends Vition,
@@ -23,13 +27,19 @@ type LeftVickenAndRightVickenTupleToTropoignantInputTuple<
   ...RightVickenTupleToRightTropoignantInputTuple<TRightVickenTuple>,
 ];
 
+type VickenTupleToQuirmList<TOutputVickenTuple extends OutputVickenTuple> = {
+  [Index in keyof TOutputVickenTuple]: VoictentToQuirm<
+    TOutputVickenTuple[Index]['voictent']
+  >;
+}[number][];
+
 export type Tropoignant2<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TOutputVoictentTuple extends VoictentTuple,
+  TOutputVickenTuple extends OutputVickenTuple,
 > = (
   ...inputTuple: LeftVickenAndRightVickenTupleToTropoignantInputTuple<
     TLeftVicken,
     TRightVickenTuple
   >
-) => VoictentTupleToQuirmList<TOutputVoictentTuple>;
+) => VickenTupleToQuirmList<TOutputVickenTuple>;

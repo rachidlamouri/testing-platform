@@ -15,10 +15,10 @@ import {
   LeftInputOdeshinVoictentAppreffingeBuilderParent,
 } from './leftInputOdeshinVoictentAppreffingeBuilder';
 
-export const buildEstinant = (): LeftInputVoictentAppreffingeBuilderParent &
-  LeftInputOdeshinVoictentAppreffingeBuilderParent &
+export const buildEstinant = (): LeftInputGritionBuilderParent &
   LeftInputHubblepupAppreffingeBuilderParent &
-  LeftInputGritionBuilderParent => {
+  LeftInputOdeshinVoictentAppreffingeBuilderParent &
+  LeftInputVoictentAppreffingeBuilderParent => {
   return {
     fromGrition: buildLeftInputGritionAppreffingeBuilder(),
     fromHubblepup: buildLeftInputHubblepupAppreffingeBuilder(),

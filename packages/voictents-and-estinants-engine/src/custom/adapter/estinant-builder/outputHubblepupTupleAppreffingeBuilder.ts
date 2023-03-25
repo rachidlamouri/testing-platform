@@ -22,14 +22,12 @@ type OutputAppreffinge<TOutputVoictent extends Voictent> = {
   gepp: TOutputVoictent['gepp'];
 };
 
+type OutputVicken<TOutputVoictent extends Voictent> =
+  OutputVoictentVicken<TOutputVoictent>;
+
 type OutputVickenTuple<TOutputVoictent extends Voictent> = [
-  OutputVoictentVicken<TOutputVoictent>,
+  OutputVicken<TOutputVoictent>,
 ];
-
-type OutputVoictentTuple<TOutputVoictent> = [TOutputVoictent];
-
-type PinbetunfOutput<TOutputVoictent extends Voictent> =
-  TOutputVoictent['hubblepupTuple'];
 
 export type OutputHubblepupTupleAppreffingeBuilder<
   TLeftVicken extends LeftVicken,
@@ -45,8 +43,7 @@ export type OutputHubblepupTupleAppreffingeBuilder<
   PinbetunfBuilderParent<
     TLeftVicken,
     TRightVickenTuple,
-    OutputVoictentTuple<TOutputVoictent>,
-    PinbetunfOutput<TOutputVoictent>
+    OutputVickenTuple<TOutputVoictent>
   >;
 //   [TInputVoictent['hubblepupTuple'][number]]
 // > &
@@ -104,8 +101,7 @@ export const buildOutputHubblepupTupleAppreffingeBuilder = <
       onPinbe: buildPinbetunfBuilder<
         TLeftVicken,
         TRightVickenTuple,
-        OutputVoictentTuple<TOutputVoictent>,
-        PinbetunfOutput<TOutputVoictent>
+        OutputVickenTuple<TOutputVoictent>
       >(nextContext),
     };
   };

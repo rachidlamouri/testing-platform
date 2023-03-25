@@ -40,9 +40,7 @@ type LeftVicken<TInputVoictent extends Voictent> =
 
 type RightInputVickenTuple = [];
 
-type OutputVoictentTuple = [];
-
-type PinbetunfOutput = void;
+type OutputVickenTuple = [];
 
 export type LeftAppreffinge<TInputVoictent extends Voictent> = {
   gepp: TInputVoictent['gepp'];
@@ -67,8 +65,7 @@ export type LeftInputHubblepupAppreffingeBuilder = <
   PinbetunfBuilderParent<
     LeftVicken<TInputVoictent>,
     RightInputVickenTuple,
-    OutputVoictentTuple,
-    PinbetunfOutput
+    OutputVickenTuple
   > &
   OutputGritionAppreffingeBuilderParent<
     LeftHubblepupVicken<TInputVoictent>,
@@ -127,8 +124,7 @@ export const buildLeftInputHubblepupAppreffingeBuilder =
           onPinbe: buildPinbetunfBuilder<
             LeftVicken<TInputVoictent>,
             RightInputVickenTuple,
-            OutputVoictentTuple,
-            PinbetunfOutput
+            OutputVickenTuple
           >(nextInputOutputContext),
 
           toGrition: buildOutputGritionAppreffingeBuilder<

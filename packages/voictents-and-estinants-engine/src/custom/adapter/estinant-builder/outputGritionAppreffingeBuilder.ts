@@ -1,5 +1,6 @@
 import {
   LeftVicken,
+  OutputGritionVicken,
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
 import { OdeshinVoictent } from '../odeshinVoictent';
@@ -22,12 +23,12 @@ type OutputAppreffinge<
   getZorn: ZornAccessor<TLeftVicken['tropoignantInput']>;
 };
 
-type OutputVoictentTuple<TOutputVoictent extends OdeshinVoictent> = [
-  TOutputVoictent,
-];
+type OutputVicken<TOutputVoictent extends OdeshinVoictent> =
+  OutputGritionVicken<TOutputVoictent>;
 
-type PinbetunfOutput<TOutputVoictent extends OdeshinVoictent> =
-  TOutputVoictent['hubblepupTuple'][number]['grition'];
+type OutputVickenTuple<TOutputVoictent extends OdeshinVoictent> = [
+  OutputVicken<TOutputVoictent>,
+];
 
 export type OutputGritionAppreffingeBuilder<
   TLeftVicken extends LeftVicken,
@@ -37,8 +38,7 @@ export type OutputGritionAppreffingeBuilder<
 ) => PinbetunfBuilderParent<
   TLeftVicken,
   TRightVickenTuple,
-  OutputVoictentTuple<TOutputVoictent>,
-  PinbetunfOutput<TOutputVoictent>
+  OutputVickenTuple<TOutputVoictent>
 >;
 
 export const buildOutputGritionAppreffingeBuilder = <
@@ -72,8 +72,7 @@ export const buildOutputGritionAppreffingeBuilder = <
       onPinbe: buildPinbetunfBuilder<
         TLeftVicken,
         TRightVickenTuple,
-        OutputVoictentTuple<TOutputVoictent>,
-        PinbetunfOutput<TOutputVoictent>
+        OutputVickenTuple<TOutputVoictent>
       >(nextContext),
     };
   };

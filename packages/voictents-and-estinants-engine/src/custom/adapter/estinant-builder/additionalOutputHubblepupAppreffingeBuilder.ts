@@ -1,4 +1,3 @@
-import { Simplify, UnionToIntersection } from 'type-fest';
 import {
   AppendOutputVickenToTuple,
   LeftVicken,
@@ -21,29 +20,15 @@ type OutputAppreffinge<TOutputVoictent extends Voictent> = {
   gepp: TOutputVoictent['gepp'];
 };
 
-type OutputVoictentTuple<TOutputVoictent> = [TOutputVoictent];
-
 type OutputVicken<TOutputVoictent extends Voictent> =
   OutputHubblepupVicken<TOutputVoictent>;
 
-type PinbetunfOutput2<TOutputVickenTuple extends OutputVickenTuple> = {
-  [Index in keyof TOutputVickenTuple]: {
-    [Key in TOutputVickenTuple[Index]['voictent']['gepp']]: TOutputVickenTuple[Index]['pinbeOutput'];
-  };
-}[number];
-
-type PinbetunfOutput1<
+type NextOutputVickenTuple<
   TOutputVickenTuple extends OutputVickenTuple,
   TOutputVoictent extends Voictent,
-> = Simplify<
-  UnionToIntersection<
-    PinbetunfOutput2<
-      AppendOutputVickenToTuple<
-        TOutputVickenTuple,
-        OutputVicken<TOutputVoictent>
-      >
-    >
-  >
+> = AppendOutputVickenToTuple<
+  TOutputVickenTuple,
+  OutputVicken<TOutputVoictent>
 >;
 
 export type AdditionalOutputHubblepupAppreffingeBuilder<
@@ -55,8 +40,7 @@ export type AdditionalOutputHubblepupAppreffingeBuilder<
 ) => PinbetunfBuilderParent<
   TLeftVicken,
   TRightVickenTuple,
-  OutputVoictentTuple<TOutputVoictent>,
-  PinbetunfOutput1<TOutputVickenTuple, TOutputVoictent>
+  NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
 >;
 
 export const buildAdditionalOutputHubblepupAppreffingeBuilder = <
@@ -86,8 +70,7 @@ export const buildAdditionalOutputHubblepupAppreffingeBuilder = <
       onPinbe: buildPinbetunfBuilder<
         TLeftVicken,
         TRightVickenTuple,
-        OutputVoictentTuple<TOutputVoictent>,
-        PinbetunfOutput1<TOutputVickenTuple, TOutputVoictent>
+        NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
       >(nextContext),
     };
   };
