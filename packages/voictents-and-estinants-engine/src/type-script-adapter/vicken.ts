@@ -96,7 +96,9 @@ export type RightHubblepupVicken<
   voictent: TVoictent;
   voictentTuple: TVoictentTuple;
   zorn: TZorn;
-  tropoignantInput: TVoictent['hubblepupTuple'][number];
+  tropoignantInput: {
+    [Index in keyof TVoictentTuple]: TVoictent['hubblepupTuple'][number];
+  };
   pinbetunfInput: {
     [Index in keyof TVoictentTuple]: TVoictent['hubblepupTuple'][number];
   };
@@ -110,7 +112,9 @@ export type RightGritionVicken<
   voictent: TVoictent;
   voictentTuple: TVoictentTuple;
   zorn: TZorn;
-  tropoignantInput: TVoictent['hubblepupTuple'][number];
+  tropoignantInput: {
+    [Index in keyof TVoictentTuple]: TVoictent['hubblepupTuple'][number];
+  };
   pinbetunfInput: {
     [Index in keyof TVoictentTuple]: TVoictent['hubblepupTuple'][number]['grition'];
   };
