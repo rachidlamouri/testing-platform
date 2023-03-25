@@ -1,13 +1,10 @@
 import {
   AppendRightVickenToTuple,
   LeftVicken,
-  RightHubblepupVicken,
+  RightOdeshinVoictentVicken,
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
-import { StralineTuple } from '../../../utilities/semantic-types/straline';
-import { Tuple } from '../../../utilities/semantic-types/tuple';
 import {
-  AppendInputToPinbetunfInputTuple,
   extendInputContext,
   InputContext,
   RightInputVoictentContext,
@@ -32,55 +29,39 @@ type NextVickenTuple<
   TRightInputVoictent extends OdeshinVoictent,
 > = AppendRightVickenToTuple<
   TRightVickenTuple,
-  RightHubblepupVicken<TRightInputVoictent>
->;
-
-type NextPinbetunfInputTuple<
-  TPinbetunfInputTuple extends StralineTuple,
-  TRightInputVoictent extends OdeshinVoictent,
-> = AppendInputToPinbetunfInputTuple<
-  TPinbetunfInputTuple,
-  // Note: don't use "OdeshinVoictentToGritionTuple" because it makes the final type harder to read :eyeroll:
-  Tuple<TRightInputVoictent['hubblepupTuple'][number]['grition']>
+  RightOdeshinVoictentVicken<TRightInputVoictent>
 >;
 
 export type RightInputOdeshinVoictentAppreffingeBuilder<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 > = <TRightInputVoictent extends OdeshinVoictent>(
   rightAppreffinge: RightAppreffinge<TRightInputVoictent>,
 ) => RightInputOdeshinVoictentAppreffingeBuilderParent<
   TLeftVicken,
-  NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
-  NextPinbetunfInputTuple<TPinbetunfInputTuple, TRightInputVoictent>
+  NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
 > &
   RightInputVoictentAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
-    NextPinbetunfInputTuple<TPinbetunfInputTuple, TRightInputVoictent>
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
   > &
   OutputHubblepupAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
-    NextPinbetunfInputTuple<TPinbetunfInputTuple, TRightInputVoictent>
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
   >;
 
 export const buildRightInputOdeshinVoictentAppreffingeBuilder = <
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 >(
   inputContext: InputContext,
 ): RightInputOdeshinVoictentAppreffingeBuilder<
   TLeftVicken,
-  TRightVickenTuple,
-  TPinbetunfInputTuple
+  TRightVickenTuple
 > => {
   const buildRightInputOdeshinVoictentAppreffinge: RightInputOdeshinVoictentAppreffingeBuilder<
     TLeftVicken,
-    TRightVickenTuple,
-    TPinbetunfInputTuple
+    TRightVickenTuple
   > = <TRightInputVoictent extends OdeshinVoictent>(
     rightAppreffinge: RightAppreffinge<TRightInputVoictent>,
   ) => {
@@ -96,19 +77,16 @@ export const buildRightInputOdeshinVoictentAppreffingeBuilder = <
     return {
       andFromOdeshinVoictent: buildRightInputOdeshinVoictentAppreffingeBuilder<
         TLeftVicken,
-        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
-        NextPinbetunfInputTuple<TPinbetunfInputTuple, TRightInputVoictent>
+        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
       >(nextContext),
       andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
         TLeftVicken,
-        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
-        NextPinbetunfInputTuple<TPinbetunfInputTuple, TRightInputVoictent>
+        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
       >(nextContext),
 
       toHubblepup: buildOutputHubblepupAppreffingeBuilder<
         TLeftVicken,
-        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
-        NextPinbetunfInputTuple<TPinbetunfInputTuple, TRightInputVoictent>
+        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
       >(nextContext),
     };
   };
@@ -119,11 +97,9 @@ export const buildRightInputOdeshinVoictentAppreffingeBuilder = <
 export type RightInputOdeshinVoictentAppreffingeBuilderParent<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 > = {
   andFromOdeshinVoictent: RightInputOdeshinVoictentAppreffingeBuilder<
     TLeftVicken,
-    TRightVickenTuple,
-    TPinbetunfInputTuple
+    TRightVickenTuple
   >;
 };

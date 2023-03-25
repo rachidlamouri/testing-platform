@@ -3,7 +3,6 @@ import {
   OutputVoictentVicken,
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
-import { StralineTuple } from '../../../utilities/semantic-types/straline';
 import { Voictent } from '../voictent';
 import {
   AdditionalOutputHubblepupTupleAppreffingeBuilderParent,
@@ -35,21 +34,18 @@ type PinbetunfOutput<TOutputVoictent extends Voictent> =
 export type OutputHubblepupTupleAppreffingeBuilder<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 > = <TOutputVoictent extends Voictent>(
   outputAppreffinge: OutputAppreffinge<TOutputVoictent>,
   // pinbe: Pinbetunf<[TInputVoictent['hubblepupTuple'][number]], unknown>,
 ) => AdditionalOutputHubblepupTupleAppreffingeBuilderParent<
   TLeftVicken,
   TRightVickenTuple,
-  OutputVickenTuple<TOutputVoictent>,
-  TPinbetunfInputTuple
+  OutputVickenTuple<TOutputVoictent>
 > &
   PinbetunfBuilderParent<
     TLeftVicken,
     TRightVickenTuple,
     OutputVoictentTuple<TOutputVoictent>,
-    TPinbetunfInputTuple,
     PinbetunfOutput<TOutputVoictent>
   >;
 //   [TInputVoictent['hubblepupTuple'][number]]
@@ -59,18 +55,12 @@ export type OutputHubblepupTupleAppreffingeBuilder<
 export const buildOutputHubblepupTupleAppreffingeBuilder = <
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 >(
   inputContext: InputContext,
-): OutputHubblepupTupleAppreffingeBuilder<
-  TLeftVicken,
-  TRightVickenTuple,
-  TPinbetunfInputTuple
-> => {
+): OutputHubblepupTupleAppreffingeBuilder<TLeftVicken, TRightVickenTuple> => {
   const buildOutputHubblepupTupleAppreffinge: OutputHubblepupTupleAppreffingeBuilder<
     TLeftVicken,
-    TRightVickenTuple,
-    TPinbetunfInputTuple
+    TRightVickenTuple
   > = <TOutputVoictent extends Voictent>(
     outputAppreffinge: OutputAppreffinge<TOutputVoictent>,
     // pinbe: Pinbetunf<[TInputVoictent['hubblepupTuple'][number]], unknown>,
@@ -109,14 +99,12 @@ export const buildOutputHubblepupTupleAppreffingeBuilder = <
         buildAdditionalOutputHubblepupTupleAppreffingeBuilder<
           TLeftVicken,
           TRightVickenTuple,
-          OutputVickenTuple<TOutputVoictent>,
-          TPinbetunfInputTuple
+          OutputVickenTuple<TOutputVoictent>
         >(nextContext),
       onPinbe: buildPinbetunfBuilder<
         TLeftVicken,
         TRightVickenTuple,
         OutputVoictentTuple<TOutputVoictent>,
-        TPinbetunfInputTuple,
         PinbetunfOutput<TOutputVoictent>
       >(nextContext),
     };
@@ -128,11 +116,9 @@ export const buildOutputHubblepupTupleAppreffingeBuilder = <
 export type OutputHubblepupTupleAppreffingeBuilderParent<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 > = {
   toHubblepupTuple: OutputHubblepupTupleAppreffingeBuilder<
     TLeftVicken,
-    TRightVickenTuple,
-    TPinbetunfInputTuple
+    TRightVickenTuple
   >;
 };

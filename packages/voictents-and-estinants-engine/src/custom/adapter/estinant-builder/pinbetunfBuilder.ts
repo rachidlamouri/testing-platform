@@ -1,12 +1,10 @@
 import {
   LeftVicken,
+  RightVicken,
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
 import { VoictentTuple } from '../../../type-script-adapter/voictent';
-import {
-  Straline,
-  StralineTuple,
-} from '../../../utilities/semantic-types/straline';
+import { Straline } from '../../../utilities/semantic-types/straline';
 import {
   buildEstinantAssembler,
   EstinantAssemblerParent,
@@ -17,14 +15,27 @@ import {
   Pinbetunf,
 } from './estinantBuilderContext';
 
+type PinbetunInputTuple2<
+  TVickenTuple extends readonly (LeftVicken | RightVicken)[],
+> = {
+  [Index in keyof TVickenTuple]: TVickenTuple[Index]['pinbetunfInput'];
+};
+
+type PinbetunInputTuple1<
+  TLeftVicken extends LeftVicken,
+  TRightVickenTuple extends RightVickenTuple,
+> = PinbetunInputTuple2<[TLeftVicken, ...TRightVickenTuple]>;
+
 export type PinbetunfBuilder<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
   TOutputVoictentTuple extends VoictentTuple,
-  TPinbetunfInputTuple extends StralineTuple,
   TPinbeOutput extends Straline,
 > = (
-  pinbe: Pinbetunf<TPinbetunfInputTuple, TPinbeOutput>,
+  pinbe: Pinbetunf<
+    PinbetunInputTuple1<TLeftVicken, TRightVickenTuple>,
+    TPinbeOutput
+  >,
 ) => EstinantAssemblerParent<
   TLeftVicken,
   TRightVickenTuple,
@@ -35,7 +46,6 @@ export const buildPinbetunfBuilder = <
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
   TOutputVoictentTuple extends VoictentTuple,
-  TPinbetunfInputTuple extends StralineTuple,
   TPinbeOutput extends Straline,
 >(
   inputOutputContext: InputOutputContext,
@@ -43,16 +53,19 @@ export const buildPinbetunfBuilder = <
   TLeftVicken,
   TRightVickenTuple,
   TOutputVoictentTuple,
-  TPinbetunfInputTuple,
   TPinbeOutput
 > => {
   const buildPinbetunf: PinbetunfBuilder<
     TLeftVicken,
     TRightVickenTuple,
     TOutputVoictentTuple,
-    TPinbetunfInputTuple,
     TPinbeOutput
-  > = (pinbe: Pinbetunf<TPinbetunfInputTuple, TPinbeOutput>) => {
+  > = (
+    pinbe: Pinbetunf<
+      PinbetunInputTuple1<TLeftVicken, TRightVickenTuple>,
+      TPinbeOutput
+    >,
+  ) => {
     const { inputContext, outputContext } = inputOutputContext;
 
     const nextContext: AssemblerContext = {
@@ -73,14 +86,12 @@ export type PinbetunfBuilderParent<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
   TOutputVoictentTuple extends VoictentTuple,
-  TPinbetunfInputTuple extends StralineTuple,
   TPinbeOutput extends Straline,
 > = {
   onPinbe: PinbetunfBuilder<
     TLeftVicken,
     TRightVickenTuple,
     TOutputVoictentTuple,
-    TPinbetunfInputTuple,
     TPinbeOutput
   >;
 };

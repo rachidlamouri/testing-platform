@@ -6,7 +6,6 @@ import {
   OutputVickenTuple,
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
-import { StralineTuple } from '../../../utilities/semantic-types/straline';
 import { Voictent } from '../voictent';
 import { InputOutputContext } from './estinantBuilderContext';
 import {
@@ -51,14 +50,12 @@ export type AdditionalOutputHubblepupAppreffingeBuilder<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
   TOutputVickenTuple extends OutputVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 > = <TOutputVoictent extends Voictent>(
   outputAppreffinge: OutputAppreffinge<TOutputVoictent>,
 ) => PinbetunfBuilderParent<
   TLeftVicken,
   TRightVickenTuple,
   OutputVoictentTuple<TOutputVoictent>,
-  TPinbetunfInputTuple,
   PinbetunfOutput1<TOutputVickenTuple, TOutputVoictent>
 >;
 
@@ -66,20 +63,17 @@ export const buildAdditionalOutputHubblepupAppreffingeBuilder = <
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
   TOutputVickenTuple extends OutputVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 >(
   inputOutputContext: InputOutputContext,
 ): AdditionalOutputHubblepupAppreffingeBuilder<
   TLeftVicken,
   TRightVickenTuple,
-  TOutputVickenTuple,
-  TPinbetunfInputTuple
+  TOutputVickenTuple
 > => {
   const buildAdditionalOutputVoictentAppreffinge: AdditionalOutputHubblepupAppreffingeBuilder<
     TLeftVicken,
     TRightVickenTuple,
-    TOutputVickenTuple,
-    TPinbetunfInputTuple
+    TOutputVickenTuple
   > = <TOutputVoictent extends Voictent>(
     outputAppreffinge: OutputAppreffinge<TOutputVoictent>,
   ) => {
@@ -93,7 +87,6 @@ export const buildAdditionalOutputHubblepupAppreffingeBuilder = <
         TLeftVicken,
         TRightVickenTuple,
         OutputVoictentTuple<TOutputVoictent>,
-        TPinbetunfInputTuple,
         PinbetunfOutput1<TOutputVickenTuple, TOutputVoictent>
       >(nextContext),
     };
@@ -106,12 +99,10 @@ export type AdditionalOutputHubblepupAppreffingeBuilderParent<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
   TOutputVickenTuple extends OutputVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 > = {
   toHubblepup: AdditionalOutputHubblepupAppreffingeBuilder<
     TLeftVicken,
     TRightVickenTuple,
-    TOutputVickenTuple,
-    TPinbetunfInputTuple
+    TOutputVickenTuple
   >;
 };
