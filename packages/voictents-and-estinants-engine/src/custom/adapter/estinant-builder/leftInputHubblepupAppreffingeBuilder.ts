@@ -1,5 +1,4 @@
 import { LeftHubblepupVicken } from '../../../type-script-adapter/vicken';
-import { VoictentToHubblepup } from '../../../type-script-adapter/voictent';
 import { Voictent } from '../voictent';
 import {
   AggregatedOutput,
@@ -41,13 +40,7 @@ type LeftVicken<TInputVoictent extends Voictent> =
 
 type RightInputVickenTuple = [];
 
-type PinbetunfInputTuple<TInputVoictent extends Voictent> = [
-  VoictentToHubblepup<TInputVoictent>,
-];
-
-type OutputVoictentTuple = [];
-
-type PinbetunfOutput = void;
+type OutputVickenTuple = [];
 
 export type LeftAppreffinge<TInputVoictent extends Voictent> = {
   gepp: TInputVoictent['gepp'];
@@ -59,40 +52,34 @@ export type LeftInputHubblepupAppreffingeBuilder = <
   leftAppreffinge: LeftAppreffinge<TInputVoictent>,
 ) => RightInputGritionTupleAppreffingeBuilderParent<
   LeftHubblepupVicken<TInputVoictent>,
-  RightInputVickenTuple,
-  PinbetunfInputTuple<TInputVoictent>
+  RightInputVickenTuple
 > &
   RightInputHubblepupTupleAppreffingeBuilderParent<
     LeftHubblepupVicken<TInputVoictent>,
-    RightInputVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    RightInputVickenTuple
   > &
   RightInputVoictentAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
-    RightInputVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    RightInputVickenTuple
   > &
   PinbetunfBuilderParent<
     LeftVicken<TInputVoictent>,
     RightInputVickenTuple,
-    OutputVoictentTuple,
-    PinbetunfInputTuple<TInputVoictent>,
-    PinbetunfOutput
+    OutputVickenTuple
   > &
   OutputGritionAppreffingeBuilderParent<
     LeftHubblepupVicken<TInputVoictent>,
-    RightInputVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    RightInputVickenTuple
   > &
   OutputHubblepupAppreffingeBuilderParent<
     LeftHubblepupVicken<TInputVoictent>,
     RightInputVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    OutputVickenTuple
   > &
   OutputHubblepupTupleAppreffingeBuilderParent<
     LeftHubblepupVicken<TInputVoictent>,
     RightInputVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    OutputVickenTuple
   >;
 
 export const buildLeftInputHubblepupAppreffingeBuilder =
@@ -124,44 +111,38 @@ export const buildLeftInputHubblepupAppreffingeBuilder =
         return {
           andFromGritionTuple: buildRightInputGritionTupleAppreffingeBuilder<
             LeftHubblepupVicken<TInputVoictent>,
-            RightInputVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
+            RightInputVickenTuple
           >(nextInputContext),
           andFromHubblepupTuple:
             buildRightInputHubblepupTupleAppreffingeBuilder<
               LeftHubblepupVicken<TInputVoictent>,
-              RightInputVickenTuple,
-              PinbetunfInputTuple<TInputVoictent>
+              RightInputVickenTuple
             >(nextInputContext),
           andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
             LeftHubblepupVicken<TInputVoictent>,
-            RightInputVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
+            RightInputVickenTuple
           >(nextInputContext),
 
           onPinbe: buildPinbetunfBuilder<
             LeftVicken<TInputVoictent>,
             RightInputVickenTuple,
-            OutputVoictentTuple,
-            PinbetunfInputTuple<TInputVoictent>,
-            PinbetunfOutput
+            OutputVickenTuple
           >(nextInputOutputContext),
 
           toGrition: buildOutputGritionAppreffingeBuilder<
             LeftHubblepupVicken<TInputVoictent>,
-            RightInputVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
+            RightInputVickenTuple
           >(nextInputContext),
           toHubblepup: buildOutputHubblepupAppreffingeBuilder<
             LeftHubblepupVicken<TInputVoictent>,
             RightInputVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
-          >(nextInputContext),
+            OutputVickenTuple
+          >(nextInputOutputContext),
           toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
             LeftHubblepupVicken<TInputVoictent>,
             RightInputVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
-          >(nextInputContext),
+            OutputVickenTuple
+          >(nextInputOutputContext),
         };
       };
 

@@ -3,29 +3,29 @@ import {
   OutputHubblepupAppreffingeBuilderParent,
 } from './outputHubblepupAppreffingeBuilder';
 import { odeshinTupleToGritionTuple } from './tropoignantInputOutputModifier';
-import { LeftVoictentVicken } from '../../../type-script-adapter/vicken';
-import { InputContext } from './estinantBuilderContext';
+import { LeftOdeshinVoictentVicken } from '../../../type-script-adapter/vicken';
+import {
+  AggregatedOutput,
+  InputContext,
+  InputOutputContext,
+} from './estinantBuilderContext';
 import {
   buildRightInputVoictentAppreffingeBuilder,
   RightInputVoictentAppreffingeBuilderParent,
 } from './rightInputVoictentAppreffingeBuilder';
 import { LeftAppreffinge } from './leftInputHubblepupAppreffingeBuilder';
 import { OdeshinVoictent } from '../odeshinVoictent';
-import { Tuple } from '../../../utilities/semantic-types/tuple';
 import {
   buildRightInputOdeshinVoictentAppreffingeBuilder,
   RightInputOdeshinVoictentAppreffingeBuilderParent,
 } from './rightInputOdeshinVoictentAppreffingeBuilder';
 
 type LeftVicken<TInputVoictent extends OdeshinVoictent> =
-  LeftVoictentVicken<TInputVoictent>;
+  LeftOdeshinVoictentVicken<TInputVoictent>;
 
 type RightVickenTuple = [];
 
-type PinbetunfInputTuple<TInputVoictent extends OdeshinVoictent> = [
-  // Note: don't use "OdeshinVoictentToGritionTuple" because it makes the final type harder to read :eyeroll:
-  Tuple<TInputVoictent['hubblepupTuple'][number]['grition']>,
-];
+type OutputVickenTuple = [];
 
 export type LeftInputOdeshinVoictentAppreffingeBuilder = <
   TInputVoictent extends OdeshinVoictent,
@@ -33,18 +33,16 @@ export type LeftInputOdeshinVoictentAppreffingeBuilder = <
   leftAppreffinge: LeftAppreffinge<TInputVoictent>,
 ) => RightInputOdeshinVoictentAppreffingeBuilderParent<
   LeftVicken<TInputVoictent>,
-  RightVickenTuple,
-  PinbetunfInputTuple<TInputVoictent>
+  RightVickenTuple
 > &
   RightInputVoictentAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
-    RightVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    RightVickenTuple
   > &
   OutputHubblepupAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
     RightVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    OutputVickenTuple
   >;
 
 export const buildLeftInputOdeshinVoictentAppreffingeBuilder =
@@ -53,7 +51,7 @@ export const buildLeftInputOdeshinVoictentAppreffingeBuilder =
       <TInputVoictent extends OdeshinVoictent>(
         leftAppreffinge: LeftAppreffinge<TInputVoictent>,
       ) => {
-        const nextContext: InputContext = {
+        const nextInputContext: InputContext = {
           leftInputContext: {
             gepp: leftAppreffinge.gepp,
             isWibiz: true,
@@ -62,24 +60,33 @@ export const buildLeftInputOdeshinVoictentAppreffingeBuilder =
           rightInputContextTuple: [],
         };
 
+        const nextInputOutputContext: InputOutputContext = {
+          inputContext: nextInputContext,
+          outputContext: {
+            aggregatePinbetunfOutput: () => {
+              const aggregatedOutput: AggregatedOutput = {};
+              return aggregatedOutput;
+            },
+            constituentResultNormalizerList: [],
+          },
+        };
+
         return {
           andFromOdeshinVoictent:
             buildRightInputOdeshinVoictentAppreffingeBuilder<
               LeftVicken<TInputVoictent>,
-              RightVickenTuple,
-              PinbetunfInputTuple<TInputVoictent>
-            >(nextContext),
+              RightVickenTuple
+            >(nextInputContext),
           andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
             LeftVicken<TInputVoictent>,
-            RightVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
-          >(nextContext),
+            RightVickenTuple
+          >(nextInputContext),
 
           toHubblepup: buildOutputHubblepupAppreffingeBuilder<
             LeftVicken<TInputVoictent>,
             RightVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
-          >(nextContext),
+            OutputVickenTuple
+          >(nextInputOutputContext),
         };
       };
 

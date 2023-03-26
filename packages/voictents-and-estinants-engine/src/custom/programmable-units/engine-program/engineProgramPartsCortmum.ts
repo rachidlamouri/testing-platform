@@ -64,20 +64,12 @@ export const getEngineProgramParts = buildEstinant()
   .fromHubblepup<ParsedTypeScriptFileVoictent>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .andFromGritionTuple<
-    TypeScriptFileVoictent,
-    [TypeScriptFileVoictent],
-    string
-  >({
+  .andFromGritionTuple<TypeScriptFileVoictent, [string]>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
     framate: (leftInput) => [leftInput.zorn],
     croard: (rightInput) => rightInput.zorn,
   })
-  .andFromGritionTuple<
-    TypeScriptFileImportListVoictent,
-    [TypeScriptFileImportListVoictent],
-    string
-  >({
+  .andFromGritionTuple<TypeScriptFileImportListVoictent, [string]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     framate: (leftInput) => [leftInput.zorn],
     croard: (rightInput) => rightInput.zorn,
@@ -88,7 +80,7 @@ export const getEngineProgramParts = buildEstinant()
   .toHubblepupTuple<EngineProgramVoictent>({
     gepp: ENGINE_PROGRAM_GEPP,
   })
-  .andToHubblepupTuple<EngineEstinantVoictent>({
+  .toHubblepupTuple<EngineEstinantVoictent>({
     gepp: ENGINE_ESTINANT_GEPP,
   })
   .onPinbe(

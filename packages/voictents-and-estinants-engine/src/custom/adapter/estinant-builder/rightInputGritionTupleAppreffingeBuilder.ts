@@ -1,19 +1,17 @@
 import {
   AppendRightVickenToTuple,
   LeftVicken,
-  RightHubblepupVicken,
+  RightGritionVicken,
   RightVickenTuple,
-  VickenVoictentTupleToZornTuple,
 } from '../../../type-script-adapter/vicken';
 import { VoictentToHubblepup } from '../../../type-script-adapter/voictent';
-import { StralineTuple } from '../../../utilities/semantic-types/straline';
-import { Tuple } from '../../../utilities/semantic-types/tuple';
-import { Zorn } from '../../../utilities/semantic-types/zorn';
+import { ZornTuple } from '../../../utilities/semantic-types/zorn';
 import { OdeshinVoictent } from '../odeshinVoictent';
 import {
-  AppendInputToPinbetunfInputTuple,
+  AggregatedOutput,
   extendInputContext,
   InputContext,
+  InputOutputContext,
   RightInputHubblepupContext,
 } from './estinantBuilderContext';
 import {
@@ -45,184 +43,86 @@ import { odeshinTupleToGritionTuple } from './tropoignantInputOutputModifier';
 type RightAppreffinge<
   TLeftVicken extends LeftVicken,
   TRightInputVoictent extends OdeshinVoictent,
-  TVoictentTuple extends Tuple<TRightInputVoictent>,
-  TZorn extends Zorn,
+  TZornTuple extends ZornTuple,
 > = {
   gepp: TRightInputVoictent['gepp'];
-  framate: (
-    leftInput: TLeftVicken['tropoignantInput'],
-  ) => VickenVoictentTupleToZornTuple<TVoictentTuple, TZorn>;
-  croard: (rightInput: VoictentToHubblepup<TRightInputVoictent>) => TZorn;
-};
-
-type RightInputTuple<
-  TRightInputVoictent extends OdeshinVoictent,
-  TVoictentTuple extends Tuple<TRightInputVoictent>,
-> = {
-  [Index in keyof TVoictentTuple]: TVoictentTuple[Index]['hubblepupTuple'][number]['grition'];
+  framate: (leftInput: TLeftVicken['tropoignantInput']) => TZornTuple;
+  croard: (
+    rightInput: VoictentToHubblepup<TRightInputVoictent>,
+  ) => TZornTuple[number];
 };
 
 type NextVickenTuple<
   TRightVickenTuple extends RightVickenTuple,
   TRightInputVoictent extends OdeshinVoictent,
-  TVoictentTuple extends Tuple<TRightInputVoictent>,
-  TZorn extends Zorn,
+  TZornTuple extends ZornTuple,
 > = AppendRightVickenToTuple<
   TRightVickenTuple,
-  RightHubblepupVicken<TRightInputVoictent, TVoictentTuple, TZorn>
+  RightGritionVicken<TRightInputVoictent, TZornTuple>
 >;
 
-type NextPinbetunfInputTuple<
-  TPinbetunfInputTuple extends StralineTuple,
-  TRightInputVoictent extends OdeshinVoictent,
-  TVoictentTuple extends Tuple<TRightInputVoictent>,
-> = AppendInputToPinbetunfInputTuple<
-  TPinbetunfInputTuple,
-  RightInputTuple<TRightInputVoictent, TVoictentTuple>
->;
+type OutputVickenTuple = [];
 
 export type RightInputGritionTupleAppreffingeBuilder<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
-> = <
-  TRightInputVoictent extends OdeshinVoictent,
-  TVoictentTuple extends Tuple<TRightInputVoictent>,
-  TZorn extends Zorn,
->(
+> = <TRightInputVoictent extends OdeshinVoictent, TZornTuple extends ZornTuple>(
   rightAppreffinge: RightAppreffinge<
     TLeftVicken,
     TRightInputVoictent,
-    TVoictentTuple,
-    TZorn
+    TZornTuple
   >,
 ) => RightInputGritionTupleAppreffingeBuilderParent<
   TLeftVicken,
-  NextVickenTuple<
-    TRightVickenTuple,
-    TRightInputVoictent,
-    TVoictentTuple,
-    TZorn
-  >,
-  NextPinbetunfInputTuple<
-    TPinbetunfInputTuple,
-    TRightInputVoictent,
-    TVoictentTuple
-  >
+  NextVickenTuple<TRightVickenTuple, TRightInputVoictent, TZornTuple>
 > &
   RightInputHubblepupTupleAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<
-      TRightVickenTuple,
-      TRightInputVoictent,
-      TVoictentTuple,
-      TZorn
-    >,
-    NextPinbetunfInputTuple<
-      TPinbetunfInputTuple,
-      TRightInputVoictent,
-      TVoictentTuple
-    >
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent, TZornTuple>
   > &
   RightInputOdeshinVoictentAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<
-      TRightVickenTuple,
-      TRightInputVoictent,
-      TVoictentTuple,
-      TZorn
-    >,
-    NextPinbetunfInputTuple<
-      TPinbetunfInputTuple,
-      TRightInputVoictent,
-      TVoictentTuple
-    >
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent, TZornTuple>
   > &
   RightInputVoictentAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<
-      TRightVickenTuple,
-      TRightInputVoictent,
-      TVoictentTuple,
-      TZorn
-    >,
-    NextPinbetunfInputTuple<
-      TPinbetunfInputTuple,
-      TRightInputVoictent,
-      TVoictentTuple
-    >
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent, TZornTuple>
   > &
   OutputGritionAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<
-      TRightVickenTuple,
-      TRightInputVoictent,
-      TVoictentTuple,
-      TZorn
-    >,
-    NextPinbetunfInputTuple<
-      TPinbetunfInputTuple,
-      TRightInputVoictent,
-      TVoictentTuple
-    >
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent, TZornTuple>
   > &
   OutputHubblepupAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<
-      TRightVickenTuple,
-      TRightInputVoictent,
-      TVoictentTuple,
-      TZorn
-    >,
-    NextPinbetunfInputTuple<
-      TPinbetunfInputTuple,
-      TRightInputVoictent,
-      TVoictentTuple
-    >
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent, TZornTuple>,
+    OutputVickenTuple
   > &
   OutputHubblepupTupleAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<
-      TRightVickenTuple,
-      TRightInputVoictent,
-      TVoictentTuple,
-      TZorn
-    >,
-    NextPinbetunfInputTuple<
-      TPinbetunfInputTuple,
-      TRightInputVoictent,
-      TVoictentTuple
-    >
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent, TZornTuple>,
+    OutputVickenTuple
   >;
 
 export const buildRightInputGritionTupleAppreffingeBuilder = <
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 >(
   inputContext: InputContext,
-): RightInputGritionTupleAppreffingeBuilder<
-  TLeftVicken,
-  TRightVickenTuple,
-  TPinbetunfInputTuple
-> => {
+): RightInputGritionTupleAppreffingeBuilder<TLeftVicken, TRightVickenTuple> => {
   const buildRightInputGritionTupleAppreffinge: RightInputGritionTupleAppreffingeBuilder<
     TLeftVicken,
-    TRightVickenTuple,
-    TPinbetunfInputTuple
+    TRightVickenTuple
   > = <
     TRightInputVoictent extends OdeshinVoictent,
-    TVoictentTuple extends Tuple<TRightInputVoictent>,
-    TZorn extends Zorn,
+    TZornTuple extends ZornTuple,
   >(
     rightAppreffinge: RightAppreffinge<
       TLeftVicken,
       TRightInputVoictent,
-      TVoictentTuple,
-      TZorn
+      TZornTuple
     >,
   ) => {
-    const nextContext = extendInputContext<RightInputHubblepupContext>({
+    const nextInputContext = extendInputContext<RightInputHubblepupContext>({
       inputContext,
       nextRightInputContext: {
         gepp: rightAppreffinge.gepp,
@@ -233,53 +133,54 @@ export const buildRightInputGritionTupleAppreffingeBuilder = <
       },
     });
 
+    const nextInputOutputContext: InputOutputContext = {
+      inputContext: nextInputContext,
+      outputContext: {
+        aggregatePinbetunfOutput: () => {
+          const aggregatedOutput: AggregatedOutput = {};
+          return aggregatedOutput;
+        },
+        constituentResultNormalizerList: [],
+      },
+    };
+
     type TNextRightVickenTuple = AppendRightVickenToTuple<
       TRightVickenTuple,
-      RightHubblepupVicken<TRightInputVoictent, TVoictentTuple, TZorn>
-    >;
-
-    type TNextPinbetunfInputTuple = AppendInputToPinbetunfInputTuple<
-      TPinbetunfInputTuple,
-      RightInputTuple<TRightInputVoictent, TVoictentTuple>
+      RightGritionVicken<TRightInputVoictent, TZornTuple>
     >;
 
     return {
       andFromGritionTuple: buildRightInputGritionTupleAppreffingeBuilder<
         TLeftVicken,
-        TNextRightVickenTuple,
-        TNextPinbetunfInputTuple
-      >(nextContext),
+        TNextRightVickenTuple
+      >(nextInputContext),
       andFromHubblepupTuple: buildRightInputHubblepupTupleAppreffingeBuilder<
         TLeftVicken,
-        TNextRightVickenTuple,
-        TNextPinbetunfInputTuple
-      >(nextContext),
+        TNextRightVickenTuple
+      >(nextInputContext),
       andFromOdeshinVoictent: buildRightInputOdeshinVoictentAppreffingeBuilder<
         TLeftVicken,
-        TNextRightVickenTuple,
-        TNextPinbetunfInputTuple
-      >(nextContext),
+        TNextRightVickenTuple
+      >(nextInputContext),
       andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
         TLeftVicken,
-        TNextRightVickenTuple,
-        TNextPinbetunfInputTuple
-      >(nextContext),
+        TNextRightVickenTuple
+      >(nextInputContext),
 
       toGrition: buildOutputGritionAppreffingeBuilder<
         TLeftVicken,
-        TNextRightVickenTuple,
-        TNextPinbetunfInputTuple
-      >(nextContext),
+        TNextRightVickenTuple
+      >(nextInputContext),
       toHubblepup: buildOutputHubblepupAppreffingeBuilder<
         TLeftVicken,
         TNextRightVickenTuple,
-        TNextPinbetunfInputTuple
-      >(nextContext),
+        OutputVickenTuple
+      >(nextInputOutputContext),
       toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
         TLeftVicken,
         TNextRightVickenTuple,
-        TNextPinbetunfInputTuple
-      >(nextContext),
+        OutputVickenTuple
+      >(nextInputOutputContext),
     };
   };
 
@@ -289,11 +190,9 @@ export const buildRightInputGritionTupleAppreffingeBuilder = <
 export type RightInputGritionTupleAppreffingeBuilderParent<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 > = {
   andFromGritionTuple: RightInputGritionTupleAppreffingeBuilder<
     TLeftVicken,
-    TRightVickenTuple,
-    TPinbetunfInputTuple
+    TRightVickenTuple
   >;
 };

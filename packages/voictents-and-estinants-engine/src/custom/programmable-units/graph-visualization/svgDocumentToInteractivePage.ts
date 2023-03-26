@@ -14,7 +14,7 @@ export const addInteractivityToSvgDocument = buildEstinant()
   .fromHubblepup<SvgDocumentVoictent>({
     gepp: SVG_DOCUMENT_GEPP,
   })
-  .andFromHubblepupTuple<HtmlFileVoictent, [HtmlFileVoictent], string>({
+  .andFromHubblepupTuple<HtmlFileVoictent, [string]>({
     gepp: HTML_FILE_GEPP,
     framate: () => [INTERACTIVE_HTML_FILE_PATH],
     croard: (rightInput) => rightInput.zorn,

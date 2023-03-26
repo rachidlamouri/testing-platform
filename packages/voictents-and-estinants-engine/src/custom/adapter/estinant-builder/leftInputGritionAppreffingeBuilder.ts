@@ -1,6 +1,10 @@
-import { LeftHubblepupVicken } from '../../../type-script-adapter/vicken';
-import { OdeshinVoictent, OdeshinVoictentToGrition } from '../odeshinVoictent';
-import { InputContext } from './estinantBuilderContext';
+import { LeftGritionVicken } from '../../../type-script-adapter/vicken';
+import { OdeshinVoictent } from '../odeshinVoictent';
+import {
+  AggregatedOutput,
+  InputContext,
+  InputOutputContext,
+} from './estinantBuilderContext';
 import { LeftAppreffinge } from './leftInputHubblepupAppreffingeBuilder';
 import {
   buildOutputGritionAppreffingeBuilder,
@@ -29,13 +33,11 @@ import {
 import { odeshinToGrition } from './tropoignantInputOutputModifier';
 
 type LeftVicken<TInputVoictent extends OdeshinVoictent> =
-  LeftHubblepupVicken<TInputVoictent>;
+  LeftGritionVicken<TInputVoictent>;
 
 type RightInputVickenTuple = [];
 
-type PinbetunfInputTuple<TInputVoictent extends OdeshinVoictent> = [
-  OdeshinVoictentToGrition<TInputVoictent>,
-];
+type OutputVickenTuple = [];
 
 export type LeftInputGritionAppreffingeBuilder = <
   TInputVoictent extends OdeshinVoictent,
@@ -43,33 +45,29 @@ export type LeftInputGritionAppreffingeBuilder = <
   leftAppreffinge: LeftAppreffinge<TInputVoictent>,
 ) => RightInputHubblepupTupleAppreffingeBuilderParent<
   LeftVicken<TInputVoictent>,
-  RightInputVickenTuple,
-  PinbetunfInputTuple<TInputVoictent>
+  RightInputVickenTuple
 > &
   RightInputOdeshinVoictentAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
-    RightInputVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    RightInputVickenTuple
   > &
   RightInputVoictentAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
-    RightInputVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    RightInputVickenTuple
   > &
   OutputGritionAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
-    RightInputVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    RightInputVickenTuple
   > &
   OutputHubblepupAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
     RightInputVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    OutputVickenTuple
   > &
   OutputHubblepupTupleAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
     RightInputVickenTuple,
-    PinbetunfInputTuple<TInputVoictent>
+    OutputVickenTuple
   >;
 
 export const buildLeftInputGritionAppreffingeBuilder =
@@ -78,7 +76,7 @@ export const buildLeftInputGritionAppreffingeBuilder =
       <TInputVoictent extends OdeshinVoictent>(
         leftAppreffinge: LeftAppreffinge<TInputVoictent>,
       ) => {
-        const nextContext: InputContext = {
+        const nextInputContext: InputContext = {
           leftInputContext: {
             gepp: leftAppreffinge.gepp,
             isWibiz: false,
@@ -87,40 +85,47 @@ export const buildLeftInputGritionAppreffingeBuilder =
           rightInputContextTuple: [],
         };
 
+        const nextInputOutputContext: InputOutputContext = {
+          inputContext: nextInputContext,
+          outputContext: {
+            aggregatePinbetunfOutput: () => {
+              const aggregatedOutput: AggregatedOutput = {};
+              return aggregatedOutput;
+            },
+            constituentResultNormalizerList: [],
+          },
+        };
+
         return {
           andFromHubblepupTuple:
             buildRightInputHubblepupTupleAppreffingeBuilder<
               LeftVicken<TInputVoictent>,
-              RightInputVickenTuple,
-              PinbetunfInputTuple<TInputVoictent>
-            >(nextContext),
+              RightInputVickenTuple
+            >(nextInputContext),
           andFromOdeshinVoictent:
             buildRightInputOdeshinVoictentAppreffingeBuilder<
               LeftVicken<TInputVoictent>,
-              RightInputVickenTuple,
-              PinbetunfInputTuple<TInputVoictent>
-            >(nextContext),
+              RightInputVickenTuple
+            >(nextInputContext),
           andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
             LeftVicken<TInputVoictent>,
-            RightInputVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
-          >(nextContext),
+            RightInputVickenTuple
+          >(nextInputContext),
 
           toGrition: buildOutputGritionAppreffingeBuilder<
             LeftVicken<TInputVoictent>,
-            RightInputVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
-          >(nextContext),
+            RightInputVickenTuple
+          >(nextInputContext),
           toHubblepup: buildOutputHubblepupAppreffingeBuilder<
             LeftVicken<TInputVoictent>,
             RightInputVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
-          >(nextContext),
+            OutputVickenTuple
+          >(nextInputOutputContext),
           toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
             LeftVicken<TInputVoictent>,
             RightInputVickenTuple,
-            PinbetunfInputTuple<TInputVoictent>
-          >(nextContext),
+            OutputVickenTuple
+          >(nextInputOutputContext),
         };
       };
 

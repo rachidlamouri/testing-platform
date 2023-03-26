@@ -56,7 +56,7 @@ export const enumerateFileSystemObjects = buildEstinant()
   .toHubblepupTuple<DirectoryVoictent>({
     gepp: DIRECTORY_GEPP,
   })
-  .andToHubblepupTuple<FileVoictent>({
+  .toHubblepupTuple<FileVoictent>({
     gepp: FILE_GEPP,
   })
   .onPinbe((input) => {

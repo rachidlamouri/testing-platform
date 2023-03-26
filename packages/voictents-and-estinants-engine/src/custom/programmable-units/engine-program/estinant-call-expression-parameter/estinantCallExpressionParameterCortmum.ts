@@ -58,31 +58,29 @@ export const getEstinantCallExpressionParts = buildEstinant()
   .fromHubblepup<EngineEstinantVoictent>({
     gepp: ENGINE_ESTINANT_GEPP,
   })
-  .andFromHubblepupTuple<
-    ProgramBodyDeclarationsByIdentifierVoictent,
-    [ProgramBodyDeclarationsByIdentifierVoictent],
-    string
-  >({
-    gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
-    croard: (rightInput) => rightInput.zorn,
-    framate: (leftInput) => [leftInput.grition.estinantFilePath],
-  })
+  .andFromHubblepupTuple<ProgramBodyDeclarationsByIdentifierVoictent, [string]>(
+    {
+      gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
+      croard: (rightInput) => rightInput.zorn,
+      framate: (leftInput) => [leftInput.grition.estinantFilePath],
+    },
+  )
   .toHubblepupTuple<EstinantInputOutputParentVoictent>({
     gepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
   })
-  .andToHubblepupTuple<EstinantCallExpressionInputParameterVoictent>({
+  .toHubblepupTuple<EstinantCallExpressionInputParameterVoictent>({
     gepp: ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
   })
-  .andToHubblepupTuple<EstinantCallExpressionOutputParameterVoictent>({
+  .toHubblepupTuple<EstinantCallExpressionOutputParameterVoictent>({
     gepp: ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
   })
-  .andToHubblepupTuple<EstinantInputListVoictent>({
+  .toHubblepupTuple<EstinantInputListVoictent>({
     gepp: ESTINANT_INPUT_LIST_GEPP,
   })
-  .andToHubblepupTuple<EstinantOutputListVoictent>({
+  .toHubblepupTuple<EstinantOutputListVoictent>({
     gepp: ESTINANT_OUTPUT_LIST_GEPP,
   })
-  .andToHubblepupTuple<ErrorVoictent>({
+  .toHubblepupTuple<ErrorVoictent>({
     gepp: ERROR_GEPP,
   })
   .onPinbe(

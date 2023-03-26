@@ -56,11 +56,7 @@ const inputHubblepupAndInputHubblepupTupleToOutputHubblepup = buildEstinant()
   .fromHubblepup<InputAVoictent>({
     gepp: INPUT_A_GEPP,
   })
-  .andFromHubblepupTuple<
-    InputBVoictent,
-    [InputBVoictent, InputBVoictent],
-    string
-  >({
+  .andFromHubblepupTuple<InputBVoictent, [string, string]>({
     gepp: INPUT_B_GEPP,
     framate: (leftInput) => [`b-${leftInput.number}`, `b-${leftInput.number}`],
     croard: (rightInput) => rightInput.zorn,
@@ -85,11 +81,7 @@ const inputHubblepupAndInputHubblepupTupleAndInputHubblepupTupleToOutputHubblepu
     .fromHubblepup<InputAVoictent>({
       gepp: INPUT_A_GEPP,
     })
-    .andFromHubblepupTuple<
-      InputBVoictent,
-      [InputBVoictent, InputBVoictent],
-      string
-    >({
+    .andFromHubblepupTuple<InputBVoictent, [string, string]>({
       gepp: INPUT_B_GEPP,
       framate: (leftInput) => [
         `b-${leftInput.number}`,
@@ -97,11 +89,7 @@ const inputHubblepupAndInputHubblepupTupleAndInputHubblepupTupleToOutputHubblepu
       ],
       croard: (rightInput) => rightInput.zorn,
     })
-    .andFromHubblepupTuple<
-      InputCVoictent,
-      [InputCVoictent, InputCVoictent, InputCVoictent],
-      string
-    >({
+    .andFromHubblepupTuple<InputCVoictent, [string, string, string]>({
       gepp: INPUT_C_GEPP,
       framate: (leftInput) => [
         `c-${leftInput.number}`,

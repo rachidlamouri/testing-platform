@@ -1,8 +1,8 @@
-import { Tuple } from '../../utilities/semantic-types/tuple';
 import { LeftAppreffinge, RightAppreffingeTuple } from '../appreffinge';
 import { Tropoignant, Tropoignant2 } from '../tropoignant';
 import {
   LeftVicken,
+  OutputVickenTuple,
   RightHubblepupVicken,
   RightVicken,
   RightVickenTuple,
@@ -24,16 +24,16 @@ type RightVickenToAppreffinge<
   TLeftVicken extends LeftVicken,
   TRightVicken extends RightVicken,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-> = TRightVicken extends RightHubblepupVicken<any, any, any>
+> = TRightVicken extends RightHubblepupVicken<any, any>
   ? {
       gepp: TRightVicken['voictent']['gepp'];
       isWibiz: boolean;
       framate: (
         leftInput: TLeftVicken['tropoignantInput'],
-      ) => Tuple<TRightVicken['zorn']>;
+      ) => TRightVicken['zornTuple'];
       croard: (
         rightInput: TRightVicken['tropoignantInput'],
-      ) => TRightVicken['zorn'];
+      ) => TRightVicken['zornTuple'][number];
     }
   : {
       gepp: TRightVicken['voictent']['gepp'];
@@ -56,7 +56,7 @@ export type RightVickenTupleToAppreffingeTuple<
 export type Estinant2<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TOutputVoictentTuple extends VoictentTuple,
+  TOutputVickenTuple extends OutputVickenTuple,
 > = {
   leftAppreffinge: {
     gepp: TLeftVicken['voictent']['gepp'];
@@ -66,5 +66,5 @@ export type Estinant2<
     TLeftVicken,
     TRightVickenTuple
   >;
-  tropoig: Tropoignant2<TLeftVicken, TRightVickenTuple, TOutputVoictentTuple>;
+  tropoig: Tropoignant2<TLeftVicken, TRightVickenTuple, TOutputVickenTuple>;
 };

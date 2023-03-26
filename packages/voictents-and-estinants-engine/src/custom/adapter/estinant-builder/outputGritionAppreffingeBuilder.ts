@@ -1,8 +1,8 @@
 import {
   LeftVicken,
+  OutputGritionVicken,
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
-import { StralineTuple } from '../../../utilities/semantic-types/straline';
 import { OdeshinVoictent } from '../odeshinVoictent';
 import { InputContext, InputOutputContext } from './estinantBuilderContext';
 import {
@@ -23,42 +23,33 @@ type OutputAppreffinge<
   getZorn: ZornAccessor<TLeftVicken['tropoignantInput']>;
 };
 
-type OutputVoictentTuple<TOutputVoictent extends OdeshinVoictent> = [
-  TOutputVoictent,
-];
+type OutputVicken<TOutputVoictent extends OdeshinVoictent> =
+  OutputGritionVicken<TOutputVoictent>;
 
-type PinbetunfOutput<TOutputVoictent extends OdeshinVoictent> =
-  TOutputVoictent['hubblepupTuple'][number]['grition'];
+type OutputVickenTuple<TOutputVoictent extends OdeshinVoictent> = [
+  OutputVicken<TOutputVoictent>,
+];
 
 export type OutputGritionAppreffingeBuilder<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 > = <TOutputVoictent extends OdeshinVoictent>(
   outputAppreffinge: OutputAppreffinge<TLeftVicken, TOutputVoictent>,
 ) => PinbetunfBuilderParent<
   TLeftVicken,
   TRightVickenTuple,
-  OutputVoictentTuple<TOutputVoictent>,
-  TPinbetunfInputTuple,
-  PinbetunfOutput<TOutputVoictent>
+  OutputVickenTuple<TOutputVoictent>
 >;
 
 export const buildOutputGritionAppreffingeBuilder = <
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 >(
   inputContext: InputContext,
-): OutputGritionAppreffingeBuilder<
-  TLeftVicken,
-  TRightVickenTuple,
-  TPinbetunfInputTuple
-> => {
+): OutputGritionAppreffingeBuilder<TLeftVicken, TRightVickenTuple> => {
   const buildoutputGritionAppreffinge: OutputGritionAppreffingeBuilder<
     TLeftVicken,
-    TRightVickenTuple,
-    TPinbetunfInputTuple
+    TRightVickenTuple
   > = <TOutputVoictent extends OdeshinVoictent>(
     outputAppreffinge: OutputAppreffinge<TLeftVicken, TOutputVoictent>,
   ) => {
@@ -81,9 +72,7 @@ export const buildOutputGritionAppreffingeBuilder = <
       onPinbe: buildPinbetunfBuilder<
         TLeftVicken,
         TRightVickenTuple,
-        OutputVoictentTuple<TOutputVoictent>,
-        TPinbetunfInputTuple,
-        PinbetunfOutput<TOutputVoictent>
+        OutputVickenTuple<TOutputVoictent>
       >(nextContext),
     };
   };
@@ -94,11 +83,6 @@ export const buildOutputGritionAppreffingeBuilder = <
 export type OutputGritionAppreffingeBuilderParent<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
-  TPinbetunfInputTuple extends StralineTuple,
 > = {
-  toGrition: OutputGritionAppreffingeBuilder<
-    TLeftVicken,
-    TRightVickenTuple,
-    TPinbetunfInputTuple
-  >;
+  toGrition: OutputGritionAppreffingeBuilder<TLeftVicken, TRightVickenTuple>;
 };
