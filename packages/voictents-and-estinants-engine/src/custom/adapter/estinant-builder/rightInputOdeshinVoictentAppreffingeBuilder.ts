@@ -5,11 +5,8 @@ import {
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
 import {
-  AggregatedOutput,
-  extendInputContext,
-  InputContext,
+  buildInputOutputContextFromRightInputContext,
   InputOutputContext,
-  RightInputVoictentContext,
 } from './estinantBuilderContext';
 import {
   buildOutputHubblepupAppreffingeBuilder,
@@ -59,7 +56,7 @@ export const buildRightInputOdeshinVoictentAppreffingeBuilder = <
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
 >(
-  inputContext: InputContext,
+  inputOutputContext: InputOutputContext,
 ): RightInputOdeshinVoictentAppreffingeBuilder<
   TLeftVicken,
   TRightVickenTuple
@@ -70,41 +67,30 @@ export const buildRightInputOdeshinVoictentAppreffingeBuilder = <
   > = <TRightInputVoictent extends OdeshinVoictent>(
     rightAppreffinge: RightAppreffinge<TRightInputVoictent>,
   ) => {
-    const nextInputContext = extendInputContext<RightInputVoictentContext>({
-      inputContext,
-      nextRightInputContext: {
+    const nextContext = buildInputOutputContextFromRightInputContext({
+      previousContext: inputOutputContext,
+      rightInputContext: {
         gepp: rightAppreffinge.gepp,
         isWibiz: true,
         modifyTropoignantInput: odeshinTupleToGritionTuple,
       },
     });
 
-    const nextInputOutputContext: InputOutputContext = {
-      inputContext: nextInputContext,
-      outputContext: {
-        aggregatePinbetunfOutput: () => {
-          const aggregatedOutput: AggregatedOutput = {};
-          return aggregatedOutput;
-        },
-        constituentResultNormalizerList: [],
-      },
-    };
-
     return {
       andFromOdeshinVoictent: buildRightInputOdeshinVoictentAppreffingeBuilder<
         TLeftVicken,
         NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
-      >(nextInputContext),
+      >(nextContext),
       andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
         TLeftVicken,
         NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
-      >(nextInputContext),
+      >(nextContext),
 
       toHubblepup: buildOutputHubblepupAppreffingeBuilder<
         TLeftVicken,
         NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
         OutputVickenTuple
-      >(nextInputOutputContext),
+      >(nextContext),
     };
   };
 

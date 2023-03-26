@@ -4,14 +4,16 @@ import {
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
 import { OdeshinVoictent } from '../odeshinVoictent';
-import { InputContext, InputOutputContext } from './estinantBuilderContext';
+import {
+  buildInputOutputContextFromConstituentResultNormalizer,
+  InputOutputContext,
+} from './estinantBuilderContext';
 import {
   buildPinbetunfBuilder,
   PinbetunfBuilderParent,
 } from './pinbetunfBuilder';
 import {
   buildOutputGritionNormalizer,
-  buildPinbetunfOutputAggregator,
   ZornAccessor,
 } from './tropoignantInputOutputModifier';
 
@@ -45,7 +47,7 @@ export const buildOutputGritionAppreffingeBuilder = <
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
 >(
-  inputContext: InputContext,
+  inputOutputContext: InputOutputContext,
 ): OutputGritionAppreffingeBuilder<TLeftVicken, TRightVickenTuple> => {
   const buildoutputGritionAppreffinge: OutputGritionAppreffingeBuilder<
     TLeftVicken,
@@ -53,20 +55,14 @@ export const buildOutputGritionAppreffingeBuilder = <
   > = <TOutputVoictent extends OdeshinVoictent>(
     outputAppreffinge: OutputAppreffinge<TLeftVicken, TOutputVoictent>,
   ) => {
-    const nextContext: InputOutputContext = {
-      inputContext,
-      outputContext: {
-        aggregatePinbetunfOutput: buildPinbetunfOutputAggregator(
-          outputAppreffinge.gepp,
-        ),
-        constituentResultNormalizerList: [
-          buildOutputGritionNormalizer(
-            outputAppreffinge.gepp,
-            outputAppreffinge.getZorn,
-          ),
-        ],
-      },
-    };
+    const nextContext = buildInputOutputContextFromConstituentResultNormalizer({
+      previousContext: inputOutputContext,
+      normalizeResult: buildOutputGritionNormalizer(
+        outputAppreffinge.gepp,
+        outputAppreffinge.getZorn,
+      ),
+      outputGepp: outputAppreffinge.gepp,
+    });
 
     return {
       onPinbe: buildPinbetunfBuilder<

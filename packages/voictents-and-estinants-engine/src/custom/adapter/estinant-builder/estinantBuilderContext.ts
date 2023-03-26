@@ -121,3 +121,109 @@ export type AssemblerContext = {
   outputContext: AggregatedOutputContext;
   pinbe: AnyPinbetunf;
 };
+
+const buildEmptyAggregatedOutput: PinbetunfOutputAggregator = () => {
+  const aggregatedOutput: AggregatedOutput = {};
+  return aggregatedOutput;
+};
+
+const buildSingleValueAggregatedOutputBuilder = (
+  outputGepp: Gepp,
+): PinbetunfOutputAggregator => {
+  const buildSingleValueAggregatedOutput: PinbetunfOutputAggregator = (
+    modifiedOutput: unknown,
+  ) => {
+    const aggregatedOutput: AggregatedOutput = {
+      [outputGepp]: modifiedOutput,
+    };
+    return aggregatedOutput;
+  };
+
+  return buildSingleValueAggregatedOutput;
+};
+
+const passthroughAggregatedOutput: PinbetunfOutputAggregator = (
+  modifiedOutput: unknown,
+) => {
+  const aggregatedOutput = modifiedOutput as AggregatedOutput;
+  return aggregatedOutput;
+};
+
+export const buildInputOutputContextFromLeftInputContext = (
+  leftInputContext: LeftInputContext,
+): InputOutputContext => {
+  return {
+    inputContext: {
+      leftInputContext,
+      rightInputContextTuple: [],
+    },
+    outputContext: {
+      aggregatePinbetunfOutput: buildEmptyAggregatedOutput,
+      constituentResultNormalizerList: [],
+    },
+  };
+};
+
+type InputOutputContextFromRightInputContextBuilderInput = {
+  previousContext: InputOutputContext;
+  rightInputContext: RightInputContext;
+};
+
+export const buildInputOutputContextFromRightInputContext = ({
+  previousContext: {
+    inputContext: {
+      leftInputContext,
+      rightInputContextTuple: previousRightInputContextTuple,
+    },
+    outputContext,
+  },
+  rightInputContext,
+}: InputOutputContextFromRightInputContextBuilderInput): InputOutputContext => {
+  const nextRightInputContextTuple = [
+    ...previousRightInputContextTuple,
+    rightInputContext,
+  ];
+
+  return {
+    inputContext: {
+      leftInputContext,
+      rightInputContextTuple: nextRightInputContextTuple,
+    },
+    outputContext,
+  };
+};
+
+type InputOutputContextFromOutputContextBuilderInput = {
+  previousContext: InputOutputContext;
+  normalizeResult: ConstituentResultNormalizer;
+  outputGepp: Gepp;
+};
+
+export const buildInputOutputContextFromConstituentResultNormalizer = ({
+  previousContext: {
+    inputContext,
+    outputContext: {
+      constituentResultNormalizerList: previousConstituentResultNormalizerList,
+    },
+  },
+  normalizeResult,
+  outputGepp,
+}: InputOutputContextFromOutputContextBuilderInput): InputOutputContext => {
+  const nextConstituentResultNormalizerList = [
+    ...previousConstituentResultNormalizerList,
+    normalizeResult,
+  ];
+
+  const aggregatePinbetunfOutput: PinbetunfOutputAggregator =
+    nextConstituentResultNormalizerList.length === 1
+      ? buildSingleValueAggregatedOutputBuilder(outputGepp)
+      : passthroughAggregatedOutput;
+
+  return {
+    inputContext,
+    outputContext: {
+      aggregatePinbetunfOutput,
+      constituentResultNormalizerList: nextConstituentResultNormalizerList,
+    },
+  };
+};
