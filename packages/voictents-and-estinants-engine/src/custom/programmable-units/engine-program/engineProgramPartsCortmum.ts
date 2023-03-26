@@ -88,7 +88,7 @@ export const getEngineProgramParts = buildEstinant()
   .toHubblepupTuple<EngineProgramVoictent>({
     gepp: ENGINE_PROGRAM_GEPP,
   })
-  .andToHubblepupTuple<EngineEstinantVoictent>({
+  .toHubblepupTuple<EngineEstinantVoictent>({
     gepp: ENGINE_ESTINANT_GEPP,
   })
   .onPinbe(

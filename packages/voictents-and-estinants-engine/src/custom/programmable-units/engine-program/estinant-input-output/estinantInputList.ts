@@ -86,7 +86,7 @@ export const getEstinantInputList = buildEstinant()
   .toHubblepup<EstinantInputListVoictent>({
     gepp: ESTINANT_INPUT_LIST_GEPP,
   })
-  .andToHubblepupTuple<ErrorVoictent>({
+  .toHubblepupTuple<ErrorVoictent>({
     gepp: ERROR_GEPP,
   })
   .onPinbe((input) => {

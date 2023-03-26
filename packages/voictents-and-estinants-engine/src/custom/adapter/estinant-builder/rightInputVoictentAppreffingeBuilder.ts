@@ -6,8 +6,10 @@ import {
 } from '../../../type-script-adapter/vicken';
 import { Voictent } from '../voictent';
 import {
+  AggregatedOutput,
   extendInputContext,
   InputContext,
+  InputOutputContext,
   RightInputVoictentContext,
 } from './estinantBuilderContext';
 import {
@@ -32,6 +34,8 @@ type NextVickenTuple<
   RightHubblepupVicken<TRightInputVoictent>
 >;
 
+type OutputVickenTuple = [];
+
 export type RightInputVoictentAppreffingeBuilder<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
@@ -43,11 +47,13 @@ export type RightInputVoictentAppreffingeBuilder<
 > &
   OutputHubblepupAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
+    OutputVickenTuple
   > &
   OutputHubblepupTupleAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
+    OutputVickenTuple
   >;
 
 export const buildRightInputVoictentAppreffingeBuilder = <
@@ -62,7 +68,7 @@ export const buildRightInputVoictentAppreffingeBuilder = <
   > = <TRightInputVoictent extends Voictent>(
     rightAppreffinge: RightAppreffinge<TRightInputVoictent>,
   ) => {
-    const nextContext = extendInputContext<RightInputVoictentContext>({
+    const nextInputContext = extendInputContext<RightInputVoictentContext>({
       inputContext,
       nextRightInputContext: {
         gepp: rightAppreffinge.gepp,
@@ -71,20 +77,33 @@ export const buildRightInputVoictentAppreffingeBuilder = <
       },
     });
 
+    const nextInputOutputContext: InputOutputContext = {
+      inputContext: nextInputContext,
+      outputContext: {
+        aggregatePinbetunfOutput: () => {
+          const aggregatedOutput: AggregatedOutput = {};
+          return aggregatedOutput;
+        },
+        constituentResultNormalizerList: [],
+      },
+    };
+
     return {
       andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
         TLeftVicken,
         NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
-      >(nextContext),
+      >(nextInputContext),
 
       toHubblepup: buildOutputHubblepupAppreffingeBuilder<
         TLeftVicken,
-        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
-      >(nextContext),
+        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
+        OutputVickenTuple
+      >(nextInputOutputContext),
       toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
         TLeftVicken,
-        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
-      >(nextContext),
+        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
+        OutputVickenTuple
+      >(nextInputOutputContext),
     };
   };
 

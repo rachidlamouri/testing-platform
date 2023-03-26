@@ -73,11 +73,13 @@ export type LeftInputHubblepupAppreffingeBuilder = <
   > &
   OutputHubblepupAppreffingeBuilderParent<
     LeftHubblepupVicken<TInputVoictent>,
-    RightInputVickenTuple
+    RightInputVickenTuple,
+    OutputVickenTuple
   > &
   OutputHubblepupTupleAppreffingeBuilderParent<
     LeftHubblepupVicken<TInputVoictent>,
-    RightInputVickenTuple
+    RightInputVickenTuple,
+    OutputVickenTuple
   >;
 
 export const buildLeftInputHubblepupAppreffingeBuilder =
@@ -133,12 +135,14 @@ export const buildLeftInputHubblepupAppreffingeBuilder =
           >(nextInputContext),
           toHubblepup: buildOutputHubblepupAppreffingeBuilder<
             LeftHubblepupVicken<TInputVoictent>,
-            RightInputVickenTuple
-          >(nextInputContext),
+            RightInputVickenTuple,
+            OutputVickenTuple
+          >(nextInputOutputContext),
           toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
             LeftHubblepupVicken<TInputVoictent>,
-            RightInputVickenTuple
-          >(nextInputContext),
+            RightInputVickenTuple,
+            OutputVickenTuple
+          >(nextInputOutputContext),
         };
       };
 

@@ -70,19 +70,19 @@ export const getEstinantCallExpressionParts = buildEstinant()
   .toHubblepupTuple<EstinantInputOutputParentVoictent>({
     gepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
   })
-  .andToHubblepupTuple<EstinantCallExpressionInputParameterVoictent>({
+  .toHubblepupTuple<EstinantCallExpressionInputParameterVoictent>({
     gepp: ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
   })
-  .andToHubblepupTuple<EstinantCallExpressionOutputParameterVoictent>({
+  .toHubblepupTuple<EstinantCallExpressionOutputParameterVoictent>({
     gepp: ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
   })
-  .andToHubblepupTuple<EstinantInputListVoictent>({
+  .toHubblepupTuple<EstinantInputListVoictent>({
     gepp: ESTINANT_INPUT_LIST_GEPP,
   })
-  .andToHubblepupTuple<EstinantOutputListVoictent>({
+  .toHubblepupTuple<EstinantOutputListVoictent>({
     gepp: ESTINANT_OUTPUT_LIST_GEPP,
   })
-  .andToHubblepupTuple<ErrorVoictent>({
+  .toHubblepupTuple<ErrorVoictent>({
     gepp: ERROR_GEPP,
   })
   .onPinbe(

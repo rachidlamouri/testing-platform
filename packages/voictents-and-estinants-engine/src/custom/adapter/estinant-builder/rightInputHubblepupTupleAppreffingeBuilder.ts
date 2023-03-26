@@ -10,8 +10,10 @@ import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { Zorn } from '../../../utilities/semantic-types/zorn';
 import { Voictent } from '../voictent';
 import {
+  AggregatedOutput,
   extendInputContext,
   InputContext,
+  InputOutputContext,
   RightInputHubblepupContext,
 } from './estinantBuilderContext';
 import {
@@ -58,6 +60,8 @@ type NextVickenTuple<
   TRightVickenTuple,
   RightHubblepupVicken<TRightInputVoictent, TVoictentTuple, TZorn>
 >;
+
+type OutputVickenTuple = [];
 
 export type RightInputHubblepupTupleAppreffingeBuilder<
   TLeftVicken extends LeftVicken,
@@ -111,7 +115,8 @@ export type RightInputHubblepupTupleAppreffingeBuilder<
       TRightInputVoictent,
       TVoictentTuple,
       TZorn
-    >
+    >,
+    OutputVickenTuple
   > &
   OutputHubblepupTupleAppreffingeBuilderParent<
     TLeftVicken,
@@ -120,7 +125,8 @@ export type RightInputHubblepupTupleAppreffingeBuilder<
       TRightInputVoictent,
       TVoictentTuple,
       TZorn
-    >
+    >,
+    OutputVickenTuple
   >;
 
 export const buildRightInputHubblepupTupleAppreffingeBuilder = <
@@ -147,7 +153,7 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder = <
       TZorn
     >,
   ) => {
-    const nextContext = extendInputContext<RightInputHubblepupContext>({
+    const nextInputContext = extendInputContext<RightInputHubblepupContext>({
       inputContext,
       nextRightInputContext: {
         gepp: rightAppreffinge.gepp,
@@ -158,6 +164,17 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder = <
       },
     });
 
+    const nextInputOutputContext: InputOutputContext = {
+      inputContext: nextInputContext,
+      outputContext: {
+        aggregatePinbetunfOutput: () => {
+          const aggregatedOutput: AggregatedOutput = {};
+          return aggregatedOutput;
+        },
+        constituentResultNormalizerList: [],
+      },
+    };
+
     type TNextRightVickenTuple = AppendRightVickenToTuple<
       TRightVickenTuple,
       RightHubblepupVicken<TRightInputVoictent, TVoictentTuple, TZorn>
@@ -167,28 +184,30 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder = <
       andFromHubblepupTuple: buildRightInputHubblepupTupleAppreffingeBuilder<
         TLeftVicken,
         TNextRightVickenTuple
-      >(nextContext),
+      >(nextInputContext),
       andFromOdeshinVoictent: buildRightInputOdeshinVoictentAppreffingeBuilder<
         TLeftVicken,
         TNextRightVickenTuple
-      >(nextContext),
+      >(nextInputContext),
       andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
         TLeftVicken,
         TNextRightVickenTuple
-      >(nextContext),
+      >(nextInputContext),
 
       toGrition: buildOutputGritionAppreffingeBuilder<
         TLeftVicken,
         TNextRightVickenTuple
-      >(nextContext),
+      >(nextInputContext),
       toHubblepup: buildOutputHubblepupAppreffingeBuilder<
         TLeftVicken,
-        TNextRightVickenTuple
-      >(nextContext),
+        TNextRightVickenTuple,
+        OutputVickenTuple
+      >(nextInputOutputContext),
       toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
         TLeftVicken,
-        TNextRightVickenTuple
-      >(nextContext),
+        TNextRightVickenTuple,
+        OutputVickenTuple
+      >(nextInputOutputContext),
     };
   };
 

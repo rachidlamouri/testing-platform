@@ -1,18 +1,16 @@
 import {
+  AppendOutputVickenToTuple,
   LeftVicken,
   OutputHubblepupVicken,
+  OutputVickenTuple,
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
 import { Voictent } from '../voictent';
+import { AggregatedOutput, InputOutputContext } from './estinantBuilderContext';
 import {
-  AdditionalOutputHubblepupAppreffingeBuilderParent,
-  buildAdditionalOutputHubblepupAppreffingeBuilder,
-} from './additionalOutputHubblepupAppreffingeBuilder';
-import {
-  AdditionalOutputHubblepupTupleAppreffingeBuilderParent,
-  buildAdditionalOutputHubblepupTupleAppreffingeBuilder,
-} from './additionalOutputHubblepupTupleAppreffingeBuilder';
-import { InputContext, InputOutputContext } from './estinantBuilderContext';
+  buildOutputHubblepupTupleAppreffingeBuilder,
+  OutputHubblepupTupleAppreffingeBuilderParent,
+} from './outputHubblepupTupleAppreffingeBuilder';
 import {
   buildPinbetunfBuilder,
   PinbetunfBuilderParent,
@@ -29,71 +27,88 @@ type OutputAppreffinge<TOutputVoictent extends Voictent> = {
 type OutputVicken<TOutputVoictent extends Voictent> =
   OutputHubblepupVicken<TOutputVoictent>;
 
-type OutputVickenTuple<TOutputVoictent extends Voictent> = [
-  OutputVicken<TOutputVoictent>,
-];
+type NextOutputVickenTuple<
+  TOutputVickenTuple extends OutputVickenTuple,
+  TOutputVoictent extends Voictent,
+> = AppendOutputVickenToTuple<
+  TOutputVickenTuple,
+  OutputVicken<TOutputVoictent>
+>;
 
 export type OutputHubblepupAppreffingeBuilder<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
+  TOutputVickenTuple extends OutputVickenTuple,
 > = <TOutputVoictent extends Voictent>(
   outputAppreffinge: OutputAppreffinge<TOutputVoictent>,
-) => AdditionalOutputHubblepupAppreffingeBuilderParent<
+) => OutputHubblepupAppreffingeBuilderParent<
   TLeftVicken,
   TRightVickenTuple,
-  OutputVickenTuple<TOutputVoictent>
+  NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
 > &
-  AdditionalOutputHubblepupTupleAppreffingeBuilderParent<
+  OutputHubblepupTupleAppreffingeBuilderParent<
     TLeftVicken,
     TRightVickenTuple,
-    OutputVickenTuple<TOutputVoictent>
+    NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
   > &
   PinbetunfBuilderParent<
     TLeftVicken,
     TRightVickenTuple,
-    OutputVickenTuple<TOutputVoictent>
+    NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
   >;
 
 export const buildOutputHubblepupAppreffingeBuilder = <
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
+  TOutputVickenTuple extends OutputVickenTuple,
 >(
-  inputContext: InputContext,
-): OutputHubblepupAppreffingeBuilder<TLeftVicken, TRightVickenTuple> => {
+  inputOutputContext: InputOutputContext,
+): OutputHubblepupAppreffingeBuilder<
+  TLeftVicken,
+  TRightVickenTuple,
+  TOutputVickenTuple
+> => {
   const buildOutputHubblepupAppreffinge: OutputHubblepupAppreffingeBuilder<
     TLeftVicken,
-    TRightVickenTuple
+    TRightVickenTuple,
+    TOutputVickenTuple
   > = <TOutputVoictent extends Voictent>(
     outputAppreffinge: OutputAppreffinge<TOutputVoictent>,
   ) => {
+    const nextConstituentResultNormalizerList = [
+      ...inputOutputContext.outputContext.constituentResultNormalizerList,
+      buildOutputHubblepupNormalizer(outputAppreffinge.gepp),
+    ];
+
     const nextContext: InputOutputContext = {
-      inputContext,
+      inputContext: inputOutputContext.inputContext,
       outputContext: {
-        aggregatePinbetunfOutput: buildPinbetunfOutputAggregator(
-          outputAppreffinge.gepp,
-        ),
-        constituentResultNormalizerList: [
-          buildOutputHubblepupNormalizer(outputAppreffinge.gepp),
-        ],
+        aggregatePinbetunfOutput:
+          nextConstituentResultNormalizerList.length < 2
+            ? buildPinbetunfOutputAggregator(outputAppreffinge.gepp)
+            : (aggregatedOutput: AggregatedOutput): AggregatedOutput => {
+                return aggregatedOutput;
+              },
+        constituentResultNormalizerList: nextConstituentResultNormalizerList,
       },
     };
 
     return {
-      toHubblepup: buildAdditionalOutputHubblepupAppreffingeBuilder<
+      toHubblepup: buildOutputHubblepupAppreffingeBuilder<
         TLeftVicken,
         TRightVickenTuple,
-        OutputVickenTuple<TOutputVoictent>
+        NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
       >(nextContext),
-      andToHubblepupTuple:
-        buildAdditionalOutputHubblepupTupleAppreffingeBuilder<
-          TLeftVicken,
-          TRightVickenTuple,
-          OutputVickenTuple<TOutputVoictent>
-        >(nextContext),
+      toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
+        TLeftVicken,
+        TRightVickenTuple,
+        NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
+      >(nextContext),
+
       onPinbe: buildPinbetunfBuilder<
         TLeftVicken,
         TRightVickenTuple,
-        OutputVickenTuple<TOutputVoictent>
+        NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
       >(nextContext),
     };
   };
@@ -104,9 +119,11 @@ export const buildOutputHubblepupAppreffingeBuilder = <
 export type OutputHubblepupAppreffingeBuilderParent<
   TLeftVicken extends LeftVicken,
   TRightVickenTuple extends RightVickenTuple,
+  TOutputVickenTuple extends OutputVickenTuple,
 > = {
   toHubblepup: OutputHubblepupAppreffingeBuilder<
     TLeftVicken,
-    TRightVickenTuple
+    TRightVickenTuple,
+    TOutputVickenTuple
   >;
 };

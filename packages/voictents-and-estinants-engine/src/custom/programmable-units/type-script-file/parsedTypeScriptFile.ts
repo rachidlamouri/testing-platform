@@ -37,7 +37,7 @@ export const parseTypeScriptFile = buildEstinant()
   .toHubblepupTuple<ParsedTypeScriptFileVoictent>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .andToHubblepupTuple<ErrorVoictent>({
+  .toHubblepupTuple<ErrorVoictent>({
     gepp: ERROR_GEPP,
   })
   .onPinbe((input) => {
