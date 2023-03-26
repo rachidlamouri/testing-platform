@@ -6,15 +6,15 @@ import {
   RightVickenTuple,
 } from '../../../type-script-adapter/vicken';
 import { Voictent } from '../voictent';
-import { AggregatedOutput, InputOutputContext } from './estinantBuilderContext';
+import {
+  buildInputOutputContextFromConstituentResultNormalizer,
+  InputOutputContext,
+} from './estinantBuilderContext';
 import {
   buildPinbetunfBuilder,
   PinbetunfBuilderParent,
 } from './pinbetunfBuilder';
-import {
-  buildOutputHubblepupTupleNormalizer,
-  buildPinbetunfOutputAggregator,
-} from './tropoignantInputOutputModifier';
+import { buildOutputHubblepupTupleNormalizer } from './tropoignantInputOutputModifier';
 
 type OutputAppreffinge<TOutputVoictent extends Voictent> = {
   gepp: TOutputVoictent['gepp'];
@@ -66,23 +66,13 @@ export const buildOutputHubblepupTupleAppreffingeBuilder = <
   > = <TOutputVoictent extends Voictent>(
     outputAppreffinge: OutputAppreffinge<TOutputVoictent>,
   ) => {
-    const nextConstituentResultNormalizerList = [
-      ...inputOutputContext.outputContext.constituentResultNormalizerList,
-      buildOutputHubblepupTupleNormalizer(outputAppreffinge.gepp),
-    ];
-
-    const nextContext: InputOutputContext = {
-      inputContext: inputOutputContext.inputContext,
-      outputContext: {
-        aggregatePinbetunfOutput:
-          nextConstituentResultNormalizerList.length < 2
-            ? buildPinbetunfOutputAggregator(outputAppreffinge.gepp)
-            : (aggregatedOutput: AggregatedOutput): AggregatedOutput => {
-                return aggregatedOutput;
-              },
-        constituentResultNormalizerList: nextConstituentResultNormalizerList,
-      },
-    };
+    const nextContext = buildInputOutputContextFromConstituentResultNormalizer({
+      previousContext: inputOutputContext,
+      normalizeResult: buildOutputHubblepupTupleNormalizer(
+        outputAppreffinge.gepp,
+      ),
+      outputGepp: outputAppreffinge.gepp,
+    });
 
     return {
       toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
