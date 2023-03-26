@@ -57,11 +57,7 @@ export const getTypeScriptFileRelationshipList = buildEstinant()
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
   // TODO: change to "andFromOdeshinTuple"
-  .andFromHubblepupTuple<
-    TypeScriptFileImportListVoictent,
-    [TypeScriptFileImportListVoictent],
-    string
-  >({
+  .andFromHubblepupTuple<TypeScriptFileImportListVoictent, [string]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     framate: (leftInput): [string] => [leftInput.zorn],
     croard: (rightInput): string => rightInput.zorn,

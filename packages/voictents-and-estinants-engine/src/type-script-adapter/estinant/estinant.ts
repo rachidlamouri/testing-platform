@@ -1,4 +1,3 @@
-import { Tuple } from '../../utilities/semantic-types/tuple';
 import { LeftAppreffinge, RightAppreffingeTuple } from '../appreffinge';
 import { Tropoignant, Tropoignant2 } from '../tropoignant';
 import {
@@ -25,16 +24,16 @@ type RightVickenToAppreffinge<
   TLeftVicken extends LeftVicken,
   TRightVicken extends RightVicken,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-> = TRightVicken extends RightHubblepupVicken<any, any, any>
+> = TRightVicken extends RightHubblepupVicken<any, any>
   ? {
       gepp: TRightVicken['voictent']['gepp'];
       isWibiz: boolean;
       framate: (
         leftInput: TLeftVicken['tropoignantInput'],
-      ) => Tuple<TRightVicken['zorn']>;
+      ) => TRightVicken['zornTuple'];
       croard: (
         rightInput: TRightVicken['tropoignantInput'],
-      ) => TRightVicken['zorn'];
+      ) => TRightVicken['zornTuple'][number];
     }
   : {
       gepp: TRightVicken['voictent']['gepp'];

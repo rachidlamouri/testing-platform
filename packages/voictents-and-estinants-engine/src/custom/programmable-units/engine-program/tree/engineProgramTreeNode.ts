@@ -38,11 +38,7 @@ export const constructEngineProgramTree = buildEstinant()
   .fromGrition<EngineProgramVoictent>({
     gepp: ENGINE_PROGRAM_GEPP,
   })
-  .andFromHubblepupTuple<
-    EstinantTreeNodeVoictent,
-    Tuple<EstinantTreeNodeVoictent>,
-    string
-  >({
+  .andFromHubblepupTuple<EstinantTreeNodeVoictent, Tuple<string>>({
     gepp: ESTINANT_TREE_NODE_GEPP,
     framate: (leftInput) => leftInput.grition.estinantIdentifierList,
     croard: (rightInput) => rightInput.zorn,

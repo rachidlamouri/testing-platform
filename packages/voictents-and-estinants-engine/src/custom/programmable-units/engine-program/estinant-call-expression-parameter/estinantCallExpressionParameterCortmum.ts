@@ -58,15 +58,13 @@ export const getEstinantCallExpressionParts = buildEstinant()
   .fromHubblepup<EngineEstinantVoictent>({
     gepp: ENGINE_ESTINANT_GEPP,
   })
-  .andFromHubblepupTuple<
-    ProgramBodyDeclarationsByIdentifierVoictent,
-    [ProgramBodyDeclarationsByIdentifierVoictent],
-    string
-  >({
-    gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
-    croard: (rightInput) => rightInput.zorn,
-    framate: (leftInput) => [leftInput.grition.estinantFilePath],
-  })
+  .andFromHubblepupTuple<ProgramBodyDeclarationsByIdentifierVoictent, [string]>(
+    {
+      gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
+      croard: (rightInput) => rightInput.zorn,
+      framate: (leftInput) => [leftInput.grition.estinantFilePath],
+    },
+  )
   .toHubblepupTuple<EstinantInputOutputParentVoictent>({
     gepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
   })

@@ -49,20 +49,12 @@ export const constructEstinantTreeNode = buildEstinant()
   .fromGrition<EstinantInputOutputParentVoictent>({
     gepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
   })
-  .andFromHubblepupTuple<
-    EstinantInputListVoictent,
-    [EstinantInputListVoictent],
-    string
-  >({
+  .andFromHubblepupTuple<EstinantInputListVoictent, [string]>({
     gepp: ESTINANT_INPUT_LIST_GEPP,
     framate: (leftInput) => [leftInput.grition.inputListIdentifier],
     croard: (rightInput) => rightInput.zorn,
   })
-  .andFromHubblepupTuple<
-    EstinantOutputListVoictent,
-    [EstinantOutputListVoictent],
-    string
-  >({
+  .andFromHubblepupTuple<EstinantOutputListVoictent, [string]>({
     gepp: ESTINANT_OUTPUT_LIST_GEPP,
     framate: (leftInput) => [leftInput.grition.outputListIdentifier],
     croard: (rightInput) => rightInput.zorn,
