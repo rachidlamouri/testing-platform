@@ -54,6 +54,7 @@ export type PinbetunfOutputAggregator<> = (
 
 export type ConstituentResultNormalizer = (
   leftInput: unknown,
+  modifiedInput: unknown,
   aggregatedOutput: AggregatedOutput,
 ) => QuirmList;
 
@@ -122,7 +123,7 @@ export type AssemblerContext = {
   pinbe: AnyPinbetunf;
 };
 
-const buildEmptyAggregatedOutput: PinbetunfOutputAggregator = () => {
+export const buildEmptyAggregatedOutput: PinbetunfOutputAggregator = () => {
   const aggregatedOutput: AggregatedOutput = {};
   return aggregatedOutput;
 };
