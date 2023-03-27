@@ -1,16 +1,16 @@
 import { digikikify } from '../../type-script-adapter/digikikify';
 import { buildQuirmDebugger } from '../debugger/quirmDebugger';
-import { categorizeFiles } from '../programmable-units/file/fileMattomer';
-import { enumerateFileSystemObjects } from '../programmable-units/file/fileMentursection';
-import { FILE_MENTURSECTION_CONFIGURATION_GEPP } from '../programmable-units/file/fileMentursectionConfiguration';
+import { categorizeFiles } from '../programmable-units/file/categorizeFiles';
+import { enumerateFileSystemObjects } from '../programmable-units/file/enumerateFileSystemObjects';
+import { FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP } from '../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { DIRECTED_GRAPH_GEPP } from '../programmable-units/graph-visualization/directed-graph/directedGraph';
-import { encodeDirectedGraphAsGraphvizCode } from '../programmable-units/graph-visualization/directedGraphToGraphvizCode';
-import { renderGraphvizCodeToSvgDocument } from '../programmable-units/graph-visualization/graphvizCodeToSvgDocument';
-import { addInteractivityToSvgDocument } from '../programmable-units/graph-visualization/svgDocumentToInteractivePage';
+import { encodeDirectedGraphAsGraphvizCode } from '../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
+import { renderGraphvizCodeToSvgDocument } from '../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
+import { addInteractivityToSvgDocument } from '../programmable-units/graph-visualization/addInteractivityToSvgDocument';
 
 digikikify({
   initialVoictentsByGepp: {
-    [FILE_MENTURSECTION_CONFIGURATION_GEPP]: [
+    [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
       {
         directoryPath:
           'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization',

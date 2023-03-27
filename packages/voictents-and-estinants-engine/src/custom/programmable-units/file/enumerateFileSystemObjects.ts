@@ -13,8 +13,8 @@ import { FileVoictent, FILE_GEPP, FileOdeshin, FileGrition } from './file';
 import { getFileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import {
   FileSystemObjectEnumeratorConfigurationVoictent,
-  FILE_MENTURSECTION_CONFIGURATION_GEPP,
-} from './fileMentursectionConfiguration';
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+} from './fileSystemObjectEnumeratorConfiguration';
 import { getFileMetadata } from './getFileMetadata';
 
 const partsToCamel = (x: string[]): string => {
@@ -51,7 +51,7 @@ const partsToKebabCase = (x: string[]): string => {
 
 export const enumerateFileSystemObjects = buildEstinant()
   .fromHubblepup<FileSystemObjectEnumeratorConfigurationVoictent>({
-    gepp: FILE_MENTURSECTION_CONFIGURATION_GEPP,
+    gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   })
   .toHubblepupTuple<DirectoryVoictent>({
     gepp: DIRECTORY_GEPP,
