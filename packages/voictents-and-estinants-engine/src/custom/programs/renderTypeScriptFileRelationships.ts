@@ -1,24 +1,24 @@
 import { digikikify } from '../../type-script-adapter/digikikify';
 import { buildQuirmDebugger } from '../debugger/quirmDebugger';
-import { categorizeFiles } from '../programmable-units/file/fileMattomer';
-import { enumerateFileSystemObjects } from '../programmable-units/file/fileMentursection';
+import { categorizeFiles } from '../programmable-units/file/categorizeFiles';
+import { enumerateFileSystemObjects } from '../programmable-units/file/enumerateFileSystemObjects';
 import {
-  FILE_MENTURSECTION_CONFIGURATION_GEPP,
-  VOICTENTS_AND_ESTINANTS_FILE_MENTURSECTION_CONFIGURATION,
-} from '../programmable-units/file/fileMentursectionConfiguration';
-import { encodeDirectedGraphAsGraphvizCode } from '../programmable-units/graph-visualization/directedGraphToGraphvizCode';
-import { renderGraphvizCodeToSvgDocument } from '../programmable-units/graph-visualization/graphvizCodeToSvgDocument';
-import { addInteractivityToSvgDocument } from '../programmable-units/graph-visualization/svgDocumentToInteractivePage';
-import { getTypeScriptFileRelationshipList } from '../programmable-units/type-script-file-relationships/typeScriptFileRelationshipList';
-import { digraphificateTypeScriptFileRelationshipList } from '../programmable-units/type-script-file-relationships/typeScriptFileRelationshipListToDirectedGraph';
-import { parseTypeScriptFile } from '../programmable-units/type-script-file/parsedTypeScriptFile';
-import { associateTypeScriptFileToTypescriptConfiguration } from '../programmable-units/type-script-file/typeScriptFileConfiguration';
-import { getTypeScriptFileImportList } from '../programmable-units/type-script-file/typeScriptFileImportList';
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+} from '../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
+import { encodeDirectedGraphAsGraphvizCode } from '../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
+import { renderGraphvizCodeToSvgDocument } from '../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
+import { addInteractivityToSvgDocument } from '../programmable-units/graph-visualization/addInteractivityToSvgDocument';
+import { digraphificateTypeScriptFileRelationshipList } from '../programmable-units/type-script-file-relationships/digraphificateTypeScriptFileRelationshipList';
+import { associateTypeScriptFileToTypescriptConfiguration } from '../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
+import { getTypeScriptFileImportList } from '../programmable-units/type-script-file/getTypeScriptFileImportList';
+import { parseTypeScriptFile } from '../programmable-units/type-script-file/parseTypeScriptFile';
+import { getTypeScriptFileRelationshipList } from '../programmable-units/type-script-file-relationships/getTypeScriptFileRelationshipList';
 
 digikikify({
   initialVoictentsByGepp: {
-    [FILE_MENTURSECTION_CONFIGURATION_GEPP]: [
-      VOICTENTS_AND_ESTINANTS_FILE_MENTURSECTION_CONFIGURATION,
+    [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
+      VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
     ],
   },
   estinantTuple: [

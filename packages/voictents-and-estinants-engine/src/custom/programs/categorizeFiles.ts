@@ -1,16 +1,16 @@
 import { digikikify } from '../../type-script-adapter/digikikify';
 import {
-  FILE_MENTURSECTION_CONFIGURATION_GEPP,
-  VOICTENTS_AND_ESTINANTS_FILE_MENTURSECTION_CONFIGURATION,
-} from '../programmable-units/file/fileMentursectionConfiguration';
-import { categorizeFiles } from '../programmable-units/file/fileMattomer';
-import { enumerateFileSystemObjects } from '../programmable-units/file/fileMentursection';
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+} from '../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
+import { categorizeFiles } from '../programmable-units/file/categorizeFiles';
+import { enumerateFileSystemObjects } from '../programmable-units/file/enumerateFileSystemObjects';
 import { buildBasicQuirmDebugger } from '../debugger/quirmDebugger';
 
 digikikify({
   initialVoictentsByGepp: {
-    [FILE_MENTURSECTION_CONFIGURATION_GEPP]: [
-      VOICTENTS_AND_ESTINANTS_FILE_MENTURSECTION_CONFIGURATION,
+    [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
+      VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
     ],
   },
   estinantTuple: [enumerateFileSystemObjects, categorizeFiles],
