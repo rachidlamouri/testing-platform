@@ -7,6 +7,10 @@ import {
   OutputGritionAppreffingeBuilderParent,
 } from './outputGritionAppreffingeBuilder';
 import {
+  buildOutputGritionConditionalAppreffingeBuilder,
+  OutputGritionConditionalAppreffingeBuilderParent,
+} from './outputGritionConditionalAppreffingeBuilder';
+import {
   buildOutputHubblepupAppreffingeBuilder,
   OutputHubblepupAppreffingeBuilderParent,
 } from './outputHubblepupAppreffingeBuilder';
@@ -51,6 +55,7 @@ export type LeftInputGritionAppreffingeBuilder = <
     LeftVicken<TInputVoictent>,
     RightInputVickenTuple
   > &
+  OutputGritionConditionalAppreffingeBuilderParent<LeftVicken<TInputVoictent>> &
   OutputGritionAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
     RightInputVickenTuple
@@ -94,6 +99,10 @@ export const buildLeftInputGritionAppreffingeBuilder =
             RightInputVickenTuple
           >(nextContext),
 
+          toGritionOnCondition:
+            buildOutputGritionConditionalAppreffingeBuilder<
+              LeftVicken<TInputVoictent>
+            >(nextContext),
           toGrition: buildOutputGritionAppreffingeBuilder<
             LeftVicken<TInputVoictent>,
             RightInputVickenTuple

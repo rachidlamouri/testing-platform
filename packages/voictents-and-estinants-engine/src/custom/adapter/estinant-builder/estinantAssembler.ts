@@ -75,7 +75,11 @@ export const buildEstinantAssembler = <
 
         const quirmList = outputContext.constituentResultNormalizerList.flatMap(
           (normalizeResult) => {
-            const resultList = normalizeResult(leftInput, aggregatedOutput);
+            const resultList = normalizeResult(
+              leftInput,
+              modifiedLeftInput,
+              aggregatedOutput,
+            );
             return resultList;
           },
         );

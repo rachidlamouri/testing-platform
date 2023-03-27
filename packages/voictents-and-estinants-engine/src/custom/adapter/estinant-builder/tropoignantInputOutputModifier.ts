@@ -45,6 +45,7 @@ export const buildOutputHubblepupTupleNormalizer = (
 ): ConstituentResultNormalizer => {
   const normalizeHubblepupTuple: ConstituentResultNormalizer = (
     leftInput,
+    modifiedInput,
     aggregatedOutput,
   ) => {
     const hubblepupTuple = aggregatedOutput[gepp] as HubblepupTuple;
@@ -66,6 +67,7 @@ export const buildOutputHubblepupNormalizer = (
 ): ConstituentResultNormalizer => {
   const normalizeHubblepup: ConstituentResultNormalizer = (
     leftInput,
+    modifiedInput,
     aggregatedOutput,
   ) => {
     const hubblepup = aggregatedOutput[gepp] as Hubblepup;
@@ -91,6 +93,7 @@ export const buildOutputGritionNormalizer = (
 ): ConstituentResultNormalizer => {
   const normalizeGrition: ConstituentResultNormalizer = (
     leftInput,
+    modifiedInput,
     aggregatedOutput,
   ) => {
     const zorn = getZorn(leftInput);
