@@ -176,14 +176,6 @@ export const getEstinantCallExpressionParts = buildEstinant()
         };
       }
 
-      // const estinantBuilderCallExpression = isSpecificIdentifiableCallExpression(
-      //   callExpression,
-      //   // TODO:
-      //   'assemble',
-      // )
-      //   ? callExpression
-      //   : null;
-
       const flattenedCallExpressionAndErrorList =
         flattenCallExpressionChain(callExpression);
 
@@ -216,19 +208,6 @@ export const getEstinantCallExpressionParts = buildEstinant()
           }),
         };
       }
-
-      // const functionNameList = flattenedCallExpressionList.map((expression) => {
-      //   if (expression.type === AST_NODE_TYPES.CallExpression) {
-      //     return expression.callee.name;
-      //   }
-
-      //   return expression.property.name;
-      // });
-
-      // const inputOutputCallExpressionList = flattenedCallExpressionList.slice(
-      //   1,
-      //   -2,
-      // );
 
       type ParsedExpression1 = {
         functionName: string;
