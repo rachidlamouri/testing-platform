@@ -303,9 +303,6 @@ export const getEstinantCallExpressionParts = buildEstinant()
       // TODO: tie these function names back to the estinant builder function names
       if (
         parsedFlattenedCallExpressionList[
-          parsedFlattenedCallExpressionList.length - 2
-        ]?.functionName !== 'onPinbe' ||
-        parsedFlattenedCallExpressionList[
           parsedFlattenedCallExpressionList.length - 1
         ]?.functionName !== 'assemble'
       ) {
@@ -320,7 +317,7 @@ export const getEstinantCallExpressionParts = buildEstinant()
               zorn: errorZorn,
               grition: {
                 message:
-                  'Estinant builder call expression chain does not end in "onPinbe" and on "assemble"',
+                  'Estinant builder call expression chain does not end in "assemble"',
                 parsedFlattenedCallExpressionList,
               },
             },
@@ -328,10 +325,18 @@ export const getEstinantCallExpressionParts = buildEstinant()
         };
       }
 
+      const inputOutputExpressionList =
+        parsedFlattenedCallExpressionList.filter(
+          (parsedExpression) =>
+            // TODO: tie these function names back to the estinant builder function names
+            !['buildEstinant', 'onPinbe', 'assemble'].includes(
+              parsedExpression.functionName,
+            ),
+        );
       const inputOutputCallExpressionList: ParsedExpression2[] = [];
       const errorParsedExpressionList: ParsedExpression1[] = [];
       splitList({
-        list: parsedFlattenedCallExpressionList.slice(1, -2),
+        list: inputOutputExpressionList,
         isElementA: (element): element is ParsedExpression2 =>
           element.isInput !== null &&
           isIdentifiableTypeScriptTypeReference(element.typeNode),
