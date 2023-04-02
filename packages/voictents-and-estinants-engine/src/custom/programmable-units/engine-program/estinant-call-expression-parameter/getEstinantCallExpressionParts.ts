@@ -15,7 +15,7 @@ import {
 } from '../../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
 import { IdentifiableMemberExpressionCallExpression } from '../../../../utilities/type-script-ast/isMemberExpressionCallExpression';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { ErrorVoictent, ERROR_GEPP } from '../../error/error';
+import { ErrorVoictent, ERROR_GEPP, ErrorOdeshin } from '../../error/error';
 import {
   ProgramBodyDeclarationsByIdentifierVoictent,
   PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
@@ -53,6 +53,11 @@ import {
   EstinantInputOutputParentVoictent,
   ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
 } from './estinantInputOutputParent';
+import {
+  IdentifiableProperty,
+  isObjectExpressionWithIdentifierProperties,
+} from '../../../../utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
+import { isStringLiteral } from '../../../../utilities/type-script-ast/isStringLiteral';
 
 export const getEstinantCallExpressionParts = buildEstinant()
   .fromHubblepup<EngineEstinantVoictent>({
@@ -402,6 +407,46 @@ export const getEstinantCallExpressionParts = buildEstinant()
           !inputOrOutput.isInput,
       );
 
+      const instantiationExpression = flattenedCallExpressionList[0];
+      const instantiationArgument = isCallExpression(instantiationExpression)
+        ? instantiationExpression.arguments[0]
+        : null;
+      const estinantNameProperty = isObjectExpressionWithIdentifierProperties(
+        instantiationArgument,
+      )
+        ? instantiationArgument.properties.find(
+            (property: IdentifiableProperty) => {
+              return property.key.name === 'name';
+            },
+          ) ?? null
+        : null;
+
+      const instantiatedName =
+        estinantNameProperty !== null &&
+        isStringLiteral(estinantNameProperty.value)
+          ? estinantNameProperty.value.value
+          : null;
+
+      const parallelErrorList: ErrorOdeshin[] = [];
+
+      if (instantiatedName === null) {
+        parallelErrorList.push({
+          zorn: `${errorZorn}/missing-name`,
+          grition: {
+            message: `Estinant builder instantiation is missing a name`,
+          },
+        });
+      } else if (instantiatedName !== estinantName) {
+        parallelErrorList.push({
+          zorn: `${errorZorn}/invalid-name`,
+          grition: {
+            message: `Estinant builder instantiation name does not match the variable name`,
+            expected: estinantName,
+            actual: instantiatedName,
+          },
+        });
+      }
+
       return {
         [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [
           {
@@ -428,7 +473,7 @@ export const getEstinantCallExpressionParts = buildEstinant()
             grition: outputList,
           },
         ],
-        [ERROR_GEPP]: [],
+        [ERROR_GEPP]: parallelErrorList,
       };
     },
   )

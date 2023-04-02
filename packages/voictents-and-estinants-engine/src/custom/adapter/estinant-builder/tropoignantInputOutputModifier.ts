@@ -114,7 +114,7 @@ export const buildOutputGritionNormalizer = (
 };
 
 export const extendInputOutputContext = (
-  { inputContext, outputContext }: InputOutputContext,
+  { instantiationContext, inputContext, outputContext }: InputOutputContext,
   normalizeNextConstituentResult: ConstituentResultNormalizer,
 ): InputOutputContext => {
   const nextOutputContext: AggregatedOutputContext = {
@@ -127,7 +127,8 @@ export const extendInputOutputContext = (
     ],
   };
 
-  const nextInputOutputContext = {
+  const nextInputOutputContext: InputOutputContext = {
+    instantiationContext,
     inputContext,
     outputContext: nextOutputContext,
   };

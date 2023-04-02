@@ -74,9 +74,11 @@ export const buildPinbetunfBuilder = <
       PinbetunfOutput<TOutputVickenTuple>
     >,
   ) => {
-    const { inputContext, outputContext } = inputOutputContext;
+    const { instantiationContext, inputContext, outputContext } =
+      inputOutputContext;
 
     const nextContext: AssemblerContext = {
+      instantiationContext,
       inputContext,
       outputContext,
       pinbe,

@@ -17,7 +17,9 @@ import {
 } from '../html-file/htmlFile';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 
-export const categorizeFiles = buildEstinant()
+export const categorizeFiles = buildEstinant({
+  name: 'categorizeFiles',
+})
   .fromGrition<FileVoictent>({
     gepp: FILE_GEPP,
   })
