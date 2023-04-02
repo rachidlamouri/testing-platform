@@ -1,3 +1,4 @@
+import * as uuid from 'uuid';
 import {
   FileSystemNodeMetadata,
   getNestedFileSystemNodeMetadataList,
@@ -82,6 +83,7 @@ export const enumerateFileSystemObjects = buildEstinant({
         return {
           zorn: nodePath,
           grition: {
+            instanceId: uuid.v4(),
             directoryPath: nodePath,
             directoryPathPartList: nodePath.split('/'),
           },
@@ -89,7 +91,7 @@ export const enumerateFileSystemObjects = buildEstinant({
       },
     );
 
-    const fileOutputTuple = fileMetadataList.map<FileOdeshin>(
+    const fileTuple = fileMetadataList.map<FileOdeshin>(
       ({ nodePath, directoryPath }) => {
         const {
           onDiskFileNameParts,
@@ -99,6 +101,7 @@ export const enumerateFileSystemObjects = buildEstinant({
         } = getFileMetadata(nodePath);
 
         const grition: FileGrition = {
+          instanceId: uuid.v4(),
           filePath: nodePath,
           directoryPath,
           onDiskFileName: {
@@ -106,12 +109,14 @@ export const enumerateFileSystemObjects = buildEstinant({
             pascalCase: partsToPascal(onDiskFileNameParts),
             screamingSnakeCase: partsToScreamingSnake(onDiskFileNameParts),
             kebabCase: partsToKebabCase(onDiskFileNameParts),
+            parts: onDiskFileNameParts,
           },
           inMemoryFileName: {
             camelCase: partsToCamel(inMemoryFileNameParts),
             pascalCase: partsToPascal(inMemoryFileNameParts),
             screamingSnakeCase: partsToScreamingSnake(inMemoryFileNameParts),
             kebabCase: partsToKebabCase(inMemoryFileNameParts),
+            parts: inMemoryFileNameParts,
           },
           extension: {
             parts: extensionParts,
@@ -128,9 +133,20 @@ export const enumerateFileSystemObjects = buildEstinant({
       },
     );
 
+    const fileByGroupId = new Map<string, FileOdeshin[]>();
+    fileTuple.forEach((fileOdeshin) => {
+      const groupId = fileOdeshin.grition.extension.suffixIdentifier;
+
+      const list = fileByGroupId.get(groupId) ?? [];
+      list.push(fileOdeshin);
+      fileByGroupId.set(groupId, list);
+    });
+
+    const outputFileTuple = [...fileByGroupId.values()].flat();
+
     return {
       [DIRECTORY_GEPP]: directoryOutputTuple,
-      [FILE_GEPP]: fileOutputTuple,
+      [FILE_GEPP]: outputFileTuple,
     };
   })
   .assemble();

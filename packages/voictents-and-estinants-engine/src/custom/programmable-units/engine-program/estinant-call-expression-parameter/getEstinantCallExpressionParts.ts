@@ -90,7 +90,7 @@ export const getEstinantCallExpressionParts = buildEstinant()
   })
   .onPinbe(
     (engineEstinantInput, [{ grition: bodyDeclarationsByIdentifier }]) => {
-      const errorZorn = `estinantCallExpressionParameterCortmum/${engineEstinantInput.zorn}`;
+      const errorZorn = `getEstinantCallExpressionParts/${engineEstinantInput.zorn}`;
 
       const engineEstinant = engineEstinantInput.grition;
       const { programName, estinantName } = engineEstinant;

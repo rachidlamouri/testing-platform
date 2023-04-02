@@ -40,6 +40,7 @@ export const renderGraphvizCodeToSvgDocument = buildEstinant()
       $element.addClass(`head-${headId}`);
     });
 
+    // TODO: get rid of this convention where its looking for tailId:headId. It's confusing and the concern leaks into other files
     $svg.find('.edge').each((index, element) => {
       const $element = $(element);
       const id = $element.attr('id') ?? '';
@@ -57,11 +58,7 @@ export const renderGraphvizCodeToSvgDocument = buildEstinant()
 
     return [
       {
-        zorn: `${zorn}/original`,
-        grition: originalDocument,
-      },
-      {
-        zorn: `${zorn}/modified`,
+        zorn,
         grition: modifiedDocument,
       },
     ];

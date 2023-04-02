@@ -47,7 +47,7 @@ const getConfigurationFilePath = (filePath: string): string => {
   }
 
   if (configFilePath === null) {
-    throw Error('No config found');
+    throw Error(`No config found for "${filePath}"`);
   }
 
   return configFilePath;
