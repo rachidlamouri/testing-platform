@@ -1,4 +1,5 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
+import { TypeScriptNode, isNode } from './isNode';
 
 export type IdentifiableProperty = TSESTree.Property & {
   key: TSESTree.Identifier;
@@ -16,7 +17,8 @@ export const isIdentifiableProperty = (
   node.key.type === AST_NODE_TYPES.Identifier;
 
 export const isObjectExpressionWithIdentifierProperties = (
-  node: TSESTree.Node,
+  node: TypeScriptNode,
 ): node is ObjectExpressionWithIdentifierProperties =>
+  isNode(node) &&
   node.type === AST_NODE_TYPES.ObjectExpression &&
   node.properties.every(isIdentifiableProperty);

@@ -58,6 +58,7 @@ export type Estinant2<
   TRightVickenTuple extends RightVickenTuple,
   TOutputVickenTuple extends OutputVickenTuple,
 > = {
+  name?: string;
   leftAppreffinge: {
     gepp: TLeftVicken['voictent']['gepp'];
     isWibiz: boolean;

@@ -49,7 +49,9 @@ const partsToKebabCase = (x: string[]): string => {
   return x.join('-');
 };
 
-export const enumerateFileSystemObjects = buildEstinant()
+export const enumerateFileSystemObjects = buildEstinant({
+  name: 'enumerateFileSystemObjects',
+})
   .fromHubblepup<FileSystemObjectEnumeratorConfigurationVoictent>({
     gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   })
