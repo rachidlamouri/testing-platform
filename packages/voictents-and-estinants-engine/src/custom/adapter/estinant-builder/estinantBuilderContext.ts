@@ -113,11 +113,13 @@ export const extendInputContext = <
 };
 
 export type InputOutputContext = {
+  estinantName?: string;
   inputContext: InputContext;
   outputContext: AggregatedOutputContext;
 };
 
 export type AssemblerContext = {
+  estinantName?: string;
   inputContext: InputContext;
   outputContext: AggregatedOutputContext;
   pinbe: AnyPinbetunf;
@@ -151,9 +153,11 @@ const passthroughAggregatedOutput: PinbetunfOutputAggregator = (
 };
 
 export const buildInputOutputContextFromLeftInputContext = (
+  estinantName: string,
   leftInputContext: LeftInputContext,
 ): InputOutputContext => {
   return {
+    estinantName,
     inputContext: {
       leftInputContext,
       rightInputContextTuple: [],
@@ -172,6 +176,7 @@ type InputOutputContextFromRightInputContextBuilderInput = {
 
 export const buildInputOutputContextFromRightInputContext = ({
   previousContext: {
+    estinantName,
     inputContext: {
       leftInputContext,
       rightInputContextTuple: previousRightInputContextTuple,
@@ -186,6 +191,7 @@ export const buildInputOutputContextFromRightInputContext = ({
   ];
 
   return {
+    estinantName,
     inputContext: {
       leftInputContext,
       rightInputContextTuple: nextRightInputContextTuple,
@@ -202,6 +208,7 @@ type InputOutputContextFromOutputContextBuilderInput = {
 
 export const buildInputOutputContextFromConstituentResultNormalizer = ({
   previousContext: {
+    estinantName,
     inputContext,
     outputContext: {
       constituentResultNormalizerList: previousConstituentResultNormalizerList,
@@ -221,6 +228,7 @@ export const buildInputOutputContextFromConstituentResultNormalizer = ({
       : passthroughAggregatedOutput;
 
   return {
+    estinantName,
     inputContext,
     outputContext: {
       aggregatePinbetunfOutput,

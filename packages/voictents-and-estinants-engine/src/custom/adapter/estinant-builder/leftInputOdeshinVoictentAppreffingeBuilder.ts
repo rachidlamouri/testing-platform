@@ -15,6 +15,18 @@ import {
   buildRightInputOdeshinVoictentAppreffingeBuilder,
   RightInputOdeshinVoictentAppreffingeBuilderParent,
 } from './rightInputOdeshinVoictentAppreffingeBuilder';
+import {
+  buildOutputHubblepupTupleAppreffingeBuilder,
+  OutputHubblepupTupleAppreffingeBuilderParent,
+} from './outputHubblepupTupleAppreffingeBuilder';
+import {
+  buildOutputGritionAppreffingeBuilder,
+  OutputGritionAppreffingeBuilderParent,
+} from './outputGritionAppreffingeBuilder';
+import {
+  buildPinbetunfBuilder,
+  PinbetunfBuilderParent,
+} from './pinbetunfBuilder';
 
 type LeftVicken<TInputVoictent extends OdeshinVoictent> =
   LeftOdeshinVoictentVicken<TInputVoictent>;
@@ -35,45 +47,80 @@ export type LeftInputOdeshinVoictentAppreffingeBuilder = <
     LeftVicken<TInputVoictent>,
     RightVickenTuple
   > &
+  PinbetunfBuilderParent<
+    LeftVicken<TInputVoictent>,
+    RightVickenTuple,
+    OutputVickenTuple
+  > &
+  OutputGritionAppreffingeBuilderParent<
+    LeftVicken<TInputVoictent>,
+    RightVickenTuple,
+    OutputVickenTuple
+  > &
   OutputHubblepupAppreffingeBuilderParent<
+    LeftVicken<TInputVoictent>,
+    RightVickenTuple,
+    OutputVickenTuple
+  > &
+  OutputHubblepupTupleAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
     RightVickenTuple,
     OutputVickenTuple
   >;
 
-export const buildLeftInputOdeshinVoictentAppreffingeBuilder =
-  (): LeftInputOdeshinVoictentAppreffingeBuilder => {
-    const buildLeftInputOdeshinVoictentAppreffinge: LeftInputOdeshinVoictentAppreffingeBuilder =
-      <TInputVoictent extends OdeshinVoictent>(
-        leftAppreffinge: LeftAppreffinge<TInputVoictent>,
-      ) => {
-        const nextContext = buildInputOutputContextFromLeftInputContext({
+export const buildLeftInputOdeshinVoictentAppreffingeBuilder = (
+  estinantName: string,
+): LeftInputOdeshinVoictentAppreffingeBuilder => {
+  const buildLeftInputOdeshinVoictentAppreffinge: LeftInputOdeshinVoictentAppreffingeBuilder =
+    <TInputVoictent extends OdeshinVoictent>(
+      leftAppreffinge: LeftAppreffinge<TInputVoictent>,
+    ) => {
+      const nextContext = buildInputOutputContextFromLeftInputContext(
+        estinantName,
+        {
           gepp: leftAppreffinge.gepp,
           isWibiz: true,
           modifyTropoignantInput: odeshinTupleToGritionTuple,
-        });
+        },
+      );
 
-        return {
-          andFromOdeshinVoictent:
-            buildRightInputOdeshinVoictentAppreffingeBuilder<
-              LeftVicken<TInputVoictent>,
-              RightVickenTuple
-            >(nextContext),
-          andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
+      return {
+        andFromOdeshinVoictent:
+          buildRightInputOdeshinVoictentAppreffingeBuilder<
             LeftVicken<TInputVoictent>,
             RightVickenTuple
           >(nextContext),
+        andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
+          LeftVicken<TInputVoictent>,
+          RightVickenTuple
+        >(nextContext),
 
-          toHubblepup: buildOutputHubblepupAppreffingeBuilder<
-            LeftVicken<TInputVoictent>,
-            RightVickenTuple,
-            OutputVickenTuple
-          >(nextContext),
-        };
+        onPinbe: buildPinbetunfBuilder<
+          LeftVicken<TInputVoictent>,
+          RightVickenTuple,
+          OutputVickenTuple
+        >(nextContext),
+
+        toGrition: buildOutputGritionAppreffingeBuilder<
+          LeftVicken<TInputVoictent>,
+          RightVickenTuple,
+          OutputVickenTuple
+        >(nextContext),
+        toHubblepup: buildOutputHubblepupAppreffingeBuilder<
+          LeftVicken<TInputVoictent>,
+          RightVickenTuple,
+          OutputVickenTuple
+        >(nextContext),
+        toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
+          LeftVicken<TInputVoictent>,
+          RightVickenTuple,
+          OutputVickenTuple
+        >(nextContext),
       };
+    };
 
-    return buildLeftInputOdeshinVoictentAppreffinge;
-  };
+  return buildLeftInputOdeshinVoictentAppreffinge;
+};
 
 export type LeftInputOdeshinVoictentAppreffingeBuilderParent = {
   fromOdeshinVoictent: LeftInputOdeshinVoictentAppreffingeBuilder;

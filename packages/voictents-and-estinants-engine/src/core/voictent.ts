@@ -25,7 +25,8 @@ export class Voictent {
   }
 
   private receivedHubblepup = {
-    previousTick: false,
+    twoTicksAgo: false,
+    oneTickAgo: false,
     thisTick: false,
   };
 
@@ -37,14 +38,15 @@ export class Voictent {
   onTickStart(): void {
     // eslint-disable-next-line prefer-destructuring
     this.receivedHubblepup = {
-      previousTick: this.receivedHubblepup.thisTick,
+      twoTicksAgo: this.receivedHubblepup.oneTickAgo,
+      oneTickAgo: this.receivedHubblepup.thisTick,
       thisTick: false,
     };
   }
 
   get didStopAccumulating(): boolean {
     return (
-      this.receivedHubblepup.previousTick && !this.receivedHubblepup.thisTick
+      this.receivedHubblepup.twoTicksAgo && !this.receivedHubblepup.oneTickAgo
     );
   }
 
@@ -54,6 +56,12 @@ export class Voictent {
       debugName,
       hasNext: () => {
         return this.didStopAccumulating;
+      },
+      willHaveNext: () => {
+        return (
+          this.receivedHubblepup.twoTicksAgo ||
+          this.receivedHubblepup.oneTickAgo
+        );
       },
       advance: () => {},
       dereference: () => {

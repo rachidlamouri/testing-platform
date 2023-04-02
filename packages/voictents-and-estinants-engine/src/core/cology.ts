@@ -1,24 +1,22 @@
 import { Zorn } from '../utilities/semantic-types/zorn';
 import { Gepp } from './gepp';
+import { Hubblepup, HubblepupTuple } from './hubblepup';
 import { Mabz } from './mabz';
-import { Quirm } from './quirm';
 
 /**
- * A left Hubblepup and a respective Mabz.
- * This helps the engine find all of the right Hubblepups associated with the left Hubblepup
+ * A left input and a respective Mabz.
+ * This helps the engine find all of the right inputs associated with the left input
  */
 export type Cology = {
-  leftQuirm: Quirm;
+  leftGepp: Gepp;
+  leftInput: Hubblepup | HubblepupTuple;
   mabz: Mabz;
 };
 
 export type CologyEntry = [Gepp, Zorn];
 
 export const getCologyEntryList = (cology: Cology): CologyEntry[] => {
-  const leftEntry: CologyEntry = [
-    cology.leftQuirm.gepp,
-    cology.leftQuirm.hubblepup,
-  ];
+  const leftEntry: CologyEntry = [cology.leftGepp, cology.leftInput];
 
   const nestedRightEntryList = [...cology.mabz.entries()];
 

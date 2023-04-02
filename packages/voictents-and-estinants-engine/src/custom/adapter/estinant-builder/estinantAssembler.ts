@@ -27,11 +27,13 @@ export const buildEstinantAssembler = <
     TOutputVickenTuple
   > = () => {
     const {
+      estinantName,
       inputContext: { leftInputContext, rightInputContextTuple },
       outputContext,
     } = assemblerContext;
 
     const estinant = {
+      name: estinantName,
       leftAppreffinge: {
         gepp: leftInputContext.gepp,
         isWibiz: leftInputContext.isWibiz,

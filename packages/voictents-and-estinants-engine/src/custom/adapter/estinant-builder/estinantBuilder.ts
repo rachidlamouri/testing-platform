@@ -15,14 +15,17 @@ import {
   LeftInputOdeshinVoictentAppreffingeBuilderParent,
 } from './leftInputOdeshinVoictentAppreffingeBuilder';
 
-export const buildEstinant = (): LeftInputGritionBuilderParent &
+export const buildEstinant = (
+  estinantName = '',
+): LeftInputGritionBuilderParent &
   LeftInputHubblepupAppreffingeBuilderParent &
   LeftInputOdeshinVoictentAppreffingeBuilderParent &
   LeftInputVoictentAppreffingeBuilderParent => {
   return {
-    fromGrition: buildLeftInputGritionAppreffingeBuilder(),
-    fromHubblepup: buildLeftInputHubblepupAppreffingeBuilder(),
-    fromOdeshinVoictent: buildLeftInputOdeshinVoictentAppreffingeBuilder(),
-    fromVoictent: buildLeftInputVoictentAppreffingeBuilder(),
+    fromGrition: buildLeftInputGritionAppreffingeBuilder(estinantName),
+    fromHubblepup: buildLeftInputHubblepupAppreffingeBuilder(estinantName),
+    fromOdeshinVoictent:
+      buildLeftInputOdeshinVoictentAppreffingeBuilder(estinantName),
+    fromVoictent: buildLeftInputVoictentAppreffingeBuilder(estinantName),
   };
 };

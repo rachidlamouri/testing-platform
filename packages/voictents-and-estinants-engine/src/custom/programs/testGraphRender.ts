@@ -7,6 +7,7 @@ import { DIRECTED_GRAPH_GEPP } from '../programmable-units/graph-visualization/d
 import { encodeDirectedGraphAsGraphvizCode } from '../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { renderGraphvizCodeToSvgDocument } from '../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
 import { addInteractivityToSvgDocument } from '../programmable-units/graph-visualization/addInteractivityToSvgDocument';
+import { DIRECTED_GRAPH_METADATA_BY_ID_GEPP } from '../programmable-units/graph-visualization/directedGraphMetadataById';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -90,6 +91,15 @@ digikikify({
             },
           ],
         },
+      },
+    ],
+    [DIRECTED_GRAPH_METADATA_BY_ID_GEPP]: [
+      {
+        cluster_my_subgraph: 'My Subgraph is the best',
+        a: 'My Node A',
+        b: 'My Node B',
+        c: 'My Node C',
+        d: 'My Node D',
       },
     ],
   },

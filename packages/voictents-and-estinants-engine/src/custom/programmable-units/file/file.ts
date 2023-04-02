@@ -8,12 +8,14 @@ export type FileName = {
   camelCase: string;
   screamingSnakeCase: string;
   kebabCase: string;
+  parts: string[];
 };
 
 export type File<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
   TAdditionalMetadata extends object | null = null,
 > = {
+  instanceId: string;
   filePath: string;
   directoryPath: string;
   onDiskFileName: FileName;

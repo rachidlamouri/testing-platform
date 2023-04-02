@@ -79,7 +79,8 @@ export type RightInputHubblepupTupleAppreffingeBuilder<
   > &
   OutputGritionAppreffingeBuilderParent<
     TLeftVicken,
-    NextVickenTuple<TRightVickenTuple, TRightInputVoictent, TZornTuple>
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent, TZornTuple>,
+    OutputVickenTuple
   > &
   OutputHubblepupAppreffingeBuilderParent<
     TLeftVicken,
@@ -143,7 +144,8 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder = <
 
       toGrition: buildOutputGritionAppreffingeBuilder<
         TLeftVicken,
-        TNextRightVickenTuple
+        TNextRightVickenTuple,
+        OutputVickenTuple
       >(nextContext),
       toHubblepup: buildOutputHubblepupAppreffingeBuilder<
         TLeftVicken,
