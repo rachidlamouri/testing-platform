@@ -15,6 +15,18 @@ import {
   buildRightInputOdeshinVoictentAppreffingeBuilder,
   RightInputOdeshinVoictentAppreffingeBuilderParent,
 } from './rightInputOdeshinVoictentAppreffingeBuilder';
+import {
+  buildOutputHubblepupTupleAppreffingeBuilder,
+  OutputHubblepupTupleAppreffingeBuilderParent,
+} from './outputHubblepupTupleAppreffingeBuilder';
+import {
+  buildOutputGritionAppreffingeBuilder,
+  OutputGritionAppreffingeBuilderParent,
+} from './outputGritionAppreffingeBuilder';
+import {
+  buildPinbetunfBuilder,
+  PinbetunfBuilderParent,
+} from './pinbetunfBuilder';
 
 type LeftVicken<TInputVoictent extends OdeshinVoictent> =
   LeftOdeshinVoictentVicken<TInputVoictent>;
@@ -35,7 +47,22 @@ export type LeftInputOdeshinVoictentAppreffingeBuilder = <
     LeftVicken<TInputVoictent>,
     RightVickenTuple
   > &
+  PinbetunfBuilderParent<
+    LeftVicken<TInputVoictent>,
+    RightVickenTuple,
+    OutputVickenTuple
+  > &
+  OutputGritionAppreffingeBuilderParent<
+    LeftVicken<TInputVoictent>,
+    RightVickenTuple,
+    OutputVickenTuple
+  > &
   OutputHubblepupAppreffingeBuilderParent<
+    LeftVicken<TInputVoictent>,
+    RightVickenTuple,
+    OutputVickenTuple
+  > &
+  OutputHubblepupTupleAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
     RightVickenTuple,
     OutputVickenTuple
@@ -64,7 +91,23 @@ export const buildLeftInputOdeshinVoictentAppreffingeBuilder =
             RightVickenTuple
           >(nextContext),
 
+          onPinbe: buildPinbetunfBuilder<
+            LeftVicken<TInputVoictent>,
+            RightVickenTuple,
+            OutputVickenTuple
+          >(nextContext),
+
+          toGrition: buildOutputGritionAppreffingeBuilder<
+            LeftVicken<TInputVoictent>,
+            RightVickenTuple,
+            OutputVickenTuple
+          >(nextContext),
           toHubblepup: buildOutputHubblepupAppreffingeBuilder<
+            LeftVicken<TInputVoictent>,
+            RightVickenTuple,
+            OutputVickenTuple
+          >(nextContext),
+          toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
             LeftVicken<TInputVoictent>,
             RightVickenTuple,
             OutputVickenTuple
