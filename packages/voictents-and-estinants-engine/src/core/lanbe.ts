@@ -1,3 +1,4 @@
+import { Simplify } from 'type-fest';
 import { Hubblepup, HubblepupTuple } from './hubblepup';
 
 export enum LanbeTypeName {
@@ -15,6 +16,12 @@ type BaseLanbe<
   advance: () => void;
   dereference: () => TOutput | null;
 };
+
+// export type VoictentLanbe = Simplify<
+//   BaseLanbe<LanbeTypeName.VoictentLanbe, HubblepupTuple> & {
+//     willHaveNext: () => boolean;
+//   }
+// >;
 
 export type VoictentLanbe = BaseLanbe<
   LanbeTypeName.VoictentLanbe,

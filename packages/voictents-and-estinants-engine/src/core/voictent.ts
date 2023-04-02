@@ -28,6 +28,11 @@ export class Voictent {
     previousTick: false,
     thisTick: false,
   };
+  // private receivedHubblepup = {
+  //   twoTicksAgo: false,
+  //   oneTickAgo: false,
+  //   thisTick: false,
+  // };
 
   addHubblepup(hubblepup: Hubblepup): void {
     this.receivedHubblepup.thisTick = true;
@@ -42,11 +47,26 @@ export class Voictent {
     };
   }
 
+  // onTickStart(): void {
+  //   // eslint-disable-next-line prefer-destructuring
+  //   this.receivedHubblepup = {
+  //     twoTicksAgo: this.receivedHubblepup.oneTickAgo,
+  //     oneTickAgo: this.receivedHubblepup.thisTick,
+  //     thisTick: false,
+  //   };
+  // }
+
   get didStopAccumulating(): boolean {
     return (
       this.receivedHubblepup.previousTick && !this.receivedHubblepup.thisTick
     );
   }
+
+  // get didStopAccumulating(): boolean {
+  //   return (
+  //     this.receivedHubblepup.twoTicksAgo && !this.receivedHubblepup.oneTickAgo
+  //   );
+  // }
 
   createVoictentLanbe(debugName: string): VoictentLanbe {
     const lanbe: VoictentLanbe = {
@@ -55,6 +75,12 @@ export class Voictent {
       hasNext: () => {
         return this.didStopAccumulating;
       },
+      // willHaveNext: () => {
+      //   return (
+      //     this.receivedHubblepup.twoTicksAgo ||
+      //     this.receivedHubblepup.oneTickAgo
+      //   );
+      // },
       advance: () => {},
       dereference: () => {
         return [...this.hubblepupTuple];
