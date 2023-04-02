@@ -112,7 +112,9 @@ export const digikikify = ({
         dreanor.lanbe.advance();
 
         if (dreanor.typeName === DreanorTypeName.LeftDreanor) {
-          const leftHubblepup = dreanor.lanbe.dereference() as Hubblepup;
+          const leftInput = dreanor.lanbe.dereference() as
+            | Hubblepup
+            | HubblepupTuple;
 
           const mabzEntryList = platomity.rightDreanorTuple.map<MabzEntry>(
             (rightDreanor) => {
@@ -122,7 +124,7 @@ export const digikikify = ({
               ) {
                 zornTuple = [dreanor.lanbe];
               } else {
-                zornTuple = rightDreanor.framate(leftHubblepup);
+                zornTuple = rightDreanor.framate(leftInput);
               }
 
               return [rightDreanor.gepp, zornTuple];
@@ -130,10 +132,8 @@ export const digikikify = ({
           );
 
           const cology: Cology = {
-            leftQuirm: {
-              gepp: dreanor.gepp,
-              hubblepup: leftHubblepup,
-            },
+            leftGepp: dreanor.gepp,
+            leftInput,
             mabz: new Mabz(mabzEntryList),
           };
 
@@ -186,7 +186,7 @@ export const digikikify = ({
     });
 
     readyCologies.forEach((cology) => {
-      const leftInput = cology.leftQuirm.hubblepup;
+      const { leftInput } = cology;
 
       const rightInputTuple = platomity.rightDreanorTuple.map<HubblepupTuple>(
         (rightDreanor) => {
