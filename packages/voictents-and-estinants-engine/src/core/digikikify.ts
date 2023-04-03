@@ -103,11 +103,20 @@ export const digikikify = ({
     );
   };
 
-  const executePlatomity = (platomity: Platomity): void => {
+  type CologyExecutionContext = {
+    platomity: Platomity;
+    cology: Cology;
+  };
+
+  const getCologyExecutionContextList = (
+    platomity: Platomity,
+  ): CologyExecutionContext[] => {
     const touchedCologySet = new CologySet();
 
     getDreanorTuple(platomity)
-      .filter((dreanor) => dreanor.lanbe.hasNext())
+      .filter((dreanor) => {
+        return dreanor.lanbe.hasNext();
+      })
       .forEach((dreanor) => {
         dreanor.lanbe.advance();
 
@@ -170,7 +179,7 @@ export const digikikify = ({
         }
       });
 
-    const readyCologies = [...touchedCologySet].filter((cology) => {
+    const readyCologyList = [...touchedCologySet].filter((cology) => {
       const isReady = platomity.rightDreanorTuple.every(
         (rightDreanor: RightDreanor) => {
           if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
@@ -185,31 +194,44 @@ export const digikikify = ({
       return isReady;
     });
 
-    readyCologies.forEach((cology) => {
-      const { leftInput } = cology;
+    const cologyExecutionContextList =
+      readyCologyList.map<CologyExecutionContext>((cology) => {
+        return {
+          platomity,
+          cology,
+        };
+      });
 
-      const rightInputTuple = platomity.rightDreanorTuple.map<HubblepupTuple>(
-        (rightDreanor) => {
-          if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-            const rightInput =
-              rightDreanor.lanbe.dereference() as HubblepupTuple;
-            return rightInput;
-          }
+    return cologyExecutionContextList;
+  };
 
-          const zornTuple = cology.mabz.get(rightDreanor.gepp) as ZornTuple;
-          const rightInput = zornTuple.map(
-            (zorn) => rightDreanor.prected.get(zorn) as Hubblepup,
-          );
+  const executeContext = ({
+    platomity,
+    cology,
+  }: CologyExecutionContext): void => {
+    const { leftInput } = cology;
+
+    const rightInputTuple = platomity.rightDreanorTuple.map<HubblepupTuple>(
+      (rightDreanor) => {
+        if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
+          const rightInput = rightDreanor.lanbe.dereference() as HubblepupTuple;
           return rightInput;
-        },
-      );
+        }
 
-      const outputQuirmTuple = platomity.estinant.tropoig(
-        leftInput,
-        ...rightInputTuple,
-      );
-      addToTabilly(outputQuirmTuple);
-    });
+        const zornTuple = cology.mabz.get(rightDreanor.gepp) as ZornTuple;
+        const rightInput = zornTuple.map(
+          (zorn) => rightDreanor.prected.get(zorn) as Hubblepup,
+        );
+        return rightInput;
+      },
+    );
+
+    const outputQuirmTuple = platomity.estinant.tropoig(
+      leftInput,
+      ...rightInputTuple,
+    );
+
+    addToTabilly(outputQuirmTuple);
   };
 
   addToTabilly(initialQuirmTuple);
@@ -220,8 +242,13 @@ export const digikikify = ({
       voictent.onTickStart();
     });
 
-    platomityList.filter(canPlatomityAdvance).forEach((platomity) => {
-      executePlatomity(platomity);
-    });
+    platomityList
+      .flatMap((platomity) => {
+        return getCologyExecutionContextList(platomity);
+      })
+      .forEach((context) => {
+        // Note: it's important that execution is separated from evaluation since executing a platomity can affect other platomities
+        executeContext(context);
+      });
   } while (platomityList.some(canPlatomityAdvance));
 };
