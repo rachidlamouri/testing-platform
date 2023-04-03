@@ -236,8 +236,7 @@ export const digikikify = ({
 
   addToTabilly(initialQuirmTuple);
 
-  // This must be a dowhile so that when "isWibiz" is true, it triggers for a Voictent with 1 item
-  do {
+  while (platomityList.some(canPlatomityAdvance)) {
     [...tabilly.values()].forEach((voictent) => {
       voictent.onTickStart();
     });
@@ -250,5 +249,5 @@ export const digikikify = ({
         // Note: it's important that execution is separated from evaluation since executing a platomity can affect other platomities
         executeContext(context);
       });
-  } while (platomityList.some(canPlatomityAdvance));
+  }
 };
