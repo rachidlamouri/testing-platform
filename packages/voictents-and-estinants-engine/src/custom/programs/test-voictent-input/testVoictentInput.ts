@@ -46,6 +46,7 @@ const testOptionCombination = (
     estinantTuple: [estinant, getVoictent],
     quirmDebugger: buildBasicQuirmDebugger(
       `testVoictentInput-${inputCount}-${estinant.name ?? uuid.v4()}`,
+      'snapshot',
     ),
   });
 };

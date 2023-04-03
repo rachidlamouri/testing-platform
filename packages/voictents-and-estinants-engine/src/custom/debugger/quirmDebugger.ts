@@ -16,6 +16,7 @@ export const escapePathSeparator = (text: string): string =>
 
 export const buildQuirmDebugger = (
   programName: string,
+  debugDirectoryPath = 'debug',
 ): QuirmDebugger<OutputFileVoictent> => {
   const createDirectory = (directoryPath: string): void => {
     if (!fs.existsSync(directoryPath)) {
@@ -26,10 +27,9 @@ export const buildQuirmDebugger = (
     fs.mkdirSync(directoryPath, { recursive: true });
   };
 
-  const DEBUG_DIRECTORY_PATH = 'debug';
-  createDirectory(DEBUG_DIRECTORY_PATH);
+  createDirectory(debugDirectoryPath);
 
-  const programDirectoryPath = posix.join(DEBUG_DIRECTORY_PATH, programName);
+  const programDirectoryPath = posix.join(debugDirectoryPath, programName);
   fs.rmSync(programDirectoryPath, { recursive: true, force: true });
   createDirectory(programDirectoryPath);
 
@@ -77,10 +77,12 @@ export const buildQuirmDebugger = (
 
 export const buildBasicQuirmDebugger = (
   programName: string,
+  debugDirectoryPath?: string,
 ): QuirmDebugger<Voictent> => {
   return {
     handlerByGepp: {},
-    defaultHandler: buildQuirmDebugger(programName).defaultHandler,
+    defaultHandler: buildQuirmDebugger(programName, debugDirectoryPath)
+      .defaultHandler,
   };
 };
 
