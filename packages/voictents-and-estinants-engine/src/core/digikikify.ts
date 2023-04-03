@@ -13,7 +13,7 @@ import { Estinant, EstinantTuple } from './estinant';
 import { Hubblepup, HubblepupTuple } from './hubblepup';
 import { Lanbe, VoictentItemLanbe, VoictentLanbe } from './lanbe';
 import { Mabz, MabzEntry } from './mabz';
-import { Platomity } from './platomity';
+import { Platomity, getDreanorTuple } from './platomity';
 import { Prected } from './prected';
 import { Procody } from './procody';
 import { Quirm, QuirmTuple } from './quirm';
@@ -98,15 +98,15 @@ export const digikikify = ({
   });
 
   const canPlatomityAdvance = (platomity: Platomity): boolean => {
-    return [platomity.leftDreanor, ...platomity.rightDreanorTuple].some(
-      (dreanor) => dreanor.lanbe.hasNext(),
+    return getDreanorTuple(platomity).some((dreanor) =>
+      dreanor.lanbe.hasNext(),
     );
   };
 
   const executePlatomity = (platomity: Platomity): void => {
     const touchedCologySet = new CologySet();
 
-    [platomity.leftDreanor, ...platomity.rightDreanorTuple]
+    getDreanorTuple(platomity)
       .filter((dreanor) => dreanor.lanbe.hasNext())
       .forEach((dreanor) => {
         dreanor.lanbe.advance();
