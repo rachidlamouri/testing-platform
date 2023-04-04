@@ -7,6 +7,12 @@ class MissingLanbeError extends Error {
   }
 }
 
+type ReceivedHubblepupState = {
+  twoTicksAgo: boolean;
+  oneTickAgo: boolean;
+  thisTick: boolean | null;
+};
+
 /**
  * A data structure for collecting Hubblepups in order and managing Lanbes.
  * It encapsulates pointer indices that can range from -1 to the length of the Hubblepup collection minus 1 (inclusive).
@@ -24,9 +30,10 @@ export class Voictent {
     return this.size - 1;
   }
 
-  private receivedHubblepup = {
-    previousTick: false,
-    thisTick: false,
+  private receivedHubblepup: ReceivedHubblepupState = {
+    twoTicksAgo: false,
+    oneTickAgo: false,
+    thisTick: null,
   };
 
   addHubblepup(hubblepup: Hubblepup): void {
@@ -37,14 +44,15 @@ export class Voictent {
   onTickStart(): void {
     // eslint-disable-next-line prefer-destructuring
     this.receivedHubblepup = {
-      previousTick: this.receivedHubblepup.thisTick,
-      thisTick: false,
+      twoTicksAgo: this.receivedHubblepup.oneTickAgo,
+      oneTickAgo: this.receivedHubblepup.thisTick ?? false,
+      thisTick: null,
     };
   }
 
   get didStopAccumulating(): boolean {
     return (
-      this.receivedHubblepup.previousTick && !this.receivedHubblepup.thisTick
+      this.receivedHubblepup.twoTicksAgo && !this.receivedHubblepup.oneTickAgo
     );
   }
 
@@ -54,6 +62,13 @@ export class Voictent {
       debugName,
       hasNext: () => {
         return this.didStopAccumulating;
+      },
+      isAccumulating: () => {
+        return (
+          this.receivedHubblepup.twoTicksAgo ||
+          this.receivedHubblepup.oneTickAgo ||
+          (this.receivedHubblepup.thisTick ?? false)
+        );
       },
       advance: () => {},
       dereference: () => {

@@ -4,6 +4,7 @@ import { Voictent } from '../../adapter/voictent';
 
 export type EngineProgram = {
   programName: string;
+  filePath: string;
   estinantIdentifierList: string[];
 };
 

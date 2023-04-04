@@ -89,7 +89,7 @@ export const enumerateFileSystemObjects = buildEstinant({
       },
     );
 
-    const fileOutputTuple = fileMetadataList.map<FileOdeshin>(
+    const fileTuple = fileMetadataList.map<FileOdeshin>(
       ({ nodePath, directoryPath }) => {
         const {
           onDiskFileNameParts,
@@ -128,9 +128,20 @@ export const enumerateFileSystemObjects = buildEstinant({
       },
     );
 
+    const fileBySuffixIdentifier = new Map<string, FileOdeshin[]>();
+    fileTuple.forEach((fileOdeshin) => {
+      const { suffixIdentifier } = fileOdeshin.grition.extension;
+
+      const list = fileBySuffixIdentifier.get(suffixIdentifier) ?? [];
+      list.push(fileOdeshin);
+      fileBySuffixIdentifier.set(suffixIdentifier, list);
+    });
+
+    const outputFileTuple = [...fileBySuffixIdentifier.values()].flat();
+
     return {
       [DIRECTORY_GEPP]: directoryOutputTuple,
-      [FILE_GEPP]: fileOutputTuple,
+      [FILE_GEPP]: outputFileTuple,
     };
   })
   .assemble();

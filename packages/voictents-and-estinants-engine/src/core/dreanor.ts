@@ -1,3 +1,4 @@
+import { Tuple } from '../utilities/semantic-types/tuple';
 import { Croarder } from './croarder';
 import { Framation } from './framation';
 import { Gepp } from './gepp';
@@ -41,3 +42,7 @@ export type RightVoictentItemDreanor = {
 export type RightDreanor = RightVoictentDreanor | RightVoictentItemDreanor;
 
 export type RightDreanorTuple = readonly RightDreanor[];
+
+export type Dreanor = LeftDreanor | RightDreanor;
+
+export type DreanorTuple = Tuple<Dreanor>;

@@ -1,4 +1,7 @@
-import { digikikify as coreDigikikify } from '../core/digikikify';
+import {
+  RuntimeStatisticsHandler,
+  digikikify as coreDigikikify,
+} from '../core/digikikify';
 import { EstinantTuple as CoreEstinantTuple } from '../core/estinant';
 import { Quirm } from '../core/quirm';
 import { StralineTuple } from '../utilities/semantic-types/straline';
@@ -89,11 +92,13 @@ export type QuirmDebugger<TVoictent extends Voictent> = {
     [Key in TVoictent['gepp']]?: (quirm: VoictentToQuirm<TVoictent>) => void;
   };
   defaultHandler: (quirm: Quirm) => void;
+  onFinish: RuntimeStatisticsHandler;
 };
 
 type QuirmDebuggerFromEstinantTuple<TEstinantTuple extends AnyEstinantTuple> = {
   handlerByGepp: EstinantTupleToPartialAggregateQuirmHandler<TEstinantTuple>;
   defaultHandler: OnHubblepupAddedToVoictentsHandler<TEstinantTuple>;
+  onFinish?: RuntimeStatisticsHandler;
 };
 
 type DigikikifyInput<TEstinantTuple extends AnyEstinantTuple> = {
@@ -140,5 +145,6 @@ export const digikikify = <TPotentialEstinantTuple extends StralineTuple>({
 
       handler(quirm);
     },
+    onFinish: inputDebugger?.onFinish,
   });
 };

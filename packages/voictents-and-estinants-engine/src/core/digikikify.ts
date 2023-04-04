@@ -10,21 +10,70 @@ import {
   RightVoictentItemDreanor,
 } from './dreanor';
 import { Estinant, EstinantTuple } from './estinant';
+import { Gepp } from './gepp';
 import { Hubblepup, HubblepupTuple } from './hubblepup';
-import { Lanbe, VoictentItemLanbe, VoictentLanbe } from './lanbe';
+import {
+  Lanbe,
+  LanbeTypeName,
+  VoictentItemLanbe,
+  VoictentLanbe,
+} from './lanbe';
 import { Mabz, MabzEntry } from './mabz';
-import { Platomity } from './platomity';
+import { Platomity, getDreanorTuple } from './platomity';
 import { Prected } from './prected';
 import { Procody } from './procody';
 import { Quirm, QuirmTuple } from './quirm';
 import { Tabilly } from './tabilly';
+import { Voictent } from './voictent';
 
 export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
+
+export type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 
 export type DigikikifierInput = {
   initialQuirmTuple: QuirmTuple;
   estinantTuple: EstinantTuple;
   onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler;
+  onFinish?: RuntimeStatisticsHandler;
+};
+
+const nanosecondsToSeconds = (nanoseconds: bigint): bigint =>
+  nanoseconds / 1000000000n;
+
+// A series of values by engine tick
+type TickSeries<TValue extends number | bigint> = TValue[];
+
+type VoictentTickSeriesConfiguration = {
+  gepp: Gepp;
+  voictentLanbe: VoictentLanbe;
+  voictentItemLanbe: VoictentItemLanbe;
+  voictentTickSeries: TickSeries<number>;
+  voictentItemTickSeries: TickSeries<number>;
+};
+
+type EstinantConnectionTickSeriesConfiguration = {
+  gepp: Gepp;
+  lanbe: Lanbe;
+  tickSeries: TickSeries<number>;
+};
+
+type EstinantTickSeriesConfiguration = {
+  platomity: Platomity;
+  connectionList: EstinantConnectionTickSeriesConfiguration[];
+  cumulativeExecutionCountTickSeries: TickSeries<number>;
+  relativeExecutionCountTickSeries: TickSeries<number>;
+};
+
+type TimeSeriesConfiguration = {
+  timestampSeries: TickSeries<bigint>;
+  cumulativeElapsedSecondsTickSeries: TickSeries<number>;
+  relativeElapsedSecondsTickSeries: TickSeries<number>;
+};
+
+type RuntimeStatistics = {
+  voictentList: VoictentTickSeriesConfiguration[];
+  estinantList: EstinantTickSeriesConfiguration[];
+  time: TimeSeriesConfiguration;
 };
 
 /**
@@ -38,6 +87,7 @@ export const digikikify = ({
   initialQuirmTuple,
   estinantTuple,
   onHubblepupAddedToVoictents,
+  onFinish,
 }: DigikikifierInput): void => {
   const tabilly = new Tabilly();
 
@@ -92,27 +142,43 @@ export const digikikify = ({
       leftDreanor,
       rightDreanorTuple,
       procody: new Procody(),
+      executionCount: 0,
     };
 
     return platomity;
   });
 
-  const canPlatomityAdvance = (platomity: Platomity): boolean => {
-    return [platomity.leftDreanor, ...platomity.rightDreanorTuple].some(
-      (dreanor) => dreanor.lanbe.hasNext(),
-    );
+  const isPlatomityActive = (platomity: Platomity): boolean => {
+    return getDreanorTuple(platomity).some((dreanor) => {
+      if (dreanor.lanbe.typeName === LanbeTypeName.VoictentLanbe) {
+        return dreanor.lanbe.hasNext() || dreanor.lanbe.isAccumulating();
+      }
+
+      return dreanor.lanbe.hasNext();
+    });
   };
 
-  const executePlatomity = (platomity: Platomity): void => {
+  type CologyExecutionContext = {
+    platomity: Platomity;
+    cology: Cology;
+  };
+
+  const getCologyExecutionContextList = (
+    platomity: Platomity,
+  ): CologyExecutionContext[] => {
     const touchedCologySet = new CologySet();
 
-    [platomity.leftDreanor, ...platomity.rightDreanorTuple]
-      .filter((dreanor) => dreanor.lanbe.hasNext())
+    getDreanorTuple(platomity)
+      .filter((dreanor) => {
+        return dreanor.lanbe.hasNext();
+      })
       .forEach((dreanor) => {
         dreanor.lanbe.advance();
 
         if (dreanor.typeName === DreanorTypeName.LeftDreanor) {
-          const leftHubblepup = dreanor.lanbe.dereference() as Hubblepup;
+          const leftInput = dreanor.lanbe.dereference() as
+            | Hubblepup
+            | HubblepupTuple;
 
           const mabzEntryList = platomity.rightDreanorTuple.map<MabzEntry>(
             (rightDreanor) => {
@@ -120,9 +186,9 @@ export const digikikify = ({
               if (
                 rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
               ) {
-                zornTuple = [dreanor.lanbe];
+                zornTuple = [rightDreanor.lanbe];
               } else {
-                zornTuple = rightDreanor.framate(leftHubblepup);
+                zornTuple = rightDreanor.framate(leftInput);
               }
 
               return [rightDreanor.gepp, zornTuple];
@@ -130,10 +196,8 @@ export const digikikify = ({
           );
 
           const cology: Cology = {
-            leftQuirm: {
-              gepp: dreanor.gepp,
-              hubblepup: leftHubblepup,
-            },
+            leftGepp: dreanor.gepp,
+            leftInput,
             mabz: new Mabz(mabzEntryList),
           };
 
@@ -170,7 +234,7 @@ export const digikikify = ({
         }
       });
 
-    const readyCologies = [...touchedCologySet].filter((cology) => {
+    const readyCologyList = [...touchedCologySet].filter((cology) => {
       const isReady = platomity.rightDreanorTuple.every(
         (rightDreanor: RightDreanor) => {
           if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
@@ -185,43 +249,177 @@ export const digikikify = ({
       return isReady;
     });
 
-    readyCologies.forEach((cology) => {
-      const leftInput = cology.leftQuirm.hubblepup;
+    const cologyExecutionContextList =
+      readyCologyList.map<CologyExecutionContext>((cology) => {
+        return {
+          platomity,
+          cology,
+        };
+      });
 
-      const rightInputTuple = platomity.rightDreanorTuple.map<HubblepupTuple>(
-        (rightDreanor) => {
-          if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-            const rightInput =
-              rightDreanor.lanbe.dereference() as HubblepupTuple;
-            return rightInput;
-          }
+    return cologyExecutionContextList;
+  };
 
-          const zornTuple = cology.mabz.get(rightDreanor.gepp) as ZornTuple;
-          const rightInput = zornTuple.map(
-            (zorn) => rightDreanor.prected.get(zorn) as Hubblepup,
-          );
+  const executeContext = ({
+    platomity,
+    cology,
+  }: CologyExecutionContext): void => {
+    const { leftInput } = cology;
+
+    const rightInputTuple = platomity.rightDreanorTuple.map<HubblepupTuple>(
+      (rightDreanor) => {
+        if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
+          const rightInput = rightDreanor.lanbe.dereference() as HubblepupTuple;
           return rightInput;
-        },
-      );
+        }
 
-      const outputQuirmTuple = platomity.estinant.tropoig(
-        leftInput,
-        ...rightInputTuple,
-      );
-      addToTabilly(outputQuirmTuple);
-    });
+        const zornTuple = cology.mabz.get(rightDreanor.gepp) as ZornTuple;
+        const rightInput = zornTuple.map(
+          (zorn) => rightDreanor.prected.get(zorn) as Hubblepup,
+        );
+        return rightInput;
+      },
+    );
+
+    const outputQuirmTuple = platomity.estinant.tropoig(
+      leftInput,
+      ...rightInputTuple,
+    );
+
+    // eslint-disable-next-line no-param-reassign
+    platomity.executionCount += 1;
+
+    addToTabilly(outputQuirmTuple);
   };
 
   addToTabilly(initialQuirmTuple);
 
-  // This must be a dowhile so that when "isWibiz" is true, it triggers for a Voictent with 1 item
-  do {
+  const voictentConfigurationByVoictent = new Map<
+    Voictent,
+    VoictentTickSeriesConfiguration
+  >();
+
+  const estinantTickSeriesConfigurationList =
+    platomityList.map<EstinantTickSeriesConfiguration>((platomity) => {
+      return {
+        platomity,
+        connectionList: getDreanorTuple(
+          platomity,
+        ).map<EstinantConnectionTickSeriesConfiguration>((dreanor) => {
+          return {
+            gepp: dreanor.gepp,
+            lanbe: dreanor.lanbe,
+            tickSeries: [],
+          };
+        }),
+        cumulativeExecutionCountTickSeries: [],
+        relativeExecutionCountTickSeries: [],
+      };
+    });
+
+  const timeConfiguration: TimeSeriesConfiguration = {
+    timestampSeries: [],
+    cumulativeElapsedSecondsTickSeries: [],
+    relativeElapsedSecondsTickSeries: [],
+  };
+
+  const startTime = process.hrtime.bigint();
+  let prevousTickTime = startTime;
+
+  let tickCount = 0;
+
+  while (platomityList.some(isPlatomityActive)) {
     [...tabilly.values()].forEach((voictent) => {
       voictent.onTickStart();
     });
 
-    platomityList.filter(canPlatomityAdvance).forEach((platomity) => {
-      executePlatomity(platomity);
+    // TODO: make estinant input output gepps static so that the list of possible gepps/voictents is known from the start
+    // eslint-disable-next-line @typescript-eslint/no-loop-func
+    [...tabilly.entries()].forEach(([gepp, voictent]) => {
+      const configuration: VoictentTickSeriesConfiguration =
+        voictentConfigurationByVoictent.get(voictent) ?? {
+          gepp,
+          voictentLanbe: voictent.createVoictentLanbe(gepp),
+          voictentItemLanbe: voictent.createVoictentItemLanbe(gepp),
+          voictentTickSeries: Array.from({ length: tickCount }).map(() => 0),
+          voictentItemTickSeries: Array.from({ length: tickCount }).map(
+            () => 0,
+          ),
+        };
+
+      voictentConfigurationByVoictent.set(voictent, configuration);
+
+      configuration.voictentTickSeries.push(
+        configuration.voictentLanbe.hasNext() ? 1 : 0,
+      );
+
+      configuration.voictentItemTickSeries.push(
+        configuration.voictentItemLanbe.hasNext() ? 1 : 0,
+      );
+
+      while (configuration.voictentItemLanbe.hasNext()) {
+        configuration.voictentItemLanbe.advance();
+      }
     });
-  } while (platomityList.some(canPlatomityAdvance));
+
+    estinantTickSeriesConfigurationList.forEach((configuration) => {
+      configuration.connectionList.forEach((connection) => {
+        connection.tickSeries.push(connection.lanbe.hasNext() ? 1 : 0);
+      });
+    });
+
+    platomityList
+      .flatMap((platomity) => {
+        return getCologyExecutionContextList(platomity);
+      })
+      .forEach((context) => {
+        // Note: it's important that execution is separated from evaluation since executing a platomity can affect other platomities
+        executeContext(context);
+      });
+
+    estinantTickSeriesConfigurationList.forEach((configuration) => {
+      const lastExecutionCount =
+        configuration.cumulativeExecutionCountTickSeries[
+          configuration.cumulativeExecutionCountTickSeries.length - 1
+        ] ?? 0;
+
+      configuration.cumulativeExecutionCountTickSeries.push(
+        configuration.platomity.executionCount,
+      );
+
+      const relativeExecutionCount =
+        configuration.platomity.executionCount - lastExecutionCount;
+      configuration.relativeExecutionCountTickSeries.push(
+        relativeExecutionCount,
+      );
+    });
+
+    const tickTime = process.hrtime.bigint();
+    timeConfiguration.timestampSeries.push(tickTime);
+
+    const cumulativeElapsedSeconds = nanosecondsToSeconds(tickTime - startTime);
+    timeConfiguration.cumulativeElapsedSecondsTickSeries.push(
+      Number(cumulativeElapsedSeconds),
+    );
+
+    const relativeElapsedSeconds = nanosecondsToSeconds(
+      tickTime - prevousTickTime,
+    );
+    timeConfiguration.relativeElapsedSecondsTickSeries.push(
+      Number(relativeElapsedSeconds),
+    );
+
+    prevousTickTime = tickTime;
+    tickCount += 1;
+  }
+
+  const statistics: RuntimeStatistics = {
+    voictentList: [...voictentConfigurationByVoictent.values()],
+    estinantList: estinantTickSeriesConfigurationList,
+    time: timeConfiguration,
+  };
+
+  if (onFinish) {
+    onFinish(statistics);
+  }
 };

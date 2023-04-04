@@ -1,0 +1,13 @@
+Collections:
+
+    example-input
+      I: |X|
+      C: |-|
+
+Transforms:
+
+  0
+    example-input
+      I: |X|
+         |_|
+      E: |1|

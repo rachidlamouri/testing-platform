@@ -1,4 +1,4 @@
-import { LeftDreanor, RightDreanorTuple } from './dreanor';
+import { DreanorTuple, LeftDreanor, RightDreanorTuple } from './dreanor';
 import { Estinant } from './estinant';
 import { Procody } from './procody';
 
@@ -11,4 +11,10 @@ export type Platomity = {
   leftDreanor: LeftDreanor;
   rightDreanorTuple: RightDreanorTuple;
   procody: Procody;
+  executionCount: number;
 };
+
+export const getDreanorTuple = (platomity: Platomity): DreanorTuple => [
+  platomity.leftDreanor,
+  ...platomity.rightDreanorTuple,
+];

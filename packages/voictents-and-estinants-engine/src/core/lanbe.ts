@@ -1,3 +1,4 @@
+import { Simplify } from 'type-fest';
 import { Hubblepup, HubblepupTuple } from './hubblepup';
 
 export enum LanbeTypeName {
@@ -16,9 +17,10 @@ type BaseLanbe<
   dereference: () => TOutput | null;
 };
 
-export type VoictentLanbe = BaseLanbe<
-  LanbeTypeName.VoictentLanbe,
-  HubblepupTuple
+export type VoictentLanbe = Simplify<
+  BaseLanbe<LanbeTypeName.VoictentLanbe, HubblepupTuple> & {
+    isAccumulating: () => boolean;
+  }
 >;
 
 export type VoictentItemLanbe = BaseLanbe<
