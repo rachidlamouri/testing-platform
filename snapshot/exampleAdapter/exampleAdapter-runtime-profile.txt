@@ -1,0 +1,79 @@
+Collections:
+
+    initial-input
+      I: |X----|
+      C: |X----|
+
+    a
+      I: |-XX--|
+      C: |-XX--|
+
+    serialized
+      I: |-XXXX|
+      C: |-XXXX|
+
+    letter
+      I: |-XXXX|
+      C: |-XXXX|
+
+    number
+      I: |-XXXX|
+      C: |-XXXX|
+
+    b
+      I: |---XX|
+      C: |---XX|
+
+    joined
+      I: |----X|
+      C: |----X|
+
+Transforms:
+
+  0
+    initial-input
+      I: |XXXX-|
+         |_____|
+      E: |1111-|
+
+  1
+    initial-input
+      I: |XXXX-|
+         |_____|
+      E: |1111-|
+
+  6
+    initial-input
+      I: |XXXX-|
+         |_____|
+      E: |1111-|
+
+  3
+    serialized
+      I: |-XXXX|
+         |_____|
+      E: |-1111|
+
+  2
+    a
+      I: |-XX--|
+    b
+      I: |---XX|
+         |_____|
+      E: |---11|
+
+  5
+    a
+      I: |-XX--|
+    b
+      I: |---XX|
+         |_____|
+      E: |---11|
+
+  4
+    a
+      I: |-XX--|
+    b
+      I: |---XX|
+         |_____|
+      E: |----2|

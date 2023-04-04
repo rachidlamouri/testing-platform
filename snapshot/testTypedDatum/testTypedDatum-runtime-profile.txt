@@ -1,0 +1,37 @@
+Collections:
+
+    datum-test-case-input
+      I: |X-----------------------|
+      C: |X-----------------------|
+
+    type-script-datum-type-name
+      I: |-XXXXXXXXXXXXXXXXXXXXXXX|
+      C: |-XXXXXXXXXXXXXXXXXXXXXXX|
+
+    custom-datum-type-name
+      I: |-XXXXXXXXXXXXXXXXXXXXXXX|
+      C: |-XXXXXXXXXXXXXXXXXXXXXXX|
+
+    serialized-datum
+      I: |-XXXXXXXXXXXXXXXXXXXXXXX|
+      C: |-XXXXXXXXXXXXXXXXXXXXXXX|
+
+Transforms:
+
+  0
+    datum-test-case-input
+      I: |XXXXXXXXXXXXXXXXXXXXXXXX|
+         |________________________|
+      E: |111111111111111111111111|
+
+  1
+    datum-test-case-input
+      I: |XXXXXXXXXXXXXXXXXXXXXXXX|
+         |________________________|
+      E: |111111111111111111111111|
+
+  2
+    datum-test-case-input
+      I: |XXXXXXXXXXXXXXXXXXXXXXXX|
+         |________________________|
+      E: |111111111111111111111111|

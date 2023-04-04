@@ -1,0 +1,73 @@
+Collections:
+
+    input-a
+      I: |X-|
+      C: |X-|
+
+    input-b
+      I: |X-|
+      C: |X-|
+
+    input-c
+      I: |X-|
+      C: |X-|
+
+    input-d
+      I: |X-|
+      C: |X-|
+
+    output
+      I: |-X|
+      C: |-X|
+
+Transforms:
+
+  0
+    input-a
+      C: |X-|
+         |__|
+      E: |1-|
+
+  1
+    input-a
+      I: |XX|
+         |__|
+      E: |11|
+
+  2
+    input-b
+      I: |XX|
+         |__|
+      E: |11|
+
+  3
+    input-a
+      I: |XX|
+    input-b
+      I: |XX|
+         |__|
+      E: |11|
+
+  4
+    input-a
+      I: |XX|
+    input-b
+      I: |XX|
+    input-c
+      I: |XX|
+         |__|
+      E: |11|
+
+  5
+    input-b
+      I: |XX|
+         |__|
+      E: |11|
+
+  6
+    input-a
+      I: |XX|
+    input-d
+      C: |X-|
+         |__|
+      E: |11|
