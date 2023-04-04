@@ -2,7 +2,7 @@ Collections:
 
     example-input
       I: |X|
-      C: |X|
+      C: |-|
 
 Transforms:
 

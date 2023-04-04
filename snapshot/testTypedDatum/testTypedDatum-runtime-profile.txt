@@ -2,19 +2,19 @@ Collections:
 
     datum-test-case-input
       I: |X-----------------------|
-      C: |X-----------------------|
+      C: |-X----------------------|
 
     type-script-datum-type-name
       I: |-XXXXXXXXXXXXXXXXXXXXXXX|
-      C: |-XXXXXXXXXXXXXXXXXXXXXXX|
+      C: |------------------------|
 
     custom-datum-type-name
       I: |-XXXXXXXXXXXXXXXXXXXXXXX|
-      C: |-XXXXXXXXXXXXXXXXXXXXXXX|
+      C: |------------------------|
 
     serialized-datum
       I: |-XXXXXXXXXXXXXXXXXXXXXXX|
-      C: |-XXXXXXXXXXXXXXXXXXXXXXX|
+      C: |------------------------|
 
 Transforms:
 

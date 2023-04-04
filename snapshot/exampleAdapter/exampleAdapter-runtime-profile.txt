@@ -2,31 +2,31 @@ Collections:
 
     initial-input
       I: |X----|
-      C: |X----|
+      C: |-X---|
 
     a
       I: |-XX--|
-      C: |-XX--|
+      C: |---X-|
 
     serialized
       I: |-XXXX|
-      C: |-XXXX|
+      C: |-----|
 
     letter
       I: |-XXXX|
-      C: |-XXXX|
+      C: |-----|
 
     number
       I: |-XXXX|
-      C: |-XXXX|
+      C: |-----|
 
     b
       I: |---XX|
-      C: |---XX|
+      C: |-----|
 
     joined
       I: |----X|
-      C: |----X|
+      C: |-----|
 
 Transforms:
 
