@@ -187,6 +187,7 @@ export const getEngineProgramParts = buildEstinant()
         zorn: leftInput.zorn,
         grition: {
           programName,
+          filePath: typeScriptFile.filePath,
           estinantIdentifierList: outputEstinantList.map(({ zorn }) => zorn),
         },
       };
