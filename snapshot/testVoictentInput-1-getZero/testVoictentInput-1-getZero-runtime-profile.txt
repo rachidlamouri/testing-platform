@@ -2,7 +2,7 @@ Collections:
 
     item-a
       I: |X|
-      C: |X|
+      C: |-|
 
     item-b
       I: |-|

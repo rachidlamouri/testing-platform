@@ -12,7 +12,12 @@ import {
 import { Estinant, EstinantTuple } from './estinant';
 import { Gepp } from './gepp';
 import { Hubblepup, HubblepupTuple } from './hubblepup';
-import { Lanbe, VoictentItemLanbe, VoictentLanbe } from './lanbe';
+import {
+  Lanbe,
+  LanbeTypeName,
+  VoictentItemLanbe,
+  VoictentLanbe,
+} from './lanbe';
 import { Mabz, MabzEntry } from './mabz';
 import { Platomity, getDreanorTuple } from './platomity';
 import { Prected } from './prected';
@@ -143,10 +148,14 @@ export const digikikify = ({
     return platomity;
   });
 
-  const canPlatomityAdvance = (platomity: Platomity): boolean => {
-    return getDreanorTuple(platomity).some((dreanor) =>
-      dreanor.lanbe.hasNext(),
-    );
+  const isPlatomityActive = (platomity: Platomity): boolean => {
+    return getDreanorTuple(platomity).some((dreanor) => {
+      if (dreanor.lanbe.typeName === LanbeTypeName.VoictentLanbe) {
+        return dreanor.lanbe.hasNext() || dreanor.lanbe.isAccumulating();
+      }
+
+      return dreanor.lanbe.hasNext();
+    });
   };
 
   type CologyExecutionContext = {
@@ -319,7 +328,7 @@ export const digikikify = ({
 
   let tickCount = 0;
 
-  while (platomityList.some(canPlatomityAdvance)) {
+  while (platomityList.some(isPlatomityActive)) {
     [...tabilly.values()].forEach((voictent) => {
       voictent.onTickStart();
     });
@@ -343,9 +352,11 @@ export const digikikify = ({
       configuration.voictentTickSeries.push(
         configuration.voictentLanbe.hasNext() ? 1 : 0,
       );
+
       configuration.voictentItemTickSeries.push(
         configuration.voictentItemLanbe.hasNext() ? 1 : 0,
       );
+
       while (configuration.voictentItemLanbe.hasNext()) {
         configuration.voictentItemLanbe.advance();
       }

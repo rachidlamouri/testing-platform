@@ -1,23 +1,27 @@
 Collections:
 
     item-a
-      I: |X|
-      C: |X|
+      I: |X---|
+      C: |-X--|
 
     item-b
-      I: |-|
-      C: |-|
+      I: |-X--|
+      C: |--X-|
+
+    item-c
+      I: |---X|
+      C: |----|
 
 Transforms:
 
   getEvery
     item-a
-      I: |X|
-         |_|
-      E: |1|
+      I: |X---|
+         |____|
+      E: |1---|
 
   getVoictent
     item-b
-      C: |-|
-         |_|
-      E: |-|
+      C: |--X-|
+         |____|
+      E: |--1-|

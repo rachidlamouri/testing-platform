@@ -1,2 +1,4 @@
 "zorn": "call-count-1"
-"grition": - "value": 0
+"grition":
+  - "value": 0
+  - "value": 1
