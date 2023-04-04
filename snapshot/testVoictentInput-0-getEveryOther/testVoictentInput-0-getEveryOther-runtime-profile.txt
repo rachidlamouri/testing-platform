@@ -1,0 +1,15 @@
+Collections:
+
+Transforms:
+
+  getEveryOther
+    item-a
+      I: ||
+         ||
+      E: ||
+
+  getVoictent
+    item-b
+      C: ||
+         ||
+      E: ||

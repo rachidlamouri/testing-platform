@@ -10,6 +10,7 @@ import {
   RightVoictentItemDreanor,
 } from './dreanor';
 import { Estinant, EstinantTuple } from './estinant';
+import { Gepp } from './gepp';
 import { Hubblepup, HubblepupTuple } from './hubblepup';
 import { Lanbe, VoictentItemLanbe, VoictentLanbe } from './lanbe';
 import { Mabz, MabzEntry } from './mabz';
@@ -18,13 +19,56 @@ import { Prected } from './prected';
 import { Procody } from './procody';
 import { Quirm, QuirmTuple } from './quirm';
 import { Tabilly } from './tabilly';
+import { Voictent } from './voictent';
 
 export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
+
+export type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 
 export type DigikikifierInput = {
   initialQuirmTuple: QuirmTuple;
   estinantTuple: EstinantTuple;
   onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler;
+  onFinish?: RuntimeStatisticsHandler;
+};
+
+const nanosecondsToSeconds = (nanoseconds: bigint): bigint =>
+  nanoseconds / 1000000000n;
+
+// A series of values by engine tick
+type TickSeries<TValue extends number | bigint> = TValue[];
+
+type VoictentTickSeriesConfiguration = {
+  gepp: Gepp;
+  voictentLanbe: VoictentLanbe;
+  voictentItemLanbe: VoictentItemLanbe;
+  voictentTickSeries: TickSeries<number>;
+  voictentItemTickSeries: TickSeries<number>;
+};
+
+type EstinantConnectionTickSeriesConfiguration = {
+  gepp: Gepp;
+  lanbe: Lanbe;
+  tickSeries: TickSeries<number>;
+};
+
+type EstinantTickSeriesConfiguration = {
+  platomity: Platomity;
+  connectionList: EstinantConnectionTickSeriesConfiguration[];
+  cumulativeExecutionCountTickSeries: TickSeries<number>;
+  relativeExecutionCountTickSeries: TickSeries<number>;
+};
+
+type TimeSeriesConfiguration = {
+  timestampSeries: TickSeries<bigint>;
+  cumulativeElapsedSecondsTickSeries: TickSeries<number>;
+  relativeElapsedSecondsTickSeries: TickSeries<number>;
+};
+
+type RuntimeStatistics = {
+  voictentList: VoictentTickSeriesConfiguration[];
+  estinantList: EstinantTickSeriesConfiguration[];
+  time: TimeSeriesConfiguration;
 };
 
 /**
@@ -38,6 +82,7 @@ export const digikikify = ({
   initialQuirmTuple,
   estinantTuple,
   onHubblepupAddedToVoictents,
+  onFinish,
 }: DigikikifierInput): void => {
   const tabilly = new Tabilly();
 
@@ -92,6 +137,7 @@ export const digikikify = ({
       leftDreanor,
       rightDreanorTuple,
       procody: new Procody(),
+      executionCount: 0,
     };
 
     return platomity;
@@ -231,14 +277,84 @@ export const digikikify = ({
       ...rightInputTuple,
     );
 
+    // eslint-disable-next-line no-param-reassign
+    platomity.executionCount += 1;
+
     addToTabilly(outputQuirmTuple);
   };
 
   addToTabilly(initialQuirmTuple);
 
+  const voictentConfigurationByVoictent = new Map<
+    Voictent,
+    VoictentTickSeriesConfiguration
+  >();
+
+  const estinantTickSeriesConfigurationList =
+    platomityList.map<EstinantTickSeriesConfiguration>((platomity) => {
+      return {
+        platomity,
+        connectionList: getDreanorTuple(
+          platomity,
+        ).map<EstinantConnectionTickSeriesConfiguration>((dreanor) => {
+          return {
+            gepp: dreanor.gepp,
+            lanbe: dreanor.lanbe,
+            tickSeries: [],
+          };
+        }),
+        cumulativeExecutionCountTickSeries: [],
+        relativeExecutionCountTickSeries: [],
+      };
+    });
+
+  const timeConfiguration: TimeSeriesConfiguration = {
+    timestampSeries: [],
+    cumulativeElapsedSecondsTickSeries: [],
+    relativeElapsedSecondsTickSeries: [],
+  };
+
+  const startTime = process.hrtime.bigint();
+  let prevousTickTime = startTime;
+
+  let tickCount = 0;
+
   while (platomityList.some(canPlatomityAdvance)) {
     [...tabilly.values()].forEach((voictent) => {
       voictent.onTickStart();
+    });
+
+    // TODO: make estinant input output gepps static so that the list of possible gepps/voictents is known from the start
+    // eslint-disable-next-line @typescript-eslint/no-loop-func
+    [...tabilly.entries()].forEach(([gepp, voictent]) => {
+      const configuration: VoictentTickSeriesConfiguration =
+        voictentConfigurationByVoictent.get(voictent) ?? {
+          gepp,
+          voictentLanbe: voictent.createVoictentLanbe(gepp),
+          voictentItemLanbe: voictent.createVoictentItemLanbe(gepp),
+          voictentTickSeries: Array.from({ length: tickCount }).map(() => 0),
+          voictentItemTickSeries: Array.from({ length: tickCount }).map(
+            () => 0,
+          ),
+        };
+
+      voictentConfigurationByVoictent.set(voictent, configuration);
+
+      configuration.voictentTickSeries.push(
+        configuration.voictentLanbe.hasNext() ? 1 : 0,
+      );
+      configuration.voictentItemTickSeries.push(
+        configuration.voictentItemLanbe.hasNext() ? 1 : 0,
+      );
+      while (configuration.voictentItemLanbe.hasNext()) {
+        configuration.voictentItemLanbe.advance();
+      }
+    });
+
+    estinantTickSeriesConfigurationList.forEach((configuration) => {
+      configuration.connectionList.forEach((connection) => {
+        connection.tickSeries.push(connection.lanbe.hasNext() ? 1 : 0);
+      });
     });
 
     platomityList
@@ -249,5 +365,50 @@ export const digikikify = ({
         // Note: it's important that execution is separated from evaluation since executing a platomity can affect other platomities
         executeContext(context);
       });
+
+    estinantTickSeriesConfigurationList.forEach((configuration) => {
+      const lastExecutionCount =
+        configuration.cumulativeExecutionCountTickSeries[
+          configuration.cumulativeExecutionCountTickSeries.length - 1
+        ] ?? 0;
+
+      configuration.cumulativeExecutionCountTickSeries.push(
+        configuration.platomity.executionCount,
+      );
+
+      const relativeExecutionCount =
+        configuration.platomity.executionCount - lastExecutionCount;
+      configuration.relativeExecutionCountTickSeries.push(
+        relativeExecutionCount,
+      );
+    });
+
+    const tickTime = process.hrtime.bigint();
+    timeConfiguration.timestampSeries.push(tickTime);
+
+    const cumulativeElapsedSeconds = nanosecondsToSeconds(tickTime - startTime);
+    timeConfiguration.cumulativeElapsedSecondsTickSeries.push(
+      Number(cumulativeElapsedSeconds),
+    );
+
+    const relativeElapsedSeconds = nanosecondsToSeconds(
+      tickTime - prevousTickTime,
+    );
+    timeConfiguration.relativeElapsedSecondsTickSeries.push(
+      Number(relativeElapsedSeconds),
+    );
+
+    prevousTickTime = tickTime;
+    tickCount += 1;
+  }
+
+  const statistics: RuntimeStatistics = {
+    voictentList: [...voictentConfigurationByVoictent.values()],
+    estinantList: estinantTickSeriesConfigurationList,
+    time: timeConfiguration,
+  };
+
+  if (onFinish) {
+    onFinish(statistics);
   }
 };

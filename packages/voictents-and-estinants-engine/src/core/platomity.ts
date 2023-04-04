@@ -11,6 +11,7 @@ export type Platomity = {
   leftDreanor: LeftDreanor;
   rightDreanorTuple: RightDreanorTuple;
   procody: Procody;
+  executionCount: number;
 };
 
 export const getDreanorTuple = (platomity: Platomity): DreanorTuple => [

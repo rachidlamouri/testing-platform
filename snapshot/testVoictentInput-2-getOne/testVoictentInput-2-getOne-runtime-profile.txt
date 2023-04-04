@@ -1,0 +1,27 @@
+Collections:
+
+    item-a
+      I: |X--|
+      C: |X--|
+
+    item-b
+      I: |-X-|
+      C: |-X-|
+
+    item-c
+      I: |--X|
+      C: |--X|
+
+Transforms:
+
+  getOne
+    item-a
+      I: |XX-|
+         |___|
+      E: |11-|
+
+  getVoictent
+    item-b
+      C: |-X-|
+         |___|
+      E: |-1-|
