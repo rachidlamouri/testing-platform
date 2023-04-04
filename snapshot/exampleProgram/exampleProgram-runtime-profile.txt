@@ -70,4 +70,4 @@ Transforms:
     input-d
       C: |-X-|
          |___|
-      E: |-1-|
+      E: |-2-|

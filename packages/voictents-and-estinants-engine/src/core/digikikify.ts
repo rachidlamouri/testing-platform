@@ -186,7 +186,7 @@ export const digikikify = ({
               if (
                 rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
               ) {
-                zornTuple = [dreanor.lanbe];
+                zornTuple = [rightDreanor.lanbe];
               } else {
                 zornTuple = rightDreanor.framate(leftInput);
               }
