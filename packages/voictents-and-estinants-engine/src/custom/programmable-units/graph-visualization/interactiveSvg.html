@@ -1,14 +1,60 @@
-<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.5.0/dist/svg-pan-zoom.min.js"></script>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.5.0/dist/svg-pan-zoom.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: grid;
+      grid-template-columns: auto 600px;
+    }
+
+    #svg-container {
+      padding-right: 8px;
+    }
+
+    #side-panel {
+      margin: 0px;
+      padding-left: 8px;
+      border-left: 1px solid #333
+    }
+
+    #side-panel h2 {
+      margin-top: 0px
+    }
+
+    #side-panel label {
+      font-size: 14px;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+
+    #side-panel p {
+      font-size: 12px;
+      margin: 0px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
 <body>
-  <!-- SVG_PLACEHOLDER -->
+  <div id="svg-container">
+    <!-- SVG_PLACEHOLDER -->
+  </div>
+  <div id="side-panel">
+    <h2>No Selection</h2>
+  </div>
 </body>
 <script>
+  // this gets overwritten by the engine program
+  const graphMetadataById = {};
+
+  const sidePanel = document.getElementById('side-panel');
+
   svgPanZoom('svg', {
-    zoomScaleSensitivity: .3,
+    zoomScaleSensitivity: .5,
     minZoom: .2,
     maxZoom: 20,
   })
 
+  const clusterList = [...document.getElementsByClassName('cluster')];
   const nodeList = [...document.getElementsByClassName('node')];
 
   const setEdgeColor = (element, color) => {
@@ -19,8 +65,41 @@
     }
   }
 
+  const setPanelContent = (element) => {
+    [...sidePanel.children].forEach((child) => {
+      sidePanel.removeChild(child);
+    })
+
+    const metadata = graphMetadataById[element.id];
+
+    const titleElement = document.createElement('h2');
+    titleElement.textContent = metadata.title;
+    sidePanel.appendChild(titleElement)
+
+    metadata.fieldList.forEach(({ label, value }) => {
+      const labelElement = document.createElement('label');
+      const valueElement = document.createElement('p');
+
+      labelElement.textContent = label;
+      valueElement.textContent = value;
+
+      sidePanel.appendChild(labelElement)
+      sidePanel.appendChild(valueElement)
+    })
+  }
+
+  clusterList.forEach((cluster) => {
+    cluster.addEventListener('click', (event) => {
+      event.stopPropagation();
+      setPanelContent(cluster)
+    })
+  })
+
   nodeList.forEach((node) => {
-    node.addEventListener('click', () => {
+    node.addEventListener('click', (event) => {
+      event.stopPropagation();
+      setPanelContent(node)
+
       nodeList.forEach((node) => {
         node.querySelector('polygon').setAttribute('stroke', 'black');
       })

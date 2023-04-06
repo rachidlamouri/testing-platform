@@ -7,6 +7,8 @@ import { DIRECTED_GRAPH_GEPP } from '../programmable-units/graph-visualization/d
 import { encodeDirectedGraphAsGraphvizCode } from '../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { renderGraphvizCodeToSvgDocument } from '../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
 import { addInteractivityToSvgDocument } from '../programmable-units/graph-visualization/addInteractivityToSvgDocument';
+import { DIRECTED_GRAPH_METADATA_BY_ID_GEPP } from '../programmable-units/graph-visualization/directedGraphMetadataById';
+import { LabelLocation } from '../programmable-units/graph-visualization/directed-graph/attribute';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -25,6 +27,7 @@ digikikify({
           attributeByKey: {
             id: 'my graph',
             label: 'my graph',
+            labelloc: LabelLocation.Top,
           },
           nodeList: [
             {
@@ -89,6 +92,58 @@ digikikify({
               subgraphList: [],
             },
           ],
+        },
+      },
+    ],
+    [DIRECTED_GRAPH_METADATA_BY_ID_GEPP]: [
+      {
+        zorn: 'my-graph',
+        grition: {
+          cluster_my_subgraph: {
+            title: 'My Subgraph',
+            fieldList: [
+              {
+                label: 'About My Subgraph',
+                value: 'It is the best!',
+              },
+            ],
+          },
+          a: {
+            title: 'My Node A',
+            fieldList: [
+              {
+                label: 'Letter',
+                value: 'a',
+              },
+            ],
+          },
+          b: {
+            title: 'My Node B',
+            fieldList: [
+              {
+                label: 'Letter',
+                value: 'b',
+              },
+            ],
+          },
+          c: {
+            title: 'My Node C',
+            fieldList: [
+              {
+                label: 'Letter',
+                value: 'c',
+              },
+            ],
+          },
+          d: {
+            title: 'My Node D',
+            fieldList: [
+              {
+                label: 'Letter',
+                value: 'd',
+              },
+            ],
+          },
         },
       },
     ],
