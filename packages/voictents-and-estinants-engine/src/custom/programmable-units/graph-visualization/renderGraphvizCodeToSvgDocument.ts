@@ -5,16 +5,17 @@ import { SvgDocumentVoictent, SVG_DOCUMENT_GEPP } from './svgDocument';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 
 export const renderGraphvizCodeToSvgDocument = buildEstinant()
-  .fromHubblepup<GraphvizCodeVoictent>({
+  .fromGrition<GraphvizCodeVoictent>({
     gepp: GRAPHVIZ_CODE_GEPP,
   })
-  .toHubblepupTuple<SvgDocumentVoictent>({
+  .toGrition<SvgDocumentVoictent>({
     gepp: SVG_DOCUMENT_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
   })
-  .onPinbe(({ zorn, grition }) => {
+  .onPinbe((graphvizCode) => {
     const result = childProcessUtilities.spawnSync('dot', ['-Tsvg'], {
       encoding: 'utf8',
-      input: grition,
+      input: graphvizCode,
     });
 
     const originalDocument = result.output
@@ -40,6 +41,7 @@ export const renderGraphvizCodeToSvgDocument = buildEstinant()
       $element.addClass(`head-${headId}`);
     });
 
+    // TODO: get rid of this convention where its looking for tailId:headId. It's confusing and the concern leaks into other files
     $svg.find('.edge').each((index, element) => {
       const $element = $(element);
       const id = $element.attr('id') ?? '';
@@ -54,16 +56,6 @@ export const renderGraphvizCodeToSvgDocument = buildEstinant()
     $svg.find('.edge > polygon').attr('fill', 'gray');
 
     const modifiedDocument = $svg.toString() ?? '';
-
-    return [
-      {
-        zorn: `${zorn}/original`,
-        grition: originalDocument,
-      },
-      {
-        zorn: `${zorn}/modified`,
-        grition: modifiedDocument,
-      },
-    ];
+    return modifiedDocument;
   })
   .assemble();

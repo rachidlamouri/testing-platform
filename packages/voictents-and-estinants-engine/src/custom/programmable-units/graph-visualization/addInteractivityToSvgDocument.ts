@@ -5,6 +5,10 @@ import {
   OutputFileVoictent,
   OUTPUT_FILE_GEPP,
 } from '../output-file/outputFile';
+import {
+  DirectedGraphMetadataByIdVoictent,
+  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+} from './directedGraphMetadataById';
 import { SvgDocumentVoictent, SVG_DOCUMENT_GEPP } from './svgDocument';
 
 const INTERACTIVE_HTML_FILE_PATH =
@@ -14,29 +18,41 @@ export const addInteractivityToSvgDocument = buildEstinant()
   .fromHubblepup<SvgDocumentVoictent>({
     gepp: SVG_DOCUMENT_GEPP,
   })
-  .andFromHubblepupTuple<HtmlFileVoictent, [string]>({
+  .andFromGritionTuple<HtmlFileVoictent, [string]>({
     gepp: HTML_FILE_GEPP,
     framate: () => [INTERACTIVE_HTML_FILE_PATH],
+    croard: (rightInput) => rightInput.zorn,
+  })
+  .andFromGritionTuple<DirectedGraphMetadataByIdVoictent, [string]>({
+    gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+    framate: (leftInput) => [leftInput.zorn],
     croard: (rightInput) => rightInput.zorn,
   })
   .toHubblepup<OutputFileVoictent>({
     gepp: OUTPUT_FILE_GEPP,
   })
-  .onPinbe((leftInput, [rightInput]) => {
+  .onPinbe((leftInput, [templateFile], [directedGraphMetadataById]) => {
     const svgText = leftInput.grition;
-    const templateFile = rightInput.grition;
 
     const templateText = fs.readFileSync(templateFile.filePath, 'utf8');
 
-    const outputTemplate = templateText.replace(
-      '<!-- SVG_PLACEHOLDER -->',
-      svgText,
+    const stringifiedMetadataById = JSON.stringify(
+      directedGraphMetadataById,
+      null,
+      2,
     );
 
-    const fileId = leftInput.zorn.replaceAll(/\//g, '-');
+    const outputTemplate = templateText
+      .replace('<!-- SVG_PLACEHOLDER -->', svgText)
+      .replace(
+        'const graphMetadataById = {};',
+        `const graphMetadataById = JSON.parse(\`${stringifiedMetadataById}\`);`,
+      );
+
+    const fileName = leftInput.zorn.replaceAll(/\//g, '-');
 
     return {
-      fileName: fileId,
+      fileName,
       fileExtensionSuffix: 'html',
       text: outputTemplate,
     };
