@@ -72,6 +72,10 @@
 
     const metadata = graphMetadataById[element.id];
 
+    if (metadata === undefined) {
+      return;
+    }
+
     const titleElement = document.createElement('h2');
     titleElement.textContent = metadata.title;
     sidePanel.appendChild(titleElement)
