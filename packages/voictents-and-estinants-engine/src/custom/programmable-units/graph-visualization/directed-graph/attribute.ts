@@ -15,6 +15,7 @@ export type AttributeByKey = {
   label: string;
   shape: Shape;
   fontname: string;
+  fontsize: number;
   labelloc: LabelLocation;
 };
 

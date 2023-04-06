@@ -9,11 +9,13 @@ import {
 import { encodeDirectedGraphAsGraphvizCode } from '../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { renderGraphvizCodeToSvgDocument } from '../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
 import { addInteractivityToSvgDocument } from '../programmable-units/graph-visualization/addInteractivityToSvgDocument';
-import { digraphificateTypeScriptFileRelationshipList } from '../programmable-units/type-script-file-relationships/digraphificateTypeScriptFileRelationshipList';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import { getTypeScriptFileImportList } from '../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { parseTypeScriptFile } from '../programmable-units/type-script-file/parseTypeScriptFile';
-import { getTypeScriptFileRelationshipList } from '../programmable-units/type-script-file-relationships/getTypeScriptFileRelationshipList';
+import { getFileNodeAttributeByKey } from '../programmable-units/type-script-file-relationships/graph-element/getFileNodeAttributeByKey';
+import { getRootDirectedGraph } from '../programmable-units/type-script-file-relationships/graph-element/getRootDirectedGraph';
+import { getGraphMetadataById } from '../programmable-units/type-script-file-relationships/getGraphMetadataById';
+import { getRootDirectory } from '../programmable-units/type-script-file-relationships/getRootDirectory';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -29,8 +31,11 @@ digikikify({
     parseTypeScriptFile,
     getTypeScriptFileImportList,
 
-    getTypeScriptFileRelationshipList,
-    digraphificateTypeScriptFileRelationshipList,
+    getRootDirectory,
+    getGraphMetadataById,
+
+    getFileNodeAttributeByKey,
+    getRootDirectedGraph,
 
     encodeDirectedGraphAsGraphvizCode,
     renderGraphvizCodeToSvgDocument,

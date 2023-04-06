@@ -8,6 +8,7 @@ import { AttributeByKey as BaseAttributeByKey } from './attribute';
 
 export enum DirectedGraphRankDirection {
   LeftRight = 'LR',
+  TopBottom = 'TB',
 }
 
 type GraphSpecificAttributeByKey = {
