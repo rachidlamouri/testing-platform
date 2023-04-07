@@ -63,7 +63,7 @@ digikikify({
             {
               isRoot: false,
               attributeByKey: {
-                id: 'cluster_my_subgraph',
+                id: 'my_subgraph',
                 label: 'my subgraph',
               },
               nodeList: [
@@ -99,7 +99,7 @@ digikikify({
       {
         zorn: 'my-graph',
         grition: {
-          cluster_my_subgraph: {
+          my_subgraph: {
             title: 'My Subgraph',
             fieldList: [
               {

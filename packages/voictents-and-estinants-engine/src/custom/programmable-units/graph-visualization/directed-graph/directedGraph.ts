@@ -22,14 +22,7 @@ type GraphAttributeByKey = Merge<
 
 type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
 
-type SubgraphSpecificAttributeByKey = {
-  id: `cluster_${string}`;
-};
-
-type SubgraphAttributeByKey = Merge<
-  BaseAttributeByKey,
-  SubgraphSpecificAttributeByKey
->;
+type SubgraphAttributeByKey = BaseAttributeByKey;
 
 type PartialSubgraphAttributeByKey = SetOptional<
   SubgraphAttributeByKey,

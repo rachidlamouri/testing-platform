@@ -71,7 +71,11 @@ const getDirectedGraphCodeLineList = (
 ): string[] => {
   const graphKeyword = graph.isRoot ? 'digraph' : 'subgraph';
 
-  const quotedId = quoteId(graph.attributeByKey.id ?? '');
+  const idPrefix = graph.isRoot ? '' : 'cluster_';
+  const idSuffix = graph.isRoot ? '' : graph.attributeByKey.id;
+  const id = `${idPrefix}${idSuffix}`;
+
+  const quotedId = quoteId(id);
 
   const attributeStatementList = getAttributeStatementList(graph).map(
     (line) => {
