@@ -16,6 +16,8 @@ import { getFileNodeAttributeByKey } from '../programmable-units/type-script-fil
 import { getRootDirectedGraph } from '../programmable-units/type-script-file-relationships/graph-element/getRootDirectedGraph';
 import { getGraphMetadataById } from '../programmable-units/type-script-file-relationships/getGraphMetadataById';
 import { getRootDirectory } from '../programmable-units/type-script-file-relationships/getRootDirectory';
+import { getImportRelationshipEdge } from '../programmable-units/type-script-file-relationships/graph-element/getImportRelationshipEdge';
+import { getTypeScriptFileInstanceIdByFilePath } from '../programmable-units/type-script-file-relationships/getTypeScriptFileInstanceIdByFilePath';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -32,9 +34,11 @@ digikikify({
     getTypeScriptFileImportList,
 
     getRootDirectory,
+    getTypeScriptFileInstanceIdByFilePath,
     getGraphMetadataById,
 
     getFileNodeAttributeByKey,
+    getImportRelationshipEdge,
     getRootDirectedGraph,
 
     encodeDirectedGraphAsGraphvizCode,
