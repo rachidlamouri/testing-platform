@@ -18,6 +18,10 @@ import { getGraphMetadataById } from '../programmable-units/type-script-file-rel
 import { getRootDirectory } from '../programmable-units/type-script-file-relationships/getRootDirectory';
 import { getImportRelationshipEdge } from '../programmable-units/type-script-file-relationships/graph-element/getImportRelationshipEdge';
 import { getTypeScriptFileInstanceIdByFilePath } from '../programmable-units/type-script-file-relationships/getTypeScriptFileInstanceIdByFilePath';
+import { getDirectorySubgraphAttributeByKey } from '../programmable-units/type-script-file-relationships/graph-element/getDirectorySubgraphAttributeByKey';
+import { getFileNodeToParentRelationship } from '../programmable-units/type-script-file-relationships/graph-element/getFileNodeToParentRelationship';
+import { getDirectorySubgraphToParentRelationship } from '../programmable-units/type-script-file-relationships/graph-element/getDirectorySubgraphToParentRelationship';
+import { getDirectoryInstanceIdByDirectoryPath } from '../programmable-units/type-script-file-relationships/getDirectoryInstanceIdByFilePath';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -34,11 +38,17 @@ digikikify({
     getTypeScriptFileImportList,
 
     getRootDirectory,
+    getDirectoryInstanceIdByDirectoryPath,
     getTypeScriptFileInstanceIdByFilePath,
     getGraphMetadataById,
 
+    getDirectorySubgraphAttributeByKey,
     getFileNodeAttributeByKey,
+
+    getDirectorySubgraphToParentRelationship,
+    getFileNodeToParentRelationship,
     getImportRelationshipEdge,
+
     getRootDirectedGraph,
 
     encodeDirectedGraphAsGraphvizCode,

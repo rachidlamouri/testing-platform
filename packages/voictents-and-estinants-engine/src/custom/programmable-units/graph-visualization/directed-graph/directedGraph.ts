@@ -21,7 +21,7 @@ type GraphAttributeByKey = Merge<
   GraphSpecificAttributeByKey
 >;
 
-type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
+export type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
 
 type SubgraphAttributeByKey = BaseAttributeByKey;
 

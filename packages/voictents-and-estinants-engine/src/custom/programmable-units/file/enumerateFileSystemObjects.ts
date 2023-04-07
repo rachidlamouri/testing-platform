@@ -80,12 +80,17 @@ export const enumerateFileSystemObjects = buildEstinant({
 
     const directoryOutputTuple = directoryMetadataList.map<DirectoryOdeshin>(
       ({ nodePath }) => {
+        const directoryPathPartList = nodePath.split('/');
+        const directoryName =
+          directoryPathPartList[directoryPathPartList.length - 1];
+
         return {
           zorn: nodePath,
           grition: {
             instanceId: uuid.v4(),
+            directoryName,
             directoryPath: nodePath,
-            directoryPathPartList: nodePath.split('/'),
+            directoryPathPartList,
           },
         };
       },
