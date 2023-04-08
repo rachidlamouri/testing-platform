@@ -357,7 +357,7 @@ export const digikikify = ({
         configuration.voictentItemLanbe.hasNext() ? 1 : 0,
       );
 
-      while (configuration.voictentItemLanbe.hasNext()) {
+      if (configuration.voictentItemLanbe.hasNext()) {
         configuration.voictentItemLanbe.advance();
       }
     });
