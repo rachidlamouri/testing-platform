@@ -1,6 +1,7 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { DIRECTORY_GEPP, DirectoryVoictent } from '../../file/directory';
-import { COMMON_ATTRIBUTE_BY_KEY } from './commonAttributeByKey';
+import { DirectedGraphStyle } from '../../graph-visualization/directed-graph/directedGraph';
+import { COMMON_ATTRIBUTE_BY_KEY, FONT_SIZE } from './commonAttributeByKey';
 import {
   DIRECTORY_SUBGRAPH_ATTRIBUTE_BY_KEY_GEPP,
   DirectorySubgraphAttributeByKey,
@@ -21,7 +22,8 @@ export const getDirectorySubgraphAttributeByKey = buildEstinant({
     return {
       id: directory.instanceId,
       label: directory.directoryName,
-      fontsize: 20,
+      fontsize: FONT_SIZE.directory,
+      style: DirectedGraphStyle.Rounded,
       ...COMMON_ATTRIBUTE_BY_KEY,
     } satisfies DirectorySubgraphAttributeByKey;
   })

@@ -22,49 +22,58 @@ import { getDirectorySubgraphAttributeByKey } from '../../programmable-units/typ
 import { getFileNodeToParentRelationship } from '../../programmable-units/type-script-file-relationships/graph-element/getFileNodeToParentRelationship';
 import { getDirectorySubgraphToParentRelationship } from '../../programmable-units/type-script-file-relationships/graph-element/getDirectorySubgraphToParentRelationship';
 import { getDirectoryInstanceIdByDirectoryPath } from '../../programmable-units/type-script-file-relationships/getDirectoryInstanceIdByFilePath';
-import { getBoundarySubgraphAttributeByKey } from '../../programmable-units/type-script-file-relationships/graph-element/getBoundarySubgraphAttributeByKey';
 import { getBoundarySubgraphToParentRelationship } from '../../programmable-units/type-script-file-relationships/graph-element/getBoundarySubgraphToParentRelationship';
-import {
-  BOUNDARY_CONFIGURATION_GEPP,
-  createBoundaryConfigurationTuple,
-} from '../../programmable-units/type-script-file-relationships/boundaryConfiguration';
 import { getExternalModuleCollection } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleCollection';
 import { getExternalModuleNodeAttributeByKey } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleNodeAttributeByKey';
 import { getExternalModuleNodeToParentRelationship } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleNodeToParentRelationship';
 import { getExternalModuleInstanceIdBySourcePath } from '../../programmable-units/type-script-file-relationships/getExternalModuleInstanceIdBySourcePath';
+import {
+  BOUNDARY_CONFIGURATION_GEPP,
+  createBoundaryConfiguration,
+} from '../../programmable-units/type-script-file-relationships/graph-element/boundaryConfiguration';
+import { getBoundaryMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getBoundaryMetadata';
+import { getDirectoryMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getDirectoryMetadata';
+import { getFileNodeMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getFileNodeMetadata';
+import { getExternalModuleMetdata } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleMetadata';
+import { getFileNodeMetadataByFilePath } from '../../programmable-units/type-script-file-relationships/graph-element/getFileNodeMetadataByFilePath';
 
 digikikify({
   initialVoictentsByGepp: {
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
       VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
     ],
-    [BOUNDARY_CONFIGURATION_GEPP]: createBoundaryConfigurationTuple([
-      'packages/voictents-and-estinants-engine/src/core',
-      'packages/voictents-and-estinants-engine/src/custom/adapter',
-      'packages/voictents-and-estinants-engine/src/custom/debugger',
-      'packages/voictents-and-estinants-engine/src/custom/programmable-units',
+    [BOUNDARY_CONFIGURATION_GEPP]: [
+      createBoundaryConfiguration([
+        'packages/voictents-and-estinants-engine/src/core',
 
-      'packages/voictents-and-estinants-engine/src/custom/programs/categorize-files',
-      'packages/voictents-and-estinants-engine/src/custom/programs/estinant-builder-example',
-      'packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script',
-      'packages/voictents-and-estinants-engine/src/custom/programs/model-programs',
-      'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships',
-      'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file',
-      'packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render',
-      'packages/voictents-and-estinants-engine/src/custom/programs/test-serialize',
-      'packages/voictents-and-estinants-engine/src/custom/programs/test-typed-datum',
-      'packages/voictents-and-estinants-engine/src/custom/programs/test-voictent-input',
+        'packages/voictents-and-estinants-engine/src/custom/adapter',
+        'packages/voictents-and-estinants-engine/src/custom/debugger',
+        'packages/voictents-and-estinants-engine/src/custom/programmable-units',
 
-      'packages/voictents-and-estinants-engine/src/custom/serialize-test-case',
-      'packages/voictents-and-estinants-engine/src/example-programs',
-      'packages/voictents-and-estinants-engine/src/type-script-adapter',
-      'packages/voictents-and-estinants-engine/src/utilities/directedGraph',
-      'packages/voictents-and-estinants-engine/src/utilities/file',
-      'packages/voictents-and-estinants-engine/src/utilities/semantic-types',
-      'packages/voictents-and-estinants-engine/src/utilities/type-script-ast',
-      'packages/voictents-and-estinants-engine/src/utilities/typed-datum',
-      'packages/voictents-and-estinants-engine/src/utilities',
-    ]),
+        'packages/voictents-and-estinants-engine/src/custom/programs/categorize-files',
+        'packages/voictents-and-estinants-engine/src/custom/programs/estinant-builder-example',
+        'packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script',
+        'packages/voictents-and-estinants-engine/src/custom/programs/model-programs',
+        'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships',
+        'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file',
+        'packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render',
+        'packages/voictents-and-estinants-engine/src/custom/programs/test-serialize',
+        'packages/voictents-and-estinants-engine/src/custom/programs/test-typed-datum',
+        'packages/voictents-and-estinants-engine/src/custom/programs/test-voictent-input',
+
+        'packages/voictents-and-estinants-engine/src/custom/serialize-test-case',
+
+        'packages/voictents-and-estinants-engine/src/example-programs',
+        'packages/voictents-and-estinants-engine/src/type-script-adapter',
+
+        'packages/voictents-and-estinants-engine/src/utilities/directedGraph',
+        'packages/voictents-and-estinants-engine/src/utilities/file',
+        'packages/voictents-and-estinants-engine/src/utilities/semantic-types',
+        'packages/voictents-and-estinants-engine/src/utilities/type-script-ast',
+        'packages/voictents-and-estinants-engine/src/utilities/typed-datum',
+        'packages/voictents-and-estinants-engine/src/utilities',
+      ]),
+    ],
   },
   estinantTuple: [
     enumerateFileSystemObjects,
@@ -82,15 +91,16 @@ digikikify({
     getExternalModuleInstanceIdBySourcePath,
     getGraphMetadataById,
 
-    getBoundarySubgraphAttributeByKey,
-    getDirectorySubgraphAttributeByKey,
-    getFileNodeAttributeByKey,
+    getBoundaryMetadata,
+    getDirectoryMetadata,
+    getFileNodeMetadata,
+    getFileNodeMetadataByFilePath,
+    getExternalModuleMetdata,
 
     getBoundarySubgraphToParentRelationship,
     getDirectorySubgraphToParentRelationship,
     getFileNodeToParentRelationship,
     getExternalModuleNodeToParentRelationship,
-    getExternalModuleNodeAttributeByKey,
     getImportRelationshipEdge,
 
     getRootDirectedGraph,

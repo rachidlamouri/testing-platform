@@ -13,14 +13,13 @@ import { ROOT_DIRECTORY_GEPP, RootDirectoryVoictent } from './rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 import { DIRECTORY_GEPP, DirectoryVoictent } from '../file/directory';
 import {
-  BoundaryConfigurationVoictent,
-  BOUNDARY_CONFIGURATION_GEPP,
-} from './boundaryConfiguration';
-import { EXTERNAL_BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY } from './graph-element/externalBoundarySubgraph';
-import {
   EXTERNAL_MODULE_GEPP,
   ExternalModuleVoictent,
 } from './graph-element/externalModule';
+import {
+  BOUNDARY_METADATA_GEPP,
+  BoundaryMetadataVoictent,
+} from './graph-element/boundaryMetadata';
 
 export const getGraphMetadataById = buildEstinant({
   name: 'getGraphMetadataById',
@@ -28,8 +27,8 @@ export const getGraphMetadataById = buildEstinant({
   .fromGrition<RootDirectoryVoictent>({
     gepp: ROOT_DIRECTORY_GEPP,
   })
-  .andFromOdeshinVoictent<BoundaryConfigurationVoictent>({
-    gepp: BOUNDARY_CONFIGURATION_GEPP,
+  .andFromOdeshinVoictent<BoundaryMetadataVoictent>({
+    gepp: BOUNDARY_METADATA_GEPP,
   })
   .andFromOdeshinVoictent<DirectoryVoictent>({
     gepp: DIRECTORY_GEPP,
@@ -55,37 +54,43 @@ export const getGraphMetadataById = buildEstinant({
       const metadataById: DirectedGraphMetadataById = {};
 
       boundaryList.forEach((boundary) => {
-        metadataById[boundary.instanceId] = {
-          title: posix.basename(boundary.directoryPath),
-          fieldList: [
-            {
-              label: 'Type',
-              value: 'Boundary',
-            },
-            {
-              label: 'Root Directory Path',
-              value: rootDirectory.directoryPath,
-            },
-            {
-              label: 'Directory Path',
-              value: boundary.directoryPath.replace(
-                rootDirectory.directoryPath,
-                '<root>',
-              ),
-            },
-          ],
-        };
+        if (boundary.isInternal) {
+          metadataById[boundary.id] = {
+            title: posix.basename(boundary.directoryPath),
+            fieldList: [
+              {
+                label: 'Type',
+                value: 'Boundary',
+              },
+              {
+                label: 'Root Directory Path',
+                value: rootDirectory.directoryPath,
+              },
+              {
+                label: 'Directory Path',
+                value: boundary.directoryPath.replace(
+                  rootDirectory.directoryPath,
+                  '<root>',
+                ),
+              },
+            ],
+          };
+        } else {
+          metadataById[boundary.id] = {
+            title: boundary.attributeByKey.label,
+            fieldList: [
+              {
+                label: 'Type',
+                value: 'Boundary',
+              },
+              {
+                label: 'Description',
+                value: boundary.description,
+              },
+            ],
+          };
+        }
       });
-
-      metadataById[EXTERNAL_BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY.id] = {
-        title: EXTERNAL_BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY.label,
-        fieldList: [
-          {
-            label: 'Type',
-            value: 'Boundary',
-          },
-        ],
-      };
 
       directoryList.forEach((directory) => {
         metadataById[directory.instanceId] = {

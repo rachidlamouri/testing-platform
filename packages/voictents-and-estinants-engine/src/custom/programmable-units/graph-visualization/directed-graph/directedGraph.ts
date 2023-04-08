@@ -12,9 +12,15 @@ export enum DirectedGraphRankDirection {
   TopBottom = 'TB',
 }
 
+export enum DirectedGraphStyle {
+  Bold = 'bold',
+  Rounded = 'rounded',
+}
+
 type GraphSpecificAttributeByKey = {
   id: string;
   rankdir: DirectedGraphRankDirection;
+  nodesep: number;
 };
 
 type GraphAttributeByKey = Merge<
@@ -24,7 +30,14 @@ type GraphAttributeByKey = Merge<
 
 export type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
 
-type SubgraphAttributeByKey = BaseAttributeByKey;
+type SubgraphSpecificAttributeByKey = {
+  style: DirectedGraphStyle;
+};
+
+type SubgraphAttributeByKey = Merge<
+  BaseAttributeByKey,
+  SubgraphSpecificAttributeByKey
+>;
 
 export type PartialSubgraphAttributeByKey = SetOptional<
   SubgraphAttributeByKey,
