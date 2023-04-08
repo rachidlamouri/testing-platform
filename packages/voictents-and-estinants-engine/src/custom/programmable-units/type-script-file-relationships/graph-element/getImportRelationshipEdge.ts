@@ -4,10 +4,8 @@ import {
   TypeScriptFileVoictent,
 } from '../../type-script-file/typeScriptFile';
 import {
-  LocalTypeScriptFileImport,
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImportListVoictent,
-  TypeScriptFileImportTypeName,
 } from '../../type-script-file/typeScriptFileImportList';
 import {
   IMPORT_RELATIONSHIP_EDGE_GEPP,
@@ -44,13 +42,10 @@ export const getImportRelationshipEdge = buildEstinant({
     const headId = typeScriptFile.instanceId;
 
     const edgeList = importList
-      .filter(
-        (importedItem): importedItem is LocalTypeScriptFileImport =>
-          importedItem.typeName === TypeScriptFileImportTypeName.Local,
-      )
+      .filter((importedItem) => importedItem.isInternal)
       .map<ImportRelationshipEdge>((importedItem) => {
         const tailId =
-          fileInstanceIdByFilePath.get(importedItem.filePath) ??
+          fileInstanceIdByFilePath.get(importedItem.sourcePath) ??
           'TAIL_ID_NOT_FOUND';
         return {
           attributeByKey: {

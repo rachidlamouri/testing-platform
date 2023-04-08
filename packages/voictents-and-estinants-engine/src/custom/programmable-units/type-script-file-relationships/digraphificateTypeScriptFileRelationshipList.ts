@@ -15,7 +15,6 @@ import {
   TypeScriptFileVoictent,
   TYPE_SCRIPT_FILE_GEPP,
 } from '../type-script-file/typeScriptFile';
-import { TypeScriptFileImportTypeName } from '../type-script-file/typeScriptFileImportList';
 import {
   RelationshipNodeMetadata,
   TypeScriptFileRelationshipListVoictent,
@@ -153,10 +152,7 @@ export const digraphificateTypeScriptFileRelationshipList = buildEstinant()
     const externalNodeByNodePath = new Map<string, RelationshipNodeMetadata>();
     allRelationshipList
       .map(({ importedNode }) => importedNode)
-      .filter(
-        (importedNode) =>
-          importedNode.typeName === TypeScriptFileImportTypeName.External,
-      )
+      .filter((importedNode) => !importedNode.isInternal)
       .forEach((importedNode) => {
         const node =
           externalNodeByNodePath.get(importedNode.nodePath) ?? importedNode;

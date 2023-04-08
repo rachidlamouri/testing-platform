@@ -6,8 +6,6 @@ import {
 import {
   TypeScriptFileImportListVoictent,
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-  TypeScriptFileImportTypeName,
-  getSourcePath,
 } from '../type-script-file/typeScriptFileImportList';
 import {
   TypeScriptFileRelationshipListVoictent,
@@ -34,13 +32,13 @@ export const getTypeScriptFileRelationshipList = buildEstinant()
       (importedItem) => {
         return {
           node: {
-            typeName: TypeScriptFileImportTypeName.Local,
+            isInternal: true,
             directoryPath: typeScriptFile.directoryPath,
             nodePath: typeScriptFile.filePath,
           },
           importedNode: {
-            typeName: importedItem.typeName,
-            nodePath: getSourcePath(importedItem),
+            isInternal: importedItem.isInternal,
+            nodePath: importedItem.sourcePath,
           },
         };
       },
