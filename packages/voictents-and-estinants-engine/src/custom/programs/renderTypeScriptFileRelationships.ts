@@ -22,12 +22,34 @@ import { getDirectorySubgraphAttributeByKey } from '../programmable-units/type-s
 import { getFileNodeToParentRelationship } from '../programmable-units/type-script-file-relationships/graph-element/getFileNodeToParentRelationship';
 import { getDirectorySubgraphToParentRelationship } from '../programmable-units/type-script-file-relationships/graph-element/getDirectorySubgraphToParentRelationship';
 import { getDirectoryInstanceIdByDirectoryPath } from '../programmable-units/type-script-file-relationships/getDirectoryInstanceIdByFilePath';
+import { getBoundarySubgraphAttributeByKey } from '../programmable-units/type-script-file-relationships/graph-element/getBoundarySubgraphAttributeByKey';
+import { getBoundarySubgraphToParentRelationship } from '../programmable-units/type-script-file-relationships/graph-element/getBoundarySubgraphToParentRelationship';
+import {
+  BOUNDARY_CONFIGURATION_GEPP,
+  createBoundaryConfigurationTuple,
+} from '../programmable-units/type-script-file-relationships/boundaryConfiguration';
 
 digikikify({
   initialVoictentsByGepp: {
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
       VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
     ],
+    [BOUNDARY_CONFIGURATION_GEPP]: createBoundaryConfigurationTuple([
+      'packages/voictents-and-estinants-engine/src/core',
+      'packages/voictents-and-estinants-engine/src/custom/adapter',
+      'packages/voictents-and-estinants-engine/src/custom/debugger',
+      'packages/voictents-and-estinants-engine/src/custom/programmable-units',
+      'packages/voictents-and-estinants-engine/src/custom/programs',
+      'packages/voictents-and-estinants-engine/src/custom/serialize-test-case',
+      'packages/voictents-and-estinants-engine/src/example-programs',
+      'packages/voictents-and-estinants-engine/src/type-script-adapter',
+      'packages/voictents-and-estinants-engine/src/utilities/directedGraph',
+      'packages/voictents-and-estinants-engine/src/utilities/file',
+      'packages/voictents-and-estinants-engine/src/utilities/semantic-types',
+      'packages/voictents-and-estinants-engine/src/utilities/type-script-ast',
+      'packages/voictents-and-estinants-engine/src/utilities/typed-datum',
+      'packages/voictents-and-estinants-engine/src/utilities',
+    ]),
   },
   estinantTuple: [
     enumerateFileSystemObjects,
@@ -42,9 +64,11 @@ digikikify({
     getTypeScriptFileInstanceIdByFilePath,
     getGraphMetadataById,
 
+    getBoundarySubgraphAttributeByKey,
     getDirectorySubgraphAttributeByKey,
     getFileNodeAttributeByKey,
 
+    getBoundarySubgraphToParentRelationship,
     getDirectorySubgraphToParentRelationship,
     getFileNodeToParentRelationship,
     getImportRelationshipEdge,

@@ -12,12 +12,19 @@ import {
 import { ROOT_DIRECTORY_GEPP, RootDirectoryVoictent } from './rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 import { DIRECTORY_GEPP, DirectoryVoictent } from '../file/directory';
+import {
+  BoundaryConfigurationVoictent,
+  BOUNDARY_CONFIGURATION_GEPP,
+} from './boundaryConfiguration';
 
 export const getGraphMetadataById = buildEstinant({
   name: 'getGraphMetadataById',
 })
   .fromGrition<RootDirectoryVoictent>({
     gepp: ROOT_DIRECTORY_GEPP,
+  })
+  .andFromOdeshinVoictent<BoundaryConfigurationVoictent>({
+    gepp: BOUNDARY_CONFIGURATION_GEPP,
   })
   .andFromOdeshinVoictent<DirectoryVoictent>({
     gepp: DIRECTORY_GEPP,
@@ -32,11 +39,35 @@ export const getGraphMetadataById = buildEstinant({
   .onPinbe(
     (
       rootDirectory,
+      boundaryList,
       directoryList,
       typeScriptFileList,
       // TODO: add more inputs
     ) => {
       const metadataById: DirectedGraphMetadataById = {};
+
+      boundaryList.forEach((boundary) => {
+        metadataById[boundary.instanceId] = {
+          title: posix.basename(boundary.directoryPath),
+          fieldList: [
+            {
+              label: 'Type',
+              value: 'Boundary',
+            },
+            {
+              label: 'Root Directory Path',
+              value: rootDirectory.directoryPath,
+            },
+            {
+              label: 'Directory Path',
+              value: boundary.directoryPath.replace(
+                rootDirectory.directoryPath,
+                '<root>',
+              ),
+            },
+          ],
+        };
+      });
 
       directoryList.forEach((directory) => {
         metadataById[directory.instanceId] = {

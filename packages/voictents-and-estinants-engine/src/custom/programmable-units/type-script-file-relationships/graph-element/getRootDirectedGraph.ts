@@ -13,6 +13,10 @@ import {
 } from '../nodeToGraphRelationship';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import {
+  BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY_GEPP,
+  BoundarySubgraphAttributeByKeyVoictent,
+} from './boundarySubgraphAttributeByKey';
+import {
   DIRECTORY_SUBGRAPH_ATTRIBUTE_BY_KEY_GEPP,
   DirectorySubgraphAttributeByKeyVoictent,
 } from './directorySubgraphAttributeByKey';
@@ -33,7 +37,10 @@ import {
 export const getRootDirectedGraph = buildEstinant({
   name: 'getRootDirectedGraph',
 })
-  .fromOdeshinVoictent<DirectorySubgraphAttributeByKeyVoictent>({
+  .fromOdeshinVoictent<BoundarySubgraphAttributeByKeyVoictent>({
+    gepp: BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY_GEPP,
+  })
+  .andFromOdeshinVoictent<DirectorySubgraphAttributeByKeyVoictent>({
     gepp: DIRECTORY_SUBGRAPH_ATTRIBUTE_BY_KEY_GEPP,
   })
   .andFromOdeshinVoictent<FileNodeAttributeByKeyVoictent>({
@@ -56,12 +63,12 @@ export const getRootDirectedGraph = buildEstinant({
   })
   .onPinbe(
     (
+      boundarySubgraphAttributeByKeyList,
       directorySubgraphAttributeByKeyList,
       fileNodeAttributeByKeyList,
       subgraphToGraphRelationshipList,
       nodeToGraphRelationshipList,
       importRelationshipEdgeList,
-      // TODO: add more inputs
     ) => {
       const root: DirectedGraph = {
         isRoot: true,
@@ -70,6 +77,20 @@ export const getRootDirectedGraph = buildEstinant({
         edgeList: [],
         subgraphList: [],
       };
+
+      const boundarySubgraphList = boundarySubgraphAttributeByKeyList.map(
+        (attributeByKey) => {
+          const subgraph: DirectedSubgraph = {
+            isRoot: false,
+            attributeByKey,
+            nodeList: [],
+            edgeList: [],
+            subgraphList: [],
+          };
+
+          return subgraph;
+        },
+      );
 
       const directorySubgraphList = directorySubgraphAttributeByKeyList.map(
         (attributeByKey) => {
@@ -85,7 +106,11 @@ export const getRootDirectedGraph = buildEstinant({
         },
       );
 
-      const allGraphList = [root, ...directorySubgraphList];
+      const allSubgraphList = [
+        ...boundarySubgraphList,
+        ...directorySubgraphList,
+      ];
+      const allGraphList = [root, ...allSubgraphList];
 
       const nodeList = fileNodeAttributeByKeyList.map((attributeByKey) => {
         const node: DirectedGraphNode = {
@@ -104,10 +129,10 @@ export const getRootDirectedGraph = buildEstinant({
       );
 
       const subgraphById = new Map(
-        directorySubgraphList.map((graph) => [
+        allSubgraphList.map((subgraph) => [
           // TODO: make root graph id required
-          graph.attributeByKey.id,
-          graph,
+          subgraph.attributeByKey.id,
+          subgraph,
         ]),
       );
 
@@ -156,7 +181,6 @@ export const getRootDirectedGraph = buildEstinant({
       });
 
       root.edgeList = importRelationshipEdgeList;
-      root.subgraphList = directorySubgraphList;
 
       return {
         [DIRECTED_GRAPH_GEPP]: {
