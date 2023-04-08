@@ -29,6 +29,10 @@ import {
   RightInputHubblepupTupleAppreffingeBuilderParent,
 } from './rightInputHubblepupTupleAppreffingeBuilder';
 import {
+  buildRightInputOdeshinVoictentAppreffingeBuilder,
+  RightInputOdeshinVoictentAppreffingeBuilderParent,
+} from './rightInputOdeshinVoictentAppreffingeBuilder';
+import {
   buildRightInputVoictentAppreffingeBuilder,
   RightInputVoictentAppreffingeBuilderParent,
 } from './rightInputVoictentAppreffingeBuilder';
@@ -55,6 +59,10 @@ export type LeftInputHubblepupAppreffingeBuilder = <
 > &
   RightInputHubblepupTupleAppreffingeBuilderParent<
     LeftHubblepupVicken<TInputVoictent>,
+    RightInputVickenTuple
+  > &
+  RightInputOdeshinVoictentAppreffingeBuilderParent<
+    LeftVicken<TInputVoictent>,
     RightInputVickenTuple
   > &
   RightInputVoictentAppreffingeBuilderParent<
@@ -107,6 +115,11 @@ export const buildLeftInputHubblepupAppreffingeBuilder = (
           LeftHubblepupVicken<TInputVoictent>,
           RightInputVickenTuple
         >(nextContext),
+        andFromOdeshinVoictent:
+          buildRightInputOdeshinVoictentAppreffingeBuilder<
+            LeftHubblepupVicken<TInputVoictent>,
+            RightInputVickenTuple
+          >(nextContext),
         andFromVoictent: buildRightInputVoictentAppreffingeBuilder<
           LeftHubblepupVicken<TInputVoictent>,
           RightInputVickenTuple
