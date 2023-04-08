@@ -7,7 +7,9 @@ import {
 } from './directoryInstanceIdByDirectoryPath';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 
-export const getDirectoryInstanceIdByDirectoryPath = buildEstinant()
+export const getDirectoryInstanceIdByDirectoryPath = buildEstinant({
+  name: 'getDirectoryInstanceIdByDirectoryPath',
+})
   .fromOdeshinVoictent<DirectoryVoictent>({
     gepp: DIRECTORY_GEPP,
   })

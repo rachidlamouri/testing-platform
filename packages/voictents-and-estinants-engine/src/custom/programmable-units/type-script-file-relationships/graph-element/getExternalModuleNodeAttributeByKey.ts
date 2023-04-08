@@ -7,7 +7,9 @@ import {
   FileNodeAttributeByKeyVoictent,
 } from './fileNodeAttributeByKey';
 
-export const getExternalModuleNodeAttributeByKey = buildEstinant()
+export const getExternalModuleNodeAttributeByKey = buildEstinant({
+  name: 'getExternalModuleNodeAttributeByKey',
+})
   .fromGrition<ExternalModuleVoictent>({
     gepp: EXTERNAL_MODULE_GEPP,
   })

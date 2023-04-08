@@ -12,7 +12,9 @@ import {
   COMMON_ATTRIBUTE_BY_KEY,
 } from './commonAttributeByKey';
 
-export const getBoundarySubgraphAttributeByKey = buildEstinant()
+export const getBoundarySubgraphAttributeByKey = buildEstinant({
+  name: 'getBoundarySubgraphAttributeByKey',
+})
   .fromGrition<BoundaryConfigurationVoictent>({
     gepp: BOUNDARY_CONFIGURATION_GEPP,
   })

@@ -14,7 +14,9 @@ import {
 } from '../nodeToGraphRelationship';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 
-export const getFileNodeToParentRelationship = buildEstinant()
+export const getFileNodeToParentRelationship = buildEstinant({
+  name: 'getFileNodeToParentRelationship',
+})
   .fromHubblepup<TypeScriptFileVoictent>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })

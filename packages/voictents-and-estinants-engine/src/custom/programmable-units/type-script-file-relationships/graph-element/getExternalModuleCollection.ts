@@ -10,7 +10,9 @@ import {
   ExternalModuleVoictent,
 } from './externalModule';
 
-export const getExternalModuleCollection = buildEstinant()
+export const getExternalModuleCollection = buildEstinant({
+  name: 'getExternalModuleCollection',
+})
   .fromOdeshinVoictent<TypeScriptFileImportListVoictent>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })

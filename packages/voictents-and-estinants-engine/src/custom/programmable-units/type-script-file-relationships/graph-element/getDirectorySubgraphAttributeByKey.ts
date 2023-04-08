@@ -7,7 +7,9 @@ import {
   DirectorySubgraphAttributeByKeyVoictent,
 } from './directorySubgraphAttributeByKey';
 
-export const getDirectorySubgraphAttributeByKey = buildEstinant()
+export const getDirectorySubgraphAttributeByKey = buildEstinant({
+  name: 'getDirectorySubgraphAttributeByKey',
+})
   .fromGrition<DirectoryVoictent>({
     gepp: DIRECTORY_GEPP,
   })

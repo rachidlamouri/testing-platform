@@ -4,7 +4,9 @@ import { GraphvizCodeVoictent, GRAPHVIZ_CODE_GEPP } from './graphvizCode';
 import { SvgDocumentVoictent, SVG_DOCUMENT_GEPP } from './svgDocument';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 
-export const renderGraphvizCodeToSvgDocument = buildEstinant()
+export const renderGraphvizCodeToSvgDocument = buildEstinant({
+  name: 'renderGraphvizCodeToSvgDocument',
+})
   .fromGrition<GraphvizCodeVoictent>({
     gepp: GRAPHVIZ_CODE_GEPP,
   })

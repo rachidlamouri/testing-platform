@@ -14,7 +14,9 @@ import { SvgDocumentVoictent, SVG_DOCUMENT_GEPP } from './svgDocument';
 const INTERACTIVE_HTML_FILE_PATH =
   'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/interactiveSvg.html';
 
-export const addInteractivityToSvgDocument = buildEstinant()
+export const addInteractivityToSvgDocument = buildEstinant({
+  name: 'addInteractivityToSvgDocument',
+})
   .fromHubblepup<SvgDocumentVoictent>({
     gepp: SVG_DOCUMENT_GEPP,
   })

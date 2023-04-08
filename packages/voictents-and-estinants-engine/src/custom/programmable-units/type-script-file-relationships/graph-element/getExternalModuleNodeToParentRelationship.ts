@@ -6,7 +6,9 @@ import {
 import { EXTERNAL_BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY } from './externalBoundarySubgraph';
 import { EXTERNAL_MODULE_GEPP, ExternalModuleVoictent } from './externalModule';
 
-export const getExternalModuleNodeToParentRelationship = buildEstinant()
+export const getExternalModuleNodeToParentRelationship = buildEstinant({
+  name: 'getExternalModuleNodeToParentRelationship',
+})
   .fromGrition<ExternalModuleVoictent>({
     gepp: EXTERNAL_MODULE_GEPP,
   })

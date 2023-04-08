@@ -6,7 +6,9 @@ import {
 import { getGraphvizCode } from './directed-graph/getGraphvizCode';
 import { GraphvizCodeVoictent, GRAPHVIZ_CODE_GEPP } from './graphvizCode';
 
-export const encodeDirectedGraphAsGraphvizCode = buildEstinant()
+export const encodeDirectedGraphAsGraphvizCode = buildEstinant({
+  name: 'encodeDirectedGraphAsGraphvizCode',
+})
   .fromGrition<DirectedGraphVoictent>({
     gepp: DIRECTED_GRAPH_GEPP,
   })

@@ -10,7 +10,9 @@ import {
   FileNodeAttributeByKeyVoictent,
 } from './fileNodeAttributeByKey';
 
-export const getFileNodeAttributeByKey = buildEstinant()
+export const getFileNodeAttributeByKey = buildEstinant({
+  name: 'getFileNodeAttributeByKey',
+})
   .fromGrition<TypeScriptFileVoictent>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
