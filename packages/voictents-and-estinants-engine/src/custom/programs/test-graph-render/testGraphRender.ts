@@ -1,14 +1,14 @@
-import { digikikify } from '../../type-script-adapter/digikikify';
-import { buildQuirmDebugger } from '../debugger/quirmDebugger';
-import { categorizeFiles } from '../programmable-units/file/categorizeFiles';
-import { enumerateFileSystemObjects } from '../programmable-units/file/enumerateFileSystemObjects';
-import { FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP } from '../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import { DIRECTED_GRAPH_GEPP } from '../programmable-units/graph-visualization/directed-graph/directedGraph';
-import { encodeDirectedGraphAsGraphvizCode } from '../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
-import { renderGraphvizCodeToSvgDocument } from '../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
-import { addInteractivityToSvgDocument } from '../programmable-units/graph-visualization/addInteractivityToSvgDocument';
-import { DIRECTED_GRAPH_METADATA_BY_ID_GEPP } from '../programmable-units/graph-visualization/directedGraphMetadataById';
-import { LabelLocation } from '../programmable-units/graph-visualization/directed-graph/attribute';
+import { digikikify } from '../../../type-script-adapter/digikikify';
+import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
+import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
+import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
+import { FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
+import { DIRECTED_GRAPH_GEPP } from '../../programmable-units/graph-visualization/directed-graph/directedGraph';
+import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
+import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
+import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/addInteractivityToSvgDocument';
+import { DIRECTED_GRAPH_METADATA_BY_ID_GEPP } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
+import { LabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attribute';
 
 digikikify({
   initialVoictentsByGepp: {
