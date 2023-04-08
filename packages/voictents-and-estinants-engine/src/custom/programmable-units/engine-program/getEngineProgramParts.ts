@@ -16,10 +16,8 @@ import {
   TYPE_SCRIPT_FILE_GEPP,
 } from '../type-script-file/typeScriptFile';
 import {
-  LocalTypeScriptFileImport,
   TypeScriptFileImportListVoictent,
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-  TypeScriptFileImportTypeName,
   TypeScriptFileImport,
 } from '../type-script-file/typeScriptFileImportList';
 import {
@@ -57,7 +55,7 @@ const isEngineCallExpressionStatement = (
 
 type ImportedEstinant = {
   identifier: string;
-  fileImport: LocalTypeScriptFileImport;
+  fileImport: TypeScriptFileImport;
 };
 
 export const getEngineProgramParts = buildEstinant()
@@ -94,8 +92,8 @@ export const getEngineProgramParts = buildEstinant()
 
       const hasEngineFunctionImport = importList.some(
         (fileImport) =>
-          fileImport.typeName === TypeScriptFileImportTypeName.Local &&
-          fileImport.filePath === engineFunctionConfiguration.filePath &&
+          fileImport.isInternal &&
+          fileImport.sourcePath === engineFunctionConfiguration.filePath &&
           fileImport.specifierList.some(
             (specifier) =>
               specifier === engineFunctionConfiguration.exportedIdentifier,
@@ -163,8 +161,7 @@ export const getEngineProgramParts = buildEstinant()
         .filter(
           (importedEstinant): importedEstinant is ImportedEstinant =>
             importedEstinant.fileImport !== undefined &&
-            importedEstinant.fileImport.typeName ===
-              TypeScriptFileImportTypeName.Local,
+            importedEstinant.fileImport.isInternal,
         );
 
       const programName = typeScriptFile.inMemoryFileName.kebabCase;
@@ -178,7 +175,7 @@ export const getEngineProgramParts = buildEstinant()
           grition: {
             programName,
             estinantName: importedEstinant.identifier,
-            estinantFilePath: importedEstinant.fileImport.filePath,
+            estinantFilePath: importedEstinant.fileImport.sourcePath,
             exportedIdentifierName: importedEstinant.identifier,
           },
         }));

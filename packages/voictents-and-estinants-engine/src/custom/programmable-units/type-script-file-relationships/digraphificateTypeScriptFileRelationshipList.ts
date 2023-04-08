@@ -15,12 +15,16 @@ import {
   TypeScriptFileVoictent,
   TYPE_SCRIPT_FILE_GEPP,
 } from '../type-script-file/typeScriptFile';
-import { TypeScriptFileImportTypeName } from '../type-script-file/typeScriptFileImportList';
 import {
   RelationshipNodeMetadata,
   TypeScriptFileRelationshipListVoictent,
   TYPE_SCRIPT_FILE_RELATIONSHIP_LIST_GEPP,
 } from './typeScriptFileRelationshipList';
+import {
+  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+  DirectedGraphMetadataByIdVoictent,
+} from '../graph-visualization/directedGraphMetadataById';
+import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 
 export const digraphificateTypeScriptFileRelationshipList = buildEstinant()
   .fromOdeshinVoictent<TypeScriptFileRelationshipListVoictent>({
@@ -35,6 +39,9 @@ export const digraphificateTypeScriptFileRelationshipList = buildEstinant()
   })
   .toHubblepup<DirectedGraphVoictent>({
     gepp: DIRECTED_GRAPH_GEPP,
+  })
+  .toHubblepup<DirectedGraphMetadataByIdVoictent>({
+    gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   })
   .onPinbe((relationshipListTuple, directoryTuple, typeScriptFileTuple) => {
     const allRelationshipList = relationshipListTuple.flat();
@@ -145,10 +152,7 @@ export const digraphificateTypeScriptFileRelationshipList = buildEstinant()
     const externalNodeByNodePath = new Map<string, RelationshipNodeMetadata>();
     allRelationshipList
       .map(({ importedNode }) => importedNode)
-      .filter(
-        (importedNode) =>
-          importedNode.typeName === TypeScriptFileImportTypeName.External,
-      )
+      .filter((importedNode) => !importedNode.isInternal)
       .forEach((importedNode) => {
         const node =
           externalNodeByNodePath.get(importedNode.nodePath) ?? importedNode;
@@ -178,8 +182,14 @@ export const digraphificateTypeScriptFileRelationshipList = buildEstinant()
     rootGraph.subgraphList.unshift(externalSubgraph);
 
     return {
-      zorn: 'type-script-file-relationship-graph',
-      grition: rootGraph,
+      [DIRECTED_GRAPH_GEPP]: {
+        zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
+        grition: rootGraph,
+      },
+      [DIRECTED_GRAPH_METADATA_BY_ID_GEPP]: {
+        zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
+        grition: {},
+      },
     };
   })
   .assemble();

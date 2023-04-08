@@ -23,8 +23,10 @@ const getAttributeStatementList = (
   return Object.entries(node.attributeByKey)
     .filter(([, value]) => value !== undefined)
     .map(([key, value]): AttributeStatement => {
+      const textValue = `${value}`;
+
       const quotedKey = quote(key);
-      const quotedValue = key === 'id' ? quoteId(value) : quote(value);
+      const quotedValue = key === 'id' ? quoteId(textValue) : quote(textValue);
 
       return `${quotedKey}=${quotedValue};`;
     });
@@ -71,7 +73,11 @@ const getDirectedGraphCodeLineList = (
 ): string[] => {
   const graphKeyword = graph.isRoot ? 'digraph' : 'subgraph';
 
-  const quotedId = quoteId(graph.attributeByKey.id ?? '');
+  const idPrefix = graph.isRoot ? '' : 'cluster_';
+  const idSuffix = graph.isRoot ? '' : graph.attributeByKey.id;
+  const id = `${idPrefix}${idSuffix}`;
+
+  const quotedId = quoteId(id);
 
   const attributeStatementList = getAttributeStatementList(graph).map(
     (line) => {

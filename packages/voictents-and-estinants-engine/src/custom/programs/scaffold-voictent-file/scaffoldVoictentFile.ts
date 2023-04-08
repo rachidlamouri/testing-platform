@@ -1,7 +1,7 @@
 import fs from 'fs';
-import { digikikify } from '../../core/digikikify';
-import { buildDefaultHandler } from '../debugger/quirmDebugger';
-import { getFileMetadata } from '../programmable-units/file/getFileMetadata';
+import { digikikify } from '../../../core/digikikify';
+import { buildDefaultHandler } from '../../debugger/quirmDebugger';
+import { getFileMetadata } from '../../programmable-units/file/getFileMetadata';
 
 const [filePath] = process.argv.slice(2);
 

@@ -3,6 +3,8 @@ import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
 
 export type Directory = {
+  instanceId: string;
+  directoryName: string;
   directoryPath: string;
   directoryPathPartList: string[];
 };

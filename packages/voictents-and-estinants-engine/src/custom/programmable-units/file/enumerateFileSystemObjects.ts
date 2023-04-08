@@ -1,3 +1,4 @@
+import * as uuid from 'uuid';
 import {
   FileSystemNodeMetadata,
   getNestedFileSystemNodeMetadataList,
@@ -79,11 +80,17 @@ export const enumerateFileSystemObjects = buildEstinant({
 
     const directoryOutputTuple = directoryMetadataList.map<DirectoryOdeshin>(
       ({ nodePath }) => {
+        const directoryPathPartList = nodePath.split('/');
+        const directoryName =
+          directoryPathPartList[directoryPathPartList.length - 1];
+
         return {
           zorn: nodePath,
           grition: {
+            instanceId: uuid.v4(),
+            directoryName,
             directoryPath: nodePath,
-            directoryPathPartList: nodePath.split('/'),
+            directoryPathPartList,
           },
         };
       },
@@ -99,6 +106,7 @@ export const enumerateFileSystemObjects = buildEstinant({
         } = getFileMetadata(nodePath);
 
         const grition: FileGrition = {
+          instanceId: uuid.v4(),
           filePath: nodePath,
           directoryPath,
           onDiskFileName: {

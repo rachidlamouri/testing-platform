@@ -8,6 +8,8 @@ import { AttributeByKey as BaseAttributeByKey } from './attribute';
 
 export enum DirectedGraphRankDirection {
   LeftRight = 'LR',
+  RightLeft = 'RL',
+  TopBottom = 'TB',
 }
 
 type GraphSpecificAttributeByKey = {
@@ -20,18 +22,11 @@ type GraphAttributeByKey = Merge<
   GraphSpecificAttributeByKey
 >;
 
-type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
+export type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
 
-type SubgraphSpecificAttributeByKey = {
-  id: `cluster_${string}`;
-};
+type SubgraphAttributeByKey = BaseAttributeByKey;
 
-type SubgraphAttributeByKey = Merge<
-  BaseAttributeByKey,
-  SubgraphSpecificAttributeByKey
->;
-
-type PartialSubgraphAttributeByKey = SetOptional<
+export type PartialSubgraphAttributeByKey = SetOptional<
   SubgraphAttributeByKey,
   Exclude<keyof SubgraphAttributeByKey, 'id'>
 >;

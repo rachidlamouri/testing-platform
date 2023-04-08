@@ -10,9 +10,6 @@ import {
   TypeScriptFileImportListVoictent,
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImport,
-  TypeScriptFileImportTypeName,
-  LocalTypeScriptFileImport,
-  ExternalTypeScriptFileImport,
 } from './typeScriptFileImportList';
 
 export const getTypeScriptFileImportList = buildEstinant()
@@ -47,17 +44,17 @@ export const getTypeScriptFileImportList = buildEstinant()
           );
 
           return {
-            typeName: TypeScriptFileImportTypeName.Local,
-            filePath: sourceFilePath,
+            isInternal: true,
+            sourcePath: sourceFilePath,
             specifierList,
-          } satisfies LocalTypeScriptFileImport;
+          };
         }
 
         return {
-          typeName: TypeScriptFileImportTypeName.External,
-          moduleName: sourcePath,
+          isInternal: false,
+          sourcePath,
           specifierList,
-        } satisfies ExternalTypeScriptFileImport;
+        };
       });
 
     return importList;

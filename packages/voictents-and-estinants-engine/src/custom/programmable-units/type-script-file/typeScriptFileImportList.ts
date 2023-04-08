@@ -1,36 +1,12 @@
-import { Merge } from '../../../utilities/merge';
 import { Grition } from '../../adapter/grition';
 import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
 
-export enum TypeScriptFileImportTypeName {
-  Local = 'Local',
-  External = 'External',
-}
-
-type BaseTypeScriptFileImport<
-  TTypeName extends TypeScriptFileImportTypeName,
-  TProperties extends object,
-> = Merge<{ typeName: TTypeName; specifierList: string[] }, TProperties>;
-
-export type LocalTypeScriptFileImport = BaseTypeScriptFileImport<
-  TypeScriptFileImportTypeName.Local,
-  { filePath: string }
->;
-
-export type ExternalTypeScriptFileImport = BaseTypeScriptFileImport<
-  TypeScriptFileImportTypeName.External,
-  { moduleName: string }
->;
-
-export type TypeScriptFileImport =
-  | LocalTypeScriptFileImport
-  | ExternalTypeScriptFileImport;
-
-export const getSourcePath = (importItem: TypeScriptFileImport): string =>
-  importItem.typeName === TypeScriptFileImportTypeName.Local
-    ? importItem.filePath
-    : importItem.moduleName;
+export type TypeScriptFileImport = {
+  isInternal: boolean;
+  sourcePath: string;
+  specifierList: string[];
+};
 
 export type TypeScriptFileImportList = TypeScriptFileImport[];
 
