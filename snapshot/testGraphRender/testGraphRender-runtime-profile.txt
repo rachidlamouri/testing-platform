@@ -13,7 +13,7 @@ Collections:
       C: |-X-------------|
 
     file
-      I: |-X-------------|
+      I: |-XXXXXXXXXXXXX-|
       C: |--X------------|
 
     graphviz-code
@@ -21,7 +21,7 @@ Collections:
       C: |--X------------|
 
     directory
-      I: |-X-------------|
+      I: |-XX------------|
       C: |--X------------|
 
     svg-document

@@ -1,19 +1,19 @@
 Collections:
 
     input-a
-      I: |X--|
+      I: |XX-|
       C: |-X-|
 
     input-b
-      I: |X--|
+      I: |XX-|
       C: |-X-|
 
     input-c
-      I: |X--|
+      I: |XX-|
       C: |-X-|
 
     input-d
-      I: |X--|
+      I: |XX-|
       C: |-X-|
 
     output

@@ -1,7 +1,7 @@
 Collections:
 
     initial-input
-      I: |X----|
+      I: |XXXX-|
       C: |-X---|
 
     a
