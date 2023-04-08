@@ -25,7 +25,7 @@ export type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
 
 type SubgraphAttributeByKey = BaseAttributeByKey;
 
-type PartialSubgraphAttributeByKey = SetOptional<
+export type PartialSubgraphAttributeByKey = SetOptional<
   SubgraphAttributeByKey,
   Exclude<keyof SubgraphAttributeByKey, 'id'>
 >;

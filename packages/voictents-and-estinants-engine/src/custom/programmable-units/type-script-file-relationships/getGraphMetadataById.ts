@@ -16,6 +16,11 @@ import {
   BoundaryConfigurationVoictent,
   BOUNDARY_CONFIGURATION_GEPP,
 } from './boundaryConfiguration';
+import { EXTERNAL_BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY } from './graph-element/externalBoundarySubgraph';
+import {
+  EXTERNAL_MODULE_GEPP,
+  ExternalModuleVoictent,
+} from './graph-element/externalModule';
 
 export const getGraphMetadataById = buildEstinant({
   name: 'getGraphMetadataById',
@@ -32,6 +37,9 @@ export const getGraphMetadataById = buildEstinant({
   .andFromOdeshinVoictent<TypeScriptFileVoictent>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
+  .andFromOdeshinVoictent<ExternalModuleVoictent>({
+    gepp: EXTERNAL_MODULE_GEPP,
+  })
   .toGrition<DirectedGraphMetadataByIdVoictent>({
     gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
     getZorn: () => TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
@@ -42,7 +50,7 @@ export const getGraphMetadataById = buildEstinant({
       boundaryList,
       directoryList,
       typeScriptFileList,
-      // TODO: add more inputs
+      externalModuleList,
     ) => {
       const metadataById: DirectedGraphMetadataById = {};
 
@@ -68,6 +76,16 @@ export const getGraphMetadataById = buildEstinant({
           ],
         };
       });
+
+      metadataById[EXTERNAL_BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY.id] = {
+        title: EXTERNAL_BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY.label,
+        fieldList: [
+          {
+            label: 'Type',
+            value: 'Boundary',
+          },
+        ],
+      };
 
       directoryList.forEach((directory) => {
         metadataById[directory.instanceId] = {
@@ -116,6 +134,18 @@ export const getGraphMetadataById = buildEstinant({
                 rootDirectory.directoryPath,
                 '<root>',
               ),
+            },
+          ],
+        };
+      });
+
+      externalModuleList.forEach((externalModule) => {
+        metadataById[externalModule.instanceId] = {
+          title: externalModule.sourcePath,
+          fieldList: [
+            {
+              label: 'Type',
+              value: 'External Module',
             },
           ],
         };

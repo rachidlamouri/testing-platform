@@ -21,6 +21,10 @@ import {
   DirectorySubgraphAttributeByKeyVoictent,
 } from './directorySubgraphAttributeByKey';
 import {
+  EXTERNAL_BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY,
+  EXTERNAL_BOUNDARY_SUBGRAPH_TO_GRAPH_RELATIONSHIP,
+} from './externalBoundarySubgraph';
+import {
   FileNodeAttributeByKeyVoictent,
   FILE_NODE_ATTRIBUTE_BY_KEY_GEPP,
 } from './fileNodeAttributeByKey';
@@ -70,6 +74,16 @@ export const getRootDirectedGraph = buildEstinant({
       nodeToGraphRelationshipList,
       importRelationshipEdgeList,
     ) => {
+      const allBoundarySubgraphAttributeByKeyList = [
+        ...boundarySubgraphAttributeByKeyList,
+        EXTERNAL_BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY,
+      ];
+
+      const allSubgraphToGraphRelationshipList = [
+        ...subgraphToGraphRelationshipList,
+        EXTERNAL_BOUNDARY_SUBGRAPH_TO_GRAPH_RELATIONSHIP,
+      ];
+
       const root: DirectedGraph = {
         isRoot: true,
         attributeByKey: ROOT_DIRECTED_GRAPH_ATTRIBUTE_BY_KEY,
@@ -78,7 +92,7 @@ export const getRootDirectedGraph = buildEstinant({
         subgraphList: [],
       };
 
-      const boundarySubgraphList = boundarySubgraphAttributeByKeyList.map(
+      const boundarySubgraphList = allBoundarySubgraphAttributeByKeyList.map(
         (attributeByKey) => {
           const subgraph: DirectedSubgraph = {
             isRoot: false,
@@ -142,7 +156,7 @@ export const getRootDirectedGraph = buildEstinant({
 
       const errorList: ErrorOdeshin[] = [];
 
-      subgraphToGraphRelationshipList.forEach((relationship, index) => {
+      allSubgraphToGraphRelationshipList.forEach((relationship, index) => {
         const parentGraph = graphById.get(relationship.parentId);
         const childGraph = subgraphById.get(relationship.childId);
 

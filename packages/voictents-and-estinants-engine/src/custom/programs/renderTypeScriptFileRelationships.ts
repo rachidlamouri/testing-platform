@@ -28,6 +28,10 @@ import {
   BOUNDARY_CONFIGURATION_GEPP,
   createBoundaryConfigurationTuple,
 } from '../programmable-units/type-script-file-relationships/boundaryConfiguration';
+import { getExternalModuleCollection } from '../programmable-units/type-script-file-relationships/graph-element/getExternalModuleCollection';
+import { getExternalModuleNodeAttributeByKey } from '../programmable-units/type-script-file-relationships/graph-element/getExternalModuleNodeAttributeByKey';
+import { getExternalModuleNodeToParentRelationship } from '../programmable-units/type-script-file-relationships/graph-element/getExternalModuleNodeToParentRelationship';
+import { getExternalModuleInstanceIdBySourcePath } from '../programmable-units/type-script-file-relationships/getExternalModuleInstanceIdBySourcePath';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -59,9 +63,12 @@ digikikify({
     parseTypeScriptFile,
     getTypeScriptFileImportList,
 
+    getExternalModuleCollection,
+
     getRootDirectory,
     getDirectoryInstanceIdByDirectoryPath,
     getTypeScriptFileInstanceIdByFilePath,
+    getExternalModuleInstanceIdBySourcePath,
     getGraphMetadataById,
 
     getBoundarySubgraphAttributeByKey,
@@ -71,6 +78,8 @@ digikikify({
     getBoundarySubgraphToParentRelationship,
     getDirectorySubgraphToParentRelationship,
     getFileNodeToParentRelationship,
+    getExternalModuleNodeToParentRelationship,
+    getExternalModuleNodeAttributeByKey,
     getImportRelationshipEdge,
 
     getRootDirectedGraph,

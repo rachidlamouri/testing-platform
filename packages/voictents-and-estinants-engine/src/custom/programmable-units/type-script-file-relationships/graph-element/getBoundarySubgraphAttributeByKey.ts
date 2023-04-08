@@ -7,7 +7,10 @@ import {
   BOUNDARY_SUBGRAPH_ATTRIBUTE_BY_KEY_GEPP,
   BoundarySubgraphAttributeByKeyVoictent,
 } from './boundarySubgraphAttributeByKey';
-import { COMMON_ATTRIBUTE_BY_KEY } from './commonAttributeByKey';
+import {
+  BOUNDARY_FONT_SIZE,
+  COMMON_ATTRIBUTE_BY_KEY,
+} from './commonAttributeByKey';
 
 export const getBoundarySubgraphAttributeByKey = buildEstinant()
   .fromGrition<BoundaryConfigurationVoictent>({
@@ -21,7 +24,7 @@ export const getBoundarySubgraphAttributeByKey = buildEstinant()
     return {
       id: boundary.instanceId,
       label: boundary.directoryPath,
-      fontsize: 36,
+      fontsize: BOUNDARY_FONT_SIZE,
       ...COMMON_ATTRIBUTE_BY_KEY,
     };
   })
