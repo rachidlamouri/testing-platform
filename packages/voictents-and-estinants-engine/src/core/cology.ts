@@ -1,5 +1,5 @@
 import { Zorn } from '../utilities/semantic-types/zorn';
-import { Gepp } from './gepp';
+import { Dreanor, LeftDreanor } from './dreanor';
 import { Hubblepup, HubblepupTuple } from './hubblepup';
 import { Mabz } from './mabz';
 
@@ -8,22 +8,22 @@ import { Mabz } from './mabz';
  * This helps the engine find all of the right inputs associated with the left input
  */
 export type Cology = {
-  leftGepp: Gepp;
+  leftDreanor: LeftDreanor;
   leftInput: Hubblepup | HubblepupTuple;
   mabz: Mabz;
 };
 
-export type CologyEntry = [Gepp, Zorn];
+export type CologyEntry = [Dreanor, Zorn];
 
 export const getCologyEntryList = (cology: Cology): CologyEntry[] => {
-  const leftEntry: CologyEntry = [cology.leftGepp, cology.leftInput];
+  const leftEntry: CologyEntry = [cology.leftDreanor, cology.leftInput];
 
   const nestedRightEntryList = [...cology.mabz.entries()];
 
   const flattenedRightEntryList = nestedRightEntryList.flatMap<CologyEntry>(
-    ([gepp, zornTuple]) => {
+    ([rightDreanor, zornTuple]) => {
       return zornTuple.map<CologyEntry>((zorn) => {
-        return [gepp, zorn];
+        return [rightDreanor, zorn];
       });
     },
   );

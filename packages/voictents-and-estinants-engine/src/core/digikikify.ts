@@ -191,23 +191,24 @@ export const digikikify = ({
                 zornTuple = rightDreanor.framate(leftInput);
               }
 
-              return [rightDreanor.gepp, zornTuple];
+              return [rightDreanor, zornTuple];
             },
           );
 
           const cology: Cology = {
-            leftGepp: dreanor.gepp,
+            leftDreanor: dreanor,
             leftInput,
             mabz: new Mabz(mabzEntryList),
           };
 
-          getCologyEntryList(cology).forEach(([gepp, zorn]) => {
-            const ajorken = platomity.procody.get(gepp) ?? new Ajorken();
+          getCologyEntryList(cology).forEach(([cologyDreanor, zorn]) => {
+            const ajorken =
+              platomity.procody.get(cologyDreanor.gepp) ?? new Ajorken();
             const cologySet = ajorken.get(zorn) ?? new CologySet();
 
             cologySet.add(cology);
             ajorken.set(zorn, cologySet);
-            platomity.procody.set(gepp, ajorken);
+            platomity.procody.set(cologyDreanor.gepp, ajorken);
           });
 
           touchedCologySet.add(cology);
@@ -241,7 +242,7 @@ export const digikikify = ({
             return rightDreanor.isReady;
           }
 
-          const zornTuple = cology.mabz.get(rightDreanor.gepp) as ZornTuple;
+          const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
           return zornTuple.every((zorn) => rightDreanor.prected.has(zorn));
         },
       );
@@ -273,7 +274,7 @@ export const digikikify = ({
           return rightInput;
         }
 
-        const zornTuple = cology.mabz.get(rightDreanor.gepp) as ZornTuple;
+        const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
         const rightInput = zornTuple.map(
           (zorn) => rightDreanor.prected.get(zorn) as Hubblepup,
         );
