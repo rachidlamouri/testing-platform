@@ -39,7 +39,9 @@ export type ProgramBodyDeclarationsByIdentifierVoictent = Voictent<
   ProgramBodyDeclarationsByIdentifierOdeshin
 >;
 
-export const getProgramBodyDeclarationsByIdentifier = buildEstinant()
+export const getProgramBodyDeclarationsByIdentifier = buildEstinant({
+  name: 'getProgramBodyDeclarationsByIdentifier',
+})
   .fromGrition<ParsedTypeScriptFileVoictent>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })

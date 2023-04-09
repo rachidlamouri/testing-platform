@@ -16,7 +16,9 @@ import {
   ESTINANT_TREE_NODE_GEPP,
 } from './estinantTreeNode';
 
-export const constructEstinantTreeNode = buildEstinant()
+export const constructEstinantTreeNode = buildEstinant({
+  name: 'constructEstinantTreeNode',
+})
   .fromGrition<EstinantInputOutputParentVoictent>({
     gepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
   })

@@ -8,7 +8,9 @@ import {
   FilteredEngineProgramVoictent,
 } from './filteredEngineProgram';
 
-export const constructSnapshotScript = buildEstinant()
+export const constructSnapshotScript = buildEstinant({
+  name: 'constructSnapshotScript',
+})
   .fromOdeshinVoictent<FilteredEngineProgramVoictent>({
     gepp: FILTERED_ENGINE_PROGRAM_GEPP,
   })

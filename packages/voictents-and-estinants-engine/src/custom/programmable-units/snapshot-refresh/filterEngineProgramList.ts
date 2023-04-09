@@ -13,7 +13,9 @@ const IGNORED_FILE_PATH_SET = new Set([
   'packages/voictents-and-estinants-engine/src/custom/programs/test-serialize/testSerialize.ts',
 ]);
 
-export const filterEngineProgramList = buildEstinant()
+export const filterEngineProgramList = buildEstinant({
+  name: 'filterEngineProgramList',
+})
   .fromOdeshinVoictent<EngineProgramVoictent>({
     gepp: ENGINE_PROGRAM_GEPP,
   })

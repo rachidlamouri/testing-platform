@@ -36,7 +36,9 @@ type IdentifiableRenderableNode = {
   right: IdentifiableEntityNode;
 };
 
-export const constructEngineProgramTreeOutputFile = buildEstinant()
+export const constructEngineProgramTreeOutputFile = buildEstinant({
+  name: 'constructEngineProgramTreeOutputFile',
+})
   .fromGrition<EngineProgramTreeNodeVoictent>({
     gepp: ENGINE_PROGRAM_TREE_NODE_GEPP,
   })

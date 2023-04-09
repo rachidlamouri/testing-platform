@@ -14,7 +14,9 @@ import {
   EstinantOutput,
 } from './estinantOutputList';
 
-export const getEstinantOutputList = buildEstinant()
+export const getEstinantOutputList = buildEstinant({
+  name: 'getEstinantOutputList',
+})
   .fromHubblepup<EstinantCallExpressionOutputParameterVoictent>({
     gepp: ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
   })

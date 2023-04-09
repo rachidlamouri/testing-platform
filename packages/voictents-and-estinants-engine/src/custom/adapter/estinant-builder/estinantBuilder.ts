@@ -17,7 +17,7 @@ import {
 import { InstantiationContext } from './estinantBuilderContext';
 
 export const buildEstinant = (
-  context: InstantiationContext = {},
+  context: InstantiationContext,
 ): LeftInputGritionBuilderParent &
   LeftInputHubblepupAppreffingeBuilderParent &
   LeftInputOdeshinVoictentAppreffingeBuilderParent &

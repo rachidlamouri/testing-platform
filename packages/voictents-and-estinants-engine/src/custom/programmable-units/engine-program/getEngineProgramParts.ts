@@ -58,7 +58,9 @@ type ImportedEstinant = {
   fileImport: TypeScriptFileImport;
 };
 
-export const getEngineProgramParts = buildEstinant()
+export const getEngineProgramParts = buildEstinant({
+  name: 'getEngineProgramParts',
+})
   .fromHubblepup<ParsedTypeScriptFileVoictent>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })

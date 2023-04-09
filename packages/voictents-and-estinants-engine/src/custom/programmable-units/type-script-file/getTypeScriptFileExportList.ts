@@ -19,7 +19,9 @@ import {
   TypeScriptFileExportTypeName,
 } from './typeScriptFileExportList';
 
-export const getTypeScriptFileExportList = buildEstinant()
+export const getTypeScriptFileExportList = buildEstinant({
+  name: 'getTypeScriptFileExportList',
+})
   .fromGrition<ParsedTypeScriptFileVoictent>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
