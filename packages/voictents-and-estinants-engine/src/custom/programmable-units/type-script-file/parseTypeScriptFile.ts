@@ -12,7 +12,9 @@ import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
 } from './parsedTypeScriptFile';
 
-export const parseTypeScriptFile = buildEstinant()
+export const parseTypeScriptFile = buildEstinant({
+  name: 'parseTypeScriptFile',
+})
   .fromHubblepup<TypeScriptFileConfigurationVoictent>({
     gepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
   })

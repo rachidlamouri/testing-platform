@@ -53,7 +53,9 @@ const getConfigurationFilePath = (filePath: string): string => {
   return configFilePath;
 };
 
-export const associateTypeScriptFileToTypescriptConfiguration = buildEstinant()
+export const associateTypeScriptFileToTypescriptConfiguration = buildEstinant({
+  name: 'associateTypeScriptFileToTypescriptConfiguration',
+})
   .fromGrition<TypeScriptFileVoictent>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })

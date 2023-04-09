@@ -1,10 +1,10 @@
 import { ZornTuple } from '../utilities/semantic-types/zorn';
-import { Gepp } from './gepp';
+import { RightDreanor } from './dreanor';
 
 /**
- * A cache of right Zorn tuples by their respective Gepps.
+ * A cache of right Zorn tuples by their respective Dreanors.
  * This helps the engine find the identifiers for a specific right collection.
  */
-export class Mabz extends Map<Gepp, ZornTuple> {}
+export class Mabz extends Map<RightDreanor, ZornTuple> {}
 
-export type MabzEntry = [Gepp, ZornTuple];
+export type MabzEntry = [RightDreanor, ZornTuple];

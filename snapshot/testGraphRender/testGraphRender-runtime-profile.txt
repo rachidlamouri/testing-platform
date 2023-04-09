@@ -13,7 +13,7 @@ Collections:
       C: |-X-------------|
 
     file
-      I: |-X-------------|
+      I: |-XXXXXXXXXXXXX-|
       C: |--X------------|
 
     graphviz-code
@@ -21,7 +21,7 @@ Collections:
       C: |--X------------|
 
     directory
-      I: |-X-------------|
+      I: |-XX------------|
       C: |--X------------|
 
     svg-document
@@ -44,7 +44,7 @@ Transforms:
          |_______________|
       E: |1--------------|
 
-  2
+  encodeDirectedGraphAsGraphvizCode
     directed-graph
       I: |X--------------|
          |_______________|
@@ -56,13 +56,13 @@ Transforms:
          |_______________|
       E: |-1111111111111-|
 
-  3
+  renderGraphvizCodeToSvgDocument
     graphviz-code
       I: |-X-------------|
          |_______________|
       E: |-1-------------|
 
-  4
+  addInteractivityToSvgDocument
     svg-document
       I: |--X------------|
     html-file

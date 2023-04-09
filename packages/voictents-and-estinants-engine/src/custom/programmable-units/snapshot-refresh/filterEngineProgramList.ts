@@ -10,7 +10,7 @@ import {
 
 const IGNORED_FILE_PATH_SET = new Set([
   // this one should probably just get deleted. We have test typed datum now which tests serialization
-  'packages/voictents-and-estinants-engine/src/custom/programs/testSerialize.ts',
+  'packages/voictents-and-estinants-engine/src/custom/programs/test-serialize/testSerialize.ts',
 ]);
 
 export const filterEngineProgramList = buildEstinant()
