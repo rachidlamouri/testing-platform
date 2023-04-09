@@ -62,7 +62,9 @@ const isVitionInstantiation = (
       isIdentifiableTypeScriptTypeReference(subNode.typeParameters.params[0]),
   );
 
-export const getEstinantInputList = buildEstinant()
+export const getEstinantInputList = buildEstinant({
+  name: 'getEstinantInputList',
+})
   .fromHubblepup<EstinantCallExpressionInputParameterVoictent>({
     gepp: ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
   })

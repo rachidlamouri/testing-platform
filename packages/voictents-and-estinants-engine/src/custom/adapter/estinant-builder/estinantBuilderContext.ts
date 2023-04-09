@@ -85,7 +85,7 @@ export type Pinbetunf<
 export type AnyPinbetunf = Pinbetunf<any, any>;
 
 export type InstantiationContext = {
-  name?: string;
+  name: string;
 };
 
 export type InputContext = {

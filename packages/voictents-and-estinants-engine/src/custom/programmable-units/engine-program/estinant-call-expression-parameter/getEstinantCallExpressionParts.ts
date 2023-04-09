@@ -59,7 +59,9 @@ import {
 } from '../../../../utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
 import { isStringLiteral } from '../../../../utilities/type-script-ast/isStringLiteral';
 
-export const getEstinantCallExpressionParts = buildEstinant()
+export const getEstinantCallExpressionParts = buildEstinant({
+  name: 'getEstinantCallExpressionParts',
+})
   .fromHubblepup<EngineEstinantVoictent>({
     gepp: ENGINE_ESTINANT_GEPP,
   })
@@ -90,7 +92,9 @@ export const getEstinantCallExpressionParts = buildEstinant()
   })
   .onPinbe(
     (engineEstinantInput, [{ grition: bodyDeclarationsByIdentifier }]) => {
-      const errorZorn = `estinantCallExpressionParameterCortmum/${engineEstinantInput.zorn}`;
+      const basicErrorZorn = `estinantCallExpressionParameterCortmum/${engineEstinantInput.zorn}`;
+      const missingNameErrorZorn = `estinantCallExpressionParameterCortmum/missing-name/${engineEstinantInput.zorn}`;
+      const invalidNameErrorZorn = `estinantCallExpressionParameterCortmum/invalid-name/${engineEstinantInput.zorn}`;
 
       const engineEstinant = engineEstinantInput.grition;
       const { programName, estinantName } = engineEstinant;
@@ -115,7 +119,7 @@ export const getEstinantCallExpressionParts = buildEstinant()
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [ERROR_GEPP]: [
             {
-              zorn: errorZorn,
+              zorn: basicErrorZorn,
               grition: {
                 message: 'Export declaration is missing a call expression',
                 hasNode: node !== undefined,
@@ -207,7 +211,7 @@ export const getEstinantCallExpressionParts = buildEstinant()
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [ERROR_GEPP]: errorList.map((error, index) => {
             return {
-              zorn: `${errorZorn}/${index}`,
+              zorn: `${basicErrorZorn}/${index}`,
               grition: error,
             };
           }),
@@ -295,7 +299,7 @@ export const getEstinantCallExpressionParts = buildEstinant()
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [ERROR_GEPP]: [
             {
-              zorn: errorZorn,
+              zorn: basicErrorZorn,
               grition: {
                 message: `Call expression chain does not start with "${buildEstinant.name}"`,
                 parsedFlattenedCallExpressionList,
@@ -319,7 +323,7 @@ export const getEstinantCallExpressionParts = buildEstinant()
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [ERROR_GEPP]: [
             {
-              zorn: errorZorn,
+              zorn: basicErrorZorn,
               grition: {
                 message:
                   'Estinant builder call expression chain does not end in "assemble"',
@@ -359,7 +363,7 @@ export const getEstinantCallExpressionParts = buildEstinant()
           [ERROR_GEPP]: errorParsedExpressionList.map(
             (parsedExpression, index) => {
               return {
-                zorn: `${errorZorn}/${index}`,
+                zorn: `${basicErrorZorn}/${index}`,
                 grition: {
                   message: `Estinant builder expression "${parsedExpression.functionName}" is missing a type parameter`,
                   parsedExpression,
@@ -431,14 +435,14 @@ export const getEstinantCallExpressionParts = buildEstinant()
 
       if (instantiatedName === null) {
         parallelErrorList.push({
-          zorn: `${errorZorn}/missing-name`,
+          zorn: missingNameErrorZorn,
           grition: {
             message: `Estinant builder instantiation is missing a name`,
           },
         });
       } else if (instantiatedName !== estinantName) {
         parallelErrorList.push({
-          zorn: `${errorZorn}/invalid-name`,
+          zorn: invalidNameErrorZorn,
           grition: {
             message: `Estinant builder instantiation name does not match the variable name`,
             expected: estinantName,

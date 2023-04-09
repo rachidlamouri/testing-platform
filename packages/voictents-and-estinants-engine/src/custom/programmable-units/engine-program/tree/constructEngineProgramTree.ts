@@ -11,7 +11,9 @@ import {
   ESTINANT_TREE_NODE_GEPP,
 } from './estinantTreeNode';
 
-export const constructEngineProgramTree = buildEstinant()
+export const constructEngineProgramTree = buildEstinant({
+  name: 'constructEngineProgramTree',
+})
   .fromGrition<EngineProgramVoictent>({
     gepp: ENGINE_PROGRAM_GEPP,
   })

@@ -1,7 +1,9 @@
 import { buildEstinant } from '../../../custom/adapter/estinant-builder/estinantBuilder';
 import { SerializedVoictent } from './exampleOnama';
 
-export const exampleWortinator = buildEstinant()
+export const exampleWortinator = buildEstinant({
+  name: 'exampleWortinator',
+})
   .fromHubblepup<SerializedVoictent>({
     gepp: 'serialized',
   })

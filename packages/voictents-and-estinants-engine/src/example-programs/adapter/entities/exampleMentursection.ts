@@ -13,7 +13,9 @@ type LetterVoictent = Voictent<'letter', ValueHubblepup<string>>;
 
 type NumberVoictent = Voictent<'number', ValueHubblepup<number>>;
 
-export const exampleMentursection = buildEstinant()
+export const exampleMentursection = buildEstinant({
+  name: 'exampleMentursection',
+})
   .fromHubblepup<InitialInputVoictent>({
     gepp: INITIAL_INPUT_GEPP,
   })
