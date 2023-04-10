@@ -6,6 +6,7 @@ import { DirectedGraphNode } from '../../graph-visualization/directed-graph/dire
 export type ExternalModuleMetadata = {
   id: string;
   boundaryId: string;
+  sourcePath: string;
   attributeByKey: Omit<DirectedGraphNode['attributeByKey'], 'id'>;
 };
 

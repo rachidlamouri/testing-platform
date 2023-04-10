@@ -20,12 +20,21 @@ import {
   BOUNDARY_METADATA_GEPP,
   BoundaryMetadataVoictent,
 } from './graph-element/boundaryMetadata';
+import {
+  ROOT_METADATA_GEPP,
+  RootMetadataVoictent,
+} from './graph-element/rootMetadata';
 
 export const getGraphMetadataById = buildEstinant({
   name: 'getGraphMetadataById',
 })
-  .fromGrition<RootDirectoryVoictent>({
+  .fromGrition<RootMetadataVoictent>({
+    gepp: ROOT_METADATA_GEPP,
+  })
+  .andFromGritionTuple<RootDirectoryVoictent, [string]>({
     gepp: ROOT_DIRECTORY_GEPP,
+    framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
+    croard: (rightInput) => rightInput.zorn,
   })
   .andFromOdeshinVoictent<BoundaryMetadataVoictent>({
     gepp: BOUNDARY_METADATA_GEPP,
@@ -41,11 +50,12 @@ export const getGraphMetadataById = buildEstinant({
   })
   .toGrition<DirectedGraphMetadataByIdVoictent>({
     gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-    getZorn: () => TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
+    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe(
     (
-      rootDirectory,
+      rootMetadata,
+      [rootDirectory],
       boundaryList,
       directoryList,
       typeScriptFileList,

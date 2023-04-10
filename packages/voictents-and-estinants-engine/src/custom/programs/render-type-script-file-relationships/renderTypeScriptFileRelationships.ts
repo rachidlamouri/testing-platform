@@ -15,15 +15,8 @@ import { parseTypeScriptFile } from '../../programmable-units/type-script-file/p
 import { getRootDirectedGraph } from '../../programmable-units/type-script-file-relationships/graph-element/getRootDirectedGraph';
 import { getGraphMetadataById } from '../../programmable-units/type-script-file-relationships/getGraphMetadataById';
 import { getRootDirectory } from '../../programmable-units/type-script-file-relationships/getRootDirectory';
-import { getImportRelationshipEdge } from '../../programmable-units/type-script-file-relationships/graph-element/getImportRelationshipEdge';
-import { getTypeScriptFileInstanceIdByFilePath } from '../../programmable-units/type-script-file-relationships/getTypeScriptFileInstanceIdByFilePath';
-import { getFileNodeToParentRelationship } from '../../programmable-units/type-script-file-relationships/graph-element/getFileNodeToParentRelationship';
-import { getDirectorySubgraphToParentRelationship } from '../../programmable-units/type-script-file-relationships/graph-element/getDirectorySubgraphToParentRelationship';
 import { getDirectoryInstanceIdByDirectoryPath } from '../../programmable-units/type-script-file-relationships/getDirectoryInstanceIdByFilePath';
-import { getBoundarySubgraphToParentRelationship } from '../../programmable-units/type-script-file-relationships/graph-element/getBoundarySubgraphToParentRelationship';
 import { getExternalModuleCollection } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleCollection';
-import { getExternalModuleNodeToParentRelationship } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleNodeToParentRelationship';
-import { getExternalModuleInstanceIdBySourcePath } from '../../programmable-units/type-script-file-relationships/getExternalModuleInstanceIdBySourcePath';
 import {
   BOUNDARY_CONFIGURATION_GEPP,
   createBoundaryConfiguration,
@@ -31,8 +24,11 @@ import {
 import { getBoundaryMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getBoundaryMetadata';
 import { getDirectoryMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getDirectoryMetadata';
 import { getFileNodeMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getFileNodeMetadata';
-import { getExternalModuleMetdata } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleMetadata';
+import { getExternalModuleMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleMetadata';
 import { getFileNodeMetadataByFilePath } from '../../programmable-units/type-script-file-relationships/graph-element/getFileNodeMetadataByFilePath';
+import { getExternalModuleMetadataBySourcePath } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleMetadataBySourcePath';
+import { getRootMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getRootMetadata';
+import { getInitialEdgeMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getInitialEdgeMetadata';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -84,21 +80,17 @@ digikikify({
 
     getRootDirectory,
     getDirectoryInstanceIdByDirectoryPath,
-    getTypeScriptFileInstanceIdByFilePath,
-    getExternalModuleInstanceIdBySourcePath,
     getGraphMetadataById,
 
     getBoundaryMetadata,
     getDirectoryMetadata,
     getFileNodeMetadata,
     getFileNodeMetadataByFilePath,
-    getExternalModuleMetdata,
+    getExternalModuleMetadata,
+    getExternalModuleMetadataBySourcePath,
 
-    getBoundarySubgraphToParentRelationship,
-    getDirectorySubgraphToParentRelationship,
-    getFileNodeToParentRelationship,
-    getExternalModuleNodeToParentRelationship,
-    getImportRelationshipEdge,
+    getInitialEdgeMetadata,
+    getRootMetadata,
 
     getRootDirectedGraph,
 

@@ -43,9 +43,10 @@ export const getDirectoryMetadata = buildEstinant({
       id: directory.instanceId,
       boundaryId: foundBoundary.id,
       attributeByKey: {
-        label: directory.directoryName,
+        label: `Directory: ${directory.directoryName}`,
         fontsize: FONT_SIZE.directory,
         style: DirectedGraphStyle.Rounded,
+        color: 'gray',
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
     };

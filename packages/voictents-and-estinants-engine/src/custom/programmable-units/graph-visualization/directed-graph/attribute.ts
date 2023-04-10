@@ -17,6 +17,7 @@ export type AttributeByKey = {
   fontname: string;
   fontsize: number;
   labelloc: LabelLocation;
+  color: string;
 };
 
 export type PartialAttributeByKey = SetOptional<
