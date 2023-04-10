@@ -1,5 +1,7 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { DirectedGraphStyle } from '../../graph-visualization/directed-graph/directedGraph';
+import { RootDirectoryVoictent, ROOT_DIRECTORY_GEPP } from '../rootDirectory';
+import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import {
   BOUNDARY_CONFIGURATION_GEPP,
   BoundaryConfigurationVoictent,
@@ -17,10 +19,15 @@ export const getBoundaryMetadata = buildEstinant({
   .fromGrition<BoundaryConfigurationVoictent>({
     gepp: BOUNDARY_CONFIGURATION_GEPP,
   })
+  .andFromGritionTuple<RootDirectoryVoictent, [string]>({
+    gepp: ROOT_DIRECTORY_GEPP,
+    framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
+    croard: (rightInput) => rightInput.zorn,
+  })
   .toHubblepupTuple<BoundaryMetadataVoictent>({
     gepp: BOUNDARY_METADATA_GEPP,
   })
-  .onPinbe((boundaryConfiguration) => {
+  .onPinbe((boundaryConfiguration, [rootDirectory]) => {
     const COMMON_BOUNDARY_ATTRIBUTE_BY_KEY = {
       fontsize: FONT_SIZE.boundary,
       style: DirectedGraphStyle.Bold,
@@ -30,6 +37,12 @@ export const getBoundaryMetadata = buildEstinant({
     const internalBoundaryMetadataList =
       boundaryConfiguration.internal.map<BoundaryMetadataOdeshin>(
         (internalConfiguration) => {
+          const relativeDirectoryPath =
+            internalConfiguration.directoryPath.replace(
+              `${rootDirectory.directoryPath}/`,
+              '',
+            );
+
           return {
             zorn: `internal/${internalConfiguration.directoryPath}`,
             grition: {
@@ -37,7 +50,7 @@ export const getBoundaryMetadata = buildEstinant({
               id: internalConfiguration.instanceId,
               directoryPath: internalConfiguration.directoryPath,
               attributeByKey: {
-                label: internalConfiguration.directoryPath,
+                label: `Boundary: ${relativeDirectoryPath}`,
                 ...COMMON_BOUNDARY_ATTRIBUTE_BY_KEY,
               },
             },
@@ -52,7 +65,7 @@ export const getBoundaryMetadata = buildEstinant({
         id: boundaryConfiguration.external.instanceId,
         description: 'Modules from Node and NPM',
         attributeByKey: {
-          label: 'External Modules',
+          label: 'Boundary: External Modules',
           ...COMMON_BOUNDARY_ATTRIBUTE_BY_KEY,
         },
       },
@@ -66,7 +79,7 @@ export const getBoundaryMetadata = buildEstinant({
         description:
           'If you are seeing this then something is most likely misconfigured. This boundary catches all other items without a boundary',
         attributeByKey: {
-          label: 'Limbo Boundary',
+          label: 'Boundary: Limbo',
           ...COMMON_BOUNDARY_ATTRIBUTE_BY_KEY,
         },
       },

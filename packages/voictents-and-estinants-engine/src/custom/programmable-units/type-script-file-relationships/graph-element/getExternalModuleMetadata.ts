@@ -11,7 +11,7 @@ import {
   ExternalModuleMetadataVoictent,
 } from './externalModuleMetadata';
 
-export const getExternalModuleMetdata = buildEstinant({
+export const getExternalModuleMetadata = buildEstinant({
   name: 'getExternalModuleMetdata',
 })
   .fromGrition<ExternalModuleVoictent>({
@@ -30,10 +30,12 @@ export const getExternalModuleMetdata = buildEstinant({
     return {
       id: externalModule.instanceId,
       boundaryId: boundary.id,
+      sourcePath: externalModule.sourcePath,
       attributeByKey: {
         label: externalModule.sourcePath,
         shape: Shape.Box,
         fontsize: FONT_SIZE.node,
+        color: 'gray',
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
     };

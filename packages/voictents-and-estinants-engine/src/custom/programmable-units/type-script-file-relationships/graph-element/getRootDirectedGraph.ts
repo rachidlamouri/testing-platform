@@ -1,5 +1,4 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { ERROR_GEPP, ErrorOdeshin, ErrorVoictent } from '../../error/error';
 import {
   DirectedGraphVoictent,
   DIRECTED_GRAPH_GEPP,
@@ -7,11 +6,6 @@ import {
   DirectedSubgraph,
 } from '../../graph-visualization/directed-graph/directedGraph';
 import { DirectedGraphNode } from '../../graph-visualization/directed-graph/directedGraphNode';
-import {
-  NODE_TO_GRAPH_RELATIONSHIP_GEPP,
-  NodeToGraphRelationshipVoictent,
-} from '../nodeToGraphRelationship';
-import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import {
   BOUNDARY_METADATA_GEPP,
   BoundaryMetadataVoictent,
@@ -21,28 +15,27 @@ import {
   DirectoryMetadataVoictent,
 } from './directoryMetadata';
 import {
-  EXTERNAL_MODULE_METADATA_GEPP,
-  ExternalModuleMetadataVoictent,
-} from './externalModuleMetadata';
-import {
   FILE_NODE_METADATA_GEPP,
   FileNodeMetadataVoictent,
 } from './fileNodeMetadata';
+import { ROOT_METADATA_GEPP, RootMetadataVoictent } from './rootMetadata';
+import { DirectedGraphEdge } from '../../graph-visualization/directed-graph/directedGraphEdge';
+import { Tuple } from '../../../../utilities/semantic-types/tuple';
 import {
-  ImportRelationshipEdgeVoictent,
-  IMPORT_RELATIONSHIP_EDGE_GEPP,
-} from './importRelationshipEdge';
-import { ROOT_DIRECTED_GRAPH_ATTRIBUTE_BY_KEY } from './rootDirectedGraph';
-import {
-  SUBGRAPH_TO_GRAPH_RELATIONSHIP_GEPP,
-  SubgraphToGraphRelationshipVoictent,
-} from './subgraphToGraphRelationship';
+  EXTERNAL_MODULE_METADATA_GEPP,
+  ExternalModuleMetadataVoictent,
+} from './externalModuleMetadata';
 
 export const getRootDirectedGraph = buildEstinant({
   name: 'getRootDirectedGraph',
 })
-  .fromOdeshinVoictent<BoundaryMetadataVoictent>({
+  .fromGrition<RootMetadataVoictent>({
+    gepp: ROOT_METADATA_GEPP,
+  })
+  .andFromGritionTuple<BoundaryMetadataVoictent, Tuple<string>>({
     gepp: BOUNDARY_METADATA_GEPP,
+    framate: (leftInput) => [...leftInput.grition.relevantBoundaryIdSet],
+    croard: (rightInput) => rightInput.grition.id,
   })
   .andFromOdeshinVoictent<DirectoryMetadataVoictent>({
     gepp: DIRECTORY_METADATA_GEPP,
@@ -53,76 +46,123 @@ export const getRootDirectedGraph = buildEstinant({
   .andFromOdeshinVoictent<ExternalModuleMetadataVoictent>({
     gepp: EXTERNAL_MODULE_METADATA_GEPP,
   })
-  .andFromOdeshinVoictent<SubgraphToGraphRelationshipVoictent>({
-    gepp: SUBGRAPH_TO_GRAPH_RELATIONSHIP_GEPP,
-  })
-  .andFromOdeshinVoictent<NodeToGraphRelationshipVoictent>({
-    gepp: NODE_TO_GRAPH_RELATIONSHIP_GEPP,
-  })
-  .andFromOdeshinVoictent<ImportRelationshipEdgeVoictent>({
-    gepp: IMPORT_RELATIONSHIP_EDGE_GEPP,
-  })
-  .toHubblepup<DirectedGraphVoictent>({
+  .toGrition<DirectedGraphVoictent>({
     gepp: DIRECTED_GRAPH_GEPP,
-  })
-  .toHubblepupTuple<ErrorVoictent>({
-    gepp: ERROR_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe(
     (
-      boundaryMetdataList,
+      rootMetadata,
+      relevantBoundaryMetadataList,
       directoryMetadataList,
-      fileNodeMetdataList,
-      externalModuleMetdataList,
-      subgraphToGraphRelationshipList,
-      nodeToGraphRelationshipList,
-      importRelationshipEdgeList,
+      fileNodeMetadataList,
+      externalModuleMetadataList,
     ) => {
-      const root: DirectedGraph = {
+      const nodeWithEdgeSet = new Set(
+        rootMetadata.edgeMetadataList.flatMap((metadata) => {
+          return [metadata.tail, metadata.head];
+        }),
+      );
+
+      const relevantDirectoryMetadataList = directoryMetadataList.filter(
+        (metadata) =>
+          rootMetadata.relevantBoundaryIdSet.has(metadata.boundaryId),
+      );
+
+      const relevantFileNodeMetadataList = fileNodeMetadataList.filter(
+        (metadata) => {
+          return (
+            metadata.boundaryId === rootMetadata.boundaryId ||
+            nodeWithEdgeSet.has(metadata)
+          );
+        },
+      );
+
+      const relevantExternalModuleMetadataList =
+        externalModuleMetadataList.filter((metadata) => {
+          return (
+            metadata.boundaryId === rootMetadata.boundaryId ||
+            nodeWithEdgeSet.has(metadata)
+          );
+        });
+
+      const rootDirectedGraph: DirectedGraph = {
         isRoot: true,
-        attributeByKey: ROOT_DIRECTED_GRAPH_ATTRIBUTE_BY_KEY,
+        attributeByKey: {
+          id: rootMetadata.id,
+          ...rootMetadata.attributeByKey,
+        },
         nodeList: [],
         edgeList: [],
         subgraphList: [],
       };
 
-      const boundarySubgraphList = boundaryMetdataList.map((metadata) => {
-        const subgraph: DirectedSubgraph = {
-          isRoot: false,
-          attributeByKey: {
-            id: metadata.id,
-            ...metadata.attributeByKey,
-          },
-          nodeList: [],
-          edgeList: [],
-          subgraphList: [],
-        };
+      const boundarySubgraphList = relevantBoundaryMetadataList.map(
+        (metadata) => {
+          const subgraph: DirectedSubgraph = {
+            isRoot: false,
+            attributeByKey: {
+              id: metadata.id,
+              ...metadata.attributeByKey,
+            },
+            nodeList: [],
+            edgeList: [],
+            subgraphList: [],
+          };
 
-        return subgraph;
-      });
+          if (metadata.id !== rootMetadata.boundaryId) {
+            // subgraph.attributeByKey.color = 'b;acl';
+          } else {
+            subgraph.attributeByKey.color = '#0377fc';
+          }
 
-      const directorySubgraphList = directoryMetadataList.map((metadata) => {
-        const subgraph: DirectedSubgraph = {
-          isRoot: false,
-          attributeByKey: {
-            id: metadata.id,
-            ...metadata.attributeByKey,
-          },
-          nodeList: [],
-          edgeList: [],
-          subgraphList: [],
-        };
+          return subgraph;
+        },
+      );
 
-        return subgraph;
-      });
+      const directorySubgraphList = relevantDirectoryMetadataList.map(
+        (metadata) => {
+          const subgraph: DirectedSubgraph = {
+            isRoot: false,
+            attributeByKey: {
+              id: metadata.id,
+              ...metadata.attributeByKey,
+            },
+            nodeList: [],
+            edgeList: [],
+            subgraphList: [],
+          };
+
+          return subgraph;
+        },
+      );
 
       const allSubgraphList = [
         ...boundarySubgraphList,
         ...directorySubgraphList,
       ];
-      const allGraphList = [root, ...allSubgraphList];
 
-      const fileNodeList = fileNodeMetdataList.map((metadata) => {
+      const subgraphById = new Map<string, DirectedSubgraph>();
+      allSubgraphList.forEach((subgraph) => {
+        subgraphById.set(subgraph.attributeByKey.id, subgraph);
+      });
+
+      relevantBoundaryMetadataList.forEach((metadata) => {
+        const subgraph = subgraphById.get(metadata.id) as DirectedSubgraph;
+
+        rootDirectedGraph.subgraphList.push(subgraph);
+      });
+
+      relevantDirectoryMetadataList.forEach((metadata) => {
+        const childSubgraph = subgraphById.get(metadata.id) as DirectedSubgraph;
+        const parentSubgraph = subgraphById.get(
+          metadata.boundaryId,
+        ) as DirectedSubgraph;
+
+        parentSubgraph.subgraphList.push(childSubgraph);
+      });
+
+      relevantFileNodeMetadataList.forEach((metadata) => {
         const node: DirectedGraphNode = {
           attributeByKey: {
             id: metadata.id,
@@ -130,93 +170,44 @@ export const getRootDirectedGraph = buildEstinant({
           },
         };
 
-        return node;
+        const parentSubgraph = subgraphById.get(
+          metadata.directoryId,
+        ) as DirectedSubgraph;
+        parentSubgraph.nodeList.push(node);
       });
 
-      const externalModuleNodeList = externalModuleMetdataList.map(
-        (metadata) => {
-          const node: DirectedGraphNode = {
-            attributeByKey: {
-              id: metadata.id,
-              ...metadata.attributeByKey,
-            },
-          };
+      relevantExternalModuleMetadataList.forEach((metadata) => {
+        const node: DirectedGraphNode = {
+          attributeByKey: {
+            id: metadata.id,
+            ...metadata.attributeByKey,
+          },
+        };
 
-          return node;
-        },
-      );
-
-      const allNodeList = [...fileNodeList, ...externalModuleNodeList];
-
-      const graphById = new Map(
-        allGraphList.map((graph) => [
-          // TODO: make root graph id required
-          graph.attributeByKey.id as string,
-          graph,
-        ]),
-      );
-
-      const subgraphById = new Map(
-        allSubgraphList.map((subgraph) => [
-          // TODO: make root graph id required
-          subgraph.attributeByKey.id,
-          subgraph,
-        ]),
-      );
-
-      const nodeById = new Map(
-        allNodeList.map((node) => [node.attributeByKey.id, node]),
-      );
-
-      const errorList: ErrorOdeshin[] = [];
-
-      subgraphToGraphRelationshipList.forEach((relationship, index) => {
-        const parentGraph = graphById.get(relationship.parentId);
-        const childGraph = subgraphById.get(relationship.childId);
-
-        if (parentGraph === undefined || childGraph === undefined) {
-          errorList.push({
-            zorn: `getRootDirectedGraph/subgraphToGraph/${index}`,
-            grition: {
-              relationship,
-              hasParent: parentGraph !== undefined,
-              hasChild: childGraph !== undefined,
-            },
-          });
-          return;
-        }
-
-        parentGraph.subgraphList.push(childGraph);
+        const parentSubgraph = subgraphById.get(
+          metadata.boundaryId,
+        ) as DirectedSubgraph;
+        parentSubgraph.nodeList.push(node);
       });
 
-      nodeToGraphRelationshipList.forEach((relationship, index) => {
-        const parentGraph = graphById.get(relationship.parentId);
-        const childNode = nodeById.get(relationship.childId);
+      const edgeList = rootMetadata.edgeMetadataList.map((metadata) => {
+        const tailId = metadata.tail.id;
+        const headId = metadata.head.id;
 
-        if (parentGraph === undefined || childNode === undefined) {
-          errorList.push({
-            zorn: `getRootDirectedGraph/nodeToGraph/${index}`,
-            grition: {
-              relationship,
-              hasParent: parentGraph !== undefined,
-              hasChild: childNode !== undefined,
-            },
-          });
-          return;
-        }
+        const edge: DirectedGraphEdge = {
+          attributeByKey: {
+            id: `${tailId}:${headId}`,
+          },
+          tailId,
+          headId,
+        };
 
-        parentGraph.nodeList.push(childNode);
+        return edge;
       });
 
-      root.edgeList = importRelationshipEdgeList;
+      rootDirectedGraph.edgeList = edgeList;
 
-      return {
-        [DIRECTED_GRAPH_GEPP]: {
-          zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
-          grition: root,
-        },
-        [ERROR_GEPP]: errorList,
-      };
+      return rootDirectedGraph;
     },
   )
   .assemble();

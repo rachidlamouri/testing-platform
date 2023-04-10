@@ -84,6 +84,7 @@ export const getFileNodeMetadata = buildEstinant({
               label: file.onDiskFileName.pascalCase,
               shape: Shape.Box,
               fontsize: FONT_SIZE.node,
+              color: 'gray',
               ...COMMON_ATTRIBUTE_BY_KEY,
             },
           } satisfies FileNodeMetadata,
