@@ -13,7 +13,9 @@ import {
   TypeScriptFileRelationship,
 } from './typeScriptFileRelationshipList';
 
-export const getTypeScriptFileRelationshipList = buildEstinant()
+export const getTypeScriptFileRelationshipList = buildEstinant({
+  name: 'getTypeScriptFileRelationshipList',
+})
   .fromGrition<TypeScriptFileVoictent>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })

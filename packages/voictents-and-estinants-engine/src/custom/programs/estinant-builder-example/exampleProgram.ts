@@ -7,7 +7,9 @@ import { InputBVoictent, INPUT_B_GEPP } from './inputB';
 import { InputCVoictent, INPUT_C_GEPP } from './inputC';
 import { InputDVoictent, INPUT_D_GEPP } from './inputD';
 
-const inputVoictentToOutputHubblepup = buildEstinant()
+const inputVoictentToOutputHubblepup = buildEstinant({
+  name: 'inputVoictentToOutputHubblepup',
+})
   .fromVoictent<InputAVoictent>({
     gepp: INPUT_A_GEPP,
   })
@@ -22,7 +24,9 @@ const inputVoictentToOutputHubblepup = buildEstinant()
   })
   .assemble();
 
-const inputHubblepupToOutputHubblepup = buildEstinant()
+const inputHubblepupToOutputHubblepup = buildEstinant({
+  name: 'inputHubblepupToOutputHubblepup',
+})
   .fromHubblepup<InputAVoictent>({
     gepp: INPUT_A_GEPP,
   })
@@ -37,7 +41,9 @@ const inputHubblepupToOutputHubblepup = buildEstinant()
   })
   .assemble();
 
-const inputGritionToOutputHubblepup = buildEstinant()
+const inputGritionToOutputHubblepup = buildEstinant({
+  name: 'inputGritionToOutputHubblepup',
+})
   .fromGrition<InputBVoictent>({
     gepp: INPUT_B_GEPP,
   })
@@ -52,7 +58,9 @@ const inputGritionToOutputHubblepup = buildEstinant()
   })
   .assemble();
 
-const inputHubblepupAndInputHubblepupTupleToOutputHubblepup = buildEstinant()
+const inputHubblepupAndInputHubblepupTupleToOutputHubblepup = buildEstinant({
+  name: 'inputHubblepupAndInputHubblepupTupleToOutputHubblepup',
+})
   .fromHubblepup<InputAVoictent>({
     gepp: INPUT_A_GEPP,
   })
@@ -77,7 +85,9 @@ const inputHubblepupAndInputHubblepupTupleToOutputHubblepup = buildEstinant()
   .assemble();
 
 const inputHubblepupAndInputHubblepupTupleAndInputHubblepupTupleToOutputHubblepup =
-  buildEstinant()
+  buildEstinant({
+    name: 'inputHubblepupAndInputHubblepupTupleAndInputHubblepupTupleToOutputHubblepup',
+  })
     .fromHubblepup<InputAVoictent>({
       gepp: INPUT_A_GEPP,
     })
@@ -122,7 +132,9 @@ const inputHubblepupAndInputHubblepupTupleAndInputHubblepupTupleToOutputHubblepu
     )
     .assemble();
 
-const inputGritionToOutputGrition = buildEstinant()
+const inputGritionToOutputGrition = buildEstinant({
+  name: 'inputGritionToOutputGrition',
+})
   .fromGrition<InputBVoictent>({
     gepp: INPUT_B_GEPP,
   })
@@ -135,7 +147,9 @@ const inputGritionToOutputGrition = buildEstinant()
   })
   .assemble();
 
-const inputHubblepupAndInputVoictentToOutputHubblepup = buildEstinant()
+const inputHubblepupAndInputVoictentToOutputHubblepup = buildEstinant({
+  name: 'inputHubblepupAndInputVoictentToOutputHubblepup',
+})
   .fromHubblepup<InputAVoictent>({
     gepp: INPUT_A_GEPP,
   })

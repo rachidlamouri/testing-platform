@@ -26,7 +26,9 @@ import {
 } from '../graph-visualization/directedGraphMetadataById';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 
-export const digraphificateTypeScriptFileRelationshipList = buildEstinant()
+export const digraphificateTypeScriptFileRelationshipList = buildEstinant({
+  name: 'digraphificateTypeScriptFileRelationshipList',
+})
   .fromOdeshinVoictent<TypeScriptFileRelationshipListVoictent>({
     gepp: TYPE_SCRIPT_FILE_RELATIONSHIP_LIST_GEPP,
   })
