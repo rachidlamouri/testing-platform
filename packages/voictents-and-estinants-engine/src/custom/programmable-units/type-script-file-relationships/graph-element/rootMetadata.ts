@@ -8,6 +8,7 @@ export type RootMetadata = {
   id: string;
   boundaryId: string;
   relevantBoundaryIdSet: Set<string>;
+  importedBoundaryIdSet: Set<string>;
   edgeMetadataList: InitialEdgeMetadata[];
   attributeByKey: Omit<DirectedGraph['attributeByKey'], 'id'>;
 };

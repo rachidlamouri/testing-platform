@@ -1,0 +1,255 @@
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.5.0/dist/svg-pan-zoom.min.js"></script>
+  <style>
+    body {
+      display: grid;
+      font-family: sans-serif;
+      grid-template-columns: 400px auto 600px;
+    }
+
+    .panel {
+      margin: 0px;
+    }
+
+    #left-panel {
+      border-right: 1px solid #333;
+      padding-right: 8px;
+    }
+
+    #right-panel {
+      border-left: 1px solid #333;
+      padding-left: 8px;
+    }
+
+    .panel h2 {
+      margin-top: 0px
+    }
+
+    #left-panel button {
+      height: 20px;
+      width: 100%;
+      margin-bottom: 4px;
+      text-align: left;
+    }
+
+    #left-panel button.selected {
+      border: 1px solid #0377fc;
+    }
+
+    #left-panel ul {
+      list-style-type: none;
+      padding-left: 8px;
+    }
+
+    #right-panel label {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    #right-panel p {
+      font-size: 12px;
+      margin: 0px;
+      margin-bottom: 12px;
+    }
+  </style>
+  <script>
+    // the next line is automatically overwritten by the engine program
+    const navigationItemList = [];
+
+    // the next line is automatically overwritten by the engine program
+    const graphMetadataByIdList = [];
+    let metadataById;
+
+    let navigationList;
+    let rightPanel;
+    let buttonList;
+    let view;
+    let templateList;
+
+    let clusterList;
+    let nodeList;
+  </script>
+  <script>
+    const setEdgeColor = (element, color) => {
+    element.setAttribute('stroke', color)
+
+    if (element.tagName === 'polygon') {
+      element.setAttribute('fill', color)
+    }
+  }
+
+  const clearRightPanelContent = (showDefaultHeader) => {
+    [...rightPanel.children].forEach((child) => {
+      rightPanel.removeChild(child);
+    })
+
+    if (showDefaultHeader) {
+      const defaultHeader = document.createElement('h2');
+      defaultHeader.textContent = 'No Selection';
+      rightPanel.appendChild(defaultHeader);
+    }
+  }
+
+  const setRightPanelContent = (element) => {
+    clearRightPanelContent(false);
+
+    metadata = metadataById[element.id];
+
+    if (metadata === undefined) {
+      return;
+    }
+
+    const titleElement = document.createElement('h2');
+    titleElement.textContent = metadata.title;
+    rightPanel.appendChild(titleElement)
+
+    metadata.fieldList.forEach(({ label, value }) => {
+      const labelElement = document.createElement('label');
+      const valueElement = document.createElement('p');
+
+      labelElement.textContent = label;
+      valueElement.textContent = value;
+
+      rightPanel.appendChild(labelElement)
+      rightPanel.appendChild(valueElement)
+    })
+  }
+
+  const updateViewListeners = () => {
+    clusterList.forEach((cluster) => {
+      cluster.addEventListener('click', (event) => {
+        event.stopPropagation();
+        setRightPanelContent(cluster)
+      })
+    })
+
+    nodeList.forEach((node) => {
+      node.addEventListener('click', (event) => {
+        event.stopPropagation();
+        setRightPanelContent(node)
+
+        nodeList.forEach((node) => {
+          node.querySelector('polygon').setAttribute('stroke', 'black');
+        })
+
+        node.querySelector('polygon').setAttribute('stroke', 'orange');
+
+        const id = node.getAttribute('id');
+
+        const allEdgeList = document.querySelectorAll('.edge > path, .edge > polygon');
+
+        const incomingEdgeList = document.querySelectorAll(`.edge.head-${id} > path, .edge.head-${id} > polygon`)
+        const outgoingEdgeList = document.querySelectorAll(`.edge.tail-${id} > path, .edge.tail-${id} > polygon`)
+
+        // TODO: make this trigger once per edge, not twice
+        Array.from(incomingEdgeList).forEach((element) => {
+          const classNameList = element.parentElement.getAttribute('class').split(' ');
+
+          const tailClass = classNameList.find((className) => className.startsWith('tail-'));
+          const tailId = tailClass.split('tail-')[1]
+
+          const tailElement = document.getElementById(tailId);
+          tailElement.querySelector('polygon').setAttribute('stroke', 'green');
+        })
+
+        // TODO: make this trigger once per edge, not twice
+        Array.from(outgoingEdgeList).forEach((element) => {
+          const classNameList = element.parentElement.getAttribute('class').split(' ');
+
+          const tailClass = classNameList.find((className) => className.startsWith('head-'));
+          const headId = tailClass.split('head-')[1]
+
+          const headElement = document.getElementById(headId);
+          headElement.querySelector('polygon').setAttribute('stroke', 'blue');
+        })
+
+        allEdgeList.forEach((element) => {
+          setEdgeColor(element, 'gray');
+        })
+
+        incomingEdgeList.forEach((element) => {
+          setEdgeColor(element, 'green');
+        })
+
+        outgoingEdgeList.forEach((element) => {
+          setEdgeColor(element, 'blue');
+        })
+      })
+    })
+  }
+  </script>
+  <script>
+    const setView = (index) => {
+      clearRightPanelContent(true);
+
+      metadataById = graphMetadataByIdList[index];
+
+      for (button of buttonList) {
+        button.classList.remove('selected');
+      }
+      buttonList.item(index).classList.add('selected');
+
+      const template = templateList[index];
+      const svgTemplate = template.content.querySelector('svg');
+      const svg = document.importNode(svgTemplate, true);
+
+      [...view.children].forEach((child) => {
+        view.removeChild(child);
+      })
+      view.appendChild(svg);
+
+      svgPanZoom('svg', {
+        zoomScaleSensitivity: .5,
+        minZoom: .2,
+        maxZoom: 20,
+      })
+
+      clusterList = [...document.body.getElementsByClassName('cluster')];
+      nodeList = [...document.body.getElementsByClassName('node')];
+
+      updateViewListeners();
+    };
+  </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function init() {
+      navigationList = document.getElementById('navigation-list');
+      buttonList = document.getElementsByTagName('button');
+      view = document.getElementById('view');
+      rightPanel = document.getElementById('right-panel');
+      templateList = document.getElementsByTagName('template');
+
+      navigationItemList.forEach((navigationItem, index) => {
+        const listItem = document.createElement('li');
+        const button = document.createElement('button');
+        button.textContent = navigationItem.text;
+
+        button.addEventListener('click', () => {
+          setView(index);
+        })
+
+        listItem.appendChild(button);
+        navigationList.appendChild(listItem);
+      })
+
+      setView(0);
+    });
+  </script>
+</head>
+<body>
+  <div id="left-panel" class="panel">
+    <!-- TODO: Make the title dynamic -->
+    <h2>Boundary Graphs</h2>
+    <ul id="navigation-list">
+      <!-- this list is populated at runtime -->
+    </ul>
+  </div>
+  <div id="view">
+  </div>
+  <div id="right-panel" class="panel">
+    <!-- this gets populated at runtime -->
+  </div>
+
+  <!-- the next line is automatically overwritten by the engine program -->
+  <!-- SVG_TEMPLATE_SET_PLACEHOLDER -->
+</body>

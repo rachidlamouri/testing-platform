@@ -8,7 +8,6 @@ import {
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
-import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/addInteractivityToSvgDocument';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
@@ -29,6 +28,8 @@ import { getFileNodeMetadataByFilePath } from '../../programmable-units/type-scr
 import { getExternalModuleMetadataBySourcePath } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleMetadataBySourcePath';
 import { getRootMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getRootMetadata';
 import { getInitialEdgeMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getInitialEdgeMetadata';
+import { constructKnowledgeGraph } from '../../programmable-units/graph-visualization/constructKnowledgeGraph';
+import { getSvgMetadataList } from '../../programmable-units/type-script-file-relationships/getSvgMetadataList';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -96,7 +97,8 @@ digikikify({
 
     encodeDirectedGraphAsGraphvizCode,
     renderGraphvizCodeToSvgDocument,
-    addInteractivityToSvgDocument,
+    getSvgMetadataList,
+    constructKnowledgeGraph,
   ],
   quirmDebugger: buildQuirmDebugger('renderTypeScriptFileRelationships'),
 });

@@ -1,6 +1,7 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { DIRECTORY_GEPP, DirectoryVoictent } from '../../file/directory';
 import { DirectedGraphStyle } from '../../graph-visualization/directed-graph/directedGraph';
+import { LIMBO_BOUNDARY_ZORN } from './boundaryConfiguration';
 import {
   BOUNDARY_METADATA_GEPP,
   BoundaryMetadataVoictent,
@@ -19,7 +20,7 @@ export const getDirectoryMetadata = buildEstinant({
   })
   .andFromGritionTuple<BoundaryMetadataVoictent, [string]>({
     gepp: BOUNDARY_METADATA_GEPP,
-    framate: () => ['limbo'],
+    framate: () => [LIMBO_BOUNDARY_ZORN],
     croard: (rightInput) => rightInput.zorn,
   })
   .andFromOdeshinVoictent<BoundaryMetadataVoictent>({

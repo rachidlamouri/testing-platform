@@ -1,5 +1,6 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { Shape } from '../../graph-visualization/directed-graph/attribute';
+import { EXTERNAL_BOUNDARY_ZORN } from './boundaryConfiguration';
 import {
   BOUNDARY_METADATA_GEPP,
   BoundaryMetadataVoictent,
@@ -19,7 +20,7 @@ export const getExternalModuleMetadata = buildEstinant({
   })
   .andFromGritionTuple<BoundaryMetadataVoictent, [string]>({
     gepp: BOUNDARY_METADATA_GEPP,
-    framate: () => ['external'],
+    framate: () => [EXTERNAL_BOUNDARY_ZORN],
     croard: (rightInput) => rightInput.zorn,
   })
   .toGrition<ExternalModuleMetadataVoictent>({

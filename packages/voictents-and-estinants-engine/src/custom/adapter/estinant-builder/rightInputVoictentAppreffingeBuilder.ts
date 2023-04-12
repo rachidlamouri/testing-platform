@@ -10,6 +10,10 @@ import {
   InputOutputContext,
 } from './estinantBuilderContext';
 import {
+  OutputGritionAppreffingeBuilderParent,
+  buildOutputGritionAppreffingeBuilder,
+} from './outputGritionAppreffingeBuilder';
+import {
   buildOutputHubblepupAppreffingeBuilder,
   OutputHubblepupAppreffingeBuilderParent,
 } from './outputHubblepupAppreffingeBuilder';
@@ -42,6 +46,11 @@ export type RightInputVoictentAppreffingeBuilder<
   TLeftVicken,
   NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
 > &
+  OutputGritionAppreffingeBuilderParent<
+    TLeftVicken,
+    NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
+    OutputVickenTuple
+  > &
   OutputHubblepupAppreffingeBuilderParent<
     TLeftVicken,
     NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
@@ -80,6 +89,11 @@ export const buildRightInputVoictentAppreffingeBuilder = <
         NextVickenTuple<TRightVickenTuple, TRightInputVoictent>
       >(nextContext),
 
+      toGrition: buildOutputGritionAppreffingeBuilder<
+        TLeftVicken,
+        NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,
+        OutputVickenTuple
+      >(nextContext),
       toHubblepup: buildOutputHubblepupAppreffingeBuilder<
         TLeftVicken,
         NextVickenTuple<TRightVickenTuple, TRightInputVoictent>,

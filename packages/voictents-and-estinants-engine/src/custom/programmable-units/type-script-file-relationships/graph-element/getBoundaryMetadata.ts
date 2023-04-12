@@ -5,6 +5,9 @@ import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelat
 import {
   BOUNDARY_CONFIGURATION_GEPP,
   BoundaryConfigurationVoictent,
+  EXTERNAL_BOUNDARY_ZORN,
+  LIMBO_BOUNDARY_ZORN,
+  OVERVIEW_BOUNDARY_ZORN,
 } from './boundaryConfiguration';
 import {
   BOUNDARY_METADATA_GEPP,
@@ -34,6 +37,20 @@ export const getBoundaryMetadata = buildEstinant({
       ...COMMON_ATTRIBUTE_BY_KEY,
     };
 
+    const overviewBoundaryMetadata: BoundaryMetadataOdeshin = {
+      zorn: OVERVIEW_BOUNDARY_ZORN,
+      grition: {
+        isInternal: null,
+        id: boundaryConfiguration.overview.instanceId,
+        description:
+          'A visualization for the relationship between the other boundaries',
+        attributeByKey: {
+          label: 'Boundary: Overview',
+          ...COMMON_BOUNDARY_ATTRIBUTE_BY_KEY,
+        },
+      },
+    };
+
     const internalBoundaryMetadataList =
       boundaryConfiguration.internal.map<BoundaryMetadataOdeshin>(
         (internalConfiguration) => {
@@ -59,7 +76,7 @@ export const getBoundaryMetadata = buildEstinant({
       );
 
     const externalBoundaryMetadata: BoundaryMetadataOdeshin = {
-      zorn: 'external',
+      zorn: EXTERNAL_BOUNDARY_ZORN,
       grition: {
         isInternal: false,
         id: boundaryConfiguration.external.instanceId,
@@ -72,7 +89,7 @@ export const getBoundaryMetadata = buildEstinant({
     };
 
     const limboBoundaryMetadata: BoundaryMetadataOdeshin = {
-      zorn: 'limbo',
+      zorn: LIMBO_BOUNDARY_ZORN,
       grition: {
         isInternal: null,
         id: boundaryConfiguration.limbo.instanceId,
@@ -86,6 +103,7 @@ export const getBoundaryMetadata = buildEstinant({
     };
 
     return [
+      overviewBoundaryMetadata,
       ...internalBoundaryMetadataList,
       externalBoundaryMetadata,
       limboBoundaryMetadata,
