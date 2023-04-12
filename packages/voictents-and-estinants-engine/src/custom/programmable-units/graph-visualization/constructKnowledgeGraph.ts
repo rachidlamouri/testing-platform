@@ -9,6 +9,10 @@ import {
   SVG_METADATA_LIST_GEPP,
   SvgMetadataListVoictent,
 } from './svgMetadataList';
+import {
+  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+  DirectedGraphMetadataByIdVoictent,
+} from './directedGraphMetadataById';
 
 const KNOWLEDGE_GRAPH_FILE_PATH =
   'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/knowledgeGraphTemplate.html';
@@ -24,10 +28,13 @@ export const constructKnowledgeGraph = buildEstinant({
     framate: () => [KNOWLEDGE_GRAPH_FILE_PATH],
     croard: (rightInput) => rightInput.zorn,
   })
+  .andFromOdeshinVoictent<DirectedGraphMetadataByIdVoictent>({
+    gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+  })
   .toHubblepup<OutputFileVoictent>({
     gepp: OUTPUT_FILE_GEPP,
   })
-  .onPinbe((leftInput, [templateFile]) => {
+  .onPinbe((leftInput, [templateFile], metadataByIdList) => {
     const svgMetadataList = leftInput.grition;
 
     const navigationItemList = svgMetadataList.map((metadata) => {
@@ -47,6 +54,7 @@ export const constructKnowledgeGraph = buildEstinant({
 
     const htmlTemplateText = fs.readFileSync(templateFile.filePath, 'utf8');
     const navigationItemListText = JSON.stringify(navigationItemList, null, 2);
+    const metadataByIdListText = JSON.stringify(metadataByIdList, null, 2);
     const svgTemplateText = svgTemplateTextList.join('\n');
 
     const outputTemplate = htmlTemplateText
@@ -54,7 +62,10 @@ export const constructKnowledgeGraph = buildEstinant({
         'const navigationItemList = [];',
         `const navigationItemList = JSON.parse(\`${navigationItemListText}\`);`,
       )
-
+      .replace(
+        'const graphMetadataByIdList = [];',
+        `const graphMetadataByIdList = JSON.parse(\`${metadataByIdListText}\`);`,
+      )
       .replace('<!-- SVG_TEMPLATE_SET_PLACEHOLDER -->', svgTemplateText);
 
     const fileName = leftInput.zorn.replaceAll(/\//g, '-');
