@@ -18,6 +18,10 @@ import {
   buildRightInputOdeshinVoictentAppreffingeBuilder,
   RightInputOdeshinVoictentAppreffingeBuilderParent,
 } from './rightInputOdeshinVoictentAppreffingeBuilder';
+import {
+  buildRightInputGritionTupleAppreffingeBuilder,
+  RightInputGritionTupleAppreffingeBuilderParent,
+} from './rightInputGritionTupleAppreffingeBuilder';
 
 type LeftVicken<TInputVoictent extends Voictent> =
   LeftVoictentVicken<TInputVoictent>;
@@ -30,10 +34,14 @@ export type LeftInputVoictentAppreffingeBuilder = <
   TInputVoictent extends Voictent,
 >(
   leftAppreffinge: LeftAppreffinge<TInputVoictent>,
-) => RightInputOdeshinVoictentAppreffingeBuilderParent<
+) => RightInputGritionTupleAppreffingeBuilderParent<
   LeftVicken<TInputVoictent>,
   RightVickenTuple
 > &
+  RightInputOdeshinVoictentAppreffingeBuilderParent<
+    LeftVicken<TInputVoictent>,
+    RightVickenTuple
+  > &
   RightInputVoictentAppreffingeBuilderParent<
     LeftVicken<TInputVoictent>,
     RightVickenTuple
@@ -61,6 +69,10 @@ export const buildLeftInputVoictentAppreffingeBuilder = (
       });
 
       return {
+        andFromGritionTuple: buildRightInputGritionTupleAppreffingeBuilder<
+          LeftVicken<TInputVoictent>,
+          RightVickenTuple
+        >(nextContext),
         andFromOdeshinVoictent:
           buildRightInputOdeshinVoictentAppreffingeBuilder<
             LeftVicken<TInputVoictent>,
