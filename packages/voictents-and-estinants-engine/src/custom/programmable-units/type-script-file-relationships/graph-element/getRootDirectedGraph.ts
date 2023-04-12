@@ -1,3 +1,4 @@
+import * as uuid from 'uuid';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   DirectedGraphVoictent,
@@ -25,6 +26,11 @@ import {
   EXTERNAL_MODULE_METADATA_GEPP,
   ExternalModuleMetadataVoictent,
 } from './externalModuleMetadata';
+import { OVERVIEW_BOUNDARY_ZORN } from './boundaryConfiguration';
+import { COMMON_ATTRIBUTE_BY_KEY, FONT_SIZE } from './commonAttributeByKey';
+import { Shape } from '../../graph-visualization/directed-graph/attribute';
+import { RootDirectoryVoictent, ROOT_DIRECTORY_GEPP } from '../rootDirectory';
+import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 
 export const getRootDirectedGraph = buildEstinant({
   name: 'getRootDirectedGraph',
@@ -32,10 +38,20 @@ export const getRootDirectedGraph = buildEstinant({
   .fromGrition<RootMetadataVoictent>({
     gepp: ROOT_METADATA_GEPP,
   })
+  .andFromGritionTuple<RootMetadataVoictent, [string]>({
+    gepp: ROOT_METADATA_GEPP,
+    framate: () => [OVERVIEW_BOUNDARY_ZORN],
+    croard: (rightInput) => rightInput.zorn,
+  })
   .andFromGritionTuple<BoundaryMetadataVoictent, Tuple<string>>({
     gepp: BOUNDARY_METADATA_GEPP,
     framate: (leftInput) => [...leftInput.grition.relevantBoundaryIdSet],
     croard: (rightInput) => rightInput.grition.id,
+  })
+  .andFromGritionTuple<RootDirectoryVoictent, [string]>({
+    gepp: ROOT_DIRECTORY_GEPP,
+    framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
+    croard: (rightInput) => rightInput.zorn,
   })
   .andFromOdeshinVoictent<DirectoryMetadataVoictent>({
     gepp: DIRECTORY_METADATA_GEPP,
@@ -46,6 +62,9 @@ export const getRootDirectedGraph = buildEstinant({
   .andFromOdeshinVoictent<ExternalModuleMetadataVoictent>({
     gepp: EXTERNAL_MODULE_METADATA_GEPP,
   })
+  .andFromVoictent<RootMetadataVoictent>({
+    gepp: ROOT_METADATA_GEPP,
+  })
   .toGrition<DirectedGraphVoictent>({
     gepp: DIRECTED_GRAPH_GEPP,
     getZorn: (leftInput) => leftInput.zorn,
@@ -53,10 +72,13 @@ export const getRootDirectedGraph = buildEstinant({
   .onPinbe(
     (
       rootMetadata,
+      [overviewRootMetadata],
       relevantBoundaryMetadataList,
+      [rootDirectory],
       directoryMetadataList,
       fileNodeMetadataList,
       externalModuleMetadataList,
+      allRootMetadataOdeshinList,
     ) => {
       const nodeWithEdgeSet = new Set(
         rootMetadata.edgeMetadataList.flatMap((metadata) => {
@@ -96,6 +118,88 @@ export const getRootDirectedGraph = buildEstinant({
         edgeList: [],
         subgraphList: [],
       };
+
+      // TODO: maybe put the custom overview graph logic in a different transform :shruggy-mc-shrug-face:
+      if (rootMetadata.id === overviewRootMetadata.id) {
+        const overviewSubgraphByName = new Map<string, DirectedSubgraph>();
+
+        allRootMetadataOdeshinList.forEach(({ zorn, grition: metadata }) => {
+          const filePath = zorn;
+          const modifiedFilePath = filePath.replace(
+            `internal/${rootDirectory.directoryPath}/`,
+            '',
+          );
+
+          let nodeLabel: string;
+          let subgraph: DirectedSubgraph | null;
+          if (filePath.includes('/')) {
+            const subgraphName = modifiedFilePath.split('/')[0];
+
+            if (modifiedFilePath === subgraphName) {
+              nodeLabel = '.';
+            } else {
+              nodeLabel = modifiedFilePath.replace(`${subgraphName}/`, '');
+            }
+
+            subgraph =
+              overviewSubgraphByName.get(subgraphName) ??
+              ({
+                isRoot: false,
+                attributeByKey: {
+                  id: uuid.v4(),
+                  label: `${subgraphName}/`,
+                  fontsize: FONT_SIZE.directory,
+                  ...COMMON_ATTRIBUTE_BY_KEY,
+                },
+                nodeList: [],
+                edgeList: [],
+                subgraphList: [],
+              } satisfies DirectedSubgraph);
+
+            if (!overviewSubgraphByName.has(subgraphName)) {
+              rootDirectedGraph.subgraphList.push(subgraph);
+            }
+
+            overviewSubgraphByName.set(subgraphName, subgraph);
+          } else {
+            subgraph = null;
+            nodeLabel = modifiedFilePath;
+          }
+
+          const node: DirectedGraphNode = {
+            attributeByKey: {
+              id: metadata.boundaryId,
+              label: nodeLabel,
+              shape: Shape.Box,
+              fontsize: FONT_SIZE.node,
+              ...COMMON_ATTRIBUTE_BY_KEY,
+            },
+          };
+
+          if (subgraph === null) {
+            rootDirectedGraph.nodeList.push(node);
+          } else {
+            subgraph.nodeList.push(node);
+          }
+
+          [...metadata.importedBoundaryIdSet].forEach((importedBoundaryId) => {
+            const tailId = metadata.boundaryId;
+            const headId = importedBoundaryId;
+
+            const edge: DirectedGraphEdge = {
+              attributeByKey: {
+                id: `${tailId}:${headId}`,
+              },
+              tailId,
+              headId,
+            };
+
+            rootDirectedGraph.edgeList.push(edge);
+          });
+        });
+
+        return rootDirectedGraph;
+      }
 
       const boundarySubgraphList = relevantBoundaryMetadataList.map(
         (metadata) => {

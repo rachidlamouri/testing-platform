@@ -4,6 +4,10 @@ import { OdeshinFromGrition } from '../../../adapter/odeshin';
 import { Voictent } from '../../../adapter/voictent';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 
+export type OverviewBoundaryConfiguration = {
+  instanceId: string;
+};
+
 export type InternalBoundaryConfiguration = {
   instanceId: string;
   directoryPath: string;
@@ -18,6 +22,7 @@ export type LimboBoundaryConfiguration = {
 };
 
 export type BoundaryConfiguration = {
+  overview: OverviewBoundaryConfiguration;
   internal: InternalBoundaryConfiguration[];
   external: ExternalBoundaryConfiguration;
   limbo: LimboBoundaryConfiguration;
@@ -43,6 +48,9 @@ export const createBoundaryConfiguration = (
   return {
     zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
     grition: {
+      overview: {
+        instanceId: uuid.v4(),
+      },
       internal: directoryPathList.map((directoryPath) => {
         return {
           instanceId: uuid.v4(),
@@ -58,3 +66,7 @@ export const createBoundaryConfiguration = (
     },
   };
 };
+
+export const OVERVIEW_BOUNDARY_ZORN = '* Overview';
+export const EXTERNAL_BOUNDARY_ZORN = '* External';
+export const LIMBO_BOUNDARY_ZORN = '* Limbo';

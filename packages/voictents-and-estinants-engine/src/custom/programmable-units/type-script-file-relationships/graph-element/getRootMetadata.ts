@@ -44,10 +44,15 @@ export const getRootMetadata = buildEstinant({
       return [metadata.tail.boundaryId, metadata.head.boundaryId];
     });
 
+    const importedBoundaryIdList = edgeMetadataList
+      .filter((metadata) => metadata.head.boundaryId !== boundaryMetadata.id)
+      .map((metadata) => metadata.head.boundaryId);
+
     return {
       id: uuid.v4(),
       boundaryId: boundaryMetadata.id,
       relevantBoundaryIdSet: new Set(relevantBoundaryIdList),
+      importedBoundaryIdSet: new Set(importedBoundaryIdList),
       edgeMetadataList,
       attributeByKey: {
         rankdir: DirectedGraphRankDirection.LeftRight,

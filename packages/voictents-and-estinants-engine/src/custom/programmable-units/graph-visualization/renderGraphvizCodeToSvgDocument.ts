@@ -43,6 +43,10 @@ export const renderGraphvizCodeToSvgDocument = buildEstinant({
       $element.addClass(`head-${headId}`);
     });
 
+    if ($svg.find('.node').length === 0) {
+      $svg.find('g').append(`<text font-size="18">:(</text>`);
+    }
+
     // TODO: get rid of this convention where its looking for tailId:headId. It's confusing and the concern leaks into other files
     $svg.find('.edge').each((index, element) => {
       const $element = $(element);

@@ -7,6 +7,11 @@ import {
   SVG_METADATA_LIST_GEPP,
   SvgMetadataListVoictent,
 } from '../graph-visualization/svgMetadataList';
+import {
+  EXTERNAL_BOUNDARY_ZORN,
+  LIMBO_BOUNDARY_ZORN,
+  OVERVIEW_BOUNDARY_ZORN,
+} from './graph-element/boundaryConfiguration';
 import { RootDirectoryVoictent, ROOT_DIRECTORY_GEPP } from './rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 
@@ -27,17 +32,51 @@ export const getSvgMetadataList = buildEstinant({
   .onPinbe((svgDocumentInputList, [rootDirectory]) => {
     return {
       zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
-      grition: svgDocumentInputList.map(({ zorn, grition }) => {
-        const filePath = zorn;
-        const label = filePath
-          .replace(/^internal\//, '')
-          .replace(`${rootDirectory.directoryPath}/`, '');
+      grition: svgDocumentInputList
+        .slice()
+        .sort((a, b) => {
+          if (a.zorn === OVERVIEW_BOUNDARY_ZORN) {
+            return -1;
+          }
 
-        return {
-          label,
-          document: grition,
-        };
-      }),
+          if (b.zorn === OVERVIEW_BOUNDARY_ZORN) {
+            return 1;
+          }
+
+          if (a.zorn === LIMBO_BOUNDARY_ZORN) {
+            return 1;
+          }
+
+          if (b.zorn === LIMBO_BOUNDARY_ZORN) {
+            return -1;
+          }
+
+          if (a.zorn === EXTERNAL_BOUNDARY_ZORN) {
+            return 1;
+          }
+
+          if (b.zorn === EXTERNAL_BOUNDARY_ZORN) {
+            return -1;
+          }
+
+          if (a.zorn < b.zorn) {
+            return -1;
+          }
+
+          return 1;
+        })
+        .map(({ zorn, grition }) => {
+          const filePath = zorn;
+          const label = filePath.replace(
+            `internal/${rootDirectory.directoryPath}/`,
+            '',
+          );
+
+          return {
+            label,
+            document: grition,
+          };
+        }),
     };
   })
   .assemble();
