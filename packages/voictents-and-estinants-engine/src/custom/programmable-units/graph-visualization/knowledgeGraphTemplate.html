@@ -1,0 +1,125 @@
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.5.0/dist/svg-pan-zoom.min.js"></script>
+  <style>
+    body {
+      display: grid;
+      font-family: sans-serif;
+      grid-template-columns: 400px auto 600px;
+    }
+
+    .panel {
+      margin: 0px;
+    }
+
+    #left-panel {
+      border-right: 1px solid #333;
+      padding-right: 8px;
+    }
+
+    #right-panel {
+      border-left: 1px solid #333;
+      padding-left: 8px;
+    }
+
+    .panel h2 {
+      margin-top: 0px
+    }
+
+    #left-panel button {
+      height: 20px;
+      width: 100%;
+      margin-bottom: 4px;
+      text-align: left;
+    }
+
+    #left-panel button.selected {
+      border: 1px solid #0377fc;
+    }
+
+    #left-panel ul {
+      list-style-type: none;
+      padding-left: 8px;
+    }
+
+    #right-panel label {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    #right-panel p {
+      font-size: 12px;
+      margin: 0px;
+      margin-bottom: 12px;
+    }
+  </style>
+  <script>
+    // the next line is automatically overwritten by the engine program
+    const navigationItemList = [];
+
+    let navigationList;
+    let buttonList;
+    let view;
+    let templateList;
+
+    const setView = (index) => {
+      for (button of buttonList) {
+        button.classList.remove('selected');
+      }
+      buttonList.item(index).classList.add('selected');
+
+      const template = templateList[index];
+      const svgTemplate = template.content.querySelector('svg');
+      const svg = document.importNode(svgTemplate, true);
+
+      [...view.children].forEach((child) => {
+        view.removeChild(child);
+      })
+      view.appendChild(svg);
+
+      svgPanZoom('svg', {
+        zoomScaleSensitivity: .5,
+        minZoom: .2,
+        maxZoom: 20,
+      })
+    };
+
+    window.addEventListener('DOMContentLoaded', function init() {
+      navigationList = document.getElementById('navigation-list');
+      buttonList = document.getElementsByTagName('button');
+      view = document.getElementById('view');
+      templateList = document.getElementsByTagName('template');
+
+      navigationItemList.forEach((navigationItem, index) => {
+        const listItem = document.createElement('li');
+        const button = document.createElement('button');
+        button.textContent = navigationItem.text;
+
+        button.addEventListener('click', () => {
+          setView(index);
+        })
+
+        listItem.appendChild(button);
+        navigationList.appendChild(listItem);
+      })
+
+      setView(0);
+    });
+  </script>
+</head>
+<body>
+  <div id="left-panel" class="panel">
+    <h2>Graphs</h2>
+    <ul id="navigation-list">
+      <!-- This list is populated at runtime -->
+    </ul>
+  </div>
+  <div id="view">
+  </div>
+  <div id="right-panel" class="panel">
+    <h2>No Selection</h2>
+  </div>
+
+  <!-- the next line is automatically overwritten by the engine program -->
+  <!-- SVG_TEMPLATE_SET_PLACEHOLDER -->
+</body>
