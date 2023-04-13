@@ -14,9 +14,6 @@ import {
   DirectedGraphMetadataByIdVoictent,
 } from './directedGraphMetadataById';
 
-const KNOWLEDGE_GRAPH_FILE_PATH =
-  'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/knowledgeGraphTemplate.html';
-
 export const constructKnowledgeGraph = buildEstinant({
   name: 'constructKnowledgeGraph',
 })
@@ -25,7 +22,9 @@ export const constructKnowledgeGraph = buildEstinant({
   })
   .andFromGritionTuple<HtmlFileVoictent, [string]>({
     gepp: HTML_FILE_GEPP,
-    framate: () => [KNOWLEDGE_GRAPH_FILE_PATH],
+    framate: () => [
+      '../testing-platform/packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/knowledgeGraphTemplate.html',
+    ],
     croard: (rightInput) => rightInput.zorn,
   })
   .andFromOdeshinVoictent<DirectedGraphMetadataByIdVoictent>({

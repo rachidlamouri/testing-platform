@@ -13,7 +13,7 @@ const fileExtensionSuffixesByFileExtensionSuffixIdentifer = {
   [FileExtensionSuffixIdentifier.Html]: 'html',
   [FileExtensionSuffixIdentifier.Json]: 'json',
   [FileExtensionSuffixIdentifier.TypeScript]: 'ts',
-  [FileExtensionSuffixIdentifier.Yaml]: 'yaml',
+  [FileExtensionSuffixIdentifier.Yaml]: 'yml',
 } satisfies Record<
   Exclude<FileExtensionSuffixIdentifier, FileExtensionSuffixIdentifier.Unknown>,
   string
