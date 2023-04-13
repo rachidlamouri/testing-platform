@@ -16,6 +16,11 @@ import {
   HTML_FILE_GEPP,
 } from '../html-file/htmlFile';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import {
+  TSV_FILE_GEPP,
+  TsvFile,
+  TsvFileVoictent,
+} from '../type-script-file/tsvFile';
 
 export const categorizeFiles = buildEstinant({
   name: 'categorizeFiles',
@@ -41,5 +46,12 @@ export const categorizeFiles = buildEstinant({
     getZorn: (leftInput) => leftInput.zorn,
     pinbe: (file): file is HtmlFile =>
       file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Html,
+  })
+  .toGritionOnCondition<TsvFileVoictent>({
+    gepp: TSV_FILE_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
+    pinbe: (file): file is TsvFile =>
+      file.extension.suffixIdentifier ===
+      FileExtensionSuffixIdentifier.TabSeparatedValue,
   })
   .assemble();

@@ -3,6 +3,7 @@ import { swapEntries } from '../../../utilities/swapEntries';
 export enum FileExtensionSuffixIdentifier {
   Html = 'Html',
   Json = 'Json',
+  TabSeparatedValue = 'TabSeparatedValue',
   TypeScript = 'TypeScript',
   Yaml = 'Yaml',
 
@@ -12,6 +13,7 @@ export enum FileExtensionSuffixIdentifier {
 const fileExtensionSuffixesByFileExtensionSuffixIdentifer = {
   [FileExtensionSuffixIdentifier.Html]: 'html',
   [FileExtensionSuffixIdentifier.Json]: 'json',
+  [FileExtensionSuffixIdentifier.TabSeparatedValue]: 'tsv',
   [FileExtensionSuffixIdentifier.TypeScript]: 'ts',
   [FileExtensionSuffixIdentifier.Yaml]: 'yaml',
 } satisfies Record<

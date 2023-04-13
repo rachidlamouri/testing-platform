@@ -1,0 +1,67 @@
+Collections:
+
+    file-system-object-enumerator-configuration
+      I: |X-------------|
+      C: |-X------------|
+
+    file
+      I: |-XXXXXXXXXX---|
+      C: |--X-----------|
+
+    directory
+      I: |-X------------|
+      C: |--X-----------|
+
+    type-script-file
+      I: |---XXXXXX-----|
+      C: |---------X----|
+
+    tsv-file
+      I: |---------XX---|
+      C: |-----------X--|
+
+    html-file
+      I: |-----------X--|
+      C: |------------X-|
+
+    map-metadata
+      I: |------------X-|
+      C: |-------------X|
+
+    svg-document
+      I: |-------------X|
+      C: |--------------|
+
+Transforms:
+
+  enumerateFileSystemObjects
+    file-system-object-enumerator-configuration
+      I: |X-------------|
+         |______________|
+      E: |1-------------|
+
+  categorizeFiles
+    file
+      I: |-XXXXXXXXXX---|
+         |______________|
+      E: |-1111111111---|
+
+  parseTsvFile
+    tsv-file
+      C: |-----------X--|
+         |______________|
+      E: |-----------1--|
+
+  constructLocationSvg
+    map-metadata
+      I: |------------X-|
+         |______________|
+      E: |------------1-|
+
+  populateHtmlFile
+    svg-document
+      I: |-------------X|
+    html-file
+      I: |-----------X--|
+         |______________|
+      E: |-------------1|
