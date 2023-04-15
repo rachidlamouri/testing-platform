@@ -46,10 +46,10 @@ import {
 } from '../../../../utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
 import { isStringLiteral } from '../../../../utilities/type-script-ast/isStringLiteral';
 
-type EstinantName = 'getEstinantCallExpressionParts';
+type EstinantName = 'getEstinantBuilderCallExpressionParts';
 
-export const getEstinantCallExpressionParts = buildEstinant({
-  name: 'getEstinantCallExpressionParts',
+export const getEstinantBuilderCallExpressionParts = buildEstinant({
+  name: 'getEstinantBuilderCallExpressionParts',
 })
   .fromHubblepup<EngineEstinantVoictent>({
     gepp: ENGINE_ESTINANT_GEPP,
@@ -75,9 +75,9 @@ export const getEstinantCallExpressionParts = buildEstinant({
   })
   .onPinbe(
     (engineEstinantInput, [{ grition: bodyDeclarationsByIdentifier }]) => {
-      const basicErrorZorn = `getEstinantCallExpressionParts/${engineEstinantInput.zorn}`;
-      const missingNameErrorZorn = `getEstinantCallExpressionParts/missing-name/${engineEstinantInput.zorn}`;
-      const invalidNameErrorZorn = `getEstinantCallExpressionParts/invalid-name/${engineEstinantInput.zorn}`;
+      const basicErrorZorn = `getEstinantBuilderCallExpressionParts/${engineEstinantInput.zorn}`;
+      const missingNameErrorZorn = `getEstinantBuilderCallExpressionParts/missing-name/${engineEstinantInput.zorn}`;
+      const invalidNameErrorZorn = `getEstinantBuilderCallExpressionParts/invalid-name/${engineEstinantInput.zorn}`;
 
       const engineEstinant = engineEstinantInput.grition;
       const { programName, estinantName } = engineEstinant;
@@ -102,7 +102,7 @@ export const getEstinantCallExpressionParts = buildEstinant({
             {
               zorn: basicErrorZorn,
               grition: {
-                errorId: `getEstinantCallExpressionParts/missing-call-expression`,
+                errorId: `getEstinantBuilderCallExpressionParts/missing-call-expression`,
                 message: 'Export declaration is missing a call expression',
                 locator: {
                   typeName: ErrorLocatorTypeName.FileErrorLocator,
@@ -146,7 +146,7 @@ export const getEstinantCallExpressionParts = buildEstinant({
             return {
               zorn: `${basicErrorZorn}/${index}`,
               grition: {
-                errorId: `getEstinantCallExpressionParts/idk`,
+                errorId: `getEstinantBuilderCallExpressionParts/idk`,
                 message: 'I have no idea',
                 locator: {
                   typeName: ErrorLocatorTypeName.FileErrorLocator,
@@ -242,7 +242,7 @@ export const getEstinantCallExpressionParts = buildEstinant({
             {
               zorn: basicErrorZorn,
               grition: {
-                errorId: `getEstinantCallExpressionParts/invalid-call-expression-chain-start`,
+                errorId: `getEstinantBuilderCallExpressionParts/invalid-call-expression-chain-start`,
                 message: `Call expression chain does not start with "${buildEstinant.name}"`,
                 locator: {
                   typeName: ErrorLocatorTypeName.FileErrorLocator,
@@ -271,7 +271,7 @@ export const getEstinantCallExpressionParts = buildEstinant({
             {
               zorn: basicErrorZorn,
               grition: {
-                errorId: `getEstinantCallExpressionParts/invalid-call-expression-chain-end`,
+                errorId: `getEstinantBuilderCallExpressionParts/invalid-call-expression-chain-end`,
                 message:
                   'Estinant builder call expression chain does not end in "assemble"',
                 locator: {
@@ -316,7 +316,7 @@ export const getEstinantCallExpressionParts = buildEstinant({
               return {
                 zorn: `${basicErrorZorn}/${index}`,
                 grition: {
-                  errorId: `getEstinantCallExpressionParts/missing-type-parameter`,
+                  errorId: `getEstinantBuilderCallExpressionParts/missing-type-parameter`,
                   message: `Estinant builder expression "${parsedExpression.functionName}" is missing a type parameter`,
                   locator: {
                     typeName: ErrorLocatorTypeName.FileErrorLocator,
@@ -395,7 +395,7 @@ export const getEstinantCallExpressionParts = buildEstinant({
         parallelErrorList.push({
           zorn: missingNameErrorZorn,
           grition: {
-            errorId: `getEstinantCallExpressionParts/missing-estinant-name`,
+            errorId: `getEstinantBuilderCallExpressionParts/missing-estinant-name`,
             message: `Estinant builder instantiation is missing a name`,
             locator: {
               typeName: ErrorLocatorTypeName.FileErrorLocator,
@@ -408,7 +408,7 @@ export const getEstinantCallExpressionParts = buildEstinant({
         parallelErrorList.push({
           zorn: invalidNameErrorZorn,
           grition: {
-            errorId: `getEstinantCallExpressionParts/invalid-estinant-name`,
+            errorId: `getEstinantBuilderCallExpressionParts/invalid-estinant-name`,
             message: `Estinant builder instantiation name does not match the variable name`,
             locator: {
               typeName: ErrorLocatorTypeName.FileErrorLocator,
