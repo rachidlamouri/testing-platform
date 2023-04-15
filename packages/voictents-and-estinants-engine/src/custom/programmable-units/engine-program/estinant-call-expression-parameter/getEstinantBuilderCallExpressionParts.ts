@@ -5,17 +5,19 @@ import {
   FlattenedCallExpressionOrError,
 } from '../../../../utilities/type-script-ast/flattenIdentifiableCallExpressionChain';
 import { isCallExpression } from '../../../../utilities/type-script-ast/isCallExpression';
-import {
-  IdentifiableCallExpression,
-  isIdentifiableCallExpression,
-} from '../../../../utilities/type-script-ast/isIdentifiableCallExpression';
+import { IdentifiableCallExpression } from '../../../../utilities/type-script-ast/isIdentifiableCallExpression';
 import {
   IdentifiableTypeScriptTypeReference,
   isIdentifiableTypeScriptTypeReference,
 } from '../../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
 import { IdentifiableMemberExpressionCallExpression } from '../../../../utilities/type-script-ast/isMemberExpressionCallExpression';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { ErrorVoictent, ERROR_GEPP, ErrorOdeshin } from '../../error/error';
+import {
+  ProgramErrorVoictent,
+  PROGRAM_ERROR_GEPP,
+  ProgramErrorOdeshin,
+  ErrorLocatorTypeName,
+} from '../../error/programError';
 import {
   ProgramBodyDeclarationsByIdentifierVoictent,
   PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
@@ -24,13 +26,6 @@ import {
   EngineEstinantVoictent,
   ENGINE_ESTINANT_GEPP,
 } from '../engineEstinant';
-import { isCortmumCallExpression } from '../estinant-call-expression/cortmumCallExpression';
-import { isDisatingerCallExpression } from '../estinant-call-expression/disatingerCallExpression';
-import { isMattomerCallExpression } from '../estinant-call-expression/mattomerCallExpression';
-import { isMentursectionCallExpression } from '../estinant-call-expression/mentursectionCallExpression';
-import { isOnamaCallExpression } from '../estinant-call-expression/onamaCallExpression';
-import { isWattlectionCallExpression } from '../estinant-call-expression/wattlectionCallExpression';
-import { isWortinatorCallExpression } from '../estinant-call-expression/wortinatorCallExpression';
 import {
   EstinantInput,
   EstinantInputListVoictent,
@@ -42,14 +37,6 @@ import {
   ESTINANT_OUTPUT_LIST_GEPP,
 } from '../estinant-input-output/estinantOutputList';
 import {
-  EstinantCallExpressionInputParameterVoictent,
-  ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
-} from './estinantCallExpressionInputParameter';
-import {
-  EstinantCallExpressionOutputParameterVoictent,
-  ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
-} from './estinantCallExpressionOutputParameter';
-import {
   EstinantInputOutputParentVoictent,
   ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
 } from './estinantInputOutputParent';
@@ -59,8 +46,10 @@ import {
 } from '../../../../utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
 import { isStringLiteral } from '../../../../utilities/type-script-ast/isStringLiteral';
 
-export const getEstinantCallExpressionParts = buildEstinant({
-  name: 'getEstinantCallExpressionParts',
+type EstinantName = 'getEstinantBuilderCallExpressionParts';
+
+export const getEstinantBuilderCallExpressionParts = buildEstinant({
+  name: 'getEstinantBuilderCallExpressionParts',
 })
   .fromHubblepup<EngineEstinantVoictent>({
     gepp: ENGINE_ESTINANT_GEPP,
@@ -75,26 +64,20 @@ export const getEstinantCallExpressionParts = buildEstinant({
   .toHubblepupTuple<EstinantInputOutputParentVoictent>({
     gepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
   })
-  .toHubblepupTuple<EstinantCallExpressionInputParameterVoictent>({
-    gepp: ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
-  })
-  .toHubblepupTuple<EstinantCallExpressionOutputParameterVoictent>({
-    gepp: ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
-  })
   .toHubblepupTuple<EstinantInputListVoictent>({
     gepp: ESTINANT_INPUT_LIST_GEPP,
   })
   .toHubblepupTuple<EstinantOutputListVoictent>({
     gepp: ESTINANT_OUTPUT_LIST_GEPP,
   })
-  .toHubblepupTuple<ErrorVoictent>({
-    gepp: ERROR_GEPP,
+  .toHubblepupTuple<ProgramErrorVoictent<EstinantName>>({
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe(
     (engineEstinantInput, [{ grition: bodyDeclarationsByIdentifier }]) => {
-      const basicErrorZorn = `estinantCallExpressionParameterCortmum/${engineEstinantInput.zorn}`;
-      const missingNameErrorZorn = `estinantCallExpressionParameterCortmum/missing-name/${engineEstinantInput.zorn}`;
-      const invalidNameErrorZorn = `estinantCallExpressionParameterCortmum/invalid-name/${engineEstinantInput.zorn}`;
+      const basicErrorZorn = `getEstinantBuilderCallExpressionParts/${engineEstinantInput.zorn}`;
+      const missingNameErrorZorn = `getEstinantBuilderCallExpressionParts/missing-name/${engineEstinantInput.zorn}`;
+      const invalidNameErrorZorn = `getEstinantBuilderCallExpressionParts/invalid-name/${engineEstinantInput.zorn}`;
 
       const engineEstinant = engineEstinantInput.grition;
       const { programName, estinantName } = engineEstinant;
@@ -113,75 +96,27 @@ export const getEstinantCallExpressionParts = buildEstinant({
       if (callExpression === null) {
         return {
           [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
-          [ERROR_GEPP]: [
+          [PROGRAM_ERROR_GEPP]: [
             {
               zorn: basicErrorZorn,
               grition: {
+                errorId: `getEstinantBuilderCallExpressionParts/missing-call-expression`,
                 message: 'Export declaration is missing a call expression',
-                hasNode: node !== undefined,
-                hasInitExpression: initExpression !== null,
-                hasCallExpression: callExpression !== null,
-                initExpression,
+                locator: {
+                  typeName: ErrorLocatorTypeName.FileErrorLocator,
+                  filePath: engineEstinant.estinantFilePath,
+                },
+                metadata: {
+                  hasNode: node !== undefined,
+                  hasInitExpression: initExpression !== null,
+                  hasCallExpression: callExpression !== null,
+                  initExpression,
+                },
               },
             },
           ],
-        };
-      }
-
-      if (
-        isIdentifiableCallExpression(callExpression) &&
-        (isCortmumCallExpression(callExpression) ||
-          isMentursectionCallExpression(callExpression) ||
-          isOnamaCallExpression(callExpression) ||
-          isMattomerCallExpression(callExpression) ||
-          isWattlectionCallExpression(callExpression) ||
-          isWortinatorCallExpression(callExpression) ||
-          isDisatingerCallExpression(callExpression))
-      ) {
-        const inputListIdentifier = `${engineEstinantInput.zorn}/input`;
-        const outputListIdentifier = `${engineEstinantInput.zorn}/output`;
-
-        return {
-          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [
-            {
-              zorn: engineEstinantInput.zorn,
-              grition: {
-                programName,
-                estinantName,
-                inputListIdentifier,
-                outputListIdentifier,
-              },
-            },
-          ],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [
-            {
-              zorn: inputListIdentifier,
-              grition: {
-                programName,
-                estinantName,
-                isInput: true,
-                node: callExpression.typeParameters.params[0],
-              },
-            },
-          ],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [
-            {
-              zorn: outputListIdentifier,
-              grition: {
-                programName,
-                estinantName,
-                isInput: false,
-                node: callExpression.typeParameters.params[1],
-              },
-            },
-          ],
-          [ESTINANT_INPUT_LIST_GEPP]: [],
-          [ESTINANT_OUTPUT_LIST_GEPP]: [],
-          [ERROR_GEPP]: [],
         };
       }
 
@@ -205,14 +140,22 @@ export const getEstinantCallExpressionParts = buildEstinant({
       if (errorList.length > 0) {
         return {
           [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
-          [ERROR_GEPP]: errorList.map((error, index) => {
+          [PROGRAM_ERROR_GEPP]: errorList.map((error, index) => {
             return {
               zorn: `${basicErrorZorn}/${index}`,
-              grition: error,
+              grition: {
+                errorId: `getEstinantBuilderCallExpressionParts/idk`,
+                message: 'I have no idea',
+                locator: {
+                  typeName: ErrorLocatorTypeName.FileErrorLocator,
+                  filePath: engineEstinant.estinantFilePath,
+                },
+                metadata: {
+                  error,
+                },
+              },
             };
           }),
         };
@@ -293,16 +236,21 @@ export const getEstinantCallExpressionParts = buildEstinant({
       ) {
         return {
           [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
-          [ERROR_GEPP]: [
+          [PROGRAM_ERROR_GEPP]: [
             {
               zorn: basicErrorZorn,
               grition: {
+                errorId: `getEstinantBuilderCallExpressionParts/invalid-call-expression-chain-start`,
                 message: `Call expression chain does not start with "${buildEstinant.name}"`,
-                parsedFlattenedCallExpressionList,
+                locator: {
+                  typeName: ErrorLocatorTypeName.FileErrorLocator,
+                  filePath: engineEstinant.estinantFilePath,
+                },
+                metadata: {
+                  parsedFlattenedCallExpressionList,
+                },
               },
             },
           ],
@@ -317,17 +265,22 @@ export const getEstinantCallExpressionParts = buildEstinant({
       ) {
         return {
           [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
-          [ERROR_GEPP]: [
+          [PROGRAM_ERROR_GEPP]: [
             {
               zorn: basicErrorZorn,
               grition: {
+                errorId: `getEstinantBuilderCallExpressionParts/invalid-call-expression-chain-end`,
                 message:
                   'Estinant builder call expression chain does not end in "assemble"',
-                parsedFlattenedCallExpressionList,
+                locator: {
+                  typeName: ErrorLocatorTypeName.FileErrorLocator,
+                  filePath: engineEstinant.estinantFilePath,
+                },
+                metadata: {
+                  parsedFlattenedCallExpressionList,
+                },
               },
             },
           ],
@@ -356,17 +309,22 @@ export const getEstinantCallExpressionParts = buildEstinant({
       if (errorParsedExpressionList.length > 0) {
         return {
           [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
-          [ERROR_GEPP]: errorParsedExpressionList.map(
+          [PROGRAM_ERROR_GEPP]: errorParsedExpressionList.map(
             (parsedExpression, index) => {
               return {
                 zorn: `${basicErrorZorn}/${index}`,
                 grition: {
+                  errorId: `getEstinantBuilderCallExpressionParts/missing-type-parameter`,
                   message: `Estinant builder expression "${parsedExpression.functionName}" is missing a type parameter`,
-                  parsedExpression,
+                  locator: {
+                    typeName: ErrorLocatorTypeName.FileErrorLocator,
+                    filePath: engineEstinant.estinantFilePath,
+                  },
+                  metadata: {
+                    parsedExpression,
+                  },
                 },
               };
             },
@@ -431,22 +389,35 @@ export const getEstinantCallExpressionParts = buildEstinant({
           ? estinantNameProperty.value.value
           : null;
 
-      const parallelErrorList: ErrorOdeshin[] = [];
+      const parallelErrorList: ProgramErrorOdeshin<EstinantName>[] = [];
 
       if (instantiatedName === null) {
         parallelErrorList.push({
           zorn: missingNameErrorZorn,
           grition: {
+            errorId: `getEstinantBuilderCallExpressionParts/missing-estinant-name`,
             message: `Estinant builder instantiation is missing a name`,
+            locator: {
+              typeName: ErrorLocatorTypeName.FileErrorLocator,
+              filePath: engineEstinant.estinantFilePath,
+            },
+            metadata: null,
           },
         });
       } else if (instantiatedName !== estinantName) {
         parallelErrorList.push({
           zorn: invalidNameErrorZorn,
           grition: {
+            errorId: `getEstinantBuilderCallExpressionParts/invalid-estinant-name`,
             message: `Estinant builder instantiation name does not match the variable name`,
-            expected: estinantName,
-            actual: instantiatedName,
+            locator: {
+              typeName: ErrorLocatorTypeName.FileErrorLocator,
+              filePath: engineEstinant.estinantFilePath,
+            },
+            metadata: {
+              expected: estinantName,
+              actual: instantiatedName,
+            },
           },
         });
       }
@@ -463,8 +434,6 @@ export const getEstinantCallExpressionParts = buildEstinant({
             },
           },
         ],
-        [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-        [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
         [ESTINANT_INPUT_LIST_GEPP]: [
           {
             zorn: inputListZorn,
@@ -477,7 +446,7 @@ export const getEstinantCallExpressionParts = buildEstinant({
             grition: outputList,
           },
         ],
-        [ERROR_GEPP]: parallelErrorList,
+        [PROGRAM_ERROR_GEPP]: parallelErrorList,
       };
     },
   )

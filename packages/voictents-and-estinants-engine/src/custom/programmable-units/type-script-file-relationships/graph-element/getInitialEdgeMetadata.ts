@@ -4,7 +4,12 @@ import {
   TypeScriptFileImportListVoictent,
 } from '../../type-script-file/typeScriptFileImportList';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
-import { ERROR_GEPP, ErrorOdeshin, ErrorVoictent } from '../../error/error';
+import {
+  PROGRAM_ERROR_GEPP,
+  ErrorLocatorTypeName,
+  ProgramErrorOdeshin,
+  ProgramErrorVoictent,
+} from '../../error/programError';
 import {
   INITIAL_EDGE_METADATA_LIST_GEPP,
   InitialEdgeMetadataList,
@@ -47,8 +52,8 @@ export const getInitialEdgeMetadata = buildEstinant({
   .toHubblepup<InitialEdgeMetadataListVoictent>({
     gepp: INITIAL_EDGE_METADATA_LIST_GEPP,
   })
-  .toHubblepupTuple<ErrorVoictent>({
-    gepp: ERROR_GEPP,
+  .toHubblepupTuple<ProgramErrorVoictent>({
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe(
     (
@@ -59,7 +64,7 @@ export const getInitialEdgeMetadata = buildEstinant({
     ) => {
       const fileNodeMetadata = leftInput.grition;
 
-      const errorList: ErrorOdeshin[] = [];
+      const errorList: ProgramErrorOdeshin[] = [];
       const edgeMetadataList: InitialEdgeMetadataList = [];
 
       const tailList = importList.map((importedItem) => {
@@ -78,8 +83,15 @@ export const getInitialEdgeMetadata = buildEstinant({
           errorList.push({
             zorn: `getInitialEdgeMetadata/${leftInput.zorn}/${index}`,
             grition: {
-              fileNodeMetadata,
-              importedItem,
+              message: `Unable to find metadata for the imported item "${importedItem.sourcePath}"`,
+              locator: {
+                typeName: ErrorLocatorTypeName.FileErrorLocator,
+                filePath: fileNodeMetadata.filePath,
+              },
+              metadata: {
+                fileNodeMetadata,
+                importedItem,
+              },
             },
           });
         } else {
@@ -91,7 +103,7 @@ export const getInitialEdgeMetadata = buildEstinant({
       });
 
       return {
-        [ERROR_GEPP]: errorList,
+        [PROGRAM_ERROR_GEPP]: errorList,
         [INITIAL_EDGE_METADATA_LIST_GEPP]: {
           zorn: leftInput.zorn,
           grition: edgeMetadataList,

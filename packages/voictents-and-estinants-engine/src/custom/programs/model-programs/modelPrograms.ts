@@ -12,16 +12,15 @@ import {
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { getEngineProgramParts } from '../../programmable-units/engine-program/getEngineProgramParts';
 import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
-import { getEstinantCallExpressionParts } from '../../programmable-units/engine-program/estinant-call-expression-parameter/getEstinantCallExpressionParts';
+import { getEstinantBuilderCallExpressionParts } from '../../programmable-units/engine-program/estinant-call-expression-parameter/getEstinantBuilderCallExpressionParts';
 import { constructEngineProgramTreeOutputFile } from '../../programmable-units/engine-program/constructEngineProgramTreeOutputFile';
 import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { getTypeScriptFileExportList } from '../../programmable-units/type-script-file/getTypeScriptFileExportList';
-import { getEstinantInputList } from '../../programmable-units/engine-program/estinant-input-output/getEstinantInputList';
-import { getEstinantOutputList } from '../../programmable-units/engine-program/estinant-input-output/getEstinantOutputList';
 import { constructEngineProgramTree } from '../../programmable-units/engine-program/tree/constructEngineProgramTree';
 import { constructEstinantTreeNode } from '../../programmable-units/engine-program/tree/constructEstinantTreeNode';
+import { reportErrors } from '../../programmable-units/error/reportErrors';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -41,12 +40,12 @@ digikikify({
     getTypeScriptFileImportList,
 
     getEngineProgramParts,
-    getEstinantCallExpressionParts,
-    getEstinantInputList,
-    getEstinantOutputList,
+    getEstinantBuilderCallExpressionParts,
     constructEstinantTreeNode,
     constructEngineProgramTree,
     constructEngineProgramTreeOutputFile,
+
+    reportErrors,
   ],
   quirmDebugger: buildQuirmDebugger('modelPrograms'),
 });

@@ -1,5 +1,10 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { ERROR_GEPP, ErrorVoictent } from '../../error/error';
+import {
+  PROGRAM_ERROR_GEPP,
+  ErrorLocatorTypeName,
+  ProgramErrorVoictent,
+  ProgramError,
+} from '../../error/programError';
 import { Shape } from '../../graph-visualization/directed-graph/attribute';
 import {
   TYPE_SCRIPT_FILE_GEPP,
@@ -35,8 +40,8 @@ export const getFileNodeMetadata = buildEstinant({
   .andFromOdeshinVoictent<BoundaryMetadataVoictent>({
     gepp: BOUNDARY_METADATA_GEPP,
   })
-  .toHubblepupTuple<ErrorVoictent>({
-    gepp: ERROR_GEPP,
+  .toHubblepupTuple<ProgramErrorVoictent>({
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple<FileNodeMetadataVoictent>({
     gepp: FILE_NODE_METADATA_GEPP,
@@ -55,15 +60,21 @@ export const getFileNodeMetadata = buildEstinant({
 
     if (directoryId === undefined || foundBoundary === undefined) {
       return {
-        [ERROR_GEPP]: [
+        [PROGRAM_ERROR_GEPP]: [
           {
             zorn: `getFileNodeMetadata/${leftInput.zorn}`,
             grition: {
               message: 'Unable to find directory id or boundary id',
-              directoryId,
-              boundaryId: foundBoundary?.id,
-              file,
-            },
+              locator: {
+                typeName: ErrorLocatorTypeName.FileErrorLocator,
+                filePath: file.filePath,
+              },
+              metadata: {
+                directoryId,
+                boundaryId: foundBoundary?.id,
+                file,
+              },
+            } satisfies ProgramError,
           },
         ],
         [FILE_NODE_METADATA_GEPP]: [],
@@ -71,7 +82,7 @@ export const getFileNodeMetadata = buildEstinant({
     }
 
     return {
-      [ERROR_GEPP]: [],
+      [PROGRAM_ERROR_GEPP]: [],
       [FILE_NODE_METADATA_GEPP]: [
         {
           zorn: leftInput.zorn,

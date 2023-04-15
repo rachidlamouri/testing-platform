@@ -18,19 +18,19 @@ Collections:
 
 Transforms:
 
-  0
+  datumTestCaseInputToTypeScriptDatumTypeName
     datum-test-case-input
       I: |XXXXXXXXXXXXXXXXXXXXXXXX|
          |________________________|
       E: |111111111111111111111111|
 
-  1
+  datumTestCaseInputToCustomDatumTypeName
     datum-test-case-input
       I: |XXXXXXXXXXXXXXXXXXXXXXXX|
          |________________________|
       E: |111111111111111111111111|
 
-  2
+  datumTestCaseInputToSerializedDatum
     datum-test-case-input
       I: |XXXXXXXXXXXXXXXXXXXXXXXX|
          |________________________|
