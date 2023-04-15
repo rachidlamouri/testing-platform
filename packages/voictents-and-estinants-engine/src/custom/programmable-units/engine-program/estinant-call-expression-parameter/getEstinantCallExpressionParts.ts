@@ -195,7 +195,20 @@ export const getEstinantCallExpressionParts = buildEstinant({
           ],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
-          [PROGRAM_ERROR_GEPP]: [],
+          [PROGRAM_ERROR_GEPP]: [
+            {
+              zorn: basicErrorZorn,
+              grition: {
+                errorId: `getEstinantCallExpressionParts/deprecated-call-expression`,
+                message: `Calls to "${callExpression.callee.name}" are deprecated. Use "buildEstinant" instead`,
+                locator: {
+                  typeName: ErrorLocatorTypeName.FileErrorLocator,
+                  filePath: engineEstinant.estinantFilePath,
+                },
+                metadata: null,
+              },
+            },
+          ],
         };
       }
 
