@@ -12,7 +12,7 @@ import {
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { getEngineProgramParts } from '../../programmable-units/engine-program/getEngineProgramParts';
 import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
-import { getEstinantCallExpressionParts } from '../../programmable-units/engine-program/estinant-call-expression-parameter/getEstinantCallExpressionParts';
+import { getEstinantCallExpressionParts } from '../../programmable-units/engine-program/estinant-call-expression-parameter/getEstinantBuilderCallExpressionParts';
 import { constructEngineProgramTreeOutputFile } from '../../programmable-units/engine-program/constructEngineProgramTreeOutputFile';
 import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
