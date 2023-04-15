@@ -11,6 +11,10 @@ import {
   InputOutputContext,
 } from './estinantBuilderContext';
 import {
+  OutputHubblepupTupleAppreffingeBuilderParent,
+  buildOutputHubblepupTupleAppreffingeBuilder,
+} from './outputHubblepupTupleAppreffingeBuilder';
+import {
   buildPinbetunfBuilder,
   PinbetunfBuilderParent,
 } from './pinbetunfBuilder';
@@ -48,7 +52,12 @@ export type OutputGritionAppreffingeBuilder<
   TLeftVicken,
   TRightVickenTuple,
   NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
->;
+> &
+  OutputHubblepupTupleAppreffingeBuilderParent<
+    TLeftVicken,
+    TRightVickenTuple,
+    NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
+  >;
 
 export const buildOutputGritionAppreffingeBuilder = <
   TLeftVicken extends LeftVicken,
@@ -79,6 +88,12 @@ export const buildOutputGritionAppreffingeBuilder = <
 
     return {
       onPinbe: buildPinbetunfBuilder<
+        TLeftVicken,
+        TRightVickenTuple,
+        NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
+      >(nextContext),
+
+      toHubblepupTuple: buildOutputHubblepupTupleAppreffingeBuilder<
         TLeftVicken,
         TRightVickenTuple,
         NextOutputVickenTuple<TOutputVickenTuple, TOutputVoictent>
