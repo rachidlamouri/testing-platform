@@ -1,5 +1,5 @@
 import { serialize } from '../../../utilities/typed-datum/serializer/serialize';
-import { buildOnama } from '../../adapter/estinant/onama';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   DatumTestCaseInputVoictent,
   DATUM_TEST_CASE_INPUT_GEPP,
@@ -9,14 +9,18 @@ import {
   SERIALIZED_DATUM_GEPP,
 } from './serializedDatum';
 
-export const datumTestCaseInputToSerializedDatum = buildOnama<
-  DatumTestCaseInputVoictent,
-  SerializedDatumVoictent
->({
-  inputGepp: DATUM_TEST_CASE_INPUT_GEPP,
-  outputGepp: SERIALIZED_DATUM_GEPP,
-  pinbe: (input) => {
+export const datumTestCaseInputToSerializedDatum = buildEstinant({
+  name: 'datumTestCaseInputToSerializedDatum',
+})
+  .fromGrition<DatumTestCaseInputVoictent>({
+    gepp: DATUM_TEST_CASE_INPUT_GEPP,
+  })
+  .toGrition<SerializedDatumVoictent>({
+    gepp: SERIALIZED_DATUM_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
+  })
+  .onPinbe((input) => {
     const text = serialize(input);
     return text;
-  },
-});
+  })
+  .assemble();

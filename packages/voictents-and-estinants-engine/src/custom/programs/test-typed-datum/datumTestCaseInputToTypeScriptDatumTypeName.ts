@@ -1,5 +1,5 @@
 import { getTypeScriptTypedDatum } from '../../../utilities/typed-datum/type-script/typeScriptTypedDatum';
-import { buildOnama } from '../../adapter/estinant/onama';
+import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   DatumTestCaseInputVoictent,
   DATUM_TEST_CASE_INPUT_GEPP,
@@ -9,14 +9,18 @@ import {
   TYPE_SCRIPT_DATUM_TYPE_NAME_GEPP,
 } from './typeScriptDatumTypeName';
 
-export const datumTestCaseInputToTypeScriptDatumTypeName = buildOnama<
-  DatumTestCaseInputVoictent,
-  TypeScriptDatumTypeNameVoictent
->({
-  inputGepp: DATUM_TEST_CASE_INPUT_GEPP,
-  outputGepp: TYPE_SCRIPT_DATUM_TYPE_NAME_GEPP,
-  pinbe: (input) => {
+export const datumTestCaseInputToTypeScriptDatumTypeName = buildEstinant({
+  name: 'datumTestCaseInputToTypeScriptDatumTypeName',
+})
+  .fromGrition<DatumTestCaseInputVoictent>({
+    gepp: DATUM_TEST_CASE_INPUT_GEPP,
+  })
+  .toGrition<TypeScriptDatumTypeNameVoictent>({
+    gepp: TYPE_SCRIPT_DATUM_TYPE_NAME_GEPP,
+    getZorn: (leftInput) => leftInput.zorn,
+  })
+  .onPinbe((input) => {
     const typedDatum = getTypeScriptTypedDatum(input);
     return typedDatum.typeName;
-  },
-});
+  })
+  .assemble();
