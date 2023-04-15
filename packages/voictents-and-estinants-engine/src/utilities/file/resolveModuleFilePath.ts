@@ -1,6 +1,8 @@
 import fs from 'fs';
 
-export const resolveModuleFilePath = (extensionlessPath: string): string => {
+export const resolveModuleFilePath = (
+  extensionlessPath: string,
+): string | Error => {
   const extensionSuffixesToCheck = ['ts'];
 
   const filePath = extensionSuffixesToCheck
@@ -10,12 +12,7 @@ export const resolveModuleFilePath = (extensionlessPath: string): string => {
     });
 
   if (filePath === undefined) {
-    // eslint-disable-next-line no-console
-    console.log('Module not found', {
-      cwd: process.cwd(),
-      extensionlessPath,
-    });
-    process.exit(1);
+    return new Error(`Module not found: "${extensionlessPath}"`);
   }
 
   return filePath;
