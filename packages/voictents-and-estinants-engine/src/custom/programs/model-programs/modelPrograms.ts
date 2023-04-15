@@ -22,6 +22,7 @@ import { getEstinantInputList } from '../../programmable-units/engine-program/es
 import { getEstinantOutputList } from '../../programmable-units/engine-program/estinant-input-output/getEstinantOutputList';
 import { constructEngineProgramTree } from '../../programmable-units/engine-program/tree/constructEngineProgramTree';
 import { constructEstinantTreeNode } from '../../programmable-units/engine-program/tree/constructEstinantTreeNode';
+import { reportErrors } from '../../programmable-units/error/reportErrors';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -47,6 +48,8 @@ digikikify({
     constructEstinantTreeNode,
     constructEngineProgramTree,
     constructEngineProgramTreeOutputFile,
+
+    reportErrors,
   ],
   quirmDebugger: buildQuirmDebugger('modelPrograms'),
 });
