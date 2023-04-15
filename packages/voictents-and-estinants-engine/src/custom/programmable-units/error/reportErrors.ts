@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { ERROR_GEPP, ErrorVoictent } from './programError';
+import { PROGRAM_ERROR_GEPP, ProgramErrorVoictent } from './programError';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;
@@ -7,14 +7,16 @@ let errorCount = 0;
 export const reportErrors = buildEstinant({
   name: 'reportErrors',
 })
-  .fromHubblepup<ErrorVoictent>({
-    gepp: ERROR_GEPP,
+  .fromGrition<ProgramErrorVoictent>({
+    gepp: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((input) => {
+  .onPinbe((programError) => {
     /* eslint-disable no-console */
     console.log();
-    console.log(`Error ${errorCount}:`);
-    console.log(input.zorn);
+    console.log(`\x1b[31mError\x1b[0m ${errorCount}: ${programError.message}`);
+    if (programError.locator !== null) {
+      console.log(`  File Path: ${programError.locator.filePath}`);
+    }
     console.log();
     /* eslint-enable no-console */
 

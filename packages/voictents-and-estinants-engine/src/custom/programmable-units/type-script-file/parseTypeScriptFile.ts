@@ -2,7 +2,12 @@ import { TSESTree } from '@typescript-eslint/typescript-estree';
 import fs from 'fs';
 import * as parser from '@typescript-eslint/typescript-estree';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { ErrorVoictent, ERROR_GEPP } from '../error/programError';
+import {
+  ProgramErrorVoictent,
+  PROGRAM_ERROR_GEPP,
+  ProgramError,
+  ErrorLocatorTypeName,
+} from '../error/programError';
 import {
   TypeScriptFileConfigurationVoictent,
   TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
@@ -21,8 +26,8 @@ export const parseTypeScriptFile = buildEstinant({
   .toHubblepupTuple<ParsedTypeScriptFileVoictent>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toHubblepupTuple<ErrorVoictent>({
-    gepp: ERROR_GEPP,
+  .toHubblepupTuple<ProgramErrorVoictent>({
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((input) => {
     const inputGrition = input.grition;
@@ -46,15 +51,24 @@ export const parseTypeScriptFile = buildEstinant({
             },
           },
         ],
-        [ERROR_GEPP]: [],
+        [PROGRAM_ERROR_GEPP]: [],
       };
     } catch (error) {
       return {
         [PARSED_TYPE_SCRIPT_FILE_GEPP]: [],
-        [ERROR_GEPP]: [
+        [PROGRAM_ERROR_GEPP]: [
           {
             zorn: input.zorn,
-            grition: error,
+            grition: {
+              message: 'Failed to parse file',
+              locator: {
+                typeName: ErrorLocatorTypeName.FileErrorLocator,
+                filePath: inputGrition.sourceFilePath,
+              },
+              metadata: {
+                error,
+              },
+            } satisfies ProgramError,
           },
         ],
       };

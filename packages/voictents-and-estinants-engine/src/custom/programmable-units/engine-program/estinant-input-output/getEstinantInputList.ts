@@ -11,7 +11,11 @@ import {
   isTypeScriptTypeParameterInstantiation,
 } from '../../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { ErrorVoictent, ERROR_GEPP } from '../../error/programError';
+import {
+  ProgramErrorVoictent,
+  PROGRAM_ERROR_GEPP,
+  ProgramError,
+} from '../../error/programError';
 import {
   EstinantCallExpressionInputParameterVoictent,
   ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
@@ -27,6 +31,7 @@ import {
   ESTINANT_INPUT_LIST_GEPP,
   EstinantInput,
 } from './estinantInputList';
+import { TypeScriptObjectInstance } from '../../../../utilities/typed-datum/type-script/object';
 
 type VickenInstantiation = IdentifiableTypeScriptTypeReference<
   typeof VICKEN_NAME
@@ -71,8 +76,8 @@ export const getEstinantInputList = buildEstinant({
   .toHubblepup<EstinantInputListVoictent>({
     gepp: ESTINANT_INPUT_LIST_GEPP,
   })
-  .toHubblepupTuple<ErrorVoictent>({
-    gepp: ERROR_GEPP,
+  .toHubblepupTuple<ProgramErrorVoictent>({
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((input) => {
     const callExpressionInputParameter = input.grition;
@@ -101,7 +106,7 @@ export const getEstinantInputList = buildEstinant({
       voictentNameList = [];
     }
 
-    const errorList: unknown[] =
+    const errorMetadataList: TypeScriptObjectInstance[] =
       voictentNameList?.length === 0
         ? [
             {
@@ -129,10 +134,14 @@ export const getEstinantInputList = buildEstinant({
         zorn: input.zorn,
         grition: inputList,
       },
-      [ERROR_GEPP]: errorList.map((error, index) => {
+      [PROGRAM_ERROR_GEPP]: errorMetadataList.map((errorMetadata, index) => {
         return {
           zorn: `${input.zorn}/${index}`,
-          grition: error,
+          grition: {
+            message: "I honestly don't remember what this one does :shrugmoji:",
+            locator: null,
+            metadata: errorMetadata,
+          } satisfies ProgramError,
         };
       }),
     };

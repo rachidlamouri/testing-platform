@@ -2,7 +2,11 @@ import { TSESTree, AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
 import { splitList } from '../../../../utilities/splitList';
 import { isIdentifiableTypeScriptTypeReference } from '../../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { ErrorVoictent, ERROR_GEPP } from '../../error/programError';
+import {
+  ProgramErrorVoictent,
+  PROGRAM_ERROR_GEPP,
+  ProgramError,
+} from '../../error/programError';
 import {
   EstinantCallExpressionOutputParameterVoictent,
   ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
@@ -23,8 +27,8 @@ export const getEstinantOutputList = buildEstinant({
   .toHubblepupTuple<EstinantOutputListVoictent>({
     gepp: ESTINANT_OUTPUT_LIST_GEPP,
   })
-  .toHubblepupTuple<ErrorVoictent>({
-    gepp: ERROR_GEPP,
+  .toHubblepupTuple<ProgramErrorVoictent>({
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((input) => {
     const callExpressionOutputParameter = input.grition;
@@ -41,7 +45,7 @@ export const getEstinantOutputList = buildEstinant({
     }
 
     const voictentNameList: string[] = [];
-    const errorList: TSESTree.TypeNode[] = [];
+    const errorNodeList: TSESTree.TypeNode[] = [];
     splitList({
       list: nodeList.map((node) => {
         if (
@@ -57,7 +61,7 @@ export const getEstinantOutputList = buildEstinant({
       }),
       isElementA: (element): element is string => typeof element === 'string',
       accumulatorA: voictentNameList,
-      accumulatorB: errorList,
+      accumulatorB: errorNodeList,
     });
 
     const outputList = voictentNameList.map<EstinantOutput>((voictentName) => {
@@ -77,10 +81,17 @@ export const getEstinantOutputList = buildEstinant({
           grition: outputList,
         },
       ],
-      [ERROR_GEPP]: errorList.map((error, index) => {
+      [PROGRAM_ERROR_GEPP]: errorNodeList.map((errorNode, index) => {
         return {
           zorn: `${input.zorn}/${index}`,
-          grition: error,
+          grition: {
+            message:
+              'Node is not a TypeScript type reference node that ends in "Voictent"',
+            locator: null,
+            metadata: {
+              errorNode,
+            },
+          } satisfies ProgramError,
         };
       }),
     };
