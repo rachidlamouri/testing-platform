@@ -2,7 +2,7 @@ import { TSESTree } from '@typescript-eslint/typescript-estree';
 import fs from 'fs';
 import * as parser from '@typescript-eslint/typescript-estree';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { ErrorVoictent, ERROR_GEPP } from '../error/error';
+import { ErrorVoictent, ERROR_GEPP } from '../error/programError';
 import {
   TypeScriptFileConfigurationVoictent,
   TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,

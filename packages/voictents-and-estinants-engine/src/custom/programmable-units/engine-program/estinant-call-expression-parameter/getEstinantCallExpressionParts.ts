@@ -15,7 +15,7 @@ import {
 } from '../../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
 import { IdentifiableMemberExpressionCallExpression } from '../../../../utilities/type-script-ast/isMemberExpressionCallExpression';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { ErrorVoictent, ERROR_GEPP, ErrorOdeshin } from '../../error/error';
+import { ErrorVoictent, ERROR_GEPP, ErrorOdeshin } from '../../error/programError';
 import {
   ProgramBodyDeclarationsByIdentifierVoictent,
   PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,

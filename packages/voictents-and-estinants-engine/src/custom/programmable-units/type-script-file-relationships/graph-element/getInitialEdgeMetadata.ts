@@ -4,7 +4,7 @@ import {
   TypeScriptFileImportListVoictent,
 } from '../../type-script-file/typeScriptFileImportList';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
-import { ERROR_GEPP, ErrorOdeshin, ErrorVoictent } from '../../error/error';
+import { ERROR_GEPP, ErrorOdeshin, ErrorVoictent } from '../../error/programError';
 import {
   INITIAL_EDGE_METADATA_LIST_GEPP,
   InitialEdgeMetadataList,

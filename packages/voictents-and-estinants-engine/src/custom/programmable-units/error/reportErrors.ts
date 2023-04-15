@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { ERROR_GEPP, ErrorVoictent } from './error';
+import { ERROR_GEPP, ErrorVoictent } from './programError';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;

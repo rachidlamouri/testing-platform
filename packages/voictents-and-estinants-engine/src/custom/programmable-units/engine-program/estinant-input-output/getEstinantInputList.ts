@@ -11,7 +11,7 @@ import {
   isTypeScriptTypeParameterInstantiation,
 } from '../../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { ErrorVoictent, ERROR_GEPP } from '../../error/error';
+import { ErrorVoictent, ERROR_GEPP } from '../../error/programError';
 import {
   EstinantCallExpressionInputParameterVoictent,
   ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,

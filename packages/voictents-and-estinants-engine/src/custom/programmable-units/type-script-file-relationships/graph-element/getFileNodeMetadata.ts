@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { ERROR_GEPP, ErrorVoictent } from '../../error/error';
+import { ERROR_GEPP, ErrorVoictent } from '../../error/programError';
 import { Shape } from '../../graph-visualization/directed-graph/attribute';
 import {
   TYPE_SCRIPT_FILE_GEPP,

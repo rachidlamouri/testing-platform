@@ -2,7 +2,7 @@ import { TSESTree, AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
 import { splitList } from '../../../../utilities/splitList';
 import { isIdentifiableTypeScriptTypeReference } from '../../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { ErrorVoictent, ERROR_GEPP } from '../../error/error';
+import { ErrorVoictent, ERROR_GEPP } from '../../error/programError';
 import {
   EstinantCallExpressionOutputParameterVoictent,
   ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
