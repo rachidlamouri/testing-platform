@@ -13,7 +13,7 @@ import {
 } from './externalModuleMetadata';
 
 export const getExternalModuleMetadata = buildEstinant({
-  name: 'getExternalModuleMetdata',
+  name: 'getExternalModuleMetadata',
 })
   .fromGrition<ExternalModuleVoictent>({
     gepp: EXTERNAL_MODULE_GEPP,
