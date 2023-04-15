@@ -18,8 +18,6 @@ import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { getTypeScriptFileExportList } from '../../programmable-units/type-script-file/getTypeScriptFileExportList';
-import { getEstinantInputList } from '../../programmable-units/engine-program/estinant-input-output/getEstinantInputList';
-import { getEstinantOutputList } from '../../programmable-units/engine-program/estinant-input-output/getEstinantOutputList';
 import { constructEngineProgramTree } from '../../programmable-units/engine-program/tree/constructEngineProgramTree';
 import { constructEstinantTreeNode } from '../../programmable-units/engine-program/tree/constructEstinantTreeNode';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
@@ -43,8 +41,6 @@ digikikify({
 
     getEngineProgramParts,
     getEstinantCallExpressionParts,
-    getEstinantInputList,
-    getEstinantOutputList,
     constructEstinantTreeNode,
     constructEngineProgramTree,
     constructEngineProgramTreeOutputFile,

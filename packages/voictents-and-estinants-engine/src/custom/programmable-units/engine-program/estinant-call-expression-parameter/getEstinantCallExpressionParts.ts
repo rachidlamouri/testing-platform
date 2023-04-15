@@ -5,10 +5,7 @@ import {
   FlattenedCallExpressionOrError,
 } from '../../../../utilities/type-script-ast/flattenIdentifiableCallExpressionChain';
 import { isCallExpression } from '../../../../utilities/type-script-ast/isCallExpression';
-import {
-  IdentifiableCallExpression,
-  isIdentifiableCallExpression,
-} from '../../../../utilities/type-script-ast/isIdentifiableCallExpression';
+import { IdentifiableCallExpression } from '../../../../utilities/type-script-ast/isIdentifiableCallExpression';
 import {
   IdentifiableTypeScriptTypeReference,
   isIdentifiableTypeScriptTypeReference,
@@ -29,13 +26,6 @@ import {
   EngineEstinantVoictent,
   ENGINE_ESTINANT_GEPP,
 } from '../engineEstinant';
-import { isCortmumCallExpression } from '../estinant-call-expression/cortmumCallExpression';
-import { isDisatingerCallExpression } from '../estinant-call-expression/disatingerCallExpression';
-import { isMattomerCallExpression } from '../estinant-call-expression/mattomerCallExpression';
-import { isMentursectionCallExpression } from '../estinant-call-expression/mentursectionCallExpression';
-import { isOnamaCallExpression } from '../estinant-call-expression/onamaCallExpression';
-import { isWattlectionCallExpression } from '../estinant-call-expression/wattlectionCallExpression';
-import { isWortinatorCallExpression } from '../estinant-call-expression/wortinatorCallExpression';
 import {
   EstinantInput,
   EstinantInputListVoictent,
@@ -46,14 +36,6 @@ import {
   EstinantOutputListVoictent,
   ESTINANT_OUTPUT_LIST_GEPP,
 } from '../estinant-input-output/estinantOutputList';
-import {
-  EstinantCallExpressionInputParameterVoictent,
-  ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
-} from './estinantCallExpressionInputParameter';
-import {
-  EstinantCallExpressionOutputParameterVoictent,
-  ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
-} from './estinantCallExpressionOutputParameter';
 import {
   EstinantInputOutputParentVoictent,
   ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
@@ -81,12 +63,6 @@ export const getEstinantCallExpressionParts = buildEstinant({
   )
   .toHubblepupTuple<EstinantInputOutputParentVoictent>({
     gepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
-  })
-  .toHubblepupTuple<EstinantCallExpressionInputParameterVoictent>({
-    gepp: ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP,
-  })
-  .toHubblepupTuple<EstinantCallExpressionOutputParameterVoictent>({
-    gepp: ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP,
   })
   .toHubblepupTuple<EstinantInputListVoictent>({
     gepp: ESTINANT_INPUT_LIST_GEPP,
@@ -120,8 +96,6 @@ export const getEstinantCallExpressionParts = buildEstinant({
       if (callExpression === null) {
         return {
           [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [PROGRAM_ERROR_GEPP]: [
@@ -140,72 +114,6 @@ export const getEstinantCallExpressionParts = buildEstinant({
                   hasCallExpression: callExpression !== null,
                   initExpression,
                 },
-              },
-            },
-          ],
-        };
-      }
-
-      if (
-        isIdentifiableCallExpression(callExpression) &&
-        (isCortmumCallExpression(callExpression) ||
-          isMentursectionCallExpression(callExpression) ||
-          isOnamaCallExpression(callExpression) ||
-          isMattomerCallExpression(callExpression) ||
-          isWattlectionCallExpression(callExpression) ||
-          isWortinatorCallExpression(callExpression) ||
-          isDisatingerCallExpression(callExpression))
-      ) {
-        const inputListIdentifier = `${engineEstinantInput.zorn}/input`;
-        const outputListIdentifier = `${engineEstinantInput.zorn}/output`;
-
-        return {
-          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [
-            {
-              zorn: engineEstinantInput.zorn,
-              grition: {
-                programName,
-                estinantName,
-                inputListIdentifier,
-                outputListIdentifier,
-              },
-            },
-          ],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [
-            {
-              zorn: inputListIdentifier,
-              grition: {
-                programName,
-                estinantName,
-                isInput: true,
-                node: callExpression.typeParameters.params[0],
-              },
-            },
-          ],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [
-            {
-              zorn: outputListIdentifier,
-              grition: {
-                programName,
-                estinantName,
-                isInput: false,
-                node: callExpression.typeParameters.params[1],
-              },
-            },
-          ],
-          [ESTINANT_INPUT_LIST_GEPP]: [],
-          [ESTINANT_OUTPUT_LIST_GEPP]: [],
-          [PROGRAM_ERROR_GEPP]: [
-            {
-              zorn: basicErrorZorn,
-              grition: {
-                errorId: `getEstinantCallExpressionParts/deprecated-call-expression`,
-                message: `Calls to "${callExpression.callee.name}" are deprecated. Use "buildEstinant" instead`,
-                locator: {
-                  typeName: ErrorLocatorTypeName.FileErrorLocator,
-                  filePath: engineEstinant.estinantFilePath,
-                },
-                metadata: null,
               },
             },
           ],
@@ -232,8 +140,6 @@ export const getEstinantCallExpressionParts = buildEstinant({
       if (errorList.length > 0) {
         return {
           [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [PROGRAM_ERROR_GEPP]: errorList.map((error, index) => {
@@ -330,8 +236,6 @@ export const getEstinantCallExpressionParts = buildEstinant({
       ) {
         return {
           [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [PROGRAM_ERROR_GEPP]: [
@@ -361,8 +265,6 @@ export const getEstinantCallExpressionParts = buildEstinant({
       ) {
         return {
           [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [PROGRAM_ERROR_GEPP]: [
@@ -407,8 +309,6 @@ export const getEstinantCallExpressionParts = buildEstinant({
       if (errorParsedExpressionList.length > 0) {
         return {
           [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-          [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
           [ESTINANT_INPUT_LIST_GEPP]: [],
           [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [PROGRAM_ERROR_GEPP]: errorParsedExpressionList.map(
@@ -534,8 +434,6 @@ export const getEstinantCallExpressionParts = buildEstinant({
             },
           },
         ],
-        [ESTINANT_CALL_EXPRESSION_INPUT_PARAMETER_GEPP]: [],
-        [ESTINANT_CALL_EXPRESSION_OUTPUT_PARAMETER_GEPP]: [],
         [ESTINANT_INPUT_LIST_GEPP]: [
           {
             zorn: inputListZorn,
