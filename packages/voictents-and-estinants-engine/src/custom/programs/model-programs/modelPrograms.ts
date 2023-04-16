@@ -17,7 +17,6 @@ import { constructEngineProgramTreeOutputFile } from '../../programmable-units/e
 import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
-import { getTypeScriptFileExportList } from '../../programmable-units/type-script-file/getTypeScriptFileExportList';
 import { constructEngineProgramTree } from '../../programmable-units/engine-program/tree/constructEngineProgramTree';
 import { constructEstinantTreeNode } from '../../programmable-units/engine-program/tree/constructEstinantTreeNode';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
@@ -36,7 +35,6 @@ digikikify({
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
     getProgramBodyDeclarationsByIdentifier,
-    getTypeScriptFileExportList,
     getTypeScriptFileImportList,
 
     getEngineProgramParts,
