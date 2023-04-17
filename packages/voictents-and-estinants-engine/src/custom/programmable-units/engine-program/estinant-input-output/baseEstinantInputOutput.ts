@@ -4,6 +4,7 @@ export type BaseEstinantInputOutput<
   TIsInput extends boolean,
   TIndex extends number | null,
 > = {
+  id: string;
   programName: string;
   estinantName: string;
   voictentName: string;

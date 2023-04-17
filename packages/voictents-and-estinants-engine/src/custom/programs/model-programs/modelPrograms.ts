@@ -20,6 +20,11 @@ import { getTypeScriptFileImportList } from '../../programmable-units/type-scrip
 import { constructEngineProgramTree } from '../../programmable-units/engine-program/tree/constructEngineProgramTree';
 import { constructEstinantTreeNode } from '../../programmable-units/engine-program/tree/constructEstinantTreeNode';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
+import { getEngineProgram } from '../../programmable-units/engine-program/getEngineProgram';
+import { getDirectedGraph } from '../../programmable-units/getDirectedGraph';
+import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/addInteractivityToSvgDocument';
+import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
+import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -39,6 +44,14 @@ digikikify({
 
     getEngineProgramParts,
     getEstinantBuilderCallExpressionParts,
+    getEngineProgram,
+
+    getDirectedGraph,
+
+    encodeDirectedGraphAsGraphvizCode,
+    renderGraphvizCodeToSvgDocument,
+    addInteractivityToSvgDocument,
+
     constructEstinantTreeNode,
     constructEngineProgramTree,
     constructEngineProgramTreeOutputFile,
