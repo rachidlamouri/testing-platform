@@ -20,21 +20,21 @@ import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImport,
 } from '../type-script-file/typeScriptFileImportList';
-import {
-  EngineEstinantVoictent,
-  ENGINE_ESTINANT_GEPP,
-  EngineEstinantOdeshin,
-  getEngineEstinantIdentifier,
-} from './engineEstinant';
+import { getEngineEstinantIdentifier } from './engineEstinant';
 import {
   EngineFunctionConfigurationVoictent,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
 } from './engineFunctionConfiguration';
 import {
-  EngineProgramOdeshin,
-  EngineProgramVoictent,
-  ENGINE_PROGRAM_GEPP,
-} from './engineProgram';
+  ENGINE_ESTINANT_LOCATOR_GEPP,
+  EngineEstinantLocatorOdeshin,
+  EngineEstinantLocatorVoictent,
+} from './engineEstinantLocator';
+import {
+  ENGINE_PROGRAM_LOCATOR_GEPP,
+  EngineProgramLocatorOdeshin,
+  EngineProgramLocatorVoictent,
+} from './engineProgramLocator';
 
 type EngineCallExpression = TSESTree.CallExpression & {
   arguments: [ObjectExpressionWithIdentifierProperties];
@@ -58,6 +58,7 @@ type ImportedEstinant = {
   fileImport: TypeScriptFileImport;
 };
 
+// TODO: consider filtering files by ones that have the engine and ones that do not, and then "getEngineProgramParts" only runs on a file identified as an engine program
 export const getEngineProgramParts = buildEstinant({
   name: 'getEngineProgramParts',
 })
@@ -77,11 +78,11 @@ export const getEngineProgramParts = buildEstinant({
   .andFromVoictent<EngineFunctionConfigurationVoictent>({
     gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple<EngineProgramVoictent>({
-    gepp: ENGINE_PROGRAM_GEPP,
+  .toHubblepupTuple<EngineProgramLocatorVoictent>({
+    gepp: ENGINE_PROGRAM_LOCATOR_GEPP,
   })
-  .toHubblepupTuple<EngineEstinantVoictent>({
-    gepp: ENGINE_ESTINANT_GEPP,
+  .toHubblepupTuple<EngineEstinantLocatorVoictent>({
+    gepp: ENGINE_ESTINANT_LOCATOR_GEPP,
   })
   .onPinbe(
     (
@@ -104,8 +105,8 @@ export const getEngineProgramParts = buildEstinant({
 
       if (!hasEngineFunctionImport) {
         return {
-          [ENGINE_PROGRAM_GEPP]: [],
-          [ENGINE_ESTINANT_GEPP]: [],
+          [ENGINE_PROGRAM_LOCATOR_GEPP]: [],
+          [ENGINE_ESTINANT_LOCATOR_GEPP]: [],
         };
       }
 
@@ -169,20 +170,22 @@ export const getEngineProgramParts = buildEstinant({
       const programName = typeScriptFile.inMemoryFileName.kebabCase;
 
       const outputEstinantList =
-        importedEstinantList.map<EngineEstinantOdeshin>((importedEstinant) => ({
-          zorn: getEngineEstinantIdentifier(
-            programName,
-            importedEstinant.identifier,
-          ),
-          grition: {
-            programName,
-            estinantName: importedEstinant.identifier,
-            estinantFilePath: importedEstinant.fileImport.sourcePath,
-            exportedIdentifierName: importedEstinant.identifier,
-          },
-        }));
+        importedEstinantList.map<EngineEstinantLocatorOdeshin>(
+          (importedEstinant) => ({
+            zorn: getEngineEstinantIdentifier(
+              programName,
+              importedEstinant.identifier,
+            ),
+            grition: {
+              programName,
+              estinantName: importedEstinant.identifier,
+              estinantFilePath: importedEstinant.fileImport.sourcePath,
+              exportedIdentifierName: importedEstinant.identifier,
+            },
+          }),
+        );
 
-      const outputProgram: EngineProgramOdeshin = {
+      const outputProgram: EngineProgramLocatorOdeshin = {
         zorn: leftInput.zorn,
         grition: {
           programName,
@@ -192,8 +195,8 @@ export const getEngineProgramParts = buildEstinant({
       };
 
       return {
-        [ENGINE_PROGRAM_GEPP]: [outputProgram],
-        [ENGINE_ESTINANT_GEPP]: outputEstinantList,
+        [ENGINE_PROGRAM_LOCATOR_GEPP]: [outputProgram],
+        [ENGINE_ESTINANT_LOCATOR_GEPP]: outputEstinantList,
       };
     },
   )

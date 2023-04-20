@@ -13,14 +13,15 @@ import {
 import { getEngineProgramParts } from '../../programmable-units/engine-program/getEngineProgramParts';
 import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
 import { getEstinantBuilderCallExpressionParts } from '../../programmable-units/engine-program/estinant-call-expression-parameter/getEstinantBuilderCallExpressionParts';
-import { constructEngineProgramTreeOutputFile } from '../../programmable-units/engine-program/constructEngineProgramTreeOutputFile';
 import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
-import { getTypeScriptFileExportList } from '../../programmable-units/type-script-file/getTypeScriptFileExportList';
-import { constructEngineProgramTree } from '../../programmable-units/engine-program/tree/constructEngineProgramTree';
-import { constructEstinantTreeNode } from '../../programmable-units/engine-program/tree/constructEstinantTreeNode';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
+import { getEngineProgram } from '../../programmable-units/engine-program/getEngineProgram';
+import { getDirectedGraph } from '../../programmable-units/getDirectedGraph';
+import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/addInteractivityToSvgDocument';
+import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
+import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -36,14 +37,17 @@ digikikify({
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
     getProgramBodyDeclarationsByIdentifier,
-    getTypeScriptFileExportList,
     getTypeScriptFileImportList,
 
     getEngineProgramParts,
     getEstinantBuilderCallExpressionParts,
-    constructEstinantTreeNode,
-    constructEngineProgramTree,
-    constructEngineProgramTreeOutputFile,
+    getEngineProgram,
+
+    getDirectedGraph,
+
+    encodeDirectedGraphAsGraphvizCode,
+    renderGraphvizCodeToSvgDocument,
+    addInteractivityToSvgDocument,
 
     reportErrors,
   ],

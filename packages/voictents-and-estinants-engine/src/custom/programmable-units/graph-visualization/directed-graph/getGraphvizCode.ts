@@ -71,9 +71,11 @@ const getNodeStatement = (node: DirectedGraphNode): string => {
 const getDirectedGraphCodeLineList = (
   graph: DirectedGraph | DirectedSubgraph,
 ): string[] => {
+  const isCluster = graph.isCluster ?? false;
+
   const graphKeyword = graph.isRoot ? 'digraph' : 'subgraph';
 
-  const idPrefix = graph.isRoot ? '' : 'cluster_';
+  const idPrefix = isCluster ? 'cluster_' : '';
   const idSuffix = graph.isRoot ? '' : graph.attributeByKey.id;
   const id = `${idPrefix}${idSuffix}`;
 
@@ -84,6 +86,12 @@ const getDirectedGraphCodeLineList = (
       return `${indent}${line}`;
     },
   );
+
+  const serializedRankGroupList = (graph.rankGroupList ?? []).map((group) => {
+    const nodeIdList = group.map((nodeId) => `"${nodeId}"`);
+
+    return `${indent}{ rank=same; ${nodeIdList.join('; ')}; }`;
+  });
 
   const nodeStatementList = graph.nodeList.map((node) => {
     return `${indent}${getNodeStatement(node)}`;
@@ -105,9 +113,13 @@ const getDirectedGraphCodeLineList = (
     ...attributeStatementList,
     '',
     ...nodeStatementList,
+    '',
     ...edgeStatementList,
     '',
     ...subgraphLineList,
+    '',
+    ...serializedRankGroupList,
+    '',
     '}',
   ];
 };

@@ -1,4 +1,5 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
+import * as uuid from 'uuid';
 import { splitList } from '../../../../utilities/splitList';
 import {
   flattenCallExpressionChain,
@@ -25,34 +26,27 @@ import {
 import {
   EngineEstinantVoictent,
   ENGINE_ESTINANT_GEPP,
+  EngineEstinant,
 } from '../engineEstinant';
-import {
-  EstinantInput,
-  EstinantInputListVoictent,
-  ESTINANT_INPUT_LIST_GEPP,
-} from '../estinant-input-output/estinantInputList';
-import {
-  EstinantOutput,
-  EstinantOutputListVoictent,
-  ESTINANT_OUTPUT_LIST_GEPP,
-} from '../estinant-input-output/estinantOutputList';
-import {
-  EstinantInputOutputParentVoictent,
-  ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
-} from './estinantInputOutputParent';
+import { EstinantInput } from '../estinant-input-output/estinantInputList';
+import { EstinantOutput } from '../estinant-input-output/estinantOutputList';
 import {
   IdentifiableProperty,
   isObjectExpressionWithIdentifierProperties,
 } from '../../../../utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
 import { isStringLiteral } from '../../../../utilities/type-script-ast/isStringLiteral';
+import {
+  ENGINE_ESTINANT_LOCATOR_GEPP,
+  EngineEstinantLocatorVoictent,
+} from '../engineEstinantLocator';
 
 type EstinantName = 'getEstinantBuilderCallExpressionParts';
 
 export const getEstinantBuilderCallExpressionParts = buildEstinant({
   name: 'getEstinantBuilderCallExpressionParts',
 })
-  .fromHubblepup<EngineEstinantVoictent>({
-    gepp: ENGINE_ESTINANT_GEPP,
+  .fromHubblepup<EngineEstinantLocatorVoictent>({
+    gepp: ENGINE_ESTINANT_LOCATOR_GEPP,
   })
   .andFromHubblepupTuple<ProgramBodyDeclarationsByIdentifierVoictent, [string]>(
     {
@@ -61,29 +55,26 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
       framate: (leftInput) => [leftInput.grition.estinantFilePath],
     },
   )
-  .toHubblepupTuple<EstinantInputOutputParentVoictent>({
-    gepp: ESTINANT_INPUT_OUTPUT_PARENT_GEPP,
-  })
-  .toHubblepupTuple<EstinantInputListVoictent>({
-    gepp: ESTINANT_INPUT_LIST_GEPP,
-  })
-  .toHubblepupTuple<EstinantOutputListVoictent>({
-    gepp: ESTINANT_OUTPUT_LIST_GEPP,
-  })
   .toHubblepupTuple<ProgramErrorVoictent<EstinantName>>({
     gepp: PROGRAM_ERROR_GEPP,
   })
+  .toHubblepupTuple<EngineEstinantVoictent>({
+    gepp: ENGINE_ESTINANT_GEPP,
+  })
   .onPinbe(
-    (engineEstinantInput, [{ grition: bodyDeclarationsByIdentifier }]) => {
-      const basicErrorZorn = `getEstinantBuilderCallExpressionParts/${engineEstinantInput.zorn}`;
-      const missingNameErrorZorn = `getEstinantBuilderCallExpressionParts/missing-name/${engineEstinantInput.zorn}`;
-      const invalidNameErrorZorn = `getEstinantBuilderCallExpressionParts/invalid-name/${engineEstinantInput.zorn}`;
+    (
+      engineEstinantLocatorInput,
+      [{ grition: bodyDeclarationsByIdentifier }],
+    ) => {
+      const basicErrorZorn = `getEstinantBuilderCallExpressionParts/${engineEstinantLocatorInput.zorn}`;
+      const missingNameErrorZorn = `getEstinantBuilderCallExpressionParts/missing-name/${engineEstinantLocatorInput.zorn}`;
+      const invalidNameErrorZorn = `getEstinantBuilderCallExpressionParts/invalid-name/${engineEstinantLocatorInput.zorn}`;
 
-      const engineEstinant = engineEstinantInput.grition;
-      const { programName, estinantName } = engineEstinant;
+      const engineEstinantLocator = engineEstinantLocatorInput.grition;
+      const { programName, estinantName } = engineEstinantLocator;
 
       const node = bodyDeclarationsByIdentifier.get(
-        engineEstinant.exportedIdentifierName,
+        engineEstinantLocator.exportedIdentifierName,
       );
 
       const initExpression =
@@ -95,9 +86,6 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
 
       if (callExpression === null) {
         return {
-          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_INPUT_LIST_GEPP]: [],
-          [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [PROGRAM_ERROR_GEPP]: [
             {
               zorn: basicErrorZorn,
@@ -106,7 +94,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
                 message: 'Export declaration is missing a call expression',
                 locator: {
                   typeName: ErrorLocatorTypeName.FileErrorLocator,
-                  filePath: engineEstinant.estinantFilePath,
+                  filePath: engineEstinantLocator.estinantFilePath,
                 },
                 metadata: {
                   hasNode: node !== undefined,
@@ -117,6 +105,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
               },
             },
           ],
+          [ENGINE_ESTINANT_GEPP]: [],
         };
       }
 
@@ -139,9 +128,6 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
 
       if (errorList.length > 0) {
         return {
-          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_INPUT_LIST_GEPP]: [],
-          [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [PROGRAM_ERROR_GEPP]: errorList.map((error, index) => {
             return {
               zorn: `${basicErrorZorn}/${index}`,
@@ -150,7 +136,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
                 message: 'I have no idea',
                 locator: {
                   typeName: ErrorLocatorTypeName.FileErrorLocator,
-                  filePath: engineEstinant.estinantFilePath,
+                  filePath: engineEstinantLocator.estinantFilePath,
                 },
                 metadata: {
                   error,
@@ -158,6 +144,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
               },
             };
           }),
+          [ENGINE_ESTINANT_GEPP]: [],
         };
       }
 
@@ -235,9 +222,6 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
         parsedFlattenedCallExpressionList[0].functionName !== buildEstinant.name
       ) {
         return {
-          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_INPUT_LIST_GEPP]: [],
-          [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [PROGRAM_ERROR_GEPP]: [
             {
               zorn: basicErrorZorn,
@@ -246,7 +230,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
                 message: `Call expression chain does not start with "${buildEstinant.name}"`,
                 locator: {
                   typeName: ErrorLocatorTypeName.FileErrorLocator,
-                  filePath: engineEstinant.estinantFilePath,
+                  filePath: engineEstinantLocator.estinantFilePath,
                 },
                 metadata: {
                   parsedFlattenedCallExpressionList,
@@ -254,6 +238,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
               },
             },
           ],
+          [ENGINE_ESTINANT_GEPP]: [],
         };
       }
 
@@ -264,9 +249,6 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
         ]?.functionName !== 'assemble'
       ) {
         return {
-          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_INPUT_LIST_GEPP]: [],
-          [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [PROGRAM_ERROR_GEPP]: [
             {
               zorn: basicErrorZorn,
@@ -276,7 +258,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
                   'Estinant builder call expression chain does not end in "assemble"',
                 locator: {
                   typeName: ErrorLocatorTypeName.FileErrorLocator,
-                  filePath: engineEstinant.estinantFilePath,
+                  filePath: engineEstinantLocator.estinantFilePath,
                 },
                 metadata: {
                   parsedFlattenedCallExpressionList,
@@ -284,6 +266,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
               },
             },
           ],
+          [ENGINE_ESTINANT_GEPP]: [],
         };
       }
 
@@ -308,9 +291,6 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
 
       if (errorParsedExpressionList.length > 0) {
         return {
-          [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [],
-          [ESTINANT_INPUT_LIST_GEPP]: [],
-          [ESTINANT_OUTPUT_LIST_GEPP]: [],
           [PROGRAM_ERROR_GEPP]: errorParsedExpressionList.map(
             (parsedExpression, index) => {
               return {
@@ -320,7 +300,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
                   message: `Estinant builder expression "${parsedExpression.functionName}" is missing a type parameter`,
                   locator: {
                     typeName: ErrorLocatorTypeName.FileErrorLocator,
-                    filePath: engineEstinant.estinantFilePath,
+                    filePath: engineEstinantLocator.estinantFilePath,
                   },
                   metadata: {
                     parsedExpression,
@@ -329,11 +309,9 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
               };
             },
           ),
+          [ENGINE_ESTINANT_GEPP]: [],
         };
       }
-
-      const inputListZorn = `${engineEstinantInput.zorn}/input`;
-      const outputListZorn = `${engineEstinantInput.zorn}/output`;
 
       const estinantInputOutputList = inputOutputCallExpressionList.map<
         EstinantInput | EstinantOutput
@@ -343,6 +321,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
 
         if (isInput) {
           return {
+            id: uuid.v4(),
             programName,
             estinantName,
             voictentName,
@@ -352,6 +331,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
         }
 
         return {
+          id: uuid.v4(),
           programName,
           estinantName,
           voictentName,
@@ -399,7 +379,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
             message: `Estinant builder instantiation is missing a name`,
             locator: {
               typeName: ErrorLocatorTypeName.FileErrorLocator,
-              filePath: engineEstinant.estinantFilePath,
+              filePath: engineEstinantLocator.estinantFilePath,
             },
             metadata: null,
           },
@@ -412,7 +392,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
             message: `Estinant builder instantiation name does not match the variable name`,
             locator: {
               typeName: ErrorLocatorTypeName.FileErrorLocator,
-              filePath: engineEstinant.estinantFilePath,
+              filePath: engineEstinantLocator.estinantFilePath,
             },
             metadata: {
               expected: estinantName,
@@ -423,30 +403,18 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
       }
 
       return {
-        [ESTINANT_INPUT_OUTPUT_PARENT_GEPP]: [
-          {
-            zorn: engineEstinantInput.zorn,
-            grition: {
-              programName,
-              estinantName,
-              inputListIdentifier: inputListZorn,
-              outputListIdentifier: outputListZorn,
-            },
-          },
-        ],
-        [ESTINANT_INPUT_LIST_GEPP]: [
-          {
-            zorn: inputListZorn,
-            grition: inputList,
-          },
-        ],
-        [ESTINANT_OUTPUT_LIST_GEPP]: [
-          {
-            zorn: outputListZorn,
-            grition: outputList,
-          },
-        ],
         [PROGRAM_ERROR_GEPP]: parallelErrorList,
+        [ENGINE_ESTINANT_GEPP]: [
+          {
+            zorn: engineEstinantLocatorInput.zorn,
+            grition: {
+              id: uuid.v4(),
+              ...engineEstinantLocator,
+              inputList,
+              outputList,
+            } satisfies EngineEstinant,
+          },
+        ],
       };
     },
   )

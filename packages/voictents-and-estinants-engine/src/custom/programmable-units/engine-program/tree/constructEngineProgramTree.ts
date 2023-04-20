@@ -1,6 +1,9 @@
 import { Tuple } from '../../../../utilities/semantic-types/tuple';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { EngineProgramVoictent, ENGINE_PROGRAM_GEPP } from '../engineProgram';
+import {
+  ENGINE_PROGRAM_LOCATOR_GEPP,
+  EngineProgramLocatorVoictent,
+} from '../engineProgramLocator';
 import {
   EngineProgramTreeNodeVoictent,
   ENGINE_PROGRAM_TREE_NODE_GEPP,
@@ -14,8 +17,8 @@ import {
 export const constructEngineProgramTree = buildEstinant({
   name: 'constructEngineProgramTree',
 })
-  .fromGrition<EngineProgramVoictent>({
-    gepp: ENGINE_PROGRAM_GEPP,
+  .fromGrition<EngineProgramLocatorVoictent>({
+    gepp: ENGINE_PROGRAM_LOCATOR_GEPP,
   })
   .andFromHubblepupTuple<EstinantTreeNodeVoictent, Tuple<string>>({
     gepp: ESTINANT_TREE_NODE_GEPP,
