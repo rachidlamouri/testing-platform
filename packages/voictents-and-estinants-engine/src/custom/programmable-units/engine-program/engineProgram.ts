@@ -5,6 +5,7 @@ import { Voictent } from '../../adapter/voictent';
 import { EngineEstinant } from './engineEstinant';
 
 export type EngineProgram = {
+  id: string;
   programName: string;
   filePath: string;
   estinantList: Tuple<EngineEstinant>;

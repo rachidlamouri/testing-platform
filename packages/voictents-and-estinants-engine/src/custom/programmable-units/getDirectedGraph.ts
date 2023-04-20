@@ -11,6 +11,7 @@ import {
 } from './graph-visualization/directed-graph/directedGraph';
 import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+  DirectedGraphMetadataById,
   DirectedGraphMetadataByIdVoictent,
 } from './graph-visualization/directedGraphMetadataById';
 import { DirectedGraphNode } from './graph-visualization/directed-graph/directedGraphNode';
@@ -88,22 +89,22 @@ export const getDirectedGraph = buildEstinant({
       return node;
     });
 
-    const estinantInputNodeList = engineProgram.estinantList
-      .flatMap((estinant) => {
-        return estinant.inputList;
-      })
-      .map((input) => {
-        const node: DirectedGraphNode = {
-          attributeByKey: {
-            id: input.id,
-            label: input.index === 0 ? 'L' : 'R',
-            shape: Shape.InvertedTriangle,
-            ...COMMON_ATTRIBUTE_BY_KEY,
-          },
-        };
+    const estinantInputList = engineProgram.estinantList.flatMap((estinant) => {
+      return estinant.inputList;
+    });
 
-        return node;
-      });
+    const estinantInputNodeList = estinantInputList.map((input) => {
+      const node: DirectedGraphNode = {
+        attributeByKey: {
+          id: input.id,
+          label: input.index === 0 ? 'L' : 'R',
+          shape: Shape.InvertedTriangle,
+          ...COMMON_ATTRIBUTE_BY_KEY,
+        },
+      };
+
+      return node;
+    });
 
     const voictentByName = new Map<string, EngineVoictent>(
       voictentList.map((voictent) => {
@@ -172,6 +173,7 @@ export const getDirectedGraph = buildEstinant({
     const rootGraph: DirectedGraph = {
       isRoot: true,
       attributeByKey: {
+        id: engineProgram.id,
         label: engineProgram.programName,
         labelloc: LabelLocation.Top,
         fontsize: FONT_SIZE.root,
@@ -186,9 +188,56 @@ export const getDirectedGraph = buildEstinant({
       subgraphList: [],
     };
 
+    const metadataById: DirectedGraphMetadataById = {};
+
+    metadataById[engineProgram.id] = {
+      title: engineProgram.programName,
+      fieldList: [
+        {
+          label: 'File Path',
+          value: engineProgram.filePath,
+        },
+        {
+          label: 'Type',
+          value: 'Program',
+        },
+      ],
+    };
+
+    voictentList.forEach((voictent) => {
+      metadataById[voictent.id] = {
+        title: voictent.name,
+        fieldList: [
+          {
+            label: 'Type',
+            value: 'Voictent',
+          },
+        ],
+      };
+    });
+
+    engineProgram.estinantList.forEach((estinant) => {
+      metadataById[estinant.id] = {
+        title: estinant.estinantName,
+        fieldList: [
+          {
+            label: 'Type',
+            value: 'Estinant',
+          },
+        ],
+      };
+    });
+
+    estinantInputList.forEach((input) => {
+      metadataById[input.id] = {
+        title: input.index === 0 ? 'Left Input' : 'Right Input',
+        fieldList: [],
+      };
+    });
+
     return {
       [DIRECTED_GRAPH_GEPP]: rootGraph,
-      [DIRECTED_GRAPH_METADATA_BY_ID_GEPP]: {},
+      [DIRECTED_GRAPH_METADATA_BY_ID_GEPP]: metadataById,
     };
   })
   .assemble();

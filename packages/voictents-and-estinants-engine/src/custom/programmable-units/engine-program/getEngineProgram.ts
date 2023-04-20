@@ -1,3 +1,4 @@
+import * as uuid from 'uuid';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
@@ -34,6 +35,7 @@ export const getEngineProgram = buildEstinant({
     const { programName, filePath } = programLocator;
 
     return {
+      id: uuid.v4(),
       programName,
       filePath,
       estinantList,

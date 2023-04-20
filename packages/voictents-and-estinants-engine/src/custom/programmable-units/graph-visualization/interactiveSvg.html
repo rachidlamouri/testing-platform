@@ -54,6 +54,7 @@
     maxZoom: 20,
   })
 
+  const graphList = [...document.getElementsByClassName('graph')];
   const clusterList = [...document.getElementsByClassName('cluster')];
   const nodeList = [...document.getElementsByClassName('node')];
 
@@ -91,6 +92,18 @@
       sidePanel.appendChild(valueElement)
     })
   }
+
+  graphList.forEach((graph) => {
+    const children = [...graph.children]
+    const textNode = children.find((child) => {
+      return child.tagName === 'text'
+    })
+
+    textNode.addEventListener('click', (event) => {
+      event.stopPropagation();
+      setPanelContent(graph);
+    })
+  })
 
   clusterList.forEach((cluster) => {
     cluster.addEventListener('click', (event) => {
