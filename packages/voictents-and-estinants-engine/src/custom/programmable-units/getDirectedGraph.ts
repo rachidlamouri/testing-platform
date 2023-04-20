@@ -8,6 +8,7 @@ import {
   DIRECTED_GRAPH_GEPP,
   DirectedGraph,
   DirectedGraphVoictent,
+  DirectedSubgraph,
 } from './graph-visualization/directed-graph/directedGraph';
 import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
@@ -170,6 +171,28 @@ export const getDirectedGraph = buildEstinant({
         });
       });
 
+    const rankGroupList: string[][] = engineProgram.estinantList.map(
+      (estinant) => {
+        return estinant.inputList.map((input) => input.id);
+      },
+    );
+
+    const rankControlSubgraph: DirectedSubgraph = {
+      isRoot: false,
+      isCluster: false,
+      attributeByKey: {
+        id: engineProgram.id,
+      },
+      rankGroupList,
+      nodeList: [
+        ...voictentNodeList,
+        ...estinantNodeList,
+        ...estinantInputNodeList,
+      ],
+      edgeList: [],
+      subgraphList: [],
+    };
+
     const rootGraph: DirectedGraph = {
       isRoot: true,
       attributeByKey: {
@@ -179,13 +202,9 @@ export const getDirectedGraph = buildEstinant({
         fontsize: FONT_SIZE.root,
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
-      nodeList: [
-        ...voictentNodeList,
-        ...estinantNodeList,
-        ...estinantInputNodeList,
-      ],
+      nodeList: [],
       edgeList: [...inputEdgeList, ...outputEdgeList],
-      subgraphList: [],
+      subgraphList: [rankControlSubgraph],
     };
 
     const metadataById: DirectedGraphMetadataById = {};
