@@ -30,6 +30,8 @@ import { getRootMetadata } from '../../programmable-units/type-script-file-relat
 import { getInitialEdgeMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getInitialEdgeMetadata';
 import { constructKnowledgeGraph } from '../../programmable-units/graph-visualization/constructKnowledgeGraph';
 import { getSvgMetadataList } from '../../programmable-units/type-script-file-relationships/getSvgMetadataList';
+import { markUnusedNodes } from '../../programmable-units/type-script-file-relationships/markUnusedNodes';
+import { reportErrors } from '../../programmable-units/error/reportErrors';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -95,6 +97,9 @@ digikikify({
     renderGraphvizCodeToSvgDocument,
     getSvgMetadataList,
     constructKnowledgeGraph,
+
+    markUnusedNodes,
+    reportErrors,
   ],
   quirmDebugger: buildQuirmDebugger('renderTypeScriptFileRelationships'),
 });
