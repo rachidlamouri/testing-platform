@@ -145,6 +145,7 @@ export const getRootDirectedGraph = buildEstinant({
               overviewSubgraphByName.get(subgraphName) ??
               ({
                 isRoot: false,
+                isCluster: true,
                 attributeByKey: {
                   id: uuid.v4(),
                   label: `${subgraphName}/`,
@@ -205,6 +206,7 @@ export const getRootDirectedGraph = buildEstinant({
         (metadata) => {
           const subgraph: DirectedSubgraph = {
             isRoot: false,
+            isCluster: true,
             attributeByKey: {
               id: metadata.id,
               ...metadata.attributeByKey,
@@ -228,6 +230,7 @@ export const getRootDirectedGraph = buildEstinant({
         (metadata) => {
           const subgraph: DirectedSubgraph = {
             isRoot: false,
+            isCluster: true,
             attributeByKey: {
               id: metadata.id,
               ...metadata.attributeByKey,

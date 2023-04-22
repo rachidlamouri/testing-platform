@@ -46,7 +46,7 @@ export type PartialSubgraphAttributeByKey = SetOptional<
 
 export type DirectedSubgraph = {
   isRoot: false;
-  isCluster?: boolean;
+  isCluster: boolean;
   attributeByKey: PartialSubgraphAttributeByKey;
   rankGroupList?: string[][];
   nodeList: DirectedGraphNode[];
