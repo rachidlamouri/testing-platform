@@ -1,28 +1,35 @@
-import { Zorn, ZornTuple } from '../utilities/semantic-types/zorn';
-import { Ajorken } from './ajorken';
-import { Appreffinge, getIsWibiz } from './appreffinge';
-import { Cology, CologySet, getCologyEntryList } from './cology';
+import { Zorn, ZornTuple } from '../../utilities/semantic-types/zorn';
+import { Ajorken } from '../internal/procody/ajorken';
+import {
+  Appreffinge,
+  getIsWibiz,
+} from '../engine-shell/appreffinge/appreffinge';
+import {
+  Cology,
+  CologySet,
+  getCologyEntryList,
+} from '../internal/procody/cology';
 import {
   DreanorTypeName,
   LeftDreanor,
   RightDreanor,
   RightVoictentDreanor,
   RightVoictentItemDreanor,
-} from './dreanor';
-import { Estinant, EstinantTuple } from './estinant';
-import { Gepp } from './gepp';
-import { Hubblepup, HubblepupTuple } from './hubblepup';
+} from '../internal/dreanor/dreanor';
+import { Estinant, EstinantTuple } from '../engine-shell/estinant/estinant';
+import { Gepp } from '../engine-shell/voictent/gepp';
+import { Hubblepup, HubblepupTuple } from '../engine-shell/quirm/hubblepup';
 import {
   Lanbe,
   LanbeTypeName,
   VoictentItemLanbe,
   VoictentLanbe,
-} from './lanbe';
-import { Mabz, MabzEntry } from './mabz';
-import { Platomity, getDreanorTuple } from './platomity';
-import { Prected } from './prected';
-import { Procody } from './procody';
-import { Quirm, QuirmTuple } from './quirm';
+} from '../engine-shell/voictent/lanbe';
+import { Mabz, MabzEntry } from '../internal/procody/mabz';
+import { Platomity, getDreanorTuple } from '../internal/platomity';
+import { Prected } from '../internal/dreanor/prected';
+import { Procody } from '../internal/procody/procody';
+import { Quirm, QuirmTuple } from '../engine-shell/quirm/quirm';
 import { Tabilly } from './tabilly';
 import { Voictent } from './voictent';
 

@@ -1,5 +1,5 @@
-import { Hubblepup, HubblepupTuple } from './hubblepup';
-import { QuirmList } from './quirm';
+import { Hubblepup, HubblepupTuple } from '../quirm/hubblepup';
+import { QuirmList } from '../quirm/quirm';
 
 /**
  * The thing that a Programmer creates to process one or more Quirms. The engine manages them at runtime.

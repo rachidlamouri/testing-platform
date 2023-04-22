@@ -1,4 +1,4 @@
-import { Zorn } from '../utilities/semantic-types/zorn';
+import { Zorn } from '../../../utilities/semantic-types/zorn';
 import { CologySet } from './cology';
 
 /**

@@ -1,5 +1,5 @@
-import { Hubblepup } from '../../../core/hubblepup';
-import { Quirm, QuirmList } from '../../../core/quirm';
+import { Hubblepup } from '../../../core/engine-shell/quirm/hubblepup';
+import { Quirm, QuirmList } from '../../../core/engine-shell/quirm/quirm';
 import { Gepp } from '../../../type-script-adapter/gepp';
 import { HubblepupTuple } from '../../../type-script-adapter/hubblepup';
 import { StringZorn } from '../../../utilities/semantic-types/zorn';

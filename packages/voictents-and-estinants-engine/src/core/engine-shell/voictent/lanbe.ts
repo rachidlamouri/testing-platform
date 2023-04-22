@@ -1,5 +1,5 @@
 import { Simplify } from 'type-fest';
-import { Hubblepup, HubblepupTuple } from './hubblepup';
+import { Hubblepup, HubblepupTuple } from '../quirm/hubblepup';
 
 export enum LanbeTypeName {
   VoictentLanbe = 'VoictentLanbe',

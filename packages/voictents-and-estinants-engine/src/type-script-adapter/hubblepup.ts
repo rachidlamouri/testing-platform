@@ -1,4 +1,4 @@
-import { Hubblepup as CoreHubblepup } from '../core/hubblepup';
+import { Hubblepup as CoreHubblepup } from '../core/engine-shell/quirm/hubblepup';
 import { Dalph } from '../utilities/semantic-types/dalph';
 import { Tuple } from '../utilities/semantic-types/tuple';
 

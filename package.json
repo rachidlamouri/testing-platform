@@ -4,7 +4,7 @@
   "description": "Testing frameworks on testing frameworks",
   "private": true,
   "scripts": {
-    "scaffold": "npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file/scaffoldVoictentFile.ts",
+    "scaffold": "npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file/assembleScaffoldedFile.ts",
     "example-core": "ts-node packages/open-schema-type-script/src/example/core/exampleCore.ts",
     "example-adapter": "ts-node packages/open-schema-type-script/src/example/adapter/exampleAdapter.ts",
     "example-custom": "ts-node packages/open-schema-type-script/src/example/custom/exampleCustom.ts",

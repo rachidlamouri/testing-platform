@@ -1,5 +1,5 @@
-import { Hubblepup } from './hubblepup';
-import { Zorn } from '../utilities/semantic-types/zorn';
+import { Zorn } from '../../../utilities/semantic-types/zorn';
+import { Hubblepup } from '../quirm/hubblepup';
 
 /**
  * A function that converts a Hubblepup to an identifying Zorn.

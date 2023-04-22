@@ -1,6 +1,6 @@
-import { Gepp } from './gepp';
+import { Gepp } from '../engine-shell/voictent/gepp';
 import { Voictent } from './voictent';
-import { Quirm, QuirmTuple } from './quirm';
+import { Quirm, QuirmTuple } from '../engine-shell/quirm/quirm';
 
 /**
  * A cache of Voictents by Gepp.

@@ -1,6 +1,10 @@
-import { DreanorTuple, LeftDreanor, RightDreanorTuple } from './dreanor';
-import { Estinant } from './estinant';
-import { Procody } from './procody';
+import {
+  DreanorTuple,
+  LeftDreanor,
+  RightDreanorTuple,
+} from './dreanor/dreanor';
+import { Estinant } from '../engine-shell/estinant/estinant';
+import { Procody } from './procody/procody';
 
 /**
  * The primary thing that the engine operates on in the main loop.

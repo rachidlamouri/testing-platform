@@ -1,9 +1,9 @@
 import {
   RuntimeStatisticsHandler,
   digikikify as coreDigikikify,
-} from '../core/digikikify';
-import { EstinantTuple as CoreEstinantTuple } from '../core/estinant';
-import { Quirm } from '../core/quirm';
+} from '../core/engine/digikikify';
+import { EstinantTuple as CoreEstinantTuple } from '../core/engine-shell/estinant/estinant';
+import { Quirm } from '../core/engine-shell/quirm/quirm';
 import { StralineTuple } from '../utilities/semantic-types/straline';
 import { Estinant, Estinant2 } from './estinant/estinant';
 import { RightVickenTuple, VickenTupleToVoictentTuple } from './vicken';

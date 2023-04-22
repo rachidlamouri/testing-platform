@@ -1,5 +1,9 @@
-import { LanbeTypeName, VoictentItemLanbe, VoictentLanbe } from './lanbe';
-import { Hubblepup } from './hubblepup';
+import {
+  LanbeTypeName,
+  VoictentItemLanbe,
+  VoictentLanbe,
+} from '../engine-shell/voictent/lanbe';
+import { Hubblepup } from '../engine-shell/quirm/hubblepup';
 
 class MissingLanbeError extends Error {
   constructor(lanbe: VoictentItemLanbe) {

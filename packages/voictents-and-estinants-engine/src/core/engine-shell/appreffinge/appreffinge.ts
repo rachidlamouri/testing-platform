@@ -1,7 +1,7 @@
-import { Merge } from '../utilities/merge';
+import { Merge } from 'type-fest';
 import { Croarder } from './croarder';
 import { Framation } from './framation';
-import { Gepp } from './gepp';
+import { Gepp } from '../voictent/gepp';
 
 export type LeftAppreffinge = {
   gepp: Gepp;

@@ -1,8 +1,12 @@
-import { Tuple } from '../utilities/semantic-types/tuple';
-import { Croarder } from './croarder';
-import { Framation } from './framation';
-import { Gepp } from './gepp';
-import { Lanbe, VoictentItemLanbe, VoictentLanbe } from './lanbe';
+import { Tuple } from '../../../utilities/semantic-types/tuple';
+import { Croarder } from '../../engine-shell/appreffinge/croarder';
+import { Framation } from '../../engine-shell/appreffinge/framation';
+import { Gepp } from '../../engine-shell/voictent/gepp';
+import {
+  Lanbe,
+  VoictentItemLanbe,
+  VoictentLanbe,
+} from '../../engine-shell/voictent/lanbe';
 import { Prected } from './prected';
 
 export enum DreanorTypeName {

@@ -1,8 +1,8 @@
-import { digikikify } from '../../core/digikikify';
-import { Estinant } from '../../core/estinant';
-import { Gepp } from '../../core/gepp';
-import { Hubblepup } from '../../core/hubblepup';
-import { Quirm } from '../../core/quirm';
+import { digikikify } from '../../core/engine/digikikify';
+import { Estinant } from '../../core/engine-shell/estinant/estinant';
+import { Gepp } from '../../core/engine-shell/voictent/gepp';
+import { Hubblepup } from '../../core/engine-shell/quirm/hubblepup';
+import { Quirm } from '../../core/engine-shell/quirm/quirm';
 import { buildDefaultHandler } from '../../custom/debugger/quirmDebugger';
 
 const exampleGeppInitialInput: Gepp = 'gepp-initial-input';
