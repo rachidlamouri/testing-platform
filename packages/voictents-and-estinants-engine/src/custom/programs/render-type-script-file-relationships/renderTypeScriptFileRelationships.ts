@@ -30,6 +30,8 @@ import { getRootMetadata } from '../../programmable-units/type-script-file-relat
 import { getInitialEdgeMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getInitialEdgeMetadata';
 import { constructKnowledgeGraph } from '../../programmable-units/graph-visualization/constructKnowledgeGraph';
 import { getSvgMetadataList } from '../../programmable-units/type-script-file-relationships/getSvgMetadataList';
+import { markUnusedNodes } from '../../programmable-units/type-script-file-relationships/markUnusedNodes';
+import { reportErrors } from '../../programmable-units/error/reportErrors';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -51,16 +53,12 @@ digikikify({
         'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships',
         'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file',
         'packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render',
-        'packages/voictents-and-estinants-engine/src/custom/programs/test-serialize',
         'packages/voictents-and-estinants-engine/src/custom/programs/test-typed-datum',
         'packages/voictents-and-estinants-engine/src/custom/programs/test-voictent-input',
-
-        'packages/voictents-and-estinants-engine/src/custom/serialize-test-case',
 
         'packages/voictents-and-estinants-engine/src/example-programs',
         'packages/voictents-and-estinants-engine/src/type-script-adapter',
 
-        'packages/voictents-and-estinants-engine/src/utilities/directedGraph',
         'packages/voictents-and-estinants-engine/src/utilities/file',
         'packages/voictents-and-estinants-engine/src/utilities/semantic-types',
         'packages/voictents-and-estinants-engine/src/utilities/type-script-ast',
@@ -99,6 +97,9 @@ digikikify({
     renderGraphvizCodeToSvgDocument,
     getSvgMetadataList,
     constructKnowledgeGraph,
+
+    markUnusedNodes,
+    reportErrors,
   ],
   quirmDebugger: buildQuirmDebugger('renderTypeScriptFileRelationships'),
 });

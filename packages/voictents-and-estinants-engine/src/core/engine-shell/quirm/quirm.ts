@@ -1,5 +1,5 @@
-import { List } from '../utilities/semantic-types/list';
-import { Gepp } from './gepp';
+import { List } from '../../../utilities/semantic-types/list';
+import { Gepp } from '../voictent/gepp';
 import { Hubblepup } from './hubblepup';
 
 /**

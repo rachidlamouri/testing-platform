@@ -9,7 +9,7 @@ import {
   OutputFileVoictent,
   OUTPUT_FILE_GEPP,
 } from '../programmable-units/output-file/outputFile';
-import { LanbeTypeName } from '../../core/lanbe';
+import { LanbeTypeName } from '../../core/engine-shell/voictent/lanbe';
 
 // TODO: move to a utility or something
 export const escapePathSeparator = (text: string): string =>

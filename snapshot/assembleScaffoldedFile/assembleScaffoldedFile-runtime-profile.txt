@@ -1,0 +1,13 @@
+Collections:
+
+    scaffold-configuration
+      I: |X|
+      C: |-|
+
+Transforms:
+
+  scaffoldFile
+    scaffold-configuration
+      I: |X|
+         |_|
+      E: |1|

@@ -62,6 +62,7 @@ digikikify({
           subgraphList: [
             {
               isRoot: false,
+              isCluster: true,
               attributeByKey: {
                 id: 'my_subgraph',
                 label: 'my subgraph',

@@ -1,6 +1,6 @@
-import { Zorn } from '../utilities/semantic-types/zorn';
-import { Dreanor, LeftDreanor } from './dreanor';
-import { Hubblepup, HubblepupTuple } from './hubblepup';
+import { Zorn } from '../../../utilities/semantic-types/zorn';
+import { Dreanor, LeftDreanor } from '../dreanor/dreanor';
+import { Hubblepup, HubblepupTuple } from '../../engine-shell/quirm/hubblepup';
 import { Mabz } from './mabz';
 
 /**

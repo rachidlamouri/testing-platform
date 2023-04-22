@@ -1,5 +1,5 @@
-import { ZornTuple } from '../utilities/semantic-types/zorn';
-import { RightDreanor } from './dreanor';
+import { ZornTuple } from '../../../utilities/semantic-types/zorn';
+import { RightDreanor } from '../dreanor/dreanor';
 
 /**
  * A cache of right Zorn tuples by their respective Dreanors.

@@ -1,4 +1,7 @@
-import { LeftAppreffinge, RightAppreffingeTuple } from './appreffinge';
+import {
+  LeftAppreffinge,
+  RightAppreffingeTuple,
+} from '../appreffinge/appreffinge';
 import { Tropoignant } from './tropoignant';
 
 /**

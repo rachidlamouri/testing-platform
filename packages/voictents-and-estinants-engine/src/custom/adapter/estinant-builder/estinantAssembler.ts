@@ -1,4 +1,4 @@
-import { Estinant as CoreEstinant } from '../../../core/estinant';
+import { Estinant as CoreEstinant } from '../../../core/engine-shell/estinant/estinant';
 import { Estinant2 } from '../../../type-script-adapter/estinant/estinant';
 import { QuirmList } from '../../../type-script-adapter/quirm';
 import {
