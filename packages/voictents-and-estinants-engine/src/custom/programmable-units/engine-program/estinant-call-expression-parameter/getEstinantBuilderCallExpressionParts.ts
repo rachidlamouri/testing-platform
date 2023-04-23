@@ -414,6 +414,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
             grition: {
               id: uuid.v4(),
               ...engineEstinantLocator,
+              commentText: commentedBodyDeclaration?.commentText ?? '',
               inputList,
               outputList,
             } satisfies EngineEstinant,

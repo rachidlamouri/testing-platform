@@ -243,6 +243,15 @@ export const getDirectedGraph = buildEstinant({
             label: 'Type',
             value: 'Estinant',
           },
+          {
+            label: 'Comment',
+            // TODO: handle this character re-mapping in a more sustainable way
+            value: estinant.commentText
+              .replaceAll('\n', '')
+              .replaceAll('*', '')
+              .replaceAll("'", '')
+              .replaceAll('"', ''),
+          },
         ],
       };
     });

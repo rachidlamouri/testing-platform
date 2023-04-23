@@ -11,6 +11,7 @@ export type EngineEstinant = {
   estinantName: string;
   estinantFilePath: string;
   exportedIdentifierName: string;
+  commentText: string;
   inputList: EstinantInputList;
   outputList: EstinantOutputList;
 };
