@@ -22,6 +22,7 @@ import { getDirectedGraph } from '../../programmable-units/getDirectedGraph';
 import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/addInteractivityToSvgDocument';
 import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
+import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -36,6 +37,7 @@ digikikify({
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
+    getCommentedProgramBodyDeclarationList,
     getProgramBodyDeclarationsByIdentifier,
     getTypeScriptFileImportList,
 

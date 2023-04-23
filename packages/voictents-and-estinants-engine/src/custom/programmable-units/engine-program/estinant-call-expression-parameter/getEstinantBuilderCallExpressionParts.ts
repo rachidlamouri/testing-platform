@@ -73,12 +73,15 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
       const engineEstinantLocator = engineEstinantLocatorInput.grition;
       const { programName, estinantName } = engineEstinantLocator;
 
-      const node = bodyDeclarationsByIdentifier.get(
+      const commentedBodyDeclaration = bodyDeclarationsByIdentifier.get(
         engineEstinantLocator.exportedIdentifierName,
       );
 
       const initExpression =
-        node?.type === AST_NODE_TYPES.VariableDeclarator ? node.init : null;
+        commentedBodyDeclaration?.identifiableNode?.type ===
+        AST_NODE_TYPES.VariableDeclarator
+          ? commentedBodyDeclaration.identifiableNode.init
+          : null;
 
       const callExpression = isCallExpression(initExpression)
         ? initExpression
@@ -97,7 +100,8 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
                   filePath: engineEstinantLocator.estinantFilePath,
                 },
                 metadata: {
-                  hasNode: node !== undefined,
+                  hasIdentifiableNode:
+                    commentedBodyDeclaration?.identifiableNode !== undefined,
                   hasInitExpression: initExpression !== null,
                   hasCallExpression: callExpression !== null,
                   initExpression,

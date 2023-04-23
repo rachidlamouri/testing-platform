@@ -10,6 +10,12 @@ export type CommentedProgramBodyDeclaration = {
   identifiableNode: IdentifiableProgramBodyStatementNode | null;
 };
 
+export type IdentifiableCommentedProgramBodyDeclaration = {
+  commentText: string | null;
+  bodyStatement: TSESTree.ProgramStatement;
+  identifiableNode: IdentifiableProgramBodyStatementNode;
+};
+
 export type CommentedProgramBodyDeclarationList =
   CommentedProgramBodyDeclaration[];
 
