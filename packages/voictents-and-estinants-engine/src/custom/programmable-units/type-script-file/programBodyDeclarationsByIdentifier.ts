@@ -1,25 +1,22 @@
-import { isExportNamedTypeDeclaration } from '../../../utilities/type-script-ast/isExportNamedTypeDeclaration';
-import { isExportNamedVariableDeclaration } from '../../../utilities/type-script-ast/isExportNamedVariableDeclaration';
-import {
-  IdentifiableVariableDeclarator,
-  isIdentifiableVariableDeclaration,
-} from '../../../utilities/type-script-ast/isIdentifiableVariableDeclaration';
-import {
-  isIdentifiableTypeDeclaration,
-  IdentifiableTypeDeclaration,
-} from '../../../utilities/type-script-ast/isIdentifiableTypeDeclaration';
 import { Grition } from '../../adapter/grition';
 import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
-import {
-  ParsedTypeScriptFileVoictent,
-  PARSED_TYPE_SCRIPT_FILE_GEPP,
-} from './parsedTypeScriptFile';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import {
+  COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
+  CommentedProgramBodyDeclaration,
+  CommentedProgramBodyDeclarationListVoictent,
+  IdentifiableCommentedProgramBodyDeclaration,
+} from './commentedProgramBodyDeclarationList';
+
+export type ProgramBodyDeclarationsByIdentifierEntry = [
+  string,
+  CommentedProgramBodyDeclaration,
+];
 
 export type ProgramBodyDeclarationsByIdentifier = Map<
   string,
-  IdentifiableVariableDeclarator | IdentifiableTypeDeclaration
+  CommentedProgramBodyDeclaration
 >;
 
 export type ProgramBodyDeclarationsByIdentifierGrition =
@@ -42,33 +39,34 @@ export type ProgramBodyDeclarationsByIdentifierVoictent = Voictent<
 export const getProgramBodyDeclarationsByIdentifier = buildEstinant({
   name: 'getProgramBodyDeclarationsByIdentifier',
 })
-  .fromGrition<ParsedTypeScriptFileVoictent>({
-    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .fromGrition<CommentedProgramBodyDeclarationListVoictent>({
+    gepp: COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
   })
   .toGrition<ProgramBodyDeclarationsByIdentifierVoictent>({
     gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
     getZorn: (leftInput) => leftInput.zorn,
   })
-  .onPinbe((input) => {
-    const output: ProgramBodyDeclarationsByIdentifier = new Map();
+  .onPinbe((commentedProgramBodyDeclarationList) => {
+    const outputEntryList = commentedProgramBodyDeclarationList
+      .filter(
+        (
+          commentedDeclaration,
+        ): commentedDeclaration is IdentifiableCommentedProgramBodyDeclaration => {
+          return commentedDeclaration.identifiableNode !== null;
+        },
+      )
+      .map<ProgramBodyDeclarationsByIdentifierEntry>(
+        (identifiableCommentedDeclaration) => {
+          return [
+            identifiableCommentedDeclaration.identifiableNode.id.name,
+            identifiableCommentedDeclaration,
+          ];
+        },
+      );
 
-    input.program.body.forEach((statement) => {
-      if (isExportNamedVariableDeclaration(statement)) {
-        output.set(
-          statement.declaration.declarations[0].id.name,
-          statement.declaration.declarations[0],
-        );
-      } else if (isIdentifiableVariableDeclaration(statement)) {
-        output.set(
-          statement.declarations[0].id.name,
-          statement.declarations[0],
-        );
-      } else if (isExportNamedTypeDeclaration(statement)) {
-        output.set(statement.declaration.id.name, statement.declaration);
-      } else if (isIdentifiableTypeDeclaration(statement)) {
-        output.set(statement.id.name, statement);
-      }
-    });
+    const output: ProgramBodyDeclarationsByIdentifier = new Map(
+      outputEntryList,
+    );
 
     return output;
   })
