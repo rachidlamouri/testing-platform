@@ -38,6 +38,7 @@ export const parseTypeScriptFile = buildEstinant({
       const program: TSESTree.Program = parser.parse(fileContents, {
         project: './tsconfig.json',
         tsconfigRootDir: inputGrition.rootDirectory,
+        loc: true,
         comment: true,
       });
 
