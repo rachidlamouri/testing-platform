@@ -10,9 +10,54 @@ import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
 } from './directedGraphMetadataById';
 import { SvgDocumentVoictent, SVG_DOCUMENT_GEPP } from './svgDocument';
+import {
+  CustomDatumTypeName,
+  getCustomTypedDatum,
+} from '../../../utilities/typed-datum/customTypedDatum';
 
 const INTERACTIVE_HTML_FILE_PATH =
   'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/interactiveSvg.html';
+
+// TODO: replace this with a data structure [to ast?] to code generator (I couldn't find one :sad-face:)
+const dataStructureToCode = (datum: unknown): string => {
+  const typedDatum = getCustomTypedDatum(datum);
+
+  switch (typedDatum.typeName) {
+    case CustomDatumTypeName.RootObjectInstance: {
+      const middleLineList = Object.entries(typedDatum.datum).map(
+        ([key, value]) => {
+          const partialKeyCode = dataStructureToCode(key);
+          const valueCode = dataStructureToCode(value);
+
+          const keyCode = `[${partialKeyCode}]`;
+          return `${keyCode}: ${valueCode},`;
+        },
+      );
+
+      const lineList = ['{', ...middleLineList, '}'];
+      const code = lineList.join('\n');
+      return code;
+    }
+    case CustomDatumTypeName.Array: {
+      const middleLineList = typedDatum.datum.map((element) => {
+        const elementCode = `${dataStructureToCode(element)},`;
+        return elementCode;
+      });
+
+      const lineList = ['[', ...middleLineList, ']'];
+      const code = lineList.join('\n');
+      return code;
+    }
+    case CustomDatumTypeName.String: {
+      const escapedText = typedDatum.datum.replaceAll('`', '\\`');
+      const quotedText = `\`${escapedText}\``;
+      return quotedText;
+    }
+    default: {
+      throw Error(`Unhandled datum type "${typedDatum.typeName}"`);
+    }
+  }
+};
 
 export const addInteractivityToSvgDocument = buildEstinant({
   name: 'addInteractivityToSvgDocument',
@@ -38,17 +83,13 @@ export const addInteractivityToSvgDocument = buildEstinant({
 
     const templateText = fs.readFileSync(templateFile.filePath, 'utf8');
 
-    const stringifiedMetadataById = JSON.stringify(
-      directedGraphMetadataById,
-      null,
-      2,
-    );
+    const metadataByIdCode = dataStructureToCode(directedGraphMetadataById);
 
     const outputTemplate = templateText
       .replace('<!-- SVG_PLACEHOLDER -->', svgText)
       .replace(
         'const graphMetadataById = {};',
-        `const graphMetadataById = JSON.parse(\`${stringifiedMetadataById}\`);`,
+        `const graphMetadataById = ${metadataByIdCode};`,
       );
 
     const fileName = leftInput.zorn.replaceAll(/\//g, '-');
