@@ -244,7 +244,7 @@ export const getDirectedGraph = buildEstinant({
             value: 'Estinant',
           },
           {
-            label: 'Comment',
+            label: 'Description',
             value: estinant.commentText,
           },
         ],

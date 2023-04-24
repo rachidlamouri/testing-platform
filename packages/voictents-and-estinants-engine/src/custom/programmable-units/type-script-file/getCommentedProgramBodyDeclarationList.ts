@@ -1,4 +1,8 @@
-import { TSESTree } from '@typescript-eslint/typescript-estree';
+import {
+  AST_TOKEN_TYPES,
+  TSESTree,
+} from '@typescript-eslint/typescript-estree';
+import * as commentParser from 'comment-parser';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
@@ -40,8 +44,27 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
           const identifiableNode =
             getIdentifiableProgramBodyStatementNode(programBodyStatement);
 
+          let commentText: string | null;
+          if (comment === undefined) {
+            commentText = null;
+          } else if (comment.type === AST_TOKEN_TYPES.Block) {
+            const originalValue = `/*${comment.value}*/`;
+
+            const parsedCommentBlockList = commentParser.parse(originalValue);
+            if (parsedCommentBlockList.length === 0) {
+              // Note: I don't fully understand comment parser's output, so I don't know when this would happen
+              throw Error('Unhandled empty parsed comment');
+            }
+
+            const [parsedCommentBlock] = parsedCommentBlockList;
+
+            commentText = parsedCommentBlock.description;
+          } else {
+            commentText = comment.value;
+          }
+
           return {
-            commentText: comment?.value ?? null,
+            commentText,
             bodyStatement: programBodyStatement,
             identifiableNode,
           } satisfies CommentedProgramBodyDeclaration;
