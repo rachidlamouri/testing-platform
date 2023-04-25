@@ -47,6 +47,7 @@ digikikify({
         'packages/voictents-and-estinants-engine/src/custom/programmable-units',
 
         'packages/voictents-and-estinants-engine/src/custom/programs/categorize-files',
+        'packages/voictents-and-estinants-engine/src/custom/programs/comments-example',
         'packages/voictents-and-estinants-engine/src/custom/programs/estinant-builder-example',
         'packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script',
         'packages/voictents-and-estinants-engine/src/custom/programs/model-programs',
