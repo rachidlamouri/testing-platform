@@ -53,6 +53,11 @@ const getConfigurationFilePath = (filePath: string): string => {
   return configFilePath;
 };
 
+/**
+ * Given a TypeScript file, it traverses back up the file tree until it
+ * encounters a tsconfig.json file, and it assumes they are related. It's great.
+ * Super robust logic.
+ */
 export const associateTypeScriptFileToTypescriptConfiguration = buildEstinant({
   name: 'associateTypeScriptFileToTypescriptConfiguration',
 })

@@ -17,6 +17,12 @@ import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
 } from './parsedTypeScriptFile';
 
+/**
+ * Takes a file with an associated TypeScript configuration and runs the
+ * \@typescript-eslint parser on it. This transform does not copy the metadata
+ * from the TypeScript file, but you can join back to that collection in a later
+ * transform.
+ */
 export const parseTypeScriptFile = buildEstinant({
   name: 'parseTypeScriptFile',
 })

@@ -23,6 +23,11 @@ type EstinantName = 'getTypeScriptFileImportList';
 
 const ESTINANT_NAME: EstinantName = 'getTypeScriptFileImportList';
 
+/**
+ * Gets useful metadata about the import statements in a TypeScript file. For
+ * example it gets the full file path for relative imports so later transforms
+ * don't need to resolve file paths.
+ */
 export const getTypeScriptFileImportList = buildEstinant({
   name: 'getTypeScriptFileImportList',
 })
