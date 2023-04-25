@@ -17,6 +17,9 @@ import {
 } from '../html-file/htmlFile';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 
+/**
+ * Places a file into zero or more collections without modifying the file
+ */
 export const categorizeFiles = buildEstinant({
   name: 'categorizeFiles',
 })
