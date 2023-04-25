@@ -10,19 +10,21 @@ import {
   ENGINE_FUNCTION_CONFIGURATION,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
-import { getEngineProgramParts } from '../../programmable-units/engine-program/getEngineProgramParts';
 import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
-import { getEstinantBuilderCallExpressionParts } from '../../programmable-units/engine-program/estinant-call-expression-parameter/getEstinantBuilderCallExpressionParts';
 import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
-import { getEngineProgram } from '../../programmable-units/engine-program/getEngineProgram';
 import { getDirectedGraph } from '../../programmable-units/getDirectedGraph';
 import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/addInteractivityToSvgDocument';
 import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
+import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
+import { getEngineProgramLocator } from '../../programmable-units/engine-program/getEngineProgramLocator';
+import { getEngineEstinantLocatorCollection } from '../../programmable-units/engine-program/getEngineEstinantLocatorCollection';
+import { getEngineEstinant } from '../../programmable-units/engine-program/getEngineEstinant';
+import { getEngineProgram2 } from '../../programmable-units/engine-program/getEngineProgram2';
 
 digikikify({
   initialVoictentsByGepp: {
@@ -41,9 +43,11 @@ digikikify({
     getProgramBodyDeclarationsByIdentifier,
     getTypeScriptFileImportList,
 
-    getEngineProgramParts,
-    getEstinantBuilderCallExpressionParts,
-    getEngineProgram,
+    filterEngineProgramFile,
+    getEngineProgramLocator,
+    getEngineEstinantLocatorCollection,
+    getEngineEstinant,
+    getEngineProgram2,
 
     getDirectedGraph,
 

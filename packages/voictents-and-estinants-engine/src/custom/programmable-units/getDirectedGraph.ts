@@ -1,10 +1,6 @@
 import * as uuid from 'uuid';
 import { buildEstinant } from '../adapter/estinant-builder/estinantBuilder';
 import {
-  ENGINE_PROGRAM_GEPP,
-  EngineProgramVoictent,
-} from './engine-program/engineProgram';
-import {
   DIRECTED_GRAPH_GEPP,
   DirectedGraph,
   DirectedGraphVoictent,
@@ -25,6 +21,10 @@ import {
   FONT_SIZE,
 } from './type-script-file-relationships/graph-element/commonAttributeByKey';
 import { DirectedGraphEdge } from './graph-visualization/directed-graph/directedGraphEdge';
+import {
+  ENGINE_PROGRAM_2_GEPP,
+  EngineProgram2Voictent,
+} from './engine-program/engineProgram2';
 
 type EngineVoictent = {
   id: string;
@@ -34,8 +34,8 @@ type EngineVoictent = {
 export const getDirectedGraph = buildEstinant({
   name: 'getDirectedGraph',
 })
-  .fromGrition<EngineProgramVoictent>({
-    gepp: ENGINE_PROGRAM_GEPP,
+  .fromGrition<EngineProgram2Voictent>({
+    gepp: ENGINE_PROGRAM_2_GEPP,
   })
   .toGrition<DirectedGraphVoictent>({
     gepp: DIRECTED_GRAPH_GEPP,
