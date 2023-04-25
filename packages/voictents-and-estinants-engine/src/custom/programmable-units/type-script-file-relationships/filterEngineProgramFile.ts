@@ -16,6 +16,10 @@ import {
   EngineProgramFileVoictent,
 } from './engineProgramFile';
 
+/**
+ * Filters the collection of TypeScript files to those that are an engine program.
+ * A TypeScript file is considered an engine program if it imports the engine.
+ */
 export const filterEngineProgramFile = buildEstinant({
   name: 'filterEngineProgramFile',
 })

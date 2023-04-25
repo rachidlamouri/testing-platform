@@ -15,6 +15,10 @@ import {
   EngineProgramLocator2Voictent,
 } from './engineProgramLocator2';
 
+/**
+ * Joins the program locator to its transforms in order to
+ * construct an object that represents an engine program.
+ */
 export const getEngineProgram2 = buildEstinant({
   name: 'getEngineProgram2',
 })
