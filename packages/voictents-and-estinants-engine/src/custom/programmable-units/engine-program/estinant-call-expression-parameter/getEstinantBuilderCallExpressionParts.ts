@@ -69,6 +69,7 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
       const basicErrorZorn = `getEstinantBuilderCallExpressionParts/${engineEstinantLocatorInput.zorn}`;
       const missingNameErrorZorn = `getEstinantBuilderCallExpressionParts/missing-name/${engineEstinantLocatorInput.zorn}`;
       const invalidNameErrorZorn = `getEstinantBuilderCallExpressionParts/invalid-name/${engineEstinantLocatorInput.zorn}`;
+      const missingCommentErrorZorn = `getEstinantBuilderCallExpressionParts/missing-comment/${engineEstinantLocatorInput.zorn}`;
 
       const engineEstinantLocator = engineEstinantLocatorInput.grition;
       const { programName, estinantName } = engineEstinantLocator;
@@ -402,6 +403,21 @@ export const getEstinantBuilderCallExpressionParts = buildEstinant({
               expected: estinantName,
               actual: instantiatedName,
             },
+          },
+        });
+      }
+
+      if (commentedBodyDeclaration?.commentText === null) {
+        parallelErrorList.push({
+          zorn: missingCommentErrorZorn,
+          grition: {
+            errorId: `getEstinantBuilderCallExpressionParts/missing-name`,
+            message: 'Estinant definitions is missing a TypeDoc comment',
+            locator: {
+              typeName: ErrorLocatorTypeName.FileErrorLocator,
+              filePath: engineEstinantLocator.estinantFilePath,
+            },
+            metadata: null,
           },
         });
       }

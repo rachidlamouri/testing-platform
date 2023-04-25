@@ -15,8 +15,11 @@ export type FileErrorLocator = {
 // TODO: add more locator types as needed
 export type ProgramErrorLocator = FileErrorLocator | null;
 
+export type ProgramErrorId<TPrefix extends string = string> =
+  `${TPrefix}/${string}`;
+
 export type ProgramError<TPrefix extends string = string> = {
-  errorId?: `${TPrefix}/${string}`;
+  errorId?: ProgramErrorId<TPrefix>;
   message: string;
   locator: ProgramErrorLocator;
   metadata: TypeScriptObjectInstance | null;
