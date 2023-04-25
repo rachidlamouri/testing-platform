@@ -4,6 +4,11 @@ import { PROGRAM_ERROR_GEPP, ProgramErrorVoictent } from './programError';
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;
 
+/**
+ * Logs a ProgramError's id, message, and locator information to the console.
+ * Note that this transform only reports the ProgramErrors, and is not
+ * responsible for acting on them, such as setting the proccess exit code
+ */
 export const reportErrors = buildEstinant({
   name: 'reportErrors',
 })
