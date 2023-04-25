@@ -50,7 +50,6 @@ export const markUnusedNodes = buildEstinant({
     };
 
     edgeMetadataList.forEach((metadata) => {
-      updateCache(metadata.tail.id);
       updateCache(metadata.head.id);
     });
 
@@ -61,7 +60,7 @@ export const markUnusedNodes = buildEstinant({
           zorn: `markUnusedNodes/${index}/${metadata.filePath}`,
           grition: {
             errorId: `markUnusedNodes/${metadata.filePath}`,
-            // The uncertainty in the language is due to a lack of test coverage
+            // The uncertainty in the language is due to a lack of code coverage reporting
             message: `"${metadata.filePath}" appears to be unused`,
             locator: {
               typeName: ErrorLocatorTypeName.FileErrorLocator,
