@@ -17,6 +17,10 @@ import {
 const KNOWLEDGE_GRAPH_FILE_PATH =
   'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/knowledgeGraphTemplate.html';
 
+/**
+ * Combines the knowledge graph HTML template with the SVG graphs and their
+ * corresponding labels.
+ */
 export const constructKnowledgeGraph = buildEstinant({
   name: 'constructKnowledgeGraph',
 })
