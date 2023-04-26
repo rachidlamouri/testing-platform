@@ -3,6 +3,7 @@ import { buildEstinant } from '../adapter/estinant-builder/estinantBuilder';
 import {
   DIRECTED_GRAPH_GEPP,
   DirectedGraph,
+  DirectedGraphStyle,
   DirectedGraphVoictent,
   DirectedSubgraph,
 } from './graph-visualization/directed-graph/directedGraph';
@@ -81,7 +82,36 @@ export const getDirectedGraph = buildEstinant({
       return node;
     });
 
-    const estinantNodeList = engineProgram.estinantList.map((estinant) => {
+    const estinantSubgraphMetadataList = engineProgram.estinantList.map(
+      (estinant) => {
+        const subgraph: DirectedSubgraph = {
+          isRoot: false,
+          isCluster: true,
+          attributeByKey: {
+            id: uuid.v4(),
+            label: '',
+            style: DirectedGraphStyle.Rounded,
+            color: 'gray',
+          },
+          nodeList: [],
+          edgeList: [],
+          subgraphList: [],
+        };
+
+        return {
+          estinantId: estinant.id,
+          subgraph,
+        };
+      },
+    );
+
+    const estinantSubgraphByEstinantId = new Map<string, DirectedSubgraph>(
+      estinantSubgraphMetadataList.map(({ estinantId, subgraph }) => {
+        return [estinantId, subgraph];
+      }),
+    );
+
+    engineProgram.estinantList.forEach((estinant) => {
       const node: DirectedGraphNode = {
         attributeByKey: {
           id: estinant.id,
@@ -91,14 +121,25 @@ export const getDirectedGraph = buildEstinant({
         },
       };
 
-      return node;
+      const subgraph = estinantSubgraphByEstinantId.get(
+        estinant.id,
+      ) as DirectedSubgraph;
+
+      subgraph.nodeList.push(node);
     });
 
-    const estinantInputList = engineProgram.estinantList.flatMap((estinant) => {
-      return estinant.inputList;
-    });
+    const estinantInputMetadataList = engineProgram.estinantList.flatMap(
+      (estinant) => {
+        return estinant.inputList.map((input) => {
+          return {
+            estinant,
+            input,
+          };
+        });
+      },
+    );
 
-    const estinantInputNodeList = estinantInputList.map((input) => {
+    estinantInputMetadataList.forEach(({ estinant, input }) => {
       const node: DirectedGraphNode = {
         attributeByKey: {
           id: input.id,
@@ -108,7 +149,11 @@ export const getDirectedGraph = buildEstinant({
         },
       };
 
-      return node;
+      const subgraph = estinantSubgraphByEstinantId.get(
+        estinant.id,
+      ) as DirectedSubgraph;
+
+      subgraph.nodeList.push(node);
     });
 
     const voictentByName = new Map<string, EngineVoictent>(
@@ -175,28 +220,6 @@ export const getDirectedGraph = buildEstinant({
         });
       });
 
-    const rankGroupList: string[][] = engineProgram.estinantList.map(
-      (estinant) => {
-        return estinant.inputList.map((input) => input.id);
-      },
-    );
-
-    const rankControlSubgraph: DirectedSubgraph = {
-      isRoot: false,
-      isCluster: false,
-      attributeByKey: {
-        id: engineProgram.id,
-      },
-      rankGroupList,
-      nodeList: [
-        ...voictentNodeList,
-        ...estinantNodeList,
-        ...estinantInputNodeList,
-      ],
-      edgeList: [],
-      subgraphList: [],
-    };
-
     const rootGraph: DirectedGraph = {
       isRoot: true,
       attributeByKey: {
@@ -206,9 +229,11 @@ export const getDirectedGraph = buildEstinant({
         fontsize: FONT_SIZE.root,
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
-      nodeList: [],
+      nodeList: voictentNodeList,
       edgeList: [...inputEdgeList, ...outputEdgeList],
-      subgraphList: [rankControlSubgraph],
+      subgraphList: estinantSubgraphMetadataList.map(({ subgraph }) => {
+        return subgraph;
+      }),
     };
 
     const metadataById: DirectedGraphMetadataById = {};
@@ -255,7 +280,7 @@ export const getDirectedGraph = buildEstinant({
       };
     });
 
-    estinantInputList.forEach((input) => {
+    estinantInputMetadataList.forEach(({ input }) => {
       metadataById[input.id] = {
         title: input.index === 0 ? 'Left Input' : 'Right Input',
         fieldList: [],
