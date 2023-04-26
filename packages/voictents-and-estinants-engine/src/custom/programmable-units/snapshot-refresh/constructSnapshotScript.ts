@@ -8,6 +8,10 @@ import {
   EngineProgramFileVoictent,
 } from '../type-script-file-relationships/engineProgramFile';
 
+/**
+ * Creates the output "refreshSnapshot" file. The file is a shell script that runs all engine programs
+ * for the purpose of updating their runtime profile snapshots.
+ */
 export const constructSnapshotScript = buildEstinant({
   name: 'constructSnapshotScript',
 })
