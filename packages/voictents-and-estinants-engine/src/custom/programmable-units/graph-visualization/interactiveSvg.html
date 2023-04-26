@@ -116,16 +116,20 @@
     })
   })
 
+  const getNodeShapeElement = (node) => {
+    return node.querySelector('polygon') ?? node.querySelector('ellipse');
+  }
+
   nodeList.forEach((node) => {
     node.addEventListener('click', (event) => {
       event.stopPropagation();
       setPanelContent(node)
 
       nodeList.forEach((node) => {
-        node.querySelector('polygon').setAttribute('stroke', 'black');
+        getNodeShapeElement(node).setAttribute('stroke', 'black');
       })
 
-      node.querySelector('polygon').setAttribute('stroke', 'orange');
+      getNodeShapeElement(node).setAttribute('stroke', 'orange');
 
       const id = node.getAttribute('id');
 

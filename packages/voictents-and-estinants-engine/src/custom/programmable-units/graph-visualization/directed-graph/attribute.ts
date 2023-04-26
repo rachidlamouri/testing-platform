@@ -2,8 +2,12 @@ import { SetOptional } from 'type-fest';
 
 export enum Shape {
   Box = 'box',
+  Circle = 'circle',
   InvertedTriangle = 'invtriangle',
   InvertedHouse = 'invhouse',
+  Oval = 'oval',
+  PlainText = 'plaintext',
+  Point = 'point',
 }
 
 export enum LabelLocation {
