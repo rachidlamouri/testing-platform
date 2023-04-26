@@ -143,7 +143,7 @@ export const getDirectedGraph = buildEstinant({
       const node: DirectedGraphNode = {
         attributeByKey: {
           id: input.id,
-          label: input.index === 0 ? 'L' : 'R',
+          label: input.index === 0 ? 'L' : `R${input.index}`,
           shape: Shape.InvertedTriangle,
           ...COMMON_ATTRIBUTE_BY_KEY,
         },
@@ -276,14 +276,32 @@ export const getDirectedGraph = buildEstinant({
             label: 'Description',
             value: estinant.commentText,
           },
+          ...estinant.inputList.map((input) => {
+            return {
+              label:
+                input.index === 0 ? 'Left Input' : `Right Input ${input.index}`,
+              value: input.voictentName,
+            };
+          }),
+          {
+            label: 'Output',
+            value: estinant.outputList
+              .map((output) => output.voictentName)
+              .join(', '),
+          },
         ],
       };
     });
 
     estinantInputMetadataList.forEach(({ input }) => {
       metadataById[input.id] = {
-        title: input.index === 0 ? 'Left Input' : 'Right Input',
-        fieldList: [],
+        title: input.index === 0 ? 'Left Input' : `Right Input ${input.index}`,
+        fieldList: [
+          {
+            label: 'Voictent',
+            value: input.voictentName,
+          },
+        ],
       };
     });
 
