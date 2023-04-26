@@ -17,5 +17,5 @@ digikikify({
     datumTestCaseInputToCustomDatumTypeName,
     datumTestCaseInputToSerializedDatum,
   ],
-  quirmDebugger: buildBasicQuirmDebugger('testTypedDatum'),
+  quirmDebugger: buildBasicQuirmDebugger('testTypedDatum', 'snapshot'),
 });
