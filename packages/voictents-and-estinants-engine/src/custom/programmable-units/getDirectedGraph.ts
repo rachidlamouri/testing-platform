@@ -426,12 +426,12 @@ export const getDirectedGraph = buildEstinant({
       title: engineProgram.programName,
       fieldList: [
         {
-          label: 'File Path',
-          value: engineProgram.filePath,
-        },
-        {
           label: 'Type',
           value: 'Program',
+        },
+        {
+          label: 'File Path',
+          value: engineProgram.filePath,
         },
       ],
     };
@@ -442,7 +442,7 @@ export const getDirectedGraph = buildEstinant({
         fieldList: [
           {
             label: 'Type',
-            value: 'Voictent',
+            value: 'Collection',
           },
         ],
       };
@@ -454,7 +454,7 @@ export const getDirectedGraph = buildEstinant({
         fieldList: [
           {
             label: 'Type',
-            value: 'Estinant',
+            value: 'Transform',
           },
           {
             label: 'Description',
@@ -477,12 +477,19 @@ export const getDirectedGraph = buildEstinant({
       };
     });
 
-    estinantInputMetadataList.forEach(({ input }) => {
+    estinantInputMetadataList.forEach(({ estinant, input }) => {
+      const inputName =
+        input.index === 0 ? 'Left Input' : `Right Input ${input.index}`;
+
       metadataById[input.id] = {
-        title: input.index === 0 ? 'Left Input' : `Right Input ${input.index}`,
+        title: `${estinant.estinantName}: ${inputName}`,
         fieldList: [
           {
-            label: 'Voictent',
+            label: 'Type',
+            value: 'Transform Input',
+          },
+          {
+            label: 'Source Collection',
             value: input.voictentName,
           },
         ],
