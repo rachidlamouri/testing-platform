@@ -12,6 +12,10 @@ import {
   DirectoryMetadataVoictent,
 } from './directoryMetadata';
 
+/**
+ * Gets information that is used to present Directory items and to associate
+ * them with items from other collections.
+ */
 export const getDirectoryMetadata = buildEstinant({
   name: 'getDirectoryMetadata',
 })

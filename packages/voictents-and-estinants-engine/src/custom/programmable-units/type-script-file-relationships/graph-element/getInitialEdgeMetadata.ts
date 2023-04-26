@@ -28,6 +28,9 @@ import {
   FileNodeMetadataByFilePathVoictent,
 } from './fileNodeMetadataByFilePath';
 
+/**
+ * Converts TypeScript file import statements into directed graph edge metadata.
+ */
 export const getInitialEdgeMetadata = buildEstinant({
   name: 'getInitialEdgeMetadata',
 })
@@ -67,7 +70,7 @@ export const getInitialEdgeMetadata = buildEstinant({
       const errorList: ProgramErrorOdeshin[] = [];
       const edgeMetadataList: InitialEdgeMetadataList = [];
 
-      const tailList = importList.map((importedItem) => {
+      const headList = importList.map((importedItem) => {
         const headMetadata = importedItem.isInternal
           ? fileNodeMetadataByFilePath.get(importedItem.sourcePath)
           : externalModuleMetadataIdBySourcePath.get(importedItem.sourcePath);
@@ -78,7 +81,7 @@ export const getInitialEdgeMetadata = buildEstinant({
         };
       });
 
-      tailList.forEach(({ headMetadata, importedItem }, index) => {
+      headList.forEach(({ headMetadata, importedItem }, index) => {
         if (headMetadata === undefined) {
           errorList.push({
             zorn: `getInitialEdgeMetadata/${leftInput.zorn}/${index}`,

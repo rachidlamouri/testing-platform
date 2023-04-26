@@ -3,6 +3,10 @@ import { DIRECTORY_GEPP, DirectoryVoictent } from '../file/directory';
 import { ROOT_DIRECTORY_GEPP, RootDirectoryVoictent } from './rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 
+/**
+ * Processes all Directory items at once in order to find the largest shared
+ * directory path among them
+ */
 export const getRootDirectory = buildEstinant({
   name: 'getRootDirectory',
 })

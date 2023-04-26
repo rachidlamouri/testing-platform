@@ -10,6 +10,10 @@ import {
   ExternalModuleVoictent,
 } from './externalModule';
 
+/**
+ * Gets all external module file paths at once in order to deduplicate them and
+ * assign each one a unique id.
+ */
 export const getExternalModuleCollection = buildEstinant({
   name: 'getExternalModuleCollection',
 })

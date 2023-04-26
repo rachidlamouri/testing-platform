@@ -10,6 +10,11 @@ import {
   FileNodeMetadataByFilePathVoictent,
 } from './fileNodeMetadataByFilePath';
 
+/**
+ * Consumes the entire FileNodeMetadata collection in order to index
+ * FileNodeMetadata items by their file path. This facilitates finding directed
+ * graph edges between TypeScript files.
+ */
 export const getFileNodeMetadataByFilePath = buildEstinant({
   name: 'getFileNodeMetadataByFilePath',
 })

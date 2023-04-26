@@ -12,6 +12,11 @@ import {
   ExternalModuleMetadataVoictent,
 } from './externalModuleMetadata';
 
+/**
+ * Gets information that is used to present External TypeScript modules (ie.
+ * first party node modules, and third party npm modules) and to associate them
+ * with items from other collections.
+ */
 export const getExternalModuleMetadata = buildEstinant({
   name: 'getExternalModuleMetadata',
 })

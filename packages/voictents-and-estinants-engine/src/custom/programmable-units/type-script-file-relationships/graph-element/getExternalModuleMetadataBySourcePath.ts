@@ -10,6 +10,12 @@ import {
   ExternalModuleMetadataBySourcePathVoictent,
 } from './externalModuleMetadataBySourcePath';
 
+/**
+ * Consumes the entire ExternalModuleMetadata collection in order to index
+ * ExternalModuleMetadata items by their source path. This facilitates finding
+ * directed graph edges between second party TypeScript files and first or third
+ * party TypeScript modules.
+ */
 export const getExternalModuleMetadataBySourcePath = buildEstinant({
   name: 'getExternalModuleMetadataBySourcePath',
 })
