@@ -9,6 +9,11 @@ import {
   CUSTOM_DATUM_TYPE_NAME_GEPP,
 } from './customDatumTypeName';
 
+/**
+ * Tests converting a datum to a CustomTypedDatum. That is, a datum with a
+ * typeName that allows for type narrowing of the datum based on some custom
+ * logic. The custom logic makes it easier to serialize data based on its type
+ */
 export const datumTestCaseInputToCustomDatumTypeName = buildEstinant({
   name: 'datumTestCaseInputToCustomDatumTypeName',
 })
