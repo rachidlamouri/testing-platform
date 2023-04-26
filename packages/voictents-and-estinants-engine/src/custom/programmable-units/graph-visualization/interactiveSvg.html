@@ -116,8 +116,8 @@
     })
   })
 
-  const getNodeShapeElement = (node) => {
-    return node.querySelector('polygon') ?? node.querySelector('ellipse');
+  const getChildShapeElement = (element) => {
+    return element.querySelector('polygon') ?? element.querySelector('ellipse');
   }
 
   nodeList.forEach((node) => {
@@ -126,10 +126,10 @@
       setPanelContent(node)
 
       nodeList.forEach((node) => {
-        getNodeShapeElement(node).setAttribute('stroke', 'black');
+        getChildShapeElement(node).setAttribute('stroke', 'black');
       })
 
-      getNodeShapeElement(node).setAttribute('stroke', 'orange');
+      getChildShapeElement(node).setAttribute('stroke', 'orange');
 
       const id = node.getAttribute('id');
 
@@ -148,7 +148,7 @@
         const tailId = tailClass.split('tail-')[1]
 
         const tailElement = document.getElementById(tailId);
-        tailElement.querySelector('polygon').setAttribute('stroke', 'green');
+        getChildShapeElement(tailElement).setAttribute('stroke', 'green');
       })
 
       // TODO: make this trigger once per edge, not twice
@@ -159,7 +159,7 @@
         const headId = tailClass.split('head-')[1]
 
         const headElement = document.getElementById(headId);
-        headElement.querySelector('polygon').setAttribute('stroke', 'blue');
+        getChildShapeElement(headElement).setAttribute('stroke', 'blue');
       })
 
       allEdgeList.forEach((element) => {

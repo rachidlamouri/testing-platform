@@ -26,11 +26,11 @@ import {
   ENGINE_PROGRAM_2_GEPP,
   EngineProgram2Voictent,
 } from './engine-program/engineProgram2';
-import { EngineEstinant2 } from './engine-program/engineEstinant2';
 
 type EngineVoictent = {
   id: string;
   name: string;
+  hasInitialInput: boolean;
   isConsumed: boolean;
 };
 
@@ -53,12 +53,26 @@ export const getDirectedGraph = buildEstinant({
     getZorn: (leftInput) => leftInput.grition.programName,
   })
   .onPinbe((engineProgram) => {
-    const engineVoictentByName = new Map<string, EngineVoictent>();
+    const engineVoictentByName = new Map<string, EngineVoictent>(
+      engineProgram.initialVoictentNameList.map((voictentName) => {
+        return [
+          voictentName,
+          {
+            id: uuid.v4(),
+            name: voictentName,
+            hasInitialInput: true,
+            isConsumed: false,
+          },
+        ];
+      }),
+    );
+
     engineProgram.estinantList.forEach((estinant) => {
       estinant.inputList.forEach((input) => {
         const cacheValue = engineVoictentByName.get(input.voictentName) ?? {
           id: uuid.v4(),
           name: input.voictentName,
+          hasInitialInput: false,
           isConsumed: false,
         };
 
@@ -71,6 +85,7 @@ export const getDirectedGraph = buildEstinant({
         const cacheValue = engineVoictentByName.get(output.voictentName) ?? {
           id: uuid.v4(),
           name: output.voictentName,
+          hasInitialInput: false,
           isConsumed: false,
         };
 
@@ -78,9 +93,84 @@ export const getDirectedGraph = buildEstinant({
       });
     });
 
+    const startNode: DirectedGraphNode = {
+      attributeByKey: {
+        id: uuid.v4(),
+        label: 'START',
+        shape: Shape.Circle,
+        color: 'gray',
+        ...COMMON_ATTRIBUTE_BY_KEY,
+      },
+    };
+
     const voictentList = [...engineVoictentByName.values()];
 
-    const voictentNodeList = voictentList.map((voictent) => {
+    const startingEdgeList = voictentList
+      .filter((voictent) => voictent.hasInitialInput)
+      .map((voictent) => {
+        const tailId = startNode.attributeByKey.id;
+        const headId = voictent.id;
+
+        const edge: DirectedGraphEdge = {
+          tailId,
+          headId,
+          attributeByKey: {
+            id: `${tailId}:${headId}`,
+          },
+        };
+
+        return edge;
+      });
+
+    enum VoictentCategoryName {
+      Start = 'Start',
+      Middle = 'Middle',
+      End = 'End',
+    }
+
+    type CategorizedVoictent = {
+      category: VoictentCategoryName;
+      voictent: EngineVoictent;
+    };
+
+    const categorizedVoictentList = voictentList.map<CategorizedVoictent>(
+      (voictent) => {
+        if (voictent.hasInitialInput) {
+          return {
+            category: VoictentCategoryName.Start,
+            voictent,
+          };
+        }
+
+        if (voictent.isConsumed) {
+          return {
+            category: VoictentCategoryName.Middle,
+            voictent,
+          };
+        }
+
+        return {
+          category: VoictentCategoryName.End,
+          voictent,
+        };
+      },
+    );
+
+    const startingVoictentList: EngineVoictent[] = categorizedVoictentList
+      .filter(({ category }) => category === VoictentCategoryName.Start)
+      .map(({ voictent }) => voictent);
+
+    const middleVoictentList: EngineVoictent[] = categorizedVoictentList
+      .filter(({ category }) => category === VoictentCategoryName.Middle)
+      .map(({ voictent }) => voictent);
+
+    const endingVoictentList: EngineVoictent[] = categorizedVoictentList
+      .filter(({ category }) => category === VoictentCategoryName.End)
+      .map(({ voictent }) => voictent);
+
+    const createVoictentNode = (
+      voictent: EngineVoictent,
+    ): DirectedGraphNode => {
       const node: DirectedGraphNode = {
         attributeByKey: {
           id: voictent.id,
@@ -91,7 +181,12 @@ export const getDirectedGraph = buildEstinant({
       };
 
       return node;
-    });
+    };
+
+    const startingVoictentNodeList =
+      startingVoictentList.map(createVoictentNode);
+    const middleVoictentNodeList = middleVoictentList.map(createVoictentNode);
+    const endingVoictentNodeList = endingVoictentList.map(createVoictentNode);
 
     const estinantSubgraphMetadataList = engineProgram.estinantList.map(
       (estinant) => {
@@ -235,14 +330,9 @@ export const getDirectedGraph = buildEstinant({
         });
       });
 
-    const unusedVoictentSet = new Set<EngineVoictent>();
-    const terminatingEstinantSet = new Set<EngineEstinant2>();
-
     const voictentToEndEdgeList = voictentList
       .filter((voictent) => !voictent.isConsumed)
       .map<DirectedGraphEdge>((voictent) => {
-        unusedVoictentSet.add(voictent);
-
         const tailId = voictent.id;
         const headId = endNode.attributeByKey.id;
 
@@ -262,8 +352,6 @@ export const getDirectedGraph = buildEstinant({
         return estinant.outputList.length === 0;
       })
       .map((estinant) => {
-        terminatingEstinantSet.add(estinant);
-
         const tailId = estinant.id;
         const headId = endNode.attributeByKey.id;
 
@@ -278,23 +366,19 @@ export const getDirectedGraph = buildEstinant({
         return edge;
       });
 
-    const unusedVoictentIdSet = new Set(
-      [...unusedVoictentSet].map((voictent) => {
-        return voictent.id;
-      }),
-    );
-
-    const unusedVoictentNodeList: DirectedGraphNode[] = voictentNodeList.filter(
-      (node) => {
-        return unusedVoictentIdSet.has(node.attributeByKey.id);
+    const startSubgraph: DirectedSubgraph = {
+      isRoot: false,
+      isCluster: true,
+      attributeByKey: {
+        id: uuid.v4(),
+        label: '',
+        style: DirectedGraphStyle.Rounded,
+        color: 'none',
       },
-    );
-
-    const usedVoictentNodeList: DirectedGraphNode[] = voictentNodeList.filter(
-      (node) => {
-        return !unusedVoictentIdSet.has(node.attributeByKey.id);
-      },
-    );
+      nodeList: startingVoictentNodeList,
+      edgeList: [],
+      subgraphList: [],
+    };
 
     const endSubgraph: DirectedSubgraph = {
       isRoot: false,
@@ -303,9 +387,9 @@ export const getDirectedGraph = buildEstinant({
         id: uuid.v4(),
         label: '',
         style: DirectedGraphStyle.Rounded,
-        color: 'gray',
+        color: 'none',
       },
-      nodeList: [...unusedVoictentNodeList, endNode],
+      nodeList: endingVoictentNodeList,
       edgeList: [],
       subgraphList: [],
     };
@@ -319,14 +403,16 @@ export const getDirectedGraph = buildEstinant({
         fontsize: FONT_SIZE.root,
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
-      nodeList: usedVoictentNodeList,
+      nodeList: [startNode, ...middleVoictentNodeList, endNode],
       edgeList: [
+        ...startingEdgeList,
         ...inputEdgeList,
         ...outputEdgeList,
         ...voictentToEndEdgeList,
         ...estinantToEndEdgeList,
       ],
       subgraphList: [
+        startSubgraph,
         ...estinantSubgraphMetadataList.map(({ subgraph }) => {
           return subgraph;
         }),
@@ -403,6 +489,27 @@ export const getDirectedGraph = buildEstinant({
       };
     });
 
+    metadataById[startNode.attributeByKey.id] = {
+      title: 'Start',
+      fieldList: [
+        {
+          label: 'Description',
+          value:
+            'This represents the starting point for all paths through an engine program. It points to the collections for which the programmer has provided intitial values.',
+        },
+        {
+          label: 'Starting Collections',
+          value: startingVoictentList
+            .map((voictent) => voictent.name)
+            .join(', '),
+        },
+      ],
+    };
+
+    const terminatingEstinantList = engineProgram.estinantList.filter(
+      (estinant) => estinant.outputList.length === 0,
+    );
+
     metadataById[endNode.attributeByKey.id] = {
       title: 'End',
       fieldList: [
@@ -413,13 +520,11 @@ export const getDirectedGraph = buildEstinant({
         },
         {
           label: 'Unused Collections',
-          value: [...unusedVoictentSet]
-            .map((voictent) => voictent.name)
-            .join(', '),
+          value: endingVoictentList.map((voictent) => voictent.name).join(', '),
         },
         {
           label: 'Terminating Transforms',
-          value: [...terminatingEstinantSet]
+          value: terminatingEstinantList
             .map((estinant) => estinant.estinantName)
             .join(', '),
         },

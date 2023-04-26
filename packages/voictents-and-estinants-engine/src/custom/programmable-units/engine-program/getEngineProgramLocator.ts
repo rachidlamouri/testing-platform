@@ -39,6 +39,22 @@ type EngineCallExpressionStatement = TSESTree.ExpressionStatement & {
   expression: EngineCallExpression;
 };
 
+/**
+ * @todo tie this to the logic that a gepp identifier is in screaming snake case
+ * @todo tie this to the logic that enforces that a gepp identifier should end in 'GEPP'
+ */
+const geppToVoictentName = (geppIdentifier: string): string => {
+  const namePartList = geppIdentifier.split('_');
+
+  namePartList.pop();
+
+  const voictentName = namePartList
+    .map((word) => `${word.charAt(0)}${word.slice(1).toLowerCase()}`)
+    .join('');
+
+  return voictentName;
+};
+
 const isEngineCallExpressionStatement = (
   node: TSESTree.Node,
   engineFunctionIdentifier: string,
@@ -92,6 +108,28 @@ export const getEngineProgramLocator = buildEstinant({
 
       const engineCallExpressionPropertyList: IdentifiableProperty[] =
         engineCallExpressionStatement?.expression.arguments[0].properties ?? [];
+
+      const initialVoictentByGeppProperty =
+        engineCallExpressionPropertyList.find(
+          (property) =>
+            property.key.name ===
+            engineFunctionConfiguration.initialVoictentByGeppKeyIdentifierName,
+        );
+
+      const initialVoictentByGeppValueNode =
+        initialVoictentByGeppProperty?.value;
+
+      const initialVoictentGeppIdentifierList =
+        isObjectExpressionWithIdentifierProperties(
+          initialVoictentByGeppValueNode,
+        )
+          ? initialVoictentByGeppValueNode.properties.map(
+              (property: IdentifiableProperty) => property.key.name,
+            )
+          : [];
+
+      const initialVoictentNameList =
+        initialVoictentGeppIdentifierList.map(geppToVoictentName);
 
       const estinantListProperty = engineCallExpressionPropertyList.find(
         (property) =>
@@ -152,6 +190,7 @@ export const getEngineProgramLocator = buildEstinant({
       const engineProgramLocator: EngineProgramLocator2 = {
         programName,
         filePath: engineProgramFile.filePath,
+        initialVoictentNameList,
         engineEstinantLocatorList,
       };
 

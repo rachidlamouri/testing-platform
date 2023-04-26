@@ -8,6 +8,7 @@ export type EngineProgram2 = {
   id: string;
   programName: string;
   filePath: string;
+  initialVoictentNameList: string[];
   estinantList: Tuple<EngineEstinant2>;
 };
 
