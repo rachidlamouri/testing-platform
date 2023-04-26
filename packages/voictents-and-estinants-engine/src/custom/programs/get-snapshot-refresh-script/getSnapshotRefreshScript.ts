@@ -4,7 +4,6 @@ import {
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
   ENGINE_FUNCTION_CONFIGURATION,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
-import { getEngineProgramParts } from '../../programmable-units/engine-program/getEngineProgramParts';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -12,7 +11,7 @@ import {
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { constructSnapshotScript } from '../../programmable-units/snapshot-refresh/constructSnapshotScript';
-import { filterEngineProgramList } from '../../programmable-units/snapshot-refresh/filterEngineProgramList';
+import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
@@ -32,8 +31,8 @@ digikikify({
     parseTypeScriptFile,
     getTypeScriptFileImportList,
 
-    getEngineProgramParts,
-    filterEngineProgramList,
+    filterEngineProgramFile,
+
     constructSnapshotScript,
   ],
   quirmDebugger: buildQuirmDebugger('getSnapshotRefreshScript'),

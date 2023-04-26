@@ -1,0 +1,26 @@
+"zorn": "1/primitive-collection/2/object/0/with-string-keys"
+"grition":
+  "key-0": null
+  "key-1": ~
+  "key-2": "this is a single line string"
+  "key-3":
+    "---
+    this
+      is
+    a multiline
+      string
+    ---"
+  "key-4":
+    # bigint
+    99999999999999999999999999
+  "key-5": 12.34
+  "key-6": 123
+  "key-7": 0.123
+  "key-8": true
+  "key-9": false
+  "key-10":
+    # symbol: ""
+    0714dac4-a4ce-45c7-8bd2-948d95aa9f32
+  "key-11":
+    # symbol: "this is a symbol description"
+    441765d9-4a6a-4244-8ebd-0903851fba3c

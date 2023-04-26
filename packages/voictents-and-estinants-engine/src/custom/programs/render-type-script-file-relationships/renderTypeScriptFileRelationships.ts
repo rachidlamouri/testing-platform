@@ -80,7 +80,6 @@ digikikify({
 
     getRootDirectory,
     getDirectoryInstanceIdByDirectoryPath,
-    getGraphMetadataById,
 
     getBoundaryMetadata,
     getDirectoryMetadata,
@@ -88,6 +87,8 @@ digikikify({
     getFileNodeMetadataByFilePath,
     getExternalModuleMetadata,
     getExternalModuleMetadataBySourcePath,
+
+    getGraphMetadataById,
 
     getInitialEdgeMetadata,
     getRootMetadata,

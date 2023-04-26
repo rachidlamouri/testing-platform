@@ -26,6 +26,10 @@ const partsToKebab = (x: string[]): string => {
   return x.join('-');
 };
 
+/**
+ * Populates export declarations for a collection and all related types. It uses
+ * the file name to derive the reference names/
+ */
 export const scaffoldFile = buildEstinant({
   name: 'scaffoldFile',
 })

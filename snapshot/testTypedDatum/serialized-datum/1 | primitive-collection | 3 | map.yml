@@ -1,0 +1,45 @@
+"zorn": "1/primitive-collection/3/map"
+"grition":
+  "---
+  # Map
+  - - null
+    - null
+  - - ~
+    - ~
+  - - "this is a single line string"
+    - "this is a single line string"
+  - - "---
+      this
+        is
+      a multiline
+        string
+      ---"
+    - "---
+      this
+        is
+      a multiline
+        string
+      ---"
+      # bigint
+  - - 99999999999999999999999999
+      # bigint
+    - 99999999999999999999999999
+  - - 12.34
+    - 12.34
+  - - 123
+    - 123
+  - - 0.123
+    - 0.123
+  - - true
+    - true
+  - - false
+    - false
+      # symbol: ""
+  - - 0714dac4-a4ce-45c7-8bd2-948d95aa9f32
+      # symbol: ""
+    - 0714dac4-a4ce-45c7-8bd2-948d95aa9f32
+      # symbol: "this is a symbol description"
+  - - 441765d9-4a6a-4244-8ebd-0903851fba3c
+      # symbol: "this is a symbol description"
+    - 441765d9-4a6a-4244-8ebd-0903851fba3c
+  ---"

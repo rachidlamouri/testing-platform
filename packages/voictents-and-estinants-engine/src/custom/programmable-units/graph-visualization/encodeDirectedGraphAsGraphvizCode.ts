@@ -6,6 +6,9 @@ import {
 import { getGraphvizCode } from './directed-graph/getGraphvizCode';
 import { GraphvizCodeVoictent, GRAPHVIZ_CODE_GEPP } from './graphvizCode';
 
+/**
+ * Converts a directed graph data structure into Graphviz code.
+ */
 export const encodeDirectedGraphAsGraphvizCode = buildEstinant({
   name: 'encodeDirectedGraphAsGraphvizCode',
 })

@@ -25,6 +25,10 @@ import {
   RootMetadataVoictent,
 } from './graph-element/rootMetadata';
 
+/**
+ * Converts all TypeScript relationship metadata into a format that can be used
+ * for presentation
+ */
 export const getGraphMetadataById = buildEstinant({
   name: 'getGraphMetadataById',
 })

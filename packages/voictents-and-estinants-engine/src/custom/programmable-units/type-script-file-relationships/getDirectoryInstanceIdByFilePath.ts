@@ -7,6 +7,11 @@ import {
 } from './directoryInstanceIdByDirectoryPath';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 
+/**
+ * Consumes the entire Directory collection in order to index Directory object
+ * ids by their directory path. This allows later transforms to associate File
+ * items to Directory items via their directory path.
+ */
 export const getDirectoryInstanceIdByDirectoryPath = buildEstinant({
   name: 'getDirectoryInstanceIdByDirectoryPath',
 })

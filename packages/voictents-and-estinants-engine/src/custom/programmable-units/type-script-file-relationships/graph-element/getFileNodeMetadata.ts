@@ -26,6 +26,10 @@ import {
   FileNodeMetadataVoictent,
 } from './fileNodeMetadata';
 
+/**
+ * Gets information that is used to present TypeScriptFile items and to
+ * associate them with items from other collections.
+ */
 export const getFileNodeMetadata = buildEstinant({
   name: 'getFileNodeMetadata',
 })

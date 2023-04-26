@@ -15,6 +15,11 @@ import {
 import { RootDirectoryVoictent, ROOT_DIRECTORY_GEPP } from './rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 
+/**
+ * Acquires the metadata needed to populate the tabs on the left in the
+ * knowledge graph as well as their associated SVG documents. This transform
+ * also dictates the ordering of the labels in the knowledge graph.
+ */
 export const getSvgMetadataList = buildEstinant({
   name: 'getSvgMetadataList',
 })

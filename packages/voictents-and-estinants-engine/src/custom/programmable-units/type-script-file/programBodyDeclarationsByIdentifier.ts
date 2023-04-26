@@ -36,6 +36,12 @@ export type ProgramBodyDeclarationsByIdentifierVoictent = Voictent<
   ProgramBodyDeclarationsByIdentifierOdeshin
 >;
 
+/**
+ * Uses the convention of an "identifiable top level node", to cache all top
+ * level program statements by their identifiable node. A useful example is
+ * looking up an export statement AST node in one file, based on the import
+ * identifier in a dependent file.
+ */
 export const getProgramBodyDeclarationsByIdentifier = buildEstinant({
   name: 'getProgramBodyDeclarationsByIdentifier',
 })

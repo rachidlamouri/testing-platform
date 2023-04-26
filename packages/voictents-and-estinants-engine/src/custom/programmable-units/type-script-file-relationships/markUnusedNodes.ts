@@ -16,6 +16,12 @@ import {
   InitialEdgeMetadataListVoictent,
 } from './graph-element/initialEdgeMetadataList';
 
+/**
+ * Marks TypeScript files that have zero incoming edges among the TypeScript
+ * relationship knowledge graph nodes. It is currently responsible for
+ * determining which nodes should not be marked, but this logic can be improved
+ * or moved elsewhere.
+ */
 export const markUnusedNodes = buildEstinant({
   name: 'markUnusedNodes',
 })

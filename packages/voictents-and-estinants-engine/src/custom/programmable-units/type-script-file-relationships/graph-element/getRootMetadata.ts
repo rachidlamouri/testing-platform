@@ -17,6 +17,10 @@ import {
   RootMetadataVoictent,
 } from './rootMetadata';
 
+/**
+ * Gets the root directed graph metadata for each boundary in the knowledge graph.
+ * In the knowledge graph, this corresponds to the root SVG graph element for each tab on the left.
+ */
 export const getRootMetadata = buildEstinant({
   name: 'getRootMetadata',
 })

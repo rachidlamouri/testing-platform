@@ -48,6 +48,10 @@ const isEngineCallExpressionStatement = (
   node.expression.callee.name === engineFunctionIdentifier &&
   isObjectExpressionWithIdentifierProperties(node.expression.arguments[0]);
 
+/**
+ * Gets metadata that helps later transforms find engine programs, their
+ * collections, their transforms, and the edges between the collections and transforms
+ */
 export const getEngineProgramLocator = buildEstinant({
   name: 'getEngineProgramLocator',
 })

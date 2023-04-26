@@ -32,6 +32,9 @@ import { Shape } from '../../graph-visualization/directed-graph/attribute';
 import { RootDirectoryVoictent, ROOT_DIRECTORY_GEPP } from '../rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 
+/**
+ * Converts all TypeScript relationship metadata into a directed graph
+ */
 export const getRootDirectedGraph = buildEstinant({
   name: 'getRootDirectedGraph',
 })

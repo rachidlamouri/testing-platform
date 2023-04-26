@@ -52,8 +52,8 @@ const partsToKebabCase = (x: string[]): string => {
 
 /**
  * Traverses the file system starting from a given directory path, and outputs
- * all of the encountered directories and files. It ignores file system nodes based
- * on the input configuration's ignored list configuration.
+ * all of the encountered directories and files. It ignores file system nodes
+ * based on the input configuration's ignored list configuration.
  */
 export const enumerateFileSystemObjects = buildEstinant({
   name: 'enumerateFileSystemObjects',

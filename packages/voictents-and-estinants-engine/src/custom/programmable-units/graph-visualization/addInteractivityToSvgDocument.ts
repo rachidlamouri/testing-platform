@@ -59,6 +59,12 @@ const dataStructureToCode = (datum: unknown): string => {
   }
 };
 
+/**
+ * Merges an SVG document with an HTML file template. The HTML file template
+ * displays the SVG and applies an interactive pan-zoom handler to it. The
+ * template also provides a side panel to render metadata when SVG elements are
+ * clicked on.
+ */
 export const addInteractivityToSvgDocument = buildEstinant({
   name: 'addInteractivityToSvgDocument',
 })

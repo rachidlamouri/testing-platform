@@ -9,6 +9,11 @@ import {
   TYPE_SCRIPT_DATUM_TYPE_NAME_GEPP,
 } from './typeScriptDatumTypeName';
 
+/**
+ * Tests converting a datum to a TypeScriptTypedDatum. That is, a datum with a
+ * typeName that allows for type narrowing of the datum based on the result of
+ * the "typeof" operator.
+ */
 export const datumTestCaseInputToTypeScriptDatumTypeName = buildEstinant({
   name: 'datumTestCaseInputToTypeScriptDatumTypeName',
 })

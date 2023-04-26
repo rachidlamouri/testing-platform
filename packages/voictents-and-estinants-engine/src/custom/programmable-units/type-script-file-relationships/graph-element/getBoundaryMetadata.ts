@@ -16,6 +16,10 @@ import {
 } from './boundaryMetadata';
 import { FONT_SIZE, COMMON_ATTRIBUTE_BY_KEY } from './commonAttributeByKey';
 
+/**
+ * Gets information that is used to present Boundary items and to associate them
+ * with items from other collections.
+ */
 export const getBoundaryMetadata = buildEstinant({
   name: 'getBoundaryMetadata',
 })

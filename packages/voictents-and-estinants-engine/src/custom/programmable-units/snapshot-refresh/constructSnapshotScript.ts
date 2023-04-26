@@ -4,15 +4,19 @@ import {
   OutputFileVoictent,
 } from '../output-file/outputFile';
 import {
-  FILTERED_ENGINE_PROGRAM_GEPP,
-  FilteredEngineProgramVoictent,
-} from './filteredEngineProgram';
+  ENGINE_PROGRAM_FILE_GEPP,
+  EngineProgramFileVoictent,
+} from '../type-script-file-relationships/engineProgramFile';
 
+/**
+ * Creates the output "refreshSnapshot" file. The file is a shell script that runs all engine programs
+ * for the purpose of updating their runtime profile snapshots.
+ */
 export const constructSnapshotScript = buildEstinant({
   name: 'constructSnapshotScript',
 })
-  .fromOdeshinVoictent<FilteredEngineProgramVoictent>({
-    gepp: FILTERED_ENGINE_PROGRAM_GEPP,
+  .fromOdeshinVoictent<EngineProgramFileVoictent>({
+    gepp: ENGINE_PROGRAM_FILE_GEPP,
   })
   .toHubblepup<OutputFileVoictent>({
     gepp: OUTPUT_FILE_GEPP,
@@ -21,6 +25,12 @@ export const constructSnapshotScript = buildEstinant({
     const filePathSet = new Set(inputList.map((input) => input.filePath));
 
     const text = [...filePathSet]
+      .filter((filePath) => {
+        return (
+          filePath !==
+          'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file/assembleScaffoldedFile.ts'
+        );
+      })
       .map((filePath) => `npx ts-node "${filePath}"`)
       .join('&&\\\n');
 

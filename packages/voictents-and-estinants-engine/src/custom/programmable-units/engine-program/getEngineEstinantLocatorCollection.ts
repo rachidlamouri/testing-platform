@@ -14,6 +14,11 @@ import {
   EngineProgramLocator2Voictent,
 } from './engineProgramLocator2';
 
+/**
+ * Consumes the entire collection of engine program locators in order to
+ * deduplicate their estinant locator information. This transform makes sure
+ * that each estinant is only processed once.
+ */
 export const getEngineEstinantLocatorCollection = buildEstinant({
   name: 'getEngineEstinantLocatorCollection',
 })

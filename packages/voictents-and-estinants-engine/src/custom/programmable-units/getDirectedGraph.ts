@@ -31,6 +31,10 @@ type EngineVoictent = {
   name: string;
 };
 
+/**
+ * Converts an engine program into a directed graph and the associated metadata
+ * to be displayed in the interactive directed graph.
+ */
 export const getDirectedGraph = buildEstinant({
   name: 'getDirectedGraph',
 })

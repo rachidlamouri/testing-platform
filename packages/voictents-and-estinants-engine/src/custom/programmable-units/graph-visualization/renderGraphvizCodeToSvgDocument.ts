@@ -4,6 +4,9 @@ import { GraphvizCodeVoictent, GRAPHVIZ_CODE_GEPP } from './graphvizCode';
 import { SvgDocumentVoictent, SVG_DOCUMENT_GEPP } from './svgDocument';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 
+/**
+ * Uses the "dot" program to convert Graphviz code into an SVG HTML document.
+ */
 export const renderGraphvizCodeToSvgDocument = buildEstinant({
   name: 'renderGraphvizCodeToSvgDocument',
 })

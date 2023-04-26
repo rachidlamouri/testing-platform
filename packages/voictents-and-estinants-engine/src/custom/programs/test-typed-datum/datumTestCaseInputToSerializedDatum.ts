@@ -9,6 +9,15 @@ import {
   SERIALIZED_DATUM_GEPP,
 } from './serializedDatum';
 
+/**
+ * Tests converting a datum to its serialized representation using a custom
+ * serializer.
+ *
+ * @todo The QuirmDebugger currently uses the serialization function to
+ * serialize the output for readability. That means this program depends on the
+ * serialize function that it's testing. So we should fix that, and I'm
+ * currently not sure how. Good luck future me.
+ */
 export const datumTestCaseInputToSerializedDatum = buildEstinant({
   name: 'datumTestCaseInputToSerializedDatum',
 })

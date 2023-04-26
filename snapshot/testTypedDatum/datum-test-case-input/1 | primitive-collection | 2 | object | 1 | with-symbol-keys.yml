@@ -1,0 +1,38 @@
+"zorn": "1/primitive-collection/2/object/1/with-symbol-keys"
+"grition":
+  # symbol: "key-0"
+  c4f1446e-a189-4c2d-8c49-994f54ba35eb: null
+  # symbol: "key-1"
+  d004b095-ac64-4bcb-babf-39422cedc41d: ~
+  # symbol: "key-2"
+  81621974-7445-48a6-b4ed-61b2995c26e6: "this is a single line string"
+  # symbol: "key-3"
+  efb2dd7d-81bc-490a-94f8-a3f5a1d0d554:
+    "---
+    this
+      is
+    a multiline
+      string
+    ---"
+  # symbol: "key-4"
+  e3227d56-8d34-4298-b460-1d2ca93187f9:
+    # bigint
+    99999999999999999999999999
+  # symbol: "key-5"
+  7629b6b3-bff2-46b3-8afa-fa2ad356d0e5: 12.34
+  # symbol: "key-6"
+  cfd4d517-6c91-4031-a7c5-f6be4e8f3cdd: 123
+  # symbol: "key-7"
+  75cc85d0-5796-4886-bfcc-24a16b0516f6: 0.123
+  # symbol: "key-8"
+  554217fc-99e5-4bb9-8db7-96f0a548025f: true
+  # symbol: "key-9"
+  1ce89917-5401-4962-8583-db05fb53580b: false
+  # symbol: "key-10"
+  b7bf126d-41b7-4497-819d-5f7dfbcdbf32:
+    # symbol: ""
+    0714dac4-a4ce-45c7-8bd2-948d95aa9f32
+  # symbol: "key-11"
+  d485e801-45b9-41a1-8fbe-cf71b45dca02:
+    # symbol: "this is a symbol description"
+    441765d9-4a6a-4244-8ebd-0903851fba3c

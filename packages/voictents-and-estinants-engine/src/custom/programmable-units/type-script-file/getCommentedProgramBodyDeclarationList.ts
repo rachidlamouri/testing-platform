@@ -15,6 +15,12 @@ import {
 } from './parsedTypeScriptFile';
 import { getIdentifiableProgramBodyStatementNode } from './getIdentifiableProgramBodyStatementNode';
 
+/**
+ * Grabs the top level list of AST nodes in the root Program AST node's
+ * statement list. It also associates any comment that is one line before a top
+ * level AST node with that node. Note that this transforms gets all nodes, even
+ * uncommented ones.
+ */
 export const getCommentedProgramBodyDeclarationList = buildEstinant({
   name: 'getCommentedProgramBodyDeclarationList',
 })
