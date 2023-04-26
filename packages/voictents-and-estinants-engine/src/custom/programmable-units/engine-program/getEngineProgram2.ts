@@ -45,6 +45,7 @@ export const getEngineProgram2 = buildEstinant({
       id: uuid.v4(),
       programName: engineProgramLocator.programName,
       filePath: engineProgramLocator.filePath,
+      initialVoictentNameList: engineProgramLocator.initialVoictentNameList,
       estinantList,
     };
   })

@@ -6,6 +6,7 @@ export type EngineFunctionConfiguration = {
   filePath: string;
   exportedIdentifier: string;
   estinantListKeyIdentifierName: string;
+  initialVoictentByGeppKeyIdentifierName: string;
 };
 
 export type EngineFunctionConfigurationGrition =
@@ -31,4 +32,5 @@ export const ENGINE_FUNCTION_CONFIGURATION: EngineFunctionConfigurationHubblepup
       'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts',
     exportedIdentifier: 'digikikify',
     estinantListKeyIdentifierName: 'estinantTuple',
+    initialVoictentByGeppKeyIdentifierName: 'initialVoictentsByGepp',
   };
