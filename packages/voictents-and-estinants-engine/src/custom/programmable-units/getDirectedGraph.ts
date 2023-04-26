@@ -278,6 +278,38 @@ export const getDirectedGraph = buildEstinant({
         return edge;
       });
 
+    const unusedVoictentIdSet = new Set(
+      [...unusedVoictentSet].map((voictent) => {
+        return voictent.id;
+      }),
+    );
+
+    const unusedVoictentNodeList: DirectedGraphNode[] = voictentNodeList.filter(
+      (node) => {
+        return unusedVoictentIdSet.has(node.attributeByKey.id);
+      },
+    );
+
+    const usedVoictentNodeList: DirectedGraphNode[] = voictentNodeList.filter(
+      (node) => {
+        return !unusedVoictentIdSet.has(node.attributeByKey.id);
+      },
+    );
+
+    const endSubgraph: DirectedSubgraph = {
+      isRoot: false,
+      isCluster: true,
+      attributeByKey: {
+        id: uuid.v4(),
+        label: '',
+        style: DirectedGraphStyle.Rounded,
+        color: 'gray',
+      },
+      nodeList: [...unusedVoictentNodeList, endNode],
+      edgeList: [],
+      subgraphList: [],
+    };
+
     const rootGraph: DirectedGraph = {
       isRoot: true,
       attributeByKey: {
@@ -287,16 +319,19 @@ export const getDirectedGraph = buildEstinant({
         fontsize: FONT_SIZE.root,
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
-      nodeList: [...voictentNodeList, endNode],
+      nodeList: usedVoictentNodeList,
       edgeList: [
         ...inputEdgeList,
         ...outputEdgeList,
         ...voictentToEndEdgeList,
         ...estinantToEndEdgeList,
       ],
-      subgraphList: estinantSubgraphMetadataList.map(({ subgraph }) => {
-        return subgraph;
-      }),
+      subgraphList: [
+        ...estinantSubgraphMetadataList.map(({ subgraph }) => {
+          return subgraph;
+        }),
+        endSubgraph,
+      ],
     };
 
     const metadataById: DirectedGraphMetadataById = {};
