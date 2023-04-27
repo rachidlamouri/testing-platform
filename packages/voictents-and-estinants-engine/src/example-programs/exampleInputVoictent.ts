@@ -1,17 +1,15 @@
 import { digikikify } from '../core/engine/digikikify';
-import { Voictent } from '../core/engine/voictent';
+import { InMemoryVoictent } from '../core/engine/inMemoryVoictent';
 import { QuirmList } from '../type-script-adapter/quirm';
 
 digikikify({
-  inputVoictentList: [new Voictent('example-1')],
-  initialQuirmTuple: [
-    {
-      gepp: 'example-1',
-      hubblepup: {
-        value: 2,
-      },
-    },
+  inputVoictentList: [
+    new InMemoryVoictent({
+      gepp: 'voictent-1',
+      initialHubblepupTuple: [{ value: 3 }],
+    }),
   ],
+  initialQuirmTuple: [],
   estinantTuple: [
     {
       leftAppreffinge: {
