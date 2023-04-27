@@ -26,6 +26,9 @@ import { getEngineEstinantLocatorCollection } from '../../programmable-units/eng
 import { getEngineEstinant } from '../../programmable-units/engine-program/getEngineEstinant';
 import { getEngineProgram2 } from '../../programmable-units/engine-program/getEngineProgram2';
 
+/**
+ * Creates an interactive model for each engine program.
+ */
 digikikify({
   initialVoictentsByGepp: {
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
