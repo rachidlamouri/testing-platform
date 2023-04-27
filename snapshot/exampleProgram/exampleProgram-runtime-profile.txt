@@ -22,19 +22,19 @@ Collections:
 
 Transforms:
 
-  1
+  inputHubblepupToOutputHubblepup
     input-a
       I: |XX-|
          |___|
       E: |11-|
 
-  2
+  inputGritionToOutputHubblepup
     input-b
       I: |XX-|
          |___|
       E: |11-|
 
-  3
+  inputHubblepupAndInputHubblepupTupleToOutputHubblepup
     input-a
       I: |XX-|
     input-b
@@ -42,7 +42,7 @@ Transforms:
          |___|
       E: |11-|
 
-  4
+  inputHubblepupAndInputHubblepupTupleAndInputHubblepupTupleToOutputHubblepup
     input-a
       I: |XX-|
     input-b
@@ -52,19 +52,19 @@ Transforms:
          |___|
       E: |11-|
 
-  5
+  inputGritionToOutputGrition
     input-b
       I: |XX-|
          |___|
       E: |11-|
 
-  0
+  inputVoictentToOutputHubblepup
     input-a
       C: |-X-|
          |___|
       E: |-1-|
 
-  6
+  inputHubblepupAndInputVoictentToOutputHubblepup
     input-a
       I: |XX-|
     input-d
