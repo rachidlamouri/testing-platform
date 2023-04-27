@@ -14,6 +14,10 @@ if (!fs.existsSync(filePath)) {
   throw Error(`"${filePath}" does not exist`);
 }
 
+/**
+ * Given a file path, it populates that file with a template for defining a
+ * collection type and all related types
+ */
 digikikify({
   initialVoictentsByGepp: {
     [SCAFFOLD_CONFIGURATION_GEPP]: [{ filePath }],

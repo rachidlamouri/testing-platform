@@ -7,6 +7,7 @@ import { EngineEstinant2 } from './engineEstinant2';
 export type EngineProgram2 = {
   id: string;
   programName: string;
+  description: string;
   filePath: string;
   initialVoictentNameList: string[];
   estinantList: Tuple<EngineEstinant2>;

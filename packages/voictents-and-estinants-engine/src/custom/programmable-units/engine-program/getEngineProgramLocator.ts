@@ -5,10 +5,6 @@ import {
   EngineProgramFileVoictent,
 } from '../type-script-file-relationships/engineProgramFile';
 import {
-  PARSED_TYPE_SCRIPT_FILE_GEPP,
-  ParsedTypeScriptFileVoictent,
-} from '../type-script-file/parsedTypeScriptFile';
-import {
   IdentifiableProperty,
   ObjectExpressionWithIdentifierProperties,
   isObjectExpressionWithIdentifierProperties,
@@ -26,10 +22,20 @@ import {
 } from './engineFunctionConfiguration';
 import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
-  EngineProgramLocator2,
+  EngineProgramLocator2Odeshin,
   EngineProgramLocator2Voictent,
 } from './engineProgramLocator2';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
+import {
+  COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
+  CommentedProgramBodyDeclarationListVoictent,
+} from '../type-script-file/commentedProgramBodyDeclarationList';
+import {
+  ErrorLocatorTypeName,
+  PROGRAM_ERROR_GEPP,
+  ProgramErrorOdeshin,
+  ProgramErrorVoictent,
+} from '../error/programError';
 
 type EngineCallExpression = TSESTree.CallExpression & {
   arguments: [ObjectExpressionWithIdentifierProperties];
@@ -74,8 +80,8 @@ export const getEngineProgramLocator = buildEstinant({
   .fromGrition<EngineProgramFileVoictent>({
     gepp: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .andFromGritionTuple<ParsedTypeScriptFileVoictent, [string]>({
-    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .andFromGritionTuple<CommentedProgramBodyDeclarationListVoictent, [string]>({
+    gepp: COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
     framate: (leftInput) => [leftInput.zorn],
     croard: (rightInput) => rightInput.zorn,
   })
@@ -87,27 +93,56 @@ export const getEngineProgramLocator = buildEstinant({
   .andFromVoictent<EngineFunctionConfigurationVoictent>({
     gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
   })
-  .toGrition<EngineProgramLocator2Voictent>({
+  .toHubblepupTuple<ProgramErrorVoictent>({
+    gepp: PROGRAM_ERROR_GEPP,
+  })
+  .toHubblepupTuple<EngineProgramLocator2Voictent>({
     gepp: ENGINE_PROGRAM_LOCATOR_2_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe(
     (
       engineProgramFile,
-      [parsedFile],
+      [commentedProgramBodyStatementList],
       [importList],
       [engineFunctionConfiguration],
     ) => {
-      const engineCallExpressionStatement = parsedFile.program.body.find(
-        (statement): statement is EngineCallExpressionStatement =>
+      type EngineCallDeclaration = {
+        commentText: string | null;
+        bodyStatement: EngineCallExpressionStatement;
+        identifiableNode: null;
+      };
+
+      const engineCallDeclaration = commentedProgramBodyStatementList.find(
+        (commentedDeclaration): commentedDeclaration is EngineCallDeclaration =>
           isEngineCallExpressionStatement(
-            statement,
+            commentedDeclaration.bodyStatement,
             engineFunctionConfiguration.exportedIdentifier,
           ),
       );
 
+      if (engineCallDeclaration === undefined) {
+        return {
+          [PROGRAM_ERROR_GEPP]: [
+            {
+              zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
+              grition: {
+                errorId: `getEngineProgramLocator/missing-engine-call`,
+                message: 'Unable to find engine call declaration',
+                locator: {
+                  typeName: ErrorLocatorTypeName.FileErrorLocator,
+                  filePath: engineProgramFile.filePath,
+                },
+                metadata: null,
+              },
+            },
+          ],
+          [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [],
+        };
+      }
+
       const engineCallExpressionPropertyList: IdentifiableProperty[] =
-        engineCallExpressionStatement?.expression.arguments[0].properties ?? [];
+        engineCallDeclaration?.bodyStatement?.expression.arguments[0]
+          .properties ?? [];
 
       const initialVoictentByGeppProperty =
         engineCallExpressionPropertyList.find(
@@ -187,14 +222,38 @@ export const getEngineProgramLocator = buildEstinant({
 
       const programName = engineProgramFile.inMemoryFileName.kebabCase;
 
-      const engineProgramLocator: EngineProgramLocator2 = {
-        programName,
-        filePath: engineProgramFile.filePath,
-        initialVoictentNameList,
-        engineEstinantLocatorList,
+      const parallelErrorList: ProgramErrorOdeshin[] = [];
+
+      if (engineCallDeclaration.commentText === null) {
+        parallelErrorList.push({
+          zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
+          grition: {
+            errorId: `getEngineProgramLocator/missing-program-description`,
+            message: 'Program is missing a description',
+            locator: {
+              typeName: ErrorLocatorTypeName.FileErrorLocator,
+              filePath: engineProgramFile.filePath,
+            },
+            metadata: null,
+          },
+        });
+      }
+
+      const engineProgramLocatorOdeshin: EngineProgramLocator2Odeshin = {
+        zorn: engineProgramFile.filePath,
+        grition: {
+          programName,
+          description: engineCallDeclaration.commentText ?? '',
+          filePath: engineProgramFile.filePath,
+          initialVoictentNameList,
+          engineEstinantLocatorList,
+        },
       };
 
-      return engineProgramLocator;
+      return {
+        [PROGRAM_ERROR_GEPP]: parallelErrorList,
+        [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [engineProgramLocatorOdeshin],
+      };
     },
   )
   .assemble();

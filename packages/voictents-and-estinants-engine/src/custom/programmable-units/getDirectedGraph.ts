@@ -430,6 +430,10 @@ export const getDirectedGraph = buildEstinant({
           value: 'Program',
         },
         {
+          label: 'Description',
+          value: engineProgram.description,
+        },
+        {
           label: 'File Path',
           value: engineProgram.filePath,
         },

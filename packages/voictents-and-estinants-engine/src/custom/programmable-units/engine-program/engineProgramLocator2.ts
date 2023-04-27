@@ -5,6 +5,7 @@ import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 
 export type EngineProgramLocator2 = {
   programName: string;
+  description: string;
   filePath: string;
   initialVoictentNameList: string[];
   engineEstinantLocatorList: EngineEstinantLocator2[];
