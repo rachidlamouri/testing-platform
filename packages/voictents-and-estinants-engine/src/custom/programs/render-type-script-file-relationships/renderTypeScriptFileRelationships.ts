@@ -33,6 +33,12 @@ import { getSvgMetadataList } from '../../programmable-units/type-script-file-re
 import { markUnusedNodes } from '../../programmable-units/type-script-file-relationships/markUnusedNodes';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 
+/**
+ * Assembles a knowledge graph of the TypeScript files in this package and their
+ * dependency relationships. It groups files into "boundaries" to make the file
+ * system easier to visualize and to establish which groups of files cover which
+ * concerns.
+ */
 digikikify({
   initialVoictentsByGepp: {
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [

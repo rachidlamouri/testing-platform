@@ -8,6 +8,9 @@ import { datumTestCaseInputToCustomDatumTypeName } from './datumTestCaseInputToC
 import { datumTestCaseInputToSerializedDatum } from './datumTestCaseInputToSerializedDatum';
 import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
 
+/**
+ * Example program to manually verify the behavior of a custom serializer.
+ */
 digikikify({
   initialVoictentsByGepp: {
     [DATUM_TEST_CASE_INPUT_GEPP]: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,

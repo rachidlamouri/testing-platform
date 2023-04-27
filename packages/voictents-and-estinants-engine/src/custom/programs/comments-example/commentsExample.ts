@@ -10,6 +10,9 @@ import { associateTypeScriptFileToTypescriptConfiguration } from '../../programm
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 
+/**
+ * Example program to demonstrate associating AST nodes to top level comments
+ */
 digikikify({
   initialVoictentsByGepp: {
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [

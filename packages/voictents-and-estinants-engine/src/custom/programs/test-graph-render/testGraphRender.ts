@@ -10,6 +10,9 @@ import { addInteractivityToSvgDocument } from '../../programmable-units/graph-vi
 import { DIRECTED_GRAPH_METADATA_BY_ID_GEPP } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import { LabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attribute';
 
+/**
+ * Example program to demonstrate defining and rendering a directed graph.
+ */
 digikikify({
   initialVoictentsByGepp: {
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [

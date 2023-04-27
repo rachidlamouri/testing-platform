@@ -16,6 +16,9 @@ import { associateTypeScriptFileToTypescriptConfiguration } from '../../programm
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 
+/**
+ * Creates a bash script to run all engine programs
+ */
 digikikify({
   initialVoictentsByGepp: {
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
