@@ -31,13 +31,14 @@ import { Prected } from '../internal/dreanor/prected';
 import { Procody } from '../internal/procody/procody';
 import { Quirm, QuirmTuple } from '../engine-shell/quirm/quirm';
 import { Tabilly } from './tabilly';
-import { Voictent } from './voictent';
+import { GenericVoictent } from './voictent2';
 
 export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
 
 export type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 
 export type DigikikifierInput = {
+  inputVoictentList?: GenericVoictent[];
   initialQuirmTuple: QuirmTuple;
   estinantTuple: EstinantTuple;
   onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler;
@@ -91,12 +92,17 @@ type RuntimeStatistics = {
  * @param input.initialQuirmTuple the starting collection of Quirms to kickstart the engine
  */
 export const digikikify = ({
+  inputVoictentList = [],
   initialQuirmTuple,
   estinantTuple,
   onHubblepupAddedToVoictents,
   onFinish,
 }: DigikikifierInput): void => {
-  const tabilly = new Tabilly();
+  const initialTabillyEntryList = inputVoictentList.map((voictent) => {
+    return [voictent.gepp, voictent] as const;
+  });
+
+  const tabilly = new Tabilly(initialTabillyEntryList);
 
   const addToTabilly = (quirmTuple: QuirmTuple): void => {
     tabilly.addHubblepupsToVoictents(quirmTuple);
@@ -303,7 +309,7 @@ export const digikikify = ({
   addToTabilly(initialQuirmTuple);
 
   const voictentConfigurationByVoictent = new Map<
-    Voictent,
+    GenericVoictent,
     VoictentTickSeriesConfiguration
   >();
 

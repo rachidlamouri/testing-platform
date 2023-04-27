@@ -1,13 +1,14 @@
 import { Gepp } from '../engine-shell/voictent/gepp';
 import { Voictent } from './voictent';
 import { Quirm, QuirmTuple } from '../engine-shell/quirm/quirm';
+import { GenericVoictent } from './voictent2';
 
 /**
  * A cache of Voictents by Gepp.
  * The engine uses this to connect Tropoignant's to their input Voictents,
  * and to add Hubblepups to their corresponding Voictents.
  */
-export class Tabilly extends Map<Gepp, Voictent> {
+export class Tabilly extends Map<Gepp, GenericVoictent> {
   /**
    * Gets a Voictent cached by a Gepp.
    *
@@ -15,11 +16,11 @@ export class Tabilly extends Map<Gepp, Voictent> {
    * @param gepp the key of the Voictent to get
    * @returns the cached Voictent or a new Voictent
    */
-  getOrInstantiateAndGetVoictent(gepp: Gepp): Voictent {
+  getOrInstantiateAndGetVoictent(gepp: Gepp): GenericVoictent {
     let voictent = this.get(gepp);
 
     if (voictent === undefined) {
-      voictent = new Voictent();
+      voictent = new Voictent(gepp);
       this.set(gepp, voictent);
     }
 

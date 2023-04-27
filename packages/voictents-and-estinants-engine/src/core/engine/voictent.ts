@@ -4,6 +4,8 @@ import {
   VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
 import { Hubblepup } from '../engine-shell/quirm/hubblepup';
+import { Gepp } from '../engine-shell/voictent/gepp';
+import { GenericVoictent } from './voictent2';
 
 class MissingLanbeError extends Error {
   constructor(lanbe: VoictentItemLanbe) {
@@ -23,7 +25,7 @@ type ReceivedHubblepupState = {
  * A pointer that is out of bounds of the collection will dereference to null.
  * It is used by the Engine to connect Hubblepups to Estinants.
  */
-export class Voictent {
+export class Voictent implements GenericVoictent {
   hubblepupTuple: Hubblepup[] = [];
 
   indicesByLanbe: Map<VoictentItemLanbe, number> = new Map();
@@ -39,6 +41,8 @@ export class Voictent {
     oneTickAgo: false,
     thisTick: null,
   };
+
+  constructor(public readonly gepp: Gepp) {}
 
   addHubblepup(hubblepup: Hubblepup): void {
     this.receivedHubblepup.thisTick = true;
