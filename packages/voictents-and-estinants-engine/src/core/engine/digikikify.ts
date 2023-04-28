@@ -14,14 +14,17 @@ import {
   LeftDreanor,
   RightDreanor,
   RightVoictentDreanor,
+  RightVoictentItem2Dreanor,
   RightVoictentItemDreanor,
 } from '../internal/dreanor/dreanor';
 import { Estinant, EstinantTuple } from '../engine-shell/estinant/estinant';
 import { Gepp } from '../engine-shell/voictent/gepp';
 import { Hubblepup, HubblepupTuple } from '../engine-shell/quirm/hubblepup';
 import {
+  GenericVoictentItemLanbe2,
   Lanbe,
   LanbeTypeName,
+  ReferenceTypeName,
   VoictentItemLanbe,
   VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
@@ -54,7 +57,7 @@ type TickSeries<TValue extends number | bigint> = TValue[];
 type VoictentTickSeriesConfiguration = {
   gepp: Gepp;
   voictentLanbe: VoictentLanbe;
-  voictentItemLanbe: VoictentItemLanbe;
+  voictentItemLanbe: VoictentItemLanbe | GenericVoictentItemLanbe2;
   voictentTickSeries: TickSeries<number>;
   voictentItemTickSeries: TickSeries<number>;
 };
@@ -139,14 +142,29 @@ export const digikikify = ({
             isReady: false,
           } satisfies RightVoictentDreanor;
         }
+
+        if ('framate' in rightAppreffinge) {
+          return {
+            typeName: DreanorTypeName.RightVoictentItemDreanor,
+            gepp: rightAppreffinge.gepp,
+            lanbe: createLanbe(estinant, rightAppreffinge) as VoictentItemLanbe,
+            framate: rightAppreffinge.framate,
+            croard: rightAppreffinge.croard,
+            prected: new Prected(),
+          } satisfies RightVoictentItemDreanor;
+        }
+
         return {
-          typeName: DreanorTypeName.RightVoictentItemDreanor,
+          typeName: DreanorTypeName.RightVoictentItem2Dreanor,
           gepp: rightAppreffinge.gepp,
-          lanbe: createLanbe(estinant, rightAppreffinge) as VoictentItemLanbe,
-          framate: rightAppreffinge.framate,
-          croard: rightAppreffinge.croard,
+          lanbe: createLanbe(
+            estinant,
+            rightAppreffinge,
+          ) as GenericVoictentItemLanbe2,
+          framate: rightAppreffinge.framate2,
+          croard: rightAppreffinge.croard2,
           prected: new Prected(),
-        } satisfies RightVoictentItemDreanor;
+        } satisfies RightVoictentItem2Dreanor;
       },
     );
 
@@ -189,9 +207,15 @@ export const digikikify = ({
         dreanor.lanbe.advance();
 
         if (dreanor.typeName === DreanorTypeName.LeftDreanor) {
-          const leftInput = dreanor.lanbe.dereference() as
-            | Hubblepup
-            | HubblepupTuple;
+          const {
+            typeName: leftInputTypeName,
+            value: leftInputReferenceValue,
+          } = dreanor.lanbe.dereference();
+
+          const leftInput: Hubblepup | HubblepupTuple =
+            leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
+              ? leftInputReferenceValue.hubblepup
+              : leftInputReferenceValue;
 
           const mabzEntryList = platomity.rightDreanorTuple.map<MabzEntry>(
             (rightDreanor) => {
@@ -200,8 +224,28 @@ export const digikikify = ({
                 rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
               ) {
                 zornTuple = [rightDreanor.lanbe];
-              } else {
+              } else if (
+                rightDreanor.typeName ===
+                DreanorTypeName.RightVoictentItemDreanor
+              ) {
                 zornTuple = rightDreanor.framate(leftInput);
+              } else if (
+                rightDreanor.typeName ===
+                  DreanorTypeName.RightVoictentItem2Dreanor &&
+                leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
+              ) {
+                zornTuple = rightDreanor.framate(leftInputReferenceValue);
+              } else {
+                // TODO: remove this else once all voictent item lanbes return indexed hubblepups
+
+                // eslint-disable-next-line no-console
+                console.log('DEBUG INFO A:', {
+                  leftInputTypeName,
+                  rightDreanor,
+                  platomity,
+                });
+
+                throw Error('Invalid lanbe setup. See above info.');
               }
 
               return [rightDreanor, zornTuple];
@@ -226,17 +270,43 @@ export const digikikify = ({
 
           touchedCologySet.add(cology);
         } else {
-          let rightInput;
+          const {
+            typeName: rightInputTypeName,
+            value: rightInputReferenceValue,
+          } = dreanor.lanbe.dereference();
+
+          const rightInput =
+            rightInputTypeName === ReferenceTypeName.IndexedVoictentItem
+              ? rightInputReferenceValue.hubblepup
+              : rightInputReferenceValue;
+
           let zorn: Zorn;
           if (dreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-            rightInput = dreanor.lanbe.dereference() as HubblepupTuple;
             zorn = dreanor.lanbe;
             // eslint-disable-next-line no-param-reassign
             dreanor.isReady = true;
-          } else {
-            rightInput = dreanor.lanbe.dereference() as Hubblepup;
-            zorn = dreanor.croard(rightInput);
+          } else if (
+            dreanor.typeName === DreanorTypeName.RightVoictentItemDreanor &&
+            rightInputTypeName === ReferenceTypeName.VoictentItem
+          ) {
+            zorn = dreanor.croard(rightInputReferenceValue);
             dreanor.prected.set(zorn, rightInput);
+          } else if (
+            dreanor.typeName === DreanorTypeName.RightVoictentItem2Dreanor &&
+            rightInputTypeName === ReferenceTypeName.IndexedVoictentItem
+          ) {
+            zorn = dreanor.croard(rightInputReferenceValue);
+            dreanor.prected.set(zorn, rightInput);
+          } else {
+            // TODO: remove this else once all voictent item lanbes return indexed hubblepups
+
+            // eslint-disable-next-line no-console
+            console.log('DEBUG INFO B:', {
+              rightInputTypeName,
+              dreanor,
+            });
+
+            throw Error('Invalid lanbe setup. See above info.');
           }
 
           const ajorken = platomity.procody.get(dreanor.gepp) ?? new Ajorken();
@@ -283,7 +353,7 @@ export const digikikify = ({
     const rightInputTuple = platomity.rightDreanorTuple.map<HubblepupTuple>(
       (rightDreanor) => {
         if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-          const rightInput = rightDreanor.lanbe.dereference() as HubblepupTuple;
+          const rightInput = rightDreanor.lanbe.dereference().value;
           return rightInput;
         }
 

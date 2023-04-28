@@ -1,5 +1,6 @@
 import {
   LanbeTypeName,
+  ReferenceTypeName,
   VoictentItemLanbe,
   VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
@@ -80,7 +81,10 @@ export class Voictent implements GenericVoictent {
       },
       advance: () => {},
       dereference: () => {
-        return [...this.hubblepupTuple];
+        return {
+          typeName: ReferenceTypeName.Voictent,
+          value: [...this.hubblepupTuple],
+        };
       },
     };
 
@@ -98,7 +102,12 @@ export class Voictent implements GenericVoictent {
         this.advance(lanbe);
       },
       dereference: () => {
-        return this.dereference(lanbe);
+        const value = this.dereference(lanbe);
+
+        return {
+          typeName: ReferenceTypeName.VoictentItem,
+          value,
+        };
       },
     };
 
@@ -132,11 +141,11 @@ export class Voictent implements GenericVoictent {
     }
   }
 
-  private dereference(lanbe: VoictentItemLanbe): Hubblepup | null {
+  private dereference(lanbe: VoictentItemLanbe): Hubblepup {
     const currentIndex = this.getLanbeIndex(lanbe);
 
     if (currentIndex === Voictent.minimumInclusiveIndex) {
-      return null;
+      throw Error('There is nothing to dereference');
     }
 
     const hubblepup = this.hubblepupTuple[currentIndex];
