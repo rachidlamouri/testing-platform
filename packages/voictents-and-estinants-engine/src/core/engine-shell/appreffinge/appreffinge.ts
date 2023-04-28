@@ -1,6 +1,6 @@
 import { Merge } from 'type-fest';
-import { Croarder } from './croarder';
-import { Framation } from './framation';
+import { Croader2, Croarder } from './croarder';
+import { Framation, Framation2 } from './framation';
 import { Gepp } from '../voictent/gepp';
 
 export type LeftAppreffinge = {
@@ -9,13 +9,21 @@ export type LeftAppreffinge = {
   isWibiz?: boolean;
 };
 
-export type RightAppreffinge = Merge<
-  LeftAppreffinge,
-  {
-    croard: Croarder;
-    framate: Framation;
-  }
->;
+export type RightAppreffinge =
+  | Merge<
+      LeftAppreffinge,
+      {
+        croard: Croarder;
+        framate: Framation;
+      }
+    >
+  | Merge<
+      LeftAppreffinge,
+      {
+        croard2: Croader2;
+        framate2: Framation2;
+      }
+    >;
 
 /**
  * Information used to configure a Dreanor

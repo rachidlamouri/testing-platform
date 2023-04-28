@@ -1,4 +1,3 @@
-import * as uuid from 'uuid';
 import { getPrototypeNameTuple } from '../../getPrototypeNameTuple';
 import {
   CustomDatumTypeName,
@@ -32,7 +31,8 @@ import {
   SimpleSerializeableObjectEntry,
 } from './serializeableNode';
 
-const symbolReferenceMap = new Map<symbol, string>();
+let referenceCount = -1;
+const symbolReferenceMap = new Map<symbol, number>();
 
 type MappedSerializeableNode<TDatum> =
   // this comment forces prettier to make this readable >:(
@@ -251,15 +251,17 @@ export const buildSerializeableNode = <TDatum>(
       } satisfies SerializeableStringNode as MappedSerializeableNode<TDatum>;
     }
     case CustomDatumTypeName.Symbol: {
-      const referenceId = symbolReferenceMap.get(datum) ?? uuid.v4();
-      symbolReferenceMap.set(datum, referenceId);
+      const referenceNumber =
+        symbolReferenceMap.get(datum) ??
+        ((referenceCount += 1), referenceCount);
+      symbolReferenceMap.set(datum, referenceNumber);
 
       return {
         nodeName: SerializeableNodeName.String,
         metadata: {
           typeName,
           description: datum.description ?? '',
-          referenceId,
+          referenceId: `"Symbol ${referenceNumber}"`,
         },
       } satisfies SerializeableStringNode as MappedSerializeableNode<TDatum>;
     }

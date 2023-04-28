@@ -70,7 +70,7 @@ export const buildOutputHubblepupNormalizer = (
     modifiedInput,
     aggregatedOutput,
   ) => {
-    const hubblepup = aggregatedOutput[gepp] as Hubblepup;
+    const hubblepup = aggregatedOutput[gepp];
     const quirm: Quirm = {
       gepp,
       hubblepup,

@@ -37,10 +37,9 @@ const exampleMentursectionEstinant: Estinant = {
   leftAppreffinge: { gepp: exampleGeppInitialInput },
   rightAppreffingeTuple: [],
   tropoig: function categorizeByValue(input) {
-    const firstEntry: [unknown, unknown] = Object.entries(input)[0] ?? [
-      undefined,
-      undefined,
-    ];
+    const firstEntry: [unknown, unknown] = Object.entries(
+      input as object,
+    )[0] ?? [undefined, undefined];
 
     const [key, value] = firstEntry;
 
@@ -64,7 +63,7 @@ const exampleCortmumEstinant: Estinant = {
     {
       gepp: 'key-category-"b"',
       croard: (inputB): unknown => {
-        return Object.values(inputB)[0];
+        return Object.values(inputB as object)[0];
       },
       framate: (): number[] => {
         return [2, 1];

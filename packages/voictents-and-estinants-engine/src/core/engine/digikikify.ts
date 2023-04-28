@@ -14,14 +14,17 @@ import {
   LeftDreanor,
   RightDreanor,
   RightVoictentDreanor,
+  RightVoictentItem2Dreanor,
   RightVoictentItemDreanor,
 } from '../internal/dreanor/dreanor';
 import { Estinant, EstinantTuple } from '../engine-shell/estinant/estinant';
 import { Gepp } from '../engine-shell/voictent/gepp';
 import { Hubblepup, HubblepupTuple } from '../engine-shell/quirm/hubblepup';
 import {
+  GenericVoictentItemLanbe2,
   Lanbe,
   LanbeTypeName,
+  ReferenceTypeName,
   VoictentItemLanbe,
   VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
@@ -31,13 +34,14 @@ import { Prected } from '../internal/dreanor/prected';
 import { Procody } from '../internal/procody/procody';
 import { Quirm, QuirmTuple } from '../engine-shell/quirm/quirm';
 import { Tabilly } from './tabilly';
-import { Voictent } from './voictent';
+import { GenericVoictent } from './voictent2';
 
 export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
 
 export type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 
 export type DigikikifierInput = {
+  inputVoictentList?: GenericVoictent[];
   initialQuirmTuple: QuirmTuple;
   estinantTuple: EstinantTuple;
   onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler;
@@ -53,7 +57,7 @@ type TickSeries<TValue extends number | bigint> = TValue[];
 type VoictentTickSeriesConfiguration = {
   gepp: Gepp;
   voictentLanbe: VoictentLanbe;
-  voictentItemLanbe: VoictentItemLanbe;
+  voictentItemLanbe: VoictentItemLanbe | GenericVoictentItemLanbe2;
   voictentTickSeries: TickSeries<number>;
   voictentItemTickSeries: TickSeries<number>;
 };
@@ -91,12 +95,17 @@ type RuntimeStatistics = {
  * @param input.initialQuirmTuple the starting collection of Quirms to kickstart the engine
  */
 export const digikikify = ({
+  inputVoictentList = [],
   initialQuirmTuple,
   estinantTuple,
   onHubblepupAddedToVoictents,
   onFinish,
 }: DigikikifierInput): void => {
-  const tabilly = new Tabilly();
+  const initialTabillyEntryList = inputVoictentList.map((voictent) => {
+    return [voictent.gepp, voictent] as const;
+  });
+
+  const tabilly = new Tabilly(initialTabillyEntryList);
 
   const addToTabilly = (quirmTuple: QuirmTuple): void => {
     tabilly.addHubblepupsToVoictents(quirmTuple);
@@ -133,14 +142,29 @@ export const digikikify = ({
             isReady: false,
           } satisfies RightVoictentDreanor;
         }
+
+        if ('framate' in rightAppreffinge) {
+          return {
+            typeName: DreanorTypeName.RightVoictentItemDreanor,
+            gepp: rightAppreffinge.gepp,
+            lanbe: createLanbe(estinant, rightAppreffinge) as VoictentItemLanbe,
+            framate: rightAppreffinge.framate,
+            croard: rightAppreffinge.croard,
+            prected: new Prected(),
+          } satisfies RightVoictentItemDreanor;
+        }
+
         return {
-          typeName: DreanorTypeName.RightVoictentItemDreanor,
+          typeName: DreanorTypeName.RightVoictentItem2Dreanor,
           gepp: rightAppreffinge.gepp,
-          lanbe: createLanbe(estinant, rightAppreffinge) as VoictentItemLanbe,
-          framate: rightAppreffinge.framate,
-          croard: rightAppreffinge.croard,
+          lanbe: createLanbe(
+            estinant,
+            rightAppreffinge,
+          ) as GenericVoictentItemLanbe2,
+          framate: rightAppreffinge.framate2,
+          croard: rightAppreffinge.croard2,
           prected: new Prected(),
-        } satisfies RightVoictentItemDreanor;
+        } satisfies RightVoictentItem2Dreanor;
       },
     );
 
@@ -183,9 +207,15 @@ export const digikikify = ({
         dreanor.lanbe.advance();
 
         if (dreanor.typeName === DreanorTypeName.LeftDreanor) {
-          const leftInput = dreanor.lanbe.dereference() as
-            | Hubblepup
-            | HubblepupTuple;
+          const {
+            typeName: leftInputTypeName,
+            value: leftInputReferenceValue,
+          } = dreanor.lanbe.dereference();
+
+          const leftInput: Hubblepup | HubblepupTuple =
+            leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
+              ? leftInputReferenceValue.hubblepup
+              : leftInputReferenceValue;
 
           const mabzEntryList = platomity.rightDreanorTuple.map<MabzEntry>(
             (rightDreanor) => {
@@ -194,8 +224,28 @@ export const digikikify = ({
                 rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
               ) {
                 zornTuple = [rightDreanor.lanbe];
-              } else {
+              } else if (
+                rightDreanor.typeName ===
+                DreanorTypeName.RightVoictentItemDreanor
+              ) {
                 zornTuple = rightDreanor.framate(leftInput);
+              } else if (
+                rightDreanor.typeName ===
+                  DreanorTypeName.RightVoictentItem2Dreanor &&
+                leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
+              ) {
+                zornTuple = rightDreanor.framate(leftInputReferenceValue);
+              } else {
+                // TODO: remove this else once all voictent item lanbes return indexed hubblepups
+
+                // eslint-disable-next-line no-console
+                console.log('DEBUG INFO A:', {
+                  leftInputTypeName,
+                  rightDreanor,
+                  platomity,
+                });
+
+                throw Error('Invalid lanbe setup. See above info.');
               }
 
               return [rightDreanor, zornTuple];
@@ -220,17 +270,43 @@ export const digikikify = ({
 
           touchedCologySet.add(cology);
         } else {
-          let rightInput;
+          const {
+            typeName: rightInputTypeName,
+            value: rightInputReferenceValue,
+          } = dreanor.lanbe.dereference();
+
+          const rightInput =
+            rightInputTypeName === ReferenceTypeName.IndexedVoictentItem
+              ? rightInputReferenceValue.hubblepup
+              : rightInputReferenceValue;
+
           let zorn: Zorn;
           if (dreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-            rightInput = dreanor.lanbe.dereference() as HubblepupTuple;
             zorn = dreanor.lanbe;
             // eslint-disable-next-line no-param-reassign
             dreanor.isReady = true;
-          } else {
-            rightInput = dreanor.lanbe.dereference() as Hubblepup;
-            zorn = dreanor.croard(rightInput);
+          } else if (
+            dreanor.typeName === DreanorTypeName.RightVoictentItemDreanor &&
+            rightInputTypeName === ReferenceTypeName.VoictentItem
+          ) {
+            zorn = dreanor.croard(rightInputReferenceValue);
             dreanor.prected.set(zorn, rightInput);
+          } else if (
+            dreanor.typeName === DreanorTypeName.RightVoictentItem2Dreanor &&
+            rightInputTypeName === ReferenceTypeName.IndexedVoictentItem
+          ) {
+            zorn = dreanor.croard(rightInputReferenceValue);
+            dreanor.prected.set(zorn, rightInput);
+          } else {
+            // TODO: remove this else once all voictent item lanbes return indexed hubblepups
+
+            // eslint-disable-next-line no-console
+            console.log('DEBUG INFO B:', {
+              rightInputTypeName,
+              dreanor,
+            });
+
+            throw Error('Invalid lanbe setup. See above info.');
           }
 
           const ajorken = platomity.procody.get(dreanor.gepp) ?? new Ajorken();
@@ -277,14 +353,14 @@ export const digikikify = ({
     const rightInputTuple = platomity.rightDreanorTuple.map<HubblepupTuple>(
       (rightDreanor) => {
         if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-          const rightInput = rightDreanor.lanbe.dereference() as HubblepupTuple;
+          const rightInput = rightDreanor.lanbe.dereference().value;
           return rightInput;
         }
 
         const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
-        const rightInput = zornTuple.map(
-          (zorn) => rightDreanor.prected.get(zorn) as Hubblepup,
-        );
+        const rightInput = zornTuple.map((zorn) => {
+          return rightDreanor.prected.get(zorn);
+        });
         return rightInput;
       },
     );
@@ -303,7 +379,7 @@ export const digikikify = ({
   addToTabilly(initialQuirmTuple);
 
   const voictentConfigurationByVoictent = new Map<
-    Voictent,
+    GenericVoictent,
     VoictentTickSeriesConfiguration
   >();
 
