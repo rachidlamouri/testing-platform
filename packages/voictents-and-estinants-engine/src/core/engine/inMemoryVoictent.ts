@@ -11,13 +11,19 @@ import {
 import { Voictent2 } from './voictent2';
 import { IVoictentDebugger } from './voictentDebugger';
 
+export type InMemoryVoictentIndex = number;
+
 export type InMemoryVoictentConstructorInput<
   TGepp extends Gepp,
   THubblepup extends Hubblepup,
 > = {
   gepp: TGepp;
   initialHubblepupTuple: Tuple<THubblepup>;
-  voictentDebugger?: IVoictentDebugger<TGepp, THubblepup>;
+  voictentDebugger?: IVoictentDebugger<
+    TGepp,
+    THubblepup,
+    InMemoryVoictentIndex
+  >;
 };
 
 class MissingLanbeError extends Error {
@@ -32,14 +38,16 @@ type ReceivedHubblepupState = {
   thisTick: boolean | null;
 };
 
-export type InMemoryVoictentIndex = number;
-
 export class InMemoryVoictent<TGepp extends Gepp, THubblepup extends Hubblepup>
   implements Voictent2<TGepp, THubblepup, number>
 {
   public readonly gepp: TGepp;
 
-  public readonly voictentDebugger?: IVoictentDebugger<TGepp, THubblepup>;
+  public readonly voictentDebugger?: IVoictentDebugger<
+    TGepp,
+    THubblepup,
+    InMemoryVoictentIndex
+  >;
 
   hubblepupTuple: THubblepup[] = [];
 
