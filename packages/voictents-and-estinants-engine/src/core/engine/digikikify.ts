@@ -358,9 +358,9 @@ export const digikikify = ({
         }
 
         const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
-        const rightInput = zornTuple.map(
-          (zorn) => rightDreanor.prected.get(zorn) as Hubblepup,
-        );
+        const rightInput = zornTuple.map((zorn) => {
+          return rightDreanor.prected.get(zorn);
+        });
         return rightInput;
       },
     );
