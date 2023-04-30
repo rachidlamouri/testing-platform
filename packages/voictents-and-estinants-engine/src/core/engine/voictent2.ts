@@ -1,24 +1,20 @@
-import { Straline } from '../../utilities/semantic-types/straline';
-import { Hubblepup } from '../engine-shell/quirm/hubblepup';
-import { Gepp } from '../engine-shell/voictent/gepp';
 import {
-  VoictentLanbe,
   VoictentItemLanbe,
   VoictentItemLanbe2,
+  VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
+import { GenericVoictentConfiguration } from './voictentConfiguration';
 
 export type Voictent2<
-  TGepp extends Gepp,
-  THubblepup extends Hubblepup,
-  TIndex extends Straline,
+  TVoictentConfiguration extends GenericVoictentConfiguration,
 > = {
-  get gepp(): TGepp;
-  createVoictentLanbe(debugName: string): VoictentLanbe;
+  get gepp(): TVoictentConfiguration['gepp'];
+  createVoictentLanbe(debugName: string): VoictentLanbe | null;
   createVoictentItemLanbe(
     debugName: string,
-  ): VoictentItemLanbe2<THubblepup, TIndex> | VoictentItemLanbe;
+  ): VoictentItemLanbe2<TVoictentConfiguration> | VoictentItemLanbe | null;
   onTickStart(): void;
-  addHubblepup(hubblepup: THubblepup): void;
+  addHubblepup(hubblepup: TVoictentConfiguration['hubblepup']): void;
 };
 
-export type GenericVoictent = Voictent2<Gepp, Hubblepup, Straline>;
+export type GenericVoictent2 = Voictent2<GenericVoictentConfiguration>;

@@ -19,7 +19,12 @@ import {
 } from '../internal/dreanor/dreanor';
 import { Estinant, EstinantTuple } from '../engine-shell/estinant/estinant';
 import { Gepp } from '../engine-shell/voictent/gepp';
-import { Hubblepup, HubblepupTuple } from '../engine-shell/quirm/hubblepup';
+import {
+  GenericIndexedHubblepup,
+  GenericIndexedHubblepupTuple,
+  Hubblepup,
+  HubblepupTuple,
+} from '../engine-shell/quirm/hubblepup';
 import {
   GenericVoictentItemLanbe2,
   Lanbe,
@@ -34,14 +39,14 @@ import { Prected } from '../internal/dreanor/prected';
 import { Procody } from '../internal/procody/procody';
 import { Quirm, QuirmTuple } from '../engine-shell/quirm/quirm';
 import { Tabilly } from './tabilly';
-import { GenericVoictent } from './voictent2';
+import { GenericVoictent2 } from './voictent2';
 
 export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
 
 export type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 
 export type DigikikifierInput = {
-  inputVoictentList?: GenericVoictent[];
+  inputVoictentList?: GenericVoictent2[];
   initialQuirmTuple: QuirmTuple;
   estinantTuple: EstinantTuple;
   onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler;
@@ -56,8 +61,8 @@ type TickSeries<TValue extends number | bigint> = TValue[];
 
 type VoictentTickSeriesConfiguration = {
   gepp: Gepp;
-  voictentLanbe: VoictentLanbe;
-  voictentItemLanbe: VoictentItemLanbe | GenericVoictentItemLanbe2;
+  voictentLanbe: VoictentLanbe | null;
+  voictentItemLanbe: VoictentItemLanbe | GenericVoictentItemLanbe2 | null;
   voictentTickSeries: TickSeries<number>;
   voictentItemTickSeries: TickSeries<number>;
 };
@@ -120,6 +125,11 @@ export const digikikify = ({
     const lanbe = getIsWibiz(appreffinge)
       ? voictent.createVoictentLanbe(estinant.tropoig.name)
       : voictent.createVoictentItemLanbe(estinant.tropoig.name);
+
+    if (lanbe === null) {
+      throw Error('Unexpected null Lanbe');
+    }
+
     return lanbe;
   };
 
@@ -212,6 +222,16 @@ export const digikikify = ({
             value: leftInputReferenceValue,
           } = dreanor.lanbe.dereference();
 
+          const indexedHubblepup: GenericIndexedHubblepup =
+            leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
+              ? leftInputReferenceValue
+              : {
+                  hubblepup: leftInputReferenceValue,
+                  indexByName: {
+                    serializeableId: '',
+                  },
+                };
+
           const leftInput: Hubblepup | HubblepupTuple =
             leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
               ? leftInputReferenceValue.hubblepup
@@ -254,7 +274,7 @@ export const digikikify = ({
 
           const cology: Cology = {
             leftDreanor: dreanor,
-            leftInput,
+            leftInput: indexedHubblepup,
             mabz: new Mabz(mabzEntryList),
           };
 
@@ -350,20 +370,27 @@ export const digikikify = ({
   }: CologyExecutionContext): void => {
     const { leftInput } = cology;
 
-    const rightInputTuple = platomity.rightDreanorTuple.map<HubblepupTuple>(
-      (rightDreanor) => {
-        if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-          const rightInput = rightDreanor.lanbe.dereference().value;
-          return rightInput;
-        }
+    const rightInputTuple: GenericIndexedHubblepupTuple =
+      platomity.rightDreanorTuple.map<GenericIndexedHubblepup>(
+        (rightDreanor) => {
+          if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
+            const rightInput = rightDreanor.lanbe.dereference().value;
+            return {
+              hubblepup: rightInput,
+              indexByName: {},
+            };
+          }
 
-        const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
-        const rightInput = zornTuple.map((zorn) => {
-          return rightDreanor.prected.get(zorn);
-        });
-        return rightInput;
-      },
-    );
+          const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
+          const rightInput = zornTuple.map((zorn) => {
+            return rightDreanor.prected.get(zorn);
+          });
+          return {
+            hubblepup: rightInput,
+            indexByName: {},
+          };
+        },
+      );
 
     const outputQuirmTuple = platomity.estinant.tropoig(
       leftInput,
@@ -379,7 +406,7 @@ export const digikikify = ({
   addToTabilly(initialQuirmTuple);
 
   const voictentConfigurationByVoictent = new Map<
-    GenericVoictent,
+    GenericVoictent2,
     VoictentTickSeriesConfiguration
   >();
 
@@ -434,14 +461,14 @@ export const digikikify = ({
       voictentConfigurationByVoictent.set(voictent, configuration);
 
       configuration.voictentTickSeries.push(
-        configuration.voictentLanbe.hasNext() ? 1 : 0,
+        configuration.voictentLanbe?.hasNext() ? 1 : 0,
       );
 
       configuration.voictentItemTickSeries.push(
-        configuration.voictentItemLanbe.hasNext() ? 1 : 0,
+        configuration.voictentItemLanbe?.hasNext() ? 1 : 0,
       );
 
-      if (configuration.voictentItemLanbe.hasNext()) {
+      if (configuration.voictentItemLanbe?.hasNext()) {
         configuration.voictentItemLanbe.advance();
       }
     });

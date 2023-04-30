@@ -1,4 +1,5 @@
-import { Straline } from '../../../utilities/semantic-types/straline';
+import { Tuple } from '../../../utilities/semantic-types/tuple';
+import { TypeScriptObject } from '../../../utilities/typed-datum/type-script/object';
 
 /**
  * A thing that a Concrete Programmer wants to operate on
@@ -7,12 +8,19 @@ export type Hubblepup = unknown;
 
 export type HubblepupTuple = readonly Hubblepup[];
 
+export type HubblepupIndexByName = TypeScriptObject;
+
 export type IndexedHubblepup<
   THubblepup extends Hubblepup,
-  TIndex extends Straline,
+  TIndexByName extends HubblepupIndexByName,
 > = {
+  indexByName: TIndexByName;
   hubblepup: THubblepup;
-  index: TIndex;
 };
 
-export type GenericIndexedHubblepup = IndexedHubblepup<Hubblepup, Straline>;
+export type GenericIndexedHubblepup = IndexedHubblepup<
+  Hubblepup,
+  HubblepupIndexByName
+>;
+
+export type GenericIndexedHubblepupTuple = Tuple<GenericIndexedHubblepup>;

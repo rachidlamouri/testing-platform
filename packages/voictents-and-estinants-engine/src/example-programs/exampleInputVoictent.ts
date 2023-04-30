@@ -1,40 +1,57 @@
 import { digikikify } from '../core/engine/digikikify';
-import { InMemoryVoictent } from '../core/engine/inMemoryVoictent';
-import { QuirmList } from '../type-script-adapter/quirm';
+import {
+  InMemoryVoictent,
+  InMemoryVoictentConfiguration,
+} from '../core/engine/inMemoryVoictent';
+import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
+import {
+  SerializableVoictent,
+  SerializableVoictentConfiguration,
+} from './serializableVoictent';
+
+type Voictent1Configuration = InMemoryVoictentConfiguration<
+  'voictent-1',
+  string
+>;
+type Voictent2Configuration = InMemoryVoictentConfiguration<
+  'voictent-2',
+  number
+>;
+type SerializedVoictentConfiguration =
+  SerializableVoictentConfiguration<'serialized'>;
 
 digikikify({
   inputVoictentList: [
-    new InMemoryVoictent({
+    new InMemoryVoictent<Voictent1Configuration>({
       gepp: 'voictent-1',
-      initialHubblepupTuple: [{ value: 3 }],
+      initialHubblepupTuple: ['a', 'b'],
     }),
-    new InMemoryVoictent({
+    new InMemoryVoictent<Voictent2Configuration>({
       gepp: 'voictent-2',
-      initialHubblepupTuple: [{ value: 7 }],
+      initialHubblepupTuple: [1, 2],
+    }),
+    new SerializableVoictent<SerializedVoictentConfiguration>({
+      nameSpace: 'exampleInputVoictent',
+      gepp: 'serialized',
+      initialHubblepupTuple: [],
     }),
   ],
   initialQuirmTuple: [],
   estinantTuple: [
-    {
-      leftAppreffinge: {
-        gepp: 'voictent-1',
-      },
-      rightAppreffingeTuple: [
-        {
-          gepp: 'voictent-2',
-          framate2: (left): [unknown] => [left.index],
-          croard2: (right): unknown => right.index,
-        },
-      ],
-      tropoig: (inputA, [inputB]): QuirmList => {
-        // eslint-disable-next-line no-console
-        console.log({
-          inputA,
-          inputB,
-        });
-        return [];
-      },
-    },
+    buildAddMetadataForSerialization<
+      Voictent1Configuration,
+      SerializedVoictentConfiguration
+    >({
+      inputGepp: 'voictent-1',
+      outputGepp: 'serialized',
+    }),
+    buildAddMetadataForSerialization<
+      Voictent2Configuration,
+      SerializedVoictentConfiguration
+    >({
+      inputGepp: 'voictent-2',
+      outputGepp: 'serialized',
+    }),
   ],
   onHubblepupAddedToVoictents: () => {},
 });
