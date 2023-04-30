@@ -46,8 +46,9 @@ export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
 export type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 
 export type DigikikifierInput = {
+  // TODO: remove "initialQuirmTuple" and make inputVoictentList required
   inputVoictentList?: GenericVoictent2[];
-  initialQuirmTuple: QuirmTuple;
+  initialQuirmTuple?: QuirmTuple;
   estinantTuple: EstinantTuple;
   onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler;
   onFinish?: RuntimeStatisticsHandler;
@@ -101,7 +102,7 @@ type RuntimeStatistics = {
  */
 export const digikikify = ({
   inputVoictentList = [],
-  initialQuirmTuple,
+  initialQuirmTuple = [],
   estinantTuple,
   onHubblepupAddedToVoictents,
   onFinish,

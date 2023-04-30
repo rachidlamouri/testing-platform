@@ -180,21 +180,29 @@ export class InMemoryVoictent<
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  getSerializableId(
+    hubblepup: TVoictentConfiguration['hubblepup'],
+    listIndex: number,
+  ): string {
+    return `${listIndex}`;
+  }
+
   private dereference(
     lanbe: VoictentItemLanbe2<TVoictentConfiguration>,
   ): TVoictentConfiguration['indexedHubblepup'] {
-    const currentIndex = this.getLanbeIndex(lanbe);
+    const listIndex = this.getLanbeIndex(lanbe);
 
-    if (currentIndex === InMemoryVoictent.minimumInclusiveIndex) {
+    if (listIndex === InMemoryVoictent.minimumInclusiveIndex) {
       throw Error('There is nothing to reference');
     }
 
-    const hubblepup = this.hubblepupTuple[currentIndex];
+    const hubblepup = this.hubblepupTuple[listIndex];
     return {
       hubblepup,
       indexByName: {
-        serializableId: `${currentIndex}`,
-        listIndex: currentIndex,
+        serializableId: this.getSerializableId(hubblepup, listIndex),
+        listIndex,
       },
     };
   }
