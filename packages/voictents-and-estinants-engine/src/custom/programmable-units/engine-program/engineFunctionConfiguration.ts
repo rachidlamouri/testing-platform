@@ -34,3 +34,13 @@ export const ENGINE_FUNCTION_CONFIGURATION: EngineFunctionConfigurationHubblepup
     estinantListKeyIdentifierName: 'estinantTuple',
     initialVoictentByGeppKeyIdentifierName: 'initialVoictentsByGepp',
   };
+
+export const CORE_ENGINE_FUNCTION_CONFIGURATION: EngineFunctionConfigurationHubblepup =
+  {
+    filePath:
+      'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts',
+    exportedIdentifier: 'digikikify',
+    // TODO: these fields are not used. The two hard coded configurations in this file should really be part of two separate singleton collections
+    estinantListKeyIdentifierName: '',
+    initialVoictentByGeppKeyIdentifierName: '',
+  };

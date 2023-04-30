@@ -66,7 +66,7 @@ export class SerializableVoictent<
     this.gepp = gepp;
 
     const voictentDirectoryPath = posix.join(ROOT_DIRECTORY, this.nameSpace);
-    fs.rmSync(voictentDirectoryPath, { recursive: true });
+    fs.rmSync(voictentDirectoryPath, { recursive: true, force: true });
 
     initialHubblepupTuple.forEach((hubblepup) => {
       this.addHubblepup(hubblepup);
