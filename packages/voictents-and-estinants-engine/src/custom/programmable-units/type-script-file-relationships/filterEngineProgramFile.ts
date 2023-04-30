@@ -37,21 +37,28 @@ export const filterEngineProgramFile = buildEstinant({
   .toHubblepupTuple<EngineProgramFileVoictent>({
     gepp: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .onPinbe((parsedFileOdeshin, [importList], [engineFunctionConfiguration]) => {
-    const hasEngineFunctionImport = importList.some(
-      (fileImport) =>
-        fileImport.isInternal &&
-        fileImport.sourcePath === engineFunctionConfiguration.filePath &&
-        fileImport.specifierList.some(
-          (specifier) =>
-            specifier === engineFunctionConfiguration.exportedIdentifier,
-        ),
-    );
+  .onPinbe(
+    (parsedFileOdeshin, [importList], engineFunctionConfigurationList) => {
+      const hasEngineFunctionImport = importList.some((fileImport) => {
+        return engineFunctionConfigurationList.some(
+          (engineFunctionConfiguration) => {
+            return (
+              fileImport.isInternal &&
+              fileImport.sourcePath === engineFunctionConfiguration.filePath &&
+              fileImport.specifierList.some(
+                (specifier) =>
+                  specifier === engineFunctionConfiguration.exportedIdentifier,
+              )
+            );
+          },
+        );
+      });
 
-    if (!hasEngineFunctionImport) {
-      return [];
-    }
+      if (!hasEngineFunctionImport) {
+        return [];
+      }
 
-    return [parsedFileOdeshin];
-  })
+      return [parsedFileOdeshin];
+    },
+  )
   .assemble();

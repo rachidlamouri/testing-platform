@@ -57,13 +57,16 @@ export const buildEstinantAssembler = <
       }),
       tropoig: (leftInput, ...rightInputTuple): QuirmList => {
         /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-        const modifiedLeftInput =
-          leftInputContext.modifyTropoignantInput(leftInput);
+        const modifiedLeftInput = leftInputContext.modifyTropoignantInput(
+          leftInput.hubblepup,
+        );
         const modifiedRightInputTuple = rightInputContextTuple.map(
           (rightInputContext, index) => {
             const rightInput = rightInputTuple[index];
             // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-            return rightInputContext.modifyTropoignantInput(rightInput);
+            return rightInputContext.modifyTropoignantInput(
+              rightInput.hubblepup,
+            );
           },
         );
         const modifiedOutput = assemblerContext.pinbe(
@@ -78,7 +81,7 @@ export const buildEstinantAssembler = <
         const quirmList = outputContext.constituentResultNormalizerList.flatMap(
           (normalizeResult) => {
             const resultList = normalizeResult(
-              leftInput,
+              leftInput.hubblepup,
               modifiedLeftInput,
               aggregatedOutput,
             );
@@ -89,7 +92,7 @@ export const buildEstinantAssembler = <
 
         return quirmList;
       },
-    } satisfies CoreEstinant as Estinant2<
+    } satisfies CoreEstinant as unknown as Estinant2<
       TLeftVicken,
       TRightVickenTuple,
       TOutputVickenTuple

@@ -3,6 +3,7 @@ import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import {
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
   ENGINE_FUNCTION_CONFIGURATION,
+  CORE_ENGINE_FUNCTION_CONFIGURATION,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
@@ -24,7 +25,10 @@ digikikify({
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
       VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
     ],
-    [ENGINE_FUNCTION_CONFIGURATION_GEPP]: [ENGINE_FUNCTION_CONFIGURATION],
+    [ENGINE_FUNCTION_CONFIGURATION_GEPP]: [
+      ENGINE_FUNCTION_CONFIGURATION,
+      CORE_ENGINE_FUNCTION_CONFIGURATION,
+    ],
   },
   estinantTuple: [
     enumerateFileSystemObjects,

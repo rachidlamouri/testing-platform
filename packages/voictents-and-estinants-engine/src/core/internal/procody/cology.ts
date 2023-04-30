@@ -1,6 +1,6 @@
 import { Zorn } from '../../../utilities/semantic-types/zorn';
 import { Dreanor, LeftDreanor } from '../dreanor/dreanor';
-import { Hubblepup, HubblepupTuple } from '../../engine-shell/quirm/hubblepup';
+import { GenericIndexedHubblepup } from '../../engine-shell/quirm/hubblepup';
 import { Mabz } from './mabz';
 
 /**
@@ -9,7 +9,7 @@ import { Mabz } from './mabz';
  */
 export type Cology = {
   leftDreanor: LeftDreanor;
-  leftInput: Hubblepup | HubblepupTuple;
+  leftInput: GenericIndexedHubblepup;
   mabz: Mabz;
 };
 

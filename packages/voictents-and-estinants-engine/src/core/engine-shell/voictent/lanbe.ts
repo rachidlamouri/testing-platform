@@ -1,10 +1,6 @@
 import { Simplify } from 'type-fest';
-import {
-  Hubblepup,
-  HubblepupTuple,
-  IndexedHubblepup,
-} from '../quirm/hubblepup';
-import { Straline } from '../../../utilities/semantic-types/straline';
+import { Hubblepup, HubblepupTuple } from '../quirm/hubblepup';
+import { GenericVoictentConfiguration } from '../../engine/voictentConfiguration';
 
 export enum LanbeTypeName {
   VoictentLanbe = 'VoictentLanbe',
@@ -51,15 +47,15 @@ export type VoictentItemLanbe = BaseLanbe<
 >;
 
 export type VoictentItemLanbe2<
-  THubblepup extends Hubblepup,
-  TIndex extends Straline,
+  TVoictentConfiguration extends GenericVoictentConfiguration,
 > = BaseLanbe<
   LanbeTypeName.VoictentItemLanbe2,
   ReferenceTypeName.IndexedVoictentItem,
-  IndexedHubblepup<THubblepup, TIndex>
+  TVoictentConfiguration['indexedHubblepup']
 >;
 
-export type GenericVoictentItemLanbe2 = VoictentItemLanbe2<Hubblepup, Straline>;
+export type GenericVoictentItemLanbe2 =
+  VoictentItemLanbe2<GenericVoictentConfiguration>;
 
 /**
  * A data structure that facilitates streaming Hubblepups from a voictent or the entire tuple from the Voictent at once.
