@@ -98,7 +98,10 @@ export class SerializableVoictent<
 
     createDirectory(directoryPath);
 
-    const filePath = posix.join(directoryPath, hubblepup.serializableId);
+    const filePath = posix.join(
+      directoryPath,
+      `${hubblepup.serializableId}.yml`,
+    );
 
     const text = serialize(hubblepup.datum);
 
