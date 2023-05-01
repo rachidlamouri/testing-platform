@@ -49,7 +49,7 @@ export type InMemoryVoictentConstructorInput<
   TVoictentConfiguration extends GenericInMemoryVoictentConfiguration,
 > = {
   gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['outputVoictent'];
+  initialHubblepupTuple: TVoictentConfiguration['emittedVoictent'];
 };
 
 export class InMemoryVoictent<
@@ -58,7 +58,7 @@ export class InMemoryVoictent<
 {
   public readonly gepp: TVoictentConfiguration['gepp'];
 
-  hubblepupTuple: TVoictentConfiguration['outputVoictent'] = [];
+  hubblepupTuple: TVoictentConfiguration['emittedVoictent'] = [];
 
   indicesByLanbe: Map<VoictentItemLanbe2<TVoictentConfiguration>, number> =
     new Map();
@@ -86,7 +86,7 @@ export class InMemoryVoictent<
     });
   }
 
-  addHubblepup(hubblepup: TVoictentConfiguration['inputHubblepup']): void {
+  addHubblepup(hubblepup: TVoictentConfiguration['receivedHubblepup']): void {
     this.receivedHubblepup.thisTick = true;
 
     this.hubblepupTuple.push(hubblepup);
@@ -189,7 +189,7 @@ export class InMemoryVoictent<
 
   // eslint-disable-next-line class-methods-use-this
   getSerializableId(
-    hubblepup: TVoictentConfiguration['inputHubblepup'],
+    hubblepup: TVoictentConfiguration['receivedHubblepup'],
     listIndex: number,
   ): string {
     return `${listIndex}`;
@@ -197,7 +197,7 @@ export class InMemoryVoictent<
 
   private dereference(
     lanbe: VoictentItemLanbe2<TVoictentConfiguration>,
-  ): TVoictentConfiguration['indexedOutputHubblepup'] {
+  ): TVoictentConfiguration['indexedEmittedHubblepup'] {
     const listIndex = this.getLanbeIndex(lanbe);
 
     if (listIndex === InMemoryVoictent.minimumInclusiveIndex) {

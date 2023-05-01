@@ -51,14 +51,14 @@ export type GenericSerializableVoictentConfiguration =
   SerializableVoictentConfiguration<Gepp>;
 
 export type IndexedSerializable =
-  GenericSerializableVoictentConfiguration['indexedOutputHubblepup'];
+  GenericSerializableVoictentConfiguration['indexedEmittedHubblepup'];
 
 export type SerializableVoictentConstructorInput<
   TVoictentConfiguration extends GenericSerializableVoictentConfiguration,
 > = {
   nameSpace: string;
   gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['inputHubblepup'][];
+  initialHubblepupTuple: TVoictentConfiguration['receivedHubblepup'][];
 };
 
 export class SerializableVoictent<

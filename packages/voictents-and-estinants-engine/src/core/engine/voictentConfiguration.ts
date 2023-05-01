@@ -7,17 +7,17 @@ import { Gepp } from '../engine-shell/voictent/gepp';
 
 export type VoictentConfiguration<
   TGepp extends Gepp,
-  TInputHubblepup extends Hubblepup,
-  TOutputHubblepup extends Hubblepup,
+  TReceivedHubblepup extends Hubblepup,
+  TEmittedHubblepup extends Hubblepup,
   IndexByName extends HubblepupIndexByName,
-  TOutputVoictent,
+  TEmittedVoictent,
 > = {
   gepp: TGepp;
   indexByName: IndexByName;
-  inputHubblepup: TInputHubblepup;
-  outputHubblepup: TOutputHubblepup;
-  indexedOutputHubblepup: IndexedHubblepup<TOutputHubblepup, IndexByName>;
-  outputVoictent: TOutputVoictent;
+  receivedHubblepup: TReceivedHubblepup;
+  emittedHubblepup: TEmittedHubblepup;
+  indexedEmittedHubblepup: IndexedHubblepup<TEmittedHubblepup, IndexByName>;
+  emittedVoictent: TEmittedVoictent;
 };
 
 export type GenericVoictentConfiguration = VoictentConfiguration<

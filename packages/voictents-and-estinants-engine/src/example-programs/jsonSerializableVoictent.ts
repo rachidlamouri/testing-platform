@@ -56,7 +56,7 @@ export type JsonSerializableVoictentConstructorInput<
 > = {
   nameSpace: string;
   gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['inputHubblepup'][];
+  initialHubblepupTuple: TVoictentConfiguration['receivedHubblepup'][];
 };
 
 export class JsonSerializableVoictent<
