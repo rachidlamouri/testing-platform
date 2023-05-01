@@ -17,7 +17,9 @@ export class InMemoryOdeshinVoictent<
   TVoictentConfiguration extends GenericInMemoryOdeshinVoictentConfiguration,
 > extends InMemoryVoictent<TVoictentConfiguration> {
   // eslint-disable-next-line class-methods-use-this
-  getSerializableId(hubblepup: TVoictentConfiguration['hubblepup']): string {
+  getSerializableId(
+    hubblepup: TVoictentConfiguration['inputHubblepup'],
+  ): string {
     // TODO: move the responsibility of normalizing the serializable id elsewhere
     return hubblepup.zorn.replaceAll('/', ' | ');
   }

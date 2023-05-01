@@ -34,7 +34,13 @@ type ReceivedHubblepupState = {
 export type InMemoryVoictentConfiguration<
   TGepp extends Gepp,
   THubblepup extends Hubblepup,
-> = VoictentConfiguration<TGepp, THubblepup, InMemoryIndexByName>;
+> = VoictentConfiguration<
+  TGepp,
+  THubblepup,
+  THubblepup,
+  InMemoryIndexByName,
+  THubblepup[]
+>;
 
 export type GenericInMemoryVoictentConfiguration =
   InMemoryVoictentConfiguration<Gepp, Hubblepup>;
@@ -43,7 +49,7 @@ export type InMemoryVoictentConstructorInput<
   TVoictentConfiguration extends GenericInMemoryVoictentConfiguration,
 > = {
   gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['hubblepupTuple'];
+  initialHubblepupTuple: TVoictentConfiguration['outputVoictent'];
 };
 
 export class InMemoryVoictent<
@@ -52,7 +58,7 @@ export class InMemoryVoictent<
 {
   public readonly gepp: TVoictentConfiguration['gepp'];
 
-  hubblepupTuple: TVoictentConfiguration['hubblepup'][] = [];
+  hubblepupTuple: TVoictentConfiguration['outputVoictent'] = [];
 
   indicesByLanbe: Map<VoictentItemLanbe2<TVoictentConfiguration>, number> =
     new Map();
@@ -80,8 +86,9 @@ export class InMemoryVoictent<
     });
   }
 
-  addHubblepup(hubblepup: TVoictentConfiguration['hubblepup']): void {
+  addHubblepup(hubblepup: TVoictentConfiguration['inputHubblepup']): void {
     this.receivedHubblepup.thisTick = true;
+
     this.hubblepupTuple.push(hubblepup);
   }
 
@@ -182,7 +189,7 @@ export class InMemoryVoictent<
 
   // eslint-disable-next-line class-methods-use-this
   getSerializableId(
-    hubblepup: TVoictentConfiguration['hubblepup'],
+    hubblepup: TVoictentConfiguration['inputHubblepup'],
     listIndex: number,
   ): string {
     return `${listIndex}`;
@@ -190,7 +197,7 @@ export class InMemoryVoictent<
 
   private dereference(
     lanbe: VoictentItemLanbe2<TVoictentConfiguration>,
-  ): TVoictentConfiguration['indexedHubblepup'] {
+  ): TVoictentConfiguration['indexedOutputHubblepup'] {
     const listIndex = this.getLanbeIndex(lanbe);
 
     if (listIndex === InMemoryVoictent.minimumInclusiveIndex) {

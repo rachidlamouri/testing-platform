@@ -30,23 +30,35 @@ export type Serializable = {
 };
 
 export type GenericSerializableSourceVoictentConfiguration =
-  VoictentConfiguration<Gepp, Hubblepup, SerializableIndexByName>;
+  VoictentConfiguration<
+    Gepp,
+    Hubblepup,
+    Hubblepup,
+    SerializableIndexByName,
+    Hubblepup[]
+  >;
 
 export type SerializableVoictentConfiguration<TGepp extends Gepp> =
-  VoictentConfiguration<TGepp, Serializable, SerializableIndexByName>;
+  VoictentConfiguration<
+    TGepp,
+    Serializable,
+    Serializable,
+    SerializableIndexByName,
+    Serializable[]
+  >;
 
 export type GenericSerializableVoictentConfiguration =
   SerializableVoictentConfiguration<Gepp>;
 
 export type IndexedSerializable =
-  GenericSerializableVoictentConfiguration['indexedHubblepup'];
+  GenericSerializableVoictentConfiguration['indexedOutputHubblepup'];
 
 export type SerializableVoictentConstructorInput<
   TVoictentConfiguration extends GenericSerializableVoictentConfiguration,
 > = {
   nameSpace: string;
   gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['hubblepupTuple'];
+  initialHubblepupTuple: TVoictentConfiguration['inputHubblepup'][];
 };
 
 export class SerializableVoictent<
