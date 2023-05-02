@@ -1,61 +1,73 @@
-import { Merge } from 'type-fest';
-import { SerializableIndexByName } from '../../example-programs/serializableVoictent';
-import { Hubblepup } from '../engine-shell/quirm/hubblepup';
+import fs from 'fs';
+import { posix } from 'path';
+import { Grition } from '../../custom/adapter/grition';
 import { Gepp } from '../engine-shell/voictent/gepp';
-import {
-  VoictentLanbe,
-  LanbeTypeName,
-  VoictentItemLanbe2,
-  GenericVoictentItemLanbe2,
-  ReferenceTypeName,
-} from '../engine-shell/voictent/lanbe';
-import { Voictent2 } from './voictent2';
 import { VoictentConfiguration } from './voictentConfiguration';
+import { SerializableIndexByName } from '../../example-programs/serializableVoictent';
+import { Voictent2 } from './voictent2';
+import {
+  LanbeTypeName,
+  ReferenceTypeName,
+  VoictentItemLanbe2,
+  VoictentLanbe,
+} from '../engine-shell/voictent/lanbe';
+import { MissingLanbeError, ReceivedHubblepupState } from './inMemoryVoictent';
+import { Json, jsonUtils } from '../../utilities/json';
 
-export type InMemoryIndexByName = Merge<
-  SerializableIndexByName,
-  {
-    listIndex: number;
+const createDirectory = (directoryPath: string): void => {
+  if (!fs.existsSync(directoryPath)) {
+    // eslint-disable-next-line no-console
+    console.log(`NEW: ${directoryPath}`);
   }
->;
 
-export class MissingLanbeError extends Error {
-  constructor(lanbe: GenericVoictentItemLanbe2) {
-    super(`Lanbe "${lanbe.debugName}" does not exist`);
-  }
-}
-
-export type ReceivedHubblepupState = {
-  twoTicksAgo: boolean;
-  oneTickAgo: boolean;
-  thisTick: boolean | null;
+  fs.mkdirSync(directoryPath, { recursive: true });
 };
 
-export type InMemoryVoictentConfiguration<
+// TODO: make the root a generic on-disk cache location that is shared by any on-disk voictent
+const ROOT_DIRECTORY = 'debug';
+createDirectory(ROOT_DIRECTORY);
+
+type BaseCacheable<T> = {
+  zorn: string;
+  lastModified: string;
+  grition: T;
+};
+
+export type CacheableAccessor<TGrition extends Grition> = BaseCacheable<
+  () => TGrition
+>;
+
+export type CachedCacheable<TGrition extends Grition> = BaseCacheable<TGrition>;
+
+export type CachedOnDiskIndexByName = SerializableIndexByName;
+
+export type CachedOnDiskVoictentConfiguration<
   TGepp extends Gepp,
-  THubblepup extends Hubblepup,
+  TGrition extends Json,
 > = VoictentConfiguration<
   TGepp,
-  THubblepup,
-  THubblepup,
-  InMemoryIndexByName,
-  THubblepup[]
+  CacheableAccessor<TGrition>,
+  CachedCacheable<TGrition>,
+  CachedOnDiskIndexByName,
+  CachedCacheable<TGrition>[]
 >;
 
-export type GenericInMemoryVoictentConfiguration =
-  InMemoryVoictentConfiguration<Gepp, Hubblepup>;
+export type GenericCachedOnDiskVoictentConfiguration =
+  CachedOnDiskVoictentConfiguration<Gepp, Json>;
 
-export type InMemoryVoictentConstructorInput<
-  TVoictentConfiguration extends GenericInMemoryVoictentConfiguration,
+export type CachedOnDiskVoictentConstructorInput<
+  TVoictentConfiguration extends GenericCachedOnDiskVoictentConfiguration,
 > = {
+  nameSpace: string;
   gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['emittedVoictent'];
 };
 
-export class InMemoryVoictent<
-  TVoictentConfiguration extends GenericInMemoryVoictentConfiguration,
+export class CachedOnDiskVoictent<
+  TVoictentConfiguration extends GenericCachedOnDiskVoictentConfiguration,
 > implements Voictent2<TVoictentConfiguration>
 {
+  public readonly nameSpace: string;
+
   public readonly gepp: TVoictentConfiguration['gepp'];
 
   hubblepupTuple: TVoictentConfiguration['emittedVoictent'] = [];
@@ -76,20 +88,54 @@ export class InMemoryVoictent<
   };
 
   constructor({
+    nameSpace,
     gepp,
-    initialHubblepupTuple,
-  }: InMemoryVoictentConstructorInput<TVoictentConfiguration>) {
+  }: CachedOnDiskVoictentConstructorInput<TVoictentConfiguration>) {
+    this.nameSpace = nameSpace;
     this.gepp = gepp;
-
-    initialHubblepupTuple.forEach((hubblepup) => {
-      this.addHubblepup(hubblepup);
-    });
   }
 
-  addHubblepup(hubblepup: TVoictentConfiguration['receivedHubblepup']): void {
+  addHubblepup(
+    receivedHubblepup: TVoictentConfiguration['receivedHubblepup'],
+  ): void {
     this.receivedHubblepup.thisTick = true;
 
-    this.hubblepupTuple.push(hubblepup);
+    const directoryPath = posix.join(ROOT_DIRECTORY, this.nameSpace, this.gepp);
+    createDirectory(directoryPath);
+
+    const fileName = `${receivedHubblepup.zorn}.json`;
+
+    const filePath = posix.join(directoryPath, fileName);
+
+    let currentCachedHubblepup:
+      | TVoictentConfiguration['emittedHubblepup']
+      | null;
+    if (fs.existsSync(filePath)) {
+      const cachedText = fs.readFileSync(filePath, 'utf8');
+      currentCachedHubblepup = jsonUtils.parse(
+        cachedText,
+      ) as TVoictentConfiguration['emittedHubblepup'];
+    } else {
+      currentCachedHubblepup = null;
+    }
+
+    let emittedHubblepup: TVoictentConfiguration['emittedHubblepup'];
+    if (
+      currentCachedHubblepup === null ||
+      receivedHubblepup.lastModified > currentCachedHubblepup.lastModified
+    ) {
+      emittedHubblepup = {
+        ...receivedHubblepup,
+        grition: receivedHubblepup.grition(),
+      };
+
+      const nextCachedText = jsonUtils.multilineSerialize(emittedHubblepup);
+      fs.writeFileSync(filePath, nextCachedText);
+    } else {
+      emittedHubblepup = currentCachedHubblepup;
+    }
+
+    this.hubblepupTuple.push(emittedHubblepup);
   }
 
   onTickStart(): void {
@@ -155,7 +201,7 @@ export class InMemoryVoictent<
       },
     };
 
-    this.indicesByLanbe.set(lanbe, InMemoryVoictent.minimumInclusiveIndex);
+    this.indicesByLanbe.set(lanbe, CachedOnDiskVoictent.minimumInclusiveIndex);
     return lanbe;
   }
 
@@ -187,20 +233,12 @@ export class InMemoryVoictent<
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  getSerializableId(
-    hubblepup: TVoictentConfiguration['receivedHubblepup'],
-    listIndex: number,
-  ): string {
-    return `${listIndex}`;
-  }
-
   private dereference(
     lanbe: VoictentItemLanbe2<TVoictentConfiguration>,
   ): TVoictentConfiguration['indexedEmittedHubblepup'] {
     const listIndex = this.getLanbeIndex(lanbe);
 
-    if (listIndex === InMemoryVoictent.minimumInclusiveIndex) {
+    if (listIndex === CachedOnDiskVoictent.minimumInclusiveIndex) {
       throw Error('There is nothing to reference');
     }
 
@@ -208,8 +246,7 @@ export class InMemoryVoictent<
     return {
       hubblepup,
       indexByName: {
-        serializableId: this.getSerializableId(hubblepup, listIndex),
-        listIndex,
+        serializableId: hubblepup.zorn,
       },
     };
   }

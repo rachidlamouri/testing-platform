@@ -30,14 +30,14 @@ export type ToJson<T extends Json> = T;
 
 export const jsonUtils = {
   lossyMultilineSerialize: (datum: unknown): string | Error => {
-    return jsonUtils.multilineSerialize(datum as Json);
-  },
-  multilineSerialize: (datum: Json): string | Error => {
     try {
-      return JSON.stringify(datum, null, 2);
+      return jsonUtils.multilineSerialize(datum as Json);
     } catch (error) {
       return error as Error;
     }
+  },
+  multilineSerialize: (datum: Json): string => {
+    return JSON.stringify(datum, null, 2);
   },
   parse: (text: string): Json => JSON.parse(text) as Json,
 };
