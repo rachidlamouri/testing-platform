@@ -1,4 +1,3 @@
-import { Tuple } from '../../utilities/semantic-types/tuple';
 import {
   Hubblepup,
   HubblepupIndexByName,
@@ -8,18 +7,23 @@ import { Gepp } from '../engine-shell/voictent/gepp';
 
 export type VoictentConfiguration<
   TGepp extends Gepp,
-  THubblepup extends Hubblepup,
+  TReceivedHubblepup extends Hubblepup,
+  TEmittedHubblepup extends Hubblepup,
   IndexByName extends HubblepupIndexByName,
+  TEmittedVoictent,
 > = {
   gepp: TGepp;
   indexByName: IndexByName;
-  hubblepup: THubblepup;
-  hubblepupTuple: Tuple<THubblepup>;
-  indexedHubblepup: IndexedHubblepup<THubblepup, IndexByName>;
+  receivedHubblepup: TReceivedHubblepup;
+  emittedHubblepup: TEmittedHubblepup;
+  indexedEmittedHubblepup: IndexedHubblepup<TEmittedHubblepup, IndexByName>;
+  emittedVoictent: TEmittedVoictent;
 };
 
 export type GenericVoictentConfiguration = VoictentConfiguration<
   Gepp,
   Hubblepup,
-  HubblepupIndexByName
+  Hubblepup,
+  HubblepupIndexByName,
+  unknown
 >;

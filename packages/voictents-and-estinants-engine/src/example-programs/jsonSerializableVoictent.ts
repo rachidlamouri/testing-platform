@@ -31,10 +31,22 @@ export type JsonSerializable = {
 };
 
 export type GenericJsonSerializableSourceVoictentConfiguration =
-  VoictentConfiguration<Gepp, Hubblepup, JsonSerializableIndexByName>;
+  VoictentConfiguration<
+    Gepp,
+    Hubblepup,
+    Hubblepup,
+    JsonSerializableIndexByName,
+    Hubblepup[]
+  >;
 
 export type JsonSerializableVoictentConfiguration<TGepp extends Gepp> =
-  VoictentConfiguration<TGepp, JsonSerializable, JsonSerializableIndexByName>;
+  VoictentConfiguration<
+    TGepp,
+    JsonSerializable,
+    JsonSerializable,
+    JsonSerializableIndexByName,
+    JsonSerializable[]
+  >;
 
 export type GenericJsonSerializableVoictentConfiguration =
   JsonSerializableVoictentConfiguration<Gepp>;
@@ -44,7 +56,7 @@ export type JsonSerializableVoictentConstructorInput<
 > = {
   nameSpace: string;
   gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['hubblepupTuple'];
+  initialHubblepupTuple: TVoictentConfiguration['receivedHubblepup'][];
 };
 
 export class JsonSerializableVoictent<

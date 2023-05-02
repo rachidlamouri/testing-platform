@@ -14,7 +14,7 @@ export type Voictent2<
     debugName: string,
   ): VoictentItemLanbe2<TVoictentConfiguration> | VoictentItemLanbe | null;
   onTickStart(): void;
-  addHubblepup(hubblepup: TVoictentConfiguration['hubblepup']): void;
+  addHubblepup(hubblepup: TVoictentConfiguration['receivedHubblepup']): void;
 };
 
 export type GenericVoictent2 = Voictent2<GenericVoictentConfiguration>;

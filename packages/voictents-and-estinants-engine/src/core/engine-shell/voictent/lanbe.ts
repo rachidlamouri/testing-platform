@@ -51,7 +51,7 @@ export type VoictentItemLanbe2<
 > = BaseLanbe<
   LanbeTypeName.VoictentItemLanbe2,
   ReferenceTypeName.IndexedVoictentItem,
-  TVoictentConfiguration['indexedHubblepup']
+  TVoictentConfiguration['indexedEmittedHubblepup']
 >;
 
 export type GenericVoictentItemLanbe2 =

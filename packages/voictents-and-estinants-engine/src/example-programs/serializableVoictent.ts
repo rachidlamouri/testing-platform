@@ -30,23 +30,35 @@ export type Serializable = {
 };
 
 export type GenericSerializableSourceVoictentConfiguration =
-  VoictentConfiguration<Gepp, Hubblepup, SerializableIndexByName>;
+  VoictentConfiguration<
+    Gepp,
+    Hubblepup,
+    Hubblepup,
+    SerializableIndexByName,
+    Hubblepup[]
+  >;
 
 export type SerializableVoictentConfiguration<TGepp extends Gepp> =
-  VoictentConfiguration<TGepp, Serializable, SerializableIndexByName>;
+  VoictentConfiguration<
+    TGepp,
+    Serializable,
+    Serializable,
+    SerializableIndexByName,
+    Serializable[]
+  >;
 
 export type GenericSerializableVoictentConfiguration =
   SerializableVoictentConfiguration<Gepp>;
 
 export type IndexedSerializable =
-  GenericSerializableVoictentConfiguration['indexedHubblepup'];
+  GenericSerializableVoictentConfiguration['indexedEmittedHubblepup'];
 
 export type SerializableVoictentConstructorInput<
   TVoictentConfiguration extends GenericSerializableVoictentConfiguration,
 > = {
   nameSpace: string;
   gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['hubblepupTuple'];
+  initialHubblepupTuple: TVoictentConfiguration['receivedHubblepup'][];
 };
 
 export class SerializableVoictent<
@@ -65,8 +77,12 @@ export class SerializableVoictent<
     this.nameSpace = nameSpace;
     this.gepp = gepp;
 
-    const voictentDirectoryPath = posix.join(ROOT_DIRECTORY, this.nameSpace);
-    fs.rmSync(voictentDirectoryPath, { recursive: true, force: true });
+    const voictentGeppDirectoryPath = posix.join(
+      ROOT_DIRECTORY,
+      this.nameSpace,
+      this.gepp,
+    );
+    fs.rmSync(voictentGeppDirectoryPath, { recursive: true, force: true });
 
     initialHubblepupTuple.forEach((hubblepup) => {
       this.addHubblepup(hubblepup);
