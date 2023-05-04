@@ -6,6 +6,9 @@ if [[ -n $(git status --porcelain) ]]; then
 
   git status --porcelain
 
+  printf "\n"
+  git diff
+
   exit 1;
 fi
 
