@@ -3,7 +3,7 @@ import fs from 'fs';
 import { Hubblepup } from '../core/engine-shell/quirm/hubblepup';
 import { Gepp } from '../core/engine-shell/voictent/gepp';
 import { Voictent2 } from '../core/engine/voictent2';
-import { VoictentConfiguration } from '../core/engine/voque';
+import { Voque } from '../core/engine/voque';
 import { jsonUtils } from '../utilities/json';
 import { serializeError } from '../utilities/serializeError';
 
@@ -30,48 +30,45 @@ export type JsonSerializable = {
   datum: unknown;
 };
 
-export type GenericJsonSerializableSourceVoictentConfiguration =
-  VoictentConfiguration<
-    Gepp,
-    Hubblepup,
-    Hubblepup,
-    JsonSerializableIndexByName,
-    Hubblepup[]
-  >;
+export type GenericJsonSerializableSourceVoque = Voque<
+  Gepp,
+  Hubblepup,
+  Hubblepup,
+  JsonSerializableIndexByName,
+  Hubblepup[]
+>;
 
-export type JsonSerializableVoictentConfiguration<TGepp extends Gepp> =
-  VoictentConfiguration<
-    TGepp,
-    JsonSerializable,
-    JsonSerializable,
-    JsonSerializableIndexByName,
-    JsonSerializable[]
-  >;
+export type JsonSerializableVoque<TGepp extends Gepp> = Voque<
+  TGepp,
+  JsonSerializable,
+  JsonSerializable,
+  JsonSerializableIndexByName,
+  JsonSerializable[]
+>;
 
-export type GenericJsonSerializableVoictentConfiguration =
-  JsonSerializableVoictentConfiguration<Gepp>;
+export type GenericJsonSerializableVoque = JsonSerializableVoque<Gepp>;
 
 export type JsonSerializableVoictentConstructorInput<
-  TVoictentConfiguration extends GenericJsonSerializableVoictentConfiguration,
+  TVoque extends GenericJsonSerializableVoque,
 > = {
   nameSpace: string;
-  gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['receivedHubblepup'][];
+  gepp: TVoque['gepp'];
+  initialHubblepupTuple: TVoque['receivedHubblepup'][];
 };
 
 export class JsonSerializableVoictent<
-  TVoictentConfiguration extends GenericJsonSerializableVoictentConfiguration,
-> implements Voictent2<TVoictentConfiguration>
+  TVoque extends GenericJsonSerializableVoque,
+> implements Voictent2<TVoque>
 {
   public readonly nameSpace: string;
 
-  public readonly gepp: TVoictentConfiguration['gepp'];
+  public readonly gepp: TVoque['gepp'];
 
   constructor({
     nameSpace,
     gepp,
     initialHubblepupTuple,
-  }: JsonSerializableVoictentConstructorInput<TVoictentConfiguration>) {
+  }: JsonSerializableVoictentConstructorInput<TVoque>) {
     this.nameSpace = nameSpace;
     this.gepp = gepp;
 

@@ -3,7 +3,7 @@ import { posix } from 'path';
 import { Gepp } from '../core/engine-shell/voictent/gepp';
 import { Voictent2 } from '../core/engine/voictent2';
 import { serialize } from '../utilities/typed-datum/serializer/serialize';
-import { VoictentConfiguration } from '../core/engine/voque';
+import { Voque } from '../core/engine/voque';
 import { Hubblepup } from '../core/engine-shell/quirm/hubblepup';
 
 const createDirectory = (directoryPath: string): void => {
@@ -29,51 +29,47 @@ export type Serializable = {
   datum: unknown;
 };
 
-export type GenericSerializableSourceVoictentConfiguration =
-  VoictentConfiguration<
-    Gepp,
-    Hubblepup,
-    Hubblepup,
-    SerializableIndexByName,
-    Hubblepup[]
-  >;
+export type GenericSerializableSourceVoque = Voque<
+  Gepp,
+  Hubblepup,
+  Hubblepup,
+  SerializableIndexByName,
+  Hubblepup[]
+>;
 
-export type SerializableVoictentConfiguration<TGepp extends Gepp> =
-  VoictentConfiguration<
-    TGepp,
-    Serializable,
-    Serializable,
-    SerializableIndexByName,
-    Serializable[]
-  >;
+export type SerializableVoque<TGepp extends Gepp> = Voque<
+  TGepp,
+  Serializable,
+  Serializable,
+  SerializableIndexByName,
+  Serializable[]
+>;
 
-export type GenericSerializableVoictentConfiguration =
-  SerializableVoictentConfiguration<Gepp>;
+export type GenericSerializableVoque = SerializableVoque<Gepp>;
 
 export type IndexedSerializable =
-  GenericSerializableVoictentConfiguration['indexedEmittedHubblepup'];
+  GenericSerializableVoque['indexedEmittedHubblepup'];
 
 export type SerializableVoictentConstructorInput<
-  TVoictentConfiguration extends GenericSerializableVoictentConfiguration,
+  TVoque extends GenericSerializableVoque,
 > = {
   nameSpace: string;
-  gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['receivedHubblepup'][];
+  gepp: TVoque['gepp'];
+  initialHubblepupTuple: TVoque['receivedHubblepup'][];
 };
 
-export class SerializableVoictent<
-  TVoictentConfiguration extends GenericSerializableVoictentConfiguration,
-> implements Voictent2<TVoictentConfiguration>
+export class SerializableVoictent<TVoque extends GenericSerializableVoque>
+  implements Voictent2<TVoque>
 {
   public readonly nameSpace: string;
 
-  public readonly gepp: TVoictentConfiguration['gepp'];
+  public readonly gepp: TVoque['gepp'];
 
   constructor({
     nameSpace,
     gepp,
     initialHubblepupTuple,
-  }: SerializableVoictentConstructorInput<TVoictentConfiguration>) {
+  }: SerializableVoictentConstructorInput<TVoque>) {
     this.nameSpace = nameSpace;
     this.gepp = gepp;
 

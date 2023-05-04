@@ -7,11 +7,10 @@ import {
 import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
 import {
   JsonSerializableVoictent,
-  JsonSerializableVoictentConfiguration,
+  JsonSerializableVoque,
 } from './jsonSerializableVoictent';
 
-type SerializedConfiguration =
-  JsonSerializableVoictentConfiguration<'serialized'>;
+type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 
 digikikify({
   inputVoictentList: [

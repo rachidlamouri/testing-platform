@@ -3,14 +3,13 @@ import { InMemoryOdeshinVoictent } from '../core/engine/inMemoryOdeshinVoictent'
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
-  DatumTestCaseInputVoictentConfiguration,
+  DatumTestCaseInputVoque,
 } from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
-import { JsonSerializableVoictentConfiguration } from './jsonSerializableVoictent';
+import { JsonSerializableVoque } from './jsonSerializableVoictent';
 import { SerializableVoictent } from './serializableVoictent';
 
-type SerializedConfiguration =
-  JsonSerializableVoictentConfiguration<'serialized'>;
+type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 
 digikikify({
   inputVoictentList: [
@@ -27,7 +26,7 @@ digikikify({
   initialQuirmTuple: [],
   estinantTuple: [
     buildAddMetadataForSerialization<
-      DatumTestCaseInputVoictentConfiguration,
+      DatumTestCaseInputVoque,
       SerializedConfiguration
     >({
       inputGepp: DATUM_TEST_CASE_INPUT_GEPP,

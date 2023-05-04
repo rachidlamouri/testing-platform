@@ -2,11 +2,10 @@ import { digikikify } from '../core/engine/digikikify';
 import { DATUM_TEST_CASE_INPUT_ODESHIN_LIST } from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
 import {
   JsonSerializableVoictent,
-  JsonSerializableVoictentConfiguration,
+  JsonSerializableVoque,
 } from './jsonSerializableVoictent';
 
-type SerializedConfiguration =
-  JsonSerializableVoictentConfiguration<'serialized'>;
+type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 
 digikikify({
   inputVoictentList: [
