@@ -29,6 +29,65 @@ class CustomObject {
   constructor(public datumList: unknown[]) {}
 }
 
+const jsonTestCaseList: DatumTestCaseInputOdeshin[] = [
+  {
+    zorn: '-/0/json-primitive/0/string',
+    grition: 'foo',
+  },
+  {
+    zorn: '-/0/json-primitive/1/number',
+    grition: 123,
+  },
+  {
+    zorn: '-/0/json-primitive/2/boolean/0/true',
+    grition: true,
+  },
+  {
+    zorn: '-/0/json-primitive/2/boolean/1/false',
+    grition: false,
+  },
+  {
+    zorn: '-/0/json-primitive/3/null',
+    grition: null,
+  },
+];
+
+const jsonTestCaseListGritionList = jsonTestCaseList.map(
+  (odeshin) => odeshin.grition,
+);
+
+const jsonPrimitiveCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
+  {
+    zorn: '-/1/json-primitive-collection/0/array',
+    grition: jsonTestCaseListGritionList,
+  },
+  {
+    zorn: '-/1/json-primitive-collection/1/object',
+    grition: Object.fromEntries(
+      jsonTestCaseList.map(({ zorn, grition }) => [zorn, grition]),
+    ),
+  },
+];
+
+const jsonPrimitiveCollectionTestCaseListGritionList =
+  jsonPrimitiveCollectionTestCaseList.map((odeshin) => odeshin.grition);
+
+const jsonCollectionCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
+  {
+    zorn: '-/2/json-collection-collection/0/array',
+    grition: jsonPrimitiveCollectionTestCaseListGritionList,
+  },
+  {
+    zorn: '-/2/json-collection-collection/1/object',
+    grition: Object.fromEntries(
+      jsonPrimitiveCollectionTestCaseListGritionList.map((datum, index) => [
+        `key-${index}`,
+        datum,
+      ]),
+    ),
+  },
+];
+
 const primitiveTestCaseList: DatumTestCaseInputOdeshin[] = [
   {
     zorn: '0/primitive/0/empty/0/null',
@@ -171,6 +230,9 @@ const collectionCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
 ];
 
 export const DATUM_TEST_CASE_INPUT_ODESHIN_LIST: DatumTestCaseInputOdeshin[] = [
+  ...jsonTestCaseList,
+  ...jsonPrimitiveCollectionTestCaseList,
+  ...jsonCollectionCollectionTestCaseList,
   ...primitiveTestCaseList,
   ...primitiveCollectionTestCaseList,
   ...collectionCollectionTestCaseList,
