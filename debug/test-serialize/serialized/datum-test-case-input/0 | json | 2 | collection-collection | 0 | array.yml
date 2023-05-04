@@ -1,0 +1,12 @@
+"zorn": "0/json/2/collection-collection/0/array"
+"grition":
+  - - "foo"
+    - 123
+    - true
+    - false
+    - null
+  - "0/json/0/primitive/0/string": "foo"
+    "0/json/0/primitive/1/number": 123
+    "0/json/0/primitive/2/boolean/0/true": true
+    "0/json/0/primitive/2/boolean/1/false": false
+    "0/json/0/primitive/3/null": null
