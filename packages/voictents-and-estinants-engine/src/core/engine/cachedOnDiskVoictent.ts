@@ -2,7 +2,7 @@ import fs from 'fs';
 import { posix } from 'path';
 import { Grition } from '../../custom/adapter/grition';
 import { Gepp } from '../engine-shell/voictent/gepp';
-import { VoictentConfiguration } from './voictentConfiguration';
+import { VoictentConfiguration } from './voque';
 import { SerializableIndexByName } from '../../example-programs/serializableVoictent';
 import { Voictent2 } from './voictent2';
 import {

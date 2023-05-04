@@ -3,7 +3,7 @@ import { posix } from 'path';
 import { Gepp } from '../core/engine-shell/voictent/gepp';
 import { Voictent2 } from '../core/engine/voictent2';
 import { serialize } from '../utilities/typed-datum/serializer/serialize';
-import { VoictentConfiguration } from '../core/engine/voictentConfiguration';
+import { VoictentConfiguration } from '../core/engine/voque';
 import { Hubblepup } from '../core/engine-shell/quirm/hubblepup';
 
 const createDirectory = (directoryPath: string): void => {

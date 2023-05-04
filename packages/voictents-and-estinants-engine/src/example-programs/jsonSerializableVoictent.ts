@@ -3,7 +3,7 @@ import fs from 'fs';
 import { Hubblepup } from '../core/engine-shell/quirm/hubblepup';
 import { Gepp } from '../core/engine-shell/voictent/gepp';
 import { Voictent2 } from '../core/engine/voictent2';
-import { VoictentConfiguration } from '../core/engine/voictentConfiguration';
+import { VoictentConfiguration } from '../core/engine/voque';
 import { jsonUtils } from '../utilities/json';
 import { serializeError } from '../utilities/serializeError';
 

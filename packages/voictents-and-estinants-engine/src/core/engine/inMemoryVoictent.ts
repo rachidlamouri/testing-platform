@@ -10,7 +10,7 @@ import {
   ReferenceTypeName,
 } from '../engine-shell/voictent/lanbe';
 import { Voictent2 } from './voictent2';
-import { VoictentConfiguration } from './voictentConfiguration';
+import { VoictentConfiguration } from './voque';
 
 export type InMemoryIndexByName = Merge<
   SerializableIndexByName,

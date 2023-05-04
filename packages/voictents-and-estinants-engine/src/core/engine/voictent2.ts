@@ -3,7 +3,7 @@ import {
   VoictentItemLanbe2,
   VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
-import { GenericVoictentConfiguration } from './voictentConfiguration';
+import { GenericVoictentConfiguration } from './voque';
 
 export type Voictent2<
   TVoictentConfiguration extends GenericVoictentConfiguration,

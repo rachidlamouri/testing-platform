@@ -1,6 +1,6 @@
 import { Simplify } from 'type-fest';
 import { Hubblepup, HubblepupTuple } from '../quirm/hubblepup';
-import { GenericVoictentConfiguration } from '../../engine/voictentConfiguration';
+import { GenericVoictentConfiguration } from '../../engine/voque';
 
 export enum LanbeTypeName {
   VoictentLanbe = 'VoictentLanbe',
