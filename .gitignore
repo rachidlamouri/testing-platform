@@ -3,3 +3,4 @@ node_modules/
 !debug
 debug/*
 !debug/test-json-serialization
+!debug/test-build-add-metadata-for-serialization
