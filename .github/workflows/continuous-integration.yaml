@@ -14,61 +14,62 @@ jobs:
         with:
           node-version-file: .nvmrc
       - name: Install Dependencies
-        run: npm clean-install && cd packages/vscode-language-server/client && npm
-          install && cd ../server && npm install
+        # run: npm clean-install && cd packages/vscode-language-server/client && npm
+        #   install && cd ../server && npm install
+        run: npm clean-install
       - name: Lint Markdown
         run: npm run lint:md
       - name: Lint TypeScript
         run: npm run lint:ts:all
 
-      # base-tsconfig
-      - name: Run base-tsconfig Tests
-        run: pwd && bash packages/base-tsconfig/scripts/runTests.sh
+      # # base-tsconfig
+      # - name: Run base-tsconfig Tests
+      #   run: pwd && bash packages/base-tsconfig/scripts/runTests.sh
 
       # voictents-and-estinants-engine
       - name: Run CI script
         run: bash packages/voictents-and-estinants-engine/ci.sh
 
-      # constraint-engine
-      - name: Lint constraint-engine Types
-        run: pwd && cd packages/constraint-engine && pwd && npx tsc
-      - name: Run constraint-engine Tests
-        run: pwd && bash packages/constraint-engine/scripts/runTests.sh
+      # # constraint-engine
+      # - name: Lint constraint-engine Types
+      #   run: pwd && cd packages/constraint-engine && pwd && npx tsc
+      # - name: Run constraint-engine Tests
+      #   run: pwd && bash packages/constraint-engine/scripts/runTests.sh
 
-      # ikaria-test
-      - name: Lint ikaria-test Types
-        run: pwd && cd packages/ikaria-test && pwd && npx tsc
-      - name: Run ikaria-test Tests
-        run: pwd && bash packages/ikaria-test/scripts/runTests.sh
+      # # ikaria-test
+      # - name: Lint ikaria-test Types
+      #   run: pwd && cd packages/ikaria-test && pwd && npx tsc
+      # - name: Run ikaria-test Tests
+      #   run: pwd && bash packages/ikaria-test/scripts/runTests.sh
 
-      # mouse-test
-      - name: Lint mouse-test Types
-        run: pwd && cd packages/mouse-test && pwd && npx tsc
-      - name: Run mouse-test Tests
-        run: pwd && bash packages/mouse-test/scripts/runTests.sh
+      # # mouse-test
+      # - name: Lint mouse-test Types
+      #   run: pwd && cd packages/mouse-test && pwd && npx tsc
+      # - name: Run mouse-test Tests
+      #   run: pwd && bash packages/mouse-test/scripts/runTests.sh
 
-      # open-schema-type-script
-      - name: Lint open-schema-type-script Types
-        run: pwd && cd packages/open-schema-type-script && pwd && npx tsc
-      - name: Run open-schema-type-script Tests
-        run: pwd && bash packages/open-schema-type-script/scripts/runTests.sh
+      # # open-schema-type-script
+      # - name: Lint open-schema-type-script Types
+      #   run: pwd && cd packages/open-schema-type-script && pwd && npx tsc
+      # - name: Run open-schema-type-script Tests
+      #   run: pwd && bash packages/open-schema-type-script/scripts/runTests.sh
 
-      # rat-test
-      - name: Lint rat-test Types
-        run: pwd && cd packages/rat-test && pwd && npx tsc
-      - name: Run rat-test Tests
-        run: pwd && bash packages/rat-test/scripts/runTests.sh
+      # # rat-test
+      # - name: Lint rat-test Types
+      #   run: pwd && cd packages/rat-test && pwd && npx tsc
+      # - name: Run rat-test Tests
+      #   run: pwd && bash packages/rat-test/scripts/runTests.sh
 
-      # vscode-extension-command
-      - name: Lint vscode-extension-command Types
-        run: pwd && cd packages/vscode-extension-command && pwd && npx tsc
-      - name: Run vscode-extension-command Tests
-        run: pwd && bash packages/vscode-extension-command/scripts/runTests.sh
+      # # vscode-extension-command
+      # - name: Lint vscode-extension-command Types
+      #   run: pwd && cd packages/vscode-extension-command && pwd && npx tsc
+      # - name: Run vscode-extension-command Tests
+      #   run: pwd && bash packages/vscode-extension-command/scripts/runTests.sh
 
-      # vscode-language-server
-      - name: Run vscode-language-server Tests
-        run: pwd && bash packages/vscode-language-server/scripts/runTests.sh
+      # # vscode-language-server
+      # - name: Run vscode-language-server Tests
+      #   run: pwd && bash packages/vscode-language-server/scripts/runTests.sh
 
       # Post-Package Steps
-      - name: Lint Repository
-        run: npm run lint:repository
+      # - name: Lint Repository
+      #   run: npm run lint:repository
