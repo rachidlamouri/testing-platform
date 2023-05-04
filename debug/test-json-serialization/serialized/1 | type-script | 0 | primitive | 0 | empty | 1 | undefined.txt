@@ -1,11 +1,1 @@
-Error: Unable to stringify datum of type "undefined"
-    at Object.multilineSerialize (/home/rachid/projects/testing-platform/packages/voictents-and-estinants-engine/src/utilities/json.ts:42:13)
-    at Object.lossyMultilineSerialize (/home/rachid/projects/testing-platform/packages/voictents-and-estinants-engine/src/utilities/json.ts:34:24)
-    at JsonSerializableVoictent.addHubblepup (/home/rachid/projects/testing-platform/packages/voictents-and-estinants-engine/src/example-programs/jsonSerializableVoictent.ts:102:40)
-    at /home/rachid/projects/testing-platform/packages/voictents-and-estinants-engine/src/example-programs/jsonSerializableVoictent.ts:82:12
-    at Array.forEach (<anonymous>)
-    at new JsonSerializableVoictent (/home/rachid/projects/testing-platform/packages/voictents-and-estinants-engine/src/example-programs/jsonSerializableVoictent.ts:81:27)
-    at Object.<anonymous> (/home/rachid/projects/testing-platform/packages/voictents-and-estinants-engine/src/example-programs/testJsonSerialization.ts:13:5)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Module.m._compile (/home/rachid/projects/testing-platform/node_modules/ts-node/src/index.ts:1618:23)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+Unable to stringify datum of type "undefined"
