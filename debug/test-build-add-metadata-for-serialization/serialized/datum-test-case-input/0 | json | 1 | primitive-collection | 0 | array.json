@@ -1,0 +1,10 @@
+{
+  "zorn": "0/json/1/primitive-collection/0/array",
+  "grition": [
+    "foo",
+    123,
+    true,
+    false,
+    null
+  ]
+}
