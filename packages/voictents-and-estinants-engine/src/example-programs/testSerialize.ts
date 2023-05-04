@@ -9,7 +9,8 @@ import { buildAddMetadataForSerialization } from './buildAddMetadataForSerializa
 import { JsonSerializableVoictentConfiguration } from './jsonSerializableVoictent';
 import { SerializableVoictent } from './serializableVoictent';
 
-type SConfiguration = JsonSerializableVoictentConfiguration<'serialized'>;
+type SerializedConfiguration =
+  JsonSerializableVoictentConfiguration<'serialized'>;
 
 digikikify({
   inputVoictentList: [
@@ -17,7 +18,7 @@ digikikify({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
       initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),
-    new SerializableVoictent<SConfiguration>({
+    new SerializableVoictent<SerializedConfiguration>({
       nameSpace: 'test-serialize',
       gepp: 'serialized',
       initialHubblepupTuple: [],
@@ -27,7 +28,7 @@ digikikify({
   estinantTuple: [
     buildAddMetadataForSerialization<
       DatumTestCaseInputVoictentConfiguration,
-      SConfiguration
+      SerializedConfiguration
     >({
       inputGepp: DATUM_TEST_CASE_INPUT_GEPP,
       outputGepp: 'serialized',

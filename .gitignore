@@ -4,3 +4,6 @@ node_modules/
 debug/*
 !debug/test-json-serialization
 !debug/test-build-add-metadata-for-serialization
+!debug/test-get-type-script-typed-datum
+!debug/test-get-custom-typed-datum
+!debug/test-serialize
