@@ -1,0 +1,167 @@
+"zorn": "1/type-script/2/collection-collection/1/set"
+"grition":
+  # Set
+  - - null
+    - ~
+    - "this is a single line string"
+    - "---
+      this
+        is
+      a multiline
+        string
+      ---"
+      # bigint
+    - 99999999999999999999999999
+    - 12.34
+    - 123
+    - 0.123
+    - true
+    - false
+      # symbol: ""
+    - "Symbol 0"
+      # symbol: "this is a symbol description"
+    - "Symbol 1"
+    # Set
+  - - null
+    - ~
+    - "this is a single line string"
+    - "---
+      this
+        is
+      a multiline
+        string
+      ---"
+      # bigint
+    - 99999999999999999999999999
+    - 12.34
+    - 123
+    - 0.123
+    - true
+    - false
+      # symbol: ""
+    - "Symbol 0"
+      # symbol: "this is a symbol description"
+    - "Symbol 1"
+  - "key-0": null
+    "key-1": ~
+    "key-2": "this is a single line string"
+    "key-3":
+      "---
+      this
+        is
+      a multiline
+        string
+      ---"
+    "key-4":
+      # bigint
+      99999999999999999999999999
+    "key-5": 12.34
+    "key-6": 123
+    "key-7": 0.123
+    "key-8": true
+    "key-9": false
+    "key-10":
+      # symbol: ""
+      "Symbol 0"
+    "key-11":
+      # symbol: "this is a symbol description"
+      "Symbol 1"
+    # symbol: "key-0"
+  - "Symbol 2": null
+    # symbol: "key-1"
+    "Symbol 3": ~
+    # symbol: "key-2"
+    "Symbol 4": "this is a single line string"
+    # symbol: "key-3"
+    "Symbol 5":
+      "---
+      this
+        is
+      a multiline
+        string
+      ---"
+    # symbol: "key-4"
+    "Symbol 6":
+      # bigint
+      99999999999999999999999999
+    # symbol: "key-5"
+    "Symbol 7": 12.34
+    # symbol: "key-6"
+    "Symbol 8": 123
+    # symbol: "key-7"
+    "Symbol 9": 0.123
+    # symbol: "key-8"
+    "Symbol 10": true
+    # symbol: "key-9"
+    "Symbol 11": false
+    # symbol: "key-10"
+    "Symbol 12":
+      # symbol: ""
+      "Symbol 0"
+    # symbol: "key-11"
+    "Symbol 13":
+      # symbol: "this is a symbol description"
+      "Symbol 1"
+    # CustomObject
+  - "datumList":
+      - null
+      - ~
+      - "this is a single line string"
+      - "---
+        this
+          is
+        a multiline
+          string
+        ---"
+        # bigint
+      - 99999999999999999999999999
+      - 12.34
+      - 123
+      - 0.123
+      - true
+      - false
+        # symbol: ""
+      - "Symbol 0"
+        # symbol: "this is a symbol description"
+      - "Symbol 1"
+    # Map
+  - - - null
+      - null
+    - - ~
+      - ~
+    - - "this is a single line string"
+      - "this is a single line string"
+    - - "---
+        this
+          is
+        a multiline
+          string
+        ---"
+      - "---
+        this
+          is
+        a multiline
+          string
+        ---"
+        # bigint
+    - - 99999999999999999999999999
+        # bigint
+      - 99999999999999999999999999
+    - - 12.34
+      - 12.34
+    - - 123
+      - 123
+    - - 0.123
+      - 0.123
+    - - true
+      - true
+    - - false
+      - false
+        # symbol: ""
+    - - "Symbol 0"
+        # symbol: ""
+      - "Symbol 0"
+        # symbol: "this is a symbol description"
+    - - "Symbol 1"
+        # symbol: "this is a symbol description"
+      - "Symbol 1"

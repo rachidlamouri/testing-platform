@@ -3,5 +3,6 @@ export const serializeError = (error: Error): string => {
     throw Error('"stack" is undefined');
   }
 
-  return error.stack;
+  // TODO: consider updating this to use the stack trace. The stack trace differs between local and the CI though
+  return error.message;
 };

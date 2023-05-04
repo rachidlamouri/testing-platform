@@ -15,7 +15,8 @@ import {
   JsonSerializableVoictentConfiguration,
 } from './jsonSerializableVoictent';
 
-type SConfiguration = JsonSerializableVoictentConfiguration<'serialized'>;
+type SerializedConfiguration =
+  JsonSerializableVoictentConfiguration<'serialized'>;
 type TypedDatumVoictentConfiguration = InMemoryVoictentConfiguration<
   'typed-datum',
   unknown
@@ -31,7 +32,7 @@ digikikify({
       gepp: 'typed-datum',
       initialHubblepupTuple: [],
     }),
-    new JsonSerializableVoictent<SConfiguration>({
+    new JsonSerializableVoictent<SerializedConfiguration>({
       nameSpace: 'test-get-custom-typed-datum',
       gepp: 'serialized',
       initialHubblepupTuple: [],
@@ -68,7 +69,7 @@ digikikify({
 
     buildAddMetadataForSerialization<
       TypedDatumVoictentConfiguration,
-      SConfiguration
+      SerializedConfiguration
     >({
       inputGepp: 'typed-datum',
       outputGepp: 'serialized',
