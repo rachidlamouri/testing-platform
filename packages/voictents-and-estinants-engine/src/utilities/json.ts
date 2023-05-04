@@ -37,7 +37,12 @@ export const jsonUtils = {
     }
   },
   multilineSerialize: (datum: Json): string => {
-    return JSON.stringify(datum, null, 2);
+    const stringified = JSON.stringify(datum, null, 2);
+    if (stringified === undefined) {
+      throw new Error(`Unable to stringify datum of type "${typeof datum}"`);
+    }
+
+    return stringified;
   },
   parse: (text: string): Json => JSON.parse(text) as Json,
 };
