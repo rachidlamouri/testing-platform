@@ -1,4 +1,3 @@
-import * as uuid from 'uuid';
 import {
   FileSystemNodeMetadata,
   getNestedFileSystemNodeMetadataList,
@@ -17,6 +16,7 @@ import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
 } from './fileSystemObjectEnumeratorConfiguration';
 import { getFileMetadata } from './getFileMetadata';
+import { getTextDigest } from '../../../utilities/getTextDigest';
 
 const partsToCamel = (x: string[]): string => {
   return x
@@ -92,7 +92,7 @@ export const enumerateFileSystemObjects = buildEstinant({
         return {
           zorn: nodePath,
           grition: {
-            instanceId: uuid.v4(),
+            instanceId: getTextDigest(nodePath),
             directoryName,
             directoryPath: nodePath,
             directoryPathPartList,
@@ -111,7 +111,7 @@ export const enumerateFileSystemObjects = buildEstinant({
         } = getFileMetadata(nodePath);
 
         const grition: FileGrition = {
-          instanceId: uuid.v4(),
+          instanceId: getTextDigest(nodePath),
           filePath: nodePath,
           directoryPath,
           onDiskFileName: {

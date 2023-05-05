@@ -1,5 +1,4 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
-import * as uuid from 'uuid';
 import { splitList } from '../../../utilities/splitList';
 import {
   flattenCallExpressionChain,
@@ -42,6 +41,7 @@ import {
   EstinantInput2,
   EstinantOutput2,
 } from './engineEstinant2';
+import { getTextDigest } from '../../../utilities/getTextDigest';
 
 type EstinantName = 'getEngineEstinant';
 
@@ -319,6 +319,8 @@ export const getEngineEstinant = buildEstinant({
       };
     }
 
+    const estinantName = estinantLocator.identifierName;
+
     const estinantInputOutputList = inputOutputCallExpressionList.map<
       EstinantInput2 | EstinantOutput2
     >(({ isInput, typeNode }, index) => {
@@ -327,7 +329,7 @@ export const getEngineEstinant = buildEstinant({
 
       if (isInput) {
         return {
-          id: uuid.v4(),
+          id: getTextDigest(`${estinantName} | input-${index}`),
           voictentName,
           isInput,
           index,
@@ -335,7 +337,7 @@ export const getEngineEstinant = buildEstinant({
       }
 
       return {
-        id: uuid.v4(),
+        id: getTextDigest(`${estinantName} | output-${index}`),
         voictentName,
         isInput,
         index: null,
@@ -424,8 +426,8 @@ export const getEngineEstinant = buildEstinant({
         {
           zorn: engineEstinantLocatorOdeshin.zorn,
           grition: {
-            id: uuid.v4(),
-            estinantName: estinantLocator.identifierName,
+            id: getTextDigest(estinantName),
+            estinantName,
             ...estinantLocator,
             commentText: commentedBodyDeclaration?.commentText ?? '',
             inputList,

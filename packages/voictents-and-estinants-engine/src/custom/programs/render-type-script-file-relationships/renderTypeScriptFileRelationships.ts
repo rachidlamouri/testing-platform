@@ -32,12 +32,17 @@ import { constructKnowledgeGraph } from '../../programmable-units/graph-visualiz
 import { getSvgMetadataList } from '../../programmable-units/type-script-file-relationships/getSvgMetadataList';
 import { markUnusedNodes } from '../../programmable-units/type-script-file-relationships/markUnusedNodes';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
+import { getOutputFileCount } from './getOutputFileCount';
 
 /**
  * Assembles a knowledge graph of the TypeScript files in this package and their
  * dependency relationships. It groups files into "boundaries" to make the file
  * system easier to visualize and to establish which groups of files cover which
  * concerns.
+ *
+ * @note Capturing the output file digest for this program resulted in a
+ * non-deterministic result between my local environment and the CI environment due
+ * to inconsistent floating point numbers in the layout
  */
 digikikify({
   initialVoictentsByGepp: {
@@ -105,6 +110,8 @@ digikikify({
     renderGraphvizCodeToSvgDocument,
     getSvgMetadataList,
     constructKnowledgeGraph,
+
+    getOutputFileCount,
 
     markUnusedNodes,
     reportErrors,

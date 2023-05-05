@@ -1,4 +1,3 @@
-import * as uuid from 'uuid';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
@@ -14,6 +13,7 @@ import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
   EngineProgramLocator2Voictent,
 } from './engineProgramLocator2';
+import { getTextDigest } from '../../../utilities/getTextDigest';
 
 /**
  * Joins the program locator to its transforms in order to
@@ -42,7 +42,7 @@ export const getEngineProgram2 = buildEstinant({
   })
   .onPinbe((engineProgramLocator, estinantList) => {
     return {
-      id: uuid.v4(),
+      id: getTextDigest(engineProgramLocator.programName),
       programName: engineProgramLocator.programName,
       description: engineProgramLocator.description,
       filePath: engineProgramLocator.filePath,

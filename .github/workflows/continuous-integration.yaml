@@ -13,10 +13,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
-      - name: Install Dependencies
+      - name: Install TypeScript Dependencies
         # run: npm clean-install && cd packages/vscode-language-server/client && npm
         #   install && cd ../server && npm install
         run: npm clean-install
+
+      - name: Install Shell Dependencies
+        run: sudo apt-get install graphviz -y
+
       - name: Lint Markdown
         run: npm run lint:md
       - name: Lint TypeScript

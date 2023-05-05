@@ -7,3 +7,17 @@ debug/*
 !debug/test-get-type-script-typed-datum
 !debug/test-get-custom-typed-datum
 !debug/test-serialize
+
+!debug/testGraphRender
+debug/testGraphRender/*
+!debug/testGraphRender/sanity-snapshot
+
+!debug/modelPrograms
+debug/modelPrograms/*
+!debug/modelPrograms/sanity-snapshot
+
+!debug/renderTypeScriptFileRelationships
+debug/renderTypeScriptFileRelationships/*
+!debug/renderTypeScriptFileRelationships/sanity-snapshot
+
+snapshot/
