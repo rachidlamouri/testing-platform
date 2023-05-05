@@ -7,3 +7,5 @@ debug/*
 !debug/test-get-type-script-typed-datum
 !debug/test-get-custom-typed-datum
 !debug/test-serialize
+
+snapshot/
