@@ -1,5 +1,6 @@
 import { Zorn } from '../../../utilities/semantic-types/zorn';
 import { GenericIndexedHubblepup, Hubblepup } from '../quirm/hubblepup';
+import { GenericRightInputHubblepupVicken } from '../vicken/rightInputVicken';
 
 /**
  * A function that converts a Hubblepup to an identifying Zorn.
@@ -8,3 +9,7 @@ import { GenericIndexedHubblepup, Hubblepup } from '../quirm/hubblepup';
 export type Croarder = (hubblepup: Hubblepup) => Zorn;
 
 export type Croader2 = (rightIndexedHubblepup: GenericIndexedHubblepup) => Zorn;
+
+export type Croader3<TRightVicken extends GenericRightInputHubblepupVicken> = (
+  rightTropoignantInput: TRightVicken['tropoignantInput'],
+) => TRightVicken['zornTupleOption'];

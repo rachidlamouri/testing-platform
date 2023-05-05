@@ -1,3 +1,4 @@
+import { Tuple } from '../../utilities/semantic-types/tuple';
 import {
   Hubblepup,
   HubblepupIndexByName,
@@ -27,3 +28,5 @@ export type GenericVoque = Voque<
   HubblepupIndexByName,
   unknown
 >;
+
+export type GenericVoqueTuple = Tuple<GenericVoque>;
