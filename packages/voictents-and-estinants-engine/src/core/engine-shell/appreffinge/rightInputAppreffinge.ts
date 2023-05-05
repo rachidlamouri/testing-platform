@@ -27,6 +27,11 @@ export type RightInputAppreffinge<
       }
 >;
 
+export type GenericRightInputAppreffinge = RightInputAppreffinge<
+  GenericLeftInputVicken,
+  GenericRightInputVicken
+>;
+
 export type InputVickenTupleToRightInputAppreffingeTuple<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,

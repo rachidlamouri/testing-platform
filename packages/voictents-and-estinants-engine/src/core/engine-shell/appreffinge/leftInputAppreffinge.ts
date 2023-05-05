@@ -6,3 +6,6 @@ export type LeftInputAppreffinge<
   gepp: TLeftInputVicken['gepp'];
   isWibiz: TLeftInputVicken['isWibiz'];
 };
+
+export type GenericLeftInputAppreffinge =
+  LeftInputAppreffinge<GenericLeftInputVicken>;

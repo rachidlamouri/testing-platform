@@ -2,9 +2,9 @@ import {
   LeftAppreffinge,
   RightAppreffingeTuple,
 } from '../appreffinge/appreffinge';
-import { LeftInputAppreffinge } from '../appreffinge/leftAppreffinge';
+import { LeftInputAppreffinge } from '../appreffinge/leftInputAppreffinge';
 import { OutputAppreffinge } from '../appreffinge/outputApreffinge';
-import { InputVickenTupleToRightInputAppreffingeTuple } from '../appreffinge/rightAppreffinge';
+import { InputVickenTupleToRightInputAppreffingeTuple } from '../appreffinge/rightInputAppreffinge';
 import { GenericLeftInputVicken } from '../vicken/leftInputVicken';
 import { GenericOutputVicken } from '../vicken/outputVicken';
 import { GenericRightInputVickenTuple } from '../vicken/rightInputVicken';

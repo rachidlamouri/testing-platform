@@ -13,3 +13,5 @@ export type Croader2 = (rightIndexedHubblepup: GenericIndexedHubblepup) => Zorn;
 export type Croader3<TRightVicken extends GenericRightInputHubblepupVicken> = (
   rightTropoignantInput: TRightVicken['tropoignantInput'],
 ) => TRightVicken['zornTupleOption'];
+
+export type GenericCroader3 = Croader3<GenericRightInputHubblepupVicken>;

@@ -18,3 +18,8 @@ export type Framation3<
 > = (
   leftTropoignantInput: TLeftInputVicken['tropoignantInput'],
 ) => TRightInputVicken['zornTuple'];
+
+export type GenericFramation3 = Framation3<
+  GenericLeftInputVicken,
+  GenericRightInputHubblepupVicken
+>;
