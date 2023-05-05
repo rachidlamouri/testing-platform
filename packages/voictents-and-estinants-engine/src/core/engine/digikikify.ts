@@ -17,7 +17,11 @@ import {
   RightVoictentItem2Dreanor,
   RightVoictentItemDreanor,
 } from '../internal/dreanor/dreanor';
-import { Estinant, GenericEstinant2 } from '../engine-shell/estinant/estinant';
+import {
+  Estinant,
+  GenericEstinant2,
+  UnsafeEstinant2Tuple,
+} from '../engine-shell/estinant/estinant';
 import { Gepp } from '../engine-shell/voictent/gepp';
 import {
   GenericIndexedHubblepup,
@@ -52,7 +56,8 @@ export type DigikikifierInput = {
   inputVoictentList?: GenericVoictent2[];
   initialQuirmTuple?: QuirmTuple;
   estinantTuple: Tuple<Estinant | GenericEstinant2>;
-  onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler;
+  /** @deprecated */
+  onHubblepupAddedToVoictents?: OnHubblepupAddedToVoictentsHandler;
   onFinish?: RuntimeStatisticsHandler;
 };
 
@@ -118,9 +123,11 @@ export const digikikify = ({
   const addToTabilly = (quirmTuple: QuirmTuple): void => {
     tabilly.addHubblepupsToVoictents(quirmTuple);
 
-    quirmTuple.forEach((quirm) => {
-      onHubblepupAddedToVoictents(quirm);
-    });
+    if (onHubblepupAddedToVoictents !== undefined) {
+      quirmTuple.forEach((quirm) => {
+        onHubblepupAddedToVoictents(quirm);
+      });
+    }
   };
 
   const createLanbe2 = (
@@ -630,4 +637,22 @@ export const digikikify = ({
   if (onFinish) {
     onFinish(statistics);
   }
+};
+
+export type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
+  inputVoictentList: GenericVoictent2[];
+  estinantTuple: TEstinantTuple;
+  onFinish?: RuntimeStatisticsHandler;
+};
+
+export const digikikify2 = <TEstinantTuple extends UnsafeEstinant2Tuple>({
+  inputVoictentList = [],
+  estinantTuple,
+  onFinish,
+}: DigikikifierInput2<TEstinantTuple>): void => {
+  digikikify({
+    inputVoictentList,
+    estinantTuple,
+    onFinish,
+  });
 };

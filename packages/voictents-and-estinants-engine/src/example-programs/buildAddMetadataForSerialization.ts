@@ -1,6 +1,6 @@
-import { Estinant } from '../core/engine-shell/estinant/estinant';
-import { GenericIndexedHubblepup } from '../core/engine-shell/quirm/hubblepup';
-import { Quirm } from '../core/engine-shell/quirm/quirm';
+import { Estinant2 } from '../core/engine-shell/estinant/estinant';
+import { LeftInputHubblepupVicken } from '../core/engine-shell/vicken/leftInputVicken';
+import { OutputVicken } from '../core/engine-shell/vicken/outputVicken';
 import {
   GenericSerializableSourceVoque,
   GenericSerializableVoque,
@@ -22,15 +22,27 @@ export const buildAddMetadataForSerialization = <
 >({
   inputGepp,
   outputGepp,
-}: SerializerBuilderInput<TInputVoictent, TOutputVoictent>): Estinant => {
-  const addMetadataForSerialization: Estinant = {
+}: SerializerBuilderInput<TInputVoictent, TOutputVoictent>): Estinant2<
+  LeftInputHubblepupVicken<GenericSerializableSourceVoque>,
+  [],
+  OutputVicken<[GenericSerializableVoque]>
+> => {
+  const addMetadataForSerialization: Estinant2<
+    LeftInputHubblepupVicken<GenericSerializableSourceVoque>,
+    [],
+    OutputVicken<[GenericSerializableVoque]>
+  > = {
+    version: 2,
     name: `serialize/${inputGepp}`,
-    leftAppreffinge: {
+    leftInputAppreffinge: {
       gepp: inputGepp,
       isWibiz: false,
     },
-    rightAppreffingeTuple: [],
-    tropoig: (rawInput: GenericIndexedHubblepup) => {
+    rightInputAppreffingeTuple: [],
+    outputAppreffinge: {
+      geppTuple: [outputGepp],
+    },
+    tropoig: (rawInput) => {
       const indexedSerializable = rawInput as IndexedSerializable;
 
       const outputHubblepup: Serializable = {
@@ -39,12 +51,9 @@ export const buildAddMetadataForSerialization = <
         datum: indexedSerializable.hubblepup,
       };
 
-      const outputQuirm: Quirm = {
-        gepp: outputGepp,
-        hubblepup: outputHubblepup,
+      return {
+        [outputGepp]: [outputHubblepup],
       };
-
-      return [outputQuirm];
     },
   };
 

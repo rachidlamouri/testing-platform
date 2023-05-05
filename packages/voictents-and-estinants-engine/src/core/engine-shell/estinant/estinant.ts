@@ -1,3 +1,4 @@
+import { Tuple } from '../../../utilities/semantic-types/tuple';
 import {
   LeftAppreffinge,
   RightAppreffingeTuple,
@@ -5,9 +6,18 @@ import {
 import { LeftInputAppreffinge } from '../appreffinge/leftInputAppreffinge';
 import { OutputAppreffinge } from '../appreffinge/outputApreffinge';
 import { InputVickenTupleToRightInputAppreffingeTuple } from '../appreffinge/rightInputAppreffinge';
-import { GenericLeftInputVicken } from '../vicken/leftInputVicken';
-import { GenericOutputVicken } from '../vicken/outputVicken';
-import { GenericRightInputVickenTuple } from '../vicken/rightInputVicken';
+import {
+  GenericLeftInputVicken,
+  UnsafeLeftInputVicken,
+} from '../vicken/leftInputVicken';
+import {
+  GenericOutputVicken,
+  UnsafeOutputVicken,
+} from '../vicken/outputVicken';
+import {
+  GenericRightInputVickenTuple,
+  UnsafeRightInputVickenTuple,
+} from '../vicken/rightInputVicken';
 import { Tropoignant, Tropoignant2 } from './tropoignant';
 
 /**
@@ -49,3 +59,13 @@ export type GenericEstinant2 = Estinant2<
   GenericRightInputVickenTuple,
   GenericOutputVicken
 >;
+
+export type GenericEstinant2Tuple = Tuple<GenericEstinant2>;
+
+export type UnsafeEstinant2 = Estinant2<
+  UnsafeLeftInputVicken,
+  UnsafeRightInputVickenTuple,
+  UnsafeOutputVicken
+>;
+
+export type UnsafeEstinant2Tuple = Tuple<UnsafeEstinant2>;

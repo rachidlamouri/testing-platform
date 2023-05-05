@@ -1,4 +1,4 @@
-import { GenericVoque } from '../../engine/voque';
+import { GenericVoque, UnsafeVoque } from '../../engine/voque';
 import { ZornTuple } from '../../../utilities/semantic-types/zorn';
 import { Gepp } from '../voictent/gepp';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
@@ -31,6 +31,11 @@ export type GenericRightInputHubblepupVicken = RightInputHubblepupVicken<
   ZornTuple
 >;
 
+export type UnsafeRightInputHubblepupVicken = RightInputHubblepupVicken<
+  UnsafeVoque,
+  ZornTuple
+>;
+
 export type RightInputVoictentVicken<TVoque extends GenericVoque> =
   BaseRightInputVicken<
     TVoque['gepp'],
@@ -42,11 +47,20 @@ export type RightInputVoictentVicken<TVoque extends GenericVoque> =
 export type GenericRightInputVoictentVicken =
   RightInputVoictentVicken<GenericVoque>;
 
+export type UnsafeRightInputVoictentVicken =
+  RightInputVoictentVicken<UnsafeVoque>;
+
 export type GenericRightInputVicken =
   | GenericRightInputHubblepupVicken
   | GenericRightInputVoictentVicken;
 
+export type UnsafeRightInputVicken =
+  | UnsafeRightInputHubblepupVicken
+  | UnsafeRightInputVoictentVicken;
+
 export type GenericRightInputVickenTuple = Tuple<GenericRightInputVicken>;
+
+export type UnsafeRightInputVickenTuple = Tuple<UnsafeRightInputVicken>;
 
 export type RightInputVickenTupleTropoignantInputTuple<
   TRightInputVickenTuple extends GenericRightInputVickenTuple,

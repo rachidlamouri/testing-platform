@@ -28,5 +28,9 @@ export type GenericVoque = Voque<
   HubblepupIndexByName,
   unknown
 >;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type UnsafeVoque = Voque<Gepp, any, any, any, any>;
 
 export type GenericVoqueTuple = Tuple<GenericVoque>;
+
+export type UnsafeVoqueTuple = Tuple<UnsafeVoque>;
