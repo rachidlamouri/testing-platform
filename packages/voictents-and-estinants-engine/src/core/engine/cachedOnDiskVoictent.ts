@@ -2,7 +2,7 @@ import fs from 'fs';
 import { posix } from 'path';
 import { Grition } from '../../custom/adapter/grition';
 import { Gepp } from '../engine-shell/voictent/gepp';
-import { VoictentConfiguration } from './voictentConfiguration';
+import { Voque } from './voque';
 import { SerializableIndexByName } from '../../example-programs/serializableVoictent';
 import { Voictent2 } from './voictent2';
 import {
@@ -41,10 +41,10 @@ export type CachedCacheable<TGrition extends Grition> = BaseCacheable<TGrition>;
 
 export type CachedOnDiskIndexByName = SerializableIndexByName;
 
-export type CachedOnDiskVoictentConfiguration<
+export type CachedOnDiskVoque<
   TGepp extends Gepp,
   TGrition extends Json,
-> = VoictentConfiguration<
+> = Voque<
   TGepp,
   CacheableAccessor<TGrition>,
   CachedCacheable<TGrition>,
@@ -52,28 +52,25 @@ export type CachedOnDiskVoictentConfiguration<
   CachedCacheable<TGrition>[]
 >;
 
-export type GenericCachedOnDiskVoictentConfiguration =
-  CachedOnDiskVoictentConfiguration<Gepp, Json>;
+export type GenericCachedOnDiskVoque = CachedOnDiskVoque<Gepp, Json>;
 
 export type CachedOnDiskVoictentConstructorInput<
-  TVoictentConfiguration extends GenericCachedOnDiskVoictentConfiguration,
+  TVoque extends GenericCachedOnDiskVoque,
 > = {
   nameSpace: string;
-  gepp: TVoictentConfiguration['gepp'];
+  gepp: TVoque['gepp'];
 };
 
-export class CachedOnDiskVoictent<
-  TVoictentConfiguration extends GenericCachedOnDiskVoictentConfiguration,
-> implements Voictent2<TVoictentConfiguration>
+export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
+  implements Voictent2<TVoque>
 {
   public readonly nameSpace: string;
 
-  public readonly gepp: TVoictentConfiguration['gepp'];
+  public readonly gepp: TVoque['gepp'];
 
-  hubblepupTuple: TVoictentConfiguration['emittedVoictent'] = [];
+  hubblepupTuple: TVoque['emittedVoictent'] = [];
 
-  indicesByLanbe: Map<VoictentItemLanbe2<TVoictentConfiguration>, number> =
-    new Map();
+  indicesByLanbe: Map<VoictentItemLanbe2<TVoque>, number> = new Map();
 
   static minimumInclusiveIndex = -1;
 
@@ -90,14 +87,12 @@ export class CachedOnDiskVoictent<
   constructor({
     nameSpace,
     gepp,
-  }: CachedOnDiskVoictentConstructorInput<TVoictentConfiguration>) {
+  }: CachedOnDiskVoictentConstructorInput<TVoque>) {
     this.nameSpace = nameSpace;
     this.gepp = gepp;
   }
 
-  addHubblepup(
-    receivedHubblepup: TVoictentConfiguration['receivedHubblepup'],
-  ): void {
+  addHubblepup(receivedHubblepup: TVoque['receivedHubblepup']): void {
     this.receivedHubblepup.thisTick = true;
 
     const directoryPath = posix.join(ROOT_DIRECTORY, this.nameSpace, this.gepp);
@@ -107,19 +102,17 @@ export class CachedOnDiskVoictent<
 
     const filePath = posix.join(directoryPath, fileName);
 
-    let currentCachedHubblepup:
-      | TVoictentConfiguration['emittedHubblepup']
-      | null;
+    let currentCachedHubblepup: TVoque['emittedHubblepup'] | null;
     if (fs.existsSync(filePath)) {
       const cachedText = fs.readFileSync(filePath, 'utf8');
       currentCachedHubblepup = jsonUtils.parse(
         cachedText,
-      ) as TVoictentConfiguration['emittedHubblepup'];
+      ) as TVoque['emittedHubblepup'];
     } else {
       currentCachedHubblepup = null;
     }
 
-    let emittedHubblepup: TVoictentConfiguration['emittedHubblepup'];
+    let emittedHubblepup: TVoque['emittedHubblepup'];
     if (
       currentCachedHubblepup === null ||
       receivedHubblepup.lastModified > currentCachedHubblepup.lastModified
@@ -179,10 +172,8 @@ export class CachedOnDiskVoictent<
     return lanbe;
   }
 
-  createVoictentItemLanbe(
-    debugName: string,
-  ): VoictentItemLanbe2<TVoictentConfiguration> {
-    const lanbe: VoictentItemLanbe2<TVoictentConfiguration> = {
+  createVoictentItemLanbe(debugName: string): VoictentItemLanbe2<TVoque> {
+    const lanbe: VoictentItemLanbe2<TVoque> = {
       typeName: LanbeTypeName.VoictentItemLanbe2,
       debugName,
       hasNext: () => {
@@ -205,9 +196,7 @@ export class CachedOnDiskVoictent<
     return lanbe;
   }
 
-  private getLanbeIndex(
-    lanbe: VoictentItemLanbe2<TVoictentConfiguration>,
-  ): number {
+  private getLanbeIndex(lanbe: VoictentItemLanbe2<TVoque>): number {
     const index = this.indicesByLanbe.get(lanbe);
 
     if (index === undefined) {
@@ -221,12 +210,12 @@ export class CachedOnDiskVoictent<
     return this.hubblepupTuple.length;
   }
 
-  private hasNext(lanbe: VoictentItemLanbe2<TVoictentConfiguration>): boolean {
+  private hasNext(lanbe: VoictentItemLanbe2<TVoque>): boolean {
     const currentIndex = this.getLanbeIndex(lanbe);
     return this.size > 0 && currentIndex < this.maximumInclusiveIndex;
   }
 
-  private advance(lanbe: VoictentItemLanbe2<TVoictentConfiguration>): void {
+  private advance(lanbe: VoictentItemLanbe2<TVoque>): void {
     if (this.hasNext(lanbe)) {
       const currentIndex = this.getLanbeIndex(lanbe);
       this.indicesByLanbe.set(lanbe, currentIndex + 1);
@@ -234,8 +223,8 @@ export class CachedOnDiskVoictent<
   }
 
   private dereference(
-    lanbe: VoictentItemLanbe2<TVoictentConfiguration>,
-  ): TVoictentConfiguration['indexedEmittedHubblepup'] {
+    lanbe: VoictentItemLanbe2<TVoque>,
+  ): TVoque['indexedEmittedHubblepup'] {
     const listIndex = this.getLanbeIndex(lanbe);
 
     if (listIndex === CachedOnDiskVoictent.minimumInclusiveIndex) {

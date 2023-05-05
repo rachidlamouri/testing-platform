@@ -5,7 +5,7 @@ import {
 } from '../engine-shell/quirm/hubblepup';
 import { Gepp } from '../engine-shell/voictent/gepp';
 
-export type VoictentConfiguration<
+export type Voque<
   TGepp extends Gepp,
   TReceivedHubblepup extends Hubblepup,
   TEmittedHubblepup extends Hubblepup,
@@ -20,7 +20,7 @@ export type VoictentConfiguration<
   emittedVoictent: TEmittedVoictent;
 };
 
-export type GenericVoictentConfiguration = VoictentConfiguration<
+export type GenericVoque = Voque<
   Gepp,
   Hubblepup,
   Hubblepup,

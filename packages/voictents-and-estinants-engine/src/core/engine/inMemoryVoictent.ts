@@ -10,7 +10,7 @@ import {
   ReferenceTypeName,
 } from '../engine-shell/voictent/lanbe';
 import { Voictent2 } from './voictent2';
-import { VoictentConfiguration } from './voictentConfiguration';
+import { Voque } from './voque';
 
 export type InMemoryIndexByName = Merge<
   SerializableIndexByName,
@@ -31,37 +31,28 @@ export type ReceivedHubblepupState = {
   thisTick: boolean | null;
 };
 
-export type InMemoryVoictentConfiguration<
+export type InMemoryVoque<
   TGepp extends Gepp,
   THubblepup extends Hubblepup,
-> = VoictentConfiguration<
-  TGepp,
-  THubblepup,
-  THubblepup,
-  InMemoryIndexByName,
-  THubblepup[]
->;
+> = Voque<TGepp, THubblepup, THubblepup, InMemoryIndexByName, THubblepup[]>;
 
-export type GenericInMemoryVoictentConfiguration =
-  InMemoryVoictentConfiguration<Gepp, Hubblepup>;
+export type GenericInMemoryVoque = InMemoryVoque<Gepp, Hubblepup>;
 
 export type InMemoryVoictentConstructorInput<
-  TVoictentConfiguration extends GenericInMemoryVoictentConfiguration,
+  TVoque extends GenericInMemoryVoque,
 > = {
-  gepp: TVoictentConfiguration['gepp'];
-  initialHubblepupTuple: TVoictentConfiguration['emittedVoictent'];
+  gepp: TVoque['gepp'];
+  initialHubblepupTuple: TVoque['emittedVoictent'];
 };
 
-export class InMemoryVoictent<
-  TVoictentConfiguration extends GenericInMemoryVoictentConfiguration,
-> implements Voictent2<TVoictentConfiguration>
+export class InMemoryVoictent<TVoque extends GenericInMemoryVoque>
+  implements Voictent2<TVoque>
 {
-  public readonly gepp: TVoictentConfiguration['gepp'];
+  public readonly gepp: TVoque['gepp'];
 
-  hubblepupTuple: TVoictentConfiguration['emittedVoictent'] = [];
+  hubblepupTuple: TVoque['emittedVoictent'] = [];
 
-  indicesByLanbe: Map<VoictentItemLanbe2<TVoictentConfiguration>, number> =
-    new Map();
+  indicesByLanbe: Map<VoictentItemLanbe2<TVoque>, number> = new Map();
 
   static minimumInclusiveIndex = -1;
 
@@ -78,7 +69,7 @@ export class InMemoryVoictent<
   constructor({
     gepp,
     initialHubblepupTuple,
-  }: InMemoryVoictentConstructorInput<TVoictentConfiguration>) {
+  }: InMemoryVoictentConstructorInput<TVoque>) {
     this.gepp = gepp;
 
     initialHubblepupTuple.forEach((hubblepup) => {
@@ -86,7 +77,7 @@ export class InMemoryVoictent<
     });
   }
 
-  addHubblepup(hubblepup: TVoictentConfiguration['receivedHubblepup']): void {
+  addHubblepup(hubblepup: TVoque['receivedHubblepup']): void {
     this.receivedHubblepup.thisTick = true;
 
     this.hubblepupTuple.push(hubblepup);
@@ -133,10 +124,8 @@ export class InMemoryVoictent<
     return lanbe;
   }
 
-  createVoictentItemLanbe(
-    debugName: string,
-  ): VoictentItemLanbe2<TVoictentConfiguration> {
-    const lanbe: VoictentItemLanbe2<TVoictentConfiguration> = {
+  createVoictentItemLanbe(debugName: string): VoictentItemLanbe2<TVoque> {
+    const lanbe: VoictentItemLanbe2<TVoque> = {
       typeName: LanbeTypeName.VoictentItemLanbe2,
       debugName,
       hasNext: () => {
@@ -159,9 +148,7 @@ export class InMemoryVoictent<
     return lanbe;
   }
 
-  private getLanbeIndex(
-    lanbe: VoictentItemLanbe2<TVoictentConfiguration>,
-  ): number {
+  private getLanbeIndex(lanbe: VoictentItemLanbe2<TVoque>): number {
     const index = this.indicesByLanbe.get(lanbe);
 
     if (index === undefined) {
@@ -175,12 +162,12 @@ export class InMemoryVoictent<
     return this.hubblepupTuple.length;
   }
 
-  private hasNext(lanbe: VoictentItemLanbe2<TVoictentConfiguration>): boolean {
+  private hasNext(lanbe: VoictentItemLanbe2<TVoque>): boolean {
     const currentIndex = this.getLanbeIndex(lanbe);
     return this.size > 0 && currentIndex < this.maximumInclusiveIndex;
   }
 
-  private advance(lanbe: VoictentItemLanbe2<TVoictentConfiguration>): void {
+  private advance(lanbe: VoictentItemLanbe2<TVoque>): void {
     if (this.hasNext(lanbe)) {
       const currentIndex = this.getLanbeIndex(lanbe);
       this.indicesByLanbe.set(lanbe, currentIndex + 1);
@@ -189,15 +176,15 @@ export class InMemoryVoictent<
 
   // eslint-disable-next-line class-methods-use-this
   getSerializableId(
-    hubblepup: TVoictentConfiguration['receivedHubblepup'],
+    hubblepup: TVoque['receivedHubblepup'],
     listIndex: number,
   ): string {
     return `${listIndex}`;
   }
 
   private dereference(
-    lanbe: VoictentItemLanbe2<TVoictentConfiguration>,
-  ): TVoictentConfiguration['indexedEmittedHubblepup'] {
+    lanbe: VoictentItemLanbe2<TVoque>,
+  ): TVoque['indexedEmittedHubblepup'] {
     const listIndex = this.getLanbeIndex(lanbe);
 
     if (listIndex === InMemoryVoictent.minimumInclusiveIndex) {

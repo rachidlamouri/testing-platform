@@ -406,7 +406,7 @@ export const digikikify = ({
 
   addToTabilly(initialQuirmTuple);
 
-  const voictentConfigurationByVoictent = new Map<
+  const voictentTickSeriesConfigurationByVoictent = new Map<
     GenericVoictent2,
     VoictentTickSeriesConfiguration
   >();
@@ -449,7 +449,7 @@ export const digikikify = ({
     // eslint-disable-next-line @typescript-eslint/no-loop-func
     [...tabilly.entries()].forEach(([gepp, voictent]) => {
       const configuration: VoictentTickSeriesConfiguration =
-        voictentConfigurationByVoictent.get(voictent) ?? {
+        voictentTickSeriesConfigurationByVoictent.get(voictent) ?? {
           gepp,
           voictentLanbe: voictent.createVoictentLanbe(gepp),
           voictentItemLanbe: voictent.createVoictentItemLanbe(gepp),
@@ -459,7 +459,7 @@ export const digikikify = ({
           ),
         };
 
-      voictentConfigurationByVoictent.set(voictent, configuration);
+      voictentTickSeriesConfigurationByVoictent.set(voictent, configuration);
 
       configuration.voictentTickSeries.push(
         configuration.voictentLanbe?.hasNext() ? 1 : 0,
@@ -526,7 +526,7 @@ export const digikikify = ({
   }
 
   const statistics: RuntimeStatistics = {
-    voictentList: [...voictentConfigurationByVoictent.values()],
+    voictentList: [...voictentTickSeriesConfigurationByVoictent.values()],
     estinantList: estinantTickSeriesConfigurationList,
     time: timeConfiguration,
   };

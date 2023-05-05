@@ -2,7 +2,7 @@ import { Estinant } from '../core/engine-shell/estinant/estinant';
 import { QuirmList } from '../core/engine-shell/quirm/quirm';
 import { digikikify } from '../core/engine/digikikify';
 import { InMemoryOdeshinVoictent } from '../core/engine/inMemoryOdeshinVoictent';
-import { InMemoryVoictentConfiguration } from '../core/engine/inMemoryVoictent';
+import { InMemoryVoque } from '../core/engine/inMemoryVoictent';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
@@ -12,15 +12,11 @@ import { getCustomTypedDatum } from '../utilities/typed-datum/customTypedDatum';
 import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
 import {
   JsonSerializableVoictent,
-  JsonSerializableVoictentConfiguration,
+  JsonSerializableVoque,
 } from './jsonSerializableVoictent';
 
-type SerializedConfiguration =
-  JsonSerializableVoictentConfiguration<'serialized'>;
-type TypedDatumVoictentConfiguration = InMemoryVoictentConfiguration<
-  'typed-datum',
-  unknown
->;
+type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
+type TypedDatumVoque = InMemoryVoque<'typed-datum', unknown>;
 
 digikikify({
   inputVoictentList: [
@@ -67,10 +63,7 @@ digikikify({
       // TODO: improve the typing of the core estinant
     } satisfies Estinant,
 
-    buildAddMetadataForSerialization<
-      TypedDatumVoictentConfiguration,
-      SerializedConfiguration
-    >({
+    buildAddMetadataForSerialization<TypedDatumVoque, SerializedConfiguration>({
       inputGepp: 'typed-datum',
       outputGepp: 'serialized',
     }),

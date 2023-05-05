@@ -3,18 +3,16 @@ import {
   VoictentItemLanbe2,
   VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
-import { GenericVoictentConfiguration } from './voictentConfiguration';
+import { GenericVoque } from './voque';
 
-export type Voictent2<
-  TVoictentConfiguration extends GenericVoictentConfiguration,
-> = {
-  get gepp(): TVoictentConfiguration['gepp'];
+export type Voictent2<TVoque extends GenericVoque> = {
+  get gepp(): TVoque['gepp'];
   createVoictentLanbe(debugName: string): VoictentLanbe | null;
   createVoictentItemLanbe(
     debugName: string,
-  ): VoictentItemLanbe2<TVoictentConfiguration> | VoictentItemLanbe | null;
+  ): VoictentItemLanbe2<TVoque> | VoictentItemLanbe | null;
   onTickStart(): void;
-  addHubblepup(hubblepup: TVoictentConfiguration['receivedHubblepup']): void;
+  addHubblepup(hubblepup: TVoque['receivedHubblepup']): void;
 };
 
-export type GenericVoictent2 = Voictent2<GenericVoictentConfiguration>;
+export type GenericVoictent2 = Voictent2<GenericVoque>;

@@ -1,25 +1,19 @@
 import { Odeshin } from '../../custom/adapter/odeshin';
 import { Gepp } from '../engine-shell/voictent/gepp';
-import {
-  InMemoryVoictent,
-  InMemoryVoictentConfiguration,
-} from './inMemoryVoictent';
+import { InMemoryVoictent, InMemoryVoque } from './inMemoryVoictent';
 
-export type InMemoryOdeshinVoictentConfiguration<
+export type InMemoryOdeshinVoque<
   TGepp extends Gepp,
   THubblepup extends Odeshin,
-> = InMemoryVoictentConfiguration<TGepp, THubblepup>;
+> = InMemoryVoque<TGepp, THubblepup>;
 
-export type GenericInMemoryOdeshinVoictentConfiguration =
-  InMemoryVoictentConfiguration<Gepp, Odeshin>;
+export type GenericInMemoryOdeshinVoque = InMemoryVoque<Gepp, Odeshin>;
 
 export class InMemoryOdeshinVoictent<
-  TVoictentConfiguration extends GenericInMemoryOdeshinVoictentConfiguration,
-> extends InMemoryVoictent<TVoictentConfiguration> {
+  TVoque extends GenericInMemoryOdeshinVoque,
+> extends InMemoryVoictent<TVoque> {
   // eslint-disable-next-line class-methods-use-this
-  getSerializableId(
-    hubblepup: TVoictentConfiguration['receivedHubblepup'],
-  ): string {
+  getSerializableId(hubblepup: TVoque['receivedHubblepup']): string {
     // TODO: move the responsibility of normalizing the serializable id elsewhere
     return hubblepup.zorn.replaceAll('/', ' | ');
   }

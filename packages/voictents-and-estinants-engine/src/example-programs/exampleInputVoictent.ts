@@ -1,24 +1,17 @@
 import { digikikify } from '../core/engine/digikikify';
 import {
   InMemoryVoictent,
-  InMemoryVoictentConfiguration,
+  InMemoryVoque,
 } from '../core/engine/inMemoryVoictent';
 import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
 import {
   SerializableVoictent,
-  SerializableVoictentConfiguration,
+  SerializableVoque,
 } from './serializableVoictent';
 
-type Voictent1Configuration = InMemoryVoictentConfiguration<
-  'voictent-1',
-  string
->;
-type Voictent2Configuration = InMemoryVoictentConfiguration<
-  'voictent-2',
-  number
->;
-type SerializedVoictentConfiguration =
-  SerializableVoictentConfiguration<'serialized'>;
+type Voictent1Configuration = InMemoryVoque<'voictent-1', string>;
+type Voictent2Configuration = InMemoryVoque<'voictent-2', number>;
+type SerializedVoque = SerializableVoque<'serialized'>;
 
 digikikify({
   inputVoictentList: [
@@ -30,7 +23,7 @@ digikikify({
       gepp: 'voictent-2',
       initialHubblepupTuple: [1, 2],
     }),
-    new SerializableVoictent<SerializedVoictentConfiguration>({
+    new SerializableVoictent<SerializedVoque>({
       nameSpace: 'exampleInputVoictent',
       gepp: 'serialized',
       initialHubblepupTuple: [],
@@ -38,17 +31,11 @@ digikikify({
   ],
   initialQuirmTuple: [],
   estinantTuple: [
-    buildAddMetadataForSerialization<
-      Voictent1Configuration,
-      SerializedVoictentConfiguration
-    >({
+    buildAddMetadataForSerialization<Voictent1Configuration, SerializedVoque>({
       inputGepp: 'voictent-1',
       outputGepp: 'serialized',
     }),
-    buildAddMetadataForSerialization<
-      Voictent2Configuration,
-      SerializedVoictentConfiguration
-    >({
+    buildAddMetadataForSerialization<Voictent2Configuration, SerializedVoque>({
       inputGepp: 'voictent-2',
       outputGepp: 'serialized',
     }),

@@ -2,24 +2,18 @@ import fs from 'fs';
 import { digikikify } from '../core/engine/digikikify';
 import {
   InMemoryVoictent,
-  InMemoryVoictentConfiguration,
+  InMemoryVoque,
 } from '../core/engine/inMemoryVoictent';
 import {
   CacheableAccessor,
   CachedOnDiskVoictent,
-  CachedOnDiskVoictentConfiguration,
+  CachedOnDiskVoque,
 } from '../core/engine/cachedOnDiskVoictent';
 import { QuirmList } from '../core/engine-shell/quirm/quirm';
 
-type InputVoictentConfiguration = InMemoryVoictentConfiguration<
-  'input',
-  CacheableAccessor<string>
->;
+type InputVoque = InMemoryVoque<'input', CacheableAccessor<string>>;
 
-type CachedVoictentConfiguration = CachedOnDiskVoictentConfiguration<
-  'cached',
-  string
->;
+type CachedVoque = CachedOnDiskVoque<'cached', string>;
 
 const nameSpace = 'test-cached-on-disk-datum';
 
@@ -28,21 +22,20 @@ const filePath =
 
 digikikify({
   inputVoictentList: [
-    new InMemoryVoictent<InputVoictentConfiguration>({
+    new InMemoryVoictent<InputVoque>({
       gepp: 'input',
       initialHubblepupTuple: [
         {
           zorn: filePath.replaceAll('/', ' | '),
           lastModified: fs.statSync(filePath).mtime.toISOString(),
-          grition:
-            (): CachedVoictentConfiguration['emittedHubblepup']['grition'] => {
-              const text = fs.readFileSync(filePath, 'utf8');
-              return text;
-            },
+          grition: (): CachedVoque['emittedHubblepup']['grition'] => {
+            const text = fs.readFileSync(filePath, 'utf8');
+            return text;
+          },
         },
       ],
     }),
-    new CachedOnDiskVoictent<CachedVoictentConfiguration>({
+    new CachedOnDiskVoictent<CachedVoque>({
       nameSpace,
       gepp: 'cached',
     }),

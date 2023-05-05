@@ -2,23 +2,23 @@ import { Estinant } from '../core/engine-shell/estinant/estinant';
 import { GenericIndexedHubblepup } from '../core/engine-shell/quirm/hubblepup';
 import { Quirm } from '../core/engine-shell/quirm/quirm';
 import {
-  GenericSerializableSourceVoictentConfiguration,
-  GenericSerializableVoictentConfiguration,
+  GenericSerializableSourceVoque,
+  GenericSerializableVoque,
   IndexedSerializable,
   Serializable,
 } from './serializableVoictent';
 
 export type SerializerBuilderInput<
-  TInputVoictent extends GenericSerializableSourceVoictentConfiguration,
-  TOutputVoictent extends GenericSerializableVoictentConfiguration,
+  TInputVoictent extends GenericSerializableSourceVoque,
+  TOutputVoictent extends GenericSerializableVoque,
 > = {
   inputGepp: TInputVoictent['gepp'];
   outputGepp: TOutputVoictent['gepp'];
 };
 
 export const buildAddMetadataForSerialization = <
-  TInputVoictent extends GenericSerializableSourceVoictentConfiguration,
-  TOutputVoictent extends GenericSerializableVoictentConfiguration,
+  TInputVoictent extends GenericSerializableSourceVoque,
+  TOutputVoictent extends GenericSerializableVoque,
 >({
   inputGepp,
   outputGepp,
