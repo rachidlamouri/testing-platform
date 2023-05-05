@@ -34,3 +34,8 @@ echo "Test model-programs is unchanged"
 npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/model-programs/modelPrograms.ts
 bash checkUncommitted.sh
 printf "\n"
+
+echo "Test render-type-script-file-relationships is unchanged"
+npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts
+bash checkUncommitted.sh
+printf "\n"

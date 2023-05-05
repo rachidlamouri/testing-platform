@@ -16,4 +16,8 @@ debug/testGraphRender/*
 debug/modelPrograms/*
 !debug/modelPrograms/sanity-snapshot
 
+!debug/renderTypeScriptFileRelationships
+debug/renderTypeScriptFileRelationships/*
+!debug/renderTypeScriptFileRelationships/sanity-snapshot
+
 snapshot/
