@@ -1,4 +1,3 @@
-import * as uuid from 'uuid';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { LabelLocation } from '../../graph-visualization/directed-graph/attribute';
 import { DirectedGraphRankDirection } from '../../graph-visualization/directed-graph/directedGraph';
@@ -16,6 +15,7 @@ import {
   RootMetadata,
   RootMetadataVoictent,
 } from './rootMetadata';
+import { getTextDigest } from '../../../../utilities/getTextDigest';
 
 /**
  * Gets the root directed graph metadata for each boundary in the knowledge graph.
@@ -53,7 +53,7 @@ export const getRootMetadata = buildEstinant({
       .map((metadata) => metadata.head.boundaryId);
 
     return {
-      id: uuid.v4(),
+      id: getTextDigest(`${boundaryMetadata.id}-root`),
       boundaryId: boundaryMetadata.id,
       relevantBoundaryIdSet: new Set(relevantBoundaryIdList),
       importedBoundaryIdSet: new Set(importedBoundaryIdList),

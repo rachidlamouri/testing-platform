@@ -1,4 +1,3 @@
-import * as uuid from 'uuid';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   DirectedGraphVoictent,
@@ -31,6 +30,7 @@ import { COMMON_ATTRIBUTE_BY_KEY, FONT_SIZE } from './commonAttributeByKey';
 import { Shape } from '../../graph-visualization/directed-graph/attribute';
 import { RootDirectoryVoictent, ROOT_DIRECTORY_GEPP } from '../rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
+import { getTextDigest } from '../../../../utilities/getTextDigest';
 
 /**
  * Converts all TypeScript relationship metadata into a directed graph
@@ -150,7 +150,7 @@ export const getRootDirectedGraph = buildEstinant({
                 isRoot: false,
                 isCluster: true,
                 attributeByKey: {
-                  id: uuid.v4(),
+                  id: getTextDigest(subgraphName),
                   label: `${subgraphName}/`,
                   fontsize: FONT_SIZE.directory,
                   ...COMMON_ATTRIBUTE_BY_KEY,

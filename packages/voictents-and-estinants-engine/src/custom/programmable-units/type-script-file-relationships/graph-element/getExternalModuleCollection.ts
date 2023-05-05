@@ -1,4 +1,3 @@
-import * as uuid from 'uuid';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
@@ -9,6 +8,7 @@ import {
   ExternalModuleOdeshin,
   ExternalModuleVoictent,
 } from './externalModule';
+import { getTextDigest } from '../../../../utilities/getTextDigest';
 
 /**
  * Gets all external module file paths at once in order to deduplicate them and
@@ -40,7 +40,7 @@ export const getExternalModuleCollection = buildEstinant({
         return {
           zorn: sourcePath,
           grition: {
-            instanceId: uuid.v4(),
+            instanceId: getTextDigest(sourcePath),
             sourcePath,
           },
         };

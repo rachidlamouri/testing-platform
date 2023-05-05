@@ -1,4 +1,3 @@
-import * as uuid from 'uuid';
 import { Grition } from '../../../adapter/grition';
 import { OdeshinFromGrition } from '../../../adapter/odeshin';
 import { Voictent } from '../../../adapter/voictent';
@@ -49,19 +48,19 @@ export const createBoundaryConfiguration = (
     zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
     grition: {
       overview: {
-        instanceId: uuid.v4(),
+        instanceId: 'overview-boundary',
       },
-      internal: directoryPathList.map((directoryPath) => {
+      internal: directoryPathList.map((directoryPath, index) => {
         return {
-          instanceId: uuid.v4(),
+          instanceId: `internal-directory-boundary-${index}`,
           directoryPath,
         };
       }),
       external: {
-        instanceId: uuid.v4(),
+        instanceId: 'external-boundary',
       },
       limbo: {
-        instanceId: uuid.v4(),
+        instanceId: 'limbo-boundary',
       },
     },
   };
