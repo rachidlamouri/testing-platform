@@ -9,6 +9,7 @@ import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-
 import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/addInteractivityToSvgDocument';
 import { DIRECTED_GRAPH_METADATA_BY_ID_GEPP } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import { LabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attribute';
+import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
 
 /**
  * Example program to demonstrate defining and rendering a directed graph.
@@ -159,6 +160,8 @@ digikikify({
     encodeDirectedGraphAsGraphvizCode,
     renderGraphvizCodeToSvgDocument,
     addInteractivityToSvgDocument,
+
+    captureOutputFileDigestList,
   ],
   quirmDebugger: buildQuirmDebugger('testGraphRender'),
 });

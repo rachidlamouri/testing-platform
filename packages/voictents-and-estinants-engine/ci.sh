@@ -25,4 +25,7 @@ npx ts-node packages/voictents-and-estinants-engine/src/example-programs/testSer
 bash checkUncommitted.sh
 printf "\n"
 
-
+echo "Test test-graph-render is unchanged"
+npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render/testGraphRender.ts
+bash checkUncommitted.sh
+printf "\n"

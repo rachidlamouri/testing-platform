@@ -8,4 +8,8 @@ debug/*
 !debug/test-get-custom-typed-datum
 !debug/test-serialize
 
+!debug/testGraphRender
+debug/testGraphRender/*
+!debug/testGraphRender/sanity-snapshot
+
 snapshot/
