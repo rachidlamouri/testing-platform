@@ -25,6 +25,7 @@ import { getEngineProgramLocator } from '../../programmable-units/engine-program
 import { getEngineEstinantLocatorCollection } from '../../programmable-units/engine-program/getEngineEstinantLocatorCollection';
 import { getEngineEstinant } from '../../programmable-units/engine-program/getEngineEstinant';
 import { getEngineProgram2 } from '../../programmable-units/engine-program/getEngineProgram2';
+import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
 
 /**
  * Creates an interactive model for each engine program.
@@ -57,6 +58,8 @@ digikikify({
     encodeDirectedGraphAsGraphvizCode,
     renderGraphvizCodeToSvgDocument,
     addInteractivityToSvgDocument,
+
+    captureOutputFileDigestList,
 
     reportErrors,
   ],

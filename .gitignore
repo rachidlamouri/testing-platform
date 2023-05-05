@@ -12,4 +12,8 @@ debug/*
 debug/testGraphRender/*
 !debug/testGraphRender/sanity-snapshot
 
+!debug/modelPrograms
+debug/modelPrograms/*
+!debug/modelPrograms/sanity-snapshot
+
 snapshot/
