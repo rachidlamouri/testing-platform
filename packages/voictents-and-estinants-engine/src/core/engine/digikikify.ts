@@ -17,7 +17,11 @@ import {
   RightVoictentItem2Dreanor,
   RightVoictentItemDreanor,
 } from '../internal/dreanor/dreanor';
-import { Estinant, EstinantTuple } from '../engine-shell/estinant/estinant';
+import {
+  Estinant,
+  GenericEstinant2,
+  UnsafeEstinant2Tuple,
+} from '../engine-shell/estinant/estinant';
 import { Gepp } from '../engine-shell/voictent/gepp';
 import {
   GenericIndexedHubblepup,
@@ -34,12 +38,14 @@ import {
   VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
 import { Mabz, MabzEntry } from '../internal/procody/mabz';
-import { Platomity, getDreanorTuple } from '../internal/platomity';
+import { Platomity, Platomity2, getDreanorTuple } from '../internal/platomity';
 import { Prected } from '../internal/dreanor/prected';
 import { Procody } from '../internal/procody/procody';
-import { Quirm, QuirmTuple } from '../engine-shell/quirm/quirm';
+import { Quirm, QuirmList, QuirmTuple } from '../engine-shell/quirm/quirm';
 import { Tabilly } from './tabilly';
 import { GenericVoictent2 } from './voictent2';
+import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
+import { Tuple } from '../../utilities/semantic-types/tuple';
 
 export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
 
@@ -49,8 +55,9 @@ export type DigikikifierInput = {
   // TODO: remove "initialQuirmTuple" and make inputVoictentList required
   inputVoictentList?: GenericVoictent2[];
   initialQuirmTuple?: QuirmTuple;
-  estinantTuple: EstinantTuple;
-  onHubblepupAddedToVoictents: OnHubblepupAddedToVoictentsHandler;
+  estinantTuple: Tuple<Estinant | GenericEstinant2>;
+  /** @deprecated */
+  onHubblepupAddedToVoictents?: OnHubblepupAddedToVoictentsHandler;
   onFinish?: RuntimeStatisticsHandler;
 };
 
@@ -75,7 +82,7 @@ type EstinantConnectionTickSeriesConfiguration = {
 };
 
 type EstinantTickSeriesConfiguration = {
-  platomity: Platomity;
+  platomity: Platomity | Platomity2;
   connectionList: EstinantConnectionTickSeriesConfiguration[];
   cumulativeExecutionCountTickSeries: TickSeries<number>;
   relativeExecutionCountTickSeries: TickSeries<number>;
@@ -116,9 +123,27 @@ export const digikikify = ({
   const addToTabilly = (quirmTuple: QuirmTuple): void => {
     tabilly.addHubblepupsToVoictents(quirmTuple);
 
-    quirmTuple.forEach((quirm) => {
-      onHubblepupAddedToVoictents(quirm);
-    });
+    if (onHubblepupAddedToVoictents !== undefined) {
+      quirmTuple.forEach((quirm) => {
+        onHubblepupAddedToVoictents(quirm);
+      });
+    }
+  };
+
+  const createLanbe2 = (
+    estinant: GenericEstinant2,
+    appreffinge: GenericAppreffinge2,
+  ): Lanbe => {
+    const voictent = tabilly.getOrInstantiateAndGetVoictent(appreffinge.gepp);
+    const lanbe = getIsWibiz(appreffinge)
+      ? voictent.createVoictentLanbe(estinant.name)
+      : voictent.createVoictentItemLanbe(estinant.name);
+
+    if (lanbe === null) {
+      throw Error('Unexpected null Lanbe');
+    }
+
+    return lanbe;
   };
 
   const createLanbe = (estinant: Estinant, appreffinge: Appreffinge): Lanbe => {
@@ -134,63 +159,119 @@ export const digikikify = ({
     return lanbe;
   };
 
-  const platomityList = estinantTuple.map<Platomity>((estinant) => {
-    const { leftAppreffinge, rightAppreffingeTuple } = estinant;
+  const platomityList = estinantTuple.map<Platomity | Platomity2>(
+    (estinant) => {
+      if (estinant.version === 2) {
+        const { leftInputAppreffinge, rightInputAppreffingeTuple } = estinant;
 
-    const leftDreanor: LeftDreanor = {
-      typeName: DreanorTypeName.LeftDreanor,
-      gepp: leftAppreffinge.gepp,
-      lanbe: createLanbe(estinant, leftAppreffinge),
-    };
+        const leftDreanor: LeftDreanor = {
+          typeName: DreanorTypeName.LeftDreanor,
+          gepp: leftInputAppreffinge.gepp,
+          lanbe: createLanbe2(estinant, leftInputAppreffinge),
+        };
 
-    const rightDreanorTuple = rightAppreffingeTuple.map<RightDreanor>(
-      (rightAppreffinge) => {
-        if (getIsWibiz(rightAppreffinge)) {
+        const rightDreanorTuple = rightInputAppreffingeTuple.map<RightDreanor>(
+          (rightInputAppreffinge) => {
+            if (getIsWibiz(rightInputAppreffinge)) {
+              return {
+                typeName: DreanorTypeName.RightVoictentDreanor,
+                gepp: rightInputAppreffinge.gepp,
+                lanbe: createLanbe2(
+                  estinant,
+                  rightInputAppreffinge,
+                ) as VoictentLanbe,
+                isReady: false,
+              } satisfies RightVoictentDreanor;
+            }
+
+            return {
+              typeName: DreanorTypeName.RightVoictentItem2Dreanor,
+              gepp: rightInputAppreffinge.gepp,
+              lanbe: createLanbe2(
+                estinant,
+                rightInputAppreffinge,
+              ) as GenericVoictentItemLanbe2,
+              framate: rightInputAppreffinge.framate,
+              croard: rightInputAppreffinge.croard,
+              prected: new Prected(),
+            } satisfies RightVoictentItem2Dreanor;
+          },
+        );
+
+        const platomity: Platomity2 = {
+          version: 2,
+          estinant,
+          leftDreanor,
+          rightDreanorTuple,
+          outputGeppSet: new Set(estinant.outputAppreffinge.geppTuple),
+          procody: new Procody(),
+          executionCount: 0,
+        };
+
+        return platomity;
+      }
+
+      const { leftAppreffinge, rightAppreffingeTuple } = estinant;
+
+      const leftDreanor: LeftDreanor = {
+        typeName: DreanorTypeName.LeftDreanor,
+        gepp: leftAppreffinge.gepp,
+        lanbe: createLanbe(estinant, leftAppreffinge),
+      };
+
+      const rightDreanorTuple = rightAppreffingeTuple.map<RightDreanor>(
+        (rightAppreffinge) => {
+          if (getIsWibiz(rightAppreffinge)) {
+            return {
+              typeName: DreanorTypeName.RightVoictentDreanor,
+              gepp: rightAppreffinge.gepp,
+              lanbe: createLanbe(estinant, rightAppreffinge) as VoictentLanbe,
+              isReady: false,
+            } satisfies RightVoictentDreanor;
+          }
+
+          if ('framate' in rightAppreffinge) {
+            return {
+              typeName: DreanorTypeName.RightVoictentItemDreanor,
+              gepp: rightAppreffinge.gepp,
+              lanbe: createLanbe(
+                estinant,
+                rightAppreffinge,
+              ) as VoictentItemLanbe,
+              framate: rightAppreffinge.framate,
+              croard: rightAppreffinge.croard,
+              prected: new Prected(),
+            } satisfies RightVoictentItemDreanor;
+          }
+
           return {
-            typeName: DreanorTypeName.RightVoictentDreanor,
+            typeName: DreanorTypeName.RightVoictentItem2Dreanor,
             gepp: rightAppreffinge.gepp,
-            lanbe: createLanbe(estinant, rightAppreffinge) as VoictentLanbe,
-            isReady: false,
-          } satisfies RightVoictentDreanor;
-        }
-
-        if ('framate' in rightAppreffinge) {
-          return {
-            typeName: DreanorTypeName.RightVoictentItemDreanor,
-            gepp: rightAppreffinge.gepp,
-            lanbe: createLanbe(estinant, rightAppreffinge) as VoictentItemLanbe,
-            framate: rightAppreffinge.framate,
-            croard: rightAppreffinge.croard,
+            lanbe: createLanbe(
+              estinant,
+              rightAppreffinge,
+            ) as GenericVoictentItemLanbe2,
+            framate: rightAppreffinge.framate2,
+            croard: rightAppreffinge.croard2,
             prected: new Prected(),
-          } satisfies RightVoictentItemDreanor;
-        }
+          } satisfies RightVoictentItem2Dreanor;
+        },
+      );
 
-        return {
-          typeName: DreanorTypeName.RightVoictentItem2Dreanor,
-          gepp: rightAppreffinge.gepp,
-          lanbe: createLanbe(
-            estinant,
-            rightAppreffinge,
-          ) as GenericVoictentItemLanbe2,
-          framate: rightAppreffinge.framate2,
-          croard: rightAppreffinge.croard2,
-          prected: new Prected(),
-        } satisfies RightVoictentItem2Dreanor;
-      },
-    );
+      const platomity: Platomity = {
+        version: 1,
+        estinant,
+        leftDreanor,
+        rightDreanorTuple,
+        procody: new Procody(),
+        executionCount: 0,
+      };
 
-    const platomity: Platomity = {
-      estinant,
-      leftDreanor,
-      rightDreanorTuple,
-      procody: new Procody(),
-      executionCount: 0,
-    };
+      return platomity;
+    },
+  );
 
-    return platomity;
-  });
-
-  const isPlatomityActive = (platomity: Platomity): boolean => {
+  const isPlatomityActive = (platomity: Platomity | Platomity2): boolean => {
     return getDreanorTuple(platomity).some((dreanor) => {
       if (dreanor.lanbe.typeName === LanbeTypeName.VoictentLanbe) {
         return dreanor.lanbe.hasNext() || dreanor.lanbe.isAccumulating();
@@ -201,12 +282,12 @@ export const digikikify = ({
   };
 
   type CologyExecutionContext = {
-    platomity: Platomity;
+    platomity: Platomity | Platomity2;
     cology: Cology;
   };
 
   const getCologyExecutionContextList = (
-    platomity: Platomity,
+    platomity: Platomity | Platomity2,
   ): CologyExecutionContext[] => {
     const touchedCologySet = new CologySet();
 
@@ -393,10 +474,32 @@ export const digikikify = ({
         },
       );
 
-    const outputQuirmTuple = platomity.estinant.tropoig(
-      leftInput,
-      ...rightInputTuple,
-    );
+    let outputQuirmTuple: QuirmList = [];
+
+    if (platomity.version === 2) {
+      const outputRecord = platomity.estinant.tropoig(
+        leftInput,
+        ...rightInputTuple,
+      );
+
+      outputQuirmTuple = Object.entries(outputRecord)
+        .filter(([gepp]) => {
+          return platomity.outputGeppSet.has(gepp);
+        })
+        .flatMap(([gepp, hubblepupTuple]): QuirmList => {
+          return hubblepupTuple.map<Quirm>((hubblepup) => {
+            return {
+              gepp,
+              hubblepup,
+            };
+          });
+        });
+    } else {
+      outputQuirmTuple = platomity.estinant.tropoig(
+        leftInput,
+        ...rightInputTuple,
+      );
+    }
 
     // eslint-disable-next-line no-param-reassign
     platomity.executionCount += 1;
@@ -534,4 +637,22 @@ export const digikikify = ({
   if (onFinish) {
     onFinish(statistics);
   }
+};
+
+export type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
+  inputVoictentList: GenericVoictent2[];
+  estinantTuple: TEstinantTuple;
+  onFinish?: RuntimeStatisticsHandler;
+};
+
+export const digikikify2 = <TEstinantTuple extends UnsafeEstinant2Tuple>({
+  inputVoictentList = [],
+  estinantTuple,
+  onFinish,
+}: DigikikifierInput2<TEstinantTuple>): void => {
+  digikikify({
+    inputVoictentList,
+    estinantTuple,
+    onFinish,
+  });
 };

@@ -1,4 +1,4 @@
-import { digikikify } from '../core/engine/digikikify';
+import { digikikify2 } from '../core/engine/digikikify';
 import { InMemoryOdeshinVoictent } from '../core/engine/inMemoryOdeshinVoictent';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
@@ -12,7 +12,7 @@ import {
 
 type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 
-digikikify({
+digikikify2({
   inputVoictentList: [
     new InMemoryOdeshinVoictent({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
@@ -24,12 +24,10 @@ digikikify({
       initialHubblepupTuple: [],
     }),
   ],
-  initialQuirmTuple: [],
   estinantTuple: [
     buildAddMetadataForSerialization({
       inputGepp: DATUM_TEST_CASE_INPUT_GEPP,
       outputGepp: 'serialized',
     }),
   ],
-  onHubblepupAddedToVoictents: () => {},
 });

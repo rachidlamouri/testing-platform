@@ -1,37 +1,23 @@
-import { digikikify } from '../core/engine/digikikify';
-import { InMemoryOdeshinVoictent } from '../core/engine/inMemoryOdeshinVoictent';
-import {
-  DATUM_TEST_CASE_INPUT_GEPP,
-  DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
-  DatumTestCaseInputVoque,
-} from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
-import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
+import { DATUM_TEST_CASE_INPUT_ODESHIN_LIST } from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { JsonSerializableVoque } from './jsonSerializableVoictent';
 import { SerializableVoictent } from './serializableVoictent';
 
 type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 
-digikikify({
-  inputVoictentList: [
-    new InMemoryOdeshinVoictent({
-      gepp: DATUM_TEST_CASE_INPUT_GEPP,
-      initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
-    }),
-    new SerializableVoictent<SerializedConfiguration>({
-      nameSpace: 'test-serialize',
-      gepp: 'serialized',
-      initialHubblepupTuple: [],
-    }),
-  ],
-  initialQuirmTuple: [],
-  estinantTuple: [
-    buildAddMetadataForSerialization<
-      DatumTestCaseInputVoque,
-      SerializedConfiguration
-    >({
-      inputGepp: DATUM_TEST_CASE_INPUT_GEPP,
-      outputGepp: 'serialized',
-    }),
-  ],
-  onHubblepupAddedToVoictents: () => {},
+// eslint-disable-next-line no-new
+new SerializableVoictent<SerializedConfiguration>({
+  nameSpace: 'test-serialize',
+  gepp: 'serialized',
+  initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST.map<
+    SerializedConfiguration['receivedHubblepup']
+  >((datumTestCaseInput) => {
+    return {
+      // TODO: make this gepp empty
+      gepp: 'datum-test-case-input',
+      // TODO: move this logic to a file utility
+      serializableId: datumTestCaseInput.zorn.replaceAll('/', ' | '),
+      // TODO: make this just the grition
+      datum: datumTestCaseInput,
+    };
+  }),
 });
