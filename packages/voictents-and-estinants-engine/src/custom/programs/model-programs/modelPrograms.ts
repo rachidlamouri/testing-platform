@@ -7,7 +7,9 @@ import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import {
-  ENGINE_FUNCTION_CONFIGURATION,
+  CORE_ENGINE_FUNCTION_2_CONFIGURATION,
+  CORE_ENGINE_FUNCTION_CONFIGURATION,
+  ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
@@ -35,7 +37,11 @@ digikikify({
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
       VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
     ],
-    [ENGINE_FUNCTION_CONFIGURATION_GEPP]: [ENGINE_FUNCTION_CONFIGURATION],
+    [ENGINE_FUNCTION_CONFIGURATION_GEPP]: [
+      CORE_ENGINE_FUNCTION_CONFIGURATION,
+      CORE_ENGINE_FUNCTION_2_CONFIGURATION,
+      ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+    ],
   },
   estinantTuple: [
     enumerateFileSystemObjects,

@@ -2,7 +2,7 @@ import { digikikify } from '../../../type-script-adapter/digikikify';
 import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import {
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
-  ENGINE_FUNCTION_CONFIGURATION,
+  ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
   CORE_ENGINE_FUNCTION_CONFIGURATION,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
@@ -26,7 +26,7 @@ digikikify({
       VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
     ],
     [ENGINE_FUNCTION_CONFIGURATION_GEPP]: [
-      ENGINE_FUNCTION_CONFIGURATION,
+      ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       CORE_ENGINE_FUNCTION_CONFIGURATION,
     ],
   },
