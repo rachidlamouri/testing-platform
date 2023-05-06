@@ -1,24 +1,23 @@
-import { Estinant } from '../core/engine-shell/estinant/estinant';
-import { QuirmList } from '../core/engine-shell/quirm/quirm';
-import { digikikify } from '../core/engine/digikikify';
+import { digikikify2 } from '../core/engine/digikikify';
 import { InMemoryOdeshinVoictent } from '../core/engine/inMemoryOdeshinVoictent';
-import { InMemoryVoque } from '../core/engine/inMemoryVoictent';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
-  DatumTestCaseInputOdeshin,
 } from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
-import { getTypeScriptTypedDatum } from '../utilities/typed-datum/type-script/typeScriptTypedDatum';
 import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
+import { getTypedTestCaseInputTypeName } from './getTypedTestCaseInputTypeName';
 import {
   JsonSerializableVoictent,
   JsonSerializableVoque,
 } from './jsonSerializableVoictent';
+import {
+  SERIALIZABLE_TYPE_NAME_GEPP,
+  SerializableTypeNameVoque,
+} from './serializableTypeName';
 
 type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
-type TypedDatumVoque = InMemoryVoque<'typed-datum', unknown>;
 
-digikikify({
+digikikify2({
   inputVoictentList: [
     new InMemoryOdeshinVoictent({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
@@ -34,39 +33,15 @@ digikikify({
       initialHubblepupTuple: [],
     }),
   ],
-  initialQuirmTuple: [],
   estinantTuple: [
-    {
-      name: 'getTypedTestCaseInputTypeName',
-      leftAppreffinge: {
-        gepp: DATUM_TEST_CASE_INPUT_GEPP,
-      },
-      rightAppreffingeTuple: [],
-      tropoig: (input): QuirmList => {
-        const inputOdeshin = input.hubblepup as DatumTestCaseInputOdeshin;
-        const testCaseInput = inputOdeshin.grition;
+    getTypedTestCaseInputTypeName,
 
-        const typedDatum = getTypeScriptTypedDatum(testCaseInput);
-
-        return [
-          {
-            gepp: 'typed-datum',
-            hubblepup: {
-              zorn: inputOdeshin.zorn,
-              grition: {
-                typeName: typedDatum.typeName,
-              },
-            },
-          },
-        ];
-      },
-      // TODO: improve the typing of the core estinant
-    } satisfies Estinant,
-
-    buildAddMetadataForSerialization<TypedDatumVoque, SerializedConfiguration>({
-      inputGepp: 'typed-datum',
+    buildAddMetadataForSerialization<
+      SerializableTypeNameVoque,
+      SerializedConfiguration
+    >({
+      inputGepp: SERIALIZABLE_TYPE_NAME_GEPP,
       outputGepp: 'serialized',
     }),
   ],
-  onHubblepupAddedToVoictents: () => {},
 });
