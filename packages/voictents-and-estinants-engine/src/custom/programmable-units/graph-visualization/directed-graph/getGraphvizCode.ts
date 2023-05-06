@@ -75,6 +75,7 @@ const getDirectedGraphCodeLineList = (
 
   const graphKeyword = graph.isRoot ? 'digraph' : 'subgraph';
 
+  // TODO: use cluster=true attribute instead https://graphviz.org/docs/attrs/cluster/
   const idPrefix = isCluster ? 'cluster_' : '';
   const idSuffix = graph.isRoot ? '' : graph.attributeByKey.id;
   const id = `${idPrefix}${idSuffix}`;
