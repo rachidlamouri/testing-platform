@@ -1,4 +1,4 @@
-import { digikikify } from '../core/engine/digikikify';
+import { digikikify2 } from '../core/engine/digikikify';
 import {
   InMemoryVoictent,
   InMemoryVoque,
@@ -13,7 +13,7 @@ type Voictent1Configuration = InMemoryVoque<'voictent-1', string>;
 type Voictent2Configuration = InMemoryVoque<'voictent-2', number>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
-digikikify({
+digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<Voictent1Configuration>({
       gepp: 'voictent-1',
@@ -29,7 +29,6 @@ digikikify({
       initialHubblepupTuple: [],
     }),
   ],
-  initialQuirmTuple: [],
   estinantTuple: [
     buildAddMetadataForSerialization<Voictent1Configuration, SerializedVoque>({
       inputGepp: 'voictent-1',
@@ -40,5 +39,4 @@ digikikify({
       outputGepp: 'serialized',
     }),
   ],
-  onHubblepupAddedToVoictents: () => {},
 });

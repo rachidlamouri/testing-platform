@@ -31,6 +31,8 @@ jobs:
       #   run: pwd && bash packages/base-tsconfig/scripts/runTests.sh
 
       # voictents-and-estinants-engine
+      - name: Lint voictents-and-estinants-engine Types
+        run: pwd && cd packages/voictents-and-estinants-engine && pwd && npx tsc
       - name: Run CI script
         run: bash packages/voictents-and-estinants-engine/ci.sh
 
