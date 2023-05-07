@@ -15,6 +15,10 @@ import {
 type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 type TypedDatumVoque = InMemoryVoque<'typed-datum', unknown>;
 
+/**
+ * Tests the "getCustomTypedDatum" function. Commit the output to get a signal
+ * whenever the behavior of this function changes
+ */
 digikikify2({
   inputVoictentList: [
     new InMemoryOdeshinVoictent({

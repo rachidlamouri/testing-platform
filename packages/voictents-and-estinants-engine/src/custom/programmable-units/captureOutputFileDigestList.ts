@@ -8,6 +8,11 @@ type OutputFileDigest = {
   digest: string;
 };
 
+/**
+ * Captures a hash of all output files. If an output file changes then the
+ * digest will change. Commit the digest list to be prompted to review any
+ * output files that change.
+ */
 export const captureOutputFileDigestList = buildEstinant({
   name: 'captureOutputFileDigestList',
 })

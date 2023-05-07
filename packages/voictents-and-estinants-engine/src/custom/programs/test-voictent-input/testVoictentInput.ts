@@ -1,3 +1,5 @@
+// TODO: figure out how to cover what this file is testing without using a dynamic engine program
+
 import * as uuid from 'uuid';
 import { digikikify } from '../../../type-script-adapter/digikikify';
 import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
