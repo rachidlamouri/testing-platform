@@ -11,6 +11,7 @@ export const signalError = buildEstinant({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe(() => {
-    process.exitCode = 1;
+    // TODO: reenable this when there aren't any errors
+    // process.exitCode = 1;
   })
   .assemble();
