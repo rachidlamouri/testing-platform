@@ -22,6 +22,8 @@
     "digest": "5f2215d4c0abd83b8f64ef454e5d2b6fb943b4e9"
   - "fileName": "test-graph-render"
     "digest": "ded88f4516c06bf398ab19a646417a89000f4c4b"
+  - "fileName": "test-joining-one-to-many"
+    "digest": "29194d7b763de0a6c1039c75477565879cdc271c"
   - "fileName": "test-joining-one-to-one"
     "digest": "74a0b360d4c4f3643c8ab9b723282cc419956234"
   - "fileName": "test-typed-datum"

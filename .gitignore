@@ -8,6 +8,7 @@ debug/*
 !debug/test-get-custom-typed-datum
 !debug/test-serialize
 !debug/test-joining-one-to-one
+!debug/test-joining-one-to-many
 
 !debug/testGraphRender
 debug/testGraphRender/*
