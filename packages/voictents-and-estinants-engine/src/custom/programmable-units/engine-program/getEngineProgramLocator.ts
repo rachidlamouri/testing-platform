@@ -9,6 +9,7 @@ import {
   IdentifiableProperty,
   ObjectExpressionWithIdentifierProperties,
   isObjectExpressionWithIdentifierProperties,
+  isSepcificIdentifiableProperty,
 } from '../../../utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
@@ -20,6 +21,7 @@ import { isArrayExpressionOfIdentifiers } from '../../../utilities/type-script-a
 import { isSpecificExpressionStatement } from '../../../utilities/type-script-ast/isSpecificExpressionStatement';
 import {
   AdaptedEngineFunctionConfiguration,
+  CoreEngineFunction2Configuration,
   EngineFunctionConfigurationTypeName,
 } from './engineFunctionConfiguration';
 import {
@@ -38,6 +40,8 @@ import {
   ProgramErrorOdeshin,
   ProgramErrorVoictent,
 } from '../error/programError';
+import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
+import { isNewExpressionWithObjectExpressionArgument } from '../../../utilities/type-script-ast/isNewExpression';
 
 type EngineCallExpression = TSESTree.CallExpression & {
   arguments: [ObjectExpressionWithIdentifierProperties];
@@ -78,11 +82,190 @@ type EngineCallDeclaration = {
   identifiableNode: null;
 };
 
+type Core2EngineProgramLocatorAccessorInput = {
+  engineProgramFile: EngineProgramFile['file'];
+  engineFunctionConfiguration: CoreEngineFunction2Configuration;
+  importList: TypeScriptFileImportList;
+  engineCallCommentText: string | null;
+  engineCallExpressionPropertyList: IdentifiableProperty[];
+};
+
+type Core2EngineProgramLocatorAccessorResult = {
+  parallelErrorList: ProgramErrorOdeshin[];
+  engineProgramLocator: EngineProgramLocator2Odeshin;
+};
+
+const getCore2EngineProgramLocator = ({
+  engineProgramFile,
+  engineFunctionConfiguration,
+  importList,
+  engineCallCommentText,
+  engineCallExpressionPropertyList,
+}: Core2EngineProgramLocatorAccessorInput): Core2EngineProgramLocatorAccessorResult => {
+  const voictentListGeppProperty = engineCallExpressionPropertyList.find(
+    (property) =>
+      property.key.name ===
+      engineFunctionConfiguration.voictentListKeyIdentifierName,
+  );
+
+  const initialVoictentListValueNode = voictentListGeppProperty?.value;
+
+  const initialVoictentGeppIdentifierList =
+    initialVoictentListValueNode?.type === AST_NODE_TYPES.ArrayExpression
+      ? initialVoictentListValueNode?.elements
+      : [];
+
+  const initialVoictentNameList: string[] = [];
+  const parallelErrorList: ProgramErrorOdeshin[] = [];
+
+  initialVoictentGeppIdentifierList.forEach((element) => {
+    let geppProperty: IdentifiableProperty | undefined;
+
+    if (isNewExpressionWithObjectExpressionArgument(element)) {
+      geppProperty = element.arguments[0].properties.find(
+        (node): node is IdentifiableProperty => {
+          // TODO: tie the word "gepp" back to something
+          return isSepcificIdentifiableProperty(
+            node,
+            engineFunctionConfiguration.voictentGeppKeyIdentifierName,
+          );
+        },
+      );
+    } else {
+      geppProperty = undefined;
+    }
+
+    if (geppProperty !== undefined && isIdentifier(geppProperty.value)) {
+      initialVoictentNameList.push(geppToVoictentName(geppProperty.value.name));
+    } else {
+      parallelErrorList.push({
+        zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
+        grition: {
+          errorId: `getEngineProgramLocator/non-identifier-estinant`,
+          message: 'Engine program has an estinant that is not a reference',
+          locator: {
+            typeName: ErrorLocatorTypeName.FileErrorLocator,
+            filePath: engineProgramFile.filePath,
+          },
+          metadata: null,
+        },
+      });
+    }
+  });
+
+  const estinantListProperty = engineCallExpressionPropertyList.find(
+    (property) =>
+      property.key.name ===
+      engineFunctionConfiguration.estinantListKeyIdentifierName,
+  );
+
+  const estinantListValueNode = estinantListProperty?.value;
+  const estinantReferenceElementList =
+    estinantListValueNode?.type === AST_NODE_TYPES.ArrayExpression
+      ? estinantListValueNode?.elements
+      : [];
+
+  const estinantNodeList: TSESTree.Identifier[] = [];
+
+  estinantReferenceElementList.forEach((element) => {
+    if (isIdentifier(element)) {
+      estinantNodeList.push(element);
+    } else {
+      parallelErrorList.push({
+        zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
+        grition: {
+          errorId: `getEngineProgramLocator/non-identifier-estinant`,
+          message: 'Engine program has an estinant that is not a reference',
+          locator: {
+            typeName: ErrorLocatorTypeName.FileErrorLocator,
+            filePath: engineProgramFile.filePath,
+          },
+          metadata: null,
+        },
+      });
+    }
+  });
+
+  const estinantIdentifierList = estinantNodeList.map(
+    (identifier) => identifier.name,
+  );
+
+  const fileImportsByImportedIdentifier = new Map<
+    string,
+    TypeScriptFileImport
+  >();
+
+  importList
+    .flatMap((fileImport) => {
+      return fileImport.specifierList.map((specifier) => ({
+        fileImport,
+        specifier,
+      }));
+    })
+    .forEach(({ fileImport, specifier }) => {
+      fileImportsByImportedIdentifier.set(specifier, fileImport);
+    });
+
+  const engineEstinantLocatorList = estinantIdentifierList
+    .map((identifierName) => {
+      const fileImport = fileImportsByImportedIdentifier.get(identifierName);
+
+      if (fileImport === undefined) {
+        return null;
+      }
+
+      return {
+        identifierName,
+        filePath: fileImport.sourcePath,
+      };
+    })
+    .filter(
+      (
+        engineEstinantLocator,
+      ): engineEstinantLocator is EngineEstinantLocator2 =>
+        engineEstinantLocator !== null,
+    );
+
+  if (engineCallCommentText === null) {
+    parallelErrorList.push({
+      zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
+      grition: {
+        errorId: `getEngineProgramLocator/missing-program-description`,
+        message: 'Program is missing a description',
+        locator: {
+          typeName: ErrorLocatorTypeName.FileErrorLocator,
+          filePath: engineProgramFile.filePath,
+        },
+        metadata: null,
+      },
+    });
+  }
+
+  const programName = engineProgramFile.inMemoryFileName.kebabCase;
+
+  const engineProgramLocatorOdeshin: EngineProgramLocator2Odeshin = {
+    zorn: engineProgramFile.filePath,
+    grition: {
+      programName,
+      description: engineCallCommentText ?? '',
+      filePath: engineProgramFile.filePath,
+      initialVoictentNameList,
+      engineEstinantLocatorList,
+    },
+  };
+
+  return {
+    parallelErrorList,
+    engineProgramLocator: engineProgramLocatorOdeshin,
+  };
+};
+
 type AdaptedEngineProgramLocatorAccessorInput = {
   engineProgramFile: EngineProgramFile['file'];
   engineFunctionConfiguration: AdaptedEngineFunctionConfiguration;
   importList: TypeScriptFileImportList;
-  engineCallDeclaration: EngineCallDeclaration;
+  engineCallCommentText: string | null;
+  engineCallExpressionPropertyList: IdentifiableProperty[];
 };
 
 type AdaptedEngineProgramLocatorAccessorResult = {
@@ -94,12 +277,9 @@ const getAdaptedEngineProgramLocator = ({
   engineProgramFile,
   engineFunctionConfiguration,
   importList,
-  engineCallDeclaration,
+  engineCallCommentText,
+  engineCallExpressionPropertyList,
 }: AdaptedEngineProgramLocatorAccessorInput): AdaptedEngineProgramLocatorAccessorResult => {
-  const engineCallExpressionPropertyList: IdentifiableProperty[] =
-    engineCallDeclaration?.bodyStatement?.expression.arguments[0].properties ??
-    [];
-
   const initialVoictentByGeppProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
@@ -175,7 +355,7 @@ const getAdaptedEngineProgramLocator = ({
 
   const parallelErrorList: ProgramErrorOdeshin[] = [];
 
-  if (engineCallDeclaration.commentText === null) {
+  if (engineCallCommentText === null) {
     parallelErrorList.push({
       zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
       grition: {
@@ -194,7 +374,7 @@ const getAdaptedEngineProgramLocator = ({
     zorn: engineProgramFile.filePath,
     grition: {
       programName,
-      description: engineCallDeclaration.commentText ?? '',
+      description: engineCallCommentText ?? '',
       filePath: engineProgramFile.filePath,
       initialVoictentNameList,
       engineEstinantLocatorList,
@@ -263,11 +443,14 @@ export const getEngineProgramLocator = buildEstinant({
         };
       }
 
+      const engineCallExpressionPropertyList: IdentifiableProperty[] =
+        engineCallDeclaration?.bodyStatement?.expression.arguments[0]
+          .properties ?? [];
+
       const { engineFunctionConfiguration } = engineProgramFile;
 
       switch (engineFunctionConfiguration.typeName) {
         case EngineFunctionConfigurationTypeName.Core:
-        case EngineFunctionConfigurationTypeName.Core2:
           return {
             [PROGRAM_ERROR_GEPP]: [
               {
@@ -285,13 +468,29 @@ export const getEngineProgramLocator = buildEstinant({
             ],
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [],
           };
+        case EngineFunctionConfigurationTypeName.Core2: {
+          const { parallelErrorList, engineProgramLocator } =
+            getCore2EngineProgramLocator({
+              engineProgramFile: engineProgramFile.file,
+              engineFunctionConfiguration,
+              importList,
+              engineCallCommentText: engineCallDeclaration.commentText,
+              engineCallExpressionPropertyList,
+            });
+
+          return {
+            [PROGRAM_ERROR_GEPP]: parallelErrorList,
+            [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [engineProgramLocator],
+          };
+        }
         case EngineFunctionConfigurationTypeName.Adapted: {
           const { parallelErrorList, engineProgramLocator } =
             getAdaptedEngineProgramLocator({
               engineProgramFile: engineProgramFile.file,
               engineFunctionConfiguration,
               importList,
-              engineCallDeclaration,
+              engineCallCommentText: engineCallDeclaration.commentText,
+              engineCallExpressionPropertyList,
             });
 
           return {
