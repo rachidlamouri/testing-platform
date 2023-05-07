@@ -356,7 +356,11 @@ export const digikikify = ({
 
           const cology: Cology = {
             leftDreanor: dreanor,
-            leftInput: indexedHubblepup,
+            leftInput:
+              platomity.estinant.version === 2 &&
+              leftInputTypeName === ReferenceTypeName.Voictent
+                ? indexedHubblepup.hubblepup
+                : indexedHubblepup,
             mabz: new Mabz(mabzEntryList),
           };
 
@@ -372,15 +376,8 @@ export const digikikify = ({
 
           touchedCologySet.add(cology);
         } else {
-          const {
-            typeName: rightInputTypeName,
-            value: rightInputReferenceValue,
-          } = dreanor.lanbe.dereference();
-
-          const rightInput =
-            rightInputTypeName === ReferenceTypeName.IndexedVoictentItem
-              ? rightInputReferenceValue
-              : rightInputReferenceValue;
+          const { typeName: rightInputTypeName, value: rightInput } =
+            dreanor.lanbe.dereference();
 
           let zorn: Zorn;
           if (dreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
@@ -391,13 +388,13 @@ export const digikikify = ({
             dreanor.typeName === DreanorTypeName.RightVoictentItemDreanor &&
             rightInputTypeName === ReferenceTypeName.VoictentItem
           ) {
-            zorn = dreanor.croard(rightInputReferenceValue);
+            zorn = dreanor.croard(rightInput);
             dreanor.prected.set(zorn, rightInput);
           } else if (
             dreanor.typeName === DreanorTypeName.RightVoictentItem2Dreanor &&
             rightInputTypeName === ReferenceTypeName.IndexedVoictentItem
           ) {
-            zorn = dreanor.croard(rightInputReferenceValue);
+            zorn = dreanor.croard(rightInput);
             dreanor.prected.set(zorn, rightInput);
           } else {
             // TODO: remove this else once all voictent item lanbes return indexed hubblepups
@@ -511,7 +508,8 @@ export const digikikify = ({
       );
 
       outputQuirmTuple = platomity.estinant.tropoig(
-        leftInput,
+        // TODO: this cast isn't right, but this whole case will go away, so whatever
+        leftInput as GenericIndexedHubblepup,
         ...rightInputTuple,
       );
     }

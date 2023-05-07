@@ -9,6 +9,7 @@ debug/*
 !debug/test-serialize
 !debug/test-joining-one-to-one
 !debug/test-joining-one-to-many
+!debug/test-voictent-input
 
 !debug/testGraphRender
 debug/testGraphRender/*
