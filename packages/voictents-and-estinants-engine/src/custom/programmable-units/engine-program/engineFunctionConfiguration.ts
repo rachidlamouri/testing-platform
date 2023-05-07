@@ -2,12 +2,39 @@ import { Grition } from '../../adapter/grition';
 import { Hubblepup } from '../../adapter/hubblepup';
 import { Voictent } from '../../adapter/voictent';
 
-export type EngineFunctionConfiguration = {
-  filePath: string;
-  exportedIdentifier: string;
-  estinantListKeyIdentifierName: string;
-  initialVoictentByGeppKeyIdentifierName: string;
+export enum EngineFunctionConfigurationTypeName {
+  Core = 'Core',
+  Core2 = 'Core2',
+  Adapted = 'Adapted',
+}
+
+export type CoreEngineFunctionConfiguration = {
+  typeName: EngineFunctionConfigurationTypeName.Core;
+  filePath: 'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts';
+  exportedIdentifier: 'digikikify';
 };
+
+export type CoreEngineFunction2Configuration = {
+  typeName: EngineFunctionConfigurationTypeName.Core2;
+  filePath: 'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts';
+  exportedIdentifier: 'digikikify2';
+  estinantListKeyIdentifierName: 'estinantTuple';
+  voictentListKeyIdentifierName: 'inputVoictentList';
+  voictentGeppKeyIdentifierName: 'gepp';
+};
+
+export type AdaptedEngineFunctionConfiguration = {
+  typeName: EngineFunctionConfigurationTypeName.Adapted;
+  filePath: 'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts';
+  exportedIdentifier: 'digikikify';
+  estinantListKeyIdentifierName: 'estinantTuple';
+  initialVoictentByGeppKeyIdentifierName: 'initialVoictentsByGepp';
+};
+
+export type EngineFunctionConfiguration =
+  | CoreEngineFunctionConfiguration
+  | CoreEngineFunction2Configuration
+  | AdaptedEngineFunctionConfiguration;
 
 export type EngineFunctionConfigurationGrition =
   Grition<EngineFunctionConfiguration>;
@@ -26,21 +53,31 @@ export type EngineFunctionConfigurationVoictent = Voictent<
   EngineFunctionConfigurationHubblepup
 >;
 
-export const ENGINE_FUNCTION_CONFIGURATION: EngineFunctionConfigurationHubblepup =
+export const CORE_ENGINE_FUNCTION_CONFIGURATION: CoreEngineFunctionConfiguration =
   {
+    typeName: EngineFunctionConfigurationTypeName.Core,
+    filePath:
+      'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts',
+    exportedIdentifier: 'digikikify',
+  };
+
+export const CORE_ENGINE_FUNCTION_2_CONFIGURATION: CoreEngineFunction2Configuration =
+  {
+    typeName: EngineFunctionConfigurationTypeName.Core2,
+    filePath:
+      'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts',
+    exportedIdentifier: 'digikikify2',
+    estinantListKeyIdentifierName: 'estinantTuple',
+    voictentListKeyIdentifierName: 'inputVoictentList',
+    voictentGeppKeyIdentifierName: 'gepp',
+  };
+
+export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfiguration =
+  {
+    typeName: EngineFunctionConfigurationTypeName.Adapted,
     filePath:
       'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts',
     exportedIdentifier: 'digikikify',
     estinantListKeyIdentifierName: 'estinantTuple',
     initialVoictentByGeppKeyIdentifierName: 'initialVoictentsByGepp',
-  };
-
-export const CORE_ENGINE_FUNCTION_CONFIGURATION: EngineFunctionConfigurationHubblepup =
-  {
-    filePath:
-      'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts',
-    exportedIdentifier: 'digikikify',
-    // TODO: these fields are not used. The two hard coded configurations in this file should really be part of two separate singleton collections
-    estinantListKeyIdentifierName: '',
-    initialVoictentByGeppKeyIdentifierName: '',
   };

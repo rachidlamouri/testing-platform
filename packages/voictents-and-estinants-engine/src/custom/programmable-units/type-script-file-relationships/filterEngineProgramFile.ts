@@ -39,26 +39,44 @@ export const filterEngineProgramFile = buildEstinant({
   })
   .onPinbe(
     (parsedFileOdeshin, [importList], engineFunctionConfigurationList) => {
-      const hasEngineFunctionImport = importList.some((fileImport) => {
-        return engineFunctionConfigurationList.some(
+      const combinationList = importList.flatMap((fileImport) => {
+        return engineFunctionConfigurationList.map(
           (engineFunctionConfiguration) => {
-            return (
-              fileImport.isInternal &&
-              fileImport.sourcePath === engineFunctionConfiguration.filePath &&
-              fileImport.specifierList.some(
-                (specifier) =>
-                  specifier === engineFunctionConfiguration.exportedIdentifier,
-              )
-            );
+            return {
+              fileImport,
+              engineFunctionConfiguration,
+            };
           },
         );
       });
 
-      if (!hasEngineFunctionImport) {
+      const engineFunctionImportCombination = combinationList.find(
+        ({ fileImport, engineFunctionConfiguration }) => {
+          return (
+            fileImport.isInternal &&
+            fileImport.sourcePath === engineFunctionConfiguration.filePath &&
+            fileImport.specifierList.some(
+              (specifier) =>
+                specifier === engineFunctionConfiguration.exportedIdentifier,
+            )
+          );
+        },
+      );
+
+      if (engineFunctionImportCombination === undefined) {
         return [];
       }
 
-      return [parsedFileOdeshin];
+      return [
+        {
+          zorn: parsedFileOdeshin.zorn,
+          grition: {
+            file: parsedFileOdeshin.grition,
+            engineFunctionConfiguration:
+              engineFunctionImportCombination.engineFunctionConfiguration,
+          },
+        },
+      ];
     },
   )
   .assemble();

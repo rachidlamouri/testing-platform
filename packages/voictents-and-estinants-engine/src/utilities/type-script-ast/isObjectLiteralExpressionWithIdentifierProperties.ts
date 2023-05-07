@@ -16,6 +16,13 @@ export const isIdentifiableProperty = (
   node.type === AST_NODE_TYPES.Property &&
   node.key.type === AST_NODE_TYPES.Identifier;
 
+export const isSepcificIdentifiableProperty = (
+  node: TSESTree.Node,
+  identifierName: string,
+): node is IdentifiableProperty => {
+  return isIdentifiableProperty(node) && node.key.name === identifierName;
+};
+
 export const isObjectExpressionWithIdentifierProperties = (
   node: TypeScriptNode,
 ): node is ObjectExpressionWithIdentifierProperties =>

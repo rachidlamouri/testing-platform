@@ -1,9 +1,14 @@
 import { Grition } from '../../adapter/grition';
 import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
+import { EngineFunctionConfiguration } from '../engine-program/engineFunctionConfiguration';
 import { TypeScriptFile } from '../type-script-file/typeScriptFile';
 
-export type EngineProgramFile = TypeScriptFile;
+// TODO: this is no longer a "File" so change the name accordingly
+export type EngineProgramFile = {
+  file: TypeScriptFile;
+  engineFunctionConfiguration: EngineFunctionConfiguration;
+};
 
 export type EngineProgramFileGrition = Grition<EngineProgramFile>;
 
