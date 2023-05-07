@@ -40,12 +40,7 @@ export type UnsafeRightInputHubblepupTupleVicken =
   RightInputHubblepupTupleVicken<UnsafeVoque, ZornTuple>;
 
 export type RightInputVoictentVicken<TVoque extends GenericVoque> =
-  BaseRightInputVicken<
-    TVoque['gepp'],
-    TVoque['indexedEmittedHubblepup'],
-    true,
-    never
-  >;
+  BaseRightInputVicken<TVoque['gepp'], TVoque['emittedVoictent'], true, never>;
 
 export type GenericRightInputVoictentVicken =
   RightInputVoictentVicken<GenericVoque>;

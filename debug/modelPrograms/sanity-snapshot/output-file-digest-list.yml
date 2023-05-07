@@ -26,6 +26,8 @@
     "digest": "29194d7b763de0a6c1039c75477565879cdc271c"
   - "fileName": "test-joining-one-to-one"
     "digest": "74a0b360d4c4f3643c8ab9b723282cc419956234"
+  - "fileName": "test-joining-one-to-voictent"
+    "digest": "6c570a27be8b09654ff1f7a643d42f746256a2ac"
   - "fileName": "test-typed-datum"
     "digest": "6c9e5d42c99a80192547948b715d910add3a5fd3"
   - "fileName": "test-voictent-input"

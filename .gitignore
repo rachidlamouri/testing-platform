@@ -10,6 +10,7 @@ debug/*
 !debug/test-joining-one-to-one
 !debug/test-joining-one-to-many
 !debug/test-voictent-input
+!debug/test-joining-one-to-voictent
 
 !debug/testGraphRender
 debug/testGraphRender/*

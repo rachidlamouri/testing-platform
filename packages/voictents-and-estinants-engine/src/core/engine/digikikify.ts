@@ -46,6 +46,7 @@ import { Tabilly } from './tabilly';
 import { GenericVoictent2 } from './voictent2';
 import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
 import { Tuple } from '../../utilities/semantic-types/tuple';
+import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/rightInputAppreffinge';
 
 export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
 
@@ -172,29 +173,31 @@ export const digikikify = ({
 
         const rightDreanorTuple = rightInputAppreffingeTuple.map<RightDreanor>(
           (rightInputAppreffinge) => {
-            if (getIsWibiz(rightInputAppreffinge)) {
+            if (
+              getIsRightInputHubblepupTupleAppreffinge(rightInputAppreffinge)
+            ) {
               return {
-                typeName: DreanorTypeName.RightVoictentDreanor,
+                typeName: DreanorTypeName.RightVoictentItem2Dreanor,
                 gepp: rightInputAppreffinge.gepp,
                 lanbe: createLanbe2(
                   estinant,
                   rightInputAppreffinge,
-                ) as VoictentLanbe,
-                isReady: false,
-              } satisfies RightVoictentDreanor;
+                ) as GenericVoictentItemLanbe2,
+                framate: rightInputAppreffinge.framate,
+                croard: rightInputAppreffinge.croard,
+                prected: new Prected(),
+              } satisfies RightVoictentItem2Dreanor;
             }
 
             return {
-              typeName: DreanorTypeName.RightVoictentItem2Dreanor,
+              typeName: DreanorTypeName.RightVoictentDreanor,
               gepp: rightInputAppreffinge.gepp,
               lanbe: createLanbe2(
                 estinant,
                 rightInputAppreffinge,
-              ) as GenericVoictentItemLanbe2,
-              framate: rightInputAppreffinge.framate,
-              croard: rightInputAppreffinge.croard,
-              prected: new Prected(),
-            } satisfies RightVoictentItem2Dreanor;
+              ) as VoictentLanbe,
+              isReady: false,
+            } satisfies RightVoictentDreanor;
           },
         );
 
@@ -455,7 +458,10 @@ export const digikikify = ({
       const rightInputTuple = platomity.rightDreanorTuple.map(
         (rightDreanor) => {
           if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-            throw Error('Unhandled scenario');
+            // TODO: Remove this cast to unknown when the Voictent interface stops assuming a voictent lanbe returns a HubblepupTuple
+            const rightInputElement = rightDreanor.lanbe.dereference()
+              .value as unknown;
+            return rightInputElement;
           }
 
           const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;

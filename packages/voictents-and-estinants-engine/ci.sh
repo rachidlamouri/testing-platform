@@ -40,6 +40,11 @@ npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-
 bash checkUncommitted.sh
 printf "\n"
 
+echo "Testing joining each item in a collection to a whole collection"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testJoiningOneToVoictent.ts
+bash checkUncommitted.sh
+printf "\n"
+
 echo "Test test-graph-render is unchanged"
 npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render/testGraphRender.ts
 bash checkUncommitted.sh
