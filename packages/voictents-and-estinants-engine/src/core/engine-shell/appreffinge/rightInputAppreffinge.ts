@@ -1,6 +1,6 @@
 import { Merge } from 'type-fest';
 import {
-  GenericRightInputHubblepupVicken,
+  GenericRightInputHubblepupTupleVicken,
   GenericRightInputVicken,
   GenericRightInputVickenTuple,
 } from '../vicken/rightInputVicken';
@@ -16,7 +16,7 @@ export type RightInputAppreffinge<
     gepp: TRightInputVicken['gepp'];
     isWibiz: TRightInputVicken['isWibiz'];
   },
-  TRightInputVicken extends GenericRightInputHubblepupVicken
+  TRightInputVicken extends GenericRightInputHubblepupTupleVicken
     ? {
         croard: Croader3<TRightInputVicken>;
         framate: Framation3<TLeftInputVicken, TRightInputVicken>;

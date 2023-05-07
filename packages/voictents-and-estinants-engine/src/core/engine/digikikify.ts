@@ -379,7 +379,7 @@ export const digikikify = ({
 
           const rightInput =
             rightInputTypeName === ReferenceTypeName.IndexedVoictentItem
-              ? rightInputReferenceValue.hubblepup
+              ? rightInputReferenceValue
               : rightInputReferenceValue;
 
           let zorn: Zorn;
@@ -452,31 +452,24 @@ export const digikikify = ({
   }: CologyExecutionContext): void => {
     const { leftInput } = cology;
 
-    const rightInputTuple: GenericIndexedHubblepupTuple =
-      platomity.rightDreanorTuple.map<GenericIndexedHubblepup>(
-        (rightDreanor) => {
-          if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-            const rightInput = rightDreanor.lanbe.dereference().value;
-            return {
-              hubblepup: rightInput,
-              indexByName: {},
-            };
-          }
-
-          const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
-          const rightInput = zornTuple.map((zorn) => {
-            return rightDreanor.prected.get(zorn);
-          });
-          return {
-            hubblepup: rightInput,
-            indexByName: {},
-          };
-        },
-      );
-
     let outputQuirmTuple: QuirmList = [];
 
     if (platomity.version === 2) {
+      const rightInputTuple = platomity.rightDreanorTuple.map(
+        (rightDreanor) => {
+          if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
+            throw Error('Unhandled scenario');
+          }
+
+          const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
+          const rightInputTupleElement = zornTuple.map((zorn) => {
+            return rightDreanor.prected.get(zorn);
+          }) as GenericIndexedHubblepupTuple;
+
+          return rightInputTupleElement;
+        },
+      );
+
       const outputRecord = platomity.estinant.tropoig(
         leftInput,
         ...rightInputTuple,
@@ -495,6 +488,28 @@ export const digikikify = ({
           });
         });
     } else {
+      const rightInputTuple = platomity.rightDreanorTuple.map(
+        (rightDreanor) => {
+          if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
+            const rightInputElement = rightDreanor.lanbe.dereference().value;
+            return {
+              hubblepup: rightInputElement,
+              indexByName: {},
+            };
+          }
+
+          const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
+          const rightInputTupleElement = zornTuple.map((zorn) => {
+            return rightDreanor.prected.get(zorn);
+          });
+
+          return {
+            hubblepup: rightInputTupleElement,
+            indexByName: {},
+          };
+        },
+      );
+
       outputQuirmTuple = platomity.estinant.tropoig(
         leftInput,
         ...rightInputTuple,

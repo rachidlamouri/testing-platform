@@ -16,25 +16,28 @@ type BaseRightInputVicken<
   zornTupleOption: TZornTuple[number];
 };
 
-export type RightInputHubblepupVicken<
+type RightTropoignantInputTupleFromZornTuple<
+  TVoque extends GenericVoque,
+  TZornTuple extends ZornTuple,
+> = {
+  readonly [Index in keyof TZornTuple]: TVoque['indexedEmittedHubblepup'];
+};
+
+export type RightInputHubblepupTupleVicken<
   TVoque extends GenericVoque,
   TZornTuple extends ZornTuple,
 > = BaseRightInputVicken<
   TVoque['gepp'],
-  TVoque['indexedEmittedHubblepup'],
+  RightTropoignantInputTupleFromZornTuple<TVoque, TZornTuple>,
   false,
   TZornTuple
 >;
 
-export type GenericRightInputHubblepupVicken = RightInputHubblepupVicken<
-  GenericVoque,
-  ZornTuple
->;
+export type GenericRightInputHubblepupTupleVicken =
+  RightInputHubblepupTupleVicken<GenericVoque, ZornTuple>;
 
-export type UnsafeRightInputHubblepupVicken = RightInputHubblepupVicken<
-  UnsafeVoque,
-  ZornTuple
->;
+export type UnsafeRightInputHubblepupTupleVicken =
+  RightInputHubblepupTupleVicken<UnsafeVoque, ZornTuple>;
 
 export type RightInputVoictentVicken<TVoque extends GenericVoque> =
   BaseRightInputVicken<
@@ -51,11 +54,11 @@ export type UnsafeRightInputVoictentVicken =
   RightInputVoictentVicken<UnsafeVoque>;
 
 export type GenericRightInputVicken =
-  | GenericRightInputHubblepupVicken
+  | GenericRightInputHubblepupTupleVicken
   | GenericRightInputVoictentVicken;
 
 export type UnsafeRightInputVicken =
-  | UnsafeRightInputHubblepupVicken
+  | UnsafeRightInputHubblepupTupleVicken
   | UnsafeRightInputVoictentVicken;
 
 export type GenericRightInputVickenTuple = Tuple<GenericRightInputVicken>;
