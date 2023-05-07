@@ -141,8 +141,9 @@ const getCore2EngineProgramLocator = ({
       parallelErrorList.push({
         zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
         grition: {
-          errorId: `getEngineProgramLocator/non-identifier-estinant`,
-          message: 'Engine program has an estinant that is not a reference',
+          errorId: `getEngineProgramLocator/non-identifier-voicent-gepp`,
+          message:
+            'Engine program has a voictent definition with a gepp that is not an identifiable reference',
           locator: {
             typeName: ErrorLocatorTypeName.FileErrorLocator,
             filePath: engineProgramFile.filePath,

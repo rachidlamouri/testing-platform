@@ -17,6 +17,10 @@ import {
 
 type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 
+/**
+ * Tests the "getTypeScriptTypedDatum" function. Commit the output to keep track
+ * of when the function's behavior changes (which it shouldn't)
+ */
 digikikify2({
   inputVoictentList: [
     new InMemoryOdeshinVoictent({

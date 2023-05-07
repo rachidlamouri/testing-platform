@@ -13,6 +13,9 @@ type Voictent1Configuration = InMemoryVoque<'voictent-1', string>;
 type Voictent2Configuration = InMemoryVoque<'voictent-2', number>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
+/**
+ * An example program using a Voictent that is derived from a Voque
+ */
 digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<Voictent1Configuration>({

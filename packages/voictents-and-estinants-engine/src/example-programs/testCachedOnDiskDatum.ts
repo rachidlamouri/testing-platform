@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { digikikify } from '../core/engine/digikikify';
+import { digikikify2 } from '../core/engine/digikikify';
 import {
   InMemoryVoictent,
   InMemoryVoque,
@@ -9,7 +9,9 @@ import {
   CachedOnDiskVoictent,
   CachedOnDiskVoque,
 } from '../core/engine/cachedOnDiskVoictent';
-import { QuirmList } from '../core/engine-shell/quirm/quirm';
+import { OutputVicken } from '../core/engine-shell/vicken/outputVicken';
+import { Estinant2 } from '../core/engine-shell/estinant/estinant';
+import { LeftInputHubblepupVicken } from '../core/engine-shell/vicken/leftInputVicken';
 
 type InputVoque = InMemoryVoque<'input', CacheableAccessor<string>>;
 
@@ -20,7 +22,10 @@ const nameSpace = 'test-cached-on-disk-datum';
 const filePath =
   'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts';
 
-digikikify({
+/**
+ * An example program to demonstrate "CachedOnDiskVoictent"
+ */
+digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<InputVoque>({
       gepp: 'input',
@@ -42,19 +47,25 @@ digikikify({
   ],
   estinantTuple: [
     {
-      leftAppreffinge: {
+      version: 2,
+      name: 'writeDatumToCache',
+      leftInputAppreffinge: {
         gepp: 'input',
+        isWibiz: false,
       },
-      rightAppreffingeTuple: [],
-      tropoig: (rawInput): QuirmList => {
-        return [
-          {
-            gepp: 'cached',
-            hubblepup: rawInput.hubblepup,
-          },
-        ];
+      outputAppreffinge: {
+        geppTuple: ['cached'],
       },
-    },
+      rightInputAppreffingeTuple: [],
+      tropoig: (rawInput): OutputVicken<[CachedVoque]>['tropoignantOutput'] => {
+        return {
+          cached: [rawInput.hubblepup],
+        };
+      },
+    } satisfies Estinant2<
+      LeftInputHubblepupVicken<InputVoque>,
+      [],
+      OutputVicken<[CachedVoque]>
+    >,
   ],
-  onHubblepupAddedToVoictents: () => {},
 });

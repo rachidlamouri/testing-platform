@@ -12,6 +12,10 @@ import {
 
 type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 
+/**
+ * Example program to test the "buildAddMetadataForSerialization" function.
+ * Commit the output to get a signal when the functionality changes.
+ */
 digikikify2({
   inputVoictentList: [
     new InMemoryOdeshinVoictent({

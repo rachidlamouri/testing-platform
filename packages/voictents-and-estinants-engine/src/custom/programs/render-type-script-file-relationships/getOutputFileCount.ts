@@ -8,6 +8,10 @@ import {
   SanitySnapshotVoictent,
 } from '../../programmable-units/sanitySnapshot';
 
+/**
+ * Captures the number of generated output files. Commit the output file count
+ * to check if changes to a program affect the number of output files.
+ */
 export const getOutputFileCount = buildEstinant({
   name: 'getOutputFileCount',
 })

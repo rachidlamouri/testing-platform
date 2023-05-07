@@ -28,6 +28,7 @@ import { getEngineEstinantLocatorCollection } from '../../programmable-units/eng
 import { getEngineEstinant } from '../../programmable-units/engine-program/getEngineEstinant';
 import { getEngineProgram2 } from '../../programmable-units/engine-program/getEngineProgram2';
 import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
+import { signalError } from '../../programmable-units/error/signalError';
 
 /**
  * Creates an interactive model for each engine program.
@@ -68,6 +69,8 @@ digikikify({
     captureOutputFileDigestList,
 
     reportErrors,
+
+    signalError,
   ],
   quirmDebugger: buildQuirmDebugger('modelPrograms'),
 });
