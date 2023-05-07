@@ -11,6 +11,7 @@ debug/*
 !debug/test-joining-one-to-many
 !debug/test-voictent-input
 !debug/test-joining-one-to-voictent
+!debug/test-joining-voictent-to-voictent
 
 !debug/testGraphRender
 debug/testGraphRender/*
