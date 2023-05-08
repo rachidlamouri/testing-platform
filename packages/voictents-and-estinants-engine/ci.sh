@@ -25,6 +25,41 @@ npx ts-node packages/voictents-and-estinants-engine/src/example-programs/testSer
 bash checkUncommitted.sh
 printf "\n"
 
+echo "Testing joining collections one to one"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testJoiningOneToOne.ts
+bash checkUncommitted.sh
+printf "\n"
+
+echo "Testing joining collections one to many"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testJoiningOneToMany.ts
+bash checkUncommitted.sh
+printf "\n"
+
+echo "Testing consuming a collection as a whole"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testVoictentInput.ts
+bash checkUncommitted.sh
+printf "\n"
+
+echo "Testing joining each item in a collection to a whole collection"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testJoiningOneToVoictent.ts
+bash checkUncommitted.sh
+printf "\n"
+
+echo "Testing joining two whole collections"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testJoiningVoictentToVoictent.ts
+bash checkUncommitted.sh
+printf "\n"
+
+echo "Testing releasing a left voictent multiple times"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testReleasingALeftVoictentMultipleTimes.ts
+bash checkUncommitted.sh
+printf "\n"
+
+echo "Testing releasing a right voictent multiple times"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testReleasingARightVoictentMultipleTimes.ts
+bash checkUncommitted.sh
+printf "\n"
+
 echo "Test test-graph-render is unchanged"
 npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render/testGraphRender.ts
 bash checkUncommitted.sh
@@ -38,4 +73,7 @@ printf "\n"
 echo "Test render-type-script-file-relationships is unchanged"
 npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts
 bash checkUncommitted.sh
+printf "\n"
+
+echo "Finished without errors!"
 printf "\n"

@@ -29,7 +29,7 @@ export type GenericVoque = Voque<
   unknown
 >;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type UnsafeVoque = Voque<Gepp, any, any, any, any>;
+export type UnsafeVoque = Voque<any, any, any, any, any>;
 
 export type GenericVoqueTuple = Tuple<GenericVoque>;
 

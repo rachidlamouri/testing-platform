@@ -39,6 +39,7 @@ export type RightVoictentDreanor = {
   gepp: Gepp;
   lanbe: VoictentLanbe;
   isReady: boolean;
+  mutableReference?: unknown;
 };
 
 export type RightVoictentItemDreanor = {

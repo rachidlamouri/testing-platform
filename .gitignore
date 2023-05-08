@@ -7,6 +7,13 @@ debug/*
 !debug/test-get-type-script-typed-datum
 !debug/test-get-custom-typed-datum
 !debug/test-serialize
+!debug/test-joining-one-to-one
+!debug/test-joining-one-to-many
+!debug/test-voictent-input
+!debug/test-joining-one-to-voictent
+!debug/test-joining-voictent-to-voictent
+!debug/test-releasing-a-left-voictent-multiple-times
+!debug/test-releasing-a-right-voictent-multiple-times
 
 !debug/testGraphRender
 debug/testGraphRender/*
