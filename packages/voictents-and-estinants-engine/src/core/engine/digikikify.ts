@@ -387,6 +387,9 @@ export const digikikify = ({
             zorn = dreanor.lanbe;
             // eslint-disable-next-line no-param-reassign
             dreanor.isReady = true;
+
+            // eslint-disable-next-line no-param-reassign
+            dreanor.mutableReference = rightInput;
           } else if (
             dreanor.typeName === DreanorTypeName.RightVoictentItemDreanor &&
             rightInputTypeName === ReferenceTypeName.VoictentItem
@@ -458,9 +461,7 @@ export const digikikify = ({
       const rightInputTuple = platomity.rightDreanorTuple.map(
         (rightDreanor) => {
           if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-            // TODO: Remove this cast to unknown when the Voictent interface stops assuming a voictent lanbe returns a HubblepupTuple
-            const rightInputElement = rightDreanor.lanbe.dereference()
-              .value as unknown;
+            const rightInputElement = rightDreanor.mutableReference;
             return rightInputElement;
           }
 
