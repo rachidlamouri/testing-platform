@@ -28,6 +28,7 @@ import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
   EngineProgramLocator2Odeshin,
   EngineProgramLocator2Voictent,
+  VoictentLocator,
 } from './engineProgramLocator2';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 import {
@@ -131,7 +132,7 @@ const getCore2EngineProgramLocator = ({
       ? initialVoictentListValueNode?.elements
       : [];
 
-  const initialVoictentNameList: string[] = [];
+  const voictentLocatorList: VoictentLocator[] = [];
   const parallelErrorList: ProgramErrorOdeshin[] = [];
 
   initialVoictentGeppIdentifierList.forEach((element) => {
@@ -153,16 +154,18 @@ const getCore2EngineProgramLocator = ({
 
     // TODO: for Core2 programs, voictents are only initial voictents if they specify initial data
     if (geppProperty !== undefined && isIdentifier(geppProperty.value)) {
-      initialVoictentNameList.push(
-        screamingSnakeCaseGeppToVoictentName(geppProperty.value.name),
-      );
+      voictentLocatorList.push({
+        name: screamingSnakeCaseGeppToVoictentName(geppProperty.value.name),
+        hasInitialInput: true,
+      });
     } else if (
       geppProperty !== undefined &&
       isStringLiteral(geppProperty.value)
     ) {
-      initialVoictentNameList.push(
-        kebabCaseGeppToVoictentName(geppProperty.value.value),
-      );
+      voictentLocatorList.push({
+        name: kebabCaseGeppToVoictentName(geppProperty.value.value),
+        hasInitialInput: true,
+      });
     } else {
       parallelErrorList.push({
         zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
@@ -276,7 +279,7 @@ const getCore2EngineProgramLocator = ({
       programName,
       description: engineCallCommentText ?? '',
       filePath: engineProgramFile.filePath,
-      initialVoictentNameList,
+      voictentLocatorList,
       engineEstinantLocatorList,
     },
   };
@@ -322,9 +325,15 @@ const getAdaptedEngineProgramLocator = ({
         )
       : [];
 
-  const initialVoictentNameList = initialVoictentGeppIdentifierList.map(
-    screamingSnakeCaseGeppToVoictentName,
-  );
+  const voictentLocatorList =
+    initialVoictentGeppIdentifierList.map<VoictentLocator>(
+      (screamingSnakeCaseName: string) => {
+        return {
+          name: screamingSnakeCaseGeppToVoictentName(screamingSnakeCaseName),
+          hasInitialInput: true,
+        };
+      },
+    );
 
   const estinantListProperty = engineCallExpressionPropertyList.find(
     (property) =>
@@ -404,7 +413,7 @@ const getAdaptedEngineProgramLocator = ({
       programName,
       description: engineCallCommentText ?? '',
       filePath: engineProgramFile.filePath,
-      initialVoictentNameList,
+      voictentLocatorList,
       engineEstinantLocatorList,
     },
   };

@@ -3,11 +3,16 @@ import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 
+export type VoictentLocator = {
+  name: string;
+  hasInitialInput: boolean;
+};
+
 export type EngineProgramLocator2 = {
   programName: string;
   description: string;
   filePath: string;
-  initialVoictentNameList: string[];
+  voictentLocatorList: VoictentLocator[];
   engineEstinantLocatorList: EngineEstinantLocator2[];
 };
 
