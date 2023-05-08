@@ -30,6 +30,8 @@
     "digest": "6c570a27be8b09654ff1f7a643d42f746256a2ac"
   - "fileName": "test-joining-voictent-to-voictent"
     "digest": "b3b24002b8140e7210e9d483f053713c513ff4b3"
+  - "fileName": "test-releasing-a-left-voictent-multiple-times"
+    "digest": "dac7908f81b8973b998181f0024a3d8aef0ce428"
   - "fileName": "test-typed-datum"
     "digest": "6c9e5d42c99a80192547948b715d910add3a5fd3"
   - "fileName": "test-voictent-input"

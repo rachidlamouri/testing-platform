@@ -12,6 +12,7 @@ debug/*
 !debug/test-voictent-input
 !debug/test-joining-one-to-voictent
 !debug/test-joining-voictent-to-voictent
+!debug/test-releasing-a-left-voictent-multiple-times
 
 !debug/testGraphRender
 debug/testGraphRender/*
