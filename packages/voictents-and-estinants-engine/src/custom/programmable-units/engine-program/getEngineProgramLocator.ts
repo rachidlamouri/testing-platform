@@ -47,6 +47,7 @@ import {
 import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
 import { isNewExpressionWithObjectExpressionArgument } from '../../../utilities/type-script-ast/isNewExpression';
 import { isStringLiteral } from '../../../utilities/type-script-ast/isStringLiteral';
+import { buildAddMetadataForSerialization } from '../../../example-programs/buildAddMetadataForSerialization';
 
 type EngineCallExpression = TSESTree.CallExpression & {
   arguments: [ObjectExpressionWithIdentifierProperties];
@@ -222,8 +223,8 @@ const getCore2EngineProgramLocator = ({
       parallelErrorList.push({
         zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
         grition: {
-          errorId: `getEngineProgramLocator/non-identifier-estinant`,
-          message: 'Engine program has an estinant that is not a reference',
+          errorId: `getEngineProgramLocator/unparseable-estinant`,
+          message: `Engine program has an unparseable estinant. Expected an identifier or a call expression to "${buildAddMetadataForSerialization.name}".`,
           locator: {
             typeName: ErrorLocatorTypeName.FileErrorLocator,
             filePath: engineProgramFile.filePath,
