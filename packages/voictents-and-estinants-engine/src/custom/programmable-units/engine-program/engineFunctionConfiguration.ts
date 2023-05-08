@@ -21,6 +21,7 @@ export type CoreEngineFunction2Configuration = {
   estinantListKeyIdentifierName: 'estinantTuple';
   voictentListKeyIdentifierName: 'inputVoictentList';
   voictentGeppKeyIdentifierName: 'gepp';
+  initialHubblepupTupleKeyIdentifierName: 'initialHubblepupTuple';
 };
 
 export type AdaptedEngineFunctionConfiguration = {
@@ -70,6 +71,7 @@ export const CORE_ENGINE_FUNCTION_2_CONFIGURATION: CoreEngineFunction2Configurat
     estinantListKeyIdentifierName: 'estinantTuple',
     voictentListKeyIdentifierName: 'inputVoictentList',
     voictentGeppKeyIdentifierName: 'gepp',
+    initialHubblepupTupleKeyIdentifierName: 'initialHubblepupTuple',
   };
 
 export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfiguration =

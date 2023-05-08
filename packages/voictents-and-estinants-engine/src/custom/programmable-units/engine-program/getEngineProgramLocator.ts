@@ -17,7 +17,10 @@ import {
   TypeScriptFileImportList,
   TypeScriptFileImportListVoictent,
 } from '../type-script-file/typeScriptFileImportList';
-import { isArrayExpressionOfIdentifiers } from '../../../utilities/type-script-ast/isArrayExpressionOfIdentifiers';
+import {
+  isArrayExpression,
+  isArrayExpressionOfIdentifiers,
+} from '../../../utilities/type-script-ast/isArrayExpressionOfIdentifiers';
 import { isSpecificExpressionStatement } from '../../../utilities/type-script-ast/isSpecificExpressionStatement';
 import {
   AdaptedEngineFunctionConfiguration,
@@ -137,26 +140,42 @@ const getCore2EngineProgramLocator = ({
 
   initialVoictentGeppIdentifierList.forEach((element) => {
     let geppProperty: IdentifiableProperty | undefined;
+    let initialHubblepupTupleProperty: IdentifiableProperty | undefined;
 
     if (isNewExpressionWithObjectExpressionArgument(element)) {
       geppProperty = element.arguments[0].properties.find(
         (node): node is IdentifiableProperty => {
-          // TODO: tie the word "gepp" back to something
           return isSepcificIdentifiableProperty(
             node,
             engineFunctionConfiguration.voictentGeppKeyIdentifierName,
           );
         },
       );
+
+      initialHubblepupTupleProperty = element.arguments[0].properties.find(
+        (node): node is IdentifiableProperty => {
+          return isSepcificIdentifiableProperty(
+            node,
+            engineFunctionConfiguration.initialHubblepupTupleKeyIdentifierName,
+          );
+        },
+      );
     } else {
       geppProperty = undefined;
+      initialHubblepupTupleProperty = undefined;
     }
 
-    // TODO: for Core2 programs, voictents are only initial voictents if they specify initial data
+    const hasInitialInput =
+      initialHubblepupTupleProperty !== undefined &&
+      isArrayExpression(initialHubblepupTupleProperty.value)
+        ? initialHubblepupTupleProperty.value.elements.length > 0
+        : // We are defaulting to true since this implies that some potentially non-empty array was passed in.
+          true;
+
     if (geppProperty !== undefined && isIdentifier(geppProperty.value)) {
       voictentLocatorList.push({
         name: screamingSnakeCaseGeppToVoictentName(geppProperty.value.name),
-        hasInitialInput: true,
+        hasInitialInput,
       });
     } else if (
       geppProperty !== undefined &&
@@ -164,15 +183,14 @@ const getCore2EngineProgramLocator = ({
     ) {
       voictentLocatorList.push({
         name: kebabCaseGeppToVoictentName(geppProperty.value.value),
-        hasInitialInput: true,
+        hasInitialInput,
       });
     } else {
       parallelErrorList.push({
         zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
         grition: {
-          errorId: `getEngineProgramLocator/unparseable-voicent-gepp`,
-          message:
-            'Engine program has a voictent definition with a gepp that is not an identifiable reference or a string literal',
+          errorId: `getEngineProgramLocator/unparseable-voicent`,
+          message: 'Engine program has an unparseable voictent definition',
           locator: {
             typeName: ErrorLocatorTypeName.FileErrorLocator,
             filePath: engineProgramFile.filePath,
