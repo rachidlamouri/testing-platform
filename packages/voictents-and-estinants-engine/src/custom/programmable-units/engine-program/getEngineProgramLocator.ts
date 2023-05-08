@@ -42,6 +42,7 @@ import {
 } from '../error/programError';
 import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
 import { isNewExpressionWithObjectExpressionArgument } from '../../../utilities/type-script-ast/isNewExpression';
+import { isStringLiteral } from '../../../utilities/type-script-ast/isStringLiteral';
 
 type EngineCallExpression = TSESTree.CallExpression & {
   arguments: [ObjectExpressionWithIdentifierProperties];
@@ -55,13 +56,28 @@ type EngineCallExpressionStatement = TSESTree.ExpressionStatement & {
  * @todo tie this to the logic that a gepp identifier is in screaming snake case
  * @todo tie this to the logic that enforces that a gepp identifier should end in 'GEPP'
  */
-const geppToVoictentName = (geppIdentifier: string): string => {
+const screamingSnakeCaseGeppToVoictentName = (
+  geppIdentifier: string,
+): string => {
   const namePartList = geppIdentifier.split('_');
 
   namePartList.pop();
 
   const voictentName = namePartList
     .map((word) => `${word.charAt(0)}${word.slice(1).toLowerCase()}`)
+    .join('');
+
+  return voictentName;
+};
+
+/**
+ * @todo tie this to the logic that a gepp literal is in kebab case
+ */
+const kebabCaseGeppToVoictentName = (geppLiteral: string): string => {
+  const namePartList = geppLiteral.split('-');
+
+  const voictentName = namePartList
+    .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
     .join('');
 
   return voictentName;
@@ -135,15 +151,25 @@ const getCore2EngineProgramLocator = ({
       geppProperty = undefined;
     }
 
+    // TODO: for Core2 programs, voictents are only initial voictents if they specify initial data
     if (geppProperty !== undefined && isIdentifier(geppProperty.value)) {
-      initialVoictentNameList.push(geppToVoictentName(geppProperty.value.name));
+      initialVoictentNameList.push(
+        screamingSnakeCaseGeppToVoictentName(geppProperty.value.name),
+      );
+    } else if (
+      geppProperty !== undefined &&
+      isStringLiteral(geppProperty.value)
+    ) {
+      initialVoictentNameList.push(
+        kebabCaseGeppToVoictentName(geppProperty.value.value),
+      );
     } else {
       parallelErrorList.push({
         zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
         grition: {
-          errorId: `getEngineProgramLocator/non-identifier-voicent-gepp`,
+          errorId: `getEngineProgramLocator/unparseable-voicent-gepp`,
           message:
-            'Engine program has a voictent definition with a gepp that is not an identifiable reference',
+            'Engine program has a voictent definition with a gepp that is not an identifiable reference or a string literal',
           locator: {
             typeName: ErrorLocatorTypeName.FileErrorLocator,
             filePath: engineProgramFile.filePath,
@@ -296,8 +322,9 @@ const getAdaptedEngineProgramLocator = ({
         )
       : [];
 
-  const initialVoictentNameList =
-    initialVoictentGeppIdentifierList.map(geppToVoictentName);
+  const initialVoictentNameList = initialVoictentGeppIdentifierList.map(
+    screamingSnakeCaseGeppToVoictentName,
+  );
 
   const estinantListProperty = engineCallExpressionPropertyList.find(
     (property) =>
