@@ -48,6 +48,7 @@ import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
 import { isNewExpressionWithObjectExpressionArgument } from '../../../utilities/type-script-ast/isNewExpression';
 import { isStringLiteral } from '../../../utilities/type-script-ast/isStringLiteral';
 import { buildAddMetadataForSerialization } from '../../../example-programs/buildAddMetadataForSerialization';
+import { isSpecificIdentifiableCallExpression } from '../../../utilities/type-script-ast/isCallExpression';
 
 type EngineCallExpression = TSESTree.CallExpression & {
   arguments: [ObjectExpressionWithIdentifierProperties];
@@ -219,6 +220,13 @@ const getCore2EngineProgramLocator = ({
   estinantReferenceElementList.forEach((element) => {
     if (isIdentifier(element)) {
       estinantNodeList.push(element);
+    } else if (
+      isSpecificIdentifiableCallExpression(
+        element,
+        buildAddMetadataForSerialization.name,
+      )
+    ) {
+      estinantNodeList.push(element.callee);
     } else {
       parallelErrorList.push({
         zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
