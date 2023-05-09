@@ -91,6 +91,8 @@ export const getEngineEstinant = buildEstinant({
       : null;
 
     if (callExpression === null) {
+      const estinantName = estinantLocator.identifierName;
+
       return {
         [PROGRAM_ERROR_GEPP]: [
           {
@@ -112,7 +114,20 @@ export const getEngineEstinant = buildEstinant({
             },
           },
         ],
-        [ENGINE_ESTINANT_2_GEPP]: [],
+        [ENGINE_ESTINANT_2_GEPP]: [
+          // TODO: remove this object when all of these errors are handled
+          {
+            zorn: engineEstinantLocatorOdeshin.zorn,
+            grition: {
+              id: getTextDigest(estinantName),
+              estinantName,
+              ...estinantLocator,
+              commentText: '',
+              inputList: [],
+              outputList: [],
+            } satisfies EngineEstinant2,
+          },
+        ],
       };
     }
 
