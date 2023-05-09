@@ -17,7 +17,10 @@ import {
   TypeScriptFileImportList,
   TypeScriptFileImportListVoictent,
 } from '../type-script-file/typeScriptFileImportList';
-import { isArrayExpressionOfIdentifiers } from '../../../utilities/type-script-ast/isArrayExpressionOfIdentifiers';
+import {
+  isArrayExpression,
+  isArrayExpressionOfIdentifiers,
+} from '../../../utilities/type-script-ast/isArrayExpressionOfIdentifiers';
 import { isSpecificExpressionStatement } from '../../../utilities/type-script-ast/isSpecificExpressionStatement';
 import {
   AdaptedEngineFunctionConfiguration,
@@ -28,6 +31,7 @@ import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
   EngineProgramLocator2Odeshin,
   EngineProgramLocator2Voictent,
+  VoictentLocator,
 } from './engineProgramLocator2';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 import {
@@ -42,6 +46,9 @@ import {
 } from '../error/programError';
 import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
 import { isNewExpressionWithObjectExpressionArgument } from '../../../utilities/type-script-ast/isNewExpression';
+import { isStringLiteral } from '../../../utilities/type-script-ast/isStringLiteral';
+import { buildAddMetadataForSerialization } from '../../../example-programs/buildAddMetadataForSerialization';
+import { isSpecificIdentifiableCallExpression } from '../../../utilities/type-script-ast/isCallExpression';
 
 type EngineCallExpression = TSESTree.CallExpression & {
   arguments: [ObjectExpressionWithIdentifierProperties];
@@ -55,13 +62,28 @@ type EngineCallExpressionStatement = TSESTree.ExpressionStatement & {
  * @todo tie this to the logic that a gepp identifier is in screaming snake case
  * @todo tie this to the logic that enforces that a gepp identifier should end in 'GEPP'
  */
-const geppToVoictentName = (geppIdentifier: string): string => {
+const screamingSnakeCaseGeppToVoictentName = (
+  geppIdentifier: string,
+): string => {
   const namePartList = geppIdentifier.split('_');
 
   namePartList.pop();
 
   const voictentName = namePartList
     .map((word) => `${word.charAt(0)}${word.slice(1).toLowerCase()}`)
+    .join('');
+
+  return voictentName;
+};
+
+/**
+ * @todo tie this to the logic that a gepp literal is in kebab case
+ */
+const kebabCaseGeppToVoictentName = (geppLiteral: string): string => {
+  const namePartList = geppLiteral.split('-');
+
+  const voictentName = namePartList
+    .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
     .join('');
 
   return voictentName;
@@ -115,35 +137,62 @@ const getCore2EngineProgramLocator = ({
       ? initialVoictentListValueNode?.elements
       : [];
 
-  const initialVoictentNameList: string[] = [];
+  const voictentLocatorList: VoictentLocator[] = [];
   const parallelErrorList: ProgramErrorOdeshin[] = [];
 
   initialVoictentGeppIdentifierList.forEach((element) => {
     let geppProperty: IdentifiableProperty | undefined;
+    let initialHubblepupTupleProperty: IdentifiableProperty | undefined;
 
     if (isNewExpressionWithObjectExpressionArgument(element)) {
       geppProperty = element.arguments[0].properties.find(
         (node): node is IdentifiableProperty => {
-          // TODO: tie the word "gepp" back to something
           return isSepcificIdentifiableProperty(
             node,
             engineFunctionConfiguration.voictentGeppKeyIdentifierName,
           );
         },
       );
+
+      initialHubblepupTupleProperty = element.arguments[0].properties.find(
+        (node): node is IdentifiableProperty => {
+          return isSepcificIdentifiableProperty(
+            node,
+            engineFunctionConfiguration.initialHubblepupTupleKeyIdentifierName,
+          );
+        },
+      );
     } else {
       geppProperty = undefined;
+      initialHubblepupTupleProperty = undefined;
     }
 
+    const hasInitialInput =
+      initialHubblepupTupleProperty !== undefined &&
+      isArrayExpression(initialHubblepupTupleProperty.value)
+        ? initialHubblepupTupleProperty.value.elements.length > 0
+        : // We are defaulting to true since this implies that some potentially non-empty array was passed in.
+          true;
+
     if (geppProperty !== undefined && isIdentifier(geppProperty.value)) {
-      initialVoictentNameList.push(geppToVoictentName(geppProperty.value.name));
+      voictentLocatorList.push({
+        name: screamingSnakeCaseGeppToVoictentName(geppProperty.value.name),
+        hasInitialInput,
+      });
+    } else if (
+      geppProperty !== undefined &&
+      isStringLiteral(geppProperty.value)
+    ) {
+      voictentLocatorList.push({
+        name: kebabCaseGeppToVoictentName(geppProperty.value.value),
+        hasInitialInput,
+      });
     } else {
       parallelErrorList.push({
         zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
         grition: {
-          errorId: `getEngineProgramLocator/non-identifier-voicent-gepp`,
-          message:
-            'Engine program has a voictent definition with a gepp that is not an identifiable reference',
+          errorId: `getEngineProgramLocator/unparseable-voicent`,
+          message: 'Engine program has an unparseable voictent definition',
           locator: {
             typeName: ErrorLocatorTypeName.FileErrorLocator,
             filePath: engineProgramFile.filePath,
@@ -171,12 +220,19 @@ const getCore2EngineProgramLocator = ({
   estinantReferenceElementList.forEach((element) => {
     if (isIdentifier(element)) {
       estinantNodeList.push(element);
+    } else if (
+      isSpecificIdentifiableCallExpression(
+        element,
+        buildAddMetadataForSerialization.name,
+      )
+    ) {
+      estinantNodeList.push(element.callee);
     } else {
       parallelErrorList.push({
         zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
         grition: {
-          errorId: `getEngineProgramLocator/non-identifier-estinant`,
-          message: 'Engine program has an estinant that is not a reference',
+          errorId: `getEngineProgramLocator/unparseable-estinant`,
+          message: `Engine program has an unparseable estinant. Expected an identifier or a call expression to "${buildAddMetadataForSerialization.name}".`,
           locator: {
             typeName: ErrorLocatorTypeName.FileErrorLocator,
             filePath: engineProgramFile.filePath,
@@ -250,7 +306,7 @@ const getCore2EngineProgramLocator = ({
       programName,
       description: engineCallCommentText ?? '',
       filePath: engineProgramFile.filePath,
-      initialVoictentNameList,
+      voictentLocatorList,
       engineEstinantLocatorList,
     },
   };
@@ -296,8 +352,15 @@ const getAdaptedEngineProgramLocator = ({
         )
       : [];
 
-  const initialVoictentNameList =
-    initialVoictentGeppIdentifierList.map(geppToVoictentName);
+  const voictentLocatorList =
+    initialVoictentGeppIdentifierList.map<VoictentLocator>(
+      (screamingSnakeCaseName: string) => {
+        return {
+          name: screamingSnakeCaseGeppToVoictentName(screamingSnakeCaseName),
+          hasInitialInput: true,
+        };
+      },
+    );
 
   const estinantListProperty = engineCallExpressionPropertyList.find(
     (property) =>
@@ -377,7 +440,7 @@ const getAdaptedEngineProgramLocator = ({
       programName,
       description: engineCallCommentText ?? '',
       filePath: engineProgramFile.filePath,
-      initialVoictentNameList,
+      voictentLocatorList,
       engineEstinantLocatorList,
     },
   };

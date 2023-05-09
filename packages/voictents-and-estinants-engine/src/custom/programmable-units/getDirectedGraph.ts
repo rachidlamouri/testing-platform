@@ -54,13 +54,13 @@ export const getDirectedGraph = buildEstinant({
   })
   .onPinbe((engineProgram) => {
     const engineVoictentByName = new Map<string, EngineVoictent>(
-      engineProgram.initialVoictentNameList.map((voictentName) => {
+      engineProgram.voictentLocatorList.map((voictentLocator) => {
         return [
-          voictentName,
+          voictentLocator.name,
           {
-            id: getTextDigest(voictentName),
-            name: voictentName,
-            hasInitialInput: true,
+            id: getTextDigest(voictentLocator.name),
+            name: voictentLocator.name,
+            hasInitialInput: voictentLocator.hasInitialInput,
             isConsumed: false,
           },
         ];

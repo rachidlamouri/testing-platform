@@ -6,6 +6,12 @@ export type ArrayExpressionOfIdentifiers = TSESTree.ArrayExpression & {
   elements: TSESTree.Identifier[];
 };
 
+export const isArrayExpression = (
+  node: TypeScriptNode,
+): node is TSESTree.ArrayExpression => {
+  return isNode(node) && node.type === AST_NODE_TYPES.ArrayExpression;
+};
+
 export const isArrayExpressionOfIdentifiers = (
   node: TypeScriptNode,
 ): node is ArrayExpressionOfIdentifiers =>

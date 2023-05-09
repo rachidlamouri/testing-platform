@@ -7,8 +7,12 @@ export const isCallExpression = (
 ): node is TSESTree.CallExpression =>
   isNode(node) && node.type === AST_NODE_TYPES.CallExpression;
 
+export type SpecificIdentifiableCallExpression = TSESTree.CallExpression & {
+  callee: TSESTree.Identifier;
+};
+
 export const isSpecificIdentifiableCallExpression = (
   node: TypeScriptNode,
   identifierName: string,
-): node is TSESTree.CallExpression =>
+): node is SpecificIdentifiableCallExpression =>
   isCallExpression(node) && isSpecificIdentifier(node.callee, identifierName);
