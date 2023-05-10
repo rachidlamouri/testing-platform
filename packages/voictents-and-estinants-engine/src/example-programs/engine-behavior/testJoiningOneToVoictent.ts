@@ -18,6 +18,39 @@ type Voque2 = InMemoryVoque<'voictent-2', string>;
 type Voque3 = InMemoryVoque<'voictent-3', string>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
+const gatherCollection: Estinant2<
+  LeftInputHubblepupVicken<Voque1>,
+  [RightInputVoictentVicken<Voque2>],
+  OutputVicken<[Voque3]>
+> = {
+  version: 2,
+  name: 'gatherCollection',
+  leftInputAppreffinge: {
+    gepp: 'voictent-1',
+    isWibiz: false,
+  },
+  rightInputAppreffingeTuple: [
+    {
+      gepp: 'voictent-2',
+      isWibiz: true,
+      framate: undefined,
+      croard: undefined,
+    },
+  ],
+  outputAppreffinge: {
+    geppTuple: ['voictent-3'],
+  },
+  tropoig: (leftInput, rightInput) => {
+    const serializedRightInput = `[${rightInput.join(', ')}]`;
+
+    const output = `${leftInput.hubblepup}-${serializedRightInput}`;
+
+    return {
+      'voictent-3': [output],
+    };
+  },
+};
+
 // TODO: debug the program snapshot for this one. The output collection appears to be out of the expected order (1, 2). Which is ok, but I want to know why.
 digikikify2({
   inputVoictentList: [
@@ -40,41 +73,7 @@ digikikify2({
     }),
   ],
   estinantTuple: [
-    {
-      version: 2,
-      name: 'gatherCollection',
-      leftInputAppreffinge: {
-        gepp: 'voictent-1',
-        isWibiz: false,
-      },
-      rightInputAppreffingeTuple: [
-        {
-          gepp: 'voictent-2',
-          isWibiz: true,
-          framate: undefined,
-          croard: undefined,
-        },
-      ],
-      outputAppreffinge: {
-        geppTuple: ['voictent-3'],
-      },
-      tropoig: (
-        leftInput,
-        rightInput,
-      ): OutputVicken<[Voque3]>['tropoignantOutput'] => {
-        const serializedRightInput = `[${rightInput.join(', ')}]`;
-
-        const output = `${leftInput.hubblepup}-${serializedRightInput}`;
-
-        return {
-          'voictent-3': [output],
-        };
-      },
-    } satisfies Estinant2<
-      LeftInputHubblepupVicken<Voque1>,
-      [RightInputVoictentVicken<Voque2>],
-      OutputVicken<[Voque3]>
-    >,
+    gatherCollection,
 
     buildAddMetadataForSerialization<Voque3, SerializedVoque>({
       inputGepp: 'voictent-3',

@@ -16,6 +16,31 @@ type Voque1 = InMemoryVoque<'voictent-1', string>;
 type Voque2 = InMemoryVoque<'voictent-2', string[]>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
+const gatherCollection: Estinant2<
+  LeftInputVoictentVicken<Voque1>,
+  [],
+  OutputVicken<[Voque2]>
+> = {
+  version: 2,
+  name: 'gatherCollection',
+  leftInputAppreffinge: {
+    gepp: 'voictent-1',
+    isWibiz: true,
+  },
+  rightInputAppreffingeTuple: [],
+  outputAppreffinge: {
+    geppTuple: ['voictent-2'],
+  },
+  tropoig: (input): OutputVicken<[Voque2]>['tropoignantOutput'] => {
+    return {
+      'voictent-2': [input],
+    };
+  },
+};
+
+/**
+ * Tests a transform that consumes a collection as a whole.
+ */
 digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<Voque1>({
@@ -33,27 +58,7 @@ digikikify2({
     }),
   ],
   estinantTuple: [
-    {
-      version: 2,
-      name: 'gatherCollection',
-      leftInputAppreffinge: {
-        gepp: 'voictent-1',
-        isWibiz: true,
-      },
-      rightInputAppreffingeTuple: [],
-      outputAppreffinge: {
-        geppTuple: ['voictent-2'],
-      },
-      tropoig: (input): OutputVicken<[Voque2]>['tropoignantOutput'] => {
-        return {
-          'voictent-2': [input],
-        };
-      },
-    } satisfies Estinant2<
-      LeftInputVoictentVicken<Voque1>,
-      [],
-      OutputVicken<[Voque2]>
-    >,
+    gatherCollection,
 
     buildAddMetadataForSerialization<Voque2, SerializedVoque>({
       inputGepp: 'voictent-2',

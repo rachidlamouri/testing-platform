@@ -22,6 +22,28 @@ const nameSpace = 'test-cached-on-disk-datum';
 const filePath =
   'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts';
 
+const writeDatumToCache: Estinant2<
+  LeftInputHubblepupVicken<InputVoque>,
+  [],
+  OutputVicken<[CachedVoque]>
+> = {
+  version: 2,
+  name: 'writeDatumToCache',
+  leftInputAppreffinge: {
+    gepp: 'input',
+    isWibiz: false,
+  },
+  outputAppreffinge: {
+    geppTuple: ['cached'],
+  },
+  rightInputAppreffingeTuple: [],
+  tropoig: (rawInput): OutputVicken<[CachedVoque]>['tropoignantOutput'] => {
+    return {
+      cached: [rawInput.hubblepup],
+    };
+  },
+};
+
 /**
  * An example program to demonstrate "CachedOnDiskVoictent"
  */
@@ -45,27 +67,5 @@ digikikify2({
       gepp: 'cached',
     }),
   ],
-  estinantTuple: [
-    {
-      version: 2,
-      name: 'writeDatumToCache',
-      leftInputAppreffinge: {
-        gepp: 'input',
-        isWibiz: false,
-      },
-      outputAppreffinge: {
-        geppTuple: ['cached'],
-      },
-      rightInputAppreffingeTuple: [],
-      tropoig: (rawInput): OutputVicken<[CachedVoque]>['tropoignantOutput'] => {
-        return {
-          cached: [rawInput.hubblepup],
-        };
-      },
-    } satisfies Estinant2<
-      LeftInputHubblepupVicken<InputVoque>,
-      [],
-      OutputVicken<[CachedVoque]>
-    >,
-  ],
+  estinantTuple: [writeDatumToCache],
 });

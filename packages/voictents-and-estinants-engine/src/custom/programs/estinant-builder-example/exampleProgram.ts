@@ -7,6 +7,9 @@ import { InputBVoictent, INPUT_B_GEPP } from './inputB';
 import { InputCVoictent, INPUT_C_GEPP } from './inputC';
 import { InputDVoictent, INPUT_D_GEPP } from './inputD';
 
+/**
+ * Tests consuming a collection as a whole
+ */
 const inputVoictentToOutputHubblepup = buildEstinant({
   name: 'inputVoictentToOutputHubblepup',
 })
@@ -24,6 +27,9 @@ const inputVoictentToOutputHubblepup = buildEstinant({
   })
   .assemble();
 
+/**
+ * Tests consuming each item of a collection
+ */
 const inputHubblepupToOutputHubblepup = buildEstinant({
   name: 'inputHubblepupToOutputHubblepup',
 })
@@ -41,6 +47,9 @@ const inputHubblepupToOutputHubblepup = buildEstinant({
   })
   .assemble();
 
+/**
+ * Tests consuming an inner datum
+ */
 const inputGritionToOutputHubblepup = buildEstinant({
   name: 'inputGritionToOutputHubblepup',
 })
@@ -58,6 +67,9 @@ const inputGritionToOutputHubblepup = buildEstinant({
   })
   .assemble();
 
+/**
+ * Tests consuming a left input and right input tuple
+ */
 const inputHubblepupAndInputHubblepupTupleToOutputHubblepup = buildEstinant({
   name: 'inputHubblepupAndInputHubblepupTupleToOutputHubblepup',
 })
@@ -84,6 +96,9 @@ const inputHubblepupAndInputHubblepupTupleToOutputHubblepup = buildEstinant({
   })
   .assemble();
 
+/**
+ * Tests consuming a left input and multiple right input tuples
+ */
 const inputHubblepupAndInputHubblepupTupleAndInputHubblepupTupleToOutputHubblepup =
   buildEstinant({
     name: 'inputHubblepupAndInputHubblepupTupleAndInputHubblepupTupleToOutputHubblepup',
@@ -132,6 +147,9 @@ const inputHubblepupAndInputHubblepupTupleAndInputHubblepupTupleToOutputHubblepu
     )
     .assemble();
 
+/**
+ * Tests consuming an inner datum and outputing an inner datum
+ */
 const inputGritionToOutputGrition = buildEstinant({
   name: 'inputGritionToOutputGrition',
 })
@@ -147,6 +165,9 @@ const inputGritionToOutputGrition = buildEstinant({
   })
   .assemble();
 
+/**
+ * Tests consuming each item from a left collection and a right collection as a whole
+ */
 const inputHubblepupAndInputVoictentToOutputHubblepup = buildEstinant({
   name: 'inputHubblepupAndInputVoictentToOutputHubblepup',
 })
@@ -156,7 +177,7 @@ const inputHubblepupAndInputVoictentToOutputHubblepup = buildEstinant({
   .andFromVoictent<InputDVoictent>({
     gepp: INPUT_D_GEPP,
   })
-  .toHubblepup({
+  .toHubblepup<OutputVoictent>({
     gepp: OUTPUT_GEPP,
   })
   .onPinbe((leftInput, rightInputTuple) => {

@@ -51,6 +51,10 @@ const joinCollections: Estinant2<
   },
 };
 
+/**
+ * Tests a transform that consumes one item in the right collection for each
+ * item in the left collection.
+ */
 digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<Voque1>({
