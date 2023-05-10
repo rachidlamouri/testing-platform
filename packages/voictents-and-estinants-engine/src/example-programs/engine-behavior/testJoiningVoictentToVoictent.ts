@@ -18,6 +18,46 @@ type Voque2 = InMemoryVoque<'voictent-2', string>;
 type Voque3 = InMemoryVoque<'voictent-3', string>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
+const gatherCollection: Estinant2<
+  LeftInputVoictentVicken<Voque1>,
+  [RightInputVoictentVicken<Voque2>],
+  OutputVicken<[Voque3]>
+> = {
+  version: 2,
+  name: 'gatherCollection',
+  leftInputAppreffinge: {
+    gepp: 'voictent-1',
+    isWibiz: true,
+  },
+  rightInputAppreffingeTuple: [
+    {
+      gepp: 'voictent-2',
+      isWibiz: true,
+      framate: undefined,
+      croard: undefined,
+    },
+  ],
+  outputAppreffinge: {
+    geppTuple: ['voictent-3'],
+  },
+  tropoig: (
+    leftInput,
+    rightInput,
+  ): OutputVicken<[Voque3]>['tropoignantOutput'] => {
+    const serializedLeftInput = `[${leftInput.join(', ')}]`;
+    const serializedRightInput = `[${rightInput.join(', ')}]`;
+
+    const output = `${serializedLeftInput}-${serializedRightInput}`;
+
+    return {
+      'voictent-3': [output],
+    };
+  },
+};
+
+/**
+ * Tests a transform that consumes two entire collections
+ */
 digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<Voque1>({
@@ -39,42 +79,7 @@ digikikify2({
     }),
   ],
   estinantTuple: [
-    {
-      version: 2,
-      name: 'gatherCollection',
-      leftInputAppreffinge: {
-        gepp: 'voictent-1',
-        isWibiz: true,
-      },
-      rightInputAppreffingeTuple: [
-        {
-          gepp: 'voictent-2',
-          isWibiz: true,
-          framate: undefined,
-          croard: undefined,
-        },
-      ],
-      outputAppreffinge: {
-        geppTuple: ['voictent-3'],
-      },
-      tropoig: (
-        leftInput,
-        rightInput,
-      ): OutputVicken<[Voque3]>['tropoignantOutput'] => {
-        const serializedLeftInput = `[${leftInput.join(', ')}]`;
-        const serializedRightInput = `[${rightInput.join(', ')}]`;
-
-        const output = `${serializedLeftInput}-${serializedRightInput}`;
-
-        return {
-          'voictent-3': [output],
-        };
-      },
-    } satisfies Estinant2<
-      LeftInputVoictentVicken<Voque1>,
-      [RightInputVoictentVicken<Voque2>],
-      OutputVicken<[Voque3]>
-    >,
+    gatherCollection,
 
     buildAddMetadataForSerialization<Voque3, SerializedVoque>({
       inputGepp: 'voictent-3',

@@ -22,6 +22,71 @@ type SerializedVoque = SerializableVoque<'serialized'>;
 
 const SKIP_INDEX = 2;
 
+const forwardFrom2To3AndSkipAValue: Estinant2<
+  LeftInputHubblepupVicken<Voque2>,
+  [],
+  OutputVicken<[Voque3]>
+> = {
+  version: 2,
+  name: 'forwardFrom2To3AndSkipAValue',
+  leftInputAppreffinge: {
+    gepp: 'voictent-2',
+    isWibiz: false,
+  },
+  rightInputAppreffingeTuple: [],
+  outputAppreffinge: {
+    geppTuple: ['voictent-3'],
+  },
+  tropoig(input): OutputVicken<[Voque3]>['tropoignantOutput'] {
+    if (input.indexByName.listIndex === SKIP_INDEX) {
+      return {
+        'voictent-3': [],
+      };
+    }
+
+    return {
+      'voictent-3': [input.hubblepup],
+    };
+  },
+};
+
+const join1ToAllOf3: Estinant2<
+  LeftInputHubblepupVicken<Voque1>,
+  [RightInputVoictentVicken<Voque3>],
+  OutputVicken<[Voque4]>
+> = {
+  version: 2,
+  name: 'join1ToAllOf3',
+  leftInputAppreffinge: {
+    gepp: 'voictent-1',
+    isWibiz: false,
+  },
+  rightInputAppreffingeTuple: [
+    {
+      gepp: 'voictent-3',
+      isWibiz: true,
+      croard: undefined,
+      framate: undefined,
+    },
+  ],
+  outputAppreffinge: {
+    geppTuple: ['voictent-4'],
+  },
+  tropoig(leftInput, rightInput): OutputVicken<[Voque4]>['tropoignantOutput'] {
+    const serializedRightInput = `[${rightInput.join(', ')}]`;
+
+    const output = `${leftInput.hubblepup}-${serializedRightInput}`;
+
+    return {
+      'voictent-4': [output],
+    };
+  },
+};
+
+/**
+ * Tests a transform that consumes a right collection in which the right
+ * collection causes the transform to trigger multiple times
+ */
 digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<Voque1>({
@@ -47,68 +112,8 @@ digikikify2({
     }),
   ],
   estinantTuple: [
-    {
-      version: 2,
-      name: 'forwardFrom2To3AndSkipAValue',
-      leftInputAppreffinge: {
-        gepp: 'voictent-2',
-        isWibiz: false,
-      },
-      rightInputAppreffingeTuple: [],
-      outputAppreffinge: {
-        geppTuple: ['voictent-3'],
-      },
-      tropoig(input): OutputVicken<[Voque3]>['tropoignantOutput'] {
-        if (input.indexByName.listIndex === SKIP_INDEX) {
-          return {
-            'voictent-3': [],
-          };
-        }
-
-        return {
-          'voictent-3': [input.hubblepup],
-        };
-      },
-    } satisfies Estinant2<
-      LeftInputHubblepupVicken<Voque2>,
-      [],
-      OutputVicken<[Voque3]>
-    >,
-    {
-      version: 2,
-      name: 'join1ToAllOf3',
-      leftInputAppreffinge: {
-        gepp: 'voictent-1',
-        isWibiz: false,
-      },
-      rightInputAppreffingeTuple: [
-        {
-          gepp: 'voictent-3',
-          isWibiz: true,
-          croard: undefined,
-          framate: undefined,
-        },
-      ],
-      outputAppreffinge: {
-        geppTuple: ['voictent-4'],
-      },
-      tropoig(
-        leftInput,
-        rightInput,
-      ): OutputVicken<[Voque4]>['tropoignantOutput'] {
-        const serializedRightInput = `[${rightInput.join(', ')}]`;
-
-        const output = `${leftInput.hubblepup}-${serializedRightInput}`;
-
-        return {
-          'voictent-4': [output],
-        };
-      },
-    } satisfies Estinant2<
-      LeftInputHubblepupVicken<Voque1>,
-      [RightInputVoictentVicken<Voque3>],
-      OutputVicken<[Voque4]>
-    >,
+    forwardFrom2To3AndSkipAValue,
+    join1ToAllOf3,
 
     buildAddMetadataForSerialization<Voque4, SerializedVoque>({
       inputGepp: 'voictent-4',
