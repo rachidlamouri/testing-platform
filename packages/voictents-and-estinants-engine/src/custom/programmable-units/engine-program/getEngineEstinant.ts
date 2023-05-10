@@ -93,27 +93,43 @@ export const getEngineEstinant = buildEstinant({
     if (callExpression === null) {
       const estinantName = estinantLocator.identifierName;
 
-      return {
-        [PROGRAM_ERROR_GEPP]: [
-          {
-            zorn: basicErrorZorn,
-            grition: {
-              errorId: `getEngineEstinant/missing-call-expression`,
-              message: 'Export declaration is missing a call expression',
-              locator: {
-                typeName: ErrorLocatorTypeName.FileErrorLocator,
-                filePath: estinantLocator.filePath,
-              },
-              metadata: {
-                hasIdentifiableNode:
-                  commentedBodyDeclaration?.identifiableNode !== undefined,
-                hasInitExpression: initExpression !== null,
-                hasCallExpression: callExpression !== null,
-                initExpression,
-              },
+      let error: ProgramErrorOdeshin<EstinantName>;
+      if (estinantLocator.isCoreEstinant) {
+        error = {
+          zorn: basicErrorZorn,
+          grition: {
+            errorId: `getEngineEstinant/unhandled-core-estinant`,
+            message: 'Parsing core engine estinants is not handled yet',
+            locator: {
+              typeName: ErrorLocatorTypeName.FileErrorLocator,
+              filePath: estinantLocator.filePath,
+            },
+            metadata: null,
+          },
+        };
+      } else {
+        error = {
+          zorn: basicErrorZorn,
+          grition: {
+            errorId: `getEngineEstinant/missing-call-expression`,
+            message: 'Export declaration is missing a call expression',
+            locator: {
+              typeName: ErrorLocatorTypeName.FileErrorLocator,
+              filePath: estinantLocator.filePath,
+            },
+            metadata: {
+              hasIdentifiableNode:
+                commentedBodyDeclaration?.identifiableNode !== undefined,
+              hasInitExpression: initExpression !== null,
+              hasCallExpression: callExpression !== null,
+              initExpression,
             },
           },
-        ],
+        };
+      }
+
+      return {
+        [PROGRAM_ERROR_GEPP]: [error],
         [ENGINE_ESTINANT_2_GEPP]: [
           // TODO: remove this object when all of these errors are handled
           {

@@ -5,10 +5,12 @@ import { Voictent } from '../../adapter/voictent';
 export type EngineEstinantLocator2 = {
   identifierName: string;
   filePath: string;
+  isCoreEstinant: boolean;
 };
 
-export const getEngineEstinantLocatorZorn = (locator: EngineEstinantLocator2) =>
-  `${locator.identifierName}:${locator.filePath}` as const;
+export const getEngineEstinantLocatorZorn = (
+  locator: Omit<EngineEstinantLocator2, 'isCoreEstinant'>,
+) => `${locator.identifierName}:${locator.filePath}` as const;
 
 export type EngineEstinantLocator2Grition = Grition<EngineEstinantLocator2>;
 

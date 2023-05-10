@@ -263,25 +263,26 @@ const getCore2EngineProgramLocator = ({
       fileImportsByImportedIdentifier.set(specifier, fileImport);
     });
 
-  const engineEstinantLocatorList = estinantIdentifierList
-    .map((identifierName) => {
-      const fileImport = fileImportsByImportedIdentifier.get(identifierName);
+  const engineEstinantLocatorList: EngineEstinantLocator2[] = [];
 
-      if (fileImport === undefined) {
-        return null;
-      }
+  estinantIdentifierList.forEach((identifierName) => {
+    const fileImport = fileImportsByImportedIdentifier.get(identifierName);
 
-      return {
+    if (fileImport === undefined) {
+      engineEstinantLocatorList.push({
         identifierName,
-        filePath: fileImport.sourcePath,
-      };
-    })
-    .filter(
-      (
-        engineEstinantLocator,
-      ): engineEstinantLocator is EngineEstinantLocator2 =>
-        engineEstinantLocator !== null,
-    );
+        filePath: engineProgramFile.filePath,
+        isCoreEstinant: true,
+      });
+      return;
+    }
+
+    engineEstinantLocatorList.push({
+      identifierName,
+      filePath: fileImport.sourcePath,
+      isCoreEstinant: true,
+    });
+  });
 
   if (engineCallCommentText === null) {
     parallelErrorList.push({
@@ -395,29 +396,29 @@ const getAdaptedEngineProgramLocator = ({
       fileImportsByImportedIdentifier.set(specifier, fileImport);
     });
 
-  const engineEstinantLocatorList = estinantIdentifierList
-    .map((identifierName) => {
-      const fileImport = fileImportsByImportedIdentifier.get(identifierName);
+  const parallelErrorList: ProgramErrorOdeshin[] = [];
+  const engineEstinantLocatorList: EngineEstinantLocator2[] = [];
 
-      if (fileImport === undefined) {
-        return null;
-      }
+  estinantIdentifierList.forEach((identifierName) => {
+    const fileImport = fileImportsByImportedIdentifier.get(identifierName);
 
-      return {
+    if (fileImport === undefined) {
+      engineEstinantLocatorList.push({
         identifierName,
-        filePath: fileImport.sourcePath,
-      };
-    })
-    .filter(
-      (
-        engineEstinantLocator,
-      ): engineEstinantLocator is EngineEstinantLocator2 =>
-        engineEstinantLocator !== null,
-    );
+        filePath: engineProgramFile.filePath,
+        isCoreEstinant: false,
+      });
+      return;
+    }
+
+    engineEstinantLocatorList.push({
+      identifierName,
+      filePath: fileImport.sourcePath,
+      isCoreEstinant: false,
+    });
+  });
 
   const programName = engineProgramFile.inMemoryFileName.kebabCase;
-
-  const parallelErrorList: ProgramErrorOdeshin[] = [];
 
   if (engineCallCommentText === null) {
     parallelErrorList.push({
