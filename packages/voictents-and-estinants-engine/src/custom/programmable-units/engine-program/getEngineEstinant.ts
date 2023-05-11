@@ -45,12 +45,191 @@ import {
 } from './engineEstinant2';
 import { getTextDigest } from '../../../utilities/getTextDigest';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclarationList';
+import { isNode } from '../../../utilities/type-script-ast/isNode';
+import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 
 type EstinantName = 'getEngineEstinant';
 
+type CoreEstinantAccessorInput = {
+  estinantLocator: EngineEstinantLocator2;
+  commentedBodyDeclaration: CommentedProgramBodyDeclaration | undefined;
+};
+
+type CoreEstinantAccessorResult = {
+  errorList: ProgramError<EstinantName>[];
+  estinant: EngineEstinant2 | null;
+};
+
+const getCoreEstinant = ({
+  estinantLocator,
+  commentedBodyDeclaration,
+}: CoreEstinantAccessorInput): CoreEstinantAccessorResult => {
+  const estinantName = estinantLocator.identifierName;
+
+  const typeNode = isNode(commentedBodyDeclaration?.identifiableNode)
+    ? commentedBodyDeclaration?.identifiableNode
+    : null;
+
+  const typeParameterNodeList =
+    typeNode?.type === AST_NODE_TYPES.VariableDeclarator &&
+    typeNode.id.typeAnnotation?.type === AST_NODE_TYPES.TSTypeAnnotation &&
+    typeNode.id.typeAnnotation.typeAnnotation.type ===
+      AST_NODE_TYPES.TSTypeReference &&
+    isTypeScriptTypeParameterInstantiationWithParameterTuple(
+      typeNode.id.typeAnnotation.typeAnnotation.typeParameters,
+      [
+        AST_NODE_TYPES.TSTypeReference,
+        AST_NODE_TYPES.TSTupleType,
+        AST_NODE_TYPES.TSTypeReference,
+      ] as const,
+    )
+      ? typeNode.id.typeAnnotation.typeAnnotation.typeParameters.params
+      : null;
+
+  if (typeParameterNodeList === null) {
+    return {
+      errorList: [
+        {
+          errorId: `getEngineEstinant/missing-type-parameter-list`,
+          message: 'Unable to locate type parameter list',
+          locator: {
+            typeName: ErrorLocatorTypeName.FileErrorLocator,
+            filePath: estinantLocator.filePath,
+          },
+          metadata: {
+            typeNode,
+            commentedBodyDeclaration,
+          },
+        },
+      ],
+      estinant: {
+        id: getTextDigest(estinantName),
+        estinantName,
+        ...estinantLocator,
+        commentText: commentedBodyDeclaration?.commentText ?? '',
+        inputList: [],
+        outputList: [],
+      } satisfies EngineEstinant2,
+    };
+  }
+
+  const [leftTypeReference, rightTypeTuple, outputTypeReference] =
+    typeParameterNodeList;
+
+  const parallelErrorList: ProgramError<EstinantName>[] = [];
+
+  const leftVoqueName =
+    isTypeScriptTypeParameterInstantiationWithParameterTuple(
+      leftTypeReference.typeParameters,
+      [AST_NODE_TYPES.TSTypeReference] as const,
+    ) &&
+    isIdentifiableTypeScriptTypeReference(
+      leftTypeReference.typeParameters.params[0],
+    )
+      ? leftTypeReference.typeParameters.params[0].typeName.name
+      : null;
+
+  const outputVoqueNameTuple =
+    isTypeScriptTypeParameterInstantiationWithParameterTuple(
+      outputTypeReference.typeParameters,
+      [AST_NODE_TYPES.TSTupleType] as const,
+    ) &&
+    outputTypeReference.typeParameters.params[0].elementTypes.every(
+      isIdentifiableTypeScriptTypeReference,
+    )
+      ? outputTypeReference.typeParameters.params[0].elementTypes.map(
+          (element) => {
+            return element.typeName.name;
+          },
+        )
+      : null;
+
+  if (leftVoqueName === null) {
+    parallelErrorList.push({
+      errorId: 'getEngineEstinant/unparseable-core-left-estinant-input',
+      message: 'Left estiant input is unparseable',
+      locator: {
+        typeName: ErrorLocatorTypeName.FileErrorLocator,
+        filePath: estinantLocator.filePath,
+      },
+      metadata: {
+        leftVoqueName,
+        leftTypeReference,
+      },
+    });
+  }
+
+  if (rightTypeTuple.elementTypes.length > 0) {
+    parallelErrorList.push({
+      errorId: 'getEngineEstinant/unhandled-core-scenario',
+      message: 'Logic to parse right type tuple does not exist yet',
+      locator: {
+        typeName: ErrorLocatorTypeName.FileErrorLocator,
+        filePath: estinantLocator.filePath,
+      },
+      metadata: null,
+    });
+  }
+
+  if (outputVoqueNameTuple === null) {
+    parallelErrorList.push({
+      errorId: 'getEngineEstinant/unparseable-core-estinant-output',
+      message: 'Estinant output tuple is unparseable',
+      locator: {
+        typeName: ErrorLocatorTypeName.FileErrorLocator,
+        filePath: estinantLocator.filePath,
+      },
+      metadata: {
+        outputVoqueNameTuple,
+        outputTypeReference,
+      },
+    });
+  }
+
+  // TODO: add right input list
+  const inputList = [leftVoqueName]
+    .map((voqueName, index) => {
+      if (voqueName === null) {
+        return null;
+      }
+
+      const voictentName = voqueName.replace(/Voque$/, '');
+
+      return {
+        id: getTextDigest(`${estinantName} | input-${voqueName}-${index}`),
+        voictentName,
+        isInput: true,
+        index,
+      } satisfies EstinantInput2;
+    })
+    .filter((input): input is EstinantInput2 => input !== null);
+
+  const outputList = (outputVoqueNameTuple ?? []).map((voqueName) => {
+    const voictentName = voqueName.replace(/Voque$/, '');
+
+    return {
+      id: getTextDigest(`${estinantName} | output-${voqueName}`),
+      voictentName,
+      isInput: false,
+      index: null,
+    } satisfies EstinantOutput2;
+  });
+
+  return {
+    errorList: parallelErrorList,
+    estinant: {
+      id: getTextDigest(estinantName),
+      estinantName,
+      ...estinantLocator,
+      commentText: commentedBodyDeclaration?.commentText ?? '',
+      inputList,
+      outputList,
+    } satisfies EngineEstinant2,
+  };
+};
+
 type AdaptedEstinantAccessorInput = {
   estinantLocator: EngineEstinantLocator2;
-  initExpression: TSESTree.Expression | null;
   commentedBodyDeclaration: CommentedProgramBodyDeclaration | undefined;
 };
 
@@ -61,9 +240,14 @@ type AdaptedEstinantAccessorResult = {
 
 const getAdaptedEstinant = ({
   estinantLocator,
-  initExpression,
   commentedBodyDeclaration,
 }: AdaptedEstinantAccessorInput): AdaptedEstinantAccessorResult => {
+  const initExpression =
+    commentedBodyDeclaration?.identifiableNode?.type ===
+    AST_NODE_TYPES.VariableDeclarator
+      ? commentedBodyDeclaration.identifiableNode.init
+      : null;
+
   const callExpression = isCallExpression(initExpression)
     ? initExpression
     : null;
@@ -419,18 +603,21 @@ export const getEngineEstinant = buildEstinant({
       estinantLocator.identifierName,
     );
 
-    const initExpression =
-      commentedBodyDeclaration?.identifiableNode?.type ===
-      AST_NODE_TYPES.VariableDeclarator
-        ? commentedBodyDeclaration.identifiableNode.init
-        : null;
+    // TODO: implement custom core estinant builder "buildAddMetadataForSerialization"
 
-    // TODO: add a function for core estinants as well
-    const { errorList, estinant } = getAdaptedEstinant({
-      estinantLocator,
-      commentedBodyDeclaration,
-      initExpression,
-    });
+    let errorList: ProgramError<EstinantName>[];
+    let estinant: EngineEstinant2 | null;
+    if (estinantLocator.isCoreEstinant) {
+      ({ errorList, estinant } = getCoreEstinant({
+        estinantLocator,
+        commentedBodyDeclaration,
+      }));
+    } else {
+      ({ errorList, estinant } = getAdaptedEstinant({
+        estinantLocator,
+        commentedBodyDeclaration,
+      }));
+    }
 
     const estinantList: EngineEstinant2Odeshin[] =
       estinant !== null

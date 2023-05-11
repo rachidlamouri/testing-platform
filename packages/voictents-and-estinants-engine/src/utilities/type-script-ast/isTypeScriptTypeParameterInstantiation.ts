@@ -32,10 +32,19 @@ export const isTypeScriptTypeParameterInstantiation = (
 ): node is TSESTree.TSTypeParameterInstantiation =>
   isNode(node) && node.type === AST_NODE_TYPES.TSTypeParameterInstantiation;
 
-export const isTypeScriptTypeParameterInstantiationWithParameterTuple = (
+export const isTypeScriptTypeParameterInstantiationWithParameterTuple = <
+  TTypeScriptTypeParameterNodeTypeTuple extends TypeScriptTypeParameterNodeTypeTuple,
+>(
   node: TypeScriptNode,
-  parameterNodeTypeTuple: TypeScriptTypeParameterNodeTypeTuple,
-): node is TSESTree.TSTypeParameterInstantiation =>
+  parameterNodeTypeTuple: TTypeScriptTypeParameterNodeTypeTuple,
+): node is TSESTree.TSTypeParameterInstantiation & {
+  params: {
+    [Index in keyof TTypeScriptTypeParameterNodeTypeTuple]: Extract<
+      TSESTree.TypeNode,
+      { type: TTypeScriptTypeParameterNodeTypeTuple[Index] }
+    >;
+  };
+} =>
   isNode(node) &&
   node.type === AST_NODE_TYPES.TSTypeParameterInstantiation &&
   node.params.every(
