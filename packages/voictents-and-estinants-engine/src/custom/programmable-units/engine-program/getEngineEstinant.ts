@@ -655,6 +655,20 @@ export const getEngineEstinant = buildEstinant({
       }));
     }
 
+    if (typeof commentedBodyDeclaration?.commentText !== 'string') {
+      errorList.push({
+        errorId: `getEngineEstinant/missing-estinant-comment`,
+        message: `Estinant definitions must have a comment with a description`,
+        locator: {
+          typeName: ErrorLocatorTypeName.FileErrorLocator,
+          filePath: estinantLocator.filePath,
+        },
+        metadata: {
+          identifier: estinantLocator.identifierName,
+        },
+      });
+    }
+
     const estinantList: EngineEstinant2Odeshin[] =
       estinant !== null
         ? [
