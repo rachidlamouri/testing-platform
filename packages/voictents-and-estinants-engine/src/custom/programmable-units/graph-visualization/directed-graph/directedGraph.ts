@@ -17,6 +17,14 @@ export enum DirectedGraphStyle {
   Rounded = 'rounded',
 }
 
+export enum SubgraphRankType {
+  Same = 'same',
+  Minimum = 'min',
+  Source = 'source',
+  Maximum = 'max',
+  Sink = 'sink',
+}
+
 type GraphSpecificAttributeByKey = {
   id: string;
   rankdir: DirectedGraphRankDirection;
@@ -32,6 +40,7 @@ export type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
 
 type SubgraphSpecificAttributeByKey = {
   style: DirectedGraphStyle;
+  rank: SubgraphRankType;
 };
 
 type SubgraphAttributeByKey = Merge<
