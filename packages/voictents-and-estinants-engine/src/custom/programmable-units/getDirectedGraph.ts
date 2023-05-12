@@ -5,6 +5,7 @@ import {
   DirectedGraphStyle,
   DirectedGraphVoictent,
   DirectedSubgraph,
+  SubgraphRankType,
 } from './graph-visualization/directed-graph/directedGraph';
 import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
@@ -190,30 +191,42 @@ export const getDirectedGraph = buildEstinant({
 
     const estinantSubgraphMetadataList = engineProgram.estinantList.map(
       (estinant) => {
-        const subgraph: DirectedSubgraph = {
+        const inputSubgraph: DirectedSubgraph = {
           isRoot: false,
-          isCluster: true,
+          isCluster: false,
           attributeByKey: {
-            id: getTextDigest(`estinant-subgraph | ${estinant.estinantName}`),
-            label: '',
-            style: DirectedGraphStyle.Rounded,
-            color: 'gray',
+            id: getTextDigest(
+              `estinant-input-subgraph | ${estinant.estinantName}`,
+            ),
+            rank: SubgraphRankType.Same,
           },
           nodeList: [],
           edgeList: [],
           subgraphList: [],
         };
 
+        const estinantSubgraph: DirectedSubgraph = {
+          isRoot: false,
+          isCluster: false,
+          attributeByKey: {
+            id: getTextDigest(`estinant-subgraph | ${estinant.estinantName}`),
+          },
+          nodeList: [],
+          edgeList: [],
+          subgraphList: [inputSubgraph],
+        };
+
         return {
           estinantId: estinant.id,
-          subgraph,
+          estinantSubgraph,
+          inputSubgraph,
         };
       },
     );
 
-    const estinantSubgraphByEstinantId = new Map<string, DirectedSubgraph>(
-      estinantSubgraphMetadataList.map(({ estinantId, subgraph }) => {
-        return [estinantId, subgraph];
+    const estinantSubgraphByEstinantId = new Map(
+      estinantSubgraphMetadataList.map((subgraphMetadata) => {
+        return [subgraphMetadata.estinantId, subgraphMetadata];
       }),
     );
 
@@ -227,9 +240,10 @@ export const getDirectedGraph = buildEstinant({
         },
       };
 
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const subgraph = estinantSubgraphByEstinantId.get(
         estinant.id,
-      ) as DirectedSubgraph;
+      )!.estinantSubgraph;
 
       subgraph.nodeList.push(node);
     });
@@ -255,9 +269,10 @@ export const getDirectedGraph = buildEstinant({
         },
       };
 
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const subgraph = estinantSubgraphByEstinantId.get(
         estinant.id,
-      ) as DirectedSubgraph;
+      )!.inputSubgraph;
 
       subgraph.nodeList.push(node);
     });
@@ -413,8 +428,8 @@ export const getDirectedGraph = buildEstinant({
       ],
       subgraphList: [
         startSubgraph,
-        ...estinantSubgraphMetadataList.map(({ subgraph }) => {
-          return subgraph;
+        ...estinantSubgraphMetadataList.map(({ estinantSubgraph }) => {
+          return estinantSubgraph;
         }),
         endSubgraph,
       ],
