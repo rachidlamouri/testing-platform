@@ -30,8 +30,11 @@ import {
 } from '../type-script-file/programBodyDeclarationsByIdentifier';
 import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
-  EngineEstinantLocator2,
+  EngineEstinantBuildAddMetadataForSerializationLocator,
+  EngineEstinantLocator2TypeName,
   EngineEstinantLocator2Voictent,
+  EngineEstinantTopLevelDeclarationLocator,
+  getEngineEstinantLocatorZorn,
 } from './engineEstinantLocator2';
 import { EstinantInput } from './estinant-input-output/estinantInputList';
 import { EstinantOutput } from './estinant-input-output/estinantOutputList';
@@ -46,18 +49,109 @@ import {
 import { getTextDigest } from '../../../utilities/getTextDigest';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclarationList';
 import { isNode } from '../../../utilities/type-script-ast/isNode';
-import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
+import {
+  buildIsTypeScriptTypeParameterInstantiationWithSpecificParameterTuple,
+  isTypeScriptTypeParameterInstantiationWithParameterTuple,
+} from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 
 type EstinantName = 'getEngineEstinant';
 
 type CoreEstinantAccessorInput = {
-  estinantLocator: EngineEstinantLocator2;
+  estinantLocator: EngineEstinantTopLevelDeclarationLocator;
   commentedBodyDeclaration: CommentedProgramBodyDeclaration | undefined;
 };
 
 type CoreEstinantAccessorResult = {
   errorList: ProgramError<EstinantName>[];
   estinant: EngineEstinant2 | null;
+};
+
+const getBuildAddMetadataForSerializationEstinant = (
+  estinantLocator: EngineEstinantBuildAddMetadataForSerializationLocator,
+): CoreEstinantAccessorResult => {
+  const typeParameterTuple =
+    isTypeScriptTypeParameterInstantiationWithParameterTuple(
+      estinantLocator.callExpression.typeParameters,
+      [AST_NODE_TYPES.TSTypeReference, AST_NODE_TYPES.TSTypeReference] as const,
+    )
+      ? estinantLocator.callExpression.typeParameters.params
+      : null;
+
+  const parameterNameTuple = typeParameterTuple?.every(
+    isIdentifiableTypeScriptTypeReference,
+  )
+    ? typeParameterTuple.map(
+        (stuff: IdentifiableTypeScriptTypeReference) => stuff.typeName.name,
+      )
+    : null;
+
+  if (parameterNameTuple === null) {
+    return {
+      errorList: [
+        {
+          errorId: `getEngineEstinant/unparseable-build-add-metadata-for-serialization`,
+          message:
+            'Unable to parse buildAddMetadataForSerialization call. Make sure it has two type parameters.',
+          locator: {
+            typeName: ErrorLocatorTypeName.FileErrorLocator,
+            filePath: estinantLocator.filePath,
+          },
+          metadata: {
+            parameterNameTuple,
+            typeParameterTuple,
+          },
+        },
+      ],
+      estinant: {
+        id: getTextDigest(getEngineEstinantLocatorZorn(estinantLocator)),
+        // TODO: why do we include both of these?
+        estinantName: 'UNKNOWN',
+        identifierName: 'UNKNOWN',
+        filePath: estinantLocator.filePath,
+        commentText: '',
+        inputList: [],
+        outputList: [],
+        locator: estinantLocator,
+      } satisfies EngineEstinant2,
+    };
+  }
+
+  const [inputVoqueName, outputVoqueName] = parameterNameTuple;
+
+  const inputVoictentName = inputVoqueName.replace(/Voque$/, '');
+  const outputVoictentName = outputVoqueName.replace(/Voque$/, '');
+
+  // TODO: tie this logic back to the helper function itself
+  const estinantName = `serialize/${inputVoictentName}`;
+
+  return {
+    errorList: [],
+    estinant: {
+      id: getTextDigest(estinantName),
+      // TODO: why do we include both of these?
+      estinantName,
+      identifierName: estinantName,
+      filePath: estinantLocator.filePath,
+      commentText: '',
+      inputList: [
+        {
+          id: getTextDigest(`${estinantName} | input | ${inputVoictentName}`),
+          voictentName: inputVoictentName,
+          isInput: true,
+          index: 0,
+        },
+      ],
+      outputList: [
+        {
+          id: getTextDigest(`${estinantName} | output | ${outputVoictentName}`),
+          voictentName: outputVoictentName,
+          isInput: false,
+          index: null,
+        },
+      ],
+      locator: estinantLocator,
+    } satisfies EngineEstinant2,
+  };
 };
 
 const getCoreEstinant = ({
@@ -109,6 +203,7 @@ const getCoreEstinant = ({
         commentText: commentedBodyDeclaration?.commentText ?? '',
         inputList: [],
         outputList: [],
+        locator: estinantLocator,
       } satisfies EngineEstinant2,
     };
   }
@@ -128,6 +223,34 @@ const getCoreEstinant = ({
     )
       ? leftTypeReference.typeParameters.params[0].typeName.name
       : null;
+
+  const rightTypeParameterInstantiationTuple =
+    rightTypeTuple.elementTypes.every(isIdentifiableTypeScriptTypeReference)
+      ? rightTypeTuple.elementTypes.map(
+          (elementType) => elementType.typeParameters,
+        )
+      : null;
+
+  const isTypeScriptTypeParameterInstantiationWithSpecificParameterTuple =
+    buildIsTypeScriptTypeParameterInstantiationWithSpecificParameterTuple([
+      AST_NODE_TYPES.TSTypeReference,
+    ] as const);
+
+  const rightTypeReferenceTuple = rightTypeParameterInstantiationTuple?.every(
+    isTypeScriptTypeParameterInstantiationWithSpecificParameterTuple,
+  )
+    ? rightTypeParameterInstantiationTuple.map(
+        (parameterInstantiation) => parameterInstantiation.params[0],
+      )
+    : null;
+
+  const rightVoqueNameTuple = rightTypeReferenceTuple?.every(
+    isIdentifiableTypeScriptTypeReference,
+  )
+    ? rightTypeReferenceTuple?.map(
+        (typeReference) => typeReference.typeName.name,
+      )
+    : null;
 
   const outputVoqueNameTuple =
     isTypeScriptTypeParameterInstantiationWithParameterTuple(
@@ -159,15 +282,20 @@ const getCoreEstinant = ({
     });
   }
 
-  if (rightTypeTuple.elementTypes.length > 0) {
+  if (rightVoqueNameTuple === null) {
     parallelErrorList.push({
-      errorId: 'getEngineEstinant/unhandled-core-scenario',
-      message: 'Logic to parse right type tuple does not exist yet',
+      errorId: 'getEngineEstinant/unparseable-core-right-estinant-input-tuple',
+      message: 'Unable to parse the right input tuple type',
       locator: {
         typeName: ErrorLocatorTypeName.FileErrorLocator,
         filePath: estinantLocator.filePath,
       },
-      metadata: null,
+      metadata: {
+        rightVoqueNameTuple,
+        rightTypeReferenceTuple,
+        rightTypeParameterInstantiationTuple,
+        rightTypeTuple,
+      },
     });
   }
 
@@ -186,8 +314,8 @@ const getCoreEstinant = ({
     });
   }
 
-  // TODO: add right input list
-  const inputList = [leftVoqueName]
+  const inputList = [leftVoqueName, rightVoqueNameTuple]
+    .flat()
     .map((voqueName, index) => {
       if (voqueName === null) {
         return null;
@@ -224,12 +352,13 @@ const getCoreEstinant = ({
       commentText: commentedBodyDeclaration?.commentText ?? '',
       inputList,
       outputList,
+      locator: estinantLocator,
     } satisfies EngineEstinant2,
   };
 };
 
 type AdaptedEstinantAccessorInput = {
-  estinantLocator: EngineEstinantLocator2;
+  estinantLocator: EngineEstinantTopLevelDeclarationLocator;
   commentedBodyDeclaration: CommentedProgramBodyDeclaration | undefined;
 };
 
@@ -293,6 +422,7 @@ const getAdaptedEstinant = ({
         commentText: '',
         inputList: [],
         outputList: [],
+        locator: estinantLocator,
       } satisfies EngineEstinant2,
     };
   }
@@ -571,6 +701,7 @@ const getAdaptedEstinant = ({
       commentText: commentedBodyDeclaration?.commentText ?? '',
       inputList,
       outputList,
+      locator: estinantLocator,
     } satisfies EngineEstinant2,
   };
 };
@@ -599,24 +730,45 @@ export const getEngineEstinant = buildEstinant({
   .onPinbe((engineEstinantLocatorOdeshin, [bodyDeclarationsByIdentifier]) => {
     const estinantLocator = engineEstinantLocatorOdeshin.grition;
 
-    const commentedBodyDeclaration = bodyDeclarationsByIdentifier.get(
-      estinantLocator.identifierName,
-    );
-
-    // TODO: implement custom core estinant builder "buildAddMetadataForSerialization"
-
     let errorList: ProgramError<EstinantName>[];
     let estinant: EngineEstinant2 | null;
-    if (estinantLocator.isCoreEstinant) {
-      ({ errorList, estinant } = getCoreEstinant({
-        estinantLocator,
-        commentedBodyDeclaration,
-      }));
+
+    if (
+      estinantLocator.typeName ===
+      EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization
+    ) {
+      ({ errorList, estinant } =
+        getBuildAddMetadataForSerializationEstinant(estinantLocator));
     } else {
-      ({ errorList, estinant } = getAdaptedEstinant({
-        estinantLocator,
-        commentedBodyDeclaration,
-      }));
+      const commentedBodyDeclaration = bodyDeclarationsByIdentifier.get(
+        estinantLocator.identifierName,
+      );
+
+      if (estinantLocator.isCoreEstinant) {
+        ({ errorList, estinant } = getCoreEstinant({
+          estinantLocator,
+          commentedBodyDeclaration,
+        }));
+      } else {
+        ({ errorList, estinant } = getAdaptedEstinant({
+          estinantLocator,
+          commentedBodyDeclaration,
+        }));
+      }
+
+      if (typeof commentedBodyDeclaration?.commentText !== 'string') {
+        errorList.push({
+          errorId: `getEngineEstinant/missing-estinant-comment`,
+          message: `Estinant definitions must have a comment with a description`,
+          locator: {
+            typeName: ErrorLocatorTypeName.FileErrorLocator,
+            filePath: estinantLocator.filePath,
+          },
+          metadata: {
+            identifier: estinantLocator.identifierName,
+          },
+        });
+      }
     }
 
     const estinantList: EngineEstinant2Odeshin[] =

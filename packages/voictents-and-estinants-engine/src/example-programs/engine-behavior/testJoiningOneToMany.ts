@@ -13,21 +13,21 @@ import {
   SerializableVoque,
 } from '../serializableVoictent';
 
-type Voque1 = InMemoryVoque<
+type Voictent1Voque = InMemoryVoque<
   'voictent-1',
   {
     value: number;
     joinIndexList: number[];
   }
 >;
-type Voque2 = InMemoryVoque<'voictent-2', string>;
-type Voque3 = InMemoryVoque<'voictent-3', string>;
+type Voictent2Voque = InMemoryVoque<'voictent-2', string>;
+type Voictent3Voque = InMemoryVoque<'voictent-3', string>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
 const joinCollections: Estinant2<
-  LeftInputHubblepupVicken<Voque1>,
-  [RightInputHubblepupTupleVicken<Voque2, number[]>],
-  OutputVicken<[Voque3]>
+  LeftInputHubblepupVicken<Voictent1Voque>,
+  [RightInputHubblepupTupleVicken<Voictent2Voque, number[]>],
+  OutputVicken<[Voictent3Voque]>
 > = {
   version: 2,
   name: 'joinCollections',
@@ -64,7 +64,7 @@ const joinCollections: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryVoictent<Voque1>({
+    new InMemoryVoictent<Voictent1Voque>({
       gepp: 'voictent-1',
       initialHubblepupTuple: [
         {
@@ -77,11 +77,11 @@ digikikify2({
         },
       ],
     }),
-    new InMemoryVoictent<Voque2>({
+    new InMemoryVoictent<Voictent2Voque>({
       gepp: 'voictent-2',
       initialHubblepupTuple: ['a', 'b', 'c', 'd'],
     }),
-    new InMemoryVoictent<Voque3>({
+    new InMemoryVoictent<Voictent3Voque>({
       gepp: 'voictent-3',
       initialHubblepupTuple: [],
     }),
@@ -94,7 +94,7 @@ digikikify2({
   estinantTuple: [
     joinCollections,
 
-    buildAddMetadataForSerialization<Voque3, SerializedVoque>({
+    buildAddMetadataForSerialization<Voictent3Voque, SerializedVoque>({
       inputGepp: 'voictent-3',
       outputGepp: 'serialized',
     }),

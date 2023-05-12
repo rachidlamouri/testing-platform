@@ -33,7 +33,12 @@ import {
   EngineProgramLocator2Voictent,
   VoictentLocator,
 } from './engineProgramLocator2';
-import { EngineEstinantLocator2 } from './engineEstinantLocator2';
+import {
+  EngineEstinantBuildAddMetadataForSerializationLocator,
+  EngineEstinantLocator2,
+  EngineEstinantLocator2TypeName,
+  EngineEstinantTopLevelDeclarationLocator,
+} from './engineEstinantLocator2';
 import {
   COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
   CommentedProgramBodyDeclarationListVoictent,
@@ -124,6 +129,8 @@ const getCore2EngineProgramLocator = ({
   engineCallCommentText,
   engineCallExpressionPropertyList,
 }: Core2EngineProgramLocatorAccessorInput): Core2EngineProgramLocatorAccessorResult => {
+  const programName = engineProgramFile.inMemoryFileName.kebabCase;
+
   const voictentListGeppProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
@@ -215,18 +222,35 @@ const getCore2EngineProgramLocator = ({
       ? estinantListValueNode?.elements
       : [];
 
-  const estinantNodeList: TSESTree.Identifier[] = [];
+  const partialEstinantLocatorList: (
+    | Pick<
+        EngineEstinantTopLevelDeclarationLocator,
+        'typeName' | 'identifierName'
+      >
+    | Pick<
+        EngineEstinantBuildAddMetadataForSerializationLocator,
+        'typeName' | 'callExpression' | 'index'
+      >
+  )[] = [];
 
-  estinantReferenceElementList.forEach((element) => {
+  estinantReferenceElementList.forEach((element, index) => {
     if (isIdentifier(element)) {
-      estinantNodeList.push(element);
+      partialEstinantLocatorList.push({
+        typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
+        identifierName: element.name,
+      });
     } else if (
       isSpecificIdentifiableCallExpression(
         element,
         buildAddMetadataForSerialization.name,
       )
     ) {
-      estinantNodeList.push(element.callee);
+      partialEstinantLocatorList.push({
+        typeName:
+          EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization,
+        callExpression: element,
+        index,
+      });
     } else {
       parallelErrorList.push({
         zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
@@ -242,10 +266,6 @@ const getCore2EngineProgramLocator = ({
       });
     }
   });
-
-  const estinantIdentifierList = estinantNodeList.map(
-    (identifier) => identifier.name,
-  );
 
   const fileImportsByImportedIdentifier = new Map<
     string,
@@ -265,12 +285,26 @@ const getCore2EngineProgramLocator = ({
 
   const engineEstinantLocatorList: EngineEstinantLocator2[] = [];
 
-  estinantIdentifierList.forEach((identifierName) => {
-    const fileImport = fileImportsByImportedIdentifier.get(identifierName);
+  partialEstinantLocatorList.forEach((partialLocator) => {
+    if (
+      partialLocator.typeName ===
+      EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization
+    ) {
+      engineEstinantLocatorList.push({
+        ...partialLocator,
+        isCoreEstinant: true,
+        filePath: engineProgramFile.filePath,
+      });
+      return;
+    }
+
+    const fileImport = fileImportsByImportedIdentifier.get(
+      partialLocator.identifierName,
+    );
 
     if (fileImport === undefined) {
       engineEstinantLocatorList.push({
-        identifierName,
+        ...partialLocator,
         filePath: engineProgramFile.filePath,
         isCoreEstinant: true,
       });
@@ -278,7 +312,7 @@ const getCore2EngineProgramLocator = ({
     }
 
     engineEstinantLocatorList.push({
-      identifierName,
+      ...partialLocator,
       filePath: fileImport.sourcePath,
       isCoreEstinant: true,
     });
@@ -298,8 +332,6 @@ const getCore2EngineProgramLocator = ({
       },
     });
   }
-
-  const programName = engineProgramFile.inMemoryFileName.kebabCase;
 
   const engineProgramLocatorOdeshin: EngineProgramLocator2Odeshin = {
     zorn: engineProgramFile.filePath,
@@ -404,6 +436,7 @@ const getAdaptedEngineProgramLocator = ({
 
     if (fileImport === undefined) {
       engineEstinantLocatorList.push({
+        typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
         identifierName,
         filePath: engineProgramFile.filePath,
         isCoreEstinant: false,
@@ -412,6 +445,7 @@ const getAdaptedEngineProgramLocator = ({
     }
 
     engineEstinantLocatorList.push({
+      typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
       identifierName,
       filePath: fileImport.sourcePath,
       isCoreEstinant: false,

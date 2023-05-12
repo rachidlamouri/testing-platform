@@ -13,19 +13,19 @@ import {
   SerializableVoque,
 } from '../serializableVoictent';
 
-type Voque1 = InMemoryVoque<'voictent-1', number>;
-type Voque2 = InMemoryVoque<'voictent-2', string>;
-type Voque3 = InMemoryVoque<'voictent-3', string>;
-type Voque4 = InMemoryVoque<'voictent-4', string>;
+type Voictent1Voque = InMemoryVoque<'voictent-1', number>;
+type Voictent2Voque = InMemoryVoque<'voictent-2', string>;
+type Voictent3Voque = InMemoryVoque<'voictent-3', string>;
+type Voictent4Voque = InMemoryVoque<'voictent-4', string>;
 
 type SerializedVoque = SerializableVoque<'serialized'>;
 
 const SKIP_INDEX = 2;
 
 const forwardFrom2To3AndSkipAValue: Estinant2<
-  LeftInputHubblepupVicken<Voque2>,
+  LeftInputHubblepupVicken<Voictent2Voque>,
   [],
-  OutputVicken<[Voque3]>
+  OutputVicken<[Voictent3Voque]>
 > = {
   version: 2,
   name: 'forwardFrom2To3AndSkipAValue',
@@ -37,7 +37,7 @@ const forwardFrom2To3AndSkipAValue: Estinant2<
   outputAppreffinge: {
     geppTuple: ['voictent-3'],
   },
-  tropoig(input): OutputVicken<[Voque3]>['tropoignantOutput'] {
+  tropoig(input): OutputVicken<[Voictent3Voque]>['tropoignantOutput'] {
     if (input.indexByName.listIndex === SKIP_INDEX) {
       return {
         'voictent-3': [],
@@ -51,9 +51,9 @@ const forwardFrom2To3AndSkipAValue: Estinant2<
 };
 
 const join1ToAllOf3: Estinant2<
-  LeftInputHubblepupVicken<Voque1>,
-  [RightInputVoictentVicken<Voque3>],
-  OutputVicken<[Voque4]>
+  LeftInputHubblepupVicken<Voictent1Voque>,
+  [RightInputVoictentVicken<Voictent3Voque>],
+  OutputVicken<[Voictent4Voque]>
 > = {
   version: 2,
   name: 'join1ToAllOf3',
@@ -72,7 +72,10 @@ const join1ToAllOf3: Estinant2<
   outputAppreffinge: {
     geppTuple: ['voictent-4'],
   },
-  tropoig(leftInput, rightInput): OutputVicken<[Voque4]>['tropoignantOutput'] {
+  tropoig(
+    leftInput,
+    rightInput,
+  ): OutputVicken<[Voictent4Voque]>['tropoignantOutput'] {
     const serializedRightInput = `[${rightInput.join(', ')}]`;
 
     const output = `${leftInput.hubblepup}-${serializedRightInput}`;
@@ -89,19 +92,19 @@ const join1ToAllOf3: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryVoictent<Voque1>({
+    new InMemoryVoictent<Voictent1Voque>({
       gepp: 'voictent-1',
       initialHubblepupTuple: [1, 2],
     }),
-    new InMemoryVoictent<Voque2>({
+    new InMemoryVoictent<Voictent2Voque>({
       gepp: 'voictent-2',
       initialHubblepupTuple: ['a', 'b', 'SKIP', 'c', 'd'],
     }),
-    new InMemoryVoictent<Voque3>({
+    new InMemoryVoictent<Voictent3Voque>({
       gepp: 'voictent-3',
       initialHubblepupTuple: [],
     }),
-    new InMemoryVoictent<Voque4>({
+    new InMemoryVoictent<Voictent4Voque>({
       gepp: 'voictent-4',
       initialHubblepupTuple: [],
     }),
@@ -115,7 +118,7 @@ digikikify2({
     forwardFrom2To3AndSkipAValue,
     join1ToAllOf3,
 
-    buildAddMetadataForSerialization<Voque4, SerializedVoque>({
+    buildAddMetadataForSerialization<Voictent4Voque, SerializedVoque>({
       inputGepp: 'voictent-4',
       outputGepp: 'serialized',
     }),

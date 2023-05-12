@@ -33,7 +33,7 @@ export const getEngineProgram2 = buildEstinant({
       });
     },
     croard: (rightInput) => {
-      return getEngineEstinantLocatorZorn(rightInput.grition);
+      return getEngineEstinantLocatorZorn(rightInput.grition.locator);
     },
   })
   .toGrition<EngineProgram2Voictent>({
