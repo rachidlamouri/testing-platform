@@ -46,7 +46,10 @@ import {
 import { getTextDigest } from '../../../utilities/getTextDigest';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclarationList';
 import { isNode } from '../../../utilities/type-script-ast/isNode';
-import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
+import {
+  buildIsTypeScriptTypeParameterInstantiationWithSpecificParameterTuple,
+  isTypeScriptTypeParameterInstantiationWithParameterTuple,
+} from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 
 type EstinantName = 'getEngineEstinant';
 
@@ -129,6 +132,34 @@ const getCoreEstinant = ({
       ? leftTypeReference.typeParameters.params[0].typeName.name
       : null;
 
+  const rightTypeParameterInstantiationTuple =
+    rightTypeTuple.elementTypes.every(isIdentifiableTypeScriptTypeReference)
+      ? rightTypeTuple.elementTypes.map(
+          (elementType) => elementType.typeParameters,
+        )
+      : null;
+
+  const isTypeScriptTypeParameterInstantiationWithSpecificParameterTuple =
+    buildIsTypeScriptTypeParameterInstantiationWithSpecificParameterTuple([
+      AST_NODE_TYPES.TSTypeReference,
+    ] as const);
+
+  const rightTypeReferenceTuple = rightTypeParameterInstantiationTuple?.every(
+    isTypeScriptTypeParameterInstantiationWithSpecificParameterTuple,
+  )
+    ? rightTypeParameterInstantiationTuple.map(
+        (parameterInstantiation) => parameterInstantiation.params[0],
+      )
+    : null;
+
+  const rightVoqueNameTuple = rightTypeReferenceTuple?.every(
+    isIdentifiableTypeScriptTypeReference,
+  )
+    ? rightTypeReferenceTuple?.map(
+        (typeReference) => typeReference.typeName.name,
+      )
+    : null;
+
   const outputVoqueNameTuple =
     isTypeScriptTypeParameterInstantiationWithParameterTuple(
       outputTypeReference.typeParameters,
@@ -159,15 +190,20 @@ const getCoreEstinant = ({
     });
   }
 
-  if (rightTypeTuple.elementTypes.length > 0) {
+  if (rightVoqueNameTuple === null) {
     parallelErrorList.push({
-      errorId: 'getEngineEstinant/unhandled-core-scenario',
-      message: 'Logic to parse right type tuple does not exist yet',
+      errorId: 'getEngineEstinant/unparseable-core-right-estinant-input-tuple',
+      message: 'Unable to parse the right input tuple type',
       locator: {
         typeName: ErrorLocatorTypeName.FileErrorLocator,
         filePath: estinantLocator.filePath,
       },
-      metadata: null,
+      metadata: {
+        rightVoqueNameTuple,
+        rightTypeReferenceTuple,
+        rightTypeParameterInstantiationTuple,
+        rightTypeTuple,
+      },
     });
   }
 
@@ -186,8 +222,8 @@ const getCoreEstinant = ({
     });
   }
 
-  // TODO: add right input list
-  const inputList = [leftVoqueName]
+  const inputList = [leftVoqueName, rightVoqueNameTuple]
+    .flat()
     .map((voqueName, index) => {
       if (voqueName === null) {
         return null;
