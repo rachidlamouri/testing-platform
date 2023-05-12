@@ -12,14 +12,14 @@ import {
   SerializableVoque,
 } from '../serializableVoictent';
 
-type Voque1 = InMemoryVoque<'voictent-1', string>;
-type Voque2 = InMemoryVoque<'voictent-2', string[]>;
+type Voictent1Voque = InMemoryVoque<'voictent-1', string>;
+type Voictent2Voque = InMemoryVoque<'voictent-2', string[]>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
 const gatherCollection: Estinant2<
-  LeftInputVoictentVicken<Voque1>,
+  LeftInputVoictentVicken<Voictent1Voque>,
   [],
-  OutputVicken<[Voque2]>
+  OutputVicken<[Voictent2Voque]>
 > = {
   version: 2,
   name: 'gatherCollection',
@@ -31,7 +31,7 @@ const gatherCollection: Estinant2<
   outputAppreffinge: {
     geppTuple: ['voictent-2'],
   },
-  tropoig: (input): OutputVicken<[Voque2]>['tropoignantOutput'] => {
+  tropoig: (input): OutputVicken<[Voictent2Voque]>['tropoignantOutput'] => {
     return {
       'voictent-2': [input],
     };
@@ -43,11 +43,11 @@ const gatherCollection: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryVoictent<Voque1>({
+    new InMemoryVoictent<Voictent1Voque>({
       gepp: 'voictent-1',
       initialHubblepupTuple: ['a', 'b', 'c', 'd'],
     }),
-    new InMemoryVoictent<Voque2>({
+    new InMemoryVoictent<Voictent2Voque>({
       gepp: 'voictent-2',
       initialHubblepupTuple: [],
     }),
@@ -60,7 +60,7 @@ digikikify2({
   estinantTuple: [
     gatherCollection,
 
-    buildAddMetadataForSerialization<Voque2, SerializedVoque>({
+    buildAddMetadataForSerialization<Voictent2Voque, SerializedVoque>({
       inputGepp: 'voictent-2',
       outputGepp: 'serialized',
     }),

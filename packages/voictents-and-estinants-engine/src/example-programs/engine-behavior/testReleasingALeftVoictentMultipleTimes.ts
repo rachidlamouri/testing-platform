@@ -15,17 +15,17 @@ import {
   SerializableVoque,
 } from '../serializableVoictent';
 
-type Voque1 = InMemoryVoque<'voictent-1', string>;
-type Voque2 = InMemoryVoque<'voictent-2', string>;
-type Voque3 = InMemoryVoque<'voictent-3', string[]>;
+type Voictent1Voque = InMemoryVoque<'voictent-1', string>;
+type Voictent2Voque = InMemoryVoque<'voictent-2', string>;
+type Voictent3Voque = InMemoryVoque<'voictent-3', string[]>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
 const SKIP_INDEX = 3;
 
 const forwardFrom1To2AndSkipAValue: Estinant2<
-  LeftInputHubblepupVicken<Voque1>,
+  LeftInputHubblepupVicken<Voictent1Voque>,
   [],
-  OutputVicken<[Voque2]>
+  OutputVicken<[Voictent2Voque]>
 > = {
   version: 2,
   name: 'forwardFrom1To2AndSkipAValue',
@@ -37,7 +37,7 @@ const forwardFrom1To2AndSkipAValue: Estinant2<
   outputAppreffinge: {
     geppTuple: ['voictent-2'],
   },
-  tropoig(input): OutputVicken<[Voque2]>['tropoignantOutput'] {
+  tropoig(input): OutputVicken<[Voictent2Voque]>['tropoignantOutput'] {
     if (input.indexByName.listIndex === SKIP_INDEX) {
       return {
         'voictent-2': [],
@@ -51,9 +51,9 @@ const forwardFrom1To2AndSkipAValue: Estinant2<
 };
 
 const forwardFrom2To3: Estinant2<
-  LeftInputVoictentVicken<Voque2>,
+  LeftInputVoictentVicken<Voictent2Voque>,
   [],
-  OutputVicken<[Voque3]>
+  OutputVicken<[Voictent3Voque]>
 > = {
   version: 2,
   name: 'forwardFrom2To3',
@@ -65,7 +65,7 @@ const forwardFrom2To3: Estinant2<
   outputAppreffinge: {
     geppTuple: ['voictent-3'],
   },
-  tropoig(input): OutputVicken<[Voque3]>['tropoignantOutput'] {
+  tropoig(input): OutputVicken<[Voictent3Voque]>['tropoignantOutput'] {
     return {
       'voictent-3': [input],
     };
@@ -78,15 +78,15 @@ const forwardFrom2To3: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryVoictent<Voque1>({
+    new InMemoryVoictent<Voictent1Voque>({
       gepp: 'voictent-1',
       initialHubblepupTuple: ['a', 'b', 'c', 'SKIP', 'd', 'e', 'f'],
     }),
-    new InMemoryVoictent<Voque2>({
+    new InMemoryVoictent<Voictent2Voque>({
       gepp: 'voictent-2',
       initialHubblepupTuple: [],
     }),
-    new InMemoryVoictent<Voque3>({
+    new InMemoryVoictent<Voictent3Voque>({
       gepp: 'voictent-3',
       initialHubblepupTuple: [],
     }),
@@ -100,7 +100,7 @@ digikikify2({
     forwardFrom1To2AndSkipAValue,
     forwardFrom2To3,
 
-    buildAddMetadataForSerialization<Voque3, SerializedVoque>({
+    buildAddMetadataForSerialization<Voictent3Voque, SerializedVoque>({
       inputGepp: 'voictent-3',
       outputGepp: 'serialized',
     }),
