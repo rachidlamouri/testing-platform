@@ -19,7 +19,7 @@ type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryOdeshinVoictent({
+    new InMemoryOdeshinVoictent<DatumTestCaseInputVoque>({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
       initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),

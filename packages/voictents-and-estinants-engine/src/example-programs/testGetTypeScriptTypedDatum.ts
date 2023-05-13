@@ -61,12 +61,12 @@ export const getTypedTestCaseInputTypeName: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryOdeshinVoictent({
+    new InMemoryOdeshinVoictent<DatumTestCaseInputVoque>({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
       initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),
-    new InMemoryOdeshinVoictent({
-      gepp: 'typed-datum',
+    new InMemoryOdeshinVoictent<SerializableTypeNameVoque>({
+      gepp: SERIALIZABLE_TYPE_NAME_GEPP,
       initialHubblepupTuple: [],
     }),
     new JsonSerializableVoictent<SerializedConfiguration>({

@@ -3,7 +3,6 @@ import { LeftInputHubblepupVicken } from '../core/engine-shell/vicken/leftInputV
 import { OutputVicken } from '../core/engine-shell/vicken/outputVicken';
 import { digikikify2 } from '../core/engine/digikikify';
 import { InMemoryOdeshinVoictent } from '../core/engine/inMemoryOdeshinVoictent';
-import { InMemoryVoque } from '../core/engine/inMemoryVoictent';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
@@ -21,7 +20,6 @@ import {
 } from './serializableTypeName';
 
 type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
-type TypedDatumVoque = InMemoryVoque<'typed-datum', unknown>;
 
 const getCustomTypedTestCaseInputTypeName: Estinant2<
   LeftInputHubblepupVicken<DatumTestCaseInputVoque>,
@@ -63,12 +61,12 @@ const getCustomTypedTestCaseInputTypeName: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryOdeshinVoictent({
+    new InMemoryOdeshinVoictent<DatumTestCaseInputVoque>({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
       initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),
-    new InMemoryOdeshinVoictent({
-      gepp: 'typed-datum',
+    new InMemoryOdeshinVoictent<SerializableTypeNameVoque>({
+      gepp: SERIALIZABLE_TYPE_NAME_GEPP,
       initialHubblepupTuple: [],
     }),
     new JsonSerializableVoictent<SerializedConfiguration>({
@@ -80,8 +78,11 @@ digikikify2({
   estinantTuple: [
     getCustomTypedTestCaseInputTypeName,
 
-    buildAddMetadataForSerialization<TypedDatumVoque, SerializedConfiguration>({
-      inputGepp: 'typed-datum',
+    buildAddMetadataForSerialization<
+      SerializableTypeNameVoque,
+      SerializedConfiguration
+    >({
+      inputGepp: SERIALIZABLE_TYPE_NAME_GEPP,
       outputGepp: 'serialized',
     }),
   ],
