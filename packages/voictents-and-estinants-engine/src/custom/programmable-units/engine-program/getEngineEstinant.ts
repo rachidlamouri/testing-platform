@@ -132,7 +132,8 @@ const getBuildAddMetadataForSerializationEstinant = (
       estinantName,
       identifierName: estinantName,
       filePath: estinantLocator.filePath,
-      commentText: '',
+      commentText:
+        'Prepares each item in one collection to be sent to a serialized collection',
       inputList: [
         {
           id: getTextDigest(`${estinantName} | input | ${inputVoictentName}`),

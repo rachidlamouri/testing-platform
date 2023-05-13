@@ -16,6 +16,9 @@ type Voictent1Voque = InMemoryVoque<'voictent-1', string>;
 type Voictent2Voque = InMemoryVoque<'voictent-2', string[]>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
+/**
+ * Forwards collection 1 as a whole to collection 2.
+ */
 const gatherCollection: Estinant2<
   LeftInputVoictentVicken<Voictent1Voque>,
   [],

@@ -18,6 +18,9 @@ type Voictent2Voque = InMemoryVoque<'voictent-2', string>;
 type Voictent3Voque = InMemoryVoque<'voictent-3', string>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
+/**
+ * Joins each item in the left collection to the entire right collection
+ */
 const gatherCollection: Estinant2<
   LeftInputHubblepupVicken<Voictent1Voque>,
   [RightInputVoictentVicken<Voictent2Voque>],

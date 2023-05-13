@@ -21,6 +21,11 @@ import {
 
 type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 
+/**
+ * Runs each datum test case input through
+ * "getCustomTypedTestCaseInputTypeName". It fowards the resulting type name for
+ * manual verification, since the input datum and output datum are the same.
+ */
 const getCustomTypedTestCaseInputTypeName: Estinant2<
   LeftInputHubblepupVicken<DatumTestCaseInputVoque>,
   [],
