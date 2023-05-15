@@ -50,10 +50,14 @@ import {
   ProgramErrorVoictent,
 } from '../error/programError';
 import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
-import { isNewExpressionWithObjectExpressionArgument } from '../../../utilities/type-script-ast/isNewExpression';
-import { isStringLiteral } from '../../../utilities/type-script-ast/isStringLiteral';
+import {
+  isNewExpression,
+  isNewExpressionWithObjectExpressionArgument,
+} from '../../../utilities/type-script-ast/isNewExpression';
 import { buildAddMetadataForSerialization } from '../../../example-programs/buildAddMetadataForSerialization';
 import { isSpecificIdentifiableCallExpression } from '../../../utilities/type-script-ast/isCallExpression';
+import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
+import { isIdentifiableTypeScriptTypeReference } from '../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
 
 type EngineCallExpression = TSESTree.CallExpression & {
   arguments: [ObjectExpressionWithIdentifierProperties];
@@ -76,19 +80,6 @@ const screamingSnakeCaseGeppToVoictentName = (
 
   const voictentName = namePartList
     .map((word) => `${word.charAt(0)}${word.slice(1).toLowerCase()}`)
-    .join('');
-
-  return voictentName;
-};
-
-/**
- * @todo tie this to the logic that a gepp literal is in kebab case
- */
-const kebabCaseGeppToVoictentName = (geppLiteral: string): string => {
-  const namePartList = geppLiteral.split('-');
-
-  const voictentName = namePartList
-    .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
     .join('');
 
   return voictentName;
@@ -148,19 +139,18 @@ const getCore2EngineProgramLocator = ({
   const parallelErrorList: ProgramErrorOdeshin[] = [];
 
   initialVoictentGeppIdentifierList.forEach((element) => {
-    let geppProperty: IdentifiableProperty | undefined;
+    const voqueName =
+      isNewExpression(element) &&
+      isTypeScriptTypeParameterInstantiationWithParameterTuple(
+        element.typeParameters,
+        [AST_NODE_TYPES.TSTypeReference],
+      ) &&
+      isIdentifiableTypeScriptTypeReference(element.typeParameters.params[0])
+        ? element.typeParameters.params[0].typeName.name
+        : null;
+
     let initialHubblepupTupleProperty: IdentifiableProperty | undefined;
-
     if (isNewExpressionWithObjectExpressionArgument(element)) {
-      geppProperty = element.arguments[0].properties.find(
-        (node): node is IdentifiableProperty => {
-          return isSepcificIdentifiableProperty(
-            node,
-            engineFunctionConfiguration.voictentGeppKeyIdentifierName,
-          );
-        },
-      );
-
       initialHubblepupTupleProperty = element.arguments[0].properties.find(
         (node): node is IdentifiableProperty => {
           return isSepcificIdentifiableProperty(
@@ -170,42 +160,41 @@ const getCore2EngineProgramLocator = ({
         },
       );
     } else {
-      geppProperty = undefined;
       initialHubblepupTupleProperty = undefined;
     }
 
-    const hasInitialInput =
-      initialHubblepupTupleProperty !== undefined &&
-      isArrayExpression(initialHubblepupTupleProperty.value)
-        ? initialHubblepupTupleProperty.value.elements.length > 0
-        : // We are defaulting to true since this implies that some potentially non-empty array was passed in.
-          true;
-
-    if (geppProperty !== undefined && isIdentifier(geppProperty.value)) {
-      voictentLocatorList.push({
-        name: screamingSnakeCaseGeppToVoictentName(geppProperty.value.name),
-        hasInitialInput,
-      });
-    } else if (
-      geppProperty !== undefined &&
-      isStringLiteral(geppProperty.value)
-    ) {
-      voictentLocatorList.push({
-        name: kebabCaseGeppToVoictentName(geppProperty.value.value),
-        hasInitialInput,
-      });
+    let hasInitialInput: boolean;
+    if (initialHubblepupTupleProperty === undefined) {
+      hasInitialInput = false;
+    } else if (isArrayExpression(initialHubblepupTupleProperty.value)) {
+      hasInitialInput = initialHubblepupTupleProperty.value.elements.length > 0;
     } else {
+      // We are defaulting to true since this implies that some potentially non-empty array was passed in
+      hasInitialInput = true;
+    }
+
+    if (voqueName === null) {
       parallelErrorList.push({
         zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
         grition: {
-          errorId: `getEngineProgramLocator/unparseable-voicent`,
-          message: 'Engine program has an unparseable voictent definition',
+          errorId: `getEngineProgramLocator/missing-voictent-type-parameter`,
+          message:
+            'New expressions for voictent instances must have a type parameter for the corresponding voque',
           locator: {
             typeName: ErrorLocatorTypeName.FileErrorLocator,
             filePath: engineProgramFile.filePath,
           },
           metadata: null,
         },
+      });
+    }
+
+    if (voqueName !== null && initialHubblepupTupleProperty !== undefined) {
+      const voictentName = voqueName.replace(/Voque$/, '');
+
+      voictentLocatorList.push({
+        name: voictentName,
+        hasInitialInput,
       });
     }
   });

@@ -22,6 +22,12 @@ type SerializedVoque = SerializableVoque<'serialized'>;
 
 const SKIP_INDEX = 3;
 
+/**
+ * Transfers items from the first collection to the second. This causes the
+ * second collection to accumulate items. One item is skipped to cause the
+ * second collection to stop accumulating twice, which will currently trigger
+ * the next transform twice
+ */
 const forwardFrom1To2AndSkipAValue: Estinant2<
   LeftInputHubblepupVicken<Voictent1Voque>,
   [],
@@ -50,6 +56,10 @@ const forwardFrom1To2AndSkipAValue: Estinant2<
   },
 };
 
+/**
+ * Sends the entire second collection to the third collection. Since the second
+ * collection stops accumulating twice this transform is expected to run twice
+ */
 const forwardFrom2To3: Estinant2<
   LeftInputVoictentVicken<Voictent2Voque>,
   [],

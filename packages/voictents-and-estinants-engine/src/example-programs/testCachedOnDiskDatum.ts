@@ -22,6 +22,15 @@ const nameSpace = 'test-cached-on-disk-datum';
 const filePath =
   'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts';
 
+/**
+ * Forwards each item in the input collection to the cached collection. We need
+ * this transform, since a cached collection does not take an in-memory initial
+ * collection.
+ *
+ * @todo Decide if a cached collection should be able to take an initial input
+ * tuple through code, and not just through the file system. Either way update
+ * the above description accordingly
+ */
 const writeDatumToCache: Estinant2<
   LeftInputHubblepupVicken<InputVoque>,
   [],

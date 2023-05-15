@@ -1,18 +1,21 @@
-import { Hubblepup2 } from '../core/engine-shell/quirm/hubblepup';
-import { InMemoryVoque } from '../core/engine/inMemoryVoictent';
+import { InMemoryOdeshinVoque } from '../core/engine/inMemoryOdeshinVoictent';
+import { Grition } from '../custom/adapter/grition';
+import { OdeshinFromGrition } from '../custom/adapter/odeshin';
 
 export type SerializableTypeName = {
   typeName: string;
 };
 
-export type SerializableTypeNameHubblepup = Hubblepup2<SerializableTypeName>;
+export type SerializableTypeNameGrition = Grition<SerializableTypeName>;
 
-// TODO: change to "serializable-type-name"
-export const SERIALIZABLE_TYPE_NAME_GEPP = 'typed-datum';
+export type SerializableTypeNameOdeshin =
+  OdeshinFromGrition<SerializableTypeNameGrition>;
+
+export const SERIALIZABLE_TYPE_NAME_GEPP = 'serializable-type-name';
 
 export type SerializableTypeNameGepp = typeof SERIALIZABLE_TYPE_NAME_GEPP;
 
-export type SerializableTypeNameVoque = InMemoryVoque<
+export type SerializableTypeNameVoque = InMemoryOdeshinVoque<
   SerializableTypeNameGepp,
-  unknown
+  SerializableTypeNameOdeshin
 >;

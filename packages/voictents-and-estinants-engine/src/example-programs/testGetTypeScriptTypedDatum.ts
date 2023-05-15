@@ -21,6 +21,11 @@ import {
 
 type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 
+/**
+ * Runs each datum test case input through "getTypescriptTypedDatum". It fowards
+ * the resulting type name for manual verification, since the input datum and
+ * output datum are the same.
+ */
 export const getTypedTestCaseInputTypeName: Estinant2<
   LeftInputHubblepupVicken<DatumTestCaseInputVoque>,
   [],
@@ -61,12 +66,12 @@ export const getTypedTestCaseInputTypeName: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryOdeshinVoictent({
+    new InMemoryOdeshinVoictent<DatumTestCaseInputVoque>({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
       initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),
-    new InMemoryOdeshinVoictent({
-      gepp: 'typed-datum',
+    new InMemoryOdeshinVoictent<SerializableTypeNameVoque>({
+      gepp: SERIALIZABLE_TYPE_NAME_GEPP,
       initialHubblepupTuple: [],
     }),
     new JsonSerializableVoictent<SerializedConfiguration>({
