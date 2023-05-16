@@ -34,6 +34,7 @@ export class Tabilly extends Map<Gepp, GenericVoictent2> {
   }
 
   addHubblepupByGepp(quirm: Quirm): void {
+    // TODO: require that a tabilly gets instantiated with all possible voictents up front
     const voictent = this.getOrInstantiateAndGetVoictent(quirm.gepp);
     voictent.addHubblepup(quirm.hubblepup);
     this.set(quirm.gepp, voictent);
