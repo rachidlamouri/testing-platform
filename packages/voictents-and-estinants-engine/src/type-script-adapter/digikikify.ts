@@ -132,7 +132,6 @@ export const digikikify = <TPotentialEstinantTuple extends StralineTuple>({
 
   coreDigikikify({
     inputVoictentList: inferredVoictentList,
-    initialQuirmTuple: [],
     estinantTuple: estinantTuple as CoreEstinantTuple,
     onHubblepupAddedToVoictents: (quirm) => {
       const quirmDebugger = inputDebugger as QuirmDebugger<Voictent>;

@@ -55,7 +55,6 @@ export type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 export type DigikikifierInput = {
   // TODO: remove "initialQuirmTuple" and make inputVoictentList required
   inputVoictentList?: GenericVoictent2[];
-  initialQuirmTuple?: QuirmTuple;
   estinantTuple: Tuple<Estinant | GenericEstinant2>;
   /** @deprecated */
   onHubblepupAddedToVoictents?: OnHubblepupAddedToVoictentsHandler;
@@ -110,7 +109,6 @@ type RuntimeStatistics = {
  */
 export const digikikify = ({
   inputVoictentList = [],
-  initialQuirmTuple = [],
   estinantTuple,
   onHubblepupAddedToVoictents,
   onFinish,
@@ -136,17 +134,6 @@ export const digikikify = ({
   duplicateGeppList.forEach((gepp) => {
     errorMessageList.push(
       `Voictents must have a unique gepp per program. Found duplicate gepp: ${gepp}`,
-    );
-  });
-
-  // TODO: remove this check when `initialQuirmTuple` is removed
-  const invalidInitialQuirmGeppList = [
-    ...new Set(initialQuirmTuple.map((quirm) => quirm.gepp)),
-  ].filter((gepp) => !inputGeppSet.has(gepp));
-
-  invalidInitialQuirmGeppList.forEach((gepp) => {
-    errorMessageList.push(
-      `Initial quirms must have a corresponding voictent. An initial quirm with gepp "${gepp}" does not have a corresponding voictent`,
     );
   });
 
@@ -633,8 +620,6 @@ export const digikikify = ({
 
     addToTabilly(outputQuirmTuple);
   };
-
-  addToTabilly(initialQuirmTuple);
 
   const voictentTickSeriesConfigurationByVoictent = new Map<
     GenericVoictent2,
