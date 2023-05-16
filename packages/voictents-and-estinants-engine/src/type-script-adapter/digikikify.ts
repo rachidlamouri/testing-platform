@@ -14,8 +14,8 @@ import {
   VoictentUnionToAggregateVoictentItemRecord,
   VoictentUnionToAggregateVoictentRecord,
 } from './voictent';
-import { Gepp } from './gepp';
-import { HubblepupTuple } from './hubblepup';
+import { Hubblepup } from './hubblepup';
+import { InMemoryVoictent } from '../core/engine/inMemoryVoictent';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyEstinant = Estinant<any, any> | Estinant2<any, any, any>;
@@ -121,17 +121,18 @@ export const digikikify = <TPotentialEstinantTuple extends StralineTuple>({
   estinantTuple,
   quirmDebugger: inputDebugger,
 }: InferredDigikikifyInput<TPotentialEstinantTuple>): void => {
-  coreDigikikify({
-    initialQuirmTuple: Object.entries(
-      initialVoictentsByGepp as Record<Gepp, HubblepupTuple>,
-    ).flatMap<Quirm>(([gepp, hubblepupTuple]) => {
-      return hubblepupTuple.map<Quirm>((hubblepup) => {
-        return {
-          gepp,
-          hubblepup,
-        };
+  const inferredVoictentList = Object.entries(initialVoictentsByGepp).map(
+    ([gepp, initialHubblepupTuple]) => {
+      return new InMemoryVoictent({
+        gepp,
+        initialHubblepupTuple: initialHubblepupTuple as Hubblepup[],
       });
-    }),
+    },
+  );
+
+  coreDigikikify({
+    inputVoictentList: inferredVoictentList,
+    initialQuirmTuple: [],
     estinantTuple: estinantTuple as CoreEstinantTuple,
     onHubblepupAddedToVoictents: (quirm) => {
       const quirmDebugger = inputDebugger as QuirmDebugger<Voictent>;

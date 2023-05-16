@@ -502,6 +502,13 @@ export const digikikify = ({
           ) {
             zorn = dreanor.croard(rightInput);
             dreanor.prected.set(zorn, rightInput);
+          } else if (
+            dreanor.typeName === DreanorTypeName.RightVoictentItemDreanor &&
+            rightInputTypeName === ReferenceTypeName.IndexedVoictentItem
+          ) {
+            const actualRightInput = rightInput.hubblepup;
+            zorn = dreanor.croard(actualRightInput);
+            dreanor.prected.set(zorn, actualRightInput);
           } else {
             // TODO: remove this else once all voictent item lanbes return indexed hubblepups
 
