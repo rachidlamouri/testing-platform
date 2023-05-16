@@ -22,7 +22,7 @@ import {
   GenericEstinant2,
   UnsafeEstinant2Tuple,
 } from '../engine-shell/estinant/estinant';
-import { Gepp } from '../engine-shell/voictent/gepp';
+import { Gepp, GeppSet } from '../engine-shell/voictent/gepp';
 import {
   GenericIndexedHubblepup,
   GenericIndexedHubblepupTuple,
@@ -55,7 +55,6 @@ export type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 export type DigikikifierInput = {
   // TODO: remove "initialQuirmTuple" and make inputVoictentList required
   inputVoictentList?: GenericVoictent2[];
-  initialQuirmTuple?: QuirmTuple;
   estinantTuple: Tuple<Estinant | GenericEstinant2>;
   /** @deprecated */
   onHubblepupAddedToVoictents?: OnHubblepupAddedToVoictentsHandler;
@@ -110,11 +109,99 @@ type RuntimeStatistics = {
  */
 export const digikikify = ({
   inputVoictentList = [],
-  initialQuirmTuple = [],
   estinantTuple,
   onHubblepupAddedToVoictents,
   onFinish,
 }: DigikikifierInput): void => {
+  const inputGeppSet: GeppSet = new Set(
+    inputVoictentList.map((voictent) => {
+      return voictent.gepp;
+    }),
+  );
+
+  const errorMessageList: string[] = [];
+
+  const voictentCountByGepp: Record<string, number> = {};
+  inputVoictentList.forEach((voictent) => {
+    const currentCount = voictentCountByGepp[voictent.gepp] ?? 0;
+    voictentCountByGepp[voictent.gepp] = currentCount + 1;
+  });
+
+  const duplicateGeppList = Object.entries(voictentCountByGepp)
+    .filter(([, count]) => count > 1)
+    .map(([gepp]) => gepp);
+
+  duplicateGeppList.forEach((gepp) => {
+    errorMessageList.push(
+      `Voictents must have a unique gepp per program. Found duplicate gepp: ${gepp}`,
+    );
+  });
+
+  const invalidEstinantInputOutputList = estinantTuple
+    .filter((estinant): estinant is GenericEstinant2 => estinant.version === 2)
+    .flatMap((estinant) => {
+      return [
+        {
+          estinantName: estinant.name,
+          gepp: estinant.leftInputAppreffinge.gepp,
+          isInput: true,
+        },
+        ...estinant.rightInputAppreffingeTuple.map((rightAppreffinge) => {
+          return {
+            estinantName: estinant.name,
+            gepp: rightAppreffinge.gepp,
+            isInput: true,
+          };
+        }),
+        ...estinant.outputAppreffinge.geppTuple.map((gepp) => {
+          return {
+            estinantName: estinant.name,
+            gepp,
+            isInput: false,
+          };
+        }),
+      ];
+    })
+    .filter(({ gepp }) => !inputGeppSet.has(gepp));
+
+  const estinantCountByName: Record<string, number> = {};
+  estinantTuple
+    .filter((estinant): estinant is GenericEstinant2 => estinant.version === 2)
+    .forEach((estinant) => {
+      const currentCount = estinantCountByName[estinant.name] ?? 0;
+      estinantCountByName[estinant.name] = currentCount + 1;
+    });
+
+  const duplicateEstinantNameList = Object.entries(voictentCountByGepp)
+    .filter(([, count]) => count > 1)
+    .map(([name]) => name);
+
+  duplicateEstinantNameList.forEach((name) => {
+    errorMessageList.push(
+      `Estinant names must be unique per program. Found duplicate name: ${name}`,
+    );
+  });
+
+  invalidEstinantInputOutputList.forEach(({ estinantName, gepp, isInput }) => {
+    const label = isInput ? 'input' : 'output';
+
+    errorMessageList.push(
+      `Estinant inputs and outputs must have a corresponding voictent. Estinant "${estinantName}" has an ${label} gepp "${gepp}" without a corresponding voictent.`,
+    );
+  });
+
+  if (errorMessageList.length > 0) {
+    const aggregateMessage = [
+      `Encountered ${errorMessageList.length} errors:`,
+      ...errorMessageList.slice(0, 100).map((errorMessage, index) => {
+        // 4 accounts for 2 spaces and then a 2 digit number
+        return `${`${index}`.padStart(4, ' ')} ${errorMessage}`;
+      }),
+    ].join('\n');
+
+    throw Error(aggregateMessage);
+  }
+
   const initialTabillyEntryList = inputVoictentList.map((voictent) => {
     return [voictent.gepp, voictent] as const;
   });
@@ -402,6 +489,13 @@ export const digikikify = ({
           ) {
             zorn = dreanor.croard(rightInput);
             dreanor.prected.set(zorn, rightInput);
+          } else if (
+            dreanor.typeName === DreanorTypeName.RightVoictentItemDreanor &&
+            rightInputTypeName === ReferenceTypeName.IndexedVoictentItem
+          ) {
+            const actualRightInput = rightInput.hubblepup;
+            zorn = dreanor.croard(actualRightInput);
+            dreanor.prected.set(zorn, actualRightInput);
           } else {
             // TODO: remove this else once all voictent item lanbes return indexed hubblepups
 
@@ -526,8 +620,6 @@ export const digikikify = ({
 
     addToTabilly(outputQuirmTuple);
   };
-
-  addToTabilly(initialQuirmTuple);
 
   const voictentTickSeriesConfigurationByVoictent = new Map<
     GenericVoictent2,
