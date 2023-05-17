@@ -4,7 +4,6 @@ import {
 } from '../core/engine/digikikify';
 import { EstinantTuple as CoreEstinantTuple } from '../core/engine-shell/estinant/estinant';
 import { Quirm } from '../core/engine-shell/quirm/quirm';
-import { StralineTuple } from '../utilities/semantic-types/straline';
 import { Estinant, Estinant2 } from './estinant/estinant';
 import { RightVickenTuple, VickenTupleToVoictentTuple } from './vicken';
 import {
@@ -107,20 +106,11 @@ type DigikikifyInput<TEstinantTuple extends AnyEstinantTuple> = {
   quirmDebugger?: QuirmDebuggerFromEstinantTuple<TEstinantTuple>;
 };
 
-type InferredDigikikifyInput<TPotentialEstinantTuple> =
-  TPotentialEstinantTuple extends AnyEstinantTuple
-    ? DigikikifyInput<TPotentialEstinantTuple>
-    : DigikikifyInput<[]>;
-
-/**
- * Inputs types are inferred from the "estinantTuple" type, so if the "estinantTuple" type
- * is not an EstinantTuple then all inputs get inferred to empty lists.
- */
-export const digikikify = <TPotentialEstinantTuple extends StralineTuple>({
+export const digikikify = <TEstinantTuple extends AnyEstinantTuple>({
   initialVoictentsByGepp,
   estinantTuple,
   quirmDebugger: inputDebugger,
-}: InferredDigikikifyInput<TPotentialEstinantTuple>): void => {
+}: DigikikifyInput<TEstinantTuple>): void => {
   const inferredVoictentList = Object.entries(initialVoictentsByGepp).map(
     ([gepp, initialHubblepupTuple]) => {
       return new InMemoryVoictent({
@@ -134,7 +124,7 @@ export const digikikify = <TPotentialEstinantTuple extends StralineTuple>({
     inputVoictentList: inferredVoictentList,
     estinantTuple: estinantTuple as CoreEstinantTuple,
     onHubblepupAddedToVoictents: (quirm) => {
-      const quirmDebugger = inputDebugger as QuirmDebugger<Voictent>;
+      const quirmDebugger = inputDebugger as unknown as QuirmDebugger<Voictent>;
 
       if (!quirmDebugger) {
         return;
