@@ -1,5 +1,5 @@
+import { Hubblepup } from '../../../core/engine-shell/quirm/hubblepup';
 import { Gepp } from '../../../type-script-adapter/gepp';
-import { QuirmList } from '../../../type-script-adapter/quirm';
 import { Voictent } from '../../../type-script-adapter/voictent';
 import {
   Straline,
@@ -52,15 +52,19 @@ export type PinbetunfOutputAggregator<> = (
   modifiedOutput: any,
 ) => AggregatedOutput;
 
+// note: using HubblepupTuple instead of Hubblepup[] cause an issue in "estinantAssembler"'s tropoig
+export type CoreConstituentOutputEntry = [Gepp, Hubblepup[]];
+
 export type ConstituentResultNormalizer = (
   leftInput: unknown,
   modifiedInput: unknown,
   aggregatedOutput: AggregatedOutput,
-) => QuirmList;
+) => CoreConstituentOutputEntry;
 
 export type AggregatedOutputContext = {
   aggregatePinbetunfOutput: PinbetunfOutputAggregator;
   constituentResultNormalizerList: ConstituentResultNormalizer[];
+  geppTuple: Gepp[];
 };
 
 export type RightInputContextTupleToModifiedInputTuple<
@@ -174,6 +178,7 @@ export const buildInputOutputContextFromLeftInputContext = ({
     outputContext: {
       aggregatePinbetunfOutput: buildEmptyAggregatedOutput,
       constituentResultNormalizerList: [],
+      geppTuple: [],
     },
   };
 };
@@ -221,6 +226,7 @@ export const buildInputOutputContextFromConstituentResultNormalizer = ({
     inputContext,
     outputContext: {
       constituentResultNormalizerList: previousConstituentResultNormalizerList,
+      geppTuple: previousGeppTuple,
     },
   },
   normalizeResult,
@@ -242,6 +248,7 @@ export const buildInputOutputContextFromConstituentResultNormalizer = ({
     outputContext: {
       aggregatePinbetunfOutput,
       constituentResultNormalizerList: nextConstituentResultNormalizerList,
+      geppTuple: [...previousGeppTuple, outputGepp],
     },
   };
 };

@@ -35,7 +35,7 @@ import {
   buildRightInputVoictentAppreffingeBuilder,
   RightInputVoictentAppreffingeBuilderParent,
 } from './rightInputVoictentAppreffingeBuilder';
-import { odeshinTupleToGritionTuple } from './tropoignantInputOutputModifier';
+import { indexedOdeshinTupleToGritionTuple } from './tropoignantInputOutputModifier';
 
 type RightAppreffinge<
   TLeftVicken extends LeftVicken,
@@ -127,7 +127,7 @@ export const buildRightInputGritionTupleAppreffingeBuilder = <
         isWibiz: false,
         framate: rightAppreffinge.framate,
         croard: rightAppreffinge.croard,
-        modifyTropoignantInput: odeshinTupleToGritionTuple,
+        modifyTropoignantInput: indexedOdeshinTupleToGritionTuple,
       },
     });
 

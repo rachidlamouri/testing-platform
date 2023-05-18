@@ -195,7 +195,7 @@ export const digikikify = ({
       `Encountered ${errorMessageList.length} errors:`,
       ...errorMessageList.slice(0, 100).map((errorMessage, index) => {
         // 4 accounts for 2 spaces and then a 2 digit number
-        return `${`${index}`.padStart(4, ' ')} ${errorMessage}`;
+        return `${`${index}`.padStart(4, ' ')}: ${errorMessage}`;
       }),
     ].join('\n');
 
@@ -427,6 +427,15 @@ export const digikikify = ({
                 leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
               ) {
                 zornTuple = rightDreanor.framate(leftInputReferenceValue);
+              } else if (
+                rightDreanor.typeName ===
+                  DreanorTypeName.RightVoictentItem2Dreanor &&
+                leftInputTypeName === ReferenceTypeName.Voictent
+              ) {
+                // TODO: this cast is incorrect, and is masking some underlying issue. The input type should probably be "never"
+                zornTuple = rightDreanor.framate(
+                  leftInput as GenericIndexedHubblepup,
+                );
               } else {
                 // TODO: remove this else once all voictent item lanbes return indexed hubblepups
 

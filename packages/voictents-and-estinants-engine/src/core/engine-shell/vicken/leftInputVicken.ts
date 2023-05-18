@@ -1,18 +1,17 @@
 import { GenericVoque, UnsafeVoque } from '../../engine/voque';
-import { Gepp } from '../voictent/gepp';
 
 type BaseLeftInputVicken<
-  TGepp extends Gepp,
+  TVoque extends GenericVoque,
   TTropoignantInput,
   TIsWibiz extends boolean,
 > = {
-  gepp: TGepp;
+  voque: TVoque;
   tropoignantInput: TTropoignantInput;
   isWibiz: TIsWibiz;
 };
 
 export type LeftInputHubblepupVicken<TVoque extends GenericVoque> =
-  BaseLeftInputVicken<TVoque['gepp'], TVoque['indexedEmittedHubblepup'], false>;
+  BaseLeftInputVicken<TVoque, TVoque['indexedEmittedHubblepup'], false>;
 
 export type GenericLeftInputHubblepupVicken =
   LeftInputHubblepupVicken<GenericVoque>;
@@ -21,7 +20,7 @@ export type UnsafeLeftInputHubblepupVicken =
   LeftInputHubblepupVicken<UnsafeVoque>;
 
 export type LeftInputVoictentVicken<TVoque extends GenericVoque> =
-  BaseLeftInputVicken<TVoque['gepp'], TVoque['emittedVoictent'], true>;
+  BaseLeftInputVicken<TVoque, TVoque['emittedVoictent'], true>;
 
 export type GenericLeftInputVoictentVicken =
   LeftInputVoictentVicken<GenericVoque>;

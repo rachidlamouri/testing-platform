@@ -26,3 +26,9 @@ export type Tropoignant2<
   leftInput: TLeftVicken['tropoignantInput'],
   ...rightInputTuple: RightInputVickenTupleTropoignantInputTuple<TRightVickenTuple>
 ) => TOutputVicken['tropoignantOutput'];
+
+export type GenericTropoignant2 = Tropoignant2<
+  GenericLeftInputVicken,
+  GenericRightInputVickenTuple,
+  GenericOutputVicken
+>;

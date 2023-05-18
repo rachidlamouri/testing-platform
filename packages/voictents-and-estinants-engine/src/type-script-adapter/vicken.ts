@@ -1,11 +1,21 @@
+import {
+  LeftInputHubblepupVicken,
+  LeftInputVoictentVicken,
+} from '../core/engine-shell/vicken/leftInputVicken';
+import {
+  RightInputHubblepupTupleVicken,
+  RightInputVoictentVicken,
+} from '../core/engine-shell/vicken/rightInputVicken';
 import { OdeshinVoictent } from '../custom/adapter/odeshinVoictent';
 import { Tuple } from '../utilities/semantic-types/tuple';
 import { Zorn, ZornTuple } from '../utilities/semantic-types/zorn';
 import {
+  AdaptedVoqueFromVoictent,
   Voictent,
   VoictentTuple,
   VoictentTupleToHubblepupTuple,
 } from './voictent';
+import { OutputVicken as CoreOutputVicken } from '../core/engine-shell/vicken/outputVicken';
 
 export type Vicken<
   TVoictent extends Voictent = Voictent,
@@ -74,6 +84,13 @@ export type LeftVicken =
   | LeftHubblepupVicken
   | LeftGritionVicken;
 
+export type CoreLeftInputVickenFromLeftVicken<TLeftVicken extends LeftVicken> =
+  TLeftVicken extends LeftVoictentVicken | LeftOdeshinVoictentVicken
+    ? LeftInputVoictentVicken<AdaptedVoqueFromVoictent<TLeftVicken['voictent']>>
+    : LeftInputHubblepupVicken<
+        AdaptedVoqueFromVoictent<TLeftVicken['voictent']>
+      >;
+
 export type RightVoictentVicken<TVoictent extends Voictent = Voictent> = {
   voictent: TVoictent;
   tropoignantInput: TVoictent['hubblepupTuple'];
@@ -129,6 +146,25 @@ export type AppendRightVickenToTuple<
   TNextRightVicken extends RightVicken,
 > = [...TRightVickenTuple, TNextRightVicken];
 
+export type CoreRightInputVickenFromRightVicken<
+  TRightVicken extends RightVicken,
+> = TRightVicken extends RightHubblepupVicken | RightGritionVicken
+  ? RightInputHubblepupTupleVicken<
+      AdaptedVoqueFromVoictent<TRightVicken['voictent']>,
+      TRightVicken['zornTuple']
+    >
+  : RightInputVoictentVicken<
+      AdaptedVoqueFromVoictent<TRightVicken['voictent']>
+    >;
+
+export type CoreRightInputVickenTupleFromRightVickenTuple<
+  TRightVickenTuple extends RightVickenTuple,
+> = {
+  [Index in keyof TRightVickenTuple]: CoreRightInputVickenFromRightVicken<
+    TRightVickenTuple[Index]
+  >;
+};
+
 // I DONT THINK VICKEN IS THE RIGHT TERM HERE, BUT WE'LL DEAL WITH THAT LATER(tm)
 export type OutputVoictentVicken<TVoictent extends Voictent = Voictent> = {
   voictent: TVoictent;
@@ -166,3 +202,11 @@ export type AppendOutputVickenToTuple<
   TOutputVickenTuple extends OutputVickenTuple,
   TNextOutputVicken extends OutputVicken,
 > = [...TOutputVickenTuple, TNextOutputVicken];
+
+export type CoreOutputVickenFromOutputVickenTuple<
+  TOutputVickenTuple extends OutputVickenTuple,
+> = CoreOutputVicken<{
+  [Index in keyof TOutputVickenTuple]: AdaptedVoqueFromVoictent<
+    TOutputVickenTuple[Index]['voictent']
+  >;
+}>;
