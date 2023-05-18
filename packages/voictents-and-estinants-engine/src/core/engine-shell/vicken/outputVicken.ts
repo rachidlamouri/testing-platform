@@ -15,6 +15,7 @@ type OutputGeppTuple<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
 };
 
 export type OutputVicken<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
+  outputVoqueOptionTuple: TOutputVoqueOptionTuple;
   geppTuple: OutputGeppTuple<TOutputVoqueOptionTuple>;
   tropoignantOutput: Simplify<
     UnionToIntersection<OutputRecordUnion<TOutputVoqueOptionTuple>>

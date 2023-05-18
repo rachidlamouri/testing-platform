@@ -1,4 +1,4 @@
-import { Quirm } from '../../../type-script-adapter/quirm';
+import { Hubblepup } from '../../../core/engine-shell/quirm/hubblepup';
 import { LeftVicken } from '../../../type-script-adapter/vicken';
 import { Predicate } from '../../../utilities/predicate';
 import { OdeshinVoictent } from '../odeshinVoictent';
@@ -57,23 +57,23 @@ export const buildOutputGritionConditionalAppreffingeBuilder = <
     ) => {
       const predicateResult = outputAppreffinge.pinbe(modifiedLeftInput);
 
+      let hubblepupTuple: Hubblepup[];
       if (predicateResult) {
         const zorn = outputAppreffinge.getZorn(
           leftInput as TLeftVicken['tropoignantInput'],
         );
 
-        const quirm: Quirm = {
-          gepp: outputAppreffinge.gepp,
-          hubblepup: {
-            zorn,
-            grition: modifiedLeftInput,
-          },
+        const hubblepup = {
+          zorn,
+          grition: modifiedLeftInput,
         };
 
-        return [quirm];
+        hubblepupTuple = [hubblepup];
+      } else {
+        hubblepupTuple = [];
       }
 
-      return [];
+      return [outputAppreffinge.gepp, hubblepupTuple];
     };
 
     const nextContext = buildInputOutputContextFromConstituentResultNormalizer({

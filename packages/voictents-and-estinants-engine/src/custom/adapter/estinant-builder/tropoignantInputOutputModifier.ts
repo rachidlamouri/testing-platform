@@ -1,15 +1,15 @@
-import { Hubblepup } from '../../../core/engine-shell/quirm/hubblepup';
-import { Quirm, QuirmList } from '../../../core/engine-shell/quirm/quirm';
+import {
+  GenericIndexedHubblepupTuple,
+  Hubblepup,
+} from '../../../core/engine-shell/quirm/hubblepup';
+import { QuirmList } from '../../../core/engine-shell/quirm/quirm';
 import { Gepp } from '../../../type-script-adapter/gepp';
 import { HubblepupTuple } from '../../../type-script-adapter/hubblepup';
 import { StringZorn } from '../../../utilities/semantic-types/zorn';
 import { Grition, GritionTuple } from '../grition';
 import { Odeshin, OdeshinTuple } from '../odeshin';
 import {
-  AggregatedOutput,
-  AggregatedOutputContext,
   ConstituentResultNormalizer,
-  InputOutputContext,
   PinbetunfOutputAggregator,
 } from './estinantBuilderContext';
 
@@ -17,9 +17,26 @@ export const hubblepupTupleToHubblepupTuple = (
   inputTuple: HubblepupTuple,
 ): HubblepupTuple => inputTuple;
 
+export const indexedOdeshinTupleToGritionTuple = (
+  inputTuple: GenericIndexedHubblepupTuple,
+): GritionTuple => {
+  const odeshinTuple = inputTuple.map((x) => x.hubblepup as Odeshin);
+  const gritionTuple = odeshinTuple.map((odeshin: Odeshin) => {
+    return odeshin.grition;
+  });
+
+  return gritionTuple;
+};
+
 export const odeshinTupleToGritionTuple = (
-  inputTuple: OdeshinTuple,
-): GritionTuple => inputTuple.map((odeshin) => odeshin.grition);
+  odeshinTuple: OdeshinTuple,
+): GritionTuple => {
+  const gritionTuple = odeshinTuple.map((odeshin: Odeshin) => {
+    return odeshin.grition;
+  });
+
+  return gritionTuple;
+};
 
 export const hubblepupToHubblepup = (input: Hubblepup): Hubblepup => input;
 
@@ -48,15 +65,8 @@ export const buildOutputHubblepupTupleNormalizer = (
     modifiedInput,
     aggregatedOutput,
   ) => {
-    const hubblepupTuple = aggregatedOutput[gepp] as HubblepupTuple;
-    const quirmList = hubblepupTuple.map<Quirm>((hubblepup) => {
-      return {
-        gepp,
-        hubblepup,
-      };
-    });
-
-    return quirmList;
+    const hubblepupTuple = aggregatedOutput[gepp] as Hubblepup[];
+    return [gepp, hubblepupTuple];
   };
 
   return normalizeHubblepupTuple;
@@ -71,12 +81,7 @@ export const buildOutputHubblepupNormalizer = (
     aggregatedOutput,
   ) => {
     const hubblepup = aggregatedOutput[gepp];
-    const quirm: Quirm = {
-      gepp,
-      hubblepup,
-    };
-
-    return [quirm];
+    return [gepp, [hubblepup]];
   };
 
   return normalizeHubblepup;
@@ -102,36 +107,9 @@ export const buildOutputGritionNormalizer = (
       zorn,
       grition,
     };
-    const quirm: Quirm = {
-      gepp,
-      hubblepup,
-    };
 
-    return [quirm];
+    return [gepp, [hubblepup]];
   };
 
   return normalizeGrition;
-};
-
-export const extendInputOutputContext = (
-  { instantiationContext, inputContext, outputContext }: InputOutputContext,
-  normalizeNextConstituentResult: ConstituentResultNormalizer,
-): InputOutputContext => {
-  const nextOutputContext: AggregatedOutputContext = {
-    aggregatePinbetunfOutput: (aggregatedOutput: AggregatedOutput) => {
-      return aggregatedOutput;
-    },
-    constituentResultNormalizerList: [
-      ...outputContext.constituentResultNormalizerList,
-      normalizeNextConstituentResult,
-    ],
-  };
-
-  const nextInputOutputContext: InputOutputContext = {
-    instantiationContext,
-    inputContext,
-    outputContext: nextOutputContext,
-  };
-
-  return nextInputOutputContext;
 };

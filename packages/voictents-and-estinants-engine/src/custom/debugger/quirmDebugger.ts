@@ -1,15 +1,16 @@
 import fs from 'fs';
 import { posix } from 'path';
 import * as uuid from 'uuid';
-import { QuirmDebugger } from '../../type-script-adapter/digikikify';
+import { SimplerQuirmDebugger } from '../../type-script-adapter/digikikify';
 import { serialize } from '../../utilities/typed-datum/serializer/serialize';
 import { isOdeshin } from '../adapter/odeshin';
-import { Voictent } from '../adapter/voictent';
 import {
   OutputFileVoictent,
   OUTPUT_FILE_GEPP,
 } from '../programmable-units/output-file/outputFile';
 import { LanbeTypeName } from '../../core/engine-shell/voictent/lanbe';
+import { GenericVoque } from '../../core/engine/voque';
+import { AdaptedVoqueFromVoictent } from '../../type-script-adapter/voictent';
 
 // TODO: move to a utility or something
 export const escapePathSeparator = (text: string): string =>
@@ -18,7 +19,7 @@ export const escapePathSeparator = (text: string): string =>
 export const buildQuirmDebugger = (
   programName: string,
   debugDirectoryPath: 'debug' | 'snapshot' = 'debug',
-): QuirmDebugger<OutputFileVoictent> => {
+): SimplerQuirmDebugger<AdaptedVoqueFromVoictent<OutputFileVoictent>> => {
   const createDirectory = (directoryPath: string): void => {
     if (!fs.existsSync(directoryPath)) {
       // eslint-disable-next-line no-console
@@ -67,7 +68,9 @@ export const buildQuirmDebugger = (
     fs.writeFileSync(filePath, text);
   };
 
-  const quirmDebugger: QuirmDebugger<OutputFileVoictent> = {
+  const quirmDebugger: SimplerQuirmDebugger<
+    AdaptedVoqueFromVoictent<OutputFileVoictent>
+  > = {
     handlerByGepp: {
       [OUTPUT_FILE_GEPP]: ({ gepp, hubblepup }) => {
         const { fileName, fileExtensionSuffix, text } = hubblepup;
@@ -205,16 +208,17 @@ export const buildQuirmDebugger = (
 export const buildBasicQuirmDebugger = (
   programName: string,
   debugDirectoryPath?: 'debug' | 'snapshot',
-): QuirmDebugger<Voictent> => {
+): SimplerQuirmDebugger<GenericVoque> => {
   const quirmDebugger = buildQuirmDebugger(programName, debugDirectoryPath);
 
   return {
-    ...quirmDebugger,
     handlerByGepp: {},
+    defaultHandler: quirmDebugger.defaultHandler,
+    onFinish: quirmDebugger.onFinish,
   };
 };
 
 export const buildDefaultHandler = (
   programName: string,
-): QuirmDebugger<Voictent>['defaultHandler'] =>
+): SimplerQuirmDebugger<GenericVoque>['defaultHandler'] =>
   buildBasicQuirmDebugger(programName).defaultHandler;

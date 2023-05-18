@@ -1,3 +1,4 @@
+import { Voque } from '../core/engine/voque';
 import { MergeTuple } from '../utilities/mergeTuple';
 import { List } from '../utilities/semantic-types/list';
 import { Tuple } from '../utilities/semantic-types/tuple';
@@ -126,3 +127,15 @@ export type VoictentUnionToAggregateVoictentItemRecord<
   [TVoictent in TVoictentUnion as TVoictent['gepp'] &
     string]: TVoictent['hubblepupTuple'][number];
 };
+
+export type AdaptedVoqueFromVoictent<TVoictent extends Voictent> =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  TVoictent extends any
+    ? Voque<
+        TVoictent['gepp'],
+        TVoictent['hubblepupTuple'][number],
+        TVoictent['hubblepupTuple'][number],
+        never,
+        TVoictent['hubblepupTuple']
+      >
+    : never;

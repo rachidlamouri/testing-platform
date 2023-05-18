@@ -1,15 +1,14 @@
 import { GenericVoque, UnsafeVoque } from '../../engine/voque';
 import { ZornTuple } from '../../../utilities/semantic-types/zorn';
-import { Gepp } from '../voictent/gepp';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 
 type BaseRightInputVicken<
-  TGepp extends Gepp,
+  TVoque extends GenericVoque,
   TTropoignantInput,
   TIsWibiz extends boolean,
   TZornTuple extends ZornTuple,
 > = {
-  gepp: TGepp;
+  voque: TVoque;
   tropoignantInput: TTropoignantInput;
   isWibiz: TIsWibiz;
   zornTuple: TZornTuple;
@@ -27,7 +26,7 @@ export type RightInputHubblepupTupleVicken<
   TVoque extends GenericVoque,
   TZornTuple extends ZornTuple,
 > = BaseRightInputVicken<
-  TVoque['gepp'],
+  TVoque,
   RightTropoignantInputTupleFromZornTuple<TVoque, TZornTuple>,
   false,
   TZornTuple
@@ -40,7 +39,7 @@ export type UnsafeRightInputHubblepupTupleVicken =
   RightInputHubblepupTupleVicken<UnsafeVoque, ZornTuple>;
 
 export type RightInputVoictentVicken<TVoque extends GenericVoque> =
-  BaseRightInputVicken<TVoque['gepp'], TVoque['emittedVoictent'], true, never>;
+  BaseRightInputVicken<TVoque, TVoque['emittedVoictent'], true, never>;
 
 export type GenericRightInputVoictentVicken =
   RightInputVoictentVicken<GenericVoque>;

@@ -3,7 +3,7 @@ import { GenericLeftInputVicken } from '../vicken/leftInputVicken';
 export type LeftInputAppreffinge<
   TLeftInputVicken extends GenericLeftInputVicken,
 > = {
-  gepp: TLeftInputVicken['gepp'];
+  gepp: TLeftInputVicken['voque']['gepp'];
   isWibiz: TLeftInputVicken['isWibiz'];
 };
 

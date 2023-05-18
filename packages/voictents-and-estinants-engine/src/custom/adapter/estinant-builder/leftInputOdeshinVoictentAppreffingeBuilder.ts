@@ -2,7 +2,6 @@ import {
   buildOutputHubblepupAppreffingeBuilder,
   OutputHubblepupAppreffingeBuilderParent,
 } from './outputHubblepupAppreffingeBuilder';
-import { odeshinTupleToGritionTuple } from './tropoignantInputOutputModifier';
 import { LeftOdeshinVoictentVicken } from '../../../type-script-adapter/vicken';
 import {
   buildInputOutputContextFromLeftInputContext,
@@ -34,6 +33,7 @@ import {
   buildRightInputGritionTupleAppreffingeBuilder,
   RightInputGritionTupleAppreffingeBuilderParent,
 } from './rightInputGritionTupleAppreffingeBuilder';
+import { OdeshinTuple } from '../odeshin';
 
 type LeftVicken<TInputVoictent extends OdeshinVoictent> =
   LeftOdeshinVoictentVicken<TInputVoictent>;
@@ -91,7 +91,8 @@ export const buildLeftInputOdeshinVoictentAppreffingeBuilder = (
         leftInputContext: {
           gepp: leftAppreffinge.gepp,
           isWibiz: true,
-          modifyTropoignantInput: odeshinTupleToGritionTuple,
+          modifyTropoignantInput: (leftInput: OdeshinTuple) =>
+            leftInput.map((odeshin) => odeshin.grition),
         },
       });
 
