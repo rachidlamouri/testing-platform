@@ -1,3 +1,4 @@
+import { AdaptedVoqueFromVoictent } from '../../../type-script-adapter/voictent';
 import { TypeScriptObjectInstance } from '../../../utilities/typed-datum/type-script/object';
 import { Grition } from '../../adapter/grition';
 import { OdeshinFromGrition } from '../../adapter/odeshin';
@@ -40,3 +41,5 @@ export type ProgramErrorVoictent<TPrefix extends string = string> = Voictent<
   ProgramErrorGepp,
   ProgramErrorOdeshin<TPrefix>
 >;
+
+export type ProgramErrorVoque = AdaptedVoqueFromVoictent<ProgramErrorVoictent>;

@@ -621,7 +621,9 @@ const getAdaptedEstinant = ({
     EstinantInput2 | EstinantOutput2
   >(({ isInput, typeNode }, index) => {
     // TODO: make the convention where we chop off the suffix more discoverable
-    const voictentName = typeNode.typeName.name.replace(/Voictent$/, '');
+    const voictentName = typeNode.typeName.name
+      .replace(/Voictent$/, '')
+      .replace(/Voque$/, '');
 
     if (isInput) {
       return {
