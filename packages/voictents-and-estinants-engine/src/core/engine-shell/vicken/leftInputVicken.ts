@@ -10,6 +10,7 @@ type BaseLeftInputVicken<
   isWibiz: TIsWibiz;
 };
 
+// TODO: rename this to "LeftInputIndexedHubblepupVicken"
 export type LeftInputHubblepupVicken<TVoque extends GenericVoque> =
   BaseLeftInputVicken<TVoque, TVoque['indexedEmittedHubblepup'], false>;
 
