@@ -5,23 +5,13 @@ import {
 } from '../../../core/engine-shell/estinant/estinant';
 import { GenericTropoignant2 } from '../../../core/engine-shell/estinant/tropoignant';
 import { GenericIndexedHubblepup } from '../../../core/engine-shell/quirm/hubblepup';
-import {
-  GenericLeftInputVicken,
-  LeftInputVoictentVicken,
-} from '../../../core/engine-shell/vicken/leftInputVicken';
+import { GenericLeftInputVicken } from '../../../core/engine-shell/vicken/leftInputVicken';
 import { GenericOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
 import {
   GenericRightInputHubblepupTupleVicken,
+  GenericRightInputVickenTuple,
   GenericRightInputVoictentVicken,
 } from '../../../core/engine-shell/vicken/rightInputVicken';
-import {
-  CoreOutputVickenFromOutputVickenTuple,
-  CoreRightInputVickenTupleFromRightVickenTuple,
-  LeftVicken,
-  OutputVickenTuple,
-  RightVickenTuple,
-} from '../../../type-script-adapter/vicken';
-import { AdaptedVoqueFromVoictent } from '../../../type-script-adapter/voictent';
 import { Zorn, ZornTuple } from '../../../utilities/semantic-types/zorn';
 import {
   AssemblerContext,
@@ -29,30 +19,26 @@ import {
 } from './estinantBuilderContext';
 
 export type EstinantAssembler<
-  TLeftVicken extends LeftVicken,
-  TRightVickenTuple extends RightVickenTuple,
-  TOutputVickenTuple extends OutputVickenTuple,
-> = () => CoreOutputVickenFromOutputVickenTuple<TOutputVickenTuple> extends GenericOutputVicken
-  ? Estinant2<
-      LeftInputVoictentVicken<
-        AdaptedVoqueFromVoictent<TLeftVicken['voictent']>
-      >,
-      CoreRightInputVickenTupleFromRightVickenTuple<TRightVickenTuple>,
-      CoreOutputVickenFromOutputVickenTuple<TOutputVickenTuple>
-    >
-  : never;
+  TLeftInputVicken extends GenericLeftInputVicken,
+  TRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TOutputVicken extends GenericOutputVicken,
+> = () => Estinant2<TLeftInputVicken, TRightInputVickenTuple, TOutputVicken>;
 
 export const buildEstinantAssembler = <
-  TLeftVicken extends LeftVicken,
-  TRightVickenTuple extends RightVickenTuple,
-  TOutputVickenTuple extends OutputVickenTuple,
+  TLeftInputVicken extends GenericLeftInputVicken,
+  TRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TOutputVicken extends GenericOutputVicken,
 >(
   assemblerContext: AssemblerContext,
-): EstinantAssembler<TLeftVicken, TRightVickenTuple, TOutputVickenTuple> => {
+): EstinantAssembler<
+  TLeftInputVicken,
+  TRightInputVickenTuple,
+  TOutputVicken
+> => {
   const assembleEstinant: EstinantAssembler<
-    TLeftVicken,
-    TRightVickenTuple,
-    TOutputVickenTuple
+    TLeftInputVicken,
+    TRightInputVickenTuple,
+    TOutputVicken
   > = () => {
     const {
       instantiationContext,
@@ -149,15 +135,11 @@ export const buildEstinantAssembler = <
         geppTuple: outputContext.geppTuple,
       },
       tropoig,
-    } satisfies GenericEstinant2 as unknown as CoreOutputVickenFromOutputVickenTuple<TOutputVickenTuple> extends GenericOutputVicken
-      ? Estinant2<
-          LeftInputVoictentVicken<
-            AdaptedVoqueFromVoictent<TLeftVicken['voictent']>
-          >,
-          CoreRightInputVickenTupleFromRightVickenTuple<TRightVickenTuple>,
-          CoreOutputVickenFromOutputVickenTuple<TOutputVickenTuple>
-        >
-      : never;
+    } satisfies GenericEstinant2 as unknown as Estinant2<
+      TLeftInputVicken,
+      TRightInputVickenTuple,
+      TOutputVicken
+    >;
     return estinant;
   };
 
@@ -165,13 +147,13 @@ export const buildEstinantAssembler = <
 };
 
 export type EstinantAssemblerParent<
-  TLeftVicken extends LeftVicken,
-  TRightVickenTuple extends RightVickenTuple,
-  TOutputVickenTuple extends OutputVickenTuple,
+  TLeftInputVicken extends GenericLeftInputVicken,
+  TRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TOutputVicken extends GenericOutputVicken,
 > = {
   assemble: EstinantAssembler<
-    TLeftVicken,
-    TRightVickenTuple,
-    TOutputVickenTuple
+    TLeftInputVicken,
+    TRightInputVickenTuple,
+    TOutputVicken
   >;
 };

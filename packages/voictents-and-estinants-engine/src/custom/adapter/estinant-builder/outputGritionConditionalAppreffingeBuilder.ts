@@ -1,5 +1,11 @@
 import { Hubblepup } from '../../../core/engine-shell/quirm/hubblepup';
-import { LeftVicken } from '../../../type-script-adapter/vicken';
+import { GenericOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
+import {
+  CoreLeftInputVickenFromLeftVicken,
+  CoreOutputVickenFromOutputVickenTuple,
+  CoreRightInputVickenTupleFromRightVickenTuple,
+  LeftVicken,
+} from '../../../type-script-adapter/vicken';
 import { Predicate } from '../../../utilities/predicate';
 import { OdeshinVoictent } from '../odeshinVoictent';
 import {
@@ -36,9 +42,11 @@ export type OutputGritionConditionalAppreffingeBuilder<
   outputAppreffinge: OutputAppreffinge<TLeftVicken, TOutputVoictent>,
 ) => OutputGritionConditionalAppreffingeBuilderParent<TLeftVicken> &
   EstinantAssemblerParent<
-    TLeftVicken,
-    RightInputVickenTuple,
-    OutputVickenTuple
+    CoreLeftInputVickenFromLeftVicken<TLeftVicken>,
+    CoreRightInputVickenTupleFromRightVickenTuple<RightInputVickenTuple>,
+    CoreOutputVickenFromOutputVickenTuple<OutputVickenTuple> extends GenericOutputVicken
+      ? CoreOutputVickenFromOutputVickenTuple<OutputVickenTuple>
+      : GenericOutputVicken
   >;
 
 export const buildOutputGritionConditionalAppreffingeBuilder = <
@@ -88,9 +96,11 @@ export const buildOutputGritionConditionalAppreffingeBuilder = <
           nextContext,
         ),
       assemble: buildEstinantAssembler<
-        TLeftVicken,
-        RightInputVickenTuple,
-        OutputVickenTuple
+        CoreLeftInputVickenFromLeftVicken<TLeftVicken>,
+        CoreRightInputVickenTupleFromRightVickenTuple<RightInputVickenTuple>,
+        CoreOutputVickenFromOutputVickenTuple<OutputVickenTuple> extends GenericOutputVicken
+          ? CoreOutputVickenFromOutputVickenTuple<OutputVickenTuple>
+          : GenericOutputVicken
       >({
         ...nextContext,
         pinbe: () => {
