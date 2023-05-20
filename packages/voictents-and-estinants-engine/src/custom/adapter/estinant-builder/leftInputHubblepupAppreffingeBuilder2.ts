@@ -16,6 +16,10 @@ import {
 } from './pinbetunfBuilder2';
 import { AdaptedLeftInputHubblepupVicken } from './vicken';
 import { SpreadN } from '../../../utilities/spreadN';
+import {
+  buildOutputHubblepupConditionalAppreffingeBuilder,
+  OutputHubblepupConditionalAppreffingeBuilderParent,
+} from './outputHubblepupConditionalAppreffingeBuilder';
 
 type EmptyAdaptedRightInputVickenTuple = [];
 
@@ -35,6 +39,9 @@ export type LeftInputHubblepupAppreffingeBuilder2 = <
       AdaptedLeftInputHubblepupVicken<TInputVoque>,
       EmptyAdaptedRightInputVickenTuple,
       EmptyAdaptedOutputVickenTuple
+    >,
+    OutputHubblepupConditionalAppreffingeBuilderParent<
+      AdaptedLeftInputHubblepupVicken<TInputVoque>
     >,
     OutputHubblepupTupleAppreffingeBuilderParent2<
       AdaptedLeftInputHubblepupVicken<TInputVoque>,
@@ -72,6 +79,10 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
           EmptyAdaptedOutputVickenTuple
         >(nextContext),
 
+        toHubblepupOnCondition:
+          buildOutputHubblepupConditionalAppreffingeBuilder<
+            AdaptedLeftInputHubblepupVicken<TInputVoque>
+          >(nextContext),
         toHubblepupTuple2: buildOutputHubblepupTupleAppreffingeBuilder2<
           AdaptedLeftInputHubblepupVicken<TInputVoque>,
           EmptyAdaptedRightInputVickenTuple,

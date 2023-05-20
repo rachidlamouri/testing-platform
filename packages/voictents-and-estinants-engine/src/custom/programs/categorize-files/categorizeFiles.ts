@@ -10,6 +10,8 @@ import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
 /**
  * Example program to demonstrate traversing the file system to enumerate files
  * and categorize them by file type.
+ *
+ * @todo rename to testCategorizeFiles and add this to ci.sh
  */
 digikikify({
   initialVoictentsByGepp: {

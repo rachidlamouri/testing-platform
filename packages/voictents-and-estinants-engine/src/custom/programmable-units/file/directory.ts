@@ -1,23 +1,18 @@
-import { InMemoryVoque } from '../../../core/engine/inMemoryVoictent';
-import { Grition } from '../../adapter/grition';
-import { OdeshinFromGrition } from '../../adapter/odeshin';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 
 export type Directory = {
+  zorn: string;
   instanceId: string;
   directoryName: string;
   directoryPath: string;
   directoryPathPartList: string[];
 };
 
-export type DirectoryGrition = Grition<Directory>;
-
-export type DirectoryOdeshin = OdeshinFromGrition<DirectoryGrition>;
-
 export const DIRECTORY_GEPP = 'directory';
 
 export type DirectoryGepp = typeof DIRECTORY_GEPP;
 
-export type DirectoryVoictent = Voictent<DirectoryGepp, DirectoryOdeshin>;
+export type DirectoryVoictent = Voictent<DirectoryGepp, Directory>;
 
-export type DirectoryVoque = InMemoryVoque<DirectoryGepp, DirectoryOdeshin>;
+export type DirectoryVoque = InMemoryOdeshin2Voque<DirectoryGepp, Directory>;

@@ -1,4 +1,3 @@
-import { Odeshin } from '../../custom/adapter/odeshin';
 import { Gepp } from '../engine-shell/voictent/gepp';
 import {
   InMemoryIndexByName,
@@ -7,8 +6,9 @@ import {
 } from './inMemoryVoictent';
 import { SpreadN } from '../../utilities/spreadN';
 import { VoictentItemLanbe2 } from '../engine-shell/voictent/lanbe';
+import { GenericOdeshin2 } from '../../custom/adapter/odeshin2';
 
-export type InMemoryOdeshinIndexByName = SpreadN<
+export type InMemoryOdeshin2IndexByName = SpreadN<
   [
     InMemoryIndexByName,
     {
@@ -17,20 +17,23 @@ export type InMemoryOdeshinIndexByName = SpreadN<
   ]
 >;
 
-export type InMemoryOdeshinVoque<
+export type InMemoryOdeshin2Voque<
   TGepp extends Gepp,
-  THubblepup extends Odeshin,
-> = InMemoryVoque<TGepp, THubblepup, InMemoryOdeshinIndexByName>;
+  THubblepup extends GenericOdeshin2,
+> = InMemoryVoque<TGepp, THubblepup, InMemoryOdeshin2IndexByName>;
 
-export type GenericInMemoryOdeshinVoque = InMemoryOdeshinVoque<Gepp, Odeshin>;
+export type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
+  Gepp,
+  GenericOdeshin2
+>;
 
-export class InMemoryOdeshinVoictent<
-  TVoque extends GenericInMemoryOdeshinVoque,
+export class InMemoryOdeshin2Voictent<
+  TVoque extends GenericInMemoryOdeshin2Voque,
 > extends InMemoryVoictent<TVoque> {
   // eslint-disable-next-line class-methods-use-this
-  getSerializableId(hubblepup: TVoque['receivedHubblepup']): string {
+  getSerializableId(odeshin: TVoque['receivedHubblepup']): string {
     // TODO: move the responsibility of normalizing the serializable id elsewhere
-    return hubblepup.zorn.replaceAll('/', ' | ');
+    return odeshin.zorn.replaceAll('/', ' | ');
   }
 
   // TODO: there is no signal that this function is required to exist. If it doesn't exist then "zorn" would be undefined in indexByName
@@ -39,11 +42,13 @@ export class InMemoryOdeshinVoictent<
   ): TVoque['indexedEmittedHubblepup'] {
     const partialIndexedHubblepup = super.dereference(lanbe);
 
+    const odeshin = partialIndexedHubblepup.hubblepup;
+
     return {
-      hubblepup: partialIndexedHubblepup.hubblepup,
+      hubblepup: odeshin,
       indexByName: {
         ...partialIndexedHubblepup.indexByName,
-        zorn: partialIndexedHubblepup.hubblepup.zorn,
+        zorn: odeshin.zorn,
       },
     };
   }

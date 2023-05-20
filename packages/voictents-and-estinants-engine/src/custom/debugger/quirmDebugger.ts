@@ -3,7 +3,6 @@ import { posix } from 'path';
 import * as uuid from 'uuid';
 import { SimplerQuirmDebugger } from '../../type-script-adapter/digikikify';
 import { serialize } from '../../utilities/typed-datum/serializer/serialize';
-import { isOdeshin } from '../adapter/odeshin';
 import {
   OutputFileVoictent,
   OUTPUT_FILE_GEPP,
@@ -11,6 +10,7 @@ import {
 import { LanbeTypeName } from '../../core/engine-shell/voictent/lanbe';
 import { GenericVoque } from '../../core/engine/voque';
 import { AdaptedVoqueFromVoictent } from '../../type-script-adapter/voictent';
+import { isOdeshin2 } from '../adapter/odeshin2';
 
 // TODO: move to a utility or something
 export const escapePathSeparator = (text: string): string =>
@@ -78,7 +78,7 @@ export const buildQuirmDebugger = (
       },
     },
     defaultHandler: ({ gepp, hubblepup }) => {
-      const fileName = isOdeshin(hubblepup)
+      const fileName = isOdeshin2(hubblepup)
         ? escapePathSeparator(hubblepup.zorn)
         : uuid.v4();
 

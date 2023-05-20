@@ -34,9 +34,19 @@ export type ReceivedHubblepupState = {
 export type InMemoryVoque<
   TGepp extends Gepp,
   THubblepup extends Hubblepup,
-> = Voque<TGepp, THubblepup, THubblepup, InMemoryIndexByName, THubblepup[]>;
+  TIndexByName extends InMemoryIndexByName,
+> = Voque<TGepp, THubblepup, THubblepup, TIndexByName, THubblepup[]>;
 
-export type GenericInMemoryVoque = InMemoryVoque<Gepp, Hubblepup>;
+export type StandardInMemoryVoque<
+  TGepp extends Gepp,
+  THubblepup extends Hubblepup,
+> = InMemoryVoque<TGepp, THubblepup, InMemoryIndexByName>;
+
+export type GenericInMemoryVoque = InMemoryVoque<
+  Gepp,
+  Hubblepup,
+  InMemoryIndexByName
+>;
 
 export type InMemoryVoictentConstructorInput<
   TVoque extends GenericInMemoryVoque,
@@ -182,7 +192,7 @@ export class InMemoryVoictent<TVoque extends GenericInMemoryVoque>
     return `${listIndex}`;
   }
 
-  private dereference(
+  protected dereference(
     lanbe: VoictentItemLanbe2<TVoque>,
   ): TVoque['indexedEmittedHubblepup'] {
     const listIndex = this.getLanbeIndex(lanbe);

@@ -1,5 +1,9 @@
 import { Simplify } from 'type-fest';
-import { Hubblepup, HubblepupTuple } from '../quirm/hubblepup';
+import {
+  GenericIndexedHubblepup,
+  Hubblepup,
+  HubblepupTuple,
+} from '../quirm/hubblepup';
 import { GenericVoque } from '../../engine/voque';
 
 export enum LanbeTypeName {
@@ -17,7 +21,7 @@ export enum ReferenceTypeName {
 type BaseLanbe<
   TLanbeTypeName extends LanbeTypeName,
   TReferenceTypeName extends ReferenceTypeName,
-  TOutput extends Hubblepup | HubblepupTuple,
+  TOutput extends GenericIndexedHubblepup | Hubblepup | HubblepupTuple,
 > = {
   typeName: TLanbeTypeName;
   debugName: string;

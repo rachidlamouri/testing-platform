@@ -1,5 +1,5 @@
 import { digikikify2 } from '../core/engine/digikikify';
-import { InMemoryOdeshinVoictent } from '../core/engine/inMemoryOdeshinVoictent';
+import { InMemoryOdeshin2Voictent } from '../core/engine/inMemoryOdeshinVoictent2';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
@@ -19,7 +19,7 @@ type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryOdeshinVoictent<DatumTestCaseInputVoque>({
+    new InMemoryOdeshin2Voictent<DatumTestCaseInputVoque>({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
       initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),

@@ -4,8 +4,8 @@ import {
 } from '../../../utilities/file/getNestedFilePaths';
 import { splitList } from '../../../utilities/splitList';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { DirectoryOdeshin, DIRECTORY_GEPP, DirectoryVoque } from './directory';
-import { FILE_GEPP, FileOdeshin, FileGrition, FileVoque } from './file';
+import { Directory, DIRECTORY_GEPP, DirectoryVoque } from './directory';
+import { FILE_GEPP, File, FileVoque } from './file';
 import { getFileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -79,7 +79,7 @@ export const enumerateFileSystemObjects = buildEstinant({
       accumulatorB: fileMetadataList,
     });
 
-    const directoryOutputTuple = directoryMetadataList.map<DirectoryOdeshin>(
+    const directoryOutputTuple = directoryMetadataList.map<Directory>(
       ({ nodePath }) => {
         const directoryPathPartList = nodePath.split('/');
         const directoryName =
@@ -87,17 +87,15 @@ export const enumerateFileSystemObjects = buildEstinant({
 
         return {
           zorn: nodePath,
-          grition: {
-            instanceId: getTextDigest(nodePath),
-            directoryName,
-            directoryPath: nodePath,
-            directoryPathPartList,
-          },
+          instanceId: getTextDigest(nodePath),
+          directoryName,
+          directoryPath: nodePath,
+          directoryPathPartList,
         };
       },
     );
 
-    const fileTuple = fileMetadataList.map<FileOdeshin>(
+    const fileTuple = fileMetadataList.map<File>(
       ({ nodePath, directoryPath }) => {
         const {
           onDiskFileNameParts,
@@ -106,7 +104,8 @@ export const enumerateFileSystemObjects = buildEstinant({
           extensionParts,
         } = getFileMetadata(nodePath);
 
-        const grition: FileGrition = {
+        const file: File = {
+          zorn: nodePath,
           instanceId: getTextDigest(nodePath),
           filePath: nodePath,
           directoryPath,
@@ -130,19 +129,16 @@ export const enumerateFileSystemObjects = buildEstinant({
           additionalMetadata: null,
         };
 
-        return {
-          zorn: nodePath,
-          grition,
-        };
+        return file;
       },
     );
 
-    const fileBySuffixIdentifier = new Map<string, FileOdeshin[]>();
-    fileTuple.forEach((fileOdeshin) => {
-      const { suffixIdentifier } = fileOdeshin.grition.extension;
+    const fileBySuffixIdentifier = new Map<string, File[]>();
+    fileTuple.forEach((file) => {
+      const { suffixIdentifier } = file.extension;
 
       const list = fileBySuffixIdentifier.get(suffixIdentifier) ?? [];
-      list.push(fileOdeshin);
+      list.push(file);
       fileBySuffixIdentifier.set(suffixIdentifier, list);
     });
 
