@@ -6,7 +6,6 @@ import {
 import { GenericTropoignant2 } from '../../../core/engine-shell/estinant/tropoignant';
 import { GenericIndexedHubblepup } from '../../../core/engine-shell/quirm/hubblepup';
 import { GenericLeftInputVicken } from '../../../core/engine-shell/vicken/leftInputVicken';
-import { GenericOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
 import {
   GenericRightInputHubblepupTupleVicken,
   GenericRightInputVickenTuple,
@@ -17,28 +16,36 @@ import {
   AssemblerContext,
   CoreConstituentOutputEntry,
 } from './estinantBuilderContext';
+import {
+  CoreOutputVickenFromAdaptedOutputVickenTuple,
+  GenericAdaptedOutputVickenTuple,
+} from './vicken';
 
 export type EstinantAssembler<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TOutputVicken extends GenericOutputVicken,
-> = () => Estinant2<TLeftInputVicken, TRightInputVickenTuple, TOutputVicken>;
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+> = () => Estinant2<
+  TLeftInputVicken,
+  TRightInputVickenTuple,
+  CoreOutputVickenFromAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple>
+>;
 
 export const buildEstinantAssembler = <
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TOutputVicken extends GenericOutputVicken,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 >(
   assemblerContext: AssemblerContext,
 ): EstinantAssembler<
   TLeftInputVicken,
   TRightInputVickenTuple,
-  TOutputVicken
+  TAdaptedOutputVickenTuple
 > => {
   const assembleEstinant: EstinantAssembler<
     TLeftInputVicken,
     TRightInputVickenTuple,
-    TOutputVicken
+    TAdaptedOutputVickenTuple
   > = () => {
     const {
       instantiationContext,
@@ -47,9 +54,12 @@ export const buildEstinantAssembler = <
     } = assemblerContext;
 
     const tropoig: GenericTropoignant2 = (leftInput, ...rightInputTuple) => {
-      const adaptedLeftInput = leftInputContext.isWibiz
-        ? leftInput
-        : (leftInput as GenericIndexedHubblepup).hubblepup;
+      let adaptedLeftInput: unknown;
+      if (leftInputContext.isWibiz || leftInputContext.version === 2) {
+        adaptedLeftInput = leftInput;
+      } else {
+        adaptedLeftInput = (leftInput as GenericIndexedHubblepup).hubblepup;
+      }
 
       /* eslint-disable @typescript-eslint/no-unsafe-assignment */
       const modifiedLeftInput =
@@ -138,7 +148,7 @@ export const buildEstinantAssembler = <
     } satisfies GenericEstinant2 as unknown as Estinant2<
       TLeftInputVicken,
       TRightInputVickenTuple,
-      TOutputVicken
+      CoreOutputVickenFromAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple>
     >;
     return estinant;
   };
@@ -149,11 +159,11 @@ export const buildEstinantAssembler = <
 export type EstinantAssemblerParent<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TOutputVicken extends GenericOutputVicken,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = {
   assemble: EstinantAssembler<
     TLeftInputVicken,
     TRightInputVickenTuple,
-    TOutputVicken
+    TAdaptedOutputVickenTuple
   >;
 };

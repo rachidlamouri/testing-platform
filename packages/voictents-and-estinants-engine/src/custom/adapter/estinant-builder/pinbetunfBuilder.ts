@@ -1,7 +1,6 @@
 import { Simplify, UnionToIntersection } from 'type-fest';
 import {
   CoreLeftInputVickenFromLeftVicken,
-  CoreOutputVickenFromOutputVickenTuple,
   CoreRightInputVickenTupleFromRightVickenTuple,
   LeftVicken,
   OutputVicken,
@@ -18,7 +17,8 @@ import {
   InputOutputContext,
   Pinbetunf,
 } from './estinantBuilderContext';
-import { GenericOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
+import { AdaptedOutputVicken } from './vicken';
+import { AdaptedVoqueFromVoictent } from '../../../type-script-adapter/voictent';
 
 type PinbetunInputTuple2<
   TVickenTuple extends readonly (LeftVicken | RightVicken)[],
@@ -58,9 +58,12 @@ export type PinbetunfBuilder<
 ) => EstinantAssemblerParent<
   CoreLeftInputVickenFromLeftVicken<TLeftVicken>,
   CoreRightInputVickenTupleFromRightVickenTuple<TRightVickenTuple>,
-  CoreOutputVickenFromOutputVickenTuple<TOutputVickenTuple> extends GenericOutputVicken
-    ? CoreOutputVickenFromOutputVickenTuple<TOutputVickenTuple>
-    : GenericOutputVicken
+  {
+    [Index in keyof TOutputVickenTuple]: AdaptedOutputVicken<
+      AdaptedVoqueFromVoictent<TOutputVickenTuple[Index]['voictent']>,
+      TOutputVickenTuple[Index]['pinbeOutput']
+    >;
+  }
 >;
 
 export const buildPinbetunfBuilder = <

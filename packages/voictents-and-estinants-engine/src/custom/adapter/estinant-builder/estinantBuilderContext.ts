@@ -1,4 +1,3 @@
-import { Hubblepup } from '../../../core/engine-shell/quirm/hubblepup';
 import { Gepp } from '../../../type-script-adapter/gepp';
 import { Voictent } from '../../../type-script-adapter/voictent';
 import {
@@ -20,6 +19,7 @@ export type TropoignantInput<
   : TVoictent['hubblepupTuple'][number];
 
 export type LeftInputContext = {
+  version?: 2;
   gepp: Gepp;
   isWibiz: boolean;
   modifyTropoignantInput: AnyLeftInputAccessor;
@@ -52,8 +52,9 @@ export type PinbetunfOutputAggregator<> = (
   modifiedOutput: any,
 ) => AggregatedOutput;
 
-// note: using HubblepupTuple instead of Hubblepup[] cause an issue in "estinantAssembler"'s tropoig
-export type CoreConstituentOutputEntry = [Gepp, Hubblepup[]];
+// TODO: the entry value should be TVoque['emittedVoictent']
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CoreConstituentOutputEntry = [Gepp, any];
 
 export type ConstituentResultNormalizer = (
   leftInput: unknown,

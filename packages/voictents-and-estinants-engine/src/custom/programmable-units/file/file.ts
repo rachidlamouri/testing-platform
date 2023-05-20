@@ -2,6 +2,7 @@ import { Grition } from '../../adapter/grition';
 import { Voictent } from '../../../type-script-adapter/voictent';
 import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
+import { InMemoryVoque } from '../../../core/engine/inMemoryVoictent';
 
 export type FileName = {
   pascalCase: string;
@@ -36,3 +37,5 @@ export const FILE_GEPP = 'file';
 export type FileGepp = typeof FILE_GEPP;
 
 export type FileVoictent = Voictent<FileGepp, FileOdeshin>;
+
+export type FileVoque = InMemoryVoque<FileGepp, FileOdeshin>;

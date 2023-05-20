@@ -4,16 +4,12 @@ import {
 } from '../../../utilities/file/getNestedFilePaths';
 import { splitList } from '../../../utilities/splitList';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import {
-  DirectoryOdeshin,
-  DirectoryVoictent,
-  DIRECTORY_GEPP,
-} from './directory';
-import { FileVoictent, FILE_GEPP, FileOdeshin, FileGrition } from './file';
+import { DirectoryOdeshin, DIRECTORY_GEPP, DirectoryVoque } from './directory';
+import { FILE_GEPP, FileOdeshin, FileGrition, FileVoque } from './file';
 import { getFileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import {
-  FileSystemObjectEnumeratorConfigurationVoictent,
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  FileSystemObjectEnumeratorConfigurationVoque,
 } from './fileSystemObjectEnumeratorConfiguration';
 import { getFileMetadata } from './getFileMetadata';
 import { getTextDigest } from '../../../utilities/getTextDigest';
@@ -58,13 +54,13 @@ const partsToKebabCase = (x: string[]): string => {
 export const enumerateFileSystemObjects = buildEstinant({
   name: 'enumerateFileSystemObjects',
 })
-  .fromHubblepup<FileSystemObjectEnumeratorConfigurationVoictent>({
+  .fromHubblepup2<FileSystemObjectEnumeratorConfigurationVoque>({
     gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple<DirectoryVoictent>({
+  .toHubblepupTuple2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .toHubblepupTuple<FileVoictent>({
+  .toHubblepupTuple2<FileVoque>({
     gepp: FILE_GEPP,
   })
   .onPinbe((input) => {

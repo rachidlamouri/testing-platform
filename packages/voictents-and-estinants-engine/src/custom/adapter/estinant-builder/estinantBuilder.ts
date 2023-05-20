@@ -19,14 +19,19 @@ import {
   buildLeftInputHubblepupAppreffingeBuilder2,
   LeftInputHubblepupAppreffingeBuilderParent2,
 } from './leftInputHubblepupAppreffingeBuilder2';
+import { SpreadN } from '../../../utilities/spreadN';
 
 export const buildEstinant = (
   context: InstantiationContext,
-): LeftInputHubblepupAppreffingeBuilderParent2 &
-  LeftInputGritionBuilderParent &
-  LeftInputHubblepupAppreffingeBuilderParent &
-  LeftInputOdeshinVoictentAppreffingeBuilderParent &
-  LeftInputVoictentAppreffingeBuilderParent => {
+): SpreadN<
+  [
+    LeftInputHubblepupAppreffingeBuilderParent2,
+    LeftInputGritionBuilderParent,
+    LeftInputHubblepupAppreffingeBuilderParent,
+    LeftInputOdeshinVoictentAppreffingeBuilderParent,
+    LeftInputVoictentAppreffingeBuilderParent,
+  ]
+> => {
   return {
     fromHubblepup2: buildLeftInputHubblepupAppreffingeBuilder2(context),
     fromGrition: buildLeftInputGritionAppreffingeBuilder(context),

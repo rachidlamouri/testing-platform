@@ -24,4 +24,10 @@ export type OutputVicken<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
 
 export type GenericOutputVicken = OutputVicken<GenericVoqueTuple>;
 
-export type UnsafeOutputVicken = OutputVicken<UnsafeVoqueTuple>;
+// TODO: tie this type back to OutputVicken
+export type UnsafeOutputVicken = {
+  outputVoqueOptionTuple: UnsafeVoqueTuple;
+  geppTuple: OutputGeppTuple<UnsafeVoqueTuple>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tropoignantOutput: Record<any, any>;
+};

@@ -7,7 +7,10 @@ import { LeftInputAppreffinge } from '../appreffinge/leftInputAppreffinge';
 import { OutputAppreffinge } from '../appreffinge/outputApreffinge';
 import { InputVickenTupleToRightInputAppreffingeTuple } from '../appreffinge/rightInputAppreffinge';
 import { GenericLeftInputVicken } from '../vicken/leftInputVicken';
-import { GenericOutputVicken } from '../vicken/outputVicken';
+import {
+  GenericOutputVicken,
+  UnsafeOutputVicken,
+} from '../vicken/outputVicken';
 import { GenericRightInputVickenTuple } from '../vicken/rightInputVicken';
 import { Tropoignant, Tropoignant2 } from './tropoignant';
 
@@ -28,7 +31,7 @@ export type EstinantTuple = readonly Estinant[];
 export type Estinant2<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TOutputVicken extends GenericOutputVicken,
+  TOutputVicken extends UnsafeOutputVicken,
 > = {
   version: 2;
   name: string;
