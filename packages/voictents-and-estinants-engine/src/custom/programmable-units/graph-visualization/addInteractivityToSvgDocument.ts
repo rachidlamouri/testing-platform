@@ -1,19 +1,16 @@
 import fs from 'fs';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { HtmlFileVoictent, HTML_FILE_GEPP } from '../html-file/htmlFile';
-import {
-  OutputFileVoictent,
-  OUTPUT_FILE_GEPP,
-} from '../output-file/outputFile';
-import {
-  DirectedGraphMetadataByIdVoictent,
-  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-} from './directedGraphMetadataById';
-import { SvgDocumentVoictent, SVG_DOCUMENT_GEPP } from './svgDocument';
+import { HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
+import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
 import {
   CustomDatumTypeName,
   getCustomTypedDatum,
 } from '../../../utilities/typed-datum/customTypedDatum';
+import { SVG_DOCUMENT_GEPP, SvgDocumentVoque } from './svgDocument';
+import {
+  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+  DirectedGraphMetadataByIdVoque,
+} from './directedGraphMetadataById';
 
 const INTERACTIVE_HTML_FILE_PATH =
   'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/interactiveSvg.html';
@@ -68,20 +65,21 @@ const dataStructureToCode = (datum: unknown): string => {
 export const addInteractivityToSvgDocument = buildEstinant({
   name: 'addInteractivityToSvgDocument',
 })
-  .fromHubblepup<SvgDocumentVoictent>({
+  .fromHubblepup2<SvgDocumentVoque>({
     gepp: SVG_DOCUMENT_GEPP,
   })
-  .andFromGritionTuple<HtmlFileVoictent, [string]>({
+  .andFromHubblepupTuple2<HtmlFileVoque, [string]>({
     gepp: HTML_FILE_GEPP,
     framate: () => [INTERACTIVE_HTML_FILE_PATH],
-    croard: (rightInput) => rightInput.zorn,
+    // TODO: add filepath to index
+    croard: (rightInput) => rightInput.hubblepup.filePath,
   })
-  .andFromGritionTuple<DirectedGraphMetadataByIdVoictent, [string]>({
+  .andFromHubblepupTuple2<DirectedGraphMetadataByIdVoque, [string]>({
     gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-    framate: (leftInput) => [leftInput.zorn],
-    croard: (rightInput) => rightInput.zorn,
+    framate: (leftInput) => [leftInput.indexByName.zorn],
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .toHubblepup<OutputFileVoictent>({
+  .toHubblepup2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
   })
   .onPinbe((leftInput, [templateFile], [directedGraphMetadataById]) => {
@@ -98,6 +96,7 @@ export const addInteractivityToSvgDocument = buildEstinant({
         `const graphMetadataById = ${metadataByIdCode};`,
       );
 
+    // TODO: move this renaming responsibility elsewhere
     const fileName = leftInput.zorn.replaceAll(/\//g, '-');
 
     return {

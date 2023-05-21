@@ -8,26 +8,30 @@ import {
   GenericAdaptedLeftInputVicken,
   GenericAdaptedOutputVicken,
   GenericAdaptedOutputVickenTuple,
+  GenericAdaptedRightInputVickenTuple,
 } from './vicken';
 import {
   Straline,
   StralineTuple,
 } from '../../../utilities/semantic-types/straline';
-import { GenericRightInputVickenTuple } from '../../../core/engine-shell/vicken/rightInputVicken';
 
 type Pinbetunf2<TInputTuple extends StralineTuple, TOutput extends Straline> = (
   ...input: TInputTuple
 ) => TOutput;
 
+// TODO: clean up the constraint on this type
 type PinbetunInputTuple2<
-  TAdaptedInputVickenTuple extends [GenericAdaptedLeftInputVicken],
+  TAdaptedInputVickenTuple extends { pinbetunfInput: unknown }[],
 > = {
   [Index in keyof TAdaptedInputVickenTuple]: TAdaptedInputVickenTuple[Index]['pinbetunfInput'];
 };
 
 type PinbetunInputTuple1<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-> = PinbetunInputTuple2<[TAdaptedLeftInputVicken]>;
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+> = PinbetunInputTuple2<
+  [TAdaptedLeftInputVicken, ...TAdaptedRightInputVickenTuple]
+>;
 
 type PinbetunfOutput<
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
@@ -49,11 +53,11 @@ type PinbetunfOutput<
 
 export type PinbetunfBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = (
   pinbe: Pinbetunf2<
-    PinbetunInputTuple1<TAdaptedLeftInputVicken>,
+    PinbetunInputTuple1<TAdaptedLeftInputVicken, TAdaptedRightInputVickenTuple>,
     PinbetunfOutput<TAdaptedOutputVickenTuple>
   >,
 ) => EstinantAssemblerParent<
@@ -64,7 +68,7 @@ export type PinbetunfBuilder2<
 
 export const buildPinbetunfBuilder2 = <
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 >(
   inputOutputContext: InputOutputContext,
@@ -79,7 +83,10 @@ export const buildPinbetunfBuilder2 = <
     TAdaptedOutputVickenTuple
   > = (
     pinbe: Pinbetunf2<
-      PinbetunInputTuple1<TAdaptedLeftInputVicken>,
+      PinbetunInputTuple1<
+        TAdaptedLeftInputVicken,
+        TAdaptedRightInputVickenTuple
+      >,
       PinbetunfOutput<TAdaptedOutputVickenTuple>
     >,
   ) => {
@@ -107,7 +114,7 @@ export const buildPinbetunfBuilder2 = <
 
 export type PinbetunfBuilderParent2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = {
   onPinbe: PinbetunfBuilder2<

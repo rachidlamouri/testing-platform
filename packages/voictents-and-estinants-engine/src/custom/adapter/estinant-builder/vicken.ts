@@ -1,6 +1,7 @@
 import { GenericVoque } from '../../../core/engine/voque';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { OutputVicken as CoreOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
+import { ZornTuple } from '../../../utilities/semantic-types/zorn';
 
 export enum AdaptedVickenTypeName {
   Output = 'Output',
@@ -44,6 +45,31 @@ export type GenericAdaptedLeftInputIndexedHubblepupVicken =
 export type GenericAdaptedLeftInputVicken =
   | GenericAdaptedLeftInputHubblepupVicken
   | GenericAdaptedLeftInputIndexedHubblepupVicken;
+
+export type AdaptedRightInputHubblepupTupleVicken<
+  TRightInputVoque extends GenericVoque,
+  TZornTuple extends ZornTuple,
+> = {
+  voque: TRightInputVoque;
+  tropoignantInput: {
+    [Index in keyof TZornTuple]: TRightInputVoque['indexedEmittedHubblepup'];
+  };
+  isWibiz: false;
+  pinbetunfInput: {
+    [Index in keyof TZornTuple]: TRightInputVoque['emittedHubblepup'];
+  };
+  zornTuple: TZornTuple;
+  zornTupleOption: TZornTuple[number];
+};
+
+export type GenericAdaptedRightInputHubblepupTupleVicken =
+  AdaptedRightInputHubblepupTupleVicken<GenericVoque, ZornTuple>;
+
+export type GenericAdaptedRightInputVicken =
+  GenericAdaptedRightInputHubblepupTupleVicken;
+
+export type GenericAdaptedRightInputVickenTuple =
+  Tuple<GenericAdaptedRightInputVicken>;
 
 export type AdaptedOutputVicken<
   TVoque extends GenericVoque,

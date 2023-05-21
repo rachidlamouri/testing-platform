@@ -7,9 +7,9 @@ import { DIRECTED_GRAPH_GEPP } from '../../programmable-units/graph-visualizatio
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
 import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/addInteractivityToSvgDocument';
-import { DIRECTED_GRAPH_METADATA_BY_ID_GEPP } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import { LabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attribute';
 import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
+import { DIRECTED_GRAPH_METADATA_BY_ID_GEPP } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 
 /**
  * Example program to demonstrate defining and rendering a directed graph.
@@ -26,78 +26,76 @@ digikikify({
     [DIRECTED_GRAPH_GEPP]: [
       {
         zorn: 'my-graph',
-        grition: {
-          isRoot: true,
-          attributeByKey: {
-            id: 'my graph',
-            label: 'my graph',
-            labelloc: LabelLocation.Top,
-          },
-          nodeList: [
-            {
-              attributeByKey: {
-                id: 'a',
-                label: 'node a',
-              },
-            },
-            {
-              attributeByKey: {
-                id: 'b',
-                label: 'node b',
-              },
-            },
-          ],
-          edgeList: [
-            {
-              tailId: 'a',
-              headId: 'b',
-              attributeByKey: {
-                id: 'a:b',
-              },
-            },
-            {
-              tailId: 'a',
-              headId: 'c',
-              attributeByKey: {
-                id: 'a:c',
-              },
-            },
-          ],
-          subgraphList: [
-            {
-              isRoot: false,
-              isCluster: true,
-              attributeByKey: {
-                id: 'my_subgraph',
-                label: 'my subgraph',
-              },
-              nodeList: [
-                {
-                  attributeByKey: {
-                    id: 'c',
-                    label: 'node c',
-                  },
-                },
-                {
-                  attributeByKey: {
-                    id: 'd',
-                    label: 'node d',
-                  },
-                },
-              ],
-              edgeList: [
-                {
-                  tailId: 'c',
-                  headId: 'd',
-                  attributeByKey: {
-                    id: 'c:d',
-                  },
-                },
-              ],
-              subgraphList: [],
-            },
-          ],
+        isRoot: true,
+        attributeByKey: {
+          id: 'my graph',
+          label: 'my graph',
+          labelloc: LabelLocation.Top,
         },
+        nodeList: [
+          {
+            attributeByKey: {
+              id: 'a',
+              label: 'node a',
+            },
+          },
+          {
+            attributeByKey: {
+              id: 'b',
+              label: 'node b',
+            },
+          },
+        ],
+        edgeList: [
+          {
+            tailId: 'a',
+            headId: 'b',
+            attributeByKey: {
+              id: 'a:b',
+            },
+          },
+          {
+            tailId: 'a',
+            headId: 'c',
+            attributeByKey: {
+              id: 'a:c',
+            },
+          },
+        ],
+        subgraphList: [
+          {
+            isRoot: false,
+            isCluster: true,
+            attributeByKey: {
+              id: 'my_subgraph',
+              label: 'my subgraph',
+            },
+            nodeList: [
+              {
+                attributeByKey: {
+                  id: 'c',
+                  label: 'node c',
+                },
+              },
+              {
+                attributeByKey: {
+                  id: 'd',
+                  label: 'node d',
+                },
+              },
+            ],
+            edgeList: [
+              {
+                tailId: 'c',
+                headId: 'd',
+                attributeByKey: {
+                  id: 'c:d',
+                },
+              },
+            ],
+            subgraphList: [],
+          },
+        ],
       },
     ],
     [DIRECTED_GRAPH_METADATA_BY_ID_GEPP]: [

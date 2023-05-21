@@ -1,10 +1,10 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { GRAPHVIZ_CODE_GEPP, GraphvizCodeVoque } from './graphvizCode';
 import {
-  DirectedGraphVoictent,
   DIRECTED_GRAPH_GEPP,
+  DirectedGraphVoque,
 } from './directed-graph/directedGraph';
 import { getGraphvizCode } from './directed-graph/getGraphvizCode';
-import { GraphvizCodeVoictent, GRAPHVIZ_CODE_GEPP } from './graphvizCode';
 
 /**
  * Converts a directed graph data structure into Graphviz code.
@@ -12,15 +12,17 @@ import { GraphvizCodeVoictent, GRAPHVIZ_CODE_GEPP } from './graphvizCode';
 export const encodeDirectedGraphAsGraphvizCode = buildEstinant({
   name: 'encodeDirectedGraphAsGraphvizCode',
 })
-  .fromGrition<DirectedGraphVoictent>({
+  .fromHubblepup2<DirectedGraphVoque>({
     gepp: DIRECTED_GRAPH_GEPP,
   })
-  .toGrition<GraphvizCodeVoictent>({
+  .toHubblepup2<GraphvizCodeVoque>({
     gepp: GRAPHVIZ_CODE_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe((input) => {
     const code = getGraphvizCode(input);
-    return code;
+    return {
+      zorn: input.zorn,
+      grition: code,
+    };
   })
   .assemble();

@@ -1,4 +1,4 @@
-import { OdeshinFromGrition } from '../../adapter/odeshin';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 
 export type DirectedGraphMetadatumField = {
@@ -11,10 +11,10 @@ export type DirectedGraphMetadata = {
   fieldList: DirectedGraphMetadatumField[];
 };
 
-export type DirectedGraphMetadataById = Record<string, DirectedGraphMetadata>;
-
-export type DirectedGraphMetadataByIdOdeshin =
-  OdeshinFromGrition<DirectedGraphMetadataById>;
+export type DirectedGraphMetadataById = {
+  zorn: string;
+  grition: Record<string, DirectedGraphMetadata>;
+};
 
 export const DIRECTED_GRAPH_METADATA_BY_ID_GEPP =
   'directed-graph-metadata-by-id';
@@ -24,5 +24,10 @@ export type DirectedGraphMetadataByIdGepp =
 
 export type DirectedGraphMetadataByIdVoictent = Voictent<
   DirectedGraphMetadataByIdGepp,
-  DirectedGraphMetadataByIdOdeshin
+  DirectedGraphMetadataById
+>;
+
+export type DirectedGraphMetadataByIdVoque = InMemoryOdeshin2Voque<
+  DirectedGraphMetadataByIdGepp,
+  DirectedGraphMetadataById
 >;

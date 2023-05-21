@@ -1,4 +1,3 @@
-import { Spread } from 'type-fest';
 import { GenericVoque } from '../../../core/engine/voque';
 import {
   buildInputOutputContextFromConstituentResultNormalizer,
@@ -15,46 +14,50 @@ import {
   GenericAdaptedOutputVickenTuple,
   GenericAdaptedRightInputVickenTuple,
 } from './vicken';
+import { SpreadN } from '../../../utilities/spreadN';
 
 type NextAdaptedOutputVickenTuple<
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
   TOutputVoque extends GenericVoque,
 > = [
   ...TAdaptedOutputVickenTuple,
-  AdaptedOutputVicken<TOutputVoque, TOutputVoque['emittedVoictent']>,
+  AdaptedOutputVicken<TOutputVoque, TOutputVoque['receivedHubblepup']>,
 ];
 
-export type OutputHubblepupTupleAppreffingeBuilder2<
+export type OutputHubblepupAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = <TOutputVoque extends GenericVoque>(
   partialOutputAppreffinge: PartialOutputAppreffinge<TOutputVoque>,
-) => Spread<
-  OutputHubblepupTupleAppreffingeBuilderParent2<
-    TAdaptedLeftInputVicken,
-    TAdaptedRightInputVickenTuple,
-    NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
-  >,
-  PinbetunfBuilderParent2<
-    TAdaptedLeftInputVicken,
-    TAdaptedRightInputVickenTuple,
-    NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
-  >
+) => SpreadN<
+  [
+    PinbetunfBuilderParent2<
+      TAdaptedLeftInputVicken,
+      TAdaptedRightInputVickenTuple,
+      NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
+    >,
+
+    OutputHubblepupAppreffingeBuilder2<
+      TAdaptedLeftInputVicken,
+      TAdaptedRightInputVickenTuple,
+      NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
+    >,
+  ]
 >;
 
-export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
+export const buildOutputHubblepupAppreffingeBuilder2 = <
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 >(
   inputOutputContext: InputOutputContext,
-): OutputHubblepupTupleAppreffingeBuilder2<
+): OutputHubblepupAppreffingeBuilder2<
   TAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple
 > => {
-  const buildOutputHubblepupTupleAppreffinge2: OutputHubblepupTupleAppreffingeBuilder2<
+  const buildOutputHubblepupAppreffinge2: OutputHubblepupAppreffingeBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple,
     TAdaptedOutputVickenTuple
@@ -74,12 +77,13 @@ export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
     });
 
     return {
-      toHubblepupTuple2: buildOutputHubblepupTupleAppreffingeBuilder2<
+      onPinbe: buildPinbetunfBuilder2<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
       >(nextContext),
-      onPinbe: buildPinbetunfBuilder2<
+
+      toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
@@ -87,15 +91,15 @@ export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
     };
   };
 
-  return buildOutputHubblepupTupleAppreffinge2;
+  return buildOutputHubblepupAppreffinge2;
 };
 
-export type OutputHubblepupTupleAppreffingeBuilderParent2<
+export type OutputHubblepupAppreffingeBuilderParent2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = {
-  toHubblepupTuple2: OutputHubblepupTupleAppreffingeBuilder2<
+  toHubblepup2: OutputHubblepupAppreffingeBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple,
     TAdaptedOutputVickenTuple
