@@ -6,6 +6,7 @@ import {
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
+import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 
 /**
  * Example program to demonstrate traversing the file system to enumerate files
@@ -14,11 +15,15 @@ import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
  * @todo rename to testCategorizeFiles and add this to ci.sh
  */
 digikikify({
-  initialHubblepupTupleByGepp: {
-    [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
-      VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
-    ],
-  },
+  populatedVoictentTuple: [
+    new InMemoryVoictent({
+      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+      initialHubblepupTuple: [
+        VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+      ],
+    }),
+  ],
+  uninferableVoictentTuple: [],
   estinantTuple: [enumerateFileSystemObjects, categorizeFiles],
   quirmDebugger: buildBasicQuirmDebugger('categorizeFiles'),
 });

@@ -55,7 +55,8 @@ export type LeftInputHubblepupAppreffingeBuilder2 = <
     >,
 
     OutputHubblepupConditionalAppreffingeBuilderParent<
-      AdaptedLeftInputHubblepupVicken<TInputVoque>
+      AdaptedLeftInputHubblepupVicken<TInputVoque>,
+      EmptyAdaptedOutputVickenTuple
     >,
     OutputHubblepupAppreffingeBuilderParent2<
       AdaptedLeftInputHubblepupVicken<TInputVoque>,
@@ -106,7 +107,8 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
 
         toHubblepupOnCondition:
           buildOutputHubblepupConditionalAppreffingeBuilder<
-            AdaptedLeftInputHubblepupVicken<TInputVoque>
+            AdaptedLeftInputHubblepupVicken<TInputVoque>,
+            EmptyAdaptedOutputVickenTuple
           >(nextContext),
 
         toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<

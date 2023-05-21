@@ -1,4 +1,4 @@
-import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoictent';
+import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 import { Voictent } from '../../adapter/voictent';
 
 export type OutputFile = {

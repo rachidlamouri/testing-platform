@@ -1,12 +1,12 @@
 import { Odeshin } from '../../custom/adapter/odeshin';
 import { Gepp } from '../engine-shell/voictent/gepp';
-import {
-  InMemoryIndexByName,
-  InMemoryVoictent,
-  InMemoryVoque,
-} from './inMemoryVoictent';
 import { SpreadN } from '../../utilities/spreadN';
 import { VoictentItemLanbe2 } from '../engine-shell/voictent/lanbe';
+import {
+  AbstractInMemoryVoictent,
+  DereferenceError,
+} from './abstractInMemoryVoictent';
+import { InMemoryIndexByName, InMemoryVoque } from './inMemoryVoque';
 
 export type InMemoryOdeshinIndexByName = SpreadN<
   [
@@ -26,24 +26,23 @@ export type GenericInMemoryOdeshinVoque = InMemoryOdeshinVoque<Gepp, Odeshin>;
 
 export class InMemoryOdeshinVoictent<
   TVoque extends GenericInMemoryOdeshinVoque,
-> extends InMemoryVoictent<TVoque> {
-  // eslint-disable-next-line class-methods-use-this
-  getSerializableId(hubblepup: TVoque['receivedHubblepup']): string {
-    // TODO: move the responsibility of normalizing the serializable id elsewhere
-    return hubblepup.zorn.replaceAll('/', ' | ');
-  }
-
-  // TODO: there is no signal that this function is required to exist. If it doesn't exist then "zorn" would be undefined in indexByName
-  dereference(
-    lanbe: VoictentItemLanbe2<TVoque>,
+> extends AbstractInMemoryVoictent<GenericInMemoryOdeshinVoque, TVoque> {
+  protected dereference(
+    lanbe: VoictentItemLanbe2<GenericInMemoryOdeshinVoque, TVoque>,
   ): TVoque['indexedEmittedHubblepup'] {
-    const partialIndexedHubblepup = super.dereference(lanbe);
+    const listIndex = this.getLanbeIndex(lanbe);
 
+    if (listIndex === AbstractInMemoryVoictent.minimumInclusiveIndex) {
+      throw new DereferenceError(lanbe);
+    }
+
+    const hubblepup = this.hubblepupTuple[listIndex];
     return {
-      hubblepup: partialIndexedHubblepup.hubblepup,
+      hubblepup,
       indexByName: {
-        ...partialIndexedHubblepup.indexByName,
-        zorn: partialIndexedHubblepup.hubblepup.zorn,
+        serializableId: hubblepup.zorn,
+        listIndex,
+        zorn: hubblepup.zorn,
       },
     };
   }

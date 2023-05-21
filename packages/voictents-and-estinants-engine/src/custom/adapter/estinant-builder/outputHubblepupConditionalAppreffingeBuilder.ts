@@ -11,12 +11,21 @@ import {
   ConstituentResultNormalizer,
   InputOutputContext,
 } from './estinantBuilderContext';
-import { GenericAdaptedLeftInputHubblepupVicken } from './vicken';
+import {
+  AdaptedOutputVicken,
+  GenericAdaptedLeftInputHubblepupVicken,
+  GenericAdaptedOutputVickenTuple,
+} from './vicken';
 
-type AdaptedRightInputVickenTuple = [];
+type EmptyAdaptedRightInputVickenTuple = [];
 
-// There is technically multiple outputs, but this is unused on a mattomer :thinking:
-type AdaptedOutputVickenTuple = [];
+type NextAdaptedOutputVickenTuple<
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TOutputVoque extends GenericVoque,
+> = [
+  ...TAdaptedOutputVickenTuple,
+  AdaptedOutputVicken<TOutputVoque, TOutputVoque['receivedHubblepup']>,
+];
 
 type PartialOutputAppreffinge<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
@@ -31,6 +40,7 @@ type PartialOutputAppreffinge<
 
 export type OutputHubblepupConditionalAppreffingeBuilder<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = <TOutputVoque extends GenericVoque>(
   partialOutputAppreffinge: PartialOutputAppreffinge<
     TAdaptedLeftInputVicken,
@@ -38,22 +48,30 @@ export type OutputHubblepupConditionalAppreffingeBuilder<
   >,
 ) => SpreadN<
   [
-    OutputHubblepupConditionalAppreffingeBuilderParent<TAdaptedLeftInputVicken>,
+    OutputHubblepupConditionalAppreffingeBuilderParent<
+      TAdaptedLeftInputVicken,
+      NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
+    >,
     EstinantAssemblerParent<
       TAdaptedLeftInputVicken,
-      AdaptedRightInputVickenTuple,
-      AdaptedOutputVickenTuple
+      EmptyAdaptedRightInputVickenTuple,
+      NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
     >,
   ]
 >;
 
 export const buildOutputHubblepupConditionalAppreffingeBuilder = <
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 >(
   inputOutputContext: InputOutputContext,
-): OutputHubblepupConditionalAppreffingeBuilder<TAdaptedLeftInputVicken> => {
+): OutputHubblepupConditionalAppreffingeBuilder<
+  TAdaptedLeftInputVicken,
+  TAdaptedOutputVickenTuple
+> => {
   const buildOutputHubblepupConditionalAppreffinge: OutputHubblepupConditionalAppreffingeBuilder<
-    TAdaptedLeftInputVicken
+    TAdaptedLeftInputVicken,
+    TAdaptedOutputVickenTuple
   > = <TOutputVoque extends GenericVoque>(
     partialOutputAppreffinge: PartialOutputAppreffinge<
       TAdaptedLeftInputVicken,
@@ -83,15 +101,15 @@ export const buildOutputHubblepupConditionalAppreffingeBuilder = <
     });
 
     return {
-      toHubblepupOnCondition:
-        buildOutputHubblepupConditionalAppreffingeBuilder<TAdaptedLeftInputVicken>(
-          nextContext,
-        ),
+      toHubblepupOnCondition: buildOutputHubblepupConditionalAppreffingeBuilder<
+        TAdaptedLeftInputVicken,
+        NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
+      >(nextContext),
 
       assemble: buildEstinantAssembler<
         TAdaptedLeftInputVicken,
-        AdaptedRightInputVickenTuple,
-        AdaptedOutputVickenTuple
+        EmptyAdaptedRightInputVickenTuple,
+        NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
       >({
         ...nextContext,
         pinbe: () => {
@@ -106,6 +124,10 @@ export const buildOutputHubblepupConditionalAppreffingeBuilder = <
 
 export type OutputHubblepupConditionalAppreffingeBuilderParent<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = {
-  toHubblepupOnCondition: OutputHubblepupConditionalAppreffingeBuilder<TAdaptedLeftInputVicken>;
+  toHubblepupOnCondition: OutputHubblepupConditionalAppreffingeBuilder<
+    TAdaptedLeftInputVicken,
+    TAdaptedOutputVickenTuple
+  >;
 };

@@ -5,7 +5,7 @@ import {
   FilePathAccessorInput,
 } from '../../../utilities/file/getNestedFilePaths';
 import { Grition } from '../../adapter/grition';
-import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoictent';
+import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 
 export type FileSystemObjectEnumeratorConfiguration = FilePathAccessorInput;
 

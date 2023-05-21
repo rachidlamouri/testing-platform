@@ -1,12 +1,12 @@
 import { Gepp } from '../engine-shell/voictent/gepp';
-import {
-  InMemoryIndexByName,
-  InMemoryVoictent,
-  InMemoryVoque,
-} from './inMemoryVoictent';
 import { SpreadN } from '../../utilities/spreadN';
 import { VoictentItemLanbe2 } from '../engine-shell/voictent/lanbe';
 import { GenericOdeshin2 } from '../../custom/adapter/odeshin2';
+import {
+  AbstractInMemoryVoictent,
+  DereferenceError,
+} from './abstractInMemoryVoictent';
+import { InMemoryIndexByName, InMemoryVoque } from './inMemoryVoque';
 
 export type InMemoryOdeshin2IndexByName = SpreadN<
   [
@@ -27,27 +27,27 @@ export type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
   GenericOdeshin2
 >;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type UnsafeInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<any, any>;
+
 export class InMemoryOdeshin2Voictent<
   TVoque extends GenericInMemoryOdeshin2Voque,
-> extends InMemoryVoictent<TVoque> {
-  // eslint-disable-next-line class-methods-use-this
-  getSerializableId(odeshin: TVoque['receivedHubblepup']): string {
-    // TODO: move the responsibility of normalizing the serializable id elsewhere
-    return odeshin.zorn.replaceAll('/', ' | ');
-  }
-
-  // TODO: there is no signal that this function is required to exist. If it doesn't exist then "zorn" would be undefined in indexByName
-  dereference(
-    lanbe: VoictentItemLanbe2<TVoque>,
+> extends AbstractInMemoryVoictent<GenericInMemoryOdeshin2Voque, TVoque> {
+  protected dereference(
+    lanbe: VoictentItemLanbe2<GenericInMemoryOdeshin2Voque, TVoque>,
   ): TVoque['indexedEmittedHubblepup'] {
-    const partialIndexedHubblepup = super.dereference(lanbe);
+    const listIndex = this.getLanbeIndex(lanbe);
 
-    const odeshin = partialIndexedHubblepup.hubblepup;
+    if (listIndex === AbstractInMemoryVoictent.minimumInclusiveIndex) {
+      throw new DereferenceError(lanbe);
+    }
 
+    const odeshin = this.hubblepupTuple[listIndex];
     return {
       hubblepup: odeshin,
       indexByName: {
-        ...partialIndexedHubblepup.indexByName,
+        serializableId: odeshin.zorn.replaceAll('/', ' | '),
+        listIndex,
         zorn: odeshin.zorn,
       },
     };
