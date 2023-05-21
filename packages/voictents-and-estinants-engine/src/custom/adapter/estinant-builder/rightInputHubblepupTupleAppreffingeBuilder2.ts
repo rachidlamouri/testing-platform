@@ -10,7 +10,15 @@ import {
   buildOutputHubblepupAppreffingeBuilder2,
   OutputHubblepupAppreffingeBuilderParent2,
 } from './outputHubblepupAppreffingeBuilder2';
+import {
+  buildOutputHubblepupTupleAppreffingeBuilder2,
+  OutputHubblepupTupleAppreffingeBuilderParent2,
+} from './outputHubblepupTupleAppreffingeBuilder2';
 import { PartialRightHubblepupTupleAppreffinge } from './partialAppreffinge';
+import {
+  buildRightInputVoictentAppreffingeBuilder2,
+  RightInputVoictentAppreffingeBuilderParent2,
+} from './rightInputVoictentAppreffingeBuilder2';
 import {
   AdaptedRightInputHubblepupTupleVicken,
   GenericAdaptedLeftInputVicken,
@@ -47,8 +55,25 @@ export type RightInputHubblepupTupleAppreffingeBuilder2<
         TZornTuple
       >
     >,
+    RightInputVoictentAppreffingeBuilderParent2<
+      TAdaptedLeftInputVicken,
+      NextAdaptedRightInputVickenTuple<
+        TAdaptedRightInputVickenTuple,
+        TRightInputVoque,
+        TZornTuple
+      >
+    >,
 
     OutputHubblepupAppreffingeBuilderParent2<
+      TAdaptedLeftInputVicken,
+      NextAdaptedRightInputVickenTuple<
+        TAdaptedRightInputVickenTuple,
+        TRightInputVoque,
+        TZornTuple
+      >,
+      EmptyAdaptedOutputVickenTuple
+    >,
+    OutputHubblepupTupleAppreffingeBuilderParent2<
       TAdaptedLeftInputVicken,
       NextAdaptedRightInputVickenTuple<
         TAdaptedRightInputVickenTuple,
@@ -106,8 +131,25 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
           TZornTuple
         >
       >(nextContext),
+      andFromVoictent2: buildRightInputVoictentAppreffingeBuilder2<
+        TAdaptedLeftInputVicken,
+        NextAdaptedRightInputVickenTuple<
+          TAdaptedRightInputVickenTuple,
+          TRightInputVoque,
+          TZornTuple
+        >
+      >(nextContext),
 
       toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
+        TAdaptedLeftInputVicken,
+        NextAdaptedRightInputVickenTuple<
+          TAdaptedRightInputVickenTuple,
+          TRightInputVoque,
+          TZornTuple
+        >,
+        EmptyAdaptedOutputVickenTuple
+      >(nextContext),
+      toHubblepupTuple2: buildOutputHubblepupTupleAppreffingeBuilder2<
         TAdaptedLeftInputVicken,
         NextAdaptedRightInputVickenTuple<
           TAdaptedRightInputVickenTuple,

@@ -1,8 +1,7 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { Grition } from '../../adapter/grition';
-import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
 import { IdentifiableProgramBodyStatementNode } from './getIdentifiableProgramBodyStatementNode';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 export type CommentedProgramBodyDeclaration = {
   commentText: string | null;
@@ -16,14 +15,11 @@ export type IdentifiableCommentedProgramBodyDeclaration = {
   identifiableNode: IdentifiableProgramBodyStatementNode;
 };
 
-export type CommentedProgramBodyDeclarationList =
-  CommentedProgramBodyDeclaration[];
-
-export type CommentedProgramBodyDeclarationListGrition =
-  Grition<CommentedProgramBodyDeclarationList>;
-
-export type CommentedProgramBodyDeclarationListOdeshin =
-  OdeshinFromGrition<CommentedProgramBodyDeclarationListGrition>;
+// TODO: fix this weird nested list type
+export type CommentedProgramBodyDeclarationList = {
+  zorn: string;
+  list: CommentedProgramBodyDeclaration[];
+};
 
 export const COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP =
   'commented-program-body-declaration-list';
@@ -33,5 +29,10 @@ export type CommentedProgramBodyDeclarationListGepp =
 
 export type CommentedProgramBodyDeclarationListVoictent = Voictent<
   CommentedProgramBodyDeclarationListGepp,
-  CommentedProgramBodyDeclarationListOdeshin
+  CommentedProgramBodyDeclarationList
+>;
+
+export type CommentedProgramBodyDeclarationListVoque = InMemoryOdeshin2Voque<
+  CommentedProgramBodyDeclarationListGepp,
+  CommentedProgramBodyDeclarationList
 >;

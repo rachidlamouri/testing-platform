@@ -77,8 +77,23 @@ export type AdaptedRightInputHubblepupTupleVicken<
 export type GenericAdaptedRightInputHubblepupTupleVicken =
   AdaptedRightInputHubblepupTupleVicken<GenericVoque, ZornTuple>;
 
+export type AdaptedRightInputVoictentVicken<
+  TRightInputVoque extends GenericVoque,
+> = {
+  voque: TRightInputVoque;
+  tropoignantInput: TRightInputVoque['emittedVoictent'];
+  isWibiz: true;
+  pinbetunfInput: TRightInputVoque['emittedVoictent'];
+  zornTuple: never;
+  zornTupleOption: never;
+};
+
+export type GenericAdaptedRightInputVoictentVicken =
+  AdaptedRightInputVoictentVicken<GenericVoque>;
+
 export type GenericAdaptedRightInputVicken =
-  GenericAdaptedRightInputHubblepupTupleVicken;
+  | GenericAdaptedRightInputHubblepupTupleVicken
+  | GenericAdaptedRightInputVoictentVicken;
 
 export type GenericAdaptedRightInputVickenTuple =
   Tuple<GenericAdaptedRightInputVicken>;

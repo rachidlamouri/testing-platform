@@ -3,15 +3,10 @@ import {
   DIRECTED_GRAPH_GEPP,
   DirectedGraph,
   DirectedGraphStyle,
-  DirectedGraphVoictent,
+  DirectedGraphVoque,
   DirectedSubgraph,
   SubgraphRankType,
 } from './graph-visualization/directed-graph/directedGraph';
-import {
-  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-  DirectedGraphMetadataById,
-  DirectedGraphMetadataByIdVoictent,
-} from './graph-visualization/directedGraphMetadataById';
 import { DirectedGraphNode } from './graph-visualization/directed-graph/directedGraphNode';
 import {
   LabelLocation,
@@ -24,9 +19,14 @@ import {
 import { DirectedGraphEdge } from './graph-visualization/directed-graph/directedGraphEdge';
 import {
   ENGINE_PROGRAM_2_GEPP,
-  EngineProgram2Voictent,
+  EngineProgram2Voque,
 } from './engine-program/engineProgram2';
 import { getTextDigest } from '../../utilities/getTextDigest';
+import {
+  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+  DirectedGraphMetadataById,
+  DirectedGraphMetadataByIdVoque,
+} from './graph-visualization/directedGraphMetadataById';
 
 type EngineVoictent = {
   id: string;
@@ -42,18 +42,19 @@ type EngineVoictent = {
 export const getDirectedGraph = buildEstinant({
   name: 'getDirectedGraph',
 })
-  .fromGrition<EngineProgram2Voictent>({
+  .fromHubblepup2<EngineProgram2Voque>({
     gepp: ENGINE_PROGRAM_2_GEPP,
   })
-  .toGrition<DirectedGraphVoictent>({
+  .toHubblepup2<DirectedGraphVoque>({
     gepp: DIRECTED_GRAPH_GEPP,
-    getZorn: (leftInput) => leftInput.grition.programName,
   })
-  .toGrition<DirectedGraphMetadataByIdVoictent>({
+  .toHubblepup2<DirectedGraphMetadataByIdVoque>({
     gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-    getZorn: (leftInput) => leftInput.grition.programName,
   })
   .onPinbe((engineProgram) => {
+    // TODO: index program name?
+    const associationId = engineProgram.programName;
+
     const engineVoictentByName = new Map<string, EngineVoictent>(
       engineProgram.voictentLocatorList.map((voictentLocator) => {
         return [
@@ -410,6 +411,7 @@ export const getDirectedGraph = buildEstinant({
     };
 
     const rootGraph: DirectedGraph = {
+      zorn: associationId,
       isRoot: true,
       attributeByKey: {
         id: engineProgram.id,
@@ -435,9 +437,12 @@ export const getDirectedGraph = buildEstinant({
       ],
     };
 
-    const metadataById: DirectedGraphMetadataById = {};
+    const metadataById: DirectedGraphMetadataById = {
+      zorn: associationId,
+      grition: {},
+    };
 
-    metadataById[engineProgram.id] = {
+    metadataById.grition[engineProgram.id] = {
       title: engineProgram.programName,
       fieldList: [
         {
@@ -456,7 +461,7 @@ export const getDirectedGraph = buildEstinant({
     };
 
     voictentList.forEach((voictent) => {
-      metadataById[voictent.id] = {
+      metadataById.grition[voictent.id] = {
         title: voictent.name,
         fieldList: [
           {
@@ -468,7 +473,7 @@ export const getDirectedGraph = buildEstinant({
     });
 
     engineProgram.estinantList.forEach((estinant) => {
-      metadataById[estinant.id] = {
+      metadataById.grition[estinant.id] = {
         title: estinant.estinantName,
         fieldList: [
           {
@@ -500,7 +505,7 @@ export const getDirectedGraph = buildEstinant({
       const inputName =
         input.index === 0 ? 'Left Input' : `Right Input ${input.index}`;
 
-      metadataById[input.id] = {
+      metadataById.grition[input.id] = {
         title: `${estinant.estinantName}: ${inputName}`,
         fieldList: [
           {
@@ -515,7 +520,7 @@ export const getDirectedGraph = buildEstinant({
       };
     });
 
-    metadataById[startNode.attributeByKey.id] = {
+    metadataById.grition[startNode.attributeByKey.id] = {
       title: 'Start',
       fieldList: [
         {
@@ -536,7 +541,7 @@ export const getDirectedGraph = buildEstinant({
       (estinant) => estinant.outputList.length === 0,
     );
 
-    metadataById[endNode.attributeByKey.id] = {
+    metadataById.grition[endNode.attributeByKey.id] = {
       title: 'End',
       fieldList: [
         {

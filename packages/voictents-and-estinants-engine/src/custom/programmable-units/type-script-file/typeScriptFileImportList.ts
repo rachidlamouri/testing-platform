@@ -1,5 +1,4 @@
-import { Grition } from '../../adapter/grition';
-import { OdeshinFromGrition } from '../../adapter/odeshin';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 
 export type TypeScriptFileImport = {
@@ -8,12 +7,11 @@ export type TypeScriptFileImport = {
   specifierList: string[];
 };
 
-export type TypeScriptFileImportList = TypeScriptFileImport[];
-
-export type TypeScriptFileImportListGrition = Grition<TypeScriptFileImportList>;
-
-export type TypeScriptFileImportListOdeshin =
-  OdeshinFromGrition<TypeScriptFileImportListGrition>;
+// TODO: fix this weird nested list type
+export type TypeScriptFileImportList = {
+  zorn: string;
+  list: TypeScriptFileImport[];
+};
 
 export const TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP = 'type-script-file-import-list';
 
@@ -22,5 +20,10 @@ export type TypeScriptFileImportListGepp =
 
 export type TypeScriptFileImportListVoictent = Voictent<
   TypeScriptFileImportListGepp,
-  TypeScriptFileImportListOdeshin
+  TypeScriptFileImportList
+>;
+
+export type TypeScriptFileImportListVoque = InMemoryOdeshin2Voque<
+  TypeScriptFileImportListGepp,
+  TypeScriptFileImportList
 >;

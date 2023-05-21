@@ -2,22 +2,29 @@ import { GenericVoque } from '../../../core/engine/voque';
 import { ZornTuple } from '../../../utilities/semantic-types/zorn';
 import { GenericAdaptedLeftInputVicken } from './vicken';
 
-export type PartialLeftInputAppreffinge<TInputVoque extends GenericVoque> = {
-  gepp: TInputVoque['gepp'];
-};
+export type PartialLeftInputAppreffinge<TLeftInputVoque extends GenericVoque> =
+  {
+    gepp: TLeftInputVoque['gepp'];
+  };
 
 export type PartialRightHubblepupTupleAppreffinge<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TInputVoque extends GenericVoque,
+  TRightInputVoque extends GenericVoque,
   TZornTuple extends ZornTuple,
 > = {
-  gepp: TInputVoque['gepp'];
+  gepp: TRightInputVoque['gepp'];
   framate: (
     leftInput: TAdaptedLeftInputVicken['tropoignantInput'],
   ) => TZornTuple;
   croard: (
-    rightInput: TInputVoque['indexedEmittedHubblepup'],
+    rightInput: TRightInputVoque['indexedEmittedHubblepup'],
   ) => TZornTuple[number];
+};
+
+export type PartialRightVoictentAppreffinge<
+  TRightInputVoque extends GenericVoque,
+> = {
+  gepp: TRightInputVoque['gepp'];
 };
 
 export type PartialOutputAppreffinge<TOutputVoque extends GenericVoque> = {

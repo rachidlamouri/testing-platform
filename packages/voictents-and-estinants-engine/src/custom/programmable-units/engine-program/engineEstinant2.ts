@@ -1,5 +1,4 @@
-import { Grition } from '../../adapter/grition';
-import { OdeshinFromGrition } from '../../adapter/odeshin';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 
@@ -18,6 +17,7 @@ export type EstinantInput2 = BaseEstinantInputOutput<true, number>;
 export type EstinantOutput2 = BaseEstinantInputOutput<false, null>;
 
 export type EngineEstinant2 = {
+  zorn: string;
   id: string;
   estinantName: string;
   filePath: string;
@@ -28,15 +28,16 @@ export type EngineEstinant2 = {
   locator: EngineEstinantLocator2;
 };
 
-export type EngineEstinant2Grition = Grition<EngineEstinant2>;
-
-export type EngineEstinant2Odeshin = OdeshinFromGrition<EngineEstinant2Grition>;
-
 export const ENGINE_ESTINANT_2_GEPP = 'engine-estinant-2';
 
 export type EngineEstinant2Gepp = typeof ENGINE_ESTINANT_2_GEPP;
 
 export type EngineEstinant2Voictent = Voictent<
   EngineEstinant2Gepp,
-  EngineEstinant2Odeshin
+  EngineEstinant2
+>;
+
+export type EngineEstinant2Voque = InMemoryOdeshin2Voque<
+  EngineEstinant2Gepp,
+  EngineEstinant2
 >;

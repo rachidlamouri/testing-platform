@@ -3,7 +3,7 @@ import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
   EngineProgramFile,
-  EngineProgramFileVoictent,
+  EngineProgramFileVoque,
 } from '../type-script-file-relationships/engineProgramFile';
 import {
   IdentifiableProperty,
@@ -15,7 +15,7 @@ import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImport,
   TypeScriptFileImportList,
-  TypeScriptFileImportListVoictent,
+  TypeScriptFileImportListVoque,
 } from '../type-script-file/typeScriptFileImportList';
 import {
   isArrayExpression,
@@ -29,8 +29,8 @@ import {
 } from './engineFunctionConfiguration';
 import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
-  EngineProgramLocator2Odeshin,
-  EngineProgramLocator2Voictent,
+  EngineProgramLocator2,
+  EngineProgramLocator2Voque,
   VoictentLocator,
 } from './engineProgramLocator2';
 import {
@@ -41,13 +41,13 @@ import {
 } from './engineEstinantLocator2';
 import {
   COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
-  CommentedProgramBodyDeclarationListVoictent,
+  CommentedProgramBodyDeclarationListVoque,
 } from '../type-script-file/commentedProgramBodyDeclarationList';
 import {
   ErrorLocatorTypeName,
   PROGRAM_ERROR_GEPP,
-  ProgramErrorOdeshin,
-  ProgramErrorVoictent,
+  ProgramError,
+  ProgramErrorVoque,
 } from '../error/programError';
 import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
 import {
@@ -103,14 +103,14 @@ type EngineCallDeclaration = {
 type Core2EngineProgramLocatorAccessorInput = {
   engineProgramFile: EngineProgramFile['file'];
   engineFunctionConfiguration: CoreEngineFunction2Configuration;
-  importList: TypeScriptFileImportList;
+  importList: TypeScriptFileImportList['list'];
   engineCallCommentText: string | null;
   engineCallExpressionPropertyList: IdentifiableProperty[];
 };
 
 type Core2EngineProgramLocatorAccessorResult = {
-  parallelErrorList: ProgramErrorOdeshin[];
-  engineProgramLocator: EngineProgramLocator2Odeshin;
+  parallelErrorList: ProgramError[];
+  engineProgramLocator: EngineProgramLocator2;
 };
 
 const getCore2EngineProgramLocator = ({
@@ -136,7 +136,7 @@ const getCore2EngineProgramLocator = ({
       : [];
 
   const voictentLocatorList: VoictentLocator[] = [];
-  const parallelErrorList: ProgramErrorOdeshin[] = [];
+  const parallelErrorList: ProgramError[] = [];
 
   initialVoictentGeppIdentifierList.forEach((element) => {
     const voqueName =
@@ -175,17 +175,14 @@ const getCore2EngineProgramLocator = ({
 
     if (voqueName === null) {
       parallelErrorList.push({
-        zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
-        grition: {
-          errorId: `getEngineProgramLocator/missing-voictent-type-parameter`,
-          message:
-            'New expressions for voictent instances must have a type parameter for the corresponding voque',
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
-            filePath: engineProgramFile.filePath,
-          },
-          metadata: null,
+        errorId: `getEngineProgramLocator/missing-voictent-type-parameter`,
+        message:
+          'New expressions for voictent instances must have a type parameter for the corresponding voque',
+        locator: {
+          typeName: ErrorLocatorTypeName.FileErrorLocator,
+          filePath: engineProgramFile.filePath,
         },
+        metadata: null,
       });
     }
 
@@ -242,16 +239,13 @@ const getCore2EngineProgramLocator = ({
       });
     } else {
       parallelErrorList.push({
-        zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
-        grition: {
-          errorId: `getEngineProgramLocator/unparseable-estinant`,
-          message: `Engine program has an unparseable estinant. Expected an identifier or a call expression to "${buildAddMetadataForSerialization.name}".`,
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
-            filePath: engineProgramFile.filePath,
-          },
-          metadata: null,
+        errorId: `getEngineProgramLocator/unparseable-estinant`,
+        message: `Engine program has an unparseable estinant. Expected an identifier or a call expression to "${buildAddMetadataForSerialization.name}".`,
+        locator: {
+          typeName: ErrorLocatorTypeName.FileErrorLocator,
+          filePath: engineProgramFile.filePath,
         },
+        metadata: null,
       });
     }
   });
@@ -280,6 +274,7 @@ const getCore2EngineProgramLocator = ({
       EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization
     ) {
       engineEstinantLocatorList.push({
+        zorn: `${engineProgramFile.filePath}:${partialLocator.index}`,
         ...partialLocator,
         isCoreEstinant: true,
         filePath: engineProgramFile.filePath,
@@ -293,6 +288,7 @@ const getCore2EngineProgramLocator = ({
 
     if (fileImport === undefined) {
       engineEstinantLocatorList.push({
+        zorn: `${partialLocator.identifierName}:${engineProgramFile.filePath}`,
         ...partialLocator,
         filePath: engineProgramFile.filePath,
         isCoreEstinant: true,
@@ -301,6 +297,7 @@ const getCore2EngineProgramLocator = ({
     }
 
     engineEstinantLocatorList.push({
+      zorn: `${partialLocator.identifierName}:${fileImport.sourcePath}`,
       ...partialLocator,
       filePath: fileImport.sourcePath,
       isCoreEstinant: true,
@@ -309,47 +306,42 @@ const getCore2EngineProgramLocator = ({
 
   if (engineCallCommentText === null) {
     parallelErrorList.push({
-      zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
-      grition: {
-        errorId: `getEngineProgramLocator/missing-program-description`,
-        message: 'Program is missing a description',
-        locator: {
-          typeName: ErrorLocatorTypeName.FileErrorLocator,
-          filePath: engineProgramFile.filePath,
-        },
-        metadata: null,
+      errorId: `getEngineProgramLocator/missing-program-description`,
+      message: 'Program is missing a description',
+      locator: {
+        typeName: ErrorLocatorTypeName.FileErrorLocator,
+        filePath: engineProgramFile.filePath,
       },
+      metadata: null,
     });
   }
 
-  const engineProgramLocatorOdeshin: EngineProgramLocator2Odeshin = {
+  const engineProgramLocator: EngineProgramLocator2 = {
     zorn: engineProgramFile.filePath,
-    grition: {
-      programName,
-      description: engineCallCommentText ?? '',
-      filePath: engineProgramFile.filePath,
-      voictentLocatorList,
-      engineEstinantLocatorList,
-    },
+    programName,
+    description: engineCallCommentText ?? '',
+    filePath: engineProgramFile.filePath,
+    voictentLocatorList,
+    engineEstinantLocatorList,
   };
 
   return {
     parallelErrorList,
-    engineProgramLocator: engineProgramLocatorOdeshin,
+    engineProgramLocator,
   };
 };
 
 type AdaptedEngineProgramLocatorAccessorInput = {
   engineProgramFile: EngineProgramFile['file'];
   engineFunctionConfiguration: AdaptedEngineFunctionConfiguration;
-  importList: TypeScriptFileImportList;
+  importList: TypeScriptFileImportList['list'];
   engineCallCommentText: string | null;
   engineCallExpressionPropertyList: IdentifiableProperty[];
 };
 
 type AdaptedEngineProgramLocatorAccessorResult = {
-  parallelErrorList: ProgramErrorOdeshin[];
-  engineProgramLocator: EngineProgramLocator2Odeshin;
+  parallelErrorList: ProgramError[];
+  engineProgramLocator: EngineProgramLocator2;
 };
 
 const getAdaptedEngineProgramLocator = ({
@@ -417,7 +409,7 @@ const getAdaptedEngineProgramLocator = ({
       fileImportsByImportedIdentifier.set(specifier, fileImport);
     });
 
-  const parallelErrorList: ProgramErrorOdeshin[] = [];
+  const parallelErrorList: ProgramError[] = [];
   const engineEstinantLocatorList: EngineEstinantLocator2[] = [];
 
   estinantIdentifierList.forEach((identifierName) => {
@@ -425,6 +417,7 @@ const getAdaptedEngineProgramLocator = ({
 
     if (fileImport === undefined) {
       engineEstinantLocatorList.push({
+        zorn: `${identifierName}:${engineProgramFile.filePath}`,
         typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
         identifierName,
         filePath: engineProgramFile.filePath,
@@ -434,6 +427,7 @@ const getAdaptedEngineProgramLocator = ({
     }
 
     engineEstinantLocatorList.push({
+      zorn: `${identifierName}:${fileImport.sourcePath}`,
       typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
       identifierName,
       filePath: fileImport.sourcePath,
@@ -445,33 +439,28 @@ const getAdaptedEngineProgramLocator = ({
 
   if (engineCallCommentText === null) {
     parallelErrorList.push({
-      zorn: `getEngineProgramLocator/${engineProgramFile.filePath}`,
-      grition: {
-        errorId: `getEngineProgramLocator/missing-program-description`,
-        message: 'Program is missing a description',
-        locator: {
-          typeName: ErrorLocatorTypeName.FileErrorLocator,
-          filePath: engineProgramFile.filePath,
-        },
-        metadata: null,
+      errorId: `getEngineProgramLocator/missing-program-description`,
+      message: 'Program is missing a description',
+      locator: {
+        typeName: ErrorLocatorTypeName.FileErrorLocator,
+        filePath: engineProgramFile.filePath,
       },
+      metadata: null,
     });
   }
 
-  const engineProgramLocatorOdeshin: EngineProgramLocator2Odeshin = {
+  const engineProgramLocator: EngineProgramLocator2 = {
     zorn: engineProgramFile.filePath,
-    grition: {
-      programName,
-      description: engineCallCommentText ?? '',
-      filePath: engineProgramFile.filePath,
-      voictentLocatorList,
-      engineEstinantLocatorList,
-    },
+    programName,
+    description: engineCallCommentText ?? '',
+    filePath: engineProgramFile.filePath,
+    voictentLocatorList,
+    engineEstinantLocatorList,
   };
 
   return {
     parallelErrorList,
-    engineProgramLocator: engineProgramLocatorOdeshin,
+    engineProgramLocator,
   };
 };
 
@@ -482,27 +471,31 @@ const getAdaptedEngineProgramLocator = ({
 export const getEngineProgramLocator = buildEstinant({
   name: 'getEngineProgramLocator',
 })
-  .fromGrition<EngineProgramFileVoictent>({
+  .fromHubblepup2<EngineProgramFileVoque>({
     gepp: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .andFromGritionTuple<CommentedProgramBodyDeclarationListVoictent, [string]>({
+  .andFromHubblepupTuple2<CommentedProgramBodyDeclarationListVoque, [string]>({
     gepp: COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
-    framate: (leftInput) => [leftInput.zorn],
-    croard: (rightInput) => rightInput.zorn,
+    framate: (leftInput) => [leftInput.indexByName.zorn],
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromGritionTuple<TypeScriptFileImportListVoictent, [string]>({
+  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [string]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    framate: (leftInput) => [leftInput.zorn],
-    croard: (rightInput) => rightInput.zorn,
+    framate: (leftInput) => [leftInput.indexByName.zorn],
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .toHubblepupTuple<ProgramErrorVoictent>({
+  .toHubblepupTuple2<ProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .toHubblepupTuple<EngineProgramLocator2Voictent>({
+  .toHubblepupTuple2<EngineProgramLocator2Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_2_GEPP,
   })
   .onPinbe(
-    (engineProgramFile, [commentedProgramBodyStatementList], [importList]) => {
+    (
+      engineProgramFile,
+      [{ list: commentedProgramBodyStatementList }],
+      [{ list: importList }],
+    ) => {
       const engineCallDeclaration = commentedProgramBodyStatementList.find(
         (commentedDeclaration): commentedDeclaration is EngineCallDeclaration =>
           isEngineCallExpressionStatement(
@@ -515,17 +508,14 @@ export const getEngineProgramLocator = buildEstinant({
         return {
           [PROGRAM_ERROR_GEPP]: [
             {
-              zorn: `getEngineProgramLocator/${engineProgramFile.file.filePath}`,
-              grition: {
-                errorId: `getEngineProgramLocator/missing-engine-call`,
-                message: 'Unable to find engine call declaration',
-                locator: {
-                  typeName: ErrorLocatorTypeName.FileErrorLocator,
-                  filePath: engineProgramFile.file.filePath,
-                },
-                metadata: null,
+              errorId: `getEngineProgramLocator/missing-engine-call`,
+              message: 'Unable to find engine call declaration',
+              locator: {
+                typeName: ErrorLocatorTypeName.FileErrorLocator,
+                filePath: engineProgramFile.file.filePath,
               },
-            },
+              metadata: null,
+            } satisfies ProgramError,
           ],
           [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [],
         };
@@ -542,17 +532,14 @@ export const getEngineProgramLocator = buildEstinant({
           return {
             [PROGRAM_ERROR_GEPP]: [
               {
-                zorn: `getEngineProgramLocator/${engineProgramFile.file.filePath}`,
-                grition: {
-                  errorId: `getEngineProgramLocator/unhandled-engine-call`,
-                  message: `Engine function configuration "${engineProgramFile.engineFunctionConfiguration.typeName}" is not currently supported by the program modeler`,
-                  locator: {
-                    typeName: ErrorLocatorTypeName.FileErrorLocator,
-                    filePath: engineProgramFile.file.filePath,
-                  },
-                  metadata: null,
+                errorId: `getEngineProgramLocator/unhandled-engine-call`,
+                message: `Engine function configuration "${engineProgramFile.engineFunctionConfiguration.typeName}" is not currently supported by the program modeler`,
+                locator: {
+                  typeName: ErrorLocatorTypeName.FileErrorLocator,
+                  filePath: engineProgramFile.file.filePath,
                 },
-              },
+                metadata: null,
+              } satisfies ProgramError,
             ],
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [],
           };

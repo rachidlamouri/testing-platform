@@ -1,7 +1,6 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { Grition } from '../../adapter/grition';
-import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 export enum EngineEstinantLocator2TypeName {
   TopLevelDeclaration = 'TopLevelDeclaration',
@@ -9,6 +8,7 @@ export enum EngineEstinantLocator2TypeName {
 }
 
 export type EngineEstinantTopLevelDeclarationLocator = {
+  zorn: string;
   typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration;
   identifierName: string;
   filePath: string;
@@ -16,6 +16,7 @@ export type EngineEstinantTopLevelDeclarationLocator = {
 };
 
 export type EngineEstinantBuildAddMetadataForSerializationLocator = {
+  zorn: string;
   typeName: EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization;
   callExpression: TSESTree.CallExpression;
   filePath: string;
@@ -27,27 +28,16 @@ export type EngineEstinantLocator2 =
   | EngineEstinantTopLevelDeclarationLocator
   | EngineEstinantBuildAddMetadataForSerializationLocator;
 
-export const getEngineEstinantLocatorZorn = (
-  locator: EngineEstinantLocator2,
-): string => {
-  switch (locator.typeName) {
-    case EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization:
-      return `${locator.filePath}:${locator.index}` as const;
-    case EngineEstinantLocator2TypeName.TopLevelDeclaration:
-      return `${locator.identifierName}:${locator.filePath}` as const;
-  }
-};
-
-export type EngineEstinantLocator2Grition = Grition<EngineEstinantLocator2>;
-
-export type EngineEstinantLocator2Odeshin =
-  OdeshinFromGrition<EngineEstinantLocator2Grition>;
-
 export const ENGINE_ESTINANT_LOCATOR_2_GEPP = 'engine-estinant-locator-2';
 
 export type EngineEstinantLocator2Gepp = typeof ENGINE_ESTINANT_LOCATOR_2_GEPP;
 
 export type EngineEstinantLocator2Voictent = Voictent<
   EngineEstinantLocator2Gepp,
-  EngineEstinantLocator2Odeshin
+  EngineEstinantLocator2
+>;
+
+export type EngineEstinantLocator2Voque = InMemoryOdeshin2Voque<
+  EngineEstinantLocator2Gepp,
+  EngineEstinantLocator2
 >;

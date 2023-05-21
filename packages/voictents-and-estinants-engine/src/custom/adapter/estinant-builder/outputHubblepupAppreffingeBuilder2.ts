@@ -15,6 +15,10 @@ import {
   GenericAdaptedRightInputVickenTuple,
 } from './vicken';
 import { SpreadN } from '../../../utilities/spreadN';
+import {
+  buildOutputHubblepupTupleAppreffingeBuilder2,
+  OutputHubblepupTupleAppreffingeBuilderParent2,
+} from './outputHubblepupTupleAppreffingeBuilder2';
 
 type NextAdaptedOutputVickenTuple<
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
@@ -38,7 +42,12 @@ export type OutputHubblepupAppreffingeBuilder2<
       NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
     >,
 
-    OutputHubblepupAppreffingeBuilder2<
+    OutputHubblepupAppreffingeBuilderParent2<
+      TAdaptedLeftInputVicken,
+      TAdaptedRightInputVickenTuple,
+      NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
+    >,
+    OutputHubblepupTupleAppreffingeBuilderParent2<
       TAdaptedLeftInputVicken,
       TAdaptedRightInputVickenTuple,
       NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
@@ -84,6 +93,11 @@ export const buildOutputHubblepupAppreffingeBuilder2 = <
       >(nextContext),
 
       toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
+        TAdaptedLeftInputVicken,
+        TAdaptedRightInputVickenTuple,
+        NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
+      >(nextContext),
+      toHubblepupTuple2: buildOutputHubblepupTupleAppreffingeBuilder2<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>

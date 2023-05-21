@@ -1,5 +1,4 @@
-import { Grition } from '../../adapter/grition';
-import { Hubblepup } from '../../adapter/hubblepup';
+import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 import { Voictent } from '../../adapter/voictent';
 
 export enum EngineFunctionConfigurationTypeName {
@@ -37,12 +36,6 @@ export type EngineFunctionConfiguration =
   | CoreEngineFunction2Configuration
   | AdaptedEngineFunctionConfiguration;
 
-export type EngineFunctionConfigurationGrition =
-  Grition<EngineFunctionConfiguration>;
-
-export type EngineFunctionConfigurationHubblepup =
-  Hubblepup<EngineFunctionConfiguration>;
-
 export const ENGINE_FUNCTION_CONFIGURATION_GEPP =
   'engine-function-configuration';
 
@@ -51,7 +44,12 @@ export type EngineFunctionConfigurationGepp =
 
 export type EngineFunctionConfigurationVoictent = Voictent<
   EngineFunctionConfigurationGepp,
-  EngineFunctionConfigurationHubblepup
+  EngineFunctionConfiguration
+>;
+
+export type EngineFunctionConfigurationVoque = StandardInMemoryVoque<
+  EngineFunctionConfigurationGepp,
+  EngineFunctionConfiguration
 >;
 
 export const CORE_ENGINE_FUNCTION_CONFIGURATION: CoreEngineFunctionConfiguration =

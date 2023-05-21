@@ -11,7 +11,6 @@ import {
   GenericEstinant2,
 } from '../core/engine-shell/estinant/estinant';
 import { GenericQuirm2, Quirm2 } from '../core/engine-shell/quirm/quirm';
-import { InMemoryVoictent } from '../core/engine/inMemoryVoictent';
 import { GenericVoque, GenericVoqueTuple, Voque } from '../core/engine/voque';
 import { Gepp } from '../core/engine-shell/voictent/gepp';
 import {
@@ -21,7 +20,10 @@ import {
   UnsafeVoictent2Tple,
   Voictent2,
 } from '../core/engine/voictent2';
-import { GenericInMemoryOdeshin2Voque } from '../core/engine/inMemoryOdeshinVoictent2';
+import {
+  GenericInMemoryOdeshin2Voque,
+  InMemoryOdeshin2Voictent,
+} from '../core/engine/inMemoryOdeshinVoictent2';
 import { FlattenTuple } from '../utilities/flattenTuple';
 import { DeduplicateTupleItems } from '../utilities/deduplicateTupleItems';
 import { FilterTupleByRejectionUnion } from '../utilities/filterTuple';
@@ -122,16 +124,18 @@ type SimilarVoque<TVoque extends GenericVoque> = Voque<
   TVoque['emittedVoictent']
 >;
 
+type InferredVoictent2<TVoque extends GenericVoque> = Voictent2<
+  SimilarVoque<TVoque>,
+  TVoque
+>;
+
 type VoqueUnionFromVoictentUnion<
   TVoictentUnion extends UnsafeVoictent2,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 > = TVoictentUnion extends Voictent2<any, infer TVoque> ? TVoque : never;
 
 type VoictentTupleFromVoqueTuple<TVoqueTuple extends GenericVoqueTuple> = {
-  [TIndex in keyof TVoqueTuple]: Voictent2<
-    SimilarVoque<TVoqueTuple[TIndex]>,
-    TVoqueTuple[TIndex]
-  >;
+  [TIndex in keyof TVoqueTuple]: InferredVoictent2<TVoqueTuple[TIndex]>;
 };
 
 type VoictentListB<
@@ -194,7 +198,7 @@ export const digikikify = <
     (gepp) => !explicitInputVoictentGeppSet.has(gepp),
   );
   const inferredInputVoictentList = inferredInputGeppList.map((gepp) => {
-    return new InMemoryVoictent({
+    return new InMemoryOdeshin2Voictent({
       gepp,
       initialHubblepupTuple: [],
     });
