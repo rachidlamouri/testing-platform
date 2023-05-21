@@ -26,12 +26,14 @@ export type LeftInputContext = {
 };
 
 export type RightInputVoictentContext = {
+  version?: 2;
   gepp: Gepp;
   isWibiz: true;
   modifyTropoignantInput: AnyRightInputAccessor;
 };
 
 export type RightInputHubblepupContext = {
+  version?: 2;
   gepp: Gepp;
   isWibiz: false;
   framate: AnyLeftInputAccessor;

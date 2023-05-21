@@ -1,3 +1,4 @@
+import { GenericIndexedHubblepupTuple } from '../../../core/engine-shell/quirm/hubblepup';
 import { GenericVoque } from '../../../core/engine/voque';
 import { ZornTuple } from '../../../utilities/semantic-types/zorn';
 import { SpreadN } from '../../../utilities/spreadN';
@@ -10,7 +11,6 @@ import {
   OutputHubblepupAppreffingeBuilderParent2,
 } from './outputHubblepupAppreffingeBuilder2';
 import { PartialRightHubblepupTupleAppreffinge } from './partialAppreffinge';
-import { hubblepupTupleToHubblepupTuple } from './tropoignantInputOutputModifier';
 import {
   AdaptedRightInputHubblepupTupleVicken,
   GenericAdaptedLeftInputVicken,
@@ -82,11 +82,18 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
     const nextContext = buildInputOutputContextFromRightInputContext({
       previousContext: inputOutputContext,
       rightInputContext: {
+        version: 2,
         gepp: partialRightAppreffinge.gepp,
         isWibiz: false,
         framate: partialRightAppreffinge.framate,
         croard: partialRightAppreffinge.croard,
-        modifyTropoignantInput: hubblepupTupleToHubblepupTuple,
+        modifyTropoignantInput: (indexedHubblepupTuple) => {
+          return (indexedHubblepupTuple as GenericIndexedHubblepupTuple).map(
+            (indexedHubblepup) => {
+              return indexedHubblepup.hubblepup;
+            },
+          );
+        },
       },
     });
 

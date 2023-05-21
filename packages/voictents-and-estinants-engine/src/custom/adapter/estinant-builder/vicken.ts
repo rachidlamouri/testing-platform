@@ -42,9 +42,21 @@ export type AdaptedLeftInputIndexedHubblepupVicken<
 export type GenericAdaptedLeftInputIndexedHubblepupVicken =
   AdaptedLeftInputIndexedHubblepupVicken<GenericVoque>;
 
+export type AdaptedLeftInputVoictentVicken<TVoque extends GenericVoque> =
+  BaseLeftInputVicken<
+    TVoque,
+    TVoque['emittedVoictent'],
+    true,
+    TVoque['emittedVoictent']
+  >;
+
+export type GenericAdaptedLeftInputVoictentVicken =
+  AdaptedLeftInputVoictentVicken<GenericVoque>;
+
 export type GenericAdaptedLeftInputVicken =
   | GenericAdaptedLeftInputHubblepupVicken
-  | GenericAdaptedLeftInputIndexedHubblepupVicken;
+  | GenericAdaptedLeftInputIndexedHubblepupVicken
+  | GenericAdaptedLeftInputVoictentVicken;
 
 export type AdaptedRightInputHubblepupTupleVicken<
   TRightInputVoque extends GenericVoque,

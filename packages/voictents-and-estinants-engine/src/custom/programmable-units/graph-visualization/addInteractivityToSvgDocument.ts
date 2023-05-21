@@ -82,27 +82,29 @@ export const addInteractivityToSvgDocument = buildEstinant({
   .toHubblepup2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
   })
-  .onPinbe((leftInput, [templateFile], [directedGraphMetadataById]) => {
-    const svgText = leftInput.grition;
+  .onPinbe(
+    (leftInput, [templateFile], [{ grition: directedGraphMetadataById }]) => {
+      const svgText = leftInput.grition;
 
-    const templateText = fs.readFileSync(templateFile.filePath, 'utf8');
+      const templateText = fs.readFileSync(templateFile.filePath, 'utf8');
 
-    const metadataByIdCode = dataStructureToCode(directedGraphMetadataById);
+      const metadataByIdCode = dataStructureToCode(directedGraphMetadataById);
 
-    const outputTemplate = templateText
-      .replace('<!-- SVG_PLACEHOLDER -->', svgText)
-      .replace(
-        'const graphMetadataById = {};',
-        `const graphMetadataById = ${metadataByIdCode};`,
-      );
+      const outputTemplate = templateText
+        .replace('<!-- SVG_PLACEHOLDER -->', svgText)
+        .replace(
+          'const graphMetadataById = {};',
+          `const graphMetadataById = ${metadataByIdCode};`,
+        );
 
-    // TODO: move this renaming responsibility elsewhere
-    const fileName = leftInput.zorn.replaceAll(/\//g, '-');
+      // TODO: move this renaming responsibility elsewhere
+      const fileName = leftInput.zorn.replaceAll(/\//g, '-');
 
-    return {
-      fileName,
-      fileExtensionSuffix: 'html',
-      text: outputTemplate,
-    };
-  })
+      return {
+        fileName,
+        fileExtensionSuffix: 'html',
+        text: outputTemplate,
+      };
+    },
+  )
   .assemble();

@@ -67,11 +67,11 @@ export const buildOutputHubblepupAppreffingeBuilder2 = <
     const nextContext = buildInputOutputContextFromConstituentResultNormalizer({
       previousContext: inputOutputContext,
       normalizeResult: (leftInput, modifiedInput, aggregatedOutput) => {
-        const hubblepupTuple = aggregatedOutput[
+        const hubblepup = aggregatedOutput[
           outputAppreffinge.gepp
-        ] as TOutputVoque['emittedVoictent'];
+        ] as TOutputVoque['emittedHubblepup'];
 
-        return [outputAppreffinge.gepp, hubblepupTuple];
+        return [outputAppreffinge.gepp, [hubblepup]];
       },
       outputGepp: outputAppreffinge.gepp,
     });

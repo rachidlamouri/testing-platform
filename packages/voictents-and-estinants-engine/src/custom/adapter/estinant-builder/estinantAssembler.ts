@@ -64,14 +64,20 @@ export const buildEstinantAssembler = <
       /* eslint-disable @typescript-eslint/no-unsafe-assignment */
       const modifiedLeftInput =
         leftInputContext.modifyTropoignantInput(adaptedLeftInput);
+
       const modifiedRightInputTuple = rightInputContextTuple.map(
         (rightInputContext, index) => {
-          const rightInput = rightInputTuple[index];
+          let adaptedRightInput: unknown;
+          if (rightInputContext.isWibiz || rightInputContext.version === 2) {
+            adaptedRightInput = rightInputTuple[index];
+          } else {
+            adaptedRightInput = (
+              rightInputTuple[index] as GenericIndexedHubblepup
+            ).hubblepup;
+          }
+
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-          return rightInputContext.modifyTropoignantInput(
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            rightInput,
-          );
+          return rightInputContext.modifyTropoignantInput(adaptedRightInput);
         },
       );
       const modifiedOutput = assemblerContext.pinbe(
@@ -126,14 +132,28 @@ export const buildEstinantAssembler = <
             gepp: rightInputContext.gepp,
             isWibiz: rightInputContext.isWibiz,
             framate: (leftInput): ZornTuple => {
-              const indexedLeftHubblepup = leftInput as GenericIndexedHubblepup;
+              let adaptedLeftInput: unknown;
+              if (leftInputContext.isWibiz || leftInputContext.version === 2) {
+                adaptedLeftInput = leftInput;
+              } else {
+                adaptedLeftInput = (leftInput as GenericIndexedHubblepup)
+                  .hubblepup;
+              }
 
-              return rightInputContext.framate(
-                indexedLeftHubblepup.hubblepup,
-              ) as ZornTuple;
+              return rightInputContext.framate(adaptedLeftInput) as ZornTuple;
             },
-            croard: (indexedRightHubblepup): Zorn => {
-              return rightInputContext.croard(indexedRightHubblepup.hubblepup);
+            croard: (indexedRightInput): Zorn => {
+              let adaptedRightInput: unknown;
+              if (
+                rightInputContext.isWibiz ||
+                rightInputContext.version === 2
+              ) {
+                adaptedRightInput = indexedRightInput;
+              } else {
+                adaptedRightInput = indexedRightInput.hubblepup;
+              }
+
+              return rightInputContext.croard(adaptedRightInput);
             },
           } satisfies RightInputAppreffinge<
             GenericLeftInputVicken,
