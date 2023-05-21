@@ -15,7 +15,7 @@ import { DIRECTED_GRAPH_METADATA_BY_ID_GEPP } from '../../programmable-units/gra
  * Example program to demonstrate defining and rendering a directed graph.
  */
 digikikify({
-  initialVoictentsByGepp: {
+  initialHubblepupTupleByGepp: {
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
       {
         directoryPath:

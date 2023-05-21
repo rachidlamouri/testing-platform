@@ -194,7 +194,7 @@ const inputHubblepupAndInputVoictentToOutputHubblepup = buildEstinant({
  * Example program for various uses of the estinant builder.
  */
 digikikify({
-  initialVoictentsByGepp: {
+  initialHubblepupTupleByGepp: {
     [INPUT_A_GEPP]: [{ number: '1' }, { number: '2' }],
     [INPUT_B_GEPP]: [
       { zorn: 'b-1', grition: 'bx' },

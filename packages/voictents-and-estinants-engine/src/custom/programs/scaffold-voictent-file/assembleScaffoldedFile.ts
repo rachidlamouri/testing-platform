@@ -19,7 +19,7 @@ if (!fs.existsSync(filePath)) {
  * collection type and all related types
  */
 digikikify({
-  initialVoictentsByGepp: {
+  initialHubblepupTupleByGepp: {
     [SCAFFOLD_CONFIGURATION_GEPP]: [{ filePath }],
   },
   estinantTuple: [scaffoldFile],

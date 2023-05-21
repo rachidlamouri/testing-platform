@@ -14,7 +14,7 @@ import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
  * @todo rename to testCategorizeFiles and add this to ci.sh
  */
 digikikify({
-  initialVoictentsByGepp: {
+  initialHubblepupTupleByGepp: {
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
       VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
     ],

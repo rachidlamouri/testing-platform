@@ -12,7 +12,7 @@ import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
  * Example program to manually verify the behavior of a custom serializer.
  */
 digikikify({
-  initialVoictentsByGepp: {
+  initialHubblepupTupleByGepp: {
     [DATUM_TEST_CASE_INPUT_GEPP]: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
   },
   estinantTuple: [

@@ -21,7 +21,7 @@ import { parseTypeScriptFile } from '../../programmable-units/type-script-file/p
  * Creates a bash script to run all engine programs
  */
 digikikify({
-  initialVoictentsByGepp: {
+  initialHubblepupTupleByGepp: {
     [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
       VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
     ],

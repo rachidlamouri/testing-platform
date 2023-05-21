@@ -95,14 +95,13 @@ type InitialHubblepupTupleByGepp<TEstinantTuple extends UnsafeEstinant2Tuple> =
   >;
 
 type DigikikifyInput<TEstinantTuple extends UnsafeEstinant2Tuple> = {
-  initialVoictentsByGepp: InitialHubblepupTupleByGepp<TEstinantTuple>;
+  initialHubblepupTupleByGepp: InitialHubblepupTupleByGepp<TEstinantTuple>;
   estinantTuple: TEstinantTuple;
   quirmDebugger?: QuirmDebuggerFromEstinantTuple<TEstinantTuple>;
 };
 
 export const digikikify = <TEstinantTuple extends UnsafeEstinant2Tuple>({
-  // TODO: apply this renaming to programs
-  initialVoictentsByGepp: initialHubblepupTupleByGepp,
+  initialHubblepupTupleByGepp,
   estinantTuple,
   quirmDebugger: inputDebugger,
 }: DigikikifyInput<TEstinantTuple>): void => {

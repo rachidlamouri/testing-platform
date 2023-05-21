@@ -29,7 +29,7 @@ export type AdaptedEngineFunctionConfiguration = {
   filePath: 'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts';
   exportedIdentifier: 'digikikify';
   estinantListKeyIdentifierName: 'estinantTuple';
-  initialVoictentByGeppKeyIdentifierName: 'initialVoictentsByGepp';
+  initialVoictentByGeppKeyIdentifierName: 'initialHubblepupTupleByGepp';
 };
 
 export type EngineFunctionConfiguration =
@@ -81,5 +81,5 @@ export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfigu
       'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts',
     exportedIdentifier: 'digikikify',
     estinantListKeyIdentifierName: 'estinantTuple',
-    initialVoictentByGeppKeyIdentifierName: 'initialVoictentsByGepp',
+    initialVoictentByGeppKeyIdentifierName: 'initialHubblepupTupleByGepp',
   };
