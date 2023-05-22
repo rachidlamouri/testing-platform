@@ -18,6 +18,7 @@ import {
   TypeScriptFileImportListVoque,
 } from '../type-script-file/typeScriptFileImportList';
 import {
+  ArrayExpressionOfIdentifiers,
   isArrayExpression,
   isArrayExpressionOfIdentifiers,
 } from '../../../utilities/type-script-ast/isArrayExpressionOfIdentifiers';
@@ -53,11 +54,13 @@ import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
 import {
   isNewExpression,
   isNewExpressionWithObjectExpressionArgument,
+  isNewExpressionWithSpecificTypeParameters,
 } from '../../../utilities/type-script-ast/isNewExpression';
 import { buildAddMetadataForSerialization } from '../../../example-programs/buildAddMetadataForSerialization';
 import { isSpecificIdentifiableCallExpression } from '../../../utilities/type-script-ast/isCallExpression';
 import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 import { isIdentifiableTypeScriptTypeReference } from '../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
+import { isSpecificConstantTypeScriptAsExpression } from '../../../utilities/type-script-ast/isConstantTypeScriptAsExpression';
 
 type EngineCallExpression = TSESTree.CallExpression & {
   arguments: [ObjectExpressionWithIdentifierProperties];
@@ -65,24 +68,6 @@ type EngineCallExpression = TSESTree.CallExpression & {
 
 type EngineCallExpressionStatement = TSESTree.ExpressionStatement & {
   expression: EngineCallExpression;
-};
-
-/**
- * @todo tie this to the logic that a gepp identifier is in screaming snake case
- * @todo tie this to the logic that enforces that a gepp identifier should end in 'GEPP'
- */
-const screamingSnakeCaseGeppToVoictentName = (
-  geppIdentifier: string,
-): string => {
-  const namePartList = geppIdentifier.split('_');
-
-  namePartList.pop();
-
-  const voictentName = namePartList
-    .map((word) => `${word.charAt(0)}${word.slice(1).toLowerCase()}`)
-    .join('');
-
-  return voictentName;
 };
 
 const isEngineCallExpressionStatement = (
@@ -351,30 +336,80 @@ const getAdaptedEngineProgramLocator = ({
   engineCallCommentText,
   engineCallExpressionPropertyList,
 }: AdaptedEngineProgramLocatorAccessorInput): AdaptedEngineProgramLocatorAccessorResult => {
-  const initialVoictentByGeppProperty = engineCallExpressionPropertyList.find(
+  const populatedVoictentTupleProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
-      engineFunctionConfiguration.initialVoictentByGeppKeyIdentifierName,
+      engineFunctionConfiguration.populatedVoictentTupleKeyIdentifierName,
   );
 
-  const initialVoictentByGeppValueNode = initialVoictentByGeppProperty?.value;
+  const populatedVoictentTupleValueNode = populatedVoictentTupleProperty?.value;
 
-  const initialVoictentGeppIdentifierList =
-    isObjectExpressionWithIdentifierProperties(initialVoictentByGeppValueNode)
-      ? initialVoictentByGeppValueNode.properties.map(
-          (property: IdentifiableProperty) => property.key.name,
-        )
+  const populatedVoictentInstanceList =
+    isSpecificConstantTypeScriptAsExpression(
+      populatedVoictentTupleValueNode,
+      isArrayExpression,
+    )
+      ? populatedVoictentTupleValueNode.expression.elements
       : [];
 
-  const voictentLocatorList =
-    initialVoictentGeppIdentifierList.map<VoictentLocator>(
-      (screamingSnakeCaseName: string) => {
-        return {
-          name: screamingSnakeCaseGeppToVoictentName(screamingSnakeCaseName),
-          hasInitialInput: true,
-        };
+  const parallelErrorList: ProgramError[] = [];
+  const voictentLocatorList: VoictentLocator[] = [];
+
+  if (populatedVoictentInstanceList.length === 0) {
+    parallelErrorList.push({
+      errorId: 'getEngineProgramLocator/unparseable-populated-voictent-list',
+      message:
+        'Unable able to parse populated input voictent list. Expected an array expression with "as const"',
+      locator: {
+        typeName: ErrorLocatorTypeName.FileErrorLocator,
+        filePath: engineProgramFile.filePath,
       },
-    );
+      metadata: {
+        reason: 'A program without inputs will not do anything',
+        populatedVoictentTupleProperty,
+        populatedVoictentTupleValueNode,
+      },
+    });
+  }
+
+  populatedVoictentInstanceList.forEach((voictentInstance, originalIndex) => {
+    const voqueTypeReferenceNode = isNewExpressionWithSpecificTypeParameters<
+      [AST_NODE_TYPES.TSTypeReference]
+    >(voictentInstance, [AST_NODE_TYPES.TSTypeReference])
+      ? voictentInstance.typeParameters.params[0]
+      : null;
+
+    const voqueName = isIdentifiableTypeScriptTypeReference(
+      voqueTypeReferenceNode,
+    )
+      ? voqueTypeReferenceNode.typeName.name
+      : null;
+
+    if (voqueName === null) {
+      parallelErrorList.push({
+        errorId: 'getEngineProgramLocator/unparseable-populated-voictent',
+        message:
+          'Unable able to parse populated input voictent. Expected a new expression with at least one type parameter',
+        locator: {
+          typeName: ErrorLocatorTypeName.FileErrorLocator,
+          filePath: engineProgramFile.filePath,
+        },
+        metadata: {
+          originalIndex,
+          voqueTypeReferenceNode,
+          voictentInstance,
+        },
+      });
+      return;
+    }
+
+    const voictentName = voqueName.replace(/Voque$/, '');
+
+    voictentLocatorList.push({
+      name: voictentName,
+      hasInitialInput: true,
+    });
+  });
 
   const estinantListProperty = engineCallExpressionPropertyList.find(
     (property) =>
@@ -385,9 +420,28 @@ const getAdaptedEngineProgramLocator = ({
   const estinantListValueNode = estinantListProperty?.value;
 
   const estinantNodeList: TSESTree.Identifier[] =
-    isArrayExpressionOfIdentifiers(estinantListValueNode)
-      ? estinantListValueNode.elements
+    isSpecificConstantTypeScriptAsExpression<ArrayExpressionOfIdentifiers>(
+      estinantListValueNode,
+      isArrayExpressionOfIdentifiers,
+    )
+      ? estinantListValueNode.expression.elements
       : [];
+
+  if (estinantNodeList.length === 0) {
+    parallelErrorList.push({
+      errorId: 'getEngineProgramLocator/unparseable-estinant-tuple',
+      message:
+        'Unable able to parse input estinant tuple. Expected an array literal of identifiers with "as const"',
+      locator: {
+        typeName: ErrorLocatorTypeName.FileErrorLocator,
+        filePath: engineProgramFile.filePath,
+      },
+      metadata: {
+        estinantListProperty,
+        estinantListValueNode,
+      },
+    });
+  }
 
   const estinantIdentifierList = estinantNodeList.map(
     (identifier) => identifier.name,
@@ -409,7 +463,6 @@ const getAdaptedEngineProgramLocator = ({
       fileImportsByImportedIdentifier.set(specifier, fileImport);
     });
 
-  const parallelErrorList: ProgramError[] = [];
   const engineEstinantLocatorList: EngineEstinantLocator2[] = [];
 
   estinantIdentifierList.forEach((identifierName) => {

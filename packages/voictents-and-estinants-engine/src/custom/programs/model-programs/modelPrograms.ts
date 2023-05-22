@@ -36,23 +36,6 @@ import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorVoque,
 } from '../../programmable-units/error/programError';
-import { InMemoryInteractiveGraphConstituentVoictent } from '../../programmable-units/graph-visualization/inMemoryInteractiveGraphConstituentVoictent';
-import {
-  DIRECTED_GRAPH_GEPP,
-  DirectedGraphVoque,
-} from '../../programmable-units/graph-visualization/directed-graph/directedGraph';
-import {
-  ASSOCIABLE_DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-  AssociableDirectedGraphMetadataByIdVoque,
-} from '../../programmable-units/graph-visualization/associableDirectedGraphMetadataById';
-import {
-  ASSOCIABLE_GRAPHVIZ_CODE_GEPP,
-  AssociableGraphvizCodeVoque,
-} from '../../programmable-units/graph-visualization/associableGraphvizCode';
-import {
-  ASSOCIABLE_SVG_DOCUMENT_GEPP,
-  AssociableSvgDocumentVoque,
-} from '../../programmable-units/graph-visualization/associableSvgDocument';
 import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,
@@ -83,28 +66,6 @@ digikikify({
       gepp: PROGRAM_ERROR_GEPP,
       initialHubblepupTuple: [],
     }),
-    new InMemoryInteractiveGraphConstituentVoictent<DirectedGraphVoque>({
-      gepp: DIRECTED_GRAPH_GEPP,
-      initialHubblepupTuple: [],
-    }),
-    new InMemoryInteractiveGraphConstituentVoictent<AssociableDirectedGraphMetadataByIdVoque>(
-      {
-        gepp: ASSOCIABLE_DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-        initialHubblepupTuple: [],
-      },
-    ),
-    new InMemoryInteractiveGraphConstituentVoictent<AssociableGraphvizCodeVoque>(
-      {
-        gepp: ASSOCIABLE_GRAPHVIZ_CODE_GEPP,
-        initialHubblepupTuple: [],
-      },
-    ),
-    new InMemoryInteractiveGraphConstituentVoictent<AssociableSvgDocumentVoque>(
-      {
-        gepp: ASSOCIABLE_SVG_DOCUMENT_GEPP,
-        initialHubblepupTuple: [],
-      },
-    ),
     new InMemoryVoictent<OutputFileVoque>({
       gepp: OUTPUT_FILE_GEPP,
       initialHubblepupTuple: [],

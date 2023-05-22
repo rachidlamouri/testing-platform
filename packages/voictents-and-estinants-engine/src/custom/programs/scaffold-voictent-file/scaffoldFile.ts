@@ -3,7 +3,7 @@ import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { getFileMetadata } from '../../programmable-units/file/getFileMetadata';
 import {
   SCAFFOLD_CONFIGURATION_GEPP,
-  ScaffoldConfigurationVoictent,
+  ScaffoldConfigurationVoque,
 } from './scaffoldConfiguration';
 
 const partsToPascal = (x: string[]): string => {
@@ -33,7 +33,7 @@ const partsToKebab = (x: string[]): string => {
 export const scaffoldFile = buildEstinant({
   name: 'scaffoldFile',
 })
-  .fromHubblepup<ScaffoldConfigurationVoictent>({
+  .fromHubblepup2<ScaffoldConfigurationVoque>({
     gepp: SCAFFOLD_CONFIGURATION_GEPP,
   })
   .onPinbe((scaffoldConfiguration) => {

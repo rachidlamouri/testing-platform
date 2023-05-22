@@ -1,3 +1,7 @@
+/**
+ * @todo tie the engine function keys back to the source files somehow
+ */
+
 import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 import { Voictent } from '../../adapter/voictent';
 
@@ -28,7 +32,7 @@ export type AdaptedEngineFunctionConfiguration = {
   filePath: 'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts';
   exportedIdentifier: 'digikikify';
   estinantListKeyIdentifierName: 'estinantTuple';
-  initialVoictentByGeppKeyIdentifierName: 'initialHubblepupTupleByGepp';
+  populatedVoictentTupleKeyIdentifierName: 'populatedVoictentTuple';
 };
 
 export type EngineFunctionConfiguration =
@@ -79,5 +83,5 @@ export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfigu
       'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts',
     exportedIdentifier: 'digikikify',
     estinantListKeyIdentifierName: 'estinantTuple',
-    initialVoictentByGeppKeyIdentifierName: 'initialHubblepupTupleByGepp',
+    populatedVoictentTupleKeyIdentifierName: 'populatedVoictentTuple',
   };

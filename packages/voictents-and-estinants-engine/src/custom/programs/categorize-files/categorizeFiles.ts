@@ -1,6 +1,7 @@
 import { digikikify } from '../../../type-script-adapter/digikikify';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  FileSystemObjectEnumeratorConfigurationVoque,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
@@ -16,14 +17,14 @@ import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
  */
 digikikify({
   populatedVoictentTuple: [
-    new InMemoryVoictent({
+    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
       gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialHubblepupTuple: [
         VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
     }),
-  ],
+  ] as const,
   uninferableVoictentTuple: [],
-  estinantTuple: [enumerateFileSystemObjects, categorizeFiles],
+  estinantTuple: [enumerateFileSystemObjects, categorizeFiles] as const,
   quirmDebugger: buildBasicQuirmDebugger('categorizeFiles'),
 });
