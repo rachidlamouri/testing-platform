@@ -1,5 +1,4 @@
-import { Grition } from '../../../adapter/grition';
-import { OdeshinFromGrition } from '../../../adapter/odeshin';
+import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../../adapter/voictent';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 
@@ -21,16 +20,12 @@ export type LimboBoundaryConfiguration = {
 };
 
 export type BoundaryConfiguration = {
+  zorn: string;
   overview: OverviewBoundaryConfiguration;
   internal: InternalBoundaryConfiguration[];
   external: ExternalBoundaryConfiguration;
   limbo: LimboBoundaryConfiguration;
 };
-
-export type BoundaryConfigurationGrition = Grition<BoundaryConfiguration>;
-
-export type BoundaryConfigurationOdeshin =
-  OdeshinFromGrition<BoundaryConfigurationGrition>;
 
 export const BOUNDARY_CONFIGURATION_GEPP = 'boundary-configuration';
 
@@ -38,30 +33,33 @@ export type BoundaryConfigurationGepp = typeof BOUNDARY_CONFIGURATION_GEPP;
 
 export type BoundaryConfigurationVoictent = Voictent<
   BoundaryConfigurationGepp,
-  BoundaryConfigurationOdeshin
+  BoundaryConfiguration
+>;
+
+export type BoundaryConfigurationVoque = InMemoryOdeshin2Voque<
+  BoundaryConfigurationGepp,
+  BoundaryConfiguration
 >;
 
 export const createBoundaryConfiguration = (
   directoryPathList: string[],
-): BoundaryConfigurationOdeshin => {
+): BoundaryConfiguration => {
   return {
     zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
-    grition: {
-      overview: {
-        instanceId: 'overview-boundary',
-      },
-      internal: directoryPathList.map((directoryPath, index) => {
-        return {
-          instanceId: `internal-directory-boundary-${index}`,
-          directoryPath,
-        };
-      }),
-      external: {
-        instanceId: 'external-boundary',
-      },
-      limbo: {
-        instanceId: 'limbo-boundary',
-      },
+    overview: {
+      instanceId: 'overview-boundary',
+    },
+    internal: directoryPathList.map((directoryPath, index) => {
+      return {
+        instanceId: `internal-directory-boundary-${index}`,
+        directoryPath,
+      };
+    }),
+    external: {
+      instanceId: 'external-boundary',
+    },
+    limbo: {
+      instanceId: 'limbo-boundary',
     },
   };
 };

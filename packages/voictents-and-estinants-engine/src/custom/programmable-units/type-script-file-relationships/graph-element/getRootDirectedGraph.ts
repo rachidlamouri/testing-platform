@@ -1,34 +1,34 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
-  DirectedGraphVoictent,
   DIRECTED_GRAPH_GEPP,
   DirectedGraph,
   DirectedSubgraph,
+  DirectedGraphVoque,
 } from '../../graph-visualization/directed-graph/directedGraph';
 import { DirectedGraphNode } from '../../graph-visualization/directed-graph/directedGraphNode';
 import {
   BOUNDARY_METADATA_GEPP,
-  BoundaryMetadataVoictent,
+  BoundaryMetadataVoque,
 } from './boundaryMetadata';
 import {
   DIRECTORY_METADATA_GEPP,
-  DirectoryMetadataVoictent,
+  DirectoryMetadataVoque,
 } from './directoryMetadata';
 import {
   FILE_NODE_METADATA_GEPP,
-  FileNodeMetadataVoictent,
+  FileNodeMetadataVoque,
 } from './fileNodeMetadata';
-import { ROOT_METADATA_GEPP, RootMetadataVoictent } from './rootMetadata';
+import { ROOT_METADATA_GEPP, RootMetadataVoque } from './rootMetadata';
 import { DirectedGraphEdge } from '../../graph-visualization/directed-graph/directedGraphEdge';
 import { Tuple } from '../../../../utilities/semantic-types/tuple';
 import {
   EXTERNAL_MODULE_METADATA_GEPP,
-  ExternalModuleMetadataVoictent,
+  ExternalModuleMetadataVoque,
 } from './externalModuleMetadata';
 import { OVERVIEW_BOUNDARY_ZORN } from './boundaryConfiguration';
 import { COMMON_ATTRIBUTE_BY_KEY, FONT_SIZE } from './commonAttributeByKey';
 import { Shape } from '../../graph-visualization/directed-graph/attribute';
-import { RootDirectoryVoictent, ROOT_DIRECTORY_GEPP } from '../rootDirectory';
+import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from '../rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import { getTextDigest } from '../../../../utilities/getTextDigest';
 
@@ -38,39 +38,38 @@ import { getTextDigest } from '../../../../utilities/getTextDigest';
 export const getRootDirectedGraph = buildEstinant({
   name: 'getRootDirectedGraph',
 })
-  .fromGrition<RootMetadataVoictent>({
+  .fromHubblepup2<RootMetadataVoque>({
     gepp: ROOT_METADATA_GEPP,
   })
-  .andFromGritionTuple<RootMetadataVoictent, [string]>({
+  .andFromHubblepupTuple2<RootMetadataVoque, [string]>({
     gepp: ROOT_METADATA_GEPP,
     framate: () => [OVERVIEW_BOUNDARY_ZORN],
-    croard: (rightInput) => rightInput.zorn,
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromGritionTuple<BoundaryMetadataVoictent, Tuple<string>>({
+  .andFromHubblepupTuple2<BoundaryMetadataVoque, Tuple<string>>({
     gepp: BOUNDARY_METADATA_GEPP,
-    framate: (leftInput) => [...leftInput.grition.relevantBoundaryIdSet],
-    croard: (rightInput) => rightInput.grition.id,
+    framate: (leftInput) => [...leftInput.hubblepup.relevantBoundaryIdSet],
+    croard: (rightInput) => rightInput.hubblepup.id,
   })
-  .andFromGritionTuple<RootDirectoryVoictent, [string]>({
+  .andFromHubblepupTuple2<RootDirectoryVoque, [string]>({
     gepp: ROOT_DIRECTORY_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
-    croard: (rightInput) => rightInput.zorn,
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromOdeshinVoictent<DirectoryMetadataVoictent>({
+  .andFromVoictent2<DirectoryMetadataVoque>({
     gepp: DIRECTORY_METADATA_GEPP,
   })
-  .andFromOdeshinVoictent<FileNodeMetadataVoictent>({
+  .andFromVoictent2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
   })
-  .andFromOdeshinVoictent<ExternalModuleMetadataVoictent>({
+  .andFromVoictent2<ExternalModuleMetadataVoque>({
     gepp: EXTERNAL_MODULE_METADATA_GEPP,
   })
-  .andFromVoictent<RootMetadataVoictent>({
+  .andFromVoictent2<RootMetadataVoque>({
     gepp: ROOT_METADATA_GEPP,
   })
-  .toGrition<DirectedGraphVoictent>({
+  .toHubblepup2<DirectedGraphVoque>({
     gepp: DIRECTED_GRAPH_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe(
     (
@@ -112,6 +111,7 @@ export const getRootDirectedGraph = buildEstinant({
         });
 
       const rootDirectedGraph: DirectedGraph = {
+        zorn: rootMetadata.zorn,
         isRoot: true,
         attributeByKey: {
           id: rootMetadata.id,
@@ -126,8 +126,8 @@ export const getRootDirectedGraph = buildEstinant({
       if (rootMetadata.id === overviewRootMetadata.id) {
         const overviewSubgraphByName = new Map<string, DirectedSubgraph>();
 
-        allRootMetadataOdeshinList.forEach(({ zorn, grition: metadata }) => {
-          const filePath = zorn;
+        allRootMetadataOdeshinList.forEach((metadata) => {
+          const filePath = metadata.zorn;
           const modifiedFilePath = filePath.replace(
             `internal/${rootDirectory.directoryPath}/`,
             '',

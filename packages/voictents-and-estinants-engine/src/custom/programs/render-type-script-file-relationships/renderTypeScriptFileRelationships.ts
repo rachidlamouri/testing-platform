@@ -4,6 +4,7 @@ import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  FileSystemObjectEnumeratorConfigurationVoque,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
@@ -18,6 +19,7 @@ import { getDirectoryInstanceIdByDirectoryPath } from '../../programmable-units/
 import { getExternalModuleCollection } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleCollection';
 import {
   BOUNDARY_CONFIGURATION_GEPP,
+  BoundaryConfigurationVoque,
   createBoundaryConfiguration,
 } from '../../programmable-units/type-script-file-relationships/graph-element/boundaryConfiguration';
 import { getBoundaryMetadata } from '../../programmable-units/type-script-file-relationships/graph-element/getBoundaryMetadata';
@@ -33,6 +35,16 @@ import { getSvgMetadataList } from '../../programmable-units/type-script-file-re
 import { markUnusedNodes } from '../../programmable-units/type-script-file-relationships/markUnusedNodes';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { getOutputFileCount } from './getOutputFileCount';
+import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
+import {
+  ProgramErrorVoque,
+  PROGRAM_ERROR_GEPP,
+} from '../../programmable-units/error/programError';
+import {
+  OutputFileVoque,
+  OUTPUT_FILE_GEPP,
+} from '../../programmable-units/output-file/outputFile';
+import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 /**
  * Assembles a knowledge graph of the TypeScript files in this package and their
@@ -45,40 +57,56 @@ import { getOutputFileCount } from './getOutputFileCount';
  * to inconsistent floating point numbers in the layout
  */
 digikikify({
-  initialHubblepupTupleByGepp: {
-    [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
-      VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
-    ],
-    [BOUNDARY_CONFIGURATION_GEPP]: [
-      createBoundaryConfiguration([
-        'packages/voictents-and-estinants-engine/src/core',
+  populatedVoictentTuple: [
+    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
+      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+      initialHubblepupTuple: [
+        VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+      ],
+    }),
+    new InMemoryOdeshin2Voictent<BoundaryConfigurationVoque>({
+      gepp: BOUNDARY_CONFIGURATION_GEPP,
+      initialHubblepupTuple: [
+        createBoundaryConfiguration([
+          'packages/voictents-and-estinants-engine/src/core',
 
-        'packages/voictents-and-estinants-engine/src/custom/adapter',
-        'packages/voictents-and-estinants-engine/src/custom/debugger',
-        'packages/voictents-and-estinants-engine/src/custom/programmable-units',
+          'packages/voictents-and-estinants-engine/src/custom/adapter',
+          'packages/voictents-and-estinants-engine/src/custom/debugger',
+          'packages/voictents-and-estinants-engine/src/custom/programmable-units',
 
-        'packages/voictents-and-estinants-engine/src/custom/programs/categorize-files',
-        'packages/voictents-and-estinants-engine/src/custom/programs/comments-example',
-        'packages/voictents-and-estinants-engine/src/custom/programs/estinant-builder-example',
-        'packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script',
-        'packages/voictents-and-estinants-engine/src/custom/programs/model-programs',
-        'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships',
-        'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file',
-        'packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render',
-        'packages/voictents-and-estinants-engine/src/custom/programs/test-typed-datum',
-        'packages/voictents-and-estinants-engine/src/custom/programs/test-voictent-input',
+          'packages/voictents-and-estinants-engine/src/custom/programs/categorize-files',
+          'packages/voictents-and-estinants-engine/src/custom/programs/comments-example',
+          'packages/voictents-and-estinants-engine/src/custom/programs/estinant-builder-example',
+          'packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script',
+          'packages/voictents-and-estinants-engine/src/custom/programs/model-programs',
+          'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships',
+          'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file',
+          'packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render',
+          'packages/voictents-and-estinants-engine/src/custom/programs/test-typed-datum',
+          'packages/voictents-and-estinants-engine/src/custom/programs/test-voictent-input',
 
-        'packages/voictents-and-estinants-engine/src/example-programs',
-        'packages/voictents-and-estinants-engine/src/type-script-adapter',
+          'packages/voictents-and-estinants-engine/src/example-programs',
+          'packages/voictents-and-estinants-engine/src/type-script-adapter',
 
-        'packages/voictents-and-estinants-engine/src/utilities/file',
-        'packages/voictents-and-estinants-engine/src/utilities/semantic-types',
-        'packages/voictents-and-estinants-engine/src/utilities/type-script-ast',
-        'packages/voictents-and-estinants-engine/src/utilities/typed-datum',
-        'packages/voictents-and-estinants-engine/src/utilities',
-      ]),
-    ],
-  },
+          'packages/voictents-and-estinants-engine/src/utilities/file',
+          'packages/voictents-and-estinants-engine/src/utilities/semantic-types',
+          'packages/voictents-and-estinants-engine/src/utilities/type-script-ast',
+          'packages/voictents-and-estinants-engine/src/utilities/typed-datum',
+          'packages/voictents-and-estinants-engine/src/utilities',
+        ]),
+      ],
+    }),
+  ] as const,
+  uninferableVoictentTuple: [
+    new InMemoryVoictent<ProgramErrorVoque>({
+      gepp: PROGRAM_ERROR_GEPP,
+      initialHubblepupTuple: [],
+    }),
+    new InMemoryVoictent<OutputFileVoque>({
+      gepp: OUTPUT_FILE_GEPP,
+      initialHubblepupTuple: [],
+    }),
+  ],
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
@@ -115,6 +143,6 @@ digikikify({
 
     markUnusedNodes,
     reportErrors,
-  ],
+  ] as const,
   quirmDebugger: buildQuirmDebugger('renderTypeScriptFileRelationships'),
 });

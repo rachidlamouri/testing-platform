@@ -28,6 +28,10 @@ import {
   buildRightInputHubblepupTupleAppreffingeBuilder2,
   RightInputHubblepupTupleAppreffingeBuilderParent2,
 } from './rightInputHubblepupTupleAppreffingeBuilder2';
+import {
+  buildRightInputVoictentAppreffingeBuilder2,
+  RightInputVoictentAppreffingeBuilderParent2,
+} from './rightInputVoictentAppreffingeBuilder2';
 
 type EmptyAdaptedRightInputVickenTuple = [];
 
@@ -44,6 +48,10 @@ export type LeftInputHubblepupAppreffingeBuilder2 = <
 ) => SpreadN<
   [
     RightInputHubblepupTupleAppreffingeBuilderParent2<
+      AdaptedLeftInputHubblepupVicken<TInputVoque>,
+      EmptyAdaptedRightInputVickenTuple
+    >,
+    RightInputVoictentAppreffingeBuilderParent2<
       AdaptedLeftInputHubblepupVicken<TInputVoque>,
       EmptyAdaptedRightInputVickenTuple
     >,
@@ -98,6 +106,10 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
             AdaptedLeftInputHubblepupVicken<TInputVoque>,
             EmptyAdaptedRightInputVickenTuple
           >(nextContext),
+        andFromVoictent2: buildRightInputVoictentAppreffingeBuilder2<
+          AdaptedLeftInputHubblepupVicken<TInputVoque>,
+          EmptyAdaptedRightInputVickenTuple
+        >(nextContext),
 
         onPinbe: buildPinbetunfBuilder2<
           AdaptedLeftInputHubblepupVicken<TInputVoque>,

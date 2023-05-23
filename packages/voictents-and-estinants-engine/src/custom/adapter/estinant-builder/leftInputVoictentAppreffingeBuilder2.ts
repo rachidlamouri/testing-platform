@@ -14,6 +14,14 @@ import {
   buildRightInputVoictentAppreffingeBuilder2,
   RightInputVoictentAppreffingeBuilderParent2,
 } from './rightInputVoictentAppreffingeBuilder2';
+import {
+  buildOutputHubblepupTupleAppreffingeBuilder2,
+  OutputHubblepupTupleAppreffingeBuilderParent2,
+} from './outputHubblepupTupleAppreffingeBuilder2';
+import {
+  buildRightInputHubblepupTupleAppreffingeBuilder2,
+  RightInputHubblepupTupleAppreffingeBuilderParent2,
+} from './rightInputHubblepupTupleAppreffingeBuilder2';
 
 type EmptyAdaptedRightInputVickenTuple = [];
 
@@ -29,8 +37,17 @@ export type LeftInputVoictentAppreffingeBuilder2 = <
       AdaptedLeftInputVoictentVicken<TInputVoque>,
       EmptyAdaptedRightInputVickenTuple
     >,
+    RightInputHubblepupTupleAppreffingeBuilderParent2<
+      AdaptedLeftInputVoictentVicken<TInputVoque>,
+      EmptyAdaptedRightInputVickenTuple
+    >,
 
     OutputHubblepupAppreffingeBuilderParent2<
+      AdaptedLeftInputVoictentVicken<TInputVoque>,
+      EmptyAdaptedRightInputVickenTuple,
+      EmptyAdaptedOutputVickenTuple
+    >,
+    OutputHubblepupTupleAppreffingeBuilderParent2<
       AdaptedLeftInputVoictentVicken<TInputVoque>,
       EmptyAdaptedRightInputVickenTuple,
       EmptyAdaptedOutputVickenTuple
@@ -59,8 +76,18 @@ export const buildLeftInputVoictentAppreffingeBuilder2 = (
           AdaptedLeftInputVoictentVicken<TInputVoque>,
           EmptyAdaptedRightInputVickenTuple
         >(nextContext),
+        andFromHubblepupTuple2:
+          buildRightInputHubblepupTupleAppreffingeBuilder2<
+            AdaptedLeftInputVoictentVicken<TInputVoque>,
+            EmptyAdaptedRightInputVickenTuple
+          >(nextContext),
 
         toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
+          AdaptedLeftInputVoictentVicken<TInputVoque>,
+          EmptyAdaptedRightInputVickenTuple,
+          EmptyAdaptedOutputVickenTuple
+        >(nextContext),
+        toHubblepupTuple2: buildOutputHubblepupTupleAppreffingeBuilder2<
           AdaptedLeftInputVoictentVicken<TInputVoque>,
           EmptyAdaptedRightInputVickenTuple,
           EmptyAdaptedOutputVickenTuple

@@ -1,18 +1,18 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   SVG_DOCUMENT_GEPP,
-  SvgDocumentVoictent,
+  SvgDocumentVoque,
 } from '../graph-visualization/svgDocument';
 import {
   SVG_METADATA_LIST_GEPP,
-  SvgMetadataListVoictent,
+  SvgMetadataListVoque,
 } from '../graph-visualization/svgMetadataList';
 import {
   EXTERNAL_BOUNDARY_ZORN,
   LIMBO_BOUNDARY_ZORN,
   OVERVIEW_BOUNDARY_ZORN,
 } from './graph-element/boundaryConfiguration';
-import { RootDirectoryVoictent, ROOT_DIRECTORY_GEPP } from './rootDirectory';
+import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from './rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 
 /**
@@ -23,15 +23,15 @@ import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelati
 export const getSvgMetadataList = buildEstinant({
   name: 'getSvgMetadataList',
 })
-  .fromVoictent<SvgDocumentVoictent>({
+  .fromVoictent2<SvgDocumentVoque>({
     gepp: SVG_DOCUMENT_GEPP,
   })
-  .andFromGritionTuple<RootDirectoryVoictent, [string]>({
+  .andFromHubblepupTuple2<RootDirectoryVoque, [string]>({
     gepp: ROOT_DIRECTORY_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
-    croard: (rightInput) => rightInput.zorn,
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .toHubblepup<SvgMetadataListVoictent>({
+  .toHubblepup2<SvgMetadataListVoque>({
     gepp: SVG_METADATA_LIST_GEPP,
   })
   .onPinbe((svgDocumentInputList, [rootDirectory]) => {
@@ -70,8 +70,8 @@ export const getSvgMetadataList = buildEstinant({
 
           return 1;
         })
-        .map(({ zorn, grition }) => {
-          const filePath = zorn;
+        .map((document) => {
+          const filePath = document.zorn;
           const label = filePath.replace(
             `internal/${rootDirectory.directoryPath}/`,
             '',
@@ -79,7 +79,7 @@ export const getSvgMetadataList = buildEstinant({
 
           return {
             label,
-            document: grition,
+            document,
           };
         }),
     };

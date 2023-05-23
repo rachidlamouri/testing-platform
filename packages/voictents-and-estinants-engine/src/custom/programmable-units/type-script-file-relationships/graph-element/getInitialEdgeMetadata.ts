@@ -1,31 +1,31 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-  TypeScriptFileImportListVoictent,
+  TypeScriptFileImportListVoque,
 } from '../../type-script-file/typeScriptFileImportList';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import {
   PROGRAM_ERROR_GEPP,
   ErrorLocatorTypeName,
-  ProgramErrorOdeshin,
-  ProgramErrorVoictent,
+  ProgramErrorVoque,
+  ProgramError,
 } from '../../error/programError';
 import {
   INITIAL_EDGE_METADATA_LIST_GEPP,
   InitialEdgeMetadataList,
-  InitialEdgeMetadataListVoictent,
+  InitialEdgeMetadataListVoque,
 } from './initialEdgeMetadataList';
 import {
   FILE_NODE_METADATA_GEPP,
-  FileNodeMetadataVoictent,
+  FileNodeMetadataVoque,
 } from './fileNodeMetadata';
 import {
   EXTERNAL_MODULE_METADATA_BY_SOURCE_PATH_GEPP,
-  ExternalModuleMetadataBySourcePathVoictent,
+  ExternalModuleMetadataBySourcePathVoque,
 } from './externalModuleMetadataBySourcePath';
 import {
   FILE_NODE_METADATA_BY_FILE_PATH_GEPP,
-  FileNodeMetadataByFilePathVoictent,
+  FileNodeMetadataByFilePathVoque,
 } from './fileNodeMetadataByFilePath';
 
 /**
@@ -34,41 +34,39 @@ import {
 export const getInitialEdgeMetadata = buildEstinant({
   name: 'getInitialEdgeMetadata',
 })
-  .fromHubblepup<FileNodeMetadataVoictent>({
+  .fromHubblepup2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
   })
-  .andFromGritionTuple<TypeScriptFileImportListVoictent, [string]>({
+  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [string]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    framate: (leftInput) => [leftInput.zorn],
-    croard: (rightInput) => rightInput.zorn,
+    framate: (leftInput) => [leftInput.indexByName.zorn],
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromGritionTuple<FileNodeMetadataByFilePathVoictent, [string]>({
+  .andFromHubblepupTuple2<FileNodeMetadataByFilePathVoque, [string]>({
     gepp: FILE_NODE_METADATA_BY_FILE_PATH_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
-    croard: (rightInput) => rightInput.zorn,
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromGritionTuple<ExternalModuleMetadataBySourcePathVoictent, [string]>({
+  .andFromHubblepupTuple2<ExternalModuleMetadataBySourcePathVoque, [string]>({
     gepp: EXTERNAL_MODULE_METADATA_BY_SOURCE_PATH_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
-    croard: (rightInput) => rightInput.zorn,
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .toHubblepup<InitialEdgeMetadataListVoictent>({
+  .toHubblepup2<InitialEdgeMetadataListVoque>({
     gepp: INITIAL_EDGE_METADATA_LIST_GEPP,
   })
-  .toHubblepupTuple<ProgramErrorVoictent>({
+  .toHubblepupTuple2<ProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe(
     (
-      leftInput,
-      [importList],
-      [fileNodeMetadataByFilePath],
-      [externalModuleMetadataIdBySourcePath],
+      fileNodeMetadata,
+      [{ list: importList }],
+      [{ grition: fileNodeMetadataByFilePath }],
+      [{ grition: externalModuleMetadataIdBySourcePath }],
     ) => {
-      const fileNodeMetadata = leftInput.grition;
-
-      const errorList: ProgramErrorOdeshin[] = [];
-      const edgeMetadataList: InitialEdgeMetadataList = [];
+      const errorList: ProgramError[] = [];
+      const edgeMetadataList: InitialEdgeMetadataList['grition'] = [];
 
       const headList = importList.map((importedItem) => {
         const headMetadata = importedItem.isInternal
@@ -81,20 +79,17 @@ export const getInitialEdgeMetadata = buildEstinant({
         };
       });
 
-      headList.forEach(({ headMetadata, importedItem }, index) => {
+      headList.forEach(({ headMetadata, importedItem }) => {
         if (headMetadata === undefined) {
           errorList.push({
-            zorn: `getInitialEdgeMetadata/${leftInput.zorn}/${index}`,
-            grition: {
-              message: `Unable to find metadata for the imported item "${importedItem.sourcePath}"`,
-              locator: {
-                typeName: ErrorLocatorTypeName.FileErrorLocator,
-                filePath: fileNodeMetadata.filePath,
-              },
-              metadata: {
-                fileNodeMetadata,
-                importedItem,
-              },
+            message: `Unable to find metadata for the imported item "${importedItem.sourcePath}"`,
+            locator: {
+              typeName: ErrorLocatorTypeName.FileErrorLocator,
+              filePath: fileNodeMetadata.filePath,
+            },
+            metadata: {
+              fileNodeMetadata,
+              importedItem,
             },
           });
         } else {
@@ -106,11 +101,11 @@ export const getInitialEdgeMetadata = buildEstinant({
       });
 
       return {
-        [PROGRAM_ERROR_GEPP]: errorList,
         [INITIAL_EDGE_METADATA_LIST_GEPP]: {
-          zorn: leftInput.zorn,
+          zorn: fileNodeMetadata.zorn,
           grition: edgeMetadataList,
         },
+        [PROGRAM_ERROR_GEPP]: errorList,
       };
     },
   )

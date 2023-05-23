@@ -1,14 +1,10 @@
-import { Grition } from '../../adapter/grition';
-import { OdeshinFromGrition } from '../../adapter/odeshin';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 
-export type DirectoryInstanceIdByDirectoryPath = Map<string, string>;
-
-export type DirectoryInstanceIdByDirectoryPathGrition =
-  Grition<DirectoryInstanceIdByDirectoryPath>;
-
-export type DirectoryInstanceIdByDirectoryPathOdeshin =
-  OdeshinFromGrition<DirectoryInstanceIdByDirectoryPathGrition>;
+export type DirectoryInstanceIdByDirectoryPath = {
+  zorn: string;
+  grition: Map<string, string>;
+};
 
 export const DIRECTORY_INSTANCE_ID_BY_FILE_PATH_GEPP =
   'directory-instance-id-by-file-path';
@@ -18,5 +14,10 @@ export type DirectoryInstanceIdByDirectoryPathGepp =
 
 export type DirectoryInstanceIdByDirectoryPathVoictent = Voictent<
   DirectoryInstanceIdByDirectoryPathGepp,
-  DirectoryInstanceIdByDirectoryPathOdeshin
+  DirectoryInstanceIdByDirectoryPath
+>;
+
+export type DirectoryInstanceIdByDirectoryPathVoque = InMemoryOdeshin2Voque<
+  DirectoryInstanceIdByDirectoryPathGepp,
+  DirectoryInstanceIdByDirectoryPath
 >;

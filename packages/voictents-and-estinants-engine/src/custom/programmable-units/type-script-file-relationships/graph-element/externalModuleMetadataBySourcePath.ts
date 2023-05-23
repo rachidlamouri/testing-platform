@@ -1,18 +1,11 @@
-import { Grition } from '../../../adapter/grition';
-import { OdeshinFromGrition } from '../../../adapter/odeshin';
+import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../../adapter/voictent';
 import { ExternalModuleMetadata } from './externalModuleMetadata';
 
-export type ExternalModuleMetadataBySourcePath = Map<
-  string,
-  ExternalModuleMetadata
->;
-
-export type ExternalModuleMetadataBySourcePathGrition =
-  Grition<ExternalModuleMetadataBySourcePath>;
-
-export type ExternalModuleMetadataBySourcePathOdeshin =
-  OdeshinFromGrition<ExternalModuleMetadataBySourcePathGrition>;
+export type ExternalModuleMetadataBySourcePath = {
+  zorn: string;
+  grition: Map<string, ExternalModuleMetadata>;
+};
 
 export const EXTERNAL_MODULE_METADATA_BY_SOURCE_PATH_GEPP =
   'external-module-metadata-by-source-path';
@@ -22,5 +15,10 @@ export type ExternalModuleMetadataBySourcePathGepp =
 
 export type ExternalModuleMetadataBySourcePathVoictent = Voictent<
   ExternalModuleMetadataBySourcePathGepp,
-  ExternalModuleMetadataBySourcePathOdeshin
+  ExternalModuleMetadataBySourcePath
+>;
+
+export type ExternalModuleMetadataBySourcePathVoque = InMemoryOdeshin2Voque<
+  ExternalModuleMetadataBySourcePathGepp,
+  ExternalModuleMetadataBySourcePath
 >;

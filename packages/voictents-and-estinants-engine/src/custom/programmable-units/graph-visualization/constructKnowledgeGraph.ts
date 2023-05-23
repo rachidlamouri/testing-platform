@@ -1,17 +1,14 @@
 import fs from 'fs';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { HtmlFileVoictent, HTML_FILE_GEPP } from '../html-file/htmlFile';
-import {
-  OutputFileVoictent,
-  OUTPUT_FILE_GEPP,
-} from '../output-file/outputFile';
+import { HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
+import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
 import {
   SVG_METADATA_LIST_GEPP,
-  SvgMetadataListVoictent,
+  SvgMetadataListVoque,
 } from './svgMetadataList';
 import {
+  DirectedGraphMetadataByIdVoque,
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-  DirectedGraphMetadataByIdVoictent,
 } from './directedGraphMetadataById';
 
 const KNOWLEDGE_GRAPH_FILE_PATH =
@@ -24,37 +21,39 @@ const KNOWLEDGE_GRAPH_FILE_PATH =
 export const constructKnowledgeGraph = buildEstinant({
   name: 'constructKnowledgeGraph',
 })
-  .fromHubblepup<SvgMetadataListVoictent>({
+  .fromHubblepup2<SvgMetadataListVoque>({
     gepp: SVG_METADATA_LIST_GEPP,
   })
-  .andFromGritionTuple<HtmlFileVoictent, [string]>({
+  .andFromHubblepupTuple2<HtmlFileVoque, [string]>({
     gepp: HTML_FILE_GEPP,
     framate: () => [KNOWLEDGE_GRAPH_FILE_PATH],
-    croard: (rightInput) => rightInput.zorn,
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromOdeshinVoictent<DirectedGraphMetadataByIdVoictent>({
+  .andFromVoictent2<DirectedGraphMetadataByIdVoque>({
     gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   })
-  .toHubblepup<OutputFileVoictent>({
+  .toHubblepup2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
   })
-  .onPinbe((leftInput, [templateFile], metadataByIdList) => {
-    const svgMetadataList = leftInput.grition;
+  .onPinbe((identifiableSvgMetadataList, [templateFile], metadataByIdList) => {
+    const navigationItemList = identifiableSvgMetadataList.grition.map(
+      (metadata) => {
+        return { text: metadata.label };
+      },
+    );
 
-    const navigationItemList = svgMetadataList.map((metadata) => {
-      return { text: metadata.label };
-    });
+    const svgTemplateTextList = identifiableSvgMetadataList.grition.map(
+      (metadata) => {
+        const templateDocument = [
+          `<!-- ${metadata.label} -->`,
+          '<template>',
+          metadata.document,
+          '</template>',
+        ].join('\n');
 
-    const svgTemplateTextList = svgMetadataList.map((metadata) => {
-      const templateDocument = [
-        `<!-- ${metadata.label} -->`,
-        '<template>',
-        metadata.document,
-        '</template>',
-      ].join('\n');
-
-      return templateDocument;
-    });
+        return templateDocument;
+      },
+    );
 
     const htmlTemplateText = fs.readFileSync(templateFile.filePath, 'utf8');
     const navigationItemListText = JSON.stringify(navigationItemList, null, 2);
@@ -72,7 +71,7 @@ export const constructKnowledgeGraph = buildEstinant({
       )
       .replace('<!-- SVG_TEMPLATE_SET_PLACEHOLDER -->', svgTemplateText);
 
-    const fileName = leftInput.zorn.replaceAll(/\//g, '-');
+    const fileName = identifiableSvgMetadataList.zorn.replaceAll(/\//g, '-');
 
     return {
       fileName,

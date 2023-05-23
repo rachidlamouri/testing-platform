@@ -3,13 +3,13 @@ import { Shape } from '../../graph-visualization/directed-graph/attribute';
 import { EXTERNAL_BOUNDARY_ZORN } from './boundaryConfiguration';
 import {
   BOUNDARY_METADATA_GEPP,
-  BoundaryMetadataVoictent,
+  BoundaryMetadataVoque,
 } from './boundaryMetadata';
 import { COMMON_ATTRIBUTE_BY_KEY, FONT_SIZE } from './commonAttributeByKey';
-import { EXTERNAL_MODULE_GEPP, ExternalModuleVoictent } from './externalModule';
+import { EXTERNAL_MODULE_GEPP, ExternalModuleVoque } from './externalModule';
 import {
   EXTERNAL_MODULE_METADATA_GEPP,
-  ExternalModuleMetadataVoictent,
+  ExternalModuleMetadataVoque,
 } from './externalModuleMetadata';
 
 /**
@@ -20,20 +20,20 @@ import {
 export const getExternalModuleMetadata = buildEstinant({
   name: 'getExternalModuleMetadata',
 })
-  .fromGrition<ExternalModuleVoictent>({
+  .fromHubblepup2<ExternalModuleVoque>({
     gepp: EXTERNAL_MODULE_GEPP,
   })
-  .andFromGritionTuple<BoundaryMetadataVoictent, [string]>({
+  .andFromHubblepupTuple2<BoundaryMetadataVoque, [string]>({
     gepp: BOUNDARY_METADATA_GEPP,
     framate: () => [EXTERNAL_BOUNDARY_ZORN],
-    croard: (rightInput) => rightInput.zorn,
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .toGrition<ExternalModuleMetadataVoictent>({
+  .toHubblepup2<ExternalModuleMetadataVoque>({
     gepp: EXTERNAL_MODULE_METADATA_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe((externalModule, [boundary]) => {
     return {
+      zorn: externalModule.zorn,
       id: externalModule.instanceId,
       boundaryId: boundary.id,
       sourcePath: externalModule.sourcePath,

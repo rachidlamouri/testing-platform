@@ -2,28 +2,26 @@ import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder
 import {
   PROGRAM_ERROR_GEPP,
   ErrorLocatorTypeName,
-  ProgramErrorVoictent,
-  ProgramError,
+  ProgramErrorVoque,
 } from '../../error/programError';
 import { Shape } from '../../graph-visualization/directed-graph/attribute';
 import {
   TYPE_SCRIPT_FILE_GEPP,
-  TypeScriptFileVoictent,
+  TypeScriptFileVoque,
 } from '../../type-script-file/typeScriptFile';
 import {
   DIRECTORY_INSTANCE_ID_BY_FILE_PATH_GEPP,
-  DirectoryInstanceIdByDirectoryPathVoictent,
+  DirectoryInstanceIdByDirectoryPathVoque,
 } from '../directoryInstanceIdByDirectoryPath';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import {
   BOUNDARY_METADATA_GEPP,
-  BoundaryMetadataVoictent,
+  BoundaryMetadataVoque,
 } from './boundaryMetadata';
 import { FONT_SIZE, COMMON_ATTRIBUTE_BY_KEY } from './commonAttributeByKey';
 import {
   FILE_NODE_METADATA_GEPP,
-  FileNodeMetadata,
-  FileNodeMetadataVoictent,
+  FileNodeMetadataVoque,
 } from './fileNodeMetadata';
 
 /**
@@ -33,41 +31,39 @@ import {
 export const getFileNodeMetadata = buildEstinant({
   name: 'getFileNodeMetadata',
 })
-  .fromHubblepup<TypeScriptFileVoictent>({
+  .fromHubblepup2<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
-  .andFromGritionTuple<DirectoryInstanceIdByDirectoryPathVoictent, [string]>({
+  .andFromHubblepupTuple2<DirectoryInstanceIdByDirectoryPathVoque, [string]>({
     gepp: DIRECTORY_INSTANCE_ID_BY_FILE_PATH_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
-    croard: (rightInput) => rightInput.zorn,
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromOdeshinVoictent<BoundaryMetadataVoictent>({
+  .andFromVoictent2<BoundaryMetadataVoque>({
     gepp: BOUNDARY_METADATA_GEPP,
   })
-  .toHubblepupTuple<ProgramErrorVoictent>({
+  .toHubblepupTuple2<ProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .toHubblepupTuple<FileNodeMetadataVoictent>({
+  .toHubblepupTuple2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
   })
-  .onPinbe((leftInput, [directoryInstanceIdByDirectoryPath], boundaryList) => {
-    const file = leftInput.grition;
+  .onPinbe(
+    (file, [{ grition: directoryInstanceIdByDirectoryPath }], boundaryList) => {
+      const directoryId = directoryInstanceIdByDirectoryPath.get(
+        file.directoryPath,
+      );
 
-    const directoryId = directoryInstanceIdByDirectoryPath.get(
-      file.directoryPath,
-    );
+      const foundBoundary = boundaryList.find(
+        (boundary) =>
+          boundary.isInternal &&
+          file.filePath.startsWith(boundary.directoryPath),
+      );
 
-    const foundBoundary = boundaryList.find(
-      (boundary) =>
-        boundary.isInternal && file.filePath.startsWith(boundary.directoryPath),
-    );
-
-    if (directoryId === undefined || foundBoundary === undefined) {
-      return {
-        [PROGRAM_ERROR_GEPP]: [
-          {
-            zorn: `getFileNodeMetadata/${leftInput.zorn}`,
-            grition: {
+      if (directoryId === undefined || foundBoundary === undefined) {
+        return {
+          [PROGRAM_ERROR_GEPP]: [
+            {
               message: 'Unable to find directory id or boundary id',
               locator: {
                 typeName: ErrorLocatorTypeName.FileErrorLocator,
@@ -78,19 +74,17 @@ export const getFileNodeMetadata = buildEstinant({
                 boundaryId: foundBoundary?.id,
                 file,
               },
-            } satisfies ProgramError,
-          },
-        ],
-        [FILE_NODE_METADATA_GEPP]: [],
-      };
-    }
+            },
+          ],
+          [FILE_NODE_METADATA_GEPP]: [],
+        };
+      }
 
-    return {
-      [PROGRAM_ERROR_GEPP]: [],
-      [FILE_NODE_METADATA_GEPP]: [
-        {
-          zorn: leftInput.zorn,
-          grition: {
+      return {
+        [PROGRAM_ERROR_GEPP]: [],
+        [FILE_NODE_METADATA_GEPP]: [
+          {
+            zorn: file.zorn,
             id: file.instanceId,
             directoryId,
             boundaryId: foundBoundary.id,
@@ -102,9 +96,9 @@ export const getFileNodeMetadata = buildEstinant({
               color: 'gray',
               ...COMMON_ATTRIBUTE_BY_KEY,
             },
-          } satisfies FileNodeMetadata,
-        },
-      ],
-    };
-  })
+          },
+        ],
+      };
+    },
+  )
   .assemble();

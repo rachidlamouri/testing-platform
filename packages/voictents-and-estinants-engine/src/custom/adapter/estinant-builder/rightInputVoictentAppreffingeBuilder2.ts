@@ -5,6 +5,10 @@ import {
   InputOutputContext,
 } from './estinantBuilderContext';
 import {
+  buildOutputHubblepupAppreffingeBuilder2,
+  OutputHubblepupAppreffingeBuilderParent2,
+} from './outputHubblepupAppreffingeBuilder2';
+import {
   OutputHubblepupTupleAppreffingeBuilderParent2,
   buildOutputHubblepupTupleAppreffingeBuilder2,
 } from './outputHubblepupTupleAppreffingeBuilder2';
@@ -32,12 +36,21 @@ export type RightInputVoictentAppreffingeBuilder2<
   partialRightAppreffinge: PartialRightVoictentAppreffinge<TRightInputVoque>,
 ) => SpreadN<
   [
-    RightInputVoictentAppreffingeBuilder2<
+    RightInputVoictentAppreffingeBuilderParent2<
       TAdaptedLeftInputVicken,
       NextAdaptedRightInputVickenTuple<
         TAdaptedRightInputVickenTuple,
         TRightInputVoque
       >
+    >,
+
+    OutputHubblepupAppreffingeBuilderParent2<
+      TAdaptedLeftInputVicken,
+      NextAdaptedRightInputVickenTuple<
+        TAdaptedRightInputVickenTuple,
+        TRightInputVoque
+      >,
+      EmptyAdaptedOutputVickenTuple
     >,
     OutputHubblepupTupleAppreffingeBuilderParent2<
       TAdaptedLeftInputVicken,
@@ -83,6 +96,14 @@ export const buildRightInputVoictentAppreffingeBuilder2 = <
         >
       >(nextContext),
 
+      toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
+        TAdaptedLeftInputVicken,
+        NextAdaptedRightInputVickenTuple<
+          TAdaptedRightInputVickenTuple,
+          TRightInputVoque
+        >,
+        EmptyAdaptedOutputVickenTuple
+      >(nextContext),
       toHubblepupTuple2: buildOutputHubblepupTupleAppreffingeBuilder2<
         TAdaptedLeftInputVicken,
         NextAdaptedRightInputVickenTuple<

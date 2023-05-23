@@ -1,12 +1,12 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-  TypeScriptFileImportListVoictent,
+  TypeScriptFileImportListVoque,
 } from '../../type-script-file/typeScriptFileImportList';
 import {
   EXTERNAL_MODULE_GEPP,
-  ExternalModuleOdeshin,
-  ExternalModuleVoictent,
+  ExternalModule,
+  ExternalModuleVoque,
 } from './externalModule';
 import { getTextDigest } from '../../../../utilities/getTextDigest';
 
@@ -17,15 +17,15 @@ import { getTextDigest } from '../../../../utilities/getTextDigest';
 export const getExternalModuleCollection = buildEstinant({
   name: 'getExternalModuleCollection',
 })
-  .fromOdeshinVoictent<TypeScriptFileImportListVoictent>({
+  .fromVoictent2<TypeScriptFileImportListVoque>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
-  .toHubblepupTuple<ExternalModuleVoictent>({
+  .toHubblepupTuple2<ExternalModuleVoque>({
     gepp: EXTERNAL_MODULE_GEPP,
   })
   .onPinbe((importListList) => {
     const externalSourcePathList = importListList
-      .flat()
+      .flatMap((element) => element.list)
       .filter((importItem) => {
         return !importItem.isInternal;
       })
@@ -35,14 +35,12 @@ export const getExternalModuleCollection = buildEstinant({
 
     const externalSourcePathSet = new Set(externalSourcePathList);
 
-    const outputList = [...externalSourcePathSet].map<ExternalModuleOdeshin>(
+    const outputList = [...externalSourcePathSet].map<ExternalModule>(
       (sourcePath) => {
         return {
           zorn: sourcePath,
-          grition: {
-            instanceId: getTextDigest(sourcePath),
-            sourcePath,
-          },
+          instanceId: getTextDigest(sourcePath),
+          sourcePath,
         };
       },
     );
