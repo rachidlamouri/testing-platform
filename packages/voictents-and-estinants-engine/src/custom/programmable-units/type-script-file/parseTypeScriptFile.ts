@@ -3,18 +3,17 @@ import fs from 'fs';
 import * as parser from '@typescript-eslint/typescript-estree';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  ProgramErrorVoictent,
   PROGRAM_ERROR_GEPP,
-  ProgramError,
   ErrorLocatorTypeName,
+  ProgramErrorVoque,
 } from '../error/programError';
 import {
-  TypeScriptFileConfigurationVoictent,
   TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
+  TypeScriptFileConfigurationVoque,
 } from './associateTypeScriptFileToTypescriptConfiguration';
 import {
-  ParsedTypeScriptFileVoictent,
   PARSED_TYPE_SCRIPT_FILE_GEPP,
+  ParsedTypeScriptFileVoque,
 } from './parsedTypeScriptFile';
 
 /**
@@ -26,24 +25,25 @@ import {
 export const parseTypeScriptFile = buildEstinant({
   name: 'parseTypeScriptFile',
 })
-  .fromHubblepup<TypeScriptFileConfigurationVoictent>({
+  .fromHubblepup2<TypeScriptFileConfigurationVoque>({
     gepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple<ParsedTypeScriptFileVoictent>({
+  .toHubblepupTuple2<ParsedTypeScriptFileVoque>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toHubblepupTuple<ProgramErrorVoictent>({
+  .toHubblepupTuple2<ProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((input) => {
-    const inputGrition = input.grition;
-
-    const fileContents = fs.readFileSync(inputGrition.sourceFilePath, 'utf8');
+  .onPinbe((typeScriptFileConfiguration) => {
+    const fileContents = fs.readFileSync(
+      typeScriptFileConfiguration.sourceFilePath,
+      'utf8',
+    );
 
     try {
       const program: TSESTree.Program = parser.parse(fileContents, {
         project: './tsconfig.json',
-        tsconfigRootDir: inputGrition.rootDirectory,
+        tsconfigRootDir: typeScriptFileConfiguration.rootDirectory,
         loc: true,
         comment: true,
       });
@@ -51,11 +51,9 @@ export const parseTypeScriptFile = buildEstinant({
       return {
         [PARSED_TYPE_SCRIPT_FILE_GEPP]: [
           {
-            zorn: input.zorn,
-            grition: {
-              filePath: inputGrition.sourceFilePath,
-              program,
-            },
+            zorn: typeScriptFileConfiguration.zorn,
+            filePath: typeScriptFileConfiguration.sourceFilePath,
+            program,
           },
         ],
         [PROGRAM_ERROR_GEPP]: [],
@@ -65,17 +63,15 @@ export const parseTypeScriptFile = buildEstinant({
         [PARSED_TYPE_SCRIPT_FILE_GEPP]: [],
         [PROGRAM_ERROR_GEPP]: [
           {
-            zorn: input.zorn,
-            grition: {
-              message: 'Failed to parse file',
-              locator: {
-                typeName: ErrorLocatorTypeName.FileErrorLocator,
-                filePath: inputGrition.sourceFilePath,
-              },
-              metadata: {
-                error,
-              },
-            } satisfies ProgramError,
+            zorn: typeScriptFileConfiguration.zorn,
+            message: 'Failed to parse file',
+            locator: {
+              typeName: ErrorLocatorTypeName.FileErrorLocator,
+              filePath: typeScriptFileConfiguration.sourceFilePath,
+            },
+            metadata: {
+              error,
+            },
           },
         ],
       };

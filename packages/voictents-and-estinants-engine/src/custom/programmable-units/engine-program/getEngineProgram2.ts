@@ -2,16 +2,12 @@ import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   ENGINE_ESTINANT_2_GEPP,
-  EngineEstinant2Voictent,
+  EngineEstinant2Voque,
 } from './engineEstinant2';
-import { getEngineEstinantLocatorZorn } from './engineEstinantLocator2';
-import {
-  ENGINE_PROGRAM_2_GEPP,
-  EngineProgram2Voictent,
-} from './engineProgram2';
+import { ENGINE_PROGRAM_2_GEPP, EngineProgram2Voque } from './engineProgram2';
 import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
-  EngineProgramLocator2Voictent,
+  EngineProgramLocator2Voque,
 } from './engineProgramLocator2';
 import { getTextDigest } from '../../../utilities/getTextDigest';
 
@@ -22,26 +18,26 @@ import { getTextDigest } from '../../../utilities/getTextDigest';
 export const getEngineProgram2 = buildEstinant({
   name: 'getEngineProgram2',
 })
-  .fromGrition<EngineProgramLocator2Voictent>({
+  .fromHubblepup2<EngineProgramLocator2Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_2_GEPP,
   })
-  .andFromGritionTuple<EngineEstinant2Voictent, Tuple<string>>({
+  .andFromHubblepupTuple2<EngineEstinant2Voque, Tuple<string>>({
     gepp: ENGINE_ESTINANT_2_GEPP,
     framate: (leftInput) => {
-      return leftInput.grition.engineEstinantLocatorList.map((locator) => {
-        return getEngineEstinantLocatorZorn(locator);
+      return leftInput.hubblepup.engineEstinantLocatorList.map((locator) => {
+        return locator.zorn;
       });
     },
     croard: (rightInput) => {
-      return getEngineEstinantLocatorZorn(rightInput.grition.locator);
+      return rightInput.indexByName.zorn;
     },
   })
-  .toGrition<EngineProgram2Voictent>({
+  .toHubblepup2<EngineProgram2Voque>({
     gepp: ENGINE_PROGRAM_2_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe((engineProgramLocator, estinantList) => {
     return {
+      zorn: engineProgramLocator.zorn,
       id: getTextDigest(engineProgramLocator.programName),
       programName: engineProgramLocator.programName,
       description: engineProgramLocator.description,

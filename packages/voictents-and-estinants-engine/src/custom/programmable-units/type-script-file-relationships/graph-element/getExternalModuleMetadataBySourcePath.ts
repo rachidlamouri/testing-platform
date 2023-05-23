@@ -2,12 +2,12 @@ import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import {
   EXTERNAL_MODULE_METADATA_GEPP,
-  ExternalModuleMetadataVoictent,
+  ExternalModuleMetadataVoque,
 } from './externalModuleMetadata';
 import {
   EXTERNAL_MODULE_METADATA_BY_SOURCE_PATH_GEPP,
   ExternalModuleMetadataBySourcePath,
-  ExternalModuleMetadataBySourcePathVoictent,
+  ExternalModuleMetadataBySourcePathVoque,
 } from './externalModuleMetadataBySourcePath';
 
 /**
@@ -19,20 +19,22 @@ import {
 export const getExternalModuleMetadataBySourcePath = buildEstinant({
   name: 'getExternalModuleMetadataBySourcePath',
 })
-  .fromOdeshinVoictent<ExternalModuleMetadataVoictent>({
+  .fromVoictent2<ExternalModuleMetadataVoque>({
     gepp: EXTERNAL_MODULE_METADATA_GEPP,
   })
-  .toGrition<ExternalModuleMetadataBySourcePathVoictent>({
+  .toHubblepup2<ExternalModuleMetadataBySourcePathVoque>({
     gepp: EXTERNAL_MODULE_METADATA_BY_SOURCE_PATH_GEPP,
-    getZorn: () => TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
   })
   .onPinbe((externalModuleMetadataList) => {
-    const map: ExternalModuleMetadataBySourcePath = new Map();
+    const map: ExternalModuleMetadataBySourcePath['grition'] = new Map();
 
     externalModuleMetadataList.forEach((metadata) => {
       map.set(metadata.sourcePath, metadata);
     });
 
-    return map;
+    return {
+      zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
+      grition: map,
+    };
   })
   .assemble();

@@ -1,15 +1,15 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { DIRECTORY_GEPP, DirectoryVoictent } from '../../file/directory';
+import { DIRECTORY_GEPP, DirectoryVoque } from '../../file/directory';
 import { DirectedGraphStyle } from '../../graph-visualization/directed-graph/directedGraph';
 import { LIMBO_BOUNDARY_ZORN } from './boundaryConfiguration';
 import {
   BOUNDARY_METADATA_GEPP,
-  BoundaryMetadataVoictent,
+  BoundaryMetadataVoque,
 } from './boundaryMetadata';
 import { FONT_SIZE, COMMON_ATTRIBUTE_BY_KEY } from './commonAttributeByKey';
 import {
   DIRECTORY_METADATA_GEPP,
-  DirectoryMetadataVoictent,
+  DirectoryMetadataVoque,
 } from './directoryMetadata';
 
 /**
@@ -19,24 +19,21 @@ import {
 export const getDirectoryMetadata = buildEstinant({
   name: 'getDirectoryMetadata',
 })
-  .fromHubblepup<DirectoryVoictent>({
+  .fromHubblepup2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .andFromGritionTuple<BoundaryMetadataVoictent, [string]>({
+  .andFromHubblepupTuple2<BoundaryMetadataVoque, [string]>({
     gepp: BOUNDARY_METADATA_GEPP,
     framate: () => [LIMBO_BOUNDARY_ZORN],
-    croard: (rightInput) => rightInput.zorn,
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromOdeshinVoictent<BoundaryMetadataVoictent>({
+  .andFromVoictent2<BoundaryMetadataVoque>({
     gepp: BOUNDARY_METADATA_GEPP,
   })
-  .toGrition<DirectoryMetadataVoictent>({
+  .toHubblepup2<DirectoryMetadataVoque>({
     gepp: DIRECTORY_METADATA_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
-  .onPinbe((leftInput, [limboBoundary], boundaryList) => {
-    const directory = leftInput.grition;
-
+  .onPinbe((directory, [limboBoundary], boundaryList) => {
     const foundBoundary =
       boundaryList.find(
         (boundary) =>
@@ -45,6 +42,7 @@ export const getDirectoryMetadata = buildEstinant({
       ) ?? limboBoundary;
 
     return {
+      zorn: directory.instanceId,
       id: directory.instanceId,
       boundaryId: foundBoundary.id,
       attributeByKey: {

@@ -1,5 +1,4 @@
-import { Grition } from '../../adapter/grition';
-import { OdeshinFromGrition } from '../../adapter/odeshin';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 import { SvgDocument } from './svgDocument';
 
@@ -8,11 +7,10 @@ export type SvgMetadata = {
   document: SvgDocument;
 };
 
-export type SvgMetadataList = SvgMetadata[];
-
-export type SvgMetadataListGrition = Grition<SvgMetadataList>;
-
-export type SvgMetadataListOdeshin = OdeshinFromGrition<SvgMetadataListGrition>;
+export type SvgMetadataList = {
+  zorn: string;
+  grition: SvgMetadata[];
+};
 
 export const SVG_METADATA_LIST_GEPP = 'svg-metadata-list';
 
@@ -20,5 +18,10 @@ export type SvgMetadataListGepp = typeof SVG_METADATA_LIST_GEPP;
 
 export type SvgMetadataListVoictent = Voictent<
   SvgMetadataListGepp,
-  SvgMetadataListOdeshin
+  SvgMetadataList
+>;
+
+export type SvgMetadataListVoque = InMemoryOdeshin2Voque<
+  SvgMetadataListGepp,
+  SvgMetadataList
 >;

@@ -5,6 +5,7 @@ import {
   FilePathAccessorInput,
 } from '../../../utilities/file/getNestedFilePaths';
 import { Grition } from '../../adapter/grition';
+import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 
 export type FileSystemObjectEnumeratorConfiguration = FilePathAccessorInput;
 
@@ -24,6 +25,12 @@ export type FileSystemObjectEnumeratorConfigurationVoictent = Voictent<
   FileSystemObjectEnumeratorConfigurationGepp,
   FileSystemObjectEnumeratorConfigurationHubblepup
 >;
+
+export type FileSystemObjectEnumeratorConfigurationVoque =
+  StandardInMemoryVoque<
+    FileSystemObjectEnumeratorConfigurationGepp,
+    FileSystemObjectEnumeratorConfigurationHubblepup
+  >;
 
 export const FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfigurationHubblepup =
   {

@@ -2,7 +2,7 @@ import { Estinant2 } from '../core/engine-shell/estinant/estinant';
 import { LeftInputHubblepupVicken } from '../core/engine-shell/vicken/leftInputVicken';
 import { OutputVicken } from '../core/engine-shell/vicken/outputVicken';
 import { digikikify2 } from '../core/engine/digikikify';
-import { InMemoryOdeshinVoictent } from '../core/engine/inMemoryOdeshinVoictent';
+import { InMemoryOdeshin2Voictent } from '../core/engine/inMemoryOdeshinVoictent2';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
@@ -66,11 +66,11 @@ export const getTypedTestCaseInputTypeName: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryOdeshinVoictent<DatumTestCaseInputVoque>({
+    new InMemoryOdeshin2Voictent<DatumTestCaseInputVoque>({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
       initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),
-    new InMemoryOdeshinVoictent<SerializableTypeNameVoque>({
+    new InMemoryOdeshin2Voictent<SerializableTypeNameVoque>({
       gepp: SERIALIZABLE_TYPE_NAME_GEPP,
       initialHubblepupTuple: [],
     }),

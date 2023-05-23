@@ -1,59 +1,94 @@
+import { Simplify, UnionToIntersection } from 'type-fest';
 import {
   buildEstinantAssembler,
   EstinantAssemblerParent,
 } from './estinantAssembler';
 import { AssemblerContext, InputOutputContext } from './estinantBuilderContext';
-import { GenericOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
-import { GenericAdaptedLeftInputVicken } from './vicken';
+import {
+  GenericAdaptedLeftInputVicken,
+  GenericAdaptedOutputVicken,
+  GenericAdaptedOutputVickenTuple,
+  GenericAdaptedRightInputVickenTuple,
+} from './vicken';
 import {
   Straline,
   StralineTuple,
 } from '../../../utilities/semantic-types/straline';
-import { GenericRightInputVickenTuple } from '../../../core/engine-shell/vicken/rightInputVicken';
 
 type Pinbetunf2<TInputTuple extends StralineTuple, TOutput extends Straline> = (
   ...input: TInputTuple
 ) => TOutput;
 
+// TODO: clean up the constraint on this type
 type PinbetunInputTuple2<
-  TAdaptedInputVickenTuple extends [GenericAdaptedLeftInputVicken],
+  TAdaptedInputVickenTuple extends { pinbetunfInput: unknown }[],
 > = {
   [Index in keyof TAdaptedInputVickenTuple]: TAdaptedInputVickenTuple[Index]['pinbetunfInput'];
 };
 
 type PinbetunInputTuple1<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-> = PinbetunInputTuple2<[TAdaptedLeftInputVicken]>;
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+> = PinbetunInputTuple2<
+  [TAdaptedLeftInputVicken, ...TAdaptedRightInputVickenTuple]
+>;
+
+type PinbetunfOutput<
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+> = TAdaptedOutputVickenTuple extends []
+  ? void
+  : TAdaptedOutputVickenTuple extends [
+      infer TAdaptedOutputVicken extends GenericAdaptedOutputVicken,
+    ]
+  ? TAdaptedOutputVicken['pinbetunfOutput']
+  : Simplify<
+      UnionToIntersection<
+        {
+          [Index in keyof TAdaptedOutputVickenTuple]: {
+            [Key in TAdaptedOutputVickenTuple[Index]['voque']['gepp']]: TAdaptedOutputVickenTuple[Index]['pinbetunfOutput'];
+          };
+        }[number]
+      >
+    >;
 
 export type PinbetunfBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TAdaptedOutputVicken extends GenericOutputVicken,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = (
-  pinbe: Pinbetunf2<PinbetunInputTuple1<TAdaptedLeftInputVicken>, void>,
+  pinbe: Pinbetunf2<
+    PinbetunInputTuple1<TAdaptedLeftInputVicken, TAdaptedRightInputVickenTuple>,
+    PinbetunfOutput<TAdaptedOutputVickenTuple>
+  >,
 ) => EstinantAssemblerParent<
   TAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple,
-  TAdaptedOutputVicken
+  TAdaptedOutputVickenTuple
 >;
 
 export const buildPinbetunfBuilder2 = <
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TAdaptedOutputVicken extends GenericOutputVicken,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 >(
   inputOutputContext: InputOutputContext,
 ): PinbetunfBuilder2<
   TAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple,
-  TAdaptedOutputVicken
+  TAdaptedOutputVickenTuple
 > => {
   const buildPinbetunf: PinbetunfBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple,
-    TAdaptedOutputVicken
+    TAdaptedOutputVickenTuple
   > = (
-    pinbe: Pinbetunf2<PinbetunInputTuple1<TAdaptedLeftInputVicken>, void>,
+    pinbe: Pinbetunf2<
+      PinbetunInputTuple1<
+        TAdaptedLeftInputVicken,
+        TAdaptedRightInputVickenTuple
+      >,
+      PinbetunfOutput<TAdaptedOutputVickenTuple>
+    >,
   ) => {
     const { instantiationContext, inputContext, outputContext } =
       inputOutputContext;
@@ -66,7 +101,11 @@ export const buildPinbetunfBuilder2 = <
     };
 
     return {
-      assemble: buildEstinantAssembler(nextContext),
+      assemble: buildEstinantAssembler<
+        TAdaptedLeftInputVicken,
+        TAdaptedRightInputVickenTuple,
+        TAdaptedOutputVickenTuple
+      >(nextContext),
     };
   };
 
@@ -75,12 +114,12 @@ export const buildPinbetunfBuilder2 = <
 
 export type PinbetunfBuilderParent2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TAdaptedOutputVicken extends GenericOutputVicken,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = {
   onPinbe: PinbetunfBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple,
-    TAdaptedOutputVicken
+    TAdaptedOutputVickenTuple
   >;
 };

@@ -1,11 +1,8 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import {
-  OUTPUT_FILE_GEPP,
-  OutputFileVoictent,
-} from '../output-file/outputFile';
+import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
-  EngineProgramFileVoictent,
+  EngineProgramFileVoque,
 } from '../type-script-file-relationships/engineProgramFile';
 
 /**
@@ -15,10 +12,10 @@ import {
 export const constructSnapshotScript = buildEstinant({
   name: 'constructSnapshotScript',
 })
-  .fromOdeshinVoictent<EngineProgramFileVoictent>({
+  .fromVoictent2<EngineProgramFileVoque>({
     gepp: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .toHubblepup<OutputFileVoictent>({
+  .toHubblepup2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
   })
   .onPinbe((inputList) => {

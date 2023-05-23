@@ -6,7 +6,6 @@ import {
 import { GenericTropoignant2 } from '../../../core/engine-shell/estinant/tropoignant';
 import { GenericIndexedHubblepup } from '../../../core/engine-shell/quirm/hubblepup';
 import { GenericLeftInputVicken } from '../../../core/engine-shell/vicken/leftInputVicken';
-import { GenericOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
 import {
   GenericRightInputHubblepupTupleVicken,
   GenericRightInputVickenTuple,
@@ -17,28 +16,36 @@ import {
   AssemblerContext,
   CoreConstituentOutputEntry,
 } from './estinantBuilderContext';
+import {
+  CoreOutputVickenFromAdaptedOutputVickenTuple,
+  GenericAdaptedOutputVickenTuple,
+} from './vicken';
 
 export type EstinantAssembler<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TOutputVicken extends GenericOutputVicken,
-> = () => Estinant2<TLeftInputVicken, TRightInputVickenTuple, TOutputVicken>;
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+> = () => Estinant2<
+  TLeftInputVicken,
+  TRightInputVickenTuple,
+  CoreOutputVickenFromAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple>
+>;
 
 export const buildEstinantAssembler = <
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TOutputVicken extends GenericOutputVicken,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 >(
   assemblerContext: AssemblerContext,
 ): EstinantAssembler<
   TLeftInputVicken,
   TRightInputVickenTuple,
-  TOutputVicken
+  TAdaptedOutputVickenTuple
 > => {
   const assembleEstinant: EstinantAssembler<
     TLeftInputVicken,
     TRightInputVickenTuple,
-    TOutputVicken
+    TAdaptedOutputVickenTuple
   > = () => {
     const {
       instantiationContext,
@@ -47,21 +54,30 @@ export const buildEstinantAssembler = <
     } = assemblerContext;
 
     const tropoig: GenericTropoignant2 = (leftInput, ...rightInputTuple) => {
-      const adaptedLeftInput = leftInputContext.isWibiz
-        ? leftInput
-        : (leftInput as GenericIndexedHubblepup).hubblepup;
+      let adaptedLeftInput: unknown;
+      if (leftInputContext.isWibiz || leftInputContext.version === 2) {
+        adaptedLeftInput = leftInput;
+      } else {
+        adaptedLeftInput = (leftInput as GenericIndexedHubblepup).hubblepup;
+      }
 
       /* eslint-disable @typescript-eslint/no-unsafe-assignment */
       const modifiedLeftInput =
         leftInputContext.modifyTropoignantInput(adaptedLeftInput);
+
       const modifiedRightInputTuple = rightInputContextTuple.map(
         (rightInputContext, index) => {
-          const rightInput = rightInputTuple[index];
+          let adaptedRightInput: unknown;
+          if (rightInputContext.isWibiz || rightInputContext.version === 2) {
+            adaptedRightInput = rightInputTuple[index];
+          } else {
+            adaptedRightInput = (
+              rightInputTuple[index] as GenericIndexedHubblepup
+            ).hubblepup;
+          }
+
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-          return rightInputContext.modifyTropoignantInput(
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            rightInput,
-          );
+          return rightInputContext.modifyTropoignantInput(adaptedRightInput);
         },
       );
       const modifiedOutput = assemblerContext.pinbe(
@@ -116,14 +132,28 @@ export const buildEstinantAssembler = <
             gepp: rightInputContext.gepp,
             isWibiz: rightInputContext.isWibiz,
             framate: (leftInput): ZornTuple => {
-              const indexedLeftHubblepup = leftInput as GenericIndexedHubblepup;
+              let adaptedLeftInput: unknown;
+              if (leftInputContext.isWibiz || leftInputContext.version === 2) {
+                adaptedLeftInput = leftInput;
+              } else {
+                adaptedLeftInput = (leftInput as GenericIndexedHubblepup)
+                  .hubblepup;
+              }
 
-              return rightInputContext.framate(
-                indexedLeftHubblepup.hubblepup,
-              ) as ZornTuple;
+              return rightInputContext.framate(adaptedLeftInput) as ZornTuple;
             },
-            croard: (indexedRightHubblepup): Zorn => {
-              return rightInputContext.croard(indexedRightHubblepup.hubblepup);
+            croard: (indexedRightInput): Zorn => {
+              let adaptedRightInput: unknown;
+              if (
+                rightInputContext.isWibiz ||
+                rightInputContext.version === 2
+              ) {
+                adaptedRightInput = indexedRightInput;
+              } else {
+                adaptedRightInput = indexedRightInput.hubblepup;
+              }
+
+              return rightInputContext.croard(adaptedRightInput);
             },
           } satisfies RightInputAppreffinge<
             GenericLeftInputVicken,
@@ -138,7 +168,7 @@ export const buildEstinantAssembler = <
     } satisfies GenericEstinant2 as unknown as Estinant2<
       TLeftInputVicken,
       TRightInputVickenTuple,
-      TOutputVicken
+      CoreOutputVickenFromAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple>
     >;
     return estinant;
   };
@@ -149,11 +179,11 @@ export const buildEstinantAssembler = <
 export type EstinantAssemblerParent<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TOutputVicken extends GenericOutputVicken,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = {
   assemble: EstinantAssembler<
     TLeftInputVicken,
     TRightInputVickenTuple,
-    TOutputVicken
+    TAdaptedOutputVickenTuple
   >;
 };

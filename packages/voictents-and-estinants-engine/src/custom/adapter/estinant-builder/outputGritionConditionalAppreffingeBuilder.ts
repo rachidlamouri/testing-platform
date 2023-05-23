@@ -1,8 +1,6 @@
 import { Hubblepup } from '../../../core/engine-shell/quirm/hubblepup';
-import { GenericOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
 import {
   CoreLeftInputVickenFromLeftVicken,
-  CoreOutputVickenFromOutputVickenTuple,
   CoreRightInputVickenTupleFromRightVickenTuple,
   LeftVicken,
 } from '../../../type-script-adapter/vicken';
@@ -22,7 +20,7 @@ import { ZornAccessor } from './tropoignantInputOutputModifier';
 type RightInputVickenTuple = [];
 
 // There is technically multiple outputs, but this is unused on a mattomer :thinking:
-type OutputVickenTuple = [];
+type AdaptedOutputVickenTuple = [];
 
 type OutputAppreffinge<
   TLeftVicken extends LeftVicken,
@@ -44,9 +42,7 @@ export type OutputGritionConditionalAppreffingeBuilder<
   EstinantAssemblerParent<
     CoreLeftInputVickenFromLeftVicken<TLeftVicken>,
     CoreRightInputVickenTupleFromRightVickenTuple<RightInputVickenTuple>,
-    CoreOutputVickenFromOutputVickenTuple<OutputVickenTuple> extends GenericOutputVicken
-      ? CoreOutputVickenFromOutputVickenTuple<OutputVickenTuple>
-      : GenericOutputVicken
+    AdaptedOutputVickenTuple
   >;
 
 export const buildOutputGritionConditionalAppreffingeBuilder = <
@@ -98,9 +94,7 @@ export const buildOutputGritionConditionalAppreffingeBuilder = <
       assemble: buildEstinantAssembler<
         CoreLeftInputVickenFromLeftVicken<TLeftVicken>,
         CoreRightInputVickenTupleFromRightVickenTuple<RightInputVickenTuple>,
-        CoreOutputVickenFromOutputVickenTuple<OutputVickenTuple> extends GenericOutputVicken
-          ? CoreOutputVickenFromOutputVickenTuple<OutputVickenTuple>
-          : GenericOutputVicken
+        AdaptedOutputVickenTuple
       >({
         ...nextContext,
         pinbe: () => {

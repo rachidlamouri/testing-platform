@@ -3,17 +3,17 @@ import { LabelLocation } from '../../graph-visualization/directed-graph/attribut
 import { DirectedGraphRankDirection } from '../../graph-visualization/directed-graph/directedGraph';
 import {
   BOUNDARY_METADATA_GEPP,
-  BoundaryMetadataVoictent,
+  BoundaryMetadataVoque,
 } from './boundaryMetadata';
 import { FONT_SIZE, COMMON_ATTRIBUTE_BY_KEY } from './commonAttributeByKey';
 import {
   INITIAL_EDGE_METADATA_LIST_GEPP,
-  InitialEdgeMetadataListVoictent,
+  InitialEdgeMetadataListVoque,
 } from './initialEdgeMetadataList';
 import {
   ROOT_METADATA_GEPP,
   RootMetadata,
-  RootMetadataVoictent,
+  RootMetadataVoque,
 } from './rootMetadata';
 import { getTextDigest } from '../../../../utilities/getTextDigest';
 
@@ -24,18 +24,19 @@ import { getTextDigest } from '../../../../utilities/getTextDigest';
 export const getRootMetadata = buildEstinant({
   name: 'getRootMetadata',
 })
-  .fromGrition<BoundaryMetadataVoictent>({
+  .fromHubblepup2<BoundaryMetadataVoque>({
     gepp: BOUNDARY_METADATA_GEPP,
   })
-  .andFromOdeshinVoictent<InitialEdgeMetadataListVoictent>({
+  .andFromVoictent2<InitialEdgeMetadataListVoque>({
     gepp: INITIAL_EDGE_METADATA_LIST_GEPP,
   })
-  .toGrition<RootMetadataVoictent>({
+  .toHubblepup2<RootMetadataVoque>({
     gepp: ROOT_METADATA_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe((boundaryMetadata, initialEdgeMetdataListList) => {
-    const initialEdgeMetadataList = initialEdgeMetdataListList.flat();
+    const initialEdgeMetadataList = initialEdgeMetdataListList.flatMap(
+      (element) => element.grition,
+    );
 
     const edgeMetadataList = initialEdgeMetadataList.filter((metadata) => {
       return (
@@ -53,6 +54,7 @@ export const getRootMetadata = buildEstinant({
       .map((metadata) => metadata.head.boundaryId);
 
     return {
+      zorn: boundaryMetadata.zorn,
       id: getTextDigest(`${boundaryMetadata.id}-root`),
       boundaryId: boundaryMetadata.id,
       relevantBoundaryIdSet: new Set(relevantBoundaryIdList),

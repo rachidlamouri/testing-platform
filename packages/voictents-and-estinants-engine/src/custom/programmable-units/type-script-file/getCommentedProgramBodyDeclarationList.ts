@@ -7,11 +7,11 @@ import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
   CommentedProgramBodyDeclaration,
-  CommentedProgramBodyDeclarationListVoictent,
+  CommentedProgramBodyDeclarationListVoque,
 } from './commentedProgramBodyDeclarationList';
 import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
-  ParsedTypeScriptFileVoictent,
+  ParsedTypeScriptFileVoque,
 } from './parsedTypeScriptFile';
 import { getIdentifiableProgramBodyStatementNode } from './getIdentifiableProgramBodyStatementNode';
 
@@ -24,12 +24,11 @@ import { getIdentifiableProgramBodyStatementNode } from './getIdentifiableProgra
 export const getCommentedProgramBodyDeclarationList = buildEstinant({
   name: 'getCommentedProgramBodyDeclarationList',
 })
-  .fromGrition<ParsedTypeScriptFileVoictent>({
+  .fromHubblepup2<ParsedTypeScriptFileVoque>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toGrition<CommentedProgramBodyDeclarationListVoictent>({
+  .toHubblepup2<CommentedProgramBodyDeclarationListVoque>({
     gepp: COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe((parsedTypeScriptFile) => {
     const commentList: TSESTree.Comment[] =
@@ -77,6 +76,9 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
         },
       );
 
-    return outputList;
+    return {
+      zorn: parsedTypeScriptFile.zorn,
+      list: outputList,
+    };
   })
   .assemble();

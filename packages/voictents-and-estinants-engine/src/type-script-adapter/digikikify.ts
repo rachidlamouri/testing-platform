@@ -11,15 +11,22 @@ import {
   GenericEstinant2,
 } from '../core/engine-shell/estinant/estinant';
 import { GenericQuirm2, Quirm2 } from '../core/engine-shell/quirm/quirm';
-import { Estinant, Estinant2 } from './estinant/estinant';
-import { Hubblepup } from './hubblepup';
-import { InMemoryVoictent } from '../core/engine/inMemoryVoictent';
-import { GenericVoque } from '../core/engine/voque';
+import { GenericVoque, GenericVoqueTuple, Voque } from '../core/engine/voque';
 import { Gepp } from '../core/engine-shell/voictent/gepp';
-import { HubblepupTuple } from '../core/engine-shell/quirm/hubblepup';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AnyEstinant = Estinant<any, any> | Estinant2<any, any, any>;
+import {
+  GenericVoictent2,
+  GenericVoictent2Tuple,
+  UnsafeVoictent2,
+  UnsafeVoictent2Tple,
+  Voictent2,
+} from '../core/engine/voictent2';
+import {
+  GenericInMemoryOdeshin2Voque,
+  InMemoryOdeshin2Voictent,
+} from '../core/engine/inMemoryOdeshinVoictent2';
+import { FlattenTuple } from '../utilities/flattenTuple';
+import { DeduplicateTupleItems } from '../utilities/deduplicateTupleItems';
+import { FilterTupleByRejectionUnion } from '../utilities/filterTuple';
 
 type QuirmHandler<TVoque extends GenericVoque> = (
   quirm: Quirm2<TVoque>,
@@ -38,6 +45,35 @@ type QuirmUnionFromVoqueUnion<TVoqueUnion extends GenericVoque> =
 type OnHubblepupAddedToVoictentsHandler2<TVoqueUnion extends GenericVoque> = (
   quirm: QuirmUnionFromVoqueUnion<TVoqueUnion>,
 ) => void;
+
+type EstinantInputOutputVoqueTuple<TEstinant extends UnsafeEstinant2> =
+  TEstinant extends CoreEstinant2<
+    infer TLeftInputVicken,
+    infer TRightInputVickenTuple,
+    infer TOutputVicken
+  >
+    ? [
+        TLeftInputVicken['voque'],
+        ...{
+          [TIndex in keyof TRightInputVickenTuple]: TRightInputVickenTuple[TIndex]['voque'];
+        },
+        ...TOutputVicken['outputVoqueOptionTuple'],
+      ]
+    : never;
+
+type EstinantTupleInputOutputVoqueTupleTuple<
+  TEstinantTuple extends UnsafeEstinant2Tuple,
+> = {
+  [TIndex in keyof TEstinantTuple]: EstinantInputOutputVoqueTuple<
+    TEstinantTuple[TIndex]
+  >;
+};
+
+type EstinantTupleInputOutputVoqueTuple<
+  TEstinantTuple extends UnsafeEstinant2Tuple,
+> = DeduplicateTupleItems<
+  FlattenTuple<EstinantTupleInputOutputVoqueTupleTuple<TEstinantTuple>>
+>;
 
 type EstinantInputOutputVoqueUnion<TEstinant extends UnsafeEstinant2> =
   TEstinant extends CoreEstinant2<
@@ -80,44 +116,71 @@ type QuirmDebuggerFromEstinantTuple<
   EstinantTupleInputOutputVoqueUnion<TEstinantTuple>
 >;
 
-type InitialHubblepupTupleByGeppUnionFromVoqueUnion<
-  TVoqueUnion extends GenericVoque,
+type SimilarVoque<TVoque extends GenericVoque> = Voque<
+  Gepp,
+  TVoque['receivedHubblepup'],
+  TVoque['emittedHubblepup'],
+  TVoque['indexByName'],
+  TVoque['emittedVoictent']
+>;
+
+type InferredVoictent2<TVoque extends GenericVoque> = Voictent2<
+  SimilarVoque<TVoque>,
+  TVoque
+>;
+
+type VoqueUnionFromVoictentUnion<
+  TVoictentUnion extends UnsafeVoictent2,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-> = TVoqueUnion extends any
-  ? { [Key in TVoqueUnion['gepp']]?: TVoqueUnion['receivedHubblepup'][] }
-  : never;
+> = TVoictentUnion extends Voictent2<any, infer TVoque> ? TVoque : never;
 
-type InitialHubblepupTupleByGepp<TEstinantTuple extends UnsafeEstinant2Tuple> =
-  UnionToIntersection<
-    InitialHubblepupTupleByGeppUnionFromVoqueUnion<
-      EstinantTupleInputOutputVoqueUnion<TEstinantTuple>
-    >
+type VoictentTupleFromVoqueTuple<TVoqueTuple extends GenericVoqueTuple> = {
+  [TIndex in keyof TVoqueTuple]: InferredVoictent2<TVoqueTuple[TIndex]>;
+};
+
+type VoictentListB<
+  TExplicitVoictentTuple extends UnsafeVoictent2Tple,
+  TEstinantTuple extends UnsafeEstinant2Tuple,
+> = VoictentTupleFromVoqueTuple<
+  FilterTupleByRejectionUnion<
+    EstinantTupleInputOutputVoqueTuple<TEstinantTuple>,
+    | VoqueUnionFromVoictentUnion<TExplicitVoictentTuple[number]>
+    | GenericInMemoryOdeshin2Voque
+  >
+>;
+
+type DigikikifyInput<
+  TExplicitVoictentTuple extends UnsafeVoictent2Tple,
+  TEstinantTuple extends UnsafeEstinant2Tuple,
+> = {
+  populatedVoictentTuple: TExplicitVoictentTuple;
+  uninferableVoictentTuple: VoictentListB<
+    TExplicitVoictentTuple,
+    TEstinantTuple
   >;
-
-type DigikikifyInput<TEstinantTuple extends UnsafeEstinant2Tuple> = {
-  initialVoictentsByGepp: InitialHubblepupTupleByGepp<TEstinantTuple>;
   estinantTuple: TEstinantTuple;
   quirmDebugger?: QuirmDebuggerFromEstinantTuple<TEstinantTuple>;
 };
 
-export const digikikify = <TEstinantTuple extends UnsafeEstinant2Tuple>({
-  // TODO: apply this renaming to programs
-  initialVoictentsByGepp: initialHubblepupTupleByGepp,
+export const digikikify = <
+  TVoictentTupleA extends UnsafeVoictent2Tple,
+  TEstinantTuple extends UnsafeEstinant2Tuple,
+>({
+  populatedVoictentTuple: initialedVoictentTuple,
+  uninferableVoictentTuple,
   estinantTuple,
   quirmDebugger: inputDebugger,
-}: DigikikifyInput<TEstinantTuple>): void => {
-  const inferredGeppSet = new Set(
-    Object.keys(initialHubblepupTupleByGepp as Record<Gepp, HubblepupTuple>),
-  );
+}: DigikikifyInput<TVoictentTupleA, TEstinantTuple>): void => {
+  const explicitInputVoictentList = [
+    ...initialedVoictentTuple,
+    ...(uninferableVoictentTuple as GenericVoictent2Tuple),
+  ];
 
-  const inferredVoictentList = Object.entries(
-    initialHubblepupTupleByGepp as Record<Gepp, HubblepupTuple>,
-  ).map(([gepp, initialHubblepupTuple]) => {
-    return new InMemoryVoictent({
-      gepp,
-      initialHubblepupTuple: initialHubblepupTuple as Hubblepup[],
-    });
-  });
+  const explicitInputVoictentGeppSet = new Set(
+    explicitInputVoictentList.map(
+      (voictent: GenericVoictent2) => voictent.gepp,
+    ),
+  );
 
   const estinantGeppList = estinantTuple.flatMap<Gepp>(
     (estinant: GenericEstinant2) => [
@@ -131,17 +194,20 @@ export const digikikify = <TEstinantTuple extends UnsafeEstinant2Tuple>({
 
   const estinantGeppSet = new Set(estinantGeppList);
 
-  const otherInputGeppList = [...estinantGeppSet].filter(
-    (gepp) => !inferredGeppSet.has(gepp),
+  const inferredInputGeppList = [...estinantGeppSet].filter(
+    (gepp) => !explicitInputVoictentGeppSet.has(gepp),
   );
-  const otherVoictentList = otherInputGeppList.map((gepp) => {
-    return new InMemoryVoictent({
+  const inferredInputVoictentList = inferredInputGeppList.map((gepp) => {
+    return new InMemoryOdeshin2Voictent({
       gepp,
       initialHubblepupTuple: [],
     });
   });
 
-  const inputVoictentList = [...inferredVoictentList, ...otherVoictentList];
+  const inputVoictentList = [
+    ...explicitInputVoictentList,
+    ...inferredInputVoictentList,
+  ];
 
   coreDigikikify({
     inputVoictentList,

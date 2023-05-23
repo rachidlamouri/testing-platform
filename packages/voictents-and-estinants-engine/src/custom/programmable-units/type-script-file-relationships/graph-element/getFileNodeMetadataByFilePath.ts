@@ -2,12 +2,12 @@ import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import {
   FILE_NODE_METADATA_GEPP,
-  FileNodeMetadataVoictent,
+  FileNodeMetadataVoque,
 } from './fileNodeMetadata';
 import {
   FILE_NODE_METADATA_BY_FILE_PATH_GEPP,
   FileNodeMetadataByFilePath,
-  FileNodeMetadataByFilePathVoictent,
+  FileNodeMetadataByFilePathVoque,
 } from './fileNodeMetadataByFilePath';
 
 /**
@@ -18,20 +18,22 @@ import {
 export const getFileNodeMetadataByFilePath = buildEstinant({
   name: 'getFileNodeMetadataByFilePath',
 })
-  .fromOdeshinVoictent<FileNodeMetadataVoictent>({
+  .fromVoictent2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
   })
-  .toGrition<FileNodeMetadataByFilePathVoictent>({
+  .toHubblepup2<FileNodeMetadataByFilePathVoque>({
     gepp: FILE_NODE_METADATA_BY_FILE_PATH_GEPP,
-    getZorn: () => TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
   })
   .onPinbe((fileMetdataList) => {
-    const metdataById: FileNodeMetadataByFilePath = new Map();
+    const metdataById: FileNodeMetadataByFilePath['grition'] = new Map();
 
     fileMetdataList.forEach((fileMetdata) => {
       metdataById.set(fileMetdata.filePath, fileMetdata);
     });
 
-    return metdataById;
+    return {
+      zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
+      grition: metdataById,
+    };
   })
   .assemble();

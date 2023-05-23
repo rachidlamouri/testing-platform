@@ -1,33 +1,121 @@
-import { Spread } from 'type-fest';
-import {
-  GenericLeftInputHubblepupVicken,
-  GenericLeftInputVicken,
-  GenericLeftInputVoictentVicken,
-} from '../../../core/engine-shell/vicken/leftInputVicken';
+import { GenericVoque } from '../../../core/engine/voque';
+import { Tuple } from '../../../utilities/semantic-types/tuple';
+import { OutputVicken as CoreOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
+import { ZornTuple } from '../../../utilities/semantic-types/zorn';
 
-export type AdaptedLeftInputVicken<
-  TLeftInputVicken extends GenericLeftInputVicken,
-  TPinbetunfInput,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-> = TLeftInputVicken extends any
-  ? Spread<
-      TLeftInputVicken,
-      {
-        pinbetunfInput: TPinbetunfInput;
-      }
-    >
-  : never;
+export enum AdaptedVickenTypeName {
+  Output = 'Output',
+}
 
-export type GenericAdaptedLeftInputHubblepupVicken = AdaptedLeftInputVicken<
-  GenericLeftInputHubblepupVicken,
-  unknown
+type BaseLeftInputVicken<
+  TVoque extends GenericVoque,
+  TTropoignantInput,
+  TIsWibiz extends boolean,
+  TPinbetunf,
+> = {
+  voque: TVoque;
+  tropoignantInput: TTropoignantInput;
+  isWibiz: TIsWibiz;
+  pinbetunfInput: TPinbetunf;
+};
+
+export type AdaptedLeftInputHubblepupVicken<TVoque extends GenericVoque> =
+  BaseLeftInputVicken<
+    TVoque,
+    TVoque['indexedEmittedHubblepup'],
+    false,
+    TVoque['emittedHubblepup']
+  >;
+
+export type GenericAdaptedLeftInputHubblepupVicken =
+  AdaptedLeftInputHubblepupVicken<GenericVoque>;
+
+export type AdaptedLeftInputIndexedHubblepupVicken<
+  TVoque extends GenericVoque,
+> = BaseLeftInputVicken<
+  TVoque,
+  TVoque['indexedEmittedHubblepup'],
+  false,
+  TVoque['indexedEmittedHubblepup']
 >;
 
-export type GenericAdaptedLeftInputVoictentVicken = AdaptedLeftInputVicken<
-  GenericLeftInputVoictentVicken,
-  unknown
->;
+export type GenericAdaptedLeftInputIndexedHubblepupVicken =
+  AdaptedLeftInputIndexedHubblepupVicken<GenericVoque>;
+
+export type AdaptedLeftInputVoictentVicken<TVoque extends GenericVoque> =
+  BaseLeftInputVicken<
+    TVoque,
+    TVoque['emittedVoictent'],
+    true,
+    TVoque['emittedVoictent']
+  >;
+
+export type GenericAdaptedLeftInputVoictentVicken =
+  AdaptedLeftInputVoictentVicken<GenericVoque>;
 
 export type GenericAdaptedLeftInputVicken =
   | GenericAdaptedLeftInputHubblepupVicken
+  | GenericAdaptedLeftInputIndexedHubblepupVicken
   | GenericAdaptedLeftInputVoictentVicken;
+
+export type AdaptedRightInputHubblepupTupleVicken<
+  TRightInputVoque extends GenericVoque,
+  TZornTuple extends ZornTuple,
+> = {
+  voque: TRightInputVoque;
+  tropoignantInput: {
+    [Index in keyof TZornTuple]: TRightInputVoque['indexedEmittedHubblepup'];
+  };
+  isWibiz: false;
+  pinbetunfInput: {
+    [Index in keyof TZornTuple]: TRightInputVoque['emittedHubblepup'];
+  };
+  zornTuple: TZornTuple;
+  zornTupleOption: TZornTuple[number];
+};
+
+export type GenericAdaptedRightInputHubblepupTupleVicken =
+  AdaptedRightInputHubblepupTupleVicken<GenericVoque, ZornTuple>;
+
+export type AdaptedRightInputVoictentVicken<
+  TRightInputVoque extends GenericVoque,
+> = {
+  voque: TRightInputVoque;
+  tropoignantInput: TRightInputVoque['emittedVoictent'];
+  isWibiz: true;
+  pinbetunfInput: TRightInputVoque['emittedVoictent'];
+  zornTuple: never;
+  zornTupleOption: never;
+};
+
+export type GenericAdaptedRightInputVoictentVicken =
+  AdaptedRightInputVoictentVicken<GenericVoque>;
+
+export type GenericAdaptedRightInputVicken =
+  | GenericAdaptedRightInputHubblepupTupleVicken
+  | GenericAdaptedRightInputVoictentVicken;
+
+export type GenericAdaptedRightInputVickenTuple =
+  Tuple<GenericAdaptedRightInputVicken>;
+
+export type AdaptedOutputVicken<
+  TVoque extends GenericVoque,
+  TPinbetunfOutput,
+> = {
+  typeName: AdaptedVickenTypeName.Output;
+  voque: TVoque;
+  pinbetunfOutput: TPinbetunfOutput;
+};
+
+export type GenericAdaptedOutputVicken = AdaptedOutputVicken<
+  GenericVoque,
+  unknown
+>;
+
+export type GenericAdaptedOutputVickenTuple = Tuple<GenericAdaptedOutputVicken>;
+
+export type CoreOutputVickenFromAdaptedOutputVickenTuple<
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+> = CoreOutputVicken<{
+  [Index in keyof TAdaptedOutputVickenTuple]: TAdaptedOutputVickenTuple[Index]['voque'];
+}>;

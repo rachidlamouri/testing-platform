@@ -1,25 +1,16 @@
 import { posix } from 'path';
 import fs from 'fs';
-import { Grition } from '../../adapter/grition';
-import { OdeshinFromGrition } from '../../adapter/odeshin';
-import {
-  TypeScriptFileVoictent,
-  TYPE_SCRIPT_FILE_GEPP,
-} from './typeScriptFile';
+import { TYPE_SCRIPT_FILE_GEPP, TypeScriptFileVoque } from './typeScriptFile';
 import { Voictent } from '../../adapter/voictent';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 export type TypeScriptFileConfiguration = {
+  zorn: string;
   sourceFilePath: string;
   filePath: string;
   rootDirectory: string;
 };
-
-export type TypeScriptFileConfigurationGrition =
-  Grition<TypeScriptFileConfiguration>;
-
-export type TypeScriptFileConfigurationOdeshin =
-  OdeshinFromGrition<TypeScriptFileConfigurationGrition>;
 
 export const TYPE_SCRIPT_FILE_CONFIGURATION_GEPP =
   'type-script-file-configuration';
@@ -29,7 +20,12 @@ export type TypeScriptFileConfigurationGepp =
 
 export type TypeScriptFileConfigurationVoictent = Voictent<
   TypeScriptFileConfigurationGepp,
-  TypeScriptFileConfigurationOdeshin
+  TypeScriptFileConfiguration
+>;
+
+export type TypeScriptFileConfigurationVoque = InMemoryOdeshin2Voque<
+  TypeScriptFileConfigurationGepp,
+  TypeScriptFileConfiguration
 >;
 
 const getConfigurationFilePath = (filePath: string): string => {
@@ -61,18 +57,18 @@ const getConfigurationFilePath = (filePath: string): string => {
 export const associateTypeScriptFileToTypescriptConfiguration = buildEstinant({
   name: 'associateTypeScriptFileToTypescriptConfiguration',
 })
-  .fromGrition<TypeScriptFileVoictent>({
+  .fromHubblepup2<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
-  .toGrition<TypeScriptFileConfigurationVoictent>({
+  .toHubblepup2<TypeScriptFileConfigurationVoque>({
     gepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
-    getZorn: (input) => input.zorn,
   })
   .onPinbe((input) => {
     const configurationFilePath = getConfigurationFilePath(input.filePath);
     const configurationRootDirectory = posix.dirname(configurationFilePath);
 
     const configuration: TypeScriptFileConfiguration = {
+      zorn: input.zorn,
       sourceFilePath: input.filePath,
       filePath: configurationFilePath,
       rootDirectory: configurationRootDirectory,

@@ -1,19 +1,19 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  EngineFunctionConfigurationVoictent,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
+  EngineFunctionConfigurationVoque,
 } from '../engine-program/engineFunctionConfiguration';
 import {
   TYPE_SCRIPT_FILE_GEPP,
-  TypeScriptFileVoictent,
+  TypeScriptFileVoque,
 } from '../type-script-file/typeScriptFile';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-  TypeScriptFileImportListVoictent,
+  TypeScriptFileImportListVoque,
 } from '../type-script-file/typeScriptFileImportList';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
-  EngineProgramFileVoictent,
+  EngineProgramFileVoque,
 } from './engineProgramFile';
 
 /**
@@ -23,22 +23,26 @@ import {
 export const filterEngineProgramFile = buildEstinant({
   name: 'filterEngineProgramFile',
 })
-  .fromHubblepup<TypeScriptFileVoictent>({
+  .fromHubblepup2<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
-  .andFromGritionTuple<TypeScriptFileImportListVoictent, [string]>({
+  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [string]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    framate: (leftInput) => [leftInput.zorn],
-    croard: (rightInput) => rightInput.zorn,
+    framate: (leftInput) => [leftInput.indexByName.zorn],
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromVoictent<EngineFunctionConfigurationVoictent>({
+  .andFromVoictent2<EngineFunctionConfigurationVoque>({
     gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple<EngineProgramFileVoictent>({
+  .toHubblepupTuple2<EngineProgramFileVoque>({
     gepp: ENGINE_PROGRAM_FILE_GEPP,
   })
   .onPinbe(
-    (parsedFileOdeshin, [importList], engineFunctionConfigurationList) => {
+    (
+      typeScriptFile,
+      [{ list: importList }],
+      engineFunctionConfigurationList,
+    ) => {
       const combinationList = importList.flatMap((fileImport) => {
         return engineFunctionConfigurationList.map(
           (engineFunctionConfiguration) => {
@@ -69,12 +73,10 @@ export const filterEngineProgramFile = buildEstinant({
 
       return [
         {
-          zorn: parsedFileOdeshin.zorn,
-          grition: {
-            file: parsedFileOdeshin.grition,
-            engineFunctionConfiguration:
-              engineFunctionImportCombination.engineFunctionConfiguration,
-          },
+          zorn: typeScriptFile.zorn,
+          file: typeScriptFile,
+          engineFunctionConfiguration:
+            engineFunctionImportCombination.engineFunctionConfiguration,
         },
       ];
     },

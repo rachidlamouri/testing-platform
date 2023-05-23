@@ -1,8 +1,10 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { PROGRAM_ERROR_GEPP, ProgramErrorVoictent } from './programError';
+import { PROGRAM_ERROR_GEPP, ProgramErrorVoque } from './programError';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;
+const errorLimit = 100;
+let isLimitReached = false;
 
 /**
  * Logs a ProgramError's id, message, and locator information to the console.
@@ -12,24 +14,33 @@ let errorCount = 0;
 export const reportErrors = buildEstinant({
   name: 'reportErrors',
 })
-  .fromGrition<ProgramErrorVoictent>({
+  .fromHubblepup2<ProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((programError) => {
-    /* eslint-disable no-console */
-    console.log();
-    console.log(
-      `\x1b[31mError\x1b[0m ${errorCount}: ${
-        programError.errorId ?? '\x1b[31mMISSING_ID\x1b[0m'
-      }`,
-    );
-    console.log(`  Message: ${programError.message}`);
-    if (programError.locator !== null) {
-      console.log(`  File Path: ${programError.locator.filePath}`);
-    }
-    console.log();
-    /* eslint-enable no-console */
-
     errorCount += 1;
+
+    if (errorCount < errorLimit) {
+      /* eslint-disable no-console */
+      console.log();
+      console.log(
+        `\x1b[31mError\x1b[0m ${errorCount}: ${
+          programError.errorId ?? '\x1b[31mMISSING_ID\x1b[0m'
+        }`,
+      );
+      console.log(`  Message: ${programError.message}`);
+      if (programError.locator !== null) {
+        console.log(`  File Path: ${programError.locator.filePath}`);
+      }
+      console.log();
+      /* eslint-enable no-console */
+    } else if (!isLimitReached) {
+      // eslint-disable-next-line no-console
+      console.log(
+        `\x1b[31mError\x1b[0m: Additional errors were encountered and omitted from the output`,
+      );
+
+      isLimitReached = true;
+    }
   })
   .assemble();

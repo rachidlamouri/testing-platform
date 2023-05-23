@@ -1,17 +1,16 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
-  ParsedTypeScriptFileVoictent,
+  ParsedTypeScriptFileVoque,
 } from '../type-script-file/parsedTypeScriptFile';
 import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
   EngineEstinantLocator2,
-  EngineEstinantLocator2Voictent,
-  getEngineEstinantLocatorZorn,
+  EngineEstinantLocator2Voque,
 } from './engineEstinantLocator2';
 import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
-  EngineProgramLocator2Voictent,
+  EngineProgramLocator2Voque,
 } from './engineProgramLocator2';
 
 /**
@@ -27,13 +26,13 @@ export const getEngineEstinantLocatorCollection = buildEstinant({
     - capture the semantics of this behavior in the builder chain
     - provide a usable signal when an estinant fails
   */
-  .fromOdeshinVoictent<ParsedTypeScriptFileVoictent>({
+  .fromVoictent2<ParsedTypeScriptFileVoque>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .andFromOdeshinVoictent<EngineProgramLocator2Voictent>({
+  .andFromVoictent2<EngineProgramLocator2Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_2_GEPP,
   })
-  .toHubblepupTuple<EngineEstinantLocator2Voictent>({
+  .toHubblepupTuple2<EngineEstinantLocator2Voque>({
     gepp: ENGINE_ESTINANT_LOCATOR_2_GEPP,
   })
   .onPinbe((unused, engineProgramLocatorList) => {
@@ -43,7 +42,7 @@ export const getEngineEstinantLocatorCollection = buildEstinant({
           engineProgramLocator.engineEstinantLocatorList,
       )
       .map((engineEstinantLocator): [string, EngineEstinantLocator2] => [
-        getEngineEstinantLocatorZorn(engineEstinantLocator),
+        engineEstinantLocator.zorn,
         engineEstinantLocator,
       ]);
 
@@ -51,13 +50,6 @@ export const getEngineEstinantLocatorCollection = buildEstinant({
 
     const uniqueLocatorList = [...locatorByZorn.values()];
 
-    const outputList = uniqueLocatorList.map((locator) => {
-      return {
-        zorn: getEngineEstinantLocatorZorn(locator),
-        grition: locator,
-      };
-    });
-
-    return outputList;
+    return uniqueLocatorList;
   })
   .assemble();

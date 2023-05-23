@@ -3,25 +3,23 @@ import { LeftInputHubblepupVicken } from '../../core/engine-shell/vicken/leftInp
 import { OutputVicken } from '../../core/engine-shell/vicken/outputVicken';
 import { RightInputHubblepupTupleVicken } from '../../core/engine-shell/vicken/rightInputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
-import {
-  InMemoryVoictent,
-  InMemoryVoque,
-} from '../../core/engine/inMemoryVoictent';
+import { InMemoryVoictent } from '../../core/engine/inMemoryVoictent';
+import { StandardInMemoryVoque } from '../../core/engine/inMemoryVoque';
 import { buildAddMetadataForSerialization } from '../buildAddMetadataForSerialization';
 import {
   SerializableVoictent,
   SerializableVoque,
 } from '../serializableVoictent';
 
-type Voictent1Voque = InMemoryVoque<
+type Voictent1Voque = StandardInMemoryVoque<
   'voictent-1',
   {
     value: number;
     joinIndexList: number[];
   }
 >;
-type Voictent2Voque = InMemoryVoque<'voictent-2', string>;
-type Voictent3Voque = InMemoryVoque<'voictent-3', string>;
+type Voictent2Voque = StandardInMemoryVoque<'voictent-2', string>;
+type Voictent3Voque = StandardInMemoryVoque<'voictent-3', string>;
 type SerializedVoque = SerializableVoque<'serialized'>;
 
 /**

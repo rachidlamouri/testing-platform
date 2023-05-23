@@ -58,7 +58,7 @@ export type JsonSerializableVoictentConstructorInput<
 
 export class JsonSerializableVoictent<
   TVoque extends GenericJsonSerializableVoque,
-> implements Voictent2<TVoque>
+> implements Voictent2<GenericJsonSerializableVoque, TVoque>
 {
   public readonly nameSpace: string;
 

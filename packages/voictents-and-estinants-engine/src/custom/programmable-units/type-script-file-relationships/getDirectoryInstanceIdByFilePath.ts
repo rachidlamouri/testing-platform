@@ -1,9 +1,9 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { DIRECTORY_GEPP, DirectoryVoictent } from '../file/directory';
+import { DIRECTORY_GEPP, DirectoryVoque } from '../file/directory';
 import {
   DIRECTORY_INSTANCE_ID_BY_FILE_PATH_GEPP,
   DirectoryInstanceIdByDirectoryPath,
-  DirectoryInstanceIdByDirectoryPathVoictent,
+  DirectoryInstanceIdByDirectoryPathVoque,
 } from './directoryInstanceIdByDirectoryPath';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 
@@ -15,14 +15,14 @@ import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelati
 export const getDirectoryInstanceIdByDirectoryPath = buildEstinant({
   name: 'getDirectoryInstanceIdByDirectoryPath',
 })
-  .fromOdeshinVoictent<DirectoryVoictent>({
+  .fromVoictent2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .toHubblepup<DirectoryInstanceIdByDirectoryPathVoictent>({
+  .toHubblepup2<DirectoryInstanceIdByDirectoryPathVoque>({
     gepp: DIRECTORY_INSTANCE_ID_BY_FILE_PATH_GEPP,
   })
   .onPinbe((directoryList) => {
-    const directoryInstanceIdByDirectoryPath: DirectoryInstanceIdByDirectoryPath =
+    const directoryInstanceIdByDirectoryPath: DirectoryInstanceIdByDirectoryPath['grition'] =
       new Map();
     directoryList.forEach((directory) => {
       directoryInstanceIdByDirectoryPath.set(

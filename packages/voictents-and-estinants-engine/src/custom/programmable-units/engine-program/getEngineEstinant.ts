@@ -18,31 +18,28 @@ import {
 import { isStringLiteral } from '../../../utilities/type-script-ast/isStringLiteral';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  ProgramErrorVoictent,
   PROGRAM_ERROR_GEPP,
   ErrorLocatorTypeName,
   ProgramError,
-  ProgramErrorOdeshin,
+  ProgramErrorVoque,
 } from '../error/programError';
 import {
-  ProgramBodyDeclarationsByIdentifierVoictent,
   PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
+  ProgramBodyDeclarationsByIdentifierVoque,
 } from '../type-script-file/programBodyDeclarationsByIdentifier';
 import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
   EngineEstinantBuildAddMetadataForSerializationLocator,
   EngineEstinantLocator2TypeName,
-  EngineEstinantLocator2Voictent,
+  EngineEstinantLocator2Voque,
   EngineEstinantTopLevelDeclarationLocator,
-  getEngineEstinantLocatorZorn,
 } from './engineEstinantLocator2';
 import { EstinantInput } from './estinant-input-output/estinantInputList';
 import { EstinantOutput } from './estinant-input-output/estinantOutputList';
 import {
   ENGINE_ESTINANT_2_GEPP,
   EngineEstinant2,
-  EngineEstinant2Odeshin,
-  EngineEstinant2Voictent,
+  EngineEstinant2Voque,
   EstinantInput2,
   EstinantOutput2,
 } from './engineEstinant2';
@@ -103,7 +100,8 @@ const getBuildAddMetadataForSerializationEstinant = (
         },
       ],
       estinant: {
-        id: getTextDigest(getEngineEstinantLocatorZorn(estinantLocator)),
+        zorn: estinantLocator.zorn,
+        id: getTextDigest(estinantLocator.zorn),
         // TODO: why do we include both of these?
         estinantName: 'UNKNOWN',
         identifierName: 'UNKNOWN',
@@ -127,6 +125,7 @@ const getBuildAddMetadataForSerializationEstinant = (
   return {
     errorList: [],
     estinant: {
+      zorn: estinantLocator.zorn,
       id: getTextDigest(estinantName),
       // TODO: why do we include both of these?
       estinantName,
@@ -716,23 +715,21 @@ const getAdaptedEstinant = ({
 export const getEngineEstinant = buildEstinant({
   name: 'getEngineEstinant',
 })
-  .fromHubblepup<EngineEstinantLocator2Voictent>({
+  .fromHubblepup2<EngineEstinantLocator2Voque>({
     gepp: ENGINE_ESTINANT_LOCATOR_2_GEPP,
   })
-  .andFromGritionTuple<ProgramBodyDeclarationsByIdentifierVoictent, [string]>({
+  .andFromHubblepupTuple2<ProgramBodyDeclarationsByIdentifierVoque, [string]>({
     gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
-    croard: (rightInput) => rightInput.zorn,
-    framate: (leftInput) => [leftInput.grition.filePath],
+    framate: (leftInput) => [leftInput.hubblepup.filePath],
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .toHubblepupTuple<ProgramErrorVoictent<EstinantName>>({
+  .toHubblepupTuple2<ProgramErrorVoque<EstinantName>>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .toHubblepupTuple<EngineEstinant2Voictent>({
+  .toHubblepupTuple2<EngineEstinant2Voque>({
     gepp: ENGINE_ESTINANT_2_GEPP,
   })
-  .onPinbe((engineEstinantLocatorOdeshin, [bodyDeclarationsByIdentifier]) => {
-    const estinantLocator = engineEstinantLocatorOdeshin.grition;
-
+  .onPinbe((estinantLocator, [bodyDeclarationsByIdentifier]) => {
     let errorList: ProgramError<EstinantName>[];
     let estinant: EngineEstinant2 | null;
 
@@ -743,9 +740,10 @@ export const getEngineEstinant = buildEstinant({
       ({ errorList, estinant } =
         getBuildAddMetadataForSerializationEstinant(estinantLocator));
     } else {
-      const commentedBodyDeclaration = bodyDeclarationsByIdentifier.get(
-        estinantLocator.identifierName,
-      );
+      const commentedBodyDeclaration =
+        bodyDeclarationsByIdentifier.declarationByIdentifier.get(
+          estinantLocator.identifierName,
+        );
 
       if (estinantLocator.isCoreEstinant) {
         ({ errorList, estinant } = getCoreEstinant({
@@ -774,25 +772,10 @@ export const getEngineEstinant = buildEstinant({
       }
     }
 
-    const estinantList: EngineEstinant2Odeshin[] =
-      estinant !== null
-        ? [
-            {
-              zorn: engineEstinantLocatorOdeshin.zorn,
-              grition: estinant,
-            },
-          ]
-        : [];
+    const estinantList: EngineEstinant2[] = estinant !== null ? [estinant] : [];
 
     return {
-      [PROGRAM_ERROR_GEPP]: errorList.map<ProgramErrorOdeshin<EstinantName>>(
-        (programError) => {
-          return {
-            zorn: '',
-            grition: programError,
-          };
-        },
-      ),
+      [PROGRAM_ERROR_GEPP]: errorList,
       [ENGINE_ESTINANT_2_GEPP]: estinantList,
     };
   })

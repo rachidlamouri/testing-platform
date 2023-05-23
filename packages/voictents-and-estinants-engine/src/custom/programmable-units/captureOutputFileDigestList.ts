@@ -1,6 +1,6 @@
 import { buildEstinant } from '../adapter/estinant-builder/estinantBuilder';
-import { OutputFileVoictent, OUTPUT_FILE_GEPP } from './output-file/outputFile';
-import { SANITY_SNAPSHOT_GEPP, SanitySnapshotVoictent } from './sanitySnapshot';
+import { OUTPUT_FILE_GEPP, OutputFileVoque } from './output-file/outputFile';
+import { SANITY_SNAPSHOT_GEPP, SanitySnapshotVoque } from './sanitySnapshot';
 import { getTextDigest } from '../../utilities/getTextDigest';
 
 type OutputFileDigest = {
@@ -16,10 +16,10 @@ type OutputFileDigest = {
 export const captureOutputFileDigestList = buildEstinant({
   name: 'captureOutputFileDigestList',
 })
-  .fromVoictent<OutputFileVoictent>({
+  .fromVoictent2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
   })
-  .toHubblepup<SanitySnapshotVoictent>({
+  .toHubblepup2<SanitySnapshotVoque>({
     gepp: SANITY_SNAPSHOT_GEPP,
   })
   .onPinbe((list) => {

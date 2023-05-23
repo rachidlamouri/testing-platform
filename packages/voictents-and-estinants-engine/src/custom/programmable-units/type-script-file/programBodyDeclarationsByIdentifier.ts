@@ -1,29 +1,23 @@
-import { Grition } from '../../adapter/grition';
-import { OdeshinFromGrition } from '../../adapter/odeshin';
 import { Voictent } from '../../adapter/voictent';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
   CommentedProgramBodyDeclaration,
-  CommentedProgramBodyDeclarationListVoictent,
+  CommentedProgramBodyDeclarationListVoque,
   IdentifiableCommentedProgramBodyDeclaration,
 } from './commentedProgramBodyDeclarationList';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 export type ProgramBodyDeclarationsByIdentifierEntry = [
   string,
   CommentedProgramBodyDeclaration,
 ];
 
-export type ProgramBodyDeclarationsByIdentifier = Map<
-  string,
-  CommentedProgramBodyDeclaration
->;
-
-export type ProgramBodyDeclarationsByIdentifierGrition =
-  Grition<ProgramBodyDeclarationsByIdentifier>;
-
-export type ProgramBodyDeclarationsByIdentifierOdeshin =
-  OdeshinFromGrition<ProgramBodyDeclarationsByIdentifierGrition>;
+// TODO: fix this weird nested map type
+export type ProgramBodyDeclarationsByIdentifier = {
+  zorn: string;
+  declarationByIdentifier: Map<string, CommentedProgramBodyDeclaration>;
+};
 
 export const PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP =
   'program-body-statements-by-identifier';
@@ -33,7 +27,12 @@ export type ProgramBodyDeclarationsByIdentifierGepp =
 
 export type ProgramBodyDeclarationsByIdentifierVoictent = Voictent<
   ProgramBodyDeclarationsByIdentifierGepp,
-  ProgramBodyDeclarationsByIdentifierOdeshin
+  ProgramBodyDeclarationsByIdentifier
+>;
+
+export type ProgramBodyDeclarationsByIdentifierVoque = InMemoryOdeshin2Voque<
+  ProgramBodyDeclarationsByIdentifierGepp,
+  ProgramBodyDeclarationsByIdentifier
 >;
 
 /**
@@ -45,15 +44,14 @@ export type ProgramBodyDeclarationsByIdentifierVoictent = Voictent<
 export const getProgramBodyDeclarationsByIdentifier = buildEstinant({
   name: 'getProgramBodyDeclarationsByIdentifier',
 })
-  .fromGrition<CommentedProgramBodyDeclarationListVoictent>({
+  .fromHubblepup2<CommentedProgramBodyDeclarationListVoque>({
     gepp: COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
   })
-  .toGrition<ProgramBodyDeclarationsByIdentifierVoictent>({
+  .toHubblepup2<ProgramBodyDeclarationsByIdentifierVoque>({
     gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe((commentedProgramBodyDeclarationList) => {
-    const outputEntryList = commentedProgramBodyDeclarationList
+    const outputEntryList = commentedProgramBodyDeclarationList.list
       .filter(
         (
           commentedDeclaration,
@@ -61,7 +59,7 @@ export const getProgramBodyDeclarationsByIdentifier = buildEstinant({
           return commentedDeclaration.identifiableNode !== null;
         },
       )
-      .map<ProgramBodyDeclarationsByIdentifierEntry>(
+      .map<[string, IdentifiableCommentedProgramBodyDeclaration]>(
         (identifiableCommentedDeclaration) => {
           return [
             identifiableCommentedDeclaration.identifiableNode.id.name,
@@ -70,10 +68,9 @@ export const getProgramBodyDeclarationsByIdentifier = buildEstinant({
         },
       );
 
-    const output: ProgramBodyDeclarationsByIdentifier = new Map(
-      outputEntryList,
-    );
-
-    return output;
+    return {
+      zorn: commentedProgramBodyDeclarationList.zorn,
+      declarationByIdentifier: new Map(outputEntryList),
+    };
   })
   .assemble();

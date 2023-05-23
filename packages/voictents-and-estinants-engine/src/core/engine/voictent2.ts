@@ -1,18 +1,28 @@
+import { Tuple } from '../../utilities/semantic-types/tuple';
 import {
   VoictentItemLanbe,
   VoictentItemLanbe2,
   VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
-import { GenericVoque } from './voque';
+import { GenericVoque, UnsafeVoque } from './voque';
 
-export type Voictent2<TVoque extends GenericVoque> = {
+export type Voictent2<
+  TRestrictingVoque extends GenericVoque,
+  TVoque extends TRestrictingVoque,
+> = {
   get gepp(): TVoque['gepp'];
   createVoictentLanbe(debugName: string): VoictentLanbe | null;
   createVoictentItemLanbe(
     debugName: string,
-  ): VoictentItemLanbe2<TVoque> | VoictentItemLanbe | null;
+  ): VoictentItemLanbe2<TRestrictingVoque, TVoque> | VoictentItemLanbe | null;
   onTickStart(): void;
   addHubblepup(hubblepup: TVoque['receivedHubblepup']): void;
 };
 
-export type GenericVoictent2 = Voictent2<GenericVoque>;
+export type GenericVoictent2 = Voictent2<GenericVoque, GenericVoque>;
+
+export type GenericVoictent2Tuple = Tuple<GenericVoictent2>;
+
+export type UnsafeVoictent2 = Voictent2<UnsafeVoque, UnsafeVoque>;
+
+export type UnsafeVoictent2Tple = Tuple<UnsafeVoictent2>;

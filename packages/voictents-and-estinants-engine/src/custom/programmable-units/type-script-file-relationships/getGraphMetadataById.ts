@@ -1,29 +1,29 @@
 import { posix } from 'path';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-  DirectedGraphMetadataById,
-  DirectedGraphMetadataByIdVoictent,
-} from '../graph-visualization/directedGraphMetadataById';
-import {
   TYPE_SCRIPT_FILE_GEPP,
-  TypeScriptFileVoictent,
+  TypeScriptFileVoque,
 } from '../type-script-file/typeScriptFile';
-import { ROOT_DIRECTORY_GEPP, RootDirectoryVoictent } from './rootDirectory';
+import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from './rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
-import { DIRECTORY_GEPP, DirectoryVoictent } from '../file/directory';
+import { DIRECTORY_GEPP, DirectoryVoque } from '../file/directory';
 import {
   EXTERNAL_MODULE_GEPP,
-  ExternalModuleVoictent,
+  ExternalModuleVoque,
 } from './graph-element/externalModule';
 import {
   BOUNDARY_METADATA_GEPP,
-  BoundaryMetadataVoictent,
+  BoundaryMetadataVoque,
 } from './graph-element/boundaryMetadata';
 import {
   ROOT_METADATA_GEPP,
-  RootMetadataVoictent,
+  RootMetadataVoque,
 } from './graph-element/rootMetadata';
+import {
+  DirectedGraphMetadataByIdVoque,
+  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+  DirectedGraphMetadataById,
+} from '../graph-visualization/directedGraphMetadataById';
 
 /**
  * Converts all TypeScript relationship metadata into a format that can be used
@@ -32,29 +32,28 @@ import {
 export const getGraphMetadataById = buildEstinant({
   name: 'getGraphMetadataById',
 })
-  .fromGrition<RootMetadataVoictent>({
+  .fromHubblepup2<RootMetadataVoque>({
     gepp: ROOT_METADATA_GEPP,
   })
-  .andFromGritionTuple<RootDirectoryVoictent, [string]>({
+  .andFromHubblepupTuple2<RootDirectoryVoque, [string]>({
     gepp: ROOT_DIRECTORY_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
-    croard: (rightInput) => rightInput.zorn,
+    croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromOdeshinVoictent<BoundaryMetadataVoictent>({
+  .andFromVoictent2<BoundaryMetadataVoque>({
     gepp: BOUNDARY_METADATA_GEPP,
   })
-  .andFromOdeshinVoictent<DirectoryVoictent>({
+  .andFromVoictent2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .andFromOdeshinVoictent<TypeScriptFileVoictent>({
+  .andFromVoictent2<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
-  .andFromOdeshinVoictent<ExternalModuleVoictent>({
+  .andFromVoictent2<ExternalModuleVoque>({
     gepp: EXTERNAL_MODULE_GEPP,
   })
-  .toGrition<DirectedGraphMetadataByIdVoictent>({
+  .toHubblepup2<DirectedGraphMetadataByIdVoque>({
     gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
   .onPinbe(
     (
@@ -65,11 +64,14 @@ export const getGraphMetadataById = buildEstinant({
       typeScriptFileList,
       externalModuleList,
     ) => {
-      const metadataById: DirectedGraphMetadataById = {};
+      const metadataById: DirectedGraphMetadataById = {
+        zorn: rootMetadata.zorn,
+        grition: {},
+      };
 
       boundaryList.forEach((boundary) => {
         if (boundary.isInternal) {
-          metadataById[boundary.id] = {
+          metadataById.grition[boundary.id] = {
             title: posix.basename(boundary.directoryPath),
             fieldList: [
               {
@@ -90,7 +92,7 @@ export const getGraphMetadataById = buildEstinant({
             ],
           };
         } else {
-          metadataById[boundary.id] = {
+          metadataById.grition[boundary.id] = {
             title: boundary.attributeByKey.label,
             fieldList: [
               {
@@ -107,7 +109,7 @@ export const getGraphMetadataById = buildEstinant({
       });
 
       directoryList.forEach((directory) => {
-        metadataById[directory.instanceId] = {
+        metadataById.grition[directory.instanceId] = {
           title: posix.basename(directory.directoryPath),
           fieldList: [
             {
@@ -130,7 +132,7 @@ export const getGraphMetadataById = buildEstinant({
       });
 
       typeScriptFileList.forEach((file) => {
-        metadataById[file.instanceId] = {
+        metadataById.grition[file.instanceId] = {
           title: file.onDiskFileName.camelCase,
           fieldList: [
             {
@@ -159,7 +161,7 @@ export const getGraphMetadataById = buildEstinant({
       });
 
       externalModuleList.forEach((externalModule) => {
-        metadataById[externalModule.instanceId] = {
+        metadataById.grition[externalModule.instanceId] = {
           title: externalModule.sourcePath,
           fieldList: [
             {

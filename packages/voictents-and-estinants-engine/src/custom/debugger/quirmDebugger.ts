@@ -3,14 +3,13 @@ import { posix } from 'path';
 import * as uuid from 'uuid';
 import { SimplerQuirmDebugger } from '../../type-script-adapter/digikikify';
 import { serialize } from '../../utilities/typed-datum/serializer/serialize';
-import { isOdeshin } from '../adapter/odeshin';
 import {
-  OutputFileVoictent,
   OUTPUT_FILE_GEPP,
+  OutputFileVoque,
 } from '../programmable-units/output-file/outputFile';
 import { LanbeTypeName } from '../../core/engine-shell/voictent/lanbe';
 import { GenericVoque } from '../../core/engine/voque';
-import { AdaptedVoqueFromVoictent } from '../../type-script-adapter/voictent';
+import { isOdeshin2 } from '../adapter/odeshin2';
 
 // TODO: move to a utility or something
 export const escapePathSeparator = (text: string): string =>
@@ -19,7 +18,7 @@ export const escapePathSeparator = (text: string): string =>
 export const buildQuirmDebugger = (
   programName: string,
   debugDirectoryPath: 'debug' | 'snapshot' = 'debug',
-): SimplerQuirmDebugger<AdaptedVoqueFromVoictent<OutputFileVoictent>> => {
+): SimplerQuirmDebugger<OutputFileVoque> => {
   const createDirectory = (directoryPath: string): void => {
     if (!fs.existsSync(directoryPath)) {
       // eslint-disable-next-line no-console
@@ -68,9 +67,7 @@ export const buildQuirmDebugger = (
     fs.writeFileSync(filePath, text);
   };
 
-  const quirmDebugger: SimplerQuirmDebugger<
-    AdaptedVoqueFromVoictent<OutputFileVoictent>
-  > = {
+  const quirmDebugger: SimplerQuirmDebugger<OutputFileVoque> = {
     handlerByGepp: {
       [OUTPUT_FILE_GEPP]: ({ gepp, hubblepup }) => {
         const { fileName, fileExtensionSuffix, text } = hubblepup;
@@ -78,7 +75,7 @@ export const buildQuirmDebugger = (
       },
     },
     defaultHandler: ({ gepp, hubblepup }) => {
-      const fileName = isOdeshin(hubblepup)
+      const fileName = isOdeshin2(hubblepup)
         ? escapePathSeparator(hubblepup.zorn)
         : uuid.v4();
 

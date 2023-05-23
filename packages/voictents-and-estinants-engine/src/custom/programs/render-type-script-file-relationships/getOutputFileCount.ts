@@ -1,11 +1,11 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   OUTPUT_FILE_GEPP,
-  OutputFileVoictent,
+  OutputFileVoque,
 } from '../../programmable-units/output-file/outputFile';
 import {
   SANITY_SNAPSHOT_GEPP,
-  SanitySnapshotVoictent,
+  SanitySnapshotVoque,
 } from '../../programmable-units/sanitySnapshot';
 
 /**
@@ -15,10 +15,10 @@ import {
 export const getOutputFileCount = buildEstinant({
   name: 'getOutputFileCount',
 })
-  .fromVoictent<OutputFileVoictent>({
+  .fromVoictent2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
   })
-  .toHubblepup<SanitySnapshotVoictent>({
+  .toHubblepup2<SanitySnapshotVoque>({
     gepp: SANITY_SNAPSHOT_GEPP,
   })
   .onPinbe((outputFileList) => {

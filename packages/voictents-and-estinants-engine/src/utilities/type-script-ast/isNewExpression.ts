@@ -1,9 +1,14 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
-import { TypeScriptNode } from './isNode';
+import { TypeScriptNode, isNode } from './isNode';
 import {
   ObjectExpressionWithIdentifierProperties,
   isObjectExpressionWithIdentifierProperties,
 } from './isObjectLiteralExpressionWithIdentifierProperties';
+import {
+  TypeScriptTypeParameterInstantiationWithSpecificParameterTuple,
+  TypeScriptTypeParameterNodeTypeTuple,
+  isTypeScriptTypeParameterInstantiationWithParameterTuple,
+} from './isTypeScriptTypeParameterInstantiation';
 
 export const isNewExpression = (
   node: TypeScriptNode,
@@ -23,3 +28,22 @@ export const isNewExpressionWithObjectExpressionArgument = (
     isObjectExpressionWithIdentifierProperties(node.arguments[0])
   );
 };
+
+export type NewExpressionWithSpecificTypeParameters<
+  TTypeScriptTypeParameterNodeTypeTuple extends TypeScriptTypeParameterNodeTypeTuple = TypeScriptTypeParameterNodeTypeTuple,
+> = TSESTree.NewExpression & {
+  typeParameters: TypeScriptTypeParameterInstantiationWithSpecificParameterTuple<TTypeScriptTypeParameterNodeTypeTuple>;
+};
+
+export const isNewExpressionWithSpecificTypeParameters = <
+  TTypeScriptTypeParameterNodeTypeTuple extends TypeScriptTypeParameterNodeTypeTuple,
+>(
+  node: TypeScriptNode,
+  parameterNodeTypeTuple: TTypeScriptTypeParameterNodeTypeTuple,
+): node is NewExpressionWithSpecificTypeParameters<TTypeScriptTypeParameterNodeTypeTuple> =>
+  isNode(node) &&
+  isNewExpression(node) &&
+  isTypeScriptTypeParameterInstantiationWithParameterTuple(
+    node.typeParameters,
+    parameterNodeTypeTuple,
+  );

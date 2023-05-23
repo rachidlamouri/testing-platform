@@ -1,53 +1,95 @@
 import { GenericIndexedHubblepup } from '../../../core/engine-shell/quirm/hubblepup';
-import { LeftInputHubblepupVicken } from '../../../core/engine-shell/vicken/leftInputVicken';
-import { OutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
 import { GenericVoque } from '../../../core/engine/voque';
 import { Voictent } from '../voictent';
 import {
   buildInputOutputContextFromLeftInputContext,
   InstantiationContext,
 } from './estinantBuilderContext';
+import {
+  buildOutputHubblepupTupleAppreffingeBuilder2,
+  OutputHubblepupTupleAppreffingeBuilderParent2,
+} from './outputHubblepupTupleAppreffingeBuilder2';
 import { PartialLeftInputAppreffinge } from './partialAppreffinge';
 import {
   buildPinbetunfBuilder2,
   PinbetunfBuilderParent2,
 } from './pinbetunfBuilder2';
-import { AdaptedLeftInputVicken } from './vicken';
+import { AdaptedLeftInputHubblepupVicken } from './vicken';
+import { SpreadN } from '../../../utilities/spreadN';
+import {
+  buildOutputHubblepupConditionalAppreffingeBuilder,
+  OutputHubblepupConditionalAppreffingeBuilderParent,
+} from './outputHubblepupConditionalAppreffingeBuilder';
+import {
+  buildOutputHubblepupAppreffingeBuilder2,
+  OutputHubblepupAppreffingeBuilderParent2,
+} from './outputHubblepupAppreffingeBuilder2';
+import {
+  buildRightInputHubblepupTupleAppreffingeBuilder2,
+  RightInputHubblepupTupleAppreffingeBuilderParent2,
+} from './rightInputHubblepupTupleAppreffingeBuilder2';
+import {
+  buildRightInputVoictentAppreffingeBuilder2,
+  RightInputVoictentAppreffingeBuilderParent2,
+} from './rightInputVoictentAppreffingeBuilder2';
 
-type CurrentAdaptedLeftInputVicken<TInputVoque extends GenericVoque> =
-  AdaptedLeftInputVicken<
-    LeftInputHubblepupVicken<TInputVoque>,
-    TInputVoque['emittedHubblepup']
-  >;
+type EmptyAdaptedRightInputVickenTuple = [];
 
-type CurrentAdaptedRightInputVickenTuple = [];
-
-type CurrentAdaptedOutputVicken = OutputVicken<[]>;
+type EmptyAdaptedOutputVickenTuple = [];
 
 export type LeftAppreffinge<TInputVoictent extends Voictent> = {
   gepp: TInputVoictent['gepp'];
 };
 
-export type LeftInputHubblepupAppreffingeBuilder = <
+export type LeftInputHubblepupAppreffingeBuilder2 = <
   TInputVoque extends GenericVoque,
 >(
   partialLeftInputAppreffinge: PartialLeftInputAppreffinge<TInputVoque>,
-) => PinbetunfBuilderParent2<
-  CurrentAdaptedLeftInputVicken<TInputVoque>,
-  CurrentAdaptedRightInputVickenTuple,
-  CurrentAdaptedOutputVicken
+) => SpreadN<
+  [
+    RightInputHubblepupTupleAppreffingeBuilderParent2<
+      AdaptedLeftInputHubblepupVicken<TInputVoque>,
+      EmptyAdaptedRightInputVickenTuple
+    >,
+    RightInputVoictentAppreffingeBuilderParent2<
+      AdaptedLeftInputHubblepupVicken<TInputVoque>,
+      EmptyAdaptedRightInputVickenTuple
+    >,
+
+    PinbetunfBuilderParent2<
+      AdaptedLeftInputHubblepupVicken<TInputVoque>,
+      EmptyAdaptedRightInputVickenTuple,
+      EmptyAdaptedOutputVickenTuple
+    >,
+
+    OutputHubblepupConditionalAppreffingeBuilderParent<
+      AdaptedLeftInputHubblepupVicken<TInputVoque>,
+      EmptyAdaptedOutputVickenTuple
+    >,
+    OutputHubblepupAppreffingeBuilderParent2<
+      AdaptedLeftInputHubblepupVicken<TInputVoque>,
+      EmptyAdaptedRightInputVickenTuple,
+      EmptyAdaptedOutputVickenTuple
+    >,
+    OutputHubblepupTupleAppreffingeBuilderParent2<
+      AdaptedLeftInputHubblepupVicken<TInputVoque>,
+      EmptyAdaptedRightInputVickenTuple,
+      EmptyAdaptedOutputVickenTuple
+    >,
+  ]
 >;
 
 export const buildLeftInputHubblepupAppreffingeBuilder2 = (
   instantiationContext: InstantiationContext,
-): LeftInputHubblepupAppreffingeBuilder => {
-  const buildLeftInputHubblepupAppreffinge: LeftInputHubblepupAppreffingeBuilder =
+): LeftInputHubblepupAppreffingeBuilder2 => {
+  const buildLeftInputHubblepupAppreffinge: LeftInputHubblepupAppreffingeBuilder2 =
     <TInputVoque extends GenericVoque>(
       partialLeftInputAppreffinge: PartialLeftInputAppreffinge<TInputVoque>,
     ) => {
       const nextContext = buildInputOutputContextFromLeftInputContext({
         instantiationContext,
         leftInputContext: {
+          version: 2,
           gepp: partialLeftInputAppreffinge.gepp,
           isWibiz: false,
           modifyTropoignantInput: (
@@ -59,10 +101,37 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
       });
 
       return {
+        andFromHubblepupTuple2:
+          buildRightInputHubblepupTupleAppreffingeBuilder2<
+            AdaptedLeftInputHubblepupVicken<TInputVoque>,
+            EmptyAdaptedRightInputVickenTuple
+          >(nextContext),
+        andFromVoictent2: buildRightInputVoictentAppreffingeBuilder2<
+          AdaptedLeftInputHubblepupVicken<TInputVoque>,
+          EmptyAdaptedRightInputVickenTuple
+        >(nextContext),
+
         onPinbe: buildPinbetunfBuilder2<
-          CurrentAdaptedLeftInputVicken<TInputVoque>,
-          CurrentAdaptedRightInputVickenTuple,
-          CurrentAdaptedOutputVicken
+          AdaptedLeftInputHubblepupVicken<TInputVoque>,
+          EmptyAdaptedRightInputVickenTuple,
+          EmptyAdaptedOutputVickenTuple
+        >(nextContext),
+
+        toHubblepupOnCondition:
+          buildOutputHubblepupConditionalAppreffingeBuilder<
+            AdaptedLeftInputHubblepupVicken<TInputVoque>,
+            EmptyAdaptedOutputVickenTuple
+          >(nextContext),
+
+        toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
+          AdaptedLeftInputHubblepupVicken<TInputVoque>,
+          EmptyAdaptedRightInputVickenTuple,
+          EmptyAdaptedOutputVickenTuple
+        >(nextContext),
+        toHubblepupTuple2: buildOutputHubblepupTupleAppreffingeBuilder2<
+          AdaptedLeftInputHubblepupVicken<TInputVoque>,
+          EmptyAdaptedRightInputVickenTuple,
+          EmptyAdaptedOutputVickenTuple
         >(nextContext),
       };
     };
@@ -71,5 +140,5 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
 };
 
 export type LeftInputHubblepupAppreffingeBuilderParent2 = {
-  fromHubblepup2: LeftInputHubblepupAppreffingeBuilder;
+  fromHubblepup2: LeftInputHubblepupAppreffingeBuilder2;
 };

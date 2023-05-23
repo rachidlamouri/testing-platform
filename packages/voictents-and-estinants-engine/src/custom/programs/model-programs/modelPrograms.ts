@@ -1,6 +1,7 @@
 import { digikikify } from '../../../type-script-adapter/digikikify';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  FileSystemObjectEnumeratorConfigurationVoque,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
@@ -11,6 +12,7 @@ import {
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
+  EngineFunctionConfigurationVoque,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
 import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
@@ -29,21 +31,46 @@ import { getEngineEstinant } from '../../programmable-units/engine-program/getEn
 import { getEngineProgram2 } from '../../programmable-units/engine-program/getEngineProgram2';
 import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
 import { signalError } from '../../programmable-units/error/signalError';
+import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
+import {
+  PROGRAM_ERROR_GEPP,
+  ProgramErrorVoque,
+} from '../../programmable-units/error/programError';
+import {
+  OUTPUT_FILE_GEPP,
+  OutputFileVoque,
+} from '../../programmable-units/output-file/outputFile';
 
 /**
  * Creates an interactive model for each engine program.
  */
 digikikify({
-  initialVoictentsByGepp: {
-    [FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP]: [
-      VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
-    ],
-    [ENGINE_FUNCTION_CONFIGURATION_GEPP]: [
-      CORE_ENGINE_FUNCTION_CONFIGURATION,
-      CORE_ENGINE_FUNCTION_2_CONFIGURATION,
-      ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-    ],
-  },
+  populatedVoictentTuple: [
+    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
+      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+      initialHubblepupTuple: [
+        VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+      ],
+    }),
+    new InMemoryVoictent<EngineFunctionConfigurationVoque>({
+      gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
+      initialHubblepupTuple: [
+        CORE_ENGINE_FUNCTION_CONFIGURATION,
+        CORE_ENGINE_FUNCTION_2_CONFIGURATION,
+        ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+      ],
+    }),
+  ] as const,
+  uninferableVoictentTuple: [
+    new InMemoryVoictent<ProgramErrorVoque>({
+      gepp: PROGRAM_ERROR_GEPP,
+      initialHubblepupTuple: [],
+    }),
+    new InMemoryVoictent<OutputFileVoque>({
+      gepp: OUTPUT_FILE_GEPP,
+      initialHubblepupTuple: [],
+    }),
+  ],
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
@@ -56,6 +83,7 @@ digikikify({
 
     filterEngineProgramFile,
     getEngineProgramLocator,
+
     getEngineEstinantLocatorCollection,
     getEngineEstinant,
     getEngineProgram2,
@@ -71,6 +99,6 @@ digikikify({
     reportErrors,
 
     signalError,
-  ],
+  ] as const,
   quirmDebugger: buildQuirmDebugger('modelPrograms'),
 });

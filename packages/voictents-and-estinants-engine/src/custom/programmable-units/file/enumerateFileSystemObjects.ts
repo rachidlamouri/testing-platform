@@ -4,16 +4,12 @@ import {
 } from '../../../utilities/file/getNestedFilePaths';
 import { splitList } from '../../../utilities/splitList';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import {
-  DirectoryOdeshin,
-  DirectoryVoictent,
-  DIRECTORY_GEPP,
-} from './directory';
-import { FileVoictent, FILE_GEPP, FileOdeshin, FileGrition } from './file';
+import { Directory, DIRECTORY_GEPP, DirectoryVoque } from './directory';
+import { FILE_GEPP, File, FileVoque } from './file';
 import { getFileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import {
-  FileSystemObjectEnumeratorConfigurationVoictent,
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  FileSystemObjectEnumeratorConfigurationVoque,
 } from './fileSystemObjectEnumeratorConfiguration';
 import { getFileMetadata } from './getFileMetadata';
 import { getTextDigest } from '../../../utilities/getTextDigest';
@@ -58,13 +54,13 @@ const partsToKebabCase = (x: string[]): string => {
 export const enumerateFileSystemObjects = buildEstinant({
   name: 'enumerateFileSystemObjects',
 })
-  .fromHubblepup<FileSystemObjectEnumeratorConfigurationVoictent>({
+  .fromHubblepup2<FileSystemObjectEnumeratorConfigurationVoque>({
     gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple<DirectoryVoictent>({
+  .toHubblepupTuple2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .toHubblepupTuple<FileVoictent>({
+  .toHubblepupTuple2<FileVoque>({
     gepp: FILE_GEPP,
   })
   .onPinbe((input) => {
@@ -83,7 +79,7 @@ export const enumerateFileSystemObjects = buildEstinant({
       accumulatorB: fileMetadataList,
     });
 
-    const directoryOutputTuple = directoryMetadataList.map<DirectoryOdeshin>(
+    const directoryOutputTuple = directoryMetadataList.map<Directory>(
       ({ nodePath }) => {
         const directoryPathPartList = nodePath.split('/');
         const directoryName =
@@ -91,17 +87,15 @@ export const enumerateFileSystemObjects = buildEstinant({
 
         return {
           zorn: nodePath,
-          grition: {
-            instanceId: getTextDigest(nodePath),
-            directoryName,
-            directoryPath: nodePath,
-            directoryPathPartList,
-          },
+          instanceId: getTextDigest(nodePath),
+          directoryName,
+          directoryPath: nodePath,
+          directoryPathPartList,
         };
       },
     );
 
-    const fileTuple = fileMetadataList.map<FileOdeshin>(
+    const fileTuple = fileMetadataList.map<File>(
       ({ nodePath, directoryPath }) => {
         const {
           onDiskFileNameParts,
@@ -110,7 +104,8 @@ export const enumerateFileSystemObjects = buildEstinant({
           extensionParts,
         } = getFileMetadata(nodePath);
 
-        const grition: FileGrition = {
+        const file: File = {
+          zorn: nodePath,
           instanceId: getTextDigest(nodePath),
           filePath: nodePath,
           directoryPath,
@@ -134,19 +129,16 @@ export const enumerateFileSystemObjects = buildEstinant({
           additionalMetadata: null,
         };
 
-        return {
-          zorn: nodePath,
-          grition,
-        };
+        return file;
       },
     );
 
-    const fileBySuffixIdentifier = new Map<string, FileOdeshin[]>();
-    fileTuple.forEach((fileOdeshin) => {
-      const { suffixIdentifier } = fileOdeshin.grition.extension;
+    const fileBySuffixIdentifier = new Map<string, File[]>();
+    fileTuple.forEach((file) => {
+      const { suffixIdentifier } = file.extension;
 
       const list = fileBySuffixIdentifier.get(suffixIdentifier) ?? [];
-      list.push(fileOdeshin);
+      list.push(file);
       fileBySuffixIdentifier.set(suffixIdentifier, list);
     });
 

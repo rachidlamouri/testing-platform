@@ -2,18 +2,18 @@ import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   ErrorLocatorTypeName,
   PROGRAM_ERROR_GEPP,
-  ProgramErrorOdeshin,
-  ProgramErrorVoictent,
+  ProgramError,
+  ProgramErrorVoque,
 } from '../error/programError';
 import {
-  FileNodeMetadataVoictent,
   FILE_NODE_METADATA_GEPP,
   FileNodeMetadata,
+  FileNodeMetadataVoque,
 } from './graph-element/fileNodeMetadata';
 import {
   INITIAL_EDGE_METADATA_LIST_GEPP,
   InitialEdgeMetadata,
-  InitialEdgeMetadataListVoictent,
+  InitialEdgeMetadataListVoque,
 } from './graph-element/initialEdgeMetadataList';
 
 /**
@@ -25,17 +25,19 @@ import {
 export const markUnusedNodes = buildEstinant({
   name: 'markUnusedNodes',
 })
-  .fromOdeshinVoictent<InitialEdgeMetadataListVoictent>({
+  .fromVoictent2<InitialEdgeMetadataListVoque>({
     gepp: INITIAL_EDGE_METADATA_LIST_GEPP,
   })
-  .andFromOdeshinVoictent<FileNodeMetadataVoictent>({
+  .andFromVoictent2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
   })
-  .toHubblepupTuple<ProgramErrorVoictent>({
+  .toHubblepupTuple2<ProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((edgeMetadataListList, fileNodeMetadataList) => {
-    const edgeMetadataList = edgeMetadataListList.flat();
+    const edgeMetadataList = edgeMetadataListList.flatMap(
+      (element) => element.grition,
+    );
 
     // TODO: this logic is super brittle and should be changed at some point
     const isHaphazardouslyProtectedFromBeingMarkedAsUnused = (
@@ -60,7 +62,7 @@ export const markUnusedNodes = buildEstinant({
     const referenceCache = new Map(
       fileNodeMetadataList.map((metadata) => {
         return [
-          metadata.id,
+          metadata.zorn,
           {
             isReferenced:
               isHaphazardouslyProtectedFromBeingMarkedAsUnused(metadata),
@@ -79,24 +81,21 @@ export const markUnusedNodes = buildEstinant({
     };
 
     edgeMetadataList.forEach((metadata: InitialEdgeMetadata) => {
-      updateCache(metadata.head.id);
+      updateCache(metadata.head.zorn);
     });
 
     const outputList = [...referenceCache.values()]
       .filter(({ isReferenced }) => !isReferenced)
-      .map<ProgramErrorOdeshin>(({ metadata }, index) => {
+      .map<ProgramError>(({ metadata }) => {
         return {
-          zorn: `markUnusedNodes/${index}/${metadata.filePath}`,
-          grition: {
-            errorId: `markUnusedNodes/${metadata.filePath}`,
-            // The uncertainty in the language is due to a lack of code coverage reporting
-            message: `"${metadata.filePath}" appears to be unused`,
-            locator: {
-              typeName: ErrorLocatorTypeName.FileErrorLocator,
-              filePath: metadata.filePath,
-            },
-            metadata,
+          errorId: `markUnusedNodes/${metadata.filePath}`,
+          // The uncertainty in the language is due to a lack of code coverage reporting
+          message: `"${metadata.filePath}" appears to be unused`,
+          locator: {
+            typeName: ErrorLocatorTypeName.FileErrorLocator,
+            filePath: metadata.filePath,
           },
+          metadata,
         };
       });
 

@@ -1,14 +1,10 @@
-import { InMemoryVoque } from '../../../core/engine/inMemoryVoictent';
-import { Grition } from '../../adapter/grition';
-import { OdeshinFromGrition } from '../../adapter/odeshin';
+import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 
-export type DatumTestCaseInput = unknown;
-
-export type DatumTestCaseInputGrition = Grition<DatumTestCaseInput>;
-
-export type DatumTestCaseInputOdeshin =
-  OdeshinFromGrition<DatumTestCaseInputGrition>;
+export type DatumTestCaseInput = {
+  zorn: string;
+  grition: unknown;
+};
 
 export const DATUM_TEST_CASE_INPUT_GEPP = 'datum-test-case-input';
 
@@ -16,19 +12,19 @@ export type DatumTestCaseInputGepp = typeof DATUM_TEST_CASE_INPUT_GEPP;
 
 export type DatumTestCaseInputVoictent = Voictent<
   DatumTestCaseInputGepp,
-  DatumTestCaseInputOdeshin
+  DatumTestCaseInput
 >;
 
-export type DatumTestCaseInputVoque = InMemoryVoque<
+export type DatumTestCaseInputVoque = InMemoryOdeshin2Voque<
   DatumTestCaseInputGepp,
-  DatumTestCaseInputOdeshin
+  DatumTestCaseInput
 >;
 
 class CustomObject {
   constructor(public datumList: unknown[]) {}
 }
 
-const jsonTestCaseList: DatumTestCaseInputOdeshin[] = [
+const jsonTestCaseList: DatumTestCaseInput[] = [
   {
     zorn: '0/json/0/primitive/0/string',
     grition: 'foo',
@@ -55,7 +51,7 @@ const jsonTestCaseListGritionList = jsonTestCaseList.map(
   (odeshin) => odeshin.grition,
 );
 
-const jsonPrimitiveCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
+const jsonPrimitiveCollectionTestCaseList: DatumTestCaseInput[] = [
   {
     zorn: '0/json/1/primitive-collection/0/array',
     grition: jsonTestCaseListGritionList,
@@ -71,7 +67,7 @@ const jsonPrimitiveCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
 const jsonPrimitiveCollectionTestCaseListGritionList =
   jsonPrimitiveCollectionTestCaseList.map((odeshin) => odeshin.grition);
 
-const jsonCollectionCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
+const jsonCollectionCollectionTestCaseList: DatumTestCaseInput[] = [
   {
     zorn: '0/json/2/collection-collection/0/array',
     grition: jsonPrimitiveCollectionTestCaseListGritionList,
@@ -87,7 +83,7 @@ const jsonCollectionCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
   },
 ];
 
-const primitiveTestCaseList: DatumTestCaseInputOdeshin[] = [
+const primitiveTestCaseList: DatumTestCaseInput[] = [
   {
     zorn: '1/type-script/0/primitive/0/empty/0/null',
     grition: null,
@@ -148,7 +144,7 @@ const primitiveTestCaseListGritionList = primitiveTestCaseList.map(
   ({ grition }) => grition,
 );
 
-const primitiveCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
+const primitiveCollectionTestCaseList: DatumTestCaseInput[] = [
   {
     zorn: '1/type-script/1/primitive-collection/0/list',
     grition: primitiveTestCaseListGritionList,
@@ -188,7 +184,7 @@ const primitiveCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
 const primitiveCollectionTestCaseListGritionList =
   primitiveCollectionTestCaseList.map(({ grition }) => grition);
 
-const collectionCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
+const collectionCollectionTestCaseList: DatumTestCaseInput[] = [
   {
     zorn: '1/type-script/2/collection-collection/0/list',
     grition: primitiveCollectionTestCaseListGritionList,
@@ -228,7 +224,7 @@ const collectionCollectionTestCaseList: DatumTestCaseInputOdeshin[] = [
   },
 ];
 
-export const DATUM_TEST_CASE_INPUT_ODESHIN_LIST: DatumTestCaseInputOdeshin[] = [
+export const DATUM_TEST_CASE_INPUT_ODESHIN_LIST: DatumTestCaseInput[] = [
   ...jsonTestCaseList,
   ...jsonPrimitiveCollectionTestCaseList,
   ...jsonCollectionCollectionTestCaseList,

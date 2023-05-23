@@ -1,5 +1,8 @@
-import { Grition } from '../../adapter/grition';
-import { Hubblepup } from '../../adapter/hubblepup';
+/**
+ * @todo tie the engine function keys back to the source files somehow
+ */
+
+import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 import { Voictent } from '../../adapter/voictent';
 
 export enum EngineFunctionConfigurationTypeName {
@@ -29,19 +32,13 @@ export type AdaptedEngineFunctionConfiguration = {
   filePath: 'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts';
   exportedIdentifier: 'digikikify';
   estinantListKeyIdentifierName: 'estinantTuple';
-  initialVoictentByGeppKeyIdentifierName: 'initialVoictentsByGepp';
+  populatedVoictentTupleKeyIdentifierName: 'populatedVoictentTuple';
 };
 
 export type EngineFunctionConfiguration =
   | CoreEngineFunctionConfiguration
   | CoreEngineFunction2Configuration
   | AdaptedEngineFunctionConfiguration;
-
-export type EngineFunctionConfigurationGrition =
-  Grition<EngineFunctionConfiguration>;
-
-export type EngineFunctionConfigurationHubblepup =
-  Hubblepup<EngineFunctionConfiguration>;
 
 export const ENGINE_FUNCTION_CONFIGURATION_GEPP =
   'engine-function-configuration';
@@ -51,7 +48,12 @@ export type EngineFunctionConfigurationGepp =
 
 export type EngineFunctionConfigurationVoictent = Voictent<
   EngineFunctionConfigurationGepp,
-  EngineFunctionConfigurationHubblepup
+  EngineFunctionConfiguration
+>;
+
+export type EngineFunctionConfigurationVoque = StandardInMemoryVoque<
+  EngineFunctionConfigurationGepp,
+  EngineFunctionConfiguration
 >;
 
 export const CORE_ENGINE_FUNCTION_CONFIGURATION: CoreEngineFunctionConfiguration =
@@ -81,5 +83,5 @@ export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfigu
       'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts',
     exportedIdentifier: 'digikikify',
     estinantListKeyIdentifierName: 'estinantTuple',
-    initialVoictentByGeppKeyIdentifierName: 'initialVoictentsByGepp',
+    populatedVoictentTupleKeyIdentifierName: 'populatedVoictentTuple',
   };

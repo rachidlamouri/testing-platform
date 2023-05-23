@@ -1,5 +1,4 @@
-import { HubblepupDalph } from '../../../type-script-adapter/hubblepup';
-import { Grition } from '../../adapter/grition';
+import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 import { Voictent } from '../../adapter/voictent';
 
 export type OutputFile = {
@@ -8,12 +7,10 @@ export type OutputFile = {
   text: string;
 };
 
-export type OutputFileGrition = Grition<OutputFile>;
-
-export type OutputFileHubblepup = HubblepupDalph<OutputFileGrition>;
-
 export const OUTPUT_FILE_GEPP = 'output-file';
 
 export type OutputFileGepp = typeof OUTPUT_FILE_GEPP;
 
-export type OutputFileVoictent = Voictent<OutputFileGepp, OutputFileHubblepup>;
+export type OutputFileVoictent = Voictent<OutputFileGepp, OutputFile>;
+
+export type OutputFileVoque = StandardInMemoryVoque<OutputFileGepp, OutputFile>;

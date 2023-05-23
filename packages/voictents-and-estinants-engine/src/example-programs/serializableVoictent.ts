@@ -59,7 +59,7 @@ export type SerializableVoictentConstructorInput<
 };
 
 export class SerializableVoictent<TVoque extends GenericSerializableVoque>
-  implements Voictent2<TVoque>
+  implements Voictent2<GenericSerializableVoque, TVoque>
 {
   public readonly nameSpace: string;
 

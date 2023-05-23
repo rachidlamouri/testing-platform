@@ -1,4 +1,4 @@
-import { InMemoryOdeshinVoque } from '../core/engine/inMemoryOdeshinVoictent';
+import { InMemoryOdeshin2Voque } from '../core/engine/inMemoryOdeshinVoictent2';
 import { Grition } from '../custom/adapter/grition';
 import { OdeshinFromGrition } from '../custom/adapter/odeshin';
 
@@ -15,7 +15,7 @@ export const SERIALIZABLE_TYPE_NAME_GEPP = 'serializable-type-name';
 
 export type SerializableTypeNameGepp = typeof SERIALIZABLE_TYPE_NAME_GEPP;
 
-export type SerializableTypeNameVoque = InMemoryOdeshinVoque<
+export type SerializableTypeNameVoque = InMemoryOdeshin2Voque<
   SerializableTypeNameGepp,
   SerializableTypeNameOdeshin
 >;

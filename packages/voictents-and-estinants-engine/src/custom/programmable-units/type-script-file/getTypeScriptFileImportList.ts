@@ -3,19 +3,19 @@ import { resolveModuleFilePath } from '../../../utilities/file/resolveModuleFile
 import { isImportDeclaration } from '../../../utilities/type-script-ast/isImportDeclaration';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  ParsedTypeScriptFileVoictent,
   PARSED_TYPE_SCRIPT_FILE_GEPP,
+  ParsedTypeScriptFileVoque,
 } from './parsedTypeScriptFile';
 import {
-  TypeScriptFileImportListVoictent,
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImport,
+  TypeScriptFileImportListVoque,
 } from './typeScriptFileImportList';
 import {
   ErrorLocatorTypeName,
   PROGRAM_ERROR_GEPP,
-  ProgramErrorOdeshin,
-  ProgramErrorVoictent,
+  ProgramError,
+  ProgramErrorVoque,
 } from '../error/programError';
 import { splitList } from '../../../utilities/splitList';
 
@@ -31,20 +31,19 @@ const ESTINANT_NAME: EstinantName = 'getTypeScriptFileImportList';
 export const getTypeScriptFileImportList = buildEstinant({
   name: 'getTypeScriptFileImportList',
 })
-  .fromGrition<ParsedTypeScriptFileVoictent>({
+  .fromHubblepup2<ParsedTypeScriptFileVoque>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toGrition<TypeScriptFileImportListVoictent>({
+  .toHubblepup2<TypeScriptFileImportListVoque>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
-  .toHubblepupTuple<ProgramErrorVoictent<EstinantName>>({
+  .toHubblepupTuple2<ProgramErrorVoque<EstinantName>>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((input) => {
-    const importAndErrorList = input.program.body
+  .onPinbe((parsedTypeScriptFile) => {
+    const importAndErrorList = parsedTypeScriptFile.program.body
       .filter(isImportDeclaration)
-      .map<TypeScriptFileImport | ProgramErrorOdeshin<EstinantName>>(
+      .map<TypeScriptFileImport | ProgramError<EstinantName>>(
         (inputImportDeclaration, index) => {
           const sourcePath = inputImportDeclaration.source.value;
 
@@ -57,7 +56,7 @@ export const getTypeScriptFileImportList = buildEstinant({
 
           if (isRelative) {
             const extensionlessSourceFilePath = posix.join(
-              posix.dirname(input.filePath),
+              posix.dirname(parsedTypeScriptFile.filePath),
               sourcePath,
             );
 
@@ -67,16 +66,14 @@ export const getTypeScriptFileImportList = buildEstinant({
 
             if (sourceFilePath instanceof Error) {
               return {
-                zorn: `${ESTINANT_NAME}/${input.filePath}/${index}`,
-                grition: {
-                  errorId: `getTypeScriptFileImportList/unresolveable-import`,
-                  message: `Unable to resolve imported filepath: ${sourcePath}`,
-                  locator: {
-                    typeName: ErrorLocatorTypeName.FileErrorLocator,
-                    filePath: input.filePath,
-                  },
-                  metadata: null,
+                zorn: `${ESTINANT_NAME}/${parsedTypeScriptFile.filePath}/${index}`,
+                errorId: `getTypeScriptFileImportList/unresolveable-import`,
+                message: `Unable to resolve imported filepath: ${sourcePath}`,
+                locator: {
+                  typeName: ErrorLocatorTypeName.FileErrorLocator,
+                  filePath: parsedTypeScriptFile.filePath,
                 },
+                metadata: null,
               };
             }
 
@@ -96,7 +93,7 @@ export const getTypeScriptFileImportList = buildEstinant({
       );
 
     const importList: TypeScriptFileImport[] = [];
-    const errorList: ProgramErrorOdeshin<EstinantName>[] = [];
+    const errorList: ProgramError<EstinantName>[] = [];
     splitList({
       list: importAndErrorList,
       isElementA: (element): element is TypeScriptFileImport =>
@@ -107,7 +104,10 @@ export const getTypeScriptFileImportList = buildEstinant({
 
     return {
       [PROGRAM_ERROR_GEPP]: errorList,
-      [TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP]: importList,
+      [TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP]: {
+        zorn: parsedTypeScriptFile.zorn,
+        list: importList,
+      },
     };
   })
   .assemble();

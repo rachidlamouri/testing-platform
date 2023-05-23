@@ -1,6 +1,6 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { DIRECTORY_GEPP, DirectoryVoictent } from '../file/directory';
-import { ROOT_DIRECTORY_GEPP, RootDirectoryVoictent } from './rootDirectory';
+import { DIRECTORY_GEPP, DirectoryVoque } from '../file/directory';
+import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from './rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelationshipGraphZorn';
 
 /**
@@ -10,12 +10,11 @@ import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from './typeScriptFileRelati
 export const getRootDirectory = buildEstinant({
   name: 'getRootDirectory',
 })
-  .fromOdeshinVoictent<DirectoryVoictent>({
+  .fromVoictent2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .toGrition<RootDirectoryVoictent>({
+  .toHubblepup2<RootDirectoryVoque>({
     gepp: ROOT_DIRECTORY_GEPP,
-    getZorn: () => TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
   })
   .onPinbe((directoryList) => {
     let rootDirectory = directoryList[0];
@@ -29,6 +28,10 @@ export const getRootDirectory = buildEstinant({
       }
     });
 
-    return rootDirectory;
+    // TODO: this zorn doesn't make sense
+    return {
+      ...rootDirectory,
+      zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
+    };
   })
   .assemble();

@@ -1,8 +1,8 @@
 import childProcessUtilities from 'child_process';
 import * as cheerio from 'cheerio';
-import { GraphvizCodeVoictent, GRAPHVIZ_CODE_GEPP } from './graphvizCode';
-import { SvgDocumentVoictent, SVG_DOCUMENT_GEPP } from './svgDocument';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { GRAPHVIZ_CODE_GEPP, GraphvizCodeVoque } from './graphvizCode';
+import { SVG_DOCUMENT_GEPP, SvgDocumentVoque } from './svgDocument';
 
 /**
  * Uses the "dot" program to convert Graphviz code into an SVG HTML document.
@@ -10,17 +10,16 @@ import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 export const renderGraphvizCodeToSvgDocument = buildEstinant({
   name: 'renderGraphvizCodeToSvgDocument',
 })
-  .fromGrition<GraphvizCodeVoictent>({
+  .fromHubblepup2<GraphvizCodeVoque>({
     gepp: GRAPHVIZ_CODE_GEPP,
   })
-  .toGrition<SvgDocumentVoictent>({
+  .toHubblepup2<SvgDocumentVoque>({
     gepp: SVG_DOCUMENT_GEPP,
-    getZorn: (leftInput) => leftInput.zorn,
   })
-  .onPinbe((graphvizCode) => {
+  .onPinbe((identifiableCode) => {
     const result = childProcessUtilities.spawnSync('dot', ['-Tsvg'], {
       encoding: 'utf8',
-      input: graphvizCode,
+      input: identifiableCode.grition,
     });
 
     const originalDocument = result.output
@@ -65,6 +64,9 @@ export const renderGraphvizCodeToSvgDocument = buildEstinant({
     $svg.find('.edge > polygon').attr('fill', 'gray');
 
     const modifiedDocument = $svg.toString() ?? '';
-    return modifiedDocument;
+    return {
+      zorn: identifiableCode.zorn,
+      grition: modifiedDocument,
+    };
   })
   .assemble();
