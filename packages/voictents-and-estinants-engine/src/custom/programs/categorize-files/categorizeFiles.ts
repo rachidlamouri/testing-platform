@@ -8,6 +8,13 @@ import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
+import { signalError } from '../../programmable-units/error/signalError';
+import { reportErrors } from '../../programmable-units/error/reportErrors';
+import { assertFileExtensionIsKnown } from './assertFileExtensionIsKnown';
+import {
+  PROGRAM_ERROR_GEPP,
+  ProgramErrorVoque,
+} from '../../programmable-units/error/programError';
 
 /**
  * Example program to demonstrate traversing the file system to enumerate files
@@ -24,7 +31,20 @@ digikikify({
       ],
     }),
   ] as const,
-  uninferableVoictentTuple: [],
-  estinantTuple: [enumerateFileSystemObjects, categorizeFiles] as const,
+  uninferableVoictentTuple: [
+    new InMemoryVoictent<ProgramErrorVoque>({
+      gepp: PROGRAM_ERROR_GEPP,
+      initialHubblepupTuple: [],
+    }),
+  ],
+  estinantTuple: [
+    enumerateFileSystemObjects,
+    categorizeFiles,
+
+    assertFileExtensionIsKnown,
+
+    reportErrors,
+    signalError,
+  ] as const,
   quirmDebugger: buildBasicQuirmDebugger('categorizeFiles'),
 });
