@@ -29,7 +29,9 @@ import { getTypeScriptFileImportList } from '../../programmable-units/type-scrip
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
 import { assertCiModelHasAllPrograms } from './assertCiModelHasAllPrograms';
+import { assertCiFileIsUpToDate } from './assertCiFileIsUpToDate';
 import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
+import { serializeCiModel } from './serializeCiModel';
 
 /**
  * Uses a hard-coded data structure that represents the information in CI.sh and
@@ -75,6 +77,9 @@ digikikify({
     filterEngineProgramFile,
     getEngineProgramLocator,
 
+    serializeCiModel,
+
+    assertCiFileIsUpToDate,
     assertCiModelHasAllPrograms,
 
     reportErrors,

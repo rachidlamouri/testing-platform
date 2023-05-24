@@ -8,6 +8,7 @@ import { YAML_FILE_GEPP, YamlFile, YamlFileVoque } from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import { HtmlFile, HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { BASH_FILE_GEPP, BashFile, BashFileVoque } from '../bash-file/bashFile';
 
 /**
  * Places a file into zero or more collections without modifying the file
@@ -33,5 +34,10 @@ export const categorizeFiles = buildEstinant({
     gepp: HTML_FILE_GEPP,
     pinbe: (file): file is HtmlFile =>
       file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Html,
+  })
+  .toHubblepupOnCondition<BashFileVoque>({
+    gepp: BASH_FILE_GEPP,
+    pinbe: (file): file is BashFile =>
+      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Bash,
   })
   .assemble();

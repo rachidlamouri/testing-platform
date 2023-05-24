@@ -1,6 +1,7 @@
 import { swapEntries } from '../../../utilities/swapEntries';
 
 export enum FileExtensionSuffixIdentifier {
+  Bash = 'Bash',
   Html = 'Html',
   Json = 'Json',
   TypeScript = 'TypeScript',
@@ -10,6 +11,7 @@ export enum FileExtensionSuffixIdentifier {
 }
 
 const fileExtensionSuffixesByFileExtensionSuffixIdentifer = {
+  [FileExtensionSuffixIdentifier.Bash]: 'sh',
   [FileExtensionSuffixIdentifier.Html]: 'html',
   [FileExtensionSuffixIdentifier.Json]: 'json',
   [FileExtensionSuffixIdentifier.TypeScript]: 'ts',
