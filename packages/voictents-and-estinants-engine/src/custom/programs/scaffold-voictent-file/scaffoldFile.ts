@@ -51,25 +51,24 @@ export const scaffoldFile = buildEstinant({
     );
 
     const customTypeName = pascalCaseName;
-    const gritionTypeName = `${customTypeName}Grition`;
-    const odeshinTypeName = `${customTypeName}Odeshin`;
     const geppCodeName = `${screamingSnakeCaseName}_GEPP`;
     const geppLiteral = kebabCaseName;
     const geppTypeName = `${customTypeName}Gepp`;
     const voictentTypeName = `${customTypeName}Voictent`;
+    const voqueTypeName = `${customTypeName}Voque`;
 
     const prependedContent = [
-      `export type ${customTypeName} = unknown`,
-      '',
-      `export type ${gritionTypeName} = Grition<${customTypeName}>`,
-      '',
-      `export type ${odeshinTypeName} = OdeshinFromGrition<${gritionTypeName}>`,
+      `export type ${customTypeName} = {`,
+      '  zorn: string;',
+      '}',
       '',
       `export const ${geppCodeName} = '${geppLiteral}'`,
       '',
       `export type ${geppTypeName} = typeof ${geppCodeName}`,
       '',
-      `export type ${voictentTypeName} = Voictent<${geppTypeName}, ${odeshinTypeName}>`,
+      `export type ${voictentTypeName} = Voictent<${geppTypeName}, ${customTypeName}>`,
+      '',
+      `export type ${voqueTypeName} = InMemoryOdeshin2Voque<${geppTypeName}, ${customTypeName}>`,
       '',
     ].join('\n');
 
