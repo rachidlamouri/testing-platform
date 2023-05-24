@@ -53,8 +53,13 @@ export const FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectE
 
 export const VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfigurationHubblepup =
   {
-    directoryPath: 'packages/voictents-and-estinants-engine/src',
-    ignoredNodePathConfigurationList: [],
+    directoryPath: 'packages/voictents-and-estinants-engine/',
+    ignoredNodePathConfigurationList: [
+      {
+        typeName: ComparisonConfigurationTypeName.EndsWith,
+        value: 'node_modules',
+      },
+    ],
   };
 
 export const CI_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfigurationHubblepup =
