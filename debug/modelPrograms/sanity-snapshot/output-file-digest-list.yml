@@ -8,6 +8,8 @@
     "digest": "ebe17b1bc1d4ea286e09105c3e9227447757ebe2"
   - "fileName": "get-snapshot-refresh-script"
     "digest": "f1083b12fbd2cd04ab00e26f745fccf3f4e1aafd"
+  - "fileName": "model-ci"
+    "digest": "e6e782b4f5e801e4fcc0b95906d25d23d2421dd9"
   - "fileName": "model-programs"
     "digest": "cc430b7c3c11f06c86206a8a37bda5ff546c16ee"
   - "fileName": "render-type-script-file-relationships"
