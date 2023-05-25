@@ -1,11 +1,14 @@
 import { digikikify2 } from '../core/engine/digikikify';
 import { DATUM_TEST_CASE_INPUT_ODESHIN_LIST } from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
-import {
-  JsonSerializableVoictent,
-  JsonSerializableVoque,
-} from './jsonSerializableVoictent';
+import { ProgramFileCache } from '../utilities/programFileCache';
+import { JsonSerializableVoictent } from './jsonSerializableVoictent';
+import { AbstractSerializableVoque } from './abstractSerializableVoictent';
 
-type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
+type SerializedConfiguration = AbstractSerializableVoque<'serialized'>;
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'test-json-serialization',
+});
 
 /**
  * Tests the "JsonSerializableVoictent" by initializing it with data.
@@ -16,13 +19,14 @@ type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
 digikikify2({
   inputVoictentList: [
     new JsonSerializableVoictent<SerializedConfiguration>({
-      nameSpace: 'test-json-serialization',
       gepp: 'serialized',
+      programFileCache,
       initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST.map<
         SerializedConfiguration['receivedHubblepup']
       >((datumTestCaseInput) => {
         return {
-          gepp: '',
+          // TODO: this should be DATUM_TEST_CASE_INPUT_GEPP
+          sourceGepp: '',
           // TODO: move this logic to a file utility
           serializableId: datumTestCaseInput.zorn.replaceAll('/', ' | '),
           datum: datumTestCaseInput.grition,

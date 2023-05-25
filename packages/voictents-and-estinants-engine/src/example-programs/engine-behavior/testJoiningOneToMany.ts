@@ -5,11 +5,10 @@ import { RightInputHubblepupTupleVicken } from '../../core/engine-shell/vicken/r
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryVoictent } from '../../core/engine/inMemoryVoictent';
 import { StandardInMemoryVoque } from '../../core/engine/inMemoryVoque';
+import { ProgramFileCache } from '../../utilities/programFileCache';
+import { AbstractSerializableVoque } from '../abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from '../buildAddMetadataForSerialization';
-import {
-  SerializableVoictent,
-  SerializableVoque,
-} from '../serializableVoictent';
+import { SerializableVoictent } from '../serializableVoictent';
 
 type Voictent1Voque = StandardInMemoryVoque<
   'voictent-1',
@@ -20,7 +19,11 @@ type Voictent1Voque = StandardInMemoryVoque<
 >;
 type Voictent2Voque = StandardInMemoryVoque<'voictent-2', string>;
 type Voictent3Voque = StandardInMemoryVoque<'voictent-3', string>;
-type SerializedVoque = SerializableVoque<'serialized'>;
+type SerializedVoque = AbstractSerializableVoque<'serialized'>;
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'test-joining-one-to-many',
+});
 
 /**
  * Joins each item in the left collection to multiple items in the right
@@ -88,8 +91,8 @@ digikikify2({
       initialHubblepupTuple: [],
     }),
     new SerializableVoictent<SerializedVoque>({
-      nameSpace: 'test-joining-one-to-many',
       gepp: 'serialized',
+      programFileCache,
       initialHubblepupTuple: [],
     }),
   ],

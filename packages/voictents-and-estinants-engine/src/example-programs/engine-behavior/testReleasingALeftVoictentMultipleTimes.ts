@@ -7,16 +7,19 @@ import { OutputVicken } from '../../core/engine-shell/vicken/outputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryVoictent } from '../../core/engine/inMemoryVoictent';
 import { StandardInMemoryVoque } from '../../core/engine/inMemoryVoque';
+import { ProgramFileCache } from '../../utilities/programFileCache';
+import { AbstractSerializableVoque } from '../abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from '../buildAddMetadataForSerialization';
-import {
-  SerializableVoictent,
-  SerializableVoque,
-} from '../serializableVoictent';
+import { SerializableVoictent } from '../serializableVoictent';
 
 type Voictent1Voque = StandardInMemoryVoque<'voictent-1', string>;
 type Voictent2Voque = StandardInMemoryVoque<'voictent-2', string>;
 type Voictent3Voque = StandardInMemoryVoque<'voictent-3', string[]>;
-type SerializedVoque = SerializableVoque<'serialized'>;
+type SerializedVoque = AbstractSerializableVoque<'serialized'>;
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'test-releasing-a-left-voictent-multiple-times',
+});
 
 const SKIP_INDEX = 3;
 
@@ -99,8 +102,8 @@ digikikify2({
       initialHubblepupTuple: [],
     }),
     new SerializableVoictent<SerializedVoque>({
-      nameSpace: 'test-releasing-a-left-voictent-multiple-times',
       gepp: 'serialized',
+      programFileCache,
       initialHubblepupTuple: [],
     }),
   ],

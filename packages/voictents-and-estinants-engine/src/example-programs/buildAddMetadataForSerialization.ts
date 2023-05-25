@@ -2,35 +2,35 @@ import { Estinant2 } from '../core/engine-shell/estinant/estinant';
 import { LeftInputHubblepupVicken } from '../core/engine-shell/vicken/leftInputVicken';
 import { OutputVicken } from '../core/engine-shell/vicken/outputVicken';
 import {
-  GenericSerializableSourceVoque,
-  GenericSerializableVoque,
-  IndexedSerializable,
-  Serializable,
-} from './serializableVoictent';
+  GenericAbstractSerializableSourceVoque,
+  GenericAbstractSerializableVoque,
+  IndexedAbstractSerializable,
+  AbstractSerializable,
+} from './abstractSerializableVoictent';
 
 export type SerializerBuilderInput<
-  TInputVoictent extends GenericSerializableSourceVoque,
-  TOutputVoictent extends GenericSerializableVoque,
+  TInputVoictent extends GenericAbstractSerializableSourceVoque,
+  TOutputVoictent extends GenericAbstractSerializableVoque,
 > = {
   inputGepp: TInputVoictent['gepp'];
   outputGepp: TOutputVoictent['gepp'];
 };
 
 export const buildAddMetadataForSerialization = <
-  TInputVoictent extends GenericSerializableSourceVoque,
-  TOutputVoictent extends GenericSerializableVoque,
+  TInputVoictent extends GenericAbstractSerializableSourceVoque,
+  TOutputVoictent extends GenericAbstractSerializableVoque,
 >({
   inputGepp,
   outputGepp,
 }: SerializerBuilderInput<TInputVoictent, TOutputVoictent>): Estinant2<
-  LeftInputHubblepupVicken<GenericSerializableSourceVoque>,
+  LeftInputHubblepupVicken<GenericAbstractSerializableSourceVoque>,
   [],
-  OutputVicken<[GenericSerializableVoque]>
+  OutputVicken<[GenericAbstractSerializableVoque]>
 > => {
   const addMetadataForSerialization: Estinant2<
-    LeftInputHubblepupVicken<GenericSerializableSourceVoque>,
+    LeftInputHubblepupVicken<GenericAbstractSerializableSourceVoque>,
     [],
-    OutputVicken<[GenericSerializableVoque]>
+    OutputVicken<[GenericAbstractSerializableVoque]>
   > = {
     version: 2,
     name: `serialize/${inputGepp}`,
@@ -43,10 +43,10 @@ export const buildAddMetadataForSerialization = <
       geppTuple: [outputGepp],
     },
     tropoig: (rawInput) => {
-      const indexedSerializable = rawInput as IndexedSerializable;
+      const indexedSerializable = rawInput as IndexedAbstractSerializable;
 
-      const outputHubblepup: Serializable = {
-        gepp: inputGepp,
+      const outputHubblepup: AbstractSerializable = {
+        sourceGepp: inputGepp,
         serializableId: indexedSerializable.indexByName.serializableId,
         datum: indexedSerializable.hubblepup,
       };
