@@ -8,18 +8,21 @@ import {
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
   DatumTestCaseInputVoque,
 } from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
+import { ProgramFileCache } from '../utilities/programFileCache';
 import { getCustomTypedDatum } from '../utilities/typed-datum/customTypedDatum';
+import { AbstractSerializableVoque } from './abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
-import {
-  JsonSerializableVoictent,
-  JsonSerializableVoque,
-} from './jsonSerializableVoictent';
+import { JsonSerializableVoictent } from './jsonSerializableVoictent';
 import {
   SerializableTypeNameVoque,
   SERIALIZABLE_TYPE_NAME_GEPP,
 } from './serializableTypeName';
 
-type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
+type SerializedConfiguration = AbstractSerializableVoque<'serialized'>;
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'test-get-custom-typed-datum',
+});
 
 /**
  * Runs each datum test case input through
@@ -75,8 +78,8 @@ digikikify2({
       initialHubblepupTuple: [],
     }),
     new JsonSerializableVoictent<SerializedConfiguration>({
-      nameSpace: 'test-get-custom-typed-datum',
       gepp: 'serialized',
+      programFileCache,
       initialHubblepupTuple: [],
     }),
   ],

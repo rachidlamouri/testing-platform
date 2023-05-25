@@ -5,13 +5,16 @@ import {
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
   DatumTestCaseInputVoque,
 } from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
+import { ProgramFileCache } from '../utilities/programFileCache';
 import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
-import {
-  JsonSerializableVoictent,
-  JsonSerializableVoque,
-} from './jsonSerializableVoictent';
+import { JsonSerializableVoictent } from './jsonSerializableVoictent';
+import { AbstractSerializableVoque } from './abstractSerializableVoictent';
 
-type SerializedConfiguration = JsonSerializableVoque<'serialized'>;
+type SerializedConfiguration = AbstractSerializableVoque<'serialized'>;
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'test-build-add-metadata-for-serialization',
+});
 
 /**
  * Example program to test the "buildAddMetadataForSerialization" function.
@@ -24,8 +27,8 @@ digikikify2({
       initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),
     new JsonSerializableVoictent<SerializedConfiguration>({
-      nameSpace: 'test-build-add-metadata-for-serialization',
       gepp: 'serialized',
+      programFileCache,
       initialHubblepupTuple: [],
     }),
   ],

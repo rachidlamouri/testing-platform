@@ -3,7 +3,6 @@ import { posix } from 'path';
 import { Grition } from '../../custom/adapter/grition';
 import { Gepp } from '../engine-shell/voictent/gepp';
 import { Voque } from './voque';
-import { SerializableIndexByName } from '../../example-programs/serializableVoictent';
 import { Voictent2 } from './voictent2';
 import {
   LanbeTypeName,
@@ -16,6 +15,7 @@ import {
   MissingLanbeError,
   ReceivedHubblepupState,
 } from './abstractInMemoryVoictent';
+import { AbstractSerializableIndexByName } from '../../example-programs/abstractSerializableVoictent';
 
 const createDirectory = (directoryPath: string): void => {
   if (!fs.existsSync(directoryPath)) {
@@ -42,7 +42,7 @@ export type CacheableAccessor<TGrition extends Grition> = BaseCacheable<
 
 export type CachedCacheable<TGrition extends Grition> = BaseCacheable<TGrition>;
 
-export type CachedOnDiskIndexByName = SerializableIndexByName;
+export type CachedOnDiskIndexByName = AbstractSerializableIndexByName;
 
 export type CachedOnDiskVoque<
   TGepp extends Gepp,
