@@ -27,8 +27,7 @@ digikikify2({
         return {
           // TODO: this should be DATUM_TEST_CASE_INPUT_GEPP
           sourceGepp: '',
-          // TODO: move this logic to a file utility
-          serializableId: datumTestCaseInput.zorn.replaceAll('/', ' | '),
+          serializableId: datumTestCaseInput.zorn,
           datum: datumTestCaseInput.grition,
         };
       }),

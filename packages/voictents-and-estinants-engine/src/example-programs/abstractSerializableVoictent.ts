@@ -92,7 +92,10 @@ export abstract class AbstractSerializableVoictent<
   addHubblepup(metahubblepup: AbstractSerializable): void {
     const metavoictentGepp = this.gepp;
     const serializedHubblepupGepp = metahubblepup.sourceGepp;
-    const extensionlessFileName = metahubblepup.serializableId;
+    const extensionlessFileName = metahubblepup.serializableId.replaceAll(
+      '/',
+      ' | ',
+    );
     const serializedHubblepup = this.serialize(metahubblepup.datum);
 
     this.programFileCache.writeSerializedHubblepup({
