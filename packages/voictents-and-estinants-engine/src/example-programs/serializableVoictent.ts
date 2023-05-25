@@ -39,7 +39,7 @@ export class SerializableVoictent<
 
     return {
       text,
-      fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yml,
+      fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
     };
   }
 }

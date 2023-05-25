@@ -7,8 +7,6 @@ export enum FileExtensionSuffixIdentifier {
   Text = 'Text',
   TypeScript = 'TypeScript',
   Yaml = 'Yaml',
-  // TODO: remove this
-  Yml = 'Yml',
 
   Unknown = 'Unknown',
 }
@@ -30,7 +28,6 @@ const fileExtensionSuffixByFileExtensionSuffixIdentifer = {
   [FileExtensionSuffixIdentifier.Text]: 'txt',
   [FileExtensionSuffixIdentifier.TypeScript]: 'ts',
   [FileExtensionSuffixIdentifier.Yaml]: 'yaml',
-  [FileExtensionSuffixIdentifier.Yml]: 'yml',
 } satisfies FileExtensionSuffixByFileExtensionSuffixIdentifer;
 
 const fileExtensionSuffixIdentifiersByFileExtensionSuffix = swapEntries(
