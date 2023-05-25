@@ -1,14 +1,12 @@
-"zorn": "0/json/2/collection-collection/1/object"
-"grition":
-  "key-0":
-    - "foo"
-    - 123
-    - true
-    - false
-    - null
-  "key-1":
-    "0/json/0/primitive/0/string": "foo"
-    "0/json/0/primitive/1/number": 123
-    "0/json/0/primitive/2/boolean/0/true": true
-    "0/json/0/primitive/2/boolean/1/false": false
-    "0/json/0/primitive/3/null": null
+"key-0":
+  - "foo"
+  - 123
+  - true
+  - false
+  - null
+"key-1":
+  "0/json/0/primitive/0/string": "foo"
+  "0/json/0/primitive/1/number": 123
+  "0/json/0/primitive/2/boolean/0/true": true
+  "0/json/0/primitive/2/boolean/1/false": false
+  "0/json/0/primitive/3/null": null

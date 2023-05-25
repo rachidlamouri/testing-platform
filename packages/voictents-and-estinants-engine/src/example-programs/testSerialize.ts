@@ -32,8 +32,7 @@ digikikify2({
           sourceGepp: DATUM_TEST_CASE_INPUT_GEPP,
           // TODO: move this logic to a file utility
           serializableId: datumTestCaseInput.zorn.replaceAll('/', ' | '),
-          // TODO: make this just the grition
-          datum: datumTestCaseInput,
+          datum: datumTestCaseInput.grition,
         };
       }),
     }),
