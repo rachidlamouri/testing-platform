@@ -8,8 +8,7 @@ import {
 
 const CACHE_DIRECTORY_PATH = 'debug';
 const NAMESPACE_REGEX = /^[a-z-]+$/;
-// TODO: make this 'voictents'
-const VOICTENTS_DIRECTORY_NAME = '';
+const VOICTENTS_DIRECTORY_NAME = 'voictents';
 
 const createDirectory = (directoryPath: string): void => {
   if (!fs.existsSync(directoryPath)) {
