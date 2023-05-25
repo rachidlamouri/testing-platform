@@ -1,5 +1,8 @@
 import { digikikify2 } from '../core/engine/digikikify';
-import { DATUM_TEST_CASE_INPUT_ODESHIN_LIST } from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
+import {
+  DATUM_TEST_CASE_INPUT_GEPP,
+  DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
+} from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../utilities/programFileCache';
 import { JsonSerializableVoictent } from './jsonSerializableVoictent';
 import { AbstractSerializableVoque } from './abstractSerializableVoictent';
@@ -25,8 +28,7 @@ digikikify2({
         SerializedConfiguration['receivedHubblepup']
       >((datumTestCaseInput) => {
         return {
-          // TODO: this should be DATUM_TEST_CASE_INPUT_GEPP
-          sourceGepp: '',
+          sourceGepp: DATUM_TEST_CASE_INPUT_GEPP,
           serializableId: datumTestCaseInput.zorn,
           datum: datumTestCaseInput.grition,
         };
