@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
 import { digikikify } from '../../../type-script-adapter/digikikify';
 import {
   SCAFFOLD_CONFIGURATION_GEPP,
@@ -7,6 +6,7 @@ import {
 } from './scaffoldConfiguration';
 import { scaffoldFile } from './scaffoldFile';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
+import { ProgramFileCache } from '../../../utilities/programFileCache';
 
 const [filePath] = process.argv.slice(2);
 
@@ -31,5 +31,7 @@ digikikify({
   ] as const,
   uninferableVoictentTuple: [],
   estinantTuple: [scaffoldFile] as const,
-  quirmDebugger: buildBasicQuirmDebugger('assembleScaffoldedFile'),
+  programFileCache: new ProgramFileCache({
+    namespace: 'assembleScaffoldedFile',
+  }),
 });

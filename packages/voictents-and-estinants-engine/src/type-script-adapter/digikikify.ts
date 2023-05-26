@@ -113,12 +113,6 @@ export type QuirmDebuggerFromVoqueUnion<TVoqueUnion extends GenericVoque> = {
   onFinish?: RuntimeStatisticsHandler;
 };
 
-type QuirmDebuggerFromEstinantTuple<
-  TEstinantTuple extends UnsafeEstinant2Tuple,
-> = QuirmDebuggerFromVoqueUnion<
-  EstinantTupleInputOutputVoqueUnion<TEstinantTuple>
->;
-
 type SimilarVoque<TVoque extends GenericVoque> = Voque<
   Gepp,
   TVoque['receivedHubblepup'],
@@ -183,9 +177,7 @@ type DigikikifyInput<
     TExplicitVoictentTuple,
     TEstinantTuple
   >[];
-  programFileCache?: ProgramFileCache;
-  // TODO: remove this
-  quirmDebugger?: QuirmDebuggerFromEstinantTuple<TEstinantTuple>;
+  programFileCache: ProgramFileCache;
 };
 
 export const digikikify = <
@@ -195,41 +187,31 @@ export const digikikify = <
   populatedVoictentTuple,
   uninferableVoictentTuple,
   estinantTuple,
-  serializeeVoictentGeppList,
+  serializeeVoictentGeppList = [],
   programFileCache,
 }: DigikikifyInput<TVoictentTupleA, TEstinantTuple>): void => {
   // note: The core engine will provide a signal if someone passes in a collection with the same Gepp
   const serializerVoictentGepp = 'serialized';
 
-  let serializableVoictentMonuple: [] | [GenericVoictent2];
-  let serializerEstinantTuple: UnsafeEstinant2[];
+  const serializableVoictent = new SerializableVoictent({
+    gepp: serializerVoictentGepp,
+    programFileCache,
+    initialHubblepupTuple: [],
+  });
 
-  if (serializeeVoictentGeppList !== undefined && programFileCache) {
-    serializableVoictentMonuple = [
-      new SerializableVoictent({
-        gepp: serializerVoictentGepp,
-        programFileCache,
-        initialHubblepupTuple: [],
-      }),
-    ];
-
-    serializerEstinantTuple = [
-      ...new Set(serializeeVoictentGeppList),
-    ].map<UnsafeEstinant2>((serializeeVoictentGepp) => {
-      return buildAddMetadataForSerialization({
-        inputGepp: serializeeVoictentGepp,
-        outputGepp: serializerVoictentGepp,
-      });
+  const serializerEstinantTuple: UnsafeEstinant2[] = [
+    ...new Set(serializeeVoictentGeppList),
+  ].map<UnsafeEstinant2>((serializeeVoictentGepp) => {
+    return buildAddMetadataForSerialization({
+      inputGepp: serializeeVoictentGepp,
+      outputGepp: serializerVoictentGepp,
     });
-  } else {
-    serializableVoictentMonuple = [];
-    serializerEstinantTuple = [];
-  }
+  });
 
   const explicitInputVoictentList = [
     ...populatedVoictentTuple,
     ...(uninferableVoictentTuple as GenericVoictent2Tuple),
-    ...serializableVoictentMonuple,
+    serializableVoictent,
   ];
 
   const explicitInputVoictentGeppSet = new Set(

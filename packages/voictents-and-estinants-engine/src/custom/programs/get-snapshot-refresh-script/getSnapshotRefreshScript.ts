@@ -1,6 +1,6 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { digikikify } from '../../../type-script-adapter/digikikify';
-import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
+import { ProgramFileCache } from '../../../utilities/programFileCache';
 import {
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
@@ -69,5 +69,7 @@ digikikify({
 
     constructSnapshotScript,
   ] as const,
-  quirmDebugger: buildQuirmDebugger('getSnapshotRefreshScript'),
+  programFileCache: new ProgramFileCache({
+    namespace: 'getSnapshotRefreshScript',
+  }),
 });

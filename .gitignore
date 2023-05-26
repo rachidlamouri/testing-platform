@@ -38,5 +38,3 @@ debug/renderTypeScriptFileRelationships/voictents/*
 !debug/renderTypeScriptFileRelationships/voictents/serialized/
 debug/renderTypeScriptFileRelationships/voictents/serialized/*
 !debug/renderTypeScriptFileRelationships/voictents/serialized/sanity-snapshot
-
-snapshot/
