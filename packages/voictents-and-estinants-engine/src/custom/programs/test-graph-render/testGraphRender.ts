@@ -1,5 +1,4 @@
 import { digikikify } from '../../../type-script-adapter/digikikify';
-import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -25,6 +24,8 @@ import {
   OUTPUT_FILE_GEPP,
 } from '../../programmable-units/output-file/outputFile';
 import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 
 /**
  * Example program to demonstrate defining and rendering a directed graph.
@@ -191,5 +192,8 @@ digikikify({
 
     captureOutputFileDigestList,
   ] as const,
-  quirmDebugger: buildQuirmDebugger('testGraphRender'),
+  serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
+  programFileCache: new ProgramFileCache({
+    namespace: 'testGraphRender',
+  }),
 });

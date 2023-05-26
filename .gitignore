@@ -17,7 +17,11 @@ debug/*
 
 !debug/testGraphRender
 debug/testGraphRender/*
-!debug/testGraphRender/sanity-snapshot
+!debug/testGraphRender/voictents/
+debug/testGraphRender/voictents/*
+!debug/testGraphRender/voictents/serialized/
+debug/testGraphRender/voictents/serialized/*
+!debug/testGraphRender/voictents/serialized/sanity-snapshot
 
 !debug/modelPrograms
 debug/modelPrograms/*
