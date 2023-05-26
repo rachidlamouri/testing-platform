@@ -6,7 +6,6 @@ import {
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
-import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { signalError } from '../../programmable-units/error/signalError';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
@@ -15,6 +14,7 @@ import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorVoque,
 } from '../../programmable-units/error/programError';
+import { ProgramFileCache } from '../../../utilities/programFileCache';
 
 /**
  * Example program to demonstrate traversing the file system to enumerate files
@@ -46,5 +46,7 @@ digikikify({
     reportErrors,
     signalError,
   ] as const,
-  quirmDebugger: buildBasicQuirmDebugger('categorizeFiles'),
+  programFileCache: new ProgramFileCache({
+    namespace: 'categorizeFiles',
+  }),
 });

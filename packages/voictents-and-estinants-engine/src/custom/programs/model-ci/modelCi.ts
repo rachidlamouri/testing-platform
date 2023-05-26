@@ -1,6 +1,5 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { digikikify } from '../../../type-script-adapter/digikikify';
-import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
 import {
   EngineFunctionConfigurationVoque,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
@@ -32,6 +31,7 @@ import { assertCiModelHasAllPrograms } from './assertCiModelHasAllPrograms';
 import { assertCiFileIsUpToDate } from './assertCiFileIsUpToDate';
 import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import { serializeCiModel } from './serializeCiModel';
+import { ProgramFileCache } from '../../../utilities/programFileCache';
 
 /**
  * Uses a hard-coded data structure that represents the information in CI.sh and
@@ -85,5 +85,7 @@ digikikify({
     reportErrors,
     signalError,
   ] as const,
-  quirmDebugger: buildBasicQuirmDebugger('modelCi'),
+  programFileCache: new ProgramFileCache({
+    namespace: 'modelCi',
+  }),
 });

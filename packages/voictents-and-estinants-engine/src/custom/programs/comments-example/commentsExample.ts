@@ -1,6 +1,6 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { digikikify } from '../../../type-script-adapter/digikikify';
-import { buildBasicQuirmDebugger } from '../../debugger/quirmDebugger';
+import { ProgramFileCache } from '../../../utilities/programFileCache';
 import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorVoque,
@@ -43,5 +43,7 @@ digikikify({
 
     getCommentedProgramBodyDeclarationList,
   ] as const,
-  quirmDebugger: buildBasicQuirmDebugger('commentsExample'),
+  programFileCache: new ProgramFileCache({
+    namespace: 'commentsExample',
+  }),
 });

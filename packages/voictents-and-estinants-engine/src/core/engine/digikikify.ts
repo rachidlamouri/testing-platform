@@ -94,7 +94,7 @@ type TimeSeriesConfiguration = {
   relativeElapsedSecondsTickSeries: TickSeries<number>;
 };
 
-type RuntimeStatistics = {
+export type RuntimeStatistics = {
   voictentList: VoictentTickSeriesConfiguration[];
   estinantList: EstinantTickSeriesConfiguration[];
   time: TimeSeriesConfiguration;

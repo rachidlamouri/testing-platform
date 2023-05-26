@@ -5,10 +5,15 @@ import {
   KnownFileExtensionSuffixIdentifier,
   getFileExtensionSuffix,
 } from '../custom/programmable-units/file/fileExtensionSuffixIdentifier';
+import { RuntimeStatistics } from '../core/engine/digikikify';
+import { serializeRuntimeStatistics } from './serializeRuntimeStatistic';
 
 const CACHE_DIRECTORY_PATH = 'debug';
-const NAMESPACE_REGEX = /^[a-z-]+$/;
+// TODO: replace the namespace regex with lowercase and hyphens
+// const NAMESPACE_REGEX = /^[a-z-]+$/;
+const NAMESPACE_REGEX = /^[A-Za-z-]+$/;
 const VOICTENTS_DIRECTORY_NAME = 'voictents';
+const RUNTIME_SNAPSHOT_FILE_NAME = 'runtimeSnapshot.txt';
 
 const createDirectory = (directoryPath: string): void => {
   if (!fs.existsSync(directoryPath)) {
@@ -46,6 +51,8 @@ export class ProgramFileCache {
 
   public readonly voictentsDirectory;
 
+  public readonly runtimeSnapshotFilePath;
+
   constructor({ namespace }: ProgramFileCacheInput) {
     if (!NAMESPACE_REGEX.test(namespace)) {
       throw Error(`Namespace must match regex: ${NAMESPACE_REGEX.toString()}`);
@@ -54,6 +61,10 @@ export class ProgramFileCache {
     this.namespace = namespace;
     this.voictentsDirectory = this.getNamespacedDirectory(
       VOICTENTS_DIRECTORY_NAME,
+    );
+    this.runtimeSnapshotFilePath = posix.join(
+      this.getNamespacedDirectory(''),
+      RUNTIME_SNAPSHOT_FILE_NAME,
     );
 
     createDirectory(this.namespaceDirectory);
@@ -88,6 +99,15 @@ export class ProgramFileCache {
 
     createDirectory(voictentDirectoryPath);
     fs.writeFileSync(hubblepupFilePath, serializedHubblepup.text);
+  }
+
+  writeRuntimeSnapshot(statistics: RuntimeStatistics): void {
+    const text = serializeRuntimeStatistics(statistics);
+
+    // eslint-disable-next-line no-console
+    console.log(`SNAPSHOT: ${this.runtimeSnapshotFilePath}`);
+
+    fs.writeFileSync(this.runtimeSnapshotFilePath, text);
   }
 
   deleteVoictentDirectory({

@@ -15,7 +15,6 @@ import {
   EngineFunctionConfigurationVoque,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
-import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
@@ -40,6 +39,8 @@ import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,
 } from '../../programmable-units/output-file/outputFile';
+import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 
 /**
  * Creates an interactive model for each engine program.
@@ -100,5 +101,8 @@ digikikify({
 
     signalError,
   ] as const,
-  quirmDebugger: buildQuirmDebugger('modelPrograms'),
+  programFileCache: new ProgramFileCache({
+    namespace: 'modelPrograms',
+  }),
+  serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
 });
