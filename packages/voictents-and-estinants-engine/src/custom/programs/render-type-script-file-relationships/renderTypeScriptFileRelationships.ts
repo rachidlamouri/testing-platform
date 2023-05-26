@@ -1,5 +1,4 @@
 import { digikikify } from '../../../type-script-adapter/digikikify';
-import { buildQuirmDebugger } from '../../debugger/quirmDebugger';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -45,6 +44,8 @@ import {
   OUTPUT_FILE_GEPP,
 } from '../../programmable-units/output-file/outputFile';
 import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 
 /**
  * Assembles a knowledge graph of the TypeScript files in this package and their
@@ -144,5 +145,8 @@ digikikify({
     markUnusedNodes,
     reportErrors,
   ] as const,
-  quirmDebugger: buildQuirmDebugger('renderTypeScriptFileRelationships'),
+  programFileCache: new ProgramFileCache({
+    namespace: 'renderTypeScriptFileRelationships',
+  }),
+  serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
 });
