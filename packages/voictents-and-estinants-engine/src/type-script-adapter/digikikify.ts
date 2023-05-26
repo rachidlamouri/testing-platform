@@ -7,7 +7,6 @@ import {
   UnsafeEstinant2,
   Estinant2 as CoreEstinant2,
   UnsafeEstinant2Tuple,
-  GenericEstinant2Tuple,
   GenericEstinant2,
 } from '../core/engine-shell/estinant/estinant';
 import { GenericQuirm2, Quirm2 } from '../core/engine-shell/quirm/quirm';
@@ -27,6 +26,10 @@ import {
 import { FlattenTuple } from '../utilities/flattenTuple';
 import { DeduplicateTupleItems } from '../utilities/deduplicateTupleItems';
 import { FilterTupleByRejectionUnion } from '../utilities/filterTuple';
+import { buildAddMetadataForSerialization } from '../example-programs/buildAddMetadataForSerialization';
+import { SerializableVoictent } from '../example-programs/serializableVoictent';
+import { ProgramFileCache } from '../utilities/programFileCache';
+import { GenericAbstractSerializableSourceVoque } from '../example-programs/abstractSerializableVoictent';
 
 type QuirmHandler<TVoque extends GenericVoque> = (
   quirm: Quirm2<TVoque>,
@@ -149,6 +152,23 @@ type VoictentListB<
   >
 >;
 
+type AllVoqueUnion<
+  TExplicitVoictentTuple extends UnsafeVoictent2Tple,
+  TEstinantTuple extends UnsafeEstinant2Tuple,
+> =
+  | EstinantTupleInputOutputVoqueUnion<TEstinantTuple>
+  | VoqueUnionFromVoictentUnion<TExplicitVoictentTuple[number]>;
+
+type SerializeeVoictentGepp<
+  TExplicitVoictentTuple extends UnsafeVoictent2Tple,
+  TEstinantTuple extends UnsafeEstinant2Tuple,
+> = AllVoqueUnion<
+  TExplicitVoictentTuple,
+  TEstinantTuple
+> extends GenericAbstractSerializableSourceVoque
+  ? AllVoqueUnion<TExplicitVoictentTuple, TEstinantTuple>['gepp']
+  : never;
+
 type DigikikifyInput<
   TExplicitVoictentTuple extends UnsafeVoictent2Tple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
@@ -159,6 +179,12 @@ type DigikikifyInput<
     TEstinantTuple
   >;
   estinantTuple: TEstinantTuple;
+  serializeeVoictentGeppList?: SerializeeVoictentGepp<
+    TExplicitVoictentTuple,
+    TEstinantTuple
+  >[];
+  programFileCache?: ProgramFileCache;
+  // TODO: remove this
   quirmDebugger?: QuirmDebuggerFromEstinantTuple<TEstinantTuple>;
 };
 
@@ -166,14 +192,44 @@ export const digikikify = <
   TVoictentTupleA extends UnsafeVoictent2Tple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
 >({
-  populatedVoictentTuple: initialedVoictentTuple,
+  populatedVoictentTuple,
   uninferableVoictentTuple,
   estinantTuple,
-  quirmDebugger: inputDebugger,
+  serializeeVoictentGeppList,
+  programFileCache,
 }: DigikikifyInput<TVoictentTupleA, TEstinantTuple>): void => {
+  // note: The core engine will provide a signal if someone passes in a collection with the same Gepp
+  const serializerVoictentGepp = 'serialized';
+
+  let serializableVoictentMonuple: [] | [GenericVoictent2];
+  let serializerEstinantTuple: UnsafeEstinant2[];
+
+  if (serializeeVoictentGeppList !== undefined && programFileCache) {
+    serializableVoictentMonuple = [
+      new SerializableVoictent({
+        gepp: serializerVoictentGepp,
+        programFileCache,
+        initialHubblepupTuple: [],
+      }),
+    ];
+
+    serializerEstinantTuple = [
+      ...new Set(serializeeVoictentGeppList),
+    ].map<UnsafeEstinant2>((serializeeVoictentGepp) => {
+      return buildAddMetadataForSerialization({
+        inputGepp: serializeeVoictentGepp,
+        outputGepp: serializerVoictentGepp,
+      });
+    });
+  } else {
+    serializableVoictentMonuple = [];
+    serializerEstinantTuple = [];
+  }
+
   const explicitInputVoictentList = [
-    ...initialedVoictentTuple,
+    ...populatedVoictentTuple,
     ...(uninferableVoictentTuple as GenericVoictent2Tuple),
+    ...serializableVoictentMonuple,
   ];
 
   const explicitInputVoictentGeppSet = new Set(
@@ -209,22 +265,15 @@ export const digikikify = <
     ...inferredInputVoictentList,
   ];
 
+  const inputEstinantTuple = [...estinantTuple, ...serializerEstinantTuple];
+
   coreDigikikify({
     inputVoictentList,
-    estinantTuple,
-    onHubblepupAddedToVoictents: (quirm) => {
-      const quirmDebugger =
-        inputDebugger as QuirmDebuggerFromEstinantTuple<GenericEstinant2Tuple>;
-
-      if (!quirmDebugger) {
-        return;
+    estinantTuple: inputEstinantTuple,
+    onFinish: (statistics) => {
+      if (programFileCache !== undefined) {
+        programFileCache.writeRuntimeSnapshot(statistics);
       }
-
-      const handler =
-        quirmDebugger.handlerByGepp[quirm.gepp] ?? quirmDebugger.defaultHandler;
-
-      handler(quirm);
     },
-    onFinish: inputDebugger?.onFinish,
   });
 };
