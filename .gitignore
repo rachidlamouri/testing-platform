@@ -25,7 +25,11 @@ debug/testGraphRender/voictents/serialized/*
 
 !debug/modelPrograms
 debug/modelPrograms/*
-!debug/modelPrograms/sanity-snapshot
+!debug/modelPrograms/voictents/
+debug/modelPrograms/voictents/*
+!debug/modelPrograms/voictents/serialized/
+debug/modelPrograms/voictents/serialized/*
+!debug/modelPrograms/voictents/serialized/sanity-snapshot
 
 !debug/renderTypeScriptFileRelationships
 debug/renderTypeScriptFileRelationships/*
