@@ -7,14 +7,15 @@ import {
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import { signalError } from '../../programmable-units/error/signalError';
-import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { assertFileExtensionIsKnown } from './assertFileExtensionIsKnown';
-import {
-  PROGRAM_ERROR_GEPP,
-  ProgramErrorVoque,
-} from '../../programmable-units/error/programError';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { ProgramError2Voictent } from '../../programmable-units/error/programError2Voictent';
+import { reportErrors } from '../../programmable-units/error/reportErrors';
+import { signalError } from '../../programmable-units/error/signalError';
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'categorizeFiles',
+});
 
 /**
  * Example program to demonstrate traversing the file system to enumerate files
@@ -32,9 +33,8 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new InMemoryVoictent<ProgramErrorVoque>({
-      gepp: PROGRAM_ERROR_GEPP,
-      initialHubblepupTuple: [],
+    new ProgramError2Voictent({
+      programFileCache,
     }),
   ],
   estinantTuple: [
@@ -46,7 +46,5 @@ digikikify({
     reportErrors,
     signalError,
   ] as const,
-  programFileCache: new ProgramFileCache({
-    namespace: 'categorizeFiles',
-  }),
+  programFileCache,
 });

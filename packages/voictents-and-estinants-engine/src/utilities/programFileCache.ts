@@ -19,6 +19,12 @@ const createDirectory = (directoryPath: string): void => {
   if (!fs.existsSync(directoryPath)) {
     // eslint-disable-next-line no-console
     console.log(`NEW: ${directoryPath}`);
+
+    // Provide some visual padding for long directory paths
+    if (directoryPath.length > 80) {
+      // eslint-disable-next-line no-console
+      console.log();
+    }
   }
 
   fs.mkdirSync(directoryPath, { recursive: true });
@@ -72,6 +78,10 @@ export class ProgramFileCache {
     if (!NAMESPACE_REGEX.test(namespace)) {
       throw Error(`Namespace must match regex: ${NAMESPACE_REGEX.toString()}`);
     }
+
+    // visual padding at the start of a program
+    // eslint-disable-next-line no-console
+    console.log();
 
     this.namespace = namespace;
     this.voictentsDirectory = this.getNamespacedDirectory(
