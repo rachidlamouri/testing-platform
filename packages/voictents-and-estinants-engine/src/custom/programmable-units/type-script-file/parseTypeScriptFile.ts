@@ -3,11 +3,6 @@ import fs from 'fs';
 import * as parser from '@typescript-eslint/typescript-estree';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  PROGRAM_ERROR_GEPP,
-  ErrorLocatorTypeName,
-  ProgramErrorVoque,
-} from '../error/programError';
-import {
   TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
   TypeScriptFileConfigurationVoque,
 } from './associateTypeScriptFileToTypescriptConfiguration';
@@ -15,6 +10,21 @@ import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
   ParsedTypeScriptFileVoque,
 } from './parsedTypeScriptFile';
+import {
+  PROGRAM_ERROR_2_GEPP,
+  ProgramError2ElementLocatorTypeName,
+  GenericProgramError2Voque,
+  ReportingEstinantLocator,
+} from '../error/programError2';
+
+const ESTINANT_NAME = 'parseTypeScriptFile' as const;
+type EstinantName = typeof ESTINANT_NAME;
+type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+const reporterLocator: ReportingLocator = {
+  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  name: ESTINANT_NAME,
+  filePath: __filename,
+};
 
 /**
  * Takes a file with an associated TypeScript configuration and runs the
@@ -23,7 +33,7 @@ import {
  * transform.
  */
 export const parseTypeScriptFile = buildEstinant({
-  name: 'parseTypeScriptFile',
+  name: ESTINANT_NAME,
 })
   .fromHubblepup2<TypeScriptFileConfigurationVoque>({
     gepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
@@ -31,8 +41,8 @@ export const parseTypeScriptFile = buildEstinant({
   .toHubblepupTuple2<ParsedTypeScriptFileVoque>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toHubblepupTuple2<ProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+  .toHubblepupTuple2<GenericProgramError2Voque>({
+    gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe((typeScriptFileConfiguration) => {
     const fileContents = fs.readFileSync(
@@ -56,20 +66,21 @@ export const parseTypeScriptFile = buildEstinant({
             program,
           },
         ],
-        [PROGRAM_ERROR_GEPP]: [],
+        [PROGRAM_ERROR_2_GEPP]: [],
       };
     } catch (error) {
       return {
         [PARSED_TYPE_SCRIPT_FILE_GEPP]: [],
-        [PROGRAM_ERROR_GEPP]: [
+        [PROGRAM_ERROR_2_GEPP]: [
           {
-            zorn: typeScriptFileConfiguration.zorn,
-            message: 'Failed to parse file',
-            locator: {
-              typeName: ErrorLocatorTypeName.FileErrorLocator,
+            name: 'unparseable-file',
+            error: new Error('Failed to parse file'),
+            reporterLocator,
+            sourceLocator: {
+              typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
               filePath: typeScriptFileConfiguration.sourceFilePath,
             },
-            metadata: {
+            context: {
               error,
             },
           },

@@ -41,6 +41,10 @@ export type ReceivedProgramError2<
   context: TypeScriptObjectInstance | null;
 };
 
+export type ReportedProgramError2<
+  TReporterLocator extends GenericProgramError2ReporterLocator,
+> = ReceivedProgramError2<TReporterLocator>;
+
 export type GenericReceivedProgramError2 =
   ReceivedProgramError2<GenericProgramError2ReporterLocator>;
 

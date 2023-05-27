@@ -35,13 +35,10 @@ import { markUnusedNodes } from '../../programmable-units/type-script-file-relat
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { getOutputFileCount } from './getOutputFileCount';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import {
-  ProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
-} from '../../programmable-units/error/programError';
 import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
+import { ProgramError2Voictent } from '../../programmable-units/error/programError2Voictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 
 const programFileCache = new ProgramFileCache({
@@ -100,9 +97,8 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new InMemoryVoictent<ProgramErrorVoque>({
-      gepp: PROGRAM_ERROR_GEPP,
-      initialHubblepupTuple: [],
+    new ProgramError2Voictent({
+      programFileCache,
     }),
     new OutputFileVoictent({
       programFileCache,

@@ -31,12 +31,9 @@ import { getEngineProgram2 } from '../../programmable-units/engine-program/getEn
 import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
 import { signalError } from '../../programmable-units/error/signalError';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import {
-  PROGRAM_ERROR_GEPP,
-  ProgramErrorVoque,
-} from '../../programmable-units/error/programError';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
+import { ProgramError2Voictent } from '../../programmable-units/error/programError2Voictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 
 const programFileCache = new ProgramFileCache({
@@ -64,9 +61,8 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new InMemoryVoictent<ProgramErrorVoque>({
-      gepp: PROGRAM_ERROR_GEPP,
-      initialHubblepupTuple: [],
+    new ProgramError2Voictent({
+      programFileCache,
     }),
     new OutputFileVoictent({
       programFileCache,

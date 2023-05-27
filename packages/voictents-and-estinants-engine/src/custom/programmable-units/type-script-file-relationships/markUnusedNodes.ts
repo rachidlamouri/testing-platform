@@ -1,10 +1,11 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  ErrorLocatorTypeName,
-  PROGRAM_ERROR_GEPP,
-  ProgramError,
-  ProgramErrorVoque,
-} from '../error/programError';
+  PROGRAM_ERROR_2_GEPP,
+  ProgramError2ElementLocatorTypeName,
+  GenericProgramError2Voque,
+  ReportedProgramError2,
+  ReportingEstinantLocator,
+} from '../error/programError2';
 import {
   FILE_NODE_METADATA_GEPP,
   FileNodeMetadata,
@@ -16,6 +17,15 @@ import {
   InitialEdgeMetadataListVoque,
 } from './graph-element/initialEdgeMetadataList';
 
+const ESTINANT_NAME = 'markUnusedNodes' as const;
+type EstinantName = typeof ESTINANT_NAME;
+type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+const reporterLocator: ReportingLocator = {
+  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  name: ESTINANT_NAME,
+  filePath: __filename,
+};
+
 /**
  * Marks TypeScript files that have zero incoming edges among the TypeScript
  * relationship knowledge graph nodes. It is currently responsible for
@@ -23,7 +33,7 @@ import {
  * or moved elsewhere.
  */
 export const markUnusedNodes = buildEstinant({
-  name: 'markUnusedNodes',
+  name: ESTINANT_NAME,
 })
   .fromVoictent2<InitialEdgeMetadataListVoque>({
     gepp: INITIAL_EDGE_METADATA_LIST_GEPP,
@@ -31,8 +41,8 @@ export const markUnusedNodes = buildEstinant({
   .andFromVoictent2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
   })
-  .toHubblepupTuple2<ProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+  .toHubblepupTuple2<GenericProgramError2Voque>({
+    gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe((edgeMetadataListList, fileNodeMetadataList) => {
     const edgeMetadataList = edgeMetadataListList.flatMap(
@@ -86,17 +96,19 @@ export const markUnusedNodes = buildEstinant({
 
     const outputList = [...referenceCache.values()]
       .filter(({ isReferenced }) => !isReferenced)
-      .map<ProgramError>(({ metadata }) => {
-        return {
-          errorId: `markUnusedNodes/${metadata.filePath}`,
-          // The uncertainty in the language is due to a lack of code coverage reporting
-          message: `"${metadata.filePath}" appears to be unused`,
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
+      .map(({ metadata }) => {
+        const error: ReportedProgramError2<ReportingLocator> = {
+          name: 'mark-unused-nodes',
+          error: new Error(`"${metadata.filePath}" appears to be unused`),
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
             filePath: metadata.filePath,
           },
-          metadata,
+          context: metadata,
         };
+
+        return error;
       });
 
     return outputList;

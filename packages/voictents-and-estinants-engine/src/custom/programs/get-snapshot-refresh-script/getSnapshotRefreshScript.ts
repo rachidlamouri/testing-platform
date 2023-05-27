@@ -7,10 +7,7 @@ import {
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   EngineFunctionConfigurationVoque,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
-import {
-  PROGRAM_ERROR_GEPP,
-  ProgramErrorVoque,
-} from '../../programmable-units/error/programError';
+import { ProgramError2Voictent } from '../../programmable-units/error/programError2Voictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -49,9 +46,8 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new InMemoryVoictent<ProgramErrorVoque>({
-      gepp: PROGRAM_ERROR_GEPP,
-      initialHubblepupTuple: [],
+    new ProgramError2Voictent({
+      programFileCache,
     }),
     new OutputFileVoictent({
       programFileCache,

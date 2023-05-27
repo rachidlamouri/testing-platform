@@ -5,12 +5,6 @@ import {
 } from '../../type-script-file/typeScriptFileImportList';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import {
-  PROGRAM_ERROR_GEPP,
-  ErrorLocatorTypeName,
-  ProgramErrorVoque,
-  ProgramError,
-} from '../../error/programError';
-import {
   INITIAL_EDGE_METADATA_LIST_GEPP,
   InitialEdgeMetadataList,
   InitialEdgeMetadataListVoque,
@@ -27,12 +21,28 @@ import {
   FILE_NODE_METADATA_BY_FILE_PATH_GEPP,
   FileNodeMetadataByFilePathVoque,
 } from './fileNodeMetadataByFilePath';
+import {
+  PROGRAM_ERROR_2_GEPP,
+  ProgramError2ElementLocatorTypeName,
+  GenericProgramError2Voque,
+  ReportedProgramError2,
+  ReportingEstinantLocator,
+} from '../../error/programError2';
+
+const ESTINANT_NAME = 'getEngineProgramLocator' as const;
+type EstinantName = typeof ESTINANT_NAME;
+type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+const reporterLocator: ReportingLocator = {
+  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  name: ESTINANT_NAME,
+  filePath: __filename,
+};
 
 /**
  * Converts TypeScript file import statements into directed graph edge metadata.
  */
 export const getInitialEdgeMetadata = buildEstinant({
-  name: 'getInitialEdgeMetadata',
+  name: ESTINANT_NAME,
 })
   .fromHubblepup2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
@@ -55,8 +65,8 @@ export const getInitialEdgeMetadata = buildEstinant({
   .toHubblepup2<InitialEdgeMetadataListVoque>({
     gepp: INITIAL_EDGE_METADATA_LIST_GEPP,
   })
-  .toHubblepupTuple2<ProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+  .toHubblepupTuple2<GenericProgramError2Voque>({
+    gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe(
     (
@@ -65,7 +75,7 @@ export const getInitialEdgeMetadata = buildEstinant({
       [{ grition: fileNodeMetadataByFilePath }],
       [{ grition: externalModuleMetadataIdBySourcePath }],
     ) => {
-      const errorList: ProgramError[] = [];
+      const errorList: ReportedProgramError2<ReportingLocator>[] = [];
       const edgeMetadataList: InitialEdgeMetadataList['grition'] = [];
 
       const headList = importList.map((importedItem) => {
@@ -82,12 +92,16 @@ export const getInitialEdgeMetadata = buildEstinant({
       headList.forEach(({ headMetadata, importedItem }) => {
         if (headMetadata === undefined) {
           errorList.push({
-            message: `Unable to find metadata for the imported item "${importedItem.sourcePath}"`,
-            locator: {
-              typeName: ErrorLocatorTypeName.FileErrorLocator,
+            name: 'missing-edge-metadata',
+            error: new Error(
+              `Unable to find metadata for the imported item "${importedItem.sourcePath}"`,
+            ),
+            reporterLocator,
+            sourceLocator: {
+              typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
               filePath: fileNodeMetadata.filePath,
             },
-            metadata: {
+            context: {
               fileNodeMetadata,
               importedItem,
             },
@@ -105,7 +119,7 @@ export const getInitialEdgeMetadata = buildEstinant({
           zorn: fileNodeMetadata.zorn,
           grition: edgeMetadataList,
         },
-        [PROGRAM_ERROR_GEPP]: errorList,
+        [PROGRAM_ERROR_2_GEPP]: errorList,
       };
     },
   )

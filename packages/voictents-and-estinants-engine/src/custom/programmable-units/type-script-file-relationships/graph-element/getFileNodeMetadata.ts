@@ -1,9 +1,11 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
-  PROGRAM_ERROR_GEPP,
-  ErrorLocatorTypeName,
-  ProgramErrorVoque,
-} from '../../error/programError';
+  PROGRAM_ERROR_2_GEPP,
+  ProgramError2ElementLocatorTypeName,
+  GenericProgramError2Voque,
+  ReportedProgramError2,
+  ReportingEstinantLocator,
+} from '../../error/programError2';
 import { Shape } from '../../graph-visualization/directed-graph/attribute';
 import {
   TYPE_SCRIPT_FILE_GEPP,
@@ -24,12 +26,21 @@ import {
   FileNodeMetadataVoque,
 } from './fileNodeMetadata';
 
+const ESTINANT_NAME = 'getFileNodeMetadata' as const;
+type EstinantName = typeof ESTINANT_NAME;
+type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+const reporterLocator: ReportingLocator = {
+  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  name: ESTINANT_NAME,
+  filePath: __filename,
+};
+
 /**
  * Gets information that is used to present TypeScriptFile items and to
  * associate them with items from other collections.
  */
 export const getFileNodeMetadata = buildEstinant({
-  name: 'getFileNodeMetadata',
+  name: ESTINANT_NAME,
 })
   .fromHubblepup2<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
@@ -42,8 +53,8 @@ export const getFileNodeMetadata = buildEstinant({
   .andFromVoictent2<BoundaryMetadataVoque>({
     gepp: BOUNDARY_METADATA_GEPP,
   })
-  .toHubblepupTuple2<ProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+  .toHubblepupTuple2<GenericProgramError2Voque>({
+    gepp: PROGRAM_ERROR_2_GEPP,
   })
   .toHubblepupTuple2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
@@ -62,26 +73,28 @@ export const getFileNodeMetadata = buildEstinant({
 
       if (directoryId === undefined || foundBoundary === undefined) {
         return {
-          [PROGRAM_ERROR_GEPP]: [
+          [PROGRAM_ERROR_2_GEPP]: [
             {
-              message: 'Unable to find directory id or boundary id',
-              locator: {
-                typeName: ErrorLocatorTypeName.FileErrorLocator,
+              name: 'missing-file-node-parent',
+              error: new Error('Unable to find directory id or boundary id'),
+              reporterLocator,
+              sourceLocator: {
+                typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
                 filePath: file.filePath,
               },
-              metadata: {
+              context: {
                 directoryId,
                 boundaryId: foundBoundary?.id,
                 file,
               },
-            },
+            } satisfies ReportedProgramError2<ReportingLocator>,
           ],
           [FILE_NODE_METADATA_GEPP]: [],
         };
       }
 
       return {
-        [PROGRAM_ERROR_GEPP]: [],
+        [PROGRAM_ERROR_2_GEPP]: [],
         [FILE_NODE_METADATA_GEPP]: [
           {
             zorn: file.zorn,
