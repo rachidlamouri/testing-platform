@@ -13,17 +13,25 @@ export type InMemoryIndexByName = Merge<
 
 export type InMemoryVoque<
   TGepp extends Gepp,
-  THubblepup extends Hubblepup,
+  TReceivedHubblepup extends Hubblepup,
+  TEmittedHubblepup extends Hubblepup,
   TIndexByName extends InMemoryIndexByName,
-> = Voque<TGepp, THubblepup, THubblepup, TIndexByName, THubblepup[]>;
+> = Voque<
+  TGepp,
+  TReceivedHubblepup,
+  TEmittedHubblepup,
+  TIndexByName,
+  TEmittedHubblepup[]
+>;
 
 export type StandardInMemoryVoque<
   TGepp extends Gepp,
   THubblepup extends Hubblepup,
-> = InMemoryVoque<TGepp, THubblepup, InMemoryIndexByName>;
+> = InMemoryVoque<TGepp, THubblepup, THubblepup, InMemoryIndexByName>;
 
 export type GenericInMemoryVoque = InMemoryVoque<
   Gepp,
+  Hubblepup,
   Hubblepup,
   InMemoryIndexByName
 >;
