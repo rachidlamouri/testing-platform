@@ -35,12 +35,13 @@ import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorVoque,
 } from '../../programmable-units/error/programError';
-import {
-  OUTPUT_FILE_GEPP,
-  OutputFileVoque,
-} from '../../programmable-units/output-file/outputFile';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
+import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'modelPrograms',
+});
 
 /**
  * Creates an interactive model for each engine program.
@@ -67,9 +68,8 @@ digikikify({
       gepp: PROGRAM_ERROR_GEPP,
       initialHubblepupTuple: [],
     }),
-    new InMemoryVoictent<OutputFileVoque>({
-      gepp: OUTPUT_FILE_GEPP,
-      initialHubblepupTuple: [],
+    new OutputFileVoictent({
+      programFileCache,
     }),
   ],
   estinantTuple: [
@@ -101,8 +101,6 @@ digikikify({
 
     signalError,
   ] as const,
-  programFileCache: new ProgramFileCache({
-    namespace: 'modelPrograms',
-  }),
+  programFileCache,
   serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
 });

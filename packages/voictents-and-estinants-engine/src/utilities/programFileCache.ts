@@ -46,6 +46,21 @@ export type VoictentDirectoryDeleterInput = {
   voictentGepp: Gepp;
 };
 
+export type NamespacedFilePathAccessorInput = {
+  voictentGepp: Gepp;
+  nestedPath: string;
+  extensionlessFileName: string;
+  fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
+};
+
+export type NamespacedFilePathWriterInput = {
+  voictentGepp: Gepp;
+  nestedPath: string;
+  extensionlessFileName: string;
+  fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
+  text: string;
+};
+
 export class ProgramFileCache {
   public readonly namespace;
 
@@ -79,22 +94,58 @@ export class ProgramFileCache {
     return posix.join(this.namespaceDirectory, relativeDirectoryPath);
   }
 
+  getNamespacedFilePath({
+    voictentGepp,
+    nestedPath,
+    extensionlessFileName,
+    fileExtensionSuffixIdentifier,
+  }: NamespacedFilePathAccessorInput): string {
+    const fileExtensionSuffix = getFileExtensionSuffix(
+      fileExtensionSuffixIdentifier,
+    );
+
+    return posix.join(
+      this.voictentsDirectory,
+      voictentGepp,
+      nestedPath,
+      `${extensionlessFileName}.${fileExtensionSuffix}`,
+    );
+  }
+
+  writeNamespacedFile({
+    voictentGepp,
+    nestedPath,
+    extensionlessFileName,
+    fileExtensionSuffixIdentifier,
+    text,
+  }: NamespacedFilePathWriterInput): void {
+    const filePath = this.getNamespacedFilePath({
+      voictentGepp,
+      nestedPath,
+      extensionlessFileName,
+      fileExtensionSuffixIdentifier,
+    });
+
+    const directoryPath = posix.dirname(filePath);
+
+    createDirectory(directoryPath);
+    fs.writeFileSync(filePath, text);
+  }
+
+  // TODO: Remove this function. A ProgramFileCache doesn't need to know what a hubblepup is
   writeSerializedHubblepup({
     voictentGepp,
     nestedPath,
     extensionlessFileName,
     serializedHubblepup,
   }: SerializedHubblepupWriterInput): void {
-    const fileExtensionSuffix = getFileExtensionSuffix(
-      serializedHubblepup.fileExtensionSuffixIdentifier,
-    );
-
-    const hubblepupFilePath = posix.join(
-      this.voictentsDirectory,
+    const hubblepupFilePath = this.getNamespacedFilePath({
       voictentGepp,
       nestedPath,
-      `${extensionlessFileName}.${fileExtensionSuffix}`,
-    );
+      extensionlessFileName,
+      fileExtensionSuffixIdentifier:
+        serializedHubblepup.fileExtensionSuffixIdentifier,
+    });
     const voictentDirectoryPath = posix.dirname(hubblepupFilePath);
 
     createDirectory(voictentDirectoryPath);
