@@ -11,7 +11,7 @@ import {
   GenericProgramError2Voque,
   PROGRAM_ERROR_2_GEPP,
   UnsafeProgramError2Voque,
-} from './programError2';
+} from './programError';
 
 export type ProgramError2VoictentConstructorInput = {
   programFileCache: ProgramFileCache;

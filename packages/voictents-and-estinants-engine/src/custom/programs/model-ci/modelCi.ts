@@ -28,7 +28,7 @@ import { assertCiFileIsUpToDate } from './assertCiFileIsUpToDate';
 import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
-import { ProgramError2Voictent } from '../../programmable-units/error/programError2Voictent';
+import { ProgramError2Voictent } from '../../programmable-units/error/programErrorVoictent';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',

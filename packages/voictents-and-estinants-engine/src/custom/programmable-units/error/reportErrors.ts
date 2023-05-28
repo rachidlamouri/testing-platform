@@ -2,7 +2,7 @@ import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   GenericProgramError2Voque,
   PROGRAM_ERROR_2_GEPP,
-} from './programError2';
+} from './programError';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;

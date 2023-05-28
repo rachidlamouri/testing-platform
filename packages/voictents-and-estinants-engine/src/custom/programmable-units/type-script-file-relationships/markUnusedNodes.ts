@@ -5,7 +5,7 @@ import {
   GenericProgramError2Voque,
   ReportedProgramError2,
   ReportingEstinantLocator,
-} from '../error/programError2';
+} from '../error/programError';
 import {
   FILE_NODE_METADATA_GEPP,
   FileNodeMetadata,

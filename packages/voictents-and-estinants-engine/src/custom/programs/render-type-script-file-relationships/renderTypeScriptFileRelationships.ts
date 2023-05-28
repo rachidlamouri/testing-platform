@@ -38,7 +38,7 @@ import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
-import { ProgramError2Voictent } from '../../programmable-units/error/programError2Voictent';
+import { ProgramError2Voictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 
 const programFileCache = new ProgramFileCache({

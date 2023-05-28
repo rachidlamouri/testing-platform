@@ -27,7 +27,7 @@ import {
   GenericProgramError2Voque,
   ReportedProgramError2,
   ReportingEstinantLocator,
-} from '../../error/programError2';
+} from '../../error/programError';
 
 const ESTINANT_NAME = 'getInitialEdgeMetadata' as const;
 type EstinantName = typeof ESTINANT_NAME;

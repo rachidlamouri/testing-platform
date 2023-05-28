@@ -15,7 +15,7 @@ import {
   ProgramError2ElementLocatorTypeName,
   GenericProgramError2Voque,
   ReportingEstinantLocator,
-} from '../error/programError2';
+} from '../error/programError';
 
 const ESTINANT_NAME = 'parseTypeScriptFile' as const;
 type EstinantName = typeof ESTINANT_NAME;

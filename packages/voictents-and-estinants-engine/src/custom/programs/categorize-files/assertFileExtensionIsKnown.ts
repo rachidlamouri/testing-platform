@@ -5,7 +5,7 @@ import {
   ProgramError2ElementLocatorTypeName,
   ReportedProgramError2,
   ReportingEstinantLocator,
-} from '../../programmable-units/error/programError2';
+} from '../../programmable-units/error/programError';
 import { FILE_GEPP, FileVoque } from '../../programmable-units/file/file';
 import { FileExtensionSuffixIdentifier } from '../../programmable-units/file/fileExtensionSuffixIdentifier';
 

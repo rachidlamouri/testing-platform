@@ -51,7 +51,7 @@ import {
   GenericProgramError2Voque,
   ReportedProgramError2,
   ReportingEstinantLocator,
-} from '../error/programError2';
+} from '../error/programError';
 import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
 import { isSpecificConstantTypeScriptAsExpression } from '../../../utilities/type-script-ast/isConstantTypeScriptAsExpression';
 

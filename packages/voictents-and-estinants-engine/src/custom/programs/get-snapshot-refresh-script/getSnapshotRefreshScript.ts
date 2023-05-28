@@ -7,7 +7,7 @@ import {
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   EngineFunctionConfigurationVoque,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
-import { ProgramError2Voictent } from '../../programmable-units/error/programError2Voictent';
+import { ProgramError2Voictent } from '../../programmable-units/error/programErrorVoictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {

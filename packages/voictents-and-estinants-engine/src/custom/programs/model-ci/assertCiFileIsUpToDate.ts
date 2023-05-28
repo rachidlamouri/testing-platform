@@ -14,7 +14,7 @@ import {
   GenericProgramError2Voque,
   ReportedProgramError2,
   ReportingEstinantLocator,
-} from '../../programmable-units/error/programError2';
+} from '../../programmable-units/error/programError';
 
 const ESTINANT_NAME = 'assertCiFileIsUpToDate' as const;
 type EstinantName = typeof ESTINANT_NAME;

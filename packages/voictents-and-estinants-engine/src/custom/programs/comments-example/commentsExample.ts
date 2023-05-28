@@ -1,7 +1,7 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { digikikify } from '../../../type-script-adapter/digikikify';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
-import { ProgramError2Voictent } from '../../programmable-units/error/programError2Voictent';
+import { ProgramError2Voictent } from '../../programmable-units/error/programErrorVoictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
