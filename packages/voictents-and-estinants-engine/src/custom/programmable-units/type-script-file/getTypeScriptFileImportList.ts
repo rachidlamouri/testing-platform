@@ -14,9 +14,9 @@ import {
 import { splitList } from '../../../utilities/splitList';
 import {
   PROGRAM_ERROR_2_GEPP,
-  ProgramError2ElementLocatorTypeName,
-  GenericProgramError2Voque,
-  ReportedProgramError2,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
   ReportingEstinantLocator,
 } from '../error/programError';
 
@@ -24,7 +24,7 @@ const ESTINANT_NAME = 'getTypeScriptFileImportList' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -43,13 +43,13 @@ export const getTypeScriptFileImportList = buildEstinant({
   .toHubblepup2<TypeScriptFileImportListVoque>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramError2Voque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe((parsedTypeScriptFile) => {
     const importAndErrorList = parsedTypeScriptFile.program.body
       .filter(isImportDeclaration)
-      .map<TypeScriptFileImport | ReportedProgramError2<ReportingLocator>>(
+      .map<TypeScriptFileImport | ReportedProgramError<ReportingLocator>>(
         (inputImportDeclaration) => {
           const sourcePath = inputImportDeclaration.source.value;
 
@@ -79,11 +79,11 @@ export const getTypeScriptFileImportList = buildEstinant({
                 reporterLocator,
                 sourceLocator: {
                   typeName:
-                    ProgramError2ElementLocatorTypeName.SourceFileLocator,
+                    ProgramErrorElementLocatorTypeName.SourceFileLocator,
                   filePath: parsedTypeScriptFile.filePath,
                 },
                 context: null,
-              } satisfies ReportedProgramError2<ReportingLocator>;
+              } satisfies ReportedProgramError<ReportingLocator>;
             }
 
             return {
@@ -102,7 +102,7 @@ export const getTypeScriptFileImportList = buildEstinant({
       );
 
     const importList: TypeScriptFileImport[] = [];
-    const errorList: ReportedProgramError2<ReportingLocator>[] = [];
+    const errorList: ReportedProgramError<ReportingLocator>[] = [];
     splitList({
       list: importAndErrorList,
       isElementA: (element): element is TypeScriptFileImport =>

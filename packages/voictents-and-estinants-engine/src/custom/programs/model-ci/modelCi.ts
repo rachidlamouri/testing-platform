@@ -28,11 +28,11 @@ import { assertCiFileIsUpToDate } from './assertCiFileIsUpToDate';
 import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
-import { ProgramError2Voictent } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
-})
+});
 
 /**
  * Uses a hard-coded data structure that represents the information in CI.sh and
@@ -60,7 +60,7 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new ProgramError2Voictent({
+    new ProgramErrorVoictent({
       programFileCache,
     }),
   ],

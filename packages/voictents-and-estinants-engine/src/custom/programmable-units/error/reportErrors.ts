@@ -1,8 +1,5 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import {
-  GenericProgramError2Voque,
-  PROGRAM_ERROR_2_GEPP,
-} from './programError';
+import { GenericProgramErrorVoque, PROGRAM_ERROR_2_GEPP } from './programError';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;
@@ -17,7 +14,7 @@ let isLimitReached = false;
 export const reportErrors = buildEstinant({
   name: 'reportErrors',
 })
-  .fromHubblepup2<GenericProgramError2Voque>({
+  .fromHubblepup2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe((programError) => {

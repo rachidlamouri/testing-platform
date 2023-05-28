@@ -1,9 +1,9 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   PROGRAM_ERROR_2_GEPP,
-  ProgramError2ElementLocatorTypeName,
-  GenericProgramError2Voque,
-  ReportedProgramError2,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
   ReportingEstinantLocator,
 } from '../error/programError';
 import {
@@ -21,7 +21,7 @@ const ESTINANT_NAME = 'markUnusedNodes' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -41,7 +41,7 @@ export const markUnusedNodes = buildEstinant({
   .andFromVoictent2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramError2Voque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe((edgeMetadataListList, fileNodeMetadataList) => {
@@ -97,12 +97,12 @@ export const markUnusedNodes = buildEstinant({
     const outputList = [...referenceCache.values()]
       .filter(({ isReferenced }) => !isReferenced)
       .map(({ metadata }) => {
-        const error: ReportedProgramError2<ReportingLocator> = {
+        const error: ReportedProgramError<ReportingLocator> = {
           name: 'mark-unused-nodes',
           error: new Error(`"${metadata.filePath}" appears to be unused`),
           reporterLocator,
           sourceLocator: {
-            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: metadata.filePath,
           },
           context: metadata,

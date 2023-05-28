@@ -1,9 +1,9 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   PROGRAM_ERROR_2_GEPP,
-  ProgramError2ElementLocatorTypeName,
-  GenericProgramError2Voque,
-  ReportedProgramError2,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../error/programError';
 import { Shape } from '../../graph-visualization/directed-graph/attribute';
@@ -30,7 +30,7 @@ const ESTINANT_NAME = 'getFileNodeMetadata' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -53,7 +53,7 @@ export const getFileNodeMetadata = buildEstinant({
   .andFromVoictent2<BoundaryMetadataVoque>({
     gepp: BOUNDARY_METADATA_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramError2Voque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .toHubblepupTuple2<FileNodeMetadataVoque>({
@@ -79,7 +79,7 @@ export const getFileNodeMetadata = buildEstinant({
               error: new Error('Unable to find directory id or boundary id'),
               reporterLocator,
               sourceLocator: {
-                typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+                typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
                 filePath: file.filePath,
               },
               context: {
@@ -87,7 +87,7 @@ export const getFileNodeMetadata = buildEstinant({
                 boundaryId: foundBoundary?.id,
                 file,
               },
-            } satisfies ReportedProgramError2<ReportingLocator>,
+            } satisfies ReportedProgramError<ReportingLocator>,
           ],
           [FILE_NODE_METADATA_GEPP]: [],
         };

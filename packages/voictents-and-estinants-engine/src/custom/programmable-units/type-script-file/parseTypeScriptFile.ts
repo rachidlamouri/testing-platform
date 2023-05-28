@@ -12,8 +12,8 @@ import {
 } from './parsedTypeScriptFile';
 import {
   PROGRAM_ERROR_2_GEPP,
-  ProgramError2ElementLocatorTypeName,
-  GenericProgramError2Voque,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
   ReportingEstinantLocator,
 } from '../error/programError';
 
@@ -21,7 +21,7 @@ const ESTINANT_NAME = 'parseTypeScriptFile' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -41,7 +41,7 @@ export const parseTypeScriptFile = buildEstinant({
   .toHubblepupTuple2<ParsedTypeScriptFileVoque>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramError2Voque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe((typeScriptFileConfiguration) => {
@@ -77,7 +77,7 @@ export const parseTypeScriptFile = buildEstinant({
             error: new Error('Failed to parse file'),
             reporterLocator,
             sourceLocator: {
-              typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+              typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
               filePath: typeScriptFileConfiguration.sourceFilePath,
             },
             context: {

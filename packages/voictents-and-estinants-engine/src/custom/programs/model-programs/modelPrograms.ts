@@ -33,7 +33,7 @@ import { signalError } from '../../programmable-units/error/signalError';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
-import { ProgramError2Voictent } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 
 const programFileCache = new ProgramFileCache({
@@ -61,7 +61,7 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new ProgramError2Voictent({
+    new ProgramErrorVoictent({
       programFileCache,
     }),
     new OutputFileVoictent({

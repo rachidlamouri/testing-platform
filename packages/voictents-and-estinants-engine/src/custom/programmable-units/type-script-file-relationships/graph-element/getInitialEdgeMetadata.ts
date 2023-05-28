@@ -23,9 +23,9 @@ import {
 } from './fileNodeMetadataByFilePath';
 import {
   PROGRAM_ERROR_2_GEPP,
-  ProgramError2ElementLocatorTypeName,
-  GenericProgramError2Voque,
-  ReportedProgramError2,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../error/programError';
 
@@ -33,7 +33,7 @@ const ESTINANT_NAME = 'getInitialEdgeMetadata' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -65,7 +65,7 @@ export const getInitialEdgeMetadata = buildEstinant({
   .toHubblepup2<InitialEdgeMetadataListVoque>({
     gepp: INITIAL_EDGE_METADATA_LIST_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramError2Voque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe(
@@ -75,7 +75,7 @@ export const getInitialEdgeMetadata = buildEstinant({
       [{ grition: fileNodeMetadataByFilePath }],
       [{ grition: externalModuleMetadataIdBySourcePath }],
     ) => {
-      const errorList: ReportedProgramError2<ReportingLocator>[] = [];
+      const errorList: ReportedProgramError<ReportingLocator>[] = [];
       const edgeMetadataList: InitialEdgeMetadataList['grition'] = [];
 
       const headList = importList.map((importedItem) => {
@@ -98,7 +98,7 @@ export const getInitialEdgeMetadata = buildEstinant({
             ),
             reporterLocator,
             sourceLocator: {
-              typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+              typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
               filePath: fileNodeMetadata.filePath,
             },
             context: {

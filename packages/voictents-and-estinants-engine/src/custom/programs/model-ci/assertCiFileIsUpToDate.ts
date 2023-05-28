@@ -10,9 +10,9 @@ import {
 } from './serializedCiModel';
 import {
   PROGRAM_ERROR_2_GEPP,
-  ProgramError2ElementLocatorTypeName,
-  GenericProgramError2Voque,
-  ReportedProgramError2,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
 
@@ -20,7 +20,7 @@ const ESTINANT_NAME = 'assertCiFileIsUpToDate' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -41,7 +41,7 @@ export const assertCiFileIsUpToDate = buildEstinant({
     framate: () => [CI_FILE_PATH],
     croard: (leftInput) => leftInput.hubblepup.filePath,
   })
-  .toHubblepupTuple2<GenericProgramError2Voque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe((serializeCiModel, [ciFile]) => {
@@ -54,11 +54,11 @@ export const assertCiFileIsUpToDate = buildEstinant({
           error: new Error('CI file is not up to date'),
           reporterLocator,
           sourceLocator: {
-            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: ciFile.filePath,
           },
           context: null,
-        } satisfies ReportedProgramError2<ReportingLocator>,
+        } satisfies ReportedProgramError<ReportingLocator>,
       ];
     }
 

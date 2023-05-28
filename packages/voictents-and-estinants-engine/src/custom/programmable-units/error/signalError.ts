@@ -1,8 +1,5 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import {
-  GenericProgramError2Voque,
-  PROGRAM_ERROR_2_GEPP,
-} from './programError';
+import { GenericProgramErrorVoque, PROGRAM_ERROR_2_GEPP } from './programError';
 
 /**
  * Sets a non-zero exit code if there is a program error.
@@ -10,7 +7,7 @@ import {
 export const signalError = buildEstinant({
   name: 'signalError',
 })
-  .fromHubblepup2<GenericProgramError2Voque>({
+  .fromHubblepup2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe(() => {

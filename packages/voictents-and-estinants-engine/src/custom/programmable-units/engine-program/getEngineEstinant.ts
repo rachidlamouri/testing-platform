@@ -47,9 +47,9 @@ import {
 } from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 import {
   PROGRAM_ERROR_2_GEPP,
-  ProgramError2ElementLocatorTypeName,
-  GenericProgramError2Voque,
-  ReportedProgramError2,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
   ReportingEstinantLocator,
 } from '../error/programError';
 import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
@@ -59,7 +59,7 @@ const ESTINANT_NAME = 'getEngineEstinant' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -70,7 +70,7 @@ type CoreEstinantAccessorInput = {
 };
 
 type CoreEstinantAccessorResult = {
-  errorList: ReportedProgramError2<ReportingLocator>[];
+  errorList: ReportedProgramError<ReportingLocator>[];
   estinant: EngineEstinant2 | null;
 };
 
@@ -103,14 +103,14 @@ const getBuildAddMetadataForSerializationEstinant = (
           ),
           reporterLocator,
           sourceLocator: {
-            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
           context: {
             parameterNameTuple,
             typeParameterTuple,
           },
-        } satisfies ReportedProgramError2<ReportingLocator>,
+        } satisfies ReportedProgramError<ReportingLocator>,
       ],
       estinant: {
         zorn: estinantLocator.zorn,
@@ -201,14 +201,14 @@ const getCoreEstinant = ({
           error: new Error('Unable to locate type parameter list'),
           reporterLocator,
           sourceLocator: {
-            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
           context: {
             typeNode,
             commentedBodyDeclaration,
           },
-        } satisfies ReportedProgramError2<ReportingLocator>,
+        } satisfies ReportedProgramError<ReportingLocator>,
       ],
       estinant: {
         id: getTextDigest(estinantName),
@@ -225,7 +225,7 @@ const getCoreEstinant = ({
   const [leftTypeReference, rightTypeTuple, outputTypeReference] =
     typeParameterNodeList;
 
-  const parallelErrorList: ReportedProgramError2<ReportingLocator>[] = [];
+  const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
 
   const leftVoqueName =
     isTypeScriptTypeParameterInstantiationWithParameterTuple(
@@ -287,7 +287,7 @@ const getCoreEstinant = ({
       error: new Error('Left estiant input is unparseable'),
       reporterLocator,
       sourceLocator: {
-        typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: estinantLocator.filePath,
       },
       context: {
@@ -303,7 +303,7 @@ const getCoreEstinant = ({
       error: new Error('Unable to parse the right input tuple type'),
       reporterLocator,
       sourceLocator: {
-        typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: estinantLocator.filePath,
       },
       context: {
@@ -321,7 +321,7 @@ const getCoreEstinant = ({
       error: new Error('Estinant output tuple is unparseable'),
       reporterLocator,
       sourceLocator: {
-        typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: estinantLocator.filePath,
       },
       context: {
@@ -381,7 +381,7 @@ type AdaptedEstinantAccessorInput = {
 };
 
 type AdaptedEstinantAccessorResult = {
-  errorList: ReportedProgramError2<ReportingLocator>[];
+  errorList: ReportedProgramError<ReportingLocator>[];
   estinant: EngineEstinant2 | null;
 };
 
@@ -403,14 +403,14 @@ const getAdaptedEstinant = ({
   if (callExpression === null) {
     const estinantName = estinantLocator.identifierName;
 
-    let error: ReportedProgramError2<ReportingLocator>;
+    let error: ReportedProgramError<ReportingLocator>;
     if (estinantLocator.isCoreEstinant) {
       error = {
         name: `unhandled-core-estinant`,
         error: new Error('Parsing core engine estinants is not handled yet'),
         reporterLocator,
         sourceLocator: {
-          typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+          typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
           filePath: estinantLocator.filePath,
         },
         context: null,
@@ -421,7 +421,7 @@ const getAdaptedEstinant = ({
         error: new Error('Export declaration is missing a call expression'),
         reporterLocator,
         sourceLocator: {
-          typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+          typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
           filePath: estinantLocator.filePath,
         },
         context: {
@@ -475,13 +475,13 @@ const getAdaptedEstinant = ({
           ),
           reporterLocator,
           sourceLocator: {
-            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
           context: {
             error,
           },
-        } satisfies ReportedProgramError2<ReportingLocator>;
+        } satisfies ReportedProgramError<ReportingLocator>;
       }),
       estinant: null,
     };
@@ -567,7 +567,7 @@ const getAdaptedEstinant = ({
           ),
           reporterLocator,
           sourceLocator: {
-            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
           context: {
@@ -594,7 +594,7 @@ const getAdaptedEstinant = ({
           ),
           reporterLocator,
           sourceLocator: {
-            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
           context: {
@@ -634,13 +634,13 @@ const getAdaptedEstinant = ({
           ),
           reporterLocator,
           sourceLocator: {
-            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
           context: {
             parsedExpression,
           },
-        } satisfies ReportedProgramError2<ReportingLocator>;
+        } satisfies ReportedProgramError<ReportingLocator>;
       }),
       estinant: null,
     };
@@ -657,7 +657,7 @@ const getAdaptedEstinant = ({
       .replace(/Voque$/, '');
 
     // TODO: maybe don't hardcode this logic
-    if (voictentName === 'GenericProgramError2') {
+    if (voictentName === 'GenericProgramError') {
       voictentName = 'ProgramError';
     }
 
@@ -724,7 +724,7 @@ const getAdaptedEstinant = ({
     instantiatedName = null;
   }
 
-  const parallelErrorList: ReportedProgramError2<ReportingLocator>[] = [];
+  const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
 
   if (instantiatedName === null) {
     parallelErrorList.push({
@@ -734,7 +734,7 @@ const getAdaptedEstinant = ({
       ),
       reporterLocator,
       sourceLocator: {
-        typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: estinantLocator.filePath,
       },
       context: null,
@@ -747,7 +747,7 @@ const getAdaptedEstinant = ({
       ),
       reporterLocator,
       sourceLocator: {
-        typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: estinantLocator.filePath,
       },
       context: {
@@ -786,14 +786,14 @@ export const getEngineEstinant = buildEstinant({
     framate: (leftInput) => [leftInput.hubblepup.filePath],
     croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .toHubblepupTuple2<GenericProgramError2Voque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .toHubblepupTuple2<EngineEstinant2Voque>({
     gepp: ENGINE_ESTINANT_2_GEPP,
   })
   .onPinbe((estinantLocator, [bodyDeclarationsByIdentifier]) => {
-    let errorList: ReportedProgramError2<ReportingLocator>[];
+    let errorList: ReportedProgramError<ReportingLocator>[];
     let estinant: EngineEstinant2 | null;
 
     if (
@@ -829,7 +829,7 @@ export const getEngineEstinant = buildEstinant({
           ),
           reporterLocator,
           sourceLocator: {
-            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
           context: {

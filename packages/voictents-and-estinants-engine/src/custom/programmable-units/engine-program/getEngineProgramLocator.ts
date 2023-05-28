@@ -57,9 +57,9 @@ import { isIdentifiableTypeScriptTypeReference } from '../../../utilities/type-s
 import { isSpecificConstantTypeScriptAsExpression } from '../../../utilities/type-script-ast/isConstantTypeScriptAsExpression';
 import {
   PROGRAM_ERROR_2_GEPP,
-  ProgramError2ElementLocatorTypeName,
-  GenericProgramError2Voque,
-  ReportedProgramError2,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
   ReportingEstinantLocator,
 } from '../error/programError';
 
@@ -67,7 +67,7 @@ const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -104,7 +104,7 @@ type Core2EngineProgramLocatorAccessorInput = {
 };
 
 type Core2EngineProgramLocatorAccessorResult = {
-  parallelErrorList: ReportedProgramError2<ReportingLocator>[];
+  parallelErrorList: ReportedProgramError<ReportingLocator>[];
   engineProgramLocator: EngineProgramLocator2;
 };
 
@@ -131,7 +131,7 @@ const getCore2EngineProgramLocator = ({
       : [];
 
   const voictentLocatorList: VoictentLocator[] = [];
-  const parallelErrorList: ReportedProgramError2<ReportingLocator>[] = [];
+  const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
 
   initialVoictentGeppIdentifierList.forEach((element) => {
     const voqueName =
@@ -176,7 +176,7 @@ const getCore2EngineProgramLocator = ({
         ),
         reporterLocator,
         sourceLocator: {
-          typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+          typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
           filePath: engineProgramFile.filePath,
         },
         context: null,
@@ -242,7 +242,7 @@ const getCore2EngineProgramLocator = ({
         ),
         reporterLocator,
         sourceLocator: {
-          typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+          typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
           filePath: engineProgramFile.filePath,
         },
         context: null,
@@ -310,7 +310,7 @@ const getCore2EngineProgramLocator = ({
       error: new Error('Program is missing a description'),
       reporterLocator,
       sourceLocator: {
-        typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: engineProgramFile.filePath,
       },
       context: null,
@@ -341,7 +341,7 @@ type AdaptedEngineProgramLocatorAccessorInput = {
 };
 
 type AdaptedEngineProgramLocatorAccessorResult = {
-  parallelErrorList: ReportedProgramError2<ReportingLocator>[];
+  parallelErrorList: ReportedProgramError<ReportingLocator>[];
   engineProgramLocator: EngineProgramLocator2;
 };
 
@@ -368,7 +368,7 @@ const getAdaptedEngineProgramLocator = ({
       ? populatedVoictentTupleValueNode.expression.elements
       : [];
 
-  const parallelErrorList: ReportedProgramError2<ReportingLocator>[] = [];
+  const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
   const voictentLocatorList: VoictentLocator[] = [];
 
   if (populatedVoictentInstanceList.length === 0) {
@@ -379,7 +379,7 @@ const getAdaptedEngineProgramLocator = ({
       ),
       reporterLocator,
       sourceLocator: {
-        typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: engineProgramFile.filePath,
       },
       context: {
@@ -411,7 +411,7 @@ const getAdaptedEngineProgramLocator = ({
         ),
         reporterLocator,
         sourceLocator: {
-          typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+          typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
           filePath: engineProgramFile.filePath,
         },
         context: {
@@ -455,7 +455,7 @@ const getAdaptedEngineProgramLocator = ({
       ),
       reporterLocator,
       sourceLocator: {
-        typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: engineProgramFile.filePath,
       },
       context: {
@@ -518,7 +518,7 @@ const getAdaptedEngineProgramLocator = ({
       error: new Error('Program is missing a description'),
       reporterLocator,
       sourceLocator: {
-        typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: engineProgramFile.filePath,
       },
       context: null,
@@ -560,7 +560,7 @@ export const getEngineProgramLocator = buildEstinant({
     framate: (leftInput) => [leftInput.indexByName.zorn],
     croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .toHubblepupTuple2<GenericProgramError2Voque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .toHubblepupTuple2<EngineProgramLocator2Voque>({
@@ -588,11 +588,11 @@ export const getEngineProgramLocator = buildEstinant({
               error: new Error('Unable to find engine call declaration'),
               reporterLocator,
               sourceLocator: {
-                typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+                typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
                 filePath: engineProgramFile.file.filePath,
               },
               context: null,
-            } satisfies ReportedProgramError2<ReportingLocator>,
+            } satisfies ReportedProgramError<ReportingLocator>,
           ],
           [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [],
         };
@@ -616,11 +616,11 @@ export const getEngineProgramLocator = buildEstinant({
                 reporterLocator,
                 sourceLocator: {
                   typeName:
-                    ProgramError2ElementLocatorTypeName.SourceFileLocator,
+                    ProgramErrorElementLocatorTypeName.SourceFileLocator,
                   filePath: engineProgramFile.file.filePath,
                 },
                 context: null,
-              } satisfies ReportedProgramError2<ReportingLocator>,
+              } satisfies ReportedProgramError<ReportingLocator>,
             ],
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [],
           };

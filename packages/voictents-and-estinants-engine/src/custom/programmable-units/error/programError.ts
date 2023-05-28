@@ -1,18 +1,18 @@
 import { Voque } from '../../../core/engine/voque';
 import { TypeScriptObjectInstance } from '../../../utilities/typed-datum/type-script/object';
 
-export enum ProgramError2ElementLocatorTypeName {
+export enum ProgramErrorElementLocatorTypeName {
   SourceFileLocator = 'SourceFileLocator',
   ReportingEstinantLocator = 'ReportingEstinantLocator',
 }
 
 export type FileErrorLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator;
+  typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator;
   filePath: string;
 };
 
 export type ReportingEstinantLocator<TEstinantName extends string> = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator;
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator;
   name: TEstinantName;
   filePath: string;
 };
@@ -23,40 +23,40 @@ export type GenericReportingEstinantLocator = ReportingEstinantLocator<string>;
 export type UnsafeReportingEstinantLocator = ReportingEstinantLocator<any>;
 
 // TODO: add more locator types as needed
-export type ProgramError2SourceLocator = FileErrorLocator;
+export type ProgramErrorSourceLocator = FileErrorLocator;
 
 // TODO: add more locator types as needed
-export type GenericProgramError2ReporterLocator =
+export type GenericProgramErrorReporterLocator =
   GenericReportingEstinantLocator;
 
-export type UnsafeProgramError2ReporterLocator = UnsafeReportingEstinantLocator;
+export type UnsafeProgramErrorReporterLocator = UnsafeReportingEstinantLocator;
 
-export type ReceivedProgramError2<
-  TReporterLocator extends GenericProgramError2ReporterLocator,
+export type ReceivedProgramError<
+  TReporterLocator extends GenericProgramErrorReporterLocator,
 > = {
   name: string;
   error: Error;
   reporterLocator: TReporterLocator;
-  sourceLocator: ProgramError2SourceLocator;
+  sourceLocator: ProgramErrorSourceLocator;
   context: TypeScriptObjectInstance | null;
 };
 
-export type ReportedProgramError2<
-  TReporterLocator extends GenericProgramError2ReporterLocator,
-> = ReceivedProgramError2<TReporterLocator>;
+export type ReportedProgramError<
+  TReporterLocator extends GenericProgramErrorReporterLocator,
+> = ReceivedProgramError<TReporterLocator>;
 
-export type GenericReceivedProgramError2 =
-  ReceivedProgramError2<GenericProgramError2ReporterLocator>;
+export type GenericReceivedProgramError =
+  ReceivedProgramError<GenericProgramErrorReporterLocator>;
 
-export type EmittedProgramError2<
-  TReporterLocator extends GenericProgramError2ReporterLocator,
+export type EmittedProgramError<
+  TReporterLocator extends GenericProgramErrorReporterLocator,
 > = {
   zorn: string;
   name: string;
   message: string;
   stackTrace: string[];
   reporterLocator: TReporterLocator;
-  sourceLocator: ProgramError2SourceLocator;
+  sourceLocator: ProgramErrorSourceLocator;
   context: TypeScriptObjectInstance | null;
   serializedContextFilePath: string;
   normalizedZorn: string;
@@ -65,27 +65,27 @@ export type EmittedProgramError2<
   contextFilePath: string;
 };
 
-export type GenericEmittedProgramError2 =
-  EmittedProgramError2<GenericProgramError2ReporterLocator>;
+export type GenericEmittedProgramError =
+  EmittedProgramError<GenericProgramErrorReporterLocator>;
 
 export const PROGRAM_ERROR_2_GEPP = 'program-error-2';
 
-export type ProgramError2Gepp = typeof PROGRAM_ERROR_2_GEPP;
+export type ProgramErrorGepp = typeof PROGRAM_ERROR_2_GEPP;
 
-export type ProgramError2Voque<
-  TReporterLocator extends GenericProgramError2ReporterLocator,
+export type ProgramErrorVoque<
+  TReporterLocator extends GenericProgramErrorReporterLocator,
 > = Voque<
-  ProgramError2Gepp,
-  ReceivedProgramError2<TReporterLocator>,
-  EmittedProgramError2<TReporterLocator>,
+  ProgramErrorGepp,
+  ReceivedProgramError<TReporterLocator>,
+  EmittedProgramError<TReporterLocator>,
   {
     zorn: string;
   },
-  EmittedProgramError2<TReporterLocator>[]
+  EmittedProgramError<TReporterLocator>[]
 >;
 
-export type GenericProgramError2Voque =
-  ProgramError2Voque<GenericProgramError2ReporterLocator>;
+export type GenericProgramErrorVoque =
+  ProgramErrorVoque<GenericProgramErrorReporterLocator>;
 
-export type UnsafeProgramError2Voque =
-  ProgramError2Voque<UnsafeProgramError2ReporterLocator>;
+export type UnsafeProgramErrorVoque =
+  ProgramErrorVoque<UnsafeProgramErrorReporterLocator>;

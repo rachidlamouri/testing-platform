@@ -9,7 +9,7 @@ import { enumerateFileSystemObjects } from '../../programmable-units/file/enumer
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { assertFileExtensionIsKnown } from './assertFileExtensionIsKnown';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
-import { ProgramError2Voictent } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 
@@ -33,7 +33,7 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new ProgramError2Voictent({
+    new ProgramErrorVoictent({
       programFileCache,
     }),
   ],

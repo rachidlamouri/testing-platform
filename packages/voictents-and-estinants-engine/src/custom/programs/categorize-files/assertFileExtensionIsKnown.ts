@@ -1,9 +1,9 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  GenericProgramError2Voque,
+  GenericProgramErrorVoque,
   PROGRAM_ERROR_2_GEPP,
-  ProgramError2ElementLocatorTypeName,
-  ReportedProgramError2,
+  ProgramErrorElementLocatorTypeName,
+  ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
 import { FILE_GEPP, FileVoque } from '../../programmable-units/file/file';
@@ -13,7 +13,7 @@ const ESTINANT_NAME = 'assertFileExtensionIsKnown' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -27,19 +27,19 @@ export const assertFileExtensionIsKnown = buildEstinant({
   .fromHubblepup2<FileVoque>({
     gepp: FILE_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramError2Voque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe((file) => {
     if (
       file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Unknown
     ) {
-      const output: ReportedProgramError2<ReportingLocator> = {
+      const output: ReportedProgramError<ReportingLocator> = {
         name: 'file-extension-is-unknown',
         error: new Error(`Unknown file extension "${file.extension.suffix}"`),
         reporterLocator,
         sourceLocator: {
-          typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+          typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
           filePath: file.filePath,
         },
         context: null,

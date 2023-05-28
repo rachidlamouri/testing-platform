@@ -7,9 +7,9 @@ import {
 import { CI_MODEL_GEPP, CI_MODEL_ZORN, CiModelVoque } from './ciModel';
 import {
   PROGRAM_ERROR_2_GEPP,
-  ProgramError2ElementLocatorTypeName,
-  GenericProgramError2Voque,
-  ReportedProgramError2,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
 
@@ -17,7 +17,7 @@ const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramError2ElementLocatorTypeName.ReportingEstinantLocator,
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -37,7 +37,7 @@ export const assertCiModelHasAllPrograms = buildEstinant({
     framate: () => [CI_MODEL_ZORN],
     croard: (rightInput) => rightInput.hubblepup.zorn,
   })
-  .toHubblepupTuple2<GenericProgramError2Voque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_2_GEPP,
   })
   .onPinbe((programLocatorList, [ciModel]) => {
@@ -61,14 +61,14 @@ export const assertCiModelHasAllPrograms = buildEstinant({
           ),
           reporterLocator,
           sourceLocator: {
-            typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath:
               'packages/voictents-and-estinants-engine/src/custom/programs/model-ci/ciModel.ts',
           },
           context: {
             error,
           },
-        } satisfies ReportedProgramError2<ReportingLocator>,
+        } satisfies ReportedProgramError<ReportingLocator>,
       ];
     }
   })

@@ -7,7 +7,7 @@ import {
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   EngineFunctionConfigurationVoque,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
-import { ProgramError2Voictent } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -46,7 +46,7 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new ProgramError2Voictent({
+    new ProgramErrorVoictent({
       programFileCache,
     }),
     new OutputFileVoictent({

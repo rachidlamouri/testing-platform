@@ -8,22 +8,22 @@ import { serialize } from '../../../utilities/typed-datum/serializer/serialize';
 import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
 import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractInMemoryVoictent2';
 import {
-  GenericProgramError2Voque,
+  GenericProgramErrorVoque,
   PROGRAM_ERROR_2_GEPP,
-  UnsafeProgramError2Voque,
+  UnsafeProgramErrorVoque,
 } from './programError';
 
-export type ProgramError2VoictentConstructorInput = {
+export type ProgramErrorVoictentConstructorInput = {
   programFileCache: ProgramFileCache;
 };
 
-export class ProgramError2Voictent extends AbstractAsymmetricInMemoryVoictent2<
-  UnsafeProgramError2Voque,
-  UnsafeProgramError2Voque
+export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
+  UnsafeProgramErrorVoque,
+  UnsafeProgramErrorVoque
 > {
   private programFileCache: ProgramFileCache;
 
-  constructor({ programFileCache }: ProgramError2VoictentConstructorInput) {
+  constructor({ programFileCache }: ProgramErrorVoictentConstructorInput) {
     super({
       gepp: PROGRAM_ERROR_2_GEPP,
       initialHubblepupTuple: [],
@@ -38,8 +38,8 @@ export class ProgramError2Voictent extends AbstractAsymmetricInMemoryVoictent2<
 
   // eslint-disable-next-line class-methods-use-this
   protected transformHubblepup(
-    receivedHubblepup: GenericProgramError2Voque['receivedHubblepup'],
-  ): GenericProgramError2Voque['emittedHubblepup'] {
+    receivedHubblepup: GenericProgramErrorVoque['receivedHubblepup'],
+  ): GenericProgramErrorVoque['emittedHubblepup'] {
     const zorn = getVoictentResourceLocator([
       receivedHubblepup.reporterLocator.name,
       receivedHubblepup.name,
@@ -57,7 +57,7 @@ export class ProgramError2Voictent extends AbstractAsymmetricInMemoryVoictent2<
     const byReporterDirectoryPath = `by-reporter/${normalizedReporterPath}`;
     const bySourceDirectoryPath = `by-source/${normalizedSourcePath}`;
 
-    const emittedHubblepup: GenericProgramError2Voque['emittedHubblepup'] = {
+    const emittedHubblepup: GenericProgramErrorVoque['emittedHubblepup'] = {
       zorn,
       name: receivedHubblepup.name,
       message: receivedHubblepup.error.message,
@@ -81,7 +81,7 @@ export class ProgramError2Voictent extends AbstractAsymmetricInMemoryVoictent2<
   }
 
   protected onTransformedHubblepup(
-    hubblepup: GenericProgramError2Voque['emittedHubblepup'],
+    hubblepup: GenericProgramErrorVoque['emittedHubblepup'],
   ): void {
     const serializedHubblepup: SerializedHubblepup = {
       text: serialize(hubblepup),
@@ -106,8 +106,8 @@ export class ProgramError2Voictent extends AbstractAsymmetricInMemoryVoictent2<
 
   // eslint-disable-next-line class-methods-use-this
   protected getIndexByName(
-    hubblepup: GenericProgramError2Voque['emittedHubblepup'],
-  ): GenericProgramError2Voque['indexByName'] {
+    hubblepup: GenericProgramErrorVoque['emittedHubblepup'],
+  ): GenericProgramErrorVoque['indexByName'] {
     return {
       zorn: hubblepup.zorn,
     };
