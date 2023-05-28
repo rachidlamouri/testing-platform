@@ -1,38 +1,91 @@
-import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
+import { Voque } from '../../../core/engine/voque';
 import { TypeScriptObjectInstance } from '../../../utilities/typed-datum/type-script/object';
-import { Voictent } from '../../adapter/voictent';
 
-export enum ErrorLocatorTypeName {
-  FileErrorLocator = 'FileErrorLocator',
+export enum ProgramErrorElementLocatorTypeName {
+  SourceFileLocator = 'SourceFileLocator',
+  ReportingEstinantLocator = 'ReportingEstinantLocator',
 }
 
 export type FileErrorLocator = {
-  typeName: ErrorLocatorTypeName.FileErrorLocator;
+  typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator;
   filePath: string;
 };
 
-// TODO: add more locator types as needed
-export type ProgramErrorLocator = FileErrorLocator | null;
-
-export type ProgramErrorId<TPrefix extends string = string> =
-  `${TPrefix}/${string}`;
-
-// TODO: make the type parameter required and make a GenericProgramError
-export type ProgramError<TPrefix extends string = string> = {
-  errorId?: ProgramErrorId<TPrefix>;
-  message: string;
-  locator: ProgramErrorLocator;
-  metadata: TypeScriptObjectInstance | null;
+export type ReportingEstinantLocator<TEstinantName extends string> = {
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator;
+  name: TEstinantName;
+  filePath: string;
 };
+
+export type GenericReportingEstinantLocator = ReportingEstinantLocator<string>;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type UnsafeReportingEstinantLocator = ReportingEstinantLocator<any>;
+
+// TODO: add more locator types as needed
+export type ProgramErrorSourceLocator = FileErrorLocator;
+
+// TODO: add more locator types as needed
+export type GenericProgramErrorReporterLocator =
+  GenericReportingEstinantLocator;
+
+export type UnsafeProgramErrorReporterLocator = UnsafeReportingEstinantLocator;
+
+export type ReceivedProgramError<
+  TReporterLocator extends GenericProgramErrorReporterLocator,
+> = {
+  name: string;
+  error: Error;
+  reporterLocator: TReporterLocator;
+  sourceLocator: ProgramErrorSourceLocator;
+  context: TypeScriptObjectInstance | null;
+};
+
+export type ReportedProgramError<
+  TReporterLocator extends GenericProgramErrorReporterLocator,
+> = ReceivedProgramError<TReporterLocator>;
+
+export type GenericReceivedProgramError =
+  ReceivedProgramError<GenericProgramErrorReporterLocator>;
+
+export type EmittedProgramError<
+  TReporterLocator extends GenericProgramErrorReporterLocator,
+> = {
+  zorn: string;
+  name: string;
+  message: string;
+  stackTrace: string[];
+  reporterLocator: TReporterLocator;
+  sourceLocator: ProgramErrorSourceLocator;
+  context: TypeScriptObjectInstance | null;
+  serializedContextFilePath: string;
+  normalizedZorn: string;
+  byReporterDirectoryPath: string;
+  bySourceDirectoryPath: string;
+  contextFilePath: string;
+};
+
+export type GenericEmittedProgramError =
+  EmittedProgramError<GenericProgramErrorReporterLocator>;
 
 export const PROGRAM_ERROR_GEPP = 'program-error';
 
 export type ProgramErrorGepp = typeof PROGRAM_ERROR_GEPP;
 
-export type ProgramErrorVoictent<TPrefix extends string = string> = Voictent<
+export type ProgramErrorVoque<
+  TReporterLocator extends GenericProgramErrorReporterLocator,
+> = Voque<
   ProgramErrorGepp,
-  ProgramError<TPrefix>
+  ReceivedProgramError<TReporterLocator>,
+  EmittedProgramError<TReporterLocator>,
+  {
+    zorn: string;
+  },
+  EmittedProgramError<TReporterLocator>[]
 >;
 
-export type ProgramErrorVoque<TPrefix extends string = string> =
-  StandardInMemoryVoque<ProgramErrorGepp, ProgramError<TPrefix>>;
+export type GenericProgramErrorVoque =
+  ProgramErrorVoque<GenericProgramErrorReporterLocator>;
+
+export type UnsafeProgramErrorVoque =
+  ProgramErrorVoque<UnsafeProgramErrorReporterLocator>;

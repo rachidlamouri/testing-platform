@@ -8,10 +8,6 @@ import {
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { getEngineProgramLocator } from '../../programmable-units/engine-program/getEngineProgramLocator';
-import {
-  PROGRAM_ERROR_GEPP,
-  ProgramErrorVoque,
-} from '../../programmable-units/error/programError';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
@@ -32,6 +28,11 @@ import { assertCiFileIsUpToDate } from './assertCiFileIsUpToDate';
 import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'modelCi',
+});
 
 /**
  * Uses a hard-coded data structure that represents the information in CI.sh and
@@ -59,9 +60,8 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new InMemoryVoictent<ProgramErrorVoque>({
-      gepp: PROGRAM_ERROR_GEPP,
-      initialHubblepupTuple: [],
+    new ProgramErrorVoictent({
+      programFileCache,
     }),
   ],
   estinantTuple: [
@@ -85,7 +85,5 @@ digikikify({
     reportErrors,
     signalError,
   ] as const,
-  programFileCache: new ProgramFileCache({
-    namespace: 'modelCi',
-  }),
+  programFileCache,
 });

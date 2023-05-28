@@ -35,17 +35,15 @@ import { markUnusedNodes } from '../../programmable-units/type-script-file-relat
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { getOutputFileCount } from './getOutputFileCount';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import {
-  ProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
-} from '../../programmable-units/error/programError';
-import {
-  OutputFileVoque,
-  OUTPUT_FILE_GEPP,
-} from '../../programmable-units/output-file/outputFile';
 import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
+import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
+import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'renderTypeScriptFileRelationships',
+});
 
 /**
  * Assembles a knowledge graph of the TypeScript files in this package and their
@@ -99,13 +97,11 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new InMemoryVoictent<ProgramErrorVoque>({
-      gepp: PROGRAM_ERROR_GEPP,
-      initialHubblepupTuple: [],
+    new ProgramErrorVoictent({
+      programFileCache,
     }),
-    new InMemoryVoictent<OutputFileVoque>({
-      gepp: OUTPUT_FILE_GEPP,
-      initialHubblepupTuple: [],
+    new OutputFileVoictent({
+      programFileCache,
     }),
   ],
   estinantTuple: [
@@ -145,8 +141,6 @@ digikikify({
     markUnusedNodes,
     reportErrors,
   ] as const,
-  programFileCache: new ProgramFileCache({
-    namespace: 'renderTypeScriptFileRelationships',
-  }),
+  programFileCache,
   serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
 });

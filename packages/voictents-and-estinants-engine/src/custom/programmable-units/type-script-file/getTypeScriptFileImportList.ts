@@ -11,17 +11,23 @@ import {
   TypeScriptFileImport,
   TypeScriptFileImportListVoque,
 } from './typeScriptFileImportList';
-import {
-  ErrorLocatorTypeName,
-  PROGRAM_ERROR_GEPP,
-  ProgramError,
-  ProgramErrorVoque,
-} from '../error/programError';
 import { splitList } from '../../../utilities/splitList';
+import {
+  PROGRAM_ERROR_GEPP,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
+  ReportingEstinantLocator,
+} from '../error/programError';
 
-type EstinantName = 'getTypeScriptFileImportList';
-
-const ESTINANT_NAME: EstinantName = 'getTypeScriptFileImportList';
+const ESTINANT_NAME = 'getTypeScriptFileImportList' as const;
+type EstinantName = typeof ESTINANT_NAME;
+type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+const reporterLocator: ReportingLocator = {
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  name: ESTINANT_NAME,
+  filePath: __filename,
+};
 
 /**
  * Gets useful metadata about the import statements in a TypeScript file. For
@@ -29,7 +35,7 @@ const ESTINANT_NAME: EstinantName = 'getTypeScriptFileImportList';
  * don't need to resolve file paths.
  */
 export const getTypeScriptFileImportList = buildEstinant({
-  name: 'getTypeScriptFileImportList',
+  name: ESTINANT_NAME,
 })
   .fromHubblepup2<ParsedTypeScriptFileVoque>({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
@@ -37,14 +43,14 @@ export const getTypeScriptFileImportList = buildEstinant({
   .toHubblepup2<TypeScriptFileImportListVoque>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
-  .toHubblepupTuple2<ProgramErrorVoque<EstinantName>>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((parsedTypeScriptFile) => {
     const importAndErrorList = parsedTypeScriptFile.program.body
       .filter(isImportDeclaration)
-      .map<TypeScriptFileImport | ProgramError<EstinantName>>(
-        (inputImportDeclaration, index) => {
+      .map<TypeScriptFileImport | ReportedProgramError<ReportingLocator>>(
+        (inputImportDeclaration) => {
           const sourcePath = inputImportDeclaration.source.value;
 
           const isRelative =
@@ -66,15 +72,18 @@ export const getTypeScriptFileImportList = buildEstinant({
 
             if (sourceFilePath instanceof Error) {
               return {
-                zorn: `${ESTINANT_NAME}/${parsedTypeScriptFile.filePath}/${index}`,
-                errorId: `getTypeScriptFileImportList/unresolveable-import`,
-                message: `Unable to resolve imported filepath: ${sourcePath}`,
-                locator: {
-                  typeName: ErrorLocatorTypeName.FileErrorLocator,
+                name: 'unresolveable-import',
+                error: new Error(
+                  `Unable to resolve imported filepath: ${sourcePath}`,
+                ),
+                reporterLocator,
+                sourceLocator: {
+                  typeName:
+                    ProgramErrorElementLocatorTypeName.SourceFileLocator,
                   filePath: parsedTypeScriptFile.filePath,
                 },
-                metadata: null,
-              };
+                context: null,
+              } satisfies ReportedProgramError<ReportingLocator>;
             }
 
             return {
@@ -93,7 +102,7 @@ export const getTypeScriptFileImportList = buildEstinant({
       );
 
     const importList: TypeScriptFileImport[] = [];
-    const errorList: ProgramError<EstinantName>[] = [];
+    const errorList: ReportedProgramError<ReportingLocator>[] = [];
     splitList({
       list: importAndErrorList,
       isElementA: (element): element is TypeScriptFileImport =>

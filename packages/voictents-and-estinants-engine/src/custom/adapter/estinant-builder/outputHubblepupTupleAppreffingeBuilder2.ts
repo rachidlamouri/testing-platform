@@ -21,7 +21,7 @@ type NextAdaptedOutputVickenTuple<
   TOutputVoque extends GenericVoque,
 > = [
   ...TAdaptedOutputVickenTuple,
-  AdaptedOutputVicken<TOutputVoque, TOutputVoque['emittedVoictent']>,
+  AdaptedOutputVicken<TOutputVoque, TOutputVoque['receivedHubblepup'][]>,
 ];
 
 export type OutputHubblepupTupleAppreffingeBuilder2<

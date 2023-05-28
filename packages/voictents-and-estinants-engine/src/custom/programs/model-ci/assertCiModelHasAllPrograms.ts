@@ -4,19 +4,30 @@ import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
   EngineProgramLocator2Voque,
 } from '../../programmable-units/engine-program/engineProgramLocator2';
-import {
-  ErrorLocatorTypeName,
-  PROGRAM_ERROR_GEPP,
-  ProgramErrorVoque,
-} from '../../programmable-units/error/programError';
 import { CI_MODEL_GEPP, CI_MODEL_ZORN, CiModelVoque } from './ciModel';
+import {
+  PROGRAM_ERROR_GEPP,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
+  ReportingEstinantLocator,
+} from '../../programmable-units/error/programError';
+
+const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
+type EstinantName = typeof ESTINANT_NAME;
+type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+const reporterLocator: ReportingLocator = {
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  name: ESTINANT_NAME,
+  filePath: __filename,
+};
 
 /**
  * Produces a ProgramError if the CI model does not contain a ProgramTest for
  * each engine program identified by the engine program locator
  */
 export const assertCiModelHasAllPrograms = buildEstinant({
-  name: 'assertCiModelHasAllPrograms',
+  name: ESTINANT_NAME,
 })
   .fromVoictent2<EngineProgramLocator2Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_2_GEPP,
@@ -26,7 +37,7 @@ export const assertCiModelHasAllPrograms = buildEstinant({
     framate: () => [CI_MODEL_ZORN],
     croard: (rightInput) => rightInput.hubblepup.zorn,
   })
-  .toHubblepupTuple2<ProgramErrorVoque>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((programLocatorList, [ciModel]) => {
@@ -44,17 +55,20 @@ export const assertCiModelHasAllPrograms = buildEstinant({
     } catch (error) {
       return [
         {
-          errorId: 'assertCiModelHasAllPrograms/missing-program-test-list',
-          message: 'ciModel.ts program name list does not match expected list',
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
+          name: 'missing-program-test-list',
+          error: new Error(
+            'ciModel.ts program name list does not match expected list',
+          ),
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath:
               'packages/voictents-and-estinants-engine/src/custom/programs/model-ci/ciModel.ts',
           },
-          metadata: {
+          context: {
             error,
           },
-        },
+        } satisfies ReportedProgramError<ReportingLocator>,
       ];
     }
   })

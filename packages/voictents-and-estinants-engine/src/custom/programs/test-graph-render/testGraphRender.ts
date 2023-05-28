@@ -19,13 +19,14 @@ import {
   DirectedGraphMetadataByIdVoque,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import {
-  OutputFileVoque,
-  OUTPUT_FILE_GEPP,
-} from '../../programmable-units/output-file/outputFile';
 import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
+import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'testGraphRender',
+});
 
 /**
  * Example program to demonstrate defining and rendering a directed graph.
@@ -177,9 +178,8 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new InMemoryVoictent<OutputFileVoque>({
-      gepp: OUTPUT_FILE_GEPP,
-      initialHubblepupTuple: [],
+    new OutputFileVoictent({
+      programFileCache,
     }),
   ],
   estinantTuple: [
@@ -193,7 +193,5 @@ digikikify({
     captureOutputFileDigestList,
   ] as const,
   serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
-  programFileCache: new ProgramFileCache({
-    namespace: 'testGraphRender',
-  }),
+  programFileCache,
 });

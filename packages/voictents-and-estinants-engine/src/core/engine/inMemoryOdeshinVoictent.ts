@@ -20,7 +20,7 @@ export type InMemoryOdeshinIndexByName = SpreadN<
 export type InMemoryOdeshinVoque<
   TGepp extends Gepp,
   THubblepup extends Odeshin,
-> = InMemoryVoque<TGepp, THubblepup, InMemoryOdeshinIndexByName>;
+> = InMemoryVoque<TGepp, THubblepup, THubblepup, InMemoryOdeshinIndexByName>;
 
 export type GenericInMemoryOdeshinVoque = InMemoryOdeshinVoque<Gepp, Odeshin>;
 

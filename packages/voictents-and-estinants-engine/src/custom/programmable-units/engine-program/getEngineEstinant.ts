@@ -18,13 +18,8 @@ import {
 import { isStringLiteral } from '../../../utilities/type-script-ast/isStringLiteral';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  PROGRAM_ERROR_GEPP,
-  ErrorLocatorTypeName,
-  ProgramError,
-  ProgramErrorVoque,
-} from '../error/programError';
-import {
   PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
+  ProgramBodyDeclarationsByIdentifier,
   ProgramBodyDeclarationsByIdentifierVoque,
 } from '../type-script-file/programBodyDeclarationsByIdentifier';
 import {
@@ -50,8 +45,24 @@ import {
   buildIsTypeScriptTypeParameterInstantiationWithSpecificParameterTuple,
   isTypeScriptTypeParameterInstantiationWithParameterTuple,
 } from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
+import {
+  PROGRAM_ERROR_GEPP,
+  ProgramErrorElementLocatorTypeName,
+  GenericProgramErrorVoque,
+  ReportedProgramError,
+  ReportingEstinantLocator,
+} from '../error/programError';
+import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
+import { isSpecificConstantTypeScriptAsExpression } from '../../../utilities/type-script-ast/isConstantTypeScriptAsExpression';
 
-type EstinantName = 'getEngineEstinant';
+const ESTINANT_NAME = 'getEngineEstinant' as const;
+type EstinantName = typeof ESTINANT_NAME;
+type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+const reporterLocator: ReportingLocator = {
+  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  name: ESTINANT_NAME,
+  filePath: __filename,
+};
 
 type CoreEstinantAccessorInput = {
   estinantLocator: EngineEstinantTopLevelDeclarationLocator;
@@ -59,7 +70,7 @@ type CoreEstinantAccessorInput = {
 };
 
 type CoreEstinantAccessorResult = {
-  errorList: ProgramError<EstinantName>[];
+  errorList: ReportedProgramError<ReportingLocator>[];
   estinant: EngineEstinant2 | null;
 };
 
@@ -86,18 +97,20 @@ const getBuildAddMetadataForSerializationEstinant = (
     return {
       errorList: [
         {
-          errorId: `getEngineEstinant/unparseable-build-add-metadata-for-serialization`,
-          message:
+          name: 'unparseable-build-add-metadata-for-serialization',
+          error: new Error(
             'Unable to parse buildAddMetadataForSerialization call. Make sure it has two type parameters.',
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
+          ),
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
-          metadata: {
+          context: {
             parameterNameTuple,
             typeParameterTuple,
           },
-        },
+        } satisfies ReportedProgramError<ReportingLocator>,
       ],
       estinant: {
         zorn: estinantLocator.zorn,
@@ -184,17 +197,18 @@ const getCoreEstinant = ({
     return {
       errorList: [
         {
-          errorId: `getEngineEstinant/missing-type-parameter-list`,
-          message: 'Unable to locate type parameter list',
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
+          name: 'missing-type-parameter-list',
+          error: new Error('Unable to locate type parameter list'),
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
-          metadata: {
+          context: {
             typeNode,
             commentedBodyDeclaration,
           },
-        },
+        } satisfies ReportedProgramError<ReportingLocator>,
       ],
       estinant: {
         id: getTextDigest(estinantName),
@@ -211,7 +225,7 @@ const getCoreEstinant = ({
   const [leftTypeReference, rightTypeTuple, outputTypeReference] =
     typeParameterNodeList;
 
-  const parallelErrorList: ProgramError<EstinantName>[] = [];
+  const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
 
   const leftVoqueName =
     isTypeScriptTypeParameterInstantiationWithParameterTuple(
@@ -269,13 +283,14 @@ const getCoreEstinant = ({
 
   if (leftVoqueName === null) {
     parallelErrorList.push({
-      errorId: 'getEngineEstinant/unparseable-core-left-estinant-input',
-      message: 'Left estiant input is unparseable',
-      locator: {
-        typeName: ErrorLocatorTypeName.FileErrorLocator,
+      name: 'unparseable-core-left-estinant-input',
+      error: new Error('Left estiant input is unparseable'),
+      reporterLocator,
+      sourceLocator: {
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: estinantLocator.filePath,
       },
-      metadata: {
+      context: {
         leftVoqueName,
         leftTypeReference,
       },
@@ -284,13 +299,14 @@ const getCoreEstinant = ({
 
   if (rightVoqueNameTuple === null) {
     parallelErrorList.push({
-      errorId: 'getEngineEstinant/unparseable-core-right-estinant-input-tuple',
-      message: 'Unable to parse the right input tuple type',
-      locator: {
-        typeName: ErrorLocatorTypeName.FileErrorLocator,
+      name: 'unparseable-core-right-estinant-input-tuple',
+      error: new Error('Unable to parse the right input tuple type'),
+      reporterLocator,
+      sourceLocator: {
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: estinantLocator.filePath,
       },
-      metadata: {
+      context: {
         rightVoqueNameTuple,
         rightTypeReferenceTuple,
         rightTypeParameterInstantiationTuple,
@@ -301,13 +317,14 @@ const getCoreEstinant = ({
 
   if (outputVoqueNameTuple === null) {
     parallelErrorList.push({
-      errorId: 'getEngineEstinant/unparseable-core-estinant-output',
-      message: 'Estinant output tuple is unparseable',
-      locator: {
-        typeName: ErrorLocatorTypeName.FileErrorLocator,
+      name: 'unparseable-core-estinant-output',
+      error: new Error('Estinant output tuple is unparseable'),
+      reporterLocator,
+      sourceLocator: {
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: estinantLocator.filePath,
       },
-      metadata: {
+      context: {
         outputVoqueNameTuple,
         outputTypeReference,
       },
@@ -360,16 +377,18 @@ const getCoreEstinant = ({
 type AdaptedEstinantAccessorInput = {
   estinantLocator: EngineEstinantTopLevelDeclarationLocator;
   commentedBodyDeclaration: CommentedProgramBodyDeclaration | undefined;
+  bodyDeclarationsByIdentifier: ProgramBodyDeclarationsByIdentifier;
 };
 
 type AdaptedEstinantAccessorResult = {
-  errorList: ProgramError<EstinantName>[];
+  errorList: ReportedProgramError<ReportingLocator>[];
   estinant: EngineEstinant2 | null;
 };
 
 const getAdaptedEstinant = ({
   estinantLocator,
   commentedBodyDeclaration,
+  bodyDeclarationsByIdentifier,
 }: AdaptedEstinantAccessorInput): AdaptedEstinantAccessorResult => {
   const initExpression =
     commentedBodyDeclaration?.identifiableNode?.type ===
@@ -384,26 +403,28 @@ const getAdaptedEstinant = ({
   if (callExpression === null) {
     const estinantName = estinantLocator.identifierName;
 
-    let error: ProgramError<EstinantName>;
+    let error: ReportedProgramError<ReportingLocator>;
     if (estinantLocator.isCoreEstinant) {
       error = {
-        errorId: `getEngineEstinant/unhandled-core-estinant`,
-        message: 'Parsing core engine estinants is not handled yet',
-        locator: {
-          typeName: ErrorLocatorTypeName.FileErrorLocator,
+        name: `unhandled-core-estinant`,
+        error: new Error('Parsing core engine estinants is not handled yet'),
+        reporterLocator,
+        sourceLocator: {
+          typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
           filePath: estinantLocator.filePath,
         },
-        metadata: null,
+        context: null,
       };
     } else {
       error = {
-        errorId: `getEngineEstinant/missing-call-expression`,
-        message: 'Export declaration is missing a call expression',
-        locator: {
-          typeName: ErrorLocatorTypeName.FileErrorLocator,
+        name: `missing-call-expression`,
+        error: new Error('Export declaration is missing a call expression'),
+        reporterLocator,
+        sourceLocator: {
+          typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
           filePath: estinantLocator.filePath,
         },
-        metadata: {
+        context: {
           hasIdentifiableNode:
             commentedBodyDeclaration?.identifiableNode !== undefined,
           hasInitExpression: initExpression !== null,
@@ -448,16 +469,19 @@ const getAdaptedEstinant = ({
     return {
       errorList: errorList.map((error) => {
         return {
-          errorId: `getEngineEstinant/idk`,
-          message: 'I have no idea',
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
+          name: `i-don't-remember`,
+          error: new Error(
+            `I seriously don't remember what this error was for`,
+          ),
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
-          metadata: {
+          context: {
             error,
           },
-        };
+        } satisfies ReportedProgramError<ReportingLocator>;
       }),
       estinant: null,
     };
@@ -537,13 +561,16 @@ const getAdaptedEstinant = ({
     return {
       errorList: [
         {
-          errorId: `getEngineEstinant/invalid-call-expression-chain-start`,
-          message: `Call expression chain does not start with "${buildEstinant.name}"`,
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
+          name: `invalid-call-expression-chain-start`,
+          error: new Error(
+            `Call expression chain does not start with "${buildEstinant.name}"`,
+          ),
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
-          metadata: {
+          context: {
             parsedFlattenedCallExpressionList,
           },
         },
@@ -561,14 +588,16 @@ const getAdaptedEstinant = ({
     return {
       errorList: [
         {
-          errorId: `getEngineEstinant/invalid-call-expression-chain-end`,
-          message:
+          name: `invalid-call-expression-chain-end`,
+          error: new Error(
             'Estinant builder call expression chain does not end in "assemble"',
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
+          ),
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
-          metadata: {
+          context: {
             parsedFlattenedCallExpressionList,
           },
         },
@@ -599,16 +628,19 @@ const getAdaptedEstinant = ({
     return {
       errorList: errorParsedExpressionList.map((parsedExpression) => {
         return {
-          errorId: `getEngineEstinant/missing-type-parameter`,
-          message: `Estinant builder expression "${parsedExpression.functionName}" is missing a type parameter`,
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
+          name: `missing-type-parameter`,
+          error: new Error(
+            `Estinant builder expression "${parsedExpression.functionName}" is missing a type parameter`,
+          ),
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
-          metadata: {
+          context: {
             parsedExpression,
           },
-        };
+        } satisfies ReportedProgramError<ReportingLocator>;
       }),
       estinant: null,
     };
@@ -620,9 +652,14 @@ const getAdaptedEstinant = ({
     EstinantInput2 | EstinantOutput2
   >(({ isInput, typeNode }, index) => {
     // TODO: make the convention where we chop off the suffix more discoverable
-    const voictentName = typeNode.typeName.name
+    let voictentName = typeNode.typeName.name
       .replace(/Voictent$/, '')
       .replace(/Voque$/, '');
+
+    // TODO: maybe don't hardcode this logic
+    if (voictentName === 'GenericProgramError') {
+      voictentName = 'ProgramError';
+    }
 
     if (isInput) {
       return {
@@ -662,32 +699,58 @@ const getAdaptedEstinant = ({
       ) ?? null
     : null;
 
-  const instantiatedName =
-    estinantNameProperty !== null && isStringLiteral(estinantNameProperty.value)
-      ? estinantNameProperty.value.value
-      : null;
+  let instantiatedName: string | null;
+  let foo: CommentedProgramBodyDeclaration | undefined;
+  if (
+    estinantNameProperty !== null &&
+    isStringLiteral(estinantNameProperty.value)
+  ) {
+    instantiatedName = estinantNameProperty.value.value;
+  } else if (
+    estinantNameProperty !== null &&
+    isIdentifier(estinantNameProperty.value) &&
+    // eslint-disable-next-line no-cond-assign
+    (foo = bodyDeclarationsByIdentifier.declarationByIdentifier.get(
+      estinantNameProperty.value.name,
+    )) !== undefined &&
+    foo.identifiableNode?.type === AST_NODE_TYPES.VariableDeclarator &&
+    isSpecificConstantTypeScriptAsExpression(
+      foo.identifiableNode.init,
+      isStringLiteral,
+    )
+  ) {
+    instantiatedName = foo.identifiableNode.init.expression.value;
+  } else {
+    instantiatedName = null;
+  }
 
-  const parallelErrorList: ProgramError<EstinantName>[] = [];
+  const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
 
   if (instantiatedName === null) {
     parallelErrorList.push({
-      errorId: `getEngineEstinant/missing-estinant-name`,
-      message: `Estinant builder instantiation is missing a name`,
-      locator: {
-        typeName: ErrorLocatorTypeName.FileErrorLocator,
+      name: `missing-estinant-name`,
+      error: new Error(
+        `Estinant builder instantiation is missing a name. Expected either a string literal or a reference to a variable declarator with "as const"`,
+      ),
+      reporterLocator,
+      sourceLocator: {
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: estinantLocator.filePath,
       },
-      metadata: null,
+      context: null,
     });
   } else if (instantiatedName !== estinantLocator.identifierName) {
     parallelErrorList.push({
-      errorId: `getEngineEstinant/invalid-estinant-name`,
-      message: `Estinant builder instantiation name does not match the variable name`,
-      locator: {
-        typeName: ErrorLocatorTypeName.FileErrorLocator,
+      name: `invalid-estinant-name`,
+      error: new Error(
+        `Estinant builder instantiation name does not match the variable name`,
+      ),
+      reporterLocator,
+      sourceLocator: {
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: estinantLocator.filePath,
       },
-      metadata: {
+      context: {
         expected: estinantLocator.identifierName,
         actual: instantiatedName,
       },
@@ -713,7 +776,7 @@ const getAdaptedEstinant = ({
  * estinant. This includes the input and output information for each estinant.
  */
 export const getEngineEstinant = buildEstinant({
-  name: 'getEngineEstinant',
+  name: ESTINANT_NAME,
 })
   .fromHubblepup2<EngineEstinantLocator2Voque>({
     gepp: ENGINE_ESTINANT_LOCATOR_2_GEPP,
@@ -723,14 +786,14 @@ export const getEngineEstinant = buildEstinant({
     framate: (leftInput) => [leftInput.hubblepup.filePath],
     croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .toHubblepupTuple2<ProgramErrorVoque<EstinantName>>({
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<EngineEstinant2Voque>({
     gepp: ENGINE_ESTINANT_2_GEPP,
   })
   .onPinbe((estinantLocator, [bodyDeclarationsByIdentifier]) => {
-    let errorList: ProgramError<EstinantName>[];
+    let errorList: ReportedProgramError<ReportingLocator>[];
     let estinant: EngineEstinant2 | null;
 
     if (
@@ -754,18 +817,22 @@ export const getEngineEstinant = buildEstinant({
         ({ errorList, estinant } = getAdaptedEstinant({
           estinantLocator,
           commentedBodyDeclaration,
+          bodyDeclarationsByIdentifier,
         }));
       }
 
       if (typeof commentedBodyDeclaration?.commentText !== 'string') {
         errorList.push({
-          errorId: `getEngineEstinant/missing-estinant-comment`,
-          message: `Estinant definitions must have a comment with a description`,
-          locator: {
-            typeName: ErrorLocatorTypeName.FileErrorLocator,
+          name: `missing-estinant-comment`,
+          error: new Error(
+            `Estinant definitions must have a comment with a description`,
+          ),
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: estinantLocator.filePath,
           },
-          metadata: {
+          context: {
             identifier: estinantLocator.identifierName,
           },
         });

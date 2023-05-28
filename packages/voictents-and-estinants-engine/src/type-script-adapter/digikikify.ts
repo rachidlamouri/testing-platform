@@ -146,22 +146,27 @@ type VoictentListB<
   >
 >;
 
-type AllVoqueUnion<
+export type AllVoqueUnion<
   TExplicitVoictentTuple extends UnsafeVoictent2Tple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
 > =
   | EstinantTupleInputOutputVoqueUnion<TEstinantTuple>
   | VoqueUnionFromVoictentUnion<TExplicitVoictentTuple[number]>;
 
-type SerializeeVoictentGepp<
+export type SerializeeVoictentGepp<
   TExplicitVoictentTuple extends UnsafeVoictent2Tple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
-> = AllVoqueUnion<
-  TExplicitVoictentTuple,
-  TEstinantTuple
-> extends GenericAbstractSerializableSourceVoque
-  ? AllVoqueUnion<TExplicitVoictentTuple, TEstinantTuple>['gepp']
-  : never;
+> = Extract<
+  AllVoqueUnion<TExplicitVoictentTuple, TEstinantTuple>,
+  GenericAbstractSerializableSourceVoque
+>['gepp'];
+
+// AllVoqueUnion<
+//   TExplicitVoictentTuple,
+//   TEstinantTuple
+// > extends GenericAbstractSerializableSourceVoque
+//   ? AllVoqueUnion<TExplicitVoictentTuple, TEstinantTuple>['gepp']
+//   : never;
 
 type DigikikifyInput<
   TExplicitVoictentTuple extends UnsafeVoictent2Tple,

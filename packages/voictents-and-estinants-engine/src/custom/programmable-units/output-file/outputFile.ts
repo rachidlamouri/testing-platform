@@ -1,4 +1,4 @@
-import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
+import { Voque } from '../../../core/engine/voque';
 import { Voictent } from '../../adapter/voictent';
 
 export type OutputFile = {
@@ -13,4 +13,10 @@ export type OutputFileGepp = typeof OUTPUT_FILE_GEPP;
 
 export type OutputFileVoictent = Voictent<OutputFileGepp, OutputFile>;
 
-export type OutputFileVoque = StandardInMemoryVoque<OutputFileGepp, OutputFile>;
+export type OutputFileVoque = Voque<
+  OutputFileGepp,
+  OutputFile,
+  OutputFile,
+  never,
+  OutputFile[]
+>;

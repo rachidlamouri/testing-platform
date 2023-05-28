@@ -1,10 +1,7 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { digikikify } from '../../../type-script-adapter/digikikify';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
-import {
-  PROGRAM_ERROR_GEPP,
-  ProgramErrorVoque,
-} from '../../programmable-units/error/programError';
+import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -15,6 +12,10 @@ import {
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'commentsExample',
+});
 
 /**
  * Example program to demonstrate associating AST nodes to top level comments
@@ -29,9 +30,8 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new InMemoryVoictent<ProgramErrorVoque>({
-      gepp: PROGRAM_ERROR_GEPP,
-      initialHubblepupTuple: [],
+    new ProgramErrorVoictent({
+      programFileCache,
     }),
   ],
   estinantTuple: [
@@ -43,7 +43,5 @@ digikikify({
 
     getCommentedProgramBodyDeclarationList,
   ] as const,
-  programFileCache: new ProgramFileCache({
-    namespace: 'commentsExample',
-  }),
+  programFileCache,
 });

@@ -31,16 +31,14 @@ import { getEngineProgram2 } from '../../programmable-units/engine-program/getEn
 import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
 import { signalError } from '../../programmable-units/error/signalError';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import {
-  PROGRAM_ERROR_GEPP,
-  ProgramErrorVoque,
-} from '../../programmable-units/error/programError';
-import {
-  OUTPUT_FILE_GEPP,
-  OutputFileVoque,
-} from '../../programmable-units/output-file/outputFile';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
+import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
+import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'modelPrograms',
+});
 
 /**
  * Creates an interactive model for each engine program.
@@ -63,13 +61,11 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new InMemoryVoictent<ProgramErrorVoque>({
-      gepp: PROGRAM_ERROR_GEPP,
-      initialHubblepupTuple: [],
+    new ProgramErrorVoictent({
+      programFileCache,
     }),
-    new InMemoryVoictent<OutputFileVoque>({
-      gepp: OUTPUT_FILE_GEPP,
-      initialHubblepupTuple: [],
+    new OutputFileVoictent({
+      programFileCache,
     }),
   ],
   estinantTuple: [
@@ -101,8 +97,6 @@ digikikify({
 
     signalError,
   ] as const,
-  programFileCache: new ProgramFileCache({
-    namespace: 'modelPrograms',
-  }),
+  programFileCache,
   serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
 });

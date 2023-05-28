@@ -1,30 +1,21 @@
-import fs from 'fs';
 import { posix } from 'path';
 import { Gepp } from '../core/engine-shell/voictent/gepp';
 import {
+  FileExtensionSuffixIdentifier,
   KnownFileExtensionSuffixIdentifier,
-  getFileExtensionSuffix,
 } from '../custom/programmable-units/file/fileExtensionSuffixIdentifier';
 import { RuntimeStatistics } from '../core/engine/digikikify';
 import { serializeRuntimeStatistics } from './serializeRuntimeStatistic';
+import { FileCache } from './fileCache';
 
-const CACHE_DIRECTORY_PATH = 'debug';
-// TODO: replace the namespace regex with lowercase and hyphens
-// const NAMESPACE_REGEX = /^[a-z-]+$/;
-const NAMESPACE_REGEX = /^[A-Za-z-]+$/;
-const VOICTENTS_DIRECTORY_NAME = 'voictents';
-const RUNTIME_SNAPSHOT_FILE_NAME = 'runtimeSnapshot.txt';
+enum TopLevelDirectoryName {
+  Root = '',
+  Voictents = 'voictents',
+}
 
-const createDirectory = (directoryPath: string): void => {
-  if (!fs.existsSync(directoryPath)) {
-    // eslint-disable-next-line no-console
-    console.log(`NEW: ${directoryPath}`);
-  }
-
-  fs.mkdirSync(directoryPath, { recursive: true });
-};
-
-createDirectory(CACHE_DIRECTORY_PATH);
+const RUNTIME_SNAPSHOT_FILE_BASE_NAME = 'runtimeSnapshot';
+const RUNTIME_SNAPSHOT_FILE_EXTENSION_SUFFIX_IDENTIFIER =
+  FileExtensionSuffixIdentifier.Text;
 
 export type ProgramFileCacheInput = {
   namespace: string;
@@ -46,37 +37,97 @@ export type VoictentDirectoryDeleterInput = {
   voictentGepp: Gepp;
 };
 
-export class ProgramFileCache {
-  public readonly namespace;
+export type NamespacedFilePathAccessorInput = {
+  topLevelDirectoryName: TopLevelDirectoryName;
+  nestedPath: string;
+  extensionlessFileName: string;
+  fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
+};
 
-  public readonly voictentsDirectory;
+export type NamespacedVoictentFilePathAccessorInput = {
+  voictentGepp: Gepp;
+  nestedPath: string;
+  extensionlessFileName: string;
+  fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
+};
 
-  public readonly runtimeSnapshotFilePath;
+export type NamespacedSubdirectoryPathAccessorInput = {
+  topLevelDirectory: TopLevelDirectoryName;
+  nestedPath: string;
+};
+
+export type NamespacedFilePathWriterInput = {
+  topLevelDirectoryName: TopLevelDirectoryName;
+  nestedPath: string;
+  extensionlessFileName: string;
+  fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
+  text: string;
+};
+
+export class ProgramFileCache extends FileCache {
+  static CACHE_DIRECTORY_PATH = 'debug';
+
+  // public readonly voictentsDirectory;
+
+  // public readonly runtimeSnapshotFilePath;
 
   constructor({ namespace }: ProgramFileCacheInput) {
-    if (!NAMESPACE_REGEX.test(namespace)) {
-      throw Error(`Namespace must match regex: ${NAMESPACE_REGEX.toString()}`);
-    }
+    super({
+      rootDirectoryPath: ProgramFileCache.CACHE_DIRECTORY_PATH,
+      namespace,
+    });
 
-    this.namespace = namespace;
-    this.voictentsDirectory = this.getNamespacedDirectory(
-      VOICTENTS_DIRECTORY_NAME,
-    );
-    this.runtimeSnapshotFilePath = posix.join(
-      this.getNamespacedDirectory(''),
-      RUNTIME_SNAPSHOT_FILE_NAME,
-    );
-
-    createDirectory(this.namespaceDirectory);
-    createDirectory(this.voictentsDirectory);
+    // eslint-disable-next-line no-console
+    console.log(`Program Namespace: ${this.namespaceDirectoryPath}`);
   }
 
-  get namespaceDirectory(): string {
-    return posix.join(CACHE_DIRECTORY_PATH, this.namespace);
+  get voictentsDirectoryPath(): string {
+    return posix.join(
+      this.namespaceDirectoryPath,
+      TopLevelDirectoryName.Voictents,
+    );
   }
 
-  getNamespacedDirectory(relativeDirectoryPath: string): string {
-    return posix.join(this.namespaceDirectory, relativeDirectoryPath);
+  getProgramNamespacedFilePath({
+    topLevelDirectoryName,
+    nestedPath,
+    extensionlessFileName,
+    fileExtensionSuffixIdentifier,
+  }: NamespacedFilePathAccessorInput): string {
+    return super.getNamespacedFilePath({
+      nestedPath: posix.join(topLevelDirectoryName, nestedPath),
+      extensionlessFileName,
+      fileExtensionSuffixIdentifier,
+    });
+  }
+
+  getNamespacedVoictentsFilePath({
+    voictentGepp,
+    nestedPath,
+    extensionlessFileName,
+    fileExtensionSuffixIdentifier,
+  }: NamespacedVoictentFilePathAccessorInput): string {
+    return this.getProgramNamespacedFilePath({
+      topLevelDirectoryName: TopLevelDirectoryName.Voictents,
+      nestedPath: posix.join(voictentGepp, nestedPath),
+      extensionlessFileName,
+      fileExtensionSuffixIdentifier,
+    });
+  }
+
+  writeNamespacedFile({
+    topLevelDirectoryName,
+    nestedPath,
+    extensionlessFileName,
+    fileExtensionSuffixIdentifier,
+    text,
+  }: NamespacedFilePathWriterInput): void {
+    super.writeNamespacedFile({
+      nestedPath: posix.join(topLevelDirectoryName, nestedPath),
+      extensionlessFileName,
+      fileExtensionSuffixIdentifier,
+      text,
+    });
   }
 
   writeSerializedHubblepup({
@@ -85,38 +136,45 @@ export class ProgramFileCache {
     extensionlessFileName,
     serializedHubblepup,
   }: SerializedHubblepupWriterInput): void {
-    const fileExtensionSuffix = getFileExtensionSuffix(
-      serializedHubblepup.fileExtensionSuffixIdentifier,
-    );
-
-    const hubblepupFilePath = posix.join(
-      this.voictentsDirectory,
-      voictentGepp,
-      nestedPath,
-      `${extensionlessFileName}.${fileExtensionSuffix}`,
-    );
-    const voictentDirectoryPath = posix.dirname(hubblepupFilePath);
-
-    createDirectory(voictentDirectoryPath);
-    fs.writeFileSync(hubblepupFilePath, serializedHubblepup.text);
+    this.writeNamespacedFile({
+      topLevelDirectoryName: TopLevelDirectoryName.Voictents,
+      nestedPath: posix.join(voictentGepp, nestedPath),
+      extensionlessFileName,
+      fileExtensionSuffixIdentifier:
+        serializedHubblepup.fileExtensionSuffixIdentifier,
+      text: serializedHubblepup.text,
+    });
   }
 
   writeRuntimeSnapshot(statistics: RuntimeStatistics): void {
     const text = serializeRuntimeStatistics(statistics);
 
-    // eslint-disable-next-line no-console
-    console.log(`SNAPSHOT: ${this.runtimeSnapshotFilePath}`);
+    const runtimeSnapshotFilePath = this.getProgramNamespacedFilePath({
+      topLevelDirectoryName: TopLevelDirectoryName.Root,
+      nestedPath: '',
+      extensionlessFileName: RUNTIME_SNAPSHOT_FILE_BASE_NAME,
+      fileExtensionSuffixIdentifier:
+        RUNTIME_SNAPSHOT_FILE_EXTENSION_SUFFIX_IDENTIFIER,
+    });
 
-    fs.writeFileSync(this.runtimeSnapshotFilePath, text);
+    // eslint-disable-next-line no-console
+    console.log(`SNAPSHOT: ${runtimeSnapshotFilePath}`);
+
+    this.writeNamespacedFile({
+      topLevelDirectoryName: TopLevelDirectoryName.Root,
+      nestedPath: '',
+      extensionlessFileName: RUNTIME_SNAPSHOT_FILE_BASE_NAME,
+      fileExtensionSuffixIdentifier:
+        RUNTIME_SNAPSHOT_FILE_EXTENSION_SUFFIX_IDENTIFIER,
+      text,
+    });
   }
 
   deleteVoictentDirectory({
     voictentGepp,
   }: VoictentDirectoryDeleterInput): void {
-    const voictentDirectoryPath = posix.join(
-      this.voictentsDirectory,
-      voictentGepp,
-    );
-    fs.rmSync(voictentDirectoryPath, { recursive: true, force: true });
+    this.deleteNamespacedFileNode({
+      nestedPath: posix.join(this.voictentsDirectoryPath, voictentGepp),
+    });
   }
 }

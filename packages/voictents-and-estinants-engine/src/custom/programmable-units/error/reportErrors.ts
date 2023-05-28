@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { PROGRAM_ERROR_GEPP, ProgramErrorVoque } from './programError';
+import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;
@@ -14,7 +14,7 @@ let isLimitReached = false;
 export const reportErrors = buildEstinant({
   name: 'reportErrors',
 })
-  .fromHubblepup2<ProgramErrorVoque>({
+  .fromHubblepup2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((programError) => {
@@ -24,14 +24,12 @@ export const reportErrors = buildEstinant({
       /* eslint-disable no-console */
       console.log();
       console.log(
-        `\x1b[31mError\x1b[0m ${errorCount}: ${
-          programError.errorId ?? '\x1b[31mMISSING_ID\x1b[0m'
-        }`,
+        `\x1b[31mError\x1b[0m ${errorCount}: ${programError.message}`,
       );
-      console.log(`  Message: ${programError.message}`);
-      if (programError.locator !== null) {
-        console.log(`  File Path: ${programError.locator.filePath}`);
-      }
+      console.log(`  Error Name    - ${programError.name}`);
+      console.log(`  Reporter Path - ${programError.reporterLocator.filePath}`);
+      console.log(`  Source Path   - ${programError.sourceLocator.filePath}`);
+      console.log(`  Context Path  - ${programError.contextFilePath}`);
       console.log();
       /* eslint-enable no-console */
     } else if (!isLimitReached) {

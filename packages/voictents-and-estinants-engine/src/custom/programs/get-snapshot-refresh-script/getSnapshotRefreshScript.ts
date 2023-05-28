@@ -7,10 +7,7 @@ import {
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   EngineFunctionConfigurationVoque,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
-import {
-  PROGRAM_ERROR_GEPP,
-  ProgramErrorVoque,
-} from '../../programmable-units/error/programError';
+import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -18,15 +15,16 @@ import {
   FileSystemObjectEnumeratorConfigurationVoque,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import {
-  OUTPUT_FILE_GEPP,
-  OutputFileVoque,
-} from '../../programmable-units/output-file/outputFile';
+import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { constructSnapshotScript } from '../../programmable-units/snapshot-refresh/constructSnapshotScript';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
+
+const programFileCache = new ProgramFileCache({
+  namespace: 'getSnapshotRefreshScript',
+});
 
 /**
  * Creates a bash script to run all engine programs
@@ -48,13 +46,11 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentTuple: [
-    new InMemoryVoictent<ProgramErrorVoque>({
-      gepp: PROGRAM_ERROR_GEPP,
-      initialHubblepupTuple: [],
+    new ProgramErrorVoictent({
+      programFileCache,
     }),
-    new InMemoryVoictent<OutputFileVoque>({
-      gepp: OUTPUT_FILE_GEPP,
-      initialHubblepupTuple: [],
+    new OutputFileVoictent({
+      programFileCache,
     }),
   ],
   estinantTuple: [
@@ -69,7 +65,5 @@ digikikify({
 
     constructSnapshotScript,
   ] as const,
-  programFileCache: new ProgramFileCache({
-    namespace: 'getSnapshotRefreshScript',
-  }),
+  programFileCache,
 });
