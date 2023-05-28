@@ -29,7 +29,7 @@ import {
   ReportingEstinantLocator,
 } from '../../error/programError2';
 
-const ESTINANT_NAME = 'getEngineProgramLocator' as const;
+const ESTINANT_NAME = 'getInitialEdgeMetadata' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {

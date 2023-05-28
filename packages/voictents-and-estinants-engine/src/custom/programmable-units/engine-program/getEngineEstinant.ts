@@ -19,6 +19,7 @@ import { isStringLiteral } from '../../../utilities/type-script-ast/isStringLite
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
+  ProgramBodyDeclarationsByIdentifier,
   ProgramBodyDeclarationsByIdentifierVoque,
 } from '../type-script-file/programBodyDeclarationsByIdentifier';
 import {
@@ -51,6 +52,8 @@ import {
   ReportedProgramError2,
   ReportingEstinantLocator,
 } from '../error/programError2';
+import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
+import { isSpecificConstantTypeScriptAsExpression } from '../../../utilities/type-script-ast/isConstantTypeScriptAsExpression';
 
 const ESTINANT_NAME = 'getEngineEstinant' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -374,6 +377,7 @@ const getCoreEstinant = ({
 type AdaptedEstinantAccessorInput = {
   estinantLocator: EngineEstinantTopLevelDeclarationLocator;
   commentedBodyDeclaration: CommentedProgramBodyDeclaration | undefined;
+  bodyDeclarationsByIdentifier: ProgramBodyDeclarationsByIdentifier;
 };
 
 type AdaptedEstinantAccessorResult = {
@@ -384,6 +388,7 @@ type AdaptedEstinantAccessorResult = {
 const getAdaptedEstinant = ({
   estinantLocator,
   commentedBodyDeclaration,
+  bodyDeclarationsByIdentifier,
 }: AdaptedEstinantAccessorInput): AdaptedEstinantAccessorResult => {
   const initExpression =
     commentedBodyDeclaration?.identifiableNode?.type ===
@@ -647,9 +652,14 @@ const getAdaptedEstinant = ({
     EstinantInput2 | EstinantOutput2
   >(({ isInput, typeNode }, index) => {
     // TODO: make the convention where we chop off the suffix more discoverable
-    const voictentName = typeNode.typeName.name
+    let voictentName = typeNode.typeName.name
       .replace(/Voictent$/, '')
       .replace(/Voque$/, '');
+
+    // TODO: maybe don't hardcode this logic
+    if (voictentName === 'GenericProgramError2') {
+      voictentName = 'ProgramError';
+    }
 
     if (isInput) {
       return {
@@ -689,17 +699,39 @@ const getAdaptedEstinant = ({
       ) ?? null
     : null;
 
-  const instantiatedName =
-    estinantNameProperty !== null && isStringLiteral(estinantNameProperty.value)
-      ? estinantNameProperty.value.value
-      : null;
+  let instantiatedName: string | null;
+  let foo: CommentedProgramBodyDeclaration | undefined;
+  if (
+    estinantNameProperty !== null &&
+    isStringLiteral(estinantNameProperty.value)
+  ) {
+    instantiatedName = estinantNameProperty.value.value;
+  } else if (
+    estinantNameProperty !== null &&
+    isIdentifier(estinantNameProperty.value) &&
+    // eslint-disable-next-line no-cond-assign
+    (foo = bodyDeclarationsByIdentifier.declarationByIdentifier.get(
+      estinantNameProperty.value.name,
+    )) !== undefined &&
+    foo.identifiableNode?.type === AST_NODE_TYPES.VariableDeclarator &&
+    isSpecificConstantTypeScriptAsExpression(
+      foo.identifiableNode.init,
+      isStringLiteral,
+    )
+  ) {
+    instantiatedName = foo.identifiableNode.init.expression.value;
+  } else {
+    instantiatedName = null;
+  }
 
   const parallelErrorList: ReportedProgramError2<ReportingLocator>[] = [];
 
   if (instantiatedName === null) {
     parallelErrorList.push({
       name: `missing-estinant-name`,
-      error: new Error(`Estinant builder instantiation is missing a name`),
+      error: new Error(
+        `Estinant builder instantiation is missing a name. Expected either a string literal or a reference to a variable declarator with "as const"`,
+      ),
       reporterLocator,
       sourceLocator: {
         typeName: ProgramError2ElementLocatorTypeName.SourceFileLocator,
@@ -785,6 +817,7 @@ export const getEngineEstinant = buildEstinant({
         ({ errorList, estinant } = getAdaptedEstinant({
           estinantLocator,
           commentedBodyDeclaration,
+          bodyDeclarationsByIdentifier,
         }));
       }
 
