@@ -65,11 +65,11 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       reporterLocator: receivedHubblepup.reporterLocator,
       sourceLocator: receivedHubblepup.sourceLocator,
       context: receivedHubblepup.context,
-      serializedContextFilePath: `${this.programFileCache.voictentsDirectory}/by-source/${normalizedSourcePath}`,
+      serializedContextFilePath: `${this.programFileCache.voictentsDirectoryPath}/by-source/${normalizedSourcePath}`,
       normalizedZorn,
       byReporterDirectoryPath,
       bySourceDirectoryPath,
-      contextFilePath: this.programFileCache.getNamespacedFilePath({
+      contextFilePath: this.programFileCache.getNamespacedVoictentsFilePath({
         voictentGepp: this.gepp,
         nestedPath: bySourceDirectoryPath,
         extensionlessFileName: normalizedZorn,

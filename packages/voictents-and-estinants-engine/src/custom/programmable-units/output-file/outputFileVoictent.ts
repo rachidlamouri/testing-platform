@@ -42,15 +42,17 @@ export class OutputFileVoictent extends AbstractAsymmetricInMemoryVoictent2<
   protected onTransformedHubblepup(
     hubblepup: OutputFileVoque['emittedHubblepup'],
   ): void {
-    this.programFileCache.writeNamespacedFile({
+    this.programFileCache.writeSerializedHubblepup({
       voictentGepp: this.gepp,
       nestedPath: '',
       extensionlessFileName: hubblepup.fileName,
-      // TODO: update OutputFile to store the suffix identifier and remove this backwards logic
-      fileExtensionSuffixIdentifier: getFileExtensionSuffixIdentifier(
-        hubblepup.fileExtensionSuffix,
-      ) as KnownFileExtensionSuffixIdentifier,
-      text: hubblepup.text,
+      serializedHubblepup: {
+        // TODO: update OutputFile to store the suffix identifier and remove this backwards logic
+        fileExtensionSuffixIdentifier: getFileExtensionSuffixIdentifier(
+          hubblepup.fileExtensionSuffix,
+        ) as KnownFileExtensionSuffixIdentifier,
+        text: hubblepup.text,
+      },
     });
   }
 }
