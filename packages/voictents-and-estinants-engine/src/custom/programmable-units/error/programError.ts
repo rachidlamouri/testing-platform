@@ -68,9 +68,9 @@ export type EmittedProgramError<
 export type GenericEmittedProgramError =
   EmittedProgramError<GenericProgramErrorReporterLocator>;
 
-export const PROGRAM_ERROR_2_GEPP = 'program-error-2';
+export const PROGRAM_ERROR_GEPP = 'program-error';
 
-export type ProgramErrorGepp = typeof PROGRAM_ERROR_2_GEPP;
+export type ProgramErrorGepp = typeof PROGRAM_ERROR_GEPP;
 
 export type ProgramErrorVoque<
   TReporterLocator extends GenericProgramErrorReporterLocator,

@@ -6,7 +6,7 @@ import {
 } from '../../programmable-units/engine-program/engineProgramLocator2';
 import { CI_MODEL_GEPP, CI_MODEL_ZORN, CiModelVoque } from './ciModel';
 import {
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   GenericProgramErrorVoque,
   ReportedProgramError,
@@ -38,7 +38,7 @@ export const assertCiModelHasAllPrograms = buildEstinant({
     croard: (rightInput) => rightInput.hubblepup.zorn,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_2_GEPP,
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((programLocatorList, [ciModel]) => {
     const actualList = ciModel.programTestList.map(

@@ -22,7 +22,7 @@ import {
   FileNodeMetadataByFilePathVoque,
 } from './fileNodeMetadataByFilePath';
 import {
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   GenericProgramErrorVoque,
   ReportedProgramError,
@@ -66,7 +66,7 @@ export const getInitialEdgeMetadata = buildEstinant({
     gepp: INITIAL_EDGE_METADATA_LIST_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_2_GEPP,
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe(
     (
@@ -119,7 +119,7 @@ export const getInitialEdgeMetadata = buildEstinant({
           zorn: fileNodeMetadata.zorn,
           grition: edgeMetadataList,
         },
-        [PROGRAM_ERROR_2_GEPP]: errorList,
+        [PROGRAM_ERROR_GEPP]: errorList,
       };
     },
   )

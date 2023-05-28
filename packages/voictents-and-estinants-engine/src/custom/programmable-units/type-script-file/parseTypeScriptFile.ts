@@ -11,7 +11,7 @@ import {
   ParsedTypeScriptFileVoque,
 } from './parsedTypeScriptFile';
 import {
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   GenericProgramErrorVoque,
   ReportingEstinantLocator,
@@ -42,7 +42,7 @@ export const parseTypeScriptFile = buildEstinant({
     gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_2_GEPP,
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((typeScriptFileConfiguration) => {
     const fileContents = fs.readFileSync(
@@ -66,12 +66,12 @@ export const parseTypeScriptFile = buildEstinant({
             program,
           },
         ],
-        [PROGRAM_ERROR_2_GEPP]: [],
+        [PROGRAM_ERROR_GEPP]: [],
       };
     } catch (error) {
       return {
         [PARSED_TYPE_SCRIPT_FILE_GEPP]: [],
-        [PROGRAM_ERROR_2_GEPP]: [
+        [PROGRAM_ERROR_GEPP]: [
           {
             name: 'unparseable-file',
             error: new Error('Failed to parse file'),

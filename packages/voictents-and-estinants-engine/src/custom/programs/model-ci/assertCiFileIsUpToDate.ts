@@ -9,7 +9,7 @@ import {
   SerializedCiModelVoque,
 } from './serializedCiModel';
 import {
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   GenericProgramErrorVoque,
   ReportedProgramError,
@@ -42,7 +42,7 @@ export const assertCiFileIsUpToDate = buildEstinant({
     croard: (leftInput) => leftInput.hubblepup.filePath,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_2_GEPP,
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((serializeCiModel, [ciFile]) => {
     const onDiskContents = fs.readFileSync(ciFile.filePath, 'utf-8');

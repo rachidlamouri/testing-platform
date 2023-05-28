@@ -46,7 +46,7 @@ import {
   isTypeScriptTypeParameterInstantiationWithParameterTuple,
 } from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 import {
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   GenericProgramErrorVoque,
   ReportedProgramError,
@@ -787,7 +787,7 @@ export const getEngineEstinant = buildEstinant({
     croard: (rightInput) => rightInput.indexByName.zorn,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_2_GEPP,
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<EngineEstinant2Voque>({
     gepp: ENGINE_ESTINANT_2_GEPP,
@@ -842,7 +842,7 @@ export const getEngineEstinant = buildEstinant({
     const estinantList: EngineEstinant2[] = estinant !== null ? [estinant] : [];
 
     return {
-      [PROGRAM_ERROR_2_GEPP]: errorList,
+      [PROGRAM_ERROR_GEPP]: errorList,
       [ENGINE_ESTINANT_2_GEPP]: estinantList,
     };
   })

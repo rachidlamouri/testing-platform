@@ -56,7 +56,7 @@ import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../
 import { isIdentifiableTypeScriptTypeReference } from '../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
 import { isSpecificConstantTypeScriptAsExpression } from '../../../utilities/type-script-ast/isConstantTypeScriptAsExpression';
 import {
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   GenericProgramErrorVoque,
   ReportedProgramError,
@@ -561,7 +561,7 @@ export const getEngineProgramLocator = buildEstinant({
     croard: (rightInput) => rightInput.indexByName.zorn,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_2_GEPP,
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<EngineProgramLocator2Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_2_GEPP,
@@ -582,7 +582,7 @@ export const getEngineProgramLocator = buildEstinant({
 
       if (engineCallDeclaration === undefined) {
         return {
-          [PROGRAM_ERROR_2_GEPP]: [
+          [PROGRAM_ERROR_GEPP]: [
             {
               name: `missing-engine-call`,
               error: new Error('Unable to find engine call declaration'),
@@ -607,7 +607,7 @@ export const getEngineProgramLocator = buildEstinant({
       switch (engineFunctionConfiguration.typeName) {
         case EngineFunctionConfigurationTypeName.Core:
           return {
-            [PROGRAM_ERROR_2_GEPP]: [
+            [PROGRAM_ERROR_GEPP]: [
               {
                 name: `unhandled-engine-call`,
                 error: new Error(
@@ -635,7 +635,7 @@ export const getEngineProgramLocator = buildEstinant({
             });
 
           return {
-            [PROGRAM_ERROR_2_GEPP]: parallelErrorList,
+            [PROGRAM_ERROR_GEPP]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [engineProgramLocator],
           };
         }
@@ -650,7 +650,7 @@ export const getEngineProgramLocator = buildEstinant({
             });
 
           return {
-            [PROGRAM_ERROR_2_GEPP]: parallelErrorList,
+            [PROGRAM_ERROR_GEPP]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [engineProgramLocator],
           };
         }

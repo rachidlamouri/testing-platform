@@ -1,7 +1,7 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   GenericProgramErrorVoque,
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   ReportedProgramError,
   ReportingEstinantLocator,
@@ -28,7 +28,7 @@ export const assertFileExtensionIsKnown = buildEstinant({
     gepp: FILE_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_2_GEPP,
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((file) => {
     if (

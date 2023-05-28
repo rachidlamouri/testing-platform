@@ -9,7 +9,7 @@ import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdenti
 import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractInMemoryVoictent2';
 import {
   GenericProgramErrorVoque,
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   UnsafeProgramErrorVoque,
 } from './programError';
 
@@ -25,7 +25,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
   constructor({ programFileCache }: ProgramErrorVoictentConstructorInput) {
     super({
-      gepp: PROGRAM_ERROR_2_GEPP,
+      gepp: PROGRAM_ERROR_GEPP,
       initialHubblepupTuple: [],
     });
 

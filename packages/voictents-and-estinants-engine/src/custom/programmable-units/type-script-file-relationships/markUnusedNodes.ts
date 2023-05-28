@@ -1,6 +1,6 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   GenericProgramErrorVoque,
   ReportedProgramError,
@@ -42,7 +42,7 @@ export const markUnusedNodes = buildEstinant({
     gepp: FILE_NODE_METADATA_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_2_GEPP,
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((edgeMetadataListList, fileNodeMetadataList) => {
     const edgeMetadataList = edgeMetadataListList.flatMap(

@@ -13,7 +13,7 @@ import {
 } from './typeScriptFileImportList';
 import { splitList } from '../../../utilities/splitList';
 import {
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   GenericProgramErrorVoque,
   ReportedProgramError,
@@ -44,7 +44,7 @@ export const getTypeScriptFileImportList = buildEstinant({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_2_GEPP,
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((parsedTypeScriptFile) => {
     const importAndErrorList = parsedTypeScriptFile.program.body
@@ -112,7 +112,7 @@ export const getTypeScriptFileImportList = buildEstinant({
     });
 
     return {
-      [PROGRAM_ERROR_2_GEPP]: errorList,
+      [PROGRAM_ERROR_GEPP]: errorList,
       [TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP]: {
         zorn: parsedTypeScriptFile.zorn,
         list: importList,

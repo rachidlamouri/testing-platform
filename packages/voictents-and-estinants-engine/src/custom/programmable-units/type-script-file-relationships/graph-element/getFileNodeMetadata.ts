@@ -1,6 +1,6 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
-  PROGRAM_ERROR_2_GEPP,
+  PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   GenericProgramErrorVoque,
   ReportedProgramError,
@@ -54,7 +54,7 @@ export const getFileNodeMetadata = buildEstinant({
     gepp: BOUNDARY_METADATA_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_2_GEPP,
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
@@ -73,7 +73,7 @@ export const getFileNodeMetadata = buildEstinant({
 
       if (directoryId === undefined || foundBoundary === undefined) {
         return {
-          [PROGRAM_ERROR_2_GEPP]: [
+          [PROGRAM_ERROR_GEPP]: [
             {
               name: 'missing-file-node-parent',
               error: new Error('Unable to find directory id or boundary id'),
@@ -94,7 +94,7 @@ export const getFileNodeMetadata = buildEstinant({
       }
 
       return {
-        [PROGRAM_ERROR_2_GEPP]: [],
+        [PROGRAM_ERROR_GEPP]: [],
         [FILE_NODE_METADATA_GEPP]: [
           {
             zorn: file.zorn,
