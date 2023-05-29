@@ -31,23 +31,17 @@ const reporterLocator: ReportingLocator = {
   filePath: __filename,
 };
 
-// TODO: remove this logic in favor of a more robust approach (whatever that may be)
-const PROTECTED_DIRECTORY_PATH_LIST = [
-  'packages/voictents-and-estinants-engine/src/utilities/type-script-ast',
-];
-
 const PROTECTED_FILE_PATH_LIST = [
-  'packages/voictents-and-estinants-engine/src/utilities/json.ts',
   'packages/voictents-and-estinants-engine/src/utilities/semantic-types/strif/strif.ts',
+  'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isParameterizedCallExpression.ts',
+  'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isTypeScriptTupleType.ts',
 ];
 
-[...PROTECTED_DIRECTORY_PATH_LIST, ...PROTECTED_FILE_PATH_LIST].forEach(
-  (nodePath) => {
-    if (!fs.existsSync(nodePath)) {
-      throw Error(`File node "${nodePath}" does not exist`);
-    }
-  },
-);
+PROTECTED_FILE_PATH_LIST.forEach((nodePath) => {
+  if (!fs.existsSync(nodePath)) {
+    throw Error(`File node "${nodePath}" does not exist`);
+  }
+});
 
 /**
  * Marks TypeScript files that have zero incoming edges among the TypeScript
@@ -80,17 +74,11 @@ export const markUnusedNodes = buildEstinant({
       const isHaphazardouslyProtectedFromBeingMarkedAsUnused = (
         metadata: FileNodeMetadata,
       ): boolean => {
-        const isInProtectedDirectory = PROTECTED_DIRECTORY_PATH_LIST.some(
-          (directoryPath) => {
-            return metadata.filePath.startsWith(`${directoryPath}/`);
-          },
-        );
-
         const isSpecificFile = PROTECTED_FILE_PATH_LIST.includes(
           metadata.filePath,
         );
 
-        return isInProtectedDirectory || isSpecificFile;
+        return isSpecificFile;
       };
 
       const mutableReferenceCache = new Map(

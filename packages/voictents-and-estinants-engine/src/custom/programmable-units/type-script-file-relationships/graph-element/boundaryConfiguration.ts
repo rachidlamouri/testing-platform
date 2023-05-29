@@ -1,3 +1,4 @@
+import fs from 'fs';
 import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../../adapter/voictent';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
@@ -44,6 +45,21 @@ export type BoundaryConfigurationVoque = InMemoryOdeshin2Voque<
 export const createBoundaryConfiguration = (
   directoryPathList: string[],
 ): BoundaryConfiguration => {
+  // TODO: move this logic elsewhere. Perhaps something that creates a program error
+  const invalidBoundaryList = directoryPathList.filter((directoryPath) => {
+    return !fs.existsSync(directoryPath);
+  });
+
+  if (invalidBoundaryList.length > 0) {
+    const errorMessage = [
+      'The following declared boundaries do not exist',
+      ...invalidBoundaryList.map((directoryPath) => {
+        return `  ${directoryPath}`;
+      }),
+    ].join('\n');
+    throw Error(errorMessage);
+  }
+
   return {
     zorn: TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN,
     overview: {

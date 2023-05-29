@@ -87,20 +87,16 @@ digikikify({
           'packages/voictents-and-estinants-engine/src/core',
 
           'packages/voictents-and-estinants-engine/src/custom/adapter',
-          'packages/voictents-and-estinants-engine/src/custom/debugger',
           'packages/voictents-and-estinants-engine/src/custom/programmable-units',
 
           'packages/voictents-and-estinants-engine/src/custom/programs/categorize-files',
           'packages/voictents-and-estinants-engine/src/custom/programs/comments-example',
-          'packages/voictents-and-estinants-engine/src/custom/programs/estinant-builder-example',
           'packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script',
           'packages/voictents-and-estinants-engine/src/custom/programs/model-ci',
           'packages/voictents-and-estinants-engine/src/custom/programs/model-programs',
           'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships',
           'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file',
           'packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render',
-          'packages/voictents-and-estinants-engine/src/custom/programs/test-typed-datum',
-          'packages/voictents-and-estinants-engine/src/custom/programs/test-voictent-input',
 
           'packages/voictents-and-estinants-engine/src/example-programs',
           'packages/voictents-and-estinants-engine/src/type-script-adapter',
