@@ -1,11 +1,11 @@
 {
   "configurations": [
     {
-      "name": "Open Schema Example 1",
+      "name": "Debug Engine",
       "request": "launch",
       "runtimeArgs": [
         "ts-node",
-        "${workspaceFolder}/packages/open-schema-type-script/src/example/example1.ts"
+        "${workspaceFolder}/packages/voictents-and-estinants-engine/src/custom/programs/model-programs/modelPrograms.ts"
       ],
       "runtimeExecutable": "npx",
       "skipFiles": [
