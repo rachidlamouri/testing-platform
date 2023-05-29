@@ -22,14 +22,8 @@ export const constructSnapshotScript = buildEstinant({
     const filePathSet = new Set(inputList.map((input) => input.file.filePath));
 
     const text = [...filePathSet]
-      .filter((filePath) => {
-        return (
-          filePath !==
-          'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file/assembleScaffoldedFile.ts'
-        );
-      })
       .map((filePath) => `npx ts-node "${filePath}"`)
-      .join('&&\\\n');
+      .join(' &&\\\n');
 
     return {
       fileName: 'refreshSnapshot',

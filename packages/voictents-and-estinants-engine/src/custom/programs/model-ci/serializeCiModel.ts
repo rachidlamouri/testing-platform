@@ -5,7 +5,7 @@ import {
   SerializedCiModelVoque,
 } from './serializedCiModel';
 
-const NEW_LINE = 'printf "\\n"';
+const PRINT_NEW_LINE = 'printf "\\n"';
 
 const ASSERT_NOTHING_CHANGED = 'bash checkUncommitted.sh';
 
@@ -25,17 +25,31 @@ export const serializeCiModel = buildEstinant({
     const serializedModelLineList = [
       ...ciModel.initialCommandList,
       '',
-      ...ciModel.programTestList.flatMap((programTest) => {
+      ...ciModel.programTestGroupList.flatMap((programTestGroup) => {
         return [
-          `# ${programTest.programName}`,
-          `echo "${programTest.prefaceDescription}"`,
-          `npx ts-node ${programTest.programFilePath}`,
-          ASSERT_NOTHING_CHANGED,
-          NEW_LINE,
+          `# ${programTestGroup.description}`,
+          '',
+          ...programTestGroup.programTestList.flatMap((programTest) => {
+            return [
+              `## ${programTest.programName}`,
+              `echo "# ${programTest.programName}"`,
+              `echo "${programTest.prefaceDescription}"`,
+              `npx ts-node ${programTest.programFilePath}`,
+              ASSERT_NOTHING_CHANGED,
+              PRINT_NEW_LINE,
+              '',
+            ].map((line) => {
+              if (programTest.skip && line !== '') {
+                return `# ${line}`;
+              }
+
+              return line;
+            });
+          }),
         ];
       }),
       ...ciModel.finalCommandList,
-      NEW_LINE,
+      PRINT_NEW_LINE,
       '',
     ].join('\n');
 

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import assert from 'assert';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   BASH_FILE_GEPP,
@@ -47,7 +48,12 @@ export const assertCiFileIsUpToDate = buildEstinant({
   .onPinbe((serializeCiModel, [ciFile]) => {
     const onDiskContents = fs.readFileSync(ciFile.filePath, 'utf-8');
 
-    if (serializeCiModel.grition !== onDiskContents) {
+    const actual = onDiskContents;
+    const expected = serializeCiModel.grition;
+
+    try {
+      assert.strictEqual(actual, expected);
+    } catch (error) {
       return [
         {
           name: 'stale-ci-file',
@@ -57,7 +63,9 @@ export const assertCiFileIsUpToDate = buildEstinant({
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
             filePath: ciFile.filePath,
           },
-          context: null,
+          context: {
+            error,
+          },
         } satisfies ReportedProgramError<ReportingLocator>,
       ];
     }
