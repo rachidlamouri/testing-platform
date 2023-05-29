@@ -73,8 +73,8 @@ export const getSvgMetadataList = buildEstinant({
         .map((document) => {
           const filePath = document.zorn;
           const label = filePath.replace(
-            `internal/${rootDirectory.directoryPath}/`,
-            '',
+            `internal/${rootDirectory.directoryPath}`,
+            'internal:',
           );
 
           return {
