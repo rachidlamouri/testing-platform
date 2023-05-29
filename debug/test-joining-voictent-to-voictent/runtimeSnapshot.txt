@@ -1,0 +1,33 @@
+Collections:
+
+    voictent-1
+      I: |XX-|
+      C: |-X-|
+
+    voictent-2
+      I: |XXX|
+      C: |-X-|
+
+    voictent-3
+      I: |--X|
+      C: |---|
+
+    serialized
+      I: |---|
+      C: |---|
+
+Transforms:
+
+  gatherCollection
+    voictent-1
+      C: |-X-|
+    voictent-2
+      C: |-X-|
+         |___|
+      E: |-1-|
+
+  serialize/voictent-3
+    voictent-3
+      I: |--X|
+         |___|
+      E: |--1|

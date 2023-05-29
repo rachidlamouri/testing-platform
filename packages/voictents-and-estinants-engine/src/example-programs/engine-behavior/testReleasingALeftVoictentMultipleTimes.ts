@@ -116,4 +116,7 @@ digikikify2({
       outputGepp: 'serialized',
     }),
   ],
+  onFinish: (runtimeStatistics) => {
+    programFileCache.writeRuntimeSnapshot(runtimeStatistics);
+  },
 });

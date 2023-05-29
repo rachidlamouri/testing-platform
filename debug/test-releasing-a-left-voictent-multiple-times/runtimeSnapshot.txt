@@ -1,0 +1,37 @@
+Collections:
+
+    voictent-1
+      I: |XXXXXXX---|
+      C: |-X--------|
+
+    voictent-2
+      I: |--XXX-XXX-|
+      C: |-----X---X|
+
+    voictent-3
+      I: |---------X|
+      C: |----------|
+
+    serialized
+      I: |----------|
+      C: |----------|
+
+Transforms:
+
+  forwardFrom1To2AndSkipAValue
+    voictent-1
+      I: |XXXXXXXX--|
+         |__________|
+      E: |-1111111--|
+
+  forwardFrom2To3
+    voictent-2
+      C: |-----X---X|
+         |__________|
+      E: |--------1-|
+
+  serialize/voictent-3
+    voictent-3
+      I: |---------X|
+         |__________|
+      E: |---------1|

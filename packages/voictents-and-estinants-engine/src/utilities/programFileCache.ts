@@ -174,7 +174,7 @@ export class ProgramFileCache extends FileCache {
     voictentGepp,
   }: VoictentDirectoryDeleterInput): void {
     this.deleteNamespacedFileNode({
-      nestedPath: posix.join(this.voictentsDirectoryPath, voictentGepp),
+      nestedPath: posix.join(TopLevelDirectoryName.Voictents, voictentGepp),
     });
   }
 }

@@ -35,6 +35,7 @@ import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+import { DigikikifierStrategy } from '../../../core/engine/digikikify';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -99,4 +100,5 @@ digikikify({
   ] as const,
   programFileCache,
   serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
+  strategy: DigikikifierStrategy.WaitForAllDependencies,
 });
