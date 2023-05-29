@@ -40,6 +40,7 @@ import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+import { signalError } from '../../programmable-units/error/signalError';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'renderTypeScriptFileRelationships',
@@ -140,6 +141,7 @@ digikikify({
 
     markUnusedNodes,
     reportErrors,
+    signalError,
   ] as const,
   programFileCache,
   serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
