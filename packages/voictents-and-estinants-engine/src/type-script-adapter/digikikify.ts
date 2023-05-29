@@ -1,5 +1,6 @@
 import { UnionToIntersection } from 'type-fest';
 import {
+  DigikikifierInput,
   RuntimeStatisticsHandler,
   digikikify as coreDigikikify,
 } from '../core/engine/digikikify';
@@ -183,6 +184,7 @@ type DigikikifyInput<
     TEstinantTuple
   >[];
   programFileCache: ProgramFileCache;
+  strategy?: DigikikifierInput['strategy'];
 };
 
 export const digikikify = <
@@ -194,6 +196,7 @@ export const digikikify = <
   estinantTuple,
   serializeeVoictentGeppList = [],
   programFileCache,
+  strategy,
 }: DigikikifyInput<TVoictentTupleA, TEstinantTuple>): void => {
   // note: The core engine will provide a signal if someone passes in a collection with the same Gepp
   const serializerVoictentGepp = 'serialized';
@@ -262,5 +265,6 @@ export const digikikify = <
         programFileCache.writeRuntimeSnapshot(statistics);
       }
     },
+    strategy,
   });
 };

@@ -32,6 +32,7 @@ export type LeftDreanor = {
   typeName: DreanorTypeName.LeftDreanor;
   gepp: Gepp;
   lanbe: Lanbe;
+  isReady: boolean;
 };
 
 export type RightVoictentDreanor = {

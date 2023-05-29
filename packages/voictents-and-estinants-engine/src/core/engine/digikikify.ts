@@ -38,7 +38,13 @@ import {
   VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
 import { Mabz, MabzEntry } from '../internal/procody/mabz';
-import { Platomity, Platomity2, getDreanorTuple } from '../internal/platomity';
+import {
+  Platomity,
+  Platomity2,
+  Virok,
+  getDreanorTuple,
+  isPlatomity2List,
+} from '../internal/platomity';
 import { Prected } from '../internal/dreanor/prected';
 import { Procody } from '../internal/procody/procody';
 import { Quirm, QuirmList, QuirmTuple } from '../engine-shell/quirm/quirm';
@@ -52,6 +58,12 @@ export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
 
 export type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 
+export enum DigikikifierStrategy {
+  AllAtOnce = 'AllAtOnce',
+  WaitForAllDependencies = 'WaitForAllDependencies',
+  OnlyWaitForVoictentDependency = 'OnlyWaitForVoictentDependency',
+}
+
 export type DigikikifierInput = {
   // TODO: remove "initialQuirmTuple" and make inputVoictentList required
   inputVoictentList?: GenericVoictent2[];
@@ -59,6 +71,7 @@ export type DigikikifierInput = {
   /** @deprecated */
   onHubblepupAddedToVoictents?: OnHubblepupAddedToVoictentsHandler;
   onFinish?: RuntimeStatisticsHandler;
+  strategy?: DigikikifierStrategy;
 };
 
 const nanosecondsToSeconds = (nanoseconds: bigint): bigint =>
@@ -112,6 +125,7 @@ export const digikikify = ({
   estinantTuple,
   onHubblepupAddedToVoictents,
   onFinish,
+  strategy = DigikikifierStrategy.WaitForAllDependencies,
 }: DigikikifierInput): void => {
   const inputGeppSet: GeppSet = new Set(
     inputVoictentList.map((voictent) => {
@@ -256,6 +270,7 @@ export const digikikify = ({
           typeName: DreanorTypeName.LeftDreanor,
           gepp: leftInputAppreffinge.gepp,
           lanbe: createLanbe2(estinant, leftInputAppreffinge),
+          isReady: false,
         };
 
         const rightDreanorTuple = rightInputAppreffingeTuple.map<RightDreanor>(
@@ -296,6 +311,9 @@ export const digikikify = ({
           outputGeppSet: new Set(estinant.outputAppreffinge.geppTuple),
           procody: new Procody(),
           executionCount: 0,
+          dependencySet: new Set(),
+          mutableDependencySet: new Set(),
+          dependentSet: new Set(),
         };
 
         return platomity;
@@ -307,6 +325,7 @@ export const digikikify = ({
         typeName: DreanorTypeName.LeftDreanor,
         gepp: leftAppreffinge.gepp,
         lanbe: createLanbe(estinant, leftAppreffinge),
+        isReady: false,
       };
 
       const rightDreanorTuple = rightAppreffingeTuple.map<RightDreanor>(
@@ -383,6 +402,15 @@ export const digikikify = ({
 
     getDreanorTuple(platomity)
       .filter((dreanor) => {
+        if (
+          strategy === DigikikifierStrategy.WaitForAllDependencies &&
+          (dreanor.typeName === DreanorTypeName.RightVoictentDreanor ||
+            (dreanor.typeName === DreanorTypeName.LeftDreanor &&
+              dreanor.lanbe.typeName === LanbeTypeName.VoictentLanbe))
+        ) {
+          return !dreanor.isReady;
+        }
+
         return dreanor.lanbe.hasNext();
       })
       .forEach((dreanor) => {
@@ -408,6 +436,11 @@ export const digikikify = ({
             leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
               ? leftInputReferenceValue.hubblepup
               : leftInputReferenceValue;
+
+          if (dreanor.lanbe.typeName === LanbeTypeName.VoictentLanbe) {
+            // eslint-disable-next-line no-param-reassign
+            dreanor.isReady = true;
+          }
 
           const mabzEntryList = platomity.rightDreanorTuple.map<MabzEntry>(
             (rightDreanor) => {
@@ -484,8 +517,10 @@ export const digikikify = ({
             // eslint-disable-next-line no-param-reassign
             dreanor.isReady = true;
 
-            // eslint-disable-next-line no-param-reassign
-            dreanor.mutableReference = rightInput;
+            if (strategy === DigikikifierStrategy.AllAtOnce) {
+              // eslint-disable-next-line no-param-reassign
+              dreanor.mutableReference = rightInput;
+            }
           } else if (
             dreanor.typeName === DreanorTypeName.RightVoictentItemDreanor &&
             rightInputTypeName === ReferenceTypeName.VoictentItem
@@ -564,8 +599,13 @@ export const digikikify = ({
       const rightInputTuple = platomity.rightDreanorTuple.map(
         (rightDreanor) => {
           if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-            const rightInputElement = rightDreanor.mutableReference;
-            return rightInputElement;
+            if (strategy === DigikikifierStrategy.AllAtOnce) {
+              const rightInputElement = rightDreanor.mutableReference;
+              return rightInputElement;
+            }
+
+            const rightInputElement = rightDreanor.lanbe.dereference();
+            return rightInputElement.value;
           }
 
           const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
@@ -630,6 +670,7 @@ export const digikikify = ({
     addToTabilly(outputQuirmTuple);
   };
 
+  // TODO: create a class or something to encapsulate tracking runtime stats
   const voictentTickSeriesConfigurationByVoictent = new Map<
     GenericVoictent2,
     VoictentTickSeriesConfiguration
@@ -664,7 +705,7 @@ export const digikikify = ({
 
   let tickCount = 0;
 
-  while (platomityList.some(isPlatomityActive)) {
+  const onTopOfLoop = (): void => {
     [...tabilly.values()].forEach((voictent) => {
       voictent.onTickStart();
     });
@@ -703,16 +744,9 @@ export const digikikify = ({
         connection.tickSeries.push(connection.lanbe.hasNext() ? 1 : 0);
       });
     });
+  };
 
-    platomityList
-      .flatMap((platomity) => {
-        return getCologyExecutionContextList(platomity);
-      })
-      .forEach((context) => {
-        // Note: it's important that execution is separated from evaluation since executing a platomity can affect other platomities
-        executeContext(context);
-      });
-
+  const onBottomOfLoop = (): void => {
     estinantTickSeriesConfigurationList.forEach((configuration) => {
       const lastExecutionCount =
         configuration.cumulativeExecutionCountTickSeries[
@@ -747,6 +781,139 @@ export const digikikify = ({
 
     prevousTickTime = tickTime;
     tickCount += 1;
+  };
+
+  const executeAllAtOnceStrategy = (): void => {
+    while (platomityList.some(isPlatomityActive)) {
+      onTopOfLoop();
+
+      platomityList
+        .flatMap((platomity) => {
+          return getCologyExecutionContextList(platomity);
+        })
+        .forEach((context) => {
+          // Note: it's important that execution is separated from evaluation since executing a platomity can affect other platomities
+          executeContext(context);
+        });
+
+      onBottomOfLoop();
+    }
+  };
+
+  const executeWaitForAllDependenciesStrategy = (): void => {
+    if (!isPlatomity2List(platomityList)) {
+      throw Error('Unsupported Platomity 1');
+    }
+
+    const virokByGepp = new Map<Gepp, Virok>();
+
+    inputVoictentList.forEach((voictent) => {
+      const virok: Virok = {
+        voictent,
+        mutableDependencySet: new Set(),
+        dependencySet: new Set(),
+        dependentSet: new Set(),
+      };
+
+      virokByGepp.set(voictent.gepp, virok);
+    });
+
+    platomityList.forEach((platomity) => {
+      [
+        platomity.estinant.leftInputAppreffinge.gepp,
+        ...platomity.estinant.rightInputAppreffingeTuple.map(
+          (appreffinge) => appreffinge.gepp,
+        ),
+      ].forEach((gepp) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const virok = virokByGepp.get(gepp)!;
+        virok.dependentSet.add(platomity);
+        platomity.dependencySet.add(virok);
+        platomity.mutableDependencySet.add(virok);
+      });
+
+      platomity.estinant.outputAppreffinge.geppTuple.forEach((gepp) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const virok = virokByGepp.get(gepp)!;
+        platomity.dependentSet.add(virok);
+        virok.dependencySet.add(platomity);
+        virok.mutableDependencySet.add(platomity);
+      });
+    });
+
+    const runtimeVirokSet = new Set(
+      [...virokByGepp.values()].filter((virok) => {
+        return virok.dependencySet.size === 0;
+      }),
+    );
+
+    // estinants cannot have direct inputs, so they won't be ready immediately
+    const runtimePlatomitySet = new Set<Platomity2>();
+
+    // This is a do-while because estinants cannot have direct inputs so there will be 0 estinants ready to run at the very start
+    do {
+      onTopOfLoop();
+
+      [...runtimePlatomitySet]
+        .flatMap((platomity) => {
+          return getCologyExecutionContextList(platomity);
+        })
+        .forEach((context) => {
+          // Note: it's important that execution is separated from evaluation since executing a platomity can affect other platomities
+          executeContext(context);
+        });
+
+      runtimePlatomitySet.forEach((platomity) => {
+        const isFinished = getDreanorTuple(platomity).every((dreanor) => {
+          if (
+            (dreanor.typeName === DreanorTypeName.LeftDreanor ||
+              dreanor.typeName === DreanorTypeName.RightVoictentDreanor) &&
+            dreanor.lanbe.typeName === LanbeTypeName.VoictentLanbe
+          ) {
+            return true;
+          }
+
+          return !dreanor.lanbe.hasNext();
+        });
+
+        if (isFinished) {
+          platomity.dependentSet.forEach((virok) => {
+            virok.mutableDependencySet.delete(platomity);
+
+            if (virok.mutableDependencySet.size === 0) {
+              runtimeVirokSet.add(virok);
+            }
+          });
+
+          runtimePlatomitySet.delete(platomity);
+        }
+      });
+
+      runtimeVirokSet.forEach((idkV) => {
+        idkV.dependentSet.forEach((idkP) => {
+          idkP.mutableDependencySet.delete(idkV);
+
+          if (idkP.mutableDependencySet.size === 0) {
+            runtimePlatomitySet.add(idkP);
+          }
+        });
+
+        runtimeVirokSet.delete(idkV);
+      });
+
+      onBottomOfLoop();
+    } while (runtimePlatomitySet.size > 0);
+  };
+
+  switch (strategy) {
+    case DigikikifierStrategy.AllAtOnce:
+      executeAllAtOnceStrategy();
+      break;
+    case DigikikifierStrategy.WaitForAllDependencies:
+      executeWaitForAllDependenciesStrategy();
+      break;
+    case DigikikifierStrategy.OnlyWaitForVoictentDependency:
+      throw Error('Not implemented');
   }
 
   const statistics: RuntimeStatistics = {
