@@ -47,7 +47,7 @@ export const constructKnowledgeGraph = buildEstinant({
         const templateDocument = [
           `<!-- ${metadata.label} -->`,
           '<template>',
-          metadata.document,
+          metadata.document.grition,
           '</template>',
         ].join('\n');
 
