@@ -40,6 +40,15 @@ import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+import { signalError } from '../../programmable-units/error/signalError';
+import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
+import {
+  EngineFunctionConfigurationVoque,
+  ENGINE_FUNCTION_CONFIGURATION_GEPP,
+  CORE_ENGINE_FUNCTION_CONFIGURATION,
+  CORE_ENGINE_FUNCTION_2_CONFIGURATION,
+  ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+} from '../../programmable-units/engine-program/engineFunctionConfiguration';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'renderTypeScriptFileRelationships',
@@ -57,6 +66,14 @@ const programFileCache = new ProgramFileCache({
  */
 digikikify({
   populatedVoictentTuple: [
+    new InMemoryVoictent<EngineFunctionConfigurationVoque>({
+      gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
+      initialHubblepupTuple: [
+        CORE_ENGINE_FUNCTION_CONFIGURATION,
+        CORE_ENGINE_FUNCTION_2_CONFIGURATION,
+        ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+      ],
+    }),
     new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
       gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialHubblepupTuple: [
@@ -77,6 +94,7 @@ digikikify({
           'packages/voictents-and-estinants-engine/src/custom/programs/comments-example',
           'packages/voictents-and-estinants-engine/src/custom/programs/estinant-builder-example',
           'packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script',
+          'packages/voictents-and-estinants-engine/src/custom/programs/model-ci',
           'packages/voictents-and-estinants-engine/src/custom/programs/model-programs',
           'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships',
           'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file',
@@ -138,8 +156,11 @@ digikikify({
 
     getOutputFileCount,
 
+    filterEngineProgramFile,
     markUnusedNodes,
+
     reportErrors,
+    signalError,
   ] as const,
   programFileCache,
   serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
