@@ -94,6 +94,7 @@ digikikify({
           'packages/voictents-and-estinants-engine/src/custom/programs/comments-example',
           'packages/voictents-and-estinants-engine/src/custom/programs/estinant-builder-example',
           'packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script',
+          'packages/voictents-and-estinants-engine/src/custom/programs/model-ci',
           'packages/voictents-and-estinants-engine/src/custom/programs/model-programs',
           'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships',
           'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file',
