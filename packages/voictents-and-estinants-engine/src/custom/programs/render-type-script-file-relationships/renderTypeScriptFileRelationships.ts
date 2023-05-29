@@ -41,6 +41,14 @@ import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { signalError } from '../../programmable-units/error/signalError';
+import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
+import {
+  EngineFunctionConfigurationVoque,
+  ENGINE_FUNCTION_CONFIGURATION_GEPP,
+  CORE_ENGINE_FUNCTION_CONFIGURATION,
+  CORE_ENGINE_FUNCTION_2_CONFIGURATION,
+  ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+} from '../../programmable-units/engine-program/engineFunctionConfiguration';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'renderTypeScriptFileRelationships',
@@ -58,6 +66,14 @@ const programFileCache = new ProgramFileCache({
  */
 digikikify({
   populatedVoictentTuple: [
+    new InMemoryVoictent<EngineFunctionConfigurationVoque>({
+      gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
+      initialHubblepupTuple: [
+        CORE_ENGINE_FUNCTION_CONFIGURATION,
+        CORE_ENGINE_FUNCTION_2_CONFIGURATION,
+        ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+      ],
+    }),
     new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
       gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialHubblepupTuple: [
@@ -139,7 +155,9 @@ digikikify({
 
     getOutputFileCount,
 
+    filterEngineProgramFile,
     markUnusedNodes,
+
     reportErrors,
     signalError,
   ] as const,
