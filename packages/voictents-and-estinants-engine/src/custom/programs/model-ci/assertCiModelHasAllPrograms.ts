@@ -41,16 +41,59 @@ export const assertCiModelHasAllPrograms = buildEstinant({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((programLocatorList, [ciModel]) => {
-    const actualList = ciModel.programTestList.map(
-      (programTest) => programTest.programName,
-    );
+    type ComparisonDatum = {
+      name: string;
+      filePath: string;
+    };
 
-    const expectedList = programLocatorList.map(
-      (locator) => locator.programName,
-    );
+    const foo = (a: ComparisonDatum, b: ComparisonDatum): number => {
+      if (a.name === b.name) {
+        return 0;
+      }
+
+      if (a.name < b.name) {
+        return -1;
+      }
+
+      return 1;
+    };
+
+    const actualList = ciModel.programTestGroupList
+      .flatMap((programTestGroup) => {
+        return programTestGroup.programTestList.map<ComparisonDatum>(
+          (programTest) => {
+            return {
+              name: programTest.programName,
+              filePath: programTest.programFilePath,
+            };
+          },
+        );
+      })
+      .sort(foo);
+
+    const expectedList = programLocatorList
+      .map<ComparisonDatum>((locator) => {
+        return {
+          name: locator.programName,
+          filePath: locator.filePath,
+        };
+      })
+      .sort(foo);
+
+    const expectedCodeList = expectedList
+      .flatMap(({ name, filePath }) => {
+        return [
+          '{',
+          `  programName: '${name}',`,
+          `  programFilePath: '${filePath}',`,
+          '  prefaceDescription: "",',
+          '},',
+        ];
+      })
+      .join('\n');
 
     try {
-      assert.deepEqual(actualList, expectedList);
+      assert.deepStrictEqual(actualList, expectedList);
       return [];
     } catch (error) {
       return [
@@ -67,6 +110,7 @@ export const assertCiModelHasAllPrograms = buildEstinant({
           },
           context: {
             error,
+            expectedCodeList,
           },
         } satisfies ReportedProgramError<ReportingLocator>,
       ];
