@@ -10,6 +10,7 @@ import {
   EngineProgramLocator2Voque,
 } from './engineProgramLocator2';
 import { getTextDigest } from '../../../utilities/getTextDigest';
+import { ENGINE_VOQUE_GEPP, EngineVoqueVoque } from './engineVoque';
 
 /**
  * Joins the program locator to its transforms in order to
@@ -32,10 +33,20 @@ export const getEngineProgram2 = buildEstinant({
       return rightInput.indexByName.zorn;
     },
   })
+  .andFromHubblepupTuple2<EngineVoqueVoque, Tuple<string>>({
+    gepp: ENGINE_VOQUE_GEPP,
+    // TODO: this logic is messy. Maybe the framate/croard pattern is bad? Should it just be (left, right) => left.x === right.x?
+    framate: (left) =>
+      left.hubblepup.engineVoqueLocatorList.map(
+        (locator) => `${locator.filePath}|${locator.identifierName}`,
+      ),
+    croard: (right) =>
+      `${right.hubblepup.filePath}|${right.hubblepup.identifierName}`,
+  })
   .toHubblepup2<EngineProgram2Voque>({
     gepp: ENGINE_PROGRAM_2_GEPP,
   })
-  .onPinbe((engineProgramLocator, estinantList) => {
+  .onPinbe((engineProgramLocator, estinantList, voqueList) => {
     return {
       zorn: engineProgramLocator.zorn,
       id: getTextDigest(engineProgramLocator.programName),
@@ -44,6 +55,7 @@ export const getEngineProgram2 = buildEstinant({
       filePath: engineProgramLocator.filePath,
       voictentLocatorList: engineProgramLocator.voictentLocatorList,
       estinantList,
+      voqueList,
     };
   })
   .assemble();

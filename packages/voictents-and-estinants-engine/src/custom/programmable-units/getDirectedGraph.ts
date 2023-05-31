@@ -26,6 +26,7 @@ import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   DirectedGraphMetadataById,
   DirectedGraphMetadataByIdVoque,
+  DirectedGraphMetadatumField,
 } from './graph-visualization/directedGraphMetadataById';
 
 type EngineVoictent = {
@@ -33,6 +34,7 @@ type EngineVoictent = {
   name: string;
   hasInitialInput: boolean;
   isConsumed: boolean;
+  commentText: string;
 };
 
 /**
@@ -55,6 +57,12 @@ export const getDirectedGraph = buildEstinant({
     // TODO: index program name?
     const associationId = engineProgram.programName;
 
+    const engineVoqueByName = new Map(
+      engineProgram.voqueList.map((voque) => {
+        return [voque.displayName, voque];
+      }),
+    );
+
     const engineVoictentByName = new Map<string, EngineVoictent>(
       engineProgram.voictentLocatorList.map((voictentLocator) => {
         return [
@@ -64,6 +72,8 @@ export const getDirectedGraph = buildEstinant({
             name: voictentLocator.name,
             hasInitialInput: voictentLocator.hasInitialInput,
             isConsumed: false,
+            commentText:
+              engineVoqueByName.get(voictentLocator.name)?.commentText ?? '',
           },
         ];
       }),
@@ -71,11 +81,15 @@ export const getDirectedGraph = buildEstinant({
 
     engineProgram.estinantList.forEach((estinant) => {
       estinant.inputList.forEach((input) => {
-        const cacheValue = engineVoictentByName.get(input.voictentName) ?? {
+        const cacheValue: EngineVoictent = engineVoictentByName.get(
+          input.voictentName,
+        ) ?? {
           id: getTextDigest(input.voictentName),
           name: input.voictentName,
           hasInitialInput: false,
           isConsumed: false,
+          commentText:
+            engineVoqueByName.get(input.voictentName)?.commentText ?? '',
         };
 
         cacheValue.isConsumed = true;
@@ -84,11 +98,15 @@ export const getDirectedGraph = buildEstinant({
       });
 
       estinant.outputList.forEach((output) => {
-        const cacheValue = engineVoictentByName.get(output.voictentName) ?? {
+        const cacheValue: EngineVoictent = engineVoictentByName.get(
+          output.voictentName,
+        ) ?? {
           id: getTextDigest(output.voictentName),
           name: output.voictentName,
           hasInitialInput: false,
           isConsumed: false,
+          commentText:
+            engineVoqueByName.get(output.voictentName)?.commentText ?? '',
         };
 
         engineVoictentByName.set(output.voictentName, cacheValue);
@@ -461,14 +479,23 @@ export const getDirectedGraph = buildEstinant({
     };
 
     voictentList.forEach((voictent) => {
+      const fieldList: DirectedGraphMetadatumField[] = [
+        {
+          label: 'Type',
+          value: 'Collection',
+        },
+      ];
+
+      if (voictent.commentText !== '') {
+        fieldList.push({
+          label: 'Collection Item Description',
+          value: voictent.commentText,
+        });
+      }
+
       metadataById.grition[voictent.id] = {
         title: voictent.name,
-        fieldList: [
-          {
-            label: 'Type',
-            value: 'Collection',
-          },
-        ],
+        fieldList,
       };
     });
 

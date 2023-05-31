@@ -79,6 +79,9 @@ export type DirectedGraphGepp = typeof DIRECTED_GRAPH_GEPP;
 
 export type DirectedGraphVoictent = Voictent<DirectedGraphGepp, DirectedGraph>;
 
+/**
+ * A proprietary object that can be converted into Graphviz code
+ */
 export type DirectedGraphVoque = InMemoryOdeshin2Voque<
   DirectedGraphGepp,
   DirectedGraph

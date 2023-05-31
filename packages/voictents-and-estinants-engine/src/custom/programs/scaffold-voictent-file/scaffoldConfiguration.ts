@@ -14,6 +14,9 @@ export type ScaffoldConfigurationVoictent = Voictent<
   ScaffoldConfiguration
 >;
 
+/**
+ * The filePath to create a Voque outline within
+ */
 export type ScaffoldConfigurationVoque = StandardInMemoryVoque<
   ScaffoldConfigurationGepp,
   ScaffoldConfiguration

@@ -36,6 +36,8 @@ import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { DigikikifierStrategy } from '../../../core/engine/digikikify';
+import { EngineVoqueLocatorVoictent } from '../../programmable-units/engine-program/engineVoqueLocatorVoictent';
+import { getEngineVoque } from '../../programmable-units/engine-program/getEngineVoque';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -65,6 +67,7 @@ digikikify({
     new ProgramErrorVoictent({
       programFileCache,
     }),
+    new EngineVoqueLocatorVoictent(),
     new OutputFileVoictent({
       programFileCache,
     }),
@@ -84,6 +87,7 @@ digikikify({
 
     getEngineEstinantLocatorCollection,
     getEngineEstinant,
+    getEngineVoque,
     getEngineProgram2,
 
     getDirectedGraph,
@@ -99,6 +103,9 @@ digikikify({
     signalError,
   ] as const,
   programFileCache,
-  serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
+  serializeeVoictentGeppList: [
+    // note: keep this is a multiline list for easier debugging
+    SANITY_SNAPSHOT_GEPP,
+  ],
   strategy: DigikikifierStrategy.WaitForAllDependencies,
 });

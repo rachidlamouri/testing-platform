@@ -27,6 +27,10 @@ export type DirectedGraphMetadataByIdVoictent = Voictent<
   DirectedGraphMetadataById
 >;
 
+/**
+ * An object that is used by the interactive HTML file to display metadata about
+ * the selected graph element
+ */
 export type DirectedGraphMetadataByIdVoque = InMemoryOdeshin2Voque<
   DirectedGraphMetadataByIdGepp,
   DirectedGraphMetadataById
