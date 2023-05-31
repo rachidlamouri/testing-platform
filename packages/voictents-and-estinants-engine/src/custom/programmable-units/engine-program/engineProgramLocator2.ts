@@ -1,6 +1,7 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
+import { ReceivedEngineVoqueLocator } from './engineVoqueLocator';
 
 export type VoictentLocator = {
   name: string;
@@ -12,6 +13,7 @@ export type EngineProgramLocator2 = {
   programName: string;
   description: string;
   filePath: string;
+  engineVoqueLocatorList: ReceivedEngineVoqueLocator[];
   voictentLocatorList: VoictentLocator[];
   engineEstinantLocatorList: EngineEstinantLocator2[];
 };
