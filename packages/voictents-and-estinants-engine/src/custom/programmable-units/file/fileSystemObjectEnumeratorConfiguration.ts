@@ -26,6 +26,9 @@ export type FileSystemObjectEnumeratorConfigurationVoictent = Voictent<
   FileSystemObjectEnumeratorConfigurationHubblepup
 >;
 
+/**
+ * The information needed to traverse the file system.
+ */
 export type FileSystemObjectEnumeratorConfigurationVoque =
   StandardInMemoryVoque<
     FileSystemObjectEnumeratorConfigurationGepp,

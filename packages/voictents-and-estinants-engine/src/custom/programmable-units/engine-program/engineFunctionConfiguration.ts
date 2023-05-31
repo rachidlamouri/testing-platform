@@ -51,6 +51,10 @@ export type EngineFunctionConfigurationVoictent = Voictent<
   EngineFunctionConfiguration
 >;
 
+/**
+ * The information needed to identify an engine program and to parse a program
+ * call
+ */
 export type EngineFunctionConfigurationVoque = StandardInMemoryVoque<
   EngineFunctionConfigurationGepp,
   EngineFunctionConfiguration
