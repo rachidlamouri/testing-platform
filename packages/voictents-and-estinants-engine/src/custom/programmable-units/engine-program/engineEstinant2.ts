@@ -1,13 +1,17 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
+import { ReceivedEngineVoqueLocator } from './engineVoqueLocator';
 
 type BaseEstinantInputOutput<
   TIsInput extends boolean,
   TIndex extends number | null,
 > = {
   id: string;
+  // TODO: delete "voictentName" in favor of "voqueLocator"
   voictentName: string;
+  // TODO: make this non optional
+  voqueLocator?: ReceivedEngineVoqueLocator;
   isInput: TIsInput;
   index: TIndex;
 };

@@ -48,14 +48,16 @@ export const getEngineVoque = buildEstinant({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((voqueLocator, [{ declarationByIdentifier }]) => {
-    const hubblepupIdentifierName = voqueLocator.identifierName.replace(
-      /Voque$/,
-      '',
-    );
+    // TODO: move these naming conventions elsewhere
+    const hubblepupIdentifierName = voqueLocator.identifierName
+      .replace(/Voque$/, '')
+      .replace(/^Generic/, '');
 
-    const hubblepupDeclaration = declarationByIdentifier.get(
-      hubblepupIdentifierName,
-    );
+    const emittedHubblepupIdentifierName = `Emitted${hubblepupIdentifierName}`;
+
+    const hubblepupDeclaration =
+      declarationByIdentifier.get(hubblepupIdentifierName) ??
+      declarationByIdentifier.get(emittedHubblepupIdentifierName);
 
     const commentText = hubblepupDeclaration?.commentText ?? null;
 
@@ -66,14 +68,17 @@ export const getEngineVoque = buildEstinant({
             {
               name: 'missing-hubblepup-comment',
               error: new Error(
-                'Voque definitions must have a corresponding hubblepup definition of a similar name with a comment',
+                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup can start with "Emitted"',
               ),
               reporterLocator,
               sourceLocator: {
                 typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
                 filePath: voqueLocator.filePath,
               },
-              context: null,
+              context: {
+                hubblepupIdentifierName,
+                voqueLocator,
+              },
             },
           ];
 
