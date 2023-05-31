@@ -20,6 +20,10 @@ export type LimboBoundaryConfiguration = {
   instanceId: string;
 };
 
+/**
+ * The information needed to establish an arbitrary grouping of files in the
+ * TypeScript knowledge graph
+ */
 export type BoundaryConfiguration = {
   zorn: string;
   overview: OverviewBoundaryConfiguration;
@@ -37,10 +41,6 @@ export type BoundaryConfigurationVoictent = Voictent<
   BoundaryConfiguration
 >;
 
-/**
- * The information needed to establish an arbitrary grouping of files in the
- * TypeScript knowledge graph
- */
 export type BoundaryConfigurationVoque = InMemoryOdeshin2Voque<
   BoundaryConfigurationGepp,
   BoundaryConfiguration

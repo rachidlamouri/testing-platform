@@ -1,19 +1,14 @@
-import { Hubblepup } from '../../adapter/hubblepup';
 import { Voictent } from '../../adapter/voictent';
 import {
   ComparisonConfigurationTypeName,
   FilePathAccessorInput,
 } from '../../../utilities/file/getNestedFilePaths';
-import { Grition } from '../../adapter/grition';
 import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 
+/**
+ * The information needed to traverse the file system.
+ */
 export type FileSystemObjectEnumeratorConfiguration = FilePathAccessorInput;
-
-export type FileSystemObjectEnumeratorConfigurationGrition =
-  Grition<FileSystemObjectEnumeratorConfiguration>;
-
-export type FileSystemObjectEnumeratorConfigurationHubblepup =
-  Hubblepup<FileSystemObjectEnumeratorConfigurationGrition>;
 
 export const FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP =
   'file-system-object-enumerator-configuration';
@@ -23,19 +18,16 @@ export type FileSystemObjectEnumeratorConfigurationGepp =
 
 export type FileSystemObjectEnumeratorConfigurationVoictent = Voictent<
   FileSystemObjectEnumeratorConfigurationGepp,
-  FileSystemObjectEnumeratorConfigurationHubblepup
+  FileSystemObjectEnumeratorConfiguration
 >;
 
-/**
- * The information needed to traverse the file system.
- */
 export type FileSystemObjectEnumeratorConfigurationVoque =
   StandardInMemoryVoque<
     FileSystemObjectEnumeratorConfigurationGepp,
-    FileSystemObjectEnumeratorConfigurationHubblepup
+    FileSystemObjectEnumeratorConfiguration
   >;
 
-export const FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfigurationHubblepup =
+export const FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfiguration =
   {
     directoryPath: '.',
     ignoredNodePathConfigurationList: [
@@ -54,7 +46,7 @@ export const FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectE
     ],
   };
 
-export const VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfigurationHubblepup =
+export const VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfiguration =
   {
     directoryPath: 'packages/voictents-and-estinants-engine/',
     ignoredNodePathConfigurationList: [
@@ -65,7 +57,7 @@ export const VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGUR
     ],
   };
 
-export const CI_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfigurationHubblepup =
+export const CI_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfiguration =
   {
     directoryPath: '.github',
     ignoredNodePathConfigurationList: [],

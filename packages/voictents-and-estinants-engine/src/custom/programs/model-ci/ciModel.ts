@@ -13,6 +13,9 @@ type ProgramTestGroup = {
   programTestList: ProgramTest[];
 };
 
+/**
+ * The information needed to build the expected ci.sh file
+ */
 export type CiModel = {
   zorn: string;
   initialCommandList: string[];
@@ -26,9 +29,6 @@ export type CiModelGepp = typeof CI_MODEL_GEPP;
 
 export type CiModelVoictent = Voictent<CiModelGepp, CiModel>;
 
-/**
- * The information needed to build the expected ci.sh file
- */
 export type CiModelVoque = StandardInMemoryVoque<CiModelGepp, CiModel>;
 
 export const CI_MODEL_ZORN = 'CI_MODEL';

@@ -48,20 +48,25 @@ export const getEngineVoque = buildEstinant({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((voqueLocator, [{ declarationByIdentifier }]) => {
-    const declaration = declarationByIdentifier.get(
-      voqueLocator.identifierName,
+    const hubblepupIdentifierName = voqueLocator.identifierName.replace(
+      /Voque$/,
+      '',
     );
 
-    const commentText = declaration?.commentText ?? null;
+    const hubblepupDeclaration = declarationByIdentifier.get(
+      hubblepupIdentifierName,
+    );
+
+    const commentText = hubblepupDeclaration?.commentText ?? null;
 
     const parallelErrorList: GenericReceivedProgramError[] =
       commentText !== null
         ? []
         : [
             {
-              name: 'missing-voque-comment',
+              name: 'missing-hubblepup-comment',
               error: new Error(
-                'Voque definitions must have a comment explaining their purpose',
+                'Voque definitions must have a corresponding hubblepup definition of a similar name with a comment',
               ),
               reporterLocator,
               sourceLocator: {

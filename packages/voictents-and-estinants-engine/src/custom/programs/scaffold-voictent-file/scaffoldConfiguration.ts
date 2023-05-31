@@ -1,6 +1,9 @@
 import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 import { Voictent } from '../../adapter/voictent';
 
+/**
+ * The filePath to create a Voque outline within
+ */
 export type ScaffoldConfiguration = {
   filePath: string;
 };
@@ -14,9 +17,6 @@ export type ScaffoldConfigurationVoictent = Voictent<
   ScaffoldConfiguration
 >;
 
-/**
- * The filePath to create a Voque outline within
- */
 export type ScaffoldConfigurationVoque = StandardInMemoryVoque<
   ScaffoldConfigurationGepp,
   ScaffoldConfiguration
