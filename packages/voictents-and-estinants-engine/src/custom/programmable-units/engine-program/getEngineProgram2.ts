@@ -11,6 +11,7 @@ import {
 } from './engineProgramLocator2';
 import { getTextDigest } from '../../../utilities/getTextDigest';
 import { ENGINE_VOQUE_GEPP, EngineVoqueVoque } from './engineVoque';
+import { ReceivedEngineVoqueLocator } from './engineVoqueLocator';
 
 /**
  * Joins the program locator to its transforms in order to
@@ -33,20 +34,41 @@ export const getEngineProgram2 = buildEstinant({
       return rightInput.indexByName.zorn;
     },
   })
-  .andFromHubblepupTuple2<EngineVoqueVoque, Tuple<string>>({
+  .andFromVoictent2<EngineVoqueVoque>({
     gepp: ENGINE_VOQUE_GEPP,
-    // TODO: this logic is messy. Maybe the framate/croard pattern is bad? Should it just be (left, right) => left.x === right.x?
-    framate: (left) =>
-      left.hubblepup.engineVoqueLocatorList.map(
-        (locator) => `${locator.filePath}|${locator.identifierName}`,
-      ),
-    croard: (right) =>
-      `${right.hubblepup.filePath}|${right.hubblepup.identifierName}`,
   })
   .toHubblepup2<EngineProgram2Voque>({
     gepp: ENGINE_PROGRAM_2_GEPP,
   })
-  .onPinbe((engineProgramLocator, estinantList, voqueList) => {
+  .onPinbe((engineProgramLocator, estinantList, allVoqueList) => {
+    const allVoqueByFilePath = new Map(
+      allVoqueList.map((voque) => [voque.filePath, voque] as const),
+    );
+
+    const voqueList = [
+      ...engineProgramLocator.engineVoqueLocatorList,
+      ...estinantList.flatMap((estinant) => {
+        return [...estinant.inputList, ...estinant.outputList].flatMap(
+          (inputOutput) => {
+            return inputOutput.voqueLocator;
+          },
+        );
+      }),
+    ]
+      .filter(
+        (voqueLocator): voqueLocator is ReceivedEngineVoqueLocator =>
+          voqueLocator !== undefined,
+      )
+      .map((voqueLocator) => {
+        const voque = allVoqueByFilePath.get(voqueLocator.filePath);
+
+        if (!voque) {
+          throw Error('Apparently this is reachable, but it shouldnt be');
+        }
+
+        return voque;
+      });
+
     return {
       zorn: engineProgramLocator.zorn,
       id: getTextDigest(engineProgramLocator.programName),

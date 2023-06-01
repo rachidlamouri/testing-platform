@@ -48,27 +48,37 @@ export const getEngineVoque = buildEstinant({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((voqueLocator, [{ declarationByIdentifier }]) => {
-    const declaration = declarationByIdentifier.get(
-      voqueLocator.identifierName,
-    );
+    // TODO: move these naming conventions elsewhere
+    const hubblepupIdentifierName = voqueLocator.identifierName
+      .replace(/Voque$/, '')
+      .replace(/^Generic/, '');
 
-    const commentText = declaration?.commentText ?? null;
+    const emittedHubblepupIdentifierName = `Emitted${hubblepupIdentifierName}`;
+
+    const hubblepupDeclaration =
+      declarationByIdentifier.get(hubblepupIdentifierName) ??
+      declarationByIdentifier.get(emittedHubblepupIdentifierName);
+
+    const commentText = hubblepupDeclaration?.commentText ?? null;
 
     const parallelErrorList: GenericReceivedProgramError[] =
       commentText !== null
         ? []
         : [
             {
-              name: 'missing-voque-comment',
+              name: 'missing-hubblepup-comment',
               error: new Error(
-                'Voque definitions must have a comment explaining their purpose',
+                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup can start with "Emitted"',
               ),
               reporterLocator,
               sourceLocator: {
                 typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
                 filePath: voqueLocator.filePath,
               },
-              context: null,
+              context: {
+                hubblepupIdentifierName,
+                voqueLocator,
+              },
             },
           ];
 

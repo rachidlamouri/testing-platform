@@ -2,6 +2,10 @@ import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { Voictent } from '../../adapter/voictent';
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
+/**
+ * Contains the AST for a TypeScript file as well as the information needed to
+ * join it back to the source file or other related objects
+ */
 export type ParsedTypeScriptFile = {
   zorn: string;
   filePath: string;

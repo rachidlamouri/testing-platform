@@ -2,6 +2,9 @@ import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVo
 import { Voictent } from '../../../adapter/voictent';
 import { FileNodeMetadata } from './fileNodeMetadata';
 
+/**
+ * Mapping of file node metadata by filepath for easier lookups
+ */
 export type FileNodeMetadataByFilePath = {
   zorn: string;
   grition: Map<string, FileNodeMetadata>;

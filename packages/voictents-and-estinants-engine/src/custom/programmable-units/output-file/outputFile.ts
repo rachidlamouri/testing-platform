@@ -1,6 +1,10 @@
 import { Voque } from '../../../core/engine/voque';
 import { Voictent } from '../../adapter/voictent';
 
+/**
+ * Pre-formatted information to output to the file system under a specified file
+ * extension
+ */
 export type OutputFile = {
   fileName: string;
   fileExtensionSuffix: string;

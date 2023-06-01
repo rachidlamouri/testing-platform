@@ -7,6 +7,10 @@ export type SvgMetadata = {
   document: SvgDocument;
 };
 
+/**
+ * The list of tab labels for a knowledge graph and their corresponding
+ * SvgDocuments
+ */
 export type SvgMetadataList = {
   zorn: string;
   grition: SvgMetadata[];

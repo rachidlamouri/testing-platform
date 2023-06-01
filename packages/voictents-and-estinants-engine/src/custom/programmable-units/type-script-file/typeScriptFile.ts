@@ -3,6 +3,9 @@ import { Voictent } from '../../../type-script-adapter/voictent';
 import { File } from '../file/file';
 import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
 
+/**
+ * A File object with the extension narrowed down to a TypeScript file
+ */
 export type TypeScriptFile = File<FileExtensionSuffixIdentifier.TypeScript>;
 
 export const TYPE_SCRIPT_FILE_GEPP = 'type-script-file';

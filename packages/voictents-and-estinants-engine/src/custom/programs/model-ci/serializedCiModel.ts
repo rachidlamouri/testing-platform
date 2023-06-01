@@ -1,6 +1,9 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 
+/**
+ * The expected ci.sh generated from the CI model
+ */
 export type SerializedCiModel = {
   zorn: string;
   grition: string;

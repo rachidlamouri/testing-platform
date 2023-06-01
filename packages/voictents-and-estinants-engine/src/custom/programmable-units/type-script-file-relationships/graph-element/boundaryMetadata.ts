@@ -33,6 +33,10 @@ export type LimboBoundaryMetadata = {
   >;
 };
 
+/**
+ * Represents an arbitrary grouping of files. This is used to organize the
+ * knowledge graph
+ */
 export type BoundaryMetadata =
   | InternalBoundaryMetadata
   | ExternalBoundaryMetadata

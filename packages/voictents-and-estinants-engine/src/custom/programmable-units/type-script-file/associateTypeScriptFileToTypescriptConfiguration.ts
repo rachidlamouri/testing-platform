@@ -5,6 +5,10 @@ import { Voictent } from '../../adapter/voictent';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
+/**
+ * Corresponds to a tsconfig.json file paired with a source TypeScript file path
+ * that is part of the project defined by the config file
+ */
 export type TypeScriptFileConfiguration = {
   zorn: string;
   sourceFilePath: string;

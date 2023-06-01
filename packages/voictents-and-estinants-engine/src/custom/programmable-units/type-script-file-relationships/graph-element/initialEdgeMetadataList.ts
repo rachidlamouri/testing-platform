@@ -8,6 +8,11 @@ export type InitialEdgeMetadata = {
   head: FileNodeMetadata | ExternalModuleMetadata;
 };
 
+/**
+ * List of information needed to add an edge to a directed graph in the knowledge graph
+ *
+ * @todo this doesn't have to be "initial". There is not other edge metadata
+ */
 export type InitialEdgeMetadataList = {
   zorn: string;
   grition: InitialEdgeMetadata[];

@@ -1,7 +1,11 @@
 import { InMemoryOdeshin2Voque } from '../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../adapter/voictent';
 
-export type SanitySnapshotOdeshin = {
+/**
+ * Information to be committed that is expected to change if a program
+ * fundamentally changes.
+ */
+export type SanitySnapshot = {
   zorn: string;
   grition: unknown;
 };
@@ -12,10 +16,10 @@ export type SanitySnapshotGepp = typeof SANITY_SNAPSHOT_GEPP;
 
 export type SanitySnapshotVoictent = Voictent<
   SanitySnapshotGepp,
-  SanitySnapshotOdeshin
+  SanitySnapshot
 >;
 
 export type SanitySnapshotVoque = InMemoryOdeshin2Voque<
   SanitySnapshotGepp,
-  SanitySnapshotOdeshin
+  SanitySnapshot
 >;

@@ -2,6 +2,10 @@ import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVo
 import { Voictent } from '../../../adapter/voictent';
 import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedGraph';
 
+/**
+ * Information needed to add a directory to a directed graph in the knowledge
+ * graph
+ */
 export type DirectoryMetadata = {
   zorn: string;
   id: string;

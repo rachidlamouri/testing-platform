@@ -2,6 +2,9 @@ import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoict
 import { Voictent } from '../../adapter/voictent';
 import { Directory } from '../file/directory';
 
+/**
+ * The directory whose filepath is the greatest common prefix of all directories
+ */
 export type RootDirectory = Directory;
 
 export const ROOT_DIRECTORY_GEPP = 'root-directory';

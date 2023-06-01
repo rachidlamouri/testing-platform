@@ -1,6 +1,9 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 
+/**
+ * Represents a file system directory
+ */
 export type Directory = {
   zorn: string;
   instanceId: string;

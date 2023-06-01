@@ -3,7 +3,7 @@ import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;
-const errorLimit = 100;
+const errorLimit = 20;
 let isLimitReached = false;
 
 /**

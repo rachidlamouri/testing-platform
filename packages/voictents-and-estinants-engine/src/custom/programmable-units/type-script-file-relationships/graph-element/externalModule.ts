@@ -1,6 +1,9 @@
 import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../../adapter/voictent';
 
+/**
+ * Represents a first or third party node modules
+ */
 export type ExternalModule = {
   zorn: string;
   instanceId: string;

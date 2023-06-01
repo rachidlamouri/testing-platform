@@ -2,6 +2,9 @@ import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVo
 import { Voictent } from '../../../adapter/voictent';
 import { ExternalModuleMetadata } from './externalModuleMetadata';
 
+/**
+ * Mapping of external modules by source path for easier lookups
+ */
 export type ExternalModuleMetadataBySourcePath = {
   zorn: string;
   grition: Map<string, ExternalModuleMetadata>;
