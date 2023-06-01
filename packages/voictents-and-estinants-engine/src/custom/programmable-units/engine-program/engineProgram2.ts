@@ -5,6 +5,9 @@ import { EngineEstinant2 } from './engineEstinant2';
 import { VoictentLocator } from './engineProgramLocator2';
 import { EngineVoque } from './engineVoque';
 
+/**
+ * Represents an engine program in the program modeler
+ */
 export type EngineProgram2 = {
   zorn: string;
   id: string;

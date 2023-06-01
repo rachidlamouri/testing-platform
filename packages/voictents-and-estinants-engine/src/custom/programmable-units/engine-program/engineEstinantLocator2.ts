@@ -24,6 +24,9 @@ export type EngineEstinantBuildAddMetadataForSerializationLocator = {
   index: number;
 };
 
+/**
+ * The information needed to find a transform definition
+ */
 export type EngineEstinantLocator2 =
   | EngineEstinantTopLevelDeclarationLocator
   | EngineEstinantBuildAddMetadataForSerializationLocator;

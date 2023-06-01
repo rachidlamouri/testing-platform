@@ -20,6 +20,9 @@ export type EstinantInput2 = BaseEstinantInputOutput<true, number>;
 
 export type EstinantOutput2 = BaseEstinantInputOutput<false, null>;
 
+/**
+ * Represents a transform for the program modeler
+ */
 export type EngineEstinant2 = {
   zorn: string;
   id: string;

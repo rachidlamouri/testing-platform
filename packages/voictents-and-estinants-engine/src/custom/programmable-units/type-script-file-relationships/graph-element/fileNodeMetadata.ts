@@ -2,6 +2,9 @@ import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVo
 import { Voictent } from '../../../adapter/voictent';
 import { DirectedGraphNode } from '../../graph-visualization/directed-graph/directedGraphNode';
 
+/**
+ * Information needed to add a file to a directed graph in the knowledge graph
+ */
 export type FileNodeMetadata = {
   zorn: string;
   id: string;

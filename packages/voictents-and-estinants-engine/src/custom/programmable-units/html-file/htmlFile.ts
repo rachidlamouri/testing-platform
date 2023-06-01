@@ -3,6 +3,9 @@ import { Voictent } from '../../adapter/voictent';
 import { File } from '../file/file';
 import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
 
+/**
+ * A File object with the extension narrowed down to an html file
+ */
 export type HtmlFile = File<FileExtensionSuffixIdentifier.Html>;
 
 export const HTML_FILE_GEPP = 'html-file';

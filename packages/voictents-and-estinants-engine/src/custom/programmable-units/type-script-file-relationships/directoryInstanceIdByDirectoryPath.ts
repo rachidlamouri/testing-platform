@@ -1,6 +1,9 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 
+/**
+ * A map of directories to their instance id
+ */
 export type DirectoryInstanceIdByDirectoryPath = {
   zorn: string;
   grition: Map<string, string>;

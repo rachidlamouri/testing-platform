@@ -8,6 +8,10 @@ export type VoictentLocator = {
   hasInitialInput: boolean;
 };
 
+/**
+ * The information needed to find the parts of an engine program so that it can
+ * be assembled later into a complete model
+ */
 export type EngineProgramLocator2 = {
   zorn: string;
   programName: string;

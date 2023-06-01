@@ -5,6 +5,10 @@ export type ReceivedEngineVoqueLocator = {
   filePath: string;
 };
 
+/**
+ * The information needed to find a Voque definition, and subsequently a
+ * hubblepup definition
+ */
 export type EmittedEngineVoqueLocator = {
   zorn: string;
   identifierName: string;

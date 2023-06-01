@@ -2,6 +2,10 @@ import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVo
 import { Voictent } from '../../../adapter/voictent';
 import { DirectedGraphNode } from '../../graph-visualization/directed-graph/directedGraphNode';
 
+/**
+ * Information needed to add an external module to a directed graph in the
+ * knowledge graph
+ */
 export type ExternalModuleMetadata = {
   zorn: string;
   id: string;

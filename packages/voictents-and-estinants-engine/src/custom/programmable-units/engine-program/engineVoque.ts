@@ -1,6 +1,11 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 
+/**
+ * Represents a metacollection used by an engine program
+ *
+ * @todo this should be an EngineHubblepup now. It should go EngineVoqueLocator -> EngineHubblepup
+ */
 export type EngineVoque = {
   zorn: string;
   id: string;

@@ -1,6 +1,10 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Voictent } from '../../adapter/voictent';
 
+/**
+ * See https://graphviz.org/doc/info/lang.html for the specification of
+ * Graphviz's DOT language
+ */
 export type GraphvizCode = {
   zorn: string;
   grition: string;

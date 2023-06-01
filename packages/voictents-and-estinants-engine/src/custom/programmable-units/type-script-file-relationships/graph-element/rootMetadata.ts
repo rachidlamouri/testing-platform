@@ -3,6 +3,9 @@ import { Voictent } from '../../../adapter/voictent';
 import { DirectedGraph } from '../../graph-visualization/directed-graph/directedGraph';
 import { InitialEdgeMetadata } from './initialEdgeMetadataList';
 
+/**
+ * List of information needed to add a root graph to a directed graph in the knowledge graph
+ */
 export type RootMetadata = {
   zorn: string;
   id: string;

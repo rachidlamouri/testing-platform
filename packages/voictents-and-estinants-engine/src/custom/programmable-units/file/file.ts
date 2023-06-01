@@ -9,6 +9,9 @@ export type FileName = {
   kebabCase: string;
 };
 
+/**
+ * Represents a file system file and encapuslates some naming conventions
+ */
 export type File<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
   TAdditionalMetadata extends object | null = null,

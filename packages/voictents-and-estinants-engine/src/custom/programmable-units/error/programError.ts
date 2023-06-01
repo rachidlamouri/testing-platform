@@ -48,6 +48,10 @@ export type ReportedProgramError<
 export type GenericReceivedProgramError =
   ReceivedProgramError<GenericProgramErrorReporterLocator>;
 
+/**
+ * The information needed to identify the source of an error, the reporter of an
+ * error and any surrounding context
+ */
 export type EmittedProgramError<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > = {
