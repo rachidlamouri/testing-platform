@@ -1,1 +1,1 @@
-export type Tuple<T = unknown> = readonly T[];
+export type Tuple<T> = readonly T[];
