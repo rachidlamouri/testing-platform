@@ -7,7 +7,11 @@ export type TypeScriptFileImport = {
   specifierList: string[];
 };
 
-// TODO: fix this weird nested list type
+/**
+ * A list of useful metadata for every import in a TypeScript file
+ *
+ * @todo fix this weird nested list type
+ */
 export type TypeScriptFileImportList = {
   zorn: string;
   list: TypeScriptFileImport[];
