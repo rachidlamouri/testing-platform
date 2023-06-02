@@ -1,10 +1,10 @@
 import { Merge } from 'type-fest';
 import { Croader2, Croarder } from './croarder';
 import { Framation, Framation2 } from './framation';
-import { Gepp } from '../voictent/gepp';
+import { GenericGepp } from '../voictent/gepp';
 
 export type LeftAppreffinge = {
-  gepp: Gepp;
+  gepp: GenericGepp;
   // determines if the input acts on the voictent as a whole or each item individually
   isWibiz?: boolean;
 };

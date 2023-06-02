@@ -1,4 +1,4 @@
-import { Gepp } from '../engine-shell/voictent/gepp';
+import { GenericGepp } from '../engine-shell/voictent/gepp';
 import { SpreadN } from '../../utilities/spreadN';
 import { VoictentItemLanbe2 } from '../engine-shell/voictent/lanbe';
 import { GenericOdeshin2 } from '../../custom/adapter/odeshin2';
@@ -18,12 +18,12 @@ type InMemoryOdeshin2IndexByName = SpreadN<
 >;
 
 export type InMemoryOdeshin2Voque<
-  TGepp extends Gepp,
+  TGepp extends GenericGepp,
   THubblepup extends GenericOdeshin2,
 > = InMemoryVoque<TGepp, THubblepup, THubblepup, InMemoryOdeshin2IndexByName>;
 
 export type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
-  Gepp,
+  GenericGepp,
   GenericOdeshin2
 >;
 

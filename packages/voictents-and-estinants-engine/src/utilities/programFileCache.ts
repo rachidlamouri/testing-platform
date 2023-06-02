@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { Gepp } from '../core/engine-shell/voictent/gepp';
+import { GenericGepp } from '../core/engine-shell/voictent/gepp';
 import {
   FileExtensionSuffixIdentifier,
   KnownFileExtensionSuffixIdentifier,
@@ -27,14 +27,14 @@ export type SerializedHubblepup = {
 };
 
 type SerializedHubblepupWriterInput = {
-  voictentGepp: Gepp;
+  voictentGepp: GenericGepp;
   nestedPath: string;
   extensionlessFileName: string;
   serializedHubblepup: SerializedHubblepup;
 };
 
 type VoictentDirectoryDeleterInput = {
-  voictentGepp: Gepp;
+  voictentGepp: GenericGepp;
 };
 
 type NamespacedFilePathAccessorInput = {
@@ -45,7 +45,7 @@ type NamespacedFilePathAccessorInput = {
 };
 
 type NamespacedVoictentFilePathAccessorInput = {
-  voictentGepp: Gepp;
+  voictentGepp: GenericGepp;
   nestedPath: string;
   extensionlessFileName: string;
   fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;

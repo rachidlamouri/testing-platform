@@ -1,8 +1,8 @@
 import { Merge } from 'type-fest';
 import { Voque } from '../../../core/engine/voque';
 import { AbstractSerializableIndexByName } from '../../../example-programs/abstractSerializableVoictent';
-import { Gepp } from '../../../type-script-adapter/gepp';
-import { Hubblepup } from '../../../type-script-adapter/hubblepup';
+import { GenericGepp } from '../../../core/engine-shell/voictent/gepp';
+import { Hubblepup } from '../../../core/engine-shell/quirm/hubblepup';
 
 type Zornable = {
   zorn: string;
@@ -14,7 +14,7 @@ export type ZornableIndexByName = Merge<
 >;
 
 export type ZornableVoque<
-  TGepp extends Gepp,
+  TGepp extends GenericGepp,
   TReceivedHubblepup extends Hubblepup,
   TEmittedHubblepup extends Hubblepup,
   TEmittedVoictent,

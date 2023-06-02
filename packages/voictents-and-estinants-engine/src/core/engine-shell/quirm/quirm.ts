@@ -1,5 +1,5 @@
 import { List } from '../../../utilities/semantic-types/list';
-import { Gepp } from '../voictent/gepp';
+import { GenericGepp } from '../voictent/gepp';
 import { Hubblepup } from './hubblepup';
 
 /**
@@ -7,7 +7,7 @@ import { Hubblepup } from './hubblepup';
  * a Hubblepup to a Voictent via a Gepp.
  */
 export type Quirm = {
-  gepp: Gepp;
+  gepp: GenericGepp;
   hubblepup: Hubblepup;
 };
 

@@ -22,7 +22,7 @@ import {
   GenericEstinant2,
   UnsafeEstinant2Tuple,
 } from '../engine-shell/estinant/estinant';
-import { Gepp, GeppSet } from '../engine-shell/voictent/gepp';
+import { GenericGepp, GenericGeppSet } from '../engine-shell/voictent/gepp';
 import {
   GenericIndexedHubblepup,
   GenericIndexedHubblepupTuple,
@@ -81,7 +81,7 @@ const nanosecondsToSeconds = (nanoseconds: bigint): bigint =>
 type TickSeries<TValue extends number | bigint> = TValue[];
 
 type VoictentTickSeriesConfiguration = {
-  gepp: Gepp;
+  gepp: GenericGepp;
   voictentLanbe: VoictentLanbe | null;
   voictentItemLanbe: VoictentItemLanbe | GenericVoictentItemLanbe2 | null;
   voictentTickSeries: TickSeries<number>;
@@ -89,7 +89,7 @@ type VoictentTickSeriesConfiguration = {
 };
 
 type EstinantConnectionTickSeriesConfiguration = {
-  gepp: Gepp;
+  gepp: GenericGepp;
   lanbe: Lanbe;
   tickSeries: TickSeries<number>;
 };
@@ -127,7 +127,7 @@ export const digikikify = ({
   onFinish,
   strategy = DigikikifierStrategy.WaitForAllDependencies,
 }: DigikikifierInput): void => {
-  const inputGeppSet: GeppSet = new Set(
+  const inputGeppSet: GenericGeppSet = new Set(
     inputVoictentList.map((voictent) => {
       return voictent.gepp;
     }),
@@ -805,7 +805,7 @@ export const digikikify = ({
       throw Error('Unsupported Platomity 1');
     }
 
-    const virokByGepp = new Map<Gepp, Virok>();
+    const virokByGepp = new Map<GenericGepp, Virok>();
 
     inputVoictentList.forEach((voictent) => {
       const virok: Virok = {

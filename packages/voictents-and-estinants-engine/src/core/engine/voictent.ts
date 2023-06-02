@@ -5,7 +5,7 @@ import {
   VoictentLanbe,
 } from '../engine-shell/voictent/lanbe';
 import { Hubblepup } from '../engine-shell/quirm/hubblepup';
-import { Gepp } from '../engine-shell/voictent/gepp';
+import { GenericGepp } from '../engine-shell/voictent/gepp';
 import { GenericVoictent2 } from './voictent2';
 
 class MissingLanbeError extends Error {
@@ -43,7 +43,7 @@ export class Voictent implements GenericVoictent2 {
     thisTick: null,
   };
 
-  constructor(public readonly gepp: Gepp) {}
+  constructor(public readonly gepp: GenericGepp) {}
 
   addHubblepup(hubblepup: Hubblepup): void {
     this.receivedHubblepup.thisTick = true;
