@@ -161,6 +161,12 @@ export const CI_MODEL: CiModel = {
           prefaceDescription: 'WIP',
         },
         {
+          programName: 'find-unused-exports',
+          programFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programs/find-unused-exports/findUnusedExports.ts',
+          prefaceDescription: 'Linting unused exports',
+        },
+        {
           programName: 'model-ci',
           programFilePath:
             'packages/voictents-and-estinants-engine/src/custom/programs/model-ci/modelCi.ts',
