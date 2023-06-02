@@ -8,7 +8,7 @@ import {
   AbstractSerializable,
 } from './abstractSerializableVoictent';
 
-export type SerializerBuilderInput<
+type SerializerBuilderInput<
   TInputVoictent extends GenericAbstractSerializableSourceVoque,
   TOutputVoictent extends GenericAbstractSerializableVoque,
 > = {

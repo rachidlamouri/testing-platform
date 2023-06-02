@@ -9,34 +9,29 @@ import {
 // const NAMESPACE_REGEX = /^[a-z-]+$/;
 const NAMESPACE_REGEX = /^[A-Za-z-]+$/;
 
-export type FileCacheInput = {
+type FileCacheInput = {
   rootDirectoryPath: string;
   namespace: string;
 };
 
-export type SerializedHubblepup = {
-  text: string;
-  fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
-};
-
-export type NamespacedFilePathAccessorInput = {
+type NamespacedFilePathAccessorInput = {
   nestedPath: string;
   extensionlessFileName: string;
   fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
 };
 
-export type NamespacedSubdirectoryPathAccessorInput = {
+type NamespacedSubdirectoryPathAccessorInput = {
   nestedPath: string;
 };
 
-export type NamespacedFilePathWriterInput = {
+type NamespacedFilePathWriterInput = {
   nestedPath: string;
   extensionlessFileName: string;
   fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
   text: string;
 };
 
-export type NamespacedFileNodeDeleterInput = {
+type NamespacedFileNodeDeleterInput = {
   nestedPath: string;
 };
 

@@ -29,7 +29,7 @@ type NextAdaptedRightInputVickenTuple<
 
 type EmptyAdaptedOutputVickenTuple = [];
 
-export type RightInputVoictentAppreffingeBuilder2<
+type RightInputVoictentAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
 > = <TRightInputVoque extends GenericVoque>(

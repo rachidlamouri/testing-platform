@@ -7,7 +7,7 @@ import {
   TypeScriptTypeParameterNodeTuple,
 } from './isTypeScriptTypeParameterInstantiation';
 
-export type ParameterizedCallExpression<
+type ParameterizedCallExpression<
   TTypeScriptTypeParameterNodeTuple extends TypeScriptTypeParameterNodeTuple = TypeScriptTypeParameterNodeTuple,
 > = TSESTree.CallExpression & {
   typeParameters: TypeScriptTypeParameterInstantiation<TTypeScriptTypeParameterNodeTuple>;

@@ -27,9 +27,7 @@ type EmptyAdaptedRightInputVickenTuple = [];
 
 type EmptyAdaptedOutputVickenTuple = [];
 
-export type LeftInputVoictentAppreffingeBuilder2 = <
-  TInputVoque extends GenericVoque,
->(
+type LeftInputVoictentAppreffingeBuilder2 = <TInputVoque extends GenericVoque>(
   partialLeftAppreffinge: PartialLeftInputAppreffinge<TInputVoque>,
 ) => SpreadN<
   [

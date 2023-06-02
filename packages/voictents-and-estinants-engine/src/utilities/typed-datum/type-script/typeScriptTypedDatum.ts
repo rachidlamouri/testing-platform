@@ -20,47 +20,47 @@ type BaseTypeScriptTypedDatum<
   datum: TDatum;
 };
 
-export type TypeScriptTypedBigint = BaseTypeScriptTypedDatum<
+type TypeScriptTypedBigint = BaseTypeScriptTypedDatum<
   TypeScriptDatumTypeName.bigint,
   bigint
 >;
 
-export type TypeScriptTypedBoolean = BaseTypeScriptTypedDatum<
+type TypeScriptTypedBoolean = BaseTypeScriptTypedDatum<
   TypeScriptDatumTypeName.boolean,
   boolean
 >;
 
-export type TypeScriptTypedFunction = BaseTypeScriptTypedDatum<
+type TypeScriptTypedFunction = BaseTypeScriptTypedDatum<
   TypeScriptDatumTypeName.function,
   TypeScriptFunction
 >;
 
-export type TypeScriptTypedNumber = BaseTypeScriptTypedDatum<
+type TypeScriptTypedNumber = BaseTypeScriptTypedDatum<
   TypeScriptDatumTypeName.number,
   number
 >;
 
-export type TypeScriptTypedObject = BaseTypeScriptTypedDatum<
+type TypeScriptTypedObject = BaseTypeScriptTypedDatum<
   TypeScriptDatumTypeName.object,
   TypeScriptObject
 >;
 
-export type TypeScriptTypedString = BaseTypeScriptTypedDatum<
+type TypeScriptTypedString = BaseTypeScriptTypedDatum<
   TypeScriptDatumTypeName.string,
   string
 >;
 
-export type TypeScriptTypedSymbol = BaseTypeScriptTypedDatum<
+type TypeScriptTypedSymbol = BaseTypeScriptTypedDatum<
   TypeScriptDatumTypeName.symbol,
   symbol
 >;
 
-export type TypeScriptTypedUndefined = BaseTypeScriptTypedDatum<
+type TypeScriptTypedUndefined = BaseTypeScriptTypedDatum<
   TypeScriptDatumTypeName.undefined,
   undefined
 >;
 
-export type TypeScriptTypedDatumOptionTuple = readonly [
+type TypeScriptTypedDatumOptionTuple = readonly [
   TypeScriptTypedBigint,
   TypeScriptTypedBoolean,
   TypeScriptTypedFunction,
@@ -71,7 +71,7 @@ export type TypeScriptTypedDatumOptionTuple = readonly [
   TypeScriptTypedUndefined,
 ];
 
-export type TypeScriptTypedDatum = TypeScriptTypedDatumOptionTuple[number];
+type TypeScriptTypedDatum = TypeScriptTypedDatumOptionTuple[number];
 
 export const getTypeScriptTypedDatum = (
   datum: unknown,

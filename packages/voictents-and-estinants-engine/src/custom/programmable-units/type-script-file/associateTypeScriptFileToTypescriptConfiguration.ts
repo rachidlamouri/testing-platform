@@ -1,7 +1,6 @@
 import { posix } from 'path';
 import fs from 'fs';
 import { TYPE_SCRIPT_FILE_GEPP, TypeScriptFileVoque } from './typeScriptFile';
-import { Voictent } from '../../adapter/voictent';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
@@ -9,7 +8,7 @@ import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoict
  * Corresponds to a tsconfig.json file paired with a source TypeScript file path
  * that is part of the project defined by the config file
  */
-export type TypeScriptFileConfiguration = {
+type TypeScriptFileConfiguration = {
   zorn: string;
   sourceFilePath: string;
   filePath: string;
@@ -19,13 +18,8 @@ export type TypeScriptFileConfiguration = {
 export const TYPE_SCRIPT_FILE_CONFIGURATION_GEPP =
   'type-script-file-configuration';
 
-export type TypeScriptFileConfigurationGepp =
+type TypeScriptFileConfigurationGepp =
   typeof TYPE_SCRIPT_FILE_CONFIGURATION_GEPP;
-
-export type TypeScriptFileConfigurationVoictent = Voictent<
-  TypeScriptFileConfigurationGepp,
-  TypeScriptFileConfiguration
->;
 
 export type TypeScriptFileConfigurationVoque = InMemoryOdeshin2Voque<
   TypeScriptFileConfigurationGepp,

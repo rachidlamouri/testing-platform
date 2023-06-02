@@ -1,5 +1,4 @@
 import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
-import { Voictent } from '../../adapter/voictent';
 
 type ProgramTest = {
   programName: string;
@@ -16,7 +15,7 @@ type ProgramTestGroup = {
 /**
  * The information needed to build the expected ci.sh file
  */
-export type CiModel = {
+type CiModel = {
   zorn: string;
   initialCommandList: string[];
   finalCommandList: string[];
@@ -25,9 +24,7 @@ export type CiModel = {
 
 export const CI_MODEL_GEPP = 'ci-model';
 
-export type CiModelGepp = typeof CI_MODEL_GEPP;
-
-export type CiModelVoictent = Voictent<CiModelGepp, CiModel>;
+type CiModelGepp = typeof CI_MODEL_GEPP;
 
 export type CiModelVoque = StandardInMemoryVoque<CiModelGepp, CiModel>;
 

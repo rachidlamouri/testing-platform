@@ -1,5 +1,4 @@
 import { Merge, SetOptional } from 'type-fest';
-import { Voictent } from '../../../adapter/voictent';
 import { DirectedGraphEdge } from './directedGraphEdge';
 import { DirectedGraphNode } from './directedGraphNode';
 import { AttributeByKey as BaseAttributeByKey } from './attribute';
@@ -35,7 +34,7 @@ type GraphAttributeByKey = Merge<
   GraphSpecificAttributeByKey
 >;
 
-export type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
+type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
 
 type SubgraphSpecificAttributeByKey = {
   style: DirectedGraphStyle;
@@ -47,7 +46,7 @@ type SubgraphAttributeByKey = Merge<
   SubgraphSpecificAttributeByKey
 >;
 
-export type PartialSubgraphAttributeByKey = SetOptional<
+type PartialSubgraphAttributeByKey = SetOptional<
   SubgraphAttributeByKey,
   Exclude<keyof SubgraphAttributeByKey, 'id'>
 >;
@@ -78,9 +77,7 @@ export type DirectedGraph = {
 
 export const DIRECTED_GRAPH_GEPP = 'directed-graph';
 
-export type DirectedGraphGepp = typeof DIRECTED_GRAPH_GEPP;
-
-export type DirectedGraphVoictent = Voictent<DirectedGraphGepp, DirectedGraph>;
+type DirectedGraphGepp = typeof DIRECTED_GRAPH_GEPP;
 
 export type DirectedGraphVoque = InMemoryOdeshin2Voque<
   DirectedGraphGepp,

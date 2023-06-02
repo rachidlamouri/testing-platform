@@ -17,7 +17,7 @@ export type EmittedEngineVoqueLocator = {
 
 export const ENGINE_VOQUE_LOCATOR_GEPP = 'engine-voque-locator';
 
-export type EngineVoqueLocatorGepp = typeof ENGINE_VOQUE_LOCATOR_GEPP;
+type EngineVoqueLocatorGepp = typeof ENGINE_VOQUE_LOCATOR_GEPP;
 
 export type EngineVoqueLocatorVoque = ZornableVoque<
   EngineVoqueLocatorGepp,

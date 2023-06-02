@@ -3,7 +3,7 @@ import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { OutputVicken as CoreOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
 import { ZornTuple } from '../../../utilities/semantic-types/zorn';
 
-export enum AdaptedVickenTypeName {
+enum AdaptedVickenTypeName {
   Output = 'Output',
 }
 
@@ -30,16 +30,15 @@ export type AdaptedLeftInputHubblepupVicken<TVoque extends GenericVoque> =
 export type GenericAdaptedLeftInputHubblepupVicken =
   AdaptedLeftInputHubblepupVicken<GenericVoque>;
 
-export type AdaptedLeftInputIndexedHubblepupVicken<
-  TVoque extends GenericVoque,
-> = BaseLeftInputVicken<
-  TVoque,
-  TVoque['indexedEmittedHubblepup'],
-  false,
-  TVoque['indexedEmittedHubblepup']
->;
+type AdaptedLeftInputIndexedHubblepupVicken<TVoque extends GenericVoque> =
+  BaseLeftInputVicken<
+    TVoque,
+    TVoque['indexedEmittedHubblepup'],
+    false,
+    TVoque['indexedEmittedHubblepup']
+  >;
 
-export type GenericAdaptedLeftInputIndexedHubblepupVicken =
+type GenericAdaptedLeftInputIndexedHubblepupVicken =
   AdaptedLeftInputIndexedHubblepupVicken<GenericVoque>;
 
 export type AdaptedLeftInputVoictentVicken<TVoque extends GenericVoque> =
@@ -50,7 +49,7 @@ export type AdaptedLeftInputVoictentVicken<TVoque extends GenericVoque> =
     TVoque['emittedVoictent']
   >;
 
-export type GenericAdaptedLeftInputVoictentVicken =
+type GenericAdaptedLeftInputVoictentVicken =
   AdaptedLeftInputVoictentVicken<GenericVoque>;
 
 export type GenericAdaptedLeftInputVicken =
@@ -74,7 +73,7 @@ export type AdaptedRightInputHubblepupTupleVicken<
   zornTupleOption: TZornTuple[number];
 };
 
-export type GenericAdaptedRightInputHubblepupTupleVicken =
+type GenericAdaptedRightInputHubblepupTupleVicken =
   AdaptedRightInputHubblepupTupleVicken<GenericVoque, ZornTuple>;
 
 export type AdaptedRightInputVoictentVicken<
@@ -88,10 +87,10 @@ export type AdaptedRightInputVoictentVicken<
   zornTupleOption: never;
 };
 
-export type GenericAdaptedRightInputVoictentVicken =
+type GenericAdaptedRightInputVoictentVicken =
   AdaptedRightInputVoictentVicken<GenericVoque>;
 
-export type GenericAdaptedRightInputVicken =
+type GenericAdaptedRightInputVicken =
   | GenericAdaptedRightInputHubblepupTupleVicken
   | GenericAdaptedRightInputVoictentVicken;
 

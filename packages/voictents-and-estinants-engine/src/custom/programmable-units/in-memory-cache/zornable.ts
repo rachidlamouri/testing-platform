@@ -2,9 +2,9 @@ import { Merge } from 'type-fest';
 import { Voque } from '../../../core/engine/voque';
 import { AbstractSerializableIndexByName } from '../../../example-programs/abstractSerializableVoictent';
 import { Gepp } from '../../../type-script-adapter/gepp';
-import { Hubblepup } from '../../adapter/hubblepup';
+import { Hubblepup } from '../../../type-script-adapter/hubblepup';
 
-export type Zornable = {
+type Zornable = {
   zorn: string;
 };
 
@@ -24,11 +24,4 @@ export type ZornableVoque<
   TEmittedHubblepup,
   ZornableIndexByName,
   TEmittedVoictent
->;
-
-export type GenericZornableVoque = ZornableVoque<
-  Gepp,
-  Hubblepup,
-  Hubblepup,
-  unknown
 >;

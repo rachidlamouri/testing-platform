@@ -5,5 +5,3 @@ import { Straline } from '../../utilities/semantic-types/straline';
  * Therefore, it is like a Hubblepup, but it is a property of a special type of Hubblepup
  */
 export type Grition<TGrition extends Straline = Straline> = TGrition;
-
-export type GritionTuple = readonly Grition[];

@@ -6,5 +6,3 @@ import { Tuple } from './tuple';
 export type Straline = unknown;
 
 export type StralineTuple = Tuple<Straline>;
-
-export type StralineObject = object;

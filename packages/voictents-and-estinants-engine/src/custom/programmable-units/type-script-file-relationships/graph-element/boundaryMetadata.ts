@@ -1,9 +1,8 @@
 import { SetRequired } from 'type-fest';
-import { Voictent } from '../../../adapter/voictent';
 import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedGraph';
 import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 
-export type InternalBoundaryMetadata = {
+type InternalBoundaryMetadata = {
   zorn: string;
   isInternal: true;
   id: string;
@@ -11,7 +10,7 @@ export type InternalBoundaryMetadata = {
   attributeByKey: Omit<DirectedSubgraph['attributeByKey'], 'id'>;
 };
 
-export type ExternalBoundaryMetadata = {
+type ExternalBoundaryMetadata = {
   zorn: string;
   isInternal: false;
   id: string;
@@ -22,7 +21,7 @@ export type ExternalBoundaryMetadata = {
   >;
 };
 
-export type LimboBoundaryMetadata = {
+type LimboBoundaryMetadata = {
   zorn: string;
   isInternal: null;
   id: string;
@@ -44,12 +43,7 @@ export type BoundaryMetadata =
 
 export const BOUNDARY_METADATA_GEPP = 'boundary-metadata';
 
-export type BoundaryMetadataGepp = typeof BOUNDARY_METADATA_GEPP;
-
-export type BoundaryMetadataVoictent = Voictent<
-  BoundaryMetadataGepp,
-  BoundaryMetadata
->;
+type BoundaryMetadataGepp = typeof BOUNDARY_METADATA_GEPP;
 
 export type BoundaryMetadataVoque = InMemoryOdeshin2Voque<
   BoundaryMetadataGepp,

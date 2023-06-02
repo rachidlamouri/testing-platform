@@ -41,12 +41,12 @@ export type SerializeableNullDatum = {
   value: null;
 };
 
-export type SerializeableUndefinedDatum = {
+type SerializeableUndefinedDatum = {
   typeName: CustomDatumTypeName.Undefined;
   value: undefined;
 };
 
-export type SerializeableNullNodeDatum =
+type SerializeableNullNodeDatum =
   | SerializeableNullDatum
   | SerializeableUndefinedDatum;
 
@@ -56,17 +56,17 @@ export type SerializeableNullNode = BaseSerializeableNode<
 >;
 
 // Number
-export type SerializeablBigIntegerDatum = {
+type SerializeablBigIntegerDatum = {
   typeName: CustomDatumTypeName.BigInteger;
   value: bigint;
 };
 
-export type SerializeableNumberDatum = {
+type SerializeableNumberDatum = {
   typeName: CustomDatumTypeName.Number;
   value: number;
 };
 
-export type SerializeableNumberNodeDatum =
+type SerializeableNumberNodeDatum =
   | SerializeablBigIntegerDatum
   | SerializeableNumberDatum;
 
@@ -76,27 +76,25 @@ export type SerializeableNumberNode = BaseSerializeableNode<
 >;
 
 // String
-export type SerializeableMultilineStringDatum = {
+type SerializeableMultilineStringDatum = {
   typeName: CustomDatumTypeName.String;
   lineList: string[];
   isMultiline: true;
 };
 
-export type SerializeableSingeLineStringMetadata<
-  TValue extends string = string,
-> = {
+type SerializeableSingeLineStringMetadata<TValue extends string = string> = {
   typeName: CustomDatumTypeName.String;
   value: TValue;
   isMultiline: false;
 };
 
-export type SerializeableSymbolMetadata = {
+type SerializeableSymbolMetadata = {
   typeName: CustomDatumTypeName.Symbol;
   description: string;
   referenceId: string;
 };
 
-export type SerializeableStringNodeMetadata =
+type SerializeableStringNodeMetadata =
   | SerializeableMultilineStringDatum
   | SerializeableSingeLineStringMetadata
   | SerializeableSymbolMetadata;
@@ -125,41 +123,41 @@ export const isSimpleObjectEntryKey = (
     CustomDatumTypeName.Symbol,
   ].includes(getCustomTypedDatum(entry[0]).typeName);
 
-export type SerializeableCustomObjectInstanceMetadata = {
+type SerializeableCustomObjectInstanceMetadata = {
   typeName: CustomDatumTypeName.CustomObjectInstance;
   isSimple: true;
   entryList: SimpleSerializeableObjectEntry[];
   prototypeNameTuple: Tuple<string>;
 };
 
-export type SerializeableFunctionMetadata = {
+type SerializeableFunctionMetadata = {
   typeName: CustomDatumTypeName.Function;
   isSimple: true;
   entryList: SimpleSerializeableObjectEntry[];
 };
 
-export type SerializeableSimpleMapMetadata = {
+type SerializeableSimpleMapMetadata = {
   typeName: CustomDatumTypeName.Map;
   isSimple: true;
   entryList: SimpleSerializeableObjectEntry[];
   prototypeNameTuple: Tuple<string>;
 };
 
-export type SerializeableComplexMapMetadata = {
+type SerializeableComplexMapMetadata = {
   typeName: CustomDatumTypeName.Map;
   isSimple: false;
   entryList: SerializeableListNode;
   prototypeNameTuple: Tuple<string>;
 };
 
-export type SerializeableRootObjectInstanceMetadata = {
+type SerializeableRootObjectInstanceMetadata = {
   typeName: CustomDatumTypeName.RootObjectInstance;
   isSimple: true;
   entryList: SimpleSerializeableObjectEntry[];
   prototypeNameTuple: Tuple<string>;
 };
 
-export type SerializeableObjectNodeMetadata =
+type SerializeableObjectNodeMetadata =
   | SerializeableCustomObjectInstanceMetadata
   | SerializeableFunctionMetadata
   | SerializeableSimpleMapMetadata

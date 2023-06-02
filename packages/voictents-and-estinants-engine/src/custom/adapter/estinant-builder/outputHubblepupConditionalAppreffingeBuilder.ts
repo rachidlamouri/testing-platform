@@ -38,7 +38,7 @@ type PartialOutputAppreffinge<
   >;
 };
 
-export type OutputHubblepupConditionalAppreffingeBuilder<
+type OutputHubblepupConditionalAppreffingeBuilder<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = <TOutputVoque extends GenericVoque>(

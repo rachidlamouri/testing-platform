@@ -1,4 +1,3 @@
-import { Voictent } from '../../adapter/voictent';
 import {
   ComparisonConfigurationTypeName,
   FilePathAccessorInput,
@@ -8,18 +7,13 @@ import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 /**
  * The information needed to traverse the file system.
  */
-export type FileSystemObjectEnumeratorConfiguration = FilePathAccessorInput;
+type FileSystemObjectEnumeratorConfiguration = FilePathAccessorInput;
 
 export const FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP =
   'file-system-object-enumerator-configuration';
 
-export type FileSystemObjectEnumeratorConfigurationGepp =
+type FileSystemObjectEnumeratorConfigurationGepp =
   typeof FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP;
-
-export type FileSystemObjectEnumeratorConfigurationVoictent = Voictent<
-  FileSystemObjectEnumeratorConfigurationGepp,
-  FileSystemObjectEnumeratorConfiguration
->;
 
 export type FileSystemObjectEnumeratorConfigurationVoque =
   StandardInMemoryVoque<

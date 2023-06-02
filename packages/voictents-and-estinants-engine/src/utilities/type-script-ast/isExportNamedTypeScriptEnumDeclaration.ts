@@ -1,10 +1,9 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import { TypeScriptNode, isNode } from './isNode';
 
-export type ExportNamedTypeScriptEnumDeclaration =
-  TSESTree.ExportNamedDeclaration & {
-    declaration: TSESTree.TSEnumDeclaration;
-  };
+type ExportNamedTypeScriptEnumDeclaration = TSESTree.ExportNamedDeclaration & {
+  declaration: TSESTree.TSEnumDeclaration;
+};
 
 export const isExportNamedTypeScriptEnumDeclaration = (
   node: TypeScriptNode,

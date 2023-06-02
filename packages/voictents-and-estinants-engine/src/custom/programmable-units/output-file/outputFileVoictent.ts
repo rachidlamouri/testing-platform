@@ -6,7 +6,7 @@ import {
 import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractInMemoryVoictent2';
 import { OUTPUT_FILE_GEPP, OutputFile, OutputFileVoque } from './outputFile';
 
-export type OutputFileVoictentConstructorInput = {
+type OutputFileVoictentConstructorInput = {
   programFileCache: ProgramFileCache;
 };
 

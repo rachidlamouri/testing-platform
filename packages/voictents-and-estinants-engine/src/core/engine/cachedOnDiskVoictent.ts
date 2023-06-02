@@ -40,9 +40,9 @@ export type CacheableAccessor<TGrition extends Grition> = BaseCacheable<
   () => TGrition
 >;
 
-export type CachedCacheable<TGrition extends Grition> = BaseCacheable<TGrition>;
+type CachedCacheable<TGrition extends Grition> = BaseCacheable<TGrition>;
 
-export type CachedOnDiskIndexByName = AbstractSerializableIndexByName;
+type CachedOnDiskIndexByName = AbstractSerializableIndexByName;
 
 export type CachedOnDiskVoque<
   TGepp extends Gepp,
@@ -55,9 +55,9 @@ export type CachedOnDiskVoque<
   CachedCacheable<TGrition>[]
 >;
 
-export type GenericCachedOnDiskVoque = CachedOnDiskVoque<Gepp, Json>;
+type GenericCachedOnDiskVoque = CachedOnDiskVoque<Gepp, Json>;
 
-export type CachedOnDiskVoictentConstructorInput<
+type CachedOnDiskVoictentConstructorInput<
   TVoque extends GenericCachedOnDiskVoque,
 > = {
   nameSpace: string;

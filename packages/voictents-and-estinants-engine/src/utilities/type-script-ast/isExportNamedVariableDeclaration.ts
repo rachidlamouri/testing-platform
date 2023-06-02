@@ -4,7 +4,7 @@ import {
   isIdentifiableVariableDeclaration,
 } from './isIdentifiableVariableDeclaration';
 
-export type ExportNamedVariableDeclaration = TSESTree.ExportNamedDeclaration & {
+type ExportNamedVariableDeclaration = TSESTree.ExportNamedDeclaration & {
   declaration: IdentifiableVariableDeclaration;
 };
 

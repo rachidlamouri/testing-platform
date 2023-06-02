@@ -1,4 +1,4 @@
-export type ListSplitterParameter<TElementA, TElementB> = {
+type ListSplitterParameter<TElementA, TElementB> = {
   list: (TElementA | TElementB)[];
   isElementA: (element: TElementA | TElementB) => element is TElementA;
   accumulatorA: TElementA[];

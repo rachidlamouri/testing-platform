@@ -51,7 +51,7 @@ type PinbetunfOutput<
       >
     >;
 
-export type PinbetunfBuilder2<
+type PinbetunfBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,

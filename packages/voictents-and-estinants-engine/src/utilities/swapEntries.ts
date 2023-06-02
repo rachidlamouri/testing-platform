@@ -1,4 +1,4 @@
-export type ObjectWithSwappedEntries<TObject extends Record<string, string>> = {
+type ObjectWithSwappedEntries<TObject extends Record<string, string>> = {
   [Key in keyof TObject as TObject[Key]]: Key;
 };
 

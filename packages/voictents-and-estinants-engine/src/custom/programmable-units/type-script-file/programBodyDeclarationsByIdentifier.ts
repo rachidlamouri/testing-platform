@@ -1,4 +1,3 @@
-import { Voictent } from '../../adapter/voictent';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
@@ -7,11 +6,6 @@ import {
   IdentifiableCommentedProgramBodyDeclaration,
 } from './commentedProgramBodyDeclarationList';
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
-
-export type ProgramBodyDeclarationsByIdentifierEntry = [
-  string,
-  CommentedProgramBodyDeclaration,
-];
 
 // TODO: fix this weird nested map type
 export type ProgramBodyDeclarationsByIdentifier = {
@@ -22,13 +16,8 @@ export type ProgramBodyDeclarationsByIdentifier = {
 export const PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP =
   'program-body-statements-by-identifier';
 
-export type ProgramBodyDeclarationsByIdentifierGepp =
+type ProgramBodyDeclarationsByIdentifierGepp =
   typeof PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP;
-
-export type ProgramBodyDeclarationsByIdentifierVoictent = Voictent<
-  ProgramBodyDeclarationsByIdentifierGepp,
-  ProgramBodyDeclarationsByIdentifier
->;
 
 export type ProgramBodyDeclarationsByIdentifierVoque = InMemoryOdeshin2Voque<
   ProgramBodyDeclarationsByIdentifierGepp,

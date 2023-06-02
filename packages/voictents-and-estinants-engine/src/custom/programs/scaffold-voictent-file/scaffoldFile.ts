@@ -54,7 +54,6 @@ export const scaffoldFile = buildEstinant({
     const geppCodeName = `${screamingSnakeCaseName}_GEPP`;
     const geppLiteral = kebabCaseName;
     const geppTypeName = `${customTypeName}Gepp`;
-    const voictentTypeName = `${customTypeName}Voictent`;
     const voqueTypeName = `${customTypeName}Voque`;
 
     const prependedContent = [
@@ -65,8 +64,6 @@ export const scaffoldFile = buildEstinant({
       `export const ${geppCodeName} = '${geppLiteral}'`,
       '',
       `export type ${geppTypeName} = typeof ${geppCodeName}`,
-      '',
-      `export type ${voictentTypeName} = Voictent<${geppTypeName}, ${customTypeName}>`,
       '',
       `export type ${voqueTypeName} = InMemoryOdeshin2Voque<${geppTypeName}, ${customTypeName}>`,
       '',

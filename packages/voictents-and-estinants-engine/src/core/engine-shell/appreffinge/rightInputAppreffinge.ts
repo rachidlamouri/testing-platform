@@ -27,7 +27,7 @@ export type RightInputAppreffinge<
       }
 >;
 
-export type GenericRightInputHubblepupTupleAppreffinge = RightInputAppreffinge<
+type GenericRightInputHubblepupTupleAppreffinge = RightInputAppreffinge<
   GenericLeftInputVicken,
   GenericRightInputHubblepupTupleVicken
 >;

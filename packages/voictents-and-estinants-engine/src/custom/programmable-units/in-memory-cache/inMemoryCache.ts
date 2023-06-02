@@ -1,27 +1,27 @@
-export class DereferenceError extends Error {
+class DereferenceError extends Error {
   constructor(pointerName: string) {
     super(`Pointer "${pointerName}" has nothing to dereference`);
   }
 }
 
-export class DuplicatePointerError extends Error {
+class DuplicatePointerError extends Error {
   constructor(pointerName: string) {
     super(`Pointer "${pointerName}" already exists`);
   }
 }
 
-export type ReceivedDatumState = {
+type ReceivedDatumState = {
   twoTicksAgo: boolean;
   oneTickAgo: boolean;
   thisTick: boolean | null;
 };
 
-export type InMemoryCachePointerConstructorInput<TDatum> = {
+type InMemoryCachePointerConstructorInput<TDatum> = {
   name: string;
   datumTupleReference: TDatum[];
 };
 
-export class InMemoryCachePointer<TDatum> {
+class InMemoryCachePointer<TDatum> {
   private name: string;
 
   private index = -1;

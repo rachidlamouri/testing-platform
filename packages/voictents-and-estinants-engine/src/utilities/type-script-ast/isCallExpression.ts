@@ -7,7 +7,7 @@ export const isCallExpression = (
 ): node is TSESTree.CallExpression =>
   isNode(node) && node.type === AST_NODE_TYPES.CallExpression;
 
-export type SpecificIdentifiableCallExpression = TSESTree.CallExpression & {
+type SpecificIdentifiableCallExpression = TSESTree.CallExpression & {
   callee: TSESTree.Identifier;
 };
 

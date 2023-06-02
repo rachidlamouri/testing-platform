@@ -17,7 +17,7 @@ const RUNTIME_SNAPSHOT_FILE_BASE_NAME = 'runtimeSnapshot';
 const RUNTIME_SNAPSHOT_FILE_EXTENSION_SUFFIX_IDENTIFIER =
   FileExtensionSuffixIdentifier.Text;
 
-export type ProgramFileCacheInput = {
+type ProgramFileCacheInput = {
   namespace: string;
 };
 
@@ -26,37 +26,32 @@ export type SerializedHubblepup = {
   fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
 };
 
-export type SerializedHubblepupWriterInput = {
+type SerializedHubblepupWriterInput = {
   voictentGepp: Gepp;
   nestedPath: string;
   extensionlessFileName: string;
   serializedHubblepup: SerializedHubblepup;
 };
 
-export type VoictentDirectoryDeleterInput = {
+type VoictentDirectoryDeleterInput = {
   voictentGepp: Gepp;
 };
 
-export type NamespacedFilePathAccessorInput = {
+type NamespacedFilePathAccessorInput = {
   topLevelDirectoryName: TopLevelDirectoryName;
   nestedPath: string;
   extensionlessFileName: string;
   fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
 };
 
-export type NamespacedVoictentFilePathAccessorInput = {
+type NamespacedVoictentFilePathAccessorInput = {
   voictentGepp: Gepp;
   nestedPath: string;
   extensionlessFileName: string;
   fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
 };
 
-export type NamespacedSubdirectoryPathAccessorInput = {
-  topLevelDirectory: TopLevelDirectoryName;
-  nestedPath: string;
-};
-
-export type NamespacedFilePathWriterInput = {
+type NamespacedFilePathWriterInput = {
   topLevelDirectoryName: TopLevelDirectoryName;
   nestedPath: string;
   extensionlessFileName: string;

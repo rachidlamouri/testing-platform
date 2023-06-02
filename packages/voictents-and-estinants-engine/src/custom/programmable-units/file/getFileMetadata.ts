@@ -27,7 +27,7 @@ const getCamelCaseNameParts = (camelCaseName: string): string[] => {
   return normalizedStuff;
 };
 
-export type FileMetadata = {
+type FileMetadata = {
   filePath: string;
   parentDirectoryNameParts: string[];
   onDiskFileNameParts: string[];

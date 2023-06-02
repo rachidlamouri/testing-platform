@@ -1,7 +1,5 @@
-import { UnionToIntersection } from 'type-fest';
 import {
   DigikikifierInput,
-  RuntimeStatisticsHandler,
   digikikify as coreDigikikify,
 } from '../core/engine/digikikify';
 import {
@@ -10,7 +8,6 @@ import {
   UnsafeEstinant2Tuple,
   GenericEstinant2,
 } from '../core/engine-shell/estinant/estinant';
-import { GenericQuirm2, Quirm2 } from '../core/engine-shell/quirm/quirm';
 import { GenericVoque, GenericVoqueTuple, Voque } from '../core/engine/voque';
 import { Gepp } from '../core/engine-shell/voictent/gepp';
 import {
@@ -31,24 +28,6 @@ import { buildAddMetadataForSerialization } from '../example-programs/buildAddMe
 import { SerializableVoictent } from '../example-programs/serializableVoictent';
 import { ProgramFileCache } from '../utilities/programFileCache';
 import { GenericAbstractSerializableSourceVoque } from '../example-programs/abstractSerializableVoictent';
-
-type QuirmHandler<TVoque extends GenericVoque> = (
-  quirm: Quirm2<TVoque>,
-) => void;
-
-type PartialQuirmHandlerDebuggerByGeppUnion<TVoqueUnion extends GenericVoque> =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  TVoqueUnion extends any
-    ? { [TGepp in TVoqueUnion['gepp']]?: QuirmHandler<TVoqueUnion> }
-    : never;
-
-type QuirmUnionFromVoqueUnion<TVoqueUnion extends GenericVoque> =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  TVoqueUnion extends any ? Quirm2<TVoqueUnion> : never;
-
-type OnHubblepupAddedToVoictentsHandler2<TVoqueUnion extends GenericVoque> = (
-  quirm: QuirmUnionFromVoqueUnion<TVoqueUnion>,
-) => void;
 
 type EstinantInputOutputVoqueTuple<TEstinant extends UnsafeEstinant2> =
   TEstinant extends CoreEstinant2<
@@ -99,21 +78,6 @@ type EstinantTupleInputOutputVoqueUnion<
   >;
 }[number];
 
-type PartialQuirmDebuggerByGepp<TVoqueUnion extends GenericVoque> =
-  UnionToIntersection<PartialQuirmHandlerDebuggerByGeppUnion<TVoqueUnion>>;
-
-export type SimplerQuirmDebugger<TVoqueUnion extends GenericVoque> = {
-  handlerByGepp: PartialQuirmDebuggerByGepp<TVoqueUnion>;
-  defaultHandler: (quirm: GenericQuirm2) => void;
-  onFinish: RuntimeStatisticsHandler;
-};
-
-export type QuirmDebuggerFromVoqueUnion<TVoqueUnion extends GenericVoque> = {
-  handlerByGepp: PartialQuirmDebuggerByGepp<TVoqueUnion>;
-  defaultHandler: OnHubblepupAddedToVoictentsHandler2<TVoqueUnion>;
-  onFinish?: RuntimeStatisticsHandler;
-};
-
 type SimilarVoque<TVoque extends GenericVoque> = Voque<
   Gepp,
   TVoque['receivedHubblepup'],
@@ -147,27 +111,20 @@ type VoictentListB<
   >
 >;
 
-export type AllVoqueUnion<
+type AllVoqueUnion<
   TExplicitVoictentTuple extends UnsafeVoictent2Tple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
 > =
   | EstinantTupleInputOutputVoqueUnion<TEstinantTuple>
   | VoqueUnionFromVoictentUnion<TExplicitVoictentTuple[number]>;
 
-export type SerializeeVoictentGepp<
+type SerializeeVoictentGepp<
   TExplicitVoictentTuple extends UnsafeVoictent2Tple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
 > = Extract<
   AllVoqueUnion<TExplicitVoictentTuple, TEstinantTuple>,
   GenericAbstractSerializableSourceVoque
 >['gepp'];
-
-// AllVoqueUnion<
-//   TExplicitVoictentTuple,
-//   TEstinantTuple
-// > extends GenericAbstractSerializableSourceVoque
-//   ? AllVoqueUnion<TExplicitVoictentTuple, TEstinantTuple>['gepp']
-//   : never;
 
 type DigikikifyInput<
   TExplicitVoictentTuple extends UnsafeVoictent2Tple,

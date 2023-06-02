@@ -10,7 +10,7 @@ export type ObjectExpressionWithIdentifierProperties =
     properties: IdentifiableProperty[];
   };
 
-export const isIdentifiableProperty = (
+const isIdentifiableProperty = (
   node: TSESTree.Node,
 ): node is IdentifiableProperty =>
   node.type === AST_NODE_TYPES.Property &&

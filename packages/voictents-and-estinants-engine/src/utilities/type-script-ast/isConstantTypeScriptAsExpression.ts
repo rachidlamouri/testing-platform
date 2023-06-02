@@ -5,12 +5,11 @@ import {
   isIdentifiableTypeScriptTypeReference,
 } from './isIdentifiableTypeScriptTypeReference';
 
-export type ConstantTypeScriptAsExpression<
-  TExpression extends TSESTree.Expression,
-> = TSESTree.TSAsExpression & {
-  typeAnnotation: IdentifiableTypeScriptTypeReference<'const'>;
-  expression: TExpression;
-};
+type ConstantTypeScriptAsExpression<TExpression extends TSESTree.Expression> =
+  TSESTree.TSAsExpression & {
+    typeAnnotation: IdentifiableTypeScriptTypeReference<'const'>;
+    expression: TExpression;
+  };
 
 export const isSpecificConstantTypeScriptAsExpression = <
   TExpression extends TSESTree.Expression,

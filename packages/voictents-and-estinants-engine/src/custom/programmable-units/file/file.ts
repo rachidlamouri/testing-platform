@@ -1,8 +1,7 @@
-import { Voictent } from '../../../type-script-adapter/voictent';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
-export type FileName = {
+type FileName = {
   pascalCase: string;
   camelCase: string;
   screamingSnakeCase: string;
@@ -32,8 +31,6 @@ export type File<
 
 export const FILE_GEPP = 'file';
 
-export type FileGepp = typeof FILE_GEPP;
-
-export type FileVoictent = Voictent<FileGepp, File>;
+type FileGepp = typeof FILE_GEPP;
 
 export type FileVoque = InMemoryOdeshin2Voque<FileGepp, File>;

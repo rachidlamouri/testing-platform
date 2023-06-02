@@ -1,32 +1,29 @@
-export type JsonString = string;
+type JsonString = string;
 
-export type JsonNumber = number;
+type JsonNumber = number;
 
-export type JsonBoolean = boolean;
+type JsonBoolean = boolean;
 
-export type JsonNull = null;
-
-// eslint-disable-next-line @typescript-eslint/no-use-before-define
-export type JsonArray = Json[];
+type JsonNull = null;
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
-export type JsonTuple = readonly Json[];
-
-export type JsonList = JsonArray | JsonTuple;
+type JsonArray = Json[];
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
-export type JsonObject = { [key: string]: Json };
+type JsonTuple = readonly Json[];
+
+type JsonList = JsonArray | JsonTuple;
+
+// eslint-disable-next-line @typescript-eslint/no-use-before-define
+type JsonObject = { [key: string]: Json };
 
 export type Json =
   | JsonString
   | JsonNumber
   | JsonBoolean
   | JsonNull
-  | JsonArray
-  | JsonTuple
+  | JsonList
   | JsonObject;
-
-export type ToJson<T extends Json> = T;
 
 export const jsonUtils = {
   lossyMultilineSerialize: (datum: unknown): string | Error => {

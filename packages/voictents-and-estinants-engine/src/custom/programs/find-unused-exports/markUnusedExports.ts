@@ -27,6 +27,8 @@ const reporterLocator: ReportingLocator = {
 /**
  * Produces an error for every named export that is not imported by any other
  * file
+ *
+ * @todo export { x } from  'y' is not being seen as "import" syntax and isn't counting as an import
  */
 export const markUnusedExports = buildEstinant({
   name: ESTINANT_NAME,
@@ -93,7 +95,71 @@ export const markUnusedExports = buildEstinant({
 
     const errorList: ReceivedProgramError<ReportingLocator>[] = [];
 
-    importItemList.forEach((importItem) => {
+    const haphazardouslyProtectedFromBeingMarkedAsUnusedList: typeof importItemList[number][] =
+      [
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/file/fileSystemObjectEnumeratorConfiguration.ts',
+          importedIdentifierName:
+            'FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/file/fileSystemObjectEnumeratorConfiguration.ts',
+          importedIdentifierName:
+            'CI_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/utilities/filterTuple.ts',
+          importedIdentifierName: 'FilterTupleByAcceptanceUnion',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/utilities/semantic-types/strif/strif.ts',
+          importedIdentifierName: 'Strif',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/utilities/semantic-types/strif/strif.ts',
+          importedIdentifierName: 'createStrif',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isIdentifiableTypeScriptTypeReference.ts',
+          importedIdentifierName:
+            'isSpecificIdentifiableTypeScriptTypeReference',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isMemberExpressionCallExpression.ts',
+          importedIdentifierName: 'isMemberExpressionCallExpression',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isParameterizedCallExpression.ts',
+          importedIdentifierName: 'isParameterizedCallExpression',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/utilities/typed-datum/customTypedDatum.ts',
+          importedIdentifierName: 'CustomTypedDatum',
+        },
+      ];
+
+    [
+      ...haphazardouslyProtectedFromBeingMarkedAsUnusedList,
+      ...importItemList,
+    ].forEach((importItem) => {
       const innerMap = outerMap.get(importItem.importedFilePath);
       const mutableState = innerMap?.get(importItem.importedIdentifierName);
 

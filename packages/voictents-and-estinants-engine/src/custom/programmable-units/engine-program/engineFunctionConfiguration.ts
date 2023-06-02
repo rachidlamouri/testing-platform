@@ -3,7 +3,6 @@
  */
 
 import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
-import { Voictent } from '../../adapter/voictent';
 
 export enum EngineFunctionConfigurationTypeName {
   Core = 'Core',
@@ -11,7 +10,7 @@ export enum EngineFunctionConfigurationTypeName {
   Adapted = 'Adapted',
 }
 
-export type CoreEngineFunctionConfiguration = {
+type CoreEngineFunctionConfiguration = {
   typeName: EngineFunctionConfigurationTypeName.Core;
   filePath: 'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts';
   exportedIdentifier: 'digikikify';
@@ -47,13 +46,8 @@ export type EngineFunctionConfiguration =
 export const ENGINE_FUNCTION_CONFIGURATION_GEPP =
   'engine-function-configuration';
 
-export type EngineFunctionConfigurationGepp =
+type EngineFunctionConfigurationGepp =
   typeof ENGINE_FUNCTION_CONFIGURATION_GEPP;
-
-export type EngineFunctionConfigurationVoictent = Voictent<
-  EngineFunctionConfigurationGepp,
-  EngineFunctionConfiguration
->;
 
 export type EngineFunctionConfigurationVoque = StandardInMemoryVoque<
   EngineFunctionConfigurationGepp,

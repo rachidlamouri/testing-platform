@@ -2,7 +2,7 @@ import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import { NamedClassDeclaration } from './isNamedClassDeclaration';
 import { isIdentifiableTypeDeclaration } from './isIdentifiableTypeDeclaration';
 
-export type ExportNamedTypeDeclaration = TSESTree.ExportNamedDeclaration & {
+type ExportNamedTypeDeclaration = TSESTree.ExportNamedDeclaration & {
   declaration: TSESTree.TSTypeAliasDeclaration | NamedClassDeclaration;
 };
 
