@@ -47,7 +47,7 @@ import {
 } from '../internal/platomity';
 import { Prected } from '../internal/dreanor/prected';
 import { Procody } from '../internal/procody/procody';
-import { Quirm, QuirmList, QuirmTuple } from '../engine-shell/quirm/quirm';
+import { Quirm, QuirmTuple } from '../engine-shell/quirm/quirm';
 import { Tabilly } from './tabilly';
 import { GenericVoictent2 } from './voictent2';
 import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
@@ -593,7 +593,7 @@ export const digikikify = ({
   }: CologyExecutionContext): void => {
     const { leftInput } = cology;
 
-    let outputQuirmTuple: QuirmList = [];
+    let outputQuirmTuple: Quirm[] = [];
 
     if (platomity.version === 2) {
       const rightInputTuple = platomity.rightDreanorTuple.map(
@@ -626,7 +626,7 @@ export const digikikify = ({
         .filter(([gepp]) => {
           return platomity.outputGeppSet.has(gepp);
         })
-        .flatMap(([gepp, hubblepupTuple]): QuirmList => {
+        .flatMap(([gepp, hubblepupTuple]): Quirm[] => {
           return hubblepupTuple.map<Quirm>((hubblepup) => {
             return {
               gepp,

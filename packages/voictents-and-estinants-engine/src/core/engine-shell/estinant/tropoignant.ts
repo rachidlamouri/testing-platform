@@ -2,7 +2,7 @@ import {
   GenericIndexedHubblepup,
   GenericIndexedHubblepupTuple,
 } from '../quirm/hubblepup';
-import { QuirmList } from '../quirm/quirm';
+import { Quirm } from '../quirm/quirm';
 import { GenericLeftInputVicken } from '../vicken/leftInputVicken';
 import { GenericOutputVicken } from '../vicken/outputVicken';
 import {
@@ -16,7 +16,7 @@ import {
 export type Tropoignant = (
   leftInput: GenericIndexedHubblepup,
   ...rightInputTuple: GenericIndexedHubblepupTuple
-) => QuirmList;
+) => Quirm[];
 
 export type Tropoignant2<
   TLeftVicken extends GenericLeftInputVicken,
