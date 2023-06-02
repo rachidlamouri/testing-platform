@@ -84,29 +84,102 @@ digikikify({
       gepp: BOUNDARY_CONFIGURATION_GEPP,
       initialHubblepupTuple: [
         createBoundaryConfiguration([
-          'packages/voictents-and-estinants-engine/src/core',
-
-          'packages/voictents-and-estinants-engine/src/custom/adapter',
-          'packages/voictents-and-estinants-engine/src/custom/programmable-units',
-
-          'packages/voictents-and-estinants-engine/src/custom/programs/categorize-files',
-          'packages/voictents-and-estinants-engine/src/custom/programs/comments-example',
-          'packages/voictents-and-estinants-engine/src/custom/programs/find-unused-exports',
-          'packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script',
-          'packages/voictents-and-estinants-engine/src/custom/programs/model-ci',
-          'packages/voictents-and-estinants-engine/src/custom/programs/model-programs',
-          'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships',
-          'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file',
-          'packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render',
-
-          'packages/voictents-and-estinants-engine/src/example-programs',
-          'packages/voictents-and-estinants-engine/src/type-script-adapter',
-
-          'packages/voictents-and-estinants-engine/src/utilities/file',
-          'packages/voictents-and-estinants-engine/src/utilities/semantic-types',
-          'packages/voictents-and-estinants-engine/src/utilities/type-script-ast',
-          'packages/voictents-and-estinants-engine/src/utilities/typed-datum',
-          'packages/voictents-and-estinants-engine/src/utilities',
+          {
+            displayName: 'Core',
+            directoryPath: 'packages/voictents-and-estinants-engine/src/core',
+          },
+          {
+            // TODO: move to adapter
+            displayName: 'Custom Adapter',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/adapter',
+          },
+          {
+            // TODO: split these up by program and shared boundaries
+            displayName: 'Programmable Units',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/programmable-units',
+          },
+          {
+            displayName: 'Program - Categorize Files',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/programs/categorize-files',
+          },
+          {
+            displayName: 'Program - Comments Example',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/programs/comments-example',
+          },
+          {
+            displayName: 'Program - Find Unused Exports',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/programs/find-unused-exports',
+          },
+          {
+            displayName: 'Program - Get Snapshot Refresh Script',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script',
+          },
+          {
+            displayName: 'Program - Model CI',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/programs/model-ci',
+          },
+          {
+            displayName: 'Program - Model Programs',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/programs/model-programs',
+          },
+          {
+            displayName: 'Program - Render TypeScript File Relationships',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships',
+          },
+          {
+            displayName: 'Program - Scaffold Voictent File',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file',
+          },
+          {
+            displayName: 'Program - Test Graph Render',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render',
+          },
+          {
+            displayName: 'Example Programs',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/example-programs',
+          },
+          {
+            displayName: 'TypeScript Adapter',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/type-script-adapter',
+          },
+          {
+            displayName: 'File Utilities',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/utilities/file',
+          },
+          {
+            displayName: 'Semantic Type Utilities',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/utilities/semantic-types',
+          },
+          {
+            displayName: 'TypeScript AST Utilities',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/utilities/type-script-ast',
+          },
+          {
+            displayName: 'Typed Datum Utilities',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/utilities/typed-datum',
+          },
+          {
+            displayName: 'Misc Utilities',
+            directoryPath:
+              'packages/voictents-and-estinants-engine/src/utilities',
+          },
         ]),
       ],
     }),
