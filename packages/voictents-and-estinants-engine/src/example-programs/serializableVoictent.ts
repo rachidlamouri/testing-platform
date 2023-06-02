@@ -10,7 +10,7 @@ import {
 import { FileExtensionSuffixIdentifier } from '../custom/programmable-units/file/fileExtensionSuffixIdentifier';
 import { serialize } from '../utilities/typed-datum/serializer/serialize';
 
-export type SerializableVoictentConstructorInput<
+type SerializableVoictentConstructorInput<
   TVoque extends GenericAbstractSerializableVoque,
 > = {
   gepp: TVoque['gepp'];

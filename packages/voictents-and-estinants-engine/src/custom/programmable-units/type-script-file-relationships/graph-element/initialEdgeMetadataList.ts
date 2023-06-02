@@ -1,5 +1,4 @@
 import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
-import { Voictent } from '../../../adapter/voictent';
 import { ExternalModuleMetadata } from './externalModuleMetadata';
 import { FileNodeMetadata } from './fileNodeMetadata';
 
@@ -20,13 +19,7 @@ export type InitialEdgeMetadataList = {
 
 export const INITIAL_EDGE_METADATA_LIST_GEPP = 'initial-edge-metadata-list';
 
-export type InitialEdgeMetadataListGepp =
-  typeof INITIAL_EDGE_METADATA_LIST_GEPP;
-
-export type InitialEdgeMetadataListVoictent = Voictent<
-  InitialEdgeMetadataListGepp,
-  InitialEdgeMetadataList
->;
+type InitialEdgeMetadataListGepp = typeof INITIAL_EDGE_METADATA_LIST_GEPP;
 
 export type InitialEdgeMetadataListVoque = InMemoryOdeshin2Voque<
   InitialEdgeMetadataListGepp,

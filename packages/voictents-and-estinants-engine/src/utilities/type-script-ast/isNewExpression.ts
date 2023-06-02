@@ -15,10 +15,9 @@ export const isNewExpression = (
 ): node is TSESTree.NewExpression =>
   node?.type === AST_NODE_TYPES.NewExpression;
 
-export type NewExpressionWithObjectExpressionArgument =
-  TSESTree.NewExpression & {
-    arguments: [ObjectExpressionWithIdentifierProperties];
-  };
+type NewExpressionWithObjectExpressionArgument = TSESTree.NewExpression & {
+  arguments: [ObjectExpressionWithIdentifierProperties];
+};
 
 export const isNewExpressionWithObjectExpressionArgument = (
   node: TypeScriptNode,
@@ -29,7 +28,7 @@ export const isNewExpressionWithObjectExpressionArgument = (
   );
 };
 
-export type NewExpressionWithSpecificTypeParameters<
+type NewExpressionWithSpecificTypeParameters<
   TTypeScriptTypeParameterNodeTypeTuple extends TypeScriptTypeParameterNodeTypeTuple = TypeScriptTypeParameterNodeTypeTuple,
 > = TSESTree.NewExpression & {
   typeParameters: TypeScriptTypeParameterInstantiationWithSpecificParameterTuple<TTypeScriptTypeParameterNodeTypeTuple>;

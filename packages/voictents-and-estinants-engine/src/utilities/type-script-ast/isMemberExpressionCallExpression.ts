@@ -4,7 +4,7 @@ import { isIdentifier } from './isIdentifier';
 import { isMemberExpression } from './isMemberExpression';
 import { isNode, TypeScriptNode } from './isNode';
 
-export type MemberExpressionCallExpression = TSESTree.MemberExpression & {
+type MemberExpressionCallExpression = TSESTree.MemberExpression & {
   object: TSESTree.CallExpression;
 };
 

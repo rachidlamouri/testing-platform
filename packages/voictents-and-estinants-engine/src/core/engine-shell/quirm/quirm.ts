@@ -1,5 +1,4 @@
 import { List } from '../../../utilities/semantic-types/list';
-import { GenericVoque } from '../../engine/voque';
 import { Gepp } from '../voictent/gepp';
 import { Hubblepup } from './hubblepup';
 
@@ -15,10 +14,3 @@ export type Quirm = {
 export type QuirmTuple = readonly Quirm[];
 
 export type QuirmList = List<Quirm>;
-
-export type Quirm2<TVoque extends GenericVoque> = {
-  gepp: TVoque['gepp'];
-  hubblepup: TVoque['emittedHubblepup'];
-};
-
-export type GenericQuirm2 = Quirm2<GenericVoque>;

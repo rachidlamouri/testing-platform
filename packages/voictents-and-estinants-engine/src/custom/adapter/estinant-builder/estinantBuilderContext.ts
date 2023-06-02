@@ -1,5 +1,4 @@
 import { Gepp } from '../../../type-script-adapter/gepp';
-import { Voictent } from '../../../type-script-adapter/voictent';
 import {
   Straline,
   StralineTuple,
@@ -11,28 +10,21 @@ type AnyLeftInputAccessor = (leftInput: any) => any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyRightInputAccessor = (leftInput: any) => any;
 
-export type TropoignantInput<
-  TVoictent extends Voictent,
-  TIsWibiz extends boolean,
-> = [TIsWibiz] extends [true]
-  ? TVoictent['hubblepupTuple']
-  : TVoictent['hubblepupTuple'][number];
-
-export type LeftInputContext = {
+type LeftInputContext = {
   version?: 2;
   gepp: Gepp;
   isWibiz: boolean;
   modifyTropoignantInput: AnyLeftInputAccessor;
 };
 
-export type RightInputVoictentContext = {
+type RightInputVoictentContext = {
   version?: 2;
   gepp: Gepp;
   isWibiz: true;
   modifyTropoignantInput: AnyRightInputAccessor;
 };
 
-export type RightInputHubblepupContext = {
+type RightInputHubblepupContext = {
   version?: 2;
   gepp: Gepp;
   isWibiz: false;
@@ -41,15 +33,13 @@ export type RightInputHubblepupContext = {
   modifyTropoignantInput: AnyRightInputAccessor;
 };
 
-export type RightInputContext =
-  | RightInputVoictentContext
-  | RightInputHubblepupContext;
+type RightInputContext = RightInputVoictentContext | RightInputHubblepupContext;
 
-export type RightInputContextTuple = Tuple<RightInputContext>;
+type RightInputContextTuple = Tuple<RightInputContext>;
 
-export type AggregatedOutput = Record<Gepp, unknown>;
+type AggregatedOutput = Record<Gepp, unknown>;
 
-export type PinbetunfOutputAggregator<> = (
+type PinbetunfOutputAggregator<> = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   modifiedOutput: any,
 ) => AggregatedOutput;
@@ -64,63 +54,26 @@ export type ConstituentResultNormalizer = (
   aggregatedOutput: AggregatedOutput,
 ) => CoreConstituentOutputEntry;
 
-export type AggregatedOutputContext = {
+type AggregatedOutputContext = {
   aggregatePinbetunfOutput: PinbetunfOutputAggregator;
   constituentResultNormalizerList: ConstituentResultNormalizer[];
   geppTuple: Gepp[];
 };
 
-export type RightInputContextTupleToModifiedInputTuple<
-  TRightInputContextTuple extends RightInputContextTuple,
-> = {
-  [Index in keyof TRightInputContextTuple]: ReturnType<
-    TRightInputContextTuple[Index]['modifyTropoignantInput']
-  >;
-};
-
-export type AppendInputToPinbetunfInputTuple<
-  TInputTuple extends StralineTuple,
-  TNextInput extends Straline,
-> = [...TInputTuple, TNextInput];
-
-export type Pinbetunf<
-  TInputTuple extends StralineTuple,
-  TOutput extends Straline,
-> = (...input: TInputTuple) => TOutput;
+type Pinbetunf<TInputTuple extends StralineTuple, TOutput extends Straline> = (
+  ...input: TInputTuple
+) => TOutput;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AnyPinbetunf = Pinbetunf<any, any>;
+type AnyPinbetunf = Pinbetunf<any, any>;
 
 export type InstantiationContext = {
   name: string;
 };
 
-export type InputContext = {
+type InputContext = {
   leftInputContext: LeftInputContext;
   rightInputContextTuple: RightInputContextTuple;
-};
-
-type InputContextExtenderInput<
-  TNextRightInputContext extends RightInputContext,
-> = {
-  inputContext: InputContext;
-  nextRightInputContext: TNextRightInputContext;
-};
-
-export const extendInputContext = <
-  TNextRightInputContext extends RightInputContext,
->({
-  inputContext,
-  nextRightInputContext,
-}: InputContextExtenderInput<TNextRightInputContext>): InputContext => {
-  const nextRightInputContextTuple = [
-    ...inputContext.rightInputContextTuple,
-    nextRightInputContext,
-  ];
-  return {
-    leftInputContext: inputContext.leftInputContext,
-    rightInputContextTuple: nextRightInputContextTuple,
-  };
 };
 
 export type InputOutputContext = {
@@ -136,7 +89,7 @@ export type AssemblerContext = {
   pinbe: AnyPinbetunf;
 };
 
-export const buildEmptyAggregatedOutput: PinbetunfOutputAggregator = () => {
+const buildEmptyAggregatedOutput: PinbetunfOutputAggregator = () => {
   const aggregatedOutput: AggregatedOutput = {};
   return aggregatedOutput;
 };
@@ -163,7 +116,7 @@ const passthroughAggregatedOutput: PinbetunfOutputAggregator = (
   return aggregatedOutput;
 };
 
-export type InputOutputContextFromLeftInputContextBuilderInput = {
+type InputOutputContextFromLeftInputContextBuilderInput = {
   instantiationContext: InstantiationContext;
   leftInputContext: LeftInputContext;
 };

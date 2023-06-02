@@ -8,9 +8,7 @@ import { Voictent2 } from '../../../core/engine/voictent2';
 import { GenericVoque } from '../../../core/engine/voque';
 import { InMemoryCache } from './inMemoryCache';
 
-export type AbstractInMemoryVoictent2ConstructorInput<
-  TVoque extends GenericVoque,
-> = {
+type AbstractInMemoryVoictent2ConstructorInput<TVoque extends GenericVoque> = {
   gepp: TVoque['gepp'];
   initialHubblepupTuple: TVoque['receivedHubblepup'][];
 };

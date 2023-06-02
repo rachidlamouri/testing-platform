@@ -41,7 +41,7 @@ export type GenericAbstractSerializableVoque = AbstractSerializableVoque<Gepp>;
 export type IndexedAbstractSerializable =
   GenericAbstractSerializableVoque['indexedEmittedHubblepup'];
 
-export type AbstractSerializableVoictentConstructorInput<
+type AbstractSerializableVoictentConstructorInput<
   TVoque extends GenericAbstractSerializableVoque,
 > = {
   gepp: TVoque['gepp'];

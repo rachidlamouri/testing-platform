@@ -36,7 +36,7 @@ type NextAdaptedRightInputVickenTuple<
 
 type EmptyAdaptedOutputVickenTuple = [];
 
-export type RightInputHubblepupTupleAppreffingeBuilder2<
+type RightInputHubblepupTupleAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
 > = <TRightInputVoque extends GenericVoque, TZornTuple extends ZornTuple>(

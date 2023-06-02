@@ -1,19 +1,13 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
-import { Voictent } from '../../adapter/voictent';
 
-export type DatumTestCaseInput = {
+type DatumTestCaseInput = {
   zorn: string;
   grition: unknown;
 };
 
 export const DATUM_TEST_CASE_INPUT_GEPP = 'datum-test-case-input';
 
-export type DatumTestCaseInputGepp = typeof DATUM_TEST_CASE_INPUT_GEPP;
-
-export type DatumTestCaseInputVoictent = Voictent<
-  DatumTestCaseInputGepp,
-  DatumTestCaseInput
->;
+type DatumTestCaseInputGepp = typeof DATUM_TEST_CASE_INPUT_GEPP;
 
 export type DatumTestCaseInputVoque = InMemoryOdeshin2Voque<
   DatumTestCaseInputGepp,

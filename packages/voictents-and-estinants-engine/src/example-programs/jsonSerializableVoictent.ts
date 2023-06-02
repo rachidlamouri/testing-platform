@@ -11,7 +11,7 @@ import {
 } from '../utilities/programFileCache';
 import { GenericHubbleup } from '../core/engine-shell/quirm/hubblepup';
 
-export type JsonSerializableVoictentConstructorInput<
+type JsonSerializableVoictentConstructorInput<
   TVoque extends GenericAbstractSerializableVoque,
 > = {
   gepp: TVoque['gepp'];

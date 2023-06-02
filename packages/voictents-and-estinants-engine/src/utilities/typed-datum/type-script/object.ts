@@ -2,25 +2,18 @@ export type TypeScriptArray = unknown[];
 
 export type TypeScriptSet = Set<unknown>;
 
-export type TypeScriptMapEntry = [unknown, unknown];
-
-export type TypeScriptMapEntryList = TypeScriptMapEntry[];
-
 export type TypeScriptMap = Map<unknown, unknown>;
 
-export type TypeScriptObjectInstanceKey = string | number | symbol;
+type TypeScriptObjectInstanceKey = string | number | symbol;
 
 export type TypeScriptObjectInstance = Record<
   TypeScriptObjectInstanceKey,
   unknown
 >;
 
-export type TypeScriptObjectInstanceEntry = [
-  TypeScriptObjectInstanceKey,
-  unknown,
-];
+type TypeScriptObjectInstanceEntry = [TypeScriptObjectInstanceKey, unknown];
 
-export type TypeScriptObjectInstanceEntryList = TypeScriptObjectInstanceEntry[];
+type TypeScriptObjectInstanceEntryList = TypeScriptObjectInstanceEntry[];
 
 export type TypeScriptObject =
   | null

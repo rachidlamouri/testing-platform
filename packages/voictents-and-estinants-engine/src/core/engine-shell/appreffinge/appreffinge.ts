@@ -9,7 +9,7 @@ export type LeftAppreffinge = {
   isWibiz?: boolean;
 };
 
-export type RightAppreffinge =
+type RightAppreffinge =
   | Merge<
       LeftAppreffinge,
       {

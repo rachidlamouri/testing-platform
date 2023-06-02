@@ -13,8 +13,7 @@ export type FlattenedCallExpressionOrError =
   | IdentifiableMemberExpressionCallExpression
   | Error;
 
-export type FlattenedCallExpressionAndErrorList =
-  FlattenedCallExpressionOrError[];
+type FlattenedCallExpressionAndErrorList = FlattenedCallExpressionOrError[];
 
 const recursivlyFlattenCallExpressionChain = (
   callExpression: TSESTree.CallExpression,

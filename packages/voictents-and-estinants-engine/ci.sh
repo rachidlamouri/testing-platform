@@ -120,6 +120,13 @@ npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/render-t
 bash checkUncommitted.sh
 printf "\n"
 
+## find-unused-exports
+echo "# find-unused-exports"
+echo "Linting unused exports"
+npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/find-unused-exports/findUnusedExports.ts
+bash checkUncommitted.sh
+printf "\n"
+
 ## model-ci
 echo "# model-ci"
 echo "Verifying ci.sh runs every engine program"

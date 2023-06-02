@@ -12,7 +12,7 @@ export type Cology = {
   mabz: Mabz;
 };
 
-export type CologyEntry = [Dreanor, Zorn];
+type CologyEntry = [Dreanor, Zorn];
 
 export const getCologyEntryList = (cology: Cology): CologyEntry[] => {
   const leftEntry: CologyEntry = [cology.leftDreanor, cology.leftInput];

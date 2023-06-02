@@ -1,6 +1,5 @@
 import { GenericIndexedHubblepup } from '../../../core/engine-shell/quirm/hubblepup';
 import { GenericVoque } from '../../../core/engine/voque';
-import { Voictent } from '../voictent';
 import {
   buildInputOutputContextFromLeftInputContext,
   InstantiationContext,
@@ -37,13 +36,7 @@ type EmptyAdaptedRightInputVickenTuple = [];
 
 type EmptyAdaptedOutputVickenTuple = [];
 
-export type LeftAppreffinge<TInputVoictent extends Voictent> = {
-  gepp: TInputVoictent['gepp'];
-};
-
-export type LeftInputHubblepupAppreffingeBuilder2 = <
-  TInputVoque extends GenericVoque,
->(
+type LeftInputHubblepupAppreffingeBuilder2 = <TInputVoque extends GenericVoque>(
   partialLeftInputAppreffinge: PartialLeftInputAppreffinge<TInputVoque>,
 ) => SpreadN<
   [

@@ -8,7 +8,7 @@ import {
 } from './abstractInMemoryVoictent';
 import { InMemoryIndexByName, InMemoryVoque } from './inMemoryVoque';
 
-export type InMemoryOdeshin2IndexByName = SpreadN<
+type InMemoryOdeshin2IndexByName = SpreadN<
   [
     InMemoryIndexByName,
     {
@@ -26,9 +26,6 @@ export type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
   Gepp,
   GenericOdeshin2
 >;
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type UnsafeInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<any, any>;
 
 export class InMemoryOdeshin2Voictent<
   TVoque extends GenericInMemoryOdeshin2Voque,

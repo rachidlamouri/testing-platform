@@ -6,7 +6,7 @@ import { TypeScriptObject } from '../../../utilities/typed-datum/type-script/obj
  */
 export type Hubblepup = unknown;
 
-export type Hubblepup2<THubblepup> = THubblepup;
+type Hubblepup2<THubblepup> = THubblepup;
 
 export type GenericHubbleup = Hubblepup2<unknown>;
 

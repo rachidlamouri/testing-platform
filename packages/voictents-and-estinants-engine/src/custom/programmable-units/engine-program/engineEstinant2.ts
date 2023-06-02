@@ -1,5 +1,4 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
-import { Voictent } from '../../adapter/voictent';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 import { ReceivedEngineVoqueLocator } from './engineVoqueLocator';
 
@@ -37,12 +36,7 @@ export type EngineEstinant2 = {
 
 export const ENGINE_ESTINANT_2_GEPP = 'engine-estinant-2';
 
-export type EngineEstinant2Gepp = typeof ENGINE_ESTINANT_2_GEPP;
-
-export type EngineEstinant2Voictent = Voictent<
-  EngineEstinant2Gepp,
-  EngineEstinant2
->;
+type EngineEstinant2Gepp = typeof ENGINE_ESTINANT_2_GEPP;
 
 export type EngineEstinant2Voque = InMemoryOdeshin2Voque<
   EngineEstinant2Gepp,

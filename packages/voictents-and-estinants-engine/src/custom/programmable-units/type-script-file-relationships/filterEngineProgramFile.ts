@@ -43,6 +43,15 @@ export const filterEngineProgramFile = buildEstinant({
       [{ list: importList }],
       engineFunctionConfigurationList,
     ) => {
+      // Skip adapted engine file that imports the core engine
+      // TODO: this code is brittle. Tie it back to the source file if possible
+      if (
+        typeScriptFile.filePath ===
+        'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts'
+      ) {
+        return [];
+      }
+
       const combinationList = importList.flatMap((fileImport) => {
         return engineFunctionConfigurationList.map(
           (engineFunctionConfiguration) => {

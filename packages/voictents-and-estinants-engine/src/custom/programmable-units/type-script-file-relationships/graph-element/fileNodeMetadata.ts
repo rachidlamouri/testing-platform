@@ -1,5 +1,4 @@
 import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
-import { Voictent } from '../../../adapter/voictent';
 import { DirectedGraphNode } from '../../graph-visualization/directed-graph/directedGraphNode';
 
 /**
@@ -16,12 +15,7 @@ export type FileNodeMetadata = {
 
 export const FILE_NODE_METADATA_GEPP = 'file-node-metadata';
 
-export type FileNodeMetadataGepp = typeof FILE_NODE_METADATA_GEPP;
-
-export type FileNodeMetadataVoictent = Voictent<
-  FileNodeMetadataGepp,
-  FileNodeMetadata
->;
+type FileNodeMetadataGepp = typeof FILE_NODE_METADATA_GEPP;
 
 export type FileNodeMetadataVoque = InMemoryOdeshin2Voque<
   FileNodeMetadataGepp,

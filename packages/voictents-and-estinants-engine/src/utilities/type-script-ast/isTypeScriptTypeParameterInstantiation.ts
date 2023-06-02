@@ -2,11 +2,10 @@ import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import { Tuple } from '../semantic-types/tuple';
 import { isNode, TypeScriptNode } from './isNode';
 
-export type TypeScriptTypeParameterNodeList =
+type TypeScriptTypeParameterNodeList =
   TSESTree.TSTypeParameterInstantiation['params'];
 
-export type TypeScriptTypeParameterNode =
-  TypeScriptTypeParameterNodeList[number];
+type TypeScriptTypeParameterNode = TypeScriptTypeParameterNodeList[number];
 
 export type TypeScriptTypeParameterNodeTuple =
   Tuple<TypeScriptTypeParameterNode>;
@@ -14,12 +13,6 @@ export type TypeScriptTypeParameterNodeTuple =
 export type TypeScriptTypeParameterNodeTypeTuple = Tuple<
   TypeScriptTypeParameterNode['type']
 >;
-
-export type TypeScriptTypeParameterNodeTupleToTypeScriptTypeParameterNodeTypeTuple<
-  TTypeScriptTypeParameterNodeTuple extends TypeScriptTypeParameterNodeTuple,
-> = {
-  [Index in keyof TTypeScriptTypeParameterNodeTuple]: TTypeScriptTypeParameterNodeTuple[Index]['type'];
-};
 
 export type TypeScriptTypeParameterInstantiation<
   TTypeScriptTypeParameterNodeTuple extends TypeScriptTypeParameterNodeTuple = TypeScriptTypeParameterNodeTuple,
@@ -57,7 +50,7 @@ export const isTypeScriptTypeParameterInstantiationWithParameterTuple = <
       subNode.type === parameterNodeTypeTuple[index],
   );
 
-export type TypeScriptTypeParameterInstantiationWithSpecificParameterTuplePredicate<
+type TypeScriptTypeParameterInstantiationWithSpecificParameterTuplePredicate<
   TTypeScriptTypeParameterNodeTypeTuple extends TypeScriptTypeParameterNodeTypeTuple,
 > = (
   node: TypeScriptNode,

@@ -54,9 +54,9 @@ import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
 import { Tuple } from '../../utilities/semantic-types/tuple';
 import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/rightInputAppreffinge';
 
-export type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
+type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
 
-export type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
+type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 
 export enum DigikikifierStrategy {
   AllAtOnce = 'AllAtOnce',
@@ -927,7 +927,7 @@ export const digikikify = ({
   }
 };
 
-export type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
+type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
   inputVoictentList: GenericVoictent2[];
   estinantTuple: TEstinantTuple;
   onFinish?: RuntimeStatisticsHandler;

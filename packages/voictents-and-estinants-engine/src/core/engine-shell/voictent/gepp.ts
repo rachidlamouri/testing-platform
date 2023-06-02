@@ -3,6 +3,4 @@
  */
 export type Gepp = string;
 
-export type GeppTuple = readonly Gepp[];
-
 export type GeppSet = Set<Gepp>;

@@ -8,5 +8,3 @@ export type Zorn = Straline;
 export type StringZorn = string;
 
 export type ZornTuple = readonly Zorn[];
-
-export type ZornTupleTuple = readonly ZornTuple[];

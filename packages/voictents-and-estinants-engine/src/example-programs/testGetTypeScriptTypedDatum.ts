@@ -29,7 +29,7 @@ const programFileCache = new ProgramFileCache({
  * the resulting type name for manual verification, since the input datum and
  * output datum are the same.
  */
-export const getTypedTestCaseInputTypeName: Estinant2<
+const getTypedTestCaseInputTypeName: Estinant2<
   LeftInputHubblepupVicken<DatumTestCaseInputVoque>,
   [],
   OutputVicken<[SerializableTypeNameVoque]>

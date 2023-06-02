@@ -21,7 +21,7 @@ import {
   GenericAdaptedOutputVickenTuple,
 } from './vicken';
 
-export type EstinantAssembler<
+type EstinantAssembler<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,

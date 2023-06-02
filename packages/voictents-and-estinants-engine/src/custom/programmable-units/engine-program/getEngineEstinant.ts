@@ -182,9 +182,13 @@ const getCoreEstinant = ({
 }: CoreEstinantAccessorInput): CoreEstinantAccessorResult => {
   const estinantName = estinantLocator.identifierName;
 
-  const typeNode = isNode(commentedBodyDeclaration?.identifiableNode)
-    ? commentedBodyDeclaration?.identifiableNode
-    : null;
+  const typeNode =
+    commentedBodyDeclaration !== undefined &&
+    commentedBodyDeclaration.identifiableNode !== null &&
+    commentedBodyDeclaration.identifiableNode.type !== undefined &&
+    isNode(commentedBodyDeclaration.identifiableNode)
+      ? commentedBodyDeclaration?.identifiableNode
+      : null;
 
   const typeParameterNodeList =
     typeNode?.type === AST_NODE_TYPES.VariableDeclarator &&

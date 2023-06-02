@@ -1,22 +1,21 @@
 import fs from 'fs';
 import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
-import { Voictent } from '../../../adapter/voictent';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 
-export type OverviewBoundaryConfiguration = {
+type OverviewBoundaryConfiguration = {
   instanceId: string;
 };
 
-export type InternalBoundaryConfiguration = {
+type InternalBoundaryConfiguration = {
   instanceId: string;
   directoryPath: string;
 };
 
-export type ExternalBoundaryConfiguration = {
+type ExternalBoundaryConfiguration = {
   instanceId: string;
 };
 
-export type LimboBoundaryConfiguration = {
+type LimboBoundaryConfiguration = {
   instanceId: string;
 };
 
@@ -24,7 +23,7 @@ export type LimboBoundaryConfiguration = {
  * The information needed to establish an arbitrary grouping of files in the
  * TypeScript knowledge graph
  */
-export type BoundaryConfiguration = {
+type BoundaryConfiguration = {
   zorn: string;
   overview: OverviewBoundaryConfiguration;
   internal: InternalBoundaryConfiguration[];
@@ -34,12 +33,7 @@ export type BoundaryConfiguration = {
 
 export const BOUNDARY_CONFIGURATION_GEPP = 'boundary-configuration';
 
-export type BoundaryConfigurationGepp = typeof BOUNDARY_CONFIGURATION_GEPP;
-
-export type BoundaryConfigurationVoictent = Voictent<
-  BoundaryConfigurationGepp,
-  BoundaryConfiguration
->;
+type BoundaryConfigurationGepp = typeof BOUNDARY_CONFIGURATION_GEPP;
 
 export type BoundaryConfigurationVoque = InMemoryOdeshin2Voque<
   BoundaryConfigurationGepp,

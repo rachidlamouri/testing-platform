@@ -1,8 +1,7 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
-import { Voictent } from '../../adapter/voictent';
 import { SvgDocument } from './svgDocument';
 
-export type SvgMetadata = {
+type SvgMetadata = {
   label: string;
   document: SvgDocument;
 };
@@ -11,19 +10,14 @@ export type SvgMetadata = {
  * The list of tab labels for a knowledge graph and their corresponding
  * SvgDocuments
  */
-export type SvgMetadataList = {
+type SvgMetadataList = {
   zorn: string;
   grition: SvgMetadata[];
 };
 
 export const SVG_METADATA_LIST_GEPP = 'svg-metadata-list';
 
-export type SvgMetadataListGepp = typeof SVG_METADATA_LIST_GEPP;
-
-export type SvgMetadataListVoictent = Voictent<
-  SvgMetadataListGepp,
-  SvgMetadataList
->;
+type SvgMetadataListGepp = typeof SVG_METADATA_LIST_GEPP;
 
 export type SvgMetadataListVoque = InMemoryOdeshin2Voque<
   SvgMetadataListGepp,

@@ -13,7 +13,7 @@ import {
   UnsafeProgramErrorVoque,
 } from './programError';
 
-export type ProgramErrorVoictentConstructorInput = {
+type ProgramErrorVoictentConstructorInput = {
   programFileCache: ProgramFileCache;
 };
 

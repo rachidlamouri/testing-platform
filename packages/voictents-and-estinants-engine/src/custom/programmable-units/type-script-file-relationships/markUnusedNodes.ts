@@ -34,7 +34,6 @@ const reporterLocator: ReportingLocator = {
 const PROTECTED_FILE_PATH_LIST = [
   'packages/voictents-and-estinants-engine/src/utilities/semantic-types/strif/strif.ts',
   'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isParameterizedCallExpression.ts',
-  'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isTypeScriptTupleType.ts',
 ];
 
 PROTECTED_FILE_PATH_LIST.forEach((nodePath) => {

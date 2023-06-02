@@ -28,7 +28,7 @@ type NextAdaptedOutputVickenTuple<
   AdaptedOutputVicken<TOutputVoque, TOutputVoque['receivedHubblepup']>,
 ];
 
-export type OutputHubblepupAppreffingeBuilder2<
+type OutputHubblepupAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,

@@ -26,9 +26,7 @@ export type ReceivedHubblepupState = {
   thisTick: boolean | null;
 };
 
-export type InMemoryVoictentConstructorInput<
-  TVoque extends GenericInMemoryVoque,
-> = {
+type InMemoryVoictentConstructorInput<TVoque extends GenericInMemoryVoque> = {
   gepp: TVoque['gepp'];
   initialHubblepupTuple: TVoque['emittedVoictent'];
 };
