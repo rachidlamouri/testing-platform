@@ -1,9 +1,7 @@
-import { Straline } from './straline';
-
 /**
  * An arbitrary identifier.
  */
-export type Zorn = Straline;
+export type Zorn = unknown;
 
 export type StringZorn = string;
 

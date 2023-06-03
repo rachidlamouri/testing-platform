@@ -10,12 +10,9 @@ import {
   GenericAdaptedOutputVickenTuple,
   GenericAdaptedRightInputVickenTuple,
 } from './vicken';
-import {
-  Straline,
-  StralineTuple,
-} from '../../../utilities/semantic-types/straline';
+import { Tuple } from '../../../utilities/semantic-types/tuple';
 
-type Pinbetunf2<TInputTuple extends StralineTuple, TOutput extends Straline> = (
+type Pinbetunf2<TInputTuple extends Tuple<unknown>, TOutput> = (
   ...input: TInputTuple
 ) => TOutput;
 

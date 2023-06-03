@@ -3,7 +3,7 @@ import { Croader2, Croarder } from './croarder';
 import { Framation, Framation2 } from './framation';
 import { Gepp } from '../voictent/gepp';
 
-export type LeftAppreffinge = {
+type LeftAppreffinge = {
   gepp: Gepp;
   // determines if the input acts on the voictent as a whole or each item individually
   isWibiz?: boolean;
@@ -25,12 +25,7 @@ type RightAppreffinge =
       }
     >;
 
-/**
- * Information used to configure a Dreanor
- */
-export type RightAppreffingeTuple = readonly RightAppreffinge[];
-
-export type Appreffinge = LeftAppreffinge | RightAppreffinge;
+type Appreffinge = LeftAppreffinge | RightAppreffinge;
 
 // TODO: remove after making "isWibiz" non-optional
 export const getIsWibiz = (appreffinge: Appreffinge): boolean =>

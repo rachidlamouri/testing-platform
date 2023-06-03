@@ -9,6 +9,7 @@ type OverviewBoundaryConfiguration = {
 type InternalBoundaryConfiguration = {
   instanceId: string;
   directoryPath: string;
+  displayName: string;
 };
 
 type ExternalBoundaryConfiguration = {
@@ -41,18 +42,21 @@ export type BoundaryConfigurationVoque = InMemoryOdeshin2Voque<
 >;
 
 export const createBoundaryConfiguration = (
-  directoryPathList: string[],
+  manualInputList: Pick<
+    InternalBoundaryConfiguration,
+    'displayName' | 'directoryPath'
+  >[],
 ): BoundaryConfiguration => {
   // TODO: move this logic elsewhere. Perhaps something that creates a program error
-  const invalidBoundaryList = directoryPathList.filter((directoryPath) => {
-    return !fs.existsSync(directoryPath);
+  const invalidBoundaryList = manualInputList.filter((manualInput) => {
+    return !fs.existsSync(manualInput.directoryPath);
   });
 
   if (invalidBoundaryList.length > 0) {
     const errorMessage = [
       'The following declared boundaries do not exist',
-      ...invalidBoundaryList.map((directoryPath) => {
-        return `  ${directoryPath}`;
+      ...invalidBoundaryList.map((manualInput) => {
+        return `  ${manualInput.displayName}: ${manualInput.directoryPath}`;
       }),
     ].join('\n');
     throw Error(errorMessage);
@@ -63,10 +67,10 @@ export const createBoundaryConfiguration = (
     overview: {
       instanceId: 'overview-boundary',
     },
-    internal: directoryPathList.map((directoryPath, index) => {
+    internal: manualInputList.map((manualInput, index) => {
       return {
         instanceId: `internal-directory-boundary-${index}`,
-        directoryPath,
+        ...manualInput,
       };
     }),
     external: {

@@ -1,7 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { DirectedGraphStyle } from '../../graph-visualization/directed-graph/directedGraph';
-import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from '../rootDirectory';
-import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import {
   BOUNDARY_CONFIGURATION_GEPP,
   BoundaryConfigurationVoque,
@@ -26,15 +24,10 @@ export const getBoundaryMetadata = buildEstinant({
   .fromHubblepup2<BoundaryConfigurationVoque>({
     gepp: BOUNDARY_CONFIGURATION_GEPP,
   })
-  .andFromHubblepupTuple2<RootDirectoryVoque, [string]>({
-    gepp: ROOT_DIRECTORY_GEPP,
-    framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
-    croard: (rightInput) => rightInput.indexByName.zorn,
-  })
   .toHubblepupTuple2<BoundaryMetadataVoque>({
     gepp: BOUNDARY_METADATA_GEPP,
   })
-  .onPinbe((boundaryConfiguration, [rootDirectory]) => {
+  .onPinbe((boundaryConfiguration) => {
     const COMMON_BOUNDARY_ATTRIBUTE_BY_KEY = {
       fontsize: FONT_SIZE.boundary,
       style: DirectedGraphStyle.Bold,
@@ -57,12 +50,6 @@ export const getBoundaryMetadata = buildEstinant({
     const internalBoundaryMetadataList =
       boundaryConfiguration.internal.map<BoundaryMetadata>(
         (internalConfiguration) => {
-          const relativeDirectoryPath =
-            internalConfiguration.directoryPath.replace(
-              `${rootDirectory.directoryPath}/`,
-              '',
-            );
-
           return {
             zorn: `internal/${internalConfiguration.directoryPath}`,
 
@@ -70,7 +57,7 @@ export const getBoundaryMetadata = buildEstinant({
             id: internalConfiguration.instanceId,
             directoryPath: internalConfiguration.directoryPath,
             attributeByKey: {
-              label: `Boundary: ${relativeDirectoryPath}`,
+              label: `Boundary: ${internalConfiguration.displayName}`,
               ...COMMON_BOUNDARY_ATTRIBUTE_BY_KEY,
             },
           };

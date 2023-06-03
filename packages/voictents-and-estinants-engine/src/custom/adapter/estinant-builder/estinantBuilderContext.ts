@@ -1,8 +1,4 @@
-import { Gepp } from '../../../type-script-adapter/gepp';
-import {
-  Straline,
-  StralineTuple,
-} from '../../../utilities/semantic-types/straline';
+import { Gepp } from '../../../core/engine-shell/voictent/gepp';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -60,7 +56,7 @@ type AggregatedOutputContext = {
   geppTuple: Gepp[];
 };
 
-type Pinbetunf<TInputTuple extends StralineTuple, TOutput extends Straline> = (
+type Pinbetunf<TInputTuple extends Tuple<unknown>, TOutput> = (
   ...input: TInputTuple
 ) => TOutput;
 

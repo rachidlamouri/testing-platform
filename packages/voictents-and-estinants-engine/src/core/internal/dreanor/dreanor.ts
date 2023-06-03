@@ -1,11 +1,9 @@
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import {
   Croader2,
-  Croarder,
   GenericCroader3,
 } from '../../engine-shell/appreffinge/croarder';
 import {
-  Framation,
   Framation2,
   GenericFramation3,
 } from '../../engine-shell/appreffinge/framation';
@@ -13,7 +11,6 @@ import { Gepp } from '../../engine-shell/voictent/gepp';
 import {
   GenericVoictentItemLanbe2,
   Lanbe,
-  VoictentItemLanbe,
   VoictentLanbe,
 } from '../../engine-shell/voictent/lanbe';
 import { Prected } from './prected';
@@ -43,15 +40,6 @@ export type RightVoictentDreanor = {
   mutableReference?: unknown;
 };
 
-export type RightVoictentItemDreanor = {
-  typeName: DreanorTypeName.RightVoictentItemDreanor;
-  gepp: Gepp;
-  lanbe: VoictentItemLanbe;
-  prected: Prected;
-  framate: Framation;
-  croard: Croarder;
-};
-
 export type RightVoictentItem2Dreanor = {
   typeName: DreanorTypeName.RightVoictentItem2Dreanor;
   gepp: Gepp;
@@ -64,10 +52,7 @@ export type RightVoictentItem2Dreanor = {
 /**
  * Contains the information needed to identify a Voictent, and to stream and cache its Hubblepups
  */
-export type RightDreanor =
-  | RightVoictentDreanor
-  | RightVoictentItemDreanor
-  | RightVoictentItem2Dreanor;
+export type RightDreanor = RightVoictentDreanor | RightVoictentItem2Dreanor;
 
 export type RightDreanorTuple = readonly RightDreanor[];
 
