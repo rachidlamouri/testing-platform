@@ -1,6 +1,6 @@
 import { Merge } from 'type-fest';
 import { Hubblepup } from '../engine-shell/quirm/hubblepup';
-import { GenericGepp } from '../engine-shell/voictent/gepp';
+import { Gepp } from '../engine-shell/voictent/gepp';
 import { Voque } from './voque';
 import { AbstractSerializableIndexByName } from '../../example-programs/abstractSerializableVoictent';
 
@@ -12,7 +12,7 @@ export type InMemoryIndexByName = Merge<
 >;
 
 export type InMemoryVoque<
-  TGepp extends GenericGepp,
+  TGepp extends Gepp,
   TReceivedHubblepup extends Hubblepup,
   TEmittedHubblepup extends Hubblepup,
   TIndexByName extends InMemoryIndexByName,
@@ -25,12 +25,12 @@ export type InMemoryVoque<
 >;
 
 export type StandardInMemoryVoque<
-  TGepp extends GenericGepp,
+  TGepp extends Gepp,
   THubblepup extends Hubblepup,
 > = InMemoryVoque<TGepp, THubblepup, THubblepup, InMemoryIndexByName>;
 
 export type GenericInMemoryVoque = InMemoryVoque<
-  GenericGepp,
+  Gepp,
   Hubblepup,
   Hubblepup,
   InMemoryIndexByName

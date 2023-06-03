@@ -7,7 +7,7 @@ import {
   Framation2,
   GenericFramation3,
 } from '../../engine-shell/appreffinge/framation';
-import { GenericGepp } from '../../engine-shell/voictent/gepp';
+import { Gepp } from '../../engine-shell/voictent/gepp';
 import {
   GenericVoictentItemLanbe2,
   Lanbe,
@@ -27,14 +27,14 @@ export enum DreanorTypeName {
  */
 export type LeftDreanor = {
   typeName: DreanorTypeName.LeftDreanor;
-  gepp: GenericGepp;
+  gepp: Gepp;
   lanbe: Lanbe;
   isReady: boolean;
 };
 
 export type RightVoictentDreanor = {
   typeName: DreanorTypeName.RightVoictentDreanor;
-  gepp: GenericGepp;
+  gepp: Gepp;
   lanbe: VoictentLanbe;
   isReady: boolean;
   mutableReference?: unknown;
@@ -42,7 +42,7 @@ export type RightVoictentDreanor = {
 
 export type RightVoictentItem2Dreanor = {
   typeName: DreanorTypeName.RightVoictentItem2Dreanor;
-  gepp: GenericGepp;
+  gepp: Gepp;
   lanbe: GenericVoictentItemLanbe2;
   prected: Prected;
   framate: Framation2 | GenericFramation3;

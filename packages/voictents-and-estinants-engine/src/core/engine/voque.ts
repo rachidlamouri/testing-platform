@@ -4,10 +4,10 @@ import {
   HubblepupIndexByName,
   IndexedHubblepup,
 } from '../engine-shell/quirm/hubblepup';
-import { GenericGepp } from '../engine-shell/voictent/gepp';
+import { Gepp } from '../engine-shell/voictent/gepp';
 
 export type Voque<
-  TGepp extends GenericGepp,
+  TGepp extends Gepp,
   TReceivedHubblepup extends Hubblepup,
   TEmittedHubblepup extends Hubblepup,
   IndexByName extends HubblepupIndexByName,
@@ -22,7 +22,7 @@ export type Voque<
 };
 
 export type GenericVoque = Voque<
-  GenericGepp,
+  Gepp,
   Hubblepup,
   Hubblepup,
   HubblepupIndexByName,

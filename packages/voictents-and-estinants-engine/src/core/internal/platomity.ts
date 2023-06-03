@@ -5,7 +5,7 @@ import {
 } from './dreanor/dreanor';
 import { GenericEstinant2 } from '../engine-shell/estinant/estinant';
 import { Procody } from './procody/procody';
-import { GenericGeppSet } from '../engine-shell/voictent/gepp';
+import { GeppSet } from '../engine-shell/voictent/gepp';
 import { GenericVoictent2 } from '../engine/voictent2';
 
 export type Platomity2 = {
@@ -13,7 +13,7 @@ export type Platomity2 = {
   estinant: GenericEstinant2;
   leftDreanor: LeftDreanor;
   rightDreanorTuple: RightDreanorTuple;
-  outputGeppSet: GenericGeppSet;
+  outputGeppSet: GeppSet;
   procody: Procody;
   executionCount: number;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define

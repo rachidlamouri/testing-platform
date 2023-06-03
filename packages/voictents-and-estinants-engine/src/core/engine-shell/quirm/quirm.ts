@@ -1,4 +1,4 @@
-import { GenericGepp } from '../voictent/gepp';
+import { Gepp } from '../voictent/gepp';
 import { Hubblepup } from './hubblepup';
 
 /**
@@ -6,7 +6,7 @@ import { Hubblepup } from './hubblepup';
  * a Hubblepup to a Voictent via a Gepp.
  */
 export type Quirm = {
-  gepp: GenericGepp;
+  gepp: Gepp;
   hubblepup: Hubblepup;
 };
 

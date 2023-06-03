@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { posix } from 'path';
 import { Grition } from '../../custom/adapter/grition';
-import { GenericGepp } from '../engine-shell/voictent/gepp';
+import { Gepp } from '../engine-shell/voictent/gepp';
 import { Voque } from './voque';
 import { Voictent2 } from './voictent2';
 import {
@@ -45,7 +45,7 @@ type CachedCacheable<TGrition extends Grition> = BaseCacheable<TGrition>;
 type CachedOnDiskIndexByName = AbstractSerializableIndexByName;
 
 export type CachedOnDiskVoque<
-  TGepp extends GenericGepp,
+  TGepp extends Gepp,
   TGrition extends Json,
 > = Voque<
   TGepp,
@@ -55,7 +55,7 @@ export type CachedOnDiskVoque<
   CachedCacheable<TGrition>[]
 >;
 
-type GenericCachedOnDiskVoque = CachedOnDiskVoque<GenericGepp, Json>;
+type GenericCachedOnDiskVoque = CachedOnDiskVoque<Gepp, Json>;
 
 type CachedOnDiskVoictentConstructorInput<
   TVoque extends GenericCachedOnDiskVoque,

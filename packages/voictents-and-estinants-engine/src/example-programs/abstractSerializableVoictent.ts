@@ -1,4 +1,4 @@
-import { GenericGepp } from '../core/engine-shell/voictent/gepp';
+import { Gepp } from '../core/engine-shell/voictent/gepp';
 import { Voictent2 } from '../core/engine/voictent2';
 import { Voque } from '../core/engine/voque';
 import {
@@ -21,14 +21,14 @@ export type AbstractSerializable = {
 };
 
 export type GenericAbstractSerializableSourceVoque = Voque<
-  GenericGepp,
+  Gepp,
   Hubblepup,
   Hubblepup,
   AbstractSerializableIndexByName,
   Hubblepup[]
 >;
 
-export type AbstractSerializableVoque<TGepp extends GenericGepp> = Voque<
+export type AbstractSerializableVoque<TGepp extends Gepp> = Voque<
   TGepp,
   AbstractSerializable,
   AbstractSerializable,
@@ -36,7 +36,7 @@ export type AbstractSerializableVoque<TGepp extends GenericGepp> = Voque<
   AbstractSerializable[]
 >;
 
-export type GenericAbstractSerializableVoque = AbstractSerializableVoque<GenericGepp>;
+export type GenericAbstractSerializableVoque = AbstractSerializableVoque<Gepp>;
 
 export type IndexedAbstractSerializable =
   GenericAbstractSerializableVoque['indexedEmittedHubblepup'];

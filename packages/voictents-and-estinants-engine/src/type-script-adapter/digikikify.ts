@@ -9,7 +9,7 @@ import {
   GenericEstinant2,
 } from '../core/engine-shell/estinant/estinant';
 import { GenericVoque, GenericVoqueTuple, Voque } from '../core/engine/voque';
-import { GenericGepp } from '../core/engine-shell/voictent/gepp';
+import { Gepp } from '../core/engine-shell/voictent/gepp';
 import {
   GenericVoictent2,
   GenericVoictent2Tuple,
@@ -79,7 +79,7 @@ type EstinantTupleInputOutputVoqueUnion<
 }[number];
 
 type SimilarVoque<TVoque extends GenericVoque> = Voque<
-  GenericGepp,
+  Gepp,
   TVoque['receivedHubblepup'],
   TVoque['emittedHubblepup'],
   TVoque['indexByName'],
@@ -185,7 +185,7 @@ export const digikikify = <
     ),
   );
 
-  const estinantGeppList = estinantTuple.flatMap<GenericGepp>(
+  const estinantGeppList = estinantTuple.flatMap<Gepp>(
     (estinant: GenericEstinant2) => [
       estinant.leftInputAppreffinge.gepp,
       ...estinant.rightInputAppreffingeTuple.map(

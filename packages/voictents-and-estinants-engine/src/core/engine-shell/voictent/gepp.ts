@@ -1,6 +1,6 @@
 /**
  * The thing that is used to find a Voictent of Hubblepups
  */
-export type GenericGepp = string;
+export type Gepp = string;
 
-export type GenericGeppSet = Set<GenericGepp>;
+export type GeppSet = Set<Gepp>;

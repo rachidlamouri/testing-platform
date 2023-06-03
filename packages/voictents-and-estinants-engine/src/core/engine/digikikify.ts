@@ -17,7 +17,7 @@ import {
   GenericEstinant2,
   UnsafeEstinant2Tuple,
 } from '../engine-shell/estinant/estinant';
-import { GenericGepp, GenericGeppSet } from '../engine-shell/voictent/gepp';
+import { Gepp, GeppSet } from '../engine-shell/voictent/gepp';
 import {
   GenericIndexedHubblepup,
   GenericIndexedHubblepupTuple,
@@ -69,7 +69,7 @@ const nanosecondsToSeconds = (nanoseconds: bigint): bigint =>
 type TickSeries<TValue extends number | bigint> = TValue[];
 
 type VoictentTickSeriesConfiguration = {
-  gepp: GenericGepp;
+  gepp: Gepp;
   voictentLanbe: VoictentLanbe | null;
   voictentItemLanbe: VoictentItemLanbe | GenericVoictentItemLanbe2 | null;
   voictentTickSeries: TickSeries<number>;
@@ -77,7 +77,7 @@ type VoictentTickSeriesConfiguration = {
 };
 
 type EstinantConnectionTickSeriesConfiguration = {
-  gepp: GenericGepp;
+  gepp: Gepp;
   lanbe: Lanbe;
   tickSeries: TickSeries<number>;
 };
@@ -115,7 +115,7 @@ export const digikikify = ({
   onFinish,
   strategy = DigikikifierStrategy.WaitForAllDependencies,
 }: DigikikifierInput): void => {
-  const inputGeppSet: GenericGeppSet = new Set(
+  const inputGeppSet: GeppSet = new Set(
     inputVoictentList.map((voictent) => {
       return voictent.gepp;
     }),
@@ -619,7 +619,7 @@ export const digikikify = ({
   };
 
   const executeWaitForAllDependenciesStrategy = (): void => {
-    const virokByGepp = new Map<GenericGepp, Virok>();
+    const virokByGepp = new Map<Gepp, Virok>();
 
     inputVoictentList.forEach((voictent) => {
       const virok: Virok = {
