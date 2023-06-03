@@ -28,6 +28,7 @@ import {
   DirectedGraphMetadataByIdVoque,
   DirectedGraphMetadatumField,
 } from './graph-visualization/directedGraphMetadataById';
+import { isNotNull } from '../../utilities/isNotNull';
 
 type EngineVoictent = {
   id: string;
@@ -428,6 +429,28 @@ export const getDirectedGraph = buildEstinant({
       subgraphList: [],
     };
 
+    // Creates an invisible arrow between inputs for the same estinant to force them to be in order
+    const inputOrderingEdgeList = engineProgram.estinantList
+      .flatMap((estinant) => {
+        return estinant.inputList.map((input, index, list) => {
+          if (index < list.length - 1) {
+            const edge: DirectedGraphEdge = {
+              attributeByKey: {
+                id: `${input.id}:${list[index + 1].id}`,
+                style: 'invis',
+              },
+              tailId: input.id,
+              headId: list[index + 1].id,
+            };
+
+            return edge;
+          }
+
+          return null;
+        });
+      })
+      .filter(isNotNull);
+
     const rootGraph: DirectedGraph = {
       zorn: associationId,
       isRoot: true,
@@ -443,6 +466,7 @@ export const getDirectedGraph = buildEstinant({
         ...startingEdgeList,
         ...inputEdgeList,
         ...outputEdgeList,
+        ...inputOrderingEdgeList,
         ...voictentToEndEdgeList,
         ...estinantToEndEdgeList,
       ],

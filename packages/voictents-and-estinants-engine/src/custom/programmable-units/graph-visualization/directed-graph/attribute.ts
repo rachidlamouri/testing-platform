@@ -24,6 +24,7 @@ export type AttributeByKey = {
   fontsize: number;
   labelloc: LabelLocation;
   color: string;
+  style: string;
 };
 
 export type PartialAttributeByKey = SetOptional<
