@@ -3,6 +3,4 @@
  */
 export type GenericGepp = string;
 
-export type Gepp<TGepp extends GenericGepp> = TGepp;
-
 export type GenericGeppSet = Set<GenericGepp>;

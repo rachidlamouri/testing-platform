@@ -1,8 +1,5 @@
 import { Tuple } from '../../../utilities/semantic-types/tuple';
-import {
-  LeftAppreffinge,
-  RightAppreffingeTuple,
-} from '../appreffinge/appreffinge';
+
 import { LeftInputAppreffinge } from '../appreffinge/leftInputAppreffinge';
 import { OutputAppreffinge } from '../appreffinge/outputApreffinge';
 import { InputVickenTupleToRightInputAppreffingeTuple } from '../appreffinge/rightInputAppreffinge';
@@ -12,19 +9,7 @@ import {
   UnsafeOutputVicken,
 } from '../vicken/outputVicken';
 import { GenericRightInputVickenTuple } from '../vicken/rightInputVicken';
-import { Tropoignant, Tropoignant2 } from './tropoignant';
-
-/**
- * One of the two programmable units of the Engine (see Quirm).
- * It allows the Progammer to register a Tropoignant to one or more Voictents via a tuple of Gepps.
- */
-export type Estinant = {
-  version?: never;
-  name?: string;
-  leftAppreffinge: LeftAppreffinge;
-  rightAppreffingeTuple: RightAppreffingeTuple;
-  tropoig: Tropoignant;
-};
+import { Tropoignant2 } from './tropoignant';
 
 export type Estinant2<
   TLeftInputVicken extends GenericLeftInputVicken,
