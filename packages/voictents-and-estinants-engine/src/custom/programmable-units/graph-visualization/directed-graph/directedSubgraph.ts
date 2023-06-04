@@ -26,7 +26,7 @@ type SubgraphAttributeByKey = SpreadN<
   ]
 >;
 
-type PartialSubgraphAttributeByKey =
+export type PartialSubgraphAttributeByKey =
   PartialAttributeByKey<SubgraphAttributeByKey>;
 
 export type DirectedSubgraph = {
@@ -52,7 +52,7 @@ type ClusterAttributeByKey = SpreadN<
   ]
 >;
 
-type PartialClusterAttributeByKey =
+export type PartialClusterAttributeByKey =
   PartialAttributeByKey<ClusterAttributeByKey>;
 
 export type DirectedCluster = {

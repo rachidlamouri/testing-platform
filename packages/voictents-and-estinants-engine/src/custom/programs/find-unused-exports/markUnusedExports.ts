@@ -160,6 +160,72 @@ export const markUnusedExports = buildEstinant({
             'packages/voictents-and-estinants-engine/src/custom/programmable-units/in-memory-cache/zornable.ts',
           importedIdentifierName: 'ZornableVoque',
         },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/directedGraphElement2.ts',
+          importedIdentifierName: 'DirectedGraphElement2',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/directedGraphElement2.ts',
+          importedIdentifierName: 'DIRECTED_GRAPH_ELEMENT_2_GEPP',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/directedGraphElement2.ts',
+          importedIdentifierName: 'DirectedGraphElement2Voque',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/graphContext.ts',
+          importedIdentifierName: 'GraphContext',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/rootGraphLocator.ts',
+          importedIdentifierName: 'RootGraphLocator',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/rootGraphLocator.ts',
+          importedIdentifierName: 'RootGraphLocatorInstance',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/directedCluster2.ts',
+          importedIdentifierName: 'DirectedCluster2Instance',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/directedGraph2.ts',
+          importedIdentifierName: 'DirectedGraph2Instance',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/directedGraphEdge2.ts',
+          importedIdentifierName: 'DirectedGraphEdge2Instance',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/directedGraphNode2.ts',
+          importedIdentifierName: 'DirectedGraphNode2Instance',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/directedSubgraph2.ts',
+          importedIdentifierName: 'DirectedSubgraph2Instance',
+        },
       ];
 
     [

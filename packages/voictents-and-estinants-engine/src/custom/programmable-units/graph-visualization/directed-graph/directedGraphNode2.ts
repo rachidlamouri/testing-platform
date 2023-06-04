@@ -1,0 +1,34 @@
+import { PartialNodeAttributeByKey } from './directedGraphNode';
+import { RootGraphLocator } from './rootGraphLocator';
+import {
+  ObjectWithPrototype,
+  buildConstructorFunctionWithName,
+} from '../../../../utilities/buildConstructorFunction';
+import { getZorn } from '../../../../utilities/getZorn';
+
+type BaseDirectedGraphNode2 = {
+  attributeByKey: PartialNodeAttributeByKey;
+  rootGraphLocator: RootGraphLocator;
+  parentId: string;
+};
+
+type DirectedGraphNode2Prototype = {
+  get zorn(): string;
+  get id(): string;
+};
+
+export type DirectedGraphNode2 = ObjectWithPrototype<
+  BaseDirectedGraphNode2,
+  DirectedGraphNode2Prototype
+>;
+
+export const { DirectedGraphNode2Instance } = buildConstructorFunctionWithName(
+  'DirectedGraphNode2Instance',
+)<BaseDirectedGraphNode2, DirectedGraphNode2Prototype>({
+  zorn: (directedNode) => {
+    return getZorn([directedNode.rootGraphLocator.zorn, directedNode.id]);
+  },
+  id: (directedNode) => {
+    return directedNode.attributeByKey.id;
+  },
+});
