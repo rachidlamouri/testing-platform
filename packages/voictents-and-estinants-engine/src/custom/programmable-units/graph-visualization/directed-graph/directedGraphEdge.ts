@@ -1,5 +1,4 @@
 import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
-import { PartialAttributeByKey } from './partialAttributeByKey';
 import { SpreadN } from '../../../../utilities/spreadN';
 import { AttributeByKeyCNE } from './attributeByKeyCNE';
 
@@ -17,10 +16,10 @@ type EdgeAttributeByKey = SpreadN<
   ]
 >;
 
-type PartialEdgeAttributeByKey = PartialAttributeByKey<EdgeAttributeByKey>;
+type PartialEdgeAttributeByKey = Partial<EdgeAttributeByKey>;
 
 export type DirectedGraphEdge = {
-  attributeByKey: PartialEdgeAttributeByKey;
+  attributeByKey?: PartialEdgeAttributeByKey;
   tailId: string;
   headId: string;
 };

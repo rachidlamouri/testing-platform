@@ -22,6 +22,10 @@ const quoteId = (text: string): QuotedText => quote(escapeId(text));
 const getAttributeStatementList = (
   node: DirectedGraphElement,
 ): AttributeStatement[] => {
+  if (node.attributeByKey === undefined) {
+    return [];
+  }
+
   return Object.entries(node.attributeByKey)
     .filter(([, value]) => value !== undefined)
     .map(([key, value]): AttributeStatement => {
@@ -42,14 +46,25 @@ type EdgeRelationshipStatement = `${QuotedText} -> ${QuotedText}`;
 type EdgeStatement = `${EdgeRelationshipStatement} ${AttributeListStatement}`;
 
 const getEdgeStatement = (edge: DirectedGraphEdge): EdgeStatement => {
-  const attributeStatementList = getAttributeStatementList(edge);
+  // TODO: remove "id" from DirectedGraphEdge
+  const { id, ...otherAttributeByKey } = edge.attributeByKey ?? {};
+
+  const modifiedEdge = {
+    ...edge,
+    attributeByKey: {
+      id: `${edge.tailId}:${edge.headId}`,
+      ...otherAttributeByKey,
+    },
+  };
+
+  const attributeStatementList = getAttributeStatementList(modifiedEdge);
 
   const attributeListStatement = joinAttributeListSingleLine(
     attributeStatementList,
   );
 
-  const quotedTailId = quoteId(edge.tailId);
-  const quotedHeadId = quoteId(edge.headId);
+  const quotedTailId = quoteId(modifiedEdge.tailId);
+  const quotedHeadId = quoteId(modifiedEdge.headId);
   const edgeRelationshipStatement: EdgeRelationshipStatement = `${quotedTailId} -> ${quotedHeadId}`;
 
   const edgeStatement: EdgeStatement = `${edgeRelationshipStatement} ${attributeListStatement}`;
