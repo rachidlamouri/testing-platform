@@ -4,14 +4,11 @@ import { AbstractSerializableIndexByName } from '../../../example-programs/abstr
 import { Gepp } from '../../../core/engine-shell/voictent/gepp';
 import { Hubblepup } from '../../../core/engine-shell/quirm/hubblepup';
 
-type Zornable = {
+export type Zornable = {
   zorn: string;
 };
 
-export type ZornableIndexByName = Merge<
-  AbstractSerializableIndexByName,
-  Zornable
->;
+type ZornableIndexByName = Merge<AbstractSerializableIndexByName, Zornable>;
 
 export type ZornableVoque<
   TGepp extends Gepp,

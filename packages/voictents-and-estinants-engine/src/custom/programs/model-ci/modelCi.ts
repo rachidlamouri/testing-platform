@@ -29,7 +29,6 @@ import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
-import { EngineVoqueLocatorVoictent } from '../../programmable-units/engine-program/engineVoqueLocatorVoictent';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
@@ -64,7 +63,6 @@ digikikify({
     new ProgramErrorVoictent({
       programFileCache,
     }),
-    new EngineVoqueLocatorVoictent(),
   ],
   estinantTuple: [
     enumerateFileSystemObjects,

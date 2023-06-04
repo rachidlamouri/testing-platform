@@ -4,14 +4,17 @@ import {
   ENGINE_ESTINANT_2_GEPP,
   EngineEstinant2Voque,
 } from './engineEstinant2';
-import { ENGINE_PROGRAM_2_GEPP, EngineProgram2Voque } from './engineProgram2';
+import {
+  ENGINE_PROGRAM_2_GEPP,
+  EngineProgram2Instance,
+  EngineProgram2Voque,
+} from './engineProgram2';
 import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
   EngineProgramLocator2Voque,
 } from './engineProgramLocator2';
-import { getTextDigest } from '../../../utilities/getTextDigest';
 import { ENGINE_VOQUE_GEPP, EngineVoqueVoque } from './engineVoque';
-import { ReceivedEngineVoqueLocator } from './engineVoqueLocator';
+import { EngineVoqueLocator } from './engineVoqueLocator';
 
 /**
  * Joins the program locator to its transforms in order to
@@ -31,7 +34,7 @@ export const getEngineProgram2 = buildEstinant({
       });
     },
     croard: (rightInput) => {
-      return rightInput.indexByName.zorn;
+      return rightInput.hubblepup.locator.zorn;
     },
   })
   .andFromVoictent2<EngineVoqueVoque>({
@@ -56,7 +59,7 @@ export const getEngineProgram2 = buildEstinant({
       }),
     ]
       .filter(
-        (voqueLocator): voqueLocator is ReceivedEngineVoqueLocator =>
+        (voqueLocator): voqueLocator is EngineVoqueLocator =>
           voqueLocator !== undefined,
       )
       .map((voqueLocator) => {
@@ -69,15 +72,14 @@ export const getEngineProgram2 = buildEstinant({
         return voque;
       });
 
-    return {
-      zorn: engineProgramLocator.zorn,
-      id: getTextDigest(engineProgramLocator.programName),
+    return new EngineProgram2Instance({
       programName: engineProgramLocator.programName,
       description: engineProgramLocator.description,
       filePath: engineProgramLocator.filePath,
       voictentLocatorList: engineProgramLocator.voictentLocatorList,
       estinantList,
       voqueList,
-    };
+      locator: engineProgramLocator,
+    });
   })
   .assemble();

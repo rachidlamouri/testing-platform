@@ -1,6 +1,12 @@
 import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import {
+  ObjectWithPrototype,
+  buildConstructorFunctionWithName,
+} from '../../../utilities/buildConstructorFunction';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
-import { ReceivedEngineVoqueLocator } from './engineVoqueLocator';
+import { EngineVoqueLocator } from './engineVoqueLocator';
+import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
+import { getTextDigest } from '../../../utilities/getTextDigest';
 
 type BaseEstinantInputOutput<
   TIsInput extends boolean,
@@ -10,7 +16,7 @@ type BaseEstinantInputOutput<
   // TODO: delete "voictentName" in favor of "voqueLocator"
   voictentName: string;
   // TODO: make this non optional
-  voqueLocator?: ReceivedEngineVoqueLocator;
+  voqueLocator?: EngineVoqueLocator;
   isInput: TIsInput;
   index: TIndex;
 };
@@ -19,12 +25,7 @@ export type EstinantInput2 = BaseEstinantInputOutput<true, number>;
 
 export type EstinantOutput2 = BaseEstinantInputOutput<false, null>;
 
-/**
- * Represents a transform for the program modeler
- */
-export type EngineEstinant2 = {
-  zorn: string;
-  id: string;
+type BaseEngineEstinant2 = {
   estinantName: string;
   filePath: string;
   identifierName: string;
@@ -33,6 +34,29 @@ export type EngineEstinant2 = {
   outputList: EstinantOutput2[];
   locator: EngineEstinantLocator2;
 };
+
+type EngineEstinant2Prototype = {
+  get zorn(): string;
+  get id(): string;
+};
+
+/**
+ * Represents a transform for the program modeler
+ */
+export type EngineEstinant2 = ObjectWithPrototype<
+  BaseEngineEstinant2,
+  EngineEstinant2Prototype
+>;
+
+export const { EngineEstinant2Instance } = buildConstructorFunctionWithName(
+  'EngineEstinant2Instance',
+)<BaseEngineEstinant2, EngineEstinant2Prototype>({
+  zorn: getExportLocatorZorn,
+  id: (engineEstinant) => {
+    return getTextDigest(engineEstinant.estinantName);
+  },
+  // id: getZornableId,
+});
 
 export const ENGINE_ESTINANT_2_GEPP = 'engine-estinant-2';
 

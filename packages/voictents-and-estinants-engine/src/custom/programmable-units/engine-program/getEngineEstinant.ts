@@ -31,10 +31,11 @@ import {
 } from './engineEstinantLocator2';
 import {
   ENGINE_ESTINANT_2_GEPP,
-  EngineEstinant2,
+  EngineEstinant2Instance,
   EngineEstinant2Voque,
   EstinantInput2,
   EstinantOutput2,
+  EngineEstinant2,
 } from './engineEstinant2';
 import { getTextDigest } from '../../../utilities/getTextDigest';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclarationList';
@@ -59,7 +60,8 @@ import {
 import {
   ENGINE_VOQUE_LOCATOR_GEPP,
   EngineVoqueLocatorVoque,
-  ReceivedEngineVoqueLocator,
+  EngineVoqueLocatorInstance,
+  EngineVoqueLocator,
 } from './engineVoqueLocator';
 
 const ESTINANT_NAME = 'getEngineEstinant' as const;
@@ -121,9 +123,7 @@ const getBuildAddMetadataForSerializationEstinant = (
           },
         } satisfies ReportedProgramError<ReportingLocator>,
       ],
-      estinant: {
-        zorn: estinantLocator.zorn,
-        id: getTextDigest(estinantLocator.zorn),
+      estinant: new EngineEstinant2Instance({
         // TODO: why do we include both of these?
         estinantName: 'UNKNOWN',
         identifierName: 'UNKNOWN',
@@ -132,7 +132,7 @@ const getBuildAddMetadataForSerializationEstinant = (
         inputList: [],
         outputList: [],
         locator: estinantLocator,
-      } satisfies EngineEstinant2,
+      }),
     };
   }
 
@@ -146,9 +146,7 @@ const getBuildAddMetadataForSerializationEstinant = (
 
   return {
     errorList: [],
-    estinant: {
-      zorn: estinantLocator.zorn,
-      id: getTextDigest(estinantName),
+    estinant: new EngineEstinant2Instance({
       // TODO: why do we include both of these?
       estinantName,
       identifierName: estinantName,
@@ -172,7 +170,7 @@ const getBuildAddMetadataForSerializationEstinant = (
         },
       ],
       locator: estinantLocator,
-    } satisfies EngineEstinant2,
+    }),
   };
 };
 
@@ -223,15 +221,15 @@ const getCoreEstinant = ({
           },
         } satisfies ReportedProgramError<ReportingLocator>,
       ],
-      estinant: {
-        id: getTextDigest(estinantName),
+      estinant: new EngineEstinant2Instance({
+        filePath: estinantLocator.filePath,
+        identifierName: estinantLocator.identifierName,
         estinantName,
-        ...estinantLocator,
         commentText: commentedBodyDeclaration?.commentText ?? '',
         inputList: [],
         outputList: [],
         locator: estinantLocator,
-      } satisfies EngineEstinant2,
+      }),
     };
   }
 
@@ -375,15 +373,15 @@ const getCoreEstinant = ({
 
   return {
     errorList: parallelErrorList,
-    estinant: {
-      id: getTextDigest(estinantName),
+    estinant: new EngineEstinant2Instance({
+      filePath: estinantLocator.filePath,
+      identifierName: estinantLocator.identifierName,
       estinantName,
-      ...estinantLocator,
       commentText: commentedBodyDeclaration?.commentText ?? '',
       inputList,
       outputList,
       locator: estinantLocator,
-    } satisfies EngineEstinant2,
+    }),
   };
 };
 
@@ -451,15 +449,15 @@ const getAdaptedEstinant = ({
 
     return {
       errorList: [error],
-      estinant: {
-        id: getTextDigest(estinantName),
+      estinant: new EngineEstinant2Instance({
+        filePath: estinantLocator.filePath,
+        identifierName: estinantLocator.identifierName,
         estinantName,
-        ...estinantLocator,
         commentText: '',
         inputList: [],
         outputList: [],
         locator: estinantLocator,
-      } satisfies EngineEstinant2,
+      }),
     };
   }
 
@@ -676,10 +674,10 @@ const getAdaptedEstinant = ({
       voictentName = voqueName.replace(/Voque$/, '');
     }
 
-    const voqueLocator: ReceivedEngineVoqueLocator = {
+    const voqueLocator = new EngineVoqueLocatorInstance({
       filePath: getIdentifierOriginFilePath(voqueName),
       identifierName: voqueName,
-    };
+    });
 
     if (isInput) {
       return {
@@ -781,15 +779,15 @@ const getAdaptedEstinant = ({
 
   return {
     errorList: parallelErrorList,
-    estinant: {
-      id: getTextDigest(estinantName),
+    estinant: new EngineEstinant2Instance({
+      filePath: estinantLocator.filePath,
+      identifierName: estinantLocator.identifierName,
       estinantName,
-      ...estinantLocator,
       commentText: commentedBodyDeclaration?.commentText ?? '',
       inputList,
       outputList,
       locator: estinantLocator,
-    } satisfies EngineEstinant2,
+    }),
   };
 };
 
@@ -902,7 +900,7 @@ export const getEngineEstinant = buildEstinant({
       ]
         .map((inputOutput) => inputOutput.voqueLocator)
         .filter(
-          (inputOutput): inputOutput is ReceivedEngineVoqueLocator =>
+          (inputOutput): inputOutput is EngineVoqueLocator =>
             inputOutput !== undefined,
         );
 

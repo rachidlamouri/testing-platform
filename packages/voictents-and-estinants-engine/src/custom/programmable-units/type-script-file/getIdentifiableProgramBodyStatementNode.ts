@@ -55,5 +55,22 @@ export const getIdentifiableProgramBodyStatementNode = (
     return { id: statement.specifiers[0].local };
   }
 
+  // TODO: same todo as the above if statement.
+  if (
+    statement.type === AST_NODE_TYPES.ExportNamedDeclaration &&
+    statement.declaration?.type === AST_NODE_TYPES.VariableDeclaration &&
+    statement.declaration.declarations[0]?.type ===
+      AST_NODE_TYPES.VariableDeclarator &&
+    statement.declaration.declarations[0].id.type ===
+      AST_NODE_TYPES.ObjectPattern &&
+    statement.declaration.declarations[0].id.properties[0] !== undefined &&
+    statement.declaration.declarations[0].id.properties[0].type ===
+      AST_NODE_TYPES.Property &&
+    statement.declaration.declarations[0].id.properties[0].key.type ===
+      AST_NODE_TYPES.Identifier
+  ) {
+    return { id: statement.declaration.declarations[0].id.properties[0].key };
+  }
+
   return null;
 };
