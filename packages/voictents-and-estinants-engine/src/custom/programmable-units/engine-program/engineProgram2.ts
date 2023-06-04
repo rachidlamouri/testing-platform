@@ -3,12 +3,13 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../utilities/buildConstructorFunction';
-import { getTextDigest } from '../../../utilities/getTextDigest';
+import { getZornableId } from '../../../utilities/getZornableId';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { EngineEstinant2 } from './engineEstinant2';
 import {
   TEngineProgramLocator2,
   VoictentLocator,
+  getEngineProgramLocatorZorn,
 } from './engineProgramLocator2';
 import { EngineVoque } from './engineVoque';
 
@@ -38,10 +39,8 @@ type EngineProgram2 = ObjectWithPrototype<
 export const { EngineProgram2Instance } = buildConstructorFunctionWithName(
   'EngineProgram2Instance',
 )<BaseEngineProgram2, EngineProgram2Prototype>({
-  zorn: (engineProgram) => engineProgram.locator.zorn,
-  id: (engineProgram) => getTextDigest(engineProgram.programName),
-  // zorn: getEngineProgramLocatorZorn,
-  // id: getZornableId,
+  zorn: getEngineProgramLocatorZorn,
+  id: getZornableId,
 });
 
 export const ENGINE_PROGRAM_2_GEPP = 'engine-program-2';

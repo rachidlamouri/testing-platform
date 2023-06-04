@@ -155,7 +155,9 @@ const getBuildAddMetadataForSerializationEstinant = (
         'Prepares each item in one collection to be sent to a serialized collection',
       inputList: [
         {
-          id: getTextDigest(`${estinantName} | input | ${inputVoictentName}`),
+          id: getTextDigest(
+            `${estinantName} | input | ${inputVoictentName} | ${0}`,
+          ),
           voictentName: inputVoictentName,
           isInput: true,
           index: 0,
@@ -350,9 +352,10 @@ const getCoreEstinant = ({
       }
 
       const voictentName = voqueName.replace(/Voque$/, '');
-
       return {
-        id: getTextDigest(`${estinantName} | input-${voqueName}-${index}`),
+        id: getTextDigest(
+          `${estinantName} | input | ${voictentName} | ${index}`,
+        ),
         voictentName,
         isInput: true,
         index,
@@ -364,7 +367,7 @@ const getCoreEstinant = ({
     const voictentName = voqueName.replace(/Voque$/, '');
 
     return {
-      id: getTextDigest(`${estinantName} | output-${voqueName}`),
+      id: getTextDigest(`${estinantName} | output | ${voqueName}`),
       voictentName,
       isInput: false,
       index: null,
@@ -681,7 +684,9 @@ const getAdaptedEstinant = ({
 
     if (isInput) {
       return {
-        id: getTextDigest(`${estinantName} | input-${index}`),
+        id: getTextDigest(
+          `${estinantName} | input | ${voictentName} | ${index}`,
+        ),
         voictentName,
         voqueLocator,
         isInput,
@@ -690,7 +695,7 @@ const getAdaptedEstinant = ({
     }
 
     return {
-      id: getTextDigest(`${estinantName} | output-${index}`),
+      id: getTextDigest(`${estinantName} | output | ${index}`),
       voictentName,
       voqueLocator,
       isInput,

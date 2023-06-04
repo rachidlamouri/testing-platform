@@ -6,7 +6,7 @@ import {
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 import { EngineVoqueLocator } from './engineVoqueLocator';
 import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
-import { getTextDigest } from '../../../utilities/getTextDigest';
+import { getZornableId } from '../../../utilities/getZornableId';
 
 type BaseEstinantInputOutput<
   TIsInput extends boolean,
@@ -52,10 +52,7 @@ export const { EngineEstinant2Instance } = buildConstructorFunctionWithName(
   'EngineEstinant2Instance',
 )<BaseEngineEstinant2, EngineEstinant2Prototype>({
   zorn: getExportLocatorZorn,
-  id: (engineEstinant) => {
-    return getTextDigest(engineEstinant.estinantName);
-  },
-  // id: getZornableId,
+  id: getZornableId,
 });
 
 export const ENGINE_ESTINANT_2_GEPP = 'engine-estinant-2';
