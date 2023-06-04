@@ -12,7 +12,6 @@ import {
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
 import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/addInteractivityToSvgDocument';
-import { LabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attribute';
 import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
 import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
@@ -23,6 +22,7 @@ import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVo
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+import { GraphLikeLabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'testGraphRender',
@@ -52,7 +52,7 @@ digikikify({
           attributeByKey: {
             id: 'my graph',
             label: 'my graph',
-            labelloc: LabelLocation.Top,
+            labelloc: GraphLikeLabelLocation.Top,
           },
           nodeList: [
             {

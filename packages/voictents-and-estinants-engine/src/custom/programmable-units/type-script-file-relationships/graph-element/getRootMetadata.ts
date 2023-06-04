@@ -1,6 +1,4 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { LabelLocation } from '../../graph-visualization/directed-graph/attribute';
-import { DirectedGraphRankDirection } from '../../graph-visualization/directed-graph/directedGraph';
 import {
   BOUNDARY_METADATA_GEPP,
   BoundaryMetadataVoque,
@@ -16,6 +14,8 @@ import {
   RootMetadataVoque,
 } from './rootMetadata';
 import { getTextDigest } from '../../../../utilities/getTextDigest';
+import { RankDirection } from '../../graph-visualization/directed-graph/attributeByKeyGS';
+import { GraphLikeLabelLocation } from '../../graph-visualization/directed-graph/attributeByKeyGSC';
 
 /**
  * Gets the root directed graph metadata for each boundary in the knowledge graph.
@@ -61,8 +61,8 @@ export const getRootMetadata = buildEstinant({
       importedBoundaryIdSet: new Set(importedBoundaryIdList),
       edgeMetadataList,
       attributeByKey: {
-        rankdir: DirectedGraphRankDirection.LeftRight,
-        labelloc: LabelLocation.Top,
+        rankdir: RankDirection.LeftRight,
+        labelloc: GraphLikeLabelLocation.Top,
         fontsize: FONT_SIZE.root,
         nodesep: 1,
         ...COMMON_ATTRIBUTE_BY_KEY,

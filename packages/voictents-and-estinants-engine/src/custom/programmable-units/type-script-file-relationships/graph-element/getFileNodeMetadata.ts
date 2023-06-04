@@ -6,7 +6,7 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../error/programError';
-import { Shape } from '../../graph-visualization/directed-graph/attribute';
+import { NodeShape } from '../../graph-visualization/directed-graph/directedGraphNode';
 import {
   TYPE_SCRIPT_FILE_GEPP,
   TypeScriptFileVoque,
@@ -104,7 +104,7 @@ export const getFileNodeMetadata = buildEstinant({
             filePath: file.filePath,
             attributeByKey: {
               label: file.onDiskFileName.pascalCase,
-              shape: Shape.Box,
+              shape: NodeShape.Box,
               fontsize: FONT_SIZE.node,
               color: 'gray',
               ...COMMON_ATTRIBUTE_BY_KEY,

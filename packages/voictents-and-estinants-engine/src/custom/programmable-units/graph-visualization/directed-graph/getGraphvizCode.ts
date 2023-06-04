@@ -1,6 +1,7 @@
 import { DirectedGraphEdge } from './directedGraphEdge';
-import { DirectedGraph, DirectedSubgraph } from './directedGraph';
+import { DirectedGraph } from './directedGraph';
 import { DirectedGraphNode } from './directedGraphNode';
+import { DirectedSubgraph } from './directedSubgraph';
 
 const indent = '  ' as const;
 
@@ -18,7 +19,11 @@ const escapeId = (text: string): string => text.replaceAll(/(\/|@|\.)/g, '__');
 const quoteId = (text: string): QuotedText => quote(escapeId(text));
 
 const getAttributeStatementList = (
-  node: DirectedGraph | DirectedGraphNode | DirectedGraphEdge,
+  node:
+    | DirectedGraph
+    | DirectedSubgraph
+    | DirectedGraphNode
+    | DirectedGraphEdge,
 ): AttributeStatement[] => {
   return Object.entries(node.attributeByKey)
     .filter(([, value]) => value !== undefined)

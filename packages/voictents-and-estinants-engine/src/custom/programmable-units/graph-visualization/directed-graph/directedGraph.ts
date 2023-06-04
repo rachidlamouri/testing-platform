@@ -1,65 +1,18 @@
-import { Merge, SetOptional } from 'type-fest';
 import { DirectedGraphEdge } from './directedGraphEdge';
 import { DirectedGraphNode } from './directedGraphNode';
-import { AttributeByKey as BaseAttributeByKey } from './attribute';
 import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { SpreadN } from '../../../../utilities/spreadN';
+import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
+import { AttributeByKeyGSC } from './attributeByKeyGSC';
+import { AttributeByKeyGS } from './attributeByKeyGS';
+import { PartialAttributeByKey } from './partialAttributeByKey';
+import { DirectedSubgraph } from './directedSubgraph';
 
-export enum DirectedGraphRankDirection {
-  LeftRight = 'LR',
-  RightLeft = 'RL',
-  TopBottom = 'TB',
-}
-
-export enum DirectedGraphStyle {
-  Bold = 'bold',
-  Rounded = 'rounded',
-}
-
-export enum SubgraphRankType {
-  Same = 'same',
-  Minimum = 'min',
-  Source = 'source',
-  Maximum = 'max',
-  Sink = 'sink',
-}
-
-type GraphSpecificAttributeByKey = {
-  id: string;
-  rankdir: DirectedGraphRankDirection;
-  nodesep: number;
-};
-
-type GraphAttributeByKey = Merge<
-  BaseAttributeByKey,
-  GraphSpecificAttributeByKey
+type GraphAttributeByKey = SpreadN<
+  [AttributeByKeyGSCNE, AttributeByKeyGSC, AttributeByKeyGS]
 >;
 
-type PartialGraphAttributeByKey = Partial<GraphAttributeByKey>;
-
-type SubgraphSpecificAttributeByKey = {
-  style: DirectedGraphStyle;
-  rank: SubgraphRankType;
-};
-
-type SubgraphAttributeByKey = Merge<
-  BaseAttributeByKey,
-  SubgraphSpecificAttributeByKey
->;
-
-type PartialSubgraphAttributeByKey = SetOptional<
-  SubgraphAttributeByKey,
-  Exclude<keyof SubgraphAttributeByKey, 'id'>
->;
-
-export type DirectedSubgraph = {
-  isRoot: false;
-  isCluster: boolean;
-  attributeByKey: PartialSubgraphAttributeByKey;
-  rankGroupList?: string[][];
-  nodeList: DirectedGraphNode[];
-  edgeList: DirectedGraphEdge[];
-  subgraphList: DirectedSubgraph[];
-};
+type PartialGraphAttributeByKey = PartialAttributeByKey<GraphAttributeByKey>;
 
 /**
  * A proprietary object that can be converted into Graphviz code

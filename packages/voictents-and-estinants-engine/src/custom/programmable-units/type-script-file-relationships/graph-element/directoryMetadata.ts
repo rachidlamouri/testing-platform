@@ -1,5 +1,5 @@
 import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
-import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedGraph';
+import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedSubgraph';
 
 /**
  * Information needed to add a directory to a directed graph in the knowledge

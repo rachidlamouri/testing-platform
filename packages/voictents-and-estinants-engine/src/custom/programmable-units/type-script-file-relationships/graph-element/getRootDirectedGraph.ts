@@ -2,10 +2,9 @@ import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder
 import {
   DIRECTED_GRAPH_GEPP,
   DirectedGraph,
-  DirectedSubgraph,
   DirectedGraphVoque,
 } from '../../graph-visualization/directed-graph/directedGraph';
-import { DirectedGraphNode } from '../../graph-visualization/directed-graph/directedGraphNode';
+import { DirectedGraphNode, NodeShape } from '../../graph-visualization/directed-graph/directedGraphNode';
 import {
   BOUNDARY_METADATA_GEPP,
   BoundaryMetadataVoque,
@@ -27,10 +26,10 @@ import {
 } from './externalModuleMetadata';
 import { OVERVIEW_BOUNDARY_ZORN } from './boundaryConfiguration';
 import { COMMON_ATTRIBUTE_BY_KEY, FONT_SIZE } from './commonAttributeByKey';
-import { Shape } from '../../graph-visualization/directed-graph/attribute';
 import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from '../rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import { getTextDigest } from '../../../../utilities/getTextDigest';
+import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedSubgraph';
 
 /**
  * Converts all TypeScript relationship metadata into a directed graph
@@ -174,7 +173,7 @@ export const getRootDirectedGraph = buildEstinant({
             attributeByKey: {
               id: metadata.boundaryId,
               label: nodeLabel,
-              shape: Shape.Box,
+              shape: NodeShape.Box,
               fontsize: FONT_SIZE.node,
               ...COMMON_ATTRIBUTE_BY_KEY,
             },
