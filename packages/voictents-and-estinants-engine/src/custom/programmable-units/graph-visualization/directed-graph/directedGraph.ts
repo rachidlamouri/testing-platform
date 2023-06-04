@@ -12,7 +12,8 @@ type GraphAttributeByKey = SpreadN<
   [AttributeByKeyGSCNE, AttributeByKeyGSC, AttributeByKeyGS]
 >;
 
-type PartialGraphAttributeByKey = PartialAttributeByKey<GraphAttributeByKey>;
+export type PartialGraphAttributeByKey =
+  PartialAttributeByKey<GraphAttributeByKey>;
 
 /**
  * A proprietary object that can be converted into Graphviz code

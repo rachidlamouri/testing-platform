@@ -16,7 +16,7 @@ type EdgeAttributeByKey = SpreadN<
   ]
 >;
 
-type PartialEdgeAttributeByKey = Partial<EdgeAttributeByKey>;
+export type PartialEdgeAttributeByKey = Partial<EdgeAttributeByKey>;
 
 export type DirectedGraphEdge = {
   attributeByKey?: PartialEdgeAttributeByKey;
