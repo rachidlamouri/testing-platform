@@ -29,6 +29,7 @@ import {
 } from './graph-visualization/directedGraphMetadataById';
 import { isNotNull } from '../../utilities/isNotNull';
 import {
+  DirectedCluster,
   DirectedSubgraph,
   RankType,
 } from './graph-visualization/directed-graph/directedSubgraph';
@@ -408,7 +409,7 @@ export const getDirectedGraph = buildEstinant({
         return edge;
       });
 
-    const startSubgraph: DirectedSubgraph = {
+    const startSubgraph: DirectedCluster = {
       isRoot: false,
       isCluster: true,
       attributeByKey: {
@@ -422,7 +423,7 @@ export const getDirectedGraph = buildEstinant({
       subgraphList: [],
     };
 
-    const endSubgraph: DirectedSubgraph = {
+    const endSubgraph: DirectedCluster = {
       isRoot: false,
       isCluster: true,
       attributeByKey: {

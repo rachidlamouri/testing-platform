@@ -1,7 +1,8 @@
 import { DirectedGraphEdge } from './directedGraphEdge';
 import { DirectedGraph } from './directedGraph';
 import { DirectedGraphNode } from './directedGraphNode';
-import { DirectedSubgraph } from './directedSubgraph';
+import { GraphLike } from './graphLike';
+import { DirectedGraphElement } from './directedGraphElement';
 
 const indent = '  ' as const;
 
@@ -19,11 +20,7 @@ const escapeId = (text: string): string => text.replaceAll(/(\/|@|\.)/g, '__');
 const quoteId = (text: string): QuotedText => quote(escapeId(text));
 
 const getAttributeStatementList = (
-  node:
-    | DirectedGraph
-    | DirectedSubgraph
-    | DirectedGraphNode
-    | DirectedGraphEdge,
+  node: DirectedGraphElement,
 ): AttributeStatement[] => {
   return Object.entries(node.attributeByKey)
     .filter(([, value]) => value !== undefined)
@@ -73,9 +70,7 @@ const getNodeStatement = (node: DirectedGraphNode): string => {
   return nodeStatement;
 };
 
-const getDirectedGraphCodeLineList = (
-  graph: DirectedGraph | DirectedSubgraph,
-): string[] => {
+const getDirectedGraphCodeLineList = (graph: GraphLike): string[] => {
   const isCluster = graph.isCluster ?? false;
 
   const graphKeyword = graph.isRoot ? 'digraph' : 'subgraph';

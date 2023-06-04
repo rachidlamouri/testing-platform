@@ -4,7 +4,10 @@ import {
   DirectedGraph,
   DirectedGraphVoque,
 } from '../../graph-visualization/directed-graph/directedGraph';
-import { DirectedGraphNode, NodeShape } from '../../graph-visualization/directed-graph/directedGraphNode';
+import {
+  DirectedGraphNode,
+  NodeShape,
+} from '../../graph-visualization/directed-graph/directedGraphNode';
 import {
   BOUNDARY_METADATA_GEPP,
   BoundaryMetadataVoque,
@@ -29,7 +32,7 @@ import { COMMON_ATTRIBUTE_BY_KEY, FONT_SIZE } from './commonAttributeByKey';
 import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from '../rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import { getTextDigest } from '../../../../utilities/getTextDigest';
-import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedSubgraph';
+import { DirectedCluster } from '../../graph-visualization/directed-graph/directedSubgraph';
 
 /**
  * Converts all TypeScript relationship metadata into a directed graph
@@ -123,7 +126,7 @@ export const getRootDirectedGraph = buildEstinant({
 
       // TODO: maybe put the custom overview graph logic in a different transform :shruggy-mc-shrug-face:
       if (rootMetadata.id === overviewRootMetadata.id) {
-        const overviewSubgraphByName = new Map<string, DirectedSubgraph>();
+        const overviewSubgraphByName = new Map<string, DirectedCluster>();
 
         allRootMetadataOdeshinList.forEach((metadata) => {
           const filePath = metadata.zorn;
@@ -133,7 +136,7 @@ export const getRootDirectedGraph = buildEstinant({
           );
 
           let nodeLabel: string;
-          let subgraph: DirectedSubgraph | null;
+          let subgraph: DirectedCluster | null;
           if (filePath.includes('/')) {
             const subgraphName = modifiedFilePath.split('/')[0];
 
@@ -157,7 +160,7 @@ export const getRootDirectedGraph = buildEstinant({
                 nodeList: [],
                 edgeList: [],
                 subgraphList: [],
-              } satisfies DirectedSubgraph);
+              } satisfies DirectedCluster);
 
             if (!overviewSubgraphByName.has(subgraphName)) {
               rootDirectedGraph.subgraphList.push(subgraph);
@@ -206,7 +209,7 @@ export const getRootDirectedGraph = buildEstinant({
 
       const boundarySubgraphList = relevantBoundaryMetadataList.map(
         (metadata) => {
-          const subgraph: DirectedSubgraph = {
+          const subgraph: DirectedCluster = {
             isRoot: false,
             isCluster: true,
             attributeByKey: {
@@ -230,7 +233,7 @@ export const getRootDirectedGraph = buildEstinant({
 
       const directorySubgraphList = relevantDirectoryMetadataList.map(
         (metadata) => {
-          const subgraph: DirectedSubgraph = {
+          const subgraph: DirectedCluster = {
             isRoot: false,
             isCluster: true,
             attributeByKey: {
@@ -251,22 +254,22 @@ export const getRootDirectedGraph = buildEstinant({
         ...directorySubgraphList,
       ];
 
-      const subgraphById = new Map<string, DirectedSubgraph>();
+      const subgraphById = new Map<string, DirectedCluster>();
       allSubgraphList.forEach((subgraph) => {
         subgraphById.set(subgraph.attributeByKey.id, subgraph);
       });
 
       relevantBoundaryMetadataList.forEach((metadata) => {
-        const subgraph = subgraphById.get(metadata.id) as DirectedSubgraph;
+        const subgraph = subgraphById.get(metadata.id) as DirectedCluster;
 
         rootDirectedGraph.subgraphList.push(subgraph);
       });
 
       relevantDirectoryMetadataList.forEach((metadata) => {
-        const childSubgraph = subgraphById.get(metadata.id) as DirectedSubgraph;
+        const childSubgraph = subgraphById.get(metadata.id) as DirectedCluster;
         const parentSubgraph = subgraphById.get(
           metadata.boundaryId,
-        ) as DirectedSubgraph;
+        ) as DirectedCluster;
 
         parentSubgraph.subgraphList.push(childSubgraph);
       });
@@ -281,7 +284,7 @@ export const getRootDirectedGraph = buildEstinant({
 
         const parentSubgraph = subgraphById.get(
           metadata.directoryId,
-        ) as DirectedSubgraph;
+        ) as DirectedCluster;
         parentSubgraph.nodeList.push(node);
       });
 
@@ -295,7 +298,7 @@ export const getRootDirectedGraph = buildEstinant({
 
         const parentSubgraph = subgraphById.get(
           metadata.boundaryId,
-        ) as DirectedSubgraph;
+        ) as DirectedCluster;
         parentSubgraph.nodeList.push(node);
       });
 

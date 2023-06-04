@@ -6,7 +6,7 @@ import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
 import { AttributeByKeyGSC } from './attributeByKeyGSC';
 import { AttributeByKeyGS } from './attributeByKeyGS';
 import { PartialAttributeByKey } from './partialAttributeByKey';
-import { DirectedSubgraph } from './directedSubgraph';
+import { SubgraphLike } from './directedSubgraph';
 
 type GraphAttributeByKey = SpreadN<
   [AttributeByKeyGSCNE, AttributeByKeyGSC, AttributeByKeyGS]
@@ -25,7 +25,7 @@ export type DirectedGraph = {
   rankGroupList?: never;
   nodeList: DirectedGraphNode[];
   edgeList: DirectedGraphEdge[];
-  subgraphList: DirectedSubgraph[];
+  subgraphList: SubgraphLike[];
 };
 
 export const DIRECTED_GRAPH_GEPP = 'directed-graph';

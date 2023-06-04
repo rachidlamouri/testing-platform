@@ -1,4 +1,5 @@
 import { SpreadN } from '../../../../utilities/spreadN';
+import { AttributeByKeyCNE } from './attributeByKeyCNE';
 import { AttributeByKeyGS } from './attributeByKeyGS';
 import { AttributeByKeyGSC } from './attributeByKeyGSC';
 import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
@@ -21,9 +22,6 @@ type SubgraphAttributeByKey = SpreadN<
     AttributeByKeyGSC,
     {
       rank: RankType;
-
-      // TODO: remove this when cluster is split from subgraph
-      color: string;
     },
   ]
 >;
@@ -33,10 +31,38 @@ type PartialSubgraphAttributeByKey =
 
 export type DirectedSubgraph = {
   isRoot: false;
-  isCluster: boolean;
+  isCluster: false;
   attributeByKey: PartialSubgraphAttributeByKey;
   rankGroupList?: string[][];
   nodeList: DirectedGraphNode[];
   edgeList: DirectedGraphEdge[];
-  subgraphList: DirectedSubgraph[];
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  subgraphList: SubgraphLike[];
 };
+
+type ClusterAttributeByKey = SpreadN<
+  [
+    AttributeByKeyGSCNE,
+    AttributeByKeyCNE,
+    AttributeByKeyGSC,
+    {
+      color: string;
+    },
+  ]
+>;
+
+type PartialClusterAttributeByKey =
+  PartialAttributeByKey<ClusterAttributeByKey>;
+
+export type DirectedCluster = {
+  isRoot: false;
+  isCluster: true;
+  attributeByKey: PartialClusterAttributeByKey;
+  rankGroupList?: never;
+  nodeList: DirectedGraphNode[];
+  edgeList: DirectedGraphEdge[];
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  subgraphList: SubgraphLike[];
+};
+
+export type SubgraphLike = DirectedSubgraph | DirectedCluster;
