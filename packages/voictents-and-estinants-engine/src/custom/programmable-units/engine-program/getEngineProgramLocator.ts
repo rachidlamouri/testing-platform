@@ -36,10 +36,9 @@ import {
   EngineProgramLocator2Instance,
 } from './engineProgramLocator2';
 import {
+  EngineEstinantLocator2Instance,
   EngineEstinantLocator2TypeName,
   EngineEstinantLocator2,
-  EngineEstinantTopLevelDeclarationLocatorInstance,
-  EngineEstinantBuildAddMetadataForSerializationLocatorInstance,
 } from './engineEstinantLocator2';
 import {
   COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
@@ -254,7 +253,7 @@ const getCore2EngineProgramLocator = ({
         engineProgramFile.filePath;
 
       engineEstinantLocatorList.push(
-        new EngineEstinantTopLevelDeclarationLocatorInstance({
+        new EngineEstinantLocator2Instance({
           typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
           identifierName,
           filePath,
@@ -268,7 +267,7 @@ const getCore2EngineProgramLocator = ({
       )
     ) {
       engineEstinantLocatorList.push(
-        new EngineEstinantBuildAddMetadataForSerializationLocatorInstance({
+        new EngineEstinantLocator2Instance({
           typeName:
             EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization,
           callExpression: element,
@@ -496,7 +495,7 @@ const getAdaptedEngineProgramLocator = ({
 
     if (fileImport === undefined) {
       engineEstinantLocatorList.push(
-        new EngineEstinantTopLevelDeclarationLocatorInstance({
+        new EngineEstinantLocator2Instance({
           typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
           identifierName,
           filePath: engineProgramFile.filePath,
@@ -507,7 +506,7 @@ const getAdaptedEngineProgramLocator = ({
     }
 
     engineEstinantLocatorList.push(
-      new EngineEstinantTopLevelDeclarationLocatorInstance({
+      new EngineEstinantLocator2Instance({
         typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
         identifierName,
         filePath: fileImport.sourcePath,

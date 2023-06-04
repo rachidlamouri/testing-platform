@@ -1,6 +1,6 @@
 import { getZorn } from './getZorn';
 
-type FileLocator = {
+export type FileLocator = {
   filePath: string;
 };
 

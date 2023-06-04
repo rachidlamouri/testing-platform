@@ -1,6 +1,6 @@
 import { getZorn } from '../../../utilities/getZorn';
 
-type ExportLocator = {
+export type ExportLocator = {
   filePath: string;
   identifierName: string;
 };

@@ -4,8 +4,7 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../utilities/buildConstructorFunction';
 import { EngineVoqueLocator } from './engineVoqueLocator';
-import { getZornableId } from '../../../utilities/getZornableId';
-import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
+import { getTextDigest } from '../../../utilities/getTextDigest';
 
 type BaseEngineVoque = {
   displayName: string;
@@ -33,8 +32,10 @@ export type EngineVoque = ObjectWithPrototype<
 export const { EngineVoqueInstance } = buildConstructorFunctionWithName(
   'EngineVoqueInstance',
 )<BaseEngineVoque, EngineVoquePrototype>({
-  zorn: getExportLocatorZorn,
-  id: getZornableId,
+  zorn: (engineVoque) => engineVoque.locator.zorn,
+  id: (engineVoque) => getTextDigest(engineVoque.zorn),
+  // zorn: getExportLocatorZorn,
+  // id: getZornableId,
 });
 
 export const ENGINE_VOQUE_GEPP = 'engine-voque';
