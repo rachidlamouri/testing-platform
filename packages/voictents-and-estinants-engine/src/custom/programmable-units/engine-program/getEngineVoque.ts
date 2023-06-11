@@ -74,7 +74,7 @@ export const getEngineVoque = buildEstinant({
             {
               name: 'missing-hubblepup-comment',
               error: new Error(
-                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup type may start with "Emitted" or "T"',
+                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup type may have an "Emitted" prefix',
               ),
               reporterLocator,
               sourceLocator: {

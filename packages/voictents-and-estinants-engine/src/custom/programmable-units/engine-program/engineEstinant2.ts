@@ -4,26 +4,13 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../utilities/buildConstructorFunction';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
-import { EngineVoqueLocator } from './engineVoqueLocator';
 import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
 import { getZornableId } from '../../../utilities/getZornableId';
-
-type BaseEstinantInputOutput<
-  TIsInput extends boolean,
-  TIndex extends number | null,
-> = {
-  id: string;
-  // TODO: delete "voictentName" in favor of "voqueLocator"
-  voictentName: string;
-  // TODO: make this non optional
-  voqueLocator?: EngineVoqueLocator;
-  isInput: TIsInput;
-  index: TIndex;
-};
-
-export type EstinantInput2 = BaseEstinantInputOutput<true, number>;
-
-export type EstinantOutput2 = BaseEstinantInputOutput<false, null>;
+import { getZorn } from '../../../utilities/getZorn';
+import { EstinantInput2 } from './input-output/engineEstinantInput2';
+import { EstinantOutput2 } from './input-output/engineEstinantOutput2';
+import { EngineVoqueLocator } from './engineVoqueLocator';
+import { isNotNull } from '../../../utilities/isNotNull';
 
 type BaseEngineEstinant2 = {
   estinantName: string;
@@ -38,6 +25,9 @@ type BaseEngineEstinant2 = {
 type EngineEstinant2Prototype = {
   get zorn(): string;
   get id(): string;
+  get subgraphId(): string;
+  get inputSubgraphId(): string;
+  get allVoqueLocatorList(): EngineVoqueLocator[];
 };
 
 /**
@@ -53,6 +43,23 @@ export const { EngineEstinant2Instance } = buildConstructorFunctionWithName(
 )<BaseEngineEstinant2, EngineEstinant2Prototype>({
   zorn: getExportLocatorZorn,
   id: getZornableId,
+  subgraphId: (engineEstinant) => {
+    const zorn = getZorn(['subgraph', engineEstinant.zorn]);
+    return getZornableId({ zorn });
+  },
+  inputSubgraphId: (engineEstinant) => {
+    const zorn = getZorn(['input-subgraph', engineEstinant.zorn]);
+    return getZornableId({ zorn });
+  },
+  allVoqueLocatorList: (engineEstinant) => {
+    const list = [...engineEstinant.inputList, ...engineEstinant.outputList]
+      .map((inputOutput) => {
+        return inputOutput.voqueLocator ?? null;
+      })
+      .filter(isNotNull);
+
+    return list;
+  },
 });
 
 export const ENGINE_ESTINANT_2_GEPP = 'engine-estinant-2';

@@ -33,11 +33,8 @@ import {
   ENGINE_ESTINANT_2_GEPP,
   EngineEstinant2Instance,
   EngineEstinant2Voque,
-  EstinantInput2,
-  EstinantOutput2,
   EngineEstinant2,
 } from './engineEstinant2';
-import { getTextDigest } from '../../../utilities/getTextDigest';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclarationList';
 import { isNode } from '../../../utilities/type-script-ast/isNode';
 import {
@@ -57,7 +54,9 @@ import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImportListVoque,
 } from '../type-script-file/typeScriptFileImportList';
+import { EngineVoqueLocatorInstance } from './engineVoqueLocator';
 import {
+<<<<<<< HEAD
   EngineVoqueLocatorInstance,
   EngineVoqueLocator,
 } from './engineVoqueLocator';
@@ -66,6 +65,19 @@ import {
   ESTINANT_VOQUE_RELATIONSHIP_GEPP,
   EstinantVoqueRelationshipInstance,
 } from './estinantVoqueRelationship';
+=======
+  ESTINANT_INPUT_2_GEPP,
+  EstinantInput2,
+  EstinantInput2Instance,
+  EstinantInput2Voque,
+} from './input-output/engineEstinantInput2';
+import {
+  ESTINANT_OUTPUT_2_GEPP,
+  EstinantOutput2,
+  EstinantOutput2Instance,
+  EstinantOutput2Voque,
+} from './input-output/engineEstinantOutput2';
+>>>>>>> deb685c (Save next program model changes that affect the current modeler)
 
 const ESTINANT_NAME = 'getEngineEstinant' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -157,22 +169,21 @@ const getBuildAddMetadataForSerializationEstinant = (
       commentText:
         'Prepares each item in one collection to be sent to a serialized collection',
       inputList: [
-        {
-          id: getTextDigest(
-            `${estinantName} | input | ${inputVoictentName} | ${0}`,
-          ),
+        new EstinantInput2Instance({
           voictentName: inputVoictentName,
           isInput: true,
           index: 0,
-        },
+          estinantLocator,
+          estinantName,
+        }),
       ],
       outputList: [
-        {
-          id: getTextDigest(`${estinantName} | output | ${outputVoictentName}`),
+        new EstinantOutput2Instance({
           voictentName: outputVoictentName,
           isInput: false,
-          index: null,
-        },
+          estinantLocator,
+          estinantName,
+        }),
       ],
       locator: estinantLocator,
     }),
@@ -355,26 +366,26 @@ const getCoreEstinant = ({
       }
 
       const voictentName = voqueName.replace(/Voque$/, '');
-      return {
-        id: getTextDigest(
-          `${estinantName} | input | ${voictentName} | ${index}`,
-        ),
+
+      return new EstinantInput2Instance({
         voictentName,
         isInput: true,
         index,
-      } satisfies EstinantInput2;
+        estinantLocator,
+        estinantName,
+      });
     })
     .filter((input): input is EstinantInput2 => input !== null);
 
   const outputList = (outputVoqueNameTuple ?? []).map((voqueName) => {
     const voictentName = voqueName.replace(/Voque$/, '');
 
-    return {
-      id: getTextDigest(`${estinantName} | output | ${voqueName}`),
+    return new EstinantOutput2Instance({
       voictentName,
       isInput: false,
-      index: null,
-    } satisfies EstinantOutput2;
+      estinantLocator,
+      estinantName,
+    });
   });
 
   return {
@@ -686,24 +697,23 @@ const getAdaptedEstinant = ({
     });
 
     if (isInput) {
-      return {
-        id: getTextDigest(
-          `${estinantName} | input | ${voictentName} | ${index}`,
-        ),
+      return new EstinantInput2Instance({
         voictentName,
         voqueLocator,
         isInput,
         index,
-      } satisfies EstinantInput2;
+        estinantLocator,
+        estinantName,
+      });
     }
 
-    return {
-      id: getTextDigest(`${estinantName} | output | ${index}`),
+    return new EstinantOutput2Instance({
       voictentName,
       voqueLocator,
       isInput,
-      index: null,
-    } satisfies EstinantOutput2;
+      estinantLocator,
+      estinantName,
+    });
   });
 
   const inputList = estinantInputOutputList.filter<EstinantInput2>(
@@ -825,8 +835,16 @@ export const getEngineEstinant = buildEstinant({
   .toHubblepupTuple2<EngineEstinant2Voque>({
     gepp: ENGINE_ESTINANT_2_GEPP,
   })
+<<<<<<< HEAD
   .toHubblepupTuple2<EstinantVoqueRelationshipVoque>({
     gepp: ESTINANT_VOQUE_RELATIONSHIP_GEPP,
+=======
+  .toHubblepupTuple2<EstinantInput2Voque>({
+    gepp: ESTINANT_INPUT_2_GEPP,
+  })
+  .toHubblepupTuple2<EstinantOutput2Voque>({
+    gepp: ESTINANT_OUTPUT_2_GEPP,
+>>>>>>> deb685c (Save next program model changes that affect the current modeler)
   })
   .onPinbe(
     (
@@ -902,6 +920,7 @@ export const getEngineEstinant = buildEstinant({
       const estinantList: EngineEstinant2[] =
         estinant !== null ? [estinant] : [];
 
+<<<<<<< HEAD
       const allVoqueLocatorList = [
         ...(estinant?.inputList ?? []),
         ...(estinant?.outputList ?? []),
@@ -926,6 +945,17 @@ export const getEngineEstinant = buildEstinant({
         [PROGRAM_ERROR_GEPP]: errorList,
         [ENGINE_ESTINANT_2_GEPP]: estinantList,
         [ESTINANT_VOQUE_RELATIONSHIP_GEPP]: estinantVoqueRelationshipList,
+=======
+      return {
+        [PROGRAM_ERROR_GEPP]: errorList,
+        [ENGINE_ESTINANT_2_GEPP]: estinantList,
+        [ESTINANT_INPUT_2_GEPP]: estinantList.flatMap((nextEstinant) => {
+          return nextEstinant.inputList;
+        }),
+        [ESTINANT_OUTPUT_2_GEPP]: estinantList.flatMap((nextEstinant) => {
+          return nextEstinant.outputList;
+        }),
+>>>>>>> deb685c (Save next program model changes that affect the current modeler)
       };
     },
   )

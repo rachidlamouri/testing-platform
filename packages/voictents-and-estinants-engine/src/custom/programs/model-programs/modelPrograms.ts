@@ -35,8 +35,6 @@ import { ProgramErrorVoictent } from '../../programmable-units/error/programErro
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { DigikikifierStrategy } from '../../../core/engine/digikikify';
 import { getEngineVoque } from '../../programmable-units/engine-program/getEngineVoque';
-import { getEngineEstinant } from '../../programmable-units/engine-program/getEngineEstinant';
-import { getEngineProgramLocator } from '../../programmable-units/engine-program/getEngineProgramLocator';
 import { getEngineVoqueLocatorCollection } from '../../programmable-units/engine-program/getEngineVoqueLocatorCollection';
 
 const programFileCache = new ProgramFileCache({
@@ -88,6 +86,7 @@ digikikify({
     getEngineEstinant,
     getEngineVoqueLocatorCollection,
     getEngineVoque,
+    getEngineVoqueLocatorCollection,
     getEngineProgram2,
 
     getDirectedGraph,

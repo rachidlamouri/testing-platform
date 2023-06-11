@@ -1,3 +1,4 @@
+import { isNotNull } from '../../../utilities/isNotNull';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
@@ -13,8 +14,17 @@ import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
   EngineProgramLocator2Voque,
 } from './engineProgramLocator2';
-import { ENGINE_VOQUE_GEPP, EngineVoqueVoque } from './engineVoque';
+import {
+  ENGINE_VOQUE_GEPP,
+  EngineVoque,
+  EngineVoqueVoque,
+} from './engineVoque';
 import { EngineVoqueLocator } from './engineVoqueLocator';
+import {
+  ENGINE_VOQUE_PROGRAM_RELATIONSHIP_GEPP,
+  EngineVoqueProgramRelationshipInstance,
+  EngineVoqueProgramRelationshipVoque,
+} from './engineVoqueProgramRelationship';
 
 /**
  * Joins the program locator to its transforms in order to
@@ -43,12 +53,33 @@ export const getEngineProgram2 = buildEstinant({
   .toHubblepup2<EngineProgram2Voque>({
     gepp: ENGINE_PROGRAM_2_GEPP,
   })
-  .onPinbe((engineProgramLocator, estinantList, allVoqueList) => {
-    const allVoqueByFilePath = new Map(
-      allVoqueList.map((voque) => [voque.filePath, voque] as const),
+  .toHubblepupTuple2<EngineVoqueProgramRelationshipVoque>({
+    gepp: ENGINE_VOQUE_PROGRAM_RELATIONSHIP_GEPP,
+  })
+  .onPinbe((engineProgramLocator, estinantList, allCodebaseVoqueList) => {
+    // TODO: we can join the program locator to the estinant locator list and then that combined data structure to the voque list
+    const allCodebaseVoqueByFilePath = new Map(
+      allCodebaseVoqueList.map((voque) => [voque.filePath, voque] as const),
     );
 
-    const voqueList = [
+    const getVoqueFromLocator = (
+      voqueLocator: EngineVoqueLocator,
+    ): EngineVoque => {
+      const voque = allCodebaseVoqueByFilePath.get(voqueLocator.filePath);
+
+      if (!voque) {
+        throw Error(
+          'Apparently this is reachable, but it shouldnt be. You should fix that',
+        );
+      }
+
+      return voque;
+    };
+
+    const initializedVoqueList =
+      engineProgramLocator.engineVoqueLocatorList.map(getVoqueFromLocator);
+
+    const allProgramVoqueList = [
       ...engineProgramLocator.engineVoqueLocatorList,
       ...estinantList.flatMap((estinant) => {
         return [...estinant.inputList, ...estinant.outputList].flatMap(
@@ -62,24 +93,63 @@ export const getEngineProgram2 = buildEstinant({
         (voqueLocator): voqueLocator is EngineVoqueLocator =>
           voqueLocator !== undefined,
       )
-      .map((voqueLocator) => {
-        const voque = allVoqueByFilePath.get(voqueLocator.filePath);
+      .map(getVoqueFromLocator);
 
-        if (!voque) {
-          throw Error('Apparently this is reachable, but it shouldnt be');
-        }
+    const allUniqueVoqueList = [
+      ...new Map(
+        allProgramVoqueList.map((engineVoque) => {
+          return [engineVoque.zorn, engineVoque] as const;
+        }),
+      ).values(),
+    ];
 
-        return voque;
-      });
+    const startingVoqueIdSet = new Set(
+      initializedVoqueList.map((engineVoque) => engineVoque.id),
+    );
 
-    return new EngineProgram2Instance({
-      programName: engineProgramLocator.programName,
-      description: engineProgramLocator.description,
-      filePath: engineProgramLocator.filePath,
-      voictentLocatorList: engineProgramLocator.voictentLocatorList,
-      estinantList,
-      voqueList,
-      locator: engineProgramLocator,
+    const allEstinantInputVoqueIdList = estinantList
+      .flatMap((engineEstinant) => {
+        return engineEstinant.inputList.map((estinantInput) => {
+          return estinantInput.voqueLocator?.id ?? null;
+        });
+      })
+      .filter(isNotNull);
+
+    const allEstinantInputVoqueIdSet = new Set(allEstinantInputVoqueIdList);
+
+    // TODO: compute this list in getEngineProgram
+    const endingVoqueList = allUniqueVoqueList.filter((engineVoque) => {
+      const isStartingVoque = startingVoqueIdSet.has(engineVoque.id);
+      const isConsumed = allEstinantInputVoqueIdSet.has(engineVoque.id);
+
+      const isEndingVoque = !(isStartingVoque || isConsumed);
+      return isEndingVoque;
     });
+
+    const voqueToProgramRelationshipList = allUniqueVoqueList.map(
+      (engineVoque) => {
+        const relationship = new EngineVoqueProgramRelationshipInstance({
+          rootGraphLocator: engineProgramLocator.rootGraphLocator,
+          engineVoqueLocator: engineVoque.locator,
+        });
+
+        return relationship;
+      },
+    );
+
+    return {
+      [ENGINE_PROGRAM_2_GEPP]: new EngineProgram2Instance({
+        programName: engineProgramLocator.programName,
+        description: engineProgramLocator.description,
+        filePath: engineProgramLocator.filePath,
+        voictentLocatorList: engineProgramLocator.voictentLocatorList,
+        estinantList,
+        allVoqueList: allProgramVoqueList,
+        initializedVoqueList,
+        endingVoqueList,
+        locator: engineProgramLocator,
+      }),
+      [ENGINE_VOQUE_PROGRAM_RELATIONSHIP_GEPP]: voqueToProgramRelationshipList,
+    };
   })
   .assemble();

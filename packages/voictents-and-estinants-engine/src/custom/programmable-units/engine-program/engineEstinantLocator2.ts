@@ -6,6 +6,8 @@ import {
 } from '../../../utilities/buildConstructorFunction';
 import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
 import { getZorn } from '../../../utilities/getZorn';
+import { PartialEngineProgramLocator2 } from './partialEngineProgramLocator2';
+import { getZornableId } from '../../../utilities/getZornableId';
 
 export enum EngineEstinantLocator2TypeName {
   TopLevelDeclaration = 'TopLevelDeclaration',
@@ -17,6 +19,7 @@ type BaseEngineEstinantTopLevelDeclarationLocator = {
   identifierName: string;
   filePath: string;
   isCoreEstinant: boolean;
+  programLocator: PartialEngineProgramLocator2;
 };
 
 type BaseEngineEstinantBuildAddMetadataForSerializationLocator = {
@@ -25,48 +28,56 @@ type BaseEngineEstinantBuildAddMetadataForSerializationLocator = {
   filePath: string;
   isCoreEstinant: true;
   index: number;
+  programLocator: PartialEngineProgramLocator2;
 };
-
-type BaseEngineEstinantLocator2 =
-  | BaseEngineEstinantTopLevelDeclarationLocator
-  | BaseEngineEstinantBuildAddMetadataForSerializationLocator;
 
 type EngineEstinantLocatorPrototype = {
   get zorn(): string;
+  get id(): string;
 };
+
+export type EngineEstinantTopLevelDeclarationLocator = ObjectWithPrototype<
+  BaseEngineEstinantTopLevelDeclarationLocator,
+  EngineEstinantLocatorPrototype
+>;
+
+export type EngineEstinantBuildAddMetadataForSerializationLocator =
+  ObjectWithPrototype<
+    BaseEngineEstinantBuildAddMetadataForSerializationLocator,
+    EngineEstinantLocatorPrototype
+  >;
 
 /**
  * The information needed to find a transform definition
  */
-export type EngineEstinantLocator2 = ObjectWithPrototype<
-  BaseEngineEstinantLocator2,
-  EngineEstinantLocatorPrototype
->;
+export type EngineEstinantLocator2 =
+  | EngineEstinantTopLevelDeclarationLocator
+  | EngineEstinantBuildAddMetadataForSerializationLocator;
 
-export type EngineEstinantTopLevelDeclarationLocator = Extract<
-  EngineEstinantLocator2,
-  BaseEngineEstinantTopLevelDeclarationLocator
->;
-
-export type EngineEstinantBuildAddMetadataForSerializationLocator = Extract<
-  EngineEstinantLocator2,
-  BaseEngineEstinantBuildAddMetadataForSerializationLocator
->;
-
-export const { EngineEstinantLocator2Instance } =
-  buildConstructorFunctionWithName('EngineEstinantLocator2Instance')<
-    BaseEngineEstinantLocator2,
+export const { EngineEstinantTopLevelDeclarationLocatorInstance } =
+  buildConstructorFunctionWithName(
+    'EngineEstinantTopLevelDeclarationLocatorInstance',
+  )<
+    BaseEngineEstinantTopLevelDeclarationLocator,
     EngineEstinantLocatorPrototype
   >({
-    zorn: (locator: EngineEstinantLocator2) => {
-      if (
-        locator.typeName === EngineEstinantLocator2TypeName.TopLevelDeclaration
-      ) {
-        return getExportLocatorZorn(locator);
-      }
+    zorn: (locator) => {
+      return getExportLocatorZorn(locator);
+    },
+    id: getZornableId,
+  });
 
+export const { EngineEstinantBuildAddMetadataForSerializationLocatorInstance } =
+  buildConstructorFunctionWithName(
+    'EngineEstinantBuildAddMetadataForSerializationLocatorInstance',
+  )<
+    BaseEngineEstinantBuildAddMetadataForSerializationLocator,
+    EngineEstinantLocatorPrototype
+  >({
+    zorn: (locator) => {
       return getZorn([locator.filePath, 'index', `${locator.index}`]);
     },
+    id: getZornableId,
   });
 
 export const { EngineEstinantTopLevelDeclarationLocatorInstance } =

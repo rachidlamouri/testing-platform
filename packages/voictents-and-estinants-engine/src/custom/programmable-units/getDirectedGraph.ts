@@ -67,7 +67,7 @@ export const getDirectedGraph = buildEstinant({
     const associationId = engineProgram.programName;
 
     const engineVoqueByName = new Map(
-      engineProgram.voqueList.map((voque) => {
+      engineProgram.allVoqueList.map((voque) => {
         return [voque.displayName, voque];
       }),
     );

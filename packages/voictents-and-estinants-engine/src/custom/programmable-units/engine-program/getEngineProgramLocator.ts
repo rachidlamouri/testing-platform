@@ -30,15 +30,16 @@ import {
 } from './engineFunctionConfiguration';
 import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
-  TEngineProgramLocator2,
+  EngineProgramLocator2,
   EngineProgramLocator2Voque,
   VoictentLocator,
   EngineProgramLocator2Instance,
 } from './engineProgramLocator2';
 import {
-  EngineEstinantLocator2Instance,
-  EngineEstinantLocator2TypeName,
+  EngineEstinantBuildAddMetadataForSerializationLocatorInstance,
   EngineEstinantLocator2,
+  EngineEstinantLocator2TypeName,
+  EngineEstinantTopLevelDeclarationLocatorInstance,
 } from './engineEstinantLocator2';
 import {
   COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
@@ -66,11 +67,15 @@ import {
   EngineVoqueLocatorInstance,
   EngineVoqueLocator,
 } from './engineVoqueLocator';
+<<<<<<< HEAD
 import {
   PROGRAM_VOQUE_RELATIONSHIP_GEPP,
   ProgramVoqueRelationshipInstance,
   ProgramVoqueRelationshipVoque,
 } from './programVoqueRelationship';
+=======
+import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
+>>>>>>> deb685c (Save next program model changes that affect the current modeler)
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -114,7 +119,7 @@ type Core2EngineProgramLocatorAccessorInput = {
 
 type Core2EngineProgramLocatorAccessorResult = {
   parallelErrorList: ReportedProgramError<ReportingLocator>[];
-  engineProgramLocator: TEngineProgramLocator2;
+  engineProgramLocator: EngineProgramLocator2;
 };
 
 const getCore2EngineProgramLocator = ({
@@ -253,11 +258,15 @@ const getCore2EngineProgramLocator = ({
         engineProgramFile.filePath;
 
       engineEstinantLocatorList.push(
-        new EngineEstinantLocator2Instance({
+        new EngineEstinantTopLevelDeclarationLocatorInstance({
           typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
           identifierName,
           filePath,
           isCoreEstinant: true,
+          programLocator: new PartialEngineProgramLocator2Instance({
+            filePath: engineProgramFile.filePath,
+            programName,
+          }),
         }),
       );
     } else if (
@@ -267,13 +276,17 @@ const getCore2EngineProgramLocator = ({
       )
     ) {
       engineEstinantLocatorList.push(
-        new EngineEstinantLocator2Instance({
+        new EngineEstinantBuildAddMetadataForSerializationLocatorInstance({
           typeName:
             EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization,
           callExpression: element,
           index,
           isCoreEstinant: true,
           filePath: engineProgramFile.filePath,
+          programLocator: new PartialEngineProgramLocator2Instance({
+            filePath: engineProgramFile.filePath,
+            programName,
+          }),
         }),
       );
     } else {
@@ -331,7 +344,7 @@ type AdaptedEngineProgramLocatorAccessorInput = {
 
 type AdaptedEngineProgramLocatorAccessorResult = {
   parallelErrorList: ReportedProgramError<ReportingLocator>[];
-  engineProgramLocator: TEngineProgramLocator2;
+  engineProgramLocator: EngineProgramLocator2;
 };
 
 const getAdaptedEngineProgramLocator = ({
@@ -488,6 +501,7 @@ const getAdaptedEngineProgramLocator = ({
     (identifier) => identifier.name,
   );
 
+  const programName = engineProgramFile.inMemoryFileName.kebabCase;
   const engineEstinantLocatorList: EngineEstinantLocator2[] = [];
 
   estinantIdentifierList.forEach((identifierName) => {
@@ -495,22 +509,30 @@ const getAdaptedEngineProgramLocator = ({
 
     if (fileImport === undefined) {
       engineEstinantLocatorList.push(
-        new EngineEstinantLocator2Instance({
+        new EngineEstinantTopLevelDeclarationLocatorInstance({
           typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
           identifierName,
           filePath: engineProgramFile.filePath,
           isCoreEstinant: false,
+          programLocator: new PartialEngineProgramLocator2Instance({
+            filePath: engineProgramFile.filePath,
+            programName,
+          }),
         }),
       );
       return;
     }
 
     engineEstinantLocatorList.push(
-      new EngineEstinantLocator2Instance({
+      new EngineEstinantTopLevelDeclarationLocatorInstance({
         typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
         identifierName,
         filePath: fileImport.sourcePath,
         isCoreEstinant: false,
+        programLocator: new PartialEngineProgramLocator2Instance({
+          filePath: engineProgramFile.filePath,
+          programName,
+        }),
       }),
     );
   });
@@ -569,9 +591,12 @@ export const getEngineProgramLocator = buildEstinant({
   .toHubblepupTuple2<EngineProgramLocator2Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_2_GEPP,
   })
+<<<<<<< HEAD
   .toHubblepupTuple2<ProgramVoqueRelationshipVoque>({
     gepp: PROGRAM_VOQUE_RELATIONSHIP_GEPP,
   })
+=======
+>>>>>>> deb685c (Save next program model changes that affect the current modeler)
   .onPinbe(
     (
       engineProgramFile,
@@ -601,7 +626,10 @@ export const getEngineProgramLocator = buildEstinant({
             } satisfies ReportedProgramError<ReportingLocator>,
           ],
           [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [],
+<<<<<<< HEAD
           [PROGRAM_VOQUE_RELATIONSHIP_GEPP]: [],
+=======
+>>>>>>> deb685c (Save next program model changes that affect the current modeler)
         };
       }
 
@@ -630,7 +658,10 @@ export const getEngineProgramLocator = buildEstinant({
               } satisfies ReportedProgramError<ReportingLocator>,
             ],
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [],
+<<<<<<< HEAD
             [PROGRAM_VOQUE_RELATIONSHIP_GEPP]: [],
+=======
+>>>>>>> deb685c (Save next program model changes that affect the current modeler)
           };
         case EngineFunctionConfigurationTypeName.Core2: {
           const { parallelErrorList, engineProgramLocator } =
@@ -645,7 +676,10 @@ export const getEngineProgramLocator = buildEstinant({
           return {
             [PROGRAM_ERROR_GEPP]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [engineProgramLocator],
+<<<<<<< HEAD
             [PROGRAM_VOQUE_RELATIONSHIP_GEPP]: [],
+=======
+>>>>>>> deb685c (Save next program model changes that affect the current modeler)
           };
         }
         case EngineFunctionConfigurationTypeName.Adapted: {
@@ -669,7 +703,10 @@ export const getEngineProgramLocator = buildEstinant({
           return {
             [PROGRAM_ERROR_GEPP]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [engineProgramLocator],
+<<<<<<< HEAD
             [PROGRAM_VOQUE_RELATIONSHIP_GEPP]: programVoqueRelationshipList,
+=======
+>>>>>>> deb685c (Save next program model changes that affect the current modeler)
           };
         }
       }

@@ -7,11 +7,11 @@ import { getZornableId } from '../../../utilities/getZornableId';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { EngineEstinant2 } from './engineEstinant2';
 import {
-  TEngineProgramLocator2,
+  EngineProgramLocator2,
   VoictentLocator,
-  getEngineProgramLocatorZorn,
 } from './engineProgramLocator2';
 import { EngineVoque } from './engineVoque';
+import { getEngineProgramZorn } from './partialEngineProgramLocator2';
 
 type BaseEngineProgram2 = {
   programName: string;
@@ -19,8 +19,10 @@ type BaseEngineProgram2 = {
   filePath: string;
   voictentLocatorList: VoictentLocator[];
   estinantList: Tuple<EngineEstinant2>;
-  voqueList: Tuple<EngineVoque>;
-  locator: TEngineProgramLocator2;
+  allVoqueList: Tuple<EngineVoque>;
+  initializedVoqueList: Tuple<EngineVoque>;
+  endingVoqueList: Tuple<EngineVoque>;
+  locator: EngineProgramLocator2;
 };
 
 type EngineProgram2Prototype = {
@@ -31,7 +33,7 @@ type EngineProgram2Prototype = {
 /**
  * Represents an engine program in the program modeler
  */
-type EngineProgram2 = ObjectWithPrototype<
+export type EngineProgram2 = ObjectWithPrototype<
   BaseEngineProgram2,
   EngineProgram2Prototype
 >;
@@ -39,7 +41,7 @@ type EngineProgram2 = ObjectWithPrototype<
 export const { EngineProgram2Instance } = buildConstructorFunctionWithName(
   'EngineProgram2Instance',
 )<BaseEngineProgram2, EngineProgram2Prototype>({
-  zorn: getEngineProgramLocatorZorn,
+  zorn: getEngineProgramZorn,
   id: getZornableId,
 });
 
