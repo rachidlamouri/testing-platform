@@ -37,6 +37,10 @@ import {
   GraphLikeStyle,
   GraphLikeLabelLocation,
 } from './graph-visualization/directed-graph/attributeByKeyGSC';
+import {
+  mutateDirectedGraphMetadataById,
+  mutateGraphLikeElementListOrder,
+} from './type-script-file-relationships/graph-element/mutateGraphLikeElementListOrder';
 
 type EngineVoictent = {
   id: string;
@@ -362,11 +366,11 @@ export const getDirectedGraph = buildEstinant({
           const headId = outputVoictent.id;
 
           const edge: DirectedGraphEdge = {
+            tailId,
+            headId,
             attributeByKey: {
               id: `${tailId}:${headId}`,
             },
-            tailId,
-            headId,
           };
 
           return edge;
@@ -620,6 +624,9 @@ export const getDirectedGraph = buildEstinant({
         },
       ],
     };
+
+    mutateGraphLikeElementListOrder(rootGraph);
+    mutateDirectedGraphMetadataById(metadataById);
 
     return {
       [DIRECTED_GRAPH_GEPP]: rootGraph,
