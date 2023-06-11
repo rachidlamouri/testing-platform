@@ -43,15 +43,15 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
     const zorn = getVoictentResourceLocator([
       receivedHubblepup.reporterLocator.name,
       receivedHubblepup.name,
-      receivedHubblepup.sourceLocator.filePath,
+      receivedHubblepup.sourceLocator?.filePath ?? '',
     ]);
 
     const normalizedZorn = normalizeFilePathForFileName(zorn);
     const normalizedReporterPath = normalizeFilePathForFileName(
-      receivedHubblepup.sourceLocator.filePath,
+      receivedHubblepup.sourceLocator?.filePath ?? '',
     );
     const normalizedSourcePath = normalizeFilePathForFileName(
-      receivedHubblepup.sourceLocator.filePath,
+      receivedHubblepup.sourceLocator?.filePath ?? '',
     );
 
     const byReporterDirectoryPath = `by-reporter/${normalizedReporterPath}`;

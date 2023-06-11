@@ -23,7 +23,7 @@ type GenericReportingEstinantLocator = ReportingEstinantLocator<string>;
 type UnsafeReportingEstinantLocator = ReportingEstinantLocator<any>;
 
 // TODO: add more locator types as needed
-type ProgramErrorSourceLocator = FileErrorLocator;
+type ProgramErrorSourceLocator = FileErrorLocator | null;
 
 // TODO: add more locator types as needed
 type GenericProgramErrorReporterLocator = GenericReportingEstinantLocator;
