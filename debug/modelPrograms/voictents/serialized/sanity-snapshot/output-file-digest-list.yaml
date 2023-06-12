@@ -12,6 +12,8 @@
     "digest": "e4032b6d0dd1dafc2c7ff7d4f37825ef8b3e1a05"
   - "fileName": "model-ci"
     "digest": "7bcef83ab24e65df3fd4cac54c8c1fb542092266"
+  - "fileName": "model-manually"
+    "digest": "c987bc42d20985756484f6b7902a6c23dae830a2"
   - "fileName": "model-programs"
     "digest": "a1d04ffcd8a59d8490d431af8dacd5d4fdaa1894"
   - "fileName": "render-type-script-file-relationships"

@@ -7,7 +7,7 @@ import { EngineVoque } from './engineVoque';
 /**
  * Represents an engine program in the program modeler
  */
-type EngineProgram2 = {
+export type EngineProgram2 = {
   zorn: string;
   id: string;
   programName: string;
