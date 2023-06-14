@@ -3,6 +3,7 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../utilities/buildConstructorFunction';
+import { getTextDigest } from '../../../utilities/getTextDigest';
 import { getZornableId } from '../../../utilities/getZornableId';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { EngineEstinant2 } from './engineEstinant2';
@@ -28,6 +29,10 @@ type BaseEngineProgram2 = {
 type EngineProgram2Prototype = {
   get zorn(): string;
   get id(): string;
+  get startingSubgraphId(): string;
+  get startingNodeId(): string;
+  get endingSubgraphId(): string;
+  get endingNodeId(): string;
 };
 
 /**
@@ -43,6 +48,18 @@ export const { EngineProgram2Instance } = buildConstructorFunctionWithName(
 )<BaseEngineProgram2, EngineProgram2Prototype>({
   zorn: getEngineProgramZorn,
   id: getZornableId,
+  startingSubgraphId: (engineProgram) => {
+    return getTextDigest(`start-subgraph | ${engineProgram.programName}`);
+  },
+  startingNodeId: (engineProgram) => {
+    return getTextDigest(`start-node | ${engineProgram.programName}`);
+  },
+  endingSubgraphId: (engineProgram) => {
+    return getTextDigest(`end-subgraph | ${engineProgram.programName}`);
+  },
+  endingNodeId: (engineProgram) => {
+    return getTextDigest(`end-node | ${engineProgram.programName}`);
+  },
 });
 
 export const ENGINE_PROGRAM_2_GEPP = 'engine-program-2';

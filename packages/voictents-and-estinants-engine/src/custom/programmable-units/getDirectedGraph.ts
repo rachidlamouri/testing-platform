@@ -41,6 +41,7 @@ import {
   mutateDirectedGraphMetadataById,
   mutateGraphLikeElementListOrder,
 } from './type-script-file-relationships/graph-element/mutateGraphLikeElementListOrder';
+import { getZorn } from '../../utilities/getZorn';
 
 type EngineVoictent = {
   id: string;
@@ -235,6 +236,11 @@ export const getDirectedGraph = buildEstinant({
           nodeList: [],
           edgeList: [],
           subgraphList: [],
+          // debugName: getZorn([
+          //   engineProgram.programName,
+          //   estinant.estinantName,
+          //   'input-subgraph',
+          // ]),
         };
 
         const estinantSubgraph: DirectedSubgraph = {
@@ -246,6 +252,11 @@ export const getDirectedGraph = buildEstinant({
           nodeList: [],
           edgeList: [],
           subgraphList: [inputSubgraph],
+          // debugName: getZorn([
+          //   engineProgram.programName,
+          //   estinant.estinantName,
+          //   'estinant-subgraph',
+          // ]),
         };
 
         return {
@@ -425,6 +436,7 @@ export const getDirectedGraph = buildEstinant({
       nodeList: startingVoictentNodeList,
       edgeList: [],
       subgraphList: [],
+      debugName: 'start-subgraph',
     };
 
     const endSubgraph: DirectedCluster = {
@@ -439,6 +451,7 @@ export const getDirectedGraph = buildEstinant({
       nodeList: endingVoictentNodeList,
       edgeList: [],
       subgraphList: [],
+      debugName: 'end-subgraph',
     };
 
     // Creates an invisible arrow between inputs for the same estinant to force them to be in order

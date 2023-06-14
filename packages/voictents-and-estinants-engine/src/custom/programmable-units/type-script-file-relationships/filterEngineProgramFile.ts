@@ -76,7 +76,15 @@ export const filterEngineProgramFile = buildEstinant({
         },
       );
 
-      if (engineFunctionImportCombination === undefined) {
+      if (
+        engineFunctionImportCombination === undefined
+
+        // ||
+        // (typeScriptFile.filePath !==
+        //   'packages/voictents-and-estinants-engine/src/custom/programs/categorize-files/categorizeFiles.ts' &&
+        //   typeScriptFile.filePath !==
+        //     'packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render/testGraphRender.ts')
+      ) {
         return [];
       }
 

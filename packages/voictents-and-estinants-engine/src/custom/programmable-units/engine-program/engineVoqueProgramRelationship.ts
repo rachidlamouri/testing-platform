@@ -10,6 +10,7 @@ import { EngineVoqueLocator } from './engineVoqueLocator';
 export type BaseEngineVoqueProgramRelationship = {
   rootGraphLocator: RootGraphLocator;
   engineVoqueLocator: EngineVoqueLocator;
+  parentId: string;
 };
 
 export type EngineVoqueProgramRelationshipPrototype = {

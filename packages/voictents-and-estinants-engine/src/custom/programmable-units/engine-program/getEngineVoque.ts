@@ -90,7 +90,6 @@ export const getEngineVoque = buildEstinant({
 
     return {
       [ENGINE_VOQUE_GEPP]: new EngineVoqueInstance({
-        displayName: voqueLocator.identifierName.replace(/Voque$/, ''),
         filePath: voqueLocator.filePath,
         identifierName: voqueLocator.identifierName,
         commentText: commentText ?? '',

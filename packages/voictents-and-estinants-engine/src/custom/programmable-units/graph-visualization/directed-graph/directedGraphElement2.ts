@@ -1,4 +1,4 @@
-import { StandardInMemoryVoque } from '../../../../core/engine/inMemoryVoque';
+import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { DirectedCluster2 } from './directedCluster2';
 import { DirectedGraph2 } from './directedGraph2';
 import { DirectedGraphEdge2 } from './directedGraphEdge2';
@@ -19,7 +19,7 @@ export const DIRECTED_GRAPH_ELEMENT_2_GEPP = 'directed-graph-element-2';
 
 type DirectedGraphElement2Gepp = typeof DIRECTED_GRAPH_ELEMENT_2_GEPP;
 
-export type DirectedGraphElement2Voque = StandardInMemoryVoque<
+export type DirectedGraphElement2Voque = InMemoryOdeshin2Voque<
   DirectedGraphElement2Gepp,
   DirectedGraphElement2
 >;

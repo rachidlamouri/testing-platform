@@ -3,12 +3,14 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../utilities/buildConstructorFunction';
-import { EngineVoqueLocator } from './engineVoqueLocator';
-import { getZornableId } from '../../../utilities/getZornableId';
-import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
+import {
+  EngineVoqueLocator,
+  getVoqueDisplayName,
+  getVoqueLocatorId,
+  getVoqueLocatorZorn,
+} from './engineVoqueLocator';
 
 type BaseEngineVoque = {
-  displayName: string;
   filePath: string;
   identifierName: string;
   commentText: string;
@@ -18,6 +20,7 @@ type BaseEngineVoque = {
 type EngineVoquePrototype = {
   get zorn(): string;
   get id(): string;
+  get displayName(): string;
 };
 
 /**
@@ -33,8 +36,9 @@ export type EngineVoque = ObjectWithPrototype<
 export const { EngineVoqueInstance } = buildConstructorFunctionWithName(
   'EngineVoqueInstance',
 )<BaseEngineVoque, EngineVoquePrototype>({
-  zorn: getExportLocatorZorn,
-  id: getZornableId,
+  zorn: getVoqueLocatorZorn,
+  id: getVoqueLocatorId,
+  displayName: getVoqueDisplayName,
 });
 
 export const ENGINE_VOQUE_GEPP = 'engine-voque';

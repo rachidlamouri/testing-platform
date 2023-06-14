@@ -21,10 +21,11 @@ import {
 } from './engineVoque';
 import { EngineVoqueLocator } from './engineVoqueLocator';
 import {
-  ENGINE_VOQUE_PROGRAM_RELATIONSHIP_GEPP,
-  EngineVoqueProgramRelationshipInstance,
-  EngineVoqueProgramRelationshipVoque,
-} from './engineVoqueProgramRelationship';
+  PROGRAM_RELATIONSHIP_GEPP,
+  ProgramRelationship,
+  ProgramRelationshipInstance,
+  ProgramRelationshipVoque,
+} from './programRelationship';
 
 /**
  * Joins the program locator to its transforms in order to
@@ -53,8 +54,11 @@ export const getEngineProgram2 = buildEstinant({
   .toHubblepup2<EngineProgram2Voque>({
     gepp: ENGINE_PROGRAM_2_GEPP,
   })
-  .toHubblepupTuple2<EngineVoqueProgramRelationshipVoque>({
-    gepp: ENGINE_VOQUE_PROGRAM_RELATIONSHIP_GEPP,
+  // .toHubblepupTuple2<EngineVoqueProgramRelationshipVoque>({
+  //   gepp: ENGINE_VOQUE_PROGRAM_RELATIONSHIP_GEPP,
+  // })
+  .toHubblepupTuple2<ProgramRelationshipVoque>({
+    gepp: PROGRAM_RELATIONSHIP_GEPP,
   })
   .onPinbe((engineProgramLocator, estinantList, allCodebaseVoqueList) => {
     // TODO: we can join the program locator to the estinant locator list and then that combined data structure to the voque list
@@ -115,6 +119,28 @@ export const getEngineProgram2 = buildEstinant({
       })
       .filter(isNotNull);
 
+    const estinantProgramRelationshipList: ProgramRelationship[] =
+      estinantList.flatMap((engineEstinant) => {
+        return [
+          new ProgramRelationshipInstance({
+            rootGraphLocator: engineProgramLocator.rootGraphLocator,
+            relatedZorn: engineEstinant.locator.zorn,
+          }),
+          ...engineEstinant.inputList.map((input) => {
+            return new ProgramRelationshipInstance({
+              rootGraphLocator: engineProgramLocator.rootGraphLocator,
+              relatedZorn: input.zorn,
+            });
+          }),
+          ...engineEstinant.outputList.map((output) => {
+            return new ProgramRelationshipInstance({
+              rootGraphLocator: engineProgramLocator.rootGraphLocator,
+              relatedZorn: output.zorn,
+            });
+          }),
+        ];
+      });
+
     const allEstinantInputVoqueIdSet = new Set(allEstinantInputVoqueIdList);
 
     // TODO: compute this list in getEngineProgram
@@ -126,11 +152,37 @@ export const getEngineProgram2 = buildEstinant({
       return isEndingVoque;
     });
 
-    const voqueToProgramRelationshipList = allUniqueVoqueList.map(
+    const endingVoqueIdSet = new Set(
+      endingVoqueList.map((engineVoque) => engineVoque.id),
+    );
+
+    const engineProgram = new EngineProgram2Instance({
+      programName: engineProgramLocator.programName,
+      description: engineProgramLocator.description,
+      filePath: engineProgramLocator.filePath,
+      voictentLocatorList: engineProgramLocator.voictentLocatorList,
+      estinantList,
+      allVoqueList: allProgramVoqueList,
+      initializedVoqueList,
+      endingVoqueList,
+      locator: engineProgramLocator,
+    });
+
+    const voqueProgramRelationshipList = allUniqueVoqueList.map(
       (engineVoque) => {
-        const relationship = new EngineVoqueProgramRelationshipInstance({
+        let parentId: string;
+        if (startingVoqueIdSet.has(engineVoque.id)) {
+          parentId = engineProgram.startingSubgraphId;
+        } else if (endingVoqueIdSet.has(engineVoque.id)) {
+          parentId = engineProgram.endingSubgraphId;
+        } else {
+          parentId = engineProgramLocator.rootGraphLocator.id;
+        }
+
+        const relationship = new ProgramRelationshipInstance({
           rootGraphLocator: engineProgramLocator.rootGraphLocator,
-          engineVoqueLocator: engineVoque.locator,
+          relatedZorn: engineVoque.locator.zorn,
+          parentId,
         });
 
         return relationship;
@@ -138,18 +190,12 @@ export const getEngineProgram2 = buildEstinant({
     );
 
     return {
-      [ENGINE_PROGRAM_2_GEPP]: new EngineProgram2Instance({
-        programName: engineProgramLocator.programName,
-        description: engineProgramLocator.description,
-        filePath: engineProgramLocator.filePath,
-        voictentLocatorList: engineProgramLocator.voictentLocatorList,
-        estinantList,
-        allVoqueList: allProgramVoqueList,
-        initializedVoqueList,
-        endingVoqueList,
-        locator: engineProgramLocator,
-      }),
-      [ENGINE_VOQUE_PROGRAM_RELATIONSHIP_GEPP]: voqueToProgramRelationshipList,
+      [ENGINE_PROGRAM_2_GEPP]: engineProgram,
+      // [ENGINE_VOQUE_PROGRAM_RELATIONSHIP_GEPP]: voqueToProgramRelationshipList,
+      [PROGRAM_RELATIONSHIP_GEPP]: [
+        ...estinantProgramRelationshipList,
+        ...voqueProgramRelationshipList,
+      ],
     };
   })
   .assemble();

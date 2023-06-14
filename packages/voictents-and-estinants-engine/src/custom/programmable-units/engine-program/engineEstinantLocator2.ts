@@ -6,7 +6,7 @@ import {
 } from '../../../utilities/buildConstructorFunction';
 import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
 import { getZorn } from '../../../utilities/getZorn';
-import { PartialEngineProgramLocator2 } from './partialEngineProgramLocator2';
+// import { PartialEngineProgramLocator2 } from './partialEngineProgramLocator2';
 import { getZornableId } from '../../../utilities/getZornableId';
 
 export enum EngineEstinantLocator2TypeName {
@@ -19,7 +19,7 @@ type BaseEngineEstinantTopLevelDeclarationLocator = {
   identifierName: string;
   filePath: string;
   isCoreEstinant: boolean;
-  programLocator: PartialEngineProgramLocator2;
+  // programLocator: PartialEngineProgramLocator2;
 };
 
 type BaseEngineEstinantBuildAddMetadataForSerializationLocator = {
@@ -28,7 +28,7 @@ type BaseEngineEstinantBuildAddMetadataForSerializationLocator = {
   filePath: string;
   isCoreEstinant: true;
   index: number;
-  programLocator: PartialEngineProgramLocator2;
+  // programLocator: PartialEngineProgramLocator2;
 };
 
 type EngineEstinantLocatorPrototype = {

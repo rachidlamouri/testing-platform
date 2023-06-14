@@ -30,24 +30,20 @@ export type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
 export class InMemoryOdeshin2Voictent<
   TVoque extends GenericInMemoryOdeshin2Voque,
 > extends AbstractInMemoryVoictent<GenericInMemoryOdeshin2Voque, TVoque> {
-  private hubblepupByZorn = new Map<string, TVoque['receivedHubblepup']>();
+  private hubblepupMap = new Map<string, TVoque['receivedHubblepup']>();
 
   addHubblepup(hubblepup: TVoque['receivedHubblepup']): void {
     super.addHubblepup(hubblepup);
 
-    if (this.hubblepupByZorn.has(hubblepup.zorn)) {
-      // TODO: turn this into a ProgramError and find a way to get in the ProgramError collection
+    if (this.hubblepupMap.has(hubblepup.zorn)) {
       // eslint-disable-next-line no-console
-      console.error('DUPLICATE ZORN', {
+      console.log('DUPLICATE ZORN', {
         gepp: this.gepp,
-        zorn: hubblepup.zorn,
-        existing: this.hubblepupByZorn.get(hubblepup.zorn),
+        existing: this.hubblepupMap.get(hubblepup.zorn),
         duplicate: hubblepup,
       });
-      // eslint-disable-next-line no-console
-      console.log();
     } else {
-      this.hubblepupByZorn.set(hubblepup.zorn, hubblepup);
+      this.hubblepupMap.set(hubblepup.zorn, hubblepup);
     }
   }
 

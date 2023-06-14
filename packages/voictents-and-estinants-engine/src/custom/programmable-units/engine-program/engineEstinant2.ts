@@ -11,6 +11,7 @@ import { EstinantInput2 } from './input-output/engineEstinantInput2';
 import { EstinantOutput2 } from './input-output/engineEstinantOutput2';
 import { EngineVoqueLocator } from './engineVoqueLocator';
 import { isNotNull } from '../../../utilities/isNotNull';
+import { getTextDigest } from '../../../utilities/getTextDigest';
 
 type BaseEngineEstinant2 = {
   estinantName: string;
@@ -44,12 +45,16 @@ export const { EngineEstinant2Instance } = buildConstructorFunctionWithName(
   zorn: getExportLocatorZorn,
   id: getZornableId,
   subgraphId: (engineEstinant) => {
-    const zorn = getZorn(['subgraph', engineEstinant.zorn]);
-    return getZornableId({ zorn });
+    return getTextDigest(`estinant-subgraph | ${engineEstinant.estinantName}`);
+    // const zorn = getZorn(['subgraph', engineEstinant.zorn]);
+    // return getZornableId({ zorn });
   },
   inputSubgraphId: (engineEstinant) => {
-    const zorn = getZorn(['input-subgraph', engineEstinant.zorn]);
-    return getZornableId({ zorn });
+    // const zorn = getZorn(['input-subgraph', engineEstinant.zorn]);
+    // return getZornableId({ zorn });
+    return getTextDigest(
+      `estinant-input-subgraph | ${engineEstinant.estinantName}`,
+    );
   },
   allVoqueLocatorList: (engineEstinant) => {
     const list = [...engineEstinant.inputList, ...engineEstinant.outputList]

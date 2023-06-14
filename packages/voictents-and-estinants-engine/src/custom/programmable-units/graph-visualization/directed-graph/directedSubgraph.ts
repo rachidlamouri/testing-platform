@@ -29,6 +29,7 @@ type SubgraphAttributeByKey = SpreadN<
 export type PartialSubgraphAttributeByKey =
   PartialAttributeByKey<SubgraphAttributeByKey>;
 
+// TODO: add a debug label, since not all subgraphs and clusters will have a label
 export type DirectedSubgraph = {
   isRoot: false;
   isCluster: false;
@@ -38,6 +39,7 @@ export type DirectedSubgraph = {
   edgeList: DirectedGraphEdge[];
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   subgraphList: SubgraphLike[];
+  debugName?: string;
 };
 
 type ClusterAttributeByKey = SpreadN<
@@ -63,6 +65,7 @@ export type DirectedCluster = {
   edgeList: DirectedGraphEdge[];
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   subgraphList: SubgraphLike[];
+  debugName?: string;
 };
 
 export type SubgraphLike = DirectedSubgraph | DirectedCluster;

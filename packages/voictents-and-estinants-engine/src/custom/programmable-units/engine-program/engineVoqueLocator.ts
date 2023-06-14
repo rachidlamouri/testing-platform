@@ -3,7 +3,7 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../utilities/buildConstructorFunction';
-import { getZornableId } from '../../../utilities/getZornableId';
+import { getTextDigest } from '../../../utilities/getTextDigest';
 import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
 
 type BaseEngineVoqueLocator = {
@@ -14,6 +14,7 @@ type BaseEngineVoqueLocator = {
 type EngineVoqueLocatorPrototype = {
   get zorn(): string;
   get id(): string;
+  get displayName(): string;
 };
 
 /**
@@ -25,11 +26,26 @@ export type EngineVoqueLocator = ObjectWithPrototype<
   EngineVoqueLocatorPrototype
 >;
 
+export const getVoqueLocatorZorn = getExportLocatorZorn;
+
+export const getVoqueLocatorId = (locator: EngineVoqueLocator): string => {
+  return getTextDigest(locator.displayName);
+};
+
+export const getVoqueDisplayName = (locator: EngineVoqueLocator): string => {
+  const hubblepupName = locator.identifierName
+    .replace(/^Generic/, '')
+    .replace(/Voque$/, '');
+
+  return hubblepupName;
+};
+
 export const { EngineVoqueLocatorInstance } = buildConstructorFunctionWithName(
   'EngineVoqueLocatorInstance',
 )<BaseEngineVoqueLocator, EngineVoqueLocatorPrototype>({
-  zorn: getExportLocatorZorn,
-  id: getZornableId,
+  zorn: getVoqueLocatorZorn,
+  id: getVoqueLocatorId,
+  displayName: getVoqueDisplayName,
 });
 
 export const ENGINE_VOQUE_LOCATOR_GEPP = 'engine-voque-locator';

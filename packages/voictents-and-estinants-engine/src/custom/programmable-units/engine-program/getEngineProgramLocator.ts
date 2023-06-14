@@ -68,6 +68,7 @@ import {
   EngineVoqueLocator,
 } from './engineVoqueLocator';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {
   PROGRAM_VOQUE_RELATIONSHIP_GEPP,
   ProgramVoqueRelationshipInstance,
@@ -76,6 +77,8 @@ import {
 =======
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
 >>>>>>> deb685c (Save next program model changes that affect the current modeler)
+=======
+>>>>>>> 3a5c2ac (wip)
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -263,10 +266,10 @@ const getCore2EngineProgramLocator = ({
           identifierName,
           filePath,
           isCoreEstinant: true,
-          programLocator: new PartialEngineProgramLocator2Instance({
-            filePath: engineProgramFile.filePath,
-            programName,
-          }),
+          // programLocator: new PartialEngineProgramLocator2Instance({
+          //   filePath: engineProgramFile.filePath,
+          //   programName,
+          // }),
         }),
       );
     } else if (
@@ -283,10 +286,10 @@ const getCore2EngineProgramLocator = ({
           index,
           isCoreEstinant: true,
           filePath: engineProgramFile.filePath,
-          programLocator: new PartialEngineProgramLocator2Instance({
-            filePath: engineProgramFile.filePath,
-            programName,
-          }),
+          // programLocator: new PartialEngineProgramLocator2Instance({
+          //   filePath: engineProgramFile.filePath,
+          //   programName,
+          // }),
         }),
       );
     } else {
@@ -514,10 +517,10 @@ const getAdaptedEngineProgramLocator = ({
           identifierName,
           filePath: engineProgramFile.filePath,
           isCoreEstinant: false,
-          programLocator: new PartialEngineProgramLocator2Instance({
-            filePath: engineProgramFile.filePath,
-            programName,
-          }),
+          // programLocator: new PartialEngineProgramLocator2Instance({
+          //   filePath: engineProgramFile.filePath,
+          //   programName,
+          // }),
         }),
       );
       return;
@@ -529,10 +532,10 @@ const getAdaptedEngineProgramLocator = ({
         identifierName,
         filePath: fileImport.sourcePath,
         isCoreEstinant: false,
-        programLocator: new PartialEngineProgramLocator2Instance({
-          filePath: engineProgramFile.filePath,
-          programName,
-        }),
+        // programLocator: new PartialEngineProgramLocator2Instance({
+        //   filePath: engineProgramFile.filePath,
+        //   programName,
+        // }),
       }),
     );
   });
