@@ -1,7 +1,25 @@
-import { PartialAttributeByKey } from './attribute';
+import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
+import { SpreadN } from '../../../../utilities/spreadN';
+import { AttributeByKeyCNE } from './attributeByKeyCNE';
+
+export enum EdgeStyle {
+  Invisible = 'invis',
+}
+
+type EdgeAttributeByKey = SpreadN<
+  [
+    AttributeByKeyGSCNE,
+    AttributeByKeyCNE,
+    {
+      style: EdgeStyle;
+    },
+  ]
+>;
+
+type PartialEdgeAttributeByKey = Partial<EdgeAttributeByKey>;
 
 export type DirectedGraphEdge = {
-  attributeByKey: PartialAttributeByKey;
+  attributeByKey?: PartialEdgeAttributeByKey;
   tailId: string;
   headId: string;
 };

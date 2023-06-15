@@ -1,6 +1,6 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { DIRECTORY_GEPP, DirectoryVoque } from '../../file/directory';
-import { DirectedGraphStyle } from '../../graph-visualization/directed-graph/directedGraph';
+import { GraphLikeStyle } from '../../graph-visualization/directed-graph/attributeByKeyGSC';
 import { LIMBO_BOUNDARY_ZORN } from './boundaryConfiguration';
 import {
   BOUNDARY_METADATA_GEPP,
@@ -48,7 +48,7 @@ export const getDirectoryMetadata = buildEstinant({
       attributeByKey: {
         label: `Directory: ${directory.directoryName}`,
         fontsize: FONT_SIZE.directory,
-        style: DirectedGraphStyle.Rounded,
+        style: GraphLikeStyle.Rounded,
         color: 'gray',
         ...COMMON_ATTRIBUTE_BY_KEY,
       },

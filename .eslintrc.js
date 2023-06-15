@@ -40,6 +40,7 @@ module.exports = {
           'error',
           { devDependencies: true },
         ],
+        'func-names': 'off',
       },
       parser: '@typescript-eslint/parser',
       parserOptions: {

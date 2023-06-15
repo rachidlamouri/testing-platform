@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { Shape } from '../../graph-visualization/directed-graph/attribute';
+import { NodeShape } from '../../graph-visualization/directed-graph/directedGraphNode';
 import { EXTERNAL_BOUNDARY_ZORN } from './boundaryConfiguration';
 import {
   BOUNDARY_METADATA_GEPP,
@@ -39,7 +39,7 @@ export const getExternalModuleMetadata = buildEstinant({
       sourcePath: externalModule.sourcePath,
       attributeByKey: {
         label: externalModule.sourcePath,
-        shape: Shape.Box,
+        shape: NodeShape.Box,
         fontsize: FONT_SIZE.node,
         color: 'gray',
         ...COMMON_ATTRIBUTE_BY_KEY,

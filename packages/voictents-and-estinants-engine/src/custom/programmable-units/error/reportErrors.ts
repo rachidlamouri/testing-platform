@@ -28,7 +28,9 @@ export const reportErrors = buildEstinant({
       );
       console.log(`  Error Name    - ${programError.name}`);
       console.log(`  Reporter Path - ${programError.reporterLocator.filePath}`);
-      console.log(`  Source Path   - ${programError.sourceLocator.filePath}`);
+      if (programError.sourceLocator !== null) {
+        console.log(`  Source Path   - ${programError.sourceLocator.filePath}`);
+      }
       console.log(`  Context Path  - ${programError.contextFilePath}`);
       console.log();
       /* eslint-enable no-console */

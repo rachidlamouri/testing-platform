@@ -36,7 +36,6 @@ import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { DigikikifierStrategy } from '../../../core/engine/digikikify';
-import { EngineVoqueLocatorVoictent } from '../../programmable-units/engine-program/engineVoqueLocatorVoictent';
 import { getEngineVoque } from '../../programmable-units/engine-program/getEngineVoque';
 
 const programFileCache = new ProgramFileCache({
@@ -67,7 +66,6 @@ digikikify({
     new ProgramErrorVoictent({
       programFileCache,
     }),
-    new EngineVoqueLocatorVoictent(),
     new OutputFileVoictent({
       programFileCache,
     }),

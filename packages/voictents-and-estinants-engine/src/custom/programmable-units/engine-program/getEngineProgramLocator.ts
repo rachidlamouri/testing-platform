@@ -30,15 +30,16 @@ import {
 } from './engineFunctionConfiguration';
 import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
-  EngineProgramLocator2,
+  TEngineProgramLocator2,
   EngineProgramLocator2Voque,
   VoictentLocator,
+  EngineProgramLocator2Instance,
 } from './engineProgramLocator2';
 import {
-  EngineEstinantBuildAddMetadataForSerializationLocator,
-  EngineEstinantLocator2,
   EngineEstinantLocator2TypeName,
-  EngineEstinantTopLevelDeclarationLocator,
+  EngineEstinantLocator2,
+  EngineEstinantTopLevelDeclarationLocatorInstance,
+  EngineEstinantBuildAddMetadataForSerializationLocatorInstance,
 } from './engineEstinantLocator2';
 import {
   COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
@@ -64,8 +65,9 @@ import {
 } from '../error/programError';
 import {
   ENGINE_VOQUE_LOCATOR_GEPP,
+  EngineVoqueLocatorInstance,
   EngineVoqueLocatorVoque,
-  ReceivedEngineVoqueLocator,
+  EngineVoqueLocator,
 } from './engineVoqueLocator';
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
@@ -110,7 +112,7 @@ type Core2EngineProgramLocatorAccessorInput = {
 
 type Core2EngineProgramLocatorAccessorResult = {
   parallelErrorList: ReportedProgramError<ReportingLocator>[];
-  engineProgramLocator: EngineProgramLocator2;
+  engineProgramLocator: TEngineProgramLocator2;
 };
 
 const getCore2EngineProgramLocator = ({
@@ -120,6 +122,35 @@ const getCore2EngineProgramLocator = ({
   engineCallCommentText,
   engineCallExpressionPropertyList,
 }: Core2EngineProgramLocatorAccessorInput): Core2EngineProgramLocatorAccessorResult => {
+  // TODO: move this to its own hubblepup
+  const fileImportsByImportedIdentifier = new Map<
+    string,
+    TypeScriptFileImport
+  >();
+
+  importList
+    .flatMap((fileImport) => {
+      return fileImport.specifierList.map((specifier) => ({
+        fileImport,
+        specifier,
+      }));
+    })
+    .forEach(({ fileImport, specifier }) => {
+      fileImportsByImportedIdentifier.set(specifier, fileImport);
+    });
+
+  const getImportPathFromIdentifier = (
+    identifierName: string,
+  ): null | string => {
+    const fileImport = fileImportsByImportedIdentifier.get(identifierName);
+
+    if (fileImport === undefined) {
+      return null;
+    }
+
+    return fileImport.sourcePath;
+  };
+
   const programName = engineProgramFile.inMemoryFileName.kebabCase;
 
   const voictentListGeppProperty = engineCallExpressionPropertyList.find(
@@ -209,36 +240,40 @@ const getCore2EngineProgramLocator = ({
     estinantListValueNode?.type === AST_NODE_TYPES.ArrayExpression
       ? estinantListValueNode?.elements
       : [];
-
-  const partialEstinantLocatorList: (
-    | Pick<
-        EngineEstinantTopLevelDeclarationLocator,
-        'typeName' | 'identifierName'
-      >
-    | Pick<
-        EngineEstinantBuildAddMetadataForSerializationLocator,
-        'typeName' | 'callExpression' | 'index'
-      >
-  )[] = [];
+  const engineEstinantLocatorList: EngineEstinantLocator2[] = [];
 
   estinantReferenceElementList.forEach((element, index) => {
     if (isIdentifier(element)) {
-      partialEstinantLocatorList.push({
-        typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
-        identifierName: element.name,
-      });
+      const identifierName = element.name;
+
+      const filePath =
+        getImportPathFromIdentifier(identifierName) ??
+        engineProgramFile.filePath;
+
+      engineEstinantLocatorList.push(
+        new EngineEstinantTopLevelDeclarationLocatorInstance({
+          typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
+          identifierName,
+          filePath,
+          isCoreEstinant: true,
+        }),
+      );
     } else if (
       isSpecificIdentifiableCallExpression(
         element,
         buildAddMetadataForSerialization.name,
       )
     ) {
-      partialEstinantLocatorList.push({
-        typeName:
-          EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization,
-        callExpression: element,
-        index,
-      });
+      engineEstinantLocatorList.push(
+        new EngineEstinantBuildAddMetadataForSerializationLocatorInstance({
+          typeName:
+            EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization,
+          callExpression: element,
+          index,
+          isCoreEstinant: true,
+          filePath: engineProgramFile.filePath,
+        }),
+      );
     } else {
       parallelErrorList.push({
         name: `unparseable-estinant`,
@@ -255,60 +290,6 @@ const getCore2EngineProgramLocator = ({
     }
   });
 
-  const fileImportsByImportedIdentifier = new Map<
-    string,
-    TypeScriptFileImport
-  >();
-
-  importList
-    .flatMap((fileImport) => {
-      return fileImport.specifierList.map((specifier) => ({
-        fileImport,
-        specifier,
-      }));
-    })
-    .forEach(({ fileImport, specifier }) => {
-      fileImportsByImportedIdentifier.set(specifier, fileImport);
-    });
-
-  const engineEstinantLocatorList: EngineEstinantLocator2[] = [];
-
-  partialEstinantLocatorList.forEach((partialLocator) => {
-    if (
-      partialLocator.typeName ===
-      EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization
-    ) {
-      engineEstinantLocatorList.push({
-        zorn: `${engineProgramFile.filePath}:${partialLocator.index}`,
-        ...partialLocator,
-        isCoreEstinant: true,
-        filePath: engineProgramFile.filePath,
-      });
-      return;
-    }
-
-    const fileImport = fileImportsByImportedIdentifier.get(
-      partialLocator.identifierName,
-    );
-
-    if (fileImport === undefined) {
-      engineEstinantLocatorList.push({
-        zorn: `${partialLocator.identifierName}:${engineProgramFile.filePath}`,
-        ...partialLocator,
-        filePath: engineProgramFile.filePath,
-        isCoreEstinant: true,
-      });
-      return;
-    }
-
-    engineEstinantLocatorList.push({
-      zorn: `${partialLocator.identifierName}:${fileImport.sourcePath}`,
-      ...partialLocator,
-      filePath: fileImport.sourcePath,
-      isCoreEstinant: true,
-    });
-  });
-
   if (engineCallCommentText === null) {
     parallelErrorList.push({
       name: `missing-program-description`,
@@ -322,8 +303,7 @@ const getCore2EngineProgramLocator = ({
     });
   }
 
-  const engineProgramLocator: EngineProgramLocator2 = {
-    zorn: engineProgramFile.filePath,
+  const engineProgramLocator = new EngineProgramLocator2Instance({
     programName,
     description: engineCallCommentText ?? '',
     filePath: engineProgramFile.filePath,
@@ -331,7 +311,7 @@ const getCore2EngineProgramLocator = ({
     engineVoqueLocatorList: [],
     voictentLocatorList,
     engineEstinantLocatorList,
-  };
+  });
 
   return {
     parallelErrorList,
@@ -349,7 +329,7 @@ type AdaptedEngineProgramLocatorAccessorInput = {
 
 type AdaptedEngineProgramLocatorAccessorResult = {
   parallelErrorList: ReportedProgramError<ReportingLocator>[];
-  engineProgramLocator: EngineProgramLocator2;
+  engineProgramLocator: TEngineProgramLocator2;
 };
 
 const getAdaptedEngineProgramLocator = ({
@@ -375,7 +355,10 @@ const getAdaptedEngineProgramLocator = ({
       ? populatedVoictentTupleValueNode.expression.elements
       : [];
 
-  // TODO: move this to its own hubblepup
+  const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
+  const engineVoqueLocatorList: EngineVoqueLocator[] = [];
+  const voictentLocatorList: VoictentLocator[] = [];
+
   const fileImportsByImportedIdentifier = new Map<
     string,
     TypeScriptFileImport
@@ -391,10 +374,6 @@ const getAdaptedEngineProgramLocator = ({
     .forEach(({ fileImport, specifier }) => {
       fileImportsByImportedIdentifier.set(specifier, fileImport);
     });
-
-  const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
-  const engineVoqueLocatorList: ReceivedEngineVoqueLocator[] = [];
-  const voictentLocatorList: VoictentLocator[] = [];
 
   if (populatedVoictentInstanceList.length === 0) {
     parallelErrorList.push({
@@ -431,7 +410,7 @@ const getAdaptedEngineProgramLocator = ({
         parallelErrorList.push({
           name: 'unparseable-populated-voictent',
           error: new Error(
-            'Unable able to parse populated input voictent. Expected a new expression with at least one type parameter',
+            'Unable to parse populated input voictent. Expected a new expression with at least one type parameter',
           ),
           reporterLocator,
           sourceLocator: {
@@ -453,10 +432,12 @@ const getAdaptedEngineProgramLocator = ({
 
       const voictentName = voqueIdentifierName.replace(/Voque$/, '');
 
-      engineVoqueLocatorList.push({
-        identifierName: voqueIdentifierName,
-        filePath: voqueFilePath,
-      });
+      engineVoqueLocatorList.push(
+        new EngineVoqueLocatorInstance({
+          identifierName: voqueIdentifierName,
+          filePath: voqueFilePath,
+        }),
+      );
 
       voictentLocatorList.push({
         name: voictentName,
@@ -509,23 +490,25 @@ const getAdaptedEngineProgramLocator = ({
     const fileImport = fileImportsByImportedIdentifier.get(identifierName);
 
     if (fileImport === undefined) {
-      engineEstinantLocatorList.push({
-        zorn: `${identifierName}:${engineProgramFile.filePath}`,
-        typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
-        identifierName,
-        filePath: engineProgramFile.filePath,
-        isCoreEstinant: false,
-      });
+      engineEstinantLocatorList.push(
+        new EngineEstinantTopLevelDeclarationLocatorInstance({
+          typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
+          identifierName,
+          filePath: engineProgramFile.filePath,
+          isCoreEstinant: false,
+        }),
+      );
       return;
     }
 
-    engineEstinantLocatorList.push({
-      zorn: `${identifierName}:${fileImport.sourcePath}`,
-      typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
-      identifierName,
-      filePath: fileImport.sourcePath,
-      isCoreEstinant: false,
-    });
+    engineEstinantLocatorList.push(
+      new EngineEstinantTopLevelDeclarationLocatorInstance({
+        typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
+        identifierName,
+        filePath: fileImport.sourcePath,
+        isCoreEstinant: false,
+      }),
+    );
   });
 
   const programName = engineProgramFile.inMemoryFileName.kebabCase;
@@ -543,15 +526,14 @@ const getAdaptedEngineProgramLocator = ({
     });
   }
 
-  const engineProgramLocator: EngineProgramLocator2 = {
-    zorn: engineProgramFile.filePath,
+  const engineProgramLocator = new EngineProgramLocator2Instance({
     programName,
     description: engineCallCommentText ?? '',
     filePath: engineProgramFile.filePath,
     engineVoqueLocatorList,
     voictentLocatorList,
     engineEstinantLocatorList,
-  };
+  });
 
   return {
     parallelErrorList,

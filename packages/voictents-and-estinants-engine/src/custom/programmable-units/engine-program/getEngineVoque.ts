@@ -1,4 +1,3 @@
-import { getTextDigest } from '../../../utilities/getTextDigest';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   GenericProgramErrorVoque,
@@ -11,7 +10,11 @@ import {
   PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
   ProgramBodyDeclarationsByIdentifierVoque,
 } from '../type-script-file/programBodyDeclarationsByIdentifier';
-import { ENGINE_VOQUE_GEPP, EngineVoqueVoque } from './engineVoque';
+import {
+  ENGINE_VOQUE_GEPP,
+  EngineVoqueInstance,
+  EngineVoqueVoque,
+} from './engineVoque';
 import {
   ENGINE_VOQUE_LOCATOR_GEPP,
   EngineVoqueLocatorVoque,
@@ -55,9 +58,12 @@ export const getEngineVoque = buildEstinant({
 
     const emittedHubblepupIdentifierName = `Emitted${hubblepupIdentifierName}`;
 
+    const disambiguatedHubblepupIdentifierName = `T${hubblepupIdentifierName}`;
+
     const hubblepupDeclaration =
       declarationByIdentifier.get(hubblepupIdentifierName) ??
-      declarationByIdentifier.get(emittedHubblepupIdentifierName);
+      declarationByIdentifier.get(emittedHubblepupIdentifierName) ??
+      declarationByIdentifier.get(disambiguatedHubblepupIdentifierName);
 
     const commentText = hubblepupDeclaration?.commentText ?? null;
 
@@ -68,7 +74,7 @@ export const getEngineVoque = buildEstinant({
             {
               name: 'missing-hubblepup-comment',
               error: new Error(
-                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup can start with "Emitted"',
+                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup type may start with "Emitted" or "T"',
               ),
               reporterLocator,
               sourceLocator: {
@@ -83,14 +89,13 @@ export const getEngineVoque = buildEstinant({
           ];
 
     return {
-      [ENGINE_VOQUE_GEPP]: {
-        zorn: voqueLocator.zorn,
-        id: getTextDigest(voqueLocator.zorn),
+      [ENGINE_VOQUE_GEPP]: new EngineVoqueInstance({
         displayName: voqueLocator.identifierName.replace(/Voque$/, ''),
         filePath: voqueLocator.filePath,
         identifierName: voqueLocator.identifierName,
         commentText: commentText ?? '',
-      },
+        locator: voqueLocator,
+      }),
       [PROGRAM_ERROR_GEPP]: parallelErrorList,
     };
   })

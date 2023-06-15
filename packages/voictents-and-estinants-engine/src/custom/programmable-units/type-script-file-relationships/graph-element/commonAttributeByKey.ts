@@ -1,6 +1,6 @@
-import { AttributeByKey } from '../../graph-visualization/directed-graph/attribute';
+import { AttributeByKeyGSCNE } from '../../graph-visualization/directed-graph/attributeByKeyGSCNE';
 
-export const COMMON_ATTRIBUTE_BY_KEY: Pick<AttributeByKey, 'fontname'> = {
+export const COMMON_ATTRIBUTE_BY_KEY: Pick<AttributeByKeyGSCNE, 'fontname'> = {
   fontname: 'sans-serif',
 };
 

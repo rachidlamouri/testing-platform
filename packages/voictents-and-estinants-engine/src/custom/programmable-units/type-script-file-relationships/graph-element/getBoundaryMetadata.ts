@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { DirectedGraphStyle } from '../../graph-visualization/directed-graph/directedGraph';
+import { GraphLikeStyle } from '../../graph-visualization/directed-graph/attributeByKeyGSC';
 import {
   BOUNDARY_CONFIGURATION_GEPP,
   BoundaryConfigurationVoque,
@@ -30,7 +30,7 @@ export const getBoundaryMetadata = buildEstinant({
   .onPinbe((boundaryConfiguration) => {
     const COMMON_BOUNDARY_ATTRIBUTE_BY_KEY = {
       fontsize: FONT_SIZE.boundary,
-      style: DirectedGraphStyle.Bold,
+      style: GraphLikeStyle.Bold,
       ...COMMON_ATTRIBUTE_BY_KEY,
     };
 

@@ -2,21 +2,20 @@ import { buildEstinant } from '../adapter/estinant-builder/estinantBuilder';
 import {
   DIRECTED_GRAPH_GEPP,
   DirectedGraph,
-  DirectedGraphStyle,
   DirectedGraphVoque,
-  DirectedSubgraph,
-  SubgraphRankType,
 } from './graph-visualization/directed-graph/directedGraph';
-import { DirectedGraphNode } from './graph-visualization/directed-graph/directedGraphNode';
 import {
-  LabelLocation,
-  Shape,
-} from './graph-visualization/directed-graph/attribute';
+  DirectedGraphNode,
+  NodeShape,
+} from './graph-visualization/directed-graph/directedGraphNode';
 import {
   COMMON_ATTRIBUTE_BY_KEY,
   FONT_SIZE,
 } from './type-script-file-relationships/graph-element/commonAttributeByKey';
-import { DirectedGraphEdge } from './graph-visualization/directed-graph/directedGraphEdge';
+import {
+  DirectedGraphEdge,
+  EdgeStyle,
+} from './graph-visualization/directed-graph/directedGraphEdge';
 import {
   ENGINE_PROGRAM_2_GEPP,
   EngineProgram2Voque,
@@ -29,6 +28,15 @@ import {
   DirectedGraphMetadatumField,
 } from './graph-visualization/directedGraphMetadataById';
 import { isNotNull } from '../../utilities/isNotNull';
+import {
+  DirectedCluster,
+  DirectedSubgraph,
+  RankType,
+} from './graph-visualization/directed-graph/directedSubgraph';
+import {
+  GraphLikeStyle,
+  GraphLikeLabelLocation,
+} from './graph-visualization/directed-graph/attributeByKeyGSC';
 
 type EngineVoictent = {
   id: string;
@@ -118,7 +126,7 @@ export const getDirectedGraph = buildEstinant({
       attributeByKey: {
         id: getTextDigest(`start-node | ${engineProgram.programName}`),
         label: 'START',
-        shape: Shape.Circle,
+        shape: NodeShape.Circle,
         color: 'gray',
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
@@ -196,7 +204,7 @@ export const getDirectedGraph = buildEstinant({
         attributeByKey: {
           id: voictent.id,
           label: voictent.name,
-          shape: Shape.Box,
+          shape: NodeShape.Box,
           ...COMMON_ATTRIBUTE_BY_KEY,
         },
       };
@@ -218,7 +226,7 @@ export const getDirectedGraph = buildEstinant({
             id: getTextDigest(
               `estinant-input-subgraph | ${estinant.estinantName}`,
             ),
-            rank: SubgraphRankType.Same,
+            rank: RankType.Same,
           },
           nodeList: [],
           edgeList: [],
@@ -255,7 +263,7 @@ export const getDirectedGraph = buildEstinant({
         attributeByKey: {
           id: estinant.id,
           label: estinant.estinantName,
-          shape: Shape.InvertedHouse,
+          shape: NodeShape.InvertedHouse,
           ...COMMON_ATTRIBUTE_BY_KEY,
         },
       };
@@ -284,7 +292,7 @@ export const getDirectedGraph = buildEstinant({
         attributeByKey: {
           id: input.id,
           label: input.index === 0 ? 'L' : `R${input.index}`,
-          shape: Shape.InvertedTriangle,
+          shape: NodeShape.InvertedTriangle,
           ...COMMON_ATTRIBUTE_BY_KEY,
         },
       };
@@ -301,7 +309,7 @@ export const getDirectedGraph = buildEstinant({
       attributeByKey: {
         id: getTextDigest(`end-node | ${engineProgram.programName}`),
         label: 'END',
-        shape: Shape.Circle,
+        shape: NodeShape.Circle,
         color: 'gray',
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
@@ -401,13 +409,13 @@ export const getDirectedGraph = buildEstinant({
         return edge;
       });
 
-    const startSubgraph: DirectedSubgraph = {
+    const startSubgraph: DirectedCluster = {
       isRoot: false,
       isCluster: true,
       attributeByKey: {
         id: getTextDigest(`start-subgraph | ${engineProgram.programName}`),
         label: '',
-        style: DirectedGraphStyle.Rounded,
+        style: GraphLikeStyle.Rounded,
         color: 'none',
       },
       nodeList: startingVoictentNodeList,
@@ -415,13 +423,13 @@ export const getDirectedGraph = buildEstinant({
       subgraphList: [],
     };
 
-    const endSubgraph: DirectedSubgraph = {
+    const endSubgraph: DirectedCluster = {
       isRoot: false,
       isCluster: true,
       attributeByKey: {
         id: getTextDigest(`end-subgraph | ${engineProgram.programName}`),
         label: '',
-        style: DirectedGraphStyle.Rounded,
+        style: GraphLikeStyle.Rounded,
         color: 'none',
       },
       nodeList: endingVoictentNodeList,
@@ -437,7 +445,7 @@ export const getDirectedGraph = buildEstinant({
             const edge: DirectedGraphEdge = {
               attributeByKey: {
                 id: `${input.id}:${list[index + 1].id}`,
-                style: 'invis',
+                style: EdgeStyle.Invisible,
               },
               tailId: input.id,
               headId: list[index + 1].id,
@@ -457,7 +465,7 @@ export const getDirectedGraph = buildEstinant({
       attributeByKey: {
         id: engineProgram.id,
         label: engineProgram.programName,
-        labelloc: LabelLocation.Top,
+        labelloc: GraphLikeLabelLocation.Top,
         fontsize: FONT_SIZE.root,
         ...COMMON_ATTRIBUTE_BY_KEY,
       },

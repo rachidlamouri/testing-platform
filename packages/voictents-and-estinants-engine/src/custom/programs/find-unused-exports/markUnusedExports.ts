@@ -154,6 +154,12 @@ export const markUnusedExports = buildEstinant({
             'packages/voictents-and-estinants-engine/src/utilities/typed-datum/customTypedDatum.ts',
           importedIdentifierName: 'CustomTypedDatum',
         },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programmable-units/in-memory-cache/zornable.ts',
+          importedIdentifierName: 'ZornableVoque',
+        },
       ];
 
     [

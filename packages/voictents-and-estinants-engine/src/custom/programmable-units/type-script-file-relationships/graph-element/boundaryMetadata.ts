@@ -1,6 +1,6 @@
 import { SetRequired } from 'type-fest';
-import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedGraph';
 import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedSubgraph';
 
 type InternalBoundaryMetadata = {
   zorn: string;
