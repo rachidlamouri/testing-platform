@@ -59,6 +59,8 @@ export abstract class AbstractSerializableVoictent<
 
   private initialHubblepupTuple: TVoque['emittedHubblepup'][];
 
+  public readonly duplicateCountByCheckId = new Map<string, number>();
+
   constructor({
     gepp,
     programFileCache,
@@ -103,12 +105,35 @@ export abstract class AbstractSerializableVoictent<
     );
     const serializedHubblepup = this.serialize(metahubblepup.datum);
 
-    this.programFileCache.writeSerializedHubblepup({
-      voictentGepp: metavoictentGepp,
-      nestedPath: serializedHubblepupGepp,
-      extensionlessFileName,
-      serializedHubblepup,
-    });
+    const duplicateCheckId = `${serializedHubblepupGepp}:${extensionlessFileName}`;
+    const previousCount =
+      this.duplicateCountByCheckId.get(duplicateCheckId) ?? 0;
+
+    const nextCount = previousCount + 1;
+    this.duplicateCountByCheckId.set(duplicateCheckId, nextCount);
+
+    if (nextCount > 1) {
+      // TODO: turn this into a ProgramError and find a way to get in the ProgramError collection
+      // eslint-disable-next-line no-console
+      console.log('SKIPPING DUPLICATE FILE NAME', {
+        fileName: this.programFileCache.getNamespacedVoictentsFilePath({
+          voictentGepp: metavoictentGepp,
+          nestedPath: serializedHubblepupGepp,
+          extensionlessFileName,
+          fileExtensionSuffixIdentifier:
+            serializedHubblepup.fileExtensionSuffixIdentifier,
+        }),
+      });
+      // eslint-disable-next-line no-console
+      console.log();
+    } else {
+      this.programFileCache.writeSerializedHubblepup({
+        voictentGepp: metavoictentGepp,
+        nestedPath: serializedHubblepupGepp,
+        extensionlessFileName,
+        serializedHubblepup,
+      });
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
