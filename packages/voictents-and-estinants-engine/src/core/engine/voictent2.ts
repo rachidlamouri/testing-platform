@@ -16,6 +16,7 @@ export type Voictent2<
     debugName: string,
   ): VoictentItemLanbe2<TRestrictingVoque, TVoque> | VoictentItemLanbe | null;
   onTickStart(): void;
+  initialize(): void;
   addHubblepup(hubblepup: TVoque['receivedHubblepup']): void;
 };
 

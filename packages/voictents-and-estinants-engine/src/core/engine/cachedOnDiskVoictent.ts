@@ -98,6 +98,11 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
     this.gepp = gepp;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  initialize(): void {
+    // no op
+  }
+
   addHubblepup(receivedHubblepup: TVoque['receivedHubblepup']): void {
     this.receivedHubblepup.thisTick = true;
 

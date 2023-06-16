@@ -115,6 +115,10 @@ export const digikikify = ({
   onFinish,
   strategy = DigikikifierStrategy.WaitForAllDependencies,
 }: DigikikifierInput): void => {
+  inputVoictentList.forEach((voictent) => {
+    voictent.initialize();
+  });
+
   const inputGeppSet: GeppSet = new Set(
     inputVoictentList.map((voictent) => {
       return voictent.gepp;

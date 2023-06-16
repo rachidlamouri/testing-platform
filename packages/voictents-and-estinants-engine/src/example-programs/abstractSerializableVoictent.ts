@@ -57,6 +57,8 @@ export abstract class AbstractSerializableVoictent<
 
   public readonly programFileCache: ProgramFileCache;
 
+  private initialHubblepupTuple: TVoque['emittedHubblepup'][];
+
   constructor({
     gepp,
     programFileCache,
@@ -64,12 +66,15 @@ export abstract class AbstractSerializableVoictent<
   }: AbstractSerializableVoictentConstructorInput<TVoque>) {
     this.gepp = gepp;
     this.programFileCache = programFileCache;
+    this.initialHubblepupTuple = initialHubblepupTuple;
+  }
 
+  initialize(): void {
     this.programFileCache.deleteVoictentDirectory({
       voictentGepp: this.gepp,
     });
 
-    initialHubblepupTuple.forEach((hubblepup) => {
+    this.initialHubblepupTuple.forEach((hubblepup) => {
       this.addHubblepup(hubblepup);
     });
   }
