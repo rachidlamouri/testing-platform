@@ -22,6 +22,8 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
 {
   public readonly gepp: TVoque['gepp'];
 
+  private initialHubblepupTuple: TVoque['emittedHubblepup'][];
+
   constructor({
     gepp,
     initialHubblepupTuple,
@@ -29,8 +31,11 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
     super();
 
     this.gepp = gepp;
+    this.initialHubblepupTuple = initialHubblepupTuple;
+  }
 
-    initialHubblepupTuple.forEach((hubblepup) => {
+  initialize(): void {
+    this.initialHubblepupTuple.forEach((hubblepup) => {
       this.addHubblepup(hubblepup);
     });
   }

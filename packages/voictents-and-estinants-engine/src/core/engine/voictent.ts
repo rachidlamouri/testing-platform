@@ -45,6 +45,11 @@ export class Voictent implements GenericVoictent2 {
 
   constructor(public readonly gepp: Gepp) {}
 
+  // eslint-disable-next-line class-methods-use-this
+  initialize(): void {
+    // no op
+  }
+
   addHubblepup(hubblepup: Hubblepup): void {
     this.receivedHubblepup.thisTick = true;
     this.hubblepupTuple.push(hubblepup);

@@ -24,9 +24,7 @@ import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
-import { getEngineProgramLocator } from '../../programmable-units/engine-program/getEngineProgramLocator';
 import { getEngineEstinantLocatorCollection } from '../../programmable-units/engine-program/getEngineEstinantLocatorCollection';
-import { getEngineEstinant } from '../../programmable-units/engine-program/getEngineEstinant';
 import { getEngineProgram2 } from '../../programmable-units/engine-program/getEngineProgram2';
 import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
 import { signalError } from '../../programmable-units/error/signalError';
@@ -37,6 +35,9 @@ import { ProgramErrorVoictent } from '../../programmable-units/error/programErro
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { DigikikifierStrategy } from '../../../core/engine/digikikify';
 import { getEngineVoque } from '../../programmable-units/engine-program/getEngineVoque';
+import { getEngineEstinant } from '../../programmable-units/engine-program/getEngineEstinant';
+import { getEngineProgramLocator } from '../../programmable-units/engine-program/getEngineProgramLocator';
+import { getEngineVoqueLocatorCollection } from '../../programmable-units/engine-program/getEngineVoqueLocatorCollection';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -85,6 +86,7 @@ digikikify({
 
     getEngineEstinantLocatorCollection,
     getEngineEstinant,
+    getEngineVoqueLocatorCollection,
     getEngineVoque,
     getEngineProgram2,
 

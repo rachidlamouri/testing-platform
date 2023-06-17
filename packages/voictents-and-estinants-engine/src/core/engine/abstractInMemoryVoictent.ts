@@ -38,6 +38,8 @@ export abstract class AbstractInMemoryVoictent<
 {
   public readonly gepp: TVoque['gepp'];
 
+  private initialHubblepupTuple: TVoque['emittedHubblepup'][];
+
   hubblepupTuple: TVoque['emittedVoictent'] = [];
 
   indicesByLanbe: Map<VoictentItemLanbe2<TRestrictingVoque, TVoque>, number> =
@@ -60,8 +62,11 @@ export abstract class AbstractInMemoryVoictent<
     initialHubblepupTuple,
   }: InMemoryVoictentConstructorInput<TVoque>) {
     this.gepp = gepp;
+    this.initialHubblepupTuple = initialHubblepupTuple;
+  }
 
-    initialHubblepupTuple.forEach((hubblepup) => {
+  initialize(): void {
+    this.initialHubblepupTuple.forEach((hubblepup) => {
       this.addHubblepup(hubblepup);
     });
   }
