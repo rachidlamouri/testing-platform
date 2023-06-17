@@ -58,11 +58,14 @@ import {
   TypeScriptFileImportListVoque,
 } from '../type-script-file/typeScriptFileImportList';
 import {
-  ENGINE_VOQUE_LOCATOR_GEPP,
-  EngineVoqueLocatorVoque,
   EngineVoqueLocatorInstance,
   EngineVoqueLocator,
 } from './engineVoqueLocator';
+import {
+  EstinantVoqueRelationshipVoque,
+  ESTINANT_VOQUE_RELATIONSHIP_GEPP,
+  EstinantVoqueRelationshipInstance,
+} from './estinantVoqueRelationship';
 
 const ESTINANT_NAME = 'getEngineEstinant' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -822,8 +825,8 @@ export const getEngineEstinant = buildEstinant({
   .toHubblepupTuple2<EngineEstinant2Voque>({
     gepp: ENGINE_ESTINANT_2_GEPP,
   })
-  .toHubblepupTuple2<EngineVoqueLocatorVoque>({
-    gepp: ENGINE_VOQUE_LOCATOR_GEPP,
+  .toHubblepupTuple2<EstinantVoqueRelationshipVoque>({
+    gepp: ESTINANT_VOQUE_RELATIONSHIP_GEPP,
   })
   .onPinbe(
     (
@@ -899,20 +902,30 @@ export const getEngineEstinant = buildEstinant({
       const estinantList: EngineEstinant2[] =
         estinant !== null ? [estinant] : [];
 
-      const voqueLocatorList = [
+      const allVoqueLocatorList = [
         ...(estinant?.inputList ?? []),
         ...(estinant?.outputList ?? []),
       ]
         .map((inputOutput) => inputOutput.voqueLocator)
         .filter(
-          (inputOutput): inputOutput is EngineVoqueLocator =>
-            inputOutput !== undefined,
+          (voqueLocator): voqueLocator is EngineVoqueLocator =>
+            voqueLocator !== undefined,
         );
+
+      const estinantVoqueRelationshipList = allVoqueLocatorList.map(
+        (voqueLocator, index) => {
+          return new EstinantVoqueRelationshipInstance({
+            estinantLocator,
+            voqueLocator,
+            distinguisher: `${index}`,
+          });
+        },
+      );
 
       return {
         [PROGRAM_ERROR_GEPP]: errorList,
         [ENGINE_ESTINANT_2_GEPP]: estinantList,
-        [ENGINE_VOQUE_LOCATOR_GEPP]: voqueLocatorList,
+        [ESTINANT_VOQUE_RELATIONSHIP_GEPP]: estinantVoqueRelationshipList,
       };
     },
   )

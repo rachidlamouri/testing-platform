@@ -64,11 +64,14 @@ import {
   ReportingEstinantLocator,
 } from '../error/programError';
 import {
-  ENGINE_VOQUE_LOCATOR_GEPP,
   EngineVoqueLocatorInstance,
-  EngineVoqueLocatorVoque,
   EngineVoqueLocator,
 } from './engineVoqueLocator';
+import {
+  PROGRAM_VOQUE_RELATIONSHIP_GEPP,
+  ProgramVoqueRelationshipInstance,
+  ProgramVoqueRelationshipVoque,
+} from './programVoqueRelationship';
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -339,6 +342,8 @@ const getAdaptedEngineProgramLocator = ({
   engineCallCommentText,
   engineCallExpressionPropertyList,
 }: AdaptedEngineProgramLocatorAccessorInput): AdaptedEngineProgramLocatorAccessorResult => {
+  const programName = engineProgramFile.inMemoryFileName.kebabCase;
+
   const populatedVoictentTupleProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
@@ -511,8 +516,6 @@ const getAdaptedEngineProgramLocator = ({
     );
   });
 
-  const programName = engineProgramFile.inMemoryFileName.kebabCase;
-
   if (engineCallCommentText === null) {
     parallelErrorList.push({
       name: `missing-program-description`,
@@ -567,8 +570,8 @@ export const getEngineProgramLocator = buildEstinant({
   .toHubblepupTuple2<EngineProgramLocator2Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_2_GEPP,
   })
-  .toHubblepupTuple2<EngineVoqueLocatorVoque>({
-    gepp: ENGINE_VOQUE_LOCATOR_GEPP,
+  .toHubblepupTuple2<ProgramVoqueRelationshipVoque>({
+    gepp: PROGRAM_VOQUE_RELATIONSHIP_GEPP,
   })
   .onPinbe(
     (
@@ -599,7 +602,7 @@ export const getEngineProgramLocator = buildEstinant({
             } satisfies ReportedProgramError<ReportingLocator>,
           ],
           [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [],
-          [ENGINE_VOQUE_LOCATOR_GEPP]: [],
+          [PROGRAM_VOQUE_RELATIONSHIP_GEPP]: [],
         };
       }
 
@@ -628,7 +631,7 @@ export const getEngineProgramLocator = buildEstinant({
               } satisfies ReportedProgramError<ReportingLocator>,
             ],
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [],
-            [ENGINE_VOQUE_LOCATOR_GEPP]: [],
+            [PROGRAM_VOQUE_RELATIONSHIP_GEPP]: [],
           };
         case EngineFunctionConfigurationTypeName.Core2: {
           const { parallelErrorList, engineProgramLocator } =
@@ -643,7 +646,7 @@ export const getEngineProgramLocator = buildEstinant({
           return {
             [PROGRAM_ERROR_GEPP]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [engineProgramLocator],
-            [ENGINE_VOQUE_LOCATOR_GEPP]: [],
+            [PROGRAM_VOQUE_RELATIONSHIP_GEPP]: [],
           };
         }
         case EngineFunctionConfigurationTypeName.Adapted: {
@@ -656,11 +659,18 @@ export const getEngineProgramLocator = buildEstinant({
               engineCallExpressionPropertyList,
             });
 
+          const programVoqueRelationshipList =
+            engineProgramLocator.engineVoqueLocatorList.map((voqueLocator) => {
+              return new ProgramVoqueRelationshipInstance({
+                programName: engineProgramLocator.programName,
+                voqueLocator,
+              });
+            });
+
           return {
             [PROGRAM_ERROR_GEPP]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_2_GEPP]: [engineProgramLocator],
-            [ENGINE_VOQUE_LOCATOR_GEPP]:
-              engineProgramLocator.engineVoqueLocatorList,
+            [PROGRAM_VOQUE_RELATIONSHIP_GEPP]: programVoqueRelationshipList,
           };
         }
       }
