@@ -58,6 +58,8 @@ type ConstructorFunctionParent<
   [Key in TConstructorName]: ConstructorFunction<TBaseObject, TPrototype>;
 };
 
+const CONSTRUCTOR_KEY_NAME = 'constructor';
+
 const buildConstructorFunction = <
   TConstructorName extends string,
   TBaseObject extends object,
@@ -72,6 +74,10 @@ const buildConstructorFunction = <
 >): ConstructorFunctionParent<TConstructorName, TBaseObject, TPrototype> => {
   const prototype = {};
   Object.entries(prototypeConfiguration).forEach(([name, getter]) => {
+    if (getter === CONSTRUCTOR_KEY_NAME) {
+      throw Error('"constructor" is a reserved key');
+    }
+
     Object.defineProperty(prototype, name, {
       get() {
         return (getter as TypeScriptFunction)(this);
@@ -79,25 +85,32 @@ const buildConstructorFunction = <
     });
   });
 
-  const constructorFunction = Object.assign(
-    // eslint-disable-next-line func-names
-    function (
-      this: ObjectWithPrototype<TBaseObject, TPrototype>,
-      input: TBaseObject,
-    ) {
-      Object.assign(this, input);
-    },
-    {
-      prototype,
-    },
-  ) as unknown as ConstructorFunction<TBaseObject, TPrototype>;
+  const constructorFunction = function (
+    this: ObjectWithPrototype<TBaseObject, TPrototype>,
+    input: TBaseObject,
+  ): void {
+    Object.assign(this, input);
+  };
 
   Object.defineProperty(constructorFunction, 'name', {
     value: constructorName,
   });
 
+  Object.assign(prototype, {
+    [CONSTRUCTOR_KEY_NAME]: constructorFunction,
+  });
+
+  Object.assign(
+    // eslint-disable-next-line func-names
+    constructorFunction,
+    { prototype },
+  );
+
   const constructorFunctionParent = {
-    [constructorName]: constructorFunction,
+    [constructorName]: constructorFunction as unknown as ConstructorFunction<
+      TBaseObject,
+      TPrototype
+    >,
   } as ConstructorFunctionParent<TConstructorName, TBaseObject, TPrototype>;
 
   return constructorFunctionParent;

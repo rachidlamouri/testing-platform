@@ -22,16 +22,45 @@ export type TypeScriptObject =
   | TypeScriptMap
   | TypeScriptObjectInstance;
 
+const recursivelyGetEntryList = (
+  originalDatum: TypeScriptObjectInstance,
+  isPrototype: boolean,
+  datumOrPrototype: TypeScriptObjectInstance,
+  // "entryListList" is an accumulator that groups entries by prototype
+  entryListList: TypeScriptObjectInstanceEntryList[],
+): void => {
+  const descriptorByKey = Object.getOwnPropertyDescriptors(datumOrPrototype);
+  const symbolList = Object.getOwnPropertySymbols(datumOrPrototype);
+  const descriptorKeyList = Object.keys(descriptorByKey).filter(
+    (key) => !isPrototype || key !== 'constructor',
+  );
+
+  const entryList = [...descriptorKeyList, ...symbolList].map((key) => {
+    return [key, originalDatum[key]] as TypeScriptObjectInstanceEntry;
+  });
+
+  entryListList.push(entryList);
+
+  const prototype = Object.getPrototypeOf(
+    datumOrPrototype,
+  ) as TypeScriptObjectInstance;
+
+  if (prototype !== Object.prototype) {
+    recursivelyGetEntryList(originalDatum, true, prototype, entryListList);
+  }
+};
+
 export const getTypeScriptObjectEntryList = (
   datum: TypeScriptObjectInstance,
 ): TypeScriptObjectInstanceEntryList => {
-  const simpleEntryList = Reflect.ownKeys(
-    datum,
-  ).map<TypeScriptObjectInstanceEntry>((key) => {
-    const value = datum[key];
+  const entryListList: TypeScriptObjectInstanceEntryList[] = [];
 
-    return [key, value];
-  });
+  recursivelyGetEntryList(datum, false, datum, entryListList);
 
-  return simpleEntryList;
+  // note: this is reversed so prototype entries are rendered first. which means this
+  // function is concerned with rendering stuff, which is probably bad
+  entryListList.reverse();
+
+  const entryList = entryListList.flat();
+  return entryList;
 };
