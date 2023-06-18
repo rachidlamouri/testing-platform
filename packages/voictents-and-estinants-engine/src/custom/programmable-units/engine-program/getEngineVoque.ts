@@ -58,12 +58,9 @@ export const getEngineVoque = buildEstinant({
 
     const emittedHubblepupIdentifierName = `Emitted${hubblepupIdentifierName}`;
 
-    const disambiguatedHubblepupIdentifierName = `T${hubblepupIdentifierName}`;
-
     const hubblepupDeclaration =
       declarationByIdentifier.get(hubblepupIdentifierName) ??
-      declarationByIdentifier.get(emittedHubblepupIdentifierName) ??
-      declarationByIdentifier.get(disambiguatedHubblepupIdentifierName);
+      declarationByIdentifier.get(emittedHubblepupIdentifierName);
 
     const commentText = hubblepupDeclaration?.commentText ?? null;
 
@@ -74,7 +71,7 @@ export const getEngineVoque = buildEstinant({
             {
               name: 'missing-hubblepup-comment',
               error: new Error(
-                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup type may start with "Emitted" or "T"',
+                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup type may start with "Emitted"',
               ),
               reporterLocator,
               sourceLocator: {

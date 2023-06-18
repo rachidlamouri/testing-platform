@@ -31,7 +31,7 @@ type EngineProgramLocator2Prototype = {
  * The information needed to find the parts of an engine program so that it can
  * be assembled later into a complete model
  */
-export type TEngineProgramLocator2 = ObjectWithPrototype<
+export type EngineProgramLocator2 = ObjectWithPrototype<
   BaseEngineProgramLocator2,
   EngineProgramLocator2Prototype
 >;
@@ -53,5 +53,5 @@ type EngineProgramLocator2Gepp = typeof ENGINE_PROGRAM_LOCATOR_2_GEPP;
 
 export type EngineProgramLocator2Voque = InMemoryOdeshin2Voque<
   EngineProgramLocator2Gepp,
-  TEngineProgramLocator2
+  EngineProgramLocator2
 >;

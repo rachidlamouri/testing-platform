@@ -7,7 +7,7 @@ import { getZornableId } from '../../../utilities/getZornableId';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { EngineEstinant2 } from './engineEstinant2';
 import {
-  TEngineProgramLocator2,
+  EngineProgramLocator2,
   VoictentLocator,
   getEngineProgramLocatorZorn,
 } from './engineProgramLocator2';
@@ -20,7 +20,7 @@ type BaseEngineProgram2 = {
   voictentLocatorList: VoictentLocator[];
   estinantList: Tuple<EngineEstinant2>;
   voqueList: Tuple<EngineVoque>;
-  locator: TEngineProgramLocator2;
+  locator: EngineProgramLocator2;
 };
 
 type EngineProgram2Prototype = {

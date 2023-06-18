@@ -30,7 +30,7 @@ import {
 } from './engineFunctionConfiguration';
 import {
   ENGINE_PROGRAM_LOCATOR_2_GEPP,
-  TEngineProgramLocator2,
+  EngineProgramLocator2,
   EngineProgramLocator2Voque,
   VoictentLocator,
   EngineProgramLocator2Instance,
@@ -115,7 +115,7 @@ type Core2EngineProgramLocatorAccessorInput = {
 
 type Core2EngineProgramLocatorAccessorResult = {
   parallelErrorList: ReportedProgramError<ReportingLocator>[];
-  engineProgramLocator: TEngineProgramLocator2;
+  engineProgramLocator: EngineProgramLocator2;
 };
 
 const getCore2EngineProgramLocator = ({
@@ -332,7 +332,7 @@ type AdaptedEngineProgramLocatorAccessorInput = {
 
 type AdaptedEngineProgramLocatorAccessorResult = {
   parallelErrorList: ReportedProgramError<ReportingLocator>[];
-  engineProgramLocator: TEngineProgramLocator2;
+  engineProgramLocator: EngineProgramLocator2;
 };
 
 const getAdaptedEngineProgramLocator = ({
