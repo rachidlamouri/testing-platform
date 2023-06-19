@@ -37,6 +37,10 @@ import {
   GraphLikeStyle,
   GraphLikeLabelLocation,
 } from './graph-visualization/directed-graph/attributeByKeyGSC';
+import {
+  mutateDirectedGraphMetadataById,
+  mutateGraphLikeElementListOrder,
+} from './graph-visualization/directed-graph/mutateGraphLikeElementListOrder';
 
 type EngineVoictent = {
   id: string;
@@ -626,6 +630,9 @@ export const getDirectedGraph = buildEstinant({
         },
       ],
     };
+
+    mutateGraphLikeElementListOrder(rootGraph);
+    mutateDirectedGraphMetadataById(metadataById);
 
     return {
       [DIRECTED_GRAPH_GEPP]: rootGraph,
