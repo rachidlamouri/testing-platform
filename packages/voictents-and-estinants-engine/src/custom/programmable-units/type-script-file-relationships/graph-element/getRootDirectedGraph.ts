@@ -149,6 +149,7 @@ export const getRootDirectedGraph = buildEstinant({
             subgraph =
               overviewSubgraphByName.get(subgraphName) ??
               ({
+                zorn: getTextDigest(subgraphName),
                 isRoot: false,
                 isCluster: true,
                 attributeByKey: {
@@ -210,6 +211,7 @@ export const getRootDirectedGraph = buildEstinant({
       const boundarySubgraphList = relevantBoundaryMetadataList.map(
         (metadata) => {
           const subgraph: DirectedCluster = {
+            zorn: metadata.id,
             isRoot: false,
             isCluster: true,
             attributeByKey: {
@@ -234,6 +236,7 @@ export const getRootDirectedGraph = buildEstinant({
       const directorySubgraphList = relevantDirectoryMetadataList.map(
         (metadata) => {
           const subgraph: DirectedCluster = {
+            zorn: metadata.id,
             isRoot: false,
             isCluster: true,
             attributeByKey: {

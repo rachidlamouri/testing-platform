@@ -219,13 +219,13 @@ export const getDirectedGraph = buildEstinant({
 
     const estinantSubgraphMetadataList = engineProgram.estinantList.map(
       (estinant) => {
+        const inputSubgraphZorn = `${engineProgram.programName} | ${estinant.estinantName} | estinant-input-subgraph`;
         const inputSubgraph: DirectedSubgraph = {
+          zorn: inputSubgraphZorn,
           isRoot: false,
           isCluster: false,
           attributeByKey: {
-            id: getTextDigest(
-              `estinant-input-subgraph | ${estinant.estinantName}`,
-            ),
+            id: getTextDigest(inputSubgraphZorn),
             rank: RankType.Same,
           },
           nodeList: [],
@@ -233,11 +233,13 @@ export const getDirectedGraph = buildEstinant({
           subgraphList: [],
         };
 
+        const estinantSubgraphZorn = `${engineProgram.programName} | ${estinant.estinantName} | estinant-subgraph`;
         const estinantSubgraph: DirectedSubgraph = {
+          zorn: estinantSubgraphZorn,
           isRoot: false,
           isCluster: false,
           attributeByKey: {
-            id: getTextDigest(`estinant-subgraph | ${estinant.estinantName}`),
+            id: getTextDigest(estinantSubgraphZorn),
           },
           nodeList: [],
           edgeList: [],
@@ -409,11 +411,13 @@ export const getDirectedGraph = buildEstinant({
         return edge;
       });
 
+    const startSubgraphZorn = `start-subgraph | ${engineProgram.programName}`;
     const startSubgraph: DirectedCluster = {
+      zorn: startSubgraphZorn,
       isRoot: false,
       isCluster: true,
       attributeByKey: {
-        id: getTextDigest(`start-subgraph | ${engineProgram.programName}`),
+        id: getTextDigest(startSubgraphZorn),
         label: '',
         style: GraphLikeStyle.Rounded,
         color: 'none',
@@ -423,11 +427,13 @@ export const getDirectedGraph = buildEstinant({
       subgraphList: [],
     };
 
+    const endSubgraphZorn = `end-subgraph | ${engineProgram.programName}`;
     const endSubgraph: DirectedCluster = {
+      zorn: endSubgraphZorn,
       isRoot: false,
       isCluster: true,
       attributeByKey: {
-        id: getTextDigest(`end-subgraph | ${engineProgram.programName}`),
+        id: getTextDigest(endSubgraphZorn),
         label: '',
         style: GraphLikeStyle.Rounded,
         color: 'none',

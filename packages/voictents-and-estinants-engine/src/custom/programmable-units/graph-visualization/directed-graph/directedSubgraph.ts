@@ -30,6 +30,7 @@ type PartialSubgraphAttributeByKey =
   PartialAttributeByKey<SubgraphAttributeByKey>;
 
 export type DirectedSubgraph = {
+  zorn: string;
   isRoot: false;
   isCluster: false;
   attributeByKey: PartialSubgraphAttributeByKey;
@@ -55,6 +56,7 @@ type PartialClusterAttributeByKey =
   PartialAttributeByKey<ClusterAttributeByKey>;
 
 export type DirectedCluster = {
+  zorn: string;
   isRoot: false;
   isCluster: true;
   attributeByKey: PartialClusterAttributeByKey;
