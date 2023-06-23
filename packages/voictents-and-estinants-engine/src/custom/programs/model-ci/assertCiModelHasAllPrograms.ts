@@ -1,9 +1,5 @@
 import assert from 'assert';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import {
-  ENGINE_PROGRAM_LOCATOR_2_GEPP,
-  EngineProgramLocator2Voque,
-} from '../../programmable-units/engine-program/engineProgramLocator2';
 import { CI_MODEL_GEPP, CI_MODEL_ZORN, CiModelVoque } from './ciModel';
 import {
   PROGRAM_ERROR_GEPP,
@@ -12,6 +8,10 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
+import {
+  ENGINE_PROGRAM_LOCATOR_3_GEPP,
+  EngineProgramLocator3Voque,
+} from '../../programmable-units/engine-program/engineProgramLocator3';
 
 const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -29,8 +29,8 @@ const reporterLocator: ReportingLocator = {
 export const assertCiModelHasAllPrograms = buildEstinant({
   name: ESTINANT_NAME,
 })
-  .fromVoictent2<EngineProgramLocator2Voque>({
-    gepp: ENGINE_PROGRAM_LOCATOR_2_GEPP,
+  .fromVoictent2<EngineProgramLocator3Voque>({
+    gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
   .andFromHubblepupTuple2<CiModelVoque, [string]>({
     gepp: CI_MODEL_GEPP,
