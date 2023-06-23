@@ -5,7 +5,7 @@ export type DirectedGraphMetadatumField = {
   value: string;
 };
 
-type DirectedGraphMetadata = {
+export type DirectedGraphMetadata = {
   title: string;
   fieldList: DirectedGraphMetadatumField[];
 };

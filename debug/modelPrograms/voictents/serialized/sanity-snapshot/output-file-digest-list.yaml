@@ -14,6 +14,8 @@
     "digest": "d2a21f65df8e86a6f2bdc1ebaeea1aed476d510b"
   - "fileName": "model-programs"
     "digest": "447cb5982ae981171f5caf0558f8a4d5121392f5"
+  - "fileName": "model-programs-2"
+    "digest": "58eb534738e93dec71cd84af3680879c00e02529"
   - "fileName": "render-type-script-file-relationships"
     "digest": "799d232b2ed82ef415e2820053272f674b2e9534"
   - "fileName": "test-build-add-metadata-for-serialization"

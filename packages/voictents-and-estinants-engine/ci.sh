@@ -113,6 +113,13 @@ npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/model-pr
 bash checkUncommittedDebug.sh
 printf "\n"
 
+## model-programs-2
+echo "# model-programs-2"
+echo "Verifying program models have not changed"
+npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/model-programs/modelPrograms2.ts
+bash checkUncommittedDebug.sh
+printf "\n"
+
 ## render-type-script-file-relationships
 echo "# render-type-script-file-relationships"
 echo "WIP"

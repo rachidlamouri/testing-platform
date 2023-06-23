@@ -368,11 +368,11 @@ export const getDirectedGraph = buildEstinant({
           const headId = outputVoictent.id;
 
           const edge: DirectedGraphEdge = {
+            tailId,
+            headId,
             attributeByKey: {
               id: `${tailId}:${headId}`,
             },
-            tailId,
-            headId,
           };
 
           return edge;

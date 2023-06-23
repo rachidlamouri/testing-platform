@@ -152,6 +152,12 @@ export const CI_MODEL: CiModel = {
           prefaceDescription: 'Verifying program models have not changed',
         },
         {
+          programName: 'model-programs-2',
+          programFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programs/model-programs/modelPrograms2.ts',
+          prefaceDescription: 'Verifying program models have not changed',
+        },
+        {
           programName: 'render-type-script-file-relationships',
           programFilePath:
             'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts',
