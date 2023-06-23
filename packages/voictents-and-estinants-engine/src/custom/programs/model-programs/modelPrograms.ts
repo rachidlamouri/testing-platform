@@ -18,14 +18,13 @@ import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
-import { getDirectedGraph } from '../../programmable-units/getDirectedGraph';
 import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/addInteractivityToSvgDocument';
 import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
-import { getEngineEstinantLocatorCollection } from '../../programmable-units/engine-program/getEngineEstinantLocatorCollection';
-import { getEngineProgram2 } from '../../programmable-units/engine-program/getEngineProgram2';
+import { getEngineEstinantLocatorCollection2 } from '../../programmable-units/engine-program/getEngineEstinantLocatorCollection2';
+import { getEngineProgram3 } from '../../programmable-units/engine-program/getEngineProgram3';
 import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
 import { signalError } from '../../programmable-units/error/signalError';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
@@ -34,10 +33,22 @@ import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { DigikikifierStrategy } from '../../../core/engine/digikikify';
-import { getEngineVoque } from '../../programmable-units/engine-program/getEngineVoque';
-import { getEngineEstinant } from '../../programmable-units/engine-program/getEngineEstinant';
-import { getEngineProgramLocator } from '../../programmable-units/engine-program/getEngineProgramLocator';
-import { getEngineVoqueLocatorCollection } from '../../programmable-units/engine-program/getEngineVoqueLocatorCollection';
+import { getEngineVoque2 } from '../../programmable-units/engine-program/getEngineVoque2';
+import { getEngineEstinant3 } from '../../programmable-units/engine-program/getEngineEstinant3';
+import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
+import { getEngineVoqueLocatorCollection2 } from '../../programmable-units/engine-program/getEngineVoqueLocatorCollection2';
+import { getEngineEstinantGraphElements } from './getEngineEstinantGraphElements';
+import { getEngineProgramVoqueElements } from './getEngineProgramVoqueElements';
+import { getDirectedGraphMetadataById2 } from './getDirectedGraphMetadataById2';
+import { getEngineEstinantMetadataEntry } from './getEngineEstinantMetadataEntry';
+import { getInputMetdataEntry } from './getInputMetdataEntry';
+import { getEngineVoqueMetadataEntry } from './getEngineVoqueMetadataEntry';
+import { getTopLevelEngineProgramGraphElements } from './getTopLevelEngineProgramGraphElements';
+import { getInputEdges } from './getInputEdges';
+import { getOutputEdge } from './getOutputEdge';
+import { groupGraphElements } from './groupGraphElements';
+import { getDirectedGraphFromGraphElementGroup } from './getDirectedGraphFromGraphElementGroup';
+import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProgramMetadataEntries';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -82,15 +93,26 @@ digikikify({
     getTypeScriptFileImportList,
 
     filterEngineProgramFile,
-    getEngineProgramLocator,
+    getEngineProgramLocator3,
+    getEngineEstinantLocatorCollection2,
+    getEngineEstinant3,
+    getEngineProgram3,
+    getEngineVoqueLocatorCollection2,
+    getEngineVoque2,
 
-    getEngineEstinantLocatorCollection,
-    getEngineEstinant,
-    getEngineVoqueLocatorCollection,
-    getEngineVoque,
-    getEngineProgram2,
+    getTopLevelEngineProgramGraphElements,
+    getEngineProgramVoqueElements,
+    getEngineEstinantGraphElements,
+    getInputEdges,
+    getOutputEdge,
+    groupGraphElements,
+    getDirectedGraphFromGraphElementGroup,
 
-    getDirectedGraph,
+    getTopLevelEngineProgramMetadataEntries,
+    getEngineVoqueMetadataEntry,
+    getEngineEstinantMetadataEntry,
+    getInputMetdataEntry,
+    getDirectedGraphMetadataById2,
 
     encodeDirectedGraphAsGraphvizCode,
     renderGraphvizCodeToSvgDocument,
@@ -99,7 +121,6 @@ digikikify({
     captureOutputFileDigestList,
 
     reportErrors,
-
     signalError,
   ] as const,
   programFileCache,

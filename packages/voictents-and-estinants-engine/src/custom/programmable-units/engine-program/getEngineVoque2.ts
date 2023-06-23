@@ -11,16 +11,16 @@ import {
   ProgramBodyDeclarationsByIdentifierVoque,
 } from '../type-script-file/programBodyDeclarationsByIdentifier';
 import {
-  ENGINE_VOQUE_GEPP,
-  EngineVoqueInstance,
-  EngineVoqueVoque,
-} from './engineVoque';
+  ENGINE_VOQUE_2_GEPP,
+  EngineVoque2Instance,
+  EngineVoque2Voque,
+} from './engineVoque2';
 import {
-  ENGINE_VOQUE_LOCATOR_GEPP,
-  EngineVoqueLocatorVoque,
-} from './engineVoqueLocator';
+  ENGINE_VOQUE_LOCATOR_2_GEPP,
+  EngineVoqueLocator2Voque,
+} from './engineVoqueLocator2';
 
-const ESTINANT_NAME = 'getEngineVoque' as const;
+const ESTINANT_NAME = 'getEngineVoque2' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
@@ -32,11 +32,11 @@ const reporterLocator: ReportingLocator = {
 /**
  * Associates a comment with a voque definition
  */
-export const getEngineVoque = buildEstinant({
+export const getEngineVoque2 = buildEstinant({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<EngineVoqueLocatorVoque>({
-    gepp: ENGINE_VOQUE_LOCATOR_GEPP,
+  .fromHubblepup2<EngineVoqueLocator2Voque>({
+    gepp: ENGINE_VOQUE_LOCATOR_2_GEPP,
   })
   .andFromHubblepupTuple2<ProgramBodyDeclarationsByIdentifierVoque, [string]>({
     gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
@@ -44,8 +44,8 @@ export const getEngineVoque = buildEstinant({
     // TODO: "zorn" is pretty useless in this context. This should be "filePath"
     croard: (right) => right.hubblepup.zorn,
   })
-  .toHubblepup2<EngineVoqueVoque>({
-    gepp: ENGINE_VOQUE_GEPP,
+  .toHubblepup2<EngineVoque2Voque>({
+    gepp: ENGINE_VOQUE_2_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
@@ -58,23 +58,21 @@ export const getEngineVoque = buildEstinant({
 
     const emittedHubblepupIdentifierName = `Emitted${hubblepupIdentifierName}`;
 
-    const disambiguatedHubblepupIdentifierName = `T${hubblepupIdentifierName}`;
-
     const hubblepupDeclaration =
       declarationByIdentifier.get(hubblepupIdentifierName) ??
-      declarationByIdentifier.get(emittedHubblepupIdentifierName) ??
-      declarationByIdentifier.get(disambiguatedHubblepupIdentifierName);
+      declarationByIdentifier.get(emittedHubblepupIdentifierName);
 
     const commentText = hubblepupDeclaration?.commentText ?? null;
 
+    // TODO: handle core voques
     const parallelErrorList: GenericReceivedProgramError[] =
-      commentText !== null
+      voqueLocator.isCoreVoque || commentText !== null
         ? []
         : [
             {
               name: 'missing-hubblepup-comment',
               error: new Error(
-                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup type may start with "Emitted" or "T"',
+                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup type may have an "Emitted" prefix',
               ),
               reporterLocator,
               sourceLocator: {
@@ -89,8 +87,7 @@ export const getEngineVoque = buildEstinant({
           ];
 
     return {
-      [ENGINE_VOQUE_GEPP]: new EngineVoqueInstance({
-        displayName: voqueLocator.identifierName.replace(/Voque$/, ''),
+      [ENGINE_VOQUE_2_GEPP]: new EngineVoque2Instance({
         filePath: voqueLocator.filePath,
         identifierName: voqueLocator.identifierName,
         commentText: commentText ?? '',

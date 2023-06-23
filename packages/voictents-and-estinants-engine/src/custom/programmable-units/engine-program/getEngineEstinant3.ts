@@ -30,14 +30,11 @@ import {
   EngineEstinantTopLevelDeclarationLocator,
 } from './engineEstinantLocator2';
 import {
-  ENGINE_ESTINANT_2_GEPP,
-  EngineEstinant2Instance,
-  EngineEstinant2Voque,
-  EstinantInput2,
-  EstinantOutput2,
-  EngineEstinant2,
-} from './engineEstinant2';
-import { getTextDigest } from '../../../utilities/getTextDigest';
+  ENGINE_ESTINANT_3_GEPP,
+  EngineEstinant3Voque,
+  EngineEstinant3,
+  EngineEstinant3Instance,
+} from './engineEstinant3';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclarationList';
 import { isNode } from '../../../utilities/type-script-ast/isNode';
 import {
@@ -58,16 +55,25 @@ import {
   TypeScriptFileImportListVoque,
 } from '../type-script-file/typeScriptFileImportList';
 import {
-  EngineVoqueLocatorInstance,
-  EngineVoqueLocator,
-} from './engineVoqueLocator';
+  ESTINANT_OUTPUT_2_GEPP,
+  EstinantOutput2,
+  EstinantOutput2Instance,
+  EstinantOutput2Voque,
+} from './input-output/engineEstinantOutput2';
 import {
-  EstinantVoqueRelationshipVoque,
-  ESTINANT_VOQUE_RELATIONSHIP_GEPP,
-  EstinantVoqueRelationshipInstance,
-} from './estinantVoqueRelationship';
+  ESTINANT_INPUT_2_GEPP,
+  EstinantInput2,
+  EstinantInput2Instance,
+  EstinantInput2Voque,
+} from './input-output/engineEstinantInput2';
+import { EngineVoqueLocator2Instance } from './engineVoqueLocator2';
+import {
+  ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
+  EstinantVoqueRelationship2Instance,
+  EstinantVoqueRelationship2Voque,
+} from './estinantVoqueRelationship2';
 
-const ESTINANT_NAME = 'getEngineEstinant' as const;
+const ESTINANT_NAME = 'getEngineEstinant3' as const;
 type EstinantName = typeof ESTINANT_NAME;
 type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
@@ -85,7 +91,7 @@ type CoreEstinantAccessorInput = {
 
 type CoreEstinantAccessorResult = {
   errorList: ReportedProgramError<ReportingLocator>[];
-  estinant: EngineEstinant2 | null;
+  estinant: EngineEstinant3 | null;
 };
 
 const getBuildAddMetadataForSerializationEstinant = (
@@ -126,7 +132,7 @@ const getBuildAddMetadataForSerializationEstinant = (
           },
         } satisfies ReportedProgramError<ReportingLocator>,
       ],
-      estinant: new EngineEstinant2Instance({
+      estinant: new EngineEstinant3Instance({
         // TODO: why do we include both of these?
         estinantName: 'UNKNOWN',
         identifierName: 'UNKNOWN',
@@ -147,9 +153,21 @@ const getBuildAddMetadataForSerializationEstinant = (
   // TODO: tie this logic back to the helper function itself
   const estinantName = `serialize/${inputVoictentName}`;
 
+  const inputVoqueLocator = new EngineVoqueLocator2Instance({
+    filePath: estinantLocator.filePath,
+    identifierName: inputVoqueName,
+    isCoreVoque: true,
+  });
+
+  const outputVoqueLocator = new EngineVoqueLocator2Instance({
+    filePath: estinantLocator.filePath,
+    identifierName: outputVoqueName,
+    isCoreVoque: true,
+  });
+
   return {
     errorList: [],
-    estinant: new EngineEstinant2Instance({
+    estinant: new EngineEstinant3Instance({
       // TODO: why do we include both of these?
       estinantName,
       identifierName: estinantName,
@@ -157,22 +175,23 @@ const getBuildAddMetadataForSerializationEstinant = (
       commentText:
         'Prepares each item in one collection to be sent to a serialized collection',
       inputList: [
-        {
-          id: getTextDigest(
-            `${estinantName} | input | ${inputVoictentName} | ${0}`,
-          ),
+        new EstinantInput2Instance({
           voictentName: inputVoictentName,
           isInput: true,
           index: 0,
-        },
+          estinantLocator,
+          estinantName,
+          voqueLocator: inputVoqueLocator,
+        }),
       ],
       outputList: [
-        {
-          id: getTextDigest(`${estinantName} | output | ${outputVoictentName}`),
+        new EstinantOutput2Instance({
           voictentName: outputVoictentName,
           isInput: false,
-          index: null,
-        },
+          estinantLocator,
+          estinantName,
+          voqueLocator: outputVoqueLocator,
+        }),
       ],
       locator: estinantLocator,
     }),
@@ -226,7 +245,7 @@ const getCoreEstinant = ({
           },
         } satisfies ReportedProgramError<ReportingLocator>,
       ],
-      estinant: new EngineEstinant2Instance({
+      estinant: new EngineEstinant3Instance({
         filePath: estinantLocator.filePath,
         identifierName: estinantLocator.identifierName,
         estinantName,
@@ -355,31 +374,45 @@ const getCoreEstinant = ({
       }
 
       const voictentName = voqueName.replace(/Voque$/, '');
-      return {
-        id: getTextDigest(
-          `${estinantName} | input | ${voictentName} | ${index}`,
-        ),
+
+      const voqueLocator = new EngineVoqueLocator2Instance({
+        identifierName: voqueName,
+        filePath: estinantLocator.filePath,
+        isCoreVoque: true,
+      });
+
+      return new EstinantInput2Instance({
         voictentName,
         isInput: true,
         index,
-      } satisfies EstinantInput2;
+        estinantLocator,
+        estinantName,
+        voqueLocator,
+      });
     })
     .filter((input): input is EstinantInput2 => input !== null);
 
   const outputList = (outputVoqueNameTuple ?? []).map((voqueName) => {
     const voictentName = voqueName.replace(/Voque$/, '');
 
-    return {
-      id: getTextDigest(`${estinantName} | output | ${voqueName}`),
+    const voqueLocator = new EngineVoqueLocator2Instance({
+      identifierName: voqueName,
+      filePath: estinantLocator.filePath,
+      isCoreVoque: true,
+    });
+
+    return new EstinantOutput2Instance({
       voictentName,
       isInput: false,
-      index: null,
-    } satisfies EstinantOutput2;
+      estinantLocator,
+      estinantName,
+      voqueLocator,
+    });
   });
 
   return {
     errorList: parallelErrorList,
-    estinant: new EngineEstinant2Instance({
+    estinant: new EngineEstinant3Instance({
       filePath: estinantLocator.filePath,
       identifierName: estinantLocator.identifierName,
       estinantName,
@@ -400,7 +433,7 @@ type AdaptedEstinantAccessorInput = {
 
 type AdaptedEstinantAccessorResult = {
   errorList: ReportedProgramError<ReportingLocator>[];
-  estinant: EngineEstinant2 | null;
+  estinant: EngineEstinant3 | null;
 };
 
 const getAdaptedEstinant = ({
@@ -455,7 +488,7 @@ const getAdaptedEstinant = ({
 
     return {
       errorList: [error],
-      estinant: new EngineEstinant2Instance({
+      estinant: new EngineEstinant3Instance({
         filePath: estinantLocator.filePath,
         identifierName: estinantLocator.identifierName,
         estinantName,
@@ -680,30 +713,30 @@ const getAdaptedEstinant = ({
       voictentName = voqueName.replace(/Voque$/, '');
     }
 
-    const voqueLocator = new EngineVoqueLocatorInstance({
+    const voqueLocator = new EngineVoqueLocator2Instance({
       filePath: getIdentifierOriginFilePath(voqueName),
       identifierName: voqueName,
+      isCoreVoque: false,
     });
 
     if (isInput) {
-      return {
-        id: getTextDigest(
-          `${estinantName} | input | ${voictentName} | ${index}`,
-        ),
+      return new EstinantInput2Instance({
         voictentName,
         voqueLocator,
         isInput,
         index,
-      } satisfies EstinantInput2;
+        estinantLocator,
+        estinantName,
+      });
     }
 
-    return {
-      id: getTextDigest(`${estinantName} | output | ${index}`),
+    return new EstinantOutput2Instance({
       voictentName,
       voqueLocator,
       isInput,
-      index: null,
-    } satisfies EstinantOutput2;
+      estinantLocator,
+      estinantName,
+    });
   });
 
   const inputList = estinantInputOutputList.filter<EstinantInput2>(
@@ -787,7 +820,7 @@ const getAdaptedEstinant = ({
 
   return {
     errorList: parallelErrorList,
-    estinant: new EngineEstinant2Instance({
+    estinant: new EngineEstinant3Instance({
       filePath: estinantLocator.filePath,
       identifierName: estinantLocator.identifierName,
       estinantName,
@@ -803,7 +836,7 @@ const getAdaptedEstinant = ({
  * Uses the estinant locator to find and populate the information for the
  * estinant. This includes the input and output information for each estinant.
  */
-export const getEngineEstinant = buildEstinant({
+export const getEngineEstinant3 = buildEstinant({
   name: ESTINANT_NAME,
 })
   .fromHubblepup2<EngineEstinantLocator2Voque>({
@@ -822,11 +855,17 @@ export const getEngineEstinant = buildEstinant({
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .toHubblepupTuple2<EngineEstinant2Voque>({
-    gepp: ENGINE_ESTINANT_2_GEPP,
+  .toHubblepupTuple2<EngineEstinant3Voque>({
+    gepp: ENGINE_ESTINANT_3_GEPP,
   })
-  .toHubblepupTuple2<EstinantVoqueRelationshipVoque>({
-    gepp: ESTINANT_VOQUE_RELATIONSHIP_GEPP,
+  .toHubblepupTuple2<EstinantInput2Voque>({
+    gepp: ESTINANT_INPUT_2_GEPP,
+  })
+  .toHubblepupTuple2<EstinantOutput2Voque>({
+    gepp: ESTINANT_OUTPUT_2_GEPP,
+  })
+  .toHubblepupTuple2<EstinantVoqueRelationship2Voque>({
+    gepp: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .onPinbe(
     (
@@ -853,7 +892,7 @@ export const getEngineEstinant = buildEstinant({
       };
 
       let errorList: ReportedProgramError<ReportingLocator>[];
-      let estinant: EngineEstinant2 | null;
+      let estinant: EngineEstinant3 | null;
 
       if (
         estinantLocator.typeName ===
@@ -899,33 +938,35 @@ export const getEngineEstinant = buildEstinant({
         }
       }
 
-      const estinantList: EngineEstinant2[] =
+      const estinantList: [EngineEstinant3] | [] =
         estinant !== null ? [estinant] : [];
 
-      const allVoqueLocatorList = [
-        ...(estinant?.inputList ?? []),
-        ...(estinant?.outputList ?? []),
-      ]
-        .map((inputOutput) => inputOutput.voqueLocator)
-        .filter(
-          (voqueLocator): voqueLocator is EngineVoqueLocator =>
-            voqueLocator !== undefined,
-        );
-
-      const estinantVoqueRelationshipList = allVoqueLocatorList.map(
-        (voqueLocator, index) => {
-          return new EstinantVoqueRelationshipInstance({
-            estinantLocator,
-            voqueLocator,
-            distinguisher: `${index}`,
-          });
-        },
+      const voqueLocatorByZorn = new Map(
+        (estinant?.allVoqueLocatorList ?? []).map((voqueLocator) => {
+          return [voqueLocator.zorn, voqueLocator];
+        }),
       );
+
+      const estinantVoqueRelationshipList = [
+        ...voqueLocatorByZorn.values(),
+      ].map((voqueLocator, index) => {
+        return new EstinantVoqueRelationship2Instance({
+          estinantLocator,
+          voqueLocator,
+          distinguisher: `${index}`,
+        });
+      });
 
       return {
         [PROGRAM_ERROR_GEPP]: errorList,
-        [ENGINE_ESTINANT_2_GEPP]: estinantList,
-        [ESTINANT_VOQUE_RELATIONSHIP_GEPP]: estinantVoqueRelationshipList,
+        [ENGINE_ESTINANT_3_GEPP]: estinantList,
+        [ESTINANT_INPUT_2_GEPP]: estinantList.flatMap((nextEstinant) => {
+          return nextEstinant.inputList;
+        }),
+        [ESTINANT_OUTPUT_2_GEPP]: estinantList.flatMap((nextEstinant) => {
+          return nextEstinant.outputList;
+        }),
+        [ESTINANT_VOQUE_RELATIONSHIP_2_GEPP]: estinantVoqueRelationshipList,
       };
     },
   )

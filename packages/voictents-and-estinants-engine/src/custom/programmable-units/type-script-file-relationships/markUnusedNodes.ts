@@ -34,6 +34,8 @@ const reporterLocator: ReportingLocator = {
 const PROTECTED_FILE_PATH_LIST = [
   'packages/voictents-and-estinants-engine/src/utilities/semantic-types/strif/strif.ts',
   'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isParameterizedCallExpression.ts',
+  'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/directedGraphElement2.ts',
+  'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/graphContext.ts',
 ];
 
 PROTECTED_FILE_PATH_LIST.forEach((nodePath) => {

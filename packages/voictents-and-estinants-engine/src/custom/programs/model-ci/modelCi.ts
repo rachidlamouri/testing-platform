@@ -7,7 +7,6 @@ import {
   CORE_ENGINE_FUNCTION_2_CONFIGURATION,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
-import { getEngineProgramLocator } from '../../programmable-units/engine-program/getEngineProgramLocator';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
@@ -29,6 +28,7 @@ import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
+import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
@@ -75,7 +75,7 @@ digikikify({
     getCommentedProgramBodyDeclarationList,
 
     filterEngineProgramFile,
-    getEngineProgramLocator,
+    getEngineProgramLocator3,
 
     serializeCiModel,
 

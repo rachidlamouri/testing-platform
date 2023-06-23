@@ -86,6 +86,7 @@ digikikify({
           ],
           subgraphList: [
             {
+              zorn: 'my_subgraph',
               isRoot: false,
               isCluster: true,
               attributeByKey: {

@@ -30,7 +30,8 @@ type NodeAttributeByKey = SpreadN<
   ]
 >;
 
-type PartialNodeAttributeByKey = PartialAttributeByKey<NodeAttributeByKey>;
+export type PartialNodeAttributeByKey =
+  PartialAttributeByKey<NodeAttributeByKey>;
 
 export type DirectedGraphNode = {
   attributeByKey: PartialNodeAttributeByKey;
