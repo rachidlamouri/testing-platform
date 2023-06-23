@@ -75,6 +75,7 @@ digikikify({
     getCommentedProgramBodyDeclarationList,
 
     filterEngineProgramFile,
+    // TODO: replace this with the new getEngineProgramLocator
     getEngineProgramLocator,
 
     serializeCiModel,

@@ -1,4 +1,3 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -31,12 +30,3 @@ export const { EngineVoqueLocatorInstance } = buildConstructorFunctionWithName(
   zorn: getExportLocatorZorn,
   id: getZornableId,
 });
-
-export const ENGINE_VOQUE_LOCATOR_GEPP = 'engine-voque-locator';
-
-type EngineVoqueLocatorGepp = typeof ENGINE_VOQUE_LOCATOR_GEPP;
-
-export type EngineVoqueLocatorVoque = InMemoryOdeshin2Voque<
-  EngineVoqueLocatorGepp,
-  EngineVoqueLocator
->;

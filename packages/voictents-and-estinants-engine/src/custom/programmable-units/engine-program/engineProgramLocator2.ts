@@ -36,7 +36,7 @@ export type EngineProgramLocator2 = ObjectWithPrototype<
   EngineProgramLocator2Prototype
 >;
 
-export const getEngineProgramLocatorZorn = getFileZorn;
+const getEngineProgramLocatorZorn = getFileZorn;
 
 export const { EngineProgramLocator2Instance } =
   buildConstructorFunctionWithName('EngineProgramLocator2Instance')<
