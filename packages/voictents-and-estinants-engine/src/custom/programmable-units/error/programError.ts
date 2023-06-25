@@ -32,13 +32,15 @@ type UnsafeProgramErrorReporterLocator = UnsafeReportingEstinantLocator;
 
 export type ReceivedProgramError<
   TReporterLocator extends GenericProgramErrorReporterLocator,
-> = {
-  name: string;
-  error: Error;
-  reporterLocator: TReporterLocator;
-  sourceLocator: ProgramErrorSourceLocator;
-  context: TypeScriptObjectInstance | null;
-};
+> =
+  | {
+      name: string;
+      error: Error;
+      reporterLocator: TReporterLocator;
+      sourceLocator: ProgramErrorSourceLocator;
+      context: TypeScriptObjectInstance | null;
+    }
+  | Error;
 
 export type ReportedProgramError<
   TReporterLocator extends GenericProgramErrorReporterLocator,
@@ -53,24 +55,26 @@ export type GenericReceivedProgramError =
  */
 type EmittedProgramError<
   TReporterLocator extends GenericProgramErrorReporterLocator,
-> = {
-  zorn: string;
-  name: string;
-  message: string;
-  stackTrace: string[];
-  reporterLocator: TReporterLocator;
-  sourceLocator: ProgramErrorSourceLocator;
-  context: TypeScriptObjectInstance | null;
-  serializedContextFilePath: string;
-  normalizedZorn: string;
-  byReporterDirectoryPath: string;
-  bySourceDirectoryPath: string;
-  contextFilePath: string;
-};
+> =
+  | {
+      zorn: string;
+      name: string;
+      message: string;
+      stackTrace: string[];
+      reporterLocator: TReporterLocator;
+      sourceLocator: ProgramErrorSourceLocator;
+      context: TypeScriptObjectInstance | null;
+      serializedContextFilePath: string;
+      normalizedZorn: string;
+      byReporterDirectoryPath: string;
+      bySourceDirectoryPath: string;
+      contextFilePath: string;
+    }
+  | Error;
 
 export const PROGRAM_ERROR_GEPP = 'program-error';
 
-type ProgramErrorGepp = typeof PROGRAM_ERROR_GEPP;
+export type ProgramErrorGepp = typeof PROGRAM_ERROR_GEPP;
 
 type ProgramErrorVoque<
   TReporterLocator extends GenericProgramErrorReporterLocator,

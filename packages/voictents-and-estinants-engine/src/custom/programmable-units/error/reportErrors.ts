@@ -27,12 +27,20 @@ export const reportErrors = buildEstinant({
         `\x1b[31mError\x1b[0m ${errorCount}: ${programError.message}`,
       );
       console.log(`  Error Name    - ${programError.name}`);
-      console.log(`  Reporter Path - ${programError.reporterLocator.filePath}`);
-      if (programError.sourceLocator !== null) {
-        console.log(`  Source Path   - ${programError.sourceLocator.filePath}`);
+
+      if (!(programError instanceof Error)) {
+        console.log(
+          `  Reporter Path - ${programError.reporterLocator.filePath}`,
+        );
+        if (programError.sourceLocator !== null) {
+          console.log(
+            `  Source Path   - ${programError.sourceLocator.filePath}`,
+          );
+        }
+        console.log(`  Context Path  - ${programError.contextFilePath}`);
+        console.log();
       }
-      console.log(`  Context Path  - ${programError.contextFilePath}`);
-      console.log();
+
       /* eslint-enable no-console */
     } else if (!isLimitReached) {
       // eslint-disable-next-line no-console

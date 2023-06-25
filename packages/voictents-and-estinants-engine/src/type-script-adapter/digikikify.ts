@@ -28,6 +28,7 @@ import { buildAddMetadataForSerialization } from '../example-programs/buildAddMe
 import { SerializableVoictent } from '../example-programs/serializableVoictent';
 import { ProgramFileCache } from '../utilities/programFileCache';
 import { GenericAbstractSerializableSourceVoque } from '../example-programs/abstractSerializableVoictent';
+import { ProgramErrorGepp } from '../custom/programmable-units/error/programError';
 
 type EstinantInputOutputVoqueTuple<TEstinant extends UnsafeEstinant2> =
   TEstinant extends CoreEstinant2<
@@ -118,6 +119,15 @@ type AllVoqueUnion<
   | EstinantTupleInputOutputVoqueUnion<TEstinantTuple>
   | VoqueUnionFromVoictentUnion<TExplicitVoictentTuple[number]>;
 
+// TODO: change this to extract any voque whose receieved hubblepup includes Error (I tried this and couldn't get it to work :sad-face:)
+type ErrorVoictentGepp<
+  TExplicitVoictentTuple extends UnsafeVoictent2Tple,
+  TEstinantTuple extends UnsafeEstinant2Tuple,
+> = Extract<
+  AllVoqueUnion<TExplicitVoictentTuple, TEstinantTuple>['gepp'],
+  ProgramErrorGepp
+>;
+
 type SerializeeVoictentGepp<
   TExplicitVoictentTuple extends UnsafeVoictent2Tple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
@@ -135,6 +145,7 @@ type DigikikifyInput<
     TExplicitVoictentTuple,
     TEstinantTuple
   >;
+  errorGepp?: ErrorVoictentGepp<TExplicitVoictentTuple, TEstinantTuple>;
   estinantTuple: TEstinantTuple;
   serializeeVoictentGeppList?: SerializeeVoictentGepp<
     TExplicitVoictentTuple,
@@ -150,6 +161,7 @@ export const digikikify = <
 >({
   populatedVoictentTuple,
   uninferableVoictentTuple,
+  errorGepp,
   estinantTuple,
   serializeeVoictentGeppList = [],
   programFileCache,
@@ -216,6 +228,7 @@ export const digikikify = <
 
   coreDigikikify({
     inputVoictentList,
+    errorGepp,
     estinantTuple: inputEstinantTuple,
     onFinish: (statistics) => {
       if (programFileCache !== undefined) {
