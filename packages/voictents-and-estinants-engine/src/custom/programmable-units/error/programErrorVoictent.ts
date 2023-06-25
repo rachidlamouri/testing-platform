@@ -1,3 +1,4 @@
+import * as uuid from 'uuid';
 import { getVoictentResourceLocator } from '../../../utilities/getVoictentResourceLocator';
 import { normalizeFilePathForFileName } from '../../../utilities/normalizeFilePathForFileName';
 import {
@@ -40,6 +41,10 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
   protected transformHubblepup(
     receivedHubblepup: GenericProgramErrorVoque['receivedHubblepup'],
   ): GenericProgramErrorVoque['emittedHubblepup'] {
+    if (receivedHubblepup instanceof Error) {
+      return receivedHubblepup;
+    }
+
     const zorn = getVoictentResourceLocator([
       receivedHubblepup.reporterLocator.name,
       receivedHubblepup.name,
@@ -83,6 +88,11 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
   protected onTransformedHubblepup(
     hubblepup: GenericProgramErrorVoque['emittedHubblepup'],
   ): void {
+    if (hubblepup instanceof Error) {
+      // TODO: serialize all errors
+      return;
+    }
+
     const serializedHubblepup: SerializedHubblepup = {
       text: serialize(hubblepup),
       fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
@@ -108,6 +118,13 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
   protected getIndexByName(
     hubblepup: GenericProgramErrorVoque['emittedHubblepup'],
   ): GenericProgramErrorVoque['indexByName'] {
+    if (hubblepup instanceof Error) {
+      return {
+        // TODO: a zorn should not be random
+        zorn: uuid.v4(),
+      };
+    }
+
     return {
       zorn: hubblepup.zorn,
     };

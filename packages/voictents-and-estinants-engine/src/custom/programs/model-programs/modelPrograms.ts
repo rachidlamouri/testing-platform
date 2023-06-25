@@ -49,6 +49,7 @@ import { getOutputEdge } from './getOutputEdge';
 import { groupGraphElements } from './groupGraphElements';
 import { getDirectedGraphFromGraphElementGroup } from './getDirectedGraphFromGraphElementGroup';
 import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProgramMetadataEntries';
+import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -82,6 +83,7 @@ digikikify({
       programFileCache,
     }),
   ],
+  errorGepp: PROGRAM_ERROR_GEPP,
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
