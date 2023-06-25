@@ -1,0 +1,45 @@
+Some cologies were not triggered:  
+[
+  {
+    "estinantName": "joinCollections",
+    "leftGepp": "input-1",
+    "cologySet": [
+      {
+        "leftInput": {
+          "hubblepup": 1,
+          "indexByName": {
+            "serializableId": "0",
+            "listIndex": 0
+          }
+        },
+        "rightTupleState": [
+          [
+            {
+              "rightGepp": "input-2",
+              "zorn": 1,
+              "hasItem": false
+            }
+          ]
+        ]
+      },
+      {
+        "leftInput": {
+          "hubblepup": 3,
+          "indexByName": {
+            "serializableId": "2",
+            "listIndex": 2
+          }
+        },
+        "rightTupleState": [
+          [
+            {
+              "rightGepp": "input-2",
+              "zorn": 3,
+              "hasItem": false
+            }
+          ]
+        ]
+      }
+    ]
+  }
+]

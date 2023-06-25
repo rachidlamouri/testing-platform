@@ -43,6 +43,20 @@ import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
 import { Tuple } from '../../utilities/semantic-types/tuple';
 import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/rightInputAppreffinge';
 
+class AggregateEngineError extends Error {
+  constructor(errorMessageList: string[]) {
+    const aggregateMessage = [
+      `Encountered ${errorMessageList.length} errors:`,
+      ...errorMessageList.slice(0, 100).map((errorMessage, index) => {
+        // 4 accounts for 2 spaces and then a 2 digit number
+        return `${`${index}`.padStart(4, ' ')}: ${errorMessage}`;
+      }),
+    ].join('\n');
+
+    super(aggregateMessage);
+  }
+}
+
 type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
 
 type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
@@ -55,6 +69,7 @@ export enum DigikikifierStrategy {
 export type DigikikifierInput = {
   // TODO: remove "initialQuirmTuple" and make inputVoictentList required
   inputVoictentList?: GenericVoictent2[];
+  errorGepp?: Gepp;
   estinantTuple: Tuple<GenericEstinant2>;
   /** @deprecated */
   onHubblepupAddedToVoictents?: OnHubblepupAddedToVoictentsHandler;
@@ -110,6 +125,7 @@ export type RuntimeStatistics = {
  */
 export const digikikify = ({
   inputVoictentList = [],
+  errorGepp,
   estinantTuple,
   onHubblepupAddedToVoictents,
   onFinish,
@@ -196,23 +212,48 @@ export const digikikify = ({
     );
   });
 
-  if (errorMessageList.length > 0) {
-    const aggregateMessage = [
-      `Encountered ${errorMessageList.length} errors:`,
-      ...errorMessageList.slice(0, 100).map((errorMessage, index) => {
-        // 4 accounts for 2 spaces and then a 2 digit number
-        return `${`${index}`.padStart(4, ' ')}: ${errorMessage}`;
-      }),
-    ].join('\n');
-
-    throw Error(aggregateMessage);
-  }
-
   const initialTabillyEntryList = inputVoictentList.map((voictent) => {
     return [voictent.gepp, voictent] as const;
   });
 
   const tabilly = new Tabilly(initialTabillyEntryList);
+
+  const errorVoictent =
+    errorGepp !== undefined ? tabilly.get(errorGepp) ?? null : null;
+
+  if (errorGepp !== undefined && errorVoictent === null) {
+    errorMessageList.push(
+      `Error gepp "${errorGepp}" has no corresponding voictent`,
+    );
+  }
+
+  type ErrorHandlerInput = {
+    error: Error;
+    isCritical: boolean;
+  };
+  const onError = ({ error, isCritical }: ErrorHandlerInput): void => {
+    if (errorVoictent === null) {
+      throw new AggregateEngineError([
+        'The engine encountered an error, but no error voictent was specified',
+        error.message,
+      ]);
+    }
+
+    errorVoictent.addHubblepup(error);
+
+    if (isCritical) {
+      throw new Error(
+        `The engine encountered a critical error. See the error voictent with gepp "${errorVoictent.gepp}" for more details`,
+      );
+    }
+  };
+
+  if (errorMessageList.length > 0) {
+    onError({
+      error: new AggregateEngineError(errorMessageList),
+      isCritical: true,
+    });
+  }
 
   const addToTabilly = (quirmTuple: QuirmTuple): void => {
     tabilly.addHubblepupsToVoictents(quirmTuple);
@@ -390,6 +431,7 @@ export const digikikify = ({
                 ? indexedHubblepup.hubblepup
                 : indexedHubblepup,
             mabz: new Mabz(mabzEntryList),
+            hasTriggered: false,
           };
 
           getCologyEntryList(cology).forEach(([cologyDreanor, zorn]) => {
@@ -485,28 +527,38 @@ export const digikikify = ({
       return rightInputTupleElement;
     });
 
-    const outputRecord = platomity.estinant.tropoig(
-      leftInput,
-      ...rightInputTuple,
-    );
+    try {
+      const outputRecord = platomity.estinant.tropoig(
+        leftInput,
+        ...rightInputTuple,
+      );
 
-    const outputQuirmTuple = Object.entries(outputRecord)
-      .filter(([gepp]) => {
-        return platomity.outputGeppSet.has(gepp);
-      })
-      .flatMap(([gepp, hubblepupTuple]): Quirm[] => {
-        return hubblepupTuple.map<Quirm>((hubblepup) => {
-          return {
-            gepp,
-            hubblepup,
-          };
+      const outputQuirmTuple = Object.entries(outputRecord)
+        .filter(([gepp]) => {
+          return platomity.outputGeppSet.has(gepp);
+        })
+        .flatMap(([gepp, hubblepupTuple]): Quirm[] => {
+          return hubblepupTuple.map<Quirm>((hubblepup) => {
+            return {
+              gepp,
+              hubblepup,
+            };
+          });
         });
+
+      addToTabilly(outputQuirmTuple);
+    } catch (error) {
+      onError({
+        error: error as Error,
+        isCritical: false,
       });
+    }
 
     // eslint-disable-next-line no-param-reassign
     platomity.executionCount += 1;
 
-    addToTabilly(outputQuirmTuple);
+    // eslint-disable-next-line no-param-reassign
+    cology.hasTriggered = true;
   };
 
   // TODO: create a class or something to encapsulate tracking runtime stats
@@ -731,6 +783,77 @@ export const digikikify = ({
       throw Error('Not implemented');
   }
 
+  const platomityEndStateList = platomityList.flatMap((platomity) => {
+    const cologySet = new Set(
+      [...platomity.procody.values()].flatMap((ajorken) => {
+        return [...ajorken.values()].flatMap((cologySubset) => {
+          return [...cologySubset];
+        });
+      }),
+    );
+
+    const untriggeredCologySet = [...cologySet].filter(
+      (cology) => !cology.hasTriggered,
+    );
+
+    return {
+      platomity,
+      untriggeredCologySet,
+    };
+  });
+
+  const unfinishedPlatomityList = platomityEndStateList.filter(
+    (endState) => endState.untriggeredCologySet.length > 0,
+  );
+
+  if (unfinishedPlatomityList.length > 0) {
+    const output = unfinishedPlatomityList.map((endState) => {
+      const cologySetEndState = endState.untriggeredCologySet.map((cology) => {
+        const rightTupleState = endState.platomity.rightDreanorTuple.map(
+          (rightDreanor: RightDreanor) => {
+            if (
+              rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
+            ) {
+              return {
+                rightGepp: rightDreanor.gepp,
+                isReady: rightDreanor.isReady,
+              };
+            }
+
+            const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
+            return zornTuple.map((zorn) => {
+              const hasItem = rightDreanor.prected.has(zorn);
+              return {
+                rightGepp: rightDreanor.gepp,
+                zorn,
+                hasItem,
+              };
+            });
+          },
+        );
+
+        return {
+          leftInput: cology.leftInput,
+          rightTupleState,
+        };
+      });
+
+      return {
+        estinantName: endState.platomity.estinant.name,
+        leftGepp: endState.platomity.estinant.leftInputAppreffinge.gepp,
+        cologySet: cologySetEndState,
+      };
+    });
+
+    const errorMessage = `Some cologies were not triggered:  \n${JSON.stringify(
+      output,
+      null,
+      2,
+    )}`;
+
+    onError({ error: new Error(errorMessage), isCritical: false });
+  }
+
   const statistics: RuntimeStatistics = {
     voictentList: [...voictentTickSeriesConfigurationByVoictent.values()],
     estinantList: estinantTickSeriesConfigurationList,
@@ -744,17 +867,20 @@ export const digikikify = ({
 
 type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
   inputVoictentList: GenericVoictent2[];
+  errorGepp?: Gepp;
   estinantTuple: TEstinantTuple;
   onFinish?: RuntimeStatisticsHandler;
 };
 
 export const digikikify2 = <TEstinantTuple extends UnsafeEstinant2Tuple>({
   inputVoictentList = [],
+  errorGepp,
   estinantTuple,
   onFinish,
 }: DigikikifierInput2<TEstinantTuple>): void => {
   digikikify({
     inputVoictentList,
+    errorGepp,
     estinantTuple,
     onFinish,
   });

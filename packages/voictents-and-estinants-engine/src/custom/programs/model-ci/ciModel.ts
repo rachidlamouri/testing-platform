@@ -36,13 +36,19 @@ export const CI_MODEL: CiModel = {
   finalCommandList: ['echo "Finished without errors!"'],
   programTestGroupList: [
     {
-      description: 'JSON Serialization',
+      description: 'JSON and Error Serialization',
       programTestList: [
         {
           programName: 'test-json-serialization',
           programFilePath:
             'packages/voictents-and-estinants-engine/src/example-programs/testJsonSerialization.ts',
           prefaceDescription: 'Testing JsonSerializableCollection',
+        },
+        {
+          programName: 'test-error-serialization',
+          programFilePath:
+            'packages/voictents-and-estinants-engine/src/example-programs/testErrorSerialization.ts',
+          prefaceDescription: 'Testing ErrorSerializableCollection',
         },
       ],
     },
@@ -55,6 +61,13 @@ export const CI_MODEL: CiModel = {
             'packages/voictents-and-estinants-engine/src/example-programs/testBuildAddMetadataForSerialization.ts',
           prefaceDescription:
             'Testing consuming each item in a collection, and "buildAddMetadataForSerialization"',
+        },
+        {
+          programName: 'test-estinant-error',
+          programFilePath:
+            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testEstinantError.ts',
+          prefaceDescription:
+            'Testing that the engine forwards errors to an error collection',
         },
         {
           programName: 'test-voictent-input',
@@ -103,6 +116,13 @@ export const CI_MODEL: CiModel = {
             'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testReleasingARightVoictentMultipleTimes.ts',
           prefaceDescription:
             'Testing a right collection that stops accumulating items for one engine tick',
+        },
+        {
+          programName: 'test-untriggered-cology-error',
+          programFilePath:
+            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testUntriggeredCologyError.ts',
+          prefaceDescription:
+            'Testing that the engine emits an error when a cology is left untriggered',
         },
       ],
     },

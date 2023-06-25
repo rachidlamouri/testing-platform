@@ -1,11 +1,18 @@
 set -e
 
-# JSON Serialization
+# JSON and Error Serialization
 
 ## test-json-serialization
 echo "# test-json-serialization"
 echo "Testing JsonSerializableCollection"
 npx ts-node packages/voictents-and-estinants-engine/src/example-programs/testJsonSerialization.ts
+bash checkUncommittedDebug.sh
+printf "\n"
+
+## test-error-serialization
+echo "# test-error-serialization"
+echo "Testing ErrorSerializableCollection"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/testErrorSerialization.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 
@@ -15,6 +22,13 @@ printf "\n"
 echo "# test-build-add-metadata-for-serialization"
 echo "Testing consuming each item in a collection, and "buildAddMetadataForSerialization""
 npx ts-node packages/voictents-and-estinants-engine/src/example-programs/testBuildAddMetadataForSerialization.ts
+bash checkUncommittedDebug.sh
+printf "\n"
+
+## test-estinant-error
+echo "# test-estinant-error"
+echo "Testing that the engine forwards errors to an error collection"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testEstinantError.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 
@@ -64,6 +78,13 @@ printf "\n"
 echo "# test-releasing-a-right-voictent-multiple-times"
 echo "Testing a right collection that stops accumulating items for one engine tick"
 npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testReleasingARightVoictentMultipleTimes.ts
+bash checkUncommittedDebug.sh
+printf "\n"
+
+## test-untriggered-cology-error
+echo "# test-untriggered-cology-error"
+echo "Testing that the engine emits an error when a cology is left untriggered"
+npx ts-node packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testUntriggeredCologyError.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 
