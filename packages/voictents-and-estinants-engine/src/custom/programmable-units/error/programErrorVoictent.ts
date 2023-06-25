@@ -88,15 +88,23 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
   protected onTransformedHubblepup(
     hubblepup: GenericProgramErrorVoque['emittedHubblepup'],
   ): void {
-    if (hubblepup instanceof Error) {
-      // TODO: serialize all errors
-      return;
-    }
-
     const serializedHubblepup: SerializedHubblepup = {
       text: serialize(hubblepup),
       fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
     };
+
+    if (hubblepup instanceof Error) {
+      this.programFileCache.writeSerializedHubblepup({
+        voictentGepp: this.gepp,
+        nestedPath: 'error',
+        serializedHubblepup,
+        // TODO: this should be the same as the zorn referenced by getIndexByName
+        extensionlessFileName: uuid.v4(),
+      });
+
+      // TODO: serialize all errors
+      return;
+    }
 
     this.programFileCache.writeSerializedHubblepup({
       voictentGepp: this.gepp,
