@@ -50,3 +50,9 @@ debug/test-estinant-error/*
 !debug/test-estinant-error/voictents/
 debug/test-estinant-error/voictents/*
 !debug/test-estinant-error/voictents/engine-error/
+
+!debug/test-untriggered-cology-error
+debug/test-untriggered-cology-error/*
+!debug/test-untriggered-cology-error/voictents/
+debug/test-untriggered-cology-error/voictents/*
+!debug/test-untriggered-cology-error/voictents/engine-error/

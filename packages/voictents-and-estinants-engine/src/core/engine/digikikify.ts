@@ -42,7 +42,6 @@ import { GenericVoictent2 } from './voictent2';
 import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
 import { Tuple } from '../../utilities/semantic-types/tuple';
 import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/rightInputAppreffinge';
-import { serialize } from '../../utilities/typed-datum/serializer/serialize';
 
 class AggregateEngineError extends Error {
   constructor(errorMessageList: string[]) {
@@ -432,6 +431,7 @@ export const digikikify = ({
                 ? indexedHubblepup.hubblepup
                 : indexedHubblepup,
             mabz: new Mabz(mabzEntryList),
+            hasTriggered: false,
           };
 
           getCologyEntryList(cology).forEach(([cologyDreanor, zorn]) => {
@@ -556,6 +556,9 @@ export const digikikify = ({
 
     // eslint-disable-next-line no-param-reassign
     platomity.executionCount += 1;
+
+    // eslint-disable-next-line no-param-reassign
+    cology.hasTriggered = true;
   };
 
   // TODO: create a class or something to encapsulate tracking runtime stats
@@ -778,6 +781,77 @@ export const digikikify = ({
       break;
     case DigikikifierStrategy.OnlyWaitForVoictentDependency:
       throw Error('Not implemented');
+  }
+
+  const platomityEndStateList = platomityList.flatMap((platomity) => {
+    const cologySet = new Set(
+      [...platomity.procody.values()].flatMap((ajorken) => {
+        return [...ajorken.values()].flatMap((cologySubset) => {
+          return [...cologySubset];
+        });
+      }),
+    );
+
+    const untriggeredCologySet = [...cologySet].filter(
+      (cology) => !cology.hasTriggered,
+    );
+
+    return {
+      platomity,
+      untriggeredCologySet,
+    };
+  });
+
+  const unfinishedPlatomityList = platomityEndStateList.filter(
+    (endState) => endState.untriggeredCologySet.length > 0,
+  );
+
+  if (unfinishedPlatomityList.length > 0) {
+    const output = unfinishedPlatomityList.map((endState) => {
+      const cologySetEndState = endState.untriggeredCologySet.map((cology) => {
+        const rightTupleState = endState.platomity.rightDreanorTuple.map(
+          (rightDreanor: RightDreanor) => {
+            if (
+              rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
+            ) {
+              return {
+                rightGepp: rightDreanor.gepp,
+                isReady: rightDreanor.isReady,
+              };
+            }
+
+            const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
+            return zornTuple.map((zorn) => {
+              const hasItem = rightDreanor.prected.has(zorn);
+              return {
+                rightGepp: rightDreanor.gepp,
+                zorn,
+                hasItem,
+              };
+            });
+          },
+        );
+
+        return {
+          leftInput: cology.leftInput,
+          rightTupleState,
+        };
+      });
+
+      return {
+        estinantName: endState.platomity.estinant.name,
+        leftGepp: endState.platomity.estinant.leftInputAppreffinge.gepp,
+        cologySet: cologySetEndState,
+      };
+    });
+
+    const errorMessage = `Some cologies were not triggered:  \n${JSON.stringify(
+      output,
+      null,
+      2,
+    )}`;
+
+    onError({ error: new Error(errorMessage), isCritical: false });
   }
 
   const statistics: RuntimeStatistics = {

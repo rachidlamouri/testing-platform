@@ -10,6 +10,7 @@ export type Cology = {
   leftDreanor: LeftDreanor;
   leftInput: unknown;
   mabz: Mabz;
+  hasTriggered: boolean;
 };
 
 type CologyEntry = [Dreanor, Zorn];
