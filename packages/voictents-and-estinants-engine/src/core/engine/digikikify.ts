@@ -42,6 +42,21 @@ import { GenericVoictent2 } from './voictent2';
 import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
 import { Tuple } from '../../utilities/semantic-types/tuple';
 import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/rightInputAppreffinge';
+import { serialize } from '../../utilities/typed-datum/serializer/serialize';
+
+class AggregateEngineError extends Error {
+  constructor(errorMessageList: string[]) {
+    const aggregateMessage = [
+      `Encountered ${errorMessageList.length} errors:`,
+      ...errorMessageList.slice(0, 100).map((errorMessage, index) => {
+        // 4 accounts for 2 spaces and then a 2 digit number
+        return `${`${index}`.padStart(4, ' ')}: ${errorMessage}`;
+      }),
+    ].join('\n');
+
+    super(aggregateMessage);
+  }
+}
 
 type OnHubblepupAddedToVoictentsHandler = (quirm: Quirm) => void;
 
@@ -55,6 +70,7 @@ export enum DigikikifierStrategy {
 export type DigikikifierInput = {
   // TODO: remove "initialQuirmTuple" and make inputVoictentList required
   inputVoictentList?: GenericVoictent2[];
+  errorGepp?: Gepp;
   estinantTuple: Tuple<GenericEstinant2>;
   /** @deprecated */
   onHubblepupAddedToVoictents?: OnHubblepupAddedToVoictentsHandler;
@@ -110,6 +126,7 @@ export type RuntimeStatistics = {
  */
 export const digikikify = ({
   inputVoictentList = [],
+  errorGepp,
   estinantTuple,
   onHubblepupAddedToVoictents,
   onFinish,
@@ -196,23 +213,48 @@ export const digikikify = ({
     );
   });
 
-  if (errorMessageList.length > 0) {
-    const aggregateMessage = [
-      `Encountered ${errorMessageList.length} errors:`,
-      ...errorMessageList.slice(0, 100).map((errorMessage, index) => {
-        // 4 accounts for 2 spaces and then a 2 digit number
-        return `${`${index}`.padStart(4, ' ')}: ${errorMessage}`;
-      }),
-    ].join('\n');
-
-    throw Error(aggregateMessage);
-  }
-
   const initialTabillyEntryList = inputVoictentList.map((voictent) => {
     return [voictent.gepp, voictent] as const;
   });
 
   const tabilly = new Tabilly(initialTabillyEntryList);
+
+  const errorVoictent =
+    errorGepp !== undefined ? tabilly.get(errorGepp) ?? null : null;
+
+  if (errorGepp !== undefined && errorVoictent === null) {
+    errorMessageList.push(
+      `Error gepp "${errorGepp}" has no corresponding voictent`,
+    );
+  }
+
+  type ErrorHandlerInput = {
+    error: Error;
+    isCritical: boolean;
+  };
+  const onError = ({ error, isCritical }: ErrorHandlerInput): void => {
+    if (errorVoictent === null) {
+      throw new AggregateEngineError([
+        'The engine encountered an error, but no error voictent was specified',
+        error.message,
+      ]);
+    }
+
+    errorVoictent.addHubblepup(error);
+
+    if (isCritical) {
+      throw new Error(
+        `The engine encountered a critical error. See the error voictent with gepp "${errorVoictent.gepp}" for more details`,
+      );
+    }
+  };
+
+  if (errorMessageList.length > 0) {
+    onError({
+      error: new AggregateEngineError(errorMessageList),
+      isCritical: true,
+    });
+  }
 
   const addToTabilly = (quirmTuple: QuirmTuple): void => {
     tabilly.addHubblepupsToVoictents(quirmTuple);
@@ -485,28 +527,35 @@ export const digikikify = ({
       return rightInputTupleElement;
     });
 
-    const outputRecord = platomity.estinant.tropoig(
-      leftInput,
-      ...rightInputTuple,
-    );
+    try {
+      const outputRecord = platomity.estinant.tropoig(
+        leftInput,
+        ...rightInputTuple,
+      );
 
-    const outputQuirmTuple = Object.entries(outputRecord)
-      .filter(([gepp]) => {
-        return platomity.outputGeppSet.has(gepp);
-      })
-      .flatMap(([gepp, hubblepupTuple]): Quirm[] => {
-        return hubblepupTuple.map<Quirm>((hubblepup) => {
-          return {
-            gepp,
-            hubblepup,
-          };
+      const outputQuirmTuple = Object.entries(outputRecord)
+        .filter(([gepp]) => {
+          return platomity.outputGeppSet.has(gepp);
+        })
+        .flatMap(([gepp, hubblepupTuple]): Quirm[] => {
+          return hubblepupTuple.map<Quirm>((hubblepup) => {
+            return {
+              gepp,
+              hubblepup,
+            };
+          });
         });
+
+      addToTabilly(outputQuirmTuple);
+    } catch (error) {
+      onError({
+        error: error as Error,
+        isCritical: false,
       });
+    }
 
     // eslint-disable-next-line no-param-reassign
     platomity.executionCount += 1;
-
-    addToTabilly(outputQuirmTuple);
   };
 
   // TODO: create a class or something to encapsulate tracking runtime stats
@@ -744,17 +793,20 @@ export const digikikify = ({
 
 type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
   inputVoictentList: GenericVoictent2[];
+  errorGepp?: Gepp;
   estinantTuple: TEstinantTuple;
   onFinish?: RuntimeStatisticsHandler;
 };
 
 export const digikikify2 = <TEstinantTuple extends UnsafeEstinant2Tuple>({
   inputVoictentList = [],
+  errorGepp,
   estinantTuple,
   onFinish,
 }: DigikikifierInput2<TEstinantTuple>): void => {
   digikikify({
     inputVoictentList,
+    errorGepp,
     estinantTuple,
     onFinish,
   });

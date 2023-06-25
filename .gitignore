@@ -44,3 +44,9 @@ debug/test-error-serialization/*
 !debug/test-error-serialization/voictents/
 debug/test-error-serialization/voictents/*
 !debug/test-error-serialization/voictents/error/
+
+!debug/test-estinant-error
+debug/test-estinant-error/*
+!debug/test-estinant-error/voictents/
+debug/test-estinant-error/voictents/*
+!debug/test-estinant-error/voictents/engine-error/
