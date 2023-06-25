@@ -71,6 +71,10 @@ export abstract class AbstractInMemoryVoictent<
     });
   }
 
+  get isEmpty(): boolean {
+    return this.hubblepupTuple.length === 0;
+  }
+
   addHubblepup(hubblepup: TVoque['receivedHubblepup']): void {
     this.receivedHubblepup.thisTick = true;
 

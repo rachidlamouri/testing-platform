@@ -50,6 +50,10 @@ export class Voictent implements GenericVoictent2 {
     // no op
   }
 
+  get isEmpty(): boolean {
+    return this.hubblepupTuple.length === 0;
+  }
+
   addHubblepup(hubblepup: Hubblepup): void {
     this.receivedHubblepup.thisTick = true;
     this.hubblepupTuple.push(hubblepup);
