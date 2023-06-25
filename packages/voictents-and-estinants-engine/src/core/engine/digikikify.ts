@@ -135,6 +135,8 @@ export const digikikify = ({
     voictent.initialize();
   });
 
+  let isInitialErrorCritical = false;
+
   const inputGeppSet: GeppSet = new Set(
     inputVoictentList.map((voictent) => {
       return voictent.gepp;
@@ -157,6 +159,8 @@ export const digikikify = ({
     errorMessageList.push(
       `Voictents must have a unique gepp per program. Found duplicate gepp: ${gepp}`,
     );
+
+    isInitialErrorCritical = true;
   });
 
   const invalidEstinantInputOutputList = estinantTuple
@@ -202,6 +206,8 @@ export const digikikify = ({
     errorMessageList.push(
       `Estinant names must be unique per program. Found duplicate name: ${name}`,
     );
+
+    isInitialErrorCritical = true;
   });
 
   invalidEstinantInputOutputList.forEach(({ estinantName, gepp, isInput }) => {
@@ -210,7 +216,49 @@ export const digikikify = ({
     errorMessageList.push(
       `Estinant inputs and outputs must have a corresponding voictent. Estinant "${estinantName}" has an ${label} gepp "${gepp}" without a corresponding voictent.`,
     );
+
+    isInitialErrorCritical = true;
   });
+
+  const fedVoictentGeppSet = new Set([
+    ...inputVoictentList
+      .filter((voictent) => {
+        // note: It's important that this check comes after all collections are initialized
+        return !voictent.isEmpty;
+      })
+      .map((voictent) => voictent.gepp),
+    ...estinantTuple.flatMap(
+      (estinant) => estinant.outputAppreffinge.geppTuple,
+    ),
+  ]);
+
+  const consumedVoictentGeppSet = new Set(
+    estinantTuple
+      .flatMap((estinant) => {
+        return [
+          estinant.leftInputAppreffinge,
+          ...estinant.rightInputAppreffingeTuple,
+        ];
+      })
+      .map((appreffinge) => appreffinge.gepp),
+  );
+
+  // note: downstream estinants are gonna be so hungies
+  const unfedVoictentList = inputVoictentList.filter((voictent) => {
+    const isConsumed = consumedVoictentGeppSet.has(voictent.gepp);
+    const isFed = fedVoictentGeppSet.has(voictent.gepp);
+    return isConsumed && !isFed;
+  });
+
+  if (unfedVoictentList.length > 0) {
+    unfedVoictentList.forEach((voictent) => {
+      errorMessageList.push(
+        `Voictent with gepp "${voictent.gepp}" is consumed by an estinant, but is not initialized nor the output of an estinant`,
+      );
+    });
+
+    // note: this is not a critical error
+  }
 
   const initialTabillyEntryList = inputVoictentList.map((voictent) => {
     return [voictent.gepp, voictent] as const;
@@ -225,6 +273,8 @@ export const digikikify = ({
     errorMessageList.push(
       `Error gepp "${errorGepp}" has no corresponding voictent`,
     );
+
+    isInitialErrorCritical = true;
   }
 
   type ErrorHandlerInput = {
@@ -251,7 +301,7 @@ export const digikikify = ({
   if (errorMessageList.length > 0) {
     onError({
       error: new AggregateEngineError(errorMessageList),
-      isCritical: true,
+      isCritical: isInitialErrorCritical,
     });
   }
 

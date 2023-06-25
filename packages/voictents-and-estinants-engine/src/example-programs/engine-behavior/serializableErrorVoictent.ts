@@ -34,6 +34,8 @@ export class SerializableErrorVoictent<
 
   private initialHubblepupTuple: TVoque['emittedHubblepup'][];
 
+  private hasReceivedItem = false;
+
   constructor({
     gepp,
     programFileCache,
@@ -70,7 +72,12 @@ export class SerializableErrorVoictent<
     });
   }
 
+  get isEmpty(): boolean {
+    return !this.hasReceivedItem;
+  }
+
   addHubblepup(hubblepup: Error): void {
+    this.hasReceivedItem = true;
     const currentErrorIndex = this.errorCount;
 
     this.programFileCache.writeSerializedHubblepup({

@@ -77,6 +77,10 @@ export class InMemoryCache<TDatum> {
     thisTick: null,
   };
 
+  get isEmpty(): boolean {
+    return this.datumTuple.length === 0;
+  }
+
   onTickStart(): void {
     // eslint-disable-next-line prefer-destructuring
     this.receivedDatumState = {

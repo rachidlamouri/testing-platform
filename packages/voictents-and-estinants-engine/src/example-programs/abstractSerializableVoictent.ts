@@ -61,6 +61,8 @@ export abstract class AbstractSerializableVoictent<
 
   public readonly duplicateCountByCheckId = new Map<string, number>();
 
+  private hasReceivedItem = false;
+
   constructor({
     gepp,
     programFileCache,
@@ -81,6 +83,10 @@ export abstract class AbstractSerializableVoictent<
     });
   }
 
+  get isEmpty(): boolean {
+    return !this.hasReceivedItem;
+  }
+
   // eslint-disable-next-line class-methods-use-this
   createVoictentLanbe(): null {
     return null;
@@ -97,6 +103,8 @@ export abstract class AbstractSerializableVoictent<
   }
 
   addHubblepup(metahubblepup: AbstractSerializable): void {
+    this.hasReceivedItem = true;
+
     const metavoictentGepp = this.gepp;
     const serializedHubblepupGepp = metahubblepup.sourceGepp;
     const extensionlessFileName = metahubblepup.serializableId.replaceAll(

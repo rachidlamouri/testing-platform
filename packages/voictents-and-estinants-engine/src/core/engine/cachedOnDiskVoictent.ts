@@ -103,6 +103,10 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
     // no op
   }
 
+  get isEmpty(): boolean {
+    return this.hubblepupTuple.length === 0;
+  }
+
   addHubblepup(receivedHubblepup: TVoque['receivedHubblepup']): void {
     this.receivedHubblepup.thisTick = true;
 
