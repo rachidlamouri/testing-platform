@@ -3,4 +3,5 @@
  */
 export type AttributeByKeyCNE = {
   color: string;
+  penwidth: number;
 };

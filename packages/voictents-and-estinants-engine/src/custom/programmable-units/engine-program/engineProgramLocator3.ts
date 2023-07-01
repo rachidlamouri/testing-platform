@@ -11,6 +11,7 @@ import { getEngineProgramZorn } from './partialEngineProgramLocator2';
 import { ProgramEstinantRelationship } from './programEstinantRelationship';
 
 type BaseEngineProgramLocator3 = {
+  isCoreProgram: boolean;
   programName: string;
   description: string;
   filePath: string;

@@ -325,6 +325,7 @@ const getCore2EngineProgramLocator = ({
   );
 
   const engineProgramLocator = new EngineProgramLocator3Instance({
+    isCoreProgram: true,
     programName,
     description: engineCallCommentText ?? '',
     filePath: engineProgramFile.filePath,
@@ -555,6 +556,7 @@ const getAdaptedEngineProgramLocator = ({
   );
 
   const engineProgramLocator = new EngineProgramLocator3Instance({
+    isCoreProgram: false,
     programName,
     description: engineCallCommentText ?? '',
     filePath: engineProgramFile.filePath,
