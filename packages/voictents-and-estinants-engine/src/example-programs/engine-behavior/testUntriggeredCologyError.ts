@@ -94,4 +94,5 @@ digikikify2({
   ],
   errorGepp: 'engine-error',
   estinantTuple: [joinCollectionsByValue],
+  failForEncounteredError: false,
 });

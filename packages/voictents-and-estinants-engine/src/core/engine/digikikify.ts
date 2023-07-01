@@ -75,6 +75,7 @@ export type DigikikifierInput = {
   onHubblepupAddedToVoictents?: OnHubblepupAddedToVoictentsHandler;
   onFinish?: RuntimeStatisticsHandler;
   strategy?: DigikikifierStrategy;
+  failForEncounteredError?: boolean;
 };
 
 const nanosecondsToSeconds = (nanoseconds: bigint): bigint =>
@@ -130,6 +131,7 @@ export const digikikify = ({
   onHubblepupAddedToVoictents,
   onFinish,
   strategy = DigikikifierStrategy.WaitForAllDependencies,
+  failForEncounteredError = true,
 }: DigikikifierInput): void => {
   inputVoictentList.forEach((voictent) => {
     voictent.initialize();
@@ -277,11 +279,15 @@ export const digikikify = ({
     isInitialErrorCritical = true;
   }
 
+  let encounteredError = false;
+
   type ErrorHandlerInput = {
     error: Error;
     isCritical: boolean;
   };
   const onError = ({ error, isCritical }: ErrorHandlerInput): void => {
+    encounteredError = true;
+
     if (errorVoictent === null) {
       throw new AggregateEngineError([
         'The engine encountered an error, but no error voictent was specified',
@@ -910,6 +916,12 @@ export const digikikify = ({
     time: timeConfiguration,
   };
 
+  if (encounteredError && failForEncounteredError) {
+    throw new Error(
+      'The engine encountered an error. See the designated error collection for more details.',
+    );
+  }
+
   if (onFinish) {
     onFinish(statistics);
   }
@@ -920,6 +932,7 @@ type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
   errorGepp?: Gepp;
   estinantTuple: TEstinantTuple;
   onFinish?: RuntimeStatisticsHandler;
+  failForEncounteredError?: boolean;
 };
 
 export const digikikify2 = <TEstinantTuple extends UnsafeEstinant2Tuple>({
@@ -927,11 +940,13 @@ export const digikikify2 = <TEstinantTuple extends UnsafeEstinant2Tuple>({
   errorGepp,
   estinantTuple,
   onFinish,
+  failForEncounteredError,
 }: DigikikifierInput2<TEstinantTuple>): void => {
   digikikify({
     inputVoictentList,
     errorGepp,
     estinantTuple,
     onFinish,
+    failForEncounteredError,
   });
 };

@@ -87,6 +87,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
   protected onTransformedHubblepup(
     hubblepup: GenericProgramErrorVoque['emittedHubblepup'],
+    index: number,
   ): void {
     const serializedHubblepup: SerializedHubblepup = {
       text: serialize(hubblepup),
@@ -98,8 +99,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
         voictentGepp: this.gepp,
         nestedPath: 'error',
         serializedHubblepup,
-        // TODO: this should be the same as the zorn referenced by getIndexByName
-        extensionlessFileName: uuid.v4(),
+        extensionlessFileName: `${index}`.padStart(2, '0'),
       });
 
       // TODO: serialize all errors

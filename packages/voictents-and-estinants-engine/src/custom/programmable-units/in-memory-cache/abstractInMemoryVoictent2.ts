@@ -43,7 +43,10 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
   addHubblepup(hubblepup: TVoque['receivedHubblepup']): void {
     const transformedHubblepup = this.transformHubblepup(hubblepup);
     this.addDatum(transformedHubblepup);
-    this.onTransformedHubblepup(transformedHubblepup);
+    this.onTransformedHubblepup(
+      transformedHubblepup,
+      this.datumTuple.length - 1,
+    );
   }
 
   protected abstract transformHubblepup(
@@ -56,6 +59,7 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
 
   protected abstract onTransformedHubblepup(
     hubblepup: TVoque['emittedHubblepup'],
+    index: number,
   ): void;
 
   createVoictentLanbe(debugName: string): VoictentLanbe | null {
