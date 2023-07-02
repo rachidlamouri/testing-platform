@@ -21,41 +21,73 @@ export type ObjectWithPrototype<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 > = SimpleSimplify<TBaseObject, TPrototype>;
 
+type RestrictedObjectInstance<
+  TBaseObject extends object,
+  TPrototype extends object,
+  TObjectInstance extends object,
+> = ObjectWithPrototype<TBaseObject, TPrototype> extends TObjectInstance
+  ? TObjectInstance
+  : never;
+
 type ConstructorFunction<
   TBaseObject extends object,
   TPrototype extends object,
+  TObjectInstance extends object,
 > = {
-  new (input: TBaseObject): ObjectWithPrototype<TBaseObject, TPrototype>;
+  new (input: TBaseObject): RestrictedObjectInstance<
+    TBaseObject,
+    TPrototype,
+    TObjectInstance
+  >;
 };
 
 type Getter<
   TBaseObject extends object,
   TPrototype extends object,
+  TObjectInstance extends object,
   TReturnValue,
-> = (self: ObjectWithPrototype<TBaseObject, TPrototype>) => TReturnValue;
+> = (
+  self: RestrictedObjectInstance<TBaseObject, TPrototype, TObjectInstance>,
+) => TReturnValue;
 
 type PrototypeConfiguration<
   TBaseObject extends object,
   TPrototype extends object,
+  TObjectInstance extends object,
 > = {
-  [TKey in keyof TPrototype]: Getter<TBaseObject, TPrototype, TPrototype[TKey]>;
+  [TKey in keyof TPrototype]: Getter<
+    TBaseObject,
+    TPrototype,
+    TObjectInstance,
+    TPrototype[TKey]
+  >;
 };
 
 type ConstructorFunctionBuilderInput<
   TConstructorName extends string,
   TBaseObject extends object,
   TPrototype extends object,
+  TObjectInstance extends object,
 > = {
   constructorName: TConstructorName;
-  prototypeConfiguration: PrototypeConfiguration<TBaseObject, TPrototype>;
+  prototypeConfiguration: PrototypeConfiguration<
+    TBaseObject,
+    TPrototype,
+    TObjectInstance
+  >;
 };
 
 type ConstructorFunctionParent<
   TConstructorName extends string,
   TBaseObject extends object,
   TPrototype extends object,
+  TObjectInstance extends object,
 > = {
-  [Key in TConstructorName]: ConstructorFunction<TBaseObject, TPrototype>;
+  [Key in TConstructorName]: ConstructorFunction<
+    TBaseObject,
+    TPrototype,
+    TObjectInstance
+  >;
 };
 
 const CONSTRUCTOR_KEY_NAME = 'constructor';
@@ -64,14 +96,21 @@ const buildConstructorFunction = <
   TConstructorName extends string,
   TBaseObject extends object,
   TPrototype extends object,
+  TObjectInstance extends object,
 >({
   constructorName,
   prototypeConfiguration,
 }: ConstructorFunctionBuilderInput<
   TConstructorName,
   TBaseObject,
-  TPrototype
->): ConstructorFunctionParent<TConstructorName, TBaseObject, TPrototype> => {
+  TPrototype,
+  TObjectInstance
+>): ConstructorFunctionParent<
+  TConstructorName,
+  TBaseObject,
+  TPrototype,
+  TObjectInstance
+> => {
   const prototype = {};
   Object.entries(prototypeConfiguration).forEach(([name, getter]) => {
     if (getter === CONSTRUCTOR_KEY_NAME) {
@@ -109,9 +148,15 @@ const buildConstructorFunction = <
   const constructorFunctionParent = {
     [constructorName]: constructorFunction as unknown as ConstructorFunction<
       TBaseObject,
-      TPrototype
+      TPrototype,
+      TObjectInstance
     >,
-  } as ConstructorFunctionParent<TConstructorName, TBaseObject, TPrototype>;
+  } as ConstructorFunctionParent<
+    TConstructorName,
+    TBaseObject,
+    TPrototype,
+    TObjectInstance
+  >;
 
   return constructorFunctionParent;
 };
@@ -121,10 +166,31 @@ export const buildConstructorFunctionWithName = <
 >(
   constructorName: TConstructorName,
 ) => {
-  return <TBaseObject extends object, TPrototype extends object>(
-    prototypeConfiguration: PrototypeConfiguration<TBaseObject, TPrototype>,
-  ): ConstructorFunctionParent<TConstructorName, TBaseObject, TPrototype> =>
-    buildConstructorFunction<TConstructorName, TBaseObject, TPrototype>({
+  return <
+    TBaseObject extends object,
+    TPrototype extends object,
+    TObjectInstance extends object = ObjectWithPrototype<
+      TBaseObject,
+      TPrototype
+    >,
+  >(
+    prototypeConfiguration: PrototypeConfiguration<
+      TBaseObject,
+      TPrototype,
+      TObjectInstance
+    >,
+  ): ConstructorFunctionParent<
+    TConstructorName,
+    TBaseObject,
+    TPrototype,
+    TObjectInstance
+  > =>
+    buildConstructorFunction<
+      TConstructorName,
+      TBaseObject,
+      TPrototype,
+      TObjectInstance
+    >({
       constructorName,
       prototypeConfiguration,
     });
