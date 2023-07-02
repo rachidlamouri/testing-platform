@@ -50,6 +50,7 @@ import { groupGraphElements } from './groupGraphElements';
 import { getDirectedGraphFromGraphElementGroup } from './getDirectedGraphFromGraphElementGroup';
 import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProgramMetadataEntries';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
+import { assertNoCopyPasta } from './assertNoCopyPasta';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -121,6 +122,8 @@ digikikify({
     addInteractivityToSvgDocument,
 
     captureOutputFileDigestList,
+
+    assertNoCopyPasta,
 
     reportErrors,
     signalError,

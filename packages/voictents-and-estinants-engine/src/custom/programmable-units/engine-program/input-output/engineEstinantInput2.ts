@@ -24,7 +24,7 @@ type EstinantInput2Prototype = {
 };
 
 /**
- * Represents an engine program in the program modeler
+ * The model of a transform input
  */
 export type EstinantInput2 = ObjectWithPrototype<
   BaseEstinantInput2,

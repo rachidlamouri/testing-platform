@@ -24,7 +24,7 @@ type EstinantOutput2Prototype = {
 };
 
 /**
- * Represents an engine program in the program modeler
+ * The model of a transform output
  */
 export type EstinantOutput2 = ObjectWithPrototype<
   BaseEstinantOutput2,

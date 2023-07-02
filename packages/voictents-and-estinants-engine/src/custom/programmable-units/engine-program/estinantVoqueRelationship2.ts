@@ -19,8 +19,7 @@ type EstinantVoqueRelationship2Prototype = {
 };
 
 /**
- * The information needed to find a Voque definition, and subsequently a
- * hubblepup definition
+ * A model of the connection between a transform and a collection meta type
  */
 type EstinantVoqueRelationship2 = ObjectWithPrototype<
   BaseEstinantVoqueRelationship2,
