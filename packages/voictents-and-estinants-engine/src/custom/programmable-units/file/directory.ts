@@ -9,6 +9,7 @@ export type Directory = {
   directoryName: string;
   directoryPath: string;
   directoryPathPartList: string[];
+  parentDirectoryPath: string;
 };
 
 export const DIRECTORY_GEPP = 'directory';

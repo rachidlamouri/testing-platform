@@ -12,11 +12,16 @@ enum NodeLabelLocation {
 export enum NodeShape {
   Box = 'box',
   Circle = 'circle',
+  Ellipse = 'ellipse',
   InvertedTriangle = 'invtriangle',
   InvertedHouse = 'invhouse',
   Oval = 'oval',
   PlainText = 'plaintext',
   Point = 'point',
+}
+
+export enum NodeStyle {
+  Rounded = 'rounded',
 }
 
 type NodeAttributeByKey = SpreadN<
@@ -26,6 +31,7 @@ type NodeAttributeByKey = SpreadN<
     {
       shape: NodeShape;
       labelloc: NodeLabelLocation;
+      style: NodeStyle;
     },
   ]
 >;

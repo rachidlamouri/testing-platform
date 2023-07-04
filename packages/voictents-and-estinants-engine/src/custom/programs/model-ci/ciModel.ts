@@ -172,12 +172,6 @@ export const CI_MODEL: CiModel = {
           prefaceDescription: 'Verifying program models have not changed',
         },
         {
-          programName: 'render-type-script-file-relationships',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts',
-          prefaceDescription: 'WIP',
-        },
-        {
           programName: 'find-unused-exports',
           programFilePath:
             'packages/voictents-and-estinants-engine/src/custom/programs/find-unused-exports/findUnusedExports.ts',
@@ -194,6 +188,18 @@ export const CI_MODEL: CiModel = {
     {
       description: 'WIP Adapted Programs',
       programTestList: [
+        {
+          programName: 'render-knowledge-graph',
+          programFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/renderKnowledgeGraph.ts',
+          prefaceDescription: 'WIP',
+        },
+        {
+          programName: 'render-type-script-file-relationships',
+          programFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts',
+          prefaceDescription: 'WIP',
+        },
         {
           programName: 'assemble-scaffolded-file',
           programFilePath:

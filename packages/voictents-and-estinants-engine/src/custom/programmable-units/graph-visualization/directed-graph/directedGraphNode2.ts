@@ -7,6 +7,7 @@ import {
 import { getZorn } from '../../../../utilities/getZorn';
 
 type BaseDirectedGraphNode2 = {
+  zorn2?: string;
   attributeByKey: PartialNodeAttributeByKey;
   rootGraphLocator: RootGraphLocator;
   parentId: string;
@@ -24,9 +25,12 @@ export type DirectedGraphNode2 = ObjectWithPrototype<
 
 export const { DirectedGraphNode2Instance } = buildConstructorFunctionWithName(
   'DirectedGraphNode2Instance',
-)<BaseDirectedGraphNode2, DirectedGraphNode2Prototype>({
+)<BaseDirectedGraphNode2, DirectedGraphNode2Prototype, DirectedGraphNode2>({
   zorn: (directedNode) => {
-    return getZorn([directedNode.rootGraphLocator.zorn, directedNode.id]);
+    return (
+      directedNode.zorn2 ??
+      getZorn([directedNode.rootGraphLocator.zorn, directedNode.id])
+    );
   },
   id: (directedNode) => {
     return directedNode.attributeByKey.id;

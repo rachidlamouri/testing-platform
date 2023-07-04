@@ -121,17 +121,25 @@ export abstract class AbstractSerializableVoictent<
     this.duplicateCountByCheckId.set(duplicateCheckId, nextCount);
 
     if (nextCount > 1) {
-      // TODO: turn this into a ProgramError and find a way to get in the ProgramError collection
-      // eslint-disable-next-line no-console
-      console.log('SKIPPING DUPLICATE FILE NAME', {
-        fileName: this.programFileCache.getNamespacedVoictentsFilePath({
-          voictentGepp: metavoictentGepp,
-          nestedPath: serializedHubblepupGepp,
-          extensionlessFileName,
-          fileExtensionSuffixIdentifier:
-            serializedHubblepup.fileExtensionSuffixIdentifier,
-        }),
+      const fileName = this.programFileCache.getNamespacedVoictentsFilePath({
+        voictentGepp: metavoictentGepp,
+        nestedPath: serializedHubblepupGepp,
+        extensionlessFileName,
+        fileExtensionSuffixIdentifier:
+          serializedHubblepup.fileExtensionSuffixIdentifier,
       });
+
+      const error = new Error(`Duplicate file name: ${fileName}`);
+      Object.assign(error, {
+        voictentGepp: metavoictentGepp,
+        nestedPath: serializedHubblepupGepp,
+        extensionlessFileName,
+        fileExtensionSuffixIdentifier:
+          serializedHubblepup.fileExtensionSuffixIdentifier,
+      });
+
+      throw error;
+
       // eslint-disable-next-line no-console
       console.log();
     } else {

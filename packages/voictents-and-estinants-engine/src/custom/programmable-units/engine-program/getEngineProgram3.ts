@@ -104,23 +104,38 @@ export const getEngineProgram3 = buildEstinant({
       }),
     );
 
+    const fedVoqueIdSet = new Set(
+      estinantList.flatMap((engineEstinant) => {
+        return engineEstinant.outputList
+          .map((output) => {
+            return output.voqueLocator;
+          })
+          .filter((voqueLocator): voqueLocator is EngineVoqueLocator2 => {
+            return voqueLocator !== undefined;
+          })
+          .map((voqueLocator) => voqueLocator.id);
+      }),
+    );
+
     const categorizedVoqueList = allVoqueLocatorList.map((voqueLocator) => {
       const isInitialized = initializedVoqueLocatorIdSet.has(voqueLocator.id);
       const isConsumed = consumedVoqueIdSet.has(voqueLocator.id);
+      const isFed = fedVoqueIdSet.has(voqueLocator.id);
 
       const isEndingVoque = !isConsumed;
 
       return {
         voqueLocator,
         isInitialized,
+        isFed,
         isEndingVoque,
       };
     });
 
     const voqueRelationshipList = categorizedVoqueList.map(
-      ({ voqueLocator, isInitialized, isEndingVoque }) => {
+      ({ voqueLocator, isInitialized, isFed, isEndingVoque }) => {
         let parentId: string;
-        if (isInitialized) {
+        if (isInitialized && !isFed) {
           parentId = engineProgramLocator.startingSubgraphId;
         } else if (isEndingVoque) {
           parentId = engineProgramLocator.endingSubgraphId;

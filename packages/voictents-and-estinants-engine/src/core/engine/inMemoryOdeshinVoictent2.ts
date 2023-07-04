@@ -36,16 +36,15 @@ export class InMemoryOdeshin2Voictent<
     super.addHubblepup(hubblepup);
 
     if (this.hubblepupByZorn.has(hubblepup.zorn)) {
-      // TODO: turn this into a ProgramError and find a way to get in the ProgramError collection
-      // eslint-disable-next-line no-console
-      console.error('DUPLICATE ZORN', {
+      const error = new Error(`Duplicate zorn: ${hubblepup.zorn}`);
+      Object.assign(error, {
         gepp: this.gepp,
         zorn: hubblepup.zorn,
         existing: this.hubblepupByZorn.get(hubblepup.zorn),
         duplicate: hubblepup,
       });
-      // eslint-disable-next-line no-console
-      console.log();
+
+      throw error;
     } else {
       this.hubblepupByZorn.set(hubblepup.zorn, hubblepup);
     }

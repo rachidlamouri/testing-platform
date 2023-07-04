@@ -19,8 +19,8 @@ type ProgramVoqueRelationship2Prototype = {
 };
 
 /**
- * The information needed to find a Voque definition, and subsequently a
- * hubblepup definition
+ * Models the relationship between a collection and a program that uses that
+ * collection
  */
 type ProgramVoqueRelationship2 = ObjectWithPrototype<
   BaseProgramVoqueRelationship2,

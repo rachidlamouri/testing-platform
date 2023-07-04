@@ -1,11 +1,24 @@
 {
   "configurations": [
     {
-      "name": "Debug Engine",
+      "name": "Model Programs",
       "request": "launch",
       "runtimeArgs": [
         "ts-node",
         "${workspaceFolder}/packages/voictents-and-estinants-engine/src/custom/programs/model-programs/modelPrograms.ts"
+      ],
+      "runtimeExecutable": "npx",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "name": "Render Knowledge Graph",
+      "request": "launch",
+      "runtimeArgs": [
+        "ts-node",
+        "${workspaceFolder}/packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/renderKnowledgeGraph.ts"
       ],
       "runtimeExecutable": "npx",
       "skipFiles": [

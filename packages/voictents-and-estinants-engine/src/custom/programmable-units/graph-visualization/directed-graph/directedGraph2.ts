@@ -7,6 +7,8 @@ import { PartialGraphAttributeByKey } from './directedGraph';
 import { RootGraphLocator } from './rootGraphLocator';
 
 type BaseDirectedGraph2 = {
+  // TODO: replace computed zorn with static zorn
+  zorn2?: string;
   isCluster?: never;
   attributeByKey: PartialGraphAttributeByKey;
   rankGroupList?: never;
@@ -26,9 +28,12 @@ export type DirectedGraph2 = ObjectWithPrototype<
 
 export const { DirectedGraph2Instance } = buildConstructorFunctionWithName(
   'DirectedGraph2Instance',
-)<BaseDirectedGraph2, DirectedGraph2Prototype>({
+)<BaseDirectedGraph2, DirectedGraph2Prototype, DirectedGraph2>({
   zorn: (directedGraph) => {
-    return getZorn([directedGraph.rootGraphLocator.zorn, directedGraph.id]);
+    return (
+      directedGraph.zorn2 ??
+      getZorn([directedGraph.rootGraphLocator.zorn, directedGraph.id])
+    );
   },
   id: (directedGraph) => {
     return directedGraph.attributeByKey.id;
