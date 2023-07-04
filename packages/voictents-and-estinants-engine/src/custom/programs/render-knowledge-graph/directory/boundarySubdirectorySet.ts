@@ -20,7 +20,7 @@ type BoundarySubdirectorySetPrototype = {
 /**
  * The list of directory paths under a boundary
  */
-export type BoundarySubdirectorySet = ObjectWithPrototype<
+type BoundarySubdirectorySet = ObjectWithPrototype<
   BaseBoundarySubdirectorySet,
   BoundarySubdirectorySetPrototype
 >;
@@ -46,7 +46,7 @@ export const { BoundarySubdirectorySetInstance } =
 
 export const BOUNDARY_SUBDIRECTORY_SET_GEPP = 'boundary-subdirectory-set';
 
-export type BoundarySubdirectorySetGepp = typeof BOUNDARY_SUBDIRECTORY_SET_GEPP;
+type BoundarySubdirectorySetGepp = typeof BOUNDARY_SUBDIRECTORY_SET_GEPP;
 
 export type BoundarySubdirectorySetVoque = InMemoryOdeshin2Voque<
   BoundarySubdirectorySetGepp,

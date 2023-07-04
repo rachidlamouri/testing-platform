@@ -30,7 +30,7 @@ export const { CommonBoundaryRootInstance } = buildConstructorFunctionWithName(
 
 export const COMMON_BOUNDARY_ROOT_GEPP = 'common-boundary-root';
 
-export type CommonBoundaryRootGepp = typeof COMMON_BOUNDARY_ROOT_GEPP;
+type CommonBoundaryRootGepp = typeof COMMON_BOUNDARY_ROOT_GEPP;
 
 export type CommonBoundaryRootVoque = InMemoryOdeshin2Voque<
   CommonBoundaryRootGepp,

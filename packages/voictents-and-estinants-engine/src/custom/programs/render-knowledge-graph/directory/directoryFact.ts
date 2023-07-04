@@ -63,7 +63,7 @@ export const { DirectoryFactInstance } = buildConstructorFunctionWithName(
 
 export const DIRECTORY_FACT_GEPP = 'directory-fact';
 
-export type DirectoryFactGepp = typeof DIRECTORY_FACT_GEPP;
+type DirectoryFactGepp = typeof DIRECTORY_FACT_GEPP;
 
 export type DirectoryFactVoque = InMemoryOdeshin2Voque<
   DirectoryFactGepp,

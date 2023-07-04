@@ -77,7 +77,7 @@ export const { BoundaryFactInstance } = buildConstructorFunctionWithName(
 
 export const BOUNDARY_FACT_GEPP = 'boundary-fact';
 
-export type BoundaryFactGepp = typeof BOUNDARY_FACT_GEPP;
+type BoundaryFactGepp = typeof BOUNDARY_FACT_GEPP;
 
 export type BoundaryFactVoque = InMemoryOdeshin2Voque<
   BoundaryFactGepp,

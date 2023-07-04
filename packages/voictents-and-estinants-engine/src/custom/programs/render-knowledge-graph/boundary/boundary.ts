@@ -28,7 +28,7 @@ export const { BoundaryInstance } = buildConstructorFunctionWithName(
 
 export const BOUNDARY_GEPP = 'boundary';
 
-export type BoundaryGepp = typeof BOUNDARY_GEPP;
+type BoundaryGepp = typeof BOUNDARY_GEPP;
 
 export type BoundaryVoque = InMemoryOdeshin2Voque<BoundaryGepp, Boundary>;
 
