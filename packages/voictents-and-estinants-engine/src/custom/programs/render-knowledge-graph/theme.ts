@@ -1,5 +1,8 @@
 import { RankDirection } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGS';
-import { GraphLikeStyle } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
+import {
+  GraphLikeLabelLocation,
+  GraphLikeStyle,
+} from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
 import { PartialGraphAttributeByKey } from '../../programmable-units/graph-visualization/directed-graph/directedGraph';
 import {
   NodeShape,
@@ -14,13 +17,20 @@ const penwidth = 0.2;
 export const THEME = {
   graph: {
     fontname,
+    fontsize: 36,
     rankdir: RankDirection.LeftRight,
+    labelloc: GraphLikeLabelLocation.Top,
   } satisfies Omit<PartialGraphAttributeByKey, 'id'>,
   boundary: {
     fontsize: 24,
     style: GraphLikeStyle.Rounded,
     penwidth,
   } satisfies Omit<PartialClusterAttributeByKey, 'id'>,
+  directory: {
+    fontsize: 16,
+    style: GraphLikeStyle.Rounded,
+    penwidth,
+  },
   placeholder: {
     fontname,
     fontsize: 12,

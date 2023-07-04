@@ -1,3 +1,4 @@
+import { posix } from 'path';
 import {
   FileSystemNodeMetadata,
   getNestedFileSystemNodeMetadataList,
@@ -91,6 +92,7 @@ export const enumerateFileSystemObjects = buildEstinant({
           directoryName,
           directoryPath: nodePath,
           directoryPathPartList,
+          parentDirectoryPath: posix.dirname(nodePath),
         };
       },
     );

@@ -1,3 +1,4 @@
+import { posix } from 'path';
 import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
@@ -9,10 +10,12 @@ import {
   RootGraphLocator,
   RootGraphLocatorInstance,
 } from '../../../programmable-units/graph-visualization/directed-graph/rootGraphLocator';
+import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
 import { Boundary } from './boundary';
 
 type BaseBoundaryFact = {
   boundary: Boundary;
+  commonBoundaryRoot: CommonBoundaryRoot;
 };
 
 type BoundaryFactPrototype = {
@@ -21,13 +24,14 @@ type BoundaryFactPrototype = {
   get graphId(): string;
   get subgraphZorn(): string;
   get subgraphId(): string;
+  get directoryPathRelativeToCommonBoundary(): string;
   get rootGraphLocator(): RootGraphLocator;
 };
 
 /**
  * Presentation metadata for a boundary. A piece of knowledge.
  */
-type BoundaryFact = ObjectWithPrototype<
+export type BoundaryFact = ObjectWithPrototype<
   BaseBoundaryFact,
   BoundaryFactPrototype
 >;
@@ -51,6 +55,12 @@ export const { BoundaryFactInstance } = buildConstructorFunctionWithName(
   },
   subgraphId: (boundaryFact) => {
     return getZornableId({ zorn: boundaryFact.subgraphZorn });
+  },
+  directoryPathRelativeToCommonBoundary: (boundaryFact) => {
+    return posix.relative(
+      boundaryFact.commonBoundaryRoot.directoryPath,
+      boundaryFact.boundary.directoryPath,
+    );
   },
   rootGraphLocator: (boundaryFact) => {
     const locator =

@@ -42,6 +42,12 @@ import { getBoundaryFactAndGraphElements } from './boundary/getBoundaryFactAndGr
 import { stubMetadata } from './boundary/stubMetadata';
 import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
 import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
+import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
+import { getBoundarySubdirectorySet } from './directory/getBoundarySubdirectorySet';
+import { getDirectoryFacts } from './directory/getDirectoryFacts';
+import { getDirectoryGraphElements } from './directory/getDirectoryGraphElements';
+import { getCommonBoundaryRoot } from './common-boundary-root/getCommonBoundaryRoot';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -94,10 +100,18 @@ digikikify({
     getEngineProgramLocator3,
 
     getAdaptedProgramBoundary,
+    getCommonBoundaryRoot,
     getBoundaryFactAndGraphElements,
 
     assertBoundaryDirectoryExists,
     assertNoBoundaryOverlap,
+
+    getDirectoriesWithFiles,
+    getBoundarySubdirectorySet,
+    getDirectoryFacts,
+    getDirectoryGraphElements,
+
+    assertDirectoriesHaveBoundaries,
 
     groupGraphElements,
     getDirectedGraphFromGraphElementGroup,
