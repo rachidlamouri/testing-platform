@@ -11,9 +11,10 @@ import {
   DirectoryWithFileVoque,
 } from './directoryWithFile';
 import {
-  BOUNDARY_SUBDIRECTORY_SET_GEPP,
-  BoundarySubdirectorySetVoque,
-} from './boundarySubdirectorySet';
+  DIRECTORY_BOUNDARY_RELATIONSHIP_GEPP,
+  DirectoryBoundaryRelationshipVoque,
+} from './directoryBoundaryRelationship';
+import { BOUNDARY_GEPP, BoundaryVoque } from '../boundary/boundary';
 
 const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -35,22 +36,25 @@ export const assertDirectoriesHaveBoundaries = buildEstinant({
   .fromVoictent2<DirectoryWithFileVoque>({
     gepp: DIRECTORY_WITH_FILE_GEPP,
   })
-  .andFromVoictent2<BoundarySubdirectorySetVoque>({
-    gepp: BOUNDARY_SUBDIRECTORY_SET_GEPP,
+  .andFromVoictent2<DirectoryBoundaryRelationshipVoque>({
+    gepp: DIRECTORY_BOUNDARY_RELATIONSHIP_GEPP,
+  })
+  .andFromVoictent2<BoundaryVoque>({
+    gepp: BOUNDARY_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((directoryList, boundarySubdirectorySetList) => {
+  .onPinbe((directoryList, boundaryDirectoryRelationshipList, boundaryList) => {
     const boundaryDirectoryPathSet = new Set(
-      boundarySubdirectorySetList.map((boundarySubdirectorySet) => {
-        return boundarySubdirectorySet.boundaryDirectoryPath;
+      boundaryList.map((boundary) => {
+        return boundary.directoryPath;
       }),
     );
 
     const boundedDirectoryPathSet = new Set(
-      boundarySubdirectorySetList.flatMap((boundarySubdirectorySet) => {
-        return boundarySubdirectorySet.subdirectoryPathList;
+      boundaryDirectoryRelationshipList.map((relationship) => {
+        return relationship.directory.directoryPath;
       }),
     );
 
@@ -78,6 +82,9 @@ export const assertDirectoriesHaveBoundaries = buildEstinant({
           filePath: directory.directoryPath,
         },
         context: {
+          directoryPath: directory.directoryPath,
+          boundaryDirectoryPathSet,
+          boundedDirectoryPathSet,
           directory,
         },
       } satisfies ReceivedProgramError<ReportingLocator>;

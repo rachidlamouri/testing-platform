@@ -1,12 +1,9 @@
-import { getTextDigest } from '../../../../utilities/getTextDigest';
-import { getZorn } from '../../../../utilities/getZorn';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { DirectedCluster2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedCluster2';
 import {
   DIRECTED_GRAPH_ELEMENT_2_GEPP,
   DirectedGraphElement2Voque,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
-import { DirectedGraphNode2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { DirectedSubgraph2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedSubgraph2';
 import { THEME } from '../theme';
 import { DIRECTORY_FACT_GEPP, DirectoryFactVoque } from './directoryFact';
@@ -65,22 +62,6 @@ export const getDirectoryGraphElements = buildEstinant({
       parentId,
     });
 
-    // TODO: remove this
-    const placeholderNodeZorn = getZorn([
-      directoryFact.zorn,
-      'directory-placeholder',
-    ]);
-    const placeholderNode = new DirectedGraphNode2Instance({
-      zorn2: placeholderNodeZorn,
-      attributeByKey: {
-        id: getTextDigest(placeholderNodeZorn),
-        label: 'directory-placeholder',
-        ...THEME.placeholder,
-      },
-      rootGraphLocator: directoryFact.boundaryFact.rootGraphLocator,
-      parentId: directoryFact.subgraphId,
-    });
-
-    return [directorySubgraph, placeholderNode];
+    return [directorySubgraph];
   })
   .assemble();
