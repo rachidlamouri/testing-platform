@@ -44,10 +44,20 @@ import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
 import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
 import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
-import { getBoundarySubdirectorySet } from './directory/getBoundarySubdirectorySet';
-import { getDirectoryFacts } from './directory/getDirectoryFacts';
+import { getDirectoryFact } from './directory/getDirectoryFact';
 import { getDirectoryGraphElements } from './directory/getDirectoryGraphElements';
 import { getCommonBoundaryRoot } from './common-boundary-root/getCommonBoundaryRoot';
+import {
+  BOUNDARY_TRIE_A_GEPP,
+  BoundaryTrieAVoque,
+} from './boundary/boundaryTrieA';
+import { getBoundaryTrieA } from './boundary/getBoundaryTrieA';
+import { getBoundaryTrieB } from './boundary/getBoundaryTrieB';
+import {
+  BoundaryTrieBVoque,
+  BOUNDARY_TRIE_B_GEPP,
+} from './boundary/boundaryTrieB';
+import { getDirectoryBoundaryRelationship } from './directory/getDirectoryBoundaryRelationship';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -82,6 +92,14 @@ digikikify({
     new ProgramErrorVoictent({
       programFileCache,
     }),
+    new InMemoryVoictent<BoundaryTrieAVoque>({
+      gepp: BOUNDARY_TRIE_A_GEPP,
+      initialHubblepupTuple: [],
+    }),
+    new InMemoryVoictent<BoundaryTrieBVoque>({
+      gepp: BOUNDARY_TRIE_B_GEPP,
+      initialHubblepupTuple: [],
+    }),
     new OutputFileVoictent({
       programFileCache,
     }),
@@ -101,14 +119,16 @@ digikikify({
 
     getAdaptedProgramBoundary,
     getCommonBoundaryRoot,
+    getBoundaryTrieA,
+    getBoundaryTrieB,
     getBoundaryFactAndGraphElements,
 
     assertBoundaryDirectoryExists,
     assertNoBoundaryOverlap,
 
     getDirectoriesWithFiles,
-    getBoundarySubdirectorySet,
-    getDirectoryFacts,
+    getDirectoryBoundaryRelationship,
+    getDirectoryFact,
     getDirectoryGraphElements,
 
     assertDirectoriesHaveBoundaries,

@@ -1,4 +1,3 @@
-import posix from 'path';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   GenericProgramErrorVoque,
@@ -7,7 +6,7 @@ import {
   ReceivedProgramError,
   ReportingEstinantLocator,
 } from '../../../programmable-units/error/programError';
-import { BOUNDARY_GEPP, Boundary, BoundaryVoque } from './boundary';
+import { BOUNDARY_TRIE_A_GEPP, BoundaryTrieAVoque } from './boundaryTrieA';
 
 const ESTINANT_NAME = 'assertNoBoundaryOverlap' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -25,104 +24,54 @@ const reporterLocator: ReportingLocator = {
 export const assertNoBoundaryOverlap = buildEstinant({
   name: ESTINANT_NAME,
 })
-  .fromVoictent2<BoundaryVoque>({
-    gepp: BOUNDARY_GEPP,
+  .fromHubblepup2<BoundaryTrieAVoque>({
+    gepp: BOUNDARY_TRIE_A_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((boundaryList) => {
-    const boundarWithPathListList = boundaryList.map((boundary) => {
-      return {
-        boundary,
-        pathList: boundary.directoryPath.split(posix.sep),
-      };
-    });
+  .onPinbe((trieA) => {
+    const trieList = trieA.flatten();
 
-    type Trie = {
-      value: Boundary | null;
-      map: {
-        [key: string]: Trie;
-      };
-    };
-
-    const trie: Trie = { value: null, map: {} };
     const errorList: ReceivedProgramError<ReportingLocator>[] = [];
+    trieList.forEach((subtrie) => {
+      const hasBoundary = subtrie.value.length > 0;
+      const hasMultipleBoundaries = subtrie.value.length > 1;
 
-    boundarWithPathListList.forEach(({ boundary, pathList }) => {
-      const pathListCopy = pathList.slice();
-
-      let previousTrie: Trie = trie;
-      let nextTrie: Trie = previousTrie;
-      let prefixingBoundary: Boundary | null = previousTrie.value;
-      while (pathListCopy.length > 0 && prefixingBoundary === null) {
-        const path = pathListCopy.shift() as string;
-
-        nextTrie = previousTrie.map[path] ?? {
-          value: null,
-          map: {},
-        };
-        previousTrie.map[path] = nextTrie;
-
-        prefixingBoundary = nextTrie.value;
-        previousTrie = nextTrie;
-      }
-
-      if (prefixingBoundary !== null) {
-        errorList.push({
-          name: 'prefixed-boundary',
-          error: new Error(
-            `Boundary "${boundary.displayName}" is contained by "${prefixingBoundary.displayName}"`,
-          ),
-          reporterLocator,
-          sourceLocator: {
-            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: boundary.directoryPath,
-          },
-          context: {
-            prefixedBoundary: boundary,
-            prefixingBoundary,
-          },
-        });
-        return;
-      }
-
-      if (nextTrie.value !== null) {
-        const duplicateBoundary = nextTrie.value;
+      if (hasMultipleBoundaries) {
         errorList.push({
           name: 'duplicate-boundary',
           error: new Error(
-            `Boundary "${boundary.displayName}" has the same directory path as "${duplicateBoundary.displayName}"`,
+            `Encountered more than one boundary with the same directory path`,
           ),
           reporterLocator,
           sourceLocator: {
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: boundary.directoryPath,
+            filePath: '',
           },
           context: {
-            currentEvaluatedBoundary: boundary,
-            duplicateBoundary,
+            duplicateDirectoryPath: subtrie.value[0].directoryPath,
+            duplicateBoundaryNameList: subtrie.value.map(
+              (boundary) => boundary.displayName,
+            ),
+            duplicateBoundaryList: subtrie.value,
           },
         });
-        return;
       }
 
-      nextTrie.value = boundary;
-
-      const isPrefixOfBoundary = Object.keys(nextTrie.map).length > 0;
-      if (isPrefixOfBoundary) {
+      if (hasBoundary && subtrie.hasSubtries) {
         errorList.push({
           name: 'prefixing-boundary',
           error: new Error(
-            `Boundary "${boundary.displayName}" contains one or more other boundaries`,
+            `Boundary "${subtrie.value[0].displayName}" contains one or more other boundaries`,
           ),
           reporterLocator,
           sourceLocator: {
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: boundary.directoryPath,
+            filePath: '',
           },
           context: {
-            boundary,
+            subtrie,
           },
         });
       }
