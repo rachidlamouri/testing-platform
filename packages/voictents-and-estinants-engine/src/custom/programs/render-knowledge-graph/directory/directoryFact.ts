@@ -25,7 +25,7 @@ type DirectoryFactPrototype = {
 /**
  * Presentation metadata for a directory. A piece of knowledge.
  */
-type DirectoryFact = ObjectWithPrototype<
+export type DirectoryFact = ObjectWithPrototype<
   BaseDirectoryFact,
   DirectoryFactPrototype
 >;

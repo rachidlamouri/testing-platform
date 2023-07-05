@@ -58,6 +58,8 @@ import {
   BOUNDARY_TRIE_B_GEPP,
 } from './boundary/boundaryTrieB';
 import { getDirectoryBoundaryRelationship } from './directory/getDirectoryBoundaryRelationship';
+import { getFileFact } from './file/getFileFact';
+import { getFileGraphElements } from './file/getFileGraphElements';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -132,6 +134,9 @@ digikikify({
     getDirectoryGraphElements,
 
     assertDirectoriesHaveBoundaries,
+
+    getFileFact,
+    getFileGraphElements,
 
     groupGraphElements,
     getDirectedGraphFromGraphElementGroup,

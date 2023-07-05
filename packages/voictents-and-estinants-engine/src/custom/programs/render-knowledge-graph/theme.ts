@@ -31,7 +31,7 @@ export const THEME = {
     style: GraphLikeStyle.Rounded,
     penwidth,
   },
-  placeholder: {
+  file: {
     fontname,
     fontsize: 12,
     shape: NodeShape.Box,
