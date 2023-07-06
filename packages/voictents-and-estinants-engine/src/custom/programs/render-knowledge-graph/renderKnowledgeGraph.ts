@@ -60,6 +60,8 @@ import {
 import { getDirectoryBoundaryRelationship } from './directory/getDirectoryBoundaryRelationship';
 import { getFileFact } from './file/getFileFact';
 import { getFileGraphElements } from './file/getFileGraphElements';
+import { getDependencyFacts } from './dependency/getDependencyFacts';
+import { getDependencyGraphElements } from './dependency/getDependencyGraphElements';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -137,6 +139,9 @@ digikikify({
 
     getFileFact,
     getFileGraphElements,
+
+    getDependencyFacts,
+    getDependencyGraphElements,
 
     groupGraphElements,
     getDirectedGraphFromGraphElementGroup,
