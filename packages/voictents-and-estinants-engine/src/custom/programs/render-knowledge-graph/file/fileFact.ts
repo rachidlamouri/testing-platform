@@ -22,7 +22,7 @@ type FileFactPrototype = {
 /**
  * Presentation metadata for a file. A piece of knowledge.
  */
-type FileFact = ObjectWithPrototype<BaseFileFact, FileFactPrototype>;
+export type FileFact = ObjectWithPrototype<BaseFileFact, FileFactPrototype>;
 
 export const { FileFactInstance } = buildConstructorFunctionWithName(
   'FileFactInstance',

@@ -25,7 +25,7 @@ export type DirectedGraphEdge2 = ObjectWithPrototype<
 
 export const { DirectedGraphEdge2Instance } = buildConstructorFunctionWithName(
   'DirectedGraphEdge2Instance',
-)<BaseDirectedGraphEdge2, DirectedGraphEdge2Prototype>({
+)<BaseDirectedGraphEdge2, DirectedGraphEdge2Prototype, DirectedGraphEdge2>({
   zorn: (directedEdge) => {
     return getZorn([directedEdge.rootGraphLocator.zorn, directedEdge.id]);
   },
