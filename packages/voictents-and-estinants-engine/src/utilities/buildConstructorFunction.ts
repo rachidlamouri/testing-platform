@@ -1,3 +1,10 @@
+/**
+ * WARNING: TypeScript does not know that spreading an object made with this
+ * pattern will not have the prototype properties
+ *
+ * @todo: fix this
+ */
+
 import { TypeScriptFunction } from './typed-datum/type-script/function';
 
 /**
@@ -124,10 +131,16 @@ const buildConstructorFunction = <
     });
   });
 
+  Object.defineProperty(prototype, Symbol.iterator, function () {
+    throw Error('dont do this');
+  });
+
   const constructorFunction = function (
     this: ObjectWithPrototype<TBaseObject, TPrototype>,
     input: TBaseObject,
   ): void {
+    // TODO: "input" could have more keys than the base type, so have a static
+    // list of keys passed in when we can automate keeping that up to date
     Object.assign(this, input);
   };
 
@@ -194,4 +207,15 @@ export const buildConstructorFunctionWithName = <
       constructorName,
       prototypeConfiguration,
     });
+};
+
+export const memoizeGetter = <TObject, TResult>(
+  getter: (object: TObject) => TResult,
+): ((object: TObject) => TResult) => {
+  const cache = new Map<unknown, TResult>();
+  return (object: TObject): TResult => {
+    const value = cache.get(object) ?? getter(object);
+    cache.set(object, value);
+    return value;
+  };
 };

@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { EdgeStyle } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphEdge';
 import { DirectedGraphEdge2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import {
   DIRECTED_GRAPH_ELEMENT_2_GEPP,
@@ -30,6 +31,9 @@ export const getDependencyGraphElements = buildEstinant({
     }
 
     const edge = new DirectedGraphEdge2Instance({
+      attributeByKey: {
+        style: EdgeStyle.Invisible,
+      },
       tailId: dependencyFact.tailId,
       headId: dependencyFact.headId,
       rootGraphLocator:

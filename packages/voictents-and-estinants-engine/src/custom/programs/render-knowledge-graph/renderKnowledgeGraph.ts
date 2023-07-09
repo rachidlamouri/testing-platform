@@ -62,6 +62,8 @@ import { getFileFact } from './file/getFileFact';
 import { getFileGraphElements } from './file/getFileGraphElements';
 import { getDependencyFacts } from './dependency/getDependencyFacts';
 import { getDependencyGraphElements } from './dependency/getDependencyGraphElements';
+import { getInvertedDependencyGroup } from './dependency/getInvertedDependencyGroup';
+import { getInvertedDependencyGraphElements } from './dependency/getInvertedDependencyGraphElements';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -142,6 +144,9 @@ digikikify({
 
     getDependencyFacts,
     getDependencyGraphElements,
+
+    getInvertedDependencyGroup,
+    getInvertedDependencyGraphElements,
 
     groupGraphElements,
     getDirectedGraphFromGraphElementGroup,
