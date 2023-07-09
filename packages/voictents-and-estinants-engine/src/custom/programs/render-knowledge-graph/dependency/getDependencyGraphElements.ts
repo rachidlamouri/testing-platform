@@ -31,9 +31,9 @@ export const getDependencyGraphElements = buildEstinant({
     }
 
     const edge = new DirectedGraphEdge2Instance({
-      attributeByKey: {
-        style: EdgeStyle.Invisible,
-      },
+      // attributeByKey: {
+      //   style: EdgeStyle.Invisible,
+      // },
       tailId: dependencyFact.tailId,
       headId: dependencyFact.headId,
       rootGraphLocator:

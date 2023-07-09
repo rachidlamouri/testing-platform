@@ -143,7 +143,7 @@ digikikify({
     getFileGraphElements,
 
     getDependencyFacts,
-    getDependencyGraphElements,
+    // getDependencyGraphElements,
 
     getInvertedDependencyGroup,
     getInvertedDependencyGraphElements,

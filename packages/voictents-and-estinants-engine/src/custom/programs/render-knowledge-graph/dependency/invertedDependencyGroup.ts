@@ -16,6 +16,7 @@ import {
 } from './dependencyPathSegmentFact';
 import { jsonUtils } from '../../../../utilities/json';
 import { serialize } from '../../../../utilities/typed-datum/serializer/serialize';
+import { isNotNull } from '../../../../utilities/isNotNull';
 
 export type BaseInvertedDependencyGroup = {
   importedFact: FileFact;
@@ -252,6 +253,54 @@ export const { InvertedDependencyGroupInstance } =
         });
       });
 
+      const i = new Map(
+        list2.flatMap(({ outputList }) => {
+          return outputList
+            .slice(0, outputList.length - 1)
+            .map((firstDirectoryPath, index) => {
+              const secondDirectoryPath = outputList[index + 1];
+
+              if (secondDirectoryPath === undefined) {
+                return null;
+              }
+
+              return new DependencyPathSegmentFactInstance({
+                parentZorn: group.zorn,
+                tailId: getDirectoryNodeId(firstDirectoryPath),
+                headId: getDirectoryNodeId(secondDirectoryPath),
+              });
+            })
+            .filter(isNotNull)
+            .map((dependencyFact) => {
+              return [dependencyFact.zorn, dependencyFact] as const;
+            });
+        }),
+      );
+
+      const k = new Map(
+        list3.flatMap(({ outputList }) => {
+          return outputList
+            .slice(0, outputList.length - 1)
+            .map((firstDirectoryPath, index) => {
+              const secondDirectoryPath = outputList[index + 1];
+
+              if (secondDirectoryPath === undefined) {
+                return null;
+              }
+
+              return new DependencyPathSegmentFactInstance({
+                parentZorn: group.zorn,
+                tailId: getDirectoryNodeId(firstDirectoryPath),
+                headId: getDirectoryNodeId(secondDirectoryPath),
+              });
+            })
+            .filter(isNotNull)
+            .map((dependencyFact) => {
+              return [dependencyFact.zorn, dependencyFact] as const;
+            });
+        }),
+      );
+
       const n = new DependencyPathSegmentFactInstance({
         parentZorn: group.zorn,
         tailId: getDirectoryNodeId(
@@ -262,7 +311,7 @@ export const { InvertedDependencyGroupInstance } =
 
       return {
         pathNodeList: [...x.values()],
-        pathSegmentList: [...y, n],
+        pathSegmentList: [...y, n, ...i.values(), ...k.values()],
       };
     }),
   });

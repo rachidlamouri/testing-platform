@@ -62,6 +62,17 @@ export const getDirectoryGraphElements = buildEstinant({
       parentId,
     });
 
-    return [directorySubgraph];
+    const pathNodeSubgraph = new DirectedCluster2Instance({
+      zorn: directoryFact.pathNodeSubgraphZorn,
+      attributeByKey: {
+        id: directoryFact.pathNodeSubgraphId,
+        label: '',
+        ...THEME.directory,
+      },
+      rootGraphLocator: directoryFact.boundaryFact.rootGraphLocator,
+      parentId: directoryFact.subgraphId,
+    });
+
+    return [directorySubgraph, pathNodeSubgraph];
   })
   .assemble();
