@@ -4,6 +4,7 @@ import {
   GraphLikeStyle,
 } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
 import { PartialGraphAttributeByKey } from '../../programmable-units/graph-visualization/directed-graph/directedGraph';
+import { PartialEdgeAttributeByKey } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge';
 import {
   NodeShape,
   NodeStyle,
@@ -26,11 +27,19 @@ export const THEME = {
     style: GraphLikeStyle.Rounded,
     penwidth,
   } satisfies Omit<PartialClusterAttributeByKey, 'id'>,
-  directory: {
+  directorySubgraph: {
     fontsize: 16,
     style: GraphLikeStyle.Rounded,
     penwidth,
   },
+  directoryPathNode: {
+    shape: NodeShape.Circle,
+    color: '#888888',
+    fillcolor: '#aaaaaa',
+    style: NodeStyle.Filled,
+    width: 0.05,
+    height: 0.05,
+  } satisfies Omit<PartialNodeAttributeByKey, 'id'>,
   file: {
     fontname,
     fontsize: 12,
@@ -38,4 +47,9 @@ export const THEME = {
     style: NodeStyle.Rounded,
     penwidth,
   } satisfies Omit<PartialNodeAttributeByKey, 'id'>,
+  dependencyEdge: {
+    color: 'black',
+    arrowsize: 0.5,
+    penwidth: 0.5,
+  } satisfies Omit<PartialEdgeAttributeByKey, 'id'>,
 } as const;

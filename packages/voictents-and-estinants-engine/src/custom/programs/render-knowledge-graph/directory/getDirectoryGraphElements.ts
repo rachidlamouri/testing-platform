@@ -56,7 +56,7 @@ export const getDirectoryGraphElements = buildEstinant({
       attributeByKey: {
         id: directoryFact.subgraphId,
         label,
-        ...THEME.directory,
+        ...THEME.directorySubgraph,
       },
       rootGraphLocator: directoryFact.boundaryFact.rootGraphLocator,
       parentId,
@@ -67,7 +67,7 @@ export const getDirectoryGraphElements = buildEstinant({
       attributeByKey: {
         id: directoryFact.pathNodeSubgraphId,
         label: '',
-        ...THEME.directory,
+        ...THEME.directorySubgraph,
       },
       rootGraphLocator: directoryFact.boundaryFact.rootGraphLocator,
       parentId: directoryFact.subgraphId,

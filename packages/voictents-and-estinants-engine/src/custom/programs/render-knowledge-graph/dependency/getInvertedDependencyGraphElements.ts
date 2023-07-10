@@ -5,12 +5,12 @@ import {
   DIRECTED_GRAPH_ELEMENT_2_GEPP,
   DirectedGraphElement2Voque,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
-import { NodeShape } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
 import { DirectedGraphNode2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import {
   DIRECTORY_FACT_GEPP,
   DirectoryFactVoque,
 } from '../directory/directoryFact';
+import { THEME } from '../theme';
 import {
   INVERTED_DEPENDENCY_GROUP_GEPP,
   InvertedDependencyGroupVoque,
@@ -48,7 +48,8 @@ export const getInvertedDependencyGraphElements = buildEstinant({
         return new DirectedGraphNode2Instance({
           attributeByKey: {
             id: pathNodeFact.nodeId,
-            shape: NodeShape.Point,
+            label: '',
+            ...THEME.directoryPathNode,
           },
           rootGraphLocator:
             group.importedFact.directoryFact.boundaryFact.rootGraphLocator,
@@ -60,6 +61,9 @@ export const getInvertedDependencyGraphElements = buildEstinant({
     const edgeList = group.pathFactLists.pathSegmentList.map(
       (pathSegmentFact) => {
         return new DirectedGraphEdge2Instance({
+          attributeByKey: {
+            ...THEME.dependencyEdge,
+          },
           tailId: pathSegmentFact.tailId,
           headId: pathSegmentFact.headId,
           rootGraphLocator:
