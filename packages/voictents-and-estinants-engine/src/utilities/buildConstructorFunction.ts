@@ -197,3 +197,14 @@ export const buildConstructorFunctionWithName = <
       prototypeConfiguration,
     });
 };
+
+export const memoizeGetter = <TObject, TResult>(
+  getter: (object: TObject) => TResult,
+): ((object: TObject) => TResult) => {
+  const cache = new Map<unknown, TResult>();
+  return (object: TObject): TResult => {
+    const value = cache.get(object) ?? getter(object);
+    cache.set(object, value);
+    return value;
+  };
+};
