@@ -22,6 +22,7 @@ export enum NodeShape {
 
 export enum NodeStyle {
   Rounded = 'rounded',
+  Filled = 'filled',
 }
 
 type NodeAttributeByKey = SpreadN<
@@ -32,6 +33,8 @@ type NodeAttributeByKey = SpreadN<
       shape: NodeShape;
       labelloc: NodeLabelLocation;
       style: NodeStyle;
+      width: number;
+      height: number;
     },
   ]
 >;

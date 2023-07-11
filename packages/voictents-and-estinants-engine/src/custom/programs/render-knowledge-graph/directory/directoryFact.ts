@@ -18,6 +18,8 @@ type DirectoryFactPrototype = {
   get zorn(): string;
   get subgraphZorn(): string;
   get subgraphId(): string;
+  get pathNodeSubgraphZorn(): string;
+  get pathNodeSubgraphId(): string;
   get directoryPathRelativeToParentDirectory(): string;
   get isBoundaryDirectory(): boolean;
 };
@@ -46,6 +48,12 @@ export const { DirectoryFactInstance } = buildConstructorFunctionWithName(
   },
   subgraphId: (directoryFact) => {
     return getZornableId({ zorn: directoryFact.subgraphZorn });
+  },
+  pathNodeSubgraphZorn: (directoryFact) => {
+    return getZorn([directoryFact.zorn, 'path-node-subgraph']);
+  },
+  pathNodeSubgraphId: (directoryFact) => {
+    return getZornableId({ zorn: directoryFact.pathNodeSubgraphZorn });
   },
   directoryPathRelativeToParentDirectory: (directoryFact) => {
     return posix.relative(

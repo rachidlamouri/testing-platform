@@ -8,7 +8,7 @@ const indent = '  ' as const;
 
 type QuotedText = `"${string}"`;
 
-type AttributeStatement = `${QuotedText}=${QuotedText};`;
+type AttributeStatement = `${QuotedText}=${string};`;
 
 // This should be a recursive template literal of "AttributeStatement", but that feature is not supported
 type AttributeListStatement = `[ ${AttributeStatement} ]`;
@@ -32,6 +32,18 @@ const getAttributeStatementList = (
       const textValue = `${value}`;
 
       const quotedKey = quote(key);
+
+      // let formattedValue: string;
+      // if (key === 'id') {
+      //   formattedValue = quoteId(textValue);
+      // } else if (key === 'arrowsize') {
+      //   formattedValue = textValue;
+      // } else {
+      //   formattedValue = quote(`${value}`);
+      // }
+
+      // return `${quotedKey}=${formattedValue};`;
+
       const quotedValue = key === 'id' ? quoteId(textValue) : quote(textValue);
 
       return `${quotedKey}=${quotedValue};`;

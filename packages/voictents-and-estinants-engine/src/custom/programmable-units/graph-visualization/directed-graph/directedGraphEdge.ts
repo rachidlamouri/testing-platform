@@ -12,6 +12,7 @@ type EdgeAttributeByKey = SpreadN<
     AttributeByKeyCNE,
     {
       style: EdgeStyle;
+      arrowsize: number;
     },
   ]
 >;

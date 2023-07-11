@@ -1,25 +1,25 @@
+/**
+ * WARNING: TypeScript does not know that spreading an object made with this
+ * pattern will not have the prototype properties
+ *
+ * @todo: fix this
+ */
+
 import { TypeScriptFunction } from './typed-datum/type-script/function';
 
 /**
  * Merges two objects without making the intellisense do something dumb, unlike
  * type-fest. Maybe one day we won't need this
  */
-type SimpleSimplify<TObject1 extends object, TObject2 extends object> = {
-  [TKey in keyof TObject1 | keyof TObject2]: TKey extends keyof TObject1 &
-    keyof TObject2
-    ? TObject1[TKey] & TObject2[TKey]
-    : TKey extends keyof TObject1
-    ? TObject1[TKey]
-    : TKey extends keyof TObject2
-    ? TObject2[TKey]
-    : never;
+type Simplify<T1 extends object, T2 extends object> = {
+  [Key in keyof (T1 & T2)]: (T1 & T2)[Key];
 };
 
 export type ObjectWithPrototype<
   TBaseObject extends object,
   TPrototype extends object,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-> = SimpleSimplify<TBaseObject, TPrototype>;
+> = Simplify<TBaseObject, TPrototype>;
 
 type RestrictedObjectInstance<
   TBaseObject extends object,
@@ -128,6 +128,8 @@ const buildConstructorFunction = <
     this: ObjectWithPrototype<TBaseObject, TPrototype>,
     input: TBaseObject,
   ): void {
+    // TODO: "input" could have more keys than the base type, so have a static
+    // list of keys passed in when we can automate keeping that up to date
     Object.assign(this, input);
   };
 
@@ -194,4 +196,15 @@ export const buildConstructorFunctionWithName = <
       constructorName,
       prototypeConfiguration,
     });
+};
+
+export const memoizeGetter = <TObject, TResult>(
+  getter: (object: TObject) => TResult,
+): ((object: TObject) => TResult) => {
+  const cache = new Map<unknown, TResult>();
+  return (object: TObject): TResult => {
+    const value = cache.get(object) ?? getter(object);
+    cache.set(object, value);
+    return value;
+  };
 };
