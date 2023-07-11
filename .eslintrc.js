@@ -22,7 +22,7 @@ module.exports = {
         'plugin:eslint-comments/recommended',
       ],
       plugins: ['@typescript-eslint', 'prettier', 'unicorn'],
-      files: './**/*.ts',
+      files: ['./**/*.ts', './**/*.tsx'],
       rules: {
         '@typescript-eslint/no-use-before-define': [
           'error',
@@ -53,6 +53,10 @@ module.exports = {
             .map((directoryName) =>
               posix.join(__dirname, 'packages', directoryName, 'tsconfig.json'),
             ),
+          posix.join(
+            __dirname,
+            'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/tsconfig.json',
+          ),
           posix.join(
             __dirname,
             'packages',
