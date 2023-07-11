@@ -6,6 +6,7 @@ export enum FileExtensionSuffixIdentifier {
   Json = 'Json',
   Text = 'Text',
   TypeScript = 'TypeScript',
+  TypeScriptXml = 'TypeScriptXml',
   Yaml = 'Yaml',
 
   Unknown = 'Unknown',
@@ -27,6 +28,7 @@ const fileExtensionSuffixByFileExtensionSuffixIdentifer = {
   [FileExtensionSuffixIdentifier.Json]: 'json',
   [FileExtensionSuffixIdentifier.Text]: 'txt',
   [FileExtensionSuffixIdentifier.TypeScript]: 'ts',
+  [FileExtensionSuffixIdentifier.TypeScriptXml]: 'tsx',
   [FileExtensionSuffixIdentifier.Yaml]: 'yaml',
 } satisfies FileExtensionSuffixByFileExtensionSuffixIdentifer;
 

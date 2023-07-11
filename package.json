@@ -4,6 +4,7 @@
   "description": "Testing frameworks on testing frameworks",
   "private": true,
   "scripts": {
+    "program": "npx nodemon --ext html,ts,tsx --ignore debug",
     "scaffold": "npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file/assembleScaffoldedFile.ts",
     "example-core": "ts-node packages/open-schema-type-script/src/example/core/exampleCore.ts",
     "example-adapter": "ts-node packages/open-schema-type-script/src/example/adapter/exampleAdapter.ts",
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/rachidlamouri/testing-platform#readme",
   "devDependencies": {
+    "@types/react-dom": "^18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "cheerio": "^1.0.0-rc.12",

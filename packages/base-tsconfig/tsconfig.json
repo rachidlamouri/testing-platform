@@ -5,6 +5,6 @@
   "extends": "@tsconfig/node16",
   "compilerOptions": {
     "noEmit": true,
-    "noErrorTruncation": true
+    "noErrorTruncation": true,
   }
 }
