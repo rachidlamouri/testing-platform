@@ -1,4 +1,5 @@
 {
   "extends": "base-tsconfig",
-  "include": ["src/"]
+  "include": ["src/"],
+  "exclude": ["**/*.tsx"]
 }

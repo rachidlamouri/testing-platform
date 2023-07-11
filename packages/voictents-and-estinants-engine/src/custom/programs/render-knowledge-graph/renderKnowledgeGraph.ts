@@ -63,6 +63,7 @@ import { getFileGraphElements } from './file/getFileGraphElements';
 import { getDependencyFacts } from './dependency/getDependencyFacts';
 import { getInvertedDependencyGroup } from './dependency/getInvertedDependencyGroup';
 import { getInvertedDependencyGraphElements } from './dependency/getInvertedDependencyGraphElements';
+import { renderApp } from './app/node/renderApp';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -150,6 +151,8 @@ digikikify({
     getDirectedGraphFromGraphElementGroup,
     encodeDirectedGraphAsGraphvizCode,
     renderGraphvizCodeToSvgDocument,
+
+    renderApp,
 
     // TODO: remove this
     stubMetadata,

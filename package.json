@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/rachidlamouri/testing-platform#readme",
   "devDependencies": {
+    "@types/react-dom": "^18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "cheerio": "^1.0.0-rc.12",
