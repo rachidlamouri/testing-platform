@@ -41,6 +41,7 @@ module.exports = {
           { devDependencies: true },
         ],
         'func-names': 'off',
+        'import/extensions': 'off',
       },
       parser: '@typescript-eslint/parser',
       parserOptions: {
