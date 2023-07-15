@@ -1,0 +1,52 @@
+Program Namespace: debug/render-knowledge-graph
+NEW: debug/render-knowledge-graph/voictents/output-file
+3 
+
+INVALID [ '', undefined, '' ]
+NEW: debug/render-knowledge-graph/voictents/program-error/error
+NEW: debug/render-knowledge-graph/voictents/serialized/svg-document
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
+3 
+
+INVALID [ '', undefined, '' ]
