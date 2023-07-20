@@ -3,6 +3,7 @@ import { ElementType } from 'react';
 import { builders as b, namedTypes as n } from 'ast-types';
 import * as recast from 'recast';
 import fs from 'fs';
+import _ from 'lodash';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   DECODED_SVG_DOCUMENT_GEPP,
@@ -17,6 +18,10 @@ import {
   ProgramErrorElementLocatorTypeName,
   ReportingEstinantLocator,
 } from '../error/programError';
+import {
+  FILE_FACT_GEPP,
+  FileFactVoque,
+} from '../../programs/render-knowledge-graph/file/fileFact';
 
 const ESTINANT_NAME = 'decodeSvgDocument' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -33,13 +38,16 @@ export const decodeSvgDocument = buildEstinant({
   .fromHubblepup2<SvgDocumentVoque>({
     gepp: SVG_DOCUMENT_GEPP,
   })
+  .andFromVoictent2<FileFactVoque>({
+    gepp: FILE_FACT_GEPP,
+  })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<DecodedSvgDocumentVoque>({
     gepp: DECODED_SVG_DOCUMENT_GEPP,
   })
-  .onPinbe((svgDocument) => {
+  .onPinbe((svgDocument, fileFactList) => {
     const $ = cheerio.load(svgDocument.grition);
 
     const svgNode = $('svg')[0];
@@ -455,6 +463,12 @@ export const decodeSvgDocument = buildEstinant({
     // const normalizedNodeList: NormalizedNode[] = [];
     const unknownNodeInfoList: UnknownDecodedNode[] = [];
 
+    const fileFactById = new Map(
+      fileFactList.map((fileFact) => {
+        return [fileFact.nodeId, fileFact] as const;
+      }),
+    );
+
     const decodeNode = (
       pathPrefix: string,
       node: ChildNode,
@@ -543,6 +557,9 @@ export const decodeSvgDocument = buildEstinant({
         //     : `${upperFirst(node.tagName)}Wrapper`;
         const elementName = node.tagName;
 
+        const fileFact =
+          node.id !== null ? fileFactById.get(node.id) : undefined;
+
         const attributeList = node.node.attributes
           .map((attribute) => {
             let name: string;
@@ -554,7 +571,7 @@ export const decodeSvgDocument = buildEstinant({
               name = attribute.name;
             }
 
-            return [name, attribute.value];
+            return [_.camelCase(name), attribute.value];
           })
           .filter(isNotNull)
           .map(([name, value]) => {
@@ -568,6 +585,18 @@ export const decodeSvgDocument = buildEstinant({
             .map((childNode) => recastNode(childNode))
             .filter(isNotNull),
         );
+
+        if (fileFact !== undefined) {
+          const parentElement = b.jsxElement(
+            b.jsxOpeningElement(b.jsxIdentifier('File'), [
+              b.jsxAttribute(b.jsxIdentifier('id'), b.literal(fileFact.nodeId)),
+            ]),
+            b.jsxClosingElement(b.jsxIdentifier('File')),
+            [element],
+          );
+
+          return parentElement;
+        }
 
         return element;
       }
@@ -588,6 +617,7 @@ export const decodeSvgDocument = buildEstinant({
       fileName,
       [
         'import React from "react"',
+        'import { File } from "./providers/file"',
         `export const Main: React.FunctionComponent = () => { return  (${
           recast.print(idk).code
         })}`,
