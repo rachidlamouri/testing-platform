@@ -9,19 +9,19 @@ import {
   DECODED_SVG_DOCUMENT_GEPP,
   DecodedSvgDocumentVoque,
   DecodedSvgNode,
-} from './decodedSvgDocument';
-import { SVG_DOCUMENT_GEPP, SvgDocumentVoque } from './svgDocument';
+} from '../../programmable-units/graph-visualization/decodedSvgDocument';
+import {
+  SVG_DOCUMENT_GEPP,
+  SvgDocumentVoque,
+} from '../../programmable-units/graph-visualization/svgDocument';
 import { isNotNull } from '../../../utilities/isNotNull';
 import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   ReportingEstinantLocator,
-} from '../error/programError';
-import {
-  FILE_FACT_GEPP,
-  FileFactVoque,
-} from '../../programs/render-knowledge-graph/file/fileFact';
+} from '../../programmable-units/error/programError';
+import { FILE_FACT_GEPP, FileFactVoque } from './file/fileFact';
 
 const ESTINANT_NAME = 'decodeSvgDocument' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -578,6 +578,14 @@ export const decodeSvgDocument = buildEstinant({
             return b.jsxAttribute(b.jsxIdentifier(name), b.literal(value));
           });
 
+        if (node.tagName === 'svg') {
+          const refAttribute = b.jsxAttribute(
+            b.jsxIdentifier('ref'),
+            b.jsxExpressionContainer(b.identifier('ref')),
+          );
+          attributeList.push(refAttribute);
+        }
+
         const element = b.jsxElement(
           b.jsxOpeningElement(b.jsxIdentifier(elementName), attributeList),
           b.jsxClosingElement(b.jsxIdentifier(elementName)),
@@ -586,17 +594,17 @@ export const decodeSvgDocument = buildEstinant({
             .filter(isNotNull),
         );
 
-        if (fileFact !== undefined) {
-          const parentElement = b.jsxElement(
-            b.jsxOpeningElement(b.jsxIdentifier('File'), [
-              b.jsxAttribute(b.jsxIdentifier('id'), b.literal(fileFact.nodeId)),
-            ]),
-            b.jsxClosingElement(b.jsxIdentifier('File')),
-            [element],
-          );
+        // if (fileFact !== undefined) {
+        //   const parentElement = b.jsxElement(
+        //     b.jsxOpeningElement(b.jsxIdentifier('File'), [
+        //       b.jsxAttribute(b.jsxIdentifier('id'), b.literal(fileFact.nodeId)),
+        //     ]),
+        //     b.jsxClosingElement(b.jsxIdentifier('File')),
+        //     [element],
+        //   );
 
-          return parentElement;
-        }
+        //   return parentElement;
+        // }
 
         return element;
       }
@@ -612,15 +620,16 @@ export const decodeSvgDocument = buildEstinant({
     };
 
     const idk = recastNode(decodedSvgNode) as n.JSXElement;
-    const fileName = `debug/example/${svgDocument.zorn}.tsx`;
+    const fileName = `packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/generated/${svgDocument.zorn}.tsx`;
     fs.writeFileSync(
       fileName,
       [
-        'import React from "react"',
-        'import { File } from "./providers/file"',
-        `export const Main: React.FunctionComponent = () => { return  (${
+        'import React, { forwardRef } from "react"',
+        'import { GeneratedComponent } from "../generatedTypes"',
+        // 'import { File } from "./providers/file"',
+        `export const Main: GeneratedComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
           recast.print(idk).code
-        })}`,
+        })})`,
       ].join('\n'),
     );
 

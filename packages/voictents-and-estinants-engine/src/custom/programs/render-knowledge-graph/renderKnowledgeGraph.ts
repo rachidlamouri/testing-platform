@@ -64,9 +64,10 @@ import { getInvertedDependencyGroup } from './dependency/getInvertedDependencyGr
 import { getInvertedDependencyGraphElements } from './dependency/getInvertedDependencyGraphElements';
 import { renderApp } from './app/node/renderApp';
 import { SVG_DOCUMENT_GEPP } from '../../programmable-units/graph-visualization/svgDocument';
-import { decodeSvgDocument } from '../../programmable-units/graph-visualization/decodeSvgDocument';
+import { decodeSvgDocument } from './decodeSvgDocument';
 import { DECODED_SVG_DOCUMENT_GEPP } from '../../programmable-units/graph-visualization/decodedSvgDocument';
 import { renderGraphvizCodeToSvgDocument2 } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument2';
+import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -156,6 +157,8 @@ digikikify({
     renderGraphvizCodeToSvgDocument2,
     decodeSvgDocument,
 
+    constructDynamicIndexFile,
+
     renderApp,
 
     // TODO: remove this
@@ -170,6 +173,6 @@ digikikify({
   serializeeVoictentGeppList: [
     // keep this as a multi-line list for easier debugging
     SVG_DOCUMENT_GEPP,
-    DECODED_SVG_DOCUMENT_GEPP,
+    // DECODED_SVG_DOCUMENT_GEPP,
   ],
 });
