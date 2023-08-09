@@ -1,3 +1,4 @@
+import fs from 'fs';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import {
   KnownFileExtensionSuffixIdentifier,
@@ -42,6 +43,11 @@ export class OutputFileVoictent extends AbstractAsymmetricInMemoryVoictent2<
   protected onTransformedHubblepup(
     hubblepup: OutputFileVoque['emittedHubblepup'],
   ): void {
+    if (hubblepup.filePath !== undefined) {
+      fs.writeFileSync(hubblepup.filePath, hubblepup.text);
+      return;
+    }
+
     this.programFileCache.writeSerializedHubblepup({
       voictentGepp: this.gepp,
       nestedPath: '',

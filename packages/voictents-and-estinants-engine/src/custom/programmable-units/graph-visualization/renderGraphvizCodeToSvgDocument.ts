@@ -5,7 +5,8 @@ import { GRAPHVIZ_CODE_GEPP, GraphvizCodeVoque } from './graphvizCode';
 import { SVG_DOCUMENT_GEPP, SvgDocumentVoque } from './svgDocument';
 
 /**
- * Uses the "dot" program to convert Graphviz code into an SVG HTML document.
+ * Uses the "dot" program to convert Graphviz code into an SVG HTML document and
+ * uses Cheerio to modify the document.
  */
 export const renderGraphvizCodeToSvgDocument = buildEstinant({
   name: 'renderGraphvizCodeToSvgDocument',
