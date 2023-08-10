@@ -33,7 +33,7 @@ import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { assertBoundaryDirectoryExists } from './boundary/assertBoundaryDirectoryExists';
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
-import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument';
+import { renderGraphvizCodeToSvgDocument2 } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument2';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { constructKnowledgeGraph } from './constructKnowledgeGraph';
 import { getDirectedGraphFromGraphElementGroup } from '../model-programs/getDirectedGraphFromGraphElementGroup';
@@ -64,6 +64,8 @@ import { getDependencyFacts } from './dependency/getDependencyFacts';
 import { getInvertedDependencyGroup } from './dependency/getInvertedDependencyGroup';
 import { getInvertedDependencyGraphElements } from './dependency/getInvertedDependencyGraphElements';
 import { renderApp } from './app/node/renderApp';
+import { constructDynamicIndexFile } from './constructDynamicIndexFile';
+import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -150,7 +152,10 @@ digikikify({
     groupGraphElements,
     getDirectedGraphFromGraphElementGroup,
     encodeDirectedGraphAsGraphvizCode,
-    renderGraphvizCodeToSvgDocument,
+    renderGraphvizCodeToSvgDocument2,
+    decodeAndRecastSvgDocument,
+
+    constructDynamicIndexFile,
 
     renderApp,
 

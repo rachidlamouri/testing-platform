@@ -35,6 +35,7 @@ export const renderApp = buildEstinant({
       ],
       {
         encoding: 'utf-8',
+        maxBuffer: 1000000000,
       },
     );
 

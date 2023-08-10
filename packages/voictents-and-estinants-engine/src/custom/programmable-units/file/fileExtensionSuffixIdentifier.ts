@@ -2,6 +2,7 @@ import { swapEntries } from '../../../utilities/swapEntries';
 
 export enum FileExtensionSuffixIdentifier {
   Bash = 'Bash',
+  Gitignore = 'Gitignore',
   Html = 'Html',
   Json = 'Json',
   Text = 'Text',
@@ -24,6 +25,7 @@ type FileExtensionSuffixByFileExtensionSuffixIdentifer = Record<
 
 const fileExtensionSuffixByFileExtensionSuffixIdentifer = {
   [FileExtensionSuffixIdentifier.Bash]: 'sh',
+  [FileExtensionSuffixIdentifier.Gitignore]: 'gitignore',
   [FileExtensionSuffixIdentifier.Html]: 'html',
   [FileExtensionSuffixIdentifier.Json]: 'json',
   [FileExtensionSuffixIdentifier.Text]: 'txt',

@@ -1,14 +1,24 @@
 import { Voque } from '../../../core/engine/voque';
 
-/**
- * Pre-formatted information to output to the file system under a specified file
- * extension
- */
-export type OutputFile = {
+export type FileCacheOutputFile = {
+  filePath?: never;
   fileName: string;
   fileExtensionSuffix: string;
   text: string;
 };
+
+type OutputFileWithFilePath = {
+  filePath: string;
+  fileName?: never;
+  fileExtensionSuffix?: never;
+  text: string;
+};
+
+/**
+ * Pre-formatted information to output to the file system under a specified file
+ * extension
+ */
+export type OutputFile = FileCacheOutputFile | OutputFileWithFilePath;
 
 export const OUTPUT_FILE_GEPP = 'output-file';
 
