@@ -226,6 +226,24 @@ export const markUnusedExports = buildEstinant({
             'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/directed-graph/directedSubgraph2.ts',
           importedIdentifierName: 'DirectedSubgraph2Instance',
         },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
+          importedIdentifierName: 'GeneratedComponent',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
+          importedIdentifierName: 'GeneratedItem',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
+          importedIdentifierName: 'GeneratedCollection',
+        },
       ];
 
     [
