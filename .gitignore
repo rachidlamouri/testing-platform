@@ -56,5 +56,3 @@ debug/test-untriggered-cology-error/*
 !debug/test-untriggered-cology-error/voictents/
 debug/test-untriggered-cology-error/voictents/*
 !debug/test-untriggered-cology-error/voictents/engine-error/
-
-packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/generated/
