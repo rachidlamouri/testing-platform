@@ -1,5 +1,9 @@
 import { buildEstinant } from '../adapter/estinant-builder/estinantBuilder';
-import { OUTPUT_FILE_GEPP, OutputFileVoque } from './output-file/outputFile';
+import {
+  FileCacheOutputFile,
+  OUTPUT_FILE_GEPP,
+  OutputFileVoque,
+} from './output-file/outputFile';
 import { SANITY_SNAPSHOT_GEPP, SanitySnapshotVoque } from './sanitySnapshot';
 import { getTextDigest } from '../../utilities/getTextDigest';
 
@@ -23,12 +27,16 @@ export const captureOutputFileDigestList = buildEstinant({
     gepp: SANITY_SNAPSHOT_GEPP,
   })
   .onPinbe((list) => {
-    const digestList = list.map<OutputFileDigest>((file) => {
-      return {
-        fileName: file.fileName,
-        digest: getTextDigest(file.text),
-      };
-    });
+    const digestList = list
+      .filter(
+        (file): file is FileCacheOutputFile => file.fileName !== undefined,
+      )
+      .map<OutputFileDigest>((file) => {
+        return {
+          fileName: file.fileName,
+          digest: getTextDigest(file.text),
+        };
+      });
 
     digestList.sort((digestA, digestB) => {
       if (digestA.fileName < digestB.fileName) {
