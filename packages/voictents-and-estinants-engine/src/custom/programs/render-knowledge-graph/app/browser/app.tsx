@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import svgPanZoom from 'svg-pan-zoom';
-import { GeneratedCollection } from './dynamicComponentTypes';
+import { SvgWrapperComponentMetadataList } from './dynamicComponentTypes';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const generatedPromise: Promise<any> = import('./generated');
@@ -16,12 +16,13 @@ export const App: React.FC = () => {
     }
   }, []);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [generated, setGenerated] = useState<GeneratedCollection | null>(null);
+  const [generated, setGenerated] =
+    useState<SvgWrapperComponentMetadataList | null>(null);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     generatedPromise.then(
-      ({ default: value }: { default: GeneratedCollection }) => {
+      ({ default: value }: { default: SvgWrapperComponentMetadataList }) => {
         setGenerated(value);
       },
     );

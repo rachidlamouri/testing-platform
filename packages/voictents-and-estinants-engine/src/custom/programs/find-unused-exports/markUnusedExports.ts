@@ -230,19 +230,19 @@ export const markUnusedExports = buildEstinant({
           importingFilePath: '',
           importedFilePath:
             'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
-          importedIdentifierName: 'GeneratedComponent',
+          importedIdentifierName: 'SvgWrapperComponent',
         },
         {
           importingFilePath: '',
           importedFilePath:
             'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
-          importedIdentifierName: 'GeneratedItem',
+          importedIdentifierName: 'SvgWrapperComponentMetadata',
         },
         {
           importingFilePath: '',
           importedFilePath:
             'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
-          importedIdentifierName: 'GeneratedCollection',
+          importedIdentifierName: 'SvgWrapperComponentMetadataList',
         },
       ];
 

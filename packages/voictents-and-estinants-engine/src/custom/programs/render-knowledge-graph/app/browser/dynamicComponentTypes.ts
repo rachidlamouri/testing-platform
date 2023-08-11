@@ -1,12 +1,12 @@
 import React from 'react';
 
-export type GeneratedComponent = React.FunctionComponent<{
+export type SvgWrapperComponent = React.FunctionComponent<{
   ref: React.ForwardedRef<SVGSVGElement>;
 }>;
 
-export type GeneratedItem = {
-  Component: GeneratedComponent;
+export type SvgWrapperComponentMetadata = {
+  Component: SvgWrapperComponent;
   label: string;
 };
 
-export type GeneratedCollection = GeneratedItem[];
+export type SvgWrapperComponentMetadataList = SvgWrapperComponentMetadata[];
