@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import svgPanZoom from 'svg-pan-zoom';
 import { useGeneratedMetadata } from './useGeneratedMetadata';
+import { LeftPanel } from './leftPanel';
 
 export const App: React.FC = () => {
   const svgReference = useCallback((svg: SVGSVGElement) => {
@@ -32,33 +33,10 @@ export const App: React.FC = () => {
         gridTemplateColumns: '400px auto',
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          borderRight: '1px solid black',
-          padding: '8px',
-          margin: '0px',
-        }}
-      >
-        {componentMetadataList.map(({ label }, index) => {
-          return (
-            <button
-              key={label}
-              style={{
-                backgroundColor: index === selectedIndex ? '5e97ff' : undefined,
-                marginBottom: '8px',
-                outline: 'none',
-              }}
-              onClick={(): void => {
-                setSelectedIndex(index);
-              }}
-            >
-              {label}
-            </button>
-          );
-        })}
-      </div>
+      <LeftPanel
+        selectedIndex={selectedIndex}
+        onIndexSelected={setSelectedIndex}
+      />
       <div>
         <Component ref={svgReference} />
       </div>
