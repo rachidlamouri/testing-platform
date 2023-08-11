@@ -1,9 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import svgPanZoom from 'svg-pan-zoom';
-import { SvgWrapperComponentMetadataList } from './dynamicComponentTypes';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const generatedPromise: Promise<any> = import('./generated');
+import { useGeneratedMetadata } from './useGeneratedMetadata';
 
 export const App: React.FC = () => {
   const svgReference = useCallback((svg: SVGSVGElement) => {
@@ -16,23 +13,14 @@ export const App: React.FC = () => {
     }
   }, []);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [generated, setGenerated] =
-    useState<SvgWrapperComponentMetadataList | null>(null);
 
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    generatedPromise.then(
-      ({ default: value }: { default: SvgWrapperComponentMetadataList }) => {
-        setGenerated(value);
-      },
-    );
-  });
+  const { componentMetadataList } = useGeneratedMetadata();
 
-  if (generated === null) {
+  if (componentMetadataList === null) {
     return null;
   }
 
-  const { Component } = generated[selectedIndex];
+  const { Component } = componentMetadataList[selectedIndex];
 
   return (
     <div
@@ -53,7 +41,7 @@ export const App: React.FC = () => {
           margin: '0px',
         }}
       >
-        {generated.map(({ label }, index) => {
+        {componentMetadataList.map(({ label }, index) => {
           return (
             <button
               key={label}
