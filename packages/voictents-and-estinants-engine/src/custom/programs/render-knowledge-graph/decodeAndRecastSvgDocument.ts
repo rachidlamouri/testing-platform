@@ -201,7 +201,18 @@ export const decodeAndRecastSvgDocument = buildEstinant({
             b.jsxIdentifier('ref'),
             b.jsxExpressionContainer(b.identifier('ref')),
           );
-          attributeList.push(refAttribute);
+
+          const widthAttribute = b.jsxAttribute(
+            b.jsxIdentifier('width'),
+            b.literal('100%'),
+          );
+
+          const heightAttribute = b.jsxAttribute(
+            b.jsxIdentifier('height'),
+            b.literal('100%'),
+          );
+
+          attributeList.push(refAttribute, widthAttribute, heightAttribute);
         }
 
         const element = b.jsxElement(

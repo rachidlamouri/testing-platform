@@ -29,15 +29,19 @@ export const App: React.FC = () => {
         width: '100%',
         height: '100%',
         overflow: 'hidden',
-        display: 'grid',
-        gridTemplateColumns: '400px auto',
+        display: 'flex',
       }}
     >
       <LeftPanel
         selectedIndex={selectedIndex}
         onIndexSelected={setSelectedIndex}
       />
-      <div>
+      <div
+        style={{
+          flexGrow: '1',
+          height: '100%',
+        }}
+      >
         <Component ref={svgReference} />
       </div>
     </div>
