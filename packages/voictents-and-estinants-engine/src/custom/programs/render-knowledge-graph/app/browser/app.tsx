@@ -1,9 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import svgPanZoom from 'svg-pan-zoom';
-import { GeneratedCollection } from './dynamicComponentTypes';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const generatedPromise: Promise<any> = import('./generated');
+import { useGeneratedMetadata } from './useGeneratedMetadata';
+import { LeftPanel } from './leftPanel';
 
 export const App: React.FC = () => {
   const svgReference = useCallback((svg: SVGSVGElement) => {
@@ -16,22 +14,14 @@ export const App: React.FC = () => {
     }
   }, []);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [generated, setGenerated] = useState<GeneratedCollection | null>(null);
 
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    generatedPromise.then(
-      ({ default: value }: { default: GeneratedCollection }) => {
-        setGenerated(value);
-      },
-    );
-  });
+  const { componentMetadataList } = useGeneratedMetadata();
 
-  if (generated === null) {
+  if (componentMetadataList === null) {
     return null;
   }
 
-  const { Component } = generated[selectedIndex];
+  const { Component } = componentMetadataList[selectedIndex];
 
   return (
     <div
@@ -39,38 +29,19 @@ export const App: React.FC = () => {
         width: '100%',
         height: '100%',
         overflow: 'hidden',
-        display: 'grid',
-        gridTemplateColumns: '400px auto',
+        display: 'flex',
       }}
     >
+      <LeftPanel
+        selectedIndex={selectedIndex}
+        onIndexSelected={setSelectedIndex}
+      />
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          borderRight: '1px solid black',
-          padding: '8px',
-          margin: '0px',
+          flexGrow: '1',
+          height: '100%',
         }}
       >
-        {generated.map(({ label }, index) => {
-          return (
-            <button
-              key={label}
-              style={{
-                backgroundColor: index === selectedIndex ? '5e97ff' : undefined,
-                marginBottom: '8px',
-                outline: 'none',
-              }}
-              onClick={(): void => {
-                setSelectedIndex(index);
-              }}
-            >
-              {label}
-            </button>
-          );
-        })}
-      </div>
-      <div>
         <Component ref={svgReference} />
       </div>
     </div>
