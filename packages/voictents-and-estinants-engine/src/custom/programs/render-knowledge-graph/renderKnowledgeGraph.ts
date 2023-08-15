@@ -66,6 +66,7 @@ import { getInvertedDependencyGraphElements } from './dependency/getInvertedDepe
 import { renderApp } from './app/node/renderApp';
 import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
+import { SVG_DOCUMENT_GEPP } from '../../programmable-units/graph-visualization/svgDocument';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -170,5 +171,6 @@ digikikify({
   programFileCache,
   serializeeVoictentGeppList: [
     // keep this as a multi-line list for easier debugging
+    SVG_DOCUMENT_GEPP,
   ],
 });
