@@ -62,9 +62,33 @@ export const decodeAndRecastSvgDocument = buildEstinant({
     type TextNode = Extract<ChildNode, { nodeType: 3 }>;
     type CommentNode = Extract<ChildNode, { nodeType: 8 }>;
 
+    const knownTagNameSet = new Set([
+      'ellipse',
+      'g',
+      'path',
+      'polygon',
+      'svg',
+      'text',
+      'title',
+    ]);
+
+    const componentWrapperByTagName: Record<string, string> = {
+      ellipse: 'EllipseWrapper',
+      g: 'GroupWrapper',
+      path: 'PathWrapper',
+      polygon: 'PolygonWrapper',
+      svg: 'SvgWrapper',
+      text: 'TextWrapper',
+    };
+
     const isElementNode = (
       childNode: ChildNode,
     ): childNode is cheerio.Element => 'tagName' in childNode;
+
+    const isKnownElementNode = (
+      childNode: ChildNode,
+    ): childNode is cheerio.Element =>
+      isElementNode(childNode) && knownTagNameSet.has(childNode.tagName);
 
     const isTextNode = (childNode: ChildNode): childNode is TextNode =>
       childNode.nodeType === 3;
@@ -74,169 +98,265 @@ export const decodeAndRecastSvgDocument = buildEstinant({
 
     type DecodedElementNode = {
       typeName: NodeTypeName.Element;
+      attributeTupleList: [name: string, value: string][];
       node: cheerio.Element;
-      pathPrefix: string;
       path: string;
       isRoot: boolean;
       id: string | null;
       tagName: string;
       hasChildren: boolean;
-      childPathPrefixList: string[];
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      children: DecodedNode[];
+      childPathList: string[];
     };
 
     type DecodedTextNode = {
       typeName: NodeTypeName.Text;
       node: TextNode;
-      pathPrefix: string;
+      path: string;
       isEmpty: boolean;
       trimmedText: string;
     };
 
     type DecodedNode = DecodedElementNode | DecodedTextNode;
 
-    type UnknownDecodedNode = {
-      pathPrefix: string;
-      nodeType: number;
+    type UnknownDecodedNode =
+      | {
+          isElement: true;
+          path: string;
+          nodeType?: never;
+          tagName: string;
+        }
+      | {
+          isElement: false;
+          path: string;
+          nodeType: number;
+          tagName?: never;
+        };
+
+    type PathedNode<TNode extends ChildNode = ChildNode> = {
+      path: string;
+      node: TNode;
     };
 
-    const unknownNodeInfoList: UnknownDecodedNode[] = [];
+    const getNextPath = (currentPath: string, index: number): string => {
+      return `${currentPath}/${index}`;
+    };
 
-    const decodeNode = (
-      pathPrefix: string,
+    const flattenNode = (
+      currentPath: string,
       node: ChildNode,
-    ): DecodedNode | null => {
-      if (isElementNode(node)) {
-        const { tagName } = node;
-        const currentPath = `${pathPrefix}/${tagName}`;
+      accumulator: PathedNode[],
+    ): void => {
+      accumulator.push({
+        path: currentPath,
+        node,
+      });
 
-        const isRoot = pathPrefix === '';
-        const id = node.attribs.id ?? null;
+      if ('childNodes' in node) {
+        node.childNodes.forEach((childNode, index) => {
+          const childPath = getNextPath(currentPath, index);
+          flattenNode(childPath, childNode, accumulator);
+        });
+      }
+    };
 
-        const pathedChildNodeList = node.childNodes.map(
-          (subchildNode, index) => {
-            const nextPathPrefix = `${currentPath}/${index}`;
-            return {
-              nextPathPrefix,
-              subchildNode,
-            };
-          },
+    const flattenNodeTree = (node: ChildNode): PathedNode[] => {
+      const accumulator: PathedNode[] = [];
+      flattenNode('', node, accumulator);
+      return accumulator;
+    };
+
+    const pathedNodeList: PathedNode[] = flattenNodeTree(svgNode);
+
+    const elementPathedNodeList = pathedNodeList.filter(
+      (pathedNode): pathedNode is PathedNode<cheerio.Element> => {
+        return isKnownElementNode(pathedNode.node);
+      },
+    );
+    const textPathedNodeList = pathedNodeList.filter(
+      (pathedNode): pathedNode is PathedNode<TextNode> => {
+        return isTextNode(pathedNode.node);
+      },
+    );
+    const unknownNodeList: UnknownDecodedNode[] = pathedNodeList
+      .filter((pathedNode) => {
+        return (
+          !isKnownElementNode(pathedNode.node) &&
+          !isTextNode(pathedNode.node) &&
+          !isCommentNode(pathedNode.node)
         );
+      })
+      .map((pathedNode) => {
+        if (isElementNode(pathedNode.node)) {
+          return {
+            isElement: true,
+            path: pathedNode.path,
+            tagName: pathedNode.node.tagName,
+          };
+        }
 
         return {
-          typeName: NodeTypeName.Element,
-          node,
-          pathPrefix,
-          path: currentPath,
-          isRoot,
-          id,
-          tagName,
-          hasChildren: node.childNodes.length > 0,
-          childPathPrefixList: pathedChildNodeList.map(
-            ({ nextPathPrefix }) => nextPathPrefix,
-          ),
-          children: pathedChildNodeList
-            .map(({ nextPathPrefix, subchildNode }) => {
-              return decodeNode(nextPathPrefix, subchildNode);
-            })
-            .filter(isNotNull),
+          isElement: false,
+          path: pathedNode.path,
+          nodeType: pathedNode.node.nodeType,
         };
-      }
+      });
 
-      if (isTextNode(node)) {
-        return {
-          typeName: NodeTypeName.Text,
-          node,
-          pathPrefix,
-          isEmpty: node.data.trim() === '',
-          trimmedText: node.data.trim(),
-        };
-      }
+    const decodeElementNode = (
+      pathedNode: PathedNode<cheerio.Element>,
+    ): DecodedElementNode => {
+      const { tagName } = pathedNode.node;
 
-      if (isCommentNode(node)) {
+      const isRoot = pathedNode.path === '';
+      const id = pathedNode.node.attribs.id ?? null;
+
+      const attributeTupleList: [string, string][] = pathedNode.node.attributes
+        .filter((attribute) => {
+          // TODO: React has different rules for prefixed attributes
+          const hasPrefix = attribute.name.includes(':');
+
+          // TODO: fix this attribute that is throwing an error
+          const isIgnored = ['xlink'].includes(attribute.name);
+
+          return !hasPrefix && !isIgnored;
+        })
+        .map((attribute) => {
+          let name: string;
+          if (attribute.name === 'class') {
+            name = 'className';
+          } else {
+            name = attribute.name;
+          }
+
+          return [_.camelCase(name), attribute.value];
+        });
+
+      return {
+        typeName: NodeTypeName.Element,
+        node: pathedNode.node,
+        attributeTupleList,
+        path: pathedNode.path,
+        isRoot,
+        id,
+        tagName,
+        hasChildren: pathedNode.node.childNodes.length > 0,
+        childPathList: pathedNode.node.childNodes.map((childNode, index) => {
+          return getNextPath(pathedNode.path, index);
+        }),
+      };
+    };
+
+    const decodeTextNode = (
+      pathedNode: PathedNode<TextNode>,
+    ): DecodedTextNode => {
+      return {
+        typeName: NodeTypeName.Text,
+        path: pathedNode.path,
+        node: pathedNode.node,
+        isEmpty: pathedNode.node.data.trim() === '',
+        trimmedText: pathedNode.node.data.trim(),
+      };
+    };
+
+    const decodedElementNodeList = elementPathedNodeList.map(decodeElementNode);
+    const decodedTextNodeList = textPathedNodeList.map(decodeTextNode);
+
+    const decodedNodeByPath = new Map(
+      [...decodedElementNodeList, ...decodedTextNodeList].map((decodedNode) => {
+        return [decodedNode.path, decodedNode] as const;
+      }),
+    );
+
+    const getDecodedNodeFromPath = (path: string): DecodedNode | null => {
+      const decodedNode = decodedNodeByPath.get(path);
+
+      return decodedNode ?? null;
+    };
+
+    const [decodedSvgNode] = decodedElementNodeList;
+    if (decodedSvgNode === undefined || decodedSvgNode.tagName !== 'svg') {
+      throw Error('Invalid or missing starting node');
+    }
+
+    const recastElementNode = (
+      decodedNode: DecodedElementNode,
+    ): n.JSXElement | null => {
+      if (decodedNode.tagName === 'title') {
         return null;
       }
 
-      unknownNodeInfoList.push({
-        pathPrefix,
-        nodeType: node.nodeType,
-      });
+      const componentOrElementName =
+        componentWrapperByTagName[decodedNode.tagName] ?? decodedNode.tagName;
 
-      return null;
-    };
+      const attributeList = decodedNode.attributeTupleList.map(
+        ([name, value]) => {
+          return b.jsxAttribute(b.jsxIdentifier(name), b.literal(value));
+        },
+      );
 
-    const decodedSvgNode = decodeNode('', svgNode);
-
-    const recastNode = (
-      node: DecodedNode,
-    ): n.JSXElement | n.JSXExpressionContainer | null => {
-      if (node.typeName === NodeTypeName.Element) {
-        if (node.tagName === 'title') {
-          return null;
-        }
-
-        const elementName = node.tagName;
-
-        const attributeList = node.node.attributes
-          .map((attribute) => {
-            let name: string;
-            if (attribute.name === 'class') {
-              name = 'className';
-            } else if (attribute.name === 'xlink') {
-              return null;
-            } else {
-              name = attribute.name;
-            }
-
-            return [_.camelCase(name), attribute.value];
-          })
-          .filter(isNotNull)
-          .map(([name, value]) => {
-            return b.jsxAttribute(b.jsxIdentifier(name), b.literal(value));
-          });
-
-        if (node.tagName === 'svg') {
-          const refAttribute = b.jsxAttribute(
-            b.jsxIdentifier('ref'),
-            b.jsxExpressionContainer(b.identifier('ref')),
-          );
-
-          const widthAttribute = b.jsxAttribute(
-            b.jsxIdentifier('width'),
-            b.literal('100%'),
-          );
-
-          const heightAttribute = b.jsxAttribute(
-            b.jsxIdentifier('height'),
-            b.literal('100%'),
-          );
-
-          attributeList.push(refAttribute, widthAttribute, heightAttribute);
-        }
-
-        const element = b.jsxElement(
-          b.jsxOpeningElement(b.jsxIdentifier(elementName), attributeList),
-          b.jsxClosingElement(b.jsxIdentifier(elementName)),
-          node.children
-            .map((childNode) => recastNode(childNode))
-            .filter(isNotNull),
+      if (decodedNode.tagName === 'svg') {
+        const refAttribute = b.jsxAttribute(
+          b.jsxIdentifier('ref'),
+          b.jsxExpressionContainer(b.identifier('ref')),
         );
 
-        return element;
+        const widthAttribute = b.jsxAttribute(
+          b.jsxIdentifier('width'),
+          b.literal('100%'),
+        );
+
+        const heightAttribute = b.jsxAttribute(
+          b.jsxIdentifier('height'),
+          b.literal('100%'),
+        );
+
+        attributeList.push(refAttribute, widthAttribute, heightAttribute);
       }
 
-      if (node.typeName === NodeTypeName.Text && node.isEmpty) {
+      const childJsxList = decodedNode.childPathList
+        .map(getDecodedNodeFromPath)
+        .filter(isNotNull)
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        .map(recastNode)
+        .filter(isNotNull);
+
+      const element = b.jsxElement(
+        b.jsxOpeningElement(
+          b.jsxIdentifier(componentOrElementName),
+          attributeList,
+        ),
+        b.jsxClosingElement(b.jsxIdentifier(componentOrElementName)),
+        childJsxList,
+      );
+
+      return element;
+    };
+
+    const recastTextNode = (
+      decodedNode: DecodedTextNode,
+    ): n.JSXExpressionContainer | null => {
+      if (decodedNode.isEmpty) {
         return null;
       }
 
       const textExpression = b.jsxExpressionContainer(
-        b.literal(node.trimmedText),
+        b.literal(decodedNode.trimmedText),
       );
+
       return textExpression;
     };
 
-    const jsxNode = decodedSvgNode !== null ? recastNode(decodedSvgNode) : null;
+    const recastNode = (
+      decodedNode: DecodedNode,
+    ): n.JSXElement | n.JSXExpressionContainer | null => {
+      switch (decodedNode.typeName) {
+        case NodeTypeName.Element:
+          return recastElementNode(decodedNode);
+        case NodeTypeName.Text:
+          return recastTextNode(decodedNode);
+      }
+    };
+
+    const jsxNode = recastNode(decodedSvgNode);
 
     if (jsxNode === null) {
       return {
@@ -263,7 +383,13 @@ export const decodeAndRecastSvgDocument = buildEstinant({
     const programCode = [
       'import React, { forwardRef } from "react"',
       'import { GeneratedComponent } from "../generatedTypes"',
-      // 'import { File } from "./providers/file"',
+      'import { EllipseWrapper } from "../wrappers/ellipseWrapper"',
+      'import { GroupWrapper } from "../wrappers/groupWrapper"',
+      'import { PathWrapper } from "../wrappers/pathWrapper"',
+      'import { PolygonWrapper } from "../wrappers/polygonWrapper"',
+      'import { SvgWrapper } from "../wrappers/svgWrapper"',
+      'import { TextWrapper } from "../wrappers/textWrapper"',
+      '',
       `export const Main: GeneratedComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
         recast.print(jsxNode).code
       })})`,
@@ -275,22 +401,26 @@ export const decodeAndRecastSvgDocument = buildEstinant({
     };
 
     return {
-      [PROGRAM_ERROR_GEPP]: unknownNodeInfoList.map(
-        ({ pathPrefix, nodeType }) => {
-          return {
-            name: 'unknown-svg-document-node',
-            error: new Error(
-              `HTML node type "${nodeType}" is not handled for node path: ${svgDocument.zorn}${pathPrefix}`,
-            ),
-            reporterLocator,
-            sourceLocator: {
-              typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-              filePath: '',
-            },
-            context: null,
-          };
-        },
-      ),
+      [PROGRAM_ERROR_GEPP]: unknownNodeList.map((unknownNode) => {
+        const error = unknownNode.isElement
+          ? new Error(
+              `Unhandled element with tagname "${unknownNode.tagName}" for node path: ${svgDocument.zorn}${unknownNode.path}`,
+            )
+          : new Error(
+              `HTML node type "${unknownNode.nodeType}" is not handled for node path: ${svgDocument.zorn}${unknownNode.path}`,
+            );
+
+        return {
+          name: 'unknown-svg-document-node',
+          error,
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
+            filePath: '',
+          },
+          context: null,
+        };
+      }),
       [OUTPUT_FILE_GEPP]: [outputFile],
     };
   })

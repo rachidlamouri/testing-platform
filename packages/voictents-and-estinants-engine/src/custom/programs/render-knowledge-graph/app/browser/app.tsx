@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import svgPanZoom from 'svg-pan-zoom';
 import { useGeneratedMetadata } from './useGeneratedMetadata';
 import { LeftPanel } from './leftPanel';
+import { PresentationContext } from './presentationContext';
 
 export const App: React.FC = () => {
   const svgReference = useCallback((svg: SVGSVGElement) => {
@@ -42,7 +43,10 @@ export const App: React.FC = () => {
           height: '100%',
         }}
       >
-        <Component ref={svgReference} />
+        {/* TODO: move provider responsibility to knowledge graph concept components */}
+        <PresentationContext.Provider value={{}}>
+          <Component ref={svgReference} />
+        </PresentationContext.Provider>
       </div>
     </div>
   );
