@@ -382,7 +382,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
     const filePath = `packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/generated/${svgDocument.zorn}.tsx`;
     const programCode = [
       'import React, { forwardRef } from "react"',
-      'import { GeneratedComponent } from "../generatedTypes"',
+      'import { SvgWrapperComponent } from "../dynamicComponentTypes"',
       'import { EllipseWrapper } from "../wrappers/ellipseWrapper"',
       'import { GroupWrapper } from "../wrappers/groupWrapper"',
       'import { PathWrapper } from "../wrappers/pathWrapper"',
@@ -390,7 +390,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       'import { SvgWrapper } from "../wrappers/svgWrapper"',
       'import { TextWrapper } from "../wrappers/textWrapper"',
       '',
-      `export const Main: GeneratedComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
+      `export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
         recast.print(jsxNode).code
       })})`,
     ].join('\n');
