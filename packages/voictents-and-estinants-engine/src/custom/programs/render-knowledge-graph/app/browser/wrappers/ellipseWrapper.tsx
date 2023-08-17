@@ -8,11 +8,11 @@ export type EllipseWrapperProps = React.PropsWithChildren<
 export const EllipseWrapper: FunctionComponent<EllipseWrapperProps> = (
   props,
 ) => {
-  const presentationContext = usePresentationContext();
+  const { style } = usePresentationContext();
 
   const combinedProps = {
     ...props,
-    ...presentationContext,
+    ...style,
   };
 
   return <ellipse {...combinedProps} />;

@@ -6,11 +6,11 @@ export type TextWrapperProps = React.PropsWithChildren<
 >;
 
 export const TextWrapper: FunctionComponent<TextWrapperProps> = (props) => {
-  const presentationContext = usePresentationContext();
+  const { style } = usePresentationContext();
 
   const combinedProps = {
     ...props,
-    ...presentationContext,
+    ...style,
   };
 
   return <text {...combinedProps} />;

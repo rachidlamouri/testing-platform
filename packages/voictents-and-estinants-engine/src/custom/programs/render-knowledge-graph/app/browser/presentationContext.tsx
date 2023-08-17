@@ -1,9 +1,11 @@
 import { createContext, useContext } from 'react';
 
 export type PresentationCtx = {
-  fill?: string;
-  stroke?: string;
-};
+  style?: {
+    // TODO: use or remove these
+    fill?: string;
+    stroke?: string;
+  };
 
 export const PresentationContext = createContext<PresentationCtx>({});
 

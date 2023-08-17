@@ -8,11 +8,11 @@ export type PolygonWrapperProps = React.PropsWithChildren<
 export const PolygonWrapper: FunctionComponent<PolygonWrapperProps> = (
   props,
 ) => {
-  const presentationContext = usePresentationContext();
+  const { style } = usePresentationContext();
 
   const combinedProps = {
     ...props,
-    ...presentationContext,
+    ...style,
   };
 
   return <polygon {...combinedProps} />;
