@@ -19,6 +19,7 @@ import {
   OutputFile,
   OutputFileVoque,
 } from '../../programmable-units/output-file/outputFile';
+import { FILE_FACT_GEPP, FileFact, FileFactVoque } from './file/fileFact';
 
 const ESTINANT_NAME = 'decodeAndRecastSvgDocument' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -39,13 +40,22 @@ export const decodeAndRecastSvgDocument = buildEstinant({
   .fromHubblepup2<SvgDocumentVoque>({
     gepp: SVG_DOCUMENT_GEPP,
   })
+  .andFromVoictent2<FileFactVoque>({
+    gepp: FILE_FACT_GEPP,
+  })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
   })
-  .onPinbe((svgDocument) => {
+  .onPinbe((svgDocument, fileFactList) => {
+    const fileFactByNodeId = new Map(
+      fileFactList.map((fileFact) => {
+        return [fileFact.nodeId, fileFact] as const;
+      }),
+    );
+
     const $ = cheerio.load(svgDocument.grition);
 
     const svgNode = $('svg')[0];
@@ -277,6 +287,39 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       throw Error('Invalid or missing starting node');
     }
 
+    const recastFileFact = (
+      fileFact: FileFact,
+      childElement: n.JSXElement,
+    ): n.JSXElement => {
+      const element = b.jsxElement(
+        b.jsxOpeningElement(b.jsxIdentifier('FileFact'), [
+          b.jsxAttribute(b.jsxIdentifier('factId'), b.literal(fileFact.nodeId)),
+          b.jsxAttribute(
+            b.jsxIdentifier('fileName'),
+            b.literal(fileFact.file.onDiskFileName.camelCase),
+          ),
+        ]),
+        b.jsxClosingElement(b.jsxIdentifier('FileFact')),
+        [childElement],
+      );
+
+      return element;
+    };
+
+    const recastFact = (
+      id: string,
+      childElement: n.JSXElement,
+    ): n.JSXElement | null => {
+      const fileFact = fileFactByNodeId.get(id);
+
+      if (fileFact !== undefined) {
+        return recastFileFact(fileFact, childElement);
+      }
+
+      // TODO: throw an error here once all fact types are handled
+      return null;
+    };
+
     const recastElementNode = (
       decodedNode: DecodedElementNode,
     ): n.JSXElement | null => {
@@ -328,7 +371,12 @@ export const decodeAndRecastSvgDocument = buildEstinant({
         childJsxList,
       );
 
-      return element;
+      const parentElement =
+        decodedNode.id !== null
+          ? recastFact(decodedNode.id, element) ?? element
+          : element;
+
+      return parentElement;
     };
 
     const recastTextNode = (
@@ -389,6 +437,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       'import { PolygonWrapper } from "../wrappers/polygonWrapper"',
       'import { SvgWrapper } from "../wrappers/svgWrapper"',
       'import { TextWrapper } from "../wrappers/textWrapper"',
+      'import { FileFact } from "../providers/fileFact"',
       '',
       `export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
         recast.print(jsxNode).code
