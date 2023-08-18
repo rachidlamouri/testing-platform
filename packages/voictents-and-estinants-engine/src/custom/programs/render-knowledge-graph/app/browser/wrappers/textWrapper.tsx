@@ -1,4 +1,4 @@
-import React, { SVGProps, FunctionComponent } from 'react';
+import React, { SVGProps, FunctionComponent, useState } from 'react';
 import { usePresentationContext } from '../presentationContext';
 
 export type TextWrapperProps = React.PropsWithChildren<
@@ -6,11 +6,23 @@ export type TextWrapperProps = React.PropsWithChildren<
 >;
 
 export const TextWrapper: FunctionComponent<TextWrapperProps> = (props) => {
-  const presentationContext = usePresentationContext();
+  const { style, onTextClicked, hasInteractiveText } = usePresentationContext();
+  const [isHovering, setIsHovering] = useState(false);
 
-  const combinedProps = {
+  const combinedProps: TextWrapperProps = {
     ...props,
-    ...presentationContext,
+    ...style,
+    cursor: hasInteractiveText ? 'pointer' : 'inherit',
+    textDecoration: isHovering && hasInteractiveText ? 'underline' : undefined,
+    onClick: (): void => {
+      onTextClicked();
+    },
+    onMouseEnter: () => {
+      setIsHovering(true);
+    },
+    onMouseLeave: () => {
+      setIsHovering(false);
+    },
   };
 
   return <text {...combinedProps} />;

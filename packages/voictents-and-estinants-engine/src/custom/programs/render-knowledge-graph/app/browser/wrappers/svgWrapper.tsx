@@ -5,11 +5,11 @@ export type SvgWrapperProps = React.PropsWithChildren<SVGProps<SVGSVGElement>>;
 
 export const SvgWrapper: FunctionComponent<SvgWrapperProps> =
   forwardRef<SVGSVGElement>((props, ref) => {
-    const presentationContext = usePresentationContext();
+    const { style } = usePresentationContext();
 
     const combinedProps = {
       ...props,
-      ...presentationContext,
+      ...style,
     };
 
     return <svg ref={ref} {...combinedProps} />;
