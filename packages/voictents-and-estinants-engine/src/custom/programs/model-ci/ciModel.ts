@@ -199,6 +199,7 @@ export const CI_MODEL: CiModel = {
           programFilePath:
             'packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts',
           prefaceDescription: 'WIP',
+          skip: true,
         },
         {
           programName: 'assemble-scaffolded-file',

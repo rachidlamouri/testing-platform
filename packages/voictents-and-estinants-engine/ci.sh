@@ -157,12 +157,12 @@ npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/render-k
 bash checkUncommittedDebug.sh
 printf "\n"
 
-## render-type-script-file-relationships
-echo "# render-type-script-file-relationships"
-echo "WIP"
-npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts
-bash checkUncommittedDebug.sh
-printf "\n"
+# ## render-type-script-file-relationships
+# echo "# render-type-script-file-relationships"
+# echo "WIP"
+# npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts
+# bash checkUncommittedDebug.sh
+# printf "\n"
 
 # ## assemble-scaffolded-file
 # echo "# assemble-scaffolded-file"
