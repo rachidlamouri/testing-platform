@@ -10,3 +10,17 @@ export type SvgWrapperComponentMetadata = {
 };
 
 export type SvgWrapperComponentMetadataList = SvgWrapperComponentMetadata[];
+
+export type MetadataField = {
+  label: string;
+  value: string;
+};
+
+export type Metadata = {
+  id: string;
+  title: string;
+  fileSystemPath: string;
+  fieldList: MetadataField[];
+};
+
+export type MetadataById = Record<string, Metadata>;

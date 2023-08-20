@@ -244,6 +244,18 @@ export const markUnusedExports = buildEstinant({
             'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
           importedIdentifierName: 'SvgWrapperComponentMetadataList',
         },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
+          importedIdentifierName: 'MetadataField',
+        },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
+          importedIdentifierName: 'MetadataById',
+        },
       ];
 
     [

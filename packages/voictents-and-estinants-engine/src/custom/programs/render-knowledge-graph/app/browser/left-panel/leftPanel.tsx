@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useGeneratedMetadata } from './useGeneratedMetadata';
+import { useGeneratedMetadata } from '../generatedMetadataContext';
 import { LeftPanelEdge } from './leftPanelEdge';
+import { Navigation } from './navigation';
+import { MetadataDisplay } from './metadataDisplay';
 
 export type LeftPanelProps = {
   selectedIndex: number;
@@ -26,36 +28,22 @@ export const LeftPanel: React.FunctionComponent<LeftPanelProps> = ({
       style={{
         height: '100%',
         display: 'flex',
+        flexDirection: 'row',
       }}
     >
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          padding: '8px',
-          margin: '0px',
-          height: '100%',
-          width: panelWidth,
         }}
       >
-        {componentMetadataList.map(({ label }, index) => {
-          return (
-            <button
-              key={label}
-              style={{
-                backgroundColor: index === selectedIndex ? '5e97ff' : undefined,
-                marginBottom: '8px',
-                outline: 'none',
-                cursor: 'pointer',
-              }}
-              onClick={(): void => {
-                onIndexSelected(index);
-              }}
-            >
-              {label}
-            </button>
-          );
-        })}
+        <Navigation
+          selectedIndex={selectedIndex}
+          onIndexSelected={onIndexSelected}
+          panelWidth={panelWidth}
+        />
+        <hr style={{ width: '95%' }} />
+        <MetadataDisplay panelWidth={panelWidth} />
       </div>
       <LeftPanelEdge
         onSizeChange={(delta): void => {
