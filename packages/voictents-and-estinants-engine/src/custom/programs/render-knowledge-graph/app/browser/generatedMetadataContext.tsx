@@ -1,4 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  PropsWithChildren,
+  FunctionComponent,
+  useContext,
+} from 'react';
 import {
   MetadataById,
   SvgWrapperComponentMetadataList,
@@ -19,7 +26,14 @@ type GeneratedMetadata = {
   metadataById: MetadataById;
 };
 
-export const useGeneratedMetadata = (): GeneratedMetadata => {
+export const GeneratedMetadataContext = createContext<GeneratedMetadata>({
+  componentMetadataList: null,
+  metadataById: null,
+});
+
+export const GeneratedMetadataProvider: FunctionComponent<
+  PropsWithChildren
+> = ({ children }) => {
   const [componentMetadataList, setComponentMetadataList] =
     useState<SvgWrapperComponentMetadataList | null>(null);
   const [metadataById, setMetadataById] = useState<MetadataById>({});
@@ -36,8 +50,18 @@ export const useGeneratedMetadata = (): GeneratedMetadata => {
     });
   });
 
-  return {
-    componentMetadataList,
-    metadataById,
-  };
+  return (
+    <GeneratedMetadataContext.Provider
+      value={{
+        componentMetadataList,
+        metadataById,
+      }}
+    >
+      {children}
+    </GeneratedMetadataContext.Provider>
+  );
+};
+
+export const useGeneratedMetadata = (): GeneratedMetadata => {
+  return useContext(GeneratedMetadataContext);
 };
