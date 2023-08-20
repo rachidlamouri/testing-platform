@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import svgPanZoom from 'svg-pan-zoom';
 import { useGeneratedMetadata } from './useGeneratedMetadata';
-import { LeftPanel } from './leftPanel';
+import { LeftPanel } from './left-panel/leftPanel';
 import { SelectedIdProvider } from './selectedIdContext';
 
 export const App: React.FC = () => {

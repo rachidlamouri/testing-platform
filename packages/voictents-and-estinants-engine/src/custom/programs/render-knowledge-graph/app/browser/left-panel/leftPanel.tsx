@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useGeneratedMetadata } from './useGeneratedMetadata';
+import { useGeneratedMetadata } from '../useGeneratedMetadata';
 import { LeftPanelEdge } from './leftPanelEdge';
-import { useSelectedIdContext } from './selectedIdContext';
+import { useSelectedIdContext } from '../selectedIdContext';
 
 export type LeftPanelProps = {
   selectedIndex: number;
