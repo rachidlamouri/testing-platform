@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import svgPanZoom from 'svg-pan-zoom';
 import { useGeneratedMetadata } from './useGeneratedMetadata';
 import { LeftPanel } from './leftPanel';
+import { SelectedIdProvider } from './selectedIdContext';
 
 export const App: React.FC = () => {
   const svgReference = useCallback((svg: SVGSVGElement) => {
@@ -17,6 +18,10 @@ export const App: React.FC = () => {
 
   const { componentMetadataList } = useGeneratedMetadata();
 
+  useEffect(() => {
+    document.body.style.fontFamily = 'Helvetica';
+  });
+
   if (componentMetadataList === null) {
     return null;
   }
@@ -24,27 +29,29 @@ export const App: React.FC = () => {
   const { Component } = componentMetadataList[selectedIndex];
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-        overflow: 'hidden',
-        display: 'flex',
-      }}
-    >
-      <LeftPanel
-        selectedIndex={selectedIndex}
-        onIndexSelected={setSelectedIndex}
-      />
+    <SelectedIdProvider>
       <div
         style={{
-          flexGrow: '1',
+          width: '100%',
           height: '100%',
+          overflow: 'hidden',
+          display: 'flex',
         }}
       >
-        {/* TODO: move provider responsibility to knowledge graph concept components */}
-        <Component ref={svgReference} />
+        <LeftPanel
+          selectedIndex={selectedIndex}
+          onIndexSelected={setSelectedIndex}
+        />
+        <div
+          style={{
+            flexGrow: '1',
+            height: '100%',
+          }}
+        >
+          {/* TODO: move provider responsibility to knowledge graph concept components */}
+          <Component ref={svgReference} />
+        </div>
       </div>
-    </div>
+    </SelectedIdProvider>
   );
 };
