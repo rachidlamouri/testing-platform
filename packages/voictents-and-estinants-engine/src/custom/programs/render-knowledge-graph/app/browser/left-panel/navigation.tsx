@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { useGeneratedMetadata } from '../useGeneratedMetadata';
+import { useGeneratedMetadata } from '../generatedMetadataContext';
 
 export type NavigationProps = {
   panelWidth: number;

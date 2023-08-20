@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useGeneratedMetadata } from '../useGeneratedMetadata';
+import { useGeneratedMetadata } from '../generatedMetadataContext';
 import { LeftPanelEdge } from './leftPanelEdge';
 import { Navigation } from './navigation';
 import { MetadataDisplay } from './metadataDisplay';

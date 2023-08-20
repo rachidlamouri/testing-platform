@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import svgPanZoom from 'svg-pan-zoom';
-import { useGeneratedMetadata } from './useGeneratedMetadata';
+import { useGeneratedMetadata } from './generatedMetadataContext';
 import { LeftPanel } from './left-panel/leftPanel';
 import { SelectedIdProvider } from './selectedIdContext';
 
