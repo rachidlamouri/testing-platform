@@ -66,6 +66,7 @@ import { getInvertedDependencyGraphElements } from './dependency/getInvertedDepe
 import { renderApp } from './app/node/renderApp';
 import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
+import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -155,6 +156,7 @@ digikikify({
     renderGraphvizCodeToSvgDocument2,
     decodeAndRecastSvgDocument,
 
+    constructDynamicMetadataFile,
     constructDynamicIndexFile,
 
     renderApp,
