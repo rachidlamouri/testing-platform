@@ -9,19 +9,15 @@ export type FileFactProps = PropsWithChildren<{
 
 export const FileFact: FunctionComponent<FileFactProps> = ({
   factId,
-  fileName,
   children,
 }) => {
-  const { onSelectId } = useSelectedIdContext();
+  const { onToggleOrSelectId } = useSelectedIdContext();
 
   return (
     <PresentationContext.Provider
       value={{
         onTextClicked: (): void => {
-          // eslint-disable-next-line no-console
-          console.log(`Text Clicked for ${factId} ${fileName}`);
-
-          onSelectId(factId);
+          onToggleOrSelectId(factId);
         },
         hasInteractiveText: true,
       }}

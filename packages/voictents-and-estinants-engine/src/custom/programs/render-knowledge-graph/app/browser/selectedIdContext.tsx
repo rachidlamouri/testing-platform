@@ -8,12 +8,14 @@ import React, {
 
 type SelectedIdCtx = {
   selectedId: string | null;
+  onToggleOrSelectId: (id: string) => void;
   onSelectId: (id: string) => void;
   onClearId: () => void;
 };
 
 export const SelectedIdContext = createContext<SelectedIdCtx>({
   selectedId: null,
+  onToggleOrSelectId: () => {},
   onSelectId: () => {},
   onClearId: () => {},
 });
@@ -26,6 +28,13 @@ export const SelectedIdProvider: FunctionComponent<PropsWithChildren> = ({
     <SelectedIdContext.Provider
       value={{
         selectedId,
+        onToggleOrSelectId: (id): void => {
+          if (id === selectedId) {
+            setSelectedId(null);
+          } else {
+            setSelectedId(id);
+          }
+        },
         onSelectId: (id): void => {
           setSelectedId(id);
         },
