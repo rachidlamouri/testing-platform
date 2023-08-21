@@ -11,7 +11,9 @@ export const FileFact: FunctionComponent<FileFactProps> = ({
   factId,
   children,
 }) => {
-  const { onToggleOrSelectId } = useSelectedIdContext();
+  const { onToggleOrSelectId, selectedId } = useSelectedIdContext();
+
+  const isSelected = selectedId === factId;
 
   return (
     <PresentationContext.Provider
@@ -20,6 +22,13 @@ export const FileFact: FunctionComponent<FileFactProps> = ({
           onToggleOrSelectId(factId);
         },
         hasInteractiveText: true,
+        styleByElement: {
+          path: {
+            stroke: isSelected ? 'black' : 'gray',
+            fill: isSelected ? 'green' : 'none',
+            strokeWidth: '1',
+          },
+        },
       }}
     >
       {children}
