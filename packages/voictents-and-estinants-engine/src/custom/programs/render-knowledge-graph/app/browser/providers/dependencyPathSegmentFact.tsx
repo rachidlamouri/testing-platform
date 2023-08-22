@@ -14,11 +14,12 @@ export const DependencyPathSegmentFact: FunctionComponent<
   DependencyPathSegmentFactProps
 > = ({ children, pathHeadId, pathTailIdSet }) => {
   const { selectedId } = useSelectedIdContext();
+  const hasSelectedTail = pathTailIdSet.has(selectedId);
 
   let color: string;
   if (selectedId === pathHeadId) {
     color = 'blue';
-  } else if (pathTailIdSet.has(selectedId)) {
+  } else if (hasSelectedTail) {
     color = 'purple';
   } else {
     color = 'black';

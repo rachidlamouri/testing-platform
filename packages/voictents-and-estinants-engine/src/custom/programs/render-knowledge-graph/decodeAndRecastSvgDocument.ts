@@ -25,6 +25,10 @@ import {
   InvertedDependencyGroupVoque,
 } from './dependency/invertedDependencyGroup';
 import { DependencyPathSegmentFact } from './dependency/dependencyPathSegmentFact';
+import {
+  DEPENDENCY_FACT_GEPP,
+  DependencyFactVoque,
+} from './dependency/dependencyFact';
 
 const ESTINANT_NAME = 'decodeAndRecastSvgDocument' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -51,6 +55,9 @@ export const decodeAndRecastSvgDocument = buildEstinant({
   .andFromVoictent2<InvertedDependencyGroupVoque>({
     gepp: INVERTED_DEPENDENCY_GROUP_GEPP,
   })
+  .andFromVoictent2<DependencyFactVoque>({
+    gepp: DEPENDENCY_FACT_GEPP,
+  })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
@@ -62,8 +69,24 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       svgDocument,
       fileFactList,
       invertedDependencyGroupList,
-      // TODO add more inputs
+      dependencyFactList,
     ) => {
+      const importedNodeIdListByImportingNodeId = new Map<string, string[]>();
+      dependencyFactList.forEach((dependencyFact) => {
+        const key = dependencyFact.importingFact.nodeId;
+        const group = importedNodeIdListByImportingNodeId.get(key) ?? [];
+        group.push(dependencyFact.importedFact.nodeId);
+        importedNodeIdListByImportingNodeId.set(key, group);
+      });
+
+      const importingNodeIdListByImportedNodeId = new Map<string, string[]>();
+      dependencyFactList.forEach((dependencyFact) => {
+        const key = dependencyFact.importedFact.nodeId;
+        const group = importingNodeIdListByImportedNodeId.get(key) ?? [];
+        group.push(dependencyFact.importingFact.nodeId);
+        importingNodeIdListByImportedNodeId.set(key, group);
+      });
+
       const fileFactByNodeId = new Map(
         fileFactList.map((fileFact) => {
           return [fileFact.nodeId, fileFact] as const;
@@ -319,6 +342,11 @@ export const decodeAndRecastSvgDocument = buildEstinant({
         fileFact: FileFact,
         childElement: n.JSXElement,
       ): n.JSXElement => {
+        const importedNodeIdList =
+          importedNodeIdListByImportingNodeId.get(fileFact.nodeId) ?? [];
+        const importingNodeIdList =
+          importingNodeIdListByImportedNodeId.get(fileFact.nodeId) ?? [];
+
         const element = b.jsxElement(
           b.jsxOpeningElement(b.jsxIdentifier('FileFact'), [
             b.jsxAttribute(
@@ -328,6 +356,26 @@ export const decodeAndRecastSvgDocument = buildEstinant({
             b.jsxAttribute(
               b.jsxIdentifier('fileName'),
               b.literal(fileFact.file.onDiskFileName.camelCase),
+            ),
+            b.jsxAttribute(
+              b.jsxIdentifier('importedNodeIdSet'),
+              b.jsxExpressionContainer(
+                b.newExpression(b.identifier('Set'), [
+                  b.arrayExpression(
+                    importedNodeIdList.map((nodeId) => b.literal(nodeId)),
+                  ),
+                ]),
+              ),
+            ),
+            b.jsxAttribute(
+              b.jsxIdentifier('importingNodeIdSet'),
+              b.jsxExpressionContainer(
+                b.newExpression(b.identifier('Set'), [
+                  b.arrayExpression(
+                    importingNodeIdList.map((nodeId) => b.literal(nodeId)),
+                  ),
+                ]),
+              ),
             ),
           ]),
           b.jsxClosingElement(b.jsxIdentifier('FileFact')),
