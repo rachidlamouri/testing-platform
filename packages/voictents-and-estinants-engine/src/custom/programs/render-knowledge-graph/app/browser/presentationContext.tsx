@@ -14,6 +14,7 @@ export type ProvidedPresentationContext = {
   };
   styleByElement?: {
     path?: ElementStyle;
+    polygon?: ElementStyle;
   };
   onTextClicked: () => void;
   hasInteractiveText: boolean;
@@ -28,6 +29,7 @@ export type ConsumedPresentationContext = {
   style: ElementStyle;
   styleByElement: {
     path: ElementStyle;
+    polygon: ElementStyle;
   };
   onTextClicked: () => void;
   hasInteractiveText: boolean;
@@ -36,7 +38,7 @@ export type ConsumedPresentationContext = {
 export const usePresentationContext = (): ConsumedPresentationContext => {
   const {
     style = {},
-    styleByElement: { path: pathStyle = {} } = {},
+    styleByElement: { path: pathStyle = {}, polygon: polygonStyle = {} } = {},
     ...nonObjectProperties
   } = useContext(PresentationContext);
 
@@ -44,6 +46,7 @@ export const usePresentationContext = (): ConsumedPresentationContext => {
     style,
     styleByElement: {
       path: pathStyle,
+      polygon: polygonStyle,
     },
     ...nonObjectProperties,
   };

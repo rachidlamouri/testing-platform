@@ -20,6 +20,11 @@ import {
   OutputFileVoque,
 } from '../../programmable-units/output-file/outputFile';
 import { FILE_FACT_GEPP, FileFact, FileFactVoque } from './file/fileFact';
+import {
+  INVERTED_DEPENDENCY_GROUP_GEPP,
+  InvertedDependencyGroupVoque,
+} from './dependency/invertedDependencyGroup';
+import { DependencyPathSegmentFact } from './dependency/dependencyPathSegmentFact';
 
 const ESTINANT_NAME = 'decodeAndRecastSvgDocument' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -43,17 +48,30 @@ export const decodeAndRecastSvgDocument = buildEstinant({
   .andFromVoictent2<FileFactVoque>({
     gepp: FILE_FACT_GEPP,
   })
+  .andFromVoictent2<InvertedDependencyGroupVoque>({
+    gepp: INVERTED_DEPENDENCY_GROUP_GEPP,
+  })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
   })
-  .onPinbe((svgDocument, fileFactList) => {
+  .onPinbe((svgDocument, fileFactList, invertedDependencyGroupList) => {
     const fileFactByNodeId = new Map(
       fileFactList.map((fileFact) => {
         return [fileFact.nodeId, fileFact] as const;
       }),
+    );
+
+    const dependencyPathSegmentFactById = new Map(
+      invertedDependencyGroupList
+        .flatMap((group) => {
+          return group.pathFactLists.pathSegmentList;
+        })
+        .map((segment) => {
+          return [`${segment.tailId}:${segment.headId}`, segment];
+        }),
     );
 
     const $ = cheerio.load(svgDocument.grition);
@@ -306,14 +324,41 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       return element;
     };
 
+    const recastDependencyPathSegmentFact = (
+      id: string,
+      fact: DependencyPathSegmentFact,
+      childElement: n.JSXElement,
+    ): n.JSXElement => {
+      const element = b.jsxElement(
+        b.jsxOpeningElement(b.jsxIdentifier('DependencyPathSegmentFact'), [
+          b.jsxAttribute(b.jsxIdentifier('factId'), b.literal(id)),
+          b.jsxAttribute(b.jsxIdentifier('headId'), b.literal(fact.headId)),
+          b.jsxAttribute(b.jsxIdentifier('tailId'), b.literal(fact.tailId)),
+        ]),
+        b.jsxClosingElement(b.jsxIdentifier('DependencyPathSegmentFact')),
+        [childElement],
+      );
+
+      return element;
+    };
+
     const recastFact = (
       id: string,
       childElement: n.JSXElement,
     ): n.JSXElement | null => {
       const fileFact = fileFactByNodeId.get(id);
+      const dependencyPathSegmentFact = dependencyPathSegmentFactById.get(id);
 
       if (fileFact !== undefined) {
         return recastFileFact(fileFact, childElement);
+      }
+
+      if (dependencyPathSegmentFact !== undefined) {
+        return recastDependencyPathSegmentFact(
+          id,
+          dependencyPathSegmentFact,
+          childElement,
+        );
       }
 
       // TODO: throw an error here once all fact types are handled
@@ -438,6 +483,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       'import { SvgWrapper } from "../wrappers/svgWrapper"',
       'import { TextWrapper } from "../wrappers/textWrapper"',
       'import { FileFact } from "../providers/fileFact"',
+      'import { DependencyPathSegmentFact } from "../providers/dependencyPathSegmentFact"',
       '',
       `export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
         recast.print(jsxNode).code
