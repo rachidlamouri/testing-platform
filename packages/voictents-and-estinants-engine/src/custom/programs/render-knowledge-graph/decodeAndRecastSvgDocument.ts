@@ -334,6 +334,20 @@ export const decodeAndRecastSvgDocument = buildEstinant({
           b.jsxAttribute(b.jsxIdentifier('factId'), b.literal(id)),
           b.jsxAttribute(b.jsxIdentifier('headId'), b.literal(fact.headId)),
           b.jsxAttribute(b.jsxIdentifier('tailId'), b.literal(fact.tailId)),
+          b.jsxAttribute(
+            b.jsxIdentifier('pathHeadId'),
+            b.literal(fact.pathHeadId),
+          ),
+          b.jsxAttribute(
+            b.jsxIdentifier('pathTailIdSet'),
+            b.jsxExpressionContainer(
+              b.newExpression(b.identifier('Set'), [
+                b.arrayExpression(
+                  fact.pathTailIdSet.map((tailId) => b.literal(tailId)),
+                ),
+              ]),
+            ),
+          ),
         ]),
         b.jsxClosingElement(b.jsxIdentifier('DependencyPathSegmentFact')),
         [childElement],

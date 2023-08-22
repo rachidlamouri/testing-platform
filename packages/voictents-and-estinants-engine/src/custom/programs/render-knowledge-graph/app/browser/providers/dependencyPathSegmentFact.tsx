@@ -6,17 +6,19 @@ export type DependencyPathSegmentFactProps = PropsWithChildren<{
   factId: string;
   headId: string;
   tailId: string;
+  pathHeadId: string;
+  pathTailIdSet: Set<string>;
 }>;
 
 export const DependencyPathSegmentFact: FunctionComponent<
   DependencyPathSegmentFactProps
-> = ({ children, headId, tailId }) => {
+> = ({ children, pathHeadId, pathTailIdSet }) => {
   const { selectedId } = useSelectedIdContext();
 
   let color: string;
-  if (selectedId === headId) {
+  if (selectedId === pathHeadId) {
     color = 'blue';
-  } else if (selectedId === tailId) {
+  } else if (pathTailIdSet.has(selectedId)) {
     color = 'purple';
   } else {
     color = 'black';

@@ -8,6 +8,8 @@ type BaseDependencyPathSegmentFact = {
   parentZorn: string;
   tailId: string;
   headId: string;
+  pathHeadId: string;
+  pathTailIdSet: string[];
 };
 
 type DependencyPathSegmentFactPrototype = {

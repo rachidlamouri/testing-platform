@@ -110,6 +110,7 @@ export const { InvertedDependencyGroupInstance } =
         })
         .map((importingFact) => {
           return {
+            importingFact,
             importingPathPartList: importingFact.file.directoryPath.split(
               posix.sep,
             ),
@@ -124,22 +125,25 @@ export const { InvertedDependencyGroupInstance } =
       }
 
       const importingPathPartListWithCommonPrefixPathPartListList =
-        importingPathPartListList.map(({ importingPathPartList }) => {
-          const commonPrefixPathPartList: string[] = [];
-          let index = 0;
-          while (
-            index < importedPathPartList.length &&
-            importedPathPartList[index] === importingPathPartList[index]
-          ) {
-            commonPrefixPathPartList.push(importedPathPartList[index]);
+        importingPathPartListList.map(
+          ({ importingFact, importingPathPartList }) => {
+            const commonPrefixPathPartList: string[] = [];
+            let index = 0;
+            while (
+              index < importedPathPartList.length &&
+              importedPathPartList[index] === importingPathPartList[index]
+            ) {
+              commonPrefixPathPartList.push(importedPathPartList[index]);
 
-            index += 1;
-          }
-          return {
-            importingPathPartList,
-            commonPrefixPathPartList,
-          };
-        });
+              index += 1;
+            }
+            return {
+              importingFact,
+              importingPathPartList,
+              commonPrefixPathPartList,
+            };
+          },
+        );
 
       const pathFromCommonPrefixToImportedList =
         importingPathPartListWithCommonPrefixPathPartListList.map(
@@ -167,7 +171,11 @@ export const { InvertedDependencyGroupInstance } =
 
       const pathFromImportingToCommonPrefixList =
         importingPathPartListWithCommonPrefixPathPartListList.map(
-          ({ importingPathPartList, commonPrefixPathPartList }) => {
+          ({
+            importingFact,
+            importingPathPartList,
+            commonPrefixPathPartList,
+          }) => {
             let index = commonPrefixPathPartList.length;
             let currentPath: string = posix.join(...commonPrefixPathPartList);
             const visitedDirectoryPathList: string[] = [currentPath];
@@ -186,6 +194,7 @@ export const { InvertedDependencyGroupInstance } =
             visitedDirectoryPathList.reverse();
 
             return {
+              importingFact,
               visitedDirectoryPathList,
               visitedDirectoryPathSet: new Set(visitedDirectoryPathList),
             };
@@ -230,6 +239,8 @@ export const { InvertedDependencyGroupInstance } =
             headId: getDirectoryNodeId(
               importingFact.directoryFact.directory.directoryPath,
             ),
+            pathHeadId: group.importedFact.nodeId,
+            pathTailIdSet: [importingFact.nodeId],
           });
         });
 
@@ -249,6 +260,16 @@ export const { InvertedDependencyGroupInstance } =
                   parentZorn: group.zorn,
                   tailId: getDirectoryNodeId(firstDirectoryPath),
                   headId: getDirectoryNodeId(secondDirectoryPath),
+                  pathHeadId: group.importedFact.nodeId,
+                  pathTailIdSet: pathFromImportingToCommonPrefixList
+                    .filter(
+                      ({ visitedDirectoryPathSet }) =>
+                        visitedDirectoryPathSet.has(firstDirectoryPath) ||
+                        visitedDirectoryPathSet.has(secondDirectoryPath),
+                    )
+                    .map(({ importingFact }) => {
+                      return importingFact.nodeId;
+                    }),
                 });
               })
               .filter(isNotNull)
@@ -275,6 +296,16 @@ export const { InvertedDependencyGroupInstance } =
                   parentZorn: group.zorn,
                   tailId: getDirectoryNodeId(firstDirectoryPath),
                   headId: getDirectoryNodeId(secondDirectoryPath),
+                  pathHeadId: group.importedFact.nodeId,
+                  pathTailIdSet: pathFromImportingToCommonPrefixList
+                    .filter(
+                      ({ visitedDirectoryPathSet }) =>
+                        visitedDirectoryPathSet.has(firstDirectoryPath) ||
+                        visitedDirectoryPathSet.has(secondDirectoryPath),
+                    )
+                    .map(({ importingFact }) => {
+                      return importingFact.nodeId;
+                    }),
                 });
               })
               .filter(isNotNull)
@@ -292,6 +323,10 @@ export const { InvertedDependencyGroupInstance } =
             group.importedFact.directoryFact.directory.directoryPath,
           ),
           headId: group.importedFact.nodeId,
+          pathHeadId: group.importedFact.nodeId,
+          pathTailIdSet: group.importingFactList.map(
+            (importingFact) => importingFact.nodeId,
+          ),
         });
 
       return {
