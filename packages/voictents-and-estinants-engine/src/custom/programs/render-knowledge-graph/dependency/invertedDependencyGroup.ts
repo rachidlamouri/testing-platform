@@ -110,6 +110,7 @@ export const { InvertedDependencyGroupInstance } =
         })
         .map((importingFact) => {
           return {
+            importingFact,
             importingPathPartList: importingFact.file.directoryPath.split(
               posix.sep,
             ),
@@ -124,68 +125,78 @@ export const { InvertedDependencyGroupInstance } =
       }
 
       const importingPathPartListWithCommonPrefixPathPartListList =
-        importingPathPartListList.map(({ importingPathPartList }) => {
-          const commonPrefixPathPartList: string[] = [];
-          let index = 0;
-          while (
-            index < importedPathPartList.length &&
-            importedPathPartList[index] === importingPathPartList[index]
-          ) {
-            commonPrefixPathPartList.push(importedPathPartList[index]);
+        importingPathPartListList.map(
+          ({ importingFact, importingPathPartList }) => {
+            const commonPrefixPathPartList: string[] = [];
+            let index = 0;
+            while (
+              index < importedPathPartList.length &&
+              importedPathPartList[index] === importingPathPartList[index]
+            ) {
+              commonPrefixPathPartList.push(importedPathPartList[index]);
 
-            index += 1;
-          }
-          return {
-            importingPathPartList,
-            commonPrefixPathPartList,
-          };
-        });
+              index += 1;
+            }
+            return {
+              importingFact,
+              importingPathPartList,
+              commonPrefixPathPartList,
+            };
+          },
+        );
 
       const pathFromCommonPrefixToImportedList =
         importingPathPartListWithCommonPrefixPathPartListList.map(
           ({ commonPrefixPathPartList }) => {
             let index = commonPrefixPathPartList.length;
             let currentPath: string = posix.join(...commonPrefixPathPartList);
-            const outputList: string[] = [currentPath];
+            const visitedDirectoryPathList: string[] = [currentPath];
 
             while (index < importedPathPartList.length) {
               currentPath = posix.join(
                 currentPath,
                 importedPathPartList[index],
               );
-              outputList.push(currentPath);
+              visitedDirectoryPathList.push(currentPath);
 
               index += 1;
             }
 
             return {
-              outputList,
+              visitedDirectoryPathList,
+              visitedDirectoryPathSet: new Set(visitedDirectoryPathList),
             };
           },
         );
 
       const pathFromImportingToCommonPrefixList =
         importingPathPartListWithCommonPrefixPathPartListList.map(
-          ({ importingPathPartList, commonPrefixPathPartList }) => {
+          ({
+            importingFact,
+            importingPathPartList,
+            commonPrefixPathPartList,
+          }) => {
             let index = commonPrefixPathPartList.length;
             let currentPath: string = posix.join(...commonPrefixPathPartList);
-            const outputList: string[] = [currentPath];
+            const visitedDirectoryPathList: string[] = [currentPath];
 
             while (index < importingPathPartList.length) {
               currentPath = posix.join(
                 currentPath,
                 importingPathPartList[index],
               );
-              outputList.push(currentPath);
+              visitedDirectoryPathList.push(currentPath);
 
               index += 1;
             }
 
             // the order indicates edge direction. So we want to go from the importing file to the common node
-            outputList.reverse();
+            visitedDirectoryPathList.reverse();
 
             return {
-              outputList,
+              importingFact,
+              visitedDirectoryPathList,
+              visitedDirectoryPathSet: new Set(visitedDirectoryPathList),
             };
           },
         );
@@ -194,7 +205,7 @@ export const { InvertedDependencyGroupInstance } =
         [
           ...pathFromCommonPrefixToImportedList,
           ...pathFromImportingToCommonPrefixList,
-        ].flatMap(({ outputList }) => outputList),
+        ].flatMap(({ visitedDirectoryPathList }) => visitedDirectoryPathList),
       );
 
       const pathNodeFactByDirectoryPath = new Map(
@@ -220,80 +231,109 @@ export const { InvertedDependencyGroupInstance } =
         return pathNodeFact.nodeId;
       };
 
-      const pathSegmentFactList = group.importingFactList.map(
-        (importingFact) => {
+      const importingToDirectoryPathSegmentFactList =
+        group.importingFactList.map((importingFact) => {
           return new DependencyPathSegmentFactInstance({
             parentZorn: group.zorn,
             tailId: importingFact.nodeId,
             headId: getDirectoryNodeId(
               importingFact.directoryFact.directory.directoryPath,
             ),
+            pathHeadId: group.importedFact.nodeId,
+            pathTailIdSet: [importingFact.nodeId],
           });
-        },
-      );
+        });
 
       const commonPrefixToImportedDependencyPathSegmentFactByZorn = new Map(
-        pathFromCommonPrefixToImportedList.flatMap(({ outputList }) => {
-          return outputList
-            .slice(0, outputList.length - 1)
-            .map((firstDirectoryPath, index) => {
-              const secondDirectoryPath = outputList[index + 1];
+        pathFromCommonPrefixToImportedList.flatMap(
+          ({ visitedDirectoryPathList }) => {
+            return visitedDirectoryPathList
+              .slice(0, visitedDirectoryPathList.length - 1)
+              .map((firstDirectoryPath, index) => {
+                const secondDirectoryPath = visitedDirectoryPathList[index + 1];
 
-              if (secondDirectoryPath === undefined) {
-                return null;
-              }
+                if (secondDirectoryPath === undefined) {
+                  return null;
+                }
 
-              return new DependencyPathSegmentFactInstance({
-                parentZorn: group.zorn,
-                tailId: getDirectoryNodeId(firstDirectoryPath),
-                headId: getDirectoryNodeId(secondDirectoryPath),
+                return new DependencyPathSegmentFactInstance({
+                  parentZorn: group.zorn,
+                  tailId: getDirectoryNodeId(firstDirectoryPath),
+                  headId: getDirectoryNodeId(secondDirectoryPath),
+                  pathHeadId: group.importedFact.nodeId,
+                  pathTailIdSet: pathFromImportingToCommonPrefixList
+                    .filter(
+                      ({ visitedDirectoryPathSet }) =>
+                        visitedDirectoryPathSet.has(firstDirectoryPath) ||
+                        visitedDirectoryPathSet.has(secondDirectoryPath),
+                    )
+                    .map(({ importingFact }) => {
+                      return importingFact.nodeId;
+                    }),
+                });
+              })
+              .filter(isNotNull)
+              .map((dependencyFact) => {
+                return [dependencyFact.zorn, dependencyFact] as const;
               });
-            })
-            .filter(isNotNull)
-            .map((dependencyFact) => {
-              return [dependencyFact.zorn, dependencyFact] as const;
-            });
-        }),
+          },
+        ),
       );
 
       const importingToCommonPrefixDependencyPathSegmentFactByZorn = new Map(
-        pathFromImportingToCommonPrefixList.flatMap(({ outputList }) => {
-          return outputList
-            .slice(0, outputList.length - 1)
-            .map((firstDirectoryPath, index) => {
-              const secondDirectoryPath = outputList[index + 1];
+        pathFromImportingToCommonPrefixList.flatMap(
+          ({ visitedDirectoryPathList }) => {
+            return visitedDirectoryPathList
+              .slice(0, visitedDirectoryPathList.length - 1)
+              .map((firstDirectoryPath, index) => {
+                const secondDirectoryPath = visitedDirectoryPathList[index + 1];
 
-              if (secondDirectoryPath === undefined) {
-                return null;
-              }
+                if (secondDirectoryPath === undefined) {
+                  return null;
+                }
 
-              return new DependencyPathSegmentFactInstance({
-                parentZorn: group.zorn,
-                tailId: getDirectoryNodeId(firstDirectoryPath),
-                headId: getDirectoryNodeId(secondDirectoryPath),
+                return new DependencyPathSegmentFactInstance({
+                  parentZorn: group.zorn,
+                  tailId: getDirectoryNodeId(firstDirectoryPath),
+                  headId: getDirectoryNodeId(secondDirectoryPath),
+                  pathHeadId: group.importedFact.nodeId,
+                  pathTailIdSet: pathFromImportingToCommonPrefixList
+                    .filter(
+                      ({ visitedDirectoryPathSet }) =>
+                        visitedDirectoryPathSet.has(firstDirectoryPath) ||
+                        visitedDirectoryPathSet.has(secondDirectoryPath),
+                    )
+                    .map(({ importingFact }) => {
+                      return importingFact.nodeId;
+                    }),
+                });
+              })
+              .filter(isNotNull)
+              .map((dependencyFact) => {
+                return [dependencyFact.zorn, dependencyFact] as const;
               });
-            })
-            .filter(isNotNull)
-            .map((dependencyFact) => {
-              return [dependencyFact.zorn, dependencyFact] as const;
-            });
-        }),
+          },
+        ),
       );
 
-      const importedNodeToDirectorynodePathSegmentFact =
+      const importedNodeToDirectoryNodePathSegmentFact =
         new DependencyPathSegmentFactInstance({
           parentZorn: group.zorn,
           tailId: getDirectoryNodeId(
             group.importedFact.directoryFact.directory.directoryPath,
           ),
           headId: group.importedFact.nodeId,
+          pathHeadId: group.importedFact.nodeId,
+          pathTailIdSet: group.importingFactList.map(
+            (importingFact) => importingFact.nodeId,
+          ),
         });
 
       return {
         pathNodeList: [...pathNodeFactByDirectoryPath.values()],
         pathSegmentList: [
-          ...pathSegmentFactList,
-          importedNodeToDirectorynodePathSegmentFact,
+          ...importingToDirectoryPathSegmentFactList,
+          importedNodeToDirectoryNodePathSegmentFact,
           ...commonPrefixToImportedDependencyPathSegmentFactByZorn.values(),
           ...importingToCommonPrefixDependencyPathSegmentFactByZorn.values(),
         ],

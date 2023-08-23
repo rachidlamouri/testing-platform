@@ -6,11 +6,12 @@ export type PathWrapperProps = React.PropsWithChildren<
 >;
 
 export const PathWrapper: FunctionComponent<PathWrapperProps> = (props) => {
-  const { style } = usePresentationContext();
+  const { style, styleByElement } = usePresentationContext();
 
   const combinedProps = {
     ...props,
     ...style,
+    ...styleByElement.path,
   };
 
   return <path {...combinedProps} />;
