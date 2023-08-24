@@ -67,6 +67,8 @@ import { renderApp } from './app/node/renderApp';
 import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
+import { DIRECTORY_FACT_GEPP } from './directory/directoryFact';
+import { DEPENDENCY_FACT_GEPP } from './dependency/dependencyFact';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -172,5 +174,7 @@ digikikify({
   programFileCache,
   serializeeVoictentGeppList: [
     // keep this as a multi-line list for easier debugging
+    DIRECTORY_FACT_GEPP,
+    DEPENDENCY_FACT_GEPP,
   ],
 });
