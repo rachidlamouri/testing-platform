@@ -901,13 +901,19 @@ export const digikikify = ({
       };
     });
 
-    const errorMessage = `Some cologies were not triggered:  \n${JSON.stringify(
-      output,
-      null,
-      2,
-    )}`;
+    class UntriggeredCologyError extends Error {
+      constructor(public metadata: unknown) {
+        super(
+          `Some cologies were not triggered:  \n${JSON.stringify(
+            metadata,
+            null,
+            2,
+          )}`,
+        );
+      }
+    }
 
-    onError({ error: new Error(errorMessage), isCritical: false });
+    onError({ error: new UntriggeredCologyError(output), isCritical: false });
   }
 
   const statistics: RuntimeStatistics = {

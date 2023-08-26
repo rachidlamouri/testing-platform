@@ -29,7 +29,7 @@ export const getInvertedDependencyGraphElements = buildEstinant({
   .andFromHubblepupTuple2<DirectoryFactVoque, Tuple<string>>({
     gepp: DIRECTORY_FACT_GEPP,
     framate: (group) => {
-      return group.hubblepup.pathFactLists.pathNodeList.map(
+      return group.hubblepup.dependencyPathNodeFactList.map(
         (fact) => fact.directoryPath,
       );
     },
@@ -41,7 +41,7 @@ export const getInvertedDependencyGraphElements = buildEstinant({
     gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
   .onPinbe((group, directoryFactList) => {
-    const nodeList = group.pathFactLists.pathNodeList.map(
+    const nodeList = group.dependencyPathNodeFactList.map(
       (pathNodeFact, index) => {
         const directoryFact = directoryFactList[index];
 
@@ -58,7 +58,7 @@ export const getInvertedDependencyGraphElements = buildEstinant({
       },
     );
 
-    const edgeList = group.pathFactLists.pathSegmentList.map(
+    const edgeList = group.dependencyPathSegmentFactList.map(
       (pathSegmentFact) => {
         return new DirectedGraphEdge2Instance({
           attributeByKey: {

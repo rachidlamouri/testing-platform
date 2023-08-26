@@ -96,7 +96,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       const dependencyPathSegmentFactById = new Map(
         invertedDependencyGroupList
           .flatMap((group) => {
-            return group.pathFactLists.pathSegmentList;
+            return group.dependencyPathSegmentFactList;
           })
           .map((segment) => {
             return [`${segment.tailId}:${segment.headId}`, segment];
