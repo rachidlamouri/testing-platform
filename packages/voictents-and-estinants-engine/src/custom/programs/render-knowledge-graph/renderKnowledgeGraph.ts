@@ -67,6 +67,8 @@ import { renderApp } from './app/node/renderApp';
 import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
+import { getAssociatedBoundaryFacts } from './associated-boundary/getAssociatedBoundaryFacts';
+import { getAssociatedBoundaryFactGraphElements } from './associated-boundary/getAssociatedBoundaryFactGraphElements';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -146,6 +148,9 @@ digikikify({
     getFileGraphElements,
 
     getDependencyFacts,
+
+    getAssociatedBoundaryFacts,
+    getAssociatedBoundaryFactGraphElements,
 
     getInvertedDependencyGroup,
     getInvertedDependencyGraphElements,

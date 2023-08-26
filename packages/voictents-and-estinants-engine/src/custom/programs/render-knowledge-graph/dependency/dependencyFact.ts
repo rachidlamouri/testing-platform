@@ -20,6 +20,9 @@ type DependencyFactPrototype = {
   get directoryPathSet(): Set<string>;
   get tailId(): string;
   get headId(): string;
+  get importingBoundaryZorn(): string;
+  get importedBoundaryZorn(): string;
+  get isCrossBoundary(): boolean;
 };
 
 /**
@@ -124,6 +127,19 @@ export const { DependencyFactInstance } = buildConstructorFunctionWithName(
   },
   headId: (dependencyFact) => {
     return dependencyFact.importedFact.nodeId;
+  },
+  importingBoundaryZorn: (dependencyFact) => {
+    return dependencyFact.importingFact.directoryFact.boundaryFact.boundary
+      .zorn;
+  },
+  importedBoundaryZorn: (dependencyFact) => {
+    return dependencyFact.importedFact.directoryFact.boundaryFact.boundary.zorn;
+  },
+  isCrossBoundary: (dependencyFact) => {
+    return (
+      dependencyFact.importingBoundaryZorn !==
+      dependencyFact.importedBoundaryZorn
+    );
   },
 });
 

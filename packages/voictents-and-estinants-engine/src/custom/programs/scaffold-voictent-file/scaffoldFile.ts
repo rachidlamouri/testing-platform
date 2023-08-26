@@ -6,6 +6,18 @@ import {
   ScaffoldConfigurationVoque,
 } from './scaffoldConfiguration';
 
+const partsToCamel = (x: string[]): string => {
+  return x
+    .map((word, index) => {
+      if (index === 0) {
+        return word;
+      }
+
+      return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`;
+    })
+    .join('');
+};
+
 const partsToPascal = (x: string[]): string => {
   return x
     .map((word) => {
@@ -39,6 +51,7 @@ export const scaffoldFile = buildEstinant({
   .onPinbe((scaffoldConfiguration) => {
     const metadata = getFileMetadata(scaffoldConfiguration.filePath);
 
+    const camelCaseName = partsToCamel(metadata.inMemoryFileNameParts);
     const pascalCaseName = partsToPascal(metadata.inMemoryFileNameParts);
     const kebabCaseName = partsToKebab(metadata.inMemoryFileNameParts);
     const screamingSnakeCaseName = partsToScreamingSnake(
@@ -50,22 +63,40 @@ export const scaffoldFile = buildEstinant({
       'utf8',
     );
 
-    const customTypeName = pascalCaseName;
+    const hubblepupBaseTypeName = `Base${pascalCaseName}`;
+    const hubblepupPrototypeTypeName = `${pascalCaseName}Prototype`;
+    const hubblepupTypename = pascalCaseName;
+    const constructorCodeName = `${hubblepupTypename}Instance`;
+    const getterInstanceCodeName = camelCaseName;
     const geppCodeName = `${screamingSnakeCaseName}_GEPP`;
     const geppLiteral = kebabCaseName;
-    const geppTypeName = `${customTypeName}Gepp`;
-    const voqueTypeName = `${customTypeName}Voque`;
+    const geppTypeName = `${hubblepupTypename}Gepp`;
+    const voqueTypeName = `${hubblepupTypename}Voque`;
 
     const prependedContent = [
-      `export type ${customTypeName} = {`,
-      '  zorn: string;',
+      `type ${hubblepupBaseTypeName} = {`,
+      '  // TODO: add properties',
       '}',
+      '',
+      `type ${hubblepupPrototypeTypeName} = {`,
+      '  get zorn(): string',
+      '}',
+      '',
+      `type ${hubblepupTypename} = ObjectWithPrototype<${hubblepupBaseTypeName}, ${hubblepupPrototypeTypeName}>`,
+      '',
+      `export const { ${constructorCodeName} } = buildConstructorFunctionWithName('${constructorCodeName}')<${hubblepupBaseTypeName}, ${hubblepupPrototypeTypeName}, ${hubblepupTypename}>({`,
+      `  zorn: (${getterInstanceCodeName}) => {`,
+      `    return getZorn([`,
+      '      // TODO: implement',
+      `    ])`,
+      `  },`,
+      '})',
       '',
       `export const ${geppCodeName} = '${geppLiteral}'`,
       '',
-      `export type ${geppTypeName} = typeof ${geppCodeName}`,
+      `type ${geppTypeName} = typeof ${geppCodeName}`,
       '',
-      `export type ${voqueTypeName} = InMemoryOdeshin2Voque<${geppTypeName}, ${customTypeName}>`,
+      `export type ${voqueTypeName} = InMemoryOdeshin2Voque<${geppTypeName}, ${hubblepupTypename}>`,
       '',
     ].join('\n');
 
