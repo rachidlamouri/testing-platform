@@ -31,7 +31,7 @@ export const getInvertedDependencyGroup = buildEstinant({
           dependencyFact.importedFact.zorn,
         ) ?? {
           importedFact: dependencyFact.importedFact,
-          importingFactList: [],
+          dependencyFactList: [],
         };
 
       // TODO: expand this to cross-boundary dependencies
@@ -39,9 +39,7 @@ export const getInvertedDependencyGroup = buildEstinant({
         dependencyFact.importedFact.directoryFact.boundaryFact.boundary.zorn ===
         dependencyFact.importingFact.directoryFact.boundaryFact.boundary.zorn
       ) {
-        invertedDependencyGroup.importingFactList.push(
-          dependencyFact.importingFact,
-        );
+        invertedDependencyGroup.dependencyFactList.push(dependencyFact);
       }
 
       invertedDependencyGroupByImportedFactZorn.set(
