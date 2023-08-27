@@ -38,7 +38,7 @@ export const { EstinantOutput2Instance } = buildConstructorFunctionWithName(
     return getZorn([
       'output',
       output.voictentName,
-      output.estinantLocator.zorn,
+      output.estinantLocator.zorn.forHuman,
     ]);
   },
   id: (output) =>

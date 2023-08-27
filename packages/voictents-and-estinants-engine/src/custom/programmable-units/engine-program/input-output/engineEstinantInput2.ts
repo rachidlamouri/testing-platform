@@ -39,7 +39,7 @@ export const { EstinantInput2Instance } = buildConstructorFunctionWithName(
       'input',
       `${input.index}`,
       input.voictentName,
-      input.estinantLocator.zorn,
+      input.estinantLocator.zorn.forHuman,
     ]);
   },
   id: (input) => {

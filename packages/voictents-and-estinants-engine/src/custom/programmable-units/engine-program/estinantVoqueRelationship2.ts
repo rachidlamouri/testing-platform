@@ -34,7 +34,7 @@ export const { EstinantVoqueRelationship2Instance } =
     zorn: (relatinoship) => {
       return getZorn([
         relatinoship.voqueLocator.zorn,
-        relatinoship.estinantLocator.zorn,
+        relatinoship.estinantLocator.zorn.forHuman,
         relatinoship.distinguisher,
       ]);
     },

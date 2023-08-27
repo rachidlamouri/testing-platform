@@ -30,6 +30,7 @@ import {
   ProgramEstinantOutputRelationshipInstance,
 } from './input-output/programEstinantOutputRelationship';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 
 /**
  * Joins the program locator to its transforms in order to
@@ -41,7 +42,7 @@ export const getEngineProgram3 = buildEstinant({
   .fromHubblepup2<EngineProgramLocator3Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromHubblepupTuple2<EngineEstinant3Voque, Tuple<string>>({
+  .andFromHubblepupTuple2<EngineEstinant3Voque, Tuple<OdeshinZorn>>({
     gepp: ENGINE_ESTINANT_3_GEPP,
     framate: (engineProgram) => {
       return engineProgram.hubblepup.estinantRelationshipList.map(
