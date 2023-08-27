@@ -12,6 +12,7 @@ import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
   EngineProgramLocator3Voque,
 } from '../../programmable-units/engine-program/engineProgramLocator3';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 
 const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -32,7 +33,7 @@ export const assertCiModelHasAllPrograms = buildEstinant({
   .fromVoictent2<EngineProgramLocator3Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromHubblepupTuple2<CiModelVoque, [string]>({
+  .andFromHubblepupTuple2<CiModelVoque, [OdeshinZorn]>({
     gepp: CI_MODEL_GEPP,
     framate: () => [CI_MODEL_ZORN],
     croard: (rightInput) => rightInput.hubblepup.zorn,

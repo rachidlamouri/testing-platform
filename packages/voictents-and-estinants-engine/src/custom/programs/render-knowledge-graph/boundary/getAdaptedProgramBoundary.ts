@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
   EngineProgramLocator3Voque,
@@ -18,7 +19,7 @@ export const getAdaptedProgramBoundary = buildEstinant({
   .fromHubblepup2<EngineProgramLocator3Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromHubblepupTuple2<EngineProgramFileVoque, [string]>({
+  .andFromHubblepupTuple2<EngineProgramFileVoque, [OdeshinZorn]>({
     gepp: ENGINE_PROGRAM_FILE_GEPP,
     framate: (locator) => [locator.hubblepup.filePath],
     croard: (programFile) => programFile.hubblepup.file.filePath,

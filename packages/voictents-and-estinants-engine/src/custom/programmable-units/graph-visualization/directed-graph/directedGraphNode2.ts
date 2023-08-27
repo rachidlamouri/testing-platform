@@ -29,7 +29,7 @@ export const { DirectedGraphNode2Instance } = buildConstructorFunctionWithName(
   zorn: (directedNode) => {
     return (
       directedNode.zorn2 ??
-      getZorn([directedNode.rootGraphLocator.zorn, directedNode.id])
+      getZorn([directedNode.rootGraphLocator.zorn.forHuman, directedNode.id])
     );
   },
   id: (directedNode) => {

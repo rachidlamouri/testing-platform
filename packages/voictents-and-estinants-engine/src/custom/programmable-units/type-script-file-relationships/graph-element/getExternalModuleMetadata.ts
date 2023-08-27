@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 import { NodeShape } from '../../graph-visualization/directed-graph/directedGraphNode';
 import { EXTERNAL_BOUNDARY_ZORN } from './boundaryConfiguration';
 import {
@@ -23,7 +24,7 @@ export const getExternalModuleMetadata = buildEstinant({
   .fromHubblepup2<ExternalModuleVoque>({
     gepp: EXTERNAL_MODULE_GEPP,
   })
-  .andFromHubblepupTuple2<BoundaryMetadataVoque, [string]>({
+  .andFromHubblepupTuple2<BoundaryMetadataVoque, [OdeshinZorn]>({
     gepp: BOUNDARY_METADATA_GEPP,
     framate: () => [EXTERNAL_BOUNDARY_ZORN],
     croard: (rightInput) => rightInput.indexByName.zorn,

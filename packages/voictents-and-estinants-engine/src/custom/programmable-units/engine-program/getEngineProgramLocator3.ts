@@ -72,6 +72,7 @@ import {
   EngineVoqueLocator2Instance,
 } from './engineVoqueLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -581,12 +582,15 @@ export const getEngineProgramLocator3 = buildEstinant({
   .fromHubblepup2<EngineProgramFileVoque>({
     gepp: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .andFromHubblepupTuple2<CommentedProgramBodyDeclarationListVoque, [string]>({
+  .andFromHubblepupTuple2<
+    CommentedProgramBodyDeclarationListVoque,
+    [OdeshinZorn]
+  >({
     gepp: COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
     framate: (leftInput) => [leftInput.indexByName.zorn],
     croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [string]>({
+  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     framate: (leftInput) => [leftInput.indexByName.zorn],
     croard: (rightInput) => rightInput.indexByName.zorn,

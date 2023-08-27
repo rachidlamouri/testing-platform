@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 import {
   TYPE_SCRIPT_FILE_GEPP,
   TypeScriptFileVoque,
@@ -19,7 +20,7 @@ export const getFileFact = buildEstinant({
   .fromHubblepup2<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
-  .andFromHubblepupTuple2<DirectoryFactVoque, [string]>({
+  .andFromHubblepupTuple2<DirectoryFactVoque, [OdeshinZorn]>({
     gepp: DIRECTORY_FACT_GEPP,
     framate: (typescriptFile) => {
       return [typescriptFile.hubblepup.directoryPath];

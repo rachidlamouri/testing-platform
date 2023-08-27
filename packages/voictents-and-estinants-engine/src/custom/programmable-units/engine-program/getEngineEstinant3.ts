@@ -72,6 +72,7 @@ import {
   EstinantVoqueRelationship2Instance,
   EstinantVoqueRelationship2Voque,
 } from './estinantVoqueRelationship2';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 
 const ESTINANT_NAME = 'getEngineEstinant3' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -842,12 +843,15 @@ export const getEngineEstinant3 = buildEstinant({
   .fromHubblepup2<EngineEstinantLocator2Voque>({
     gepp: ENGINE_ESTINANT_LOCATOR_2_GEPP,
   })
-  .andFromHubblepupTuple2<ProgramBodyDeclarationsByIdentifierVoque, [string]>({
+  .andFromHubblepupTuple2<
+    ProgramBodyDeclarationsByIdentifierVoque,
+    [OdeshinZorn]
+  >({
     gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
     framate: (leftInput) => [leftInput.hubblepup.filePath],
     croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [string]>({
+  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     framate: (leftInput) => [leftInput.hubblepup.filePath],
     croard: (rightInput) => rightInput.indexByName.zorn,

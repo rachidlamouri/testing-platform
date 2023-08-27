@@ -1,8 +1,23 @@
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
+  memoizeGetter,
 } from '../../../../utilities/buildConstructorFunction';
-import { getZorn } from '../../../../utilities/getZorn';
+import {
+  Zorn2,
+  GenericZorn2Template,
+} from '../../../../utilities/semantic-types/zorn';
+
+const ROOT_GRAPH_LOCATOR_ZORN_TEMPLATE = [
+  'id',
+  'debugName',
+] as const satisfies GenericZorn2Template;
+type RootGraphLocatorZornTemplate = typeof ROOT_GRAPH_LOCATOR_ZORN_TEMPLATE;
+class RootGraphLocatorZorn extends Zorn2<RootGraphLocatorZornTemplate> {
+  get rawTemplate(): RootGraphLocatorZornTemplate {
+    return ROOT_GRAPH_LOCATOR_ZORN_TEMPLATE;
+  }
+}
 
 type BaseRootGraphLocator = {
   id: string;
@@ -10,7 +25,7 @@ type BaseRootGraphLocator = {
 };
 
 type RootGraphLocatorPrototype = {
-  get zorn(): string;
+  get zorn(): RootGraphLocatorZorn;
 };
 
 export type RootGraphLocator = ObjectWithPrototype<
@@ -21,7 +36,10 @@ export type RootGraphLocator = ObjectWithPrototype<
 export const { RootGraphLocatorInstance } = buildConstructorFunctionWithName(
   'RootGraphLocatorInstance',
 )<BaseRootGraphLocator, RootGraphLocatorPrototype>({
-  zorn: (locator) => {
-    return getZorn([locator.id, locator.debugName]);
-  },
+  zorn: memoizeGetter((locator) => {
+    return new RootGraphLocatorZorn({
+      id: locator.debugName,
+      debugName: locator.debugName,
+    });
+  }),
 });

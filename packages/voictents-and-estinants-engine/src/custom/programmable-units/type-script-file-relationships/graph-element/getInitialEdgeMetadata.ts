@@ -28,6 +28,7 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../error/programError';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 
 const ESTINANT_NAME = 'getInitialEdgeMetadata' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -47,17 +48,20 @@ export const getInitialEdgeMetadata = buildEstinant({
   .fromHubblepup2<FileNodeMetadataVoque>({
     gepp: FILE_NODE_METADATA_GEPP,
   })
-  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [string]>({
+  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     framate: (leftInput) => [leftInput.indexByName.zorn],
     croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromHubblepupTuple2<FileNodeMetadataByFilePathVoque, [string]>({
+  .andFromHubblepupTuple2<FileNodeMetadataByFilePathVoque, [OdeshinZorn]>({
     gepp: FILE_NODE_METADATA_BY_FILE_PATH_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
     croard: (rightInput) => rightInput.indexByName.zorn,
   })
-  .andFromHubblepupTuple2<ExternalModuleMetadataBySourcePathVoque, [string]>({
+  .andFromHubblepupTuple2<
+    ExternalModuleMetadataBySourcePathVoque,
+    [OdeshinZorn]
+  >({
     gepp: EXTERNAL_MODULE_METADATA_BY_SOURCE_PATH_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
     croard: (rightInput) => rightInput.indexByName.zorn,

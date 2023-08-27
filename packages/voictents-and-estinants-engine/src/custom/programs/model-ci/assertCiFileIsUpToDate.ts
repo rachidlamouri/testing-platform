@@ -16,6 +16,7 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 
 const ESTINANT_NAME = 'assertCiFileIsUpToDate' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -37,7 +38,7 @@ export const assertCiFileIsUpToDate = buildEstinant({
   .fromHubblepup2<SerializedCiModelVoque>({
     gepp: SERIALIZED_CI_MODEL_GEPP,
   })
-  .andFromHubblepupTuple2<BashFileVoque, [string]>({
+  .andFromHubblepupTuple2<BashFileVoque, [OdeshinZorn]>({
     gepp: BASH_FILE_GEPP,
     framate: () => [CI_FILE_PATH],
     croard: (leftInput) => leftInput.hubblepup.filePath,

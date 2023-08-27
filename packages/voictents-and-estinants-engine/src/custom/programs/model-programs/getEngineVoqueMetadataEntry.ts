@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 import {
   ENGINE_VOQUE_2_GEPP,
   EngineVoque2Voque,
@@ -24,7 +25,7 @@ export const getEngineVoqueMetadataEntry = buildEstinant({
   .fromHubblepup2<ProgramVoqueRelationship2Voque>({
     gepp: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
-  .andFromHubblepupTuple2<EngineVoque2Voque, [string]>({
+  .andFromHubblepupTuple2<EngineVoque2Voque, [OdeshinZorn]>({
     gepp: ENGINE_VOQUE_2_GEPP,
     framate: (relationship) => [relationship.hubblepup.voqueLocator.zorn],
     croard: (engineVoque) => engineVoque.hubblepup.zorn,

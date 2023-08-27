@@ -27,7 +27,7 @@ export const { GraphElementGroupInstance } = buildConstructorFunctionWithName(
   'GraphElementGroupInstance',
 )<BaseGraphElementGroup, GraphElementGroupPrototype>({
   zorn: (group) => {
-    return group.rootGraphLocator.zorn;
+    return group.rootGraphLocator.zorn.forHuman;
   },
 });
 

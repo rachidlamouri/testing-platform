@@ -10,6 +10,7 @@ import {
   DirectedGraphMetadataByIdVoque,
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
 } from './directedGraphMetadataById';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 
 const KNOWLEDGE_GRAPH_FILE_PATH =
   'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization/knowledgeGraphTemplate.html';
@@ -24,7 +25,7 @@ export const constructKnowledgeGraph = buildEstinant({
   .fromHubblepup2<SvgMetadataListVoque>({
     gepp: SVG_METADATA_LIST_GEPP,
   })
-  .andFromHubblepupTuple2<HtmlFileVoque, [string]>({
+  .andFromHubblepupTuple2<HtmlFileVoque, [OdeshinZorn]>({
     gepp: HTML_FILE_GEPP,
     framate: () => [KNOWLEDGE_GRAPH_FILE_PATH],
     croard: (rightInput) => rightInput.indexByName.zorn,

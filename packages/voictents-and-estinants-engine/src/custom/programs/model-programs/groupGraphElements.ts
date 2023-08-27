@@ -26,8 +26,10 @@ export const groupGraphElements = buildEstinant({
     const elementGroupByRootLocatorZorn = new Map<string, GraphElementGroup>();
 
     allGraphElementList.forEach((element) => {
+      const key = element.rootGraphLocator.zorn.forHuman;
+
       const group =
-        elementGroupByRootLocatorZorn.get(element.rootGraphLocator.zorn) ??
+        elementGroupByRootLocatorZorn.get(key) ??
         new GraphElementGroupInstance({
           rootGraphLocator: element.rootGraphLocator,
           elementList: [],
@@ -35,7 +37,7 @@ export const groupGraphElements = buildEstinant({
 
       group.elementList.push(element);
 
-      elementGroupByRootLocatorZorn.set(element.rootGraphLocator.zorn, group);
+      elementGroupByRootLocatorZorn.set(key, group);
     });
 
     const outputList = [...elementGroupByRootLocatorZorn.values()];

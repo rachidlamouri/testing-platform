@@ -42,6 +42,7 @@ module.exports = {
         ],
         'func-names': 'off',
         'import/extensions': 'off',
+        'class-methods-use-this': 'off',
       },
       parser: '@typescript-eslint/parser',
       parserOptions: {
