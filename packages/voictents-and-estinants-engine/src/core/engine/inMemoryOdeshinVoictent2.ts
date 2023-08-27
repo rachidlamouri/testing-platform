@@ -12,7 +12,7 @@ type InMemoryOdeshin2IndexByName = SpreadN<
   [
     InMemoryIndexByName,
     {
-      zorn: string;
+      zorn: GenericOdeshin2['zorn'];
     },
   ]
 >;
@@ -27,6 +27,13 @@ export type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
   GenericOdeshin2
 >;
 
+const getHumanReadableZorn = (odeshin: GenericOdeshin2): string => {
+  const result =
+    typeof odeshin.zorn === 'string' ? odeshin.zorn : odeshin.zorn.forHuman;
+
+  return result;
+};
+
 export class InMemoryOdeshin2Voictent<
   TVoque extends GenericInMemoryOdeshin2Voque,
 > extends AbstractInMemoryVoictent<GenericInMemoryOdeshin2Voque, TVoque> {
@@ -35,18 +42,20 @@ export class InMemoryOdeshin2Voictent<
   addHubblepup(hubblepup: TVoque['receivedHubblepup']): void {
     super.addHubblepup(hubblepup);
 
-    if (this.hubblepupByZorn.has(hubblepup.zorn)) {
-      const error = new Error(`Duplicate zorn: ${hubblepup.zorn}`);
+    const humanReadableZorn = getHumanReadableZorn(hubblepup);
+
+    if (this.hubblepupByZorn.has(humanReadableZorn)) {
+      const error = new Error(`Duplicate zorn: ${humanReadableZorn}`);
       Object.assign(error, {
         gepp: this.gepp,
-        zorn: hubblepup.zorn,
-        existing: this.hubblepupByZorn.get(hubblepup.zorn),
+        zorn: humanReadableZorn,
+        existing: this.hubblepupByZorn.get(humanReadableZorn),
         duplicate: hubblepup,
       });
 
       throw error;
     } else {
-      this.hubblepupByZorn.set(hubblepup.zorn, hubblepup);
+      this.hubblepupByZorn.set(humanReadableZorn, hubblepup);
     }
   }
 
@@ -60,10 +69,11 @@ export class InMemoryOdeshin2Voictent<
     }
 
     const odeshin = this.hubblepupTuple[listIndex];
+    const humanReadableZorn = getHumanReadableZorn(odeshin);
     return {
       hubblepup: odeshin,
       indexByName: {
-        serializableId: odeshin.zorn.replaceAll('/', ' | '),
+        serializableId: humanReadableZorn.replaceAll('/', ' | '),
         listIndex,
         zorn: odeshin.zorn,
       },

@@ -1,6 +1,6 @@
 import { GenericIndexedHubblepupTuple } from '../../../core/engine-shell/quirm/hubblepup';
 import { GenericVoque } from '../../../core/engine/voque';
-import { ZornTuple } from '../../../utilities/semantic-types/zorn';
+import { Zorn2, ZornTuple2 } from '../../../utilities/semantic-types/zorn';
 import { SpreadN } from '../../../utilities/spreadN';
 import {
   buildInputOutputContextFromRightInputContext,
@@ -28,7 +28,7 @@ import {
 type NextAdaptedRightInputVickenTuple<
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TRightInputVoque extends GenericVoque,
-  TZornTuple extends ZornTuple,
+  TZornTuple extends ZornTuple2,
 > = [
   ...TAdaptedRightInputVickenTuple,
   AdaptedRightInputHubblepupTupleVicken<TRightInputVoque, TZornTuple>,
@@ -39,7 +39,7 @@ type EmptyAdaptedOutputVickenTuple = [];
 type RightInputHubblepupTupleAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-> = <TRightInputVoque extends GenericVoque, TZornTuple extends ZornTuple>(
+> = <TRightInputVoque extends GenericVoque, TZornTuple extends ZornTuple2>(
   partialRightAppreffinge: PartialRightHubblepupTupleAppreffinge<
     TAdaptedLeftInputVicken,
     TRightInputVoque,
@@ -97,7 +97,7 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
   const buildRightInputHubblepupTupleAppreffinge2: RightInputHubblepupTupleAppreffingeBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple
-  > = <TRightInputVoque extends GenericVoque, TZornTuple extends ZornTuple>(
+  > = <TRightInputVoque extends GenericVoque, TZornTuple extends ZornTuple2>(
     partialRightAppreffinge: PartialRightHubblepupTupleAppreffinge<
       TAdaptedLeftInputVicken,
       TRightInputVoque,
@@ -111,7 +111,14 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
         gepp: partialRightAppreffinge.gepp,
         isWibiz: false,
         framate: partialRightAppreffinge.framate,
-        croard: partialRightAppreffinge.croard,
+        croard: (rightInput: TRightInputVoque['indexedEmittedHubblepup']) => {
+          const intermediateValue = partialRightAppreffinge.croard(rightInput);
+          if (intermediateValue instanceof Zorn2) {
+            return intermediateValue.forHuman;
+          }
+
+          return intermediateValue;
+        },
         modifyTropoignantInput: (indexedHubblepupTuple) => {
           return (indexedHubblepupTuple as GenericIndexedHubblepupTuple).map(
             (indexedHubblepup) => {

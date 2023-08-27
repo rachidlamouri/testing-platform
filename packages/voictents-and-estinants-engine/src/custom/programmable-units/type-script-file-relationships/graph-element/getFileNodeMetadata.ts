@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
@@ -45,7 +46,10 @@ export const getFileNodeMetadata = buildEstinant({
   .fromHubblepup2<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
-  .andFromHubblepupTuple2<DirectoryInstanceIdByDirectoryPathVoque, [string]>({
+  .andFromHubblepupTuple2<
+    DirectoryInstanceIdByDirectoryPathVoque,
+    [OdeshinZorn]
+  >({
     gepp: DIRECTORY_INSTANCE_ID_BY_FILE_PATH_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
     croard: (rightInput) => rightInput.indexByName.zorn,

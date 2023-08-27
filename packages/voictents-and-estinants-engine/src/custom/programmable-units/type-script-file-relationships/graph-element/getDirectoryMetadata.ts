@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 import { DIRECTORY_GEPP, DirectoryVoque } from '../../file/directory';
 import { GraphLikeStyle } from '../../graph-visualization/directed-graph/attributeByKeyGSC';
 import { LIMBO_BOUNDARY_ZORN } from './boundaryConfiguration';
@@ -22,7 +23,7 @@ export const getDirectoryMetadata = buildEstinant({
   .fromHubblepup2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .andFromHubblepupTuple2<BoundaryMetadataVoque, [string]>({
+  .andFromHubblepupTuple2<BoundaryMetadataVoque, [OdeshinZorn]>({
     gepp: BOUNDARY_METADATA_GEPP,
     framate: () => [LIMBO_BOUNDARY_ZORN],
     croard: (rightInput) => rightInput.indexByName.zorn,
