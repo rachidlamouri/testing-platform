@@ -110,7 +110,19 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
         version: 2,
         gepp: partialRightAppreffinge.gepp,
         isWibiz: false,
-        framate: partialRightAppreffinge.framate,
+        framate: (leftInput: TAdaptedLeftInputVicken['tropoignantInput']) => {
+          const list = partialRightAppreffinge
+            .framate(leftInput)
+            .map((intermediateValue) => {
+              if (intermediateValue instanceof Zorn2) {
+                return intermediateValue.forHuman;
+              }
+
+              return intermediateValue;
+            });
+
+          return list;
+        },
         croard: (rightInput: TRightInputVoque['indexedEmittedHubblepup']) => {
           const intermediateValue = partialRightAppreffinge.croard(rightInput);
           if (intermediateValue instanceof Zorn2) {
