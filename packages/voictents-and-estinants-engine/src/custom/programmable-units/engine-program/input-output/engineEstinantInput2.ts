@@ -4,7 +4,6 @@ import {
   buildConstructorFunctionWithName,
   memoizeGetter,
 } from '../../../../utilities/buildConstructorFunction';
-import { getTextDigest } from '../../../../utilities/getTextDigest';
 import {
   GenericZorn2Template,
   Zorn2,
@@ -61,12 +60,7 @@ export const { EstinantInput2Instance } = buildConstructorFunctionWithName(
       estinantLocator: input.estinantLocator.zorn,
     });
   }),
-  // TODO: update this id to use zorn.forMachine
-  id: (input) => {
-    const zorn = `${input.estinantName} | input | ${input.voictentName} | ${input.index}`;
-    const id = getTextDigest(zorn);
-    return id;
-  },
+  id: (input) => input.zorn.forMachine,
 });
 
 export const ESTINANT_INPUT_2_GEPP = 'estinant-input-2';
