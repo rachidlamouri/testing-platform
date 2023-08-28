@@ -87,7 +87,7 @@ export const getDirectedGraphFromGraphElementGroup = buildEstinant({
         if (element.isCluster) {
           allSubgraphList.push({
             subgraph1: {
-              zorn: element.zorn,
+              zorn: element.zorn.forHuman,
               isRoot: false,
               isCluster: element.isCluster,
               attributeByKey: element.attributeByKey,

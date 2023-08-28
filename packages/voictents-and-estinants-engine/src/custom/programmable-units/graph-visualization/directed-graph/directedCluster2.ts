@@ -2,23 +2,23 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../../utilities/buildConstructorFunction';
-// import { getZorn } from '../../../../utilities/getZorn';
 import { PartialClusterAttributeByKey } from './directedSubgraph';
+import { GraphConstituentLocator } from './graphConstituentLocator';
 import { RootGraphLocator } from './rootGraphLocator';
+import { GlobalDirectedGraphElement2Zorn } from './types';
 
 type BaseDirectedCluster2 = {
-  // TODO: replace debug name with zorn
-  zorn: string;
-  attributeByKey: PartialClusterAttributeByKey;
+  locator: GraphConstituentLocator;
+  inputAttributeByKey: Omit<PartialClusterAttributeByKey, 'id'>;
   rankGroupList?: never;
-  rootGraphLocator: RootGraphLocator;
-  parentId: string;
-  debugName?: string;
 };
 
 type DirectedCluster2Prototype = {
-  // get zorn(): string;
+  get zorn(): GlobalDirectedGraphElement2Zorn;
   get id(): string;
+  get parentId(): string;
+  get rootGraphLocator(): RootGraphLocator;
+  get attributeByKey(): PartialClusterAttributeByKey;
   get isRoot(): false;
   get isCluster(): true;
 };
@@ -31,11 +31,24 @@ export type DirectedCluster2 = ObjectWithPrototype<
 export const { DirectedCluster2Instance } = buildConstructorFunctionWithName(
   'DirectedCluster2Instance',
 )<BaseDirectedCluster2, DirectedCluster2Prototype, DirectedCluster2>({
-  // zorn: (directedCluster) => {
-  //   return getZorn([directedCluster.rootGraphLocator.zorn, directedCluster.id]);
-  // },
+  // TODO: rename arguments to "directedCluster"
+  zorn: (directedSubgraph) => {
+    return directedSubgraph.locator.zorn;
+  },
   id: (directedSubgraph) => {
-    return directedSubgraph.attributeByKey.id;
+    return directedSubgraph.locator.id;
+  },
+  parentId: (directedSubgraph) => {
+    return directedSubgraph.locator.parentId;
+  },
+  rootGraphLocator: (directedCluster) => {
+    return directedCluster.locator.rootGraphLocator;
+  },
+  attributeByKey: (directedSubgraph) => {
+    return {
+      id: directedSubgraph.id,
+      ...directedSubgraph.inputAttributeByKey,
+    };
   },
   isRoot: () => false,
   isCluster: () => true,

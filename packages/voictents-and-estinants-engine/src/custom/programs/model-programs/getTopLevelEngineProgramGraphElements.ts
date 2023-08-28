@@ -16,6 +16,8 @@ import {
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { NodeShape } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
 import { DirectedGraphNode2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
+import { GraphConstituentLocatorInstance } from '../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
+import { LocalDirectedGraphElement2Zorn } from '../../programmable-units/graph-visualization/directed-graph/types';
 import {
   COMMON_ATTRIBUTE_BY_KEY,
   FONT_SIZE,
@@ -49,16 +51,19 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
     });
 
     const startingSubgraph = new DirectedCluster2Instance({
-      zorn: `start-subgraph | ${rootGraphLocator.distinguisher}`,
-      attributeByKey: {
-        id: engineProgram.locator.startingSubgraphId,
+      locator: new GraphConstituentLocatorInstance({
+        idOverride: engineProgram.locator.startingSubgraphId,
+        localZorn: LocalDirectedGraphElement2Zorn.buildClusterZorn({
+          distinguisher: `start-subgraph | ${rootGraphLocator.distinguisher}`,
+        }),
+        rootGraphLocator,
+        parentId: rootGraphLocator.id,
+      }),
+      inputAttributeByKey: {
         label: '',
         style: GraphLikeStyle.Rounded,
         color: 'none',
       },
-      rootGraphLocator,
-      parentId: rootGraphLocator.id,
-      debugName: 'start-subgraph',
     });
 
     const startNode = new DirectedGraphNode2Instance({
@@ -86,16 +91,19 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
     );
 
     const endingSubgraph = new DirectedCluster2Instance({
-      zorn: `end-subgraph | ${rootGraphLocator.distinguisher}`,
-      attributeByKey: {
-        id: engineProgram.locator.endingSubgraphId,
+      locator: new GraphConstituentLocatorInstance({
+        idOverride: engineProgram.locator.endingSubgraphId,
+        localZorn: LocalDirectedGraphElement2Zorn.buildClusterZorn({
+          distinguisher: `end-subgraph | ${rootGraphLocator.distinguisher}`,
+        }),
+        rootGraphLocator,
+        parentId: rootGraphLocator.id,
+      }),
+      inputAttributeByKey: {
         label: '',
         style: GraphLikeStyle.Rounded,
         color: 'none',
       },
-      rootGraphLocator,
-      parentId: rootGraphLocator.id,
-      debugName: 'end-subgraph',
     });
 
     const endNode = new DirectedGraphNode2Instance({
