@@ -99,7 +99,9 @@ export const addInteractivityToSvgDocument = buildEstinant({
         );
 
       // TODO: move this renaming responsibility elsewhere
-      const fileName = leftInput.zorn.replaceAll(/\//g, '-');
+      const fileName = leftInput.zorn
+        .replace(/^graph:/, '')
+        .replaceAll(/\//g, '-');
 
       return {
         fileName,

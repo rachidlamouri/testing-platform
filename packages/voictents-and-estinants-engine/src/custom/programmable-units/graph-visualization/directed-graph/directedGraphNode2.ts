@@ -1,10 +1,10 @@
 import { PartialNodeAttributeByKey } from './directedGraphNode';
-import { RootGraphLocator } from './rootGraphLocator';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../../utilities/buildConstructorFunction';
 import { getZorn } from '../../../../utilities/getZorn';
+import { RootGraphLocator } from './rootGraphLocator';
 
 type BaseDirectedGraphNode2 = {
   zorn2?: string;

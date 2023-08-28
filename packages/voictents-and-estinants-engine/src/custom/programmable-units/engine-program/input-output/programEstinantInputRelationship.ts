@@ -7,10 +7,8 @@ import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
-import {
-  RootGraphLocator,
-  RootGraphLocatorZorn,
-} from '../../graph-visualization/directed-graph/rootGraphLocator';
+import { RootGraphLocator } from '../../graph-visualization/directed-graph/rootGraphLocator';
+import { RootDirectedGraphElement2Zorn } from '../../graph-visualization/directed-graph/types';
 import { EngineEstinantLocator2 } from '../engineEstinantLocator2';
 import {
   EngineEstinantInput2Zorn,
@@ -18,7 +16,7 @@ import {
 } from './engineEstinantInput2';
 
 const PROGRAM_ESTINANT_INPUT_RELATIONSHIP_ZORN_TEMPLATE = [
-  ['rootGraphLocator', RootGraphLocatorZorn],
+  ['rootGraphLocator', RootDirectedGraphElement2Zorn],
   ['estinantInput', EngineEstinantInput2Zorn],
 ] as const satisfies GenericZorn2Template;
 type ProgramEstinantInputRelationshipZornTemplate =

@@ -39,18 +39,17 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
     const { rootGraphLocator } = engineProgram.locator;
 
     const rootGraph = new DirectedGraph2Instance({
-      attributeByKey: {
-        id: engineProgram.id,
+      locator: rootGraphLocator,
+      inputAttributeByKey: {
         label: engineProgram.programName,
         labelloc: GraphLikeLabelLocation.Top,
         fontsize: FONT_SIZE.root,
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
-      rootGraphLocator,
     });
 
     const startingSubgraph = new DirectedCluster2Instance({
-      zorn: `start-subgraph | ${rootGraphLocator.debugName}`,
+      zorn: `start-subgraph | ${rootGraphLocator.distinguisher}`,
       attributeByKey: {
         id: engineProgram.locator.startingSubgraphId,
         label: '',
@@ -87,7 +86,7 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
     );
 
     const endingSubgraph = new DirectedCluster2Instance({
-      zorn: `end-subgraph | ${rootGraphLocator.debugName}`,
+      zorn: `end-subgraph | ${rootGraphLocator.distinguisher}`,
       attributeByKey: {
         id: engineProgram.locator.endingSubgraphId,
         label: '',

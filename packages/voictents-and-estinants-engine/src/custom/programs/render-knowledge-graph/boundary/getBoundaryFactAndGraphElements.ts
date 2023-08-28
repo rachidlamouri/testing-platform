@@ -45,13 +45,11 @@ export const getBoundaryFactAndGraphElements = buildEstinant({
     });
 
     const rootGraph = new DirectedGraph2Instance({
-      zorn2: boundaryFact.graphZorn,
-      attributeByKey: {
-        id: boundaryFact.graphId,
+      locator: boundaryFact.rootGraphLocator,
+      inputAttributeByKey: {
         label: boundary.displayName,
         ...THEME.graph,
       },
-      rootGraphLocator: boundaryFact.rootGraphLocator,
     });
 
     return {

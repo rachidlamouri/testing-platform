@@ -73,7 +73,7 @@ export const getDirectedGraphFromGraphElementGroup = buildEstinant({
       if ('isRoot' in element) {
         if (element.isRoot) {
           allRootGraphList.push({
-            zorn: element.rootGraphLocator.debugName,
+            zorn: element.rootGraphLocator.zorn.forHuman,
             isRoot: true,
             attributeByKey: element.attributeByKey,
             nodeList: [],
