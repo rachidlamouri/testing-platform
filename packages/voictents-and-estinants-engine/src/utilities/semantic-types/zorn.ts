@@ -40,7 +40,10 @@ type Zorn2LikeConstructor = {
   new (inputValueByTemplateKey: UnsafeInputValueByTemplateKey): Zorn2Like;
 };
 
-type SubzornTuple = readonly [TemplateKey, Zorn2LikeConstructor];
+type SubzornTuple = readonly [
+  TemplateKey,
+  Zorn2LikeConstructor | readonly Zorn2LikeConstructor[],
+];
 
 type InputValue = TemplateKey | SubzornTuple;
 
@@ -61,6 +64,19 @@ type InputValueByTemplateKey<TTemplate extends GenericZorn2Template> = Simplify<
             },
           ]
         ? { [TKey in TTemplate[TIndex][0]]: TZorn2LikeConstructor }
+        : TTemplate[TIndex] extends readonly [
+            string,
+            readonly {
+              new (
+                ...parameterList: infer TParameterList
+              ): infer TZorn2LikeConstructor;
+            }[],
+          ]
+        ? { [TKey in TTemplate[TIndex][0]]: TZorn2LikeConstructor }
+        : // both of these last two states are invalid, but the first is easier to debug
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        TTemplate[TIndex] extends readonly [string, any]
+        ? { [TKey in TTemplate[TIndex][0]]: never }
         : never;
     }>
   >

@@ -17,11 +17,16 @@ const ENGINE_ESTINANT_BUILD_ADD_METADATA_FOR_SERIALIZATION_LOCATOR_ZORN = [
 ] as const satisfies GenericZorn2Template;
 type EngineEstinantBuildAddMetadataForSerializationLocatorZornTemplate =
   typeof ENGINE_ESTINANT_BUILD_ADD_METADATA_FOR_SERIALIZATION_LOCATOR_ZORN;
-export class EngineEstinantBuildAddMetadataForSerializationLocatorZorn extends Zorn2<EngineEstinantBuildAddMetadataForSerializationLocatorZornTemplate> {
+class EngineEstinantBuildAddMetadataForSerializationLocatorZorn extends Zorn2<EngineEstinantBuildAddMetadataForSerializationLocatorZornTemplate> {
   get rawTemplate(): EngineEstinantBuildAddMetadataForSerializationLocatorZornTemplate {
     return ENGINE_ESTINANT_BUILD_ADD_METADATA_FOR_SERIALIZATION_LOCATOR_ZORN;
   }
 }
+
+export const EngineEstinantLocator2ZornClassSet = [
+  EngineEstinantBuildAddMetadataForSerializationLocatorZorn,
+  ExportLocatorZorn,
+] as const;
 
 export enum EngineEstinantLocator2TypeName {
   TopLevelDeclaration = 'TopLevelDeclaration',
@@ -43,9 +48,9 @@ type BaseEngineEstinantBuildAddMetadataForSerializationLocator = {
   index: number;
 };
 
-type EngineEstinantLocator2Zorn =
-  | EngineEstinantBuildAddMetadataForSerializationLocatorZorn
-  | ExportLocatorZorn;
+type EngineEstinantLocator2Zorn = InstanceType<
+  typeof EngineEstinantLocator2ZornClassSet[number]
+>;
 
 type EngineEstinantLocatorPrototype = {
   get zorn(): EngineEstinantLocator2Zorn;

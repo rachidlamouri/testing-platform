@@ -175,7 +175,7 @@ export const getEngineProgram3 = buildEstinant({
       (engineEstinant) => {
         return engineEstinant.inputList.map((input) => {
           return new ProgramEstinantInputRelationshipInstance({
-            inputZorn: input.zorn,
+            inputZorn: input.zorn.forHuman,
             rootGraphLocator,
             estinantLocator: engineEstinant.locator,
           });
