@@ -32,16 +32,16 @@ export const getDirectedGraphMetadataById2 = buildEstinant({
     entryList.forEach((entry) => {
       const metadataById: DirectedGraphMetadataById =
         metadataByIdByRootGraphDebugName.get(
-          entry.rootGraphLocator.debugName,
+          entry.rootGraphLocator.zorn.forHuman,
         ) ?? {
-          zorn: entry.rootGraphLocator.debugName,
+          zorn: entry.rootGraphLocator.zorn.forHuman,
           grition: {},
         };
 
       metadataById.grition[entry.elementId] = entry.metadata;
 
       metadataByIdByRootGraphDebugName.set(
-        entry.rootGraphLocator.debugName,
+        entry.rootGraphLocator.zorn.forHuman,
         metadataById,
       );
     });

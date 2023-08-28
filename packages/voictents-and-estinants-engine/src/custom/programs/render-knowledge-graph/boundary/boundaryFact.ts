@@ -6,12 +6,12 @@ import {
 } from '../../../../utilities/buildConstructorFunction';
 import { getZorn } from '../../../../utilities/getZorn';
 import { getZornableId } from '../../../../utilities/getZornableId';
+import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
+import { Boundary } from './boundary';
 import {
   RootGraphLocator,
   RootGraphLocatorInstance,
 } from '../../../programmable-units/graph-visualization/directed-graph/rootGraphLocator';
-import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
-import { Boundary } from './boundary';
 
 type BaseBoundaryFact = {
   boundary: Boundary;
@@ -20,12 +20,8 @@ type BaseBoundaryFact = {
 
 type BoundaryFactPrototype = {
   get zorn(): string;
-  get graphZorn(): string;
-  get graphId(): string;
-  get subgraphZorn(): string;
-  get subgraphId(): string;
-  get directoryPathRelativeToCommonBoundary(): string;
   get rootGraphLocator(): RootGraphLocator;
+  get directoryPathRelativeToCommonBoundary(): string;
 };
 
 /**
@@ -36,42 +32,25 @@ export type BoundaryFact = ObjectWithPrototype<
   BoundaryFactPrototype
 >;
 
-const memoizedLocatorCache = new Map<BoundaryFact, RootGraphLocator>();
-
 export const { BoundaryFactInstance } = buildConstructorFunctionWithName(
   'BoundaryFactInstance',
 )<BaseBoundaryFact, BoundaryFactPrototype, BoundaryFact>({
   zorn: (boundaryFact) => {
     return getZorn([boundaryFact.boundary.zorn, 'fact']);
   },
-  graphZorn: (boundaryFact) => {
-    return getZorn([boundaryFact.zorn, 'graph']);
-  },
-  graphId: (boundaryFact) => {
-    return getZornableId({ zorn: boundaryFact.graphZorn });
-  },
-  subgraphZorn: (boundaryFact) => {
-    return getZorn([boundaryFact.zorn, 'subgraph']);
-  },
-  subgraphId: (boundaryFact) => {
-    return getZornableId({ zorn: boundaryFact.subgraphZorn });
+  rootGraphLocator: (boundaryFact) => {
+    return new RootGraphLocatorInstance({
+      idOverride: getZornableId({
+        zorn: getZorn([boundaryFact.zorn, 'graph']),
+      }),
+      distinguisher: boundaryFact.boundary.displayName,
+    });
   },
   directoryPathRelativeToCommonBoundary: (boundaryFact) => {
     return posix.relative(
       boundaryFact.commonBoundaryRoot.directoryPath,
       boundaryFact.boundary.directoryPath,
     );
-  },
-  rootGraphLocator: (boundaryFact) => {
-    const locator =
-      memoizedLocatorCache.get(boundaryFact) ??
-      new RootGraphLocatorInstance({
-        id: boundaryFact.graphId,
-        debugName: boundaryFact.boundary.displayName,
-      });
-
-    memoizedLocatorCache.set(boundaryFact, locator);
-    return locator;
   },
 });
 

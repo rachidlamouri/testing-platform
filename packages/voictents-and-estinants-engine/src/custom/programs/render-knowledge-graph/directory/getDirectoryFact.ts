@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 import {
   BOUNDARY_FACT_GEPP,
   BoundaryFactVoque,
@@ -23,7 +24,7 @@ export const getDirectoryFact = buildEstinant({
   .fromHubblepup2<DirectoryBoundaryRelationshipVoque>({
     gepp: DIRECTORY_BOUNDARY_RELATIONSHIP_GEPP,
   })
-  .andFromHubblepupTuple2<BoundaryFactVoque, [string]>({
+  .andFromHubblepupTuple2<BoundaryFactVoque, [OdeshinZorn]>({
     gepp: BOUNDARY_FACT_GEPP,
     framate: (relationship) => [relationship.hubblepup.boundary.zorn],
     croard: (boundaryFact) => {

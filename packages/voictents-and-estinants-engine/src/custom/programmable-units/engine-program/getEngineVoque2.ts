@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 import {
   GenericProgramErrorVoque,
   GenericReceivedProgramError,
@@ -38,7 +39,10 @@ export const getEngineVoque2 = buildEstinant({
   .fromHubblepup2<EngineVoqueLocator2Voque>({
     gepp: ENGINE_VOQUE_LOCATOR_2_GEPP,
   })
-  .andFromHubblepupTuple2<ProgramBodyDeclarationsByIdentifierVoque, [string]>({
+  .andFromHubblepupTuple2<
+    ProgramBodyDeclarationsByIdentifierVoque,
+    [OdeshinZorn]
+  >({
     gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
     framate: (left) => [left.hubblepup.filePath],
     // TODO: "zorn" is pretty useless in this context. This should be "filePath"

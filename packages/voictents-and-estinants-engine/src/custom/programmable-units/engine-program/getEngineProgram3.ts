@@ -1,6 +1,5 @@
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { RootGraphLocatorInstance } from '../graph-visualization/directed-graph/rootGraphLocator';
 import {
   EngineEstinant3Voque,
   ENGINE_ESTINANT_3_GEPP,
@@ -30,6 +29,7 @@ import {
   ProgramEstinantOutputRelationshipInstance,
 } from './input-output/programEstinantOutputRelationship';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 
 /**
  * Joins the program locator to its transforms in order to
@@ -41,7 +41,7 @@ export const getEngineProgram3 = buildEstinant({
   .fromHubblepup2<EngineProgramLocator3Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromHubblepupTuple2<EngineEstinant3Voque, Tuple<string>>({
+  .andFromHubblepupTuple2<EngineEstinant3Voque, Tuple<OdeshinZorn>>({
     gepp: ENGINE_ESTINANT_3_GEPP,
     framate: (engineProgram) => {
       return engineProgram.hubblepup.estinantRelationshipList.map(
@@ -67,10 +67,7 @@ export const getEngineProgram3 = buildEstinant({
     gepp: PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
   })
   .onPinbe((engineProgramLocator, estinantList) => {
-    const rootGraphLocator = new RootGraphLocatorInstance({
-      id: engineProgramLocator.id,
-      debugName: engineProgramLocator.programName,
-    });
+    const { rootGraphLocator } = engineProgramLocator;
 
     const voqueLocatorByZorn = new Map(
       [
@@ -167,14 +164,13 @@ export const getEngineProgram3 = buildEstinant({
         engineProgramLocator.initializedVoqueLocatorList,
       endingVoqueLocatorList,
       locator: engineProgramLocator,
-      rootGraphLocator,
     });
 
     const inputRelationshipList = engineProgram.estinantList.flatMap(
       (engineEstinant) => {
-        return engineEstinant.inputList.map((input) => {
+        return engineEstinant.inputList.map((estinantInput) => {
           return new ProgramEstinantInputRelationshipInstance({
-            inputZorn: input.zorn,
+            estinantInput,
             rootGraphLocator,
             estinantLocator: engineEstinant.locator,
           });

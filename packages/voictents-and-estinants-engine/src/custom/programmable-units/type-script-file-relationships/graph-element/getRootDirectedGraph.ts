@@ -33,6 +33,7 @@ import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from '../rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import { getTextDigest } from '../../../../utilities/getTextDigest';
 import { DirectedCluster } from '../../graph-visualization/directed-graph/directedSubgraph';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 
 /**
  * Converts all TypeScript relationship metadata into a directed graph
@@ -43,7 +44,7 @@ export const getRootDirectedGraph = buildEstinant({
   .fromHubblepup2<RootMetadataVoque>({
     gepp: ROOT_METADATA_GEPP,
   })
-  .andFromHubblepupTuple2<RootMetadataVoque, [string]>({
+  .andFromHubblepupTuple2<RootMetadataVoque, [OdeshinZorn]>({
     gepp: ROOT_METADATA_GEPP,
     framate: () => [OVERVIEW_BOUNDARY_ZORN],
     croard: (rightInput) => rightInput.indexByName.zorn,
@@ -53,7 +54,7 @@ export const getRootDirectedGraph = buildEstinant({
     framate: (leftInput) => [...leftInput.hubblepup.relevantBoundaryIdSet],
     croard: (rightInput) => rightInput.hubblepup.id,
   })
-  .andFromHubblepupTuple2<RootDirectoryVoque, [string]>({
+  .andFromHubblepupTuple2<RootDirectoryVoque, [OdeshinZorn]>({
     gepp: ROOT_DIRECTORY_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
     croard: (rightInput) => rightInput.indexByName.zorn,

@@ -5,6 +5,8 @@ import {
   DirectedGraphElement2Voque,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { DirectedSubgraph2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedSubgraph2';
+import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
+import { LocalDirectedGraphElement2Zorn } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import { THEME } from '../theme';
 import { DIRECTORY_FACT_GEPP, DirectoryFactVoque } from './directoryFact';
 
@@ -35,6 +37,7 @@ export const getDirectoryGraphElements = buildEstinant({
     gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
   .onPinbe((directoryFact, [parentDirectoryFact]) => {
+    // TODO: if you build a directory relationship fact then you can contain this logic in that fact
     let parentId: string;
     let SubgraphLikeConstructor:
       | typeof DirectedSubgraph2Instance
@@ -52,25 +55,33 @@ export const getDirectoryGraphElements = buildEstinant({
     }
 
     const directorySubgraph = new SubgraphLikeConstructor({
-      zorn: directoryFact.subgraphZorn,
-      attributeByKey: {
-        id: directoryFact.subgraphId,
+      locator: new GraphConstituentLocatorInstance({
+        idOverride: directoryFact.subgraphId,
+        localZorn: LocalDirectedGraphElement2Zorn.buildClusterZorn({
+          distinguisher: directoryFact.subgraphZorn,
+        }),
+        rootGraphLocator: directoryFact.boundaryFact.rootGraphLocator,
+        parentId,
+      }),
+      inputAttributeByKey: {
         label,
         ...THEME.directorySubgraph,
       },
-      rootGraphLocator: directoryFact.boundaryFact.rootGraphLocator,
-      parentId,
     });
 
     const pathNodeSubgraph = new DirectedCluster2Instance({
-      zorn: directoryFact.pathNodeSubgraphZorn,
-      attributeByKey: {
-        id: directoryFact.pathNodeSubgraphId,
+      locator: new GraphConstituentLocatorInstance({
+        idOverride: directoryFact.pathNodeSubgraphId,
+        localZorn: LocalDirectedGraphElement2Zorn.buildClusterZorn({
+          distinguisher: directoryFact.pathNodeSubgraphZorn,
+        }),
+        rootGraphLocator: directoryFact.boundaryFact.rootGraphLocator,
+        parentId: directoryFact.subgraphId,
+      }),
+      inputAttributeByKey: {
         label: '',
         ...THEME.directorySubgraph,
       },
-      rootGraphLocator: directoryFact.boundaryFact.rootGraphLocator,
-      parentId: directoryFact.subgraphId,
     });
 
     return [directorySubgraph, pathNodeSubgraph];

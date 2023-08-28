@@ -27,15 +27,6 @@ type PartialEngineProgramLocator2 = ObjectWithPrototype<
 
 export const getEngineProgramZorn = getFileZorn;
 
-const getRootGraphLocator = (
-  locator: PartialEngineProgramLocator2,
-): RootGraphLocator => {
-  return new RootGraphLocatorInstance({
-    id: locator.id,
-    debugName: locator.programName,
-  });
-};
-
 export const { PartialEngineProgramLocator2Instance } =
   buildConstructorFunctionWithName('PartialEngineProgramLocator2Instance')<
     BasePartialEngineProgramLocator2,
@@ -43,5 +34,12 @@ export const { PartialEngineProgramLocator2Instance } =
   >({
     zorn: getEngineProgramZorn,
     id: getZornableId,
-    rootGraphLocator: getRootGraphLocator,
+    rootGraphLocator: (
+      locator: PartialEngineProgramLocator2,
+    ): RootGraphLocator => {
+      return new RootGraphLocatorInstance({
+        idOverride: locator.id,
+        distinguisher: locator.programName,
+      });
+    },
   });

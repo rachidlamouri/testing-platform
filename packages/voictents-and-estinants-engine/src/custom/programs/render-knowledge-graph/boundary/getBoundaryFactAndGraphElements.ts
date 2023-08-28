@@ -26,11 +26,11 @@ export const getBoundaryFactAndGraphElements = buildEstinant({
   .fromHubblepup2<BoundaryVoque>({
     gepp: BOUNDARY_GEPP,
   })
-  .andFromHubblepupTuple2<CommonBoundaryRootVoque, [true]>({
+  .andFromHubblepupTuple2<CommonBoundaryRootVoque, ['']>({
     gepp: COMMON_BOUNDARY_ROOT_GEPP,
     // TODO: make a more readable pattern for singleton collections
-    framate: () => [true],
-    croard: () => true,
+    framate: () => [''],
+    croard: () => '',
   })
   .toHubblepup2<BoundaryFactVoque>({
     gepp: BOUNDARY_FACT_GEPP,
@@ -45,13 +45,11 @@ export const getBoundaryFactAndGraphElements = buildEstinant({
     });
 
     const rootGraph = new DirectedGraph2Instance({
-      zorn2: boundaryFact.graphZorn,
-      attributeByKey: {
-        id: boundaryFact.graphId,
+      locator: boundaryFact.rootGraphLocator,
+      inputAttributeByKey: {
         label: boundary.displayName,
         ...THEME.graph,
       },
-      rootGraphLocator: boundaryFact.rootGraphLocator,
     });
 
     return {

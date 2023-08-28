@@ -63,6 +63,9 @@ export const scaffoldFile = buildEstinant({
       'utf8',
     );
 
+    const zornTemplateCodeName = `${screamingSnakeCaseName}_ZORN_TEMPLATE`;
+    const zornTemplateTypeName = `${pascalCaseName}ZornTemplate`;
+    const zornTemplateClassName = `${pascalCaseName}Zorn`;
     const hubblepupBaseTypeName = `Base${pascalCaseName}`;
     const hubblepupPrototypeTypeName = `${pascalCaseName}Prototype`;
     const hubblepupTypename = pascalCaseName;
@@ -74,22 +77,32 @@ export const scaffoldFile = buildEstinant({
     const voqueTypeName = `${hubblepupTypename}Voque`;
 
     const prependedContent = [
+      `const ${zornTemplateCodeName} = [`,
+      '  // TODO: add keys',
+      '] as const satisfies GenericZorn2Template',
+      `type ${zornTemplateTypeName} = typeof ${zornTemplateCodeName}`,
+      `class ${zornTemplateClassName} extends Zorn2<${zornTemplateTypeName}> {`,
+      `  get rawTemplate(): ${zornTemplateTypeName} {`,
+      `    return ${zornTemplateCodeName}`,
+      '  }',
+      '}',
+      '',
       `type ${hubblepupBaseTypeName} = {`,
       '  // TODO: add properties',
       '}',
       '',
       `type ${hubblepupPrototypeTypeName} = {`,
-      '  get zorn(): string',
+      `  get zorn(): ${zornTemplateClassName}`,
       '}',
       '',
       `type ${hubblepupTypename} = ObjectWithPrototype<${hubblepupBaseTypeName}, ${hubblepupPrototypeTypeName}>`,
       '',
       `export const { ${constructorCodeName} } = buildConstructorFunctionWithName('${constructorCodeName}')<${hubblepupBaseTypeName}, ${hubblepupPrototypeTypeName}, ${hubblepupTypename}>({`,
-      `  zorn: (${getterInstanceCodeName}) => {`,
-      `    return getZorn([`,
-      '      // TODO: implement',
-      `    ])`,
-      `  },`,
+      `  zorn: memoizeGetter((${getterInstanceCodeName}) => {`,
+      `    return new ${zornTemplateClassName}({`,
+      '      // TODO: add key/value pairs',
+      `    })`,
+      `  }),`,
       '})',
       '',
       `export const ${geppCodeName} = '${geppLiteral}'`,

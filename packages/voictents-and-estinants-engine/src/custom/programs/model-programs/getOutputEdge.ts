@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 import {
   ENGINE_ESTINANT_3_GEPP,
   EngineEstinant3Voque,
@@ -27,14 +28,14 @@ export const getOutputEdge = buildEstinant({
     gepp: PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
   })
   // TODO: locator and estinant ids for buildAddMetadtaForSerialization can have different ids. Remove this when that issue is fixed
-  .andFromHubblepupTuple2<EngineEstinant3Voque, [string]>({
+  .andFromHubblepupTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
     gepp: ENGINE_ESTINANT_3_GEPP,
     framate: (relationship) => {
       return [relationship.hubblepup.estinantLocator.zorn];
     },
     croard: (engineEstinant) => engineEstinant.hubblepup.locator.zorn,
   })
-  .andFromHubblepupTuple2<EstinantOutput2Voque, [string]>({
+  .andFromHubblepupTuple2<EstinantOutput2Voque, [OdeshinZorn]>({
     gepp: ESTINANT_OUTPUT_2_GEPP,
     framate: (relationship) => {
       return [relationship.hubblepup.outputZorn];

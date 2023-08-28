@@ -24,11 +24,11 @@ export const getDirectoryBoundaryRelationship = buildEstinant({
   .fromHubblepup2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .andFromHubblepupTuple2<BoundaryTrieBVoque, [true]>({
+  .andFromHubblepupTuple2<BoundaryTrieBVoque, ['']>({
     // TODO: make a more readable pattern for singletons
     gepp: BOUNDARY_TRIE_B_GEPP,
-    framate: () => [true],
-    croard: () => true,
+    framate: () => [''],
+    croard: () => '',
   })
   .toHubblepupTuple2<DirectoryBoundaryRelationshipVoque>({
     gepp: DIRECTORY_BOUNDARY_RELATIONSHIP_GEPP,

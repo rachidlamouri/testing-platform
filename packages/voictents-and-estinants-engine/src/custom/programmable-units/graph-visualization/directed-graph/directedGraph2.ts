@@ -2,22 +2,22 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../../utilities/buildConstructorFunction';
-import { getZorn } from '../../../../utilities/getZorn';
 import { PartialGraphAttributeByKey } from './directedGraph';
 import { RootGraphLocator } from './rootGraphLocator';
+import { RootDirectedGraphElement2Zorn } from './types';
 
 type BaseDirectedGraph2 = {
-  // TODO: replace computed zorn with static zorn
-  zorn2?: string;
+  locator: RootGraphLocator;
   isCluster?: never;
-  attributeByKey: PartialGraphAttributeByKey;
+  inputAttributeByKey: Omit<PartialGraphAttributeByKey, 'id'>;
   rankGroupList?: never;
-  rootGraphLocator: RootGraphLocator;
 };
 
 type DirectedGraph2Prototype = {
-  get zorn(): string;
-  get id(): string;
+  get zorn(): RootDirectedGraphElement2Zorn;
+  /** @deprecated */
+  get rootGraphLocator(): RootGraphLocator;
+  get attributeByKey(): PartialGraphAttributeByKey;
   get isRoot(): true;
 };
 
@@ -30,13 +30,16 @@ export const { DirectedGraph2Instance } = buildConstructorFunctionWithName(
   'DirectedGraph2Instance',
 )<BaseDirectedGraph2, DirectedGraph2Prototype, DirectedGraph2>({
   zorn: (directedGraph) => {
-    return (
-      directedGraph.zorn2 ??
-      getZorn([directedGraph.rootGraphLocator.zorn, directedGraph.id])
-    );
+    return directedGraph.locator.zorn;
   },
-  id: (directedGraph) => {
-    return directedGraph.attributeByKey.id;
+  rootGraphLocator: (directedGraph) => {
+    return directedGraph.locator;
+  },
+  attributeByKey: (directedGraph) => {
+    return {
+      id: directedGraph.locator.id,
+      ...directedGraph.inputAttributeByKey,
+    };
   },
   isRoot: () => true,
 });

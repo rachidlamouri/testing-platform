@@ -27,15 +27,12 @@ export const getAssociatedBoundaryFactGraphElements = buildEstinant({
   })
   .onPinbe((associatedBoundaryFact) => {
     const associatedBoundarySubgraph = new DirectedCluster2Instance({
-      zorn: associatedBoundaryFact.subgraphZorn,
-      attributeByKey: {
-        id: associatedBoundaryFact.subgraphId,
+      locator: associatedBoundaryFact.subgraphLocator,
+      inputAttributeByKey: {
         label:
           associatedBoundaryFact.referencedBoundaryFact.boundary.displayName,
         ...THEME.boundary,
       },
-      rootGraphLocator: associatedBoundaryFact.rootGraphLocator,
-      parentId: associatedBoundaryFact.rootGraphLocator.id,
     });
 
     const placeholderNode = new DirectedGraphNode2Instance({
@@ -47,7 +44,7 @@ export const getAssociatedBoundaryFactGraphElements = buildEstinant({
         ...THEME.file,
       },
       rootGraphLocator: associatedBoundaryFact.rootGraphLocator,
-      parentId: associatedBoundaryFact.subgraphId,
+      parentId: associatedBoundarySubgraph.id,
     });
 
     return [associatedBoundarySubgraph, placeholderNode];

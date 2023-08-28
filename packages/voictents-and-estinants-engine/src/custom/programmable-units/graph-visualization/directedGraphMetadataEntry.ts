@@ -32,7 +32,7 @@ export const { DirectedGraphMetadataEntryInstance } =
   >({
     zorn: (metadataEntry) => {
       return getZorn([
-        metadataEntry.rootGraphLocator.debugName,
+        metadataEntry.rootGraphLocator.distinguisher,
         metadataEntry.elementId,
       ]);
     },

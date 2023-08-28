@@ -5,7 +5,12 @@ import {
 } from '../../../../utilities/buildConstructorFunction';
 import { getZorn } from '../../../../utilities/getZorn';
 import { getZornableId } from '../../../../utilities/getZornableId';
+import {
+  GraphConstituentLocator,
+  GraphConstituentLocatorInstance,
+} from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
 import { RootGraphLocator } from '../../../programmable-units/graph-visualization/directed-graph/rootGraphLocator';
+import { LocalDirectedGraphElement2Zorn } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import { BoundaryFact } from '../boundary/boundaryFact';
 
 type BaseAssociatedBoundaryFact = {
@@ -15,8 +20,7 @@ type BaseAssociatedBoundaryFact = {
 
 type AssociatedBoundaryFactPrototype = {
   get zorn(): string;
-  get subgraphZorn(): string;
-  get subgraphId(): string;
+  get subgraphLocator(): GraphConstituentLocator;
   get rootGraphLocator(): RootGraphLocator;
 };
 
@@ -41,11 +45,18 @@ export const { AssociatedBoundaryFactInstance } =
         associatedBoundaryFact.referencedBoundaryFact.zorn,
       ]);
     },
-    subgraphZorn: (associatedBoundaryFact) => {
-      return getZorn([associatedBoundaryFact.zorn, 'subgraph']);
-    },
-    subgraphId: (associatedBoundaryFact) => {
-      return getZornableId({ zorn: associatedBoundaryFact.subgraphZorn });
+    subgraphLocator: (associatedBoundaryFact) => {
+      const distinguisher = getZorn([associatedBoundaryFact.zorn, 'subgraph']);
+      return new GraphConstituentLocatorInstance({
+        idOverride: getZornableId({
+          zorn: distinguisher,
+        }),
+        rootGraphLocator: associatedBoundaryFact.rootGraphLocator,
+        parentId: associatedBoundaryFact.rootGraphLocator.id,
+        localZorn: LocalDirectedGraphElement2Zorn.buildSubgraphZorn({
+          distinguisher,
+        }),
+      });
     },
     rootGraphLocator: (boundaryAssociation) => {
       return boundaryAssociation.referencingBoundaryFact.rootGraphLocator;

@@ -24,7 +24,6 @@ type BaseEngineProgramLocator3 = {
 type EngineProgramLocator3Prototype = {
   get zorn(): string;
   get id(): string;
-  // get rootGraphLocator(): RootGraphLocator;
   get startingSubgraphId(): string;
   get startingNodeId(): string;
   get endingSubgraphId(): string;
@@ -47,7 +46,6 @@ export const { EngineProgramLocator3Instance } =
   >({
     zorn: getEngineProgramZorn,
     id: getZornableId,
-    // rootGraphLocator: getRootGraphLocator,
     startingSubgraphId: (locator) => {
       return getTextDigest(`start-subgraph | ${locator.programName}`);
     },

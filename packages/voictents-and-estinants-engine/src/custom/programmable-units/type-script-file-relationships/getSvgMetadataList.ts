@@ -1,4 +1,5 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 import {
   SVG_DOCUMENT_GEPP,
   SvgDocumentVoque,
@@ -26,7 +27,7 @@ export const getSvgMetadataList = buildEstinant({
   .fromVoictent2<SvgDocumentVoque>({
     gepp: SVG_DOCUMENT_GEPP,
   })
-  .andFromHubblepupTuple2<RootDirectoryVoque, [string]>({
+  .andFromHubblepupTuple2<RootDirectoryVoque, [OdeshinZorn]>({
     gepp: ROOT_DIRECTORY_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
     croard: (rightInput) => rightInput.indexByName.zorn,

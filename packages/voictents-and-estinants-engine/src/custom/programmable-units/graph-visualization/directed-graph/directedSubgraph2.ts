@@ -4,21 +4,23 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../../utilities/buildConstructorFunction';
+import { GlobalDirectedGraphElement2Zorn } from './types';
+import { GraphConstituentLocator } from './graphConstituentLocator';
 
 type BaseDirectedSubgraph2 = {
-  zorn: string;
-  attributeByKey: PartialSubgraphAttributeByKey;
+  locator: GraphConstituentLocator;
+  inputAttributeByKey: Omit<PartialSubgraphAttributeByKey, 'id'>;
   rankGroupList?: string[][];
-  rootGraphLocator: RootGraphLocator;
-  parentId: string;
-  debugName: string;
 };
 
 type DirectedSubgraph2Prototype = {
-  // get zorn(): string;
+  get zorn(): GlobalDirectedGraphElement2Zorn;
   get id(): string;
+  get parentId(): string;
+  get attributeByKey(): PartialSubgraphAttributeByKey;
   get isRoot(): false;
   get isCluster(): false;
+  get rootGraphLocator(): RootGraphLocator;
 };
 
 export type DirectedSubgraph2 = ObjectWithPrototype<
@@ -29,15 +31,24 @@ export type DirectedSubgraph2 = ObjectWithPrototype<
 export const { DirectedSubgraph2Instance } = buildConstructorFunctionWithName(
   'DirectedSubgraph2Instance',
 )<BaseDirectedSubgraph2, DirectedSubgraph2Prototype>({
-  // zorn: (directedSubgraph) => {
-  //   return getZorn([
-  //     directedSubgraph.rootGraphLocator.zorn,
-  //     directedSubgraph.id,
-  //   ]);
-  // },
+  zorn: (directedSubgraph) => {
+    return directedSubgraph.locator.zorn;
+  },
   id: (directedSubgraph) => {
-    return directedSubgraph.attributeByKey.id;
+    return directedSubgraph.locator.id;
+  },
+  parentId: (directedSubgraph) => {
+    return directedSubgraph.locator.parentId;
+  },
+  attributeByKey: (directedSubgraph) => {
+    return {
+      id: directedSubgraph.id,
+      ...directedSubgraph.inputAttributeByKey,
+    };
   },
   isRoot: () => false,
   isCluster: () => false,
+  rootGraphLocator: (directedSubgraph) => {
+    return directedSubgraph.locator.rootGraphLocator;
+  },
 });

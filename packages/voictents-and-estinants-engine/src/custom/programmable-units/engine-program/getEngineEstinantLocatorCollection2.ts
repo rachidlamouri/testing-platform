@@ -27,7 +27,7 @@ export const getEngineEstinantLocatorCollection2 = buildEstinant({
     const entries = relationshipList
       .map((relationship) => relationship.estinantLocator)
       .map((estinantLocator): [string, EngineEstinantLocator2] => [
-        estinantLocator.zorn,
+        estinantLocator.zorn.forHuman,
         estinantLocator,
       ]);
 

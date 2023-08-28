@@ -1,5 +1,5 @@
 import { GenericVoque } from '../../../core/engine/voque';
-import { ZornTuple } from '../../../utilities/semantic-types/zorn';
+import { ZornTuple2 } from '../../../utilities/semantic-types/zorn';
 import { GenericAdaptedLeftInputVicken } from './vicken';
 
 export type PartialLeftInputAppreffinge<TLeftInputVoque extends GenericVoque> =
@@ -10,7 +10,7 @@ export type PartialLeftInputAppreffinge<TLeftInputVoque extends GenericVoque> =
 export type PartialRightHubblepupTupleAppreffinge<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TRightInputVoque extends GenericVoque,
-  TZornTuple extends ZornTuple,
+  TZornTuple extends ZornTuple2,
 > = {
   gepp: TRightInputVoque['gepp'];
   framate: (

@@ -32,7 +32,7 @@ export const constructDynamicIndexFile = buildEstinant({
 
     const importStatementList = boundaryFactWithVariableNameList.map(
       ({ boundaryFact, variableName }) => {
-        return `import { Main as ${variableName} } from './${boundaryFact.rootGraphLocator.debugName}';`;
+        return `import { Main as ${variableName} } from './${boundaryFact.rootGraphLocator.distinguisher}';`;
       },
     );
 

@@ -19,12 +19,12 @@ type BaseEngineProgram3 = {
   initializedVoqueLocatorList: EngineVoqueLocator2[];
   endingVoqueLocatorList: EngineVoqueLocator2[];
   locator: EngineProgramLocator3;
-  rootGraphLocator: RootGraphLocator;
 };
 
 type EngineProgram3Prototype = {
   get zorn(): string;
   get id(): string;
+  get rootGraphLocator(): RootGraphLocator;
 };
 
 /**
@@ -40,6 +40,9 @@ export const { EngineProgram3Instance } = buildConstructorFunctionWithName(
 )<BaseEngineProgram3, EngineProgram3Prototype>({
   zorn: getEngineProgramZorn,
   id: getZornableId,
+  rootGraphLocator: (engineProgram) => {
+    return engineProgram.locator.rootGraphLocator;
+  },
 });
 
 export const ENGINE_PROGRAM_3_GEPP = 'engine-program-3';

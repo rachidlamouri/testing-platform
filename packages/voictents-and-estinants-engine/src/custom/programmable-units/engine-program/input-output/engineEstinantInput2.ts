@@ -2,11 +2,30 @@ import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVo
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
+  memoizeGetter,
 } from '../../../../utilities/buildConstructorFunction';
-import { getTextDigest } from '../../../../utilities/getTextDigest';
-import { getZorn } from '../../../../utilities/getZorn';
-import { EngineEstinantLocator2 } from '../engineEstinantLocator2';
+import {
+  GenericZorn2Template,
+  Zorn2,
+} from '../../../../utilities/semantic-types/zorn';
+import {
+  EngineEstinantLocator2,
+  EngineEstinantLocator2ZornClassSet,
+} from '../engineEstinantLocator2';
 import { EngineVoqueLocator2 } from '../engineVoqueLocator2';
+
+const ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE = [
+  'inputIndex',
+  'voictentName',
+  ['estinantLocator', EngineEstinantLocator2ZornClassSet],
+] as const satisfies GenericZorn2Template;
+type EngineEstinantInput2ZornTemplate =
+  typeof ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE;
+export class EngineEstinantInput2Zorn extends Zorn2<EngineEstinantInput2ZornTemplate> {
+  get rawTemplate(): EngineEstinantInput2ZornTemplate {
+    return ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE;
+  }
+}
 
 type BaseEstinantInput2 = {
   // TODO: delete "voictentName" in favor of "voqueLocator"
@@ -19,7 +38,7 @@ type BaseEstinantInput2 = {
 };
 
 type EstinantInput2Prototype = {
-  get zorn(): string;
+  get zorn(): EngineEstinantInput2Zorn;
   get id(): string;
 };
 
@@ -34,19 +53,14 @@ export type EstinantInput2 = ObjectWithPrototype<
 export const { EstinantInput2Instance } = buildConstructorFunctionWithName(
   'EstinantInput2Instance',
 )<BaseEstinantInput2, EstinantInput2Prototype>({
-  zorn: (input) => {
-    return getZorn([
-      'input',
-      `${input.index}`,
-      input.voictentName,
-      input.estinantLocator.zorn,
-    ]);
-  },
-  id: (input) => {
-    const zorn = `${input.estinantName} | input | ${input.voictentName} | ${input.index}`;
-    const id = getTextDigest(zorn);
-    return id;
-  },
+  zorn: memoizeGetter((input) => {
+    return new EngineEstinantInput2Zorn({
+      inputIndex: `${input.index}`,
+      voictentName: input.voictentName,
+      estinantLocator: input.estinantLocator.zorn,
+    });
+  }),
+  id: (input) => input.zorn.forMachine,
 });
 
 export const ESTINANT_INPUT_2_GEPP = 'estinant-input-2';

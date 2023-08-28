@@ -24,6 +24,7 @@ import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   DirectedGraphMetadataById,
 } from '../graph-visualization/directedGraphMetadataById';
+import { OdeshinZorn } from '../../adapter/odeshin2';
 
 /**
  * Converts all TypeScript relationship metadata into a format that can be used
@@ -35,7 +36,7 @@ export const getGraphMetadataById = buildEstinant({
   .fromHubblepup2<RootMetadataVoque>({
     gepp: ROOT_METADATA_GEPP,
   })
-  .andFromHubblepupTuple2<RootDirectoryVoque, [string]>({
+  .andFromHubblepupTuple2<RootDirectoryVoque, [OdeshinZorn]>({
     gepp: ROOT_DIRECTORY_GEPP,
     framate: () => [TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN],
     croard: (rightInput) => rightInput.indexByName.zorn,

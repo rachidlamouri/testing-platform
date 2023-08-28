@@ -73,7 +73,7 @@ export const getDirectedGraphFromGraphElementGroup = buildEstinant({
       if ('isRoot' in element) {
         if (element.isRoot) {
           allRootGraphList.push({
-            zorn: element.rootGraphLocator.debugName,
+            zorn: element.rootGraphLocator.zorn.forHuman,
             isRoot: true,
             attributeByKey: element.attributeByKey,
             nodeList: [],
@@ -87,28 +87,26 @@ export const getDirectedGraphFromGraphElementGroup = buildEstinant({
         if (element.isCluster) {
           allSubgraphList.push({
             subgraph1: {
-              zorn: element.zorn,
+              zorn: element.zorn.forHuman,
               isRoot: false,
               isCluster: element.isCluster,
               attributeByKey: element.attributeByKey,
               nodeList: [],
               edgeList: [],
               subgraphList: [],
-              // debugName: element.debugName,
             },
             subgraph2: element,
           });
         } else {
           allSubgraphList.push({
             subgraph1: {
-              zorn: element.zorn,
+              zorn: element.zorn.forHuman,
               isRoot: false,
               isCluster: element.isCluster,
               attributeByKey: element.attributeByKey,
               nodeList: [],
               edgeList: [],
               subgraphList: [],
-              // debugName: element.debugName,
             },
             subgraph2: element,
           });

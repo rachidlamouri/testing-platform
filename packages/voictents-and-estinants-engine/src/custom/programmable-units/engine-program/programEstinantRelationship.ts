@@ -33,7 +33,7 @@ export const { ProgramEstinantRelationshipInstance } =
   >({
     zorn: (relationship) => {
       return getZorn([
-        relationship.estinantLocator.zorn,
+        relationship.estinantLocator.zorn.forHuman,
         relationship.programName,
       ]);
     },

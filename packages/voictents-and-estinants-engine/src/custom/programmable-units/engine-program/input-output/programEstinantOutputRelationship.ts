@@ -32,7 +32,7 @@ export const { ProgramEstinantOutputRelationshipInstance } =
   >({
     zorn: (relationship) => {
       return getZorn([
-        relationship.rootGraphLocator.zorn,
+        relationship.rootGraphLocator.zorn.forHuman,
         relationship.outputZorn,
       ]);
     },
