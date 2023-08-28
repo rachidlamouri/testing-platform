@@ -13,7 +13,7 @@ const ROOT_GRAPH_LOCATOR_ZORN_TEMPLATE = [
   'debugName',
 ] as const satisfies GenericZorn2Template;
 type RootGraphLocatorZornTemplate = typeof ROOT_GRAPH_LOCATOR_ZORN_TEMPLATE;
-class RootGraphLocatorZorn extends Zorn2<RootGraphLocatorZornTemplate> {
+export class RootGraphLocatorZorn extends Zorn2<RootGraphLocatorZornTemplate> {
   get rawTemplate(): RootGraphLocatorZornTemplate {
     return ROOT_GRAPH_LOCATOR_ZORN_TEMPLATE;
   }

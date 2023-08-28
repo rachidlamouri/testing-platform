@@ -21,7 +21,7 @@ const ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE = [
 ] as const satisfies GenericZorn2Template;
 type EngineEstinantInput2ZornTemplate =
   typeof ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE;
-class EngineEstinantInput2Zorn extends Zorn2<EngineEstinantInput2ZornTemplate> {
+export class EngineEstinantInput2Zorn extends Zorn2<EngineEstinantInput2ZornTemplate> {
   get rawTemplate(): EngineEstinantInput2ZornTemplate {
     return ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE;
   }

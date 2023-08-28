@@ -39,7 +39,7 @@ export const getInputEdges = buildEstinant({
   .andFromHubblepupTuple2<EstinantInput2Voque, [OdeshinZorn]>({
     gepp: ESTINANT_INPUT_2_GEPP,
     framate: (relationship) => {
-      return [relationship.hubblepup.inputZorn];
+      return [relationship.hubblepup.estinantInput.zorn];
     },
     croard: (estinantInput) => estinantInput.hubblepup.zorn,
   })

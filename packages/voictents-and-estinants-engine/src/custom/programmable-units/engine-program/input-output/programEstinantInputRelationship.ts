@@ -3,18 +3,40 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../../utilities/buildConstructorFunction';
-import { getZorn } from '../../../../utilities/getZorn';
-import { RootGraphLocator } from '../../graph-visualization/directed-graph/rootGraphLocator';
+import {
+  GenericZorn2Template,
+  Zorn2,
+} from '../../../../utilities/semantic-types/zorn';
+import {
+  RootGraphLocator,
+  RootGraphLocatorZorn,
+} from '../../graph-visualization/directed-graph/rootGraphLocator';
 import { EngineEstinantLocator2 } from '../engineEstinantLocator2';
+import {
+  EngineEstinantInput2Zorn,
+  EstinantInput2,
+} from './engineEstinantInput2';
+
+const PROGRAM_ESTINANT_INPUT_RELATIONSHIP_ZORN_TEMPLATE = [
+  ['rootGraphLocator', RootGraphLocatorZorn],
+  ['estinantInput', EngineEstinantInput2Zorn],
+] as const satisfies GenericZorn2Template;
+type ProgramEstinantInputRelationshipZornTemplate =
+  typeof PROGRAM_ESTINANT_INPUT_RELATIONSHIP_ZORN_TEMPLATE;
+class ProgramEstinantInputRelationshipZorn extends Zorn2<ProgramEstinantInputRelationshipZornTemplate> {
+  get rawTemplate(): ProgramEstinantInputRelationshipZornTemplate {
+    return PROGRAM_ESTINANT_INPUT_RELATIONSHIP_ZORN_TEMPLATE;
+  }
+}
 
 type BaseProgramEstinantInputRelationship = {
-  inputZorn: string;
+  estinantInput: EstinantInput2;
   rootGraphLocator: RootGraphLocator;
   estinantLocator: EngineEstinantLocator2;
 };
 
 type ProgramEstinantInputRelationshipPrototype = {
-  get zorn(): string;
+  get zorn(): ProgramEstinantInputRelationshipZorn;
 };
 
 /**
@@ -31,10 +53,10 @@ export const { ProgramEstinantInputRelationshipInstance } =
     ProgramEstinantInputRelationshipPrototype
   >({
     zorn: (relationship) => {
-      return getZorn([
-        relationship.rootGraphLocator.zorn.forHuman,
-        relationship.inputZorn,
-      ]);
+      return new ProgramEstinantInputRelationshipZorn({
+        rootGraphLocator: relationship.rootGraphLocator.zorn,
+        estinantInput: relationship.estinantInput.zorn,
+      });
     },
   });
 
