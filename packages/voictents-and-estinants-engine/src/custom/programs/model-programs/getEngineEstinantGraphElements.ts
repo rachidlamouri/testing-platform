@@ -20,6 +20,8 @@ import { NodeShape } from '../../programmable-units/graph-visualization/directed
 import { DirectedGraphNode2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { RankType } from '../../programmable-units/graph-visualization/directed-graph/directedSubgraph';
 import { DirectedSubgraph2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedSubgraph2';
+import { GraphConstituentLocatorInstance } from '../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
+import { LocalDirectedGraphElement2Zorn } from '../../programmable-units/graph-visualization/directed-graph/types';
 import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-file-relationships/graph-element/commonAttributeByKey';
 
 /**
@@ -45,31 +47,42 @@ export const getEngineEstinantGraphElements = buildEstinant({
   .onPinbe((relationship, [engineEstinant]) => {
     const { rootGraphLocator } = relationship;
 
-    const rootEstinantSubgraphZorn = `${relationship.programName} | ${engineEstinant.estinantName} | estinant-subgraph`;
-    const rootEstinantSubgraphId = getTextDigest(rootEstinantSubgraphZorn);
-
-    const estinantInputSubgraphZorn = `${relationship.programName} | ${engineEstinant.estinantName} | estinant-input-subgraph`;
-    const estinantInputSubgraphId = getTextDigest(estinantInputSubgraphZorn);
-
-    const rootEstinantSubgraph = new DirectedSubgraph2Instance({
-      zorn: rootEstinantSubgraphZorn,
-      attributeByKey: {
-        id: rootEstinantSubgraphId,
-      },
+    const rootEstinantSubgraphDistinguisher = `${relationship.programName} | ${engineEstinant.estinantName} | estinant-subgraph`;
+    const rootEstinantSubgraphId = getTextDigest(
+      rootEstinantSubgraphDistinguisher,
+    );
+    const rootEstinantSubgraphLocator = new GraphConstituentLocatorInstance({
+      idOverride: rootEstinantSubgraphId,
+      localZorn: LocalDirectedGraphElement2Zorn.buildSubgraphZorn({
+        distinguisher: rootEstinantSubgraphDistinguisher,
+      }),
       rootGraphLocator,
       parentId: rootGraphLocator.id,
-      debugName: rootEstinantSubgraphZorn,
+    });
+
+    const estinantInputSubgraphDistinguisher = `${relationship.programName} | ${engineEstinant.estinantName} | estinant-input-subgraph`;
+    const estinantInputSubgraphId = getTextDigest(
+      estinantInputSubgraphDistinguisher,
+    );
+    const estinantInputSubgraphLocator = new GraphConstituentLocatorInstance({
+      idOverride: estinantInputSubgraphId,
+      localZorn: LocalDirectedGraphElement2Zorn.buildSubgraphZorn({
+        distinguisher: estinantInputSubgraphDistinguisher,
+      }),
+      rootGraphLocator,
+      parentId: rootEstinantSubgraphId,
+    });
+
+    const rootEstinantSubgraph = new DirectedSubgraph2Instance({
+      locator: rootEstinantSubgraphLocator,
+      inputAttributeByKey: {},
     });
 
     const estinantInputSubgraph = new DirectedSubgraph2Instance({
-      zorn: estinantInputSubgraphZorn,
-      attributeByKey: {
-        id: estinantInputSubgraphId,
+      locator: estinantInputSubgraphLocator,
+      inputAttributeByKey: {
         rank: RankType.Same,
       },
-      rootGraphLocator,
-      parentId: rootEstinantSubgraphId,
-      debugName: estinantInputSubgraphZorn,
     });
 
     const estinantNode = new DirectedGraphNode2Instance({

@@ -94,21 +94,19 @@ export const getDirectedGraphFromGraphElementGroup = buildEstinant({
               nodeList: [],
               edgeList: [],
               subgraphList: [],
-              // debugName: element.debugName,
             },
             subgraph2: element,
           });
         } else {
           allSubgraphList.push({
             subgraph1: {
-              zorn: element.zorn,
+              zorn: element.zorn.forHuman,
               isRoot: false,
               isCluster: element.isCluster,
               attributeByKey: element.attributeByKey,
               nodeList: [],
               edgeList: [],
               subgraphList: [],
-              // debugName: element.debugName,
             },
             subgraph2: element,
           });
