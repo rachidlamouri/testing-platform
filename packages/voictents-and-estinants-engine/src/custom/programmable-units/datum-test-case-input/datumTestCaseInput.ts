@@ -218,6 +218,34 @@ const collectionCollectionTestCaseList: DatumTestCaseInput[] = [
   },
 ];
 
+const circularObject: Record<string, unknown> = { test: 1 };
+circularObject.self = circularObject;
+const circularArray: unknown[] = [1, 2, 3];
+circularArray.push(circularArray);
+const circularSet = new Set<unknown>([1, 2, 3]);
+circularSet.add(circularSet);
+const circularMap = new Map<unknown, unknown>([['test', 1]]);
+circularMap.set(circularMap, circularMap);
+
+const circularReferenceTestCaseList: DatumTestCaseInput[] = [
+  {
+    zorn: '1/type-script/3/circular-reference/0/object',
+    grition: circularObject,
+  },
+  {
+    zorn: '1/type-script/3/circular-reference/1/array',
+    grition: circularArray,
+  },
+  {
+    zorn: '1/type-script/3/circular-reference/2/set',
+    grition: circularSet,
+  },
+  {
+    zorn: '1/type-script/3/circular-reference/3/map',
+    grition: circularMap,
+  },
+];
+
 export const DATUM_TEST_CASE_INPUT_ODESHIN_LIST: DatumTestCaseInput[] = [
   ...jsonTestCaseList,
   ...jsonPrimitiveCollectionTestCaseList,
@@ -225,4 +253,5 @@ export const DATUM_TEST_CASE_INPUT_ODESHIN_LIST: DatumTestCaseInput[] = [
   ...primitiveTestCaseList,
   ...primitiveCollectionTestCaseList,
   ...collectionCollectionTestCaseList,
+  ...circularReferenceTestCaseList,
 ];

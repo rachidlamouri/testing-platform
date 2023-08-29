@@ -1,0 +1,3 @@
+Converting circular structure to JSON
+    --> starting at object with constructor 'Array'
+    --- index 3 closes the circle

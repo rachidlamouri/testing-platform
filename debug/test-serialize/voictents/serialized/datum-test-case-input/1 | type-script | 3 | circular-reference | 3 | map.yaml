@@ -1,0 +1,7 @@
+# Map
+- - "test"
+  - 1
+    # symbol: "CIRCULAR REFERENCE"
+- - "Symbol 14"
+    # symbol: "CIRCULAR REFERENCE"
+  - "Symbol 14"

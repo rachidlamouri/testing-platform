@@ -1,5 +1,5 @@
 # symbol: "key-0"
-"Symbol 14":
+"Symbol 15":
   - null
   - ~
   - "this is a single line string"
@@ -21,7 +21,7 @@
     # symbol: "this is a symbol description"
   - "Symbol 1"
 # symbol: "key-1"
-"Symbol 15":
+"Symbol 16":
   # Set
   - null
   - ~
@@ -44,7 +44,7 @@
     # symbol: "this is a symbol description"
   - "Symbol 1"
 # symbol: "key-2"
-"Symbol 16":
+"Symbol 17":
   "key-0": null
   "key-1": ~
   "key-2": "this is a single line string"
@@ -70,7 +70,7 @@
     # symbol: "this is a symbol description"
     "Symbol 1"
 # symbol: "key-3"
-"Symbol 17":
+"Symbol 18":
   # symbol: "key-0"
   "Symbol 2": null
   # symbol: "key-1"
@@ -108,31 +108,13 @@
     # symbol: "this is a symbol description"
     "Symbol 1"
 # symbol: "key-4"
-"Symbol 18":
+"Symbol 19":
   # CustomObject
   "datumList":
-    - null
-    - ~
-    - "this is a single line string"
-    - "---
-      this
-        is
-      a multiline
-        string
-      ---"
-      # bigint
-    - 99999999999999999999999999
-    - 12.34
-    - 123
-    - 0.123
-    - true
-    - false
-      # symbol: ""
-    - "Symbol 0"
-      # symbol: "this is a symbol description"
-    - "Symbol 1"
+    # symbol: "CIRCULAR REFERENCE"
+    "Symbol 14"
 # symbol: "key-5"
-"Symbol 19":
+"Symbol 20":
   # Map
   - - null
     - null

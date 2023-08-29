@@ -7,6 +7,8 @@ import {
   DirectedGraphElement2Voque,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { DirectedGraphNode2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
+import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
+import { LocalDirectedGraphElement2Zorn } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import { THEME } from '../theme';
 import {
   ASSOCIATED_BOUNDARY_FACT_GEPP,
@@ -35,16 +37,25 @@ export const getAssociatedBoundaryFactGraphElements = buildEstinant({
       },
     });
 
+    const placeholderLabel = 'placeholder-node';
     const placeholderNode = new DirectedGraphNode2Instance({
-      attributeByKey: {
-        id: getZornableId({
-          zorn: getZorn([associatedBoundaryFact.zorn, 'placeholder-node']),
+      locator: new GraphConstituentLocatorInstance({
+        idOverride: getZornableId({
+          zorn: getZorn([associatedBoundaryFact.zorn, placeholderLabel]),
         }),
-        label: 'placeholder',
+        rootGraphLocator: associatedBoundaryFact.rootGraphLocator,
+        parentId: associatedBoundarySubgraph.id,
+        localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+          distinguisher: getZorn([
+            associatedBoundaryFact.zorn,
+            placeholderLabel,
+          ]),
+        }),
+      }),
+      inputAttributeByKey: {
+        label: placeholderLabel,
         ...THEME.file,
       },
-      rootGraphLocator: associatedBoundaryFact.rootGraphLocator,
-      parentId: associatedBoundarySubgraph.id,
     });
 
     return [associatedBoundarySubgraph, placeholderNode];

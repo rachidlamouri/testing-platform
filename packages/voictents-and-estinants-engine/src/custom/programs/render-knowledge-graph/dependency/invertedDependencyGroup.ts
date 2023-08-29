@@ -56,7 +56,7 @@ export const { InvertedDependencyGroupInstance } =
       return group.dependencyFactList.map((dependencyFact) => {
         return {
           directoryPathSet: dependencyFact.directoryPathSet,
-          tailId: dependencyFact.importingFact.nodeId,
+          tailId: dependencyFact.importingFact.nodeLocator.id,
         };
       });
     }),
@@ -161,8 +161,8 @@ export const { InvertedDependencyGroupInstance } =
       const headPathSegment = new DependencyPathSegmentFactInstance({
         parentZorn: group.zorn,
         tailId: getPathNodeId(group.importedFact.file.directoryPath),
-        headId: group.importedFact.nodeId,
-        pathHeadId: group.importedFact.nodeId,
+        headId: group.importedFact.nodeLocator.id,
+        pathHeadId: group.importedFact.nodeLocator.id,
         pathTailIdSet: group.directoryPathSetWithTailIdList.map(
           ({ tailId }) => tailId,
         ),
@@ -174,7 +174,7 @@ export const { InvertedDependencyGroupInstance } =
             parentZorn: group.zorn,
             tailId: getPathNodeId(firstDirectoryPath),
             headId: getPathNodeId(secondDirectoryPath),
-            pathHeadId: group.importedFact.nodeId,
+            pathHeadId: group.importedFact.nodeLocator.id,
             pathTailIdSet: group.directoryPathSetWithTailIdList
               .filter(({ directoryPathSet }) => {
                 return (
@@ -191,10 +191,10 @@ export const { InvertedDependencyGroupInstance } =
         (importingFact) => {
           return new DependencyPathSegmentFactInstance({
             parentZorn: group.zorn,
-            tailId: importingFact.nodeId,
+            tailId: importingFact.nodeLocator.id,
             headId: getPathNodeId(importingFact.file.directoryPath),
-            pathHeadId: group.importedFact.nodeId,
-            pathTailIdSet: [importingFact.nodeId],
+            pathHeadId: group.importedFact.nodeLocator.id,
+            pathTailIdSet: [importingFact.nodeLocator.id],
           });
         },
       );

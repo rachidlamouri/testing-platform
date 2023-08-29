@@ -256,6 +256,12 @@ export const markUnusedExports = buildEstinant({
             'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
           importedIdentifierName: 'MetadataById',
         },
+        {
+          importingFilePath: '',
+          importedFilePath:
+            'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/file/getAssociatedFileGraphElements.ts',
+          importedIdentifierName: 'getAssociatedFileGraphElements',
+        },
       ];
 
     [

@@ -123,10 +123,10 @@ export const { DependencyFactInstance } = buildConstructorFunctionWithName(
     return directoryPathSet;
   },
   tailId: (dependencyFact) => {
-    return dependencyFact.importingFact.nodeId;
+    return dependencyFact.importingFact.nodeLocator.id;
   },
   headId: (dependencyFact) => {
-    return dependencyFact.importedFact.nodeId;
+    return dependencyFact.importedFact.nodeLocator.id;
   },
   importingBoundaryZorn: (dependencyFact) => {
     return dependencyFact.importingFact.directoryFact.boundaryFact.boundary
