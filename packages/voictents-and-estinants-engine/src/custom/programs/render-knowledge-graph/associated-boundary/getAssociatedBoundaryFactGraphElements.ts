@@ -41,7 +41,7 @@ export const getAssociatedBoundaryFactGraphElements = buildEstinant({
     const placeholderNode = new DirectedGraphNode2Instance({
       locator: new GraphConstituentLocatorInstance({
         idOverride: getZornableId({
-          zorn: getZorn([associatedBoundaryFact.zorn, 'placeholder-node']),
+          zorn: getZorn([associatedBoundaryFact.zorn, placeholderLabel]),
         }),
         rootGraphLocator: associatedBoundaryFact.rootGraphLocator,
         parentId: associatedBoundarySubgraph.id,

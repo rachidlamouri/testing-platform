@@ -152,6 +152,8 @@ digikikify({
     getAssociatedBoundaryFacts,
     getAssociatedBoundaryFactGraphElements,
 
+    // getAssociatedFileGraphElements,
+
     getInvertedDependencyGroup,
     getInvertedDependencyGraphElements,
 
