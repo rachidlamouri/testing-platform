@@ -66,16 +66,22 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
       },
     });
 
+    const startLabel = 'START';
     const startNode = new DirectedGraphNode2Instance({
-      attributeByKey: {
-        id: engineProgram.locator.startingNodeId,
-        label: 'START',
+      locator: new GraphConstituentLocatorInstance({
+        idOverride: engineProgram.locator.startingNodeId,
+        rootGraphLocator,
+        parentId: rootGraphLocator.id,
+        localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+          distinguisher: startLabel,
+        }),
+      }),
+      inputAttributeByKey: {
+        label: startLabel,
         shape: NodeShape.Circle,
         color: 'gray',
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
-      rootGraphLocator,
-      parentId: rootGraphLocator.id,
     });
 
     const startingVoqueEdgeList = engineProgram.initializedVoqueLocatorList.map(
@@ -106,16 +112,22 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
       },
     });
 
+    const endLabel = 'END';
     const endNode = new DirectedGraphNode2Instance({
-      attributeByKey: {
-        id: engineProgram.locator.endingNodeId,
-        label: 'END',
+      locator: new GraphConstituentLocatorInstance({
+        idOverride: engineProgram.locator.endingNodeId,
+        rootGraphLocator,
+        parentId: rootGraphLocator.id,
+        localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+          distinguisher: endLabel,
+        }),
+      }),
+      inputAttributeByKey: {
+        label: endLabel,
         shape: NodeShape.Circle,
         color: 'gray',
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
-      rootGraphLocator,
-      parentId: rootGraphLocator.id,
     });
 
     const endingVoqueEdgeList = engineProgram.endingVoqueLocatorList.map(

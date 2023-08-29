@@ -14,6 +14,8 @@ import {
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { NodeShape } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
 import { DirectedGraphNode2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
+import { GraphConstituentLocatorInstance } from '../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
+import { LocalDirectedGraphElement2Zorn } from '../../programmable-units/graph-visualization/directed-graph/types';
 import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-file-relationships/graph-element/commonAttributeByKey';
 
 /**
@@ -41,14 +43,19 @@ export const getEngineProgramVoqueElements = buildEstinant({
         : engineVoque.displayName;
 
     const node = new DirectedGraphNode2Instance({
-      attributeByKey: {
-        id: engineVoque.id,
+      locator: new GraphConstituentLocatorInstance({
+        idOverride: engineVoque.id,
+        rootGraphLocator: relationship.rootGraphLocator,
+        parentId: relationship.parentId,
+        localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+          distinguisher: label,
+        }),
+      }),
+      inputAttributeByKey: {
         label,
         shape: NodeShape.Box,
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
-      rootGraphLocator: relationship.rootGraphLocator,
-      parentId: relationship.parentId,
     });
 
     return node;

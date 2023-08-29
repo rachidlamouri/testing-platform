@@ -22,14 +22,12 @@ export const getFileGraphElements = buildEstinant({
   })
   .onPinbe((fileFact) => {
     const node = new DirectedGraphNode2Instance({
-      attributeByKey: {
-        id: fileFact.nodeId,
+      locator: fileFact.nodeLocator,
+      inputAttributeByKey: {
         // TODO: update file to have an as-is on disk file name
         label: fileFact.file.onDiskFileName.camelCase,
         ...THEME.file,
       },
-      rootGraphLocator: fileFact.directoryFact.boundaryFact.rootGraphLocator,
-      parentId: fileFact.directoryFact.subgraphId,
     });
 
     return [node];

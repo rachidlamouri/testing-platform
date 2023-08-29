@@ -9,6 +9,7 @@ type FactoryInput = {
 
 const LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE = [
   'elementType',
+  // TODO: update the template parent type to allow this to be a string OR a Zorn
   'distinguisher',
 ] as const satisfies GenericZorn2Template;
 type LocalDirectedGraphElement2ZornTemplate =
@@ -28,6 +29,15 @@ export class LocalDirectedGraphElement2Zorn extends Zorn2<LocalDirectedGraphElem
   }: FactoryInput): LocalDirectedGraphElement2Zorn {
     return new LocalDirectedGraphElement2Zorn({
       elementType: 'cluster',
+      distinguisher,
+    });
+  }
+
+  static buildNodeZorn({
+    distinguisher,
+  }: FactoryInput): LocalDirectedGraphElement2Zorn {
+    return new LocalDirectedGraphElement2Zorn({
+      elementType: 'node',
       distinguisher,
     });
   }

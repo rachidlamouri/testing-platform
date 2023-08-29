@@ -90,7 +90,7 @@ export const constructDynamicMetadataFile = buildEstinant({
   .onPinbe((fileFactList) => {
     const metadataList: Metadata[] = fileFactList.map((fileFact) => {
       return {
-        id: fileFact.nodeId,
+        id: fileFact.nodeLocator.id,
         title: fileFact.file.onDiskFileName.camelCase,
         fileSystemPath: fileFact.file.filePath,
         fieldList: [

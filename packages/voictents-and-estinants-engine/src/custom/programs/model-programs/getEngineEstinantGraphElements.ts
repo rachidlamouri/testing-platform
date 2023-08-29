@@ -1,4 +1,5 @@
 import { getTextDigest } from '../../../utilities/getTextDigest';
+import { getZorn } from '../../../utilities/getZorn';
 import { isNotNull } from '../../../utilities/isNotNull';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { OdeshinZorn } from '../../adapter/odeshin2';
@@ -86,26 +87,37 @@ export const getEngineEstinantGraphElements = buildEstinant({
     });
 
     const estinantNode = new DirectedGraphNode2Instance({
-      attributeByKey: {
-        id: engineEstinant.id,
+      locator: new GraphConstituentLocatorInstance({
+        idOverride: engineEstinant.id,
+        rootGraphLocator,
+        parentId: rootEstinantSubgraph.id,
+        localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+          distinguisher: engineEstinant.identifierName,
+        }),
+      }),
+      inputAttributeByKey: {
         label: engineEstinant.identifierName,
         shape: NodeShape.InvertedHouse,
         ...COMMON_ATTRIBUTE_BY_KEY,
       },
-      rootGraphLocator,
-      parentId: rootEstinantSubgraphId,
     });
 
     const inputNodeList = engineEstinant.inputList.map((input) => {
+      const label = input.index === 0 ? 'L' : `R${input.index}`;
       const inputNode = new DirectedGraphNode2Instance({
-        attributeByKey: {
-          id: input.id,
-          label: input.index === 0 ? 'L' : `R${input.index}`,
+        locator: new GraphConstituentLocatorInstance({
+          idOverride: input.id,
+          rootGraphLocator,
+          parentId: estinantInputSubgraph.id,
+          localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+            distinguisher: getZorn([engineEstinant.estinantName, label]),
+          }),
+        }),
+        inputAttributeByKey: {
+          label,
           shape: NodeShape.InvertedTriangle,
           ...COMMON_ATTRIBUTE_BY_KEY,
         },
-        rootGraphLocator,
-        parentId: estinantInputSubgraphId,
       });
 
       return inputNode;

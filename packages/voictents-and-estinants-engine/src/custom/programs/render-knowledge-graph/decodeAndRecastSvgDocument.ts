@@ -73,23 +73,23 @@ export const decodeAndRecastSvgDocument = buildEstinant({
     ) => {
       const importedNodeIdListByImportingNodeId = new Map<string, string[]>();
       dependencyFactList.forEach((dependencyFact) => {
-        const key = dependencyFact.importingFact.nodeId;
+        const key = dependencyFact.importingFact.nodeLocator.id;
         const group = importedNodeIdListByImportingNodeId.get(key) ?? [];
-        group.push(dependencyFact.importedFact.nodeId);
+        group.push(dependencyFact.importedFact.nodeLocator.id);
         importedNodeIdListByImportingNodeId.set(key, group);
       });
 
       const importingNodeIdListByImportedNodeId = new Map<string, string[]>();
       dependencyFactList.forEach((dependencyFact) => {
-        const key = dependencyFact.importedFact.nodeId;
+        const key = dependencyFact.importedFact.nodeLocator.id;
         const group = importingNodeIdListByImportedNodeId.get(key) ?? [];
-        group.push(dependencyFact.importingFact.nodeId);
+        group.push(dependencyFact.importingFact.nodeLocator.id);
         importingNodeIdListByImportedNodeId.set(key, group);
       });
 
       const fileFactByNodeId = new Map(
         fileFactList.map((fileFact) => {
-          return [fileFact.nodeId, fileFact] as const;
+          return [fileFact.nodeLocator.id, fileFact] as const;
         }),
       );
 
@@ -343,15 +343,17 @@ export const decodeAndRecastSvgDocument = buildEstinant({
         childElement: n.JSXElement,
       ): n.JSXElement => {
         const importedNodeIdList =
-          importedNodeIdListByImportingNodeId.get(fileFact.nodeId) ?? [];
+          importedNodeIdListByImportingNodeId.get(fileFact.nodeLocator.id) ??
+          [];
         const importingNodeIdList =
-          importingNodeIdListByImportedNodeId.get(fileFact.nodeId) ?? [];
+          importingNodeIdListByImportedNodeId.get(fileFact.nodeLocator.id) ??
+          [];
 
         const element = b.jsxElement(
           b.jsxOpeningElement(b.jsxIdentifier('FileFact'), [
             b.jsxAttribute(
               b.jsxIdentifier('factId'),
-              b.literal(fileFact.nodeId),
+              b.literal(fileFact.nodeLocator.id),
             ),
             b.jsxAttribute(
               b.jsxIdentifier('fileName'),

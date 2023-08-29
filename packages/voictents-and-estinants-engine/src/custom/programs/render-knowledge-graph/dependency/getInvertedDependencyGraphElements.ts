@@ -1,3 +1,5 @@
+import { getZorn } from '../../../../utilities/getZorn';
+import { getZornableId } from '../../../../utilities/getZornableId';
 import { Tuple } from '../../../../utilities/semantic-types/tuple';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { DirectedGraphEdge2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
@@ -6,6 +8,8 @@ import {
   DirectedGraphElement2Voque,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { DirectedGraphNode2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
+import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
+import { LocalDirectedGraphElement2Zorn } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import {
   DIRECTORY_FACT_GEPP,
   DirectoryFactVoque,
@@ -45,15 +49,27 @@ export const getInvertedDependencyGraphElements = buildEstinant({
       (pathNodeFact, index) => {
         const directoryFact = directoryFactList[index];
 
+        const badZorn = getZorn([
+          pathNodeFact.parentZorn,
+          'dependency-path-node',
+          pathNodeFact.directoryPath,
+        ]);
         return new DirectedGraphNode2Instance({
-          attributeByKey: {
-            id: pathNodeFact.nodeId,
+          locator: new GraphConstituentLocatorInstance({
+            idOverride: getZornableId({
+              zorn: badZorn,
+            }),
+            rootGraphLocator:
+              group.importedFact.directoryFact.boundaryFact.rootGraphLocator,
+            parentId: directoryFact.subgraphId,
+            localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+              distinguisher: badZorn,
+            }),
+          }),
+          inputAttributeByKey: {
             label: '',
             ...THEME.directoryPathNode,
           },
-          rootGraphLocator:
-            group.importedFact.directoryFact.boundaryFact.rootGraphLocator,
-          parentId: directoryFact.subgraphId,
         });
       },
     );
