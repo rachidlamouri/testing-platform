@@ -2,9 +2,16 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../../utilities/buildConstructorFunction';
-import { getZorn } from '../../../../utilities/getZorn';
 import { PartialEdgeAttributeByKey } from './directedGraphEdge';
+import {
+  GraphConstituentLocator,
+  GraphConstituentLocatorInstance,
+} from './graphConstituentLocator';
 import { RootGraphLocator } from './rootGraphLocator';
+import {
+  GlobalDirectedGraphElement2Zorn,
+  LocalDirectedGraphElement2Zorn,
+} from './types';
 
 type BaseDirectedGraphEdge2 = {
   attributeByKey?: Omit<PartialEdgeAttributeByKey, 'id'>;
@@ -14,8 +21,9 @@ type BaseDirectedGraphEdge2 = {
 };
 
 type DirectedGraphEdge2Prototype = {
-  get zorn(): string;
+  get zorn(): GlobalDirectedGraphElement2Zorn;
   get id(): string;
+  get locator(): GraphConstituentLocator;
 };
 
 export type DirectedGraphEdge2 = ObjectWithPrototype<
@@ -27,12 +35,20 @@ export const { DirectedGraphEdge2Instance } = buildConstructorFunctionWithName(
   'DirectedGraphEdge2Instance',
 )<BaseDirectedGraphEdge2, DirectedGraphEdge2Prototype, DirectedGraphEdge2>({
   zorn: (directedEdge) => {
-    return getZorn([
-      directedEdge.rootGraphLocator.zorn.forHuman,
-      directedEdge.id,
-    ]);
+    return directedEdge.locator.zorn;
   },
   id: (directedEdge) => {
+    // TODO: get rid of this colon delimited id pattern when "interactiveSvg.html" no longer exists
     return `${directedEdge.tailId}:${directedEdge.headId}`;
+  },
+  locator: (directedEdge) => {
+    return new GraphConstituentLocatorInstance({
+      idOverride: directedEdge.id,
+      rootGraphLocator: directedEdge.rootGraphLocator,
+      parentId: directedEdge.rootGraphLocator.id,
+      localZorn: LocalDirectedGraphElement2Zorn.buildEdgeZorn({
+        distinguisher: directedEdge.id,
+      }),
+    });
   },
 });

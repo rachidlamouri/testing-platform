@@ -42,6 +42,15 @@ export class LocalDirectedGraphElement2Zorn extends Zorn2<LocalDirectedGraphElem
     });
   }
 
+  static buildEdgeZorn({
+    distinguisher,
+  }: FactoryInput): LocalDirectedGraphElement2Zorn {
+    return new LocalDirectedGraphElement2Zorn({
+      elementType: 'edge',
+      distinguisher,
+    });
+  }
+
   get rawTemplate(): LocalDirectedGraphElement2ZornTemplate {
     return LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;
   }
