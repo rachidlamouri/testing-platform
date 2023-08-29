@@ -549,7 +549,9 @@ export const decodeAndRecastSvgDocument = buildEstinant({
         };
       }
 
-      const filePath = `packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/generated/${svgDocument.zorn}.tsx`;
+      // TODO: remove the need for this `graph:` logic by adding more metadata to svgDocument
+      const fileName = svgDocument.zorn.replace(/^graph:/, '');
+      const filePath = `packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/generated/${fileName}.tsx`;
       const programCode = [
         'import React, { forwardRef } from "react"',
         'import { SvgWrapperComponent } from "../dynamicComponentTypes"',
