@@ -54,8 +54,34 @@ type MappedSerializeableNode<TDatum> =
     ? SerializeableStringNode
     : SerializeableNode;
 
-export const buildSerializeableNode = <TDatum>(
+const CIRCULAR_REFERENCE_SYMBOL = Symbol('CIRCULAR REFERENCE');
+
+const buildSerializeableNode3 = <TDatum>(
   inputDatum: TDatum,
+  cache: Set<unknown>,
+): MappedSerializeableNode<TDatum> => {
+  const isObject = typeof inputDatum === 'object' && inputDatum !== null;
+
+  if (isObject && cache.has(inputDatum)) {
+    // TODO: this cast is definitely not right
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    return buildSerializeableNode2(
+      CIRCULAR_REFERENCE_SYMBOL,
+      cache,
+    ) as unknown as MappedSerializeableNode<TDatum>;
+  }
+
+  if (isObject) {
+    cache.add(inputDatum);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  return buildSerializeableNode2(inputDatum, cache);
+};
+
+const buildSerializeableNode2 = <TDatum>(
+  inputDatum: TDatum,
+  cache: Set<unknown>,
 ): MappedSerializeableNode<TDatum> => {
   const { typeName, datum } = getCustomTypedDatum(inputDatum);
 
@@ -76,7 +102,10 @@ export const buildSerializeableNode = <TDatum>(
         metadata: {
           typeName,
           valueTuple: datum.map((element) => {
-            const serializeableElement = buildSerializeableNode(element);
+            const serializeableElement = buildSerializeableNode3(
+              element,
+              cache,
+            );
             return serializeableElement;
           }),
         },
@@ -88,7 +117,10 @@ export const buildSerializeableNode = <TDatum>(
         metadata: {
           typeName,
           valueTuple: [...datum].map((element) => {
-            const serializeableElement = buildSerializeableNode(element);
+            const serializeableElement = buildSerializeableNode3(
+              element,
+              cache,
+            );
             return serializeableElement;
           }),
         },
@@ -137,8 +169,8 @@ export const buildSerializeableNode = <TDatum>(
 
       const serializeableEntryList =
         entryList.map<SimpleSerializeableObjectEntry>(([key, value]) => {
-          const keyNode = buildSerializeableNode(key);
-          const valueNode = buildSerializeableNode(value);
+          const keyNode = buildSerializeableNode3(key, cache);
+          const valueNode = buildSerializeableNode3(value, cache);
           return [keyNode, valueNode];
         });
 
@@ -154,8 +186,8 @@ export const buildSerializeableNode = <TDatum>(
     }
     case CustomDatumTypeName.Function: {
       const serializeableFunctionNameEntry: SimpleSerializeableObjectEntry = [
-        buildSerializeableNode('name'),
-        buildSerializeableNode(datum.name),
+        buildSerializeableNode3('name', cache),
+        buildSerializeableNode3(datum.name, cache),
       ];
 
       return {
@@ -175,8 +207,8 @@ export const buildSerializeableNode = <TDatum>(
       if (isSimple) {
         const serializeableEntryList =
           entryList.map<SimpleSerializeableObjectEntry>(([key, value]) => {
-            const keyNode = buildSerializeableNode(key);
-            const valueNode = buildSerializeableNode(value);
+            const keyNode = buildSerializeableNode3(key, cache);
+            const valueNode = buildSerializeableNode3(value, cache);
             return [keyNode, valueNode];
           });
 
@@ -192,7 +224,7 @@ export const buildSerializeableNode = <TDatum>(
         } satisfies SerializeableObjectNode as unknown as MappedSerializeableNode<TDatum>;
       }
 
-      const serializeableEntryList = buildSerializeableNode(entryList);
+      const serializeableEntryList = buildSerializeableNode3(entryList, cache);
 
       return {
         nodeName: SerializeableNodeName.Object,
@@ -210,8 +242,8 @@ export const buildSerializeableNode = <TDatum>(
 
       const serializeableEntryList =
         entryList.map<SimpleSerializeableObjectEntry>(([key, value]) => {
-          const keyNode = buildSerializeableNode(key);
-          const valueNode = buildSerializeableNode(value);
+          const keyNode = buildSerializeableNode3(key, cache);
+          const valueNode = buildSerializeableNode3(value, cache);
           return [keyNode, valueNode];
         });
 
@@ -267,3 +299,8 @@ export const buildSerializeableNode = <TDatum>(
     }
   }
 };
+
+export const buildSerializeableNode = <TDatum>(
+  inputDatum: TDatum,
+): MappedSerializeableNode<TDatum> =>
+  buildSerializeableNode3(inputDatum, new Set());

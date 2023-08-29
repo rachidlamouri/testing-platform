@@ -106,26 +106,8 @@
 "key-4":
   # CustomObject
   "datumList":
-    - null
-    - ~
-    - "this is a single line string"
-    - "---
-      this
-        is
-      a multiline
-        string
-      ---"
-      # bigint
-    - 99999999999999999999999999
-    - 12.34
-    - 123
-    - 0.123
-    - true
-    - false
-      # symbol: ""
-    - "Symbol 0"
-      # symbol: "this is a symbol description"
-    - "Symbol 1"
+    # symbol: "CIRCULAR REFERENCE"
+    "Symbol 14"
 "key-5":
   # Map
   - - null
