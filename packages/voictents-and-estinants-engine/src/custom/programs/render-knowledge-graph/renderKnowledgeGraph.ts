@@ -69,6 +69,7 @@ import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
 import { getAssociatedBoundaryFacts } from './associated-boundary/getAssociatedBoundaryFacts';
 import { getAssociatedBoundaryFactGraphElements } from './associated-boundary/getAssociatedBoundaryFactGraphElements';
+import { getDirectoryToParentRelationshipFact } from './directory/getDirectoryToParentRelationshipFact';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -140,6 +141,7 @@ digikikify({
     getDirectoriesWithFiles,
     getDirectoryBoundaryRelationship,
     getDirectoryFact,
+    getDirectoryToParentRelationshipFact,
     getDirectoryGraphElements,
 
     assertDirectoriesHaveBoundaries,
