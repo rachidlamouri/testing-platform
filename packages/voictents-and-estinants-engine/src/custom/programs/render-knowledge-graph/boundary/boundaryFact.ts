@@ -12,6 +12,7 @@ import {
   RootGraphLocator,
   RootGraphLocatorInstance,
 } from '../../../programmable-units/graph-visualization/directed-graph/rootGraphLocator';
+import { FactTypeName } from './factTypeName';
 
 type BaseBoundaryFact = {
   boundary: Boundary;
@@ -19,6 +20,7 @@ type BaseBoundaryFact = {
 };
 
 type BoundaryFactPrototype = {
+  get typeName(): FactTypeName.BoundaryFact;
   get zorn(): string;
   get rootGraphLocator(): RootGraphLocator;
   get directoryPathRelativeToCommonBoundary(): string;
@@ -35,6 +37,7 @@ export type BoundaryFact = ObjectWithPrototype<
 export const { BoundaryFactInstance } = buildConstructorFunctionWithName(
   'BoundaryFactInstance',
 )<BaseBoundaryFact, BoundaryFactPrototype, BoundaryFact>({
+  typeName: () => FactTypeName.BoundaryFact,
   zorn: (boundaryFact) => {
     return getZorn([boundaryFact.boundary.zorn, 'fact']);
   },

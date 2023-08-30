@@ -41,6 +41,7 @@ const MetadataHeader: FunctionComponent<{
       {selectedMetadata !== null && (
         <button
           style={{
+            cursor: 'pointer',
             backgroundColor: ((): string => {
               switch (buttonState) {
                 case ButtonState.Normal:
@@ -70,7 +71,7 @@ const MetadataHeader: FunctionComponent<{
               });
           }}
         >
-          Copy Filepath
+          Copy File Path
         </button>
       )}
     </span>
