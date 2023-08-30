@@ -17,7 +17,7 @@ import { EngineVoqueLocator2 } from '../engineVoqueLocator2';
 const ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE = [
   'inputIndex',
   'voictentName',
-  ['estinantLocator', EngineEstinantLocator2ZornClassSet],
+  ['estinantLocator', ...EngineEstinantLocator2ZornClassSet],
 ] as const satisfies GenericZorn2Template;
 type EngineEstinantInput2ZornTemplate =
   typeof ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE;
