@@ -27,7 +27,7 @@ type AssociatedBoundaryFactPrototype = {
 /**
  * Information representing a boundary referenced by another boundary
  */
-type AssociatedBoundaryFact = ObjectWithPrototype<
+export type AssociatedBoundaryFact = ObjectWithPrototype<
   BaseAssociatedBoundaryFact,
   AssociatedBoundaryFactPrototype
 >;

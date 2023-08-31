@@ -70,6 +70,8 @@ import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
 import { getAssociatedBoundaryFacts } from './associated-boundary/getAssociatedBoundaryFacts';
 import { getAssociatedBoundaryFactGraphElements } from './associated-boundary/getAssociatedBoundaryFactGraphElements';
 import { getDirectoryToParentRelationshipFact } from './directory/getDirectoryToParentRelationshipFact';
+import { getCrossBoundaryFileFacts } from './file/getCrossBoundaryFileFacts';
+import { getCrossBoundaryFileFactGraphElements } from './file/getCrossBoundaryFileFactGraphElements';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -153,6 +155,9 @@ digikikify({
 
     getAssociatedBoundaryFacts,
     getAssociatedBoundaryFactGraphElements,
+
+    getCrossBoundaryFileFacts,
+    getCrossBoundaryFileFactGraphElements,
 
     // getAssociatedFileGraphElements,
 
