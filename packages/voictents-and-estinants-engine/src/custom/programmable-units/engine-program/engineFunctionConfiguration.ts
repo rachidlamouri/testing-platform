@@ -31,7 +31,8 @@ export type AdaptedEngineFunctionConfiguration = {
   filePath: 'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts';
   exportedIdentifier: 'digikikify';
   estinantListKeyIdentifierName: 'estinantTuple';
-  populatedVoictentTupleKeyIdentifierName: 'populatedVoictentTuple';
+  explicitVoictentTupleKeyIdentifierName: 'explicitVoictentTuple';
+  uninferableVoictentByGeppKeyIdentifierName: 'uninferableVoictentByGepp';
 };
 
 /**
@@ -81,5 +82,6 @@ export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfigu
       'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts',
     exportedIdentifier: 'digikikify',
     estinantListKeyIdentifierName: 'estinantTuple',
-    populatedVoictentTupleKeyIdentifierName: 'populatedVoictentTuple',
+    explicitVoictentTupleKeyIdentifierName: 'explicitVoictentTuple',
+    uninferableVoictentByGeppKeyIdentifierName: 'uninferableVoictentByGepp',
   };

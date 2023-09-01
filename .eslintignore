@@ -3,3 +3,5 @@ build/
 # TODO: unignore these when we start using them again
 packages/vscode-extension-command/
 packages/vscode-language-server
+
+**/generated/**

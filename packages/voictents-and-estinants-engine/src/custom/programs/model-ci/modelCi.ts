@@ -1,5 +1,8 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import { digikikify } from '../../../type-script-adapter/digikikify';
+import {
+  buildVoictentByGepp,
+  digikikify,
+} from '../../../type-script-adapter/digikikify';
 import {
   EngineFunctionConfigurationVoque,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
@@ -39,7 +42,7 @@ const programFileCache = new ProgramFileCache({
  * then makes sure the data structure and bash file are sound
  */
 digikikify({
-  populatedVoictentTuple: [
+  explicitVoictentTuple: [
     new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
       gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialHubblepupTuple: [
@@ -59,11 +62,11 @@ digikikify({
       initialHubblepupTuple: [CI_MODEL],
     }),
   ] as const,
-  uninferableVoictentTuple: [
+  uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,
     }),
-  ],
+  ] as const),
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,

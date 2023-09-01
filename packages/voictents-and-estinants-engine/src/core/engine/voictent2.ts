@@ -25,6 +25,6 @@ export type GenericVoictent2 = Voictent2<GenericVoque, GenericVoque>;
 
 export type GenericVoictent2Tuple = Tuple<GenericVoictent2>;
 
-export type UnsafeVoictent2 = Voictent2<UnsafeVoque, UnsafeVoque>;
+type UnsafeVoictent2 = Voictent2<UnsafeVoque, UnsafeVoque>;
 
-export type UnsafeVoictent2Tple = Tuple<UnsafeVoictent2>;
+export type UnsafeVoictent2Tuple = Tuple<UnsafeVoictent2>;

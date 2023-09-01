@@ -37,6 +37,8 @@ export type GenericEstinant2 = Estinant2<
   GenericOutputVicken
 >;
 
+export type GenericEstinant2Tuple = Tuple<GenericEstinant2>;
+
 // TODO: figure out which one of these don't need to be "any"
 // TODO: Tie this type back to "Estinant2" somehow
 export type UnsafeEstinant2 = {

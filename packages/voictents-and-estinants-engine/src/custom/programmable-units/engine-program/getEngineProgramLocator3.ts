@@ -19,7 +19,6 @@ import {
 } from '../type-script-file/typeScriptFileImportList';
 import {
   ArrayExpressionOfIdentifiers,
-  isArrayExpression,
   isArrayExpressionOfIdentifiers,
 } from '../../../utilities/type-script-ast/isArrayExpressionOfIdentifiers';
 import { isSpecificExpressionStatement } from '../../../utilities/type-script-ast/isSpecificExpressionStatement';
@@ -73,6 +72,8 @@ import {
 } from './engineVoqueLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
 import { OdeshinZorn } from '../../adapter/odeshin2';
+import { buildVoictentByGepp } from '../../../type-script-adapter/digikikify';
+import { isArrayExpression } from '../../../utilities/type-script-ast/isArrayExpression';
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -363,21 +364,20 @@ const getAdaptedEngineProgramLocator = ({
 }: AdaptedEngineProgramLocatorAccessorInput): AdaptedEngineProgramLocatorAccessorResult => {
   const programName = engineProgramFile.inMemoryFileName.kebabCase;
 
-  const populatedVoictentTupleProperty = engineCallExpressionPropertyList.find(
+  const explicitVoictentTupleProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
-      engineFunctionConfiguration.populatedVoictentTupleKeyIdentifierName,
+      engineFunctionConfiguration.explicitVoictentTupleKeyIdentifierName,
   );
 
-  const populatedVoictentTupleValueNode = populatedVoictentTupleProperty?.value;
+  const explicitVoictentTupleValueNode = explicitVoictentTupleProperty?.value;
 
-  const populatedVoictentInstanceList =
-    isSpecificConstantTypeScriptAsExpression(
-      populatedVoictentTupleValueNode,
-      isArrayExpression,
-    )
-      ? populatedVoictentTupleValueNode.expression.elements
-      : [];
+  const explicitVoictentInstanceList = isSpecificConstantTypeScriptAsExpression(
+    explicitVoictentTupleValueNode,
+    isArrayExpression,
+  )
+    ? explicitVoictentTupleValueNode.expression.elements
+    : [];
 
   const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
   const engineVoqueLocatorList: EngineVoqueLocator2[] = [];
@@ -398,11 +398,11 @@ const getAdaptedEngineProgramLocator = ({
       fileImportsByImportedIdentifier.set(specifier, fileImport);
     });
 
-  if (populatedVoictentInstanceList.length === 0) {
+  if (explicitVoictentInstanceList.length === 0) {
     parallelErrorList.push({
-      name: 'unparseable-populated-voictent-list',
+      name: 'unparseable-explicit-voictent-list',
       error: new Error(
-        'Unable able to parse populated input voictent list. Expected an array expression with "as const"',
+        'Unable able to parse explicit input voictent list. Expected an array expression with "as const"',
       ),
       reporterLocator,
       sourceLocator: {
@@ -411,12 +411,12 @@ const getAdaptedEngineProgramLocator = ({
       },
       context: {
         reason: 'A program without inputs will not do anything',
-        populatedVoictentTupleProperty,
-        populatedVoictentTupleValueNode,
+        explicitVoictentTupleProperty,
+        explicitVoictentTupleValueNode,
       },
     });
   } else {
-    populatedVoictentInstanceList.forEach((voictentInstance, originalIndex) => {
+    explicitVoictentInstanceList.forEach((voictentInstance, originalIndex) => {
       const voqueTypeReferenceNode = isNewExpressionWithSpecificTypeParameters<
         [AST_NODE_TYPES.TSTypeReference]
       >(voictentInstance, [AST_NODE_TYPES.TSTypeReference])
@@ -431,9 +431,9 @@ const getAdaptedEngineProgramLocator = ({
 
       if (voqueIdentifierName === null) {
         parallelErrorList.push({
-          name: 'unparseable-populated-voictent',
+          name: 'unparseable-explicit-voictent',
           error: new Error(
-            'Unable to parse populated input voictent. Expected a new expression with at least one type parameter',
+            'Unable to parse explicit input voictent. Expected a new expression with at least one type parameter',
           ),
           reporterLocator,
           sourceLocator: {
@@ -460,6 +460,54 @@ const getAdaptedEngineProgramLocator = ({
           isCoreVoque: false,
         }),
       );
+    });
+  }
+
+  // TODO: rename these variables or move this code to its own function (I prefer the latter), because these are way too vague
+  const keyName =
+    engineFunctionConfiguration.uninferableVoictentByGeppKeyIdentifierName;
+  const functionName = buildVoictentByGepp.name;
+
+  const uninferableVoictentByGeppProperty =
+    engineCallExpressionPropertyList.find((property) => {
+      return property.key.name === keyName;
+    });
+
+  const uninferableVoictentByGeppValueNode =
+    uninferableVoictentByGeppProperty?.value;
+
+  const buildVoictentByGeppCallExpression =
+    isSpecificIdentifiableCallExpression(
+      uninferableVoictentByGeppValueNode,
+      functionName,
+    )
+      ? uninferableVoictentByGeppValueNode
+      : null;
+
+  const hasConstantListOfArguments =
+    buildVoictentByGeppCallExpression !== null &&
+    isSpecificConstantTypeScriptAsExpression<TSESTree.ArrayExpression>(
+      buildVoictentByGeppCallExpression.arguments[0],
+      isArrayExpression,
+    );
+
+  if (!hasConstantListOfArguments) {
+    parallelErrorList.push({
+      name: 'unparseable-uninferable-voictent-by-gepp',
+      error: new Error(
+        `Unable to parse ${keyName} property. Expected a call expression to ${functionName} with a single array literal parameter ending in "as const"`,
+      ),
+      reporterLocator,
+      sourceLocator: {
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
+        filePath: engineProgramFile.filePath,
+      },
+      context: {
+        hasConstantListOfArguments,
+        buildVoictentByGeppCallExpression,
+        uninferableVoictentByGeppValueNode,
+        uninferableVoictentByGeppProperty,
+      },
     });
   }
 

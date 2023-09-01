@@ -114,12 +114,6 @@ export const markUnusedExports = buildEstinant({
         {
           importingFilePath: '',
           importedFilePath:
-            'packages/voictents-and-estinants-engine/src/utilities/filterTuple.ts',
-          importedIdentifierName: 'FilterTupleByAcceptanceUnion',
-        },
-        {
-          importingFilePath: '',
-          importedFilePath:
             'packages/voictents-and-estinants-engine/src/utilities/semantic-types/strif/strif.ts',
           importedIdentifierName: 'Strif',
         },

@@ -15,7 +15,8 @@ type BaseEngineProgramLocator3 = {
   programName: string;
   description: string;
   filePath: string;
-  // TODO: distinguish between manually specified, initially populated, and uninferred collections
+  // TODO: show if a collection is manually instantiated, part of the uninferred
+  // collection list, and if it is initialized
   initializedVoqueLocatorList: EngineVoqueLocator2[];
   estinantRelationshipList: ProgramEstinantRelationship[];
   rootGraphLocator: RootGraphLocator;
