@@ -38,6 +38,13 @@ export type GenericRightInputHubblepupTupleVicken =
 export type RightInputVoictentVicken<TVoque extends GenericVoque> =
   BaseRightInputVicken<TVoque, TVoque['emittedVoictent'], true, never>;
 
+export type RightInputVicken<
+  TVoque extends GenericVoque,
+  TZornTuple extends ZornTuple = never,
+> =
+  | RightInputHubblepupTupleVicken<TVoque, TZornTuple>
+  | RightInputVoictentVicken<TVoque>;
+
 export type GenericRightInputVoictentVicken =
   RightInputVoictentVicken<GenericVoque>;
 

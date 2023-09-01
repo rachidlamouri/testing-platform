@@ -14,13 +14,11 @@ type BaseLeftInputVicken<
 export type LeftInputHubblepupVicken<TVoque extends GenericVoque> =
   BaseLeftInputVicken<TVoque, TVoque['indexedEmittedHubblepup'], false>;
 
-type GenericLeftInputHubblepupVicken = LeftInputHubblepupVicken<GenericVoque>;
-
 export type LeftInputVoictentVicken<TVoque extends GenericVoque> =
   BaseLeftInputVicken<TVoque, TVoque['emittedVoictent'], true>;
 
-type GenericLeftInputVoictentVicken = LeftInputVoictentVicken<GenericVoque>;
+export type LeftInputVicken<TVoque extends GenericVoque> =
+  | LeftInputHubblepupVicken<TVoque>
+  | LeftInputVoictentVicken<TVoque>;
 
-export type GenericLeftInputVicken =
-  | GenericLeftInputHubblepupVicken
-  | GenericLeftInputVoictentVicken;
+export type GenericLeftInputVicken = LeftInputVicken<GenericVoque>;
