@@ -23,13 +23,13 @@ if (!fs.existsSync(filePath)) {
  * collection type and all related types
  */
 digikikify({
-  populatedVoictentTuple: [
+  explicitVoictentTuple: [
     new InMemoryVoictent<ScaffoldConfigurationVoque>({
       gepp: SCAFFOLD_CONFIGURATION_GEPP,
       initialHubblepupTuple: [{ filePath }],
     }),
   ] as const,
-  uninferableVoictentTuple: [],
+  uninferableVoictentByGepp: {},
   estinantTuple: [scaffoldFile] as const,
   programFileCache: new ProgramFileCache({
     namespace: 'assembleScaffoldedFile',

@@ -1,4 +1,7 @@
-import { digikikify } from '../../../type-script-adapter/digikikify';
+import {
+  buildVoictentByGepp,
+  digikikify,
+} from '../../../type-script-adapter/digikikify';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -32,7 +35,7 @@ const programFileCache = new ProgramFileCache({
  * Example program to demonstrate defining and rendering a directed graph.
  */
 digikikify({
-  populatedVoictentTuple: [
+  explicitVoictentTuple: [
     new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
       gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialHubblepupTuple: [
@@ -178,11 +181,11 @@ digikikify({
       ],
     }),
   ] as const,
-  uninferableVoictentTuple: [
+  uninferableVoictentByGepp: buildVoictentByGepp([
     new OutputFileVoictent({
       programFileCache,
     }),
-  ],
+  ] as const),
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
@@ -193,6 +196,6 @@ digikikify({
 
     captureOutputFileDigestList,
   ] as const,
-  serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
+  serializeeGeppList: [SANITY_SNAPSHOT_GEPP],
   programFileCache,
 });

@@ -114,12 +114,6 @@ export const markUnusedExports = buildEstinant({
         {
           importingFilePath: '',
           importedFilePath:
-            'packages/voictents-and-estinants-engine/src/utilities/filterTuple.ts',
-          importedIdentifierName: 'FilterTupleByAcceptanceUnion',
-        },
-        {
-          importingFilePath: '',
-          importedFilePath:
             'packages/voictents-and-estinants-engine/src/utilities/semantic-types/strif/strif.ts',
           importedIdentifierName: 'Strif',
         },
@@ -261,12 +255,6 @@ export const markUnusedExports = buildEstinant({
           importedFilePath:
             'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/file/getAssociatedFileGraphElements.ts',
           importedIdentifierName: 'getAssociatedFileGraphElements',
-        },
-        {
-          importingFilePath: '',
-          importedFilePath:
-            'packages/voictents-and-estinants-engine/src/type-script-adapter/deprecatedDigikikify.ts',
-          importedIdentifierName: 'digikikify',
         },
       ];
 

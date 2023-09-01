@@ -267,9 +267,7 @@ const getInferredVoictentTuple = (
   return inferredVoictentTuple;
 };
 
-export { digikikify } from './deprecatedDigikikify';
-
-const digikikify2: Digikikifier = <
+export const digikikify: Digikikifier = <
   TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
 >({
@@ -328,4 +326,36 @@ const digikikify2: Digikikifier = <
     },
     strategy,
   });
+};
+
+type VoictentByGeppTupleFromVoictentTuple<
+  TVoictentTuple extends GenericVoictent2Tuple,
+> = {
+  [TIndex in keyof TVoictentTuple]: {
+    [TKey in TVoictentTuple[TIndex]['gepp']]: TVoictentTuple[TIndex];
+  };
+};
+
+type VoictentByGeppFromVoictentTuple<
+  TVoictentTuple extends GenericVoictent2Tuple,
+> = Simplify<
+  UnionToIntersection<
+    VoictentByGeppTupleFromVoictentTuple<TVoictentTuple>[number]
+  >
+>;
+
+export const buildVoictentByGepp = <
+  TVoictentTuple extends GenericVoictent2Tuple,
+>(
+  voictentTuple: TVoictentTuple,
+): VoictentByGeppFromVoictentTuple<TVoictentTuple> => {
+  const entryList = voictentTuple.map((voictent) => {
+    return [voictent.gepp, voictent] as const;
+  });
+
+  const result = Object.fromEntries(
+    entryList,
+  ) as VoictentByGeppFromVoictentTuple<TVoictentTuple>;
+
+  return result;
 };

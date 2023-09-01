@@ -363,21 +363,20 @@ const getAdaptedEngineProgramLocator = ({
 }: AdaptedEngineProgramLocatorAccessorInput): AdaptedEngineProgramLocatorAccessorResult => {
   const programName = engineProgramFile.inMemoryFileName.kebabCase;
 
-  const populatedVoictentTupleProperty = engineCallExpressionPropertyList.find(
+  const explicitVoictentTupleProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
-      engineFunctionConfiguration.populatedVoictentTupleKeyIdentifierName,
+      engineFunctionConfiguration.explicitVoictentTupleKeyIdentifierName,
   );
 
-  const populatedVoictentTupleValueNode = populatedVoictentTupleProperty?.value;
+  const explicitVoictentTupleValueNode = explicitVoictentTupleProperty?.value;
 
-  const populatedVoictentInstanceList =
-    isSpecificConstantTypeScriptAsExpression(
-      populatedVoictentTupleValueNode,
-      isArrayExpression,
-    )
-      ? populatedVoictentTupleValueNode.expression.elements
-      : [];
+  const explicitVoictentInstanceList = isSpecificConstantTypeScriptAsExpression(
+    explicitVoictentTupleValueNode,
+    isArrayExpression,
+  )
+    ? explicitVoictentTupleValueNode.expression.elements
+    : [];
 
   const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
   const engineVoqueLocatorList: EngineVoqueLocator2[] = [];
@@ -398,11 +397,11 @@ const getAdaptedEngineProgramLocator = ({
       fileImportsByImportedIdentifier.set(specifier, fileImport);
     });
 
-  if (populatedVoictentInstanceList.length === 0) {
+  if (explicitVoictentInstanceList.length === 0) {
     parallelErrorList.push({
-      name: 'unparseable-populated-voictent-list',
+      name: 'unparseable-explicit-voictent-list',
       error: new Error(
-        'Unable able to parse populated input voictent list. Expected an array expression with "as const"',
+        'Unable able to parse explicit input voictent list. Expected an array expression with "as const"',
       ),
       reporterLocator,
       sourceLocator: {
@@ -411,12 +410,12 @@ const getAdaptedEngineProgramLocator = ({
       },
       context: {
         reason: 'A program without inputs will not do anything',
-        populatedVoictentTupleProperty,
-        populatedVoictentTupleValueNode,
+        explicitVoictentTupleProperty,
+        explicitVoictentTupleValueNode,
       },
     });
   } else {
-    populatedVoictentInstanceList.forEach((voictentInstance, originalIndex) => {
+    explicitVoictentInstanceList.forEach((voictentInstance, originalIndex) => {
       const voqueTypeReferenceNode = isNewExpressionWithSpecificTypeParameters<
         [AST_NODE_TYPES.TSTypeReference]
       >(voictentInstance, [AST_NODE_TYPES.TSTypeReference])
@@ -431,9 +430,9 @@ const getAdaptedEngineProgramLocator = ({
 
       if (voqueIdentifierName === null) {
         parallelErrorList.push({
-          name: 'unparseable-populated-voictent',
+          name: 'unparseable-explicit-voictent',
           error: new Error(
-            'Unable to parse populated input voictent. Expected a new expression with at least one type parameter',
+            'Unable to parse explicit input voictent. Expected a new expression with at least one type parameter',
           ),
           reporterLocator,
           sourceLocator: {

@@ -1,4 +1,7 @@
-import { digikikify } from '../../../type-script-adapter/digikikify';
+import {
+  buildVoictentByGepp,
+  digikikify,
+} from '../../../type-script-adapter/digikikify';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   FileSystemObjectEnumeratorConfigurationVoque,
@@ -60,7 +63,7 @@ const programFileCache = new ProgramFileCache({
  * Creates an interactive model for each engine program.
  */
 digikikify({
-  populatedVoictentTuple: [
+  explicitVoictentTuple: [
     new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
       gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialHubblepupTuple: [
@@ -76,14 +79,14 @@ digikikify({
       ],
     }),
   ] as const,
-  uninferableVoictentTuple: [
+  uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,
     }),
     new OutputFileVoictent({
       programFileCache,
     }),
-  ],
+  ] as const),
   errorGepp: PROGRAM_ERROR_GEPP,
   estinantTuple: [
     enumerateFileSystemObjects,
@@ -129,7 +132,7 @@ digikikify({
     signalError,
   ] as const,
   programFileCache,
-  serializeeVoictentGeppList: [
+  serializeeGeppList: [
     // note: keep this is a multiline list for easier debugging
     SANITY_SNAPSHOT_GEPP,
   ],

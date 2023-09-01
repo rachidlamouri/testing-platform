@@ -1,4 +1,7 @@
-import { digikikify } from '../../../type-script-adapter/digikikify';
+import {
+  buildVoictentByGepp,
+  digikikify,
+} from '../../../type-script-adapter/digikikify';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -64,7 +67,7 @@ const programFileCache = new ProgramFileCache({
  * to inconsistent floating point numbers in the layout
  */
 digikikify({
-  populatedVoictentTuple: [
+  explicitVoictentTuple: [
     new InMemoryVoictent<EngineFunctionConfigurationVoque>({
       gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
       initialHubblepupTuple: [
@@ -183,14 +186,14 @@ digikikify({
       ],
     }),
   ] as const,
-  uninferableVoictentTuple: [
+  uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,
     }),
     new OutputFileVoictent({
       programFileCache,
     }),
-  ],
+  ] as const),
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
@@ -232,5 +235,5 @@ digikikify({
     // signalError,
   ] as const,
   programFileCache,
-  serializeeVoictentGeppList: [SANITY_SNAPSHOT_GEPP],
+  serializeeGeppList: [SANITY_SNAPSHOT_GEPP],
 });

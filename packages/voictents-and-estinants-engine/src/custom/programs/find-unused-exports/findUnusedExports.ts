@@ -1,5 +1,8 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import { digikikify } from '../../../type-script-adapter/digikikify';
+import {
+  buildVoictentByGepp,
+  digikikify,
+} from '../../../type-script-adapter/digikikify';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
@@ -26,7 +29,7 @@ const programFileCache = new ProgramFileCache({
  * Reports granular export statements that are not imported by anything
  */
 digikikify({
-  populatedVoictentTuple: [
+  explicitVoictentTuple: [
     new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
       gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialHubblepupTuple: [
@@ -34,11 +37,11 @@ digikikify({
       ],
     }),
   ] as const,
-  uninferableVoictentTuple: [
+  uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,
     }),
-  ],
+  ]),
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
@@ -54,7 +57,7 @@ digikikify({
     reportErrors,
     signalError,
   ] as const,
-  serializeeVoictentGeppList: [
+  serializeeGeppList: [
     // note: keep this is a multiline list for easier debugging
   ],
   programFileCache,
