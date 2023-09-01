@@ -19,7 +19,6 @@ import {
 } from '../type-script-file/typeScriptFileImportList';
 import {
   ArrayExpressionOfIdentifiers,
-  isArrayExpression,
   isArrayExpressionOfIdentifiers,
 } from '../../../utilities/type-script-ast/isArrayExpressionOfIdentifiers';
 import { isSpecificExpressionStatement } from '../../../utilities/type-script-ast/isSpecificExpressionStatement';
@@ -73,6 +72,8 @@ import {
 } from './engineVoqueLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
 import { OdeshinZorn } from '../../adapter/odeshin2';
+import { buildVoictentByGepp } from '../../../type-script-adapter/digikikify';
+import { isArrayExpression } from '../../../utilities/type-script-ast/isArrayExpression';
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -459,6 +460,54 @@ const getAdaptedEngineProgramLocator = ({
           isCoreVoque: false,
         }),
       );
+    });
+  }
+
+  // TODO: rename these variables or move this code to its own function (I prefer the latter), because these are way too vague
+  const keyName =
+    engineFunctionConfiguration.uninferableVoictentByGeppKeyIdentifierName;
+  const functionName = buildVoictentByGepp.name;
+
+  const uninferableVoictentByGeppProperty =
+    engineCallExpressionPropertyList.find((property) => {
+      return property.key.name === keyName;
+    });
+
+  const uninferableVoictentByGeppValueNode =
+    uninferableVoictentByGeppProperty?.value;
+
+  const buildVoictentByGeppCallExpression =
+    isSpecificIdentifiableCallExpression(
+      uninferableVoictentByGeppValueNode,
+      functionName,
+    )
+      ? uninferableVoictentByGeppValueNode
+      : null;
+
+  const hasConstantListOfArguments =
+    buildVoictentByGeppCallExpression !== null &&
+    isSpecificConstantTypeScriptAsExpression<TSESTree.ArrayExpression>(
+      buildVoictentByGeppCallExpression.arguments[0],
+      isArrayExpression,
+    );
+
+  if (!hasConstantListOfArguments) {
+    parallelErrorList.push({
+      name: 'unparseable-uninferable-voictent-by-gepp',
+      error: new Error(
+        `Unable to parse ${keyName} property. Expected a call expression to ${functionName} with a single array literal parameter ending in "as const"`,
+      ),
+      reporterLocator,
+      sourceLocator: {
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
+        filePath: engineProgramFile.filePath,
+      },
+      context: {
+        hasConstantListOfArguments,
+        buildVoictentByGeppCallExpression,
+        uninferableVoictentByGeppValueNode,
+        uninferableVoictentByGeppProperty,
+      },
     });
   }
 

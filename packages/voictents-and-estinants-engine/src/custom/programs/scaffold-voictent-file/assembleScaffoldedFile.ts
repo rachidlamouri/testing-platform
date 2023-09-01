@@ -1,5 +1,8 @@
 import fs from 'fs';
-import { digikikify } from '../../../type-script-adapter/digikikify';
+import {
+  buildVoictentByGepp,
+  digikikify,
+} from '../../../type-script-adapter/digikikify';
 import {
   SCAFFOLD_CONFIGURATION_GEPP,
   ScaffoldConfigurationVoque,
@@ -29,7 +32,7 @@ digikikify({
       initialHubblepupTuple: [{ filePath }],
     }),
   ] as const,
-  uninferableVoictentByGepp: {},
+  uninferableVoictentByGepp: buildVoictentByGepp([] as const),
   estinantTuple: [scaffoldFile] as const,
   programFileCache: new ProgramFileCache({
     namespace: 'assembleScaffoldedFile',

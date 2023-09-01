@@ -36,7 +36,7 @@ digikikify({
     new ProgramErrorVoictent({
       programFileCache,
     }),
-  ]),
+  ] as const),
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,

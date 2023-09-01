@@ -32,6 +32,7 @@ export type AdaptedEngineFunctionConfiguration = {
   exportedIdentifier: 'digikikify';
   estinantListKeyIdentifierName: 'estinantTuple';
   explicitVoictentTupleKeyIdentifierName: 'explicitVoictentTuple';
+  uninferableVoictentByGeppKeyIdentifierName: 'uninferableVoictentByGepp';
 };
 
 /**
@@ -82,4 +83,5 @@ export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfigu
     exportedIdentifier: 'digikikify',
     estinantListKeyIdentifierName: 'estinantTuple',
     explicitVoictentTupleKeyIdentifierName: 'explicitVoictentTuple',
+    uninferableVoictentByGeppKeyIdentifierName: 'uninferableVoictentByGepp',
   };
