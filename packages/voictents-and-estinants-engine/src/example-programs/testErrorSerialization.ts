@@ -23,7 +23,7 @@ digikikify2({
     new SerializableErrorVoictent<ErrorVoque>({
       gepp: 'error',
       programFileCache,
-      initialHubblepupTuple: [
+      initialHubblepupPelueTuple: [
         new Error('Example error message 1'),
         new Error('Example error message 2'),
       ],

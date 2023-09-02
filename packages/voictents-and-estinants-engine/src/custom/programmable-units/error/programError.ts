@@ -30,7 +30,7 @@ type GenericProgramErrorReporterLocator = GenericReportingEstinantLocator;
 
 type UnsafeProgramErrorReporterLocator = UnsafeReportingEstinantLocator;
 
-export type ReceivedProgramError<
+export type ProgramErrorPelue<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > =
   | {
@@ -44,16 +44,16 @@ export type ReceivedProgramError<
 
 export type ReportedProgramError<
   TReporterLocator extends GenericProgramErrorReporterLocator,
-> = ReceivedProgramError<TReporterLocator>;
+> = ProgramErrorPelue<TReporterLocator>;
 
-export type GenericReceivedProgramError =
-  ReceivedProgramError<GenericProgramErrorReporterLocator>;
+export type GenericProgramErrorPelue =
+  ProgramErrorPelue<GenericProgramErrorReporterLocator>;
 
 /**
  * The information needed to identify the source of an error, the reporter of an
  * error and any surrounding context
  */
-type EmittedProgramError<
+type ProgramErrorPelie<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > =
   | {
@@ -80,12 +80,12 @@ type ProgramErrorVoque<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > = Voque<
   ProgramErrorGepp,
-  ReceivedProgramError<TReporterLocator>,
-  EmittedProgramError<TReporterLocator>,
+  ProgramErrorPelue<TReporterLocator>,
+  ProgramErrorPelie<TReporterLocator>,
   {
     zorn: string;
   },
-  EmittedProgramError<TReporterLocator>[]
+  ProgramErrorPelie<TReporterLocator>[]
 >;
 
 export type GenericProgramErrorVoque =

@@ -3,7 +3,7 @@ import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
-  ReceivedProgramError,
+  ProgramErrorPelue,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
 import {
@@ -93,7 +93,7 @@ export const markUnusedExports = buildEstinant({
         });
     });
 
-    const errorList: ReceivedProgramError<ReportingLocator>[] = [];
+    const errorList: ProgramErrorPelue<ReportingLocator>[] = [];
 
     const haphazardouslyProtectedFromBeingMarkedAsUnusedList: typeof importItemList[number][] =
       [

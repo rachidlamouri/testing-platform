@@ -71,16 +71,16 @@ digikikify2({
   inputVoictentList: [
     new InMemoryOdeshin2Voictent<DatumTestCaseInputVoque>({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
-      initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
+      initialHubblepupPelueTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),
     new InMemoryOdeshin2Voictent<SerializableTypeNameVoque>({
       gepp: SERIALIZABLE_TYPE_NAME_GEPP,
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     }),
     new JsonSerializableVoictent<SerializedConfiguration>({
       gepp: 'serialized',
       programFileCache,
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     }),
   ],
   estinantTuple: [

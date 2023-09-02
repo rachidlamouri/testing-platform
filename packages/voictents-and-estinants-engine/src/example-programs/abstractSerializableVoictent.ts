@@ -39,14 +39,14 @@ export type AbstractSerializableVoque<TGepp extends Gepp> = Voque<
 export type GenericAbstractSerializableVoque = AbstractSerializableVoque<Gepp>;
 
 export type IndexedAbstractSerializable =
-  GenericAbstractSerializableVoque['indexedEmittedHubblepup'];
+  GenericAbstractSerializableVoque['indexedHubblepupPelie'];
 
 type AbstractSerializableVoictentConstructorInput<
   TVoque extends GenericAbstractSerializableVoque,
 > = {
   gepp: TVoque['gepp'];
   programFileCache: ProgramFileCache;
-  initialHubblepupTuple: TVoque['receivedHubblepup'][];
+  initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 };
 
 export abstract class AbstractSerializableVoictent<
@@ -57,7 +57,7 @@ export abstract class AbstractSerializableVoictent<
 
   public readonly programFileCache: ProgramFileCache;
 
-  private initialHubblepupTuple: TVoque['emittedHubblepup'][];
+  private initialHubblepupPelueTuple: TVoque['hubblepupPelie'][];
 
   public readonly duplicateCountByCheckId = new Map<string, number>();
 
@@ -66,11 +66,11 @@ export abstract class AbstractSerializableVoictent<
   constructor({
     gepp,
     programFileCache,
-    initialHubblepupTuple,
+    initialHubblepupPelueTuple,
   }: AbstractSerializableVoictentConstructorInput<TVoque>) {
     this.gepp = gepp;
     this.programFileCache = programFileCache;
-    this.initialHubblepupTuple = initialHubblepupTuple;
+    this.initialHubblepupPelueTuple = initialHubblepupPelueTuple;
   }
 
   initialize(): void {
@@ -78,7 +78,7 @@ export abstract class AbstractSerializableVoictent<
       voictentGepp: this.gepp,
     });
 
-    this.initialHubblepupTuple.forEach((hubblepup) => {
+    this.initialHubblepupPelueTuple.forEach((hubblepup) => {
       this.addHubblepup(hubblepup);
     });
   }

@@ -12,10 +12,10 @@ type BaseLeftInputVicken<
 
 // TODO: rename this to "LeftInputIndexedHubblepupVicken"
 export type LeftInputHubblepupVicken<TVoque extends GenericVoque> =
-  BaseLeftInputVicken<TVoque, TVoque['indexedEmittedHubblepup'], false>;
+  BaseLeftInputVicken<TVoque, TVoque['indexedHubblepupPelie'], false>;
 
 export type LeftInputVoictentVicken<TVoque extends GenericVoque> =
-  BaseLeftInputVicken<TVoque, TVoque['emittedVoictent'], true>;
+  BaseLeftInputVicken<TVoque, TVoque['voictentPelie'], true>;
 
 export type LeftInputVicken<TVoque extends GenericVoque> =
   | LeftInputHubblepupVicken<TVoque>

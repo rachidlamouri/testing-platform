@@ -14,7 +14,7 @@ type SerializableVoictentConstructorInput<
   TVoque extends GenericAbstractSerializableVoque,
 > = {
   gepp: TVoque['gepp'];
-  initialHubblepupTuple: TVoque['receivedHubblepup'][];
+  initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
   programFileCache: ProgramFileCache;
 };
 
@@ -23,12 +23,12 @@ export class SerializableVoictent<
 > extends AbstractSerializableVoictent<TVoque> {
   constructor({
     gepp,
-    initialHubblepupTuple,
+    initialHubblepupPelueTuple,
     programFileCache,
   }: SerializableVoictentConstructorInput<TVoque>) {
     super({
       gepp,
-      initialHubblepupTuple,
+      initialHubblepupPelueTuple,
       programFileCache,
     });
   }

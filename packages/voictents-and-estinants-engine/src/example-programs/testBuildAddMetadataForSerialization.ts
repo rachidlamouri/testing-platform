@@ -24,12 +24,12 @@ digikikify2({
   inputVoictentList: [
     new InMemoryOdeshin2Voictent<DatumTestCaseInputVoque>({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
-      initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
+      initialHubblepupPelueTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),
     new JsonSerializableVoictent<SerializedConfiguration>({
       gepp: 'serialized',
       programFileCache,
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     }),
   ],
   estinantTuple: [

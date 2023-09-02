@@ -1,7 +1,7 @@
 import {
-  VoictentLanbe,
+  VoictentPelieLanbe,
   LanbeTypeName,
-  VoictentItemLanbe2,
+  HubblepupPelieLanbe2,
   GenericVoictentItemLanbe2,
   ReferenceTypeName,
 } from '../engine-shell/voictent/lanbe';
@@ -20,7 +20,7 @@ export class MissingLanbeError extends Error {
   }
 }
 
-export type ReceivedHubblepupState = {
+export type HubblepupPelueState = {
   twoTicksAgo: boolean;
   oneTickAgo: boolean;
   thisTick: boolean | null;
@@ -28,7 +28,7 @@ export type ReceivedHubblepupState = {
 
 type InMemoryVoictentConstructorInput<TVoque extends GenericInMemoryVoque> = {
   gepp: TVoque['gepp'];
-  initialHubblepupTuple: TVoque['emittedVoictent'];
+  initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 };
 
 export abstract class AbstractInMemoryVoictent<
@@ -38,11 +38,11 @@ export abstract class AbstractInMemoryVoictent<
 {
   public readonly gepp: TVoque['gepp'];
 
-  private initialHubblepupTuple: TVoque['emittedHubblepup'][];
+  private initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 
-  hubblepupTuple: TVoque['emittedVoictent'] = [];
+  hubblepupPelieTuple: TVoque['hubblepupPelie'][] = [];
 
-  indicesByLanbe: Map<VoictentItemLanbe2<TRestrictingVoque, TVoque>, number> =
+  indicesByLanbe: Map<HubblepupPelieLanbe2<TRestrictingVoque, TVoque>, number> =
     new Map();
 
   static minimumInclusiveIndex = -1;
@@ -51,7 +51,7 @@ export abstract class AbstractInMemoryVoictent<
     return this.size - 1;
   }
 
-  private receivedHubblepup: ReceivedHubblepupState = {
+  private hubblepupPelueState: HubblepupPelueState = {
     twoTicksAgo: false,
     oneTickAgo: false,
     thisTick: null,
@@ -59,62 +59,63 @@ export abstract class AbstractInMemoryVoictent<
 
   constructor({
     gepp,
-    initialHubblepupTuple,
+    initialHubblepupPelueTuple,
   }: InMemoryVoictentConstructorInput<TVoque>) {
     this.gepp = gepp;
-    this.initialHubblepupTuple = initialHubblepupTuple;
+    this.initialHubblepupPelueTuple = initialHubblepupPelueTuple;
   }
 
   initialize(): void {
-    this.initialHubblepupTuple.forEach((hubblepup) => {
+    this.initialHubblepupPelueTuple.forEach((hubblepup) => {
       this.addHubblepup(hubblepup);
     });
   }
 
   get isEmpty(): boolean {
-    return this.hubblepupTuple.length === 0;
+    return this.hubblepupPelieTuple.length === 0;
   }
 
-  addHubblepup(hubblepup: TVoque['receivedHubblepup']): void {
-    this.receivedHubblepup.thisTick = true;
+  addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
+    this.hubblepupPelueState.thisTick = true;
 
-    this.hubblepupTuple.push(hubblepup);
+    this.hubblepupPelieTuple.push(hubblepup);
   }
 
   onTickStart(): void {
     // eslint-disable-next-line prefer-destructuring
-    this.receivedHubblepup = {
-      twoTicksAgo: this.receivedHubblepup.oneTickAgo,
-      oneTickAgo: this.receivedHubblepup.thisTick ?? false,
+    this.hubblepupPelueState = {
+      twoTicksAgo: this.hubblepupPelueState.oneTickAgo,
+      oneTickAgo: this.hubblepupPelueState.thisTick ?? false,
       thisTick: null,
     };
   }
 
   get didStopAccumulating(): boolean {
     return (
-      this.receivedHubblepup.twoTicksAgo && !this.receivedHubblepup.oneTickAgo
+      this.hubblepupPelueState.twoTicksAgo &&
+      !this.hubblepupPelueState.oneTickAgo
     );
   }
 
-  createVoictentLanbe(debugName: string): VoictentLanbe {
-    const lanbe: VoictentLanbe = {
-      typeName: LanbeTypeName.VoictentLanbe,
+  createVoictentLanbe(debugName: string): VoictentPelieLanbe {
+    const lanbe: VoictentPelieLanbe = {
+      typeName: LanbeTypeName.VoictentPelieLanbe,
       debugName,
       hasNext: () => {
         return this.didStopAccumulating;
       },
       isAccumulating: () => {
         return (
-          this.receivedHubblepup.twoTicksAgo ||
-          this.receivedHubblepup.oneTickAgo ||
-          (this.receivedHubblepup.thisTick ?? false)
+          this.hubblepupPelueState.twoTicksAgo ||
+          this.hubblepupPelueState.oneTickAgo ||
+          (this.hubblepupPelueState.thisTick ?? false)
         );
       },
       advance: () => {},
       dereference: () => {
         return {
-          typeName: ReferenceTypeName.Voictent,
-          value: [...this.hubblepupTuple],
+          typeName: ReferenceTypeName.VoictentPelie,
+          value: [...this.hubblepupPelieTuple],
         };
       },
     };
@@ -124,9 +125,9 @@ export abstract class AbstractInMemoryVoictent<
 
   createVoictentItemLanbe(
     debugName: string,
-  ): VoictentItemLanbe2<TRestrictingVoque, TVoque> {
-    const lanbe: VoictentItemLanbe2<TRestrictingVoque, TVoque> = {
-      typeName: LanbeTypeName.VoictentItemLanbe2,
+  ): HubblepupPelieLanbe2<TRestrictingVoque, TVoque> {
+    const lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque> = {
+      typeName: LanbeTypeName.HubblepupPelieLanbe2,
       debugName,
       hasNext: () => {
         return this.hasNext(lanbe);
@@ -138,7 +139,7 @@ export abstract class AbstractInMemoryVoictent<
         const value = this.dereference(lanbe);
 
         return {
-          typeName: ReferenceTypeName.IndexedVoictentItem,
+          typeName: ReferenceTypeName.IndexedHubblepupPelie,
           value,
         };
       },
@@ -152,7 +153,7 @@ export abstract class AbstractInMemoryVoictent<
   }
 
   protected getLanbeIndex(
-    lanbe: VoictentItemLanbe2<TRestrictingVoque, TVoque>,
+    lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque>,
   ): number {
     const index = this.indicesByLanbe.get(lanbe);
 
@@ -164,17 +165,19 @@ export abstract class AbstractInMemoryVoictent<
   }
 
   get size(): number {
-    return this.hubblepupTuple.length;
+    return this.hubblepupPelieTuple.length;
   }
 
   private hasNext(
-    lanbe: VoictentItemLanbe2<TRestrictingVoque, TVoque>,
+    lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque>,
   ): boolean {
     const currentIndex = this.getLanbeIndex(lanbe);
     return this.size > 0 && currentIndex < this.maximumInclusiveIndex;
   }
 
-  private advance(lanbe: VoictentItemLanbe2<TRestrictingVoque, TVoque>): void {
+  private advance(
+    lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque>,
+  ): void {
     if (this.hasNext(lanbe)) {
       const currentIndex = this.getLanbeIndex(lanbe);
       this.indicesByLanbe.set(lanbe, currentIndex + 1);
@@ -182,10 +185,8 @@ export abstract class AbstractInMemoryVoictent<
   }
 
   // eslint-disable-next-line class-methods-use-this
-  protected dereference(
+  protected abstract dereference(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    lanbe: VoictentItemLanbe2<TRestrictingVoque, TVoque>,
-  ): TVoque['indexedEmittedHubblepup'] {
-    throw Error('Not implemented');
-  }
+    lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque>,
+  ): TVoque['indexedHubblepupPelie'];
 }

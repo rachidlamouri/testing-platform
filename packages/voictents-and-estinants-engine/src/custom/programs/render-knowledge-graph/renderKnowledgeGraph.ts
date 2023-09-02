@@ -86,13 +86,13 @@ digikikify({
   explicitVoictentTuple: [
     new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
       gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialHubblepupTuple: [
+      initialHubblepupPelueTuple: [
         VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
     }),
     new InMemoryVoictent<EngineFunctionConfigurationVoque>({
       gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
-      initialHubblepupTuple: [
+      initialHubblepupPelueTuple: [
         CORE_ENGINE_FUNCTION_CONFIGURATION,
         CORE_ENGINE_FUNCTION_2_CONFIGURATION,
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
@@ -100,7 +100,7 @@ digikikify({
     }),
     new InMemoryOdeshin2Voictent<BoundaryVoque>({
       gepp: BOUNDARY_GEPP,
-      initialHubblepupTuple: STATIC_BOUNDARY_LIST,
+      initialHubblepupPelueTuple: STATIC_BOUNDARY_LIST,
     }),
   ] as const,
   uninferableVoictentByGepp: buildVoictentByGepp([
@@ -109,11 +109,11 @@ digikikify({
     }),
     new InMemoryVoictent<BoundaryTrieAVoque>({
       gepp: BOUNDARY_TRIE_A_GEPP,
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     }),
     new InMemoryVoictent<BoundaryTrieBVoque>({
       gepp: BOUNDARY_TRIE_B_GEPP,
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     }),
     new OutputFileVoictent({
       programFileCache,

@@ -4,7 +4,7 @@ import {
   ProgramErrorElementLocatorTypeName,
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
-  ReceivedProgramError,
+  ProgramErrorPelue,
 } from '../../../programmable-units/error/programError';
 import {
   DIRECTORY_WITH_FILE_GEPP,
@@ -87,7 +87,7 @@ export const assertDirectoriesHaveBoundaries = buildEstinant({
           boundedDirectoryPathSet,
           directory,
         },
-      } satisfies ReceivedProgramError<ReportingLocator>;
+      } satisfies ProgramErrorPelue<ReportingLocator>;
     });
 
     return outputList;

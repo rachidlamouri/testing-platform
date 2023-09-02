@@ -24,7 +24,7 @@ type NextAdaptedOutputVickenTuple<
   TOutputVoque extends GenericVoque,
 > = [
   ...TAdaptedOutputVickenTuple,
-  AdaptedOutputVicken<TOutputVoque, TOutputVoque['receivedHubblepup']>,
+  AdaptedOutputVicken<TOutputVoque, TOutputVoque['hubblepupPelue']>,
 ];
 
 type PartialOutputAppreffinge<
@@ -34,7 +34,7 @@ type PartialOutputAppreffinge<
   gepp: TOutputVoque['gepp'];
   pinbe: Predicate<
     TAdaptedLeftInputVicken['pinbetunfInput'],
-    TOutputVoque['receivedHubblepup']
+    TOutputVoque['hubblepupPelue']
   >;
 };
 

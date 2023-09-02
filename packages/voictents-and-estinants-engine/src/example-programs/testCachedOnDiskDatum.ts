@@ -58,11 +58,11 @@ digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<InputVoque>({
       gepp: 'input',
-      initialHubblepupTuple: [
+      initialHubblepupPelueTuple: [
         {
           zorn: filePath.replaceAll('/', ' | '),
           lastModified: fs.statSync(filePath).mtime.toISOString(),
-          grition: (): CachedVoque['emittedHubblepup']['grition'] => {
+          grition: (): CachedVoque['hubblepupPelie']['grition'] => {
             const text = fs.readFileSync(filePath, 'utf8');
             return text;
           },

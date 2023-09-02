@@ -16,7 +16,7 @@ import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
-  ReceivedProgramError,
+  ProgramErrorPelue,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
 import { EngineEstinantLocator2TypeName } from '../../programmable-units/engine-program/engineEstinantLocator2';
@@ -103,7 +103,7 @@ export const assertNoCopyPasta = buildEstinant({
             description,
             duplicateDescriptionGroup,
           },
-        } satisfies ReceivedProgramError<ReportingLocator>;
+        } satisfies ProgramErrorPelue<ReportingLocator>;
       });
 
     return errorList;

@@ -29,8 +29,8 @@ import {
   Lanbe,
   LanbeTypeName,
   ReferenceTypeName,
-  VoictentItemLanbe,
-  VoictentLanbe,
+  HubblepupPelieLanbe,
+  VoictentPelieLanbe,
 } from '../engine-shell/voictent/lanbe';
 import { Mabz, MabzEntry } from '../internal/procody/mabz';
 import { Platomity2, Virok, getDreanorTuple } from '../internal/platomity';
@@ -86,8 +86,8 @@ type TickSeries<TValue extends number | bigint> = TValue[];
 
 type VoictentTickSeriesConfiguration = {
   gepp: Gepp;
-  voictentLanbe: VoictentLanbe | null;
-  voictentItemLanbe: VoictentItemLanbe | GenericVoictentItemLanbe2 | null;
+  voictentLanbe: VoictentPelieLanbe | null;
+  voictentItemLanbe: HubblepupPelieLanbe | GenericVoictentItemLanbe2 | null;
   voictentTickSeries: TickSeries<number>;
   voictentItemTickSeries: TickSeries<number>;
 };
@@ -366,7 +366,10 @@ export const digikikify = ({
         return {
           typeName: DreanorTypeName.RightVoictentDreanor,
           gepp: rightInputAppreffinge.gepp,
-          lanbe: createLanbe2(estinant, rightInputAppreffinge) as VoictentLanbe,
+          lanbe: createLanbe2(
+            estinant,
+            rightInputAppreffinge,
+          ) as VoictentPelieLanbe,
           isReady: false,
         } satisfies RightVoictentDreanor;
       },
@@ -404,7 +407,7 @@ export const digikikify = ({
           strategy === DigikikifierStrategy.WaitForAllDependencies &&
           (dreanor.typeName === DreanorTypeName.RightVoictentDreanor ||
             (dreanor.typeName === DreanorTypeName.LeftDreanor &&
-              dreanor.lanbe.typeName === LanbeTypeName.VoictentLanbe))
+              dreanor.lanbe.typeName === LanbeTypeName.VoictentPelieLanbe))
         ) {
           return !dreanor.isReady;
         }
@@ -421,7 +424,7 @@ export const digikikify = ({
           } = dreanor.lanbe.dereference();
 
           const indexedHubblepup: GenericIndexedHubblepup =
-            leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
+            leftInputTypeName === ReferenceTypeName.IndexedHubblepupPelie
               ? leftInputReferenceValue
               : {
                   hubblepup: leftInputReferenceValue,
@@ -431,11 +434,11 @@ export const digikikify = ({
                 };
 
           const leftInput: Hubblepup | HubblepupTuple =
-            leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
+            leftInputTypeName === ReferenceTypeName.IndexedHubblepupPelie
               ? leftInputReferenceValue.hubblepup
               : leftInputReferenceValue;
 
-          if (dreanor.lanbe.typeName === LanbeTypeName.VoictentLanbe) {
+          if (dreanor.lanbe.typeName === LanbeTypeName.VoictentPelieLanbe) {
             // eslint-disable-next-line no-param-reassign
             dreanor.isReady = true;
           }
@@ -450,13 +453,13 @@ export const digikikify = ({
               } else if (
                 rightDreanor.typeName ===
                   DreanorTypeName.RightVoictentItem2Dreanor &&
-                leftInputTypeName === ReferenceTypeName.IndexedVoictentItem
+                leftInputTypeName === ReferenceTypeName.IndexedHubblepupPelie
               ) {
                 zornTuple = rightDreanor.framate(leftInputReferenceValue);
               } else if (
                 rightDreanor.typeName ===
                   DreanorTypeName.RightVoictentItem2Dreanor &&
-                leftInputTypeName === ReferenceTypeName.Voictent
+                leftInputTypeName === ReferenceTypeName.VoictentPelie
               ) {
                 // TODO: this cast is incorrect, and is masking some underlying issue. The input type should probably be "never"
                 zornTuple = rightDreanor.framate(
@@ -483,7 +486,7 @@ export const digikikify = ({
             leftDreanor: dreanor,
             leftInput:
               platomity.estinant.version === 2 &&
-              leftInputTypeName === ReferenceTypeName.Voictent
+              leftInputTypeName === ReferenceTypeName.VoictentPelie
                 ? indexedHubblepup.hubblepup
                 : indexedHubblepup,
             mabz: new Mabz(mabzEntryList),
@@ -512,7 +515,7 @@ export const digikikify = ({
             dreanor.isReady = true;
           } else if (
             dreanor.typeName === DreanorTypeName.RightVoictentItem2Dreanor &&
-            rightInputTypeName === ReferenceTypeName.IndexedVoictentItem
+            rightInputTypeName === ReferenceTypeName.IndexedHubblepupPelie
           ) {
             zorn = dreanor.croard(rightInput);
             dreanor.prected.set(zorn, rightInput);
@@ -794,7 +797,7 @@ export const digikikify = ({
           if (
             (dreanor.typeName === DreanorTypeName.LeftDreanor ||
               dreanor.typeName === DreanorTypeName.RightVoictentDreanor) &&
-            dreanor.lanbe.typeName === LanbeTypeName.VoictentLanbe
+            dreanor.lanbe.typeName === LanbeTypeName.VoictentPelieLanbe
           ) {
             return true;
           }

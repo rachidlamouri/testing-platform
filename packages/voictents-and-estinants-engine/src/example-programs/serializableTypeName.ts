@@ -14,5 +14,6 @@ type SerializableTypeNameGepp = typeof SERIALIZABLE_TYPE_NAME_GEPP;
 
 export type SerializableTypeNameVoque = InMemoryOdeshin2Voque<
   SerializableTypeNameGepp,
-  SerializableTypeName
+  SerializableTypeName,
+  SerializableTypeName[]
 >;

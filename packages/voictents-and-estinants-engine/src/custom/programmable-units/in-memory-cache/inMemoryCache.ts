@@ -10,7 +10,7 @@ class DuplicatePointerError extends Error {
   }
 }
 
-type ReceivedDatumState = {
+type DatumStatePelue = {
   twoTicksAgo: boolean;
   oneTickAgo: boolean;
   thisTick: boolean | null;
@@ -71,7 +71,7 @@ export class InMemoryCache<TDatum> {
   private pointerByName = new Map<string, InMemoryCachePointer<TDatum>>();
   // private datumIndexByPointerName: Map<string, number> = new Map();
 
-  private receivedDatumState: ReceivedDatumState = {
+  private datumStatePelue: DatumStatePelue = {
     twoTicksAgo: false,
     oneTickAgo: false,
     thisTick: null,
@@ -83,15 +83,15 @@ export class InMemoryCache<TDatum> {
 
   onTickStart(): void {
     // eslint-disable-next-line prefer-destructuring
-    this.receivedDatumState = {
-      twoTicksAgo: this.receivedDatumState.oneTickAgo,
-      oneTickAgo: this.receivedDatumState.thisTick ?? false,
+    this.datumStatePelue = {
+      twoTicksAgo: this.datumStatePelue.oneTickAgo,
+      oneTickAgo: this.datumStatePelue.thisTick ?? false,
       thisTick: null,
     };
   }
 
   addDatum(datum: TDatum): void {
-    this.receivedDatumState.thisTick = true;
+    this.datumStatePelue.thisTick = true;
 
     this.datumTuple.push(datum);
   }
@@ -110,16 +110,14 @@ export class InMemoryCache<TDatum> {
   }
 
   get didStopAccumulating(): boolean {
-    return (
-      this.receivedDatumState.twoTicksAgo && !this.receivedDatumState.oneTickAgo
-    );
+    return this.datumStatePelue.twoTicksAgo && !this.datumStatePelue.oneTickAgo;
   }
 
   get isAccumulating(): boolean {
     return (
-      this.receivedDatumState.twoTicksAgo ||
-      this.receivedDatumState.oneTickAgo ||
-      (this.receivedDatumState.thisTick ?? false)
+      this.datumStatePelue.twoTicksAgo ||
+      this.datumStatePelue.oneTickAgo ||
+      (this.datumStatePelue.thisTick ?? false)
     );
   }
 

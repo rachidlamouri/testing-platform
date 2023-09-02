@@ -36,13 +36,13 @@ digikikify({
   explicitVoictentTuple: [
     new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
       gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialHubblepupTuple: [
+      initialHubblepupPelueTuple: [
         VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
     }),
     new InMemoryVoictent<EngineFunctionConfigurationVoque>({
       gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
-      initialHubblepupTuple: [
+      initialHubblepupPelueTuple: [
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
         CORE_ENGINE_FUNCTION_CONFIGURATION,
       ],

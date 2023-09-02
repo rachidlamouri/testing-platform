@@ -4,7 +4,7 @@ import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
-  ReceivedProgramError,
+  ProgramErrorPelue,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
 import {
@@ -66,7 +66,7 @@ export const getDirectedGraphFromGraphElementGroup = buildEstinant({
     const allNodeList: Node3[] = [];
     const allEdgeList: DirectedGraphEdge[] = [];
     const allSubgraphList: SubgraphLike3[] = [];
-    const parallelErrorList: ReceivedProgramError<ReportingLocator>[] = [];
+    const parallelErrorList: ProgramErrorPelue<ReportingLocator>[] = [];
 
     // TODO: make it easier to differentiate DirectedGraphElement2 items
     graphElementGroup.elementList.forEach((element) => {
@@ -147,7 +147,7 @@ export const getDirectedGraphFromGraphElementGroup = buildEstinant({
             context: {
               graphElementGroup,
             },
-          } satisfies ReceivedProgramError<ReportingLocator>,
+          } satisfies ProgramErrorPelue<ReportingLocator>,
         ],
         [DIRECTED_GRAPH_GEPP]: [],
         [DIRECTED_GRAPH_METADATA_BY_ID_GEPP]: [],
@@ -167,7 +167,7 @@ export const getDirectedGraphFromGraphElementGroup = buildEstinant({
 
     const getParentGraph = (childElement: {
       parentId: string;
-    }): GraphLike | ReceivedProgramError<ReportingLocator> => {
+    }): GraphLike | ProgramErrorPelue<ReportingLocator> => {
       const graph = graphById.get(childElement.parentId);
 
       if (graph === undefined) {
@@ -180,7 +180,7 @@ export const getDirectedGraphFromGraphElementGroup = buildEstinant({
             childElement,
             graphById,
           },
-        } satisfies ReceivedProgramError<ReportingLocator>;
+        } satisfies ProgramErrorPelue<ReportingLocator>;
       }
 
       return graph;

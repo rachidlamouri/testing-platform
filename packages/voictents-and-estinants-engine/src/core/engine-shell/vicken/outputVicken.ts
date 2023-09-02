@@ -3,7 +3,7 @@ import { GenericVoqueTuple, UnsafeVoqueTuple } from '../../engine/voque';
 
 type OutputRecordTuple<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
   [Index in keyof TOutputVoqueOptionTuple]: {
-    [TKey in TOutputVoqueOptionTuple[Index]['gepp']]: TOutputVoqueOptionTuple[Index]['receivedHubblepup'][];
+    [TKey in TOutputVoqueOptionTuple[Index]['gepp']]: TOutputVoqueOptionTuple[Index]['hubblepupPelue'][];
   };
 };
 

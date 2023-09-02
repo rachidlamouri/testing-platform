@@ -19,7 +19,7 @@ type RightTropoignantInputTupleFromZornTuple<
   TVoque extends GenericVoque,
   TZornTuple extends ZornTuple,
 > = {
-  readonly [Index in keyof TZornTuple]: TVoque['indexedEmittedHubblepup'];
+  readonly [Index in keyof TZornTuple]: TVoque['indexedHubblepupPelie'];
 };
 
 export type RightInputHubblepupTupleVicken<
@@ -36,7 +36,7 @@ export type GenericRightInputHubblepupTupleVicken =
   RightInputHubblepupTupleVicken<GenericVoque, ZornTuple>;
 
 export type RightInputVoictentVicken<TVoque extends GenericVoque> =
-  BaseRightInputVicken<TVoque, TVoque['emittedVoictent'], true, never>;
+  BaseRightInputVicken<TVoque, TVoque['voictentPelie'], true, never>;
 
 export type RightInputVicken<
   TVoque extends GenericVoque,

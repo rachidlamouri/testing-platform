@@ -40,7 +40,7 @@ type PinbetunfOutputAggregator<> = (
   modifiedOutput: any,
 ) => AggregatedOutput;
 
-// TODO: the entry value should be TVoque['emittedVoictent']
+// TODO: the entry value should be TVoque['voictentPelie']
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CoreConstituentOutputEntry = [Gepp, any];
 

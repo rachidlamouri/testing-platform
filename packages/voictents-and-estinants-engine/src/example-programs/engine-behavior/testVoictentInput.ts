@@ -49,16 +49,16 @@ digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<Voictent1Voque>({
       gepp: 'voictent-1',
-      initialHubblepupTuple: ['a', 'b', 'c', 'd'],
+      initialHubblepupPelueTuple: ['a', 'b', 'c', 'd'],
     }),
     new InMemoryVoictent<Voictent2Voque>({
       gepp: 'voictent-2',
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     }),
     new SerializableVoictent<SerializedVoque>({
       gepp: 'serialized',
       programFileCache,
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     }),
   ],
   estinantTuple: [

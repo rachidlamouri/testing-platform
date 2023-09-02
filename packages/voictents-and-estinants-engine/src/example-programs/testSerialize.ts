@@ -25,8 +25,8 @@ digikikify2({
     new SerializableVoictent<SerializedConfiguration>({
       gepp: 'serialized',
       programFileCache,
-      initialHubblepupTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST.map<
-        SerializedConfiguration['receivedHubblepup']
+      initialHubblepupPelueTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST.map<
+        SerializedConfiguration['hubblepupPelue']
       >((datumTestCaseInput) => {
         return {
           sourceGepp: DATUM_TEST_CASE_INPUT_GEPP,
