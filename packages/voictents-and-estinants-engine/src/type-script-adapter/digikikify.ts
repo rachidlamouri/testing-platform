@@ -24,7 +24,7 @@ import {
 } from '../core/engine-shell/vicken/rightInputVicken';
 import { Gepp } from '../core/engine-shell/voictent/gepp';
 import {
-  GenericInMemoryOdeshin2Voque,
+  GenericInMemoryOdeshin2ListVoque,
   InMemoryOdeshin2ListVoictent,
 } from '../core/engine/inMemoryOdeshinVoictent2';
 import {
@@ -99,7 +99,7 @@ type UninferableVoqueUnion<
   TInstantiatedVoqueUnion extends GenericVoque,
 > = Exclude<
   Exclude<TRequiredVoqueUnion, TInstantiatedVoqueUnion>,
-  GenericInMemoryOdeshin2Voque
+  GenericInMemoryOdeshin2ListVoque
 >;
 
 type VoictentByGeppFromVoqueUnion<TVoque extends GenericVoque> = Simplify<

@@ -29,7 +29,7 @@ type InMemoryOdeshin2Voque<
   TVoictentPelie
 >;
 
-export type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
+type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
   Gepp,
   GenericOdeshin2,
   unknown
@@ -42,9 +42,10 @@ const getHumanReadableZorn = (odeshin: GenericOdeshin2): string => {
   return result;
 };
 
-abstract class BaseInMemoryOdeshin2Voictent<
-  TVoque extends GenericInMemoryOdeshin2Voque,
-> extends AbstractInMemoryVoictent<GenericInMemoryOdeshin2Voque, TVoque> {
+export abstract class BaseInMemoryOdeshin2Voictent<
+  TRestrictingVoque extends GenericInMemoryOdeshin2Voque,
+  TVoque extends TRestrictingVoque,
+> extends AbstractInMemoryVoictent<TRestrictingVoque, TVoque> {
   private hubblepupPelueByZorn = new Map<string, TVoque['hubblepupPelue']>();
 
   addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
@@ -68,7 +69,7 @@ abstract class BaseInMemoryOdeshin2Voictent<
   }
 
   protected dereferenceHubblepupPelie(
-    lanbe: HubblepupPelieLanbe2<GenericInMemoryOdeshin2Voque, TVoque>,
+    lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque>,
   ): TVoque['indexedHubblepupPelie'] {
     const listIndex = this.getLanbeIndex(lanbe);
 
@@ -94,14 +95,17 @@ export type InMemoryOdeshin2ListVoque<
   TOdeshin extends GenericOdeshin2,
 > = InMemoryOdeshin2Voque<TGepp, TOdeshin, TOdeshin[]>;
 
-type GenericInMemoryOdeshin2ListVoque = InMemoryOdeshin2ListVoque<
+export type GenericInMemoryOdeshin2ListVoque = InMemoryOdeshin2ListVoque<
   Gepp,
   GenericOdeshin2
 >;
 
 export class InMemoryOdeshin2ListVoictent<
   TVoque extends GenericInMemoryOdeshin2ListVoque,
-> extends BaseInMemoryOdeshin2Voictent<TVoque> {
+> extends BaseInMemoryOdeshin2Voictent<
+  GenericInMemoryOdeshin2ListVoque,
+  TVoque
+> {
   protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
     return this.hubblepupPelieTuple;
   }

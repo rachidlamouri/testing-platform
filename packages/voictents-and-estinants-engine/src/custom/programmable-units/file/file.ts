@@ -1,7 +1,7 @@
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
-type FileName = {
+export type FileName = {
   pascalCase: string;
   camelCase: string;
   screamingSnakeCase: string;

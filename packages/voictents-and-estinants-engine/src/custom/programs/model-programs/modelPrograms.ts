@@ -7,7 +7,10 @@ import {
   FileSystemObjectEnumeratorConfigurationVoque,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
+import {
+  categorizeFiles,
+  categorizeFiles2,
+} from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import {
@@ -54,6 +57,8 @@ import { getDirectedGraphFromGraphElementGroup } from './getDirectedGraphFromGra
 import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProgramMetadataEntries';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { assertNoCopyPasta } from './assertNoCopyPasta';
+import { File2Voque, FILE_2_GEPP } from '../../programmable-units/file/file2';
+import { FileSystemNodeVoictent } from '../../programmable-units/file/fileSystemNodeVoictent';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -80,6 +85,10 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentByGepp: buildVoictentByGepp([
+    new FileSystemNodeVoictent<File2Voque>({
+      gepp: FILE_2_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
     new ProgramErrorVoictent({
       programFileCache,
     }),
@@ -91,6 +100,7 @@ digikikify({
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
+    categorizeFiles2,
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,

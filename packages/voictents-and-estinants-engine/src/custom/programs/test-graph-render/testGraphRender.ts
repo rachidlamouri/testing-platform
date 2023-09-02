@@ -2,7 +2,10 @@ import {
   buildVoictentByGepp,
   digikikify,
 } from '../../../type-script-adapter/digikikify';
-import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
+import {
+  categorizeFiles,
+  categorizeFiles2,
+} from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -26,6 +29,8 @@ import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { GraphLikeLabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
+import { File2Voque, FILE_2_GEPP } from '../../programmable-units/file/file2';
+import { FileSystemNodeVoictent } from '../../programmable-units/file/fileSystemNodeVoictent';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'testGraphRender',
@@ -182,6 +187,10 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentByGepp: buildVoictentByGepp([
+    new FileSystemNodeVoictent<File2Voque>({
+      gepp: FILE_2_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
     new OutputFileVoictent({
       programFileCache,
     }),
@@ -189,6 +198,7 @@ digikikify({
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
+    categorizeFiles2,
 
     encodeDirectedGraphAsGraphvizCode,
     renderGraphvizCodeToSvgDocument,

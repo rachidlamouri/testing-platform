@@ -11,8 +11,13 @@ import {
   EngineFunctionConfigurationVoque,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
-import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
+import {
+  categorizeFiles,
+  categorizeFiles2,
+} from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
+import { File2Voque, FILE_2_GEPP } from '../../programmable-units/file/file2';
+import { FileSystemNodeVoictent } from '../../programmable-units/file/fileSystemNodeVoictent';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   FileSystemObjectEnumeratorConfigurationVoque,
@@ -49,6 +54,10 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentByGepp: buildVoictentByGepp([
+    new FileSystemNodeVoictent<File2Voque>({
+      gepp: FILE_2_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
     new ProgramErrorVoictent({
       programFileCache,
     }),
@@ -59,6 +68,7 @@ digikikify({
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
+    categorizeFiles2,
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,

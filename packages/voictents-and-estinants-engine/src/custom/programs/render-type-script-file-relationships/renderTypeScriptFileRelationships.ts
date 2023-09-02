@@ -2,7 +2,10 @@ import {
   buildVoictentByGepp,
   digikikify,
 } from '../../../type-script-adapter/digikikify';
-import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
+import {
+  categorizeFiles,
+  categorizeFiles2,
+} from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -51,6 +54,8 @@ import {
   CORE_ENGINE_FUNCTION_2_CONFIGURATION,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
+import { File2Voque, FILE_2_GEPP } from '../../programmable-units/file/file2';
+import { FileSystemNodeVoictent } from '../../programmable-units/file/fileSystemNodeVoictent';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'renderTypeScriptFileRelationships',
@@ -187,6 +192,10 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentByGepp: buildVoictentByGepp([
+    new FileSystemNodeVoictent<File2Voque>({
+      gepp: FILE_2_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
     new ProgramErrorVoictent({
       programFileCache,
     }),
@@ -197,6 +206,7 @@ digikikify({
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
+    categorizeFiles2,
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,

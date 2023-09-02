@@ -85,7 +85,7 @@ export const filterEngineProgramFile = buildEstinant({
 
       return [
         {
-          zorn: typeScriptFile.zorn,
+          zorn: typeScriptFile.filePath,
           file: typeScriptFile,
           engineFunctionConfiguration:
             engineFunctionImportCombination.engineFunctionConfiguration,

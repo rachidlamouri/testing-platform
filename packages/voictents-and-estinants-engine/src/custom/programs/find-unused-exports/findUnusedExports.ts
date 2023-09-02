@@ -4,11 +4,17 @@ import {
   digikikify,
 } from '../../../type-script-adapter/digikikify';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
-import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
+import {
+  categorizeFiles,
+  categorizeFiles2,
+} from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
+import { File2Voque, FILE_2_GEPP } from '../../programmable-units/file/file2';
+import { FileSystemNodeVoictent } from '../../programmable-units/file/fileSystemNodeVoictent';
 import {
   FileSystemObjectEnumeratorConfigurationVoque,
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -38,6 +44,10 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentByGepp: buildVoictentByGepp([
+    new FileSystemNodeVoictent<File2Voque>({
+      gepp: FILE_2_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
     new ProgramErrorVoictent({
       programFileCache,
     }),
@@ -45,6 +55,7 @@ digikikify({
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
+    categorizeFiles2,
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
@@ -57,6 +68,7 @@ digikikify({
     reportErrors,
     signalError,
   ] as const,
+  errorGepp: PROGRAM_ERROR_GEPP,
   serializeeGeppList: [
     // note: keep this is a multiline list for easier debugging
   ],

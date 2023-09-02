@@ -66,7 +66,7 @@ export const associateTypeScriptFileToTypescriptConfiguration = buildEstinant({
     const configurationRootDirectory = posix.dirname(configurationFilePath);
 
     const configuration: TypeScriptFileConfiguration = {
-      zorn: input.zorn,
+      zorn: input.filePath,
       sourceFilePath: input.filePath,
       filePath: configurationFilePath,
       rootDirectory: configurationRootDirectory,

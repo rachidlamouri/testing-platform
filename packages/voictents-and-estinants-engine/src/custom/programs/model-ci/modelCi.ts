@@ -12,7 +12,10 @@ import {
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
-import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
+import {
+  categorizeFiles,
+  categorizeFiles2,
+} from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FileSystemObjectEnumeratorConfigurationVoque,
@@ -32,6 +35,8 @@ import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
+import { File2Voque, FILE_2_GEPP } from '../../programmable-units/file/file2';
+import { FileSystemNodeVoictent } from '../../programmable-units/file/fileSystemNodeVoictent';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
@@ -63,6 +68,10 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentByGepp: buildVoictentByGepp([
+    new FileSystemNodeVoictent<File2Voque>({
+      gepp: FILE_2_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
     new ProgramErrorVoictent({
       programFileCache,
     }),
@@ -70,6 +79,7 @@ digikikify({
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
+    categorizeFiles2,
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,

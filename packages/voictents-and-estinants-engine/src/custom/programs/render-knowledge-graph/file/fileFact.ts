@@ -32,7 +32,7 @@ export const { FileFactInstance } = buildConstructorFunctionWithName(
   'FileFactInstance',
 )<BaseFileFact, FileFactPrototype, FileFact>({
   zorn: (fileFact) => {
-    return getZorn([fileFact.file.zorn, 'fact']);
+    return getZorn([fileFact.file.filePath, 'fact']);
   },
   nodeLocator: (fileFact) => {
     return new GraphConstituentLocatorInstance({
