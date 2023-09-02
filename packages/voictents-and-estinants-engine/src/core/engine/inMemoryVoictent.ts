@@ -8,7 +8,7 @@ import { GenericInMemoryVoque } from './inMemoryVoque';
 export class InMemoryVoictent<
   TVoque extends GenericInMemoryVoque,
 > extends AbstractInMemoryVoictent<GenericInMemoryVoque, TVoque> {
-  protected dereference(
+  protected dereferenceHubblepupPelie(
     lanbe: HubblepupPelieLanbe2<GenericInMemoryVoque, TVoque>,
   ): TVoque['indexedHubblepupPelie'] {
     const listIndex = this.getLanbeIndex(lanbe);

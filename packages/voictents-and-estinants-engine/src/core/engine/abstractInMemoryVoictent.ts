@@ -136,7 +136,7 @@ export abstract class AbstractInMemoryVoictent<
         this.advance(lanbe);
       },
       dereference: () => {
-        const value = this.dereference(lanbe);
+        const value = this.dereferenceHubblepupPelie(lanbe);
 
         return {
           typeName: ReferenceTypeName.IndexedHubblepupPelie,
@@ -184,9 +184,7 @@ export abstract class AbstractInMemoryVoictent<
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  protected abstract dereference(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected abstract dereferenceHubblepupPelie(
     lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque>,
   ): TVoque['indexedHubblepupPelie'];
 }

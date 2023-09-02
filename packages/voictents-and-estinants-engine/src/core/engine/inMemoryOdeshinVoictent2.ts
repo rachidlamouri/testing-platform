@@ -67,7 +67,7 @@ export class InMemoryOdeshin2Voictent<
     }
   }
 
-  protected dereference(
+  protected dereferenceHubblepupPelie(
     lanbe: HubblepupPelieLanbe2<GenericInMemoryOdeshin2Voque, TVoque>,
   ): TVoque['indexedHubblepupPelie'] {
     const listIndex = this.getLanbeIndex(lanbe);
