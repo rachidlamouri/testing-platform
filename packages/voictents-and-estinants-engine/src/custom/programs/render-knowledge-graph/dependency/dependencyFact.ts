@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -147,7 +147,7 @@ export const DEPENDENCY_FACT_GEPP = 'dependency-fact';
 
 type DependencyFactGepp = typeof DEPENDENCY_FACT_GEPP;
 
-export type DependencyFactVoque = InMemoryOdeshin2Voque<
+export type DependencyFactVoque = InMemoryOdeshin2ListVoque<
   DependencyFactGepp,
   DependencyFact
 >;

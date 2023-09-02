@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 /**
  * A map of directories to their instance id
@@ -14,7 +14,7 @@ export const DIRECTORY_INSTANCE_ID_BY_FILE_PATH_GEPP =
 type DirectoryInstanceIdByDirectoryPathGepp =
   typeof DIRECTORY_INSTANCE_ID_BY_FILE_PATH_GEPP;
 
-export type DirectoryInstanceIdByDirectoryPathVoque = InMemoryOdeshin2Voque<
+export type DirectoryInstanceIdByDirectoryPathVoque = InMemoryOdeshin2ListVoque<
   DirectoryInstanceIdByDirectoryPathGepp,
   DirectoryInstanceIdByDirectoryPath
 >;

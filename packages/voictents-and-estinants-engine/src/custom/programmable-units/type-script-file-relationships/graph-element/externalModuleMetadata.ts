@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { DirectedGraphNode } from '../../graph-visualization/directed-graph/directedGraphNode';
 
 /**
@@ -17,7 +17,7 @@ export const EXTERNAL_MODULE_METADATA_GEPP = 'external-module-metadata';
 
 type ExternalModuleMetadataGepp = typeof EXTERNAL_MODULE_METADATA_GEPP;
 
-export type ExternalModuleMetadataVoque = InMemoryOdeshin2Voque<
+export type ExternalModuleMetadataVoque = InMemoryOdeshin2ListVoque<
   ExternalModuleMetadataGepp,
   ExternalModuleMetadata
 >;

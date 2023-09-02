@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -65,7 +65,7 @@ export const ENGINE_PROGRAM_LOCATOR_3_GEPP = 'engine-program-locator-3';
 
 type EngineProgramLocator3Gepp = typeof ENGINE_PROGRAM_LOCATOR_3_GEPP;
 
-export type EngineProgramLocator3Voque = InMemoryOdeshin2Voque<
+export type EngineProgramLocator3Voque = InMemoryOdeshin2ListVoque<
   EngineProgramLocator3Gepp,
   EngineProgramLocator3
 >;

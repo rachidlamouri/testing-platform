@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -43,7 +43,7 @@ export const DIRECTED_GRAPH_METADATA_ENTRY_GEPP =
 
 type DirectedGraphMetadataEntryGepp = typeof DIRECTED_GRAPH_METADATA_ENTRY_GEPP;
 
-export type DirectedGraphMetadataEntryVoque = InMemoryOdeshin2Voque<
+export type DirectedGraphMetadataEntryVoque = InMemoryOdeshin2ListVoque<
   DirectedGraphMetadataEntryGepp,
   DirectedGraphMetadataEntry
 >;

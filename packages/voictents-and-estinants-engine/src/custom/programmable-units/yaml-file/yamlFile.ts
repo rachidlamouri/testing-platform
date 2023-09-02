@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { File } from '../file/file';
 import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
 
@@ -11,4 +11,4 @@ export const YAML_FILE_GEPP = 'yaml-file-a';
 
 type YamlFileGepp = typeof YAML_FILE_GEPP;
 
-export type YamlFileVoque = InMemoryOdeshin2Voque<YamlFileGepp, YamlFile>;
+export type YamlFileVoque = InMemoryOdeshin2ListVoque<YamlFileGepp, YamlFile>;

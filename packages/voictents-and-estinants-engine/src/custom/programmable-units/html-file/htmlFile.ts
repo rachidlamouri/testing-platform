@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { File } from '../file/file';
 import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
 
@@ -11,4 +11,4 @@ export const HTML_FILE_GEPP = 'html-file';
 
 type HtmlFileGepp = typeof HTML_FILE_GEPP;
 
-export type HtmlFileVoque = InMemoryOdeshin2Voque<HtmlFileGepp, HtmlFile>;
+export type HtmlFileVoque = InMemoryOdeshin2ListVoque<HtmlFileGepp, HtmlFile>;

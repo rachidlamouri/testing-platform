@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -213,7 +213,7 @@ export const INVERTED_DEPENDENCY_GROUP_GEPP = 'inverted-dependency-group';
 
 type InvertedDependencyGroupGepp = typeof INVERTED_DEPENDENCY_GROUP_GEPP;
 
-export type InvertedDependencyGroupVoque = InMemoryOdeshin2Voque<
+export type InvertedDependencyGroupVoque = InMemoryOdeshin2ListVoque<
   InvertedDependencyGroupGepp,
   InvertedDependencyGroup
 >;

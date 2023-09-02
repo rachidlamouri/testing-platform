@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { Directory } from '../../../programmable-units/file/directory';
 
 /**
@@ -10,7 +10,7 @@ export const DIRECTORY_WITH_FILE_GEPP = 'directory-with-file';
 
 type DirectoryWithFileGepp = typeof DIRECTORY_WITH_FILE_GEPP;
 
-export type DirectoryWithFileVoque = InMemoryOdeshin2Voque<
+export type DirectoryWithFileVoque = InMemoryOdeshin2ListVoque<
   DirectoryWithFileGepp,
   DirectoryWithFile
 >;

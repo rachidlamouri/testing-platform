@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -68,7 +68,7 @@ export const DIRECTORY_FACT_GEPP = 'directory-fact';
 
 type DirectoryFactGepp = typeof DIRECTORY_FACT_GEPP;
 
-export type DirectoryFactVoque = InMemoryOdeshin2Voque<
+export type DirectoryFactVoque = InMemoryOdeshin2ListVoque<
   DirectoryFactGepp,
   DirectoryFact
 >;

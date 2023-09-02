@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -61,7 +61,7 @@ export const BOUNDARY_FACT_GEPP = 'boundary-fact';
 
 type BoundaryFactGepp = typeof BOUNDARY_FACT_GEPP;
 
-export type BoundaryFactVoque = InMemoryOdeshin2Voque<
+export type BoundaryFactVoque = InMemoryOdeshin2ListVoque<
   BoundaryFactGepp,
   BoundaryFact
 >;

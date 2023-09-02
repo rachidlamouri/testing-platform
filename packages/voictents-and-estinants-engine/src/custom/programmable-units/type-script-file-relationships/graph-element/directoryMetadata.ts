@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedSubgraph';
 
 /**
@@ -16,7 +16,7 @@ export const DIRECTORY_METADATA_GEPP = 'directory-metadata';
 
 type DirectoryMetadataGepp = typeof DIRECTORY_METADATA_GEPP;
 
-export type DirectoryMetadataVoque = InMemoryOdeshin2Voque<
+export type DirectoryMetadataVoque = InMemoryOdeshin2ListVoque<
   DirectoryMetadataGepp,
   DirectoryMetadata
 >;

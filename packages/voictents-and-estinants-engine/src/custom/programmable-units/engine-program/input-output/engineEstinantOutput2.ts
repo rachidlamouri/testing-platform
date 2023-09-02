@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -49,7 +49,7 @@ export const ESTINANT_OUTPUT_2_GEPP = 'estinant-output-2';
 
 type EstinantOutput2Gepp = typeof ESTINANT_OUTPUT_2_GEPP;
 
-export type EstinantOutput2Voque = InMemoryOdeshin2Voque<
+export type EstinantOutput2Voque = InMemoryOdeshin2ListVoque<
   EstinantOutput2Gepp,
   EstinantOutput2
 >;

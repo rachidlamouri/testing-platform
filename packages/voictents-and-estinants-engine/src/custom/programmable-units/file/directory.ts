@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 /**
  * Represents a file system directory
@@ -16,4 +16,7 @@ export const DIRECTORY_GEPP = 'directory';
 
 type DirectoryGepp = typeof DIRECTORY_GEPP;
 
-export type DirectoryVoque = InMemoryOdeshin2Voque<DirectoryGepp, Directory>;
+export type DirectoryVoque = InMemoryOdeshin2ListVoque<
+  DirectoryGepp,
+  Directory
+>;

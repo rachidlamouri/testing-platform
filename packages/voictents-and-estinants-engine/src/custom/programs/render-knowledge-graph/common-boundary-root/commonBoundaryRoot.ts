@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -32,7 +32,7 @@ export const COMMON_BOUNDARY_ROOT_GEPP = 'common-boundary-root';
 
 type CommonBoundaryRootGepp = typeof COMMON_BOUNDARY_ROOT_GEPP;
 
-export type CommonBoundaryRootVoque = InMemoryOdeshin2Voque<
+export type CommonBoundaryRootVoque = InMemoryOdeshin2ListVoque<
   CommonBoundaryRootGepp,
   CommonBoundaryRoot
 >;

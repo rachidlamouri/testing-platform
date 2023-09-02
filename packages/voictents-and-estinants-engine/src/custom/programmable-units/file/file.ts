@@ -1,5 +1,5 @@
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 type FileName = {
   pascalCase: string;
@@ -33,4 +33,4 @@ export const FILE_GEPP = 'file';
 
 type FileGepp = typeof FILE_GEPP;
 
-export type FileVoque = InMemoryOdeshin2Voque<FileGepp, File>;
+export type FileVoque = InMemoryOdeshin2ListVoque<FileGepp, File>;

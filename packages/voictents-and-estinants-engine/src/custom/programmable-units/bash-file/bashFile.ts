@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { File } from '../file/file';
 import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
 
@@ -11,4 +11,4 @@ export const BASH_FILE_GEPP = 'bash-file';
 
 type BashFileGepp = typeof BASH_FILE_GEPP;
 
-export type BashFileVoque = InMemoryOdeshin2Voque<BashFileGepp, BashFile>;
+export type BashFileVoque = InMemoryOdeshin2ListVoque<BashFileGepp, BashFile>;

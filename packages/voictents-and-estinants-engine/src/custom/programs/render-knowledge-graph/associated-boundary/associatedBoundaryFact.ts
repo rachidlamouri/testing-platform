@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -67,7 +67,7 @@ export const ASSOCIATED_BOUNDARY_FACT_GEPP = 'associated-boundary-fact';
 
 type AssociatedBoundaryFactGepp = typeof ASSOCIATED_BOUNDARY_FACT_GEPP;
 
-export type AssociatedBoundaryFactVoque = InMemoryOdeshin2Voque<
+export type AssociatedBoundaryFactVoque = InMemoryOdeshin2ListVoque<
   AssociatedBoundaryFactGepp,
   AssociatedBoundaryFact
 >;

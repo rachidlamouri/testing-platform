@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { FileNodeMetadata } from './fileNodeMetadata';
 
 /**
@@ -15,7 +15,7 @@ export const FILE_NODE_METADATA_BY_FILE_PATH_GEPP =
 type FileNodeMetadataByFilePathGepp =
   typeof FILE_NODE_METADATA_BY_FILE_PATH_GEPP;
 
-export type FileNodeMetadataByFilePathVoque = InMemoryOdeshin2Voque<
+export type FileNodeMetadataByFilePathVoque = InMemoryOdeshin2ListVoque<
   FileNodeMetadataByFilePathGepp,
   FileNodeMetadataByFilePath
 >;

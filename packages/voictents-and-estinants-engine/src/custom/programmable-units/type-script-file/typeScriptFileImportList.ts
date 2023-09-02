@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 export type TypeScriptFileImport = {
   isInternal: boolean;
@@ -20,7 +20,7 @@ export const TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP = 'type-script-file-import-list';
 
 type TypeScriptFileImportListGepp = typeof TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP;
 
-export type TypeScriptFileImportListVoque = InMemoryOdeshin2Voque<
+export type TypeScriptFileImportListVoque = InMemoryOdeshin2ListVoque<
   TypeScriptFileImportListGepp,
   TypeScriptFileImportList
 >;

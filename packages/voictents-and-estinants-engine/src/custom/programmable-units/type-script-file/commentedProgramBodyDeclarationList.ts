@@ -1,6 +1,6 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { IdentifiableProgramBodyStatementNode } from './getIdentifiableProgramBodyStatementNode';
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 export type CommentedProgramBodyDeclaration = {
   commentText: string | null;
@@ -26,7 +26,8 @@ export const COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP =
 type CommentedProgramBodyDeclarationListGepp =
   typeof COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP;
 
-export type CommentedProgramBodyDeclarationListVoque = InMemoryOdeshin2Voque<
-  CommentedProgramBodyDeclarationListGepp,
-  CommentedProgramBodyDeclarationList
->;
+export type CommentedProgramBodyDeclarationListVoque =
+  InMemoryOdeshin2ListVoque<
+    CommentedProgramBodyDeclarationListGepp,
+    CommentedProgramBodyDeclarationList
+  >;

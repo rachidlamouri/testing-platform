@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -30,7 +30,7 @@ export const BOUNDARY_GEPP = 'boundary';
 
 type BoundaryGepp = typeof BOUNDARY_GEPP;
 
-export type BoundaryVoque = InMemoryOdeshin2Voque<BoundaryGepp, Boundary>;
+export type BoundaryVoque = InMemoryOdeshin2ListVoque<BoundaryGepp, Boundary>;
 
 export const STATIC_BOUNDARY_LIST: Boundary[] = [
   new BoundaryInstance({

@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 /**
  * HTML SVG representation of a Graphviz graph
@@ -12,7 +12,7 @@ export const SVG_DOCUMENT_GEPP = 'svg-document';
 
 type SvgDocumentGepp = typeof SVG_DOCUMENT_GEPP;
 
-export type SvgDocumentVoque = InMemoryOdeshin2Voque<
+export type SvgDocumentVoque = InMemoryOdeshin2ListVoque<
   SvgDocumentGepp,
   SvgDocument
 >;

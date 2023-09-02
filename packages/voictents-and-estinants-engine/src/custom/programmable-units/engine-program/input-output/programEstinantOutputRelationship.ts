@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -44,7 +44,7 @@ export const PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP =
 type ProgramEstinantOutputRelationshipGepp =
   typeof PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP;
 
-export type ProgramEstinantOutputRelationshipVoque = InMemoryOdeshin2Voque<
+export type ProgramEstinantOutputRelationshipVoque = InMemoryOdeshin2ListVoque<
   ProgramEstinantOutputRelationshipGepp,
   ProgramEstinantOutputRelationship
 >;

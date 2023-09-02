@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../core/engine/inMemoryOdeshinVoictent2';
 
 type SerializableTypeName = {
   zorn: string;
@@ -12,8 +12,7 @@ export const SERIALIZABLE_TYPE_NAME_GEPP = 'serializable-type-name';
 
 type SerializableTypeNameGepp = typeof SERIALIZABLE_TYPE_NAME_GEPP;
 
-export type SerializableTypeNameVoque = InMemoryOdeshin2Voque<
+export type SerializableTypeNameVoque = InMemoryOdeshin2ListVoque<
   SerializableTypeNameGepp,
-  SerializableTypeName,
-  SerializableTypeName[]
+  SerializableTypeName
 >;

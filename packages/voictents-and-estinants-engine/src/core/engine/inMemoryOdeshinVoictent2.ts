@@ -17,10 +17,10 @@ type InMemoryOdeshin2IndexByName = SpreadN<
   ]
 >;
 
-export type InMemoryOdeshin2Voque<
+type InMemoryOdeshin2Voque<
   TGepp extends Gepp,
   THubblepup extends GenericOdeshin2,
-  TVoictentPelie = THubblepup[],
+  TVoictentPelie,
 > = InMemoryVoque<
   TGepp,
   THubblepup,
@@ -89,10 +89,18 @@ abstract class BaseInMemoryOdeshin2Voictent<
   }
 }
 
-type InMemoryOdeshin2ListVoque = InMemoryOdeshin2Voque<Gepp, GenericOdeshin2>;
+export type InMemoryOdeshin2ListVoque<
+  TGepp extends Gepp,
+  TOdeshin extends GenericOdeshin2,
+> = InMemoryOdeshin2Voque<TGepp, TOdeshin, TOdeshin[]>;
+
+type GenericInMemoryOdeshin2ListVoque = InMemoryOdeshin2ListVoque<
+  Gepp,
+  GenericOdeshin2
+>;
 
 export class InMemoryOdeshin2ListVoictent<
-  TVoque extends InMemoryOdeshin2ListVoque,
+  TVoque extends GenericInMemoryOdeshin2ListVoque,
 > extends BaseInMemoryOdeshin2Voictent<TVoque> {
   protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
     return this.hubblepupPelieTuple;
