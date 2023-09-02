@@ -12,9 +12,8 @@ import {
   categorizeFiles,
   categorizeFiles2,
 } from '../../programmable-units/file/categorizeFiles';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
-import { File2Voque, FILE_2_GEPP } from '../../programmable-units/file/file2';
-import { FileSystemNodeVoictent } from '../../programmable-units/file/fileSystemNodeVoictent';
 import {
   FileSystemObjectEnumeratorConfigurationVoque,
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -43,11 +42,8 @@ digikikify({
       ],
     }),
   ] as const,
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([
-    new FileSystemNodeVoictent<File2Voque>({
-      gepp: FILE_2_GEPP,
-      initialHubblepupPelueTuple: [],
-    }),
     new ProgramErrorVoictent({
       programFileCache,
     }),

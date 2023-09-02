@@ -57,8 +57,7 @@ import { getDirectedGraphFromGraphElementGroup } from './getDirectedGraphFromGra
 import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProgramMetadataEntries';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { assertNoCopyPasta } from './assertNoCopyPasta';
-import { File2Voque, FILE_2_GEPP } from '../../programmable-units/file/file2';
-import { FileSystemNodeVoictent } from '../../programmable-units/file/fileSystemNodeVoictent';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -84,11 +83,8 @@ digikikify({
       ],
     }),
   ] as const,
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([
-    new FileSystemNodeVoictent<File2Voque>({
-      gepp: FILE_2_GEPP,
-      initialHubblepupPelueTuple: [],
-    }),
     new ProgramErrorVoictent({
       programFileCache,
     }),

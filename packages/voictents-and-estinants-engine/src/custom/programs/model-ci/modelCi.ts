@@ -35,8 +35,7 @@ import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
-import { File2Voque, FILE_2_GEPP } from '../../programmable-units/file/file2';
-import { FileSystemNodeVoictent } from '../../programmable-units/file/fileSystemNodeVoictent';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
@@ -68,14 +67,11 @@ digikikify({
     }),
   ] as const,
   uninferableVoictentByGepp: buildVoictentByGepp([
-    new FileSystemNodeVoictent<File2Voque>({
-      gepp: FILE_2_GEPP,
-      initialHubblepupPelueTuple: [],
-    }),
     new ProgramErrorVoictent({
       programFileCache,
     }),
   ] as const),
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,

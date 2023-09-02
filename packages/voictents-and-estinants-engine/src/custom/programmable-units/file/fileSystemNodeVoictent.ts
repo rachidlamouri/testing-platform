@@ -40,7 +40,10 @@ export type FileSystemNodeVoque<
   FileVoictentPelie<THubblepup>
 >;
 
-type GenericFileSystemNodeVoque = FileSystemNodeVoque<Gepp, FileSystemNode>;
+export type GenericFileSystemNodeVoque = FileSystemNodeVoque<
+  Gepp,
+  FileSystemNode
+>;
 
 export class FileSystemNodeVoictent<
   TVoque extends GenericFileSystemNodeVoque,

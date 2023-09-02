@@ -29,8 +29,7 @@ import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { GraphLikeLabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
-import { File2Voque, FILE_2_GEPP } from '../../programmable-units/file/file2';
-import { FileSystemNodeVoictent } from '../../programmable-units/file/fileSystemNodeVoictent';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'testGraphRender',
@@ -186,11 +185,8 @@ digikikify({
       ],
     }),
   ] as const,
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([
-    new FileSystemNodeVoictent<File2Voque>({
-      gepp: FILE_2_GEPP,
-      initialHubblepupPelueTuple: [],
-    }),
     new OutputFileVoictent({
       programFileCache,
     }),

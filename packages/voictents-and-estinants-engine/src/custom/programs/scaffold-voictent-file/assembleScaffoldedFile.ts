@@ -10,6 +10,7 @@ import {
 import { scaffoldFile } from './scaffoldFile';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const [filePath] = process.argv.slice(2);
 
@@ -32,6 +33,7 @@ digikikify({
       initialHubblepupPelueTuple: [{ filePath }],
     }),
   ] as const,
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([] as const),
   estinantTuple: [scaffoldFile] as const,
   programFileCache: new ProgramFileCache({
