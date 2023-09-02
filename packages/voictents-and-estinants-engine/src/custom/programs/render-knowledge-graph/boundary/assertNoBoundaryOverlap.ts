@@ -3,7 +3,7 @@ import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
-  ReceivedProgramError,
+  ProgramErrorPelue,
   ReportingEstinantLocator,
 } from '../../../programmable-units/error/programError';
 import { BOUNDARY_TRIE_A_GEPP, BoundaryTrieAVoque } from './boundaryTrieA';
@@ -33,7 +33,7 @@ export const assertNoBoundaryOverlap = buildEstinant({
   .onPinbe((trieA) => {
     const trieList = trieA.flatten();
 
-    const errorList: ReceivedProgramError<ReportingLocator>[] = [];
+    const errorList: ProgramErrorPelue<ReportingLocator>[] = [];
     trieList.forEach((subtrie) => {
       const hasBoundary = subtrie.value.length > 0;
       const hasMultipleBoundaries = subtrie.value.length > 1;

@@ -10,37 +10,37 @@ import { InMemoryCache } from './inMemoryCache';
 
 type AbstractInMemoryVoictent2ConstructorInput<TVoque extends GenericVoque> = {
   gepp: TVoque['gepp'];
-  initialHubblepupTuple: TVoque['receivedHubblepup'][];
+  initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 };
 
 export abstract class AbstractAsymmetricInMemoryVoictent2<
     TRestrictingVoque extends GenericVoque,
     TVoque extends TRestrictingVoque,
   >
-  extends InMemoryCache<TVoque['emittedHubblepup']>
+  extends InMemoryCache<TVoque['hubblepupPelie']>
   implements Voictent2<TRestrictingVoque, TVoque>
 {
   public readonly gepp: TVoque['gepp'];
 
-  private initialHubblepupTuple: TVoque['emittedHubblepup'][];
+  private initialHubblepupPelueTuple: TVoque['hubblepupPelie'][];
 
   constructor({
     gepp,
-    initialHubblepupTuple,
+    initialHubblepupPelueTuple,
   }: AbstractInMemoryVoictent2ConstructorInput<TVoque>) {
     super();
 
     this.gepp = gepp;
-    this.initialHubblepupTuple = initialHubblepupTuple;
+    this.initialHubblepupPelueTuple = initialHubblepupPelueTuple;
   }
 
   initialize(): void {
-    this.initialHubblepupTuple.forEach((hubblepup) => {
+    this.initialHubblepupPelueTuple.forEach((hubblepup) => {
       this.addHubblepup(hubblepup);
     });
   }
 
-  addHubblepup(hubblepup: TVoque['receivedHubblepup']): void {
+  addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
     const transformedHubblepup = this.transformHubblepup(hubblepup);
     this.addDatum(transformedHubblepup);
     this.onTransformedHubblepup(
@@ -50,15 +50,15 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
   }
 
   protected abstract transformHubblepup(
-    hubblepup: TVoque['receivedHubblepup'],
-  ): TVoque['emittedHubblepup'];
+    hubblepup: TVoque['hubblepupPelue'],
+  ): TVoque['hubblepupPelie'];
 
   protected abstract getIndexByName(
-    hubblepup: TVoque['emittedHubblepup'],
+    hubblepup: TVoque['hubblepupPelie'],
   ): TVoque['indexByName'];
 
   protected abstract onTransformedHubblepup(
-    hubblepup: TVoque['emittedHubblepup'],
+    hubblepup: TVoque['hubblepupPelie'],
     index: number,
   ): void;
 

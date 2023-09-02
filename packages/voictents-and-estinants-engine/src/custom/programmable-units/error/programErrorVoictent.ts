@@ -27,7 +27,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
   constructor({ programFileCache }: ProgramErrorVoictentConstructorInput) {
     super({
       gepp: PROGRAM_ERROR_GEPP,
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     });
 
     this.programFileCache = programFileCache;
@@ -39,37 +39,37 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
   // eslint-disable-next-line class-methods-use-this
   protected transformHubblepup(
-    receivedHubblepup: GenericProgramErrorVoque['receivedHubblepup'],
-  ): GenericProgramErrorVoque['emittedHubblepup'] {
-    if (receivedHubblepup instanceof Error) {
-      return receivedHubblepup;
+    hubblepupPelue: GenericProgramErrorVoque['hubblepupPelue'],
+  ): GenericProgramErrorVoque['hubblepupPelie'] {
+    if (hubblepupPelue instanceof Error) {
+      return hubblepupPelue;
     }
 
     const zorn = getVoictentResourceLocator([
-      receivedHubblepup.reporterLocator.name,
-      receivedHubblepup.name,
-      receivedHubblepup.sourceLocator?.filePath ?? '',
+      hubblepupPelue.reporterLocator.name,
+      hubblepupPelue.name,
+      hubblepupPelue.sourceLocator?.filePath ?? '',
     ]);
 
     const normalizedZorn = normalizeFilePathForFileName(zorn);
     const normalizedReporterPath = normalizeFilePathForFileName(
-      receivedHubblepup.sourceLocator?.filePath ?? '',
+      hubblepupPelue.sourceLocator?.filePath ?? '',
     );
     const normalizedSourcePath = normalizeFilePathForFileName(
-      receivedHubblepup.sourceLocator?.filePath ?? '',
+      hubblepupPelue.sourceLocator?.filePath ?? '',
     );
 
     const byReporterDirectoryPath = `by-reporter/${normalizedReporterPath}`;
     const bySourceDirectoryPath = `by-source/${normalizedSourcePath}`;
 
-    const emittedHubblepup: GenericProgramErrorVoque['emittedHubblepup'] = {
+    const hubblepupPelie: GenericProgramErrorVoque['hubblepupPelie'] = {
       zorn,
-      name: receivedHubblepup.name,
-      message: receivedHubblepup.error.message,
-      stackTrace: (receivedHubblepup.error.stack ?? '').split('\n').slice(1),
-      reporterLocator: receivedHubblepup.reporterLocator,
-      sourceLocator: receivedHubblepup.sourceLocator,
-      context: receivedHubblepup.context,
+      name: hubblepupPelue.name,
+      message: hubblepupPelue.error.message,
+      stackTrace: (hubblepupPelue.error.stack ?? '').split('\n').slice(1),
+      reporterLocator: hubblepupPelue.reporterLocator,
+      sourceLocator: hubblepupPelue.sourceLocator,
+      context: hubblepupPelue.context,
       serializedContextFilePath: `${this.programFileCache.voictentsDirectoryPath}/by-source/${normalizedSourcePath}`,
       normalizedZorn,
       byReporterDirectoryPath,
@@ -82,11 +82,11 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       }),
     };
 
-    return emittedHubblepup;
+    return hubblepupPelie;
   }
 
   protected onTransformedHubblepup(
-    hubblepup: GenericProgramErrorVoque['emittedHubblepup'],
+    hubblepup: GenericProgramErrorVoque['hubblepupPelie'],
     index: number,
   ): void {
     const serializedHubblepup: SerializedHubblepup = {
@@ -124,7 +124,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
   // eslint-disable-next-line class-methods-use-this
   protected getIndexByName(
-    hubblepup: GenericProgramErrorVoque['emittedHubblepup'],
+    hubblepup: GenericProgramErrorVoque['hubblepupPelie'],
   ): GenericProgramErrorVoque['indexByName'] {
     if (hubblepup instanceof Error) {
       return {

@@ -10,14 +10,14 @@ export class InMemoryVoictent<
 > extends AbstractInMemoryVoictent<GenericInMemoryVoque, TVoque> {
   protected dereference(
     lanbe: VoictentItemLanbe2<GenericInMemoryVoque, TVoque>,
-  ): TVoque['indexedEmittedHubblepup'] {
+  ): TVoque['indexedHubblepupPelie'] {
     const listIndex = this.getLanbeIndex(lanbe);
 
     if (listIndex === AbstractInMemoryVoictent.minimumInclusiveIndex) {
       throw new DereferenceError(lanbe);
     }
 
-    const hubblepup = this.hubblepupTuple[listIndex];
+    const hubblepup = this.hubblepupPelieTuple[listIndex];
     return {
       hubblepup,
       indexByName: {

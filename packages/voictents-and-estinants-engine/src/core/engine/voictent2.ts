@@ -18,7 +18,7 @@ export type Voictent2<
   onTickStart(): void;
   initialize(): void;
   get isEmpty(): boolean;
-  addHubblepup(hubblepup: TVoque['receivedHubblepup']): void;
+  addHubblepup(hubblepup: TVoque['hubblepupPelue']): void;
 };
 
 export type GenericVoictent2 = Voictent2<GenericVoque, GenericVoque>;

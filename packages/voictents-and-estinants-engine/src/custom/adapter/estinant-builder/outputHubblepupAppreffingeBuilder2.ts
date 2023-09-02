@@ -25,7 +25,7 @@ type NextAdaptedOutputVickenTuple<
   TOutputVoque extends GenericVoque,
 > = [
   ...TAdaptedOutputVickenTuple,
-  AdaptedOutputVicken<TOutputVoque, TOutputVoque['receivedHubblepup']>,
+  AdaptedOutputVicken<TOutputVoque, TOutputVoque['hubblepupPelue']>,
 ];
 
 type OutputHubblepupAppreffingeBuilder2<
@@ -78,7 +78,7 @@ export const buildOutputHubblepupAppreffingeBuilder2 = <
       normalizeResult: (leftInput, modifiedInput, aggregatedOutput) => {
         const hubblepup = aggregatedOutput[
           outputAppreffinge.gepp
-        ] as TOutputVoque['emittedHubblepup'];
+        ] as TOutputVoque['hubblepupPelie'];
 
         return [outputAppreffinge.gepp, [hubblepup]];
       },

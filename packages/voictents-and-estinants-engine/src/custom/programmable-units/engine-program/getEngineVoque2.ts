@@ -2,7 +2,7 @@ import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { OdeshinZorn } from '../../adapter/odeshin2';
 import {
   GenericProgramErrorVoque,
-  GenericReceivedProgramError,
+  GenericProgramErrorPelue,
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
   ReportingEstinantLocator,
@@ -60,23 +60,23 @@ export const getEngineVoque2 = buildEstinant({
       .replace(/Voque$/, '')
       .replace(/^Generic/, '');
 
-    const emittedHubblepupIdentifierName = `Emitted${hubblepupIdentifierName}`;
+    const hubblepupPelieIdentifierName = `${hubblepupIdentifierName}Pelie`;
 
     const hubblepupDeclaration =
       declarationByIdentifier.get(hubblepupIdentifierName) ??
-      declarationByIdentifier.get(emittedHubblepupIdentifierName);
+      declarationByIdentifier.get(hubblepupPelieIdentifierName);
 
     const commentText = hubblepupDeclaration?.commentText ?? null;
 
     // TODO: handle core voques
-    const parallelErrorList: GenericReceivedProgramError[] =
+    const parallelErrorList: GenericProgramErrorPelue[] =
       voqueLocator.isCoreVoque || commentText !== null
         ? []
         : [
             {
               name: 'missing-hubblepup-comment',
               error: new Error(
-                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup type may have an "Emitted" prefix',
+                'Voque definitions must have a corresponding hubblepup definition with a comment. The hubblepup type may have a "Pelie" suffix',
               ),
               reporterLocator,
               sourceLocator: {

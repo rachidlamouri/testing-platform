@@ -202,25 +202,26 @@ const getCore2EngineProgramLocator = ({
       return;
     }
 
-    let initialHubblepupTupleProperty: IdentifiableProperty | undefined;
+    let initialHubblepupPelueTupleProperty: IdentifiableProperty | undefined;
     if (isNewExpressionWithObjectExpressionArgument(element)) {
-      initialHubblepupTupleProperty = element.arguments[0].properties.find(
+      initialHubblepupPelueTupleProperty = element.arguments[0].properties.find(
         (node): node is IdentifiableProperty => {
           return isSepcificIdentifiableProperty(
             node,
-            engineFunctionConfiguration.initialHubblepupTupleKeyIdentifierName,
+            engineFunctionConfiguration.initialHubblepupPelueTupleKeyIdentifierName,
           );
         },
       );
     } else {
-      initialHubblepupTupleProperty = undefined;
+      initialHubblepupPelueTupleProperty = undefined;
     }
 
     let hasInitialInput: boolean;
-    if (initialHubblepupTupleProperty === undefined) {
+    if (initialHubblepupPelueTupleProperty === undefined) {
       hasInitialInput = false;
-    } else if (isArrayExpression(initialHubblepupTupleProperty.value)) {
-      hasInitialInput = initialHubblepupTupleProperty.value.elements.length > 0;
+    } else if (isArrayExpression(initialHubblepupPelueTupleProperty.value)) {
+      hasInitialInput =
+        initialHubblepupPelueTupleProperty.value.elements.length > 0;
     } else {
       // We are defaulting to true since this implies that some potentially non-empty array was passed in
       hasInitialInput = true;

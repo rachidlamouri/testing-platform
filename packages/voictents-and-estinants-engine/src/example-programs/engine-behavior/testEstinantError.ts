@@ -47,11 +47,11 @@ digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<InputErrorVoque>({
       gepp: 'input-error',
-      initialHubblepupTuple: [new Error('Custom error')],
+      initialHubblepupPelueTuple: [new Error('Custom error')],
     }),
     new SerializableErrorVoictent<EngineErrorVoque>({
       gepp: 'engine-error',
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
       programFileCache,
     }),
   ],

@@ -19,7 +19,7 @@ type SerializableErrorVoictentInput<
 > = {
   gepp: TVoque['gepp'];
   programFileCache: ProgramFileCache;
-  initialHubblepupTuple: TVoque['receivedHubblepup'][];
+  initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 };
 
 export class SerializableErrorVoictent<
@@ -32,18 +32,18 @@ export class SerializableErrorVoictent<
 
   public readonly programFileCache: ProgramFileCache;
 
-  private initialHubblepupTuple: TVoque['emittedHubblepup'][];
+  private initialHubblepupPelueTuple: TVoque['hubblepupPelie'][];
 
   private hasReceivedItem = false;
 
   constructor({
     gepp,
     programFileCache,
-    initialHubblepupTuple,
+    initialHubblepupPelueTuple,
   }: SerializableErrorVoictentInput<TVoque>) {
     this.gepp = gepp;
     this.programFileCache = programFileCache;
-    this.initialHubblepupTuple = initialHubblepupTuple;
+    this.initialHubblepupPelueTuple = initialHubblepupPelueTuple;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -67,7 +67,7 @@ export class SerializableErrorVoictent<
       voictentGepp: this.gepp,
     });
 
-    this.initialHubblepupTuple.forEach((hubblepup) => {
+    this.initialHubblepupPelueTuple.forEach((hubblepup) => {
       this.addHubblepup(hubblepup);
     });
   }

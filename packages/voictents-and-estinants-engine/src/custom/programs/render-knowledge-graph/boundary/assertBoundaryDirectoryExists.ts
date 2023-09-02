@@ -5,7 +5,7 @@ import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
-  ReceivedProgramError,
+  ProgramErrorPelue,
   ReportingEstinantLocator,
 } from '../../../programmable-units/error/programError';
 
@@ -53,7 +53,7 @@ export const assertBoundaryDirectoryExists = buildEstinant({
         context: {
           boundary,
         },
-      } satisfies ReceivedProgramError<ReportingLocator>,
+      } satisfies ProgramErrorPelue<ReportingLocator>,
     ];
   })
   .assemble();

@@ -29,7 +29,7 @@ digikikify({
   explicitVoictentTuple: [
     new InMemoryVoictent<ScaffoldConfigurationVoque>({
       gepp: SCAFFOLD_CONFIGURATION_GEPP,
-      initialHubblepupTuple: [{ filePath }],
+      initialHubblepupPelueTuple: [{ filePath }],
     }),
   ] as const,
   uninferableVoictentByGepp: buildVoictentByGepp([] as const),

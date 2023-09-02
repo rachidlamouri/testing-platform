@@ -38,7 +38,7 @@ digikikify({
   explicitVoictentTuple: [
     new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
       gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialHubblepupTuple: [
+      initialHubblepupPelueTuple: [
         {
           directoryPath:
             'packages/voictents-and-estinants-engine/src/custom/programmable-units/graph-visualization',
@@ -48,7 +48,7 @@ digikikify({
     }),
     new InMemoryOdeshin2Voictent<DirectedGraphVoque>({
       gepp: DIRECTED_GRAPH_GEPP,
-      initialHubblepupTuple: [
+      initialHubblepupPelueTuple: [
         {
           zorn: 'my-graph',
           isRoot: true,
@@ -127,7 +127,7 @@ digikikify({
     }),
     new InMemoryOdeshin2Voictent<DirectedGraphMetadataByIdVoque>({
       gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-      initialHubblepupTuple: [
+      initialHubblepupPelueTuple: [
         {
           zorn: 'my-graph',
           grition: {

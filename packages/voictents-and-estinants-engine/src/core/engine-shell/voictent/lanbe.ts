@@ -58,11 +58,11 @@ export type VoictentItemLanbe2<
   ReferenceTypeName.IndexedVoictentItem,
   Voque<
     TVoque['gepp'],
-    TVoque['receivedHubblepup'],
-    TVoque['emittedHubblepup'],
+    TVoque['hubblepupPelue'],
+    TVoque['hubblepupPelie'],
     TRestrictingVoque['indexByName'],
-    TRestrictingVoque['emittedVoictent']
-  >['indexedEmittedHubblepup']
+    TRestrictingVoque['voictentPelie']
+  >['indexedHubblepupPelie']
 >;
 
 export type GenericVoictentItemLanbe2 = VoictentItemLanbe2<

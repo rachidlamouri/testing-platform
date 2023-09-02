@@ -123,7 +123,7 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
 
           return list;
         },
-        croard: (rightInput: TRightInputVoque['indexedEmittedHubblepup']) => {
+        croard: (rightInput: TRightInputVoque['indexedHubblepupPelie']) => {
           const intermediateValue = partialRightAppreffinge.croard(rightInput);
           if (intermediateValue instanceof Zorn2) {
             return intermediateValue.forHuman;

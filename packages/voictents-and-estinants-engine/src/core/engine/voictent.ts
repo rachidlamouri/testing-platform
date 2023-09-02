@@ -14,7 +14,7 @@ class MissingLanbeError extends Error {
   }
 }
 
-type ReceivedHubblepupState = {
+type HubblepupPelueState = {
   twoTicksAgo: boolean;
   oneTickAgo: boolean;
   thisTick: boolean | null;
@@ -37,7 +37,7 @@ export class Voictent implements GenericVoictent2 {
     return this.size - 1;
   }
 
-  private receivedHubblepup: ReceivedHubblepupState = {
+  private hubblepupPelue: HubblepupPelueState = {
     twoTicksAgo: false,
     oneTickAgo: false,
     thisTick: null,
@@ -55,23 +55,21 @@ export class Voictent implements GenericVoictent2 {
   }
 
   addHubblepup(hubblepup: Hubblepup): void {
-    this.receivedHubblepup.thisTick = true;
+    this.hubblepupPelue.thisTick = true;
     this.hubblepupTuple.push(hubblepup);
   }
 
   onTickStart(): void {
     // eslint-disable-next-line prefer-destructuring
-    this.receivedHubblepup = {
-      twoTicksAgo: this.receivedHubblepup.oneTickAgo,
-      oneTickAgo: this.receivedHubblepup.thisTick ?? false,
+    this.hubblepupPelue = {
+      twoTicksAgo: this.hubblepupPelue.oneTickAgo,
+      oneTickAgo: this.hubblepupPelue.thisTick ?? false,
       thisTick: null,
     };
   }
 
   get didStopAccumulating(): boolean {
-    return (
-      this.receivedHubblepup.twoTicksAgo && !this.receivedHubblepup.oneTickAgo
-    );
+    return this.hubblepupPelue.twoTicksAgo && !this.hubblepupPelue.oneTickAgo;
   }
 
   createVoictentLanbe(debugName: string): VoictentLanbe {
@@ -83,9 +81,9 @@ export class Voictent implements GenericVoictent2 {
       },
       isAccumulating: () => {
         return (
-          this.receivedHubblepup.twoTicksAgo ||
-          this.receivedHubblepup.oneTickAgo ||
-          (this.receivedHubblepup.thisTick ?? false)
+          this.hubblepupPelue.twoTicksAgo ||
+          this.hubblepupPelue.oneTickAgo ||
+          (this.hubblepupPelue.thisTick ?? false)
         );
       },
       advance: () => {},

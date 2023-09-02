@@ -20,7 +20,7 @@ export class OutputFileVoictent extends AbstractAsymmetricInMemoryVoictent2<
   constructor({ programFileCache }: OutputFileVoictentConstructorInput) {
     super({
       gepp: OUTPUT_FILE_GEPP,
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     });
 
     this.programFileCache = programFileCache;
@@ -41,7 +41,7 @@ export class OutputFileVoictent extends AbstractAsymmetricInMemoryVoictent2<
   }
 
   protected onTransformedHubblepup(
-    hubblepup: OutputFileVoque['emittedHubblepup'],
+    hubblepup: OutputFileVoque['hubblepupPelie'],
   ): void {
     if (hubblepup.filePath !== undefined) {
       fs.writeFileSync(hubblepup.filePath, hubblepup.text);

@@ -16,7 +16,7 @@ type JsonSerializableVoictentConstructorInput<
 > = {
   gepp: TVoque['gepp'];
   programFileCache: ProgramFileCache;
-  initialHubblepupTuple: TVoque['receivedHubblepup'][];
+  initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 };
 
 export class JsonSerializableVoictent<
@@ -25,12 +25,12 @@ export class JsonSerializableVoictent<
   constructor({
     gepp,
     programFileCache,
-    initialHubblepupTuple,
+    initialHubblepupPelueTuple,
   }: JsonSerializableVoictentConstructorInput<TVoque>) {
     super({
       gepp,
       programFileCache,
-      initialHubblepupTuple,
+      initialHubblepupPelueTuple,
     });
   }
 

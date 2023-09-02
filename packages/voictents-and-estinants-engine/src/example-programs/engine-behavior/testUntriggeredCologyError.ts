@@ -73,22 +73,22 @@ digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<Input1Voque>({
       gepp: 'input-1',
-      initialHubblepupTuple: [1, 2, 3],
+      initialHubblepupPelueTuple: [1, 2, 3],
     }),
     new InMemoryVoictent<Input2Voque>({
       gepp: 'input-2',
-      initialHubblepupTuple: [
+      initialHubblepupPelueTuple: [
         // this list intentionally has less items than required to properly join the collections
         2,
       ],
     }),
     new InMemoryVoictent<OutputVoque>({
       gepp: 'output',
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     }),
     new SerializableErrorVoictent<EngineErrorVoque>({
       gepp: 'engine-error',
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
       programFileCache,
     }),
   ],

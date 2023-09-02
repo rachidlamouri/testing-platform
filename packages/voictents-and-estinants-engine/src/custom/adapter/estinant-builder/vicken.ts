@@ -22,9 +22,9 @@ type BaseLeftInputVicken<
 export type AdaptedLeftInputHubblepupVicken<TVoque extends GenericVoque> =
   BaseLeftInputVicken<
     TVoque,
-    TVoque['indexedEmittedHubblepup'],
+    TVoque['indexedHubblepupPelie'],
     false,
-    TVoque['emittedHubblepup']
+    TVoque['hubblepupPelie']
   >;
 
 export type GenericAdaptedLeftInputHubblepupVicken =
@@ -33,9 +33,9 @@ export type GenericAdaptedLeftInputHubblepupVicken =
 type AdaptedLeftInputIndexedHubblepupVicken<TVoque extends GenericVoque> =
   BaseLeftInputVicken<
     TVoque,
-    TVoque['indexedEmittedHubblepup'],
+    TVoque['indexedHubblepupPelie'],
     false,
-    TVoque['indexedEmittedHubblepup']
+    TVoque['indexedHubblepupPelie']
   >;
 
 type GenericAdaptedLeftInputIndexedHubblepupVicken =
@@ -44,9 +44,9 @@ type GenericAdaptedLeftInputIndexedHubblepupVicken =
 export type AdaptedLeftInputVoictentVicken<TVoque extends GenericVoque> =
   BaseLeftInputVicken<
     TVoque,
-    TVoque['emittedVoictent'],
+    TVoque['voictentPelie'],
     true,
-    TVoque['emittedVoictent']
+    TVoque['voictentPelie']
   >;
 
 type GenericAdaptedLeftInputVoictentVicken =
@@ -63,11 +63,11 @@ export type AdaptedRightInputHubblepupTupleVicken<
 > = {
   voque: TRightInputVoque;
   tropoignantInput: {
-    [Index in keyof TZornTuple]: TRightInputVoque['indexedEmittedHubblepup'];
+    [Index in keyof TZornTuple]: TRightInputVoque['indexedHubblepupPelie'];
   };
   isWibiz: false;
   pinbetunfInput: {
-    [Index in keyof TZornTuple]: TRightInputVoque['emittedHubblepup'];
+    [Index in keyof TZornTuple]: TRightInputVoque['hubblepupPelie'];
   };
   zornTuple: TZornTuple;
   zornTupleOption: TZornTuple[number];
@@ -80,9 +80,9 @@ export type AdaptedRightInputVoictentVicken<
   TRightInputVoque extends GenericVoque,
 > = {
   voque: TRightInputVoque;
-  tropoignantInput: TRightInputVoque['emittedVoictent'];
+  tropoignantInput: TRightInputVoque['voictentPelie'];
   isWibiz: true;
-  pinbetunfInput: TRightInputVoque['emittedVoictent'];
+  pinbetunfInput: TRightInputVoque['voictentPelie'];
   zornTuple: never;
   zornTupleOption: never;
 };

@@ -190,7 +190,7 @@ const buildSerializableVoictent = (
   const serializableVoictent = new SerializableVoictent({
     gepp: serializerGepp,
     programFileCache,
-    initialHubblepupTuple: [],
+    initialHubblepupPelueTuple: [],
   });
 
   return serializableVoictent;
@@ -260,7 +260,7 @@ const getInferredVoictentTuple = (
   const inferredVoictentTuple = missingGeppList.map((gepp) => {
     return new InMemoryOdeshin2Voictent({
       gepp,
-      initialHubblepupTuple: [],
+      initialHubblepupPelueTuple: [],
     });
   });
 

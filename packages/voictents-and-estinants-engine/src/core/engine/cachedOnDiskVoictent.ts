@@ -13,7 +13,7 @@ import {
 import { Json, jsonUtils } from '../../utilities/json';
 import {
   MissingLanbeError,
-  ReceivedHubblepupState,
+  HubblepupPelueState,
 } from './abstractInMemoryVoictent';
 import { AbstractSerializableIndexByName } from '../../example-programs/abstractSerializableVoictent';
 
@@ -71,7 +71,7 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
 
   public readonly gepp: TVoque['gepp'];
 
-  hubblepupTuple: TVoque['emittedVoictent'] = [];
+  hubblepupTuple: TVoque['voictentPelie'] = [];
 
   indicesByLanbe: Map<
     VoictentItemLanbe2<GenericCachedOnDiskVoque, TVoque>,
@@ -84,7 +84,7 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
     return this.size - 1;
   }
 
-  private receivedHubblepup: ReceivedHubblepupState = {
+  private hubblepupPelue: HubblepupPelueState = {
     twoTicksAgo: false,
     oneTickAgo: false,
     thisTick: null,
@@ -107,58 +107,56 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
     return this.hubblepupTuple.length === 0;
   }
 
-  addHubblepup(receivedHubblepup: TVoque['receivedHubblepup']): void {
-    this.receivedHubblepup.thisTick = true;
+  addHubblepup(hubblepupPelue: TVoque['hubblepupPelue']): void {
+    this.hubblepupPelue.thisTick = true;
 
     const directoryPath = posix.join(ROOT_DIRECTORY, this.nameSpace, this.gepp);
     createDirectory(directoryPath);
 
-    const fileName = `${receivedHubblepup.zorn}.json`;
+    const fileName = `${hubblepupPelue.zorn}.json`;
 
     const filePath = posix.join(directoryPath, fileName);
 
-    let currentCachedHubblepup: TVoque['emittedHubblepup'] | null;
+    let currentCachedHubblepup: TVoque['hubblepupPelie'] | null;
     if (fs.existsSync(filePath)) {
       const cachedText = fs.readFileSync(filePath, 'utf8');
       currentCachedHubblepup = jsonUtils.parse(
         cachedText,
-      ) as TVoque['emittedHubblepup'];
+      ) as TVoque['hubblepupPelie'];
     } else {
       currentCachedHubblepup = null;
     }
 
-    let emittedHubblepup: TVoque['emittedHubblepup'];
+    let hubblepupPelie: TVoque['hubblepupPelie'];
     if (
       currentCachedHubblepup === null ||
-      receivedHubblepup.lastModified > currentCachedHubblepup.lastModified
+      hubblepupPelue.lastModified > currentCachedHubblepup.lastModified
     ) {
-      emittedHubblepup = {
-        ...receivedHubblepup,
-        grition: receivedHubblepup.grition(),
+      hubblepupPelie = {
+        ...hubblepupPelue,
+        grition: hubblepupPelue.grition(),
       };
 
-      const nextCachedText = jsonUtils.multilineSerialize(emittedHubblepup);
+      const nextCachedText = jsonUtils.multilineSerialize(hubblepupPelie);
       fs.writeFileSync(filePath, nextCachedText);
     } else {
-      emittedHubblepup = currentCachedHubblepup;
+      hubblepupPelie = currentCachedHubblepup;
     }
 
-    this.hubblepupTuple.push(emittedHubblepup);
+    this.hubblepupTuple.push(hubblepupPelie);
   }
 
   onTickStart(): void {
     // eslint-disable-next-line prefer-destructuring
-    this.receivedHubblepup = {
-      twoTicksAgo: this.receivedHubblepup.oneTickAgo,
-      oneTickAgo: this.receivedHubblepup.thisTick ?? false,
+    this.hubblepupPelue = {
+      twoTicksAgo: this.hubblepupPelue.oneTickAgo,
+      oneTickAgo: this.hubblepupPelue.thisTick ?? false,
       thisTick: null,
     };
   }
 
   get didStopAccumulating(): boolean {
-    return (
-      this.receivedHubblepup.twoTicksAgo && !this.receivedHubblepup.oneTickAgo
-    );
+    return this.hubblepupPelue.twoTicksAgo && !this.hubblepupPelue.oneTickAgo;
   }
 
   createVoictentLanbe(debugName: string): VoictentLanbe {
@@ -170,9 +168,9 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
       },
       isAccumulating: () => {
         return (
-          this.receivedHubblepup.twoTicksAgo ||
-          this.receivedHubblepup.oneTickAgo ||
-          (this.receivedHubblepup.thisTick ?? false)
+          this.hubblepupPelue.twoTicksAgo ||
+          this.hubblepupPelue.oneTickAgo ||
+          (this.hubblepupPelue.thisTick ?? false)
         );
       },
       advance: () => {},
@@ -247,7 +245,7 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
 
   private dereference(
     lanbe: VoictentItemLanbe2<GenericCachedOnDiskVoque, TVoque>,
-  ): TVoque['indexedEmittedHubblepup'] {
+  ): TVoque['indexedHubblepupPelie'] {
     const listIndex = this.getLanbeIndex(lanbe);
 
     if (listIndex === CachedOnDiskVoictent.minimumInclusiveIndex) {

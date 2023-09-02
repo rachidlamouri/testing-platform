@@ -17,7 +17,7 @@ export type PartialRightHubblepupTupleAppreffinge<
     leftInput: TAdaptedLeftInputVicken['tropoignantInput'],
   ) => TZornTuple;
   croard: (
-    rightInput: TRightInputVoque['indexedEmittedHubblepup'],
+    rightInput: TRightInputVoque['indexedHubblepupPelie'],
   ) => TZornTuple[number];
 };
 

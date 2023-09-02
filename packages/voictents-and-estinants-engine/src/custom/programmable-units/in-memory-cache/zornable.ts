@@ -12,13 +12,13 @@ type ZornableIndexByName = Merge<AbstractSerializableIndexByName, Zornable>;
 
 export type ZornableVoque<
   TGepp extends Gepp,
-  TReceivedHubblepup extends Hubblepup,
-  TEmittedHubblepup extends Hubblepup,
-  TEmittedVoictent,
+  THubblepupPelue extends Hubblepup,
+  THubblepupPelie extends Hubblepup,
+  TVoictentPelie,
 > = Voque<
   TGepp,
-  TReceivedHubblepup,
-  TEmittedHubblepup,
+  THubblepupPelue,
+  THubblepupPelie,
   ZornableIndexByName,
-  TEmittedVoictent
+  TVoictentPelie
 >;
