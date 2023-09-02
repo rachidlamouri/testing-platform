@@ -6,7 +6,7 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
-import { FILE_2_GEPP, File2Voque } from '../../programmable-units/file/file';
+import { FILE_GEPP, FileVoque } from '../../programmable-units/file/file';
 import { FileExtensionSuffixIdentifier } from '../../programmable-units/file/fileExtensionSuffixIdentifier';
 
 const ESTINANT_NAME = 'assertFileExtensionIsKnown' as const;
@@ -24,8 +24,8 @@ const reporterLocator: ReportingLocator = {
 export const assertFileExtensionIsKnown = buildEstinant({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<File2Voque>({
-    gepp: FILE_2_GEPP,
+  .fromHubblepup2<FileVoque>({
+    gepp: FILE_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,

@@ -8,7 +8,7 @@ import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import { HtmlFile, HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { BASH_FILE_GEPP, BashFile, BashFileVoque } from '../bash-file/bashFile';
-import { FILE_2_GEPP, File2Voque } from './file';
+import { FILE_GEPP, FileVoque } from './file';
 
 /**
  * Places a file into zero or more collections without modifying the file. Uses
@@ -17,8 +17,8 @@ import { FILE_2_GEPP, File2Voque } from './file';
 export const categorizeFiles = buildEstinant({
   name: 'categorizeFiles',
 })
-  .fromHubblepup2<File2Voque>({
-    gepp: FILE_2_GEPP,
+  .fromHubblepup2<FileVoque>({
+    gepp: FILE_GEPP,
   })
   .toHubblepupOnCondition<BashFileVoque>({
     gepp: BASH_FILE_GEPP,

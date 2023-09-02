@@ -8,7 +8,7 @@ import { BASH_FILE_GEPP } from '../bash-file/bashFile';
 import { HTML_FILE_GEPP } from '../html-file/htmlFile';
 import { YAML_FILE_GEPP } from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
-import { FILE_2_GEPP } from './file';
+import { FILE_GEPP } from './file';
 import { TYPE_SCRIPT_FILE_GEPP } from '../type-script-file/typeScriptFile';
 
 type FileExtensionSuffixIdentifierOfInterest =
@@ -32,7 +32,7 @@ const defaultFileGeppByFileExtensionSuffixIdentifier = {
   [FileExtensionSuffixIdentifier.Html]: HTML_FILE_GEPP,
   [FileExtensionSuffixIdentifier.TypeScript]: TYPE_SCRIPT_FILE_GEPP,
   [FileExtensionSuffixIdentifier.Yaml]: YAML_FILE_GEPP,
-  BaseFile: FILE_2_GEPP,
+  BaseFile: FILE_GEPP,
 } as const satisfies DefaultGeppByFileExtensionSuffixIdentifier;
 
 const defaultFileGeppList = Object.values(

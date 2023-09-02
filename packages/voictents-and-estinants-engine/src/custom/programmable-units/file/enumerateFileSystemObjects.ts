@@ -13,7 +13,7 @@ import {
 } from './fileSystemObjectEnumeratorConfiguration';
 import { getFileMetadata } from './getFileMetadata';
 import { getTextDigest } from '../../../utilities/getTextDigest';
-import { FILE_2_GEPP, File2, File2Instance, File2Voque } from './file';
+import { FILE_GEPP, File, FileInstance, FileVoque } from './file';
 
 const partsToCamel = (x: string[]): string => {
   return x
@@ -61,8 +61,8 @@ export const enumerateFileSystemObjects = buildEstinant({
   .toHubblepupTuple2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .toHubblepupTuple2<File2Voque>({
-    gepp: FILE_2_GEPP,
+  .toHubblepupTuple2<FileVoque>({
+    gepp: FILE_GEPP,
   })
   .onPinbe((input) => {
     const nodeMetadataList = getNestedFileSystemNodeMetadataList(input);
@@ -97,7 +97,7 @@ export const enumerateFileSystemObjects = buildEstinant({
       },
     );
 
-    const unorderedFileTuple = fileMetadataList.map<File2>(
+    const unorderedFileTuple = fileMetadataList.map<File>(
       ({ nodePath, directoryPath }) => {
         const {
           onDiskFileName,
@@ -107,7 +107,7 @@ export const enumerateFileSystemObjects = buildEstinant({
           extensionParts,
         } = getFileMetadata(nodePath);
 
-        const file2 = new File2Instance({
+        const file2 = new FileInstance({
           instanceId: getTextDigest(nodePath),
           filePath: nodePath,
           directoryPath,
@@ -138,7 +138,7 @@ export const enumerateFileSystemObjects = buildEstinant({
     );
 
     // Reorders the files by suffix identifier so they are easier to see in a serialized collection
-    const reorderByFileSuffixForDebugability = <TFile extends File2>(
+    const reorderByFileSuffixForDebugability = <TFile extends File>(
       fileList: TFile[],
     ): TFile[] => {
       const fileBySuffixIdentifier = new Map<string, TFile[]>();
@@ -159,7 +159,7 @@ export const enumerateFileSystemObjects = buildEstinant({
 
     return {
       [DIRECTORY_GEPP]: directoryOutputTuple,
-      [FILE_2_GEPP]: orderedFileTuple,
+      [FILE_GEPP]: orderedFileTuple,
     };
   })
   .assemble();

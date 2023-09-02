@@ -13,14 +13,14 @@ import {
 import { FileSystemNodeVoque } from './fileSystemNodeVoictent';
 import { SpreadN } from '../../../utilities/spreadN';
 
-export type FileName = {
+type FileName = {
   pascalCase: string;
   camelCase: string;
   screamingSnakeCase: string;
   kebabCase: string;
 };
 
-type File2ExtensionMetadata<
+type FileExtensionMetadata<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier,
 > = {
   /** @deprecated in favor of partList */
@@ -30,7 +30,7 @@ type File2ExtensionMetadata<
   suffixIdentifier: TFileExtensionSuffixIdentifier;
 };
 
-type BaseFile2<
+type BaseFile<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
   TAdditionalMetadata extends object | null = null,
 > = SpreadN<
@@ -42,35 +42,35 @@ type BaseFile2<
       directoryPath: string;
       onDiskFileName: Merge<FileName, { asIs: string }>;
       inMemoryFileName: FileName;
-      extension: File2ExtensionMetadata<TFileExtensionSuffixIdentifier>;
+      extension: FileExtensionMetadata<TFileExtensionSuffixIdentifier>;
       additionalMetadata: TAdditionalMetadata;
     },
   ]
 >;
 
 // TODO: move extension logic to a getter
-type File2Prototype = FileSystemNodePrototype;
+type FilePrototype = FileSystemNodePrototype;
 
 /**
  * Represents a file system file
  */
-export type File2<
+export type File<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
   TAdditionalMetadata extends object | null = null,
 > = ObjectWithPrototype<
-  BaseFile2<TFileExtensionSuffixIdentifier, TAdditionalMetadata>,
-  File2Prototype
+  BaseFile<TFileExtensionSuffixIdentifier, TAdditionalMetadata>,
+  FilePrototype
 >;
 
-export const { File2Instance } = buildConstructorFunctionWithName(
-  'File2Instance',
-)<BaseFile2, File2Prototype, File2>({
+export const { FileInstance } = buildConstructorFunctionWithName(
+  'FileInstance',
+)<BaseFile, FilePrototype, File>({
   zorn: getFileSystemNodeZorn,
   filePathPartList: getFileSystemNodePathPartList,
 });
 
-export const FILE_2_GEPP = 'file-2';
+export const FILE_GEPP = 'file';
 
-type File2Gepp = typeof FILE_2_GEPP;
+type FileGepp = typeof FILE_GEPP;
 
-export type File2Voque = FileSystemNodeVoque<File2Gepp, File2>;
+export type FileVoque = FileSystemNodeVoque<FileGepp, File>;
