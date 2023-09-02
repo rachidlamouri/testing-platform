@@ -11,10 +11,7 @@ import {
   EngineFunctionConfigurationVoque,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
-import {
-  categorizeFiles,
-  categorizeFiles2,
-} from '../../programmable-units/file/categorizeFiles';
+import { categorizeFiles2 } from '../../programmable-units/file/categorizeFiles';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -63,7 +60,6 @@ digikikify({
   ] as const),
   estinantTuple: [
     enumerateFileSystemObjects,
-    categorizeFiles,
     categorizeFiles2,
 
     associateTypeScriptFileToTypescriptConfiguration,

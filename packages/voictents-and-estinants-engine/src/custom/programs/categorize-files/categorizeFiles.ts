@@ -7,10 +7,7 @@ import {
   FileSystemObjectEnumeratorConfigurationVoque,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import {
-  categorizeFiles,
-  categorizeFiles2,
-} from '../../programmable-units/file/categorizeFiles';
+import { categorizeFiles2 } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { assertFileExtensionIsKnown } from './assertFileExtensionIsKnown';
@@ -49,7 +46,6 @@ digikikify({
   ] as const),
   estinantTuple: [
     enumerateFileSystemObjects,
-    categorizeFiles,
     categorizeFiles2,
 
     assertFileExtensionIsKnown,

@@ -1,4 +1,3 @@
-import { FILE_GEPP, FileVoque } from './file';
 import {
   TypeScriptFile,
   TYPE_SCRIPT_FILE_GEPP,
@@ -12,32 +11,6 @@ import { BASH_FILE_GEPP, BashFile, BashFileVoque } from '../bash-file/bashFile';
 import { FILE_2_GEPP, File2Voque } from './file2';
 
 /**
- * Places a file into zero or more collections without modifying the file
- */
-export const categorizeFiles = buildEstinant({
-  name: 'categorizeFiles',
-})
-  .fromHubblepup2<FileVoque>({
-    gepp: FILE_GEPP,
-  })
-  .toHubblepupOnCondition<YamlFileVoque>({
-    gepp: YAML_FILE_GEPP,
-    pinbe: (file): file is YamlFile =>
-      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Yaml,
-  })
-  .toHubblepupOnCondition<HtmlFileVoque>({
-    gepp: HTML_FILE_GEPP,
-    pinbe: (file): file is HtmlFile =>
-      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Html,
-  })
-  .toHubblepupOnCondition<BashFileVoque>({
-    gepp: BASH_FILE_GEPP,
-    pinbe: (file): file is BashFile =>
-      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Bash,
-  })
-  .assemble();
-
-/**
  * Places a file into zero or more collections without modifying the file. Uses
  * the object pattern with shareable getters
  */
@@ -47,10 +20,25 @@ export const categorizeFiles2 = buildEstinant({
   .fromHubblepup2<File2Voque>({
     gepp: FILE_2_GEPP,
   })
+  .toHubblepupOnCondition<BashFileVoque>({
+    gepp: BASH_FILE_GEPP,
+    pinbe: (file): file is BashFile =>
+      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Bash,
+  })
+  .toHubblepupOnCondition<HtmlFileVoque>({
+    gepp: HTML_FILE_GEPP,
+    pinbe: (file): file is HtmlFile =>
+      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Html,
+  })
   .toHubblepupOnCondition<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
     pinbe: (file): file is TypeScriptFile =>
       file.extension.suffixIdentifier ===
       FileExtensionSuffixIdentifier.TypeScript,
+  })
+  .toHubblepupOnCondition<YamlFileVoque>({
+    gepp: YAML_FILE_GEPP,
+    pinbe: (file): file is YamlFile =>
+      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Yaml,
   })
   .assemble();

@@ -8,10 +8,7 @@ import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError'
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
-import {
-  categorizeFiles,
-  categorizeFiles2,
-} from '../../programmable-units/file/categorizeFiles';
+import { categorizeFiles2 } from '../../programmable-units/file/categorizeFiles';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -50,7 +47,6 @@ digikikify({
   ] as const),
   estinantTuple: [
     enumerateFileSystemObjects,
-    categorizeFiles,
     categorizeFiles2,
 
     associateTypeScriptFileToTypescriptConfiguration,

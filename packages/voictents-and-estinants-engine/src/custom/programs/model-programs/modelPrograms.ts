@@ -7,10 +7,7 @@ import {
   FileSystemObjectEnumeratorConfigurationVoque,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import {
-  categorizeFiles,
-  categorizeFiles2,
-} from '../../programmable-units/file/categorizeFiles';
+import { categorizeFiles2 } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import {
@@ -95,7 +92,6 @@ digikikify({
   errorGepp: PROGRAM_ERROR_GEPP,
   estinantTuple: [
     enumerateFileSystemObjects,
-    categorizeFiles,
     categorizeFiles2,
 
     associateTypeScriptFileToTypescriptConfiguration,

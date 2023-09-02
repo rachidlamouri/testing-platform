@@ -4,24 +4,21 @@ import {
   GeppCombination,
 } from '../../../core/engine-shell/voictent/gepp';
 import { buildGeppCombination } from '../../../type-script-adapter/digikikify';
-// import { BASH_FILE_GEPP } from '../bash-file/bashFile';
-// import { HTML_FILE_GEPP } from '../html-file/htmlFile';
-// import { YAML_FILE_GEPP } from '../yaml-file/yamlFile';
+import { BASH_FILE_GEPP } from '../bash-file/bashFile';
+import { HTML_FILE_GEPP } from '../html-file/htmlFile';
+import { YAML_FILE_GEPP } from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import { FILE_2_GEPP } from './file2';
 import { TYPE_SCRIPT_FILE_GEPP } from '../type-script-file/typeScriptFile';
 
 type FileExtensionSuffixIdentifierOfInterest =
-  | Extract<
-      Exclude<
-        FileExtensionSuffixIdentifier,
-        | FileExtensionSuffixIdentifier.Unknown
-        | FileExtensionSuffixIdentifier.Text
-        | FileExtensionSuffixIdentifier.TypeScriptXml
-        | FileExtensionSuffixIdentifier.Json
-        | FileExtensionSuffixIdentifier.Gitignore
-      >,
-      FileExtensionSuffixIdentifier.TypeScript
+  | Exclude<
+      FileExtensionSuffixIdentifier,
+      | FileExtensionSuffixIdentifier.Unknown
+      | FileExtensionSuffixIdentifier.Text
+      | FileExtensionSuffixIdentifier.TypeScriptXml
+      | FileExtensionSuffixIdentifier.Json
+      | FileExtensionSuffixIdentifier.Gitignore
     >
   | 'BaseFile';
 
@@ -31,10 +28,10 @@ type DefaultGeppByFileExtensionSuffixIdentifier = Record<
 >;
 
 const defaultFileGeppByFileExtensionSuffixIdentifier = {
-  // [FileExtensionSuffixIdentifier.Bash]: BASH_FILE_GEPP,
-  // [FileExtensionSuffixIdentifier.Html]: HTML_FILE_GEPP,
+  [FileExtensionSuffixIdentifier.Bash]: BASH_FILE_GEPP,
+  [FileExtensionSuffixIdentifier.Html]: HTML_FILE_GEPP,
   [FileExtensionSuffixIdentifier.TypeScript]: TYPE_SCRIPT_FILE_GEPP,
-  // [FileExtensionSuffixIdentifier.Yaml]: YAML_FILE_GEPP,
+  [FileExtensionSuffixIdentifier.Yaml]: YAML_FILE_GEPP,
   BaseFile: FILE_2_GEPP,
 } as const satisfies DefaultGeppByFileExtensionSuffixIdentifier;
 

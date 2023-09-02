@@ -14,10 +14,7 @@ import {
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
-import {
-  categorizeFiles,
-  categorizeFiles2,
-} from '../../programmable-units/file/categorizeFiles';
+import { categorizeFiles2 } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -127,7 +124,6 @@ digikikify({
   errorGepp: PROGRAM_ERROR_GEPP,
   estinantTuple: [
     enumerateFileSystemObjects,
-    categorizeFiles,
     categorizeFiles2,
 
     associateTypeScriptFileToTypescriptConfiguration,

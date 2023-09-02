@@ -12,10 +12,7 @@ import {
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
-import {
-  categorizeFiles,
-  categorizeFiles2,
-} from '../../programmable-units/file/categorizeFiles';
+import { categorizeFiles2 } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FileSystemObjectEnumeratorConfigurationVoque,
@@ -74,7 +71,6 @@ digikikify({
   fileSystemNodeGeppCombination: defaultFileGeppCombination,
   estinantTuple: [
     enumerateFileSystemObjects,
-    categorizeFiles,
     categorizeFiles2,
 
     associateTypeScriptFileToTypescriptConfiguration,
