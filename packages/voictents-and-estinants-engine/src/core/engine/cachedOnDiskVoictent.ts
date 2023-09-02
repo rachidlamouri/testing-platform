@@ -6,7 +6,6 @@ import { Voque } from './voque';
 import { Voictent2 } from './voictent2';
 import {
   LanbeTypeName,
-  ReferenceTypeName,
   HubblepupPelieLanbe2,
   VoictentPelieLanbe,
 } from '../engine-shell/voictent/lanbe';
@@ -16,6 +15,7 @@ import {
   HubblepupPelueState,
 } from './abstractInMemoryVoictent';
 import { AbstractSerializableIndexByName } from '../../example-programs/abstractSerializableVoictent';
+import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
 
 const createDirectory = (directoryPath: string): void => {
   if (!fs.existsSync(directoryPath)) {
@@ -159,8 +159,8 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
     return this.hubblepupPelue.twoTicksAgo && !this.hubblepupPelue.oneTickAgo;
   }
 
-  createVoictentLanbe(debugName: string): VoictentPelieLanbe {
-    const lanbe: VoictentPelieLanbe = {
+  createVoictentLanbe(debugName: string): VoictentPelieLanbe<TVoque> {
+    const lanbe: VoictentPelieLanbe<TVoque> = {
       typeName: LanbeTypeName.VoictentPelieLanbe,
       debugName,
       hasNext: () => {

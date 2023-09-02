@@ -1,9 +1,9 @@
 import {
   LanbeTypeName,
-  ReferenceTypeName,
   HubblepupPelieLanbe2,
   VoictentPelieLanbe,
 } from '../../../core/engine-shell/voictent/lanbe';
+import { ReferenceTypeName } from '../../../core/engine-shell/voictent/referenceTypeName';
 import { Voictent2 } from '../../../core/engine/voictent2';
 import { GenericVoque } from '../../../core/engine/voque';
 import { InMemoryCache } from './inMemoryCache';
@@ -62,8 +62,8 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
     index: number,
   ): void;
 
-  createVoictentLanbe(debugName: string): VoictentPelieLanbe | null {
-    const lanbe: VoictentPelieLanbe = {
+  createVoictentLanbe(debugName: string): VoictentPelieLanbe<TVoque> {
+    const lanbe: VoictentPelieLanbe<TVoque> = {
       typeName: LanbeTypeName.VoictentPelieLanbe,
       debugName,
       hasNext: () => {

@@ -3,10 +3,10 @@ import {
   LanbeTypeName,
   HubblepupPelieLanbe2,
   GenericVoictentItemLanbe2,
-  ReferenceTypeName,
 } from '../engine-shell/voictent/lanbe';
 import { Voictent2 } from './voictent2';
 import { GenericInMemoryVoque } from './inMemoryVoque';
+import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
 
 export class DereferenceError extends Error {
   constructor(lanbe: GenericVoictentItemLanbe2) {
@@ -97,8 +97,8 @@ export abstract class AbstractInMemoryVoictent<
     );
   }
 
-  createVoictentLanbe(debugName: string): VoictentPelieLanbe {
-    const lanbe: VoictentPelieLanbe = {
+  createVoictentLanbe(debugName: string): VoictentPelieLanbe<TVoque> {
+    const lanbe: VoictentPelieLanbe<TVoque> = {
       typeName: LanbeTypeName.VoictentPelieLanbe,
       debugName,
       hasNext: () => {

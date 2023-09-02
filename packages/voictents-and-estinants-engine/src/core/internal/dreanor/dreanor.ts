@@ -10,8 +10,8 @@ import {
 import { Gepp } from '../../engine-shell/voictent/gepp';
 import {
   GenericVoictentItemLanbe2,
+  GenericVoictentPelieLanbe,
   Lanbe,
-  VoictentPelieLanbe,
 } from '../../engine-shell/voictent/lanbe';
 import { Prected } from './prected';
 
@@ -35,7 +35,7 @@ export type LeftDreanor = {
 export type RightVoictentDreanor = {
   typeName: DreanorTypeName.RightVoictentDreanor;
   gepp: Gepp;
-  lanbe: VoictentPelieLanbe;
+  lanbe: GenericVoictentPelieLanbe;
   isReady: boolean;
   mutableReference?: unknown;
 };
