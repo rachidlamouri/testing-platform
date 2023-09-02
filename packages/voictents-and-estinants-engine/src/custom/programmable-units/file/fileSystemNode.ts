@@ -9,7 +9,7 @@ import {
 } from '../../../utilities/semantic-types/zorn';
 
 const FILE_SYSTEM_NODE_ZORN_TEMPLATE = [
-  'filePath',
+  'nodePath',
 ] as const satisfies GenericZorn2Template;
 type FileSystemNodeZornTemplate = typeof FILE_SYSTEM_NODE_ZORN_TEMPLATE;
 class FileSystemNodeZorn extends Zorn2<FileSystemNodeZornTemplate> {
@@ -19,12 +19,12 @@ class FileSystemNodeZorn extends Zorn2<FileSystemNodeZornTemplate> {
 }
 
 export type BaseFileSystemNode = {
-  filePath: string;
+  nodePath: string;
 };
 
 export type FileSystemNodePrototype = {
   get zorn(): FileSystemNodeZorn;
-  get filePathPartList(): string[];
+  get nodePathPartList(): string[];
 };
 
 export type FileSystemNode = ObjectWithPrototype<
@@ -36,12 +36,12 @@ export const getFileSystemNodeZorn = (
   node: FileSystemNode,
 ): FileSystemNodeZorn => {
   return new FileSystemNodeZorn({
-    filePath: node.filePath,
+    nodePath: node.nodePath,
   });
 };
 
 export const getFileSystemNodePathPartList = memoizeGetter(
   (node: FileSystemNode): string[] => {
-    return node.filePath.split(posix.sep);
+    return node.nodePath.split(posix.sep);
   },
 );

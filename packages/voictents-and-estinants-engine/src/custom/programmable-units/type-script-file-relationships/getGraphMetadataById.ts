@@ -61,7 +61,7 @@ export const getGraphMetadataById = buildEstinant({
       rootMetadata,
       [rootDirectory],
       boundaryList,
-      directoryList,
+      directoryVoictent,
       typeScriptFileVoictent,
       externalModuleList,
     ) => {
@@ -109,7 +109,7 @@ export const getGraphMetadataById = buildEstinant({
         }
       });
 
-      directoryList.forEach((directory) => {
+      directoryVoictent.fileList.forEach((directory) => {
         metadataById.grition[directory.instanceId] = {
           title: posix.basename(directory.directoryPath),
           fieldList: [

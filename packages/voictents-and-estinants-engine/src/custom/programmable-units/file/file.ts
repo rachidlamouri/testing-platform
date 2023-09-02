@@ -49,7 +49,15 @@ type BaseFile<
 >;
 
 // TODO: move extension logic to a getter
-type FilePrototype = FileSystemNodePrototype;
+type FilePrototype = SpreadN<
+  [
+    FileSystemNodePrototype,
+    {
+      get filePath(): string;
+      get filePathPartList(): string[];
+    },
+  ]
+>;
 
 /**
  * Represents a file system file
@@ -66,7 +74,13 @@ export const { FileInstance } = buildConstructorFunctionWithName(
   'FileInstance',
 )<BaseFile, FilePrototype, File>({
   zorn: getFileSystemNodeZorn,
-  filePathPartList: getFileSystemNodePathPartList,
+  nodePathPartList: getFileSystemNodePathPartList,
+  filePathPartList: (file) => {
+    return file.nodePathPartList;
+  },
+  filePath: (file) => {
+    return file.nodePath;
+  },
 });
 
 export const FILE_GEPP = 'file';

@@ -5,7 +5,7 @@ import {
 } from '../../../utilities/file/getNestedFilePaths';
 import { splitList } from '../../../utilities/splitList';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { Directory, DIRECTORY_GEPP, DirectoryVoque } from './directory';
+import { DIRECTORY_GEPP, DirectoryInstance, DirectoryVoque } from './directory';
 import { getFileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -80,22 +80,13 @@ export const enumerateFileSystemObjects = buildEstinant({
       accumulatorB: fileMetadataList,
     });
 
-    const directoryOutputTuple = directoryMetadataList.map<Directory>(
-      ({ nodePath }) => {
-        const directoryPathPartList = nodePath.split('/');
-        const directoryName =
-          directoryPathPartList[directoryPathPartList.length - 1];
-
-        return {
-          zorn: nodePath,
-          instanceId: getTextDigest(nodePath),
-          directoryName,
-          directoryPath: nodePath,
-          directoryPathPartList,
-          parentDirectoryPath: posix.dirname(nodePath),
-        };
-      },
-    );
+    const directoryOutputTuple = directoryMetadataList.map(({ nodePath }) => {
+      return new DirectoryInstance({
+        instanceId: getTextDigest(nodePath),
+        nodePath,
+        parentDirectoryPath: posix.dirname(nodePath),
+      });
+    });
 
     const unorderedFileTuple = fileMetadataList.map<File>(
       ({ nodePath, directoryPath }) => {
@@ -109,7 +100,7 @@ export const enumerateFileSystemObjects = buildEstinant({
 
         const file2 = new FileInstance({
           instanceId: getTextDigest(nodePath),
-          filePath: nodePath,
+          nodePath,
           directoryPath,
           onDiskFileName: {
             camelCase: partsToCamel(onDiskFileNameParts),

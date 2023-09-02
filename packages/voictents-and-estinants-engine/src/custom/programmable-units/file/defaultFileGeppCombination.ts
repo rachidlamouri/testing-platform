@@ -10,6 +10,7 @@ import { YAML_FILE_GEPP } from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import { FILE_GEPP } from './file';
 import { TYPE_SCRIPT_FILE_GEPP } from '../type-script-file/typeScriptFile';
+import { DIRECTORY_GEPP } from './directory';
 
 type FileExtensionSuffixIdentifierOfInterest =
   | Exclude<
@@ -20,7 +21,8 @@ type FileExtensionSuffixIdentifierOfInterest =
       | FileExtensionSuffixIdentifier.Json
       | FileExtensionSuffixIdentifier.Gitignore
     >
-  | 'BaseFile';
+  | 'BaseFile'
+  | 'Directory';
 
 type DefaultGeppByFileExtensionSuffixIdentifier = Record<
   FileExtensionSuffixIdentifierOfInterest,
@@ -33,6 +35,7 @@ const defaultFileGeppByFileExtensionSuffixIdentifier = {
   [FileExtensionSuffixIdentifier.TypeScript]: TYPE_SCRIPT_FILE_GEPP,
   [FileExtensionSuffixIdentifier.Yaml]: YAML_FILE_GEPP,
   BaseFile: FILE_GEPP,
+  Directory: DIRECTORY_GEPP,
 } as const satisfies DefaultGeppByFileExtensionSuffixIdentifier;
 
 const defaultFileGeppList = Object.values(

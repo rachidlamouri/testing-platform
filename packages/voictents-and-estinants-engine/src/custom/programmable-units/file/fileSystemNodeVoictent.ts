@@ -56,7 +56,7 @@ export class FileSystemNodeVoictent<
 
   addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
     this.voictentPelie.fileByZorn.set(hubblepup.zorn.forHuman, hubblepup);
-    this.voictentPelie.fileByFilePath.set(hubblepup.filePath, hubblepup);
+    this.voictentPelie.fileByFilePath.set(hubblepup.nodePath, hubblepup);
     this.voictentPelie.fileList.push(hubblepup);
 
     super.addHubblepup(hubblepup);
@@ -82,7 +82,7 @@ export class FileSystemNodeVoictent<
         serializableId: `${listIndex}`,
         listIndex,
         zorn: hubblepup.zorn,
-        filePath: hubblepup.filePath,
+        filePath: hubblepup.nodePath,
       },
     };
   }
