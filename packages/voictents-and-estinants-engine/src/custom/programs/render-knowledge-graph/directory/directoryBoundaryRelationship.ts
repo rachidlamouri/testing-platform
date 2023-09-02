@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -34,7 +34,7 @@ export const { DirectoryBoundaryRelationshipInstance } =
       return getZorn([
         relationship.boundary.zorn,
         'directory',
-        relationship.directory.zorn,
+        relationship.directory.zorn.forHuman,
       ]);
     },
   });
@@ -45,7 +45,7 @@ export const DIRECTORY_BOUNDARY_RELATIONSHIP_GEPP =
 type DirectoryBoundaryRelationshipGepp =
   typeof DIRECTORY_BOUNDARY_RELATIONSHIP_GEPP;
 
-export type DirectoryBoundaryRelationshipVoque = InMemoryOdeshin2Voque<
+export type DirectoryBoundaryRelationshipVoque = InMemoryOdeshin2ListVoque<
   DirectoryBoundaryRelationshipGepp,
   DirectoryBoundaryRelationship
 >;

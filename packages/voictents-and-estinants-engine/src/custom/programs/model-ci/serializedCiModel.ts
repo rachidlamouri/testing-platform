@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 /**
  * The expected ci.sh generated from the CI model
@@ -12,7 +12,7 @@ export const SERIALIZED_CI_MODEL_GEPP = 'serialized-ci-model';
 
 type SerializedCiModelGepp = typeof SERIALIZED_CI_MODEL_GEPP;
 
-export type SerializedCiModelVoque = InMemoryOdeshin2Voque<
+export type SerializedCiModelVoque = InMemoryOdeshin2ListVoque<
   SerializedCiModelGepp,
   SerializedCiModel
 >;

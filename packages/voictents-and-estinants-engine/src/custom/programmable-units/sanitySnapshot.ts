@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../core/engine/inMemoryOdeshinVoictent2';
 
 /**
  * Information to be committed that is expected to change if a program
@@ -13,7 +13,7 @@ export const SANITY_SNAPSHOT_GEPP = 'sanity-snapshot';
 
 type SanitySnapshotGepp = typeof SANITY_SNAPSHOT_GEPP;
 
-export type SanitySnapshotVoque = InMemoryOdeshin2Voque<
+export type SanitySnapshotVoque = InMemoryOdeshin2ListVoque<
   SanitySnapshotGepp,
   SanitySnapshot
 >;

@@ -1,12 +1,12 @@
 import {
   LanbeTypeName,
-  ReferenceTypeName,
   HubblepupPelieLanbe,
-  VoictentPelieLanbe,
+  GenericVoictentPelieLanbe,
 } from '../engine-shell/voictent/lanbe';
 import { Hubblepup } from '../engine-shell/quirm/hubblepup';
 import { Gepp } from '../engine-shell/voictent/gepp';
 import { GenericVoictent2 } from './voictent2';
+import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
 
 class MissingLanbeError extends Error {
   constructor(lanbe: HubblepupPelieLanbe) {
@@ -72,8 +72,8 @@ export class Voictent implements GenericVoictent2 {
     return this.hubblepupPelue.twoTicksAgo && !this.hubblepupPelue.oneTickAgo;
   }
 
-  createVoictentLanbe(debugName: string): VoictentPelieLanbe {
-    const lanbe: VoictentPelieLanbe = {
+  createVoictentLanbe(debugName: string): GenericVoictentPelieLanbe {
+    const lanbe: GenericVoictentPelieLanbe = {
       typeName: LanbeTypeName.VoictentPelieLanbe,
       debugName,
       hasNext: () => {

@@ -1,6 +1,6 @@
 import { DirectedGraphEdge } from './directedGraphEdge';
 import { DirectedGraphNode } from './directedGraphNode';
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { SpreadN } from '../../../../utilities/spreadN';
 import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
 import { AttributeByKeyGSC } from './attributeByKeyGSC';
@@ -33,7 +33,7 @@ export const DIRECTED_GRAPH_GEPP = 'directed-graph';
 
 type DirectedGraphGepp = typeof DIRECTED_GRAPH_GEPP;
 
-export type DirectedGraphVoque = InMemoryOdeshin2Voque<
+export type DirectedGraphVoque = InMemoryOdeshin2ListVoque<
   DirectedGraphGepp,
   DirectedGraph
 >;

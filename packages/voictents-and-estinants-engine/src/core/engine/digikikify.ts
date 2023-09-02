@@ -28,9 +28,8 @@ import {
   GenericVoictentItemLanbe2,
   Lanbe,
   LanbeTypeName,
-  ReferenceTypeName,
   HubblepupPelieLanbe,
-  VoictentPelieLanbe,
+  GenericVoictentPelieLanbe,
 } from '../engine-shell/voictent/lanbe';
 import { Mabz, MabzEntry } from '../internal/procody/mabz';
 import { Platomity2, Virok, getDreanorTuple } from '../internal/platomity';
@@ -42,6 +41,7 @@ import { GenericVoictent2 } from './voictent2';
 import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
 import { Tuple } from '../../utilities/semantic-types/tuple';
 import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/rightInputAppreffinge';
+import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
 
 class AggregateEngineError extends Error {
   constructor(errorMessageList: string[]) {
@@ -86,7 +86,7 @@ type TickSeries<TValue extends number | bigint> = TValue[];
 
 type VoictentTickSeriesConfiguration = {
   gepp: Gepp;
-  voictentLanbe: VoictentPelieLanbe | null;
+  voictentLanbe: GenericVoictentPelieLanbe | null;
   voictentItemLanbe: HubblepupPelieLanbe | GenericVoictentItemLanbe2 | null;
   voictentTickSeries: TickSeries<number>;
   voictentItemTickSeries: TickSeries<number>;
@@ -369,7 +369,7 @@ export const digikikify = ({
           lanbe: createLanbe2(
             estinant,
             rightInputAppreffinge,
-          ) as VoictentPelieLanbe,
+          ) as GenericVoictentPelieLanbe,
           isReady: false,
         } satisfies RightVoictentDreanor;
       },

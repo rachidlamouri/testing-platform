@@ -26,15 +26,11 @@ export const getCommonBoundaryRoot = buildEstinant({
   .toHubblepup2<CommonBoundaryRootVoque>({
     gepp: COMMON_BOUNDARY_ROOT_GEPP,
   })
-  .onPinbe((boundaryList, directoryList) => {
-    const directoryByPath = new Map(
-      directoryList.map((directory) => {
-        return [directory.directoryPath, directory] as const;
-      }),
-    );
-
+  .onPinbe((boundaryList, directoryVoictent) => {
     const boundaryDirectoryList = boundaryList.map((boundary) => {
-      const directory = directoryByPath.get(boundary.directoryPath);
+      const directory = directoryVoictent.byNodePath.get(
+        boundary.directoryPath,
+      );
       if (directory === undefined) {
         throw Error(
           'Unexpected undefined directory: All boundary directories come from the directory collection',

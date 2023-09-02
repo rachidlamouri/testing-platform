@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 
 type OverviewBoundaryConfiguration = {
@@ -36,7 +36,7 @@ export const BOUNDARY_CONFIGURATION_GEPP = 'boundary-configuration';
 
 type BoundaryConfigurationGepp = typeof BOUNDARY_CONFIGURATION_GEPP;
 
-export type BoundaryConfigurationVoque = InMemoryOdeshin2Voque<
+export type BoundaryConfigurationVoque = InMemoryOdeshin2ListVoque<
   BoundaryConfigurationGepp,
   BoundaryConfiguration
 >;

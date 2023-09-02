@@ -1,10 +1,7 @@
 import { Simplify } from 'type-fest';
-import {
-  GenericIndexedHubblepup,
-  Hubblepup,
-  HubblepupTuple,
-} from '../quirm/hubblepup';
+import { Hubblepup } from '../quirm/hubblepup';
 import { GenericVoque, Voque } from '../../engine/voque';
+import { ReferenceTypeName } from './referenceTypeName';
 
 export enum LanbeTypeName {
   VoictentPelieLanbe = 'VoictentPelieLanbe',
@@ -12,37 +9,32 @@ export enum LanbeTypeName {
   HubblepupPelieLanbe2 = 'HubblepupPelieLanbe2',
 }
 
-export enum ReferenceTypeName {
-  VoictentPelie = 'Voictent',
-  HubblepupPelie = 'VoictentItem',
-  IndexedHubblepupPelie = 'IndexedVoictentItem',
-}
-
 type BaseLanbe<
   TLanbeTypeName extends LanbeTypeName,
   TReferenceTypeName extends ReferenceTypeName,
-  TOutput extends GenericIndexedHubblepup | Hubblepup | HubblepupTuple,
+  TOutput,
 > = {
   typeName: TLanbeTypeName;
   debugName: string;
   hasNext: () => boolean;
   advance: () => void;
   dereference: () => {
-    // TODO: this is just a temporary measure while we update lanbe. So replace "typeName" with something else or just remove it altogether
     typeName: TReferenceTypeName;
     value: TOutput;
   };
 };
 
-export type VoictentPelieLanbe = Simplify<
+export type VoictentPelieLanbe<TVoque extends GenericVoque> = Simplify<
   BaseLanbe<
     LanbeTypeName.VoictentPelieLanbe,
     ReferenceTypeName.VoictentPelie,
-    HubblepupTuple
+    TVoque['voictentPelie']
   > & {
     isAccumulating: () => boolean;
   }
 >;
+
+export type GenericVoictentPelieLanbe = VoictentPelieLanbe<GenericVoque>;
 
 export type HubblepupPelieLanbe = BaseLanbe<
   LanbeTypeName.HubblepupPelieLanbe,
@@ -76,6 +68,6 @@ export type GenericVoictentItemLanbe2 = HubblepupPelieLanbe2<
  * This allows an external entity to read a Voictent without needing a direct reference to it.
  */
 export type Lanbe =
-  | VoictentPelieLanbe
+  | GenericVoictentPelieLanbe
   | HubblepupPelieLanbe
   | GenericVoictentItemLanbe2;

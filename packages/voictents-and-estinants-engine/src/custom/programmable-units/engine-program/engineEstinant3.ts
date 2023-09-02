@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -55,7 +55,7 @@ export const ENGINE_ESTINANT_3_GEPP = 'engine-estinant-3';
 
 type EngineEstinant3Gepp = typeof ENGINE_ESTINANT_3_GEPP;
 
-export type EngineEstinant3Voque = InMemoryOdeshin2Voque<
+export type EngineEstinant3Voque = InMemoryOdeshin2ListVoque<
   EngineEstinant3Gepp,
   EngineEstinant3
 >;

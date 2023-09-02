@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { ExternalModuleMetadata } from './externalModuleMetadata';
 
 /**
@@ -15,7 +15,7 @@ export const EXTERNAL_MODULE_METADATA_BY_SOURCE_PATH_GEPP =
 type ExternalModuleMetadataBySourcePathGepp =
   typeof EXTERNAL_MODULE_METADATA_BY_SOURCE_PATH_GEPP;
 
-export type ExternalModuleMetadataBySourcePathVoque = InMemoryOdeshin2Voque<
+export type ExternalModuleMetadataBySourcePathVoque = InMemoryOdeshin2ListVoque<
   ExternalModuleMetadataBySourcePathGepp,
   ExternalModuleMetadataBySourcePath
 >;

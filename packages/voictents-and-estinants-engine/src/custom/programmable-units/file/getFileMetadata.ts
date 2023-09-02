@@ -30,6 +30,7 @@ const getCamelCaseNameParts = (camelCaseName: string): string[] => {
 type FileMetadata = {
   filePath: string;
   parentDirectoryNameParts: string[];
+  onDiskFileName: string;
   onDiskFileNameParts: string[];
   inMemoryFileNameParts: string[];
   extensionParts: string[];
@@ -65,6 +66,7 @@ export const getFileMetadata = (filePath: string): FileMetadata => {
   return {
     filePath,
     parentDirectoryNameParts,
+    onDiskFileName: legalFileName,
     onDiskFileNameParts,
     inMemoryFileNameParts,
     extensionParts: normalizedFileExtensionParts,

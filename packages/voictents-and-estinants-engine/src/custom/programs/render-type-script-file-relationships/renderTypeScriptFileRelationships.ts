@@ -38,7 +38,7 @@ import { markUnusedNodes } from '../../programmable-units/type-script-file-relat
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { getOutputFileCount } from './getOutputFileCount';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
@@ -51,6 +51,7 @@ import {
   CORE_ENGINE_FUNCTION_2_CONFIGURATION,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'renderTypeScriptFileRelationships',
@@ -82,7 +83,7 @@ digikikify({
         VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
     }),
-    new InMemoryOdeshin2Voictent<BoundaryConfigurationVoque>({
+    new InMemoryOdeshin2ListVoictent<BoundaryConfigurationVoque>({
       gepp: BOUNDARY_CONFIGURATION_GEPP,
       initialHubblepupPelueTuple: [
         createBoundaryConfiguration([
@@ -186,6 +187,7 @@ digikikify({
       ],
     }),
   ] as const,
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,

@@ -5,7 +5,7 @@ import {
   CommentedProgramBodyDeclarationListVoque,
   IdentifiableCommentedProgramBodyDeclaration,
 } from './commentedProgramBodyDeclarationList';
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 // TODO: fix this weird nested map type
 export type ProgramBodyDeclarationsByIdentifier = {
@@ -19,10 +19,11 @@ export const PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP =
 type ProgramBodyDeclarationsByIdentifierGepp =
   typeof PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP;
 
-export type ProgramBodyDeclarationsByIdentifierVoque = InMemoryOdeshin2Voque<
-  ProgramBodyDeclarationsByIdentifierGepp,
-  ProgramBodyDeclarationsByIdentifier
->;
+export type ProgramBodyDeclarationsByIdentifierVoque =
+  InMemoryOdeshin2ListVoque<
+    ProgramBodyDeclarationsByIdentifierGepp,
+    ProgramBodyDeclarationsByIdentifier
+  >;
 
 /**
  * Uses the convention of an "identifiable top level node", to cache all top

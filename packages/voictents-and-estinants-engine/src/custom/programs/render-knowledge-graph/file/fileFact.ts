@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -32,7 +32,7 @@ export const { FileFactInstance } = buildConstructorFunctionWithName(
   'FileFactInstance',
 )<BaseFileFact, FileFactPrototype, FileFact>({
   zorn: (fileFact) => {
-    return getZorn([fileFact.file.zorn, 'fact']);
+    return getZorn([fileFact.file.filePath, 'fact']);
   },
   nodeLocator: (fileFact) => {
     return new GraphConstituentLocatorInstance({
@@ -50,4 +50,4 @@ export const FILE_FACT_GEPP = 'file-fact';
 
 type FileFactGepp = typeof FILE_FACT_GEPP;
 
-export type FileFactVoque = InMemoryOdeshin2Voque<FileFactGepp, FileFact>;
+export type FileFactVoque = InMemoryOdeshin2ListVoque<FileFactGepp, FileFact>;

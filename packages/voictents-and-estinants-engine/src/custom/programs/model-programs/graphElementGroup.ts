@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -35,7 +35,7 @@ export const GRAPH_ELEMENT_GROUP_GEPP = 'graph-element-group';
 
 type GraphElementGroupGepp = typeof GRAPH_ELEMENT_GROUP_GEPP;
 
-export type GraphElementGroupVoque = InMemoryOdeshin2Voque<
+export type GraphElementGroupVoque = InMemoryOdeshin2ListVoque<
   GraphElementGroupGepp,
   GraphElementGroup
 >;

@@ -15,6 +15,9 @@ import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
+import { FILE_GEPP } from '../../programmable-units/file/file';
+import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'categorizeFiles',
@@ -35,6 +38,7 @@ digikikify({
       ],
     }),
   ] as const,
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,
@@ -49,5 +53,10 @@ digikikify({
     reportErrors,
     signalError,
   ] as const,
+  errorGepp: PROGRAM_ERROR_GEPP,
+  serializeeGeppList: [
+    // keep this as a multi-line list for easier debugging
+    FILE_GEPP,
+  ],
   programFileCache,
 });

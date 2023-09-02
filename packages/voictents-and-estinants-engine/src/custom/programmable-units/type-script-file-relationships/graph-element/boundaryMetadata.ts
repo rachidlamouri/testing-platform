@@ -1,5 +1,5 @@
 import { SetRequired } from 'type-fest';
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedSubgraph';
 
 type InternalBoundaryMetadata = {
@@ -45,7 +45,7 @@ export const BOUNDARY_METADATA_GEPP = 'boundary-metadata';
 
 type BoundaryMetadataGepp = typeof BOUNDARY_METADATA_GEPP;
 
-export type BoundaryMetadataVoque = InMemoryOdeshin2Voque<
+export type BoundaryMetadataVoque = InMemoryOdeshin2ListVoque<
   BoundaryMetadataGepp,
   BoundaryMetadata
 >;

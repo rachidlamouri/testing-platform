@@ -21,10 +21,10 @@ export const getDirectoryInstanceIdByDirectoryPath = buildEstinant({
   .toHubblepup2<DirectoryInstanceIdByDirectoryPathVoque>({
     gepp: DIRECTORY_INSTANCE_ID_BY_FILE_PATH_GEPP,
   })
-  .onPinbe((directoryList) => {
+  .onPinbe((directoryVoictent) => {
     const directoryInstanceIdByDirectoryPath: DirectoryInstanceIdByDirectoryPath['grition'] =
       new Map();
-    directoryList.forEach((directory) => {
+    directoryVoictent.list.forEach((directory) => {
       directoryInstanceIdByDirectoryPath.set(
         directory.directoryPath,
         directory.instanceId,

@@ -54,6 +54,7 @@ import { getDirectedGraphFromGraphElementGroup } from './getDirectedGraphFromGra
 import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProgramMetadataEntries';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { assertNoCopyPasta } from './assertNoCopyPasta';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -79,6 +80,7 @@ digikikify({
       ],
     }),
   ] as const,
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,

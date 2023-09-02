@@ -25,15 +25,18 @@ export type GenericAbstractSerializableSourceVoque = Voque<
   Hubblepup,
   Hubblepup,
   AbstractSerializableIndexByName,
-  Hubblepup[]
+  unknown
 >;
 
-export type AbstractSerializableVoque<TGepp extends Gepp> = Voque<
+export type AbstractSerializableVoque<
+  TGepp extends Gepp,
+  TVoictentPelie = unknown,
+> = Voque<
   TGepp,
   AbstractSerializable,
   AbstractSerializable,
   AbstractSerializableIndexByName,
-  AbstractSerializable[]
+  TVoictentPelie
 >;
 
 export type GenericAbstractSerializableVoque = AbstractSerializableVoque<Gepp>;

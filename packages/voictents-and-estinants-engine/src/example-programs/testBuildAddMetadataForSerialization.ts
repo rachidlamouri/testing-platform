@@ -1,5 +1,5 @@
 import { digikikify2 } from '../core/engine/digikikify';
-import { InMemoryOdeshin2Voictent } from '../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoictent } from '../core/engine/inMemoryOdeshinVoictent2';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
@@ -22,7 +22,7 @@ const programFileCache = new ProgramFileCache({
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryOdeshin2Voictent<DatumTestCaseInputVoque>({
+    new InMemoryOdeshin2ListVoictent<DatumTestCaseInputVoque>({
       gepp: DATUM_TEST_CASE_INPUT_GEPP,
       initialHubblepupPelueTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),

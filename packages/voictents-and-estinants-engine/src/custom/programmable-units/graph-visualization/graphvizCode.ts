@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 /**
  * See https://graphviz.org/doc/info/lang.html for the specification of
@@ -13,7 +13,7 @@ export const GRAPHVIZ_CODE_GEPP = 'graphviz-code';
 
 type GraphvizCodeGepp = typeof GRAPHVIZ_CODE_GEPP;
 
-export type GraphvizCodeVoque = InMemoryOdeshin2Voque<
+export type GraphvizCodeVoque = InMemoryOdeshin2ListVoque<
   GraphvizCodeGepp,
   GraphvizCode
 >;

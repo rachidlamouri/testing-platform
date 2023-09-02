@@ -4,10 +4,12 @@ import {
   digikikify,
 } from '../../../type-script-adapter/digikikify';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FileSystemObjectEnumeratorConfigurationVoque,
@@ -37,6 +39,7 @@ digikikify({
       ],
     }),
   ] as const,
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,
@@ -57,6 +60,7 @@ digikikify({
     reportErrors,
     signalError,
   ] as const,
+  errorGepp: PROGRAM_ERROR_GEPP,
   serializeeGeppList: [
     // note: keep this is a multiline list for easier debugging
   ],

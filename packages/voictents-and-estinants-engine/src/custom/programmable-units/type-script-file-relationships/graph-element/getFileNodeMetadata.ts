@@ -101,7 +101,7 @@ export const getFileNodeMetadata = buildEstinant({
         [PROGRAM_ERROR_GEPP]: [],
         [FILE_NODE_METADATA_GEPP]: [
           {
-            zorn: file.zorn,
+            zorn: file.filePath,
             id: file.instanceId,
             directoryId,
             boundaryId: foundBoundary.id,

@@ -1,5 +1,5 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -108,7 +108,7 @@ export const ENGINE_ESTINANT_LOCATOR_2_GEPP = 'engine-estinant-locator-2';
 
 type EngineEstinantLocator2Gepp = typeof ENGINE_ESTINANT_LOCATOR_2_GEPP;
 
-export type EngineEstinantLocator2Voque = InMemoryOdeshin2Voque<
+export type EngineEstinantLocator2Voque = InMemoryOdeshin2ListVoque<
   EngineEstinantLocator2Gepp,
   EngineEstinantLocator2
 >;

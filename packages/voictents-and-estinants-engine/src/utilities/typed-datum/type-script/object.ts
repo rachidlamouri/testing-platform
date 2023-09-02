@@ -4,7 +4,7 @@ export type TypeScriptSet = Set<unknown>;
 
 export type TypeScriptMap = Map<unknown, unknown>;
 
-type TypeScriptObjectInstanceKey = string | number | symbol;
+export type TypeScriptObjectInstanceKey = string | number | symbol;
 
 export type TypeScriptObjectInstance = Record<
   TypeScriptObjectInstanceKey,

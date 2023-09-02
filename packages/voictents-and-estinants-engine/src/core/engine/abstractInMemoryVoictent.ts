@@ -3,10 +3,10 @@ import {
   LanbeTypeName,
   HubblepupPelieLanbe2,
   GenericVoictentItemLanbe2,
-  ReferenceTypeName,
 } from '../engine-shell/voictent/lanbe';
 import { Voictent2 } from './voictent2';
 import { GenericInMemoryVoque } from './inMemoryVoque';
+import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
 
 export class DereferenceError extends Error {
   constructor(lanbe: GenericVoictentItemLanbe2) {
@@ -97,8 +97,8 @@ export abstract class AbstractInMemoryVoictent<
     );
   }
 
-  createVoictentLanbe(debugName: string): VoictentPelieLanbe {
-    const lanbe: VoictentPelieLanbe = {
+  createVoictentLanbe(debugName: string): VoictentPelieLanbe<TVoque> {
+    const lanbe: VoictentPelieLanbe<TVoque> = {
       typeName: LanbeTypeName.VoictentPelieLanbe,
       debugName,
       hasNext: () => {
@@ -115,7 +115,7 @@ export abstract class AbstractInMemoryVoictent<
       dereference: () => {
         return {
           typeName: ReferenceTypeName.VoictentPelie,
-          value: [...this.hubblepupPelieTuple],
+          value: this.dereferenceVoictentPelie(),
         };
       },
     };
@@ -136,7 +136,7 @@ export abstract class AbstractInMemoryVoictent<
         this.advance(lanbe);
       },
       dereference: () => {
-        const value = this.dereference(lanbe);
+        const value = this.dereferenceHubblepupPelie(lanbe);
 
         return {
           typeName: ReferenceTypeName.IndexedHubblepupPelie,
@@ -184,9 +184,9 @@ export abstract class AbstractInMemoryVoictent<
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  protected abstract dereference(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected abstract dereferenceVoictentPelie(): TVoque['voictentPelie'];
+
+  protected abstract dereferenceHubblepupPelie(
     lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque>,
   ): TVoque['indexedHubblepupPelie'];
 }

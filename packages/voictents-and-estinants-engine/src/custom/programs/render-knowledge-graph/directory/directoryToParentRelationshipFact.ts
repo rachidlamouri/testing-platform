@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -107,7 +107,7 @@ export const DIRECTORY_TO_PARENT_RELATIONSHIP_FACT_GEPP =
 type DirectoryToParentRelationshipFactGepp =
   typeof DIRECTORY_TO_PARENT_RELATIONSHIP_FACT_GEPP;
 
-export type DirectoryToParentRelationshipFactVoque = InMemoryOdeshin2Voque<
+export type DirectoryToParentRelationshipFactVoque = InMemoryOdeshin2ListVoque<
   DirectoryToParentRelationshipFactGepp,
   DirectoryToParentRelationshipFact
 >;

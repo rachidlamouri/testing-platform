@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { Directory } from '../file/directory';
 
 /**
@@ -10,7 +10,7 @@ export const ROOT_DIRECTORY_GEPP = 'root-directory';
 
 type RootDirectoryGepp = typeof ROOT_DIRECTORY_GEPP;
 
-export type RootDirectoryVoque = InMemoryOdeshin2Voque<
+export type RootDirectoryVoque = InMemoryOdeshin2ListVoque<
   RootDirectoryGepp,
   RootDirectory
 >;

@@ -32,6 +32,7 @@ import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
@@ -67,6 +68,7 @@ digikikify({
       programFileCache,
     }),
   ] as const),
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,

@@ -44,7 +44,7 @@ import { groupGraphElements } from '../model-programs/groupGraphElements';
 import { getBoundaryFactAndGraphElements } from './boundary/getBoundaryFactAndGraphElements';
 import { stubMetadata } from './boundary/stubMetadata';
 import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
-import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
 import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
 import { getDirectoryFact } from './directory/getDirectoryFact';
@@ -73,6 +73,7 @@ import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
 import { getAssociatedBoundaryFacts } from './associated-boundary/getAssociatedBoundaryFacts';
 import { getAssociatedBoundaryFactGraphElements } from './associated-boundary/getAssociatedBoundaryFactGraphElements';
 import { getDirectoryToParentRelationshipFact } from './directory/getDirectoryToParentRelationshipFact';
+import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -98,11 +99,12 @@ digikikify({
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
-    new InMemoryOdeshin2Voictent<BoundaryVoque>({
+    new InMemoryOdeshin2ListVoictent<BoundaryVoque>({
       gepp: BOUNDARY_GEPP,
       initialHubblepupPelueTuple: STATIC_BOUNDARY_LIST,
     }),
   ] as const,
+  fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,

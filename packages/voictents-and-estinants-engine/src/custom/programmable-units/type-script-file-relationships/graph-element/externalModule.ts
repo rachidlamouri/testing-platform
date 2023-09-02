@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 
 /**
  * Represents a first or third party node modules
@@ -13,7 +13,7 @@ export const EXTERNAL_MODULE_GEPP = 'external-module';
 
 type ExternalModuleGepp = typeof EXTERNAL_MODULE_GEPP;
 
-export type ExternalModuleVoque = InMemoryOdeshin2Voque<
+export type ExternalModuleVoque = InMemoryOdeshin2ListVoque<
   ExternalModuleGepp,
   ExternalModule
 >;

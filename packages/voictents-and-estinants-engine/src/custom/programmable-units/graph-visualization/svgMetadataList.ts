@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { SvgDocument } from './svgDocument';
 
 type SvgMetadata = {
@@ -19,7 +19,7 @@ export const SVG_METADATA_LIST_GEPP = 'svg-metadata-list';
 
 type SvgMetadataListGepp = typeof SVG_METADATA_LIST_GEPP;
 
-export type SvgMetadataListVoque = InMemoryOdeshin2Voque<
+export type SvgMetadataListVoque = InMemoryOdeshin2ListVoque<
   SvgMetadataListGepp,
   SvgMetadataList
 >;

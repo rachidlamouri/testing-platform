@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { DirectedGraph } from '../../graph-visualization/directed-graph/directedGraph';
 import { InitialEdgeMetadata } from './initialEdgeMetadataList';
 
@@ -18,7 +18,7 @@ export type RootMetadata = {
 export const ROOT_METADATA_GEPP = 'root-metadata';
 
 type RootMetadataGepp = typeof ROOT_METADATA_GEPP;
-export type RootMetadataVoque = InMemoryOdeshin2Voque<
+export type RootMetadataVoque = InMemoryOdeshin2ListVoque<
   RootMetadataGepp,
   RootMetadata
 >;

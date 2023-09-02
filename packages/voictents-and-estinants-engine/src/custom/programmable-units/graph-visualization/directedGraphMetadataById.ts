@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 export type DirectedGraphMetadatumField = {
   label: string;
@@ -24,7 +24,7 @@ export const DIRECTED_GRAPH_METADATA_BY_ID_GEPP =
 
 type DirectedGraphMetadataByIdGepp = typeof DIRECTED_GRAPH_METADATA_BY_ID_GEPP;
 
-export type DirectedGraphMetadataByIdVoque = InMemoryOdeshin2Voque<
+export type DirectedGraphMetadataByIdVoque = InMemoryOdeshin2ListVoque<
   DirectedGraphMetadataByIdGepp,
   DirectedGraphMetadataById
 >;

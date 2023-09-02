@@ -5,8 +5,7 @@ import {
 } from '../../../utilities/file/getNestedFilePaths';
 import { splitList } from '../../../utilities/splitList';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { Directory, DIRECTORY_GEPP, DirectoryVoque } from './directory';
-import { FILE_GEPP, File, FileVoque } from './file';
+import { DIRECTORY_GEPP, DirectoryInstance, DirectoryVoque } from './directory';
 import { getFileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -14,6 +13,7 @@ import {
 } from './fileSystemObjectEnumeratorConfiguration';
 import { getFileMetadata } from './getFileMetadata';
 import { getTextDigest } from '../../../utilities/getTextDigest';
+import { FILE_GEPP, File, FileInstance, FileVoque } from './file';
 
 const partsToCamel = (x: string[]): string => {
   return x
@@ -80,42 +80,34 @@ export const enumerateFileSystemObjects = buildEstinant({
       accumulatorB: fileMetadataList,
     });
 
-    const directoryOutputTuple = directoryMetadataList.map<Directory>(
-      ({ nodePath }) => {
-        const directoryPathPartList = nodePath.split('/');
-        const directoryName =
-          directoryPathPartList[directoryPathPartList.length - 1];
+    const directoryOutputTuple = directoryMetadataList.map(({ nodePath }) => {
+      return new DirectoryInstance({
+        instanceId: getTextDigest(nodePath),
+        nodePath,
+        parentDirectoryPath: posix.dirname(nodePath),
+      });
+    });
 
-        return {
-          zorn: nodePath,
-          instanceId: getTextDigest(nodePath),
-          directoryName,
-          directoryPath: nodePath,
-          directoryPathPartList,
-          parentDirectoryPath: posix.dirname(nodePath),
-        };
-      },
-    );
-
-    const fileTuple = fileMetadataList.map<File>(
+    const unorderedFileTuple = fileMetadataList.map<File>(
       ({ nodePath, directoryPath }) => {
         const {
+          onDiskFileName,
           onDiskFileNameParts,
           inMemoryFileNameParts,
           extensionSuffix,
           extensionParts,
         } = getFileMetadata(nodePath);
 
-        const file: File = {
-          zorn: nodePath,
+        const file2 = new FileInstance({
           instanceId: getTextDigest(nodePath),
-          filePath: nodePath,
+          nodePath,
           directoryPath,
           onDiskFileName: {
             camelCase: partsToCamel(onDiskFileNameParts),
             pascalCase: partsToPascal(onDiskFileNameParts),
             screamingSnakeCase: partsToScreamingSnake(onDiskFileNameParts),
             kebabCase: partsToKebabCase(onDiskFileNameParts),
+            asIs: onDiskFileName,
           },
           inMemoryFileName: {
             camelCase: partsToCamel(inMemoryFileNameParts),
@@ -125,30 +117,40 @@ export const enumerateFileSystemObjects = buildEstinant({
           },
           extension: {
             parts: extensionParts,
+            partList: extensionParts,
             suffix: extensionSuffix,
             suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
           },
           additionalMetadata: null,
-        };
+        });
 
-        return file;
+        return file2;
       },
     );
 
-    const fileBySuffixIdentifier = new Map<string, File[]>();
-    fileTuple.forEach((file) => {
-      const { suffixIdentifier } = file.extension;
+    // Reorders the files by suffix identifier so they are easier to see in a serialized collection
+    const reorderByFileSuffixForDebugability = <TFile extends File>(
+      fileList: TFile[],
+    ): TFile[] => {
+      const fileBySuffixIdentifier = new Map<string, TFile[]>();
+      fileList.forEach((file) => {
+        const { suffixIdentifier } = file.extension;
 
-      const list = fileBySuffixIdentifier.get(suffixIdentifier) ?? [];
-      list.push(file);
-      fileBySuffixIdentifier.set(suffixIdentifier, list);
-    });
+        const list = fileBySuffixIdentifier.get(suffixIdentifier) ?? [];
+        list.push(file);
+        fileBySuffixIdentifier.set(suffixIdentifier, list);
+      });
 
-    const outputFileTuple = [...fileBySuffixIdentifier.values()].flat();
+      const result = [...fileBySuffixIdentifier.values()].flat();
+      return result;
+    };
+
+    const orderedFileTuple =
+      reorderByFileSuffixForDebugability(unorderedFileTuple);
 
     return {
       [DIRECTORY_GEPP]: directoryOutputTuple,
-      [FILE_GEPP]: outputFileTuple,
+      [FILE_GEPP]: orderedFileTuple,
     };
   })
   .assemble();

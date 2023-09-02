@@ -11,7 +11,7 @@ export type Voictent2<
   TVoque extends TRestrictingVoque,
 > = {
   get gepp(): TVoque['gepp'];
-  createVoictentLanbe(debugName: string): VoictentPelieLanbe | null;
+  createVoictentLanbe(debugName: string): VoictentPelieLanbe<TVoque> | null;
   createVoictentItemLanbe(
     debugName: string,
   ):

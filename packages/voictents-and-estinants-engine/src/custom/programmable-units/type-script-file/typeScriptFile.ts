@@ -1,6 +1,6 @@
-import { InMemoryOdeshin2Voque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { File } from '../file/file';
 import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
+import { FileSystemNodeVoque } from '../file/fileSystemNodeVoictent';
 
 /**
  * A File object with the extension narrowed down to a TypeScript file
@@ -11,7 +11,7 @@ export const TYPE_SCRIPT_FILE_GEPP = 'type-script-file';
 
 type TypeScriptFileGepp = typeof TYPE_SCRIPT_FILE_GEPP;
 
-export type TypeScriptFileVoque = InMemoryOdeshin2Voque<
+export type TypeScriptFileVoque = FileSystemNodeVoque<
   TypeScriptFileGepp,
   TypeScriptFile
 >;

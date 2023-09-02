@@ -22,10 +22,14 @@ import {
   GenericRightInputVickenTuple,
   RightInputVicken,
 } from '../core/engine-shell/vicken/rightInputVicken';
-import { Gepp } from '../core/engine-shell/voictent/gepp';
 import {
-  GenericInMemoryOdeshin2Voque,
-  InMemoryOdeshin2Voictent,
+  Gepp,
+  GenericGeppCombination,
+  GeppTuple,
+} from '../core/engine-shell/voictent/gepp';
+import {
+  GenericInMemoryOdeshin2ListVoque,
+  InMemoryOdeshin2ListVoictent,
 } from '../core/engine/inMemoryOdeshinVoictent2';
 import {
   GenericVoictent2,
@@ -39,6 +43,10 @@ import { GenericAbstractSerializableSourceVoque } from '../example-programs/abst
 import { buildAddMetadataForSerialization } from '../example-programs/buildAddMetadataForSerialization';
 import { SerializableVoictent } from '../example-programs/serializableVoictent';
 import { ProgramFileCache } from '../utilities/programFileCache';
+import {
+  FileSystemNodeVoictent,
+  GenericFileSystemNodeVoque,
+} from '../custom/programmable-units/file/fileSystemNodeVoictent';
 
 type VoqueUnionFromVoictentTuple<
   TVoictentTuple extends UnsafeVoictent2Tuple,
@@ -94,12 +102,29 @@ type EstinantUnionFromEstinantTuple<
 type VoqueUnionFromEstinantTuple<TEstinantTuple extends UnsafeEstinant2Tuple> =
   VoqueUnionFromEstinant<EstinantUnionFromEstinantTuple<TEstinantTuple>>;
 
-type UninferableVoqueUnion<
-  TRequiredVoqueUnion extends GenericVoque,
-  TInstantiatedVoqueUnion extends GenericVoque,
-> = Exclude<
-  Exclude<TRequiredVoqueUnion, TInstantiatedVoqueUnion>,
-  GenericInMemoryOdeshin2Voque
+type GenericInferableVoque =
+  | GenericInMemoryOdeshin2ListVoque
+  | GenericFileSystemNodeVoque;
+
+type UninferableVoqueUnion<TImplicitVoqueUnion extends GenericVoque> = Exclude<
+  TImplicitVoqueUnion,
+  GenericInferableVoque
+>;
+
+type InferableVoqueUnion<
+  TImplicitVoqueUnion extends GenericVoque,
+  TInferableVoque extends GenericInferableVoque,
+> = Extract<TImplicitVoqueUnion, TInferableVoque>;
+
+type GeppCombinationFromVoqueUnion<TVoque extends GenericVoque> = Simplify<
+  UnionToIntersection<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    TVoque extends any
+      ? {
+          [TGepp in TVoque['gepp']]: null;
+        }
+      : never
+  >
 >;
 
 type VoictentByGeppFromVoqueUnion<TVoque extends GenericVoque> = Simplify<
@@ -113,15 +138,8 @@ type VoictentByGeppFromVoqueUnion<TVoque extends GenericVoque> = Simplify<
   >
 >;
 
-type UninferableVoictentByGepp<
-  TExplicitVoictentTupleVoqueUnion extends GenericVoque,
-  TEstinantTupleVoqueUnion extends GenericVoque,
-> = VoictentByGeppFromVoqueUnion<
-  UninferableVoqueUnion<
-    TEstinantTupleVoqueUnion,
-    TExplicitVoictentTupleVoqueUnion
-  >
->;
+type UninferableVoictentByGepp<TImplicitVoqueUnion extends GenericVoque> =
+  VoictentByGeppFromVoqueUnion<UninferableVoqueUnion<TImplicitVoqueUnion>>;
 
 // TODO: change this to extract any voque whose receieved hubblepup includes Error (I tried this and couldn't get it to work :sad-face:)
 type ErrorGepp<TAllVoqueUnion extends GenericVoque> = Extract<
@@ -134,18 +152,27 @@ type SerializeeGepp<TAllVoqueUnion extends GenericVoque> = Extract<
   GenericAbstractSerializableSourceVoque
 >['gepp'];
 
+type AllVoqueUnion<
+  TExplicitVoictentTupleVoqueUnion extends GenericVoque,
+  TEstinantTupleVoqueUnion extends GenericVoque,
+> = TExplicitVoictentTupleVoqueUnion | TEstinantTupleVoqueUnion;
+
+type ImplicitVoqueUnion<
+  TRequiredVoqueUnion extends GenericVoque,
+  TExplicitVoqueUnion extends GenericVoque,
+> = Exclude<TRequiredVoqueUnion, TExplicitVoqueUnion>;
+
 type DigikikifierInputFromAllComputedUnions<
   TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
-  TExplicitVoictentTupleVoqueUnion extends GenericVoque,
-  TEstinantTupleVoqueUnion extends GenericVoque,
   TAllVoqueUnion extends GenericVoque,
+  TImplicitVoqueUnion extends GenericVoque,
 > = {
   explicitVoictentTuple: TExplicitVoictentTuple;
-  uninferableVoictentByGepp: UninferableVoictentByGepp<
-    TExplicitVoictentTupleVoqueUnion,
-    TEstinantTupleVoqueUnion
+  fileSystemNodeGeppCombination: GeppCombinationFromVoqueUnion<
+    InferableVoqueUnion<TImplicitVoqueUnion, GenericFileSystemNodeVoque>
   >;
+  uninferableVoictentByGepp: UninferableVoictentByGepp<TImplicitVoqueUnion>;
   errorGepp?: ErrorGepp<TAllVoqueUnion>;
   estinantTuple: TEstinantTuple;
   serializeeGeppList?: SerializeeGepp<TAllVoqueUnion>[];
@@ -161,9 +188,8 @@ type DigikikifierInputFromPreliminaryComputedUnions<
 > = DigikikifierInputFromAllComputedUnions<
   TExplicitVoictentTuple,
   TEstinantTuple,
-  TExplicitVoictentTupleVoqueUnion,
-  TEstinantTupleVoqueUnion,
-  TExplicitVoictentTupleVoqueUnion | TEstinantTupleVoqueUnion
+  AllVoqueUnion<TExplicitVoictentTupleVoqueUnion, TEstinantTupleVoqueUnion>,
+  ImplicitVoqueUnion<TEstinantTupleVoqueUnion, TExplicitVoictentTupleVoqueUnion>
 >;
 
 type DigikikifierInput<
@@ -246,7 +272,21 @@ const getEstinantTupleGeppSet = (
   return result;
 };
 
-const getInferredVoictentTuple = (
+const getInferredFileSystemNodeVoictentTuple = (
+  fileSystemNodeGeppCombination: GenericGeppCombination,
+): GenericVoictent2Tuple => {
+  const geppList = Object.keys(fileSystemNodeGeppCombination);
+  const voictentList = geppList.map((gepp) => {
+    return new FileSystemNodeVoictent({
+      gepp,
+      initialHubblepupPelueTuple: [],
+    });
+  });
+
+  return voictentList;
+};
+
+const getInferredInMemoryVoictentTuple = (
   voictentTuple: GenericVoictent2Tuple,
   estinantTuple: GenericEstinant2Tuple,
 ): GenericVoictent2Tuple => {
@@ -258,7 +298,7 @@ const getInferredVoictentTuple = (
   );
 
   const inferredVoictentTuple = missingGeppList.map((gepp) => {
-    return new InMemoryOdeshin2Voictent({
+    return new InMemoryOdeshin2ListVoictent({
       gepp,
       initialHubblepupPelueTuple: [],
     });
@@ -272,6 +312,7 @@ export const digikikify: Digikikifier = <
   TEstinantTuple extends UnsafeEstinant2Tuple,
 >({
   explicitVoictentTuple: specificExplicitVoictentTuple,
+  fileSystemNodeGeppCombination: specificFileSystemNodeGeppCombination,
   uninferableVoictentByGepp: specificUninferableVoictentByGepp,
   errorGepp,
   estinantTuple: specificEstinantTuple,
@@ -293,10 +334,23 @@ export const digikikify: Digikikifier = <
     programFileCache,
   );
 
+  const genericFileSystemNodeGeppCombination =
+    specificFileSystemNodeGeppCombination as GenericGeppCombination;
+
+  const inferredFileSystemNodeVoictentTuple =
+    getInferredFileSystemNodeVoictentTuple(
+      genericFileSystemNodeGeppCombination,
+    );
+
   const estinantTuple = specificEstinantTuple as GenericEstinant2Tuple;
 
-  const inferredVoictentTuple = getInferredVoictentTuple(
-    explicitVoictentTuple,
+  const instantiatedVoictentTuple = [
+    ...explicitVoictentTuple,
+    ...inferredFileSystemNodeVoictentTuple,
+  ];
+
+  const inferredVoictentTuple = getInferredInMemoryVoictentTuple(
+    instantiatedVoictentTuple,
     estinantTuple,
   );
 
@@ -307,16 +361,17 @@ export const digikikify: Digikikifier = <
     serializeeGeppList,
   );
 
-  const inputVoictentList = [
+  const inputVoictentTuple: GenericVoictent2[] = [
     ...explicitVoictentTuple,
     serializableVoictent,
+    ...inferredFileSystemNodeVoictentTuple,
     ...inferredVoictentTuple,
   ];
 
   const inputEstinantTuple = [...estinantTuple, ...serializerEstinantTuple];
 
   coreDigikikify({
-    inputVoictentList,
+    inputVoictentList: inputVoictentTuple,
     errorGepp,
     estinantTuple: inputEstinantTuple,
     onFinish: (statistics) => {
@@ -358,4 +413,25 @@ export const buildVoictentByGepp = <
   ) as VoictentByGeppFromVoictentTuple<TVoictentTuple>;
 
   return result;
+};
+
+type GeppCombinationFromGeppUnion<TGeppUnion extends Gepp> = Simplify<
+  UnionToIntersection<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    TGeppUnion extends any ? { [TGepp in TGeppUnion]: null } : never
+  >
+>;
+
+export const buildGeppCombination = <TGeppTuple extends GeppTuple>(
+  geppTuple: TGeppTuple,
+): GeppCombinationFromGeppUnion<TGeppTuple[number]> => {
+  const entryList = geppTuple.map((gepp) => {
+    return [gepp, null] as const;
+  });
+
+  const guranteedGeppSet = Object.fromEntries(
+    entryList,
+  ) as GeppCombinationFromGeppUnion<TGeppTuple[number]>;
+
+  return guranteedGeppSet;
 };
