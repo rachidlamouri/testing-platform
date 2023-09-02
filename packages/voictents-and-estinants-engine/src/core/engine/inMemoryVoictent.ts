@@ -8,6 +8,10 @@ import { GenericInMemoryVoque } from './inMemoryVoque';
 export class InMemoryVoictent<
   TVoque extends GenericInMemoryVoque,
 > extends AbstractInMemoryVoictent<GenericInMemoryVoque, TVoque> {
+  protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
+    return this.hubblepupPelieTuple;
+  }
+
   protected dereferenceHubblepupPelie(
     lanbe: HubblepupPelieLanbe2<GenericInMemoryVoque, TVoque>,
   ): TVoque['indexedHubblepupPelie'] {

@@ -115,7 +115,7 @@ export abstract class AbstractInMemoryVoictent<
       dereference: () => {
         return {
           typeName: ReferenceTypeName.VoictentPelie,
-          value: [...this.hubblepupPelieTuple],
+          value: this.dereferenceVoictentPelie(),
         };
       },
     };
@@ -183,6 +183,8 @@ export abstract class AbstractInMemoryVoictent<
       this.indicesByLanbe.set(lanbe, currentIndex + 1);
     }
   }
+
+  protected abstract dereferenceVoictentPelie(): TVoque['voictentPelie'];
 
   protected abstract dereferenceHubblepupPelie(
     lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque>,

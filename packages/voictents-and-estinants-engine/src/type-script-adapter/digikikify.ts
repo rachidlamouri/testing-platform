@@ -25,7 +25,7 @@ import {
 import { Gepp } from '../core/engine-shell/voictent/gepp';
 import {
   GenericInMemoryOdeshin2Voque,
-  InMemoryOdeshin2Voictent,
+  InMemoryOdeshin2ListVoictent,
 } from '../core/engine/inMemoryOdeshinVoictent2';
 import {
   GenericVoictent2,
@@ -258,7 +258,7 @@ const getInferredVoictentTuple = (
   );
 
   const inferredVoictentTuple = missingGeppList.map((gepp) => {
-    return new InMemoryOdeshin2Voictent({
+    return new InMemoryOdeshin2ListVoictent({
       gepp,
       initialHubblepupPelueTuple: [],
     });

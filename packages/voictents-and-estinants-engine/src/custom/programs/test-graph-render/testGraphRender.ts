@@ -21,7 +21,7 @@ import {
   DirectedGraphMetadataByIdVoque,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import { InMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
@@ -46,7 +46,7 @@ digikikify({
         },
       ],
     }),
-    new InMemoryOdeshin2Voictent<DirectedGraphVoque>({
+    new InMemoryOdeshin2ListVoictent<DirectedGraphVoque>({
       gepp: DIRECTED_GRAPH_GEPP,
       initialHubblepupPelueTuple: [
         {
@@ -125,7 +125,7 @@ digikikify({
         },
       ],
     }),
-    new InMemoryOdeshin2Voictent<DirectedGraphMetadataByIdVoque>({
+    new InMemoryOdeshin2ListVoictent<DirectedGraphMetadataByIdVoque>({
       gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
       initialHubblepupPelueTuple: [
         {

@@ -42,7 +42,7 @@ const getHumanReadableZorn = (odeshin: GenericOdeshin2): string => {
   return result;
 };
 
-export class InMemoryOdeshin2Voictent<
+abstract class BaseInMemoryOdeshin2Voictent<
   TVoque extends GenericInMemoryOdeshin2Voque,
 > extends AbstractInMemoryVoictent<GenericInMemoryOdeshin2Voque, TVoque> {
   private hubblepupPelueByZorn = new Map<string, TVoque['hubblepupPelue']>();
@@ -86,5 +86,15 @@ export class InMemoryOdeshin2Voictent<
         zorn: odeshin.zorn,
       },
     };
+  }
+}
+
+type InMemoryOdeshin2ListVoque = InMemoryOdeshin2Voque<Gepp, GenericOdeshin2>;
+
+export class InMemoryOdeshin2ListVoictent<
+  TVoque extends InMemoryOdeshin2ListVoque,
+> extends BaseInMemoryOdeshin2Voictent<TVoque> {
+  protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
+    return this.hubblepupPelieTuple;
   }
 }
