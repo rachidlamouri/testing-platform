@@ -6,7 +6,6 @@ import {
 import { splitList } from '../../../utilities/splitList';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { Directory, DIRECTORY_GEPP, DirectoryVoque } from './directory';
-import { FILE_GEPP, File, FileVoque } from './file';
 import { getFileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -14,7 +13,7 @@ import {
 } from './fileSystemObjectEnumeratorConfiguration';
 import { getFileMetadata } from './getFileMetadata';
 import { getTextDigest } from '../../../utilities/getTextDigest';
-import { FILE_2_GEPP, File2, File2Instance, File2Voque } from './file2';
+import { FILE_2_GEPP, File2, File2Instance, File2Voque } from './file';
 
 const partsToCamel = (x: string[]): string => {
   return x
@@ -62,9 +61,6 @@ export const enumerateFileSystemObjects = buildEstinant({
   .toHubblepupTuple2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .toHubblepupTuple2<FileVoque>({
-    gepp: FILE_GEPP,
-  })
   .toHubblepupTuple2<File2Voque>({
     gepp: FILE_2_GEPP,
   })
@@ -101,7 +97,7 @@ export const enumerateFileSystemObjects = buildEstinant({
       },
     );
 
-    const allFileTuple = fileMetadataList.map<{ file1: File; file2: File2 }>(
+    const unorderedFileTuple = fileMetadataList.map<File2>(
       ({ nodePath, directoryPath }) => {
         const {
           onDiskFileName,
@@ -110,31 +106,6 @@ export const enumerateFileSystemObjects = buildEstinant({
           extensionSuffix,
           extensionParts,
         } = getFileMetadata(nodePath);
-
-        const file1: File = {
-          zorn: nodePath,
-          instanceId: getTextDigest(nodePath),
-          filePath: nodePath,
-          directoryPath,
-          onDiskFileName: {
-            camelCase: partsToCamel(onDiskFileNameParts),
-            pascalCase: partsToPascal(onDiskFileNameParts),
-            screamingSnakeCase: partsToScreamingSnake(onDiskFileNameParts),
-            kebabCase: partsToKebabCase(onDiskFileNameParts),
-          },
-          inMemoryFileName: {
-            camelCase: partsToCamel(inMemoryFileNameParts),
-            pascalCase: partsToPascal(inMemoryFileNameParts),
-            screamingSnakeCase: partsToScreamingSnake(inMemoryFileNameParts),
-            kebabCase: partsToKebabCase(inMemoryFileNameParts),
-          },
-          extension: {
-            parts: extensionParts,
-            suffix: extensionSuffix,
-            suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
-          },
-          additionalMetadata: null,
-        };
 
         const file2 = new File2Instance({
           instanceId: getTextDigest(nodePath),
@@ -162,12 +133,12 @@ export const enumerateFileSystemObjects = buildEstinant({
           additionalMetadata: null,
         });
 
-        return { file1, file2 };
+        return file2;
       },
     );
 
     // Reorders the files by suffix identifier so they are easier to see in a serialized collection
-    const reorderByFileSuffixForDebugability = <TFile extends File | File2>(
+    const reorderByFileSuffixForDebugability = <TFile extends File2>(
       fileList: TFile[],
     ): TFile[] => {
       const fileBySuffixIdentifier = new Map<string, TFile[]>();
@@ -183,17 +154,12 @@ export const enumerateFileSystemObjects = buildEstinant({
       return result;
     };
 
-    const outputFileTuple1 = reorderByFileSuffixForDebugability(
-      allFileTuple.map(({ file1 }) => file1),
-    );
-    const outputFileTuple2 = reorderByFileSuffixForDebugability(
-      allFileTuple.map(({ file2 }) => file2),
-    );
+    const orderedFileTuple =
+      reorderByFileSuffixForDebugability(unorderedFileTuple);
 
     return {
       [DIRECTORY_GEPP]: directoryOutputTuple,
-      [FILE_GEPP]: outputFileTuple1,
-      [FILE_2_GEPP]: outputFileTuple2,
+      [FILE_2_GEPP]: orderedFileTuple,
     };
   })
   .assemble();

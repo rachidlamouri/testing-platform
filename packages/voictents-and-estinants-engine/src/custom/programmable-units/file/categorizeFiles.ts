@@ -8,7 +8,7 @@ import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import { HtmlFile, HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { BASH_FILE_GEPP, BashFile, BashFileVoque } from '../bash-file/bashFile';
-import { FILE_2_GEPP, File2Voque } from './file2';
+import { FILE_2_GEPP, File2Voque } from './file';
 
 /**
  * Places a file into zero or more collections without modifying the file. Uses

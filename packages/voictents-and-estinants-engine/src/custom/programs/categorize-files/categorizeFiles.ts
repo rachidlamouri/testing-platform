@@ -15,7 +15,7 @@ import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
-import { FILE_2_GEPP } from '../../programmable-units/file/file2';
+import { FILE_2_GEPP } from '../../programmable-units/file/file';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 

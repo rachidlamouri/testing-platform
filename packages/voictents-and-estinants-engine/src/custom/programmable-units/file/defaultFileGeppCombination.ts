@@ -8,7 +8,7 @@ import { BASH_FILE_GEPP } from '../bash-file/bashFile';
 import { HTML_FILE_GEPP } from '../html-file/htmlFile';
 import { YAML_FILE_GEPP } from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
-import { FILE_2_GEPP } from './file2';
+import { FILE_2_GEPP } from './file';
 import { TYPE_SCRIPT_FILE_GEPP } from '../type-script-file/typeScriptFile';
 
 type FileExtensionSuffixIdentifierOfInterest =

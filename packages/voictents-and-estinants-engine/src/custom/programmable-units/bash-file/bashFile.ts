@@ -1,4 +1,4 @@
-import { File2 } from '../file/file2';
+import { File2 } from '../file/file';
 import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
 import { FileSystemNodeVoque } from '../file/fileSystemNodeVoictent';
 
