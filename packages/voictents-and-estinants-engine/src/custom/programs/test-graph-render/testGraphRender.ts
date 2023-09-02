@@ -2,7 +2,7 @@ import {
   buildVoictentByGepp,
   digikikify,
 } from '../../../type-script-adapter/digikikify';
-import { categorizeFiles2 } from '../../programmable-units/file/categorizeFiles';
+import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -190,7 +190,7 @@ digikikify({
   ] as const),
   estinantTuple: [
     enumerateFileSystemObjects,
-    categorizeFiles2,
+    categorizeFiles,
 
     encodeDirectedGraphAsGraphvizCode,
     renderGraphvizCodeToSvgDocument,

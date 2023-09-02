@@ -5,7 +5,7 @@ import {
 } from '../../../type-script-adapter/digikikify';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
-import { categorizeFiles2 } from '../../programmable-units/file/categorizeFiles';
+import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -41,7 +41,7 @@ digikikify({
   ] as const),
   estinantTuple: [
     enumerateFileSystemObjects,
-    categorizeFiles2,
+    categorizeFiles,
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,

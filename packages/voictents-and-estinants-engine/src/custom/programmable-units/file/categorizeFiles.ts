@@ -14,8 +14,8 @@ import { FILE_2_GEPP, File2Voque } from './file2';
  * Places a file into zero or more collections without modifying the file. Uses
  * the object pattern with shareable getters
  */
-export const categorizeFiles2 = buildEstinant({
-  name: 'categorizeFiles2',
+export const categorizeFiles = buildEstinant({
+  name: 'categorizeFiles',
 })
   .fromHubblepup2<File2Voque>({
     gepp: FILE_2_GEPP,
