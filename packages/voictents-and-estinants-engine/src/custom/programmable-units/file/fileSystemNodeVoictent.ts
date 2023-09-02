@@ -24,9 +24,9 @@ type FileSystemNodeIndexByName = SpreadN<
 >;
 
 type FileVoictentPelie<THubblepupPelie> = {
-  fileByZorn: Map<string, THubblepupPelie>;
-  fileByFilePath: Map<string, THubblepupPelie>;
-  fileList: THubblepupPelie[];
+  byZorn: Map<string, THubblepupPelie>;
+  byNodePath: Map<string, THubblepupPelie>;
+  list: THubblepupPelie[];
 };
 
 export type FileSystemNodeVoque<
@@ -49,15 +49,15 @@ export class FileSystemNodeVoictent<
   TVoque extends GenericFileSystemNodeVoque,
 > extends BaseInMemoryOdeshin2Voictent<GenericFileSystemNodeVoque, TVoque> {
   private voictentPelie: TVoque['voictentPelie'] = {
-    fileByZorn: new Map(),
-    fileByFilePath: new Map(),
-    fileList: [],
+    byZorn: new Map(),
+    byNodePath: new Map(),
+    list: [],
   };
 
   addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
-    this.voictentPelie.fileByZorn.set(hubblepup.zorn.forHuman, hubblepup);
-    this.voictentPelie.fileByFilePath.set(hubblepup.nodePath, hubblepup);
-    this.voictentPelie.fileList.push(hubblepup);
+    this.voictentPelie.byZorn.set(hubblepup.zorn.forHuman, hubblepup);
+    this.voictentPelie.byNodePath.set(hubblepup.nodePath, hubblepup);
+    this.voictentPelie.list.push(hubblepup);
 
     super.addHubblepup(hubblepup);
   }

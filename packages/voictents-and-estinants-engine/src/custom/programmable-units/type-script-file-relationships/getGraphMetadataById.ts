@@ -109,7 +109,7 @@ export const getGraphMetadataById = buildEstinant({
         }
       });
 
-      directoryVoictent.fileList.forEach((directory) => {
+      directoryVoictent.list.forEach((directory) => {
         metadataById.grition[directory.instanceId] = {
           title: posix.basename(directory.directoryPath),
           fieldList: [
@@ -132,7 +132,7 @@ export const getGraphMetadataById = buildEstinant({
         };
       });
 
-      typeScriptFileVoictent.fileList.forEach((file) => {
+      typeScriptFileVoictent.list.forEach((file) => {
         metadataById.grition[file.instanceId] = {
           title: file.onDiskFileName.camelCase,
           fieldList: [

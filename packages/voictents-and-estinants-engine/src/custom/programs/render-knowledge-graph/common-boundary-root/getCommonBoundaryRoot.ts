@@ -27,14 +27,10 @@ export const getCommonBoundaryRoot = buildEstinant({
     gepp: COMMON_BOUNDARY_ROOT_GEPP,
   })
   .onPinbe((boundaryList, directoryVoictent) => {
-    const directoryByPath = new Map(
-      directoryVoictent.fileList.map((directory) => {
-        return [directory.directoryPath, directory] as const;
-      }),
-    );
-
     const boundaryDirectoryList = boundaryList.map((boundary) => {
-      const directory = directoryByPath.get(boundary.directoryPath);
+      const directory = directoryVoictent.byNodePath.get(
+        boundary.directoryPath,
+      );
       if (directory === undefined) {
         throw Error(
           'Unexpected undefined directory: All boundary directories come from the directory collection',

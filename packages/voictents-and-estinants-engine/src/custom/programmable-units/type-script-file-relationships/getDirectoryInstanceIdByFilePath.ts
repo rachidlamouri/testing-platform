@@ -24,7 +24,7 @@ export const getDirectoryInstanceIdByDirectoryPath = buildEstinant({
   .onPinbe((directoryVoictent) => {
     const directoryInstanceIdByDirectoryPath: DirectoryInstanceIdByDirectoryPath['grition'] =
       new Map();
-    directoryVoictent.fileList.forEach((directory) => {
+    directoryVoictent.list.forEach((directory) => {
       directoryInstanceIdByDirectoryPath.set(
         directory.directoryPath,
         directory.instanceId,

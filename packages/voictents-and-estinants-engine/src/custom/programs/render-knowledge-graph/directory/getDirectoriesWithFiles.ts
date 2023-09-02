@@ -29,7 +29,7 @@ export const getDirectoriesWithFiles = buildEstinant({
   })
   .onPinbe((directoryVoictent, typeScriptFileVoictent) => {
     const mutableDirectoryStateByDirectoryPath = new Map(
-      directoryVoictent.fileList.map((directory) => {
+      directoryVoictent.list.map((directory) => {
         const mutableState = {
           directory,
           hasFile: false,
@@ -39,7 +39,7 @@ export const getDirectoriesWithFiles = buildEstinant({
       }),
     );
 
-    typeScriptFileVoictent.fileList.forEach((typeScriptFile) => {
+    typeScriptFileVoictent.list.forEach((typeScriptFile) => {
       const directoryState = mutableDirectoryStateByDirectoryPath.get(
         typeScriptFile.directoryPath,
       );

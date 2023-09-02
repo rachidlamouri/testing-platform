@@ -16,9 +16,9 @@ export const getRootDirectory = buildEstinant({
     gepp: ROOT_DIRECTORY_GEPP,
   })
   .onPinbe((directoryVoictent) => {
-    let rootDirectory = directoryVoictent.fileList[0];
+    let rootDirectory = directoryVoictent.list[0];
 
-    directoryVoictent.fileList.forEach((directory) => {
+    directoryVoictent.list.forEach((directory) => {
       if (
         directory.directoryPathPartList.length <
         rootDirectory.directoryPathPartList.length
