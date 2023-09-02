@@ -27,7 +27,7 @@ export const getDirectoriesWithFiles = buildEstinant({
   .toHubblepupTuple2<DirectoryWithFileVoque>({
     gepp: DIRECTORY_WITH_FILE_GEPP,
   })
-  .onPinbe((directoryList, typeScriptFileList) => {
+  .onPinbe((directoryList, typeScriptFileVoictent) => {
     const mutableDirectoryStateByDirectoryPath = new Map(
       directoryList.map((directory) => {
         const mutableState = {
@@ -39,7 +39,7 @@ export const getDirectoriesWithFiles = buildEstinant({
       }),
     );
 
-    typeScriptFileList.forEach((typeScriptFile) => {
+    typeScriptFileVoictent.fileList.forEach((typeScriptFile) => {
       const directoryState = mutableDirectoryStateByDirectoryPath.get(
         typeScriptFile.directoryPath,
       );

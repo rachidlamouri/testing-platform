@@ -62,7 +62,7 @@ export const getGraphMetadataById = buildEstinant({
       [rootDirectory],
       boundaryList,
       directoryList,
-      typeScriptFileList,
+      typeScriptFileVoictent,
       externalModuleList,
     ) => {
       const metadataById: DirectedGraphMetadataById = {
@@ -132,7 +132,7 @@ export const getGraphMetadataById = buildEstinant({
         };
       });
 
-      typeScriptFileList.forEach((file) => {
+      typeScriptFileVoictent.fileList.forEach((file) => {
         metadataById.grition[file.instanceId] = {
           title: file.onDiskFileName.camelCase,
           fieldList: [
