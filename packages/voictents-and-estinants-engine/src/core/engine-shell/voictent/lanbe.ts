@@ -7,15 +7,15 @@ import {
 import { GenericVoque, Voque } from '../../engine/voque';
 
 export enum LanbeTypeName {
-  VoictentLanbe = 'VoictentLanbe',
-  VoictentItemLanbe = 'VoictentItemLanbe',
-  VoictentItemLanbe2 = 'VoictentItemLanbe2',
+  VoictentPelieLanbe = 'VoictentPelieLanbe',
+  HubblepupPelieLanbe = 'HubblepupPelieLanbe',
+  HubblepupPelieLanbe2 = 'HubblepupPelieLanbe2',
 }
 
 export enum ReferenceTypeName {
-  Voictent = 'Voictent',
-  VoictentItem = 'VoictentItem',
-  IndexedVoictentItem = 'IndexedVoictentItem',
+  VoictentPelie = 'Voictent',
+  HubblepupPelie = 'VoictentItem',
+  IndexedHubblepupPelie = 'IndexedVoictentItem',
 }
 
 type BaseLanbe<
@@ -34,28 +34,28 @@ type BaseLanbe<
   };
 };
 
-export type VoictentLanbe = Simplify<
+export type VoictentPelieLanbe = Simplify<
   BaseLanbe<
-    LanbeTypeName.VoictentLanbe,
-    ReferenceTypeName.Voictent,
+    LanbeTypeName.VoictentPelieLanbe,
+    ReferenceTypeName.VoictentPelie,
     HubblepupTuple
   > & {
     isAccumulating: () => boolean;
   }
 >;
 
-export type VoictentItemLanbe = BaseLanbe<
-  LanbeTypeName.VoictentItemLanbe,
-  ReferenceTypeName.VoictentItem,
+export type HubblepupPelieLanbe = BaseLanbe<
+  LanbeTypeName.HubblepupPelieLanbe,
+  ReferenceTypeName.HubblepupPelie,
   Hubblepup
 >;
 
-export type VoictentItemLanbe2<
+export type HubblepupPelieLanbe2<
   TRestrictingVoque extends GenericVoque,
   TVoque extends TRestrictingVoque,
 > = BaseLanbe<
-  LanbeTypeName.VoictentItemLanbe2,
-  ReferenceTypeName.IndexedVoictentItem,
+  LanbeTypeName.HubblepupPelieLanbe2,
+  ReferenceTypeName.IndexedHubblepupPelie,
   Voque<
     TVoque['gepp'],
     TVoque['hubblepupPelue'],
@@ -65,7 +65,7 @@ export type VoictentItemLanbe2<
   >['indexedHubblepupPelie']
 >;
 
-export type GenericVoictentItemLanbe2 = VoictentItemLanbe2<
+export type GenericVoictentItemLanbe2 = HubblepupPelieLanbe2<
   GenericVoque,
   GenericVoque
 >;
@@ -76,6 +76,6 @@ export type GenericVoictentItemLanbe2 = VoictentItemLanbe2<
  * This allows an external entity to read a Voictent without needing a direct reference to it.
  */
 export type Lanbe =
-  | VoictentLanbe
-  | VoictentItemLanbe
+  | VoictentPelieLanbe
+  | HubblepupPelieLanbe
   | GenericVoictentItemLanbe2;

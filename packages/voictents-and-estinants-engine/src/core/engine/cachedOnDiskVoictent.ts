@@ -7,8 +7,8 @@ import { Voictent2 } from './voictent2';
 import {
   LanbeTypeName,
   ReferenceTypeName,
-  VoictentItemLanbe2,
-  VoictentLanbe,
+  HubblepupPelieLanbe2,
+  VoictentPelieLanbe,
 } from '../engine-shell/voictent/lanbe';
 import { Json, jsonUtils } from '../../utilities/json';
 import {
@@ -74,7 +74,7 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
   hubblepupTuple: TVoque['voictentPelie'] = [];
 
   indicesByLanbe: Map<
-    VoictentItemLanbe2<GenericCachedOnDiskVoque, TVoque>,
+    HubblepupPelieLanbe2<GenericCachedOnDiskVoque, TVoque>,
     number
   > = new Map();
 
@@ -159,9 +159,9 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
     return this.hubblepupPelue.twoTicksAgo && !this.hubblepupPelue.oneTickAgo;
   }
 
-  createVoictentLanbe(debugName: string): VoictentLanbe {
-    const lanbe: VoictentLanbe = {
-      typeName: LanbeTypeName.VoictentLanbe,
+  createVoictentLanbe(debugName: string): VoictentPelieLanbe {
+    const lanbe: VoictentPelieLanbe = {
+      typeName: LanbeTypeName.VoictentPelieLanbe,
       debugName,
       hasNext: () => {
         return this.didStopAccumulating;
@@ -176,7 +176,7 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
       advance: () => {},
       dereference: () => {
         return {
-          typeName: ReferenceTypeName.Voictent,
+          typeName: ReferenceTypeName.VoictentPelie,
           value: [...this.hubblepupTuple],
         };
       },
@@ -187,9 +187,9 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
 
   createVoictentItemLanbe(
     debugName: string,
-  ): VoictentItemLanbe2<GenericCachedOnDiskVoque, TVoque> {
-    const lanbe: VoictentItemLanbe2<GenericCachedOnDiskVoque, TVoque> = {
-      typeName: LanbeTypeName.VoictentItemLanbe2,
+  ): HubblepupPelieLanbe2<GenericCachedOnDiskVoque, TVoque> {
+    const lanbe: HubblepupPelieLanbe2<GenericCachedOnDiskVoque, TVoque> = {
+      typeName: LanbeTypeName.HubblepupPelieLanbe2,
       debugName,
       hasNext: () => {
         return this.hasNext(lanbe);
@@ -201,7 +201,7 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
         const value = this.dereference(lanbe);
 
         return {
-          typeName: ReferenceTypeName.IndexedVoictentItem,
+          typeName: ReferenceTypeName.IndexedHubblepupPelie,
           value,
         };
       },
@@ -212,7 +212,7 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
   }
 
   private getLanbeIndex(
-    lanbe: VoictentItemLanbe2<GenericCachedOnDiskVoque, TVoque>,
+    lanbe: HubblepupPelieLanbe2<GenericCachedOnDiskVoque, TVoque>,
   ): number {
     const index = this.indicesByLanbe.get(lanbe);
 
@@ -228,14 +228,14 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
   }
 
   private hasNext(
-    lanbe: VoictentItemLanbe2<GenericCachedOnDiskVoque, TVoque>,
+    lanbe: HubblepupPelieLanbe2<GenericCachedOnDiskVoque, TVoque>,
   ): boolean {
     const currentIndex = this.getLanbeIndex(lanbe);
     return this.size > 0 && currentIndex < this.maximumInclusiveIndex;
   }
 
   private advance(
-    lanbe: VoictentItemLanbe2<GenericCachedOnDiskVoque, TVoque>,
+    lanbe: HubblepupPelieLanbe2<GenericCachedOnDiskVoque, TVoque>,
   ): void {
     if (this.hasNext(lanbe)) {
       const currentIndex = this.getLanbeIndex(lanbe);
@@ -244,7 +244,7 @@ export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
   }
 
   private dereference(
-    lanbe: VoictentItemLanbe2<GenericCachedOnDiskVoque, TVoque>,
+    lanbe: HubblepupPelieLanbe2<GenericCachedOnDiskVoque, TVoque>,
   ): TVoque['indexedHubblepupPelie'] {
     const listIndex = this.getLanbeIndex(lanbe);
 

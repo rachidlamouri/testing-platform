@@ -1,8 +1,8 @@
 import { Tuple } from '../../utilities/semantic-types/tuple';
 import {
-  VoictentItemLanbe,
-  VoictentItemLanbe2,
-  VoictentLanbe,
+  HubblepupPelieLanbe,
+  HubblepupPelieLanbe2,
+  VoictentPelieLanbe,
 } from '../engine-shell/voictent/lanbe';
 import { GenericVoque, UnsafeVoque } from './voque';
 
@@ -11,10 +11,13 @@ export type Voictent2<
   TVoque extends TRestrictingVoque,
 > = {
   get gepp(): TVoque['gepp'];
-  createVoictentLanbe(debugName: string): VoictentLanbe | null;
+  createVoictentLanbe(debugName: string): VoictentPelieLanbe | null;
   createVoictentItemLanbe(
     debugName: string,
-  ): VoictentItemLanbe2<TRestrictingVoque, TVoque> | VoictentItemLanbe | null;
+  ):
+    | HubblepupPelieLanbe2<TRestrictingVoque, TVoque>
+    | HubblepupPelieLanbe
+    | null;
   onTickStart(): void;
   initialize(): void;
   get isEmpty(): boolean;

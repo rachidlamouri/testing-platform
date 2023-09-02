@@ -1,15 +1,15 @@
 import {
   LanbeTypeName,
   ReferenceTypeName,
-  VoictentItemLanbe,
-  VoictentLanbe,
+  HubblepupPelieLanbe,
+  VoictentPelieLanbe,
 } from '../engine-shell/voictent/lanbe';
 import { Hubblepup } from '../engine-shell/quirm/hubblepup';
 import { Gepp } from '../engine-shell/voictent/gepp';
 import { GenericVoictent2 } from './voictent2';
 
 class MissingLanbeError extends Error {
-  constructor(lanbe: VoictentItemLanbe) {
+  constructor(lanbe: HubblepupPelieLanbe) {
     super(`Lanbe "${lanbe.debugName}" does not exist`);
   }
 }
@@ -29,7 +29,7 @@ type HubblepupPelueState = {
 export class Voictent implements GenericVoictent2 {
   hubblepupTuple: Hubblepup[] = [];
 
-  indicesByLanbe: Map<VoictentItemLanbe, number> = new Map();
+  indicesByLanbe: Map<HubblepupPelieLanbe, number> = new Map();
 
   static minimumInclusiveIndex = -1;
 
@@ -72,9 +72,9 @@ export class Voictent implements GenericVoictent2 {
     return this.hubblepupPelue.twoTicksAgo && !this.hubblepupPelue.oneTickAgo;
   }
 
-  createVoictentLanbe(debugName: string): VoictentLanbe {
-    const lanbe: VoictentLanbe = {
-      typeName: LanbeTypeName.VoictentLanbe,
+  createVoictentLanbe(debugName: string): VoictentPelieLanbe {
+    const lanbe: VoictentPelieLanbe = {
+      typeName: LanbeTypeName.VoictentPelieLanbe,
       debugName,
       hasNext: () => {
         return this.didStopAccumulating;
@@ -89,7 +89,7 @@ export class Voictent implements GenericVoictent2 {
       advance: () => {},
       dereference: () => {
         return {
-          typeName: ReferenceTypeName.Voictent,
+          typeName: ReferenceTypeName.VoictentPelie,
           value: [...this.hubblepupTuple],
         };
       },
@@ -98,9 +98,9 @@ export class Voictent implements GenericVoictent2 {
     return lanbe;
   }
 
-  createVoictentItemLanbe(debugName: string): VoictentItemLanbe {
-    const lanbe: VoictentItemLanbe = {
-      typeName: LanbeTypeName.VoictentItemLanbe,
+  createVoictentItemLanbe(debugName: string): HubblepupPelieLanbe {
+    const lanbe: HubblepupPelieLanbe = {
+      typeName: LanbeTypeName.HubblepupPelieLanbe,
       debugName,
       hasNext: () => {
         return this.hasNext(lanbe);
@@ -112,7 +112,7 @@ export class Voictent implements GenericVoictent2 {
         const value = this.dereference(lanbe);
 
         return {
-          typeName: ReferenceTypeName.VoictentItem,
+          typeName: ReferenceTypeName.HubblepupPelie,
           value,
         };
       },
@@ -122,7 +122,7 @@ export class Voictent implements GenericVoictent2 {
     return lanbe;
   }
 
-  private getLanbeIndex(lanbe: VoictentItemLanbe): number {
+  private getLanbeIndex(lanbe: HubblepupPelieLanbe): number {
     const index = this.indicesByLanbe.get(lanbe);
 
     if (index === undefined) {
@@ -136,19 +136,19 @@ export class Voictent implements GenericVoictent2 {
     return this.hubblepupTuple.length;
   }
 
-  private hasNext(lanbe: VoictentItemLanbe): boolean {
+  private hasNext(lanbe: HubblepupPelieLanbe): boolean {
     const currentIndex = this.getLanbeIndex(lanbe);
     return this.size > 0 && currentIndex < this.maximumInclusiveIndex;
   }
 
-  private advance(lanbe: VoictentItemLanbe): void {
+  private advance(lanbe: HubblepupPelieLanbe): void {
     if (this.hasNext(lanbe)) {
       const currentIndex = this.getLanbeIndex(lanbe);
       this.indicesByLanbe.set(lanbe, currentIndex + 1);
     }
   }
 
-  private dereference(lanbe: VoictentItemLanbe): Hubblepup {
+  private dereference(lanbe: HubblepupPelieLanbe): Hubblepup {
     const currentIndex = this.getLanbeIndex(lanbe);
 
     if (currentIndex === Voictent.minimumInclusiveIndex) {

@@ -71,7 +71,9 @@ export const serializeRuntimeStatistics = (
 
       configuration.connectionList.forEach((connection) => {
         const connectionType =
-          connection.lanbe.typeName === LanbeTypeName.VoictentLanbe ? 'C' : 'I';
+          connection.lanbe.typeName === LanbeTypeName.VoictentPelieLanbe
+            ? 'C'
+            : 'I';
         const serializedSeries = connection.tickSeries.map((value) =>
           value === 1 ? TRIGGER_CHARACTER : IDLE_CHARACTER,
         );

@@ -1,8 +1,8 @@
 import {
   LanbeTypeName,
   ReferenceTypeName,
-  VoictentItemLanbe2,
-  VoictentLanbe,
+  HubblepupPelieLanbe2,
+  VoictentPelieLanbe,
 } from '../../../core/engine-shell/voictent/lanbe';
 import { Voictent2 } from '../../../core/engine/voictent2';
 import { GenericVoque } from '../../../core/engine/voque';
@@ -62,9 +62,9 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
     index: number,
   ): void;
 
-  createVoictentLanbe(debugName: string): VoictentLanbe | null {
-    const lanbe: VoictentLanbe = {
-      typeName: LanbeTypeName.VoictentLanbe,
+  createVoictentLanbe(debugName: string): VoictentPelieLanbe | null {
+    const lanbe: VoictentPelieLanbe = {
+      typeName: LanbeTypeName.VoictentPelieLanbe,
       debugName,
       hasNext: () => {
         return this.didStopAccumulating;
@@ -75,7 +75,7 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
       advance: () => {},
       dereference: () => {
         return {
-          typeName: ReferenceTypeName.Voictent,
+          typeName: ReferenceTypeName.VoictentPelie,
           value: [...this.datumTuple],
         };
       },
@@ -86,11 +86,11 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
 
   createVoictentItemLanbe(
     debugName: string,
-  ): VoictentItemLanbe2<TRestrictingVoque, TVoque> {
+  ): HubblepupPelieLanbe2<TRestrictingVoque, TVoque> {
     const pointer = this.createPointer(debugName);
 
-    const lanbe: VoictentItemLanbe2<TRestrictingVoque, TVoque> = {
-      typeName: LanbeTypeName.VoictentItemLanbe2,
+    const lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque> = {
+      typeName: LanbeTypeName.HubblepupPelieLanbe2,
       debugName,
       hasNext: () => {
         return pointer.hasNext();
@@ -107,7 +107,7 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
         };
 
         return {
-          typeName: ReferenceTypeName.IndexedVoictentItem,
+          typeName: ReferenceTypeName.IndexedHubblepupPelie,
           value: indexedHubblepup,
         };
       },

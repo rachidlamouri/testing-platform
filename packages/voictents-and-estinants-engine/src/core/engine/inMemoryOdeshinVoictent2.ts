@@ -1,6 +1,6 @@
 import { Gepp } from '../engine-shell/voictent/gepp';
 import { SpreadN } from '../../utilities/spreadN';
-import { VoictentItemLanbe2 } from '../engine-shell/voictent/lanbe';
+import { HubblepupPelieLanbe2 } from '../engine-shell/voictent/lanbe';
 import { GenericOdeshin2 } from '../../custom/adapter/odeshin2';
 import {
   AbstractInMemoryVoictent,
@@ -68,7 +68,7 @@ export class InMemoryOdeshin2Voictent<
   }
 
   protected dereference(
-    lanbe: VoictentItemLanbe2<GenericInMemoryOdeshin2Voque, TVoque>,
+    lanbe: HubblepupPelieLanbe2<GenericInMemoryOdeshin2Voque, TVoque>,
   ): TVoque['indexedHubblepupPelie'] {
     const listIndex = this.getLanbeIndex(lanbe);
 
