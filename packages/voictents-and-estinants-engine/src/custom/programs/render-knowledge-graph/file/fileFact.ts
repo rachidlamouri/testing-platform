@@ -5,6 +5,7 @@ import {
 } from '../../../../utilities/buildConstructorFunction';
 import { getZorn } from '../../../../utilities/getZorn';
 import { getZornableId } from '../../../../utilities/getZornableId';
+import { Tuple } from '../../../../utilities/semantic-types/tuple';
 import {
   GraphConstituentLocator,
   GraphConstituentLocatorInstance,
@@ -12,6 +13,9 @@ import {
 import { LocalDirectedGraphElement2Zorn } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import { TypeScriptFile } from '../../../programmable-units/type-script-file/typeScriptFile';
 import { DirectoryFact } from '../directory/directoryFact';
+
+const BASE_TYPE = x();
+type BaseType = typeof BASE_TYPE;
 
 type BaseFileFact = {
   file: TypeScriptFile;
