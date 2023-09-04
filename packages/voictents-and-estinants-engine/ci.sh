@@ -167,7 +167,7 @@ printf "\n"
 # ## assemble-scaffolded-file
 # echo "# assemble-scaffolded-file"
 # echo "Perfoming test run of "assembleScaffoldedFile""
-# npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file/assembleScaffoldedFile.ts
+# npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/scaffold-file/assembleScaffoldedFile.ts
 # bash checkUncommittedDebug.sh
 # printf "\n"
 

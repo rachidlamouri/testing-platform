@@ -204,7 +204,7 @@ export const CI_MODEL: CiModel = {
         {
           programName: 'assemble-scaffolded-file',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-voictent-file/assembleScaffoldedFile.ts',
+            'packages/voictents-and-estinants-engine/src/custom/programs/scaffold-file/assembleScaffoldedFile.ts',
           prefaceDescription: 'Perfoming test run of "assembleScaffoldedFile"',
           skip: true,
         },
