@@ -129,11 +129,12 @@ export const { DependencyFactInstance } = buildConstructorFunctionWithName(
     return dependencyFact.importedFact.nodeLocator.id;
   },
   importingBoundaryZorn: (dependencyFact) => {
-    return dependencyFact.importingFact.directoryFact.boundaryFact.boundary
-      .zorn;
+    return dependencyFact.importingFact.directoryFact.boundaryFact.boundary.zorn
+      .forHuman;
   },
   importedBoundaryZorn: (dependencyFact) => {
-    return dependencyFact.importedFact.directoryFact.boundaryFact.boundary.zorn;
+    return dependencyFact.importedFact.directoryFact.boundaryFact.boundary.zorn
+      .forHuman;
   },
   isCrossBoundary: (dependencyFact) => {
     return (

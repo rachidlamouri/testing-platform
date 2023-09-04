@@ -1,30 +1,68 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
-  ObjectWithPrototype,
-  buildConstructorFunctionWithName,
-} from '../../../../utilities/buildConstructorFunction';
+  GenericZorn2Template,
+  Zorn2,
+} from '../../../../utilities/semantic-types/zorn';
+import { Simplify } from '../../../../utilities/simplify';
 
-type BaseBoundary = {
-  directoryPath: string;
+const BOUNDARY_ZORN_TEMPLATE = [
+  'normalizedDisplayName',
+] as const satisfies GenericZorn2Template;
+type BoundaryZornTemplate = typeof BOUNDARY_ZORN_TEMPLATE;
+export class BoundaryZorn extends Zorn2<BoundaryZornTemplate> {
+  get rawTemplate(): BoundaryZornTemplate {
+    return BOUNDARY_ZORN_TEMPLATE;
+  }
+}
+
+type BoundaryConstructorInput = {
   displayName: string;
-};
-
-type BoundaryPrototype = {
-  get zorn(): string;
+  directoryPath: string;
 };
 
 /**
  * A group of files and directories in the project with some related concerns, or purpose
  */
-export type Boundary = ObjectWithPrototype<BaseBoundary, BoundaryPrototype>;
+export type Boundary = Simplify<
+  BoundaryConstructorInput,
+  {
+    zorn: BoundaryZorn;
+  }
+>;
 
-export const { BoundaryInstance } = buildConstructorFunctionWithName(
-  'BoundaryInstance',
-)<BaseBoundary, BoundaryPrototype, Boundary>({
-  zorn: (boundary) => {
-    return boundary.displayName.replaceAll(/(:|\s+),'-'/g, '');
-  },
-});
+export const { BoundaryInstance } = buildNamedConstructorFunction({
+  constructorName: 'BoundaryInstance',
+  instancePropertyNameTuple: [
+    // keep this as a multiline list
+    'zorn',
+    'displayName',
+    'directoryPath',
+  ],
+} as const)
+  .withTypes<BoundaryConstructorInput, Boundary>({
+    typeCheckErrorMesssages: {
+      initialization: '',
+      instancePropertyNameTuple: {
+        missingProperties: '',
+        extraneousProperties: '',
+      },
+    },
+    transformInput: (input) => {
+      const { displayName } = input;
+
+      const normalizedDisplayName = displayName.replaceAll(/(:|\s+),'-'/g, '');
+      const zorn = new BoundaryZorn({
+        normalizedDisplayName,
+      });
+
+      return {
+        zorn,
+        ...input,
+      };
+    },
+  })
+  .assemble();
 
 export const BOUNDARY_GEPP = 'boundary';
 

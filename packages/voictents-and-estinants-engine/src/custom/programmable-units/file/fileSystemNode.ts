@@ -12,7 +12,7 @@ const FILE_SYSTEM_NODE_ZORN_TEMPLATE = [
   'nodePath',
 ] as const satisfies GenericZorn2Template;
 type FileSystemNodeZornTemplate = typeof FILE_SYSTEM_NODE_ZORN_TEMPLATE;
-class FileSystemNodeZorn extends Zorn2<FileSystemNodeZornTemplate> {
+export class FileSystemNodeZorn extends Zorn2<FileSystemNodeZornTemplate> {
   get rawTemplate(): FileSystemNodeZornTemplate {
     return FILE_SYSTEM_NODE_ZORN_TEMPLATE;
   }

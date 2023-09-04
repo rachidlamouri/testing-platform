@@ -4,13 +4,12 @@ import { buildNamedConstructorFunction } from '../../../../utilities/constructor
 import {
   GenericZorn2Template,
   Zorn2,
-  ZornTemplateKeyword,
 } from '../../../../utilities/semantic-types/zorn';
 import { Simplify } from '../../../../utilities/simplify';
 import { getZorn } from '../../../../utilities/getZorn';
 import { getZornableId } from '../../../../utilities/getZornableId';
 import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
-import { Boundary } from './boundary';
+import { Boundary, BoundaryZorn } from './boundary';
 import {
   RootGraphLocator,
   RootGraphLocatorInstance,
@@ -18,9 +17,7 @@ import {
 import { FactTypeName } from './factTypeName';
 
 const BOUNDARY_FACT_ZORN_TEMPLATE = [
-  'boundary',
-  // TODO: remove "subtype"
-  ['subtype', ZornTemplateKeyword.LITERAL],
+  ['boundary', BoundaryZorn],
 ] as const satisfies GenericZorn2Template;
 type BoundaryFactZornTemplate = typeof BOUNDARY_FACT_ZORN_TEMPLATE;
 class BoundaryFactZorn extends Zorn2<BoundaryFactZornTemplate> {
@@ -71,7 +68,6 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
 
       const zorn = new BoundaryFactZorn({
         boundary: boundary.zorn,
-        subtype: 'fact',
       });
 
       const rootGraphLocator = new RootGraphLocatorInstance({
