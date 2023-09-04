@@ -1,9 +1,12 @@
 import { posix } from 'path';
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
-  ObjectWithPrototype,
-  buildConstructorFunctionWithName,
-} from '../../../../utilities/buildConstructorFunction';
+  GenericZorn2Template,
+  Zorn2,
+  ZornTemplateKeyword,
+} from '../../../../utilities/semantic-types/zorn';
+import { Simplify } from '../../../../utilities/simplify';
 import { getZorn } from '../../../../utilities/getZorn';
 import { getZornableId } from '../../../../utilities/getZornableId';
 import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
@@ -14,48 +17,85 @@ import {
 } from '../../../programmable-units/graph-visualization/directed-graph/rootGraphLocator';
 import { FactTypeName } from './factTypeName';
 
-type BaseBoundaryFact = {
+const BOUNDARY_FACT_ZORN_TEMPLATE = [
+  'boundary',
+  // TODO: remove "subtype"
+  ['subtype', ZornTemplateKeyword.LITERAL],
+] as const satisfies GenericZorn2Template;
+type BoundaryFactZornTemplate = typeof BOUNDARY_FACT_ZORN_TEMPLATE;
+class BoundaryFactZorn extends Zorn2<BoundaryFactZornTemplate> {
+  get rawTemplate(): BoundaryFactZornTemplate {
+    return BOUNDARY_FACT_ZORN_TEMPLATE;
+  }
+}
+
+type BoundaryFactConstructorInput = {
   boundary: Boundary;
   commonBoundaryRoot: CommonBoundaryRoot;
-};
-
-type BoundaryFactPrototype = {
-  get typeName(): FactTypeName.BoundaryFact;
-  get zorn(): string;
-  get rootGraphLocator(): RootGraphLocator;
-  get directoryPathRelativeToCommonBoundary(): string;
 };
 
 /**
  * Presentation metadata for a boundary. A piece of knowledge.
  */
-export type BoundaryFact = ObjectWithPrototype<
-  BaseBoundaryFact,
-  BoundaryFactPrototype
+export type BoundaryFact = Simplify<
+  Pick<BoundaryFactConstructorInput, 'boundary'>,
+  {
+    zorn: BoundaryFactZorn;
+    typeName: FactTypeName.BoundaryFact;
+    rootGraphLocator: RootGraphLocator;
+    directoryPathRelativeToCommonBoundary: string;
+  }
 >;
 
-export const { BoundaryFactInstance } = buildConstructorFunctionWithName(
-  'BoundaryFactInstance',
-)<BaseBoundaryFact, BoundaryFactPrototype, BoundaryFact>({
-  typeName: () => FactTypeName.BoundaryFact,
-  zorn: (boundaryFact) => {
-    return getZorn([boundaryFact.boundary.zorn, 'fact']);
-  },
-  rootGraphLocator: (boundaryFact) => {
-    return new RootGraphLocatorInstance({
-      idOverride: getZornableId({
-        zorn: getZorn([boundaryFact.zorn, 'graph']),
-      }),
-      distinguisher: boundaryFact.boundary.displayName,
-    });
-  },
-  directoryPathRelativeToCommonBoundary: (boundaryFact) => {
-    return posix.relative(
-      boundaryFact.commonBoundaryRoot.directoryPath,
-      boundaryFact.boundary.directoryPath,
-    );
-  },
-});
+export const { BoundaryFactInstance } = buildNamedConstructorFunction({
+  constructorName: 'BoundaryFactInstance',
+  instancePropertyNameTuple: [
+    // keep this as a multiline list
+    'zorn',
+    'boundary',
+    'typeName',
+    'rootGraphLocator',
+    'directoryPathRelativeToCommonBoundary',
+  ],
+} as const)
+  .withTypes<BoundaryFactConstructorInput, BoundaryFact>({
+    typeCheckErrorMesssages: {
+      initialization: '',
+      instancePropertyNameTuple: {
+        missingProperties: '',
+        extraneousProperties: '',
+      },
+    },
+    transformInput: (input) => {
+      const { boundary, commonBoundaryRoot } = input;
+
+      const zorn = new BoundaryFactZorn({
+        boundary: boundary.zorn,
+        subtype: 'fact',
+      });
+
+      const rootGraphLocator = new RootGraphLocatorInstance({
+        idOverride: getZornableId({
+          zorn: getZorn([zorn.forHuman, 'graph']),
+        }),
+        distinguisher: boundary.displayName,
+      });
+
+      const directoryPathRelativeToCommonBoundary = posix.relative(
+        commonBoundaryRoot.directoryPath,
+        boundary.directoryPath,
+      );
+
+      return {
+        zorn,
+        typeName: FactTypeName.BoundaryFact,
+        boundary,
+        rootGraphLocator,
+        directoryPathRelativeToCommonBoundary,
+      };
+    },
+  })
+  .assemble();
 
 export const BOUNDARY_FACT_GEPP = 'boundary-fact';
 

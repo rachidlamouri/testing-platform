@@ -54,7 +54,7 @@ export const { DirectoryFactInstance } = buildNamedConstructorFunction({
 
       const typeName = FactTypeName.DirectoryFact;
       const zorn = getZorn([
-        boundaryFact.zorn,
+        boundaryFact.zorn.forHuman,
         'directory',
         directory.directoryPath,
         'fact',

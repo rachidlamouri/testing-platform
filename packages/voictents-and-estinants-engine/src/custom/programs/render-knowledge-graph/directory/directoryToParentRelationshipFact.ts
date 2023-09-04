@@ -61,7 +61,10 @@ export const { DirectoryToParentRelationshipFactInstance } =
   >({
     zorn: memoizeGetter((relationshipFact) => {
       return new DirectoryToParentRelationshipFactZorn({
-        parentFact: relationshipFact.parentFact.zorn,
+        parentFact:
+          typeof relationshipFact.parentFact.zorn === 'string'
+            ? relationshipFact.parentFact.zorn
+            : relationshipFact.parentFact.zorn.forHuman,
         childDirectoryFact: relationshipFact.childDirectoryFact.zorn,
       });
     }),
