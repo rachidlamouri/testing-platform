@@ -9,6 +9,7 @@ import {
 } from './scaffoldConfiguration';
 import { ImportConfiguration, ScaffoldeeFileMetadata } from './types';
 import { getHubblepupFileContents } from './getHubblepupFileContents';
+import { getEstinantFileContents } from './getEstinantFileContents';
 
 const partsToCamel = (x: string[]): string => {
   return x
@@ -83,7 +84,7 @@ export const scaffoldFile = buildEstinant({
     const prependedContent = ((): string => {
       switch (scaffoldConfiguration.typeName) {
         case FileTypeName.Estinant:
-          throw Error('Not implemented');
+          return getEstinantFileContents(relevantFileMetadata);
         case FileTypeName.Hubblepup:
           return getHubblepupFileContents(relevantFileMetadata);
       }
