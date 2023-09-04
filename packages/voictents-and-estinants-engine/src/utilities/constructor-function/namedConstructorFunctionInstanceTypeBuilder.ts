@@ -87,7 +87,7 @@ type NamedConstructorFunctionInstanceTypeBuilder<
   TConstructedInstancePropertyNameTuple extends GenericPropertyNameTuple,
 > = <
   TConstructorInput extends GenericObjectLike,
-  TConstructedInstance extends ConstructedInstance<TConstructedInstancePropertyNameTuple>,
+  TConstructedInstance extends GenericObjectLike,
 >(
   partialAssemblerContext: PartialNamedConstructorFunctionAssemblerContext<
     TConstructorInput,
@@ -119,7 +119,7 @@ export const buildNamedConstructorFunctionInstanceTypeBuilder = <
     TConstructedInstancePropertyNameTuple
   > = <
     TConstructorInput extends GenericObjectLike,
-    TConstructedInstance extends ConstructedInstance<TConstructedInstancePropertyNameTuple>,
+    TConstructedInstance extends GenericObjectLike,
   >(
     partialAssemblerContext: PartialNamedConstructorFunctionAssemblerContext<
       TConstructorInput,
