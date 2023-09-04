@@ -32,7 +32,7 @@ export const { DirectoryBoundaryRelationshipInstance } =
   >({
     zorn: (relationship) => {
       return getZorn([
-        relationship.boundary.zorn,
+        relationship.boundary.zorn.forHuman,
         'directory',
         relationship.directory.zorn.forHuman,
       ]);

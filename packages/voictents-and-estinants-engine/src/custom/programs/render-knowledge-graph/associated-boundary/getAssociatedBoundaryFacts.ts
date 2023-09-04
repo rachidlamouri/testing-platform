@@ -38,9 +38,9 @@ export const getAssociatedBoundaryFacts = buildEstinant({
         return (
           dependencyFact.isCrossBoundary &&
           (dependencyFact.importingBoundaryZorn ===
-            referencingBoundaryFact.boundary.zorn ||
+            referencingBoundaryFact.boundary.zorn.forHuman ||
             dependencyFact.importedBoundaryZorn ===
-              referencingBoundaryFact.boundary.zorn)
+              referencingBoundaryFact.boundary.zorn.forHuman)
         );
       },
     );
@@ -49,7 +49,7 @@ export const getAssociatedBoundaryFacts = buildEstinant({
       crossBoundaryDependencyFactList.map((dependencyFact) => {
         if (
           dependencyFact.importedBoundaryZorn ===
-          referencingBoundaryFact.boundary.zorn
+          referencingBoundaryFact.boundary.zorn.forHuman
         ) {
           return dependencyFact.importingBoundaryZorn;
         }
@@ -59,7 +59,7 @@ export const getAssociatedBoundaryFacts = buildEstinant({
     );
 
     const referencedBoundaryFactList = boundaryFactList.filter((boundaryFact) =>
-      referencedBoundaryZornSet.has(boundaryFact.boundary.zorn),
+      referencedBoundaryZornSet.has(boundaryFact.boundary.zorn.forHuman),
     );
 
     const associatedBoundaryFactList = referencedBoundaryFactList.map(
