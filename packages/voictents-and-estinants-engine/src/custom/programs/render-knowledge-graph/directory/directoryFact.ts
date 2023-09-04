@@ -1,68 +1,87 @@
 import { posix } from 'path';
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
-import {
-  ObjectWithPrototype,
-  buildConstructorFunctionWithName,
-} from '../../../../utilities/buildConstructorFunction';
 import { getZorn } from '../../../../utilities/getZorn';
 import { getZornableId } from '../../../../utilities/getZornableId';
 import { Directory } from '../../../programmable-units/file/directory';
 import { BoundaryFact } from '../boundary/boundaryFact';
 import { FactTypeName } from '../boundary/factTypeName';
+import { Simplify } from '../../../../utilities/simplify';
+import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 
-type BaseDirectoryFact = {
+type DirectoryFactConstructorInput = {
   directory: Directory;
   boundaryFact: BoundaryFact;
-};
-
-type DirectoryFactPrototype = {
-  get typeName(): FactTypeName.DirectoryFact;
-  get zorn(): string;
-  get subgraphZorn(): string;
-  get subgraphId(): string;
-  get directoryPathRelativeToParentDirectory(): string;
-  get isBoundaryDirectory(): boolean;
 };
 
 /**
  * Presentation metadata for a directory. A piece of knowledge.
  */
-export type DirectoryFact = ObjectWithPrototype<
-  BaseDirectoryFact,
-  DirectoryFactPrototype
+export type DirectoryFact = Simplify<
+  DirectoryFactConstructorInput,
+  {
+    typeName: FactTypeName.DirectoryFact;
+    zorn: string;
+    subgraphZorn: string;
+    subgraphId: string;
+    directoryPathRelativeToParentDirectory: string;
+    isBoundaryDirectory: boolean;
+  }
 >;
 
-export const { DirectoryFactInstance } = buildConstructorFunctionWithName(
-  'DirectoryFactInstance',
-)<BaseDirectoryFact, DirectoryFactPrototype, DirectoryFact>({
-  typeName: () => FactTypeName.DirectoryFact,
-  zorn: (directoryFact) => {
-    return getZorn([
-      directoryFact.boundaryFact.zorn,
-      'directory',
-      directoryFact.directory.directoryPath,
-      'fact',
-    ]);
-  },
-  subgraphZorn: (directoryFact) => {
-    return getZorn([directoryFact.zorn, 'subgraph']);
-  },
-  subgraphId: (directoryFact) => {
-    return getZornableId({ zorn: directoryFact.subgraphZorn });
-  },
-  directoryPathRelativeToParentDirectory: (directoryFact) => {
-    return posix.relative(
-      directoryFact.directory.parentDirectoryPath,
-      directoryFact.directory.directoryPath,
-    );
-  },
-  isBoundaryDirectory: (directoryFact) => {
-    return (
-      directoryFact.directory.directoryPath ===
-      directoryFact.boundaryFact.boundary.directoryPath
-    );
-  },
-});
+export const { DirectoryFactInstance } = buildNamedConstructorFunction({
+  constructorName: 'DirectoryFactInstance',
+  instancePropertyNameTuple: [
+    'directory',
+    'boundaryFact',
+    'typeName',
+    'zorn',
+    'subgraphZorn',
+    'subgraphId',
+    'directoryPathRelativeToParentDirectory',
+    'isBoundaryDirectory',
+  ],
+} as const)
+  .withTypes<DirectoryFactConstructorInput, DirectoryFact>({
+    typeCheckErrorMesssages: {
+      initialization: '',
+      instancePropertyNameTuple: {
+        missingProperties: '',
+        extraneousProperties: '',
+      },
+    },
+    transformInput: (partialDirectoryFact) => {
+      const { directory, boundaryFact } = partialDirectoryFact;
+
+      const typeName = FactTypeName.DirectoryFact;
+      const zorn = getZorn([
+        boundaryFact.zorn,
+        'directory',
+        directory.directoryPath,
+        'fact',
+      ]);
+      const subgraphZorn = getZorn([zorn, 'subgraph']);
+      const subgraphId = getZornableId({ zorn: subgraphZorn });
+      const directoryPathRelativeToParentDirectory = posix.relative(
+        directory.parentDirectoryPath,
+        directory.directoryPath,
+      );
+      const isBoundaryDirectory =
+        directory.directoryPath === boundaryFact.boundary.directoryPath;
+
+      const directoryFact: DirectoryFact = {
+        ...partialDirectoryFact,
+        typeName,
+        zorn,
+        subgraphZorn,
+        subgraphId,
+        directoryPathRelativeToParentDirectory,
+        isBoundaryDirectory,
+      };
+
+      return directoryFact;
+    },
+  })
+  .assemble();
 
 export const DIRECTORY_FACT_GEPP = 'directory-fact';
 
