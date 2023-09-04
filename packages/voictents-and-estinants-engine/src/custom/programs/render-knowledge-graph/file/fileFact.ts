@@ -1,8 +1,4 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
-import {
-  ObjectWithPrototype,
-  buildConstructorFunctionWithName,
-} from '../../../../utilities/buildConstructorFunction';
 import { getZorn } from '../../../../utilities/getZorn';
 import { getZornableId } from '../../../../utilities/getZornableId';
 import {
@@ -12,39 +8,61 @@ import {
 import { LocalDirectedGraphElement2Zorn } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import { TypeScriptFile } from '../../../programmable-units/type-script-file/typeScriptFile';
 import { DirectoryFact } from '../directory/directoryFact';
+import { Simplify } from '../../../../utilities/simplify';
+import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 
-type BaseFileFact = {
+type FileFactConstructorInput = {
   file: TypeScriptFile;
   directoryFact: DirectoryFact;
-};
-
-type FileFactPrototype = {
-  get zorn(): string;
-  get nodeLocator(): GraphConstituentLocator;
 };
 
 /**
  * Presentation metadata for a file. A piece of knowledge.
  */
-export type FileFact = ObjectWithPrototype<BaseFileFact, FileFactPrototype>;
+export type FileFact = Simplify<
+  FileFactConstructorInput,
+  {
+    zorn: string;
+    nodeLocator: GraphConstituentLocator;
+  }
+>;
 
-export const { FileFactInstance } = buildConstructorFunctionWithName(
-  'FileFactInstance',
-)<BaseFileFact, FileFactPrototype, FileFact>({
-  zorn: (fileFact) => {
-    return getZorn([fileFact.file.filePath, 'fact']);
-  },
-  nodeLocator: (fileFact) => {
-    return new GraphConstituentLocatorInstance({
-      idOverride: getZornableId({ zorn: getZorn([fileFact.zorn, 'node']) }),
-      rootGraphLocator: fileFact.directoryFact.boundaryFact.rootGraphLocator,
-      parentId: fileFact.directoryFact.subgraphId,
-      localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
-        distinguisher: fileFact.file.filePath,
-      }),
-    });
-  },
-});
+export const { FileFactInstance } = buildNamedConstructorFunction({
+  constructorName: 'FileFactInstance',
+  instancePropertyNameTuple: ['file', 'directoryFact', 'zorn', 'nodeLocator'],
+} as const)
+  .withTypes<FileFactConstructorInput, FileFact>({
+    typeCheckErrorMesssages: {
+      initialization: '',
+      instancePropertyNameTuple: {
+        missingProperties: '',
+        extraneousProperties: '',
+      },
+    },
+    transformInput: (partialFileFact) => {
+      const { file, directoryFact } = partialFileFact;
+      const zorn = getZorn([file.filePath, 'fact']);
+      const nodeLocator = new GraphConstituentLocatorInstance({
+        idOverride: getZornableId({
+          zorn: getZorn([zorn, 'node']),
+        }),
+        rootGraphLocator: directoryFact.boundaryFact.rootGraphLocator,
+        parentId: directoryFact.subgraphId,
+        localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+          distinguisher: file.filePath,
+        }),
+      });
+
+      const fileFact: FileFact = {
+        ...partialFileFact,
+        zorn,
+        nodeLocator,
+      };
+
+      return fileFact;
+    },
+  })
+  .assemble();
 
 export const FILE_FACT_GEPP = 'file-fact';
 
