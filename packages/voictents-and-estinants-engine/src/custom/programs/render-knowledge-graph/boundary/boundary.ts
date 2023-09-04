@@ -4,7 +4,7 @@ import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
-import { Simplify } from '../../../../utilities/simplify';
+import { SimplifyN } from '../../../../utilities/simplify';
 
 const BOUNDARY_ZORN_TEMPLATE = [
   'normalizedDisplayName',
@@ -24,11 +24,13 @@ type BoundaryConstructorInput = {
 /**
  * A group of files and directories in the project with some related concerns, or purpose
  */
-export type Boundary = Simplify<
-  BoundaryConstructorInput,
-  {
-    zorn: BoundaryZorn;
-  }
+export type Boundary = SimplifyN<
+  [
+    {
+      zorn: BoundaryZorn;
+    },
+    BoundaryConstructorInput,
+  ]
 >;
 
 export const { BoundaryInstance } = buildNamedConstructorFunction({

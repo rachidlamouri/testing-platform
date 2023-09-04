@@ -5,7 +5,7 @@ import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
-import { Simplify } from '../../../../utilities/simplify';
+import { SimplifyN } from '../../../../utilities/simplify';
 import { getZorn } from '../../../../utilities/getZorn';
 import { getZornableId } from '../../../../utilities/getZornableId';
 import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
@@ -40,15 +40,17 @@ type BoundaryFactConstructorInput = {
  * Presentation metadata for a directed graph that is focused on a boundary. A
  * piece of knowledge.
  */
-export type BoundaryFact = Simplify<
-  Pick<BoundaryFactConstructorInput, 'boundary'>,
-  {
-    zorn: BoundaryFactZorn;
-    typeName: FactTypeName.BoundaryFact;
-    rootGraphLocator: RootGraphLocator;
-    directoryPathRelativeToCommonBoundary: string;
-    directedGraph: DirectedGraph2;
-  }
+export type BoundaryFact = SimplifyN<
+  [
+    { zorn: BoundaryFactZorn },
+    Pick<BoundaryFactConstructorInput, 'boundary'>,
+    {
+      typeName: FactTypeName.BoundaryFact;
+      rootGraphLocator: RootGraphLocator;
+      directoryPathRelativeToCommonBoundary: string;
+      directedGraph: DirectedGraph2;
+    },
+  ]
 >;
 
 export const { BoundaryFactInstance } = buildNamedConstructorFunction({
