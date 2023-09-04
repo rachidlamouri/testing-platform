@@ -8,7 +8,11 @@ import {
   AppRendererDelayerInstance,
   AppRendererDelayerVoque,
 } from './appRendererDelayer';
-import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
+import {
+  BOUNDARY_FACT_GEPP,
+  BoundaryFact,
+  BoundaryFactVoque,
+} from './boundary/boundaryFact';
 
 /**
  * Generates a barrel file for every file created by decodeAndRecastSvgDocument for the
@@ -26,17 +30,22 @@ export const constructDynamicIndexFile = buildEstinant({
   .toHubblepup2<AppRendererDelayerVoque>({
     gepp: APP_RENDERER_DELAYER_GEPP,
   })
-  .onPinbe((boundaryFactList) => {
-    const boundaryFactWithVariableNameList = boundaryFactList.map(
-      (boundaryFact, index) => {
-        const variableName = `boundary${index}`;
+  .onPinbe(() => {
+    // const boundaryFactWithVariableNameList = boundaryFactList.map(
+    //   (boundaryFact, index) => {
+    //     const variableName = `boundary${index}`;
 
-        return {
-          boundaryFact,
-          variableName,
-        };
-      },
-    );
+    //     return {
+    //       boundaryFact,
+    //       variableName,
+    //     };
+    //   },
+    // );
+
+    const boundaryFactWithVariableNameList: {
+      boundaryFact: BoundaryFact;
+      variableName: string;
+    }[] = [];
 
     const importStatementList = boundaryFactWithVariableNameList.map(
       ({ boundaryFact, variableName }) => {

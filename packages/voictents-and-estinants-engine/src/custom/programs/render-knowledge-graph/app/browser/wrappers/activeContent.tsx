@@ -20,7 +20,11 @@ export const ActiveContent: React.FunctionComponent<{
     return null;
   }
 
-  const { Component } = (componentMetadataList ?? [])[selectedIndex];
+  const selectedComponentMetadata = (componentMetadataList ?? [])[
+    selectedIndex
+  ];
+
+  const Component = selectedComponentMetadata?.Component;
 
   if (!Component) {
     return null;

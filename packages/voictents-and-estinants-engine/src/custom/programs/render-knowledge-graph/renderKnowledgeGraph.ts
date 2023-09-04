@@ -38,42 +38,27 @@ import { assertBoundaryDirectoryExists } from './boundary/assertBoundaryDirector
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { renderGraphvizCodeToSvgDocument2 } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument2';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
-import { constructKnowledgeGraph } from './constructKnowledgeGraph';
 import { getDirectedGraphFromGraphElementGroup } from '../model-programs/getDirectedGraphFromGraphElementGroup';
 import { groupGraphElements } from '../model-programs/groupGraphElements';
-import { getBoundaryFactAndGraphElements } from './boundary/getBoundaryFactAndGraphElements';
-import { stubMetadata } from './boundary/stubMetadata';
+import { getBoundaryFact } from './boundary/getBoundaryFact';
 import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
 import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
-import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
-import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
-import { getDirectoryFact } from './directory/getDirectoryFact';
-import { getDirectoryGraphElements } from './directory/getDirectoryGraphElements';
 import { getCommonBoundaryRoot } from './common-boundary-root/getCommonBoundaryRoot';
 import {
   BOUNDARY_TRIE_A_GEPP,
   BoundaryTrieAVoque,
 } from './boundary/boundaryTrieA';
 import { getBoundaryTrieA } from './boundary/getBoundaryTrieA';
-import { getBoundaryTrieB } from './boundary/getBoundaryTrieB';
 import {
   BoundaryTrieBVoque,
   BOUNDARY_TRIE_B_GEPP,
 } from './boundary/boundaryTrieB';
-import { getDirectoryBoundaryRelationship } from './directory/getDirectoryBoundaryRelationship';
-import { getFileFact } from './file/getFileFact';
-import { getFileGraphElements } from './file/getFileGraphElements';
-import { getDependencyFacts } from './dependency/getDependencyFacts';
-import { getInvertedDependencyGroup } from './dependency/getInvertedDependencyGroup';
-import { getInvertedDependencyGraphElements } from './dependency/getInvertedDependencyGraphElements';
 import { renderApp } from './app/node/renderApp';
 import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
-import { getAssociatedBoundaryFacts } from './associated-boundary/getAssociatedBoundaryFacts';
-import { getAssociatedBoundaryFactGraphElements } from './associated-boundary/getAssociatedBoundaryFactGraphElements';
-import { getDirectoryToParentRelationshipFact } from './directory/getDirectoryToParentRelationshipFact';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { getAllFactGraphElements } from './getAllFactGraphElements';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -135,34 +120,38 @@ digikikify({
     getEngineProgramLocator3,
 
     getAdaptedProgramBoundary,
-    getCommonBoundaryRoot,
-    getBoundaryTrieA,
-    getBoundaryTrieB,
-    getBoundaryFactAndGraphElements,
-
     assertBoundaryDirectoryExists,
+
+    getBoundaryTrieA,
     assertNoBoundaryOverlap,
 
-    getDirectoriesWithFiles,
-    getDirectoryBoundaryRelationship,
-    getDirectoryFact,
-    getDirectoryToParentRelationshipFact,
-    getDirectoryGraphElements,
+    getCommonBoundaryRoot,
+    getBoundaryFact,
 
-    assertDirectoriesHaveBoundaries,
+    // getBoundaryTrieB,
 
-    getFileFact,
-    getFileGraphElements,
+    // getDirectoriesWithFiles,
+    // getDirectoryBoundaryRelationship,
+    // getDirectoryFact,
+    // getDirectoryToParentRelationshipFact,
+    // getDirectoryGraphElements,
 
-    getDependencyFacts,
+    // assertDirectoriesHaveBoundaries,
 
-    getAssociatedBoundaryFacts,
-    getAssociatedBoundaryFactGraphElements,
+    // getFileFact,
+    // getFileGraphElements,
+
+    // getDependencyFacts,
+
+    // getAssociatedBoundaryFacts,
+    // getAssociatedBoundaryFactGraphElements,
 
     // getAssociatedFileGraphElements,
 
-    getInvertedDependencyGroup,
-    getInvertedDependencyGraphElements,
+    // getInvertedDependencyGroup,
+    // getInvertedDependencyGraphElements,
+
+    getAllFactGraphElements,
 
     groupGraphElements,
     getDirectedGraphFromGraphElementGroup,
@@ -174,11 +163,6 @@ digikikify({
     constructDynamicIndexFile,
 
     renderApp,
-
-    // TODO: remove this
-    stubMetadata,
-
-    constructKnowledgeGraph,
 
     reportErrors,
     signalError,
