@@ -40,9 +40,9 @@ export const { AssociatedBoundaryFactInstance } =
   >({
     zorn: (associatedBoundaryFact) => {
       return getZorn([
-        associatedBoundaryFact.referencingBoundaryFact.zorn,
+        associatedBoundaryFact.referencingBoundaryFact.zorn.forHuman,
         'references',
-        associatedBoundaryFact.referencedBoundaryFact.zorn,
+        associatedBoundaryFact.referencedBoundaryFact.zorn.forHuman,
       ]);
     },
     subgraphLocator: (associatedBoundaryFact) => {
