@@ -19,7 +19,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   {
     filePath:
       'packages/voictents-and-estinants-engine/src/utilities/simplify.ts',
-    identifierList: ['Simplify'],
+    identifierList: ['SimplifyN'],
   },
 ];
 
@@ -60,12 +60,13 @@ type ${constructorInputTypeName} = {
   UPDATE_ME: any;
 }
 
-type ${hubblepupTypename} = Simplify<
+type ${hubblepupTypename} = SimplifyN<[
+  { zorn: ${zornTemplateClassName} },
   ${constructorInputTypeName},
   {
-    zorn: ${zornTemplateClassName}
+    // TODO: UPDATE_ME
   }
->
+]>
 
 export const { ${constructorCodeName} } = buildNamedConstructorFunction({
   constructorName: '${constructorCodeName}',

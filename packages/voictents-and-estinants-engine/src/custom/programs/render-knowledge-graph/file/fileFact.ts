@@ -8,7 +8,7 @@ import {
 import { LocalDirectedGraphElement2Zorn } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import { TypeScriptFile } from '../../../programmable-units/type-script-file/typeScriptFile';
 import { DirectoryFact } from '../directory/directoryFact';
-import { Simplify } from '../../../../utilities/simplify';
+import { SimplifyN } from '../../../../utilities/simplify';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 
 type FileFactConstructorInput = {
@@ -19,12 +19,14 @@ type FileFactConstructorInput = {
 /**
  * Presentation metadata for a file. A piece of knowledge.
  */
-export type FileFact = Simplify<
-  FileFactConstructorInput,
-  {
-    zorn: string;
-    nodeLocator: GraphConstituentLocator;
-  }
+export type FileFact = SimplifyN<
+  [
+    { zorn: string },
+    FileFactConstructorInput,
+    {
+      nodeLocator: GraphConstituentLocator;
+    },
+  ]
 >;
 
 export const { FileFactInstance } = buildNamedConstructorFunction({

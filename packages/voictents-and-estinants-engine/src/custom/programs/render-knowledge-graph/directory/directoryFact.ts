@@ -5,7 +5,7 @@ import { getZornableId } from '../../../../utilities/getZornableId';
 import { Directory } from '../../../programmable-units/file/directory';
 import { BoundaryFact } from '../boundary/boundaryFact';
 import { FactTypeName } from '../boundary/factTypeName';
-import { Simplify } from '../../../../utilities/simplify';
+import { SimplifyN } from '../../../../utilities/simplify';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 
 type DirectoryFactConstructorInput = {
@@ -16,16 +16,19 @@ type DirectoryFactConstructorInput = {
 /**
  * Presentation metadata for a directory. A piece of knowledge.
  */
-export type DirectoryFact = Simplify<
-  DirectoryFactConstructorInput,
-  {
-    typeName: FactTypeName.DirectoryFact;
-    zorn: string;
-    subgraphZorn: string;
-    subgraphId: string;
-    directoryPathRelativeToParentDirectory: string;
-    isBoundaryDirectory: boolean;
-  }
+export type DirectoryFact = SimplifyN<
+  [
+    { zorn: string },
+    DirectoryFactConstructorInput,
+    {
+      typeName: FactTypeName.DirectoryFact;
+
+      subgraphZorn: string;
+      subgraphId: string;
+      directoryPathRelativeToParentDirectory: string;
+      isBoundaryDirectory: boolean;
+    },
+  ]
 >;
 
 export const { DirectoryFactInstance } = buildNamedConstructorFunction({
