@@ -3,7 +3,11 @@ import {
   DIRECTED_GRAPH_ELEMENT_2_GEPP,
   DirectedGraphElement2Voque,
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
+import { DirectedGraphNode2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
+import { GraphConstituentLocatorInstance } from '../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
+import { LocalDirectedGraphElement2Zorn } from '../../programmable-units/graph-visualization/directed-graph/types';
 import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
+import { THEME } from './theme';
 
 /**
  * Acquires all graph elements (graphs, subgraphs, clusters, nodes, and edges)
@@ -18,7 +22,27 @@ export const getAllFactGraphElements = buildEstinant({
   .toHubblepupTuple2<DirectedGraphElement2Voque>({
     gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
-  .onPinbe(() => {
-    return [];
+  .onPinbe((boundaryFactList) => {
+    return [
+      ...boundaryFactList.map((boundaryFact) => {
+        return boundaryFact.directedGraph;
+      }),
+      // TODO: remove placeholder node
+      ...boundaryFactList.map((boundaryFact) => {
+        return new DirectedGraphNode2Instance({
+          locator: new GraphConstituentLocatorInstance({
+            rootGraphLocator: boundaryFact.rootGraphLocator,
+            parentId: boundaryFact.rootGraphLocator.id,
+            localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+              distinguisher: boundaryFact.boundary.displayName,
+            }),
+          }),
+          inputAttributeByKey: {
+            label: `${boundaryFact.boundary.displayName}`,
+            ...THEME.file,
+          },
+        });
+      }),
+    ];
   })
   .assemble();

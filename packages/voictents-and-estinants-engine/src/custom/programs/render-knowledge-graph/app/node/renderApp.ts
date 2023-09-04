@@ -48,7 +48,6 @@ export const renderApp = buildEstinant({
     );
 
     let programErrorList: GenericProgramErrorPelue[];
-    // TODO: add better error handling
     if (result.stderr !== '') {
       const error = Object.assign(
         new Error('Encountered an error in "renderApp"'),

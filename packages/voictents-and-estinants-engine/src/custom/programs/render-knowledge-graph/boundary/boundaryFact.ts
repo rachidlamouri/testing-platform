@@ -15,6 +15,11 @@ import {
   RootGraphLocatorInstance,
 } from '../../../programmable-units/graph-visualization/directed-graph/rootGraphLocator';
 import { FactTypeName } from './factTypeName';
+import {
+  DirectedGraph2,
+  DirectedGraph2Instance,
+} from '../../../programmable-units/graph-visualization/directed-graph/directedGraph2';
+import { THEME } from '../theme';
 
 const BOUNDARY_FACT_ZORN_TEMPLATE = [
   ['boundary', BoundaryZorn],
@@ -32,7 +37,8 @@ type BoundaryFactConstructorInput = {
 };
 
 /**
- * Presentation metadata for a boundary. A piece of knowledge.
+ * Presentation metadata for a directed graph that is focused on a boundary. A
+ * piece of knowledge.
  */
 export type BoundaryFact = Simplify<
   Pick<BoundaryFactConstructorInput, 'boundary'>,
@@ -41,6 +47,7 @@ export type BoundaryFact = Simplify<
     typeName: FactTypeName.BoundaryFact;
     rootGraphLocator: RootGraphLocator;
     directoryPathRelativeToCommonBoundary: string;
+    directedGraph: DirectedGraph2;
   }
 >;
 
@@ -53,6 +60,7 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
     'typeName',
     'rootGraphLocator',
     'directoryPathRelativeToCommonBoundary',
+    'directedGraph',
   ],
 } as const)
   .withTypes<BoundaryFactConstructorInput, BoundaryFact>({
@@ -82,12 +90,21 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
         boundary.directoryPath,
       );
 
+      const directedGraph = new DirectedGraph2Instance({
+        locator: rootGraphLocator,
+        inputAttributeByKey: {
+          // label: boundary.displayName,
+          ...THEME.graph,
+        },
+      });
+
       return {
         zorn,
         typeName: FactTypeName.BoundaryFact,
         boundary,
         rootGraphLocator,
         directoryPathRelativeToCommonBoundary,
+        directedGraph,
       };
     },
   })
