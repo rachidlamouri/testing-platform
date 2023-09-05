@@ -29,6 +29,11 @@ import {
   DEPENDENCY_FACT_GEPP,
   DependencyFactVoque,
 } from './dependency/dependencyFact';
+import {
+  APP_RENDERER_DELAYER_GEPP,
+  AppRendererDelayerInstance,
+  AppRendererDelayerVoque,
+} from './appRendererDelayer';
 
 const ESTINANT_NAME = 'decodeAndRecastSvgDocument' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -63,6 +68,9 @@ export const decodeAndRecastSvgDocument = buildEstinant({
   })
   .toHubblepupTuple2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
+  })
+  .toHubblepupTuple2<AppRendererDelayerVoque>({
+    gepp: APP_RENDERER_DELAYER_GEPP,
   })
   .onPinbe(
     (
@@ -452,30 +460,29 @@ export const decodeAndRecastSvgDocument = buildEstinant({
         const componentOrElementName =
           componentWrapperByTagName[decodedNode.tagName] ?? decodedNode.tagName;
 
-        const attributeList = decodedNode.attributeTupleList.map(
-          ([name, value]) => {
-            return b.jsxAttribute(b.jsxIdentifier(name), b.literal(value));
-          },
-        );
+        type RawAttributeTuple = [string, string | n.JSXExpressionContainer];
+        const rawAttributeTupleList: RawAttributeTuple[] =
+          decodedNode.attributeTupleList.slice();
 
         if (decodedNode.tagName === 'svg') {
-          const refAttribute = b.jsxAttribute(
-            b.jsxIdentifier('ref'),
-            b.jsxExpressionContainer(b.identifier('ref')),
+          rawAttributeTupleList.push(
+            ['ref', b.jsxExpressionContainer(b.identifier('ref'))],
+            ['width', '100%'],
+            ['height', '100%'],
           );
-
-          const widthAttribute = b.jsxAttribute(
-            b.jsxIdentifier('width'),
-            b.literal('100%'),
-          );
-
-          const heightAttribute = b.jsxAttribute(
-            b.jsxIdentifier('height'),
-            b.literal('100%'),
-          );
-
-          attributeList.push(refAttribute, widthAttribute, heightAttribute);
         }
+
+        const deduplicatedAttributeTupleList = [
+          ...new Map(rawAttributeTupleList).entries(),
+        ];
+
+        const attributeList = deduplicatedAttributeTupleList.map(
+          ([name, value]) => {
+            const valueNode =
+              typeof value === 'string' ? b.literal(value) : value;
+            return b.jsxAttribute(b.jsxIdentifier(name), valueNode);
+          },
+        );
 
         const childJsxList = decodedNode.childPathList
           .map(getDecodedNodeFromPath)
@@ -546,6 +553,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
             },
           ],
           [OUTPUT_FILE_GEPP]: [],
+          [APP_RENDERER_DELAYER_GEPP]: [],
         };
       }
 
@@ -596,6 +604,12 @@ export const decodeAndRecastSvgDocument = buildEstinant({
           };
         }),
         [OUTPUT_FILE_GEPP]: [outputFile],
+        [APP_RENDERER_DELAYER_GEPP]: [
+          new AppRendererDelayerInstance({
+            estinantName: 'decodeAndRecastSvgDocument',
+            distinguisher: svgDocument.zorn,
+          }),
+        ],
       };
     },
   )

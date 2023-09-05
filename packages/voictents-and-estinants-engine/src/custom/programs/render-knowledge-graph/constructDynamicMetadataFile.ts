@@ -16,6 +16,11 @@ import {
   OutputFileVoque,
 } from '../../programmable-units/output-file/outputFile';
 import { Metadata } from './app/browser/dynamicComponentTypes';
+import {
+  APP_RENDERER_DELAYER_GEPP,
+  AppRendererDelayerInstance,
+  AppRendererDelayerVoque,
+} from './appRendererDelayer';
 
 const encodePrimitive = (
   primitive: string | number | boolean | null,
@@ -87,6 +92,9 @@ export const constructDynamicMetadataFile = buildEstinant({
   .toHubblepup2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
   })
+  .toHubblepup2<AppRendererDelayerVoque>({
+    gepp: APP_RENDERER_DELAYER_GEPP,
+  })
   .onPinbe((fileFactList) => {
     const metadataList: Metadata[] = fileFactList.map((fileFact) => {
       return {
@@ -134,6 +142,11 @@ export const constructDynamicMetadataFile = buildEstinant({
       text: moduleCode,
     };
 
-    return outputFile;
+    return {
+      [OUTPUT_FILE_GEPP]: outputFile,
+      [APP_RENDERER_DELAYER_GEPP]: new AppRendererDelayerInstance({
+        estinantName: 'constructDynamicMetadataFile',
+      }),
+    };
   })
   .assemble();
