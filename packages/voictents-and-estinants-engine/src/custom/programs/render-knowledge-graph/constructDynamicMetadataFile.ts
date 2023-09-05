@@ -21,6 +21,11 @@ import {
   AppRendererDelayerVoque,
 } from './appRendererDelayer';
 import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
+import {
+  APP_RENDERER_DELAYER_GEPP,
+  AppRendererDelayerInstance,
+  AppRendererDelayerVoque,
+} from './appRendererDelayer';
 
 const encodePrimitive = (
   primitive: string | number | boolean | null,
