@@ -2,13 +2,18 @@ import childProcessUtility from 'child_process';
 import fs from 'fs';
 import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
 import {
-  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-  FileSystemObjectEnumeratorConfigurationVoque,
-} from '../../../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,
 } from '../../../../programmable-units/output-file/outputFile';
+import {
+  GenericProgramErrorPelue,
+  GenericProgramErrorVoque,
+  PROGRAM_ERROR_GEPP,
+} from '../../../../programmable-units/error/programError';
+import {
+  APP_RENDERER_DELAYER_GEPP,
+  AppRendererDelayerVoque,
+} from '../../appRendererDelayer';
 
 /**
  * Generates the knowledge graph js bundle with esbuild and merges it with an
@@ -19,11 +24,14 @@ import {
 export const renderApp = buildEstinant({
   name: 'renderApp',
 })
-  .fromHubblepup2<FileSystemObjectEnumeratorConfigurationVoque>({
-    gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  .fromVoictent2<AppRendererDelayerVoque>({
+    gepp: APP_RENDERER_DELAYER_GEPP,
   })
   .toHubblepup2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
+  })
+  .toHubblepupTuple2<GenericProgramErrorVoque>({
+    gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe(() => {
     const result = childProcessUtility.spawnSync(
@@ -38,6 +46,18 @@ export const renderApp = buildEstinant({
         maxBuffer: 1000000000,
       },
     );
+
+    let programErrorList: GenericProgramErrorPelue[];
+    // TODO: add better error handling
+    if (result.stderr !== '') {
+      const error = Object.assign(
+        new Error('Encountered an error in "renderApp"'),
+        { stdError: result.stderr },
+      );
+      programErrorList = [error];
+    } else {
+      programErrorList = [];
+    }
 
     const jsContents = result.stdout;
 
@@ -54,9 +74,12 @@ export const renderApp = buildEstinant({
     ].join('\n');
 
     return {
-      fileName: 'rendered-knowledge-graph',
-      fileExtensionSuffix: 'html',
-      text: htmlContents,
+      [OUTPUT_FILE_GEPP]: {
+        fileName: 'rendered-knowledge-graph',
+        fileExtensionSuffix: 'html',
+        text: htmlContents,
+      },
+      [PROGRAM_ERROR_GEPP]: programErrorList,
     };
   })
   .assemble();

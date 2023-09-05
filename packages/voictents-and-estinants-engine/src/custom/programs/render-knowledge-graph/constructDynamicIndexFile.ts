@@ -3,6 +3,11 @@ import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,
 } from '../../programmable-units/output-file/outputFile';
+import {
+  APP_RENDERER_DELAYER_GEPP,
+  AppRendererDelayerInstance,
+  AppRendererDelayerVoque,
+} from './appRendererDelayer';
 import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
 
 /**
@@ -17,6 +22,9 @@ export const constructDynamicIndexFile = buildEstinant({
   })
   .toHubblepup2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
+  })
+  .toHubblepup2<AppRendererDelayerVoque>({
+    gepp: APP_RENDERER_DELAYER_GEPP,
   })
   .onPinbe((boundaryFactList) => {
     const boundaryFactWithVariableNameList = boundaryFactList.map(
@@ -58,9 +66,14 @@ export const constructDynamicIndexFile = buildEstinant({
     `;
 
     return {
-      filePath:
-        'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/generated/index.tsx',
-      text: programText,
+      [OUTPUT_FILE_GEPP]: {
+        filePath:
+          'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/generated/index.tsx',
+        text: programText,
+      },
+      [APP_RENDERER_DELAYER_GEPP]: new AppRendererDelayerInstance({
+        estinantName: 'constructDynamicIndexFile',
+      }),
     };
   })
   .assemble();
