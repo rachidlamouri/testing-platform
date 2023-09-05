@@ -1,5 +1,6 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import {
+  buildGeppCombination,
   buildVoictentByGepp,
   digikikify,
 } from '../../../type-script-adapter/digikikify';
@@ -42,7 +43,7 @@ import { getDirectedGraphFromGraphElementGroup } from '../model-programs/getDire
 import { groupGraphElements } from '../model-programs/groupGraphElements';
 import { getBoundaryFact } from './boundary/getBoundaryFact';
 import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
-import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin3Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { getCommonBoundaryRoot } from './common-boundary-root/getCommonBoundaryRoot';
 import {
   BOUNDARY_TRIE_A_GEPP,
@@ -59,6 +60,11 @@ import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { getAllFactGraphElements } from './getAllFactGraphElements';
+import { getBoundaryTrieB } from './boundary/getBoundaryTrieB';
+import { getBoundedFile } from './file/getBoundedFile';
+import { BOUNDED_FILE_GEPP } from './file/boundedFile';
+import { getBoundaryAssociations } from './boundary/getBoundaryAssociations';
+import { getFileDependencies } from './dependency/getFileDependencies';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -84,12 +90,18 @@ digikikify({
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
-    new InMemoryOdeshin2ListVoictent<BoundaryVoque>({
+    new InMemoryOdeshin3Voictent<BoundaryVoque>({
       gepp: BOUNDARY_GEPP,
       initialHubblepupPelueTuple: STATIC_BOUNDARY_LIST,
     }),
   ] as const,
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
+  fileSystemNodeGeppCombination: {
+    ...defaultFileGeppCombination,
+    ...buildGeppCombination([
+      // keep as multiline list
+      BOUNDED_FILE_GEPP,
+    ] as const),
+  },
   uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,
@@ -128,7 +140,10 @@ digikikify({
     getCommonBoundaryRoot,
     getBoundaryFact,
 
-    // getBoundaryTrieB,
+    getBoundaryTrieB,
+    getBoundedFile,
+    getFileDependencies,
+    getBoundaryAssociations,
 
     // getDirectoriesWithFiles,
     // getDirectoryBoundaryRelationship,

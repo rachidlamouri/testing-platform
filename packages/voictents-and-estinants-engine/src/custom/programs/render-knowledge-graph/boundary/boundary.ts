@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin3Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
   GenericZorn2Template,
@@ -70,7 +70,7 @@ export const BOUNDARY_GEPP = 'boundary';
 
 type BoundaryGepp = typeof BOUNDARY_GEPP;
 
-export type BoundaryVoque = InMemoryOdeshin2ListVoque<BoundaryGepp, Boundary>;
+export type BoundaryVoque = InMemoryOdeshin3Voque<BoundaryGepp, Boundary>;
 
 export const STATIC_BOUNDARY_LIST: Boundary[] = [
   new BoundaryInstance({

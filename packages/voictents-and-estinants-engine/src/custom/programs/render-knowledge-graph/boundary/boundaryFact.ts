@@ -95,7 +95,7 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
       const directedGraph = new DirectedGraph2Instance({
         locator: rootGraphLocator,
         inputAttributeByKey: {
-          // label: boundary.displayName,
+          label: boundary.displayName,
           ...THEME.graph,
         },
       });

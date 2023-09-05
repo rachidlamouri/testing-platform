@@ -20,10 +20,10 @@ export const getBoundaryTrieA = buildEstinant({
   .toHubblepup2<BoundaryTrieAVoque>({
     gepp: BOUNDARY_TRIE_A_GEPP,
   })
-  .onPinbe((boundaryList) => {
+  .onPinbe((boundaryVoictent) => {
     const trieA = new BoundaryTrieA([]);
 
-    boundaryList.forEach((boundary) => {
+    boundaryVoictent.list.forEach((boundary) => {
       const pathPartList = boundary.directoryPath.split(posix.sep);
 
       trieA.addSubtrie(

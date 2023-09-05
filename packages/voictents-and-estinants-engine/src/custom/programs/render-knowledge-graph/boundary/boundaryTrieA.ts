@@ -5,6 +5,8 @@ import { Boundary } from './boundary';
 /**
  * A boundary trie where nodes are always a list of zero or more boundaries.
  * This lets us handle duplicates without having to error check right away
+ *
+ * @todo rename to BoundaryListTrie
  */
 export class BoundaryTrieA extends Trie<Boundary[]> {}
 

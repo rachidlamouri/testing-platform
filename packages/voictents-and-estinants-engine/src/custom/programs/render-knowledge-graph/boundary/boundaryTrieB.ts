@@ -4,6 +4,8 @@ import { Boundary } from './boundary';
 
 /**
  * A boundary trie where nodes are either a single boundary or null
+ *
+ * @todo rename to BoundaryTrie
  */
 export class BoundaryTrieB extends Trie<Boundary | null> {}
 

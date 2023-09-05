@@ -45,51 +45,53 @@ export const assertDirectoriesHaveBoundaries = buildEstinant({
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((directoryList, boundaryDirectoryRelationshipList, boundaryList) => {
-    const boundaryDirectoryPathSet = new Set(
-      boundaryList.map((boundary) => {
-        return boundary.directoryPath;
-      }),
-    );
-
-    const boundedDirectoryPathSet = new Set(
-      boundaryDirectoryRelationshipList.map((relationship) => {
-        return relationship.directory.directoryPath;
-      }),
-    );
-
-    const unboundedDirectoryList = directoryList.filter((directory) => {
-      const isBoundaryDirectory = boundaryDirectoryPathSet.has(
-        directory.directoryPath,
+  .onPinbe(
+    (directoryList, boundaryDirectoryRelationshipList, boundaryVoictent) => {
+      const boundaryDirectoryPathSet = new Set(
+        boundaryVoictent.list.map((boundary) => {
+          return boundary.directoryPath;
+        }),
       );
-      const isBoundarySubdirectory = boundedDirectoryPathSet.has(
-        directory.directoryPath,
+
+      const boundedDirectoryPathSet = new Set(
+        boundaryDirectoryRelationshipList.map((relationship) => {
+          return relationship.directory.directoryPath;
+        }),
       );
-      const isBounded = isBoundaryDirectory || isBoundarySubdirectory;
 
-      return !isBounded;
-    });
+      const unboundedDirectoryList = directoryList.filter((directory) => {
+        const isBoundaryDirectory = boundaryDirectoryPathSet.has(
+          directory.directoryPath,
+        );
+        const isBoundarySubdirectory = boundedDirectoryPathSet.has(
+          directory.directoryPath,
+        );
+        const isBounded = isBoundaryDirectory || isBoundarySubdirectory;
 
-    const outputList = unboundedDirectoryList.map((directory) => {
-      return {
-        name: 'unbounded-directory',
-        error: new Error(
-          `Directory ${directory.directoryPath} is not under a boundary`,
-        ),
-        reporterLocator,
-        sourceLocator: {
-          typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-          filePath: directory.directoryPath,
-        },
-        context: {
-          directoryPath: directory.directoryPath,
-          boundaryDirectoryPathSet,
-          boundedDirectoryPathSet,
-          directory,
-        },
-      } satisfies ProgramErrorPelue<ReportingLocator>;
-    });
+        return !isBounded;
+      });
 
-    return outputList;
-  })
+      const outputList = unboundedDirectoryList.map((directory) => {
+        return {
+          name: 'unbounded-directory',
+          error: new Error(
+            `Directory ${directory.directoryPath} is not under a boundary`,
+          ),
+          reporterLocator,
+          sourceLocator: {
+            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
+            filePath: directory.directoryPath,
+          },
+          context: {
+            directoryPath: directory.directoryPath,
+            boundaryDirectoryPathSet,
+            boundedDirectoryPathSet,
+            directory,
+          },
+        } satisfies ProgramErrorPelue<ReportingLocator>;
+      });
+
+      return outputList;
+    },
+  )
   .assemble();

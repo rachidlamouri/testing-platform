@@ -26,8 +26,8 @@ export const getCommonBoundaryRoot = buildEstinant({
   .toHubblepup2<CommonBoundaryRootVoque>({
     gepp: COMMON_BOUNDARY_ROOT_GEPP,
   })
-  .onPinbe((boundaryList, directoryVoictent) => {
-    const boundaryDirectoryList = boundaryList.map((boundary) => {
+  .onPinbe((boundaryVoictent, directoryVoictent) => {
+    const boundaryDirectoryList = boundaryVoictent.list.map((boundary) => {
       const directory = directoryVoictent.byNodePath.get(
         boundary.directoryPath,
       );
