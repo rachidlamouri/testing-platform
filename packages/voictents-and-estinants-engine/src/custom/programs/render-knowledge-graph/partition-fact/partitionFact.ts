@@ -6,46 +6,38 @@ import {
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
 import { SimplifyN } from '../../../../utilities/simplify';
-import { getZorn } from '../../../../utilities/getZorn';
-import { getZornableId } from '../../../../utilities/getZornableId';
-import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
-import { Boundary, BoundaryZorn } from './boundary';
-import {
-  RootGraphLocator,
-  RootGraphLocatorInstance,
-} from '../../../programmable-units/graph-visualization/directed-graph/rootGraphLocator';
-import { FactTypeName } from './factTypeName';
 import {
   DirectedGraph2,
   DirectedGraph2Instance,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraph2';
+import {
+  RootGraphLocator,
+  RootGraphLocatorInstance,
+} from '../../../programmable-units/graph-visualization/directed-graph/rootGraphLocator';
+import { Boundary, BoundaryZorn } from '../boundary/boundary';
+import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
 import { THEME } from '../theme';
 
-const BOUNDARY_FACT_ZORN_TEMPLATE = [
+const PARTITION_FACT_ZORN_TEMPLATE = [
   ['boundary', BoundaryZorn],
 ] as const satisfies GenericZorn2Template;
-type BoundaryFactZornTemplate = typeof BOUNDARY_FACT_ZORN_TEMPLATE;
-export class BoundaryFactZorn extends Zorn2<BoundaryFactZornTemplate> {
-  get rawTemplate(): BoundaryFactZornTemplate {
-    return BOUNDARY_FACT_ZORN_TEMPLATE;
+type PartitionFactZornTemplate = typeof PARTITION_FACT_ZORN_TEMPLATE;
+class PartitionFactZorn extends Zorn2<PartitionFactZornTemplate> {
+  get rawTemplate(): PartitionFactZornTemplate {
+    return PARTITION_FACT_ZORN_TEMPLATE;
   }
 }
 
-type BoundaryFactConstructorInput = {
+type PartitionFactConstructorInput = {
   boundary: Boundary;
   commonBoundaryRoot: CommonBoundaryRoot;
 };
 
-/**
- * Presentation metadata for a directed graph that is focused on a boundary. A
- * piece of knowledge.
- */
-export type BoundaryFact = SimplifyN<
+type PartitionFact = SimplifyN<
   [
-    { zorn: BoundaryFactZorn },
-    Pick<BoundaryFactConstructorInput, 'boundary'>,
+    { zorn: PartitionFactZorn },
+    Pick<PartitionFactConstructorInput, 'boundary'>,
     {
-      typeName: FactTypeName.BoundaryFact;
       rootGraphLocator: RootGraphLocator;
       directoryPathRelativeToCommonBoundary: string;
       directedGraph: DirectedGraph2;
@@ -53,19 +45,18 @@ export type BoundaryFact = SimplifyN<
   ]
 >;
 
-export const { BoundaryFactInstance } = buildNamedConstructorFunction({
-  constructorName: 'BoundaryFactInstance',
+export const { PartitionFactInstance } = buildNamedConstructorFunction({
+  constructorName: 'PartitionFactInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'zorn',
     'boundary',
-    'typeName',
     'rootGraphLocator',
     'directoryPathRelativeToCommonBoundary',
     'directedGraph',
   ],
 } as const)
-  .withTypes<BoundaryFactConstructorInput, BoundaryFact>({
+  .withTypes<PartitionFactConstructorInput, PartitionFact>({
     typeCheckErrorMesssages: {
       initialization: '',
       instancePropertyNameTuple: {
@@ -76,14 +67,11 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { boundary, commonBoundaryRoot } = input;
 
-      const zorn = new BoundaryFactZorn({
+      const zorn = new PartitionFactZorn({
         boundary: boundary.zorn,
       });
 
       const rootGraphLocator = new RootGraphLocatorInstance({
-        idOverride: getZornableId({
-          zorn: getZorn([zorn.forHuman, 'graph']),
-        }),
         distinguisher: boundary.displayName,
       });
 
@@ -102,7 +90,6 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
 
       return {
         zorn,
-        typeName: FactTypeName.BoundaryFact,
         boundary,
         rootGraphLocator,
         directoryPathRelativeToCommonBoundary,
@@ -112,11 +99,11 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const BOUNDARY_FACT_GEPP = 'boundary-fact';
+export const PARTITION_FACT_GEPP = 'partition-fact';
 
-type BoundaryFactGepp = typeof BOUNDARY_FACT_GEPP;
+type PartitionFactGepp = typeof PARTITION_FACT_GEPP;
 
-export type BoundaryFactVoque = InMemoryOdeshin2ListVoque<
-  BoundaryFactGepp,
-  BoundaryFact
+export type PartitionFactVoque = InMemoryOdeshin2ListVoque<
+  PartitionFactGepp,
+  PartitionFact
 >;

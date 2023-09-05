@@ -65,6 +65,10 @@ import { getBoundedFile } from './file/getBoundedFile';
 import { BOUNDED_FILE_GEPP } from './file/boundedFile';
 import { getBoundaryAssociations } from './boundary/getBoundaryAssociations';
 import { getFileDependencies } from './dependency/getFileDependencies';
+import { getBoundaryToBoundedDirectoryAssociation } from './directory/getBoundaryToBoundedDirectoryAssociation';
+import { getBoundedDirectory } from './directory/getBoundedDirectory';
+import { getDirectoryFact2 } from './directory/getDirectoryFact2';
+import { getPartitionFact } from './partition-fact/getPartitionFact';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -138,12 +142,17 @@ digikikify({
     assertNoBoundaryOverlap,
 
     getCommonBoundaryRoot,
-    getBoundaryFact,
+    getPartitionFact,
+    // getBoundaryFact,
 
-    getBoundaryTrieB,
-    getBoundedFile,
-    getFileDependencies,
-    getBoundaryAssociations,
+    // getBoundaryTrieB,
+    // getBoundedFile,
+    // getFileDependencies,
+    // getBoundaryAssociations,
+
+    // getBoundedDirectory,
+    // getBoundaryToBoundedDirectoryAssociation,
+    // getDirectoryFact2,
 
     // getDirectoriesWithFiles,
     // getDirectoryBoundaryRelationship,

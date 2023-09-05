@@ -12,6 +12,10 @@ import {
   BoundaryAssociationVoque,
 } from './boundary/boundaryAssociation';
 import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
+import {
+  DIRECTORY_FACT_2_GEPP,
+  DirectoryFact2Voque,
+} from './directory/directoryFact2';
 import { THEME } from './theme';
 
 /**
@@ -24,40 +28,28 @@ export const getAllFactGraphElements = buildEstinant({
   .fromVoictent2<BoundaryFactVoque>({
     gepp: BOUNDARY_FACT_GEPP,
   })
-  .andFromVoictent2<BoundaryAssociationVoque>({
-    gepp: BOUNDARY_ASSOCIATION_GEPP,
+  .andFromVoictent2<DirectoryFact2Voque>({
+    gepp: DIRECTORY_FACT_2_GEPP,
   })
   .toHubblepupTuple2<DirectedGraphElement2Voque>({
     gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
-  .onPinbe((boundaryFactList, boundaryAssociationList) => {
-    // TODO: remove this hardcoded map
-    const boundaryFactByBoundaryZorn = new Map(
-      boundaryFactList.map((boundaryFact) => {
-        return [boundaryFact.boundary.zorn, boundaryFact] as const;
-      }),
-    );
-
+  .onPinbe((boundaryFactList, directoryFactList) => {
     // TODO: remove placeholder nodes
-    const associatedBoundaryPlaceholderNodeList = boundaryAssociationList.map(
-      (boundaryAssociation) => {
-        const referencingBoundaryFact = boundaryFactByBoundaryZorn.get(
-          boundaryAssociation.referencingBoundary.zorn,
-        );
-
-        assertIsDefined(referencingBoundaryFact);
-
+    const directoryFactPlaceholderNodeList = directoryFactList.map(
+      (directoryFact) => {
         return new DirectedGraphNode2Instance({
           locator: new GraphConstituentLocatorInstance({
-            rootGraphLocator: referencingBoundaryFact.rootGraphLocator,
-            parentId: referencingBoundaryFact.rootGraphLocator.id,
+            rootGraphLocator: directoryFact.boundaryFact.rootGraphLocator,
+            parentId: directoryFact.subgraph.id,
             localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
-              distinguisher: boundaryAssociation.referencedBoundary.displayName,
+              distinguisher:
+                directoryFact.boundedDirectory.directory.zorn.forMachine,
             }),
           }),
           inputAttributeByKey: {
-            label: boundaryAssociation.referencedBoundary.displayName,
-            ...THEME.file,
+            label: '',
+            ...THEME.directoryPathNode,
           },
         });
       },
@@ -67,8 +59,11 @@ export const getAllFactGraphElements = buildEstinant({
       ...boundaryFactList.map((boundaryFact) => {
         return boundaryFact.directedGraph;
       }),
+      ...directoryFactList.map((directoryFact) => {
+        return directoryFact.subgraph;
+      }),
       // TODO: remove placeholder nodes
-      ...associatedBoundaryPlaceholderNodeList,
+      ...directoryFactPlaceholderNodeList,
     ];
   })
   .assemble();

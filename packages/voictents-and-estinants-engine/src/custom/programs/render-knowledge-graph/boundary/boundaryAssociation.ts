@@ -13,7 +13,7 @@ const BOUNDARY_ASSOCIATION_ZORN_TEMPLATE = [
 ] as const satisfies GenericZorn2Template;
 type BoundaryAssociationZornTemplate =
   typeof BOUNDARY_ASSOCIATION_ZORN_TEMPLATE;
-class BoundaryAssociationZorn extends Zorn2<BoundaryAssociationZornTemplate> {
+export class BoundaryAssociationZorn extends Zorn2<BoundaryAssociationZornTemplate> {
   get rawTemplate(): BoundaryAssociationZornTemplate {
     return BOUNDARY_ASSOCIATION_ZORN_TEMPLATE;
   }
@@ -28,8 +28,10 @@ type BoundaryAssociationConstructorInput = {
  * Defines a relationship between two boundaries without defining the direction
  * of that relationship (ie. importing vs imported). A boundary can be
  * associated with itself so that it appears in its own directed graph
+ *
+ * @todo rename to BoundaryToBoundaryAssociation
  */
-type BoundaryAssociation = SimplifyN<
+export type BoundaryAssociation = SimplifyN<
   [
     {
       zorn: BoundaryAssociationZorn;
