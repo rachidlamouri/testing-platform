@@ -19,16 +19,6 @@ import {
   OutputFile,
   OutputFileVoque,
 } from '../../programmable-units/output-file/outputFile';
-import { FILE_FACT_GEPP, FileFact, FileFactVoque } from './file/fileFact';
-import {
-  INVERTED_DEPENDENCY_GROUP_GEPP,
-  InvertedDependencyGroupVoque,
-} from './dependency/invertedDependencyGroup';
-import { DependencyPathSegmentFact } from './dependency/dependencyPathSegmentFact';
-import {
-  DEPENDENCY_FACT_GEPP,
-  DependencyFactVoque,
-} from './dependency/dependencyFact';
 import {
   APP_RENDERER_DELAYER_GEPP,
   AppRendererDelayerInstance,
@@ -54,15 +44,15 @@ export const decodeAndRecastSvgDocument = buildEstinant({
   .fromHubblepup2<SvgDocumentVoque>({
     gepp: SVG_DOCUMENT_GEPP,
   })
-  .andFromVoictent2<FileFactVoque>({
-    gepp: FILE_FACT_GEPP,
-  })
-  .andFromVoictent2<InvertedDependencyGroupVoque>({
-    gepp: INVERTED_DEPENDENCY_GROUP_GEPP,
-  })
-  .andFromVoictent2<DependencyFactVoque>({
-    gepp: DEPENDENCY_FACT_GEPP,
-  })
+  // .andFromVoictent2<FileFactVoque>({
+  //   gepp: FILE_FACT_GEPP,
+  // })
+  // .andFromVoictent2<InvertedDependencyGroupVoque>({
+  //   gepp: INVERTED_DEPENDENCY_GROUP_GEPP,
+  // })
+  // .andFromVoictent2<DependencyFactVoque>({
+  //   gepp: DEPENDENCY_FACT_GEPP,
+  // })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
@@ -75,41 +65,41 @@ export const decodeAndRecastSvgDocument = buildEstinant({
   .onPinbe(
     (
       svgDocument,
-      fileFactList,
-      invertedDependencyGroupList,
-      dependencyFactList,
+      // fileFactList,
+      // invertedDependencyGroupList,
+      // dependencyFactList,
     ) => {
-      const importedNodeIdListByImportingNodeId = new Map<string, string[]>();
-      dependencyFactList.forEach((dependencyFact) => {
-        const key = dependencyFact.importingFact.nodeLocator.id;
-        const group = importedNodeIdListByImportingNodeId.get(key) ?? [];
-        group.push(dependencyFact.importedFact.nodeLocator.id);
-        importedNodeIdListByImportingNodeId.set(key, group);
-      });
+      // const importedNodeIdListByImportingNodeId = new Map<string, string[]>();
+      // dependencyFactList.forEach((dependencyFact) => {
+      //   const key = dependencyFact.importingFact.nodeLocator.id;
+      //   const group = importedNodeIdListByImportingNodeId.get(key) ?? [];
+      //   group.push(dependencyFact.importedFact.nodeLocator.id);
+      //   importedNodeIdListByImportingNodeId.set(key, group);
+      // });
 
-      const importingNodeIdListByImportedNodeId = new Map<string, string[]>();
-      dependencyFactList.forEach((dependencyFact) => {
-        const key = dependencyFact.importedFact.nodeLocator.id;
-        const group = importingNodeIdListByImportedNodeId.get(key) ?? [];
-        group.push(dependencyFact.importingFact.nodeLocator.id);
-        importingNodeIdListByImportedNodeId.set(key, group);
-      });
+      // const importingNodeIdListByImportedNodeId = new Map<string, string[]>();
+      // dependencyFactList.forEach((dependencyFact) => {
+      //   const key = dependencyFact.importedFact.nodeLocator.id;
+      //   const group = importingNodeIdListByImportedNodeId.get(key) ?? [];
+      //   group.push(dependencyFact.importingFact.nodeLocator.id);
+      //   importingNodeIdListByImportedNodeId.set(key, group);
+      // });
 
-      const fileFactByNodeId = new Map(
-        fileFactList.map((fileFact) => {
-          return [fileFact.nodeLocator.id, fileFact] as const;
-        }),
-      );
+      // const fileFactByNodeId = new Map(
+      //   fileFactList.map((fileFact) => {
+      //     return [fileFact.nodeLocator.id, fileFact] as const;
+      //   }),
+      // );
 
-      const dependencyPathSegmentFactById = new Map(
-        invertedDependencyGroupList
-          .flatMap((group) => {
-            return group.dependencyPathSegmentFactList;
-          })
-          .map((segment) => {
-            return [`${segment.tailId}:${segment.headId}`, segment];
-          }),
-      );
+      // const dependencyPathSegmentFactById = new Map(
+      //   invertedDependencyGroupList
+      //     .flatMap((group) => {
+      //       return group.dependencyPathSegmentFactList;
+      //     })
+      //     .map((segment) => {
+      //       return [`${segment.tailId}:${segment.headId}`, segment];
+      //     }),
+      // );
 
       const $ = cheerio.load(svgDocument.grition);
 
@@ -346,109 +336,109 @@ export const decodeAndRecastSvgDocument = buildEstinant({
         throw Error('Invalid or missing starting node');
       }
 
-      const recastFileFact = (
-        fileFact: FileFact,
-        childElement: n.JSXElement,
-      ): n.JSXElement => {
-        const importedNodeIdList =
-          importedNodeIdListByImportingNodeId.get(fileFact.nodeLocator.id) ??
-          [];
-        const importingNodeIdList =
-          importingNodeIdListByImportedNodeId.get(fileFact.nodeLocator.id) ??
-          [];
+      // const recastFileFact = (
+      //   fileFact: FileFact,
+      //   childElement: n.JSXElement,
+      // ): n.JSXElement => {
+      //   // const importedNodeIdList =
+      //   //   importedNodeIdListByImportingNodeId.get(fileFact.nodeLocator.id) ??
+      //   //   [];
+      //   // const importingNodeIdList =
+      //   //   importingNodeIdListByImportedNodeId.get(fileFact.nodeLocator.id) ??
+      //   //   [];
 
-        const element = b.jsxElement(
-          b.jsxOpeningElement(b.jsxIdentifier('FileFact'), [
-            b.jsxAttribute(
-              b.jsxIdentifier('factId'),
-              b.literal(fileFact.nodeLocator.id),
-            ),
-            b.jsxAttribute(
-              b.jsxIdentifier('fileName'),
-              b.literal(fileFact.file.onDiskFileName.camelCase),
-            ),
-            b.jsxAttribute(
-              b.jsxIdentifier('importedNodeIdSet'),
-              b.jsxExpressionContainer(
-                b.newExpression(b.identifier('Set'), [
-                  b.arrayExpression(
-                    importedNodeIdList.map((nodeId) => b.literal(nodeId)),
-                  ),
-                ]),
-              ),
-            ),
-            b.jsxAttribute(
-              b.jsxIdentifier('importingNodeIdSet'),
-              b.jsxExpressionContainer(
-                b.newExpression(b.identifier('Set'), [
-                  b.arrayExpression(
-                    importingNodeIdList.map((nodeId) => b.literal(nodeId)),
-                  ),
-                ]),
-              ),
-            ),
-          ]),
-          b.jsxClosingElement(b.jsxIdentifier('FileFact')),
-          [childElement],
-        );
+      //   const element = b.jsxElement(
+      //     b.jsxOpeningElement(b.jsxIdentifier('FileFact'), [
+      //       b.jsxAttribute(
+      //         b.jsxIdentifier('factId'),
+      //         b.literal(fileFact.nodeLocator.id),
+      //       ),
+      //       b.jsxAttribute(
+      //         b.jsxIdentifier('fileName'),
+      //         b.literal(fileFact.file.onDiskFileName.camelCase),
+      //       ),
+      //       b.jsxAttribute(
+      //         b.jsxIdentifier('importedNodeIdSet'),
+      //         b.jsxExpressionContainer(
+      //           b.newExpression(b.identifier('Set'), [
+      //             b.arrayExpression(
+      //               importedNodeIdList.map((nodeId) => b.literal(nodeId)),
+      //             ),
+      //           ]),
+      //         ),
+      //       ),
+      //       b.jsxAttribute(
+      //         b.jsxIdentifier('importingNodeIdSet'),
+      //         b.jsxExpressionContainer(
+      //           b.newExpression(b.identifier('Set'), [
+      //             b.arrayExpression(
+      //               importingNodeIdList.map((nodeId) => b.literal(nodeId)),
+      //             ),
+      //           ]),
+      //         ),
+      //       ),
+      //     ]),
+      //     b.jsxClosingElement(b.jsxIdentifier('FileFact')),
+      //     [childElement],
+      //   );
 
-        return element;
-      };
+      //   return element;
+      // };
 
-      const recastDependencyPathSegmentFact = (
-        id: string,
-        fact: DependencyPathSegmentFact,
-        childElement: n.JSXElement,
-      ): n.JSXElement => {
-        const element = b.jsxElement(
-          b.jsxOpeningElement(b.jsxIdentifier('DependencyPathSegmentFact'), [
-            b.jsxAttribute(b.jsxIdentifier('factId'), b.literal(id)),
-            b.jsxAttribute(b.jsxIdentifier('headId'), b.literal(fact.headId)),
-            b.jsxAttribute(b.jsxIdentifier('tailId'), b.literal(fact.tailId)),
-            b.jsxAttribute(
-              b.jsxIdentifier('pathHeadId'),
-              b.literal(fact.pathHeadId),
-            ),
-            b.jsxAttribute(
-              b.jsxIdentifier('pathTailIdSet'),
-              b.jsxExpressionContainer(
-                b.newExpression(b.identifier('Set'), [
-                  b.arrayExpression(
-                    fact.pathTailIdSet.map((tailId) => b.literal(tailId)),
-                  ),
-                ]),
-              ),
-            ),
-          ]),
-          b.jsxClosingElement(b.jsxIdentifier('DependencyPathSegmentFact')),
-          [childElement],
-        );
+      // const recastDependencyPathSegmentFact = (
+      //   id: string,
+      //   fact: DependencyPathSegmentFact,
+      //   childElement: n.JSXElement,
+      // ): n.JSXElement => {
+      //   const element = b.jsxElement(
+      //     b.jsxOpeningElement(b.jsxIdentifier('DependencyPathSegmentFact'), [
+      //       b.jsxAttribute(b.jsxIdentifier('factId'), b.literal(id)),
+      //       b.jsxAttribute(b.jsxIdentifier('headId'), b.literal(fact.headId)),
+      //       b.jsxAttribute(b.jsxIdentifier('tailId'), b.literal(fact.tailId)),
+      //       b.jsxAttribute(
+      //         b.jsxIdentifier('pathHeadId'),
+      //         b.literal(fact.pathHeadId),
+      //       ),
+      //       b.jsxAttribute(
+      //         b.jsxIdentifier('pathTailIdSet'),
+      //         b.jsxExpressionContainer(
+      //           b.newExpression(b.identifier('Set'), [
+      //             b.arrayExpression(
+      //               fact.pathTailIdSet.map((tailId) => b.literal(tailId)),
+      //             ),
+      //           ]),
+      //         ),
+      //       ),
+      //     ]),
+      //     b.jsxClosingElement(b.jsxIdentifier('DependencyPathSegmentFact')),
+      //     [childElement],
+      //   );
 
-        return element;
-      };
+      //   return element;
+      // };
 
-      const recastFact = (
-        id: string,
-        childElement: n.JSXElement,
-      ): n.JSXElement | null => {
-        const fileFact = fileFactByNodeId.get(id);
-        const dependencyPathSegmentFact = dependencyPathSegmentFactById.get(id);
+      // const recastFact = (
+      //   id: string,
+      //   childElement: n.JSXElement,
+      // ): n.JSXElement | null => {
+      //   const fileFact = fileFactByNodeId.get(id);
+      //   const dependencyPathSegmentFact = dependencyPathSegmentFactById.get(id);
 
-        if (fileFact !== undefined) {
-          return recastFileFact(fileFact, childElement);
-        }
+      //   if (fileFact !== undefined) {
+      //     return recastFileFact(fileFact, childElement);
+      //   }
 
-        if (dependencyPathSegmentFact !== undefined) {
-          return recastDependencyPathSegmentFact(
-            id,
-            dependencyPathSegmentFact,
-            childElement,
-          );
-        }
+      //   if (dependencyPathSegmentFact !== undefined) {
+      //     return recastDependencyPathSegmentFact(
+      //       id,
+      //       dependencyPathSegmentFact,
+      //       childElement,
+      //     );
+      //   }
 
-        // TODO: throw an error here once all fact types are handled
-        return null;
-      };
+      //   // TODO: throw an error here once all fact types are handled
+      //   return null;
+      // };
 
       const recastElementNode = (
         decodedNode: DecodedElementNode,
@@ -500,10 +490,11 @@ export const decodeAndRecastSvgDocument = buildEstinant({
           childJsxList,
         );
 
-        const parentElement =
-          decodedNode.id !== null
-            ? recastFact(decodedNode.id, element) ?? element
-            : element;
+        const parentElement = element;
+        // const parentElement =
+        //   decodedNode.id !== null
+        //     ? recastFact(decodedNode.id, element) ?? element
+        //     : element;
 
         return parentElement;
       };
