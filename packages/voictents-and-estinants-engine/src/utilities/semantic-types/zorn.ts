@@ -43,7 +43,7 @@ type Zorn2LikeConstructor<TZorn2Like extends Zorn2Like> = {
 
 type GenericZorn2LikeConstructor = Zorn2LikeConstructor<Zorn2Like>;
 
-export enum ZornTemplateKeyword {
+enum ZornTemplateKeyword {
   LITERAL = '',
 }
 

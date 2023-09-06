@@ -15,8 +15,8 @@ import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 type ScriptInput = {
-  filePath: string | undefined;
   typeName: string | undefined;
+  filePath: string | undefined;
 };
 
 function assertScriptInputIsValid(
@@ -48,10 +48,10 @@ function assertScriptInputIsValid(
   }
 }
 
-const [filePath, typeName] = process.argv.slice(2);
+const [typeName, filePath] = process.argv.slice(2);
 const scriptInput: ScriptInput = {
-  filePath,
   typeName,
+  filePath,
 };
 
 assertScriptInputIsValid(scriptInput);
