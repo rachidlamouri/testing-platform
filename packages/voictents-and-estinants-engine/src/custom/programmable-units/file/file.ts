@@ -1,17 +1,9 @@
 import { Merge } from 'type-fest';
-import {
-  ObjectWithPrototype,
-  buildConstructorFunctionWithName,
-} from '../../../utilities/buildConstructorFunction';
+import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
-import {
-  BaseFileSystemNode,
-  FileSystemNodePrototype,
-  getFileSystemNodePathPartList,
-  getFileSystemNodeZorn,
-} from './fileSystemNode';
+import { FilePath, FilePathInstance } from './filePath';
+import { FileSystemNodeZorn } from './fileSystemNode';
 import { FileSystemNodeVoque } from './fileSystemNodeVoictent';
-import { SpreadN } from '../../../utilities/spreadN';
 
 type FileName = {
   pascalCase: string;
@@ -23,41 +15,28 @@ type FileName = {
 type FileExtensionMetadata<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier,
 > = {
-  /** @deprecated in favor of partList */
+  /** @deprecated in favor of nodePath.partList */
   parts: string[];
+  /** @deprecated in favor of nodePath.partList */
   partList: string[];
+  /** @deprecated in favor of a nodePath property */
   suffix: string;
+  /** @deprecated in favor of a nodePath property */
   suffixIdentifier: TFileExtensionSuffixIdentifier;
 };
 
-type BaseFile<
-  TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
-  TAdditionalMetadata extends object | null = null,
-> = SpreadN<
-  [
-    BaseFileSystemNode,
-    {
-      /** @deprecated in favor of zorn.forMachine  */
-      instanceId: string;
-      directoryPath: string;
-      onDiskFileName: Merge<FileName, { asIs: string }>;
-      inMemoryFileName: FileName;
-      extension: FileExtensionMetadata<TFileExtensionSuffixIdentifier>;
-      additionalMetadata: TAdditionalMetadata;
-    },
-  ]
->;
+type FileConstructorInput = {
+  nodePath: string;
+  // TODO: update some of these fields to be derived in this file
+  /** @deprecated in favor of zorn.forMachine  */
+  instanceId: string;
+  onDiskFileName: Merge<FileName, { asIs: string }>;
+  inMemoryFileName: FileName;
+  extension: FileExtensionMetadata<FileExtensionSuffixIdentifier>;
+  additionalMetadata: null;
+};
 
-// TODO: move extension logic to a getter
-type FilePrototype = SpreadN<
-  [
-    FileSystemNodePrototype,
-    {
-      get filePath(): string;
-      get filePathPartList(): string[];
-    },
-  ]
->;
+// TODO: separate "File" and GenericFile;
 
 /**
  * Represents a file system file
@@ -65,23 +44,69 @@ type FilePrototype = SpreadN<
 export type File<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
   TAdditionalMetadata extends object | null = null,
-> = ObjectWithPrototype<
-  BaseFile<TFileExtensionSuffixIdentifier, TAdditionalMetadata>,
-  FilePrototype
->;
+> = {
+  zorn: FileSystemNodeZorn;
+  /** @deprecated in favor of zorn.forMachine  */
+  instanceId: string;
+  /** @deprecated in favor of a nodePath.parentDirectoryPath */
+  directoryPath: string;
+  onDiskFileName: Merge<FileName, { asIs: string }>;
+  inMemoryFileName: FileName;
+  extension: FileExtensionMetadata<TFileExtensionSuffixIdentifier>;
+  additionalMetadata: TAdditionalMetadata;
+  filePath: string;
+  nodePath: FilePath;
+};
 
-export const { FileInstance } = buildConstructorFunctionWithName(
-  'FileInstance',
-)<BaseFile, FilePrototype, File>({
-  zorn: getFileSystemNodeZorn,
-  nodePathPartList: getFileSystemNodePathPartList,
-  filePathPartList: (file) => {
-    return file.nodePathPartList;
-  },
-  filePath: (file) => {
-    return file.nodePath;
-  },
-});
+export const { FileInstance } = buildNamedConstructorFunction({
+  constructorName: 'FileInstance',
+  instancePropertyNameTuple: [
+    // keep this as a multiline list
+    'zorn',
+    'instanceId',
+    'onDiskFileName',
+    'inMemoryFileName',
+    'extension',
+    'additionalMetadata',
+    'instanceId',
+    'directoryPath',
+    'filePath',
+    'nodePath',
+    'onDiskFileName',
+    'inMemoryFileName',
+    'extension',
+    'additionalMetadata',
+  ],
+} as const)
+  .withTypes<FileConstructorInput, File>({
+    typeCheckErrorMesssages: {
+      initialization: '',
+      instancePropertyNameTuple: {
+        missingProperties: '',
+        extraneousProperties: '',
+      },
+    },
+    transformInput: (input) => {
+      const { nodePath: serializedFilePath, ...otherInputFields } = input;
+
+      const zorn = new FileSystemNodeZorn({
+        nodePath: serializedFilePath,
+      });
+
+      const filePath = new FilePathInstance({
+        serialized: serializedFilePath,
+      });
+
+      return {
+        zorn,
+        filePath: serializedFilePath,
+        nodePath: filePath,
+        directoryPath: filePath.parentDirectoryPath,
+        ...otherInputFields,
+      };
+    },
+  })
+  .assemble();
 
 export const FILE_GEPP = 'file';
 

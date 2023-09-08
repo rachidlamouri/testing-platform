@@ -18,7 +18,7 @@ type FileSystemNodeIndexByName = SpreadN<
     InMemoryIndexByName,
     {
       zorn: GenericOdeshin2['zorn'];
-      filePath: string;
+      nodePath: string;
     },
   ]
 >;
@@ -56,7 +56,7 @@ export class FileSystemNodeVoictent<
 
   addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
     this.voictentPelie.byZorn.set(hubblepup.zorn.forHuman, hubblepup);
-    this.voictentPelie.byNodePath.set(hubblepup.nodePath, hubblepup);
+    this.voictentPelie.byNodePath.set(hubblepup.nodePath.serialized, hubblepup);
     this.voictentPelie.list.push(hubblepup);
 
     super.addHubblepup(hubblepup);
@@ -82,7 +82,7 @@ export class FileSystemNodeVoictent<
         serializableId: `${listIndex}`,
         listIndex,
         zorn: hubblepup.zorn,
-        filePath: hubblepup.nodePath,
+        nodePath: hubblepup.nodePath.serialized,
       },
     };
   }

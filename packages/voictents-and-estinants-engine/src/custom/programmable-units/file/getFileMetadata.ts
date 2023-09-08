@@ -30,10 +30,14 @@ const getCamelCaseNameParts = (camelCaseName: string): string[] => {
 type FileMetadata = {
   filePath: string;
   parentDirectoryNameParts: string[];
+  extensionlessFileName: string;
   onDiskFileName: string;
   onDiskFileNameParts: string[];
   inMemoryFileNameParts: string[];
+  fullExtension: string;
+  /** @deprecated in favor of extensionPartList */
   extensionParts: string[];
+  extensionPartList: string[];
   extensionSuffix: string;
 };
 
@@ -49,16 +53,17 @@ export const getFileMetadata = (filePath: string): FileMetadata => {
     .split('-')
     .map((x) => x.toLowerCase());
 
-  const [onDiskFileName, ...fileExtensionParts] = legalFileName.split('.');
+  const [extensionlessFileName, ...fileExtensionParts] =
+    legalFileName.split('.');
   const normalizedFileExtensionParts = fileExtensionParts.map((x) =>
     x.toLowerCase(),
   );
   const fileExtensionSuffix: string =
     fileExtensionParts[fileExtensionParts.length - 1];
 
-  const onDiskFileNameParts = getCamelCaseNameParts(onDiskFileName);
+  const onDiskFileNameParts = getCamelCaseNameParts(extensionlessFileName);
 
-  const isIndexFile = onDiskFileName === 'index';
+  const isIndexFile = extensionlessFileName === 'index';
   const inMemoryFileNameParts = isIndexFile
     ? parentDirectoryNameParts
     : onDiskFileNameParts;
@@ -66,10 +71,13 @@ export const getFileMetadata = (filePath: string): FileMetadata => {
   return {
     filePath,
     parentDirectoryNameParts,
+    extensionlessFileName,
     onDiskFileName: legalFileName,
     onDiskFileNameParts,
     inMemoryFileNameParts,
+    fullExtension: fileExtensionParts.join('.'),
     extensionParts: normalizedFileExtensionParts,
+    extensionPartList: normalizedFileExtensionParts,
     extensionSuffix: fileExtensionSuffix,
   } satisfies FileMetadata;
 };
