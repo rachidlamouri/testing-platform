@@ -81,7 +81,7 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
 
       const directoryPathRelativeToCommonBoundary = posix.relative(
         commonBoundaryRoot.directoryPath,
-        boundary.directoryPath,
+        boundary.directory.directoryPath,
       );
 
       return {

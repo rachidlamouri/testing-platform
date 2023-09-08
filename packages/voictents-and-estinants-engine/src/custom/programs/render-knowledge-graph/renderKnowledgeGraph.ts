@@ -28,37 +28,38 @@ import { getTypeScriptFileImportList } from '../../programmable-units/type-scrip
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getAdaptedProgramBoundary } from './boundary/getAdaptedProgramBoundary';
 import {
-  BOUNDARY_GEPP,
-  BoundaryVoque,
-  STATIC_BOUNDARY_LIST,
-} from './boundary/boundary';
+  BOUNDARY_CONFIGURATION_GEPP,
+  BoundaryConfigurationVoque,
+  BOUNDARY_CONFIGURATION_LIST,
+} from './boundary/boundaryConfiguration';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
-import { assertBoundaryDirectoryExists } from './boundary/assertBoundaryDirectoryExists';
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { renderGraphvizCodeToSvgDocument2 } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument2';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { getDirectedGraphFromGraphElementGroup } from '../model-programs/getDirectedGraphFromGraphElementGroup';
 import { groupGraphElements } from '../model-programs/groupGraphElements';
 import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
-import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin3Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { getCommonBoundaryRoot } from './common-boundary-root/getCommonBoundaryRoot';
 import {
-  BOUNDARY_TRIE_A_GEPP,
-  BoundaryTrieAVoque,
-} from './boundary/boundaryTrieA';
-import { getBoundaryTrieA } from './boundary/getBoundaryTrieA';
+  PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+  PartitionedBoundaryListTrieVoque,
+} from './boundary/partitionedBoundaryListTrie';
+import { getPartitionedBoundaryListTrie } from './boundary/getPartitionedBoundaryListTrie';
 import {
-  BoundaryTrieBVoque,
-  BOUNDARY_TRIE_B_GEPP,
-} from './boundary/boundaryTrieB';
+  PARTITIONED_BOUNDARY_TRIE_GEPP,
+  PartitionedBoundaryTrieVoque,
+} from './boundary/partitionedBoundaryTrie';
+import { getPartitionedBoundaryTrie } from './boundary/getPartitionedBoundaryTrie';
 import { renderApp } from './app/node/renderApp';
 import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { getAllFactGraphElements } from './getAllFactGraphElements';
-import { getPartitionFact } from './partition-fact/getPartitionFact';
+import { getBoundaryFromConfiguration } from './boundary/getBoundaryFromConfiguration';
+import { getBoundaryPartition } from './partition-fact/getBoundaryPartition';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -84,9 +85,9 @@ digikikify({
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
-    new InMemoryOdeshin2ListVoictent<BoundaryVoque>({
-      gepp: BOUNDARY_GEPP,
-      initialHubblepupPelueTuple: STATIC_BOUNDARY_LIST,
+    new InMemoryOdeshin3Voictent<BoundaryConfigurationVoque>({
+      gepp: BOUNDARY_CONFIGURATION_GEPP,
+      initialHubblepupPelueTuple: BOUNDARY_CONFIGURATION_LIST,
     }),
   ] as const,
   fileSystemNodeGeppCombination: defaultFileGeppCombination,
@@ -94,12 +95,12 @@ digikikify({
     new ProgramErrorVoictent({
       programFileCache,
     }),
-    new InMemoryVoictent<BoundaryTrieAVoque>({
-      gepp: BOUNDARY_TRIE_A_GEPP,
+    new InMemoryVoictent<PartitionedBoundaryListTrieVoque>({
+      gepp: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
       initialHubblepupPelueTuple: [],
     }),
-    new InMemoryVoictent<BoundaryTrieBVoque>({
-      gepp: BOUNDARY_TRIE_B_GEPP,
+    new InMemoryVoictent<PartitionedBoundaryTrieVoque>({
+      gepp: PARTITIONED_BOUNDARY_TRIE_GEPP,
       initialHubblepupPelueTuple: [],
     }),
     new OutputFileVoictent({
@@ -119,16 +120,16 @@ digikikify({
     filterEngineProgramFile,
     getEngineProgramLocator3,
 
+    getBoundaryFromConfiguration,
     getAdaptedProgramBoundary,
-    assertBoundaryDirectoryExists,
-
-    getBoundaryTrieA,
-    assertNoBoundaryOverlap,
 
     getCommonBoundaryRoot,
-    getPartitionFact,
+    getBoundaryPartition,
 
-    // getBoundaryTrieB,
+    getPartitionedBoundaryListTrie,
+    assertNoBoundaryOverlap,
+
+    getPartitionedBoundaryTrie,
 
     // getDirectoriesWithFiles,
     // getDirectoryBoundaryRelationship,

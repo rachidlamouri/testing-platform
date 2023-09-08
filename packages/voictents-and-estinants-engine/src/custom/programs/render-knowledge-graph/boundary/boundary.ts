@@ -5,12 +5,20 @@ import {
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
 import { SimplifyN } from '../../../../utilities/simplify';
+import { Directory } from '../../../programmable-units/file/directory';
 
 const BOUNDARY_ZORN_TEMPLATE = [
   'normalizedDisplayName',
 ] as const satisfies GenericZorn2Template;
 type BoundaryZornTemplate = typeof BOUNDARY_ZORN_TEMPLATE;
 export class BoundaryZorn extends Zorn2<BoundaryZornTemplate> {
+  constructor(displayName: string) {
+    const normalizedDisplayName = displayName.replaceAll(/(:|\s+),'-'/g, '');
+    super({
+      normalizedDisplayName,
+    });
+  }
+
   get rawTemplate(): BoundaryZornTemplate {
     return BOUNDARY_ZORN_TEMPLATE;
   }
@@ -18,7 +26,7 @@ export class BoundaryZorn extends Zorn2<BoundaryZornTemplate> {
 
 type BoundaryConstructorInput = {
   displayName: string;
-  directoryPath: string;
+  directory: Directory;
 };
 
 /**
@@ -39,7 +47,7 @@ export const { BoundaryInstance } = buildNamedConstructorFunction({
     // keep this as a multiline list
     'zorn',
     'displayName',
-    'directoryPath',
+    'directory',
   ],
 } as const)
   .withTypes<BoundaryConstructorInput, Boundary>({
@@ -53,10 +61,7 @@ export const { BoundaryInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { displayName } = input;
 
-      const normalizedDisplayName = displayName.replaceAll(/(:|\s+),'-'/g, '');
-      const zorn = new BoundaryZorn({
-        normalizedDisplayName,
-      });
+      const zorn = new BoundaryZorn(displayName);
 
       return {
         zorn,
@@ -71,35 +76,3 @@ export const BOUNDARY_GEPP = 'boundary';
 type BoundaryGepp = typeof BOUNDARY_GEPP;
 
 export type BoundaryVoque = InMemoryOdeshin2ListVoque<BoundaryGepp, Boundary>;
-
-export const STATIC_BOUNDARY_LIST: Boundary[] = [
-  new BoundaryInstance({
-    displayName: 'Core Layer',
-    directoryPath: 'packages/voictents-and-estinants-engine/src/core',
-  }),
-  new BoundaryInstance({
-    // TODO: move to adapter
-    displayName: 'Custom Adapter',
-    directoryPath: 'packages/voictents-and-estinants-engine/src/custom/adapter',
-  }),
-  new BoundaryInstance({
-    // TODO: split these up by program and shared boundaries
-    displayName: 'Programmable Units',
-    directoryPath:
-      'packages/voictents-and-estinants-engine/src/custom/programmable-units',
-  }),
-  new BoundaryInstance({
-    displayName: 'Example Programs',
-    directoryPath:
-      'packages/voictents-and-estinants-engine/src/example-programs',
-  }),
-  new BoundaryInstance({
-    displayName: 'Adapter Layer',
-    directoryPath:
-      'packages/voictents-and-estinants-engine/src/type-script-adapter',
-  }),
-  new BoundaryInstance({
-    displayName: 'Utilities',
-    directoryPath: 'packages/voictents-and-estinants-engine/src/utilities',
-  }),
-];

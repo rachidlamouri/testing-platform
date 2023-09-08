@@ -335,6 +335,7 @@ const getCore2EngineProgramLocator = ({
     initializedVoqueLocatorList: initialVoqueLocatorList,
     estinantRelationshipList,
     rootGraphLocator: partialProgramLocator.rootGraphLocator,
+    engineProgramFile,
   });
 
   return {
@@ -613,6 +614,7 @@ const getAdaptedEngineProgramLocator = ({
     initializedVoqueLocatorList: engineVoqueLocatorList,
     estinantRelationshipList,
     rootGraphLocator: partialProgramLocator.rootGraphLocator,
+    engineProgramFile,
   });
 
   return {

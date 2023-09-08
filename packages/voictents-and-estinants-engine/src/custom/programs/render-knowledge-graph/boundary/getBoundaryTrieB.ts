@@ -29,7 +29,7 @@ export const getBoundaryTrieB = buildEstinant({
       .filter(hasOneElement)
       .forEach(([boundary]) => {
         // TODO: move path parsing elsewhere
-        const pathPartList = boundary.directoryPath.split(posix.sep);
+        const pathPartList = boundary.directory.directoryPath.split(posix.sep);
 
         trieB.addSubtrie(
           pathPartList,

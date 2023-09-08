@@ -5,13 +5,13 @@ import {
   EngineProgramLocator3Voque,
 } from '../../../programmable-units/engine-program/engineProgramLocator3';
 import {
-  ENGINE_PROGRAM_FILE_GEPP,
-  EngineProgramFileVoque,
-} from '../../../programmable-units/type-script-file-relationships/engineProgramFile';
+  DIRECTORY_GEPP,
+  DirectoryVoque,
+} from '../../../programmable-units/file/directory';
 import { BOUNDARY_GEPP, BoundaryInstance, BoundaryVoque } from './boundary';
 
 /**
- * Marks every engine program as a separate boundary
+ * Marks every adapted engine program as a separate boundary
  */
 export const getAdaptedProgramBoundary = buildEstinant({
   name: 'getAdaptedProgramBoundary',
@@ -19,15 +19,15 @@ export const getAdaptedProgramBoundary = buildEstinant({
   .fromHubblepup2<EngineProgramLocator3Voque>({
     gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromHubblepupTuple2<EngineProgramFileVoque, [OdeshinZorn]>({
-    gepp: ENGINE_PROGRAM_FILE_GEPP,
-    framate: (locator) => [locator.hubblepup.filePath],
-    croard: (programFile) => programFile.hubblepup.file.filePath,
+  .andFromHubblepupTuple2<DirectoryVoque, [OdeshinZorn]>({
+    gepp: DIRECTORY_GEPP,
+    framate: (locator) => [locator.hubblepup.engineProgramFile.directoryPath],
+    croard: (directory) => directory.hubblepup.directoryPath,
   })
   .toHubblepupTuple2<BoundaryVoque>({
     gepp: BOUNDARY_GEPP,
   })
-  .onPinbe((programLocator, [programFile]) => {
+  .onPinbe((programLocator, [directory]) => {
     if (programLocator.isCoreProgram) {
       return [];
     }
@@ -35,7 +35,7 @@ export const getAdaptedProgramBoundary = buildEstinant({
     return [
       new BoundaryInstance({
         displayName: `Adapted Program: ${programLocator.programName}`,
-        directoryPath: programFile.file.directoryPath,
+        directory,
       }),
     ];
   })

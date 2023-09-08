@@ -32,8 +32,8 @@ export const assertBoundaryDirectoryExists = buildEstinant({
   })
   .onPinbe((boundary) => {
     if (
-      fs.existsSync(boundary.directoryPath) &&
-      fs.statSync(boundary.directoryPath).isDirectory()
+      fs.existsSync(boundary.directory.directoryPath) &&
+      fs.statSync(boundary.directory.directoryPath).isDirectory()
     ) {
       return [];
     }
@@ -42,7 +42,7 @@ export const assertBoundaryDirectoryExists = buildEstinant({
       {
         name: 'nonexistent-boundary',
         error: new Error(
-          `Boundary "${boundary.directoryPath}" does not exist or is not a directory`,
+          `Boundary "${boundary.directory.directoryPath}" does not exist or is not a directory`,
         ),
         reporterLocator,
         sourceLocator: {

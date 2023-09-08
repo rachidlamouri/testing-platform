@@ -48,7 +48,7 @@ export const assertDirectoriesHaveBoundaries = buildEstinant({
   .onPinbe((directoryList, boundaryDirectoryRelationshipList, boundaryList) => {
     const boundaryDirectoryPathSet = new Set(
       boundaryList.map((boundary) => {
-        return boundary.directoryPath;
+        return boundary.directory.directoryPath;
       }),
     );
 

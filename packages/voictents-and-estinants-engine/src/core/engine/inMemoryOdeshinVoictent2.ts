@@ -46,7 +46,7 @@ export abstract class BaseInMemoryOdeshin2Voictent<
   TRestrictingVoque extends GenericInMemoryOdeshin2Voque,
   TVoque extends TRestrictingVoque,
 > extends AbstractInMemoryVoictent<TRestrictingVoque, TVoque> {
-  private hubblepupPelueByZorn = new Map<string, TVoque['hubblepupPelue']>();
+  protected hubblepupPelueByZorn = new Map<string, TVoque['hubblepupPelue']>();
 
   addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
     super.addHubblepup(hubblepup);
@@ -108,5 +108,35 @@ export class InMemoryOdeshin2ListVoictent<
 > {
   protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
     return this.hubblepupPelieTuple;
+  }
+}
+
+type InMemoryOdeshin3VoictentPelie<TOdeshinPelie> = {
+  byZorn: Map<string, TOdeshinPelie>;
+  list: TOdeshinPelie[];
+};
+
+export type InMemoryOdeshin3Voque<
+  TGepp extends Gepp,
+  TOdeshin extends GenericOdeshin2,
+> = InMemoryOdeshin2Voque<
+  TGepp,
+  TOdeshin,
+  InMemoryOdeshin3VoictentPelie<TOdeshin>
+>;
+
+type GenericinMemoryOdeshin3Voque = InMemoryOdeshin3Voque<
+  Gepp,
+  GenericOdeshin2
+>;
+
+export class InMemoryOdeshin3Voictent<
+  TVoque extends GenericinMemoryOdeshin3Voque,
+> extends BaseInMemoryOdeshin2Voictent<GenericinMemoryOdeshin3Voque, TVoque> {
+  protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
+    return {
+      byZorn: this.hubblepupPelueByZorn,
+      list: this.hubblepupPelieTuple,
+    };
   }
 }

@@ -24,7 +24,7 @@ export const getBoundaryTrieA = buildEstinant({
     const trieA = new BoundaryTrieA([]);
 
     boundaryList.forEach((boundary) => {
-      const pathPartList = boundary.directoryPath.split(posix.sep);
+      const pathPartList = boundary.directory.directoryPath.split(posix.sep);
 
       trieA.addSubtrie(
         pathPartList,

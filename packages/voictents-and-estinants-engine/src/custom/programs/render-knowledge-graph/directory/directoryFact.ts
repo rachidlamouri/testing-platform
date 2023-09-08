@@ -69,7 +69,8 @@ export const { DirectoryFactInstance } = buildNamedConstructorFunction({
         directory.directoryPath,
       );
       const isBoundaryDirectory =
-        directory.directoryPath === boundaryFact.boundary.directoryPath;
+        directory.directoryPath ===
+        boundaryFact.boundary.directory.directoryPath;
 
       const directoryFact: DirectoryFact = {
         ...partialDirectoryFact,

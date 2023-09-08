@@ -36,7 +36,7 @@ type PartitionFactConstructorInput = {
 /**
  * A section of the knowledge graph
  */
-type PartitionFact = SimplifyN<
+export type PartitionFact = SimplifyN<
   [
     { zorn: PartitionFactZorn },
     Pick<PartitionFactConstructorInput, 'boundary'>,
@@ -80,7 +80,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
 
       const directoryPathRelativeToCommonBoundary = posix.relative(
         commonBoundaryRoot.directoryPath,
-        boundary.directoryPath,
+        boundary.directory.directoryPath,
       );
 
       const directedGraph = new DirectedGraph2Instance({

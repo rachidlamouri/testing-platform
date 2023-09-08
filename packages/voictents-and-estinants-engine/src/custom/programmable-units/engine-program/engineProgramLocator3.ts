@@ -6,6 +6,7 @@ import {
 import { getTextDigest } from '../../../utilities/getTextDigest';
 import { getZornableId } from '../../../utilities/getZornableId';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
+import { TypeScriptFile } from '../type-script-file/typeScriptFile';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
 import { getEngineProgramZorn } from './partialEngineProgramLocator2';
 import { ProgramEstinantRelationship } from './programEstinantRelationship';
@@ -20,6 +21,7 @@ type BaseEngineProgramLocator3 = {
   initializedVoqueLocatorList: EngineVoqueLocator2[];
   estinantRelationshipList: ProgramEstinantRelationship[];
   rootGraphLocator: RootGraphLocator;
+  engineProgramFile: TypeScriptFile;
 };
 
 type EngineProgramLocator3Prototype = {
