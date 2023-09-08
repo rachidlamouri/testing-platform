@@ -11,6 +11,7 @@ import {
 } from '../../../utilities/type-script-ast/isIdentifiableVariableDeclaration';
 import { isExportNamedTypeScriptEnumDeclaration } from '../../../utilities/type-script-ast/isExportNamedTypeScriptEnumDeclaration';
 import { hasOneElement } from '../../../utilities/hasOneElement';
+import { isExportNamedFunctionDeclaration } from '../../../utilities/type-script-ast/isExportNamedFunctionDeclaration';
 
 export type IdentifiableProgramBodyStatementNode =
   | IdentifiableVariableDeclarator
@@ -39,6 +40,10 @@ export const getIdentifiableProgramBodyStatementNode = (
 
   if (isExportNamedTypeScriptEnumDeclaration(statement)) {
     return statement.declaration;
+  }
+
+  if (isExportNamedFunctionDeclaration(statement)) {
+    return { id: statement.declaration.id };
   }
 
   // TODO: this whole function needs to have a better return type to account for this case OR we need to make sure there are no re-exports
