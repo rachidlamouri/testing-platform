@@ -93,7 +93,7 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
       return {
         zorn,
         ...input,
-      }
+      } satisfies ${hubblepupTypeName}
     },
   })
   .assemble()
