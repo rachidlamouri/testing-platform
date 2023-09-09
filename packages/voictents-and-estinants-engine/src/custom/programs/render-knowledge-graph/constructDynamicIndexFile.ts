@@ -29,8 +29,8 @@ export const constructDynamicIndexFile = buildEstinant({
   .toHubblepup2<AppRendererDelayerVoque>({
     gepp: APP_RENDERER_DELAYER_GEPP,
   })
-  .onPinbe((partitionFactList) => {
-    const partitionFactWithVariableNameList = partitionFactList.map(
+  .onPinbe((partitionFactVoictent) => {
+    const partitionFactWithVariableNameList = partitionFactVoictent.list.map(
       (partitionFact, index) => {
         const variableName = `boundary${index}`;
 

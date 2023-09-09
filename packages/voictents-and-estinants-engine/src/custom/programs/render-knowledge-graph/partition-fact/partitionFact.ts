@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin3Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
   GenericZorn2Template,
@@ -22,7 +22,7 @@ const PARTITION_FACT_ZORN_TEMPLATE = [
   ['boundary', BoundaryZorn],
 ] as const satisfies GenericZorn2Template;
 type PartitionFactZornTemplate = typeof PARTITION_FACT_ZORN_TEMPLATE;
-class PartitionFactZorn extends Zorn2<PartitionFactZornTemplate> {
+export class PartitionFactZorn extends Zorn2<PartitionFactZornTemplate> {
   get rawTemplate(): PartitionFactZornTemplate {
     return PARTITION_FACT_ZORN_TEMPLATE;
   }
@@ -43,7 +43,7 @@ export type PartitionFact = SimplifyN<
     {
       rootGraphLocator: RootGraphLocator;
       directoryPathRelativeToCommonBoundary: string;
-      directedGraph: DirectedGraph2;
+      graphElement: DirectedGraph2;
     },
   ]
 >;
@@ -56,7 +56,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
     'boundary',
     'rootGraphLocator',
     'directoryPathRelativeToCommonBoundary',
-    'directedGraph',
+    'graphElement',
   ],
 } as const)
   .withTypes<PartitionFactConstructorInput, PartitionFact>({
@@ -83,7 +83,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
         boundary.directory.directoryPath,
       );
 
-      const directedGraph = new DirectedGraph2Instance({
+      const graphElement = new DirectedGraph2Instance({
         locator: rootGraphLocator,
         inputAttributeByKey: {
           label: boundary.displayName,
@@ -96,7 +96,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
         boundary,
         rootGraphLocator,
         directoryPathRelativeToCommonBoundary,
-        directedGraph,
+        graphElement,
       };
     },
   })
@@ -106,7 +106,7 @@ export const PARTITION_FACT_GEPP = 'partition-fact';
 
 type PartitionFactGepp = typeof PARTITION_FACT_GEPP;
 
-export type PartitionFactVoque = InMemoryOdeshin2ListVoque<
+export type PartitionFactVoque = InMemoryOdeshin3Voque<
   PartitionFactGepp,
   PartitionFact
 >;

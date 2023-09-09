@@ -1,5 +1,6 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import {
+  buildGeppCombination,
   buildVoictentByGepp,
   digikikify,
 } from '../../../type-script-adapter/digikikify';
@@ -60,6 +61,22 @@ import { defaultFileGeppCombination } from '../../programmable-units/file/defaul
 import { getAllFactGraphElements } from './getAllFactGraphElements';
 import { getBoundaryFromConfiguration } from './boundary/getBoundaryFromConfiguration';
 import { getBoundaryPartition } from './partition-fact/getBoundaryPartition';
+import {
+  PARTITION_FACT_GEPP,
+  PartitionFactVoque,
+} from './partition-fact/partitionFact';
+import {
+  PARTITIONED_FILE_GEPP,
+  PartitionedFileVoque,
+} from './file/partitionedFile';
+import { getFileDependencies } from './dependency/getFileDependencies';
+import { getBoundedFile } from './file/getBoundedFile';
+import { getPartitionedFileSystemNodes } from './getPartitionedFileSystemNodes';
+import { getBoundedDirectory } from './directory/getBoundedDirectory';
+import { getDirectoryFact2 } from './directory/getDirectoryFact2';
+import { getFileFact2 } from './file/getFileFact2';
+import { BOUNDED_DIRECTORY_GEPP } from './directory/boundedDirectory';
+import { BOUNDED_FILE_GEPP } from './file/boundedFile';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -90,10 +107,21 @@ digikikify({
       initialHubblepupPelueTuple: BOUNDARY_CONFIGURATION_LIST,
     }),
   ] as const,
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
+  fileSystemNodeGeppCombination: {
+    ...defaultFileGeppCombination,
+    ...buildGeppCombination([
+      // keep as multiline list
+      BOUNDED_DIRECTORY_GEPP,
+      BOUNDED_FILE_GEPP,
+    ] as const),
+  },
   uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,
+    }),
+    new InMemoryOdeshin3Voictent<PartitionFactVoque>({
+      gepp: PARTITION_FACT_GEPP,
+      initialHubblepupPelueTuple: [],
     }),
     new InMemoryVoictent<PartitionedBoundaryListTrieVoque>({
       gepp: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
@@ -101,6 +129,10 @@ digikikify({
     }),
     new InMemoryVoictent<PartitionedBoundaryTrieVoque>({
       gepp: PARTITIONED_BOUNDARY_TRIE_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
+    new InMemoryOdeshin3Voictent<PartitionedFileVoque>({
+      gepp: PARTITIONED_FILE_GEPP,
       initialHubblepupPelueTuple: [],
     }),
     new OutputFileVoictent({
@@ -130,6 +162,12 @@ digikikify({
     assertNoBoundaryOverlap,
 
     getPartitionedBoundaryTrie,
+    getBoundedDirectory,
+    getBoundedFile,
+    getFileDependencies,
+    getPartitionedFileSystemNodes,
+    getDirectoryFact2,
+    getFileFact2,
 
     // getDirectoriesWithFiles,
     // getDirectoryBoundaryRelationship,

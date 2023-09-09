@@ -7,6 +7,7 @@ type DirectoryConstructorInput = {
   /** @deprecated in favor of zorn.forMachine  */
   instanceId: string;
   nodePath: string;
+  ancestorDirectoryPathSet: string[];
 };
 
 /**
@@ -52,7 +53,11 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { instanceId, nodePath: serializedDirectoryPath } = input;
+      const {
+        instanceId,
+        nodePath: serializedDirectoryPath,
+        ancestorDirectoryPathSet,
+      } = input;
 
       const zorn = new FileSystemNodeZorn({
         nodePath: serializedDirectoryPath,
@@ -60,6 +65,7 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
 
       const directoryPath = new DirectoryPathInstance({
         serialized: serializedDirectoryPath,
+        ancestorDirectoryPathSet,
       });
 
       return {

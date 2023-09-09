@@ -79,49 +79,55 @@ export const enumerateFileSystemObjects = buildEstinant({
       accumulatorB: fileMetadataList,
     });
 
-    const directoryOutputTuple = directoryMetadataList.map(({ nodePath }) => {
-      return new DirectoryInstance({
-        instanceId: getTextDigest(nodePath),
-        nodePath,
-      });
-    });
+    const directoryOutputTuple = directoryMetadataList.map(
+      ({ nodePath, ancestorDirectoryPathSet }) => {
+        return new DirectoryInstance({
+          instanceId: getTextDigest(nodePath),
+          nodePath,
+          ancestorDirectoryPathSet,
+        });
+      },
+    );
 
-    const unorderedFileTuple = fileMetadataList.map<File>(({ nodePath }) => {
-      const {
-        onDiskFileName,
-        onDiskFileNameParts,
-        inMemoryFileNameParts,
-        extensionSuffix,
-        extensionParts,
-      } = getFileMetadata(nodePath);
+    const unorderedFileTuple = fileMetadataList.map<File>(
+      ({ nodePath, ancestorDirectoryPathSet }) => {
+        const {
+          onDiskFileName,
+          onDiskFileNameParts,
+          inMemoryFileNameParts,
+          extensionSuffix,
+          extensionParts,
+        } = getFileMetadata(nodePath);
 
-      const file2 = new FileInstance({
-        instanceId: getTextDigest(nodePath),
-        nodePath,
-        onDiskFileName: {
-          camelCase: partsToCamel(onDiskFileNameParts),
-          pascalCase: partsToPascal(onDiskFileNameParts),
-          screamingSnakeCase: partsToScreamingSnake(onDiskFileNameParts),
-          kebabCase: partsToKebabCase(onDiskFileNameParts),
-          asIs: onDiskFileName,
-        },
-        inMemoryFileName: {
-          camelCase: partsToCamel(inMemoryFileNameParts),
-          pascalCase: partsToPascal(inMemoryFileNameParts),
-          screamingSnakeCase: partsToScreamingSnake(inMemoryFileNameParts),
-          kebabCase: partsToKebabCase(inMemoryFileNameParts),
-        },
-        extension: {
-          parts: extensionParts,
-          partList: extensionParts,
-          suffix: extensionSuffix,
-          suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
-        },
-        additionalMetadata: null,
-      });
+        const file2 = new FileInstance({
+          instanceId: getTextDigest(nodePath),
+          nodePath,
+          ancestorDirectoryPathSet,
+          onDiskFileName: {
+            camelCase: partsToCamel(onDiskFileNameParts),
+            pascalCase: partsToPascal(onDiskFileNameParts),
+            screamingSnakeCase: partsToScreamingSnake(onDiskFileNameParts),
+            kebabCase: partsToKebabCase(onDiskFileNameParts),
+            asIs: onDiskFileName,
+          },
+          inMemoryFileName: {
+            camelCase: partsToCamel(inMemoryFileNameParts),
+            pascalCase: partsToPascal(inMemoryFileNameParts),
+            screamingSnakeCase: partsToScreamingSnake(inMemoryFileNameParts),
+            kebabCase: partsToKebabCase(inMemoryFileNameParts),
+          },
+          extension: {
+            parts: extensionParts,
+            partList: extensionParts,
+            suffix: extensionSuffix,
+            suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
+          },
+          additionalMetadata: null,
+        });
 
-      return file2;
-    });
+        return file2;
+      },
+    );
 
     // Reorders the files by suffix identifier so they are easier to see in a serialized collection
     const reorderByFileSuffixForDebugability = <TFile extends File>(
