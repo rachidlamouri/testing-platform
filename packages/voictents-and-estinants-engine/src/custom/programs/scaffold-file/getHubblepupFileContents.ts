@@ -36,12 +36,12 @@ export const getHubblepupFileContents = ({
   const zornTemplateTypeName = `${pascalCaseName}ZornTemplate`;
   const zornTemplateClassName = `${pascalCaseName}Zorn`;
   const constructorInputTypeName = `${pascalCaseName}ConstructorInput`;
-  const hubblepupTypename = pascalCaseName;
-  const constructorCodeName = `${hubblepupTypename}Instance`;
+  const hubblepupTypeName = pascalCaseName;
+  const constructorCodeName = `${hubblepupTypeName}Instance`;
   const geppCodeName = `${screamingSnakeCaseName}_GEPP`;
   const geppLiteral = kebabCaseName;
-  const geppTypeName = `${hubblepupTypename}Gepp`;
-  const voqueTypeName = `${hubblepupTypename}Voque`;
+  const geppTypeName = `${hubblepupTypeName}Gepp`;
+  const voqueTypeName = `${hubblepupTypeName}Voque`;
 
   const fileContents = `
 ${serializedImportLines}
@@ -60,7 +60,7 @@ type ${constructorInputTypeName} = {
   UPDATE_ME: any;
 }
 
-type ${hubblepupTypename} = SimplifyN<[
+type ${hubblepupTypeName} = SimplifyN<[
   { zorn: ${zornTemplateClassName} },
   ${constructorInputTypeName},
   {
@@ -75,7 +75,7 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
     'zorn',
   ],
 } as const)
-  .withTypes<${constructorInputTypeName}, ${hubblepupTypename}>({
+  .withTypes<${constructorInputTypeName}, ${hubblepupTypeName}>({
     typeCheckErrorMesssages: {
       initialization: '',
       instancePropertyNameTuple: {
@@ -102,7 +102,7 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
 
   type ${geppTypeName} = typeof ${geppCodeName}
 
-  export type ${voqueTypeName} = InMemoryOdeshin2ListVoque<${geppTypeName}, ${hubblepupTypename}>
+  export type ${voqueTypeName} = InMemoryOdeshin2ListVoque<${geppTypeName}, ${hubblepupTypeName}>
 `;
 
   return fileContents;
