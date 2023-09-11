@@ -7,6 +7,8 @@ import {
   DereferenceError,
 } from './abstractInMemoryVoictent';
 import { InMemoryIndexByName, InMemoryVoque } from './inMemoryVoque';
+import { OutputValueByTemplateKeyPath } from '../../utilities/semantic-types/zorn';
+import { assertNotUndefined } from '../../utilities/assertNotUndefined';
 
 type InMemoryOdeshin2IndexByName = SpreadN<
   [
@@ -35,9 +37,16 @@ type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
   unknown
 >;
 
-const getHumanReadableZorn = (odeshin: GenericOdeshin2): string => {
+const getZornLike = (
+  odeshin: GenericOdeshin2,
+): { forHuman: string; forDebug: OutputValueByTemplateKeyPath | string } => {
   const result =
-    typeof odeshin.zorn === 'string' ? odeshin.zorn : odeshin.zorn.forHuman;
+    typeof odeshin.zorn === 'string'
+      ? { forHuman: odeshin.zorn, forDebug: odeshin.zorn }
+      : {
+          forHuman: odeshin.zorn.forHuman,
+          forDebug: odeshin.zorn.templateValueByKeyPath,
+        };
 
   return result;
 };
@@ -51,15 +60,25 @@ export abstract class BaseInMemoryOdeshin2Voictent<
   addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
     super.addHubblepup(hubblepup);
 
-    const humanReadableZorn = getHumanReadableZorn(hubblepup);
+    const hubblepupZornLike = getZornLike(hubblepup);
+    const humanReadableZorn = hubblepupZornLike.forHuman;
 
     if (this.hubblepupPelueByZorn.has(humanReadableZorn)) {
+      const existingHubblepup =
+        this.hubblepupPelueByZorn.get(humanReadableZorn);
+      assertNotUndefined(existingHubblepup);
+      const existingZornLike = getZornLike(existingHubblepup);
+
       const error = new Error(`Duplicate zorn: ${humanReadableZorn}`);
       Object.assign(error, {
         gepp: this.gepp,
         zorn: humanReadableZorn,
-        existing: this.hubblepupPelueByZorn.get(humanReadableZorn),
-        duplicate: hubblepup,
+        formatted: {
+          existing: existingZornLike.forDebug,
+          duplicate: existingZornLike.forDebug,
+        },
+        existingHubblepup,
+        duplicateHubblepup: hubblepup,
       });
 
       throw error;
@@ -78,7 +97,7 @@ export abstract class BaseInMemoryOdeshin2Voictent<
     }
 
     const odeshin = this.hubblepupPelieTuple[listIndex];
-    const humanReadableZorn = getHumanReadableZorn(odeshin);
+    const humanReadableZorn = getZornLike(odeshin).forHuman;
     return {
       hubblepup: odeshin,
       indexByName: {
