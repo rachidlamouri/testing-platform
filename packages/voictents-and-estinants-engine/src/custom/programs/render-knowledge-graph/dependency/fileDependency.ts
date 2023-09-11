@@ -1,23 +1,18 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { assertNotUndefined } from '../../../../utilities/assertNotUndefined';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import {
-  GenericZorn2Template,
-  Zorn2,
-} from '../../../../utilities/semantic-types/zorn';
+import { isNotNull } from '../../../../utilities/isNotNull';
 import { SimplifyN } from '../../../../utilities/simplify';
-import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
 import { BoundedFile } from '../file/boundedFile';
-
-const FILE_DEPENDENCY_ZORN_TEMPLATE = [
-  ['importingFile', FileSystemNodeZorn],
-  ['importedFile', FileSystemNodeZorn],
-] as const satisfies GenericZorn2Template;
-type FileDependencyZornTemplate = typeof FILE_DEPENDENCY_ZORN_TEMPLATE;
-class FileDependencyZorn extends Zorn2<FileDependencyZornTemplate> {
-  get rawTemplate(): FileDependencyZornTemplate {
-    return FILE_DEPENDENCY_ZORN_TEMPLATE;
-  }
-}
+import {
+  FileDependencyPathNode,
+  FileDependencyPathNodeInstance,
+} from './dependency-path/fileDependencyPathNode';
+import {
+  FileDependencyPathSegment,
+  FileDependencyPathSegmentInstance,
+} from './dependency-path/fileDependencyPathSegment';
+import { FileDependencyZorn } from './fileDependencyZorn';
 
 type FileDependencyConstructorInput = {
   importingFile: BoundedFile;
@@ -27,12 +22,18 @@ type FileDependencyConstructorInput = {
 /**
  * Defines a single import relationship between two bounded files
  */
-type FileDependency = SimplifyN<
+export type FileDependency = SimplifyN<
   [
     {
       zorn: FileDependencyZorn;
     },
     FileDependencyConstructorInput,
+    {
+      pathNodeSet: FileDependencyPathNode[];
+      pathSegmentSet: FileDependencyPathSegment[];
+      tailNode: FileDependencyPathNode;
+      headNode: FileDependencyPathNode;
+    },
   ]
 >;
 
@@ -43,6 +44,10 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
     'zorn',
     'importingFile',
     'importedFile',
+    'pathNodeSet',
+    'pathSegmentSet',
+    'tailNode',
+    'headNode',
   ],
 } as const)
   .withTypes<FileDependencyConstructorInput, FileDependency>({
@@ -61,10 +66,94 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
         importedFile: importedFile.zorn,
       });
 
+      const isCrossBoundary =
+        importingFile.boundary.zorn.forHuman !==
+        importedFile.boundary.zorn.forHuman;
+
+      let dependencyPathDirectoryPathSet: Set<string>;
+      if (isCrossBoundary) {
+        dependencyPathDirectoryPathSet = new Set([
+          ...importingFile.directoryPathSetToBoundary,
+          ...importedFile.directoryPathSetFromBoundary,
+        ]);
+      } else {
+        let apexDirectoryPath: string | undefined;
+
+        let index = 0;
+        while (
+          importedFile.directoryPathSetFromBoundary[index] !== undefined &&
+          importedFile.directoryPathSetFromBoundary[index] ===
+            importingFile.directoryPathSetFromBoundary[index]
+        ) {
+          apexDirectoryPath = importedFile.directoryPathSetFromBoundary[index];
+          index += 1;
+        }
+
+        assertNotUndefined(apexDirectoryPath);
+
+        const indexA = importingFile.directoryPathSetToBoundary.findIndex(
+          (directoryPath) => {
+            return directoryPath === apexDirectoryPath;
+          },
+        );
+
+        const indexB = importedFile.directoryPathSetFromBoundary.findIndex(
+          (directoryPath) => {
+            return directoryPath === apexDirectoryPath;
+          },
+        );
+
+        dependencyPathDirectoryPathSet = new Set([
+          // The first subset will not include the apex directory, but the second subset will
+          ...importingFile.directoryPathSetToBoundary.slice(0, indexA),
+          ...importedFile.directoryPathSetFromBoundary.slice(indexB),
+        ]);
+      }
+
+      const dependencyPathDirectoryPathCombination = [
+        ...dependencyPathDirectoryPathSet,
+      ];
+
+      const pathNodeSet = dependencyPathDirectoryPathCombination.map(
+        (directoryPath, index) => {
+          return new FileDependencyPathNodeInstance({
+            fileDependencyZorn: zorn,
+            directoryPath,
+            index,
+          });
+        },
+      );
+
+      const tailNode = pathNodeSet[0];
+      const headNode = pathNodeSet[pathNodeSet.length - 1];
+
+      assertNotUndefined(tailNode);
+      assertNotUndefined(headNode);
+
+      const pathSegmentSet = dependencyPathDirectoryPathCombination
+        .map((tailDirectoryPath, index, list) => {
+          const headDirectoryPath = list[index + 1];
+
+          if (headDirectoryPath === undefined) {
+            return null;
+          }
+
+          return new FileDependencyPathSegmentInstance({
+            tailDirectoryPath,
+            headDirectoryPath,
+          });
+        })
+        .filter(isNotNull);
+
       return {
         zorn,
-        ...input,
-      };
+        importingFile,
+        importedFile,
+        pathNodeSet,
+        pathSegmentSet,
+        tailNode,
+        headNode,
+      } satisfies FileDependency;
     },
   })
   .assemble();

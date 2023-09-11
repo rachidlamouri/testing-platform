@@ -24,6 +24,7 @@ export type BoundedFile = {
   file: TypeScriptFile;
   nodePath: FilePath;
   directoryPathSetFromBoundary: string[];
+  directoryPathSetToBoundary: string[];
   localGraphElementZorn: LocalDirectedGraphElement2Zorn;
 };
 
@@ -37,6 +38,7 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
     'file',
     'nodePath',
     'directoryPathSetFromBoundary',
+    'directoryPathSetToBoundary',
     'localGraphElementZorn',
   ],
 } as const)
@@ -64,6 +66,10 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
           boundaryDirectoryPathIndex,
         );
 
+      const directoryPathSetToBoundary = directoryPathSetFromBoundary
+        .slice()
+        .reverse();
+
       const localGraphElementZorn =
         LocalDirectedGraphElement2Zorn.buildNodeZorn({
           distinguisher: file.filePath,
@@ -76,6 +82,7 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
         file,
         nodePath: file.nodePath,
         directoryPathSetFromBoundary,
+        directoryPathSetToBoundary,
         localGraphElementZorn,
       };
     },

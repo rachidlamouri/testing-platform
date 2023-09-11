@@ -77,6 +77,9 @@ import { getDirectoryFact2 } from './directory/getDirectoryFact2';
 import { getFileFact2 } from './file/getFileFact2';
 import { BOUNDED_DIRECTORY_GEPP } from './directory/boundedDirectory';
 import { BOUNDED_FILE_GEPP } from './file/boundedFile';
+import { getPartitionedFileDependency } from './dependency/getPartitionedFileDependency';
+import { getPartitionedFileDependencyPathConstituents } from './dependency/getPartitionedFileDependencyPathConstituents';
+import { getFileDependencyPathNodeFact } from './dependency/dependency-path/getFileDependencyPathNodeFact';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -168,6 +171,10 @@ digikikify({
     getPartitionedFileSystemNodes,
     getDirectoryFact2,
     getFileFact2,
+
+    getPartitionedFileDependency,
+    getPartitionedFileDependencyPathConstituents,
+    getFileDependencyPathNodeFact,
 
     // getDirectoriesWithFiles,
     // getDirectoryBoundaryRelationship,
