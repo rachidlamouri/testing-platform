@@ -69,12 +69,12 @@ type ${hubblepupTypeName} = SimplifyN<[
 ]>
 
 export const { ${constructorCodeName} } = buildNamedConstructorFunction({
-  constructorName: '${constructorCodeName}',
+  constructorName: '${constructorCodeName}' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'zorn',
-  ],
-} as const)
+  ] as const satisfies readonly (keyof ${hubblepupTypeName})[],
+})
   .withTypes<${constructorInputTypeName}, ${hubblepupTypeName}>({
     typeCheckErrorMesssages: {
       initialization: '',
