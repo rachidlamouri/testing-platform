@@ -19,6 +19,7 @@ type DirectedGraph2Prototype = {
   get rootGraphLocator(): RootGraphLocator;
   get attributeByKey(): PartialGraphAttributeByKey;
   get isRoot(): true;
+  get id(): string;
 };
 
 export type DirectedGraph2 = ObjectWithPrototype<
@@ -42,4 +43,7 @@ export const { DirectedGraph2Instance } = buildConstructorFunctionWithName(
     };
   },
   isRoot: () => true,
+  id: (directedGraph) => {
+    return directedGraph.locator.id;
+  },
 });

@@ -5,6 +5,7 @@ import { DirectedGraphElement2 } from '../../../../programmable-units/graph-visu
 import { DirectedGraphNode2Instance } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { GraphConstituentLocatorInstance } from '../../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
 import { BoundedDirectory } from '../../directory/boundedDirectory';
+import { FactTypeName } from '../../fact/factTypeName';
 import { THEME } from '../../theme';
 import {
   PartitionedFileDependencyPathNode,
@@ -19,9 +20,10 @@ type FileDependencyPathNodeFactConstructorInput = {
 /**
  * Contains the graph element for a FileDependencyPathNode. A piece of knowledge.
  */
-type FileDependencyPathNodeFact = SimplifyN<
+export type FileDependencyPathNodeFact = SimplifyN<
   [
     {
+      typeName: FactTypeName.FileDependencyPathNodeFact;
       zorn: PartitionedFileDependencyPathNodeZorn;
     },
     FileDependencyPathNodeFactConstructorInput,
@@ -36,6 +38,7 @@ export const { FileDependencyPathNodeFactInstance } =
     constructorName: 'FileDependencyPathNodeFactInstance',
     instancePropertyNameTuple: [
       // keep this as a multiline list
+      'typeName',
       'zorn',
       'pathNode',
       'directory',
@@ -69,6 +72,7 @@ export const { FileDependencyPathNodeFactInstance } =
         });
 
         return {
+          typeName: FactTypeName.FileDependencyPathNodeFact,
           zorn: pathNode.zorn,
           pathNode,
           directory,

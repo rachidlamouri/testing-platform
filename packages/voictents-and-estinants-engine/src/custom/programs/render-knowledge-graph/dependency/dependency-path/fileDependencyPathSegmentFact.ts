@@ -8,6 +8,7 @@ import { SimplifyN } from '../../../../../utilities/simplify';
 import { DirectedGraphEdge2Instance } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import { DirectedGraphElement2 } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { LocalDirectedGraphElement2Zorn } from '../../../../programmable-units/graph-visualization/directed-graph/types';
+import { FactTypeName } from '../../fact/factTypeName';
 import { PartitionFact } from '../../partition-fact/partitionFact';
 import { THEME } from '../../theme';
 import { PartitionedFileDependencyGroupZorn } from '../partitionedFileDependencyGroupZorn';
@@ -38,7 +39,10 @@ type FileDependencyPathSegmentFactConstructorInput = {
  */
 export type FileDependencyPathSegmentFact = SimplifyN<
   [
-    { zorn: FileDependencyPathSegmentFactZorn },
+    {
+      typeName: FactTypeName.FileDependencyPathSegmentFact;
+      zorn: FileDependencyPathSegmentFactZorn;
+    },
     FileDependencyPathSegmentFactConstructorInput,
     {
       graphElement: DirectedGraphElement2;
@@ -51,6 +55,7 @@ export const { FileDependencyPathSegmentFactInstance } =
     constructorName: 'FileDependencyPathSegmentFactInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
+      'typeName',
       'zorn',
       'partitionFact',
       'dependencyGroupZorn',
@@ -94,6 +99,7 @@ export const { FileDependencyPathSegmentFactInstance } =
         });
 
         return {
+          typeName: FactTypeName.FileDependencyPathSegmentFact,
           zorn,
           ...input,
           graphElement,

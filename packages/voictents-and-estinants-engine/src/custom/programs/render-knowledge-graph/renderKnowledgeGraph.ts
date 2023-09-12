@@ -80,6 +80,8 @@ import { BOUNDED_FILE_GEPP } from './file/boundedFile';
 import { getPartitionedFileDependency } from './dependency/getPartitionedFileDependency';
 import { getPartitionedFileDependencyPathConstituents } from './dependency/getPartitionedFileDependencyPathConstituents';
 import { getFileDependencyPathNodeFact } from './dependency/dependency-path/getFileDependencyPathNodeFact';
+import { aggregateFacts } from './fact/aggregateFacts';
+import { FactVoictent } from './fact/fact';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -141,6 +143,7 @@ digikikify({
     new OutputFileVoictent({
       programFileCache,
     }),
+    new FactVoictent(),
   ] as const),
   errorGepp: PROGRAM_ERROR_GEPP,
   estinantTuple: [
@@ -175,6 +178,8 @@ digikikify({
     getPartitionedFileDependency,
     getPartitionedFileDependencyPathConstituents,
     getFileDependencyPathNodeFact,
+
+    aggregateFacts,
 
     // getDirectoriesWithFiles,
     // getDirectoryBoundaryRelationship,

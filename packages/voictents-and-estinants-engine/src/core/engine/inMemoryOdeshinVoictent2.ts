@@ -10,7 +10,7 @@ import { InMemoryIndexByName, InMemoryVoque } from './inMemoryVoque';
 import { OutputValueByTemplateKeyPath } from '../../utilities/semantic-types/zorn';
 import { assertNotUndefined } from '../../utilities/assertNotUndefined';
 
-type InMemoryOdeshin2IndexByName = SpreadN<
+export type InMemoryOdeshin2IndexByName = SpreadN<
   [
     InMemoryIndexByName,
     {

@@ -12,6 +12,7 @@ import {
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
 import { BoundedDirectory } from '../directory/boundedDirectory';
+import { FactTypeName } from '../fact/factTypeName';
 import {
   PartitionFact,
   PartitionFactZorn,
@@ -40,9 +41,12 @@ type FileFact2ConstructorInput = {
  * Contains the graph element for a file within a
  * specific partition. A piece of knowledge.
  */
-type FileFact2 = SimplifyN<
+export type FileFact2 = SimplifyN<
   [
-    { zorn: FileFact2Zorn },
+    {
+      typeName: FactTypeName.FileFact2;
+      zorn: FileFact2Zorn;
+    },
     Omit<FileFact2ConstructorInput, 'parentBoundedDirectory'>,
     {
       graphElement: DirectedGraphNode2;
@@ -54,6 +58,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
   constructorName: 'FileFact2Instance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
+    'typeName',
     'zorn',
     'partitionFact',
     'boundedFile',
@@ -89,6 +94,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
       });
 
       return {
+        typeName: FactTypeName.FileFact2,
         zorn,
         partitionFact,
         boundedFile,

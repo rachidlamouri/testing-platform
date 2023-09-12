@@ -17,6 +17,7 @@ import { BoundedDirectory } from './boundedDirectory';
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { DirectedCluster2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedCluster2';
 import { DirectedGraphElement2 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
+import { FactTypeName } from '../fact/factTypeName';
 
 const DIRECTORY_FACT_2_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactZorn],
@@ -39,9 +40,12 @@ type DirectoryFact2ConstructorInput = {
  * Contains the graph element for a directory within a specific partition. A
  * piece of knowledge.
  */
-type DirectoryFact2 = SimplifyN<
+export type DirectoryFact2 = SimplifyN<
   [
-    { zorn: DirectoryFact2Zorn },
+    {
+      typeName: FactTypeName.DirectoryFact2;
+      zorn: DirectoryFact2Zorn;
+    },
     Omit<DirectoryFact2ConstructorInput, 'parentDirectory'>,
     {
       graphElement: DirectedGraphElement2;
@@ -53,6 +57,7 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
   constructorName: 'DirectoryFact2Instance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
+    'typeName',
     'zorn',
     'partitionFact',
     'directory',
@@ -99,6 +104,7 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
       });
 
       return {
+        typeName: FactTypeName.DirectoryFact2,
         zorn,
         partitionFact,
         directory,
