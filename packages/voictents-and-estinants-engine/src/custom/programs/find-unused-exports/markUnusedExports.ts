@@ -253,12 +253,6 @@ export const markUnusedExports = buildEstinant({
         {
           importingFilePath: '',
           importedFilePath:
-            'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/file/getAssociatedFileGraphElements.ts',
-          importedIdentifierName: 'getAssociatedFileGraphElements',
-        },
-        {
-          importingFilePath: '',
-          importedFilePath:
             'packages/voictents-and-estinants-engine/src/utilities/simplify.ts',
           importedIdentifierName: 'Simplify',
         },

@@ -20,7 +20,7 @@ type BoundaryConfiguration = SimplifyN<
   ]
 >;
 
-export const { BoundaryConfigurationInstance } = buildNamedConstructorFunction({
+const { BoundaryConfigurationInstance } = buildNamedConstructorFunction({
   constructorName: 'BoundaryConfigurationInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list

@@ -33,7 +33,7 @@ type PartitionedFileConstructorInput = {
  * A bounded file and a partition it should appear under. There can be
  * multiple partitioned files for the same file.
  */
-export type PartitionedFile = SimplifyN<
+type PartitionedFile = SimplifyN<
   [
     {
       zorn: PartitionedFileZorn;

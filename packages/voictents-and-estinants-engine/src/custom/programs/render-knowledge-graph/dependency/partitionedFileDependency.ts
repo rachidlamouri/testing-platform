@@ -33,7 +33,7 @@ export type PartitionedFileDependencyConstructorInput = {
  * A FileDependency and a partition it will be displayed under. A FileDependency
  * can appear in more than one partition.
  */
-export type PartitionedFileDependency = SimplifyN<
+type PartitionedFileDependency = SimplifyN<
   [
     {
       zorn: PartitionedFileDependencyZorn;

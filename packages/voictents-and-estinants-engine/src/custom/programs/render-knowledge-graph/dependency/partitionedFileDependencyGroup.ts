@@ -1,4 +1,3 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { assertNotNull } from '../../../../utilities/assertNotNull';
 import { assertNotUndefined } from '../../../../utilities/assertNotUndefined';
 import { ComplexMap } from '../../../../utilities/complexMap';
@@ -209,14 +208,3 @@ export const { PartitionedFileDependencyGroupInstance } =
       },
     })
     .assemble();
-
-export const PARTITIONED_FILE_DEPENDENCY_GROUP_GEPP =
-  'partitioned-file-dependency-group';
-
-type PartitionedFileDependencyGroupGepp =
-  typeof PARTITIONED_FILE_DEPENDENCY_GROUP_GEPP;
-
-export type PartitionedFileDependencyGroupVoque = InMemoryOdeshin2ListVoque<
-  PartitionedFileDependencyGroupGepp,
-  PartitionedFileDependencyGroup
->;
