@@ -8,7 +8,10 @@ import {
   AppRendererDelayerInstance,
   AppRendererDelayerVoque,
 } from './appRendererDelayer';
-import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
+import {
+  PARTITION_FACT_GEPP,
+  PartitionFactVoque,
+} from './partition-fact/partitionFact';
 
 /**
  * Generates a barrel file for every file created by decodeAndRecastSvgDocument for the
@@ -17,8 +20,8 @@ import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
 export const constructDynamicIndexFile = buildEstinant({
   name: 'constructDynamicIndexFile',
 })
-  .fromVoictent2<BoundaryFactVoque>({
-    gepp: BOUNDARY_FACT_GEPP,
+  .fromVoictent2<PartitionFactVoque>({
+    gepp: PARTITION_FACT_GEPP,
   })
   .toHubblepup2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
@@ -26,21 +29,21 @@ export const constructDynamicIndexFile = buildEstinant({
   .toHubblepup2<AppRendererDelayerVoque>({
     gepp: APP_RENDERER_DELAYER_GEPP,
   })
-  .onPinbe((boundaryFactList) => {
-    const boundaryFactWithVariableNameList = boundaryFactList.map(
-      (boundaryFact, index) => {
+  .onPinbe((partitionFactVoictent) => {
+    const partitionFactWithVariableNameList = partitionFactVoictent.list.map(
+      (partitionFact, index) => {
         const variableName = `boundary${index}`;
 
         return {
-          boundaryFact,
+          partitionFact,
           variableName,
         };
       },
     );
 
-    const importStatementList = boundaryFactWithVariableNameList.map(
-      ({ boundaryFact, variableName }) => {
-        return `import { Main as ${variableName} } from './${boundaryFact.rootGraphLocator.distinguisher}';`;
+    const importStatementList = partitionFactWithVariableNameList.map(
+      ({ partitionFact, variableName }) => {
+        return `import { Main as ${variableName} } from './${partitionFact.rootGraphLocator.distinguisher}';`;
       },
     );
 
@@ -50,11 +53,11 @@ export const constructDynamicIndexFile = buildEstinant({
       ${importStatementText}
 
       export default [
-        ${boundaryFactWithVariableNameList
-          .map(({ boundaryFact, variableName }) => {
+        ${partitionFactWithVariableNameList
+          .map(({ partitionFact, variableName }) => {
             const entry = [
               '{',
-              `  label: "${boundaryFact.boundary.displayName}",`,
+              `  label: "${partitionFact.boundary.displayName}",`,
               `  Component: ${variableName},`,
               '},',
             ];

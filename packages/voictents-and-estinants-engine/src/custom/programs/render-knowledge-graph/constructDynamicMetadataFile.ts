@@ -1,7 +1,6 @@
 import { namedTypes as n, builders as b } from 'ast-types';
 import * as recast from 'recast';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { FILE_FACT_GEPP, FileFactVoque } from './file/fileFact';
 import {
   CustomDatumTypeName,
   getCustomTypedDatum,
@@ -21,6 +20,10 @@ import {
   AppRendererDelayerInstance,
   AppRendererDelayerVoque,
 } from './appRendererDelayer';
+import {
+  PARTITION_FACT_GEPP,
+  PartitionFactVoque,
+} from './partition-fact/partitionFact';
 
 const encodePrimitive = (
   primitive: string | number | boolean | null,
@@ -86,40 +89,45 @@ const encodeDatum = (
 export const constructDynamicMetadataFile = buildEstinant({
   name: 'constructDynamicMetadataFile',
 })
-  .fromVoictent2<FileFactVoque>({
-    gepp: FILE_FACT_GEPP,
+  .fromVoictent2<PartitionFactVoque>({
+    gepp: PARTITION_FACT_GEPP,
   })
+  // .fromVoictent2<FileFactVoque>({
+  //   gepp: FILE_FACT_GEPP,
+  // })
   .toHubblepup2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,
   })
   .toHubblepup2<AppRendererDelayerVoque>({
     gepp: APP_RENDERER_DELAYER_GEPP,
   })
-  .onPinbe((fileFactList) => {
-    const metadataList: Metadata[] = fileFactList.map((fileFact) => {
-      return {
-        id: fileFact.nodeLocator.id,
-        title: fileFact.file.onDiskFileName.camelCase,
-        fileSystemPath: fileFact.file.filePath,
-        fieldList: [
-          {
-            label: 'Boundary',
-            value: fileFact.directoryFact.boundaryFact.boundary.displayName,
-          },
-          {
-            label: 'Boundary Path',
-            value: fileFact.directoryFact.boundaryFact.boundary.directoryPath,
-          },
-          {
-            label: 'Directory Path from Boundary',
-            value: fileFact.file.directoryPath.replace(
-              fileFact.directoryFact.boundaryFact.boundary.directoryPath,
-              '<boundary>',
-            ),
-          },
-        ],
-      };
-    });
+  .onPinbe(() => {
+    // const metadataList: Metadata[] = fileFactList.map((fileFact) => {
+    //   return {
+    //     id: fileFact.nodeLocator.id,
+    //     title: fileFact.file.onDiskFileName.camelCase,
+    //     fileSystemPath: fileFact.file.filePath,
+    //     fieldList: [
+    //       {
+    //         label: 'Boundary',
+    //         value: fileFact.directoryFact.boundaryFact.boundary.displayName,
+    //       },
+    //       {
+    //         label: 'Boundary Path',
+    //         value: fileFact.directoryFact.boundaryFact.boundary.directoryPath,
+    //       },
+    //       {
+    //         label: 'Directory Path from Boundary',
+    //         value: fileFact.file.directoryPath.replace(
+    //           fileFact.directoryFact.boundaryFact.boundary.directoryPath,
+    //           '<boundary>',
+    //         ),
+    //       },
+    //     ],
+    //   };
+    // });
+
+    const metadataList: Metadata[] = [];
 
     const metadataById = Object.fromEntries(
       metadataList.map((metadata) => {

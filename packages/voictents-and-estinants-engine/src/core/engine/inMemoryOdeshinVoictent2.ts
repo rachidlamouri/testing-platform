@@ -7,8 +7,10 @@ import {
   DereferenceError,
 } from './abstractInMemoryVoictent';
 import { InMemoryIndexByName, InMemoryVoque } from './inMemoryVoque';
+import { OutputValueByTemplateKeyPath } from '../../utilities/semantic-types/zorn';
+import { assertNotUndefined } from '../../utilities/assertNotUndefined';
 
-type InMemoryOdeshin2IndexByName = SpreadN<
+export type InMemoryOdeshin2IndexByName = SpreadN<
   [
     InMemoryIndexByName,
     {
@@ -35,9 +37,16 @@ type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
   unknown
 >;
 
-const getHumanReadableZorn = (odeshin: GenericOdeshin2): string => {
+const getZornLike = (
+  odeshin: GenericOdeshin2,
+): { forHuman: string; forDebug: OutputValueByTemplateKeyPath | string } => {
   const result =
-    typeof odeshin.zorn === 'string' ? odeshin.zorn : odeshin.zorn.forHuman;
+    typeof odeshin.zorn === 'string'
+      ? { forHuman: odeshin.zorn, forDebug: odeshin.zorn }
+      : {
+          forHuman: odeshin.zorn.forHuman,
+          forDebug: odeshin.zorn.templateValueByKeyPath,
+        };
 
   return result;
 };
@@ -46,20 +55,30 @@ export abstract class BaseInMemoryOdeshin2Voictent<
   TRestrictingVoque extends GenericInMemoryOdeshin2Voque,
   TVoque extends TRestrictingVoque,
 > extends AbstractInMemoryVoictent<TRestrictingVoque, TVoque> {
-  private hubblepupPelueByZorn = new Map<string, TVoque['hubblepupPelue']>();
+  protected hubblepupPelueByZorn = new Map<string, TVoque['hubblepupPelue']>();
 
   addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
     super.addHubblepup(hubblepup);
 
-    const humanReadableZorn = getHumanReadableZorn(hubblepup);
+    const hubblepupZornLike = getZornLike(hubblepup);
+    const humanReadableZorn = hubblepupZornLike.forHuman;
 
     if (this.hubblepupPelueByZorn.has(humanReadableZorn)) {
+      const existingHubblepup =
+        this.hubblepupPelueByZorn.get(humanReadableZorn);
+      assertNotUndefined(existingHubblepup);
+      const existingZornLike = getZornLike(existingHubblepup);
+
       const error = new Error(`Duplicate zorn: ${humanReadableZorn}`);
       Object.assign(error, {
         gepp: this.gepp,
         zorn: humanReadableZorn,
-        existing: this.hubblepupPelueByZorn.get(humanReadableZorn),
-        duplicate: hubblepup,
+        formatted: {
+          existing: existingZornLike.forDebug,
+          duplicate: existingZornLike.forDebug,
+        },
+        existingHubblepup,
+        duplicateHubblepup: hubblepup,
       });
 
       throw error;
@@ -78,7 +97,7 @@ export abstract class BaseInMemoryOdeshin2Voictent<
     }
 
     const odeshin = this.hubblepupPelieTuple[listIndex];
-    const humanReadableZorn = getHumanReadableZorn(odeshin);
+    const humanReadableZorn = getZornLike(odeshin).forHuman;
     return {
       hubblepup: odeshin,
       indexByName: {
@@ -108,5 +127,35 @@ export class InMemoryOdeshin2ListVoictent<
 > {
   protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
     return this.hubblepupPelieTuple;
+  }
+}
+
+type InMemoryOdeshin3VoictentPelie<TOdeshinPelie> = {
+  byZorn: Map<string, TOdeshinPelie>;
+  list: TOdeshinPelie[];
+};
+
+export type InMemoryOdeshin3Voque<
+  TGepp extends Gepp,
+  TOdeshin extends GenericOdeshin2,
+> = InMemoryOdeshin2Voque<
+  TGepp,
+  TOdeshin,
+  InMemoryOdeshin3VoictentPelie<TOdeshin>
+>;
+
+type GenericinMemoryOdeshin3Voque = InMemoryOdeshin3Voque<
+  Gepp,
+  GenericOdeshin2
+>;
+
+export class InMemoryOdeshin3Voictent<
+  TVoque extends GenericinMemoryOdeshin3Voque,
+> extends BaseInMemoryOdeshin2Voictent<GenericinMemoryOdeshin3Voque, TVoque> {
+  protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
+    return {
+      byZorn: this.hubblepupPelueByZorn,
+      list: this.hubblepupPelieTuple,
+    };
   }
 }

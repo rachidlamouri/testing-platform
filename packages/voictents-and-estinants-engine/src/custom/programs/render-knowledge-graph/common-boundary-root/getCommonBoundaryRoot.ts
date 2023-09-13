@@ -29,7 +29,7 @@ export const getCommonBoundaryRoot = buildEstinant({
   .onPinbe((boundaryList, directoryVoictent) => {
     const boundaryDirectoryList = boundaryList.map((boundary) => {
       const directory = directoryVoictent.byNodePath.get(
-        boundary.directoryPath,
+        boundary.directory.directoryPath,
       );
       if (directory === undefined) {
         throw Error(

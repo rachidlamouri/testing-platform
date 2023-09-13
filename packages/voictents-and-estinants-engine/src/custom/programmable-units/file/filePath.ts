@@ -3,10 +3,9 @@ import { buildNamedConstructorFunction } from '../../../utilities/constructor-fu
 import { SimplifyN } from '../../../utilities/simplify';
 import { getFileMetadata } from './getFileMetadata';
 import { getFileSystemNodePathPartList } from './getFileSystemNodePathPartList';
+import { NodePathConstructorInput } from './nodePathConstructorInput';
 
-type FilePathConstructorInput = {
-  serialized: string;
-};
+type FilePathConstructorInput = NodePathConstructorInput;
 
 type FileExtension = {
   serialized: string;
@@ -36,6 +35,7 @@ export const { FilePathInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'serialized',
+    'ancestorDirectoryPathSet',
     'name',
     'partList',
     'parentDirectoryPath',
@@ -50,7 +50,7 @@ export const { FilePathInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { serialized } = input;
+      const { serialized, ancestorDirectoryPathSet } = input;
 
       const {
         onDiskFileName,
@@ -66,6 +66,7 @@ export const { FilePathInstance } = buildNamedConstructorFunction({
 
       return {
         serialized,
+        ancestorDirectoryPathSet,
         name: {
           serialized: onDiskFileName,
           extensionless: extensionlessFileName,

@@ -1,5 +1,6 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import {
+  buildGeppCombination,
   buildVoictentByGepp,
   digikikify,
 } from '../../../type-script-adapter/digikikify';
@@ -28,52 +29,62 @@ import { getTypeScriptFileImportList } from '../../programmable-units/type-scrip
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getAdaptedProgramBoundary } from './boundary/getAdaptedProgramBoundary';
 import {
-  BOUNDARY_GEPP,
-  BoundaryVoque,
-  STATIC_BOUNDARY_LIST,
-} from './boundary/boundary';
+  BOUNDARY_CONFIGURATION_GEPP,
+  BoundaryConfigurationVoque,
+  BOUNDARY_CONFIGURATION_LIST,
+} from './boundary/boundaryConfiguration';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
-import { assertBoundaryDirectoryExists } from './boundary/assertBoundaryDirectoryExists';
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { renderGraphvizCodeToSvgDocument2 } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument2';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
-import { constructKnowledgeGraph } from './constructKnowledgeGraph';
 import { getDirectedGraphFromGraphElementGroup } from '../model-programs/getDirectedGraphFromGraphElementGroup';
 import { groupGraphElements } from '../model-programs/groupGraphElements';
-import { getBoundaryFactAndGraphElements } from './boundary/getBoundaryFactAndGraphElements';
-import { stubMetadata } from './boundary/stubMetadata';
 import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
-import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
-import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
-import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
-import { getDirectoryFact } from './directory/getDirectoryFact';
-import { getDirectoryGraphElements } from './directory/getDirectoryGraphElements';
+import { InMemoryOdeshin3Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { getCommonBoundaryRoot } from './common-boundary-root/getCommonBoundaryRoot';
 import {
-  BOUNDARY_TRIE_A_GEPP,
-  BoundaryTrieAVoque,
-} from './boundary/boundaryTrieA';
-import { getBoundaryTrieA } from './boundary/getBoundaryTrieA';
-import { getBoundaryTrieB } from './boundary/getBoundaryTrieB';
+  PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+  PartitionedBoundaryListTrieVoque,
+} from './boundary/partitionedBoundaryListTrie';
+import { getPartitionedBoundaryListTrie } from './boundary/getPartitionedBoundaryListTrie';
 import {
-  BoundaryTrieBVoque,
-  BOUNDARY_TRIE_B_GEPP,
-} from './boundary/boundaryTrieB';
-import { getDirectoryBoundaryRelationship } from './directory/getDirectoryBoundaryRelationship';
-import { getFileFact } from './file/getFileFact';
-import { getFileGraphElements } from './file/getFileGraphElements';
-import { getDependencyFacts } from './dependency/getDependencyFacts';
-import { getInvertedDependencyGroup } from './dependency/getInvertedDependencyGroup';
-import { getInvertedDependencyGraphElements } from './dependency/getInvertedDependencyGraphElements';
+  PARTITIONED_BOUNDARY_TRIE_GEPP,
+  PartitionedBoundaryTrieVoque,
+} from './boundary/partitionedBoundaryTrie';
+import { getPartitionedBoundaryTrie } from './boundary/getPartitionedBoundaryTrie';
 import { renderApp } from './app/node/renderApp';
 import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
-import { getAssociatedBoundaryFacts } from './associated-boundary/getAssociatedBoundaryFacts';
-import { getAssociatedBoundaryFactGraphElements } from './associated-boundary/getAssociatedBoundaryFactGraphElements';
-import { getDirectoryToParentRelationshipFact } from './directory/getDirectoryToParentRelationshipFact';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { getAllFactGraphElements } from './getAllFactGraphElements';
+import { getBoundaryFromConfiguration } from './boundary/getBoundaryFromConfiguration';
+import { getBoundaryPartition } from './partition-fact/getBoundaryPartition';
+import {
+  PARTITION_FACT_GEPP,
+  PartitionFactVoque,
+} from './partition-fact/partitionFact';
+import {
+  PARTITIONED_FILE_GEPP,
+  PartitionedFileVoque,
+} from './file/partitionedFile';
+import { getFileDependencies } from './dependency/getFileDependencies';
+import { getBoundedFile } from './file/getBoundedFile';
+import { getPartitionedFileSystemNodes } from './getPartitionedFileSystemNodes';
+import { getBoundedDirectory } from './directory/getBoundedDirectory';
+import { getDirectoryFact2 } from './directory/getDirectoryFact2';
+import { getFileFact2 } from './file/getFileFact2';
+import { BOUNDED_DIRECTORY_GEPP } from './directory/boundedDirectory';
+import { BOUNDED_FILE_GEPP } from './file/boundedFile';
+import { getPartitionedFileDependency } from './dependency/getPartitionedFileDependency';
+import { getPartitionedFileDependencyPathConstituents } from './dependency/getPartitionedFileDependencyPathConstituents';
+import { getFileDependencyPathNodeFact } from './dependency/dependency-path/getFileDependencyPathNodeFact';
+import { aggregateFacts } from './fact/aggregateFacts';
+import { FactVoictent } from './fact/fact';
+import { FileDependencyVoictent } from './dependency/fileDependencyVoictent';
+import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
+import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -99,27 +110,44 @@ digikikify({
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
-    new InMemoryOdeshin2ListVoictent<BoundaryVoque>({
-      gepp: BOUNDARY_GEPP,
-      initialHubblepupPelueTuple: STATIC_BOUNDARY_LIST,
+    new InMemoryOdeshin3Voictent<BoundaryConfigurationVoque>({
+      gepp: BOUNDARY_CONFIGURATION_GEPP,
+      initialHubblepupPelueTuple: BOUNDARY_CONFIGURATION_LIST,
     }),
   ] as const,
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
+  fileSystemNodeGeppCombination: {
+    ...defaultFileGeppCombination,
+    ...buildGeppCombination([
+      // keep as multiline list
+      BOUNDED_DIRECTORY_GEPP,
+      BOUNDED_FILE_GEPP,
+    ] as const),
+  },
   uninferableVoictentByGepp: buildVoictentByGepp([
     new ProgramErrorVoictent({
       programFileCache,
     }),
-    new InMemoryVoictent<BoundaryTrieAVoque>({
-      gepp: BOUNDARY_TRIE_A_GEPP,
+    new InMemoryOdeshin3Voictent<PartitionFactVoque>({
+      gepp: PARTITION_FACT_GEPP,
       initialHubblepupPelueTuple: [],
     }),
-    new InMemoryVoictent<BoundaryTrieBVoque>({
-      gepp: BOUNDARY_TRIE_B_GEPP,
+    new InMemoryVoictent<PartitionedBoundaryListTrieVoque>({
+      gepp: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
+    new InMemoryVoictent<PartitionedBoundaryTrieVoque>({
+      gepp: PARTITIONED_BOUNDARY_TRIE_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
+    new InMemoryOdeshin3Voictent<PartitionedFileVoque>({
+      gepp: PARTITIONED_FILE_GEPP,
       initialHubblepupPelueTuple: [],
     }),
     new OutputFileVoictent({
       programFileCache,
     }),
+    new FactVoictent(),
+    new FileDependencyVoictent(),
   ] as const),
   errorGepp: PROGRAM_ERROR_GEPP,
   estinantTuple: [
@@ -134,35 +162,33 @@ digikikify({
     filterEngineProgramFile,
     getEngineProgramLocator3,
 
+    getBoundaryFromConfiguration,
     getAdaptedProgramBoundary,
-    getCommonBoundaryRoot,
-    getBoundaryTrieA,
-    getBoundaryTrieB,
-    getBoundaryFactAndGraphElements,
 
-    assertBoundaryDirectoryExists,
+    getCommonBoundaryRoot,
+    getBoundaryPartition,
+
+    getPartitionedBoundaryListTrie,
     assertNoBoundaryOverlap,
 
-    getDirectoriesWithFiles,
-    getDirectoryBoundaryRelationship,
-    getDirectoryFact,
-    getDirectoryToParentRelationshipFact,
-    getDirectoryGraphElements,
+    getPartitionedBoundaryTrie,
 
+    getBoundedDirectory,
+    getDirectoriesWithFiles,
     assertDirectoriesHaveBoundaries,
 
-    getFileFact,
-    getFileGraphElements,
+    getBoundedFile,
+    getFileDependencies,
+    getPartitionedFileSystemNodes,
+    getDirectoryFact2,
+    getFileFact2,
 
-    getDependencyFacts,
+    getPartitionedFileDependency,
+    getPartitionedFileDependencyPathConstituents,
+    getFileDependencyPathNodeFact,
 
-    getAssociatedBoundaryFacts,
-    getAssociatedBoundaryFactGraphElements,
-
-    // getAssociatedFileGraphElements,
-
-    getInvertedDependencyGroup,
-    getInvertedDependencyGraphElements,
+    aggregateFacts,
+    getAllFactGraphElements,
 
     groupGraphElements,
     getDirectedGraphFromGraphElementGroup,
@@ -174,11 +200,6 @@ digikikify({
     constructDynamicIndexFile,
 
     renderApp,
-
-    // TODO: remove this
-    stubMetadata,
-
-    constructKnowledgeGraph,
 
     reportErrors,
     signalError,

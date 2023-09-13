@@ -6,7 +6,10 @@ import {
   ProgramErrorPelue,
   ReportingEstinantLocator,
 } from '../../../programmable-units/error/programError';
-import { BOUNDARY_TRIE_A_GEPP, BoundaryTrieAVoque } from './boundaryTrieA';
+import {
+  PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+  PartitionedBoundaryListTrieVoque,
+} from './partitionedBoundaryListTrie';
 
 const ESTINANT_NAME = 'assertNoBoundaryOverlap' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -24,14 +27,14 @@ const reporterLocator: ReportingLocator = {
 export const assertNoBoundaryOverlap = buildEstinant({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<BoundaryTrieAVoque>({
-    gepp: BOUNDARY_TRIE_A_GEPP,
+  .fromHubblepup2<PartitionedBoundaryListTrieVoque>({
+    gepp: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((trieA) => {
-    const trieList = trieA.flatten();
+  .onPinbe((partitionedBoundaryListTrie) => {
+    const trieList = partitionedBoundaryListTrie.flatten();
 
     const errorList: ProgramErrorPelue<ReportingLocator>[] = [];
     trieList.forEach((subtrie) => {
@@ -50,9 +53,10 @@ export const assertNoBoundaryOverlap = buildEstinant({
             filePath: '',
           },
           context: {
-            duplicateDirectoryPath: subtrie.value[0].directoryPath,
+            duplicateDirectoryPath:
+              subtrie.value[0].boundary.directory.directoryPath,
             duplicateBoundaryNameList: subtrie.value.map(
-              (boundary) => boundary.displayName,
+              (partitionedBoundary) => partitionedBoundary.boundary.displayName,
             ),
             duplicateBoundaryList: subtrie.value,
           },
@@ -63,7 +67,7 @@ export const assertNoBoundaryOverlap = buildEstinant({
         errorList.push({
           name: 'prefixing-boundary',
           error: new Error(
-            `Boundary "${subtrie.value[0].displayName}" contains one or more other boundaries`,
+            `Boundary "${subtrie.value[0].boundary.displayName}" contains one or more other boundaries`,
           ),
           reporterLocator,
           sourceLocator: {

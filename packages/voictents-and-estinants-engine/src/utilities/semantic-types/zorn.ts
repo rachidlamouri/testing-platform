@@ -23,7 +23,7 @@ type TemplateKeyPath = string;
 
 type OutputValue = string;
 
-type OutputValueByTemplateKeyPath = Record<TemplateKeyPath, OutputValue>;
+export type OutputValueByTemplateKeyPath = Record<TemplateKeyPath, OutputValue>;
 
 type Zorn2Like = {
   getOutputValueByTemplateKeyPathList(
@@ -155,17 +155,6 @@ export abstract class Zorn2<TTemplate extends GenericZorn2Template>
 {
   static LITERAL = ZornTemplateKeyword.LITERAL;
 
-  private memoizedValueByTemplateKeyPathList:
-    | OutputValueByTemplateKeyPath[]
-    | null = null;
-
-  private memoizedValueByTemplateKeyPath: OutputValueByTemplateKeyPath | null =
-    null;
-
-  private memoizedTemplate: string[] | null = null;
-
-  private memoizedHumanReadableSerialization: string | null = null;
-
   constructor(
     public readonly valueByTemplateKey: InputValueByTemplateKey<TTemplate>,
   ) {}
@@ -183,65 +172,47 @@ export abstract class Zorn2<TTemplate extends GenericZorn2Template>
   getOutputValueByTemplateKeyPathList(
     prefix: string,
   ): OutputValueByTemplateKeyPath[] {
-    if (this.memoizedValueByTemplateKeyPathList === null) {
-      this.memoizedValueByTemplateKeyPathList = this.template.flatMap(
-        (key: string) => {
-          const nextPrefix = prefix === '' ? key : `${prefix}.${key}`;
+    return this.template.flatMap((key: string) => {
+      const nextPrefix = prefix === '' ? key : `${prefix}.${key}`;
 
-          const value = this.safeValueByTemplateKey[key];
+      const value = this.safeValueByTemplateKey[key];
 
-          if (typeof value === 'string') {
-            return [{ [nextPrefix]: value }];
-          }
-          return value.getOutputValueByTemplateKeyPathList(nextPrefix);
-        },
-      );
-    }
-
-    return this.memoizedValueByTemplateKeyPathList;
+      if (typeof value === 'string') {
+        return [{ [nextPrefix]: value }];
+      }
+      return value.getOutputValueByTemplateKeyPathList(nextPrefix);
+    });
   }
 
   get templateValueByKeyPath(): OutputValueByTemplateKeyPath {
-    if (this.memoizedValueByTemplateKeyPath === null) {
-      this.memoizedValueByTemplateKeyPath = Object.assign(
-        {},
-        ...this.getOutputValueByTemplateKeyPathList(''),
-      ) as OutputValueByTemplateKeyPath;
-    }
-
-    return this.memoizedValueByTemplateKeyPath;
+    return Object.assign(
+      {},
+      ...this.getOutputValueByTemplateKeyPathList(''),
+    ) as OutputValueByTemplateKeyPath;
   }
 
   get template(): TemplateKeyTuple<TTemplate> {
-    if (this.memoizedTemplate === null) {
-      this.memoizedTemplate = this.rawTemplate.map((value) => {
+    return this.rawTemplate.map((value) => {
+      if (typeof value === 'string') {
+        return value;
+      }
+
+      return value[0];
+    }) as TemplateKeyTuple<TTemplate>;
+  }
+
+  get forHuman(): string {
+    return this.template
+      .map((key: string) => {
+        const value = this.safeValueByTemplateKey[key];
+
         if (typeof value === 'string') {
           return value;
         }
 
-        return value[0];
-      });
-    }
-
-    return this.memoizedTemplate as TemplateKeyTuple<TTemplate>;
-  }
-
-  get forHuman(): string {
-    if (this.memoizedHumanReadableSerialization === null) {
-      this.memoizedHumanReadableSerialization = this.template
-        .map((key: string) => {
-          const value = this.safeValueByTemplateKey[key];
-
-          if (typeof value === 'string') {
-            return value;
-          }
-
-          return value.forHuman;
-        })
-        .join(':');
-    }
-
-    return this.memoizedHumanReadableSerialization;
+        return value.forHuman;
+      })
+      .join(':');
   }
 
   get forMachine(): string {

@@ -11,10 +11,9 @@ import {
   DirectoryWithFileVoque,
 } from './directoryWithFile';
 import {
-  DIRECTORY_BOUNDARY_RELATIONSHIP_GEPP,
-  DirectoryBoundaryRelationshipVoque,
-} from './directoryBoundaryRelationship';
-import { BOUNDARY_GEPP, BoundaryVoque } from '../boundary/boundary';
+  BOUNDED_DIRECTORY_GEPP,
+  BoundedDirectoryVoque,
+} from './boundedDirectory';
 
 const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -36,39 +35,21 @@ export const assertDirectoriesHaveBoundaries = buildEstinant({
   .fromVoictent2<DirectoryWithFileVoque>({
     gepp: DIRECTORY_WITH_FILE_GEPP,
   })
-  .andFromVoictent2<DirectoryBoundaryRelationshipVoque>({
-    gepp: DIRECTORY_BOUNDARY_RELATIONSHIP_GEPP,
-  })
-  .andFromVoictent2<BoundaryVoque>({
-    gepp: BOUNDARY_GEPP,
+  .andFromVoictent2<BoundedDirectoryVoque>({
+    gepp: BOUNDED_DIRECTORY_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((directoryList, boundaryDirectoryRelationshipList, boundaryList) => {
-    const boundaryDirectoryPathSet = new Set(
-      boundaryList.map((boundary) => {
-        return boundary.directoryPath;
-      }),
+  .onPinbe((directoryWithFileVoictent, boundedDirectoryVoictent) => {
+    const unboundedDirectoryList = directoryWithFileVoictent.filter(
+      (directory) => {
+        const boundedDirectory = boundedDirectoryVoictent.byNodePath.get(
+          directory.directoryPath,
+        );
+        return boundedDirectory === undefined;
+      },
     );
-
-    const boundedDirectoryPathSet = new Set(
-      boundaryDirectoryRelationshipList.map((relationship) => {
-        return relationship.directory.directoryPath;
-      }),
-    );
-
-    const unboundedDirectoryList = directoryList.filter((directory) => {
-      const isBoundaryDirectory = boundaryDirectoryPathSet.has(
-        directory.directoryPath,
-      );
-      const isBoundarySubdirectory = boundedDirectoryPathSet.has(
-        directory.directoryPath,
-      );
-      const isBounded = isBoundaryDirectory || isBoundarySubdirectory;
-
-      return !isBounded;
-    });
 
     const outputList = unboundedDirectoryList.map((directory) => {
       return {
@@ -83,8 +64,6 @@ export const assertDirectoriesHaveBoundaries = buildEstinant({
         },
         context: {
           directoryPath: directory.directoryPath,
-          boundaryDirectoryPathSet,
-          boundedDirectoryPathSet,
           directory,
         },
       } satisfies ProgramErrorPelue<ReportingLocator>;

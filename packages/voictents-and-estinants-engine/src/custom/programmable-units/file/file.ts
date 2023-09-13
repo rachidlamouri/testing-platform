@@ -30,6 +30,7 @@ type FileConstructorInput = {
   // TODO: update some of these fields to be derived in this file
   /** @deprecated in favor of zorn.forMachine  */
   instanceId: string;
+  ancestorDirectoryPathSet: string[];
   onDiskFileName: Merge<FileName, { asIs: string }>;
   inMemoryFileName: FileName;
   extension: FileExtensionMetadata<FileExtensionSuffixIdentifier>;
@@ -87,7 +88,11 @@ export const { FileInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { nodePath: serializedFilePath, ...otherInputFields } = input;
+      const {
+        nodePath: serializedFilePath,
+        ancestorDirectoryPathSet,
+        ...otherInputFields
+      } = input;
 
       const zorn = new FileSystemNodeZorn({
         nodePath: serializedFilePath,
@@ -95,6 +100,7 @@ export const { FileInstance } = buildNamedConstructorFunction({
 
       const filePath = new FilePathInstance({
         serialized: serializedFilePath,
+        ancestorDirectoryPathSet,
       });
 
       return {

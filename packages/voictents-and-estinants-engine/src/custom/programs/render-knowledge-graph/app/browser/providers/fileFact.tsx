@@ -1,13 +1,7 @@
-import React, { FunctionComponent, PropsWithChildren } from 'react';
+import React, { FunctionComponent } from 'react';
 import { PresentationContext } from '../presentationContext';
 import { useSelectedIdContext } from '../selectedIdContext';
-
-export type FileFactProps = PropsWithChildren<{
-  factId: string;
-  fileName: string;
-  importedNodeIdSet: Set<string>;
-  importingNodeIdSet: Set<string>;
-}>;
+import { FileFactProps } from '../factProps';
 
 export const FileFact: FunctionComponent<FileFactProps> = ({
   factId,
@@ -24,9 +18,9 @@ export const FileFact: FunctionComponent<FileFactProps> = ({
   let strokeColor: string;
   if (isSelected) {
     strokeColor = 'green';
-  } else if (isImportedNodeSelected) {
-    strokeColor = 'blue';
   } else if (isImportingNodeSelected) {
+    strokeColor = 'blue';
+  } else if (isImportedNodeSelected) {
     strokeColor = 'purple';
   } else {
     strokeColor = 'gray';
