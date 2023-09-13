@@ -3,7 +3,7 @@ import { OdeshinZorn } from '../../../adapter/odeshin2';
 import {
   FILE_DEPENDENCY_GEPP,
   FileDependencyVoque,
-} from '../dependency/fileDependencyVoque';
+} from '../dependency/fileDependency';
 import {
   BOUNDED_DIRECTORY_GEPP,
   BoundedDirectoryVoque,

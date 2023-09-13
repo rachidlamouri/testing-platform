@@ -18,6 +18,9 @@ import {
 } from '../partition-fact/partitionFact';
 import { FACT_GEPP, FactVoque } from './fact';
 
+/**
+ * Combines all knowledge graph facts into a single collection
+ */
 export const aggregateFacts = buildEstinant({
   name: 'aggregateFacts',
 })

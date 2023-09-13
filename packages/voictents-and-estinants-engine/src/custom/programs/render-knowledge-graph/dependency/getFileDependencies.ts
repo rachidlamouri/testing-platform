@@ -6,11 +6,11 @@ import {
   TypeScriptFileImportListVoque,
 } from '../../../programmable-units/type-script-file/typeScriptFileImportList';
 import { BOUNDED_FILE_GEPP, BoundedFileVoque } from '../file/boundedFile';
-import { FileDependencyInstance } from './fileDependency';
 import {
+  FileDependencyInstance,
   FileDependencyVoque,
   FILE_DEPENDENCY_GEPP,
-} from './fileDependencyVoque';
+} from './fileDependency';
 
 /**
  * Flattens a TypeScriptFileImportList into its individual file to file

@@ -11,7 +11,7 @@ import {
 import {
   FILE_DEPENDENCY_GEPP,
   FileDependencyVoque,
-} from './dependency/fileDependencyVoque';
+} from './dependency/fileDependency';
 import { assertNotUndefined } from '../../../utilities/assertNotUndefined';
 import {
   PARTITIONED_DIRECTORY_GEPP,

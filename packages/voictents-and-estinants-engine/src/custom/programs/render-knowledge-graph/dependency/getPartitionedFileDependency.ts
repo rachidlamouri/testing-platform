@@ -1,9 +1,6 @@
 import { ComplexMap } from '../../../../utilities/complexMap';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import {
-  FILE_DEPENDENCY_GEPP,
-  FileDependencyVoque,
-} from './fileDependencyVoque';
+import { FILE_DEPENDENCY_GEPP, FileDependencyVoque } from './fileDependency';
 import {
   PARTITIONED_FILE_DEPENDENCY_GEPP,
   PartitionedFileDependencyConstructorInput,

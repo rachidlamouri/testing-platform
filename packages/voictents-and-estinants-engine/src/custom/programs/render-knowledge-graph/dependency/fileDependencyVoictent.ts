@@ -1,11 +1,11 @@
 import { BaseInMemoryOdeshin2Voictent } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { BoundedFile } from '../file/boundedFile';
-import { FileDependency } from './fileDependency';
 import {
+  FileDependency,
   FILE_DEPENDENCY_GEPP,
   FileDependencyVoictentPelie,
   FileDependencyVoque,
-} from './fileDependencyVoque';
+} from './fileDependency';
 
 class BoundedFileCombination extends Map<string, BoundedFile> {}
 

@@ -11,6 +11,9 @@ import { FileDependencyPathNodeFact } from '../dependency/dependency-path/fileDe
 import { DirectoryFact2 } from '../directory/directoryFact2';
 import { FileFact2 } from '../file/fileFact2';
 
+/**
+ * A piece of knowledge
+ */
 export type Fact =
   | PartitionFact
   | DirectoryFact2
