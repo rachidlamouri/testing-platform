@@ -31,6 +31,8 @@ type FileDependencyPathSegmentFactConstructorInput = {
   dependencyGroupZorn: PartitionedFileDependencyGroupZorn;
   tailGraphElementZorn: LocalDirectedGraphElement2Zorn;
   headGraphElementZorn: LocalDirectedGraphElement2Zorn;
+  pathHeadId: string;
+  pathTailIdSet: Set<string>;
 };
 
 /**
@@ -62,6 +64,8 @@ export const { FileDependencyPathSegmentFactInstance } =
       'tailGraphElementZorn',
       'headGraphElementZorn',
       'graphElement',
+      'pathHeadId',
+      'pathTailIdSet',
     ] as const satisfies readonly (keyof FileDependencyPathSegmentFact)[],
   })
     .withTypes<

@@ -31,9 +31,13 @@ import {
 import { FACT_GEPP, Fact, FactVoque } from './fact/fact';
 import { assertNotUndefined } from '../../../utilities/assertNotUndefined';
 import { FactTypeName } from './fact/factTypeName';
-import { FileFactProps } from './app/browser/factProps';
+import {
+  FileDependencyPathSegmentFactProps,
+  FileFactProps,
+} from './app/browser/factProps';
 import { FileFact2 } from './file/fileFact2';
 import { TypeScriptObject } from '../../../utilities/typed-datum/type-script/object';
+import { FileDependencyPathSegmentFact } from './dependency/dependency-path/fileDependencyPathSegmentFact';
 
 const ESTINANT_NAME = 'decodeAndRecastSvgDocument' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -369,6 +373,18 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       return {
         factId: fact.graphElement.id,
         fileName: fact.boundedFile.file.nodePath.name.serialized,
+        importedNodeIdSet: fact.importedNodeIdSet,
+        importingNodeIdSet: fact.importingNodeIdSet,
+      };
+    };
+
+    const getFileDependencyPathSegmentFactProps = (
+      fact: FileDependencyPathSegmentFact,
+    ): Exclude<FileDependencyPathSegmentFactProps, 'children'> => {
+      return {
+        factId: fact.graphElement.id,
+        pathHeadId: fact.pathHeadId,
+        pathTailIdSet: fact.pathTailIdSet,
       };
     };
 
@@ -384,12 +400,16 @@ export const decodeAndRecastSvgDocument = buildEstinant({
         case FactTypeName.PartitionFact:
         case FactTypeName.DirectoryFact2:
         case FactTypeName.FileDependencyPathNodeFact:
-        case FactTypeName.FileDependencyPathSegmentFact:
           return null;
         case FactTypeName.FileFact2:
           return {
             componentName: 'FileFact',
             props: getFileFactProps(fact),
+          };
+        case FactTypeName.FileDependencyPathSegmentFact:
+          return {
+            componentName: 'DependencyPathSegmentFact',
+            props: getFileDependencyPathSegmentFactProps(fact),
           };
       }
     };

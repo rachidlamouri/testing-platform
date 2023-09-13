@@ -11,7 +11,7 @@ import {
 import {
   FILE_DEPENDENCY_GEPP,
   FileDependencyVoque,
-} from './dependency/fileDependency';
+} from './dependency/fileDependencyVoque';
 import { assertNotUndefined } from '../../../utilities/assertNotUndefined';
 import {
   PARTITIONED_DIRECTORY_GEPP,
@@ -59,7 +59,7 @@ export const getPartitionedFileSystemNodes = buildEstinant({
       partitionFactVoictent,
       directoryVoictent,
       fileVoictent,
-      fileDependencyList,
+      fileDependencyVoictent,
     ) => {
       type LocalFileSystemNodeMetadata = {
         isDirectory: boolean;
@@ -98,7 +98,7 @@ export const getPartitionedFileSystemNodes = buildEstinant({
         }),
       );
 
-      fileDependencyList
+      fileDependencyVoictent.list
         .map(({ importingFile, importedFile }) => {
           const nodePathSet = new Set([
             importingFile.nodePath.serialized,

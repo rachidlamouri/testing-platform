@@ -1,4 +1,3 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { assertNotUndefined } from '../../../../utilities/assertNotUndefined';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { isNotNull } from '../../../../utilities/isNotNull';
@@ -157,12 +156,3 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
     },
   })
   .assemble();
-
-export const FILE_DEPENDENCY_GEPP = 'file-dependency';
-
-type FileDependencyGepp = typeof FILE_DEPENDENCY_GEPP;
-
-export type FileDependencyVoque = InMemoryOdeshin2ListVoque<
-  FileDependencyGepp,
-  FileDependency
->;

@@ -1,6 +1,9 @@
 import { ComplexMap } from '../../../../utilities/complexMap';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { FILE_DEPENDENCY_GEPP, FileDependencyVoque } from './fileDependency';
+import {
+  FILE_DEPENDENCY_GEPP,
+  FileDependencyVoque,
+} from './fileDependencyVoque';
 import {
   PARTITIONED_FILE_DEPENDENCY_GEPP,
   PartitionedFileDependencyConstructorInput,
@@ -31,7 +34,7 @@ export const getPartitionedFileDependency = buildEstinant({
     };
 
     const mappableFileDependencyInputList =
-      fileDependencyVoictent.flatMap<MappableFileDependencyInput>(
+      fileDependencyVoictent.list.flatMap<MappableFileDependencyInput>(
         (fileDependency) => {
           const importingSourcePartition =
             fileDependency.importingFile.sourcePartitionFact;

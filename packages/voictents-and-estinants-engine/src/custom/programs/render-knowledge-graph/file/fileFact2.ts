@@ -35,6 +35,8 @@ type FileFact2ConstructorInput = {
   partitionFact: PartitionFact;
   parentBoundedDirectory: BoundedDirectory;
   boundedFile: BoundedFile;
+  importedNodeIdSet: Set<string>;
+  importingNodeIdSet: Set<string>;
 };
 
 /**
@@ -63,6 +65,8 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
     'partitionFact',
     'boundedFile',
     'graphElement',
+    'importedNodeIdSet',
+    'importingNodeIdSet',
   ],
 } as const)
   .withTypes<FileFact2ConstructorInput, FileFact2>({
@@ -74,7 +78,13 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { partitionFact, parentBoundedDirectory, boundedFile } = input;
+      const {
+        partitionFact,
+        parentBoundedDirectory,
+        boundedFile,
+        importedNodeIdSet,
+        importingNodeIdSet,
+      } = input;
 
       const zorn = new FileFact2Zorn({
         partitionFact: partitionFact.zorn,
@@ -99,6 +109,8 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         partitionFact,
         boundedFile,
         graphElement,
+        importedNodeIdSet,
+        importingNodeIdSet,
       };
     },
   })

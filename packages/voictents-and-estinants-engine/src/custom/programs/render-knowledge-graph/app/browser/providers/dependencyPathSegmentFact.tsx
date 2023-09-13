@@ -1,17 +1,10 @@
-import React, { FunctionComponent, PropsWithChildren } from 'react';
+import React, { FunctionComponent } from 'react';
 import { PresentationContext } from '../presentationContext';
 import { useSelectedIdContext } from '../selectedIdContext';
-
-export type DependencyPathSegmentFactProps = PropsWithChildren<{
-  factId: string;
-  headId: string;
-  tailId: string;
-  pathHeadId: string;
-  pathTailIdSet: Set<string>;
-}>;
+import { FileDependencyPathSegmentFactProps } from '../factProps';
 
 export const DependencyPathSegmentFact: FunctionComponent<
-  DependencyPathSegmentFactProps
+  FileDependencyPathSegmentFactProps
 > = ({ children, pathHeadId, pathTailIdSet }) => {
   const { selectedId } = useSelectedIdContext();
   const hasSelectedTail = pathTailIdSet.has(selectedId);

@@ -5,23 +5,23 @@ import { FileFactProps } from '../factProps';
 
 export const FileFact: FunctionComponent<FileFactProps> = ({
   factId,
-  // importedNodeIdSet,
-  // importingNodeIdSet,
+  importedNodeIdSet,
+  importingNodeIdSet,
   children,
 }) => {
   const { onToggleOrSelectId, selectedId } = useSelectedIdContext();
 
   const isSelected = selectedId === factId;
-  // const isImportedNodeSelected = importedNodeIdSet.has(selectedId);
-  // const isImportingNodeSelected = importingNodeIdSet.has(selectedId);
+  const isImportedNodeSelected = importedNodeIdSet.has(selectedId);
+  const isImportingNodeSelected = importingNodeIdSet.has(selectedId);
 
   let strokeColor: string;
   if (isSelected) {
     strokeColor = 'green';
-    // } else if (isImportedNodeSelected) {
-    //   strokeColor = 'blue';
-    // } else if (isImportingNodeSelected) {
-    //   strokeColor = 'purple';
+  } else if (isImportingNodeSelected) {
+    strokeColor = 'blue';
+  } else if (isImportedNodeSelected) {
+    strokeColor = 'purple';
   } else {
     strokeColor = 'gray';
   }

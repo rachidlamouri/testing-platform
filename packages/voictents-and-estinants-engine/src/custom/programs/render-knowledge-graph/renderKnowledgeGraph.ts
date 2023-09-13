@@ -82,6 +82,7 @@ import { getPartitionedFileDependencyPathConstituents } from './dependency/getPa
 import { getFileDependencyPathNodeFact } from './dependency/dependency-path/getFileDependencyPathNodeFact';
 import { aggregateFacts } from './fact/aggregateFacts';
 import { FactVoictent } from './fact/fact';
+import { FileDependencyVoictent } from './dependency/fileDependencyVoictent';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -144,6 +145,7 @@ digikikify({
       programFileCache,
     }),
     new FactVoictent(),
+    new FileDependencyVoictent(),
   ] as const),
   errorGepp: PROGRAM_ERROR_GEPP,
   estinantTuple: [

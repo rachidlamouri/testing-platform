@@ -1,9 +1,11 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { assertNotNull } from '../../../../utilities/assertNotNull';
 import { assertNotUndefined } from '../../../../utilities/assertNotUndefined';
 import { ComplexMap } from '../../../../utilities/complexMap';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { BoundedFile } from '../file/boundedFile';
 import { PartitionFact } from '../partition-fact/partitionFact';
+import { FileDependencyPathSegment } from './dependency-path/fileDependencyPathSegment';
 import {
   FileDependencyPathSegmentFact,
   FileDependencyPathSegmentFactInstance,
@@ -102,6 +104,35 @@ export const { PartitionedFileDependencyGroupInstance } =
             }),
         });
 
+        const keyTemplate = ['tailDirectoryPath', 'headDirectoryPath'] as const;
+        const pathTailIdSetByPathSegment = new ComplexMap<
+          FileDependencyPathSegment,
+          Set<string>,
+          typeof keyTemplate
+        >({
+          keyTemplate,
+        });
+
+        fileDependencyList
+          .flatMap((fileDependency) => {
+            return fileDependency.pathSegmentSet.map((pathSegment) => {
+              const pathTailId =
+                fileDependency.importingFile.localGraphElementZorn.forMachine;
+              return {
+                pathSegment,
+                pathTailId,
+              };
+            });
+          })
+          .forEach(({ pathSegment, pathTailId }) => {
+            const pathTailIdSet =
+              pathTailIdSetByPathSegment.get(pathSegment) ?? new Set<string>();
+            pathTailIdSet.add(pathTailId);
+            pathTailIdSetByPathSegment.set(pathSegment, pathTailIdSet);
+          });
+
+        const pathHeadId = importedFile.localGraphElementZorn.forMachine;
+
         const partialPathSegmentSet = pathSegmentCombination
           .values()
           .map((pathSegment) => {
@@ -109,15 +140,19 @@ export const { PartitionedFileDependencyGroupInstance } =
 
             const tailPathNode = pathNodeByDirectoryPath.get(tailDirectoryPath);
             const headPathNode = pathNodeByDirectoryPath.get(headDirectoryPath);
+            const pathTailIdSet = pathTailIdSetByPathSegment.get(pathSegment);
 
             assertNotUndefined(tailPathNode);
             assertNotUndefined(headPathNode);
+            assertNotNull(pathTailIdSet);
 
             return new FileDependencyPathSegmentFactInstance({
               partitionFact,
               dependencyGroupZorn: zorn,
               tailGraphElementZorn: tailPathNode.localGraphElementZorn,
               headGraphElementZorn: headPathNode.localGraphElementZorn,
+              pathHeadId,
+              pathTailIdSet,
             });
           });
 
@@ -141,6 +176,10 @@ export const { PartitionedFileDependencyGroupInstance } =
               tailGraphElementZorn:
                 fileDependency.importingFile.localGraphElementZorn,
               headGraphElementZorn: tailNode.localGraphElementZorn,
+              pathHeadId,
+              pathTailIdSet: new Set([
+                fileDependency.importingFile.localGraphElementZorn.forMachine,
+              ]),
             });
           }),
           ...partialPathSegmentSet,
@@ -149,6 +188,13 @@ export const { PartitionedFileDependencyGroupInstance } =
             dependencyGroupZorn: zorn,
             tailGraphElementZorn: headNode.localGraphElementZorn,
             headGraphElementZorn: importedFile.localGraphElementZorn,
+            pathHeadId,
+            pathTailIdSet: new Set(
+              fileDependencyList.map((fileDependency) => {
+                return fileDependency.importingFile.localGraphElementZorn
+                  .forMachine;
+              }),
+            ),
           }),
         ];
 
