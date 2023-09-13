@@ -49,7 +49,7 @@ export const getBoundedDirectory = buildEstinant({
     );
 
     if (partitionedBoundary === null) {
-      // TODO: make sure some mechanism is handling actual errors
+      // "assertDirectoriesHaveBoundaries" covers this edge case
       // This is not necessarily an error, because directories without files do not have to be in a boundary
       return [];
     }

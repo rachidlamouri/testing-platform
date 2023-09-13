@@ -83,6 +83,8 @@ import { getFileDependencyPathNodeFact } from './dependency/dependency-path/getF
 import { aggregateFacts } from './fact/aggregateFacts';
 import { FactVoictent } from './fact/fact';
 import { FileDependencyVoictent } from './dependency/fileDependencyVoictent';
+import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
+import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -170,7 +172,11 @@ digikikify({
     assertNoBoundaryOverlap,
 
     getPartitionedBoundaryTrie,
+
     getBoundedDirectory,
+    getDirectoriesWithFiles,
+    assertDirectoriesHaveBoundaries,
+
     getBoundedFile,
     getFileDependencies,
     getPartitionedFileSystemNodes,
@@ -182,28 +188,6 @@ digikikify({
     getFileDependencyPathNodeFact,
 
     aggregateFacts,
-
-    // getDirectoriesWithFiles,
-    // getDirectoryBoundaryRelationship,
-    // getDirectoryFact,
-    // getDirectoryToParentRelationshipFact,
-    // getDirectoryGraphElements,
-
-    // assertDirectoriesHaveBoundaries,
-
-    // getFileFact,
-    // getFileGraphElements,
-
-    // getDependencyFacts,
-
-    // getAssociatedBoundaryFacts,
-    // getAssociatedBoundaryFactGraphElements,
-
-    // getAssociatedFileGraphElements,
-
-    // getInvertedDependencyGroup,
-    // getInvertedDependencyGraphElements,
-
     getAllFactGraphElements,
 
     groupGraphElements,
