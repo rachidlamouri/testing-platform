@@ -12,6 +12,7 @@
     "describe:repository": "npm run open-schema-example -- r",
     "lint:repository": "npm run example-custom",
     "lint:ts:all": "npm run --silent lint:ts .",
+    "lint:ts:engine": "npm run --silent lint:ts packages/voictents-and-estinants-engine/",
     "lint:ts:fix-all": "npm run --silent lint:ts -- --fix .",
     "lint:ts": "eslint --color --max-warnings 0 --ext ts,tsx,js",
     "lint:md": "markdownlint '**/*.md' --ignore '**/node_modules/**'",
