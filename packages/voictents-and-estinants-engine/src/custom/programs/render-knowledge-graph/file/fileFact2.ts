@@ -11,6 +11,7 @@ import {
   DirectedGraphNode2Instance,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
+import { Metadata } from '../app/browser/dynamicComponentTypes';
 import { BoundedDirectory } from '../directory/boundedDirectory';
 import { FactTypeName } from '../fact/factTypeName';
 import {
@@ -52,6 +53,7 @@ export type FileFact2 = SimplifyN<
     Omit<FileFact2ConstructorInput, 'parentBoundedDirectory'>,
     {
       graphElement: DirectedGraphNode2;
+      graphMetadata: Metadata;
     },
   ]
 >;
@@ -67,6 +69,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
     'graphElement',
     'importedNodeIdSet',
     'importingNodeIdSet',
+    'graphMetadata',
   ],
 } as const)
   .withTypes<FileFact2ConstructorInput, FileFact2>({
@@ -103,6 +106,29 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         },
       });
 
+      const graphMetadata: Metadata = {
+        id: graphElement.id,
+        title: boundedFile.file.onDiskFileName.asIs,
+        fileSystemPath: boundedFile.file.filePath,
+        fieldList: [
+          {
+            label: 'Boundary',
+            value: boundedFile.boundary.displayName,
+          },
+          {
+            label: 'Boundary Path',
+            value: boundedFile.boundary.directory.directoryPath,
+          },
+          {
+            label: 'Directory Path from Boundary',
+            value: boundedFile.file.directoryPath.replace(
+              boundedFile.boundary.directory.directoryPath,
+              '<boundary>',
+            ),
+          },
+        ],
+      };
+
       return {
         typeName: FactTypeName.FileFact2,
         zorn,
@@ -111,6 +137,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         graphElement,
         importedNodeIdSet,
         importingNodeIdSet,
+        graphMetadata,
       };
     },
   })
