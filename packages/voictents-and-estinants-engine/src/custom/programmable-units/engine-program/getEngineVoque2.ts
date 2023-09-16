@@ -8,9 +8,9 @@ import {
   ReportingEstinantLocator,
 } from '../error/programError';
 import {
-  PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
-  ProgramBodyDeclarationsByIdentifierVoque,
-} from '../type-script-file/programBodyDeclarationsByIdentifier';
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  FileCommentedProgramBodyDeclarationGroupVoque,
+} from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
 import {
   ENGINE_VOQUE_2_GEPP,
   EngineVoque2Instance,
@@ -40,13 +40,12 @@ export const getEngineVoque2 = buildEstinant({
     gepp: ENGINE_VOQUE_LOCATOR_2_GEPP,
   })
   .andFromHubblepupTuple2<
-    ProgramBodyDeclarationsByIdentifierVoque,
+    FileCommentedProgramBodyDeclarationGroupVoque,
     [OdeshinZorn]
   >({
-    gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
+    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
     framate: (left) => [left.hubblepup.filePath],
-    // TODO: "zorn" is pretty useless in this context. This should be "filePath"
-    croard: (right) => right.hubblepup.zorn,
+    croard: (right) => right.hubblepup.filePath,
   })
   .toHubblepup2<EngineVoque2Voque>({
     gepp: ENGINE_VOQUE_2_GEPP,

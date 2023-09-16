@@ -17,7 +17,6 @@ import {
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
   EngineFunctionConfigurationVoque,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
-import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
@@ -97,7 +96,6 @@ digikikify({
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
     getCommentedProgramBodyDeclarationList,
-    getProgramBodyDeclarationsByIdentifier,
     getTypeScriptFileImportList,
 
     filterEngineProgramFile,

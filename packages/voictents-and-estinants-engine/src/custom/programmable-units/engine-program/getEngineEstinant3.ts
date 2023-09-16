@@ -18,11 +18,6 @@ import {
 import { isStringLiteral } from '../../../utilities/type-script-ast/isStringLiteral';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
-  ProgramBodyDeclarationsByIdentifier,
-  ProgramBodyDeclarationsByIdentifierVoque,
-} from '../type-script-file/programBodyDeclarationsByIdentifier';
-import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
   EngineEstinantBuildAddMetadataForSerializationLocator,
   EngineEstinantLocator2TypeName,
@@ -35,7 +30,6 @@ import {
   EngineEstinant3,
   EngineEstinant3Instance,
 } from './engineEstinant3';
-import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclarationList';
 import { isNode } from '../../../utilities/type-script-ast/isNode';
 import {
   buildIsTypeScriptTypeParameterInstantiationWithSpecificParameterTuple,
@@ -73,6 +67,12 @@ import {
   EstinantVoqueRelationship2Voque,
 } from './estinantVoqueRelationship2';
 import { OdeshinZorn } from '../../adapter/odeshin2';
+import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclaration';
+import {
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  FileCommentedProgramBodyDeclarationGroup,
+  FileCommentedProgramBodyDeclarationGroupVoque,
+} from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
 
 const ESTINANT_NAME = 'getEngineEstinant3' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -87,7 +87,7 @@ type IdentifierOriginFilePathAccessor = (identifierName: string) => string;
 
 type CoreEstinantAccessorInput = {
   estinantLocator: EngineEstinantTopLevelDeclarationLocator;
-  commentedBodyDeclaration: CommentedProgramBodyDeclaration | undefined;
+  estinantDeclaration: CommentedProgramBodyDeclaration | undefined;
 };
 
 type CoreEstinantAccessorResult = {
@@ -201,16 +201,16 @@ const getBuildAddMetadataForSerializationEstinant = (
 
 const getCoreEstinant = ({
   estinantLocator,
-  commentedBodyDeclaration,
+  estinantDeclaration,
 }: CoreEstinantAccessorInput): CoreEstinantAccessorResult => {
   const estinantName = estinantLocator.identifierName;
 
   const typeNode =
-    commentedBodyDeclaration !== undefined &&
-    commentedBodyDeclaration.identifiableNode !== null &&
-    commentedBodyDeclaration.identifiableNode.type !== undefined &&
-    isNode(commentedBodyDeclaration.identifiableNode)
-      ? commentedBodyDeclaration?.identifiableNode
+    estinantDeclaration !== undefined &&
+    estinantDeclaration.identifiableNode !== null &&
+    estinantDeclaration.identifiableNode.type !== undefined &&
+    isNode(estinantDeclaration.identifiableNode)
+      ? estinantDeclaration?.identifiableNode
       : null;
 
   const typeParameterNodeList =
@@ -242,7 +242,7 @@ const getCoreEstinant = ({
           },
           context: {
             typeNode,
-            commentedBodyDeclaration,
+            estinantDeclaration,
           },
         } satisfies ReportedProgramError<ReportingLocator>,
       ],
@@ -250,7 +250,7 @@ const getCoreEstinant = ({
         filePath: estinantLocator.filePath,
         identifierName: estinantLocator.identifierName,
         estinantName,
-        commentText: commentedBodyDeclaration?.commentText ?? '',
+        commentText: estinantDeclaration?.commentText ?? '',
         inputList: [],
         outputList: [],
         locator: estinantLocator,
@@ -417,7 +417,7 @@ const getCoreEstinant = ({
       filePath: estinantLocator.filePath,
       identifierName: estinantLocator.identifierName,
       estinantName,
-      commentText: commentedBodyDeclaration?.commentText ?? '',
+      commentText: estinantDeclaration?.commentText ?? '',
       inputList,
       outputList,
       locator: estinantLocator,
@@ -427,8 +427,8 @@ const getCoreEstinant = ({
 
 type AdaptedEstinantAccessorInput = {
   estinantLocator: EngineEstinantTopLevelDeclarationLocator;
-  commentedBodyDeclaration: CommentedProgramBodyDeclaration | undefined;
-  bodyDeclarationsByIdentifier: ProgramBodyDeclarationsByIdentifier;
+  estinantDeclaration: CommentedProgramBodyDeclaration | undefined;
+  bodyDeclarationGroup: FileCommentedProgramBodyDeclarationGroup;
   getIdentifierOriginFilePath: IdentifierOriginFilePathAccessor;
 };
 
@@ -439,14 +439,14 @@ type AdaptedEstinantAccessorResult = {
 
 const getAdaptedEstinant = ({
   estinantLocator,
-  commentedBodyDeclaration,
-  bodyDeclarationsByIdentifier,
+  estinantDeclaration,
+  bodyDeclarationGroup,
   getIdentifierOriginFilePath,
 }: AdaptedEstinantAccessorInput): AdaptedEstinantAccessorResult => {
   const initExpression =
-    commentedBodyDeclaration?.identifiableNode?.type ===
+    estinantDeclaration?.identifiableNode?.type ===
     AST_NODE_TYPES.VariableDeclarator
-      ? commentedBodyDeclaration.identifiableNode.init
+      ? estinantDeclaration.identifiableNode.init
       : null;
 
   const callExpression = isCallExpression(initExpression)
@@ -479,7 +479,7 @@ const getAdaptedEstinant = ({
         },
         context: {
           hasIdentifiableNode:
-            commentedBodyDeclaration?.identifiableNode !== undefined,
+            estinantDeclaration?.identifiableNode !== undefined,
           hasInitExpression: initExpression !== null,
           hasCallExpression: callExpression !== null,
           initExpression,
@@ -762,7 +762,7 @@ const getAdaptedEstinant = ({
     : null;
 
   let instantiatedName: string | null;
-  let foo: CommentedProgramBodyDeclaration | undefined;
+  let declaration: CommentedProgramBodyDeclaration | undefined;
   if (
     estinantNameProperty !== null &&
     isStringLiteral(estinantNameProperty.value)
@@ -772,16 +772,16 @@ const getAdaptedEstinant = ({
     estinantNameProperty !== null &&
     isIdentifier(estinantNameProperty.value) &&
     // eslint-disable-next-line no-cond-assign
-    (foo = bodyDeclarationsByIdentifier.declarationByIdentifier.get(
+    (declaration = bodyDeclarationGroup.declarationByIdentifier.get(
       estinantNameProperty.value.name,
     )) !== undefined &&
-    foo.identifiableNode?.type === AST_NODE_TYPES.VariableDeclarator &&
+    declaration.identifiableNode?.type === AST_NODE_TYPES.VariableDeclarator &&
     isSpecificConstantTypeScriptAsExpression(
-      foo.identifiableNode.init,
+      declaration.identifiableNode.init,
       isStringLiteral,
     )
   ) {
-    instantiatedName = foo.identifiableNode.init.expression.value;
+    instantiatedName = declaration.identifiableNode.init.expression.value;
   } else {
     instantiatedName = null;
   }
@@ -825,7 +825,7 @@ const getAdaptedEstinant = ({
       filePath: estinantLocator.filePath,
       identifierName: estinantLocator.identifierName,
       estinantName,
-      commentText: commentedBodyDeclaration?.commentText ?? '',
+      commentText: estinantDeclaration?.commentText ?? '',
       inputList,
       outputList,
       locator: estinantLocator,
@@ -844,12 +844,12 @@ export const getEngineEstinant3 = buildEstinant({
     gepp: ENGINE_ESTINANT_LOCATOR_2_GEPP,
   })
   .andFromHubblepupTuple2<
-    ProgramBodyDeclarationsByIdentifierVoque,
+    FileCommentedProgramBodyDeclarationGroupVoque,
     [OdeshinZorn]
   >({
-    gepp: PROGRAM_BODY_STATEMENTS_BY_IDENTIFIER_GEPP,
+    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
     framate: (leftInput) => [leftInput.hubblepup.filePath],
-    croard: (rightInput) => rightInput.indexByName.zorn,
+    croard: (rightInput) => rightInput.hubblepup.filePath,
   })
   .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
@@ -872,11 +872,7 @@ export const getEngineEstinant3 = buildEstinant({
     gepp: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .onPinbe(
-    (
-      estinantLocator,
-      [bodyDeclarationsByIdentifier],
-      [{ list: importList }],
-    ) => {
+    (estinantLocator, [bodyDeclarationGroup], [{ list: importList }]) => {
       const importByIdentifierName = new Map(
         importList
           .filter((importItem) => importItem.isInternal)
@@ -905,26 +901,25 @@ export const getEngineEstinant3 = buildEstinant({
         ({ errorList, estinant } =
           getBuildAddMetadataForSerializationEstinant(estinantLocator));
       } else {
-        const commentedBodyDeclaration =
-          bodyDeclarationsByIdentifier.declarationByIdentifier.get(
+        const estinantDeclaration =
+          bodyDeclarationGroup.declarationByIdentifier.get(
             estinantLocator.identifierName,
           );
-
         if (estinantLocator.isCoreEstinant) {
           ({ errorList, estinant } = getCoreEstinant({
             estinantLocator,
-            commentedBodyDeclaration,
+            estinantDeclaration,
           }));
         } else {
           ({ errorList, estinant } = getAdaptedEstinant({
             estinantLocator,
-            commentedBodyDeclaration,
-            bodyDeclarationsByIdentifier,
+            estinantDeclaration,
+            bodyDeclarationGroup,
             getIdentifierOriginFilePath,
           }));
         }
 
-        if (typeof commentedBodyDeclaration?.commentText !== 'string') {
+        if (typeof estinantDeclaration?.commentText !== 'string') {
           errorList.push({
             name: `missing-estinant-comment`,
             error: new Error(
