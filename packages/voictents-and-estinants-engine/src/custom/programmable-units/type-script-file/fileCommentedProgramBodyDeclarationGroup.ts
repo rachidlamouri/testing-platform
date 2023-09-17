@@ -1,3 +1,4 @@
+import Case from 'case';
 import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
@@ -27,6 +28,50 @@ type FileCommentedProgramBodyDeclarationGroupConstructorInput = {
   list: CommentedProgramBodyDeclaration[];
 };
 
+class IdentifiableCommentedProgramBodyDeclarationListByName extends Map<
+  string,
+  IdentifiableCommentedProgramBodyDeclaration[]
+> {
+  constructor(
+    sublistEntryList: (readonly [
+      key: string,
+      value: IdentifiableCommentedProgramBodyDeclaration,
+    ])[],
+  ) {
+    super();
+
+    sublistEntryList.forEach(([name, value]) => {
+      this.addToSublist(name, value);
+    });
+  }
+
+  private normalizeKey(key: string): string {
+    const normalizedKey = Case.kebab(key);
+    return normalizedKey;
+  }
+
+  set(key: string, value: IdentifiableCommentedProgramBodyDeclaration[]): this {
+    const normalizedKey = this.normalizeKey(key);
+    super.set(normalizedKey, value);
+    return this;
+  }
+
+  addToSublist(
+    key: string,
+    value: IdentifiableCommentedProgramBodyDeclaration,
+  ): void {
+    const sublist = this.get(key) ?? [];
+    sublist.push(value);
+    this.set(key, sublist);
+  }
+
+  get(key: string): IdentifiableCommentedProgramBodyDeclaration[] | undefined {
+    const normalizedKey = this.normalizeKey(key);
+    const value = super.get(normalizedKey);
+    return value;
+  }
+}
+
 /**
  * The set of top level declaration AST nodes that may have a comment and may
  * have an identifiable node
@@ -44,6 +89,7 @@ export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
         string,
         IdentifiableCommentedProgramBodyDeclaration
       >;
+      declarationListByIdentifier: IdentifiableCommentedProgramBodyDeclarationListByName;
     },
   ]
 >;
@@ -58,6 +104,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       'filePath',
       'list',
       'declarationByIdentifier',
+      'declarationListByIdentifier',
     ] as const satisfies readonly (keyof FileCommentedProgramBodyDeclarationGroup)[],
   })
     .withTypes<
@@ -89,11 +136,24 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
             }),
         );
 
+        const declarationListByIdentifier =
+          new IdentifiableCommentedProgramBodyDeclarationListByName(
+            list
+              .filter(isIdentifiableCommentedProgramBodyDeclaration)
+              .map((declaration) => {
+                return [
+                  declaration.identifiableNode.id.name,
+                  declaration,
+                ] as const;
+              }),
+          );
+
         return {
           zorn,
           filePath,
           list,
           declarationByIdentifier,
+          declarationListByIdentifier,
         } satisfies FileCommentedProgramBodyDeclarationGroup;
       },
     })

@@ -1,5 +1,6 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
+import { hasOneElement } from '../../../../utilities/hasOneElement';
 import {
   GenericZorn2Template,
   Zorn2,
@@ -11,6 +12,7 @@ import {
   DirectedGraphNode2Instance,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
+import { FileCommentedProgramBodyDeclarationGroup } from '../../../programmable-units/type-script-file/fileCommentedProgramBodyDeclarationGroup';
 import { Metadata } from '../app/browser/dynamicComponentTypes';
 import { BoundedDirectory } from '../directory/boundedDirectory';
 import { FactTypeName } from '../fact/factTypeName';
@@ -38,6 +40,7 @@ type FileFact2ConstructorInput = {
   boundedFile: BoundedFile;
   importedNodeIdSet: Set<string>;
   importingNodeIdSet: Set<string>;
+  declarationGroup: FileCommentedProgramBodyDeclarationGroup;
 };
 
 /**
@@ -50,7 +53,10 @@ export type FileFact2 = SimplifyN<
       typeName: FactTypeName.FileFact2;
       zorn: FileFact2Zorn;
     },
-    Omit<FileFact2ConstructorInput, 'parentBoundedDirectory'>,
+    Omit<
+      FileFact2ConstructorInput,
+      'parentBoundedDirectory' | 'declarationGroup'
+    >,
     {
       graphElement: DirectedGraphNode2;
       graphMetadata: Metadata;
@@ -87,6 +93,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         boundedFile,
         importedNodeIdSet,
         importingNodeIdSet,
+        declarationGroup,
       } = input;
 
       const zorn = new FileFact2Zorn({
@@ -105,6 +112,16 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
           ...THEME.file,
         },
       });
+
+      const canonicalDeclarationList =
+        declarationGroup.declarationListByIdentifier.get(
+          boundedFile.file.nodePath.name.extensionless,
+        ) ?? [];
+
+      // TODO: handle the cases where there is more than one
+      const canonicalDeclaration = hasOneElement(canonicalDeclarationList)
+        ? canonicalDeclarationList[0]
+        : null;
 
       const graphMetadata: Metadata = {
         id: graphElement.id,
@@ -128,6 +145,13 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
           },
         ],
       };
+
+      if (canonicalDeclaration !== null) {
+        graphMetadata.fieldList.push({
+          label: canonicalDeclaration.identifiableNode.id.name,
+          value: canonicalDeclaration.commentText ?? '',
+        });
+      }
 
       return {
         typeName: FactTypeName.FileFact2,

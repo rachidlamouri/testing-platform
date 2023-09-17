@@ -1,6 +1,10 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { OdeshinZorn } from '../../../adapter/odeshin2';
 import {
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  FileCommentedProgramBodyDeclarationGroupVoque,
+} from '../../../programmable-units/type-script-file/fileCommentedProgramBodyDeclarationGroup';
+import {
   FILE_DEPENDENCY_GEPP,
   FileDependencyVoque,
 } from '../dependency/fileDependency';
@@ -33,6 +37,18 @@ export const getFileFact2 = buildEstinant({
       return boundedDirectory.hubblepup.directory.directoryPath;
     },
   })
+  .andFromHubblepupTuple2<
+    FileCommentedProgramBodyDeclarationGroupVoque,
+    [OdeshinZorn]
+  >({
+    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+    framate: (partitionedFile) => {
+      return [partitionedFile.hubblepup.file.file.filePath];
+    },
+    croard: (declarationGroup) => {
+      return declarationGroup.hubblepup.filePath;
+    },
+  })
   .andFromVoictent2<FileDependencyVoque>({
     gepp: FILE_DEPENDENCY_GEPP,
   })
@@ -40,7 +56,12 @@ export const getFileFact2 = buildEstinant({
     gepp: FILE_FACT_2_GEPP,
   })
   .onPinbe(
-    (partitionedFile, [parentBoundedDirectory], fileDependencyVoictent) => {
+    (
+      partitionedFile,
+      [parentBoundedDirectory],
+      [declarationGroup],
+      fileDependencyVoictent,
+    ) => {
       const importedFileList =
         fileDependencyVoictent.importedFileListByImportingFilePath.get(
           partitionedFile.file.file.filePath,
@@ -68,6 +89,7 @@ export const getFileFact2 = buildEstinant({
         boundedFile: partitionedFile.file,
         importedNodeIdSet,
         importingNodeIdSet,
+        declarationGroup,
       });
     },
   )
