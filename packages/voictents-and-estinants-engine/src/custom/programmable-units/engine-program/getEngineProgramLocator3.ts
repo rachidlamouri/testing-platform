@@ -33,10 +33,6 @@ import {
   EngineEstinantLocator2TypeName,
   EngineEstinantTopLevelDeclarationLocatorInstance,
 } from './engineEstinantLocator2';
-import {
-  COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
-  CommentedProgramBodyDeclarationListVoque,
-} from '../type-script-file/commentedProgramBodyDeclarationList';
 import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
 import {
   isNewExpression,
@@ -74,6 +70,10 @@ import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLoca
 import { OdeshinZorn } from '../../adapter/odeshin2';
 import { buildVoictentByGepp } from '../../../type-script-adapter/digikikify';
 import { isArrayExpression } from '../../../utilities/type-script-ast/isArrayExpression';
+import {
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  FileCommentedProgramBodyDeclarationGroupVoque,
+} from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -634,10 +634,10 @@ export const getEngineProgramLocator3 = buildEstinant({
     gepp: ENGINE_PROGRAM_FILE_GEPP,
   })
   .andFromHubblepupTuple2<
-    CommentedProgramBodyDeclarationListVoque,
+    FileCommentedProgramBodyDeclarationGroupVoque,
     [OdeshinZorn]
   >({
-    gepp: COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
+    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
     framate: (leftInput) => [leftInput.indexByName.zorn],
     croard: (rightInput) => rightInput.indexByName.zorn,
   })

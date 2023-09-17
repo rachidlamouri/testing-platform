@@ -1,15 +1,15 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
-  CommentedProgramBodyDeclarationListVoque,
-} from './commentedProgramBodyDeclarationList';
-import {
   TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
   TypeScriptFileExport,
   TypeScriptFileExportListVoque,
 } from './typeScriptFileExportList';
 import { isNotNull } from '../../../utilities/isNotNull';
+import {
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  FileCommentedProgramBodyDeclarationGroupVoque,
+} from './fileCommentedProgramBodyDeclarationGroup';
 
 /**
  * Gets the identifier name for every named export in a TypeScript file
@@ -17,14 +17,14 @@ import { isNotNull } from '../../../utilities/isNotNull';
 export const getTypeScriptFileExportList = buildEstinant({
   name: 'getTypeScriptFileExportList',
 })
-  .fromHubblepup2<CommentedProgramBodyDeclarationListVoque>({
-    gepp: COMMENTED_PROGRAM_BODY_DECLARATION_LIST_GEPP,
+  .fromHubblepup2<FileCommentedProgramBodyDeclarationGroupVoque>({
+    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   })
   .toHubblepup2<TypeScriptFileExportListVoque>({
     gepp: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
   })
-  .onPinbe(({ zorn: filePath, list: declarationList }) => {
-    const exportList = declarationList
+  .onPinbe((group) => {
+    const exportList = group.list
       .filter((declaration) => {
         return (
           declaration.bodyStatement.type ===
@@ -38,7 +38,7 @@ export const getTypeScriptFileExportList = buildEstinant({
       }));
 
     return {
-      zorn: filePath,
+      zorn: group.filePath,
       list: exportList,
     };
   })

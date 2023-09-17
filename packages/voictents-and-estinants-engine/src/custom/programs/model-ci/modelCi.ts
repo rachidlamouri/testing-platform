@@ -24,7 +24,6 @@ import { associateTypeScriptFileToTypescriptConfiguration } from '../../programm
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
-import { getProgramBodyDeclarationsByIdentifier } from '../../programmable-units/type-script-file/programBodyDeclarationsByIdentifier';
 import { assertCiModelHasAllPrograms } from './assertCiModelHasAllPrograms';
 import { assertCiFileIsUpToDate } from './assertCiFileIsUpToDate';
 import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
@@ -76,7 +75,6 @@ digikikify({
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
     getTypeScriptFileImportList,
-    getProgramBodyDeclarationsByIdentifier,
     getCommentedProgramBodyDeclarationList,
 
     filterEngineProgramFile,

@@ -159,6 +159,20 @@ export abstract class Zorn2<TTemplate extends GenericZorn2Template>
     public readonly valueByTemplateKey: InputValueByTemplateKey<TTemplate>,
   ) {}
 
+  get forHuman(): string {
+    return this.template
+      .map((key: string) => {
+        const value = this.safeValueByTemplateKey[key];
+
+        if (typeof value === 'string') {
+          return value;
+        }
+
+        return value.forHuman;
+      })
+      .join(':');
+  }
+
   /**
    * This function is safe and private because the exact type of
    * "valueByTemplateKey" cannot be derived within this class
@@ -199,20 +213,6 @@ export abstract class Zorn2<TTemplate extends GenericZorn2Template>
 
       return value[0];
     }) as TemplateKeyTuple<TTemplate>;
-  }
-
-  get forHuman(): string {
-    return this.template
-      .map((key: string) => {
-        const value = this.safeValueByTemplateKey[key];
-
-        if (typeof value === 'string') {
-          return value;
-        }
-
-        return value.forHuman;
-      })
-      .join(':');
   }
 
   get forMachine(): string {
