@@ -44,7 +44,8 @@ type Zorn2LikeConstructor<TZorn2Like extends Zorn2Like> = {
 type GenericZorn2LikeConstructor = Zorn2LikeConstructor<Zorn2Like>;
 
 enum ZornTemplateKeyword {
-  LITERAL = '',
+  LITERAL = 'literal',
+  ANY = 'any',
 }
 
 type Subzorn = ZornTemplateKeyword | GenericZorn2LikeConstructor;
@@ -81,11 +82,14 @@ type GenericZorn2TemplateEntry = Zorn2TemplateEntry<
 
 export type GenericZorn2Template = NonEmptyTuple<GenericZorn2TemplateEntry>;
 
-type InputValue<TSubzorn extends Subzorn> = TSubzorn extends ZornTemplateKeyword
-  ? OutputValue
-  : TSubzorn extends Zorn2LikeConstructor<infer TZorn2Like>
-  ? TZorn2Like
-  : never;
+type InputValue<TSubzorn extends Subzorn> =
+  TSubzorn extends ZornTemplateKeyword.LITERAL
+    ? OutputValue
+    : TSubzorn extends ZornTemplateKeyword.ANY
+    ? Zorn2Like | { zorn: Zorn2Like }
+    : TSubzorn extends Zorn2LikeConstructor<infer TZorn2Like>
+    ? TZorn2Like | { zorn: TZorn2Like }
+    : never;
 
 type InputValueFromSubzornTuple<TSubzornTuple extends GenericSubzornTuple> =
   TSubzornTuple extends SubzornSingleton<infer TSubzorn>
@@ -155,6 +159,8 @@ export abstract class Zorn2<TTemplate extends GenericZorn2Template>
 {
   static LITERAL = ZornTemplateKeyword.LITERAL;
 
+  static ANY = ZornTemplateKeyword.ANY;
+
   constructor(
     public readonly valueByTemplateKey: InputValueByTemplateKey<TTemplate>,
   ) {}
@@ -168,7 +174,8 @@ export abstract class Zorn2<TTemplate extends GenericZorn2Template>
           return value;
         }
 
-        return value.forHuman;
+        const subzorn = 'zorn' in value ? value.zorn : value;
+        return subzorn.forHuman;
       })
       .join(':');
   }
@@ -177,8 +184,14 @@ export abstract class Zorn2<TTemplate extends GenericZorn2Template>
    * This function is safe and private because the exact type of
    * "valueByTemplateKey" cannot be derived within this class
    */
-  private get safeValueByTemplateKey(): Record<string, string | Zorn2Like> {
-    return this.valueByTemplateKey as Record<string, string | Zorn2Like>;
+  private get safeValueByTemplateKey(): Record<
+    string,
+    string | Zorn2Like | { zorn: Zorn2Like }
+  > {
+    return this.valueByTemplateKey as Record<
+      string,
+      string | Zorn2Like | { zorn: Zorn2Like }
+    >;
   }
 
   abstract get rawTemplate(): TTemplate;
@@ -194,7 +207,9 @@ export abstract class Zorn2<TTemplate extends GenericZorn2Template>
       if (typeof value === 'string') {
         return [{ [nextPrefix]: value }];
       }
-      return value.getOutputValueByTemplateKeyPathList(nextPrefix);
+
+      const subzorn = 'zorn' in value ? value.zorn : value;
+      return subzorn.getOutputValueByTemplateKeyPathList(nextPrefix);
     });
   }
 

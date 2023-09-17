@@ -16,6 +16,7 @@ import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
+import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
 import { getTypeScriptFileExportList } from '../../programmable-units/type-script-file/getTypeScriptFileExportList';
@@ -57,6 +58,7 @@ digikikify({
 
     markUnusedExports,
 
+    reportFailedLintAssertion,
     reportErrors,
     signalError,
   ] as const,

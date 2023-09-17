@@ -1,4 +1,6 @@
+import { serialize } from '../../../utilities/typed-datum/serializer/serialize';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { LintAssertionError } from '../linting/reportFailedLintAssertion';
 import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
@@ -20,13 +22,16 @@ export const reportErrors = buildEstinant({
   .onPinbe((programError) => {
     errorCount += 1;
 
+    // TODO: Update programError to always be an instance of Error
+
+    // TODO: create an abstract subclass of Error that requires a function that serializes metadata including program file cache file paths
+
     if (errorCount < errorLimit) {
       /* eslint-disable no-console */
       console.log();
       console.log(
         `\x1b[31mError\x1b[0m ${errorCount}: ${programError.message}`,
       );
-      console.log(`  Error Name    - ${programError.name}`);
 
       if (!(programError instanceof Error)) {
         console.log(
@@ -39,6 +44,28 @@ export const reportErrors = buildEstinant({
         }
         console.log(`  Context Path  - ${programError.contextFilePath}`);
         console.log();
+      } else if (programError instanceof LintAssertionError) {
+        const { lintAssertion } = programError;
+
+        console.log('  Rule Name');
+        console.log(`    ${lintAssertion.rule.name}`);
+        console.log('  Rule Source');
+        console.log(
+          serialize(lintAssertion.rule.source.zorn.templateValueByKeyPath)
+            .split('\n')
+            .map((line) => `    ${line}`)
+            .join('\n'),
+        );
+
+        console.log('  Lint Source');
+        console.log(
+          serialize(lintAssertion.lintSource.zorn.templateValueByKeyPath)
+            .split('\n')
+            .map((line) => `    ${line}`)
+            .join('\n'),
+        );
+
+        // TODO: incorporate the program file cache error context filepath
       }
 
       /* eslint-enable no-console */
