@@ -1,11 +1,14 @@
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
-  GenericProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
-  ProgramErrorElementLocatorTypeName,
-  ProgramErrorPelue,
-  ReportingEstinantLocator,
-} from '../../programmable-units/error/programError';
+  GenericLintAssertion,
+  LINT_ASSERTION_GEPP,
+  LintAssertion,
+  LintAssertionVoque,
+} from '../../programmable-units/linting/lintAssertion';
+import { TypedRule } from '../../programmable-units/linting/rule';
+import { EstinantSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ExportedIdentifierSourceInstance } from '../../programmable-units/linting/source/exportedIdentifierSource';
+import { ImportedIdentifierSourceInstance } from '../../programmable-units/linting/source/importedIdentifierSource';
 import {
   TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
   TypeScriptFileExportListVoque,
@@ -16,13 +19,30 @@ import {
 } from '../../programmable-units/type-script-file/typeScriptFileImportList';
 
 const ESTINANT_NAME = 'markUnusedExports' as const;
-type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
-const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
-  name: ESTINANT_NAME,
+const ruleSource = new EstinantSourceInstance({
+  estinantName: ESTINANT_NAME,
   filePath: __filename,
-};
+});
+
+type LocatableImportRuleMessageContext = { importedIdentifierName: string };
+const locatableImportRule = new TypedRule<LocatableImportRuleMessageContext>({
+  source: ruleSource,
+  name: 'import-is-locatable',
+  description: 'All imports must have a resolvable source',
+  getErrorMessage: ({ importedIdentifierName }): string => {
+    return `Unable to find file corresponding to import "${importedIdentifierName}"`;
+  },
+});
+
+type NoUnusedExportRuleMessageContext = { exportedIdentifierName: string };
+const noUnusedExportRule = new TypedRule<NoUnusedExportRuleMessageContext>({
+  source: ruleSource,
+  name: 'export-is-imported',
+  description: 'All exports must be imported somewhere',
+  getErrorMessage: ({ exportedIdentifierName }): string => {
+    return `Export "${exportedIdentifierName}" is not imported by anything`;
+  },
+});
 
 /**
  * Produces an error for every named export that is not imported by any other
@@ -39,8 +59,8 @@ export const markUnusedExports = buildEstinant({
   .andFromVoictent2<TypeScriptFileExportListVoque>({
     gepp: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+  .toHubblepupTuple2<LintAssertionVoque>({
+    gepp: LINT_ASSERTION_GEPP,
   })
   .onPinbe((importListList, exportListList) => {
     type FilePath = string;
@@ -92,8 +112,6 @@ export const markUnusedExports = buildEstinant({
           });
         });
     });
-
-    const errorList: ProgramErrorPelue<ReportingLocator>[] = [];
 
     const haphazardouslyProtectedFromBeingMarkedAsUnusedList: typeof importItemList[number][] =
       [
@@ -258,6 +276,8 @@ export const markUnusedExports = buildEstinant({
         },
       ];
 
+    const lintAssertionList: GenericLintAssertion[] = [];
+
     [
       ...haphazardouslyProtectedFromBeingMarkedAsUnusedList,
       ...importItemList,
@@ -265,24 +285,28 @@ export const markUnusedExports = buildEstinant({
       const innerMap = outerMap.get(importItem.importedFilePath);
       const mutableState = innerMap?.get(importItem.importedIdentifierName);
 
-      if (mutableState !== undefined) {
-        mutableState.isImported = true;
-      } else {
-        errorList.push({
-          name: 'unlocatable-import',
-          error: new Error(
-            `Unable to find file corresponding to import "${importItem.importedIdentifierName}"`,
-          ),
-          reporterLocator,
-          sourceLocator: {
-            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: importItem.importingFilePath,
+      const isLocatableImport = mutableState !== undefined;
+
+      lintAssertionList.push(
+        new LintAssertion({
+          rule: locatableImportRule,
+          lintSource: new ImportedIdentifierSourceInstance({
+            importingFilePath: importItem.importingFilePath,
+            importedIdentifierName: importItem.importedIdentifierName,
+          }),
+          isValid: isLocatableImport,
+          errorMessageContext: {
+            importedIdentifierName: importItem.importedIdentifierName,
           },
           context: {
             importItem,
             innerMap,
           },
-        });
+        }),
+      );
+
+      if (isLocatableImport) {
+        mutableState.isImported = true;
       }
     });
 
@@ -290,27 +314,25 @@ export const markUnusedExports = buildEstinant({
       return [...innerMap.values()];
     });
 
-    const unusedExportList = exportStateList.filter((state) => {
-      return !state.isImported;
+    exportStateList.forEach((exportState) => {
+      lintAssertionList.push(
+        new LintAssertion({
+          rule: noUnusedExportRule,
+          lintSource: new ExportedIdentifierSourceInstance({
+            filePath: exportState.filePath,
+            exportedIdentifier: exportState.identifierName,
+          }),
+          errorMessageContext: {
+            exportedIdentifierName: exportState.identifierName,
+          },
+          context: {
+            exportState,
+          },
+          isValid: exportState.isImported,
+        }),
+      );
     });
 
-    unusedExportList.forEach((exportState) => {
-      errorList.push({
-        name: 'unused-export',
-        error: new Error(
-          `Export "${exportState.identifierName}" is not imported by anything`,
-        ),
-        reporterLocator,
-        sourceLocator: {
-          typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-          filePath: exportState.filePath,
-        },
-        context: {
-          exportState,
-        },
-      });
-    });
-
-    return errorList;
+    return lintAssertionList;
   })
   .assemble();
