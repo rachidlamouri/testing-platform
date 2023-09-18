@@ -147,6 +147,10 @@ export class ComplexMap<
     return value;
   }
 
+  has(keyDatum: TKeyDatum): boolean {
+    return this.get(keyDatum) !== null;
+  }
+
   values(): TValueDatum[] {
     return [...this.leafMapSet].flatMap((leafMap) => {
       return [...leafMap.values()];

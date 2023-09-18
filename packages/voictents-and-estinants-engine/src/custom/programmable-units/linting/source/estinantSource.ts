@@ -4,6 +4,7 @@ import {
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
 import { SimplifyN } from '../../../../utilities/simplify';
+import { SourceTypeName } from './sourceTypeName';
 
 const ESTINANT_SOURCE_ZORN_TEMPLATE = [
   'filePath',
@@ -24,6 +25,7 @@ type EstinantSourceConstructorInput = {
 export type EstinantSource = SimplifyN<
   [
     {
+      typeName: SourceTypeName.EstinantSource;
       zorn: EstinantSourceZorn;
     },
     EstinantSourceConstructorInput,
@@ -34,6 +36,7 @@ export const { EstinantSourceInstance } = buildNamedConstructorFunction({
   constructorName: 'EstinantSourceInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
+    'typeName',
     'zorn',
     'estinantName',
     'filePath',
@@ -56,6 +59,7 @@ export const { EstinantSourceInstance } = buildNamedConstructorFunction({
       });
 
       return {
+        typeName: SourceTypeName.EstinantSource,
         zorn,
         ...input,
       } satisfies EstinantSource;

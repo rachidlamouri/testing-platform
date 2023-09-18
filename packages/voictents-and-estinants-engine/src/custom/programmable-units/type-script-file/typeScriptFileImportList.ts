@@ -13,6 +13,7 @@ export type TypeScriptFileImport = {
  */
 export type TypeScriptFileImportList = {
   zorn: string;
+  filePath: string;
   list: TypeScriptFileImport[];
 };
 

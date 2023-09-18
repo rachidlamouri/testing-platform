@@ -16,6 +16,12 @@ import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
+import { auditLintAssertionOmissions } from '../../programmable-units/linting/auditLintAssertionOmissions';
+import {
+  LINT_ASSERTION_OMISSION_GEPP,
+  LintAssertionOmissionVoictent,
+  LintAssertionOmissionVoque,
+} from '../../programmable-units/linting/lintAssertionOmission';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
@@ -23,6 +29,7 @@ import { getTypeScriptFileExportList } from '../../programmable-units/type-scrip
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { markUnusedExports } from './markUnusedExports';
+import { omittedUnusedExportList } from './omittedUnusedExportList';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'findUnusedExports',
@@ -38,6 +45,10 @@ digikikify({
       initialHubblepupPelueTuple: [
         VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
+    }),
+    new LintAssertionOmissionVoictent<LintAssertionOmissionVoque>({
+      gepp: LINT_ASSERTION_OMISSION_GEPP,
+      initialHubblepupPelueTuple: omittedUnusedExportList,
     }),
   ] as const,
   fileSystemNodeGeppCombination: defaultFileGeppCombination,
@@ -58,6 +69,7 @@ digikikify({
 
     markUnusedExports,
 
+    auditLintAssertionOmissions,
     reportFailedLintAssertion,
     reportErrors,
     signalError,
