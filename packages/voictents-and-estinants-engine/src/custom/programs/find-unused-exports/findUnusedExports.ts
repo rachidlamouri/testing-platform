@@ -16,6 +16,7 @@ import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
+import { auditLintAssertionOmissions } from '../../programmable-units/linting/auditLintAssertionOmissions';
 import {
   LINT_ASSERTION_OMISSION_GEPP,
   LintAssertionOmissionVoictent,
@@ -67,6 +68,7 @@ digikikify({
 
     markUnusedExports,
 
+    auditLintAssertionOmissions,
     reportFailedLintAssertion,
     reportErrors,
     signalError,

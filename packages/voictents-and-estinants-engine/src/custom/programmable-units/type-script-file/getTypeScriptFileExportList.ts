@@ -39,6 +39,7 @@ export const getTypeScriptFileExportList = buildEstinant({
 
     return {
       zorn: group.filePath,
+      filePath: group.filePath,
       list: exportList,
     };
   })

@@ -4,6 +4,7 @@ import {
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
 import { SimplifyN } from '../../../../utilities/simplify';
+import { SourceTypeName } from './sourceTypeName';
 
 const IMPORTED_IDENTIFIER_SOURCE_ZORN_TEMPLATE = [
   'importingFilePath',
@@ -26,6 +27,7 @@ type ImportedIdentifierSourceConstructorInput = {
 export type ImportedIdentifierSource = SimplifyN<
   [
     {
+      typeName: SourceTypeName.ImportedIdentifierSource;
       zorn: ImportedIdentifierSourceZorn;
     },
     ImportedIdentifierSourceConstructorInput,
@@ -37,6 +39,7 @@ export const { ImportedIdentifierSourceInstance } =
     constructorName: 'ImportedIdentifierSourceInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
+      'typeName',
       'zorn',
       'importingFilePath',
       'importedIdentifierName',
@@ -62,6 +65,7 @@ export const { ImportedIdentifierSourceInstance } =
         });
 
         return {
+          typeName: SourceTypeName.ImportedIdentifierSource,
           zorn,
           ...input,
         } satisfies ImportedIdentifierSource;

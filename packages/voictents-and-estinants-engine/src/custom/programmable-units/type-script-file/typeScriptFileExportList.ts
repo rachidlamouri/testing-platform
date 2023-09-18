@@ -9,6 +9,7 @@ export type TypeScriptFileExport = {
  */
 type TypeScriptFileExportList = {
   zorn: string;
+  filePath: string;
   list: TypeScriptFileExport[];
 };
 

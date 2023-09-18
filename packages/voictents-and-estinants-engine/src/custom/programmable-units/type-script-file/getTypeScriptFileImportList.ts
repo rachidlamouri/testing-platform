@@ -122,6 +122,7 @@ export const getTypeScriptFileImportList = buildEstinant({
       [PROGRAM_ERROR_GEPP]: errorList,
       [TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP]: {
         zorn: parsedTypeScriptFile.zorn,
+        filePath: parsedTypeScriptFile.filePath,
         list: importList,
       },
     };

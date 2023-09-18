@@ -4,6 +4,7 @@ import {
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
 import { SimplifyN } from '../../../../utilities/simplify';
+import { SourceTypeName } from './sourceTypeName';
 
 const FILE_SOURCE_ZORN_TEMPLATE = [
   'filePath',
@@ -22,6 +23,7 @@ type FileSourceConstructorInput = {
 export type FileSource = SimplifyN<
   [
     {
+      typeName: SourceTypeName.FileSource;
       zorn: FileSourceZorn;
     },
     FileSourceConstructorInput,
@@ -32,6 +34,7 @@ export const { FileSourceInstance } = buildNamedConstructorFunction({
   constructorName: 'FileSourceInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
+    'typeName',
     'zorn',
     'filePath',
   ] as const satisfies readonly (keyof FileSource)[],
@@ -52,6 +55,7 @@ export const { FileSourceInstance } = buildNamedConstructorFunction({
       });
 
       return {
+        typeName: SourceTypeName.FileSource,
         zorn,
         ...input,
       } satisfies FileSource;
