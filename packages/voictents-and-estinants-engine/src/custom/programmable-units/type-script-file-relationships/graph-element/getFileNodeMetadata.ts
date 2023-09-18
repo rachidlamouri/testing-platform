@@ -67,7 +67,7 @@ export const getFileNodeMetadata = buildEstinant({
   .onPinbe(
     (file, [{ grition: directoryInstanceIdByDirectoryPath }], boundaryList) => {
       const directoryId = directoryInstanceIdByDirectoryPath.get(
-        file.directoryPath,
+        file.filePath.parentDirectoryPath,
       );
 
       const foundBoundary = boundaryList.find(

@@ -21,7 +21,9 @@ export const getAdaptedProgramBoundary = buildEstinant({
   })
   .andFromHubblepupTuple2<DirectoryVoque, [OdeshinZorn]>({
     gepp: DIRECTORY_GEPP,
-    framate: (locator) => [locator.hubblepup.engineProgramFile.directoryPath],
+    framate: (locator) => [
+      locator.hubblepup.engineProgramFile.filePath.parentDirectoryPath,
+    ],
     croard: (directory) => directory.hubblepup.directoryPath,
   })
   .toHubblepupTuple2<BoundaryVoque>({

@@ -31,7 +31,7 @@ export const getFileFact2 = buildEstinant({
   .andFromHubblepupTuple2<BoundedDirectoryVoque, [OdeshinZorn]>({
     gepp: BOUNDED_DIRECTORY_GEPP,
     framate: (partitionedFile) => {
-      return [partitionedFile.hubblepup.file.file.directoryPath];
+      return [partitionedFile.hubblepup.file.file.filePath.parentDirectoryPath];
     },
     croard: (boundedDirectory) => {
       return boundedDirectory.hubblepup.directory.directoryPath;
