@@ -4,7 +4,10 @@ import { FileSystemNodeZorn } from './fileSystemNode';
 import { FileSystemNodeVoque } from './fileSystemNodeVoictent';
 
 type DirectoryConstructorInput = {
-  /** @deprecated in favor of zorn.forMachine  */
+  /**
+   * @deprecated in favor of zorn.forMachine
+   * @todo remove after removing typescript-file-relationship program
+   */
   instanceId: string;
   nodePath: string;
 };

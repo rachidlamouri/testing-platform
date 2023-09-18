@@ -6,9 +6,11 @@ import { FileSystemNodeVoque } from './fileSystemNodeVoictent';
 
 type FileConstructorInput = {
   nodePath: string;
-  /** @deprecated in favor of zorn.forMachine  */
+  /**
+   * @deprecated in favor of zorn.forMachine
+   * @todo remove after removing typescript-file-relationship program
+   */
   instanceId: string;
-  additionalMetadata: null;
 };
 
 // TODO: separate "File" and GenericFile;

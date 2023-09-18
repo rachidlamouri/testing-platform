@@ -56,7 +56,6 @@ export const enumerateFileSystemObjects = buildEstinant({
       const file2 = new FileInstance({
         instanceId: getTextDigest(nodePath),
         nodePath,
-        additionalMetadata: null,
       });
 
       return file2;
