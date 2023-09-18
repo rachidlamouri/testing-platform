@@ -37,7 +37,8 @@ export const getDirectoryFact2 = buildEstinant({
       return [parentDirectoryPath];
     },
     croard: (potentialParentDirectory) => {
-      return potentialParentDirectory.hubblepup.directory.directoryPath.serialized;
+      return potentialParentDirectory.hubblepup.directory.directoryPath
+        .serialized;
     },
   })
   .toHubblepup2<DirectoryFact2Voque>({

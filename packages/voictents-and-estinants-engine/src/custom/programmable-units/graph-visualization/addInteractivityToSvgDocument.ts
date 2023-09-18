@@ -87,7 +87,10 @@ export const addInteractivityToSvgDocument = buildEstinant({
     (leftInput, [templateFile], [{ grition: directedGraphMetadataById }]) => {
       const svgText = leftInput.grition;
 
-      const templateText = fs.readFileSync(templateFile.filePath.serialized, 'utf8');
+      const templateText = fs.readFileSync(
+        templateFile.filePath.serialized,
+        'utf8',
+      );
 
       const metadataByIdCode = dataStructureToCode(directedGraphMetadataById);
 

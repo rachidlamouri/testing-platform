@@ -57,7 +57,8 @@ export const { BoundedDirectoryInstance } = buildNamedConstructorFunction({
       const { boundary, commonBoundaryRoot, directory } = input;
 
       const isBoundaryDirectory =
-        directory.directoryPath.serialized === boundary.directory.directoryPath.serialized;
+        directory.directoryPath.serialized ===
+        boundary.directory.directoryPath.serialized;
 
       const directoryPathFromCommonBoundaryRoot = posix.relative(
         commonBoundaryRoot.directoryPath,
