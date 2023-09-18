@@ -20,6 +20,7 @@ import { auditLintAssertionOmissions } from '../../programmable-units/linting/au
 import {
   LINT_ASSERTION_OMISSION_GEPP,
   LintAssertionOmissionVoictent,
+  LintAssertionOmissionVoque,
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
@@ -45,7 +46,7 @@ digikikify({
         VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
     }),
-    new LintAssertionOmissionVoictent({
+    new LintAssertionOmissionVoictent<LintAssertionOmissionVoque>({
       gepp: LINT_ASSERTION_OMISSION_GEPP,
       initialHubblepupPelueTuple: omittedUnusedExportList,
     }),

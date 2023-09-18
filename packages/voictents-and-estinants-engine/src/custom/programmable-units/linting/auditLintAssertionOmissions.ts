@@ -16,7 +16,7 @@ import { LintAssertionError } from './reportFailedLintAssertion';
 import { TypedRule } from './rule';
 import { EstinantSourceInstance } from './source/estinantSource';
 
-const ESTINANT_NAME = 'auditLintAssertionOmissions';
+const ESTINANT_NAME = 'auditLintAssertionOmissions' as const;
 
 type OmissionIsValidRuleMessageContext = Record<string, never>;
 const omissionIsValidRule = new TypedRule<OmissionIsValidRuleMessageContext>({
@@ -32,6 +32,9 @@ const omissionIsValidRule = new TypedRule<OmissionIsValidRuleMessageContext>({
   },
 });
 
+/**
+ * Lints linter omissions for non-existent assertions
+ */
 export const auditLintAssertionOmissions = buildEstinant({
   name: ESTINANT_NAME,
 })

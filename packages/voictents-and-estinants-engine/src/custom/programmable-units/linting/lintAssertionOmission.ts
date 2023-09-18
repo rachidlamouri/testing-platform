@@ -27,6 +27,9 @@ type LintAssertionOmissionConstructorInput = {
   omittedAssertionZorn: LintAssertionZorn;
 };
 
+/**
+ * A means for ignoring a lint rule
+ */
 type LintAssertionOmission = SimplifyN<
   [
     {
@@ -86,10 +89,10 @@ export type LintAssertionOmissionVoque = Voque<
   LintAssertionOmissionVoictentPelie
 >;
 
-export class LintAssertionOmissionVoictent extends AbstractInMemoryVoictent<
-  LintAssertionOmissionVoque,
-  LintAssertionOmissionVoque
-> {
+// TODO: update this class to not need a TVoque. you will need to update the program modeler
+export class LintAssertionOmissionVoictent<
+  TVoque extends LintAssertionOmissionVoque,
+> extends AbstractInMemoryVoictent<LintAssertionOmissionVoque, TVoque> {
   private omittedZornSet = new Set<string>();
 
   addHubblepup(hubblepup: LintAssertionOmission): void {
