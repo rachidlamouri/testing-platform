@@ -47,9 +47,9 @@ export const filterEngineProgramFile = buildEstinant({
       // Skip adapted engine file that imports the core engine
       // TODO: this code is brittle. Tie it back to the source file if possible
       if (
-        typeScriptFile.filePath ===
+        typeScriptFile.filePath.serialized ===
           'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts' ||
-        typeScriptFile.filePath ===
+        typeScriptFile.filePath.serialized ===
           'packages/voictents-and-estinants-engine/src/type-script-adapter/deprecatedDigikikify.ts'
       ) {
         return [];
@@ -85,7 +85,7 @@ export const filterEngineProgramFile = buildEstinant({
 
       return [
         {
-          zorn: typeScriptFile.filePath,
+          zorn: typeScriptFile.filePath.serialized,
           file: typeScriptFile,
           engineFunctionConfiguration:
             engineFunctionImportCombination.engineFunctionConfiguration,

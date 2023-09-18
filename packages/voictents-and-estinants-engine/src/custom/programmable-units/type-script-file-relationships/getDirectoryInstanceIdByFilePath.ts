@@ -26,7 +26,7 @@ export const getDirectoryInstanceIdByDirectoryPath = buildEstinant({
       new Map();
     directoryVoictent.list.forEach((directory) => {
       directoryInstanceIdByDirectoryPath.set(
-        directory.directoryPath,
+        directory.directoryPath.serialized,
         directory.instanceId,
       );
     });

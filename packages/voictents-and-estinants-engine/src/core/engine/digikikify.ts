@@ -295,7 +295,14 @@ export const digikikify = ({
       ]);
     }
 
-    errorVoictent.addHubblepup(error);
+    try {
+      errorVoictent.addHubblepup(error);
+    } catch (secondError) {
+      throw new AggregateEngineError([
+        `The engine encountered a critical error. The error voictent "${errorVoictent.gepp}" threw an error while handling an error`,
+        (secondError as Error).message,
+      ]);
+    }
 
     if (isCritical) {
       throw new Error(

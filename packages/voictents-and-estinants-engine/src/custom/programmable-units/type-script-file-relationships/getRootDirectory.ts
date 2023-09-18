@@ -20,8 +20,8 @@ export const getRootDirectory = buildEstinant({
 
     directoryVoictent.list.forEach((directory) => {
       if (
-        directory.directoryPathPartList.length <
-        rootDirectory.directoryPathPartList.length
+        directory.directoryPath.partList.length <
+        rootDirectory.directoryPath.partList.length
       ) {
         rootDirectory = directory;
       }

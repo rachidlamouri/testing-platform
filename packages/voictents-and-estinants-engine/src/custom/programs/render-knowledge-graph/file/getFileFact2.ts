@@ -31,10 +31,10 @@ export const getFileFact2 = buildEstinant({
   .andFromHubblepupTuple2<BoundedDirectoryVoque, [OdeshinZorn]>({
     gepp: BOUNDED_DIRECTORY_GEPP,
     framate: (partitionedFile) => {
-      return [partitionedFile.hubblepup.file.file.directoryPath];
+      return [partitionedFile.hubblepup.file.file.filePath.parentDirectoryPath];
     },
     croard: (boundedDirectory) => {
-      return boundedDirectory.hubblepup.directory.directoryPath;
+      return boundedDirectory.hubblepup.directory.directoryPath.serialized;
     },
   })
   .andFromHubblepupTuple2<
@@ -43,7 +43,7 @@ export const getFileFact2 = buildEstinant({
   >({
     gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
     framate: (partitionedFile) => {
-      return [partitionedFile.hubblepup.file.file.filePath];
+      return [partitionedFile.hubblepup.file.file.filePath.serialized];
     },
     croard: (declarationGroup) => {
       return declarationGroup.hubblepup.filePath;
@@ -64,11 +64,11 @@ export const getFileFact2 = buildEstinant({
     ) => {
       const importedFileList =
         fileDependencyVoictent.importedFileListByImportingFilePath.get(
-          partitionedFile.file.file.filePath,
+          partitionedFile.file.file.filePath.serialized,
         ) ?? [];
       const importingFileList =
         fileDependencyVoictent.importingFileListByImportedFilePath.get(
-          partitionedFile.file.file.filePath,
+          partitionedFile.file.file.filePath.serialized,
         ) ?? [];
 
       const importedNodeIdSet = new Set(

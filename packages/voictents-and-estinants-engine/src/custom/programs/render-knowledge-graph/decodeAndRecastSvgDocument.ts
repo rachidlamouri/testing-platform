@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import { builders as b, namedTypes as n } from 'ast-types';
 import * as recast from 'recast';
-import _ from 'lodash';
+import Case from 'case';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   SVG_DOCUMENT_GEPP,
@@ -317,7 +317,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
             name = attribute.name;
           }
 
-          return [_.camelCase(name), attribute.value];
+          return [Case.camel(name), attribute.value];
         });
 
       return {

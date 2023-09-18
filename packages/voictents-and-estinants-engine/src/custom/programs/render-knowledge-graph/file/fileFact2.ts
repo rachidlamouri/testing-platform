@@ -125,8 +125,8 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
 
       const graphMetadata: Metadata = {
         id: graphElement.id,
-        title: boundedFile.file.onDiskFileName.asIs,
-        fileSystemPath: boundedFile.file.filePath,
+        title: boundedFile.file.nodePath.name.serialized,
+        fileSystemPath: boundedFile.file.filePath.serialized,
         fieldList: [
           {
             label: 'Boundary',
@@ -134,12 +134,12 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
           },
           {
             label: 'Boundary Path',
-            value: boundedFile.boundary.directory.directoryPath,
+            value: boundedFile.boundary.directory.directoryPath.serialized,
           },
           {
             label: 'Directory Path from Boundary',
-            value: boundedFile.file.directoryPath.replace(
-              boundedFile.boundary.directory.directoryPath,
+            value: boundedFile.file.filePath.parentDirectoryPath.replace(
+              boundedFile.boundary.directory.directoryPath.serialized,
               '<boundary>',
             ),
           },

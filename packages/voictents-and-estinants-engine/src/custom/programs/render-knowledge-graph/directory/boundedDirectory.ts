@@ -57,16 +57,17 @@ export const { BoundedDirectoryInstance } = buildNamedConstructorFunction({
       const { boundary, commonBoundaryRoot, directory } = input;
 
       const isBoundaryDirectory =
-        directory.directoryPath === boundary.directory.directoryPath;
+        directory.directoryPath.serialized ===
+        boundary.directory.directoryPath.serialized;
 
       const directoryPathFromCommonBoundaryRoot = posix.relative(
         commonBoundaryRoot.directoryPath,
-        boundary.directory.directoryPath,
+        boundary.directory.directoryPath.serialized,
       );
 
       const localGraphElementZorn =
         LocalDirectedGraphElement2Zorn.buildSubgraphZorn({
-          distinguisher: directory.directoryPath,
+          distinguisher: directory.directoryPath.serialized,
         });
 
       return {

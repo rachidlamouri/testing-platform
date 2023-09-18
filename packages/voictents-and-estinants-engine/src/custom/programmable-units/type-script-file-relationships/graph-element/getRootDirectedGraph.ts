@@ -132,7 +132,7 @@ export const getRootDirectedGraph = buildEstinant({
         allRootMetadataOdeshinList.forEach((metadata) => {
           const filePath = metadata.zorn;
           const modifiedFilePath = filePath.replace(
-            `internal/${rootDirectory.directoryPath}/`,
+            `internal/${rootDirectory.directoryPath.serialized}/`,
             '',
           );
 

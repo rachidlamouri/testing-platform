@@ -5,46 +5,12 @@ import {
 import { splitList } from '../../../utilities/splitList';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import { DIRECTORY_GEPP, DirectoryInstance, DirectoryVoque } from './directory';
-import { getFileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   FileSystemObjectEnumeratorConfigurationVoque,
 } from './fileSystemObjectEnumeratorConfiguration';
-import { getFileMetadata } from './getFileMetadata';
 import { getTextDigest } from '../../../utilities/getTextDigest';
 import { FILE_GEPP, File, FileInstance, FileVoque } from './file';
-
-const partsToCamel = (x: string[]): string => {
-  return x
-    .map((word, index) => {
-      if (index === 0) {
-        return word;
-      }
-
-      return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`;
-    })
-    .join('');
-};
-
-const partsToPascal = (x: string[]): string => {
-  return x
-    .map((word) => {
-      return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`;
-    })
-    .join('');
-};
-
-const partsToScreamingSnake = (x: string[]): string => {
-  return x
-    .map((word) => {
-      return word.toUpperCase();
-    })
-    .join('_');
-};
-
-const partsToKebabCase = (x: string[]): string => {
-  return x.join('-');
-};
 
 /**
  * Traverses the file system starting from a given directory path, and outputs
@@ -79,55 +45,21 @@ export const enumerateFileSystemObjects = buildEstinant({
       accumulatorB: fileMetadataList,
     });
 
-    const directoryOutputTuple = directoryMetadataList.map(
-      ({ nodePath, ancestorDirectoryPathSet }) => {
-        return new DirectoryInstance({
-          instanceId: getTextDigest(nodePath),
-          nodePath,
-          ancestorDirectoryPathSet,
-        });
-      },
-    );
+    const directoryOutputTuple = directoryMetadataList.map(({ nodePath }) => {
+      return new DirectoryInstance({
+        instanceId: getTextDigest(nodePath),
+        nodePath,
+      });
+    });
 
-    const unorderedFileTuple = fileMetadataList.map<File>(
-      ({ nodePath, ancestorDirectoryPathSet }) => {
-        const {
-          onDiskFileName,
-          onDiskFileNameParts,
-          inMemoryFileNameParts,
-          extensionSuffix,
-          extensionParts,
-        } = getFileMetadata(nodePath);
+    const unorderedFileTuple = fileMetadataList.map<File>(({ nodePath }) => {
+      const file2 = new FileInstance({
+        instanceId: getTextDigest(nodePath),
+        nodePath,
+      });
 
-        const file2 = new FileInstance({
-          instanceId: getTextDigest(nodePath),
-          nodePath,
-          ancestorDirectoryPathSet,
-          onDiskFileName: {
-            camelCase: partsToCamel(onDiskFileNameParts),
-            pascalCase: partsToPascal(onDiskFileNameParts),
-            screamingSnakeCase: partsToScreamingSnake(onDiskFileNameParts),
-            kebabCase: partsToKebabCase(onDiskFileNameParts),
-            asIs: onDiskFileName,
-          },
-          inMemoryFileName: {
-            camelCase: partsToCamel(inMemoryFileNameParts),
-            pascalCase: partsToPascal(inMemoryFileNameParts),
-            screamingSnakeCase: partsToScreamingSnake(inMemoryFileNameParts),
-            kebabCase: partsToKebabCase(inMemoryFileNameParts),
-          },
-          extension: {
-            parts: extensionParts,
-            partList: extensionParts,
-            suffix: extensionSuffix,
-            suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
-          },
-          additionalMetadata: null,
-        });
-
-        return file2;
-      },
-    );
+      return file2;
+    });
 
     // Reorders the files by suffix identifier so they are easier to see in a serialized collection
     const reorderByFileSuffixForDebugability = <TFile extends File>(
@@ -135,7 +67,7 @@ export const enumerateFileSystemObjects = buildEstinant({
     ): TFile[] => {
       const fileBySuffixIdentifier = new Map<string, TFile[]>();
       fileList.forEach((file) => {
-        const { suffixIdentifier } = file.extension;
+        const { suffixIdentifier } = file.nodePath.name.extension;
 
         const list = fileBySuffixIdentifier.get(suffixIdentifier) ?? [];
         list.push(file);

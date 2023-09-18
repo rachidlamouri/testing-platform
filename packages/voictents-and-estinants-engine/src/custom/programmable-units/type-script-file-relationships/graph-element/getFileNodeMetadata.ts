@@ -1,3 +1,4 @@
+import Case from 'case';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { OdeshinZorn } from '../../../adapter/odeshin2';
 import {
@@ -66,13 +67,13 @@ export const getFileNodeMetadata = buildEstinant({
   .onPinbe(
     (file, [{ grition: directoryInstanceIdByDirectoryPath }], boundaryList) => {
       const directoryId = directoryInstanceIdByDirectoryPath.get(
-        file.directoryPath,
+        file.filePath.parentDirectoryPath,
       );
 
       const foundBoundary = boundaryList.find(
         (boundary) =>
           boundary.isInternal &&
-          file.filePath.startsWith(boundary.directoryPath),
+          file.filePath.serialized.startsWith(boundary.directoryPath),
       );
 
       if (directoryId === undefined || foundBoundary === undefined) {
@@ -84,7 +85,7 @@ export const getFileNodeMetadata = buildEstinant({
               reporterLocator,
               sourceLocator: {
                 typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-                filePath: file.filePath,
+                filePath: file.filePath.serialized,
               },
               context: {
                 directoryId,
@@ -101,13 +102,13 @@ export const getFileNodeMetadata = buildEstinant({
         [PROGRAM_ERROR_GEPP]: [],
         [FILE_NODE_METADATA_GEPP]: [
           {
-            zorn: file.filePath,
+            zorn: file.filePath.serialized,
             id: file.instanceId,
             directoryId,
             boundaryId: foundBoundary.id,
-            filePath: file.filePath,
+            filePath: file.filePath.serialized,
             attributeByKey: {
-              label: file.onDiskFileName.pascalCase,
+              label: Case.pascal(file.nodePath.name.extensionless),
               shape: NodeShape.Box,
               fontsize: FONT_SIZE.node,
               color: 'gray',

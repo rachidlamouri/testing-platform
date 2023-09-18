@@ -3,6 +3,10 @@ import { isNotNull } from '../../../../utilities/isNotNull';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { OdeshinZorn } from '../../../adapter/odeshin2';
 import {
+  FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
+  FileAncestorDirectoryPathSetVoque,
+} from '../../../programmable-units/file/fileAncestorDirectoryPathSet';
+import {
   TYPE_SCRIPT_FILE_GEPP,
   TypeScriptFileVoque,
 } from '../../../programmable-units/type-script-file/typeScriptFile';
@@ -25,6 +29,15 @@ export const getBoundedFile = buildEstinant({
   .fromHubblepup2<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
+  .andFromHubblepupTuple2<FileAncestorDirectoryPathSetVoque, [string]>({
+    gepp: FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
+    framate: (file) => {
+      return [file.hubblepup.filePath.serialized];
+    },
+    croard: (file) => {
+      return file.hubblepup.filePath;
+    },
+  })
   .andFromHubblepupTuple2<PartitionedBoundaryTrieVoque, [OdeshinZorn]>({
     // TODO: make a more readable pattern for singletons
     gepp: PARTITIONED_BOUNDARY_TRIE_GEPP,
@@ -34,20 +47,23 @@ export const getBoundedFile = buildEstinant({
   .toHubblepup2<BoundedFileVoque>({
     gepp: BOUNDED_FILE_GEPP,
   })
-  .onPinbe((file, [partitionedBoundaryTrie]) => {
-    const boundary = partitionedBoundaryTrie.find(
-      file.nodePath.partList,
-      isNotNull,
-    );
+  .onPinbe(
+    (file, [{ set: ancestorDirectoryPathSet }], [partitionedBoundaryTrie]) => {
+      const boundary = partitionedBoundaryTrie.find(
+        file.nodePath.partList,
+        isNotNull,
+      );
 
-    assertNotNull(
-      boundary,
-      `Unable to find boundary for file ${file.filePath}`,
-    );
+      assertNotNull(
+        boundary,
+        `Unable to find boundary for file ${file.filePath.serialized}`,
+      );
 
-    return new BoundedFileInstance({
-      boundary,
-      file,
-    });
-  })
+      return new BoundedFileInstance({
+        boundary,
+        file,
+        ancestorDirectoryPathSet,
+      });
+    },
+  )
   .assemble();

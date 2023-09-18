@@ -27,7 +27,7 @@ export const getPartitionedBoundaryListTrie = buildEstinant({
 
     partitionedBoundaryList.forEach((partitionedBoundary) => {
       trie.addSubtrie(
-        partitionedBoundary.boundary.directory.directoryPathPartList,
+        partitionedBoundary.boundary.directory.directoryPath.partList,
         () => {
           return new PartitionedBoundaryListTrie([]);
         },

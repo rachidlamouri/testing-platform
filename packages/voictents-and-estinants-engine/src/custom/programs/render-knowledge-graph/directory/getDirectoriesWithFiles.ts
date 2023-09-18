@@ -35,18 +35,18 @@ export const getDirectoriesWithFiles = buildEstinant({
           hasFile: false,
         };
 
-        return [directory.directoryPath, mutableState] as const;
+        return [directory.directoryPath.serialized, mutableState] as const;
       }),
     );
 
     typeScriptFileVoictent.list.forEach((typeScriptFile) => {
       const directoryState = mutableDirectoryStateByDirectoryPath.get(
-        typeScriptFile.directoryPath,
+        typeScriptFile.filePath.parentDirectoryPath,
       );
 
       if (directoryState === undefined) {
         throw Error(
-          `Unexpected missing directory for path "${typeScriptFile.directoryPath}". All TypeScript files should correspond to a parent Directory object, so something is very wrong.`,
+          `Unexpected missing directory for path "${typeScriptFile.filePath.parentDirectoryPath}". All TypeScript files should correspond to a parent Directory object, so something is very wrong.`,
         );
       }
 

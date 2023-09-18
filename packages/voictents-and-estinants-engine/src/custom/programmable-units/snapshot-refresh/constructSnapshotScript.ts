@@ -19,7 +19,9 @@ export const constructSnapshotScript = buildEstinant({
     gepp: OUTPUT_FILE_GEPP,
   })
   .onPinbe((inputList) => {
-    const filePathSet = new Set(inputList.map((input) => input.file.filePath));
+    const filePathSet = new Set(
+      inputList.map((input) => input.file.filePath.serialized),
+    );
 
     const text = [...filePathSet]
       .map((filePath) => `npx ts-node "${filePath}"`)

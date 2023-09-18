@@ -110,7 +110,7 @@ export const markUnusedNodes = buildEstinant({
 
       // Marks engine program files as used
       engineProgramFileList.forEach((programFile) => {
-        updateCache(programFile.file.filePath);
+        updateCache(programFile.file.filePath.serialized);
       });
 
       const outputList = [...mutableReferenceCache.values()]

@@ -85,7 +85,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
 
       const directoryPathRelativeToCommonBoundary = posix.relative(
         commonBoundaryRoot.directoryPath,
-        boundary.directory.directoryPath,
+        boundary.directory.directoryPath.serialized,
       );
 
       const graphElement = new DirectedGraph2Instance({

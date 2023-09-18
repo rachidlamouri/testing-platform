@@ -1,4 +1,5 @@
 import { posix } from 'path';
+import Case from 'case';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   TYPE_SCRIPT_FILE_GEPP,
@@ -81,12 +82,12 @@ export const getGraphMetadataById = buildEstinant({
               },
               {
                 label: 'Root Directory Path',
-                value: rootDirectory.directoryPath,
+                value: rootDirectory.directoryPath.serialized,
               },
               {
                 label: 'Directory Path',
                 value: boundary.directoryPath.replace(
-                  rootDirectory.directoryPath,
+                  rootDirectory.directoryPath.serialized,
                   '<root>',
                 ),
               },
@@ -111,7 +112,7 @@ export const getGraphMetadataById = buildEstinant({
 
       directoryVoictent.list.forEach((directory) => {
         metadataById.grition[directory.instanceId] = {
-          title: posix.basename(directory.directoryPath),
+          title: posix.basename(directory.directoryPath.serialized),
           fieldList: [
             {
               label: 'Type',
@@ -119,12 +120,12 @@ export const getGraphMetadataById = buildEstinant({
             },
             {
               label: 'Root Directory Path',
-              value: rootDirectory.directoryPath,
+              value: rootDirectory.directoryPath.serialized,
             },
             {
               label: 'Directory Path',
-              value: directory.directoryPath.replace(
-                rootDirectory.directoryPath,
+              value: directory.directoryPath.serialized.replace(
+                rootDirectory.directoryPath.serialized,
                 '<root>',
               ),
             },
@@ -134,7 +135,7 @@ export const getGraphMetadataById = buildEstinant({
 
       typeScriptFileVoictent.list.forEach((file) => {
         metadataById.grition[file.instanceId] = {
-          title: file.onDiskFileName.camelCase,
+          title: Case.camel(file.nodePath.name.extensionless),
           fieldList: [
             {
               label: 'Type',
@@ -142,18 +143,18 @@ export const getGraphMetadataById = buildEstinant({
             },
             {
               label: 'Root Directory Path',
-              value: rootDirectory.directoryPath,
+              value: rootDirectory.directoryPath.serialized,
             },
             {
               label: 'Parent Directory Path',
               value: posix
-                .dirname(file.filePath)
-                .replace(rootDirectory.directoryPath, '<root>'),
+                .dirname(file.filePath.serialized)
+                .replace(rootDirectory.directoryPath.serialized, '<root>'),
             },
             {
               label: 'File Path',
-              value: file.filePath.replace(
-                rootDirectory.directoryPath,
+              value: file.filePath.serialized.replace(
+                rootDirectory.directoryPath.serialized,
                 '<root>',
               ),
             },

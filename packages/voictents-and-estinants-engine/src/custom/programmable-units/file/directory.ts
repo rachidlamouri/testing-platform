@@ -4,10 +4,12 @@ import { FileSystemNodeZorn } from './fileSystemNode';
 import { FileSystemNodeVoque } from './fileSystemNodeVoictent';
 
 type DirectoryConstructorInput = {
-  /** @deprecated in favor of zorn.forMachine  */
+  /**
+   * @deprecated in favor of zorn.forMachine
+   * @todo remove after removing typescript-file-relationship program
+   */
   instanceId: string;
   nodePath: string;
-  ancestorDirectoryPathSet: string[];
 };
 
 /**
@@ -17,18 +19,8 @@ export type Directory = {
   zorn: FileSystemNodeZorn;
   /** @deprecated in favor of zorn.forMachine */
   instanceId: string;
+  directoryPath: DirectoryPath;
   nodePath: DirectoryPath;
-  /** @deprecated in favor of nodePath.parentDirectoryPath */
-  parentDirectoryPath: string;
-  /** @deprecated in favor of nodePath.name.serialized */
-  directoryName: string;
-  /**
-   *  @deprecated in favor of nodePath
-   *  @todo convert this to type DirectoryPath
-   */
-  directoryPath: string;
-  /** @deprecated in favor of nodePath.partList */
-  directoryPathPartList: string[];
 };
 
 export const { DirectoryInstance } = buildNamedConstructorFunction({
@@ -39,9 +31,6 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
     'instanceId',
     'directoryPath',
     'nodePath',
-    'parentDirectoryPath',
-    'directoryPathPartList',
-    'directoryName',
   ],
 } as const)
   .withTypes<DirectoryConstructorInput, Directory>({
@@ -53,11 +42,7 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const {
-        instanceId,
-        nodePath: serializedDirectoryPath,
-        ancestorDirectoryPathSet,
-      } = input;
+      const { instanceId, nodePath: serializedDirectoryPath } = input;
 
       const zorn = new FileSystemNodeZorn({
         nodePath: serializedDirectoryPath,
@@ -65,18 +50,14 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
 
       const directoryPath = new DirectoryPathInstance({
         serialized: serializedDirectoryPath,
-        ancestorDirectoryPathSet,
       });
 
       return {
         zorn,
         instanceId,
-        directoryPath: serializedDirectoryPath,
+        directoryPath,
         nodePath: directoryPath,
-        parentDirectoryPath: directoryPath.parentDirectoryPath,
-        directoryPathPartList: directoryPath.partList,
-        directoryName: directoryPath.name.serialized,
-      };
+      } satisfies Directory;
     },
   })
   .assemble();

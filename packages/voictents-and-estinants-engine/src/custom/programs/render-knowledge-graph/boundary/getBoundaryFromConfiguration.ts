@@ -22,7 +22,7 @@ export const getBoundaryFromConfiguration = buildEstinant({
   .andFromHubblepupTuple2<DirectoryVoque, [OdeshinZorn]>({
     gepp: DIRECTORY_GEPP,
     framate: (locator) => [locator.hubblepup.directoryPath],
-    croard: (directory) => directory.hubblepup.directoryPath,
+    croard: (directory) => directory.hubblepup.directoryPath.serialized,
   })
   .toHubblepup2<BoundaryVoque>({
     gepp: BOUNDARY_GEPP,
