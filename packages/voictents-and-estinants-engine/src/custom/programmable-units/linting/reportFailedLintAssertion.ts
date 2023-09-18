@@ -9,6 +9,10 @@ import {
   LINT_ASSERTION_GEPP,
   LintAssertionVoque,
 } from './lintAssertion';
+import {
+  LINT_ASSERTION_OMISSION_GEPP,
+  LintAssertionOmissionVoque,
+} from './lintAssertionOmission';
 
 export class LintAssertionError extends Error {
   constructor(public readonly lintAssertion: GenericLintAssertion) {
@@ -19,7 +23,8 @@ export class LintAssertionError extends Error {
 }
 
 /**
- * Forwards failed LintAssertion objects to the error collection
+ * Forwards failed LintAssertion objects to the error collection. Ignors lint
+ * assertions with an entry in the LintAssertionOmission collection
  */
 export const reportFailedLintAssertion = buildEstinant({
   name: 'reportFailedLintAssertion',
@@ -27,11 +32,18 @@ export const reportFailedLintAssertion = buildEstinant({
   .fromHubblepup2<LintAssertionVoque>({
     gepp: LINT_ASSERTION_GEPP,
   })
+  .andFromVoictent2<LintAssertionOmissionVoque>({
+    gepp: LINT_ASSERTION_OMISSION_GEPP,
+  })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((lintAssertion) => {
-    if (lintAssertion.result.isValid) {
+  .onPinbe((lintAssertion, omissionVoictent) => {
+    const isOmitted = omissionVoictent.omittedZornSet.has(
+      lintAssertion.zorn.forHuman,
+    );
+
+    if (isOmitted || lintAssertion.result.isValid) {
       return [];
     }
 

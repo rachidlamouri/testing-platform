@@ -16,7 +16,7 @@ const LINT_ASSERTION_ZORN_TEMPLATE = [
   ['lintSource', Zorn2.ANY],
 ] as const satisfies GenericZorn2Template;
 type LintAssertionZornTemplate = typeof LINT_ASSERTION_ZORN_TEMPLATE;
-class LintAssertionZorn extends Zorn2<LintAssertionZornTemplate> {
+export class LintAssertionZorn extends Zorn2<LintAssertionZornTemplate> {
   get rawTemplate(): LintAssertionZornTemplate {
     return LINT_ASSERTION_ZORN_TEMPLATE;
   }
