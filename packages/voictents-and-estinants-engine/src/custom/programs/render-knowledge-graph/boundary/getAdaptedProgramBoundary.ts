@@ -24,7 +24,7 @@ export const getAdaptedProgramBoundary = buildEstinant({
     framate: (locator) => [
       locator.hubblepup.engineProgramFile.filePath.parentDirectoryPath,
     ],
-    croard: (directory) => directory.hubblepup.directoryPath,
+    croard: (directory) => directory.hubblepup.directoryPath.serialized,
   })
   .toHubblepupTuple2<BoundaryVoque>({
     gepp: BOUNDARY_GEPP,

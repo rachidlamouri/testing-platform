@@ -19,18 +19,8 @@ export type Directory = {
   zorn: FileSystemNodeZorn;
   /** @deprecated in favor of zorn.forMachine */
   instanceId: string;
+  directoryPath: DirectoryPath;
   nodePath: DirectoryPath;
-  /** @deprecated in favor of nodePath.parentDirectoryPath */
-  parentDirectoryPath: string;
-  /** @deprecated in favor of nodePath.name.serialized */
-  directoryName: string;
-  /**
-   *  @deprecated in favor of nodePath
-   *  @todo convert this to type DirectoryPath
-   */
-  directoryPath: string;
-  /** @deprecated in favor of nodePath.partList */
-  directoryPathPartList: string[];
 };
 
 export const { DirectoryInstance } = buildNamedConstructorFunction({
@@ -41,9 +31,6 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
     'instanceId',
     'directoryPath',
     'nodePath',
-    'parentDirectoryPath',
-    'directoryPathPartList',
-    'directoryName',
   ],
 } as const)
   .withTypes<DirectoryConstructorInput, Directory>({
@@ -68,12 +55,9 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
       return {
         zorn,
         instanceId,
-        directoryPath: serializedDirectoryPath,
+        directoryPath,
         nodePath: directoryPath,
-        parentDirectoryPath: directoryPath.parentDirectoryPath,
-        directoryPathPartList: directoryPath.partList,
-        directoryName: directoryPath.name.serialized,
-      };
+      } satisfies Directory;
     },
   })
   .assemble();

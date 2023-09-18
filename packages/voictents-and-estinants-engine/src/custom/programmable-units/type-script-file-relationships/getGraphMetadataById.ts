@@ -82,12 +82,12 @@ export const getGraphMetadataById = buildEstinant({
               },
               {
                 label: 'Root Directory Path',
-                value: rootDirectory.directoryPath,
+                value: rootDirectory.directoryPath.serialized,
               },
               {
                 label: 'Directory Path',
                 value: boundary.directoryPath.replace(
-                  rootDirectory.directoryPath,
+                  rootDirectory.directoryPath.serialized,
                   '<root>',
                 ),
               },
@@ -112,7 +112,7 @@ export const getGraphMetadataById = buildEstinant({
 
       directoryVoictent.list.forEach((directory) => {
         metadataById.grition[directory.instanceId] = {
-          title: posix.basename(directory.directoryPath),
+          title: posix.basename(directory.directoryPath.serialized),
           fieldList: [
             {
               label: 'Type',
@@ -120,12 +120,12 @@ export const getGraphMetadataById = buildEstinant({
             },
             {
               label: 'Root Directory Path',
-              value: rootDirectory.directoryPath,
+              value: rootDirectory.directoryPath.serialized,
             },
             {
               label: 'Directory Path',
-              value: directory.directoryPath.replace(
-                rootDirectory.directoryPath,
+              value: directory.directoryPath.serialized.replace(
+                rootDirectory.directoryPath.serialized,
                 '<root>',
               ),
             },
@@ -143,18 +143,18 @@ export const getGraphMetadataById = buildEstinant({
             },
             {
               label: 'Root Directory Path',
-              value: rootDirectory.directoryPath,
+              value: rootDirectory.directoryPath.serialized,
             },
             {
               label: 'Parent Directory Path',
               value: posix
                 .dirname(file.filePath.serialized)
-                .replace(rootDirectory.directoryPath, '<root>'),
+                .replace(rootDirectory.directoryPath.serialized, '<root>'),
             },
             {
               label: 'File Path',
               value: file.filePath.serialized.replace(
-                rootDirectory.directoryPath,
+                rootDirectory.directoryPath.serialized,
                 '<root>',
               ),
             },

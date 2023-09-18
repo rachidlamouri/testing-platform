@@ -60,7 +60,7 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
 
       const boundaryDirectoryPathIndex = ancestorDirectoryPathSet.findIndex(
         (directoryPath) => {
-          return directoryPath === boundary.directory.directoryPath;
+          return directoryPath === boundary.directory.directoryPath.serialized;
         },
       );
 

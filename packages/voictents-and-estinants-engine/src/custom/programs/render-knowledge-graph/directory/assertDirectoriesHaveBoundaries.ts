@@ -45,7 +45,7 @@ export const assertDirectoriesHaveBoundaries = buildEstinant({
     const unboundedDirectoryList = directoryWithFileVoictent.filter(
       (directory) => {
         const boundedDirectory = boundedDirectoryVoictent.byNodePath.get(
-          directory.directoryPath,
+          directory.directoryPath.serialized,
         );
         return boundedDirectory === undefined;
       },
@@ -55,15 +55,15 @@ export const assertDirectoriesHaveBoundaries = buildEstinant({
       return {
         name: 'unbounded-directory',
         error: new Error(
-          `Directory ${directory.directoryPath} is not under a boundary`,
+          `Directory ${directory.directoryPath.serialized} is not under a boundary`,
         ),
         reporterLocator,
         sourceLocator: {
           typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-          filePath: directory.directoryPath,
+          filePath: directory.directoryPath.serialized,
         },
         context: {
-          directoryPath: directory.directoryPath,
+          directoryPath: directory.directoryPath.serialized,
           directory,
         },
       } satisfies ProgramErrorPelue<ReportingLocator>;

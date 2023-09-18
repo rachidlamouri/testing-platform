@@ -39,7 +39,7 @@ export const getDirectoryMetadata = buildEstinant({
       boundaryList.find(
         (boundary) =>
           boundary.isInternal &&
-          directory.directoryPath.startsWith(boundary.directoryPath),
+          directory.directoryPath.serialized.startsWith(boundary.directoryPath),
       ) ?? limboBoundary;
 
     return {
@@ -47,7 +47,7 @@ export const getDirectoryMetadata = buildEstinant({
       id: directory.instanceId,
       boundaryId: foundBoundary.id,
       attributeByKey: {
-        label: `Directory: ${directory.directoryName}`,
+        label: `Directory: ${directory.directoryPath.name.serialized}`,
         fontsize: FONT_SIZE.directory,
         style: GraphLikeStyle.Rounded,
         color: 'gray',

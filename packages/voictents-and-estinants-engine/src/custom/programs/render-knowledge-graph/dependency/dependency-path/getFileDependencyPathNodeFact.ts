@@ -29,7 +29,7 @@ export const getFileDependencyPathNodeFact = buildEstinant({
       return [pathNode.hubblepup.directoryPath];
     },
     croard: (directory) => {
-      return directory.hubblepup.directory.directoryPath;
+      return directory.hubblepup.directory.directoryPath.serialized;
     },
   })
   .toHubblepup2<FileDependencyPathNodeFactVoque>({

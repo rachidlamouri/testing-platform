@@ -134,12 +134,12 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
           },
           {
             label: 'Boundary Path',
-            value: boundedFile.boundary.directory.directoryPath,
+            value: boundedFile.boundary.directory.directoryPath.serialized,
           },
           {
             label: 'Directory Path from Boundary',
             value: boundedFile.file.filePath.parentDirectoryPath.replace(
-              boundedFile.boundary.directory.directoryPath,
+              boundedFile.boundary.directory.directoryPath.serialized,
               '<boundary>',
             ),
           },

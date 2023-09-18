@@ -35,7 +35,7 @@ export const getDirectoriesWithFiles = buildEstinant({
           hasFile: false,
         };
 
-        return [directory.directoryPath, mutableState] as const;
+        return [directory.directoryPath.serialized, mutableState] as const;
       }),
     );
 

@@ -34,7 +34,7 @@ export const getFileFact2 = buildEstinant({
       return [partitionedFile.hubblepup.file.file.filePath.parentDirectoryPath];
     },
     croard: (boundedDirectory) => {
-      return boundedDirectory.hubblepup.directory.directoryPath;
+      return boundedDirectory.hubblepup.directory.directoryPath.serialized;
     },
   })
   .andFromHubblepupTuple2<

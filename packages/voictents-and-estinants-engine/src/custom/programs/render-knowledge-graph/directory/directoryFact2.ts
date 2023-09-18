@@ -88,7 +88,7 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
       } else {
         assertNotNull(parentDirectory);
         parentId = parentDirectory.localGraphElementZorn.forMachine;
-        label = directory.directory.directoryName + posix.sep;
+        label = directory.directory.directoryPath.name.serialized + posix.sep;
       }
 
       const graphElement = new DirectedCluster2Instance({

@@ -33,7 +33,7 @@ export const getPartitionedBoundaryTrie = buildEstinant({
       .forEach(([partitionedBoundary]) => {
         // TODO: move path parsing elsewhere
         partitionedBoundaryTrie.addSubtrie(
-          partitionedBoundary.boundary.directory.directoryPathPartList,
+          partitionedBoundary.boundary.directory.directoryPath.partList,
           () => new PartitionedBoundaryTrie(null),
           () => {
             return partitionedBoundary;

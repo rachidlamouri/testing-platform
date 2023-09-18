@@ -54,7 +54,7 @@ export const assertNoBoundaryOverlap = buildEstinant({
           },
           context: {
             duplicateDirectoryPath:
-              subtrie.value[0].boundary.directory.directoryPath,
+              subtrie.value[0].boundary.directory.directoryPath.serialized,
             duplicateBoundaryNameList: subtrie.value.map(
               (partitionedBoundary) => partitionedBoundary.boundary.displayName,
             ),
