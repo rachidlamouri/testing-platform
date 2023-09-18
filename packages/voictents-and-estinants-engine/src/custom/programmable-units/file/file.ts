@@ -8,7 +8,6 @@ type FileConstructorInput = {
   nodePath: string;
   /** @deprecated in favor of zorn.forMachine  */
   instanceId: string;
-  ancestorDirectoryPathSet: string[];
   additionalMetadata: null;
 };
 
@@ -49,11 +48,7 @@ export const { FileInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const {
-        nodePath: serializedFilePath,
-        ancestorDirectoryPathSet,
-        ...otherInputFields
-      } = input;
+      const { nodePath: serializedFilePath, ...otherInputFields } = input;
 
       const zorn = new FileSystemNodeZorn({
         nodePath: serializedFilePath,
@@ -61,7 +56,6 @@ export const { FileInstance } = buildNamedConstructorFunction({
 
       const filePath = new FilePathInstance({
         serialized: serializedFilePath,
-        ancestorDirectoryPathSet,
       });
 
       return {

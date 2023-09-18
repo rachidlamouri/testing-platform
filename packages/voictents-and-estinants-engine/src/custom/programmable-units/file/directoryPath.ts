@@ -27,7 +27,6 @@ export const { DirectoryPathInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'serialized',
-    'ancestorDirectoryPathSet',
     'name',
     'parentDirectoryPath',
     'partList',
@@ -42,7 +41,7 @@ export const { DirectoryPathInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { serialized, ancestorDirectoryPathSet } = input;
+      const { serialized } = input;
 
       const partList = getFileSystemNodePathPartList(serialized);
       const directoryName = partList[partList.length - 1];
@@ -52,7 +51,6 @@ export const { DirectoryPathInstance } = buildNamedConstructorFunction({
 
       return {
         serialized,
-        ancestorDirectoryPathSet,
         name: {
           serialized: directoryName,
         },

@@ -85,6 +85,7 @@ import { FactVoictent } from './fact/fact';
 import { FileDependencyVoictent } from './dependency/fileDependencyVoictent';
 import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
 import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
+import { getFileAncestorDirectoryPathSet } from '../../programmable-units/file/getFileAncestorDirectoryPathSet';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -177,6 +178,7 @@ digikikify({
     getDirectoriesWithFiles,
     assertDirectoriesHaveBoundaries,
 
+    getFileAncestorDirectoryPathSet,
     getBoundedFile,
     getFileDependencies,
     getPartitionedFileSystemNodes,

@@ -11,6 +11,7 @@ import { PartitionFact } from '../partition-fact/partitionFact';
 type BoundedFileConstructorInput = {
   boundary: PartitionedBoundary;
   file: TypeScriptFile;
+  ancestorDirectoryPathSet: string[];
 };
 
 /**
@@ -54,17 +55,18 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
       const {
         boundary: { partitionFact, boundary },
         file,
+        ancestorDirectoryPathSet,
       } = input;
 
-      const boundaryDirectoryPathIndex =
-        file.nodePath.ancestorDirectoryPathSet.findIndex((directoryPath) => {
+      const boundaryDirectoryPathIndex = ancestorDirectoryPathSet.findIndex(
+        (directoryPath) => {
           return directoryPath === boundary.directory.directoryPath;
-        });
+        },
+      );
 
-      const directoryPathSetFromBoundary =
-        file.nodePath.ancestorDirectoryPathSet.slice(
-          boundaryDirectoryPathIndex,
-        );
+      const directoryPathSetFromBoundary = ancestorDirectoryPathSet.slice(
+        boundaryDirectoryPathIndex,
+      );
 
       const directoryPathSetToBoundary = directoryPathSetFromBoundary
         .slice()

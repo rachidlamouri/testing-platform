@@ -45,28 +45,22 @@ export const enumerateFileSystemObjects = buildEstinant({
       accumulatorB: fileMetadataList,
     });
 
-    const directoryOutputTuple = directoryMetadataList.map(
-      ({ nodePath, ancestorDirectoryPathSet }) => {
-        return new DirectoryInstance({
-          instanceId: getTextDigest(nodePath),
-          nodePath,
-          ancestorDirectoryPathSet,
-        });
-      },
-    );
+    const directoryOutputTuple = directoryMetadataList.map(({ nodePath }) => {
+      return new DirectoryInstance({
+        instanceId: getTextDigest(nodePath),
+        nodePath,
+      });
+    });
 
-    const unorderedFileTuple = fileMetadataList.map<File>(
-      ({ nodePath, ancestorDirectoryPathSet }) => {
-        const file2 = new FileInstance({
-          instanceId: getTextDigest(nodePath),
-          nodePath,
-          ancestorDirectoryPathSet,
-          additionalMetadata: null,
-        });
+    const unorderedFileTuple = fileMetadataList.map<File>(({ nodePath }) => {
+      const file2 = new FileInstance({
+        instanceId: getTextDigest(nodePath),
+        nodePath,
+        additionalMetadata: null,
+      });
 
-        return file2;
-      },
-    );
+      return file2;
+    });
 
     // Reorders the files by suffix identifier so they are easier to see in a serialized collection
     const reorderByFileSuffixForDebugability = <TFile extends File>(

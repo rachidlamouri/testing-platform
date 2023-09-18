@@ -26,18 +26,15 @@ export type FileSystemNodeMetadata = {
   isDirectory: boolean;
   nodePath: string;
   directoryPath: string;
-  ancestorDirectoryPathSet: string[];
 };
 
 type FilePathAccumulatorInput = {
   directoryPath: string;
-  ancestorDirectoryPathSet: string[];
   ignoredNodePathConfigurationList: ComparisonConfiguration[];
   mutableNodeMetadataList: FileSystemNodeMetadata[];
 };
 const accumulateFilePaths = ({
   directoryPath,
-  ancestorDirectoryPathSet,
   ignoredNodePathConfigurationList,
   mutableNodeMetadataList,
 }: FilePathAccumulatorInput): void => {
@@ -65,23 +62,16 @@ const accumulateFilePaths = ({
       };
     });
 
-  const nextAncestorDirectoryPathSet = [
-    ...ancestorDirectoryPathSet,
-    directoryPath,
-  ];
-
   statuses.forEach((status) => {
     mutableNodeMetadataList.push({
       isDirectory: status.isDirectory,
       nodePath: status.nodePath,
       directoryPath,
-      ancestorDirectoryPathSet: nextAncestorDirectoryPathSet,
     });
 
     if (status.isDirectory) {
       accumulateFilePaths({
         directoryPath: status.nodePath,
-        ancestorDirectoryPathSet: nextAncestorDirectoryPathSet,
         ignoredNodePathConfigurationList,
         mutableNodeMetadataList,
       });
@@ -102,14 +92,12 @@ export const getNestedFileSystemNodeMetadataList = ({
     {
       isDirectory: true,
       nodePath: directoryPath,
-      ancestorDirectoryPathSet: [],
       directoryPath: '',
     },
   ];
 
   accumulateFilePaths({
     directoryPath,
-    ancestorDirectoryPathSet: [],
     ignoredNodePathConfigurationList,
     mutableNodeMetadataList,
   });

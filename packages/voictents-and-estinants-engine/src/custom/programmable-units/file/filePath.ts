@@ -48,7 +48,6 @@ export const { FilePathInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'serialized',
-    'ancestorDirectoryPathSet',
     'name',
     'partList',
     'parentDirectoryPath',
@@ -63,8 +62,7 @@ export const { FilePathInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { serialized: serializedFilePath, ancestorDirectoryPathSet } =
-        input;
+      const { serialized: serializedFilePath } = input;
 
       const { base: serializedOnDiskName } = posix.parse(serializedFilePath);
 
@@ -82,7 +80,6 @@ export const { FilePathInstance } = buildNamedConstructorFunction({
 
       return {
         serialized: serializedFilePath,
-        ancestorDirectoryPathSet,
         name: {
           serialized: serializedOnDiskName,
           extensionless: extensionlessOnDiskName,
