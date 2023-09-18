@@ -4,6 +4,7 @@ import {
   Zorn2,
 } from '../../../utilities/semantic-types/zorn';
 import { SimplifyN } from '../../../utilities/simplify';
+import { TypeScriptObject } from '../../../utilities/typed-datum/type-script/object';
 import { Source } from './source/source';
 
 const RULE_ZORN_TEMPLATE = [
@@ -17,7 +18,7 @@ export class RuleZorn extends Zorn2<RuleZornTemplate> {
   }
 }
 
-type GenericMessageAccessorInput = Record<string, string>;
+type GenericMessageAccessorInput = TypeScriptObject;
 type MessageAccessor<TInput extends GenericMessageAccessorInput> = (
   ...args: [TInput]
 ) => string;

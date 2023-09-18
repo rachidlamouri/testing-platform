@@ -6,6 +6,8 @@ export type CommentedProgramBodyDeclaration<
   TBodyStatement extends TSESTree.ProgramStatement = TSESTree.ProgramStatement,
   TIdentifiableNode extends IdentifiableProgramBodyStatementNode | null = IdentifiableProgramBodyStatementNode | null,
 > = {
+  isCanonical: boolean;
+  isDerivative: boolean;
   commentText: string | null;
   bodyStatement: TBodyStatement;
   identifiableNode: TIdentifiableNode;
@@ -28,6 +30,8 @@ export const { CommentedProgramBodyDeclarationInstance } =
     constructorName: 'CommentedProgramBodyDeclarationInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
+      'isCanonical',
+      'isDerivative',
       'commentText',
       'bodyStatement',
       'identifiableNode',

@@ -54,6 +54,14 @@ import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProg
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { assertNoCopyPasta } from './assertNoCopyPasta';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { assertTypeScriptFileHasCanonicalDeclaration } from '../../programmable-units/type-script-file/canonical-declaration/assertTypeScriptFileHasCanonicalDeclaration';
+import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
+import {
+  LINT_ASSERTION_OMISSION_GEPP,
+  LintAssertionOmissionVoictent,
+  LintAssertionOmissionVoque,
+  NULL_OMISSION,
+} from '../../programmable-units/linting/lintAssertionOmission';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 
 const programFileCache = new ProgramFileCache({
@@ -79,6 +87,10 @@ digikikify({
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
+    new LintAssertionOmissionVoictent<LintAssertionOmissionVoque>({
+      gepp: LINT_ASSERTION_OMISSION_GEPP,
+      initialHubblepupPelueTuple: [NULL_OMISSION],
+    }),
   ] as const,
   fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([
@@ -98,6 +110,8 @@ digikikify({
     parseTypeScriptFile,
     getCommentedProgramBodyDeclarationList,
     getTypeScriptFileImportList,
+
+    assertTypeScriptFileHasCanonicalDeclaration,
 
     filterEngineProgramFile,
     getEngineProgramLocator3,
@@ -129,6 +143,7 @@ digikikify({
 
     assertNoCopyPasta,
 
+    reportFailedLintAssertion,
     reportErrors,
     reportErrorCount,
     signalError,
