@@ -54,6 +54,7 @@ import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProg
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { assertNoCopyPasta } from './assertNoCopyPasta';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -129,6 +130,7 @@ digikikify({
     assertNoCopyPasta,
 
     reportErrors,
+    reportErrorCount,
     signalError,
   ] as const,
   programFileCache,
