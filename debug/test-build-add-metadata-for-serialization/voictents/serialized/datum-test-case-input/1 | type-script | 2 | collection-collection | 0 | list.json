@@ -1,0 +1,49 @@
+{
+  "zorn": "1/type-script/2/collection-collection/0/list",
+  "grition": [
+    [
+      null,
+      null,
+      "this is a single line string",
+      "this\n  is\na multiline\n  string",
+      "99999999999999999999999999",
+      12.34,
+      123,
+      0.123,
+      true,
+      false,
+      null,
+      null
+    ],
+    {},
+    {
+      "key-0": null,
+      "key-2": "this is a single line string",
+      "key-3": "this\n  is\na multiline\n  string",
+      "key-4": "99999999999999999999999999",
+      "key-5": 12.34,
+      "key-6": 123,
+      "key-7": 0.123,
+      "key-8": true,
+      "key-9": false
+    },
+    {},
+    {
+      "datumList": [
+        null,
+        null,
+        "this is a single line string",
+        "this\n  is\na multiline\n  string",
+        "99999999999999999999999999",
+        12.34,
+        123,
+        0.123,
+        true,
+        false,
+        null,
+        null
+      ]
+    },
+    {}
+  ]
+}
