@@ -1,29 +1,42 @@
 import { posix } from 'path';
 import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { SimplifyN } from '../../../utilities/simplify';
-import { getFileMetadata } from './getFileMetadata';
 import { getFileSystemNodePathPartList } from './getFileSystemNodePathPartList';
 import { NodePathConstructorInput } from './nodePathConstructorInput';
+import {
+  FileExtensionSuffixIdentifier,
+  getFileExtensionSuffixIdentifier,
+} from './fileExtensionSuffixIdentifier';
 
 type FilePathConstructorInput = NodePathConstructorInput;
 
-type FileExtension = {
+type FileExtension<
+  TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier,
+> = {
   serialized: string;
-  partList: string[];
   suffix: string;
+  suffixIdentifier: TFileExtensionSuffixIdentifier;
 };
 
-type FileName = {
+type GenericFileExtension = FileExtension<FileExtensionSuffixIdentifier>;
+
+type FileName<
+  TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier,
+> = {
   serialized: string;
   extensionless: string;
-  extension: FileExtension;
+  extension: FileExtension<TFileExtensionSuffixIdentifier>;
 };
 
-export type FilePath = SimplifyN<
+type GenericFileName = FileName<FileExtensionSuffixIdentifier>;
+
+export type FilePath<
+  TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
+> = SimplifyN<
   [
     FilePathConstructorInput,
     {
-      name: FileName;
+      name: FileName<TFileExtensionSuffixIdentifier>;
       partList: string[];
       parentDirectoryPath: string;
     },
@@ -50,35 +63,38 @@ export const { FilePathInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { serialized, ancestorDirectoryPathSet } = input;
+      const { serialized: serializedFilePath, ancestorDirectoryPathSet } =
+        input;
 
-      const {
-        onDiskFileName,
-        extensionlessFileName,
-        fullExtension,
-        extensionPartList,
-        extensionSuffix,
-      } = getFileMetadata(serialized);
+      const { base: serializedOnDiskName } = posix.parse(serializedFilePath);
 
-      const partList = getFileSystemNodePathPartList(serialized);
+      const [extensionlessOnDiskName, ...extensionPartList] =
+        serializedOnDiskName.split('.');
 
-      const parentDirectoryPath = posix.dirname(serialized);
+      const extensionSuffix: string =
+        extensionPartList[extensionPartList.length - 1];
+
+      const serializedExtension = extensionPartList.join('.');
+
+      const pathPartList = getFileSystemNodePathPartList(serializedFilePath);
+
+      const parentDirectoryPath = posix.dirname(serializedFilePath);
 
       return {
-        serialized,
+        serialized: serializedFilePath,
         ancestorDirectoryPathSet,
         name: {
-          serialized: onDiskFileName,
-          extensionless: extensionlessFileName,
+          serialized: serializedOnDiskName,
+          extensionless: extensionlessOnDiskName,
           extension: {
-            serialized: fullExtension,
-            partList: extensionPartList,
+            serialized: serializedExtension,
             suffix: extensionSuffix,
-          },
-        },
-        partList,
+            suffixIdentifier: getFileExtensionSuffixIdentifier(extensionSuffix),
+          } satisfies GenericFileExtension,
+        } satisfies GenericFileName,
+        partList: pathPartList,
         parentDirectoryPath,
-      };
+      } satisfies FilePath;
     },
   })
   .assemble();

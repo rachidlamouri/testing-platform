@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { posix } from 'path';
 import {
   buildVoictentByGepp,
   digikikify,
@@ -13,6 +14,11 @@ import { scaffoldFile } from './scaffoldFile';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
+import {
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  FileSystemObjectEnumeratorConfigurationVoque,
+} from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 
 type ScriptInput = {
   typeName: string | undefined;
@@ -62,6 +68,15 @@ assertScriptInputIsValid(scriptInput);
  */
 digikikify({
   explicitVoictentTuple: [
+    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
+      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+      initialHubblepupPelueTuple: [
+        {
+          directoryPath: posix.dirname(filePath),
+          ignoredNodePathConfigurationList: [],
+        },
+      ],
+    }),
     new InMemoryVoictent<ScaffoldConfigurationVoque>({
       gepp: SCAFFOLD_CONFIGURATION_GEPP,
       initialHubblepupPelueTuple: [scriptInput],
@@ -69,7 +84,7 @@ digikikify({
   ] as const,
   fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([] as const),
-  estinantTuple: [scaffoldFile] as const,
+  estinantTuple: [enumerateFileSystemObjects, scaffoldFile] as const,
   programFileCache: new ProgramFileCache({
     namespace: 'assembleScaffoldedFile',
   }),

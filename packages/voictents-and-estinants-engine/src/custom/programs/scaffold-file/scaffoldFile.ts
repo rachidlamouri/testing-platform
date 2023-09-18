@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { posix } from 'path';
+import Case from 'case';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { getFileMetadata } from '../../programmable-units/file/getFileMetadata';
 import {
   FileTypeName,
   SCAFFOLD_CONFIGURATION_GEPP,
@@ -10,38 +10,7 @@ import {
 import { ImportConfiguration, ScaffoldeeFileMetadata } from './types';
 import { getHubblepupFileContents } from './getHubblepupFileContents';
 import { getEstinantFileContents } from './getEstinantFileContents';
-
-const partsToCamel = (x: string[]): string => {
-  return x
-    .map((word, index) => {
-      if (index === 0) {
-        return word;
-      }
-
-      return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`;
-    })
-    .join('');
-};
-
-const partsToPascal = (x: string[]): string => {
-  return x
-    .map((word) => {
-      return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`;
-    })
-    .join('');
-};
-
-const partsToScreamingSnake = (x: string[]): string => {
-  return x
-    .map((word) => {
-      return word.toUpperCase();
-    })
-    .join('_');
-};
-
-const partsToKebab = (x: string[]): string => {
-  return x.join('-');
-};
+import { FILE_GEPP, FileVoque } from '../../programmable-units/file/file';
 
 /**
  * Populates export declarations for a collection and all related types. It uses
@@ -53,19 +22,26 @@ export const scaffoldFile = buildEstinant({
   .fromHubblepup2<ScaffoldConfigurationVoque>({
     gepp: SCAFFOLD_CONFIGURATION_GEPP,
   })
-  .onPinbe((scaffoldConfiguration) => {
-    const fileMetadata = getFileMetadata(scaffoldConfiguration.filePath);
+  .andFromHubblepupTuple2<FileVoque, [string]>({
+    gepp: FILE_GEPP,
+    framate: (configuration) => {
+      return [configuration.hubblepup.filePath];
+    },
+    croard: (file) => {
+      return file.hubblepup.filePath;
+    },
+  })
+  .onPinbe((scaffoldConfiguration, [file]) => {
     const currentContents = fs.readFileSync(
       scaffoldConfiguration.filePath,
       'utf8',
     );
-    const directoryPath = posix.dirname(fileMetadata.filePath);
 
     const relevantFileMetadata: ScaffoldeeFileMetadata = {
       getImportStatement: (importConfiguration: ImportConfiguration) => {
         const identifierText = importConfiguration.identifierList.join(', ');
         const relativePath = posix.relative(
-          directoryPath,
+          file.nodePath.parentDirectoryPath,
           importConfiguration.filePath,
         );
 
@@ -73,12 +49,10 @@ export const scaffoldFile = buildEstinant({
 
         return `import { ${identifierText} } from '${extensionlessRelativePath}'`;
       },
-      camelCaseName: partsToCamel(fileMetadata.inMemoryFileNameParts),
-      pascalCaseName: partsToPascal(fileMetadata.inMemoryFileNameParts),
-      kebabCaseName: partsToKebab(fileMetadata.inMemoryFileNameParts),
-      screamingSnakeCaseName: partsToScreamingSnake(
-        fileMetadata.inMemoryFileNameParts,
-      ),
+      camelCaseName: Case.camel(file.nodePath.name.extensionless),
+      pascalCaseName: Case.pascal(file.nodePath.name.extensionless),
+      kebabCaseName: Case.kebab(file.nodePath.name.extensionless),
+      screamingSnakeCaseName: Case.constant(file.nodePath.name.extensionless),
     };
 
     const prependedContent = ((): string => {

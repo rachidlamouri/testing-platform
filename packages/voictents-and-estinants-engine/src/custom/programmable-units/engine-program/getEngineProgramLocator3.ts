@@ -1,4 +1,5 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
+import Case from 'case';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
@@ -156,7 +157,7 @@ const getCore2EngineProgramLocator = ({
     return fileImport.sourcePath;
   };
 
-  const programName = engineProgramFile.inMemoryFileName.kebabCase;
+  const programName = Case.kebab(engineProgramFile.nodePath.name.extensionless);
 
   const voictentListGeppProperty = engineCallExpressionPropertyList.find(
     (property) =>
@@ -364,7 +365,7 @@ const getAdaptedEngineProgramLocator = ({
   engineCallCommentText,
   engineCallExpressionPropertyList,
 }: AdaptedEngineProgramLocatorAccessorInput): AdaptedEngineProgramLocatorAccessorResult => {
-  const programName = engineProgramFile.inMemoryFileName.kebabCase;
+  const programName = Case.kebab(engineProgramFile.nodePath.name.extensionless);
 
   const explicitVoictentTupleProperty = engineCallExpressionPropertyList.find(
     (property) =>

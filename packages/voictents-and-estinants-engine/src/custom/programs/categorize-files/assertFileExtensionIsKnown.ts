@@ -31,12 +31,12 @@ export const assertFileExtensionIsKnown = buildEstinant({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((file) => {
-    if (
-      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Unknown
-    ) {
+    const { suffixIdentifier, suffix } = file.nodePath.name.extension;
+
+    if (suffixIdentifier === FileExtensionSuffixIdentifier.Unknown) {
       const output: ReportedProgramError<ReportingLocator> = {
         name: 'file-extension-is-unknown',
-        error: new Error(`Unknown file extension "${file.extension.suffix}"`),
+        error: new Error(`Unknown file extension "${suffix}"`),
         reporterLocator,
         sourceLocator: {
           typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,

@@ -23,22 +23,25 @@ export const categorizeFiles = buildEstinant({
   .toHubblepupOnCondition<BashFileVoque>({
     gepp: BASH_FILE_GEPP,
     pinbe: (file): file is BashFile =>
-      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Bash,
+      file.nodePath.name.extension.suffixIdentifier ===
+      FileExtensionSuffixIdentifier.Bash,
   })
   .toHubblepupOnCondition<HtmlFileVoque>({
     gepp: HTML_FILE_GEPP,
     pinbe: (file): file is HtmlFile =>
-      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Html,
+      file.nodePath.name.extension.suffixIdentifier ===
+      FileExtensionSuffixIdentifier.Html,
   })
   .toHubblepupOnCondition<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
     pinbe: (file): file is TypeScriptFile =>
-      file.extension.suffixIdentifier ===
+      file.nodePath.name.extension.suffixIdentifier ===
       FileExtensionSuffixIdentifier.TypeScript,
   })
   .toHubblepupOnCondition<YamlFileVoque>({
     gepp: YAML_FILE_GEPP,
     pinbe: (file): file is YamlFile =>
-      file.extension.suffixIdentifier === FileExtensionSuffixIdentifier.Yaml,
+      file.nodePath.name.extension.suffixIdentifier ===
+      FileExtensionSuffixIdentifier.Yaml,
   })
   .assemble();

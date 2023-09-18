@@ -1,3 +1,4 @@
+import Case from 'case';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { OdeshinZorn } from '../../../adapter/odeshin2';
 import {
@@ -107,7 +108,7 @@ export const getFileNodeMetadata = buildEstinant({
             boundaryId: foundBoundary.id,
             filePath: file.filePath,
             attributeByKey: {
-              label: file.onDiskFileName.pascalCase,
+              label: Case.pascal(file.nodePath.name.extensionless),
               shape: NodeShape.Box,
               fontsize: FONT_SIZE.node,
               color: 'gray',

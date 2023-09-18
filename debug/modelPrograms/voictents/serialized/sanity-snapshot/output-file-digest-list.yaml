@@ -1,7 +1,7 @@
 "zorn": "output-file-digest-list"
 "grition":
   - "fileName": "assemble-scaffolded-file"
-    "digest": "a7f738e6fd5200df7b9ca0fc5ff39141b313ee6e"
+    "digest": "0d5fc459171b9d81ce6593a693c18cbc2bb3b00c"
   - "fileName": "categorize-files"
     "digest": "ebc5d70052c9c2d38f1e023a5520c6e17210a460"
   - "fileName": "comments-example"

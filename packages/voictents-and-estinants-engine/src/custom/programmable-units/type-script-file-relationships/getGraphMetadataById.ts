@@ -1,4 +1,5 @@
 import { posix } from 'path';
+import Case from 'case';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
   TYPE_SCRIPT_FILE_GEPP,
@@ -134,7 +135,7 @@ export const getGraphMetadataById = buildEstinant({
 
       typeScriptFileVoictent.list.forEach((file) => {
         metadataById.grition[file.instanceId] = {
-          title: file.onDiskFileName.camelCase,
+          title: Case.camel(file.nodePath.name.extensionless),
           fieldList: [
             {
               label: 'Type',

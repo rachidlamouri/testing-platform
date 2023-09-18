@@ -16,6 +16,10 @@ import {
 } from './outputHubblepupTupleAppreffingeBuilder2';
 import { PartialRightHubblepupTupleAppreffinge } from './partialAppreffinge';
 import {
+  PinbetunfBuilderParent2,
+  buildPinbetunfBuilder2,
+} from './pinbetunfBuilder2';
+import {
   buildRightInputVoictentAppreffingeBuilder2,
   RightInputVoictentAppreffingeBuilderParent2,
 } from './rightInputVoictentAppreffingeBuilder2';
@@ -62,6 +66,16 @@ type RightInputHubblepupTupleAppreffingeBuilder2<
         TRightInputVoque,
         TZornTuple
       >
+    >,
+
+    PinbetunfBuilderParent2<
+      TAdaptedLeftInputVicken,
+      NextAdaptedRightInputVickenTuple<
+        TAdaptedRightInputVickenTuple,
+        TRightInputVoque,
+        TZornTuple
+      >,
+      EmptyAdaptedOutputVickenTuple
     >,
 
     OutputHubblepupAppreffingeBuilderParent2<
@@ -157,6 +171,16 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
           TRightInputVoque,
           TZornTuple
         >
+      >(nextContext),
+
+      onPinbe: buildPinbetunfBuilder2<
+        TAdaptedLeftInputVicken,
+        NextAdaptedRightInputVickenTuple<
+          TAdaptedRightInputVickenTuple,
+          TRightInputVoque,
+          TZornTuple
+        >,
+        EmptyAdaptedOutputVickenTuple
       >(nextContext),
 
       toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
