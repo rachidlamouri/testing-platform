@@ -56,17 +56,14 @@ export const { FileAncestorDirectoryPathSetInstance } =
       },
       transformInput: (input) => {
         const { file } = input;
-        const {
-          filePath,
-          nodePath: { parentDirectoryPath },
-        } = file;
+        const { filePath } = file;
 
         const zorn = new FileAncestorDirectoryPathSetZorn({
-          filePath,
+          filePath: filePath.serialized,
         });
 
         const ancestorDirectorySet = [];
-        let nextDirectoryPath = parentDirectoryPath;
+        let nextDirectoryPath = filePath.parentDirectoryPath;
         while (nextDirectoryPath !== '.') {
           ancestorDirectorySet.push(nextDirectoryPath);
           nextDirectoryPath = posix.dirname(nextDirectoryPath);
@@ -76,7 +73,7 @@ export const { FileAncestorDirectoryPathSetInstance } =
 
         return {
           zorn,
-          filePath,
+          filePath: filePath.serialized,
           set: ancestorDirectorySet,
         } satisfies FileAncestorDirectoryPathSet;
       },

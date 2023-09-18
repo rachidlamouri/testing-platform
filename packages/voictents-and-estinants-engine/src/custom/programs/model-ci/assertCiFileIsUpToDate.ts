@@ -41,13 +41,13 @@ export const assertCiFileIsUpToDate = buildEstinant({
   .andFromHubblepupTuple2<BashFileVoque, [OdeshinZorn]>({
     gepp: BASH_FILE_GEPP,
     framate: () => [CI_FILE_PATH],
-    croard: (leftInput) => leftInput.hubblepup.filePath,
+    croard: (leftInput) => leftInput.hubblepup.filePath.serialized,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
   .onPinbe((serializeCiModel, [ciFile]) => {
-    const onDiskContents = fs.readFileSync(ciFile.filePath, 'utf-8');
+    const onDiskContents = fs.readFileSync(ciFile.filePath.serialized, 'utf-8');
 
     const actual = onDiskContents;
     const expected = serializeCiModel.grition;
@@ -62,7 +62,7 @@ export const assertCiFileIsUpToDate = buildEstinant({
           reporterLocator,
           sourceLocator: {
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: ciFile.filePath,
+            filePath: ciFile.filePath.serialized,
           },
           context: {
             error,

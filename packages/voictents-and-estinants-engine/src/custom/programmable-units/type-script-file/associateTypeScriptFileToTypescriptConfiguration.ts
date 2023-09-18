@@ -62,12 +62,12 @@ export const associateTypeScriptFileToTypescriptConfiguration = buildEstinant({
     gepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
   })
   .onPinbe((input) => {
-    const configurationFilePath = getConfigurationFilePath(input.filePath);
+    const configurationFilePath = getConfigurationFilePath(input.filePath.serialized);
     const configurationRootDirectory = posix.dirname(configurationFilePath);
 
     const configuration: TypeScriptFileConfiguration = {
-      zorn: input.filePath,
-      sourceFilePath: input.filePath,
+      zorn: input.filePath.serialized,
+      sourceFilePath: input.filePath.serialized,
       filePath: configurationFilePath,
       rootDirectory: configurationRootDirectory,
     };

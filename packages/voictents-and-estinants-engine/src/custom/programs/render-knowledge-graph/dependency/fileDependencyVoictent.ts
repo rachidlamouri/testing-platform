@@ -32,10 +32,10 @@ export class FileDependencyVoictent extends BaseInMemoryOdeshin2Voictent<
 
   addHubblepup(hubblepup: FileDependency): void {
     const { importingFile } = hubblepup;
-    const importingFilePath = importingFile.file.filePath;
+    const importingFilePath = importingFile.file.filePath.serialized;
 
     const { importedFile } = hubblepup;
-    const importedFilePath = importedFile.file.filePath;
+    const importedFilePath = importedFile.file.filePath.serialized;
 
     {
       const combination =

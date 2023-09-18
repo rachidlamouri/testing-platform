@@ -28,7 +28,7 @@ export const scaffoldFile = buildEstinant({
       return [configuration.hubblepup.filePath];
     },
     croard: (file) => {
-      return file.hubblepup.filePath;
+      return file.hubblepup.filePath.serialized;
     },
   })
   .onPinbe((scaffoldConfiguration, [file]) => {

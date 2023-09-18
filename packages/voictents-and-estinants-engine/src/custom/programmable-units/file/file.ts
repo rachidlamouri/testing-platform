@@ -24,7 +24,7 @@ export type File<
   instanceId: string;
   /** @deprecated in favor of a nodePath.parentDirectoryPath */
   directoryPath: string;
-  filePath: string;
+  filePath: FilePath<TFileExtensionSuffixIdentifier>;
   nodePath: FilePath<TFileExtensionSuffixIdentifier>;
 };
 
@@ -60,7 +60,8 @@ export const { FileInstance } = buildNamedConstructorFunction({
 
       return {
         zorn,
-        filePath: serializedFilePath,
+        filePath2: serializedFilePath,
+        filePath,
         nodePath: filePath,
         directoryPath: filePath.parentDirectoryPath,
         ...otherInputFields,

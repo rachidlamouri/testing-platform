@@ -56,7 +56,7 @@ export const constructKnowledgeGraph = buildEstinant({
       },
     );
 
-    const htmlTemplateText = fs.readFileSync(templateFile.filePath, 'utf8');
+    const htmlTemplateText = fs.readFileSync(templateFile.filePath.serialized, 'utf8');
     const navigationItemListText = JSON.stringify(navigationItemList, null, 2);
     const metadataByIdListText = JSON.stringify(metadataByIdList, null, 2);
     const svgTemplateText = svgTemplateTextList.join('\n');

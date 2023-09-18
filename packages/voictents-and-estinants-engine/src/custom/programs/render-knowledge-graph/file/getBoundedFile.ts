@@ -32,7 +32,7 @@ export const getBoundedFile = buildEstinant({
   .andFromHubblepupTuple2<FileAncestorDirectoryPathSetVoque, [string]>({
     gepp: FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
     framate: (file) => {
-      return [file.hubblepup.filePath];
+      return [file.hubblepup.filePath.serialized];
     },
     croard: (file) => {
       return file.hubblepup.filePath;
@@ -56,7 +56,7 @@ export const getBoundedFile = buildEstinant({
 
       assertNotNull(
         boundary,
-        `Unable to find boundary for file ${file.filePath}`,
+        `Unable to find boundary for file ${file.filePath.serialized}`,
       );
 
       return new BoundedFileInstance({

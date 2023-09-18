@@ -148,12 +148,12 @@ export const getGraphMetadataById = buildEstinant({
             {
               label: 'Parent Directory Path',
               value: posix
-                .dirname(file.filePath)
+                .dirname(file.filePath.serialized)
                 .replace(rootDirectory.directoryPath, '<root>'),
             },
             {
               label: 'File Path',
-              value: file.filePath.replace(
+              value: file.filePath.serialized.replace(
                 rootDirectory.directoryPath,
                 '<root>',
               ),

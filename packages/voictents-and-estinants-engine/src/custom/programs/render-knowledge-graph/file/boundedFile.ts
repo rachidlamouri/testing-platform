@@ -74,7 +74,7 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
 
       const localGraphElementZorn =
         LocalDirectedGraphElement2Zorn.buildNodeZorn({
-          distinguisher: file.filePath,
+          distinguisher: file.filePath.serialized,
         });
 
       return {

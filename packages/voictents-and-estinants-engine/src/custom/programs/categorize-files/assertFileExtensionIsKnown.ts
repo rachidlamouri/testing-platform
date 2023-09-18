@@ -40,7 +40,7 @@ export const assertFileExtensionIsKnown = buildEstinant({
         reporterLocator,
         sourceLocator: {
           typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-          filePath: file.filePath,
+          filePath: file.filePath.serialized,
         },
         context: null,
       };

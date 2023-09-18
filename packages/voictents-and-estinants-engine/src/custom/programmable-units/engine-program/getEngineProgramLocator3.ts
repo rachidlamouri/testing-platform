@@ -195,7 +195,7 @@ const getCore2EngineProgramLocator = ({
         reporterLocator,
         sourceLocator: {
           typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-          filePath: engineProgramFile.filePath,
+          filePath: engineProgramFile.filePath.serialized,
         },
         context: null,
       });
@@ -232,7 +232,7 @@ const getCore2EngineProgramLocator = ({
       initialVoqueLocatorList.push(
         new EngineVoqueLocator2Instance({
           identifierName: voqueName,
-          filePath: engineProgramFile.filePath,
+          filePath: engineProgramFile.filePath.serialized,
           isCoreVoque: true,
         }),
       );
@@ -258,7 +258,7 @@ const getCore2EngineProgramLocator = ({
 
       const filePath =
         getImportPathFromIdentifier(identifierName) ??
-        engineProgramFile.filePath;
+        engineProgramFile.filePath.serialized;
 
       engineEstinantLocatorList.push(
         new EngineEstinantTopLevelDeclarationLocatorInstance({
@@ -281,7 +281,7 @@ const getCore2EngineProgramLocator = ({
           callExpression: element,
           index,
           isCoreEstinant: true,
-          filePath: engineProgramFile.filePath,
+          filePath: engineProgramFile.filePath.serialized,
         }),
       );
     } else {
@@ -293,7 +293,7 @@ const getCore2EngineProgramLocator = ({
         reporterLocator,
         sourceLocator: {
           typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-          filePath: engineProgramFile.filePath,
+          filePath: engineProgramFile.filePath.serialized,
         },
         context: null,
       });
@@ -307,7 +307,7 @@ const getCore2EngineProgramLocator = ({
       reporterLocator,
       sourceLocator: {
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-        filePath: engineProgramFile.filePath,
+        filePath: engineProgramFile.filePath.serialized,
       },
       context: null,
     });
@@ -315,7 +315,7 @@ const getCore2EngineProgramLocator = ({
 
   const partialProgramLocator = new PartialEngineProgramLocator2Instance({
     programName,
-    filePath: engineProgramFile.filePath,
+    filePath: engineProgramFile.filePath.serialized,
   });
 
   const estinantRelationshipList = engineEstinantLocatorList.map(
@@ -332,7 +332,7 @@ const getCore2EngineProgramLocator = ({
     isCoreProgram: true,
     programName,
     description: engineCallCommentText ?? '',
-    filePath: engineProgramFile.filePath,
+    filePath: engineProgramFile.filePath.serialized,
     initializedVoqueLocatorList: initialVoqueLocatorList,
     estinantRelationshipList,
     rootGraphLocator: partialProgramLocator.rootGraphLocator,
@@ -410,7 +410,7 @@ const getAdaptedEngineProgramLocator = ({
       reporterLocator,
       sourceLocator: {
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-        filePath: engineProgramFile.filePath,
+        filePath: engineProgramFile.filePath.serialized,
       },
       context: {
         reason: 'A program without inputs will not do anything',
@@ -441,7 +441,7 @@ const getAdaptedEngineProgramLocator = ({
           reporterLocator,
           sourceLocator: {
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: engineProgramFile.filePath,
+            filePath: engineProgramFile.filePath.serialized,
           },
           context: {
             originalIndex,
@@ -454,7 +454,7 @@ const getAdaptedEngineProgramLocator = ({
 
       const voqueFilePath =
         fileImportsByImportedIdentifier.get(voqueIdentifierName)?.sourcePath ??
-        engineProgramFile.filePath;
+        engineProgramFile.filePath.serialized;
 
       engineVoqueLocatorList.push(
         new EngineVoqueLocator2Instance({
@@ -503,7 +503,7 @@ const getAdaptedEngineProgramLocator = ({
       reporterLocator,
       sourceLocator: {
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-        filePath: engineProgramFile.filePath,
+        filePath: engineProgramFile.filePath.serialized,
       },
       context: {
         hasConstantListOfArguments,
@@ -539,7 +539,7 @@ const getAdaptedEngineProgramLocator = ({
       reporterLocator,
       sourceLocator: {
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-        filePath: engineProgramFile.filePath,
+        filePath: engineProgramFile.filePath.serialized,
       },
       context: {
         estinantListProperty,
@@ -562,7 +562,7 @@ const getAdaptedEngineProgramLocator = ({
         new EngineEstinantTopLevelDeclarationLocatorInstance({
           typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
           identifierName,
-          filePath: engineProgramFile.filePath,
+          filePath: engineProgramFile.filePath.serialized,
           isCoreEstinant: false,
         }),
       );
@@ -586,7 +586,7 @@ const getAdaptedEngineProgramLocator = ({
       reporterLocator,
       sourceLocator: {
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-        filePath: engineProgramFile.filePath,
+        filePath: engineProgramFile.filePath.serialized,
       },
       context: null,
     });
@@ -594,7 +594,7 @@ const getAdaptedEngineProgramLocator = ({
 
   const partialProgramLocator = new PartialEngineProgramLocator2Instance({
     programName,
-    filePath: engineProgramFile.filePath,
+    filePath: engineProgramFile.filePath.serialized,
   });
 
   const estinantRelationshipList = engineEstinantLocatorList.map(
@@ -611,7 +611,7 @@ const getAdaptedEngineProgramLocator = ({
     isCoreProgram: false,
     programName,
     description: engineCallCommentText ?? '',
-    filePath: engineProgramFile.filePath,
+    filePath: engineProgramFile.filePath.serialized,
     initializedVoqueLocatorList: engineVoqueLocatorList,
     estinantRelationshipList,
     rootGraphLocator: partialProgramLocator.rootGraphLocator,
@@ -679,7 +679,7 @@ export const getEngineProgramLocator3 = buildEstinant({
               reporterLocator,
               sourceLocator: {
                 typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-                filePath: engineProgramFile.file.filePath,
+                filePath: engineProgramFile.file.filePath.serialized,
               },
               context: null,
             } satisfies ReportedProgramError<ReportingLocator>,
@@ -708,7 +708,7 @@ export const getEngineProgramLocator3 = buildEstinant({
                 sourceLocator: {
                   typeName:
                     ProgramErrorElementLocatorTypeName.SourceFileLocator,
-                  filePath: engineProgramFile.file.filePath,
+                  filePath: engineProgramFile.file.filePath.serialized,
                 },
                 context: null,
               } satisfies ReportedProgramError<ReportingLocator>,

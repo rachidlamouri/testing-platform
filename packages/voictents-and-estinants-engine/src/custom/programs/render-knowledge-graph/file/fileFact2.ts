@@ -126,7 +126,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
       const graphMetadata: Metadata = {
         id: graphElement.id,
         title: boundedFile.file.nodePath.name.serialized,
-        fileSystemPath: boundedFile.file.filePath,
+        fileSystemPath: boundedFile.file.filePath.serialized,
         fieldList: [
           {
             label: 'Boundary',

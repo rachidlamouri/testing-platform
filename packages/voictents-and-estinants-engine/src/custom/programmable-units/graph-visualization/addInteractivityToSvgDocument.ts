@@ -73,7 +73,7 @@ export const addInteractivityToSvgDocument = buildEstinant({
     gepp: HTML_FILE_GEPP,
     framate: () => [INTERACTIVE_HTML_FILE_PATH],
     // TODO: add filepath to index
-    croard: (rightInput) => rightInput.hubblepup.filePath,
+    croard: (rightInput) => rightInput.hubblepup.filePath.serialized,
   })
   .andFromHubblepupTuple2<DirectedGraphMetadataByIdVoque, [OdeshinZorn]>({
     gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
@@ -87,7 +87,7 @@ export const addInteractivityToSvgDocument = buildEstinant({
     (leftInput, [templateFile], [{ grition: directedGraphMetadataById }]) => {
       const svgText = leftInput.grition;
 
-      const templateText = fs.readFileSync(templateFile.filePath, 'utf8');
+      const templateText = fs.readFileSync(templateFile.filePath.serialized, 'utf8');
 
       const metadataByIdCode = dataStructureToCode(directedGraphMetadataById);
 

@@ -33,7 +33,7 @@ export const getFileDependencies = buildEstinant({
       return [importingFileZorn, ...importedFileZornList];
     },
     croard: (partitionedFile) => {
-      return partitionedFile.hubblepup.file.filePath;
+      return partitionedFile.hubblepup.file.filePath.serialized;
     },
   })
   .toHubblepupTuple2<FileDependencyVoque>({
