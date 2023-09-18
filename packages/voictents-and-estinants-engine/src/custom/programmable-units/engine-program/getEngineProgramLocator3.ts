@@ -75,6 +75,7 @@ import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   FileCommentedProgramBodyDeclarationGroupVoque,
 } from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
+import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclaration';
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -102,11 +103,10 @@ const isEngineCallExpressionStatement = (
   node.expression.callee.name === engineFunctionIdentifier &&
   isObjectExpressionWithIdentifierProperties(node.expression.arguments[0]);
 
-type EngineCallDeclaration = {
-  commentText: string | null;
-  bodyStatement: EngineCallExpressionStatement;
-  identifiableNode: null;
-};
+type EngineCallDeclaration = CommentedProgramBodyDeclaration<
+  EngineCallExpressionStatement,
+  null
+>;
 
 type Core2EngineProgramLocatorAccessorInput = {
   engineProgramFile: EngineProgramFile['file'];
