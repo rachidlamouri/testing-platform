@@ -5,7 +5,7 @@ import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;
-const errorLimit = 20;
+const errorLimit = 5;
 let isLimitReached = false;
 
 /**
@@ -26,7 +26,7 @@ export const reportErrors = buildEstinant({
 
     // TODO: create an abstract subclass of Error that requires a function that serializes metadata including program file cache file paths
 
-    if (errorCount < errorLimit) {
+    if (errorCount <= errorLimit) {
       /* eslint-disable no-console */
       console.log();
       console.log(
