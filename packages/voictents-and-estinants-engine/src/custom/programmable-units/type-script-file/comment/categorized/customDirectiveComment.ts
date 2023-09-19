@@ -1,4 +1,3 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { CommentZorn } from '../commentZorn';
 import { AdaptedLineComment } from '../adapted/adaptedLineComment';
@@ -69,12 +68,3 @@ export const { CustomDirectiveCommentInstance } = buildNamedConstructorFunction(
     },
   })
   .assemble();
-
-export const CUSTOM_DIRECTIVE_COMMENT_GEPP = 'custom-directive-comment';
-
-type CustomDirectiveCommentGepp = typeof CUSTOM_DIRECTIVE_COMMENT_GEPP;
-
-export type CustomDirectiveCommentVoque = InMemoryOdeshin2ListVoque<
-  CustomDirectiveCommentGepp,
-  CustomDirectiveComment
->;

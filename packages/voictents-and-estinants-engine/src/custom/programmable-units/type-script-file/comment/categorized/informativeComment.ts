@@ -1,4 +1,3 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { AdaptedLineComment } from '../adapted/adaptedLineComment';
 import { CategorizedCommentTypeName } from './categorizedCommentTypeName';
@@ -57,12 +56,3 @@ export const { InformativeCommentInstance } = buildNamedConstructorFunction({
     },
   })
   .assemble();
-
-export const INFORMATIVE_COMMENT_GEPP = 'informative-comment';
-
-type InformativeCommentGepp = typeof INFORMATIVE_COMMENT_GEPP;
-
-export type InformativeCommentVoque = InMemoryOdeshin2ListVoque<
-  InformativeCommentGepp,
-  InformativeComment
->;

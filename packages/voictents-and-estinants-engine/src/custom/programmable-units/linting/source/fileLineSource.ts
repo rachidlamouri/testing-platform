@@ -1,4 +1,3 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
   GenericZorn2Template,
@@ -69,12 +68,3 @@ export const { FileLineSourceInstance } = buildNamedConstructorFunction({
     },
   })
   .assemble();
-
-export const FILE_LINE_SOURCE_GEPP = 'file-line-source';
-
-type FileLineSourceGepp = typeof FILE_LINE_SOURCE_GEPP;
-
-export type FileLineSourceVoque = InMemoryOdeshin2ListVoque<
-  FileLineSourceGepp,
-  FileLineSource
->;

@@ -144,6 +144,11 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
       'packages/voictents-and-estinants-engine/src/utilities/simplify.ts',
     importedIdentifierName: 'Simplify',
   },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/custom/programmable-units/linting/source/fileLineSource.ts',
+    importedIdentifierName: 'FileLineSourceInstance',
+  },
 ].map(({ importedFilePath, importedIdentifierName }) => {
   return new LintAssertionOmissionInstance({
     omitterSource,

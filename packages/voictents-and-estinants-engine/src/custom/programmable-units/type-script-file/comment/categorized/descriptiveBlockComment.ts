@@ -1,4 +1,3 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { AdaptedJsdocLikeBlockComment } from '../adapted/adaptedJsdocLikeBlockComment';
 import { CommentZorn } from '../commentZorn';
@@ -68,12 +67,3 @@ export const { DescriptiveBlockCommentInstance } =
       },
     })
     .assemble();
-
-export const DESCRIPTIVE_BLOCK_COMMENT_GEPP = 'descriptive-block-comment';
-
-type DescriptiveBlockCommentGepp = typeof DESCRIPTIVE_BLOCK_COMMENT_GEPP;
-
-export type DescriptiveBlockCommentVoque = InMemoryOdeshin2ListVoque<
-  DescriptiveBlockCommentGepp,
-  DescriptiveBlockComment
->;
