@@ -307,6 +307,14 @@ const getInferredInMemoryVoictentTuple = (
   return inferredVoictentTuple;
 };
 
+/**
+ * The adapted engine. It abstracts the core engine's concerns by providing an
+ * easier interface to work with. The types of its other inputs are derived from
+ * the type of the input collection tuple and the input programmed transform
+ * tuple.
+ *
+ * @readable runAdaptedEngine
+ */
 export const digikikify: Digikikifier = <
   TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,

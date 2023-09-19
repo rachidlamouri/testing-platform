@@ -86,6 +86,7 @@ import { FileDependencyVoictent } from './dependency/fileDependencyVoictent';
 import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
 import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
 import { getFileAncestorDirectoryPathSet } from '../../programmable-units/file/getFileAncestorDirectoryPathSet';
+import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -157,6 +158,7 @@ digikikify({
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
+    parseTypeScriptFileComments,
     getTypeScriptFileImportList,
     getCommentedProgramBodyDeclarationList,
 

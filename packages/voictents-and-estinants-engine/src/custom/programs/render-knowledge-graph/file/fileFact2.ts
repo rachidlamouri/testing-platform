@@ -1,6 +1,6 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { hasOneElement } from '../../../../utilities/hasOneElement';
+import { isNotNull } from '../../../../utilities/isNotNull';
 import {
   GenericZorn2Template,
   Zorn2,
@@ -12,6 +12,7 @@ import {
   DirectedGraphNode2Instance,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
+import { CategorizedCommentTypeName } from '../../../programmable-units/type-script-file/comment/categorized/categorizedCommentTypeName';
 import { FileCommentedProgramBodyDeclarationGroup } from '../../../programmable-units/type-script-file/fileCommentedProgramBodyDeclarationGroup';
 import { Metadata } from '../app/browser/dynamicComponentTypes';
 import { BoundedDirectory } from '../directory/boundedDirectory';
@@ -101,6 +102,33 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         boundedFile: boundedFile.zorn,
       });
 
+      const { canonicalDeclaration } = declarationGroup;
+
+      const canonicalDeclarationIdentifierName =
+        canonicalDeclaration !== null
+          ? canonicalDeclaration.identifiableNode.id.name
+          : 'Missing Canonical Declaration';
+
+      const canonicalDeclarationDescription =
+        canonicalDeclaration?.comment?.typeName ===
+        CategorizedCommentTypeName.Descriptive
+          ? canonicalDeclaration.comment.description
+          : '—';
+
+      const readableTag =
+        canonicalDeclaration?.comment?.typeName ===
+        CategorizedCommentTypeName.Descriptive
+          ? canonicalDeclaration.comment.tagTuple.find(
+              (tag) => tag.tag === 'readable',
+            ) ?? null
+          : null;
+
+      const extensionlessName = boundedFile.nodePath.name.extensionless;
+      const label =
+        readableTag !== null
+          ? `${extensionlessName}\n(${readableTag.name})`
+          : extensionlessName;
+
       const graphElement = new DirectedGraphNode2Instance({
         locator: new GraphConstituentLocatorInstance({
           rootGraphLocator: partitionFact.rootGraphLocator,
@@ -108,26 +136,24 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
           localZorn: boundedFile.localGraphElementZorn,
         }),
         inputAttributeByKey: {
-          label: boundedFile.nodePath.name.extensionless,
+          label,
           ...THEME.file,
         },
       });
-
-      const canonicalDeclarationList =
-        declarationGroup.declarationListByIdentifier.get(
-          boundedFile.file.nodePath.name.extensionless,
-        ) ?? [];
-
-      // TODO: handle the cases where there is more than one
-      const canonicalDeclaration = hasOneElement(canonicalDeclarationList)
-        ? canonicalDeclarationList[0]
-        : null;
 
       const graphMetadata: Metadata = {
         id: graphElement.id,
         title: boundedFile.file.nodePath.name.serialized,
         fileSystemPath: boundedFile.file.filePath.serialized,
         fieldList: [
+          {
+            label: canonicalDeclarationIdentifierName,
+            value: canonicalDeclarationDescription,
+          },
+          {
+            label: 'Readable Name',
+            value: readableTag?.name ?? '—',
+          },
           {
             label: 'Boundary',
             value: boundedFile.boundary.displayName,
@@ -143,15 +169,8 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
               '<boundary>',
             ),
           },
-        ],
+        ].filter(isNotNull),
       };
-
-      if (canonicalDeclaration !== null) {
-        graphMetadata.fieldList.push({
-          label: canonicalDeclaration.identifiableNode.id.name,
-          value: canonicalDeclaration.commentText ?? '',
-        });
-      }
 
       return {
         typeName: FactTypeName.FileFact2,

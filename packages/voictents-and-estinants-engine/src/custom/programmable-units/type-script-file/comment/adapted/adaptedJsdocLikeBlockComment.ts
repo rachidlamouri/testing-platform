@@ -16,6 +16,7 @@ export type AdaptedJsdocLikeBlockComment = {
   startingLineNumber: number;
   endingLineNumber: number;
   parsedBlock: commentParser.Block;
+  filePath: string;
   rawComment: TSESTree.BlockComment;
 };
 
@@ -29,6 +30,7 @@ export const { AdaptedJsdocLikeBlockCommentInstance } =
       'startingLineNumber',
       'endingLineNumber',
       'parsedBlock',
+      'filePath',
       'rawComment',
     ] as const satisfies readonly (keyof AdaptedJsdocLikeBlockComment)[],
   })
@@ -44,7 +46,7 @@ export const { AdaptedJsdocLikeBlockCommentInstance } =
         },
       },
       transformInput: (input) => {
-        const { rawComment, parsedBlock } = input;
+        const { filePath, rawComment, parsedBlock } = input;
 
         return {
           typeName: AdaptedCommentTypeName.JsdocLikeBlock,
@@ -52,6 +54,7 @@ export const { AdaptedJsdocLikeBlockCommentInstance } =
           startingLineNumber: rawComment.loc.start.line,
           endingLineNumber: rawComment.loc.end.line,
           parsedBlock,
+          filePath,
           rawComment,
         } satisfies AdaptedJsdocLikeBlockComment;
       },

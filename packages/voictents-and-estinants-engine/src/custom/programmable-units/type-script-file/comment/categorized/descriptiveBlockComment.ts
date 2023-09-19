@@ -9,10 +9,16 @@ type DescriptiveBlockCommentConstructorInput = {
   description: string;
 };
 
+type TagWithName = {
+  tag: string;
+  name: string;
+};
+
 export type DescriptiveBlockComment = {
   typeName: CategorizedCommentTypeName.Descriptive;
   zorn: CommentZorn;
   description: string;
+  tagTuple: TagWithName[];
   startingLineNumber: number;
   endingLineNumber: number;
 };
@@ -25,6 +31,7 @@ export const { DescriptiveBlockCommentInstance } =
       'typeName',
       'zorn',
       'description',
+      'tagTuple',
       'startingLineNumber',
       'endingLineNumber',
     ] as const satisfies readonly (keyof DescriptiveBlockComment)[],
@@ -43,10 +50,18 @@ export const { DescriptiveBlockCommentInstance } =
       transformInput: (input) => {
         const { adaptedComment, description } = input;
 
+        const tagTuple = adaptedComment.parsedBlock.tags.map((tag) => {
+          return {
+            tag: tag.tag,
+            name: tag.name,
+          };
+        });
+
         return {
           typeName: CategorizedCommentTypeName.Descriptive,
           zorn: adaptedComment.zorn,
           description,
+          tagTuple,
           startingLineNumber: adaptedComment.startingLineNumber,
           endingLineNumber: adaptedComment.endingLineNumber,
         } satisfies DescriptiveBlockComment;

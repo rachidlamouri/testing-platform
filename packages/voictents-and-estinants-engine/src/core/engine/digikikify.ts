@@ -144,11 +144,17 @@ export type RuntimeStatistics = {
 };
 
 /**
- * A pipes and filters engine
+ * A pipes and filters engine. It takes a set of collections and a set of
+ * programmed transforms. The engine continues to run as long as a programmed
+ * transform has data in its input streams.
+ *
+ * @readable runCoreEngine
  *
  * @param input (see individual properties)
- * @param input.estinantTuple the collection of Estinants to register in the engine
- * @param input.initialQuirmTuple the starting collection of Quirms to kickstart the engine
+ * @param input.estinantTuple the collection of Estinants to register in the
+ * engine
+ * @param input.initialQuirmTuple the starting collection of Quirms to kickstart
+ * the engine
  */
 export const digikikify = ({
   inputVoictentList = [],
