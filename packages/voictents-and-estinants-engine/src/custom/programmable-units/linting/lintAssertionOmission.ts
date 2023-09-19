@@ -32,7 +32,7 @@ type LintAssertionOmissionConstructorInput = {
 /**
  * A means for ignoring a lint rule
  */
-type LintAssertionOmission = SimplifyN<
+export type LintAssertionOmission = SimplifyN<
   [
     {
       zorn: LintAssertionOmissionZorn;

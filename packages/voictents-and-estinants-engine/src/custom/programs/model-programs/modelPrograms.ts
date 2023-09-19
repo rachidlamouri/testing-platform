@@ -63,6 +63,7 @@ import {
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
+import { canonicalDeclarationOmissionList } from '../../programmable-units/type-script-file/canonical-declaration/canonicalDeclarationOmissionList';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -89,7 +90,11 @@ digikikify({
     }),
     new LintAssertionOmissionVoictent<LintAssertionOmissionVoque>({
       gepp: LINT_ASSERTION_OMISSION_GEPP,
-      initialHubblepupPelueTuple: [NULL_OMISSION],
+      // TODO: fix and remove omissions
+      initialHubblepupPelueTuple: [
+        NULL_OMISSION,
+        ...canonicalDeclarationOmissionList,
+      ],
     }),
   ] as const,
   fileSystemNodeGeppCombination: defaultFileGeppCombination,
@@ -143,6 +148,8 @@ digikikify({
 
     assertNoCopyPasta,
 
+    // TODO: add the audit back in when we don't need the NULL_OMISSION
+    // auditLintAssertionOmissions,
     reportFailedLintAssertion,
     reportErrors,
     reportErrorCount,

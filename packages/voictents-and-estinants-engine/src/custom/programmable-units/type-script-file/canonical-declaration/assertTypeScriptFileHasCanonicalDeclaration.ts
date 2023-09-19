@@ -19,7 +19,7 @@ type TypeScriptFileHasCanonicalDeclarationMessageContext = {
   hasMultipleCanonicalDeclarations: boolean;
   hasMultipleDerivativeDeclarations: boolean;
 };
-const typeScriptFileHasCanonicalDeclarationRule =
+export const typeScriptFileHasCanonicalDeclarationRule =
   new TypedRule<TypeScriptFileHasCanonicalDeclarationMessageContext>({
     name: 'typescript-file-has-canonical-declaration',
     source: new EstinantSourceInstance({

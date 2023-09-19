@@ -1,5 +1,8 @@
 import { LintAssertionZorn } from '../../programmable-units/linting/lintAssertion';
-import { LintAssertionOmissionInstance } from '../../programmable-units/linting/lintAssertionOmission';
+import {
+  LintAssertionOmission,
+  LintAssertionOmissionInstance,
+} from '../../programmable-units/linting/lintAssertionOmission';
 import { ExportedIdentifierSourceInstance } from '../../programmable-units/linting/source/exportedIdentifierSource';
 import { FileSourceInstance } from '../../programmable-units/linting/source/fileSource';
 import { noUnusedExportRule } from './markUnusedExports';
@@ -8,7 +11,8 @@ const omitterSource = new FileSourceInstance({
   filePath: __filename,
 });
 
-export const omittedUnusedExportList = [
+// TODO: audit this list
+export const omittedUnusedExportList: LintAssertionOmission[] = [
   {
     importedFilePath:
       'packages/voictents-and-estinants-engine/src/custom/programmable-units/file/fileSystemObjectEnumeratorConfiguration.ts',
