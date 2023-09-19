@@ -28,7 +28,7 @@ export type CoreEngineFunction2Configuration = {
 
 export type AdaptedEngineFunctionConfiguration = {
   typeName: EngineFunctionConfigurationTypeName.Adapted;
-  filePath: 'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts';
+  filePath: 'packages/voictents-and-estinants-engine/src/custom/adapter/digikikify.ts';
   exportedIdentifier: 'digikikify';
   estinantListKeyIdentifierName: 'estinantTuple';
   explicitVoictentTupleKeyIdentifierName: 'explicitVoictentTuple';
@@ -79,7 +79,7 @@ export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfigu
   {
     typeName: EngineFunctionConfigurationTypeName.Adapted,
     filePath:
-      'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts',
+      'packages/voictents-and-estinants-engine/src/custom/adapter/digikikify.ts',
     exportedIdentifier: 'digikikify',
     estinantListKeyIdentifierName: 'estinantTuple',
     explicitVoictentTupleKeyIdentifierName: 'explicitVoictentTuple',

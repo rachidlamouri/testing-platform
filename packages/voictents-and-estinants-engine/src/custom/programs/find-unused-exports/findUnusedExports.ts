@@ -1,8 +1,5 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import {
-  buildVoictentByGepp,
-  digikikify,
-} from '../../../type-script-adapter/digikikify';
+import { buildVoictentByGepp, digikikify } from '../../adapter/digikikify';
 import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';

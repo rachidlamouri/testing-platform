@@ -65,8 +65,8 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
     directoryPath: 'packages/voictents-and-estinants-engine/src/core',
   }),
   new BoundaryConfigurationInstance({
-    // TODO: move to adapter
-    displayName: 'Custom Adapter',
+    // TODO: move to src/adapter
+    displayName: 'Adapter Layer',
     directoryPath: 'packages/voictents-and-estinants-engine/src/custom/adapter',
   }),
   new BoundaryConfigurationInstance({
@@ -76,14 +76,9 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
       'packages/voictents-and-estinants-engine/src/custom/programmable-units',
   }),
   new BoundaryConfigurationInstance({
-    displayName: 'Example Programs',
+    displayName: 'Core Test Programs',
     directoryPath:
       'packages/voictents-and-estinants-engine/src/example-programs',
-  }),
-  new BoundaryConfigurationInstance({
-    displayName: 'Adapter Layer',
-    directoryPath:
-      'packages/voictents-and-estinants-engine/src/type-script-adapter',
   }),
   new BoundaryConfigurationInstance({
     displayName: 'Utilities',
