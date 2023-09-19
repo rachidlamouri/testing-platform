@@ -27,6 +27,7 @@ import { getTypeScriptFileImportList } from '../../programmable-units/type-scrip
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { markUnusedExports } from './markUnusedExports';
 import { omittedUnusedExportList } from './omittedUnusedExportList';
+import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'findUnusedExports',
@@ -60,6 +61,7 @@ digikikify({
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
+    parseTypeScriptFileComments,
     getCommentedProgramBodyDeclarationList,
     getTypeScriptFileImportList,
     getTypeScriptFileExportList,

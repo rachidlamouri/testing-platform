@@ -29,6 +29,7 @@ import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
@@ -71,6 +72,7 @@ digikikify({
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
+    parseTypeScriptFileComments,
     getTypeScriptFileImportList,
     getCommentedProgramBodyDeclarationList,
 
