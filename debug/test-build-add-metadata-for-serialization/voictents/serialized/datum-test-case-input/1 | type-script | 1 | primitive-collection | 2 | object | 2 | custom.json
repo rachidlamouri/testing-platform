@@ -1,0 +1,19 @@
+{
+  "zorn": "1/type-script/1/primitive-collection/2/object/2/custom",
+  "grition": {
+    "datumList": [
+      null,
+      null,
+      "this is a single line string",
+      "this\n  is\na multiline\n  string",
+      "99999999999999999999999999",
+      12.34,
+      123,
+      0.123,
+      true,
+      false,
+      null,
+      null
+    ]
+  }
+}

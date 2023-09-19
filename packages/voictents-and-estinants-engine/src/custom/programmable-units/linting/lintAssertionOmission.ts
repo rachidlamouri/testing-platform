@@ -8,6 +8,8 @@ import {
 } from '../../../utilities/semantic-types/zorn';
 import { SimplifyN } from '../../../utilities/simplify';
 import { LintAssertionZorn } from './lintAssertion';
+import { TypedRule } from './rule';
+import { FileSourceInstance } from './source/fileSource';
 import { Source } from './source/source';
 
 const LINT_ASSERTION_OMISSION_ZORN_TEMPLATE = [
@@ -30,7 +32,7 @@ type LintAssertionOmissionConstructorInput = {
 /**
  * A means for ignoring a lint rule
  */
-type LintAssertionOmission = SimplifyN<
+export type LintAssertionOmission = SimplifyN<
   [
     {
       zorn: LintAssertionOmissionZorn;
@@ -112,3 +114,24 @@ export class LintAssertionOmissionVoictent<
     throw new Error('Method not supported');
   }
 }
+
+/**
+ * The NULL_OMISSION shouldn't exist. It's currently required because the engine
+ * throws an error when a collection is uninitialized, nor the output of a
+ * transform
+ */
+const fileSource = new FileSourceInstance({
+  filePath: __filename,
+});
+export const NULL_OMISSION = new LintAssertionOmissionInstance({
+  omittedAssertionZorn: new LintAssertionZorn({
+    rule: new TypedRule({
+      name: 'null-omission-rule',
+      source: fileSource,
+      description: 'NULL_OMISSION_RULE',
+      getErrorMessage: () => 'NULL_OMISSION_RULE' as const,
+    }),
+    lintSource: fileSource,
+  }),
+  omitterSource: fileSource,
+});

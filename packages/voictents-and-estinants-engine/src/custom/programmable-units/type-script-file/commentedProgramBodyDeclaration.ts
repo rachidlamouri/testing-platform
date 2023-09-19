@@ -2,17 +2,22 @@ import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { IdentifiableProgramBodyStatementNode } from './getIdentifiableProgramBodyStatementNode';
 
-export type CommentedProgramBodyDeclaration = {
+export type CommentedProgramBodyDeclaration<
+  TBodyStatement extends TSESTree.ProgramStatement = TSESTree.ProgramStatement,
+  TIdentifiableNode extends IdentifiableProgramBodyStatementNode | null = IdentifiableProgramBodyStatementNode | null,
+> = {
+  isCanonical: boolean;
+  isDerivative: boolean;
   commentText: string | null;
-  bodyStatement: TSESTree.ProgramStatement;
-  identifiableNode: IdentifiableProgramBodyStatementNode | null;
+  bodyStatement: TBodyStatement;
+  identifiableNode: TIdentifiableNode;
 };
 
-export type IdentifiableCommentedProgramBodyDeclaration = {
-  commentText: string | null;
-  bodyStatement: TSESTree.ProgramStatement;
-  identifiableNode: IdentifiableProgramBodyStatementNode;
-};
+export type IdentifiableCommentedProgramBodyDeclaration =
+  CommentedProgramBodyDeclaration<
+    TSESTree.ProgramStatement,
+    IdentifiableProgramBodyStatementNode
+  >;
 
 export const isIdentifiableCommentedProgramBodyDeclaration = (
   declaration: CommentedProgramBodyDeclaration,
@@ -25,6 +30,8 @@ export const { CommentedProgramBodyDeclarationInstance } =
     constructorName: 'CommentedProgramBodyDeclarationInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
+      'isCanonical',
+      'isDerivative',
       'commentText',
       'bodyStatement',
       'identifiableNode',

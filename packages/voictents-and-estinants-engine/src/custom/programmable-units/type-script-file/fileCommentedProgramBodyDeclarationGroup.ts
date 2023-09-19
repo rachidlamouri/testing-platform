@@ -11,6 +11,7 @@ import {
   IdentifiableCommentedProgramBodyDeclaration,
   isIdentifiableCommentedProgramBodyDeclaration,
 } from './commentedProgramBodyDeclaration';
+import { hasOneElement } from '../../../utilities/hasOneElement';
 
 const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE = [
   'filePath',
@@ -90,6 +91,9 @@ export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
         IdentifiableCommentedProgramBodyDeclaration
       >;
       declarationListByIdentifier: IdentifiableCommentedProgramBodyDeclarationListByName;
+      canonicalDeclarationList: IdentifiableCommentedProgramBodyDeclaration[];
+      derivativeDeclarationList: IdentifiableCommentedProgramBodyDeclaration[];
+      canonicalDeclaration: IdentifiableCommentedProgramBodyDeclaration | null;
     },
   ]
 >;
@@ -105,6 +109,9 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       'list',
       'declarationByIdentifier',
       'declarationListByIdentifier',
+      'canonicalDeclarationList',
+      'derivativeDeclarationList',
+      'canonicalDeclaration',
     ] as const satisfies readonly (keyof FileCommentedProgramBodyDeclarationGroup)[],
   })
     .withTypes<
@@ -148,12 +155,44 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
               }),
           );
 
+        const canonicalDeclarationList = list.filter(
+          (
+            declaration,
+          ): declaration is IdentifiableCommentedProgramBodyDeclaration => {
+            return declaration.isCanonical;
+          },
+        );
+
+        const derivativeDeclarationList = list.filter(
+          (
+            declaration,
+          ): declaration is IdentifiableCommentedProgramBodyDeclaration => {
+            return declaration.isDerivative;
+          },
+        );
+
+        // TODO: handle the case when a file has two canonical declarations or two derivative declarations
+        let canonicalDeclaration: IdentifiableCommentedProgramBodyDeclaration | null;
+        if (hasOneElement(canonicalDeclarationList)) {
+          [canonicalDeclaration] = canonicalDeclarationList;
+        } else if (
+          canonicalDeclarationList.length === 0 &&
+          hasOneElement(derivativeDeclarationList)
+        ) {
+          [canonicalDeclaration] = derivativeDeclarationList;
+        } else {
+          canonicalDeclaration = null;
+        }
+
         return {
           zorn,
           filePath,
           list,
           declarationByIdentifier,
           declarationListByIdentifier,
+          canonicalDeclarationList,
+          derivativeDeclarationList,
+          canonicalDeclaration,
         } satisfies FileCommentedProgramBodyDeclarationGroup;
       },
     })

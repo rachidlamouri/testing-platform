@@ -34,7 +34,17 @@ export const jsonUtils = {
     }
   },
   multilineSerialize: (datum: Json): string => {
-    const stringified = JSON.stringify(datum, null, 2);
+    const stringified = JSON.stringify(
+      datum,
+      (key, value: unknown) => {
+        if (typeof value === 'bigint') {
+          return value.toString();
+        }
+
+        return value;
+      },
+      2,
+    );
     if (stringified === undefined) {
       throw new Error(`Unable to stringify datum of type "${typeof datum}"`);
     }

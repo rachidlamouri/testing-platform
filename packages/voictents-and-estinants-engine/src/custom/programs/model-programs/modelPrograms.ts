@@ -54,6 +54,16 @@ import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProg
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { assertNoCopyPasta } from './assertNoCopyPasta';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { assertTypeScriptFileHasCanonicalDeclaration } from '../../programmable-units/type-script-file/canonical-declaration/assertTypeScriptFileHasCanonicalDeclaration';
+import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
+import {
+  LINT_ASSERTION_OMISSION_GEPP,
+  LintAssertionOmissionVoictent,
+  LintAssertionOmissionVoque,
+  NULL_OMISSION,
+} from '../../programmable-units/linting/lintAssertionOmission';
+import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
+import { canonicalDeclarationOmissionList } from '../../programmable-units/type-script-file/canonical-declaration/canonicalDeclarationOmissionList';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -78,6 +88,14 @@ digikikify({
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
+    new LintAssertionOmissionVoictent<LintAssertionOmissionVoque>({
+      gepp: LINT_ASSERTION_OMISSION_GEPP,
+      // TODO: fix and remove omissions
+      initialHubblepupPelueTuple: [
+        NULL_OMISSION,
+        ...canonicalDeclarationOmissionList,
+      ],
+    }),
   ] as const,
   fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([
@@ -97,6 +115,8 @@ digikikify({
     parseTypeScriptFile,
     getCommentedProgramBodyDeclarationList,
     getTypeScriptFileImportList,
+
+    assertTypeScriptFileHasCanonicalDeclaration,
 
     filterEngineProgramFile,
     getEngineProgramLocator3,
@@ -128,7 +148,11 @@ digikikify({
 
     assertNoCopyPasta,
 
+    // TODO: add the audit back in when we don't need the NULL_OMISSION
+    // auditLintAssertionOmissions,
+    reportFailedLintAssertion,
     reportErrors,
+    reportErrorCount,
     signalError,
   ] as const,
   programFileCache,
