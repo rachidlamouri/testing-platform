@@ -4,11 +4,12 @@ import { usePresentationContext } from '../presentationContext';
 export type GroupWrapperProps = React.PropsWithChildren<SVGProps<SVGGElement>>;
 
 export const GroupWrapper: FunctionComponent<GroupWrapperProps> = (props) => {
-  const { style } = usePresentationContext();
+  const { style, styleByElement } = usePresentationContext();
 
   const combinedProps = {
     ...props,
     ...style,
+    ...styleByElement.group,
   };
 
   return <g {...combinedProps} />;

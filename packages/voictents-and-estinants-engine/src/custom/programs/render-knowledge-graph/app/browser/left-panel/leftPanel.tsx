@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGeneratedMetadata } from '../generatedMetadataContext';
 import { LeftPanelEdge } from './leftPanelEdge';
 import { Navigation } from './navigation';
 import { MetadataDisplay } from './metadataDisplay';
+import { useSelectedIdContext } from '../selectedIdContext';
 
 export type LeftPanelProps = {
   selectedIndex: number;
@@ -17,7 +18,14 @@ export const LeftPanel: React.FunctionComponent<LeftPanelProps> = ({
   onIndexSelected,
 }) => {
   const { componentMetadataList } = useGeneratedMetadata();
+  const { onSelectBoundaryId } = useSelectedIdContext();
   const [panelWidth, setPanelWidth] = useState(400);
+
+  useEffect(() => {
+    if (componentMetadataList !== null) {
+      onSelectBoundaryId(componentMetadataList[0].boundaryId);
+    }
+  }, [componentMetadataList]);
 
   if (componentMetadataList === null) {
     return null;
@@ -39,7 +47,10 @@ export const LeftPanel: React.FunctionComponent<LeftPanelProps> = ({
       >
         <Navigation
           selectedIndex={selectedIndex}
-          onIndexSelected={onIndexSelected}
+          onIndexSelected={(index, boundaryId): void => {
+            onIndexSelected(index);
+            onSelectBoundaryId(boundaryId);
+          }}
           panelWidth={panelWidth}
         />
         <hr style={{ width: '95%' }} />

@@ -32,12 +32,14 @@ import { FACT_GEPP, Fact, FactVoque } from './fact/fact';
 import { assertNotUndefined } from '../../../utilities/assertNotUndefined';
 import { FactTypeName } from './fact/factTypeName';
 import {
+  DirectoryFactProps,
   FileDependencyPathSegmentFactProps,
   FileFactProps,
 } from './app/browser/factProps';
 import { FileFact2 } from './file/fileFact2';
 import { TypeScriptObject } from '../../../utilities/typed-datum/type-script/object';
 import { FileDependencyPathSegmentFact } from './dependency/dependency-path/fileDependencyPathSegmentFact';
+import { DirectoryFact2 } from './directory/directoryFact2';
 
 const ESTINANT_NAME = 'decodeAndRecastSvgDocument' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -367,6 +369,17 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       throw Error('Invalid or missing starting node');
     }
 
+    const getDirectoryFactProps = (
+      fact: DirectoryFact2,
+    ): Exclude<DirectoryFactProps, 'children'> => {
+      return {
+        factId: fact.graphElement.id,
+        directoryPath: fact.directory.directory.directoryPath.serialized,
+        boundaryId: fact.directory.boundary.zorn.forMachine,
+        isBoundaryDirectory: fact.directory.isBoundaryDirectory,
+      };
+    };
+
     const getFileFactProps = (
       fact: FileFact2,
     ): Exclude<FileFactProps, 'children'> => {
@@ -398,7 +411,12 @@ export const decodeAndRecastSvgDocument = buildEstinant({
     ): WrapperConfiguration | null => {
       switch (fact.typeName) {
         case FactTypeName.PartitionFact:
+          return null;
         case FactTypeName.DirectoryFact2:
+          return {
+            componentName: 'DirectoryFact',
+            props: getDirectoryFactProps(fact),
+          };
         case FactTypeName.FileDependencyPathNodeFact:
           return null;
         case FactTypeName.FileFact2:
@@ -560,6 +578,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       'import { SvgWrapper } from "../wrappers/svgWrapper"',
       'import { TextWrapper } from "../wrappers/textWrapper"',
       'import { FileFact } from "../providers/fileFact"',
+      'import { DirectoryFact } from "../providers/directoryFact"',
       'import { DependencyPathSegmentFact } from "../providers/dependencyPathSegmentFact"',
       '',
       `export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${

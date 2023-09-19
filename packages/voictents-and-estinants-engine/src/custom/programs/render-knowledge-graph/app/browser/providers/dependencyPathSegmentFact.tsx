@@ -10,12 +10,16 @@ export const DependencyPathSegmentFact: FunctionComponent<
   const hasSelectedTail = pathTailIdSet.has(selectedId);
 
   let color: string;
+  let strokeWidth: string;
   if (selectedId === pathHeadId) {
-    color = 'blue';
+    color = 'tomato';
+    strokeWidth = '2';
   } else if (hasSelectedTail) {
     color = 'purple';
+    strokeWidth = '2';
   } else {
     color = 'black';
+    strokeWidth = '.5';
   }
 
   return (
@@ -27,6 +31,7 @@ export const DependencyPathSegmentFact: FunctionComponent<
           // edge
           path: {
             stroke: color,
+            strokeWidth,
           },
           // arrowhead
           polygon: {

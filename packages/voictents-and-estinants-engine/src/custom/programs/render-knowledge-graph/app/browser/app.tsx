@@ -24,7 +24,9 @@ export const App: React.FC = () => {
         >
           <LeftPanel
             selectedIndex={selectedIndex}
-            onIndexSelected={setSelectedIndex}
+            onIndexSelected={(index): void => {
+              setSelectedIndex(index);
+            }}
           />
           <div
             style={{

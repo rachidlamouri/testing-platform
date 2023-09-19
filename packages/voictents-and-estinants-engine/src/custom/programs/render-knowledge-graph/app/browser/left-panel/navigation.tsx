@@ -4,7 +4,7 @@ import { useGeneratedMetadata } from '../generatedMetadataContext';
 export type NavigationProps = {
   panelWidth: number;
   selectedIndex: number;
-  onIndexSelected: (index: number) => void;
+  onIndexSelected: (index: number, boundaryId: string) => void;
 };
 
 export const Navigation: FunctionComponent<NavigationProps> = ({
@@ -25,10 +25,10 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
         width: panelWidth,
       }}
     >
-      {(componentMetadataList ?? []).map(({ label }, index) => {
+      {(componentMetadataList ?? []).map((componentMetadata, index) => {
         return (
           <button
-            key={label}
+            key={componentMetadata.label}
             style={{
               backgroundColor: index === selectedIndex ? '5e97ff' : undefined,
               marginBottom: '8px',
@@ -36,10 +36,10 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
               cursor: 'pointer',
             }}
             onClick={(): void => {
-              onIndexSelected(index);
+              onIndexSelected(index, componentMetadata.boundaryId);
             }}
           >
-            {label}
+            {componentMetadata.label}
           </button>
         );
       })}
