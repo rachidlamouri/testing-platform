@@ -7,6 +7,7 @@ export type SvgWrapperComponent = React.FunctionComponent<{
 export type SvgWrapperComponentMetadata = {
   Component: SvgWrapperComponent;
   label: string;
+  boundaryId: string;
 };
 
 export type SvgWrapperComponentMetadataList = SvgWrapperComponentMetadata[];

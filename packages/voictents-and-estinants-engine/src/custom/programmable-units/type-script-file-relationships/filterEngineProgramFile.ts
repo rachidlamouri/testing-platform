@@ -48,9 +48,7 @@ export const filterEngineProgramFile = buildEstinant({
       // TODO: this code is brittle. Tie it back to the source file if possible
       if (
         typeScriptFile.filePath.serialized ===
-          'packages/voictents-and-estinants-engine/src/type-script-adapter/digikikify.ts' ||
-        typeScriptFile.filePath.serialized ===
-          'packages/voictents-and-estinants-engine/src/type-script-adapter/deprecatedDigikikify.ts'
+        'packages/voictents-and-estinants-engine/src/custom/adapter/digikikify.ts'
       ) {
         return [];
       }

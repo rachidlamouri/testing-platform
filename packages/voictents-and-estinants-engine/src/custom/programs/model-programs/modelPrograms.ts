@@ -1,7 +1,4 @@
-import {
-  buildVoictentByGepp,
-  digikikify,
-} from '../../../type-script-adapter/digikikify';
+import { buildVoictentByGepp, digikikify } from '../../adapter/digikikify';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   FileSystemObjectEnumeratorConfigurationVoque,
@@ -64,6 +61,7 @@ import {
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import { canonicalDeclarationOmissionList } from '../../programmable-units/type-script-file/canonical-declaration/canonicalDeclarationOmissionList';
+import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -113,6 +111,7 @@ digikikify({
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
+    parseTypeScriptFileComments,
     getCommentedProgramBodyDeclarationList,
     getTypeScriptFileImportList,
 

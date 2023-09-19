@@ -2,51 +2,51 @@ import { Simplify, UnionToIntersection } from 'type-fest';
 import {
   DigikikifierInput as CoreDigikikifierInput,
   digikikify as coreDigikikify,
-} from '../core/engine/digikikify';
+} from '../../core/engine/digikikify';
 import {
   GenericEstinant2Tuple,
   UnsafeEstinant2,
   GenericEstinant2,
   UnsafeEstinant2Tuple,
   Estinant2,
-} from '../core/engine-shell/estinant/estinant';
+} from '../../core/engine-shell/estinant/estinant';
 import {
   GenericLeftInputVicken,
   LeftInputVicken,
-} from '../core/engine-shell/vicken/leftInputVicken';
+} from '../../core/engine-shell/vicken/leftInputVicken';
 import {
   GenericOutputVicken,
   OutputVicken,
-} from '../core/engine-shell/vicken/outputVicken';
+} from '../../core/engine-shell/vicken/outputVicken';
 import {
   GenericRightInputVickenTuple,
   RightInputVicken,
-} from '../core/engine-shell/vicken/rightInputVicken';
+} from '../../core/engine-shell/vicken/rightInputVicken';
 import {
   Gepp,
   GenericGeppCombination,
   GeppTuple,
-} from '../core/engine-shell/voictent/gepp';
+} from '../../core/engine-shell/voictent/gepp';
 import {
   GenericInMemoryOdeshin2ListVoque,
   InMemoryOdeshin2ListVoictent,
-} from '../core/engine/inMemoryOdeshinVoictent2';
+} from '../../core/engine/inMemoryOdeshinVoictent2';
 import {
   GenericVoictent2,
   GenericVoictent2Tuple,
   UnsafeVoictent2Tuple,
   Voictent2,
-} from '../core/engine/voictent2';
-import { GenericVoque } from '../core/engine/voque';
-import { ProgramErrorGepp } from '../custom/programmable-units/error/programError';
-import { GenericAbstractSerializableSourceVoque } from '../example-programs/abstractSerializableVoictent';
-import { buildAddMetadataForSerialization } from '../example-programs/buildAddMetadataForSerialization';
-import { SerializableVoictent } from '../example-programs/serializableVoictent';
-import { ProgramFileCache } from '../utilities/programFileCache';
+} from '../../core/engine/voictent2';
+import { GenericVoque } from '../../core/engine/voque';
+import { ProgramErrorGepp } from '../programmable-units/error/programError';
+import { GenericAbstractSerializableSourceVoque } from '../../example-programs/abstractSerializableVoictent';
+import { buildAddMetadataForSerialization } from '../../example-programs/buildAddMetadataForSerialization';
+import { SerializableVoictent } from '../../example-programs/serializableVoictent';
+import { ProgramFileCache } from '../../utilities/programFileCache';
 import {
   FileSystemNodeVoictent,
   GenericFileSystemNodeVoque,
-} from '../custom/programmable-units/file/fileSystemNodeVoictent';
+} from '../programmable-units/file/fileSystemNodeVoictent';
 
 type VoqueUnionFromVoictentTuple<
   TVoictentTuple extends UnsafeVoictent2Tuple,
@@ -307,6 +307,14 @@ const getInferredInMemoryVoictentTuple = (
   return inferredVoictentTuple;
 };
 
+/**
+ * The adapted engine. It abstracts the core engine's concerns by providing an
+ * easier interface to work with. The types of its other inputs are derived from
+ * the type of the input collection tuple and the input programmed transform
+ * tuple.
+ *
+ * @readable runAdaptedEngine
+ */
 export const digikikify: Digikikifier = <
   TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,

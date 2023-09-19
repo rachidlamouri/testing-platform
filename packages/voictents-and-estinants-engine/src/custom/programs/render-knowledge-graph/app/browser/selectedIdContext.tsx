@@ -7,6 +7,8 @@ import React, {
 } from 'react';
 
 type SelectedIdCtx = {
+  selectedBoundaryId: string | null;
+  onSelectBoundaryId: (id: string) => void;
   selectedId: string | null;
   onToggleOrSelectId: (id: string) => void;
   onSelectId: (id: string) => void;
@@ -14,6 +16,8 @@ type SelectedIdCtx = {
 };
 
 export const SelectedIdContext = createContext<SelectedIdCtx>({
+  selectedBoundaryId: null,
+  onSelectBoundaryId: () => {},
   selectedId: null,
   onToggleOrSelectId: () => {},
   onSelectId: () => {},
@@ -23,10 +27,15 @@ export const SelectedIdContext = createContext<SelectedIdCtx>({
 export const SelectedIdProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
+  const [selectedGraphId, setSelectedGraphId] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   return (
     <SelectedIdContext.Provider
       value={{
+        selectedBoundaryId: selectedGraphId,
+        onSelectBoundaryId: (id): void => {
+          setSelectedGraphId(id);
+        },
         selectedId,
         onToggleOrSelectId: (id): void => {
           if (id === selectedId) {

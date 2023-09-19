@@ -57,6 +57,7 @@ export const constructDynamicIndexFile = buildEstinant({
           .map(({ partitionFact, variableName }) => {
             const entry = [
               '{',
+              `  boundaryId: "${partitionFact.boundary.zorn.forMachine}",`,
               `  label: "${partitionFact.boundary.displayName}",`,
               `  Component: ${variableName},`,
               '},',

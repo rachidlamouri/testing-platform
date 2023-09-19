@@ -1,5 +1,12 @@
 import { PropsWithChildren } from 'react';
 
+export type DirectoryFactProps = PropsWithChildren<{
+  factId: string;
+  boundaryId: string;
+  directoryPath: string;
+  isBoundaryDirectory: boolean;
+}>;
+
 export type FileFactProps = PropsWithChildren<{
   factId: string;
   fileName: string;

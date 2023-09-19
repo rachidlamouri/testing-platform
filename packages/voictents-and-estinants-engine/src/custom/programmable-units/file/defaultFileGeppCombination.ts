@@ -3,7 +3,7 @@ import {
   Gepp,
   GeppCombination,
 } from '../../../core/engine-shell/voictent/gepp';
-import { buildGeppCombination } from '../../../type-script-adapter/digikikify';
+import { buildGeppCombination } from '../../adapter/digikikify';
 import { BASH_FILE_GEPP } from '../bash-file/bashFile';
 import { HTML_FILE_GEPP } from '../html-file/htmlFile';
 import { YAML_FILE_GEPP } from '../yaml-file/yamlFile';

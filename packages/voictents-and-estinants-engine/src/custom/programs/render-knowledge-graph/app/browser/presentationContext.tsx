@@ -13,6 +13,7 @@ export type ProvidedPresentationContext = {
     stroke?: string;
   };
   styleByElement?: {
+    group?: ElementStyle;
     path?: ElementStyle;
     polygon?: ElementStyle;
   };
@@ -28,6 +29,7 @@ export const PresentationContext = createContext<ProvidedPresentationContext>({
 export type ConsumedPresentationContext = {
   style: ElementStyle;
   styleByElement: {
+    group?: ElementStyle;
     path: ElementStyle;
     polygon: ElementStyle;
   };

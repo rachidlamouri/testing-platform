@@ -45,7 +45,10 @@ export const typeScriptFileHasCanonicalDeclarationRule =
     },
   });
 
-// TODO: add description
+/**
+ * Asserts that a TypeScript file has a top level declaration whose identifier
+ * name matches the file name regardless of casing
+ */
 export const assertTypeScriptFileHasCanonicalDeclaration = buildEstinant({
   name: ESTINANT_NAME,
 })

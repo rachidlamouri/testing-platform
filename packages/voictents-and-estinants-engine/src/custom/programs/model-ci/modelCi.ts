@@ -1,8 +1,5 @@
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import {
-  buildVoictentByGepp,
-  digikikify,
-} from '../../../type-script-adapter/digikikify';
+import { buildVoictentByGepp, digikikify } from '../../adapter/digikikify';
 import {
   EngineFunctionConfigurationVoque,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
@@ -32,6 +29,7 @@ import { ProgramFileCache } from '../../../utilities/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
@@ -74,6 +72,7 @@ digikikify({
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
+    parseTypeScriptFileComments,
     getTypeScriptFileImportList,
     getCommentedProgramBodyDeclarationList,
 

@@ -55,7 +55,11 @@ const gatherCollection: Estinant2<
   },
 };
 
-// TODO: debug the program snapshot for this one. The output collection appears to be out of the expected order (1, 2). Which is ok, but I want to know why.
+/**
+ * Tests joining each item in the left collection to the entire right collection
+ *
+ * @todo debug the program snapshot for this one. The output collection appears to be out of the expected order (1, 2). Which is ok, but I want to know why.
+ */
 digikikify2({
   inputVoictentList: [
     new InMemoryVoictent<Voictent1Voque>({

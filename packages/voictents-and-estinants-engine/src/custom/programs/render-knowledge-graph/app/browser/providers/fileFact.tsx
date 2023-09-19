@@ -16,14 +16,19 @@ export const FileFact: FunctionComponent<FileFactProps> = ({
   const isImportingNodeSelected = importingNodeIdSet.has(selectedId);
 
   let strokeColor: string;
+  let strokeWidth: string;
   if (isSelected) {
     strokeColor = 'green';
+    strokeWidth = '2';
   } else if (isImportingNodeSelected) {
-    strokeColor = 'blue';
+    strokeColor = 'tomato';
+    strokeWidth = '2';
   } else if (isImportedNodeSelected) {
     strokeColor = 'purple';
+    strokeWidth = '2';
   } else {
     strokeColor = 'gray';
+    strokeWidth = '1';
   }
 
   return (
@@ -37,7 +42,7 @@ export const FileFact: FunctionComponent<FileFactProps> = ({
           path: {
             stroke: strokeColor,
             fill: 'none',
-            strokeWidth: '1',
+            strokeWidth,
           },
         },
       }}
