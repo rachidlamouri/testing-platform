@@ -64,6 +64,7 @@ import {
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import { canonicalDeclarationOmissionList } from '../../programmable-units/type-script-file/canonical-declaration/canonicalDeclarationOmissionList';
+import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -113,6 +114,7 @@ digikikify({
 
     associateTypeScriptFileToTypescriptConfiguration,
     parseTypeScriptFile,
+    parseTypeScriptFileComments,
     getCommentedProgramBodyDeclarationList,
     getTypeScriptFileImportList,
 

@@ -58,12 +58,16 @@ export const reportErrors = buildEstinant({
         );
 
         console.log('  Lint Source');
-        console.log(
-          serialize(lintAssertion.lintSource.zorn.templateValueByKeyPath)
-            .split('\n')
-            .map((line) => `    ${line}`)
-            .join('\n'),
-        );
+        if ('serialized' in lintAssertion.lintSource) {
+          console.log(`    ${lintAssertion.lintSource.serialized}`);
+        } else {
+          console.log(
+            serialize(lintAssertion.lintSource.zorn.templateValueByKeyPath)
+              .split('\n')
+              .map((line) => `    ${line}`)
+              .join('\n'),
+          );
+        }
 
         // TODO: incorporate the program file cache error context filepath
       }
