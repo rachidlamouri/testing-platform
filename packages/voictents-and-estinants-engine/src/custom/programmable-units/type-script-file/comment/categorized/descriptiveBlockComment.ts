@@ -14,6 +14,7 @@ export type DescriptiveBlockComment = {
   zorn: CommentZorn;
   description: string;
   startingLineNumber: number;
+  endingLineNumber: number;
 };
 
 export const { DescriptiveBlockCommentInstance } =
@@ -25,6 +26,7 @@ export const { DescriptiveBlockCommentInstance } =
       'zorn',
       'description',
       'startingLineNumber',
+      'endingLineNumber',
     ] as const satisfies readonly (keyof DescriptiveBlockComment)[],
   })
     .withTypes<
@@ -46,6 +48,7 @@ export const { DescriptiveBlockCommentInstance } =
           zorn: adaptedComment.zorn,
           description,
           startingLineNumber: adaptedComment.startingLineNumber,
+          endingLineNumber: adaptedComment.endingLineNumber,
         } satisfies DescriptiveBlockComment;
       },
     })

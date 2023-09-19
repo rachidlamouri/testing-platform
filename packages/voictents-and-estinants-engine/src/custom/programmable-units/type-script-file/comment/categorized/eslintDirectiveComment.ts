@@ -13,6 +13,7 @@ export type EslintDirectiveComment = {
   zorn: CommentZorn;
   text: string;
   startingLineNumber: number;
+  endingLineNumber: number;
 };
 
 export const { EslintDirectiveCommentInstance } = buildNamedConstructorFunction(
@@ -24,6 +25,7 @@ export const { EslintDirectiveCommentInstance } = buildNamedConstructorFunction(
       'zorn',
       'text',
       'startingLineNumber',
+      'endingLineNumber',
     ] as const satisfies readonly (keyof EslintDirectiveComment)[],
   },
 )
@@ -43,6 +45,7 @@ export const { EslintDirectiveCommentInstance } = buildNamedConstructorFunction(
         zorn: adaptedComment.zorn,
         text: adaptedComment.text,
         startingLineNumber: adaptedComment.startingLineNumber,
+        endingLineNumber: adaptedComment.endingLineNumber,
       } satisfies EslintDirectiveComment;
     },
   })

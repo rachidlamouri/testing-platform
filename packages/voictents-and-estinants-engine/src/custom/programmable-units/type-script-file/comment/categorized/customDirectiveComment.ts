@@ -26,7 +26,9 @@ export type CustomDirectiveComment = {
   zorn: CommentZorn;
   subtypeName: CustomDirectiveTypeName;
   directiveDescription: string;
+  text: string;
   startingLineNumber: number;
+  endingLineNumber: number;
 };
 
 export const { CustomDirectiveCommentInstance } = buildNamedConstructorFunction(
@@ -38,7 +40,9 @@ export const { CustomDirectiveCommentInstance } = buildNamedConstructorFunction(
       'zorn',
       'subtypeName',
       'directiveDescription',
+      'text',
       'startingLineNumber',
+      'endingLineNumber',
     ] as const satisfies readonly (keyof CustomDirectiveComment)[],
   },
 )
@@ -58,7 +62,9 @@ export const { CustomDirectiveCommentInstance } = buildNamedConstructorFunction(
         zorn: adaptedComment.zorn,
         subtypeName,
         directiveDescription: descriptionByDirectiveTypeName[subtypeName],
+        text: adaptedComment.text,
         startingLineNumber: adaptedComment.lineNumber,
+        endingLineNumber: adaptedComment.lineNumber,
       } satisfies CustomDirectiveComment;
     },
   })

@@ -1,6 +1,7 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { IdentifiableProgramBodyStatementNode } from './getIdentifiableProgramBodyStatementNode';
+import { CategorizedComment } from './comment/categorized/categorizedComment';
 
 export type CommentedProgramBodyDeclaration<
   TBodyStatement extends TSESTree.ProgramStatement = TSESTree.ProgramStatement,
@@ -8,6 +9,8 @@ export type CommentedProgramBodyDeclaration<
 > = {
   isCanonical: boolean;
   isDerivative: boolean;
+  comment: CategorizedComment | null;
+  /** @deprecated in favor of "comment" */
   commentText: string | null;
   bodyStatement: TBodyStatement;
   identifiableNode: TIdentifiableNode;
@@ -32,6 +35,7 @@ export const { CommentedProgramBodyDeclarationInstance } =
       // keep this as a multiline list
       'isCanonical',
       'isDerivative',
+      'comment',
       'commentText',
       'bodyStatement',
       'identifiableNode',

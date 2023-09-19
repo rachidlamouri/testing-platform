@@ -2,7 +2,9 @@ import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinV
 import { EngineFunctionConfiguration } from '../engine-program/engineFunctionConfiguration';
 import { TypeScriptFile } from '../type-script-file/typeScriptFile';
 
-// TODO: this is no longer a "File" so change the name accordingly
+/**
+ * A file that calls the core engine or the adapted engine
+ */
 export type EngineProgramFile = {
   zorn: string;
   file: TypeScriptFile;

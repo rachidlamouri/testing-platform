@@ -14,6 +14,7 @@ export type UnknownComment = SimplifyN<
       typeName: CategorizedCommentTypeName.Unknown;
       zorn: CommentZorn;
       startingLineNumber: number;
+      endingLineNumber: number;
     },
     UnknownCommentConstructorInput,
   ]
@@ -26,6 +27,7 @@ export const { UnknownCommentInstance } = buildNamedConstructorFunction({
     'typeName',
     'zorn',
     'startingLineNumber',
+    'endingLineNumber',
     'adaptedComment',
   ] as const satisfies readonly (keyof UnknownComment)[],
 })
@@ -44,6 +46,7 @@ export const { UnknownCommentInstance } = buildNamedConstructorFunction({
         typeName: CategorizedCommentTypeName.Unknown,
         zorn: adaptedComment.zorn,
         startingLineNumber: adaptedComment.startingLineNumber,
+        endingLineNumber: adaptedComment.endingLineNumber,
         adaptedComment,
       } satisfies UnknownComment;
     },

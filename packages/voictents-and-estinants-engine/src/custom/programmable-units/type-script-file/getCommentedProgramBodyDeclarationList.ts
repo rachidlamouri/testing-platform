@@ -1,8 +1,3 @@
-import {
-  AST_TOKEN_TYPES,
-  TSESTree,
-} from '@typescript-eslint/typescript-estree';
-import * as commentParser from 'comment-parser';
 import Case from 'case';
 import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
 import {
@@ -17,6 +12,11 @@ import {
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { CommentedProgramBodyDeclarationInstance } from './commentedProgramBodyDeclaration';
 import { TypeScriptFileVoque, TYPE_SCRIPT_FILE_GEPP } from './typeScriptFile';
+import {
+  FILE_PARSED_COMMENT_GROUP_GEPP,
+  FileParsedCommentGroupVoque,
+} from './fileParsedCommentGroup';
+import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 
 const allowedDerivativePrefixSet = [
   // keep as multiline list
@@ -46,10 +46,19 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
       return file.hubblepup.filePath.serialized;
     },
   })
+  .andFromHubblepupTuple2<FileParsedCommentGroupVoque, [string]>({
+    gepp: FILE_PARSED_COMMENT_GROUP_GEPP,
+    framate: (parsedFile) => {
+      return [parsedFile.hubblepup.filePath];
+    },
+    croard: (file) => {
+      return file.hubblepup.filePath;
+    },
+  })
   .toHubblepup2<FileCommentedProgramBodyDeclarationGroupVoque>({
     gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   })
-  .onPinbe((parsedTypeScriptFile, [typescriptFile]) => {
+  .onPinbe((parsedTypeScriptFile, [typescriptFile], [commentGroup]) => {
     const kebabExtensionlessName = Case.kebab(
       typescriptFile.filePath.name.extensionless,
     );
@@ -60,41 +69,27 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
       }),
     );
 
-    const commentList: TSESTree.Comment[] =
-      parsedTypeScriptFile.program.comments ?? [];
+    const commentList = commentGroup.list;
 
     const programBodyStatementList = parsedTypeScriptFile.program.body;
 
     const declarationList = programBodyStatementList.map(
       (programBodyStatement) => {
-        const comment = commentList.find((nextComment) => {
-          return (
-            programBodyStatement.loc.start.line === nextComment.loc.end.line + 1
-          );
-        });
+        const comment =
+          commentList.find((nextComment) => {
+            return (
+              programBodyStatement.loc.start.line ===
+              nextComment.endingLineNumber + 1
+            );
+          }) ?? null;
+
+        const commentText =
+          comment?.typeName === CategorizedCommentTypeName.Descriptive
+            ? comment.description
+            : null;
 
         const identifiableNode =
           getIdentifiableProgramBodyStatementNode(programBodyStatement);
-
-        let commentText: string | null;
-        if (comment === undefined) {
-          commentText = null;
-        } else if (comment.type === AST_TOKEN_TYPES.Block) {
-          const originalValue = `/*${comment.value}*/`;
-
-          const parsedCommentBlockList = commentParser.parse(originalValue);
-          // TODO: do we only care about the first comment block? what if there are 2?
-          if (parsedCommentBlockList.length === 0) {
-            // Note: I don't fully understand comment parser's output, so I don't know when this would happen
-            throw Error('Unhandled empty parsed comment');
-          }
-
-          const [parsedCommentBlock] = parsedCommentBlockList;
-
-          commentText = parsedCommentBlock.description;
-        } else {
-          commentText = comment.value;
-        }
 
         const kebabIdentifierName =
           identifiableNode !== null
@@ -113,6 +108,7 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
         return new CommentedProgramBodyDeclarationInstance({
           isCanonical,
           isDerivative,
+          comment,
           commentText,
           bodyStatement: programBodyStatement,
           identifiableNode,

@@ -14,6 +14,7 @@ export type AdaptedLineComment = {
   text: string;
   lineNumber: number;
   startingLineNumber: number;
+  endingLineNumber: number;
   rawComment: TSESTree.LineComment;
 };
 
@@ -26,6 +27,7 @@ export const { AdaptedLineCommentInstance } = buildNamedConstructorFunction({
     'text',
     'lineNumber',
     'startingLineNumber',
+    'endingLineNumber',
     'rawComment',
   ] as const satisfies readonly (keyof AdaptedLineComment)[],
 })
@@ -48,6 +50,7 @@ export const { AdaptedLineCommentInstance } = buildNamedConstructorFunction({
         text: rawComment.value.slice(1),
         lineNumber,
         startingLineNumber: lineNumber,
+        endingLineNumber: lineNumber,
         rawComment,
       } satisfies AdaptedLineComment;
     },

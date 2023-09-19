@@ -20,6 +20,7 @@ export type InformativeComment = {
   subtypeName: InformativeCommentTypeName;
   text: string;
   startingLineNumber: number;
+  endingLineNumber: number;
 };
 
 export const { InformativeCommentInstance } = buildNamedConstructorFunction({
@@ -31,6 +32,7 @@ export const { InformativeCommentInstance } = buildNamedConstructorFunction({
     'subtypeName',
     'text',
     'startingLineNumber',
+    'endingLineNumber',
   ] as const satisfies readonly (keyof InformativeComment)[],
 })
   .withTypes<InformativeCommentConstructorInput, InformativeComment>({
@@ -50,6 +52,7 @@ export const { InformativeCommentInstance } = buildNamedConstructorFunction({
         subtypeName,
         text: adaptedComment.text,
         startingLineNumber: adaptedComment.startingLineNumber,
+        endingLineNumber: adaptedComment.endingLineNumber,
       } satisfies InformativeComment;
     },
   })
