@@ -9,7 +9,7 @@ import {
   InMemoryVoque,
 } from '../../../core/engine/inMemoryVoque';
 import { SpreadN } from '../../../utilities/spreadN';
-import { GenericOdeshin2 } from '../../../adapter/odeshin2';
+import { GenericOdeshin2 } from '../../../adapter/odeshin/odeshin2';
 import { FileSystemNode } from './fileSystemNode';
 import { BaseInMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 

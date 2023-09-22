@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 import {
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
   EngineFunctionConfigurationVoque,
@@ -48,7 +48,7 @@ export const filterEngineProgramFile = buildEstinant({
       // TODO: this code is brittle. Tie it back to the source file if possible
       if (
         typeScriptFile.filePath.serialized ===
-        'packages/voictents-and-estinants-engine/src/adapter/digikikify.ts'
+        'packages/voictents-and-estinants-engine/src/adapter/engine/digikikify.ts'
       ) {
         return [];
       }

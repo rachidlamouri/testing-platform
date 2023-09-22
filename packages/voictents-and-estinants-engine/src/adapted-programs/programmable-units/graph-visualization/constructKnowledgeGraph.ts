@@ -10,7 +10,7 @@ import {
   DirectedGraphMetadataByIdVoque,
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
 } from './directedGraphMetadataById';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 
 const KNOWLEDGE_GRAPH_FILE_PATH =
   'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/knowledgeGraphTemplate.html';

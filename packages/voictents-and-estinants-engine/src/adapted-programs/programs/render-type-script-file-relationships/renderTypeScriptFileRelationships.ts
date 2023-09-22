@@ -1,4 +1,7 @@
-import { buildVoictentByGepp, digikikify } from '../../../adapter/digikikify';
+import {
+  buildVoictentByGepp,
+  digikikify,
+} from '../../../adapter/engine/digikikify';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {

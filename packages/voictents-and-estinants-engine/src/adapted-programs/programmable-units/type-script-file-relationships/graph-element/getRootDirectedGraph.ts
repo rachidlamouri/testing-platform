@@ -33,7 +33,7 @@ import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from '../rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
 import { getTextDigest } from '../../../../utilities/getTextDigest';
 import { DirectedCluster } from '../../graph-visualization/directed-graph/directedSubgraph';
-import { OdeshinZorn } from '../../../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
 
 /**
  * Converts all TypeScript relationship metadata into a directed graph

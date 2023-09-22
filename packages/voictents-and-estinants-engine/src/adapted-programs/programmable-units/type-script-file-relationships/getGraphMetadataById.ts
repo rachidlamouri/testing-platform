@@ -25,7 +25,7 @@ import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   DirectedGraphMetadataById,
 } from '../graph-visualization/directedGraphMetadataById';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 
 /**
  * Converts all TypeScript relationship metadata into a format that can be used

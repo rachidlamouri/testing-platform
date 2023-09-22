@@ -65,9 +65,18 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
     directoryPath: 'packages/voictents-and-estinants-engine/src/core',
   }),
   new BoundaryConfigurationInstance({
-    // TODO: move to src/adapter
     displayName: 'Adapted Engine',
-    directoryPath: 'packages/voictents-and-estinants-engine/src/adapter',
+    directoryPath: 'packages/voictents-and-estinants-engine/src/adapter/engine',
+  }),
+  new BoundaryConfigurationInstance({
+    displayName: 'Estinant Builder',
+    directoryPath:
+      'packages/voictents-and-estinants-engine/src/adapter/estinant-builder',
+  }),
+  new BoundaryConfigurationInstance({
+    displayName: 'Odeshin',
+    directoryPath:
+      'packages/voictents-and-estinants-engine/src/adapter/odeshin',
   }),
   new BoundaryConfigurationInstance({
     // TODO: split these up by program and shared boundaries

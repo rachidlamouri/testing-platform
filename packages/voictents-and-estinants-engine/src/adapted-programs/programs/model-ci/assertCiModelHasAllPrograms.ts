@@ -12,7 +12,7 @@ import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
   EngineProgramLocator3Voque,
 } from '../../programmable-units/engine-program/engineProgramLocator3';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 
 const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
 type EstinantName = typeof ESTINANT_NAME;

@@ -29,7 +29,7 @@ import {
   ProgramEstinantOutputRelationshipInstance,
 } from './input-output/programEstinantOutputRelationship';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 
 /**
  * Joins the program locator to its transforms in order to

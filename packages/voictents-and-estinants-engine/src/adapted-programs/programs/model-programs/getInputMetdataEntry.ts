@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 import {
   ESTINANT_INPUT_2_GEPP,
   EstinantInput2Voque,

@@ -68,8 +68,8 @@ import {
   EngineVoqueLocator2Instance,
 } from './engineVoqueLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
-import { buildVoictentByGepp } from '../../../adapter/digikikify';
+import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { buildVoictentByGepp } from '../../../adapter/engine/digikikify';
 import { isArrayExpression } from '../../../utilities/type-script-ast/isArrayExpression';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,

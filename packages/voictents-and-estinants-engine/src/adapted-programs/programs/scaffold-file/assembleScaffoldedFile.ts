@@ -1,6 +1,9 @@
 import fs from 'fs';
 import { posix } from 'path';
-import { buildVoictentByGepp, digikikify } from '../../../adapter/digikikify';
+import {
+  buildVoictentByGepp,
+  digikikify,
+} from '../../../adapter/engine/digikikify';
 import {
   SCAFFOLD_CONFIGURATION_GEPP,
   ScaffoldConfiguration,
