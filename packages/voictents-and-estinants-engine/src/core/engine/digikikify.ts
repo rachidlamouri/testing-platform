@@ -43,6 +43,7 @@ import { Tuple } from '../../utilities/semantic-types/tuple';
 import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/rightInputAppreffinge';
 import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
 import { assertIsError } from '../../utilities/assertIsError';
+import { assertNotUndefined } from '../../utilities/assertNotUndefined';
 
 class AggregateEngineError extends Error {
   constructor(errorList: (string | Error)[]) {
@@ -353,7 +354,15 @@ export const digikikify = ({
   }
 
   const addToTabilly = (quirmTuple: QuirmTuple): void => {
-    tabilly.addHubblepupsToVoictents(quirmTuple);
+    quirmTuple.forEach((quirm) => {
+      const voictent = tabilly.get(quirm.gepp);
+      assertNotUndefined(
+        voictent,
+        `Unable to find voictent for gepp: ${quirm.gepp}`,
+      );
+
+      voictent.addHubblepup(quirm.hubblepup);
+    });
 
     if (onHubblepupAddedToVoictents !== undefined) {
       quirmTuple.forEach((quirm) => {
@@ -366,7 +375,11 @@ export const digikikify = ({
     estinant: GenericEstinant2,
     appreffinge: GenericAppreffinge2,
   ): Lanbe => {
-    const voictent = tabilly.getOrInstantiateAndGetVoictent(appreffinge.gepp);
+    const voictent = tabilly.get(appreffinge.gepp);
+    assertNotUndefined(
+      voictent,
+      `Unable to find voictent for gepp: ${appreffinge.gepp}`,
+    );
     const lanbe = getIsWibiz(appreffinge)
       ? voictent.createVoictentLanbe(estinant.name)
       : voictent.createVoictentItemLanbe(estinant.name);
