@@ -87,6 +87,19 @@ import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
 import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
 import { getFileAncestorDirectoryPathSet } from '../../programmable-units/file/getFileAncestorDirectoryPathSet';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
+import {
+  LAYER_CONFIGURATION_GEPP,
+  LAYER_CONFIGURATION_LIST,
+  LayerConfigurationVoque,
+} from './layer/layerConfiguration';
+import { getLayer } from './layer/getLayer';
+import { getLayerListTrie } from './layer/getLayerListTrie';
+import { getLayerTrie } from './layer/getLayerTrie';
+import {
+  LAYER_LIST_TRIE_GEPP,
+  LayerListTrieVoque,
+} from './layer/layerListTrie';
+import { LAYER_TRIE_GEPP, LayerTrieVoque } from './layer/layerTrie';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -115,6 +128,10 @@ digikikify({
     new InMemoryOdeshin3Voictent<BoundaryConfigurationVoque>({
       gepp: BOUNDARY_CONFIGURATION_GEPP,
       initialHubblepupPelueTuple: BOUNDARY_CONFIGURATION_LIST,
+    }),
+    new InMemoryOdeshin3Voictent<LayerConfigurationVoque>({
+      gepp: LAYER_CONFIGURATION_GEPP,
+      initialHubblepupPelueTuple: LAYER_CONFIGURATION_LIST,
     }),
   ] as const,
   fileSystemNodeGeppCombination: {
@@ -150,6 +167,14 @@ digikikify({
     }),
     new FactVoictent(),
     new FileDependencyVoictent(),
+    new InMemoryVoictent<LayerListTrieVoque>({
+      gepp: LAYER_LIST_TRIE_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
+    new InMemoryVoictent<LayerTrieVoque>({
+      gepp: LAYER_TRIE_GEPP,
+      initialHubblepupPelueTuple: [],
+    }),
   ] as const),
   errorGepp: PROGRAM_ERROR_GEPP,
   estinantTuple: [
@@ -164,6 +189,10 @@ digikikify({
 
     filterEngineProgramFile,
     getEngineProgramLocator3,
+
+    getLayer,
+    getLayerListTrie,
+    getLayerTrie,
 
     getBoundaryFromConfiguration,
     getAdaptedProgramBoundary,
