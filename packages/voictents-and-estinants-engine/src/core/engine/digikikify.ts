@@ -1,6 +1,5 @@
 import { Zorn, ZornTuple } from '../../utilities/semantic-types/zorn';
 import { Ajorken } from '../internal/procody/ajorken';
-import { getIsWibiz } from '../engine-shell/appreffinge/appreffinge';
 import {
   Cology,
   CologySet,
@@ -386,7 +385,7 @@ export const digikikify = ({
       voictent,
       `Unable to find voictent for gepp: ${appreffinge.gepp}`,
     );
-    const lanbe = getIsWibiz(appreffinge)
+    const lanbe = appreffinge.isWibiz
       ? voictent.createVoictentLanbe(estinant.name)
       : voictent.createVoictentItemLanbe(estinant.name);
 
