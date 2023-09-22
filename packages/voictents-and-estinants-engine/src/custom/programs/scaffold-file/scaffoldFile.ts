@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { posix } from 'path';
 import Case from 'case';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   FileTypeName,
   SCAFFOLD_CONFIGURATION_GEPP,

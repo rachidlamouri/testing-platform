@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
 import {
   DIRECTORY_GEPP,
   DirectoryVoque,

@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
 import {
   LINT_ASSERTION_GEPP,
   LintAssertion,

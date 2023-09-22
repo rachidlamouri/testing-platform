@@ -1,5 +1,5 @@
 import childProcessUtilities from 'child_process';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { GRAPHVIZ_CODE_GEPP, GraphvizCodeVoque } from './graphvizCode';
 import { SVG_DOCUMENT_GEPP, SvgDocumentVoque } from './svgDocument';
 

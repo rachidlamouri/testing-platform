@@ -1,7 +1,7 @@
-import { GenericIndexedHubblepupTuple } from '../../../core/engine-shell/quirm/hubblepup';
-import { GenericVoque } from '../../../core/engine/voque';
-import { Zorn2, ZornTuple2 } from '../../../utilities/semantic-types/zorn';
-import { SpreadN } from '../../../utilities/spreadN';
+import { GenericIndexedHubblepupTuple } from '../../core/engine-shell/quirm/hubblepup';
+import { GenericVoque } from '../../core/engine/voque';
+import { Zorn2, ZornTuple2 } from '../../utilities/semantic-types/zorn';
+import { SpreadN } from '../../utilities/spreadN';
 import {
   buildInputOutputContextFromRightInputContext,
   InputOutputContext,

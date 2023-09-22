@@ -1,5 +1,5 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../../../adapter/odeshin2';
 import { DIRECTORY_GEPP, DirectoryVoque } from '../../file/directory';
 import { GraphLikeStyle } from '../../graph-visualization/directed-graph/attributeByKeyGSC';
 import { LIMBO_BOUNDARY_ZORN } from './boundaryConfiguration';

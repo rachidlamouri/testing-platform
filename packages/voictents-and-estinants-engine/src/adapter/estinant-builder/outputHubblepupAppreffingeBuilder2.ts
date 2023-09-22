@@ -1,4 +1,4 @@
-import { GenericVoque } from '../../../core/engine/voque';
+import { GenericVoque } from '../../core/engine/voque';
 import {
   buildInputOutputContextFromConstituentResultNormalizer,
   InputOutputContext,
@@ -14,7 +14,7 @@ import {
   GenericAdaptedOutputVickenTuple,
   GenericAdaptedRightInputVickenTuple,
 } from './vicken';
-import { SpreadN } from '../../../utilities/spreadN';
+import { SpreadN } from '../../utilities/spreadN';
 import {
   buildOutputHubblepupTupleAppreffingeBuilder2,
   OutputHubblepupTupleAppreffingeBuilderParent2,

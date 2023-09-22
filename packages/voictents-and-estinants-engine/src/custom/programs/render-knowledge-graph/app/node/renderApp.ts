@@ -1,6 +1,6 @@
 import childProcessUtility from 'child_process';
 import fs from 'fs';
-import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../../adapter/estinant-builder/estinantBuilder';
 import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,

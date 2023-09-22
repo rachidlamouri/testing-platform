@@ -1,5 +1,5 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../../../adapter/odeshin2';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   FileCommentedProgramBodyDeclarationGroupVoque,

@@ -1,5 +1,5 @@
 import { Tuple } from '../../../utilities/semantic-types/tuple';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   EngineEstinant3Voque,
   ENGINE_ESTINANT_3_GEPP,
@@ -29,7 +29,7 @@ import {
   ProgramEstinantOutputRelationshipInstance,
 } from './input-output/programEstinantOutputRelationship';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
-import { OdeshinZorn } from '../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 
 /**
  * Joins the program locator to its transforms in order to

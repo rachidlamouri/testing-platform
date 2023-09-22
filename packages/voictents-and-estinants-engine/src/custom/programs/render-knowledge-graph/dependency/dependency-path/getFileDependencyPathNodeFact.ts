@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../../adapter/estinant-builder/estinantBuilder';
 import {
   BOUNDED_DIRECTORY_GEPP,
   BoundedDirectoryVoque,

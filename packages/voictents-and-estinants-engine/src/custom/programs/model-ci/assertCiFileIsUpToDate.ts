@@ -1,6 +1,6 @@
 import fs from 'fs';
 import assert from 'assert';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   BASH_FILE_GEPP,
   BashFileVoque,
@@ -16,7 +16,7 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
-import { OdeshinZorn } from '../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 
 const ESTINANT_NAME = 'assertCiFileIsUpToDate' as const;
 type EstinantName = typeof ESTINANT_NAME;

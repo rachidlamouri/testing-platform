@@ -6,10 +6,10 @@ import {
   buildOutputHubblepupAppreffingeBuilder2,
   OutputHubblepupAppreffingeBuilderParent2,
 } from './outputHubblepupAppreffingeBuilder2';
-import { GenericVoque } from '../../../core/engine/voque';
+import { GenericVoque } from '../../core/engine/voque';
 import { AdaptedLeftInputVoictentVicken } from './vicken';
 import { PartialLeftInputAppreffinge } from './partialAppreffinge';
-import { SpreadN } from '../../../utilities/spreadN';
+import { SpreadN } from '../../utilities/spreadN';
 import {
   buildRightInputVoictentAppreffingeBuilder2,
   RightInputVoictentAppreffingeBuilderParent2,

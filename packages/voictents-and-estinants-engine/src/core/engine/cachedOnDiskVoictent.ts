@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { posix } from 'path';
-import { Grition } from '../../custom/adapter/grition';
+import { Grition } from '../../adapter/grition';
 import { Gepp } from '../engine-shell/voictent/gepp';
 import { Voque } from './voque';
 import { Voictent2 } from './voictent2';

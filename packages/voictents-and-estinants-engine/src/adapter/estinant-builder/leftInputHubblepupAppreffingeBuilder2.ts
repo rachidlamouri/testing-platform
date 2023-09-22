@@ -1,5 +1,5 @@
-import { GenericIndexedHubblepup } from '../../../core/engine-shell/quirm/hubblepup';
-import { GenericVoque } from '../../../core/engine/voque';
+import { GenericIndexedHubblepup } from '../../core/engine-shell/quirm/hubblepup';
+import { GenericVoque } from '../../core/engine/voque';
 import {
   buildInputOutputContextFromLeftInputContext,
   InstantiationContext,
@@ -14,7 +14,7 @@ import {
   PinbetunfBuilderParent2,
 } from './pinbetunfBuilder2';
 import { AdaptedLeftInputHubblepupVicken } from './vicken';
-import { SpreadN } from '../../../utilities/spreadN';
+import { SpreadN } from '../../utilities/spreadN';
 import {
   buildOutputHubblepupConditionalAppreffingeBuilder,
   OutputHubblepupConditionalAppreffingeBuilderParent,

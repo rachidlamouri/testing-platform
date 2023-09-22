@@ -1,17 +1,17 @@
-import { RightInputAppreffinge } from '../../../core/engine-shell/appreffinge/rightInputAppreffinge';
+import { RightInputAppreffinge } from '../../core/engine-shell/appreffinge/rightInputAppreffinge';
 import {
   Estinant2,
   GenericEstinant2,
-} from '../../../core/engine-shell/estinant/estinant';
-import { GenericTropoignant2 } from '../../../core/engine-shell/estinant/tropoignant';
-import { GenericIndexedHubblepup } from '../../../core/engine-shell/quirm/hubblepup';
-import { GenericLeftInputVicken } from '../../../core/engine-shell/vicken/leftInputVicken';
+} from '../../core/engine-shell/estinant/estinant';
+import { GenericTropoignant2 } from '../../core/engine-shell/estinant/tropoignant';
+import { GenericIndexedHubblepup } from '../../core/engine-shell/quirm/hubblepup';
+import { GenericLeftInputVicken } from '../../core/engine-shell/vicken/leftInputVicken';
 import {
   GenericRightInputHubblepupTupleVicken,
   GenericRightInputVickenTuple,
   GenericRightInputVoictentVicken,
-} from '../../../core/engine-shell/vicken/rightInputVicken';
-import { Zorn, ZornTuple } from '../../../utilities/semantic-types/zorn';
+} from '../../core/engine-shell/vicken/rightInputVicken';
+import { Zorn, ZornTuple } from '../../utilities/semantic-types/zorn';
 import {
   AssemblerContext,
   CoreConstituentOutputEntry,

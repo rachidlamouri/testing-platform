@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   ENGINE_VOQUE_LOCATOR_2_GEPP,
   EngineVoqueLocator2Voque,

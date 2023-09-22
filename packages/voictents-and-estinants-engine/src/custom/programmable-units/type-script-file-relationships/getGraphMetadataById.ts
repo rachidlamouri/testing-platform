@@ -1,6 +1,6 @@
 import { posix } from 'path';
 import Case from 'case';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   TYPE_SCRIPT_FILE_GEPP,
   TypeScriptFileVoque,
@@ -25,7 +25,7 @@ import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   DirectedGraphMetadataById,
 } from '../graph-visualization/directedGraphMetadataById';
-import { OdeshinZorn } from '../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 
 /**
  * Converts all TypeScript relationship metadata into a format that can be used

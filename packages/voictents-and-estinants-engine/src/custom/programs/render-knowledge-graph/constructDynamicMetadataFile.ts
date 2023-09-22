@@ -1,6 +1,6 @@
 import { namedTypes as n, builders as b } from 'ast-types';
 import * as recast from 'recast';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   CustomDatumTypeName,
   getCustomTypedDatum,

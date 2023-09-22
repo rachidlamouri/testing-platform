@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import {
   SERIALIZED_CI_MODEL_GEPP,

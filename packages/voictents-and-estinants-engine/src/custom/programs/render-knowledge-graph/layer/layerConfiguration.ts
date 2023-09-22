@@ -75,7 +75,7 @@ export const LAYER_CONFIGURATION_LIST: LayerConfiguration[] = [
     sortOrder: 2,
   }),
   new LayerConfigurationInstance({
-    directoryPath: 'packages/voictents-and-estinants-engine/src/custom/adapter',
+    directoryPath: 'packages/voictents-and-estinants-engine/src/adapter',
     displayName: 'Adapter Layer',
     sortOrder: 3,
   }),

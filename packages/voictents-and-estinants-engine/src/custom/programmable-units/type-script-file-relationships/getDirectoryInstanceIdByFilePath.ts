@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { DIRECTORY_GEPP, DirectoryVoque } from '../file/directory';
 import {
   DIRECTORY_INSTANCE_ID_BY_FILE_PATH_GEPP,

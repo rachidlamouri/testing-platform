@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImportListVoque,
@@ -28,7 +28,7 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../error/programError';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { OdeshinZorn } from '../../../../adapter/odeshin2';
 
 const ESTINANT_NAME = 'getInitialEdgeMetadata' as const;
 type EstinantName = typeof ESTINANT_NAME;

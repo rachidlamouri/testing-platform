@@ -1,6 +1,6 @@
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../../../adapter/odeshin2';
 import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,

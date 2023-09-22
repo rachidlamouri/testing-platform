@@ -1,5 +1,5 @@
 import { hasOneElement } from '../../../../utilities/hasOneElement';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
 import { LAYER_LIST_TRIE_GEPP, LayerListTrieVoque } from './layerListTrie';
 import { LAYER_TRIE_GEPP, LayerTrie, LayerTrieVoque } from './layerTrie';
 

@@ -1,5 +1,5 @@
 import { ComplexMap } from '../../../../utilities/complexMap';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
 import { PartitionFact } from '../partition-fact/partitionFact';
 import {
   FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,

@@ -1,4 +1,4 @@
-import { buildVoictentByGepp, digikikify } from '../../adapter/digikikify';
+import { buildVoictentByGepp, digikikify } from '../../../adapter/digikikify';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   FileSystemObjectEnumeratorConfigurationVoque,

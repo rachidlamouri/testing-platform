@@ -1,6 +1,6 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import Case from 'case';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
   EngineProgramFile,
@@ -68,8 +68,8 @@ import {
   EngineVoqueLocator2Instance,
 } from './engineVoqueLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
-import { OdeshinZorn } from '../../adapter/odeshin2';
-import { buildVoictentByGepp } from '../../adapter/digikikify';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
+import { buildVoictentByGepp } from '../../../adapter/digikikify';
 import { isArrayExpression } from '../../../utilities/type-script-ast/isArrayExpression';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,

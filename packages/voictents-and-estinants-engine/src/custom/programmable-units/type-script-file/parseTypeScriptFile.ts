@@ -1,7 +1,7 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import fs from 'fs';
 import * as parser from '@typescript-eslint/typescript-estree';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
   TypeScriptFileConfigurationVoque,

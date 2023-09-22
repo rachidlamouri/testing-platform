@@ -1,6 +1,6 @@
 import * as recast from 'recast';
 import Case from 'case';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,
@@ -96,7 +96,10 @@ export const constructDynamicIndexFile = buildEstinant({
         const partitionList = partitionFactListByLayerZorn.get(
           layer.zorn.forHuman,
         );
-        assertNotUndefined(partitionList);
+        assertNotUndefined(
+          partitionList,
+          `Unable to find partition list for layer: ${layer.displayName}`,
+        );
 
         const navigationPartitionList =
           partitionList.map<ModifiedNavigationPartition>((partitionFact) => {

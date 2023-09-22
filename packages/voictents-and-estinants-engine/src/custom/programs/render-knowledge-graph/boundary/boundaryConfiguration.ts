@@ -67,7 +67,7 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
   new BoundaryConfigurationInstance({
     // TODO: move to src/adapter
     displayName: 'Adapted Engine',
-    directoryPath: 'packages/voictents-and-estinants-engine/src/custom/adapter',
+    directoryPath: 'packages/voictents-and-estinants-engine/src/adapter',
   }),
   new BoundaryConfigurationInstance({
     // TODO: split these up by program and shared boundaries

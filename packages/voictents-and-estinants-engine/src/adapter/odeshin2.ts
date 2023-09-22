@@ -1,4 +1,4 @@
-import { StringZorn, UnsafeZorn2 } from '../../utilities/semantic-types/zorn';
+import { StringZorn, UnsafeZorn2 } from '../utilities/semantic-types/zorn';
 
 export type OdeshinZorn = StringZorn | UnsafeZorn2;
 

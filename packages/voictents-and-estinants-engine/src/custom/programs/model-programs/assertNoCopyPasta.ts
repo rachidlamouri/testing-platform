@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   ENGINE_ESTINANT_3_GEPP,
   EngineEstinant3Voque,

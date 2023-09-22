@@ -1,8 +1,8 @@
 import { getTextDigest } from '../../../utilities/getTextDigest';
 import { getZorn } from '../../../utilities/getZorn';
 import { isNotNull } from '../../../utilities/isNotNull';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
-import { OdeshinZorn } from '../../adapter/odeshin2';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { OdeshinZorn } from '../../../adapter/odeshin2';
 import {
   ENGINE_ESTINANT_3_GEPP,
   EngineEstinant3Voque,
