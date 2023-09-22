@@ -7,7 +7,7 @@ const LAYER_ZORN_TEMPLATE = [
   'directoryPath',
   'displayName',
 ] as const satisfies GenericZorn2Template;
-export type LayerZornTemplate = typeof LAYER_ZORN_TEMPLATE;
+type LayerZornTemplate = typeof LAYER_ZORN_TEMPLATE;
 export class LayerZorn extends Zorn2<LayerZornTemplate> {
   get rawTemplate(): LayerZornTemplate {
     return LAYER_ZORN_TEMPLATE;

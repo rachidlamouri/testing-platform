@@ -29,7 +29,7 @@ export type NavigationLayer = {
   partitionList: NavigationPartition[];
 };
 
-export type PartitionByBoundaryId = Map<string, NavigationPartition>;
+type PartitionByBoundaryId = Map<string, NavigationPartition>;
 
 export type GeneratedIndex = {
   navigationList: NavigationLayer[];

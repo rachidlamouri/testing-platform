@@ -21,7 +21,7 @@ export type LayerConfiguration = SimplifyN<
   ]
 >;
 
-export const { LayerConfigurationInstance } = buildNamedConstructorFunction({
+const { LayerConfigurationInstance } = buildNamedConstructorFunction({
   constructorName: 'LayerConfigurationInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
