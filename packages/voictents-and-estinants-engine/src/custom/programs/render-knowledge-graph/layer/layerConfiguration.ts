@@ -76,7 +76,7 @@ export const LAYER_CONFIGURATION_LIST: LayerConfiguration[] = [
   }),
   new LayerConfigurationInstance({
     directoryPath: 'packages/voictents-and-estinants-engine/src/custom/adapter',
-    displayName: 'Adapter',
+    displayName: 'Adapter Layer',
     sortOrder: 3,
   }),
   new LayerConfigurationInstance({
@@ -93,7 +93,7 @@ export const LAYER_CONFIGURATION_LIST: LayerConfiguration[] = [
   }),
   new LayerConfigurationInstance({
     directoryPath: 'packages/voictents-and-estinants-engine/src/utilities',
-    displayName: 'Agnostic Layer',
+    displayName: 'Layer-Agnostic ... Layer',
     sortOrder: 6,
   }),
 ];
