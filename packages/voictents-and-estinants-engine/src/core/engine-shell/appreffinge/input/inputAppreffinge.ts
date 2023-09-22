@@ -1,6 +1,6 @@
 import { GenericLeftInputAppreffinge } from './leftInputAppreffinge';
-import { GenericRightInputAppreffinge } from './rightInputAppreffinge';
+import { GenericRightInputAppreffinge } from './right/rightInputAppreffinge';
 
-export type GenericAppreffinge2 =
+export type GenericInputAppreffinge2 =
   | GenericLeftInputAppreffinge
   | GenericRightInputAppreffinge;

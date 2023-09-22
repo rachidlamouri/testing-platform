@@ -1,4 +1,4 @@
-import { GenericLeftInputVicken } from '../vicken/leftInputVicken';
+import { GenericLeftInputVicken } from '../../vicken/leftInputVicken';
 
 export type LeftInputAppreffinge<
   TLeftInputVicken extends GenericLeftInputVicken,

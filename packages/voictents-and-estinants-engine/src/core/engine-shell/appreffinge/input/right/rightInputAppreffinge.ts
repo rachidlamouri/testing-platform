@@ -3,10 +3,10 @@ import {
   GenericRightInputHubblepupTupleVicken,
   GenericRightInputVicken,
   GenericRightInputVickenTuple,
-} from '../vicken/rightInputVicken';
+} from '../../../vicken/rightInputVicken';
 import { Croader3 } from './croarder';
 import { Framation3 } from './framation';
-import { GenericLeftInputVicken } from '../vicken/leftInputVicken';
+import { GenericLeftInputVicken } from '../../../vicken/leftInputVicken';
 
 export type RightInputAppreffinge<
   TLeftInputVicken extends GenericLeftInputVicken,

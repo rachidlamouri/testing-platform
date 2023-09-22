@@ -36,9 +36,9 @@ import { Prected } from '../internal/dreanor/prected';
 import { Procody } from '../internal/procody/procody';
 import { Tabilly } from './tabilly';
 import { GenericVoictent2 } from './voictent2';
-import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
+import { GenericInputAppreffinge2 } from '../engine-shell/appreffinge/input/inputAppreffinge';
 import { Tuple } from '../../utilities/semantic-types/tuple';
-import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/rightInputAppreffinge';
+import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/input/right/rightInputAppreffinge';
 import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
 import { assertIsError } from '../../utilities/assertIsError';
 import { assertNotUndefined } from '../../utilities/assertNotUndefined';
@@ -378,7 +378,7 @@ export const digikikify = ({
 
   const createLanbe2 = (
     estinant: GenericEstinant2,
-    appreffinge: GenericAppreffinge2,
+    appreffinge: GenericInputAppreffinge2,
   ): Lanbe => {
     const voictent = tabilly.get(appreffinge.gepp);
     assertNotUndefined(

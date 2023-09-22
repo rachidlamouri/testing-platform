@@ -1,4 +1,4 @@
-import { RightInputAppreffinge } from '../../../core/engine-shell/appreffinge/rightInputAppreffinge';
+import { RightInputAppreffinge } from '../../../core/engine-shell/appreffinge/input/right/rightInputAppreffinge';
 import {
   Estinant2,
   GenericEstinant2,

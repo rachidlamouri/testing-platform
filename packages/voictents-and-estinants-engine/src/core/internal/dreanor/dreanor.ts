@@ -2,11 +2,11 @@ import { Tuple } from '../../../utilities/semantic-types/tuple';
 import {
   Croader2,
   GenericCroader3,
-} from '../../engine-shell/appreffinge/croarder';
+} from '../../engine-shell/appreffinge/input/right/croarder';
 import {
   Framation2,
   GenericFramation3,
-} from '../../engine-shell/appreffinge/framation';
+} from '../../engine-shell/appreffinge/input/right/framation';
 import { Gepp } from '../../engine-shell/voictent/gepp';
 import {
   GenericVoictentItemLanbe2,

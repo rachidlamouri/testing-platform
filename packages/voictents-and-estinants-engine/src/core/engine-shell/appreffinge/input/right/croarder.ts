@@ -1,6 +1,6 @@
-import { Zorn } from '../../../utilities/semantic-types/zorn';
-import { GenericIndexedHubblepup } from '../hubblepup/hubblepup';
-import { GenericRightInputHubblepupTupleVicken } from '../vicken/rightInputVicken';
+import { Zorn } from '../../../../../utilities/semantic-types/zorn';
+import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
+import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInputVicken';
 
 /**
  * A function that converts a Hubblepup to an identifying Zorn.
