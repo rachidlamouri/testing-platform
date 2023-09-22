@@ -1,5 +1,5 @@
 import { Zorn } from '../../../utilities/semantic-types/zorn';
-import { GenericIndexedHubblepup, Hubblepup } from '../quirm/hubblepup';
+import { GenericIndexedHubblepup, Hubblepup } from '../hubblepup/hubblepup';
 import { GenericRightInputHubblepupTupleVicken } from '../vicken/rightInputVicken';
 
 /**

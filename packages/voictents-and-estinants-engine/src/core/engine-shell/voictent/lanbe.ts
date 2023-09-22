@@ -1,5 +1,5 @@
 import { Simplify } from 'type-fest';
-import { Hubblepup } from '../quirm/hubblepup';
+import { Hubblepup } from '../hubblepup/hubblepup';
 import { GenericVoque, Voque } from '../../engine/voque';
 import { ReferenceTypeName } from './referenceTypeName';
 

@@ -4,7 +4,7 @@ import {
   GenericEstinant2,
 } from '../../../core/engine-shell/estinant/estinant';
 import { GenericTropoignant2 } from '../../../core/engine-shell/estinant/tropoignant';
-import { GenericIndexedHubblepup } from '../../../core/engine-shell/quirm/hubblepup';
+import { GenericIndexedHubblepup } from '../../../core/engine-shell/hubblepup/hubblepup';
 import { GenericLeftInputVicken } from '../../../core/engine-shell/vicken/leftInputVicken';
 import {
   GenericRightInputHubblepupTupleVicken,

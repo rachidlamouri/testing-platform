@@ -1,4 +1,4 @@
-import { GenericIndexedHubblepup } from '../../../core/engine-shell/quirm/hubblepup';
+import { GenericIndexedHubblepup } from '../../../core/engine-shell/hubblepup/hubblepup';
 import { GenericVoque } from '../../../core/engine/voque';
 import {
   buildInputOutputContextFromLeftInputContext,

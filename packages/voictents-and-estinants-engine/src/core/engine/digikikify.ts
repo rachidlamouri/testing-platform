@@ -23,7 +23,7 @@ import {
   GenericIndexedHubblepupTuple,
   Hubblepup,
   HubblepupTuple,
-} from '../engine-shell/quirm/hubblepup';
+} from '../engine-shell/hubblepup/hubblepup';
 import {
   GenericVoictentItemLanbe2,
   Lanbe,
@@ -35,7 +35,6 @@ import { Mabz, MabzEntry } from '../internal/procody/mabz';
 import { Platomity2, Virok, getDreanorTuple } from '../internal/platomity';
 import { Prected } from '../internal/dreanor/prected';
 import { Procody } from '../internal/procody/procody';
-import { Quirm, QuirmTuple } from '../engine-shell/quirm/quirm';
 import { Tabilly } from './tabilly';
 import { GenericVoictent2 } from './voictent2';
 import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
@@ -44,6 +43,13 @@ import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appref
 import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
 import { assertIsError } from '../../utilities/assertIsError';
 import { assertNotUndefined } from '../../utilities/assertNotUndefined';
+
+type Quirm = {
+  gepp: Gepp;
+  hubblepup: Hubblepup;
+};
+
+type QuirmTuple = Tuple<Quirm>;
 
 class AggregateEngineError extends Error {
   constructor(errorList: (string | Error)[]) {

@@ -9,7 +9,7 @@ import {
   ProgramFileCache,
   SerializedHubblepup,
 } from '../utilities/programFileCache';
-import { GenericHubbleup } from '../core/engine-shell/quirm/hubblepup';
+import { GenericHubbleup } from '../core/engine-shell/hubblepup/hubblepup';
 
 type JsonSerializableVoictentConstructorInput<
   TVoque extends GenericAbstractSerializableVoque,

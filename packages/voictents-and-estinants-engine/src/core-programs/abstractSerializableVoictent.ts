@@ -4,7 +4,7 @@ import { Voque } from '../core/engine/voque';
 import {
   GenericHubbleup,
   Hubblepup,
-} from '../core/engine-shell/quirm/hubblepup';
+} from '../core/engine-shell/hubblepup/hubblepup';
 import {
   ProgramFileCache,
   SerializedHubblepup,

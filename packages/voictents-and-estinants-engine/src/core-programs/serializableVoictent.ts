@@ -1,4 +1,4 @@
-import { GenericHubbleup } from '../core/engine-shell/quirm/hubblepup';
+import { GenericHubbleup } from '../core/engine-shell/hubblepup/hubblepup';
 import {
   GenericAbstractSerializableVoque,
   AbstractSerializableVoictent,
