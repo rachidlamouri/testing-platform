@@ -1,6 +1,9 @@
 import { GenericLeftInputAppreffinge } from './leftInputAppreffinge';
 import { GenericRightInputAppreffinge } from './right/rightInputAppreffinge';
 
-export type GenericInputAppreffinge2 =
+/**
+ * An input stream configuration for an estinant
+ */
+export type GenericInputAppreffinge =
   | GenericLeftInputAppreffinge
   | GenericRightInputAppreffinge;

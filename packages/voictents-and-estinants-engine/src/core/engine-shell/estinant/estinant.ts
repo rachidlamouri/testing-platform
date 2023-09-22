@@ -1,7 +1,7 @@
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 
 import { LeftInputAppreffinge } from '../appreffinge/input/leftInputAppreffinge';
-import { OutputAppreffinge } from '../appreffinge/output/outputApreffinge';
+import { OutputAppreffinge } from '../appreffinge/output/outputAppreffinge';
 import { InputVickenTupleToRightInputAppreffingeTuple } from '../appreffinge/input/right/rightInputAppreffinge';
 import { GenericLeftInputVicken } from '../vicken/leftInputVicken';
 import {

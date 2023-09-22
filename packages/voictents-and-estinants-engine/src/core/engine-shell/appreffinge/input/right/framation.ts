@@ -6,7 +6,7 @@ import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInpu
 /**
  * A function that takes the leftmost Hubblepup of a Cology and outputs a Zorn tuple for each of the other members of the Cology
  */
-export type Framation2 = (
+export type Framation = (
   leftIndexedHubblepup: GenericIndexedHubblepup,
 ) => ZornTuple;
 
