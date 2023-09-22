@@ -15,7 +15,7 @@ export const DependencyPathSegmentFact: FunctionComponent<
     color = 'tomato';
     strokeWidth = '2';
   } else if (hasSelectedTail) {
-    color = 'purple';
+    color = '#660033';
     strokeWidth = '2';
   } else {
     color = 'black';

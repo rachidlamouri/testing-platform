@@ -24,7 +24,7 @@ export const FileFact: FunctionComponent<FileFactProps> = ({
     strokeColor = 'tomato';
     strokeWidth = '2';
   } else if (isImportedNodeSelected) {
-    strokeColor = 'purple';
+    strokeColor = '#660033';
     strokeWidth = '2';
   } else {
     strokeColor = 'gray';
