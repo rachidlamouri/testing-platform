@@ -80,20 +80,13 @@ export const LAYER_CONFIGURATION_LIST: LayerConfiguration[] = [
     sortOrder: 3,
   }),
   new LayerConfigurationInstance({
-    directoryPath:
-      'packages/voictents-and-estinants-engine/src/custom/programs',
+    directoryPath: 'packages/voictents-and-estinants-engine/src/custom',
     displayName: 'Adapted Program Layer',
     sortOrder: 4,
   }),
   new LayerConfigurationInstance({
-    directoryPath:
-      'packages/voictents-and-estinants-engine/src/custom/programmable-units',
-    displayName: 'Adapted Program Layer',
-    sortOrder: 5,
-  }),
-  new LayerConfigurationInstance({
     directoryPath: 'packages/voictents-and-estinants-engine/src/utilities',
     displayName: 'Layer-Agnostic ... Layer',
-    sortOrder: 6,
+    sortOrder: 5,
   }),
 ];
