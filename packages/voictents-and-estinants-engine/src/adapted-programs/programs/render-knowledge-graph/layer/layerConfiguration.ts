@@ -69,8 +69,7 @@ export const LAYER_CONFIGURATION_LIST: LayerConfiguration[] = [
     sortOrder: 1,
   }),
   new LayerConfigurationInstance({
-    directoryPath:
-      'packages/voictents-and-estinants-engine/src/example-programs',
+    directoryPath: 'packages/voictents-and-estinants-engine/src/core-programs',
     displayName: 'Core Program Layer',
     sortOrder: 2,
   }),

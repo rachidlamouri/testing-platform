@@ -41,13 +41,13 @@ export const CI_MODEL: CiModel = {
         {
           programName: 'test-json-serialization',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/testJsonSerialization.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/testJsonSerialization.ts',
           prefaceDescription: 'Testing JsonSerializableCollection',
         },
         {
           programName: 'test-error-serialization',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/testErrorSerialization.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/testErrorSerialization.ts',
           prefaceDescription: 'Testing ErrorSerializableCollection',
         },
       ],
@@ -58,69 +58,69 @@ export const CI_MODEL: CiModel = {
         {
           programName: 'test-build-add-metadata-for-serialization',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/testBuildAddMetadataForSerialization.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/testBuildAddMetadataForSerialization.ts',
           prefaceDescription:
             'Testing consuming each item in a collection, and "buildAddMetadataForSerialization"',
         },
         {
           programName: 'test-estinant-error',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testEstinantError.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testEstinantError.ts',
           prefaceDescription:
             'Testing that the engine forwards errors to an error collection',
         },
         {
           programName: 'test-voictent-input',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testVoictentInput.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testVoictentInput.ts',
           prefaceDescription: 'Testing consuming a collection as a whole',
         },
         {
           programName: 'test-joining-one-to-one',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testJoiningOneToOne.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToOne.ts',
           prefaceDescription:
             'Testing joining each item in one collection to one item from another collection',
         },
         {
           programName: 'test-joining-one-to-many',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testJoiningOneToMany.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToMany.ts',
           prefaceDescription:
             'Testing joining each item in one collection to multiple items from another',
         },
         {
           programName: 'test-joining-one-to-voictent',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testJoiningOneToVoictent.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToVoictent.ts',
           prefaceDescription:
             'Testing joining each item in one collection the an entire different collection as a whole',
         },
         {
           programName: 'test-joining-voictent-to-voictent',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testJoiningVoictentToVoictent.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningVoictentToVoictent.ts',
           prefaceDescription:
             'Testing joining one collection as a whole to another collection as a whole',
         },
         {
           programName: 'test-releasing-a-left-voictent-multiple-times',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testReleasingALeftVoictentMultipleTimes.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingALeftVoictentMultipleTimes.ts',
           prefaceDescription:
             'Testing a left collection that stops accumulating items for one engine tick',
         },
         {
           programName: 'test-releasing-a-right-voictent-multiple-times',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testReleasingARightVoictentMultipleTimes.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingARightVoictentMultipleTimes.ts',
           prefaceDescription:
             'Testing a right collection that stops accumulating items for one engine tick',
         },
         {
           programName: 'test-untriggered-cology-error',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/engine-behavior/testUntriggeredCologyError.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testUntriggeredCologyError.ts',
           prefaceDescription:
             'Testing that the engine emits an error when a cology is left untriggered',
         },
@@ -132,19 +132,19 @@ export const CI_MODEL: CiModel = {
         {
           programName: 'test-get-type-script-typed-datum',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/testGetTypeScriptTypedDatum.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/testGetTypeScriptTypedDatum.ts',
           prefaceDescription: 'Testing "getTypeScriptTypedDatum"',
         },
         {
           programName: 'test-get-custom-typed-datum',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/testGetCustomTypedDatum.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/testGetCustomTypedDatum.ts',
           prefaceDescription: 'Testing "getCustomTypedDatum"',
         },
         {
           programName: 'test-serialize',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/testSerialize.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/testSerialize.ts',
           prefaceDescription: 'Testing "serialize"',
         },
       ],
@@ -224,7 +224,7 @@ export const CI_MODEL: CiModel = {
         {
           programName: 'test-cached-on-disk-datum',
           programFilePath:
-            'packages/voictents-and-estinants-engine/src/example-programs/testCachedOnDiskDatum.ts',
+            'packages/voictents-and-estinants-engine/src/core-programs/testCachedOnDiskDatum.ts',
           prefaceDescription: 'Perfoming test run of "testCachedOnDiskDatum"',
         },
       ],

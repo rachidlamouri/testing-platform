@@ -148,7 +148,7 @@ digikikify({
           {
             displayName: 'Example Programs',
             directoryPath:
-              'packages/voictents-and-estinants-engine/src/example-programs',
+              'packages/voictents-and-estinants-engine/src/core-programs',
           },
           {
             displayName: 'TypeScript Adapter',

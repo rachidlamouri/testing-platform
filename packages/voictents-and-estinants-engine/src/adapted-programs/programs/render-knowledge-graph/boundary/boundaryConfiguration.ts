@@ -77,8 +77,7 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
   }),
   new BoundaryConfigurationInstance({
     displayName: 'Core Test Programs',
-    directoryPath:
-      'packages/voictents-and-estinants-engine/src/example-programs',
+    directoryPath: 'packages/voictents-and-estinants-engine/src/core-programs',
   }),
   new BoundaryConfigurationInstance({
     displayName: 'Utilities',
