@@ -4,14 +4,6 @@ export type SvgWrapperComponent = React.FunctionComponent<{
   ref: React.ForwardedRef<SVGSVGElement>;
 }>;
 
-export type SvgWrapperComponentMetadata = {
-  Component: SvgWrapperComponent;
-  label: string;
-  boundaryId: string;
-};
-
-export type SvgWrapperComponentMetadataList = SvgWrapperComponentMetadata[];
-
 export type MetadataField = {
   label: string;
   value: string;
@@ -25,3 +17,21 @@ export type Metadata = {
 };
 
 export type MetadataById = Record<string, Metadata>;
+
+export type NavigationPartition = {
+  boundaryId: string;
+  label: string;
+  Component: SvgWrapperComponent;
+};
+
+export type NavigationLayer = {
+  label: string;
+  partitionList: NavigationPartition[];
+};
+
+export type PartitionByBoundaryId = Map<string, NavigationPartition>;
+
+export type GeneratedIndex = {
+  navigationList: NavigationLayer[];
+  partitionByBoundaryId: PartitionByBoundaryId;
+};

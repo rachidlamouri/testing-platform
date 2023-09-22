@@ -30,6 +30,7 @@ export const { LayerInstance } = buildNamedConstructorFunction({
     'zorn',
     'displayName',
     'directory',
+    'sortOrder',
   ] as const satisfies readonly (keyof Layer)[],
 })
   .withTypes<LayerConstructorInput, Layer>({

@@ -18,6 +18,7 @@ import { Boundary, BoundaryZorn } from '../boundary/boundary';
 import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
 import { THEME } from '../theme';
 import { FactTypeName } from '../fact/factTypeName';
+import { Layer } from '../layer/layer';
 
 const PARTITION_FACT_ZORN_TEMPLATE = [
   ['boundary', BoundaryZorn],
@@ -30,6 +31,7 @@ export class PartitionFactZorn extends Zorn2<PartitionFactZornTemplate> {
 }
 
 type PartitionFactConstructorInput = {
+  layer: Layer;
   boundary: Boundary;
   commonBoundaryRoot: CommonBoundaryRoot;
 };
@@ -43,7 +45,7 @@ export type PartitionFact = SimplifyN<
       typeName: FactTypeName.PartitionFact;
       zorn: PartitionFactZorn;
     },
-    Pick<PartitionFactConstructorInput, 'boundary'>,
+    Pick<PartitionFactConstructorInput, 'layer' | 'boundary'>,
     {
       rootGraphLocator: RootGraphLocator;
       directoryPathRelativeToCommonBoundary: string;
@@ -58,6 +60,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
     // keep this as a multiline list
     'typeName',
     'zorn',
+    'layer',
     'boundary',
     'rootGraphLocator',
     'directoryPathRelativeToCommonBoundary',
@@ -73,7 +76,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { boundary, commonBoundaryRoot } = input;
+      const { layer, boundary, commonBoundaryRoot } = input;
 
       const zorn = new PartitionFactZorn({
         boundary: boundary.zorn,
@@ -99,6 +102,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
       return {
         typeName: FactTypeName.PartitionFact,
         zorn,
+        layer,
         boundary,
         rootGraphLocator,
         directoryPathRelativeToCommonBoundary,

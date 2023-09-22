@@ -1,3 +1,5 @@
+import { assertNotNull } from '../../../../utilities/assertNotNull';
+import { isNotNull } from '../../../../utilities/isNotNull';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { BOUNDARY_GEPP, BoundaryVoque } from '../boundary/boundary';
 import {
@@ -9,6 +11,7 @@ import {
   COMMON_BOUNDARY_ROOT_GEPP,
   CommonBoundaryRootVoque,
 } from '../common-boundary-root/commonBoundaryRoot';
+import { LAYER_TRIE_GEPP, LayerTrieVoque } from '../layer/layerTrie';
 import {
   PARTITION_FACT_GEPP,
   PartitionFactInstance,
@@ -24,6 +27,12 @@ export const getBoundaryPartition = buildEstinant({
   .fromHubblepup2<BoundaryVoque>({
     gepp: BOUNDARY_GEPP,
   })
+  .andFromHubblepupTuple2<LayerTrieVoque, ['']>({
+    gepp: LAYER_TRIE_GEPP,
+    // TODO: make a more readable pattern for singleton collections
+    framate: () => [''],
+    croard: () => '',
+  })
   .andFromHubblepupTuple2<CommonBoundaryRootVoque, ['']>({
     gepp: COMMON_BOUNDARY_ROOT_GEPP,
     // TODO: make a more readable pattern for singleton collections
@@ -36,8 +45,19 @@ export const getBoundaryPartition = buildEstinant({
   .toHubblepup2<PartitionedBoundaryVoque>({
     gepp: PARTITIONED_BOUNDARY_GEPP,
   })
-  .onPinbe((boundary, [commonBoundaryRoot]) => {
+  .onPinbe((boundary, [layerTrie], [commonBoundaryRoot]) => {
+    const layer = layerTrie.find(
+      boundary.directory.directoryPath.partList,
+      isNotNull,
+    );
+
+    assertNotNull(
+      layer,
+      `Unable to find layer for boundary: ${boundary.displayName}`,
+    );
+
     const partitionFact = new PartitionFactInstance({
+      layer,
       boundary,
       commonBoundaryRoot,
     });

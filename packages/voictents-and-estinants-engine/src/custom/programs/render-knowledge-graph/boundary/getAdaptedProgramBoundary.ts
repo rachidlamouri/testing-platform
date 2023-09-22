@@ -36,7 +36,7 @@ export const getAdaptedProgramBoundary = buildEstinant({
 
     return [
       new BoundaryInstance({
-        displayName: `Adapted Program: ${programLocator.programName}`,
+        displayName: programLocator.programName,
         directory,
       }),
     ];

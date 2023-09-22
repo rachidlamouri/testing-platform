@@ -6,6 +6,7 @@ import { LayerZorn } from './layerZorn';
 type LayerConfigurationConstructorInput = {
   directoryPath: string;
   displayName: string;
+  sortOrder: number;
 };
 
 /**
@@ -27,6 +28,7 @@ export const { LayerConfigurationInstance } = buildNamedConstructorFunction({
     'zorn',
     'directoryPath',
     'displayName',
+    'sortOrder',
   ] as const satisfies readonly (keyof LayerConfiguration)[],
 })
   .withTypes<LayerConfigurationConstructorInput, LayerConfiguration>({
@@ -64,14 +66,34 @@ export const LAYER_CONFIGURATION_LIST: LayerConfiguration[] = [
   new LayerConfigurationInstance({
     directoryPath: 'packages/voictents-and-estinants-engine/src/core',
     displayName: 'Core Layer',
+    sortOrder: 1,
+  }),
+  new LayerConfigurationInstance({
+    directoryPath:
+      'packages/voictents-and-estinants-engine/src/example-programs',
+    displayName: 'Core Program Layer',
+    sortOrder: 2,
   }),
   new LayerConfigurationInstance({
     directoryPath: 'packages/voictents-and-estinants-engine/src/custom/adapter',
-    displayName: 'Adapter Layer',
+    displayName: 'Adapter',
+    sortOrder: 3,
   }),
   new LayerConfigurationInstance({
     directoryPath:
       'packages/voictents-and-estinants-engine/src/custom/programs',
-    displayName: 'Program Layer',
+    displayName: 'Adapted Program Layer',
+    sortOrder: 4,
+  }),
+  new LayerConfigurationInstance({
+    directoryPath:
+      'packages/voictents-and-estinants-engine/src/custom/programmable-units',
+    displayName: 'Adapted Program Layer',
+    sortOrder: 5,
+  }),
+  new LayerConfigurationInstance({
+    directoryPath: 'packages/voictents-and-estinants-engine/src/utilities',
+    displayName: 'Agnostic Layer',
+    sortOrder: 6,
   }),
 ];

@@ -1,18 +1,29 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { useGeneratedMetadata } from '../generatedMetadataContext';
+import { useSelectedIdContext } from '../selectedIdContext';
 
 export type NavigationProps = {
   panelWidth: number;
-  selectedIndex: number;
-  onIndexSelected: (index: number, boundaryId: string) => void;
 };
 
 export const Navigation: FunctionComponent<NavigationProps> = ({
   panelWidth,
-  selectedIndex,
-  onIndexSelected,
 }) => {
-  const { componentMetadataList } = useGeneratedMetadata();
+  const { generatedIndex } = useGeneratedMetadata();
+
+  const { selectedBoundaryId, onSelectBoundaryId } = useSelectedIdContext();
+
+  useEffect(() => {
+    if (generatedIndex !== null) {
+      onSelectBoundaryId(
+        generatedIndex.navigationList[0].partitionList[0].boundaryId,
+      );
+    }
+  }, [generatedIndex]);
+
+  if (generatedIndex === null) {
+    return null;
+  }
 
   return (
     <div
@@ -25,22 +36,48 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
         width: panelWidth,
       }}
     >
-      {(componentMetadataList ?? []).map((componentMetadata, index) => {
+      {(generatedIndex.navigationList ?? []).map((layer, layerIndex) => {
         return (
-          <button
-            key={componentMetadata.label}
+          <div
+            key={layerIndex}
             style={{
-              backgroundColor: index === selectedIndex ? '5e97ff' : undefined,
-              marginBottom: '8px',
-              outline: 'none',
-              cursor: 'pointer',
-            }}
-            onClick={(): void => {
-              onIndexSelected(index, componentMetadata.boundaryId);
+              marginBottom: '4px',
             }}
           >
-            {componentMetadata.label}
-          </button>
+            <h2
+              key={`layer/${layerIndex}/${layer.label}`}
+              style={{
+                margin: 0,
+                marginBottom: '4px',
+                fontSize: '20px',
+              }}
+            >
+              {layer.label}
+            </h2>
+            {layer.partitionList.map((partition, partitionIndex) => {
+              return (
+                <button
+                  key={`partition/${partitionIndex}/${partition.label}`}
+                  style={{
+                    backgroundColor:
+                      partition.boundaryId === selectedBoundaryId
+                        ? '5e97ff'
+                        : undefined,
+                    marginBottom: '8px',
+                    outline: 'none',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    width: '100%',
+                  }}
+                  onClick={(): void => {
+                    onSelectBoundaryId(partition.boundaryId);
+                  }}
+                >
+                  {partition.label}
+                </button>
+              );
+            })}
+          </div>
         );
       })}
     </div>

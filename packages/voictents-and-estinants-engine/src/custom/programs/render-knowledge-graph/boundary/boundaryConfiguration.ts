@@ -61,12 +61,12 @@ export type BoundaryConfigurationVoque = InMemoryOdeshin3Voque<
 
 export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
   new BoundaryConfigurationInstance({
-    displayName: 'Core Layer',
+    displayName: 'Core Engine',
     directoryPath: 'packages/voictents-and-estinants-engine/src/core',
   }),
   new BoundaryConfigurationInstance({
     // TODO: move to src/adapter
-    displayName: 'Adapter Layer',
+    displayName: 'Adapted Engine',
     directoryPath: 'packages/voictents-and-estinants-engine/src/custom/adapter',
   }),
   new BoundaryConfigurationInstance({
