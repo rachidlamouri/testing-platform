@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { useGeneratedMetadata } from '../generatedMetadataContext';
 import { useSelectedIdContext } from '../selectedIdContext';
+import { THEME } from '../theme';
 
 export type NavigationProps = {
   panelWidth: number;
@@ -55,14 +56,18 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
               {layer.label}
             </h2>
             {layer.partitionList.map((partition, partitionIndex) => {
+              const isSelected = partition.boundaryId === selectedBoundaryId;
+
               return (
                 <button
                   key={`partition/${partitionIndex}/${partition.label}`}
                   style={{
-                    backgroundColor:
-                      partition.boundaryId === selectedBoundaryId
-                        ? '5e97ff'
-                        : undefined,
+                    backgroundColor: isSelected
+                      ? THEME.boundary.selected
+                      : undefined,
+                    color: isSelected
+                      ? THEME.partition.selectedForeground
+                      : THEME.colors.edgelord,
                     marginBottom: '8px',
                     outline: 'none',
                     cursor: 'pointer',

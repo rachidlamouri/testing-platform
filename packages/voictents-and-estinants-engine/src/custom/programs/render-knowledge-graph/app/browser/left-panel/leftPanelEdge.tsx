@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { THEME } from '../theme';
 
 export type LeftPanelEdgeProps = {
   onSizeChange: (delta: number) => void;
@@ -49,7 +50,7 @@ export const LeftPanelEdge: React.FunctionComponent<LeftPanelEdgeProps> = ({
       style={{
         width: '2px',
         height: '100%',
-        backgroundColor: '#333',
+        backgroundColor: THEME.colors.edgelord,
       }}
       onMouseDown={(): void => {
         setIsDragging(true);

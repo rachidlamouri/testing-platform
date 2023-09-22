@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { PresentationContext } from '../presentationContext';
 import { useSelectedIdContext } from '../selectedIdContext';
 import { FileDependencyPathSegmentFactProps } from '../factProps';
+import { THEME } from '../theme';
 
 export const DependencyPathSegmentFact: FunctionComponent<
   FileDependencyPathSegmentFactProps
@@ -12,14 +13,14 @@ export const DependencyPathSegmentFact: FunctionComponent<
   let color: string;
   let strokeWidth: string;
   if (selectedId === pathHeadId) {
-    color = 'tomato';
+    color = THEME.file.importsSelectedFile;
     strokeWidth = '2';
   } else if (hasSelectedTail) {
-    color = '#660033';
+    color = THEME.file.importedBySelectedFile;
     strokeWidth = '2';
   } else {
-    color = 'black';
-    strokeWidth = '.5';
+    color = THEME.file.deselected;
+    strokeWidth = '.7';
   }
 
   return (
@@ -36,7 +37,7 @@ export const DependencyPathSegmentFact: FunctionComponent<
           // arrowhead
           polygon: {
             fill: color,
-            stroke: 'gray',
+            stroke: THEME.file.deselected,
           },
         },
       }}
