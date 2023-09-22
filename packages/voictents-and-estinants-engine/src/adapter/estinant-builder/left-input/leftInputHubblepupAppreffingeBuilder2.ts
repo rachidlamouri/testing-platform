@@ -1,36 +1,36 @@
-import { GenericIndexedHubblepup } from '../../core/engine-shell/quirm/hubblepup';
-import { GenericVoque } from '../../core/engine/voque';
+import { GenericIndexedHubblepup } from '../../../core/engine-shell/quirm/hubblepup';
+import { GenericVoque } from '../../../core/engine/voque';
 import {
   buildInputOutputContextFromLeftInputContext,
   InstantiationContext,
-} from './estinantBuilderContext';
+} from '../shared/estinantBuilderContext';
 import {
   buildOutputHubblepupTupleAppreffingeBuilder2,
   OutputHubblepupTupleAppreffingeBuilderParent2,
-} from './outputHubblepupTupleAppreffingeBuilder2';
-import { PartialLeftInputAppreffinge } from './partialAppreffinge';
+} from '../output/outputHubblepupTupleAppreffingeBuilder2';
+import { PartialLeftInputAppreffinge } from '../shared/partialAppreffinge';
 import {
   buildPinbetunfBuilder2,
   PinbetunfBuilderParent2,
-} from './pinbetunfBuilder2';
-import { AdaptedLeftInputHubblepupVicken } from './vicken';
-import { SpreadN } from '../../utilities/spreadN';
+} from '../pinbetunf/pinbetunfBuilder2';
+import { AdaptedLeftInputHubblepupVicken } from '../shared/vicken';
+import { SpreadN } from '../../../utilities/spreadN';
 import {
   buildOutputHubblepupConditionalAppreffingeBuilder,
   OutputHubblepupConditionalAppreffingeBuilderParent,
-} from './outputHubblepupConditionalAppreffingeBuilder';
+} from '../output/outputHubblepupConditionalAppreffingeBuilder';
 import {
   buildOutputHubblepupAppreffingeBuilder2,
   OutputHubblepupAppreffingeBuilderParent2,
-} from './outputHubblepupAppreffingeBuilder2';
+} from '../output/outputHubblepupAppreffingeBuilder2';
 import {
   buildRightInputHubblepupTupleAppreffingeBuilder2,
   RightInputHubblepupTupleAppreffingeBuilderParent2,
-} from './rightInputHubblepupTupleAppreffingeBuilder2';
+} from '../right-input/rightInputHubblepupTupleAppreffingeBuilder2';
 import {
   buildRightInputVoictentAppreffingeBuilder2,
   RightInputVoictentAppreffingeBuilderParent2,
-} from './rightInputVoictentAppreffingeBuilder2';
+} from '../right-input/rightInputVoictentAppreffingeBuilder2';
 
 type EmptyAdaptedRightInputVickenTuple = [];
 

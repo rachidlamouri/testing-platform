@@ -1,72 +1,60 @@
-import { GenericVoque } from '../../core/engine/voque';
+import { Spread } from 'type-fest';
+import { GenericVoque } from '../../../core/engine/voque';
 import {
   buildInputOutputContextFromConstituentResultNormalizer,
   InputOutputContext,
-} from './estinantBuilderContext';
-import { PartialOutputAppreffinge } from './partialAppreffinge';
+} from '../shared/estinantBuilderContext';
+import { PartialOutputAppreffinge } from '../shared/partialAppreffinge';
 import {
   PinbetunfBuilderParent2,
   buildPinbetunfBuilder2,
-} from './pinbetunfBuilder2';
+} from '../pinbetunf/pinbetunfBuilder2';
 import {
   AdaptedOutputVicken,
   GenericAdaptedLeftInputVicken,
   GenericAdaptedOutputVickenTuple,
   GenericAdaptedRightInputVickenTuple,
-} from './vicken';
-import { SpreadN } from '../../utilities/spreadN';
-import {
-  buildOutputHubblepupTupleAppreffingeBuilder2,
-  OutputHubblepupTupleAppreffingeBuilderParent2,
-} from './outputHubblepupTupleAppreffingeBuilder2';
+} from '../shared/vicken';
 
 type NextAdaptedOutputVickenTuple<
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
   TOutputVoque extends GenericVoque,
 > = [
   ...TAdaptedOutputVickenTuple,
-  AdaptedOutputVicken<TOutputVoque, TOutputVoque['hubblepupPelue']>,
+  AdaptedOutputVicken<TOutputVoque, TOutputVoque['hubblepupPelue'][]>,
 ];
 
-type OutputHubblepupAppreffingeBuilder2<
+type OutputHubblepupTupleAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = <TOutputVoque extends GenericVoque>(
   partialOutputAppreffinge: PartialOutputAppreffinge<TOutputVoque>,
-) => SpreadN<
-  [
-    PinbetunfBuilderParent2<
-      TAdaptedLeftInputVicken,
-      TAdaptedRightInputVickenTuple,
-      NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
-    >,
-
-    OutputHubblepupAppreffingeBuilderParent2<
-      TAdaptedLeftInputVicken,
-      TAdaptedRightInputVickenTuple,
-      NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
-    >,
-    OutputHubblepupTupleAppreffingeBuilderParent2<
-      TAdaptedLeftInputVicken,
-      TAdaptedRightInputVickenTuple,
-      NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
-    >,
-  ]
+) => Spread<
+  OutputHubblepupTupleAppreffingeBuilderParent2<
+    TAdaptedLeftInputVicken,
+    TAdaptedRightInputVickenTuple,
+    NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
+  >,
+  PinbetunfBuilderParent2<
+    TAdaptedLeftInputVicken,
+    TAdaptedRightInputVickenTuple,
+    NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
+  >
 >;
 
-export const buildOutputHubblepupAppreffingeBuilder2 = <
+export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 >(
   inputOutputContext: InputOutputContext,
-): OutputHubblepupAppreffingeBuilder2<
+): OutputHubblepupTupleAppreffingeBuilder2<
   TAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple
 > => {
-  const buildOutputHubblepupAppreffinge2: OutputHubblepupAppreffingeBuilder2<
+  const buildOutputHubblepupTupleAppreffinge2: OutputHubblepupTupleAppreffingeBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple,
     TAdaptedOutputVickenTuple
@@ -76,28 +64,22 @@ export const buildOutputHubblepupAppreffingeBuilder2 = <
     const nextContext = buildInputOutputContextFromConstituentResultNormalizer({
       previousContext: inputOutputContext,
       normalizeResult: (leftInput, modifiedInput, aggregatedOutput) => {
-        const hubblepup = aggregatedOutput[
+        const hubblepupTuple = aggregatedOutput[
           outputAppreffinge.gepp
-        ] as TOutputVoque['hubblepupPelie'];
+        ] as TOutputVoque['voictentPelie'];
 
-        return [outputAppreffinge.gepp, [hubblepup]];
+        return [outputAppreffinge.gepp, hubblepupTuple];
       },
       outputGepp: outputAppreffinge.gepp,
     });
 
     return {
-      onPinbe: buildPinbetunfBuilder2<
-        TAdaptedLeftInputVicken,
-        TAdaptedRightInputVickenTuple,
-        NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
-      >(nextContext),
-
-      toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
-        TAdaptedLeftInputVicken,
-        TAdaptedRightInputVickenTuple,
-        NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
-      >(nextContext),
       toHubblepupTuple2: buildOutputHubblepupTupleAppreffingeBuilder2<
+        TAdaptedLeftInputVicken,
+        TAdaptedRightInputVickenTuple,
+        NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
+      >(nextContext),
+      onPinbe: buildPinbetunfBuilder2<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
@@ -105,15 +87,15 @@ export const buildOutputHubblepupAppreffingeBuilder2 = <
     };
   };
 
-  return buildOutputHubblepupAppreffinge2;
+  return buildOutputHubblepupTupleAppreffinge2;
 };
 
-export type OutputHubblepupAppreffingeBuilderParent2<
+export type OutputHubblepupTupleAppreffingeBuilderParent2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = {
-  toHubblepup2: OutputHubblepupAppreffingeBuilder2<
+  toHubblepupTuple2: OutputHubblepupTupleAppreffingeBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple,
     TAdaptedOutputVickenTuple

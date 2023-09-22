@@ -1,31 +1,31 @@
 import {
   buildInputOutputContextFromLeftInputContext,
   InstantiationContext,
-} from './estinantBuilderContext';
+} from '../shared/estinantBuilderContext';
 import {
   buildOutputHubblepupAppreffingeBuilder2,
   OutputHubblepupAppreffingeBuilderParent2,
-} from './outputHubblepupAppreffingeBuilder2';
-import { GenericVoque } from '../../core/engine/voque';
-import { AdaptedLeftInputVoictentVicken } from './vicken';
-import { PartialLeftInputAppreffinge } from './partialAppreffinge';
-import { SpreadN } from '../../utilities/spreadN';
+} from '../output/outputHubblepupAppreffingeBuilder2';
+import { GenericVoque } from '../../../core/engine/voque';
+import { AdaptedLeftInputVoictentVicken } from '../shared/vicken';
+import { PartialLeftInputAppreffinge } from '../shared/partialAppreffinge';
+import { SpreadN } from '../../../utilities/spreadN';
 import {
   buildRightInputVoictentAppreffingeBuilder2,
   RightInputVoictentAppreffingeBuilderParent2,
-} from './rightInputVoictentAppreffingeBuilder2';
+} from '../right-input/rightInputVoictentAppreffingeBuilder2';
 import {
   buildOutputHubblepupTupleAppreffingeBuilder2,
   OutputHubblepupTupleAppreffingeBuilderParent2,
-} from './outputHubblepupTupleAppreffingeBuilder2';
+} from '../output/outputHubblepupTupleAppreffingeBuilder2';
 import {
   buildRightInputHubblepupTupleAppreffingeBuilder2,
   RightInputHubblepupTupleAppreffingeBuilderParent2,
-} from './rightInputHubblepupTupleAppreffingeBuilder2';
+} from '../right-input/rightInputHubblepupTupleAppreffingeBuilder2';
 import {
   buildPinbetunfBuilder2,
   PinbetunfBuilderParent2,
-} from './pinbetunfBuilder2';
+} from '../pinbetunf/pinbetunfBuilder2';
 
 type EmptyAdaptedRightInputVickenTuple = [];
 

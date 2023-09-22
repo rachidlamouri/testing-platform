@@ -2,15 +2,18 @@ import { Simplify, UnionToIntersection } from 'type-fest';
 import {
   buildEstinantAssembler,
   EstinantAssemblerParent,
-} from './estinantAssembler';
-import { AssemblerContext, InputOutputContext } from './estinantBuilderContext';
+} from '../assembler/estinantAssembler';
+import {
+  AssemblerContext,
+  InputOutputContext,
+} from '../shared/estinantBuilderContext';
 import {
   GenericAdaptedLeftInputVicken,
   GenericAdaptedOutputVicken,
   GenericAdaptedOutputVickenTuple,
   GenericAdaptedRightInputVickenTuple,
-} from './vicken';
-import { Tuple } from '../../utilities/semantic-types/tuple';
+} from '../shared/vicken';
+import { Tuple } from '../../../utilities/semantic-types/tuple';
 
 type Pinbetunf2<TInputTuple extends Tuple<unknown>, TOutput> = (
   ...input: TInputTuple

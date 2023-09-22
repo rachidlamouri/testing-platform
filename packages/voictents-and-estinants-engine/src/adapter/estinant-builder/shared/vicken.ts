@@ -1,7 +1,7 @@
-import { GenericVoque } from '../../core/engine/voque';
-import { Tuple } from '../../utilities/semantic-types/tuple';
-import { OutputVicken as CoreOutputVicken } from '../../core/engine-shell/vicken/outputVicken';
-import { ZornTuple } from '../../utilities/semantic-types/zorn';
+import { GenericVoque } from '../../../core/engine/voque';
+import { Tuple } from '../../../utilities/semantic-types/tuple';
+import { OutputVicken as CoreOutputVicken } from '../../../core/engine-shell/vicken/outputVicken';
+import { ZornTuple } from '../../../utilities/semantic-types/zorn';
 
 enum AdaptedVickenTypeName {
   Output = 'Output',

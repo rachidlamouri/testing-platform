@@ -1,13 +1,13 @@
-import { InstantiationContext } from './estinantBuilderContext';
+import { InstantiationContext } from './shared/estinantBuilderContext';
 import {
   buildLeftInputHubblepupAppreffingeBuilder2,
   LeftInputHubblepupAppreffingeBuilderParent2,
-} from './leftInputHubblepupAppreffingeBuilder2';
+} from './left-input/leftInputHubblepupAppreffingeBuilder2';
 import { SpreadN } from '../../utilities/spreadN';
 import {
   buildLeftInputVoictentAppreffingeBuilder2,
   LeftInputVoictentAppreffingeBuilderParent2,
-} from './leftInputVoictentAppreffingeBuilder2';
+} from './left-input/leftInputVoictentAppreffingeBuilder2';
 
 export const buildEstinant = (
   context: InstantiationContext,

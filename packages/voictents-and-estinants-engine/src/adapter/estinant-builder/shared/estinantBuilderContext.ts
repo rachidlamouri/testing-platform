@@ -1,5 +1,5 @@
-import { Gepp } from '../../core/engine-shell/voictent/gepp';
-import { Tuple } from '../../utilities/semantic-types/tuple';
+import { Gepp } from '../../../core/engine-shell/voictent/gepp';
+import { Tuple } from '../../../utilities/semantic-types/tuple';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyLeftInputAccessor = (leftInput: any) => any;

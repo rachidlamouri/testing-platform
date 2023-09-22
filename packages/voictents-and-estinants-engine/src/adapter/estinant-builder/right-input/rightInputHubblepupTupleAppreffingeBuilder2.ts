@@ -1,24 +1,24 @@
-import { GenericIndexedHubblepupTuple } from '../../core/engine-shell/quirm/hubblepup';
-import { GenericVoque } from '../../core/engine/voque';
-import { Zorn2, ZornTuple2 } from '../../utilities/semantic-types/zorn';
-import { SpreadN } from '../../utilities/spreadN';
+import { GenericIndexedHubblepupTuple } from '../../../core/engine-shell/quirm/hubblepup';
+import { GenericVoque } from '../../../core/engine/voque';
+import { Zorn2, ZornTuple2 } from '../../../utilities/semantic-types/zorn';
+import { SpreadN } from '../../../utilities/spreadN';
 import {
   buildInputOutputContextFromRightInputContext,
   InputOutputContext,
-} from './estinantBuilderContext';
+} from '../shared/estinantBuilderContext';
 import {
   buildOutputHubblepupAppreffingeBuilder2,
   OutputHubblepupAppreffingeBuilderParent2,
-} from './outputHubblepupAppreffingeBuilder2';
+} from '../output/outputHubblepupAppreffingeBuilder2';
 import {
   buildOutputHubblepupTupleAppreffingeBuilder2,
   OutputHubblepupTupleAppreffingeBuilderParent2,
-} from './outputHubblepupTupleAppreffingeBuilder2';
-import { PartialRightHubblepupTupleAppreffinge } from './partialAppreffinge';
+} from '../output/outputHubblepupTupleAppreffingeBuilder2';
+import { PartialRightHubblepupTupleAppreffinge } from '../shared/partialAppreffinge';
 import {
   PinbetunfBuilderParent2,
   buildPinbetunfBuilder2,
-} from './pinbetunfBuilder2';
+} from '../pinbetunf/pinbetunfBuilder2';
 import {
   buildRightInputVoictentAppreffingeBuilder2,
   RightInputVoictentAppreffingeBuilderParent2,
@@ -27,7 +27,7 @@ import {
   AdaptedRightInputHubblepupTupleVicken,
   GenericAdaptedLeftInputVicken,
   GenericAdaptedRightInputVickenTuple,
-} from './vicken';
+} from '../shared/vicken';
 
 type NextAdaptedRightInputVickenTuple<
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,

@@ -1,5 +1,5 @@
-import { GenericVoque } from '../../core/engine/voque';
-import { ZornTuple2 } from '../../utilities/semantic-types/zorn';
+import { GenericVoque } from '../../../core/engine/voque';
+import { ZornTuple2 } from '../../../utilities/semantic-types/zorn';
 import { GenericAdaptedLeftInputVicken } from './vicken';
 
 export type PartialLeftInputAppreffinge<TLeftInputVoque extends GenericVoque> =

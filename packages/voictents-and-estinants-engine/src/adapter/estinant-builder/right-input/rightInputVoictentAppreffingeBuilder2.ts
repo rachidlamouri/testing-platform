@@ -1,23 +1,23 @@
-import { GenericVoque } from '../../core/engine/voque';
-import { SpreadN } from '../../utilities/spreadN';
+import { GenericVoque } from '../../../core/engine/voque';
+import { SpreadN } from '../../../utilities/spreadN';
 import {
   buildInputOutputContextFromRightInputContext,
   InputOutputContext,
-} from './estinantBuilderContext';
+} from '../shared/estinantBuilderContext';
 import {
   buildOutputHubblepupAppreffingeBuilder2,
   OutputHubblepupAppreffingeBuilderParent2,
-} from './outputHubblepupAppreffingeBuilder2';
+} from '../output/outputHubblepupAppreffingeBuilder2';
 import {
   OutputHubblepupTupleAppreffingeBuilderParent2,
   buildOutputHubblepupTupleAppreffingeBuilder2,
-} from './outputHubblepupTupleAppreffingeBuilder2';
-import { PartialRightVoictentAppreffinge } from './partialAppreffinge';
+} from '../output/outputHubblepupTupleAppreffingeBuilder2';
+import { PartialRightVoictentAppreffinge } from '../shared/partialAppreffinge';
 import {
   AdaptedRightInputVoictentVicken,
   GenericAdaptedLeftInputVicken,
   GenericAdaptedRightInputVickenTuple,
-} from './vicken';
+} from '../shared/vicken';
 
 type NextAdaptedRightInputVickenTuple<
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
