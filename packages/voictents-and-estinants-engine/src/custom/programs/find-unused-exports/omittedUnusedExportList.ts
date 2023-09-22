@@ -122,12 +122,12 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
   {
     importedFilePath:
       'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
-    importedIdentifierName: 'SvgWrapperComponentMetadata',
+    importedIdentifierName: 'GeneratedIndex',
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/dynamicComponentTypes.ts',
-    importedIdentifierName: 'SvgWrapperComponentMetadataList',
+      'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/theme.ts',
+    importedIdentifierName: 'THEME',
   },
   {
     importedFilePath:

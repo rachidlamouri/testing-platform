@@ -57,12 +57,21 @@ type TreeifiedDatumNode =
   | n.ObjectExpression
   | n.NewExpression;
 
-const treeifyDatum = (datum: unknown): TreeifiedDatumNode => {
+export class IdentifierConfiguration {
+  constructor(public readonly name: string) {}
+}
+
+export const treeifyDatum = (datum: unknown): TreeifiedDatumNode => {
   const typedDatum = getCustomTypedDatum(datum);
 
   switch (typedDatum.typeName) {
     case CustomDatumTypeName.RootObjectInstance:
     case CustomDatumTypeName.CustomObjectInstance: {
+      if (typedDatum.datum instanceof IdentifierConfiguration) {
+        const result = b.identifier(typedDatum.datum.name);
+        return result;
+      }
+
       const propertyList = Object.entries(typedDatum.datum).map(
         ([key, value]) => {
           return b.objectProperty(b.identifier(key), treeifyDatum(value));

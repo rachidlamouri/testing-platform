@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { PresentationContext } from '../presentationContext';
 import { DirectoryFactProps } from '../factProps';
 import { useSelectedIdContext } from '../selectedIdContext';
+import { THEME } from '../theme';
 
 export const DirectoryFact: FunctionComponent<DirectoryFactProps> = ({
   directoryPath,
@@ -14,10 +15,10 @@ export const DirectoryFact: FunctionComponent<DirectoryFactProps> = ({
   let strokeColor: string;
   let strokeWidth: string;
   if (isBoundaryDirectory && boundaryId === selectedBoundaryId) {
-    strokeColor = 'SlateBlue';
+    strokeColor = THEME.boundary.selected;
     strokeWidth = '4';
   } else {
-    strokeColor = 'RoyalBlue';
+    strokeColor = THEME.directory.color;
     strokeWidth = '2';
   }
 

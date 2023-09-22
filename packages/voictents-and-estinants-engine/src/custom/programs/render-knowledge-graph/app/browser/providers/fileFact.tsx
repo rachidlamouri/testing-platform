@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { PresentationContext } from '../presentationContext';
 import { useSelectedIdContext } from '../selectedIdContext';
 import { FileFactProps } from '../factProps';
+import { THEME } from '../theme';
 
 export const FileFact: FunctionComponent<FileFactProps> = ({
   factId,
@@ -18,16 +19,16 @@ export const FileFact: FunctionComponent<FileFactProps> = ({
   let strokeColor: string;
   let strokeWidth: string;
   if (isSelected) {
-    strokeColor = 'green';
+    strokeColor = THEME.file.selected;
     strokeWidth = '2';
   } else if (isImportingNodeSelected) {
-    strokeColor = 'tomato';
+    strokeColor = THEME.file.importsSelectedFile;
     strokeWidth = '2';
   } else if (isImportedNodeSelected) {
-    strokeColor = 'purple';
+    strokeColor = THEME.file.importedBySelectedFile;
     strokeWidth = '2';
   } else {
-    strokeColor = 'gray';
+    strokeColor = THEME.file.deselected;
     strokeWidth = '1';
   }
 

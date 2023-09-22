@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
 import svgPanZoom from 'svg-pan-zoom';
 import { useGeneratedMetadata } from '../generatedMetadataContext';
+import { useSelectedIdContext } from '../selectedIdContext';
 
-export const ActiveContent: React.FunctionComponent<{
-  selectedIndex: number;
-}> = ({ selectedIndex }) => {
+export const ActiveContent: React.FunctionComponent = () => {
   const svgReference = useCallback((svg: SVGSVGElement) => {
     if (svg !== null) {
       svgPanZoom(svg, {
@@ -14,13 +13,15 @@ export const ActiveContent: React.FunctionComponent<{
       });
     }
   }, []);
-  const { componentMetadataList } = useGeneratedMetadata();
+  const { generatedIndex } = useGeneratedMetadata();
+  const { selectedBoundaryId } = useSelectedIdContext();
 
-  if (componentMetadataList === null) {
+  if (generatedIndex === null || selectedBoundaryId === null) {
     return null;
   }
 
-  const { Component } = (componentMetadataList ?? [])[selectedIndex];
+  const { Component } =
+    generatedIndex.partitionByBoundaryId.get(selectedBoundaryId);
 
   if (!Component) {
     return null;

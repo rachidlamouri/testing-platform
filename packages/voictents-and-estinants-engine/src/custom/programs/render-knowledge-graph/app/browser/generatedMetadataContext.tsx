@@ -6,13 +6,10 @@ import React, {
   FunctionComponent,
   useContext,
 } from 'react';
-import {
-  MetadataById,
-  SvgWrapperComponentMetadataList,
-} from './dynamicComponentTypes';
+import { MetadataById, GeneratedIndex } from './dynamicComponentTypes';
 
 const generatedDataPromise = import('./generated') as Promise<{
-  default: SvgWrapperComponentMetadataList;
+  default: GeneratedIndex;
 }>;
 
 const generatedMetadataByIdPromise = import(
@@ -22,26 +19,25 @@ const generatedMetadataByIdPromise = import(
 }>;
 
 type GeneratedMetadata = {
-  componentMetadataList: SvgWrapperComponentMetadataList | null;
+  generatedIndex: GeneratedIndex | null;
   metadataById: MetadataById;
 };
 
 export const GeneratedMetadataContext = createContext<GeneratedMetadata>({
-  componentMetadataList: null,
+  generatedIndex: null,
   metadataById: null,
 });
 
 export const GeneratedMetadataProvider: FunctionComponent<
   PropsWithChildren
 > = ({ children }) => {
-  const [componentMetadataList, setComponentMetadataList] =
-    useState<SvgWrapperComponentMetadataList | null>(null);
+  const [generatedIndex, setLayerList] = useState<GeneratedIndex | null>(null);
   const [metadataById, setMetadataById] = useState<MetadataById>({});
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     generatedDataPromise.then(({ default: value }) => {
-      setComponentMetadataList(value);
+      setLayerList(value);
     });
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -53,7 +49,7 @@ export const GeneratedMetadataProvider: FunctionComponent<
   return (
     <GeneratedMetadataContext.Provider
       value={{
-        componentMetadataList,
+        generatedIndex,
         metadataById,
       }}
     >
