@@ -57,7 +57,7 @@ module.exports = {
             ),
           posix.join(
             __dirname,
-            'packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/app/browser/tsconfig.json',
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/tsconfig.json',
           ),
           posix.join(
             __dirname,

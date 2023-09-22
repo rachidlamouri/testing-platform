@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { posix } from 'path';
-import { Grition } from '../../custom/adapter/grition';
+import { Grition } from '../../adapter/odeshin/grition';
 import { Gepp } from '../engine-shell/voictent/gepp';
 import { Voque } from './voque';
 import { Voictent2 } from './voictent2';
@@ -14,7 +14,7 @@ import {
   MissingLanbeError,
   HubblepupPelueState,
 } from './abstractInMemoryVoictent';
-import { AbstractSerializableIndexByName } from '../../example-programs/abstractSerializableVoictent';
+import { AbstractSerializableIndexByName } from '../../core-programs/abstractSerializableVoictent';
 import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
 
 const createDirectory = (directoryPath: string): void => {

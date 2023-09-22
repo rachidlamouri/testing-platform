@@ -1,6 +1,5 @@
 import { Zorn, ZornTuple } from '../../utilities/semantic-types/zorn';
 import { Ajorken } from '../internal/procody/ajorken';
-import { getIsWibiz } from '../engine-shell/appreffinge/appreffinge';
 import {
   Cology,
   CologySet,
@@ -23,7 +22,7 @@ import {
   GenericIndexedHubblepupTuple,
   Hubblepup,
   HubblepupTuple,
-} from '../engine-shell/quirm/hubblepup';
+} from '../engine-shell/hubblepup/hubblepup';
 import {
   GenericVoictentItemLanbe2,
   Lanbe,
@@ -35,14 +34,21 @@ import { Mabz, MabzEntry } from '../internal/procody/mabz';
 import { Platomity2, Virok, getDreanorTuple } from '../internal/platomity';
 import { Prected } from '../internal/dreanor/prected';
 import { Procody } from '../internal/procody/procody';
-import { Quirm, QuirmTuple } from '../engine-shell/quirm/quirm';
 import { Tabilly } from './tabilly';
 import { GenericVoictent2 } from './voictent2';
-import { GenericAppreffinge2 } from '../engine-shell/appreffinge/appreffinge2';
+import { GenericInputAppreffinge } from '../engine-shell/appreffinge/input/inputAppreffinge';
 import { Tuple } from '../../utilities/semantic-types/tuple';
-import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/rightInputAppreffinge';
+import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/input/right/rightInputAppreffinge';
 import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
 import { assertIsError } from '../../utilities/assertIsError';
+import { assertNotUndefined } from '../../utilities/assertNotUndefined';
+
+type Quirm = {
+  gepp: Gepp;
+  hubblepup: Hubblepup;
+};
+
+type QuirmTuple = Tuple<Quirm>;
 
 class AggregateEngineError extends Error {
   constructor(errorList: (string | Error)[]) {
@@ -353,7 +359,15 @@ export const digikikify = ({
   }
 
   const addToTabilly = (quirmTuple: QuirmTuple): void => {
-    tabilly.addHubblepupsToVoictents(quirmTuple);
+    quirmTuple.forEach((quirm) => {
+      const voictent = tabilly.get(quirm.gepp);
+      assertNotUndefined(
+        voictent,
+        `Unable to find voictent for gepp: ${quirm.gepp}`,
+      );
+
+      voictent.addHubblepup(quirm.hubblepup);
+    });
 
     if (onHubblepupAddedToVoictents !== undefined) {
       quirmTuple.forEach((quirm) => {
@@ -364,10 +378,14 @@ export const digikikify = ({
 
   const createLanbe2 = (
     estinant: GenericEstinant2,
-    appreffinge: GenericAppreffinge2,
+    appreffinge: GenericInputAppreffinge,
   ): Lanbe => {
-    const voictent = tabilly.getOrInstantiateAndGetVoictent(appreffinge.gepp);
-    const lanbe = getIsWibiz(appreffinge)
+    const voictent = tabilly.get(appreffinge.gepp);
+    assertNotUndefined(
+      voictent,
+      `Unable to find voictent for gepp: ${appreffinge.gepp}`,
+    );
+    const lanbe = appreffinge.isWibiz
       ? voictent.createVoictentLanbe(estinant.name)
       : voictent.createVoictentItemLanbe(estinant.name);
 

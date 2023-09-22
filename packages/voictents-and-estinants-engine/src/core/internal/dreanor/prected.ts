@@ -1,5 +1,5 @@
 import { Zorn } from '../../../utilities/semantic-types/zorn';
-import { Hubblepup } from '../../engine-shell/quirm/hubblepup';
+import { Hubblepup } from '../../engine-shell/hubblepup/hubblepup';
 
 /**
  * A cache of Hubblepups by Zorn

@@ -1,7 +1,7 @@
 import { Gepp } from '../engine-shell/voictent/gepp';
 import { SpreadN } from '../../utilities/spreadN';
 import { HubblepupPelieLanbe2 } from '../engine-shell/voictent/lanbe';
-import { GenericOdeshin2 } from '../../custom/adapter/odeshin2';
+import { GenericOdeshin2 } from '../../adapter/odeshin/odeshin2';
 import {
   AbstractInMemoryVoictent,
   DereferenceError,

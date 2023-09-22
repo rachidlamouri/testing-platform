@@ -1,12 +1,12 @@
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import {
-  Croader2,
+  Croarder,
   GenericCroader3,
-} from '../../engine-shell/appreffinge/croarder';
+} from '../../engine-shell/appreffinge/input/right/croarder';
 import {
-  Framation2,
+  Framation,
   GenericFramation3,
-} from '../../engine-shell/appreffinge/framation';
+} from '../../engine-shell/appreffinge/input/right/framation';
 import { Gepp } from '../../engine-shell/voictent/gepp';
 import {
   GenericVoictentItemLanbe2,
@@ -45,8 +45,8 @@ export type RightVoictentItem2Dreanor = {
   gepp: Gepp;
   lanbe: GenericVoictentItemLanbe2;
   prected: Prected;
-  framate: Framation2 | GenericFramation3;
-  croard: Croader2 | GenericCroader3;
+  framate: Framation | GenericFramation3;
+  croard: Croarder | GenericCroader3;
 };
 
 /**

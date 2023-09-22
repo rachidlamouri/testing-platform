@@ -3,7 +3,7 @@ import {
   Hubblepup,
   HubblepupIndexByName,
   IndexedHubblepup,
-} from '../engine-shell/quirm/hubblepup';
+} from '../engine-shell/hubblepup/hubblepup';
 import { Gepp } from '../engine-shell/voictent/gepp';
 
 export type Voque<
