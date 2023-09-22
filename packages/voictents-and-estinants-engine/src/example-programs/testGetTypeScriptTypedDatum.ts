@@ -7,7 +7,7 @@ import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
   DatumTestCaseInputVoque,
-} from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
+} from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../utilities/programFileCache';
 import { getTypeScriptTypedDatum } from '../utilities/typed-datum/type-script/typeScriptTypedDatum';
 import { AbstractSerializableVoque } from './abstractSerializableVoictent';

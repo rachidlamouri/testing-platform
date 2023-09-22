@@ -3,7 +3,7 @@ import fs from 'fs';
 import {
   KnownFileExtensionSuffixIdentifier,
   getFileExtensionSuffix,
-} from '../custom/programmable-units/file/fileExtensionSuffixIdentifier';
+} from '../adapted-programs/programmable-units/file/fileExtensionSuffixIdentifier';
 
 // TODO: replace the namespace regex with lowercase and hyphens
 // const NAMESPACE_REGEX = /^[a-z-]+$/;

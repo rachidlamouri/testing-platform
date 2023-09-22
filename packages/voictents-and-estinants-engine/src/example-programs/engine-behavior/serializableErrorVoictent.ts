@@ -1,7 +1,7 @@
 import { Gepp } from '../../core/engine-shell/voictent/gepp';
 import { Voictent2 } from '../../core/engine/voictent2';
 import { Voque } from '../../core/engine/voque';
-import { FileExtensionSuffixIdentifier } from '../../custom/programmable-units/file/fileExtensionSuffixIdentifier';
+import { FileExtensionSuffixIdentifier } from '../../adapted-programs/programmable-units/file/fileExtensionSuffixIdentifier';
 import { ProgramFileCache } from '../../utilities/programFileCache';
 
 export type SerializableErrorVoque<TGepp extends Gepp> = Voque<

@@ -3,7 +3,7 @@ import { Gepp } from '../core/engine-shell/voictent/gepp';
 import {
   FileExtensionSuffixIdentifier,
   KnownFileExtensionSuffixIdentifier,
-} from '../custom/programmable-units/file/fileExtensionSuffixIdentifier';
+} from '../adapted-programs/programmable-units/file/fileExtensionSuffixIdentifier';
 import { RuntimeStatistics } from '../core/engine/digikikify';
 import { serializeRuntimeStatistics } from './serializeRuntimeStatistic';
 import { FileCache } from './fileCache';

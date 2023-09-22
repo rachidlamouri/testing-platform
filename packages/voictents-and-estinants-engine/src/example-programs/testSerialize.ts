@@ -2,7 +2,7 @@ import { digikikify2 } from '../core/engine/digikikify';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
-} from '../custom/programmable-units/datum-test-case-input/datumTestCaseInput';
+} from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../utilities/programFileCache';
 import { SerializableVoictent } from './serializableVoictent';
 import { AbstractSerializableVoque } from './abstractSerializableVoictent';

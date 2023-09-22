@@ -4,7 +4,7 @@ import {
   GenericAbstractSerializableVoque,
   AbstractSerializableVoictent,
 } from './abstractSerializableVoictent';
-import { FileExtensionSuffixIdentifier } from '../custom/programmable-units/file/fileExtensionSuffixIdentifier';
+import { FileExtensionSuffixIdentifier } from '../adapted-programs/programmable-units/file/fileExtensionSuffixIdentifier';
 import {
   ProgramFileCache,
   SerializedHubblepup,

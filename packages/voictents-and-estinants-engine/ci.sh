@@ -116,35 +116,35 @@ printf "\n"
 ## categorize-files
 echo "# categorize-files"
 echo "Verifying file extensions"
-npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/categorize-files/categorizeFiles.ts
+npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/categorize-files/categorizeFiles.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 
 ## test-graph-render
 echo "# test-graph-render"
 echo "Verifying example rendered graph has not changed"
-npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/test-graph-render/testGraphRender.ts
+npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/test-graph-render/testGraphRender.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 
 ## model-programs
 echo "# model-programs"
 echo "Verifying program models have not changed"
-npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/model-programs/modelPrograms.ts
+npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-programs/modelPrograms.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 
 ## find-unused-exports
 echo "# find-unused-exports"
 echo "Linting unused exports"
-npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/find-unused-exports/findUnusedExports.ts
+npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/find-unused-exports/findUnusedExports.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 
 ## model-ci
 echo "# model-ci"
 echo "Verifying ci.sh runs every engine program"
-npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/model-ci/modelCi.ts
+npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-ci/modelCi.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 
@@ -153,35 +153,35 @@ printf "\n"
 ## render-knowledge-graph
 echo "# render-knowledge-graph"
 echo "WIP"
-npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/renderKnowledgeGraph.ts
+npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 
 # ## render-type-script-file-relationships
 # echo "# render-type-script-file-relationships"
 # echo "WIP"
-# npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts
+# npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts
 # bash checkUncommittedDebug.sh
 # printf "\n"
 
 # ## assemble-scaffolded-file
 # echo "# assemble-scaffolded-file"
 # echo "Perfoming test run of "assembleScaffoldedFile""
-# npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/scaffold-file/assembleScaffoldedFile.ts
+# npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/scaffold-file/assembleScaffoldedFile.ts
 # bash checkUncommittedDebug.sh
 # printf "\n"
 
 ## comments-example
 echo "# comments-example"
 echo "Perfoming test run of "commentsExample""
-npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/comments-example/commentsExample.ts
+npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/comments-example/commentsExample.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 
 ## get-snapshot-refresh-script
 echo "# get-snapshot-refresh-script"
 echo "Perfoming test run of "getSnapshotRefreshScript""
-npx ts-node packages/voictents-and-estinants-engine/src/custom/programs/get-snapshot-refresh-script/getSnapshotRefreshScript.ts
+npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/get-snapshot-refresh-script/getSnapshotRefreshScript.ts
 bash checkUncommittedDebug.sh
 printf "\n"
 

@@ -38,7 +38,7 @@ import {
   Voictent2,
 } from '../core/engine/voictent2';
 import { GenericVoque } from '../core/engine/voque';
-import { ProgramErrorGepp } from '../custom/programmable-units/error/programError';
+import { ProgramErrorGepp } from '../adapted-programs/programmable-units/error/programError';
 import { GenericAbstractSerializableSourceVoque } from '../example-programs/abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from '../example-programs/buildAddMetadataForSerialization';
 import { SerializableVoictent } from '../example-programs/serializableVoictent';
@@ -46,7 +46,7 @@ import { ProgramFileCache } from '../utilities/programFileCache';
 import {
   FileSystemNodeVoictent,
   GenericFileSystemNodeVoque,
-} from '../custom/programmable-units/file/fileSystemNodeVoictent';
+} from '../adapted-programs/programmable-units/file/fileSystemNodeVoictent';
 
 type VoqueUnionFromVoictentTuple<
   TVoictentTuple extends UnsafeVoictent2Tuple,
