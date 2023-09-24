@@ -4,7 +4,7 @@ import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../../../utilities/simplify';
+import { SimplifyN } from '../../../../../utilities/types/simplify';
 import { DirectedGraphEdge2Instance } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import { DirectedGraphElement2 } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { LocalDirectedGraphElement2Zorn } from '../../../../programmable-units/graph-visualization/directed-graph/types';

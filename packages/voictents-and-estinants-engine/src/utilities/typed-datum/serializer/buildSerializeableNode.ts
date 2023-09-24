@@ -1,4 +1,4 @@
-import { getPrototypeNameTuple } from '../../getPrototypeNameTuple';
+import { getPrototypeNameTuple } from './getPrototypeNameTuple';
 import {
   CustomDatumTypeName,
   CustomTypedArray,

@@ -3,7 +3,7 @@ import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../../utilities/simplify';
+import { SimplifyN } from '../../../../utilities/types/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
 const IMPORTED_IDENTIFIER_SOURCE_ZORN_TEMPLATE = [

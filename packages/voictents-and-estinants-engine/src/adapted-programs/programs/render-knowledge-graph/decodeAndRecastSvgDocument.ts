@@ -7,7 +7,7 @@ import {
   SVG_DOCUMENT_GEPP,
   SvgDocumentVoque,
 } from '../../programmable-units/graph-visualization/svgDocument';
-import { isNotNull } from '../../../utilities/isNotNull';
+import { isNotNull } from '../../../utilities/nil/isNotNull';
 import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
@@ -29,7 +29,7 @@ import {
   getCustomTypedDatum,
 } from '../../../utilities/typed-datum/customTypedDatum';
 import { FACT_GEPP, Fact, FactVoque } from './fact/fact';
-import { assertNotUndefined } from '../../../utilities/assertNotUndefined';
+import { assertNotUndefined } from '../../../utilities/nil/assertNotUndefined';
 import { FactTypeName } from './fact/factTypeName';
 import {
   DirectoryFactProps,

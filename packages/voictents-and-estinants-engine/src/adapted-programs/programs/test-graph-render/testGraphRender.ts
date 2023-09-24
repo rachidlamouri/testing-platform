@@ -22,7 +22,7 @@ import {
 } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
-import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { ProgramFileCache } from '../../../utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { GraphLikeLabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';

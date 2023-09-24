@@ -1,6 +1,6 @@
 import { posix } from 'path';
 import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { SimplifyN } from '../../../utilities/simplify';
+import { SimplifyN } from '../../../utilities/types/simplify';
 import { getFileSystemNodePathPartList } from './getFileSystemNodePathPartList';
 import { NodePathConstructorInput } from './nodePathConstructorInput';
 import {

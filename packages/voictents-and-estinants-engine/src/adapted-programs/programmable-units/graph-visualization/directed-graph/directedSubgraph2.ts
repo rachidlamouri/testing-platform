@@ -3,7 +3,7 @@ import { RootGraphLocator } from './rootGraphLocator';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../../utilities/buildConstructorFunction';
+} from '../../../../utilities/deprecated-constructor-function/buildConstructorFunction';
 import { GlobalDirectedGraphElement2Zorn } from './types';
 import { GraphConstituentLocator } from './graphConstituentLocator';
 

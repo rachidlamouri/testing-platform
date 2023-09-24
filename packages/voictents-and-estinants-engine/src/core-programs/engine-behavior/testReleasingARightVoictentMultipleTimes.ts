@@ -5,7 +5,7 @@ import { RightInputVoictentVicken } from '../../core/engine-shell/vicken/rightIn
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryVoictent } from '../../core/engine/inMemoryVoictent';
 import { StandardInMemoryVoque } from '../../core/engine/inMemoryVoque';
-import { ProgramFileCache } from '../../utilities/programFileCache';
+import { ProgramFileCache } from '../../utilities/program/programFileCache';
 import { AbstractSerializableVoque } from '../abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from '../buildAddMetadataForSerialization';
 import { SerializableVoictent } from '../serializableVoictent';

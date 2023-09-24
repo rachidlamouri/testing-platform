@@ -2,7 +2,7 @@ import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinV
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../utilities/buildConstructorFunction';
+} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
 import {
   EngineVoqueLocator2,
   getVoqueDisplayName,

@@ -11,7 +11,7 @@ import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { assertFileExtensionIsKnown } from './assertFileExtensionIsKnown';
-import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { ProgramFileCache } from '../../../utilities/program/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';

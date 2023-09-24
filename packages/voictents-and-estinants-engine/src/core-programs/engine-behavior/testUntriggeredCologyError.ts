@@ -5,7 +5,7 @@ import { RightInputHubblepupTupleVicken } from '../../core/engine-shell/vicken/r
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryVoictent } from '../../core/engine/inMemoryVoictent';
 import { StandardInMemoryVoque } from '../../core/engine/inMemoryVoque';
-import { ProgramFileCache } from '../../utilities/programFileCache';
+import { ProgramFileCache } from '../../utilities/program/programFileCache';
 import {
   SerializableErrorVoictent,
   SerializableErrorVoque,

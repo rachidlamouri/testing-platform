@@ -1,5 +1,5 @@
 import { ConditionalKeys } from 'type-fest';
-import { Tuple } from './semantic-types/tuple';
+import { Tuple } from '../semantic-types/tuple';
 
 type GenericMappableDatum = Record<string, unknown>;
 

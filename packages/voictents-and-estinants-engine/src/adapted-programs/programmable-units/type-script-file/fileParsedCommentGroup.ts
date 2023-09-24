@@ -4,7 +4,7 @@ import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../utilities/simplify';
+import { SimplifyN } from '../../../utilities/types/simplify';
 import { CategorizedComment } from './comment/categorized/categorizedComment';
 
 const FILE_PARSED_COMMENT_GROUP_ZORN_TEMPLATE = [

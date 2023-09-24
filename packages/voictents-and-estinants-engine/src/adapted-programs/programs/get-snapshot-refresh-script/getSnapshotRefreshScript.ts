@@ -3,7 +3,7 @@ import {
   buildVoictentByGepp,
   digikikify,
 } from '../../../adapter/engine/digikikify';
-import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { ProgramFileCache } from '../../../utilities/program/programFileCache';
 import {
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,

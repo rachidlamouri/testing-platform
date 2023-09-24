@@ -2,13 +2,13 @@ import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinV
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../utilities/buildConstructorFunction';
+} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
-import { getZornableId } from '../../../utilities/getZornableId';
+import { getZornableId } from '../../../utilities/deprecated-zorn/getZornableId';
 import { EstinantInput2 } from './input-output/engineEstinantInput2';
 import { EstinantOutput2 } from './input-output/engineEstinantOutput2';
-import { isNotNull } from '../../../utilities/isNotNull';
+import { isNotNull } from '../../../utilities/nil/isNotNull';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
 
 type BaseEngineEstinant3 = {

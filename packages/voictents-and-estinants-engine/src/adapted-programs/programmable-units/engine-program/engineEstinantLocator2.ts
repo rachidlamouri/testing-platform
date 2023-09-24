@@ -4,7 +4,7 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
   memoizeGetter,
-} from '../../../utilities/buildConstructorFunction';
+} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
 import { ExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
 import {
   GenericZorn2Template,

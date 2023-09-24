@@ -1,12 +1,12 @@
 import { posix } from 'path';
-import { Gepp } from '../core/engine-shell/voictent/gepp';
+import { Gepp } from '../../core/engine-shell/voictent/gepp';
 import {
   FileExtensionSuffixIdentifier,
   KnownFileExtensionSuffixIdentifier,
-} from '../adapted-programs/programmable-units/file/fileExtensionSuffixIdentifier';
-import { RuntimeStatistics } from '../core/engine/digikikify';
-import { serializeRuntimeStatistics } from './serializeRuntimeStatistic';
-import { FileCache } from './fileCache';
+} from '../../adapted-programs/programmable-units/file/fileExtensionSuffixIdentifier';
+import { RuntimeStatistics } from '../../core/engine/digikikify';
+import { serializeRuntimeStatistics } from './serializeRuntimeStatistics';
+import { FileCache } from '../file/fileCache';
 
 enum TopLevelDirectoryName {
   Root = '',

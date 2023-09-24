@@ -1,7 +1,7 @@
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../../utilities/buildConstructorFunction';
+} from '../../../../utilities/deprecated-constructor-function/buildConstructorFunction';
 import {
   LocalDirectedGraphElement2Zorn,
   RootDirectedGraphElement2Zorn,

@@ -1,11 +1,11 @@
 import { posix } from 'path';
-import { assertNotNull } from '../../../../utilities/assertNotNull';
+import { assertNotNull } from '../../../../utilities/nil/assertNotNull';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../../utilities/simplify';
+import { SimplifyN } from '../../../../utilities/types/simplify';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
 import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
 import {

@@ -40,8 +40,8 @@ import { GenericInputAppreffinge } from '../engine-shell/appreffinge/input/input
 import { Tuple } from '../../utilities/semantic-types/tuple';
 import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/input/right/rightInputAppreffinge';
 import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
-import { assertIsError } from '../../utilities/assertIsError';
-import { assertNotUndefined } from '../../utilities/assertNotUndefined';
+import { assertIsError } from '../../utilities/error/assertIsError';
+import { assertNotUndefined } from '../../utilities/nil/assertNotUndefined';
 
 type Quirm = {
   gepp: Gepp;

@@ -6,7 +6,7 @@ import {
 import {
   ProgramFileCache,
   SerializedHubblepup,
-} from '../utilities/programFileCache';
+} from '../utilities/program/programFileCache';
 import { FileExtensionSuffixIdentifier } from '../adapted-programs/programmable-units/file/fileExtensionSuffixIdentifier';
 import { serialize } from '../utilities/typed-datum/serializer/serialize';
 

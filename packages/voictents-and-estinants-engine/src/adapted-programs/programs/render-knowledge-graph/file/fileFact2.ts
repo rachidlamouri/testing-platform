@@ -1,11 +1,11 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { isNotNull } from '../../../../utilities/isNotNull';
+import { isNotNull } from '../../../../utilities/nil/isNotNull';
 import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../../utilities/simplify';
+import { SimplifyN } from '../../../../utilities/types/simplify';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
 import {
   DirectedGraphNode2,

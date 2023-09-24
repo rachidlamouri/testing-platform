@@ -3,7 +3,7 @@ import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../../../utilities/simplify';
+import { SimplifyN } from '../../../../../utilities/types/simplify';
 import { FileDependencyZorn } from '../fileDependencyZorn';
 
 const FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE = [

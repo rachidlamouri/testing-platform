@@ -2,7 +2,7 @@ import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdesh
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../../utilities/buildConstructorFunction';
+} from '../../../../utilities/deprecated-constructor-function/buildConstructorFunction';
 
 type BaseCommonBoundaryRoot = {
   directoryPath: string;

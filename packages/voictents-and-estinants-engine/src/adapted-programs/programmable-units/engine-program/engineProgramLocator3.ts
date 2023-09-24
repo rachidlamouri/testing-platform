@@ -2,9 +2,9 @@ import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinV
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../utilities/buildConstructorFunction';
-import { getTextDigest } from '../../../utilities/getTextDigest';
-import { getZornableId } from '../../../utilities/getZornableId';
+} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
+import { getTextDigest } from '../../../utilities/string/getTextDigest';
+import { getZornableId } from '../../../utilities/deprecated-zorn/getZornableId';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
 import { TypeScriptFile } from '../type-script-file/typeScriptFile';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';

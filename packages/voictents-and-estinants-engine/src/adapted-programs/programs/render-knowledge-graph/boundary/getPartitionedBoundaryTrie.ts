@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
-import { hasOneElement } from '../../../../utilities/hasOneElement';
+import { hasOneElement } from '../../../../utilities/arrays/hasOneElement';
 import {
   PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
   PartitionedBoundaryListTrieVoque,

@@ -1,4 +1,4 @@
-import { ComplexMap } from '../../../../utilities/complexMap';
+import { ComplexMap } from '../../../../utilities/datastructures/complexMap';
 import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
 import { PartitionFact } from '../partition-fact/partitionFact';
 import {

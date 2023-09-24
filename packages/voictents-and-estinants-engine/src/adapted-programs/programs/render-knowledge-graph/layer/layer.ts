@@ -1,6 +1,6 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { SimplifyN } from '../../../../utilities/simplify';
+import { SimplifyN } from '../../../../utilities/types/simplify';
 import { Directory } from '../../../programmable-units/file/directory';
 import { LayerConfiguration } from './layerConfiguration';
 
