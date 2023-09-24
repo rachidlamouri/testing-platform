@@ -1,6 +1,14 @@
 import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 
-type ProgramTest = {
+type CustomProgramTest = {
+  programName: string;
+  programFilePath: string;
+  prefaceDescription: string;
+  skip?: boolean;
+  commandList: string[];
+};
+
+type DefaultProgramTest = {
   programName: string;
   programFilePath: string;
   prefaceDescription: string;
@@ -9,7 +17,7 @@ type ProgramTest = {
 
 type ProgramTestGroup = {
   description: string;
-  programTestList: ProgramTest[];
+  programTestList: (DefaultProgramTest | CustomProgramTest)[];
 };
 
 /**
@@ -206,7 +214,22 @@ export const CI_MODEL: CiModel = {
           programFilePath:
             'packages/voictents-and-estinants-engine/src/adapted-programs/programs/scaffold-file/assembleScaffoldedFile.ts',
           prefaceDescription: 'Perfoming test run of "assembleScaffoldedFile"',
-          skip: true,
+          commandList: [
+            'BASE_SNAPSHOT_DIRECTORY_PATH=debug/assembleScaffoldedFile/test',
+            'HUBBLEPUP_SNAPSHOT_FILE_PATH="$BASE_SNAPSHOT_DIRECTORY_PATH/hubblepupSnapshot.ts"',
+            'ESTINANT_SNAPSHOT_FILE_PATH="$BASE_SNAPSHOT_DIRECTORY_PATH/estinantSnapshot.ts"',
+            'PROGRAM_SNAPSHOT_FILE_PATH="$BASE_SNAPSHOT_DIRECTORY_PATH/programSnapshot.ts"',
+            'mkdir -p "$BASE_SNAPSHOT_DIRECTORY_PATH"',
+            'rm -f "$HUBBLEPUP_SNAPSHOT_FILE_PATH"',
+            'rm -f "$ESTINANT_SNAPSHOT_FILE_PATH"',
+            'rm -f "$PROGRAM_SNAPSHOT_FILE_PATH"',
+            'touch "$HUBBLEPUP_SNAPSHOT_FILE_PATH"',
+            'touch "$ESTINANT_SNAPSHOT_FILE_PATH"',
+            'touch "$PROGRAM_SNAPSHOT_FILE_PATH"',
+            'npm run scaffold hubblepup "$HUBBLEPUP_SNAPSHOT_FILE_PATH"',
+            'npm run scaffold estinant "$ESTINANT_SNAPSHOT_FILE_PATH"',
+            'npm run scaffold program "$PROGRAM_SNAPSHOT_FILE_PATH"',
+          ],
         },
         {
           programName: 'comments-example',

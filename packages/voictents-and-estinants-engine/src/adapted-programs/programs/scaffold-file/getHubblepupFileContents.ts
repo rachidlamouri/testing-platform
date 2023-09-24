@@ -18,7 +18,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/utilities/simplify.ts',
+      'packages/voictents-and-estinants-engine/src/utilities/types/simplify.ts',
     identifierList: ['SimplifyN'],
   },
 ];

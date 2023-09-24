@@ -30,11 +30,18 @@ export const serializeCiModel = buildEstinant({
           `# ${programTestGroup.description}`,
           '',
           ...programTestGroup.programTestList.flatMap((programTest) => {
+            let commandList: string[];
+            if ('commandList' in programTest) {
+              commandList = programTest.commandList;
+            } else {
+              commandList = [`npx ts-node ${programTest.programFilePath}`];
+            }
+
             return [
               `## ${programTest.programName}`,
               `echo "# ${programTest.programName}"`,
               `echo "${programTest.prefaceDescription}"`,
-              `npx ts-node ${programTest.programFilePath}`,
+              ...commandList,
               ASSERT_CACHED_DEBUG_IS_UNCHANGED,
               PRINT_NEW_LINE,
               '',

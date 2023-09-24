@@ -1,4 +1,5 @@
 build/
+debug/
 
 # TODO: unignore these when we start using them again
 packages/vscode-extension-command/
