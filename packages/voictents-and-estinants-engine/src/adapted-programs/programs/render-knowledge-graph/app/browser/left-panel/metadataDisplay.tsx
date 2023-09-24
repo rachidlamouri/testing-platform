@@ -109,13 +109,7 @@ const MetadataFields: FunctionComponent<{ selectedMetadata: Metadata }> = ({
   );
 };
 
-export type MetadataDisplayProps = {
-  panelWidth: number;
-};
-
-export const MetadataDisplay: FunctionComponent<MetadataDisplayProps> = ({
-  panelWidth,
-}) => {
+export const MetadataDisplay: FunctionComponent = () => {
   const { metadataById } = useGeneratedMetadata();
   const { selectedId } = useSelectedIdContext();
 
@@ -130,7 +124,6 @@ export const MetadataDisplay: FunctionComponent<MetadataDisplayProps> = ({
         padding: '8px',
         margin: '0px',
         height: '100%',
-        width: panelWidth,
         overflow: 'hidden',
       }}
     >

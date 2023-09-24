@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { GeneratedMetadataProvider } from './generatedMetadataContext';
-import { LeftPanel } from './left-panel/leftPanel';
 import { SelectedIdProvider } from './selectedIdContext';
 import { ActiveContent } from './wrappers/activeContent';
-import { THEME } from './theme';
+import { Layout } from './layout';
+import { Navigation } from './left-panel/navigation';
+import { MetadataDisplay } from './left-panel/metadataDisplay';
 
 export const App: React.FC = () => {
   useEffect(() => {
@@ -13,21 +14,8 @@ export const App: React.FC = () => {
   return (
     <GeneratedMetadataProvider>
       <SelectedIdProvider>
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <div
-            style={{
-              borderBottom: `2px solid ${THEME.colors.edgelord}`,
-              padding: '8px',
-            }}
-          >
+        <Layout
+          headingContent={
             <h1
               style={{
                 fontSize: '28px',
@@ -36,27 +24,16 @@ export const App: React.FC = () => {
             >
               Knowledge Graph
             </h1>
-          </div>
-
-          <div
-            style={{
-              width: '100%',
-              height: '100%',
-              overflow: 'hidden',
-              display: 'flex',
-            }}
-          >
-            <LeftPanel />
-            <div
-              style={{
-                flexGrow: '1',
-                height: '100%',
-              }}
-            >
-              <ActiveContent />
-            </div>
-          </div>
-        </div>
+          }
+          leftPanelContent={
+            <>
+              <Navigation />
+              <hr style={{ width: '95%' }} />
+              <MetadataDisplay />
+            </>
+          }
+          mainContent={<ActiveContent />}
+        />
       </SelectedIdProvider>
     </GeneratedMetadataProvider>
   );

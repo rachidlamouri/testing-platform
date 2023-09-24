@@ -3,13 +3,7 @@ import { useGeneratedMetadata } from '../generatedMetadataContext';
 import { useSelectedIdContext } from '../selectedIdContext';
 import { THEME } from '../theme';
 
-export type NavigationProps = {
-  panelWidth: number;
-};
-
-export const Navigation: FunctionComponent<NavigationProps> = ({
-  panelWidth,
-}) => {
+export const Navigation: FunctionComponent = () => {
   const { generatedIndex } = useGeneratedMetadata();
 
   const { selectedBoundaryId, onSelectBoundaryId } = useSelectedIdContext();
@@ -34,7 +28,6 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
         padding: '8px',
         margin: '0px',
         height: '70%',
-        width: panelWidth,
         overflowY: 'scroll',
       }}
     >
