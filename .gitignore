@@ -23,6 +23,10 @@ debug/testGraphRender/voictents/*
 debug/testGraphRender/voictents/serialized/*
 !debug/testGraphRender/voictents/serialized/sanity-snapshot
 
+!debug/assembleScaffoldedFile
+debug/assembleScaffoldedFile/*
+!debug/assembleScaffoldedFile/test
+
 !debug/modelPrograms
 debug/modelPrograms/*
 !debug/modelPrograms/voictents/
