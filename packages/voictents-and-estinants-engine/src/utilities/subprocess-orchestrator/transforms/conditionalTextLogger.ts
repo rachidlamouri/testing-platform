@@ -2,15 +2,13 @@
 import { TextTransform } from './textTransform';
 
 type ConditionalTextLoggerInput = {
-  initialIsEnabledState: boolean;
+  isInitiallyEnabled: boolean;
 };
 
 export class ConditionalTextLogger extends TextTransform {
   private _isEnabled: boolean;
 
-  constructor({
-    initialIsEnabledState: initialIsEnableState,
-  }: ConditionalTextLoggerInput) {
+  constructor({ isInitiallyEnabled }: ConditionalTextLoggerInput) {
     super({
       onTransform: (text): string => {
         if (this.isEnabled) {
@@ -24,7 +22,7 @@ export class ConditionalTextLogger extends TextTransform {
       },
     });
 
-    this._isEnabled = initialIsEnableState;
+    this._isEnabled = isInitiallyEnabled;
   }
 
   get isEnabled(): boolean {

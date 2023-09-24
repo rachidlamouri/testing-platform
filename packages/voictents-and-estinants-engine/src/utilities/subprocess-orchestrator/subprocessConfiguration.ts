@@ -4,4 +4,5 @@ export type SubprocessConfiguration = {
   label: string;
   script: string;
   color: ForegroundColor;
+  isInitiallyEnabled: boolean;
 };

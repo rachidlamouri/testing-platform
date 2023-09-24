@@ -21,39 +21,44 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       label: 'model-programs',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-programs/modelPrograms.ts',
+      isInitiallyEnabled: true,
     },
     {
       label: 'render-knowledge-graph',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts',
+      isInitiallyEnabled: true,
     },
     {
       label: 'serve-knowledge-graph',
       script:
         'npx http-server debug/render-knowledge-graph/voictents/output-file',
+      isInitiallyEnabled: false,
     },
     {
       label: 'find-unused-exports',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/find-unused-exports/findUnusedExports.ts',
+      isInitiallyEnabled: true,
     },
     {
       label: 'model-ci',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-ci/modelCi.ts',
+      isInitiallyEnabled: true,
     },
     {
       label: 'typecheck',
       script: 'npx tsc -p packages/voictents-and-estinants-engine --watch',
+      isInitiallyEnabled: true,
     },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
-).map(({ label, script }) => {
+).map((partialConfiguration) => {
   const color = mutableColorList.pop();
   assertNotUndefined(color);
 
   return {
-    label,
-    script,
+    ...partialConfiguration,
     color,
   };
 });
@@ -71,7 +76,7 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
     const childProcess = spawn(command, args);
 
     const textLogger = new ConditionalTextLogger({
-      initialIsEnabledState: true,
+      isInitiallyEnabled: configuration.isInitiallyEnabled,
     });
 
     childProcess.stdout
