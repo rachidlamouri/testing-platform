@@ -6,6 +6,8 @@
     "digest": "c9be5e43c3354e9b972d0ae437d01ac800a8beb5"
   - "fileName": "comments-example"
     "digest": "ad6980699e133ec087036591c9004eb6e9bd1de1"
+  - "fileName": "develop-knowledge-graph"
+    "digest": "eddf4e147636d632154992968a716c3fa0f19523"
   - "fileName": "find-unused-exports"
     "digest": "51078036b7947b5904f898bf88d31ed866c9cbe4"
   - "fileName": "get-snapshot-refresh-script"

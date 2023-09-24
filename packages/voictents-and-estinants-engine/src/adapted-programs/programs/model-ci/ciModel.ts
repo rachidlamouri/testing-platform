@@ -203,6 +203,13 @@ export const CI_MODEL: CiModel = {
           prefaceDescription: 'WIP',
         },
         {
+          programName: 'develop-knowledge-graph',
+          programFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts',
+          prefaceDescription: 'WIP',
+          skip: true,
+        },
+        {
           programName: 'render-type-script-file-relationships',
           programFilePath:
             'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts',
