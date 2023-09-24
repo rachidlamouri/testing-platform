@@ -157,6 +157,13 @@ npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/program
 bash checkUncommittedDebug.sh
 printf "\n"
 
+# ## develop-knowledge-graph
+# echo "# develop-knowledge-graph"
+# echo "WIP"
+# npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts
+# bash checkUncommittedDebug.sh
+# printf "\n"
+
 # ## render-type-script-file-relationships
 # echo "# render-type-script-file-relationships"
 # echo "WIP"

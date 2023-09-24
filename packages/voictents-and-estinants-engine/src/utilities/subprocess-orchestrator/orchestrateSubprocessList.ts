@@ -15,6 +15,18 @@ const FOCUS_ALL_REGEX = /^a$/;
 
 const mutableColorList = colorList.slice();
 
+const useKnowledgeGraphDeveloper = process.env.DEV_KG !== undefined;
+
+const knowledgeGraphProgramLabel = useKnowledgeGraphDeveloper
+  ? 'develop-knowledge-graph'
+  : 'render-knowledge-graph';
+const runKnowledgeGraph = useKnowledgeGraphDeveloper
+  ? 'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts'
+  : 'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts';
+const serveKnowledgeGrpah = useKnowledgeGraphDeveloper
+  ? 'npx http-server debug/develop-knowledge-graph/voictents/output-file'
+  : 'npx http-server debug/render-knowledge-graph/voictents/output-file';
+
 const subprocessConfigurationList: SubprocessConfiguration[] = (
   [
     {
@@ -24,15 +36,13 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       isInitiallyVisible: true,
     },
     {
-      label: 'render-knowledge-graph',
-      script:
-        'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts',
+      label: knowledgeGraphProgramLabel,
+      script: runKnowledgeGraph,
       isInitiallyVisible: true,
     },
     {
       label: 'serve-knowledge-graph',
-      script:
-        'npx http-server debug/render-knowledge-graph/voictents/output-file',
+      script: serveKnowledgeGrpah,
       isInitiallyVisible: false,
     },
     {
