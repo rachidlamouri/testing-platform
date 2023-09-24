@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { posix } from 'path';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   PROGRAM_ERROR_GEPP,
@@ -28,7 +29,7 @@ type ReportingLocator = ReportingEstinantLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
   typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
   name: ESTINANT_NAME,
-  filePath: __filename,
+  filePath: posix.relative('', __filename),
 };
 
 const PROTECTED_FILE_PATH_LIST = [

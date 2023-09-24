@@ -1,3 +1,4 @@
+import { posix } from 'path';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   GenericLintAssertion,
@@ -21,7 +22,7 @@ import {
 const ESTINANT_NAME = 'markUnusedExports' as const;
 const ruleSource = new EstinantSourceInstance({
   estinantName: ESTINANT_NAME,
-  filePath: __filename,
+  filePath: posix.relative('', __filename),
 });
 
 type LocatableImportRuleMessageContext = { importedIdentifierName: string };
