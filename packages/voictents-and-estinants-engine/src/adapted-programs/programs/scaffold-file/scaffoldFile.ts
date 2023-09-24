@@ -11,6 +11,7 @@ import { ImportConfiguration, ScaffoldeeFileMetadata } from './types';
 import { getHubblepupFileContents } from './getHubblepupFileContents';
 import { getEstinantFileContents } from './getEstinantFileContents';
 import { FILE_GEPP, FileVoque } from '../../programmable-units/file/file';
+import { getProgramFileContents } from './getProgramFileContents';
 
 /**
  * Populates export declarations for a collection and all related types. It uses
@@ -61,6 +62,8 @@ export const scaffoldFile = buildEstinant({
           return getEstinantFileContents(relevantFileMetadata);
         case FileTypeName.Hubblepup:
           return getHubblepupFileContents(relevantFileMetadata);
+        case FileTypeName.Program:
+          return getProgramFileContents(relevantFileMetadata);
       }
     })();
 

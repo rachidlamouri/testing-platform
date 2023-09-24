@@ -1,6 +1,7 @@
 import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
 
 export enum FileTypeName {
+  Program = 'program',
   Estinant = 'estinant',
   Hubblepup = 'hubblepup',
 }
