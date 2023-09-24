@@ -1,6 +1,6 @@
 import { InMemoryOdeshin3Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { SimplifyN } from '../../../../utilities/simplify';
+import { SimplifyN } from '../../../../utilities/types/simplify';
 import { BoundaryZorn } from './boundary';
 
 type BoundaryConfigurationConstructorInput = {
@@ -87,9 +87,5 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
   new BoundaryConfigurationInstance({
     displayName: 'Core Test Programs',
     directoryPath: 'packages/voictents-and-estinants-engine/src/core-programs',
-  }),
-  new BoundaryConfigurationInstance({
-    displayName: 'Utilities',
-    directoryPath: 'packages/voictents-and-estinants-engine/src/utilities',
   }),
 ];

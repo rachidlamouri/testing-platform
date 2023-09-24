@@ -1,9 +1,9 @@
 import { InMemoryOdeshin2IndexByName } from '../../../../core/engine/inMemoryOdeshinVoictent2';
 import { InMemoryVoque } from '../../../../core/engine/inMemoryVoque';
-import { assertNotUndefined } from '../../../../utilities/assertNotUndefined';
+import { assertNotUndefined } from '../../../../utilities/nil/assertNotUndefined';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { isNotNull } from '../../../../utilities/isNotNull';
-import { SimplifyN } from '../../../../utilities/simplify';
+import { isNotNull } from '../../../../utilities/nil/isNotNull';
+import { SimplifyN } from '../../../../utilities/types/simplify';
 import { BoundedFile } from '../file/boundedFile';
 import {
   FileDependencyPathNode,

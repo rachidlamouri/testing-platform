@@ -5,7 +5,7 @@ import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../../utilities/simplify';
+import { SimplifyN } from '../../../../utilities/types/simplify';
 import {
   DirectedGraph2,
   DirectedGraph2Instance,

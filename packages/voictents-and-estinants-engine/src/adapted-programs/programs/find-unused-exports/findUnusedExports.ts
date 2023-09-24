@@ -3,7 +3,7 @@ import {
   buildVoictentByGepp,
   digikikify,
 } from '../../../adapter/engine/digikikify';
-import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { ProgramFileCache } from '../../../utilities/program/programFileCache';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';

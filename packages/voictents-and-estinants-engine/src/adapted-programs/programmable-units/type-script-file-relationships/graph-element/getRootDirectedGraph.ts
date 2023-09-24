@@ -31,7 +31,7 @@ import { OVERVIEW_BOUNDARY_ZORN } from './boundaryConfiguration';
 import { COMMON_ATTRIBUTE_BY_KEY, FONT_SIZE } from './commonAttributeByKey';
 import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from '../rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
-import { getTextDigest } from '../../../../utilities/getTextDigest';
+import { getTextDigest } from '../../../../utilities/string/getTextDigest';
 import { DirectedCluster } from '../../graph-visualization/directed-graph/directedSubgraph';
 import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
 

@@ -8,7 +8,7 @@ import {
   BoundedDirectoryInstance,
   BoundedDirectoryVoque,
 } from './boundedDirectory';
-import { isNotNull } from '../../../../utilities/isNotNull';
+import { isNotNull } from '../../../../utilities/nil/isNotNull';
 import {
   PARTITIONED_BOUNDARY_TRIE_GEPP,
   PartitionedBoundaryTrieVoque,

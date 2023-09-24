@@ -1,4 +1,4 @@
-import { hasOneElement } from '../../../utilities/hasOneElement';
+import { hasOneElement } from '../../../utilities/arrays/hasOneElement';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   GenericProgramErrorVoque,

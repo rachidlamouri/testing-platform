@@ -1,6 +1,6 @@
-import { assertNotNull } from '../../../../utilities/assertNotNull';
-import { assertNotUndefined } from '../../../../utilities/assertNotUndefined';
-import { ComplexMap } from '../../../../utilities/complexMap';
+import { assertNotNull } from '../../../../utilities/nil/assertNotNull';
+import { assertNotUndefined } from '../../../../utilities/nil/assertNotUndefined';
+import { ComplexMap } from '../../../../utilities/datastructures/complexMap';
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { BoundedFile } from '../file/boundedFile';
 import { PartitionFact } from '../partition-fact/partitionFact';

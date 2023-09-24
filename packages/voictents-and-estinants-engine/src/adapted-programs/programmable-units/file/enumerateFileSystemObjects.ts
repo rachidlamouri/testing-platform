@@ -2,14 +2,14 @@ import {
   FileSystemNodeMetadata,
   getNestedFileSystemNodeMetadataList,
 } from '../../../utilities/file/getNestedFilePaths';
-import { splitList } from '../../../utilities/splitList';
+import { splitList } from '../../../utilities/arrays/splitList';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { DIRECTORY_GEPP, DirectoryInstance, DirectoryVoque } from './directory';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   FileSystemObjectEnumeratorConfigurationVoque,
 } from './fileSystemObjectEnumeratorConfiguration';
-import { getTextDigest } from '../../../utilities/getTextDigest';
+import { getTextDigest } from '../../../utilities/string/getTextDigest';
 import { FILE_GEPP, File, FileInstance, FileVoque } from './file';
 
 /**

@@ -1,5 +1,5 @@
 import { StandardInMemoryVoque } from '../../../../core/engine/inMemoryVoque';
-import { Trie } from '../../../../utilities/trie';
+import { Trie } from '../../../../utilities/datastructures/trie';
 import { Layer } from './layer';
 
 /**

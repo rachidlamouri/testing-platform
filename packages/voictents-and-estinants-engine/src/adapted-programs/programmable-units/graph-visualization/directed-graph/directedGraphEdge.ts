@@ -1,5 +1,5 @@
 import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
-import { SpreadN } from '../../../../utilities/spreadN';
+import { SpreadN } from '../../../../utilities/types/spreadN';
 import { AttributeByKeyCNE } from './attributeByKeyCNE';
 
 export enum EdgeStyle {

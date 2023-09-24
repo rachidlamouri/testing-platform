@@ -2,7 +2,7 @@ import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinV
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../utilities/buildConstructorFunction';
+} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
 import { DirectedGraphElement2 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { RootGraphLocator } from '../../programmable-units/graph-visualization/directed-graph/rootGraphLocator';
 

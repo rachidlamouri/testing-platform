@@ -2,8 +2,8 @@ import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinV
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../utilities/buildConstructorFunction';
-import { getZorn } from '../../../utilities/getZorn';
+} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
+import { getZorn } from '../../../utilities/deprecated-zorn/getZorn';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
 

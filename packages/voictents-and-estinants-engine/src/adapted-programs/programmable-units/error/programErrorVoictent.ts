@@ -1,10 +1,10 @@
 import * as uuid from 'uuid';
-import { getVoictentResourceLocator } from '../../../utilities/getVoictentResourceLocator';
-import { normalizeFilePathForFileName } from '../../../utilities/normalizeFilePathForFileName';
+import { getVoictentResourceLocator } from '../../../utilities/deprecated-misc/getVoictentResourceLocator';
+import { normalizeFilePathForFileName } from '../../../utilities/file/normalizeFilePathForFileName';
 import {
   ProgramFileCache,
   SerializedHubblepup,
-} from '../../../utilities/programFileCache';
+} from '../../../utilities/program/programFileCache';
 import { serialize } from '../../../utilities/typed-datum/serializer/serialize';
 import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
 import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractInMemoryVoictent2';

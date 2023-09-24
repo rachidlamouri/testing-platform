@@ -12,7 +12,7 @@ import {
   FILE_DEPENDENCY_GEPP,
   FileDependencyVoque,
 } from './dependency/fileDependency';
-import { assertNotUndefined } from '../../../utilities/assertNotUndefined';
+import { assertNotUndefined } from '../../../utilities/nil/assertNotUndefined';
 import {
   PARTITIONED_DIRECTORY_GEPP,
   PartitionedDirectoryInstance,

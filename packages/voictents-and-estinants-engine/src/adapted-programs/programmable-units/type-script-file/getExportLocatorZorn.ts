@@ -1,4 +1,4 @@
-import { getZorn } from '../../../utilities/getZorn';
+import { getZorn } from '../../../utilities/deprecated-zorn/getZorn';
 import {
   GenericZorn2Template,
   Zorn2,

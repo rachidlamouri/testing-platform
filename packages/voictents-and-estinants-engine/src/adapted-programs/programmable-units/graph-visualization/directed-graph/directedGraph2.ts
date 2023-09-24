@@ -1,7 +1,7 @@
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../../utilities/buildConstructorFunction';
+} from '../../../../utilities/deprecated-constructor-function/buildConstructorFunction';
 import { PartialGraphAttributeByKey } from './directedGraph';
 import { RootGraphLocator } from './rootGraphLocator';
 import { RootDirectedGraphElement2Zorn } from './types';

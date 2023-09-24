@@ -2,8 +2,8 @@ import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinV
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../utilities/buildConstructorFunction';
-import { getZornableId } from '../../../utilities/getZornableId';
+} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
+import { getZornableId } from '../../../utilities/deprecated-zorn/getZornableId';
 import { Tuple } from '../../../utilities/semantic-types/tuple';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
 import { EngineEstinant3 } from './engineEstinant3';

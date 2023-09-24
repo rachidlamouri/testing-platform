@@ -9,7 +9,7 @@ import {
   HubblepupPelieLanbe2,
   VoictentPelieLanbe,
 } from '../engine-shell/voictent/lanbe';
-import { Json, jsonUtils } from '../../utilities/json';
+import { Json, jsonUtils } from '../../utilities/json/json';
 import {
   MissingLanbeError,
   HubblepupPelueState,

@@ -1,4 +1,4 @@
-import { assertNotNull } from '../../../utilities/assertNotNull';
+import { assertNotNull } from '../../../utilities/nil/assertNotNull';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   GenericProgramErrorVoque,

@@ -141,7 +141,7 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/utilities/simplify.ts',
+      'packages/voictents-and-estinants-engine/src/utilities/types/simplify.ts',
     importedIdentifierName: 'Simplify',
   },
   {

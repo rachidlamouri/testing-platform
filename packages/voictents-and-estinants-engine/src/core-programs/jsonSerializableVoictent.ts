@@ -1,5 +1,5 @@
-import { jsonUtils } from '../utilities/json';
-import { serializeError } from '../utilities/serializeError';
+import { jsonUtils } from '../utilities/json/json';
+import { serializeError } from '../utilities/error/serializeError';
 import {
   GenericAbstractSerializableVoque,
   AbstractSerializableVoictent,
@@ -8,7 +8,7 @@ import { FileExtensionSuffixIdentifier } from '../adapted-programs/programmable-
 import {
   ProgramFileCache,
   SerializedHubblepup,
-} from '../utilities/programFileCache';
+} from '../utilities/program/programFileCache';
 import { GenericHubbleup } from '../core/engine-shell/hubblepup/hubblepup';
 
 type JsonSerializableVoictentConstructorInput<

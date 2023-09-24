@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
-import { splitList } from '../../../utilities/splitList';
+import { splitList } from '../../../utilities/arrays/splitList';
 import {
   flattenCallExpressionChain,
   FlattenedCallExpressionOrError,

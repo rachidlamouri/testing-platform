@@ -1,9 +1,9 @@
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../utilities/buildConstructorFunction';
-import { getFileZorn } from '../../../utilities/getFileZorn';
-import { getZornableId } from '../../../utilities/getZornableId';
+} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
+import { getFileZorn } from '../../../utilities/deprecated-zorn/getFileZorn';
+import { getZornableId } from '../../../utilities/deprecated-zorn/getZornableId';
 import {
   RootGraphLocator,
   RootGraphLocatorInstance,

@@ -12,7 +12,7 @@ import {
   TypeScriptFileImport,
   TypeScriptFileImportListVoque,
 } from './typeScriptFileImportList';
-import { splitList } from '../../../utilities/splitList';
+import { splitList } from '../../../utilities/arrays/splitList';
 import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,

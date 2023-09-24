@@ -4,7 +4,7 @@ import {
   buildVoictentByGepp,
   digikikify,
 } from '../../../adapter/engine/digikikify';
-import { ProgramFileCache } from '../../../utilities/programFileCache';
+import { ProgramFileCache } from '../../../utilities/program/programFileCache';
 import {
   EngineFunctionConfigurationVoque,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
@@ -100,6 +100,7 @@ import {
   LayerListTrieVoque,
 } from './layer/layerListTrie';
 import { LAYER_TRIE_GEPP, LayerTrieVoque } from './layer/layerTrie';
+import { getUtilityBoundary } from './boundary/getUtilityBoundary';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -196,6 +197,7 @@ digikikify({
 
     getBoundaryFromConfiguration,
     getAdaptedProgramBoundary,
+    getUtilityBoundary,
 
     getCommonBoundaryRoot,
     getBoundaryPartition,

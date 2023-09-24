@@ -1,6 +1,6 @@
-import { getTextDigest } from '../../../utilities/getTextDigest';
-import { getZorn } from '../../../utilities/getZorn';
-import { isNotNull } from '../../../utilities/isNotNull';
+import { getTextDigest } from '../../../utilities/string/getTextDigest';
+import { getZorn } from '../../../utilities/deprecated-zorn/getZorn';
+import { isNotNull } from '../../../utilities/nil/isNotNull';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 import {

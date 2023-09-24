@@ -10,7 +10,7 @@ import {
   isIdentifiableVariableDeclaration,
 } from '../../../utilities/type-script-ast/isIdentifiableVariableDeclaration';
 import { isExportNamedTypeScriptEnumDeclaration } from '../../../utilities/type-script-ast/isExportNamedTypeScriptEnumDeclaration';
-import { hasOneElement } from '../../../utilities/hasOneElement';
+import { hasOneElement } from '../../../utilities/arrays/hasOneElement';
 import { isExportNamedFunctionDeclaration } from '../../../utilities/type-script-ast/isExportNamedFunctionDeclaration';
 
 export type IdentifiableProgramBodyStatementNode =

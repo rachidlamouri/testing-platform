@@ -14,7 +14,7 @@ import {
   GenericAdaptedOutputVickenTuple,
   GenericAdaptedRightInputVickenTuple,
 } from '../shared/vicken';
-import { SpreadN } from '../../../utilities/spreadN';
+import { SpreadN } from '../../../utilities/types/spreadN';
 import {
   buildOutputHubblepupTupleAppreffingeBuilder2,
   OutputHubblepupTupleAppreffingeBuilderParent2,

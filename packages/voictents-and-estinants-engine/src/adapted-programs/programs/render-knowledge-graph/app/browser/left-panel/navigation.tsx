@@ -33,8 +33,9 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
         flexDirection: 'column',
         padding: '8px',
         margin: '0px',
-        height: '100%',
+        height: '70%',
         width: panelWidth,
+        overflowY: 'scroll',
       }}
     >
       {(generatedIndex.navigationList ?? []).map((layer, layerIndex) => {

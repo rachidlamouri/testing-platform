@@ -1,7 +1,7 @@
 import { Hubblepup } from '../../../core/engine-shell/hubblepup/hubblepup';
 import { GenericVoque } from '../../../core/engine/voque';
-import { Predicate } from '../../../utilities/predicate';
-import { SpreadN } from '../../../utilities/spreadN';
+import { Predicate } from '../../../utilities/functions/predicate';
+import { SpreadN } from '../../../utilities/types/spreadN';
 import {
   buildEstinantAssembler,
   EstinantAssemblerParent,

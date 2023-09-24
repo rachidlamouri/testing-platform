@@ -1,5 +1,5 @@
-import { LanbeTypeName } from '../core/engine-shell/voictent/lanbe';
-import { RuntimeStatistics } from '../core/engine/digikikify';
+import { LanbeTypeName } from '../../core/engine-shell/voictent/lanbe';
+import { RuntimeStatistics } from '../../core/engine/digikikify';
 
 export const serializeRuntimeStatistics = (
   statistics: RuntimeStatistics,

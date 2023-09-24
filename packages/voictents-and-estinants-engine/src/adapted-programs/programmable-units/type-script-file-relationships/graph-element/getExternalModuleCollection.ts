@@ -8,7 +8,7 @@ import {
   ExternalModule,
   ExternalModuleVoque,
 } from './externalModule';
-import { getTextDigest } from '../../../../utilities/getTextDigest';
+import { getTextDigest } from '../../../../utilities/string/getTextDigest';
 
 /**
  * Gets all external module file paths at once in order to deduplicate them and

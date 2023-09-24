@@ -1,5 +1,5 @@
 import { TupleToUnion, UnionToIntersection, Simplify } from 'type-fest';
-import { getTextDigest } from '../getTextDigest';
+import { getTextDigest } from '../string/getTextDigest';
 import { NonEmptyTuple, Tuple } from './tuple';
 
 /**

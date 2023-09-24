@@ -5,13 +5,13 @@ import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../utilities/simplify';
+import { SimplifyN } from '../../../utilities/types/simplify';
 import {
   CommentedProgramBodyDeclaration,
   IdentifiableCommentedProgramBodyDeclaration,
   isIdentifiableCommentedProgramBodyDeclaration,
 } from './commentedProgramBodyDeclaration';
-import { hasOneElement } from '../../../utilities/hasOneElement';
+import { hasOneElement } from '../../../utilities/arrays/hasOneElement';
 
 const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE = [
   'filePath',

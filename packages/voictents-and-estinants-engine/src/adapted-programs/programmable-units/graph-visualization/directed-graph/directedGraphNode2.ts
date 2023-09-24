@@ -2,7 +2,7 @@ import { PartialNodeAttributeByKey } from './directedGraphNode';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../../utilities/buildConstructorFunction';
+} from '../../../../utilities/deprecated-constructor-function/buildConstructorFunction';
 import { GraphConstituentLocator } from './graphConstituentLocator';
 import { GlobalDirectedGraphElement2Zorn } from './types';
 import { RootGraphLocator } from './rootGraphLocator';
