@@ -10,8 +10,8 @@ import { formatTable } from '../table-formatter/formatTable';
 
 const EMPTY_WHITESPACE_REGEX = /^\s*$/;
 const SPACE_DELIMITED_INTEGERS_REGEX = /^(\d+\s*)+$/;
-const FOCUS_REGEX = /^f\d$/;
-const ENABLE_ALL_REGEX = /^a$/;
+const FOCUS_ONE_REGEX = /^f\d$/;
+const FOCUS_ALL_REGEX = /^a$/;
 
 const mutableColorList = colorList.slice();
 
@@ -21,36 +21,36 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       label: 'model-programs',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-programs/modelPrograms.ts',
-      isInitiallyEnabled: true,
+      isInitiallyVisible: true,
     },
     {
       label: 'render-knowledge-graph',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts',
-      isInitiallyEnabled: true,
+      isInitiallyVisible: true,
     },
     {
       label: 'serve-knowledge-graph',
       script:
         'npx http-server debug/render-knowledge-graph/voictents/output-file',
-      isInitiallyEnabled: false,
+      isInitiallyVisible: false,
     },
     {
       label: 'find-unused-exports',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/find-unused-exports/findUnusedExports.ts',
-      isInitiallyEnabled: true,
+      isInitiallyVisible: true,
     },
     {
       label: 'model-ci',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-ci/modelCi.ts',
-      isInitiallyEnabled: true,
+      isInitiallyVisible: true,
     },
     {
       label: 'typecheck',
       script: 'npx tsc -p packages/voictents-and-estinants-engine --watch',
-      isInitiallyEnabled: true,
+      isInitiallyVisible: true,
     },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
 ).map((partialConfiguration) => {
@@ -76,7 +76,7 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
     const childProcess = spawn(command, args);
 
     const textLogger = new ConditionalTextLogger({
-      isInitiallyEnabled: configuration.isInitiallyEnabled,
+      isInitiallyVisible: configuration.isInitiallyVisible,
     });
 
     childProcess.stdout
@@ -123,7 +123,7 @@ const orchestrateSubprocessList = (): void => {
 
   type CachedSubprocessState = {
     label: string;
-    isEnabled: boolean;
+    isVisible: boolean;
     color: ForegroundColor;
   };
 
@@ -133,7 +133,7 @@ const orchestrateSubprocessList = (): void => {
     cachedSubprocessStateList.forEach((cachedState) => {
       const subprocessState = subprocessStateByLabel.get(cachedState.label);
       assertNotUndefined(subprocessState);
-      subprocessState.textLogger.isEnabled = cachedState.isEnabled;
+      subprocessState.textLogger.isVisible = cachedState.isVisible;
 
       subprocessState.childProcess.stdin.write('rs\n');
     });
@@ -142,7 +142,7 @@ const orchestrateSubprocessList = (): void => {
       'Now playing:',
       ...cachedSubprocessStateList
         .filter((cachedState) => {
-          return cachedState.isEnabled;
+          return cachedState.isVisible;
         })
         .map((cachedState) => {
           return `    ${applyColor(cachedState.label, cachedState.color)}`;
@@ -157,22 +157,22 @@ const orchestrateSubprocessList = (): void => {
       cachedSubprocessStateList = subprocessStateList.map((state) => {
         return {
           label: state.configuration.label,
-          isEnabled: state.textLogger.isEnabled,
+          isVisible: state.textLogger.isVisible,
           color: state.configuration.color,
         };
       });
 
       subprocessStateList.forEach((state) => {
         // eslint-disable-next-line no-param-reassign
-        state.textLogger.isEnabled = false;
+        state.textLogger.isVisible = false;
       });
     }
 
     const table = formatTable([
-      ['Index', 'Label', 'Is Enabled'],
+      ['Index', 'Label', 'Is Visible'],
       ...cachedSubprocessStateList.map((cachedState, index) => {
-        const isEnabledColor: ForegroundColor | undefined =
-          cachedState.isEnabled ? 'green' : undefined;
+        const isVisibleColor: ForegroundColor | undefined =
+          cachedState.isVisible ? 'green' : undefined;
 
         return [
           `${index}`,
@@ -181,8 +181,8 @@ const orchestrateSubprocessList = (): void => {
             color: cachedState.color,
           },
           {
-            text: cachedState.isEnabled.toString(),
-            color: isEnabledColor,
+            text: cachedState.isVisible.toString(),
+            color: isVisibleColor,
           },
         ];
       }),
@@ -196,9 +196,9 @@ const orchestrateSubprocessList = (): void => {
       SPACE_DELIMITED_INTEGERS_REGEX.toString(),
     );
 
-    const focusRegexText = chalk.blue(FOCUS_REGEX);
+    const focusOneRegextText = chalk.blue(FOCUS_ONE_REGEX);
 
-    const enableAllRegexText = chalk.blue(ENABLE_ALL_REGEX);
+    const focusAllRegexText = chalk.blue(FOCUS_ALL_REGEX);
 
     const outputText = [
       ...table.split('\n'),
@@ -206,8 +206,8 @@ const orchestrateSubprocessList = (): void => {
       'Options',
       `    - enter text matching ${emptyWhitespaceRegexText} to continue`,
       `    - enter text with indices matching ${spaceDelimitedIntegersRegexText} to toggle subprocess visibility`,
-      `    - enter text with one index matching ${focusRegexText} to enable visibility for one subprocess`,
-      `    - enter text matching ${enableAllRegexText} to enable visibility for all subprocesses`,
+      `    - enter text with one index matching ${focusOneRegextText} to enable visibility for one subprocess`,
+      `    - enter text matching ${focusAllRegexText} to enable visibility for all subprocesses`,
     ].join('\n');
 
     return outputText;
@@ -230,20 +230,20 @@ const orchestrateSubprocessList = (): void => {
         const cachedSubprocessState = cachedSubprocessStateList[index];
         assertNotUndefined(cachedSubprocessState);
 
-        cachedSubprocessState.isEnabled = !cachedSubprocessState.isEnabled;
+        cachedSubprocessState.isVisible = !cachedSubprocessState.isVisible;
       });
-    } else if (FOCUS_REGEX.test(input.text)) {
+    } else if (FOCUS_ONE_REGEX.test(input.text)) {
       const numericText = input.text.slice(1);
       const selectedIndex = Number.parseInt(numericText, 10);
 
       cachedSubprocessStateList.forEach((cachedSubprocessState, index) => {
         // eslint-disable-next-line no-param-reassign
-        cachedSubprocessState.isEnabled = index === selectedIndex;
+        cachedSubprocessState.isVisible = index === selectedIndex;
       });
-    } else if (ENABLE_ALL_REGEX.test(input.text)) {
+    } else if (FOCUS_ALL_REGEX.test(input.text)) {
       cachedSubprocessStateList.forEach((cachedSubprocessState) => {
         // eslint-disable-next-line no-param-reassign
-        cachedSubprocessState.isEnabled = true;
+        cachedSubprocessState.isVisible = true;
       });
     }
 

@@ -2,16 +2,16 @@
 import { TextTransform } from './textTransform';
 
 type ConditionalTextLoggerInput = {
-  isInitiallyEnabled: boolean;
+  isInitiallyVisible: boolean;
 };
 
 export class ConditionalTextLogger extends TextTransform {
-  private _isEnabled: boolean;
+  private _isVisible: boolean;
 
-  constructor({ isInitiallyEnabled }: ConditionalTextLoggerInput) {
+  constructor({ isInitiallyVisible }: ConditionalTextLoggerInput) {
     super({
       onTransform: (text): string => {
-        if (this.isEnabled) {
+        if (this.isVisible) {
           // eslint-disable-next-line no-control-regex
           const RESET_TERMINAL_REGEX = /\x1bc/g;
           const outputText = text.replaceAll(RESET_TERMINAL_REGEX, '');
@@ -22,19 +22,19 @@ export class ConditionalTextLogger extends TextTransform {
       },
     });
 
-    this._isEnabled = isInitiallyEnabled;
+    this._isVisible = isInitiallyVisible;
   }
 
-  get isEnabled(): boolean {
-    return this._isEnabled;
+  get isVisible(): boolean {
+    return this._isVisible;
   }
 
-  set isEnabled(isEnabled: boolean) {
-    this._isEnabled = isEnabled;
+  set isVisible(isVisible: boolean) {
+    this._isVisible = isVisible;
   }
 
-  toggleIsEnabled(): void {
-    this.isEnabled = !this._isEnabled;
+  toggleIsVisible(): void {
+    this.isVisible = !this._isVisible;
   }
 }
 /* eslint-enable no-underscore-dangle */
