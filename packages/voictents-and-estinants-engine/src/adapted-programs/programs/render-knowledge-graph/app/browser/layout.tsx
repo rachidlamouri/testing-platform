@@ -1,10 +1,10 @@
 import React from 'react';
 import { THEME } from './theme';
-import { LeftPanel } from './left-panel/leftPanel';
+import { LeftPanel, LeftPanelProps } from './left-panel/leftPanel';
 
 export type LayoutProps = {
   headingContent: React.ReactElement;
-  leftPanelContent: React.ReactElement;
+  leftPanelContent: LeftPanelProps['children'];
   mainContent: React.ReactElement;
 };
 

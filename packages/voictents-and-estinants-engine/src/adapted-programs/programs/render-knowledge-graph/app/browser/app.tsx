@@ -3,8 +3,8 @@ import { GeneratedMetadataProvider } from './generatedMetadataContext';
 import { SelectedIdProvider } from './selectedIdContext';
 import { ActiveContent } from './wrappers/activeContent';
 import { Layout } from './layout';
-import { Navigation } from './left-panel/navigation';
-import { MetadataDisplay } from './left-panel/metadataDisplay';
+import { LayersSection } from './panel-content/layersSection';
+import { MetadataSection } from './panel-content/metadataSection';
 
 export const App: React.FC = () => {
   useEffect(() => {
@@ -27,9 +27,8 @@ export const App: React.FC = () => {
           }
           leftPanelContent={
             <>
-              <Navigation />
-              <hr style={{ width: '95%' }} />
-              <MetadataDisplay />
+              <LayersSection />
+              <MetadataSection />
             </>
           }
           mainContent={<ActiveContent />}

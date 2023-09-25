@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { LeftPanelEdge } from './leftPanelEdge';
 import { EDGE_WIDTH } from './constants';
 
 const MIN_WIDTH = 100;
 const MAX_WIDTH = 800;
 
-export type LeftPanelProps = React.PropsWithChildren;
+export type LeftPanelProps = PropsWithChildren;
 
 export const LeftPanel: React.FunctionComponent<LeftPanelProps> = ({
   children,
@@ -25,6 +25,7 @@ export const LeftPanel: React.FunctionComponent<LeftPanelProps> = ({
           width: panelWidth - EDGE_WIDTH,
           display: 'flex',
           flexDirection: 'column',
+          padding: '4px',
         }}
       >
         {children}

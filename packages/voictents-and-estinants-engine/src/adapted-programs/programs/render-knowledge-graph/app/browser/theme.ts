@@ -6,6 +6,7 @@ const colors = {
   graphite: 'Gray',
   grass: 'Green',
   blurple: 'SlateBlue',
+  lightBlurple: '#6a5acd66',
   gymboreeBlue: 'RoyalBlue',
 };
 
