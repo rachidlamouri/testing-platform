@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { GeneratedMetadataProvider } from './generatedMetadataContext';
-import { LeftPanel } from './left-panel/leftPanel';
 import { SelectedIdProvider } from './selectedIdContext';
 import { ActiveContent } from './wrappers/activeContent';
+import { Layout } from './layout';
+import { LayersSection } from './panel-content/layersSection';
+import { MetadataSection } from './panel-content/metadataSection';
 
 export const App: React.FC = () => {
   useEffect(() => {
@@ -12,24 +14,25 @@ export const App: React.FC = () => {
   return (
     <GeneratedMetadataProvider>
       <SelectedIdProvider>
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            overflow: 'hidden',
-            display: 'flex',
-          }}
-        >
-          <LeftPanel />
-          <div
-            style={{
-              flexGrow: '1',
-              height: '100%',
-            }}
-          >
-            <ActiveContent />
-          </div>
-        </div>
+        <Layout
+          headingContent={
+            <h1
+              style={{
+                fontSize: '28px',
+                margin: '0px',
+              }}
+            >
+              Knowledge Graph
+            </h1>
+          }
+          leftPanelContent={
+            <>
+              <LayersSection />
+              <MetadataSection />
+            </>
+          }
+          mainContent={<ActiveContent />}
+        />
       </SelectedIdProvider>
     </GeneratedMetadataProvider>
   );

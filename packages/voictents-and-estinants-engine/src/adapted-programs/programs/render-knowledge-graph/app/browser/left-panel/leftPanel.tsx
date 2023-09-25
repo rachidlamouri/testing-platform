@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-import { useGeneratedMetadata } from '../generatedMetadataContext';
+import React, { PropsWithChildren, useState } from 'react';
 import { LeftPanelEdge } from './leftPanelEdge';
-import { Navigation } from './navigation';
-import { MetadataDisplay } from './metadataDisplay';
+import { EDGE_WIDTH } from './constants';
 
 const MIN_WIDTH = 100;
 const MAX_WIDTH = 800;
 
-export const LeftPanel: React.FunctionComponent = () => {
-  const { generatedIndex } = useGeneratedMetadata();
-  const [panelWidth, setPanelWidth] = useState(400);
+export type LeftPanelProps = PropsWithChildren;
 
-  if (generatedIndex === null) {
-    return null;
-  }
+export const LeftPanel: React.FunctionComponent<LeftPanelProps> = ({
+  children,
+}) => {
+  const [panelWidth, setPanelWidth] = useState(400);
 
   return (
     <div
@@ -25,13 +22,13 @@ export const LeftPanel: React.FunctionComponent = () => {
     >
       <div
         style={{
+          width: panelWidth - EDGE_WIDTH,
           display: 'flex',
           flexDirection: 'column',
+          padding: '4px',
         }}
       >
-        <Navigation panelWidth={panelWidth} />
-        <hr style={{ width: '95%' }} />
-        <MetadataDisplay panelWidth={panelWidth} />
+        {children}
       </div>
       <LeftPanelEdge
         onSizeChange={(delta): void => {

@@ -149,6 +149,11 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
       'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/linting/source/fileLineSource.ts',
     importedIdentifierName: 'FileLineSourceInstance',
   },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/left-panel/constants.ts',
+    importedIdentifierName: 'EDGE_WIDTH',
+  },
 ].map(({ importedFilePath, importedIdentifierName }) => {
   return new LintAssertionOmissionInstance({
     omitterSource,

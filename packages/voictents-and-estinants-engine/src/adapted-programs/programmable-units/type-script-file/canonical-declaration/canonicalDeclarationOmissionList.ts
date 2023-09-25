@@ -68,6 +68,7 @@ export const canonicalDeclarationOmissionList: LintAssertionOmission[] = [
   'packages/voictents-and-estinants-engine/src/utilities/typed-datum/type-script/function.ts',
   'packages/voictents-and-estinants-engine/src/utilities/typed-datum/type-script/object.ts',
   'packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts',
+  'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/left-panel/constants.ts',
 ].map((filePath) => {
   return new LintAssertionOmissionInstance({
     omitterSource,
