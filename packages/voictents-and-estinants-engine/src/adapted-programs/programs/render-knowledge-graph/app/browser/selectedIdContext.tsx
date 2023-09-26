@@ -9,6 +9,10 @@ import React, {
 type SelectedIdCtx = {
   selectedBoundaryId: string | null;
   onSelectBoundaryId: (id: string) => void;
+
+  secondaryBoundaryId: string | null;
+  onToggleSecondaryBoundaryId: (id: string) => void;
+
   selectedId: string | null;
   onToggleOrSelectId: (id: string) => void;
   onSelectId: (id: string) => void;
@@ -18,6 +22,10 @@ type SelectedIdCtx = {
 export const SelectedIdContext = createContext<SelectedIdCtx>({
   selectedBoundaryId: null,
   onSelectBoundaryId: () => {},
+
+  secondaryBoundaryId: null,
+  onToggleSecondaryBoundaryId: () => {},
+
   selectedId: null,
   onToggleOrSelectId: () => {},
   onSelectId: () => {},
@@ -28,6 +36,9 @@ export const SelectedIdProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   const [selectedGraphId, setSelectedGraphId] = useState<string | null>(null);
+  const [secondaryBoundaryId, setSecondaryBoundaryId] = useState<string | null>(
+    null,
+  );
   const [selectedId, setSelectedId] = useState<string | null>(null);
   return (
     <SelectedIdContext.Provider
@@ -36,6 +47,12 @@ export const SelectedIdProvider: FunctionComponent<PropsWithChildren> = ({
         onSelectBoundaryId: (id): void => {
           setSelectedGraphId(id);
         },
+
+        secondaryBoundaryId,
+        onToggleSecondaryBoundaryId: (id): void => {
+          setSecondaryBoundaryId(id);
+        },
+
         selectedId,
         onToggleOrSelectId: (id): void => {
           if (id === selectedId) {

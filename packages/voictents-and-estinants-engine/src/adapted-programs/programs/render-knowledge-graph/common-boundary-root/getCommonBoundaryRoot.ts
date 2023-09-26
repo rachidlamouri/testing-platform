@@ -10,6 +10,11 @@ import {
   CommonBoundaryRootInstance,
   CommonBoundaryRootVoque,
 } from './commonBoundaryRoot';
+import {
+  BOUNDARY_FACT_GEPP,
+  BoundaryFactInstance,
+  BoundaryFactVoque,
+} from '../boundary/boundaryFact';
 
 /**
  * See CommonBoundaryRoot for more details
@@ -25,6 +30,9 @@ export const getCommonBoundaryRoot = buildEstinant({
   })
   .toHubblepup2<CommonBoundaryRootVoque>({
     gepp: COMMON_BOUNDARY_ROOT_GEPP,
+  })
+  .toHubblepupTuple2<BoundaryFactVoque>({
+    gepp: BOUNDARY_FACT_GEPP,
   })
   .onPinbe((boundaryList, directoryVoictent) => {
     const boundaryDirectoryList = boundaryList.map((boundary) => {
@@ -60,8 +68,20 @@ export const getCommonBoundaryRoot = buildEstinant({
     // Remove the last path since that corresponds to a boundary and we want the root of all boundary directories
     partListCopy.pop();
 
-    return new CommonBoundaryRootInstance({
+    const commonBoundaryRoot = new CommonBoundaryRootInstance({
       directoryPath: partListCopy.join(posix.sep),
     });
+
+    const boundaryFactList = boundaryList.map((boundary) => {
+      return new BoundaryFactInstance({
+        boundary,
+        commonBoundaryRoot,
+      });
+    });
+
+    return {
+      [COMMON_BOUNDARY_ROOT_GEPP]: commonBoundaryRoot,
+      [BOUNDARY_FACT_GEPP]: boundaryFactList,
+    };
   })
   .assemble();

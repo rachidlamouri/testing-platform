@@ -1,24 +1,38 @@
 import React, { PropsWithChildren } from 'react';
 
+export enum StackGap {
+  Small = 'Small',
+  Medium = 'Medium',
+  Large = 'Large',
+}
+
 export type StackProps = PropsWithChildren<{
-  style: Pick<
+  gap?: StackGap;
+  style?: Pick<
     React.DetailedHTMLProps<
       React.HTMLAttributes<HTMLDivElement>,
       HTMLDivElement
     >['style'],
-    'flexDirection' | 'justifyContent' | 'alignItems'
+    'flexDirection' | 'justifyContent' | 'alignItems' | 'width' | 'height'
   >;
 }>;
 
+const sizeByStackGap: Record<StackGap, string> = {
+  [StackGap.Small]: '2px',
+  [StackGap.Medium]: '4px',
+  [StackGap.Large]: '8px',
+};
+
 export const Stack: React.FunctionComponent<StackProps> = ({
-  style,
+  gap = StackGap.Medium,
+  style = {},
   children,
 }) => {
   return (
     <div
       style={{
         display: 'flex',
-        gap: '4px',
+        gap: sizeByStackGap[gap],
         padding: '4px',
         ...style,
       }}
@@ -26,4 +40,8 @@ export const Stack: React.FunctionComponent<StackProps> = ({
       {children}
     </div>
   );
+};
+
+export const StackSpacer: React.FunctionComponent = () => {
+  return <span style={{ flex: 1 }}></span>;
 };

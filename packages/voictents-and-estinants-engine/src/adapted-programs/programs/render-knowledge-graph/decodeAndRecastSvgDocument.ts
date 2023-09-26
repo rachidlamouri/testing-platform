@@ -394,6 +394,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
     ): Exclude<FileFactProps, 'children'> => {
       return {
         factId: fact.graphElement.id,
+        boundaryId: fact.boundedFile.boundary.zorn.forMachine,
         fileName: fact.boundedFile.file.nodePath.name.serialized,
         importedNodeIdSet: fact.importedNodeIdSet,
         importingNodeIdSet: fact.importingNodeIdSet,

@@ -9,6 +9,7 @@ export type DirectoryFactProps = PropsWithChildren<{
 
 export type FileFactProps = PropsWithChildren<{
   factId: string;
+  boundaryId: string;
   fileName: string;
   importedNodeIdSet: Set<string>;
   importingNodeIdSet: Set<string>;

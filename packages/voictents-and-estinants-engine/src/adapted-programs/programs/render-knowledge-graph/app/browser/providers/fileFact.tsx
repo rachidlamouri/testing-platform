@@ -6,11 +6,13 @@ import { THEME } from '../theme';
 
 export const FileFact: FunctionComponent<FileFactProps> = ({
   factId,
+  boundaryId,
   importedNodeIdSet,
   importingNodeIdSet,
   children,
 }) => {
-  const { onToggleOrSelectId, selectedId } = useSelectedIdContext();
+  const { onToggleSecondaryBoundaryId, onToggleOrSelectId, selectedId } =
+    useSelectedIdContext();
 
   const isSelected = selectedId === factId;
   const isImportedNodeSelected = importedNodeIdSet.has(selectedId);
@@ -37,6 +39,7 @@ export const FileFact: FunctionComponent<FileFactProps> = ({
       value={{
         onTextClicked: (): void => {
           onToggleOrSelectId(factId);
+          onToggleSecondaryBoundaryId(boundaryId);
         },
         hasInteractiveText: true,
         styleByElement: {

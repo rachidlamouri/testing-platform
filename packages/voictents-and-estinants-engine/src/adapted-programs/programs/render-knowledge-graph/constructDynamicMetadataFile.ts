@@ -21,6 +21,11 @@ import {
   AppRendererDelayerVoque,
 } from './appRendererDelayer';
 import { FILE_FACT_2_GEPP, FileFact2Voque } from './file/fileFact2';
+import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
+import {
+  COMMON_BOUNDARY_ROOT_GEPP,
+  CommonBoundaryRootVoque,
+} from './common-boundary-root/commonBoundaryRoot';
 
 const encodePrimitive = (
   primitive: string | number | boolean | null,
@@ -86,7 +91,16 @@ const encodeDatum = (
 export const constructDynamicMetadataFile = buildEstinant({
   name: 'constructDynamicMetadataFile',
 })
-  .fromVoictent2<FileFact2Voque>({
+  .fromVoictent2<BoundaryFactVoque>({
+    gepp: BOUNDARY_FACT_GEPP,
+  })
+  .andFromHubblepupTuple2<CommonBoundaryRootVoque, ['']>({
+    gepp: COMMON_BOUNDARY_ROOT_GEPP,
+    // TODO: make a more readable pattern for singleton collections
+    framate: () => [''],
+    croard: () => '',
+  })
+  .andFromVoictent2<FileFact2Voque>({
     gepp: FILE_FACT_2_GEPP,
   })
   .toHubblepup2<OutputFileVoque>({
@@ -95,16 +109,30 @@ export const constructDynamicMetadataFile = buildEstinant({
   .toHubblepup2<AppRendererDelayerVoque>({
     gepp: APP_RENDERER_DELAYER_GEPP,
   })
-  .onPinbe((fileFactVoictent) => {
-    const metadataList: Metadata[] = fileFactVoictent.map(
-      (fileFact) => fileFact.graphMetadata,
-    );
+  .onPinbe((boundaryFactVoictent, [commonBoundaryRoot], fileFactVoictent) => {
+    const metadataList: Metadata[] = [
+      ...boundaryFactVoictent,
+      ...fileFactVoictent,
+    ].map((fact) => fact.graphMetadata);
 
     const metadataById = Object.fromEntries(
       metadataList.map((metadata) => {
         return [metadata.id, metadata];
       }),
     );
+
+    // TODO: indexing this with a hardcoded key is a terrible idea. Store this object elsewhere
+    metadataById['common-boundary-root'] = {
+      title: 'Common Boundary Root',
+      id: 'common-boundary-root',
+      fileSystemPath: commonBoundaryRoot.directoryPath,
+      fieldList: [
+        {
+          label: 'Directory Path',
+          value: `~r/${commonBoundaryRoot.directoryPath}`,
+        },
+      ],
+    };
 
     const astNode = encodeDatum(metadataById);
 
