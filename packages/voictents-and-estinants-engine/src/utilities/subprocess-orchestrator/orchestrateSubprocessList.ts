@@ -1,12 +1,13 @@
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 import chalk from 'chalk';
 import { SubprocessConfiguration } from './subprocessConfiguration';
-import { ForegroundColor, applyColor, colorList } from '../colors/colorList';
+import { ForegroundColor, colorList } from '../colors/colorList';
 import { assertNotUndefined } from '../nil/assertNotUndefined';
 import { LineLabeler } from './transforms/lineLabeler';
-import { ConditionalTextLogger } from './transforms/conditionalTextLogger';
+import { TextLogger } from './transforms/textLogger';
 import { TextTransform } from './transforms/textTransform';
 import { formatTable } from '../table-formatter/formatTable';
+import { Valve } from './transforms/valve';
 
 const EMPTY_WHITESPACE_REGEX = /^\s*$/;
 const SPACE_DELIMITED_INTEGERS_REGEX = /^(\d+\s*)+$/;
@@ -76,7 +77,7 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
 type SubprocessState = {
   configuration: SubprocessConfiguration;
   childProcess: ChildProcessWithoutNullStreams;
-  textLogger: ConditionalTextLogger;
+  valve: Valve;
 };
 
 const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
@@ -85,23 +86,24 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
 
     const childProcess = spawn(command, args);
 
-    const textLogger = new ConditionalTextLogger({
+    const valve = new Valve({
       isInitiallyVisible: configuration.isInitiallyVisible,
     });
 
     childProcess.stdout
+      .pipe(valve)
       .pipe(
         new LineLabeler({
           label: configuration.label,
           color: configuration.color,
         }),
       )
-      .pipe(textLogger);
+      .pipe(new TextLogger());
 
     return {
       configuration,
       childProcess,
-      textLogger,
+      valve,
     };
   },
 );
@@ -119,6 +121,9 @@ function assertEndsInNewLine(text: string): void {
 }
 
 const orchestrateSubprocessList = (): void => {
+  // eslint-disable-next-line no-console
+  console.clear();
+
   type NormalizedInput = {
     isBlank: boolean;
     text: string;
@@ -139,27 +144,15 @@ const orchestrateSubprocessList = (): void => {
 
   let cachedSubprocessStateList: CachedSubprocessState[] = [];
 
-  const onIdle = (): string => {
+  const onIdle = (): string | null => {
     cachedSubprocessStateList.forEach((cachedState) => {
       const subprocessState = subprocessStateByLabel.get(cachedState.label);
       assertNotUndefined(subprocessState);
-      subprocessState.textLogger.isVisible = cachedState.isVisible;
 
-      subprocessState.childProcess.stdin.write('rs\n');
+      subprocessState.valve.isVisible = cachedState.isVisible;
     });
 
-    const outputText = [
-      'Now playing:',
-      ...cachedSubprocessStateList
-        .filter((cachedState) => {
-          return cachedState.isVisible;
-        })
-        .map((cachedState) => {
-          return `    ${applyColor(cachedState.label, cachedState.color)}`;
-        }),
-    ].join('\n');
-
-    return outputText;
+    return null;
   };
 
   const onMenu = (previousStdInState: StdinState): string => {
@@ -167,14 +160,14 @@ const orchestrateSubprocessList = (): void => {
       cachedSubprocessStateList = subprocessStateList.map((state) => {
         return {
           label: state.configuration.label,
-          isVisible: state.textLogger.isVisible,
+          isVisible: state.valve.isVisible,
           color: state.configuration.color,
         };
       });
 
       subprocessStateList.forEach((state) => {
         // eslint-disable-next-line no-param-reassign
-        state.textLogger.isVisible = false;
+        state.valve.isVisible = false;
       });
     }
 
@@ -275,7 +268,10 @@ const orchestrateSubprocessList = (): void => {
       }
     }
 
-    let outputText: string;
+    // eslint-disable-next-line no-console
+    console.clear();
+
+    let outputText: string | null;
     switch (nextStdInState) {
       case StdinState.Idle: {
         outputText = onIdle();
@@ -287,10 +283,10 @@ const orchestrateSubprocessList = (): void => {
       }
     }
 
-    // eslint-disable-next-line no-console
-    console.clear();
-    // eslint-disable-next-line no-console
-    console.log(outputText);
+    if (outputText !== null) {
+      // eslint-disable-next-line no-console
+      console.log(outputText);
+    }
 
     currentStdInState = nextStdInState;
   };

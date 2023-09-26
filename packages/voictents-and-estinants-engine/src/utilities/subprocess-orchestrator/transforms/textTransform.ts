@@ -1,7 +1,7 @@
 import { Transform } from 'stream';
 
 type TextTransformInput = {
-  onTransform: (text: string) => string;
+  onTransform: (text: string) => string | null;
 };
 
 export class TextTransform extends Transform {
