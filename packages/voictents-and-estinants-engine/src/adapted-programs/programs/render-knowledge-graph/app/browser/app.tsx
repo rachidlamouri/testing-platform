@@ -4,7 +4,8 @@ import { SelectedIdProvider } from './selectedIdContext';
 import { ActiveContent } from './wrappers/activeContent';
 import { Layout } from './layout';
 import { LayersSection } from './panel-content/layers/layersSection';
-import { MetadataSection } from './panel-content/metadata/metadataSection';
+import { SectionSeparator } from './left-panel/sectionSeparator';
+import { FileMetadataSection } from './panel-content/metadata/fileMetadataSection';
 
 export const App: React.FC = () => {
   useEffect(() => {
@@ -28,7 +29,8 @@ export const App: React.FC = () => {
           leftPanelContent={
             <>
               <LayersSection />
-              <MetadataSection />
+              <SectionSeparator />
+              <FileMetadataSection />
             </>
           }
           mainContent={<ActiveContent />}
