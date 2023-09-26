@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useGeneratedMetadata } from '../../generatedMetadataContext';
 import { PanelSection } from '../../left-panel/panelSection';
 import { SectionTitle, SubsectionTitle } from '../../left-panel/sectionTitle';
 import { useSelectedIdContext } from '../../selectedIdContext';
 import { Stack } from '../../stack';
 import { PartitionNavigationButton } from './partitionNavigationButton';
+import { SubsectionSeparator } from '../../left-panel/subsectionSeparator';
 
 export const LayersSection: React.FunctionComponent = () => {
   const { generatedIndex } = useGeneratedMetadata();
@@ -27,27 +28,29 @@ export const LayersSection: React.FunctionComponent = () => {
     >
       {navigationList.map((layer, layerIndex) => {
         return (
-          <PanelSection
-            key={layer.label}
-            title={<SubsectionTitle>{layer.label}</SubsectionTitle>}
-            isInitiallyVisible={layerIndex === 0}
-          >
-            <Stack
-              style={{
-                flexDirection: 'column',
-                alignItems: 'left',
-              }}
+          <Fragment key={layer.label}>
+            <PanelSection
+              title={<SubsectionTitle>{layer.label}</SubsectionTitle>}
+              isInitiallyVisible={layerIndex === 0}
             >
-              {layer.partitionList.map((partition) => {
-                return (
-                  <PartitionNavigationButton
-                    key={partition.label}
-                    partition={partition}
-                  />
-                );
-              })}
-            </Stack>
-          </PanelSection>
+              <Stack
+                style={{
+                  flexDirection: 'column',
+                  alignItems: 'left',
+                }}
+              >
+                {layer.partitionList.map((partition) => {
+                  return (
+                    <PartitionNavigationButton
+                      key={partition.label}
+                      partition={partition}
+                    />
+                  );
+                })}
+              </Stack>
+            </PanelSection>
+            {layerIndex < navigationList.length - 1 && <SubsectionSeparator />}
+          </Fragment>
         );
       })}
     </PanelSection>

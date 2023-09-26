@@ -12,7 +12,7 @@ import { DirectoryFact2 } from '../directory/directoryFact2';
 import { FileFact2 } from '../file/fileFact2';
 
 /**
- * A piece of knowledge
+ * A piece of knowledge. This file is for facts that have graphElements.
  */
 export type Fact =
   | PartitionFact

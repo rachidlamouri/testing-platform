@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, useState } from 'react';
 import { LeftPanelEdge } from './leftPanelEdge';
 import { EDGE_WIDTH } from './constants';
+import { Stack, StackGap } from '../stack';
 
 const MIN_WIDTH = 100;
 const MAX_WIDTH = 800;
@@ -18,18 +19,18 @@ export const LeftPanel: React.FunctionComponent<LeftPanelProps> = ({
         height: '100%',
         display: 'flex',
         flexDirection: 'row',
+        overflowY: 'scroll',
       }}
     >
-      <div
+      <Stack
         style={{
           width: panelWidth - EDGE_WIDTH,
-          display: 'flex',
           flexDirection: 'column',
-          padding: '4px',
         }}
+        gap={StackGap.Medium}
       >
         {children}
-      </div>
+      </Stack>
       <LeftPanelEdge
         onSizeChange={(delta): void => {
           let nextWidth = panelWidth + delta;

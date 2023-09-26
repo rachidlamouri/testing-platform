@@ -13,7 +13,7 @@ export type StackProps = PropsWithChildren<{
       React.HTMLAttributes<HTMLDivElement>,
       HTMLDivElement
     >['style'],
-    'flexDirection' | 'justifyContent' | 'alignItems'
+    'flexDirection' | 'justifyContent' | 'alignItems' | 'width' | 'height'
   >;
 }>;
 

@@ -155,18 +155,10 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
             value: readableTag?.name ?? '—',
           },
           {
-            label: 'Boundary',
-            value: boundedFile.boundary.displayName,
-          },
-          {
-            label: 'Boundary Path',
-            value: boundedFile.boundary.directory.directoryPath.serialized,
-          },
-          {
-            label: 'Directory Path from Boundary',
+            label: 'Directory Path',
             value: boundedFile.file.filePath.parentDirectoryPath.replace(
               boundedFile.boundary.directory.directoryPath.serialized,
-              '<boundary>',
+              '~b',
             ),
           },
         ].filter(isNotNull),

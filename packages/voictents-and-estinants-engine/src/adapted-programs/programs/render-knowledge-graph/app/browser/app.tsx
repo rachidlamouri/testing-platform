@@ -6,6 +6,9 @@ import { Layout } from './layout';
 import { LayersSection } from './panel-content/layers/layersSection';
 import { SectionSeparator } from './left-panel/sectionSeparator';
 import { FileMetadataSection } from './panel-content/metadata/fileMetadataSection';
+import { BoundaryMetadataSection } from './panel-content/metadata/boundaryMetadataSection';
+import { StackSpacer } from './stack';
+import { LegendSection } from './panel-content/legendSection';
 
 export const App: React.FC = () => {
   useEffect(() => {
@@ -30,7 +33,12 @@ export const App: React.FC = () => {
             <>
               <LayersSection />
               <SectionSeparator />
+              <BoundaryMetadataSection />
+              <SectionSeparator />
               <FileMetadataSection />
+              <SectionSeparator />
+              <StackSpacer />
+              <LegendSection />
             </>
           }
           mainContent={<ActiveContent />}

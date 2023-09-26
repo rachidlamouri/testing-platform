@@ -14,7 +14,7 @@ export const MetadataHeader: React.FunctionComponent<MetadataHeaderProps> = ({
 
   return (
     <Stack>
-      <h3 style={{ margin: 0 }}>{title}</h3>
+      <h4 style={{ margin: 0 }}>{title}</h4>
       {metadata !== null && (
         <>
           <StackSpacer />

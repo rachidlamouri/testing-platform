@@ -16,9 +16,9 @@ export const MetadataField: React.FunctionComponent<MetadataFieldProps> = ({
         flexDirection: 'column',
       }}
     >
-      <h4 style={{ margin: 0 }}>
+      <h5 style={{ margin: 0 }}>
         <b>{field.label}</b>
-      </h4>
+      </h5>
       <p style={{ margin: 0 }}>{field.value}</p>
     </Stack>
   );
