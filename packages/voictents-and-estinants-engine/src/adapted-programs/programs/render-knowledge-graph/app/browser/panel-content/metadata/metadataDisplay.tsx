@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
-import { useSelectedIdContext } from '../selectedIdContext';
-import { useGeneratedMetadata } from '../generatedMetadataContext';
-import { Metadata } from '../dynamicComponentTypes';
+import { useSelectedIdContext } from '../../selectedIdContext';
+import { useGeneratedMetadata } from '../../generatedMetadataContext';
+import { Metadata } from '../../dynamicComponentTypes';
 
 enum ButtonState {
   Normal = 'Normal',

@@ -1,12 +1,12 @@
 import React from 'react';
-import { MetadataDisplay } from '../left-panel/metadataDisplay';
+import { MetadataDisplay } from './metadata/metadataDisplay';
 import { PanelSection } from '../left-panel/panelSection';
 import { SectionTitle } from '../left-panel/sectionTitle';
 
-export const MetadataSection: React.FunctionComponent = () => {
+export const FileMetadataSection: React.FunctionComponent = () => {
   return (
     <PanelSection
-      title={<SectionTitle>Metadata</SectionTitle>}
+      title={<SectionTitle>File Metadata</SectionTitle>}
       isInitiallyVisible={true}
     >
       <MetadataDisplay />

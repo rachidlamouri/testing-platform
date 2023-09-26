@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { useGeneratedMetadata } from '../generatedMetadataContext';
-import { PanelSection } from '../left-panel/panelSection';
-import { SectionTitle, SubsectionTitle } from '../left-panel/sectionTitle';
-import { useSelectedIdContext } from '../selectedIdContext';
-import { Stack } from '../stack';
+import { useGeneratedMetadata } from '../../generatedMetadataContext';
+import { PanelSection } from '../../left-panel/panelSection';
+import { SectionTitle, SubsectionTitle } from '../../left-panel/sectionTitle';
+import { useSelectedIdContext } from '../../selectedIdContext';
+import { Stack } from '../../stack';
 import { PartitionNavigationButton } from './partitionNavigationButton';
 
 export const LayersSection: React.FunctionComponent = () => {

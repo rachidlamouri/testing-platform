@@ -3,8 +3,8 @@ import { GeneratedMetadataProvider } from './generatedMetadataContext';
 import { SelectedIdProvider } from './selectedIdContext';
 import { ActiveContent } from './wrappers/activeContent';
 import { Layout } from './layout';
-import { LayersSection } from './panel-content/layersSection';
-import { MetadataSection } from './panel-content/metadataSection';
+import { LayersSection } from './panel-content/layers/layersSection';
+import { MetadataSection } from './panel-content/metadata/metadataSection';
 
 export const App: React.FC = () => {
   useEffect(() => {

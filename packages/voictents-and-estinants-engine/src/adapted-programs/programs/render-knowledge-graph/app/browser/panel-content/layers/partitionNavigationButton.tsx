@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { NavigationPartition } from '../dynamicComponentTypes';
-import { useSelectedIdContext } from '../selectedIdContext';
-import { THEME } from '../theme';
+import { NavigationPartition } from '../../dynamicComponentTypes';
+import { useSelectedIdContext } from '../../selectedIdContext';
+import { THEME } from '../../theme';
 
 export type PartitionNavigationButtonProps = {
   partition: NavigationPartition;
