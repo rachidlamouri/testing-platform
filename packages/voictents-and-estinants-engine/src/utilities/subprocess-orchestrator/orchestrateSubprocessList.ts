@@ -94,8 +94,10 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
 
     const valve = new Valve();
 
-    childProcess.stdout
-      .pipe(valve)
+    childProcess.stdout.pipe(valve);
+    childProcess.stderr.pipe(valve);
+
+    valve
       .pipe(
         new LineLabeler({
           label: configuration.label,
