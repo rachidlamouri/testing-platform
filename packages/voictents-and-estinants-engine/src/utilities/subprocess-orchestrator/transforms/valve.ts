@@ -2,10 +2,6 @@
 import { assertNotNull } from '../../nil/assertNotNull';
 import { TextTransform } from './textTransform';
 
-type ValveInput = {
-  isInitiallyVisible: boolean;
-};
-
 type BufferNode = {
   nextNode: BufferNode | null;
   text: string;
@@ -17,16 +13,16 @@ type BufferTracker = {
   size: number;
 };
 
-const MAX_BUFFER_ENTRIES = 100;
+const MAX_BUFFER_ENTRIES = 50;
 
 export class Valve extends TextTransform {
-  private _isVisible: boolean;
+  private _isVisible = true;
 
   private isFlushingBuffer = false;
 
   private bufferTracker: BufferTracker | null = null;
 
-  constructor({ isInitiallyVisible }: ValveInput) {
+  constructor() {
     super({
       onTransform: (text): string | null => {
         if (!this.isFlushingBuffer) {
@@ -40,8 +36,12 @@ export class Valve extends TextTransform {
         return null;
       },
     });
+  }
 
-    this._isVisible = isInitiallyVisible;
+  public bypassBuffer(text: string): void {
+    this.isFlushingBuffer = true;
+    this.write(text);
+    this.isFlushingBuffer = false;
   }
 
   private buffer(text: string): void {

@@ -80,15 +80,19 @@ type SubprocessState = {
   valve: Valve;
 };
 
+const maxLabelLength = Math.max(
+  ...subprocessConfigurationList.map((configuration) => {
+    return configuration.label.length;
+  }),
+);
+
 const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
   (configuration) => {
     const [command, ...args] = configuration.script.split(' ');
 
     const childProcess = spawn(command, args);
 
-    const valve = new Valve({
-      isInitiallyVisible: configuration.isInitiallyVisible,
-    });
+    const valve = new Valve();
 
     childProcess.stdout
       .pipe(valve)
@@ -120,9 +124,30 @@ function assertEndsInNewLine(text: string): void {
   }
 }
 
+// this clears away more than console.clear
+const obliterateConsole = (): void => {
+  process.stdout.write('\x1bc');
+};
+
 const orchestrateSubprocessList = (): void => {
-  // eslint-disable-next-line no-console
-  console.clear();
+  obliterateConsole();
+
+  subprocessConfigurationList.forEach((configuration) => {
+    const subprocessState = subprocessStateByLabel.get(configuration.label);
+    assertNotUndefined(subprocessState);
+
+    const initialText = configuration.isInitiallyVisible
+      ? 'Starting'
+      : 'Starting in background';
+
+    const offsetSpaces = ''.padStart(
+      maxLabelLength - configuration.label.length,
+      ' ',
+    );
+
+    subprocessState.valve.bypassBuffer(`${offsetSpaces}${initialText}\n`);
+    subprocessState.valve.isVisible = configuration.isInitiallyVisible;
+  });
 
   type NormalizedInput = {
     isBlank: boolean;
@@ -268,8 +293,7 @@ const orchestrateSubprocessList = (): void => {
       }
     }
 
-    // eslint-disable-next-line no-console
-    console.clear();
+    obliterateConsole();
 
     let outputText: string | null;
     switch (nextStdInState) {
