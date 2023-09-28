@@ -4,7 +4,7 @@ import { SubprocessConfiguration } from './subprocessConfiguration';
 import { ForegroundColor, colorList } from '../colors/colorList';
 import { assertNotUndefined } from '../nil/assertNotUndefined';
 import { LineLabeler } from './transforms/lineLabeler';
-import { TextLogger } from './transforms/textLogger';
+import { TextSanitizer } from './transforms/textSanitizer';
 import { TextTransform } from './transforms/textTransform';
 import { formatTable } from '../table-formatter/formatTable';
 import { Valve } from './transforms/valve';
@@ -60,7 +60,8 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
     },
     {
       label: 'typecheck',
-      script: 'npx tsc -p packages/voictents-and-estinants-engine --watch',
+      script:
+        'npx tsc --pretty -p packages/voictents-and-estinants-engine --watch',
       isInitiallyVisible: true,
     },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
@@ -104,7 +105,8 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
           color: configuration.color,
         }),
       )
-      .pipe(new TextLogger());
+      .pipe(new TextSanitizer())
+      .pipe(process.stdout);
 
     return {
       configuration,
