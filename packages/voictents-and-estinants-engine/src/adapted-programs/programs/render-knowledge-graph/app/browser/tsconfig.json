@@ -6,5 +6,5 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
   },
-  "include": ["./"]
+  "include": ["./", "../../boundary/boundaryTypeName.ts"]
 }

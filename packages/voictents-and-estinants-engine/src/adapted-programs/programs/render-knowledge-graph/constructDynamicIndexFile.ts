@@ -107,6 +107,7 @@ export const constructDynamicIndexFile = buildEstinant({
               getPartitionComponentVariableName(partitionFact);
 
             return {
+              boundaryTypeName: partitionFact.boundary.typeName,
               boundaryId: partitionFact.boundary.zorn.forMachine,
               label: partitionFact.boundary.displayName,
               Component: new IdentifierConfiguration(componentVariableName),

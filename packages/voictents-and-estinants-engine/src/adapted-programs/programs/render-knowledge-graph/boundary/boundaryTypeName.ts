@@ -1,6 +1,8 @@
 export enum BoundaryTypeName {
   AdaptedProgram = 'AdaptedProgram',
+  Engine = 'Engine',
   ProgrammableUnit = 'ProgrammableUnit',
-  Utility = 'Utility',
+  TestProgram = 'TestProgram',
   Unspecified = 'Unspecified',
+  Utility = 'Utility',
 }

@@ -19,7 +19,14 @@ export const MetadataField: React.FunctionComponent<MetadataFieldProps> = ({
       <h5 style={{ margin: 0 }}>
         <b>{field.label}</b>
       </h5>
-      <p style={{ margin: 0 }}>{field.value}</p>
+      <p
+        style={{
+          fontSize: '14px',
+          margin: 0,
+        }}
+      >
+        {field.value}
+      </p>
     </Stack>
   );
 };
