@@ -69,7 +69,12 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
   new BoundaryConfigurationInstance({
     typeName: BoundaryTypeName.Engine,
     displayName: 'Core Engine',
-    directoryPath: 'packages/voictents-and-estinants-engine/src/core',
+    directoryPath: 'packages/voictents-and-estinants-engine/src/core/engine',
+  }),
+  new BoundaryConfigurationInstance({
+    typeName: BoundaryTypeName.Utility,
+    displayName: 'Core Types',
+    directoryPath: 'packages/voictents-and-estinants-engine/src/core/types',
   }),
   new BoundaryConfigurationInstance({
     typeName: BoundaryTypeName.Utility,
