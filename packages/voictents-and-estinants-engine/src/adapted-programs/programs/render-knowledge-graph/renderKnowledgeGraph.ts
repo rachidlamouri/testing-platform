@@ -101,6 +101,7 @@ import {
 } from './layer/layerListTrie';
 import { LAYER_TRIE_GEPP, LayerTrieVoque } from './layer/layerTrie';
 import { getUtilityBoundary } from './boundary/getUtilityBoundary';
+import { getProgrammableUnitBoundary } from './boundary/getProgrammableUnitBoundary';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -197,6 +198,7 @@ digikikify({
 
     getBoundaryFromConfiguration,
     getAdaptedProgramBoundary,
+    getProgrammableUnitBoundary,
     getUtilityBoundary,
 
     getCommonBoundaryRoot,

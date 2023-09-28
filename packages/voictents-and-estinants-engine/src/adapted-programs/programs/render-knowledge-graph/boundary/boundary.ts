@@ -6,15 +6,22 @@ import {
 } from '../../../../utilities/semantic-types/zorn';
 import { SimplifyN } from '../../../../utilities/types/simplify';
 import { Directory } from '../../../programmable-units/file/directory';
+import { BoundaryTypeName } from './boundaryTypeName';
 
 const BOUNDARY_ZORN_TEMPLATE = [
+  'typeName',
   'normalizedDisplayName',
 ] as const satisfies GenericZorn2Template;
 type BoundaryZornTemplate = typeof BOUNDARY_ZORN_TEMPLATE;
+type BoundaryZornInput = {
+  typeName: BoundaryTypeName;
+  displayName: string;
+};
 export class BoundaryZorn extends Zorn2<BoundaryZornTemplate> {
-  constructor(displayName: string) {
+  constructor({ typeName, displayName }: BoundaryZornInput) {
     const normalizedDisplayName = displayName.replaceAll(/(:|\s+),'-'/g, '');
     super({
+      typeName,
       normalizedDisplayName,
     });
   }
@@ -25,6 +32,7 @@ export class BoundaryZorn extends Zorn2<BoundaryZornTemplate> {
 }
 
 type BoundaryConstructorInput = {
+  typeName: BoundaryTypeName;
   displayName: string;
   directory: Directory;
 };
@@ -46,6 +54,7 @@ export const { BoundaryInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'zorn',
+    'typeName',
     'displayName',
     'directory',
   ],
@@ -59,13 +68,15 @@ export const { BoundaryInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { displayName } = input;
+      const { typeName, displayName, directory } = input;
 
-      const zorn = new BoundaryZorn(displayName);
+      const zorn = new BoundaryZorn({ typeName, displayName });
 
       return {
         zorn,
-        ...input,
+        typeName,
+        displayName,
+        directory,
       };
     },
   })

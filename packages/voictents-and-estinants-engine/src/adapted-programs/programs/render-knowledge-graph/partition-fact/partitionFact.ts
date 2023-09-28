@@ -83,7 +83,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
       });
 
       const rootGraphLocator = new RootGraphLocatorInstance({
-        distinguisher: boundary.displayName,
+        distinguisher: boundary.zorn.forHuman,
       });
 
       const directoryPathRelativeToCommonBoundary = posix.relative(

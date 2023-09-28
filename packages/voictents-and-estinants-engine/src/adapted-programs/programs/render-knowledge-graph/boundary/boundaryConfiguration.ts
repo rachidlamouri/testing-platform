@@ -2,6 +2,7 @@ import { InMemoryOdeshin3Voque } from '../../../../core/engine/inMemoryOdeshinVo
 import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
 import { SimplifyN } from '../../../../utilities/types/simplify';
 import { BoundaryZorn } from './boundary';
+import { BoundaryTypeName } from './boundaryTypeName';
 
 type BoundaryConfigurationConstructorInput = {
   displayName: string;
@@ -40,7 +41,10 @@ const { BoundaryConfigurationInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { displayName } = input;
 
-      const zorn = new BoundaryZorn(displayName);
+      const zorn = new BoundaryZorn({
+        typeName: BoundaryTypeName.Unspecified,
+        displayName,
+      });
 
       return {
         zorn,
@@ -77,12 +81,6 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
     displayName: 'Odeshin',
     directoryPath:
       'packages/voictents-and-estinants-engine/src/adapter/odeshin',
-  }),
-  new BoundaryConfigurationInstance({
-    // TODO: split these up by program and shared boundaries
-    displayName: 'Programmable Units',
-    directoryPath:
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units',
   }),
   new BoundaryConfigurationInstance({
     displayName: 'Core Test Programs',

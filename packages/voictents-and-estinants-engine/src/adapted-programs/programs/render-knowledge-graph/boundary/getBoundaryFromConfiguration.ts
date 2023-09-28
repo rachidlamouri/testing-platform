@@ -9,6 +9,7 @@ import {
   BOUNDARY_CONFIGURATION_GEPP,
   BoundaryConfigurationVoque,
 } from './boundaryConfiguration';
+import { BoundaryTypeName } from './boundaryTypeName';
 
 /**
  * Gathers the directory for a boundary given the directory path from the boundary configuration
@@ -29,6 +30,7 @@ export const getBoundaryFromConfiguration = buildEstinant({
   })
   .onPinbe((boundaryConfiguration, [directory]) => {
     return new BoundaryInstance({
+      typeName: BoundaryTypeName.Unspecified,
       displayName: boundaryConfiguration.displayName,
       directory,
     });

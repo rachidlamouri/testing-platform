@@ -9,6 +9,7 @@ import {
   DirectoryVoque,
 } from '../../../programmable-units/file/directory';
 import { BOUNDARY_GEPP, BoundaryInstance, BoundaryVoque } from './boundary';
+import { BoundaryTypeName } from './boundaryTypeName';
 
 /**
  * Marks every adapted engine program as a separate boundary
@@ -36,6 +37,7 @@ export const getAdaptedProgramBoundary = buildEstinant({
 
     return [
       new BoundaryInstance({
+        typeName: BoundaryTypeName.AdaptedProgram,
         displayName: programLocator.programName,
         directory,
       }),
