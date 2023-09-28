@@ -1,4 +1,4 @@
-import { TypeScriptObjectInstanceKey } from '../typed-datum/type-script/object';
+import { TypeScriptObjectInstanceKey } from '../object/object';
 
 export type Combination<TValue extends TypeScriptObjectInstanceKey> = Record<
   TValue,

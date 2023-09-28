@@ -1,14 +1,14 @@
-import { TypeScriptFunction } from './type-script/function';
+import { TypeScriptFunction } from '../function/function';
 import {
   TypeScriptArray,
   TypeScriptMap,
   TypeScriptObjectInstance,
   TypeScriptSet,
-} from './type-script/object';
+} from '../object/object';
 import {
   getTypeScriptTypedDatum,
   TypeScriptDatumTypeName,
-} from './type-script/typeScriptTypedDatum';
+} from './typeScriptTypedDatum';
 
 export enum CustomDatumTypeName {
   Array = 'Array',

@@ -1,5 +1,5 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
-import { TypeScriptObject } from '../../../package-agnostic-utilities/typed-datum/type-script/object';
+import { TypeScriptObject } from '../../../package-agnostic-utilities/object/object';
 
 /**
  * A thing that a Concrete Programmer wants to operate on

@@ -1,4 +1,4 @@
-import { CustomDatumTypeName } from '../customTypedDatum';
+import { CustomDatumTypeName } from '../typed-datum/customTypedDatum';
 import {
   SerializeableNode,
   SerializeableNodeName,

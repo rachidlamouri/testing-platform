@@ -8,7 +8,7 @@ import {
   SerializedHubblepup,
 } from '../layer-agnostic-utilities/program/programFileCache';
 import { FileExtensionSuffixIdentifier } from '../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { serialize } from '../package-agnostic-utilities/typed-datum/serializer/serialize';
+import { serialize } from '../package-agnostic-utilities/one-way-serializer/serialize';
 
 type SerializableVoictentConstructorInput<
   TVoque extends GenericAbstractSerializableVoque,

@@ -1,4 +1,4 @@
-import { getPrototypeNameTuple } from './getPrototypeNameTuple';
+import { getPrototypeNameTuple } from '../object/getPrototypeNameTuple';
 import {
   CustomDatumTypeName,
   CustomTypedArray,
@@ -15,8 +15,8 @@ import {
   CustomTypedSymbol,
   CustomTypedUndefined,
   getCustomTypedDatum,
-} from '../customTypedDatum';
-import { getTypeScriptObjectEntryList } from '../type-script/object';
+} from '../typed-datum/customTypedDatum';
+import { getTypeScriptObjectEntryList } from '../object/object';
 import {
   isSimpleObjectEntryKey,
   SerializeableBooleanNode,

@@ -5,7 +5,7 @@
  * @todo: fix this
  */
 
-import { TypeScriptFunction } from '../typed-datum/type-script/function';
+import { TypeScriptFunction } from '../function/function';
 
 /**
  * Merges two objects without making the intellisense do something dumb, unlike

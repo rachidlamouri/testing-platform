@@ -1,6 +1,9 @@
-import { Tuple } from '../../type/tuple';
-import { CustomDatumTypeName, getCustomTypedDatum } from '../customTypedDatum';
-import { TypeScriptObjectInstance } from '../type-script/object';
+import { Tuple } from '../type/tuple';
+import {
+  CustomDatumTypeName,
+  getCustomTypedDatum,
+} from '../typed-datum/customTypedDatum';
+import { TypeScriptObjectInstance } from '../object/object';
 
 export enum SerializeableNodeName {
   Boolean = 'Boolean',

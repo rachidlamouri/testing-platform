@@ -65,8 +65,8 @@ export const canonicalDeclarationOmissionList: LintAssertionOmission[] = [
   'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/type-script-ast/flattenIdentifiableCallExpressionChain.ts',
   'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/type-script-ast/isConstantTypeScriptAsExpression.ts',
   'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties.ts',
-  'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/typed-datum/type-script/function.ts',
-  'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/typed-datum/type-script/object.ts',
+  'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/function/function.ts',
+  'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/object/object.ts',
   'packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts',
   'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/left-panel/constants.ts',
 ].map((filePath) => {

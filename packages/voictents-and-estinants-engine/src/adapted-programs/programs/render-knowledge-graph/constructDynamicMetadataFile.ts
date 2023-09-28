@@ -8,7 +8,7 @@ import {
 import {
   TypeScriptArray,
   TypeScriptObjectInstance,
-} from '../../../package-agnostic-utilities/typed-datum/type-script/object';
+} from '../../../package-agnostic-utilities/object/object';
 import {
   OUTPUT_FILE_GEPP,
   OutputFile,

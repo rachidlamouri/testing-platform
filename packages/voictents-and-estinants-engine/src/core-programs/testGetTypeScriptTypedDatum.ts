@@ -9,7 +9,7 @@ import {
   DatumTestCaseInputVoque,
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
-import { getTypeScriptTypedDatum } from '../package-agnostic-utilities/typed-datum/type-script/typeScriptTypedDatum';
+import { getTypeScriptTypedDatum } from '../package-agnostic-utilities/typed-datum/typeScriptTypedDatum';
 import { AbstractSerializableVoque } from './abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
 import { JsonSerializableVoictent } from './jsonSerializableVoictent';
