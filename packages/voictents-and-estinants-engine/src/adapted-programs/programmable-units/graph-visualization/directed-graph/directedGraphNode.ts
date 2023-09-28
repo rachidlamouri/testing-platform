@@ -35,6 +35,7 @@ type NodeAttributeByKey = SpreadN<
       style: NodeStyle;
       width: number;
       height: number;
+      fixedsize: boolean;
     },
   ]
 >;

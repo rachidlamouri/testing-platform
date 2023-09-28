@@ -66,8 +66,8 @@ export const { FileDependencyPathNodeFactInstance } =
             localZorn: pathNode.localGraphElementZorn,
           }),
           inputAttributeByKey: {
-            label: '',
-            ...THEME.directoryPathNode,
+            label: 'X',
+            ...THEME.dependencyPathNode,
           },
         });
 

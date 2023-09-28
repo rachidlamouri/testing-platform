@@ -82,6 +82,7 @@ export const { PartitionedFileDependencyGroupInstance } =
               partitionFact,
               dependencyGroupZorn: zorn,
               pathNode,
+              pathHeadId: importedFile.localGraphElementZorn.forMachine,
             });
           },
         );

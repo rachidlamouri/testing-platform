@@ -32,13 +32,15 @@ export const THEME = {
     style: GraphLikeStyle.Rounded,
     penwidth,
   },
-  directoryPathNode: {
+  dependencyPathNode: {
     shape: NodeShape.Circle,
     color: '#888888',
     fillcolor: '#aaaaaa',
     style: NodeStyle.Filled,
     width: 0.05,
     height: 0.05,
+    fontsize: 4,
+    fixedsize: true,
   } satisfies Omit<PartialNodeAttributeByKey, 'id'>,
   file: {
     fontname,

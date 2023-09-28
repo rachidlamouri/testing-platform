@@ -33,6 +33,7 @@ import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/asse
 import { FactTypeName } from './fact/factTypeName';
 import {
   DirectoryFactProps,
+  FileDependencyPathNodeFactProps,
   FileDependencyPathSegmentFactProps,
   FileFactProps,
 } from './app/browser/factProps';
@@ -40,6 +41,7 @@ import { FileFact2 } from './file/fileFact2';
 import { TypeScriptObject } from '../../../package-agnostic-utilities/object/object';
 import { FileDependencyPathSegmentFact } from './dependency/dependency-path/fileDependencyPathSegmentFact';
 import { DirectoryFact2 } from './directory/directoryFact2';
+import { FileDependencyPathNodeFact } from './dependency/dependency-path/fileDependencyPathNodeFact';
 
 const ESTINANT_NAME = 'decodeAndRecastSvgDocument' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -411,6 +413,15 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       };
     };
 
+    const getFileDependencyPathNodeFactProps = (
+      fact: FileDependencyPathNodeFact,
+    ): Exclude<FileDependencyPathNodeFactProps, 'children'> => {
+      return {
+        factId: fact.graphElement.id,
+        pathHeadId: fact.pathNode.pathHeadId,
+      };
+    };
+
     type WrapperConfiguration = {
       componentName: string;
       props: TypeScriptObject;
@@ -428,7 +439,10 @@ export const decodeAndRecastSvgDocument = buildEstinant({
             props: getDirectoryFactProps(fact),
           };
         case FactTypeName.FileDependencyPathNodeFact:
-          return null;
+          return {
+            componentName: 'FileDependencyPathNodeFact',
+            props: getFileDependencyPathNodeFactProps(fact),
+          };
         case FactTypeName.FileFact2:
           return {
             componentName: 'FileFact',
@@ -590,6 +604,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       'import { FileFact } from "../providers/fileFact"',
       'import { DirectoryFact } from "../providers/directoryFact"',
       'import { DependencyPathSegmentFact } from "../providers/dependencyPathSegmentFact"',
+      'import { FileDependencyPathNodeFact } from "../providers/fileDependencyPathNodeFact"',
       '',
       `export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
         recast.print(jsxNode).code
