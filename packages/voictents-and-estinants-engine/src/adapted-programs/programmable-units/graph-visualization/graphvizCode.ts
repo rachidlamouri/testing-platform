@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 
 /**
  * See https://graphviz.org/doc/info/lang.html for the specification of

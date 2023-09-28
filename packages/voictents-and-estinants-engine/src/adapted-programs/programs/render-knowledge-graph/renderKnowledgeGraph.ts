@@ -1,4 +1,4 @@
-import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
+import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
 import {
   buildGeppCombination,
   buildVoictentByGepp,
@@ -41,7 +41,7 @@ import { OutputFileVoictent } from '../../programmable-units/output-file/outputF
 import { getDirectedGraphFromGraphElementGroup } from '../model-programs/getDirectedGraphFromGraphElementGroup';
 import { groupGraphElements } from '../model-programs/groupGraphElements';
 import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
-import { InMemoryOdeshin3Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin3Voictent } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { getCommonBoundaryRoot } from './common-boundary-root/getCommonBoundaryRoot';
 import {
   PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,

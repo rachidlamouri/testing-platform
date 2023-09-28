@@ -1,4 +1,4 @@
-import { GenericVoque } from '../../../core/engine/voque';
+import { GenericVoque } from '../../../core/types/voque/voque';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
   buildInputOutputContextFromRightInputContext,

@@ -9,7 +9,7 @@ import {
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
-import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
+import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
 import { assertFileExtensionIsKnown } from './assertFileExtensionIsKnown';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';

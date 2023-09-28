@@ -2,7 +2,7 @@ import { ValueOf } from 'type-fest';
 import {
   Gepp,
   GeppCombination,
-} from '../../../core/engine-shell/voictent/gepp';
+} from '../../../core/types/voictent/gepp';
 import { buildGeppCombination } from '../../../adapter/engine/digikikify';
 import { BASH_FILE_GEPP } from '../bash-file/bashFile';
 import { HTML_FILE_GEPP } from '../html-file/htmlFile';

@@ -1,5 +1,5 @@
-import { Gepp } from '../engine-shell/voictent/gepp';
-import { GenericVoictent2 } from './voictent2';
+import { Gepp } from '../types/voictent/gepp';
+import { GenericVoictent2 } from '../types/voictent/voictent2';
 
 /**
  * A cache of Voictents by Gepp.

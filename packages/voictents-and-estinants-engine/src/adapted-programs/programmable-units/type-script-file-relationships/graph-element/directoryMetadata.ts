@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { DirectedSubgraph } from '../../graph-visualization/directed-graph/directedSubgraph';
 
 /**

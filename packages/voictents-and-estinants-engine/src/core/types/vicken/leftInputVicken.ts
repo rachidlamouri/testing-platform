@@ -1,4 +1,4 @@
-import { GenericVoque } from '../../engine/voque';
+import { GenericVoque } from '../voque/voque';
 
 type BaseLeftInputVicken<
   TVoque extends GenericVoque,

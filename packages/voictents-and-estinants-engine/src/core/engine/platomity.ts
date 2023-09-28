@@ -3,10 +3,10 @@ import {
   LeftDreanor,
   RightDreanorTuple,
 } from './dreanor/dreanor';
-import { GenericEstinant2 } from '../engine-shell/estinant/estinant';
+import { GenericEstinant2 } from '../types/estinant/estinant';
 import { Procody } from './procody/procody';
-import { GeppSet } from '../engine-shell/voictent/gepp';
-import { GenericVoictent2 } from '../engine/voictent2';
+import { GeppSet } from '../types/voictent/gepp';
+import { GenericVoictent2 } from '../types/voictent/voictent2';
 
 export type Platomity2 = {
   version: 2;

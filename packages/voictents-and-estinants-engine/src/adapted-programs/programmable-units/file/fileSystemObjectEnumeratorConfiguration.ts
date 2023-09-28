@@ -2,7 +2,7 @@ import {
   ComparisonConfigurationTypeName,
   FilePathAccessorInput,
 } from '../../../package-agnostic-utilities/file/getNestedFilePaths';
-import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
+import { StandardInMemoryVoque } from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
 
 /**
  * The information needed to traverse the file system.

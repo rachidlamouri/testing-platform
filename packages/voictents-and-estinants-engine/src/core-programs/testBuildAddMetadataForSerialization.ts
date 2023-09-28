@@ -1,5 +1,5 @@
 import { digikikify2 } from '../core/engine/digikikify';
-import { InMemoryOdeshin2ListVoictent } from '../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,

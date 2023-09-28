@@ -1,6 +1,6 @@
 import { Simplify } from 'type-fest';
 import { Hubblepup } from '../hubblepup/hubblepup';
-import { GenericVoque, Voque } from '../../engine/voque';
+import { GenericVoque, Voque } from '../voque/voque';
 import { ReferenceTypeName } from './referenceTypeName';
 
 export enum LanbeTypeName {

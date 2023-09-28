@@ -1,4 +1,4 @@
-import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
+import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
 import {
   buildVoictentByGepp,
   digikikify,

@@ -1,17 +1,17 @@
-import { Gepp } from '../../../core/engine-shell/voictent/gepp';
-import { HubblepupPelieLanbe2 } from '../../../core/engine-shell/voictent/lanbe';
+import { Gepp } from '../../../core/types/voictent/gepp';
+import { HubblepupPelieLanbe2 } from '../../../core/types/lanbe/lanbe';
 import {
   AbstractInMemoryVoictent,
   DereferenceError,
-} from '../../../core/engine/abstractInMemoryVoictent';
+} from '../../../layer-agnostic-utilities/voictent/abstractInMemoryVoictent';
 import {
   InMemoryIndexByName,
   InMemoryVoque,
-} from '../../../core/engine/inMemoryVoque';
+} from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { GenericOdeshin2 } from '../../../adapter/odeshin/odeshin2';
 import { FileSystemNode } from './fileSystemNode';
-import { BaseInMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { BaseInMemoryOdeshin2Voictent } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 
 type FileSystemNodeIndexByName = SpreadN<
   [

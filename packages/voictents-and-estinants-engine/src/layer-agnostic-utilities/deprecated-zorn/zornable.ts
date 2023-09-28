@@ -1,8 +1,8 @@
 import { Merge } from 'type-fest';
-import { Voque } from '../../core/engine/voque';
+import { Voque } from '../../core/types/voque/voque';
 import { AbstractSerializableIndexByName } from '../../core-programs/abstractSerializableVoictent';
-import { Gepp } from '../../core/engine-shell/voictent/gepp';
-import { Hubblepup } from '../../core/engine-shell/hubblepup/hubblepup';
+import { Gepp } from '../../core/types/voictent/gepp';
+import { Hubblepup } from '../../core/types/hubblepup/hubblepup';
 
 export type Zornable = {
   zorn: string;

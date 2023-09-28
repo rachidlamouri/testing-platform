@@ -1,4 +1,4 @@
-import { GenericVoque } from '../../engine/voque';
+import { GenericVoque } from '../voque/voque';
 import { ZornTuple } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 

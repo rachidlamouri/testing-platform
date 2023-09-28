@@ -1,9 +1,9 @@
-import { Estinant2 } from '../../core/engine-shell/estinant/estinant';
-import { LeftInputVoictentVicken } from '../../core/engine-shell/vicken/leftInputVicken';
-import { OutputVicken } from '../../core/engine-shell/vicken/outputVicken';
+import { Estinant2 } from '../../core/types/estinant/estinant';
+import { LeftInputVoictentVicken } from '../../core/types/vicken/leftInputVicken';
+import { OutputVicken } from '../../core/types/vicken/outputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
-import { InMemoryVoictent } from '../../core/engine/inMemoryVoictent';
-import { StandardInMemoryVoque } from '../../core/engine/inMemoryVoque';
+import { InMemoryVoictent } from '../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { StandardInMemoryVoque } from '../../layer-agnostic-utilities/voque/inMemoryVoque';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import { AbstractSerializableVoque } from '../abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from '../buildAddMetadataForSerialization';

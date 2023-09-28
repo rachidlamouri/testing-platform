@@ -2,17 +2,17 @@ import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import {
   Croarder,
   GenericCroader3,
-} from '../../engine-shell/appreffinge/input/right/croarder';
+} from '../../types/appreffinge/input/right/croarder';
 import {
   Framation,
   GenericFramation3,
-} from '../../engine-shell/appreffinge/input/right/framation';
-import { Gepp } from '../../engine-shell/voictent/gepp';
+} from '../../types/appreffinge/input/right/framation';
+import { Gepp } from '../../types/voictent/gepp';
 import {
   GenericVoictentItemLanbe2,
   GenericVoictentPelieLanbe,
   Lanbe,
-} from '../../engine-shell/voictent/lanbe';
+} from '../../types/lanbe/lanbe';
 import { Prected } from './prected';
 
 export enum DreanorTypeName {

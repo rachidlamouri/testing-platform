@@ -1,6 +1,6 @@
-import { Estinant2 } from '../core/engine-shell/estinant/estinant';
-import { LeftInputHubblepupVicken } from '../core/engine-shell/vicken/leftInputVicken';
-import { OutputVicken } from '../core/engine-shell/vicken/outputVicken';
+import { Estinant2 } from '../core/types/estinant/estinant';
+import { LeftInputHubblepupVicken } from '../core/types/vicken/leftInputVicken';
+import { OutputVicken } from '../core/types/vicken/outputVicken';
 import {
   GenericAbstractSerializableSourceVoque,
   GenericAbstractSerializableVoque,

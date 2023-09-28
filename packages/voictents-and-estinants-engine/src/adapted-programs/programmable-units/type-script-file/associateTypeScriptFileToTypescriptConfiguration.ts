@@ -2,7 +2,7 @@ import { posix } from 'path';
 import fs from 'fs';
 import { TYPE_SCRIPT_FILE_GEPP, TypeScriptFileVoque } from './typeScriptFile';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
-import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 
 /**
  * Corresponds to a tsconfig.json file paired with a source TypeScript file path

@@ -6,7 +6,7 @@ import {
   buildOutputHubblepupAppreffingeBuilder2,
   OutputHubblepupAppreffingeBuilderParent2,
 } from '../output/outputHubblepupAppreffingeBuilder2';
-import { GenericVoque } from '../../../core/engine/voque';
+import { GenericVoque } from '../../../core/types/voque/voque';
 import { AdaptedLeftInputVoictentVicken } from '../shared/vicken';
 import { PartialLeftInputAppreffinge } from '../shared/partialAppreffinge';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';

@@ -14,7 +14,7 @@ import {
 } from '../partition-fact/partitionFact';
 import { THEME } from '../theme';
 import { BoundedDirectory } from './boundedDirectory';
-import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { DirectedCluster2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedCluster2';
 import { DirectedGraphElement2 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { FactTypeName } from '../fact/factTypeName';

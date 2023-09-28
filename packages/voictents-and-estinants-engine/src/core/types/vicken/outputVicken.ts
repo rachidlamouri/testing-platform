@@ -1,5 +1,5 @@
 import { Simplify, UnionToIntersection } from 'type-fest';
-import { GenericVoqueTuple, UnsafeVoqueTuple } from '../../engine/voque';
+import { GenericVoqueTuple, UnsafeVoqueTuple } from '../voque/voque';
 
 type OutputRecordTuple<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
   [Index in keyof TOutputVoqueOptionTuple]: {

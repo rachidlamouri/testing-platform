@@ -9,35 +9,35 @@ import {
   GenericEstinant2,
   UnsafeEstinant2Tuple,
   Estinant2,
-} from '../../core/engine-shell/estinant/estinant';
+} from '../../core/types/estinant/estinant';
 import {
   GenericLeftInputVicken,
   LeftInputVicken,
-} from '../../core/engine-shell/vicken/leftInputVicken';
+} from '../../core/types/vicken/leftInputVicken';
 import {
   GenericOutputVicken,
   OutputVicken,
-} from '../../core/engine-shell/vicken/outputVicken';
+} from '../../core/types/vicken/outputVicken';
 import {
   GenericRightInputVickenTuple,
   RightInputVicken,
-} from '../../core/engine-shell/vicken/rightInputVicken';
+} from '../../core/types/vicken/rightInputVicken';
 import {
   Gepp,
   GenericGeppCombination,
   GeppTuple,
-} from '../../core/engine-shell/voictent/gepp';
+} from '../../core/types/voictent/gepp';
 import {
   GenericInMemoryOdeshin2ListVoque,
   InMemoryOdeshin2ListVoictent,
-} from '../../core/engine/inMemoryOdeshinVoictent2';
+} from '../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import {
   GenericVoictent2,
   GenericVoictent2Tuple,
   UnsafeVoictent2Tuple,
   Voictent2,
-} from '../../core/engine/voictent2';
-import { GenericVoque } from '../../core/engine/voque';
+} from '../../core/types/voictent/voictent2';
+import { GenericVoque } from '../../core/types/voque/voque';
 import { ProgramErrorGepp } from '../../adapted-programs/programmable-units/error/programError';
 import { GenericAbstractSerializableSourceVoque } from '../../core-programs/abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from '../../core-programs/buildAddMetadataForSerialization';

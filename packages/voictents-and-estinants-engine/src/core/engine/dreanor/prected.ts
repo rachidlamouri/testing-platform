@@ -1,5 +1,5 @@
 import { Zorn } from '../../../package-agnostic-utilities/datastructure/zorn';
-import { Hubblepup } from '../../engine-shell/hubblepup/hubblepup';
+import { Hubblepup } from '../../types/hubblepup/hubblepup';
 
 /**
  * A cache of Hubblepups by Zorn

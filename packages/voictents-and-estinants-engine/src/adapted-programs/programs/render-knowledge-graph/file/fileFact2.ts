@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
 import {

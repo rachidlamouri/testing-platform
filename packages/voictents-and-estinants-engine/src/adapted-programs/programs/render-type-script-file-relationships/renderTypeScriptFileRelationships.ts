@@ -37,8 +37,8 @@ import { getSvgMetadataList } from '../../programmable-units/type-script-file-re
 import { markUnusedNodes } from '../../programmable-units/type-script-file-relationships/markUnusedNodes';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { getOutputFileCount } from './getOutputFileCount';
-import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryOdeshin2ListVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';

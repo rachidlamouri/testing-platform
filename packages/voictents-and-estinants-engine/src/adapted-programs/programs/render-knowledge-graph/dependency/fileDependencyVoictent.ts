@@ -1,4 +1,4 @@
-import { BaseInMemoryOdeshin2Voictent } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { BaseInMemoryOdeshin2Voictent } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { BoundedFile } from '../file/boundedFile';
 import {
   FileDependency,

@@ -1,4 +1,4 @@
-import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
+import { StandardInMemoryVoque } from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
 
 export enum FileTypeName {
   Program = 'program',

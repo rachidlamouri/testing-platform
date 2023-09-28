@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { Gepp } from '../../core/engine-shell/voictent/gepp';
+import { Gepp } from '../../core/types/voictent/gepp';
 import {
   FileExtensionSuffixIdentifier,
   KnownFileExtensionSuffixIdentifier,

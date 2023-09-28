@@ -1,12 +1,12 @@
-import { Gepp } from '../engine-shell/voictent/gepp';
+import { Gepp } from '../../core/types/voictent/gepp';
 import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
-import { HubblepupPelieLanbe2 } from '../engine-shell/voictent/lanbe';
+import { HubblepupPelieLanbe2 } from '../../core/types/lanbe/lanbe';
 import { GenericOdeshin2 } from '../../adapter/odeshin/odeshin2';
 import {
   AbstractInMemoryVoictent,
   DereferenceError,
 } from './abstractInMemoryVoictent';
-import { InMemoryIndexByName, InMemoryVoque } from './inMemoryVoque';
+import { InMemoryIndexByName, InMemoryVoque } from '../voque/inMemoryVoque';
 import { OutputValueByTemplateKeyPath } from '../../package-agnostic-utilities/datastructure/zorn';
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 

@@ -1,15 +1,15 @@
 import fs from 'fs';
 import { digikikify2 } from '../core/engine/digikikify';
-import { InMemoryVoictent } from '../core/engine/inMemoryVoictent';
+import { InMemoryVoictent } from '../layer-agnostic-utilities/voictent/inMemoryVoictent';
 import {
   CacheableAccessor,
   CachedOnDiskVoictent,
   CachedOnDiskVoque,
-} from '../core/engine/cachedOnDiskVoictent';
-import { OutputVicken } from '../core/engine-shell/vicken/outputVicken';
-import { Estinant2 } from '../core/engine-shell/estinant/estinant';
-import { LeftInputHubblepupVicken } from '../core/engine-shell/vicken/leftInputVicken';
-import { StandardInMemoryVoque } from '../core/engine/inMemoryVoque';
+} from '../layer-agnostic-utilities/voictent/cachedOnDiskVoictent';
+import { OutputVicken } from '../core/types/vicken/outputVicken';
+import { Estinant2 } from '../core/types/estinant/estinant';
+import { LeftInputHubblepupVicken } from '../core/types/vicken/leftInputVicken';
+import { StandardInMemoryVoque } from '../layer-agnostic-utilities/voque/inMemoryVoque';
 
 type InputVoque = StandardInMemoryVoque<'input', CacheableAccessor<string>>;
 

@@ -1,7 +1,7 @@
 import { Merge } from 'type-fest';
-import { Hubblepup } from '../engine-shell/hubblepup/hubblepup';
-import { Gepp } from '../engine-shell/voictent/gepp';
-import { Voque } from './voque';
+import { Hubblepup } from '../../core/types/hubblepup/hubblepup';
+import { Gepp } from '../../core/types/voictent/gepp';
+import { Voque } from '../../core/types/voque/voque';
 import { AbstractSerializableIndexByName } from '../../core-programs/abstractSerializableVoictent';
 
 export type InMemoryIndexByName = Merge<

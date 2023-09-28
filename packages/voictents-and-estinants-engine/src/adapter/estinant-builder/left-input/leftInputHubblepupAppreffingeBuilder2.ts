@@ -1,5 +1,5 @@
-import { GenericIndexedHubblepup } from '../../../core/engine-shell/hubblepup/hubblepup';
-import { GenericVoque } from '../../../core/engine/voque';
+import { GenericIndexedHubblepup } from '../../../core/types/hubblepup/hubblepup';
+import { GenericVoque } from '../../../core/types/voque/voque';
 import {
   buildInputOutputContextFromLeftInputContext,
   InstantiationContext,
