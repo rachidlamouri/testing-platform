@@ -56,7 +56,7 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/in-memory-cache/zornable.ts',
+      'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/deprecated-zorn/zornable.ts',
     importedIdentifierName: 'ZornableVoque',
   },
   {
