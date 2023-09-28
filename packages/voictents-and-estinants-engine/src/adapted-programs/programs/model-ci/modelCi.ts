@@ -28,7 +28,7 @@ import { assertCiModelHasAllPrograms } from './assertCiModelHasAllPrograms';
 import { assertCiFileIsUpToDate } from './assertCiFileIsUpToDate';
 import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import { serializeCiModel } from './serializeCiModel';
-import { ProgramFileCache } from '../../../utilities/program/programFileCache';
+import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';

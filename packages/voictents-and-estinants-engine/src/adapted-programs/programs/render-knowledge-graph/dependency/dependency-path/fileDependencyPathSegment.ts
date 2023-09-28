@@ -1,4 +1,4 @@
-import { buildNamedConstructorFunction } from '../../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 
 export type FileDependencyPathSegment = {
   tailDirectoryPath: string;

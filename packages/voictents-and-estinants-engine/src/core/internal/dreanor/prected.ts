@@ -1,4 +1,4 @@
-import { Zorn } from '../../../utilities/semantic-types/zorn';
+import { Zorn } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { Hubblepup } from '../../engine-shell/hubblepup/hubblepup';
 
 /**

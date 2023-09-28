@@ -1,7 +1,7 @@
 import { posix } from 'path';
-import { assertNotUndefined } from '../../../utilities/nil/assertNotUndefined';
-import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { SimplifyN } from '../../../utilities/types/simplify';
+import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
+import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { getFileSystemNodePathPartList } from './getFileSystemNodePathPartList';
 import { NodePathConstructorInput } from './nodePathConstructorInput';
 

@@ -1,5 +1,5 @@
 import { File } from '../file/file';
-import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
+import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { FileSystemNodeVoque } from '../file/fileSystemNodeVoictent';
 
 /**

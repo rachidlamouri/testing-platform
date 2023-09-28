@@ -4,12 +4,12 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
   memoizeGetter,
-} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
+} from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { ExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../utilities/semantic-types/zorn';
+} from '../../../package-agnostic-utilities/datastructure/zorn';
 
 const ENGINE_ESTINANT_BUILD_ADD_METADATA_FOR_SERIALIZATION_LOCATOR_ZORN = [
   'filePath',

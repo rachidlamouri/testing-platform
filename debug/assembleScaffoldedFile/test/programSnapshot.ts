@@ -10,7 +10,7 @@ import { categorizeFiles } from '../../../packages/voictents-and-estinants-engin
 import { reportErrors } from '../../../packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/error/reportErrors'
 import { reportErrorCount } from '../../../packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/error/reportErrorCount'
 import { signalError } from '../../../packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/error/signalError'
-import { ProgramFileCache } from '../../../packages/voictents-and-estinants-engine/src/utilities/program/programFileCache'
+import { ProgramFileCache } from '../../../packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/program/programFileCache'
 import { assertFileExtensionIsKnown } from '../../../packages/voictents-and-estinants-engine/src/adapted-programs/programs/categorize-files/assertFileExtensionIsKnown'
 
 const programFileCache = new ProgramFileCache({

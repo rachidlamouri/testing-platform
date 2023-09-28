@@ -1,8 +1,8 @@
-import { getZorn } from '../../../utilities/deprecated-zorn/getZorn';
+import { getZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../utilities/semantic-types/zorn';
+} from '../../../package-agnostic-utilities/datastructure/zorn';
 
 type ExportLocator = {
   filePath: string;

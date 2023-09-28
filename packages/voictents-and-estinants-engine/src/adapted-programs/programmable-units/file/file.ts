@@ -1,5 +1,5 @@
-import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
+import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { FilePath, FilePathInstance } from './filePath';
 import { FileSystemNodeZorn } from './fileSystemNode';
 import { FileSystemNodeVoque } from './fileSystemNodeVoictent';

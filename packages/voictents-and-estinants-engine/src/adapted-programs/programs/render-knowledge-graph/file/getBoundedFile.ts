@@ -1,5 +1,5 @@
-import { assertNotNull } from '../../../../utilities/nil/assertNotNull';
-import { isNotNull } from '../../../../utilities/nil/isNotNull';
+import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
+import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
 import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
 import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
 import {

@@ -11,7 +11,10 @@ import {
   GenericRightInputVickenTuple,
   GenericRightInputVoictentVicken,
 } from '../../../core/engine-shell/vicken/rightInputVicken';
-import { Zorn, ZornTuple } from '../../../utilities/semantic-types/zorn';
+import {
+  Zorn,
+  ZornTuple,
+} from '../../../package-agnostic-utilities/datastructure/zorn';
 import {
   AssemblerContext,
   CoreConstituentOutputEntry,

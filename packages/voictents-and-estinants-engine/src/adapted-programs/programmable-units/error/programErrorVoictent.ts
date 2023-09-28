@@ -1,12 +1,12 @@
 import * as uuid from 'uuid';
-import { getVoictentResourceLocator } from '../../../utilities/deprecated-misc/getVoictentResourceLocator';
-import { normalizeFilePathForFileName } from '../../../utilities/file/normalizeFilePathForFileName';
+import { getVoictentResourceLocator } from '../../../layer-agnostic-utilities/deprecated-zorn/getVoictentResourceLocator';
+import { normalizeFilePathForFileName } from '../../../package-agnostic-utilities/file/normalizeFilePathForFileName';
 import {
   ProgramFileCache,
   SerializedHubblepup,
-} from '../../../utilities/program/programFileCache';
-import { serialize } from '../../../utilities/typed-datum/serializer/serialize';
-import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
+} from '../../../layer-agnostic-utilities/program/programFileCache';
+import { serialize } from '../../../package-agnostic-utilities/one-way-serializer/serialize';
+import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractInMemoryVoictent2';
 import {
   GenericProgramErrorVoque,

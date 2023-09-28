@@ -1,7 +1,7 @@
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../../utilities/semantic-types/zorn';
+} from '../../../../package-agnostic-utilities/datastructure/zorn';
 
 type FactoryInput = {
   distinguisher: string;

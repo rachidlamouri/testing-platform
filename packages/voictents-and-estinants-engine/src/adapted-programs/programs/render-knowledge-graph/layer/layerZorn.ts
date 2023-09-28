@@ -1,7 +1,7 @@
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../../utilities/semantic-types/zorn';
+} from '../../../../package-agnostic-utilities/datastructure/zorn';
 
 const LAYER_ZORN_TEMPLATE = [
   'directoryPath',

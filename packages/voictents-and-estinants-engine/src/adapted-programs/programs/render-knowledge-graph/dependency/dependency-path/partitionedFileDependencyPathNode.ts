@@ -1,9 +1,9 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../../core/engine/inMemoryOdeshinVoictent2';
-import { buildNamedConstructorFunction } from '../../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../../../utilities/semantic-types/zorn';
+} from '../../../../../package-agnostic-utilities/datastructure/zorn';
 import { LocalDirectedGraphElement2Zorn } from '../../../../programmable-units/graph-visualization/directed-graph/types';
 import { PartitionFact } from '../../partition-fact/partitionFact';
 import { PartitionedFileDependencyGroupZorn } from '../partitionedFileDependencyGroupZorn';
@@ -25,6 +25,7 @@ type PartitionedFileDependencyPathNodeConstructorInput = {
   partitionFact: PartitionFact;
   dependencyGroupZorn: PartitionedFileDependencyGroupZorn;
   pathNode: FileDependencyPathNode;
+  pathHeadId: string;
 };
 
 /**
@@ -36,6 +37,7 @@ export type PartitionedFileDependencyPathNode = {
   partitionFact: PartitionFact;
   directoryPath: string;
   localGraphElementZorn: LocalDirectedGraphElement2Zorn;
+  pathHeadId: string;
 };
 
 export const { PartitionedFileDependencyPathNodeInstance } =
@@ -47,6 +49,7 @@ export const { PartitionedFileDependencyPathNodeInstance } =
       'partitionFact',
       'directoryPath',
       'localGraphElementZorn',
+      'pathHeadId',
     ],
   } as const)
     .withTypes<
@@ -65,6 +68,7 @@ export const { PartitionedFileDependencyPathNodeInstance } =
           partitionFact,
           dependencyGroupZorn,
           pathNode: { directoryPath },
+          pathHeadId,
         } = input;
 
         const zorn = new PartitionedFileDependencyPathNodeZorn({
@@ -82,6 +86,7 @@ export const { PartitionedFileDependencyPathNodeInstance } =
           partitionFact,
           directoryPath,
           localGraphElementZorn,
+          pathHeadId,
         } satisfies PartitionedFileDependencyPathNode;
       },
     })

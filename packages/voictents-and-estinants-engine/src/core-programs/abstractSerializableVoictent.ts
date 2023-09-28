@@ -8,7 +8,7 @@ import {
 import {
   ProgramFileCache,
   SerializedHubblepup,
-} from '../utilities/program/programFileCache';
+} from '../layer-agnostic-utilities/program/programFileCache';
 
 export type AbstractSerializableIndexByName = {
   serializableId: string;

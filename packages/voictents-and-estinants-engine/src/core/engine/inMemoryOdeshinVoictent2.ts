@@ -1,5 +1,5 @@
 import { Gepp } from '../engine-shell/voictent/gepp';
-import { SpreadN } from '../../utilities/types/spreadN';
+import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
 import { HubblepupPelieLanbe2 } from '../engine-shell/voictent/lanbe';
 import { GenericOdeshin2 } from '../../adapter/odeshin/odeshin2';
 import {
@@ -7,8 +7,8 @@ import {
   DereferenceError,
 } from './abstractInMemoryVoictent';
 import { InMemoryIndexByName, InMemoryVoque } from './inMemoryVoque';
-import { OutputValueByTemplateKeyPath } from '../../utilities/semantic-types/zorn';
-import { assertNotUndefined } from '../../utilities/nil/assertNotUndefined';
+import { OutputValueByTemplateKeyPath } from '../../package-agnostic-utilities/datastructure/zorn';
+import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 
 export type InMemoryOdeshin2IndexByName = SpreadN<
   [

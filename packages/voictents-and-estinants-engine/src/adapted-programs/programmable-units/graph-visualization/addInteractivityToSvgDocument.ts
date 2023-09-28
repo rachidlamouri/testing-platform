@@ -5,7 +5,7 @@ import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
 import {
   CustomDatumTypeName,
   getCustomTypedDatum,
-} from '../../../utilities/typed-datum/customTypedDatum';
+} from '../../../package-agnostic-utilities/typed-datum/customTypedDatum';
 import { SVG_DOCUMENT_GEPP, SvgDocumentVoque } from './svgDocument';
 import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,

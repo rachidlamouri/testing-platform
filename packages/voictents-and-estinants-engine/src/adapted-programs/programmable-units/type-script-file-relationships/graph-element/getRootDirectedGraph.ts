@@ -22,7 +22,7 @@ import {
 } from './fileNodeMetadata';
 import { ROOT_METADATA_GEPP, RootMetadataVoque } from './rootMetadata';
 import { DirectedGraphEdge } from '../../graph-visualization/directed-graph/directedGraphEdge';
-import { Tuple } from '../../../../utilities/semantic-types/tuple';
+import { Tuple } from '../../../../package-agnostic-utilities/type/tuple';
 import {
   EXTERNAL_MODULE_METADATA_GEPP,
   ExternalModuleMetadataVoque,
@@ -31,7 +31,7 @@ import { OVERVIEW_BOUNDARY_ZORN } from './boundaryConfiguration';
 import { COMMON_ATTRIBUTE_BY_KEY, FONT_SIZE } from './commonAttributeByKey';
 import { ROOT_DIRECTORY_GEPP, RootDirectoryVoque } from '../rootDirectory';
 import { TYPE_SCRIPT_FILE_RELATIONSHIP_GRAPH_ZORN } from '../typeScriptFileRelationshipGraphZorn';
-import { getTextDigest } from '../../../../utilities/string/getTextDigest';
+import { getTextDigest } from '../../../../package-agnostic-utilities/string/getTextDigest';
 import { DirectedCluster } from '../../graph-visualization/directed-graph/directedSubgraph';
 import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
 

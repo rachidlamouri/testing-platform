@@ -7,7 +7,7 @@ import {
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
 import { FILE_GEPP, FileVoque } from '../../programmable-units/file/file';
-import { FileExtensionSuffixIdentifier } from '../../programmable-units/file/fileExtensionSuffixIdentifier';
+import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 
 const ESTINANT_NAME = 'assertFileExtensionIsKnown' as const;
 type EstinantName = typeof ESTINANT_NAME;

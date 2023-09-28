@@ -1,17 +1,17 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
-import { isExportNamedTypeDeclaration } from '../../../utilities/type-script-ast/isExportNamedTypeDeclaration';
-import { isExportNamedVariableDeclaration } from '../../../utilities/type-script-ast/isExportNamedVariableDeclaration';
+import { isExportNamedTypeDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isExportNamedTypeDeclaration';
+import { isExportNamedVariableDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isExportNamedVariableDeclaration';
 import {
   IdentifiableTypeDeclaration,
   isIdentifiableTypeDeclaration,
-} from '../../../utilities/type-script-ast/isIdentifiableTypeDeclaration';
+} from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableTypeDeclaration';
 import {
   IdentifiableVariableDeclarator,
   isIdentifiableVariableDeclaration,
-} from '../../../utilities/type-script-ast/isIdentifiableVariableDeclaration';
-import { isExportNamedTypeScriptEnumDeclaration } from '../../../utilities/type-script-ast/isExportNamedTypeScriptEnumDeclaration';
-import { hasOneElement } from '../../../utilities/arrays/hasOneElement';
-import { isExportNamedFunctionDeclaration } from '../../../utilities/type-script-ast/isExportNamedFunctionDeclaration';
+} from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableVariableDeclaration';
+import { isExportNamedTypeScriptEnumDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isExportNamedTypeScriptEnumDeclaration';
+import { hasOneElement } from '../../../package-agnostic-utilities/array/hasOneElement';
+import { isExportNamedFunctionDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isExportNamedFunctionDeclaration';
 
 export type IdentifiableProgramBodyStatementNode =
   | IdentifiableVariableDeclarator

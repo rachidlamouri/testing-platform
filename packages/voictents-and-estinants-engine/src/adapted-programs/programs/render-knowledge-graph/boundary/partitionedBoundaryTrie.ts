@@ -1,5 +1,5 @@
 import { StandardInMemoryVoque } from '../../../../core/engine/inMemoryVoque';
-import { Trie } from '../../../../utilities/datastructures/trie';
+import { Trie } from '../../../../package-agnostic-utilities/datastructure/trie';
 import { PartitionedBoundary } from './partitionedBoundary';
 
 /**

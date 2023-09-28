@@ -20,3 +20,8 @@ export type FileDependencyPathSegmentFactProps = PropsWithChildren<{
   pathHeadId: string;
   pathTailIdSet: Set<string>;
 }>;
+
+export type FileDependencyPathNodeFactProps = PropsWithChildren<{
+  factId: string;
+  pathHeadId: string;
+}>;

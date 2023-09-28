@@ -1,5 +1,5 @@
 import { Voque } from '../../../core/engine/voque';
-import { TypeScriptObjectInstance } from '../../../utilities/typed-datum/type-script/object';
+import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/object/object';
 
 export enum ProgramErrorElementLocatorTypeName {
   SourceFileLocator = 'SourceFileLocator',

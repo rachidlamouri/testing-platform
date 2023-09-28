@@ -2,8 +2,8 @@ import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinV
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../utilities/semantic-types/zorn';
-import { TypeScriptObject } from '../../../utilities/typed-datum/type-script/object';
+} from '../../../package-agnostic-utilities/datastructure/zorn';
+import { TypeScriptObject } from '../../../package-agnostic-utilities/object/object';
 import {
   MessageAccessorInputFromAccessor,
   RuleZorn,

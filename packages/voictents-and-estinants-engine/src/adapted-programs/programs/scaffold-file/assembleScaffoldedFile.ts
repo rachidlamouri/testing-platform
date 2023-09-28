@@ -12,7 +12,7 @@ import {
 } from './scaffoldConfiguration';
 import { scaffoldFile } from './scaffoldFile';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import { ProgramFileCache } from '../../../utilities/program/programFileCache';
+import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {

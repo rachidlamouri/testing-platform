@@ -3,7 +3,7 @@ import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
-import { ProgramFileCache } from '../utilities/program/programFileCache';
+import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import { SerializableVoictent } from './serializableVoictent';
 import { AbstractSerializableVoque } from './abstractSerializableVoictent';
 

@@ -1,6 +1,6 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import * as commentParser from 'comment-parser';
-import { buildNamedConstructorFunction } from '../../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import { CommentZorn } from '../commentZorn';
 import { AdaptedCommentTypeName } from './adaptedCommentTypeName';
 

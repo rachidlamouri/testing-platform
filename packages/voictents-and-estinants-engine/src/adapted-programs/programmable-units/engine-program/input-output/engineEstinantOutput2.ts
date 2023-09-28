@@ -2,9 +2,9 @@ import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdesh
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../../utilities/deprecated-constructor-function/buildConstructorFunction';
-import { getTextDigest } from '../../../../utilities/string/getTextDigest';
-import { getZorn } from '../../../../utilities/deprecated-zorn/getZorn';
+} from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
+import { getTextDigest } from '../../../../package-agnostic-utilities/string/getTextDigest';
+import { getZorn } from '../../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
 import { EngineEstinantLocator2 } from '../engineEstinantLocator2';
 import { EngineVoqueLocator2 } from '../engineVoqueLocator2';
 

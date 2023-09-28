@@ -14,7 +14,7 @@ import {
   PinbetunfBuilderParent2,
 } from '../pinbetunf/pinbetunfBuilder2';
 import { AdaptedLeftInputHubblepupVicken } from '../shared/vicken';
-import { SpreadN } from '../../../utilities/types/spreadN';
+import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
   buildOutputHubblepupConditionalAppreffingeBuilder,
   OutputHubblepupConditionalAppreffingeBuilderParent,

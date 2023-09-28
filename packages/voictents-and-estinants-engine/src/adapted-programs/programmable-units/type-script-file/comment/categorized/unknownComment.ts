@@ -1,5 +1,5 @@
-import { buildNamedConstructorFunction } from '../../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { SimplifyN } from '../../../../../utilities/types/simplify';
+import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
 import { CategorizedCommentTypeName } from './categorizedCommentTypeName';
 import { CommentZorn } from '../commentZorn';
 import { AdaptedComment } from '../adapted/adaptedComment';

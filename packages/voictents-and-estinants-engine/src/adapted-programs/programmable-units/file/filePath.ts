@@ -1,12 +1,12 @@
 import { posix } from 'path';
-import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { SimplifyN } from '../../../utilities/types/simplify';
+import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { getFileSystemNodePathPartList } from './getFileSystemNodePathPartList';
 import { NodePathConstructorInput } from './nodePathConstructorInput';
 import {
   FileExtensionSuffixIdentifier,
   getFileExtensionSuffixIdentifier,
-} from './fileExtensionSuffixIdentifier';
+} from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 
 type FilePathConstructorInput = NodePathConstructorInput;
 

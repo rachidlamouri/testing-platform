@@ -8,17 +8,17 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/utilities/constructor-function/namedConstructorFunctionBuilder.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder.ts',
     identifierList: ['buildNamedConstructorFunction'],
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/utilities/semantic-types/zorn.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/datastructure/zorn.ts',
     identifierList: ['GenericZorn2Template', 'Zorn2'],
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/utilities/types/simplify.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/type/simplify.ts',
     identifierList: ['SimplifyN'],
   },
 ];

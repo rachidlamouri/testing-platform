@@ -29,7 +29,7 @@ const getAttributeStatementList = (
   return Object.entries(node.attributeByKey)
     .filter(([, value]) => value !== undefined)
     .map(([key, value]): AttributeStatement => {
-      const textValue = `${value}`;
+      const textValue = String(value);
 
       const quotedKey = quote(key);
 

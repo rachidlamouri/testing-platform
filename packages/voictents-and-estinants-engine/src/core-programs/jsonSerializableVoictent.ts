@@ -1,14 +1,14 @@
-import { jsonUtils } from '../utilities/json/json';
-import { serializeError } from '../utilities/error/serializeError';
+import { jsonUtils } from '../package-agnostic-utilities/json/json';
+import { serializeError } from '../package-agnostic-utilities/error/serializeError';
 import {
   GenericAbstractSerializableVoque,
   AbstractSerializableVoictent,
 } from './abstractSerializableVoictent';
-import { FileExtensionSuffixIdentifier } from '../adapted-programs/programmable-units/file/fileExtensionSuffixIdentifier';
+import { FileExtensionSuffixIdentifier } from '../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import {
   ProgramFileCache,
   SerializedHubblepup,
-} from '../utilities/program/programFileCache';
+} from '../layer-agnostic-utilities/program/programFileCache';
 import { GenericHubbleup } from '../core/engine-shell/hubblepup/hubblepup';
 
 type JsonSerializableVoictentConstructorInput<

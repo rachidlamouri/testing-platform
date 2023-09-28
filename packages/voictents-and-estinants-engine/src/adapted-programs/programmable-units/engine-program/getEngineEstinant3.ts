@@ -1,21 +1,21 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
-import { splitList } from '../../../utilities/arrays/splitList';
+import { splitList } from '../../../package-agnostic-utilities/array/splitList';
 import {
   flattenCallExpressionChain,
   FlattenedCallExpressionOrError,
-} from '../../../utilities/type-script-ast/flattenIdentifiableCallExpressionChain';
-import { isCallExpression } from '../../../utilities/type-script-ast/isCallExpression';
-import { IdentifiableCallExpression } from '../../../utilities/type-script-ast/isIdentifiableCallExpression';
+} from '../../../package-agnostic-utilities/type-script-ast/flattenIdentifiableCallExpressionChain';
+import { isCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isCallExpression';
+import { IdentifiableCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableCallExpression';
 import {
   IdentifiableTypeScriptTypeReference,
   isIdentifiableTypeScriptTypeReference,
-} from '../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
-import { IdentifiableMemberExpressionCallExpression } from '../../../utilities/type-script-ast/isMemberExpressionCallExpression';
+} from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
+import { IdentifiableMemberExpressionCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isMemberExpressionCallExpression';
 import {
   isObjectExpressionWithIdentifierProperties,
   IdentifiableProperty,
-} from '../../../utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
-import { isStringLiteral } from '../../../utilities/type-script-ast/isStringLiteral';
+} from '../../../package-agnostic-utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
+import { isStringLiteral } from '../../../package-agnostic-utilities/type-script-ast/isStringLiteral';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
@@ -30,11 +30,11 @@ import {
   EngineEstinant3,
   EngineEstinant3Instance,
 } from './engineEstinant3';
-import { isNode } from '../../../utilities/type-script-ast/isNode';
+import { isNode } from '../../../package-agnostic-utilities/type-script-ast/isNode';
 import {
   buildIsTypeScriptTypeParameterInstantiationWithSpecificParameterTuple,
   isTypeScriptTypeParameterInstantiationWithParameterTuple,
-} from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
+} from '../../../package-agnostic-utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
@@ -42,8 +42,8 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../error/programError';
-import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
-import { isSpecificConstantTypeScriptAsExpression } from '../../../utilities/type-script-ast/isConstantTypeScriptAsExpression';
+import { isIdentifier } from '../../../package-agnostic-utilities/type-script-ast/isIdentifier';
+import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isConstantTypeScriptAsExpression';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImportListVoque,

@@ -1,7 +1,7 @@
-import { assertNotNull } from '../../../../utilities/nil/assertNotNull';
-import { assertNotUndefined } from '../../../../utilities/nil/assertNotUndefined';
-import { ComplexMap } from '../../../../utilities/datastructures/complexMap';
-import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
+import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
+import { assertNotUndefined } from '../../../../package-agnostic-utilities/nil/assertNotUndefined';
+import { ComplexMap } from '../../../../package-agnostic-utilities/datastructure/complexMap';
+import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import { BoundedFile } from '../file/boundedFile';
 import { PartitionFact } from '../partition-fact/partitionFact';
 import { FileDependencyPathSegment } from './dependency-path/fileDependencyPathSegment';
@@ -82,6 +82,7 @@ export const { PartitionedFileDependencyGroupInstance } =
               partitionFact,
               dependencyGroupZorn: zorn,
               pathNode,
+              pathHeadId: importedFile.localGraphElementZorn.forMachine,
             });
           },
         );

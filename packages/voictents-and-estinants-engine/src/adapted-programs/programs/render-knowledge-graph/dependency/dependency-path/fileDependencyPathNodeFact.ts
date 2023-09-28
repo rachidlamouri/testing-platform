@@ -1,6 +1,6 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../../core/engine/inMemoryOdeshinVoictent2';
-import { buildNamedConstructorFunction } from '../../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { SimplifyN } from '../../../../../utilities/types/simplify';
+import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
 import { DirectedGraphElement2 } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { DirectedGraphNode2Instance } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { GraphConstituentLocatorInstance } from '../../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
@@ -66,8 +66,8 @@ export const { FileDependencyPathNodeFactInstance } =
             localZorn: pathNode.localGraphElementZorn,
           }),
           inputAttributeByKey: {
-            label: '',
-            ...THEME.directoryPathNode,
+            label: 'X',
+            ...THEME.dependencyPathNode,
           },
         });
 

@@ -1,4 +1,4 @@
-import { Zorn } from '../../../utilities/semantic-types/zorn';
+import { Zorn } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { Dreanor, LeftDreanor } from '../dreanor/dreanor';
 import { Mabz } from './mabz';
 

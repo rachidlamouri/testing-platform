@@ -1,4 +1,4 @@
-import { NonEmptyTuple } from '../../../../utilities/semantic-types/tuple';
+import { NonEmptyTuple } from '../../../../package-agnostic-utilities/type/tuple';
 import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
 import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
 import {

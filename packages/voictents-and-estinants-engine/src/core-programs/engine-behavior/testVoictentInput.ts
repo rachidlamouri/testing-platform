@@ -4,7 +4,7 @@ import { OutputVicken } from '../../core/engine-shell/vicken/outputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryVoictent } from '../../core/engine/inMemoryVoictent';
 import { StandardInMemoryVoque } from '../../core/engine/inMemoryVoque';
-import { ProgramFileCache } from '../../utilities/program/programFileCache';
+import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import { AbstractSerializableVoque } from '../abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from '../buildAddMetadataForSerialization';
 import { SerializableVoictent } from '../serializableVoictent';
