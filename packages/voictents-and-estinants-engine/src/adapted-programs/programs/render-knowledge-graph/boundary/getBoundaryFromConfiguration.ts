@@ -29,6 +29,7 @@ export const getBoundaryFromConfiguration = buildEstinant({
   })
   .onPinbe((boundaryConfiguration, [directory]) => {
     return new BoundaryInstance({
+      typeName: boundaryConfiguration.typeName,
       displayName: boundaryConfiguration.displayName,
       directory,
     });

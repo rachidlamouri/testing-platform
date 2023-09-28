@@ -51,16 +51,17 @@ export const PanelSection: React.FunctionComponent<PanelSectionProps> = ({
           {title}
         </Stack>
       </div>
-      {isVisible && (
+      {
         <div
           style={{
+            display: isVisible ? 'block' : 'none',
             paddingLeft: '6px',
             paddingBottom: '6px',
           }}
         >
           {children}
         </div>
-      )}
+      }
     </>
   );
 };

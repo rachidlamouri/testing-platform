@@ -1,4 +1,5 @@
 import React from 'react';
+import { BoundaryTypeName } from '../../boundary/boundaryTypeName';
 
 export type SvgWrapperComponent = React.FunctionComponent<{
   ref: React.ForwardedRef<SVGSVGElement>;
@@ -19,6 +20,7 @@ export type Metadata = {
 export type MetadataById = Record<string, Metadata>;
 
 export type NavigationPartition = {
+  boundaryTypeName: BoundaryTypeName;
   boundaryId: string;
   label: string;
   Component: SvgWrapperComponent;

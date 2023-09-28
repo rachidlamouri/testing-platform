@@ -38,6 +38,7 @@ export const App: React.FC = () => {
               <FileMetadataSection />
               <SectionSeparator />
               <StackSpacer />
+              <SectionSeparator />
               <LegendSection />
             </>
           }

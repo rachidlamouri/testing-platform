@@ -19,13 +19,13 @@ export const LeftPanel: React.FunctionComponent<LeftPanelProps> = ({
         height: '100%',
         display: 'flex',
         flexDirection: 'row',
-        overflowY: 'scroll',
       }}
     >
       <Stack
         style={{
           width: panelWidth - EDGE_WIDTH,
           flexDirection: 'column',
+          overflowY: 'scroll',
         }}
         gap={StackGap.Medium}
       >

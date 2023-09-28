@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
 
 /**
  * Information to be committed that is expected to change if a program

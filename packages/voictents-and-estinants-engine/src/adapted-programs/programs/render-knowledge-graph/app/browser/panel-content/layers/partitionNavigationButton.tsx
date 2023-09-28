@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { NavigationPartition } from '../../dynamicComponentTypes';
 import { useSelectedIdContext } from '../../selectedIdContext';
 import { THEME } from '../../theme';
+import { Stack, StackSpacer } from '../../stack';
+import { BoundaryTypeIndicator } from './boundaryTypeIndicator';
 
 export type PartitionNavigationButtonProps = {
   partition: NavigationPartition;
@@ -47,7 +49,15 @@ export const PartitionNavigationButton: React.FunctionComponent<
         setIsHovered(false);
       }}
     >
-      {partition.label}
+      <Stack
+        style={{
+          alignItems: 'center',
+        }}
+      >
+        {partition.label}
+        <StackSpacer />
+        <BoundaryTypeIndicator typeName={partition.boundaryTypeName} />
+      </Stack>
     </button>
   );
 };
