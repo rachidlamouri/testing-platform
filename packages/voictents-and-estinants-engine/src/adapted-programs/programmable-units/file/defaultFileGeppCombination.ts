@@ -7,7 +7,7 @@ import { buildGeppCombination } from '../../../adapter/engine/digikikify';
 import { BASH_FILE_GEPP } from '../bash-file/bashFile';
 import { HTML_FILE_GEPP } from '../html-file/htmlFile';
 import { YAML_FILE_GEPP } from '../yaml-file/yamlFile';
-import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
+import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { FILE_GEPP } from './file';
 import { TYPE_SCRIPT_FILE_GEPP } from '../type-script-file/typeScriptFile';
 import { DIRECTORY_GEPP } from './directory';

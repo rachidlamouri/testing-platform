@@ -6,7 +6,7 @@ import {
   SerializedHubblepup,
 } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { serialize } from '../../../package-agnostic-utilities/typed-datum/serializer/serialize';
-import { FileExtensionSuffixIdentifier } from '../file/fileExtensionSuffixIdentifier';
+import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractInMemoryVoictent2';
 import {
   GenericProgramErrorVoque,

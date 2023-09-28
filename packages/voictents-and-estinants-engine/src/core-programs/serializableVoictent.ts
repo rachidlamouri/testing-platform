@@ -7,7 +7,7 @@ import {
   ProgramFileCache,
   SerializedHubblepup,
 } from '../layer-agnostic-utilities/program/programFileCache';
-import { FileExtensionSuffixIdentifier } from '../adapted-programs/programmable-units/file/fileExtensionSuffixIdentifier';
+import { FileExtensionSuffixIdentifier } from '../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { serialize } from '../package-agnostic-utilities/typed-datum/serializer/serialize';
 
 type SerializableVoictentConstructorInput<

@@ -6,7 +6,7 @@ import { NodePathConstructorInput } from './nodePathConstructorInput';
 import {
   FileExtensionSuffixIdentifier,
   getFileExtensionSuffixIdentifier,
-} from './fileExtensionSuffixIdentifier';
+} from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 
 type FilePathConstructorInput = NodePathConstructorInput;
 

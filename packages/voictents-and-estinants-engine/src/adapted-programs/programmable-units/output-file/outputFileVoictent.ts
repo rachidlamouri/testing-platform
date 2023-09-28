@@ -3,7 +3,7 @@ import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/prog
 import {
   KnownFileExtensionSuffixIdentifier,
   getFileExtensionSuffixIdentifier,
-} from '../file/fileExtensionSuffixIdentifier';
+} from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractInMemoryVoictent2';
 import { OUTPUT_FILE_GEPP, OutputFile, OutputFileVoque } from './outputFile';
 

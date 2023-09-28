@@ -4,7 +4,7 @@ import {
   TypeScriptFileVoque,
 } from '../type-script-file/typeScriptFile';
 import { YAML_FILE_GEPP, YamlFile, YamlFileVoque } from '../yaml-file/yamlFile';
-import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
+import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { HtmlFile, HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { BASH_FILE_GEPP, BashFile, BashFileVoque } from '../bash-file/bashFile';
