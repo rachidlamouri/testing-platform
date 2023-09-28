@@ -11,23 +11,23 @@ const boundaryTypeIndicatorFieldByBoundaryType: Record<
   MetadataField
 > = {
   [BoundaryTypeName.AdaptedProgram]: {
-    label: 'Adapted Program Indicator',
+    label: 'Adapted Program',
     value: 'AP',
   },
   [BoundaryTypeName.Engine]: {
-    label: 'Engine Indicator',
+    label: 'Engine',
     value: 'E',
   },
   [BoundaryTypeName.ProgrammableUnit]: {
-    label: 'Programmable Unit Indicator',
+    label: 'Programmable Unit',
     value: 'PU',
   },
   [BoundaryTypeName.TestProgram]: {
-    label: 'Test Program Indicator',
+    label: 'Test Program',
     value: 'TP',
   },
   [BoundaryTypeName.Utility]: {
-    label: 'Utility Indicator',
+    label: 'Utility',
     value: 'U',
   },
 };
@@ -55,19 +55,19 @@ export const LegendSection: React.FunctionComponent = () => {
       >
         <MetadataFieldDisplay
           field={{
-            label: 'Repository Directory Shorthand',
+            label: 'Repository',
             value: '~r',
           }}
         />
         <MetadataFieldDisplay
           field={{
-            label: 'Common Boundary Root Directory Shorthand',
+            label: 'Common Boundary Root',
             value: '~c',
           }}
         />
         <MetadataFieldDisplay
           field={{
-            label: 'Boundary Directory Shorthand',
+            label: 'Boundary',
             value: '~b',
           }}
         />
