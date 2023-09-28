@@ -1,11 +1,11 @@
 import { posix } from 'path';
 import { InMemoryOdeshin3Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
-import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../../utilities/types/simplify';
+} from '../../../../package-agnostic-utilities/datastructure/zorn';
+import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import {
   DirectedGraph2,
   DirectedGraph2Instance,

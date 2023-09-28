@@ -7,7 +7,7 @@ import {
   SVG_DOCUMENT_GEPP,
   SvgDocumentVoque,
 } from '../../programmable-units/graph-visualization/svgDocument';
-import { isNotNull } from '../../../utilities/nil/isNotNull';
+import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
@@ -27,9 +27,9 @@ import {
 import {
   CustomDatumTypeName,
   getCustomTypedDatum,
-} from '../../../utilities/typed-datum/customTypedDatum';
+} from '../../../package-agnostic-utilities/typed-datum/customTypedDatum';
 import { FACT_GEPP, Fact, FactVoque } from './fact/fact';
-import { assertNotUndefined } from '../../../utilities/nil/assertNotUndefined';
+import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { FactTypeName } from './fact/factTypeName';
 import {
   DirectoryFactProps,
@@ -37,7 +37,7 @@ import {
   FileFactProps,
 } from './app/browser/factProps';
 import { FileFact2 } from './file/fileFact2';
-import { TypeScriptObject } from '../../../utilities/typed-datum/type-script/object';
+import { TypeScriptObject } from '../../../package-agnostic-utilities/typed-datum/type-script/object';
 import { FileDependencyPathSegmentFact } from './dependency/dependency-path/fileDependencyPathSegmentFact';
 import { DirectoryFact2 } from './directory/directoryFact2';
 

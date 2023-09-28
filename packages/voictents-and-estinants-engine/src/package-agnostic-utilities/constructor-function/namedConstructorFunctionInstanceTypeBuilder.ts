@@ -13,7 +13,7 @@ import {
   buildNamedConstructorFunctionAssembler,
 } from './namedConstructorFunctionAssembler';
 import { ConstructorFunctionName } from './types';
-import { SpreadN } from '../types/spreadN';
+import { SpreadN } from '../type/spreadN';
 
 type TypeCheckErrorMessages<
   TInitializationErrorMessage,

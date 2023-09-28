@@ -1,8 +1,8 @@
 
 import { InMemoryOdeshin2ListVoque } from '../../../packages/voictents-and-estinants-engine/src/core/engine/inMemoryOdeshinVoictent2'
-import { buildNamedConstructorFunction } from '../../../packages/voictents-and-estinants-engine/src/utilities/constructor-function/namedConstructorFunctionBuilder'
-import { GenericZorn2Template, Zorn2 } from '../../../packages/voictents-and-estinants-engine/src/utilities/semantic-types/zorn'
-import { SimplifyN } from '../../../packages/voictents-and-estinants-engine/src/utilities/types/simplify'
+import { buildNamedConstructorFunction } from '../../../packages/voictents-and-estinants-engine/src/package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder'
+import { GenericZorn2Template, Zorn2 } from '../../../packages/voictents-and-estinants-engine/src/package-agnostic-utilities/datastructure/zorn'
+import { SimplifyN } from '../../../packages/voictents-and-estinants-engine/src/package-agnostic-utilities/type/simplify'
 
 const HUBBLEPUP_SNAPSHOT_ZORN_TEMPLATE = [
   'UPDATE_ME'

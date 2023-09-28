@@ -13,7 +13,7 @@ import {
   GenericAdaptedOutputVickenTuple,
   GenericAdaptedRightInputVickenTuple,
 } from '../shared/vicken';
-import { Tuple } from '../../../utilities/semantic-types/tuple';
+import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
 type Pinbetunf2<TInputTuple extends Tuple<unknown>, TOutput> = (
   ...input: TInputTuple

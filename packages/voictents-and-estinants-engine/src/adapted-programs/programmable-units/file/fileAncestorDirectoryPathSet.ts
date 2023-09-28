@@ -1,10 +1,10 @@
 import { posix } from 'path';
 import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinVoictent2';
-import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../utilities/semantic-types/zorn';
+} from '../../../package-agnostic-utilities/datastructure/zorn';
 import { File } from './file';
 
 const FILE_ANCESTOR_DIRECTORY_PATH_SET_ZORN_TEMPLATE = [

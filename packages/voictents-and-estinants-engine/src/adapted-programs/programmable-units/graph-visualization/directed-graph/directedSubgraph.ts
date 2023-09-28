@@ -1,4 +1,4 @@
-import { SpreadN } from '../../../../utilities/types/spreadN';
+import { SpreadN } from '../../../../package-agnostic-utilities/type/spreadN';
 import { AttributeByKeyCNE } from './attributeByKeyCNE';
 import { AttributeByKeyGS } from './attributeByKeyGS';
 import { AttributeByKeyGSC } from './attributeByKeyGSC';

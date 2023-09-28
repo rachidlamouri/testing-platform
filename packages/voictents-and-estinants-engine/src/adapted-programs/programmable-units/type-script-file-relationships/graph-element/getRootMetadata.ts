@@ -13,7 +13,7 @@ import {
   RootMetadata,
   RootMetadataVoque,
 } from './rootMetadata';
-import { getTextDigest } from '../../../../utilities/string/getTextDigest';
+import { getTextDigest } from '../../../../package-agnostic-utilities/string/getTextDigest';
 import { RankDirection } from '../../graph-visualization/directed-graph/attributeByKeyGS';
 import { GraphLikeLabelLocation } from '../../graph-visualization/directed-graph/attributeByKeyGSC';
 

@@ -1,4 +1,4 @@
-import { Tuple } from '../../semantic-types/tuple';
+import { Tuple } from '../../type/tuple';
 import { CustomDatumTypeName, getCustomTypedDatum } from '../customTypedDatum';
 import { TypeScriptObjectInstance } from '../type-script/object';
 

@@ -4,11 +4,11 @@ import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder
 import {
   CustomDatumTypeName,
   getCustomTypedDatum,
-} from '../../../utilities/typed-datum/customTypedDatum';
+} from '../../../package-agnostic-utilities/typed-datum/customTypedDatum';
 import {
   TypeScriptArray,
   TypeScriptObjectInstance,
-} from '../../../utilities/typed-datum/type-script/object';
+} from '../../../package-agnostic-utilities/typed-datum/type-script/object';
 import {
   OUTPUT_FILE_GEPP,
   OutputFile,

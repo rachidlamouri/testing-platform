@@ -1,4 +1,4 @@
-import { serialize } from '../../../utilities/typed-datum/serializer/serialize';
+import { serialize } from '../../../package-agnostic-utilities/typed-datum/serializer/serialize';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import { LintAssertionError } from '../linting/reportFailedLintAssertion';
 import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';

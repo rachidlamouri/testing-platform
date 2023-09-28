@@ -1,7 +1,7 @@
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 import chalk from 'chalk';
 import { SubprocessConfiguration } from './subprocessConfiguration';
-import { ForegroundColor, colorList } from '../colors/colorList';
+import { ForegroundColor, colorList } from '../color/colorList';
 import { assertNotUndefined } from '../nil/assertNotUndefined';
 import { LineLabeler } from './transforms/lineLabeler';
 import { TextSanitizer } from './transforms/textSanitizer';

@@ -23,7 +23,9 @@ export const getUtilityBoundary = buildEstinant({
     // TODO: update the stream configuration to allow filtering the inputs
     if (
       directory.directoryPath.parentDirectoryPath !==
-      'packages/voictents-and-estinants-engine/src/utilities'
+        'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities' &&
+      directory.directoryPath.parentDirectoryPath !==
+        'packages/voictents-and-estinants-engine/src/package-agnostic-utilities'
     ) {
       return [];
     }

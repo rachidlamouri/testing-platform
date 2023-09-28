@@ -1,4 +1,4 @@
-import { ForegroundColor } from '../colors/colorList';
+import { ForegroundColor } from '../color/colorList';
 
 export type SubprocessConfiguration = {
   label: string;

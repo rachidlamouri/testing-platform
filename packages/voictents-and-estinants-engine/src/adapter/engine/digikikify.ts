@@ -42,7 +42,7 @@ import { ProgramErrorGepp } from '../../adapted-programs/programmable-units/erro
 import { GenericAbstractSerializableSourceVoque } from '../../core-programs/abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from '../../core-programs/buildAddMetadataForSerialization';
 import { SerializableVoictent } from '../../core-programs/serializableVoictent';
-import { ProgramFileCache } from '../../utilities/program/programFileCache';
+import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import {
   FileSystemNodeVoictent,
   GenericFileSystemNodeVoque,

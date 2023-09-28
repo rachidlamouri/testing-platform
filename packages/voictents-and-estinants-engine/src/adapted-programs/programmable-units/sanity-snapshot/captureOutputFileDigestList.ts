@@ -5,7 +5,7 @@ import {
   OutputFileVoque,
 } from '../output-file/outputFile';
 import { SANITY_SNAPSHOT_GEPP, SanitySnapshotVoque } from './sanitySnapshot';
-import { getTextDigest } from '../../../utilities/string/getTextDigest';
+import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
 
 type OutputFileDigest = {
   fileName: string;

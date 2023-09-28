@@ -1,4 +1,4 @@
-import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import { FileExtensionSuffixIdentifier } from './fileExtensionSuffixIdentifier';
 import { FilePath, FilePathInstance } from './filePath';
 import { FileSystemNodeZorn } from './fileSystemNode';

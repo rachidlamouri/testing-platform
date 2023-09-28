@@ -9,7 +9,7 @@ import {
   ParsedTypeScriptFileVoque,
 } from './parsedTypeScriptFile';
 import { CategorizedComment } from './comment/categorized/categorizedComment';
-import { assertHasZeroOrOneElements } from '../../../utilities/arrays/assertHasZeroOrOneElements';
+import { assertHasZeroOrOneElements } from '../../../package-agnostic-utilities/array/assertHasZeroOrOneElements';
 import {
   GenericLintAssertion,
   LINT_ASSERTION_GEPP,

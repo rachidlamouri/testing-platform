@@ -1,6 +1,6 @@
 import { InMemoryOdeshin3Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
-import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { SimplifyN } from '../../../../utilities/types/simplify';
+import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { BoundaryZorn } from './boundary';
 import { BoundaryTypeName } from './boundaryTypeName';
 

@@ -2,8 +2,8 @@ import { InMemoryOdeshin2ListVoque } from '../../../core/engine/inMemoryOdeshinV
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
-import { getTextDigest } from '../../../utilities/string/getTextDigest';
+} from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
+import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
 import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
 
 type BaseEngineVoqueLocator2 = {

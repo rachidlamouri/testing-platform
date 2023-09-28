@@ -1,4 +1,4 @@
-import { Tuple } from '../../utilities/semantic-types/tuple';
+import { Tuple } from '../../package-agnostic-utilities/type/tuple';
 import {
   HubblepupPelieLanbe,
   HubblepupPelieLanbe2,

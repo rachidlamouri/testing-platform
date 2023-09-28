@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { ProgramFileCache } from '../../../utilities/program/programFileCache';
+import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import {
   KnownFileExtensionSuffixIdentifier,
   getFileExtensionSuffixIdentifier,

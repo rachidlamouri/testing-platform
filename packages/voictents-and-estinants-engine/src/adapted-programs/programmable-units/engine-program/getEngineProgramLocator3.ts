@@ -11,7 +11,7 @@ import {
   ObjectExpressionWithIdentifierProperties,
   isObjectExpressionWithIdentifierProperties,
   isSepcificIdentifiableProperty,
-} from '../../../utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
+} from '../../../package-agnostic-utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImport,
@@ -21,8 +21,8 @@ import {
 import {
   ArrayExpressionOfIdentifiers,
   isArrayExpressionOfIdentifiers,
-} from '../../../utilities/type-script-ast/isArrayExpressionOfIdentifiers';
-import { isSpecificExpressionStatement } from '../../../utilities/type-script-ast/isSpecificExpressionStatement';
+} from '../../../package-agnostic-utilities/type-script-ast/isArrayExpressionOfIdentifiers';
+import { isSpecificExpressionStatement } from '../../../package-agnostic-utilities/type-script-ast/isSpecificExpressionStatement';
 import {
   AdaptedEngineFunctionConfiguration,
   CoreEngineFunction2Configuration,
@@ -34,17 +34,17 @@ import {
   EngineEstinantLocator2TypeName,
   EngineEstinantTopLevelDeclarationLocatorInstance,
 } from './engineEstinantLocator2';
-import { isIdentifier } from '../../../utilities/type-script-ast/isIdentifier';
+import { isIdentifier } from '../../../package-agnostic-utilities/type-script-ast/isIdentifier';
 import {
   isNewExpression,
   isNewExpressionWithObjectExpressionArgument,
   isNewExpressionWithSpecificTypeParameters,
-} from '../../../utilities/type-script-ast/isNewExpression';
+} from '../../../package-agnostic-utilities/type-script-ast/isNewExpression';
 import { buildAddMetadataForSerialization } from '../../../core-programs/buildAddMetadataForSerialization';
-import { isSpecificIdentifiableCallExpression } from '../../../utilities/type-script-ast/isCallExpression';
-import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../../utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
-import { isIdentifiableTypeScriptTypeReference } from '../../../utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
-import { isSpecificConstantTypeScriptAsExpression } from '../../../utilities/type-script-ast/isConstantTypeScriptAsExpression';
+import { isSpecificIdentifiableCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isCallExpression';
+import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../../package-agnostic-utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
+import { isIdentifiableTypeScriptTypeReference } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
+import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isConstantTypeScriptAsExpression';
 import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
@@ -70,7 +70,7 @@ import {
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
 import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 import { buildVoictentByGepp } from '../../../adapter/engine/digikikify';
-import { isArrayExpression } from '../../../utilities/type-script-ast/isArrayExpression';
+import { isArrayExpression } from '../../../package-agnostic-utilities/type-script-ast/isArrayExpression';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   FileCommentedProgramBodyDeclarationGroupVoque,

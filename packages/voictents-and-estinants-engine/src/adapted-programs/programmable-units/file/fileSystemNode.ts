@@ -1,8 +1,8 @@
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../utilities/types/simplify';
+} from '../../../package-agnostic-utilities/datastructure/zorn';
+import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { NodePath } from './nodePath';
 
 const FILE_SYSTEM_NODE_ZORN_TEMPLATE = [

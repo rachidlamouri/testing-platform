@@ -1,7 +1,7 @@
 import { posix } from 'path';
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
-import { resolveModuleFilePath } from '../../../utilities/file/resolveModuleFilePath';
-import { isImportDeclaration } from '../../../utilities/type-script-ast/isImportDeclaration';
+import { resolveModuleFilePath } from '../../../package-agnostic-utilities/file/resolveModuleFilePath';
+import { isImportDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isImportDeclaration';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
@@ -12,7 +12,7 @@ import {
   TypeScriptFileImport,
   TypeScriptFileImportListVoque,
 } from './typeScriptFileImportList';
-import { splitList } from '../../../utilities/arrays/splitList';
+import { splitList } from '../../../package-agnostic-utilities/array/splitList';
 import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,

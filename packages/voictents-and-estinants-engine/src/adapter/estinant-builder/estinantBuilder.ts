@@ -3,7 +3,7 @@ import {
   buildLeftInputHubblepupAppreffingeBuilder2,
   LeftInputHubblepupAppreffingeBuilderParent2,
 } from './left-input/leftInputHubblepupAppreffingeBuilder2';
-import { SpreadN } from '../../utilities/types/spreadN';
+import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
 import {
   buildLeftInputVoictentAppreffingeBuilder2,
   LeftInputVoictentAppreffingeBuilderParent2,

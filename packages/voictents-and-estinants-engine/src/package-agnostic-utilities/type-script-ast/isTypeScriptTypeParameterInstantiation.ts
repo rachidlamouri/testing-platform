@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
-import { Tuple } from '../semantic-types/tuple';
+import { Tuple } from '../type/tuple';
 import { isNode, TypeScriptNode } from './isNode';
 
 type TypeScriptTypeParameterNodeList =

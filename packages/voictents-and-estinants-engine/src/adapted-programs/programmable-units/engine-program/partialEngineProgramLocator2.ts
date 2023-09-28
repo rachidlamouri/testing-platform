@@ -1,9 +1,9 @@
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../utilities/deprecated-constructor-function/buildConstructorFunction';
-import { getFileZorn } from '../../../utilities/deprecated-zorn/getFileZorn';
-import { getZornableId } from '../../../utilities/deprecated-zorn/getZornableId';
+} from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
+import { getFileZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getFileZorn';
+import { getZornableId } from '../../../layer-agnostic-utilities/deprecated-zorn/getZornableId';
 import {
   RootGraphLocator,
   RootGraphLocatorInstance,

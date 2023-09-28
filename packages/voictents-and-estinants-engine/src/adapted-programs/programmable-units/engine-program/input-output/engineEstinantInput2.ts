@@ -3,11 +3,11 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
   memoizeGetter,
-} from '../../../../utilities/deprecated-constructor-function/buildConstructorFunction';
+} from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../../utilities/semantic-types/zorn';
+} from '../../../../package-agnostic-utilities/datastructure/zorn';
 import {
   EngineEstinantLocator2,
   EngineEstinantLocator2ZornClassSet,

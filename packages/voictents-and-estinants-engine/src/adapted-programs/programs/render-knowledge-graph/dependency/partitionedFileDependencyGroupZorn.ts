@@ -1,7 +1,7 @@
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../../utilities/semantic-types/zorn';
+} from '../../../../package-agnostic-utilities/datastructure/zorn';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
 import { PartitionFactZorn } from '../partition-fact/partitionFact';
 

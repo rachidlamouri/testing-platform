@@ -6,7 +6,7 @@ import {
 } from '../../adapted-programs/programmable-units/file/fileExtensionSuffixIdentifier';
 import { RuntimeStatistics } from '../../core/engine/digikikify';
 import { serializeRuntimeStatistics } from './serializeRuntimeStatistics';
-import { FileCache } from '../file/fileCache';
+import { FileCache } from '../../package-agnostic-utilities/file/fileCache';
 
 enum TopLevelDirectoryName {
   Root = '',

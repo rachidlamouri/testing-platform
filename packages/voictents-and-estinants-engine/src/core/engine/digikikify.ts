@@ -1,4 +1,7 @@
-import { Zorn, ZornTuple } from '../../utilities/semantic-types/zorn';
+import {
+  Zorn,
+  ZornTuple,
+} from '../../package-agnostic-utilities/datastructure/zorn';
 import { Ajorken } from '../internal/procody/ajorken';
 import {
   Cology,
@@ -37,11 +40,11 @@ import { Procody } from '../internal/procody/procody';
 import { Tabilly } from './tabilly';
 import { GenericVoictent2 } from './voictent2';
 import { GenericInputAppreffinge } from '../engine-shell/appreffinge/input/inputAppreffinge';
-import { Tuple } from '../../utilities/semantic-types/tuple';
+import { Tuple } from '../../package-agnostic-utilities/type/tuple';
 import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/input/right/rightInputAppreffinge';
 import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
-import { assertIsError } from '../../utilities/error/assertIsError';
-import { assertNotUndefined } from '../../utilities/nil/assertNotUndefined';
+import { assertIsError } from '../../package-agnostic-utilities/error/assertIsError';
+import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 
 type Quirm = {
   gepp: Gepp;

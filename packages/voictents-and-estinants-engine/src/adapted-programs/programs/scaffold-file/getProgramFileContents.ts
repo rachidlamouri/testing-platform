@@ -62,7 +62,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/utilities/program/programFileCache.ts',
+      'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/program/programFileCache.ts',
     identifierList: ['ProgramFileCache'],
   },
   {

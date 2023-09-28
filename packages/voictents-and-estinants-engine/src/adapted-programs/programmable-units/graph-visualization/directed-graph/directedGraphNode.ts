@@ -1,6 +1,6 @@
 import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
 import { PartialAttributeByKey } from './partialAttributeByKey';
-import { SpreadN } from '../../../../utilities/types/spreadN';
+import { SpreadN } from '../../../../package-agnostic-utilities/type/spreadN';
 import { AttributeByKeyCNE } from './attributeByKeyCNE';
 
 enum NodeLabelLocation {

@@ -2,11 +2,11 @@ import { InMemoryOdeshin2ListVoque } from '../../../../core/engine/inMemoryOdesh
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
-} from '../../../../utilities/deprecated-constructor-function/buildConstructorFunction';
+} from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../../utilities/semantic-types/zorn';
+} from '../../../../package-agnostic-utilities/datastructure/zorn';
 import { RootGraphLocator } from '../../graph-visualization/directed-graph/rootGraphLocator';
 import { RootDirectedGraphElement2Zorn } from '../../graph-visualization/directed-graph/types';
 import { EngineEstinantLocator2 } from '../engineEstinantLocator2';

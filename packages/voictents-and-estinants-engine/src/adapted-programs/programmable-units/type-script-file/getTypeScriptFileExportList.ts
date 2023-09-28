@@ -5,7 +5,7 @@ import {
   TypeScriptFileExport,
   TypeScriptFileExportListVoque,
 } from './typeScriptFileExportList';
-import { isNotNull } from '../../../utilities/nil/isNotNull';
+import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   FileCommentedProgramBodyDeclarationGroupVoque,

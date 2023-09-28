@@ -1,4 +1,4 @@
-import { getTextDigest } from '../string/getTextDigest';
+import { getTextDigest } from '../../package-agnostic-utilities/string/getTextDigest';
 import { Zornable } from '../../adapted-programs/programmable-units/in-memory-cache/zornable';
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define

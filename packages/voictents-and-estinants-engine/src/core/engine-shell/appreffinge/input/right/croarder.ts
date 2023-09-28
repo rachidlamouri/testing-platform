@@ -1,4 +1,4 @@
-import { Zorn } from '../../../../../utilities/semantic-types/zorn';
+import { Zorn } from '../../../../../package-agnostic-utilities/datastructure/zorn';
 import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
 import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInputVicken';
 

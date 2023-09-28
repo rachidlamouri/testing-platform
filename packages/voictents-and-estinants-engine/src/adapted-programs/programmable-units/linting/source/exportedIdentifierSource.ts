@@ -1,9 +1,9 @@
-import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../../utilities/types/simplify';
+} from '../../../../package-agnostic-utilities/datastructure/zorn';
+import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
 const EXPORTED_IDENTIFIER_SOURCE_ZORN_TEMPLATE = [

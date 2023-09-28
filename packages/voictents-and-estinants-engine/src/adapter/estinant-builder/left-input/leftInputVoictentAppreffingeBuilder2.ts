@@ -9,7 +9,7 @@ import {
 import { GenericVoque } from '../../../core/engine/voque';
 import { AdaptedLeftInputVoictentVicken } from '../shared/vicken';
 import { PartialLeftInputAppreffinge } from '../shared/partialAppreffinge';
-import { SpreadN } from '../../../utilities/types/spreadN';
+import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
   buildRightInputVoictentAppreffingeBuilder2,
   RightInputVoictentAppreffingeBuilderParent2,

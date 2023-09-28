@@ -20,12 +20,12 @@ import {
   PartitionFact,
   PartitionFactVoque,
 } from './partition-fact/partitionFact';
-import { assertNotUndefined } from '../../../utilities/nil/assertNotUndefined';
+import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import {
   NavigationLayer,
   NavigationPartition,
 } from './app/browser/dynamicComponentTypes';
-import { SpreadN } from '../../../utilities/types/spreadN';
+import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 
 /**
  * Generates a barrel file for every file created by decodeAndRecastSvgDocument for the

@@ -1,4 +1,4 @@
-import { UnsafeTuple } from '../semantic-types/tuple';
+import { UnsafeTuple } from '../type/tuple';
 import { TypeScriptObjectInstance } from '../typed-datum/type-script/object';
 
 export type ConstructorFunctionName = string;

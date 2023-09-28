@@ -1,5 +1,5 @@
 import { digikikify2 } from '../core/engine/digikikify';
-import { ProgramFileCache } from '../utilities/program/programFileCache';
+import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import {
   SerializableErrorVoictent,
   SerializableErrorVoque,

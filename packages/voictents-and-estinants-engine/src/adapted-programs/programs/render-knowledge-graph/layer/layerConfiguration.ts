@@ -1,6 +1,6 @@
 import { InMemoryOdeshin3Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
-import { buildNamedConstructorFunction } from '../../../../utilities/constructor-function/namedConstructorFunctionBuilder';
-import { SimplifyN } from '../../../../utilities/types/simplify';
+import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { LayerZorn } from './layerZorn';
 
 type LayerConfigurationConstructorInput = {
@@ -85,8 +85,15 @@ export const LAYER_CONFIGURATION_LIST: LayerConfiguration[] = [
     sortOrder: 4,
   }),
   new LayerConfigurationInstance({
-    directoryPath: 'packages/voictents-and-estinants-engine/src/utilities',
-    displayName: 'Layer-Agnostic ... Layer',
+    directoryPath:
+      'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities',
+    displayName: 'Layer-Agnostic Layer',
+    sortOrder: 5,
+  }),
+  new LayerConfigurationInstance({
+    directoryPath:
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities',
+    displayName: 'Package-Agnostic Layer',
     sortOrder: 5,
   }),
 ];

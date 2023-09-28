@@ -1,9 +1,10 @@
 import { TupleToUnion, UnionToIntersection, Simplify } from 'type-fest';
 import { getTextDigest } from '../string/getTextDigest';
-import { NonEmptyTuple, Tuple } from './tuple';
+import { NonEmptyTuple, Tuple } from '../type/tuple';
 
 /**
  * An arbitrary identifier.
+ * @deprecated
  */
 export type Zorn = unknown;
 

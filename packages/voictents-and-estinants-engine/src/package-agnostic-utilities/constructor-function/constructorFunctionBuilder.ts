@@ -1,4 +1,4 @@
-import { NonEmptyTuple } from '../semantic-types/tuple';
+import { NonEmptyTuple } from '../type/tuple';
 import { ConstructorFunction, ConstructorFunctionName } from './types';
 
 type GenericPropertyName = string;

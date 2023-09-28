@@ -1,10 +1,10 @@
-import { buildNamedConstructorFunction } from '../../../utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
   GenericZorn2Template,
   Zorn2,
-} from '../../../utilities/semantic-types/zorn';
-import { SimplifyN } from '../../../utilities/types/simplify';
-import { TypeScriptObject } from '../../../utilities/typed-datum/type-script/object';
+} from '../../../package-agnostic-utilities/datastructure/zorn';
+import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
+import { TypeScriptObject } from '../../../package-agnostic-utilities/typed-datum/type-script/object';
 import { Source } from './source/source';
 
 const RULE_ZORN_TEMPLATE = [

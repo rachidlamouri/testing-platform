@@ -1,4 +1,4 @@
-import { swapEntries } from '../../../utilities/objects/swapEntries';
+import { swapEntries } from '../../../package-agnostic-utilities/object/swapEntries';
 
 export enum FileExtensionSuffixIdentifier {
   Bash = 'Bash',

@@ -8,7 +8,7 @@ import {
   InMemoryIndexByName,
   InMemoryVoque,
 } from '../../../core/engine/inMemoryVoque';
-import { SpreadN } from '../../../utilities/types/spreadN';
+import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { GenericOdeshin2 } from '../../../adapter/odeshin/odeshin2';
 import { FileSystemNode } from './fileSystemNode';
 import { BaseInMemoryOdeshin2Voictent } from '../../../core/engine/inMemoryOdeshinVoictent2';

@@ -1,6 +1,6 @@
 import { GenericVoque } from '../../engine/voque';
-import { ZornTuple } from '../../../utilities/semantic-types/zorn';
-import { Tuple } from '../../../utilities/semantic-types/tuple';
+import { ZornTuple } from '../../../package-agnostic-utilities/datastructure/zorn';
+import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
 type BaseRightInputVicken<
   TVoque extends GenericVoque,

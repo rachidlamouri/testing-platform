@@ -1,4 +1,4 @@
-import { ForegroundColor, applyColor } from '../../colors/colorList';
+import { ForegroundColor, applyColor } from '../../color/colorList';
 import { TextTransform } from './textTransform';
 
 type LineLabelerInput = {

@@ -26,32 +26,32 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/utilities/semantic-types/strif/strif.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/strif/strif.ts',
     importedIdentifierName: 'Strif',
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/utilities/semantic-types/strif/strif.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/strif/strif.ts',
     importedIdentifierName: 'createStrif',
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isIdentifiableTypeScriptTypeReference.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/type-script-ast/isIdentifiableTypeScriptTypeReference.ts',
     importedIdentifierName: 'isSpecificIdentifiableTypeScriptTypeReference',
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isMemberExpressionCallExpression.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/type-script-ast/isMemberExpressionCallExpression.ts',
     importedIdentifierName: 'isMemberExpressionCallExpression',
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/utilities/type-script-ast/isParameterizedCallExpression.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/type-script-ast/isParameterizedCallExpression.ts',
     importedIdentifierName: 'isParameterizedCallExpression',
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/utilities/typed-datum/customTypedDatum.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/typed-datum/customTypedDatum.ts',
     importedIdentifierName: 'CustomTypedDatum',
   },
   {
@@ -141,7 +141,7 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/utilities/types/simplify.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/type/simplify.ts',
     importedIdentifierName: 'Simplify',
   },
   {
