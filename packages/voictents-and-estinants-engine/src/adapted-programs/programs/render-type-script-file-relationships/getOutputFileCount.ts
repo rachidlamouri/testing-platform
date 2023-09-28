@@ -6,7 +6,7 @@ import {
 import {
   SANITY_SNAPSHOT_GEPP,
   SanitySnapshotVoque,
-} from '../../programmable-units/sanitySnapshot';
+} from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 
 /**
  * Captures the number of generated output files. Commit the output file count

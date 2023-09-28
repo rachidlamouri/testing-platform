@@ -1,11 +1,11 @@
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   FileCacheOutputFile,
   OUTPUT_FILE_GEPP,
   OutputFileVoque,
-} from './output-file/outputFile';
+} from '../output-file/outputFile';
 import { SANITY_SNAPSHOT_GEPP, SanitySnapshotVoque } from './sanitySnapshot';
-import { getTextDigest } from '../../utilities/string/getTextDigest';
+import { getTextDigest } from '../../../utilities/string/getTextDigest';
 
 type OutputFileDigest = {
   fileName: string;

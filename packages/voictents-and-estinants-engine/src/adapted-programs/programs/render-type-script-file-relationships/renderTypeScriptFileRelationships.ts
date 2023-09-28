@@ -40,7 +40,7 @@ import { getOutputFileCount } from './getOutputFileCount';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
 import { ProgramFileCache } from '../../../utilities/program/programFileCache';
-import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
+import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';

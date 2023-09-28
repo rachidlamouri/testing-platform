@@ -27,11 +27,11 @@ import { getCommentedProgramBodyDeclarationList } from '../../programmable-units
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
 import { getEngineEstinantLocatorCollection2 } from '../../programmable-units/engine-program/getEngineEstinantLocatorCollection2';
 import { getEngineProgram3 } from '../../programmable-units/engine-program/getEngineProgram3';
-import { captureOutputFileDigestList } from '../../programmable-units/captureOutputFileDigestList';
+import { captureOutputFileDigestList } from '../../programmable-units/sanity-snapshot/captureOutputFileDigestList';
 import { signalError } from '../../programmable-units/error/signalError';
 import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
 import { ProgramFileCache } from '../../../utilities/program/programFileCache';
-import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanitySnapshot';
+import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
 import { DigikikifierStrategy } from '../../../core/engine/digikikify';
