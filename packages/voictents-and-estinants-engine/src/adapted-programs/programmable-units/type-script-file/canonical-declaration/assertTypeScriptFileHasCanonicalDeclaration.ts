@@ -11,6 +11,8 @@ import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   FileCommentedProgramBodyDeclarationGroupVoque,
 } from '../fileCommentedProgramBodyDeclarationGroup';
+import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
+import { shishKebab } from '../../../../package-agnostic-utilities/case/shishKebab';
 
 const ESTINANT_NAME = 'assertTypeScriptFileHasCanonicalDeclaration' as const;
 
@@ -74,6 +76,13 @@ export const assertTypeScriptFileHasCanonicalDeclaration = buildEstinant({
       },
       context: {
         group,
+        // TODO: sync this normalization pattern with the one in getCommentedProgramBodyDeclarationList
+        normalizedIdentifierList: group.list
+          .map((declaration) => declaration.identifiableNode)
+          .filter(isNotNull)
+          .map((identifiableNode) => {
+            return shishKebab(identifiableNode.id.name);
+          }),
       },
     });
   })

@@ -17,10 +17,16 @@ import {
   FileParsedCommentGroupVoque,
 } from './fileParsedCommentGroup';
 import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
+import { shishKebab } from '../../../package-agnostic-utilities/case/shishKebab';
 
 const allowedDerivativePrefixSet = [
   // keep as multiline list
   'generic',
+] as const;
+
+const allowedDerivativeSuffixSet = [
+  // keep as multiline list
+  '2',
 ] as const;
 
 /**
@@ -63,11 +69,14 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
       typescriptFile.filePath.name.extensionless,
     );
 
-    const allowedDerivativeNameSet = new Set(
-      allowedDerivativePrefixSet.map((prefix) => {
+    const allowedDerivativeNameSet = new Set([
+      ...allowedDerivativePrefixSet.map((prefix) => {
         return `${prefix}-${kebabExtensionlessName}`;
       }),
-    );
+      ...allowedDerivativeSuffixSet.map((suffix) => {
+        return `${kebabExtensionlessName}-${suffix}`;
+      }),
+    ]);
 
     const commentList = commentGroup.list;
 
@@ -91,19 +100,19 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
         const identifiableNode =
           getIdentifiableProgramBodyStatementNode(programBodyStatement);
 
-        const kebabIdentifierName =
+        const normalizedIdentifierName =
           identifiableNode !== null
-            ? Case.kebab(identifiableNode.id.name)
+            ? shishKebab(identifiableNode.id.name)
             : null;
 
         const isCanonical =
-          kebabIdentifierName !== null &&
-          kebabIdentifierName === kebabExtensionlessName;
+          normalizedIdentifierName !== null &&
+          normalizedIdentifierName === kebabExtensionlessName;
 
         const isDerivative =
           !isCanonical &&
-          kebabIdentifierName !== null &&
-          allowedDerivativeNameSet.has(kebabIdentifierName);
+          normalizedIdentifierName !== null &&
+          allowedDerivativeNameSet.has(normalizedIdentifierName);
 
         return new CommentedProgramBodyDeclarationInstance({
           isCanonical,
