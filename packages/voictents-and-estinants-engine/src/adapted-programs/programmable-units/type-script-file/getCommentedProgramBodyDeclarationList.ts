@@ -27,6 +27,7 @@ const allowedDerivativePrefixSet = [
 const allowedDerivativeSuffixSet = [
   // keep as multiline list
   '2',
+  'pelue',
 ] as const;
 
 /**
