@@ -45,7 +45,7 @@ type EstinantInput2Prototype = {
 /**
  * The model of a transform input
  */
-export type EstinantInput2 = ObjectWithPrototype<
+export type EngineEstinantInput2 = ObjectWithPrototype<
   BaseEstinantInput2,
   EstinantInput2Prototype
 >;
@@ -67,7 +67,7 @@ export const ESTINANT_INPUT_2_GEPP = 'estinant-input-2';
 
 type EstinantInput2Gepp = typeof ESTINANT_INPUT_2_GEPP;
 
-export type EstinantInput2Voque = InMemoryOdeshin2ListVoque<
+export type EngineEstinantInput2Voque = InMemoryOdeshin2ListVoque<
   EstinantInput2Gepp,
-  EstinantInput2
+  EngineEstinantInput2
 >;

@@ -6,7 +6,7 @@ import {
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
 import { getZornableId } from '../../../layer-agnostic-utilities/deprecated-zorn/getZornableId';
-import { EstinantInput2 } from './input-output/engineEstinantInput2';
+import { EngineEstinantInput2 } from './input-output/engineEstinantInput2';
 import { EstinantOutput2 } from './input-output/engineEstinantOutput2';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
@@ -16,7 +16,7 @@ type BaseEngineEstinant3 = {
   filePath: string;
   identifierName: string;
   commentText: string;
-  inputList: EstinantInput2[];
+  inputList: EngineEstinantInput2[];
   outputList: EstinantOutput2[];
   locator: EngineEstinantLocator2;
 };
