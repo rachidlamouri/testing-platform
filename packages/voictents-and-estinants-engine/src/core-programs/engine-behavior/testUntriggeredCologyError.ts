@@ -9,7 +9,7 @@ import { ProgramFileCache } from '../../layer-agnostic-utilities/program/program
 import {
   SerializableErrorVoictent,
   SerializableErrorVoque,
-} from './serializableErrorVoictent';
+} from '../../layer-agnostic-utilities/voictent/serializableErrorVoictent';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-untriggered-cology-error',

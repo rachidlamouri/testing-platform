@@ -4,8 +4,8 @@ import {
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
-import { JsonSerializableVoictent } from './jsonSerializableVoictent';
-import { AbstractSerializableVoque } from './abstractSerializableVoictent';
+import { JsonSerializableVoictent } from '../layer-agnostic-utilities/voictent/jsonSerializableVoictent';
+import { AbstractSerializableVoque } from '../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
 
 type SerializedConfiguration = AbstractSerializableVoque<'serialized'>;
 

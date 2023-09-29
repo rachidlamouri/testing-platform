@@ -2,7 +2,7 @@ import { Gepp } from '../../core/types/voictent/gepp';
 import { Voictent2 } from '../../core/types/voictent/voictent2';
 import { Voque } from '../../core/types/voque/voque';
 import { FileExtensionSuffixIdentifier } from '../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
+import { ProgramFileCache } from '../program/programFileCache';
 
 export type SerializableErrorVoque<TGepp extends Gepp> = Voque<
   TGepp,

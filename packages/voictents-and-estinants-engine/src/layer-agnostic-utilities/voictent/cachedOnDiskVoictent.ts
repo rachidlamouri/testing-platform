@@ -14,7 +14,7 @@ import {
   MissingLanbeError,
   HubblepupPelueState,
 } from './abstractInMemoryVoictent';
-import { AbstractSerializableIndexByName } from '../../core-programs/abstractSerializableVoictent';
+import { AbstractSerializableIndexByName } from './abstractSerializableVoictent';
 import { ReferenceTypeName } from '../../core/types/lanbe/referenceTypeName';
 
 const createDirectory = (directoryPath: string): void => {

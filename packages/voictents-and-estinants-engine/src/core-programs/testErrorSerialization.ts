@@ -3,7 +3,7 @@ import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFil
 import {
   SerializableErrorVoictent,
   SerializableErrorVoque,
-} from './engine-behavior/serializableErrorVoictent';
+} from '../layer-agnostic-utilities/voictent/serializableErrorVoictent';
 
 type ErrorVoque = SerializableErrorVoque<'error'>;
 

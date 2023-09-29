@@ -39,9 +39,9 @@ import {
 } from '../../core/types/voictent/voictent2';
 import { GenericVoque } from '../../core/types/voque/voque';
 import { ProgramErrorGepp } from '../../adapted-programs/programmable-units/error/programError';
-import { GenericAbstractSerializableSourceVoque } from '../../core-programs/abstractSerializableVoictent';
-import { buildAddMetadataForSerialization } from '../../core-programs/buildAddMetadataForSerialization';
-import { SerializableVoictent } from '../../core-programs/serializableVoictent';
+import { GenericAbstractSerializableSourceVoque } from '../../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
+import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { SerializableVoictent } from '../../layer-agnostic-utilities/voictent/serializableVoictent';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import {
   FileSystemNodeVoictent,

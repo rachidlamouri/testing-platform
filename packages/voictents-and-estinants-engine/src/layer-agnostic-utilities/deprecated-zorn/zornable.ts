@@ -1,6 +1,6 @@
 import { Merge } from 'type-fest';
 import { Voque } from '../../core/types/voque/voque';
-import { AbstractSerializableIndexByName } from '../../core-programs/abstractSerializableVoictent';
+import { AbstractSerializableIndexByName } from '../voictent/abstractSerializableVoictent';
 import { Gepp } from '../../core/types/voictent/gepp';
 import { Hubblepup } from '../../core/types/hubblepup/hubblepup';
 

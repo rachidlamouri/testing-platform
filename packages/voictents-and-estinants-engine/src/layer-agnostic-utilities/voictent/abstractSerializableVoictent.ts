@@ -1,14 +1,14 @@
-import { Gepp } from '../core/types/voictent/gepp';
-import { Voictent2 } from '../core/types/voictent/voictent2';
-import { Voque } from '../core/types/voque/voque';
+import { Gepp } from '../../core/types/voictent/gepp';
+import { Voictent2 } from '../../core/types/voictent/voictent2';
+import { Voque } from '../../core/types/voque/voque';
 import {
   GenericHubbleup,
   Hubblepup,
-} from '../core/types/hubblepup/hubblepup';
+} from '../../core/types/hubblepup/hubblepup';
 import {
   ProgramFileCache,
   SerializedHubblepup,
-} from '../layer-agnostic-utilities/program/programFileCache';
+} from '../program/programFileCache';
 
 export type AbstractSerializableIndexByName = {
   serializableId: string;

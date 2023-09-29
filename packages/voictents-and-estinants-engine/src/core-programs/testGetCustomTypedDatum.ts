@@ -10,9 +10,9 @@ import {
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import { getCustomTypedDatum } from '../package-agnostic-utilities/typed-datum/customTypedDatum';
-import { AbstractSerializableVoque } from './abstractSerializableVoictent';
-import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
-import { JsonSerializableVoictent } from './jsonSerializableVoictent';
+import { AbstractSerializableVoque } from '../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
+import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { JsonSerializableVoictent } from '../layer-agnostic-utilities/voictent/jsonSerializableVoictent';
 import {
   SerializableTypeNameVoque,
   SERIALIZABLE_TYPE_NAME_GEPP,

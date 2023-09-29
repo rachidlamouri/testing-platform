@@ -1,4 +1,4 @@
-import { GenericHubbleup } from '../core/types/hubblepup/hubblepup';
+import { GenericHubbleup } from '../../core/types/hubblepup/hubblepup';
 import {
   GenericAbstractSerializableVoque,
   AbstractSerializableVoictent,
@@ -6,9 +6,9 @@ import {
 import {
   ProgramFileCache,
   SerializedHubblepup,
-} from '../layer-agnostic-utilities/program/programFileCache';
-import { FileExtensionSuffixIdentifier } from '../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { serialize } from '../package-agnostic-utilities/one-way-serializer/serialize';
+} from '../program/programFileCache';
+import { FileExtensionSuffixIdentifier } from '../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
+import { serialize } from '../../package-agnostic-utilities/one-way-serializer/serialize';
 
 type SerializableVoictentConstructorInput<
   TVoque extends GenericAbstractSerializableVoque,

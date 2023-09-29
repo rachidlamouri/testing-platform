@@ -8,7 +8,7 @@ import { ProgramFileCache } from '../../layer-agnostic-utilities/program/program
 import {
   SerializableErrorVoictent,
   SerializableErrorVoque,
-} from './serializableErrorVoictent';
+} from '../../layer-agnostic-utilities/voictent/serializableErrorVoictent';
 
 type InputErrorVoque = StandardInMemoryVoque<'input-error', Error>;
 type EngineErrorVoque = SerializableErrorVoque<'engine-error'>;
