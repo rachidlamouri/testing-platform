@@ -50,9 +50,9 @@ import {
 } from '../type-script-file/typeScriptFileImportList';
 import {
   ESTINANT_OUTPUT_2_GEPP,
-  EstinantOutput2,
+  EngineEstinantOutput2,
   EstinantOutput2Instance,
-  EstinantOutput2Voque,
+  EngineEstinantOutput2Voque,
 } from './input-output/engineEstinantOutput2';
 import {
   ESTINANT_INPUT_2_GEPP,
@@ -702,7 +702,7 @@ const getAdaptedEstinant = ({
   const estinantName = estinantLocator.identifierName;
 
   const estinantInputOutputList = inputOutputCallExpressionList.map<
-    EngineEstinantInput2 | EstinantOutput2
+    EngineEstinantInput2 | EngineEstinantOutput2
   >(({ isInput, typeNode }, index) => {
     // TODO: make the convention where we chop off the suffix more discoverable
     const voqueName = typeNode.typeName.name;
@@ -743,8 +743,8 @@ const getAdaptedEstinant = ({
   const inputList = estinantInputOutputList.filter<EngineEstinantInput2>(
     (inputOrOutput): inputOrOutput is EngineEstinantInput2 => inputOrOutput.isInput,
   );
-  const outputList = estinantInputOutputList.filter<EstinantOutput2>(
-    (inputOrOutput): inputOrOutput is EstinantOutput2 => !inputOrOutput.isInput,
+  const outputList = estinantInputOutputList.filter<EngineEstinantOutput2>(
+    (inputOrOutput): inputOrOutput is EngineEstinantOutput2 => !inputOrOutput.isInput,
   );
 
   const instantiationExpression = flattenedCallExpressionList[0];
@@ -865,7 +865,7 @@ export const getEngineEstinant3 = buildEstinant({
   .toHubblepupTuple2<EngineEstinantInput2Voque>({
     gepp: ESTINANT_INPUT_2_GEPP,
   })
-  .toHubblepupTuple2<EstinantOutput2Voque>({
+  .toHubblepupTuple2<EngineEstinantOutput2Voque>({
     gepp: ESTINANT_OUTPUT_2_GEPP,
   })
   .toHubblepupTuple2<EstinantVoqueRelationship2Voque>({
