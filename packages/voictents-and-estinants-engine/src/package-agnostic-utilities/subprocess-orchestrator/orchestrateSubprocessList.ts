@@ -91,7 +91,12 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
   (configuration) => {
     const [command, ...args] = configuration.script.split(' ');
 
-    const childProcess = spawn(command, args);
+    const childProcess = spawn(command, args, {
+      env: {
+        ...process.env,
+        FORCE_COLOR: '1',
+      },
+    });
 
     const valve = new Valve();
 

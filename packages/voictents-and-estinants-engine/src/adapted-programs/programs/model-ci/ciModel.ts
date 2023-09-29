@@ -1,23 +1,15 @@
 import { StandardInMemoryVoque } from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
 
-type CustomProgramTest = {
-  programName: string;
-  programFilePath: string;
-  prefaceDescription: string;
-  skip?: boolean;
-  commandList: string[];
-};
+const PRINT_NEW_LINE = 'printf "\\n"';
 
-type DefaultProgramTest = {
+type ProgramTest = {
   programName: string;
-  programFilePath: string;
-  prefaceDescription: string;
-  skip?: boolean;
+  testFilePath: string;
 };
 
 type ProgramTestGroup = {
   description: string;
-  programTestList: (DefaultProgramTest | CustomProgramTest)[];
+  programTestList: ProgramTest[];
 };
 
 /**
@@ -40,7 +32,7 @@ export const CI_MODEL_ZORN = 'CI_MODEL';
 
 export const CI_MODEL: CiModel = {
   zorn: CI_MODEL_ZORN,
-  initialCommandList: ['set -e'],
+  initialCommandList: ['set -e', '', 'echo "Starting ci.sh"', PRINT_NEW_LINE],
   finalCommandList: ['echo "Finished without errors!"'],
   programTestGroupList: [
     {
@@ -48,15 +40,13 @@ export const CI_MODEL: CiModel = {
       programTestList: [
         {
           programName: 'test-json-serialization',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/testJsonSerialization.ts',
-          prefaceDescription: 'Testing JsonSerializableCollection',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/testJsonSerialization.test.sh',
         },
         {
           programName: 'test-error-serialization',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/testErrorSerialization.ts',
-          prefaceDescription: 'Testing ErrorSerializableCollection',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/testErrorSerialization.test.sh',
         },
       ],
     },
@@ -65,72 +55,53 @@ export const CI_MODEL: CiModel = {
       programTestList: [
         {
           programName: 'test-build-add-metadata-for-serialization',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/testBuildAddMetadataForSerialization.ts',
-          prefaceDescription:
-            'Testing consuming each item in a collection, and "buildAddMetadataForSerialization"',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/testBuildAddMetadataForSerialization.test.sh',
         },
         {
           programName: 'test-estinant-error',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testEstinantError.ts',
-          prefaceDescription:
-            'Testing that the engine forwards errors to an error collection',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testEstinantError.test.sh',
         },
         {
           programName: 'test-voictent-input',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testVoictentInput.ts',
-          prefaceDescription: 'Testing consuming a collection as a whole',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testVoictentInput.test.sh',
         },
         {
           programName: 'test-joining-one-to-one',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToOne.ts',
-          prefaceDescription:
-            'Testing joining each item in one collection to one item from another collection',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToOne.test.sh',
         },
         {
           programName: 'test-joining-one-to-many',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToMany.ts',
-          prefaceDescription:
-            'Testing joining each item in one collection to multiple items from another',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToMany.test.sh',
         },
         {
           programName: 'test-joining-one-to-voictent',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToVoictent.ts',
-          prefaceDescription:
-            'Testing joining each item in one collection the an entire different collection as a whole',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToVoictent.test.sh',
         },
         {
           programName: 'test-joining-voictent-to-voictent',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningVoictentToVoictent.ts',
-          prefaceDescription:
-            'Testing joining one collection as a whole to another collection as a whole',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningVoictentToVoictent.test.sh',
         },
         {
           programName: 'test-releasing-a-left-voictent-multiple-times',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingALeftVoictentMultipleTimes.ts',
-          prefaceDescription:
-            'Testing a left collection that stops accumulating items for one engine tick',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingALeftVoictentMultipleTimes.test.sh',
         },
         {
           programName: 'test-releasing-a-right-voictent-multiple-times',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingARightVoictentMultipleTimes.ts',
-          prefaceDescription:
-            'Testing a right collection that stops accumulating items for one engine tick',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingARightVoictentMultipleTimes.test.sh',
         },
         {
           programName: 'test-untriggered-cology-error',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testUntriggeredCologyError.ts',
-          prefaceDescription:
-            'Testing that the engine emits an error when a cology is left untriggered',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testUntriggeredCologyError.test.sh',
         },
       ],
     },
@@ -139,21 +110,18 @@ export const CI_MODEL: CiModel = {
       programTestList: [
         {
           programName: 'test-get-type-script-typed-datum',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/testGetTypeScriptTypedDatum.ts',
-          prefaceDescription: 'Testing "getTypeScriptTypedDatum"',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/testGetTypeScriptTypedDatum.test.sh',
         },
         {
           programName: 'test-get-custom-typed-datum',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/testGetCustomTypedDatum.ts',
-          prefaceDescription: 'Testing "getCustomTypedDatum"',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/testGetCustomTypedDatum.test.sh',
         },
         {
           programName: 'test-serialize',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/testSerialize.ts',
-          prefaceDescription: 'Testing "serialize"',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/testSerialize.test.sh',
         },
       ],
     },
@@ -162,34 +130,28 @@ export const CI_MODEL: CiModel = {
       programTestList: [
         {
           programName: 'categorize-files',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/categorize-files/categorizeFiles.ts',
-          prefaceDescription: 'Verifying file extensions',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/categorize-files/categorizeFiles.test.sh',
         },
         {
           programName: 'test-graph-render',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/test-graph-render/testGraphRender.ts',
-          prefaceDescription:
-            'Verifying example rendered graph has not changed',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/test-graph-render/testGraphRender.test.sh',
         },
         {
           programName: 'model-programs',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-programs/modelPrograms.ts',
-          prefaceDescription: 'Verifying program models have not changed',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-programs/modelPrograms.test.sh',
         },
         {
           programName: 'find-unused-exports',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/find-unused-exports/findUnusedExports.ts',
-          prefaceDescription: 'Linting unused exports',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/find-unused-exports/findUnusedExports.test.sh',
         },
         {
           programName: 'model-ci',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-ci/modelCi.ts',
-          prefaceDescription: 'Verifying ci.sh runs every engine program',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-ci/modelCi.test.sh',
         },
       ],
     },
@@ -198,65 +160,38 @@ export const CI_MODEL: CiModel = {
       programTestList: [
         {
           programName: 'render-knowledge-graph',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts',
-          prefaceDescription: 'WIP',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.test.sh',
         },
         {
           programName: 'develop-knowledge-graph',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts',
-          prefaceDescription: 'WIP',
-          skip: true,
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.test.sh',
         },
         {
           programName: 'render-type-script-file-relationships',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.ts',
-          prefaceDescription: 'WIP',
-          skip: true,
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.test.sh',
         },
         {
           programName: 'assemble-scaffolded-file',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/scaffold-file/assembleScaffoldedFile.ts',
-          prefaceDescription: 'Perfoming test run of "assembleScaffoldedFile"',
-          commandList: [
-            'BASE_SNAPSHOT_DIRECTORY_PATH=debug/assembleScaffoldedFile/test',
-            'HUBBLEPUP_SNAPSHOT_FILE_PATH="$BASE_SNAPSHOT_DIRECTORY_PATH/hubblepupSnapshot.ts"',
-            'ESTINANT_SNAPSHOT_FILE_PATH="$BASE_SNAPSHOT_DIRECTORY_PATH/estinantSnapshot.ts"',
-            'PROGRAM_SNAPSHOT_FILE_PATH="$BASE_SNAPSHOT_DIRECTORY_PATH/programSnapshot.ts"',
-            'mkdir -p "$BASE_SNAPSHOT_DIRECTORY_PATH"',
-            'rm -f "$HUBBLEPUP_SNAPSHOT_FILE_PATH"',
-            'rm -f "$ESTINANT_SNAPSHOT_FILE_PATH"',
-            'rm -f "$PROGRAM_SNAPSHOT_FILE_PATH"',
-            'touch "$HUBBLEPUP_SNAPSHOT_FILE_PATH"',
-            'touch "$ESTINANT_SNAPSHOT_FILE_PATH"',
-            'touch "$PROGRAM_SNAPSHOT_FILE_PATH"',
-            'npm run scaffold hubblepup "$HUBBLEPUP_SNAPSHOT_FILE_PATH"',
-            'npm run scaffold estinant "$ESTINANT_SNAPSHOT_FILE_PATH"',
-            'npm run scaffold program "$PROGRAM_SNAPSHOT_FILE_PATH"',
-          ],
-          skip: true,
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/scaffold-file/assembleScaffoldedFile.test.sh',
         },
         {
           programName: 'comments-example',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/comments-example/commentsExample.ts',
-          prefaceDescription: 'Perfoming test run of "commentsExample"',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/comments-example/commentsExample.test.sh',
         },
         {
           programName: 'get-snapshot-refresh-script',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/get-snapshot-refresh-script/getSnapshotRefreshScript.ts',
-          prefaceDescription:
-            'Perfoming test run of "getSnapshotRefreshScript"',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/get-snapshot-refresh-script/getSnapshotRefreshScript.test.sh',
         },
         {
           programName: 'test-cached-on-disk-datum',
-          programFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/testCachedOnDiskDatum.ts',
-          prefaceDescription: 'Perfoming test run of "testCachedOnDiskDatum"',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/core-programs/testCachedOnDiskDatum.test.sh',
         },
       ],
     },

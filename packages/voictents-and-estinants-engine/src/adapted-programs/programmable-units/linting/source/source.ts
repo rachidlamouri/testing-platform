@@ -1,12 +1,4 @@
-import { EstinantSource } from './estinantSource';
-import { ExportedIdentifierSource } from './exportedIdentifierSource';
-import { FileLineSource } from './fileLineSource';
-import { FileSource } from './fileSource';
-import { ImportedIdentifierSource } from './importedIdentifierSource';
+import { LeafSource } from './leafSource';
+import { RequestSource } from './requestSource';
 
-export type Source =
-  | FileSource
-  | FileLineSource
-  | ImportedIdentifierSource
-  | ExportedIdentifierSource
-  | EstinantSource;
+export type Source = LeafSource | RequestSource;

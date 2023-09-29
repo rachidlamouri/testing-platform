@@ -13,6 +13,10 @@ import {
   EngineProgramLocator3Voque,
 } from '../../programmable-units/engine-program/engineProgramLocator3';
 import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import {
+  EXPECTED_PROGRAM_TEST_FILE_GEPP,
+  ExpectedProgramTestFileVoque,
+} from './expectedProgramTestFile';
 
 const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -34,20 +38,33 @@ export const assertCiModelHasAllPrograms = buildEstinant({
     gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
   .andFromHubblepupTuple2<CiModelVoque, [OdeshinZorn]>({
+    // TODO: make a better pattern for singletons
     gepp: CI_MODEL_GEPP,
     framate: () => [CI_MODEL_ZORN],
     croard: (rightInput) => rightInput.hubblepup.zorn,
   })
+  .andFromVoictent2<ExpectedProgramTestFileVoque>({
+    gepp: EXPECTED_PROGRAM_TEST_FILE_GEPP,
+  })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((programLocatorList, [ciModel]) => {
+  .onPinbe((programLocatorList, [ciModel], expectedTestFileVoictent) => {
+    const testFilePathByProgramFilePath = new Map(
+      expectedTestFileVoictent.map((expectedTestFile) => {
+        return [
+          expectedTestFile.programFile.filePath.serialized,
+          expectedTestFile.testFile.filePath.serialized,
+        ];
+      }),
+    );
+
     type ComparisonDatum = {
       name: string;
-      filePath: string;
+      filePath?: string;
     };
 
-    const foo = (a: ComparisonDatum, b: ComparisonDatum): number => {
+    const compareNames = (a: ComparisonDatum, b: ComparisonDatum): number => {
       if (a.name === b.name) {
         return 0;
       }
@@ -65,33 +82,25 @@ export const assertCiModelHasAllPrograms = buildEstinant({
           (programTest) => {
             return {
               name: programTest.programName,
-              filePath: programTest.programFilePath,
+              filePath: programTest.testFilePath,
             };
           },
         );
       })
-      .sort(foo);
+      .sort(compareNames);
 
     const expectedList = programLocatorList
       .map<ComparisonDatum>((locator) => {
+        const testFilePath = testFilePathByProgramFilePath.get(
+          locator.filePath,
+        );
+
         return {
           name: locator.programName,
-          filePath: locator.filePath,
+          filePath: testFilePath,
         };
       })
-      .sort(foo);
-
-    const expectedCodeList = expectedList
-      .flatMap(({ name, filePath }) => {
-        return [
-          '{',
-          `  programName: '${name}',`,
-          `  programFilePath: '${filePath}',`,
-          '  prefaceDescription: "",',
-          '},',
-        ];
-      })
-      .join('\n');
+      .sort(compareNames);
 
     try {
       assert.deepStrictEqual(actualList, expectedList);
@@ -111,7 +120,6 @@ export const assertCiModelHasAllPrograms = buildEstinant({
           },
           context: {
             error,
-            expectedCodeList,
           },
         } satisfies ReportedProgramError<ReportingLocator>,
       ];

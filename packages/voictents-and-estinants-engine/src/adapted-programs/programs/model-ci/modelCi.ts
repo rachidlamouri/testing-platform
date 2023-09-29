@@ -33,6 +33,18 @@ import { ProgramErrorVoictent } from '../../programmable-units/error/programErro
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
+import { getExpectedProgramTestFileConfiguration } from './getExpectedProgramTestFileConfiguration';
+import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
+import { assertFileExists } from '../../../layer-agnostic-utilities/assertion/assertFileExists';
+import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
+import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
+import {
+  LINT_ASSERTION_OMISSION_GEPP,
+  LintAssertionOmissionVoictent,
+  NULL_OMISSION,
+} from '../../programmable-units/linting/lintAssertionOmission';
+import { getExpectedProgramTestFile } from './getExpectedProgramTestFile';
+import { assertProgramTestFileIsValid } from './assertProgramTestFileIsValid';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
@@ -67,6 +79,10 @@ digikikify({
     new ProgramErrorVoictent({
       programFileCache,
     }),
+    new LintAssertionOmissionVoictent({
+      gepp: LINT_ASSERTION_OMISSION_GEPP,
+      initialHubblepupPelueTuple: [NULL_OMISSION],
+    }),
   ] as const),
   fileSystemNodeGeppCombination: defaultFileGeppCombination,
   estinantTuple: [
@@ -82,13 +98,21 @@ digikikify({
     filterEngineProgramFile,
     getEngineProgramLocator3,
 
+    getExpectedProgramTestFileConfiguration,
+    getExpectedProgramTestFile,
+    assertProgramTestFileIsValid,
+
     serializeCiModel,
 
+    assertFileExists,
     assertCiFileIsUpToDate,
     assertCiModelHasAllPrograms,
 
+    reportFailedLintAssertion,
     reportErrors,
+    reportErrorCount,
     signalError,
   ] as const,
+  errorGepp: PROGRAM_ERROR_GEPP,
   programFileCache,
 });
