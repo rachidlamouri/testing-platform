@@ -7,8 +7,6 @@ import {
 
 const PRINT_NEW_LINE = 'printf "\\n"';
 
-const ASSERT_CACHED_DEBUG_IS_UNCHANGED = 'bash checkUncommittedDebug.sh';
-
 /**
  * Turns the CI Model object into the text for the bash file
  */
@@ -30,28 +28,12 @@ export const serializeCiModel = buildEstinant({
           `# ${programTestGroup.description}`,
           '',
           ...programTestGroup.programTestList.flatMap((programTest) => {
-            let commandList: string[];
-            if ('commandList' in programTest) {
-              commandList = programTest.commandList;
-            } else {
-              commandList = [`npx ts-node ${programTest.programFilePath}`];
-            }
-
             return [
               `## ${programTest.programName}`,
-              `echo "# ${programTest.programName}"`,
-              `echo "${programTest.prefaceDescription}"`,
-              ...commandList,
-              ASSERT_CACHED_DEBUG_IS_UNCHANGED,
+              `bash ${programTest.testFilePath}`,
               PRINT_NEW_LINE,
               '',
-            ].map((line) => {
-              if (programTest.skip && line !== '') {
-                return `# ${line}`;
-              }
-
-              return line;
-            });
+            ];
           }),
         ];
       }),
