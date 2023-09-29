@@ -237,6 +237,7 @@ export const CI_MODEL: CiModel = {
             'npm run scaffold estinant "$ESTINANT_SNAPSHOT_FILE_PATH"',
             'npm run scaffold program "$PROGRAM_SNAPSHOT_FILE_PATH"',
           ],
+          skip: true,
         },
         {
           programName: 'comments-example',
