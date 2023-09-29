@@ -1,14 +1,14 @@
 import { digikikify2 } from '../core/engine/digikikify';
-import { InMemoryOdeshin2ListVoictent } from '../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
   DatumTestCaseInputVoque,
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
-import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
-import { JsonSerializableVoictent } from './jsonSerializableVoictent';
-import { AbstractSerializableVoque } from './abstractSerializableVoictent';
+import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { JsonSerializableVoictent } from '../layer-agnostic-utilities/voictent/jsonSerializableVoictent';
+import { AbstractSerializableVoque } from '../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
 
 type SerializedConfiguration = AbstractSerializableVoque<'serialized'>;
 

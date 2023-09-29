@@ -12,11 +12,11 @@ const omitterSource = new FileSourceInstance({
 
 // TODO: audit this list
 export const canonicalDeclarationOmissionList: LintAssertionOmission[] = [
-  'packages/voictents-and-estinants-engine/src/core/engine/inMemoryOdeshinVoictent2.ts',
-  'packages/voictents-and-estinants-engine/src/core/engine-shell/appreffinge/outputApreffinge.ts',
-  'packages/voictents-and-estinants-engine/src/core/engine-shell/estinant/estinant.ts',
-  'packages/voictents-and-estinants-engine/src/core/engine-shell/estinant/tropoignant.ts',
-  'packages/voictents-and-estinants-engine/src/core/internal/platomity.ts',
+  'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2.ts',
+  'packages/voictents-and-estinants-engine/src/core/types/appreffinge/outputApreffinge.ts',
+  'packages/voictents-and-estinants-engine/src/core/types/estinant/estinant.ts',
+  'packages/voictents-and-estinants-engine/src/core/types/estinant/tropoignant.ts',
+  'packages/voictents-and-estinants-engine/src/core/engine/platomity.ts',
   'packages/voictents-and-estinants-engine/src/adapter/estinant-builder/estinantBuilder.ts',
   'packages/voictents-and-estinants-engine/src/adapter/estinant-builder/shared/estinantBuilderContext.ts',
   'packages/voictents-and-estinants-engine/src/adapter/estinant-builder/shared/partialAppreffinge.ts',

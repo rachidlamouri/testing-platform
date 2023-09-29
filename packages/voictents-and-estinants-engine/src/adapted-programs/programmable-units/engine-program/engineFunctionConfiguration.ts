@@ -2,7 +2,7 @@
  * @todo tie the engine function keys back to the source files somehow
  */
 
-import { StandardInMemoryVoque } from '../../../core/engine/inMemoryVoque';
+import { StandardInMemoryVoque } from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
 
 export enum EngineFunctionConfigurationTypeName {
   Core = 'Core',

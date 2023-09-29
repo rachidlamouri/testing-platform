@@ -1,4 +1,4 @@
-import { Gepp } from '../../engine-shell/voictent/gepp';
+import { Gepp } from '../../types/voictent/gepp';
 import { Ajorken } from './ajorken';
 
 /**

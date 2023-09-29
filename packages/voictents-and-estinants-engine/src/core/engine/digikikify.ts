@@ -2,47 +2,43 @@ import {
   Zorn,
   ZornTuple,
 } from '../../package-agnostic-utilities/datastructure/zorn';
-import { Ajorken } from '../internal/procody/ajorken';
-import {
-  Cology,
-  CologySet,
-  getCologyEntryList,
-} from '../internal/procody/cology';
+import { Ajorken } from './procody/ajorken';
+import { Cology, CologySet, getCologyEntryList } from './procody/cology';
 import {
   DreanorTypeName,
   LeftDreanor,
   RightDreanor,
   RightVoictentDreanor,
   RightVoictentItem2Dreanor,
-} from '../internal/dreanor/dreanor';
+} from './dreanor/dreanor';
 import {
   GenericEstinant2,
   UnsafeEstinant2Tuple,
-} from '../engine-shell/estinant/estinant';
-import { Gepp, GeppSet } from '../engine-shell/voictent/gepp';
+} from '../types/estinant/estinant';
+import { Gepp, GeppSet } from '../types/voictent/gepp';
 import {
   GenericIndexedHubblepup,
   GenericIndexedHubblepupTuple,
   Hubblepup,
   HubblepupTuple,
-} from '../engine-shell/hubblepup/hubblepup';
+} from '../types/hubblepup/hubblepup';
 import {
   GenericVoictentItemLanbe2,
   Lanbe,
   LanbeTypeName,
   HubblepupPelieLanbe,
   GenericVoictentPelieLanbe,
-} from '../engine-shell/voictent/lanbe';
-import { Mabz, MabzEntry } from '../internal/procody/mabz';
-import { Platomity2, Virok, getDreanorTuple } from '../internal/platomity';
-import { Prected } from '../internal/dreanor/prected';
-import { Procody } from '../internal/procody/procody';
+} from '../types/lanbe/lanbe';
+import { Mabz, MabzEntry } from './procody/mabz';
+import { Platomity2, Virok, getDreanorTuple } from './platomity';
+import { Prected } from './dreanor/prected';
+import { Procody } from './procody/procody';
 import { Tabilly } from './tabilly';
-import { GenericVoictent2 } from './voictent2';
-import { GenericInputAppreffinge } from '../engine-shell/appreffinge/input/inputAppreffinge';
+import { GenericVoictent2 } from '../types/voictent/voictent2';
+import { GenericInputAppreffinge } from '../types/appreffinge/input/inputAppreffinge';
 import { Tuple } from '../../package-agnostic-utilities/type/tuple';
-import { getIsRightInputHubblepupTupleAppreffinge } from '../engine-shell/appreffinge/input/right/rightInputAppreffinge';
-import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
+import { getIsRightInputHubblepupTupleAppreffinge } from '../types/appreffinge/input/right/rightInputAppreffinge';
+import { ReferenceTypeName } from '../types/lanbe/referenceTypeName';
 import { assertIsError } from '../../package-agnostic-utilities/error/assertIsError';
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 

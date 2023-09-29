@@ -1,9 +1,9 @@
-import { HubblepupPelieLanbe2 } from '../engine-shell/voictent/lanbe';
+import { HubblepupPelieLanbe2 } from '../../core/types/lanbe/lanbe';
 import {
   AbstractInMemoryVoictent,
   DereferenceError,
 } from './abstractInMemoryVoictent';
-import { GenericInMemoryVoque } from './inMemoryVoque';
+import { GenericInMemoryVoque } from '../voque/inMemoryVoque';
 
 export class InMemoryVoictent<
   TVoque extends GenericInMemoryVoque,

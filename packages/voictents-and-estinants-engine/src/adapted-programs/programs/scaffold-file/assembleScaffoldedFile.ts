@@ -11,7 +11,7 @@ import {
   validTypeNameList,
 } from './scaffoldConfiguration';
 import { scaffoldFile } from './scaffoldFile';
-import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
+import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';

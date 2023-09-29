@@ -2,10 +2,10 @@ import {
   LanbeTypeName,
   HubblepupPelieLanbe2,
   VoictentPelieLanbe,
-} from '../../../core/engine-shell/voictent/lanbe';
-import { ReferenceTypeName } from '../../../core/engine-shell/voictent/referenceTypeName';
-import { Voictent2 } from '../../../core/engine/voictent2';
-import { GenericVoque } from '../../../core/engine/voque';
+} from '../../../core/types/lanbe/lanbe';
+import { ReferenceTypeName } from '../../../core/types/lanbe/referenceTypeName';
+import { Voictent2 } from '../../../core/types/voictent/voictent2';
+import { GenericVoque } from '../../../core/types/voque/voque';
 import { InMemoryCache } from './inMemoryCache';
 
 type AbstractInMemoryVoictent2ConstructorInput<TVoque extends GenericVoque> = {

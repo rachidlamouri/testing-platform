@@ -1,4 +1,4 @@
-import { Voque } from '../../../core/engine/voque';
+import { Voque } from '../../../core/types/voque/voque';
 
 export type FileCacheOutputFile = {
   filePath?: never;

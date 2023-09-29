@@ -29,7 +29,7 @@ import { getEngineEstinantLocatorCollection2 } from '../../programmable-units/en
 import { getEngineProgram3 } from '../../programmable-units/engine-program/getEngineProgram3';
 import { captureOutputFileDigestList } from '../../programmable-units/sanity-snapshot/captureOutputFileDigestList';
 import { signalError } from '../../programmable-units/error/signalError';
-import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
+import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';

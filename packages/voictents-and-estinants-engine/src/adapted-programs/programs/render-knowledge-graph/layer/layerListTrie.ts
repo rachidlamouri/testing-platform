@@ -1,4 +1,4 @@
-import { StandardInMemoryVoque } from '../../../../core/engine/inMemoryVoque';
+import { StandardInMemoryVoque } from '../../../../layer-agnostic-utilities/voque/inMemoryVoque';
 import { Trie } from '../../../../package-agnostic-utilities/datastructure/trie';
 import { Layer } from './layer';
 

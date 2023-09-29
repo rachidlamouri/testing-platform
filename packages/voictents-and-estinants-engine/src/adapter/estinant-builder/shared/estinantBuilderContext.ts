@@ -1,4 +1,4 @@
-import { Gepp } from '../../../core/engine-shell/voictent/gepp';
+import { Gepp } from '../../../core/types/voictent/gepp';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

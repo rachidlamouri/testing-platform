@@ -40,7 +40,7 @@ import {
   isNewExpressionWithObjectExpressionArgument,
   isNewExpressionWithSpecificTypeParameters,
 } from '../../../package-agnostic-utilities/type-script-ast/isNewExpression';
-import { buildAddMetadataForSerialization } from '../../../core-programs/buildAddMetadataForSerialization';
+import { buildAddMetadataForSerialization } from '../../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
 import { isSpecificIdentifiableCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isCallExpression';
 import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../../package-agnostic-utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 import { isIdentifiableTypeScriptTypeReference } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';

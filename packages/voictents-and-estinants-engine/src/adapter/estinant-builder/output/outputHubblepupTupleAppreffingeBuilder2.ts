@@ -1,5 +1,5 @@
 import { Spread } from 'type-fest';
-import { GenericVoque } from '../../../core/engine/voque';
+import { GenericVoque } from '../../../core/types/voque/voque';
 import {
   buildInputOutputContextFromConstituentResultNormalizer,
   InputOutputContext,

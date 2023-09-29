@@ -1,4 +1,4 @@
-import { InMemoryOdeshin3Voque } from '../../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin3Voque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { BoundaryZorn } from './boundary';
@@ -69,7 +69,12 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
   new BoundaryConfigurationInstance({
     typeName: BoundaryTypeName.Engine,
     displayName: 'Core Engine',
-    directoryPath: 'packages/voictents-and-estinants-engine/src/core',
+    directoryPath: 'packages/voictents-and-estinants-engine/src/core/engine',
+  }),
+  new BoundaryConfigurationInstance({
+    typeName: BoundaryTypeName.Utility,
+    displayName: 'Core Types',
+    directoryPath: 'packages/voictents-and-estinants-engine/src/core/types',
   }),
   new BoundaryConfigurationInstance({
     typeName: BoundaryTypeName.Utility,

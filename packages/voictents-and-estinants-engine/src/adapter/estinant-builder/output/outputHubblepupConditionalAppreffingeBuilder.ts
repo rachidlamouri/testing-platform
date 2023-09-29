@@ -1,5 +1,5 @@
-import { Hubblepup } from '../../../core/engine-shell/hubblepup/hubblepup';
-import { GenericVoque } from '../../../core/engine/voque';
+import { Hubblepup } from '../../../core/types/hubblepup/hubblepup';
+import { GenericVoque } from '../../../core/types/voque/voque';
 import { Predicate } from '../../../package-agnostic-utilities/function/predicate';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {

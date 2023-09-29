@@ -1,10 +1,10 @@
-import { Tuple } from '../../package-agnostic-utilities/type/tuple';
+import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import {
   HubblepupPelieLanbe,
   HubblepupPelieLanbe2,
   VoictentPelieLanbe,
-} from '../engine-shell/voictent/lanbe';
-import { GenericVoque, UnsafeVoque } from './voque';
+} from '../lanbe/lanbe';
+import { GenericVoque, UnsafeVoque } from '../voque/voque';
 
 export type Voictent2<
   TRestrictingVoque extends GenericVoque,

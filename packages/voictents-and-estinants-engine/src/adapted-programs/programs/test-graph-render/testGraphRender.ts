@@ -20,8 +20,8 @@ import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   DirectedGraphMetadataByIdVoque,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
-import { InMemoryVoictent } from '../../../core/engine/inMemoryVoictent';
-import { InMemoryOdeshin2ListVoictent } from '../../../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryOdeshin2ListVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';

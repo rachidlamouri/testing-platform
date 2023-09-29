@@ -1,10 +1,10 @@
-import { Tuple } from '../../package-agnostic-utilities/type/tuple';
+import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import {
   Hubblepup,
   HubblepupIndexByName,
   IndexedHubblepup,
-} from '../engine-shell/hubblepup/hubblepup';
-import { Gepp } from '../engine-shell/voictent/gepp';
+} from '../hubblepup/hubblepup';
+import { Gepp } from '../voictent/gepp';
 
 export type Voque<
   TGepp extends Gepp,

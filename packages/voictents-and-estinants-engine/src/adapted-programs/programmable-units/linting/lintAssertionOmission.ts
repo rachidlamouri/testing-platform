@@ -1,6 +1,6 @@
-import { AbstractInMemoryVoictent } from '../../../core/engine/abstractInMemoryVoictent';
-import { InMemoryIndexByName } from '../../../core/engine/inMemoryVoque';
-import { Voque } from '../../../core/engine/voque';
+import { AbstractInMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/abstractInMemoryVoictent';
+import { InMemoryIndexByName } from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { Voque } from '../../../core/types/voque/voque';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
 import {
   GenericZorn2Template,

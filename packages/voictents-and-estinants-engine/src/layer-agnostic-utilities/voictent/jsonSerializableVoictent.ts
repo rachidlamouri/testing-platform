@@ -1,15 +1,15 @@
-import { jsonUtils } from '../package-agnostic-utilities/json/json';
-import { serializeError } from '../package-agnostic-utilities/error/serializeError';
+import { jsonUtils } from '../../package-agnostic-utilities/json/json';
+import { serializeError } from '../../package-agnostic-utilities/error/serializeError';
 import {
   GenericAbstractSerializableVoque,
   AbstractSerializableVoictent,
 } from './abstractSerializableVoictent';
-import { FileExtensionSuffixIdentifier } from '../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
+import { FileExtensionSuffixIdentifier } from '../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import {
   ProgramFileCache,
   SerializedHubblepup,
-} from '../layer-agnostic-utilities/program/programFileCache';
-import { GenericHubbleup } from '../core/engine-shell/hubblepup/hubblepup';
+} from '../program/programFileCache';
+import { GenericHubbleup } from '../../core/types/hubblepup/hubblepup';
 
 type JsonSerializableVoictentConstructorInput<
   TVoque extends GenericAbstractSerializableVoque,

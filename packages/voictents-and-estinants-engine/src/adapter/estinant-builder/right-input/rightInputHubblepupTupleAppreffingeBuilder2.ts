@@ -1,5 +1,5 @@
-import { GenericIndexedHubblepupTuple } from '../../../core/engine-shell/hubblepup/hubblepup';
-import { GenericVoque } from '../../../core/engine/voque';
+import { GenericIndexedHubblepupTuple } from '../../../core/types/hubblepup/hubblepup';
+import { GenericVoque } from '../../../core/types/voque/voque';
 import {
   Zorn2,
   ZornTuple2,

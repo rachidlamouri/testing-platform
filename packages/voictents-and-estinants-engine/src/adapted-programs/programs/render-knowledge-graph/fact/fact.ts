@@ -1,9 +1,9 @@
 import {
   InMemoryOdeshin2IndexByName,
   BaseInMemoryOdeshin2Voictent,
-} from '../../../../core/engine/inMemoryOdeshinVoictent2';
+} from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 
-import { InMemoryVoque } from '../../../../core/engine/inMemoryVoque';
+import { InMemoryVoque } from '../../../../layer-agnostic-utilities/voque/inMemoryVoque';
 import { DirectedGraphElement2 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { FileDependencyPathSegmentFact } from '../dependency/dependency-path/fileDependencyPathSegmentFact';
 import { PartitionFact } from '../partition-fact/partitionFact';

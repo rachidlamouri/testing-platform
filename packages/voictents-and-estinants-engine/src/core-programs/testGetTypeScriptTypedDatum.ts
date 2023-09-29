@@ -1,8 +1,8 @@
-import { Estinant2 } from '../core/engine-shell/estinant/estinant';
-import { LeftInputHubblepupVicken } from '../core/engine-shell/vicken/leftInputVicken';
-import { OutputVicken } from '../core/engine-shell/vicken/outputVicken';
+import { Estinant2 } from '../core/types/estinant/estinant';
+import { LeftInputHubblepupVicken } from '../core/types/vicken/leftInputVicken';
+import { OutputVicken } from '../core/types/vicken/outputVicken';
 import { digikikify2 } from '../core/engine/digikikify';
-import { InMemoryOdeshin2ListVoictent } from '../core/engine/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
@@ -10,9 +10,9 @@ import {
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import { getTypeScriptTypedDatum } from '../package-agnostic-utilities/typed-datum/typeScriptTypedDatum';
-import { AbstractSerializableVoque } from './abstractSerializableVoictent';
-import { buildAddMetadataForSerialization } from './buildAddMetadataForSerialization';
-import { JsonSerializableVoictent } from './jsonSerializableVoictent';
+import { AbstractSerializableVoque } from '../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
+import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { JsonSerializableVoictent } from '../layer-agnostic-utilities/voictent/jsonSerializableVoictent';
 import {
   SERIALIZABLE_TYPE_NAME_GEPP,
   SerializableTypeNameVoque,

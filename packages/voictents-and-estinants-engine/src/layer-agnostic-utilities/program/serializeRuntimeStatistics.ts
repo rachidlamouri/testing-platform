@@ -1,4 +1,4 @@
-import { LanbeTypeName } from '../../core/engine-shell/voictent/lanbe';
+import { LanbeTypeName } from '../../core/types/lanbe/lanbe';
 import { RuntimeStatistics } from '../../core/engine/digikikify';
 
 export const serializeRuntimeStatistics = (

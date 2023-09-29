@@ -3,10 +3,10 @@ import {
   LanbeTypeName,
   HubblepupPelieLanbe2,
   GenericVoictentItemLanbe2,
-} from '../engine-shell/voictent/lanbe';
-import { Voictent2 } from './voictent2';
-import { GenericInMemoryVoque } from './inMemoryVoque';
-import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
+} from '../../core/types/lanbe/lanbe';
+import { Voictent2 } from '../../core/types/voictent/voictent2';
+import { GenericInMemoryVoque } from '../voque/inMemoryVoque';
+import { ReferenceTypeName } from '../../core/types/lanbe/referenceTypeName';
 
 export class DereferenceError extends Error {
   constructor(lanbe: GenericVoictentItemLanbe2) {

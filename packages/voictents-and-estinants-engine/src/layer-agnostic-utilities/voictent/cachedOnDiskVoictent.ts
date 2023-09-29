@@ -1,21 +1,21 @@
 import fs from 'fs';
 import { posix } from 'path';
 import { Grition } from '../../adapter/odeshin/grition';
-import { Gepp } from '../engine-shell/voictent/gepp';
-import { Voque } from './voque';
-import { Voictent2 } from './voictent2';
+import { Gepp } from '../../core/types/voictent/gepp';
+import { Voque } from '../../core/types/voque/voque';
+import { Voictent2 } from '../../core/types/voictent/voictent2';
 import {
   LanbeTypeName,
   HubblepupPelieLanbe2,
   VoictentPelieLanbe,
-} from '../engine-shell/voictent/lanbe';
+} from '../../core/types/lanbe/lanbe';
 import { Json, jsonUtils } from '../../package-agnostic-utilities/json/json';
 import {
   MissingLanbeError,
   HubblepupPelueState,
 } from './abstractInMemoryVoictent';
-import { AbstractSerializableIndexByName } from '../../core-programs/abstractSerializableVoictent';
-import { ReferenceTypeName } from '../engine-shell/voictent/referenceTypeName';
+import { AbstractSerializableIndexByName } from './abstractSerializableVoictent';
+import { ReferenceTypeName } from '../../core/types/lanbe/referenceTypeName';
 
 const createDirectory = (directoryPath: string): void => {
   if (!fs.existsSync(directoryPath)) {

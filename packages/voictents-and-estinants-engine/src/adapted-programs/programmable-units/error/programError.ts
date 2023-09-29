@@ -1,4 +1,4 @@
-import { Voque } from '../../../core/engine/voque';
+import { Voque } from '../../../core/types/voque/voque';
 import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/object/object';
 
 export enum ProgramErrorElementLocatorTypeName {

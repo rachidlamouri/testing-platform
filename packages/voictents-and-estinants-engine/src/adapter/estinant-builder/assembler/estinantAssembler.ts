@@ -1,16 +1,16 @@
-import { RightInputAppreffinge } from '../../../core/engine-shell/appreffinge/input/right/rightInputAppreffinge';
+import { RightInputAppreffinge } from '../../../core/types/appreffinge/input/right/rightInputAppreffinge';
 import {
   Estinant2,
   GenericEstinant2,
-} from '../../../core/engine-shell/estinant/estinant';
-import { GenericTropoignant2 } from '../../../core/engine-shell/estinant/tropoignant';
-import { GenericIndexedHubblepup } from '../../../core/engine-shell/hubblepup/hubblepup';
-import { GenericLeftInputVicken } from '../../../core/engine-shell/vicken/leftInputVicken';
+} from '../../../core/types/estinant/estinant';
+import { GenericTropoignant2 } from '../../../core/types/estinant/tropoignant';
+import { GenericIndexedHubblepup } from '../../../core/types/hubblepup/hubblepup';
+import { GenericLeftInputVicken } from '../../../core/types/vicken/leftInputVicken';
 import {
   GenericRightInputHubblepupTupleVicken,
   GenericRightInputVickenTuple,
   GenericRightInputVoictentVicken,
-} from '../../../core/engine-shell/vicken/rightInputVicken';
+} from '../../../core/types/vicken/rightInputVicken';
 import {
   Zorn,
   ZornTuple,
