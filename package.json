@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon --watch packages/voictents-and-estinants-engine/src/utilities/subprocess-orchestrator packages/voictents-and-estinants-engine/src/package-agnostic-utilities/subprocess-orchestrator/orchestrateSubprocessList.ts",
-    "program": "npx nodemon --ext html,ts,tsx --ignore debug --ignore **/generated/**",
+    "program": "npx nodemon --ext html,ts,tsx,sh --ignore debug --ignore **/generated/**",
     "scaffold": "npx ts-node packages/voictents-and-estinants-engine/src/adapted-programs/programs/scaffold-file/assembleScaffoldedFile.ts",
     "example-core": "ts-node packages/open-schema-type-script/src/example/core/exampleCore.ts",
     "example-adapter": "ts-node packages/open-schema-type-script/src/example/adapter/exampleAdapter.ts",

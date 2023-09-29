@@ -43,6 +43,8 @@ import {
   LintAssertionOmissionVoictent,
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
+import { getExpectedProgramTestFile } from './getExpectedProgramTestFile';
+import { assertProgramTestFileIsValid } from './assertProgramTestFileIsValid';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
@@ -97,6 +99,8 @@ digikikify({
     getEngineProgramLocator3,
 
     getExpectedProgramTestFileConfiguration,
+    getExpectedProgramTestFile,
+    assertProgramTestFileIsValid,
 
     serializeCiModel,
 

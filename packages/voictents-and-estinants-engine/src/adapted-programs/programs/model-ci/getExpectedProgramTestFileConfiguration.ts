@@ -53,7 +53,9 @@ export const getExpectedProgramTestFileConfiguration = buildEstinant({
         }),
       [EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP]:
         new ExpectedProgramTestFileConfigurationInstance({
-          filePath: expectedTestFilePath,
+          programName: programLocator.programName,
+          programFile: programLocator.engineProgramFile,
+          testFilePath: expectedTestFilePath,
         }),
     };
   })

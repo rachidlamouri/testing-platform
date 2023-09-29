@@ -5,9 +5,10 @@ import {
   Zorn2,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
+import { TypeScriptFile } from '../../programmable-units/type-script-file/typeScriptFile';
 
 const EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ZORN_TEMPLATE = [
-  'filePath',
+  'testFilePath',
 ] as const satisfies GenericZorn2Template;
 type ExpectedProgramTestFileConfigurationZornTemplate =
   typeof EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ZORN_TEMPLATE;
@@ -18,7 +19,9 @@ class ExpectedProgramTestFileConfigurationZorn extends Zorn2<ExpectedProgramTest
 }
 
 type ExpectedProgramTestFileConfigurationConstructorInput = {
-  filePath: string;
+  programName: string;
+  programFile: TypeScriptFile;
+  testFilePath: string;
 };
 
 /**
@@ -39,7 +42,9 @@ export const { ExpectedProgramTestFileConfigurationInstance } =
     instancePropertyNameTuple: [
       // keep this as a multiline list
       'zorn',
-      'filePath',
+      'programName',
+      'programFile',
+      'testFilePath',
     ] as const satisfies readonly (keyof ExpectedProgramTestFileConfiguration)[],
   })
     .withTypes<
@@ -54,10 +59,10 @@ export const { ExpectedProgramTestFileConfigurationInstance } =
         },
       },
       transformInput: (input) => {
-        const { filePath } = input;
+        const { testFilePath } = input;
 
         const zorn = new ExpectedProgramTestFileConfigurationZorn({
-          filePath,
+          testFilePath,
         });
 
         return {
