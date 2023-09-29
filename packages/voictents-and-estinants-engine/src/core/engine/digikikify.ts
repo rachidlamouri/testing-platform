@@ -3,11 +3,7 @@ import {
   ZornTuple,
 } from '../../package-agnostic-utilities/datastructure/zorn';
 import { Ajorken } from './procody/ajorken';
-import {
-  Cology,
-  CologySet,
-  getCologyEntryList,
-} from './procody/cology';
+import { Cology, CologySet, getCologyEntryList } from './procody/cology';
 import {
   DreanorTypeName,
   LeftDreanor,
