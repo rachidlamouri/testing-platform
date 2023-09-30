@@ -64,6 +64,11 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
         'npx tsc --pretty -p packages/voictents-and-estinants-engine --watch',
       isInitiallyVisible: true,
     },
+    {
+      label: 'lint',
+      script: 'nodemon --exec npm run lint:ts:engine',
+      isInitiallyVisible: true,
+    },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
 ).map((partialConfiguration) => {
   const color = mutableColorList.pop();
