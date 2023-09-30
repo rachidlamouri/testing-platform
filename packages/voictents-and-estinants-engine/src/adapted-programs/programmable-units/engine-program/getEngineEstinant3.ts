@@ -12,9 +12,9 @@ import {
 } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
 import { IdentifiableMemberExpressionCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isMemberExpressionCallExpression';
 import {
-  isObjectExpressionWithIdentifierProperties,
+  isObjectExpressionWithIdentifiableProperties,
   IdentifiableProperty,
-} from '../../../package-agnostic-utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
+} from '../../../package-agnostic-utilities/type-script-ast/isObjectExpressionWithIdentifiableProperties';
 import { isStringLiteral } from '../../../package-agnostic-utilities/type-script-ast/isStringLiteral';
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
@@ -753,7 +753,7 @@ const getAdaptedEstinant = ({
   const instantiationArgument = isCallExpression(instantiationExpression)
     ? instantiationExpression.arguments[0]
     : null;
-  const estinantNameProperty = isObjectExpressionWithIdentifierProperties(
+  const estinantNameProperty = isObjectExpressionWithIdentifiableProperties(
     instantiationArgument,
   )
     ? instantiationArgument.properties.find(

@@ -9,9 +9,9 @@ import {
 import {
   IdentifiableProperty,
   ObjectExpressionWithIdentifierProperties,
-  isObjectExpressionWithIdentifierProperties,
+  isObjectExpressionWithIdentifiableProperties,
   isSepcificIdentifiableProperty,
-} from '../../../package-agnostic-utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
+} from '../../../package-agnostic-utilities/type-script-ast/isObjectExpressionWithIdentifiableProperties';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImport,
@@ -101,7 +101,7 @@ const isEngineCallExpressionStatement = (
   isSpecificExpressionStatement(node, AST_NODE_TYPES.CallExpression) &&
   node.expression.callee.type === AST_NODE_TYPES.Identifier &&
   node.expression.callee.name === engineFunctionIdentifier &&
-  isObjectExpressionWithIdentifierProperties(node.expression.arguments[0]);
+  isObjectExpressionWithIdentifiableProperties(node.expression.arguments[0]);
 
 type EngineCallDeclaration = CommentedProgramBodyDeclaration<
   EngineCallExpressionStatement,
