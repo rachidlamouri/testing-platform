@@ -63,7 +63,6 @@ import {
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
-import { canonicalDeclarationOmissionList } from '../../programmable-units/type-script-file/canonical-declaration/canonicalDeclarationOmissionList';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 import { handleNoCanonicalDirective } from '../../programmable-units/type-script-file/handleNoCanonicalDirective';
 import { omitProgramCanoncalExportRequirement } from '../../programmable-units/type-script-file/omitProgramCanoncalExportRequirement';
