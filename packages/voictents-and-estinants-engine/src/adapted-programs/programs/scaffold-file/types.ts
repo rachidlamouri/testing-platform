@@ -1,3 +1,7 @@
+/**
+ * @noCanonical
+ */
+
 export type ScaffoldeeFileMetadata = {
   getImportStatement: (importConfiguration: ImportConfiguration) => string;
   camelCaseName: string;

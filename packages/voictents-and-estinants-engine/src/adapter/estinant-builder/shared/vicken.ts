@@ -1,3 +1,9 @@
+/**
+ * @noCanonical
+ *
+ * @todo split this file into left, right tuple, and output vicken files
+ */
+
 import { GenericVoque } from '../../../core/types/voque/voque';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { OutputVicken as CoreOutputVicken } from '../../../core/types/vicken/outputVicken';

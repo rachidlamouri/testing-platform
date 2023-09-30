@@ -1,3 +1,9 @@
+/**
+ * @noCanonical
+ *
+ * @todo split up the typess and functions in this file by purpose
+ */
+
 import { Gepp } from '../../../core/types/voictent/gepp';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 

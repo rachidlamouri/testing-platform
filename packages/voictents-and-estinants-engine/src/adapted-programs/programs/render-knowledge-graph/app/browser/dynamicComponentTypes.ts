@@ -1,3 +1,8 @@
+/**
+ * @noCanonical
+ * @todo this file should probably be broken up or renamed
+ */
+
 import React from 'react';
 import { BoundaryTypeName } from '../../boundary/boundaryTypeName';
 

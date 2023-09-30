@@ -1,3 +1,7 @@
+/**
+ * @noCanonical
+ */
+
 import { PropsWithChildren } from 'react';
 
 export type DirectoryFactProps = PropsWithChildren<{

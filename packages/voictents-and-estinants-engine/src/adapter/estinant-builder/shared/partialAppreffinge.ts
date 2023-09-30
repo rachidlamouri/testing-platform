@@ -1,3 +1,9 @@
+/**
+ * @noCanonical
+ *
+ * @todo split this file into left and right appreffinges
+ */
+
 import { GenericVoque } from '../../../core/types/voque/voque';
 import { ZornTuple2 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { GenericAdaptedLeftInputVicken } from './vicken';
