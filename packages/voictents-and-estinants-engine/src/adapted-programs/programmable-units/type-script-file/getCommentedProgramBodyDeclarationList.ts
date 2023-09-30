@@ -101,14 +101,19 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
         const identifiableNode =
           getIdentifiableProgramBodyStatementNode(programBodyStatement);
 
+        const hasCanonicalTag =
+          comment?.typeName === CategorizedCommentTypeName.Descriptive &&
+          comment.tagIdSet.has('canonical');
+
         const normalizedIdentifierName =
           identifiableNode !== null
             ? shishKebab(identifiableNode.id.name)
             : null;
 
         const isCanonical =
-          normalizedIdentifierName !== null &&
-          normalizedIdentifierName === kebabExtensionlessName;
+          hasCanonicalTag ||
+          (normalizedIdentifierName !== null &&
+            normalizedIdentifierName === kebabExtensionlessName);
 
         const isDerivative =
           !isCanonical &&
@@ -116,6 +121,7 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
           allowedDerivativeNameSet.has(normalizedIdentifierName);
 
         return new CommentedProgramBodyDeclarationInstance({
+          hasCanonicalTag,
           isCanonical,
           isDerivative,
           comment,

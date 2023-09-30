@@ -14,6 +14,8 @@ type ProgramTestGroup = {
 
 /**
  * The information needed to build the expected ci.sh file
+ *
+ * @canonical
  */
 type CiModel = {
   zorn: string;

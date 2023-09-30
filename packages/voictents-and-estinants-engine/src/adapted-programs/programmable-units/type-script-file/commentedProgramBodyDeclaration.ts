@@ -9,6 +9,7 @@ export type CommentedProgramBodyDeclaration<
 > = {
   isCanonical: boolean;
   isDerivative: boolean;
+  hasCanonicalTag: boolean;
   comment: CategorizedComment | null;
   /** @deprecated in favor of "comment" */
   commentText: string | null;
@@ -35,6 +36,7 @@ export const { CommentedProgramBodyDeclarationInstance } =
       // keep this as a multiline list
       'isCanonical',
       'isDerivative',
+      'hasCanonicalTag',
       'comment',
       'commentText',
       'bodyStatement',

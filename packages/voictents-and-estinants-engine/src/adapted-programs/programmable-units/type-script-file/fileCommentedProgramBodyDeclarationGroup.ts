@@ -12,6 +12,7 @@ import {
   isIdentifiableCommentedProgramBodyDeclaration,
 } from './commentedProgramBodyDeclaration';
 import { hasOneElement } from '../../../package-agnostic-utilities/array/hasOneElement';
+import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 
 const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE = [
   'filePath',
@@ -143,6 +144,18 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
             }),
         );
 
+        const explicitCanonicalDeclarationList = list.filter(
+          (
+            declaration,
+          ): declaration is IdentifiableCommentedProgramBodyDeclaration => {
+            return (
+              declaration.comment?.typeName ===
+                CategorizedCommentTypeName.Descriptive &&
+              declaration.comment.tagIdSet.has('canonical')
+            );
+          },
+        );
+
         const declarationListByIdentifier =
           new IdentifiableCommentedProgramBodyDeclarationListByName(
             list
@@ -155,7 +168,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
               }),
           );
 
-        const canonicalDeclarationList = list.filter(
+        const implicitCanonicalDeclarationList = list.filter(
           (
             declaration,
           ): declaration is IdentifiableCommentedProgramBodyDeclaration => {
@@ -173,10 +186,12 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
 
         // TODO: handle the case when a file has two canonical declarations or two derivative declarations
         let canonicalDeclaration: IdentifiableCommentedProgramBodyDeclaration | null;
-        if (hasOneElement(canonicalDeclarationList)) {
-          [canonicalDeclaration] = canonicalDeclarationList;
+        if (hasOneElement(explicitCanonicalDeclarationList)) {
+          [canonicalDeclaration] = explicitCanonicalDeclarationList;
+        } else if (hasOneElement(implicitCanonicalDeclarationList)) {
+          [canonicalDeclaration] = implicitCanonicalDeclarationList;
         } else if (
-          canonicalDeclarationList.length === 0 &&
+          implicitCanonicalDeclarationList.length === 0 &&
           hasOneElement(derivativeDeclarationList)
         ) {
           [canonicalDeclaration] = derivativeDeclarationList;
@@ -190,7 +205,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
           list,
           declarationByIdentifier,
           declarationListByIdentifier,
-          canonicalDeclarationList,
+          canonicalDeclarationList: implicitCanonicalDeclarationList,
           derivativeDeclarationList,
           canonicalDeclaration,
         } satisfies FileCommentedProgramBodyDeclarationGroup;
