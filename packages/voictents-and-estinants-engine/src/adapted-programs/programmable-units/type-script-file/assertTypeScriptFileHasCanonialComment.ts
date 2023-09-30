@@ -23,42 +23,43 @@ type MessageContext = {
   canonicalCommentLintMetadata: CanonicalCommentLintMetadata;
 };
 
-const typeScriptFileHasCanonicalCommentRule = new TypedRule<MessageContext>({
-  name: 'typescript-file-has-canonical-comment',
-  source: new EstinantSourceInstance({
-    filePath: posix.relative('', __filename),
-    estinantName: ESTINANT_NAME,
-  }),
-  description:
-    'All TypeScript files must have a canonical comment with a description.',
-  getErrorMessage: ({
-    filePath,
-    trimmedCanonicalCommentText,
-    canonicalCommentLintMetadata,
-  }): string => {
-    let reason: string;
-    let remediationList: string[];
+export const typeScriptFileHasCanonicalCommentRule =
+  new TypedRule<MessageContext>({
+    name: 'typescript-file-has-canonical-comment',
+    source: new EstinantSourceInstance({
+      filePath: posix.relative('', __filename),
+      estinantName: ESTINANT_NAME,
+    }),
+    description:
+      'All TypeScript files must have a canonical comment with a description.',
+    getErrorMessage: ({
+      filePath,
+      trimmedCanonicalCommentText,
+      canonicalCommentLintMetadata,
+    }): string => {
+      let reason: string;
+      let remediationList: string[];
 
-    if (trimmedCanonicalCommentText === '') {
-      reason = 'Comment cannot be empty.';
-      remediationList = ['Fill out the canonical comment'];
-    } else {
-      assertNotNull(canonicalCommentLintMetadata.badStateReason);
-      assertNotNull(canonicalCommentLintMetadata.remediationList);
-      reason = canonicalCommentLintMetadata.badStateReason;
-      remediationList = canonicalCommentLintMetadata.remediationList;
-    }
+      if (trimmedCanonicalCommentText === '') {
+        reason = 'Comment cannot be empty.';
+        remediationList = ['Fill out the canonical comment'];
+      } else {
+        assertNotNull(canonicalCommentLintMetadata.badStateReason);
+        assertNotNull(canonicalCommentLintMetadata.remediationList);
+        reason = canonicalCommentLintMetadata.badStateReason;
+        remediationList = canonicalCommentLintMetadata.remediationList;
+      }
 
-    // TODO: formatting should go elsewhere. This should probably return an object.
-    return [
-      `File ${filePath} has an invalid canonical comment. ${reason}`,
-      '  Remediation Options:',
-      ...remediationList.map((option) => {
-        return `    - ${option}`;
-      }),
-    ].join('\n');
-  },
-});
+      // TODO: formatting should go elsewhere. This should probably return an object.
+      return [
+        `File ${filePath} has an invalid canonical comment. ${reason}`,
+        '  Remediation Options:',
+        ...remediationList.map((option) => {
+          return `    - ${option}`;
+        }),
+      ].join('\n');
+    },
+  });
 
 /**
  * Verifies that a TypeScript file has non-empty comment either on the canonical
