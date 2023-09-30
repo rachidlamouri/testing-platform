@@ -95,7 +95,7 @@ digikikify({
       // TODO: fix and remove omissions
       initialHubblepupPelueTuple: [
         NULL_OMISSION,
-        ...canonicalDeclarationOmissionList,
+        // ...canonicalDeclarationOmissionList,
       ],
     }),
   ] as const,
