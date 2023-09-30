@@ -1,4 +1,7 @@
 /**
+ * A mess. Seriously this file needs to be cleaned up. It has all sorts of misc
+ * context objects, input acessors, and other functions.
+ *
  * @noCanonicalDeclaration
  *
  * @todo split up the typess and functions in this file by purpose

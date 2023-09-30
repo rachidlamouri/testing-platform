@@ -1,4 +1,6 @@
 /**
+ * Constructor function types
+ *
  * @noCanonicalDeclaration
  */
 

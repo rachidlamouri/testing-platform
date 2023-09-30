@@ -1,4 +1,7 @@
 /**
+ * Component prop types used by both the fact components, and the
+ * decodeAndRecastSvgDocument transform
+ *
  * @noCanonicalDeclaration
  */
 

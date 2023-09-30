@@ -1,4 +1,8 @@
 /**
+ * An in memory collection for identifiable streamables (version 2) ... (also
+ * version 3, and by the time you're reading this theres probably a version 4.
+ * who knows?)
+ *
  * @noCanonicalDeclaration
  *
  * @todo find a better name for this file

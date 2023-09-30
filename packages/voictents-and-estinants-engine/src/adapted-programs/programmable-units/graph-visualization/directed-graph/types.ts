@@ -1,4 +1,5 @@
 /**
+ * Directed graph zorn types
  * @noCanonicalDeclaration
  */
 

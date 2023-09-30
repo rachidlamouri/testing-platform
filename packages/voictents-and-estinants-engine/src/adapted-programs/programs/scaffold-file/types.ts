@@ -1,4 +1,6 @@
 /**
+ * Shared utility types for the scaffold-file script
+ *
  * @noCanonicalDeclaration
  */
 

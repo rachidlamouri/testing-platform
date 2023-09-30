@@ -1,4 +1,7 @@
 /**
+ * An adapted stream metatype. It contains the type information needed to
+ * connect collections and transforms.
+ *
  * @noCanonicalDeclaration
  *
  * @todo split this file into left, right tuple, and output vicken files

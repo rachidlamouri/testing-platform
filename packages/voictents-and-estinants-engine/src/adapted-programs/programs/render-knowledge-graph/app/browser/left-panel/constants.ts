@@ -1,4 +1,6 @@
 /**
+ * Panel constants (singular). It's pretty straight forward.
+ *
  * @noCanonicalDeclaration
  */
 

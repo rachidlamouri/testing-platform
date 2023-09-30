@@ -1,4 +1,6 @@
 /**
+ * An appreffinge without isWibiz
+ *
  * @noCanonicalDeclaration
  *
  * @todo split this file into left and right appreffinges
