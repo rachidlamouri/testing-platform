@@ -1,4 +1,3 @@
-import Case from 'case';
 import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
 import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
@@ -67,16 +66,16 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
     gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   })
   .onPinbe((parsedTypeScriptFile, [typescriptFile], [commentGroup]) => {
-    const kebabExtensionlessName = Case.kebab(
+    const normalizedFileName = shishKebab(
       typescriptFile.filePath.name.extensionless,
     );
 
     const allowedDerivativeNameSet = new Set([
       ...allowedDerivativePrefixSet.map((prefix) => {
-        return `${prefix}-${kebabExtensionlessName}`;
+        return `${prefix}-${normalizedFileName}`;
       }),
       ...allowedDerivativeSuffixSet.map((suffix) => {
-        return `${kebabExtensionlessName}-${suffix}`;
+        return `${normalizedFileName}-${suffix}`;
       }),
     ]);
 
@@ -114,7 +113,7 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
         const isCanonical =
           hasCanonicalTag ||
           (normalizedIdentifierName !== null &&
-            normalizedIdentifierName === kebabExtensionlessName);
+            normalizedIdentifierName === normalizedFileName);
 
         const isDerivative =
           !isCanonical &&
