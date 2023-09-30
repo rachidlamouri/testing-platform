@@ -1,3 +1,7 @@
+/**
+ * @noCanonical
+ */
+
 import { UnsafeTuple } from '../type/tuple';
 import { TypeScriptObjectInstance } from '../object/object';
 
