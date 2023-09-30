@@ -66,6 +66,7 @@ import { reportErrorCount } from '../../programmable-units/error/reportErrorCoun
 import { canonicalDeclarationOmissionList } from '../../programmable-units/type-script-file/canonical-declaration/canonicalDeclarationOmissionList';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 import { handleNoCanonicalDirective } from '../../programmable-units/type-script-file/handleNoCanonicalDirective';
+import { omitProgramCanoncalExportRequirement } from '../../programmable-units/type-script-file/omitProgramCanoncalExportRequirement';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -121,6 +122,7 @@ digikikify({
 
     assertTypeScriptFileHasCanonicalDeclaration,
     handleNoCanonicalDirective,
+    omitProgramCanoncalExportRequirement,
 
     filterEngineProgramFile,
     getEngineProgramLocator3,
