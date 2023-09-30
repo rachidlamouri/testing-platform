@@ -42,11 +42,6 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       isInitiallyVisible: true,
     },
     {
-      label: 'serve-knowledge-graph',
-      script: serveKnowledgeGrpah,
-      isInitiallyVisible: false,
-    },
-    {
       label: 'find-unused-exports',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/find-unused-exports/findUnusedExports.ts',
@@ -68,6 +63,11 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       label: 'lint',
       script: 'nodemon --exec npm run lint:ts:engine',
       isInitiallyVisible: true,
+    },
+    {
+      label: 'serve-knowledge-graph',
+      script: serveKnowledgeGrpah,
+      isInitiallyVisible: false,
     },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
 ).map((partialConfiguration) => {
