@@ -66,6 +66,8 @@ import { reportErrorCount } from '../../programmable-units/error/reportErrorCoun
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 import { handleNoCanonicalDirective } from '../../programmable-units/type-script-file/handleNoCanonicalDirective';
 import { omitProgramCanoncalExportRequirement } from '../../programmable-units/type-script-file/omitProgramCanoncalExportRequirement';
+import { assertTypeScriptFileHasCanonialComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonialComment';
+import { existingFilesWithMissingCanonicalCommentsExemptionList } from '../../programmable-units/type-script-file/existingFilesWithMissingCanonicalCommentsExemptionList';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -95,7 +97,7 @@ digikikify({
       // TODO: fix and remove omissions
       initialHubblepupPelueTuple: [
         NULL_OMISSION,
-        // ...canonicalDeclarationOmissionList,
+        ...existingFilesWithMissingCanonicalCommentsExemptionList,
       ],
     }),
   ] as const,
@@ -120,6 +122,7 @@ digikikify({
     getTypeScriptFileImportList,
 
     assertTypeScriptFileHasCanonicalDeclaration,
+    assertTypeScriptFileHasCanonialComment,
     handleNoCanonicalDirective,
     omitProgramCanoncalExportRequirement,
 

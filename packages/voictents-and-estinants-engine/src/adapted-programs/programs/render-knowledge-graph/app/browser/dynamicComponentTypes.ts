@@ -1,4 +1,7 @@
 /**
+ * Types that render-knowledge-graph uses for generating data, and that the
+ * knowledge graph app uses when presenting the generated data.
+ *
  * @noCanonicalDeclaration
  * @todo this file should probably be broken up or renamed
  */
