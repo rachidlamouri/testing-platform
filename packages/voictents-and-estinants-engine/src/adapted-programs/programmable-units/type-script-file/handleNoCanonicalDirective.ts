@@ -8,6 +8,7 @@ import {
 import { EstinantSourceInstance } from '../linting/source/estinantSource';
 import { FileSourceInstance } from '../linting/source/fileSource';
 import { typeScriptFileHasCanonicalDeclarationRule } from './canonical-declaration/assertTypeScriptFileHasCanonicalDeclaration';
+import { CommentTagId } from './comment/commentTagId';
 import {
   FILE_PARSED_COMMENT_GROUP_GEPP,
   FileParsedCommentGroupVoque,
@@ -21,7 +22,7 @@ const omitterSource = new EstinantSourceInstance({
 });
 
 /**
- * Creates an assertion omission for files with a noCanonical tag in their file
+ * Creates an assertion omission for files with a specific tag in their file
  * comment
  */
 export const handleNoCanonicalDirective = buildEstinant({
@@ -36,7 +37,9 @@ export const handleNoCanonicalDirective = buildEstinant({
   .onPinbe((commentGroup) => {
     if (
       commentGroup.fileComment !== null &&
-      commentGroup.fileComment.tagIdSet.has('noCanonical')
+      commentGroup.fileComment.tagIdSet.has(
+        CommentTagId.CanonicalDeclarationExemption,
+      )
     ) {
       return [
         new LintAssertionOmissionInstance({

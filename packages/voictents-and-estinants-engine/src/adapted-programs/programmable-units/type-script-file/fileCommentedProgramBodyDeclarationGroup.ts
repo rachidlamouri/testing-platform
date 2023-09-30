@@ -13,6 +13,7 @@ import {
 } from './commentedProgramBodyDeclaration';
 import { hasOneElement } from '../../../package-agnostic-utilities/array/hasOneElement';
 import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
+import { CommentTagId } from './comment/commentTagId';
 
 const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE = [
   'filePath',
@@ -151,7 +152,9 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
             return (
               declaration.comment?.typeName ===
                 CategorizedCommentTypeName.Descriptive &&
-              declaration.comment.tagIdSet.has('canonical')
+              declaration.comment.tagIdSet.has(
+                CommentTagId.ExplicitCanonicalDeclaration,
+              )
             );
           },
         );

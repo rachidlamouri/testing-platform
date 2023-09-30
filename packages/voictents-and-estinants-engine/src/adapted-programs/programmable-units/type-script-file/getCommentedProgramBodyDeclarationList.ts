@@ -17,6 +17,7 @@ import {
 } from './fileParsedCommentGroup';
 import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 import { shishKebab } from '../../../package-agnostic-utilities/case/shishKebab';
+import { CommentTagId } from './comment/commentTagId';
 
 const allowedDerivativePrefixSet = [
   // keep as multiline list
@@ -103,7 +104,7 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
 
         const hasCanonicalTag =
           comment?.typeName === CategorizedCommentTypeName.Descriptive &&
-          comment.tagIdSet.has('canonical');
+          comment.tagIdSet.has(CommentTagId.ExplicitCanonicalDeclaration);
 
         const normalizedIdentifierName =
           identifiableNode !== null
