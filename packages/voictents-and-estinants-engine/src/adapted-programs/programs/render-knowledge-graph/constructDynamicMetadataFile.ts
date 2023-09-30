@@ -8,7 +8,7 @@ import {
 import {
   TypeScriptArray,
   TypeScriptObjectInstance,
-} from '../../../package-agnostic-utilities/object/object';
+} from '../../../package-agnostic-utilities/object/typeScriptObject';
 import {
   OUTPUT_FILE_GEPP,
   OutputFile,

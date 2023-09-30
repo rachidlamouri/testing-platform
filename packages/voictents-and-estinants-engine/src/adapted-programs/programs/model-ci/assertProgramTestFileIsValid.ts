@@ -15,7 +15,7 @@ import {
 import { EstinantSourceInstance } from '../../programmable-units/linting/source/estinantSource';
 import { TypedRule } from '../../programmable-units/linting/rule';
 import { FileSourceInstance } from '../../programmable-units/linting/source/fileSource';
-import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/object/object';
+import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import {
   LINT_ASSERTION_OMISSION_GEPP,
   LintAssertionOmissionInstance,

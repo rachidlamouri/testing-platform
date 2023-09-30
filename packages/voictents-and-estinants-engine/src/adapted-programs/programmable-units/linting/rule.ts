@@ -4,7 +4,7 @@ import {
   Zorn2,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
-import { TypeScriptObject } from '../../../package-agnostic-utilities/object/object';
+import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import { Source } from './source/source';
 
 const RULE_ZORN_TEMPLATE = [

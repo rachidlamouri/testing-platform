@@ -16,7 +16,7 @@ import {
   CustomTypedUndefined,
   getCustomTypedDatum,
 } from '../typed-datum/customTypedDatum';
-import { getTypeScriptObjectEntryList } from '../object/object';
+import { getTypeScriptObjectEntryList } from '../object/typeScriptObject';
 import {
   isSimpleObjectEntryKey,
   SerializeableBooleanNode,

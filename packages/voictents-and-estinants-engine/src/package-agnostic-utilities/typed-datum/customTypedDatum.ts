@@ -4,7 +4,7 @@ import {
   TypeScriptMap,
   TypeScriptObjectInstance,
   TypeScriptSet,
-} from '../object/object';
+} from '../object/typeScriptObject';
 import {
   getTypeScriptTypedDatum,
   TypeScriptDatumTypeName,

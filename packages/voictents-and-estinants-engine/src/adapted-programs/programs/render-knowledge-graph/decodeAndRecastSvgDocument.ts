@@ -38,7 +38,7 @@ import {
   FileFactProps,
 } from './app/browser/factProps';
 import { FileFact2 } from './file/fileFact2';
-import { TypeScriptObject } from '../../../package-agnostic-utilities/object/object';
+import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import { FileDependencyPathSegmentFact } from './dependency/dependency-path/fileDependencyPathSegmentFact';
 import { DirectoryFact2 } from './directory/directoryFact2';
 import { FileDependencyPathNodeFact } from './dependency/dependency-path/fileDependencyPathNodeFact';

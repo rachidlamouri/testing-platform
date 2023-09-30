@@ -1,5 +1,5 @@
 import { TypeScriptFunction } from '../function/typeScriptFunction';
-import { TypeScriptObject } from '../object/object';
+import { TypeScriptObject } from '../object/typeScriptObject';
 
 export enum TypeScriptDatumTypeName {
   bigint = 'bigint',
