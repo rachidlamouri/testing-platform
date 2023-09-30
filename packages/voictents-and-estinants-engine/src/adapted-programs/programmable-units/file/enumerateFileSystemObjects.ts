@@ -1,7 +1,7 @@
 import {
   FileSystemNodeMetadata,
   getNestedFileSystemNodeMetadataList,
-} from '../../../package-agnostic-utilities/file/getNestedFilePaths';
+} from '../../../package-agnostic-utilities/file/getNestedFileSystemNodeMetadataList';
 import { splitList } from '../../../package-agnostic-utilities/array/splitList';
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import { DIRECTORY_GEPP, DirectoryInstance, DirectoryVoque } from './directory';
