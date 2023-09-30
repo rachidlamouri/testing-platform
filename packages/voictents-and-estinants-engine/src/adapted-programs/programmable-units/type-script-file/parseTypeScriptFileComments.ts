@@ -36,6 +36,7 @@ import {
   FileParsedCommentGroupInstance,
   FileParsedCommentGroupVoque,
 } from './fileParsedCommentGroup';
+import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 
 const getAdaptedComment = (
   filePath: string,
@@ -127,16 +128,11 @@ const getCategorizedComment = (
     });
   }
 
+  // TODO: maybe "descriptive" isn't the right word since it doesn't have to have a description
   const description = adaptedComment.parsedBlock.description.trim();
-  if (description !== '') {
-    return new DescriptiveBlockCommentInstance({
-      adaptedComment,
-      description,
-    });
-  }
-
-  return new UnknownCommentInstance({
+  return new DescriptiveBlockCommentInstance({
     adaptedComment,
+    description,
   });
 };
 
@@ -184,6 +180,20 @@ export const parseTypeScriptFileComments = buildEstinant({
       getCategorizedComment(adaptedComment),
     );
 
+    const [firstComment = null] = categorizedCommentList;
+
+    const firstStatement = parsedTypeScriptFile.program.body[0] ?? null;
+
+    const fileComment =
+      firstComment !== null &&
+      firstComment.typeName === CategorizedCommentTypeName.Descriptive &&
+      (firstStatement === null ||
+        firstComment.endingLineNumber + 1 !== firstStatement.loc.end.line)
+        ? firstComment
+        : null;
+
+    // 'adaptedComment' in  firstComment && firstComment.typeName
+
     // TODO: apply this assertion and consider moving it to a different transform
     const lintAssertionList: GenericLintAssertion[] = [];
     // categorizedCommentList.map((comment) => {
@@ -208,6 +218,7 @@ export const parseTypeScriptFileComments = buildEstinant({
       [FILE_PARSED_COMMENT_GROUP_GEPP]: new FileParsedCommentGroupInstance({
         filePath,
         list: categorizedCommentList,
+        fileComment,
       }),
     };
   })

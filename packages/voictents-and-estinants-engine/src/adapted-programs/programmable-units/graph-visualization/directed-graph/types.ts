@@ -1,3 +1,7 @@
+/**
+ * @noCanonical
+ */
+
 import {
   GenericZorn2Template,
   Zorn2,
