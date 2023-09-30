@@ -3,7 +3,7 @@ import { splitList } from '../../../package-agnostic-utilities/array/splitList';
 import {
   flattenCallExpressionChain,
   FlattenedCallExpressionOrError,
-} from '../../../package-agnostic-utilities/type-script-ast/flattenIdentifiableCallExpressionChain';
+} from '../../../package-agnostic-utilities/type-script-ast/flattenCallExpressionChain';
 import { isCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isCallExpression';
 import { IdentifiableCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableCallExpression';
 import {
@@ -741,10 +741,12 @@ const getAdaptedEstinant = ({
   });
 
   const inputList = estinantInputOutputList.filter<EngineEstinantInput2>(
-    (inputOrOutput): inputOrOutput is EngineEstinantInput2 => inputOrOutput.isInput,
+    (inputOrOutput): inputOrOutput is EngineEstinantInput2 =>
+      inputOrOutput.isInput,
   );
   const outputList = estinantInputOutputList.filter<EngineEstinantOutput2>(
-    (inputOrOutput): inputOrOutput is EngineEstinantOutput2 => !inputOrOutput.isInput,
+    (inputOrOutput): inputOrOutput is EngineEstinantOutput2 =>
+      !inputOrOutput.isInput,
   );
 
   const instantiationExpression = flattenedCallExpressionList[0];
