@@ -6,7 +6,7 @@ import {
   GenericConstructedInstance,
   ConstructorInputTransformer,
   GenericConstructorInputTransformer,
-} from './constructorFunctionBuilder';
+} from './buildConstructorFunction';
 import {
   NamedConstructorFunctionAssemblerContext,
   NamedConstructorFunctionAssemblerParent,

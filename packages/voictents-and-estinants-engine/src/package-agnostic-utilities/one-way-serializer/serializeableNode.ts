@@ -3,7 +3,7 @@ import {
   CustomDatumTypeName,
   getCustomTypedDatum,
 } from '../typed-datum/customTypedDatum';
-import { TypeScriptObjectInstance } from '../object/object';
+import { TypeScriptObjectInstance } from '../object/typeScriptObject';
 
 export enum SerializeableNodeName {
   Boolean = 'Boolean',

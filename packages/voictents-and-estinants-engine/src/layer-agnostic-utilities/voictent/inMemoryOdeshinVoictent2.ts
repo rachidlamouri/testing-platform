@@ -1,3 +1,9 @@
+/**
+ * @noCanonical
+ *
+ * @todo find a better name for this file
+ */
+
 import { Gepp } from '../../core/types/voictent/gepp';
 import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
 import { HubblepupPelieLanbe2 } from '../../core/types/lanbe/lanbe';

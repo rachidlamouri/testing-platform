@@ -1,10 +1,10 @@
-import { TypeScriptFunction } from '../function/function';
+import { TypeScriptFunction } from '../function/typeScriptFunction';
 import {
   TypeScriptArray,
   TypeScriptMap,
   TypeScriptObjectInstance,
   TypeScriptSet,
-} from '../object/object';
+} from '../object/typeScriptObject';
 import {
   getTypeScriptTypedDatum,
   TypeScriptDatumTypeName,

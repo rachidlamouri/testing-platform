@@ -1,7 +1,7 @@
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 import { assertNotUndefined } from '../../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { ComplexMap } from '../../../../package-agnostic-utilities/datastructure/complexMap';
-import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { BoundedFile } from '../file/boundedFile';
 import { PartitionFact } from '../partition-fact/partitionFact';
 import { FileDependencyPathSegment } from './dependency-path/fileDependencyPathSegment';

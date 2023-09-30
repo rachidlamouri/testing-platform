@@ -1,5 +1,5 @@
 import { serialize } from '../../../package-agnostic-utilities/one-way-serializer/serialize';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import { LintAssertionError } from '../linting/reportFailedLintAssertion';
 import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 

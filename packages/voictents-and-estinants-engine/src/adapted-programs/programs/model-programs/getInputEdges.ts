@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 import {
   EngineEstinant3Voque,
@@ -6,7 +6,7 @@ import {
 } from '../../programmable-units/engine-program/engineEstinant3';
 import {
   ESTINANT_INPUT_2_GEPP,
-  EstinantInput2Voque,
+  EngineEstinantInput2Voque,
 } from '../../programmable-units/engine-program/input-output/engineEstinantInput2';
 import {
   PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
@@ -36,7 +36,7 @@ export const getInputEdges = buildEstinant({
     },
     croard: (engineEstinant) => engineEstinant.hubblepup.locator.zorn,
   })
-  .andFromHubblepupTuple2<EstinantInput2Voque, [OdeshinZorn]>({
+  .andFromHubblepupTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
     gepp: ESTINANT_INPUT_2_GEPP,
     framate: (relationship) => {
       return [relationship.hubblepup.estinantInput.zorn];

@@ -4,7 +4,7 @@ import {
   GenericConstructorInput,
   NamedConstructorFunctionParent,
   buildConstructorFunction,
-} from './constructorFunctionBuilder';
+} from './buildConstructorFunction';
 import { ConstructorFunctionName } from './types';
 
 export type NamedConstructorFunctionAssemblerContext =

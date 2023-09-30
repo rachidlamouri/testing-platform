@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import { builders as b, namedTypes as n } from 'ast-types';
 import * as recast from 'recast';
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   SVG_DOCUMENT_GEPP,
   SvgDocumentVoque,
@@ -38,7 +38,7 @@ import {
   FileFactProps,
 } from './app/browser/factProps';
 import { FileFact2 } from './file/fileFact2';
-import { TypeScriptObject } from '../../../package-agnostic-utilities/object/object';
+import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import { FileDependencyPathSegmentFact } from './dependency/dependency-path/fileDependencyPathSegmentFact';
 import { DirectoryFact2 } from './directory/directoryFact2';
 import { FileDependencyPathNodeFact } from './dependency/dependency-path/fileDependencyPathNodeFact';

@@ -3,7 +3,7 @@ import { splitList } from '../../../package-agnostic-utilities/array/splitList';
 import {
   flattenCallExpressionChain,
   FlattenedCallExpressionOrError,
-} from '../../../package-agnostic-utilities/type-script-ast/flattenIdentifiableCallExpressionChain';
+} from '../../../package-agnostic-utilities/type-script-ast/flattenCallExpressionChain';
 import { isCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isCallExpression';
 import { IdentifiableCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableCallExpression';
 import {
@@ -12,11 +12,11 @@ import {
 } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
 import { IdentifiableMemberExpressionCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isMemberExpressionCallExpression';
 import {
-  isObjectExpressionWithIdentifierProperties,
+  isObjectExpressionWithIdentifiableProperties,
   IdentifiableProperty,
-} from '../../../package-agnostic-utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
+} from '../../../package-agnostic-utilities/type-script-ast/isObjectExpressionWithIdentifiableProperties';
 import { isStringLiteral } from '../../../package-agnostic-utilities/type-script-ast/isStringLiteral';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
   EngineEstinantBuildAddMetadataForSerializationLocator,
@@ -43,22 +43,22 @@ import {
   ReportingEstinantLocator,
 } from '../error/programError';
 import { isIdentifier } from '../../../package-agnostic-utilities/type-script-ast/isIdentifier';
-import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isConstantTypeScriptAsExpression';
+import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isSpecificConstantTypeScriptAsExpression';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImportListVoque,
 } from '../type-script-file/typeScriptFileImportList';
 import {
   ESTINANT_OUTPUT_2_GEPP,
-  EstinantOutput2,
+  EngineEstinantOutput2,
   EstinantOutput2Instance,
-  EstinantOutput2Voque,
+  EngineEstinantOutput2Voque,
 } from './input-output/engineEstinantOutput2';
 import {
   ESTINANT_INPUT_2_GEPP,
-  EstinantInput2,
+  EngineEstinantInput2,
   EstinantInput2Instance,
-  EstinantInput2Voque,
+  EngineEstinantInput2Voque,
 } from './input-output/engineEstinantInput2';
 import { EngineVoqueLocator2Instance } from './engineVoqueLocator2';
 import {
@@ -391,7 +391,7 @@ const getCoreEstinant = ({
         voqueLocator,
       });
     })
-    .filter((input): input is EstinantInput2 => input !== null);
+    .filter((input): input is EngineEstinantInput2 => input !== null);
 
   const outputList = (outputVoqueNameTuple ?? []).map((voqueName) => {
     const voictentName = voqueName.replace(/Voque$/, '');
@@ -702,7 +702,7 @@ const getAdaptedEstinant = ({
   const estinantName = estinantLocator.identifierName;
 
   const estinantInputOutputList = inputOutputCallExpressionList.map<
-    EstinantInput2 | EstinantOutput2
+    EngineEstinantInput2 | EngineEstinantOutput2
   >(({ isInput, typeNode }, index) => {
     // TODO: make the convention where we chop off the suffix more discoverable
     const voqueName = typeNode.typeName.name;
@@ -740,18 +740,20 @@ const getAdaptedEstinant = ({
     });
   });
 
-  const inputList = estinantInputOutputList.filter<EstinantInput2>(
-    (inputOrOutput): inputOrOutput is EstinantInput2 => inputOrOutput.isInput,
+  const inputList = estinantInputOutputList.filter<EngineEstinantInput2>(
+    (inputOrOutput): inputOrOutput is EngineEstinantInput2 =>
+      inputOrOutput.isInput,
   );
-  const outputList = estinantInputOutputList.filter<EstinantOutput2>(
-    (inputOrOutput): inputOrOutput is EstinantOutput2 => !inputOrOutput.isInput,
+  const outputList = estinantInputOutputList.filter<EngineEstinantOutput2>(
+    (inputOrOutput): inputOrOutput is EngineEstinantOutput2 =>
+      !inputOrOutput.isInput,
   );
 
   const instantiationExpression = flattenedCallExpressionList[0];
   const instantiationArgument = isCallExpression(instantiationExpression)
     ? instantiationExpression.arguments[0]
     : null;
-  const estinantNameProperty = isObjectExpressionWithIdentifierProperties(
+  const estinantNameProperty = isObjectExpressionWithIdentifiableProperties(
     instantiationArgument,
   )
     ? instantiationArgument.properties.find(
@@ -862,10 +864,10 @@ export const getEngineEstinant3 = buildEstinant({
   .toHubblepupTuple2<EngineEstinant3Voque>({
     gepp: ENGINE_ESTINANT_3_GEPP,
   })
-  .toHubblepupTuple2<EstinantInput2Voque>({
+  .toHubblepupTuple2<EngineEstinantInput2Voque>({
     gepp: ESTINANT_INPUT_2_GEPP,
   })
-  .toHubblepupTuple2<EstinantOutput2Voque>({
+  .toHubblepupTuple2<EngineEstinantOutput2Voque>({
     gepp: ESTINANT_OUTPUT_2_GEPP,
   })
   .toHubblepupTuple2<EstinantVoqueRelationship2Voque>({

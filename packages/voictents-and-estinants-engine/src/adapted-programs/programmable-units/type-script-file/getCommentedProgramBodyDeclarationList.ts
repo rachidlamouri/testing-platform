@@ -1,5 +1,4 @@
-import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
   ParsedTypeScriptFileVoque,
@@ -17,10 +16,18 @@ import {
   FileParsedCommentGroupVoque,
 } from './fileParsedCommentGroup';
 import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
+import { shishKebab } from '../../../package-agnostic-utilities/case/shishKebab';
 
 const allowedDerivativePrefixSet = [
   // keep as multiline list
   'generic',
+] as const;
+
+const allowedDerivativeSuffixSet = [
+  // keep as multiline list
+  '2',
+  '3',
+  'pelue',
 ] as const;
 
 /**
@@ -59,15 +66,18 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
     gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   })
   .onPinbe((parsedTypeScriptFile, [typescriptFile], [commentGroup]) => {
-    const kebabExtensionlessName = Case.kebab(
+    const normalizedFileName = shishKebab(
       typescriptFile.filePath.name.extensionless,
     );
 
-    const allowedDerivativeNameSet = new Set(
-      allowedDerivativePrefixSet.map((prefix) => {
-        return `${prefix}-${kebabExtensionlessName}`;
+    const allowedDerivativeNameSet = new Set([
+      ...allowedDerivativePrefixSet.map((prefix) => {
+        return `${prefix}-${normalizedFileName}`;
       }),
-    );
+      ...allowedDerivativeSuffixSet.map((suffix) => {
+        return `${normalizedFileName}-${suffix}`;
+      }),
+    ]);
 
     const commentList = commentGroup.list;
 
@@ -91,21 +101,27 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
         const identifiableNode =
           getIdentifiableProgramBodyStatementNode(programBodyStatement);
 
-        const kebabIdentifierName =
+        const hasCanonicalTag =
+          comment?.typeName === CategorizedCommentTypeName.Descriptive &&
+          comment.tagIdSet.has('canonical');
+
+        const normalizedIdentifierName =
           identifiableNode !== null
-            ? Case.kebab(identifiableNode.id.name)
+            ? shishKebab(identifiableNode.id.name)
             : null;
 
         const isCanonical =
-          kebabIdentifierName !== null &&
-          kebabIdentifierName === kebabExtensionlessName;
+          hasCanonicalTag ||
+          (normalizedIdentifierName !== null &&
+            normalizedIdentifierName === normalizedFileName);
 
         const isDerivative =
           !isCanonical &&
-          kebabIdentifierName !== null &&
-          allowedDerivativeNameSet.has(kebabIdentifierName);
+          normalizedIdentifierName !== null &&
+          allowedDerivativeNameSet.has(normalizedIdentifierName);
 
         return new CommentedProgramBodyDeclarationInstance({
+          hasCanonicalTag,
           isCanonical,
           isDerivative,
           comment,

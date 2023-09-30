@@ -1,6 +1,6 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
   EngineProgramFile,
@@ -9,9 +9,9 @@ import {
 import {
   IdentifiableProperty,
   ObjectExpressionWithIdentifierProperties,
-  isObjectExpressionWithIdentifierProperties,
+  isObjectExpressionWithIdentifiableProperties,
   isSepcificIdentifiableProperty,
-} from '../../../package-agnostic-utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
+} from '../../../package-agnostic-utilities/type-script-ast/isObjectExpressionWithIdentifiableProperties';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImport,
@@ -44,7 +44,7 @@ import { buildAddMetadataForSerialization } from '../../../layer-agnostic-utilit
 import { isSpecificIdentifiableCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isCallExpression';
 import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../../package-agnostic-utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 import { isIdentifiableTypeScriptTypeReference } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
-import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isConstantTypeScriptAsExpression';
+import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isSpecificConstantTypeScriptAsExpression';
 import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,
@@ -101,7 +101,7 @@ const isEngineCallExpressionStatement = (
   isSpecificExpressionStatement(node, AST_NODE_TYPES.CallExpression) &&
   node.expression.callee.type === AST_NODE_TYPES.Identifier &&
   node.expression.callee.name === engineFunctionIdentifier &&
-  isObjectExpressionWithIdentifierProperties(node.expression.arguments[0]);
+  isObjectExpressionWithIdentifiableProperties(node.expression.arguments[0]);
 
 type EngineCallDeclaration = CommentedProgramBodyDeclaration<
   EngineCallExpressionStatement,

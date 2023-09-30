@@ -12,7 +12,7 @@ import { RootDirectedGraphElement2Zorn } from '../../graph-visualization/directe
 import { EngineEstinantLocator2 } from '../engineEstinantLocator2';
 import {
   EngineEstinantInput2Zorn,
-  EstinantInput2,
+  EngineEstinantInput2,
 } from './engineEstinantInput2';
 
 const PROGRAM_ESTINANT_INPUT_RELATIONSHIP_ZORN_TEMPLATE = [
@@ -28,7 +28,7 @@ class ProgramEstinantInputRelationshipZorn extends Zorn2<ProgramEstinantInputRel
 }
 
 type BaseProgramEstinantInputRelationship = {
-  estinantInput: EstinantInput2;
+  estinantInput: EngineEstinantInput2;
   rootGraphLocator: RootGraphLocator;
   estinantLocator: EngineEstinantLocator2;
 };

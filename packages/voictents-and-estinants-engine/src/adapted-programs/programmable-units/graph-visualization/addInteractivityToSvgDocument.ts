@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import { HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
 import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
 import {

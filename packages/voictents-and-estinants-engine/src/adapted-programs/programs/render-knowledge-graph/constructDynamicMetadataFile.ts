@@ -1,6 +1,6 @@
 import { namedTypes as n, builders as b } from 'ast-types';
 import * as recast from 'recast';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   CustomDatumTypeName,
   getCustomTypedDatum,
@@ -8,7 +8,7 @@ import {
 import {
   TypeScriptArray,
   TypeScriptObjectInstance,
-} from '../../../package-agnostic-utilities/object/object';
+} from '../../../package-agnostic-utilities/object/typeScriptObject';
 import {
   OUTPUT_FILE_GEPP,
   OutputFile,

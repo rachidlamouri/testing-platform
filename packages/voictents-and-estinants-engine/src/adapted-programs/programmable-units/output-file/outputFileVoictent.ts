@@ -4,7 +4,7 @@ import {
   KnownFileExtensionSuffixIdentifier,
   getFileExtensionSuffixIdentifier,
 } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractInMemoryVoictent2';
+import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractAsymmetricInMemoryVoictent2';
 import { OUTPUT_FILE_GEPP, OutputFile, OutputFileVoque } from './outputFile';
 
 type OutputFileVoictentConstructorInput = {

@@ -1,4 +1,4 @@
-import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { AdaptedJsdocLikeBlockComment } from '../adapted/adaptedJsdocLikeBlockComment';
 import { CommentZorn } from '../commentZorn';
 import { CategorizedCommentTypeName } from './categorizedCommentTypeName';
@@ -18,6 +18,7 @@ export type DescriptiveBlockComment = {
   zorn: CommentZorn;
   description: string;
   tagTuple: TagWithName[];
+  tagIdSet: Set<string>;
   startingLineNumber: number;
   endingLineNumber: number;
 };
@@ -31,6 +32,7 @@ export const { DescriptiveBlockCommentInstance } =
       'zorn',
       'description',
       'tagTuple',
+      'tagIdSet',
       'startingLineNumber',
       'endingLineNumber',
     ] as const satisfies readonly (keyof DescriptiveBlockComment)[],
@@ -49,18 +51,27 @@ export const { DescriptiveBlockCommentInstance } =
       transformInput: (input) => {
         const { adaptedComment, description } = input;
 
-        const tagTuple = adaptedComment.parsedBlock.tags.map((tag) => {
+        const tagList = adaptedComment.parsedBlock.tags;
+
+        const tagTuple = tagList.map((tag) => {
           return {
             tag: tag.tag,
             name: tag.name,
           };
         });
 
+        const tagIdSet = new Set(
+          tagList.map((tag) => {
+            return tag.tag;
+          }),
+        );
+
         return {
           typeName: CategorizedCommentTypeName.Descriptive,
           zorn: adaptedComment.zorn,
           description,
           tagTuple,
+          tagIdSet,
           startingLineNumber: adaptedComment.startingLineNumber,
           endingLineNumber: adaptedComment.endingLineNumber,
         } satisfies DescriptiveBlockComment;

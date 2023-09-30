@@ -26,7 +26,7 @@ type EstinantOutput2Prototype = {
 /**
  * The model of a transform output
  */
-export type EstinantOutput2 = ObjectWithPrototype<
+export type EngineEstinantOutput2 = ObjectWithPrototype<
   BaseEstinantOutput2,
   EstinantOutput2Prototype
 >;
@@ -49,7 +49,7 @@ export const ESTINANT_OUTPUT_2_GEPP = 'estinant-output-2';
 
 type EstinantOutput2Gepp = typeof ESTINANT_OUTPUT_2_GEPP;
 
-export type EstinantOutput2Voque = InMemoryOdeshin2ListVoque<
+export type EngineEstinantOutput2Voque = InMemoryOdeshin2ListVoque<
   EstinantOutput2Gepp,
-  EstinantOutput2
+  EngineEstinantOutput2
 >;

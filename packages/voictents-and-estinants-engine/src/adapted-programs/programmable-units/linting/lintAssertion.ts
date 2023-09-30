@@ -3,7 +3,7 @@ import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
-import { TypeScriptObject } from '../../../package-agnostic-utilities/object/object';
+import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import {
   MessageAccessorInputFromAccessor,
   RuleZorn,

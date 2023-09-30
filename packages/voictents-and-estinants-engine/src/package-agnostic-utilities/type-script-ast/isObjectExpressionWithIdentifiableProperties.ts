@@ -23,7 +23,7 @@ export const isSepcificIdentifiableProperty = (
   return isIdentifiableProperty(node) && node.key.name === identifierName;
 };
 
-export const isObjectExpressionWithIdentifierProperties = (
+export const isObjectExpressionWithIdentifiableProperties = (
   node: TypeScriptNode,
 ): node is ObjectExpressionWithIdentifierProperties =>
   isNode(node) &&

@@ -1,4 +1,4 @@
-import { GenericPropertyNameTuple } from './constructorFunctionBuilder';
+import { GenericPropertyNameTuple } from './buildConstructorFunction';
 import {
   NamedConstructorFunctionInstanceTypeBuilderParent,
   buildNamedConstructorFunctionInstanceTypeBuilder,

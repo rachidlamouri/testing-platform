@@ -2,8 +2,8 @@ import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import { TypeScriptNode, isNode } from './isNode';
 import {
   ObjectExpressionWithIdentifierProperties,
-  isObjectExpressionWithIdentifierProperties,
-} from './isObjectLiteralExpressionWithIdentifierProperties';
+  isObjectExpressionWithIdentifiableProperties,
+} from './isObjectExpressionWithIdentifiableProperties';
 import {
   TypeScriptTypeParameterInstantiationWithSpecificParameterTuple,
   TypeScriptTypeParameterNodeTypeTuple,
@@ -24,7 +24,7 @@ export const isNewExpressionWithObjectExpressionArgument = (
 ): node is NewExpressionWithObjectExpressionArgument => {
   return (
     isNewExpression(node) &&
-    isObjectExpressionWithIdentifierProperties(node.arguments[0])
+    isObjectExpressionWithIdentifiableProperties(node.arguments[0])
   );
 };
 

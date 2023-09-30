@@ -17,7 +17,7 @@ import { parseTypeScriptFile } from '../../programmable-units/type-script-file/p
 import { getRootDirectedGraph } from '../../programmable-units/type-script-file-relationships/graph-element/getRootDirectedGraph';
 import { getGraphMetadataById } from '../../programmable-units/type-script-file-relationships/getGraphMetadataById';
 import { getRootDirectory } from '../../programmable-units/type-script-file-relationships/getRootDirectory';
-import { getDirectoryInstanceIdByDirectoryPath } from '../../programmable-units/type-script-file-relationships/getDirectoryInstanceIdByFilePath';
+import { getDirectoryInstanceIdByDirectoryPath } from '../../programmable-units/type-script-file-relationships/getDirectoryInstanceIdByDirectoryPath';
 import { getExternalModuleCollection } from '../../programmable-units/type-script-file-relationships/graph-element/getExternalModuleCollection';
 import {
   BOUNDARY_CONFIGURATION_GEPP,

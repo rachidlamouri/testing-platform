@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
   EngineEstinantLocator2,

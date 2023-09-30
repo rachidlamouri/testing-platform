@@ -1,11 +1,12 @@
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
-import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericZorn2Template,
   Zorn2,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { CategorizedComment } from './comment/categorized/categorizedComment';
+import { DescriptiveBlockComment } from './comment/categorized/descriptiveBlockComment';
 
 const FILE_PARSED_COMMENT_GROUP_ZORN_TEMPLATE = [
   'filePath',
@@ -21,6 +22,7 @@ class FileParsedCommentGroupZorn extends Zorn2<FileParsedCommentGroupZornTemplat
 type FileParsedCommentGroupConstructorInput = {
   filePath: string;
   list: CategorizedComment[];
+  fileComment: DescriptiveBlockComment | null;
 };
 
 /**
@@ -43,6 +45,7 @@ export const { FileParsedCommentGroupInstance } = buildNamedConstructorFunction(
       'zorn',
       'filePath',
       'list',
+      'fileComment',
     ] as const satisfies readonly (keyof FileParsedCommentGroup)[],
   },
 )

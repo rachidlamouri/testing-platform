@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
   PartitionedBoundaryListTrie,

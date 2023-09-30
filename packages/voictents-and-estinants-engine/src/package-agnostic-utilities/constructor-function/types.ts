@@ -1,5 +1,9 @@
+/**
+ * @noCanonical
+ */
+
 import { UnsafeTuple } from '../type/tuple';
-import { TypeScriptObjectInstance } from '../object/object';
+import { TypeScriptObjectInstance } from '../object/typeScriptObject';
 
 export type ConstructorFunctionName = string;
 

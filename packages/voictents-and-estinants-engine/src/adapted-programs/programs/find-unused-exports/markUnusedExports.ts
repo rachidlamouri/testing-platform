@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   GenericLintAssertion,
   LINT_ASSERTION_GEPP,

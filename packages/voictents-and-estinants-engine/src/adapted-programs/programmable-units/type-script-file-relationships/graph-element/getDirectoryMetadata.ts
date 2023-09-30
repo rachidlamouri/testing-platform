@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
 import { DIRECTORY_GEPP, DirectoryVoque } from '../../file/directory';
 import { GraphLikeStyle } from '../../graph-visualization/directed-graph/attributeByKeyGSC';

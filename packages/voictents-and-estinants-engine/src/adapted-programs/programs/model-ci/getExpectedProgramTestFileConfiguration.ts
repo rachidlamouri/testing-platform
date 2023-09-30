@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   FileExistenceAsserterInputVoque,
   FILE_EXISTENCE_ASSERTER_INPUT_GEPP,
