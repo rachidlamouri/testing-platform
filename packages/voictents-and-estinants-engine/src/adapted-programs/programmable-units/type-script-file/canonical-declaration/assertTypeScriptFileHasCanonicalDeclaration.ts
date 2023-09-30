@@ -1,3 +1,4 @@
+import { posix } from 'path';
 import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   LINT_ASSERTION_GEPP,
@@ -8,42 +9,46 @@ import { TypedRule } from '../../linting/rule';
 import { EstinantSourceInstance } from '../../linting/source/estinantSource';
 import { FileSourceInstance } from '../../linting/source/fileSource';
 import {
+  CanonicalDeclarationLintMetadata,
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   FileCommentedProgramBodyDeclarationGroupVoque,
 } from '../fileCommentedProgramBodyDeclarationGroup';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
 import { shishKebab } from '../../../../package-agnostic-utilities/case/shishKebab';
+import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 
 const ESTINANT_NAME = 'assertTypeScriptFileHasCanonicalDeclaration' as const;
 
 type TypeScriptFileHasCanonicalDeclarationMessageContext = {
   filePath: string;
-  hasMultipleCanonicalDeclarations: boolean;
-  hasMultipleDerivativeDeclarations: boolean;
+  canonicalDeclarationLintMetadata: CanonicalDeclarationLintMetadata;
 };
 export const typeScriptFileHasCanonicalDeclarationRule =
   new TypedRule<TypeScriptFileHasCanonicalDeclarationMessageContext>({
     name: 'typescript-file-has-canonical-declaration',
     source: new EstinantSourceInstance({
-      filePath: __filename,
+      filePath: posix.relative('', __filename),
       estinantName: ESTINANT_NAME,
     }),
     description:
       'All TypeScript files must have at least one top level declaration whose name matches the file name regardless of casing',
     getErrorMessage: ({
       filePath,
-      hasMultipleCanonicalDeclarations,
-      hasMultipleDerivativeDeclarations,
+      canonicalDeclarationLintMetadata,
     }): string => {
-      if (hasMultipleCanonicalDeclarations) {
-        return `File ${filePath} has more than on canonical declaration. Remediation for this scenario is currently not handled.`;
-      }
+      const { badStateReason, remediationOptionList } =
+        canonicalDeclarationLintMetadata;
 
-      if (hasMultipleDerivativeDeclarations) {
-        return `File ${filePath} does not have a canonical declaration, but has multiple derivative declarations. Remediation for this scenario is currently not handled.`;
-      }
+      assertNotNull(badStateReason);
+      assertNotNull(remediationOptionList);
 
-      return `File ${filePath} does not have a canonical declaration, nor any derivative declarations. Create a top level declaration whose name corresponds to the file name regardless of casing.`;
+      return [
+        `File ${filePath} does not have exactly one canonical declaration. ${badStateReason}`,
+        '  Remediation Options:',
+        ...remediationOptionList.map((option) => {
+          return `    - ${option}`;
+        }),
+      ].join('\n');
     },
   });
 
@@ -69,10 +74,8 @@ export const assertTypeScriptFileHasCanonicalDeclaration = buildEstinant({
       isValid: group.canonicalDeclaration !== null,
       errorMessageContext: {
         filePath: group.filePath,
-        hasMultipleCanonicalDeclarations:
-          group.canonicalDeclarationList.length > 1,
-        hasMultipleDerivativeDeclarations:
-          group.derivativeDeclarationList.length > 1,
+        canonicalDeclarationLintMetadata:
+          group.canonicalDeclarationLintMetadata,
       },
       context: {
         group,

@@ -11,9 +11,20 @@ import {
   IdentifiableCommentedProgramBodyDeclaration,
   isIdentifiableCommentedProgramBodyDeclaration,
 } from './commentedProgramBodyDeclaration';
+import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { hasOneElement } from '../../../package-agnostic-utilities/array/hasOneElement';
-import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 import { CommentTagId } from './comment/commentTagId';
+
+enum CanonicalDeclarationState {
+  InvalidExplicitCanonicalDeclaration = 'InvalidExplicitCanonicalDeclaration',
+  UseExplicitCanonicalDeclaration = 'UseExplicitCanonicalDeclaration',
+  UseImplicitCanonicalDeclaration = 'UseImplicitCanonicalDeclaration',
+  TooManyExplicitOptions = 'TooManyExplicitOptions',
+  TooManyImplicitOptions = 'TooManyImplicitOptions',
+  UseImplicitCanonicalVariantDeclaration = 'UseImplicitCanonicalVariantDeclaration',
+  TooManyImplicitVariantOptions = 'TooManyImplicitVariantOptions',
+  MissingCanonicalDeclaration = 'MissingCanonicalDeclaration',
+}
 
 const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE = [
   'filePath',
@@ -75,6 +86,12 @@ class IdentifiableCommentedProgramBodyDeclarationListByName extends Map<
   }
 }
 
+export type CanonicalDeclarationLintMetadata = {
+  state: CanonicalDeclarationState;
+  badStateReason: string | null;
+  remediationOptionList: string[] | null;
+};
+
 /**
  * The set of top level declaration AST nodes that may have a comment and may
  * have an identifiable node
@@ -96,6 +113,7 @@ export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
       canonicalDeclarationList: IdentifiableCommentedProgramBodyDeclaration[];
       derivativeDeclarationList: IdentifiableCommentedProgramBodyDeclaration[];
       canonicalDeclaration: IdentifiableCommentedProgramBodyDeclaration | null;
+      canonicalDeclarationLintMetadata: CanonicalDeclarationLintMetadata;
     },
   ]
 >;
@@ -114,6 +132,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       'canonicalDeclarationList',
       'derivativeDeclarationList',
       'canonicalDeclaration',
+      'canonicalDeclarationLintMetadata',
     ] as const satisfies readonly (keyof FileCommentedProgramBodyDeclarationGroup)[],
   })
     .withTypes<
@@ -145,20 +164,6 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
             }),
         );
 
-        const explicitCanonicalDeclarationList = list.filter(
-          (
-            declaration,
-          ): declaration is IdentifiableCommentedProgramBodyDeclaration => {
-            return (
-              declaration.comment?.typeName ===
-                CategorizedCommentTypeName.Descriptive &&
-              declaration.comment.tagIdSet.has(
-                CommentTagId.ExplicitCanonicalDeclaration,
-              )
-            );
-          },
-        );
-
         const declarationListByIdentifier =
           new IdentifiableCommentedProgramBodyDeclarationListByName(
             list
@@ -171,36 +176,164 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
               }),
           );
 
+        const explicitCanonicalDeclarationList = list.filter(
+          (
+            declaration,
+          ): declaration is IdentifiableCommentedProgramBodyDeclaration => {
+            return (
+              declaration.isExplicitlyCanonical &&
+              declaration.identifiableNode !== null
+            );
+          },
+        );
+
         const implicitCanonicalDeclarationList = list.filter(
           (
             declaration,
           ): declaration is IdentifiableCommentedProgramBodyDeclaration => {
-            return declaration.isCanonical;
+            return declaration.isImplicitlyCanonical;
           },
         );
 
-        const derivativeDeclarationList = list.filter(
+        const implicitCanonicalVariantDeclarationList = list.filter(
           (
             declaration,
           ): declaration is IdentifiableCommentedProgramBodyDeclaration => {
-            return declaration.isDerivative;
+            return declaration.isImplicitCanonicalVariant;
           },
         );
 
-        // TODO: handle the case when a file has two canonical declarations or two derivative declarations
-        let canonicalDeclaration: IdentifiableCommentedProgramBodyDeclaration | null;
-        if (hasOneElement(explicitCanonicalDeclarationList)) {
-          [canonicalDeclaration] = explicitCanonicalDeclarationList;
-        } else if (hasOneElement(implicitCanonicalDeclarationList)) {
-          [canonicalDeclaration] = implicitCanonicalDeclarationList;
-        } else if (
-          implicitCanonicalDeclarationList.length === 0 &&
-          hasOneElement(derivativeDeclarationList)
+        const hasExplicitCanonicalDeclarationOption =
+          explicitCanonicalDeclarationList.length > 0;
+
+        const theExplicitCanonicalDeclaration = hasOneElement(
+          explicitCanonicalDeclarationList,
+        )
+          ? explicitCanonicalDeclarationList[0]
+          : null;
+
+        const hasMultipleExplicitCanonicalDeclarationOptions =
+          explicitCanonicalDeclarationList.length > 1;
+
+        const hasImplicitCanonicalDeclarationOption =
+          implicitCanonicalDeclarationList.length > 0;
+
+        const hasMultipleImplicitCanonicalDeclarationOptions =
+          implicitCanonicalDeclarationList.length > 1;
+
+        const hasExactlyOneImplicitCanonicalDeclarationOption =
+          hasImplicitCanonicalDeclarationOption &&
+          !hasMultipleImplicitCanonicalDeclarationOptions;
+
+        const hasImplicitCanonicalVariantDeclarationOption =
+          implicitCanonicalVariantDeclarationList.length > 0;
+
+        const hasMultipleImplicitCanonicalVariantDeclarationOptions =
+          implicitCanonicalVariantDeclarationList.length > 1;
+
+        const hasExactlyOneImplicitCanonicalVariantDeclarationOption =
+          hasImplicitCanonicalVariantDeclarationOption &&
+          !hasMultipleImplicitCanonicalVariantDeclarationOptions;
+
+        let state: CanonicalDeclarationState;
+        let badStateReason: string | null;
+        let remediationOptionList: string[] | null;
+        if (
+          theExplicitCanonicalDeclaration !== null &&
+          // note: this file is not responsible for the case where there the explicit declaration is the only implicit declaration. It's redundant, but does not change the canonical declaration
+          (!hasImplicitCanonicalDeclarationOption ||
+            theExplicitCanonicalDeclaration.isImplicitlyCanonical)
         ) {
-          [canonicalDeclaration] = derivativeDeclarationList;
+          state = CanonicalDeclarationState.UseExplicitCanonicalDeclaration;
+          badStateReason = null;
+          remediationOptionList = null;
+        } else if (
+          theExplicitCanonicalDeclaration !== null &&
+          !theExplicitCanonicalDeclaration.isImplicitlyCanonical &&
+          hasImplicitCanonicalDeclarationOption
+        ) {
+          state = CanonicalDeclarationState.InvalidExplicitCanonicalDeclaration;
+
+          badStateReason =
+            'The explicit canonical declaration cannot be a non-implicit canonical declaration when there are implicit canonical declarations available.';
+          remediationOptionList = hasMultipleImplicitCanonicalDeclarationOptions
+            ? [
+                `Designate one of the implicit canonical declarations as the canonical declaration with an @${CommentTagId.ExplicitCanonicalDeclaration} tag.`,
+              ]
+            : [
+                `Remove all @${CommentTagId.ExplicitCanonicalDeclaration} tag, since there is an implicit canonical declaration.`,
+              ];
+        } else if (
+          hasExactlyOneImplicitCanonicalDeclarationOption &&
+          !hasExplicitCanonicalDeclarationOption
+        ) {
+          state = CanonicalDeclarationState.UseImplicitCanonicalDeclaration;
+          badStateReason = null;
+          remediationOptionList = null;
+        } else if (
+          hasMultipleExplicitCanonicalDeclarationOptions &&
+          !hasExactlyOneImplicitCanonicalDeclarationOption
+        ) {
+          state = CanonicalDeclarationState.TooManyExplicitOptions;
+          badStateReason = `There can only be one explicit canonical declaration if there are no implicit canonical declarations.`;
+          remediationOptionList = [
+            `Remove @${CommentTagId.ExplicitCanonicalDeclaration} tags until there is only one.`,
+          ];
+        } else if (
+          hasMultipleImplicitCanonicalDeclarationOptions &&
+          !hasExplicitCanonicalDeclarationOption
+        ) {
+          state = CanonicalDeclarationState.TooManyImplicitOptions;
+          badStateReason = `There can only be one implicit canonical declaration.`;
+          remediationOptionList = [
+            `Use the @${CommentTagId.ExplicitCanonicalDeclaration} tag to designate the canonical declaration.`,
+          ];
+        } else if (hasExactlyOneImplicitCanonicalVariantDeclarationOption) {
+          state =
+            CanonicalDeclarationState.UseImplicitCanonicalVariantDeclaration;
+
+          badStateReason = null;
+          remediationOptionList = null;
+        } else if (hasMultipleImplicitCanonicalVariantDeclarationOptions) {
+          state = CanonicalDeclarationState.TooManyImplicitVariantOptions;
+          badStateReason =
+            'There is more than one implicit canonical variant declaration.';
+          remediationOptionList = [
+            `Use an @${CommentTagId.ExplicitCanonicalDeclaration} tag to designate the canonical declaration`,
+            'Add a canonical declaration',
+          ];
         } else {
-          canonicalDeclaration = null;
+          state = CanonicalDeclarationState.MissingCanonicalDeclaration;
+          badStateReason = 'File is missing a canonical declaration';
+          remediationOptionList = [
+            'Add a canonical declaration',
+            `Designate a top level declaration as the canonical declaration with the @${CommentTagId.ExplicitCanonicalDeclaration} tag.`,
+            `Add the @${CommentTagId.CanonicalDeclarationExemption} tag to the file comment`,
+          ];
         }
+
+        const canonicalDeclaration = (():
+          | IdentifiableCommentedProgramBodyDeclaration
+          | null
+          | undefined => {
+          switch (state) {
+            case CanonicalDeclarationState.UseExplicitCanonicalDeclaration:
+              return explicitCanonicalDeclarationList[0];
+            case CanonicalDeclarationState.UseImplicitCanonicalDeclaration:
+              return implicitCanonicalDeclarationList[0];
+            case CanonicalDeclarationState.UseImplicitCanonicalVariantDeclaration:
+              return implicitCanonicalVariantDeclarationList[0];
+            case CanonicalDeclarationState.InvalidExplicitCanonicalDeclaration:
+            case CanonicalDeclarationState.TooManyExplicitOptions:
+            case CanonicalDeclarationState.TooManyImplicitOptions:
+            case CanonicalDeclarationState.TooManyImplicitVariantOptions:
+            case CanonicalDeclarationState.MissingCanonicalDeclaration:
+              return null;
+          }
+        })();
+
+        // note: if this fails, then the "state" logic above is wrong
+        assertNotUndefined(canonicalDeclaration);
 
         return {
           zorn,
@@ -209,8 +342,13 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
           declarationByIdentifier,
           declarationListByIdentifier,
           canonicalDeclarationList: implicitCanonicalDeclarationList,
-          derivativeDeclarationList,
+          derivativeDeclarationList: implicitCanonicalVariantDeclarationList,
           canonicalDeclaration,
+          canonicalDeclarationLintMetadata: {
+            state,
+            badStateReason,
+            remediationOptionList,
+          },
         } satisfies FileCommentedProgramBodyDeclarationGroup;
       },
     })
