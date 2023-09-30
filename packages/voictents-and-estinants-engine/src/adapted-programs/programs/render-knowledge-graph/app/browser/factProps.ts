@@ -1,5 +1,5 @@
 /**
- * @noCanonical
+ * @noCanonicalDeclaration
  */
 
 import { PropsWithChildren } from 'react';

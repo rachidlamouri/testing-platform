@@ -1,5 +1,5 @@
 /**
- * @noCanonical
+ * @noCanonicalDeclaration
  */
 
 export type ScaffoldeeFileMetadata = {

@@ -1,5 +1,5 @@
 /**
- * @noCanonical
+ * @noCanonicalDeclaration
  *
  * @todo find a better name for this file
  */

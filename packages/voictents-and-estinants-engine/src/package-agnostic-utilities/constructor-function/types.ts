@@ -1,5 +1,5 @@
 /**
- * @noCanonical
+ * @noCanonicalDeclaration
  */
 
 import { UnsafeTuple } from '../type/tuple';

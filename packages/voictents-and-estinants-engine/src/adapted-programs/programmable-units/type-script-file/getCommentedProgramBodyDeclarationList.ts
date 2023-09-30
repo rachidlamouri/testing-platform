@@ -17,13 +17,14 @@ import {
 } from './fileParsedCommentGroup';
 import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 import { shishKebab } from '../../../package-agnostic-utilities/case/shishKebab';
+import { CommentTagId } from './comment/commentTagId';
 
-const allowedDerivativePrefixSet = [
+const allowedCanonicalVariationDeclarationPrefixSet = [
   // keep as multiline list
   'generic',
 ] as const;
 
-const allowedDerivativeSuffixSet = [
+const allowedCanonicalVariationDeclarationSuffixSet = [
   // keep as multiline list
   '2',
   '3',
@@ -71,10 +72,10 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
     );
 
     const allowedDerivativeNameSet = new Set([
-      ...allowedDerivativePrefixSet.map((prefix) => {
+      ...allowedCanonicalVariationDeclarationPrefixSet.map((prefix) => {
         return `${prefix}-${normalizedFileName}`;
       }),
-      ...allowedDerivativeSuffixSet.map((suffix) => {
+      ...allowedCanonicalVariationDeclarationSuffixSet.map((suffix) => {
         return `${normalizedFileName}-${suffix}`;
       }),
     ]);
@@ -101,29 +102,26 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
         const identifiableNode =
           getIdentifiableProgramBodyStatementNode(programBodyStatement);
 
-        const hasCanonicalTag =
-          comment?.typeName === CategorizedCommentTypeName.Descriptive &&
-          comment.tagIdSet.has('canonical');
-
         const normalizedIdentifierName =
           identifiableNode !== null
             ? shishKebab(identifiableNode.id.name)
             : null;
 
-        const isCanonical =
-          hasCanonicalTag ||
-          (normalizedIdentifierName !== null &&
-            normalizedIdentifierName === normalizedFileName);
+        const isImplicitlyCanonical =
+          normalizedIdentifierName === normalizedFileName;
 
-        const isDerivative =
-          !isCanonical &&
+        const isImplicitCanonicalVariant =
           normalizedIdentifierName !== null &&
           allowedDerivativeNameSet.has(normalizedIdentifierName);
 
+        const isExplicitlyCanonical =
+          comment?.typeName === CategorizedCommentTypeName.Descriptive &&
+          comment.tagIdSet.has(CommentTagId.ExplicitCanonicalDeclaration);
+
         return new CommentedProgramBodyDeclarationInstance({
-          hasCanonicalTag,
-          isCanonical,
-          isDerivative,
+          isImplicitlyCanonical,
+          isImplicitCanonicalVariant,
+          isExplicitlyCanonical,
           comment,
           commentText,
           bodyStatement: programBodyStatement,
