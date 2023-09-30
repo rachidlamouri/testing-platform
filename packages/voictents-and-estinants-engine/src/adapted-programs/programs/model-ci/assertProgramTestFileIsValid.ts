@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { posix } from 'path';
 import chalk from 'chalk';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   GenericLintAssertion,
   LINT_ASSERTION_GEPP,

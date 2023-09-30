@@ -1,6 +1,6 @@
 import fs from 'fs';
 import assert from 'assert';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   BASH_FILE_GEPP,
   BashFileVoque,

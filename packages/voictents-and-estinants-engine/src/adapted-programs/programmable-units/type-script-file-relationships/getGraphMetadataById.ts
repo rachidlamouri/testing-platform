@@ -1,6 +1,6 @@
 import { posix } from 'path';
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   TYPE_SCRIPT_FILE_GEPP,
   TypeScriptFileVoque,

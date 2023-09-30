@@ -3,7 +3,7 @@ import {
   getNestedFileSystemNodeMetadataList,
 } from '../../../package-agnostic-utilities/file/getNestedFilePaths';
 import { splitList } from '../../../package-agnostic-utilities/array/splitList';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import { DIRECTORY_GEPP, DirectoryInstance, DirectoryVoque } from './directory';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,

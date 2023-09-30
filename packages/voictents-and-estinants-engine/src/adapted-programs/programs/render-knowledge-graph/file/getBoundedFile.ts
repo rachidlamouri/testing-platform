@@ -1,6 +1,6 @@
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
-import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
 import {
   FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,

@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 import {
   ESTINANT_INPUT_2_GEPP,

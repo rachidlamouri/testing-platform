@@ -1,5 +1,5 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   EngineEstinant3Voque,
   ENGINE_ESTINANT_3_GEPP,

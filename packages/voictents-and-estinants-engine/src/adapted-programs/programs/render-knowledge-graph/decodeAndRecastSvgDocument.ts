@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import { builders as b, namedTypes as n } from 'ast-types';
 import * as recast from 'recast';
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   SVG_DOCUMENT_GEPP,
   SvgDocumentVoque,

@@ -1,6 +1,6 @@
 import * as recast from 'recast';
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,

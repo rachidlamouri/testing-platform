@@ -1,5 +1,5 @@
 import { NonEmptyTuple } from '../../../../package-agnostic-utilities/type/tuple';
-import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,

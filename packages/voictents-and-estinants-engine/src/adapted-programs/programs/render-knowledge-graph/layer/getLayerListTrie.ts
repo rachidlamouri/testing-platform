@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
 import { LAYER_GEPP, LayerVoque } from './layer';
 import {
   LAYER_LIST_TRIE_GEPP,

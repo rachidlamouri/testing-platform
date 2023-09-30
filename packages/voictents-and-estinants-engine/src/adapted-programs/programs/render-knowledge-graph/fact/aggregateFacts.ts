@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
   FileDependencyPathNodeFactVoque,

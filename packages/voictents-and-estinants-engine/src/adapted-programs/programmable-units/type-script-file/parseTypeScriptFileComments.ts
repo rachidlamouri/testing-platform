@@ -3,7 +3,7 @@ import {
   TSESTree,
 } from '@typescript-eslint/typescript-estree';
 import * as commentParser from 'comment-parser';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
   ParsedTypeScriptFileVoque,

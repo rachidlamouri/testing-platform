@@ -16,7 +16,7 @@ import {
   IdentifiableProperty,
 } from '../../../package-agnostic-utilities/type-script-ast/isObjectLiteralExpressionWithIdentifierProperties';
 import { isStringLiteral } from '../../../package-agnostic-utilities/type-script-ast/isStringLiteral';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
   EngineEstinantBuildAddMetadataForSerializationLocator,

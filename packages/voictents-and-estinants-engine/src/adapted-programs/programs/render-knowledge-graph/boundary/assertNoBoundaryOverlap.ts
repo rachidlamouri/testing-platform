@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,

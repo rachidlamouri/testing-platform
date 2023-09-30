@@ -1,6 +1,6 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
   EngineProgramFile,

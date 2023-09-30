@@ -7,7 +7,7 @@ import {
 } from '../../adapted-programs/programmable-units/linting/lintAssertion';
 import { TypedRule } from '../../adapted-programs/programmable-units/linting/rule';
 import { EstinantSourceInstance } from '../../adapted-programs/programmable-units/linting/source/estinantSource';
-import { buildEstinant } from '../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../adapter/estinant-builder/buildEstinant';
 import {
   FILE_EXISTENCE_ASSERTER_INPUT_GEPP,
   FileExistenceAsserterInputVoque,

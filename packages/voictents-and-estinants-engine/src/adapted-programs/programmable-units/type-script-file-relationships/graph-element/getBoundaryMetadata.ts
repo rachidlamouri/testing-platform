@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/estinantBuilder';
+import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
 import { GraphLikeStyle } from '../../graph-visualization/directed-graph/attributeByKeyGSC';
 import {
   BOUNDARY_CONFIGURATION_GEPP,
