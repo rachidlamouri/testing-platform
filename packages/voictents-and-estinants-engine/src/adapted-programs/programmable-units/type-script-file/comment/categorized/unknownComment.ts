@@ -1,4 +1,4 @@
-import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
 import { CategorizedCommentTypeName } from './categorizedCommentTypeName';
 import { CommentZorn } from '../commentZorn';

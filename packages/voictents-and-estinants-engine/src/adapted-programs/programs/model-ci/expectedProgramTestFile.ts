@@ -1,5 +1,5 @@
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
-import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { BashFile } from '../../programmable-units/bash-file/bashFile';
 import { FileSystemNodeZorn } from '../../programmable-units/file/fileSystemNode';

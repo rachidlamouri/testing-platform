@@ -1,4 +1,4 @@
-import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder';
+import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { FilePath } from '../../../programmable-units/file/filePath';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
 import { FileSystemNodeVoque } from '../../../programmable-units/file/fileSystemNodeVoictent';
