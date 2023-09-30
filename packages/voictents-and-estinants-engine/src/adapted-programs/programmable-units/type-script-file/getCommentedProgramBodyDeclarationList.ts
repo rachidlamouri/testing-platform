@@ -19,12 +19,12 @@ import { CategorizedCommentTypeName } from './comment/categorized/categorizedCom
 import { shishKebab } from '../../../package-agnostic-utilities/case/shishKebab';
 import { CommentTagId } from './comment/commentTagId';
 
-const allowedDerivativePrefixSet = [
+const allowedCanonicalVariationDeclarationPrefixSet = [
   // keep as multiline list
   'generic',
 ] as const;
 
-const allowedDerivativeSuffixSet = [
+const allowedCanonicalVariationDeclarationSuffixSet = [
   // keep as multiline list
   '2',
   '3',
@@ -72,10 +72,10 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
     );
 
     const allowedDerivativeNameSet = new Set([
-      ...allowedDerivativePrefixSet.map((prefix) => {
+      ...allowedCanonicalVariationDeclarationPrefixSet.map((prefix) => {
         return `${prefix}-${normalizedFileName}`;
       }),
-      ...allowedDerivativeSuffixSet.map((suffix) => {
+      ...allowedCanonicalVariationDeclarationSuffixSet.map((suffix) => {
         return `${normalizedFileName}-${suffix}`;
       }),
     ]);

@@ -1,4 +1,4 @@
 export enum CommentTagId {
-  ExplicitCanonicalDeclaration = 'canonical',
-  CanonicalDeclarationExemption = 'noCanonical',
+  ExplicitCanonicalDeclaration = 'canonicalDeclaration',
+  CanonicalDeclarationExemption = 'noCanonicalDeclaration',
 }

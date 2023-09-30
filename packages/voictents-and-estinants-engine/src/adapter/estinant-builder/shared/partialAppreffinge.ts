@@ -1,5 +1,5 @@
 /**
- * @noCanonical
+ * @noCanonicalDeclaration
  *
  * @todo split this file into left and right appreffinges
  */

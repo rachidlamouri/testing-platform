@@ -1,5 +1,5 @@
 /**
- * @noCanonical
+ * @noCanonicalDeclaration
  * @todo this file should probably be broken up or renamed
  */
 
