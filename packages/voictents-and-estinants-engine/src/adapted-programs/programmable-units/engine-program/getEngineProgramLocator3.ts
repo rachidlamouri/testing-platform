@@ -44,7 +44,7 @@ import { buildAddMetadataForSerialization } from '../../../layer-agnostic-utilit
 import { isSpecificIdentifiableCallExpression } from '../../../package-agnostic-utilities/type-script-ast/isCallExpression';
 import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../../package-agnostic-utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 import { isIdentifiableTypeScriptTypeReference } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
-import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isConstantTypeScriptAsExpression';
+import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isSpecificConstantTypeScriptAsExpression';
 import {
   PROGRAM_ERROR_GEPP,
   ProgramErrorElementLocatorTypeName,

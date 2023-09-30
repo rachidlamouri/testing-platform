@@ -43,7 +43,7 @@ import {
   ReportingEstinantLocator,
 } from '../error/programError';
 import { isIdentifier } from '../../../package-agnostic-utilities/type-script-ast/isIdentifier';
-import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isConstantTypeScriptAsExpression';
+import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isSpecificConstantTypeScriptAsExpression';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImportListVoque,
