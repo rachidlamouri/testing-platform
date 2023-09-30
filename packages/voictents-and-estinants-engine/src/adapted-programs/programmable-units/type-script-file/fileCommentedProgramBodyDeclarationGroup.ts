@@ -14,6 +14,9 @@ import {
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { hasOneElement } from '../../../package-agnostic-utilities/array/hasOneElement';
 import { CommentTagId } from './comment/commentTagId';
+import { DescriptiveBlockComment } from './comment/categorized/descriptiveBlockComment';
+import { CategorizedComment } from './comment/categorized/categorizedComment';
+import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 
 enum CanonicalDeclarationState {
   InvalidExplicitCanonicalDeclaration = 'InvalidExplicitCanonicalDeclaration',
@@ -36,11 +39,6 @@ class FileCommentedProgramBodyDeclarationGroupZorn extends Zorn2<FileCommentedPr
     return FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE;
   }
 }
-
-type FileCommentedProgramBodyDeclarationGroupConstructorInput = {
-  filePath: string;
-  list: CommentedProgramBodyDeclaration[];
-};
 
 class IdentifiableCommentedProgramBodyDeclarationListByName extends Map<
   string,
@@ -92,6 +90,48 @@ export type CanonicalDeclarationLintMetadata = {
   remediationOptionList: string[] | null;
 };
 
+enum CanonicalCommentSource {
+  CanonicalDeclaration = 'canonical declaration',
+  File = 'file',
+}
+
+type CommentSourceStateA = {
+  expectedCommentSource: CanonicalCommentSource.CanonicalDeclaration;
+  sourceComment: CategorizedComment | null;
+};
+
+type CommentSourceStateB = {
+  expectedCommentSource: CanonicalCommentSource.File;
+  sourceComment: DescriptiveBlockComment;
+};
+
+type CommentSourceStateC = {
+  expectedCommentSource: null;
+  sourceComment: null;
+};
+
+type CommentSourceState =
+  | CommentSourceStateA
+  | CommentSourceStateB
+  | CommentSourceStateC;
+
+type CanonicalCommentState = {
+  canonicalComment: DescriptiveBlockComment | null;
+  badStateReason: string | null;
+  remediationList: string[] | null;
+};
+
+export type CanonicalCommentLintMetadata = Omit<
+  CanonicalCommentState,
+  'canonicalComment'
+>;
+
+type FileCommentedProgramBodyDeclarationGroupConstructorInput = {
+  filePath: string;
+  list: CommentedProgramBodyDeclaration[];
+  fileComment: DescriptiveBlockComment | null;
+};
+
 /**
  * The set of top level declaration AST nodes that may have a comment and may
  * have an identifiable node
@@ -103,7 +143,10 @@ export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
     {
       zorn: FileCommentedProgramBodyDeclarationGroupZorn;
     },
-    FileCommentedProgramBodyDeclarationGroupConstructorInput,
+    Omit<
+      FileCommentedProgramBodyDeclarationGroupConstructorInput,
+      'fileComment'
+    >,
     {
       declarationByIdentifier: Map<
         string,
@@ -114,6 +157,8 @@ export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
       derivativeDeclarationList: IdentifiableCommentedProgramBodyDeclaration[];
       canonicalDeclaration: IdentifiableCommentedProgramBodyDeclaration | null;
       canonicalDeclarationLintMetadata: CanonicalDeclarationLintMetadata;
+      canonicalComment: DescriptiveBlockComment | null;
+      canonicalCommentLintMetadata: CanonicalCommentLintMetadata;
     },
   ]
 >;
@@ -133,6 +178,8 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       'derivativeDeclarationList',
       'canonicalDeclaration',
       'canonicalDeclarationLintMetadata',
+      'canonicalComment',
+      'canonicalCommentLintMetadata',
     ] as const satisfies readonly (keyof FileCommentedProgramBodyDeclarationGroup)[],
   })
     .withTypes<
@@ -147,7 +194,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
         },
       },
       transformInput: (input) => {
-        const { filePath, list } = input;
+        const { filePath, list, fileComment } = input;
 
         const zorn = new FileCommentedProgramBodyDeclarationGroupZorn({
           filePath,
@@ -335,6 +382,80 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
         // note: if this fails, then the "state" logic above is wrong
         assertNotUndefined(canonicalDeclaration);
 
+        let commentSourceState: CommentSourceState;
+        if (canonicalDeclaration !== null) {
+          commentSourceState = {
+            expectedCommentSource: CanonicalCommentSource.CanonicalDeclaration,
+            sourceComment: canonicalDeclaration.comment,
+          } satisfies CommentSourceStateA;
+        } else if (fileComment !== null) {
+          commentSourceState = {
+            expectedCommentSource: CanonicalCommentSource.File,
+            sourceComment: fileComment,
+          } satisfies CommentSourceStateB;
+        } else {
+          commentSourceState = {
+            expectedCommentSource: null,
+            sourceComment: null,
+          } satisfies CommentSourceStateC;
+        }
+
+        const { canonicalComment, ...canonicalCommentLintMetadata } =
+          ((): CanonicalCommentState => {
+            switch (commentSourceState.expectedCommentSource) {
+              case CanonicalCommentSource.CanonicalDeclaration: {
+                if (commentSourceState.sourceComment === null) {
+                  return {
+                    canonicalComment: null,
+                    badStateReason:
+                      'Canonical declaration is missing a comment.',
+                    remediationList: [
+                      'Add a comment to the canonical declaration.',
+                    ],
+                  };
+                }
+
+                if (
+                  commentSourceState.sourceComment.typeName !==
+                  CategorizedCommentTypeName.Descriptive
+                ) {
+                  return {
+                    canonicalComment: null,
+                    badStateReason:
+                      'Canonical declaration comment must be a jsdoc-like block comment.',
+                    remediationList: [
+                      'Convert canonical declaration comment to a jsdoc-like block comment.',
+                    ],
+                  };
+                }
+
+                return {
+                  canonicalComment: commentSourceState.sourceComment,
+                  badStateReason: null,
+                  remediationList: null,
+                };
+              }
+              case CanonicalCommentSource.File: {
+                return {
+                  canonicalComment: commentSourceState.sourceComment,
+                  badStateReason: null,
+                  remediationList: null,
+                };
+              }
+              case null: {
+                return {
+                  canonicalComment: null,
+                  badStateReason:
+                    'Unable to find a source for a canonical comment.',
+                  remediationList: [
+                    'Add a canonical declaration.',
+                    'Add a file comment.',
+                  ],
+                };
+              }
+            }
+          })();
+
         return {
           zorn,
           filePath,
@@ -349,6 +470,8 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
             badStateReason,
             remediationOptionList,
           },
+          canonicalComment,
+          canonicalCommentLintMetadata,
         } satisfies FileCommentedProgramBodyDeclarationGroup;
       },
     })
