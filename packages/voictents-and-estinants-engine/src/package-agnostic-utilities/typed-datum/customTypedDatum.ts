@@ -1,4 +1,4 @@
-import { TypeScriptFunction } from '../function/function';
+import { TypeScriptFunction } from '../function/typeScriptFunction';
 import {
   TypeScriptArray,
   TypeScriptMap,
