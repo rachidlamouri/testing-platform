@@ -90,7 +90,9 @@ export const assertTypeScriptFileHasCanonialComment = buildEstinant({
       lintSource: new FileSourceInstance({
         filePath: declarationGroup.filePath,
       }),
-      isValid: trimmedCanonicalCommentText !== '',
+      isValid:
+        trimmedCanonicalCommentText !== null &&
+        trimmedCanonicalCommentText !== '',
       errorMessageContext,
       context: errorMessageContext,
     });
