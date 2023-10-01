@@ -61,7 +61,8 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
     },
     {
       label: 'lint',
-      script: 'nodemon --exec npm run lint:ts:engine',
+      script:
+        'nodemon --ext ts,tsx --ignore debug --ignore **/generated/** --exec npm run lint:ts:engine',
       isInitiallyVisible: true,
     },
     {
