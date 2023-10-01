@@ -45,6 +45,11 @@ export type GenericFileSystemNodeVoque = FileSystemNodeVoque<
   FileSystemNode
 >;
 
+/**
+ * A collection for objects that have the same shape as FileSystemNode. It
+ * indexes streamables by identifier and node path, and provides these
+ * datastructures as the collection streamable
+ */
 export class FileSystemNodeVoictent<
   TVoque extends GenericFileSystemNodeVoque,
 > extends BaseInMemoryOdeshin2Voictent<GenericFileSystemNodeVoque, TVoque> {

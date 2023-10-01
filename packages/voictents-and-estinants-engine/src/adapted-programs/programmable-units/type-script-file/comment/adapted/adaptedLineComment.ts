@@ -8,6 +8,9 @@ type AdaptedLineCommentConstructorInput = {
   rawComment: TSESTree.LineComment;
 };
 
+/**
+ * Metadata about a line comment (the one with two forward slashes)
+ */
 export type AdaptedLineComment = {
   typeName: AdaptedCommentTypeName.Line;
   zorn: CommentZorn;

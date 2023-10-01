@@ -13,6 +13,13 @@ type TagWithName = {
   name: string;
 };
 
+/**
+ * A jsdoc-like comment
+ *
+ * @todo this is a misnomer. It was originally supposed to be a jsdoc-like
+ * comment with a description, but sometimes code doesn't need a descript (like
+ * when you just want to annotate something or add directives)
+ */
 export type DescriptiveBlockComment = {
   typeName: CategorizedCommentTypeName.Descriptive;
   zorn: CommentZorn;

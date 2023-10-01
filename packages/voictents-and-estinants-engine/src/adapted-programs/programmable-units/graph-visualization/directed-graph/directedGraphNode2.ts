@@ -20,6 +20,10 @@ type DirectedGraphNode2Prototype = {
   get attributeByKey(): PartialNodeAttributeByKey;
 };
 
+/**
+ * Represents a Graphviz node object. The rootGraphLocator allows this object to
+ * be assembled into a complete graph.
+ */
 export type DirectedGraphNode2 = ObjectWithPrototype<
   BaseDirectedGraphNode2,
   DirectedGraphNode2Prototype

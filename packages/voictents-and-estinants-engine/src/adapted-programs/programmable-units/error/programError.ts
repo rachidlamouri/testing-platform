@@ -30,6 +30,12 @@ type GenericProgramErrorReporterLocator = GenericReportingEstinantLocator;
 
 type UnsafeProgramErrorReporterLocator = UnsafeReportingEstinantLocator;
 
+/**
+ * Represents an error that occurred while a program is running. Errors can be
+ * thrown by the engine or the program
+ *
+ * @todo Convert ProgramError to a subclass of Error or just get rid of it
+ */
 export type ProgramErrorPelue<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > =

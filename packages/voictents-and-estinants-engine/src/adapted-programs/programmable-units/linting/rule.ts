@@ -34,6 +34,17 @@ type RuleConstructorInput = {
   description: string;
 };
 
+/**
+ * Symbolizes something that can be enforced against a lint source (which is any
+ * Source object). It contains the rule id, description, and information needed
+ * to build a precise error message given context
+ *
+ * @todo this should be UntypedLintRule
+ *
+ * @todo the canonical declaration should be TypedLintRule (or they should be split into two files)
+ *
+ * @todo name should probably be the id. we can add namespaces too if needed
+ */
 type Rule = SimplifyN<
   [
     {

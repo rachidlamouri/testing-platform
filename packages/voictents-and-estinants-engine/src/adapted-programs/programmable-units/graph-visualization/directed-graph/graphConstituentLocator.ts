@@ -22,6 +22,11 @@ type GraphConstituentLocatorPrototype = {
   get id(): string;
 };
 
+/**
+ * The information needed to associate a subobject of a directed graph to the
+ * directed graph itself and to the parent object within the directed graph (which
+ * could be the graph itself for top level objects)
+ */
 export type GraphConstituentLocator = ObjectWithPrototype<
   BaseGraphConstituentLocator,
   GraphConstituentLocatorPrototype

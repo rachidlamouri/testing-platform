@@ -65,6 +65,12 @@ class InMemoryCachePointer<TDatum> {
   }
 }
 
+/**
+ * Encapsulates storing data in memory in a list, and producing pointers that
+ * can traverse the list independently
+ *
+ * @todo should pointers be renamed to iterators? :thinking-monocle:
+ */
 export class InMemoryCache<TDatum> {
   protected datumTuple: TDatum[] = [];
 

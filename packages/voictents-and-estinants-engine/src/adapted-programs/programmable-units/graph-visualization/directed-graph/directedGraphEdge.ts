@@ -19,6 +19,9 @@ type EdgeAttributeByKey = SpreadN<
 
 export type PartialEdgeAttributeByKey = Partial<EdgeAttributeByKey>;
 
+/**
+ * A representation of a Graphviz edge that can be serialized to graphviz code.
+ */
 export type DirectedGraphEdge = {
   attributeByKey?: PartialEdgeAttributeByKey;
   tailId: string;

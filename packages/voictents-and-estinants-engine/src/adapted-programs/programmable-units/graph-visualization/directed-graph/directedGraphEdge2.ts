@@ -26,6 +26,10 @@ type DirectedGraphEdge2Prototype = {
   get locator(): GraphConstituentLocator;
 };
 
+/**
+ * Represents the information needed to build a Graphviz edge. The
+ * rootGraphLocator allows this object to be assembled into a complete graph.
+ */
 export type DirectedGraphEdge2 = ObjectWithPrototype<
   BaseDirectedGraphEdge2,
   DirectedGraphEdge2Prototype

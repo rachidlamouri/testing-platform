@@ -30,6 +30,10 @@ type FileName<
 
 type GenericFileName = FileName<FileExtensionSuffixIdentifier>;
 
+/**
+ * An object that encapsulates various aspects of a file's location within a
+ * file system
+ */
 export type FilePath<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
 > = SimplifyN<

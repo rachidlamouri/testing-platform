@@ -8,6 +8,9 @@ type AdaptedNormalBlockCommentConstructorInput = {
   rawComment: TSESTree.BlockComment;
 };
 
+/**
+ * Metadata about a block comment that cannot be parsed as a jsdoc-like comment
+ */
 export type AdaptedNormalBlockComment = {
   typeName: AdaptedCommentTypeName.NormalBlock;
   zorn: CommentZorn;

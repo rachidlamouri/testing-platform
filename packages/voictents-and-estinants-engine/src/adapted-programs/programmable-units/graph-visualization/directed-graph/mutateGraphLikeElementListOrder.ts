@@ -18,9 +18,13 @@ const compareGraphElements = (
   return 1;
 };
 
-// TODO: Remove this logic since it has side effects. This is used to help
-// measure parity between program modelers with logic that can result in the
-// same graph, but with elements defined in a different order
+/**
+ * This is used to help measure parity between program modelers with logic that
+ * can result in the same graph, but with elements defined in a different order
+ *
+ * @todo Remove this logic since it has side effects, and we finished remodeling
+ * the program modeler months ago
+ */
 export const mutateGraphLikeElementListOrder = (graphLike: GraphLike): void => {
   graphLike.nodeList.sort(compareGraphElements);
   graphLike.subgraphList.sort(compareGraphElements);

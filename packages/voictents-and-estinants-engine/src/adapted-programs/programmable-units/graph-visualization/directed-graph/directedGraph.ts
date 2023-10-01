@@ -16,7 +16,11 @@ export type PartialGraphAttributeByKey =
   PartialAttributeByKey<GraphAttributeByKey>;
 
 /**
- * A proprietary object that can be converted into Graphviz code
+ * A representation of a complete Graphviz directed graph including all of its
+ * child objects. It can be serialized into Graphviz code.
+ *
+ * @todo rename this type and (all similar types: DirectedSubgraph, ...etc) since its too similar to DirectedGraph2 and
+ * technically this object gets generated from DirectedGraph2
  */
 export type DirectedGraph = {
   zorn: string;

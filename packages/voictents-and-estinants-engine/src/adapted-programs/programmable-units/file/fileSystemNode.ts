@@ -19,6 +19,9 @@ type FileSystemNodeConstructorInput = {
   nodePath: NodePath;
 };
 
+/**
+ * A readable identifier and a NodePath
+ */
 export type FileSystemNode = SimplifyN<
   [
     {

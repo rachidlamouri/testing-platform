@@ -14,6 +14,10 @@ const COMMENT_ZORN_TEMPLATE = [
   'lineNumber',
 ] as const satisfies GenericZorn2Template;
 type CommentZornTemplate = typeof COMMENT_ZORN_TEMPLATE;
+
+/**
+ * The complex identifier for a comment
+ */
 export class CommentZorn extends Zorn2<CommentZornTemplate> {
   static build({ filePath, rawComment }: CommentZornContext): CommentZorn {
     return new CommentZorn({
