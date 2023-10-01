@@ -59,6 +59,11 @@ type NamespacedFilePathWriterInput = {
   text: string;
 };
 
+/**
+ * A file cache specifically for engine programs. It understands engine-specific
+ * concepts like collections and the class itself provides a standard cache
+ * directory path
+ */
 export class ProgramFileCache extends FileCache {
   static CACHE_DIRECTORY_PATH = 'debug';
 

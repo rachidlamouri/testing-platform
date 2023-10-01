@@ -31,6 +31,10 @@ type EmptyAdaptedRightInputVickenTuple = [];
 
 type EmptyAdaptedOutputVickenTuple = [];
 
+/**
+ * Builds the left input context for an estinant that consumes the entire left
+ * collection
+ */
 type LeftInputVoictentAppreffingeBuilder2 = <TInputVoque extends GenericVoque>(
   partialLeftAppreffinge: PartialLeftInputAppreffinge<TInputVoque>,
 ) => SpreadN<

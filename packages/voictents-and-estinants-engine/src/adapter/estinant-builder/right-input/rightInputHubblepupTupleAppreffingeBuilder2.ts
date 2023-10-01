@@ -43,6 +43,10 @@ type NextAdaptedRightInputVickenTuple<
 
 type EmptyAdaptedOutputVickenTuple = [];
 
+/**
+ * Constructs the context needed to build a right input stream connection for
+ * zero or more hubblepups.
+ */
 type RightInputHubblepupTupleAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,

@@ -28,6 +28,9 @@ type NextAdaptedOutputVickenTuple<
   AdaptedOutputVicken<TOutputVoque, TOutputVoque['hubblepupPelue']>,
 ];
 
+/**
+ * Builds the context needed to enable outputing a single hubblepup
+ */
 type OutputHubblepupAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,

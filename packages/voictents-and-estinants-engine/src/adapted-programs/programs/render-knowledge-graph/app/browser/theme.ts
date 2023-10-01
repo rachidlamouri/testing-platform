@@ -10,6 +10,9 @@ const colors = {
   gymboreeBlue: 'RoyalBlue',
 };
 
+/**
+ * Knowledge graph UI colors grouped by semantics
+ */
 export const THEME = {
   colors,
   file: {

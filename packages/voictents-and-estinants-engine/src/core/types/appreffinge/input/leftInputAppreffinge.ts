@@ -1,5 +1,8 @@
 import { GenericLeftInputVicken } from '../../vicken/leftInputVicken';
 
+/**
+ * The stream configuration for a left input
+ */
 export type LeftInputAppreffinge<
   TLeftInputVicken extends GenericLeftInputVicken,
 > = {

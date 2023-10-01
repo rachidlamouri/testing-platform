@@ -29,6 +29,10 @@ type NextAdaptedRightInputVickenTuple<
 
 type EmptyAdaptedOutputVickenTuple = [];
 
+/**
+ * Collects the context needed to construct a right input stream connection to
+ * consume an entire collection.
+ */
 type RightInputVoictentAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,

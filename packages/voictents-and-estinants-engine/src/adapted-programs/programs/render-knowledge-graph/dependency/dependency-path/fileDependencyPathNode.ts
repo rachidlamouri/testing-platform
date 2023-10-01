@@ -24,6 +24,11 @@ type FileDependencyPathNodeConstructorInput = {
   index: number;
 };
 
+/**
+ * The conceptual marker on a directory along a FileDependencyPath
+ *
+ * @todo define FileDependencyPath
+ */
 export type FileDependencyPathNode = SimplifyN<
   [
     { zorn: FileDependencyPathNodeZorn },

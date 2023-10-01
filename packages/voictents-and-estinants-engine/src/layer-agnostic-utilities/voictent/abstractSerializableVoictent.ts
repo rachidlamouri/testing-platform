@@ -52,6 +52,10 @@ type AbstractSerializableVoictentConstructorInput<
   initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 };
 
+/**
+ * A collection that can take a serializeable hubblepup and write it to a
+ * program file cache.
+ */
 export abstract class AbstractSerializableVoictent<
   TVoque extends GenericAbstractSerializableVoque,
 > implements Voictent2<GenericAbstractSerializableVoque, TVoque>

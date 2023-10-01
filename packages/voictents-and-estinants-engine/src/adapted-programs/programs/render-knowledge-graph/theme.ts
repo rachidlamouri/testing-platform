@@ -15,6 +15,11 @@ import { PartialClusterAttributeByKey } from '../../programmable-units/graph-vis
 const fontname = 'Helvetica';
 const penwidth = 0.2;
 
+/**
+ * Knowledge graph Graphviz attributes that affect the layout. The layout is
+ * determined when we use graphviz to render an svg. The UI theme is handled by
+ * the knowledge graph app since it is independent of the layout.
+ */
 export const THEME = {
   graph: {
     fontname,

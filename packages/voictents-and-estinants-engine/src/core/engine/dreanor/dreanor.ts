@@ -56,6 +56,9 @@ export type RightDreanor = RightVoictentDreanor | RightVoictentItem2Dreanor;
 
 export type RightDreanorTuple = readonly RightDreanor[];
 
+/**
+ * The information needed to identify a voictent and to stream its hubblepup
+ */
 export type Dreanor = LeftDreanor | RightDreanor;
 
 export type DreanorTuple = Tuple<Dreanor>;

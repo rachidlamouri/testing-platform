@@ -8,6 +8,9 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
 ];
 
+/**
+ * Constructs the boilerplate text for an estinant file
+ */
 export const getEstinantFileContents = ({
   getImportStatement,
   camelCaseName,

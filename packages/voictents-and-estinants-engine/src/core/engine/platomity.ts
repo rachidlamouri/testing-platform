@@ -8,6 +8,9 @@ import { Procody } from './procody/procody';
 import { GeppSet } from '../types/voictent/gepp';
 import { GenericVoictent2 } from '../types/voictent/voictent2';
 
+/**
+ * A wrapper on an estinant which the engine uses to stream hubblepups to estinants.
+ */
 export type Platomity2 = {
   version: 2;
   estinant: GenericEstinant2;

@@ -38,6 +38,10 @@ type PartialOutputAppreffinge<
   >;
 };
 
+/**
+ * Builds the context needed to output the input hubblepup based on a condition.
+ * Each conditional appreffinge is independent of the others.
+ */
 type OutputHubblepupConditionalAppreffingeBuilder<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,

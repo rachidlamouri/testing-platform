@@ -8,6 +8,10 @@ const LAYER_ZORN_TEMPLATE = [
   'displayName',
 ] as const satisfies GenericZorn2Template;
 type LayerZornTemplate = typeof LAYER_ZORN_TEMPLATE;
+
+/**
+ * The complex identifier of a Layer
+ */
 export class LayerZorn extends Zorn2<LayerZornTemplate> {
   get rawTemplate(): LayerZornTemplate {
     return LAYER_ZORN_TEMPLATE;

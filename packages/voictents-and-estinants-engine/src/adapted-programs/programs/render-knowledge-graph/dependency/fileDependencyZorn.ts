@@ -9,6 +9,10 @@ const FILE_DEPENDENCY_ZORN_TEMPLATE = [
   ['importedFile', FileSystemNodeZorn],
 ] as const satisfies GenericZorn2Template;
 type FileDependencyZornTemplate = typeof FILE_DEPENDENCY_ZORN_TEMPLATE;
+
+/**
+ * The complex identifier of a FileDependency
+ */
 export class FileDependencyZorn extends Zorn2<FileDependencyZornTemplate> {
   get rawTemplate(): FileDependencyZornTemplate {
     return FILE_DEPENDENCY_ZORN_TEMPLATE;

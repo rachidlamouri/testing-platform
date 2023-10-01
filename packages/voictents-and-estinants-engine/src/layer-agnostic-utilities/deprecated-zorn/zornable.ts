@@ -4,6 +4,11 @@ import { AbstractSerializableIndexByName } from '../voictent/abstractSerializabl
 import { Gepp } from '../../core/types/voictent/gepp';
 import { Hubblepup } from '../../core/types/hubblepup/hubblepup';
 
+/**
+ * An identifiable object.
+ *
+ * @todo switch to using Zorn2 for the identifier
+ */
 export type Zornable = {
   zorn: string;
 };

@@ -14,6 +14,9 @@ type OutputGeppTuple<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
   [Index in keyof TOutputVoqueOptionTuple]: TOutputVoqueOptionTuple[Index]['gepp'];
 };
 
+/**
+ * The type information needed to configure a strongly typed output stream
+ */
 export type OutputVicken<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
   outputVoqueOptionTuple: TOutputVoqueOptionTuple;
   geppTuple: OutputGeppTuple<TOutputVoqueOptionTuple>;

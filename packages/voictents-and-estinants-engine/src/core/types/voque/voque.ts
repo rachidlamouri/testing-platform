@@ -6,6 +6,9 @@ import {
 } from '../hubblepup/hubblepup';
 import { Gepp } from '../voictent/gepp';
 
+/**
+ * The type information needed to define a strongly typed stream, transform, or collection.
+ */
 export type Voque<
   TGepp extends Gepp,
   THubblepupPelue extends Hubblepup,

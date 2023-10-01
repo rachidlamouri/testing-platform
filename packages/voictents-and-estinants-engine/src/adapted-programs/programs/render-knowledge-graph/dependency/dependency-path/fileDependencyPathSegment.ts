@@ -1,5 +1,11 @@
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 
+/**
+ * The concept of a segment of an arrow spanning two adjacent nodes, or a node
+ * and a file, within a FileDependencyPath
+ *
+ * @todo define FileDependencyPath
+ */
 export type FileDependencyPathSegment = {
   tailDirectoryPath: string;
   headDirectoryPath: string;

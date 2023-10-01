@@ -6,6 +6,11 @@ import {
 } from '../lanbe/lanbe';
 import { GenericVoque, UnsafeVoque } from '../voque/voque';
 
+/**
+ * The interface to implement when defining a collection for an engine program.
+ * All collections must suport the interface for creating independent streams of
+ * hubblepups, even if they don't actually allow streaming hubblepups.
+ */
 export type Voictent2<
   TRestrictingVoque extends GenericVoque,
   TVoque extends TRestrictingVoque,
@@ -19,6 +24,12 @@ export type Voictent2<
     | HubblepupPelieLanbe
     | null;
   onTickStart(): void;
+  /**
+   * This is for collections whose constructor accepts initial hubblepups. This
+   * allows you to defer adding the initial hubblepups to the collection until
+   * the engine starts running. This way, all hubblepups are added to their
+   * collections with the proper error handling in place.
+   */
   initialize(): void;
   get isEmpty(): boolean;
   addHubblepup(hubblepup: TVoque['hubblepupPelue']): void;
