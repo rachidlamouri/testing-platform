@@ -67,6 +67,7 @@ import { parseTypeScriptFileComments } from '../../programmable-units/type-scrip
 import { handleNoCanonicalDirective } from '../../programmable-units/type-script-file/handleNoCanonicalDirective';
 import { omitProgramCanoncalExportRequirement } from '../../programmable-units/type-script-file/omitProgramCanoncalExportRequirement';
 import { assertTypeScriptFileHasCanonialComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonialComment';
+import { exemptEngineProgramFromCanonicalComment } from '../../programmable-units/type-script-file/exemptEngineProgramFromCanonicalComment';
 import { existingFilesWithMissingCanonicalCommentsExemptionList } from '../../programmable-units/type-script-file/existingFilesWithMissingCanonicalCommentsExemptionList';
 
 const programFileCache = new ProgramFileCache({
@@ -124,6 +125,7 @@ digikikify({
     assertTypeScriptFileHasCanonicalDeclaration,
     assertTypeScriptFileHasCanonialComment,
     handleNoCanonicalDirective,
+    exemptEngineProgramFromCanonicalComment,
     omitProgramCanoncalExportRequirement,
 
     filterEngineProgramFile,
