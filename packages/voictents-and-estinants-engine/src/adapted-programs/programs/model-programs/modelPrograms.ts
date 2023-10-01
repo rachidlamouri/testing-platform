@@ -69,6 +69,7 @@ import { omitProgramCanoncalExportRequirement } from '../../programmable-units/t
 import { assertTypeScriptFileHasCanonialComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonialComment';
 import { exemptEngineProgramFromCanonicalComment } from '../../programmable-units/type-script-file/exemptEngineProgramFromCanonicalComment';
 import { existingFilesWithMissingCanonicalCommentsExemptionList } from '../../programmable-units/type-script-file/existingFilesWithMissingCanonicalCommentsExemptionList';
+import { exemptPredicatesFromCanonicalComment } from '../../programmable-units/type-script-file/exemptPredicatesFromCanonicalComment';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -128,6 +129,7 @@ digikikify({
     assertTypeScriptFileHasCanonialComment,
     handleNoCanonicalDirective,
     exemptEngineProgramFromCanonicalComment,
+    exemptPredicatesFromCanonicalComment,
     omitProgramCanoncalExportRequirement,
 
     filterEngineProgramFile,
