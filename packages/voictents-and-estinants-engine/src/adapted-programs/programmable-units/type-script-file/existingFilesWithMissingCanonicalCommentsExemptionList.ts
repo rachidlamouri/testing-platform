@@ -41,7 +41,6 @@ export const existingFilesWithMissingCanonicalCommentsExemptionList: LintAsserti
     'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/directedSubgraph2.ts',
     'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/getGraphvizCode.ts',
     'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/graphConstituentLocator.ts',
-    'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/graphContext.ts',
     'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/graphLike.ts',
     'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/mutateGraphLikeElementListOrder.ts',
     'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/partialAttributeByKey.ts',

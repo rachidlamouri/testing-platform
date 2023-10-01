@@ -76,11 +76,6 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/graphContext.ts',
-    importedIdentifierName: 'GraphContext',
-  },
-  {
-    importedFilePath:
       'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/rootGraphLocator.ts',
     importedIdentifierName: 'RootGraphLocator',
   },
