@@ -16,6 +16,8 @@ const programFileCache = new ProgramFileCache({
  *
  * @note Running the collection through the engine is technically unnecessary,
  * but it allows the program modeler to construct a snapshot digest of this file
+ *
+ * @canonicalComment
  */
 digikikify2({
   inputVoictentList: [

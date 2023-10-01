@@ -53,6 +53,8 @@ const writeDatumToCache: Estinant2<
 
 /**
  * An example program to demonstrate "CachedOnDiskVoictent"
+ *
+ * @canonicalComment
  */
 digikikify2({
   inputVoictentList: [

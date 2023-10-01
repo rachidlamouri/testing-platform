@@ -66,6 +66,8 @@ const joinCollections: Estinant2<
 /**
  * Tests a transform that consumes multiple items from a right collection for
  * each item of the left collection
+ *
+ * @canonicalComment
  */
 digikikify2({
   inputVoictentList: [

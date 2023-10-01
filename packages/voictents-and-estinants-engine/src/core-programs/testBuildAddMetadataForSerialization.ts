@@ -19,6 +19,8 @@ const programFileCache = new ProgramFileCache({
 /**
  * Example program to test the "buildAddMetadataForSerialization" function.
  * Commit the output to get a signal when the functionality changes.
+ *
+ * @canonicalComment
  */
 digikikify2({
   inputVoictentList: [

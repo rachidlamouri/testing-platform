@@ -66,6 +66,8 @@ const getCustomTypedTestCaseInputTypeName: Estinant2<
 /**
  * Tests the "getCustomTypedDatum" function. Commit the output to get a signal
  * whenever the behavior of this function changes
+ *
+ * @canonicalComment
  */
 digikikify2({
   inputVoictentList: [

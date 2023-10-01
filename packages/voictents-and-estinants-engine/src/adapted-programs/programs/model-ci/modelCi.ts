@@ -53,6 +53,8 @@ const programFileCache = new ProgramFileCache({
 /**
  * Uses a hard-coded data structure that represents the information in CI.sh and
  * then makes sure the data structure and bash file are sound
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [

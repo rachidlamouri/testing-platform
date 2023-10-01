@@ -32,6 +32,8 @@ const programFileCache = new ProgramFileCache({
 
 /**
  * Creates a bash script to run all engine programs
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [

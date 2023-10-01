@@ -99,6 +99,8 @@ const join1ToAllOf3: Estinant2<
 /**
  * Tests a transform that consumes a right collection in which the right
  * collection causes the transform to trigger multiple times
+ *
+ * @canonicalComment
  */
 digikikify2({
   inputVoictentList: [

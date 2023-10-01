@@ -76,6 +76,8 @@ const programFileCache = new ProgramFileCache({
 
 /**
  * Creates an interactive model for each engine program.
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [

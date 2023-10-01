@@ -66,6 +66,8 @@ const programFileCache = new ProgramFileCache({
  * @note Capturing the output file digest for this program resulted in a
  * non-deterministic result between my local environment and the CI environment due
  * to inconsistent floating point numbers in the layout
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [

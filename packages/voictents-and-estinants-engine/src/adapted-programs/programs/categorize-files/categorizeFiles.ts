@@ -27,6 +27,8 @@ const programFileCache = new ProgramFileCache({
  * Example program to demonstrate traversing the file system to enumerate files
  * and categorize them by file type.
  *
+ * @canonicalComment
+ *
  * @todo rename to testCategorizeFiles and add this to ci.sh
  */
 digikikify({
