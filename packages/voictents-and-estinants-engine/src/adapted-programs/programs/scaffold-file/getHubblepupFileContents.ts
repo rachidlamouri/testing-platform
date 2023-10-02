@@ -60,7 +60,7 @@ class ${zornTemplateClassName} extends Zorn2<${zornTemplateTypeName}> {
 }
 
 type ${constructorInputTypeName} = {
-  UPDATE_ME: any;
+  placeholderInputProperty: never;
 }
 
 type ${hubblepupTypeName} = SimplifyN<[
@@ -76,6 +76,7 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'zorn',
+    'placeholderInputProperty',
   ] as const satisfies readonly (keyof ${hubblepupTypeName})[],
 })
   .withTypes<${constructorInputTypeName}, ${hubblepupTypeName}>({
@@ -87,10 +88,10 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { UPDATE_ME } = input;
+      const { placeholderInputProperty } = input;
 
       const zorn = new ${zornTemplateClassName}({
-        UPDATE_ME: UPDATE_ME,
+        UPDATE_ME: placeholderInputProperty,
       });
 
       return {
