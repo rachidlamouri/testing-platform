@@ -15,6 +15,10 @@ import {
 } from '../shared/vicken';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
+/**
+ * A transform that is abstracted away from a core transform's input and output
+ * data structures. It's just a typed function.
+ */
 type Pinbetunf2<TInputTuple extends Tuple<unknown>, TOutput> = (
   ...input: TInputTuple
 ) => TOutput;
@@ -51,6 +55,9 @@ type PinbetunfOutput<
       >
     >;
 
+/**
+ * Constructs the {@link Pinbetunf2}
+ */
 type PinbetunfBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,

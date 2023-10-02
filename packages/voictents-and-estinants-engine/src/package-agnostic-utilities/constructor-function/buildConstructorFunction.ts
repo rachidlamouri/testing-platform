@@ -45,6 +45,9 @@ export type ConstructorFunctionBuilderContext = {
 
 const CONSTRUCTOR_KEY_NAME = 'constructor';
 
+/**
+ * Encapsulates instantiating a constructo function given relevant context
+ */
 export const buildConstructorFunction = <
   TConstructorInput extends GenericConstructorInput,
   TConstructedInstance extends GenericConstructedInstance,

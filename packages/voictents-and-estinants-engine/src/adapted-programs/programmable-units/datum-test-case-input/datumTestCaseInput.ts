@@ -1,5 +1,9 @@
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 
+/**
+ * Used for testing serialization. It contains a datum of any type, and a
+ * readable identifier for the particular datum, which in itself is a test case
+ */
 type DatumTestCaseInput = {
   zorn: string;
   grition: unknown;

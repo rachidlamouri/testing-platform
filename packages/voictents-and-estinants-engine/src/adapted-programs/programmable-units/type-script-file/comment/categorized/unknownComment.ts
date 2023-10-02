@@ -8,6 +8,9 @@ type UnknownCommentConstructorInput = {
   adaptedComment: AdaptedComment;
 };
 
+/**
+ * The category for uncategorized comments.
+ */
 export type UnknownComment = SimplifyN<
   [
     {

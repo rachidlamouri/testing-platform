@@ -34,6 +34,8 @@ const programFileCache = new ProgramFileCache({
 
 /**
  * Example program to demonstrate defining and rendering a directed graph.
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [

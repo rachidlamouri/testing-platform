@@ -1,3 +1,6 @@
+/**
+ * A heterogenous list where the order matters.
+ */
 export type Tuple<T> = readonly T[];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

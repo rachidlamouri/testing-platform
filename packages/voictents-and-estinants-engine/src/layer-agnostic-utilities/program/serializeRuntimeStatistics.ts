@@ -1,6 +1,10 @@
 import { LanbeTypeName } from '../../core/types/lanbe/lanbe';
 import { RuntimeStatistics } from '../../core/engine/digikikify';
 
+/**
+ * Converts a RuntimeStatistics object into a comprehensive visual ascii
+ * document
+ */
 export const serializeRuntimeStatistics = (
   statistics: RuntimeStatistics,
 ): string => {

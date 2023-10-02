@@ -22,6 +22,10 @@ type RootGraphLocatorPrototype = {
   rootLocator: RootGraphLocator;
 };
 
+/**
+ * The information needed to find a directed graph. It is used by graph
+ * constiuents to tie them all to the same graph.
+ */
 export type RootGraphLocator = ObjectWithPrototype<
   BaseRootGraphLocator,
   RootGraphLocatorPrototype

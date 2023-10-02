@@ -64,6 +64,11 @@ type CachedOnDiskVoictentConstructorInput<
   gepp: TVoque['gepp'];
 };
 
+/**
+ * A collection that takes a CacheableAccessor which can be used to defer
+ * acquiring data until it has confirmed it doesn't exist, or not acquiring data
+ * if it already exists in the cache.
+ */
 export class CachedOnDiskVoictent<TVoque extends GenericCachedOnDiskVoque>
   implements Voictent2<GenericCachedOnDiskVoque, TVoque>
 {

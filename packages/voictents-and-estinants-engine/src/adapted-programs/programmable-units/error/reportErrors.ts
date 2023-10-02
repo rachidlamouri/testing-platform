@@ -75,6 +75,8 @@ export const reportErrors = buildEstinant({
       /* eslint-enable no-console */
     } else if (!isLimitReached) {
       // eslint-disable-next-line no-console
+      console.log();
+      // eslint-disable-next-line no-console
       console.log(
         `\x1b[31mError\x1b[0m: Additional errors were encountered and omitted from the output`,
       );

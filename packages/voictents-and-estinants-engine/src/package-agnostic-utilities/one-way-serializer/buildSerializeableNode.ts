@@ -300,6 +300,9 @@ const buildSerializeableNode2 = <TDatum>(
   }
 };
 
+/**
+ * Gets metadata for how to serialize a datum based on its data type
+ */
 export const buildSerializeableNode = <TDatum>(
   inputDatum: TDatum,
 ): MappedSerializeableNode<TDatum> =>

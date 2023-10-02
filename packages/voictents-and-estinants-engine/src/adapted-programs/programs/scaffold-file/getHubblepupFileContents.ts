@@ -23,6 +23,9 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
 ];
 
+/**
+ * Constructs the boilerplate text for a hubblepup file
+ */
 export const getHubblepupFileContents = ({
   getImportStatement,
   pascalCaseName,

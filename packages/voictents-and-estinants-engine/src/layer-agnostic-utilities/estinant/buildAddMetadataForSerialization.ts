@@ -16,6 +16,10 @@ type SerializerBuilderInput<
   outputGepp: TOutputVoictent['gepp'];
 };
 
+/**
+ * Constructs an estinant that takes a serializeable input, normalizes it, and
+ * sends it to a compatible output stream
+ */
 export const buildAddMetadataForSerialization = <
   TInputVoictent extends GenericAbstractSerializableSourceVoque,
   TOutputVoictent extends GenericAbstractSerializableVoque,

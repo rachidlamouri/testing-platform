@@ -8,6 +8,9 @@ import { Croader3 } from './croarder';
 import { Framation3 } from './framation';
 import { GenericLeftInputVicken } from '../../../vicken/leftInputVicken';
 
+/**
+ * The stream configuration for a right input
+ */
 export type RightInputAppreffinge<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVicken extends GenericRightInputVicken,

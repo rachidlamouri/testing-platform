@@ -24,6 +24,8 @@ const programFileCache = new ProgramFileCache({
 
 /**
  * Example program to demonstrate associating AST nodes to top level comments
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [

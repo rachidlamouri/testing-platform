@@ -86,6 +86,8 @@ const forwardFrom2To3: Estinant2<
 /**
  * Tests a transform that consumes an entire collection, but is triggered
  * multiple times
+ *
+ * @canonicalComment
  */
 digikikify2({
   inputVoictentList: [

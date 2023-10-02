@@ -3,6 +3,10 @@ import Chalk, { ForegroundColor as ChalkForegroundColor } from 'chalk';
 
 export type ForegroundColor = typeof ChalkForegroundColor;
 
+/**
+ * An enumerated list of chalk foreground colors so that each color is
+ * represented once for other use cases.
+ */
 export const colorList: ForegroundColor[] = [
   'black',
   'blue',

@@ -11,7 +11,14 @@ const omitterSource = new FileSourceInstance({
   filePath: __filename,
 });
 
-// TODO: audit this list
+/**
+ * Exemptions for unused exports. For example: "Strif" hasn't been integrated
+ * with the project yet, "FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION" is a
+ * convenience configuration for debugging, and "EDGE_WIDTH" appears as unused
+ * because tsx files aren't linted correctly
+ *
+ * @todo audit this list
+ */
 export const omittedUnusedExportList: LintAssertionOmission[] = [
   {
     importedFilePath:
@@ -73,11 +80,6 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
     importedFilePath:
       'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/directedGraphElement2.ts',
     importedIdentifierName: 'DirectedGraphElement2Voque',
-  },
-  {
-    importedFilePath:
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/graphContext.ts',
-    importedIdentifierName: 'GraphContext',
   },
   {
     importedFilePath:

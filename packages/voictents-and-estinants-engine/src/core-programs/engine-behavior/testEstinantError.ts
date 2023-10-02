@@ -42,6 +42,8 @@ const throwError: Estinant2<
  * Expects the engine to forward an error thrown in a transform to the
  * designated error collection. The error collection's serialized output is
  * checked into git to detect if the behavior changes
+ *
+ * @canonicalComment
  */
 digikikify2({
   inputVoictentList: [

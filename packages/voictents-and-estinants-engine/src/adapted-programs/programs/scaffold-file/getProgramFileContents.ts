@@ -72,6 +72,9 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
 ];
 
+/**
+ * Constructs the boilerplate text for an engine program file
+ */
 export const getProgramFileContents = ({
   getImportStatement,
   kebabCaseName,

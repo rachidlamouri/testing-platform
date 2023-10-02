@@ -23,6 +23,10 @@ type DirectedCluster2Prototype = {
   get isCluster(): true;
 };
 
+/**
+ * Represents a Graphviz Cluster without the child objects. The rootGraphLocator allows this object to
+ * be assembled into a complete graph.
+ */
 export type DirectedCluster2 = ObjectWithPrototype<
   BaseDirectedCluster2,
   DirectedCluster2Prototype

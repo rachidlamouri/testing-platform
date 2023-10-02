@@ -99,6 +99,12 @@ export type CustomTypedUndefined = BaseCustomTypedDatum<
   undefined
 >;
 
+/**
+ * A union of datastructures that make it easy to tell what type of data you're
+ * working. It provides much better semantics than "typeof", such as
+ * distinguishing Sets, Maps, arrays and other objects. It is not necessarily an
+ * exhaustive union.
+ */
 export type CustomTypedDatum =
   | CustomTypedArray
   | CustomTypedBigInteger

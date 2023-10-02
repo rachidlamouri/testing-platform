@@ -43,6 +43,9 @@ type NodeAttributeByKey = SpreadN<
 export type PartialNodeAttributeByKey =
   PartialAttributeByKey<NodeAttributeByKey>;
 
+/**
+ * A representation of a Graphviz node that can be serialized to graphviz code.
+ */
 export type DirectedGraphNode = {
   attributeByKey: PartialNodeAttributeByKey;
 };

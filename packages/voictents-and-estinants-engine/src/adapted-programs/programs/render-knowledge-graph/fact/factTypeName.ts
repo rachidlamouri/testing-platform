@@ -1,3 +1,6 @@
+/**
+ * An enum for distinguishing Fact types
+ */
 export enum FactTypeName {
   PartitionFact = 'PartitionFact',
   DirectoryFact2 = 'DirectoryFact2',

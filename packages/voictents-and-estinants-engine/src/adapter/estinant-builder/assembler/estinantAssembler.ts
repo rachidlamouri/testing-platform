@@ -24,6 +24,10 @@ import {
   GenericAdaptedOutputVickenTuple,
 } from '../shared/vicken';
 
+/**
+ * Constructs an estinant given all of the context accumulated by the builder
+ * chain
+ */
 type EstinantAssembler<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,

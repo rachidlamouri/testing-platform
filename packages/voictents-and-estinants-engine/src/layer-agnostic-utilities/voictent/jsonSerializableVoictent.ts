@@ -19,6 +19,10 @@ type JsonSerializableVoictentConstructorInput<
   initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 };
 
+/**
+ * A collection that serializes data, or serializes an eror resulting from the
+ * attempt to serialize the data. This collection cannot be consumed
+ */
 export class JsonSerializableVoictent<
   TVoque extends GenericAbstractSerializableVoque,
 > extends AbstractSerializableVoictent<TVoque> {

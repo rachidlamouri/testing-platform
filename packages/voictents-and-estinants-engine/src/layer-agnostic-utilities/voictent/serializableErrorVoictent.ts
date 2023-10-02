@@ -22,6 +22,9 @@ type SerializableErrorVoictentInput<
   initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 };
 
+/**
+ * A collection that writes errors to disk. It's not as complex as ProgramErrorVoictent
+ */
 export class SerializableErrorVoictent<
   TVoque extends GenericSerializableErrorVoque,
 > implements Voictent2<GenericSerializableErrorVoque, TVoque>

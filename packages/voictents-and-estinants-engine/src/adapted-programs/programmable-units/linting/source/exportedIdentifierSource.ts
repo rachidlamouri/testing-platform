@@ -23,7 +23,12 @@ type ExportedIdentifierSourceConstructorInput = {
   exportedIdentifier: string;
 };
 
-// TODO: replace this with an AST node source or something, especially if by the time you read this its still only used in one place
+/**
+ * The information needed to find an export declaration with an identifier
+ *
+ * @todo replace this with an AST node source or something, especially if by the
+ * time you read this its still only used in one place
+ */
 export type ExportedIdentifierSource = SimplifyN<
   [
     {

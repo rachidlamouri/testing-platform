@@ -152,6 +152,10 @@ const getDirectedGraphCodeLineList = (graph: GraphLike): string[] => {
   ];
 };
 
+/**
+ * Serializes the proprietary DirectedGraph and its subobjects into Graphviz
+ * code
+ */
 export const getGraphvizCode = (graph: DirectedGraph): string => {
   const lines = getDirectedGraphCodeLineList(graph);
 

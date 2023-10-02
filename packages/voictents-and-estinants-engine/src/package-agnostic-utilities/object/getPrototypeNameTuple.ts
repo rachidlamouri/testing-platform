@@ -11,6 +11,9 @@ const accumulatePrototypeNameTuple = (
   }
 };
 
+/**
+ * Acquires the list of prototype names for an object up its prototype chain
+ */
 export const getPrototypeNameTuple = (datum: object): string[] => {
   const prototypeNameTuple: string[] = [];
   accumulatePrototypeNameTuple(

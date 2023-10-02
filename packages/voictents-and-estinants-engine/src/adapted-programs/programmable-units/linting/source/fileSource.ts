@@ -20,6 +20,9 @@ type FileSourceConstructorInput = {
   filePath: string;
 };
 
+/**
+ * The information needed to find a file (which is just a filepath)
+ */
 export type FileSource = SimplifyN<
   [
     {

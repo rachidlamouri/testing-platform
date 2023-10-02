@@ -11,6 +11,10 @@ type DirectoryName = {
   serialized: string;
 };
 
+/**
+ * An object that encapsulates various aspects of a directory's location within a
+ * file system
+ */
 export type DirectoryPath = SimplifyN<
   [
     DirectoryPathConstructorInput,

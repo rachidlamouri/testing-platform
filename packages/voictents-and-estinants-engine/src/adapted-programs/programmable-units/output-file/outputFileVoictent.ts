@@ -11,6 +11,11 @@ type OutputFileVoictentConstructorInput = {
   programFileCache: ProgramFileCache;
 };
 
+/**
+ * A collection of OutputFile objects. The collection only exists on disk, and
+ * cannot be consumed. It uses a program file cache to immediately write files
+ * and it handles all OutputFile types; see OutputFile for more details.
+ */
 export class OutputFileVoictent extends AbstractAsymmetricInMemoryVoictent2<
   OutputFileVoque,
   OutputFileVoque

@@ -22,6 +22,11 @@ type RequestSourceConstructorInput = {
   requestee: LeafSource;
 };
 
+/**
+ * A source composed of other sources. This allows one source to make a check on
+ * behalf of another source through a third entity without losing how to find
+ * any of the sources.
+ */
 export type RequestSource = SimplifyN<
   [
     {

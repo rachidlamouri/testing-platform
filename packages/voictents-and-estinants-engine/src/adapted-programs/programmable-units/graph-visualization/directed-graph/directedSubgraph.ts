@@ -29,6 +29,10 @@ type SubgraphAttributeByKey = SpreadN<
 export type PartialSubgraphAttributeByKey =
   PartialAttributeByKey<SubgraphAttributeByKey>;
 
+/**
+ * A representation of a Graphviz subgraph and its child objects that can be
+ * serialized to graphviz code.
+ */
 export type DirectedSubgraph = {
   zorn: string;
   isRoot: false;
@@ -55,6 +59,10 @@ type ClusterAttributeByKey = SpreadN<
 export type PartialClusterAttributeByKey =
   PartialAttributeByKey<ClusterAttributeByKey>;
 
+/**
+ * A representation of a Graphviz cluster and its child objects that can be
+ * serialized to graphviz code.
+ */
 export type DirectedCluster = {
   zorn: string;
   isRoot: false;
@@ -67,4 +75,7 @@ export type DirectedCluster = {
   subgraphList: SubgraphLike[];
 };
 
+/**
+ * @todo maybe DirectedSubgraphLike should be the canonical declaration :thinking:
+ */
 export type SubgraphLike = DirectedSubgraph | DirectedCluster;

@@ -20,6 +20,10 @@ type EngineProgramLocator2Prototype = {
   get rootGraphLocator(): RootGraphLocator;
 };
 
+/**
+ * The part of an EngineProgramLocator that is required to build the estinant
+ * relationships for the actual EngineProgramLocator
+ */
 type PartialEngineProgramLocator2 = ObjectWithPrototype<
   BasePartialEngineProgramLocator2,
   EngineProgramLocator2Prototype

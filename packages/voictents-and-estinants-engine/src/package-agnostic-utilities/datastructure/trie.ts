@@ -1,3 +1,6 @@
+/**
+ * See https://en.wikipedia.org/wiki/Trie
+ */
 export class Trie<T> {
   value: T;
 

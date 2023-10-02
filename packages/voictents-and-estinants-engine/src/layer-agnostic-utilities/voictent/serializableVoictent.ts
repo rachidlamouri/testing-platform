@@ -18,6 +18,9 @@ type SerializableVoictentConstructorInput<
   programFileCache: ProgramFileCache;
 };
 
+/**
+ * This collection specifically uses the custom one way serializer
+ */
 export class SerializableVoictent<
   TVoque extends GenericAbstractSerializableVoque,
 > extends AbstractSerializableVoictent<TVoque> {

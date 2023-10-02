@@ -23,6 +23,10 @@ type DirectedSubgraph2Prototype = {
   get rootGraphLocator(): RootGraphLocator;
 };
 
+/**
+ * Represents a Graphviz Subgraph without the child objects. The
+ * rootGraphLocator allows this object to be assembled into a complete graph.
+ */
 export type DirectedSubgraph2 = ObjectWithPrototype<
   BaseDirectedSubgraph2,
   DirectedSubgraph2Prototype

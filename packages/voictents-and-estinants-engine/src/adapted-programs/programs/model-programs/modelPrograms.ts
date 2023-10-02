@@ -67,7 +67,8 @@ import { parseTypeScriptFileComments } from '../../programmable-units/type-scrip
 import { handleNoCanonicalDirective } from '../../programmable-units/type-script-file/handleNoCanonicalDirective';
 import { omitProgramCanoncalExportRequirement } from '../../programmable-units/type-script-file/omitProgramCanoncalExportRequirement';
 import { assertTypeScriptFileHasCanonialComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonialComment';
-import { existingFilesWithMissingCanonicalCommentsExemptionList } from '../../programmable-units/type-script-file/existingFilesWithMissingCanonicalCommentsExemptionList';
+import { exemptEngineProgramFromCanonicalComment } from '../../programmable-units/type-script-file/exemptEngineProgramFromCanonicalComment';
+import { exemptPredicatesFromCanonicalComment } from '../../programmable-units/type-script-file/exemptPredicatesFromCanonicalComment';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -75,6 +76,8 @@ const programFileCache = new ProgramFileCache({
 
 /**
  * Creates an interactive model for each engine program.
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [
@@ -96,8 +99,8 @@ digikikify({
       gepp: LINT_ASSERTION_OMISSION_GEPP,
       // TODO: fix and remove omissions
       initialHubblepupPelueTuple: [
+        // keep this multiline
         NULL_OMISSION,
-        ...existingFilesWithMissingCanonicalCommentsExemptionList,
       ],
     }),
   ] as const,
@@ -124,6 +127,8 @@ digikikify({
     assertTypeScriptFileHasCanonicalDeclaration,
     assertTypeScriptFileHasCanonialComment,
     handleNoCanonicalDirective,
+    exemptEngineProgramFromCanonicalComment,
+    exemptPredicatesFromCanonicalComment,
     omitProgramCanoncalExportRequirement,
 
     filterEngineProgramFile,

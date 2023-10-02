@@ -22,6 +22,9 @@ type EstinantSourceConstructorInput = {
   estinantName: string;
 };
 
+/**
+ * The information needed to locate an estinant definition
+ */
 export type EstinantSource = SimplifyN<
   [
     {

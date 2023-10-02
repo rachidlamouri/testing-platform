@@ -43,5 +43,9 @@ type DefaultFileGepp = ValueOf<
   typeof defaultFileGeppByFileExtensionSuffixIdentifier
 >;
 
+/**
+ * The set of collection ids for streamable metatypes that use the
+ * FileSystemNodeVoque
+ */
 export const defaultFileGeppCombination: GeppCombination<DefaultFileGepp> =
   buildGeppCombination(defaultFileGeppList);

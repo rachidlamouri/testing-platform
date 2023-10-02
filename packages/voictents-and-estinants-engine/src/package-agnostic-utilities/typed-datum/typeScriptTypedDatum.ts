@@ -71,8 +71,18 @@ type TypeScriptTypedDatumOptionTuple = readonly [
   TypeScriptTypedUndefined,
 ];
 
+/**
+ * A custom data structure that is used by "getTypeScriptTypedDatum" to do the
+ * same thing as `typeof`, but without hardcoded string literals for the all the
+ * types. It uses an enum instead!
+ */
 type TypeScriptTypedDatum = TypeScriptTypedDatumOptionTuple[number];
 
+/**
+ * @todo move this to its own file since it deserves its own comment
+ *
+ * @todo then update the comment on "TypeScriptTypedDatum"
+ */
 export const getTypeScriptTypedDatum = (
   datum: unknown,
 ): TypeScriptTypedDatum => {

@@ -65,6 +65,8 @@ assertScriptInputIsValid(scriptInput);
 /**
  * Given a file path, it populates that file with a template for defining a
  * collection type and all related types
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [

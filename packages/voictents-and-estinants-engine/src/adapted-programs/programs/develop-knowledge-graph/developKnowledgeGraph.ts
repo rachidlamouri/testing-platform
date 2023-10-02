@@ -27,6 +27,8 @@ const programFileCache = new ProgramFileCache({
  * at least once for this script to work
  *
  * @usage DEV_KG= npm run dev
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [

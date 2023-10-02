@@ -11,6 +11,9 @@ import {
 import { GenericRightInputVickenTuple } from '../vicken/rightInputVicken';
 import { Tropoignant2 } from './tropoignant';
 
+/**
+ * A core transform plus its input and output stream configurations.
+ */
 export type Estinant2<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,

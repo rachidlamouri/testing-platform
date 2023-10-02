@@ -76,6 +76,8 @@ import {
   FileCommentedProgramBodyDeclarationGroupVoque,
 } from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclaration';
+import { CategorizedCommentTypeName } from '../type-script-file/comment/categorized/categorizedCommentTypeName';
+import { CommentTagId } from '../type-script-file/comment/commentTagId';
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -112,7 +114,7 @@ type Core2EngineProgramLocatorAccessorInput = {
   engineProgramFile: EngineProgramFile['file'];
   engineFunctionConfiguration: CoreEngineFunction2Configuration;
   importList: TypeScriptFileImportList['list'];
-  engineCallCommentText: string | null;
+  engineCallDeclaration: EngineCallDeclaration | null;
   engineCallExpressionPropertyList: IdentifiableProperty[];
 };
 
@@ -125,9 +127,11 @@ const getCore2EngineProgramLocator = ({
   engineProgramFile,
   engineFunctionConfiguration,
   importList,
-  engineCallCommentText,
+  engineCallDeclaration,
   engineCallExpressionPropertyList,
 }: Core2EngineProgramLocatorAccessorInput): Core2EngineProgramLocatorAccessorResult => {
+  const engineCallCommentText = engineCallDeclaration?.commentText;
+
   // TODO: move this to its own hubblepup
   const fileImportsByImportedIdentifier = new Map<
     string,
@@ -313,6 +317,29 @@ const getCore2EngineProgramLocator = ({
     });
   }
 
+  if (
+    engineCallDeclaration?.comment?.typeName ===
+      CategorizedCommentTypeName.Descriptive &&
+    !engineCallDeclaration.comment.tagIdSet.has(
+      CommentTagId.ExplicitCanonicalComment,
+    )
+  ) {
+    parallelErrorList.push({
+      name: `missing-program-canonical-comment-tag`,
+      error: new Error(
+        `Program description is missing an @${CommentTagId.ExplicitCanonicalComment} tag`,
+      ),
+      reporterLocator,
+      sourceLocator: {
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
+        filePath: engineProgramFile.filePath.serialized,
+      },
+      context: {
+        comment: engineCallDeclaration?.comment,
+      },
+    });
+  }
+
   const partialProgramLocator = new PartialEngineProgramLocator2Instance({
     programName,
     filePath: engineProgramFile.filePath.serialized,
@@ -349,7 +376,7 @@ type AdaptedEngineProgramLocatorAccessorInput = {
   engineProgramFile: EngineProgramFile['file'];
   engineFunctionConfiguration: AdaptedEngineFunctionConfiguration;
   importList: TypeScriptFileImportList['list'];
-  engineCallCommentText: string | null;
+  engineCallDeclaration: CommentedProgramBodyDeclaration | null;
   engineCallExpressionPropertyList: IdentifiableProperty[];
 };
 
@@ -362,10 +389,11 @@ const getAdaptedEngineProgramLocator = ({
   engineProgramFile,
   engineFunctionConfiguration,
   importList,
-  engineCallCommentText,
+  engineCallDeclaration,
   engineCallExpressionPropertyList,
 }: AdaptedEngineProgramLocatorAccessorInput): AdaptedEngineProgramLocatorAccessorResult => {
   const programName = Case.kebab(engineProgramFile.nodePath.name.extensionless);
+  const engineCallCommentText = engineCallDeclaration?.commentText ?? null;
 
   const explicitVoictentTupleProperty = engineCallExpressionPropertyList.find(
     (property) =>
@@ -579,7 +607,11 @@ const getAdaptedEngineProgramLocator = ({
     );
   });
 
-  if (engineCallCommentText === null) {
+  if (
+    engineCallDeclaration?.comment?.typeName !==
+      CategorizedCommentTypeName.Descriptive ||
+    engineCallCommentText === null
+  ) {
     parallelErrorList.push({
       name: `missing-program-description`,
       error: new Error('Program is missing a description'),
@@ -588,7 +620,33 @@ const getAdaptedEngineProgramLocator = ({
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
         filePath: engineProgramFile.filePath.serialized,
       },
-      context: null,
+      context: {
+        comment: engineCallDeclaration?.comment,
+        engineCallCommentText,
+      },
+    });
+  }
+
+  if (
+    engineCallDeclaration?.comment?.typeName ===
+      CategorizedCommentTypeName.Descriptive &&
+    !engineCallDeclaration.comment.tagIdSet.has(
+      CommentTagId.ExplicitCanonicalComment,
+    )
+  ) {
+    parallelErrorList.push({
+      name: `missing-program-canonical-comment-tag`,
+      error: new Error(
+        `Program description is missing an @${CommentTagId.ExplicitCanonicalComment} tag`,
+      ),
+      reporterLocator,
+      sourceLocator: {
+        typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
+        filePath: engineProgramFile.filePath.serialized,
+      },
+      context: {
+        comment: engineCallDeclaration?.comment,
+      },
     });
   }
 
@@ -722,7 +780,7 @@ export const getEngineProgramLocator3 = buildEstinant({
               engineProgramFile: engineProgramFile.file,
               engineFunctionConfiguration,
               importList,
-              engineCallCommentText: engineCallDeclaration.commentText,
+              engineCallDeclaration,
               engineCallExpressionPropertyList,
             });
 
@@ -739,7 +797,7 @@ export const getEngineProgramLocator3 = buildEstinant({
               engineProgramFile: engineProgramFile.file,
               engineFunctionConfiguration,
               importList,
-              engineCallCommentText: engineCallDeclaration.commentText,
+              engineCallDeclaration,
               engineCallExpressionPropertyList,
             });
 

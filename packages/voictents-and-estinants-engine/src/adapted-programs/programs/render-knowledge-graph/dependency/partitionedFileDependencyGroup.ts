@@ -21,6 +21,10 @@ export type PartitionedFileDependencyGroupConstructorInput = {
   fileDependencyList: FileDependency[];
 };
 
+/**
+ * A group of dependencies that share the same imported file and an associated
+ * partition. The same group will be associated with multiple partitions.
+ */
 type PartitionedFileDependencyGroup = {
   zorn: PartitionedFileDependencyGroupZorn;
   partitionFact: PartitionFact;

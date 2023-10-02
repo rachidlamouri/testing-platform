@@ -31,6 +31,8 @@ type LintAssertionOmissionConstructorInput = {
 
 /**
  * A means for ignoring a lint rule
+ *
+ * @todo rename to LintAssertionExemption
  */
 export type LintAssertionOmission = SimplifyN<
   [

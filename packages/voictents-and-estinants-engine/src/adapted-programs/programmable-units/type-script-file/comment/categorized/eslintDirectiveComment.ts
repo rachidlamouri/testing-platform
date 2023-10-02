@@ -8,6 +8,9 @@ type EslintDirectiveCommentConstructorInput = {
   adaptedComment: AdaptedLineComment | AdaptedNormalBlockComment;
 };
 
+/**
+ * Such as "eslint-disable foo" or "eslint-disable-next-line"
+ */
 export type EslintDirectiveComment = {
   typeName: CategorizedCommentTypeName.EslintDirective;
   zorn: CommentZorn;

@@ -22,6 +22,14 @@ type DirectedGraph2Prototype = {
   get id(): string;
 };
 
+/**
+ * Represents a Graphviz directed graph without any child objects. This is the
+ * top most item in a directed graph. The rootGraphLocator allows this object to
+ * be assembled into a complete graph.
+ *
+ * @todo rename this type (and all related types: DirectedSubgraph2, ...etc) since its too similar to DirectedGraph this object is
+ * used to derived DirectedGraph
+ */
 export type DirectedGraph2 = ObjectWithPrototype<
   BaseDirectedGraph2,
   DirectedGraph2Prototype

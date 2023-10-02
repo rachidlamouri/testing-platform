@@ -5,6 +5,16 @@ type ListSplitterParameter<TElementA, TElementB> = {
   accumulatorB: TElementB[];
 };
 
+/**
+ * Segments a list into two sublists based on the result of a predicate
+ *
+ * @todo there are several variations of this function that would probably be
+ * better: a version that takes 2+ predicates and stops on the first matching
+ * predicate, a version that takes 2+ predicates and allows an element to be in
+ * more than one accumulator, and a version that takes 2+ predicates and and
+ * throws if an element would be in two accumulators. These variants should also
+ * throw if an element cannot be placed in one of the 2+ accumulators
+ */
 export const splitList = <TElementA, TElementB>({
   list,
   isElementA,

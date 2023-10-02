@@ -110,6 +110,8 @@ const programFileCache = new ProgramFileCache({
 /**
  * Renders an interactive HTML page showing the relationship
  * between parts of the project (files, directories, boundaries of concern, ..etc)
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [

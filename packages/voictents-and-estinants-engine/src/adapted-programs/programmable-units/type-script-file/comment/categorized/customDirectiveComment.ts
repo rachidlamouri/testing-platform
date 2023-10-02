@@ -20,6 +20,10 @@ type CustomDirectiveCommentConstructorInput = {
   subtypeName: CustomDirectiveTypeName;
 };
 
+/**
+ * A line comment that tooling can use to take action (or not take action),
+ * against a file
+ */
 export type CustomDirectiveComment = {
   typeName: CategorizedCommentTypeName.CustomDirective;
   zorn: CommentZorn;

@@ -19,6 +19,9 @@ export type IdentifiableProgramBodyStatementNode =
   | TSESTree.TSEnumDeclaration
   | { type?: never; id: TSESTree.Identifier };
 
+/**
+ * Encapsulates how to find the identifiable node of a top level declaration (if possible)
+ */
 export const getIdentifiableProgramBodyStatementNode = (
   statement: TSESTree.ProgramStatement,
 ): IdentifiableProgramBodyStatementNode | null => {

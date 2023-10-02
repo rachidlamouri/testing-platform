@@ -3,6 +3,9 @@ import { buildNamedConstructorFunction } from '../../../package-agnostic-utiliti
 import { IdentifiableProgramBodyStatementNode } from './getIdentifiableProgramBodyStatementNode';
 import { CategorizedComment } from './comment/categorized/categorizedComment';
 
+/**
+ * A top level declaration of a file and its associated comment
+ */
 export type CommentedProgramBodyDeclaration<
   TBodyStatement extends TSESTree.ProgramStatement = TSESTree.ProgramStatement,
   TIdentifiableNode extends IdentifiableProgramBodyStatementNode | null = IdentifiableProgramBodyStatementNode | null,

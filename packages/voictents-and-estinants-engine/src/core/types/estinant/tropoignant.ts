@@ -5,6 +5,12 @@ import {
   RightInputVickenTupleTropoignantInputTuple,
 } from '../vicken/rightInputVicken';
 
+/**
+ * A tranform with specific input and output datastructures that make it easy
+ * for the engine to stream data.
+ *
+ * @todo define Transform
+ */
 export type Tropoignant2<
   TLeftVicken extends GenericLeftInputVicken,
   TRightVickenTuple extends GenericRightInputVickenTuple,

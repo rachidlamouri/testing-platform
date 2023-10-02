@@ -23,7 +23,13 @@ type ImportedIdentifierSourceConstructorInput = {
   importedIdentifierName: string;
 };
 
-// TODO: replace this with an AST node source or something, especially if by the time you read this its still only used in one place
+/**
+ * The information needed to find an import declaration with an identifiable
+ * specifier
+ *
+ *  @todo replace this with an AST node source or something, especially if by
+ *  the time you read this its still only used in one place
+ */
 export type ImportedIdentifierSource = SimplifyN<
   [
     {

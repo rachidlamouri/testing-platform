@@ -18,6 +18,13 @@ type ProgramErrorVoictentConstructorInput = {
   programFileCache: ProgramFileCache;
 };
 
+/**
+ * A collection for handling all program errors. It serializes errors into a
+ * readable form and then uses a program file cache to write them to disk.
+ *
+ * It also enhances the error object with a context path, so that downstream
+ * transforms can emit where to find more error context
+ */
 export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
   UnsafeProgramErrorVoque,
   UnsafeProgramErrorVoque

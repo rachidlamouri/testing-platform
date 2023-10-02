@@ -10,6 +10,9 @@ type AdaptedJsdocLikeBlockCommentConstructorInput = {
   parsedBlock: commentParser.Block;
 };
 
+/**
+ * Metadata about a block comment that can be parsed as a jsdoc-like comment
+ */
 export type AdaptedJsdocLikeBlockComment = {
   typeName: AdaptedCommentTypeName.JsdocLikeBlock;
   zorn: CommentZorn;

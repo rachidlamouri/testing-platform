@@ -21,6 +21,9 @@ type FileLineSourceConstructorInput = {
   lineNumber: number;
 };
 
+/**
+ * The information needed to locate a particular line in a file
+ */
 export type FileLineSource = SimplifyN<
   [
     {

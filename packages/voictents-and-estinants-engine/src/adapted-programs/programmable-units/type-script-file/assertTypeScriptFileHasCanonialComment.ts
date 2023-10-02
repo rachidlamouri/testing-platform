@@ -18,7 +18,6 @@ import { FileSourceInstance } from '../linting/source/fileSource';
 const ESTINANT_NAME = 'assertTypeScriptFileHasCanonicalDeclaration' as const;
 
 type MessageContext = {
-  filePath: string;
   trimmedCanonicalCommentText: string | null;
   canonicalCommentLintMetadata: CanonicalCommentLintMetadata;
 };
@@ -33,7 +32,6 @@ export const typeScriptFileHasCanonicalCommentRule =
     description:
       'All TypeScript files must have a canonical comment with a description.',
     getErrorMessage: ({
-      filePath,
       trimmedCanonicalCommentText,
       canonicalCommentLintMetadata,
     }): string => {
@@ -52,7 +50,7 @@ export const typeScriptFileHasCanonicalCommentRule =
 
       // TODO: formatting should go elsewhere. This should probably return an object.
       return [
-        `File ${filePath} has an invalid canonical comment. ${reason}`,
+        `File has an invalid canonical comment. ${reason}`,
         '  Remediation Options:',
         ...remediationList.map((option) => {
           return `    - ${option}`;
@@ -80,7 +78,6 @@ export const assertTypeScriptFileHasCanonialComment = buildEstinant({
     const trimmedCanonicalCommentText =
       declarationGroup.canonicalComment?.description?.trim() ?? null;
     const errorMessageContext: MessageContext = {
-      filePath,
       trimmedCanonicalCommentText,
       canonicalCommentLintMetadata:
         declarationGroup.canonicalCommentLintMetadata,
@@ -95,7 +92,10 @@ export const assertTypeScriptFileHasCanonialComment = buildEstinant({
         trimmedCanonicalCommentText !== null &&
         trimmedCanonicalCommentText !== '',
       errorMessageContext,
-      context: errorMessageContext,
+      context: {
+        filePath,
+        errorMessageContext,
+      },
     });
   })
   .assemble();

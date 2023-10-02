@@ -13,6 +13,10 @@ type InformativeCommentConstructorInput = {
   subtypeName: InformativeCommentTypeName;
 };
 
+/**
+ * A comment with information for developers and an indication of how that
+ * information should be used
+ */
 export type InformativeComment = {
   typeName: CategorizedCommentTypeName.Informative;
   zorn: CommentZorn;

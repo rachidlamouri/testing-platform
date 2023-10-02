@@ -68,6 +68,8 @@ const joinCollectionsByValue: Estinant2<
  * collection is designed to have less inputs than needed. Emitted errors should
  * be sent to the designated error collection, which in this case serializes the
  * error. The serialized error is committed to the git repo.
+ *
+ * @canonicalComment
  */
 digikikify2({
   inputVoictentList: [

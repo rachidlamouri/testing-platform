@@ -1,5 +1,10 @@
 import { AttributeByKeyGSCNE } from '../../graph-visualization/directed-graph/attributeByKeyGSCNE';
 
+/**
+ * Common attributes for an outdated graph pattern
+ *
+ * @deprecated
+ */
 export const COMMON_ATTRIBUTE_BY_KEY: Pick<AttributeByKeyGSCNE, 'fontname'> = {
   fontname: 'sans-serif',
 };

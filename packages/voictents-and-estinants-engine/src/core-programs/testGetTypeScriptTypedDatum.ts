@@ -66,6 +66,8 @@ const getTypedTestCaseInputTypeName: Estinant2<
 /**
  * Tests the "getTypeScriptTypedDatum" function. Commit the output to keep track
  * of when the function's behavior changes (which it shouldn't)
+ *
+ * @canonicalComment
  */
 digikikify2({
   inputVoictentList: [

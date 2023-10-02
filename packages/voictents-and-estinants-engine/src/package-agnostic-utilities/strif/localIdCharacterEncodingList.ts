@@ -18,6 +18,10 @@ const visibleCodePointList = visibleCodePointInclusiveRangeList.flatMap(
   },
 );
 
+/**
+ * The list of characters that can be used to generate a local id. This file was
+ * made this way so that the code point ranges we use are easy to find.
+ */
 export const localIdCharacterEncodingList = visibleCodePointList.map(
   (characterCode) => String.fromCharCode(characterCode),
 );

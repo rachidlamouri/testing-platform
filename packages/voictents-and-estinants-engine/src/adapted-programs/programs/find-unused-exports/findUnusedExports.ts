@@ -38,6 +38,8 @@ const programFileCache = new ProgramFileCache({
 
 /**
  * Reports granular export statements that are not imported by anything
+ *
+ * @canonicalComment
  */
 digikikify({
   explicitVoictentTuple: [

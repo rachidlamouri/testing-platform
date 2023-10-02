@@ -31,6 +31,9 @@ type InMemoryVoictentConstructorInput<TVoque extends GenericInMemoryVoque> = {
   initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 };
 
+/**
+ * The parent class of any collection that wants to store data in memory
+ */
 export abstract class AbstractInMemoryVoictent<
   TRestrictingVoque extends GenericInMemoryVoque,
   TVoque extends TRestrictingVoque,

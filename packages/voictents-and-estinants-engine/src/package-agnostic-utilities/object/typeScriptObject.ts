@@ -15,6 +15,9 @@ type TypeScriptObjectInstanceEntry = [TypeScriptObjectInstanceKey, unknown];
 
 type TypeScriptObjectInstanceEntryList = TypeScriptObjectInstanceEntry[];
 
+/**
+ * A version of the standard "object" TypeScript type that is, IMO, easier to work with
+ */
 export type TypeScriptObject =
   | null
   | TypeScriptArray
