@@ -68,7 +68,6 @@ import { handleNoCanonicalDirective } from '../../programmable-units/type-script
 import { omitProgramCanoncalExportRequirement } from '../../programmable-units/type-script-file/omitProgramCanoncalExportRequirement';
 import { assertTypeScriptFileHasCanonialComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonialComment';
 import { exemptEngineProgramFromCanonicalComment } from '../../programmable-units/type-script-file/exemptEngineProgramFromCanonicalComment';
-import { existingFilesWithMissingCanonicalCommentsExemptionList } from '../../programmable-units/type-script-file/existingFilesWithMissingCanonicalCommentsExemptionList';
 import { exemptPredicatesFromCanonicalComment } from '../../programmable-units/type-script-file/exemptPredicatesFromCanonicalComment';
 
 const programFileCache = new ProgramFileCache({
@@ -100,8 +99,8 @@ digikikify({
       gepp: LINT_ASSERTION_OMISSION_GEPP,
       // TODO: fix and remove omissions
       initialHubblepupPelueTuple: [
+        // keep this multiline
         NULL_OMISSION,
-        ...existingFilesWithMissingCanonicalCommentsExemptionList,
       ],
     }),
   ] as const,
