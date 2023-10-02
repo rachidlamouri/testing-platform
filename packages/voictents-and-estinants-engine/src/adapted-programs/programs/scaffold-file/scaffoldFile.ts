@@ -58,8 +58,10 @@ export const scaffoldFile = buildEstinant({
 
     const prependedContent = ((): string => {
       switch (scaffoldConfiguration.typeName) {
+        case FileTypeName.ProgrammedTransform:
         case FileTypeName.Estinant:
           return getEstinantFileContents(relevantFileMetadata);
+        case FileTypeName.Streamable:
         case FileTypeName.Hubblepup:
           return getHubblepupFileContents(relevantFileMetadata);
         case FileTypeName.Program:
@@ -70,5 +72,8 @@ export const scaffoldFile = buildEstinant({
     const outputContents = `${prependedContent}\n${currentContents}`;
 
     fs.writeFileSync(scaffoldConfiguration.filePath, outputContents);
+
+    // eslint-disable-next-line no-console
+    console.log('PREPENDED:', scaffoldConfiguration.filePath);
   })
   .assemble();
