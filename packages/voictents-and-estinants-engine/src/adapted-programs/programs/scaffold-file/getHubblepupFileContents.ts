@@ -3,12 +3,12 @@ import { ImportConfiguration, ScaffoldeeFileMetadata } from './types';
 const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/core/engine/inMemoryOdeshinVoictent2.ts',
+      'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2.ts',
     identifierList: ['InMemoryOdeshin2ListVoque'],
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/constructor-function/namedConstructorFunctionBuilder.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/constructor-function/buildNamedConstructorFunction.ts',
     identifierList: ['buildNamedConstructorFunction'],
   },
   {
@@ -60,7 +60,7 @@ class ${zornTemplateClassName} extends Zorn2<${zornTemplateTypeName}> {
 }
 
 type ${constructorInputTypeName} = {
-  UPDATE_ME: any;
+  placeholderInputProperty: never;
 }
 
 type ${hubblepupTypeName} = SimplifyN<[
@@ -76,6 +76,7 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'zorn',
+    'placeholderInputProperty',
   ] as const satisfies readonly (keyof ${hubblepupTypeName})[],
 })
   .withTypes<${constructorInputTypeName}, ${hubblepupTypeName}>({
@@ -87,10 +88,10 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { UPDATE_ME } = input;
+      const { placeholderInputProperty } = input;
 
       const zorn = new ${zornTemplateClassName}({
-        UPDATE_ME: UPDATE_ME,
+        UPDATE_ME: placeholderInputProperty,
       });
 
       return {

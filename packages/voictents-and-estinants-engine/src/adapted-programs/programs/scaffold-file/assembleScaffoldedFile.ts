@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { posix } from 'path';
+import chalk from 'chalk';
 import {
   buildVoictentByGepp,
   digikikify,
@@ -8,6 +9,8 @@ import {
   SCAFFOLD_CONFIGURATION_GEPP,
   ScaffoldConfiguration,
   ScaffoldConfigurationVoque,
+  fileTypeNameByDeprecatedFileTypeName,
+  isDeprecatedFileTypeName,
   validTypeNameList,
 } from './scaffoldConfiguration';
 import { scaffoldFile } from './scaffoldFile';
@@ -33,7 +36,9 @@ function assertScriptInputIsValid(
   if (input.filePath === undefined) {
     errorMessageList.push('filePath is required');
   } else if (!fs.existsSync(input.filePath)) {
-    errorMessageList.push(`"${input.filePath}" does not exist`);
+    const directoryPath = posix.dirname(input.filePath);
+    fs.mkdirSync(directoryPath, { recursive: true });
+    fs.writeFileSync(input.filePath, '');
   }
 
   if (input.typeName === undefined) {
@@ -48,6 +53,9 @@ function assertScriptInputIsValid(
     const errorMessage = [
       `Encountered ${errorMessageList.length} Error(s)`,
       ...errorMessageList.map((line) => `  ${line}`),
+      '',
+      `${chalk.cyan('Usage')}: npm run scaffold <typeName> <filePath>`,
+      '',
     ].join('\n');
 
     throw Error(errorMessage);
@@ -61,6 +69,33 @@ const scriptInput: ScriptInput = {
 };
 
 assertScriptInputIsValid(scriptInput);
+
+if (isDeprecatedFileTypeName(scriptInput.typeName)) {
+  const formattedExclamation = chalk.yellow('AYE YAI YAI');
+
+  const formattedInputTypeName = chalk.cyan(scriptInput.typeName);
+
+  const replacementName =
+    fileTypeNameByDeprecatedFileTypeName[scriptInput.typeName];
+
+  const formattedSuggestion = chalk.green(replacementName);
+
+  /* eslint-disable no-console */
+  console.log();
+  console.log(
+    '=============================================================================',
+  );
+  console.log();
+  console.log(
+    `${formattedExclamation}: the option ${formattedInputTypeName} is deprecated, use ${formattedSuggestion} instead.`,
+  );
+  console.log();
+  console.log(
+    '=============================================================================',
+  );
+  console.log();
+  /* eslint-enable no-console */
+}
 
 /**
  * Given a file path, it populates that file with a template for defining a

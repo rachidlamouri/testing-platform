@@ -2,9 +2,35 @@ import { StandardInMemoryVoque } from '../../../layer-agnostic-utilities/voque/i
 
 export enum FileTypeName {
   Program = 'program',
+  ProgrammedTransform = 'transform',
   Estinant = 'estinant',
+  Streamable = 'streamable',
   Hubblepup = 'hubblepup',
 }
+
+const deprecatedFileTypeNameOptionTuple = [
+  FileTypeName.Estinant,
+  FileTypeName.Hubblepup,
+] as const;
+
+type DeprecatedFileTypeName = typeof deprecatedFileTypeNameOptionTuple[number];
+
+export const fileTypeNameByDeprecatedFileTypeName: Record<
+  DeprecatedFileTypeName,
+  FileTypeName
+> = {
+  [FileTypeName.Estinant]: FileTypeName.ProgrammedTransform,
+  [FileTypeName.Hubblepup]: FileTypeName.Streamable,
+};
+
+export const isDeprecatedFileTypeName = (
+  name: FileTypeName,
+): name is DeprecatedFileTypeName => {
+  return (deprecatedFileTypeNameOptionTuple as readonly string[]).includes(
+    name,
+  );
+};
+
 export const validTypeNameList = Object.values(FileTypeName) as string[];
 
 /**
