@@ -419,6 +419,7 @@ export const decodeAndRecastSvgDocument = buildEstinant({
       return {
         factId: fact.graphElement.id,
         pathHeadId: fact.pathNode.pathHeadId,
+        pathTailIdSet: fact.pathNode.pathTailIdSet,
       };
     };
 
