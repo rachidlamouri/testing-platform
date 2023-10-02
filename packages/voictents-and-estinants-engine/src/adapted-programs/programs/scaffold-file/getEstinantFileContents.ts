@@ -3,8 +3,13 @@ import { ImportConfiguration, ScaffoldeeFileMetadata } from './types';
 const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/adapter/estinant-builder/estinantBuilder.ts',
+      'packages/voictents-and-estinants-engine/src/adapter/estinant-builder/buildEstinant.ts',
     identifierList: ['buildEstinant'],
+  },
+  {
+    filePath:
+      'packages/voictents-and-estinants-engine/src/core/types/voque/voque.ts',
+    identifierList: ['UnsafeVoque'],
   },
 ];
 
