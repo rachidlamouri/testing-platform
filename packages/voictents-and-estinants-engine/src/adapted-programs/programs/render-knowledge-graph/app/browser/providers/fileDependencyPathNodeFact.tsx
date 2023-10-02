@@ -6,7 +6,7 @@ import { THEME } from '../theme';
 
 export const FileDependencyPathNodeFact: FunctionComponent<
   FileDependencyPathNodeFactProps
-> = ({ children, pathHeadId }) => {
+> = ({ children, pathHeadId, pathTailIdSet }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { onToggleOrSelectId, selectedId } = useSelectedIdContext();
 
@@ -16,6 +16,8 @@ export const FileDependencyPathNodeFact: FunctionComponent<
     edgeStroke = THEME.file.selected;
   } else if (selectedId === pathHeadId) {
     edgeStroke = THEME.file.importsSelectedFile;
+  } else if (pathTailIdSet.has(selectedId)) {
+    edgeStroke = THEME.file.importedBySelectedFile;
   } else {
     edgeStroke = THEME.file.deselected;
   }

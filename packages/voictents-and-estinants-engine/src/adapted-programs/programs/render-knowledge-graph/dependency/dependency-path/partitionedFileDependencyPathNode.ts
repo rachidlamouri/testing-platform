@@ -26,6 +26,7 @@ type PartitionedFileDependencyPathNodeConstructorInput = {
   dependencyGroupZorn: PartitionedFileDependencyGroupZorn;
   pathNode: FileDependencyPathNode;
   pathHeadId: string;
+  pathTailIdSet: Set<string>;
 };
 
 /**
@@ -38,6 +39,7 @@ export type PartitionedFileDependencyPathNode = {
   directoryPath: string;
   localGraphElementZorn: LocalDirectedGraphElement2Zorn;
   pathHeadId: string;
+  pathTailIdSet: Set<string>;
 };
 
 export const { PartitionedFileDependencyPathNodeInstance } =
@@ -50,6 +52,7 @@ export const { PartitionedFileDependencyPathNodeInstance } =
       'directoryPath',
       'localGraphElementZorn',
       'pathHeadId',
+      'pathTailIdSet',
     ],
   } as const)
     .withTypes<
@@ -69,6 +72,7 @@ export const { PartitionedFileDependencyPathNodeInstance } =
           dependencyGroupZorn,
           pathNode: { directoryPath },
           pathHeadId,
+          pathTailIdSet,
         } = input;
 
         const zorn = new PartitionedFileDependencyPathNodeZorn({
@@ -87,6 +91,7 @@ export const { PartitionedFileDependencyPathNodeInstance } =
           directoryPath,
           localGraphElementZorn,
           pathHeadId,
+          pathTailIdSet,
         } satisfies PartitionedFileDependencyPathNode;
       },
     })

@@ -17,6 +17,7 @@ import { CommentTagId } from './comment/commentTagId';
 import { DescriptiveBlockComment } from './comment/categorized/descriptiveBlockComment';
 import { CategorizedComment } from './comment/categorized/categorizedComment';
 import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
+import { FileParsedCommentGroup } from './fileParsedCommentGroup';
 
 enum CanonicalDeclarationState {
   InvalidExplicitCanonicalDeclaration = 'InvalidExplicitCanonicalDeclaration',
@@ -92,12 +93,18 @@ export type CanonicalDeclarationLintMetadata = {
 
 enum CanonicalCommentSource {
   CanonicalDeclaration = 'canonical declaration',
+  ExplicitCanonicalComment = 'explicit canonical comment',
   File = 'file',
 }
 
 type CommentSourceStateA = {
   expectedCommentSource: CanonicalCommentSource.CanonicalDeclaration;
   sourceComment: CategorizedComment | null;
+};
+
+type CommentSourceStateAAndAHalf = {
+  expectedCommentSource: CanonicalCommentSource.ExplicitCanonicalComment;
+  sourceComment: DescriptiveBlockComment | null;
 };
 
 type CommentSourceStateB = {
@@ -112,6 +119,7 @@ type CommentSourceStateC = {
 
 type CommentSourceState =
   | CommentSourceStateA
+  | CommentSourceStateAAndAHalf
   | CommentSourceStateB
   | CommentSourceStateC;
 
@@ -129,7 +137,7 @@ export type CanonicalCommentLintMetadata = Omit<
 type FileCommentedProgramBodyDeclarationGroupConstructorInput = {
   filePath: string;
   list: CommentedProgramBodyDeclaration[];
-  fileComment: DescriptiveBlockComment | null;
+  commentGroup: FileParsedCommentGroup;
 };
 
 /**
@@ -145,7 +153,7 @@ export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
     },
     Omit<
       FileCommentedProgramBodyDeclarationGroupConstructorInput,
-      'fileComment'
+      'commentGroup'
     >,
     {
       declarationByIdentifier: Map<
@@ -193,8 +201,9 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
           extraneousProperties: '',
         },
       },
+      // TODO: break this logic into multiple functions and use this function as an orchestrator
       transformInput: (input) => {
-        const { filePath, list, fileComment } = input;
+        const { filePath, list, commentGroup } = input;
 
         const zorn = new FileCommentedProgramBodyDeclarationGroupZorn({
           filePath,
@@ -388,10 +397,16 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
             expectedCommentSource: CanonicalCommentSource.CanonicalDeclaration,
             sourceComment: canonicalDeclaration.comment,
           } satisfies CommentSourceStateA;
-        } else if (fileComment !== null) {
+        } else if (commentGroup.explicitCanonicalComment !== null) {
+          commentSourceState = {
+            expectedCommentSource:
+              CanonicalCommentSource.ExplicitCanonicalComment,
+            sourceComment: commentGroup.explicitCanonicalComment,
+          } satisfies CommentSourceStateAAndAHalf;
+        } else if (commentGroup.fileComment !== null) {
           commentSourceState = {
             expectedCommentSource: CanonicalCommentSource.File,
-            sourceComment: fileComment,
+            sourceComment: commentGroup.fileComment,
           } satisfies CommentSourceStateB;
         } else {
           commentSourceState = {
@@ -435,6 +450,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
                   remediationList: null,
                 };
               }
+              case CanonicalCommentSource.ExplicitCanonicalComment:
               case CanonicalCommentSource.File: {
                 return {
                   canonicalComment: commentSourceState.sourceComment,
