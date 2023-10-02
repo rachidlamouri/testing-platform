@@ -35,9 +35,14 @@ type NamespacedFileNodeDeleterInput = {
   nestedPath: string;
 };
 
-// TODO: a file cache should provide a means to get a nested FileCache.
-// Basically another FileCache instance on a nested filepath of the current file
-// cache. Then in the ProgramFileCache we can add semantics to these subcaches.
+/**
+ * Provides a convention for caching files on disk by abstracting how a file
+ * gets written, and how to manage writing files to the cache.
+ *
+ * @todo a file cache should provide a means to get a nested FileCache.
+ * Basically another FileCache instance on a nested filepath of the current file
+ * cache. Then in the ProgramFileCache we can add semantics to these subcaches.
+ */
 export class FileCache {
   public readonly rootDirectoryPath: string;
 

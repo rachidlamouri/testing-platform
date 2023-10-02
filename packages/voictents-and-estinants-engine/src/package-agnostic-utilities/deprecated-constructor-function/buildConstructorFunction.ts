@@ -92,6 +92,13 @@ type ConstructorFunctionParent<
 
 const CONSTRUCTOR_KEY_NAME = 'constructor';
 
+/**
+ * An outdated pattern for declaration a constructor function with reusable
+ * getters. This pattern can be merged with the other constructor function
+ * builder pattern if needed
+ *
+ * @deprecated
+ */
 const buildConstructorFunction = <
   TConstructorName extends string,
   TBaseObject extends object,

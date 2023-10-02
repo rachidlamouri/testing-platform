@@ -60,6 +60,12 @@ type ComplexMapConstructorInput<
   initialList?: Tuple<readonly [key: TKeyDatum, value: TValueDatum]>;
 };
 
+/**
+ * A map that can take an object as a key, but it is configured to use the
+ * properties of the object to build the nested maps to store the data. This way
+ * two different object instances with the same key values result in the same
+ * lookup.
+ */
 export class ComplexMap<
   TKeyDatum extends GenericMappableDatum,
   TValueDatum,

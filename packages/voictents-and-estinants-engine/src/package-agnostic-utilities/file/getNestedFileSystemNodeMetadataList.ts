@@ -84,6 +84,11 @@ export type FilePathAccessorInput = Pick<
   'directoryPath' | 'ignoredNodePathConfigurationList'
 >;
 
+/**
+ * Traverses a file system starting at a directory. It accumulates every nested
+ * directory and filepath while adhering to the provided
+ * "ignoredNodePathConfigurationList".
+ */
 export const getNestedFileSystemNodeMetadataList = ({
   directoryPath,
   ignoredNodePathConfigurationList,

@@ -172,6 +172,9 @@ export type SerializeableObjectNode = BaseSerializeableNode<
   SerializeableObjectNodeMetadata
 >;
 
+/**
+ * Datum metadata for serialization
+ */
 export type SerializeableNode =
   | SerializeableBooleanNode
   | SerializeableListNode

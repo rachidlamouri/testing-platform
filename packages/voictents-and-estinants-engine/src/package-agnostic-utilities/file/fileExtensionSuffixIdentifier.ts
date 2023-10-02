@@ -1,5 +1,9 @@
 import { swapEntries } from '../object/swapEntries';
 
+/**
+ * An enum used to distinguish file types. Is this the best way to do this? No.
+ * Does it work. Sorta.
+ */
 export enum FileExtensionSuffixIdentifier {
   Bash = 'Bash',
   Gitignore = 'Gitignore',

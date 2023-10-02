@@ -15,6 +15,12 @@ type BufferTracker = {
 
 const MAX_BUFFER_ENTRIES = 50;
 
+/**
+ * A node stream transform that can interrupt a stream of data. It also caches
+ * the data while it is marked as invisbile (up to some limit). This transform
+ * should be applied first so that all other transforms don't run when a
+ * subprocess stream is turned off
+ */
 export class Valve extends TextTransform {
   private _isVisible = true;
 

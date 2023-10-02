@@ -48,6 +48,10 @@ const getLineListMetadata = (lineList: string[]): LineListMetadata => {
   };
 };
 
+/**
+ * Uses serialization metadata to convert a serializeable node into a list of
+ * lines of text for serialization
+ */
 export const getSerializeableNodeLineList = (
   node: SerializeableNode,
 ): string[] => {

@@ -1,10 +1,14 @@
-import { Transform } from 'stream';
+import { Transform as NodeStreamTransform } from 'stream';
 
 type TextTransformInput = {
   onTransform: (text: string) => string | null;
 };
 
-export class TextTransform extends Transform {
+/**
+ * A node stream transform that encapsulates converting the input data to a
+ * string. Specialized node stream transforms should subclass this class.
+ */
+export class TextTransform extends NodeStreamTransform {
   constructor({ onTransform }: TextTransformInput) {
     super({
       encoding: 'utf-8',

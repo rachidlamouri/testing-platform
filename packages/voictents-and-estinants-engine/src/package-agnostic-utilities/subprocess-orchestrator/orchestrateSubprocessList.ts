@@ -144,6 +144,14 @@ const obliterateConsole = (): void => {
   process.stdout.write('\x1bc');
 };
 
+/**
+ * A utility for running multiple subprocesses in parallel. It makes it easy to
+ * run things like eslint, tsc, and various custom linting programs while
+ * developing. It is particularly useful for catching errors that you
+ * accidentally introduce in other files as a side effect of your changes. This
+ * utility also has an interactive CLI t which subprocess output is displayed on
+ * screenhat can be used to filter.
+ */
 const orchestrateSubprocessList = (): void => {
   obliterateConsole();
 

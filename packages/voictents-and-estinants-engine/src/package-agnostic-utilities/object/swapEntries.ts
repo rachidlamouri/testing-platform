@@ -4,6 +4,9 @@ type ObjectWithSwappedEntries<TObject extends Record<string, string>> = {
 
 type ObjectEntry = [string, string];
 
+/**
+ * Swaps key value pairs so the value is the key and the key is the value
+ */
 export const swapEntries = <TObject extends Record<string, string>>(
   object: TObject,
 ): ObjectWithSwappedEntries<TObject> => {

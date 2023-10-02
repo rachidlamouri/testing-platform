@@ -40,6 +40,13 @@ const recursivlyFlattenCallExpressionChain = (
   );
 };
 
+/**
+ * This is used to take each call expression in a chain of call expressions
+ * (think Promise chain, or a builder chain), and to put them into a list in
+ * order. That might sound simple, but the AST for a call expression chain is
+ * actually inverted. The first node you find when traversing the tree is the
+ * expression that gets added to the end of the list.
+ */
 export const flattenCallExpressionChain = (
   callExpression: TSESTree.CallExpression,
 ): FlattenedCallExpressionAndErrorList => {

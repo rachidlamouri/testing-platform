@@ -82,6 +82,10 @@ type PartialNamedConstructorFunctionAssemblerContext<
   ]
 >;
 
+/**
+ * The part of the constructor function builder that takes a strongly typed
+ * transformInput function based on the types given in the chain.
+ */
 type NamedConstructorFunctionInstanceTypeBuilder<
   TConstructorFunctionName extends ConstructorFunctionName,
   TConstructedInstancePropertyNameTuple extends GenericPropertyNameTuple,

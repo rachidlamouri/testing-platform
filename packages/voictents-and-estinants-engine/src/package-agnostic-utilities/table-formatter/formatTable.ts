@@ -12,6 +12,10 @@ type NormalizedRow = NormalizedCell[];
 type Table = Row[];
 type NormalizedTable = NormalizedRow[];
 
+/**
+ * A proprietary function for formatting text into table with a header. It's not
+ * that fancy. Feel free to replace this with an existing library.
+ */
 export const formatTable = (table: Table): string => {
   const normalizedTable: NormalizedTable = table.map<NormalizedRow>((row) => {
     return row.map<NormalizedCell>((cell) => {
