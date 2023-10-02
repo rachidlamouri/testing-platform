@@ -6,7 +6,9 @@ import {
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { CategorizedComment } from './comment/categorized/categorizedComment';
+import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 import { DescriptiveBlockComment } from './comment/categorized/descriptiveBlockComment';
+import { CommentTagId } from './comment/commentTagId';
 
 const FILE_PARSED_COMMENT_GROUP_ZORN_TEMPLATE = [
   'filePath',
@@ -28,12 +30,15 @@ type FileParsedCommentGroupConstructorInput = {
 /**
  * The categorized set of comments for a TypeScript file
  */
-type FileParsedCommentGroup = SimplifyN<
+export type FileParsedCommentGroup = SimplifyN<
   [
     {
       zorn: FileParsedCommentGroupZorn;
     },
     FileParsedCommentGroupConstructorInput,
+    {
+      explicitCanonicalComment: DescriptiveBlockComment | null;
+    },
   ]
 >;
 
@@ -46,6 +51,7 @@ export const { FileParsedCommentGroupInstance } = buildNamedConstructorFunction(
       'filePath',
       'list',
       'fileComment',
+      'explicitCanonicalComment',
     ] as const satisfies readonly (keyof FileParsedCommentGroup)[],
   },
 )
@@ -58,15 +64,23 @@ export const { FileParsedCommentGroupInstance } = buildNamedConstructorFunction(
       },
     },
     transformInput: (input) => {
-      const { filePath } = input;
+      const { filePath, list } = input;
 
       const zorn = new FileParsedCommentGroupZorn({
         filePath,
       });
 
+      const explicitCanonicalComment =
+        list.find(
+          (comment): comment is DescriptiveBlockComment =>
+            comment.typeName === CategorizedCommentTypeName.Descriptive &&
+            comment.tagIdSet.has(CommentTagId.ExplicitCanonicalComment),
+        ) ?? null;
+
       return {
         zorn,
         ...input,
+        explicitCanonicalComment,
       } satisfies FileParsedCommentGroup;
     },
   })

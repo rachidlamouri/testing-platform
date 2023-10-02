@@ -23,6 +23,8 @@ import {
 } from '../partition-fact/partitionFact';
 import { THEME } from '../theme';
 import { BoundedFile } from './boundedFile';
+import { CommentTagId } from '../../../programmable-units/type-script-file/comment/commentTagId';
+import { shishKebab } from '../../../../package-agnostic-utilities/case/shishKebab';
 
 const FILE_FACT_2_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactZorn],
@@ -102,18 +104,26 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         boundedFile: boundedFile.zorn,
       });
 
-      const { canonicalDeclaration } = declarationGroup;
+      const { canonicalDeclaration, canonicalComment } = declarationGroup;
+      const extensionlessName = boundedFile.nodePath.name.extensionless;
 
-      const canonicalDeclarationIdentifierName =
-        canonicalDeclaration !== null
-          ? canonicalDeclaration.identifiableNode.id.name
-          : 'Missing Canonical Declaration';
+      let canonicalName: string | null;
+      if (canonicalDeclaration !== null) {
+        canonicalName = canonicalDeclaration.identifiableNode.id.name;
+      } else if (
+        canonicalComment?.tagIdSet?.has(
+          CommentTagId.CanonicalDeclarationExemption,
+        ) ||
+        canonicalComment?.tagIdSet?.has(CommentTagId.ExplicitCanonicalComment)
+      ) {
+        // TODO: update this branch to only trigger for programs, and have the program name handy
+        canonicalName = shishKebab(extensionlessName);
+      } else {
+        canonicalName = null;
+      }
 
-      const canonicalDeclarationDescription =
-        canonicalDeclaration?.comment?.typeName ===
-        CategorizedCommentTypeName.Descriptive
-          ? canonicalDeclaration.comment.description
-          : '—';
+      const canonicalDescription =
+        canonicalComment !== null ? canonicalComment.description : null;
 
       const readableTag =
         canonicalDeclaration?.comment?.typeName ===
@@ -123,7 +133,6 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
             ) ?? null
           : null;
 
-      const extensionlessName = boundedFile.nodePath.name.extensionless;
       const label =
         readableTag !== null
           ? `${extensionlessName}\n(${readableTag.name})`
@@ -147,12 +156,16 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         fileSystemPath: boundedFile.file.filePath.serialized,
         fieldList: [
           {
-            label: canonicalDeclarationIdentifierName,
-            value: canonicalDeclarationDescription,
+            label: 'Canonical Name',
+            value: canonicalName ?? '—',
           },
           {
             label: 'Readable Name',
             value: readableTag?.name ?? '—',
+          },
+          {
+            label: 'Canonical Description',
+            value: canonicalDescription ?? '—',
           },
           {
             label: 'Directory Path',

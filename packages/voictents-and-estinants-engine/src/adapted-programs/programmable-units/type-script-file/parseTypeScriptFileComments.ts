@@ -188,7 +188,7 @@ export const parseTypeScriptFileComments = buildEstinant({
       firstComment !== null &&
       firstComment.typeName === CategorizedCommentTypeName.Descriptive &&
       (firstStatement === null ||
-        firstComment.endingLineNumber + 1 !== firstStatement.loc.end.line)
+        firstComment.endingLineNumber < firstStatement.loc.start.line - 1)
         ? firstComment
         : null;
 
