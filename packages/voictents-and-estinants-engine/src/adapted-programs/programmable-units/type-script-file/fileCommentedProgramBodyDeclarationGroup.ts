@@ -18,6 +18,8 @@ import { DescriptiveBlockComment } from './comment/categorized/descriptiveBlockC
 import { CategorizedComment } from './comment/categorized/categorizedComment';
 import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 import { FileParsedCommentGroup } from './fileParsedCommentGroup';
+import { FilePath } from '../file/filePath';
+import { isSensiblePhrase } from '../../../layer-agnostic-utilities/nonsense/isSensiblePhrase';
 
 enum CanonicalDeclarationState {
   InvalidExplicitCanonicalDeclaration = 'InvalidExplicitCanonicalDeclaration',
@@ -135,6 +137,9 @@ export type CanonicalCommentLintMetadata = Omit<
 >;
 
 type FileCommentedProgramBodyDeclarationGroupConstructorInput = {
+  // TODO: remove string file path and rename this to filePath
+  filePathObject: FilePath;
+  /** @deprecated */
   filePath: string;
   list: CommentedProgramBodyDeclaration[];
   commentGroup: FileParsedCommentGroup;
@@ -167,6 +172,8 @@ export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
       canonicalDeclarationLintMetadata: CanonicalDeclarationLintMetadata;
       canonicalComment: DescriptiveBlockComment | null;
       canonicalCommentLintMetadata: CanonicalCommentLintMetadata;
+      canonicalName: string;
+      hasSensibleName: boolean;
     },
   ]
 >;
@@ -179,6 +186,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       // keep this as a multiline list
       'zorn',
       'filePath',
+      'filePathObject',
       'list',
       'declarationByIdentifier',
       'declarationListByIdentifier',
@@ -188,6 +196,8 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       'canonicalDeclarationLintMetadata',
       'canonicalComment',
       'canonicalCommentLintMetadata',
+      'canonicalName',
+      'hasSensibleName',
     ] as const satisfies readonly (keyof FileCommentedProgramBodyDeclarationGroup)[],
   })
     .withTypes<
@@ -203,7 +213,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       },
       // TODO: break this logic into multiple functions and use this function as an orchestrator
       transformInput: (input) => {
-        const { filePath, list, commentGroup } = input;
+        const { filePath, filePathObject, list, commentGroup } = input;
 
         const zorn = new FileCommentedProgramBodyDeclarationGroupZorn({
           filePath,
@@ -472,9 +482,15 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
             }
           })();
 
+        const canonicalName =
+          canonicalDeclaration !== null
+            ? canonicalDeclaration.identifiableNode.id.name
+            : filePathObject.name.extensionless;
+
         return {
           zorn,
           filePath,
+          filePathObject,
           list,
           declarationByIdentifier,
           declarationListByIdentifier,
@@ -488,6 +504,8 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
           },
           canonicalComment,
           canonicalCommentLintMetadata,
+          canonicalName,
+          hasSensibleName: isSensiblePhrase(canonicalName),
         } satisfies FileCommentedProgramBodyDeclarationGroup;
       },
     })

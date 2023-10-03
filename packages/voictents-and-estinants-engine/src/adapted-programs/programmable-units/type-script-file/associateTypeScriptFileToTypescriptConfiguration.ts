@@ -3,6 +3,7 @@ import fs from 'fs';
 import { TYPE_SCRIPT_FILE_GEPP, TypeScriptFileVoque } from './typeScriptFile';
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { FilePath } from '../file/filePath';
 
 /**
  * Corresponds to a tsconfig.json file paired with a source TypeScript file path
@@ -10,6 +11,9 @@ import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voi
  */
 type TypeScriptFileConfiguration = {
   zorn: string;
+  // TODO: remove string sourceFilePath and rename this to sourceFilePath
+  sourceFilePathObject: FilePath;
+  /** @deprecated */
   sourceFilePath: string;
   filePath: string;
   rootDirectory: string;
@@ -70,6 +74,7 @@ export const associateTypeScriptFileToTypescriptConfiguration = buildEstinant({
     const configuration: TypeScriptFileConfiguration = {
       zorn: input.filePath.serialized,
       sourceFilePath: input.filePath.serialized,
+      sourceFilePathObject: input.filePath,
       filePath: configurationFilePath,
       rootDirectory: configurationRootDirectory,
     };
