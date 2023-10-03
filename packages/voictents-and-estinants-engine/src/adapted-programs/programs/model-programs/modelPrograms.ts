@@ -70,6 +70,7 @@ import { assertTypeScriptFileHasCanonialComment } from '../../programmable-units
 import { exemptEngineProgramFromCanonicalComment } from '../../programmable-units/type-script-file/exemptEngineProgramFromCanonicalComment';
 import { exemptPredicatesFromCanonicalComment } from '../../programmable-units/type-script-file/exemptPredicatesFromCanonicalComment';
 import { assertTypeScriptFileHasSensibleName } from '../../programmable-units/type-script-file/assertTypeScriptFileHasSensibleName';
+import { existingUnreadableNamesExemptionList } from '../../programmable-units/type-script-file/existingUnreadableNamesExemptionList';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -102,6 +103,7 @@ digikikify({
       initialHubblepupPelueTuple: [
         // keep this multiline
         NULL_OMISSION,
+        ...existingUnreadableNamesExemptionList,
       ],
     }),
   ] as const,
