@@ -12,7 +12,6 @@ import {
   DirectedGraphNode2Instance,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
-import { CategorizedCommentTypeName } from '../../../programmable-units/type-script-file/comment/categorized/categorizedCommentTypeName';
 import { FileCommentedProgramBodyDeclarationGroup } from '../../../programmable-units/type-script-file/fileCommentedProgramBodyDeclarationGroup';
 import { Metadata } from '../app/browser/dynamicComponentTypes';
 import { BoundedDirectory } from '../directory/boundedDirectory';
@@ -126,12 +125,9 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         canonicalComment !== null ? canonicalComment.description : null;
 
       const readableTag =
-        canonicalDeclaration?.comment?.typeName ===
-        CategorizedCommentTypeName.Descriptive
-          ? canonicalDeclaration.comment.tagTuple.find(
-              (tag) => tag.tag === 'readable',
-            ) ?? null
-          : null;
+        canonicalComment?.tagTuple.find(
+          (tag) => tag.tag === CommentTagId.ReadableName,
+        ) ?? null;
 
       const label =
         readableTag !== null

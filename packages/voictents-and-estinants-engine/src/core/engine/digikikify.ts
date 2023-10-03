@@ -153,7 +153,7 @@ export type RuntimeStatistics = {
  * programmed transforms. The engine continues to run as long as a programmed
  * transform has data in its input streams.
  *
- * @readable runCoreEngine
+ * @readableName runCoreEngine
  *
  * @param input (see individual properties)
  * @param input.estinantTuple the collection of Estinants to register in the
