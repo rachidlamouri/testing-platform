@@ -173,6 +173,7 @@ export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
       canonicalComment: DescriptiveBlockComment | null;
       canonicalCommentLintMetadata: CanonicalCommentLintMetadata;
       canonicalName: string;
+      readableName: string | null;
       hasSensibleName: boolean;
     },
   ]
@@ -197,6 +198,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       'canonicalComment',
       'canonicalCommentLintMetadata',
       'canonicalName',
+      'readableName',
       'hasSensibleName',
     ] as const satisfies readonly (keyof FileCommentedProgramBodyDeclarationGroup)[],
   })
@@ -487,6 +489,16 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
             ? canonicalDeclaration.identifiableNode.id.name
             : filePathObject.name.extensionless;
 
+        const readableTag =
+          canonicalComment?.tagTuple.find(
+            (tag) => tag.tag === CommentTagId.ReadableName,
+          ) ?? null;
+        const readableName = readableTag?.name ?? null;
+
+        const hasSensibleName =
+          isSensiblePhrase(canonicalName) ||
+          (readableName !== null && isSensiblePhrase(readableName));
+
         return {
           zorn,
           filePath,
@@ -505,7 +517,8 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
           canonicalComment,
           canonicalCommentLintMetadata,
           canonicalName,
-          hasSensibleName: isSensiblePhrase(canonicalName),
+          readableName,
+          hasSensibleName,
         } satisfies FileCommentedProgramBodyDeclarationGroup;
       },
     })
