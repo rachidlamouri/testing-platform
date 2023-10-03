@@ -1,6 +1,5 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
-import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
 import {
   GenericZorn2Template,
   Zorn2,
@@ -12,9 +11,8 @@ import {
   DirectedGraphNode2Instance,
 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
-import { CategorizedCommentTypeName } from '../../../programmable-units/type-script-file/comment/categorized/categorizedCommentTypeName';
 import { FileCommentedProgramBodyDeclarationGroup } from '../../../programmable-units/type-script-file/fileCommentedProgramBodyDeclarationGroup';
-import { Metadata } from '../app/browser/dynamicComponentTypes';
+import { Metadata, MetadataField } from '../app/browser/dynamicComponentTypes';
 import { BoundedDirectory } from '../directory/boundedDirectory';
 import { FactTypeName } from '../fact/factTypeName';
 import {
@@ -23,8 +21,6 @@ import {
 } from '../partition-fact/partitionFact';
 import { THEME } from '../theme';
 import { BoundedFile } from './boundedFile';
-import { CommentTagId } from '../../../programmable-units/type-script-file/comment/commentTagId';
-import { shishKebab } from '../../../../package-agnostic-utilities/case/shishKebab';
 
 const FILE_FACT_2_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactZorn],
@@ -104,38 +100,20 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         boundedFile: boundedFile.zorn,
       });
 
-      const { canonicalDeclaration, canonicalComment } = declarationGroup;
+      const {
+        canonicalComment,
+        canonicalName,
+        readableNameAnnotation,
+        hasSensibleCanonicalName,
+      } = declarationGroup;
       const extensionlessName = boundedFile.nodePath.name.extensionless;
-
-      let canonicalName: string | null;
-      if (canonicalDeclaration !== null) {
-        canonicalName = canonicalDeclaration.identifiableNode.id.name;
-      } else if (
-        canonicalComment?.tagIdSet?.has(
-          CommentTagId.CanonicalDeclarationExemption,
-        ) ||
-        canonicalComment?.tagIdSet?.has(CommentTagId.ExplicitCanonicalComment)
-      ) {
-        // TODO: update this branch to only trigger for programs, and have the program name handy
-        canonicalName = shishKebab(extensionlessName);
-      } else {
-        canonicalName = null;
-      }
 
       const canonicalDescription =
         canonicalComment !== null ? canonicalComment.description : null;
 
-      const readableTag =
-        canonicalDeclaration?.comment?.typeName ===
-        CategorizedCommentTypeName.Descriptive
-          ? canonicalDeclaration.comment.tagTuple.find(
-              (tag) => tag.tag === 'readable',
-            ) ?? null
-          : null;
-
       const label =
-        readableTag !== null
-          ? `${extensionlessName}\n(${readableTag.name})`
+        readableNameAnnotation !== null
+          ? `${extensionlessName}\n(${readableNameAnnotation})`
           : extensionlessName;
 
       const graphElement = new DirectedGraphNode2Instance({
@@ -150,31 +128,39 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         },
       });
 
+      const metadataFieldList: MetadataField[] = [
+        {
+          label: 'Canonical Name',
+          value: canonicalName ?? '—',
+        },
+      ];
+
+      if (!hasSensibleCanonicalName) {
+        metadataFieldList.push({
+          label: 'Readable Name',
+          value: readableNameAnnotation ?? '—',
+        });
+      }
+
+      metadataFieldList.push(
+        {
+          label: 'Canonical Description',
+          value: canonicalDescription ?? '—',
+        },
+        {
+          label: 'Directory Path',
+          value: boundedFile.file.filePath.parentDirectoryPath.replace(
+            boundedFile.boundary.directory.directoryPath.serialized,
+            '~b',
+          ),
+        },
+      );
+
       const graphMetadata: Metadata = {
         id: graphElement.id,
         title: boundedFile.file.nodePath.name.serialized,
         fileSystemPath: boundedFile.file.filePath.serialized,
-        fieldList: [
-          {
-            label: 'Canonical Name',
-            value: canonicalName ?? '—',
-          },
-          {
-            label: 'Readable Name',
-            value: readableTag?.name ?? '—',
-          },
-          {
-            label: 'Canonical Description',
-            value: canonicalDescription ?? '—',
-          },
-          {
-            label: 'Directory Path',
-            value: boundedFile.file.filePath.parentDirectoryPath.replace(
-              boundedFile.boundary.directory.directoryPath.serialized,
-              '~b',
-            ),
-          },
-        ].filter(isNotNull),
+        fieldList: metadataFieldList,
       };
 
       return {

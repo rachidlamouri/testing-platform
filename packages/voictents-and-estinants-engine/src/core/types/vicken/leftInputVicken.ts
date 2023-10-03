@@ -19,6 +19,8 @@ export type LeftInputVoictentVicken<TVoque extends GenericVoque> =
 
 /**
  * The type information needed to configure a strongly typed left input stream
+ *
+ * @readableName LeftInputStreamConnectionMetatype
  */
 export type LeftInputVicken<TVoque extends GenericVoque> =
   | LeftInputHubblepupVicken<TVoque>

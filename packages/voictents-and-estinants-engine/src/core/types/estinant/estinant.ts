@@ -13,6 +13,8 @@ import { Tropoignant2 } from './tropoignant';
 
 /**
  * A core transform plus its input and output stream configurations.
+ *
+ * @readableName ProgrammedTransform
  */
 export type Estinant2<
   TLeftInputVicken extends GenericLeftInputVicken,

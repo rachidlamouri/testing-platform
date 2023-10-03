@@ -7,7 +7,11 @@ import {
 import { Gepp } from '../voictent/gepp';
 
 /**
- * The type information needed to define a strongly typed stream, transform, or collection.
+ * The type information needed to define a strongly typed stream connection,
+ * transform input, transform output, or collection without tightly coupling their
+ * instances.
+ *
+ * @readableName StreamMetatype
  */
 export type Voque<
   TGepp extends Gepp,

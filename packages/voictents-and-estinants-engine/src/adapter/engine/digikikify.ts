@@ -313,7 +313,7 @@ const getInferredInMemoryVoictentTuple = (
  * the type of the input collection tuple and the input programmed transform
  * tuple.
  *
- * @readable runAdaptedEngine
+ * @readableName runAdaptedEngine
  */
 export const digikikify: Digikikifier = <
   TExplicitVoictentTuple extends UnsafeVoictent2Tuple,

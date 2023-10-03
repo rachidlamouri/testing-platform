@@ -3,8 +3,12 @@ import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
 import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInputVicken';
 
 /**
- * A function that converts a Hubblepup to an identifying Zorn.
- * This is used by the Engine to associate Hubblepups from different Voictents when processing Estinants with multiple inputs.
+ * A function that gets the id for a streamable. The engine does not assume the
+ * shape of any streamable, so this information has to be supplied by the
+ * programmer. This is used by the engine to associate streamables from different
+ * collections when a transform has multiple inputs.
+ *
+ * @readableName IdAccessor
  */
 export type Croarder = (rightIndexedHubblepup: GenericIndexedHubblepup) => Zorn;
 

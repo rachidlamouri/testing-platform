@@ -40,6 +40,8 @@ export type RightInputVoictentVicken<TVoque extends GenericVoque> =
 
 /**
  * The type information needed to configure a strongly typed right input stream
+ *
+ * @readableName RightInputStreamConnectionMetatype
  */
 export type RightInputVicken<
   TVoque extends GenericVoque,

@@ -1,5 +1,6 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { FilePath } from '../file/filePath';
 
 /**
  * Contains the AST for a TypeScript file as well as the information needed to
@@ -7,7 +8,10 @@ import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voi
  */
 type ParsedTypeScriptFile = {
   zorn: string;
+  /** @deprecated */
   filePath: string;
+  // TODO: remove the string file path and rename this object to filePath
+  filePathObject: FilePath;
   program: TSESTree.Program;
 };
 

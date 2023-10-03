@@ -7,9 +7,14 @@ import {
 import { GenericVoque, UnsafeVoque } from '../voque/voque';
 
 /**
- * The interface to implement when defining a collection for an engine program.
- * All collections must suport the interface for creating independent streams of
- * hubblepups, even if they don't actually allow streaming hubblepups.
+ * The collection interface. All collections must support the interface for
+ * creating independent streams even if they don't actually allow streaming
+ * data.
+ *
+ * @readableName Collection
+ *
+ * @todo make "addHubblepup" private, and create a stream connection for sending
+ * data to a collection
  */
 export type Voictent2<
   TRestrictingVoque extends GenericVoque,

@@ -132,6 +132,7 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
 
     return new FileCommentedProgramBodyDeclarationGroupInstance({
       filePath: parsedTypeScriptFile.filePath,
+      filePathObject: parsedTypeScriptFile.filePathObject,
       list: declarationList,
       commentGroup,
     });

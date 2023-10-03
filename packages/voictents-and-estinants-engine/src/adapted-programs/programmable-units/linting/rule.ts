@@ -111,3 +111,5 @@ export class TypedRule<
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type UnsafeTypedRule = TypedRule<any>;
+
+export type EmptyMessageContext = Record<string, never>;

@@ -10,6 +10,8 @@ import {
  * for the engine to stream data.
  *
  * @todo define Transform
+ *
+ * @readableName CoreTransform
  */
 export type Tropoignant2<
   TLeftVicken extends GenericLeftInputVicken,

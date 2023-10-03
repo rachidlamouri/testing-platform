@@ -9,7 +9,10 @@ import { Framation3 } from './framation';
 import { GenericLeftInputVicken } from '../../../vicken/leftInputVicken';
 
 /**
- * The stream configuration for a right input
+ * Determines how to stream a collection into a single right input of a
+ * transform. See the data types of its properties for more details.
+ *
+ * @readableName RightInputStreamConfiguration
  */
 export type RightInputAppreffinge<
   TLeftInputVicken extends GenericLeftInputVicken,

@@ -63,6 +63,7 @@ export const parseTypeScriptFile = buildEstinant({
           {
             zorn: typeScriptFileConfiguration.zorn,
             filePath: typeScriptFileConfiguration.sourceFilePath,
+            filePathObject: typeScriptFileConfiguration.sourceFilePathObject,
             program,
           },
         ],

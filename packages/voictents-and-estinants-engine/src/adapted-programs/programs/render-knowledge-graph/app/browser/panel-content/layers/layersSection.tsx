@@ -16,7 +16,7 @@ export const LayersSection: React.FunctionComponent = () => {
   useEffect(() => {
     if (generatedIndex !== null) {
       onSelectBoundaryId(
-        generatedIndex.navigationList[0].partitionList[0].boundaryId,
+        generatedIndex.navigationList[0].partitionList[1].boundaryId,
       );
     }
   }, [generatedIndex]);
