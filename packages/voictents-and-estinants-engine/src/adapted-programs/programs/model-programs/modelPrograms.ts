@@ -69,6 +69,7 @@ import { omitProgramCanoncalExportRequirement } from '../../programmable-units/t
 import { assertTypeScriptFileHasCanonialComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonialComment';
 import { exemptEngineProgramFromCanonicalComment } from '../../programmable-units/type-script-file/exemptEngineProgramFromCanonicalComment';
 import { exemptPredicatesFromCanonicalComment } from '../../programmable-units/type-script-file/exemptPredicatesFromCanonicalComment';
+import { assertTypeScriptFileHasSensibleName } from '../../programmable-units/type-script-file/assertTypeScriptFileHasSensibleName';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -130,6 +131,8 @@ digikikify({
     exemptEngineProgramFromCanonicalComment,
     exemptPredicatesFromCanonicalComment,
     omitProgramCanoncalExportRequirement,
+
+    assertTypeScriptFileHasSensibleName,
 
     filterEngineProgramFile,
     getEngineProgramLocator3,

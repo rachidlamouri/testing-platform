@@ -173,7 +173,8 @@ export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
       canonicalComment: DescriptiveBlockComment | null;
       canonicalCommentLintMetadata: CanonicalCommentLintMetadata;
       canonicalName: string;
-      readableName: string | null;
+      readableNameAnnotation: string | null;
+      hasSensibleCanonicalName: boolean;
       hasSensibleName: boolean;
     },
   ]
@@ -198,7 +199,8 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       'canonicalComment',
       'canonicalCommentLintMetadata',
       'canonicalName',
-      'readableName',
+      'readableNameAnnotation',
+      'hasSensibleCanonicalName',
       'hasSensibleName',
     ] as const satisfies readonly (keyof FileCommentedProgramBodyDeclarationGroup)[],
   })
@@ -489,15 +491,19 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
             ? canonicalDeclaration.identifiableNode.id.name
             : filePathObject.name.extensionless;
 
+        const hasSensibleCanonicalName = isSensiblePhrase(canonicalName);
+
         const readableTag =
           canonicalComment?.tagTuple.find(
             (tag) => tag.tag === CommentTagId.ReadableName,
           ) ?? null;
-        const readableName = readableTag?.name ?? null;
+
+        const readableNameAnnotation = readableTag?.name ?? null;
 
         const hasSensibleName =
-          isSensiblePhrase(canonicalName) ||
-          (readableName !== null && isSensiblePhrase(readableName));
+          hasSensibleCanonicalName ||
+          (readableNameAnnotation !== null &&
+            isSensiblePhrase(readableNameAnnotation));
 
         return {
           zorn,
@@ -517,7 +523,8 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
           canonicalComment,
           canonicalCommentLintMetadata,
           canonicalName,
-          readableName,
+          readableNameAnnotation,
+          hasSensibleCanonicalName,
           hasSensibleName,
         } satisfies FileCommentedProgramBodyDeclarationGroup;
       },

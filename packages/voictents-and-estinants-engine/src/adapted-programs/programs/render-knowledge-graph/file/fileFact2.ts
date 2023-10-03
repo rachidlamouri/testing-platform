@@ -21,7 +21,6 @@ import {
 } from '../partition-fact/partitionFact';
 import { THEME } from '../theme';
 import { BoundedFile } from './boundedFile';
-import { isSensiblePhrase } from '../../../../layer-agnostic-utilities/nonsense/isSensiblePhrase';
 
 const FILE_FACT_2_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactZorn],
@@ -101,16 +100,20 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         boundedFile: boundedFile.zorn,
       });
 
-      const { canonicalComment, canonicalName, readableName } =
-        declarationGroup;
+      const {
+        canonicalComment,
+        canonicalName,
+        readableNameAnnotation,
+        hasSensibleCanonicalName,
+      } = declarationGroup;
       const extensionlessName = boundedFile.nodePath.name.extensionless;
 
       const canonicalDescription =
         canonicalComment !== null ? canonicalComment.description : null;
 
       const label =
-        readableName !== null
-          ? `${extensionlessName}\n(${readableName})`
+        readableNameAnnotation !== null
+          ? `${extensionlessName}\n(${readableNameAnnotation})`
           : extensionlessName;
 
       const graphElement = new DirectedGraphNode2Instance({
@@ -132,10 +135,10 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         },
       ];
 
-      if (!isSensiblePhrase(canonicalName)) {
+      if (!hasSensibleCanonicalName) {
         metadataFieldList.push({
           label: 'Readable Name',
-          value: readableName ?? '—',
+          value: readableNameAnnotation ?? '—',
         });
       }
 
