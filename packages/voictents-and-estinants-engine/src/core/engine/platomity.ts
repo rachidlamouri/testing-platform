@@ -9,7 +9,10 @@ import { GeppSet } from '../types/voictent/gepp';
 import { GenericVoictent2 } from '../types/voictent/voictent2';
 
 /**
- * A wrapper on an estinant which the engine uses to stream hubblepups to estinants.
+ * A programmed transform wrapper that is used to connect collections to
+ * transforms.
+ *
+ * @readableName MutableTransformState
  */
 export type Platomity2 = {
   version: 2;

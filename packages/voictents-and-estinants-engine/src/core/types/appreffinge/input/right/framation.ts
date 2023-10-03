@@ -4,7 +4,12 @@ import { GenericLeftInputVicken } from '../../../vicken/leftInputVicken';
 import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInputVicken';
 
 /**
- * A function that takes the leftmost Hubblepup of a Cology and outputs a Zorn tuple for each of the other members of the Cology
+ * A function that takes the leftmost input of a transform input group and
+ * outputs an id tuple for the associated right inputs of a particular stream
+ * connection. This allows the engine to look up the associated right inputs by id and
+ * coordinate triggering a transform when an input group has all streamables.
+ *
+ * @readableName AssociatedIdTupleAccessor
  */
 export type Framation = (
   leftIndexedHubblepup: GenericIndexedHubblepup,

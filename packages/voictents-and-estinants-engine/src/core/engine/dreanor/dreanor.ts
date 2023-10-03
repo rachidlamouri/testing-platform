@@ -49,15 +49,15 @@ export type RightVoictentItem2Dreanor = {
   croard: Croarder | GenericCroader3;
 };
 
-/**
- * Contains the information needed to identify a Voictent, and to stream and cache its Hubblepups
- */
 export type RightDreanor = RightVoictentDreanor | RightVoictentItem2Dreanor;
 
 export type RightDreanorTuple = readonly RightDreanor[];
 
 /**
- * The information needed to identify a voictent and to stream its hubblepup
+ * The information needed to identify a collection, to stream its contents, and
+ * to track when a collection is ready to be streamed.
+ *
+ * @readableName MutableStreamConnectionState
  */
 export type Dreanor = LeftDreanor | RightDreanor;
 

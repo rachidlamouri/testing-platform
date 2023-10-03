@@ -2,7 +2,9 @@ import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { Combination } from '../../../package-agnostic-utilities/type/combination';
 
 /**
- * The thing that is used to find a Voictent of Hubblepups
+ * Enables identifying an instantiated collection.
+ *
+ * @readableName CollectionId
  */
 export type Gepp = string;
 
