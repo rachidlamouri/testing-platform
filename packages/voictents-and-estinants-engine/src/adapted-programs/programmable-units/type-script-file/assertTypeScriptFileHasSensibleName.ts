@@ -14,6 +14,7 @@ import {
   FileCommentedProgramBodyDeclarationGroupVoque,
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { FileSourceInstance } from '../linting/source/fileSource';
+import { getPhraseSensibilityState } from '../../../layer-agnostic-utilities/nonsense/isSensiblePhrase';
 
 const ESTINANT_NAME = 'assertTypeScriptFileHasSensibleName' as const;
 
@@ -54,6 +55,15 @@ export const assertTypeScriptFileHasSensibleName = buildEstinant({
       isValid: commentGroup.hasSensibleName,
       errorMessageContext: {},
       context: {
+        readableNameAnnotation: commentGroup.readableNameAnnotation,
+        readableNameAnnotationSensibilityState:
+          commentGroup.readableNameAnnotation !== null
+            ? getPhraseSensibilityState(commentGroup.readableNameAnnotation)
+            : null,
+        canonicalName: commentGroup.canonicalName,
+        canonicalNameSensibilityState: getPhraseSensibilityState(
+          commentGroup.canonicalName,
+        ),
         commentGroup,
       },
     });
