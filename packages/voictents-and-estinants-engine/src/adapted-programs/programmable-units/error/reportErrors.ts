@@ -69,6 +69,11 @@ export const reportErrors = buildEstinant({
           );
         }
 
+        const contextPath = programError.contextFilePath ?? 'n/a';
+
+        console.log('  Context Path');
+        console.log(`    ${contextPath}`);
+
         // TODO: incorporate the program file cache error context filepath
       }
 

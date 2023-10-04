@@ -13,6 +13,9 @@ import {
   PROGRAM_ERROR_GEPP,
   UnsafeProgramErrorVoque,
 } from './programError';
+import { LintAssertionError } from '../linting/reportFailedLintAssertion';
+import { SourceTypeName } from '../linting/source/sourceTypeName';
+import { Source } from '../linting/source/source';
 
 type ProgramErrorVoictentConstructorInput = {
   programFileCache: ProgramFileCache;
@@ -48,26 +51,77 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
   protected transformHubblepup(
     hubblepupPelue: GenericProgramErrorVoque['hubblepupPelue'],
   ): GenericProgramErrorVoque['hubblepupPelie'] {
-    if (hubblepupPelue instanceof Error) {
+    if (
+      !(hubblepupPelue instanceof LintAssertionError) &&
+      hubblepupPelue instanceof Error
+    ) {
       return hubblepupPelue;
     }
 
-    const zorn = getVoictentResourceLocator([
-      hubblepupPelue.reporterLocator.name,
-      hubblepupPelue.name,
-      hubblepupPelue.sourceLocator?.filePath ?? '',
-    ]);
+    let zorn: string;
+    let sourceLocatorFilePath: string | null;
+    if (hubblepupPelue instanceof LintAssertionError) {
+      zorn = hubblepupPelue.lintAssertion.zorn.forHuman;
+
+      const { lintSource } = hubblepupPelue.lintAssertion;
+
+      sourceLocatorFilePath = (function getSourceLocatorFilePath(
+        source: Source,
+      ): string {
+        switch (source.typeName) {
+          case SourceTypeName.FileSource: {
+            return source.filePath;
+          }
+          case SourceTypeName.FileLineSource: {
+            return source.filePath;
+          }
+          case SourceTypeName.ImportedIdentifierSource: {
+            return source.importingFilePath;
+          }
+          case SourceTypeName.ExportedIdentifierSource: {
+            return source.filePath;
+          }
+          case SourceTypeName.EstinantSource: {
+            return source.filePath;
+          }
+          case SourceTypeName.RequestSource: {
+            return getSourceLocatorFilePath(source.requestee);
+          }
+        }
+      })(lintSource);
+    } else {
+      zorn = getVoictentResourceLocator([
+        hubblepupPelue.reporterLocator.name,
+        hubblepupPelue.name,
+        hubblepupPelue.sourceLocator?.filePath ?? '',
+      ]);
+
+      sourceLocatorFilePath = hubblepupPelue.sourceLocator?.filePath ?? '';
+    }
 
     const normalizedZorn = normalizeFilePathForFileName(zorn);
     const normalizedReporterPath = normalizeFilePathForFileName(
-      hubblepupPelue.sourceLocator?.filePath ?? '',
+      sourceLocatorFilePath,
     );
     const normalizedSourcePath = normalizeFilePathForFileName(
-      hubblepupPelue.sourceLocator?.filePath ?? '',
+      sourceLocatorFilePath,
     );
 
     const byReporterDirectoryPath = `by-reporter/${normalizedReporterPath}`;
     const bySourceDirectoryPath = `by-source/${normalizedSourcePath}`;
+
+    const contextFilePath =
+      this.programFileCache.getNamespacedVoictentsFilePath({
+        voictentGepp: this.gepp,
+        nestedPath: bySourceDirectoryPath,
+        extensionlessFileName: normalizedZorn,
+        fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
+      });
+
+    if (hubblepupPelue instanceof LintAssertionError) {
+      // hubblepupPelue.setContextFilePath(contextFilePath);
+      return hubblepupPelue;
+    }
 
     const hubblepupPelie: GenericProgramErrorVoque['hubblepupPelie'] = {
       zorn,
@@ -81,12 +135,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       normalizedZorn,
       byReporterDirectoryPath,
       bySourceDirectoryPath,
-      contextFilePath: this.programFileCache.getNamespacedVoictentsFilePath({
-        voictentGepp: this.gepp,
-        nestedPath: bySourceDirectoryPath,
-        extensionlessFileName: normalizedZorn,
-        fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
-      }),
+      contextFilePath,
     };
 
     return hubblepupPelie;
@@ -108,6 +157,18 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
         serializedHubblepup,
         extensionlessFileName: `${index}`.padStart(2, '0'),
       });
+
+      if (hubblepup instanceof LintAssertionError) {
+        const contextFilePath =
+          this.programFileCache.getNamespacedVoictentsFilePath({
+            voictentGepp: this.gepp,
+            nestedPath: 'error',
+            extensionlessFileName: `${index}`.padStart(2, '0'),
+            fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
+          });
+
+        hubblepup.setContextFilePath(contextFilePath);
+      }
 
       // TODO: serialize all errors
       return;
