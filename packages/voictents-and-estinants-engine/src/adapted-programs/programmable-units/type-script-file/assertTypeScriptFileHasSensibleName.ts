@@ -22,7 +22,7 @@ export const typeScriptFileHasSensibleNameRule =
     name: 'type-script-file-has-sensible-name',
     description: `TypeScript files must have a name without nonsense words, or a @${CommentTagId.ReadableName} annotation in their canonical comment with a readable name.`,
     source: new EstinantSourceInstance({
-      filePath: posix.resolve('', __filename),
+      filePath: posix.relative('', __filename),
       estinantName: ESTINANT_NAME,
     }),
     getErrorMessage: (): string => {
