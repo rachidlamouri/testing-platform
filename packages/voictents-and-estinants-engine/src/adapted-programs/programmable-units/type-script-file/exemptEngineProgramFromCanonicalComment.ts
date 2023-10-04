@@ -12,7 +12,7 @@ import {
 } from '../linting/lintAssertionOmission';
 import { EstinantSourceInstance } from '../linting/source/estinantSource';
 import { FileSourceInstance } from '../linting/source/fileSource';
-import { typeScriptFileHasCanonicalCommentRule } from './assertTypeScriptFileHasCanonialComment';
+import { typeScriptFileHasCanonicalCommentRule } from './assertTypeScriptFileHasCanonicalComment';
 
 const ESTINANT_NAME = 'exemptEngineProgramFromCanonicalComment' as const;
 

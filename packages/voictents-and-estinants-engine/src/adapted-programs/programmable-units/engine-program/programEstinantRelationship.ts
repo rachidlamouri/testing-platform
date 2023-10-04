@@ -20,6 +20,8 @@ type ProgramEstinantRelationshipPrototype = {
 /**
  * Defines a relationship between a program and a transform: a transform can
  * appear in more than one program
+ *
+ * @readableName ProgramProgrammedTransformRelationship
  */
 export type ProgramEstinantRelationship = ObjectWithPrototype<
   BaseProgramEstinantRelationship,

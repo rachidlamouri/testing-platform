@@ -29,6 +29,8 @@ type EngineProgram3Prototype = {
 
 /**
  * The model of a program
+ *
+ * @readableName ProgramModel
  */
 type EngineProgram3 = ObjectWithPrototype<
   BaseEngineProgram3,

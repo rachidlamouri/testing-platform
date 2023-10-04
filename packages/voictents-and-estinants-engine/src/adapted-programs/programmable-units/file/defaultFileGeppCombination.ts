@@ -46,6 +46,10 @@ type DefaultFileGepp = ValueOf<
 /**
  * The set of collection ids for streamable metatypes that use the
  * FileSystemNodeVoque
+ *
+ * @todo remove this so that the adapted engine doesn't have to know about FileSystemNode collections and instead provide a builder for a default set of collections
+ *
+ * @readableName defaultFileCollectionIdCombination
  */
 export const defaultFileGeppCombination: GeppCombination<DefaultFileGepp> =
   buildGeppCombination(defaultFileGeppList);

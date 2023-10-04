@@ -38,7 +38,9 @@ type ProgramEstinantInputRelationshipPrototype = {
 };
 
 /**
- * Defines a relationship between an program and transform
+ * Defines a relationship between a program and a transform input
+ *
+ * @readableName ProgramTransformInputStreamRelationship
  */
 type ProgramEstinantInputRelationship = ObjectWithPrototype<
   BaseProgramEstinantInputRelationship,

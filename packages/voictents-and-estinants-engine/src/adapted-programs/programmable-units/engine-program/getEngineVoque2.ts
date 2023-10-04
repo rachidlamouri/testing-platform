@@ -32,6 +32,8 @@ const reporterLocator: ReportingLocator = {
 
 /**
  * Associates a comment with a voque definition
+ *
+ * @readableName getStreamMetatypeModel
  */
 export const getEngineVoque2 = buildEstinant({
   name: ESTINANT_NAME,

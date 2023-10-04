@@ -5,6 +5,7 @@ import {
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { LeafSource } from './leafSource';
+import { SourceTypeName } from './sourceTypeName';
 
 const REQUEST_SOURCE_ZORN_TEMPLATE = [
   'requestor',
@@ -30,6 +31,7 @@ type RequestSourceConstructorInput = {
 export type RequestSource = SimplifyN<
   [
     {
+      typeName: SourceTypeName.RequestSource;
       zorn: RequestSourceZorn;
     },
     RequestSourceConstructorInput,
@@ -40,6 +42,7 @@ export const { RequestSourceInstance } = buildNamedConstructorFunction({
   constructorName: 'RequestSourceInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
+    'typeName',
     'zorn',
     'requestor',
     'requestee',
@@ -62,6 +65,7 @@ export const { RequestSourceInstance } = buildNamedConstructorFunction({
       });
 
       return {
+        typeName: SourceTypeName.RequestSource,
         zorn,
         ...input,
       } satisfies RequestSource;

@@ -4,6 +4,7 @@ import {
   Zorn2,
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
+import { SourceTypeName } from './sourceTypeName';
 
 const FILE_LINE_SOURCE_ZORN_TEMPLATE = [
   'filePath',
@@ -27,6 +28,7 @@ type FileLineSourceConstructorInput = {
 export type FileLineSource = SimplifyN<
   [
     {
+      typeName: SourceTypeName.FileLineSource;
       zorn: FileLineSourceZorn;
     },
     FileLineSourceConstructorInput,
@@ -40,6 +42,7 @@ export const { FileLineSourceInstance } = buildNamedConstructorFunction({
   constructorName: 'FileLineSourceInstance' as const,
   instancePropertyNameTuple: [
     // multiline-keep
+    'typeName',
     'zorn',
     'filePath',
     'lineNumber',
@@ -63,6 +66,7 @@ export const { FileLineSourceInstance } = buildNamedConstructorFunction({
       });
 
       return {
+        typeName: SourceTypeName.FileLineSource,
         zorn,
         filePath,
         lineNumber,

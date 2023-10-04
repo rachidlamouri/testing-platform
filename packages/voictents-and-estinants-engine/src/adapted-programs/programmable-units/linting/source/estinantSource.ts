@@ -24,6 +24,8 @@ type EstinantSourceConstructorInput = {
 
 /**
  * The information needed to locate an estinant definition
+ *
+ * @readableName ProgrammedTransformSource
  */
 export type EstinantSource = SimplifyN<
   [

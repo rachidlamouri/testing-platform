@@ -17,6 +17,8 @@ type CommentZornTemplate = typeof COMMENT_ZORN_TEMPLATE;
 
 /**
  * The complex identifier for a comment
+ *
+ * @readableName CommentComplexId
  */
 export class CommentZorn extends Zorn2<CommentZornTemplate> {
   static build({ filePath, rawComment }: CommentZornContext): CommentZorn {

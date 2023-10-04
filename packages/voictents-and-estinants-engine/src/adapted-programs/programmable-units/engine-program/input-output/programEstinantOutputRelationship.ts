@@ -19,6 +19,8 @@ type ProgramEstinantOutputRelationshipPrototype = {
 
 /**
  * Defines a relationship between a program and a transform output
+ *
+ * @readableName ProgramTransformOutputStreamRelationship
  */
 type ProgramEstinantOutputRelationship = ObjectWithPrototype<
   BaseProgramEstinantOutputRelationship,

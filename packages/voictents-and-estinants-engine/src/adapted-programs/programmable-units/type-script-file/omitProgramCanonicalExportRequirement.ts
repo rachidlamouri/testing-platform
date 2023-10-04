@@ -13,7 +13,7 @@ import {
 } from '../type-script-file-relationships/engineProgramFile';
 import { typeScriptFileHasCanonicalDeclarationRule } from './canonical-declaration/assertTypeScriptFileHasCanonicalDeclaration';
 
-const ESTINANT_NAME = 'omitProgramCanoncalExportRequirement' as const;
+const ESTINANT_NAME = 'omitProgramCanonicalExportRequirement' as const;
 
 const omitterSource = new EstinantSourceInstance({
   filePath: __filename,
@@ -23,8 +23,8 @@ const omitterSource = new EstinantSourceInstance({
 /**
  * Creates an assertion omission for program files
  */
-export const omitProgramCanoncalExportRequirement = buildEstinant({
-  name: 'omitProgramCanoncalExportRequirement',
+export const omitProgramCanonicalExportRequirement = buildEstinant({
+  name: ESTINANT_NAME,
 })
   .fromHubblepup2<EngineProgramFileVoque>({
     gepp: ENGINE_PROGRAM_FILE_GEPP,

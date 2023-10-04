@@ -27,6 +27,8 @@ type ProgramErrorVoictentConstructorInput = {
  *
  * It also enhances the error object with a context path, so that downstream
  * transforms can emit where to find more error context
+ *
+ * @readableName ProgramErrorCollection
  */
 export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
   UnsafeProgramErrorVoque,

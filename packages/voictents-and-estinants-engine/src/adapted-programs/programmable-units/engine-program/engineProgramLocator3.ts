@@ -36,6 +36,8 @@ type EngineProgramLocator3Prototype = {
 /**
  * The information needed to find the parts of an engine program so that it can
  * be assembled later into a complete model
+ *
+ * @readableName ProgramLocator
  */
 export type EngineProgramLocator3 = ObjectWithPrototype<
   BaseEngineProgramLocator3,

@@ -13,6 +13,8 @@ import {
  * Consumes the entire collection of engine program locators in order to
  * deduplicate their estinant locator information. This transform makes sure
  * that each estinant is only processed once.
+ *
+ * @readableName getProgrammedTransformLocatorCollection
  */
 export const getEngineEstinantLocatorCollection2 = buildEstinant({
   name: 'getEngineEstinantLocatorCollection2',

@@ -34,6 +34,8 @@ import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
 /**
  * Joins the program locator to its transforms in order to
  * construct an object that represents an engine program.
+ *
+ * @readableName getProgramModel
  */
 export const getEngineProgram3 = buildEstinant({
   name: 'getEngineProgram3',

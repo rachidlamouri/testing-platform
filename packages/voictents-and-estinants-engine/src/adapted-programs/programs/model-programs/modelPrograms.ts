@@ -43,7 +43,7 @@ import { getEngineEstinantGraphElements } from './getEngineEstinantGraphElements
 import { getEngineProgramVoqueElements } from './getEngineProgramVoqueElements';
 import { getDirectedGraphMetadataById2 } from './getDirectedGraphMetadataById2';
 import { getEngineEstinantMetadataEntry } from './getEngineEstinantMetadataEntry';
-import { getInputMetdataEntry } from './getInputMetdataEntry';
+import { getInputMetadataEntry } from './getInputMetadataEntry';
 import { getEngineVoqueMetadataEntry } from './getEngineVoqueMetadataEntry';
 import { getTopLevelEngineProgramGraphElements } from './getTopLevelEngineProgramGraphElements';
 import { getInputEdges } from './getInputEdges';
@@ -65,8 +65,8 @@ import {
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 import { handleNoCanonicalDirective } from '../../programmable-units/type-script-file/handleNoCanonicalDirective';
-import { omitProgramCanoncalExportRequirement } from '../../programmable-units/type-script-file/omitProgramCanoncalExportRequirement';
-import { assertTypeScriptFileHasCanonialComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonialComment';
+import { omitProgramCanonicalExportRequirement } from '../../programmable-units/type-script-file/omitProgramCanonicalExportRequirement';
+import { assertTypeScriptFileHasCanonicalComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonicalComment';
 import { exemptEngineProgramFromCanonicalComment } from '../../programmable-units/type-script-file/exemptEngineProgramFromCanonicalComment';
 import { exemptPredicatesFromCanonicalComment } from '../../programmable-units/type-script-file/exemptPredicatesFromCanonicalComment';
 import { assertTypeScriptFileHasSensibleName } from '../../programmable-units/type-script-file/assertTypeScriptFileHasSensibleName';
@@ -128,11 +128,11 @@ digikikify({
     getTypeScriptFileImportList,
 
     assertTypeScriptFileHasCanonicalDeclaration,
-    assertTypeScriptFileHasCanonialComment,
+    assertTypeScriptFileHasCanonicalComment,
     handleNoCanonicalDirective,
     exemptEngineProgramFromCanonicalComment,
     exemptPredicatesFromCanonicalComment,
-    omitProgramCanoncalExportRequirement,
+    omitProgramCanonicalExportRequirement,
 
     assertTypeScriptFileHasSensibleName,
 
@@ -155,7 +155,7 @@ digikikify({
     getTopLevelEngineProgramMetadataEntries,
     getEngineVoqueMetadataEntry,
     getEngineEstinantMetadataEntry,
-    getInputMetdataEntry,
+    getInputMetadataEntry,
     getDirectedGraphMetadataById2,
 
     encodeDirectedGraphAsGraphvizCode,

@@ -23,6 +23,8 @@ type EngineProgramLocator2Prototype = {
 /**
  * The part of an EngineProgramLocator that is required to build the estinant
  * relationships for the actual EngineProgramLocator
+ *
+ * @readableName PartialProgramLocator
  */
 type PartialEngineProgramLocator2 = ObjectWithPrototype<
   BasePartialEngineProgramLocator2,

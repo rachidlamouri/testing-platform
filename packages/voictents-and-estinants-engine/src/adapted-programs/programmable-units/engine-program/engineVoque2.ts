@@ -28,6 +28,8 @@ type EngineVoque2Prototype = {
  * Represents a metacollection used by an engine program
  *
  * @todo this should be an EngineHubblepup now. It should go EngineVoqueLocator -> EngineHubblepup
+ *
+ * @readableName StreamMetatypeModel
  */
 type EngineVoque2 = ObjectWithPrototype<
   BaseEngineVoque2,

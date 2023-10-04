@@ -13,7 +13,7 @@ import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { LintAssertionZorn } from '../linting/lintAssertion';
-import { typeScriptFileHasCanonicalCommentRule } from './assertTypeScriptFileHasCanonialComment';
+import { typeScriptFileHasCanonicalCommentRule } from './assertTypeScriptFileHasCanonicalComment';
 import { FileSourceInstance } from '../linting/source/fileSource';
 import { isExportNamedFunctionDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isExportNamedFunctionDeclaration';
 import { IdentifiableFunctionDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableFunctionDeclaration';

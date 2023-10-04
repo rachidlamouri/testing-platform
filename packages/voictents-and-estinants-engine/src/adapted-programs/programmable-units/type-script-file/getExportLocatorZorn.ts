@@ -12,6 +12,8 @@ type ExportLocator = {
 /**
  * This is part of an outdated identifier pattern. Use the Zorn class instead.
  * @deprecated
+ *
+ * @readableName getExportLocatorId
  */
 export const getExportLocatorZorn = (locator: ExportLocator): string => {
   return getZorn([locator.filePath, locator.identifierName]);

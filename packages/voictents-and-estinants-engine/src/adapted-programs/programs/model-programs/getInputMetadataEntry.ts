@@ -17,8 +17,8 @@ import {
 /**
  * Gets information about transform inputs and their connected collections
  */
-export const getInputMetdataEntry = buildEstinant({
-  name: 'getInputMetdataEntry',
+export const getInputMetadataEntry = buildEstinant({
+  name: 'getInputMetadataEntry',
 })
   .fromHubblepup2<ProgramEstinantInputRelationshipVoque>({
     gepp: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,

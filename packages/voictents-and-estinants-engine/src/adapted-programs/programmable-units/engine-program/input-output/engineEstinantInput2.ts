@@ -44,6 +44,8 @@ type EstinantInput2Prototype = {
 
 /**
  * The model of a transform input
+ *
+ * @readableName ProgrammedTransformInputStreamModel
  */
 export type EngineEstinantInput2 = ObjectWithPrototype<
   BaseEstinantInput2,
