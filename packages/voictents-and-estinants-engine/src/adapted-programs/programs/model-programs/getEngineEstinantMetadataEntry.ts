@@ -16,6 +16,8 @@ import {
 
 /**
  * Gets metadata for transforms
+ *
+ * @readableName getProgrammedTransformModelMetadataEntry
  */
 export const getEngineEstinantMetadataEntry = buildEstinant({
   name: 'getEngineEstinantMetadataEntry',

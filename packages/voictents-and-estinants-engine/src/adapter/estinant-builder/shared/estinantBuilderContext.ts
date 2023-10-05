@@ -4,6 +4,8 @@
  *
  * @noCanonicalDeclaration
  *
+ * @readableName ProgrammedTransformBuilderContext
+ *
  * @todo split up the typess and functions in this file by purpose
  */
 

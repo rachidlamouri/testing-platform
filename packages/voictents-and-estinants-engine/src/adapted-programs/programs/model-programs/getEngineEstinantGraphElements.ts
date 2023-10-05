@@ -28,6 +28,8 @@ import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-fi
 /**
  * Creates a subgraph to group the estinant node and its input nodes, as well as
  * a set of invisible edges to force the input nodes to render in order
+ *
+ * @readableName getProgrammedTransformModelGraphElement
  */
 export const getEngineEstinantGraphElements = buildEstinant({
   name: 'getEngineEstinantGraphElements',

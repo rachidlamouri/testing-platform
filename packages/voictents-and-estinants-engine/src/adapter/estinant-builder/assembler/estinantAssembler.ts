@@ -27,6 +27,8 @@ import {
 /**
  * Constructs an estinant given all of the context accumulated by the builder
  * chain
+ *
+ * @readableName ProgrammedTransformAssembler
  */
 type EstinantAssembler<
   TLeftInputVicken extends GenericLeftInputVicken,

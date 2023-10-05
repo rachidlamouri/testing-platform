@@ -18,6 +18,8 @@ import {
 /**
  * Gets metadata about meta collection types and their corresponding collections
  * and collection items
+ *
+ * @readableName getStreamMetatypeModelMetadataEntry
  */
 export const getEngineVoqueMetadataEntry = buildEstinant({
   name: 'getEngineVoqueMetadataEntry',

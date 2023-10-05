@@ -4,6 +4,8 @@
  *
  * @noCanonicalDeclaration
  *
+ * @readableName AdaptedStreamConnectionMetatype
+ *
  * @todo split this file into left, right tuple, and output vicken files
  */
 

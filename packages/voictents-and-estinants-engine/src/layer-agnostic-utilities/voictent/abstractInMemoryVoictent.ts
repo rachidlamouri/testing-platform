@@ -33,6 +33,8 @@ type InMemoryVoictentConstructorInput<TVoque extends GenericInMemoryVoque> = {
 
 /**
  * The parent class of any collection that wants to store data in memory
+ *
+ * @readableName AbstractInMemoryCollection
  */
 export abstract class AbstractInMemoryVoictent<
   TRestrictingVoque extends GenericInMemoryVoque,

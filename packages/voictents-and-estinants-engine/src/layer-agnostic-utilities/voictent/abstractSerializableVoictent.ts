@@ -55,6 +55,8 @@ type AbstractSerializableVoictentConstructorInput<
 /**
  * A collection that can take a serializeable hubblepup and write it to a
  * program file cache.
+ *
+ * @readableName AbstractSerializableCollection
  */
 export abstract class AbstractSerializableVoictent<
   TVoque extends GenericAbstractSerializableVoque,

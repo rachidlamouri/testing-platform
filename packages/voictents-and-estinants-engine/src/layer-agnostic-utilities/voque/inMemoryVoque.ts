@@ -13,6 +13,8 @@ export type InMemoryIndexByName = Merge<
 
 /**
  * Definese the type information needed to collect and stream data in memory
+ *
+ * @readableName InMemoryStreamMetatype
  */
 export type InMemoryVoque<
   TGepp extends Gepp,

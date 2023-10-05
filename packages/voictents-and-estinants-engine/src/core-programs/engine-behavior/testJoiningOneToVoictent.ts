@@ -61,6 +61,8 @@ const gatherCollection: Estinant2<
  * @todo debug the program snapshot for this one. The output collection appears to be out of the expected order (1, 2). Which is ok, but I want to know why.
  *
  * @canonicalComment
+ *
+ * @readableName testJoiningOneStreamableToCollection
  */
 digikikify2({
   inputVoictentList: [

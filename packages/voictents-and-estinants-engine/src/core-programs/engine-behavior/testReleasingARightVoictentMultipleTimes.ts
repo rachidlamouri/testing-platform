@@ -101,6 +101,8 @@ const join1ToAllOf3: Estinant2<
  * collection causes the transform to trigger multiple times
  *
  * @canonicalComment
+ *
+ * @readableName testReleasingARightCollectionMultipleTimes
  */
 digikikify2({
   inputVoictentList: [

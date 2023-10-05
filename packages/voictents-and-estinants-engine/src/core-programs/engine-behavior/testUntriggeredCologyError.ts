@@ -70,6 +70,8 @@ const joinCollectionsByValue: Estinant2<
  * error. The serialized error is committed to the git repo.
  *
  * @canonicalComment
+ *
+ * @readableName testUntriggeredTransformInputIdGroupError
  */
 digikikify2({
   inputVoictentList: [

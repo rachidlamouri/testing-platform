@@ -20,6 +20,8 @@ type SerializableVoictentConstructorInput<
 
 /**
  * This collection specifically uses the custom one way serializer
+ *
+ * @readableName SerializableCollection
  */
 export class SerializableVoictent<
   TVoque extends GenericAbstractSerializableVoque,

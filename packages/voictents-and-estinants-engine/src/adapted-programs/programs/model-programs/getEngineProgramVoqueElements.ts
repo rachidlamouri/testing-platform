@@ -21,6 +21,8 @@ import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-fi
 /**
  * Gets directed graph elements for collection meta types and their
  * corresponding collections and collection items
+ *
+ * @readableName getStreamMetatypeModelGraphElement
  */
 export const getEngineProgramVoqueElements = buildEstinant({
   name: 'getEngineProgramVoqueElements',

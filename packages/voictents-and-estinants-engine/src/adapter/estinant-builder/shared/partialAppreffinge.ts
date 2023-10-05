@@ -3,6 +3,8 @@
  *
  * @noCanonicalDeclaration
  *
+ * @readableName PartialStreamConfiguration
+ *
  * @todo split this file into left and right appreffinges
  */
 

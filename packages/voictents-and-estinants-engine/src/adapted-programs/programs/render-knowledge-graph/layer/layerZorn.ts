@@ -11,6 +11,8 @@ type LayerZornTemplate = typeof LAYER_ZORN_TEMPLATE;
 
 /**
  * The complex identifier of a Layer
+ *
+ * @readableName LayerComplexId
  */
 export class LayerZorn extends Zorn2<LayerZornTemplate> {
   get rawTemplate(): LayerZornTemplate {
