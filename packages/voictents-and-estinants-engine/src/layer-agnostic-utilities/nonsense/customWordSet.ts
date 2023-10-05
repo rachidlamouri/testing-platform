@@ -8,10 +8,6 @@ type CustomDefinition = {
 // note: each word should be in all lowercase
 const customDefinitionSet: CustomDefinition[] = [
   {
-    word: 'metatype',
-    existingDocumentation: 'https://en.wiktionary.org/wiki/metatype',
-  },
-  {
     word: 'svg',
     existingDocumentation: 'https://en.wikipedia.org/wiki/SVG',
     isAcronym: true,
@@ -36,11 +32,37 @@ const customDefinitionSet: CustomDefinition[] = [
   {
     word: 'yaml',
     existingDocumentation: 'https://yaml.org/',
+    isAcronym: true,
   },
   {
     word: 'ci',
     description: 'Continuous integration',
     isAcronym: true,
+  },
+  {
+    word: 'accessor',
+    existingDocumentation: 'https://en.wiktionary.org/wiki/accessor',
+  },
+  {
+    word: 'runtime',
+    existingDocumentation:
+      'https://en.wikipedia.org/wiki/Runtime_(program_lifecycle_phase)',
+  },
+  {
+    word: 'serializable',
+    existingDocumentation: 'https://en.wikipedia.org/wiki/Serialization',
+  },
+  {
+    word: 'serialization',
+    existingDocumentation: 'https://en.wikipedia.org/wiki/Serialization',
+  },
+  {
+    word: 'json',
+    existingDocumentation: 'https://www.json.org',
+  },
+  {
+    word: 'enum',
+    existingDocumentation: 'https://en.wikipedia.org/wiki/Enumerated_type',
   },
 ];
 

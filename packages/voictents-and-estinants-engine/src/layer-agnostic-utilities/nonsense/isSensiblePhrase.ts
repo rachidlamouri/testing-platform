@@ -6,6 +6,7 @@ import {
 import { wordSet } from './wordSet';
 import { customWordSet } from './customWordSet';
 import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
+import { removeAffix } from './removeAffix';
 
 type AnalyzedPhrase = {
   phrase: string;
@@ -61,13 +62,19 @@ const isSensibleWord = (word: string): boolean => {
 
 type AnalyzedWord = {
   word: string;
+  subword: string;
   isSensible: boolean;
 };
 
 const analyzeWord = (word: string): AnalyzedWord => {
+  const subword = removeAffix(word);
+
+  const isSensible = isSensibleWord(word) || isSensibleWord(subword);
+
   return {
     word,
-    isSensible: isSensibleWord(word),
+    subword,
+    isSensible,
   };
 };
 
