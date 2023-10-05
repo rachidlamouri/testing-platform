@@ -29,6 +29,8 @@ type EngineEstinant3Prototype = {
 
 /**
  * Represents a transform for the program modeler
+ *
+ * @readableName ProgrammedTransformModel
  */
 export type EngineEstinant3 = ObjectWithPrototype<
   BaseEngineEstinant3,

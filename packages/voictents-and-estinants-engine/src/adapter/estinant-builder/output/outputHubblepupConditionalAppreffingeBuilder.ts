@@ -41,6 +41,8 @@ type PartialOutputAppreffinge<
 /**
  * Builds the context needed to output the input hubblepup based on a condition.
  * Each conditional appreffinge is independent of the others.
+ *
+ * @readableName OutputStreamableConditionalStreamConfigurationBuilder
  */
 type OutputHubblepupConditionalAppreffingeBuilder<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,

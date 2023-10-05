@@ -2,7 +2,13 @@ import * as uuidUtils from 'uuid';
 import { localIdCharacterEncodingList } from './localIdCharacterEncodingList';
 
 /**
+ * A uuid enumerating a feature along with a shorter readable hash that can be
+ * used locally
+ *
+ * @example
  * { globalId: 'fea3f4c4-7d1e-41f4-bfac-bb9d7d719107', localId: 'KK5R' }
+ *
+ * @readableName FeatureId
  */
 export type Strif = {
   globalId: string;

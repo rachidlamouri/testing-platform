@@ -25,6 +25,8 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
 
 /**
  * Constructs the boilerplate text for a hubblepup file
+ *
+ * @readableName getStreamableFileContents
  */
 export const getHubblepupFileContents = ({
   getImportStatement,

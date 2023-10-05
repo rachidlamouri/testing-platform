@@ -44,6 +44,8 @@ const throwError: Estinant2<
  * checked into git to detect if the behavior changes
  *
  * @canonicalComment
+ *
+ * @readableName testProgrammedTransformError
  */
 digikikify2({
   inputVoictentList: [

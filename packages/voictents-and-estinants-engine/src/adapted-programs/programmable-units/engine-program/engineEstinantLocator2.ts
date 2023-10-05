@@ -70,6 +70,8 @@ export type EngineEstinantBuildAddMetadataForSerializationLocator =
 
 /**
  * The information needed to find a transform definition
+ *
+ * @readableName ProgrammedTransformLocator
  */
 export type EngineEstinantLocator2 =
   | EngineEstinantTopLevelDeclarationLocator

@@ -57,6 +57,8 @@ type PinbetunfOutput<
 
 /**
  * Constructs the {@link Pinbetunf2}
+ *
+ * @readableName AdaptedTransformBuilder
  */
 type PinbetunfBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,

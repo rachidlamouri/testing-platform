@@ -15,7 +15,7 @@ import {
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { FileSourceInstance } from '../linting/source/fileSource';
 
-const ESTINANT_NAME = 'assertTypeScriptFileHasCanonicalDeclaration' as const;
+const ESTINANT_NAME = 'assertTypeScriptFileHasCanonicalComment' as const;
 
 type MessageContext = {
   trimmedCanonicalCommentText: string | null;
@@ -64,8 +64,8 @@ export const typeScriptFileHasCanonicalCommentRule =
  * declaration or in the file comment in the case that the canonical declaration
  * does not exist.
  */
-export const assertTypeScriptFileHasCanonialComment = buildEstinant({
-  name: 'assertTypeScriptFileHasCanonialComment',
+export const assertTypeScriptFileHasCanonicalComment = buildEstinant({
+  name: ESTINANT_NAME,
 })
   .fromHubblepup2<FileCommentedProgramBodyDeclarationGroupVoque>({
     gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,

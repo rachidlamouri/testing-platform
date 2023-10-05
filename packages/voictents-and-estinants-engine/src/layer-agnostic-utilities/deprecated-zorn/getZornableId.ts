@@ -6,6 +6,8 @@ import { Zornable } from './zornable';
  * Zorn2 instead
  *
  * @deprecated
+ *
+ * @readableName getDigestibleId
  */
 export const getZornableId = (zornable: Zornable): string => {
   return getTextDigest(zornable.zorn);

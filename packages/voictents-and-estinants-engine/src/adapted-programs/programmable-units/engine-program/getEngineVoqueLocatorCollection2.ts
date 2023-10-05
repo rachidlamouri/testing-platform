@@ -17,6 +17,8 @@ import {
  * locators in order to get a unique list of voque locators. This transform
  * makes sure that each engine voque is only processed once.
  *
+ * @readableName getStreamMetatypeLocatorCollection
+ *
  * @todo move the responsibility of uniqueness to a collection
  */
 export const getEngineVoqueLocatorCollection2 = buildEstinant({

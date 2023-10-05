@@ -15,10 +15,17 @@ import {
 } from './lintAssertionOmission';
 
 export class LintAssertionError extends Error {
+  // TODO: make a subclass of Error that has this path
+  public contextFilePath?: string;
+
   constructor(public readonly lintAssertion: GenericLintAssertion) {
     assertNotNull(lintAssertion.result.errorMessage);
 
     super(lintAssertion.result.errorMessage);
+  }
+
+  public setContextFilePath(filePath: string): void {
+    this.contextFilePath = filePath;
   }
 }
 

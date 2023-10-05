@@ -5,6 +5,8 @@ import { NonEmptyTuple, Tuple } from '../type/tuple';
 /**
  * An arbitrary identifier.
  * @deprecated
+ *
+ * @readableName Id
  */
 export type Zorn = unknown;
 

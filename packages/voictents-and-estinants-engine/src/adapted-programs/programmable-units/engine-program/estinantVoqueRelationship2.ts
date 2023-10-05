@@ -20,6 +20,8 @@ type EstinantVoqueRelationship2Prototype = {
 
 /**
  * A model of the connection between a transform and a collection meta type
+ *
+ * @readableName ProgrammedTransformStreamMetatypeRelationship
  */
 type EstinantVoqueRelationship2 = ObjectWithPrototype<
   BaseEstinantVoqueRelationship2,

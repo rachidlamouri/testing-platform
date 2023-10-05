@@ -24,6 +24,8 @@ type SerializableErrorVoictentInput<
 
 /**
  * A collection that writes errors to disk. It's not as complex as ProgramErrorVoictent
+ *
+ * @readableName SerializableErrorCollection
  */
 export class SerializableErrorVoictent<
   TVoque extends GenericSerializableErrorVoque,

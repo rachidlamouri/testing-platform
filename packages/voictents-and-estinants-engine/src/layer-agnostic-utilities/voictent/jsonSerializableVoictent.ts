@@ -22,6 +22,8 @@ type JsonSerializableVoictentConstructorInput<
 /**
  * A collection that serializes data, or serializes an eror resulting from the
  * attempt to serialize the data. This collection cannot be consumed
+ *
+ * @readableName JsonSerializableCollection
  */
 export class JsonSerializableVoictent<
   TVoque extends GenericAbstractSerializableVoque,

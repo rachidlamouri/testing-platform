@@ -14,6 +14,8 @@ import {
  * essential to the adapter layer as it guides the programmer's types, allows
  * the programmer to ignore engine-specific concerns, and it constructs an
  * engine-compatiable estinant.
+ *
+ * @readableName BuildProgrammedTransform
  */
 export const buildEstinant = (
   context: InstantiationContext,

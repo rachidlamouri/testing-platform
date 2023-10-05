@@ -10,6 +10,8 @@ export type OdeshinZorn = StringZorn | UnsafeZorn2;
 
 /**
  * An identifiable streamable
+ *
+ * @readableName GenericIdentifiableStreamable
  */
 export type GenericOdeshin2 = {
   zorn: OdeshinZorn;

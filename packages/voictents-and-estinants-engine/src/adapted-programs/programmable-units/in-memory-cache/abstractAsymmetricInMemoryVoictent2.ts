@@ -17,6 +17,8 @@ type AbstractInMemoryVoictent2ConstructorInput<TVoque extends GenericVoque> = {
  * The base class for in memory collections. It supports asymmetric collections
  * (collections where the pelue and pelie are different) since that means it can
  * also support symmetric collections.
+ *
+ * @readableName AbstractAsymmetricInMemoryCollection
  */
 export abstract class AbstractAsymmetricInMemoryVoictent2<
     TRestrictingVoque extends GenericVoque,

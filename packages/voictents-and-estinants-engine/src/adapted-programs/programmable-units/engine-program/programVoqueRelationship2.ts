@@ -21,6 +21,8 @@ type ProgramVoqueRelationship2Prototype = {
 /**
  * Models the relationship between a collection and a program that uses that
  * collection
+ *
+ * @readableName ProgramStreamMetatypeRelationship
  */
 type ProgramVoqueRelationship2 = ObjectWithPrototype<
   BaseProgramVoqueRelationship2,

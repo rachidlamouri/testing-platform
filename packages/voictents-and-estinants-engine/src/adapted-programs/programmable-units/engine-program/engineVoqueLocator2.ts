@@ -21,6 +21,8 @@ type EngineVoqueLocator2Prototype = {
 /**
  * The information needed to find a Voque definition, and subsequently a
  * hubblepup definition
+ *
+ * @readableName StreamMetatypeLocator
  */
 export type EngineVoqueLocator2 = ObjectWithPrototype<
   BaseEngineVoqueLocator2,

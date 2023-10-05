@@ -46,6 +46,8 @@ type EmptyAdaptedOutputVickenTuple = [];
 /**
  * Constructs the context needed to build a right input stream connection for
  * zero or more hubblepups.
+ *
+ * @readableName RightInputStreamableTupleStreamConfigurationBuilder
  */
 type RightInputHubblepupTupleAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,

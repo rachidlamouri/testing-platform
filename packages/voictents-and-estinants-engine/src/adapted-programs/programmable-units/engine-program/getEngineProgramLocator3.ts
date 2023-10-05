@@ -685,6 +685,8 @@ const getAdaptedEngineProgramLocator = ({
 /**
  * Gets metadata that helps later transforms find engine programs, their
  * collections, their transforms, and the edges between the collections and transforms
+ *
+ * @readableName getProgramLocator
  */
 export const getEngineProgramLocator3 = buildEstinant({
   name: 'getEngineProgramLocator3',

@@ -88,6 +88,8 @@ const forwardFrom2To3: Estinant2<
  * multiple times
  *
  * @canonicalComment
+ *
+ * @readableName testReleasingALeftCollectionMultipleTimes
  */
 digikikify2({
   inputVoictentList: [

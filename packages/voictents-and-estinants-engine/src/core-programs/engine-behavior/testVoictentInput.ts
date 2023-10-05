@@ -46,6 +46,8 @@ const gatherCollection: Estinant2<
  * Tests a transform that consumes a collection as a whole.
  *
  * @canonicalComment
+ *
+ * @readableName testCollectionInput
  */
 digikikify2({
   inputVoictentList: [

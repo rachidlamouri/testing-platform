@@ -14,23 +14,23 @@ import {
   FileCommentedProgramBodyDeclarationGroupVoque,
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { FileSourceInstance } from '../linting/source/fileSource';
+import { getPhraseSensibilityState } from '../../../layer-agnostic-utilities/nonsense/isSensiblePhrase';
 
 const ESTINANT_NAME = 'assertTypeScriptFileHasSensibleName' as const;
 
-export const typeScriptFileHasSensibleNameRule =
-  new TypedRule<EmptyMessageContext>({
-    name: 'type-script-file-has-sensible-name',
-    description: `TypeScript files must have a name without nonsense words, or a @${CommentTagId.ReadableName} annotation in their canonical comment with a readable name.`,
-    source: new EstinantSourceInstance({
-      filePath: posix.resolve('', __filename),
-      estinantName: ESTINANT_NAME,
-    }),
-    getErrorMessage: (): string => {
-      const emphasizedTag = chalk.cyan(`@${CommentTagId.ReadableName}`);
+const typeScriptFileHasSensibleNameRule = new TypedRule<EmptyMessageContext>({
+  name: 'type-script-file-has-sensible-name',
+  description: `TypeScript files must have a name without nonsense words, or a @${CommentTagId.ReadableName} annotation in their canonical comment with a readable name.`,
+  source: new EstinantSourceInstance({
+    filePath: posix.relative('', __filename),
+    estinantName: ESTINANT_NAME,
+  }),
+  getErrorMessage: (): string => {
+    const emphasizedTag = chalk.cyan(`@${CommentTagId.ReadableName}`);
 
-      return `File has nonsensical name. Update the ${emphasizedTag} to be composed of sensible words.`;
-    },
-  });
+    return `File has nonsensical name. Update the ${emphasizedTag} to be composed of sensible words.`;
+  },
+});
 
 /**
  * Produces an assertion based on whether or not a TypeScript file has a
@@ -54,6 +54,15 @@ export const assertTypeScriptFileHasSensibleName = buildEstinant({
       isValid: commentGroup.hasSensibleName,
       errorMessageContext: {},
       context: {
+        readableNameAnnotation: commentGroup.readableNameAnnotation,
+        readableNameAnnotationSensibilityState:
+          commentGroup.readableNameAnnotation !== null
+            ? getPhraseSensibilityState(commentGroup.readableNameAnnotation)
+            : null,
+        canonicalName: commentGroup.canonicalName,
+        canonicalNameSensibilityState: getPhraseSensibilityState(
+          commentGroup.canonicalName,
+        ),
         commentGroup,
       },
     });

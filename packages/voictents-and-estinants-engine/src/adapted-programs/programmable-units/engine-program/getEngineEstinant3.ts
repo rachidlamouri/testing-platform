@@ -838,6 +838,8 @@ const getAdaptedEstinant = ({
 /**
  * Uses the estinant locator to find and populate the information for the
  * estinant. This includes the input and output information for each estinant.
+ *
+ * @readableName getProgrammedTransformModel
  */
 export const getEngineEstinant3 = buildEstinant({
   name: ESTINANT_NAME,

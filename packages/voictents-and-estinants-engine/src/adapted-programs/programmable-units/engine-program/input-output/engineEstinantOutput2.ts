@@ -25,6 +25,8 @@ type EstinantOutput2Prototype = {
 
 /**
  * The model of a transform output
+ *
+ * @readableName ProgrammedTransformOutputStreamModel
  */
 export type EngineEstinantOutput2 = ObjectWithPrototype<
   BaseEstinantOutput2,

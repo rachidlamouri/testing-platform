@@ -7,6 +7,8 @@ import { GenericInMemoryVoque } from '../voque/inMemoryVoque';
 
 /**
  * A collection that can store any hubblepup in an in-memory array.
+ *
+ * @readableName InMemoryCollection
  */
 export class InMemoryVoictent<
   TVoque extends GenericInMemoryVoque,
