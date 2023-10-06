@@ -68,7 +68,7 @@ export type GenericVoictentItemLanbe2 = HubblepupPelieLanbe2<
  * a collection. This allows an external entity to read a collection without
  * needing a direct reference to it.
  *
- * @readableName StreamConnection
+ * @readableName Stream
  */
 export type Lanbe =
   | GenericVoictentPelieLanbe
