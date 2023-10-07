@@ -37,10 +37,10 @@ type EmptyAdaptedRightInputVickenTuple = [];
 type EmptyAdaptedOutputVickenTuple = [];
 
 /**
- * Builds the left input context for an estinant that consumes each streamable
+ * Builds the left input context for an estinant that consumes each item
  * from the left collection
  *
- * @readableName LeftInputStreamableStreamConfigurationBuilder
+ * @readableName LeftInputItemStreamConfigurationBuilder
  */
 type LeftInputHubblepupAppreffingeBuilder2 = <TInputVoque extends GenericVoque>(
   partialLeftInputAppreffinge: PartialLeftInputAppreffinge<TInputVoque>,

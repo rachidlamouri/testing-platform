@@ -71,7 +71,7 @@ const joinCollectionsByValue: Estinant2<
  *
  * @canonicalComment
  *
- * @readableName testUntriggeredTransformInputIdGroupError
+ * @readableName testUntriggeredTransformInputKeyGroupError
  */
 digikikify2({
   inputVoictentList: [

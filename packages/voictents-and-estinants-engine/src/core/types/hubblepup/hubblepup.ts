@@ -7,7 +7,7 @@ import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typ
  *
  * It is of type "unknown" because it can be anything!
  *
- * @readableName Streamable
+ * @readableName Item
  */
 export type Hubblepup = unknown;
 

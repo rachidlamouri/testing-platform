@@ -15,16 +15,16 @@ import { Gepp } from '../voictent/gepp';
  */
 export type Voque<
   TGepp extends Gepp,
-  THubblepupPelue extends Hubblepup,
-  THubblepupPelie extends Hubblepup,
+  TItemEgg extends Hubblepup,
+  TItem extends Hubblepup,
   IndexByName extends HubblepupIndexByName,
   TVoictentPelie,
 > = {
   gepp: TGepp;
   indexByName: IndexByName;
-  hubblepupPelue: THubblepupPelue;
-  hubblepupPelie: THubblepupPelie;
-  indexedHubblepupPelie: IndexedHubblepup<THubblepupPelie, IndexByName>;
+  hubblepupPelue: TItemEgg;
+  hubblepupPelie: TItem;
+  indexedHubblepupPelie: IndexedHubblepup<TItem, IndexByName>;
   voictentPelie: TVoictentPelie;
 };
 

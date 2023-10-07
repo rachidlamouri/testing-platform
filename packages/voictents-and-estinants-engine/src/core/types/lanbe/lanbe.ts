@@ -63,10 +63,10 @@ export type GenericVoictentItemLanbe2 = HubblepupPelieLanbe2<
 >;
 
 /**
- * A data structure that facilitates streaming streamables from a collection, or
- * streaming the entire collection at once. It encapsulates stream operations on
- * a collection. This allows an external entity to read a collection without
- * needing a direct reference to it.
+ * A data structure that facilitates streaming streamables,
+ * including streaming an entire collection at once. It encapsulates stream
+ * operations on a collection. This allows an external entity to read a
+ * collection without needing a direct reference to it.
  *
  * @readableName Stream
  */

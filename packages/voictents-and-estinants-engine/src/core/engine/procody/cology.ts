@@ -6,10 +6,10 @@ import { Mabz } from './mabz';
  * A left input and its stream connection plus every right input id tuple and
  * their respective stream connections (one connection per tuple). This helps
  * the engine find all of the right inputs associated with the left input. The
- * engine does not assume the shape of a streamable, so the id of the left input
+ * engine does not assume the shape of an item, so the id of the left input
  * is unknown, and therefore the group must store the left input itself.
  *
- * @readableName TransformInputIdGroup
+ * @readableName TransformInputKeyGroup
  */
 export type Cology = {
   leftDreanor: LeftDreanor;

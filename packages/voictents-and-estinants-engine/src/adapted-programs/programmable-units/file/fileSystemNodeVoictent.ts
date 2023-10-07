@@ -47,7 +47,7 @@ export type GenericFileSystemNodeVoque = FileSystemNodeVoque<
 
 /**
  * A collection for objects that have the same shape as FileSystemNode. It
- * indexes streamables by identifier and node path, and provides these
+ * indexes items with node paths by identifier and node path, and provides these
  * datastructures as the collection streamable
  *
  * @readableName FileSystemNodeCollection

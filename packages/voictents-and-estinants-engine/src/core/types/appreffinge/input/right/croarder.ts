@@ -3,9 +3,9 @@ import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
 import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInputVicken';
 
 /**
- * A function that gets the id for a streamable. The engine does not assume the
- * shape of any streamable, so this information has to be supplied by the
- * programmer. This is used by the engine to associate streamables from different
+ * A function that gets the key for an item. The engine does not assume the
+ * shape of any item, so this information has to be supplied by the
+ * programmer. This is used by the engine to associate items from different
  * collections when a transform has multiple inputs.
  *
  * @readableName IdAccessor
