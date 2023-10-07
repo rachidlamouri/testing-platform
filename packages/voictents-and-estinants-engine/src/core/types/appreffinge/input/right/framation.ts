@@ -5,9 +5,9 @@ import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInpu
 
 /**
  * A function that takes the leftmost input of a transform input group and
- * outputs an id tuple for the associated right inputs of a particular stream
- * connection. This allows the engine to look up the associated right inputs by id and
- * coordinate triggering a transform when an input group has all streamables.
+ * outputs a key tuple for the associated right inputs of a particular stream
+ * connection. This allows the engine to look up the associated right inputs by key and
+ * coordinate triggering a transform when an input group has all items.
  *
  * @readableName AssociatedIdTupleAccessor
  */

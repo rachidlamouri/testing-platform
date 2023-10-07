@@ -1,9 +1,7 @@
 /**
  * An enum to distinguish data that is currently being streamed
  *
- * @readableName StreamableReferenceTypeName
- *
- * @todo turn this into StreamTypeName when we have input streams
+ * @readableName StreamableTypeName
  */
 export enum ReferenceTypeName {
   VoictentPelie = 'Voictent',

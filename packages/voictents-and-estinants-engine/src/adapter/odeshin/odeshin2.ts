@@ -9,9 +9,9 @@ import {
 export type OdeshinZorn = StringZorn | UnsafeZorn2;
 
 /**
- * An identifiable streamable
+ * An identifiable item
  *
- * @readableName GenericIdentifiableStreamable
+ * @readableName GenericIdentifiableItem
  */
 export type GenericOdeshin2 = {
   zorn: OdeshinZorn;

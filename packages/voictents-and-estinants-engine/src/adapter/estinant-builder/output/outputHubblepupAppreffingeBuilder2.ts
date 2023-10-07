@@ -31,7 +31,7 @@ type NextAdaptedOutputVickenTuple<
 /**
  * Builds the context needed to enable outputing a single hubblepup
  *
- * @readableName OutputStreamableStreamConfigurationBuilder
+ * @readableName OutputItemStreamConfigurationBuilder
  */
 type OutputHubblepupAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,

@@ -1,11 +1,11 @@
 /**
- * An in memory collection for identifiable streamables (version 2) ... (also
+ * An in memory collection for identifiable items (version 2) ... (also
  * version 3, and by the time you're reading this theres probably a version 4.
  * who knows?)
  *
  * @noCanonicalDeclaration
  *
- * @readableName InMemoryIdentifiableStreamableCollection
+ * @readableName InMemoryIdentifiableItemCollection
  *
  * @todo find a better name for this file
  */

@@ -62,7 +62,7 @@ const gatherCollection: Estinant2<
  *
  * @canonicalComment
  *
- * @readableName testJoiningOneStreamableToCollection
+ * @readableName testJoiningOneItemToCollection
  */
 digikikify2({
   inputVoictentList: [
