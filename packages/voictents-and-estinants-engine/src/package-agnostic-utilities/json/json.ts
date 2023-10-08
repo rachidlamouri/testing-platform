@@ -12,10 +12,10 @@ type JsonArray = Json[];
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 type JsonTuple = readonly Json[];
 
-type JsonList = JsonArray | JsonTuple;
+export type JsonList = JsonArray | JsonTuple;
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
-type JsonObject = { [key: string]: Json };
+export type JsonObject = { [key: string]: Json };
 
 /**
  * It's pretty self explanatory, and yes you can probably get this type from
