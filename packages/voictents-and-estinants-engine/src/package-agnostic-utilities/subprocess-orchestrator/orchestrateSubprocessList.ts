@@ -42,6 +42,12 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       isInitiallyVisible: true,
     },
     {
+      label: 'lint-nonsense',
+      script:
+        'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/lint-nonsense/lintNonsense.ts',
+      isInitiallyVisible: true,
+    },
+    {
       label: 'find-unused-exports',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/find-unused-exports/findUnusedExports.ts',
