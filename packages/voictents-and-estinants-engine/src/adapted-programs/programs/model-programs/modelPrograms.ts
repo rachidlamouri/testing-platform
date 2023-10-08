@@ -54,7 +54,6 @@ import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProg
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { assertNoCopyPasta } from './assertNoCopyPasta';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
-import { assertTypeScriptFileHasCanonicalDeclaration } from '../../programmable-units/type-script-file/canonical-declaration/assertTypeScriptFileHasCanonicalDeclaration';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import {
   LINT_ASSERTION_OMISSION_GEPP,
@@ -64,12 +63,6 @@ import {
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
-import { handleNoCanonicalDirective } from '../../programmable-units/type-script-file/handleNoCanonicalDirective';
-import { omitProgramCanonicalExportRequirement } from '../../programmable-units/type-script-file/omitProgramCanonicalExportRequirement';
-import { assertTypeScriptFileHasCanonicalComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonicalComment';
-import { exemptEngineProgramFromCanonicalComment } from '../../programmable-units/type-script-file/exemptEngineProgramFromCanonicalComment';
-import { exemptPredicatesFromCanonicalComment } from '../../programmable-units/type-script-file/exemptPredicatesFromCanonicalComment';
-import { assertTypeScriptFileHasSensibleName } from '../../programmable-units/type-script-file/assertTypeScriptFileHasSensibleName';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -124,15 +117,6 @@ digikikify({
     parseTypeScriptFileComments,
     getCommentedProgramBodyDeclarationList,
     getTypeScriptFileImportList,
-
-    assertTypeScriptFileHasCanonicalDeclaration,
-    assertTypeScriptFileHasCanonicalComment,
-    handleNoCanonicalDirective,
-    exemptEngineProgramFromCanonicalComment,
-    exemptPredicatesFromCanonicalComment,
-    omitProgramCanonicalExportRequirement,
-
-    assertTypeScriptFileHasSensibleName,
 
     filterEngineProgramFile,
     getEngineProgramLocator3,
