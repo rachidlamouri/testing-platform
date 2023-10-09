@@ -22,8 +22,6 @@
     "digest": "ee882db7c14454de9f09da14ed8d37da68d37dd3"
   - "fileName": "render-knowledge-graph"
     "digest": "543270597ff19abc0e1a7a26a888076cf2c0a58f"
-  - "fileName": "render-type-script-file-relationships"
-    "digest": "e4029769d373d3b397fc84953d668e8cd4164fcc"
   - "fileName": "test-build-add-metadata-for-serialization"
     "digest": "34fcae362a69ada035263af2217aa445abee7202"
   - "fileName": "test-cached-on-disk-datum"

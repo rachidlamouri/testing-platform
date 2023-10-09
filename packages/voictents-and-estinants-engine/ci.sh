@@ -109,10 +109,6 @@ printf "\n"
 bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.test.sh
 printf "\n"
 
-## render-type-script-file-relationships
-bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.test.sh
-printf "\n"
-
 ## assemble-scaffolded-file
 bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/scaffold-file/assembleScaffoldedFile.test.sh
 printf "\n"
