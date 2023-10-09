@@ -1,17 +1,17 @@
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 
 const APP_RENDERER_DELAYER_ZORN_TEMPLATE = [
   'estinantName',
   'distinguisher',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type AppRendererDelayerZornTemplate = typeof APP_RENDERER_DELAYER_ZORN_TEMPLATE;
-class AppRendererDelayerZorn extends Zorn2<AppRendererDelayerZornTemplate> {
+class AppRendererDelayerZorn extends Complexzorn<AppRendererDelayerZornTemplate> {
   get rawTemplate(): AppRendererDelayerZornTemplate {
     return APP_RENDERER_DELAYER_ZORN_TEMPLATE;
   }

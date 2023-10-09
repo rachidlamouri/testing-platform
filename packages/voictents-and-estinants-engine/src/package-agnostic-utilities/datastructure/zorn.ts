@@ -1,21 +1,27 @@
+/**
+ * A simple string identifier or a complex identifer composed of key/value pairs
+ *
+ * @noCanonicalDeclaration
+ *
+ * @readableName Id
+ */
+
 import { TupleToUnion, UnionToIntersection, Simplify } from 'type-fest';
 import { getTextDigest } from '../string/getTextDigest';
 import { NonEmptyTuple, Tuple } from '../type/tuple';
 
 /**
  * An arbitrary identifier.
- * @deprecated
- *
- * @readableName Id
+ * @deprecated use SimpleId or ComplexId instead
  */
-export type Zorn = unknown;
+export type Deprecatedzorn = unknown;
 
-export type StringZorn = string;
+export type Simplezorn = string;
 
-export type ZornTuple = readonly Zorn[];
+export type ZornTuple = readonly Deprecatedzorn[];
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
-export type ZornTuple2 = readonly (string | UnsafeZorn2)[];
+export type ZornTuple2 = readonly (string | UnsafeComplexzorn)[];
 
 type TemplateKey<TTemplateKey extends string> = TTemplateKey;
 
@@ -28,7 +34,7 @@ type OutputValue = string;
 
 export type OutputValueByTemplateKeyPath = Record<TemplateKeyPath, OutputValue>;
 
-type Zorn2Like = {
+type ComplexzornLike = {
   getOutputValueByTemplateKeyPathList(
     parentTemplateKeyPath: string,
   ): OutputValueByTemplateKeyPath[];
@@ -40,18 +46,21 @@ type Zorn2Like = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type UnsafeInputValueByTemplateKey = any;
 
-type Zorn2LikeConstructor<TZorn2Like extends Zorn2Like> = {
-  new (inputValueByTemplateKey: UnsafeInputValueByTemplateKey): TZorn2Like;
+type ComplexzornLikeConstructor<TComplexzornLike extends ComplexzornLike> = {
+  new (
+    inputValueByTemplateKey: UnsafeInputValueByTemplateKey,
+  ): TComplexzornLike;
 };
 
-type GenericZorn2LikeConstructor = Zorn2LikeConstructor<Zorn2Like>;
+type GenericComplexzornLikeConstructor =
+  ComplexzornLikeConstructor<ComplexzornLike>;
 
 enum ZornTemplateKeyword {
   LITERAL = 'literal',
   ANY = 'any',
 }
 
-type Subzorn = ZornTemplateKeyword | GenericZorn2LikeConstructor;
+type Subzorn = ZornTemplateKeyword | GenericComplexzornLikeConstructor;
 
 type SubzornTuple<TSubzornTuple extends Tuple<Subzorn>> = TSubzornTuple;
 type GenericSubzornTuple = SubzornTuple<Tuple<Subzorn>>;
@@ -73,25 +82,26 @@ type SubzornTemplateEntry<
   TNonEmptySubzornTuple extends GenericNonEmptySubzornTuple,
 > = readonly [TTemplateKey, ...TNonEmptySubzornTuple];
 
-type Zorn2TemplateEntry<
+type ComplexzornTemplateEntry<
   TTemplateKey extends GenericTemplateKey,
   TNonEmptySubzornTuple extends GenericNonEmptySubzornTuple,
 > = TTemplateKey | SubzornTemplateEntry<TTemplateKey, TNonEmptySubzornTuple>;
 
-type GenericZorn2TemplateEntry = Zorn2TemplateEntry<
+type GenericComplexzornTemplateEntry = ComplexzornTemplateEntry<
   GenericTemplateKey,
   GenericNonEmptySubzornTuple
 >;
 
-export type GenericZorn2Template = NonEmptyTuple<GenericZorn2TemplateEntry>;
+export type GenericComplexzornTemplate =
+  NonEmptyTuple<GenericComplexzornTemplateEntry>;
 
 type InputValue<TSubzorn extends Subzorn> =
   TSubzorn extends ZornTemplateKeyword.LITERAL
     ? OutputValue
     : TSubzorn extends ZornTemplateKeyword.ANY
-    ? Zorn2Like | { zorn: Zorn2Like }
-    : TSubzorn extends Zorn2LikeConstructor<infer TZorn2Like>
-    ? TZorn2Like | { zorn: TZorn2Like }
+    ? ComplexzornLike | { zorn: ComplexzornLike }
+    : TSubzorn extends ComplexzornLikeConstructor<infer TComplexzornLike>
+    ? TComplexzornLike | { zorn: TComplexzornLike }
     : never;
 
 type InputValueFromSubzornTuple<TSubzornTuple extends GenericSubzornTuple> =
@@ -104,31 +114,32 @@ type InputValueFromSubzornTuple<TSubzornTuple extends GenericSubzornTuple> =
     ? InputValue<TFirstSubzorn> | InputValueFromSubzornTuple<TRestSubzornTuple>
     : never;
 
-type InputValueByTemplateKey<TZorn2Template extends GenericZorn2Template> =
-  Simplify<
-    UnionToIntersection<
-      TupleToUnion<{
-        [TIndex in keyof TZorn2Template]: TZorn2Template[TIndex] extends TemplateKey<
-          infer TTemplateKey
-        >
-          ? {
-              [TKey in TTemplateKey]: InputValueFromSubzornTuple<
-                [ZornTemplateKeyword]
-              >;
-            }
-          : TZorn2Template[TIndex] extends SubzornTemplateEntry<
-              infer TTemplateKey,
-              infer TNonEmptySubzornTuple
-            >
-          ? {
-              [TKey in TTemplateKey]: InputValueFromSubzornTuple<TNonEmptySubzornTuple>;
-            }
-          : never;
-      }>
-    >
-  >;
+type InputValueByTemplateKey<
+  TComplexzornTemplate extends GenericComplexzornTemplate,
+> = Simplify<
+  UnionToIntersection<
+    TupleToUnion<{
+      [TIndex in keyof TComplexzornTemplate]: TComplexzornTemplate[TIndex] extends TemplateKey<
+        infer TTemplateKey
+      >
+        ? {
+            [TKey in TTemplateKey]: InputValueFromSubzornTuple<
+              [ZornTemplateKeyword]
+            >;
+          }
+        : TComplexzornTemplate[TIndex] extends SubzornTemplateEntry<
+            infer TTemplateKey,
+            infer TNonEmptySubzornTuple
+          >
+        ? {
+            [TKey in TTemplateKey]: InputValueFromSubzornTuple<TNonEmptySubzornTuple>;
+          }
+        : never;
+    }>
+  >
+>;
 
-type TemplateKeyTuple<TTemplate extends GenericZorn2Template> = {
+type TemplateKeyTuple<TTemplate extends GenericComplexzornTemplate> = {
   [TIndex in keyof TTemplate]: TTemplate[TIndex] extends GenericTemplateKey
     ? TTemplate[TIndex]
     : TTemplate[TIndex] extends SubzornTemplateEntry<
@@ -139,7 +150,7 @@ type TemplateKeyTuple<TTemplate extends GenericZorn2Template> = {
     : never;
 };
 
-type Zorn2Interface<TTemplate extends GenericZorn2Template> = {
+type ComplexzornInterface<TTemplate extends GenericComplexzornTemplate> = {
   rawTemplate: TTemplate;
   getOutputValueByTemplateKeyPathList(
     parentTemplateKeyPath: string,
@@ -157,8 +168,8 @@ type Zorn2Interface<TTemplate extends GenericZorn2Template> = {
  * A complex identifier. It contains one or more key/value pairs that can be
  * used to generate a string representation of the identifier
  */
-export abstract class Zorn2<TTemplate extends GenericZorn2Template>
-  implements Zorn2Interface<TTemplate>
+export abstract class Complexzorn<TTemplate extends GenericComplexzornTemplate>
+  implements ComplexzornInterface<TTemplate>
 {
   static LITERAL = ZornTemplateKeyword.LITERAL;
 
@@ -189,11 +200,11 @@ export abstract class Zorn2<TTemplate extends GenericZorn2Template>
    */
   private get safeValueByTemplateKey(): Record<
     string,
-    string | Zorn2Like | { zorn: Zorn2Like }
+    string | ComplexzornLike | { zorn: ComplexzornLike }
   > {
     return this.valueByTemplateKey as Record<
       string,
-      string | Zorn2Like | { zorn: Zorn2Like }
+      string | ComplexzornLike | { zorn: ComplexzornLike }
     >;
   }
 
@@ -239,4 +250,4 @@ export abstract class Zorn2<TTemplate extends GenericZorn2Template>
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type UnsafeZorn2 = Zorn2Interface<NonEmptyTuple<any>>;
+export type UnsafeComplexzorn = ComplexzornInterface<NonEmptyTuple<any>>;

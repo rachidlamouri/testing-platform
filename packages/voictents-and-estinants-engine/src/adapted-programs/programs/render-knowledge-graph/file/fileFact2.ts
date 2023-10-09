@@ -1,8 +1,8 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
@@ -25,9 +25,9 @@ import { BoundedFile } from './boundedFile';
 const FILE_FACT_2_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactZorn],
   ['boundedFile', FileSystemNodeZorn],
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type FileFact2ZornTemplate = typeof FILE_FACT_2_ZORN_TEMPLATE;
-class FileFact2Zorn extends Zorn2<FileFact2ZornTemplate> {
+class FileFact2Zorn extends Complexzorn<FileFact2ZornTemplate> {
   get rawTemplate(): FileFact2ZornTemplate {
     return FILE_FACT_2_ZORN_TEMPLATE;
   }

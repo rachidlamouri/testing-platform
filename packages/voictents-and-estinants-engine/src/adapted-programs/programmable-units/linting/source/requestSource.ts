@@ -1,7 +1,7 @@
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { LeafSource } from './leafSource';
@@ -10,9 +10,9 @@ import { SourceTypeName } from './sourceTypeName';
 const REQUEST_SOURCE_ZORN_TEMPLATE = [
   'requestor',
   'requestee',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type RequestSourceZornTemplate = typeof REQUEST_SOURCE_ZORN_TEMPLATE;
-class RequestSourceZorn extends Zorn2<RequestSourceZornTemplate> {
+class RequestSourceZorn extends Complexzorn<RequestSourceZornTemplate> {
   get rawTemplate(): RequestSourceZornTemplate {
     return REQUEST_SOURCE_ZORN_TEMPLATE;
   }

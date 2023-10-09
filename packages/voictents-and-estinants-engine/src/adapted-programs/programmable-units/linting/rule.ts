@@ -1,18 +1,18 @@
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import { Source } from './source/source';
 
 const RULE_ZORN_TEMPLATE = [
-  ['source', Zorn2.ANY],
+  ['source', Complexzorn.ANY],
   'name',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type RuleZornTemplate = typeof RULE_ZORN_TEMPLATE;
-export class RuleZorn extends Zorn2<RuleZornTemplate> {
+export class RuleZorn extends Complexzorn<RuleZornTemplate> {
   get rawTemplate(): RuleZornTemplate {
     return RULE_ZORN_TEMPLATE;
   }

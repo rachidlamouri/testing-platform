@@ -32,10 +32,21 @@ export const nonsenseDictionary = new Map(
         word: 'grition',
         suggestion: 'subitem',
       },
-      // TODO: distinguish simple id from complex id
       {
         word: 'zorn',
-        suggestion: 'complex-identifier',
+        suggestion: 'id',
+      },
+      {
+        word: 'deprecatedzorn',
+        suggestion: 'deprecated-id',
+      },
+      {
+        word: 'simplezorn',
+        suggestion: 'simple-id',
+      },
+      {
+        word: 'complexzorn',
+        suggestion: 'complex-id',
       },
       {
         word: 'estinant',

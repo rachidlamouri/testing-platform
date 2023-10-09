@@ -1,8 +1,8 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../../../package-agnostic-utilities/datastructure/zorn';
 import { LocalDirectedGraphElement2Zorn } from '../../../../programmable-units/graph-visualization/directed-graph/types';
 import { PartitionFact } from '../../partition-fact/partitionFact';
@@ -12,10 +12,10 @@ import { FileDependencyPathNode } from './fileDependencyPathNode';
 const PARTITIONED_FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE = [
   ['partitionedFileDependencyGroup', PartitionedFileDependencyGroupZorn],
   'directoryPath',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type PartitionedFileDependencyPathNodeZornTemplate =
   typeof PARTITIONED_FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE;
-export class PartitionedFileDependencyPathNodeZorn extends Zorn2<PartitionedFileDependencyPathNodeZornTemplate> {
+export class PartitionedFileDependencyPathNodeZorn extends Complexzorn<PartitionedFileDependencyPathNodeZornTemplate> {
   get rawTemplate(): PartitionedFileDependencyPathNodeZornTemplate {
     return PARTITIONED_FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE;
   }

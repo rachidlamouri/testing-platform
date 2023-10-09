@@ -1,7 +1,7 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 
 type CommentZornContext = {
@@ -12,7 +12,7 @@ type CommentZornContext = {
 const COMMENT_ZORN_TEMPLATE = [
   'filePath',
   'lineNumber',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type CommentZornTemplate = typeof COMMENT_ZORN_TEMPLATE;
 
 /**
@@ -20,7 +20,7 @@ type CommentZornTemplate = typeof COMMENT_ZORN_TEMPLATE;
  *
  * @readableName CommentComplexId
  */
-export class CommentZorn extends Zorn2<CommentZornTemplate> {
+export class CommentZorn extends Complexzorn<CommentZornTemplate> {
   static build({ filePath, rawComment }: CommentZornContext): CommentZorn {
     return new CommentZorn({
       filePath,

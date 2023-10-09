@@ -1,4 +1,4 @@
-import { Zorn } from '../../../package-agnostic-utilities/datastructure/zorn';
+import { Deprecatedzorn } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { Dreanor, LeftDreanor } from '../dreanor/dreanor';
 import { Mabz } from './mabz';
 
@@ -18,7 +18,7 @@ export type Cology = {
   hasTriggered: boolean;
 };
 
-type CologyEntry = [Dreanor, Zorn];
+type CologyEntry = [Dreanor, Deprecatedzorn];
 
 export const getCologyEntryList = (cology: Cology): CologyEntry[] => {
   const leftEntry: CologyEntry = [cology.leftDreanor, cology.leftInput];

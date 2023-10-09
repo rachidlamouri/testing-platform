@@ -1,5 +1,5 @@
 import {
-  Zorn,
+  Deprecatedzorn,
   ZornTuple,
 } from '../../package-agnostic-utilities/datastructure/zorn';
 import { Ajorken } from './procody/ajorken';
@@ -566,7 +566,7 @@ export const digikikify = ({
           const { typeName: rightInputTypeName, value: rightInput } =
             dreanor.lanbe.dereference();
 
-          let zorn: Zorn;
+          let zorn: Deprecatedzorn;
           if (dreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
             zorn = dreanor.lanbe;
             // eslint-disable-next-line no-param-reassign

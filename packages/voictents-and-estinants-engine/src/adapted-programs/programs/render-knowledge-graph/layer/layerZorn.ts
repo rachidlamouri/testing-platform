@@ -1,12 +1,12 @@
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 
 const LAYER_ZORN_TEMPLATE = [
   'directoryPath',
   'displayName',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type LayerZornTemplate = typeof LAYER_ZORN_TEMPLATE;
 
 /**
@@ -14,7 +14,7 @@ type LayerZornTemplate = typeof LAYER_ZORN_TEMPLATE;
  *
  * @readableName LayerComplexId
  */
-export class LayerZorn extends Zorn2<LayerZornTemplate> {
+export class LayerZorn extends Complexzorn<LayerZornTemplate> {
   get rawTemplate(): LayerZornTemplate {
     return LAYER_ZORN_TEMPLATE;
   }

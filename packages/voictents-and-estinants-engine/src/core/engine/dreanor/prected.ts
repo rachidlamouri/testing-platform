@@ -1,4 +1,4 @@
-import { Zorn } from '../../../package-agnostic-utilities/datastructure/zorn';
+import { Deprecatedzorn } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { Hubblepup } from '../../types/hubblepup/hubblepup';
 
 /**
@@ -7,4 +7,4 @@ import { Hubblepup } from '../../types/hubblepup/hubblepup';
  *
  * @readableName ItemCache
  */
-export class Prected extends Map<Zorn, Hubblepup> {}
+export class Prected extends Map<Deprecatedzorn, Hubblepup> {}

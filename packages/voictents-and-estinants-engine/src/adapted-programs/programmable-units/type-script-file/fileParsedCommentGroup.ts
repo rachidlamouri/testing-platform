@@ -1,8 +1,8 @@
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { CategorizedComment } from './comment/categorized/categorizedComment';
@@ -12,10 +12,10 @@ import { CommentTagId } from './comment/commentTagId';
 
 const FILE_PARSED_COMMENT_GROUP_ZORN_TEMPLATE = [
   'filePath',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type FileParsedCommentGroupZornTemplate =
   typeof FILE_PARSED_COMMENT_GROUP_ZORN_TEMPLATE;
-class FileParsedCommentGroupZorn extends Zorn2<FileParsedCommentGroupZornTemplate> {
+class FileParsedCommentGroupZorn extends Complexzorn<FileParsedCommentGroupZornTemplate> {
   get rawTemplate(): FileParsedCommentGroupZornTemplate {
     return FILE_PARSED_COMMENT_GROUP_ZORN_TEMPLATE;
   }

@@ -1,7 +1,7 @@
 const DELIMITER = ':' as const;
 
 /**
- * A deprecated utility for constructing an identifier. Use Zorn2 instead.
+ * A deprecated utility for constructing an identifier. Use ComplexId instead.
  *
  * @deprecated
  *

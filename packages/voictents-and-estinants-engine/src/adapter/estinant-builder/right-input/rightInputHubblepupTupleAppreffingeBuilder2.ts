@@ -1,7 +1,7 @@
 import { GenericIndexedHubblepupTuple } from '../../../core/types/hubblepup/hubblepup';
 import { GenericVoque } from '../../../core/types/voque/voque';
 import {
-  Zorn2,
+  Complexzorn,
   ZornTuple2,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
@@ -137,7 +137,7 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
           const list = partialRightAppreffinge
             .framate(leftInput)
             .map((intermediateValue) => {
-              if (intermediateValue instanceof Zorn2) {
+              if (intermediateValue instanceof Complexzorn) {
                 return intermediateValue.forHuman;
               }
 
@@ -148,7 +148,7 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
         },
         croard: (rightInput: TRightInputVoque['indexedHubblepupPelie']) => {
           const intermediateValue = partialRightAppreffinge.croard(rightInput);
-          if (intermediateValue instanceof Zorn2) {
+          if (intermediateValue instanceof Complexzorn) {
             return intermediateValue.forHuman;
           }
 

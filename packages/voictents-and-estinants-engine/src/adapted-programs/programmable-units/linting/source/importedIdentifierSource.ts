@@ -1,7 +1,7 @@
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
@@ -9,10 +9,10 @@ import { SourceTypeName } from './sourceTypeName';
 const IMPORTED_IDENTIFIER_SOURCE_ZORN_TEMPLATE = [
   'importingFilePath',
   'importedIdentifierName',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type ImportedIdentifierSourceZornTemplate =
   typeof IMPORTED_IDENTIFIER_SOURCE_ZORN_TEMPLATE;
-class ImportedIdentifierSourceZorn extends Zorn2<ImportedIdentifierSourceZornTemplate> {
+class ImportedIdentifierSourceZorn extends Complexzorn<ImportedIdentifierSourceZornTemplate> {
   get rawTemplate(): ImportedIdentifierSourceZornTemplate {
     return IMPORTED_IDENTIFIER_SOURCE_ZORN_TEMPLATE;
   }

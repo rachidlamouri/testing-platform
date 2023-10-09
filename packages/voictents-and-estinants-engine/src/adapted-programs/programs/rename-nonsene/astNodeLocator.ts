@@ -2,8 +2,8 @@ import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { FilePath } from '../../programmable-units/file/filePath';
@@ -11,9 +11,9 @@ import { FilePath } from '../../programmable-units/file/filePath';
 const AST_NODE_LOCATOR_ZORN_TEMPLATE = [
   'filePath',
   'astPath',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type AstNodeLocatorZornTemplate = typeof AST_NODE_LOCATOR_ZORN_TEMPLATE;
-class AstNodeLocatorZorn extends Zorn2<AstNodeLocatorZornTemplate> {
+class AstNodeLocatorZorn extends Complexzorn<AstNodeLocatorZornTemplate> {
   get rawTemplate(): AstNodeLocatorZornTemplate {
     return AST_NODE_LOCATOR_ZORN_TEMPLATE;
   }
