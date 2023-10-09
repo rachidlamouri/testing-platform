@@ -4,7 +4,7 @@ import {
   GenericRightInputVicken,
   GenericRightInputVickenTuple,
 } from '../../../vicken/rightInputVicken';
-import { Croader3 } from './croarder';
+import { Croarder3 } from './croarder';
 import { Framation3 } from './framation';
 import { GenericLeftInputVicken } from '../../../vicken/leftInputVicken';
 
@@ -24,7 +24,7 @@ export type RightInputAppreffinge<
   },
   TRightInputVicken extends GenericRightInputHubblepupTupleVicken
     ? {
-        croard: Croader3<TRightInputVicken>;
+        croard: Croarder3<TRightInputVicken>;
         framate: Framation3<TLeftInputVicken, TRightInputVicken>;
       }
     : {

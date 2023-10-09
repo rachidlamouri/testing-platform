@@ -19,7 +19,7 @@ class FileLineSourceZorn extends Zorn2<FileLineSourceZornTemplate> {
 
 type FileLineSourceConstructorInput = {
   filePath: string;
-  lineNumber: number;
+  lineNumber: number | string;
 };
 
 /**

@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { assertNotNull } from '../../nil/assertNotNull';
 import { TextTransform } from './textTransform';
 
@@ -22,7 +21,8 @@ const MAX_BUFFER_ENTRIES = 50;
  * subprocess stream is turned off
  */
 export class Valve extends TextTransform {
-  private _isVisible = true;
+  // note: using special characters to prefix local variables made an unnecessary edge case for renaming nonsense
+  private localIsVisible = true;
 
   private isFlushingBuffer = false;
 
@@ -105,17 +105,16 @@ export class Valve extends TextTransform {
   }
 
   get isVisible(): boolean {
-    return this._isVisible;
+    return this.localIsVisible;
   }
 
   set isVisible(isVisible: boolean) {
-    const wasVisible = this._isVisible;
+    const wasVisible = this.localIsVisible;
 
-    this._isVisible = isVisible;
+    this.localIsVisible = isVisible;
 
     if (!wasVisible && isVisible) {
       this.flushBuffer();
     }
   }
 }
-/* eslint-enable no-underscore-dangle */

@@ -1,0 +1,4 @@
+{
+  "configFileName": "/home/rachid/projects/testing-platform/packages/voictents-and-estinants-engine/tsconfig.json",
+  "canonicalConfigFilePath": "/home/rachid/projects/testing-platform/packages/voictents-and-estinants-engine/tsconfig.json"
+}

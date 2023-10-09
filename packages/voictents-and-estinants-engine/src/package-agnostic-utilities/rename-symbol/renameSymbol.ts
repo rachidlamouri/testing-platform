@@ -21,7 +21,7 @@ const isDebugEnabled = process.env.DEBUG_RENAME !== undefined;
 const log: typeof console.log = (...args) => {
   if (isDebugEnabled) {
     // eslint-disable-next-line no-console
-    console.log(args);
+    console.log(...args);
   }
 };
 
@@ -121,8 +121,8 @@ const getSymbolReferenceList = (): void => {
     command: 'rename',
     arguments: {
       file: absoluteFilePath,
-      line: 220,
-      offset: 9,
+      line: oneBasedLineNumber,
+      offset: oneBasedColumnOffset,
     },
   });
 
@@ -144,7 +144,6 @@ type ReplacementMetadata = {
 const replaceAll = (list: ReplacementMetadata[]): void => {
   log(`Replaceing ${list.length} locations`);
 
-  log(list);
   const reverseList = list.slice().reverse();
 
   reverseList.forEach(
@@ -159,6 +158,7 @@ const replaceAll = (list: ReplacementMetadata[]): void => {
         zeroBasedLineNumber,
         zeroBasedStartOffset,
       });
+      log();
 
       const fileText = fs.readFileSync(filePath, 'utf-8');
       const fileLineList = fileText.split('\n');
@@ -187,15 +187,25 @@ childProcess.stdout.pipe(
 
       const { datum } = typedDatum;
 
+      log('Handling response');
+      log(datum);
+      log();
+
+      if ('success' in datum && !datum.success) {
+        process.exit(1);
+      }
+
       if (datum.type === 'event' && datum.event === 'projectLoadingFinish') {
-        // eslint-disable-next-line no-console
-        console.log('Project finished loading');
+        log('Project finished loading');
+        log();
         getSymbolReferenceList();
         return;
       }
 
       if (datum.type === 'response' && datum.command === 'rename') {
         log('Received rename response');
+        log(datum);
+        log();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const { body } = datum as {
           body: {
@@ -209,7 +219,6 @@ childProcess.stdout.pipe(
           };
         };
 
-        log(JSON.stringify(body, null, 2));
         const filePositionList: ReplacementMetadata[] = body.locs.flatMap(
           (fileLocation) => {
             return fileLocation.locs.map((position) => {
@@ -233,7 +242,9 @@ childProcess.stdout.pipe(
         process.exit(0);
       }
 
-      log(datum);
+      log('Reached the unreachable');
+      log();
+      process.exit(2);
     },
   }),
 );

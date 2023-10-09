@@ -1,7 +1,7 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import {
   Croarder,
-  GenericCroader3,
+  GenericCroarder3,
 } from '../../types/appreffinge/input/right/croarder';
 import {
   Framation,
@@ -46,7 +46,7 @@ export type RightVoictentItem2Dreanor = {
   lanbe: GenericVoictentItemLanbe2;
   prected: Prected;
   framate: Framation | GenericFramation3;
-  croard: Croarder | GenericCroader3;
+  croard: Croarder | GenericCroarder3;
 };
 
 export type RightDreanor = RightVoictentDreanor | RightVoictentItem2Dreanor;

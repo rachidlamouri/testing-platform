@@ -24,7 +24,7 @@ const knowledgeGraphProgramLabel = useKnowledgeGraphDeveloper
 const runKnowledgeGraph = useKnowledgeGraphDeveloper
   ? 'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts'
   : 'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts';
-const serveKnowledgeGrpah = useKnowledgeGraphDeveloper
+const serveKnowledgeGraph = useKnowledgeGraphDeveloper
   ? 'npx http-server debug/develop-knowledge-graph/voictents/output-file'
   : 'npx http-server debug/render-knowledge-graph/voictents/output-file';
 
@@ -45,6 +45,12 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       label: 'lint-nonsense',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/lint-nonsense/lintNonsense.ts',
+      isInitiallyVisible: true,
+    },
+    {
+      label: 'rename-nonsense',
+      script:
+        'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsene/renameNonsense.ts',
       isInitiallyVisible: true,
     },
     {
@@ -73,7 +79,7 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
     },
     {
       label: 'serve-knowledge-graph',
-      script: serveKnowledgeGrpah,
+      script: serveKnowledgeGraph,
       isInitiallyVisible: false,
     },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
@@ -253,7 +259,7 @@ const orchestrateSubprocessList = (): void => {
       SPACE_DELIMITED_INTEGERS_REGEX.toString(),
     );
 
-    const focusOneRegextText = chalk.blue(FOCUS_ONE_REGEX);
+    const focusOneRegexText = chalk.blue(FOCUS_ONE_REGEX);
 
     const focusAllRegexText = chalk.blue(FOCUS_ALL_REGEX);
 
@@ -263,7 +269,7 @@ const orchestrateSubprocessList = (): void => {
       'Options',
       `    - enter text matching ${emptyWhitespaceRegexText} to continue`,
       `    - enter text with indices matching ${spaceDelimitedIntegersRegexText} to toggle subprocess visibility`,
-      `    - enter text with one index matching ${focusOneRegextText} to enable visibility for one subprocess`,
+      `    - enter text with one index matching ${focusOneRegexText} to enable visibility for one subprocess`,
       `    - enter text matching ${focusAllRegexText} to enable visibility for all subprocesses`,
     ].join('\n');
 

@@ -13,7 +13,7 @@ export type Hubblepup = unknown;
 
 type Hubblepup2<THubblepup> = THubblepup;
 
-export type GenericHubbleup = Hubblepup2<unknown>;
+export type GenericHubblepup = Hubblepup2<unknown>;
 
 export type HubblepupTuple = readonly Hubblepup[];
 

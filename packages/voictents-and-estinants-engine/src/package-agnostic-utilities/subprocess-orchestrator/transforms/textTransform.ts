@@ -14,8 +14,8 @@ export class TextTransform extends NodeStreamTransform {
       encoding: 'utf-8',
       transform: (chunk: string, encoding, done): void => {
         const text = chunk.toString();
-        const modifiedtText = onTransform(text);
-        done(null, modifiedtText);
+        const modifiedText = onTransform(text);
+        done(null, modifiedText);
       },
     });
   }

@@ -9,7 +9,7 @@ import {
   ProgramFileCache,
   SerializedHubblepup,
 } from '../program/programFileCache';
-import { GenericHubbleup } from '../../core/types/hubblepup/hubblepup';
+import { GenericHubblepup } from '../../core/types/hubblepup/hubblepup';
 
 type JsonSerializableVoictentConstructorInput<
   TVoque extends GenericAbstractSerializableVoque,
@@ -41,7 +41,7 @@ export class JsonSerializableVoictent<
   }
 
   // eslint-disable-next-line class-methods-use-this
-  protected serialize(hubblepup: GenericHubbleup): SerializedHubblepup {
+  protected serialize(hubblepup: GenericHubblepup): SerializedHubblepup {
     const jsonSerializationResult =
       jsonUtils.lossyMultilineSerialize(hubblepup);
 

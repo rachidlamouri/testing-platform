@@ -69,14 +69,14 @@ type GenericNonEmptySubzornTuple = NonEmptySubzornTuple<
 >;
 
 type SubzornTemplateEntry<
-  TTemplatekey extends GenericTemplateKey,
+  TTemplateKey extends GenericTemplateKey,
   TNonEmptySubzornTuple extends GenericNonEmptySubzornTuple,
-> = readonly [TTemplatekey, ...TNonEmptySubzornTuple];
+> = readonly [TTemplateKey, ...TNonEmptySubzornTuple];
 
 type Zorn2TemplateEntry<
-  TTemplatekey extends GenericTemplateKey,
+  TTemplateKey extends GenericTemplateKey,
   TNonEmptySubzornTuple extends GenericNonEmptySubzornTuple,
-> = TTemplatekey | SubzornTemplateEntry<TTemplatekey, TNonEmptySubzornTuple>;
+> = TTemplateKey | SubzornTemplateEntry<TTemplateKey, TNonEmptySubzornTuple>;
 
 type GenericZorn2TemplateEntry = Zorn2TemplateEntry<
   GenericTemplateKey,
