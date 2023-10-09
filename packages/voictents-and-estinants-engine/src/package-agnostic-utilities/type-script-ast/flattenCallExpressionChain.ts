@@ -15,7 +15,7 @@ export type FlattenedCallExpressionOrError =
 
 type FlattenedCallExpressionAndErrorList = FlattenedCallExpressionOrError[];
 
-const recursivlyFlattenCallExpressionChain = (
+const recursivelyFlattenCallExpressionChain = (
   callExpression: TSESTree.CallExpression,
   flattenedCallExpressionAndErrorList: FlattenedCallExpressionAndErrorList,
 ): void => {
@@ -27,7 +27,7 @@ const recursivlyFlattenCallExpressionChain = (
   if (isIdentifiableMemberExpressionCallExpression(callExpression.callee)) {
     const memberExpression = callExpression.callee;
 
-    recursivlyFlattenCallExpressionChain(
+    recursivelyFlattenCallExpressionChain(
       memberExpression.object,
       flattenedCallExpressionAndErrorList,
     );
@@ -52,7 +52,7 @@ export const flattenCallExpressionChain = (
 ): FlattenedCallExpressionAndErrorList => {
   const flattenedCallExpressionAndErrorList: FlattenedCallExpressionAndErrorList =
     [];
-  recursivlyFlattenCallExpressionChain(
+  recursivelyFlattenCallExpressionChain(
     callExpression,
     flattenedCallExpressionAndErrorList,
   );

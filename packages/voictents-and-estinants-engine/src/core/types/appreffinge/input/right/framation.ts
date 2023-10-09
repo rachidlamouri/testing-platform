@@ -9,7 +9,7 @@ import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInpu
  * connection. This allows the engine to look up the associated right inputs by key and
  * coordinate triggering a transform when an input group has all items.
  *
- * @readableName AssociatedIdTupleAccessor
+ * @readableName RightKeyTupleAccessor
  */
 export type Framation = (
   leftIndexedHubblepup: GenericIndexedHubblepup,

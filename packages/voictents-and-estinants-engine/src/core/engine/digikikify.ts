@@ -709,7 +709,7 @@ export const digikikify = ({
   };
 
   const startTime = process.hrtime.bigint();
-  let prevousTickTime = startTime;
+  let previousTickTime = startTime;
 
   let tickCount = 0;
 
@@ -781,13 +781,13 @@ export const digikikify = ({
     );
 
     const relativeElapsedSeconds = nanosecondsToSeconds(
-      tickTime - prevousTickTime,
+      tickTime - previousTickTime,
     );
     timeConfiguration.relativeElapsedSecondsTickSeries.push(
       Number(relativeElapsedSeconds),
     );
 
-    prevousTickTime = tickTime;
+    previousTickTime = tickTime;
     tickCount += 1;
   };
 
@@ -876,16 +876,16 @@ export const digikikify = ({
         }
       });
 
-      runtimeVirokSet.forEach((idkV) => {
-        idkV.dependentSet.forEach((idkP) => {
-          idkP.mutableDependencySet.delete(idkV);
+      runtimeVirokSet.forEach((virok) => {
+        virok.dependentSet.forEach((platomity) => {
+          platomity.mutableDependencySet.delete(virok);
 
-          if (idkP.mutableDependencySet.size === 0) {
-            runtimePlatomitySet.add(idkP);
+          if (platomity.mutableDependencySet.size === 0) {
+            runtimePlatomitySet.add(platomity);
           }
         });
 
-        runtimeVirokSet.delete(idkV);
+        runtimeVirokSet.delete(virok);
       });
 
       onBottomOfLoop();

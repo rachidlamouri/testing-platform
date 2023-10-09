@@ -155,6 +155,16 @@ export const CI_MODEL: CiModel = {
           testFilePath:
             'packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-ci/modelCi.test.sh',
         },
+        {
+          programName: 'lint-nonsense',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/lint-nonsense/lintNonsense.test.sh',
+        },
+        {
+          programName: 'rename-nonsense',
+          testFilePath:
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsene/renameNonsense.test.sh',
+        },
       ],
     },
     {

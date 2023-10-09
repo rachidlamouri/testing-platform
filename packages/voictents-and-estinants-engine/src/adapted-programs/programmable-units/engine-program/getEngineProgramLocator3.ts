@@ -10,7 +10,7 @@ import {
   IdentifiableProperty,
   ObjectExpressionWithIdentifierProperties,
   isObjectExpressionWithIdentifiableProperties,
-  isSepcificIdentifiableProperty,
+  isSpecificIdentifiableProperty,
 } from '../../../package-agnostic-utilities/type-script-ast/isObjectExpressionWithIdentifiableProperties';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
@@ -211,7 +211,7 @@ const getCore2EngineProgramLocator = ({
     if (isNewExpressionWithObjectExpressionArgument(element)) {
       initialHubblepupPelueTupleProperty = element.arguments[0].properties.find(
         (node): node is IdentifiableProperty => {
-          return isSepcificIdentifiableProperty(
+          return isSpecificIdentifiableProperty(
             node,
             engineFunctionConfiguration.initialHubblepupPelueTupleKeyIdentifierName,
           );

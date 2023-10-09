@@ -24,16 +24,16 @@ type Pinbetunf2<TInputTuple extends Tuple<unknown>, TOutput> = (
 ) => TOutput;
 
 // TODO: clean up the constraint on this type
-type PinbetunInputTuple2<
+type PinbetunfInputTuple2<
   TAdaptedInputVickenTuple extends { pinbetunfInput: unknown }[],
 > = {
   [Index in keyof TAdaptedInputVickenTuple]: TAdaptedInputVickenTuple[Index]['pinbetunfInput'];
 };
 
-type PinbetunInputTuple1<
+type PinbetunfInputTuple1<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-> = PinbetunInputTuple2<
+> = PinbetunfInputTuple2<
   [TAdaptedLeftInputVicken, ...TAdaptedRightInputVickenTuple]
 >;
 
@@ -66,7 +66,10 @@ type PinbetunfBuilder2<
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = (
   pinbe: Pinbetunf2<
-    PinbetunInputTuple1<TAdaptedLeftInputVicken, TAdaptedRightInputVickenTuple>,
+    PinbetunfInputTuple1<
+      TAdaptedLeftInputVicken,
+      TAdaptedRightInputVickenTuple
+    >,
     PinbetunfOutput<TAdaptedOutputVickenTuple>
   >,
 ) => EstinantAssemblerParent<
@@ -92,7 +95,7 @@ export const buildPinbetunfBuilder2 = <
     TAdaptedOutputVickenTuple
   > = (
     pinbe: Pinbetunf2<
-      PinbetunInputTuple1<
+      PinbetunfInputTuple1<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple
       >,

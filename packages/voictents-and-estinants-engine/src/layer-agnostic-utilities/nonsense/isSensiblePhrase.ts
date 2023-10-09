@@ -7,6 +7,8 @@ import { wordSet } from './wordSet';
 import { customWordSet } from './customWordSet';
 import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
 import { removeAffix } from './removeAffix';
+import { parsePedroPascal } from '../../package-agnostic-utilities/case/pedroPascal';
+import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 
 type AnalyzedPhrase = {
   phrase: string;
@@ -14,7 +16,15 @@ type AnalyzedPhrase = {
 };
 
 const analyzePhrase = (phrase: string): AnalyzedPhrase => {
-  const caseTypeName = Case.of(phrase);
+  let caseTypeName: string;
+
+  if (phrase.startsWith('_')) {
+    caseTypeName = Case.of(phrase.slice(1));
+  } else {
+    caseTypeName = Case.of(phrase);
+  }
+
+  assertNotUndefined(caseTypeName, `Unknown case type for: ${phrase}`);
 
   return {
     phrase,
@@ -32,15 +42,15 @@ type ParsedPhrase = SpreadN<
 >;
 
 const parsePhrase = (analyzedPhrase: AnalyzedPhrase): ParsedPhrase => {
-  let preparsedPhrase: string;
-  if (analyzedPhrase.caseTypeName === 'pascal') {
-    preparsedPhrase = analyzedPhrase.phrase.replaceAll(/(?<!^)([A-Z])/g, '-$1');
+  let wordList;
+  if (
+    analyzedPhrase.caseTypeName === 'pascal' ||
+    analyzedPhrase.caseTypeName === 'capital'
+  ) {
+    wordList = parsePedroPascal(analyzedPhrase.phrase);
   } else {
-    preparsedPhrase = analyzedPhrase.phrase;
+    wordList = shishKebab(analyzedPhrase.phrase).split(SHISH_KEBAB_SKEWER);
   }
-
-  const wordList = shishKebab(preparsedPhrase).split(SHISH_KEBAB_SKEWER);
-
   return {
     ...analyzedPhrase,
     wordList,
@@ -98,7 +108,7 @@ const analyzeParsedPhrase = (
   };
 };
 
-type PhraseSensibilityState = SpreadN<
+export type PhraseSensibilityState = SpreadN<
   [
     AnalyzedParsedPhrase,
     {
