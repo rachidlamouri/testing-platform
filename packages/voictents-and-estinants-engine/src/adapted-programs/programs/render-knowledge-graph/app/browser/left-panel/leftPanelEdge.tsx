@@ -6,6 +6,10 @@ type LeftPanelEdgeProps = {
   onSizeChange: (delta: number) => void;
 };
 
+/**
+ * Layout component for the interactive edge of the left panel that can be
+ * clicked on to adjust the size of the panel
+ */
 export const LeftPanelEdge: React.FunctionComponent<LeftPanelEdgeProps> = ({
   onSizeChange,
 }) => {

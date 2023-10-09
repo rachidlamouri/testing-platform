@@ -1,4 +1,8 @@
-(function hotReload(): void {
+/**
+ * A rudimentary script that polls the dev server to see if the last-modified
+ * header has changed
+ */
+const hotReload = (): void => {
   setTimeout(() => {
     (async (): Promise<void> => {
       const currentPath = window.location.pathname;
@@ -28,4 +32,6 @@
       console.error(error);
     });
   }, 500);
-})();
+};
+
+hotReload();

@@ -8,6 +8,9 @@ const MAX_WIDTH = 800;
 
 export type LeftPanelProps = PropsWithChildren;
 
+/**
+ * The layout component for the adjustable panel on the left
+ */
 export const LeftPanel: React.FunctionComponent<LeftPanelProps> = ({
   children,
 }) => {

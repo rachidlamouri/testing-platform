@@ -8,6 +8,10 @@ type MetadataDisplayProps = {
   metadata: Metadata | null;
 };
 
+/**
+ * A standard presentation component for metadata. That is, information composed
+ * of multiple label / value fields.
+ */
 export const MetadataDisplay: FunctionComponent<MetadataDisplayProps> = ({
   metadata,
 }) => {

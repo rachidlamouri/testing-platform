@@ -9,6 +9,10 @@ type PartitionNavigationButtonProps = {
   partition: NavigationPartition;
 };
 
+/**
+ * An interactive button that corresponds to a partition. When click it changes
+ * the active content
+ */
 export const PartitionNavigationButton: React.FunctionComponent<
   PartitionNavigationButtonProps
 > = ({ partition }) => {

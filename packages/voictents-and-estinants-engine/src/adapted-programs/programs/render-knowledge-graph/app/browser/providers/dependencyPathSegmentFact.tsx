@@ -4,6 +4,10 @@ import { useSelectedIdContext } from '../selectedIdContext';
 import { FileDependencyPathSegmentFactProps } from '../factProps';
 import { THEME } from '../theme';
 
+/**
+ * Represents a single segment of a dependency group. A single segment that
+ * lights up when a file node is clicked.
+ */
 export const DependencyPathSegmentFact: FunctionComponent<
   FileDependencyPathSegmentFactProps
 > = ({ children, pathHeadId, pathTailIdSet }) => {

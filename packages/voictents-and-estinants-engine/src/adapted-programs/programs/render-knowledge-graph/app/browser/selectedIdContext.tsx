@@ -19,6 +19,10 @@ type SelectedIdCtx = {
   onClearId: () => void;
 };
 
+/**
+ * A React context for maintaining which knowledge graph concepts are currently
+ * selected. Ids come from the ComplexId digest of the underlying facts.
+ */
 const SelectedIdContext = createContext<SelectedIdCtx>({
   selectedBoundaryId: null,
   onSelectBoundaryId: () => {},

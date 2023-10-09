@@ -6,6 +6,9 @@ type MetadataFieldProps = {
   field: MetadataFieldObject;
 };
 
+/**
+ * The presentation component for a label / value field.
+ */
 export const MetadataFieldDisplay: React.FunctionComponent<
   MetadataFieldProps
 > = ({ field }) => {

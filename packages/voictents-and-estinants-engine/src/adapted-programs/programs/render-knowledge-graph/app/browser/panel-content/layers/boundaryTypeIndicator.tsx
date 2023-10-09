@@ -37,6 +37,10 @@ type BoundaryTypeIndicatorProps = {
   typeName: BoundaryTypeName;
 };
 
+/**
+ * A one to two letter annotation on a partition button that indicates the type
+ * of the boundary of the corresponding partition.
+ */
 export const BoundaryTypeIndicator: React.FunctionComponent<
   BoundaryTypeIndicatorProps
 > = ({ typeName }) => {

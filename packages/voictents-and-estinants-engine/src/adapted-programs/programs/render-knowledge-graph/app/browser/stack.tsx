@@ -28,6 +28,9 @@ const sizeByStackGap: Record<StackGap, string> = {
   [StackGap.Large]: '8px',
 };
 
+/**
+ * A layout component for spacing elements within a row or a columns.
+ */
 export const Stack: React.FunctionComponent<StackProps> = ({
   gap = StackGap.Medium,
   style = {},

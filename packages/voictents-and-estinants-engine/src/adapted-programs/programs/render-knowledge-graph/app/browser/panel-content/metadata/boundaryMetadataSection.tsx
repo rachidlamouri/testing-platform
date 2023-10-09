@@ -6,6 +6,10 @@ import { SectionTitle, SubsectionTitle } from '../../left-panel/sectionTitle';
 import { MetadataDisplay } from './metadataDisplay';
 import { SubsectionSeparator } from '../../left-panel/subsectionSeparator';
 
+/**
+ * The content component for the selected boundary, common boundary root, and
+ * selected related boundary (if there is one) found in the left panel
+ */
 export const BoundaryMetadataSection: React.FunctionComponent = () => {
   const { metadataById } = useGeneratedMetadata();
   const { selectedBoundaryId, secondaryBoundaryId } = useSelectedIdContext();

@@ -24,6 +24,11 @@ type ProvidedPresentationContext = {
   hasInteractiveText: boolean;
 };
 
+/**
+ * A React context object that allows a custom knowledge graph concept component
+ * (eg. FileFact, DirectoryFact) to control, and to receive events from, its
+ * nested svg wrapper subcomponents.
+ */
 export const PresentationContext = createContext<ProvidedPresentationContext>({
   onTextClicked: () => {},
   onTextHoverChange: () => {},

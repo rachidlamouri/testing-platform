@@ -7,6 +7,10 @@ import { Stack } from '../../stack';
 import { PartitionNavigationButton } from './partitionNavigationButton';
 import { SubsectionSeparator } from '../../left-panel/subsectionSeparator';
 
+/**
+ * A content component for the accordion-like layers and subsection buttons, and
+ * the partition buttons in the left panel
+ */
 export const LayersSection: React.FunctionComponent = () => {
   const { generatedIndex } = useGeneratedMetadata();
 

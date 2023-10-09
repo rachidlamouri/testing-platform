@@ -9,6 +9,9 @@ type PanelSectionProps = PropsWithChildren<{
   isInitiallyVisible?: boolean;
 }>;
 
+/**
+ * A layout component for an accordion style navigation section.
+ */
 export const PanelSection: React.FunctionComponent<PanelSectionProps> = ({
   title,
   children,

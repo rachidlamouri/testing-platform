@@ -8,6 +8,10 @@ type LayoutProps = {
   mainContent: React.ReactElement;
 };
 
+/**
+ * The top level layout component for the app. It is only concerned with
+ * positioning content.
+ */
 export const Layout: React.FunctionComponent<LayoutProps> = ({
   headingContent,
   leftPanelContent,

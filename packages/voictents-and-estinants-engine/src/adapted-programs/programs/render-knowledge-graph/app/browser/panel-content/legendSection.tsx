@@ -32,6 +32,10 @@ const boundaryTypeIndicatorFieldByBoundaryType: Record<
   },
 };
 
+/**
+ * The content component for the accordion-like legend at the bottom of the left
+ * panel. It contains information on how to read parts of the knowledge graph.
+ */
 export const LegendSection: React.FunctionComponent = () => {
   return (
     <PanelSection

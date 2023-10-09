@@ -4,6 +4,11 @@ import { useSelectedIdContext } from '../selectedIdContext';
 import { FileDependencyPathNodeFactProps } from '../factProps';
 import { THEME } from '../theme';
 
+/**
+ * Represents a single node of a dependency group. It becomes highlighted when
+ * the associated dependency group is highlighted. It can also be selected to
+ * highlight the imported file node.
+ */
 export const FileDependencyPathNodeFact: FunctionComponent<
   FileDependencyPathNodeFactProps
 > = ({ children, pathHeadId, pathTailIdSet }) => {
