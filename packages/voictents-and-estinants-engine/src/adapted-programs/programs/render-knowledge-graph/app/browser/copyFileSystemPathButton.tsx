@@ -11,6 +11,11 @@ type CopyFileSystemPathButtonProps = {
   fileSystemPath: string;
 };
 
+/**
+ * A button for copying a file path to the clipboard, so that a developer can
+ * open the file in their editor of choice. If the knowledge graph can open an
+ * editor directly then this behavior would not be needed.
+ */
 export const CopyFileSystemPathButton: React.FunctionComponent<
   CopyFileSystemPathButtonProps
 > = ({ fileSystemPath }) => {

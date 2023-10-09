@@ -31,6 +31,7 @@ import { parseTypeScriptFile } from '../../programmable-units/type-script-file/p
 import { markUnusedExports } from './markUnusedExports';
 import { omittedUnusedExportList } from './omittedUnusedExportList';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
+import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'findUnusedExports',
@@ -76,6 +77,7 @@ digikikify({
     auditLintAssertionOmissions,
     reportFailedLintAssertion,
     reportErrors,
+    reportErrorCount,
     signalError,
   ] as const,
   errorGepp: PROGRAM_ERROR_GEPP,

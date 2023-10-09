@@ -48,6 +48,10 @@ export const VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGUR
         typeName: ComparisonConfigurationTypeName.EndsWith,
         value: 'node_modules',
       },
+      {
+        typeName: ComparisonConfigurationTypeName.Includes,
+        value: '/generated/',
+      },
     ],
   };
 

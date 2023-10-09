@@ -1,10 +1,12 @@
 import React, { SVGProps, FunctionComponent } from 'react';
 import { usePresentationContext } from '../presentationContext';
 
-export type EllipseWrapperProps = React.PropsWithChildren<
-  SVGProps<SVGEllipseElement>
->;
+type EllipseWrapperProps = React.PropsWithChildren<SVGProps<SVGEllipseElement>>;
 
+/**
+ * Wraps an svg ellipse component in order to receive styles from, and propagate
+ * events to, its parent concept component.
+ */
 export const EllipseWrapper: FunctionComponent<EllipseWrapperProps> = (
   props,
 ) => {

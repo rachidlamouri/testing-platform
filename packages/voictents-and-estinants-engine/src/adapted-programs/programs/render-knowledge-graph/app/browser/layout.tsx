@@ -2,12 +2,16 @@ import React from 'react';
 import { THEME } from './theme';
 import { LeftPanel, LeftPanelProps } from './left-panel/leftPanel';
 
-export type LayoutProps = {
+type LayoutProps = {
   headingContent: React.ReactElement;
   leftPanelContent: LeftPanelProps['children'];
   mainContent: React.ReactElement;
 };
 
+/**
+ * The top level layout component for the app. It is only concerned with
+ * positioning content.
+ */
 export const Layout: React.FunctionComponent<LayoutProps> = ({
   headingContent,
   leftPanelContent,

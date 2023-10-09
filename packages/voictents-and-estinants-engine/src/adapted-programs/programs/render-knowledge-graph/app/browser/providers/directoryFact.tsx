@@ -4,6 +4,11 @@ import { DirectoryFactProps } from '../factProps';
 import { useSelectedIdContext } from '../selectedIdContext';
 import { THEME } from '../theme';
 
+/**
+ * Represents a directory.
+ *
+ * @todo make this component more interactive
+ */
 export const DirectoryFact: FunctionComponent<DirectoryFactProps> = ({
   directoryPath,
   boundaryId,

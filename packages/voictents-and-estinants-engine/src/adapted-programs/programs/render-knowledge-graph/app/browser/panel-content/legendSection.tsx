@@ -1,7 +1,7 @@
 import React from 'react';
 import { PanelSection } from '../left-panel/panelSection';
 import { SectionTitle, SubsectionTitle } from '../left-panel/sectionTitle';
-import { MetadataField as MetadataFieldDisplay } from './metadata/metadataField';
+import { MetadataFieldDisplay } from './metadata/metadataFieldDisplay';
 import { BoundaryTypeName } from '../../../boundary/boundaryTypeName';
 import { MetadataField } from '../dynamicComponentTypes';
 import { SubsectionSeparator } from '../left-panel/subsectionSeparator';
@@ -32,6 +32,10 @@ const boundaryTypeIndicatorFieldByBoundaryType: Record<
   },
 };
 
+/**
+ * The content component for the accordion-like legend at the bottom of the left
+ * panel. It contains information on how to read parts of the knowledge graph.
+ */
 export const LegendSection: React.FunctionComponent = () => {
   return (
     <PanelSection

@@ -348,6 +348,14 @@ const customDefinitionSet: CustomDefinition[] = [
     existingDocumentation: 'https://en.wikipedia.org/wiki/Whitespace_character',
   },
   {
+    word: 'fc',
+    description: 'A React function fomponent',
+  },
+  {
+    word: 'ctx',
+    description: 'Context',
+  },
+  {
     word: 'kg',
     description: 'Knowledge graph',
   },

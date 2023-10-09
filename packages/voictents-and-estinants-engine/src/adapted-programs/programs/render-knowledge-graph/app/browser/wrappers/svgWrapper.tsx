@@ -1,8 +1,12 @@
 import React, { SVGProps, FunctionComponent, forwardRef } from 'react';
 import { usePresentationContext } from '../presentationContext';
 
-export type SvgWrapperProps = React.PropsWithChildren<SVGProps<SVGSVGElement>>;
+type SvgWrapperProps = React.PropsWithChildren<SVGProps<SVGSVGElement>>;
 
+/**
+ * Wraps an svg component in order to receive styles from, and propagate
+ * events to, its parent concept component.
+ */
 export const SvgWrapper: FunctionComponent<SvgWrapperProps> =
   forwardRef<SVGSVGElement>((props, ref) => {
     const { style } = usePresentationContext();

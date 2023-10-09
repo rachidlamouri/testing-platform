@@ -6,7 +6,7 @@ type ElementStyle = {
   strokeWidth?: string;
 };
 
-export type ProvidedPresentationContext = {
+type ProvidedPresentationContext = {
   style?: {
     // TODO: use or remove these
     fill?: string;
@@ -24,13 +24,18 @@ export type ProvidedPresentationContext = {
   hasInteractiveText: boolean;
 };
 
+/**
+ * A React context object that allows a custom knowledge graph concept component
+ * (eg. FileFact, DirectoryFact) to control, and to receive events from, its
+ * nested svg wrapper subcomponents.
+ */
 export const PresentationContext = createContext<ProvidedPresentationContext>({
   onTextClicked: () => {},
   onTextHoverChange: () => {},
   hasInteractiveText: false,
 });
 
-export type ConsumedPresentationContext = {
+type ConsumedPresentationContext = {
   style: ElementStyle;
   styleByElement: {
     group?: ElementStyle;

@@ -6,9 +6,12 @@ type MetadataFieldProps = {
   field: MetadataFieldObject;
 };
 
-export const MetadataField: React.FunctionComponent<MetadataFieldProps> = ({
-  field,
-}) => {
+/**
+ * The presentation component for a label / value field.
+ */
+export const MetadataFieldDisplay: React.FunctionComponent<
+  MetadataFieldProps
+> = ({ field }) => {
   return (
     <Stack
       gap={StackGap.Small}

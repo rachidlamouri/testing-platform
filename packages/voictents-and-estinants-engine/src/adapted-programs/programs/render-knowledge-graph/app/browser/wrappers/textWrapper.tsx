@@ -1,10 +1,12 @@
 import React, { SVGProps, FunctionComponent, useState, useEffect } from 'react';
 import { usePresentationContext } from '../presentationContext';
 
-export type TextWrapperProps = React.PropsWithChildren<
-  SVGProps<SVGTextElement>
->;
+type TextWrapperProps = React.PropsWithChildren<SVGProps<SVGTextElement>>;
 
+/**
+ * Wraps an svg text component in order to receive styles from, and propagate
+ * events to, its parent concept component.
+ */
 export const TextWrapper: FunctionComponent<TextWrapperProps> = (props) => {
   const {
     style,

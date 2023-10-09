@@ -4,6 +4,9 @@ type SectionTitleProps = {
   children: string;
 };
 
+/**
+ * Style component for a section header
+ */
 export const SectionTitle: React.FunctionComponent<SectionTitleProps> = ({
   children: title,
 }) => {
@@ -18,6 +21,9 @@ export const SectionTitle: React.FunctionComponent<SectionTitleProps> = ({
   );
 };
 
+/**
+ * Style component for a subsection header
+ */
 export const SubsectionTitle: React.FunctionComponent<SectionTitleProps> = ({
   children: title,
 }) => {

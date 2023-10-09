@@ -5,7 +5,10 @@ import { FileSystemNodeVoque } from '../file/fileSystemNodeVoictent';
 /**
  * A File object with the extension narrowed down to a TypeScript file
  */
-export type TypeScriptFile = File<FileExtensionSuffixIdentifier.TypeScript>;
+export type TypeScriptFile = File<
+  | FileExtensionSuffixIdentifier.TypeScript
+  | FileExtensionSuffixIdentifier.TypeScriptXml
+>;
 
 export const TYPE_SCRIPT_FILE_GEPP = 'type-script-file';
 

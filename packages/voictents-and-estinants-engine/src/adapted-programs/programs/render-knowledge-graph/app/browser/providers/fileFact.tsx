@@ -4,6 +4,10 @@ import { useSelectedIdContext } from '../selectedIdContext';
 import { FileFactProps } from '../factProps';
 import { THEME } from '../theme';
 
+/**
+ * Represents a file. When selected, its related dependency groups are
+ * highlighted.
+ */
 export const FileFact: FunctionComponent<FileFactProps> = ({
   factId,
   boundaryId,

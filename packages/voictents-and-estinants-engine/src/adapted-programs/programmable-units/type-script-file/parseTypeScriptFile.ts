@@ -16,6 +16,7 @@ import {
   GenericProgramErrorVoque,
   ReportingEstinantLocator,
 } from '../error/programError';
+import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 
 const ESTINANT_NAME = 'parseTypeScriptFile' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -56,6 +57,9 @@ export const parseTypeScriptFile = buildEstinant({
         tsconfigRootDir: typeScriptFileConfiguration.rootDirectory,
         loc: true,
         comment: true,
+        jsx:
+          typeScriptFileConfiguration.sourceFilePathObject.name.extension
+            .suffixIdentifier === FileExtensionSuffixIdentifier.TypeScriptXml,
       });
 
       return {

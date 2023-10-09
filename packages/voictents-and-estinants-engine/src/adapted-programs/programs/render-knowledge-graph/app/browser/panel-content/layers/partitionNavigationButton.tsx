@@ -5,10 +5,14 @@ import { THEME } from '../../theme';
 import { Stack, StackSpacer } from '../../stack';
 import { BoundaryTypeIndicator } from './boundaryTypeIndicator';
 
-export type PartitionNavigationButtonProps = {
+type PartitionNavigationButtonProps = {
   partition: NavigationPartition;
 };
 
+/**
+ * An interactive button that corresponds to a partition. When click it changes
+ * the active content
+ */
 export const PartitionNavigationButton: React.FunctionComponent<
   PartitionNavigationButtonProps
 > = ({ partition }) => {

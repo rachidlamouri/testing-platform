@@ -10,6 +10,9 @@ import { BoundaryMetadataSection } from './panel-content/metadata/boundaryMetada
 import { StackSpacer } from './stack';
 import { LegendSection } from './panel-content/legendSection';
 
+/**
+ * The Knowledge Graph React application
+ */
 export const App: React.FC = () => {
   useEffect(() => {
     document.body.style.fontFamily = 'Helvetica';
