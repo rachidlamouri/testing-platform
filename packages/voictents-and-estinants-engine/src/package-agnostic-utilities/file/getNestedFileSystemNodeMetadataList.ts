@@ -4,6 +4,7 @@ import { posix } from 'path';
 export enum ComparisonConfigurationTypeName {
   Equals = 'Equals',
   EndsWith = 'EndsWith',
+  Includes = 'Includes',
 }
 
 type ComparisonConfiguration = {
@@ -18,8 +19,9 @@ const comparisonImplementationsByTypeName: Record<
     comparisonConfiguration: ComparisonConfiguration,
   ) => boolean
 > = {
-  Equals: (nodePath, thing) => nodePath === thing.value,
-  EndsWith: (nodePath, thing) => nodePath.endsWith(thing.value),
+  Equals: (nodePath, config) => nodePath === config.value,
+  EndsWith: (nodePath, config) => nodePath.endsWith(config.value),
+  Includes: (nodePath, config) => nodePath.includes(config.value),
 };
 
 export type FileSystemNodeMetadata = {

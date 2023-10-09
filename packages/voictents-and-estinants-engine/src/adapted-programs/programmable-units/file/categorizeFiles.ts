@@ -36,7 +36,9 @@ export const categorizeFiles = buildEstinant({
     gepp: TYPE_SCRIPT_FILE_GEPP,
     pinbe: (file): file is TypeScriptFile =>
       file.nodePath.name.extension.suffixIdentifier ===
-      FileExtensionSuffixIdentifier.TypeScript,
+        FileExtensionSuffixIdentifier.TypeScript ||
+      file.nodePath.name.extension.suffixIdentifier ===
+        FileExtensionSuffixIdentifier.TypeScriptXml,
   })
   .toHubblepupOnCondition<YamlFileVoque>({
     gepp: YAML_FILE_GEPP,
