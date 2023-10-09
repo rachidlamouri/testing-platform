@@ -3,7 +3,7 @@ import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voi
 /**
  * HTML SVG representation of a Graphviz graph
  */
-export type SvgDocument = {
+type SvgDocument = {
   zorn: string;
   grition: string;
 };

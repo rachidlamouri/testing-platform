@@ -41,6 +41,8 @@ const programFileCache = new ProgramFileCache({
  * Reports granular export statements that are not imported by anything
  *
  * @canonicalComment
+ *
+ * @todo check if we still need to lint for unused files or if all current rules will catch that
  */
 digikikify({
   explicitVoictentTuple: [

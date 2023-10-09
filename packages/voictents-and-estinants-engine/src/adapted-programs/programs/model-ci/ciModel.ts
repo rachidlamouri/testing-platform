@@ -181,11 +181,6 @@ export const CI_MODEL: CiModel = {
             'packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.test.sh',
         },
         {
-          programName: 'render-type-script-file-relationships',
-          testFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-type-script-file-relationships/renderTypeScriptFileRelationships.test.sh',
-        },
-        {
           programName: 'assemble-scaffolded-file',
           testFilePath:
             'packages/voictents-and-estinants-engine/src/adapted-programs/programs/scaffold-file/assembleScaffoldedFile.test.sh',
