@@ -22,12 +22,12 @@ export type KnownFileExtensionSuffixIdentifier = Exclude<
   FileExtensionSuffixIdentifier.Unknown
 >;
 
-type FileExtensionSuffixByFileExtensionSuffixIdentifer = Record<
+type FileExtensionSuffixByFileExtensionSuffixIdentifier = Record<
   KnownFileExtensionSuffixIdentifier,
   string
 >;
 
-const fileExtensionSuffixByFileExtensionSuffixIdentifer = {
+const fileExtensionSuffixByFileExtensionSuffixIdentifier = {
   [FileExtensionSuffixIdentifier.Bash]: 'sh',
   [FileExtensionSuffixIdentifier.Gitignore]: 'gitignore',
   [FileExtensionSuffixIdentifier.Html]: 'html',
@@ -36,10 +36,10 @@ const fileExtensionSuffixByFileExtensionSuffixIdentifer = {
   [FileExtensionSuffixIdentifier.TypeScript]: 'ts',
   [FileExtensionSuffixIdentifier.TypeScriptXml]: 'tsx',
   [FileExtensionSuffixIdentifier.Yaml]: 'yaml',
-} satisfies FileExtensionSuffixByFileExtensionSuffixIdentifer;
+} satisfies FileExtensionSuffixByFileExtensionSuffixIdentifier;
 
 const fileExtensionSuffixIdentifiersByFileExtensionSuffix = swapEntries(
-  fileExtensionSuffixByFileExtensionSuffixIdentifer,
+  fileExtensionSuffixByFileExtensionSuffixIdentifier,
 );
 
 export const getFileExtensionSuffixIdentifier = (
@@ -54,7 +54,7 @@ export const getFileExtensionSuffixIdentifier = (
 export const getFileExtensionSuffix = (
   extensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier,
 ): string => {
-  return fileExtensionSuffixByFileExtensionSuffixIdentifer[
+  return fileExtensionSuffixByFileExtensionSuffixIdentifier[
     extensionSuffixIdentifier
   ];
 };

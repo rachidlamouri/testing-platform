@@ -1,4 +1,4 @@
-import { GenericHubbleup } from '../../core/types/hubblepup/hubblepup';
+import { GenericHubblepup } from '../../core/types/hubblepup/hubblepup';
 import {
   GenericAbstractSerializableVoque,
   AbstractSerializableVoictent,
@@ -39,7 +39,7 @@ export class SerializableVoictent<
   }
 
   // eslint-disable-next-line class-methods-use-this
-  protected serialize(hubblepup: GenericHubbleup): SerializedHubblepup {
+  protected serialize(hubblepup: GenericHubblepup): SerializedHubblepup {
     const text = serialize(hubblepup);
 
     return {

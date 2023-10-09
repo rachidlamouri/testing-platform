@@ -2,7 +2,7 @@ import { Gepp } from '../../core/types/voictent/gepp';
 import { Voictent2 } from '../../core/types/voictent/voictent2';
 import { Voque } from '../../core/types/voque/voque';
 import {
-  GenericHubbleup,
+  GenericHubblepup,
   Hubblepup,
 } from '../../core/types/hubblepup/hubblepup';
 import {
@@ -164,7 +164,7 @@ export abstract class AbstractSerializableVoictent<
   // eslint-disable-next-line class-methods-use-this
   protected serialize(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    hubblepup: GenericHubbleup,
+    hubblepup: GenericHubblepup,
   ): SerializedHubblepup {
     throw Error('Not implemented');
   }

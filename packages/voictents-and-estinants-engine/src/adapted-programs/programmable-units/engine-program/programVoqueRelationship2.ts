@@ -34,10 +34,10 @@ export const { ProgramVoqueRelationship2Instance } =
     BaseProgramVoqueRelationship2,
     ProgramVoqueRelationship2Prototype
   >({
-    zorn: (relatinoship) => {
+    zorn: (relationship) => {
       return getZorn([
-        relatinoship.voqueLocator.zorn,
-        relatinoship.programName,
+        relationship.voqueLocator.zorn,
+        relationship.programName,
       ]);
     },
   });

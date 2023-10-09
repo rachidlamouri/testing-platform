@@ -59,7 +59,7 @@ export type SerializeableNullNode = BaseSerializeableNode<
 >;
 
 // Number
-type SerializeablBigIntegerDatum = {
+type SerializeableBigIntegerDatum = {
   typeName: CustomDatumTypeName.BigInteger;
   value: bigint;
 };
@@ -70,7 +70,7 @@ type SerializeableNumberDatum = {
 };
 
 type SerializeableNumberNodeDatum =
-  | SerializeablBigIntegerDatum
+  | SerializeableBigIntegerDatum
   | SerializeableNumberDatum;
 
 export type SerializeableNumberNode = BaseSerializeableNode<

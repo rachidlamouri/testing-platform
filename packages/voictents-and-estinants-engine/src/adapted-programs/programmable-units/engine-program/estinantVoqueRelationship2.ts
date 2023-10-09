@@ -33,11 +33,11 @@ export const { EstinantVoqueRelationship2Instance } =
     BaseEstinantVoqueRelationship2,
     EstinantVoqueRelationship2Prototype
   >({
-    zorn: (relatinoship) => {
+    zorn: (relationship) => {
       return getZorn([
-        relatinoship.voqueLocator.zorn,
-        relatinoship.estinantLocator.zorn.forHuman,
-        relatinoship.distinguisher,
+        relationship.voqueLocator.zorn,
+        relationship.estinantLocator.zorn.forHuman,
+        relationship.distinguisher,
       ]);
     },
   });

@@ -8,14 +8,14 @@ import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInpu
  * programmer. This is used by the engine to associate items from different
  * collections when a transform has multiple inputs.
  *
- * @readableName IdAccessor
+ * @readableName KeyAccessor
  */
 export type Croarder = (rightIndexedHubblepup: GenericIndexedHubblepup) => Zorn;
 
-export type Croader3<
+export type Croarder3<
   TRightVicken extends GenericRightInputHubblepupTupleVicken,
 > = (
   rightTropoignantInputElement: TRightVicken['tropoignantInput'][number],
 ) => TRightVicken['zornTupleOption'];
 
-export type GenericCroader3 = Croader3<GenericRightInputHubblepupTupleVicken>;
+export type GenericCroarder3 = Croarder3<GenericRightInputHubblepupTupleVicken>;

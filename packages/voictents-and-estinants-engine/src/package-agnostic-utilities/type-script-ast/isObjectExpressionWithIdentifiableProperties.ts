@@ -16,7 +16,7 @@ const isIdentifiableProperty = (
   node.type === AST_NODE_TYPES.Property &&
   node.key.type === AST_NODE_TYPES.Identifier;
 
-export const isSepcificIdentifiableProperty = (
+export const isSpecificIdentifiableProperty = (
   node: TSESTree.Node,
   identifierName: string,
 ): node is IdentifiableProperty => {
