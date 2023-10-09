@@ -14,7 +14,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   {
     filePath:
       'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/datastructure/zorn.ts',
-    identifierList: ['GenericZorn2Template', 'Zorn2'],
+    identifierList: ['GenericComplexzornTemplate', 'Complexzorn'],
   },
   {
     filePath:
@@ -53,9 +53,9 @@ ${serializedImportLines}
 
 const ${zornTemplateCodeName} = [
   'UPDATE_ME'
-] as const satisfies GenericZorn2Template
+] as const satisfies GenericComplexzornTemplate
 type ${zornTemplateTypeName} = typeof ${zornTemplateCodeName}
-class ${zornTemplateClassName} extends Zorn2<${zornTemplateTypeName}> {
+class ${zornTemplateClassName} extends Complexzorn<${zornTemplateTypeName}> {
   get rawTemplate(): ${zornTemplateTypeName} {
     return ${zornTemplateCodeName}
   }

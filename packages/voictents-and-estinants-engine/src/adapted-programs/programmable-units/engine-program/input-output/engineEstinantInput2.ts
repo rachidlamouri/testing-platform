@@ -5,8 +5,8 @@ import {
   memoizeGetter,
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 import {
   EngineEstinantLocator2,
@@ -18,10 +18,10 @@ const ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE = [
   'inputIndex',
   'voictentName',
   ['estinantLocator', ...EngineEstinantLocator2ZornClassSet],
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type EngineEstinantInput2ZornTemplate =
   typeof ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE;
-export class EngineEstinantInput2Zorn extends Zorn2<EngineEstinantInput2ZornTemplate> {
+export class EngineEstinantInput2Zorn extends Complexzorn<EngineEstinantInput2ZornTemplate> {
   get rawTemplate(): EngineEstinantInput2ZornTemplate {
     return ENGINE_ESTINANT_INPUT_2_ZORN_TEMPLATE;
   }

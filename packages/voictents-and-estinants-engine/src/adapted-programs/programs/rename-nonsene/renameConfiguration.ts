@@ -3,8 +3,8 @@ import { PhraseSensibilityState } from '../../../layer-agnostic-utilities/nonsen
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { IdentifierNodeLocator } from './identifierNodeLocator';
@@ -15,10 +15,10 @@ const RENAME_CONFIGURATION_ZORN_TEMPLATE = [
   'oneBasedLineOffset',
   'originalName',
   'distinguisher',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type RenameConfigurationZornTemplate =
   typeof RENAME_CONFIGURATION_ZORN_TEMPLATE;
-class RenameConfigurationZorn extends Zorn2<RenameConfigurationZornTemplate> {
+class RenameConfigurationZorn extends Complexzorn<RenameConfigurationZornTemplate> {
   get rawTemplate(): RenameConfigurationZornTemplate {
     return RENAME_CONFIGURATION_ZORN_TEMPLATE;
   }

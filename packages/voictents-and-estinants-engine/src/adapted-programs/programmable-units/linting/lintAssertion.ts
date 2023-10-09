@@ -1,7 +1,7 @@
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import {
@@ -13,10 +13,10 @@ import { Source } from './source/source';
 
 const LINT_ASSERTION_ZORN_TEMPLATE = [
   ['rule', RuleZorn],
-  ['lintSource', Zorn2.ANY],
-] as const satisfies GenericZorn2Template;
+  ['lintSource', Complexzorn.ANY],
+] as const satisfies GenericComplexzornTemplate;
 type LintAssertionZornTemplate = typeof LINT_ASSERTION_ZORN_TEMPLATE;
-export class LintAssertionZorn extends Zorn2<LintAssertionZornTemplate> {
+export class LintAssertionZorn extends Complexzorn<LintAssertionZornTemplate> {
   get rawTemplate(): LintAssertionZornTemplate {
     return LINT_ASSERTION_ZORN_TEMPLATE;
   }

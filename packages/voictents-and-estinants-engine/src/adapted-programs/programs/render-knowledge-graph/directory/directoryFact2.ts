@@ -2,8 +2,8 @@ import { posix } from 'path';
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
@@ -22,9 +22,9 @@ import { FactTypeName } from '../fact/factTypeName';
 const DIRECTORY_FACT_2_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactZorn],
   ['directory', FileSystemNodeZorn],
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type DirectoryFact2ZornTemplate = typeof DIRECTORY_FACT_2_ZORN_TEMPLATE;
-class DirectoryFact2Zorn extends Zorn2<DirectoryFact2ZornTemplate> {
+class DirectoryFact2Zorn extends Complexzorn<DirectoryFact2ZornTemplate> {
   get rawTemplate(): DirectoryFact2ZornTemplate {
     return DIRECTORY_FACT_2_ZORN_TEMPLATE;
   }

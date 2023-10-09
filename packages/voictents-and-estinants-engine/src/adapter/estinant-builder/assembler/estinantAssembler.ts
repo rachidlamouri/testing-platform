@@ -12,7 +12,7 @@ import {
   GenericRightInputVoictentVicken,
 } from '../../../core/types/vicken/rightInputVicken';
 import {
-  Zorn,
+  Deprecatedzorn,
   ZornTuple,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import {
@@ -151,7 +151,7 @@ export const buildEstinantAssembler = <
 
               return rightInputContext.framate(adaptedLeftInput) as ZornTuple;
             },
-            croard: (indexedRightInput): Zorn => {
+            croard: (indexedRightInput): Deprecatedzorn => {
               let adaptedRightInput: unknown;
               if (
                 rightInputContext.isWibiz ||

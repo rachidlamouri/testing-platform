@@ -3,8 +3,8 @@ import { InMemoryIndexByName } from '../../../layer-agnostic-utilities/voque/inM
 import { Voque } from '../../../core/types/voque/voque';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { LintAssertionZorn } from './lintAssertion';
@@ -13,12 +13,12 @@ import { FileSourceInstance } from './source/fileSource';
 import { Source } from './source/source';
 
 const LINT_ASSERTION_OMISSION_ZORN_TEMPLATE = [
-  ['omitterSource', Zorn2.ANY],
+  ['omitterSource', Complexzorn.ANY],
   ['omittedAssertionZorn', LintAssertionZorn],
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type LintAssertionOmissionZornTemplate =
   typeof LINT_ASSERTION_OMISSION_ZORN_TEMPLATE;
-class LintAssertionOmissionZorn extends Zorn2<LintAssertionOmissionZornTemplate> {
+class LintAssertionOmissionZorn extends Complexzorn<LintAssertionOmissionZornTemplate> {
   get rawTemplate(): LintAssertionOmissionZornTemplate {
     return LINT_ASSERTION_OMISSION_ZORN_TEMPLATE;
   }

@@ -1,8 +1,8 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { Directory } from '../../../programmable-units/file/directory';
@@ -11,13 +11,13 @@ import { BoundaryTypeName } from './boundaryTypeName';
 const BOUNDARY_ZORN_TEMPLATE = [
   'typeName',
   'normalizedDisplayName',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type BoundaryZornTemplate = typeof BOUNDARY_ZORN_TEMPLATE;
 type BoundaryZornInput = {
   typeName: BoundaryTypeName;
   displayName: string;
 };
-export class BoundaryZorn extends Zorn2<BoundaryZornTemplate> {
+export class BoundaryZorn extends Complexzorn<BoundaryZornTemplate> {
   constructor({ typeName, displayName }: BoundaryZornInput) {
     const normalizedDisplayName = displayName.replaceAll(/(:|\s+),'-'/g, '');
     super({

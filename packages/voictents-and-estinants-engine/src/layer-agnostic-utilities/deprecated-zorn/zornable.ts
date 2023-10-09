@@ -7,7 +7,7 @@ import { Hubblepup } from '../../core/types/hubblepup/hubblepup';
 /**
  * An identifiable object.
  *
- * @todo switch to using Zorn2 for the identifier
+ * @todo switch to using ComplexId for the identifier
  *
  * @readableName Identifiable
  */

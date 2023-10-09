@@ -1,18 +1,18 @@
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { TypeScriptFile } from '../../programmable-units/type-script-file/typeScriptFile';
 
 const EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ZORN_TEMPLATE = [
   'testFilePath',
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type ExpectedProgramTestFileConfigurationZornTemplate =
   typeof EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ZORN_TEMPLATE;
-class ExpectedProgramTestFileConfigurationZorn extends Zorn2<ExpectedProgramTestFileConfigurationZornTemplate> {
+class ExpectedProgramTestFileConfigurationZorn extends Complexzorn<ExpectedProgramTestFileConfigurationZornTemplate> {
   get rawTemplate(): ExpectedProgramTestFileConfigurationZornTemplate {
     return EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ZORN_TEMPLATE;
   }

@@ -3,7 +3,7 @@ import { Zornable } from './zornable';
 
 /**
  * An outdated pattern for getting an alphanumeric id from a string id. Use
- * Zorn2 instead
+ * ComplexId instead
  *
  * @deprecated
  *

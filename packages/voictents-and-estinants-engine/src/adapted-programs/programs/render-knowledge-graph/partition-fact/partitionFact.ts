@@ -2,8 +2,8 @@ import { posix } from 'path';
 import { InMemoryOdeshin3Voque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericZorn2Template,
-  Zorn2,
+  GenericComplexzornTemplate,
+  Complexzorn,
 } from '../../../../package-agnostic-utilities/datastructure/zorn';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import {
@@ -22,9 +22,9 @@ import { Layer } from '../layer/layer';
 
 const PARTITION_FACT_ZORN_TEMPLATE = [
   ['boundary', BoundaryZorn],
-] as const satisfies GenericZorn2Template;
+] as const satisfies GenericComplexzornTemplate;
 type PartitionFactZornTemplate = typeof PARTITION_FACT_ZORN_TEMPLATE;
-export class PartitionFactZorn extends Zorn2<PartitionFactZornTemplate> {
+export class PartitionFactZorn extends Complexzorn<PartitionFactZornTemplate> {
   get rawTemplate(): PartitionFactZornTemplate {
     return PARTITION_FACT_ZORN_TEMPLATE;
   }
