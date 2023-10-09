@@ -95,6 +95,10 @@ printf "\n"
 bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/lint-nonsense/lintNonsense.test.sh
 printf "\n"
 
+## rename-nonsense
+bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsene/renameNonsense.test.sh
+printf "\n"
+
 # WIP Adapted Programs
 
 ## render-knowledge-graph

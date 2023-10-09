@@ -48,6 +48,12 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       isInitiallyVisible: true,
     },
     {
+      label: 'rename-nonsense',
+      script:
+        'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsene/renameNonsense.ts',
+      isInitiallyVisible: true,
+    },
+    {
       label: 'find-unused-exports',
       script:
         'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/find-unused-exports/findUnusedExports.ts',

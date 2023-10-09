@@ -18,6 +18,8 @@
     "digest": "6542410f2d6b6e829699778b905d9b4a08ca4482"
   - "fileName": "model-programs"
     "digest": "1c994d63bd348276d293d4ae66eac18a6ca85b0e"
+  - "fileName": "rename-nonsense"
+    "digest": "ee882db7c14454de9f09da14ed8d37da68d37dd3"
   - "fileName": "render-knowledge-graph"
     "digest": "543270597ff19abc0e1a7a26a888076cf2c0a58f"
   - "fileName": "render-type-script-file-relationships"
