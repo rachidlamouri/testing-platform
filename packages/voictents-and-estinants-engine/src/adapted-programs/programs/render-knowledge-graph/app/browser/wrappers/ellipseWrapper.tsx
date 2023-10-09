@@ -1,9 +1,7 @@
 import React, { SVGProps, FunctionComponent } from 'react';
 import { usePresentationContext } from '../presentationContext';
 
-export type EllipseWrapperProps = React.PropsWithChildren<
-  SVGProps<SVGEllipseElement>
->;
+type EllipseWrapperProps = React.PropsWithChildren<SVGProps<SVGEllipseElement>>;
 
 export const EllipseWrapper: FunctionComponent<EllipseWrapperProps> = (
   props,

@@ -19,7 +19,7 @@ type SelectedIdCtx = {
   onClearId: () => void;
 };
 
-export const SelectedIdContext = createContext<SelectedIdCtx>({
+const SelectedIdContext = createContext<SelectedIdCtx>({
   selectedBoundaryId: null,
   onSelectBoundaryId: () => {},
 

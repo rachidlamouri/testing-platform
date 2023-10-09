@@ -2,7 +2,7 @@ import React from 'react';
 import { THEME } from './theme';
 import { LeftPanel, LeftPanelProps } from './left-panel/leftPanel';
 
-export type LayoutProps = {
+type LayoutProps = {
   headingContent: React.ReactElement;
   leftPanelContent: LeftPanelProps['children'];
   mainContent: React.ReactElement;

@@ -6,7 +6,7 @@ type ElementStyle = {
   strokeWidth?: string;
 };
 
-export type ProvidedPresentationContext = {
+type ProvidedPresentationContext = {
   style?: {
     // TODO: use or remove these
     fill?: string;
@@ -30,7 +30,7 @@ export const PresentationContext = createContext<ProvidedPresentationContext>({
   hasInteractiveText: false,
 });
 
-export type ConsumedPresentationContext = {
+type ConsumedPresentationContext = {
   style: ElementStyle;
   styleByElement: {
     group?: ElementStyle;

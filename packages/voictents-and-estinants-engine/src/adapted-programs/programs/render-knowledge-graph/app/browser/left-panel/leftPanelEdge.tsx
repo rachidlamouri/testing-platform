@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { THEME } from '../theme';
 import { EDGE_WIDTH } from './constants';
 
-export type LeftPanelEdgeProps = {
+type LeftPanelEdgeProps = {
   onSizeChange: (delta: number) => void;
 };
 

@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { Metadata } from '../../dynamicComponentTypes';
-import { MetadataField } from './metadataField';
+import { MetadataFieldDisplay } from './metadataFieldDisplay';
 import { Stack, StackGap } from '../../stack';
 import { MetadataHeader } from './metadataHeader';
 
-export type MetadataDisplayProps = {
+type MetadataDisplayProps = {
   metadata: Metadata | null;
 };
 
@@ -22,7 +22,7 @@ export const MetadataDisplay: FunctionComponent<MetadataDisplayProps> = ({
     >
       <MetadataHeader metadata={metadata} />
       {fieldList.map((field) => {
-        return <MetadataField key={field.label} field={field} />;
+        return <MetadataFieldDisplay key={field.label} field={field} />;
       })}
     </Stack>
   );

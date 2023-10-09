@@ -6,7 +6,7 @@ export enum StackGap {
   Large = 'Large',
 }
 
-export type StackProps = PropsWithChildren<{
+type StackProps = PropsWithChildren<{
   gap?: StackGap;
   style?: Pick<
     React.DetailedHTMLProps<

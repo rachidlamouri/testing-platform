@@ -156,6 +156,56 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
       'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/left-panel/constants.ts',
     importedIdentifierName: 'EDGE_WIDTH',
   },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/providers/fileFact.tsx',
+    importedIdentifierName: 'FileFact',
+  },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/providers/directoryFact.tsx',
+    importedIdentifierName: 'DirectoryFact',
+  },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/providers/dependencyPathSegmentFact.tsx',
+    importedIdentifierName: 'DependencyPathSegmentFact',
+  },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/providers/fileDependencyPathNodeFact.tsx',
+    importedIdentifierName: 'FileDependencyPathNodeFact',
+  },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/wrappers/ellipseWrapper.tsx',
+    importedIdentifierName: 'EllipseWrapper',
+  },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/wrappers/groupWrapper.tsx',
+    importedIdentifierName: 'GroupWrapper',
+  },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/wrappers/pathWrapper.tsx',
+    importedIdentifierName: 'PathWrapper',
+  },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/wrappers/polygonWrapper.tsx',
+    importedIdentifierName: 'PolygonWrapper',
+  },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/wrappers/svgWrapper.tsx',
+    importedIdentifierName: 'SvgWrapper',
+  },
+  {
+    importedFilePath:
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/wrappers/textWrapper.tsx',
+    importedIdentifierName: 'TextWrapper',
+  },
 ].map(({ importedFilePath, importedIdentifierName }) => {
   return new LintAssertionOmissionInstance({
     omitterSource,

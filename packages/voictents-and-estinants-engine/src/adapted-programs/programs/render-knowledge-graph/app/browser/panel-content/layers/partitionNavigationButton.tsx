@@ -5,7 +5,7 @@ import { THEME } from '../../theme';
 import { Stack, StackSpacer } from '../../stack';
 import { BoundaryTypeIndicator } from './boundaryTypeIndicator';
 
-export type PartitionNavigationButtonProps = {
+type PartitionNavigationButtonProps = {
   partition: NavigationPartition;
 };
 

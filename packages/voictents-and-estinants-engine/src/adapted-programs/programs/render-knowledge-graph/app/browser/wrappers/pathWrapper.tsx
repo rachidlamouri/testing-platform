@@ -1,9 +1,7 @@
 import React, { SVGProps, FunctionComponent } from 'react';
 import { usePresentationContext } from '../presentationContext';
 
-export type PathWrapperProps = React.PropsWithChildren<
-  SVGProps<SVGPathElement>
->;
+type PathWrapperProps = React.PropsWithChildren<SVGProps<SVGPathElement>>;
 
 export const PathWrapper: FunctionComponent<PathWrapperProps> = (props) => {
   const { style, styleByElement } = usePresentationContext();
