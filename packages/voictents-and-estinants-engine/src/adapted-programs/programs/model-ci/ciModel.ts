@@ -163,7 +163,7 @@ export const CI_MODEL: CiModel = {
         {
           programName: 'rename-nonsense',
           testFilePath:
-            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsene/renameNonsense.test.sh',
+            'packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsense/renameNonsense.test.sh',
         },
       ],
     },

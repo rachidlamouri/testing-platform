@@ -96,7 +96,7 @@ bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/lint-
 printf "\n"
 
 ## rename-nonsense
-bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsene/renameNonsense.test.sh
+bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsense/renameNonsense.test.sh
 printf "\n"
 
 # WIP Adapted Programs
