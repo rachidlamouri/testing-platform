@@ -18,6 +18,10 @@ import {
   GenericAdaptedLeftInputVicken,
   GenericAdaptedRightInputVickenTuple,
 } from '../shared/vicken';
+import {
+  buildPinbetunfBuilder2,
+  PinbetunfBuilderParent2,
+} from '../pinbetunf/pinbetunfBuilder2';
 
 type NextAdaptedRightInputVickenTuple<
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
@@ -48,6 +52,15 @@ type RightInputVoictentAppreffingeBuilder2<
         TAdaptedRightInputVickenTuple,
         TRightInputVoque
       >
+    >,
+
+    PinbetunfBuilderParent2<
+      TAdaptedLeftInputVicken,
+      NextAdaptedRightInputVickenTuple<
+        TAdaptedRightInputVickenTuple,
+        TRightInputVoque
+      >,
+      EmptyAdaptedOutputVickenTuple
     >,
 
     OutputHubblepupAppreffingeBuilderParent2<
@@ -100,6 +113,15 @@ export const buildRightInputVoictentAppreffingeBuilder2 = <
           TAdaptedRightInputVickenTuple,
           TRightInputVoque
         >
+      >(nextContext),
+
+      onPinbe: buildPinbetunfBuilder2<
+        TAdaptedLeftInputVicken,
+        NextAdaptedRightInputVickenTuple<
+          TAdaptedRightInputVickenTuple,
+          TRightInputVoque
+        >,
+        EmptyAdaptedOutputVickenTuple
       >(nextContext),
 
       toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
