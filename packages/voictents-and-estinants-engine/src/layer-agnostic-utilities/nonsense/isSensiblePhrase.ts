@@ -45,7 +45,9 @@ const parsePhrase = (analyzedPhrase: AnalyzedPhrase): ParsedPhrase => {
   let wordList;
   if (
     analyzedPhrase.caseTypeName === 'pascal' ||
-    analyzedPhrase.caseTypeName === 'capital'
+    analyzedPhrase.caseTypeName === 'capital' ||
+    // camel has the same parsing logic as pascal since the first letter is guaranteed to be lowercase
+    analyzedPhrase.caseTypeName === 'camel'
   ) {
     wordList = parsePedroPascal(analyzedPhrase.phrase);
   } else {
@@ -108,7 +110,7 @@ const analyzeParsedPhrase = (
   };
 };
 
-export type PhraseSensibilityState = SpreadN<
+type PhraseSensibilityState = SpreadN<
   [
     AnalyzedParsedPhrase,
     {

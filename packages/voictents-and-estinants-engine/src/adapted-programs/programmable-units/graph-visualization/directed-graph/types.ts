@@ -6,7 +6,7 @@
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../../package-agnostic-utilities/data-structure/zorn';
 
 type FactoryInput = {
   distinguisher: string;

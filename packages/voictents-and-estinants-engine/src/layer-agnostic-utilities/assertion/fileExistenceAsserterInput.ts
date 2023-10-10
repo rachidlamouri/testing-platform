@@ -8,7 +8,7 @@ import { buildNamedConstructorFunction } from '../../package-agnostic-utilities/
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../package-agnostic-utilities/datastructure/zorn';
+} from '../../package-agnostic-utilities/data-structure/zorn';
 import { SimplifyN } from '../../package-agnostic-utilities/type/simplify';
 import { InMemoryOdeshin2ListVoque } from '../voictent/inMemoryOdeshinVoictent2';
 

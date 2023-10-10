@@ -14,7 +14,7 @@ import {
 import {
   Deprecatedzorn,
   ZornTuple,
-} from '../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../package-agnostic-utilities/data-structure/zorn';
 import {
   AssemblerContext,
   CoreConstituentOutputEntry,

@@ -2,7 +2,7 @@ import { getZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getZo
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../package-agnostic-utilities/data-structure/zorn';
 
 type ExportLocator = {
   filePath: string;

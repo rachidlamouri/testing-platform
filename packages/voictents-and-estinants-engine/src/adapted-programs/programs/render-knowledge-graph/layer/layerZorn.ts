@@ -1,7 +1,7 @@
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../../package-agnostic-utilities/data-structure/zorn';
 
 const LAYER_ZORN_TEMPLATE = [
   'directoryPath',

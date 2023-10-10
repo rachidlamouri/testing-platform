@@ -359,6 +359,10 @@ const customDefinitionSet: CustomDefinition[] = [
     word: 'kg',
     description: 'Knowledge graph',
   },
+  {
+    word: 'src',
+    description: 'Source',
+  },
 
   {
     word: 'tomahto',

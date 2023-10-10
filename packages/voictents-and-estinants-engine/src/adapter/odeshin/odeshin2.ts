@@ -1,7 +1,7 @@
 import {
   Simplezorn,
   UnsafeComplexzorn,
-} from '../../package-agnostic-utilities/datastructure/zorn';
+} from '../../package-agnostic-utilities/data-structure/zorn';
 
 /**
  * @todo consider eliminating string literals and just going with complex identifiers

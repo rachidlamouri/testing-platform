@@ -7,7 +7,7 @@ import {
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../../package-agnostic-utilities/data-structure/zorn';
 import {
   EngineEstinantLocator2,
   EngineEstinantLocator2ZornClassSet,

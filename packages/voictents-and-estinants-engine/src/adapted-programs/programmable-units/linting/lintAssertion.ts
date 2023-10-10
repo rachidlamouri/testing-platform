@@ -2,7 +2,7 @@ import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voi
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../package-agnostic-utilities/data-structure/zorn';
 import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import {
   MessageAccessorInputFromAccessor,

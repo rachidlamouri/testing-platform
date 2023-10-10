@@ -1,13 +1,13 @@
 import { posix } from 'path';
-import { PhraseSensibilityState } from '../../../layer-agnostic-utilities/nonsense/isSensiblePhrase';
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../package-agnostic-utilities/data-structure/zorn';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { IdentifierNodeLocator } from './identifierNodeLocator';
+import { SensibleNameState } from './getSensibleNameState';
 
 const RENAME_CONFIGURATION_ZORN_TEMPLATE = [
   'fileName',
@@ -31,7 +31,7 @@ type RenameConfigurationInput = {
   oneBasedLineNumber: number;
   oneBasedLineOffset: number;
   newName: string;
-  sensibilityState: PhraseSensibilityState;
+  nameSensibilityState: SensibleNameState;
 };
 
 /**
@@ -59,7 +59,7 @@ export const { RenameConfigurationInstance } = buildNamedConstructorFunction({
     'oneBasedLineNumber',
     'oneBasedLineOffset',
     'newName',
-    'sensibilityState',
+    'nameSensibilityState',
   ] as const satisfies readonly (keyof RenameConfiguration)[],
 })
   .withTypes<RenameConfigurationInput, RenameConfiguration>({

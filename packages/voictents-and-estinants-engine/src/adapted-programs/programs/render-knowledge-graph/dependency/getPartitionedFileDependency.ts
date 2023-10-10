@@ -1,4 +1,4 @@
-import { ComplexMap } from '../../../../package-agnostic-utilities/datastructure/complexMap';
+import { ComplexMap } from '../../../../package-agnostic-utilities/data-structure/complexMap';
 import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
 import { FILE_DEPENDENCY_GEPP, FileDependencyVoque } from './fileDependency';
 import {

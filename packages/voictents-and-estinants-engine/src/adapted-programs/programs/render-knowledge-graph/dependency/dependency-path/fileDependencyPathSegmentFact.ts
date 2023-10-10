@@ -3,7 +3,7 @@ import { buildNamedConstructorFunction } from '../../../../../package-agnostic-u
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../../../package-agnostic-utilities/data-structure/zorn';
 import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
 import { DirectedGraphEdge2Instance } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import { DirectedGraphElement2 } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';

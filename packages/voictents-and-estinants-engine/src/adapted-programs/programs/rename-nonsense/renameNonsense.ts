@@ -36,7 +36,10 @@ import { reportFailedLintAssertion } from '../../programmable-units/linting/repo
 import { filterIdentifier } from './filterIdentifier';
 import { getRenameConfiguration } from './getRenameConfiguration';
 import { enumerateNodeLocators } from './enumerateNodeLocators';
+import { getFileRenameConfiguration } from './getFileRenameConfiguration';
+import { FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP } from './fileSystemNodeRenameConfiguration';
 import { RENAME_CONFIGURATION_GEPP } from './renameConfiguration';
+import { getDirectoryRenameConfiguration } from './getDirectoryRenameConfiguration';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'rename-nonsense',
@@ -90,6 +93,8 @@ digikikify({
     enumerateNodeLocators,
     filterIdentifier,
 
+    getDirectoryRenameConfiguration,
+    getFileRenameConfiguration,
     getRenameConfiguration,
 
     reportFailedLintAssertion,
@@ -100,6 +105,7 @@ digikikify({
   serializeeGeppList: [
     // keep this as a multi-line list for easier debugging
     RENAME_CONFIGURATION_GEPP,
+    FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
   ],
   programFileCache,
 });

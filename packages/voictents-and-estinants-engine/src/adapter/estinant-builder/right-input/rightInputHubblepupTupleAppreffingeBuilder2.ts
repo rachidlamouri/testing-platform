@@ -3,7 +3,7 @@ import { GenericVoque } from '../../../core/types/voque/voque';
 import {
   Complexzorn,
   ZornTuple2,
-} from '../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../package-agnostic-utilities/data-structure/zorn';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
   buildInputOutputContextFromRightInputContext,

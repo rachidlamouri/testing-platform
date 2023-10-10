@@ -50,7 +50,7 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
     {
       label: 'rename-nonsense',
       script:
-        'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsene/renameNonsense.ts',
+        'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsense/renameNonsense.ts',
       isInitiallyVisible: true,
     },
     {

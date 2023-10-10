@@ -1,7 +1,7 @@
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../../package-agnostic-utilities/data-structure/zorn';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
 
 const FILE_DEPENDENCY_ZORN_TEMPLATE = [

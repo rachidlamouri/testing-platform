@@ -1,7 +1,7 @@
 import {
   Deprecatedzorn,
   ZornTuple,
-} from '../../package-agnostic-utilities/datastructure/zorn';
+} from '../../package-agnostic-utilities/data-structure/zorn';
 import { Ajorken } from './procody/ajorken';
 import { Cology, CologySet, getCologyEntryList } from './procody/cology';
 import {

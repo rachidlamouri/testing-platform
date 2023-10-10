@@ -12,7 +12,7 @@
 import { GenericVoque } from '../../../core/types/voque/voque';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { OutputVicken as CoreOutputVicken } from '../../../core/types/vicken/outputVicken';
-import { ZornTuple } from '../../../package-agnostic-utilities/datastructure/zorn';
+import { ZornTuple } from '../../../package-agnostic-utilities/data-structure/zorn';
 
 enum AdaptedVickenTypeName {
   Output = 'Output',

@@ -2,7 +2,7 @@ import { buildNamedConstructorFunction } from '../../../../package-agnostic-util
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../../package-agnostic-utilities/data-structure/zorn';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
