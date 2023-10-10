@@ -10,7 +10,7 @@ import { localIdCharacterEncodingList } from './localIdCharacterEncodingList';
  *
  * @readableName FeatureId
  */
-export type Strif = {
+export type FeatureId = {
   globalId: string;
   localId: string;
 };
@@ -58,7 +58,7 @@ const uuidToLocalId = (uuid: string): string => {
   return localId;
 };
 
-export const createStrif = (): Strif => {
+export const createFeatureId = (): FeatureId => {
   const globalId = uuidUtils.v4();
   const localId = uuidToLocalId(globalId);
 
