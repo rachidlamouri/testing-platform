@@ -66,6 +66,12 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       isInitiallyVisible: true,
     },
     {
+      label: 'lint-file-system-node-path-literals',
+      script:
+        'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/lint-file-system-node-path-literals/lintFileSystemNodePathLiterals.ts',
+      isInitiallyVisible: true,
+    },
+    {
       label: 'typecheck',
       script:
         'npx tsc --pretty -p packages/voictents-and-estinants-engine --watch',

@@ -20,6 +20,7 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../error/programError';
+import { isRelativeFilePath } from '../../../package-agnostic-utilities/file/isRelativeFilePath';
 
 const ESTINANT_NAME = 'getTypeScriptFileImportList' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -54,8 +55,7 @@ export const getTypeScriptFileImportList = buildEstinant({
         (inputImportDeclaration) => {
           const sourcePath = inputImportDeclaration.source.value;
 
-          const isRelative =
-            sourcePath.startsWith('./') || sourcePath.startsWith('../');
+          const isRelative = isRelativeFilePath(sourcePath);
 
           const specifierList: string[] = inputImportDeclaration.specifiers.map(
             (specifier) => {
