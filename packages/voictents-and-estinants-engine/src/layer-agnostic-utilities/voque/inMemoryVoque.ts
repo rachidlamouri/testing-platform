@@ -41,10 +41,18 @@ export type StandardInMemoryVoque<
   THubblepup[]
 >;
 
+export type GenericStandardInMemoryVoque = StandardInMemoryVoque<
+  Gepp,
+  Hubblepup
+>;
+
 export type GenericInMemoryVoque = InMemoryVoque<
   Gepp,
   Hubblepup,
   Hubblepup,
   InMemoryIndexByName,
+  // TODO: this "unknown" is problematic. It allows a program to specify a
+  // collection whose collection stream will not satisfy the constraints of a
+  // transform that uses the correct metastream type
   unknown
 >;

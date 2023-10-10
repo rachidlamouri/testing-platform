@@ -3,7 +3,7 @@ import {
   AbstractInMemoryVoictent,
   DereferenceError,
 } from './abstractInMemoryVoictent';
-import { GenericInMemoryVoque } from '../voque/inMemoryVoque';
+import { GenericStandardInMemoryVoque } from '../voque/inMemoryVoque';
 
 /**
  * A collection that can store any hubblepup in an in-memory array.
@@ -11,14 +11,14 @@ import { GenericInMemoryVoque } from '../voque/inMemoryVoque';
  * @readableName InMemoryCollection
  */
 export class InMemoryVoictent<
-  TVoque extends GenericInMemoryVoque,
-> extends AbstractInMemoryVoictent<GenericInMemoryVoque, TVoque> {
+  TVoque extends GenericStandardInMemoryVoque,
+> extends AbstractInMemoryVoictent<GenericStandardInMemoryVoque, TVoque> {
   protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
     return this.hubblepupPelieTuple;
   }
 
   protected dereferenceHubblepupPelie(
-    lanbe: HubblepupPelieLanbe2<GenericInMemoryVoque, TVoque>,
+    lanbe: HubblepupPelieLanbe2<GenericStandardInMemoryVoque, TVoque>,
   ): TVoque['indexedHubblepupPelie'] {
     const listIndex = this.getLanbeIndex(lanbe);
 
