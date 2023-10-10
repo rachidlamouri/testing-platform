@@ -206,11 +206,6 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
       'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/wrappers/textWrapper.tsx',
     importedIdentifierName: 'TextWrapper',
   },
-  {
-    importedFilePath:
-      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/file/renameFileSystemNode.ts',
-    importedIdentifierName: 'renameFileSystemNode',
-  },
 ].map(({ importedFilePath, importedIdentifierName }) => {
   return new LintAssertionOmissionInstance({
     omitterSource,
