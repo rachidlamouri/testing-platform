@@ -33,13 +33,13 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/strif/strif.ts',
-    importedIdentifierName: 'Strif',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/feature-id/featureId.ts',
+    importedIdentifierName: 'FeatureId',
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/strif/strif.ts',
-    importedIdentifierName: 'createStrif',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/feature-id/featureId.ts',
+    importedIdentifierName: 'createFeatureId',
   },
   {
     importedFilePath:
