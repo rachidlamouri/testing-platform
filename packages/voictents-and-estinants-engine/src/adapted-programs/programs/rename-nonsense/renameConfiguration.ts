@@ -37,7 +37,7 @@ type RenameConfigurationInput = {
 /**
  * The information needed to rename an identifier
  */
-type RenameConfiguration = SpreadN<
+export type RenameConfiguration = SpreadN<
   [
     {
       zorn: RenameConfigurationZorn;

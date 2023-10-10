@@ -85,7 +85,7 @@ export const getDirectoryRenameConfiguration = buildEstinant({
 
     const newName = shishKebab(sensibleNameResult.sensibleName);
 
-    const newDirectoryPath = posix.join(
+    const relativeNewPath = posix.join(
       directory.directoryPath.parentDirectoryPath,
       `${newName}`,
     );
@@ -94,7 +94,9 @@ export const getDirectoryRenameConfiguration = buildEstinant({
       [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP]: [
         new FileSystemNodeRenameConfigurationInstance({
           zorn: directory.zorn,
-          newPath: newDirectoryPath,
+          isDirectory: true,
+          oldNodePath: directory.directoryPath,
+          relativeNewPath,
         }),
       ],
       [LINT_ASSERTION_GEPP]: [],

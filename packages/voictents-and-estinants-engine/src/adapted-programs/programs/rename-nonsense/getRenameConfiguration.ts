@@ -21,6 +21,8 @@ import { getSensibleNameState } from './getSensibleNameState';
 import { RequestSourceInstance } from '../../programmable-units/linting/source/requestSource';
 import { nonsenseIsDocumentedRule } from './nonsenseIsDocumentedRule';
 
+const literalAllowSet = new Set(['_']);
+
 const ESTINANT_NAME = 'getRenameConfiguration' as const;
 
 const linterSource = new EstinantSourceInstance({
@@ -51,7 +53,10 @@ export const getRenameConfiguration = buildEstinant({
 
     const sensibleNameResult = getSensibleNameState(originalName);
 
-    if (sensibleNameResult.isOriginalNameSensible) {
+    if (
+      sensibleNameResult.isOriginalNameSensible ||
+      literalAllowSet.has(originalName)
+    ) {
       return {
         [RENAME_CONFIGURATION_GEPP]: [],
         [LINT_ASSERTION_GEPP]: [],

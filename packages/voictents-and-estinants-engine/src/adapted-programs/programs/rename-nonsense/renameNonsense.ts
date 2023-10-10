@@ -37,9 +37,8 @@ import { filterIdentifier } from './filterIdentifier';
 import { getRenameConfiguration } from './getRenameConfiguration';
 import { enumerateNodeLocators } from './enumerateNodeLocators';
 import { getFileRenameConfiguration } from './getFileRenameConfiguration';
-import { FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP } from './fileSystemNodeRenameConfiguration';
-import { RENAME_CONFIGURATION_GEPP } from './renameConfiguration';
 import { getDirectoryRenameConfiguration } from './getDirectoryRenameConfiguration';
+import { applyRenaming } from './applyRenaming';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'rename-nonsense',
@@ -47,6 +46,8 @@ const programFileCache = new ProgramFileCache({
 
 /**
  * Gathers information for renaming identifiers.
+ *
+ * @note this program will not apply any renaming unless the env var ENABLE_WRITE is set
  *
  * @todo actually apply the renaming
  *
@@ -97,6 +98,8 @@ digikikify({
     getFileRenameConfiguration,
     getRenameConfiguration,
 
+    applyRenaming,
+
     reportFailedLintAssertion,
     reportErrors,
     reportErrorCount,
@@ -104,8 +107,6 @@ digikikify({
   ] as const,
   serializeeGeppList: [
     // keep this as a multi-line list for easier debugging
-    RENAME_CONFIGURATION_GEPP,
-    FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
   ],
   programFileCache,
 });

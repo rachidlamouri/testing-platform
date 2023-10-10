@@ -244,6 +244,8 @@ childProcess.stdout.pipe(
         log('Done!');
         process.exit(0);
       }
+
+      log('no-op');
     },
   }),
 );

@@ -1,14 +1,29 @@
+import { posix } from 'path';
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
+import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { FileSystemNodeZorn } from '../../programmable-units/file/fileSystemNode';
+import { NodePath } from '../../programmable-units/file/nodePath';
+
+type FileSystemNodeRenameConfigurationInput = {
+  zorn: FileSystemNodeZorn;
+  isDirectory: boolean;
+  oldNodePath: NodePath;
+  relativeNewPath: string;
+};
 
 /**
  * The information needed to rename a file or directory
  */
-type FileSystemNodeRenameConfiguration = {
-  zorn: FileSystemNodeZorn;
-  newPath: string;
-};
+export type FileSystemNodeRenameConfiguration = SpreadN<
+  [
+    FileSystemNodeRenameConfigurationInput,
+    {
+      oldAbsolutePath: string;
+      newAbsolutePath: string;
+    },
+  ]
+>;
 
 export const { FileSystemNodeRenameConfigurationInstance } =
   buildNamedConstructorFunction({
@@ -16,11 +31,15 @@ export const { FileSystemNodeRenameConfigurationInstance } =
     instancePropertyNameTuple: [
       // keep this as a multiline list
       'zorn',
-      'newPath',
+      'isDirectory',
+      'oldNodePath',
+      'relativeNewPath',
+      'oldAbsolutePath',
+      'newAbsolutePath',
     ] as const satisfies readonly (keyof FileSystemNodeRenameConfiguration)[],
   })
     .withTypes<
-      FileSystemNodeRenameConfiguration,
+      FileSystemNodeRenameConfigurationInput,
       FileSystemNodeRenameConfiguration
     >({
       typeCheckErrorMesssages: {
@@ -30,7 +49,16 @@ export const { FileSystemNodeRenameConfigurationInstance } =
           extraneousProperties: '',
         },
       },
-      transformInput: (input) => input,
+      transformInput: (input) => {
+        const oldAbsolutePath = posix.resolve(input.oldNodePath.serialized);
+        const newAbsolutePath = posix.resolve(input.relativeNewPath);
+
+        return {
+          ...input,
+          oldAbsolutePath,
+          newAbsolutePath,
+        };
+      },
     })
     .assemble();
 
