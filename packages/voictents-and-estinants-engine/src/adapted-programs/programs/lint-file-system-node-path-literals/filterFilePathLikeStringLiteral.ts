@@ -54,9 +54,12 @@ export const filterFilePathLikeStringLiteral = buildEstinant({
     }
 
     // TODO: make this less brittle
+    // Note: generated app files are linted by renderApp
     if (
       sourceFileFilePath.serialized ===
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput.ts'
+        'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput.ts' ||
+      sourceFileFilePath.serialized ===
+        'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/constructDynamicIndexFile.ts'
     ) {
       return [];
     }
