@@ -12,6 +12,8 @@
     "digest": "598c9011e29dcbd1c59eec77ab49de1c938fe25c"
   - "fileName": "get-snapshot-refresh-script"
     "digest": "6920cfbf84297c8394c10e25e8e1fae4bb13cc1f"
+  - "fileName": "lint-file-system-node-path-literals"
+    "digest": "02d721ca41955376967b4b94a14abfce08ef1a22"
   - "fileName": "lint-nonsense"
     "digest": "6e761aef3989ae3c90cc9ec983ae78c36fcf68ee"
   - "fileName": "model-ci"

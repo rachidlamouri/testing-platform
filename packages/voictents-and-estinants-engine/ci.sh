@@ -91,6 +91,10 @@ printf "\n"
 bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-ci/modelCi.test.sh
 printf "\n"
 
+## lint-file-system-node-path-literals
+bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/lint-file-system-node-path-literals/lintFileSystemNodePathLiterals.test.sh
+printf "\n"
+
 ## lint-nonsense
 bash packages/voictents-and-estinants-engine/src/adapted-programs/programs/lint-nonsense/lintNonsense.test.sh
 printf "\n"

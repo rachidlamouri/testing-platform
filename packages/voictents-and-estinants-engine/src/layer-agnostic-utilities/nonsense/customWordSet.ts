@@ -363,6 +363,10 @@ const customDefinitionSet: CustomDefinition[] = [
     word: 'src',
     description: 'Source',
   },
+  {
+    word: 'renamer',
+    description: 'One who renames',
+  },
 
   {
     word: 'tomahto',
