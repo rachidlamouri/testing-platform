@@ -1,9 +1,0 @@
-{
-  "extends": "base-tsconfig",
-  "include": ["src/"],
-  "compilerOptions": {
-    "noEmit": false,
-    "rootDir": "src",
-    "outDir": "build"
-  }
-}

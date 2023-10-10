@@ -1,4 +1,0 @@
-{
-  "extends": "base-tsconfig",
-  "include": ["src/"]
-}
