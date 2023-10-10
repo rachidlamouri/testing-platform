@@ -33,13 +33,13 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/strif/strif.ts',
-    importedIdentifierName: 'Strif',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/feature-id/featureId.ts',
+    importedIdentifierName: 'FeatureId',
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/strif/strif.ts',
-    importedIdentifierName: 'createStrif',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/feature-id/featureId.ts',
+    importedIdentifierName: 'createFeatureId',
   },
   {
     importedFilePath:
@@ -205,11 +205,6 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
     importedFilePath:
       'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/wrappers/textWrapper.tsx',
     importedIdentifierName: 'TextWrapper',
-  },
-  {
-    importedFilePath:
-      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/file/renameFileSystemNode.ts',
-    importedIdentifierName: 'renameFileSystemNode',
   },
 ].map(({ importedFilePath, importedIdentifierName }) => {
   return new LintAssertionOmissionInstance({

@@ -244,6 +244,10 @@ const customDefinitionSet: CustomDefinition[] = [
     description: 'Standard in',
   },
   {
+    word: 'stdio',
+    description: 'Standard input and output',
+  },
+  {
     word: 'js',
     description: 'JavaScript',
   },

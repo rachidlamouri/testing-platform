@@ -31,10 +31,36 @@ export const getSensibleNameState = (
   originalName: string,
 ): SensibleNameState => {
   const sensibilityState = getPhraseSensibilityState(originalName);
-  const caseTypeName = Case.of(originalName) as keyof typeof Case;
+  const originalCaseTypeName = Case.of(originalName) as keyof typeof Case;
+
+  const modifiedCaseTypeName = ((): keyof typeof Case => {
+    switch (originalCaseTypeName) {
+      case 'capital':
+        return 'pascal';
+      case 'lower':
+        return 'camel';
+      case 'pascal':
+      case 'camel':
+      case 'kebab':
+      case 'constant':
+        return originalCaseTypeName;
+      case 'upper':
+      case 'snake':
+      case 'header':
+      case 'title':
+      case 'sentence':
+      case 'of':
+      case 'flip':
+      case 'random':
+      case 'type':
+        throw Error(
+          `Unhandled key: "${originalCaseTypeName}" for value "${originalName}"`,
+        );
+    }
+  })();
 
   const applyCase = (text: string): string => {
-    const method = Case[caseTypeName] as (text: string) => string;
+    const method = Case[modifiedCaseTypeName] as (text: string) => string;
     const result = method(text);
 
     return result;

@@ -242,9 +242,7 @@ childProcess.stdout.pipe(
         process.exit(0);
       }
 
-      log('Reached the unreachable');
-      log();
-      process.exit(2);
+      log('no-op');
     },
   }),
 );

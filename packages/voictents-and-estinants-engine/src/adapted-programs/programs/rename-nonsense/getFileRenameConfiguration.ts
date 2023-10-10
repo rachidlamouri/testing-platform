@@ -82,7 +82,7 @@ export const getFileRenameConfiguration = buildEstinant({
 
     const newName = Case.camel(sensibleNameResult.sensibleName);
 
-    const newFilePath = posix.join(
+    const relativeNewPath = posix.join(
       file.filePath.parentDirectoryPath,
       `${newName}.${file.filePath.name.extension.serialized}`,
     );
@@ -91,7 +91,9 @@ export const getFileRenameConfiguration = buildEstinant({
       [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP]: [
         new FileSystemNodeRenameConfigurationInstance({
           zorn: file.zorn,
-          newPath: newFilePath,
+          isDirectory: false,
+          oldNodePath: file.filePath,
+          relativeNewPath,
         }),
       ],
       [LINT_ASSERTION_GEPP]: [],
