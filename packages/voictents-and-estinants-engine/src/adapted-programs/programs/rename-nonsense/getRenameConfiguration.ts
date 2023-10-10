@@ -16,7 +16,7 @@ import {
   LintAssertion,
   LintAssertionVoque,
 } from '../../programmable-units/linting/lintAssertion';
-import { FileLineSourceInstance } from '../../programmable-units/linting/source/fileLineSource';
+import { FileLineColumnSourceInstance } from '../../programmable-units/linting/source/fileLineColumnSource';
 import { getSensibleNameState } from './getSensibleNameState';
 import { RequestSourceInstance } from '../../programmable-units/linting/source/requestSource';
 import { nonsenseIsDocumentedRule } from './nonsenseIsDocumentedRule';
@@ -60,10 +60,11 @@ export const getRenameConfiguration = buildEstinant({
 
     const lintSource = new RequestSourceInstance({
       requestor: linterSource,
-      requestee: new FileLineSourceInstance({
+      requestee: new FileLineColumnSourceInstance({
         filePath: identifierLocator.filePath.serialized,
-        // TODO: make a FileLineColumnSourceInstance
-        lineNumber: `${oneBasedLineNumber}:${oneBasedLineOffset} ${identifierLocator.zorn.forMachine}`,
+        lineNumber: `${oneBasedLineNumber}:`,
+        // TODO: figure out why we need the locator id
+        columnNumber: `${oneBasedLineOffset} ${identifierLocator.zorn.forMachine}`,
       }),
     });
 

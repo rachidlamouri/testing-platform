@@ -6,6 +6,7 @@ export enum SourceTypeName {
   ExportedIdentifierSource = 'ExportedIdentifierSource',
   FileSource = 'FileSource',
   FileLineSource = 'FileLineSource',
+  FileLineColumnSource = 'FileLineColumnSource',
   ImportedIdentifierSource = 'ImportedIdentifierSource',
   RequestSource = 'RequestSource',
 }

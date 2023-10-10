@@ -77,6 +77,9 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
           case SourceTypeName.FileLineSource: {
             return source.filePath;
           }
+          case SourceTypeName.FileLineColumnSource: {
+            return source.filePath;
+          }
           case SourceTypeName.ImportedIdentifierSource: {
             return source.importingFilePath;
           }
