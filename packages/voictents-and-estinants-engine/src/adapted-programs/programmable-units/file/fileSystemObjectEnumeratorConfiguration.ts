@@ -42,7 +42,7 @@ export const FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectE
 
 export const VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfiguration =
   {
-    directoryPath: 'packages/voictents-and-estinants-engine/',
+    directoryPath: 'packages/voictents-and-estinants-engine',
     ignoredNodePathConfigurationList: [
       {
         typeName: ComparisonConfigurationTypeName.EndsWith,
