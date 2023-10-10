@@ -13,7 +13,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/datastructure/zorn.ts',
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/data-structure/zorn.ts',
     identifierList: ['GenericComplexzornTemplate', 'Complexzorn'],
   },
   {
