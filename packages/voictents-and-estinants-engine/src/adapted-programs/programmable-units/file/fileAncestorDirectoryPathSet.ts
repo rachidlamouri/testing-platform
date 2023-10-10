@@ -4,7 +4,7 @@ import { buildNamedConstructorFunction } from '../../../package-agnostic-utiliti
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../package-agnostic-utilities/data-structure/zorn';
 import { File } from './file';
 
 const FILE_ANCESTOR_DIRECTORY_PATH_SET_ZORN_TEMPLATE = [

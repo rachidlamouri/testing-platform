@@ -19,7 +19,7 @@ import {
   DereferenceError,
 } from './abstractInMemoryVoictent';
 import { InMemoryIndexByName, InMemoryVoque } from '../voque/inMemoryVoque';
-import { OutputValueByTemplateKeyPath } from '../../package-agnostic-utilities/datastructure/zorn';
+import { OutputValueByTemplateKeyPath } from '../../package-agnostic-utilities/data-structure/zorn';
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 
 export type InMemoryOdeshin2IndexByName = SpreadN<

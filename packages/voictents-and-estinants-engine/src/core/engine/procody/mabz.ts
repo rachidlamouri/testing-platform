@@ -1,4 +1,4 @@
-import { ZornTuple } from '../../../package-agnostic-utilities/datastructure/zorn';
+import { ZornTuple } from '../../../package-agnostic-utilities/data-structure/zorn';
 import { RightDreanor } from '../dreanor/dreanor';
 
 /**

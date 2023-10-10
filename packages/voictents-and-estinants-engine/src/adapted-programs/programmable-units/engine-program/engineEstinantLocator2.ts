@@ -9,7 +9,7 @@ import { ExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../package-agnostic-utilities/data-structure/zorn';
 
 const ENGINE_ESTINANT_BUILD_ADD_METADATA_FOR_SERIALIZATION_LOCATOR_ZORN = [
   'filePath',

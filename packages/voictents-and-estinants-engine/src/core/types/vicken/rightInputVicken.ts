@@ -1,5 +1,5 @@
 import { GenericVoque } from '../voque/voque';
-import { ZornTuple } from '../../../package-agnostic-utilities/datastructure/zorn';
+import { ZornTuple } from '../../../package-agnostic-utilities/data-structure/zorn';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
 type BaseRightInputVicken<

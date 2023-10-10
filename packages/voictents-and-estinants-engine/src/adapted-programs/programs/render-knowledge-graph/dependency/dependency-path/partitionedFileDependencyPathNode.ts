@@ -3,7 +3,7 @@ import { buildNamedConstructorFunction } from '../../../../../package-agnostic-u
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../../../package-agnostic-utilities/data-structure/zorn';
 import { LocalDirectedGraphElement2Zorn } from '../../../../programmable-units/graph-visualization/directed-graph/types';
 import { PartitionFact } from '../../partition-fact/partitionFact';
 import { PartitionedFileDependencyGroupZorn } from '../partitionedFileDependencyGroupZorn';

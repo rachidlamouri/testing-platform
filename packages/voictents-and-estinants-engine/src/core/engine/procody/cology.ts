@@ -1,4 +1,4 @@
-import { Deprecatedzorn } from '../../../package-agnostic-utilities/datastructure/zorn';
+import { Deprecatedzorn } from '../../../package-agnostic-utilities/data-structure/zorn';
 import { Dreanor, LeftDreanor } from '../dreanor/dreanor';
 import { Mabz } from './mabz';
 

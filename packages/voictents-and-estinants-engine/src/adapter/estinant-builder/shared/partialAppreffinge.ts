@@ -9,7 +9,7 @@
  */
 
 import { GenericVoque } from '../../../core/types/voque/voque';
-import { ZornTuple2 } from '../../../package-agnostic-utilities/datastructure/zorn';
+import { ZornTuple2 } from '../../../package-agnostic-utilities/data-structure/zorn';
 import { GenericAdaptedLeftInputVicken } from './vicken';
 
 export type PartialLeftInputAppreffinge<TLeftInputVoque extends GenericVoque> =

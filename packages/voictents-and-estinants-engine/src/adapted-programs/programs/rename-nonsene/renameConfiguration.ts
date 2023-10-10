@@ -4,7 +4,7 @@ import { buildNamedConstructorFunction } from '../../../package-agnostic-utiliti
 import {
   GenericComplexzornTemplate,
   Complexzorn,
-} from '../../../package-agnostic-utilities/datastructure/zorn';
+} from '../../../package-agnostic-utilities/data-structure/zorn';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { IdentifierNodeLocator } from './identifierNodeLocator';
 import { SensibleNameState } from './getSensibleNameState';

@@ -1,4 +1,4 @@
-import { Deprecatedzorn } from '../../../package-agnostic-utilities/datastructure/zorn';
+import { Deprecatedzorn } from '../../../package-agnostic-utilities/data-structure/zorn';
 import { Hubblepup } from '../../types/hubblepup/hubblepup';
 
 /**

@@ -1,4 +1,4 @@
-import { Deprecatedzorn } from '../../../../../package-agnostic-utilities/datastructure/zorn';
+import { Deprecatedzorn } from '../../../../../package-agnostic-utilities/data-structure/zorn';
 import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
 import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInputVicken';
 
