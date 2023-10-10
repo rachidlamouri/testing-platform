@@ -19,6 +19,9 @@ import {
   RenameConfiguration,
   RenameConfigurationVoque,
 } from './renameConfiguration';
+import { progressLog } from './progressLog';
+
+const COMMON_ROOT = 'packages/voictents-and-estinants-engine/src' as const;
 
 const isWriteEnabled = process.env.ENABLE_WRITE !== undefined;
 
@@ -134,11 +137,30 @@ export const applyRenaming = buildEstinant({
       }
 
       const {
+        directory,
         directoryChange,
         fileNameChangeList: [fileNameChange],
         identifierChangeList: [identifierChange],
       } = group;
 
+      const activeDirectoryPath = directory.directoryPath.serialized.replace(
+        `${COMMON_ROOT}/`,
+        '',
+      );
+      if (progressLog.getActiveDirectoryPath() === null) {
+        progressLog.setActiveDirectoryPath(activeDirectoryPath);
+      } else if (progressLog.getActiveDirectoryPath() !== activeDirectoryPath) {
+        log();
+        log(
+          chalk.yellow('Commit and clear the latest progress log to continue'),
+        );
+        log();
+
+        return;
+      }
+
+      let oldName: string;
+      let newName: string;
       let apply: () => SpawnSyncReturns<string>;
       if (directoryChange !== null) {
         log();
@@ -151,8 +173,11 @@ export const applyRenaming = buildEstinant({
         );
         log();
 
-        apply = (): SpawnSyncReturns<string> =>
-          applyFileSystemNodeChange(directoryChange);
+        oldName = directoryChange.oldNodePath.serialized;
+        newName = directoryChange.relativeNewPath;
+        apply = (): SpawnSyncReturns<string> => {
+          return applyFileSystemNodeChange(directoryChange);
+        };
       } else if (fileNameChange !== undefined) {
         log();
         log(
@@ -164,8 +189,11 @@ export const applyRenaming = buildEstinant({
         );
         log();
 
-        apply = (): SpawnSyncReturns<string> =>
-          applyFileSystemNodeChange(fileNameChange);
+        oldName = fileNameChange.oldNodePath.serialized;
+        newName = fileNameChange.relativeNewPath;
+        apply = (): SpawnSyncReturns<string> => {
+          return applyFileSystemNodeChange(fileNameChange);
+        };
       } else if (identifierChange !== undefined) {
         log();
         log(
@@ -180,8 +208,11 @@ export const applyRenaming = buildEstinant({
         );
         log();
 
-        apply = (): SpawnSyncReturns<string> =>
-          applySymbolRename(identifierChange);
+        oldName = `${identifierChange.identifierLocator.filePath.serialized}:${identifierChange.originalName}`;
+        newName = `${identifierChange.identifierLocator.filePath.serialized}:${identifierChange.newName}`;
+        apply = (): SpawnSyncReturns<string> => {
+          return applySymbolRename(identifierChange);
+        };
       } else {
         throw Error('Reached the unreachable');
       }
@@ -197,6 +228,14 @@ export const applyRenaming = buildEstinant({
         return;
       }
 
+      progressLog.appendToCommitMessage([
+        // keep multiline
+        `- ${oldName}`,
+        `+ ${newName}`,
+        '',
+        '',
+      ]);
+
       const result = apply();
       const isSuccessful = result.status === 0;
       const applyColor = isSuccessful ? chalk.green : chalk.red;
@@ -205,7 +244,7 @@ export const applyRenaming = buildEstinant({
       log(applyColor('Applied renaming!'));
       log();
 
-      if (isSuccessful) {
+      if (!isSuccessful) {
         const error = new Error(
           `Received status exit code "${result.status ?? 'null'}"`,
         );
