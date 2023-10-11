@@ -47,6 +47,17 @@ export const getRenameConfiguration = buildEstinant({
     gepp: LINT_ASSERTION_GEPP,
   })
   .onPinbe((identifierLocator) => {
+    // TODO: identifiers are heavily integrated everywhere in the project. There are only a few instances left in the file to update. Do so when all other objects are renamed.
+    if (
+      identifierLocator.filePath.serialized ===
+      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/data-structure/id.ts'
+    ) {
+      return {
+        [RENAME_CONFIGURATION_GEPP]: [],
+        [LINT_ASSERTION_GEPP]: [],
+      };
+    }
+
     const originalName = identifierLocator.node.name;
     const oneBasedLineNumber = identifierLocator.node.loc.start.line;
     const oneBasedLineOffset = identifierLocator.node.loc.start.column + 1;

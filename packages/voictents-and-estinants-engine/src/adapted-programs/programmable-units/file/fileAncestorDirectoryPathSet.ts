@@ -2,17 +2,17 @@ import { posix } from 'path';
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../package-agnostic-utilities/data-structure/id';
 import { File } from './file';
 
 const FILE_ANCESTOR_DIRECTORY_PATH_SET_ZORN_TEMPLATE = [
   'filePath',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type FileAncestorDirectoryPathSetZornTemplate =
   typeof FILE_ANCESTOR_DIRECTORY_PATH_SET_ZORN_TEMPLATE;
-class FileAncestorDirectoryPathSetZorn extends Complexzorn<FileAncestorDirectoryPathSetZornTemplate> {
+class FileAncestorDirectoryPathSetZorn extends ComplexId<FileAncestorDirectoryPathSetZornTemplate> {
   get rawTemplate(): FileAncestorDirectoryPathSetZornTemplate {
     return FILE_ANCESTOR_DIRECTORY_PATH_SET_ZORN_TEMPLATE;
   }

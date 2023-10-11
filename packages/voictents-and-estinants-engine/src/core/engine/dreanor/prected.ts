@@ -1,4 +1,4 @@
-import { Deprecatedzorn } from '../../../package-agnostic-utilities/data-structure/zorn';
+import { DeprecatedId } from '../../../package-agnostic-utilities/data-structure/id';
 import { Hubblepup } from '../../types/hubblepup/hubblepup';
 
 /**
@@ -7,4 +7,4 @@ import { Hubblepup } from '../../types/hubblepup/hubblepup';
  *
  * @readableName ItemCache
  */
-export class Prected extends Map<Deprecatedzorn, Hubblepup> {}
+export class Prected extends Map<DeprecatedId, Hubblepup> {}

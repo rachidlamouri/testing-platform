@@ -1,17 +1,17 @@
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
 const ESTINANT_SOURCE_ZORN_TEMPLATE = [
   'filePath',
   'estinantName',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type EstinantSourceZornTemplate = typeof ESTINANT_SOURCE_ZORN_TEMPLATE;
-class EstinantSourceZorn extends Complexzorn<EstinantSourceZornTemplate> {
+class EstinantSourceZorn extends ComplexId<EstinantSourceZornTemplate> {
   get rawTemplate(): EstinantSourceZornTemplate {
     return ESTINANT_SOURCE_ZORN_TEMPLATE;
   }

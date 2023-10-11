@@ -1,4 +1,4 @@
-import { ZornTuple } from '../../../package-agnostic-utilities/data-structure/zorn';
+import { IdTuple } from '../../../package-agnostic-utilities/data-structure/id';
 import { RightDreanor } from '../dreanor/dreanor';
 
 /**
@@ -7,6 +7,6 @@ import { RightDreanor } from '../dreanor/dreanor';
  *
  * @readableName RightInputKeyTupleCache
  */
-export class Mabz extends Map<RightDreanor, ZornTuple> {}
+export class Mabz extends Map<RightDreanor, IdTuple> {}
 
-export type MabzEntry = [RightDreanor, ZornTuple];
+export type MabzEntry = [RightDreanor, IdTuple];

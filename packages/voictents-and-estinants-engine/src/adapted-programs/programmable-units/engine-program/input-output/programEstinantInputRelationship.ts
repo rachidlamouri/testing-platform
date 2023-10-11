@@ -4,9 +4,9 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../package-agnostic-utilities/data-structure/id';
 import { RootGraphLocator } from '../../graph-visualization/directed-graph/rootGraphLocator';
 import { RootDirectedGraphElement2Zorn } from '../../graph-visualization/directed-graph/types';
 import { EngineEstinantLocator2 } from '../engineEstinantLocator2';
@@ -18,10 +18,10 @@ import {
 const PROGRAM_ESTINANT_INPUT_RELATIONSHIP_ZORN_TEMPLATE = [
   ['rootGraphLocator', RootDirectedGraphElement2Zorn],
   ['estinantInput', EngineEstinantInput2Zorn],
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type ProgramEstinantInputRelationshipZornTemplate =
   typeof PROGRAM_ESTINANT_INPUT_RELATIONSHIP_ZORN_TEMPLATE;
-class ProgramEstinantInputRelationshipZorn extends Complexzorn<ProgramEstinantInputRelationshipZornTemplate> {
+class ProgramEstinantInputRelationshipZorn extends ComplexId<ProgramEstinantInputRelationshipZornTemplate> {
   get rawTemplate(): ProgramEstinantInputRelationshipZornTemplate {
     return PROGRAM_ESTINANT_INPUT_RELATIONSHIP_ZORN_TEMPLATE;
   }

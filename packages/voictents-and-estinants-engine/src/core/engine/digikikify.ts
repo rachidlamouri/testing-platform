@@ -1,7 +1,7 @@
 import {
-  Deprecatedzorn,
-  ZornTuple,
-} from '../../package-agnostic-utilities/data-structure/zorn';
+  DeprecatedId,
+  IdTuple,
+} from '../../package-agnostic-utilities/data-structure/id';
 import { Ajorken } from './procody/ajorken';
 import { Cology, CologySet, getCologyEntryList } from './procody/cology';
 import {
@@ -503,7 +503,7 @@ export const digikikify = ({
 
           const mabzEntryList = platomity.rightDreanorTuple.map<MabzEntry>(
             (rightDreanor) => {
-              let zornTuple: ZornTuple;
+              let zornTuple: IdTuple;
               if (
                 rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
               ) {
@@ -566,7 +566,7 @@ export const digikikify = ({
           const { typeName: rightInputTypeName, value: rightInput } =
             dreanor.lanbe.dereference();
 
-          let zorn: Deprecatedzorn;
+          let zorn: DeprecatedId;
           if (dreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
             zorn = dreanor.lanbe;
             // eslint-disable-next-line no-param-reassign
@@ -605,7 +605,7 @@ export const digikikify = ({
             return rightDreanor.isReady;
           }
 
-          const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
+          const zornTuple = cology.mabz.get(rightDreanor) as IdTuple;
           return zornTuple.every((zorn) => rightDreanor.prected.has(zorn));
         },
       );
@@ -636,7 +636,7 @@ export const digikikify = ({
         return rightInputElement.value;
       }
 
-      const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
+      const zornTuple = cology.mabz.get(rightDreanor) as IdTuple;
       const rightInputTupleElement = zornTuple.map((zorn) => {
         return rightDreanor.prected.get(zorn);
       }) as GenericIndexedHubblepupTuple;
@@ -937,7 +937,7 @@ export const digikikify = ({
               };
             }
 
-            const zornTuple = cology.mabz.get(rightDreanor) as ZornTuple;
+            const zornTuple = cology.mabz.get(rightDreanor) as IdTuple;
             return zornTuple.map((zorn) => {
               const hasItem = rightDreanor.prected.has(zorn);
               return {

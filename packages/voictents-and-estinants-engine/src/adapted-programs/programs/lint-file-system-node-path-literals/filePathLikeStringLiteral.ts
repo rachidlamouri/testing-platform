@@ -1,9 +1,9 @@
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { FilePath } from '../../programmable-units/file/filePath';
 
@@ -12,10 +12,10 @@ const FILE_PATH_LIKE_STRING_LITERAL_ZORN_TEMPLATE = [
   'referencedFilePath',
   'lineNumber',
   'columnNumber',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type FilePathLikeStringLiteralZornTemplate =
   typeof FILE_PATH_LIKE_STRING_LITERAL_ZORN_TEMPLATE;
-class FilePathLikeStringLiteralZorn extends Complexzorn<FilePathLikeStringLiteralZornTemplate> {
+class FilePathLikeStringLiteralZorn extends ComplexId<FilePathLikeStringLiteralZornTemplate> {
   get rawTemplate(): FilePathLikeStringLiteralZornTemplate {
     return FILE_PATH_LIKE_STRING_LITERAL_ZORN_TEMPLATE;
   }

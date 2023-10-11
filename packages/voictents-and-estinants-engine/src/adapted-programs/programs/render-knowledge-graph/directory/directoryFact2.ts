@@ -2,9 +2,9 @@ import { posix } from 'path';
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
 import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
@@ -22,9 +22,9 @@ import { FactTypeName } from '../fact/factTypeName';
 const DIRECTORY_FACT_2_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactZorn],
   ['directory', FileSystemNodeZorn],
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type DirectoryFact2ZornTemplate = typeof DIRECTORY_FACT_2_ZORN_TEMPLATE;
-class DirectoryFact2Zorn extends Complexzorn<DirectoryFact2ZornTemplate> {
+class DirectoryFact2Zorn extends ComplexId<DirectoryFact2ZornTemplate> {
   get rawTemplate(): DirectoryFact2ZornTemplate {
     return DIRECTORY_FACT_2_ZORN_TEMPLATE;
   }

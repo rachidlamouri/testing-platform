@@ -3,9 +3,9 @@ import { InMemoryIndexByName } from '../../../layer-agnostic-utilities/voque/inM
 import { Voque } from '../../../core/types/voque/voque';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { LintAssertionZorn } from './lintAssertion';
 import { TypedRule } from './rule';
@@ -13,12 +13,12 @@ import { FileSourceInstance } from './source/fileSource';
 import { Source } from './source/source';
 
 const LINT_ASSERTION_OMISSION_ZORN_TEMPLATE = [
-  ['omitterSource', Complexzorn.ANY],
+  ['omitterSource', ComplexId.ANY],
   ['omittedAssertionZorn', LintAssertionZorn],
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type LintAssertionOmissionZornTemplate =
   typeof LINT_ASSERTION_OMISSION_ZORN_TEMPLATE;
-class LintAssertionOmissionZorn extends Complexzorn<LintAssertionOmissionZornTemplate> {
+class LintAssertionOmissionZorn extends ComplexId<LintAssertionOmissionZornTemplate> {
   get rawTemplate(): LintAssertionOmissionZornTemplate {
     return LINT_ASSERTION_OMISSION_ZORN_TEMPLATE;
   }

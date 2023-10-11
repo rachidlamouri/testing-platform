@@ -12,9 +12,9 @@ import {
   GenericRightInputVoictentVicken,
 } from '../../../core/types/vicken/rightInputVicken';
 import {
-  Deprecatedzorn,
-  ZornTuple,
-} from '../../../package-agnostic-utilities/data-structure/zorn';
+  DeprecatedId,
+  IdTuple,
+} from '../../../package-agnostic-utilities/data-structure/id';
 import {
   AssemblerContext,
   CoreConstituentOutputEntry,
@@ -140,7 +140,7 @@ export const buildEstinantAssembler = <
           return {
             gepp: rightInputContext.gepp,
             isWibiz: rightInputContext.isWibiz,
-            framate: (leftInput): ZornTuple => {
+            framate: (leftInput): IdTuple => {
               let adaptedLeftInput: unknown;
               if (leftInputContext.isWibiz || leftInputContext.version === 2) {
                 adaptedLeftInput = leftInput;
@@ -149,9 +149,9 @@ export const buildEstinantAssembler = <
                   .hubblepup;
               }
 
-              return rightInputContext.framate(adaptedLeftInput) as ZornTuple;
+              return rightInputContext.framate(adaptedLeftInput) as IdTuple;
             },
-            croard: (indexedRightInput): Deprecatedzorn => {
+            croard: (indexedRightInput): DeprecatedId => {
               let adaptedRightInput: unknown;
               if (
                 rightInputContext.isWibiz ||

@@ -1,15 +1,15 @@
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { NodePath } from './nodePath';
 
 const FILE_SYSTEM_NODE_ZORN_TEMPLATE = [
   'nodePath',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type FileSystemNodeZornTemplate = typeof FILE_SYSTEM_NODE_ZORN_TEMPLATE;
-export class FileSystemNodeZorn extends Complexzorn<FileSystemNodeZornTemplate> {
+export class FileSystemNodeZorn extends ComplexId<FileSystemNodeZornTemplate> {
   get rawTemplate(): FileSystemNodeZornTemplate {
     return FILE_SYSTEM_NODE_ZORN_TEMPLATE;
   }

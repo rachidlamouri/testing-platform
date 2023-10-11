@@ -4,9 +4,9 @@
  */
 
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../package-agnostic-utilities/data-structure/id';
 
 type FactoryInput = {
   distinguisher: string;
@@ -16,10 +16,10 @@ const LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE = [
   'elementType',
   // TODO: update the template parent type to allow this to be a string OR a Zorn
   'distinguisher',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type LocalDirectedGraphElement2ZornTemplate =
   typeof LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;
-export class LocalDirectedGraphElement2Zorn extends Complexzorn<LocalDirectedGraphElement2ZornTemplate> {
+export class LocalDirectedGraphElement2Zorn extends ComplexId<LocalDirectedGraphElement2ZornTemplate> {
   static buildSubgraphZorn({
     distinguisher,
   }: FactoryInput): LocalDirectedGraphElement2Zorn {
@@ -73,11 +73,11 @@ export class RootDirectedGraphElement2Zorn extends LocalDirectedGraphElement2Zor
 const GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE = [
   ['root', RootDirectedGraphElement2Zorn],
   ['local', LocalDirectedGraphElement2Zorn],
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type GlobalDirectedGraphElement2ZornTemplate =
   typeof GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;
 
-export class GlobalDirectedGraphElement2Zorn extends Complexzorn<GlobalDirectedGraphElement2ZornTemplate> {
+export class GlobalDirectedGraphElement2Zorn extends ComplexId<GlobalDirectedGraphElement2ZornTemplate> {
   get rawTemplate(): GlobalDirectedGraphElement2ZornTemplate {
     return GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;
   }

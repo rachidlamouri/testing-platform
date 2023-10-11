@@ -12,7 +12,7 @@
 import { GenericVoque } from '../../../core/types/voque/voque';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { OutputVicken as CoreOutputVicken } from '../../../core/types/vicken/outputVicken';
-import { ZornTuple } from '../../../package-agnostic-utilities/data-structure/zorn';
+import { IdTuple } from '../../../package-agnostic-utilities/data-structure/id';
 
 enum AdaptedVickenTypeName {
   Output = 'Output',
@@ -70,7 +70,7 @@ export type GenericAdaptedLeftInputVicken =
 
 export type AdaptedRightInputHubblepupTupleVicken<
   TRightInputVoque extends GenericVoque,
-  TZornTuple extends ZornTuple,
+  TZornTuple extends IdTuple,
 > = {
   voque: TRightInputVoque;
   tropoignantInput: {
@@ -85,7 +85,7 @@ export type AdaptedRightInputHubblepupTupleVicken<
 };
 
 type GenericAdaptedRightInputHubblepupTupleVicken =
-  AdaptedRightInputHubblepupTupleVicken<GenericVoque, ZornTuple>;
+  AdaptedRightInputHubblepupTupleVicken<GenericVoque, IdTuple>;
 
 export type AdaptedRightInputVoictentVicken<
   TRightInputVoque extends GenericVoque,

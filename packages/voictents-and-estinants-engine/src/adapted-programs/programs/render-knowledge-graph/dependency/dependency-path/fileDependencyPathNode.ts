@@ -1,18 +1,18 @@
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
 import { FileDependencyZorn } from '../fileDependencyZorn';
 
 const FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE = [
   ['fileDependency', FileDependencyZorn],
   'index',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type FileDependencyPathNodeZornTemplate =
   typeof FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE;
-class FileDependencyPathNodeZorn extends Complexzorn<FileDependencyPathNodeZornTemplate> {
+class FileDependencyPathNodeZorn extends ComplexId<FileDependencyPathNodeZornTemplate> {
   get rawTemplate(): FileDependencyPathNodeZornTemplate {
     return FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE;
   }

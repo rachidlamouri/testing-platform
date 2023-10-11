@@ -1,8 +1,8 @@
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
@@ -10,10 +10,10 @@ const FILE_LINE_COLUMN_SOURCE_ZORN_TEMPLATE = [
   'filePath',
   'lineNumber',
   'columnNumber',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type FileLineColumnSourceZornTemplate =
   typeof FILE_LINE_COLUMN_SOURCE_ZORN_TEMPLATE;
-class FileLineColumnSourceZorn extends Complexzorn<FileLineColumnSourceZornTemplate> {
+class FileLineColumnSourceZorn extends ComplexId<FileLineColumnSourceZornTemplate> {
   get rawTemplate(): FileLineColumnSourceZornTemplate {
     return FILE_LINE_COLUMN_SOURCE_ZORN_TEMPLATE;
   }

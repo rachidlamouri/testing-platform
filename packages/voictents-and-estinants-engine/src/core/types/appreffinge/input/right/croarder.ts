@@ -1,4 +1,4 @@
-import { Deprecatedzorn } from '../../../../../package-agnostic-utilities/data-structure/zorn';
+import { DeprecatedId } from '../../../../../package-agnostic-utilities/data-structure/id';
 import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
 import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInputVicken';
 
@@ -12,7 +12,7 @@ import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInpu
  */
 export type Croarder = (
   rightIndexedHubblepup: GenericIndexedHubblepup,
-) => Deprecatedzorn;
+) => DeprecatedId;
 
 export type Croarder3<
   TRightVicken extends GenericRightInputHubblepupTupleVicken,

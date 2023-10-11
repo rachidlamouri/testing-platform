@@ -1,12 +1,12 @@
 import { GenericVoque } from '../voque/voque';
-import { ZornTuple } from '../../../package-agnostic-utilities/data-structure/zorn';
+import { IdTuple } from '../../../package-agnostic-utilities/data-structure/id';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
 type BaseRightInputVicken<
   TVoque extends GenericVoque,
   TTropoignantInput,
   TIsWibiz extends boolean,
-  TZornTuple extends ZornTuple,
+  TZornTuple extends IdTuple,
 > = {
   voque: TVoque;
   tropoignantInput: TTropoignantInput;
@@ -17,14 +17,14 @@ type BaseRightInputVicken<
 
 type RightTropoignantInputTupleFromZornTuple<
   TVoque extends GenericVoque,
-  TZornTuple extends ZornTuple,
+  TZornTuple extends IdTuple,
 > = {
   readonly [Index in keyof TZornTuple]: TVoque['indexedHubblepupPelie'];
 };
 
 export type RightInputHubblepupTupleVicken<
   TVoque extends GenericVoque,
-  TZornTuple extends ZornTuple,
+  TZornTuple extends IdTuple,
 > = BaseRightInputVicken<
   TVoque,
   RightTropoignantInputTupleFromZornTuple<TVoque, TZornTuple>,
@@ -33,7 +33,7 @@ export type RightInputHubblepupTupleVicken<
 >;
 
 export type GenericRightInputHubblepupTupleVicken =
-  RightInputHubblepupTupleVicken<GenericVoque, ZornTuple>;
+  RightInputHubblepupTupleVicken<GenericVoque, IdTuple>;
 
 export type RightInputVoictentVicken<TVoque extends GenericVoque> =
   BaseRightInputVicken<TVoque, TVoque['voictentPelie'], true, never>;
@@ -45,7 +45,7 @@ export type RightInputVoictentVicken<TVoque extends GenericVoque> =
  */
 export type RightInputVicken<
   TVoque extends GenericVoque,
-  TZornTuple extends ZornTuple = never,
+  TZornTuple extends IdTuple = never,
 > =
   | RightInputHubblepupTupleVicken<TVoque, TZornTuple>
   | RightInputVoictentVicken<TVoque>;

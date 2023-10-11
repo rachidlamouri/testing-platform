@@ -2,9 +2,9 @@ import Case from 'case';
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import {
   CommentedProgramBodyDeclaration,
@@ -34,10 +34,10 @@ enum CanonicalDeclarationState {
 
 const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE = [
   'filePath',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type FileCommentedProgramBodyDeclarationGroupZornTemplate =
   typeof FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE;
-class FileCommentedProgramBodyDeclarationGroupZorn extends Complexzorn<FileCommentedProgramBodyDeclarationGroupZornTemplate> {
+class FileCommentedProgramBodyDeclarationGroupZorn extends ComplexId<FileCommentedProgramBodyDeclarationGroupZornTemplate> {
   get rawTemplate(): FileCommentedProgramBodyDeclarationGroupZornTemplate {
     return FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE;
   }

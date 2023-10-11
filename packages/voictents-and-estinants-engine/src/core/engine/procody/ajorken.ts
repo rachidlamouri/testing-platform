@@ -1,4 +1,4 @@
-import { Deprecatedzorn } from '../../../package-agnostic-utilities/data-structure/zorn';
+import { DeprecatedId } from '../../../package-agnostic-utilities/data-structure/id';
 import { CologySet } from './cology';
 
 /**
@@ -12,4 +12,4 @@ import { CologySet } from './cology';
  *
  * @readableName TransformInputKeyGroupSetCache
  */
-export class Ajorken extends Map<Deprecatedzorn, CologySet> {}
+export class Ajorken extends Map<DeprecatedId, CologySet> {}

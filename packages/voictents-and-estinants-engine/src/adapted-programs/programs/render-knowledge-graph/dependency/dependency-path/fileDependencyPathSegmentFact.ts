@@ -1,9 +1,9 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
 import { DirectedGraphEdge2Instance } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import { DirectedGraphElement2 } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
@@ -17,10 +17,10 @@ const FILE_DEPENDENCY_PATH_SEGMENT_FACT_ZORN_TEMPLATE = [
   ['partitionedFileDependencyGroup', PartitionedFileDependencyGroupZorn],
   ['tail', LocalDirectedGraphElement2Zorn],
   ['head', LocalDirectedGraphElement2Zorn],
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type FileDependencyPathSegmentFactZornTemplate =
   typeof FILE_DEPENDENCY_PATH_SEGMENT_FACT_ZORN_TEMPLATE;
-class FileDependencyPathSegmentFactZorn extends Complexzorn<FileDependencyPathSegmentFactZornTemplate> {
+class FileDependencyPathSegmentFactZorn extends ComplexId<FileDependencyPathSegmentFactZornTemplate> {
   get rawTemplate(): FileDependencyPathSegmentFactZornTemplate {
     return FILE_DEPENDENCY_PATH_SEGMENT_FACT_ZORN_TEMPLATE;
   }

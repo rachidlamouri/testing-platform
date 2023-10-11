@@ -1,8 +1,8 @@
 import { getZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../package-agnostic-utilities/data-structure/id';
 
 type ExportLocator = {
   filePath: string;
@@ -22,10 +22,10 @@ export const getExportLocatorZorn = (locator: ExportLocator): string => {
 const EXPORT_LOCATOR_ZORN_TEMPLATE = [
   'filePath',
   'identifierName',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type ExportLocatorZornTemplate = typeof EXPORT_LOCATOR_ZORN_TEMPLATE;
 
-export class ExportLocatorZorn extends Complexzorn<ExportLocatorZornTemplate> {
+export class ExportLocatorZorn extends ComplexId<ExportLocatorZornTemplate> {
   static fromLocator(locator: ExportLocator): ExportLocatorZorn {
     return new ExportLocatorZorn({
       filePath: locator.filePath,

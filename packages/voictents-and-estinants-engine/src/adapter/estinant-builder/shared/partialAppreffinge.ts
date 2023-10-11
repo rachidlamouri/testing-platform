@@ -9,7 +9,7 @@
  */
 
 import { GenericVoque } from '../../../core/types/voque/voque';
-import { ZornTuple2 } from '../../../package-agnostic-utilities/data-structure/zorn';
+import { IdTuple2 } from '../../../package-agnostic-utilities/data-structure/id';
 import { GenericAdaptedLeftInputVicken } from './vicken';
 
 export type PartialLeftInputAppreffinge<TLeftInputVoque extends GenericVoque> =
@@ -20,7 +20,7 @@ export type PartialLeftInputAppreffinge<TLeftInputVoque extends GenericVoque> =
 export type PartialRightHubblepupTupleAppreffinge<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TRightInputVoque extends GenericVoque,
-  TZornTuple extends ZornTuple2,
+  TZornTuple extends IdTuple2,
 > = {
   gepp: TRightInputVoque['gepp'];
   framate: (

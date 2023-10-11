@@ -7,17 +7,17 @@ import {
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { ExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../package-agnostic-utilities/data-structure/id';
 
 const ENGINE_ESTINANT_BUILD_ADD_METADATA_FOR_SERIALIZATION_LOCATOR_ZORN = [
   'filePath',
   'index',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type EngineEstinantBuildAddMetadataForSerializationLocatorZornTemplate =
   typeof ENGINE_ESTINANT_BUILD_ADD_METADATA_FOR_SERIALIZATION_LOCATOR_ZORN;
-class EngineEstinantBuildAddMetadataForSerializationLocatorZorn extends Complexzorn<EngineEstinantBuildAddMetadataForSerializationLocatorZornTemplate> {
+class EngineEstinantBuildAddMetadataForSerializationLocatorZorn extends ComplexId<EngineEstinantBuildAddMetadataForSerializationLocatorZornTemplate> {
   get rawTemplate(): EngineEstinantBuildAddMetadataForSerializationLocatorZornTemplate {
     return ENGINE_ESTINANT_BUILD_ADD_METADATA_FOR_SERIALIZATION_LOCATOR_ZORN;
   }

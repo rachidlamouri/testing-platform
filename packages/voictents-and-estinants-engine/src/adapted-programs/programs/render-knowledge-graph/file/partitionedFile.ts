@@ -1,9 +1,9 @@
 import { InMemoryOdeshin3Voque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { FilePath } from '../../../programmable-units/file/filePath';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
@@ -16,9 +16,9 @@ import { BoundedFile } from './boundedFile';
 const PARTITIONED_FILE_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactZorn],
   ['file', FileSystemNodeZorn],
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type PartitionedFileZornTemplate = typeof PARTITIONED_FILE_ZORN_TEMPLATE;
-class PartitionedFileZorn extends Complexzorn<PartitionedFileZornTemplate> {
+class PartitionedFileZorn extends ComplexId<PartitionedFileZornTemplate> {
   get rawTemplate(): PartitionedFileZornTemplate {
     return PARTITIONED_FILE_ZORN_TEMPLATE;
   }

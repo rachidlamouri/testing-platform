@@ -2,9 +2,9 @@ import { posix } from 'path';
 import { InMemoryOdeshin3Voque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import {
   DirectedGraph2,
@@ -22,9 +22,9 @@ import { Layer } from '../layer/layer';
 
 const PARTITION_FACT_ZORN_TEMPLATE = [
   ['boundary', BoundaryZorn],
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type PartitionFactZornTemplate = typeof PARTITION_FACT_ZORN_TEMPLATE;
-export class PartitionFactZorn extends Complexzorn<PartitionFactZornTemplate> {
+export class PartitionFactZorn extends ComplexId<PartitionFactZornTemplate> {
   get rawTemplate(): PartitionFactZornTemplate {
     return PARTITION_FACT_ZORN_TEMPLATE;
   }

@@ -6,19 +6,19 @@ import {
 } from '../../adapted-programs/programmable-units/linting/source/requestSource';
 import { buildNamedConstructorFunction } from '../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../package-agnostic-utilities/type/simplify';
 import { InMemoryOdeshin2ListVoque } from '../voictent/inMemoryOdeshinVoictent2';
 
 const FILE_EXISTENCE_ASSERTER_INPUT_ZORN_TEMPLATE = [
-  ['requestor', Complexzorn.ANY],
+  ['requestor', ComplexId.ANY],
   'filePath',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type FileExistenceAsserterInputZornTemplate =
   typeof FILE_EXISTENCE_ASSERTER_INPUT_ZORN_TEMPLATE;
-class FileExistenceAsserterInputZorn extends Complexzorn<FileExistenceAsserterInputZornTemplate> {
+class FileExistenceAsserterInputZorn extends ComplexId<FileExistenceAsserterInputZornTemplate> {
   get rawTemplate(): FileExistenceAsserterInputZornTemplate {
     return FILE_EXISTENCE_ASSERTER_INPUT_ZORN_TEMPLATE;
   }

@@ -1,4 +1,4 @@
-import { ZornTuple } from '../../../../../package-agnostic-utilities/data-structure/zorn';
+import { IdTuple } from '../../../../../package-agnostic-utilities/data-structure/id';
 import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
 import { GenericLeftInputVicken } from '../../../vicken/leftInputVicken';
 import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInputVicken';
@@ -13,7 +13,7 @@ import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInpu
  */
 export type Framation = (
   leftIndexedHubblepup: GenericIndexedHubblepup,
-) => ZornTuple;
+) => IdTuple;
 
 export type Framation3<
   TLeftInputVicken extends GenericLeftInputVicken,

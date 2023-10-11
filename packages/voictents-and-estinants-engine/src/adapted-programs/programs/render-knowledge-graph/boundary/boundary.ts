@@ -1,9 +1,9 @@
 import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { Directory } from '../../../programmable-units/file/directory';
 import { BoundaryTypeName } from './boundaryTypeName';
@@ -11,13 +11,13 @@ import { BoundaryTypeName } from './boundaryTypeName';
 const BOUNDARY_ZORN_TEMPLATE = [
   'typeName',
   'normalizedDisplayName',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type BoundaryZornTemplate = typeof BOUNDARY_ZORN_TEMPLATE;
 type BoundaryZornInput = {
   typeName: BoundaryTypeName;
   displayName: string;
 };
-export class BoundaryZorn extends Complexzorn<BoundaryZornTemplate> {
+export class BoundaryZorn extends ComplexId<BoundaryZornTemplate> {
   constructor({ typeName, displayName }: BoundaryZornInput) {
     const normalizedDisplayName = displayName.replaceAll(/(:|\s+),'-'/g, '');
     super({

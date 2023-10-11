@@ -1,13 +1,13 @@
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../../package-agnostic-utilities/data-structure/id';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
 
 const FILE_DEPENDENCY_ZORN_TEMPLATE = [
   ['importingFile', FileSystemNodeZorn],
   ['importedFile', FileSystemNodeZorn],
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type FileDependencyZornTemplate = typeof FILE_DEPENDENCY_ZORN_TEMPLATE;
 
 /**
@@ -15,7 +15,7 @@ type FileDependencyZornTemplate = typeof FILE_DEPENDENCY_ZORN_TEMPLATE;
  *
  * @readableName FileDependencyComplexId
  */
-export class FileDependencyZorn extends Complexzorn<FileDependencyZornTemplate> {
+export class FileDependencyZorn extends ComplexId<FileDependencyZornTemplate> {
   get rawTemplate(): FileDependencyZornTemplate {
     return FILE_DEPENDENCY_ZORN_TEMPLATE;
   }

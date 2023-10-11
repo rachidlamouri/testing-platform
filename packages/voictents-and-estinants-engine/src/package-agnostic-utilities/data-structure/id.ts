@@ -14,14 +14,14 @@ import { NonEmptyTuple, Tuple } from '../type/tuple';
  * An arbitrary identifier.
  * @deprecated use SimpleId or ComplexId instead
  */
-export type Deprecatedzorn = unknown;
+export type DeprecatedId = unknown;
 
-export type Simplezorn = string;
+export type SimpleId = string;
 
-export type ZornTuple = readonly Deprecatedzorn[];
+export type IdTuple = readonly DeprecatedId[];
 
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
-export type ZornTuple2 = readonly (string | UnsafeComplexzorn)[];
+export type IdTuple2 = readonly (string | UnsafeComplexId)[];
 
 type TemplateKey<TTemplateKey extends string> = TTemplateKey;
 
@@ -34,7 +34,7 @@ type OutputValue = string;
 
 export type OutputValueByTemplateKeyPath = Record<TemplateKeyPath, OutputValue>;
 
-type ComplexzornLike = {
+type ComplexIdLike = {
   getOutputValueByTemplateKeyPathList(
     parentTemplateKeyPath: string,
   ): OutputValueByTemplateKeyPath[];
@@ -46,111 +46,104 @@ type ComplexzornLike = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type UnsafeInputValueByTemplateKey = any;
 
-type ComplexzornLikeConstructor<TComplexzornLike extends ComplexzornLike> = {
-  new (
-    inputValueByTemplateKey: UnsafeInputValueByTemplateKey,
-  ): TComplexzornLike;
+type ComplexIdLikeConstructor<TComplexIdLike extends ComplexIdLike> = {
+  new (inputValueByTemplateKey: UnsafeInputValueByTemplateKey): TComplexIdLike;
 };
 
-type GenericComplexzornLikeConstructor =
-  ComplexzornLikeConstructor<ComplexzornLike>;
+type GenericComplexIdLikeConstructor = ComplexIdLikeConstructor<ComplexIdLike>;
 
-enum ZornTemplateKeyword {
+enum IdTemplateKeyword {
   LITERAL = 'literal',
   ANY = 'any',
 }
 
-type Subzorn = ZornTemplateKeyword | GenericComplexzornLikeConstructor;
+type Subid = IdTemplateKeyword | GenericComplexIdLikeConstructor;
 
-type SubzornTuple<TSubzornTuple extends Tuple<Subzorn>> = TSubzornTuple;
-type GenericSubzornTuple = SubzornTuple<Tuple<Subzorn>>;
+type SubidTuple<TSubidTuple extends Tuple<Subid>> = TSubidTuple;
+type GenericSubidTuple = SubidTuple<Tuple<Subid>>;
 
-type SubzornSingleton<TSubzorn extends Subzorn> = SubzornTuple<[TSubzorn]>;
+type SubidSingleton<TSubid extends Subid> = SubidTuple<[TSubid]>;
 
-type NonEmptySubzornTuple<
-  TFirstSubzorn extends Subzorn,
-  TRestSubzornTuple extends GenericSubzornTuple,
-> = readonly [TFirstSubzorn, ...TRestSubzornTuple];
+type NonEmptySubidTuple<
+  TFirstSubid extends Subid,
+  TRestSubidTuple extends GenericSubidTuple,
+> = readonly [TFirstSubid, ...TRestSubidTuple];
 
-type GenericNonEmptySubzornTuple = NonEmptySubzornTuple<
-  Subzorn,
-  GenericSubzornTuple
->;
+type GenericNonEmptySubidTuple = NonEmptySubidTuple<Subid, GenericSubidTuple>;
 
-type SubzornTemplateEntry<
+type SubidTemplateEntry<
   TTemplateKey extends GenericTemplateKey,
-  TNonEmptySubzornTuple extends GenericNonEmptySubzornTuple,
-> = readonly [TTemplateKey, ...TNonEmptySubzornTuple];
+  TNonEmptySubidTuple extends GenericNonEmptySubidTuple,
+> = readonly [TTemplateKey, ...TNonEmptySubidTuple];
 
-type ComplexzornTemplateEntry<
+type ComplexIdTemplateEntry<
   TTemplateKey extends GenericTemplateKey,
-  TNonEmptySubzornTuple extends GenericNonEmptySubzornTuple,
-> = TTemplateKey | SubzornTemplateEntry<TTemplateKey, TNonEmptySubzornTuple>;
+  TNonEmptySubidTuple extends GenericNonEmptySubidTuple,
+> = TTemplateKey | SubidTemplateEntry<TTemplateKey, TNonEmptySubidTuple>;
 
-type GenericComplexzornTemplateEntry = ComplexzornTemplateEntry<
+type GenericComplexIdTemplateEntry = ComplexIdTemplateEntry<
   GenericTemplateKey,
-  GenericNonEmptySubzornTuple
+  GenericNonEmptySubidTuple
 >;
 
-export type GenericComplexzornTemplate =
-  NonEmptyTuple<GenericComplexzornTemplateEntry>;
+export type GenericComplexIdTemplate =
+  NonEmptyTuple<GenericComplexIdTemplateEntry>;
 
-type InputValue<TSubzorn extends Subzorn> =
-  TSubzorn extends ZornTemplateKeyword.LITERAL
-    ? OutputValue
-    : TSubzorn extends ZornTemplateKeyword.ANY
-    ? ComplexzornLike | { zorn: ComplexzornLike }
-    : TSubzorn extends ComplexzornLikeConstructor<infer TComplexzornLike>
-    ? TComplexzornLike | { zorn: TComplexzornLike }
-    : never;
+type InputValue<TSubid extends Subid> = TSubid extends IdTemplateKeyword.LITERAL
+  ? OutputValue
+  : TSubid extends IdTemplateKeyword.ANY
+  ? ComplexIdLike | { id: ComplexIdLike } | { zorn: ComplexIdLike }
+  : TSubid extends ComplexIdLikeConstructor<infer TComplexIdLike>
+  ? TComplexIdLike | { id: TComplexIdLike } | { zorn: TComplexIdLike }
+  : never;
 
-type InputValueFromSubzornTuple<TSubzornTuple extends GenericSubzornTuple> =
-  TSubzornTuple extends SubzornSingleton<infer TSubzorn>
-    ? InputValue<TSubzorn>
-    : TSubzornTuple extends NonEmptySubzornTuple<
-        infer TFirstSubzorn,
-        infer TRestSubzornTuple
+type InputValueFromSubidTuple<TSubidTuple extends GenericSubidTuple> =
+  TSubidTuple extends SubidSingleton<infer TSubid>
+    ? InputValue<TSubid>
+    : TSubidTuple extends NonEmptySubidTuple<
+        infer TFirstSubid,
+        infer TRestSubidTuple
       >
-    ? InputValue<TFirstSubzorn> | InputValueFromSubzornTuple<TRestSubzornTuple>
+    ? InputValue<TFirstSubid> | InputValueFromSubidTuple<TRestSubidTuple>
     : never;
 
 type InputValueByTemplateKey<
-  TComplexzornTemplate extends GenericComplexzornTemplate,
+  TComplexIdTemplate extends GenericComplexIdTemplate,
 > = Simplify<
   UnionToIntersection<
     TupleToUnion<{
-      [TIndex in keyof TComplexzornTemplate]: TComplexzornTemplate[TIndex] extends TemplateKey<
+      [TIndex in keyof TComplexIdTemplate]: TComplexIdTemplate[TIndex] extends TemplateKey<
         infer TTemplateKey
       >
         ? {
-            [TKey in TTemplateKey]: InputValueFromSubzornTuple<
-              [ZornTemplateKeyword]
+            [TKey in TTemplateKey]: InputValueFromSubidTuple<
+              [IdTemplateKeyword]
             >;
           }
-        : TComplexzornTemplate[TIndex] extends SubzornTemplateEntry<
+        : TComplexIdTemplate[TIndex] extends SubidTemplateEntry<
             infer TTemplateKey,
-            infer TNonEmptySubzornTuple
+            infer TNonEmptySubidTuple
           >
         ? {
-            [TKey in TTemplateKey]: InputValueFromSubzornTuple<TNonEmptySubzornTuple>;
+            [TKey in TTemplateKey]: InputValueFromSubidTuple<TNonEmptySubidTuple>;
           }
         : never;
     }>
   >
 >;
 
-type TemplateKeyTuple<TTemplate extends GenericComplexzornTemplate> = {
+type TemplateKeyTuple<TTemplate extends GenericComplexIdTemplate> = {
   [TIndex in keyof TTemplate]: TTemplate[TIndex] extends GenericTemplateKey
     ? TTemplate[TIndex]
-    : TTemplate[TIndex] extends SubzornTemplateEntry<
+    : TTemplate[TIndex] extends SubidTemplateEntry<
         infer TTemplateKey,
-        GenericNonEmptySubzornTuple
+        GenericNonEmptySubidTuple
       >
     ? TTemplateKey
     : never;
 };
 
-type ComplexzornInterface<TTemplate extends GenericComplexzornTemplate> = {
+type ComplexIdInterface<TTemplate extends GenericComplexIdTemplate> = {
   rawTemplate: TTemplate;
   getOutputValueByTemplateKeyPathList(
     parentTemplateKeyPath: string,
@@ -168,12 +161,12 @@ type ComplexzornInterface<TTemplate extends GenericComplexzornTemplate> = {
  * A complex identifier. It contains one or more key/value pairs that can be
  * used to generate a string representation of the identifier
  */
-export abstract class Complexzorn<TTemplate extends GenericComplexzornTemplate>
-  implements ComplexzornInterface<TTemplate>
+export abstract class ComplexId<TTemplate extends GenericComplexIdTemplate>
+  implements ComplexIdInterface<TTemplate>
 {
-  static LITERAL = ZornTemplateKeyword.LITERAL;
+  static LITERAL = IdTemplateKeyword.LITERAL;
 
-  static ANY = ZornTemplateKeyword.ANY;
+  static ANY = IdTemplateKeyword.ANY;
 
   constructor(
     public readonly valueByTemplateKey: InputValueByTemplateKey<TTemplate>,
@@ -188,8 +181,16 @@ export abstract class Complexzorn<TTemplate extends GenericComplexzornTemplate>
           return value;
         }
 
-        const subzorn = 'zorn' in value ? value.zorn : value;
-        return subzorn.forHuman;
+        let subid: ComplexIdLike;
+        if ('id' in value) {
+          subid = value.id;
+        } else if ('zorn' in value) {
+          subid = value.zorn;
+        } else {
+          subid = value;
+        }
+
+        return subid.forHuman;
       })
       .join(':');
   }
@@ -200,11 +201,11 @@ export abstract class Complexzorn<TTemplate extends GenericComplexzornTemplate>
    */
   private get safeValueByTemplateKey(): Record<
     string,
-    string | ComplexzornLike | { zorn: ComplexzornLike }
+    string | ComplexIdLike | { id: ComplexIdLike } | { zorn: ComplexIdLike }
   > {
     return this.valueByTemplateKey as Record<
       string,
-      string | ComplexzornLike | { zorn: ComplexzornLike }
+      string | ComplexIdLike | { id: ComplexIdLike } | { zorn: ComplexIdLike }
     >;
   }
 
@@ -222,8 +223,16 @@ export abstract class Complexzorn<TTemplate extends GenericComplexzornTemplate>
         return [{ [nextPrefix]: value }];
       }
 
-      const subzorn = 'zorn' in value ? value.zorn : value;
-      return subzorn.getOutputValueByTemplateKeyPathList(nextPrefix);
+      let subid: ComplexIdLike;
+      if ('id' in value) {
+        subid = value.id;
+      } else if ('zorn' in value) {
+        subid = value.zorn;
+      } else {
+        subid = value;
+      }
+
+      return subid.getOutputValueByTemplateKeyPathList(nextPrefix);
     });
   }
 
@@ -250,4 +259,4 @@ export abstract class Complexzorn<TTemplate extends GenericComplexzornTemplate>
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type UnsafeComplexzorn = ComplexzornInterface<NonEmptyTuple<any>>;
+export type UnsafeComplexId = ComplexIdInterface<NonEmptyTuple<any>>;

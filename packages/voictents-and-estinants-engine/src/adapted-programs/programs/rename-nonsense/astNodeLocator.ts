@@ -2,18 +2,18 @@ import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
-  GenericComplexzornTemplate,
-  Complexzorn,
-} from '../../../package-agnostic-utilities/data-structure/zorn';
+  GenericComplexIdTemplate,
+  ComplexId,
+} from '../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { FilePath } from '../../programmable-units/file/filePath';
 
 const AST_NODE_LOCATOR_ZORN_TEMPLATE = [
   'filePath',
   'astPath',
-] as const satisfies GenericComplexzornTemplate;
+] as const satisfies GenericComplexIdTemplate;
 type AstNodeLocatorZornTemplate = typeof AST_NODE_LOCATOR_ZORN_TEMPLATE;
-class AstNodeLocatorZorn extends Complexzorn<AstNodeLocatorZornTemplate> {
+class AstNodeLocatorZorn extends ComplexId<AstNodeLocatorZornTemplate> {
   get rawTemplate(): AstNodeLocatorZornTemplate {
     return AST_NODE_LOCATOR_ZORN_TEMPLATE;
   }
