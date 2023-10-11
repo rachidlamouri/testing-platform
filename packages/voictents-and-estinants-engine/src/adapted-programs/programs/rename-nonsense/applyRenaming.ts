@@ -162,23 +162,7 @@ export const applyRenaming = buildEstinant({
       let oldName: string;
       let newName: string;
       let apply: () => SpawnSyncReturns<string>;
-      if (directoryChange !== null) {
-        log();
-        log(
-          [
-            chalk.blue(`Renaming directory:`),
-            `  Old: ${directoryChange.oldNodePath.serialized}`,
-            `  New: ${directoryChange.relativeNewPath}`,
-          ].join('\n'),
-        );
-        log();
-
-        oldName = directoryChange.oldNodePath.serialized;
-        newName = directoryChange.relativeNewPath;
-        apply = (): SpawnSyncReturns<string> => {
-          return applyFileSystemNodeChange(directoryChange);
-        };
-      } else if (fileNameChange !== undefined) {
+      if (fileNameChange !== undefined) {
         log();
         log(
           [
@@ -212,6 +196,22 @@ export const applyRenaming = buildEstinant({
         newName = `${identifierChange.identifierLocator.filePath.serialized}:${identifierChange.newName}`;
         apply = (): SpawnSyncReturns<string> => {
           return applySymbolRename(identifierChange);
+        };
+      } else if (directoryChange !== null) {
+        log();
+        log(
+          [
+            chalk.blue(`Renaming directory:`),
+            `  Old: ${directoryChange.oldNodePath.serialized}`,
+            `  New: ${directoryChange.relativeNewPath}`,
+          ].join('\n'),
+        );
+        log();
+
+        oldName = directoryChange.oldNodePath.serialized;
+        newName = directoryChange.relativeNewPath;
+        apply = (): SpawnSyncReturns<string> => {
+          return applyFileSystemNodeChange(directoryChange);
         };
       } else {
         throw Error('Reached the unreachable');
