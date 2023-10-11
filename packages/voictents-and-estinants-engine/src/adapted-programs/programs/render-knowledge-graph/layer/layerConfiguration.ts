@@ -32,7 +32,7 @@ const { LayerConfigurationInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof LayerConfiguration)[],
 })
   .withTypes<LayerConfigurationConstructorInput, LayerConfiguration>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

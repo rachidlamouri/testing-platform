@@ -35,7 +35,7 @@ export const { AdaptedLineCommentInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof AdaptedLineComment)[],
 })
   .withTypes<AdaptedLineCommentConstructorInput, AdaptedLineComment>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

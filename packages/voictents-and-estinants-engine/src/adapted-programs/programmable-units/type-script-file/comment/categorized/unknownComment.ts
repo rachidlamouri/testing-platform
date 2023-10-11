@@ -35,7 +35,7 @@ export const { UnknownCommentInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof UnknownComment)[],
 })
   .withTypes<UnknownCommentConstructorInput, UnknownComment>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

@@ -48,7 +48,7 @@ export const { FileDependencyPathNodeInstance } = buildNamedConstructorFunction(
   } as const,
 )
   .withTypes<FileDependencyPathNodeConstructorInput, FileDependencyPathNode>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

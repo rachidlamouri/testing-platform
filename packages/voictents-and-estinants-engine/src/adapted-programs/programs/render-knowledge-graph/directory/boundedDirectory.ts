@@ -46,7 +46,7 @@ export const { BoundedDirectoryInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<BoundedDirectoryConstructorInput, BoundedDirectory>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

@@ -59,7 +59,7 @@ export const { FileExistenceAsserterInputInstance } =
       FileExistenceAsserterInputConstructorInput,
       FileExistenceAsserterInput
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

@@ -65,7 +65,7 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<DirectoryFact2ConstructorInput, DirectoryFact2>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

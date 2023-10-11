@@ -33,7 +33,7 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof BoundaryFact)[],
 })
   .withTypes<BoundaryFactConstructorInput, BoundaryFact>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

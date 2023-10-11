@@ -53,7 +53,7 @@ export const { AstNodeLocatorInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof GenericAstNodeLocator)[],
 })
   .withTypes<GenericAstNodeLocatorConstructorInput, GenericAstNodeLocator>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

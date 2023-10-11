@@ -44,7 +44,7 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<BoundedFileConstructorInput, BoundedFile>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

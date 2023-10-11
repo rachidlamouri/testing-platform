@@ -50,7 +50,7 @@ export const { FileLineColumnSourceInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof FileLineColumnSource)[],
 })
   .withTypes<FileLineColumnSourceConstructorInput, FileLineColumnSource>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

@@ -59,7 +59,7 @@ export const { PartitionedFileDependencyPathNodeInstance } =
       PartitionedFileDependencyPathNodeConstructorInput,
       PartitionedFileDependencyPathNode
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

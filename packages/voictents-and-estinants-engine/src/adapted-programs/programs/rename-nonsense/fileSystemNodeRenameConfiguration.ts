@@ -42,7 +42,7 @@ export const { FileSystemNodeRenameConfigurationInstance } =
       FileSystemNodeRenameConfigurationInput,
       FileSystemNodeRenameConfiguration
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

@@ -56,7 +56,7 @@ export const { PartitionedFileInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<PartitionedFileConstructorInput, PartitionedFile>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

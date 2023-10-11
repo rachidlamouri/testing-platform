@@ -26,7 +26,7 @@ export const { FileDependencyPathSegmentInstance } =
       FileDependencyPathSegmentConstructorInput,
       FileDependencyPathSegment
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

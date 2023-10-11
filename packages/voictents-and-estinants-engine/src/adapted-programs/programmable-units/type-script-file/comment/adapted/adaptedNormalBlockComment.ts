@@ -39,7 +39,7 @@ export const { AdaptedNormalBlockCommentInstance } =
       AdaptedNormalBlockCommentConstructorInput,
       AdaptedNormalBlockComment
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

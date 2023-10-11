@@ -51,7 +51,7 @@ export const { PartitionedFileDependencyGroupInstance } =
       PartitionedFileDependencyGroupConstructorInput,
       PartitionedFileDependencyGroup
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

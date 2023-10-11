@@ -34,7 +34,7 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<DirectoryConstructorInput, Directory>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

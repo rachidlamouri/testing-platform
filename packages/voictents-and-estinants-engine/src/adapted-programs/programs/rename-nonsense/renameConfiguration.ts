@@ -63,7 +63,7 @@ export const { RenameConfigurationInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof RenameConfiguration)[],
 })
   .withTypes<RenameConfigurationInput, RenameConfiguration>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

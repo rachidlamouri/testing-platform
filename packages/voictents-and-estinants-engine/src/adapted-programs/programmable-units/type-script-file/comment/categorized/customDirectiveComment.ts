@@ -50,7 +50,7 @@ export const { CustomDirectiveCommentInstance } = buildNamedConstructorFunction(
   },
 )
   .withTypes<CustomDirectiveCommentConstructorInput, CustomDirectiveComment>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

@@ -51,7 +51,7 @@ export const { ExpectedProgramTestFileConfigurationInstance } =
       ExpectedProgramTestFileConfigurationConstructorInput,
       ExpectedProgramTestFileConfiguration
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

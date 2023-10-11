@@ -48,7 +48,7 @@ export const { AppRendererDelayerInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<AppRendererDelayerConstructorInput, AppRendererDelayer>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

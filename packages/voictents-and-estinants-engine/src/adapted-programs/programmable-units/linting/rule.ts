@@ -65,7 +65,7 @@ const { RuleInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof Rule)[],
 })
   .withTypes<RuleConstructorInput, Rule>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

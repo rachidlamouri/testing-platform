@@ -48,7 +48,7 @@ export const { DescriptiveBlockCommentInstance } =
       DescriptiveBlockCommentConstructorInput,
       DescriptiveBlockComment
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

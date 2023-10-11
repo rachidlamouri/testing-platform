@@ -47,7 +47,7 @@ export const { FileAncestorDirectoryPathSetInstance } =
       FileAncestorDirectoryPathSetConstructorInput,
       FileAncestorDirectoryPathSet
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

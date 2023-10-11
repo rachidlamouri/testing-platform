@@ -49,7 +49,7 @@ export const { FileDependencyPathNodeFactInstance } =
       FileDependencyPathNodeFactConstructorInput,
       FileDependencyPathNodeFact
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

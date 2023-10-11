@@ -78,7 +78,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<FileFact2ConstructorInput, FileFact2>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

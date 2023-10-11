@@ -57,7 +57,7 @@ export const { FilePathLikeStringLiteralInstance } =
       FilePathLikeStringLiteralConstructorInput,
       FilePathLikeStringLiteral
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

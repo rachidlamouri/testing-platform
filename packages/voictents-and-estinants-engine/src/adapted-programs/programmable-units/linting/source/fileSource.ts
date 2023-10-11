@@ -43,7 +43,7 @@ export const { FileSourceInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof FileSource)[],
 })
   .withTypes<FileSourceConstructorInput, FileSource>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

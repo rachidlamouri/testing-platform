@@ -38,7 +38,7 @@ export const { ExpectedProgramTestFileInstance } =
       ExpectedProgramTestFileConstructorInput,
       ExpectedProgramTestFile
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

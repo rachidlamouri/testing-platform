@@ -50,7 +50,7 @@ export const { FileLineSourceInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof FileLineSource)[],
 })
   .withTypes<FileLineSourceConstructorInput, FileLineSource>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

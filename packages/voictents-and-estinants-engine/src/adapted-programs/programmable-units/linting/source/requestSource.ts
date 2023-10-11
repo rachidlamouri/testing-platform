@@ -49,7 +49,7 @@ export const { RequestSourceInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof RequestSource)[],
 })
   .withTypes<RequestSourceConstructorInput, RequestSource>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

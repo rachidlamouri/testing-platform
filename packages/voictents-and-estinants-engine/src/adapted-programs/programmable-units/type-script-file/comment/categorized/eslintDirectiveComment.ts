@@ -33,7 +33,7 @@ export const { EslintDirectiveCommentInstance } = buildNamedConstructorFunction(
   },
 )
   .withTypes<EslintDirectiveCommentConstructorInput, EslintDirectiveComment>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

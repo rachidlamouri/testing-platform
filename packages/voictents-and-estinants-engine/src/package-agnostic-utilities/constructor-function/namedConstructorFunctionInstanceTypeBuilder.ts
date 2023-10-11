@@ -20,7 +20,7 @@ type TypeCheckErrorMessages<
   TMissingPropertyName,
   TExtraneousPropertyName,
 > = {
-  typeCheckErrorMesssages: {
+  typeCheckErrorMessage: {
     initialization: TInitializationErrorMessage;
     instancePropertyNameTuple: {
       missingProperties: TMissingPropertyName;

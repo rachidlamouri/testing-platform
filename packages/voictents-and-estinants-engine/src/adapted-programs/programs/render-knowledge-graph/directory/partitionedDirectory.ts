@@ -52,7 +52,7 @@ export const { PartitionedDirectoryInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<PartitionedDirectoryConstructorInput, PartitionedDirectory>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

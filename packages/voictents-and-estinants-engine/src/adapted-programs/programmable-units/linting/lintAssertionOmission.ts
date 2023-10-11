@@ -53,7 +53,7 @@ export const { LintAssertionOmissionInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof LintAssertionOmission)[],
 })
   .withTypes<LintAssertionOmissionConstructorInput, LintAssertionOmission>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

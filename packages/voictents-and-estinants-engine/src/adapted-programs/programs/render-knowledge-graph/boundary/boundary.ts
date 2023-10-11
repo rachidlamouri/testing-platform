@@ -60,7 +60,7 @@ export const { BoundaryInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<BoundaryConstructorInput, Boundary>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

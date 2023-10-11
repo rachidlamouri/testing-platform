@@ -39,7 +39,7 @@ export const { FileInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<FileConstructorInput, File>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

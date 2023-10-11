@@ -41,7 +41,7 @@ export const { AdaptedJsdocLikeBlockCommentInstance } =
       AdaptedJsdocLikeBlockCommentConstructorInput,
       AdaptedJsdocLikeBlockComment
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

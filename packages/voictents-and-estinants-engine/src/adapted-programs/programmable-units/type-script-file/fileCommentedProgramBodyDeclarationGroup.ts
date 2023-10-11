@@ -208,7 +208,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       FileCommentedProgramBodyDeclarationGroupConstructorInput,
       FileCommentedProgramBodyDeclarationGroup
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

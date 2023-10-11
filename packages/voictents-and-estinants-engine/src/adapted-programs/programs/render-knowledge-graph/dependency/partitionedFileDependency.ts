@@ -56,7 +56,7 @@ export const { PartitionedFileDependencyInstance } =
       PartitionedFileDependencyConstructorInput,
       PartitionedFileDependency
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

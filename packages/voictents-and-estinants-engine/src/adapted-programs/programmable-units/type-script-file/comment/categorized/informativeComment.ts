@@ -39,7 +39,7 @@ export const { InformativeCommentInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof InformativeComment)[],
 })
   .withTypes<InformativeCommentConstructorInput, InformativeComment>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

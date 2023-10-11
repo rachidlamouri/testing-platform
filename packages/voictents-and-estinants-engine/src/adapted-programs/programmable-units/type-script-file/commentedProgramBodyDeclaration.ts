@@ -50,7 +50,7 @@ export const { CommentedProgramBodyDeclarationInstance } =
       CommentedProgramBodyDeclaration,
       CommentedProgramBodyDeclaration
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

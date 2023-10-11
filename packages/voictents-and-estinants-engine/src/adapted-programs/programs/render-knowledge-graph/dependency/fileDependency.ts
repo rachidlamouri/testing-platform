@@ -52,7 +52,7 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<FileDependencyConstructorInput, FileDependency>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

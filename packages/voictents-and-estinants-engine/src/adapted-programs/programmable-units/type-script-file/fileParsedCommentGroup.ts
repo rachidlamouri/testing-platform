@@ -56,7 +56,7 @@ export const { FileParsedCommentGroupInstance } = buildNamedConstructorFunction(
   },
 )
   .withTypes<FileParsedCommentGroupConstructorInput, FileParsedCommentGroup>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

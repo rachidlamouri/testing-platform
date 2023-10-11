@@ -68,7 +68,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<PartitionFactConstructorInput, PartitionFact>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

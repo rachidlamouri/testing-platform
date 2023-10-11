@@ -48,7 +48,7 @@ export const { EstinantSourceInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof EstinantSource)[],
 })
   .withTypes<EstinantSourceConstructorInput, EstinantSource>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

@@ -34,7 +34,7 @@ export const { LayerInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof Layer)[],
 })
   .withTypes<LayerConstructorInput, Layer>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

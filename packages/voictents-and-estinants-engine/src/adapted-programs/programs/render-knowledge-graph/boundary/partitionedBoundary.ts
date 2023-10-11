@@ -31,7 +31,7 @@ export const { PartitionedBoundaryInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<PartitionedBoundaryConstructorInput, PartitionedBoundary>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

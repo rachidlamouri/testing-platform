@@ -55,7 +55,7 @@ export const { ImportedIdentifierSourceInstance } =
       ImportedIdentifierSourceConstructorInput,
       ImportedIdentifierSource
     >({
-      typeCheckErrorMesssages: {
+      typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
           missingProperties: '',

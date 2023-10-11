@@ -37,7 +37,7 @@ export const { DirectoryPathInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<DirectoryPathConstructorInput, DirectoryPath>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

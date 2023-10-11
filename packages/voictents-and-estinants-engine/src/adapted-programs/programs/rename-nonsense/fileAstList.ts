@@ -34,7 +34,7 @@ export const { FileAstListInstance } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof FileAstList)[],
 })
   .withTypes<FileAstListConstructorInput, FileAstList>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',

@@ -58,7 +58,7 @@ export const { FilePathInstance } = buildNamedConstructorFunction({
   ],
 } as const)
   .withTypes<FilePathConstructorInput, FilePath>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',
