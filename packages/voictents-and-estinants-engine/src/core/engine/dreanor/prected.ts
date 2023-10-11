@@ -1,5 +1,5 @@
 import { DeprecatedId } from '../../../package-agnostic-utilities/data-structure/id';
-import { Hubblepup } from '../../types/hubblepup/hubblepup';
+import { Item } from '../../types/hubblepup/hubblepup';
 
 /**
  * A cache of items keyed by id. This allows the engine to know if every
@@ -7,4 +7,4 @@ import { Hubblepup } from '../../types/hubblepup/hubblepup';
  *
  * @readableName ItemCache
  */
-export class Prected extends Map<DeprecatedId, Hubblepup> {}
+export class Prected extends Map<DeprecatedId, Item> {}

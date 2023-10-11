@@ -9,9 +9,12 @@ import {
 import { OutputVicken } from '../core/types/vicken/outputVicken';
 import { Estinant2 } from '../core/types/estinant/estinant';
 import { LeftInputHubblepupVicken } from '../core/types/vicken/leftInputVicken';
-import { StandardInMemoryVoque } from '../layer-agnostic-utilities/voque/inMemoryVoque';
+import { StandardInMemoryStreamMetatype } from '../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 
-type InputVoque = StandardInMemoryVoque<'input', CacheableAccessor<string>>;
+type InputVoque = StandardInMemoryStreamMetatype<
+  'input',
+  CacheableAccessor<string>
+>;
 
 type CachedVoque = CachedOnDiskVoque<'cached', string>;
 

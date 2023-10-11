@@ -1,4 +1,4 @@
-import { StandardInMemoryVoque } from '../../../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { StandardInMemoryStreamMetatype } from '../../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { Trie } from '../../../../package-agnostic-utilities/data-structure/trie';
 import { PartitionedBoundary } from './partitionedBoundary';
 
@@ -14,7 +14,7 @@ export const PARTITIONED_BOUNDARY_LIST_TRIE_GEPP =
 type PartitionedBoundaryListTrieGepp =
   typeof PARTITIONED_BOUNDARY_LIST_TRIE_GEPP;
 
-export type PartitionedBoundaryListTrieVoque = StandardInMemoryVoque<
+export type PartitionedBoundaryListTrieVoque = StandardInMemoryStreamMetatype<
   PartitionedBoundaryListTrieGepp,
   PartitionedBoundaryListTrie
 >;

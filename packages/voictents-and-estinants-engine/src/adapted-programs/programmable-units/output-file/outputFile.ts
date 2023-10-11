@@ -1,4 +1,4 @@
-import { Voque } from '../../../core/types/voque/voque';
+import { StreamMetatype } from '../../../core/types/voque/voque';
 
 export type FileCacheOutputFile = {
   filePath?: never;
@@ -24,7 +24,7 @@ export const OUTPUT_FILE_GEPP = 'output-file';
 
 type OutputFileGepp = typeof OUTPUT_FILE_GEPP;
 
-export type OutputFileVoque = Voque<
+export type OutputFileVoque = StreamMetatype<
   OutputFileGepp,
   OutputFile,
   OutputFile,

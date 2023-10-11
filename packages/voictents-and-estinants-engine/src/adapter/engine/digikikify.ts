@@ -23,7 +23,7 @@ import {
   RightInputVicken,
 } from '../../core/types/vicken/rightInputVicken';
 import {
-  Gepp,
+  CollectionId,
   GenericGeppCombination,
   GeppTuple,
 } from '../../core/types/voictent/gepp';
@@ -210,7 +210,7 @@ type Digikikifier = <
 ) => void;
 
 const buildSerializableVoictent = (
-  serializerGepp: Gepp,
+  serializerGepp: CollectionId,
   programFileCache: ProgramFileCache,
 ): GenericVoictent2 => {
   const serializableVoictent = new SerializableVoictent({
@@ -223,8 +223,8 @@ const buildSerializableVoictent = (
 };
 
 const buildSerializerEstinantTuple = (
-  serializerGepp: Gepp,
-  serializeeGeppList: Gepp[],
+  serializerGepp: CollectionId,
+  serializeeGeppList: CollectionId[],
 ): GenericEstinant2Tuple => {
   const serializeeGeppSet = new Set(serializeeGeppList);
 
@@ -242,7 +242,7 @@ const buildSerializerEstinantTuple = (
 
 const getVoictentTupleGeppSet = (
   voictentTuple: GenericVoictent2Tuple,
-): Set<Gepp> => {
+): Set<CollectionId> => {
   const voictentTupleGeppSet = new Set(
     voictentTuple.map((voictent) => voictent.gepp),
   );
@@ -252,8 +252,8 @@ const getVoictentTupleGeppSet = (
 
 const getEstinantTupleGeppSet = (
   estinantTuple: GenericEstinant2Tuple,
-): Gepp[] => {
-  const estinantGeppList = estinantTuple.flatMap<Gepp>(
+): CollectionId[] => {
+  const estinantGeppList = estinantTuple.flatMap<CollectionId>(
     (estinant: GenericEstinant2) => {
       const leftInputGepp = estinant.leftInputAppreffinge.gepp;
       const rightInputGeppTuple = estinant.rightInputAppreffingeTuple.map(
@@ -362,7 +362,7 @@ export const digikikify: Digikikifier = <
     estinantTuple,
   );
 
-  const serializeeGeppList = specificSerializeeGeppList as Gepp[];
+  const serializeeGeppList = specificSerializeeGeppList as CollectionId[];
 
   const serializerEstinantTuple = buildSerializerEstinantTuple(
     serializerGepp,
@@ -423,7 +423,7 @@ export const buildVoictentByGepp = <
   return result;
 };
 
-type GeppCombinationFromGeppUnion<TGeppUnion extends Gepp> = Simplify<
+type GeppCombinationFromGeppUnion<TGeppUnion extends CollectionId> = Simplify<
   UnionToIntersection<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     TGeppUnion extends any ? { [TGepp in TGeppUnion]: null } : never

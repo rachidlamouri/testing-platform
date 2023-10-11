@@ -1,4 +1,4 @@
-import { StandardInMemoryVoque } from '../../../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { StandardInMemoryStreamMetatype } from '../../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { Trie } from '../../../../package-agnostic-utilities/data-structure/trie';
 import { Layer } from './layer';
 
@@ -11,4 +11,7 @@ export const LAYER_TRIE_GEPP = 'layer-trie';
 
 type LayerTrieGepp = typeof LAYER_TRIE_GEPP;
 
-export type LayerTrieVoque = StandardInMemoryVoque<LayerTrieGepp, LayerTrie>;
+export type LayerTrieVoque = StandardInMemoryStreamMetatype<
+  LayerTrieGepp,
+  LayerTrie
+>;

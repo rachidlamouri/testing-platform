@@ -4,21 +4,21 @@ import { OutputVicken } from '../../core/types/vicken/outputVicken';
 import { RightInputHubblepupTupleVicken } from '../../core/types/vicken/rightInputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryVoictent } from '../../layer-agnostic-utilities/voictent/inMemoryVoictent';
-import { StandardInMemoryVoque } from '../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import { AbstractSerializableVoque } from '../../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
 import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
 import { SerializableVoictent } from '../../layer-agnostic-utilities/voictent/serializableVoictent';
 
-type Voictent1Voque = StandardInMemoryVoque<
+type Voictent1Voque = StandardInMemoryStreamMetatype<
   'voictent-1',
   {
     value: number;
     joinIndexList: number[];
   }
 >;
-type Voictent2Voque = StandardInMemoryVoque<'voictent-2', string>;
-type Voictent3Voque = StandardInMemoryVoque<'voictent-3', string>;
+type Voictent2Voque = StandardInMemoryStreamMetatype<'voictent-2', string>;
+type Voictent3Voque = StandardInMemoryStreamMetatype<'voictent-3', string>;
 type SerializedVoque = AbstractSerializableVoque<'serialized'>;
 
 const programFileCache = new ProgramFileCache({

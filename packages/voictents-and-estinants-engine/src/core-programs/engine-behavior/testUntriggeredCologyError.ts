@@ -4,7 +4,7 @@ import { OutputVicken } from '../../core/types/vicken/outputVicken';
 import { RightInputHubblepupTupleVicken } from '../../core/types/vicken/rightInputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryVoictent } from '../../layer-agnostic-utilities/voictent/inMemoryVoictent';
-import { StandardInMemoryVoque } from '../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import {
   SerializableErrorVoictent,
@@ -15,9 +15,9 @@ const programFileCache = new ProgramFileCache({
   namespace: 'test-untriggered-cology-error',
 });
 
-type Input1Voque = StandardInMemoryVoque<'input-1', number>;
-type Input2Voque = StandardInMemoryVoque<'input-2', number>;
-type OutputVoque = StandardInMemoryVoque<
+type Input1Voque = StandardInMemoryStreamMetatype<'input-1', number>;
+type Input2Voque = StandardInMemoryStreamMetatype<'input-2', number>;
+type OutputVoque = StandardInMemoryStreamMetatype<
   'output',
   { leftInput: number; rightInput: number }
 >;

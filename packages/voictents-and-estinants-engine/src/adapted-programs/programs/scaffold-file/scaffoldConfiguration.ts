@@ -1,4 +1,4 @@
-import { StandardInMemoryVoque } from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { StandardInMemoryStreamMetatype } from '../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 
 export enum FileTypeName {
   Program = 'program',
@@ -45,7 +45,7 @@ export const SCAFFOLD_CONFIGURATION_GEPP = 'scaffold-configuration';
 
 type ScaffoldConfigurationGepp = typeof SCAFFOLD_CONFIGURATION_GEPP;
 
-export type ScaffoldConfigurationVoque = StandardInMemoryVoque<
+export type ScaffoldConfigurationVoque = StandardInMemoryStreamMetatype<
   ScaffoldConfigurationGepp,
   ScaffoldConfiguration
 >;

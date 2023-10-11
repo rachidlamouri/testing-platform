@@ -1,5 +1,5 @@
 import { InMemoryOdeshin2IndexByName } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
-import { InMemoryVoque } from '../../../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { InMemoryStreamMetatype } from '../../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { assertNotUndefined } from '../../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
@@ -169,7 +169,7 @@ export type FileDependencyVoictentPelie = {
   list: FileDependency[];
 };
 
-export type FileDependencyVoque = InMemoryVoque<
+export type FileDependencyVoque = InMemoryStreamMetatype<
   FileDependencyGepp,
   FileDependency,
   FileDependency,

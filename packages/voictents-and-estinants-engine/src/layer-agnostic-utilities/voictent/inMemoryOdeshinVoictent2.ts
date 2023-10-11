@@ -10,7 +10,7 @@
  * @todo find a better name for this file
  */
 
-import { Gepp } from '../../core/types/voictent/gepp';
+import { CollectionId } from '../../core/types/voictent/gepp';
 import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
 import { HubblepupPelieLanbe2 } from '../../core/types/lanbe/lanbe';
 import { GenericOdeshin2 } from '../../adapter/odeshin/odeshin2';
@@ -18,7 +18,10 @@ import {
   AbstractInMemoryVoictent,
   DereferenceError,
 } from './abstractInMemoryVoictent';
-import { InMemoryIndexByName, InMemoryVoque } from '../voque/inMemoryVoque';
+import {
+  InMemoryIndexByName,
+  InMemoryStreamMetatype,
+} from '../stream-metatype/inMemoryStreamMetatype';
 import { OutputValueByTemplateKeyPath } from '../../package-agnostic-utilities/data-structure/id';
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 
@@ -32,10 +35,10 @@ export type InMemoryOdeshin2IndexByName = SpreadN<
 >;
 
 type InMemoryOdeshin2Voque<
-  TGepp extends Gepp,
+  TGepp extends CollectionId,
   THubblepup extends GenericOdeshin2,
   TVoictentPelie,
-> = InMemoryVoque<
+> = InMemoryStreamMetatype<
   TGepp,
   THubblepup,
   THubblepup,
@@ -44,7 +47,7 @@ type InMemoryOdeshin2Voque<
 >;
 
 type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
-  Gepp,
+  CollectionId,
   GenericOdeshin2,
   unknown
 >;
@@ -122,12 +125,12 @@ export abstract class BaseInMemoryOdeshin2Voictent<
 }
 
 export type InMemoryOdeshin2ListVoque<
-  TGepp extends Gepp,
+  TGepp extends CollectionId,
   TOdeshin extends GenericOdeshin2,
 > = InMemoryOdeshin2Voque<TGepp, TOdeshin, TOdeshin[]>;
 
 export type GenericInMemoryOdeshin2ListVoque = InMemoryOdeshin2ListVoque<
-  Gepp,
+  CollectionId,
   GenericOdeshin2
 >;
 
@@ -148,7 +151,7 @@ type InMemoryOdeshin3VoictentPelie<TOdeshinPelie> = {
 };
 
 export type InMemoryOdeshin3Voque<
-  TGepp extends Gepp,
+  TGepp extends CollectionId,
   TOdeshin extends GenericOdeshin2,
 > = InMemoryOdeshin2Voque<
   TGepp,
@@ -157,7 +160,7 @@ export type InMemoryOdeshin3Voque<
 >;
 
 type GenericInMemoryOdeshin3Voque = InMemoryOdeshin3Voque<
-  Gepp,
+  CollectionId,
   GenericOdeshin2
 >;
 

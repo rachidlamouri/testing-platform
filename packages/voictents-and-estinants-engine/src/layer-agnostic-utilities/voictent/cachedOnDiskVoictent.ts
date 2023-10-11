@@ -1,8 +1,8 @@
 import fs from 'fs';
 import { posix } from 'path';
 import { Grition } from '../../adapter/odeshin/grition';
-import { Gepp } from '../../core/types/voictent/gepp';
-import { Voque } from '../../core/types/voque/voque';
+import { CollectionId } from '../../core/types/voictent/gepp';
+import { StreamMetatype } from '../../core/types/voque/voque';
 import { Voictent2 } from '../../core/types/voictent/voictent2';
 import {
   LanbeTypeName,
@@ -45,9 +45,9 @@ type CachedCacheable<TGrition extends Grition> = BaseCacheable<TGrition>;
 type CachedOnDiskIndexByName = AbstractSerializableIndexByName;
 
 export type CachedOnDiskVoque<
-  TGepp extends Gepp,
+  TGepp extends CollectionId,
   TGrition extends Json,
-> = Voque<
+> = StreamMetatype<
   TGepp,
   CacheableAccessor<TGrition>,
   CachedCacheable<TGrition>,
@@ -55,7 +55,7 @@ export type CachedOnDiskVoque<
   CachedCacheable<TGrition>[]
 >;
 
-type GenericCachedOnDiskVoque = CachedOnDiskVoque<Gepp, Json>;
+type GenericCachedOnDiskVoque = CachedOnDiskVoque<CollectionId, Json>;
 
 type CachedOnDiskVoictentConstructorInput<
   TVoque extends GenericCachedOnDiskVoque,

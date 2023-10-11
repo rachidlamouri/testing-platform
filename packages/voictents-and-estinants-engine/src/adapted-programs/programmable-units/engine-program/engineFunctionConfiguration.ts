@@ -2,7 +2,7 @@
  * @todo tie the engine function keys back to the source files somehow
  */
 
-import { StandardInMemoryVoque } from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { StandardInMemoryStreamMetatype } from '../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 
 export enum EngineFunctionConfigurationTypeName {
   Core = 'Core',
@@ -50,7 +50,7 @@ export const ENGINE_FUNCTION_CONFIGURATION_GEPP =
 type EngineFunctionConfigurationGepp =
   typeof ENGINE_FUNCTION_CONFIGURATION_GEPP;
 
-export type EngineFunctionConfigurationVoque = StandardInMemoryVoque<
+export type EngineFunctionConfigurationVoque = StandardInMemoryStreamMetatype<
   EngineFunctionConfigurationGepp,
   EngineFunctionConfiguration
 >;

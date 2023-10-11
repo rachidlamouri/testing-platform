@@ -3,14 +3,14 @@ import { LeftInputHubblepupVicken } from '../../core/types/vicken/leftInputVicke
 import { OutputVicken } from '../../core/types/vicken/outputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryVoictent } from '../../layer-agnostic-utilities/voictent/inMemoryVoictent';
-import { StandardInMemoryVoque } from '../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import {
   SerializableErrorVoictent,
   SerializableErrorVoque,
 } from '../../layer-agnostic-utilities/voictent/serializableErrorVoictent';
 
-type InputErrorVoque = StandardInMemoryVoque<'input-error', Error>;
+type InputErrorVoque = StandardInMemoryStreamMetatype<'input-error', Error>;
 type EngineErrorVoque = SerializableErrorVoque<'engine-error'>;
 
 const programFileCache = new ProgramFileCache({

@@ -5,13 +5,15 @@ import { Combination } from '../../../package-agnostic-utilities/type/combinatio
  * Enables identifying an instantiated collection.
  *
  * @readableName CollectionId
+ *
+ * @canonicalDeclaration
  */
-export type Gepp = string;
+export type CollectionId = string;
 
-export type GeppTuple = Tuple<Gepp>;
+export type GeppTuple = Tuple<CollectionId>;
 
-export type GeppSet = Set<Gepp>;
+export type GeppSet = Set<CollectionId>;
 
-export type GeppCombination<TGepp extends Gepp> = Combination<TGepp>;
+export type GeppCombination<TGepp extends CollectionId> = Combination<TGepp>;
 
-export type GenericGeppCombination = GeppCombination<Gepp>;
+export type GenericGeppCombination = GeppCombination<CollectionId>;

@@ -1,10 +1,10 @@
-import { Gepp } from '../../core/types/voictent/gepp';
+import { CollectionId } from '../../core/types/voictent/gepp';
 import { Voictent2 } from '../../core/types/voictent/voictent2';
-import { Voque } from '../../core/types/voque/voque';
+import { StreamMetatype } from '../../core/types/voque/voque';
 import { FileExtensionSuffixIdentifier } from '../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { ProgramFileCache } from '../program/programFileCache';
 
-export type SerializableErrorVoque<TGepp extends Gepp> = Voque<
+export type SerializableErrorVoque<TGepp extends CollectionId> = StreamMetatype<
   TGepp,
   Error,
   Error,
@@ -12,7 +12,7 @@ export type SerializableErrorVoque<TGepp extends Gepp> = Voque<
   never
 >;
 
-type GenericSerializableErrorVoque = SerializableErrorVoque<Gepp>;
+type GenericSerializableErrorVoque = SerializableErrorVoque<CollectionId>;
 
 type SerializableErrorVoictentInput<
   TVoque extends GenericSerializableErrorVoque,

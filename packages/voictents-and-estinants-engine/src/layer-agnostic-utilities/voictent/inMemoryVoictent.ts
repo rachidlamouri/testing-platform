@@ -3,7 +3,7 @@ import {
   AbstractInMemoryVoictent,
   DereferenceError,
 } from './abstractInMemoryVoictent';
-import { GenericStandardInMemoryVoque } from '../voque/inMemoryVoque';
+import { GenericStandardInMemoryStreamMetatype } from '../stream-metatype/inMemoryStreamMetatype';
 
 /**
  * A collection that can store any hubblepup in an in-memory array.
@@ -11,14 +11,17 @@ import { GenericStandardInMemoryVoque } from '../voque/inMemoryVoque';
  * @readableName InMemoryCollection
  */
 export class InMemoryVoictent<
-  TVoque extends GenericStandardInMemoryVoque,
-> extends AbstractInMemoryVoictent<GenericStandardInMemoryVoque, TVoque> {
+  TVoque extends GenericStandardInMemoryStreamMetatype,
+> extends AbstractInMemoryVoictent<
+  GenericStandardInMemoryStreamMetatype,
+  TVoque
+> {
   protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
     return this.hubblepupPelieTuple;
   }
 
   protected dereferenceHubblepupPelie(
-    lanbe: HubblepupPelieLanbe2<GenericStandardInMemoryVoque, TVoque>,
+    lanbe: HubblepupPelieLanbe2<GenericStandardInMemoryStreamMetatype, TVoque>,
   ): TVoque['indexedHubblepupPelie'] {
     const listIndex = this.getLanbeIndex(lanbe);
 

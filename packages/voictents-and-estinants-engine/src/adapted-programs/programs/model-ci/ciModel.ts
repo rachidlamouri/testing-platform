@@ -1,4 +1,4 @@
-import { StandardInMemoryVoque } from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { StandardInMemoryStreamMetatype } from '../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 
 const PRINT_NEW_LINE = 'printf "\\n"';
 
@@ -28,7 +28,7 @@ export const CI_MODEL_GEPP = 'ci-model';
 
 type CiModelGepp = typeof CI_MODEL_GEPP;
 
-export type CiModelVoque = StandardInMemoryVoque<CiModelGepp, CiModel>;
+export type CiModelVoque = StandardInMemoryStreamMetatype<CiModelGepp, CiModel>;
 
 export const CI_MODEL_ZORN = 'CI_MODEL';
 

@@ -2,7 +2,7 @@ import {
   ComparisonConfigurationTypeName,
   FilePathAccessorInput,
 } from '../../../package-agnostic-utilities/file/getNestedFileSystemNodeMetadataList';
-import { StandardInMemoryVoque } from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { StandardInMemoryStreamMetatype } from '../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 
 /**
  * The information needed to traverse the file system.
@@ -16,7 +16,7 @@ type FileSystemObjectEnumeratorConfigurationGepp =
   typeof FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP;
 
 export type FileSystemObjectEnumeratorConfigurationVoque =
-  StandardInMemoryVoque<
+  StandardInMemoryStreamMetatype<
     FileSystemObjectEnumeratorConfigurationGepp,
     FileSystemObjectEnumeratorConfiguration
   >;

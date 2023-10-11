@@ -1,4 +1,4 @@
-import { Gepp } from '../../types/voictent/gepp';
+import { CollectionId } from '../../types/voictent/gepp';
 import { Ajorken } from './ajorken';
 
 /**
@@ -10,4 +10,4 @@ import { Ajorken } from './ajorken';
  *
  * @readableName TransformInputKeyGroupSetCacheCache
  */
-export class Procody extends Map<Gepp, Ajorken> {}
+export class Procody extends Map<CollectionId, Ajorken> {}

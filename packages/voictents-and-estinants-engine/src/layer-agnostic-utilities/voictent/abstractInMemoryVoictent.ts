@@ -5,7 +5,7 @@ import {
   GenericVoictentItemLanbe2,
 } from '../../core/types/lanbe/lanbe';
 import { Voictent2 } from '../../core/types/voictent/voictent2';
-import { GenericInMemoryVoque } from '../voque/inMemoryVoque';
+import { GenericInMemoryStreamMetatype } from '../stream-metatype/inMemoryStreamMetatype';
 import { ReferenceTypeName } from '../../core/types/lanbe/referenceTypeName';
 
 export class DereferenceError extends Error {
@@ -26,7 +26,9 @@ export type HubblepupPelueState = {
   thisTick: boolean | null;
 };
 
-type InMemoryVoictentConstructorInput<TVoque extends GenericInMemoryVoque> = {
+type InMemoryVoictentConstructorInput<
+  TVoque extends GenericInMemoryStreamMetatype,
+> = {
   gepp: TVoque['gepp'];
   initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
 };
@@ -37,7 +39,7 @@ type InMemoryVoictentConstructorInput<TVoque extends GenericInMemoryVoque> = {
  * @readableName AbstractInMemoryCollection
  */
 export abstract class AbstractInMemoryVoictent<
-  TRestrictingVoque extends GenericInMemoryVoque,
+  TRestrictingVoque extends GenericInMemoryStreamMetatype,
   TVoque extends TRestrictingVoque,
 > implements Voictent2<TRestrictingVoque, TVoque>
 {

@@ -1,4 +1,4 @@
-import { Hubblepup } from '../../../core/types/hubblepup/hubblepup';
+import { Item } from '../../../core/types/hubblepup/hubblepup';
 import { GenericVoque } from '../../../core/types/voque/voque';
 import { Predicate } from '../../../package-agnostic-utilities/function/predicate';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
@@ -90,7 +90,7 @@ export const buildOutputHubblepupConditionalAppreffingeBuilder = <
     ) => {
       const predicateResult = partialOutputAppreffinge.pinbe(modifiedLeftInput);
 
-      let hubblepupTuple: Hubblepup[];
+      let hubblepupTuple: Item[];
       if (predicateResult) {
         hubblepupTuple = [modifiedLeftInput];
       } else {

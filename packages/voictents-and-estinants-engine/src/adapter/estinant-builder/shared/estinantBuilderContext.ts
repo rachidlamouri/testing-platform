@@ -9,7 +9,7 @@
  * @todo split up the typess and functions in this file by purpose
  */
 
-import { Gepp } from '../../../core/types/voictent/gepp';
+import { CollectionId } from '../../../core/types/voictent/gepp';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,21 +19,21 @@ type AnyRightInputAccessor = (leftInput: any) => any;
 
 type LeftInputContext = {
   version?: 2;
-  gepp: Gepp;
+  gepp: CollectionId;
   isWibiz: boolean;
   modifyTropoignantInput: AnyLeftInputAccessor;
 };
 
 type RightInputVoictentContext = {
   version?: 2;
-  gepp: Gepp;
+  gepp: CollectionId;
   isWibiz: true;
   modifyTropoignantInput: AnyRightInputAccessor;
 };
 
 type RightInputHubblepupContext = {
   version?: 2;
-  gepp: Gepp;
+  gepp: CollectionId;
   isWibiz: false;
   framate: AnyLeftInputAccessor;
   croard: AnyRightInputAccessor;
@@ -44,7 +44,7 @@ type RightInputContext = RightInputVoictentContext | RightInputHubblepupContext;
 
 type RightInputContextTuple = Tuple<RightInputContext>;
 
-type AggregatedOutput = Record<Gepp, unknown>;
+type AggregatedOutput = Record<CollectionId, unknown>;
 
 type PinbetunfOutputAggregator<> = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,7 +53,7 @@ type PinbetunfOutputAggregator<> = (
 
 // TODO: the entry value should be TVoque['voictentPelie']
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type CoreConstituentOutputEntry = [Gepp, any];
+export type CoreConstituentOutputEntry = [CollectionId, any];
 
 export type ConstituentResultNormalizer = (
   leftInput: unknown,
@@ -64,7 +64,7 @@ export type ConstituentResultNormalizer = (
 type AggregatedOutputContext = {
   aggregatePinbetunfOutput: PinbetunfOutputAggregator;
   constituentResultNormalizerList: ConstituentResultNormalizer[];
-  geppTuple: Gepp[];
+  geppTuple: CollectionId[];
 };
 
 type Pinbetunf<TInputTuple extends Tuple<unknown>, TOutput> = (
@@ -102,7 +102,7 @@ const buildEmptyAggregatedOutput: PinbetunfOutputAggregator = () => {
 };
 
 const buildSingleValueAggregatedOutputBuilder = (
-  outputGepp: Gepp,
+  outputGepp: CollectionId,
 ): PinbetunfOutputAggregator => {
   const buildSingleValueAggregatedOutput: PinbetunfOutputAggregator = (
     modifiedOutput: unknown,
@@ -180,7 +180,7 @@ export const buildInputOutputContextFromRightInputContext = ({
 type InputOutputContextFromOutputContextBuilderInput = {
   previousContext: InputOutputContext;
   normalizeResult: ConstituentResultNormalizer;
-  outputGepp: Gepp;
+  outputGepp: CollectionId;
 };
 
 export const buildInputOutputContextFromConstituentResultNormalizer = ({

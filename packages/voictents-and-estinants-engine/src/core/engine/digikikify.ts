@@ -15,11 +15,11 @@ import {
   GenericEstinant2,
   UnsafeEstinant2Tuple,
 } from '../types/estinant/estinant';
-import { Gepp, GeppSet } from '../types/voictent/gepp';
+import { CollectionId, GeppSet } from '../types/voictent/gepp';
 import {
   GenericIndexedHubblepup,
   GenericIndexedHubblepupTuple,
-  Hubblepup,
+  Item,
   HubblepupTuple,
 } from '../types/hubblepup/hubblepup';
 import {
@@ -43,8 +43,8 @@ import { assertIsError } from '../../package-agnostic-utilities/error/assertIsEr
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 
 type Quirm = {
-  gepp: Gepp;
-  hubblepup: Hubblepup;
+  gepp: CollectionId;
+  hubblepup: Item;
 };
 
 type QuirmTuple = Tuple<Quirm>;
@@ -100,7 +100,7 @@ export enum DigikikifierStrategy {
 export type DigikikifierInput = {
   // TODO: remove "initialQuirmTuple" and make inputVoictentList required
   inputVoictentList?: GenericVoictent2[];
-  errorGepp?: Gepp;
+  errorGepp?: CollectionId;
   estinantTuple: Tuple<GenericEstinant2>;
   /** @deprecated */
   onHubblepupAddedToVoictents?: OnHubblepupAddedToVoictentsHandler;
@@ -116,7 +116,7 @@ const nanosecondsToSeconds = (nanoseconds: bigint): bigint =>
 type TickSeries<TValue extends number | bigint> = TValue[];
 
 type VoictentTickSeriesConfiguration = {
-  gepp: Gepp;
+  gepp: CollectionId;
   voictentLanbe: GenericVoictentPelieLanbe | null;
   voictentItemLanbe: HubblepupPelieLanbe | GenericVoictentItemLanbe2 | null;
   voictentTickSeries: TickSeries<number>;
@@ -124,7 +124,7 @@ type VoictentTickSeriesConfiguration = {
 };
 
 type EstinantConnectionTickSeriesConfiguration = {
-  gepp: Gepp;
+  gepp: CollectionId;
   lanbe: Lanbe;
   tickSeries: TickSeries<number>;
 };
@@ -491,7 +491,7 @@ export const digikikify = ({
                   },
                 };
 
-          const leftInput: Hubblepup | HubblepupTuple =
+          const leftInput: Item | HubblepupTuple =
             leftInputTypeName === ReferenceTypeName.IndexedHubblepupPelie
               ? leftInputReferenceValue.hubblepup
               : leftInputReferenceValue;
@@ -792,7 +792,7 @@ export const digikikify = ({
   };
 
   const executeWaitForAllDependenciesStrategy = (): void => {
-    const virokByGepp = new Map<Gepp, Virok>();
+    const virokByGepp = new Map<CollectionId, Virok>();
 
     inputVoictentList.forEach((voictent) => {
       const virok: Virok = {
@@ -996,7 +996,7 @@ export const digikikify = ({
 
 type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
   inputVoictentList: GenericVoictent2[];
-  errorGepp?: Gepp;
+  errorGepp?: CollectionId;
   estinantTuple: TEstinantTuple;
   onFinish?: RuntimeStatisticsHandler;
   failForEncounteredError?: boolean;

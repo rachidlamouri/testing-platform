@@ -1,10 +1,7 @@
-import { Gepp } from '../../core/types/voictent/gepp';
+import { CollectionId } from '../../core/types/voictent/gepp';
 import { Voictent2 } from '../../core/types/voictent/voictent2';
-import { Voque } from '../../core/types/voque/voque';
-import {
-  GenericHubblepup,
-  Hubblepup,
-} from '../../core/types/hubblepup/hubblepup';
+import { StreamMetatype } from '../../core/types/voque/voque';
+import { GenericHubblepup, Item } from '../../core/types/hubblepup/hubblepup';
 import {
   ProgramFileCache,
   SerializedHubblepup,
@@ -20,18 +17,18 @@ export type AbstractSerializable = {
   datum: unknown;
 };
 
-export type GenericAbstractSerializableSourceVoque = Voque<
-  Gepp,
-  Hubblepup,
-  Hubblepup,
+export type GenericAbstractSerializableSourceVoque = StreamMetatype<
+  CollectionId,
+  Item,
+  Item,
   AbstractSerializableIndexByName,
   unknown
 >;
 
 export type AbstractSerializableVoque<
-  TGepp extends Gepp,
+  TGepp extends CollectionId,
   TVoictentPelie = unknown,
-> = Voque<
+> = StreamMetatype<
   TGepp,
   AbstractSerializable,
   AbstractSerializable,
@@ -39,7 +36,8 @@ export type AbstractSerializableVoque<
   TVoictentPelie
 >;
 
-export type GenericAbstractSerializableVoque = AbstractSerializableVoque<Gepp>;
+export type GenericAbstractSerializableVoque =
+  AbstractSerializableVoque<CollectionId>;
 
 export type IndexedAbstractSerializable =
   GenericAbstractSerializableVoque['indexedHubblepupPelie'];

@@ -1,4 +1,4 @@
-import { Voque } from '../../../core/types/voque/voque';
+import { StreamMetatype } from '../../../core/types/voque/voque';
 import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/object/typeScriptObject';
 
 export enum ProgramErrorElementLocatorTypeName {
@@ -88,7 +88,7 @@ export type ProgramErrorGepp = typeof PROGRAM_ERROR_GEPP;
 
 type ProgramErrorVoque<
   TReporterLocator extends GenericProgramErrorReporterLocator,
-> = Voque<
+> = StreamMetatype<
   ProgramErrorGepp,
   ProgramErrorPelue<TReporterLocator>,
   ProgramErrorPelie<TReporterLocator>,

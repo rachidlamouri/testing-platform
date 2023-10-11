@@ -1,8 +1,8 @@
 import { Merge } from 'type-fest';
-import { Voque } from '../../core/types/voque/voque';
+import { StreamMetatype } from '../../core/types/voque/voque';
 import { AbstractSerializableIndexByName } from '../voictent/abstractSerializableVoictent';
-import { Gepp } from '../../core/types/voictent/gepp';
-import { Hubblepup } from '../../core/types/hubblepup/hubblepup';
+import { CollectionId } from '../../core/types/voictent/gepp';
+import { Item } from '../../core/types/hubblepup/hubblepup';
 
 /**
  * An identifiable object.
@@ -18,11 +18,11 @@ export type Zornable = {
 type ZornableIndexByName = Merge<AbstractSerializableIndexByName, Zornable>;
 
 export type ZornableVoque<
-  TGepp extends Gepp,
-  THubblepupPelue extends Hubblepup,
-  THubblepupPelie extends Hubblepup,
+  TGepp extends CollectionId,
+  THubblepupPelue extends Item,
+  THubblepupPelie extends Item,
   TVoictentPelie,
-> = Voque<
+> = StreamMetatype<
   TGepp,
   THubblepupPelue,
   THubblepupPelie,

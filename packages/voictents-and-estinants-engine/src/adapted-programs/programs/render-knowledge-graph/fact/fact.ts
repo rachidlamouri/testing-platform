@@ -3,7 +3,7 @@ import {
   BaseInMemoryOdeshin2Voictent,
 } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
 
-import { InMemoryVoque } from '../../../../layer-agnostic-utilities/voque/inMemoryVoque';
+import { InMemoryStreamMetatype } from '../../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { DirectedGraphElement2 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { FileDependencyPathSegmentFact } from '../dependency/dependency-path/fileDependencyPathSegmentFact';
 import { PartitionFact } from '../partition-fact/partitionFact';
@@ -30,7 +30,7 @@ export const FACT_GEPP = 'fact';
 
 type FactGepp = typeof FACT_GEPP;
 
-export type FactVoque = InMemoryVoque<
+export type FactVoque = InMemoryStreamMetatype<
   FactGepp,
   Fact,
   Fact,

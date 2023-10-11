@@ -1,4 +1,4 @@
-import { Gepp } from '../../../core/types/voictent/gepp';
+import { CollectionId } from '../../../core/types/voictent/gepp';
 import { HubblepupPelieLanbe2 } from '../../../core/types/lanbe/lanbe';
 import {
   AbstractInMemoryVoictent,
@@ -6,8 +6,8 @@ import {
 } from '../../../layer-agnostic-utilities/voictent/abstractInMemoryVoictent';
 import {
   InMemoryIndexByName,
-  InMemoryVoque,
-} from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
+  InMemoryStreamMetatype,
+} from '../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { GenericOdeshin2 } from '../../../adapter/odeshin/odeshin2';
 import { FileSystemNode } from './fileSystemNode';
@@ -30,9 +30,9 @@ type FileVoictentPelie<THubblepupPelie> = {
 };
 
 export type FileSystemNodeVoque<
-  TGepp extends Gepp,
+  TGepp extends CollectionId,
   THubblepup extends FileSystemNode,
-> = InMemoryVoque<
+> = InMemoryStreamMetatype<
   TGepp,
   THubblepup,
   THubblepup,
@@ -41,7 +41,7 @@ export type FileSystemNodeVoque<
 >;
 
 export type GenericFileSystemNodeVoque = FileSystemNodeVoque<
-  Gepp,
+  CollectionId,
   FileSystemNode
 >;
 

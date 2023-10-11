@@ -1,4 +1,4 @@
-import { Gepp } from '../types/voictent/gepp';
+import { CollectionId } from '../types/voictent/gepp';
 import { GenericVoictent2 } from '../types/voictent/voictent2';
 
 /**
@@ -6,4 +6,4 @@ import { GenericVoictent2 } from '../types/voictent/voictent2';
  *
  * @readableName CollectionCache
  */
-export class Tabilly extends Map<Gepp, GenericVoictent2> {}
+export class Tabilly extends Map<CollectionId, GenericVoictent2> {}

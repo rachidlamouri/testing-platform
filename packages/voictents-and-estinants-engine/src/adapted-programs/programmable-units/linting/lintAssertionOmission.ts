@@ -1,6 +1,6 @@
 import { AbstractInMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/abstractInMemoryVoictent';
-import { InMemoryIndexByName } from '../../../layer-agnostic-utilities/voque/inMemoryVoque';
-import { Voque } from '../../../core/types/voque/voque';
+import { InMemoryIndexByName } from '../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
+import { StreamMetatype } from '../../../core/types/voque/voque';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -85,7 +85,7 @@ type LintAssertionOmissionVoictentPelie = {
   omittedZornSet: Set<string>;
 };
 
-export type LintAssertionOmissionVoque = Voque<
+export type LintAssertionOmissionVoque = StreamMetatype<
   LintAssertionOmissionGepp,
   LintAssertionOmission,
   LintAssertionOmission,

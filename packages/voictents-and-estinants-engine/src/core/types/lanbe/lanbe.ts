@@ -1,6 +1,6 @@
 import { Simplify } from 'type-fest';
-import { Hubblepup } from '../hubblepup/hubblepup';
-import { GenericVoque, Voque } from '../voque/voque';
+import { Item } from '../hubblepup/hubblepup';
+import { GenericVoque, StreamMetatype } from '../voque/voque';
 import { ReferenceTypeName } from './referenceTypeName';
 
 export enum LanbeTypeName {
@@ -39,7 +39,7 @@ export type GenericVoictentPelieLanbe = VoictentPelieLanbe<GenericVoque>;
 export type HubblepupPelieLanbe = BaseLanbe<
   LanbeTypeName.HubblepupPelieLanbe,
   ReferenceTypeName.HubblepupPelie,
-  Hubblepup
+  Item
 >;
 
 export type HubblepupPelieLanbe2<
@@ -48,7 +48,7 @@ export type HubblepupPelieLanbe2<
 > = BaseLanbe<
   LanbeTypeName.HubblepupPelieLanbe2,
   ReferenceTypeName.IndexedHubblepupPelie,
-  Voque<
+  StreamMetatype<
     TVoque['gepp'],
     TVoque['hubblepupPelue'],
     TVoque['hubblepupPelie'],

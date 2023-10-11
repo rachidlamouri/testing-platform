@@ -1,10 +1,10 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import {
-  Hubblepup,
+  Item,
   HubblepupIndexByName,
   IndexedHubblepup,
 } from '../hubblepup/hubblepup';
-import { Gepp } from '../voictent/gepp';
+import { CollectionId } from '../voictent/gepp';
 
 /**
  * The type information needed to define a strongly typed stream connection,
@@ -12,11 +12,13 @@ import { Gepp } from '../voictent/gepp';
  * instances.
  *
  * @readableName StreamMetatype
+ *
+ * @canonicalDeclaration
  */
-export type Voque<
-  TGepp extends Gepp,
-  TItemEgg extends Hubblepup,
-  TItem extends Hubblepup,
+export type StreamMetatype<
+  TGepp extends CollectionId,
+  TItemEgg extends Item,
+  TItem extends Item,
   IndexByName extends HubblepupIndexByName,
   TVoictentPelie,
 > = {
@@ -28,16 +30,16 @@ export type Voque<
   voictentPelie: TVoictentPelie;
 };
 
-export type GenericVoque = Voque<
-  Gepp,
-  Hubblepup,
-  Hubblepup,
+export type GenericVoque = StreamMetatype<
+  CollectionId,
+  Item,
+  Item,
   HubblepupIndexByName,
   unknown
 >;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type UnsafeVoque = Voque<any, any, any, any, any>;
+export type UnsafeVoque = StreamMetatype<any, any, any, any, any>;
 
 export type GenericVoqueTuple = Tuple<GenericVoque>;
 
