@@ -1,4 +1,4 @@
-import { StreamMetatype } from '../../../core/types/voque/voque';
+import { StreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/object/typeScriptObject';
 
 export enum ProgramErrorElementLocatorTypeName {

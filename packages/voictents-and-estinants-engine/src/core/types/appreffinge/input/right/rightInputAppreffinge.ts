@@ -19,7 +19,7 @@ export type RightInputAppreffinge<
   TRightInputVicken extends GenericRightInputVicken,
 > = Merge<
   {
-    collectionId: TRightInputVicken['voque']['gepp'];
+    collectionId: TRightInputVicken['voque']['collectionId'];
     isWibiz: TRightInputVicken['isWibiz'];
   },
   TRightInputVicken extends GenericRightInputHubblepupTupleVicken

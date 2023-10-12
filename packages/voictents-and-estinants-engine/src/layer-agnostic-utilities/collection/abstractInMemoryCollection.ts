@@ -29,8 +29,8 @@ export type ItemEggState = {
 type InMemoryCollectionConstructorInput<
   TStreamMetatype extends GenericInMemoryStreamMetatype,
 > = {
-  collectionId: TStreamMetatype['gepp'];
-  initialItemEggTuple: TStreamMetatype['hubblepupPelue'][];
+  collectionId: TStreamMetatype['collectionId'];
+  initialItemEggTuple: TStreamMetatype['itemEggStreamable'][];
 };
 
 /**
@@ -45,11 +45,11 @@ export abstract class AbstractInMemoryCollection<
   TStreamMetatype extends TRestrictingStreamMetatype,
 > implements Collection2<TRestrictingStreamMetatype, TStreamMetatype>
 {
-  public readonly collectionId: TStreamMetatype['gepp'];
+  public readonly collectionId: TStreamMetatype['collectionId'];
 
-  private initialItemEggTuple: TStreamMetatype['hubblepupPelue'][];
+  private initialItemEggTuple: TStreamMetatype['itemEggStreamable'][];
 
-  itemTuple: TStreamMetatype['hubblepupPelie'][] = [];
+  itemTuple: TStreamMetatype['itemStreamable'][] = [];
 
   indicesByStream: Map<
     ItemStream2<TRestrictingStreamMetatype, TStreamMetatype>,
@@ -86,7 +86,7 @@ export abstract class AbstractInMemoryCollection<
     return this.itemTuple.length === 0;
   }
 
-  addItem(item: TStreamMetatype['hubblepupPelue']): void {
+  addItem(item: TStreamMetatype['itemEggStreamable']): void {
     this.itemEggState.thisTick = true;
 
     this.itemTuple.push(item);
@@ -192,9 +192,9 @@ export abstract class AbstractInMemoryCollection<
     }
   }
 
-  protected abstract dereferenceCollection(): TStreamMetatype['voictentPelie'];
+  protected abstract dereferenceCollection(): TStreamMetatype['collectionStreamable'];
 
   protected abstract dereferenceItem(
     stream: ItemStream2<TRestrictingStreamMetatype, TStreamMetatype>,
-  ): TStreamMetatype['indexedHubblepupPelie'];
+  ): TStreamMetatype['indexedItemStreamable'];
 }

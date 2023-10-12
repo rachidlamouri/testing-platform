@@ -8,35 +8,38 @@
  * @todo split this file into left and right appreffinges
  */
 
-import { GenericVoque } from '../../../core/types/voque/voque';
+import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { IdTuple2 } from '../../../package-agnostic-utilities/data-structure/id';
 import { GenericAdaptedLeftInputVicken } from './vicken';
 
-export type PartialLeftInputAppreffinge<TLeftInputVoque extends GenericVoque> =
-  {
-    collectionId: TLeftInputVoque['gepp'];
-  };
+export type PartialLeftInputAppreffinge<
+  TLeftInputVoque extends GenericStreamMetatype,
+> = {
+  collectionId: TLeftInputVoque['collectionId'];
+};
 
 export type PartialRightHubblepupTupleAppreffinge<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TRightInputVoque extends GenericVoque,
+  TRightInputVoque extends GenericStreamMetatype,
   TZornTuple extends IdTuple2,
 > = {
-  gepp: TRightInputVoque['gepp'];
+  gepp: TRightInputVoque['collectionId'];
   framate: (
     leftInput: TAdaptedLeftInputVicken['tropoignantInput'],
   ) => TZornTuple;
   croard: (
-    rightInput: TRightInputVoque['indexedHubblepupPelie'],
+    rightInput: TRightInputVoque['indexedItemStreamable'],
   ) => TZornTuple[number];
 };
 
 export type PartialRightVoictentAppreffinge<
-  TRightInputVoque extends GenericVoque,
+  TRightInputVoque extends GenericStreamMetatype,
 > = {
-  gepp: TRightInputVoque['gepp'];
+  gepp: TRightInputVoque['collectionId'];
 };
 
-export type PartialOutputAppreffinge<TOutputVoque extends GenericVoque> = {
-  collectionId: TOutputVoque['gepp'];
+export type PartialOutputAppreffinge<
+  TOutputVoque extends GenericStreamMetatype,
+> = {
+  collectionId: TOutputVoque['collectionId'];
 };

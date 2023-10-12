@@ -1,4 +1,4 @@
-import { GenericVoque } from '../../../core/types/voque/voque';
+import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import {
   buildInputOutputContextFromConstituentResultNormalizer,
   InputOutputContext,
@@ -22,10 +22,10 @@ import {
 
 type NextAdaptedOutputVickenTuple<
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
-  TOutputVoque extends GenericVoque,
+  TOutputVoque extends GenericStreamMetatype,
 > = [
   ...TAdaptedOutputVickenTuple,
-  AdaptedOutputVicken<TOutputVoque, TOutputVoque['hubblepupPelue']>,
+  AdaptedOutputVicken<TOutputVoque, TOutputVoque['itemEggStreamable']>,
 ];
 
 /**
@@ -37,7 +37,7 @@ type OutputHubblepupAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
-> = <TOutputVoque extends GenericVoque>(
+> = <TOutputVoque extends GenericStreamMetatype>(
   partialOutputAppreffinge: PartialOutputAppreffinge<TOutputVoque>,
 ) => SpreadN<
   [
@@ -75,7 +75,7 @@ export const buildOutputHubblepupAppreffingeBuilder2 = <
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple,
     TAdaptedOutputVickenTuple
-  > = <TOutputVoque extends GenericVoque>(
+  > = <TOutputVoque extends GenericStreamMetatype>(
     outputAppreffinge: PartialOutputAppreffinge<TOutputVoque>,
   ) => {
     const nextContext = buildInputOutputContextFromConstituentResultNormalizer({
@@ -83,7 +83,7 @@ export const buildOutputHubblepupAppreffingeBuilder2 = <
       normalizeResult: (leftInput, modifiedInput, aggregatedOutput) => {
         const hubblepup = aggregatedOutput[
           outputAppreffinge.collectionId
-        ] as TOutputVoque['hubblepupPelie'];
+        ] as TOutputVoque['itemStreamable'];
 
         return [outputAppreffinge.collectionId, [hubblepup]];
       },

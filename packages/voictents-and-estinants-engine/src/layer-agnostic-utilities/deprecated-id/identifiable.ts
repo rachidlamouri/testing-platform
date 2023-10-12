@@ -1,5 +1,5 @@
 import { Merge } from 'type-fest';
-import { StreamMetatype } from '../../core/types/voque/voque';
+import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { AbstractSerializableIndexByName } from '../collection/abstractSerializableCollection';
 import { CollectionId } from '../../core/types/voictent/gepp';
 import { Item } from '../../core/types/hubblepup/hubblepup';

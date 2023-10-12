@@ -1,4 +1,4 @@
-import { StreamMetatype } from '../../../core/types/voque/voque';
+import { StreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 
 export type FileCacheOutputFile = {
   filePath?: never;

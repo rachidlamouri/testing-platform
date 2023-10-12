@@ -55,13 +55,13 @@ export type GenericFileSystemNodeVoque = FileSystemNodeVoque<
 export class FileSystemNodeVoictent<
   TVoque extends GenericFileSystemNodeVoque,
 > extends BaseInMemoryOdeshin2Voictent<GenericFileSystemNodeVoque, TVoque> {
-  private voictentPelie: TVoque['voictentPelie'] = {
+  private voictentPelie: TVoque['collectionStreamable'] = {
     byZorn: new Map(),
     byNodePath: new Map(),
     list: [],
   };
 
-  addItem(hubblepup: TVoque['hubblepupPelue']): void {
+  addItem(hubblepup: TVoque['itemEggStreamable']): void {
     this.voictentPelie.byZorn.set(hubblepup.zorn.forHuman, hubblepup);
     this.voictentPelie.byNodePath.set(hubblepup.nodePath.serialized, hubblepup);
     this.voictentPelie.list.push(hubblepup);
@@ -69,13 +69,13 @@ export class FileSystemNodeVoictent<
     super.addItem(hubblepup);
   }
 
-  protected dereferenceCollection(): TVoque['voictentPelie'] {
+  protected dereferenceCollection(): TVoque['collectionStreamable'] {
     return this.voictentPelie;
   }
 
   protected dereferenceItem(
     lanbe: ItemStream2<GenericFileSystemNodeVoque, TVoque>,
-  ): TVoque['indexedHubblepupPelie'] {
+  ): TVoque['indexedItemStreamable'] {
     const listIndex = this.getStreamIndex(lanbe);
 
     if (listIndex === AbstractInMemoryCollection.minimumInclusiveIndex) {

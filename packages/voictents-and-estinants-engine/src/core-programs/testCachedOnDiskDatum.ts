@@ -69,7 +69,7 @@ digikikify2({
         {
           id: filePath.replaceAll('/', ' | '),
           lastModified: fs.statSync(filePath).mtime.toISOString(),
-          subitem: (): CachedVoque['hubblepupPelie']['subitem'] => {
+          subitem: (): CachedVoque['itemStreamable']['subitem'] => {
             const text = fs.readFileSync(filePath, 'utf8');
             return text;
           },

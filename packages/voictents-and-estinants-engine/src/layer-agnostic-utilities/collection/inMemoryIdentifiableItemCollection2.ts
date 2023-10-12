@@ -79,9 +79,12 @@ export abstract class BaseInMemoryOdeshin2Voictent<
   TRestrictingVoque extends GenericInMemoryIdentifiableItem2StreamMetatype,
   TVoque extends TRestrictingVoque,
 > extends AbstractInMemoryCollection<TRestrictingVoque, TVoque> {
-  protected hubblepupPelueByZorn = new Map<string, TVoque['hubblepupPelue']>();
+  protected hubblepupPelueByZorn = new Map<
+    string,
+    TVoque['itemEggStreamable']
+  >();
 
-  addItem(hubblepup: TVoque['hubblepupPelue']): void {
+  addItem(hubblepup: TVoque['itemEggStreamable']): void {
     super.addItem(hubblepup);
 
     const hubblepupZornLike = getIdLike(hubblepup);
@@ -113,7 +116,7 @@ export abstract class BaseInMemoryOdeshin2Voictent<
 
   protected dereferenceItem(
     lanbe: ItemStream2<TRestrictingVoque, TVoque>,
-  ): TVoque['indexedHubblepupPelie'] {
+  ): TVoque['indexedItemStreamable'] {
     const listIndex = this.getStreamIndex(lanbe);
 
     if (listIndex === AbstractInMemoryCollection.minimumInclusiveIndex) {
@@ -151,7 +154,7 @@ export class InMemoryOdeshin2ListVoictent<
   GenericInMemoryOdeshin2ListVoque,
   TVoque
 > {
-  protected dereferenceCollection(): TVoque['voictentPelie'] {
+  protected dereferenceCollection(): TVoque['collectionStreamable'] {
     return this.itemTuple;
   }
 }
@@ -178,7 +181,7 @@ type GenericInMemoryOdeshin3Voque = InMemoryOdeshin3Voque<
 export class InMemoryOdeshin3Voictent<
   TVoque extends GenericInMemoryOdeshin3Voque,
 > extends BaseInMemoryOdeshin2Voictent<GenericInMemoryOdeshin3Voque, TVoque> {
-  protected dereferenceCollection(): TVoque['voictentPelie'] {
+  protected dereferenceCollection(): TVoque['collectionStreamable'] {
     return {
       byZorn: this.hubblepupPelueByZorn,
       list: this.itemTuple,

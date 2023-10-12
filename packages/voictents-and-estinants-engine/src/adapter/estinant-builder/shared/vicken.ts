@@ -9,7 +9,7 @@
  * @todo split this file into left, right tuple, and output vicken files
  */
 
-import { GenericVoque } from '../../../core/types/voque/voque';
+import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { OutputStreamConnectionMetatype as CoreOutputVicken } from '../../../core/types/vicken/outputVicken';
 import { IdTuple } from '../../../package-agnostic-utilities/data-structure/id';
@@ -19,7 +19,7 @@ enum AdaptedVickenTypeName {
 }
 
 type BaseLeftInputVicken<
-  TVoque extends GenericVoque,
+  TVoque extends GenericStreamMetatype,
   TTropoignantInput,
   TIsWibiz extends boolean,
   TPinbetunf,
@@ -30,38 +30,41 @@ type BaseLeftInputVicken<
   pinbetunfInput: TPinbetunf;
 };
 
-export type AdaptedLeftInputHubblepupVicken<TVoque extends GenericVoque> =
-  BaseLeftInputVicken<
-    TVoque,
-    TVoque['indexedHubblepupPelie'],
-    false,
-    TVoque['hubblepupPelie']
-  >;
+export type AdaptedLeftInputHubblepupVicken<
+  TVoque extends GenericStreamMetatype,
+> = BaseLeftInputVicken<
+  TVoque,
+  TVoque['indexedItemStreamable'],
+  false,
+  TVoque['itemStreamable']
+>;
 
 export type GenericAdaptedLeftInputHubblepupVicken =
-  AdaptedLeftInputHubblepupVicken<GenericVoque>;
+  AdaptedLeftInputHubblepupVicken<GenericStreamMetatype>;
 
-type AdaptedLeftInputIndexedHubblepupVicken<TVoque extends GenericVoque> =
-  BaseLeftInputVicken<
-    TVoque,
-    TVoque['indexedHubblepupPelie'],
-    false,
-    TVoque['indexedHubblepupPelie']
-  >;
+type AdaptedLeftInputIndexedHubblepupVicken<
+  TVoque extends GenericStreamMetatype,
+> = BaseLeftInputVicken<
+  TVoque,
+  TVoque['indexedItemStreamable'],
+  false,
+  TVoque['indexedItemStreamable']
+>;
 
 type GenericAdaptedLeftInputIndexedHubblepupVicken =
-  AdaptedLeftInputIndexedHubblepupVicken<GenericVoque>;
+  AdaptedLeftInputIndexedHubblepupVicken<GenericStreamMetatype>;
 
-export type AdaptedLeftInputVoictentVicken<TVoque extends GenericVoque> =
-  BaseLeftInputVicken<
-    TVoque,
-    TVoque['voictentPelie'],
-    true,
-    TVoque['voictentPelie']
-  >;
+export type AdaptedLeftInputVoictentVicken<
+  TVoque extends GenericStreamMetatype,
+> = BaseLeftInputVicken<
+  TVoque,
+  TVoque['collectionStreamable'],
+  true,
+  TVoque['collectionStreamable']
+>;
 
 type GenericAdaptedLeftInputVoictentVicken =
-  AdaptedLeftInputVoictentVicken<GenericVoque>;
+  AdaptedLeftInputVoictentVicken<GenericStreamMetatype>;
 
 export type GenericAdaptedLeftInputVicken =
   | GenericAdaptedLeftInputHubblepupVicken
@@ -69,37 +72,37 @@ export type GenericAdaptedLeftInputVicken =
   | GenericAdaptedLeftInputVoictentVicken;
 
 export type AdaptedRightInputHubblepupTupleVicken<
-  TRightInputVoque extends GenericVoque,
+  TRightInputVoque extends GenericStreamMetatype,
   TZornTuple extends IdTuple,
 > = {
   voque: TRightInputVoque;
   tropoignantInput: {
-    [Index in keyof TZornTuple]: TRightInputVoque['indexedHubblepupPelie'];
+    [Index in keyof TZornTuple]: TRightInputVoque['indexedItemStreamable'];
   };
   isWibiz: false;
   pinbetunfInput: {
-    [Index in keyof TZornTuple]: TRightInputVoque['hubblepupPelie'];
+    [Index in keyof TZornTuple]: TRightInputVoque['itemStreamable'];
   };
   zornTuple: TZornTuple;
   zornTupleOption: TZornTuple[number];
 };
 
 type GenericAdaptedRightInputHubblepupTupleVicken =
-  AdaptedRightInputHubblepupTupleVicken<GenericVoque, IdTuple>;
+  AdaptedRightInputHubblepupTupleVicken<GenericStreamMetatype, IdTuple>;
 
 export type AdaptedRightInputVoictentVicken<
-  TRightInputVoque extends GenericVoque,
+  TRightInputVoque extends GenericStreamMetatype,
 > = {
   voque: TRightInputVoque;
-  tropoignantInput: TRightInputVoque['voictentPelie'];
+  tropoignantInput: TRightInputVoque['collectionStreamable'];
   isWibiz: true;
-  pinbetunfInput: TRightInputVoque['voictentPelie'];
+  pinbetunfInput: TRightInputVoque['collectionStreamable'];
   zornTuple: never;
   zornTupleOption: never;
 };
 
 type GenericAdaptedRightInputVoictentVicken =
-  AdaptedRightInputVoictentVicken<GenericVoque>;
+  AdaptedRightInputVoictentVicken<GenericStreamMetatype>;
 
 type GenericAdaptedRightInputVicken =
   | GenericAdaptedRightInputHubblepupTupleVicken
@@ -109,7 +112,7 @@ export type GenericAdaptedRightInputVickenTuple =
   Tuple<GenericAdaptedRightInputVicken>;
 
 export type AdaptedOutputVicken<
-  TVoque extends GenericVoque,
+  TVoque extends GenericStreamMetatype,
   TPinbetunfOutput,
 > = {
   typeName: AdaptedVickenTypeName.Output;
@@ -118,7 +121,7 @@ export type AdaptedOutputVicken<
 };
 
 export type GenericAdaptedOutputVicken = AdaptedOutputVicken<
-  GenericVoque,
+  GenericStreamMetatype,
   unknown
 >;
 

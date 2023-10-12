@@ -51,8 +51,8 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
   // eslint-disable-next-line class-methods-use-this
   protected transformHubblepup(
-    hubblepupPelue: GenericProgramErrorVoque['hubblepupPelue'],
-  ): GenericProgramErrorVoque['hubblepupPelie'] {
+    hubblepupPelue: GenericProgramErrorVoque['itemEggStreamable'],
+  ): GenericProgramErrorVoque['itemStreamable'] {
     if (
       !(hubblepupPelue instanceof LintAssertionError) &&
       hubblepupPelue instanceof Error
@@ -128,7 +128,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       return hubblepupPelue;
     }
 
-    const hubblepupPelie: GenericProgramErrorVoque['hubblepupPelie'] = {
+    const hubblepupPelie: GenericProgramErrorVoque['itemStreamable'] = {
       zorn,
       name: hubblepupPelue.name,
       message: hubblepupPelue.error.message,
@@ -147,7 +147,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
   }
 
   protected onTransformedHubblepup(
-    hubblepup: GenericProgramErrorVoque['hubblepupPelie'],
+    hubblepup: GenericProgramErrorVoque['itemStreamable'],
     index: number,
   ): void {
     const serializedHubblepup: SerializedItem = {
@@ -197,7 +197,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
   // eslint-disable-next-line class-methods-use-this
   protected getIndexByName(
-    hubblepup: GenericProgramErrorVoque['hubblepupPelie'],
+    hubblepup: GenericProgramErrorVoque['itemStreamable'],
   ): GenericProgramErrorVoque['indexByName'] {
     if (hubblepup instanceof Error) {
       return {

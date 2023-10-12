@@ -4,7 +4,10 @@ import {
   ItemStream2,
   CollectionStream,
 } from '../lanbe/lanbe';
-import { GenericVoque, UnsafeVoque } from '../voque/voque';
+import {
+  GenericStreamMetatype,
+  UnsafeStreamMetatype,
+} from '../stream-metatype/streamMetatype';
 
 /**
  * The collection interface. All collections must support the interface for
@@ -19,10 +22,10 @@ import { GenericVoque, UnsafeVoque } from '../voque/voque';
  * data to a collection
  */
 export type Collection2<
-  TRestrictingVoque extends GenericVoque,
+  TRestrictingVoque extends GenericStreamMetatype,
   TVoque extends TRestrictingVoque,
 > = {
-  get collectionId(): TVoque['gepp'];
+  get collectionId(): TVoque['collectionId'];
   createCollectionStream(debugName: string): CollectionStream<TVoque> | null;
   createCollectionItemStream(
     debugName: string,
@@ -36,13 +39,16 @@ export type Collection2<
    */
   initialize(): void;
   get isEmpty(): boolean;
-  addItem(hubblepup: TVoque['hubblepupPelue']): void;
+  addItem(hubblepup: TVoque['itemEggStreamable']): void;
 };
 
-export type GenericVoictent2 = Collection2<GenericVoque, GenericVoque>;
+export type GenericVoictent2 = Collection2<
+  GenericStreamMetatype,
+  GenericStreamMetatype
+>;
 
 export type GenericVoictent2Tuple = Tuple<GenericVoictent2>;
 
-type UnsafeVoictent2 = Collection2<UnsafeVoque, UnsafeVoque>;
+type UnsafeVoictent2 = Collection2<UnsafeStreamMetatype, UnsafeStreamMetatype>;
 
 export type UnsafeVoictent2Tuple = Tuple<UnsafeVoictent2>;

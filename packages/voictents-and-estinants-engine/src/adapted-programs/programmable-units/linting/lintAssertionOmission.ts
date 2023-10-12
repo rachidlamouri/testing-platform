@@ -1,6 +1,6 @@
 import { AbstractInMemoryCollection } from '../../../layer-agnostic-utilities/collection/abstractInMemoryCollection';
 import { InMemoryIndexByName } from '../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
-import { StreamMetatype } from '../../../core/types/voque/voque';
+import { StreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,

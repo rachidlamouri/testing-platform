@@ -2,7 +2,7 @@ import fs from 'fs';
 import { posix } from 'path';
 import { Subitem } from '../../adapter/odeshin/subitem';
 import { CollectionId } from '../../core/types/voictent/gepp';
-import { StreamMetatype } from '../../core/types/voque/voque';
+import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { Collection2 } from '../../core/types/voictent/voictent2';
 import {
   StreamTypeName,
@@ -61,7 +61,7 @@ type CachedOnDiskCollectionConstructorInput<
   TStreamMetatype extends GenericCachedOnDiskStreamMetatype,
 > = {
   nameSpace: string;
-  collectionId: TStreamMetatype['gepp'];
+  collectionId: TStreamMetatype['collectionId'];
 };
 
 /**
@@ -79,9 +79,9 @@ export class CachedOnDiskCollection<
 {
   public readonly nameSpace: string;
 
-  public readonly collectionId: TStreamMetatype['gepp'];
+  public readonly collectionId: TStreamMetatype['collectionId'];
 
-  itemTuple: TStreamMetatype['hubblepupPelie'][] = [];
+  itemTuple: TStreamMetatype['itemStreamable'][] = [];
 
   indicesByStream: Map<
     ItemStream2<GenericCachedOnDiskStreamMetatype, TStreamMetatype>,
@@ -117,7 +117,7 @@ export class CachedOnDiskCollection<
     return this.itemTuple.length === 0;
   }
 
-  addItem(itemEgg: TStreamMetatype['hubblepupPelue']): void {
+  addItem(itemEgg: TStreamMetatype['itemEggStreamable']): void {
     this.itemEgg.thisTick = true;
 
     const directoryPath = posix.join(
@@ -131,17 +131,17 @@ export class CachedOnDiskCollection<
 
     const filePath = posix.join(directoryPath, fileName);
 
-    let currentCachedItem: TStreamMetatype['hubblepupPelie'] | null;
+    let currentCachedItem: TStreamMetatype['itemStreamable'] | null;
     if (fs.existsSync(filePath)) {
       const cachedText = fs.readFileSync(filePath, 'utf8');
       currentCachedItem = jsonUtils.parse(
         cachedText,
-      ) as TStreamMetatype['hubblepupPelie'];
+      ) as TStreamMetatype['itemStreamable'];
     } else {
       currentCachedItem = null;
     }
 
-    let item: TStreamMetatype['hubblepupPelie'];
+    let item: TStreamMetatype['itemStreamable'];
     if (
       currentCachedItem === null ||
       itemEgg.lastModified > currentCachedItem.lastModified
@@ -265,7 +265,7 @@ export class CachedOnDiskCollection<
 
   private dereference(
     stream: ItemStream2<GenericCachedOnDiskStreamMetatype, TStreamMetatype>,
-  ): TStreamMetatype['indexedHubblepupPelie'] {
+  ): TStreamMetatype['indexedItemStreamable'] {
     const listIndex = this.getStreamIndex(stream);
 
     if (listIndex === CachedOnDiskCollection.minimumInclusiveIndex) {

@@ -1,6 +1,6 @@
 import { CollectionId } from '../../core/types/voictent/gepp';
 import { Collection2 } from '../../core/types/voictent/voictent2';
-import { StreamMetatype } from '../../core/types/voque/voque';
+import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { GenericItem, Item } from '../../core/types/hubblepup/hubblepup';
 import { ProgramFileCache, SerializedItem } from '../program/programFileCache';
 
@@ -37,14 +37,14 @@ export type GenericAbstractSerializableStreamMetatype =
   AbstractSerializableStreamMetatype<CollectionId>;
 
 export type IndexedAbstractSerializable =
-  GenericAbstractSerializableStreamMetatype['indexedHubblepupPelie'];
+  GenericAbstractSerializableStreamMetatype['indexedItemStreamable'];
 
 type AbstractSerializableCollectionConstructorInput<
   TStreamMetatype extends GenericAbstractSerializableStreamMetatype,
 > = {
-  collectionId: TStreamMetatype['gepp'];
+  collectionId: TStreamMetatype['collectionId'];
   programFileCache: ProgramFileCache;
-  initialItemEggTuple: TStreamMetatype['hubblepupPelue'][];
+  initialItemEggTuple: TStreamMetatype['itemEggStreamable'][];
 };
 
 /**
@@ -60,11 +60,11 @@ export abstract class AbstractSerializableCollection<
 > implements
     Collection2<GenericAbstractSerializableStreamMetatype, TStreamMetatype>
 {
-  public readonly collectionId: TStreamMetatype['gepp'];
+  public readonly collectionId: TStreamMetatype['collectionId'];
 
   public readonly programFileCache: ProgramFileCache;
 
-  private initialItemEggTuple: TStreamMetatype['hubblepupPelie'][];
+  private initialItemEggTuple: TStreamMetatype['itemStreamable'][];
 
   public readonly duplicateCountByCheckId = new Map<string, number>();
 

@@ -1,6 +1,9 @@
 import { Simplify } from 'type-fest';
 import { Item } from '../hubblepup/hubblepup';
-import { GenericVoque, StreamMetatype } from '../voque/voque';
+import {
+  GenericStreamMetatype,
+  StreamMetatype,
+} from '../stream-metatype/streamMetatype';
 import { ReferenceTypeName } from './referenceTypeName';
 
 export enum StreamTypeName {
@@ -24,17 +27,17 @@ type BaseLanbe<
   };
 };
 
-export type CollectionStream<TVoque extends GenericVoque> = Simplify<
+export type CollectionStream<TVoque extends GenericStreamMetatype> = Simplify<
   BaseLanbe<
     StreamTypeName.CollectionStream,
     ReferenceTypeName.Collection,
-    TVoque['voictentPelie']
+    TVoque['collectionStreamable']
   > & {
     isAccumulating: () => boolean;
   }
 >;
 
-export type GenericVoictentPelieLanbe = CollectionStream<GenericVoque>;
+export type GenericVoictentPelieLanbe = CollectionStream<GenericStreamMetatype>;
 
 export type HubblepupPelieLanbe = BaseLanbe<
   StreamTypeName.HubblepupPelieLanbe,
@@ -43,23 +46,23 @@ export type HubblepupPelieLanbe = BaseLanbe<
 >;
 
 export type ItemStream2<
-  TRestrictingVoque extends GenericVoque,
+  TRestrictingVoque extends GenericStreamMetatype,
   TVoque extends TRestrictingVoque,
 > = BaseLanbe<
   StreamTypeName.ItemStream2,
   ReferenceTypeName.IndexedItem,
   StreamMetatype<
-    TVoque['gepp'],
-    TVoque['hubblepupPelue'],
-    TVoque['hubblepupPelie'],
+    TVoque['collectionId'],
+    TVoque['itemEggStreamable'],
+    TVoque['itemStreamable'],
     TRestrictingVoque['indexByName'],
-    TRestrictingVoque['voictentPelie']
-  >['indexedHubblepupPelie']
+    TRestrictingVoque['collectionStreamable']
+  >['indexedItemStreamable']
 >;
 
 export type GenericCollectionItemStream2 = ItemStream2<
-  GenericVoque,
-  GenericVoque
+  GenericStreamMetatype,
+  GenericStreamMetatype
 >;
 
 /**

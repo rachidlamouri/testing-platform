@@ -1,7 +1,7 @@
-import { GenericVoque } from '../voque/voque';
+import { GenericStreamMetatype } from '../stream-metatype/streamMetatype';
 
 type BaseLeftInputVicken<
-  TVoque extends GenericVoque,
+  TVoque extends GenericStreamMetatype,
   TTropoignantInput,
   TIsWibiz extends boolean,
 > = {
@@ -11,19 +11,20 @@ type BaseLeftInputVicken<
 };
 
 // TODO: rename this to "LeftInputIndexedHubblepupVicken"
-export type LeftInputItemStreamConnectionMetatype<TVoque extends GenericVoque> =
-  BaseLeftInputVicken<TVoque, TVoque['indexedHubblepupPelie'], false>;
+export type LeftInputItemStreamConnectionMetatype<
+  TVoque extends GenericStreamMetatype,
+> = BaseLeftInputVicken<TVoque, TVoque['indexedItemStreamable'], false>;
 
-export type LeftInputVoictentVicken<TVoque extends GenericVoque> =
-  BaseLeftInputVicken<TVoque, TVoque['voictentPelie'], true>;
+export type LeftInputVoictentVicken<TVoque extends GenericStreamMetatype> =
+  BaseLeftInputVicken<TVoque, TVoque['collectionStreamable'], true>;
 
 /**
  * The type information needed to configure a strongly typed left input stream
  *
  * @readableName LeftInputStreamConnectionMetatype
  */
-export type LeftInputVicken<TVoque extends GenericVoque> =
+export type LeftInputVicken<TVoque extends GenericStreamMetatype> =
   | LeftInputItemStreamConnectionMetatype<TVoque>
   | LeftInputVoictentVicken<TVoque>;
 
-export type GenericLeftInputVicken = LeftInputVicken<GenericVoque>;
+export type GenericLeftInputVicken = LeftInputVicken<GenericStreamMetatype>;

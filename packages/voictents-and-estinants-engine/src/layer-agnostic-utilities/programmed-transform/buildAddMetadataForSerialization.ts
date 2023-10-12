@@ -12,8 +12,8 @@ type SerializerBuilderInput<
   TInputCollection extends GenericAbstractSerializableSourceStreamMetatype,
   TOutputCollection extends GenericAbstractSerializableStreamMetatype,
 > = {
-  inputCollectionId: TInputCollection['gepp'];
-  outputCollectionId: TOutputCollection['gepp'];
+  inputCollectionId: TInputCollection['collectionId'];
+  outputCollectionId: TOutputCollection['collectionId'];
 };
 
 /**

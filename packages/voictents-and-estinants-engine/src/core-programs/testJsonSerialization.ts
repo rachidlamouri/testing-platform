@@ -27,7 +27,7 @@ digikikify2({
       collectionId: 'serialized',
       programFileCache,
       initialItemEggTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST.map<
-        SerializedConfiguration['hubblepupPelue']
+        SerializedConfiguration['itemEggStreamable']
       >((datumTestCaseInput) => {
         return {
           sourceCollectionId: DATUM_TEST_CASE_INPUT_GEPP,

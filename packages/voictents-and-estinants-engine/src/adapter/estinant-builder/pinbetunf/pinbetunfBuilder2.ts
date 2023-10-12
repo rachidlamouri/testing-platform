@@ -49,7 +49,7 @@ type PinbetunfOutput<
       UnionToIntersection<
         {
           [Index in keyof TAdaptedOutputVickenTuple]: {
-            [Key in TAdaptedOutputVickenTuple[Index]['voque']['gepp']]: TAdaptedOutputVickenTuple[Index]['pinbetunfOutput'];
+            [Key in TAdaptedOutputVickenTuple[Index]['voque']['collectionId']]: TAdaptedOutputVickenTuple[Index]['pinbetunfOutput'];
           };
         }[number]
       >

@@ -1,5 +1,5 @@
 import { GenericIndexedHubblepup } from '../../../core/types/hubblepup/hubblepup';
-import { GenericVoque } from '../../../core/types/voque/voque';
+import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import {
   buildInputOutputContextFromLeftInputContext,
   InstantiationContext,
@@ -42,7 +42,9 @@ type EmptyAdaptedOutputVickenTuple = [];
  *
  * @readableName LeftInputItemStreamConfigurationBuilder
  */
-type LeftInputHubblepupAppreffingeBuilder2 = <TInputVoque extends GenericVoque>(
+type LeftInputHubblepupAppreffingeBuilder2 = <
+  TInputVoque extends GenericStreamMetatype,
+>(
   partialLeftInputAppreffinge: PartialLeftInputAppreffinge<TInputVoque>,
 ) => SpreadN<
   [
@@ -82,7 +84,7 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
   instantiationContext: InstantiationContext,
 ): LeftInputHubblepupAppreffingeBuilder2 => {
   const buildLeftInputHubblepupAppreffinge: LeftInputHubblepupAppreffingeBuilder2 =
-    <TInputVoque extends GenericVoque>(
+    <TInputVoque extends GenericStreamMetatype>(
       partialLeftInputAppreffinge: PartialLeftInputAppreffinge<TInputVoque>,
     ) => {
       const nextContext = buildInputOutputContextFromLeftInputContext({

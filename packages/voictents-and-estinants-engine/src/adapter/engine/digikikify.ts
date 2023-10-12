@@ -37,7 +37,7 @@ import {
   UnsafeVoictent2Tuple,
   Collection2,
 } from '../../core/types/voictent/voictent2';
-import { GenericVoque } from '../../core/types/voque/voque';
+import { GenericStreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { ProgramErrorGepp } from '../../adapted-programs/programmable-units/error/programError';
 import { GenericAbstractSerializableSourceStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
 import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
@@ -108,67 +108,68 @@ type GenericInferableVoque =
   | GenericInMemoryOdeshin2ListVoque
   | GenericFileSystemNodeVoque;
 
-type UninferableVoqueUnion<TImplicitVoqueUnion extends GenericVoque> = Exclude<
-  TImplicitVoqueUnion,
-  GenericInferableVoque
->;
+type UninferableVoqueUnion<TImplicitVoqueUnion extends GenericStreamMetatype> =
+  Exclude<TImplicitVoqueUnion, GenericInferableVoque>;
 
 type InferableVoqueUnion<
-  TImplicitVoqueUnion extends GenericVoque,
+  TImplicitVoqueUnion extends GenericStreamMetatype,
   TInferableVoque extends GenericInferableVoque,
 > = Extract<TImplicitVoqueUnion, TInferableVoque>;
 
-type GeppCombinationFromVoqueUnion<TVoque extends GenericVoque> = Simplify<
-  UnionToIntersection<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    TVoque extends any
-      ? {
-          [TGepp in TVoque['gepp']]: null;
-        }
-      : never
-  >
->;
+type GeppCombinationFromVoqueUnion<TVoque extends GenericStreamMetatype> =
+  Simplify<
+    UnionToIntersection<
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      TVoque extends any
+        ? {
+            [TGepp in TVoque['collectionId']]: null;
+          }
+        : never
+    >
+  >;
 
-type VoictentByGeppFromVoqueUnion<TVoque extends GenericVoque> = Simplify<
-  UnionToIntersection<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    TVoque extends any
-      ? {
-          [TGepp in TVoque['gepp']]: Collection2<TVoque, TVoque>;
-        }
-      : never
-  >
->;
+type VoictentByGeppFromVoqueUnion<TVoque extends GenericStreamMetatype> =
+  Simplify<
+    UnionToIntersection<
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      TVoque extends any
+        ? {
+            [TGepp in TVoque['collectionId']]: Collection2<TVoque, TVoque>;
+          }
+        : never
+    >
+  >;
 
-type UninferableVoictentByGepp<TImplicitVoqueUnion extends GenericVoque> =
-  VoictentByGeppFromVoqueUnion<UninferableVoqueUnion<TImplicitVoqueUnion>>;
+type UninferableVoictentByGepp<
+  TImplicitVoqueUnion extends GenericStreamMetatype,
+> = VoictentByGeppFromVoqueUnion<UninferableVoqueUnion<TImplicitVoqueUnion>>;
 
 // TODO: change this to extract any voque whose receieved hubblepup includes Error (I tried this and couldn't get it to work :sad-face:)
-type ErrorGepp<TAllVoqueUnion extends GenericVoque> = Extract<
-  TAllVoqueUnion['gepp'],
+type ErrorGepp<TAllVoqueUnion extends GenericStreamMetatype> = Extract<
+  TAllVoqueUnion['collectionId'],
   ProgramErrorGepp
 >;
 
-type SerializeeGepp<TAllVoqueUnion extends GenericVoque> = Extract<
+type SerializeeGepp<TAllVoqueUnion extends GenericStreamMetatype> = Extract<
   TAllVoqueUnion,
   GenericAbstractSerializableSourceStreamMetatype
->['gepp'];
+>['collectionId'];
 
 type AllVoqueUnion<
-  TExplicitVoictentTupleVoqueUnion extends GenericVoque,
-  TEstinantTupleVoqueUnion extends GenericVoque,
+  TExplicitVoictentTupleVoqueUnion extends GenericStreamMetatype,
+  TEstinantTupleVoqueUnion extends GenericStreamMetatype,
 > = TExplicitVoictentTupleVoqueUnion | TEstinantTupleVoqueUnion;
 
 type ImplicitVoqueUnion<
-  TRequiredVoqueUnion extends GenericVoque,
-  TExplicitVoqueUnion extends GenericVoque,
+  TRequiredVoqueUnion extends GenericStreamMetatype,
+  TExplicitVoqueUnion extends GenericStreamMetatype,
 > = Exclude<TRequiredVoqueUnion, TExplicitVoqueUnion>;
 
 type DigikikifierInputFromAllComputedUnions<
   TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
-  TAllVoqueUnion extends GenericVoque,
-  TImplicitVoqueUnion extends GenericVoque,
+  TAllVoqueUnion extends GenericStreamMetatype,
+  TImplicitVoqueUnion extends GenericStreamMetatype,
 > = {
   explicitVoictentTuple: TExplicitVoictentTuple;
   fileSystemNodeGeppCombination: GeppCombinationFromVoqueUnion<
@@ -185,8 +186,8 @@ type DigikikifierInputFromAllComputedUnions<
 type DigikikifierInputFromPreliminaryComputedUnions<
   TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
-  TExplicitVoictentTupleVoqueUnion extends GenericVoque,
-  TEstinantTupleVoqueUnion extends GenericVoque,
+  TExplicitVoictentTupleVoqueUnion extends GenericStreamMetatype,
+  TEstinantTupleVoqueUnion extends GenericStreamMetatype,
 > = DigikikifierInputFromAllComputedUnions<
   TExplicitVoictentTuple,
   TEstinantTuple,

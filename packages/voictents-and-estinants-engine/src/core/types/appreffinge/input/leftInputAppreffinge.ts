@@ -9,7 +9,7 @@ import { GenericLeftInputVicken } from '../../vicken/leftInputVicken';
 export type LeftInputAppreffinge<
   TLeftInputVicken extends GenericLeftInputVicken,
 > = {
-  collectionId: TLeftInputVicken['voque']['gepp'];
+  collectionId: TLeftInputVicken['voque']['collectionId'];
   isCollectionStream: TLeftInputVicken['isWibiz'];
 };
 

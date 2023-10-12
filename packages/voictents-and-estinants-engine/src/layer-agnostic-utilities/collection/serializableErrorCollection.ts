@@ -1,6 +1,6 @@
 import { CollectionId } from '../../core/types/voictent/gepp';
 import { Collection2 } from '../../core/types/voictent/voictent2';
-import { StreamMetatype } from '../../core/types/voque/voque';
+import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { FileExtensionSuffixIdentifier } from '../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { ProgramFileCache } from '../program/programFileCache';
 
@@ -14,9 +14,9 @@ type GenericSerializableErrorStreamMetatype =
 type SerializableErrorCollectionInput<
   TStreamMetatype extends GenericSerializableErrorStreamMetatype,
 > = {
-  collectionId: TStreamMetatype['gepp'];
+  collectionId: TStreamMetatype['collectionId'];
   programFileCache: ProgramFileCache;
-  initialItemEggTuple: TStreamMetatype['hubblepupPelue'][];
+  initialItemEggTuple: TStreamMetatype['itemEggStreamable'][];
 };
 
 /**
@@ -33,11 +33,11 @@ export class SerializableErrorCollection<
 {
   private errorCount = 0;
 
-  public readonly collectionId: TStreamMetatype['gepp'];
+  public readonly collectionId: TStreamMetatype['collectionId'];
 
   public readonly programFileCache: ProgramFileCache;
 
-  private initialItemEggTuple: TStreamMetatype['hubblepupPelie'][];
+  private initialItemEggTuple: TStreamMetatype['itemStreamable'][];
 
   private hasReceivedItem = false;
 

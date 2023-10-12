@@ -48,7 +48,7 @@ export class OutputFileVoictent extends AbstractAsymmetricInMemoryVoictent2<
   }
 
   protected onTransformedHubblepup(
-    hubblepup: OutputFileVoque['hubblepupPelie'],
+    hubblepup: OutputFileVoque['itemStreamable'],
   ): void {
     if (hubblepup.filePath !== undefined) {
       fs.writeFileSync(hubblepup.filePath, hubblepup.text);

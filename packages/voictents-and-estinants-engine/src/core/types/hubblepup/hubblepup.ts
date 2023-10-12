@@ -19,19 +19,16 @@ export type GenericItem = Hubblepup2<unknown>;
 
 export type HubblepupTuple = readonly Item[];
 
-export type HubblepupIndexByName = TypeScriptObject;
+export type ItemIndexByName = TypeScriptObject;
 
-export type IndexedHubblepup<
+export type IndexedItem<
   THubblepup extends Item,
-  TIndexByName extends HubblepupIndexByName,
+  TIndexByName extends ItemIndexByName,
 > = {
   indexByName: TIndexByName;
   item: THubblepup;
 };
 
-export type GenericIndexedHubblepup = IndexedHubblepup<
-  Item,
-  HubblepupIndexByName
->;
+export type GenericIndexedHubblepup = IndexedItem<Item, ItemIndexByName>;
 
 export type GenericIndexedHubblepupTuple = Tuple<GenericIndexedHubblepup>;

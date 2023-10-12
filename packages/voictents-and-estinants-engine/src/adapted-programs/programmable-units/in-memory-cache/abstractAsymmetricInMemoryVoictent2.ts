@@ -5,12 +5,14 @@ import {
 } from '../../../core/types/lanbe/lanbe';
 import { ReferenceTypeName } from '../../../core/types/lanbe/referenceTypeName';
 import { Collection2 } from '../../../core/types/voictent/voictent2';
-import { GenericVoque } from '../../../core/types/voque/voque';
+import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { InMemoryCache } from './inMemoryCache';
 
-type AbstractInMemoryVoictent2ConstructorInput<TVoque extends GenericVoque> = {
-  gepp: TVoque['gepp'];
-  initialHubblepupPelueTuple: TVoque['hubblepupPelue'][];
+type AbstractInMemoryVoictent2ConstructorInput<
+  TVoque extends GenericStreamMetatype,
+> = {
+  gepp: TVoque['collectionId'];
+  initialHubblepupPelueTuple: TVoque['itemEggStreamable'][];
 };
 
 /**
@@ -21,15 +23,15 @@ type AbstractInMemoryVoictent2ConstructorInput<TVoque extends GenericVoque> = {
  * @readableName AbstractAsymmetricInMemoryCollection
  */
 export abstract class AbstractAsymmetricInMemoryVoictent2<
-    TRestrictingVoque extends GenericVoque,
+    TRestrictingVoque extends GenericStreamMetatype,
     TVoque extends TRestrictingVoque,
   >
-  extends InMemoryCache<TVoque['hubblepupPelie']>
+  extends InMemoryCache<TVoque['itemStreamable']>
   implements Collection2<TRestrictingVoque, TVoque>
 {
-  public readonly collectionId: TVoque['gepp'];
+  public readonly collectionId: TVoque['collectionId'];
 
-  private initialHubblepupPelueTuple: TVoque['hubblepupPelie'][];
+  private initialHubblepupPelueTuple: TVoque['itemStreamable'][];
 
   constructor({
     gepp,
@@ -47,7 +49,7 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
     });
   }
 
-  addItem(hubblepup: TVoque['hubblepupPelue']): void {
+  addItem(hubblepup: TVoque['itemEggStreamable']): void {
     const transformedHubblepup = this.transformHubblepup(hubblepup);
     this.addDatum(transformedHubblepup);
     this.onTransformedHubblepup(
@@ -57,15 +59,15 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
   }
 
   protected abstract transformHubblepup(
-    hubblepup: TVoque['hubblepupPelue'],
-  ): TVoque['hubblepupPelie'];
+    hubblepup: TVoque['itemEggStreamable'],
+  ): TVoque['itemStreamable'];
 
   protected abstract getIndexByName(
-    hubblepup: TVoque['hubblepupPelie'],
+    hubblepup: TVoque['itemStreamable'],
   ): TVoque['indexByName'];
 
   protected abstract onTransformedHubblepup(
-    hubblepup: TVoque['hubblepupPelie'],
+    hubblepup: TVoque['itemStreamable'],
     index: number,
   ): void;
 

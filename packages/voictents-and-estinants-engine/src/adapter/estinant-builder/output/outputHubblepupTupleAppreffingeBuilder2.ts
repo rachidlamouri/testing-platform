@@ -1,5 +1,5 @@
 import { Spread } from 'type-fest';
-import { GenericVoque } from '../../../core/types/voque/voque';
+import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import {
   buildInputOutputContextFromConstituentResultNormalizer,
   InputOutputContext,
@@ -18,10 +18,10 @@ import {
 
 type NextAdaptedOutputVickenTuple<
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
-  TOutputVoque extends GenericVoque,
+  TOutputVoque extends GenericStreamMetatype,
 > = [
   ...TAdaptedOutputVickenTuple,
-  AdaptedOutputVicken<TOutputVoque, TOutputVoque['hubblepupPelue'][]>,
+  AdaptedOutputVicken<TOutputVoque, TOutputVoque['itemEggStreamable'][]>,
 ];
 
 /**
@@ -33,7 +33,7 @@ type OutputHubblepupTupleAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
-> = <TOutputVoque extends GenericVoque>(
+> = <TOutputVoque extends GenericStreamMetatype>(
   partialOutputAppreffinge: PartialOutputAppreffinge<TOutputVoque>,
 ) => Spread<
   OutputHubblepupTupleAppreffingeBuilderParent2<
@@ -63,7 +63,7 @@ export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple,
     TAdaptedOutputVickenTuple
-  > = <TOutputVoque extends GenericVoque>(
+  > = <TOutputVoque extends GenericStreamMetatype>(
     outputAppreffinge: PartialOutputAppreffinge<TOutputVoque>,
   ) => {
     const nextContext = buildInputOutputContextFromConstituentResultNormalizer({
@@ -71,7 +71,7 @@ export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
       normalizeResult: (leftInput, modifiedInput, aggregatedOutput) => {
         const hubblepupTuple = aggregatedOutput[
           outputAppreffinge.collectionId
-        ] as TOutputVoque['voictentPelie'];
+        ] as TOutputVoque['collectionStreamable'];
 
         return [outputAppreffinge.collectionId, hubblepupTuple];
       },

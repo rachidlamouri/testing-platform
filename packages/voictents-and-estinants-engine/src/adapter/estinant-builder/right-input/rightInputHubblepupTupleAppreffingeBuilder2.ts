@@ -1,5 +1,5 @@
 import { GenericIndexedHubblepupTuple } from '../../../core/types/hubblepup/hubblepup';
-import { GenericVoque } from '../../../core/types/voque/voque';
+import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import {
   ComplexId,
   IdTuple2,
@@ -34,7 +34,7 @@ import {
 
 type NextAdaptedRightInputVickenTuple<
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-  TRightInputVoque extends GenericVoque,
+  TRightInputVoque extends GenericStreamMetatype,
   TZornTuple extends IdTuple2,
 > = [
   ...TAdaptedRightInputVickenTuple,
@@ -52,7 +52,10 @@ type EmptyAdaptedOutputVickenTuple = [];
 type RightInputHubblepupTupleAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-> = <TRightInputVoque extends GenericVoque, TZornTuple extends IdTuple2>(
+> = <
+  TRightInputVoque extends GenericStreamMetatype,
+  TZornTuple extends IdTuple2,
+>(
   partialRightAppreffinge: PartialRightHubblepupTupleAppreffinge<
     TAdaptedLeftInputVicken,
     TRightInputVoque,
@@ -120,7 +123,10 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
   const buildRightInputHubblepupTupleAppreffinge2: RightInputHubblepupTupleAppreffingeBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple
-  > = <TRightInputVoque extends GenericVoque, TZornTuple extends IdTuple2>(
+  > = <
+    TRightInputVoque extends GenericStreamMetatype,
+    TZornTuple extends IdTuple2,
+  >(
     partialRightAppreffinge: PartialRightHubblepupTupleAppreffinge<
       TAdaptedLeftInputVicken,
       TRightInputVoque,
@@ -146,7 +152,7 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
 
           return list;
         },
-        croard: (rightInput: TRightInputVoque['indexedHubblepupPelie']) => {
+        croard: (rightInput: TRightInputVoque['indexedItemStreamable']) => {
           const intermediateValue = partialRightAppreffinge.croard(rightInput);
           if (intermediateValue instanceof ComplexId) {
             return intermediateValue.forHuman;

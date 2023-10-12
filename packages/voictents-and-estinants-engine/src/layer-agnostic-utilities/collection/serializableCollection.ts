@@ -10,8 +10,8 @@ import { serialize } from '../../package-agnostic-utilities/one-way-serializer/s
 type SerializableCollectionConstructorInput<
   TStreamMetatype extends GenericAbstractSerializableStreamMetatype,
 > = {
-  collectionId: TStreamMetatype['gepp'];
-  initialItemEggTuple: TStreamMetatype['hubblepupPelue'][];
+  collectionId: TStreamMetatype['collectionId'];
+  initialItemEggTuple: TStreamMetatype['itemEggStreamable'][];
   programFileCache: ProgramFileCache;
 };
 

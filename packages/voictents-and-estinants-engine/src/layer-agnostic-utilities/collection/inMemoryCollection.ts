@@ -18,13 +18,13 @@ export class InMemoryCollection<
   GenericStandardInMemoryStreamMetatype,
   TStreamMetatype
 > {
-  protected dereferenceCollection(): TStreamMetatype['voictentPelie'] {
+  protected dereferenceCollection(): TStreamMetatype['collectionStreamable'] {
     return this.itemTuple;
   }
 
   protected dereferenceItem(
     stream: ItemStream2<GenericStandardInMemoryStreamMetatype, TStreamMetatype>,
-  ): TStreamMetatype['indexedHubblepupPelie'] {
+  ): TStreamMetatype['indexedItemStreamable'] {
     const listIndex = this.getStreamIndex(stream);
 
     if (listIndex === AbstractInMemoryCollection.minimumInclusiveIndex) {

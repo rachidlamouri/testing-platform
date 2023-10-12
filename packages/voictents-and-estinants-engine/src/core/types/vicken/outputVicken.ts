@@ -1,17 +1,25 @@
 import { Simplify, UnionToIntersection } from 'type-fest';
-import { GenericVoqueTuple, UnsafeVoqueTuple } from '../voque/voque';
+import {
+  GenericStreamMetatypeTuple,
+  UnsafeStreamMetatypeTuple,
+} from '../stream-metatype/streamMetatype';
 
-type OutputRecordTuple<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
+type OutputRecordTuple<
+  TOutputVoqueOptionTuple extends GenericStreamMetatypeTuple,
+> = {
   [Index in keyof TOutputVoqueOptionTuple]: {
-    [TKey in TOutputVoqueOptionTuple[Index]['gepp']]: TOutputVoqueOptionTuple[Index]['hubblepupPelue'][];
+    [TKey in TOutputVoqueOptionTuple[Index]['collectionId']]: TOutputVoqueOptionTuple[Index]['itemEggStreamable'][];
   };
 };
 
-type OutputRecordUnion<TOutputVoqueOptionTuple extends GenericVoqueTuple> =
-  OutputRecordTuple<TOutputVoqueOptionTuple>[number];
+type OutputRecordUnion<
+  TOutputVoqueOptionTuple extends GenericStreamMetatypeTuple,
+> = OutputRecordTuple<TOutputVoqueOptionTuple>[number];
 
-type OutputGeppTuple<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
-  [Index in keyof TOutputVoqueOptionTuple]: TOutputVoqueOptionTuple[Index]['gepp'];
+type OutputGeppTuple<
+  TOutputVoqueOptionTuple extends GenericStreamMetatypeTuple,
+> = {
+  [Index in keyof TOutputVoqueOptionTuple]: TOutputVoqueOptionTuple[Index]['collectionId'];
 };
 
 /**
@@ -22,7 +30,7 @@ type OutputGeppTuple<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
  * @canonicalDeclaration
  */
 export type OutputStreamConnectionMetatype<
-  TOutputVoqueOptionTuple extends GenericVoqueTuple,
+  TOutputVoqueOptionTuple extends GenericStreamMetatypeTuple,
 > = {
   outputVoqueOptionTuple: TOutputVoqueOptionTuple;
   geppTuple: OutputGeppTuple<TOutputVoqueOptionTuple>;
@@ -32,12 +40,12 @@ export type OutputStreamConnectionMetatype<
 };
 
 export type GenericOutputVicken =
-  OutputStreamConnectionMetatype<GenericVoqueTuple>;
+  OutputStreamConnectionMetatype<GenericStreamMetatypeTuple>;
 
 // TODO: tie this type back to OutputVicken
 export type UnsafeOutputVicken = {
-  outputVoqueOptionTuple: UnsafeVoqueTuple;
-  geppTuple: OutputGeppTuple<UnsafeVoqueTuple>;
+  outputVoqueOptionTuple: UnsafeStreamMetatypeTuple;
+  geppTuple: OutputGeppTuple<UnsafeStreamMetatypeTuple>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tropoignantOutput: Record<any, any>;
 };

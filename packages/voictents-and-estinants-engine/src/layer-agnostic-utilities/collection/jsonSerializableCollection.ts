@@ -11,9 +11,9 @@ import { GenericItem } from '../../core/types/hubblepup/hubblepup';
 type JsonSerializableCollectionConstructorInput<
   TStreamMetatype extends GenericAbstractSerializableStreamMetatype,
 > = {
-  collectionId: TStreamMetatype['gepp'];
+  collectionId: TStreamMetatype['collectionId'];
   programFileCache: ProgramFileCache;
-  initialItemEggTuple: TStreamMetatype['hubblepupPelue'][];
+  initialItemEggTuple: TStreamMetatype['itemEggStreamable'][];
 };
 
 /**

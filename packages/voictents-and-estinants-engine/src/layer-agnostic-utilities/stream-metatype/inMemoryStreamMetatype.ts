@@ -1,7 +1,7 @@
 import { Merge } from 'type-fest';
 import { Item } from '../../core/types/hubblepup/hubblepup';
 import { CollectionId } from '../../core/types/voictent/gepp';
-import { StreamMetatype } from '../../core/types/voque/voque';
+import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { AbstractSerializableIndexByName } from '../collection/abstractSerializableCollection';
 
 export type InMemoryIndexByName = Merge<

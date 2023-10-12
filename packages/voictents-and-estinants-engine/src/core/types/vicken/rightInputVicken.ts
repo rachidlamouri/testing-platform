@@ -1,9 +1,9 @@
-import { GenericVoque } from '../voque/voque';
+import { GenericStreamMetatype } from '../stream-metatype/streamMetatype';
 import { IdTuple } from '../../../package-agnostic-utilities/data-structure/id';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
 type BaseRightInputVicken<
-  TVoque extends GenericVoque,
+  TVoque extends GenericStreamMetatype,
   TTropoignantInput,
   TIsWibiz extends boolean,
   TZornTuple extends IdTuple,
@@ -16,14 +16,14 @@ type BaseRightInputVicken<
 };
 
 type RightTropoignantInputTupleFromZornTuple<
-  TVoque extends GenericVoque,
+  TVoque extends GenericStreamMetatype,
   TZornTuple extends IdTuple,
 > = {
-  readonly [Index in keyof TZornTuple]: TVoque['indexedHubblepupPelie'];
+  readonly [Index in keyof TZornTuple]: TVoque['indexedItemStreamable'];
 };
 
 export type RightInputHubblepupTupleVicken<
-  TVoque extends GenericVoque,
+  TVoque extends GenericStreamMetatype,
   TZornTuple extends IdTuple,
 > = BaseRightInputVicken<
   TVoque,
@@ -33,10 +33,10 @@ export type RightInputHubblepupTupleVicken<
 >;
 
 export type GenericRightInputHubblepupTupleVicken =
-  RightInputHubblepupTupleVicken<GenericVoque, IdTuple>;
+  RightInputHubblepupTupleVicken<GenericStreamMetatype, IdTuple>;
 
-export type RightInputVoictentVicken<TVoque extends GenericVoque> =
-  BaseRightInputVicken<TVoque, TVoque['voictentPelie'], true, never>;
+export type RightInputVoictentVicken<TVoque extends GenericStreamMetatype> =
+  BaseRightInputVicken<TVoque, TVoque['collectionStreamable'], true, never>;
 
 /**
  * The type information needed to configure a strongly typed right input stream
@@ -44,14 +44,14 @@ export type RightInputVoictentVicken<TVoque extends GenericVoque> =
  * @readableName RightInputStreamConnectionMetatype
  */
 export type RightInputVicken<
-  TVoque extends GenericVoque,
+  TVoque extends GenericStreamMetatype,
   TZornTuple extends IdTuple = never,
 > =
   | RightInputHubblepupTupleVicken<TVoque, TZornTuple>
   | RightInputVoictentVicken<TVoque>;
 
 export type GenericRightInputVoictentVicken =
-  RightInputVoictentVicken<GenericVoque>;
+  RightInputVoictentVicken<GenericStreamMetatype>;
 
 export type GenericRightInputVicken =
   | GenericRightInputHubblepupTupleVicken

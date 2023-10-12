@@ -1,4 +1,4 @@
-import { GenericVoque } from '../../../core/types/voque/voque';
+import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
   buildInputOutputContextFromRightInputContext,
@@ -25,7 +25,7 @@ import {
 
 type NextAdaptedRightInputVickenTuple<
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-  TRightInputVoque extends GenericVoque,
+  TRightInputVoque extends GenericStreamMetatype,
 > = [
   ...TAdaptedRightInputVickenTuple,
   AdaptedRightInputVoictentVicken<TRightInputVoque>,
@@ -42,7 +42,7 @@ type EmptyAdaptedOutputVickenTuple = [];
 type RightInputVoictentAppreffingeBuilder2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-> = <TRightInputVoque extends GenericVoque>(
+> = <TRightInputVoque extends GenericStreamMetatype>(
   partialRightAppreffinge: PartialRightVoictentAppreffinge<TRightInputVoque>,
 ) => SpreadN<
   [
@@ -94,7 +94,7 @@ export const buildRightInputVoictentAppreffingeBuilder2 = <
   const buildRightInputHubblepupAppreffinge: RightInputVoictentAppreffingeBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple
-  > = <TRightInputVoque extends GenericVoque>(
+  > = <TRightInputVoque extends GenericStreamMetatype>(
     partialRightAppreffinge: PartialRightVoictentAppreffinge<TRightInputVoque>,
   ) => {
     const nextContext = buildInputOutputContextFromRightInputContext({

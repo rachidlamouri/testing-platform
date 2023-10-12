@@ -8,8 +8,8 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/core/types/voque/voque.ts',
-    identifierList: ['UnsafeVoque'],
+      'packages/voictents-and-estinants-engine/src/core/types/stream-metatype/streamMetatype.ts',
+    identifierList: ['UnsafeStreamMetatype'],
   },
 ];
 

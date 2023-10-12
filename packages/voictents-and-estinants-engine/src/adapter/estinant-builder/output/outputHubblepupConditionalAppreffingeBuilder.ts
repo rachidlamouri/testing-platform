@@ -1,5 +1,5 @@
 import { Item } from '../../../core/types/hubblepup/hubblepup';
-import { GenericVoque } from '../../../core/types/voque/voque';
+import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { Predicate } from '../../../package-agnostic-utilities/function/predicate';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
@@ -21,20 +21,20 @@ type EmptyAdaptedRightInputVickenTuple = [];
 
 type NextAdaptedOutputVickenTuple<
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
-  TOutputVoque extends GenericVoque,
+  TOutputVoque extends GenericStreamMetatype,
 > = [
   ...TAdaptedOutputVickenTuple,
-  AdaptedOutputVicken<TOutputVoque, TOutputVoque['hubblepupPelue']>,
+  AdaptedOutputVicken<TOutputVoque, TOutputVoque['itemEggStreamable']>,
 ];
 
 type PartialOutputAppreffinge<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
-  TOutputVoque extends GenericVoque,
+  TOutputVoque extends GenericStreamMetatype,
 > = {
-  gepp: TOutputVoque['gepp'];
+  gepp: TOutputVoque['collectionId'];
   pinbe: Predicate<
     TAdaptedLeftInputVicken['pinbetunfInput'],
-    TOutputVoque['hubblepupPelue']
+    TOutputVoque['itemEggStreamable']
   >;
 };
 
@@ -47,7 +47,7 @@ type PartialOutputAppreffinge<
 type OutputHubblepupConditionalAppreffingeBuilder<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
-> = <TOutputVoque extends GenericVoque>(
+> = <TOutputVoque extends GenericStreamMetatype>(
   partialOutputAppreffinge: PartialOutputAppreffinge<
     TAdaptedLeftInputVicken,
     TOutputVoque
@@ -78,7 +78,7 @@ export const buildOutputHubblepupConditionalAppreffingeBuilder = <
   const buildOutputHubblepupConditionalAppreffinge: OutputHubblepupConditionalAppreffingeBuilder<
     TAdaptedLeftInputVicken,
     TAdaptedOutputVickenTuple
-  > = <TOutputVoque extends GenericVoque>(
+  > = <TOutputVoque extends GenericStreamMetatype>(
     partialOutputAppreffinge: PartialOutputAppreffinge<
       TAdaptedLeftInputVicken,
       TOutputVoque
