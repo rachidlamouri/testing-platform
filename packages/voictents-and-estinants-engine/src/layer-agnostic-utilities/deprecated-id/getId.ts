@@ -5,6 +5,6 @@
  *
  *  @readableName getId
  */
-export const getZorn = (partList: string[]): string => {
+export const getId = (partList: string[]): string => {
   return partList.join(':');
 };

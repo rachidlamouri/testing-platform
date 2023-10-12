@@ -37,7 +37,7 @@ export const getEngineEstinantMetadataEntry = buildEstinant({
   })
   .onPinbe((relationship, [engineEstinant]) => {
     const entry = new DirectedGraphMetadataEntryInstance({
-      elementId: engineEstinant.id,
+      elementId: engineEstinant.digestibleId,
       rootGraphLocator: relationship.rootGraphLocator,
       metadata: {
         title: engineEstinant.estinantName,

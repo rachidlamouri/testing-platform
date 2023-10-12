@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import { getVoictentResourceLocator } from '../../../layer-agnostic-utilities/deprecated-zorn/getVoictentResourceLocator';
+import { getCollectionResourceLocator } from '../../../layer-agnostic-utilities/deprecated-id/getCollectionResourceLocator';
 import { normalizeFilePathForFileName } from '../../../package-agnostic-utilities/file/normalizeFilePathForFileName';
 import {
   ProgramFileCache,
@@ -95,7 +95,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
         }
       })(lintSource);
     } else {
-      zorn = getVoictentResourceLocator([
+      zorn = getCollectionResourceLocator([
         hubblepupPelue.reporterLocator.name,
         hubblepupPelue.name,
         hubblepupPelue.sourceLocator?.filePath ?? '',

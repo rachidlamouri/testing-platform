@@ -24,7 +24,7 @@ export const getTopLevelEngineProgramMetadataEntries = buildEstinant({
   })
   .onPinbe((engineProgram) => {
     const programEntry = new DirectedGraphMetadataEntryInstance({
-      elementId: engineProgram.id,
+      elementId: engineProgram.digestibleId,
       rootGraphLocator: engineProgram.locator.rootGraphLocator,
       metadata: {
         title: engineProgram.programName,

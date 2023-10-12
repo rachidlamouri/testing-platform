@@ -1,5 +1,5 @@
 import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
-import { getZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
+import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
@@ -109,7 +109,7 @@ export const getEngineEstinantGraphElements = buildEstinant({
           rootGraphLocator,
           parentId: estinantInputSubgraph.id,
           localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
-            distinguisher: getZorn([engineEstinant.estinantName, label]),
+            distinguisher: getId([engineEstinant.estinantName, label]),
           }),
         }),
         inputAttributeByKey: {

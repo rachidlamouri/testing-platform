@@ -142,7 +142,7 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
       .filter((engineEstinant) => engineEstinant.outputList.length === 0)
       .map((engineEstinant) => {
         const edge = new DirectedGraphEdge2Instance({
-          tailId: engineEstinant.id,
+          tailId: engineEstinant.digestibleId,
           headId: engineProgram.locator.endingNodeId,
           rootGraphLocator,
         });

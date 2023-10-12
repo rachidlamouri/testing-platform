@@ -52,7 +52,7 @@ export const getOutputEdge = buildEstinant({
     }
 
     const edge = new DirectedGraphEdge2Instance({
-      tailId: engineEstinant.id,
+      tailId: engineEstinant.digestibleId,
       headId: estinantOutput.voqueLocator.id,
       rootGraphLocator: relationship.rootGraphLocator,
     });

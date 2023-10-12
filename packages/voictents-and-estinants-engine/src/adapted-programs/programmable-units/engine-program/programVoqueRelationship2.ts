@@ -3,7 +3,7 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
-import { getZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
+import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
 
@@ -35,10 +35,7 @@ export const { ProgramVoqueRelationship2Instance } =
     ProgramVoqueRelationship2Prototype
   >({
     zorn: (relationship) => {
-      return getZorn([
-        relationship.voqueLocator.zorn,
-        relationship.programName,
-      ]);
+      return getId([relationship.voqueLocator.zorn, relationship.programName]);
     },
   });
 

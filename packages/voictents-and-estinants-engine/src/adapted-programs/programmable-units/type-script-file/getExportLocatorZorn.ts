@@ -1,4 +1,4 @@
-import { getZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
+import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import {
   GenericComplexIdTemplate,
   ComplexId,
@@ -16,7 +16,7 @@ type ExportLocator = {
  * @readableName getExportLocatorId
  */
 export const getExportLocatorZorn = (locator: ExportLocator): string => {
-  return getZorn([locator.filePath, locator.identifierName]);
+  return getId([locator.filePath, locator.identifierName]);
 };
 
 const EXPORT_LOCATOR_ZORN_TEMPLATE = [

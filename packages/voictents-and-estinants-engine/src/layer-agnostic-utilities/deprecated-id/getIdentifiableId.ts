@@ -1,5 +1,5 @@
 import { getTextDigest } from '../../package-agnostic-utilities/string/getTextDigest';
-import { Zornable } from './zornable';
+import { Identifiable } from './identifiable';
 
 /**
  * An outdated pattern for getting an alphanumeric id from a string id. Use
@@ -9,6 +9,6 @@ import { Zornable } from './zornable';
  *
  * @readableName getDigestibleId
  */
-export const getZornableId = (zornable: Zornable): string => {
-  return getTextDigest(zornable.zorn);
+export const getIdentifiableId = (identifiable: Identifiable): string => {
+  return getTextDigest(identifiable.id);
 };

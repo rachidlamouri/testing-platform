@@ -7,7 +7,7 @@ const DELIMITER = ':' as const;
  *
  * @readableName getCollectionResourceLocator
  */
-export const getVoictentResourceLocator = (partList: string[]): string => {
+export const getCollectionResourceLocator = (partList: string[]): string => {
   if (partList.some((part) => part.includes(DELIMITER))) {
     throw Error(
       `Voictent resource locator parts cannot contain delimiter "${DELIMITER}"; Received: [${partList.join(

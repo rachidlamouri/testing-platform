@@ -4,7 +4,7 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
-import { getZornableId } from '../../../layer-agnostic-utilities/deprecated-zorn/getZornableId';
+import { getIdentifiableId } from '../../../layer-agnostic-utilities/deprecated-id/getIdentifiableId';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
 import { TypeScriptFile } from '../type-script-file/typeScriptFile';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
@@ -25,8 +25,8 @@ type BaseEngineProgramLocator3 = {
 };
 
 type EngineProgramLocator3Prototype = {
-  get zorn(): string;
   get id(): string;
+  get digestibleId(): string;
   get startingSubgraphId(): string;
   get startingNodeId(): string;
   get endingSubgraphId(): string;
@@ -49,8 +49,8 @@ export const { EngineProgramLocator3Instance } =
     BaseEngineProgramLocator3,
     EngineProgramLocator3Prototype
   >({
-    zorn: getEngineProgramZorn,
-    id: getZornableId,
+    id: getEngineProgramZorn,
+    digestibleId: getIdentifiableId,
     startingSubgraphId: (locator) => {
       return getTextDigest(`start-subgraph | ${locator.programName}`);
     },

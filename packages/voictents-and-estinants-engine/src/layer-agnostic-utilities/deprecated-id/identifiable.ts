@@ -11,21 +11,24 @@ import { Item } from '../../core/types/hubblepup/hubblepup';
  *
  * @readableName Identifiable
  */
-export type Zornable = {
-  zorn: string;
+export type Identifiable = {
+  id: string;
 };
 
-type ZornableIndexByName = Merge<AbstractSerializableIndexByName, Zornable>;
+type IdentifiableIndexByName = Merge<
+  AbstractSerializableIndexByName,
+  Identifiable
+>;
 
-export type ZornableVoque<
-  TGepp extends CollectionId,
-  THubblepupPelue extends Item,
-  THubblepupPelie extends Item,
-  TVoictentPelie,
+export type IdentifiableStreamMetatype<
+  TCollectionId extends CollectionId,
+  TItemEgg extends Item,
+  TItem extends Item,
+  TCollection,
 > = StreamMetatype<
-  TGepp,
-  THubblepupPelue,
-  THubblepupPelie,
-  ZornableIndexByName,
-  TVoictentPelie
+  TCollectionId,
+  TItemEgg,
+  TItem,
+  IdentifiableIndexByName,
+  TCollection
 >;

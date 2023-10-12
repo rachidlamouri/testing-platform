@@ -3,7 +3,7 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
-import { getZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
+import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import { RootGraphLocator } from './directed-graph/rootGraphLocator';
 import { DirectedGraphMetadata } from './directedGraphMetadataById';
 
@@ -31,7 +31,7 @@ export const { DirectedGraphMetadataEntryInstance } =
     DirectedGraphMetadataEntryPrototype
   >({
     zorn: (metadataEntry) => {
-      return getZorn([
+      return getId([
         metadataEntry.rootGraphLocator.distinguisher,
         metadataEntry.elementId,
       ]);

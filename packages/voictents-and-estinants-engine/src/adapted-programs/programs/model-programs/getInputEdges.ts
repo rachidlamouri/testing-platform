@@ -60,7 +60,7 @@ export const getInputEdges = buildEstinant({
 
     const outgoingEdge = new DirectedGraphEdge2Instance({
       tailId: estinantInput.id,
-      headId: engineEstinant.id,
+      headId: engineEstinant.digestibleId,
       rootGraphLocator: relationship.rootGraphLocator,
     });
 

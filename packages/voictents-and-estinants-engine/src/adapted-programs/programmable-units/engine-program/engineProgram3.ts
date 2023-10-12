@@ -3,7 +3,7 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
-import { getZornableId } from '../../../layer-agnostic-utilities/deprecated-zorn/getZornableId';
+import { getIdentifiableId } from '../../../layer-agnostic-utilities/deprecated-id/getIdentifiableId';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
 import { EngineEstinant3 } from './engineEstinant3';
@@ -22,8 +22,8 @@ type BaseEngineProgram3 = {
 };
 
 type EngineProgram3Prototype = {
-  get zorn(): string;
   get id(): string;
+  get digestibleId(): string;
   get rootGraphLocator(): RootGraphLocator;
 };
 
@@ -40,8 +40,8 @@ type EngineProgram3 = ObjectWithPrototype<
 export const { EngineProgram3Instance } = buildConstructorFunctionWithName(
   'EngineProgram3Instance',
 )<BaseEngineProgram3, EngineProgram3Prototype>({
-  zorn: getEngineProgramZorn,
-  id: getZornableId,
+  id: getEngineProgramZorn,
+  digestibleId: getIdentifiableId,
   rootGraphLocator: (engineProgram) => {
     return engineProgram.locator.rootGraphLocator;
   },

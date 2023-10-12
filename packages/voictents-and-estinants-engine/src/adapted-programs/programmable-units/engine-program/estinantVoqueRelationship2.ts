@@ -3,7 +3,7 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
-import { getZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
+import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
 
@@ -34,7 +34,7 @@ export const { EstinantVoqueRelationship2Instance } =
     EstinantVoqueRelationship2Prototype
   >({
     zorn: (relationship) => {
-      return getZorn([
+      return getId([
         relationship.voqueLocator.zorn,
         relationship.estinantLocator.zorn.forHuman,
         relationship.distinguisher,

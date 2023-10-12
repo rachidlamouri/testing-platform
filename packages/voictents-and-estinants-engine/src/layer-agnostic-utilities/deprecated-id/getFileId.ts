@@ -1,4 +1,4 @@
-import { getZorn } from './getZorn';
+import { getId } from './getId';
 
 type FileLocator = {
   filePath: string;
@@ -11,6 +11,6 @@ type FileLocator = {
  *
  * @readableName getFileId
  */
-export const getFileZorn = (locator: FileLocator): string => {
-  return getZorn([locator.filePath]);
+export const getFileId = (locator: FileLocator): string => {
+  return getId([locator.filePath]);
 };

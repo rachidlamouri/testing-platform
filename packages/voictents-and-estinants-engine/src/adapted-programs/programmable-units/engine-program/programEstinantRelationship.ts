@@ -3,7 +3,7 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
-import { getZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
+import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 
@@ -34,7 +34,7 @@ export const { ProgramEstinantRelationshipInstance } =
     ProgramEstinantRelationshipPrototype
   >({
     zorn: (relationship) => {
-      return getZorn([
+      return getId([
         relationship.estinantLocator.zorn.forHuman,
         relationship.programName,
       ]);

@@ -5,7 +5,7 @@ import {
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
-import { getZornableId } from '../../../layer-agnostic-utilities/deprecated-zorn/getZornableId';
+import { getIdentifiableId } from '../../../layer-agnostic-utilities/deprecated-id/getIdentifiableId';
 import { EngineEstinantInput2 } from './input-output/engineEstinantInput2';
 import { EngineEstinantOutput2 } from './input-output/engineEstinantOutput2';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
@@ -22,8 +22,8 @@ type BaseEngineEstinant3 = {
 };
 
 type EngineEstinant3Prototype = {
-  get zorn(): string;
   get id(): string;
+  get digestibleId(): string;
   get allVoqueLocatorList(): EngineVoqueLocator2[];
 };
 
@@ -40,8 +40,8 @@ export type EngineEstinant3 = ObjectWithPrototype<
 export const { EngineEstinant3Instance } = buildConstructorFunctionWithName(
   'EngineEstinant3Instance',
 )<BaseEngineEstinant3, EngineEstinant3Prototype>({
-  zorn: getExportLocatorZorn,
-  id: getZornableId,
+  id: getExportLocatorZorn,
+  digestibleId: getIdentifiableId,
   allVoqueLocatorList: (engineEstinant) => {
     const list = [...engineEstinant.inputList, ...engineEstinant.outputList]
       .map((inputOutput) => {

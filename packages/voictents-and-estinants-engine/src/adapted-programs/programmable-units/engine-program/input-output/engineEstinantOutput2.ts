@@ -4,7 +4,7 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getTextDigest } from '../../../../package-agnostic-utilities/string/getTextDigest';
-import { getZorn } from '../../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
+import { getId } from '../../../../layer-agnostic-utilities/deprecated-id/getId';
 import { EngineEstinantLocator2 } from '../engineEstinantLocator2';
 import { EngineVoqueLocator2 } from '../engineVoqueLocator2';
 
@@ -37,7 +37,7 @@ export const { EstinantOutput2Instance } = buildConstructorFunctionWithName(
   'EstinantOutput2Instance',
 )<BaseEstinantOutput2, EstinantOutput2Prototype>({
   zorn: (output) => {
-    return getZorn([
+    return getId([
       'output',
       output.voictentName,
       output.estinantLocator.zorn.forHuman,

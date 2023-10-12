@@ -2,8 +2,8 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
-import { getFileZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getFileZorn';
-import { getZornableId } from '../../../layer-agnostic-utilities/deprecated-zorn/getZornableId';
+import { getFileId } from '../../../layer-agnostic-utilities/deprecated-id/getFileId';
+import { getIdentifiableId } from '../../../layer-agnostic-utilities/deprecated-id/getIdentifiableId';
 import {
   RootGraphLocator,
   RootGraphLocatorInstance,
@@ -15,8 +15,8 @@ type BasePartialEngineProgramLocator2 = {
 };
 
 type EngineProgramLocator2Prototype = {
-  get zorn(): string;
   get id(): string;
+  get digestibleId(): string;
   get rootGraphLocator(): RootGraphLocator;
 };
 
@@ -31,20 +31,20 @@ type PartialEngineProgramLocator2 = ObjectWithPrototype<
   EngineProgramLocator2Prototype
 >;
 
-export const getEngineProgramZorn = getFileZorn;
+export const getEngineProgramZorn = getFileId;
 
 export const { PartialEngineProgramLocator2Instance } =
   buildConstructorFunctionWithName('PartialEngineProgramLocator2Instance')<
     BasePartialEngineProgramLocator2,
     EngineProgramLocator2Prototype
   >({
-    zorn: getEngineProgramZorn,
-    id: getZornableId,
+    id: getEngineProgramZorn,
+    digestibleId: getIdentifiableId,
     rootGraphLocator: (
       locator: PartialEngineProgramLocator2,
     ): RootGraphLocator => {
       return new RootGraphLocatorInstance({
-        idOverride: locator.id,
+        idOverride: locator.digestibleId,
         distinguisher: locator.programName,
       });
     },
