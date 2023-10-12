@@ -129,6 +129,19 @@ const oops = (): void => {
   beep();
 };
 
+const stageAllChanges = (): void => {
+  runCommand({
+    title: 'Stage All Changes',
+    command: [
+      // keep multiline
+      'git',
+      'add',
+      '.',
+    ],
+    errorCode: 6,
+  });
+};
+
 // eslint-disable-next-line no-constant-condition
 while (true) {
   runCommand({
@@ -163,16 +176,7 @@ while (true) {
     continue;
   }
 
-  runCommand({
-    title: 'Stage All Changes',
-    command: [
-      // keep multiline
-      'git',
-      'add',
-      '.',
-    ],
-    errorCode: 6,
-  });
+  stageAllChanges();
 
   const commitMessage = progressLog.read();
 
@@ -203,11 +207,26 @@ while (true) {
     title: 'Lint',
     command: [
       // keep multiline
-      'npm',
-      'run',
-      'lint:ts:all',
+      'npx',
+      'eslint',
+      '--fix',
+      '--color',
+      '--max-warnings',
+      '0',
+      '--ext',
+      'ts,tsx,js',
+      '.',
     ],
     errorCode: 4,
+  });
+
+  stageAllChanges();
+
+  runCommand({
+    title: 'Ammend Commit',
+    command: ['git', 'commit', '--amend', '--no-edit'],
+    errorCode: 23,
+    continueOnError: true,
   });
 
   runCommand({
