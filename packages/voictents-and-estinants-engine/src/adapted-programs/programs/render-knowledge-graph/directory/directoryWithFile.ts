@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { Directory } from '../../../programmable-units/file/directory';
 
 /**
@@ -10,7 +10,8 @@ export const DIRECTORY_WITH_FILE_GEPP = 'directory-with-file';
 
 type DirectoryWithFileGepp = typeof DIRECTORY_WITH_FILE_GEPP;
 
-export type DirectoryWithFileVoque = InMemoryOdeshin2ListVoque<
-  DirectoryWithFileGepp,
-  DirectoryWithFile
->;
+export type DirectoryWithFileVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    DirectoryWithFileGepp,
+    DirectoryWithFile
+  >;

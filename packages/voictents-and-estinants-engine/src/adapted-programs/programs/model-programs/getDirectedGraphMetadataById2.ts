@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { mutateDirectedGraphMetadataById } from '../../programmable-units/graph-visualization/directed-graph/mutateGraphLikeElementListOrder';
 import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
@@ -14,16 +14,16 @@ import {
  * Aggregates directed graph metadata entries into a single object,
  * so that interactive HTML files can lookup metadata by graph node id
  */
-export const getDirectedGraphMetadataById2 = buildEstinant({
+export const getDirectedGraphMetadataById2 = buildProgrammedTransform({
   name: 'getDirectedGraphMetadataById2',
 })
   .fromVoictent2<DirectedGraphMetadataEntryVoque>({
-    gepp: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
+    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
   })
   .toHubblepupTuple2<DirectedGraphMetadataByIdVoque>({
-    gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+    collectionId: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   })
-  .onPinbe((entryList) => {
+  .onTransform((entryList) => {
     const metadataByIdByRootGraphDebugName = new Map<
       string,
       DirectedGraphMetadataById

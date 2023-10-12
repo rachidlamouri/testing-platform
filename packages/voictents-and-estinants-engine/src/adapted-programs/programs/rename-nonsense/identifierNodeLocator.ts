@@ -1,5 +1,5 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { AstNodeLocator } from './astNodeLocator';
 
 /**
@@ -11,7 +11,8 @@ export const IDENTIFIER_NODE_LOCATOR_GEPP = 'identifier-node-locator';
 
 type IdentifierNodeLocatorGepp = typeof IDENTIFIER_NODE_LOCATOR_GEPP;
 
-export type IdentifierNodeLocatorVoque = InMemoryOdeshin2ListVoque<
-  IdentifierNodeLocatorGepp,
-  IdentifierNodeLocator
->;
+export type IdentifierNodeLocatorVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    IdentifierNodeLocatorGepp,
+    IdentifierNodeLocator
+  >;

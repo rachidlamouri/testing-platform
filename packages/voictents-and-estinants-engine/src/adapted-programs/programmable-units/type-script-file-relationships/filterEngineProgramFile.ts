@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
@@ -21,11 +21,11 @@ import {
  * Filters the collection of TypeScript files to those that are an engine program.
  * A TypeScript file is considered an engine program if it imports the engine.
  */
-export const filterEngineProgramFile = buildEstinant({
+export const filterEngineProgramFile = buildProgrammedTransform({
   name: 'filterEngineProgramFile',
 })
-  .fromHubblepup2<TypeScriptFileVoque>({
-    gepp: TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<TypeScriptFileVoque>({
+    collectionId: TYPE_SCRIPT_FILE_GEPP,
   })
   .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
@@ -36,9 +36,9 @@ export const filterEngineProgramFile = buildEstinant({
     gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
   })
   .toHubblepupTuple2<EngineProgramFileVoque>({
-    gepp: ENGINE_PROGRAM_FILE_GEPP,
+    collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .onPinbe(
+  .onTransform(
     (
       typeScriptFile,
       [{ list: importList }],

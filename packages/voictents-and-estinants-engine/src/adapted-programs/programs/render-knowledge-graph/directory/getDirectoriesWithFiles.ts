@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   DIRECTORY_GEPP,
   DirectoryVoque,
@@ -15,19 +15,19 @@ import {
 /**
  * Filters the set of directories to just those with TypeScript files
  */
-export const getDirectoriesWithFiles = buildEstinant({
+export const getDirectoriesWithFiles = buildProgrammedTransform({
   name: 'getDirectoriesWithFiles',
 })
   .fromVoictent2<DirectoryVoque>({
-    gepp: DIRECTORY_GEPP,
+    collectionId: DIRECTORY_GEPP,
   })
   .andFromVoictent2<TypeScriptFileVoque>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
   })
   .toHubblepupTuple2<DirectoryWithFileVoque>({
-    gepp: DIRECTORY_WITH_FILE_GEPP,
+    collectionId: DIRECTORY_WITH_FILE_GEPP,
   })
-  .onPinbe((directoryVoictent, typeScriptFileVoictent) => {
+  .onTransform((directoryVoictent, typeScriptFileVoictent) => {
     const mutableDirectoryStateByDirectoryPath = new Map(
       directoryVoictent.list.map((directory) => {
         const mutableState = {

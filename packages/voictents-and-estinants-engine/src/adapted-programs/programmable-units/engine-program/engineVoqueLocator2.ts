@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -55,7 +55,8 @@ export const ENGINE_VOQUE_LOCATOR_2_GEPP = 'engine-voque-locator-2';
 
 type EngineVoqueLocatorGepp = typeof ENGINE_VOQUE_LOCATOR_2_GEPP;
 
-export type EngineVoqueLocator2Voque = InMemoryOdeshin2ListVoque<
-  EngineVoqueLocatorGepp,
-  EngineVoqueLocator2
->;
+export type EngineVoqueLocator2Voque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    EngineVoqueLocatorGepp,
+    EngineVoqueLocator2
+  >;

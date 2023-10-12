@@ -16,7 +16,7 @@ import {
   IdentifiableProperty,
 } from '../../../package-agnostic-utilities/type-script-ast/isObjectExpressionWithIdentifiableProperties';
 import { isStringLiteral } from '../../../package-agnostic-utilities/type-script-ast/isStringLiteral';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
   EngineEstinantBuildAddMetadataForSerializationLocator,
@@ -609,14 +609,15 @@ const getAdaptedEstinant = ({
     });
 
   if (
-    parsedFlattenedCallExpressionList[0].functionName !== buildEstinant.name
+    parsedFlattenedCallExpressionList[0].functionName !==
+    buildProgrammedTransform.name
   ) {
     return {
       errorList: [
         {
           name: `invalid-call-expression-chain-start`,
           error: new Error(
-            `Call expression chain does not start with "${buildEstinant.name}"`,
+            `Call expression chain does not start with "${buildProgrammedTransform.name}"`,
           ),
           reporterLocator,
           sourceLocator: {
@@ -841,11 +842,11 @@ const getAdaptedEstinant = ({
  *
  * @readableName getProgrammedTransformModel
  */
-export const getEngineEstinant3 = buildEstinant({
+export const getEngineEstinant3 = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<EngineEstinantLocator2Voque>({
-    gepp: ENGINE_ESTINANT_LOCATOR_2_GEPP,
+  .fromItem2<EngineEstinantLocator2Voque>({
+    collectionId: ENGINE_ESTINANT_LOCATOR_2_GEPP,
   })
   .andFromHubblepupTuple2<
     FileCommentedProgramBodyDeclarationGroupVoque,
@@ -861,21 +862,21 @@ export const getEngineEstinant3 = buildEstinant({
     croard: (rightInput) => rightInput.item.zorn,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<EngineEstinant3Voque>({
-    gepp: ENGINE_ESTINANT_3_GEPP,
+    collectionId: ENGINE_ESTINANT_3_GEPP,
   })
   .toHubblepupTuple2<EngineEstinantInput2Voque>({
-    gepp: ESTINANT_INPUT_2_GEPP,
+    collectionId: ESTINANT_INPUT_2_GEPP,
   })
   .toHubblepupTuple2<EngineEstinantOutput2Voque>({
-    gepp: ESTINANT_OUTPUT_2_GEPP,
+    collectionId: ESTINANT_OUTPUT_2_GEPP,
   })
   .toHubblepupTuple2<EstinantVoqueRelationship2Voque>({
-    gepp: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
+    collectionId: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
   })
-  .onPinbe(
+  .onTransform(
     (estinantLocator, [bodyDeclarationGroup], [{ list: importList }]) => {
       const importByIdentifierName = new Map(
         importList

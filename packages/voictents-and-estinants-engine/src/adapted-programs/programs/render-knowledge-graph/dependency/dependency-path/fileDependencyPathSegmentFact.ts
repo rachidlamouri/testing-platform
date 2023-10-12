@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -118,7 +118,8 @@ export const FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP =
 type FileDependencyPathSegmentFactGepp =
   typeof FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP;
 
-export type FileDependencyPathSegmentFactVoque = InMemoryOdeshin2ListVoque<
-  FileDependencyPathSegmentFactGepp,
-  FileDependencyPathSegmentFact
->;
+export type FileDependencyPathSegmentFactVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    FileDependencyPathSegmentFactGepp,
+    FileDependencyPathSegmentFact
+  >;

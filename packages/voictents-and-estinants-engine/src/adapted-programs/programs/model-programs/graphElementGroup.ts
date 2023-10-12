@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -35,7 +35,8 @@ export const GRAPH_ELEMENT_GROUP_GEPP = 'graph-element-group';
 
 type GraphElementGroupGepp = typeof GRAPH_ELEMENT_GROUP_GEPP;
 
-export type GraphElementGroupVoque = InMemoryOdeshin2ListVoque<
-  GraphElementGroupGepp,
-  GraphElementGroup
->;
+export type GraphElementGroupVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    GraphElementGroupGepp,
+    GraphElementGroup
+  >;

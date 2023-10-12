@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -52,7 +52,8 @@ export const ESTINANT_OUTPUT_2_GEPP = 'estinant-output-2';
 
 type EstinantOutput2Gepp = typeof ESTINANT_OUTPUT_2_GEPP;
 
-export type EngineEstinantOutput2Voque = InMemoryOdeshin2ListVoque<
-  EstinantOutput2Gepp,
-  EngineEstinantOutput2
->;
+export type EngineEstinantOutput2Voque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    EstinantOutput2Gepp,
+    EngineEstinantOutput2
+  >;

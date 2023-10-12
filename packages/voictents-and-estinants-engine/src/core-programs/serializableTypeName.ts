@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * A data structure to snapshot when testing if a utility can detect the right
@@ -17,7 +17,8 @@ export const SERIALIZABLE_TYPE_NAME_GEPP = 'serializable-type-name';
 
 type SerializableTypeNameGepp = typeof SERIALIZABLE_TYPE_NAME_GEPP;
 
-export type SerializableTypeNameVoque = InMemoryOdeshin2ListVoque<
-  SerializableTypeNameGepp,
-  SerializableTypeName
->;
+export type SerializableTypeNameVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    SerializableTypeNameGepp,
+    SerializableTypeName
+  >;

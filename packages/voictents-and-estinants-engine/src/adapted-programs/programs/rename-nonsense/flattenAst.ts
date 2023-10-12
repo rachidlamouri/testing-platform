@@ -1,5 +1,5 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   FILE_AST_LIST_GEPP,
   FileAstListInstance,
@@ -76,16 +76,16 @@ const flattenAstRoot = (rootNode: TSESTree.Node): AstListEntry[] => {
  * Traverses a TypeScript AST to enumerate all nodes and their ast paths in one
  * list
  */
-export const flattenAst = buildEstinant({
+export const flattenAst = buildProgrammedTransform({
   name: 'flattenAst',
 })
-  .fromHubblepup2<ParsedTypeScriptFileVoque>({
-    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<ParsedTypeScriptFileVoque>({
+    collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toHubblepup2<FileAstListVoque>({
-    gepp: FILE_AST_LIST_GEPP,
+  .toItem2<FileAstListVoque>({
+    collectionId: FILE_AST_LIST_GEPP,
   })
-  .onPinbe((parsedFile) => {
+  .onTransform((parsedFile) => {
     const flattenedAst = flattenAstRoot(parsedFile.program);
 
     return new FileAstListInstance({

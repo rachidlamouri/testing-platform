@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -51,7 +51,7 @@ export const ENGINE_PROGRAM_3_GEPP = 'engine-program-3';
 
 type EngineProgram3Gepp = typeof ENGINE_PROGRAM_3_GEPP;
 
-export type EngineProgram3Voque = InMemoryOdeshin2ListVoque<
+export type EngineProgram3Voque = InMemoryIdentifiableItem2ListStreamMetatype<
   EngineProgram3Gepp,
   EngineProgram3
 >;

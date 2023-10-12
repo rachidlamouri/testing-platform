@@ -1,5 +1,5 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   EngineEstinant3Voque,
   ENGINE_ESTINANT_3_GEPP,
@@ -37,11 +37,11 @@ import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
  *
  * @readableName getProgramModel
  */
-export const getEngineProgram3 = buildEstinant({
+export const getEngineProgram3 = buildProgrammedTransform({
   name: 'getEngineProgram3',
 })
-  .fromHubblepup2<EngineProgramLocator3Voque>({
-    gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+  .fromItem2<EngineProgramLocator3Voque>({
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
   .andFromHubblepupTuple2<EngineEstinant3Voque, Tuple<OdeshinZorn>>({
     gepp: ENGINE_ESTINANT_3_GEPP,
@@ -54,19 +54,19 @@ export const getEngineProgram3 = buildEstinant({
       return engineEstinant.item.locator.zorn;
     },
   })
-  .toHubblepup2<EngineProgram3Voque>({
-    gepp: ENGINE_PROGRAM_3_GEPP,
+  .toItem2<EngineProgram3Voque>({
+    collectionId: ENGINE_PROGRAM_3_GEPP,
   })
   .toHubblepupTuple2<ProgramVoqueRelationship2Voque>({
-    gepp: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
+    collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .toHubblepupTuple2<ProgramEstinantInputRelationshipVoque>({
-    gepp: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
+    collectionId: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
   })
   .toHubblepupTuple2<ProgramEstinantOutputRelationshipVoque>({
-    gepp: PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
+    collectionId: PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
   })
-  .onPinbe((engineProgramLocator, estinantList) => {
+  .onTransform((engineProgramLocator, estinantList) => {
     const { rootGraphLocator } = engineProgramLocator;
 
     const voqueLocatorByZorn = new Map(

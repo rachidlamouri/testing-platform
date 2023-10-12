@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   STRING_LITERAL_NODE_LOCATOR_GEPP,
   StringLiteralNodeLocator,
@@ -23,16 +23,16 @@ const isStringLiteralLocator = (
 /**
  * Pipes string literal ast node locators into their own collection
  */
-export const filterStringLiteral = buildEstinant({
+export const filterStringLiteral = buildProgrammedTransform({
   name: 'filterStringLiteral',
 })
-  .fromHubblepup2<AstNodeLocatorVoque>({
-    gepp: AST_NODE_LOCATOR_GEPP,
+  .fromItem2<AstNodeLocatorVoque>({
+    collectionId: AST_NODE_LOCATOR_GEPP,
   })
   .toHubblepupTuple2<StringLiteralNodeLocatorVoque>({
-    gepp: STRING_LITERAL_NODE_LOCATOR_GEPP,
+    collectionId: STRING_LITERAL_NODE_LOCATOR_GEPP,
   })
-  .onPinbe((nodeLocator) => {
+  .onTransform((nodeLocator) => {
     if (isStringLiteralLocator(nodeLocator)) {
       return [nodeLocator];
     }

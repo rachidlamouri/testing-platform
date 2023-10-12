@@ -1,13 +1,13 @@
 import chalk from 'chalk';
 import { posix } from 'path';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
-  LINT_ASSERTION_GEPP,
+  LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,
-  LintAssertionVoque,
+  LintAssertionStreamMetatype,
 } from '../linting/lintAssertion';
 import { EmptyMessageContext, TypedRule } from '../linting/rule';
-import { EstinantSourceInstance } from '../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import { CommentTagId } from './comment/commentTagId';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
@@ -21,9 +21,9 @@ const ESTINANT_NAME = 'assertTypeScriptFileHasSensibleName' as const;
 const typeScriptFileHasSensibleNameRule = new TypedRule<EmptyMessageContext>({
   name: 'type-script-file-has-sensible-name',
   description: `TypeScript files must have a name without nonsense words, or a @${CommentTagId.ReadableName} annotation in their canonical comment with a readable name.`,
-  source: new EstinantSourceInstance({
+  source: new ProgrammedTransformSourceInstance({
     filePath: posix.relative('', __filename),
-    estinantName: ESTINANT_NAME,
+    programmedTransformName: ESTINANT_NAME,
   }),
   getErrorMessage: (): string => {
     const emphasizedTag = chalk.cyan(`@${CommentTagId.ReadableName}`);
@@ -36,16 +36,16 @@ const typeScriptFileHasSensibleNameRule = new TypedRule<EmptyMessageContext>({
  * Produces an assertion based on whether or not a TypeScript file has a
  * sensible name or a sensible name annotation
  */
-export const assertTypeScriptFileHasSensibleName = buildEstinant({
+export const assertTypeScriptFileHasSensibleName = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   })
-  .toHubblepup2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
+  .toItem2<LintAssertionStreamMetatype>({
+    collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .onPinbe((commentGroup) => {
+  .onTransform((commentGroup) => {
     return new LintAssertion({
       rule: typeScriptFileHasSensibleNameRule,
       lintSource: new FileSourceInstance({

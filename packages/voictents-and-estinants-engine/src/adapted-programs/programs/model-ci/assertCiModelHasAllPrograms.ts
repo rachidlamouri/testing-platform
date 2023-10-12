@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { CI_MODEL_GEPP, CI_MODEL_ZORN, CiModelVoque } from './ciModel';
 import {
   PROGRAM_ERROR_GEPP,
@@ -31,11 +31,11 @@ const reporterLocator: ReportingLocator = {
  * Produces a ProgramError if the CI model does not contain a ProgramTest for
  * each engine program identified by the engine program locator
  */
-export const assertCiModelHasAllPrograms = buildEstinant({
+export const assertCiModelHasAllPrograms = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
   .fromVoictent2<EngineProgramLocator3Voque>({
-    gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
   .andFromHubblepupTuple2<CiModelVoque, [OdeshinZorn]>({
     // TODO: make a better pattern for singletons
@@ -47,9 +47,9 @@ export const assertCiModelHasAllPrograms = buildEstinant({
     gepp: EXPECTED_PROGRAM_TEST_FILE_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((programLocatorList, [ciModel], expectedTestFileVoictent) => {
+  .onTransform((programLocatorList, [ciModel], expectedTestFileVoictent) => {
     const testFilePathByProgramFilePath = new Map(
       expectedTestFileVoictent.map((expectedTestFile) => {
         return [

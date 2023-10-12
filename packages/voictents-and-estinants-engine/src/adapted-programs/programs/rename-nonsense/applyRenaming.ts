@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { SpawnSyncReturns } from 'child_process';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import {
   DIRECTORY_GEPP,
@@ -44,11 +44,11 @@ type ConfigurationGroup = {
  *
  * The program associated with this transform will have to run multiple times.
  */
-export const applyRenaming = buildEstinant({
+export const applyRenaming = buildProgrammedTransform({
   name: 'applyRenaming',
 })
   .fromVoictent2<DirectoryVoque>({
-    gepp: DIRECTORY_GEPP,
+    collectionId: DIRECTORY_GEPP,
   })
   .andFromVoictent2<FileSystemNodeRenameConfigurationVoque>({
     gepp: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
@@ -56,7 +56,7 @@ export const applyRenaming = buildEstinant({
   .andFromVoictent2<RenameConfigurationVoque>({
     gepp: RENAME_CONFIGURATION_GEPP,
   })
-  .onPinbe(
+  .onTransform(
     (
       directoryVoictent,
       fileSystemNodeConfigurationList,

@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
   ParsedTypeScriptFileVoque,
@@ -39,11 +39,11 @@ const allowedCanonicalVariationDeclarationSuffixSet = [
  *
  * @todo rename this so the file name matches the output collection name
  */
-export const getCommentedProgramBodyDeclarationList = buildEstinant({
+export const getCommentedProgramBodyDeclarationList = buildProgrammedTransform({
   name: 'getCommentedProgramBodyDeclarationList',
 })
-  .fromHubblepup2<ParsedTypeScriptFileVoque>({
-    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<ParsedTypeScriptFileVoque>({
+    collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
   .andFromHubblepupTuple2<TypeScriptFileVoque, [string]>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
@@ -63,10 +63,10 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
       return file.item.filePath;
     },
   })
-  .toHubblepup2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  .toItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   })
-  .onPinbe((parsedTypeScriptFile, [typescriptFile], [commentGroup]) => {
+  .onTransform((parsedTypeScriptFile, [typescriptFile], [commentGroup]) => {
     const normalizedFileName = shishKebab(
       typescriptFile.filePath.name.extensionless,
     );

@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   DIRECTED_GRAPH_ELEMENT_2_GEPP,
   DirectedGraphElement2Voque,
@@ -9,16 +9,16 @@ import { FACT_GEPP, FactVoque } from './fact/fact';
  * Acquires all graph elements (graphs, subgraphs, clusters, nodes, and edges)
  * for the knowlege graph. All "Fact" types should define one graph element.
  */
-export const getAllFactGraphElements = buildEstinant({
+export const getAllFactGraphElements = buildProgrammedTransform({
   name: 'getAllFactGraphElements',
 })
   .fromVoictent2<FactVoque>({
-    gepp: FACT_GEPP,
+    collectionId: FACT_GEPP,
   })
   .toHubblepupTuple2<DirectedGraphElement2Voque>({
-    gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
-  .onPinbe((factVoictent) => {
+  .onTransform((factVoictent) => {
     return factVoictent.graphElementList;
   })
   .assemble();

@@ -1,6 +1,6 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
   EngineProgramFile,
@@ -688,11 +688,11 @@ const getAdaptedEngineProgramLocator = ({
  *
  * @readableName getProgramLocator
  */
-export const getEngineProgramLocator3 = buildEstinant({
+export const getEngineProgramLocator3 = buildProgrammedTransform({
   name: 'getEngineProgramLocator3',
 })
-  .fromHubblepup2<EngineProgramFileVoque>({
-    gepp: ENGINE_PROGRAM_FILE_GEPP,
+  .fromItem2<EngineProgramFileVoque>({
+    collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
   .andFromHubblepupTuple2<
     FileCommentedProgramBodyDeclarationGroupVoque,
@@ -708,15 +708,15 @@ export const getEngineProgramLocator3 = buildEstinant({
     croard: (rightInput) => rightInput.item.zorn,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<EngineProgramLocator3Voque>({
-    gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
   .toHubblepupTuple2<ProgramEstinantRelationshipVoque>({
-    gepp: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
+    collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
   })
-  .onPinbe(
+  .onTransform(
     (
       engineProgramFile,
       [{ list: commentedProgramBodyStatementList }],

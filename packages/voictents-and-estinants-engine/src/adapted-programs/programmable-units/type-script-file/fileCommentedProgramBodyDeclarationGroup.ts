@@ -1,5 +1,5 @@
 import Case from 'case';
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -538,7 +538,7 @@ type FileCommentedProgramBodyDeclarationGroupGepp =
   typeof FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP;
 
 export type FileCommentedProgramBodyDeclarationGroupVoque =
-  InMemoryOdeshin2ListVoque<
+  InMemoryIdentifiableItem2ListStreamMetatype<
     FileCommentedProgramBodyDeclarationGroupGepp,
     FileCommentedProgramBodyDeclarationGroup
   >;

@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -32,7 +32,8 @@ export const COMMON_BOUNDARY_ROOT_GEPP = 'common-boundary-root';
 
 type CommonBoundaryRootGepp = typeof COMMON_BOUNDARY_ROOT_GEPP;
 
-export type CommonBoundaryRootVoque = InMemoryOdeshin2ListVoque<
-  CommonBoundaryRootGepp,
-  CommonBoundaryRoot
->;
+export type CommonBoundaryRootVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    CommonBoundaryRootGepp,
+    CommonBoundaryRoot
+  >;

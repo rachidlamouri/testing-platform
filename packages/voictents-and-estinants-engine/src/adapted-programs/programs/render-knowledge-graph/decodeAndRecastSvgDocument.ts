@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import { builders as b, namedTypes as n } from 'ast-types';
 import * as recast from 'recast';
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   SVG_DOCUMENT_GEPP,
   SvgDocumentVoque,
@@ -130,25 +130,25 @@ export const treeifyDatum = (datum: unknown): TreeifiedDatumNode => {
  * Parses an svg document into an HTML AST and then recasts it to a JSX AST and
  * finally JSX code
  */
-export const decodeAndRecastSvgDocument = buildEstinant({
+export const decodeAndRecastSvgDocument = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<SvgDocumentVoque>({
-    gepp: SVG_DOCUMENT_GEPP,
+  .fromItem2<SvgDocumentVoque>({
+    collectionId: SVG_DOCUMENT_GEPP,
   })
   .andFromVoictent2<FactVoque>({
     gepp: FACT_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<OutputFileVoque>({
-    gepp: OUTPUT_FILE_GEPP,
+    collectionId: OUTPUT_FILE_GEPP,
   })
   .toHubblepupTuple2<AppRendererDelayerVoque>({
-    gepp: APP_RENDERER_DELAYER_GEPP,
+    collectionId: APP_RENDERER_DELAYER_GEPP,
   })
-  .onPinbe((svgDocument, factVoictent) => {
+  .onTransform((svgDocument, factVoictent) => {
     const $ = cheerio.load(svgDocument.grition);
 
     const svgNode = $('svg')[0];

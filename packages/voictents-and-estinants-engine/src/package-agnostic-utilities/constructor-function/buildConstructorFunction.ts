@@ -19,7 +19,7 @@ export type GenericConstructedInstance =
 
 export type GenericConstructorInput = GenericObjectLike;
 
-type ConstructorFunctionFromBuilderContext<
+export type ConstructorFunctionFromBuilderContext<
   TConstructorInput extends GenericConstructorInput,
   TConstructedInstance extends GenericConstructedInstance,
 > = ConstructorFunction<
@@ -54,6 +54,7 @@ export const buildConstructorFunction = <
 >({
   constructorName,
   transformInput,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   instancePropertyNameTuple,
 }: ConstructorFunctionBuilderContext): ConstructorFunctionFromBuilderContext<
   TConstructorInput,
@@ -68,14 +69,16 @@ export const buildConstructorFunction = <
   ): void {
     // "restrictedInstance" ignores extraneous properties, because structural typing allows "rawInstance" to have more properties than specified
     const rawInstance: GenericConstructedInstance = transformInput(input);
-    const restrictedInstance: GenericConstructedInstance = Object.fromEntries(
-      instancePropertyNameTuple.map((instancePropertyName) => {
-        const value: unknown = rawInstance[instancePropertyName];
-        return [instancePropertyName, value];
-      }),
-    );
 
-    Object.assign(this, restrictedInstance);
+    // TODO: reinstate restrictedInstance after mass refactor. We can't refactor string literals (oof)
+    // const restrictedInstance: GenericConstructedInstance = Object.fromEntries(
+    //   instancePropertyNameTuple.map((instancePropertyName) => {
+    //     const value: unknown = rawInstance[instancePropertyName];
+    //     return [instancePropertyName, value];
+    //   }),
+    // );
+
+    Object.assign(this, rawInstance);
   };
 
   Object.defineProperty(constructorFunction, 'name', {

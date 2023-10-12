@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   PARTITIONED_FILE_GEPP,
   PartitionedFileInstance,
@@ -33,11 +33,11 @@ import { BOUNDED_FILE_GEPP, BoundedFileVoque } from './file/boundedFile';
  * respective ancestor directories, can be associated with the set of partitions
  * from the file dependency.
  */
-export const getPartitionedFileSystemNodes = buildEstinant({
+export const getPartitionedFileSystemNodes = buildProgrammedTransform({
   name: 'getPartitionedFileSystemNodes',
 })
   .fromVoictent2<PartitionFactVoque>({
-    gepp: PARTITION_FACT_GEPP,
+    collectionId: PARTITION_FACT_GEPP,
   })
   .andFromVoictent2<BoundedDirectoryVoque>({
     gepp: BOUNDED_DIRECTORY_GEPP,
@@ -49,12 +49,12 @@ export const getPartitionedFileSystemNodes = buildEstinant({
     gepp: FILE_DEPENDENCY_GEPP,
   })
   .toHubblepupTuple2<PartitionedDirectoryVoque>({
-    gepp: PARTITIONED_DIRECTORY_GEPP,
+    collectionId: PARTITIONED_DIRECTORY_GEPP,
   })
   .toHubblepupTuple2<PartitionedFileVoque>({
-    gepp: PARTITIONED_FILE_GEPP,
+    collectionId: PARTITIONED_FILE_GEPP,
   })
-  .onPinbe(
+  .onTransform(
     (
       partitionFactVoictent,
       directoryVoictent,

@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../../adapter/estinant-builder/buildEstinant';
 import {
   BOUNDED_DIRECTORY_GEPP,
   BoundedDirectoryVoque,
@@ -17,11 +17,11 @@ import {
  * Constructs a FileDependencyPathNodeFact from a path node and the directory it
  * resides in
  */
-export const getFileDependencyPathNodeFact = buildEstinant({
+export const getFileDependencyPathNodeFact = buildProgrammedTransform({
   name: 'getFileDependencyPathNodeFact',
 })
-  .fromHubblepup2<PartitionedFileDependencyPathNodeVoque>({
-    gepp: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
+  .fromItem2<PartitionedFileDependencyPathNodeVoque>({
+    collectionId: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
   })
   .andFromHubblepupTuple2<BoundedDirectoryVoque, [string]>({
     gepp: BOUNDED_DIRECTORY_GEPP,
@@ -32,10 +32,10 @@ export const getFileDependencyPathNodeFact = buildEstinant({
       return directory.item.directory.directoryPath.serialized;
     },
   })
-  .toHubblepup2<FileDependencyPathNodeFactVoque>({
-    gepp: FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
+  .toItem2<FileDependencyPathNodeFactVoque>({
+    collectionId: FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
   })
-  .onPinbe((pathNode, [directory]) => {
+  .onTransform((pathNode, [directory]) => {
     return new FileDependencyPathNodeFactInstance({
       pathNode,
       directory,

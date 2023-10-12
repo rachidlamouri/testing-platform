@@ -89,7 +89,7 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
         instantiationContext,
         leftInputContext: {
           version: 2,
-          gepp: partialLeftInputAppreffinge.gepp,
+          gepp: partialLeftInputAppreffinge.collectionId,
           isWibiz: false,
           modifyTropoignantInput: (
             indexedHubblepup: GenericIndexedHubblepup,
@@ -110,7 +110,7 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
           EmptyAdaptedRightInputVickenTuple
         >(nextContext),
 
-        onPinbe: buildPinbetunfBuilder2<
+        onTransform: buildPinbetunfBuilder2<
           AdaptedLeftInputHubblepupVicken<TInputVoque>,
           EmptyAdaptedRightInputVickenTuple,
           EmptyAdaptedOutputVickenTuple
@@ -122,7 +122,7 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
             EmptyAdaptedOutputVickenTuple
           >(nextContext),
 
-        toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
+        toItem2: buildOutputHubblepupAppreffingeBuilder2<
           AdaptedLeftInputHubblepupVicken<TInputVoque>,
           EmptyAdaptedRightInputVickenTuple,
           EmptyAdaptedOutputVickenTuple
@@ -139,5 +139,5 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
 };
 
 export type LeftInputHubblepupAppreffingeBuilderParent2 = {
-  fromHubblepup2: LeftInputHubblepupAppreffingeBuilder2;
+  fromItem2: LeftInputHubblepupAppreffingeBuilder2;
 };

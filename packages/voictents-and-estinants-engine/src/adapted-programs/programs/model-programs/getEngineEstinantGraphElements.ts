@@ -1,7 +1,7 @@
 import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
 import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_ESTINANT_3_GEPP,
@@ -31,11 +31,11 @@ import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-fi
  *
  * @readableName getProgrammedTransformModelGraphElement
  */
-export const getEngineEstinantGraphElements = buildEstinant({
+export const getEngineEstinantGraphElements = buildProgrammedTransform({
   name: 'getEngineEstinantGraphElements',
 })
-  .fromHubblepup2<ProgramEstinantRelationshipVoque>({
-    gepp: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
+  .fromItem2<ProgramEstinantRelationshipVoque>({
+    collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
   })
   .andFromHubblepupTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
     gepp: ENGINE_ESTINANT_3_GEPP,
@@ -45,9 +45,9 @@ export const getEngineEstinantGraphElements = buildEstinant({
     croard: (engineEstinant) => engineEstinant.item.locator.zorn,
   })
   .toHubblepupTuple2<DirectedGraphElement2Voque>({
-    gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
-  .onPinbe((relationship, [engineEstinant]) => {
+  .onTransform((relationship, [engineEstinant]) => {
     const { rootGraphLocator } = relationship;
 
     const rootEstinantSubgraphDistinguisher = `${relationship.programName} | ${engineEstinant.estinantName} | estinant-subgraph`;

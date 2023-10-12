@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -80,7 +80,8 @@ export const PARTITIONED_DIRECTORY_GEPP = 'partitioned-directory';
 
 type PartitionedDirectoryGepp = typeof PARTITIONED_DIRECTORY_GEPP;
 
-export type PartitionedDirectoryVoque = InMemoryOdeshin2ListVoque<
-  PartitionedDirectoryGepp,
-  PartitionedDirectory
->;
+export type PartitionedDirectoryVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    PartitionedDirectoryGepp,
+    PartitionedDirectory
+  >;

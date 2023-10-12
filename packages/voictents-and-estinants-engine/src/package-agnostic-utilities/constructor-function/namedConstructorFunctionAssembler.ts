@@ -1,5 +1,6 @@
 import {
   ConstructorFunctionBuilderContext,
+  ConstructorFunctionFromBuilderContext,
   GenericConstructedInstance,
   GenericConstructorInput,
   NamedConstructorFunctionParent,
@@ -45,9 +46,20 @@ export const buildNamedConstructorFunctionAssembler = <
       TConstructedInstance
     >(assemblerContext);
 
-    return {
-      [assemblerContext.constructorName]: constructorFunction,
-    } as NamedConstructorFunctionParent<
+    // TODO: remove proxy after mass refactor. We are destructuring based on a string name that isn't automatically refactored
+    const result = new Proxy(
+      {},
+      {
+        get: (): ConstructorFunctionFromBuilderContext<
+          TConstructorInput,
+          TConstructedInstance
+        > => {
+          return constructorFunction;
+        },
+      },
+    );
+
+    return result as NamedConstructorFunctionParent<
       TConstructorFunctionName,
       TConstructorInput,
       TConstructedInstance

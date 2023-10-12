@@ -1,18 +1,18 @@
 import fs from 'fs';
 import { posix } from 'path';
 import chalk from 'chalk';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   GenericLintAssertion,
-  LINT_ASSERTION_GEPP,
+  LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,
-  LintAssertionVoque,
+  LintAssertionStreamMetatype,
 } from '../../programmable-units/linting/lintAssertion';
 import {
   EXPECTED_PROGRAM_TEST_FILE_GEPP,
   ExpectedProgramTestFileVoque,
 } from './expectedProgramTestFile';
-import { EstinantSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
 import { TypedRule } from '../../programmable-units/linting/rule';
 import { FileSourceInstance } from '../../programmable-units/linting/source/fileSource';
 import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/object/typeScriptObject';
@@ -24,9 +24,9 @@ import {
 
 const ESTINANT_NAME = 'assertProgramTestFileIsValid' as const;
 
-const ruleSource = new EstinantSourceInstance({
+const ruleSource = new ProgrammedTransformSourceInstance({
   filePath: posix.relative('', __filename),
-  estinantName: ESTINANT_NAME,
+  programmedTransformName: ESTINANT_NAME,
 });
 
 const programTestFileExitsImmediately = new TypedRule<{ testFilePath: string }>(
@@ -94,19 +94,19 @@ const programTestFileMakesAnAssertion = new TypedRule<MessageContext>({
 /**
  * Enforces the structure of a program test file
  */
-export const assertProgramTestFileIsValid = buildEstinant({
+export const assertProgramTestFileIsValid = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<ExpectedProgramTestFileVoque>({
-    gepp: EXPECTED_PROGRAM_TEST_FILE_GEPP,
+  .fromItem2<ExpectedProgramTestFileVoque>({
+    collectionId: EXPECTED_PROGRAM_TEST_FILE_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
+  .toHubblepupTuple2<LintAssertionStreamMetatype>({
+    collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .toHubblepupTuple2<LintAssertionOmissionVoque>({
-    gepp: LINT_ASSERTION_OMISSION_GEPP,
+    collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
-  .onPinbe((expectedFile) => {
+  .onTransform((expectedFile) => {
     const { programName } = expectedFile;
     const programFilePath = expectedFile.programFile.filePath.serialized;
 
@@ -227,7 +227,7 @@ export const assertProgramTestFileIsValid = buildEstinant({
       : [];
 
     return {
-      [LINT_ASSERTION_GEPP]: assertionList,
+      [LINT_ASSERTION_COLLECTION_ID]: assertionList,
       [LINT_ASSERTION_OMISSION_GEPP]: omissionList,
     };
   })

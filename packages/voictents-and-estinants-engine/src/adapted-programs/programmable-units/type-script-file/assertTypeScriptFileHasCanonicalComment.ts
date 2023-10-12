@@ -1,13 +1,13 @@
 import { posix } from 'path';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { assertNotNull } from '../../../package-agnostic-utilities/nil/assertNotNull';
 import {
-  LINT_ASSERTION_GEPP,
+  LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,
-  LintAssertionVoque,
+  LintAssertionStreamMetatype,
 } from '../linting/lintAssertion';
 import { TypedRule } from '../linting/rule';
-import { EstinantSourceInstance } from '../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import {
   CanonicalCommentLintMetadata,
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
@@ -25,9 +25,9 @@ type MessageContext = {
 export const typeScriptFileHasCanonicalCommentRule =
   new TypedRule<MessageContext>({
     name: 'typescript-file-has-canonical-comment',
-    source: new EstinantSourceInstance({
+    source: new ProgrammedTransformSourceInstance({
       filePath: posix.relative('', __filename),
-      estinantName: ESTINANT_NAME,
+      programmedTransformName: ESTINANT_NAME,
     }),
     description:
       'All TypeScript files must have a canonical comment with a description.',
@@ -64,16 +64,18 @@ export const typeScriptFileHasCanonicalCommentRule =
  * declaration or in the file comment in the case that the canonical declaration
  * does not exist.
  */
-export const assertTypeScriptFileHasCanonicalComment = buildEstinant({
-  name: ESTINANT_NAME,
-})
-  .fromHubblepup2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+export const assertTypeScriptFileHasCanonicalComment = buildProgrammedTransform(
+  {
+    name: ESTINANT_NAME,
+  },
+)
+  .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   })
-  .toHubblepup2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
+  .toItem2<LintAssertionStreamMetatype>({
+    collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .onPinbe((declarationGroup) => {
+  .onTransform((declarationGroup) => {
     const { filePath } = declarationGroup;
     const trimmedCanonicalCommentText =
       declarationGroup.canonicalComment?.description?.trim() ?? null;

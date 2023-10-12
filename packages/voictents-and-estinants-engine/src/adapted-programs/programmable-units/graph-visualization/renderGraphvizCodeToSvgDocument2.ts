@@ -1,21 +1,21 @@
 import childProcessUtilities from 'child_process';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { GRAPHVIZ_CODE_GEPP, GraphvizCodeVoque } from './graphvizCode';
 import { SVG_DOCUMENT_GEPP, SvgDocumentVoque } from './svgDocument';
 
 /**
  * Uses the "dot" program to convert Graphviz code into an SVG HTML document.
  */
-export const renderGraphvizCodeToSvgDocument2 = buildEstinant({
+export const renderGraphvizCodeToSvgDocument2 = buildProgrammedTransform({
   name: 'renderGraphvizCodeToSvgDocument2',
 })
-  .fromHubblepup2<GraphvizCodeVoque>({
-    gepp: GRAPHVIZ_CODE_GEPP,
+  .fromItem2<GraphvizCodeVoque>({
+    collectionId: GRAPHVIZ_CODE_GEPP,
   })
-  .toHubblepup2<SvgDocumentVoque>({
-    gepp: SVG_DOCUMENT_GEPP,
+  .toItem2<SvgDocumentVoque>({
+    collectionId: SVG_DOCUMENT_GEPP,
   })
-  .onPinbe((identifiableCode) => {
+  .onTransform((identifiableCode) => {
     const result = childProcessUtilities.spawnSync('dot', ['-Tsvg'], {
       encoding: 'utf8',
       input: identifiableCode.grition,

@@ -1,12 +1,12 @@
 import { posix } from 'path';
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
-  LINT_ASSERTION_GEPP,
+  LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,
-  LintAssertionVoque,
+  LintAssertionStreamMetatype,
 } from '../../linting/lintAssertion';
 import { TypedRule } from '../../linting/rule';
-import { EstinantSourceInstance } from '../../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../linting/source/estinantSource';
 import { FileSourceInstance } from '../../linting/source/fileSource';
 import {
   CanonicalDeclarationLintMetadata,
@@ -26,9 +26,9 @@ type TypeScriptFileHasCanonicalDeclarationMessageContext = {
 export const typeScriptFileHasCanonicalDeclarationRule =
   new TypedRule<TypeScriptFileHasCanonicalDeclarationMessageContext>({
     name: 'typescript-file-has-canonical-declaration',
-    source: new EstinantSourceInstance({
+    source: new ProgrammedTransformSourceInstance({
       filePath: posix.relative('', __filename),
-      estinantName: ESTINANT_NAME,
+      programmedTransformName: ESTINANT_NAME,
     }),
     description:
       'All TypeScript files must have at least one top level declaration whose name matches the file name regardless of casing',
@@ -56,37 +56,38 @@ export const typeScriptFileHasCanonicalDeclarationRule =
  * Asserts that a TypeScript file has a top level declaration whose identifier
  * name matches the file name regardless of casing
  */
-export const assertTypeScriptFileHasCanonicalDeclaration = buildEstinant({
-  name: ESTINANT_NAME,
-})
-  .fromHubblepup2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+export const assertTypeScriptFileHasCanonicalDeclaration =
+  buildProgrammedTransform({
+    name: ESTINANT_NAME,
   })
-  .toHubblepup2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
-  })
-  .onPinbe((group) => {
-    return new LintAssertion({
-      rule: typeScriptFileHasCanonicalDeclarationRule,
-      lintSource: new FileSourceInstance({
-        filePath: group.filePath,
-      }),
-      isValid: group.canonicalDeclaration !== null,
-      errorMessageContext: {
-        filePath: group.filePath,
-        canonicalDeclarationLintMetadata:
-          group.canonicalDeclarationLintMetadata,
-      },
-      context: {
-        group,
-        // TODO: sync this normalization pattern with the one in getCommentedProgramBodyDeclarationList
-        normalizedIdentifierList: group.list
-          .map((declaration) => declaration.identifiableNode)
-          .filter(isNotNull)
-          .map((identifiableNode) => {
-            return shishKebab(identifiableNode.id.name);
-          }),
-      },
-    });
-  })
-  .assemble();
+    .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
+      collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+    })
+    .toItem2<LintAssertionStreamMetatype>({
+      collectionId: LINT_ASSERTION_COLLECTION_ID,
+    })
+    .onTransform((group) => {
+      return new LintAssertion({
+        rule: typeScriptFileHasCanonicalDeclarationRule,
+        lintSource: new FileSourceInstance({
+          filePath: group.filePath,
+        }),
+        isValid: group.canonicalDeclaration !== null,
+        errorMessageContext: {
+          filePath: group.filePath,
+          canonicalDeclarationLintMetadata:
+            group.canonicalDeclarationLintMetadata,
+        },
+        context: {
+          group,
+          // TODO: sync this normalization pattern with the one in getCommentedProgramBodyDeclarationList
+          normalizedIdentifierList: group.list
+            .map((declaration) => declaration.identifiableNode)
+            .filter(isNotNull)
+            .map((identifiableNode) => {
+              return shishKebab(identifiableNode.id.name);
+            }),
+        },
+      });
+    })
+    .assemble();

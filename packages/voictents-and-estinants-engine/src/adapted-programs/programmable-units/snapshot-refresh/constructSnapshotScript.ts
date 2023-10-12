@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
@@ -9,16 +9,16 @@ import {
  * Creates the output "refreshSnapshot" file. The file is a shell script that runs all engine programs
  * for the purpose of updating their runtime profile snapshots.
  */
-export const constructSnapshotScript = buildEstinant({
+export const constructSnapshotScript = buildProgrammedTransform({
   name: 'constructSnapshotScript',
 })
   .fromVoictent2<EngineProgramFileVoque>({
-    gepp: ENGINE_PROGRAM_FILE_GEPP,
+    collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .toHubblepup2<OutputFileVoque>({
-    gepp: OUTPUT_FILE_GEPP,
+  .toItem2<OutputFileVoque>({
+    collectionId: OUTPUT_FILE_GEPP,
   })
-  .onPinbe((inputList) => {
+  .onTransform((inputList) => {
     const filePathSet = new Set(
       inputList.map((input) => input.file.filePath.serialized),
     );

@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_ESTINANT_3_GEPP,
@@ -21,11 +21,11 @@ import {
 /**
  * Gets the edges from the estinant to its output voictents.
  */
-export const getOutputEdge = buildEstinant({
+export const getOutputEdge = buildProgrammedTransform({
   name: 'getOutputEdge',
 })
-  .fromHubblepup2<ProgramEstinantOutputRelationshipVoque>({
-    gepp: PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
+  .fromItem2<ProgramEstinantOutputRelationshipVoque>({
+    collectionId: PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
   })
   // TODO: locator and estinant ids for buildAddMetadtaForSerialization can have different ids. Remove this when that issue is fixed
   .andFromHubblepupTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
@@ -43,9 +43,9 @@ export const getOutputEdge = buildEstinant({
     croard: (estinantOutput) => estinantOutput.item.zorn,
   })
   .toHubblepupTuple2<DirectedGraphElement2Voque>({
-    gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
-  .onPinbe((relationship, [engineEstinant], [estinantOutput]) => {
+  .onTransform((relationship, [engineEstinant], [estinantOutput]) => {
     // TODO: make voqueLocator required
     if (estinantOutput.voqueLocator === undefined) {
       throw Error('Voque locator is required');

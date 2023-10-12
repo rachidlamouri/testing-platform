@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { BashFile } from '../../programmable-units/bash-file/bashFile';
@@ -60,7 +60,8 @@ export const EXPECTED_PROGRAM_TEST_FILE_GEPP = 'expected-program-test-file';
 
 type ExpectedProgramTestFileGepp = typeof EXPECTED_PROGRAM_TEST_FILE_GEPP;
 
-export type ExpectedProgramTestFileVoque = InMemoryOdeshin2ListVoque<
-  ExpectedProgramTestFileGepp,
-  ExpectedProgramTestFile
->;
+export type ExpectedProgramTestFileVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    ExpectedProgramTestFileGepp,
+    ExpectedProgramTestFile
+  >;

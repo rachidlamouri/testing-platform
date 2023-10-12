@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
   TypeScriptFileExport,
@@ -14,16 +14,16 @@ import {
 /**
  * Gets the identifier name for every named export in a TypeScript file
  */
-export const getTypeScriptFileExportList = buildEstinant({
+export const getTypeScriptFileExportList = buildProgrammedTransform({
   name: 'getTypeScriptFileExportList',
 })
-  .fromHubblepup2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   })
-  .toHubblepup2<TypeScriptFileExportListVoque>({
-    gepp: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
+  .toItem2<TypeScriptFileExportListVoque>({
+    collectionId: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
   })
-  .onPinbe((group) => {
+  .onTransform((group) => {
     const exportList = group.list
       .filter((declaration) => {
         return (

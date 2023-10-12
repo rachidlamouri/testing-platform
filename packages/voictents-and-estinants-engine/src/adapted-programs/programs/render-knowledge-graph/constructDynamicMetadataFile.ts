@@ -1,6 +1,6 @@
 import { namedTypes as n, builders as b } from 'ast-types';
 import * as recast from 'recast';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   CustomDatumTypeName,
   getCustomTypedDatum,
@@ -88,11 +88,11 @@ const encodeDatum = (
  * Accumulates all fact metadata into an object keyed by fact id for the
  * knowledge graph to consume and present the data
  */
-export const constructDynamicMetadataFile = buildEstinant({
+export const constructDynamicMetadataFile = buildProgrammedTransform({
   name: 'constructDynamicMetadataFile',
 })
   .fromVoictent2<BoundaryFactVoque>({
-    gepp: BOUNDARY_FACT_GEPP,
+    collectionId: BOUNDARY_FACT_GEPP,
   })
   .andFromHubblepupTuple2<CommonBoundaryRootVoque, ['']>({
     gepp: COMMON_BOUNDARY_ROOT_GEPP,
@@ -103,57 +103,59 @@ export const constructDynamicMetadataFile = buildEstinant({
   .andFromVoictent2<FileFact2Voque>({
     gepp: FILE_FACT_2_GEPP,
   })
-  .toHubblepup2<OutputFileVoque>({
-    gepp: OUTPUT_FILE_GEPP,
+  .toItem2<OutputFileVoque>({
+    collectionId: OUTPUT_FILE_GEPP,
   })
-  .toHubblepup2<AppRendererDelayerVoque>({
-    gepp: APP_RENDERER_DELAYER_GEPP,
+  .toItem2<AppRendererDelayerVoque>({
+    collectionId: APP_RENDERER_DELAYER_GEPP,
   })
-  .onPinbe((boundaryFactVoictent, [commonBoundaryRoot], fileFactVoictent) => {
-    const metadataList: Metadata[] = [
-      ...boundaryFactVoictent,
-      ...fileFactVoictent,
-    ].map((fact) => fact.graphMetadata);
+  .onTransform(
+    (boundaryFactVoictent, [commonBoundaryRoot], fileFactVoictent) => {
+      const metadataList: Metadata[] = [
+        ...boundaryFactVoictent,
+        ...fileFactVoictent,
+      ].map((fact) => fact.graphMetadata);
 
-    const metadataById = Object.fromEntries(
-      metadataList.map((metadata) => {
-        return [metadata.id, metadata];
-      }),
-    );
+      const metadataById = Object.fromEntries(
+        metadataList.map((metadata) => {
+          return [metadata.id, metadata];
+        }),
+      );
 
-    // TODO: indexing this with a hardcoded key is a terrible idea. Store this object elsewhere
-    metadataById['common-boundary-root'] = {
-      title: 'Common Boundary Root',
-      id: 'common-boundary-root',
-      fileSystemPath: commonBoundaryRoot.directoryPath,
-      fieldList: [
-        {
-          label: 'Directory Path',
-          value: `~r/${commonBoundaryRoot.directoryPath}`,
-        },
-      ],
-    };
+      // TODO: indexing this with a hardcoded key is a terrible idea. Store this object elsewhere
+      metadataById['common-boundary-root'] = {
+        title: 'Common Boundary Root',
+        id: 'common-boundary-root',
+        fileSystemPath: commonBoundaryRoot.directoryPath,
+        fieldList: [
+          {
+            label: 'Directory Path',
+            value: `~r/${commonBoundaryRoot.directoryPath}`,
+          },
+        ],
+      };
 
-    const astNode = encodeDatum(metadataById);
+      const astNode = encodeDatum(metadataById);
 
-    const metadataByIdCode = recast.print(astNode).code;
+      const metadataByIdCode = recast.print(astNode).code;
 
-    const filePath = `packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/generated/metadataById.tsx`;
-    const moduleCode = [
-      'import { MetadataById } from "../dynamicComponentTypes"',
-      `export default ${metadataByIdCode}`,
-    ].join('\n');
+      const filePath = `packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/generated/metadataById.tsx`;
+      const moduleCode = [
+        'import { MetadataById } from "../dynamicComponentTypes"',
+        `export default ${metadataByIdCode}`,
+      ].join('\n');
 
-    const outputFile: OutputFile = {
-      filePath,
-      text: moduleCode,
-    };
+      const outputFile: OutputFile = {
+        filePath,
+        text: moduleCode,
+      };
 
-    return {
-      [OUTPUT_FILE_GEPP]: outputFile,
-      [APP_RENDERER_DELAYER_GEPP]: new AppRendererDelayerInstance({
-        estinantName: 'constructDynamicMetadataFile',
-      }),
-    };
-  })
+      return {
+        [OUTPUT_FILE_GEPP]: outputFile,
+        [APP_RENDERER_DELAYER_GEPP]: new AppRendererDelayerInstance({
+          estinantName: 'constructDynamicMetadataFile',
+        }),
+      };
+    },
+  )
   .assemble();

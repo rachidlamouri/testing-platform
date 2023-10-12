@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
@@ -24,16 +24,16 @@ const reporterLocator: ReportingLocator = {
  * Checks if any boundaries have the same path, or if a boundary is nested under
  * another boundary
  */
-export const assertNoBoundaryOverlap = buildEstinant({
+export const assertNoBoundaryOverlap = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<PartitionedBoundaryListTrieVoque>({
-    gepp: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+  .fromItem2<PartitionedBoundaryListTrieVoque>({
+    collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((partitionedBoundaryListTrie) => {
+  .onTransform((partitionedBoundaryListTrie) => {
     const trieList = partitionedBoundaryListTrie.flatten();
 
     const errorList: ProgramErrorPelue<ReportingLocator>[] = [];

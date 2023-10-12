@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -102,7 +102,8 @@ export const RENAME_CONFIGURATION_GEPP = 'rename-configuration';
 
 type RenameConfigurationGepp = typeof RENAME_CONFIGURATION_GEPP;
 
-export type RenameConfigurationVoque = InMemoryOdeshin2ListVoque<
-  RenameConfigurationGepp,
-  RenameConfiguration
->;
+export type RenameConfigurationVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    RenameConfigurationGepp,
+    RenameConfiguration
+  >;

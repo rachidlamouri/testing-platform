@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import {
   SERIALIZED_CI_MODEL_GEPP,
@@ -10,16 +10,16 @@ const PRINT_NEW_LINE = 'printf "\\n"';
 /**
  * Turns the CI Model object into the text for the bash file
  */
-export const serializeCiModel = buildEstinant({
+export const serializeCiModel = buildProgrammedTransform({
   name: 'serializeCiModel',
 })
-  .fromHubblepup2<CiModelVoque>({
-    gepp: CI_MODEL_GEPP,
+  .fromItem2<CiModelVoque>({
+    collectionId: CI_MODEL_GEPP,
   })
-  .toHubblepup2<SerializedCiModelVoque>({
-    gepp: SERIALIZED_CI_MODEL_GEPP,
+  .toItem2<SerializedCiModelVoque>({
+    collectionId: SERIALIZED_CI_MODEL_GEPP,
   })
-  .onPinbe((ciModel) => {
+  .onTransform((ciModel) => {
     const serializedModelLineList = [
       ...ciModel.initialCommandList,
       '',

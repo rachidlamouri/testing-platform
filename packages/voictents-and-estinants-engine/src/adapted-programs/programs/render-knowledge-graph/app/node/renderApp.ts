@@ -1,6 +1,6 @@
 import childProcessUtility from 'child_process';
 import fs from 'fs';
-import { buildEstinant } from '../../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../../adapter/estinant-builder/buildEstinant';
 import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,
@@ -21,19 +21,19 @@ import {
  *
  * @todo add the graphviz output to this html file
  */
-export const renderApp = buildEstinant({
+export const renderApp = buildProgrammedTransform({
   name: 'renderApp',
 })
   .fromVoictent2<AppRendererDelayerVoque>({
-    gepp: APP_RENDERER_DELAYER_GEPP,
+    collectionId: APP_RENDERER_DELAYER_GEPP,
   })
-  .toHubblepup2<OutputFileVoque>({
-    gepp: OUTPUT_FILE_GEPP,
+  .toItem2<OutputFileVoque>({
+    collectionId: OUTPUT_FILE_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe(() => {
+  .onTransform(() => {
     const result = childProcessUtility.spawnSync(
       'npx',
       [

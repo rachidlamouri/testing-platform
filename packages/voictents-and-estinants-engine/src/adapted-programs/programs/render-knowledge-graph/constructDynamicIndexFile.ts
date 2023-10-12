@@ -1,6 +1,6 @@
 import * as recast from 'recast';
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,
@@ -31,22 +31,22 @@ import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
  * Generates a barrel file for every file created by decodeAndRecastSvgDocument for the
  * knowledge graph app to import
  */
-export const constructDynamicIndexFile = buildEstinant({
+export const constructDynamicIndexFile = buildProgrammedTransform({
   name: 'constructDynamicIndexFile',
 })
   .fromVoictent2<LayerVoque>({
-    gepp: LAYER_GEPP,
+    collectionId: LAYER_GEPP,
   })
   .andFromVoictent2<PartitionFactVoque>({
     gepp: PARTITION_FACT_GEPP,
   })
-  .toHubblepup2<OutputFileVoque>({
-    gepp: OUTPUT_FILE_GEPP,
+  .toItem2<OutputFileVoque>({
+    collectionId: OUTPUT_FILE_GEPP,
   })
-  .toHubblepup2<AppRendererDelayerVoque>({
-    gepp: APP_RENDERER_DELAYER_GEPP,
+  .toItem2<AppRendererDelayerVoque>({
+    collectionId: APP_RENDERER_DELAYER_GEPP,
   })
-  .onPinbe((layerVoictent, partitionFactVoictent) => {
+  .onTransform((layerVoictent, partitionFactVoictent) => {
     const getPartitionComponentVariableName = (
       partitionFact: PartitionFact,
     ): string => {

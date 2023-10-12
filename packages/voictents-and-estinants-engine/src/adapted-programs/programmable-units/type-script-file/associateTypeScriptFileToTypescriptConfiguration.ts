@@ -1,8 +1,8 @@
 import { posix } from 'path';
 import fs from 'fs';
 import { TYPE_SCRIPT_FILE_GEPP, TypeScriptFileVoque } from './typeScriptFile';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { FilePath } from '../file/filePath';
 
 /**
@@ -25,10 +25,11 @@ export const TYPE_SCRIPT_FILE_CONFIGURATION_GEPP =
 type TypeScriptFileConfigurationGepp =
   typeof TYPE_SCRIPT_FILE_CONFIGURATION_GEPP;
 
-export type TypeScriptFileConfigurationVoque = InMemoryOdeshin2ListVoque<
-  TypeScriptFileConfigurationGepp,
-  TypeScriptFileConfiguration
->;
+export type TypeScriptFileConfigurationVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    TypeScriptFileConfigurationGepp,
+    TypeScriptFileConfiguration
+  >;
 
 const getConfigurationFilePath = (filePath: string): string => {
   let configFilePath: string | null = null;
@@ -56,29 +57,30 @@ const getConfigurationFilePath = (filePath: string): string => {
  * encounters a tsconfig.json file, and it assumes they are related. It's great.
  * Super robust logic.
  */
-export const associateTypeScriptFileToTypescriptConfiguration = buildEstinant({
-  name: 'associateTypeScriptFileToTypescriptConfiguration',
-})
-  .fromHubblepup2<TypeScriptFileVoque>({
-    gepp: TYPE_SCRIPT_FILE_GEPP,
+export const associateTypeScriptFileToTypescriptConfiguration =
+  buildProgrammedTransform({
+    name: 'associateTypeScriptFileToTypescriptConfiguration',
   })
-  .toHubblepup2<TypeScriptFileConfigurationVoque>({
-    gepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
-  })
-  .onPinbe((input) => {
-    const configurationFilePath = getConfigurationFilePath(
-      input.filePath.serialized,
-    );
-    const configurationRootDirectory = posix.dirname(configurationFilePath);
+    .fromItem2<TypeScriptFileVoque>({
+      collectionId: TYPE_SCRIPT_FILE_GEPP,
+    })
+    .toItem2<TypeScriptFileConfigurationVoque>({
+      collectionId: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
+    })
+    .onTransform((input) => {
+      const configurationFilePath = getConfigurationFilePath(
+        input.filePath.serialized,
+      );
+      const configurationRootDirectory = posix.dirname(configurationFilePath);
 
-    const configuration: TypeScriptFileConfiguration = {
-      zorn: input.filePath.serialized,
-      sourceFilePath: input.filePath.serialized,
-      sourceFilePathObject: input.filePath,
-      filePath: configurationFilePath,
-      rootDirectory: configurationRootDirectory,
-    };
+      const configuration: TypeScriptFileConfiguration = {
+        zorn: input.filePath.serialized,
+        sourceFilePath: input.filePath.serialized,
+        sourceFilePathObject: input.filePath,
+        filePath: configurationFilePath,
+        rootDirectory: configurationRootDirectory,
+      };
 
-    return configuration;
-  })
-  .assemble();
+      return configuration;
+    })
+    .assemble();

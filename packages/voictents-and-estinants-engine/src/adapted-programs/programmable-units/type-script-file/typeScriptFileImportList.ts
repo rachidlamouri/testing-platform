@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 export type TypeScriptFileImport = {
   isInternal: boolean;
@@ -21,7 +21,8 @@ export const TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP = 'type-script-file-import-list';
 
 type TypeScriptFileImportListGepp = typeof TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP;
 
-export type TypeScriptFileImportListVoque = InMemoryOdeshin2ListVoque<
-  TypeScriptFileImportListGepp,
-  TypeScriptFileImportList
->;
+export type TypeScriptFileImportListVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    TypeScriptFileImportListGepp,
+    TypeScriptFileImportList
+  >;

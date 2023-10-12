@@ -1,6 +1,6 @@
 import { posix } from 'path';
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { isRelativeFilePath } from '../../../package-agnostic-utilities/file/isRelativeFilePath';
 import {
   FILE_PATH_LIKE_STRING_LITERAL_GEPP,
@@ -20,16 +20,16 @@ const IS_SINGLE_PATH_LIKE_REGEX = /^[^/]*$/;
 /**
  * Filters string literal AST nodes down to those that look like a file system node path
  */
-export const filterFilePathLikeStringLiteral = buildEstinant({
+export const filterFilePathLikeStringLiteral = buildProgrammedTransform({
   name: 'filterFilePathLikeStringLiteral',
 })
-  .fromHubblepup2<StringLiteralNodeLocatorVoque>({
-    gepp: STRING_LITERAL_NODE_LOCATOR_GEPP,
+  .fromItem2<StringLiteralNodeLocatorVoque>({
+    collectionId: STRING_LITERAL_NODE_LOCATOR_GEPP,
   })
   .toHubblepupTuple2<FilePathLikeStringLiteralVoque>({
-    gepp: FILE_PATH_LIKE_STRING_LITERAL_GEPP,
+    collectionId: FILE_PATH_LIKE_STRING_LITERAL_GEPP,
   })
-  .onPinbe((nodeLocator) => {
+  .onTransform((nodeLocator) => {
     const sourceFileFilePath = nodeLocator.filePath;
     const literal = nodeLocator.node.value;
 

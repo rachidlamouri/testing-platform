@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
   EngineEstinantLocator2,
@@ -16,16 +16,16 @@ import {
  *
  * @readableName getProgrammedTransformLocatorCollection
  */
-export const getEngineEstinantLocatorCollection2 = buildEstinant({
+export const getEngineEstinantLocatorCollection2 = buildProgrammedTransform({
   name: 'getEngineEstinantLocatorCollection2',
 })
   .fromVoictent2<ProgramEstinantRelationshipVoque>({
-    gepp: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
+    collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
   })
   .toHubblepupTuple2<EngineEstinantLocator2Voque>({
-    gepp: ENGINE_ESTINANT_LOCATOR_2_GEPP,
+    collectionId: ENGINE_ESTINANT_LOCATOR_2_GEPP,
   })
-  .onPinbe((relationshipList) => {
+  .onTransform((relationshipList) => {
     const entries = relationshipList
       .map((relationship) => relationship.estinantLocator)
       .map((estinantLocator): [string, EngineEstinantLocator2] => [

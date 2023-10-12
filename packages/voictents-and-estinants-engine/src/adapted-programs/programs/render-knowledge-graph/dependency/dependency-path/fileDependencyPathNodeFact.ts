@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
 import { DirectedGraphElement2 } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
@@ -88,7 +88,8 @@ export const FILE_DEPENDENCY_PATH_NODE_FACT_GEPP =
 type FileDependencyPathNodeFactGepp =
   typeof FILE_DEPENDENCY_PATH_NODE_FACT_GEPP;
 
-export type FileDependencyPathNodeFactVoque = InMemoryOdeshin2ListVoque<
-  FileDependencyPathNodeFactGepp,
-  FileDependencyPathNodeFact
->;
+export type FileDependencyPathNodeFactVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    FileDependencyPathNodeFactGepp,
+    FileDependencyPathNodeFact
+  >;

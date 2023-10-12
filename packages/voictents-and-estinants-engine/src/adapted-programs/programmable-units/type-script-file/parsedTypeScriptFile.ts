@@ -1,5 +1,5 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { FilePath } from '../file/filePath';
 
 /**
@@ -19,7 +19,8 @@ export const PARSED_TYPE_SCRIPT_FILE_GEPP = 'parsed-type-script-file';
 
 type ParsedTypeScriptFileGepp = typeof PARSED_TYPE_SCRIPT_FILE_GEPP;
 
-export type ParsedTypeScriptFileVoque = InMemoryOdeshin2ListVoque<
-  ParsedTypeScriptFileGepp,
-  ParsedTypeScriptFile
->;
+export type ParsedTypeScriptFileVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    ParsedTypeScriptFileGepp,
+    ParsedTypeScriptFile
+  >;

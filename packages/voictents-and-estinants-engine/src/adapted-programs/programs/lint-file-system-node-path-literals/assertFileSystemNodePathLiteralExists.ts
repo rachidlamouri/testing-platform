@@ -1,15 +1,15 @@
 import { posix } from 'path';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
-  LINT_ASSERTION_GEPP,
+  LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,
-  LintAssertionVoque,
+  LintAssertionStreamMetatype,
 } from '../../programmable-units/linting/lintAssertion';
 import {
   TypedRule,
   EmptyMessageContext,
 } from '../../programmable-units/linting/rule';
-import { EstinantSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
 import {
   FILE_PATH_LIKE_STRING_LITERAL_GEPP,
   FilePathLikeStringLiteralVoque,
@@ -21,9 +21,9 @@ const ESTINANT_NAME = 'assertFileSystemNodePathLiteralExists' as const;
 const fileSystemNodePathLiteralExistsRule = new TypedRule<EmptyMessageContext>({
   name: 'file-system-node-path-literal-exists',
   description: `Any string literal that looks like a file system node path should reference an existing file system node.`,
-  source: new EstinantSourceInstance({
+  source: new ProgrammedTransformSourceInstance({
     filePath: posix.relative('', __filename),
-    estinantName: ESTINANT_NAME,
+    programmedTransformName: ESTINANT_NAME,
   }),
   getErrorMessage: (): string => {
     return `A string literal that looks like a file system node path does not reference a real path`;
@@ -34,16 +34,16 @@ const fileSystemNodePathLiteralExistsRule = new TypedRule<EmptyMessageContext>({
  * Checks that a string literal with a file system path-like value has one or
  * more resolvable on disk paths
  */
-export const assertFileSystemNodePathLiteralExists = buildEstinant({
+export const assertFileSystemNodePathLiteralExists = buildProgrammedTransform({
   name: 'assertFileSystemNodePathLiteralExists',
 })
-  .fromHubblepup2<FilePathLikeStringLiteralVoque>({
-    gepp: FILE_PATH_LIKE_STRING_LITERAL_GEPP,
+  .fromItem2<FilePathLikeStringLiteralVoque>({
+    collectionId: FILE_PATH_LIKE_STRING_LITERAL_GEPP,
   })
-  .toHubblepup2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
+  .toItem2<LintAssertionStreamMetatype>({
+    collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .onPinbe((filePathLikeStringLiteral) => {
+  .onTransform((filePathLikeStringLiteral) => {
     return new LintAssertion({
       rule: fileSystemNodePathLiteralExistsRule,
       lintSource: new FileLineColumnSourceInstance({

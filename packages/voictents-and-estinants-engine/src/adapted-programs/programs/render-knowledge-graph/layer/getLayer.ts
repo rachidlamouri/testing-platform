@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   DIRECTORY_GEPP,
   DirectoryVoque,
@@ -12,11 +12,11 @@ import {
 /**
  * Converts a layer configuration into a layer
  */
-export const getLayer = buildEstinant({
+export const getLayer = buildProgrammedTransform({
   name: 'getLayer',
 })
-  .fromHubblepup2<LayerConfigurationVoque>({
-    gepp: LAYER_CONFIGURATION_GEPP,
+  .fromItem2<LayerConfigurationVoque>({
+    collectionId: LAYER_CONFIGURATION_GEPP,
   })
   .andFromHubblepupTuple2<DirectoryVoque, [string]>({
     gepp: DIRECTORY_GEPP,
@@ -27,10 +27,10 @@ export const getLayer = buildEstinant({
       return directory.item.directoryPath.serialized;
     },
   })
-  .toHubblepup2<LayerVoque>({
-    gepp: LAYER_GEPP,
+  .toItem2<LayerVoque>({
+    collectionId: LAYER_GEPP,
   })
-  .onPinbe((layerConfiguration, [directory]) => {
+  .onTransform((layerConfiguration, [directory]) => {
     return new LayerInstance({
       layerConfiguration,
       directory,

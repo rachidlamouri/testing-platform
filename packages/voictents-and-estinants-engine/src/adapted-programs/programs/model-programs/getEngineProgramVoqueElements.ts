@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_VOQUE_2_GEPP,
@@ -24,21 +24,21 @@ import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-fi
  *
  * @readableName getStreamMetatypeModelGraphElement
  */
-export const getEngineProgramVoqueElements = buildEstinant({
+export const getEngineProgramVoqueElements = buildProgrammedTransform({
   name: 'getEngineProgramVoqueElements',
 })
-  .fromHubblepup2<ProgramVoqueRelationship2Voque>({
-    gepp: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
+  .fromItem2<ProgramVoqueRelationship2Voque>({
+    collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .andFromHubblepupTuple2<EngineVoque2Voque, [OdeshinZorn]>({
     gepp: ENGINE_VOQUE_2_GEPP,
     framate: (relationship) => [relationship.item.voqueLocator.zorn],
     croard: (engineVoque) => engineVoque.item.locator.zorn,
   })
-  .toHubblepup2<DirectedGraphElement2Voque>({
-    gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+  .toItem2<DirectedGraphElement2Voque>({
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
-  .onPinbe((relationship, [engineVoque]) => {
+  .onTransform((relationship, [engineVoque]) => {
     const label =
       engineVoque.displayName === 'GenericProgramError'
         ? 'ProgramError'

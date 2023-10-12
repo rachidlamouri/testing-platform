@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   DIRECTORY_GEPP,
   DirectoryVoque,
@@ -21,11 +21,11 @@ import {
 /**
  * Associates a directory to a boundary
  */
-export const getBoundedDirectory = buildEstinant({
+export const getBoundedDirectory = buildProgrammedTransform({
   name: 'getBoundedDirectory',
 })
-  .fromHubblepup2<DirectoryVoque>({
-    gepp: DIRECTORY_GEPP,
+  .fromItem2<DirectoryVoque>({
+    collectionId: DIRECTORY_GEPP,
   })
   .andFromHubblepupTuple2<CommonBoundaryRootVoque, ['']>({
     gepp: COMMON_BOUNDARY_ROOT_GEPP,
@@ -40,9 +40,9 @@ export const getBoundedDirectory = buildEstinant({
     croard: () => '',
   })
   .toHubblepupTuple2<BoundedDirectoryVoque>({
-    gepp: BOUNDED_DIRECTORY_GEPP,
+    collectionId: BOUNDED_DIRECTORY_GEPP,
   })
-  .onPinbe((directory, [commonBoundaryRoot], [partitionedBoundaryTrie]) => {
+  .onTransform((directory, [commonBoundaryRoot], [partitionedBoundaryTrie]) => {
     const partitionedBoundary = partitionedBoundaryTrie.find(
       directory.nodePath.partList,
       isNotNull,

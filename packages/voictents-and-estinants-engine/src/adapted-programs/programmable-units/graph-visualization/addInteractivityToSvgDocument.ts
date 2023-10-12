@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
 import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
 import {
@@ -63,11 +63,11 @@ const dataStructureToCode = (datum: unknown): string => {
  * template also provides a side panel to render metadata when SVG elements are
  * clicked on.
  */
-export const addInteractivityToSvgDocument = buildEstinant({
+export const addInteractivityToSvgDocument = buildProgrammedTransform({
   name: 'addInteractivityToSvgDocument',
 })
-  .fromHubblepup2<SvgDocumentVoque>({
-    gepp: SVG_DOCUMENT_GEPP,
+  .fromItem2<SvgDocumentVoque>({
+    collectionId: SVG_DOCUMENT_GEPP,
   })
   .andFromHubblepupTuple2<HtmlFileVoque, [OdeshinZorn]>({
     gepp: HTML_FILE_GEPP,
@@ -80,10 +80,10 @@ export const addInteractivityToSvgDocument = buildEstinant({
     framate: (leftInput) => [leftInput.item.zorn],
     croard: (rightInput) => rightInput.item.zorn,
   })
-  .toHubblepup2<OutputFileVoque>({
-    gepp: OUTPUT_FILE_GEPP,
+  .toItem2<OutputFileVoque>({
+    collectionId: OUTPUT_FILE_GEPP,
   })
-  .onPinbe(
+  .onTransform(
     (leftInput, [templateFile], [{ grition: directedGraphMetadataById }]) => {
       const svgText = leftInput.grition;
 

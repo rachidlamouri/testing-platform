@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -90,7 +90,8 @@ export const FILE_PARSED_COMMENT_GROUP_GEPP = 'file-parsed-comment-group';
 
 type FileParsedCommentGroupGepp = typeof FILE_PARSED_COMMENT_GROUP_GEPP;
 
-export type FileParsedCommentGroupVoque = InMemoryOdeshin2ListVoque<
-  FileParsedCommentGroupGepp,
-  FileParsedCommentGroup
->;
+export type FileParsedCommentGroupVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    FileParsedCommentGroupGepp,
+    FileParsedCommentGroup
+  >;

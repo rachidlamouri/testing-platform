@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { Directory } from '../../../programmable-units/file/directory';
@@ -56,4 +56,7 @@ export const LAYER_GEPP = 'layer';
 
 type LayerGepp = typeof LAYER_GEPP;
 
-export type LayerVoque = InMemoryOdeshin2ListVoque<LayerGepp, Layer>;
+export type LayerVoque = InMemoryIdentifiableItem2ListStreamMetatype<
+  LayerGepp,
+  Layer
+>;

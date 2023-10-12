@@ -1,7 +1,7 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import fs from 'fs';
 import * as parser from '@typescript-eslint/typescript-estree';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
   TypeScriptFileConfigurationVoque,
@@ -33,19 +33,19 @@ const reporterLocator: ReportingLocator = {
  * from the TypeScript file, but you can join back to that collection in a later
  * transform.
  */
-export const parseTypeScriptFile = buildEstinant({
+export const parseTypeScriptFile = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<TypeScriptFileConfigurationVoque>({
-    gepp: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
+  .fromItem2<TypeScriptFileConfigurationVoque>({
+    collectionId: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
   })
   .toHubblepupTuple2<ParsedTypeScriptFileVoque>({
-    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+    collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((typeScriptFileConfiguration) => {
+  .onTransform((typeScriptFileConfiguration) => {
     const fileContents = fs.readFileSync(
       typeScriptFileConfiguration.sourceFilePath,
       'utf8',

@@ -1,6 +1,6 @@
 import Case from 'case';
 import { posix } from 'path';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   IDENTIFIER_NODE_LOCATOR_GEPP,
   IdentifierNodeLocatorVoque,
@@ -10,11 +10,11 @@ import {
   RenameConfigurationInstance,
   RenameConfigurationVoque,
 } from './renameConfiguration';
-import { EstinantSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
 import {
-  LINT_ASSERTION_GEPP,
+  LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,
-  LintAssertionVoque,
+  LintAssertionStreamMetatype,
 } from '../../programmable-units/linting/lintAssertion';
 import { FileLineColumnSourceInstance } from '../../programmable-units/linting/source/fileLineColumnSource';
 import { getSensibleNameState } from './getSensibleNameState';
@@ -25,28 +25,28 @@ const literalAllowSet = new Set(['_']);
 
 const ESTINANT_NAME = 'getRenameConfiguration' as const;
 
-const linterSource = new EstinantSourceInstance({
+const linterSource = new ProgrammedTransformSourceInstance({
   filePath: posix.relative('', __filename),
-  estinantName: ESTINANT_NAME,
+  programmedTransformName: ESTINANT_NAME,
 });
 
 /**
  * Gathers information for renaming nonsense identifiers while ignoring sensible
  * ones.
  */
-export const getRenameConfiguration = buildEstinant({
+export const getRenameConfiguration = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<IdentifierNodeLocatorVoque>({
-    gepp: IDENTIFIER_NODE_LOCATOR_GEPP,
+  .fromItem2<IdentifierNodeLocatorVoque>({
+    collectionId: IDENTIFIER_NODE_LOCATOR_GEPP,
   })
   .toHubblepupTuple2<RenameConfigurationVoque>({
-    gepp: RENAME_CONFIGURATION_GEPP,
+    collectionId: RENAME_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
+  .toHubblepupTuple2<LintAssertionStreamMetatype>({
+    collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .onPinbe((identifierLocator) => {
+  .onTransform((identifierLocator) => {
     // TODO: identifiers are heavily integrated everywhere in the project. There are only a few instances left in the file to update. Do so when all other objects are renamed.
     if (
       identifierLocator.filePath.serialized ===
@@ -62,7 +62,7 @@ export const getRenameConfiguration = buildEstinant({
     ) {
       return {
         [RENAME_CONFIGURATION_GEPP]: [],
-        [LINT_ASSERTION_GEPP]: [],
+        [LINT_ASSERTION_COLLECTION_ID]: [],
       };
     }
 
@@ -73,12 +73,13 @@ export const getRenameConfiguration = buildEstinant({
     const sensibleNameResult = getSensibleNameState(originalName);
 
     if (
+      originalName === '__filename' ||
       sensibleNameResult.isOriginalNameSensible ||
       literalAllowSet.has(originalName)
     ) {
       return {
         [RENAME_CONFIGURATION_GEPP]: [],
-        [LINT_ASSERTION_GEPP]: [],
+        [LINT_ASSERTION_COLLECTION_ID]: [],
       };
     }
 
@@ -95,7 +96,7 @@ export const getRenameConfiguration = buildEstinant({
     if (sensibleNameResult.sensibleName === null) {
       return {
         [RENAME_CONFIGURATION_GEPP]: [],
-        [LINT_ASSERTION_GEPP]: [
+        [LINT_ASSERTION_COLLECTION_ID]: [
           new LintAssertion({
             rule: nonsenseIsDocumentedRule,
             lintSource,
@@ -125,7 +126,7 @@ export const getRenameConfiguration = buildEstinant({
           nameSensibilityState: sensibleNameResult,
         }),
       ],
-      [LINT_ASSERTION_GEPP]: [],
+      [LINT_ASSERTION_COLLECTION_ID]: [],
     };
   })
   .assemble();

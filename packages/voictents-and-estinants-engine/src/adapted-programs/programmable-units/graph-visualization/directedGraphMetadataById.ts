@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 export type DirectedGraphMetadatumField = {
   label: string;
@@ -24,7 +24,8 @@ export const DIRECTED_GRAPH_METADATA_BY_ID_GEPP =
 
 type DirectedGraphMetadataByIdGepp = typeof DIRECTED_GRAPH_METADATA_BY_ID_GEPP;
 
-export type DirectedGraphMetadataByIdVoque = InMemoryOdeshin2ListVoque<
-  DirectedGraphMetadataByIdGepp,
-  DirectedGraphMetadataById
->;
+export type DirectedGraphMetadataByIdVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    DirectedGraphMetadataByIdGepp,
+    DirectedGraphMetadataById
+  >;

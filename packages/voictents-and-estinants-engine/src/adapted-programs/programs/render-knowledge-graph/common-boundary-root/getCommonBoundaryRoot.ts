@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   DIRECTORY_GEPP,
   DirectoryVoque,
@@ -19,22 +19,22 @@ import {
 /**
  * See CommonBoundaryRoot for more details
  */
-export const getCommonBoundaryRoot = buildEstinant({
+export const getCommonBoundaryRoot = buildProgrammedTransform({
   name: 'getCommonBoundaryRoot',
 })
   .fromVoictent2<BoundaryVoque>({
-    gepp: BOUNDARY_GEPP,
+    collectionId: BOUNDARY_GEPP,
   })
   .andFromVoictent2<DirectoryVoque>({
     gepp: DIRECTORY_GEPP,
   })
-  .toHubblepup2<CommonBoundaryRootVoque>({
-    gepp: COMMON_BOUNDARY_ROOT_GEPP,
+  .toItem2<CommonBoundaryRootVoque>({
+    collectionId: COMMON_BOUNDARY_ROOT_GEPP,
   })
   .toHubblepupTuple2<BoundaryFactVoque>({
-    gepp: BOUNDARY_FACT_GEPP,
+    collectionId: BOUNDARY_FACT_GEPP,
   })
-  .onPinbe((boundaryList, directoryVoictent) => {
+  .onTransform((boundaryList, directoryVoictent) => {
     const boundaryDirectoryList = boundaryList.map((boundary) => {
       const directory = directoryVoictent.byNodePath.get(
         boundary.directory.directoryPath.serialized,

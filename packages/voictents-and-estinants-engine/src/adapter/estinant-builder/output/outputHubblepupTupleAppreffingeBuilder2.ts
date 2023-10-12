@@ -70,12 +70,12 @@ export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
       previousContext: inputOutputContext,
       normalizeResult: (leftInput, modifiedInput, aggregatedOutput) => {
         const hubblepupTuple = aggregatedOutput[
-          outputAppreffinge.gepp
+          outputAppreffinge.collectionId
         ] as TOutputVoque['voictentPelie'];
 
-        return [outputAppreffinge.gepp, hubblepupTuple];
+        return [outputAppreffinge.collectionId, hubblepupTuple];
       },
-      outputGepp: outputAppreffinge.gepp,
+      outputGepp: outputAppreffinge.collectionId,
     });
 
     return {
@@ -84,7 +84,7 @@ export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
       >(nextContext),
-      onPinbe: buildPinbetunfBuilder2<
+      onTransform: buildPinbetunfBuilder2<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>

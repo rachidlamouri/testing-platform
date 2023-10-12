@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -76,7 +76,8 @@ export const APP_RENDERER_DELAYER_GEPP = 'app-renderer-delayer';
 
 type AppRendererDelayerGepp = typeof APP_RENDERER_DELAYER_GEPP;
 
-export type AppRendererDelayerVoque = InMemoryOdeshin2ListVoque<
-  AppRendererDelayerGepp,
-  AppRendererDelayer
->;
+export type AppRendererDelayerVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    AppRendererDelayerGepp,
+    AppRendererDelayer
+  >;

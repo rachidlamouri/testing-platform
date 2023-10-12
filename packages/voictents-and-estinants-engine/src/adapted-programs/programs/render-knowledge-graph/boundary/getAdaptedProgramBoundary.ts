@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
@@ -14,11 +14,11 @@ import { BoundaryTypeName } from './boundaryTypeName';
 /**
  * Marks every adapted engine program as a separate boundary
  */
-export const getAdaptedProgramBoundary = buildEstinant({
+export const getAdaptedProgramBoundary = buildProgrammedTransform({
   name: 'getAdaptedProgramBoundary',
 })
-  .fromHubblepup2<EngineProgramLocator3Voque>({
-    gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+  .fromItem2<EngineProgramLocator3Voque>({
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
   .andFromHubblepupTuple2<DirectoryVoque, [OdeshinZorn]>({
     gepp: DIRECTORY_GEPP,
@@ -28,9 +28,9 @@ export const getAdaptedProgramBoundary = buildEstinant({
     croard: (directory) => directory.item.directoryPath.serialized,
   })
   .toHubblepupTuple2<BoundaryVoque>({
-    gepp: BOUNDARY_GEPP,
+    collectionId: BOUNDARY_GEPP,
   })
-  .onPinbe((programLocator, [directory]) => {
+  .onTransform((programLocator, [directory]) => {
     if (programLocator.isCoreProgram) {
       return [];
     }

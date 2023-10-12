@@ -1,13 +1,13 @@
 import { posix } from 'path';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   GenericLintAssertion,
-  LINT_ASSERTION_GEPP,
+  LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,
-  LintAssertionVoque,
+  LintAssertionStreamMetatype,
 } from '../../programmable-units/linting/lintAssertion';
 import { TypedRule } from '../../programmable-units/linting/rule';
-import { EstinantSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
 import { ExportedIdentifierSourceInstance } from '../../programmable-units/linting/source/exportedIdentifierSource';
 import { ImportedIdentifierSourceInstance } from '../../programmable-units/linting/source/importedIdentifierSource';
 import {
@@ -20,8 +20,8 @@ import {
 } from '../../programmable-units/type-script-file/typeScriptFileImportList';
 
 const ESTINANT_NAME = 'markUnusedExports' as const;
-const ruleSource = new EstinantSourceInstance({
-  estinantName: ESTINANT_NAME,
+const ruleSource = new ProgrammedTransformSourceInstance({
+  programmedTransformName: ESTINANT_NAME,
   filePath: posix.relative('', __filename),
 });
 
@@ -52,19 +52,19 @@ export const noUnusedExportRule =
  *
  * @todo export { x } from  'y' is not being seen as "import" syntax and isn't counting as an import
  */
-export const markUnusedExports = buildEstinant({
+export const markUnusedExports = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
   .fromVoictent2<TypeScriptFileImportListVoque>({
-    gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
   .andFromVoictent2<TypeScriptFileExportListVoque>({
     gepp: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
+  .toHubblepupTuple2<LintAssertionStreamMetatype>({
+    collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .onPinbe((importListList, exportListList) => {
+  .onTransform((importListList, exportListList) => {
     type FilePath = string;
     type IdentifierName = string;
 

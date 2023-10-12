@@ -1,11 +1,11 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { LintAssertionZorn } from '../linting/lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_GEPP,
   LintAssertionOmissionInstance,
   LintAssertionOmissionVoque,
 } from '../linting/lintAssertionOmission';
-import { EstinantSourceInstance } from '../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import { FileSourceInstance } from '../linting/source/fileSource';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
@@ -15,24 +15,24 @@ import { typeScriptFileHasCanonicalDeclarationRule } from './canonical-declarati
 
 const ESTINANT_NAME = 'omitProgramCanonicalExportRequirement' as const;
 
-const omitterSource = new EstinantSourceInstance({
+const omitterSource = new ProgrammedTransformSourceInstance({
   filePath: __filename,
-  estinantName: ESTINANT_NAME,
+  programmedTransformName: ESTINANT_NAME,
 });
 
 /**
  * Creates an assertion omission for program files
  */
-export const omitProgramCanonicalExportRequirement = buildEstinant({
+export const omitProgramCanonicalExportRequirement = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<EngineProgramFileVoque>({
-    gepp: ENGINE_PROGRAM_FILE_GEPP,
+  .fromItem2<EngineProgramFileVoque>({
+    collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .toHubblepup2<LintAssertionOmissionVoque>({
-    gepp: LINT_ASSERTION_OMISSION_GEPP,
+  .toItem2<LintAssertionOmissionVoque>({
+    collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
-  .onPinbe((engineFile) => {
+  .onTransform((engineFile) => {
     return new LintAssertionOmissionInstance({
       omitterSource,
       omittedAssertionZorn: new LintAssertionZorn({

@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
@@ -22,11 +22,11 @@ import { PARTITIONED_FILE_GEPP, PartitionedFileVoque } from './partitionedFile';
 /**
  * Associates a partitioned file to its parent bounded directory
  */
-export const getFileFact2 = buildEstinant({
+export const getFileFact2 = buildProgrammedTransform({
   name: 'getFileFact2',
 })
-  .fromHubblepup2<PartitionedFileVoque>({
-    gepp: PARTITIONED_FILE_GEPP,
+  .fromItem2<PartitionedFileVoque>({
+    collectionId: PARTITIONED_FILE_GEPP,
   })
   .andFromHubblepupTuple2<BoundedDirectoryVoque, [OdeshinZorn]>({
     gepp: BOUNDED_DIRECTORY_GEPP,
@@ -52,10 +52,10 @@ export const getFileFact2 = buildEstinant({
   .andFromVoictent2<FileDependencyVoque>({
     gepp: FILE_DEPENDENCY_GEPP,
   })
-  .toHubblepup2<FileFact2Voque>({
-    gepp: FILE_FACT_2_GEPP,
+  .toItem2<FileFact2Voque>({
+    collectionId: FILE_FACT_2_GEPP,
   })
-  .onPinbe(
+  .onTransform(
     (
       partitionedFile,
       [parentBoundedDirectory],

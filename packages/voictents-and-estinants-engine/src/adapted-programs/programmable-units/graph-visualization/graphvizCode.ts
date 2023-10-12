@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * See https://graphviz.org/doc/info/lang.html for the specification of
@@ -13,7 +13,7 @@ export const GRAPHVIZ_CODE_GEPP = 'graphviz-code';
 
 type GraphvizCodeGepp = typeof GRAPHVIZ_CODE_GEPP;
 
-export type GraphvizCodeVoque = InMemoryOdeshin2ListVoque<
+export type GraphvizCodeVoque = InMemoryIdentifiableItem2ListStreamMetatype<
   GraphvizCodeGepp,
   GraphvizCode
 >;

@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   EngineProgram3Voque,
   ENGINE_PROGRAM_3_GEPP,
@@ -28,16 +28,16 @@ import {
  * voictents, the end node and edges from unused voictents and estinants without
  * outputs to the end node
  */
-export const getTopLevelEngineProgramGraphElements = buildEstinant({
+export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
   name: 'getTopLevelEngineProgramGraphElements',
 })
-  .fromHubblepup2<EngineProgram3Voque>({
-    gepp: ENGINE_PROGRAM_3_GEPP,
+  .fromItem2<EngineProgram3Voque>({
+    collectionId: ENGINE_PROGRAM_3_GEPP,
   })
   .toHubblepupTuple2<DirectedGraphElement2Voque>({
-    gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
-  .onPinbe((engineProgram) => {
+  .onTransform((engineProgram) => {
     const { rootGraphLocator } = engineProgram.locator;
 
     const rootGraph = new DirectedGraph2Instance({

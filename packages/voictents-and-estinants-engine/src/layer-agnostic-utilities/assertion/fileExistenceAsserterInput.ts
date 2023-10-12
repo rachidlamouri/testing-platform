@@ -10,17 +10,17 @@ import {
   ComplexId,
 } from '../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../package-agnostic-utilities/type/simplify';
-import { InMemoryOdeshin2ListVoque } from '../collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../collection/inMemoryIdentifiableItemCollection2';
 
-const FILE_EXISTENCE_ASSERTER_INPUT_ZORN_TEMPLATE = [
+const FILE_EXISTENCE_ASSERTER_INPUT_ID_TEMPLATE = [
   ['requestor', ComplexId.ANY],
   'filePath',
 ] as const satisfies GenericComplexIdTemplate;
-type FileExistenceAsserterInputZornTemplate =
-  typeof FILE_EXISTENCE_ASSERTER_INPUT_ZORN_TEMPLATE;
-class FileExistenceAsserterInputZorn extends ComplexId<FileExistenceAsserterInputZornTemplate> {
-  get rawTemplate(): FileExistenceAsserterInputZornTemplate {
-    return FILE_EXISTENCE_ASSERTER_INPUT_ZORN_TEMPLATE;
+type FileExistenceAsserterInputIdTemplate =
+  typeof FILE_EXISTENCE_ASSERTER_INPUT_ID_TEMPLATE;
+class FileExistenceAsserterInputId extends ComplexId<FileExistenceAsserterInputIdTemplate> {
+  get rawTemplate(): FileExistenceAsserterInputIdTemplate {
+    return FILE_EXISTENCE_ASSERTER_INPUT_ID_TEMPLATE;
   }
 }
 
@@ -36,7 +36,7 @@ type FileExistenceAsserterInputConstructorInput = {
 type FileExistenceAsserterInput = SimplifyN<
   [
     {
-      zorn: FileExistenceAsserterInputZorn;
+      id: FileExistenceAsserterInputId;
     },
     Omit<FileExistenceAsserterInputConstructorInput, 'requestor'>,
     {
@@ -50,7 +50,7 @@ export const { FileExistenceAsserterInputInstance } =
     constructorName: 'FileExistenceAsserterInputInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'filePath',
       'requestSource',
     ] as const satisfies readonly (keyof FileExistenceAsserterInput)[],
@@ -69,7 +69,7 @@ export const { FileExistenceAsserterInputInstance } =
       transformInput: (input) => {
         const { filePath, requestor } = input;
 
-        const zorn = new FileExistenceAsserterInputZorn({
+        const id = new FileExistenceAsserterInputId({
           requestor,
           filePath,
         });
@@ -82,7 +82,7 @@ export const { FileExistenceAsserterInputInstance } =
         });
 
         return {
-          zorn,
+          id,
           ...input,
           requestSource,
         } satisfies FileExistenceAsserterInput;
@@ -90,12 +90,14 @@ export const { FileExistenceAsserterInputInstance } =
     })
     .assemble();
 
-export const FILE_EXISTENCE_ASSERTER_INPUT_GEPP =
+export const FILE_EXISTENCE_ASSERTER_INPUT_COLLECTION_ID =
   'file-existence-asserter-input';
 
-type FileExistenceAsserterInputGepp = typeof FILE_EXISTENCE_ASSERTER_INPUT_GEPP;
+type FileExistenceAsserterInputCollectionId =
+  typeof FILE_EXISTENCE_ASSERTER_INPUT_COLLECTION_ID;
 
-export type FileExistenceAsserterInputVoque = InMemoryOdeshin2ListVoque<
-  FileExistenceAsserterInputGepp,
-  FileExistenceAsserterInput
->;
+export type FileExistenceAsserterInputStreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    FileExistenceAsserterInputCollectionId,
+    FileExistenceAsserterInput
+  >;

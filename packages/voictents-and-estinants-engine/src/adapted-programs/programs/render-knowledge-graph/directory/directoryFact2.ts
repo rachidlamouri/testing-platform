@@ -14,7 +14,7 @@ import {
 } from '../partition-fact/partitionFact';
 import { THEME } from '../theme';
 import { BoundedDirectory } from './boundedDirectory';
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { DirectedCluster2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedCluster2';
 import { DirectedGraphElement2 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { FactTypeName } from '../fact/factTypeName';
@@ -118,7 +118,7 @@ export const DIRECTORY_FACT_2_GEPP = 'directory-fact-2';
 
 type DirectoryFact2Gepp = typeof DIRECTORY_FACT_2_GEPP;
 
-export type DirectoryFact2Voque = InMemoryOdeshin2ListVoque<
+export type DirectoryFact2Voque = InMemoryIdentifiableItem2ListStreamMetatype<
   DirectoryFact2Gepp,
   DirectoryFact2
 >;

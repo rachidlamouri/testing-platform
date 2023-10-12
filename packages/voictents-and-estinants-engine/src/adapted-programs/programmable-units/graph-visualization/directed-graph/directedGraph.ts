@@ -1,6 +1,6 @@
 import { DirectedGraphEdge } from './directedGraphEdge';
 import { DirectedGraphNode } from './directedGraphNode';
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { SpreadN } from '../../../../package-agnostic-utilities/type/spreadN';
 import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
 import { AttributeByKeyGSC } from './attributeByKeyGSC';
@@ -37,7 +37,7 @@ export const DIRECTED_GRAPH_GEPP = 'directed-graph';
 
 type DirectedGraphGepp = typeof DIRECTED_GRAPH_GEPP;
 
-export type DirectedGraphVoque = InMemoryOdeshin2ListVoque<
+export type DirectedGraphVoque = InMemoryIdentifiableItem2ListStreamMetatype<
   DirectedGraphGepp,
   DirectedGraph
 >;

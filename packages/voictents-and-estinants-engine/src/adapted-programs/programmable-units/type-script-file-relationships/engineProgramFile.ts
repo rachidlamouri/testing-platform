@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { EngineFunctionConfiguration } from '../engine-program/engineFunctionConfiguration';
 import { TypeScriptFile } from '../type-script-file/typeScriptFile';
 
@@ -15,7 +15,8 @@ export const ENGINE_PROGRAM_FILE_GEPP = 'engine-program-file';
 
 type EngineProgramFileGepp = typeof ENGINE_PROGRAM_FILE_GEPP;
 
-export type EngineProgramFileVoque = InMemoryOdeshin2ListVoque<
-  EngineProgramFileGepp,
-  EngineProgramFile
->;
+export type EngineProgramFileVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    EngineProgramFileGepp,
+    EngineProgramFile
+  >;

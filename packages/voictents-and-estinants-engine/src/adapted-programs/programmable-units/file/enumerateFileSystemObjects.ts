@@ -3,7 +3,7 @@ import {
   getNestedFileSystemNodeMetadataList,
 } from '../../../package-agnostic-utilities/file/getNestedFileSystemNodeMetadataList';
 import { splitList } from '../../../package-agnostic-utilities/array/splitList';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { DIRECTORY_GEPP, DirectoryInstance, DirectoryVoque } from './directory';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -17,19 +17,19 @@ import { FILE_GEPP, File, FileInstance, FileVoque } from './file';
  * all of the encountered directories and files. It ignores file system nodes
  * based on the input configuration's ignored list configuration.
  */
-export const enumerateFileSystemObjects = buildEstinant({
+export const enumerateFileSystemObjects = buildProgrammedTransform({
   name: 'enumerateFileSystemObjects',
 })
-  .fromHubblepup2<FileSystemObjectEnumeratorConfigurationVoque>({
-    gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  .fromItem2<FileSystemObjectEnumeratorConfigurationVoque>({
+    collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   })
   .toHubblepupTuple2<DirectoryVoque>({
-    gepp: DIRECTORY_GEPP,
+    collectionId: DIRECTORY_GEPP,
   })
   .toHubblepupTuple2<FileVoque>({
-    gepp: FILE_GEPP,
+    collectionId: FILE_GEPP,
   })
-  .onPinbe((input) => {
+  .onTransform((input) => {
     const nodeMetadataList = getNestedFileSystemNodeMetadataList(input);
 
     const directoryMetadataList: FileSystemNodeMetadata[] = [];

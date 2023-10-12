@@ -129,7 +129,7 @@ export type PinbetunfBuilderParent2<
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = {
-  onPinbe: PinbetunfBuilder2<
+  onTransform: PinbetunfBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple,
     TAdaptedOutputVickenTuple

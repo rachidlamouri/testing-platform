@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -86,4 +86,7 @@ export const BOUNDARY_GEPP = 'boundary';
 
 type BoundaryGepp = typeof BOUNDARY_GEPP;
 
-export type BoundaryVoque = InMemoryOdeshin2ListVoque<BoundaryGepp, Boundary>;
+export type BoundaryVoque = InMemoryIdentifiableItem2ListStreamMetatype<
+  BoundaryGepp,
+  Boundary
+>;

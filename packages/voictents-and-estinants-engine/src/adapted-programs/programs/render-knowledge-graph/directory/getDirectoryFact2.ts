@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
 import {
   BOUNDED_DIRECTORY_GEPP,
@@ -18,11 +18,11 @@ import {
  * Associates a partitioned directory to its bounded parent directory. Boundary
  * directories will not have a bounded parent directory.
  */
-export const getDirectoryFact2 = buildEstinant({
+export const getDirectoryFact2 = buildProgrammedTransform({
   name: 'getDirectoryFact2',
 })
-  .fromHubblepup2<PartitionedDirectoryVoque>({
-    gepp: PARTITIONED_DIRECTORY_GEPP,
+  .fromItem2<PartitionedDirectoryVoque>({
+    collectionId: PARTITIONED_DIRECTORY_GEPP,
   })
   .andFromHubblepupTuple2<BoundedDirectoryVoque, [] | [OdeshinZorn]>({
     gepp: BOUNDED_DIRECTORY_GEPP,
@@ -40,10 +40,10 @@ export const getDirectoryFact2 = buildEstinant({
       return potentialParentDirectory.item.directory.directoryPath.serialized;
     },
   })
-  .toHubblepup2<DirectoryFact2Voque>({
-    gepp: DIRECTORY_FACT_2_GEPP,
+  .toItem2<DirectoryFact2Voque>({
+    collectionId: DIRECTORY_FACT_2_GEPP,
   })
-  .onPinbe((childDirectory, [parentDirectory = null]) => {
+  .onTransform((childDirectory, [parentDirectory = null]) => {
     return new DirectoryFact2Instance({
       partitionFact: childDirectory.partitionFact,
       parentDirectory,

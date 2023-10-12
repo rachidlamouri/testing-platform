@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { FilePath } from '../../programmable-units/file/filePath';
 import { FileSystemNodeZorn } from '../../programmable-units/file/fileSystemNode';
@@ -56,7 +56,7 @@ export const FILE_AST_LIST_GEPP = 'file-ast-list';
 
 type FileAstListGepp = typeof FILE_AST_LIST_GEPP;
 
-export type FileAstListVoque = InMemoryOdeshin2ListVoque<
+export type FileAstListVoque = InMemoryIdentifiableItem2ListStreamMetatype<
   FileAstListGepp,
   FileAstList
 >;

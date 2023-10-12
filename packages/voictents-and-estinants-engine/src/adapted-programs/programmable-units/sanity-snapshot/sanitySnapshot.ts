@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * Information to be committed that is expected to change if a program
@@ -13,7 +13,7 @@ export const SANITY_SNAPSHOT_GEPP = 'sanity-snapshot';
 
 type SanitySnapshotGepp = typeof SANITY_SNAPSHOT_GEPP;
 
-export type SanitySnapshotVoque = InMemoryOdeshin2ListVoque<
+export type SanitySnapshotVoque = InMemoryIdentifiableItem2ListStreamMetatype<
   SanitySnapshotGepp,
   SanitySnapshot
 >;

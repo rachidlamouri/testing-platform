@@ -1,6 +1,6 @@
 import fs from 'fs';
 import assert from 'assert';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   BASH_FILE_GEPP,
   BashFileVoque,
@@ -32,11 +32,11 @@ const CI_FILE_PATH = 'packages/voictents-and-estinants-engine/ci.sh';
 /**
  * Produces a ProgramError if ci.sh does not match the serialized model
  */
-export const assertCiFileIsUpToDate = buildEstinant({
+export const assertCiFileIsUpToDate = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<SerializedCiModelVoque>({
-    gepp: SERIALIZED_CI_MODEL_GEPP,
+  .fromItem2<SerializedCiModelVoque>({
+    collectionId: SERIALIZED_CI_MODEL_GEPP,
   })
   .andFromHubblepupTuple2<BashFileVoque, [OdeshinZorn]>({
     gepp: BASH_FILE_GEPP,
@@ -44,9 +44,9 @@ export const assertCiFileIsUpToDate = buildEstinant({
     croard: (leftInput) => leftInput.item.filePath.serialized,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((serializeCiModel, [ciFile]) => {
+  .onTransform((serializeCiModel, [ciFile]) => {
     const onDiskContents = fs.readFileSync(ciFile.filePath.serialized, 'utf-8');
 
     const actual = onDiskContents;

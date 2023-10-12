@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ESTINANT_INPUT_2_GEPP,
@@ -17,11 +17,11 @@ import {
 /**
  * Gets information about transform inputs and their connected collections
  */
-export const getInputMetadataEntry = buildEstinant({
+export const getInputMetadataEntry = buildProgrammedTransform({
   name: 'getInputMetadataEntry',
 })
-  .fromHubblepup2<ProgramEstinantInputRelationshipVoque>({
-    gepp: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
+  .fromItem2<ProgramEstinantInputRelationshipVoque>({
+    collectionId: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
   })
   .andFromHubblepupTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
     gepp: ESTINANT_INPUT_2_GEPP,
@@ -30,10 +30,10 @@ export const getInputMetadataEntry = buildEstinant({
     },
     croard: (engineEstinant) => engineEstinant.item.zorn,
   })
-  .toHubblepup2<DirectedGraphMetadataEntryVoque>({
-    gepp: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
+  .toItem2<DirectedGraphMetadataEntryVoque>({
+    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
   })
-  .onPinbe((relationship, [estinantInput]) => {
+  .onTransform((relationship, [estinantInput]) => {
     const inputName =
       estinantInput.index === 0
         ? 'Left Input'

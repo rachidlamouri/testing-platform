@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
 import {
   DirectoryVoque,
@@ -13,21 +13,21 @@ import {
 /**
  * Gathers the directory for a boundary given the directory path from the boundary configuration
  */
-export const getBoundaryFromConfiguration = buildEstinant({
+export const getBoundaryFromConfiguration = buildProgrammedTransform({
   name: 'getBoundaryFromConfiguration',
 })
-  .fromHubblepup2<BoundaryConfigurationVoque>({
-    gepp: BOUNDARY_CONFIGURATION_GEPP,
+  .fromItem2<BoundaryConfigurationVoque>({
+    collectionId: BOUNDARY_CONFIGURATION_GEPP,
   })
   .andFromHubblepupTuple2<DirectoryVoque, [OdeshinZorn]>({
     gepp: DIRECTORY_GEPP,
     framate: (locator) => [locator.item.directoryPath],
     croard: (directory) => directory.item.directoryPath.serialized,
   })
-  .toHubblepup2<BoundaryVoque>({
-    gepp: BOUNDARY_GEPP,
+  .toItem2<BoundaryVoque>({
+    collectionId: BOUNDARY_GEPP,
   })
-  .onPinbe((boundaryConfiguration, [directory]) => {
+  .onTransform((boundaryConfiguration, [directory]) => {
     return new BoundaryInstance({
       typeName: boundaryConfiguration.typeName,
       displayName: boundaryConfiguration.displayName,

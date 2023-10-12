@@ -1,5 +1,5 @@
 import { ComplexMap } from '../../../../package-agnostic-utilities/data-structure/complexMap';
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import { FILE_DEPENDENCY_GEPP, FileDependencyVoque } from './fileDependency';
 import {
   PARTITIONED_FILE_DEPENDENCY_GEPP,
@@ -14,16 +14,16 @@ import {
  * PartitionedFileDependency objects by the combination of PartitionFact id and
  * FileDependency id
  */
-export const getPartitionedFileDependency = buildEstinant({
+export const getPartitionedFileDependency = buildProgrammedTransform({
   name: 'getPartitionedFileDependency',
 })
   .fromVoictent2<FileDependencyVoque>({
-    gepp: FILE_DEPENDENCY_GEPP,
+    collectionId: FILE_DEPENDENCY_GEPP,
   })
   .toHubblepupTuple2<PartitionedFileDependencyVoque>({
-    gepp: PARTITIONED_FILE_DEPENDENCY_GEPP,
+    collectionId: PARTITIONED_FILE_DEPENDENCY_GEPP,
   })
-  .onPinbe((fileDependencyVoictent) => {
+  .onTransform((fileDependencyVoictent) => {
     type MappableFileDependencyInput = {
       partitionFactZorn: string;
       fileDependencyZorn: string;

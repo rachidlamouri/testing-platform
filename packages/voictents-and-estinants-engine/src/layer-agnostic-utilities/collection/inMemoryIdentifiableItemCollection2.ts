@@ -134,15 +134,16 @@ export abstract class BaseInMemoryOdeshin2Voictent<
   }
 }
 
-export type InMemoryOdeshin2ListVoque<
+export type InMemoryIdentifiableItem2ListStreamMetatype<
   TGepp extends CollectionId,
   TOdeshin extends GenericIdentifiableItem,
 > = InMemoryIdentifiableItem2StreamMetatype<TGepp, TOdeshin, TOdeshin[]>;
 
-export type GenericInMemoryOdeshin2ListVoque = InMemoryOdeshin2ListVoque<
-  CollectionId,
-  GenericIdentifiableItem
->;
+export type GenericInMemoryOdeshin2ListVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    CollectionId,
+    GenericIdentifiableItem
+  >;
 
 export class InMemoryOdeshin2ListVoictent<
   TVoque extends GenericInMemoryOdeshin2ListVoque,

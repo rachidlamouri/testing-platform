@@ -2,7 +2,7 @@ import { posix } from 'path';
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
 import { resolveModuleFilePath } from '../../../package-agnostic-utilities/file/resolveModuleFilePath';
 import { isImportDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isImportDeclaration';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
   ParsedTypeScriptFileVoque,
@@ -36,19 +36,19 @@ const reporterLocator: ReportingLocator = {
  * example it gets the full file path for relative imports so later transforms
  * don't need to resolve file paths.
  */
-export const getTypeScriptFileImportList = buildEstinant({
+export const getTypeScriptFileImportList = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<ParsedTypeScriptFileVoque>({
-    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<ParsedTypeScriptFileVoque>({
+    collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toHubblepup2<TypeScriptFileImportListVoque>({
-    gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+  .toItem2<TypeScriptFileImportListVoque>({
+    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((parsedTypeScriptFile) => {
+  .onTransform((parsedTypeScriptFile) => {
     const importAndErrorList = parsedTypeScriptFile.program.body
       .filter(isImportDeclaration)
       .map<TypeScriptFileImport | ReportedProgramError<ReportingLocator>>(

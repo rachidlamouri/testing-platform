@@ -1,6 +1,6 @@
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import { BOUNDARY_GEPP, BoundaryVoque } from '../boundary/boundary';
 import {
   PARTITIONED_BOUNDARY_GEPP,
@@ -21,11 +21,11 @@ import {
 /**
  * Creates a partition fact and a partitioned boundary from a boundary.
  */
-export const getBoundaryPartition = buildEstinant({
+export const getBoundaryPartition = buildProgrammedTransform({
   name: 'getBoundaryPartition',
 })
-  .fromHubblepup2<BoundaryVoque>({
-    gepp: BOUNDARY_GEPP,
+  .fromItem2<BoundaryVoque>({
+    collectionId: BOUNDARY_GEPP,
   })
   .andFromHubblepupTuple2<LayerTrieVoque, ['']>({
     gepp: LAYER_TRIE_GEPP,
@@ -39,13 +39,13 @@ export const getBoundaryPartition = buildEstinant({
     framate: () => [''],
     croard: () => '',
   })
-  .toHubblepup2<PartitionFactVoque>({
-    gepp: PARTITION_FACT_GEPP,
+  .toItem2<PartitionFactVoque>({
+    collectionId: PARTITION_FACT_GEPP,
   })
-  .toHubblepup2<PartitionedBoundaryVoque>({
-    gepp: PARTITIONED_BOUNDARY_GEPP,
+  .toItem2<PartitionedBoundaryVoque>({
+    collectionId: PARTITIONED_BOUNDARY_GEPP,
   })
-  .onPinbe((boundary, [layerTrie], [commonBoundaryRoot]) => {
+  .onTransform((boundary, [layerTrie], [commonBoundaryRoot]) => {
     const layer = layerTrie.find(
       boundary.directory.directoryPath.partList,
       isNotNull,

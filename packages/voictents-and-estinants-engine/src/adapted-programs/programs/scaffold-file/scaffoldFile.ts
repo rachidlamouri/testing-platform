@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { posix } from 'path';
 import Case from 'case';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   FileTypeName,
   SCAFFOLD_CONFIGURATION_GEPP,
@@ -17,11 +17,11 @@ import { getProgramFileContents } from './getProgramFileContents';
  * Populates export declarations for a collection and all related types. It uses
  * the file name to derive the reference names/
  */
-export const scaffoldFile = buildEstinant({
+export const scaffoldFile = buildProgrammedTransform({
   name: 'scaffoldFile',
 })
-  .fromHubblepup2<ScaffoldConfigurationVoque>({
-    gepp: SCAFFOLD_CONFIGURATION_GEPP,
+  .fromItem2<ScaffoldConfigurationVoque>({
+    collectionId: SCAFFOLD_CONFIGURATION_GEPP,
   })
   .andFromHubblepupTuple2<FileVoque, [string]>({
     gepp: FILE_GEPP,
@@ -32,7 +32,7 @@ export const scaffoldFile = buildEstinant({
       return file.item.filePath.serialized;
     },
   })
-  .onPinbe((scaffoldConfiguration, [file]) => {
+  .onTransform((scaffoldConfiguration, [file]) => {
     const currentContents = fs.readFileSync(
       scaffoldConfiguration.filePath,
       'utf8',

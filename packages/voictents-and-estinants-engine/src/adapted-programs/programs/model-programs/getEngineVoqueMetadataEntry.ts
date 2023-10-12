@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_VOQUE_2_GEPP,
@@ -21,21 +21,21 @@ import {
  *
  * @readableName getStreamMetatypeModelMetadataEntry
  */
-export const getEngineVoqueMetadataEntry = buildEstinant({
+export const getEngineVoqueMetadataEntry = buildProgrammedTransform({
   name: 'getEngineVoqueMetadataEntry',
 })
-  .fromHubblepup2<ProgramVoqueRelationship2Voque>({
-    gepp: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
+  .fromItem2<ProgramVoqueRelationship2Voque>({
+    collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .andFromHubblepupTuple2<EngineVoque2Voque, [OdeshinZorn]>({
     gepp: ENGINE_VOQUE_2_GEPP,
     framate: (relationship) => [relationship.item.voqueLocator.zorn],
     croard: (engineVoque) => engineVoque.item.zorn,
   })
-  .toHubblepup2<DirectedGraphMetadataEntryVoque>({
-    gepp: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
+  .toItem2<DirectedGraphMetadataEntryVoque>({
+    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
   })
-  .onPinbe((relationship, [engineVoque]) => {
+  .onTransform((relationship, [engineVoque]) => {
     const fieldList: DirectedGraphMetadatumField[] = [
       {
         label: 'Type',

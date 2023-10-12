@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   AST_NODE_LOCATOR_GEPP,
   AstNodeLocatorVoque,
@@ -20,16 +20,16 @@ const isIdentifierLocator = (
 /**
  * Pipes identifier ast node locators into their own collection
  */
-export const filterIdentifier = buildEstinant({
+export const filterIdentifier = buildProgrammedTransform({
   name: 'filterIdentifier',
 })
-  .fromHubblepup2<AstNodeLocatorVoque>({
-    gepp: AST_NODE_LOCATOR_GEPP,
+  .fromItem2<AstNodeLocatorVoque>({
+    collectionId: AST_NODE_LOCATOR_GEPP,
   })
   .toHubblepupTuple2<IdentifierNodeLocatorVoque>({
-    gepp: IDENTIFIER_NODE_LOCATOR_GEPP,
+    collectionId: IDENTIFIER_NODE_LOCATOR_GEPP,
   })
-  .onPinbe((nodeLocator) => {
+  .onTransform((nodeLocator) => {
     if (isIdentifierLocator(nodeLocator) && nodeLocator.node.name !== 'const') {
       return [nodeLocator];
     }

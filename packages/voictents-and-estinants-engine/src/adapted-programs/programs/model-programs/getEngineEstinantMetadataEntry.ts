@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_ESTINANT_3_GEPP,
@@ -19,11 +19,11 @@ import {
  *
  * @readableName getProgrammedTransformModelMetadataEntry
  */
-export const getEngineEstinantMetadataEntry = buildEstinant({
+export const getEngineEstinantMetadataEntry = buildProgrammedTransform({
   name: 'getEngineEstinantMetadataEntry',
 })
-  .fromHubblepup2<ProgramEstinantRelationshipVoque>({
-    gepp: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
+  .fromItem2<ProgramEstinantRelationshipVoque>({
+    collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
   })
   .andFromHubblepupTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
     gepp: ENGINE_ESTINANT_3_GEPP,
@@ -32,10 +32,10 @@ export const getEngineEstinantMetadataEntry = buildEstinant({
     },
     croard: (engineEstinant) => engineEstinant.item.locator.zorn,
   })
-  .toHubblepup2<DirectedGraphMetadataEntryVoque>({
-    gepp: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
+  .toItem2<DirectedGraphMetadataEntryVoque>({
+    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
   })
-  .onPinbe((relationship, [engineEstinant]) => {
+  .onTransform((relationship, [engineEstinant]) => {
     const entry = new DirectedGraphMetadataEntryInstance({
       elementId: engineEstinant.digestibleId,
       rootGraphLocator: relationship.rootGraphLocator,

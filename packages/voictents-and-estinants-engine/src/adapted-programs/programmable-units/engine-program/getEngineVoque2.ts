@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   GenericProgramErrorVoque,
@@ -35,11 +35,11 @@ const reporterLocator: ReportingLocator = {
  *
  * @readableName getStreamMetatypeModel
  */
-export const getEngineVoque2 = buildEstinant({
+export const getEngineVoque2 = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<EngineVoqueLocator2Voque>({
-    gepp: ENGINE_VOQUE_LOCATOR_2_GEPP,
+  .fromItem2<EngineVoqueLocator2Voque>({
+    collectionId: ENGINE_VOQUE_LOCATOR_2_GEPP,
   })
   .andFromHubblepupTuple2<
     FileCommentedProgramBodyDeclarationGroupVoque,
@@ -49,13 +49,13 @@ export const getEngineVoque2 = buildEstinant({
     framate: (left) => [left.item.filePath],
     croard: (right) => right.item.filePath,
   })
-  .toHubblepup2<EngineVoque2Voque>({
-    gepp: ENGINE_VOQUE_2_GEPP,
+  .toItem2<EngineVoque2Voque>({
+    collectionId: ENGINE_VOQUE_2_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((voqueLocator, [{ declarationByIdentifier }]) => {
+  .onTransform((voqueLocator, [{ declarationByIdentifier }]) => {
     // TODO: move these naming conventions elsewhere
     const hubblepupIdentifierName = voqueLocator.identifierName
       .replace(/Voque$/, '')

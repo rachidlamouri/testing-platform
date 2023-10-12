@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   EngineProgram3Voque,
   ENGINE_PROGRAM_3_GEPP,
@@ -13,16 +13,18 @@ import {
  * Gets metadata for engine program concepts that require the full program
  * context
  */
-export const getTopLevelEngineProgramMetadataEntries = buildEstinant({
-  name: 'getTopLevelEngineProgramMetadataEntries',
-})
-  .fromHubblepup2<EngineProgram3Voque>({
-    gepp: ENGINE_PROGRAM_3_GEPP,
+export const getTopLevelEngineProgramMetadataEntries = buildProgrammedTransform(
+  {
+    name: 'getTopLevelEngineProgramMetadataEntries',
+  },
+)
+  .fromItem2<EngineProgram3Voque>({
+    collectionId: ENGINE_PROGRAM_3_GEPP,
   })
   .toHubblepupTuple2<DirectedGraphMetadataEntryVoque>({
-    gepp: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
+    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
   })
-  .onPinbe((engineProgram) => {
+  .onTransform((engineProgram) => {
     const programEntry = new DirectedGraphMetadataEntryInstance({
       elementId: engineProgram.digestibleId,
       rootGraphLocator: engineProgram.locator.rootGraphLocator,

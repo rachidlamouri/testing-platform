@@ -1,11 +1,11 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { LintAssertionZorn } from '../linting/lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_GEPP,
   LintAssertionOmissionInstance,
   LintAssertionOmissionVoque,
 } from '../linting/lintAssertionOmission';
-import { EstinantSourceInstance } from '../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import { FileSourceInstance } from '../linting/source/fileSource';
 import { typeScriptFileHasCanonicalDeclarationRule } from './canonical-declaration/assertTypeScriptFileHasCanonicalDeclaration';
 import { CommentTagId } from './comment/commentTagId';
@@ -16,25 +16,25 @@ import {
 
 const ESTINANT_NAME = 'handleNoCanonicalDirective' as const;
 
-const omitterSource = new EstinantSourceInstance({
+const omitterSource = new ProgrammedTransformSourceInstance({
   filePath: __filename,
-  estinantName: ESTINANT_NAME,
+  programmedTransformName: ESTINANT_NAME,
 });
 
 /**
  * Creates an assertion omission for files with a specific tag in their file
  * comment
  */
-export const handleNoCanonicalDirective = buildEstinant({
+export const handleNoCanonicalDirective = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<FileParsedCommentGroupVoque>({
-    gepp: FILE_PARSED_COMMENT_GROUP_GEPP,
+  .fromItem2<FileParsedCommentGroupVoque>({
+    collectionId: FILE_PARSED_COMMENT_GROUP_GEPP,
   })
   .toHubblepupTuple2<LintAssertionOmissionVoque>({
-    gepp: LINT_ASSERTION_OMISSION_GEPP,
+    collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
-  .onPinbe((commentGroup) => {
+  .onTransform((commentGroup) => {
     if (
       commentGroup.fileComment !== null &&
       commentGroup.fileComment.tagIdSet.has(

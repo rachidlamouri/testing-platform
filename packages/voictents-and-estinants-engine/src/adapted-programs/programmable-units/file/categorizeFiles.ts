@@ -6,7 +6,7 @@ import {
 import { YAML_FILE_GEPP, YamlFile, YamlFileVoque } from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { HtmlFile, HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { BASH_FILE_GEPP, BashFile, BashFileVoque } from '../bash-file/bashFile';
 import { FILE_GEPP, FileVoque } from './file';
 
@@ -14,11 +14,11 @@ import { FILE_GEPP, FileVoque } from './file';
  * Places a file into zero or more collections without modifying the file. Uses
  * the object pattern with shareable getters
  */
-export const categorizeFiles = buildEstinant({
+export const categorizeFiles = buildProgrammedTransform({
   name: 'categorizeFiles',
 })
-  .fromHubblepup2<FileVoque>({
-    gepp: FILE_GEPP,
+  .fromItem2<FileVoque>({
+    collectionId: FILE_GEPP,
   })
   .toHubblepupOnCondition<BashFileVoque>({
     gepp: BASH_FILE_GEPP,

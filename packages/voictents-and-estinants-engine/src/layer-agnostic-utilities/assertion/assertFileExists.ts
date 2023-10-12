@@ -1,21 +1,21 @@
 import fs from 'fs';
 import { posix } from 'path';
 import {
-  LINT_ASSERTION_GEPP,
+  LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,
-  LintAssertionVoque,
+  LintAssertionStreamMetatype,
 } from '../../adapted-programs/programmable-units/linting/lintAssertion';
 import { TypedRule } from '../../adapted-programs/programmable-units/linting/rule';
-import { EstinantSourceInstance } from '../../adapted-programs/programmable-units/linting/source/estinantSource';
-import { buildEstinant } from '../../adapter/estinant-builder/buildEstinant';
+import { ProgrammedTransformSourceInstance } from '../../adapted-programs/programmable-units/linting/source/estinantSource';
+import { buildProgrammedTransform } from '../../adapter/estinant-builder/buildEstinant';
 import {
-  FILE_EXISTENCE_ASSERTER_INPUT_GEPP,
-  FileExistenceAsserterInputVoque,
+  FILE_EXISTENCE_ASSERTER_INPUT_COLLECTION_ID,
+  FileExistenceAsserterInputStreamMetatype,
 } from './fileExistenceAsserterInput';
 
-const ESTINANT_NAME = 'assertFileExists' as const;
-const ruleSource = new EstinantSourceInstance({
-  estinantName: ESTINANT_NAME,
+const PROGRAMMED_TRANSFORM_NAME = 'assertFileExists' as const;
+const ruleSource = new ProgrammedTransformSourceInstance({
+  programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
   filePath: posix.relative('', __filename),
 });
 
@@ -33,16 +33,16 @@ const rule = new TypedRule<MessageContext>({
 /**
  * Asserts that a given file exists
  */
-export const assertFileExists = buildEstinant({
+export const assertFileExists = buildProgrammedTransform({
   name: 'assertFileExists',
 })
-  .fromHubblepup2<FileExistenceAsserterInputVoque>({
-    gepp: FILE_EXISTENCE_ASSERTER_INPUT_GEPP,
+  .fromItem2<FileExistenceAsserterInputStreamMetatype>({
+    collectionId: FILE_EXISTENCE_ASSERTER_INPUT_COLLECTION_ID,
   })
-  .toHubblepup2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
+  .toItem2<LintAssertionStreamMetatype>({
+    collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .onPinbe((assertionInput) => {
+  .onTransform((assertionInput) => {
     const assertion = new LintAssertion({
       rule,
       lintSource: assertionInput.requestSource,

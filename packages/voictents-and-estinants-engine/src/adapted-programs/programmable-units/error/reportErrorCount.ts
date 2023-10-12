@@ -1,16 +1,16 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 
 /**
  * Reports the size of the error collection
  */
-export const reportErrorCount = buildEstinant({
+export const reportErrorCount = buildProgrammedTransform({
   name: 'reportErrorCount',
 })
   .fromVoictent2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((errorVoictent) => {
+  .onTransform((errorVoictent) => {
     if (errorVoictent.length > 0) {
       setImmediate(() => {
         /* eslint-disable no-console */

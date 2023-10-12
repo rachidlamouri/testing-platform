@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_VOQUE_LOCATOR_2_GEPP,
   EngineVoqueLocator2Voque,
@@ -21,19 +21,19 @@ import {
  *
  * @todo move the responsibility of uniqueness to a collection
  */
-export const getEngineVoqueLocatorCollection2 = buildEstinant({
+export const getEngineVoqueLocatorCollection2 = buildProgrammedTransform({
   name: 'getEngineVoqueLocatorCollection2',
 })
   .fromVoictent2<ProgramVoqueRelationship2Voque>({
-    gepp: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
+    collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .andFromVoictent2<EstinantVoqueRelationship2Voque>({
     gepp: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .toHubblepupTuple2<EngineVoqueLocator2Voque>({
-    gepp: ENGINE_VOQUE_LOCATOR_2_GEPP,
+    collectionId: ENGINE_VOQUE_LOCATOR_2_GEPP,
   })
-  .onPinbe((programRelationshipList, estinantVoqueRelationshipList) => {
+  .onTransform((programRelationshipList, estinantVoqueRelationshipList) => {
     const voqueLocatorByZorn = new Map(
       [...programRelationshipList, ...estinantVoqueRelationshipList].map(
         (relationship) => {

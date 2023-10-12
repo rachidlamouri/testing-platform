@@ -14,7 +14,7 @@ import { GenericAdaptedLeftInputVicken } from './vicken';
 
 export type PartialLeftInputAppreffinge<TLeftInputVoque extends GenericVoque> =
   {
-    gepp: TLeftInputVoque['gepp'];
+    collectionId: TLeftInputVoque['gepp'];
   };
 
 export type PartialRightHubblepupTupleAppreffinge<
@@ -38,5 +38,5 @@ export type PartialRightVoictentAppreffinge<
 };
 
 export type PartialOutputAppreffinge<TOutputVoque extends GenericVoque> = {
-  gepp: TOutputVoque['gepp'];
+  collectionId: TOutputVoque['gepp'];
 };

@@ -1,5 +1,5 @@
 import { hasOneElement } from '../../../../package-agnostic-utilities/array/hasOneElement';
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import { LAYER_LIST_TRIE_GEPP, LayerListTrieVoque } from './layerListTrie';
 import { LAYER_TRIE_GEPP, LayerTrie, LayerTrieVoque } from './layerTrie';
 
@@ -7,16 +7,16 @@ import { LAYER_TRIE_GEPP, LayerTrie, LayerTrieVoque } from './layerTrie';
  * Converts a layer list trie into a trie where each node can only have one
  * layer. It ignores nodes with more than one layer.
  */
-export const getLayerTrie = buildEstinant({
+export const getLayerTrie = buildProgrammedTransform({
   name: 'getLayerTrie',
 })
-  .fromHubblepup2<LayerListTrieVoque>({
-    gepp: LAYER_LIST_TRIE_GEPP,
+  .fromItem2<LayerListTrieVoque>({
+    collectionId: LAYER_LIST_TRIE_GEPP,
   })
-  .toHubblepup2<LayerTrieVoque>({
-    gepp: LAYER_TRIE_GEPP,
+  .toItem2<LayerTrieVoque>({
+    collectionId: LAYER_TRIE_GEPP,
   })
-  .onPinbe((layerListTrie) => {
+  .onTransform((layerListTrie) => {
     const layerTrie = new LayerTrie(null);
 
     layerListTrie

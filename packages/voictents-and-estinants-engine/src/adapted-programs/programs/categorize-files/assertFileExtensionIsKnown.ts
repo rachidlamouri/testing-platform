@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
@@ -21,16 +21,16 @@ const reporterLocator: ReportingLocator = {
 /**
  * Creates a ProgramError if the file extension was marked as unknown by "enumerateFileSystemObjects"
  */
-export const assertFileExtensionIsKnown = buildEstinant({
+export const assertFileExtensionIsKnown = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<FileVoque>({
-    gepp: FILE_GEPP,
+  .fromItem2<FileVoque>({
+    collectionId: FILE_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((file) => {
+  .onTransform((file) => {
     const { suffixIdentifier, suffix } = file.nodePath.name.extension;
 
     if (suffixIdentifier === FileExtensionSuffixIdentifier.Unknown) {

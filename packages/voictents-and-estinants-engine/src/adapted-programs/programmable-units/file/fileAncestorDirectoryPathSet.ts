@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -86,7 +86,8 @@ export const FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP =
 type FileAncestorDirectoryPathSetGepp =
   typeof FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP;
 
-export type FileAncestorDirectoryPathSetVoque = InMemoryOdeshin2ListVoque<
-  FileAncestorDirectoryPathSetGepp,
-  FileAncestorDirectoryPathSet
->;
+export type FileAncestorDirectoryPathSetVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    FileAncestorDirectoryPathSetGepp,
+    FileAncestorDirectoryPathSet
+  >;

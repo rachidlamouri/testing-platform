@@ -3,7 +3,7 @@ import {
   TSESTree,
 } from '@typescript-eslint/typescript-estree';
 import * as commentParser from 'comment-parser';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
   ParsedTypeScriptFileVoque,
@@ -12,8 +12,8 @@ import { CategorizedComment } from './comment/categorized/categorizedComment';
 import { assertHasZeroOrOneElements } from '../../../package-agnostic-utilities/array/assertHasZeroOrOneElements';
 import {
   GenericLintAssertion,
-  LINT_ASSERTION_GEPP,
-  LintAssertionVoque,
+  LINT_ASSERTION_COLLECTION_ID,
+  LintAssertionStreamMetatype,
 } from '../linting/lintAssertion';
 import { AdaptedComment } from './comment/adapted/adaptedComment';
 import { AdaptedLineCommentInstance } from './comment/adapted/adaptedLineComment';
@@ -156,19 +156,19 @@ const getCategorizedComment = (
 /**
  * Parses TypeScript file comments into a custom set of categories
  */
-export const parseTypeScriptFileComments = buildEstinant({
+export const parseTypeScriptFileComments = buildProgrammedTransform({
   name: 'parseTypeScriptFileComments',
 })
-  .fromHubblepup2<ParsedTypeScriptFileVoque>({
-    gepp: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<ParsedTypeScriptFileVoque>({
+    collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toHubblepup2<FileParsedCommentGroupVoque>({
-    gepp: FILE_PARSED_COMMENT_GROUP_GEPP,
+  .toItem2<FileParsedCommentGroupVoque>({
+    collectionId: FILE_PARSED_COMMENT_GROUP_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
+  .toHubblepupTuple2<LintAssertionStreamMetatype>({
+    collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .onPinbe((parsedTypeScriptFile) => {
+  .onTransform((parsedTypeScriptFile) => {
     const { filePath } = parsedTypeScriptFile;
     const commentList = parsedTypeScriptFile.program.comments ?? [];
 
@@ -214,7 +214,7 @@ export const parseTypeScriptFileComments = buildEstinant({
     // });
 
     return {
-      [LINT_ASSERTION_GEPP]: lintAssertionList,
+      [LINT_ASSERTION_COLLECTION_ID]: lintAssertionList,
       [FILE_PARSED_COMMENT_GROUP_GEPP]: new FileParsedCommentGroupInstance({
         filePath,
         list: categorizedCommentList,

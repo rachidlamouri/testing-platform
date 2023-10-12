@@ -1,16 +1,16 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 
 /**
  * Sets a non-zero exit code if there is a program error.
  */
-export const signalError = buildEstinant({
+export const signalError = buildProgrammedTransform({
   name: 'signalError',
 })
-  .fromHubblepup2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+  .fromItem2<GenericProgramErrorVoque>({
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe(() => {
+  .onTransform(() => {
     process.exitCode = 1;
   })
   .assemble();

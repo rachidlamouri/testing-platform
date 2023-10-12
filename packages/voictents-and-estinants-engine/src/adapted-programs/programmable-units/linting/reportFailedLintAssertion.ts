@@ -1,13 +1,13 @@
 import { assertNotNull } from '../../../package-agnostic-utilities/nil/assertNotNull';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
 } from '../error/programError';
 import {
   GenericLintAssertion,
-  LINT_ASSERTION_GEPP,
-  LintAssertionVoque,
+  LINT_ASSERTION_COLLECTION_ID,
+  LintAssertionStreamMetatype,
 } from './lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_GEPP,
@@ -33,19 +33,19 @@ export class LintAssertionError extends Error {
  * Forwards failed LintAssertion objects to the error collection. Ignors lint
  * assertions with an entry in the LintAssertionOmission collection
  */
-export const reportFailedLintAssertion = buildEstinant({
+export const reportFailedLintAssertion = buildProgrammedTransform({
   name: 'reportFailedLintAssertion',
 })
-  .fromHubblepup2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
+  .fromItem2<LintAssertionStreamMetatype>({
+    collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .andFromVoictent2<LintAssertionOmissionVoque>({
     gepp: LINT_ASSERTION_OMISSION_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((lintAssertion, omissionVoictent) => {
+  .onTransform((lintAssertion, omissionVoictent) => {
     const isOmitted = omissionVoictent.omittedZornSet.has(
       lintAssertion.zorn.forHuman,
     );

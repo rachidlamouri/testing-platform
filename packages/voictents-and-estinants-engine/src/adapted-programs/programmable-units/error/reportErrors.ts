@@ -1,5 +1,5 @@
 import { serialize } from '../../../package-agnostic-utilities/one-way-serializer/serialize';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { LintAssertionError } from '../linting/reportFailedLintAssertion';
 import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 
@@ -13,13 +13,13 @@ let isLimitReached = false;
  * Note that this transform only reports the ProgramErrors, and is not
  * responsible for acting on them, such as setting the proccess exit code
  */
-export const reportErrors = buildEstinant({
+export const reportErrors = buildProgrammedTransform({
   name: 'reportErrors',
 })
-  .fromHubblepup2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+  .fromItem2<GenericProgramErrorVoque>({
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((programError) => {
+  .onTransform((programError) => {
     errorCount += 1;
 
     // TODO: Update programError to always be an instance of Error

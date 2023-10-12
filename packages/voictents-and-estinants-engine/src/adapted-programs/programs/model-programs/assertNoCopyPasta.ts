@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_ESTINANT_3_GEPP,
   EngineEstinant3Voque,
@@ -35,11 +35,11 @@ const reporterLocator: ReportingLocator = {
  * same description. This usually indicates that some code was copied and the
  * description was not changed
  */
-export const assertNoCopyPasta = buildEstinant({
+export const assertNoCopyPasta = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
   .fromVoictent2<EngineProgram3Voque>({
-    gepp: ENGINE_PROGRAM_3_GEPP,
+    collectionId: ENGINE_PROGRAM_3_GEPP,
   })
   .andFromVoictent2<EngineVoque2Voque>({
     gepp: ENGINE_VOQUE_2_GEPP,
@@ -48,9 +48,9 @@ export const assertNoCopyPasta = buildEstinant({
     gepp: ENGINE_ESTINANT_3_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((programList, voqueList, estinantList) => {
+  .onTransform((programList, voqueList, estinantList) => {
     const describedProgramEntryList = programList.map((program) => {
       return [program.description, { program }] as const;
     });

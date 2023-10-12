@@ -82,22 +82,22 @@ export const buildOutputHubblepupAppreffingeBuilder2 = <
       previousContext: inputOutputContext,
       normalizeResult: (leftInput, modifiedInput, aggregatedOutput) => {
         const hubblepup = aggregatedOutput[
-          outputAppreffinge.gepp
+          outputAppreffinge.collectionId
         ] as TOutputVoque['hubblepupPelie'];
 
-        return [outputAppreffinge.gepp, [hubblepup]];
+        return [outputAppreffinge.collectionId, [hubblepup]];
       },
-      outputGepp: outputAppreffinge.gepp,
+      outputGepp: outputAppreffinge.collectionId,
     });
 
     return {
-      onPinbe: buildPinbetunfBuilder2<
+      onTransform: buildPinbetunfBuilder2<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
       >(nextContext),
 
-      toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
+      toItem2: buildOutputHubblepupAppreffingeBuilder2<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
@@ -118,7 +118,7 @@ export type OutputHubblepupAppreffingeBuilderParent2<
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = {
-  toHubblepup2: OutputHubblepupAppreffingeBuilder2<
+  toItem2: OutputHubblepupAppreffingeBuilder2<
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple,
     TAdaptedOutputVickenTuple

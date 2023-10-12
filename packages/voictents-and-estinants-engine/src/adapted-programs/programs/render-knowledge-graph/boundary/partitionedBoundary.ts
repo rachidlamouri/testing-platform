@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { PartitionFact } from '../partition-fact/partitionFact';
@@ -54,7 +54,8 @@ export const PARTITIONED_BOUNDARY_GEPP = 'partitioned-boundary';
 
 type PartitionedBoundaryGepp = typeof PARTITIONED_BOUNDARY_GEPP;
 
-export type PartitionedBoundaryVoque = InMemoryOdeshin2ListVoque<
-  PartitionedBoundaryGepp,
-  PartitionedBoundary
->;
+export type PartitionedBoundaryVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    PartitionedBoundaryGepp,
+    PartitionedBoundary
+  >;

@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
   PartitionedBoundaryListTrie,
@@ -13,16 +13,16 @@ import {
  * Gathers boundaries into a trie data structure by their directory paths
  * without checking for overlapping boundaries
  */
-export const getPartitionedBoundaryListTrie = buildEstinant({
+export const getPartitionedBoundaryListTrie = buildProgrammedTransform({
   name: 'getPartitionedBoundaryListTrie',
 })
   .fromVoictent2<PartitionedBoundaryVoque>({
-    gepp: PARTITIONED_BOUNDARY_GEPP,
+    collectionId: PARTITIONED_BOUNDARY_GEPP,
   })
-  .toHubblepup2<PartitionedBoundaryListTrieVoque>({
-    gepp: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+  .toItem2<PartitionedBoundaryListTrieVoque>({
+    collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
   })
-  .onPinbe((partitionedBoundaryList) => {
+  .onTransform((partitionedBoundaryList) => {
     const trie = new PartitionedBoundaryListTrie([]);
 
     partitionedBoundaryList.forEach((partitionedBoundary) => {

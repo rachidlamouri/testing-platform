@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -181,7 +181,7 @@ export const FILE_FACT_2_GEPP = 'file-fact-2';
 
 type FileFact2Gepp = typeof FILE_FACT_2_GEPP;
 
-export type FileFact2Voque = InMemoryOdeshin2ListVoque<
+export type FileFact2Voque = InMemoryIdentifiableItem2ListStreamMetatype<
   FileFact2Gepp,
   FileFact2
 >;

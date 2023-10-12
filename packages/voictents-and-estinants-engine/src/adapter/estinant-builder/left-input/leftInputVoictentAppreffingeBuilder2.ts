@@ -79,7 +79,7 @@ export const buildLeftInputVoictentAppreffingeBuilder2 = (
       const nextContext = buildInputOutputContextFromLeftInputContext({
         instantiationContext,
         leftInputContext: {
-          gepp: partialLeftAppreffinge.gepp,
+          gepp: partialLeftAppreffinge.collectionId,
           isWibiz: true,
           modifyTropoignantInput: (leftInput) => leftInput as unknown,
         },
@@ -96,13 +96,13 @@ export const buildLeftInputVoictentAppreffingeBuilder2 = (
             EmptyAdaptedRightInputVickenTuple
           >(nextContext),
 
-        onPinbe: buildPinbetunfBuilder2<
+        onTransform: buildPinbetunfBuilder2<
           AdaptedLeftInputVoictentVicken<TInputVoque>,
           EmptyAdaptedRightInputVickenTuple,
           EmptyAdaptedOutputVickenTuple
         >(nextContext),
 
-        toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
+        toItem2: buildOutputHubblepupAppreffingeBuilder2<
           AdaptedLeftInputVoictentVicken<TInputVoque>,
           EmptyAdaptedRightInputVickenTuple,
           EmptyAdaptedOutputVickenTuple

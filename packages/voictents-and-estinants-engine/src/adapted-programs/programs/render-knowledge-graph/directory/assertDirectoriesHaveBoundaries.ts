@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   ReportingEstinantLocator,
   ProgramErrorElementLocatorTypeName,
@@ -29,19 +29,19 @@ const reporterLocator: ReportingLocator = {
  *
  * @todo This should really check that all directories with TypeScript files (or other files of interest) fall under a boundary
  */
-export const assertDirectoriesHaveBoundaries = buildEstinant({
+export const assertDirectoriesHaveBoundaries = buildProgrammedTransform({
   name: 'assertDirectoriesHaveBoundaries',
 })
   .fromVoictent2<DirectoryWithFileVoque>({
-    gepp: DIRECTORY_WITH_FILE_GEPP,
+    collectionId: DIRECTORY_WITH_FILE_GEPP,
   })
   .andFromVoictent2<BoundedDirectoryVoque>({
     gepp: BOUNDED_DIRECTORY_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((directoryWithFileVoictent, boundedDirectoryVoictent) => {
+  .onTransform((directoryWithFileVoictent, boundedDirectoryVoictent) => {
     const unboundedDirectoryList = directoryWithFileVoictent.filter(
       (directory) => {
         const boundedDirectory = boundedDirectoryVoictent.byNodePath.get(

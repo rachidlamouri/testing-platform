@@ -1,6 +1,6 @@
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
 import {
   FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
@@ -23,11 +23,11 @@ import {
 /**
  * Associates a file to its boundary.
  */
-export const getBoundedFile = buildEstinant({
+export const getBoundedFile = buildProgrammedTransform({
   name: 'getBoundedFile',
 })
-  .fromHubblepup2<TypeScriptFileVoque>({
-    gepp: TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<TypeScriptFileVoque>({
+    collectionId: TYPE_SCRIPT_FILE_GEPP,
   })
   .andFromHubblepupTuple2<FileAncestorDirectoryPathSetVoque, [string]>({
     gepp: FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
@@ -44,10 +44,10 @@ export const getBoundedFile = buildEstinant({
     framate: () => [''],
     croard: () => '',
   })
-  .toHubblepup2<BoundedFileVoque>({
-    gepp: BOUNDED_FILE_GEPP,
+  .toItem2<BoundedFileVoque>({
+    collectionId: BOUNDED_FILE_GEPP,
   })
-  .onPinbe(
+  .onTransform(
     (file, [{ set: ancestorDirectoryPathSet }], [partitionedBoundaryTrie]) => {
       const boundary = partitionedBoundaryTrie.find(
         file.nodePath.partList,

@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -43,7 +43,8 @@ export const DIRECTED_GRAPH_METADATA_ENTRY_GEPP =
 
 type DirectedGraphMetadataEntryGepp = typeof DIRECTED_GRAPH_METADATA_ENTRY_GEPP;
 
-export type DirectedGraphMetadataEntryVoque = InMemoryOdeshin2ListVoque<
-  DirectedGraphMetadataEntryGepp,
-  DirectedGraphMetadataEntry
->;
+export type DirectedGraphMetadataEntryVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    DirectedGraphMetadataEntryGepp,
+    DirectedGraphMetadataEntry
+  >;

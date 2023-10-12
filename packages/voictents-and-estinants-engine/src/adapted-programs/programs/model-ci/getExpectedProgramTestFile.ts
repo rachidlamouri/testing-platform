@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   BASH_FILE_GEPP,
   BashFileVoque,
@@ -16,11 +16,11 @@ import {
 /**
  * Locates the file object for a program test file
  */
-export const getExpectedProgramTestFile = buildEstinant({
+export const getExpectedProgramTestFile = buildProgrammedTransform({
   name: 'getExpectedProgramTestFile',
 })
-  .fromHubblepup2<ExpectedProgramTestFileConfigurationVoque>({
-    gepp: EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP,
+  .fromItem2<ExpectedProgramTestFileConfigurationVoque>({
+    collectionId: EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP,
   })
   .andFromHubblepupTuple2<BashFileVoque, [string]>({
     gepp: BASH_FILE_GEPP,
@@ -31,10 +31,10 @@ export const getExpectedProgramTestFile = buildEstinant({
       return file.item.filePath.serialized;
     },
   })
-  .toHubblepup2<ExpectedProgramTestFileVoque>({
-    gepp: EXPECTED_PROGRAM_TEST_FILE_GEPP,
+  .toItem2<ExpectedProgramTestFileVoque>({
+    collectionId: EXPECTED_PROGRAM_TEST_FILE_GEPP,
   })
-  .onPinbe((configuration, [testFile]) => {
+  .onTransform((configuration, [testFile]) => {
     return new ExpectedProgramTestFileInstance({
       programName: configuration.programName,
       programFile: configuration.programFile,

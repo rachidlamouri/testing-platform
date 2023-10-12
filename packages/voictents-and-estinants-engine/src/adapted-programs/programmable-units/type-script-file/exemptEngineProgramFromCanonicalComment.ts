@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
   EngineProgramLocator3Voque,
@@ -10,7 +10,7 @@ import {
   LintAssertionOmissionInstance,
   LintAssertionOmissionVoque,
 } from '../linting/lintAssertionOmission';
-import { EstinantSourceInstance } from '../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import { FileSourceInstance } from '../linting/source/fileSource';
 import { typeScriptFileHasCanonicalCommentRule } from './assertTypeScriptFileHasCanonicalComment';
 
@@ -26,20 +26,22 @@ const ESTINANT_NAME = 'exemptEngineProgramFromCanonicalComment' as const;
  * multiple transforms to check for canonical comments and the results of those
  * transforms should get aggregated and sent to the lint assertion transform
  */
-export const exemptEngineProgramFromCanonicalComment = buildEstinant({
-  name: ESTINANT_NAME,
-})
-  .fromHubblepup2<EngineProgramLocator3Voque>({
-    gepp: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+export const exemptEngineProgramFromCanonicalComment = buildProgrammedTransform(
+  {
+    name: ESTINANT_NAME,
+  },
+)
+  .fromItem2<EngineProgramLocator3Voque>({
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .toHubblepup2<LintAssertionOmissionVoque>({
-    gepp: LINT_ASSERTION_OMISSION_GEPP,
+  .toItem2<LintAssertionOmissionVoque>({
+    collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
-  .onPinbe((programLocator) => {
+  .onTransform((programLocator) => {
     return new LintAssertionOmissionInstance({
-      omitterSource: new EstinantSourceInstance({
+      omitterSource: new ProgrammedTransformSourceInstance({
         filePath: posix.resolve('', __filename),
-        estinantName: ESTINANT_NAME,
+        programmedTransformName: ESTINANT_NAME,
       }),
       omittedAssertionZorn: new LintAssertionZorn({
         rule: typeScriptFileHasCanonicalCommentRule,

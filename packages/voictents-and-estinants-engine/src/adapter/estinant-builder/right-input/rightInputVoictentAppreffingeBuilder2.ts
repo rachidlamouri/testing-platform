@@ -115,7 +115,7 @@ export const buildRightInputVoictentAppreffingeBuilder2 = <
         >
       >(nextContext),
 
-      onPinbe: buildPinbetunfBuilder2<
+      onTransform: buildPinbetunfBuilder2<
         TAdaptedLeftInputVicken,
         NextAdaptedRightInputVickenTuple<
           TAdaptedRightInputVickenTuple,
@@ -124,7 +124,7 @@ export const buildRightInputVoictentAppreffingeBuilder2 = <
         EmptyAdaptedOutputVickenTuple
       >(nextContext),
 
-      toHubblepup2: buildOutputHubblepupAppreffingeBuilder2<
+      toItem2: buildOutputHubblepupAppreffingeBuilder2<
         TAdaptedLeftInputVicken,
         NextAdaptedRightInputVickenTuple<
           TAdaptedRightInputVickenTuple,

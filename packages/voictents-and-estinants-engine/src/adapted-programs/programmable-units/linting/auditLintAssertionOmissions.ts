@@ -1,12 +1,12 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
 } from '../error/programError';
 import {
-  LINT_ASSERTION_GEPP,
+  LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,
-  LintAssertionVoque,
+  LintAssertionStreamMetatype,
 } from './lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_GEPP,
@@ -14,16 +14,16 @@ import {
 } from './lintAssertionOmission';
 import { LintAssertionError } from './reportFailedLintAssertion';
 import { TypedRule } from './rule';
-import { EstinantSourceInstance } from './source/estinantSource';
+import { ProgrammedTransformSourceInstance } from './source/estinantSource';
 
 const ESTINANT_NAME = 'auditLintAssertionOmissions' as const;
 
 type OmissionIsValidRuleMessageContext = Record<string, never>;
 const omissionIsValidRule = new TypedRule<OmissionIsValidRuleMessageContext>({
   name: 'omission-is-valid',
-  source: new EstinantSourceInstance({
+  source: new ProgrammedTransformSourceInstance({
     filePath: __filename,
-    estinantName: ESTINANT_NAME,
+    programmedTransformName: ESTINANT_NAME,
   }),
   description:
     'All lint assertion omissions must target an existing lint assertion',
@@ -35,19 +35,19 @@ const omissionIsValidRule = new TypedRule<OmissionIsValidRuleMessageContext>({
 /**
  * Lints linter omissions for non-existent assertions
  */
-export const auditLintAssertionOmissions = buildEstinant({
+export const auditLintAssertionOmissions = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
   .fromVoictent2<LintAssertionOmissionVoque>({
-    gepp: LINT_ASSERTION_OMISSION_GEPP,
+    collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
-  .andFromVoictent2<LintAssertionVoque>({
-    gepp: LINT_ASSERTION_GEPP,
+  .andFromVoictent2<LintAssertionStreamMetatype>({
+    gepp: LINT_ASSERTION_COLLECTION_ID,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
-  .onPinbe((omissionVoictent, assertionVoictent) => {
+  .onTransform((omissionVoictent, assertionVoictent) => {
     const assertionSet = new Set(
       assertionVoictent.map((assertion) => {
         return assertion.zorn.forHuman;

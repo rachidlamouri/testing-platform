@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { FileSystemNodeZorn } from '../../programmable-units/file/fileSystemNode';
@@ -68,7 +68,8 @@ export const FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP =
 type FileSystemNodeRenameConfigurationGepp =
   typeof FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP;
 
-export type FileSystemNodeRenameConfigurationVoque = InMemoryOdeshin2ListVoque<
-  FileSystemNodeRenameConfigurationGepp,
-  FileSystemNodeRenameConfiguration
->;
+export type FileSystemNodeRenameConfigurationVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    FileSystemNodeRenameConfigurationGepp,
+    FileSystemNodeRenameConfiguration
+  >;

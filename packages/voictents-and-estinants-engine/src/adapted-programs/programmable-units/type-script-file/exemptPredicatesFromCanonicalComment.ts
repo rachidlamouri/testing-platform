@@ -1,13 +1,13 @@
 import { posix } from 'path';
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import { isPredicateFunctionish } from '../../../package-agnostic-utilities/type-script-ast/isPredicateFunctionish';
 import {
   LINT_ASSERTION_OMISSION_GEPP,
   LintAssertionOmissionInstance,
   LintAssertionOmissionVoque,
 } from '../linting/lintAssertionOmission';
-import { EstinantSourceInstance } from '../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import {
   FileCommentedProgramBodyDeclarationGroupVoque,
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
@@ -25,16 +25,16 @@ const ESTINANT_NAME = 'exemptPredicatesFromCanonicalComment' as const;
  * Predicates (which includes assertions) should have fairly literal names, so a
  * canonical comment is rather redundant.
  */
-export const exemptPredicatesFromCanonicalComment = buildEstinant({
+export const exemptPredicatesFromCanonicalComment = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   })
   .toHubblepupTuple2<LintAssertionOmissionVoque>({
-    gepp: LINT_ASSERTION_OMISSION_GEPP,
+    collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
-  .onPinbe((declarationGroup) => {
+  .onTransform((declarationGroup) => {
     const { canonicalDeclaration } = declarationGroup;
 
     let parentDeclaration:
@@ -83,9 +83,9 @@ export const exemptPredicatesFromCanonicalComment = buildEstinant({
 
     return [
       new LintAssertionOmissionInstance({
-        omitterSource: new EstinantSourceInstance({
+        omitterSource: new ProgrammedTransformSourceInstance({
           filePath: posix.resolve('', __filename),
-          estinantName: ESTINANT_NAME,
+          programmedTransformName: ESTINANT_NAME,
         }),
         omittedAssertionZorn: new LintAssertionZorn({
           rule: typeScriptFileHasCanonicalCommentRule,

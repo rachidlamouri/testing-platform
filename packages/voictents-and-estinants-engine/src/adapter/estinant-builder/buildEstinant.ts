@@ -16,8 +16,10 @@ import {
  * engine-compatiable estinant.
  *
  * @readableName BuildProgrammedTransform
+ *
+ * @canonicalDeclaration
  */
-export const buildEstinant = (
+export const buildProgrammedTransform = (
   context: InstantiationContext,
 ): SpreadN<
   [
@@ -26,7 +28,7 @@ export const buildEstinant = (
   ]
 > => {
   return {
-    fromHubblepup2: buildLeftInputHubblepupAppreffingeBuilder2(context),
+    fromItem2: buildLeftInputHubblepupAppreffingeBuilder2(context),
     fromVoictent2: buildLeftInputVoictentAppreffingeBuilder2(context),
   };
 };

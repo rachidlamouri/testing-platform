@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * The expected ci.sh generated from the CI model
@@ -12,7 +12,8 @@ export const SERIALIZED_CI_MODEL_GEPP = 'serialized-ci-model';
 
 type SerializedCiModelGepp = typeof SERIALIZED_CI_MODEL_GEPP;
 
-export type SerializedCiModelVoque = InMemoryOdeshin2ListVoque<
-  SerializedCiModelGepp,
-  SerializedCiModel
->;
+export type SerializedCiModelVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    SerializedCiModelGepp,
+    SerializedCiModel
+  >;

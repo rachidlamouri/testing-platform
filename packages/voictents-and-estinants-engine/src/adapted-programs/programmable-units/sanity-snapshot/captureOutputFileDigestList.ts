@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   FileCacheOutputFile,
   OUTPUT_FILE_GEPP,
@@ -17,16 +17,16 @@ type OutputFileDigest = {
  * digest will change. Commit the digest list to be prompted to review any
  * output files that change.
  */
-export const captureOutputFileDigestList = buildEstinant({
+export const captureOutputFileDigestList = buildProgrammedTransform({
   name: 'captureOutputFileDigestList',
 })
   .fromVoictent2<OutputFileVoque>({
-    gepp: OUTPUT_FILE_GEPP,
+    collectionId: OUTPUT_FILE_GEPP,
   })
-  .toHubblepup2<SanitySnapshotVoque>({
-    gepp: SANITY_SNAPSHOT_GEPP,
+  .toItem2<SanitySnapshotVoque>({
+    collectionId: SANITY_SNAPSHOT_GEPP,
   })
-  .onPinbe((list) => {
+  .onTransform((list) => {
     const digestList = list
       .filter(
         (file): file is FileCacheOutputFile => file.fileName !== undefined,

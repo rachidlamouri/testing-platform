@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
   FileDependencyPathNodeFactVoque,
@@ -21,11 +21,11 @@ import { FACT_GEPP, FactVoque } from './fact';
 /**
  * Combines all knowledge graph facts into a single collection
  */
-export const aggregateFacts = buildEstinant({
+export const aggregateFacts = buildProgrammedTransform({
   name: 'aggregateFacts',
 })
   .fromVoictent2<PartitionFactVoque>({
-    gepp: PARTITION_FACT_GEPP,
+    collectionId: PARTITION_FACT_GEPP,
   })
   .andFromVoictent2<DirectoryFact2Voque>({
     gepp: DIRECTORY_FACT_2_GEPP,
@@ -40,9 +40,9 @@ export const aggregateFacts = buildEstinant({
     gepp: FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,
   })
   .toHubblepupTuple2<FactVoque>({
-    gepp: FACT_GEPP,
+    collectionId: FACT_GEPP,
   })
-  .onPinbe(
+  .onTransform(
     (
       partitionFactVoictent,
       directoryFact2Voictent,

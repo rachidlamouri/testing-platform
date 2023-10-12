@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -47,7 +47,8 @@ export const ESTINANT_VOQUE_RELATIONSHIP_2_GEPP =
 
 type EstinantVoqueRelationship2Gepp = typeof ESTINANT_VOQUE_RELATIONSHIP_2_GEPP;
 
-export type EstinantVoqueRelationship2Voque = InMemoryOdeshin2ListVoque<
-  EstinantVoqueRelationship2Gepp,
-  EstinantVoqueRelationship2
->;
+export type EstinantVoqueRelationship2Voque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    EstinantVoqueRelationship2Gepp,
+    EstinantVoqueRelationship2
+  >;

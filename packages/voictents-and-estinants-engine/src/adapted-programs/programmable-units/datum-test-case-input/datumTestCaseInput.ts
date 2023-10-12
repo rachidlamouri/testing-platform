@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * Used for testing serialization. It contains a datum of any type, and a
@@ -13,10 +13,11 @@ export const DATUM_TEST_CASE_INPUT_GEPP = 'datum-test-case-input';
 
 type DatumTestCaseInputGepp = typeof DATUM_TEST_CASE_INPUT_GEPP;
 
-export type DatumTestCaseInputVoque = InMemoryOdeshin2ListVoque<
-  DatumTestCaseInputGepp,
-  DatumTestCaseInput
->;
+export type DatumTestCaseInputVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    DatumTestCaseInputGepp,
+    DatumTestCaseInput
+  >;
 
 class CustomObject {
   constructor(public datumList: unknown[]) {}

@@ -8,7 +8,7 @@ import { SourceTypeName } from './sourceTypeName';
 
 const ESTINANT_SOURCE_ZORN_TEMPLATE = [
   'filePath',
-  'estinantName',
+  'programmedTransformName',
 ] as const satisfies GenericComplexIdTemplate;
 type EstinantSourceZornTemplate = typeof ESTINANT_SOURCE_ZORN_TEMPLATE;
 class EstinantSourceZorn extends ComplexId<EstinantSourceZornTemplate> {
@@ -19,7 +19,7 @@ class EstinantSourceZorn extends ComplexId<EstinantSourceZornTemplate> {
 
 type EstinantSourceConstructorInput = {
   filePath: string;
-  estinantName: string;
+  programmedTransformName: string;
 };
 
 /**
@@ -37,37 +37,38 @@ export type EstinantSource = SimplifyN<
   ]
 >;
 
-export const { EstinantSourceInstance } = buildNamedConstructorFunction({
-  constructorName: 'EstinantSourceInstance' as const,
-  instancePropertyNameTuple: [
-    // keep this as a multiline list
-    'typeName',
-    'zorn',
-    'estinantName',
-    'filePath',
-  ] as const satisfies readonly (keyof EstinantSource)[],
-})
-  .withTypes<EstinantSourceConstructorInput, EstinantSource>({
-    typeCheckErrorMessage: {
-      initialization: '',
-      instancePropertyNameTuple: {
-        missingProperties: '',
-        extraneousProperties: '',
-      },
-    },
-    transformInput: (input) => {
-      const { estinantName, filePath } = input;
-
-      const zorn = new EstinantSourceZorn({
-        filePath,
-        estinantName,
-      });
-
-      return {
-        typeName: SourceTypeName.EstinantSource,
-        zorn,
-        ...input,
-      } satisfies EstinantSource;
-    },
+export const { ProgrammedTransformSourceInstance } =
+  buildNamedConstructorFunction({
+    constructorName: 'ProgrammedTransformSourceInstance' as const,
+    instancePropertyNameTuple: [
+      // keep this as a multiline list
+      'typeName',
+      'zorn',
+      'programmedTransformName',
+      'filePath',
+    ] as const satisfies readonly (keyof EstinantSource)[],
   })
-  .assemble();
+    .withTypes<EstinantSourceConstructorInput, EstinantSource>({
+      typeCheckErrorMessage: {
+        initialization: '',
+        instancePropertyNameTuple: {
+          missingProperties: '',
+          extraneousProperties: '',
+        },
+      },
+      transformInput: (input) => {
+        const { programmedTransformName, filePath } = input;
+
+        const zorn = new EstinantSourceZorn({
+          filePath,
+          programmedTransformName,
+        });
+
+        return {
+          typeName: SourceTypeName.EstinantSource,
+          zorn,
+          ...input,
+        } satisfies EstinantSource;
+      },
+    })
+    .assemble();

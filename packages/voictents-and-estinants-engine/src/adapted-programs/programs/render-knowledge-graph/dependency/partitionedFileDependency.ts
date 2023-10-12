@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -84,7 +84,8 @@ export const PARTITIONED_FILE_DEPENDENCY_GEPP = 'partitioned-file-dependency';
 
 type PartitionedFileDependencyGepp = typeof PARTITIONED_FILE_DEPENDENCY_GEPP;
 
-export type PartitionedFileDependencyVoque = InMemoryOdeshin2ListVoque<
-  PartitionedFileDependencyGepp,
-  PartitionedFileDependency
->;
+export type PartitionedFileDependencyVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    PartitionedFileDependencyGepp,
+    PartitionedFileDependency
+  >;

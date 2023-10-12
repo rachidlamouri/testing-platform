@@ -1,5 +1,5 @@
 import { hasOneElement } from '../../../package-agnostic-utilities/array/hasOneElement';
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,
@@ -37,19 +37,19 @@ const reporterLocator: ReportingLocator = {
 /**
  * Converts a list of directed graph elements for one graph id into a single DirectedGraph object
  */
-export const getDirectedGraphFromGraphElementGroup = buildEstinant({
+export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromHubblepup2<GraphElementGroupVoque>({
-    gepp: GRAPH_ELEMENT_GROUP_GEPP,
+  .fromItem2<GraphElementGroupVoque>({
+    collectionId: GRAPH_ELEMENT_GROUP_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
-    gepp: PROGRAM_ERROR_GEPP,
+    collectionId: PROGRAM_ERROR_GEPP,
   })
   .toHubblepupTuple2<DirectedGraphVoque>({
-    gepp: DIRECTED_GRAPH_GEPP,
+    collectionId: DIRECTED_GRAPH_GEPP,
   })
-  .onPinbe((graphElementGroup) => {
+  .onTransform((graphElementGroup) => {
     // TODO: update DirectedGraphNode to have a parentId and replace this with DirectedGraphNode
     type Node3 = {
       node1: DirectedGraphNode;

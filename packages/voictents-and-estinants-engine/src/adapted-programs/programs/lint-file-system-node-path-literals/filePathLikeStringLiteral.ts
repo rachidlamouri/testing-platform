@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -94,7 +94,8 @@ export const FILE_PATH_LIKE_STRING_LITERAL_GEPP =
 
 type FilePathLikeStringLiteralGepp = typeof FILE_PATH_LIKE_STRING_LITERAL_GEPP;
 
-export type FilePathLikeStringLiteralVoque = InMemoryOdeshin2ListVoque<
-  FilePathLikeStringLiteralGepp,
-  FilePathLikeStringLiteral
->;
+export type FilePathLikeStringLiteralVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    FilePathLikeStringLiteralGepp,
+    FilePathLikeStringLiteral
+  >;

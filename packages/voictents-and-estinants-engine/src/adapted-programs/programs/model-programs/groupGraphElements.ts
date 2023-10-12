@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
 import {
   DIRECTED_GRAPH_ELEMENT_2_GEPP,
   DirectedGraphElement2Voque,
@@ -13,16 +13,16 @@ import {
 /**
  * Consumes the entire collection of graph elements to group them by rootGraphId
  */
-export const groupGraphElements = buildEstinant({
+export const groupGraphElements = buildProgrammedTransform({
   name: 'groupGraphElements',
 })
   .fromVoictent2<DirectedGraphElement2Voque>({
-    gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
   .toHubblepupTuple2<GraphElementGroupVoque>({
-    gepp: GRAPH_ELEMENT_GROUP_GEPP,
+    collectionId: GRAPH_ELEMENT_GROUP_GEPP,
   })
-  .onPinbe((allGraphElementList) => {
+  .onTransform((allGraphElementList) => {
     const elementGroupByRootLocatorZorn = new Map<string, GraphElementGroup>();
 
     allGraphElementList.forEach((element) => {

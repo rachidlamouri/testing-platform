@@ -1,5 +1,5 @@
 import Case from 'case';
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import {
   DIRECTORY_GEPP,
   DirectoryVoque,
@@ -10,16 +10,16 @@ import { BoundaryTypeName } from './boundaryTypeName';
 /**
  * Marks every directory under utilities as a separate boundary
  */
-export const getUtilityBoundary = buildEstinant({
+export const getUtilityBoundary = buildProgrammedTransform({
   name: 'getUtilityBoundary',
 })
-  .fromHubblepup2<DirectoryVoque>({
-    gepp: DIRECTORY_GEPP,
+  .fromItem2<DirectoryVoque>({
+    collectionId: DIRECTORY_GEPP,
   })
   .toHubblepupTuple2<BoundaryVoque>({
-    gepp: BOUNDARY_GEPP,
+    collectionId: BOUNDARY_GEPP,
   })
-  .onPinbe((directory) => {
+  .onTransform((directory) => {
     // TODO: update the stream configuration to allow filtering the inputs
     if (
       directory.directoryPath.parentDirectoryPath !==

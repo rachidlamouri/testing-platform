@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -47,7 +47,8 @@ export const PROGRAM_ESTINANT_RELATIONSHIP_GEPP =
 type ProgramEstinantRelationshipGepp =
   typeof PROGRAM_ESTINANT_RELATIONSHIP_GEPP;
 
-export type ProgramEstinantRelationshipVoque = InMemoryOdeshin2ListVoque<
-  ProgramEstinantRelationshipGepp,
-  ProgramEstinantRelationship
->;
+export type ProgramEstinantRelationshipVoque =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    ProgramEstinantRelationshipGepp,
+    ProgramEstinantRelationship
+  >;

@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -80,7 +80,7 @@ type ExpectedProgramTestFileConfigurationGepp =
   typeof EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP;
 
 export type ExpectedProgramTestFileConfigurationVoque =
-  InMemoryOdeshin2ListVoque<
+  InMemoryIdentifiableItem2ListStreamMetatype<
     ExpectedProgramTestFileConfigurationGepp,
     ExpectedProgramTestFileConfiguration
   >;

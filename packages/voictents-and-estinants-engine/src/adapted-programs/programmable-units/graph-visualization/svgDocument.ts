@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * HTML SVG representation of a Graphviz graph
@@ -12,7 +12,7 @@ export const SVG_DOCUMENT_GEPP = 'svg-document';
 
 type SvgDocumentGepp = typeof SVG_DOCUMENT_GEPP;
 
-export type SvgDocumentVoque = InMemoryOdeshin2ListVoque<
+export type SvgDocumentVoque = InMemoryIdentifiableItem2ListStreamMetatype<
   SvgDocumentGepp,
   SvgDocument
 >;

@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   GenericComplexIdTemplate,
   ComplexId,
@@ -91,11 +91,12 @@ export class LintAssertion<TTypedRule extends UnsafeTypedRule> {
 
 export type GenericLintAssertion = LintAssertion<UnsafeTypedRule>;
 
-export const LINT_ASSERTION_GEPP = 'lint-assertion';
+export const LINT_ASSERTION_COLLECTION_ID = 'lint-assertion';
 
-type LintAssertionGepp = typeof LINT_ASSERTION_GEPP;
+type LintAssertionGepp = typeof LINT_ASSERTION_COLLECTION_ID;
 
-export type LintAssertionVoque = InMemoryOdeshin2ListVoque<
-  LintAssertionGepp,
-  GenericLintAssertion
->;
+export type LintAssertionStreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    LintAssertionGepp,
+    GenericLintAssertion
+  >;

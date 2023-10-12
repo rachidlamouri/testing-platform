@@ -1,4 +1,4 @@
-import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
 import { hasOneElement } from '../../../../package-agnostic-utilities/array/hasOneElement';
 import {
   PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
@@ -15,16 +15,16 @@ import {
  * trie for valid portions of the trie. That is partitioned boundary lists with
  * exactly one partitioned boundary
  */
-export const getPartitionedBoundaryTrie = buildEstinant({
+export const getPartitionedBoundaryTrie = buildProgrammedTransform({
   name: 'getPartitionedBoundaryTrie',
 })
-  .fromHubblepup2<PartitionedBoundaryListTrieVoque>({
-    gepp: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+  .fromItem2<PartitionedBoundaryListTrieVoque>({
+    collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
   })
-  .toHubblepup2<PartitionedBoundaryTrieVoque>({
-    gepp: PARTITIONED_BOUNDARY_TRIE_GEPP,
+  .toItem2<PartitionedBoundaryTrieVoque>({
+    collectionId: PARTITIONED_BOUNDARY_TRIE_GEPP,
   })
-  .onPinbe((partitionedBoundaryListTrie) => {
+  .onTransform((partitionedBoundaryListTrie) => {
     const partitionedBoundaryTrie = new PartitionedBoundaryTrie(null);
     partitionedBoundaryListTrie
       .flatten()
