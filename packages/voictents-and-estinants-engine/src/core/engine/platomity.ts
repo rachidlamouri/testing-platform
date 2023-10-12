@@ -5,8 +5,8 @@ import {
 } from './dreanor/dreanor';
 import { GenericEstinant2 } from '../types/estinant/estinant';
 import { Procody } from './procody/procody';
-import { GeppSet } from '../types/voictent/gepp';
-import { GenericVoictent2 } from '../types/voictent/voictent2';
+import { CollectionIdSet } from '../types/collection/collectionId';
+import { GenericCollection2 } from '../types/collection/collection2';
 
 /**
  * A programmed transform wrapper that is used to connect collections to
@@ -19,7 +19,7 @@ export type Platomity2 = {
   programmedTransform: GenericEstinant2;
   leftDreanor: LeftDreanor;
   rightDreanorTuple: RightDreanorTuple;
-  outputGeppSet: GeppSet;
+  outputGeppSet: CollectionIdSet;
   procody: Procody;
   executionCount: number;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -36,7 +36,7 @@ export const getDreanorTuple = (platomity: Platomity2): DreanorTuple => [
 ];
 
 export type Virok = {
-  voictent: GenericVoictent2;
+  voictent: GenericCollection2;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   dependencySet: Set<Platomity2>;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define

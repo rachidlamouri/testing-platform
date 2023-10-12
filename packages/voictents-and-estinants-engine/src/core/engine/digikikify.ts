@@ -15,7 +15,10 @@ import {
   GenericEstinant2,
   UnsafeEstinant2Tuple,
 } from '../types/estinant/estinant';
-import { CollectionId, GeppSet } from '../types/voictent/gepp';
+import {
+  CollectionId,
+  CollectionIdSet,
+} from '../types/collection/collectionId';
 import {
   GenericIndexedHubblepup,
   GenericIndexedHubblepupTuple,
@@ -26,7 +29,7 @@ import {
   GenericCollectionItemStream2,
   Lanbe,
   StreamTypeName,
-  HubblepupPelieLanbe,
+  ItemStream,
   GenericVoictentPelieLanbe,
 } from '../types/lanbe/lanbe';
 import { Mabz, MabzEntry } from './procody/mabz';
@@ -34,7 +37,7 @@ import { Platomity2, Virok, getDreanorTuple } from './platomity';
 import { Prected } from './dreanor/prected';
 import { Procody } from './procody/procody';
 import { Tabilly } from './tabilly';
-import { GenericVoictent2 } from '../types/voictent/voictent2';
+import { GenericCollection2 } from '../types/collection/collection2';
 import { GenericInputAppreffinge } from '../types/appreffinge/input/inputAppreffinge';
 import { Tuple } from '../../package-agnostic-utilities/type/tuple';
 import { getIsRightInputHubblepupTupleAppreffinge } from '../types/appreffinge/input/right/rightInputAppreffinge';
@@ -99,7 +102,7 @@ export enum DigikikifierStrategy {
 
 export type DigikikifierInput = {
   // TODO: remove "initialQuirmTuple" and make inputVoictentList required
-  inputVoictentList?: GenericVoictent2[];
+  inputVoictentList?: GenericCollection2[];
   errorGepp?: CollectionId;
   estinantTuple: Tuple<GenericEstinant2>;
   /** @deprecated */
@@ -118,7 +121,7 @@ type TickSeries<TValue extends number | bigint> = TValue[];
 type VoictentTickSeriesConfiguration = {
   collectionId: CollectionId;
   voictentLanbe: GenericVoictentPelieLanbe | null;
-  voictentItemLanbe: HubblepupPelieLanbe | GenericCollectionItemStream2 | null;
+  voictentItemLanbe: ItemStream | GenericCollectionItemStream2 | null;
   collectionTickSeries: TickSeries<number>;
   collectionItemTickSeries: TickSeries<number>;
 };
@@ -176,7 +179,7 @@ export const digikikify = ({
 
   let isInitialErrorCritical = false;
 
-  const inputGeppSet: GeppSet = new Set(
+  const inputGeppSet: CollectionIdSet = new Set(
     inputVoictentList.map((voictent) => {
       return voictent.collectionId;
     }),
@@ -692,7 +695,7 @@ export const digikikify = ({
 
   // TODO: create a class or something to encapsulate tracking runtime stats
   const voictentTickSeriesConfigurationByVoictent = new Map<
-    GenericVoictent2,
+    GenericCollection2,
     VoictentTickSeriesConfiguration
   >();
 
@@ -1013,7 +1016,7 @@ export const digikikify = ({
 };
 
 type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
-  inputVoictentList: GenericVoictent2[];
+  inputVoictentList: GenericCollection2[];
   errorGepp?: CollectionId;
   estinantTuple: TEstinantTuple;
   onFinish?: RuntimeStatisticsHandler;

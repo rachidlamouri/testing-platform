@@ -10,7 +10,7 @@
  * @todo find a better name for this file
  */
 
-import { CollectionId } from '../../core/types/voictent/gepp';
+import { CollectionId } from '../../core/types/collection/collectionId';
 import { ItemStream2 } from '../../core/types/lanbe/lanbe';
 import { GenericIdentifiableItem } from '../../adapter/odeshin/identifiableItem';
 import {

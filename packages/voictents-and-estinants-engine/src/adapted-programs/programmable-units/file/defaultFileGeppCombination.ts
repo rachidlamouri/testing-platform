@@ -1,8 +1,8 @@
 import { ValueOf } from 'type-fest';
 import {
   CollectionId,
-  GeppCombination,
-} from '../../../core/types/voictent/gepp';
+  CollectionIdCombination,
+} from '../../../core/types/collection/collectionId';
 import { buildGeppCombination } from '../../../adapter/engine/digikikify';
 import { BASH_FILE_GEPP } from '../bash-file/bashFile';
 import { HTML_FILE_GEPP } from '../html-file/htmlFile';
@@ -54,5 +54,5 @@ type DefaultFileGepp = ValueOf<
  *
  * @readableName defaultFileCollectionIdCombination
  */
-export const defaultFileGeppCombination: GeppCombination<DefaultFileGepp> =
+export const defaultFileGeppCombination: CollectionIdCombination<DefaultFileGepp> =
   buildGeppCombination(defaultFileGeppList);

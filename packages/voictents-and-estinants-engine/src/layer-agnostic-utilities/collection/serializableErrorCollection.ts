@@ -1,5 +1,5 @@
-import { CollectionId } from '../../core/types/voictent/gepp';
-import { Collection2 } from '../../core/types/voictent/voictent2';
+import { CollectionId } from '../../core/types/collection/collectionId';
+import { Collection2 } from '../../core/types/collection/collection2';
 import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { FileExtensionSuffixIdentifier } from '../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { ProgramFileCache } from '../program/programFileCache';

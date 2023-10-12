@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { CollectionId } from '../../core/types/voictent/gepp';
+import { CollectionId } from '../../core/types/collection/collectionId';
 import {
   FileExtensionSuffixIdentifier,
   KnownFileExtensionSuffixIdentifier,

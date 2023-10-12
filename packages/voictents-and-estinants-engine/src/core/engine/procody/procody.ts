@@ -1,4 +1,4 @@
-import { CollectionId } from '../../types/voictent/gepp';
+import { CollectionId } from '../../types/collection/collectionId';
 import { Ajorken } from './ajorken';
 
 /**

@@ -24,19 +24,19 @@ import {
 } from '../../core/types/vicken/rightInputVicken';
 import {
   CollectionId,
-  GenericGeppCombination,
-  GeppTuple,
-} from '../../core/types/voictent/gepp';
+  GenericCollectionIdCombination,
+  CollectionIdTuple,
+} from '../../core/types/collection/collectionId';
 import {
   GenericInMemoryOdeshin2ListVoque,
   InMemoryOdeshin2ListVoictent,
 } from '../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
-  GenericVoictent2,
-  GenericVoictent2Tuple,
-  UnsafeVoictent2Tuple,
+  GenericCollection2,
+  GenericCollection2Tuple,
+  UnsafeCollection2Tuple,
   Collection2,
-} from '../../core/types/voictent/voictent2';
+} from '../../core/types/collection/collection2';
 import { GenericStreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { ProgramErrorGepp } from '../../adapted-programs/programmable-units/error/programError';
 import { GenericAbstractSerializableSourceStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
@@ -49,7 +49,7 @@ import {
 } from '../../adapted-programs/programmable-units/file/fileSystemNodeVoictent';
 
 type VoqueUnionFromVoictentTuple<
-  TVoictentTuple extends UnsafeVoictent2Tuple,
+  TVoictentTuple extends UnsafeCollection2Tuple,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 > = TVoictentTuple extends readonly Collection2<any, infer TVoque>[]
   ? TVoque
@@ -166,7 +166,7 @@ type ImplicitVoqueUnion<
 > = Exclude<TRequiredVoqueUnion, TExplicitVoqueUnion>;
 
 type DigikikifierInputFromAllComputedUnions<
-  TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
+  TExplicitVoictentTuple extends UnsafeCollection2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
   TAllVoqueUnion extends GenericStreamMetatype,
   TImplicitVoqueUnion extends GenericStreamMetatype,
@@ -184,7 +184,7 @@ type DigikikifierInputFromAllComputedUnions<
 };
 
 type DigikikifierInputFromPreliminaryComputedUnions<
-  TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
+  TExplicitVoictentTuple extends UnsafeCollection2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
   TExplicitVoictentTupleVoqueUnion extends GenericStreamMetatype,
   TEstinantTupleVoqueUnion extends GenericStreamMetatype,
@@ -196,7 +196,7 @@ type DigikikifierInputFromPreliminaryComputedUnions<
 >;
 
 type DigikikifierInput<
-  TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
+  TExplicitVoictentTuple extends UnsafeCollection2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
 > = DigikikifierInputFromPreliminaryComputedUnions<
   TExplicitVoictentTuple,
@@ -206,7 +206,7 @@ type DigikikifierInput<
 >;
 
 type Digikikifier = <
-  TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
+  TExplicitVoictentTuple extends UnsafeCollection2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
 >(
   input: DigikikifierInput<TExplicitVoictentTuple, TEstinantTuple>,
@@ -215,7 +215,7 @@ type Digikikifier = <
 const buildSerializableVoictent = (
   serializerGepp: CollectionId,
   programFileCache: ProgramFileCache,
-): GenericVoictent2 => {
+): GenericCollection2 => {
   const serializableVoictent = new SerializableCollection({
     collectionId: serializerGepp,
     programFileCache,
@@ -244,7 +244,7 @@ const buildSerializerEstinantTuple = (
 };
 
 const getVoictentTupleGeppSet = (
-  voictentTuple: GenericVoictent2Tuple,
+  voictentTuple: GenericCollection2Tuple,
 ): Set<CollectionId> => {
   const voictentTupleGeppSet = new Set(
     voictentTuple.map((voictent) => voictent.collectionId),
@@ -278,8 +278,8 @@ const getEstinantTupleGeppSet = (
 };
 
 const getInferredFileSystemNodeVoictentTuple = (
-  fileSystemNodeGeppCombination: GenericGeppCombination,
-): GenericVoictent2Tuple => {
+  fileSystemNodeGeppCombination: GenericCollectionIdCombination,
+): GenericCollection2Tuple => {
   const geppList = Object.keys(fileSystemNodeGeppCombination);
   const voictentList = geppList.map((collectionId) => {
     return new FileSystemNodeVoictent({
@@ -292,9 +292,9 @@ const getInferredFileSystemNodeVoictentTuple = (
 };
 
 const getInferredInMemoryVoictentTuple = (
-  voictentTuple: GenericVoictent2Tuple,
+  voictentTuple: GenericCollection2Tuple,
   estinantTuple: GenericEstinant2Tuple,
-): GenericVoictent2Tuple => {
+): GenericCollection2Tuple => {
   const voictentTupleGeppSet = getVoictentTupleGeppSet(voictentTuple);
   const estinantTupleGeppSet = getEstinantTupleGeppSet(estinantTuple);
 
@@ -321,7 +321,7 @@ const getInferredInMemoryVoictentTuple = (
  * @readableName runAdaptedEngine
  */
 export const digikikify: Digikikifier = <
-  TExplicitVoictentTuple extends UnsafeVoictent2Tuple,
+  TExplicitVoictentTuple extends UnsafeCollection2Tuple,
   TEstinantTuple extends UnsafeEstinant2Tuple,
 >({
   explicitVoictentTuple: specificExplicitVoictentTuple,
@@ -336,7 +336,7 @@ export const digikikify: Digikikifier = <
   const explicitVoictentTuple = [
     ...specificExplicitVoictentTuple,
     ...Object.values(specificUninferableVoictentByGepp),
-  ] as GenericVoictent2Tuple;
+  ] as GenericCollection2Tuple;
 
   // TODO: consider making this an input argument
   // note: The core engine will provide a signal if someone passes in a collection with the same Gepp
@@ -348,7 +348,7 @@ export const digikikify: Digikikifier = <
   );
 
   const genericFileSystemNodeGeppCombination =
-    specificFileSystemNodeGeppCombination as GenericGeppCombination;
+    specificFileSystemNodeGeppCombination as GenericCollectionIdCombination;
 
   const inferredFileSystemNodeVoictentTuple =
     getInferredFileSystemNodeVoictentTuple(
@@ -374,7 +374,7 @@ export const digikikify: Digikikifier = <
     serializeeGeppList,
   );
 
-  const inputVoictentTuple: GenericVoictent2[] = [
+  const inputVoictentTuple: GenericCollection2[] = [
     ...explicitVoictentTuple,
     serializableVoictent,
     ...inferredFileSystemNodeVoictentTuple,
@@ -397,7 +397,7 @@ export const digikikify: Digikikifier = <
 };
 
 type VoictentByGeppTupleFromVoictentTuple<
-  TVoictentTuple extends GenericVoictent2Tuple,
+  TVoictentTuple extends GenericCollection2Tuple,
 > = {
   [TIndex in keyof TVoictentTuple]: {
     [TKey in TVoictentTuple[TIndex]['collectionId']]: TVoictentTuple[TIndex];
@@ -405,7 +405,7 @@ type VoictentByGeppTupleFromVoictentTuple<
 };
 
 type VoictentByGeppFromVoictentTuple<
-  TVoictentTuple extends GenericVoictent2Tuple,
+  TVoictentTuple extends GenericCollection2Tuple,
 > = Simplify<
   UnionToIntersection<
     VoictentByGeppTupleFromVoictentTuple<TVoictentTuple>[number]
@@ -413,7 +413,7 @@ type VoictentByGeppFromVoictentTuple<
 >;
 
 export const buildVoictentByGepp = <
-  TVoictentTuple extends GenericVoictent2Tuple,
+  TVoictentTuple extends GenericCollection2Tuple,
 >(
   voictentTuple: TVoictentTuple,
 ): VoictentByGeppFromVoictentTuple<TVoictentTuple> => {
@@ -435,7 +435,7 @@ type GeppCombinationFromGeppUnion<TGeppUnion extends CollectionId> = Simplify<
   >
 >;
 
-export const buildGeppCombination = <TGeppTuple extends GeppTuple>(
+export const buildGeppCombination = <TGeppTuple extends CollectionIdTuple>(
   geppTuple: TGeppTuple,
 ): GeppCombinationFromGeppUnion<TGeppTuple[number]> => {
   const entryList = geppTuple.map((gepp) => {

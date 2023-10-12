@@ -9,7 +9,7 @@
  * @todo split up the typess and functions in this file by purpose
  */
 
-import { CollectionId } from '../../../core/types/voictent/gepp';
+import { CollectionId } from '../../../core/types/collection/collectionId';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

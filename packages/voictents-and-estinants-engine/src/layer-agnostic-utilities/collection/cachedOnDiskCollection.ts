@@ -1,9 +1,9 @@
 import fs from 'fs';
 import { posix } from 'path';
 import { Subitem } from '../../adapter/odeshin/subitem';
-import { CollectionId } from '../../core/types/voictent/gepp';
+import { CollectionId } from '../../core/types/collection/collectionId';
 import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
-import { Collection2 } from '../../core/types/voictent/voictent2';
+import { Collection2 } from '../../core/types/collection/collection2';
 import {
   StreamTypeName,
   ItemStream2,

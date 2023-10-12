@@ -10,10 +10,12 @@ import { Combination } from '../../../package-agnostic-utilities/type/combinatio
  */
 export type CollectionId = string;
 
-export type GeppTuple = Tuple<CollectionId>;
+export type CollectionIdTuple = Tuple<CollectionId>;
 
-export type GeppSet = Set<CollectionId>;
+export type CollectionIdSet = Set<CollectionId>;
 
-export type GeppCombination<TGepp extends CollectionId> = Combination<TGepp>;
+export type CollectionIdCombination<TCollectionId extends CollectionId> =
+  Combination<TCollectionId>;
 
-export type GenericGeppCombination = GeppCombination<CollectionId>;
+export type GenericCollectionIdCombination =
+  CollectionIdCombination<CollectionId>;

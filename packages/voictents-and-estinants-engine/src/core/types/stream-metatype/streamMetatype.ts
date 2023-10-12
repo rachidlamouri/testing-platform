@@ -1,6 +1,6 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { Item, ItemIndexByName, IndexedItem } from '../hubblepup/hubblepup';
-import { CollectionId } from '../voictent/gepp';
+import { CollectionId } from '../collection/collectionId';
 
 /**
  * The type information needed to define a strongly typed stream connection,

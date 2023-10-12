@@ -1,4 +1,4 @@
-import { CollectionId } from '../../../core/types/voictent/gepp';
+import { CollectionId } from '../../../core/types/collection/collectionId';
 import { ItemStream2 } from '../../../core/types/lanbe/lanbe';
 import {
   AbstractInMemoryCollection,

@@ -1,9 +1,5 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
-import {
-  HubblepupPelieLanbe,
-  ItemStream2,
-  CollectionStream,
-} from '../lanbe/lanbe';
+import { ItemStream, ItemStream2, CollectionStream } from '../lanbe/lanbe';
 import {
   GenericStreamMetatype,
   UnsafeStreamMetatype,
@@ -22,14 +18,19 @@ import {
  * data to a collection
  */
 export type Collection2<
-  TRestrictingVoque extends GenericStreamMetatype,
-  TVoque extends TRestrictingVoque,
+  TRestrictingStreamMetatype extends GenericStreamMetatype,
+  TStreamMetatype extends TRestrictingStreamMetatype,
 > = {
-  get collectionId(): TVoque['collectionId'];
-  createCollectionStream(debugName: string): CollectionStream<TVoque> | null;
+  get collectionId(): TStreamMetatype['collectionId'];
+  createCollectionStream(
+    debugName: string,
+  ): CollectionStream<TStreamMetatype> | null;
   createCollectionItemStream(
     debugName: string,
-  ): ItemStream2<TRestrictingVoque, TVoque> | HubblepupPelieLanbe | null;
+  ):
+    | ItemStream2<TRestrictingStreamMetatype, TStreamMetatype>
+    | ItemStream
+    | null;
   onTickStart(): void;
   /**
    * This is for collections whose constructor accepts initial hubblepups. This
@@ -39,16 +40,19 @@ export type Collection2<
    */
   initialize(): void;
   get isEmpty(): boolean;
-  addItem(hubblepup: TVoque['itemEggStreamable']): void;
+  addItem(item: TStreamMetatype['itemEggStreamable']): void;
 };
 
-export type GenericVoictent2 = Collection2<
+export type GenericCollection2 = Collection2<
   GenericStreamMetatype,
   GenericStreamMetatype
 >;
 
-export type GenericVoictent2Tuple = Tuple<GenericVoictent2>;
+export type GenericCollection2Tuple = Tuple<GenericCollection2>;
 
-type UnsafeVoictent2 = Collection2<UnsafeStreamMetatype, UnsafeStreamMetatype>;
+type UnsafeCollection2 = Collection2<
+  UnsafeStreamMetatype,
+  UnsafeStreamMetatype
+>;
 
-export type UnsafeVoictent2Tuple = Tuple<UnsafeVoictent2>;
+export type UnsafeCollection2Tuple = Tuple<UnsafeCollection2>;

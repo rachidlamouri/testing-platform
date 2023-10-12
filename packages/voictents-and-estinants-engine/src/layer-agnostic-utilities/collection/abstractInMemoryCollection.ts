@@ -4,7 +4,7 @@ import {
   ItemStream2,
   GenericCollectionItemStream2,
 } from '../../core/types/lanbe/lanbe';
-import { Collection2 } from '../../core/types/voictent/voictent2';
+import { Collection2 } from '../../core/types/collection/collection2';
 import { GenericInMemoryStreamMetatype } from '../stream-metatype/inMemoryStreamMetatype';
 import { ReferenceTypeName } from '../../core/types/lanbe/referenceTypeName';
 

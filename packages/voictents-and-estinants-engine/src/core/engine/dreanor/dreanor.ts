@@ -7,7 +7,7 @@ import {
   Framation,
   GenericFramation3,
 } from '../../types/appreffinge/input/right/framation';
-import { CollectionId } from '../../types/voictent/gepp';
+import { CollectionId } from '../../types/collection/collectionId';
 import {
   GenericCollectionItemStream2,
   GenericVoictentPelieLanbe,

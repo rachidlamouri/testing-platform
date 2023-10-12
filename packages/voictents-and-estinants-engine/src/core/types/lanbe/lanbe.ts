@@ -39,7 +39,7 @@ export type CollectionStream<TVoque extends GenericStreamMetatype> = Simplify<
 
 export type GenericVoictentPelieLanbe = CollectionStream<GenericStreamMetatype>;
 
-export type HubblepupPelieLanbe = BaseLanbe<
+export type ItemStream = BaseLanbe<
   StreamTypeName.HubblepupPelieLanbe,
   ReferenceTypeName.HubblepupPelie,
   Item
@@ -75,5 +75,5 @@ export type GenericCollectionItemStream2 = ItemStream2<
  */
 export type Lanbe =
   | GenericVoictentPelieLanbe
-  | HubblepupPelieLanbe
+  | ItemStream
   | GenericCollectionItemStream2;
