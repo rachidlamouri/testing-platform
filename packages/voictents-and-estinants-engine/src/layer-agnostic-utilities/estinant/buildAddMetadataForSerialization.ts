@@ -2,15 +2,15 @@ import { Estinant2 } from '../../core/types/estinant/estinant';
 import { LeftInputHubblepupVicken } from '../../core/types/vicken/leftInputVicken';
 import { OutputVicken } from '../../core/types/vicken/outputVicken';
 import {
-  GenericAbstractSerializableSourceVoque,
-  GenericAbstractSerializableVoque,
+  GenericAbstractSerializableSourceStreamMetatype,
+  GenericAbstractSerializableStreamMetatype,
   IndexedAbstractSerializable,
   AbstractSerializable,
-} from '../voictent/abstractSerializableVoictent';
+} from '../collection/abstractSerializableCollection';
 
 type SerializerBuilderInput<
-  TInputVoictent extends GenericAbstractSerializableSourceVoque,
-  TOutputVoictent extends GenericAbstractSerializableVoque,
+  TInputVoictent extends GenericAbstractSerializableSourceStreamMetatype,
+  TOutputVoictent extends GenericAbstractSerializableStreamMetatype,
 > = {
   inputGepp: TInputVoictent['gepp'];
   outputGepp: TOutputVoictent['gepp'];
@@ -21,20 +21,20 @@ type SerializerBuilderInput<
  * sends it to a compatible output stream
  */
 export const buildAddMetadataForSerialization = <
-  TInputVoictent extends GenericAbstractSerializableSourceVoque,
-  TOutputVoictent extends GenericAbstractSerializableVoque,
+  TInputVoictent extends GenericAbstractSerializableSourceStreamMetatype,
+  TOutputVoictent extends GenericAbstractSerializableStreamMetatype,
 >({
   inputGepp,
   outputGepp,
 }: SerializerBuilderInput<TInputVoictent, TOutputVoictent>): Estinant2<
-  LeftInputHubblepupVicken<GenericAbstractSerializableSourceVoque>,
+  LeftInputHubblepupVicken<GenericAbstractSerializableSourceStreamMetatype>,
   [],
-  OutputVicken<[GenericAbstractSerializableVoque]>
+  OutputVicken<[GenericAbstractSerializableStreamMetatype]>
 > => {
   const addMetadataForSerialization: Estinant2<
-    LeftInputHubblepupVicken<GenericAbstractSerializableSourceVoque>,
+    LeftInputHubblepupVicken<GenericAbstractSerializableSourceStreamMetatype>,
     [],
-    OutputVicken<[GenericAbstractSerializableVoque]>
+    OutputVicken<[GenericAbstractSerializableStreamMetatype]>
   > = {
     version: 2,
     name: `serialize/${inputGepp}`,
@@ -50,9 +50,9 @@ export const buildAddMetadataForSerialization = <
       const indexedSerializable = rawInput as IndexedAbstractSerializable;
 
       const outputHubblepup: AbstractSerializable = {
-        sourceGepp: inputGepp,
+        sourceCollectionId: inputGepp,
         serializableId: indexedSerializable.indexByName.serializableId,
-        datum: indexedSerializable.hubblepup,
+        datum: indexedSerializable.item,
       };
 
       return {

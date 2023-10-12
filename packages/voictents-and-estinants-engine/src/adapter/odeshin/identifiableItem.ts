@@ -13,6 +13,12 @@ export type OdeshinZorn = SimpleId | UnsafeComplexId;
  *
  * @readableName GenericIdentifiableItem
  */
-export type GenericOdeshin2 = {
-  zorn: OdeshinZorn;
-};
+export type GenericIdentifiableItem =
+  | {
+      id: OdeshinZorn;
+      zorn?: OdeshinZorn;
+    }
+  | {
+      id?: OdeshinZorn;
+      zorn: OdeshinZorn;
+    };

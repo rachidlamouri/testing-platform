@@ -11,13 +11,12 @@
  */
 
 import { CollectionId } from '../../core/types/voictent/gepp';
-import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
-import { HubblepupPelieLanbe2 } from '../../core/types/lanbe/lanbe';
-import { GenericOdeshin2 } from '../../adapter/odeshin/odeshin2';
+import { ItemStream2 } from '../../core/types/lanbe/lanbe';
+import { GenericIdentifiableItem } from '../../adapter/odeshin/identifiableItem';
 import {
-  AbstractInMemoryVoictent,
+  AbstractInMemoryCollection,
   DereferenceError,
-} from './abstractInMemoryVoictent';
+} from './abstractInMemoryCollection';
 import {
   InMemoryIndexByName,
   InMemoryStreamMetatype,
@@ -25,68 +24,78 @@ import {
 import { OutputValueByTemplateKeyPath } from '../../package-agnostic-utilities/data-structure/id';
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 
-export type InMemoryOdeshin2IndexByName = SpreadN<
-  [
-    InMemoryIndexByName,
-    {
-      zorn: GenericOdeshin2['zorn'];
-    },
-  ]
->;
+export type InMemoryIdentifiableItem2IndexByName = InMemoryIndexByName &
+  // TODO: REMOVE UNDEFINED after mass refactor
+  (| {
+        id: GenericIdentifiableItem['id'];
+        zorn?: GenericIdentifiableItem['id'];
+      }
+    | {
+        id?: GenericIdentifiableItem['id'];
+        zorn: GenericIdentifiableItem['id'];
+      }
+  );
 
-type InMemoryOdeshin2Voque<
-  TGepp extends CollectionId,
-  THubblepup extends GenericOdeshin2,
-  TVoictentPelie,
+type InMemoryIdentifiableItem2StreamMetatype<
+  TCollectionId extends CollectionId,
+  TItem extends GenericIdentifiableItem,
+  TCollection,
 > = InMemoryStreamMetatype<
-  TGepp,
-  THubblepup,
-  THubblepup,
-  InMemoryOdeshin2IndexByName,
-  TVoictentPelie
+  TCollectionId,
+  TItem,
+  TItem,
+  InMemoryIdentifiableItem2IndexByName,
+  TCollection
 >;
 
-type GenericInMemoryOdeshin2Voque = InMemoryOdeshin2Voque<
-  CollectionId,
-  GenericOdeshin2,
-  unknown
->;
+type GenericInMemoryIdentifiableItem2StreamMetatype =
+  InMemoryIdentifiableItem2StreamMetatype<
+    CollectionId,
+    GenericIdentifiableItem,
+    unknown
+  >;
 
-const getZornLike = (
-  odeshin: GenericOdeshin2,
-): { forHuman: string; forDebug: OutputValueByTemplateKeyPath | string } => {
+type IdLike = {
+  forHuman: string;
+  forDebug: OutputValueByTemplateKeyPath | string;
+};
+
+const getIdLike = (identifiableItem: GenericIdentifiableItem): IdLike => {
+  const id = identifiableItem.id ?? identifiableItem.zorn;
+  assertNotUndefined(id);
+
   const result =
-    typeof odeshin.zorn === 'string'
-      ? { forHuman: odeshin.zorn, forDebug: odeshin.zorn }
+    typeof id === 'string'
+      ? { forHuman: id, forDebug: id }
       : {
-          forHuman: odeshin.zorn.forHuman,
-          forDebug: odeshin.zorn.templateValueByKeyPath,
+          forHuman: id.forHuman,
+          forDebug: id.templateValueByKeyPath,
         };
 
   return result;
 };
 
 export abstract class BaseInMemoryOdeshin2Voictent<
-  TRestrictingVoque extends GenericInMemoryOdeshin2Voque,
+  TRestrictingVoque extends GenericInMemoryIdentifiableItem2StreamMetatype,
   TVoque extends TRestrictingVoque,
-> extends AbstractInMemoryVoictent<TRestrictingVoque, TVoque> {
+> extends AbstractInMemoryCollection<TRestrictingVoque, TVoque> {
   protected hubblepupPelueByZorn = new Map<string, TVoque['hubblepupPelue']>();
 
-  addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
-    super.addHubblepup(hubblepup);
+  addItem(hubblepup: TVoque['hubblepupPelue']): void {
+    super.addItem(hubblepup);
 
-    const hubblepupZornLike = getZornLike(hubblepup);
+    const hubblepupZornLike = getIdLike(hubblepup);
     const humanReadableZorn = hubblepupZornLike.forHuman;
 
     if (this.hubblepupPelueByZorn.has(humanReadableZorn)) {
       const existingHubblepup =
         this.hubblepupPelueByZorn.get(humanReadableZorn);
       assertNotUndefined(existingHubblepup);
-      const existingZornLike = getZornLike(existingHubblepup);
+      const existingZornLike = getIdLike(existingHubblepup);
 
       const error = new Error(`Duplicate zorn: ${humanReadableZorn}`);
       Object.assign(error, {
-        gepp: this.gepp,
+        gepp: this.collectionId,
         zorn: humanReadableZorn,
         formatted: {
           existing: existingZornLike.forDebug,
@@ -102,23 +111,24 @@ export abstract class BaseInMemoryOdeshin2Voictent<
     }
   }
 
-  protected dereferenceHubblepupPelie(
-    lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque>,
+  protected dereferenceItem(
+    lanbe: ItemStream2<TRestrictingVoque, TVoque>,
   ): TVoque['indexedHubblepupPelie'] {
-    const listIndex = this.getLanbeIndex(lanbe);
+    const listIndex = this.getStreamIndex(lanbe);
 
-    if (listIndex === AbstractInMemoryVoictent.minimumInclusiveIndex) {
+    if (listIndex === AbstractInMemoryCollection.minimumInclusiveIndex) {
       throw new DereferenceError(lanbe);
     }
 
-    const odeshin = this.hubblepupPelieTuple[listIndex];
-    const humanReadableZorn = getZornLike(odeshin).forHuman;
+    const odeshin = this.itemTuple[listIndex];
+    const humanReadableZorn = getIdLike(odeshin).forHuman;
+
     return {
-      hubblepup: odeshin,
+      item: odeshin,
       indexByName: {
         serializableId: humanReadableZorn.replaceAll('/', ' | '),
         listIndex,
-        zorn: odeshin.zorn,
+        id: odeshin.id,
       },
     };
   }
@@ -126,12 +136,12 @@ export abstract class BaseInMemoryOdeshin2Voictent<
 
 export type InMemoryOdeshin2ListVoque<
   TGepp extends CollectionId,
-  TOdeshin extends GenericOdeshin2,
-> = InMemoryOdeshin2Voque<TGepp, TOdeshin, TOdeshin[]>;
+  TOdeshin extends GenericIdentifiableItem,
+> = InMemoryIdentifiableItem2StreamMetatype<TGepp, TOdeshin, TOdeshin[]>;
 
 export type GenericInMemoryOdeshin2ListVoque = InMemoryOdeshin2ListVoque<
   CollectionId,
-  GenericOdeshin2
+  GenericIdentifiableItem
 >;
 
 export class InMemoryOdeshin2ListVoictent<
@@ -140,8 +150,8 @@ export class InMemoryOdeshin2ListVoictent<
   GenericInMemoryOdeshin2ListVoque,
   TVoque
 > {
-  protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
-    return this.hubblepupPelieTuple;
+  protected dereferenceCollection(): TVoque['voictentPelie'] {
+    return this.itemTuple;
   }
 }
 
@@ -152,8 +162,8 @@ type InMemoryOdeshin3VoictentPelie<TOdeshinPelie> = {
 
 export type InMemoryOdeshin3Voque<
   TGepp extends CollectionId,
-  TOdeshin extends GenericOdeshin2,
-> = InMemoryOdeshin2Voque<
+  TOdeshin extends GenericIdentifiableItem,
+> = InMemoryIdentifiableItem2StreamMetatype<
   TGepp,
   TOdeshin,
   InMemoryOdeshin3VoictentPelie<TOdeshin>
@@ -161,16 +171,16 @@ export type InMemoryOdeshin3Voque<
 
 type GenericInMemoryOdeshin3Voque = InMemoryOdeshin3Voque<
   CollectionId,
-  GenericOdeshin2
+  GenericIdentifiableItem
 >;
 
 export class InMemoryOdeshin3Voictent<
   TVoque extends GenericInMemoryOdeshin3Voque,
 > extends BaseInMemoryOdeshin2Voictent<GenericInMemoryOdeshin3Voque, TVoque> {
-  protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
+  protected dereferenceCollection(): TVoque['voictentPelie'] {
     return {
       byZorn: this.hubblepupPelueByZorn,
-      list: this.hubblepupPelieTuple,
+      list: this.itemTuple,
     };
   }
 }

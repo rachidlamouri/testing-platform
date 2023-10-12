@@ -2,7 +2,7 @@ import { Estinant2 } from '../core/types/estinant/estinant';
 import { LeftInputHubblepupVicken } from '../core/types/vicken/leftInputVicken';
 import { OutputVicken } from '../core/types/vicken/outputVicken';
 import { digikikify2 } from '../core/engine/digikikify';
-import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
@@ -10,15 +10,15 @@ import {
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import { getCustomTypedDatum } from '../package-agnostic-utilities/typed-datum/customTypedDatum';
-import { AbstractSerializableVoque } from '../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
+import { AbstractSerializableStreamMetatype } from '../layer-agnostic-utilities/collection/abstractSerializableCollection';
 import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
-import { JsonSerializableVoictent } from '../layer-agnostic-utilities/voictent/jsonSerializableVoictent';
+import { JsonSerializableCollection } from '../layer-agnostic-utilities/collection/jsonSerializableCollection';
 import {
   SerializableTypeNameVoque,
   SERIALIZABLE_TYPE_NAME_GEPP,
 } from './serializableTypeName';
 
-type SerializedConfiguration = AbstractSerializableVoque<'serialized'>;
+type SerializedConfiguration = AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-get-custom-typed-datum',
@@ -45,7 +45,7 @@ const getCustomTypedTestCaseInputTypeName: Estinant2<
     geppTuple: [SERIALIZABLE_TYPE_NAME_GEPP],
   },
   tropoig: (input) => {
-    const inputOdeshin = input.hubblepup;
+    const inputOdeshin = input.item;
     const testCaseInput = inputOdeshin.grition;
 
     const typedDatum = getCustomTypedDatum(testCaseInput);
@@ -72,17 +72,17 @@ const getCustomTypedTestCaseInputTypeName: Estinant2<
 digikikify2({
   inputVoictentList: [
     new InMemoryOdeshin2ListVoictent<DatumTestCaseInputVoque>({
-      gepp: DATUM_TEST_CASE_INPUT_GEPP,
-      initialHubblepupPelueTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
+      collectionId: DATUM_TEST_CASE_INPUT_GEPP,
+      initialItemEggTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),
     new InMemoryOdeshin2ListVoictent<SerializableTypeNameVoque>({
-      gepp: SERIALIZABLE_TYPE_NAME_GEPP,
-      initialHubblepupPelueTuple: [],
+      collectionId: SERIALIZABLE_TYPE_NAME_GEPP,
+      initialItemEggTuple: [],
     }),
-    new JsonSerializableVoictent<SerializedConfiguration>({
-      gepp: 'serialized',
+    new JsonSerializableCollection<SerializedConfiguration>({
+      collectionId: 'serialized',
       programFileCache,
-      initialHubblepupPelueTuple: [],
+      initialItemEggTuple: [],
     }),
   ],
   estinantTuple: [

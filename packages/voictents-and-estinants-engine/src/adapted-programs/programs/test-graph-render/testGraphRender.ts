@@ -20,8 +20,8 @@ import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   DirectedGraphMetadataByIdVoque,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
-import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
-import { InMemoryOdeshin2ListVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
+import { InMemoryOdeshin2ListVoictent } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
@@ -39,9 +39,9 @@ const programFileCache = new ProgramFileCache({
  */
 digikikify({
   explicitVoictentTuple: [
-    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
-      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
+      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+      initialItemEggTuple: [
         {
           directoryPath:
             'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization',
@@ -50,8 +50,8 @@ digikikify({
       ],
     }),
     new InMemoryOdeshin2ListVoictent<DirectedGraphVoque>({
-      gepp: DIRECTED_GRAPH_GEPP,
-      initialHubblepupPelueTuple: [
+      collectionId: DIRECTED_GRAPH_GEPP,
+      initialItemEggTuple: [
         {
           zorn: 'my-graph',
           isRoot: true,
@@ -129,8 +129,8 @@ digikikify({
       ],
     }),
     new InMemoryOdeshin2ListVoictent<DirectedGraphMetadataByIdVoque>({
-      gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-      initialHubblepupPelueTuple: [
+      collectionId: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+      initialItemEggTuple: [
         {
           zorn: 'my-graph',
           grition: {

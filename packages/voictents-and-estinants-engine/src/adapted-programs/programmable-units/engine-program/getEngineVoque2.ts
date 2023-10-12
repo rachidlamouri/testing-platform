@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   GenericProgramErrorVoque,
   GenericProgramErrorPelue,
@@ -46,8 +46,8 @@ export const getEngineVoque2 = buildEstinant({
     [OdeshinZorn]
   >({
     gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-    framate: (left) => [left.hubblepup.filePath],
-    croard: (right) => right.hubblepup.filePath,
+    framate: (left) => [left.item.filePath],
+    croard: (right) => right.item.filePath,
   })
   .toHubblepup2<EngineVoque2Voque>({
     gepp: ENGINE_VOQUE_2_GEPP,

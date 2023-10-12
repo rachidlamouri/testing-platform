@@ -3,13 +3,13 @@ import { LeftInputHubblepupVicken } from '../../core/types/vicken/leftInputVicke
 import { OutputVicken } from '../../core/types/vicken/outputVicken';
 import { RightInputHubblepupTupleVicken } from '../../core/types/vicken/rightInputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
-import { InMemoryVoictent } from '../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import {
-  SerializableErrorVoictent,
-  SerializableErrorVoque,
-} from '../../layer-agnostic-utilities/voictent/serializableErrorVoictent';
+  SerializableErrorCollection,
+  SerializableErrorStreamMetatype,
+} from '../../layer-agnostic-utilities/collection/serializableErrorCollection';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-untriggered-cology-error',
@@ -21,7 +21,7 @@ type OutputVoque = StandardInMemoryStreamMetatype<
   'output',
   { leftInput: number; rightInput: number }
 >;
-type EngineErrorVoque = SerializableErrorVoque<'engine-error'>;
+type EngineErrorVoque = SerializableErrorStreamMetatype<'engine-error'>;
 
 /**
  * Joins items from a left and right collection by the value of each item. In
@@ -43,8 +43,8 @@ const joinCollectionsByValue: Estinant2<
     {
       gepp: 'input-2',
       isWibiz: false,
-      framate: (input1) => [input1.hubblepup],
-      croard: (input2) => input2.hubblepup,
+      framate: (input1) => [input1.item],
+      croard: (input2) => input2.item,
     },
   ],
   outputAppreffinge: {
@@ -54,8 +54,8 @@ const joinCollectionsByValue: Estinant2<
     return {
       output: [
         {
-          leftInput: indexedInput1.hubblepup,
-          rightInput: indexedInput2.hubblepup,
+          leftInput: indexedInput1.item,
+          rightInput: indexedInput2.item,
         },
       ],
     };
@@ -75,24 +75,24 @@ const joinCollectionsByValue: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryVoictent<Input1Voque>({
-      gepp: 'input-1',
-      initialHubblepupPelueTuple: [1, 2, 3],
+    new InMemoryCollection<Input1Voque>({
+      collectionId: 'input-1',
+      initialItemEggTuple: [1, 2, 3],
     }),
-    new InMemoryVoictent<Input2Voque>({
-      gepp: 'input-2',
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<Input2Voque>({
+      collectionId: 'input-2',
+      initialItemEggTuple: [
         // this list intentionally has less items than required to properly join the collections
         2,
       ],
     }),
-    new InMemoryVoictent<OutputVoque>({
-      gepp: 'output',
-      initialHubblepupPelueTuple: [],
+    new InMemoryCollection<OutputVoque>({
+      collectionId: 'output',
+      initialItemEggTuple: [],
     }),
-    new SerializableErrorVoictent<EngineErrorVoque>({
-      gepp: 'engine-error',
-      initialHubblepupPelueTuple: [],
+    new SerializableErrorCollection<EngineErrorVoque>({
+      collectionId: 'engine-error',
+      initialItemEggTuple: [],
       programFileCache,
     }),
   ],

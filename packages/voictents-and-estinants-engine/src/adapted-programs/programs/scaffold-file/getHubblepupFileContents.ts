@@ -3,7 +3,7 @@ import { ImportConfiguration, ScaffoldeeFileMetadata } from './types';
 const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2.ts',
+      'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2.ts',
     identifierList: ['InMemoryOdeshin2ListVoque'],
   },
   {

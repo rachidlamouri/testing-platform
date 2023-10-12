@@ -6,7 +6,7 @@ Some cologies were not triggered:
     "cologySet": [
       {
         "leftInput": {
-          "hubblepup": 1,
+          "item": 1,
           "indexByName": {
             "serializableId": "0",
             "listIndex": 0
@@ -24,7 +24,7 @@ Some cologies were not triggered:
       },
       {
         "leftInput": {
-          "hubblepup": 3,
+          "item": 3,
           "indexByName": {
             "serializableId": "2",
             "listIndex": 2

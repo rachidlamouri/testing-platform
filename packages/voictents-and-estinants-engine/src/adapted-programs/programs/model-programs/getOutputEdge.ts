@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_ESTINANT_3_GEPP,
   EngineEstinant3Voque,
@@ -31,16 +31,16 @@ export const getOutputEdge = buildEstinant({
   .andFromHubblepupTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
     gepp: ENGINE_ESTINANT_3_GEPP,
     framate: (relationship) => {
-      return [relationship.hubblepup.estinantLocator.zorn];
+      return [relationship.item.estinantLocator.zorn];
     },
-    croard: (engineEstinant) => engineEstinant.hubblepup.locator.zorn,
+    croard: (engineEstinant) => engineEstinant.item.locator.zorn,
   })
   .andFromHubblepupTuple2<EngineEstinantOutput2Voque, [OdeshinZorn]>({
     gepp: ESTINANT_OUTPUT_2_GEPP,
     framate: (relationship) => {
-      return [relationship.hubblepup.outputZorn];
+      return [relationship.item.outputZorn];
     },
-    croard: (estinantOutput) => estinantOutput.hubblepup.zorn,
+    croard: (estinantOutput) => estinantOutput.item.zorn,
   })
   .toHubblepupTuple2<DirectedGraphElement2Voque>({
     gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,

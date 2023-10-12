@@ -1,7 +1,7 @@
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
 import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
 import {
   FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
   FileAncestorDirectoryPathSetVoque,
@@ -32,10 +32,10 @@ export const getBoundedFile = buildEstinant({
   .andFromHubblepupTuple2<FileAncestorDirectoryPathSetVoque, [string]>({
     gepp: FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
     framate: (file) => {
-      return [file.hubblepup.filePath.serialized];
+      return [file.item.filePath.serialized];
     },
     croard: (file) => {
-      return file.hubblepup.filePath;
+      return file.item.filePath;
     },
   })
   .andFromHubblepupTuple2<PartitionedBoundaryTrieVoque, [OdeshinZorn]>({

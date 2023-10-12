@@ -3,19 +3,19 @@ import { LeftInputHubblepupVicken } from '../../core/types/vicken/leftInputVicke
 import { OutputVicken } from '../../core/types/vicken/outputVicken';
 import { RightInputVoictentVicken } from '../../core/types/vicken/rightInputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
-import { InMemoryVoictent } from '../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
-import { AbstractSerializableVoque } from '../../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
+import { AbstractSerializableStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
 import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
-import { SerializableVoictent } from '../../layer-agnostic-utilities/voictent/serializableVoictent';
+import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
 type Voictent1Voque = StandardInMemoryStreamMetatype<'voictent-1', number>;
 type Voictent2Voque = StandardInMemoryStreamMetatype<'voictent-2', string>;
 type Voictent3Voque = StandardInMemoryStreamMetatype<'voictent-3', string>;
 type Voictent4Voque = StandardInMemoryStreamMetatype<'voictent-4', string>;
 
-type SerializedVoque = AbstractSerializableVoque<'serialized'>;
+type SerializedVoque = AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-releasing-a-right-voictent-multiple-timesy',
@@ -50,7 +50,7 @@ const forwardFrom2To3AndSkipAValue: Estinant2<
     }
 
     return {
-      'voictent-3': [input.hubblepup],
+      'voictent-3': [input.item],
     };
   },
 };
@@ -88,7 +88,7 @@ const join1ToAllOf3: Estinant2<
   ): OutputVicken<[Voictent4Voque]>['tropoignantOutput'] {
     const serializedRightInput = `[${rightInput.join(', ')}]`;
 
-    const output = `${leftInput.hubblepup}-${serializedRightInput}`;
+    const output = `${leftInput.item}-${serializedRightInput}`;
 
     return {
       'voictent-4': [output],
@@ -106,26 +106,26 @@ const join1ToAllOf3: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryVoictent<Voictent1Voque>({
-      gepp: 'voictent-1',
-      initialHubblepupPelueTuple: [1, 2],
+    new InMemoryCollection<Voictent1Voque>({
+      collectionId: 'voictent-1',
+      initialItemEggTuple: [1, 2],
     }),
-    new InMemoryVoictent<Voictent2Voque>({
-      gepp: 'voictent-2',
-      initialHubblepupPelueTuple: ['a', 'b', 'SKIP', 'c', 'd'],
+    new InMemoryCollection<Voictent2Voque>({
+      collectionId: 'voictent-2',
+      initialItemEggTuple: ['a', 'b', 'SKIP', 'c', 'd'],
     }),
-    new InMemoryVoictent<Voictent3Voque>({
-      gepp: 'voictent-3',
-      initialHubblepupPelueTuple: [],
+    new InMemoryCollection<Voictent3Voque>({
+      collectionId: 'voictent-3',
+      initialItemEggTuple: [],
     }),
-    new InMemoryVoictent<Voictent4Voque>({
-      gepp: 'voictent-4',
-      initialHubblepupPelueTuple: [],
+    new InMemoryCollection<Voictent4Voque>({
+      collectionId: 'voictent-4',
+      initialItemEggTuple: [],
     }),
-    new SerializableVoictent<SerializedVoque>({
-      gepp: 'serialized',
+    new SerializableCollection<SerializedVoque>({
+      collectionId: 'serialized',
       programFileCache,
-      initialHubblepupPelueTuple: [],
+      initialItemEggTuple: [],
     }),
   ],
   estinantTuple: [

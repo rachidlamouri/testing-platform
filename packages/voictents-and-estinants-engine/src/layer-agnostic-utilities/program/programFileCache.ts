@@ -21,20 +21,20 @@ type ProgramFileCacheInput = {
   namespace: string;
 };
 
-export type SerializedHubblepup = {
+export type SerializedItem = {
   text: string;
   fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
 };
 
 type SerializedHubblepupWriterInput = {
-  voictentGepp: CollectionId;
+  collectionCollectionId: CollectionId;
   nestedPath: string;
   extensionlessFileName: string;
-  serializedHubblepup: SerializedHubblepup;
+  serializedItem: SerializedItem;
 };
 
 type VoictentDirectoryDeleterInput = {
-  voictentGepp: CollectionId;
+  collectionCollectionId: CollectionId;
 };
 
 type NamespacedFilePathAccessorInput = {
@@ -45,7 +45,7 @@ type NamespacedFilePathAccessorInput = {
 };
 
 type NamespacedVoictentFilePathAccessorInput = {
-  voictentGepp: CollectionId;
+  collectionCollectionId: CollectionId;
   nestedPath: string;
   extensionlessFileName: string;
   fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
@@ -101,15 +101,15 @@ export class ProgramFileCache extends FileCache {
     });
   }
 
-  getNamespacedVoictentsFilePath({
-    voictentGepp,
+  getNamespacedCollectionsFilePath({
+    collectionCollectionId,
     nestedPath,
     extensionlessFileName,
     fileExtensionSuffixIdentifier,
   }: NamespacedVoictentFilePathAccessorInput): string {
     return this.getProgramNamespacedFilePath({
       topLevelDirectoryName: TopLevelDirectoryName.Voictents,
-      nestedPath: posix.join(voictentGepp, nestedPath),
+      nestedPath: posix.join(collectionCollectionId, nestedPath),
       extensionlessFileName,
       fileExtensionSuffixIdentifier,
     });
@@ -130,15 +130,15 @@ export class ProgramFileCache extends FileCache {
     });
   }
 
-  writeSerializedHubblepup({
-    voictentGepp,
+  writeSerializedItem({
+    collectionCollectionId,
     nestedPath,
     extensionlessFileName,
-    serializedHubblepup,
+    serializedItem: serializedHubblepup,
   }: SerializedHubblepupWriterInput): void {
     this.writeNamespacedFile({
       topLevelDirectoryName: TopLevelDirectoryName.Voictents,
-      nestedPath: posix.join(voictentGepp, nestedPath),
+      nestedPath: posix.join(collectionCollectionId, nestedPath),
       extensionlessFileName,
       fileExtensionSuffixIdentifier:
         serializedHubblepup.fileExtensionSuffixIdentifier,
@@ -170,11 +170,14 @@ export class ProgramFileCache extends FileCache {
     });
   }
 
-  deleteVoictentDirectory({
-    voictentGepp,
+  deleteCollectionDirectory({
+    collectionCollectionId,
   }: VoictentDirectoryDeleterInput): void {
     this.deleteNamespacedFileNode({
-      nestedPath: posix.join(TopLevelDirectoryName.Voictents, voictentGepp),
+      nestedPath: posix.join(
+        TopLevelDirectoryName.Voictents,
+        collectionCollectionId,
+      ),
     });
   }
 }

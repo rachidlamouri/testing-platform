@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
 import {
   BOUNDED_DIRECTORY_GEPP,
   BoundedDirectoryVoque,
@@ -27,18 +27,17 @@ export const getDirectoryFact2 = buildEstinant({
   .andFromHubblepupTuple2<BoundedDirectoryVoque, [] | [OdeshinZorn]>({
     gepp: BOUNDED_DIRECTORY_GEPP,
     framate: (childDirectory) => {
-      if (childDirectory.hubblepup.directory.isBoundaryDirectory) {
+      if (childDirectory.item.directory.isBoundaryDirectory) {
         return [];
       }
 
       const { parentDirectoryPath } =
-        childDirectory.hubblepup.directory.directory.nodePath;
+        childDirectory.item.directory.directory.nodePath;
 
       return [parentDirectoryPath];
     },
     croard: (potentialParentDirectory) => {
-      return potentialParentDirectory.hubblepup.directory.directoryPath
-        .serialized;
+      return potentialParentDirectory.item.directory.directoryPath.serialized;
     },
   })
   .toHubblepup2<DirectoryFact2Voque>({

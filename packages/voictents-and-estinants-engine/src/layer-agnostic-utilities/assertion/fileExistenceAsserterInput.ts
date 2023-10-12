@@ -10,7 +10,7 @@ import {
   ComplexId,
 } from '../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../package-agnostic-utilities/type/simplify';
-import { InMemoryOdeshin2ListVoque } from '../voictent/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../collection/inMemoryIdentifiableItemCollection2';
 
 const FILE_EXISTENCE_ASSERTER_INPUT_ZORN_TEMPLATE = [
   ['requestor', ComplexId.ANY],

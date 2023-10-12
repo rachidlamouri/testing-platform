@@ -26,10 +26,10 @@ export const getFileDependencyPathNodeFact = buildEstinant({
   .andFromHubblepupTuple2<BoundedDirectoryVoque, [string]>({
     gepp: BOUNDED_DIRECTORY_GEPP,
     framate: (pathNode) => {
-      return [pathNode.hubblepup.directoryPath];
+      return [pathNode.item.directoryPath];
     },
     croard: (directory) => {
-      return directory.hubblepup.directory.directoryPath.serialized;
+      return directory.item.directory.directoryPath.serialized;
     },
   })
   .toHubblepup2<FileDependencyPathNodeFactVoque>({

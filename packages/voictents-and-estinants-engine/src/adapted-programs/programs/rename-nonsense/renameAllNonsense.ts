@@ -24,6 +24,7 @@ type CommandRunnerInput = {
   command: Command;
   environmentVariables?: Record<string, string>;
   errorCode: number;
+  continueOnError?: boolean;
 };
 
 const runCommand = ({
@@ -31,6 +32,7 @@ const runCommand = ({
   command,
   environmentVariables = {},
   errorCode,
+  continueOnError = false,
 }: CommandRunnerInput): SpawnSyncReturns<string> => {
   log(chalk.cyan(title));
   const result = spawnSync(command[0], command.slice(1), {
@@ -56,13 +58,14 @@ const runCommand = ({
 
   log();
 
-  if (result.status !== 0) {
+  if (result.status !== 0 && !continueOnError) {
     const filePath =
       'packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsense/errorLog.txt';
     log(chalk.cyan('Error'));
     log(`${chalk.red('Error log:')} ${filePath}`);
     log();
     fs.writeFileSync(filePath, serialize(result));
+
     process.exit(errorCode);
   }
 
@@ -124,6 +127,7 @@ while (true) {
     title: 'Commit',
     command: ['git', 'commit', '-m', commitMessage],
     errorCode: 7,
+    continueOnError: true,
   });
 
   runCommand({

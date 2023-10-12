@@ -1,4 +1,4 @@
-import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
   buildVoictentByGepp,
   digikikify,
@@ -32,9 +32,9 @@ const programFileCache = new ProgramFileCache({
  */
 digikikify({
   explicitVoictentTuple: [
-    new InMemoryVoictent<AppRendererDelayerVoque>({
-      gepp: APP_RENDERER_DELAYER_GEPP,
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<AppRendererDelayerVoque>({
+      collectionId: APP_RENDERER_DELAYER_GEPP,
+      initialItemEggTuple: [
         new AppRendererDelayerInstance({
           estinantName: 'n/a',
         }),

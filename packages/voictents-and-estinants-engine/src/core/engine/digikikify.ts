@@ -23,9 +23,9 @@ import {
   HubblepupTuple,
 } from '../types/hubblepup/hubblepup';
 import {
-  GenericVoictentItemLanbe2,
+  GenericCollectionItemStream2,
   Lanbe,
-  LanbeTypeName,
+  StreamTypeName,
   HubblepupPelieLanbe,
   GenericVoictentPelieLanbe,
 } from '../types/lanbe/lanbe';
@@ -118,7 +118,7 @@ type TickSeries<TValue extends number | bigint> = TValue[];
 type VoictentTickSeriesConfiguration = {
   gepp: CollectionId;
   voictentLanbe: GenericVoictentPelieLanbe | null;
-  voictentItemLanbe: HubblepupPelieLanbe | GenericVoictentItemLanbe2 | null;
+  voictentItemLanbe: HubblepupPelieLanbe | GenericCollectionItemStream2 | null;
   voictentTickSeries: TickSeries<number>;
   voictentItemTickSeries: TickSeries<number>;
 };
@@ -178,7 +178,7 @@ export const digikikify = ({
 
   const inputGeppSet: GeppSet = new Set(
     inputVoictentList.map((voictent) => {
-      return voictent.gepp;
+      return voictent.collectionId;
     }),
   );
 
@@ -186,8 +186,8 @@ export const digikikify = ({
 
   const voictentCountByGepp: Record<string, number> = {};
   inputVoictentList.forEach((voictent) => {
-    const currentCount = voictentCountByGepp[voictent.gepp] ?? 0;
-    voictentCountByGepp[voictent.gepp] = currentCount + 1;
+    const currentCount = voictentCountByGepp[voictent.collectionId] ?? 0;
+    voictentCountByGepp[voictent.collectionId] = currentCount + 1;
   });
 
   const duplicateGeppList = Object.entries(voictentCountByGepp)
@@ -265,7 +265,7 @@ export const digikikify = ({
         // note: It's important that this check comes after all collections are initialized
         return !voictent.isEmpty;
       })
-      .map((voictent) => voictent.gepp),
+      .map((voictent) => voictent.collectionId),
     ...estinantTuple.flatMap(
       (estinant) => estinant.outputAppreffinge.geppTuple,
     ),
@@ -284,15 +284,15 @@ export const digikikify = ({
 
   // note: downstream estinants are gonna be so hungies
   const unfedVoictentList = inputVoictentList.filter((voictent) => {
-    const isConsumed = consumedVoictentGeppSet.has(voictent.gepp);
-    const isFed = fedVoictentGeppSet.has(voictent.gepp);
+    const isConsumed = consumedVoictentGeppSet.has(voictent.collectionId);
+    const isFed = fedVoictentGeppSet.has(voictent.collectionId);
     return isConsumed && !isFed;
   });
 
   if (unfedVoictentList.length > 0) {
     unfedVoictentList.forEach((voictent) => {
       errorMessageList.push(
-        `Voictent with gepp "${voictent.gepp}" is consumed by an estinant, but is not initialized nor the output of an estinant`,
+        `Voictent with gepp "${voictent.collectionId}" is consumed by an estinant, but is not initialized nor the output of an estinant`,
       );
     });
 
@@ -300,7 +300,7 @@ export const digikikify = ({
   }
 
   const initialTabillyEntryList = inputVoictentList.map((voictent) => {
-    return [voictent.gepp, voictent] as const;
+    return [voictent.collectionId, voictent] as const;
   });
 
   const tabilly = new Tabilly(initialTabillyEntryList);
@@ -333,11 +333,11 @@ export const digikikify = ({
     }
 
     try {
-      errorVoictent.addHubblepup(error);
+      errorVoictent.addItem(error);
     } catch (secondError) {
       assertIsError(secondError);
       throw new AggregateEngineError([
-        `The engine encountered a critical error. The error voictent "${errorVoictent.gepp}" threw an error while handling an error`,
+        `The engine encountered a critical error. The error voictent "${errorVoictent.collectionId}" threw an error while handling an error`,
         error.message,
         secondError.message,
       ]);
@@ -345,7 +345,7 @@ export const digikikify = ({
 
     if (isCritical) {
       throw new Error(
-        `The engine encountered a critical error. See the error voictent with gepp "${errorVoictent.gepp}" for more details`,
+        `The engine encountered a critical error. See the error voictent with gepp "${errorVoictent.collectionId}" for more details`,
       );
     }
   };
@@ -365,7 +365,7 @@ export const digikikify = ({
         `Unable to find voictent for gepp: ${quirm.gepp}`,
       );
 
-      voictent.addHubblepup(quirm.hubblepup);
+      voictent.addItem(quirm.hubblepup);
     });
 
     if (onHubblepupAddedToVoictents !== undefined) {
@@ -385,8 +385,8 @@ export const digikikify = ({
       `Unable to find voictent for gepp: ${appreffinge.gepp}`,
     );
     const lanbe = appreffinge.isWibiz
-      ? voictent.createVoictentLanbe(estinant.name)
-      : voictent.createVoictentItemLanbe(estinant.name);
+      ? voictent.createCollectionStream(estinant.name)
+      : voictent.createCollectionItemStream(estinant.name);
 
     if (lanbe === null) {
       throw Error('Unexpected null Lanbe');
@@ -414,7 +414,7 @@ export const digikikify = ({
             lanbe: createLanbe2(
               estinant,
               rightInputAppreffinge,
-            ) as GenericVoictentItemLanbe2,
+            ) as GenericCollectionItemStream2,
             framate: rightInputAppreffinge.framate,
             croard: rightInputAppreffinge.croard,
             prected: new Prected(),
@@ -465,7 +465,7 @@ export const digikikify = ({
           strategy === DigikikifierStrategy.WaitForAllDependencies &&
           (dreanor.typeName === DreanorTypeName.RightVoictentDreanor ||
             (dreanor.typeName === DreanorTypeName.LeftDreanor &&
-              dreanor.lanbe.typeName === LanbeTypeName.VoictentPelieLanbe))
+              dreanor.lanbe.typeName === StreamTypeName.CollectionStream))
         ) {
           return !dreanor.isReady;
         }
@@ -482,21 +482,21 @@ export const digikikify = ({
           } = dreanor.lanbe.dereference();
 
           const indexedHubblepup: GenericIndexedHubblepup =
-            leftInputTypeName === ReferenceTypeName.IndexedHubblepupPelie
+            leftInputTypeName === ReferenceTypeName.IndexedItem
               ? leftInputReferenceValue
               : {
-                  hubblepup: leftInputReferenceValue,
+                  item: leftInputReferenceValue,
                   indexByName: {
                     serializeableId: '',
                   },
                 };
 
           const leftInput: Item | HubblepupTuple =
-            leftInputTypeName === ReferenceTypeName.IndexedHubblepupPelie
-              ? leftInputReferenceValue.hubblepup
+            leftInputTypeName === ReferenceTypeName.IndexedItem
+              ? leftInputReferenceValue.item
               : leftInputReferenceValue;
 
-          if (dreanor.lanbe.typeName === LanbeTypeName.VoictentPelieLanbe) {
+          if (dreanor.lanbe.typeName === StreamTypeName.CollectionStream) {
             // eslint-disable-next-line no-param-reassign
             dreanor.isReady = true;
           }
@@ -511,13 +511,13 @@ export const digikikify = ({
               } else if (
                 rightDreanor.typeName ===
                   DreanorTypeName.RightVoictentItem2Dreanor &&
-                leftInputTypeName === ReferenceTypeName.IndexedHubblepupPelie
+                leftInputTypeName === ReferenceTypeName.IndexedItem
               ) {
                 zornTuple = rightDreanor.framate(leftInputReferenceValue);
               } else if (
                 rightDreanor.typeName ===
                   DreanorTypeName.RightVoictentItem2Dreanor &&
-                leftInputTypeName === ReferenceTypeName.VoictentPelie
+                leftInputTypeName === ReferenceTypeName.Collection
               ) {
                 // TODO: this cast is incorrect, and is masking some underlying issue. The input type should probably be "never"
                 zornTuple = rightDreanor.framate(
@@ -544,8 +544,8 @@ export const digikikify = ({
             leftDreanor: dreanor,
             leftInput:
               platomity.estinant.version === 2 &&
-              leftInputTypeName === ReferenceTypeName.VoictentPelie
-                ? indexedHubblepup.hubblepup
+              leftInputTypeName === ReferenceTypeName.Collection
+                ? indexedHubblepup.item
                 : indexedHubblepup,
             mabz: new Mabz(mabzEntryList),
             hasTriggered: false,
@@ -573,7 +573,7 @@ export const digikikify = ({
             dreanor.isReady = true;
           } else if (
             dreanor.typeName === DreanorTypeName.RightVoictentItem2Dreanor &&
-            rightInputTypeName === ReferenceTypeName.IndexedHubblepupPelie
+            rightInputTypeName === ReferenceTypeName.IndexedItem
           ) {
             zorn = dreanor.croard(rightInput);
             dreanor.prected.set(zorn, rightInput);
@@ -724,8 +724,8 @@ export const digikikify = ({
       const configuration: VoictentTickSeriesConfiguration =
         voictentTickSeriesConfigurationByVoictent.get(voictent) ?? {
           gepp,
-          voictentLanbe: voictent.createVoictentLanbe(gepp),
-          voictentItemLanbe: voictent.createVoictentItemLanbe(gepp),
+          voictentLanbe: voictent.createCollectionStream(gepp),
+          voictentItemLanbe: voictent.createCollectionItemStream(gepp),
           voictentTickSeries: Array.from({ length: tickCount }).map(() => 0),
           voictentItemTickSeries: Array.from({ length: tickCount }).map(
             () => 0,
@@ -802,7 +802,7 @@ export const digikikify = ({
         dependentSet: new Set(),
       };
 
-      virokByGepp.set(voictent.gepp, virok);
+      virokByGepp.set(voictent.collectionId, virok);
     });
 
     platomityList.forEach((platomity) => {
@@ -855,7 +855,7 @@ export const digikikify = ({
           if (
             (dreanor.typeName === DreanorTypeName.LeftDreanor ||
               dreanor.typeName === DreanorTypeName.RightVoictentDreanor) &&
-            dreanor.lanbe.typeName === LanbeTypeName.VoictentPelieLanbe
+            dreanor.lanbe.typeName === StreamTypeName.CollectionStream
           ) {
             return true;
           }

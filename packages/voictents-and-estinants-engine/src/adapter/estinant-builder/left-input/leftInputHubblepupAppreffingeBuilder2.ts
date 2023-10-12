@@ -94,7 +94,7 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
           modifyTropoignantInput: (
             indexedHubblepup: GenericIndexedHubblepup,
           ) => {
-            return indexedHubblepup.hubblepup;
+            return indexedHubblepup.item;
           },
         },
       });

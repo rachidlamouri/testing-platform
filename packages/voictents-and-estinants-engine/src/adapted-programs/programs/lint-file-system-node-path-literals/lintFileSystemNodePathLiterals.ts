@@ -2,7 +2,7 @@ import {
   digikikify,
   buildVoictentByGepp,
 } from '../../../adapter/engine/digikikify';
-import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
@@ -44,9 +44,9 @@ const programFileCache = new ProgramFileCache({
  */
 digikikify({
   explicitVoictentTuple: [
-    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
-      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
+      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+      initialItemEggTuple: [
         VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
     }),
@@ -57,8 +57,8 @@ digikikify({
       programFileCache,
     }),
     new LintAssertionOmissionVoictent<LintAssertionOmissionVoque>({
-      gepp: LINT_ASSERTION_OMISSION_GEPP,
-      initialHubblepupPelueTuple: [
+      collectionId: LINT_ASSERTION_OMISSION_GEPP,
+      initialItemEggTuple: [
         // keep multiline
         NULL_OMISSION,
       ],

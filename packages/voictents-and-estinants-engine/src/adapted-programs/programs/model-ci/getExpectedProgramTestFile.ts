@@ -25,10 +25,10 @@ export const getExpectedProgramTestFile = buildEstinant({
   .andFromHubblepupTuple2<BashFileVoque, [string]>({
     gepp: BASH_FILE_GEPP,
     framate: (expectedProgram) => {
-      return [expectedProgram.hubblepup.testFilePath];
+      return [expectedProgram.item.testFilePath];
     },
     croard: (file) => {
-      return file.hubblepup.filePath.serialized;
+      return file.item.filePath.serialized;
     },
   })
   .toHubblepup2<ExpectedProgramTestFileVoque>({

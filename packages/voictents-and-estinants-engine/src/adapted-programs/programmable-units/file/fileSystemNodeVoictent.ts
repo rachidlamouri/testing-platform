@@ -1,23 +1,23 @@
 import { CollectionId } from '../../../core/types/voictent/gepp';
-import { HubblepupPelieLanbe2 } from '../../../core/types/lanbe/lanbe';
+import { ItemStream2 } from '../../../core/types/lanbe/lanbe';
 import {
-  AbstractInMemoryVoictent,
+  AbstractInMemoryCollection,
   DereferenceError,
-} from '../../../layer-agnostic-utilities/voictent/abstractInMemoryVoictent';
+} from '../../../layer-agnostic-utilities/collection/abstractInMemoryCollection';
 import {
   InMemoryIndexByName,
   InMemoryStreamMetatype,
 } from '../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
-import { GenericOdeshin2 } from '../../../adapter/odeshin/odeshin2';
+import { GenericIdentifiableItem } from '../../../adapter/odeshin/identifiableItem';
 import { FileSystemNode } from './fileSystemNode';
-import { BaseInMemoryOdeshin2Voictent } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { BaseInMemoryOdeshin2Voictent } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 type FileSystemNodeIndexByName = SpreadN<
   [
     InMemoryIndexByName,
     {
-      zorn: GenericOdeshin2['zorn'];
+      zorn: GenericIdentifiableItem['id'];
       nodePath: string;
     },
   ]
@@ -61,35 +61,35 @@ export class FileSystemNodeVoictent<
     list: [],
   };
 
-  addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
+  addItem(hubblepup: TVoque['hubblepupPelue']): void {
     this.voictentPelie.byZorn.set(hubblepup.zorn.forHuman, hubblepup);
     this.voictentPelie.byNodePath.set(hubblepup.nodePath.serialized, hubblepup);
     this.voictentPelie.list.push(hubblepup);
 
-    super.addHubblepup(hubblepup);
+    super.addItem(hubblepup);
   }
 
-  protected dereferenceVoictentPelie(): TVoque['voictentPelie'] {
+  protected dereferenceCollection(): TVoque['voictentPelie'] {
     return this.voictentPelie;
   }
 
-  protected dereferenceHubblepupPelie(
-    lanbe: HubblepupPelieLanbe2<GenericFileSystemNodeVoque, TVoque>,
+  protected dereferenceItem(
+    lanbe: ItemStream2<GenericFileSystemNodeVoque, TVoque>,
   ): TVoque['indexedHubblepupPelie'] {
-    const listIndex = this.getLanbeIndex(lanbe);
+    const listIndex = this.getStreamIndex(lanbe);
 
-    if (listIndex === AbstractInMemoryVoictent.minimumInclusiveIndex) {
+    if (listIndex === AbstractInMemoryCollection.minimumInclusiveIndex) {
       throw new DereferenceError(lanbe);
     }
 
-    const hubblepup = this.hubblepupPelieTuple[listIndex];
+    const item = this.itemTuple[listIndex];
     return {
-      hubblepup,
+      item,
       indexByName: {
         serializableId: `${listIndex}`,
         listIndex,
-        zorn: hubblepup.zorn,
-        nodePath: hubblepup.nodePath.serialized,
+        zorn: item.zorn,
+        nodePath: item.nodePath.serialized,
       },
     };
   }

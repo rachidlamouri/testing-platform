@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -43,8 +43,9 @@ export const { EstinantOutput2Instance } = buildConstructorFunctionWithName(
       output.estinantLocator.zorn.forHuman,
     ]);
   },
-  id: (output) =>
-    getTextDigest(`${output.estinantName} | output | ${output.voictentName}`),
+  id: (output) => {
+    return getTextDigest(output.zorn);
+  },
 });
 
 export const ESTINANT_OUTPUT_2_GEPP = 'estinant-output-2';

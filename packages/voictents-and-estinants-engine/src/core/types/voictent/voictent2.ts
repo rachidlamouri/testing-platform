@@ -1,8 +1,8 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import {
   HubblepupPelieLanbe,
-  HubblepupPelieLanbe2,
-  VoictentPelieLanbe,
+  ItemStream2,
+  CollectionStream,
 } from '../lanbe/lanbe';
 import { GenericVoque, UnsafeVoque } from '../voque/voque';
 
@@ -13,21 +13,20 @@ import { GenericVoque, UnsafeVoque } from '../voque/voque';
  *
  * @readableName Collection
  *
+ * @canonicalDeclaration
+ *
  * @todo make "addHubblepup" private, and create a stream connection for sending
  * data to a collection
  */
-export type Voictent2<
+export type Collection2<
   TRestrictingVoque extends GenericVoque,
   TVoque extends TRestrictingVoque,
 > = {
-  get gepp(): TVoque['gepp'];
-  createVoictentLanbe(debugName: string): VoictentPelieLanbe<TVoque> | null;
-  createVoictentItemLanbe(
+  get collectionId(): TVoque['gepp'];
+  createCollectionStream(debugName: string): CollectionStream<TVoque> | null;
+  createCollectionItemStream(
     debugName: string,
-  ):
-    | HubblepupPelieLanbe2<TRestrictingVoque, TVoque>
-    | HubblepupPelieLanbe
-    | null;
+  ): ItemStream2<TRestrictingVoque, TVoque> | HubblepupPelieLanbe | null;
   onTickStart(): void;
   /**
    * This is for collections whose constructor accepts initial hubblepups. This
@@ -37,13 +36,13 @@ export type Voictent2<
    */
   initialize(): void;
   get isEmpty(): boolean;
-  addHubblepup(hubblepup: TVoque['hubblepupPelue']): void;
+  addItem(hubblepup: TVoque['hubblepupPelue']): void;
 };
 
-export type GenericVoictent2 = Voictent2<GenericVoque, GenericVoque>;
+export type GenericVoictent2 = Collection2<GenericVoque, GenericVoque>;
 
 export type GenericVoictent2Tuple = Tuple<GenericVoictent2>;
 
-type UnsafeVoictent2 = Voictent2<UnsafeVoque, UnsafeVoque>;
+type UnsafeVoictent2 = Collection2<UnsafeVoque, UnsafeVoque>;
 
 export type UnsafeVoictent2Tuple = Tuple<UnsafeVoictent2>;

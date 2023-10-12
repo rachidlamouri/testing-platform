@@ -2,7 +2,7 @@ import { getTextDigest } from '../../../package-agnostic-utilities/string/getTex
 import { getZorn } from '../../../layer-agnostic-utilities/deprecated-zorn/getZorn';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_ESTINANT_3_GEPP,
   EngineEstinant3Voque,
@@ -40,9 +40,9 @@ export const getEngineEstinantGraphElements = buildEstinant({
   .andFromHubblepupTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
     gepp: ENGINE_ESTINANT_3_GEPP,
     framate: (relationship) => {
-      return [relationship.hubblepup.estinantLocator.zorn];
+      return [relationship.item.estinantLocator.zorn];
     },
-    croard: (engineEstinant) => engineEstinant.hubblepup.locator.zorn,
+    croard: (engineEstinant) => engineEstinant.item.locator.zorn,
   })
   .toHubblepupTuple2<DirectedGraphElement2Voque>({
     gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
@@ -54,21 +54,20 @@ export const getEngineEstinantGraphElements = buildEstinant({
     const rootEstinantSubgraphId = getTextDigest(
       rootEstinantSubgraphDistinguisher,
     );
-    const rootEstinantSubgraphLocator = new GraphConstituentLocatorInstance({
-      idOverride: rootEstinantSubgraphId,
-      localZorn: LocalDirectedGraphElement2Zorn.buildSubgraphZorn({
+
+    const rootEstinantSubgraphLocalZorn =
+      LocalDirectedGraphElement2Zorn.buildSubgraphZorn({
         distinguisher: rootEstinantSubgraphDistinguisher,
-      }),
+      });
+
+    const rootEstinantSubgraphLocator = new GraphConstituentLocatorInstance({
+      localZorn: rootEstinantSubgraphLocalZorn,
       rootGraphLocator,
       parentId: rootGraphLocator.id,
     });
 
     const estinantInputSubgraphDistinguisher = `${relationship.programName} | ${engineEstinant.estinantName} | estinant-input-subgraph`;
-    const estinantInputSubgraphId = getTextDigest(
-      estinantInputSubgraphDistinguisher,
-    );
     const estinantInputSubgraphLocator = new GraphConstituentLocatorInstance({
-      idOverride: estinantInputSubgraphId,
       localZorn: LocalDirectedGraphElement2Zorn.buildSubgraphZorn({
         distinguisher: estinantInputSubgraphDistinguisher,
       }),
@@ -90,7 +89,6 @@ export const getEngineEstinantGraphElements = buildEstinant({
 
     const estinantNode = new DirectedGraphNode2Instance({
       locator: new GraphConstituentLocatorInstance({
-        idOverride: engineEstinant.id,
         rootGraphLocator,
         parentId: rootEstinantSubgraph.id,
         localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
@@ -108,7 +106,6 @@ export const getEngineEstinantGraphElements = buildEstinant({
       const label = input.index === 0 ? 'L' : `R${input.index}`;
       const inputNode = new DirectedGraphNode2Instance({
         locator: new GraphConstituentLocatorInstance({
-          idOverride: input.id,
           rootGraphLocator,
           parentId: estinantInputSubgraph.id,
           localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({

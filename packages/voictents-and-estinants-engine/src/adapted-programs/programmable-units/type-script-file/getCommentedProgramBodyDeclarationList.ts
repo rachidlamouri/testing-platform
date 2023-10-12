@@ -48,19 +48,19 @@ export const getCommentedProgramBodyDeclarationList = buildEstinant({
   .andFromHubblepupTuple2<TypeScriptFileVoque, [string]>({
     gepp: TYPE_SCRIPT_FILE_GEPP,
     framate: (parsedFile) => {
-      return [parsedFile.hubblepup.filePath];
+      return [parsedFile.item.filePath];
     },
     croard: (file) => {
-      return file.hubblepup.filePath.serialized;
+      return file.item.filePath.serialized;
     },
   })
   .andFromHubblepupTuple2<FileParsedCommentGroupVoque, [string]>({
     gepp: FILE_PARSED_COMMENT_GROUP_GEPP,
     framate: (parsedFile) => {
-      return [parsedFile.hubblepup.filePath];
+      return [parsedFile.item.filePath];
     },
     croard: (file) => {
-      return file.hubblepup.filePath;
+      return file.item.filePath;
     },
   })
   .toHubblepup2<FileCommentedProgramBodyDeclarationGroupVoque>({

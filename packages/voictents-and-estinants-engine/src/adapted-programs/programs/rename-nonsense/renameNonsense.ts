@@ -2,7 +2,7 @@ import {
   digikikify,
   buildVoictentByGepp,
 } from '../../../adapter/engine/digikikify';
-import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
@@ -55,15 +55,15 @@ const programFileCache = new ProgramFileCache({
  */
 digikikify({
   explicitVoictentTuple: [
-    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
-      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
+      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+      initialItemEggTuple: [
         VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
     }),
-    new InMemoryVoictent<EngineFunctionConfigurationVoque>({
-      gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<EngineFunctionConfigurationVoque>({
+      collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
+      initialItemEggTuple: [
         CORE_ENGINE_FUNCTION_CONFIGURATION,
         CORE_ENGINE_FUNCTION_2_CONFIGURATION,
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
@@ -76,8 +76,8 @@ digikikify({
       programFileCache,
     }),
     new LintAssertionOmissionVoictent({
-      gepp: LINT_ASSERTION_OMISSION_GEPP,
-      initialHubblepupPelueTuple: [
+      collectionId: LINT_ASSERTION_OMISSION_GEPP,
+      initialItemEggTuple: [
         // keep multiline
         NULL_OMISSION,
       ],

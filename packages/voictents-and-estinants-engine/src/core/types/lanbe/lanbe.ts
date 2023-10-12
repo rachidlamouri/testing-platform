@@ -3,14 +3,14 @@ import { Item } from '../hubblepup/hubblepup';
 import { GenericVoque, StreamMetatype } from '../voque/voque';
 import { ReferenceTypeName } from './referenceTypeName';
 
-export enum LanbeTypeName {
-  VoictentPelieLanbe = 'VoictentPelieLanbe',
+export enum StreamTypeName {
+  CollectionStream = 'VoictentPelieLanbe',
   HubblepupPelieLanbe = 'HubblepupPelieLanbe',
-  HubblepupPelieLanbe2 = 'HubblepupPelieLanbe2',
+  ItemStream2 = 'HubblepupPelieLanbe2',
 }
 
 type BaseLanbe<
-  TLanbeTypeName extends LanbeTypeName,
+  TLanbeTypeName extends StreamTypeName,
   TReferenceTypeName extends ReferenceTypeName,
   TOutput,
 > = {
@@ -24,30 +24,30 @@ type BaseLanbe<
   };
 };
 
-export type VoictentPelieLanbe<TVoque extends GenericVoque> = Simplify<
+export type CollectionStream<TVoque extends GenericVoque> = Simplify<
   BaseLanbe<
-    LanbeTypeName.VoictentPelieLanbe,
-    ReferenceTypeName.VoictentPelie,
+    StreamTypeName.CollectionStream,
+    ReferenceTypeName.Collection,
     TVoque['voictentPelie']
   > & {
     isAccumulating: () => boolean;
   }
 >;
 
-export type GenericVoictentPelieLanbe = VoictentPelieLanbe<GenericVoque>;
+export type GenericVoictentPelieLanbe = CollectionStream<GenericVoque>;
 
 export type HubblepupPelieLanbe = BaseLanbe<
-  LanbeTypeName.HubblepupPelieLanbe,
+  StreamTypeName.HubblepupPelieLanbe,
   ReferenceTypeName.HubblepupPelie,
   Item
 >;
 
-export type HubblepupPelieLanbe2<
+export type ItemStream2<
   TRestrictingVoque extends GenericVoque,
   TVoque extends TRestrictingVoque,
 > = BaseLanbe<
-  LanbeTypeName.HubblepupPelieLanbe2,
-  ReferenceTypeName.IndexedHubblepupPelie,
+  StreamTypeName.ItemStream2,
+  ReferenceTypeName.IndexedItem,
   StreamMetatype<
     TVoque['gepp'],
     TVoque['hubblepupPelue'],
@@ -57,7 +57,7 @@ export type HubblepupPelieLanbe2<
   >['indexedHubblepupPelie']
 >;
 
-export type GenericVoictentItemLanbe2 = HubblepupPelieLanbe2<
+export type GenericCollectionItemStream2 = ItemStream2<
   GenericVoque,
   GenericVoque
 >;
@@ -73,4 +73,4 @@ export type GenericVoictentItemLanbe2 = HubblepupPelieLanbe2<
 export type Lanbe =
   | GenericVoictentPelieLanbe
   | HubblepupPelieLanbe
-  | GenericVoictentItemLanbe2;
+  | GenericCollectionItemStream2;

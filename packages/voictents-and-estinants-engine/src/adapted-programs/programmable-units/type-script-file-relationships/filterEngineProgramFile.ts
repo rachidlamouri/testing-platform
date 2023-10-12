@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
   EngineFunctionConfigurationVoque,
@@ -29,8 +29,8 @@ export const filterEngineProgramFile = buildEstinant({
   })
   .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    framate: (leftInput) => [leftInput.indexByName.zorn],
-    croard: (rightInput) => rightInput.indexByName.zorn,
+    framate: (leftInput) => [leftInput.item.zorn],
+    croard: (rightInput) => rightInput.item.zorn,
   })
   .andFromVoictent2<EngineFunctionConfigurationVoque>({
     gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,

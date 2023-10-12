@@ -1,4 +1,4 @@
-import { LanbeTypeName } from '../../core/types/lanbe/lanbe';
+import { StreamTypeName } from '../../core/types/lanbe/lanbe';
 import { RuntimeStatistics } from '../../core/engine/digikikify';
 
 /**
@@ -75,7 +75,7 @@ export const serializeRuntimeStatistics = (
 
       configuration.connectionList.forEach((connection) => {
         const connectionType =
-          connection.lanbe.typeName === LanbeTypeName.VoictentPelieLanbe
+          connection.lanbe.typeName === StreamTypeName.CollectionStream
             ? 'C'
             : 'I';
         const serializedSeries = connection.tickSeries.map((value) =>

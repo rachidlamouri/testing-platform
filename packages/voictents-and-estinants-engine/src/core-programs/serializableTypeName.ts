@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * A data structure to snapshot when testing if a utility can detect the right

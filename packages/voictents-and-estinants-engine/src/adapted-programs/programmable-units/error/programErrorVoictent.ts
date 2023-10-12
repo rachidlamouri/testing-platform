@@ -3,7 +3,7 @@ import { getVoictentResourceLocator } from '../../../layer-agnostic-utilities/de
 import { normalizeFilePathForFileName } from '../../../package-agnostic-utilities/file/normalizeFilePathForFileName';
 import {
   ProgramFileCache,
-  SerializedHubblepup,
+  SerializedItem,
 } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { serialize } from '../../../package-agnostic-utilities/one-way-serializer/serialize';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
@@ -44,8 +44,8 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
     this.programFileCache = programFileCache;
 
-    this.programFileCache.deleteVoictentDirectory({
-      voictentGepp: this.gepp,
+    this.programFileCache.deleteCollectionDirectory({
+      collectionCollectionId: this.collectionId,
     });
   }
 
@@ -116,8 +116,8 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
     const bySourceDirectoryPath = `by-source/${normalizedSourcePath}`;
 
     const contextFilePath =
-      this.programFileCache.getNamespacedVoictentsFilePath({
-        voictentGepp: this.gepp,
+      this.programFileCache.getNamespacedCollectionsFilePath({
+        collectionCollectionId: this.collectionId,
         nestedPath: bySourceDirectoryPath,
         extensionlessFileName: normalizedZorn,
         fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
@@ -150,23 +150,23 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
     hubblepup: GenericProgramErrorVoque['hubblepupPelie'],
     index: number,
   ): void {
-    const serializedHubblepup: SerializedHubblepup = {
+    const serializedHubblepup: SerializedItem = {
       text: serialize(hubblepup),
       fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
     };
 
     if (hubblepup instanceof Error) {
-      this.programFileCache.writeSerializedHubblepup({
-        voictentGepp: this.gepp,
+      this.programFileCache.writeSerializedItem({
+        collectionCollectionId: this.collectionId,
         nestedPath: 'error',
-        serializedHubblepup,
+        serializedItem: serializedHubblepup,
         extensionlessFileName: `${index}`.padStart(2, '0'),
       });
 
       if (hubblepup instanceof LintAssertionError) {
         const contextFilePath =
-          this.programFileCache.getNamespacedVoictentsFilePath({
-            voictentGepp: this.gepp,
+          this.programFileCache.getNamespacedCollectionsFilePath({
+            collectionCollectionId: this.collectionId,
             nestedPath: 'error',
             extensionlessFileName: `${index}`.padStart(2, '0'),
             fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
@@ -179,18 +179,18 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       return;
     }
 
-    this.programFileCache.writeSerializedHubblepup({
-      voictentGepp: this.gepp,
+    this.programFileCache.writeSerializedItem({
+      collectionCollectionId: this.collectionId,
       nestedPath: hubblepup.byReporterDirectoryPath,
-      serializedHubblepup,
+      serializedItem: serializedHubblepup,
       extensionlessFileName: hubblepup.normalizedZorn,
     });
 
     // TODO: again, put this logic in a utility or something
-    this.programFileCache.writeSerializedHubblepup({
-      voictentGepp: this.gepp,
+    this.programFileCache.writeSerializedItem({
+      collectionCollectionId: this.collectionId,
       nestedPath: hubblepup.bySourceDirectoryPath,
-      serializedHubblepup,
+      serializedItem: serializedHubblepup,
       extensionlessFileName: hubblepup.normalizedZorn,
     });
   }

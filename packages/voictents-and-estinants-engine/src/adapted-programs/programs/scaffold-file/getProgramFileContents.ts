@@ -8,7 +8,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/voictent/inMemoryVoictent.ts',
+      'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/collection/inMemoryCollection.ts',
     identifierList: ['InMemoryVoictent'],
   },
   {

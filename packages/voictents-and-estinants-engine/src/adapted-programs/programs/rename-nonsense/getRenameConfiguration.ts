@@ -50,7 +50,15 @@ export const getRenameConfiguration = buildEstinant({
     // TODO: identifiers are heavily integrated everywhere in the project. There are only a few instances left in the file to update. Do so when all other objects are renamed.
     if (
       identifierLocator.filePath.serialized ===
-      'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/data-structure/id.ts'
+        'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/data-structure/id.ts' ||
+      identifierLocator.filePath.serialized ===
+        'packages/voictents-and-estinants-engine/src/adapter/odeshin/identifiableItem.ts' ||
+      identifierLocator.filePath.serialized ===
+        'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2.ts' ||
+      identifierLocator.filePath.serialized ===
+        'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/type-script-file-relationships/filterEngineProgramFile.ts' ||
+      identifierLocator.filePath.serialized ===
+        'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/engine-program/getEngineProgramLocator3.ts'
     ) {
       return {
         [RENAME_CONFIGURATION_GEPP]: [],

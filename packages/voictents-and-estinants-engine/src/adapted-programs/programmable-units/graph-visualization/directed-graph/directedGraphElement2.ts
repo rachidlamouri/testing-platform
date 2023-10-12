@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { DirectedCluster2 } from './directedCluster2';
 import { DirectedGraph2 } from './directedGraph2';
 import { DirectedGraphEdge2 } from './directedGraphEdge2';

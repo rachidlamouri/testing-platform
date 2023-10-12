@@ -66,7 +66,7 @@ import {
   EstinantVoqueRelationship2Instance,
   EstinantVoqueRelationship2Voque,
 } from './estinantVoqueRelationship2';
-import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclaration';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
@@ -852,13 +852,13 @@ export const getEngineEstinant3 = buildEstinant({
     [OdeshinZorn]
   >({
     gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-    framate: (leftInput) => [leftInput.hubblepup.filePath],
-    croard: (rightInput) => rightInput.hubblepup.filePath,
+    framate: (leftInput) => [leftInput.item.filePath],
+    croard: (rightInput) => rightInput.item.filePath,
   })
   .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    framate: (leftInput) => [leftInput.hubblepup.filePath],
-    croard: (rightInput) => rightInput.indexByName.zorn,
+    framate: (leftInput) => [leftInput.item.filePath],
+    croard: (rightInput) => rightInput.item.zorn,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,

@@ -1,11 +1,11 @@
 import { digikikify2 } from '../core/engine/digikikify';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import {
-  SerializableErrorVoictent,
-  SerializableErrorVoque,
-} from '../layer-agnostic-utilities/voictent/serializableErrorVoictent';
+  SerializableErrorCollection,
+  SerializableErrorStreamMetatype,
+} from '../layer-agnostic-utilities/collection/serializableErrorCollection';
 
-type ErrorVoque = SerializableErrorVoque<'error'>;
+type ErrorVoque = SerializableErrorStreamMetatype<'error'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-error-serialization',
@@ -22,10 +22,10 @@ const programFileCache = new ProgramFileCache({
 digikikify2({
   inputVoictentList: [
     // TODO: make the type parameter a voque
-    new SerializableErrorVoictent<ErrorVoque>({
-      gepp: 'error',
+    new SerializableErrorCollection<ErrorVoque>({
+      collectionId: 'error',
       programFileCache,
-      initialHubblepupPelueTuple: [
+      initialItemEggTuple: [
         new Error('Example error message 1'),
         new Error('Example error message 2'),
       ],

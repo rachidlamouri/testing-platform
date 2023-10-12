@@ -1,6 +1,6 @@
 import { DirectedGraphEdge } from './directedGraphEdge';
 import { DirectedGraphNode } from './directedGraphNode';
-import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { SpreadN } from '../../../../package-agnostic-utilities/type/spreadN';
 import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
 import { AttributeByKeyGSC } from './attributeByKeyGSC';

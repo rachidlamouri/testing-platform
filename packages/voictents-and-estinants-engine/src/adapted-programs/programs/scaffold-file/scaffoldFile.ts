@@ -26,10 +26,10 @@ export const scaffoldFile = buildEstinant({
   .andFromHubblepupTuple2<FileVoque, [string]>({
     gepp: FILE_GEPP,
     framate: (configuration) => {
-      return [configuration.hubblepup.filePath];
+      return [configuration.item.filePath];
     },
     croard: (file) => {
-      return file.hubblepup.filePath.serialized;
+      return file.item.filePath.serialized;
     },
   })
   .onPinbe((scaffoldConfiguration, [file]) => {

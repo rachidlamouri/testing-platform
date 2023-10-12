@@ -1,4 +1,4 @@
-import { AbstractInMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/abstractInMemoryVoictent';
+import { AbstractInMemoryCollection } from '../../../layer-agnostic-utilities/collection/abstractInMemoryCollection';
 import { InMemoryIndexByName } from '../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { StreamMetatype } from '../../../core/types/voque/voque';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
@@ -96,23 +96,23 @@ export type LintAssertionOmissionVoque = StreamMetatype<
 // TODO: update this class to not need a TVoque. you will need to update the program modeler
 export class LintAssertionOmissionVoictent<
   TVoque extends LintAssertionOmissionVoque,
-> extends AbstractInMemoryVoictent<LintAssertionOmissionVoque, TVoque> {
+> extends AbstractInMemoryCollection<LintAssertionOmissionVoque, TVoque> {
   private omittedZornSet = new Set<string>();
 
-  addHubblepup(hubblepup: LintAssertionOmission): void {
+  addItem(hubblepup: LintAssertionOmission): void {
     this.omittedZornSet.add(hubblepup.omittedAssertionZorn.forHuman);
 
-    super.addHubblepup(hubblepup);
+    super.addItem(hubblepup);
   }
 
-  protected dereferenceVoictentPelie(): LintAssertionOmissionVoictentPelie {
+  protected dereferenceCollection(): LintAssertionOmissionVoictentPelie {
     return {
-      list: this.hubblepupPelieTuple,
+      list: this.itemTuple,
       omittedZornSet: this.omittedZornSet,
     };
   }
 
-  protected dereferenceHubblepupPelie(): never {
+  protected dereferenceItem(): never {
     throw new Error('Method not supported');
   }
 }

@@ -4,10 +4,10 @@ import {
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
-import { JsonSerializableVoictent } from '../layer-agnostic-utilities/voictent/jsonSerializableVoictent';
-import { AbstractSerializableVoque } from '../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
+import { JsonSerializableCollection } from '../layer-agnostic-utilities/collection/jsonSerializableCollection';
+import { AbstractSerializableStreamMetatype } from '../layer-agnostic-utilities/collection/abstractSerializableCollection';
 
-type SerializedConfiguration = AbstractSerializableVoque<'serialized'>;
+type SerializedConfiguration = AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-json-serialization',
@@ -23,14 +23,14 @@ const programFileCache = new ProgramFileCache({
  */
 digikikify2({
   inputVoictentList: [
-    new JsonSerializableVoictent<SerializedConfiguration>({
-      gepp: 'serialized',
+    new JsonSerializableCollection<SerializedConfiguration>({
+      collectionId: 'serialized',
       programFileCache,
-      initialHubblepupPelueTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST.map<
+      initialItemEggTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST.map<
         SerializedConfiguration['hubblepupPelue']
       >((datumTestCaseInput) => {
         return {
-          sourceGepp: DATUM_TEST_CASE_INPUT_GEPP,
+          sourceCollectionId: DATUM_TEST_CASE_INPUT_GEPP,
           serializableId: datumTestCaseInput.zorn,
           datum: datumTestCaseInput.grition,
         };

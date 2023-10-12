@@ -52,7 +52,6 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
 
     const startingSubgraph = new DirectedCluster2Instance({
       locator: new GraphConstituentLocatorInstance({
-        idOverride: engineProgram.locator.startingSubgraphId,
         localZorn: LocalDirectedGraphElement2Zorn.buildClusterZorn({
           distinguisher: `start-subgraph | ${rootGraphLocator.distinguisher}`,
         }),
@@ -69,7 +68,6 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
     const startLabel = 'START';
     const startNode = new DirectedGraphNode2Instance({
       locator: new GraphConstituentLocatorInstance({
-        idOverride: engineProgram.locator.startingNodeId,
         rootGraphLocator,
         parentId: rootGraphLocator.id,
         localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
@@ -98,7 +96,6 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
 
     const endingSubgraph = new DirectedCluster2Instance({
       locator: new GraphConstituentLocatorInstance({
-        idOverride: engineProgram.locator.endingSubgraphId,
         localZorn: LocalDirectedGraphElement2Zorn.buildClusterZorn({
           distinguisher: `end-subgraph | ${rootGraphLocator.distinguisher}`,
         }),
@@ -115,7 +112,6 @@ export const getTopLevelEngineProgramGraphElements = buildEstinant({
     const endLabel = 'END';
     const endNode = new DirectedGraphNode2Instance({
       locator: new GraphConstituentLocatorInstance({
-        idOverride: engineProgram.locator.endingNodeId,
         rootGraphLocator,
         parentId: rootGraphLocator.id,
         localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({

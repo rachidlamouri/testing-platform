@@ -1,10 +1,10 @@
 import {
-  LanbeTypeName,
-  HubblepupPelieLanbe2,
-  VoictentPelieLanbe,
+  StreamTypeName,
+  ItemStream2,
+  CollectionStream,
 } from '../../../core/types/lanbe/lanbe';
 import { ReferenceTypeName } from '../../../core/types/lanbe/referenceTypeName';
-import { Voictent2 } from '../../../core/types/voictent/voictent2';
+import { Collection2 } from '../../../core/types/voictent/voictent2';
 import { GenericVoque } from '../../../core/types/voque/voque';
 import { InMemoryCache } from './inMemoryCache';
 
@@ -25,9 +25,9 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
     TVoque extends TRestrictingVoque,
   >
   extends InMemoryCache<TVoque['hubblepupPelie']>
-  implements Voictent2<TRestrictingVoque, TVoque>
+  implements Collection2<TRestrictingVoque, TVoque>
 {
-  public readonly gepp: TVoque['gepp'];
+  public readonly collectionId: TVoque['gepp'];
 
   private initialHubblepupPelueTuple: TVoque['hubblepupPelie'][];
 
@@ -37,17 +37,17 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
   }: AbstractInMemoryVoictent2ConstructorInput<TVoque>) {
     super();
 
-    this.gepp = gepp;
+    this.collectionId = gepp;
     this.initialHubblepupPelueTuple = initialHubblepupPelueTuple;
   }
 
   initialize(): void {
     this.initialHubblepupPelueTuple.forEach((hubblepup) => {
-      this.addHubblepup(hubblepup);
+      this.addItem(hubblepup);
     });
   }
 
-  addHubblepup(hubblepup: TVoque['hubblepupPelue']): void {
+  addItem(hubblepup: TVoque['hubblepupPelue']): void {
     const transformedHubblepup = this.transformHubblepup(hubblepup);
     this.addDatum(transformedHubblepup);
     this.onTransformedHubblepup(
@@ -69,9 +69,9 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
     index: number,
   ): void;
 
-  createVoictentLanbe(debugName: string): VoictentPelieLanbe<TVoque> {
-    const lanbe: VoictentPelieLanbe<TVoque> = {
-      typeName: LanbeTypeName.VoictentPelieLanbe,
+  createCollectionStream(debugName: string): CollectionStream<TVoque> {
+    const lanbe: CollectionStream<TVoque> = {
+      typeName: StreamTypeName.CollectionStream,
       debugName,
       hasNext: () => {
         return this.didStopAccumulating;
@@ -82,7 +82,7 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
       advance: () => {},
       dereference: () => {
         return {
-          typeName: ReferenceTypeName.VoictentPelie,
+          typeName: ReferenceTypeName.Collection,
           value: [...this.datumTuple],
         };
       },
@@ -91,13 +91,13 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
     return lanbe;
   }
 
-  createVoictentItemLanbe(
+  createCollectionItemStream(
     debugName: string,
-  ): HubblepupPelieLanbe2<TRestrictingVoque, TVoque> {
+  ): ItemStream2<TRestrictingVoque, TVoque> {
     const pointer = this.createPointer(debugName);
 
-    const lanbe: HubblepupPelieLanbe2<TRestrictingVoque, TVoque> = {
-      typeName: LanbeTypeName.HubblepupPelieLanbe2,
+    const lanbe: ItemStream2<TRestrictingVoque, TVoque> = {
+      typeName: StreamTypeName.ItemStream2,
       debugName,
       hasNext: () => {
         return pointer.hasNext();
@@ -106,15 +106,15 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
         pointer.advance();
       },
       dereference: () => {
-        const hubblepup = pointer.dereference();
+        const item = pointer.dereference();
 
         const indexedHubblepup = {
-          indexByName: this.getIndexByName(hubblepup),
-          hubblepup,
+          indexByName: this.getIndexByName(item),
+          item,
         };
 
         return {
-          typeName: ReferenceTypeName.IndexedHubblepupPelie,
+          typeName: ReferenceTypeName.IndexedItem,
           value: indexedHubblepup,
         };
       },

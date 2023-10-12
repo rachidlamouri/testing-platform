@@ -1,11 +1,11 @@
 import fs from 'fs';
 import { digikikify2 } from '../core/engine/digikikify';
-import { InMemoryVoictent } from '../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
   CacheableAccessor,
-  CachedOnDiskVoictent,
-  CachedOnDiskVoque,
-} from '../layer-agnostic-utilities/voictent/cachedOnDiskVoictent';
+  CachedOnDiskCollection,
+  CachedOnDiskStreamMetatype,
+} from '../layer-agnostic-utilities/collection/cachedOnDiskCollection';
 import { OutputVicken } from '../core/types/vicken/outputVicken';
 import { Estinant2 } from '../core/types/estinant/estinant';
 import { LeftInputHubblepupVicken } from '../core/types/vicken/leftInputVicken';
@@ -16,7 +16,7 @@ type InputVoque = StandardInMemoryStreamMetatype<
   CacheableAccessor<string>
 >;
 
-type CachedVoque = CachedOnDiskVoque<'cached', string>;
+type CachedVoque = CachedOnDiskStreamMetatype<'cached', string>;
 
 const nameSpace = 'test-cached-on-disk-datum';
 
@@ -49,7 +49,7 @@ const writeDatumToCache: Estinant2<
   rightInputAppreffingeTuple: [],
   tropoig: (rawInput): OutputVicken<[CachedVoque]>['tropoignantOutput'] => {
     return {
-      cached: [rawInput.hubblepup],
+      cached: [rawInput.item],
     };
   },
 };
@@ -61,22 +61,22 @@ const writeDatumToCache: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryVoictent<InputVoque>({
-      gepp: 'input',
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<InputVoque>({
+      collectionId: 'input',
+      initialItemEggTuple: [
         {
-          zorn: filePath.replaceAll('/', ' | '),
+          id: filePath.replaceAll('/', ' | '),
           lastModified: fs.statSync(filePath).mtime.toISOString(),
-          grition: (): CachedVoque['hubblepupPelie']['grition'] => {
+          subitem: (): CachedVoque['hubblepupPelie']['subitem'] => {
             const text = fs.readFileSync(filePath, 'utf8');
             return text;
           },
         },
       ],
     }),
-    new CachedOnDiskVoictent<CachedVoque>({
+    new CachedOnDiskCollection<CachedVoque>({
       nameSpace,
-      gepp: 'cached',
+      collectionId: 'cached',
     }),
   ],
   estinantTuple: [writeDatumToCache],

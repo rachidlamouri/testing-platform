@@ -12,7 +12,7 @@ import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
   EngineProgramLocator3Voque,
 } from '../../programmable-units/engine-program/engineProgramLocator3';
-import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   EXPECTED_PROGRAM_TEST_FILE_GEPP,
   ExpectedProgramTestFileVoque,
@@ -41,7 +41,7 @@ export const assertCiModelHasAllPrograms = buildEstinant({
     // TODO: make a better pattern for singletons
     gepp: CI_MODEL_GEPP,
     framate: () => [CI_MODEL_ZORN],
-    croard: (rightInput) => rightInput.hubblepup.zorn,
+    croard: (rightInput) => rightInput.item.zorn,
   })
   .andFromVoictent2<ExpectedProgramTestFileVoque>({
     gepp: EXPECTED_PROGRAM_TEST_FILE_GEPP,

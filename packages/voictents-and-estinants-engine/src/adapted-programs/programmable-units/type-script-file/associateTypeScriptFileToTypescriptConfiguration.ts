@@ -2,7 +2,7 @@ import { posix } from 'path';
 import fs from 'fs';
 import { TYPE_SCRIPT_FILE_GEPP, TypeScriptFileVoque } from './typeScriptFile';
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
-import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoque } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { FilePath } from '../file/filePath';
 
 /**

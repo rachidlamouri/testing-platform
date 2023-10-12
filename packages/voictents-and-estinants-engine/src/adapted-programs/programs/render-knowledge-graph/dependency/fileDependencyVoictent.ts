@@ -1,4 +1,4 @@
-import { BaseInMemoryOdeshin2Voictent } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { BaseInMemoryOdeshin2Voictent } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { BoundedFile } from '../file/boundedFile';
 import {
   FileDependency,
@@ -32,12 +32,12 @@ export class FileDependencyVoictent extends BaseInMemoryOdeshin2Voictent<
 
   constructor() {
     super({
-      gepp: FILE_DEPENDENCY_GEPP,
-      initialHubblepupPelueTuple: [],
+      collectionId: FILE_DEPENDENCY_GEPP,
+      initialItemEggTuple: [],
     });
   }
 
-  addHubblepup(hubblepup: FileDependency): void {
+  addItem(hubblepup: FileDependency): void {
     const { importingFile } = hubblepup;
     const importingFilePath = importingFile.file.filePath.serialized;
 
@@ -66,10 +66,10 @@ export class FileDependencyVoictent extends BaseInMemoryOdeshin2Voictent<
       );
     }
 
-    super.addHubblepup(hubblepup);
+    super.addItem(hubblepup);
   }
 
-  protected dereferenceVoictentPelie(): FileDependencyVoictentPelie {
+  protected dereferenceCollection(): FileDependencyVoictentPelie {
     const importedFileListByImportingFilePath = new Map(
       [...this.importedFileListByImportingFilePath.entries()].map(
         ([importingFilePath, combination]) => {
@@ -91,7 +91,7 @@ export class FileDependencyVoictent extends BaseInMemoryOdeshin2Voictent<
     return {
       importedFileListByImportingFilePath,
       importingFileListByImportedFilePath,
-      list: this.hubblepupPelieTuple,
+      list: this.itemTuple,
     };
   }
 }

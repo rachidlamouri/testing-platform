@@ -4,4 +4,4 @@
  *
  * @readableName Subitem
  */
-export type Grition<TGrition = unknown> = TGrition;
+export type Subitem<TGrition = unknown> = TGrition;

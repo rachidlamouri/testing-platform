@@ -11,7 +11,7 @@ import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   DirectedGraphMetadataByIdVoque,
 } from './directedGraphMetadataById';
-import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 
 const INTERACTIVE_HTML_FILE_PATH =
   'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/interactiveSvg.html';
@@ -73,12 +73,12 @@ export const addInteractivityToSvgDocument = buildEstinant({
     gepp: HTML_FILE_GEPP,
     framate: () => [INTERACTIVE_HTML_FILE_PATH],
     // TODO: add filepath to index
-    croard: (rightInput) => rightInput.hubblepup.filePath.serialized,
+    croard: (rightInput) => rightInput.item.filePath.serialized,
   })
   .andFromHubblepupTuple2<DirectedGraphMetadataByIdVoque, [OdeshinZorn]>({
     gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-    framate: (leftInput) => [leftInput.indexByName.zorn],
-    croard: (rightInput) => rightInput.indexByName.zorn,
+    framate: (leftInput) => [leftInput.item.zorn],
+    croard: (rightInput) => rightInput.item.zorn,
   })
   .toHubblepup2<OutputFileVoque>({
     gepp: OUTPUT_FILE_GEPP,

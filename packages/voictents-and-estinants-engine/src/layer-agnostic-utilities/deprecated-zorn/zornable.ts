@@ -1,6 +1,6 @@
 import { Merge } from 'type-fest';
 import { StreamMetatype } from '../../core/types/voque/voque';
-import { AbstractSerializableIndexByName } from '../voictent/abstractSerializableVoictent';
+import { AbstractSerializableIndexByName } from '../collection/abstractSerializableCollection';
 import { CollectionId } from '../../core/types/voictent/gepp';
 import { Item } from '../../core/types/hubblepup/hubblepup';
 

@@ -15,7 +15,7 @@ export type Item = unknown;
  */
 type Hubblepup2<THubblepup> = THubblepup;
 
-export type GenericHubblepup = Hubblepup2<unknown>;
+export type GenericItem = Hubblepup2<unknown>;
 
 export type HubblepupTuple = readonly Item[];
 
@@ -26,7 +26,7 @@ export type IndexedHubblepup<
   TIndexByName extends HubblepupIndexByName,
 > = {
   indexByName: TIndexByName;
-  hubblepup: THubblepup;
+  item: THubblepup;
 };
 
 export type GenericIndexedHubblepup = IndexedHubblepup<

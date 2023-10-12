@@ -1,4 +1,4 @@
-import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
   buildGeppCombination,
   buildVoictentByGepp,
@@ -41,7 +41,7 @@ import { OutputFileVoictent } from '../../programmable-units/output-file/outputF
 import { getDirectedGraphFromGraphElementGroup } from '../model-programs/getDirectedGraphFromGraphElementGroup';
 import { groupGraphElements } from '../model-programs/groupGraphElements';
 import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
-import { InMemoryOdeshin3Voictent } from '../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin3Voictent } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { getCommonBoundaryRoot } from './common-boundary-root/getCommonBoundaryRoot';
 import {
   PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
@@ -115,27 +115,27 @@ const programFileCache = new ProgramFileCache({
  */
 digikikify({
   explicitVoictentTuple: [
-    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
-      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
+      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+      initialItemEggTuple: [
         VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
     }),
-    new InMemoryVoictent<EngineFunctionConfigurationVoque>({
-      gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<EngineFunctionConfigurationVoque>({
+      collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
+      initialItemEggTuple: [
         CORE_ENGINE_FUNCTION_CONFIGURATION,
         CORE_ENGINE_FUNCTION_2_CONFIGURATION,
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
     new InMemoryOdeshin3Voictent<BoundaryConfigurationVoque>({
-      gepp: BOUNDARY_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: BOUNDARY_CONFIGURATION_LIST,
+      collectionId: BOUNDARY_CONFIGURATION_GEPP,
+      initialItemEggTuple: BOUNDARY_CONFIGURATION_LIST,
     }),
     new InMemoryOdeshin3Voictent<LayerConfigurationVoque>({
-      gepp: LAYER_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: LAYER_CONFIGURATION_LIST,
+      collectionId: LAYER_CONFIGURATION_GEPP,
+      initialItemEggTuple: LAYER_CONFIGURATION_LIST,
     }),
   ] as const,
   fileSystemNodeGeppCombination: {
@@ -151,33 +151,33 @@ digikikify({
       programFileCache,
     }),
     new InMemoryOdeshin3Voictent<PartitionFactVoque>({
-      gepp: PARTITION_FACT_GEPP,
-      initialHubblepupPelueTuple: [],
+      collectionId: PARTITION_FACT_GEPP,
+      initialItemEggTuple: [],
     }),
-    new InMemoryVoictent<PartitionedBoundaryListTrieVoque>({
-      gepp: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
-      initialHubblepupPelueTuple: [],
+    new InMemoryCollection<PartitionedBoundaryListTrieVoque>({
+      collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+      initialItemEggTuple: [],
     }),
-    new InMemoryVoictent<PartitionedBoundaryTrieVoque>({
-      gepp: PARTITIONED_BOUNDARY_TRIE_GEPP,
-      initialHubblepupPelueTuple: [],
+    new InMemoryCollection<PartitionedBoundaryTrieVoque>({
+      collectionId: PARTITIONED_BOUNDARY_TRIE_GEPP,
+      initialItemEggTuple: [],
     }),
     new InMemoryOdeshin3Voictent<PartitionedFileVoque>({
-      gepp: PARTITIONED_FILE_GEPP,
-      initialHubblepupPelueTuple: [],
+      collectionId: PARTITIONED_FILE_GEPP,
+      initialItemEggTuple: [],
     }),
     new OutputFileVoictent({
       programFileCache,
     }),
     new FactVoictent(),
     new FileDependencyVoictent(),
-    new InMemoryVoictent<LayerListTrieVoque>({
-      gepp: LAYER_LIST_TRIE_GEPP,
-      initialHubblepupPelueTuple: [],
+    new InMemoryCollection<LayerListTrieVoque>({
+      collectionId: LAYER_LIST_TRIE_GEPP,
+      initialItemEggTuple: [],
     }),
-    new InMemoryVoictent<LayerTrieVoque>({
-      gepp: LAYER_TRIE_GEPP,
-      initialHubblepupPelueTuple: [],
+    new InMemoryCollection<LayerTrieVoque>({
+      collectionId: LAYER_TRIE_GEPP,
+      initialItemEggTuple: [],
     }),
   ] as const),
   errorGepp: PROGRAM_ERROR_GEPP,

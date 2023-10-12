@@ -67,7 +67,7 @@ export const buildEstinantAssembler = <
       if (leftInputContext.isWibiz || leftInputContext.version === 2) {
         adaptedLeftInput = leftInput;
       } else {
-        adaptedLeftInput = (leftInput as GenericIndexedHubblepup).hubblepup;
+        adaptedLeftInput = (leftInput as GenericIndexedHubblepup).item;
       }
 
       /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -82,7 +82,7 @@ export const buildEstinantAssembler = <
           } else {
             adaptedRightInput = (
               rightInputTuple[index] as GenericIndexedHubblepup
-            ).hubblepup;
+            ).item;
           }
 
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -145,8 +145,7 @@ export const buildEstinantAssembler = <
               if (leftInputContext.isWibiz || leftInputContext.version === 2) {
                 adaptedLeftInput = leftInput;
               } else {
-                adaptedLeftInput = (leftInput as GenericIndexedHubblepup)
-                  .hubblepup;
+                adaptedLeftInput = (leftInput as GenericIndexedHubblepup).item;
               }
 
               return rightInputContext.framate(adaptedLeftInput) as IdTuple;
@@ -159,7 +158,7 @@ export const buildEstinantAssembler = <
               ) {
                 adaptedRightInput = indexedRightInput;
               } else {
-                adaptedRightInput = indexedRightInput.hubblepup;
+                adaptedRightInput = indexedRightInput.item;
               }
 
               return rightInputContext.croard(adaptedRightInput);

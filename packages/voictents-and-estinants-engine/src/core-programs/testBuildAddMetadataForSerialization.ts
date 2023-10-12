@@ -1,5 +1,5 @@
 import { digikikify2 } from '../core/engine/digikikify';
-import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
@@ -7,10 +7,10 @@ import {
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
-import { JsonSerializableVoictent } from '../layer-agnostic-utilities/voictent/jsonSerializableVoictent';
-import { AbstractSerializableVoque } from '../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
+import { JsonSerializableCollection } from '../layer-agnostic-utilities/collection/jsonSerializableCollection';
+import { AbstractSerializableStreamMetatype } from '../layer-agnostic-utilities/collection/abstractSerializableCollection';
 
-type SerializedConfiguration = AbstractSerializableVoque<'serialized'>;
+type SerializedConfiguration = AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-build-add-metadata-for-serialization',
@@ -25,13 +25,13 @@ const programFileCache = new ProgramFileCache({
 digikikify2({
   inputVoictentList: [
     new InMemoryOdeshin2ListVoictent<DatumTestCaseInputVoque>({
-      gepp: DATUM_TEST_CASE_INPUT_GEPP,
-      initialHubblepupPelueTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
+      collectionId: DATUM_TEST_CASE_INPUT_GEPP,
+      initialItemEggTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
     }),
-    new JsonSerializableVoictent<SerializedConfiguration>({
-      gepp: 'serialized',
+    new JsonSerializableCollection<SerializedConfiguration>({
+      collectionId: 'serialized',
       programFileCache,
-      initialHubblepupPelueTuple: [],
+      initialItemEggTuple: [],
     }),
   ],
   estinantTuple: [

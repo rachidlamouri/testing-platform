@@ -32,8 +32,8 @@ export class OutputFileVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
     this.programFileCache = programFileCache;
 
-    this.programFileCache.deleteVoictentDirectory({
-      voictentGepp: this.gepp,
+    this.programFileCache.deleteCollectionDirectory({
+      collectionCollectionId: this.collectionId,
     });
   }
 
@@ -55,11 +55,11 @@ export class OutputFileVoictent extends AbstractAsymmetricInMemoryVoictent2<
       return;
     }
 
-    this.programFileCache.writeSerializedHubblepup({
-      voictentGepp: this.gepp,
+    this.programFileCache.writeSerializedItem({
+      collectionCollectionId: this.collectionId,
       nestedPath: '',
       extensionlessFileName: hubblepup.fileName,
-      serializedHubblepup: {
+      serializedItem: {
         // TODO: update OutputFile to store the suffix identifier and remove this backwards logic
         fileExtensionSuffixIdentifier: getFileExtensionSuffixIdentifier(
           hubblepup.fileExtensionSuffix,

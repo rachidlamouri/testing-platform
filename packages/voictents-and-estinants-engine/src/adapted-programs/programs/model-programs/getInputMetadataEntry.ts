@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ESTINANT_INPUT_2_GEPP,
   EngineEstinantInput2Voque,
@@ -26,9 +26,9 @@ export const getInputMetadataEntry = buildEstinant({
   .andFromHubblepupTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
     gepp: ESTINANT_INPUT_2_GEPP,
     framate: (relationship) => {
-      return [relationship.hubblepup.estinantInput.zorn];
+      return [relationship.item.estinantInput.zorn];
     },
-    croard: (engineEstinant) => engineEstinant.hubblepup.zorn,
+    croard: (engineEstinant) => engineEstinant.item.zorn,
   })
   .toHubblepup2<DirectedGraphMetadataEntryVoque>({
     gepp: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,

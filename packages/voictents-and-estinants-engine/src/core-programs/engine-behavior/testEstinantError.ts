@@ -2,16 +2,16 @@ import { Estinant2 } from '../../core/types/estinant/estinant';
 import { LeftInputHubblepupVicken } from '../../core/types/vicken/leftInputVicken';
 import { OutputVicken } from '../../core/types/vicken/outputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
-import { InMemoryVoictent } from '../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import {
-  SerializableErrorVoictent,
-  SerializableErrorVoque,
-} from '../../layer-agnostic-utilities/voictent/serializableErrorVoictent';
+  SerializableErrorCollection,
+  SerializableErrorStreamMetatype,
+} from '../../layer-agnostic-utilities/collection/serializableErrorCollection';
 
 type InputErrorVoque = StandardInMemoryStreamMetatype<'input-error', Error>;
-type EngineErrorVoque = SerializableErrorVoque<'engine-error'>;
+type EngineErrorVoque = SerializableErrorStreamMetatype<'engine-error'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-estinant-error',
@@ -34,7 +34,7 @@ const throwError: Estinant2<
     geppTuple: [],
   },
   tropoig: (indexedError) => {
-    throw indexedError.hubblepup;
+    throw indexedError.item;
   },
 };
 
@@ -49,13 +49,13 @@ const throwError: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryVoictent<InputErrorVoque>({
-      gepp: 'input-error',
-      initialHubblepupPelueTuple: [new Error('Custom error')],
+    new InMemoryCollection<InputErrorVoque>({
+      collectionId: 'input-error',
+      initialItemEggTuple: [new Error('Custom error')],
     }),
-    new SerializableErrorVoictent<EngineErrorVoque>({
-      gepp: 'engine-error',
-      initialHubblepupPelueTuple: [],
+    new SerializableErrorCollection<EngineErrorVoque>({
+      collectionId: 'engine-error',
+      initialItemEggTuple: [],
       programFileCache,
     }),
   ],

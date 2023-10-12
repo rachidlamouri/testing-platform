@@ -1,4 +1,4 @@
-import { InMemoryOdeshin2IndexByName } from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+import { InMemoryIdentifiableItem2IndexByName } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { InMemoryStreamMetatype } from '../../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { assertNotUndefined } from '../../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
@@ -173,6 +173,6 @@ export type FileDependencyVoque = InMemoryStreamMetatype<
   FileDependencyGepp,
   FileDependency,
   FileDependency,
-  InMemoryOdeshin2IndexByName,
+  InMemoryIdentifiableItem2IndexByName,
   FileDependencyVoictentPelie
 >;

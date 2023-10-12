@@ -68,7 +68,7 @@ import {
   EngineVoqueLocator2Instance,
 } from './engineVoqueLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
-import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import { buildVoictentByGepp } from '../../../adapter/engine/digikikify';
 import { isArrayExpression } from '../../../package-agnostic-utilities/type-script-ast/isArrayExpression';
 import {
@@ -699,13 +699,13 @@ export const getEngineProgramLocator3 = buildEstinant({
     [OdeshinZorn]
   >({
     gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-    framate: (leftInput) => [leftInput.indexByName.zorn],
-    croard: (rightInput) => rightInput.indexByName.zorn,
+    framate: (leftInput) => [leftInput.item.zorn],
+    croard: (rightInput) => rightInput.item.zorn,
   })
   .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    framate: (leftInput) => [leftInput.indexByName.zorn],
-    croard: (rightInput) => rightInput.indexByName.zorn,
+    framate: (leftInput) => [leftInput.item.zorn],
+    croard: (rightInput) => rightInput.item.zorn,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     gepp: PROGRAM_ERROR_GEPP,

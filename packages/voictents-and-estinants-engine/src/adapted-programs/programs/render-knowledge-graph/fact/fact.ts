@@ -1,7 +1,7 @@
 import {
-  InMemoryOdeshin2IndexByName,
+  InMemoryIdentifiableItem2IndexByName,
   BaseInMemoryOdeshin2Voictent,
-} from '../../../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+} from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 import { InMemoryStreamMetatype } from '../../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { DirectedGraphElement2 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
@@ -34,7 +34,7 @@ export type FactVoque = InMemoryStreamMetatype<
   FactGepp,
   Fact,
   Fact,
-  InMemoryOdeshin2IndexByName,
+  InMemoryIdentifiableItem2IndexByName,
   FactVoictentPelie
 >;
 
@@ -48,22 +48,22 @@ export class FactVoictent extends BaseInMemoryOdeshin2Voictent<
 
   constructor() {
     super({
-      gepp: FACT_GEPP,
-      initialHubblepupPelueTuple: [],
+      collectionId: FACT_GEPP,
+      initialItemEggTuple: [],
     });
   }
 
-  addHubblepup(hubblepup: Fact): void {
+  addItem(hubblepup: Fact): void {
     this.graphElementList.push(hubblepup.graphElement);
 
     // TODO: the below note indicates that some concerns need to be separated. As in this collection shouldn't be at the "fact" level or that "fact" is no longer what we wanted it to be
     // Note: there will be multiple facts for the same element (one for each partition where the element should appear). That's ok for the purposes of this collection
     this.byLocalGraphElementId.set(hubblepup.graphElement.id, hubblepup);
 
-    super.addHubblepup(hubblepup);
+    super.addItem(hubblepup);
   }
 
-  protected dereferenceVoictentPelie(): FactVoictentPelie {
+  protected dereferenceCollection(): FactVoictentPelie {
     return {
       graphElementList: this.graphElementList,
       byLocalGraphElementId: this.byLocalGraphElementId,

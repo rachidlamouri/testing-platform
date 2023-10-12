@@ -9,7 +9,7 @@ import {
 } from '../../types/appreffinge/input/right/framation';
 import { CollectionId } from '../../types/voictent/gepp';
 import {
-  GenericVoictentItemLanbe2,
+  GenericCollectionItemStream2,
   GenericVoictentPelieLanbe,
   Lanbe,
 } from '../../types/lanbe/lanbe';
@@ -43,7 +43,7 @@ export type RightVoictentDreanor = {
 export type RightVoictentItem2Dreanor = {
   typeName: DreanorTypeName.RightVoictentItem2Dreanor;
   gepp: CollectionId;
-  lanbe: GenericVoictentItemLanbe2;
+  lanbe: GenericCollectionItemStream2;
   prected: Prected;
   framate: Framation | GenericFramation3;
   croard: Croarder | GenericCroarder3;

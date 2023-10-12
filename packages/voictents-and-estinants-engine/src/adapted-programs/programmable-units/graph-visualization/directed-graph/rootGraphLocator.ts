@@ -8,7 +8,7 @@ import {
 } from './types';
 
 type BaseRootGraphLocator = {
-  // TODO: deprecate "idOverride"
+  // // TODO: deprecate "idOverride"
   idOverride?: string;
   distinguisher: string;
 };

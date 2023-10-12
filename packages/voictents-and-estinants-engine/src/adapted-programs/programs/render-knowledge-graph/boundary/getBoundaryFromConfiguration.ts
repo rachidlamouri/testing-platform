@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
 import {
   DirectoryVoque,
   DIRECTORY_GEPP,
@@ -21,8 +21,8 @@ export const getBoundaryFromConfiguration = buildEstinant({
   })
   .andFromHubblepupTuple2<DirectoryVoque, [OdeshinZorn]>({
     gepp: DIRECTORY_GEPP,
-    framate: (locator) => [locator.hubblepup.directoryPath],
-    croard: (directory) => directory.hubblepup.directoryPath.serialized,
+    framate: (locator) => [locator.item.directoryPath],
+    croard: (directory) => directory.item.directoryPath.serialized,
   })
   .toHubblepup2<BoundaryVoque>({
     gepp: BOUNDARY_GEPP,

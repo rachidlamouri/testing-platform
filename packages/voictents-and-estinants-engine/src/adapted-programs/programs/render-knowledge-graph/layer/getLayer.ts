@@ -21,10 +21,10 @@ export const getLayer = buildEstinant({
   .andFromHubblepupTuple2<DirectoryVoque, [string]>({
     gepp: DIRECTORY_GEPP,
     framate: (layer) => {
-      return [layer.hubblepup.directoryPath];
+      return [layer.item.directoryPath];
     },
     croard: (directory) => {
-      return directory.hubblepup.directoryPath.serialized;
+      return directory.item.directoryPath.serialized;
     },
   })
   .toHubblepup2<LayerVoque>({

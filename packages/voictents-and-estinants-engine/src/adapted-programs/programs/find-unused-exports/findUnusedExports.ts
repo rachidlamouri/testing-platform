@@ -1,4 +1,4 @@
-import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
   buildVoictentByGepp,
   digikikify,
@@ -46,15 +46,15 @@ const programFileCache = new ProgramFileCache({
  */
 digikikify({
   explicitVoictentTuple: [
-    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
-      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
+      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+      initialItemEggTuple: [
         VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
     }),
     new LintAssertionOmissionVoictent<LintAssertionOmissionVoque>({
-      gepp: LINT_ASSERTION_OMISSION_GEPP,
-      initialHubblepupPelueTuple: omittedUnusedExportList,
+      collectionId: LINT_ASSERTION_OMISSION_GEPP,
+      initialItemEggTuple: omittedUnusedExportList,
     }),
   ] as const,
   fileSystemNodeGeppCombination: defaultFileGeppCombination,

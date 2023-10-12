@@ -14,7 +14,7 @@ import {
   validTypeNameList,
 } from './scaffoldConfiguration';
 import { scaffoldFile } from './scaffoldFile';
-import { InMemoryVoictent } from '../../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
@@ -105,18 +105,18 @@ if (isDeprecatedFileTypeName(scriptInput.typeName)) {
  */
 digikikify({
   explicitVoictentTuple: [
-    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
-      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: [
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
+      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+      initialItemEggTuple: [
         {
           directoryPath: posix.dirname(filePath),
           ignoredNodePathConfigurationList: [],
         },
       ],
     }),
-    new InMemoryVoictent<ScaffoldConfigurationVoque>({
-      gepp: SCAFFOLD_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: [scriptInput],
+    new InMemoryCollection<ScaffoldConfigurationVoque>({
+      collectionId: SCAFFOLD_CONFIGURATION_GEPP,
+      initialItemEggTuple: [scriptInput],
     }),
   ] as const,
   fileSystemNodeGeppCombination: defaultFileGeppCombination,

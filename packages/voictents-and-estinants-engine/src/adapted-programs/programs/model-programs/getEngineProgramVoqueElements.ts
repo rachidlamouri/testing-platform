@@ -1,5 +1,5 @@
 import { buildEstinant } from '../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../adapter/odeshin/odeshin2';
+import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
 import {
   ENGINE_VOQUE_2_GEPP,
   EngineVoque2Voque,
@@ -32,8 +32,8 @@ export const getEngineProgramVoqueElements = buildEstinant({
   })
   .andFromHubblepupTuple2<EngineVoque2Voque, [OdeshinZorn]>({
     gepp: ENGINE_VOQUE_2_GEPP,
-    framate: (relationship) => [relationship.hubblepup.voqueLocator.zorn],
-    croard: (engineVoque) => engineVoque.hubblepup.locator.zorn,
+    framate: (relationship) => [relationship.item.voqueLocator.zorn],
+    croard: (engineVoque) => engineVoque.item.locator.zorn,
   })
   .toHubblepup2<DirectedGraphElement2Voque>({
     gepp: DIRECTED_GRAPH_ELEMENT_2_GEPP,
@@ -46,7 +46,6 @@ export const getEngineProgramVoqueElements = buildEstinant({
 
     const node = new DirectedGraphNode2Instance({
       locator: new GraphConstituentLocatorInstance({
-        idOverride: engineVoque.id,
         rootGraphLocator: relationship.rootGraphLocator,
         parentId: relationship.parentId,
         localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({

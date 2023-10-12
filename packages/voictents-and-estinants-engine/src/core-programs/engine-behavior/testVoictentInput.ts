@@ -2,16 +2,16 @@ import { Estinant2 } from '../../core/types/estinant/estinant';
 import { LeftInputVoictentVicken } from '../../core/types/vicken/leftInputVicken';
 import { OutputVicken } from '../../core/types/vicken/outputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
-import { InMemoryVoictent } from '../../layer-agnostic-utilities/voictent/inMemoryVoictent';
+import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
-import { AbstractSerializableVoque } from '../../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
+import { AbstractSerializableStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
 import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
-import { SerializableVoictent } from '../../layer-agnostic-utilities/voictent/serializableVoictent';
+import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
 type Voictent1Voque = StandardInMemoryStreamMetatype<'voictent-1', string>;
 type Voictent2Voque = StandardInMemoryStreamMetatype<'voictent-2', string[]>;
-type SerializedVoque = AbstractSerializableVoque<'serialized'>;
+type SerializedVoque = AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-voictent-input',
@@ -51,18 +51,18 @@ const gatherCollection: Estinant2<
  */
 digikikify2({
   inputVoictentList: [
-    new InMemoryVoictent<Voictent1Voque>({
-      gepp: 'voictent-1',
-      initialHubblepupPelueTuple: ['a', 'b', 'c', 'd'],
+    new InMemoryCollection<Voictent1Voque>({
+      collectionId: 'voictent-1',
+      initialItemEggTuple: ['a', 'b', 'c', 'd'],
     }),
-    new InMemoryVoictent<Voictent2Voque>({
-      gepp: 'voictent-2',
-      initialHubblepupPelueTuple: [],
+    new InMemoryCollection<Voictent2Voque>({
+      collectionId: 'voictent-2',
+      initialItemEggTuple: [],
     }),
-    new SerializableVoictent<SerializedVoque>({
-      gepp: 'serialized',
+    new SerializableCollection<SerializedVoque>({
+      collectionId: 'serialized',
       programFileCache,
-      initialHubblepupPelueTuple: [],
+      initialItemEggTuple: [],
     }),
   ],
   estinantTuple: [

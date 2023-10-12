@@ -30,18 +30,18 @@ import {
 import {
   GenericInMemoryOdeshin2ListVoque,
   InMemoryOdeshin2ListVoictent,
-} from '../../layer-agnostic-utilities/voictent/inMemoryOdeshinVoictent2';
+} from '../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   GenericVoictent2,
   GenericVoictent2Tuple,
   UnsafeVoictent2Tuple,
-  Voictent2,
+  Collection2,
 } from '../../core/types/voictent/voictent2';
 import { GenericVoque } from '../../core/types/voque/voque';
 import { ProgramErrorGepp } from '../../adapted-programs/programmable-units/error/programError';
-import { GenericAbstractSerializableSourceVoque } from '../../layer-agnostic-utilities/voictent/abstractSerializableVoictent';
+import { GenericAbstractSerializableSourceStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
 import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
-import { SerializableVoictent } from '../../layer-agnostic-utilities/voictent/serializableVoictent';
+import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import {
   FileSystemNodeVoictent,
@@ -51,7 +51,7 @@ import {
 type VoqueUnionFromVoictentTuple<
   TVoictentTuple extends UnsafeVoictent2Tuple,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-> = TVoictentTuple extends readonly Voictent2<any, infer TVoque>[]
+> = TVoictentTuple extends readonly Collection2<any, infer TVoque>[]
   ? TVoque
   : never;
 
@@ -132,7 +132,7 @@ type VoictentByGeppFromVoqueUnion<TVoque extends GenericVoque> = Simplify<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     TVoque extends any
       ? {
-          [TGepp in TVoque['gepp']]: Voictent2<TVoque, TVoque>;
+          [TGepp in TVoque['gepp']]: Collection2<TVoque, TVoque>;
         }
       : never
   >
@@ -149,7 +149,7 @@ type ErrorGepp<TAllVoqueUnion extends GenericVoque> = Extract<
 
 type SerializeeGepp<TAllVoqueUnion extends GenericVoque> = Extract<
   TAllVoqueUnion,
-  GenericAbstractSerializableSourceVoque
+  GenericAbstractSerializableSourceStreamMetatype
 >['gepp'];
 
 type AllVoqueUnion<
@@ -213,10 +213,10 @@ const buildSerializableVoictent = (
   serializerGepp: CollectionId,
   programFileCache: ProgramFileCache,
 ): GenericVoictent2 => {
-  const serializableVoictent = new SerializableVoictent({
-    gepp: serializerGepp,
+  const serializableVoictent = new SerializableCollection({
+    collectionId: serializerGepp,
     programFileCache,
-    initialHubblepupPelueTuple: [],
+    initialItemEggTuple: [],
   });
 
   return serializableVoictent;
@@ -244,7 +244,7 @@ const getVoictentTupleGeppSet = (
   voictentTuple: GenericVoictent2Tuple,
 ): Set<CollectionId> => {
   const voictentTupleGeppSet = new Set(
-    voictentTuple.map((voictent) => voictent.gepp),
+    voictentTuple.map((voictent) => voictent.collectionId),
   );
 
   return voictentTupleGeppSet;
@@ -276,10 +276,10 @@ const getInferredFileSystemNodeVoictentTuple = (
   fileSystemNodeGeppCombination: GenericGeppCombination,
 ): GenericVoictent2Tuple => {
   const geppList = Object.keys(fileSystemNodeGeppCombination);
-  const voictentList = geppList.map((gepp) => {
+  const voictentList = geppList.map((collectionId) => {
     return new FileSystemNodeVoictent({
-      gepp,
-      initialHubblepupPelueTuple: [],
+      collectionId,
+      initialItemEggTuple: [],
     });
   });
 
@@ -297,10 +297,10 @@ const getInferredInMemoryVoictentTuple = (
     (gepp) => !voictentTupleGeppSet.has(gepp),
   );
 
-  const inferredVoictentTuple = missingGeppList.map((gepp) => {
+  const inferredVoictentTuple = missingGeppList.map((collectionId) => {
     return new InMemoryOdeshin2ListVoictent({
-      gepp,
-      initialHubblepupPelueTuple: [],
+      collectionId,
+      initialItemEggTuple: [],
     });
   });
 
@@ -395,7 +395,7 @@ type VoictentByGeppTupleFromVoictentTuple<
   TVoictentTuple extends GenericVoictent2Tuple,
 > = {
   [TIndex in keyof TVoictentTuple]: {
-    [TKey in TVoictentTuple[TIndex]['gepp']]: TVoictentTuple[TIndex];
+    [TKey in TVoictentTuple[TIndex]['collectionId']]: TVoictentTuple[TIndex];
   };
 };
 
@@ -413,7 +413,7 @@ export const buildVoictentByGepp = <
   voictentTuple: TVoictentTuple,
 ): VoictentByGeppFromVoictentTuple<TVoictentTuple> => {
   const entryList = voictentTuple.map((voictent) => {
-    return [voictent.gepp, voictent] as const;
+    return [voictent.collectionId, voictent] as const;
   });
 
   const result = Object.fromEntries(
