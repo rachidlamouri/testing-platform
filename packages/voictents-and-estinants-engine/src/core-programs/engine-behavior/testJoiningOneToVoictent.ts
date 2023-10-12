@@ -1,13 +1,13 @@
-import { Estinant2 } from '../../core/types/estinant/estinant';
-import { LeftInputHubblepupVicken } from '../../core/types/vicken/leftInputVicken';
-import { OutputVicken } from '../../core/types/vicken/outputVicken';
+import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
+import { LeftInputItemStreamConnectionMetatype } from '../../core/types/vicken/leftInputVicken';
+import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
 import { RightInputVoictentVicken } from '../../core/types/vicken/rightInputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import { AbstractSerializableStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
-import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
 type Voictent1Voque = StandardInMemoryStreamMetatype<'voictent-1', number>;
@@ -22,29 +22,29 @@ const programFileCache = new ProgramFileCache({
 /**
  * Joins each item in the left collection to the entire right collection
  */
-const gatherCollection: Estinant2<
-  LeftInputHubblepupVicken<Voictent1Voque>,
+const gatherCollection: ProgrammedTransform2<
+  LeftInputItemStreamConnectionMetatype<Voictent1Voque>,
   [RightInputVoictentVicken<Voictent2Voque>],
-  OutputVicken<[Voictent3Voque]>
+  OutputStreamConnectionMetatype<[Voictent3Voque]>
 > = {
   version: 2,
   name: 'gatherCollection',
-  leftInputAppreffinge: {
-    gepp: 'voictent-1',
-    isWibiz: false,
+  leftInputStreamConfiguration: {
+    collectionId: 'voictent-1',
+    isCollectionStream: false,
   },
-  rightInputAppreffingeTuple: [
+  rightInputStreamConfigurationTuple: [
     {
-      gepp: 'voictent-2',
+      collectionId: 'voictent-2',
       isWibiz: true,
       framate: undefined,
       croard: undefined,
     },
   ],
-  outputAppreffinge: {
-    geppTuple: ['voictent-3'],
+  outputStreamConfiguration: {
+    collectionIdTuple: ['voictent-3'],
   },
-  tropoig: (leftInput, rightInput) => {
+  transform: (leftInput, rightInput) => {
     const serializedRightInput = `[${rightInput.join(', ')}]`;
 
     const output = `${leftInput.item}-${serializedRightInput}`;
@@ -88,8 +88,8 @@ digikikify2({
     gatherCollection,
 
     buildAddMetadataForSerialization<Voictent3Voque, SerializedVoque>({
-      inputGepp: 'voictent-3',
-      outputGepp: 'serialized',
+      inputCollectionId: 'voictent-3',
+      outputCollectionId: 'serialized',
     }),
   ],
   onFinish: (runtimeStatistics) => {

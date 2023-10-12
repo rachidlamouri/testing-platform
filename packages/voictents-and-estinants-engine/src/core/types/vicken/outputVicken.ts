@@ -18,8 +18,12 @@ type OutputGeppTuple<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
  * The type information needed to configure zero or more strongly typed output streams
  *
  * @readableName OutputStreamConnectionGroupMetatype
+ *
+ * @canonicalDeclaration
  */
-export type OutputVicken<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
+export type OutputStreamConnectionMetatype<
+  TOutputVoqueOptionTuple extends GenericVoqueTuple,
+> = {
   outputVoqueOptionTuple: TOutputVoqueOptionTuple;
   geppTuple: OutputGeppTuple<TOutputVoqueOptionTuple>;
   tropoignantOutput: Simplify<
@@ -27,7 +31,8 @@ export type OutputVicken<TOutputVoqueOptionTuple extends GenericVoqueTuple> = {
   >;
 };
 
-export type GenericOutputVicken = OutputVicken<GenericVoqueTuple>;
+export type GenericOutputVicken =
+  OutputStreamConnectionMetatype<GenericVoqueTuple>;
 
 // TODO: tie this type back to OutputVicken
 export type UnsafeOutputVicken = {

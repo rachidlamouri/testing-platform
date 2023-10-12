@@ -6,9 +6,9 @@ import {
   CachedOnDiskCollection,
   CachedOnDiskStreamMetatype,
 } from '../layer-agnostic-utilities/collection/cachedOnDiskCollection';
-import { OutputVicken } from '../core/types/vicken/outputVicken';
-import { Estinant2 } from '../core/types/estinant/estinant';
-import { LeftInputHubblepupVicken } from '../core/types/vicken/leftInputVicken';
+import { OutputStreamConnectionMetatype } from '../core/types/vicken/outputVicken';
+import { ProgrammedTransform2 } from '../core/types/estinant/estinant';
+import { LeftInputItemStreamConnectionMetatype } from '../core/types/vicken/leftInputVicken';
 import { StandardInMemoryStreamMetatype } from '../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 
 type InputVoque = StandardInMemoryStreamMetatype<
@@ -32,22 +32,24 @@ const filePath =
  * tuple through code, and not just through the file system. Either way update
  * the above description accordingly
  */
-const writeDatumToCache: Estinant2<
-  LeftInputHubblepupVicken<InputVoque>,
+const writeDatumToCache: ProgrammedTransform2<
+  LeftInputItemStreamConnectionMetatype<InputVoque>,
   [],
-  OutputVicken<[CachedVoque]>
+  OutputStreamConnectionMetatype<[CachedVoque]>
 > = {
   version: 2,
   name: 'writeDatumToCache',
-  leftInputAppreffinge: {
-    gepp: 'input',
-    isWibiz: false,
+  leftInputStreamConfiguration: {
+    collectionId: 'input',
+    isCollectionStream: false,
   },
-  outputAppreffinge: {
-    geppTuple: ['cached'],
+  outputStreamConfiguration: {
+    collectionIdTuple: ['cached'],
   },
-  rightInputAppreffingeTuple: [],
-  tropoig: (rawInput): OutputVicken<[CachedVoque]>['tropoignantOutput'] => {
+  rightInputStreamConfigurationTuple: [],
+  transform: (
+    rawInput,
+  ): OutputStreamConnectionMetatype<[CachedVoque]>['tropoignantOutput'] => {
     return {
       cached: [rawInput.item],
     };

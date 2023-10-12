@@ -1,15 +1,15 @@
-import { Estinant2 } from '../../core/types/estinant/estinant';
+import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
 import {
-  LeftInputHubblepupVicken,
+  LeftInputItemStreamConnectionMetatype,
   LeftInputVoictentVicken,
 } from '../../core/types/vicken/leftInputVicken';
-import { OutputVicken } from '../../core/types/vicken/outputVicken';
+import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import { AbstractSerializableStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
-import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
 type Voictent1Voque = StandardInMemoryStreamMetatype<'voictent-1', string>;
@@ -29,22 +29,24 @@ const SKIP_INDEX = 3;
  * second collection to stop accumulating twice, which will currently trigger
  * the next transform twice
  */
-const forwardFrom1To2AndSkipAValue: Estinant2<
-  LeftInputHubblepupVicken<Voictent1Voque>,
+const forwardFrom1To2AndSkipAValue: ProgrammedTransform2<
+  LeftInputItemStreamConnectionMetatype<Voictent1Voque>,
   [],
-  OutputVicken<[Voictent2Voque]>
+  OutputStreamConnectionMetatype<[Voictent2Voque]>
 > = {
   version: 2,
   name: 'forwardFrom1To2AndSkipAValue',
-  leftInputAppreffinge: {
-    gepp: 'voictent-1',
-    isWibiz: false,
+  leftInputStreamConfiguration: {
+    collectionId: 'voictent-1',
+    isCollectionStream: false,
   },
-  rightInputAppreffingeTuple: [],
-  outputAppreffinge: {
-    geppTuple: ['voictent-2'],
+  rightInputStreamConfigurationTuple: [],
+  outputStreamConfiguration: {
+    collectionIdTuple: ['voictent-2'],
   },
-  tropoig(input): OutputVicken<[Voictent2Voque]>['tropoignantOutput'] {
+  transform(
+    input,
+  ): OutputStreamConnectionMetatype<[Voictent2Voque]>['tropoignantOutput'] {
     if (input.indexByName.listIndex === SKIP_INDEX) {
       return {
         'voictent-2': [],
@@ -61,22 +63,24 @@ const forwardFrom1To2AndSkipAValue: Estinant2<
  * Sends the entire second collection to the third collection. Since the second
  * collection stops accumulating twice this transform is expected to run twice
  */
-const forwardFrom2To3: Estinant2<
+const forwardFrom2To3: ProgrammedTransform2<
   LeftInputVoictentVicken<Voictent2Voque>,
   [],
-  OutputVicken<[Voictent3Voque]>
+  OutputStreamConnectionMetatype<[Voictent3Voque]>
 > = {
   version: 2,
   name: 'forwardFrom2To3',
-  leftInputAppreffinge: {
-    gepp: 'voictent-2',
-    isWibiz: true,
+  leftInputStreamConfiguration: {
+    collectionId: 'voictent-2',
+    isCollectionStream: true,
   },
-  rightInputAppreffingeTuple: [],
-  outputAppreffinge: {
-    geppTuple: ['voictent-3'],
+  rightInputStreamConfigurationTuple: [],
+  outputStreamConfiguration: {
+    collectionIdTuple: ['voictent-3'],
   },
-  tropoig(input): OutputVicken<[Voictent3Voque]>['tropoignantOutput'] {
+  transform(
+    input,
+  ): OutputStreamConnectionMetatype<[Voictent3Voque]>['tropoignantOutput'] {
     return {
       'voictent-3': [input],
     };
@@ -116,8 +120,8 @@ digikikify2({
     forwardFrom2To3,
 
     buildAddMetadataForSerialization<Voictent3Voque, SerializedVoque>({
-      inputGepp: 'voictent-3',
-      outputGepp: 'serialized',
+      inputCollectionId: 'voictent-3',
+      outputCollectionId: 'serialized',
     }),
   ],
   onFinish: (runtimeStatistics) => {

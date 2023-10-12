@@ -1,13 +1,13 @@
-import { Estinant2 } from '../../core/types/estinant/estinant';
-import { LeftInputHubblepupVicken } from '../../core/types/vicken/leftInputVicken';
-import { OutputVicken } from '../../core/types/vicken/outputVicken';
+import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
+import { LeftInputItemStreamConnectionMetatype } from '../../core/types/vicken/leftInputVicken';
+import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
 import { RightInputVoictentVicken } from '../../core/types/vicken/rightInputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import { AbstractSerializableStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
-import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
 type Voictent1Voque = StandardInMemoryStreamMetatype<'voictent-1', number>;
@@ -27,22 +27,24 @@ const SKIP_INDEX = 2;
  * Forwards each item in collection 2 to collecion 3 except for one item.
  * Skipping an item causes the third collection to stop accumulating twice.
  */
-const forwardFrom2To3AndSkipAValue: Estinant2<
-  LeftInputHubblepupVicken<Voictent2Voque>,
+const forwardFrom2To3AndSkipAValue: ProgrammedTransform2<
+  LeftInputItemStreamConnectionMetatype<Voictent2Voque>,
   [],
-  OutputVicken<[Voictent3Voque]>
+  OutputStreamConnectionMetatype<[Voictent3Voque]>
 > = {
   version: 2,
   name: 'forwardFrom2To3AndSkipAValue',
-  leftInputAppreffinge: {
-    gepp: 'voictent-2',
-    isWibiz: false,
+  leftInputStreamConfiguration: {
+    collectionId: 'voictent-2',
+    isCollectionStream: false,
   },
-  rightInputAppreffingeTuple: [],
-  outputAppreffinge: {
-    geppTuple: ['voictent-3'],
+  rightInputStreamConfigurationTuple: [],
+  outputStreamConfiguration: {
+    collectionIdTuple: ['voictent-3'],
   },
-  tropoig(input): OutputVicken<[Voictent3Voque]>['tropoignantOutput'] {
+  transform(
+    input,
+  ): OutputStreamConnectionMetatype<[Voictent3Voque]>['tropoignantOutput'] {
     if (input.indexByName.listIndex === SKIP_INDEX) {
       return {
         'voictent-3': [],
@@ -60,32 +62,32 @@ const forwardFrom2To3AndSkipAValue: Estinant2<
  * collection 3 stops accumulating twice, this transform will trigger twice for
  * each item in collection 1
  */
-const join1ToAllOf3: Estinant2<
-  LeftInputHubblepupVicken<Voictent1Voque>,
+const join1ToAllOf3: ProgrammedTransform2<
+  LeftInputItemStreamConnectionMetatype<Voictent1Voque>,
   [RightInputVoictentVicken<Voictent3Voque>],
-  OutputVicken<[Voictent4Voque]>
+  OutputStreamConnectionMetatype<[Voictent4Voque]>
 > = {
   version: 2,
   name: 'join1ToAllOf3',
-  leftInputAppreffinge: {
-    gepp: 'voictent-1',
-    isWibiz: false,
+  leftInputStreamConfiguration: {
+    collectionId: 'voictent-1',
+    isCollectionStream: false,
   },
-  rightInputAppreffingeTuple: [
+  rightInputStreamConfigurationTuple: [
     {
-      gepp: 'voictent-3',
+      collectionId: 'voictent-3',
       isWibiz: true,
       croard: undefined,
       framate: undefined,
     },
   ],
-  outputAppreffinge: {
-    geppTuple: ['voictent-4'],
+  outputStreamConfiguration: {
+    collectionIdTuple: ['voictent-4'],
   },
-  tropoig(
+  transform(
     leftInput,
     rightInput,
-  ): OutputVicken<[Voictent4Voque]>['tropoignantOutput'] {
+  ): OutputStreamConnectionMetatype<[Voictent4Voque]>['tropoignantOutput'] {
     const serializedRightInput = `[${rightInput.join(', ')}]`;
 
     const output = `${leftInput.item}-${serializedRightInput}`;
@@ -133,8 +135,8 @@ digikikify2({
     join1ToAllOf3,
 
     buildAddMetadataForSerialization<Voictent4Voque, SerializedVoque>({
-      inputGepp: 'voictent-4',
-      outputGepp: 'serialized',
+      inputCollectionId: 'voictent-4',
+      outputCollectionId: 'serialized',
     }),
   ],
   onFinish: (runtimeStatistics) => {

@@ -1,6 +1,6 @@
-import { Estinant2 } from '../core/types/estinant/estinant';
-import { LeftInputHubblepupVicken } from '../core/types/vicken/leftInputVicken';
-import { OutputVicken } from '../core/types/vicken/outputVicken';
+import { ProgrammedTransform2 } from '../core/types/estinant/estinant';
+import { LeftInputItemStreamConnectionMetatype } from '../core/types/vicken/leftInputVicken';
+import { OutputStreamConnectionMetatype } from '../core/types/vicken/outputVicken';
 import { digikikify2 } from '../core/engine/digikikify';
 import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
@@ -11,7 +11,7 @@ import {
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import { getCustomTypedDatum } from '../package-agnostic-utilities/typed-datum/customTypedDatum';
 import { AbstractSerializableStreamMetatype } from '../layer-agnostic-utilities/collection/abstractSerializableCollection';
-import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { JsonSerializableCollection } from '../layer-agnostic-utilities/collection/jsonSerializableCollection';
 import {
   SerializableTypeNameVoque,
@@ -29,22 +29,22 @@ const programFileCache = new ProgramFileCache({
  * "getCustomTypedTestCaseInputTypeName". It fowards the resulting type name for
  * manual verification, since the input datum and output datum are the same.
  */
-const getCustomTypedTestCaseInputTypeName: Estinant2<
-  LeftInputHubblepupVicken<DatumTestCaseInputVoque>,
+const getCustomTypedTestCaseInputTypeName: ProgrammedTransform2<
+  LeftInputItemStreamConnectionMetatype<DatumTestCaseInputVoque>,
   [],
-  OutputVicken<[SerializableTypeNameVoque]>
+  OutputStreamConnectionMetatype<[SerializableTypeNameVoque]>
 > = {
   version: 2,
   name: 'getCustomTypedTestCaseInputTypeName',
-  leftInputAppreffinge: {
-    gepp: DATUM_TEST_CASE_INPUT_GEPP,
-    isWibiz: false,
+  leftInputStreamConfiguration: {
+    collectionId: DATUM_TEST_CASE_INPUT_GEPP,
+    isCollectionStream: false,
   },
-  rightInputAppreffingeTuple: [],
-  outputAppreffinge: {
-    geppTuple: [SERIALIZABLE_TYPE_NAME_GEPP],
+  rightInputStreamConfigurationTuple: [],
+  outputStreamConfiguration: {
+    collectionIdTuple: [SERIALIZABLE_TYPE_NAME_GEPP],
   },
-  tropoig: (input) => {
+  transform: (input) => {
     const inputOdeshin = input.item;
     const testCaseInput = inputOdeshin.grition;
 
@@ -92,8 +92,8 @@ digikikify2({
       SerializableTypeNameVoque,
       SerializedConfiguration
     >({
-      inputGepp: SERIALIZABLE_TYPE_NAME_GEPP,
-      outputGepp: 'serialized',
+      inputCollectionId: SERIALIZABLE_TYPE_NAME_GEPP,
+      outputCollectionId: 'serialized',
     }),
   ],
 });

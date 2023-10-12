@@ -1,12 +1,12 @@
-import { Estinant2 } from '../../core/types/estinant/estinant';
+import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
 import { LeftInputVoictentVicken } from '../../core/types/vicken/leftInputVicken';
-import { OutputVicken } from '../../core/types/vicken/outputVicken';
+import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import { AbstractSerializableStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
-import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
 type Voictent1Voque = StandardInMemoryStreamMetatype<'voictent-1', string>;
@@ -20,22 +20,24 @@ const programFileCache = new ProgramFileCache({
 /**
  * Forwards collection 1 as a whole to collection 2.
  */
-const gatherCollection: Estinant2<
+const gatherCollection: ProgrammedTransform2<
   LeftInputVoictentVicken<Voictent1Voque>,
   [],
-  OutputVicken<[Voictent2Voque]>
+  OutputStreamConnectionMetatype<[Voictent2Voque]>
 > = {
   version: 2,
   name: 'gatherCollection',
-  leftInputAppreffinge: {
-    gepp: 'voictent-1',
-    isWibiz: true,
+  leftInputStreamConfiguration: {
+    collectionId: 'voictent-1',
+    isCollectionStream: true,
   },
-  rightInputAppreffingeTuple: [],
-  outputAppreffinge: {
-    geppTuple: ['voictent-2'],
+  rightInputStreamConfigurationTuple: [],
+  outputStreamConfiguration: {
+    collectionIdTuple: ['voictent-2'],
   },
-  tropoig: (input): OutputVicken<[Voictent2Voque]>['tropoignantOutput'] => {
+  transform: (
+    input,
+  ): OutputStreamConnectionMetatype<[Voictent2Voque]>['tropoignantOutput'] => {
     return {
       'voictent-2': [input],
     };
@@ -69,8 +71,8 @@ digikikify2({
     gatherCollection,
 
     buildAddMetadataForSerialization<Voictent2Voque, SerializedVoque>({
-      inputGepp: 'voictent-2',
-      outputGepp: 'serialized',
+      inputCollectionId: 'voictent-2',
+      outputCollectionId: 'serialized',
     }),
   ],
   onFinish: (runtimeStatistics) => {

@@ -8,7 +8,7 @@ import {
   UnsafeEstinant2,
   GenericEstinant2,
   UnsafeEstinant2Tuple,
-  Estinant2,
+  ProgrammedTransform2,
 } from '../../core/types/estinant/estinant';
 import {
   GenericLeftInputVicken,
@@ -16,7 +16,7 @@ import {
 } from '../../core/types/vicken/leftInputVicken';
 import {
   GenericOutputVicken,
-  OutputVicken,
+  OutputStreamConnectionMetatype,
 } from '../../core/types/vicken/outputVicken';
 import {
   GenericRightInputVickenTuple,
@@ -40,7 +40,7 @@ import {
 import { GenericVoque } from '../../core/types/voque/voque';
 import { ProgramErrorGepp } from '../../adapted-programs/programmable-units/error/programError';
 import { GenericAbstractSerializableSourceStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
-import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
 import {
@@ -76,7 +76,9 @@ type VoqueUnionFromRightInputVickenTuple<
 
 type VoqueOptionTupleFromOutputVicken<
   TOutputVicken extends GenericOutputVicken,
-> = TOutputVicken extends OutputVicken<infer TVoqueOptionTuple>
+> = TOutputVicken extends OutputStreamConnectionMetatype<
+  infer TVoqueOptionTuple
+>
   ? TVoqueOptionTuple
   : never;
 
@@ -84,7 +86,7 @@ type VoqueUnionFromOutputVicken<TOutputVicken extends GenericOutputVicken> =
   VoqueOptionTupleFromOutputVicken<TOutputVicken>[number];
 
 type VoqueUnionFromEstinant<TEstinant extends UnsafeEstinant2> =
-  TEstinant extends Estinant2<
+  TEstinant extends ProgrammedTransform2<
     infer TLeftInputVicken,
     infer TRightInputVickenTuple,
     infer TOutputVicken
@@ -232,8 +234,8 @@ const buildSerializerEstinantTuple = (
     ...serializeeGeppSet,
   ].map<UnsafeEstinant2>((serializeeGepp) => {
     return buildAddMetadataForSerialization({
-      inputGepp: serializeeGepp,
-      outputGepp: serializerGepp,
+      inputCollectionId: serializeeGepp,
+      outputCollectionId: serializerGepp,
     });
   });
 
@@ -255,11 +257,13 @@ const getEstinantTupleGeppSet = (
 ): CollectionId[] => {
   const estinantGeppList = estinantTuple.flatMap<CollectionId>(
     (estinant: GenericEstinant2) => {
-      const leftInputGepp = estinant.leftInputAppreffinge.gepp;
-      const rightInputGeppTuple = estinant.rightInputAppreffingeTuple.map(
-        (appreffinge) => appreffinge.gepp,
-      );
-      const outputGeppTuple = estinant.outputAppreffinge.geppTuple;
+      const leftInputGepp = estinant.leftInputStreamConfiguration.collectionId;
+      const rightInputGeppTuple =
+        estinant.rightInputStreamConfigurationTuple.map(
+          (appreffinge) => appreffinge.collectionId,
+        );
+      const outputGeppTuple =
+        estinant.outputStreamConfiguration.collectionIdTuple;
 
       return [leftInputGepp, ...rightInputGeppTuple, ...outputGeppTuple];
     },

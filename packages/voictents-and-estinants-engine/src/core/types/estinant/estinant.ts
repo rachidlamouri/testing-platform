@@ -15,28 +15,30 @@ import { Tropoignant2 } from './tropoignant';
  * A core transform plus its input and output stream configurations.
  *
  * @readableName ProgrammedTransform
+ *
+ * @canonicalDeclaration
  */
-export type Estinant2<
+export type ProgrammedTransform2<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,
   TOutputVicken extends UnsafeOutputVicken,
 > = {
   version: 2;
   name: string;
-  leftInputAppreffinge: LeftInputAppreffinge<TLeftInputVicken>;
-  rightInputAppreffingeTuple: InputVickenTupleToRightInputAppreffingeTuple<
+  leftInputStreamConfiguration: LeftInputAppreffinge<TLeftInputVicken>;
+  rightInputStreamConfigurationTuple: InputVickenTupleToRightInputAppreffingeTuple<
     TLeftInputVicken,
     TRightInputVickenTuple
   >;
-  outputAppreffinge: OutputAppreffinge<TOutputVicken>;
-  tropoig: Tropoignant2<
+  outputStreamConfiguration: OutputAppreffinge<TOutputVicken>;
+  transform: Tropoignant2<
     TLeftInputVicken,
     TRightInputVickenTuple,
     TOutputVicken
   >;
 };
 
-export type GenericEstinant2 = Estinant2<
+export type GenericEstinant2 = ProgrammedTransform2<
   GenericLeftInputVicken,
   GenericRightInputVickenTuple,
   GenericOutputVicken
@@ -50,13 +52,13 @@ export type UnsafeEstinant2 = {
   version: 2;
   name: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  leftInputAppreffinge: any;
+  leftInputStreamConfiguration: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  rightInputAppreffingeTuple: any;
+  rightInputStreamConfigurationTuple: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  outputAppreffinge: any;
+  outputStreamConfiguration: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  tropoig: any;
+  transform: any;
 };
 
 export type UnsafeEstinant2Tuple = Tuple<UnsafeEstinant2>;

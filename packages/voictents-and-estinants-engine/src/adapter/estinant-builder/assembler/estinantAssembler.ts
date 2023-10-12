@@ -1,6 +1,6 @@
 import { RightInputAppreffinge } from '../../../core/types/appreffinge/input/right/rightInputAppreffinge';
 import {
-  Estinant2,
+  ProgrammedTransform2,
   GenericEstinant2,
 } from '../../../core/types/estinant/estinant';
 import { GenericTropoignant2 } from '../../../core/types/estinant/tropoignant';
@@ -34,7 +34,7 @@ type EstinantAssembler<
   TLeftInputVicken extends GenericLeftInputVicken,
   TRightInputVickenTuple extends GenericRightInputVickenTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
-> = () => Estinant2<
+> = () => ProgrammedTransform2<
   TLeftInputVicken,
   TRightInputVickenTuple,
   CoreOutputVickenFromAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple>
@@ -62,7 +62,7 @@ export const buildEstinantAssembler = <
       outputContext,
     } = assemblerContext;
 
-    const tropoig: GenericTropoignant2 = (leftInput, ...rightInputTuple) => {
+    const transform: GenericTropoignant2 = (leftInput, ...rightInputTuple) => {
       let adaptedLeftInput: unknown;
       if (leftInputContext.isWibiz || leftInputContext.version === 2) {
         adaptedLeftInput = leftInput;
@@ -119,15 +119,15 @@ export const buildEstinantAssembler = <
     const estinant = {
       version: 2,
       name: instantiationContext.name,
-      leftInputAppreffinge: {
-        gepp: leftInputContext.gepp,
-        isWibiz: leftInputContext.isWibiz,
+      leftInputStreamConfiguration: {
+        collectionId: leftInputContext.gepp,
+        isCollectionStream: leftInputContext.isWibiz,
       },
-      rightInputAppreffingeTuple: rightInputContextTuple.map(
+      rightInputStreamConfigurationTuple: rightInputContextTuple.map(
         (rightInputContext) => {
           if (rightInputContext.isWibiz) {
             return {
-              gepp: rightInputContext.gepp,
+              collectionId: rightInputContext.gepp,
               isWibiz: rightInputContext.isWibiz,
               framate: undefined,
               croard: undefined,
@@ -138,7 +138,7 @@ export const buildEstinantAssembler = <
           }
 
           return {
-            gepp: rightInputContext.gepp,
+            collectionId: rightInputContext.gepp,
             isWibiz: rightInputContext.isWibiz,
             framate: (leftInput): IdTuple => {
               let adaptedLeftInput: unknown;
@@ -169,11 +169,11 @@ export const buildEstinantAssembler = <
           >;
         },
       ),
-      outputAppreffinge: {
-        geppTuple: outputContext.geppTuple,
+      outputStreamConfiguration: {
+        collectionIdTuple: outputContext.geppTuple,
       },
-      tropoig,
-    } satisfies GenericEstinant2 as unknown as Estinant2<
+      transform,
+    } satisfies GenericEstinant2 as unknown as ProgrammedTransform2<
       TLeftInputVicken,
       TRightInputVickenTuple,
       CoreOutputVickenFromAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple>

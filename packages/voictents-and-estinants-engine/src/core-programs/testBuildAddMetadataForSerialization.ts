@@ -6,7 +6,7 @@ import {
   DatumTestCaseInputVoque,
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
-import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/estinant/buildAddMetadataForSerialization';
+import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { JsonSerializableCollection } from '../layer-agnostic-utilities/collection/jsonSerializableCollection';
 import { AbstractSerializableStreamMetatype } from '../layer-agnostic-utilities/collection/abstractSerializableCollection';
 
@@ -39,8 +39,8 @@ digikikify2({
       DatumTestCaseInputVoque,
       SerializedConfiguration
     >({
-      inputGepp: DATUM_TEST_CASE_INPUT_GEPP,
-      outputGepp: 'serialized',
+      inputCollectionId: DATUM_TEST_CASE_INPUT_GEPP,
+      outputCollectionId: 'serialized',
     }),
   ],
 });

@@ -10,5 +10,5 @@ import { GenericOutputVicken } from '../../vicken/outputVicken';
  * @readableName OutputStreamGroupConfiguration
  */
 export type OutputAppreffinge<TOutputVicken extends GenericOutputVicken> = {
-  geppTuple: TOutputVicken['geppTuple'];
+  collectionIdTuple: TOutputVicken['geppTuple'];
 };

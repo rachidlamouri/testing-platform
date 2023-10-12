@@ -208,17 +208,19 @@ export const digikikify = ({
       return [
         {
           estinantName: estinant.name,
-          gepp: estinant.leftInputAppreffinge.gepp,
+          gepp: estinant.leftInputStreamConfiguration.collectionId,
           isInput: true,
         },
-        ...estinant.rightInputAppreffingeTuple.map((rightAppreffinge) => {
-          return {
-            estinantName: estinant.name,
-            gepp: rightAppreffinge.gepp,
-            isInput: true,
-          };
-        }),
-        ...estinant.outputAppreffinge.geppTuple.map((gepp) => {
+        ...estinant.rightInputStreamConfigurationTuple.map(
+          (rightAppreffinge) => {
+            return {
+              estinantName: estinant.name,
+              gepp: rightAppreffinge.collectionId,
+              isInput: true,
+            };
+          },
+        ),
+        ...estinant.outputStreamConfiguration.collectionIdTuple.map((gepp) => {
           return {
             estinantName: estinant.name,
             gepp,
@@ -267,7 +269,7 @@ export const digikikify = ({
       })
       .map((voictent) => voictent.collectionId),
     ...estinantTuple.flatMap(
-      (estinant) => estinant.outputAppreffinge.geppTuple,
+      (estinant) => estinant.outputStreamConfiguration.collectionIdTuple,
     ),
   ]);
 
@@ -275,11 +277,11 @@ export const digikikify = ({
     estinantTuple
       .flatMap((estinant) => {
         return [
-          estinant.leftInputAppreffinge,
-          ...estinant.rightInputAppreffingeTuple,
+          estinant.leftInputStreamConfiguration,
+          ...estinant.rightInputStreamConfigurationTuple,
         ];
       })
-      .map((appreffinge) => appreffinge.gepp),
+      .map((appreffinge) => appreffinge.collectionId),
   );
 
   // note: downstream estinants are gonna be so hungies
@@ -379,12 +381,18 @@ export const digikikify = ({
     estinant: GenericEstinant2,
     appreffinge: GenericInputAppreffinge,
   ): Lanbe => {
-    const voictent = tabilly.get(appreffinge.gepp);
+    const voictent = tabilly.get(appreffinge.collectionId);
     assertNotUndefined(
       voictent,
-      `Unable to find voictent for gepp: ${appreffinge.gepp}`,
+      `Unable to find voictent for gepp: ${appreffinge.collectionId}`,
     );
-    const lanbe = appreffinge.isWibiz
+
+    const isCollectionStream =
+      'isCollectionStream' in appreffinge
+        ? appreffinge.isCollectionStream
+        : appreffinge.isWibiz;
+
+    const lanbe = isCollectionStream
       ? voictent.createCollectionStream(estinant.name)
       : voictent.createCollectionItemStream(estinant.name);
 
@@ -396,50 +404,53 @@ export const digikikify = ({
   };
 
   const platomityList = estinantTuple.map<Platomity2>((programmedTransform) => {
-    const { leftInputAppreffinge, rightInputAppreffingeTuple } =
+    const { leftInputStreamConfiguration, rightInputStreamConfigurationTuple } =
       programmedTransform;
 
     const leftDreanor: LeftDreanor = {
       typeName: DreanorTypeName.LeftDreanor,
-      gepp: leftInputAppreffinge.gepp,
-      lanbe: createLanbe2(programmedTransform, leftInputAppreffinge),
+      gepp: leftInputStreamConfiguration.collectionId,
+      lanbe: createLanbe2(programmedTransform, leftInputStreamConfiguration),
       isReady: false,
     };
 
-    const rightDreanorTuple = rightInputAppreffingeTuple.map<RightDreanor>(
-      (rightInputAppreffinge) => {
-        if (getIsRightInputHubblepupTupleAppreffinge(rightInputAppreffinge)) {
+    const rightDreanorTuple =
+      rightInputStreamConfigurationTuple.map<RightDreanor>(
+        (rightInputAppreffinge) => {
+          if (getIsRightInputHubblepupTupleAppreffinge(rightInputAppreffinge)) {
+            return {
+              typeName: DreanorTypeName.RightVoictentItem2Dreanor,
+              gepp: rightInputAppreffinge.collectionId,
+              lanbe: createLanbe2(
+                programmedTransform,
+                rightInputAppreffinge,
+              ) as GenericCollectionItemStream2,
+              framate: rightInputAppreffinge.framate,
+              croard: rightInputAppreffinge.croard,
+              prected: new Prected(),
+            } satisfies RightVoictentItem2Dreanor;
+          }
+
           return {
-            typeName: DreanorTypeName.RightVoictentItem2Dreanor,
-            gepp: rightInputAppreffinge.gepp,
+            typeName: DreanorTypeName.RightVoictentDreanor,
+            gepp: rightInputAppreffinge.collectionId,
             lanbe: createLanbe2(
               programmedTransform,
               rightInputAppreffinge,
-            ) as GenericCollectionItemStream2,
-            framate: rightInputAppreffinge.framate,
-            croard: rightInputAppreffinge.croard,
-            prected: new Prected(),
-          } satisfies RightVoictentItem2Dreanor;
-        }
-
-        return {
-          typeName: DreanorTypeName.RightVoictentDreanor,
-          gepp: rightInputAppreffinge.gepp,
-          lanbe: createLanbe2(
-            programmedTransform,
-            rightInputAppreffinge,
-          ) as GenericVoictentPelieLanbe,
-          isReady: false,
-        } satisfies RightVoictentDreanor;
-      },
-    );
+            ) as GenericVoictentPelieLanbe,
+            isReady: false,
+          } satisfies RightVoictentDreanor;
+        },
+      );
 
     const platomity: Platomity2 = {
       version: 2,
       programmedTransform,
       leftDreanor,
       rightDreanorTuple,
-      outputGeppSet: new Set(programmedTransform.outputAppreffinge.geppTuple),
+      outputGeppSet: new Set(
+        programmedTransform.outputStreamConfiguration.collectionIdTuple,
+      ),
       procody: new Procody(),
       executionCount: 0,
       dependencySet: new Set(),
@@ -646,7 +657,7 @@ export const digikikify = ({
     });
 
     try {
-      const outputRecord = platomity.programmedTransform.tropoig(
+      const outputRecord = platomity.programmedTransform.transform(
         leftInput,
         ...rightInputTuple,
       );
@@ -810,9 +821,9 @@ export const digikikify = ({
 
     platomityList.forEach((platomity) => {
       [
-        platomity.programmedTransform.leftInputAppreffinge.gepp,
-        ...platomity.programmedTransform.rightInputAppreffingeTuple.map(
-          (appreffinge) => appreffinge.gepp,
+        platomity.programmedTransform.leftInputStreamConfiguration.collectionId,
+        ...platomity.programmedTransform.rightInputStreamConfigurationTuple.map(
+          (appreffinge) => appreffinge.collectionId,
         ),
       ].forEach((gepp) => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -822,7 +833,7 @@ export const digikikify = ({
         platomity.mutableDependencySet.add(virok);
       });
 
-      platomity.programmedTransform.outputAppreffinge.geppTuple.forEach(
+      platomity.programmedTransform.outputStreamConfiguration.collectionIdTuple.forEach(
         (gepp) => {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           const virok = virokByGepp.get(gepp)!;
@@ -963,7 +974,8 @@ export const digikikify = ({
       return {
         estinantName: endState.platomity.programmedTransform.name,
         leftGepp:
-          endState.platomity.programmedTransform.leftInputAppreffinge.gepp,
+          endState.platomity.programmedTransform.leftInputStreamConfiguration
+            .collectionId,
         cologySet: cologySetEndState,
       };
     });

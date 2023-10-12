@@ -1,6 +1,6 @@
-import { Estinant2 } from '../../core/types/estinant/estinant';
-import { LeftInputHubblepupVicken } from '../../core/types/vicken/leftInputVicken';
-import { OutputVicken } from '../../core/types/vicken/outputVicken';
+import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
+import { LeftInputItemStreamConnectionMetatype } from '../../core/types/vicken/leftInputVicken';
+import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
 import { RightInputHubblepupTupleVicken } from '../../core/types/vicken/rightInputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
@@ -28,29 +28,29 @@ type EngineErrorVoque = SerializableErrorStreamMetatype<'engine-error'>;
  * this test case, the right collection purposefully has less items than needed
  * so this transform won't trigger for every left input
  */
-const joinCollectionsByValue: Estinant2<
-  LeftInputHubblepupVicken<Input1Voque>,
+const joinCollectionsByValue: ProgrammedTransform2<
+  LeftInputItemStreamConnectionMetatype<Input1Voque>,
   [RightInputHubblepupTupleVicken<Input2Voque, [number]>],
-  OutputVicken<[OutputVoque]>
+  OutputStreamConnectionMetatype<[OutputVoque]>
 > = {
   version: 2,
   name: 'joinCollections',
-  leftInputAppreffinge: {
-    gepp: 'input-1',
-    isWibiz: false,
+  leftInputStreamConfiguration: {
+    collectionId: 'input-1',
+    isCollectionStream: false,
   },
-  rightInputAppreffingeTuple: [
+  rightInputStreamConfigurationTuple: [
     {
-      gepp: 'input-2',
+      collectionId: 'input-2',
       isWibiz: false,
       framate: (input1) => [input1.item],
       croard: (input2) => input2.item,
     },
   ],
-  outputAppreffinge: {
-    geppTuple: ['output'],
+  outputStreamConfiguration: {
+    collectionIdTuple: ['output'],
   },
-  tropoig: (indexedInput1, [indexedInput2]) => {
+  transform: (indexedInput1, [indexedInput2]) => {
     return {
       output: [
         {

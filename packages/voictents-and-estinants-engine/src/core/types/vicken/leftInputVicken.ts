@@ -11,7 +11,7 @@ type BaseLeftInputVicken<
 };
 
 // TODO: rename this to "LeftInputIndexedHubblepupVicken"
-export type LeftInputHubblepupVicken<TVoque extends GenericVoque> =
+export type LeftInputItemStreamConnectionMetatype<TVoque extends GenericVoque> =
   BaseLeftInputVicken<TVoque, TVoque['indexedHubblepupPelie'], false>;
 
 export type LeftInputVoictentVicken<TVoque extends GenericVoque> =
@@ -23,7 +23,7 @@ export type LeftInputVoictentVicken<TVoque extends GenericVoque> =
  * @readableName LeftInputStreamConnectionMetatype
  */
 export type LeftInputVicken<TVoque extends GenericVoque> =
-  | LeftInputHubblepupVicken<TVoque>
+  | LeftInputItemStreamConnectionMetatype<TVoque>
   | LeftInputVoictentVicken<TVoque>;
 
 export type GenericLeftInputVicken = LeftInputVicken<GenericVoque>;

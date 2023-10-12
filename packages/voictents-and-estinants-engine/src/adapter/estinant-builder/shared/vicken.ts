@@ -11,7 +11,7 @@
 
 import { GenericVoque } from '../../../core/types/voque/voque';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
-import { OutputVicken as CoreOutputVicken } from '../../../core/types/vicken/outputVicken';
+import { OutputStreamConnectionMetatype as CoreOutputVicken } from '../../../core/types/vicken/outputVicken';
 import { IdTuple } from '../../../package-agnostic-utilities/data-structure/id';
 
 enum AdaptedVickenTypeName {

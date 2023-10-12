@@ -1,6 +1,6 @@
-import { Estinant2 } from '../../core/types/estinant/estinant';
-import { LeftInputHubblepupVicken } from '../../core/types/vicken/leftInputVicken';
-import { OutputVicken } from '../../core/types/vicken/outputVicken';
+import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
+import { LeftInputItemStreamConnectionMetatype } from '../../core/types/vicken/leftInputVicken';
+import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
@@ -18,22 +18,22 @@ const programFileCache = new ProgramFileCache({
 });
 
 /** Throws the input error */
-const throwError: Estinant2<
-  LeftInputHubblepupVicken<InputErrorVoque>,
+const throwError: ProgrammedTransform2<
+  LeftInputItemStreamConnectionMetatype<InputErrorVoque>,
   [],
-  OutputVicken<[]>
+  OutputStreamConnectionMetatype<[]>
 > = {
   version: 2,
   name: 'throwError',
-  leftInputAppreffinge: {
-    isWibiz: false,
-    gepp: 'input-error',
+  leftInputStreamConfiguration: {
+    isCollectionStream: false,
+    collectionId: 'input-error',
   },
-  rightInputAppreffingeTuple: [],
-  outputAppreffinge: {
-    geppTuple: [],
+  rightInputStreamConfigurationTuple: [],
+  outputStreamConfiguration: {
+    collectionIdTuple: [],
   },
-  tropoig: (indexedError) => {
+  transform: (indexedError) => {
     throw indexedError.item;
   },
 };
