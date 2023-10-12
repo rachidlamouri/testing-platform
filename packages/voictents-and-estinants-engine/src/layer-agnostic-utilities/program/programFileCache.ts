@@ -10,7 +10,7 @@ import { FileCache } from '../../package-agnostic-utilities/file/fileCache';
 
 enum TopLevelDirectoryName {
   Root = '',
-  Voictents = 'voictents',
+  Collections = 'voictents',
 }
 
 const RUNTIME_SNAPSHOT_FILE_BASE_NAME = 'runtimeSnapshot';
@@ -26,14 +26,14 @@ export type SerializedItem = {
   fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
 };
 
-type SerializedHubblepupWriterInput = {
+type SerializedItemWriterInput = {
   collectionCollectionId: CollectionId;
   nestedPath: string;
   extensionlessFileName: string;
   serializedItem: SerializedItem;
 };
 
-type VoictentDirectoryDeleterInput = {
+type CollectionDirectoryDeleterInput = {
   collectionCollectionId: CollectionId;
 };
 
@@ -44,7 +44,7 @@ type NamespacedFilePathAccessorInput = {
   fileExtensionSuffixIdentifier: KnownFileExtensionSuffixIdentifier;
 };
 
-type NamespacedVoictentFilePathAccessorInput = {
+type NamespacedCollectionFilePathAccessorInput = {
   collectionCollectionId: CollectionId;
   nestedPath: string;
   extensionlessFileName: string;
@@ -81,10 +81,10 @@ export class ProgramFileCache extends FileCache {
     console.log(`Program Namespace: ${this.namespaceDirectoryPath}`);
   }
 
-  get voictentsDirectoryPath(): string {
+  get collectionsDirectoryPath(): string {
     return posix.join(
       this.namespaceDirectoryPath,
-      TopLevelDirectoryName.Voictents,
+      TopLevelDirectoryName.Collections,
     );
   }
 
@@ -106,9 +106,9 @@ export class ProgramFileCache extends FileCache {
     nestedPath,
     extensionlessFileName,
     fileExtensionSuffixIdentifier,
-  }: NamespacedVoictentFilePathAccessorInput): string {
+  }: NamespacedCollectionFilePathAccessorInput): string {
     return this.getProgramNamespacedFilePath({
-      topLevelDirectoryName: TopLevelDirectoryName.Voictents,
+      topLevelDirectoryName: TopLevelDirectoryName.Collections,
       nestedPath: posix.join(collectionCollectionId, nestedPath),
       extensionlessFileName,
       fileExtensionSuffixIdentifier,
@@ -134,15 +134,15 @@ export class ProgramFileCache extends FileCache {
     collectionCollectionId,
     nestedPath,
     extensionlessFileName,
-    serializedItem: serializedHubblepup,
-  }: SerializedHubblepupWriterInput): void {
+    serializedItem,
+  }: SerializedItemWriterInput): void {
     this.writeNamespacedFile({
-      topLevelDirectoryName: TopLevelDirectoryName.Voictents,
+      topLevelDirectoryName: TopLevelDirectoryName.Collections,
       nestedPath: posix.join(collectionCollectionId, nestedPath),
       extensionlessFileName,
       fileExtensionSuffixIdentifier:
-        serializedHubblepup.fileExtensionSuffixIdentifier,
-      text: serializedHubblepup.text,
+        serializedItem.fileExtensionSuffixIdentifier,
+      text: serializedItem.text,
     });
   }
 
@@ -172,10 +172,10 @@ export class ProgramFileCache extends FileCache {
 
   deleteCollectionDirectory({
     collectionCollectionId,
-  }: VoictentDirectoryDeleterInput): void {
+  }: CollectionDirectoryDeleterInput): void {
     this.deleteNamespacedFileNode({
       nestedPath: posix.join(
-        TopLevelDirectoryName.Voictents,
+        TopLevelDirectoryName.Collections,
         collectionCollectionId,
       ),
     });

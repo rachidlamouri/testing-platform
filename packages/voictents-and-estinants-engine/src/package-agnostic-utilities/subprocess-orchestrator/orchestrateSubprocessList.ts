@@ -16,31 +16,31 @@ const FOCUS_ALL_REGEX = /^a$/;
 
 const mutableColorList = colorList.slice();
 
-const useKnowledgeGraphDeveloper = process.env.DEV_KG !== undefined;
+// const useKnowledgeGraphDeveloper = process.env.DEV_KG !== undefined;
 
-const knowledgeGraphProgramLabel = useKnowledgeGraphDeveloper
-  ? 'develop-knowledge-graph'
-  : 'render-knowledge-graph';
-const runKnowledgeGraph = useKnowledgeGraphDeveloper
-  ? 'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts'
-  : 'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts';
-const serveKnowledgeGraph = useKnowledgeGraphDeveloper
-  ? 'npx http-server debug/develop-knowledge-graph/voictents/output-file'
-  : 'npx http-server debug/render-knowledge-graph/voictents/output-file';
+// const knowledgeGraphProgramLabel = useKnowledgeGraphDeveloper
+//   ? 'develop-knowledge-graph'
+//   : 'render-knowledge-graph';
+// const runKnowledgeGraph = useKnowledgeGraphDeveloper
+//   ? 'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts'
+//   : 'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts';
+// const serveKnowledgeGraph = useKnowledgeGraphDeveloper
+//   ? 'npx http-server debug/develop-knowledge-graph/voictents/output-file'
+//   : 'npx http-server debug/render-knowledge-graph/voictents/output-file';
 
 const subprocessConfigurationList: SubprocessConfiguration[] = (
   [
-    {
-      label: 'model-programs',
-      script:
-        'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-programs/modelPrograms.ts',
-      isInitiallyVisible: true,
-    },
-    {
-      label: knowledgeGraphProgramLabel,
-      script: runKnowledgeGraph,
-      isInitiallyVisible: true,
-    },
+    // {
+    //   label: 'model-programs',
+    //   script:
+    //     'npm run program packages/voictents-and-estinants-engine/src/adapted-programs/programs/model-programs/modelPrograms.ts',
+    //   isInitiallyVisible: true,
+    // },
+    // {
+    //   label: knowledgeGraphProgramLabel,
+    //   script: runKnowledgeGraph,
+    //   isInitiallyVisible: true,
+    // },
     {
       label: 'lint-nonsense',
       script:
@@ -83,11 +83,11 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
         'nodemon --ext ts,tsx --ignore debug --ignore **/generated/** --exec npm run lint:ts:engine',
       isInitiallyVisible: true,
     },
-    {
-      label: 'serve-knowledge-graph',
-      script: serveKnowledgeGraph,
-      isInitiallyVisible: false,
-    },
+    // {
+    //   label: 'serve-knowledge-graph',
+    //   script: serveKnowledgeGraph,
+    //   isInitiallyVisible: false,
+    // },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
 ).map((partialConfiguration) => {
   const color = mutableColorList.pop();

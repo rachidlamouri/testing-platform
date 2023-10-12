@@ -25,6 +25,7 @@ type CommandRunnerInput = {
   environmentVariables?: Record<string, string>;
   errorCode: number;
   continueOnError?: boolean;
+  skipLog?: false;
 };
 
 const runCommand = ({
@@ -33,6 +34,7 @@ const runCommand = ({
   environmentVariables = {},
   errorCode,
   continueOnError = false,
+  skipLog = false,
 }: CommandRunnerInput): SpawnSyncReturns<string> => {
   log(chalk.cyan(title));
   const result = spawnSync(command[0], command.slice(1), {
@@ -44,21 +46,26 @@ const runCommand = ({
     },
   });
 
-  if (result.stdout) {
+  if (!skipLog && result.stdout) {
     log('STDOUT');
     log(result.stdout);
   } else {
     log('NO-STDOUT');
   }
 
-  if (result.stderr) {
+  if (!skipLog && result.stderr) {
     log();
     log('STDERR');
   }
 
-  log();
+  if (!skipLog) {
+    log();
+  }
 
   if (result.status !== 0 && !continueOnError) {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    oops();
+
     const filePath =
       'packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsense/errorLog.txt';
     log(chalk.cyan('Error'));
@@ -66,10 +73,60 @@ const runCommand = ({
     log();
     fs.writeFileSync(filePath, serialize(result));
 
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     process.exit(errorCode);
   }
 
   return result;
+};
+
+const beep = (): void => {
+  runCommand({
+    title: 'Beep',
+    command: [
+      // keep multiline
+      'printf',
+      '\\a',
+    ],
+    errorCode: 152,
+    continueOnError: true,
+  });
+};
+
+const delay = (milliseconds: number): void => {
+  runCommand({
+    title: 'Delay',
+    command: [
+      // keep multiline
+      'node',
+      '-e',
+      `setTimeout(() => {}, ${milliseconds})`,
+    ],
+    errorCode: 122,
+    continueOnError: true,
+  });
+};
+
+const oops = (): void => {
+  beep();
+  delay(500);
+  beep();
+  delay(500);
+  beep();
+  delay(500);
+  beep();
+  delay(500);
+  beep();
+  delay(500);
+  beep();
+  delay(500);
+  beep();
+  delay(500);
+  beep();
+  delay(500);
+  beep();
+  delay(500);
+  beep();
 };
 
 // eslint-disable-next-line no-constant-condition

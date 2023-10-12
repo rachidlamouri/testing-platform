@@ -116,21 +116,21 @@ const nanosecondsToSeconds = (nanoseconds: bigint): bigint =>
 type TickSeries<TValue extends number | bigint> = TValue[];
 
 type VoictentTickSeriesConfiguration = {
-  gepp: CollectionId;
+  collectionId: CollectionId;
   voictentLanbe: GenericVoictentPelieLanbe | null;
   voictentItemLanbe: HubblepupPelieLanbe | GenericCollectionItemStream2 | null;
-  voictentTickSeries: TickSeries<number>;
-  voictentItemTickSeries: TickSeries<number>;
+  collectionTickSeries: TickSeries<number>;
+  collectionItemTickSeries: TickSeries<number>;
 };
 
 type EstinantConnectionTickSeriesConfiguration = {
-  gepp: CollectionId;
-  lanbe: Lanbe;
+  collectionId: CollectionId;
+  stream: Lanbe;
   tickSeries: TickSeries<number>;
 };
 
 type EstinantTickSeriesConfiguration = {
-  platomity: Platomity2;
+  mutableTransformState: Platomity2;
   connectionList: EstinantConnectionTickSeriesConfiguration[];
   cumulativeExecutionCountTickSeries: TickSeries<number>;
   relativeExecutionCountTickSeries: TickSeries<number>;
@@ -143,8 +143,8 @@ type TimeSeriesConfiguration = {
 };
 
 export type RuntimeStatistics = {
-  voictentList: VoictentTickSeriesConfiguration[];
-  estinantList: EstinantTickSeriesConfiguration[];
+  collectionList: VoictentTickSeriesConfiguration[];
+  programmedTransformList: EstinantTickSeriesConfiguration[];
   time: TimeSeriesConfiguration;
 };
 
@@ -395,13 +395,14 @@ export const digikikify = ({
     return lanbe;
   };
 
-  const platomityList = estinantTuple.map<Platomity2>((estinant) => {
-    const { leftInputAppreffinge, rightInputAppreffingeTuple } = estinant;
+  const platomityList = estinantTuple.map<Platomity2>((programmedTransform) => {
+    const { leftInputAppreffinge, rightInputAppreffingeTuple } =
+      programmedTransform;
 
     const leftDreanor: LeftDreanor = {
       typeName: DreanorTypeName.LeftDreanor,
       gepp: leftInputAppreffinge.gepp,
-      lanbe: createLanbe2(estinant, leftInputAppreffinge),
+      lanbe: createLanbe2(programmedTransform, leftInputAppreffinge),
       isReady: false,
     };
 
@@ -412,7 +413,7 @@ export const digikikify = ({
             typeName: DreanorTypeName.RightVoictentItem2Dreanor,
             gepp: rightInputAppreffinge.gepp,
             lanbe: createLanbe2(
-              estinant,
+              programmedTransform,
               rightInputAppreffinge,
             ) as GenericCollectionItemStream2,
             framate: rightInputAppreffinge.framate,
@@ -425,7 +426,7 @@ export const digikikify = ({
           typeName: DreanorTypeName.RightVoictentDreanor,
           gepp: rightInputAppreffinge.gepp,
           lanbe: createLanbe2(
-            estinant,
+            programmedTransform,
             rightInputAppreffinge,
           ) as GenericVoictentPelieLanbe,
           isReady: false,
@@ -435,10 +436,10 @@ export const digikikify = ({
 
     const platomity: Platomity2 = {
       version: 2,
-      estinant,
+      programmedTransform,
       leftDreanor,
       rightDreanorTuple,
-      outputGeppSet: new Set(estinant.outputAppreffinge.geppTuple),
+      outputGeppSet: new Set(programmedTransform.outputAppreffinge.geppTuple),
       procody: new Procody(),
       executionCount: 0,
       dependencySet: new Set(),
@@ -543,7 +544,7 @@ export const digikikify = ({
           const cology: Cology = {
             leftDreanor: dreanor,
             leftInput:
-              platomity.estinant.version === 2 &&
+              platomity.programmedTransform.version === 2 &&
               leftInputTypeName === ReferenceTypeName.Collection
                 ? indexedHubblepup.item
                 : indexedHubblepup,
@@ -645,7 +646,7 @@ export const digikikify = ({
     });
 
     try {
-      const outputRecord = platomity.estinant.tropoig(
+      const outputRecord = platomity.programmedTransform.tropoig(
         leftInput,
         ...rightInputTuple,
       );
@@ -685,22 +686,24 @@ export const digikikify = ({
   >();
 
   const estinantTickSeriesConfigurationList =
-    platomityList.map<EstinantTickSeriesConfiguration>((platomity) => {
-      return {
-        platomity,
-        connectionList: getDreanorTuple(
-          platomity,
-        ).map<EstinantConnectionTickSeriesConfiguration>((dreanor) => {
-          return {
-            gepp: dreanor.gepp,
-            lanbe: dreanor.lanbe,
-            tickSeries: [],
-          };
-        }),
-        cumulativeExecutionCountTickSeries: [],
-        relativeExecutionCountTickSeries: [],
-      };
-    });
+    platomityList.map<EstinantTickSeriesConfiguration>(
+      (mutableTransformState) => {
+        return {
+          mutableTransformState,
+          connectionList: getDreanorTuple(
+            mutableTransformState,
+          ).map<EstinantConnectionTickSeriesConfiguration>((dreanor) => {
+            return {
+              collectionId: dreanor.gepp,
+              stream: dreanor.lanbe,
+              tickSeries: [],
+            };
+          }),
+          cumulativeExecutionCountTickSeries: [],
+          relativeExecutionCountTickSeries: [],
+        };
+      },
+    );
 
   const timeConfiguration: TimeSeriesConfiguration = {
     timestampSeries: [],
@@ -720,25 +723,25 @@ export const digikikify = ({
 
     // TODO: make estinant input output gepps static so that the list of possible gepps/voictents is known from the start
     // eslint-disable-next-line @typescript-eslint/no-loop-func
-    [...tabilly.entries()].forEach(([gepp, voictent]) => {
+    [...tabilly.entries()].forEach(([collectionId, voictent]) => {
       const configuration: VoictentTickSeriesConfiguration =
         voictentTickSeriesConfigurationByVoictent.get(voictent) ?? {
-          gepp,
-          voictentLanbe: voictent.createCollectionStream(gepp),
-          voictentItemLanbe: voictent.createCollectionItemStream(gepp),
-          voictentTickSeries: Array.from({ length: tickCount }).map(() => 0),
-          voictentItemTickSeries: Array.from({ length: tickCount }).map(
+          collectionId,
+          voictentLanbe: voictent.createCollectionStream(collectionId),
+          voictentItemLanbe: voictent.createCollectionItemStream(collectionId),
+          collectionTickSeries: Array.from({ length: tickCount }).map(() => 0),
+          collectionItemTickSeries: Array.from({ length: tickCount }).map(
             () => 0,
           ),
         };
 
       voictentTickSeriesConfigurationByVoictent.set(voictent, configuration);
 
-      configuration.voictentTickSeries.push(
+      configuration.collectionTickSeries.push(
         configuration.voictentLanbe?.hasNext() ? 1 : 0,
       );
 
-      configuration.voictentItemTickSeries.push(
+      configuration.collectionItemTickSeries.push(
         configuration.voictentItemLanbe?.hasNext() ? 1 : 0,
       );
 
@@ -749,7 +752,7 @@ export const digikikify = ({
 
     estinantTickSeriesConfigurationList.forEach((configuration) => {
       configuration.connectionList.forEach((connection) => {
-        connection.tickSeries.push(connection.lanbe.hasNext() ? 1 : 0);
+        connection.tickSeries.push(connection.stream.hasNext() ? 1 : 0);
       });
     });
   };
@@ -762,11 +765,11 @@ export const digikikify = ({
         ] ?? 0;
 
       configuration.cumulativeExecutionCountTickSeries.push(
-        configuration.platomity.executionCount,
+        configuration.mutableTransformState.executionCount,
       );
 
       const relativeExecutionCount =
-        configuration.platomity.executionCount - lastExecutionCount;
+        configuration.mutableTransformState.executionCount - lastExecutionCount;
       configuration.relativeExecutionCountTickSeries.push(
         relativeExecutionCount,
       );
@@ -807,8 +810,8 @@ export const digikikify = ({
 
     platomityList.forEach((platomity) => {
       [
-        platomity.estinant.leftInputAppreffinge.gepp,
-        ...platomity.estinant.rightInputAppreffingeTuple.map(
+        platomity.programmedTransform.leftInputAppreffinge.gepp,
+        ...platomity.programmedTransform.rightInputAppreffingeTuple.map(
           (appreffinge) => appreffinge.gepp,
         ),
       ].forEach((gepp) => {
@@ -819,13 +822,15 @@ export const digikikify = ({
         platomity.mutableDependencySet.add(virok);
       });
 
-      platomity.estinant.outputAppreffinge.geppTuple.forEach((gepp) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const virok = virokByGepp.get(gepp)!;
-        platomity.dependentSet.add(virok);
-        virok.dependencySet.add(platomity);
-        virok.mutableDependencySet.add(platomity);
-      });
+      platomity.programmedTransform.outputAppreffinge.geppTuple.forEach(
+        (gepp) => {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const virok = virokByGepp.get(gepp)!;
+          platomity.dependentSet.add(virok);
+          virok.dependencySet.add(platomity);
+          virok.mutableDependencySet.add(platomity);
+        },
+      );
     });
 
     const runtimeVirokSet = new Set(
@@ -956,8 +961,9 @@ export const digikikify = ({
       });
 
       return {
-        estinantName: endState.platomity.estinant.name,
-        leftGepp: endState.platomity.estinant.leftInputAppreffinge.gepp,
+        estinantName: endState.platomity.programmedTransform.name,
+        leftGepp:
+          endState.platomity.programmedTransform.leftInputAppreffinge.gepp,
         cologySet: cologySetEndState,
       };
     });
@@ -978,8 +984,8 @@ export const digikikify = ({
   }
 
   const statistics: RuntimeStatistics = {
-    voictentList: [...voictentTickSeriesConfigurationByVoictent.values()],
-    estinantList: estinantTickSeriesConfigurationList,
+    collectionList: [...voictentTickSeriesConfigurationByVoictent.values()],
+    programmedTransformList: estinantTickSeriesConfigurationList,
     time: timeConfiguration,
   };
 

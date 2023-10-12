@@ -16,20 +16,21 @@ export const serializeRuntimeStatistics = (
   lineList.push('Collections:');
   lineList.push('');
 
-  statistics.voictentList
+  statistics.collectionList
     .map((configuration) => {
-      let voictentIndex = configuration.voictentTickSeries.findIndex(
+      let collectionIndex = configuration.collectionTickSeries.findIndex(
         (value) => value === 1,
       );
-      voictentIndex = voictentIndex === -1 ? Infinity : voictentIndex;
+      collectionIndex = collectionIndex === -1 ? Infinity : collectionIndex;
 
-      let voictentItemIndex = configuration.voictentItemTickSeries.findIndex(
-        (value) => value === 1,
-      );
-      voictentItemIndex =
-        voictentItemIndex === -1 ? Infinity : voictentItemIndex;
+      let collectionItemIndex =
+        configuration.collectionItemTickSeries.findIndex(
+          (value) => value === 1,
+        );
+      collectionItemIndex =
+        collectionItemIndex === -1 ? Infinity : collectionItemIndex;
 
-      const sortValue = Math.min(voictentIndex, voictentItemIndex);
+      const sortValue = Math.min(collectionIndex, collectionItemIndex);
 
       return {
         configuration,
@@ -38,23 +39,23 @@ export const serializeRuntimeStatistics = (
     })
     .sort((a, b) => a.sortValue - b.sortValue)
     .forEach(({ configuration: c }) => {
-      const serializedVoictentItemSeries = c.voictentItemTickSeries.map(
+      const serializedCollectionItemSeries = c.collectionItemTickSeries.map(
         (value) => (value === 1 ? TRIGGER_CHARACTER : IDLE_CHARACTER),
       );
-      const serializedVoictentSeries = c.voictentTickSeries.map((value) =>
+      const serializedCollectionSeries = c.collectionTickSeries.map((value) =>
         value === 1 ? TRIGGER_CHARACTER : IDLE_CHARACTER,
       );
 
-      lineList.push(`    ${c.gepp}`);
-      lineList.push(`      I: |${serializedVoictentItemSeries.join('')}|`);
-      lineList.push(`      C: |${serializedVoictentSeries.join('')}|`);
+      lineList.push(`    ${c.collectionId}`);
+      lineList.push(`      I: |${serializedCollectionItemSeries.join('')}|`);
+      lineList.push(`      C: |${serializedCollectionSeries.join('')}|`);
       lineList.push('');
     });
 
   lineList.push('Transforms:');
   lineList.push('');
 
-  statistics.estinantList
+  statistics.programmedTransformList
     .map((configuration, index) => {
       let sortValue = configuration.relativeExecutionCountTickSeries.findIndex(
         (value) => value > 0,
@@ -69,20 +70,22 @@ export const serializeRuntimeStatistics = (
     })
     .sort((a, b) => a.sortValue - b.sortValue)
     .forEach(({ configuration, index }) => {
-      const name = configuration.platomity.estinant.name ?? `${index}`;
+      const name =
+        configuration.mutableTransformState.programmedTransform.name ??
+        `${index}`;
 
       lineList.push(`  ${name}`);
 
       configuration.connectionList.forEach((connection) => {
         const connectionType =
-          connection.lanbe.typeName === StreamTypeName.CollectionStream
+          connection.stream.typeName === StreamTypeName.CollectionStream
             ? 'C'
             : 'I';
         const serializedSeries = connection.tickSeries.map((value) =>
           value === 1 ? TRIGGER_CHARACTER : IDLE_CHARACTER,
         );
 
-        lineList.push(`    ${connection.gepp}`);
+        lineList.push(`    ${connection.collectionId}`);
         lineList.push(
           `      ${connectionType}: |${serializedSeries.join('')}|`,
         );

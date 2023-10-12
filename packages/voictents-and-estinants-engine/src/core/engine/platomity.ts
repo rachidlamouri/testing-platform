@@ -16,7 +16,7 @@ import { GenericVoictent2 } from '../types/voictent/voictent2';
  */
 export type Platomity2 = {
   version: 2;
-  estinant: GenericEstinant2;
+  programmedTransform: GenericEstinant2;
   leftDreanor: LeftDreanor;
   rightDreanorTuple: RightDreanorTuple;
   outputGeppSet: GeppSet;
