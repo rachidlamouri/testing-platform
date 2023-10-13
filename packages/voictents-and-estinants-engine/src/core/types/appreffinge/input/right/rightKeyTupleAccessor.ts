@@ -11,16 +11,18 @@ import { GenericRightInputItemTupleStreamConnectionMetatype } from '../../../str
  *
  * @readableName RightKeyTupleAccessor
  */
-export type Framation = (leftIndexedHubblepup: GenericIndexedItem) => IdTuple;
+export type RightKeyTupleAccessor = (
+  leftIndexedItem: GenericIndexedItem,
+) => IdTuple;
 
-export type Framation3<
-  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
-  TRightInputVicken extends GenericRightInputItemTupleStreamConnectionMetatype,
+export type RightKeyTupleAccessor3<
+  TLeftInputStreamConnectionMetatype extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputStreamConnectionMetatype extends GenericRightInputItemTupleStreamConnectionMetatype,
 > = (
-  leftTropoignantInput: TLeftInputVicken['coreTransformInput'],
-) => TRightInputVicken['idTuple'];
+  leftCoreTransformInput: TLeftInputStreamConnectionMetatype['coreTransformInput'],
+) => TRightInputStreamConnectionMetatype['idTuple'];
 
-export type GenericFramation3 = Framation3<
+export type GenericRightKeyTupleAccessor3 = RightKeyTupleAccessor3<
   GenericLeftInputStreamConnectionMetatype,
   GenericRightInputItemTupleStreamConnectionMetatype
 >;

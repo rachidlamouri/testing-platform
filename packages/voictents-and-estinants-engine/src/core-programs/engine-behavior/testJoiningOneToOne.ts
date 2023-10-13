@@ -36,9 +36,9 @@ const joinCollections: ProgrammedTransform2<
   rightInputStreamConfigurationTuple: [
     {
       collectionId: 'voictent-2',
-      isWibiz: false,
-      framate: (leftInput) => [leftInput.indexByName.listIndex],
-      croard: (rightInput) => rightInput.indexByName.listIndex,
+      isCollectionStream: false,
+      getRightKeyTuple: (leftInput) => [leftInput.indexByName.listIndex],
+      getRightKey: (rightInput) => rightInput.indexByName.listIndex,
     },
   ],
   outputStreamConfiguration: {

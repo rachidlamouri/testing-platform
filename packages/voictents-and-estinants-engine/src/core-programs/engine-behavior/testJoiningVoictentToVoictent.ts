@@ -36,9 +36,9 @@ const gatherCollection: ProgrammedTransform2<
   rightInputStreamConfigurationTuple: [
     {
       collectionId: 'voictent-2',
-      isWibiz: true,
-      framate: undefined,
-      croard: undefined,
+      isCollectionStream: true,
+      getRightKeyTuple: undefined,
+      getRightKey: undefined,
     },
   ],
   outputStreamConfiguration: {

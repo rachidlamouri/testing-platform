@@ -1,5 +1,5 @@
 import { GenericLeftInputAppreffinge } from './leftInputAppreffinge';
-import { GenericRightInputAppreffinge } from './right/rightInputAppreffinge';
+import { GenericRightInputStreamConfiguration } from './right/rightInputStreamConfiguration';
 
 /**
  * Determines how to stream a collection into one input of a transform.
@@ -8,4 +8,4 @@ import { GenericRightInputAppreffinge } from './right/rightInputAppreffinge';
  */
 export type GenericInputAppreffinge =
   | GenericLeftInputAppreffinge
-  | GenericRightInputAppreffinge;
+  | GenericRightInputStreamConfiguration;

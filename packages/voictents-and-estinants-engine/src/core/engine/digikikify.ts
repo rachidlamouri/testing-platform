@@ -40,7 +40,7 @@ import { Tabilly } from './tabilly';
 import { GenericCollection2 } from '../types/collection/collection2';
 import { GenericInputAppreffinge } from '../types/appreffinge/input/inputAppreffinge';
 import { Tuple } from '../../package-agnostic-utilities/type/tuple';
-import { getIsRightInputHubblepupTupleAppreffinge } from '../types/appreffinge/input/right/rightInputAppreffinge';
+import { getIsRightInputItemTupleStreamConfiguration } from '../types/appreffinge/input/right/rightInputStreamConfiguration';
 import { ReferenceTypeName } from '../types/stream/referenceTypeName';
 import { assertIsError } from '../../package-agnostic-utilities/error/assertIsError';
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
@@ -396,12 +396,7 @@ export const digikikify = ({
       `Unable to find voictent for gepp: ${appreffinge.collectionId}`,
     );
 
-    const isCollectionStream =
-      'isCollectionStream' in appreffinge
-        ? appreffinge.isCollectionStream
-        : appreffinge.isWibiz;
-
-    const lanbe = isCollectionStream
+    const lanbe = appreffinge.isCollectionStream
       ? voictent.createCollectionStream(estinant.name)
       : voictent.createCollectionItemStream(estinant.name);
 
@@ -426,7 +421,9 @@ export const digikikify = ({
     const rightDreanorTuple =
       rightInputStreamConfigurationTuple.map<RightDreanor>(
         (rightInputAppreffinge) => {
-          if (getIsRightInputHubblepupTupleAppreffinge(rightInputAppreffinge)) {
+          if (
+            getIsRightInputItemTupleStreamConfiguration(rightInputAppreffinge)
+          ) {
             return {
               typeName: DreanorTypeName.RightVoictentItem2Dreanor,
               gepp: rightInputAppreffinge.collectionId,
@@ -434,8 +431,8 @@ export const digikikify = ({
                 programmedTransform,
                 rightInputAppreffinge,
               ) as GenericCollectionItemStream2,
-              framate: rightInputAppreffinge.framate,
-              croard: rightInputAppreffinge.croard,
+              framate: rightInputAppreffinge.getRightKeyTuple,
+              croard: rightInputAppreffinge.getRightKey,
               prected: new Prected(),
             } satisfies RightVoictentItem2Dreanor;
           }

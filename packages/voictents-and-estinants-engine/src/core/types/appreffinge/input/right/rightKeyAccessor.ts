@@ -10,15 +10,15 @@ import { GenericRightInputItemTupleStreamConnectionMetatype } from '../../../str
  *
  * @readableName KeyAccessor
  */
-export type Croarder = (
-  rightIndexedHubblepup: GenericIndexedItem,
+export type RightKeyAccessor = (
+  rightIndexedItem: GenericIndexedItem,
 ) => DeprecatedId;
 
-export type Croarder3<
-  TRightVicken extends GenericRightInputItemTupleStreamConnectionMetatype,
+export type RightKeyAccessor3<
+  TRightStreamConnectionMetatype extends GenericRightInputItemTupleStreamConnectionMetatype,
 > = (
-  rightTropoignantInputElement: TRightVicken['coreTransformInput'][number],
-) => TRightVicken['idTupleOption'];
+  rightCoreTransformInputElement: TRightStreamConnectionMetatype['coreTransformInput'][number],
+) => TRightStreamConnectionMetatype['idTupleOption'];
 
-export type GenericCroarder3 =
-  Croarder3<GenericRightInputItemTupleStreamConnectionMetatype>;
+export type GenericRightKeyAccessor3 =
+  RightKeyAccessor3<GenericRightInputItemTupleStreamConnectionMetatype>;

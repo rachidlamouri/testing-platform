@@ -42,9 +42,9 @@ const joinCollectionsByValue: ProgrammedTransform2<
   rightInputStreamConfigurationTuple: [
     {
       collectionId: 'input-2',
-      isWibiz: false,
-      framate: (input1) => [input1.item],
-      croard: (input2) => input2.item,
+      isCollectionStream: false,
+      getRightKeyTuple: (input1) => [input1.item],
+      getRightKey: (input2) => input2.item,
     },
   ],
   outputStreamConfiguration: {

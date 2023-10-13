@@ -1,12 +1,12 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import {
-  Croarder,
-  GenericCroarder3,
-} from '../../types/appreffinge/input/right/croarder';
+  RightKeyAccessor,
+  GenericRightKeyAccessor3,
+} from '../../types/appreffinge/input/right/rightKeyAccessor';
 import {
-  Framation,
-  GenericFramation3,
-} from '../../types/appreffinge/input/right/framation';
+  RightKeyTupleAccessor,
+  GenericRightKeyTupleAccessor3,
+} from '../../types/appreffinge/input/right/rightKeyTupleAccessor';
 import { CollectionId } from '../../types/collection/collectionId';
 import {
   GenericCollectionItemStream2,
@@ -45,8 +45,8 @@ export type RightVoictentItem2Dreanor = {
   gepp: CollectionId;
   lanbe: GenericCollectionItemStream2;
   prected: Prected;
-  framate: Framation | GenericFramation3;
-  croard: Croarder | GenericCroarder3;
+  framate: RightKeyTupleAccessor | GenericRightKeyTupleAccessor3;
+  croard: RightKeyAccessor | GenericRightKeyAccessor3;
 };
 
 export type RightDreanor = RightVoictentDreanor | RightVoictentItem2Dreanor;

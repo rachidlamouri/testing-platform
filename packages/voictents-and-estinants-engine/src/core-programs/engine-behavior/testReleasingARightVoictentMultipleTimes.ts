@@ -76,9 +76,9 @@ const join1ToAllOf3: ProgrammedTransform2<
   rightInputStreamConfigurationTuple: [
     {
       collectionId: 'voictent-3',
-      isWibiz: true,
-      croard: undefined,
-      framate: undefined,
+      isCollectionStream: true,
+      getRightKey: undefined,
+      getRightKeyTuple: undefined,
     },
   ],
   outputStreamConfiguration: {

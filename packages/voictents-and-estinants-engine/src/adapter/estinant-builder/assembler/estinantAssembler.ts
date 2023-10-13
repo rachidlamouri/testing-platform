@@ -1,4 +1,4 @@
-import { RightInputAppreffinge } from '../../../core/types/appreffinge/input/right/rightInputAppreffinge';
+import { RightInputStreamConfiguration } from '../../../core/types/appreffinge/input/right/rightInputStreamConfiguration';
 import {
   ProgrammedTransform2,
   GenericProgrammedTransform2,
@@ -130,10 +130,10 @@ export const buildEstinantAssembler = <
           if (rightInputContext.isWibiz) {
             return {
               collectionId: rightInputContext.gepp,
-              isWibiz: rightInputContext.isWibiz,
-              framate: undefined,
-              croard: undefined,
-            } satisfies RightInputAppreffinge<
+              isCollectionStream: rightInputContext.isWibiz,
+              getRightKeyTuple: undefined,
+              getRightKey: undefined,
+            } satisfies RightInputStreamConfiguration<
               GenericLeftInputStreamConnectionMetatype,
               GenericRightInputCollectionStreamConnectionMetatype
             >;
@@ -141,8 +141,8 @@ export const buildEstinantAssembler = <
 
           return {
             collectionId: rightInputContext.gepp,
-            isWibiz: rightInputContext.isWibiz,
-            framate: (leftInput): IdTuple => {
+            isCollectionStream: rightInputContext.isWibiz,
+            getRightKeyTuple: (leftInput): IdTuple => {
               let adaptedLeftInput: unknown;
               if (leftInputContext.isWibiz || leftInputContext.version === 2) {
                 adaptedLeftInput = leftInput;
@@ -152,7 +152,7 @@ export const buildEstinantAssembler = <
 
               return rightInputContext.framate(adaptedLeftInput) as IdTuple;
             },
-            croard: (indexedRightInput): DeprecatedId => {
+            getRightKey: (indexedRightInput): DeprecatedId => {
               let adaptedRightInput: unknown;
               if (
                 rightInputContext.isWibiz ||
@@ -165,7 +165,7 @@ export const buildEstinantAssembler = <
 
               return rightInputContext.croard(adaptedRightInput);
             },
-          } satisfies RightInputAppreffinge<
+          } satisfies RightInputStreamConfiguration<
             GenericLeftInputStreamConnectionMetatype,
             GenericRightInputItemTupleStreamConnectionMetatype
           >;
