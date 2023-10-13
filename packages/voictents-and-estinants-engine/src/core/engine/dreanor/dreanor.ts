@@ -2,11 +2,11 @@ import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import {
   RightKeyAccessor,
   GenericRightKeyAccessor3,
-} from '../../types/appreffinge/input/right/rightKeyAccessor';
+} from '../../types/stream-configuration/input/right/rightKeyAccessor';
 import {
   RightKeyTupleAccessor,
   GenericRightKeyTupleAccessor3,
-} from '../../types/appreffinge/input/right/rightKeyTupleAccessor';
+} from '../../types/stream-configuration/input/right/rightKeyTupleAccessor';
 import { CollectionId } from '../../types/collection/collectionId';
 import {
   GenericCollectionItemStream2,

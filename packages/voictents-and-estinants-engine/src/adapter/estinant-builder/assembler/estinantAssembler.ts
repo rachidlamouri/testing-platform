@@ -1,4 +1,4 @@
-import { RightInputStreamConfiguration } from '../../../core/types/appreffinge/input/right/rightInputStreamConfiguration';
+import { RightInputStreamConfiguration } from '../../../core/types/stream-configuration/input/right/rightInputStreamConfiguration';
 import {
   ProgrammedTransform2,
   GenericProgrammedTransform2,
