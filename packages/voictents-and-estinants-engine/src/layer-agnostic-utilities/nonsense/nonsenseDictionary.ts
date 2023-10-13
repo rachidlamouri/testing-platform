@@ -134,13 +134,13 @@ export const nonsenseDictionary = new Map(
       },
       {
         word: 'croarder',
-        suggestion: 'key-accessor',
+        suggestion: 'right-key-accessor',
         definition:
-          'A function that gets the key for an item. The engine does not assume the shape of any item, so this information has to be supplied by the programmer. This is used by the engine to associate items from different collections when a transform has multiple inputs.',
+          'A function that gets the key for a right input item. The engine does not assume the shape of any item, so this information has to be supplied by the programmer. This is used by the engine to associate items from different collections when a transform has multiple inputs.',
       },
       {
         word: 'croard',
-        suggestion: 'get-key',
+        suggestion: 'get-right-key',
         definition:
           'The verb form of "croarder" mainly used for function names.',
       },
