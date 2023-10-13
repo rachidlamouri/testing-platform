@@ -144,14 +144,26 @@ const stageAllChanges = (): void => {
 
 // eslint-disable-next-line no-constant-condition
 while (true) {
+  // runCommand({
+  //   title: 'Dry Run',
+  //   command: [
+  //     'npx',
+  //     'ts-node',
+  //     'packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsense/renameNonsense.ts',
+  //   ],
+  //   errorCode: 1,
+  // });
+
   runCommand({
-    title: 'Dry Run',
+    title: 'Typecheck',
     command: [
       'npx',
-      'ts-node',
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programs/rename-nonsense/renameNonsense.ts',
+      'tsc',
+      '--pretty',
+      '-p',
+      'packages/voictents-and-estinants-engine',
     ],
-    errorCode: 1,
+    errorCode: 39,
   });
 
   const progressLogBefore = progressLog.read();
