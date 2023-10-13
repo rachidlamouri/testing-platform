@@ -10,12 +10,25 @@ import { AbstractSerializableStreamMetatype } from '../../layer-agnostic-utiliti
 import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
-type Voictent1Voque = StandardInMemoryStreamMetatype<'voictent-1', number>;
-type Voictent2Voque = StandardInMemoryStreamMetatype<'voictent-2', string>;
-type Voictent3Voque = StandardInMemoryStreamMetatype<'voictent-3', string>;
-type Voictent4Voque = StandardInMemoryStreamMetatype<'voictent-4', string>;
+type Collection1StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-1',
+  number
+>;
+type Collection2StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-2',
+  string
+>;
+type Collection3StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-3',
+  string
+>;
+type Collection4StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-4',
+  string
+>;
 
-type SerializedVoque = AbstractSerializableStreamMetatype<'serialized'>;
+type SerializedStreamMetatype =
+  AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-releasing-a-right-voictent-multiple-timesy',
@@ -28,9 +41,9 @@ const SKIP_INDEX = 2;
  * Skipping an item causes the third collection to stop accumulating twice.
  */
 const forwardFrom2To3AndSkipAValue: ProgrammedTransform2<
-  LeftInputItemStreamConnectionMetatype<Voictent2Voque>,
+  LeftInputItemStreamConnectionMetatype<Collection2StreamMetatype>,
   [],
-  OutputStreamConnectionMetatype<[Voictent3Voque]>
+  OutputStreamConnectionMetatype<[Collection3StreamMetatype]>
 > = {
   version: 2,
   name: 'forwardFrom2To3AndSkipAValue',
@@ -44,7 +57,9 @@ const forwardFrom2To3AndSkipAValue: ProgrammedTransform2<
   },
   transform(
     input,
-  ): OutputStreamConnectionMetatype<[Voictent3Voque]>['coreTransformOutput'] {
+  ): OutputStreamConnectionMetatype<
+    [Collection3StreamMetatype]
+  >['coreTransformOutput'] {
     if (input.indexByName.listIndex === SKIP_INDEX) {
       return {
         'voictent-3': [],
@@ -63,9 +78,9 @@ const forwardFrom2To3AndSkipAValue: ProgrammedTransform2<
  * each item in collection 1
  */
 const join1ToAllOf3: ProgrammedTransform2<
-  LeftInputItemStreamConnectionMetatype<Voictent1Voque>,
-  [RightInputCollectionStreamConnectionMetatype<Voictent3Voque>],
-  OutputStreamConnectionMetatype<[Voictent4Voque]>
+  LeftInputItemStreamConnectionMetatype<Collection1StreamMetatype>,
+  [RightInputCollectionStreamConnectionMetatype<Collection3StreamMetatype>],
+  OutputStreamConnectionMetatype<[Collection4StreamMetatype]>
 > = {
   version: 2,
   name: 'join1ToAllOf3',
@@ -87,7 +102,9 @@ const join1ToAllOf3: ProgrammedTransform2<
   transform(
     leftInput,
     rightInput,
-  ): OutputStreamConnectionMetatype<[Voictent4Voque]>['coreTransformOutput'] {
+  ): OutputStreamConnectionMetatype<
+    [Collection4StreamMetatype]
+  >['coreTransformOutput'] {
     const serializedRightInput = `[${rightInput.join(', ')}]`;
 
     const output = `${leftInput.item}-${serializedRightInput}`;
@@ -108,23 +125,23 @@ const join1ToAllOf3: ProgrammedTransform2<
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryCollection<Voictent1Voque>({
+    new InMemoryCollection<Collection1StreamMetatype>({
       collectionId: 'voictent-1',
       initialItemEggTuple: [1, 2],
     }),
-    new InMemoryCollection<Voictent2Voque>({
+    new InMemoryCollection<Collection2StreamMetatype>({
       collectionId: 'voictent-2',
       initialItemEggTuple: ['a', 'b', 'SKIP', 'c', 'd'],
     }),
-    new InMemoryCollection<Voictent3Voque>({
+    new InMemoryCollection<Collection3StreamMetatype>({
       collectionId: 'voictent-3',
       initialItemEggTuple: [],
     }),
-    new InMemoryCollection<Voictent4Voque>({
+    new InMemoryCollection<Collection4StreamMetatype>({
       collectionId: 'voictent-4',
       initialItemEggTuple: [],
     }),
-    new SerializableCollection<SerializedVoque>({
+    new SerializableCollection<SerializedStreamMetatype>({
       collectionId: 'serialized',
       programFileCache,
       initialItemEggTuple: [],
@@ -134,7 +151,10 @@ runEngine2({
     forwardFrom2To3AndSkipAValue,
     join1ToAllOf3,
 
-    buildAddMetadataForSerialization<Voictent4Voque, SerializedVoque>({
+    buildAddMetadataForSerialization<
+      Collection4StreamMetatype,
+      SerializedStreamMetatype
+    >({
       inputCollectionId: 'voictent-4',
       outputCollectionId: 'serialized',
     }),

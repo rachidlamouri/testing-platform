@@ -15,13 +15,14 @@ const programFileCache = new ProgramFileCache({
   namespace: 'test-untriggered-cology-error',
 });
 
-type Input1Voque = StandardInMemoryStreamMetatype<'input-1', number>;
-type Input2Voque = StandardInMemoryStreamMetatype<'input-2', number>;
-type OutputVoque = StandardInMemoryStreamMetatype<
+type Input1StreamMetatype = StandardInMemoryStreamMetatype<'input-1', number>;
+type Input2StreamMetatype = StandardInMemoryStreamMetatype<'input-2', number>;
+type OutputStreamMetatype = StandardInMemoryStreamMetatype<
   'output',
   { leftInput: number; rightInput: number }
 >;
-type EngineErrorVoque = SerializableErrorStreamMetatype<'engine-error'>;
+type EngineErrorStreamMetatype =
+  SerializableErrorStreamMetatype<'engine-error'>;
 
 /**
  * Joins items from a left and right collection by the value of each item. In
@@ -29,9 +30,9 @@ type EngineErrorVoque = SerializableErrorStreamMetatype<'engine-error'>;
  * so this transform won't trigger for every left input
  */
 const joinCollectionsByValue: ProgrammedTransform2<
-  LeftInputItemStreamConnectionMetatype<Input1Voque>,
-  [RightInputItemTupleStreamConnectionMetatype<Input2Voque, [number]>],
-  OutputStreamConnectionMetatype<[OutputVoque]>
+  LeftInputItemStreamConnectionMetatype<Input1StreamMetatype>,
+  [RightInputItemTupleStreamConnectionMetatype<Input2StreamMetatype, [number]>],
+  OutputStreamConnectionMetatype<[OutputStreamMetatype]>
 > = {
   version: 2,
   name: 'joinCollections',
@@ -75,22 +76,22 @@ const joinCollectionsByValue: ProgrammedTransform2<
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryCollection<Input1Voque>({
+    new InMemoryCollection<Input1StreamMetatype>({
       collectionId: 'input-1',
       initialItemEggTuple: [1, 2, 3],
     }),
-    new InMemoryCollection<Input2Voque>({
+    new InMemoryCollection<Input2StreamMetatype>({
       collectionId: 'input-2',
       initialItemEggTuple: [
         // this list intentionally has less items than required to properly join the collections
         2,
       ],
     }),
-    new InMemoryCollection<OutputVoque>({
+    new InMemoryCollection<OutputStreamMetatype>({
       collectionId: 'output',
       initialItemEggTuple: [],
     }),
-    new SerializableErrorCollection<EngineErrorVoque>({
+    new SerializableErrorCollection<EngineErrorStreamMetatype>({
       collectionId: 'engine-error',
       initialItemEggTuple: [],
       programFileCache,

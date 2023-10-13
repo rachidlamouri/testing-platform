@@ -19,12 +19,12 @@ printf "\n"
 bash packages/voictents-and-estinants-engine/src/core-programs/testBuildAddMetadataForSerialization.test.sh
 printf "\n"
 
-## test-estinant-error
-bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testEstinantError.test.sh
+## test-programmed-transform-error
+bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testProgrammedTransformError.test.sh
 printf "\n"
 
-## test-voictent-input
-bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testVoictentInput.test.sh
+## test-collection-input
+bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testCollectionInput.test.sh
 printf "\n"
 
 ## test-joining-one-to-one
@@ -35,24 +35,24 @@ printf "\n"
 bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToMany.test.sh
 printf "\n"
 
-## test-joining-one-to-voictent
-bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToVoictent.test.sh
+## test-joining-one-to-collection
+bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToCollection.test.sh
 printf "\n"
 
-## test-joining-voictent-to-voictent
-bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningVoictentToVoictent.test.sh
+## test-joining-collection-to-collection
+bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningCollectionToCollection.test.sh
 printf "\n"
 
-## test-releasing-a-left-voictent-multiple-times
-bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingALeftVoictentMultipleTimes.test.sh
+## test-releasing-a-left-collection-multiple-times
+bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingALeftCollectionMultipleTimes.test.sh
 printf "\n"
 
-## test-releasing-a-right-voictent-multiple-times
-bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingARightVoictentMultipleTimes.test.sh
+## test-releasing-a-right-collection-multiple-times
+bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingARightCollectionMultipleTimes.test.sh
 printf "\n"
 
-## test-untriggered-cology-error
-bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testUntriggeredCologyError.test.sh
+## test-untriggered-transform-input-key-group-error
+bash packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testUntriggeredTransformInputKeyGroupError.test.sh
 printf "\n"
 
 # Core Programs

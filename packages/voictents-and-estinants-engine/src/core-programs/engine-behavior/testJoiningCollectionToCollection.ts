@@ -1,5 +1,5 @@
 import { ProgrammedTransform2 } from '../../core/types/programmed-transform/programmedTransform';
-import { LeftInputItemStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
+import { LeftInputCollectionStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import { RightInputCollectionStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/rightInputStreamConnectionMetatype';
 import { runEngine2 } from '../../core/engine/runEngine';
@@ -10,28 +10,38 @@ import { AbstractSerializableStreamMetatype } from '../../layer-agnostic-utiliti
 import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
-type Voictent1Voque = StandardInMemoryStreamMetatype<'voictent-1', number>;
-type Voictent2Voque = StandardInMemoryStreamMetatype<'voictent-2', string>;
-type Voictent3Voque = StandardInMemoryStreamMetatype<'voictent-3', string>;
-type SerializedVoque = AbstractSerializableStreamMetatype<'serialized'>;
+type Collection1StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-1',
+  number
+>;
+type Collection2StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-2',
+  string
+>;
+type Collection3StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-3',
+  string
+>;
+type SerializedStreamMetatype =
+  AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
-  namespace: 'test-joining-one-to-voictent',
+  namespace: 'test-joining-voictent-to-voictent',
 });
 
 /**
- * Joins each item in the left collection to the entire right collection
+ * Joins the entire left collection to the entire right collection
  */
 const gatherCollection: ProgrammedTransform2<
-  LeftInputItemStreamConnectionMetatype<Voictent1Voque>,
-  [RightInputCollectionStreamConnectionMetatype<Voictent2Voque>],
-  OutputStreamConnectionMetatype<[Voictent3Voque]>
+  LeftInputCollectionStreamConnectionMetatype<Collection1StreamMetatype>,
+  [RightInputCollectionStreamConnectionMetatype<Collection2StreamMetatype>],
+  OutputStreamConnectionMetatype<[Collection3StreamMetatype]>
 > = {
   version: 2,
   name: 'gatherCollection',
   leftInputStreamConfiguration: {
     collectionId: 'voictent-1',
-    isCollectionStream: false,
+    isCollectionStream: true,
   },
   rightInputStreamConfigurationTuple: [
     {
@@ -44,10 +54,16 @@ const gatherCollection: ProgrammedTransform2<
   outputStreamConfiguration: {
     collectionIdTuple: ['voictent-3'],
   },
-  transform: (leftInput, rightInput) => {
+  transform: (
+    leftInput,
+    rightInput,
+  ): OutputStreamConnectionMetatype<
+    [Collection3StreamMetatype]
+  >['coreTransformOutput'] => {
+    const serializedLeftInput = `[${leftInput.join(', ')}]`;
     const serializedRightInput = `[${rightInput.join(', ')}]`;
 
-    const output = `${leftInput.item}-${serializedRightInput}`;
+    const output = `${serializedLeftInput}-${serializedRightInput}`;
 
     return {
       'voictent-3': [output],
@@ -56,29 +72,27 @@ const gatherCollection: ProgrammedTransform2<
 };
 
 /**
- * Tests joining each item in the left collection to the entire right collection
- *
- * @todo debug the program snapshot for this one. The output collection appears to be out of the expected order (1, 2). Which is ok, but I want to know why.
+ * Tests a transform that consumes two entire collections
  *
  * @canonicalComment
  *
- * @readableName testJoiningOneItemToCollection
+ * @readableName testJoiningCollectionToCollection
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryCollection<Voictent1Voque>({
+    new InMemoryCollection<Collection1StreamMetatype>({
       collectionId: 'voictent-1',
       initialItemEggTuple: [1, 2],
     }),
-    new InMemoryCollection<Voictent2Voque>({
+    new InMemoryCollection<Collection2StreamMetatype>({
       collectionId: 'voictent-2',
       initialItemEggTuple: ['a', 'b', 'c', 'd'],
     }),
-    new InMemoryCollection<Voictent3Voque>({
+    new InMemoryCollection<Collection3StreamMetatype>({
       collectionId: 'voictent-3',
       initialItemEggTuple: [],
     }),
-    new SerializableCollection<SerializedVoque>({
+    new SerializableCollection<SerializedStreamMetatype>({
       collectionId: 'serialized',
       programFileCache,
       initialItemEggTuple: [],
@@ -87,7 +101,10 @@ runEngine2({
   programmedTransformTuple: [
     gatherCollection,
 
-    buildAddMetadataForSerialization<Voictent3Voque, SerializedVoque>({
+    buildAddMetadataForSerialization<
+      Collection3StreamMetatype,
+      SerializedStreamMetatype
+    >({
       inputCollectionId: 'voictent-3',
       outputCollectionId: 'serialized',
     }),

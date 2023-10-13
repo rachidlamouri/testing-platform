@@ -10,8 +10,12 @@ import {
   SerializableErrorStreamMetatype,
 } from '../../layer-agnostic-utilities/collection/serializableErrorCollection';
 
-type InputErrorVoque = StandardInMemoryStreamMetatype<'input-error', Error>;
-type EngineErrorVoque = SerializableErrorStreamMetatype<'engine-error'>;
+type InputErrorStreamMetatype = StandardInMemoryStreamMetatype<
+  'input-error',
+  Error
+>;
+type EngineErrorStreamMetatype =
+  SerializableErrorStreamMetatype<'engine-error'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-estinant-error',
@@ -19,7 +23,7 @@ const programFileCache = new ProgramFileCache({
 
 /** Throws the input error */
 const throwError: ProgrammedTransform2<
-  LeftInputItemStreamConnectionMetatype<InputErrorVoque>,
+  LeftInputItemStreamConnectionMetatype<InputErrorStreamMetatype>,
   [],
   OutputStreamConnectionMetatype<[]>
 > = {
@@ -49,11 +53,11 @@ const throwError: ProgrammedTransform2<
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryCollection<InputErrorVoque>({
+    new InMemoryCollection<InputErrorStreamMetatype>({
       collectionId: 'input-error',
       initialItemEggTuple: [new Error('Custom error')],
     }),
-    new SerializableErrorCollection<EngineErrorVoque>({
+    new SerializableErrorCollection<EngineErrorStreamMetatype>({
       collectionId: 'engine-error',
       initialItemEggTuple: [],
       programFileCache,

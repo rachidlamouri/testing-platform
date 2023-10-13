@@ -10,16 +10,23 @@ import { AbstractSerializableStreamMetatype } from '../../layer-agnostic-utiliti
 import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
-type Voictent1Voque = StandardInMemoryStreamMetatype<
+type Collection1StreamMetatype = StandardInMemoryStreamMetatype<
   'voictent-1',
   {
     value: number;
     joinIndexList: number[];
   }
 >;
-type Voictent2Voque = StandardInMemoryStreamMetatype<'voictent-2', string>;
-type Voictent3Voque = StandardInMemoryStreamMetatype<'voictent-3', string>;
-type SerializedVoque = AbstractSerializableStreamMetatype<'serialized'>;
+type Collection2StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-2',
+  string
+>;
+type Collection3StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-3',
+  string
+>;
+type SerializedStreamMetatype =
+  AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-joining-one-to-many',
@@ -30,9 +37,14 @@ const programFileCache = new ProgramFileCache({
  * collection
  */
 const joinCollections: ProgrammedTransform2<
-  LeftInputItemStreamConnectionMetatype<Voictent1Voque>,
-  [RightInputItemTupleStreamConnectionMetatype<Voictent2Voque, number[]>],
-  OutputStreamConnectionMetatype<[Voictent3Voque]>
+  LeftInputItemStreamConnectionMetatype<Collection1StreamMetatype>,
+  [
+    RightInputItemTupleStreamConnectionMetatype<
+      Collection2StreamMetatype,
+      number[]
+    >,
+  ],
+  OutputStreamConnectionMetatype<[Collection3StreamMetatype]>
 > = {
   version: 2,
   name: 'joinCollections',
@@ -71,7 +83,7 @@ const joinCollections: ProgrammedTransform2<
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryCollection<Voictent1Voque>({
+    new InMemoryCollection<Collection1StreamMetatype>({
       collectionId: 'voictent-1',
       initialItemEggTuple: [
         {
@@ -84,15 +96,15 @@ runEngine2({
         },
       ],
     }),
-    new InMemoryCollection<Voictent2Voque>({
+    new InMemoryCollection<Collection2StreamMetatype>({
       collectionId: 'voictent-2',
       initialItemEggTuple: ['a', 'b', 'c', 'd'],
     }),
-    new InMemoryCollection<Voictent3Voque>({
+    new InMemoryCollection<Collection3StreamMetatype>({
       collectionId: 'voictent-3',
       initialItemEggTuple: [],
     }),
-    new SerializableCollection<SerializedVoque>({
+    new SerializableCollection<SerializedStreamMetatype>({
       collectionId: 'serialized',
       programFileCache,
       initialItemEggTuple: [],
@@ -101,7 +113,10 @@ runEngine2({
   programmedTransformTuple: [
     joinCollections,
 
-    buildAddMetadataForSerialization<Voictent3Voque, SerializedVoque>({
+    buildAddMetadataForSerialization<
+      Collection3StreamMetatype,
+      SerializedStreamMetatype
+    >({
       inputCollectionId: 'voictent-3',
       outputCollectionId: 'serialized',
     }),

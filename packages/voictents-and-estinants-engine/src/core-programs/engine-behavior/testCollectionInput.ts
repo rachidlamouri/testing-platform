@@ -9,9 +9,16 @@ import { AbstractSerializableStreamMetatype } from '../../layer-agnostic-utiliti
 import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
-type Voictent1Voque = StandardInMemoryStreamMetatype<'voictent-1', string>;
-type Voictent2Voque = StandardInMemoryStreamMetatype<'voictent-2', string[]>;
-type SerializedVoque = AbstractSerializableStreamMetatype<'serialized'>;
+type Collection1StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-1',
+  string
+>;
+type Collection2StreamMetatype = StandardInMemoryStreamMetatype<
+  'voictent-2',
+  string[]
+>;
+type SerializedStreamMetatype =
+  AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-voictent-input',
@@ -21,9 +28,9 @@ const programFileCache = new ProgramFileCache({
  * Forwards collection 1 as a whole to collection 2.
  */
 const gatherCollection: ProgrammedTransform2<
-  LeftInputCollectionStreamConnectionMetatype<Voictent1Voque>,
+  LeftInputCollectionStreamConnectionMetatype<Collection1StreamMetatype>,
   [],
-  OutputStreamConnectionMetatype<[Voictent2Voque]>
+  OutputStreamConnectionMetatype<[Collection2StreamMetatype]>
 > = {
   version: 2,
   name: 'gatherCollection',
@@ -38,7 +45,7 @@ const gatherCollection: ProgrammedTransform2<
   transform: (
     input,
   ): OutputStreamConnectionMetatype<
-    [Voictent2Voque]
+    [Collection2StreamMetatype]
   >['coreTransformOutput'] => {
     return {
       'voictent-2': [input],
@@ -55,15 +62,15 @@ const gatherCollection: ProgrammedTransform2<
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryCollection<Voictent1Voque>({
+    new InMemoryCollection<Collection1StreamMetatype>({
       collectionId: 'voictent-1',
       initialItemEggTuple: ['a', 'b', 'c', 'd'],
     }),
-    new InMemoryCollection<Voictent2Voque>({
+    new InMemoryCollection<Collection2StreamMetatype>({
       collectionId: 'voictent-2',
       initialItemEggTuple: [],
     }),
-    new SerializableCollection<SerializedVoque>({
+    new SerializableCollection<SerializedStreamMetatype>({
       collectionId: 'serialized',
       programFileCache,
       initialItemEggTuple: [],
@@ -72,7 +79,10 @@ runEngine2({
   programmedTransformTuple: [
     gatherCollection,
 
-    buildAddMetadataForSerialization<Voictent2Voque, SerializedVoque>({
+    buildAddMetadataForSerialization<
+      Collection2StreamMetatype,
+      SerializedStreamMetatype
+    >({
       inputCollectionId: 'voictent-2',
       outputCollectionId: 'serialized',
     }),

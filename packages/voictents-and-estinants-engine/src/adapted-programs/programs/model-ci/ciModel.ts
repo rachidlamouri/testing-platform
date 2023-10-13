@@ -61,14 +61,14 @@ export const CI_MODEL: CiModel = {
             'packages/voictents-and-estinants-engine/src/core-programs/testBuildAddMetadataForSerialization.test.sh',
         },
         {
-          programName: 'test-estinant-error',
+          programName: 'test-programmed-transform-error',
           testFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testEstinantError.test.sh',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testProgrammedTransformError.test.sh',
         },
         {
-          programName: 'test-voictent-input',
+          programName: 'test-collection-input',
           testFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testVoictentInput.test.sh',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testCollectionInput.test.sh',
         },
         {
           programName: 'test-joining-one-to-one',
@@ -81,29 +81,29 @@ export const CI_MODEL: CiModel = {
             'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToMany.test.sh',
         },
         {
-          programName: 'test-joining-one-to-voictent',
+          programName: 'test-joining-one-to-collection',
           testFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToVoictent.test.sh',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningOneToCollection.test.sh',
         },
         {
-          programName: 'test-joining-voictent-to-voictent',
+          programName: 'test-joining-collection-to-collection',
           testFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningVoictentToVoictent.test.sh',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testJoiningCollectionToCollection.test.sh',
         },
         {
-          programName: 'test-releasing-a-left-voictent-multiple-times',
+          programName: 'test-releasing-a-left-collection-multiple-times',
           testFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingALeftVoictentMultipleTimes.test.sh',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingALeftCollectionMultipleTimes.test.sh',
         },
         {
-          programName: 'test-releasing-a-right-voictent-multiple-times',
+          programName: 'test-releasing-a-right-collection-multiple-times',
           testFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingARightVoictentMultipleTimes.test.sh',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testReleasingARightCollectionMultipleTimes.test.sh',
         },
         {
-          programName: 'test-untriggered-cology-error',
+          programName: 'test-untriggered-transform-input-key-group-error',
           testFilePath:
-            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testUntriggeredCologyError.test.sh',
+            'packages/voictents-and-estinants-engine/src/core-programs/engine-behavior/testUntriggeredTransformInputKeyGroupError.test.sh',
         },
       ],
     },
