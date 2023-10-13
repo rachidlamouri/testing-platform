@@ -12,7 +12,7 @@ import { GenericOutputStreamConnectionMetatype } from '../../stream-connection-m
  * @canonicalDeclaration
  */
 export type OutputStreamConfiguration<
-  TOutputVicken extends GenericOutputStreamConnectionMetatype,
+  TOutputStreamConnectionMetatype extends GenericOutputStreamConnectionMetatype,
 > = {
-  collectionIdTuple: TOutputVicken['collectionIdTuple'];
+  collectionIdTuple: TOutputStreamConnectionMetatype['collectionIdTuple'];
 };
