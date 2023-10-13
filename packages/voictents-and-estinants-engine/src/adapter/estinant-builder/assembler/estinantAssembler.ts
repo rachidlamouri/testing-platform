@@ -4,7 +4,7 @@ import {
   GenericEstinant2,
 } from '../../../core/types/estinant/estinant';
 import { GenericTropoignant2 } from '../../../core/types/estinant/tropoignant';
-import { GenericIndexedHubblepup } from '../../../core/types/hubblepup/hubblepup';
+import { GenericIndexedItem } from '../../../core/types/item/item';
 import { GenericLeftInputStreamConnectionMetatype } from '../../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import {
   GenericRightInputItemTupleStreamConnectionMetatype,
@@ -67,7 +67,7 @@ export const buildEstinantAssembler = <
       if (leftInputContext.isWibiz || leftInputContext.version === 2) {
         adaptedLeftInput = leftInput;
       } else {
-        adaptedLeftInput = (leftInput as GenericIndexedHubblepup).item;
+        adaptedLeftInput = (leftInput as GenericIndexedItem).item;
       }
 
       /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -80,9 +80,8 @@ export const buildEstinantAssembler = <
           if (rightInputContext.isWibiz || rightInputContext.version === 2) {
             adaptedRightInput = rightInputTuple[index];
           } else {
-            adaptedRightInput = (
-              rightInputTuple[index] as GenericIndexedHubblepup
-            ).item;
+            adaptedRightInput = (rightInputTuple[index] as GenericIndexedItem)
+              .item;
           }
 
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -145,7 +144,7 @@ export const buildEstinantAssembler = <
               if (leftInputContext.isWibiz || leftInputContext.version === 2) {
                 adaptedLeftInput = leftInput;
               } else {
-                adaptedLeftInput = (leftInput as GenericIndexedHubblepup).item;
+                adaptedLeftInput = (leftInput as GenericIndexedItem).item;
               }
 
               return rightInputContext.framate(adaptedLeftInput) as IdTuple;

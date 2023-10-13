@@ -1,4 +1,4 @@
-import { GenericItem } from '../../core/types/hubblepup/hubblepup';
+import { GenericItem } from '../../core/types/item/item';
 import {
   GenericAbstractSerializableStreamMetatype,
   AbstractSerializableCollection,

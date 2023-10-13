@@ -1,8 +1,6 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typeScriptObject';
 
-export type Item = unknown;
-
 /**
  * The thing that a programmer operates on by streaming it between collections
  * and transforms.
@@ -13,22 +11,25 @@ export type Item = unknown;
  *
  * @canonicalDeclaration
  */
-type Hubblepup2<THubblepup> = THubblepup;
+export type Item = unknown;
 
-export type GenericItem = Hubblepup2<unknown>;
+// TODO: make this one the canonical declaration
+type Item2<TItem> = TItem;
 
-export type HubblepupTuple = readonly Item[];
+export type GenericItem = Item2<unknown>;
+
+export type ItemTuple = readonly Item[];
 
 export type ItemIndexByName = TypeScriptObject;
 
 export type IndexedItem<
-  THubblepup extends Item,
+  TItem extends Item,
   TIndexByName extends ItemIndexByName,
 > = {
   indexByName: TIndexByName;
-  item: THubblepup;
+  item: TItem;
 };
 
-export type GenericIndexedHubblepup = IndexedItem<Item, ItemIndexByName>;
+export type GenericIndexedItem = IndexedItem<Item, ItemIndexByName>;
 
-export type GenericIndexedHubblepupTuple = Tuple<GenericIndexedHubblepup>;
+export type GenericIndexedItemTuple = Tuple<GenericIndexedItem>;

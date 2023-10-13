@@ -1,5 +1,5 @@
 import { Simplify } from 'type-fest';
-import { Item } from '../hubblepup/hubblepup';
+import { Item } from '../item/item';
 import {
   GenericStreamMetatype,
   StreamMetatype,

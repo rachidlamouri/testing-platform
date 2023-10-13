@@ -6,7 +6,7 @@ import {
 } from './abstractSerializableCollection';
 import { FileExtensionSuffixIdentifier } from '../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { ProgramFileCache, SerializedItem } from '../program/programFileCache';
-import { GenericItem } from '../../core/types/hubblepup/hubblepup';
+import { GenericItem } from '../../core/types/item/item';
 
 type JsonSerializableCollectionConstructorInput<
   TStreamMetatype extends GenericAbstractSerializableStreamMetatype,

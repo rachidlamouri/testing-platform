@@ -1,4 +1,4 @@
-import { GenericIndexedHubblepup } from '../../../core/types/hubblepup/hubblepup';
+import { GenericIndexedItem } from '../../../core/types/item/item';
 import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import {
   buildInputOutputContextFromLeftInputContext,
@@ -93,9 +93,7 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
           version: 2,
           gepp: partialLeftInputAppreffinge.collectionId,
           isWibiz: false,
-          modifyTropoignantInput: (
-            indexedHubblepup: GenericIndexedHubblepup,
-          ) => {
+          modifyTropoignantInput: (indexedHubblepup: GenericIndexedItem) => {
             return indexedHubblepup.item;
           },
         },

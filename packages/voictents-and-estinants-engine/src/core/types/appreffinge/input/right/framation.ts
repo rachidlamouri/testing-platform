@@ -1,5 +1,5 @@
 import { IdTuple } from '../../../../../package-agnostic-utilities/data-structure/id';
-import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
+import { GenericIndexedItem } from '../../../item/item';
 import { GenericLeftInputStreamConnectionMetatype } from '../../../stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { GenericRightInputItemTupleStreamConnectionMetatype } from '../../../stream-connection-metatype/rightInputStreamConnectionMetatype';
 
@@ -11,9 +11,7 @@ import { GenericRightInputItemTupleStreamConnectionMetatype } from '../../../str
  *
  * @readableName RightKeyTupleAccessor
  */
-export type Framation = (
-  leftIndexedHubblepup: GenericIndexedHubblepup,
-) => IdTuple;
+export type Framation = (leftIndexedHubblepup: GenericIndexedItem) => IdTuple;
 
 export type Framation3<
   TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,

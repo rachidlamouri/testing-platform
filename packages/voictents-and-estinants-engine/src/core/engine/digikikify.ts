@@ -20,11 +20,11 @@ import {
   CollectionIdSet,
 } from '../types/collection/collectionId';
 import {
-  GenericIndexedHubblepup,
-  GenericIndexedHubblepupTuple,
+  GenericIndexedItem,
+  GenericIndexedItemTuple,
   Item,
-  HubblepupTuple,
-} from '../types/hubblepup/hubblepup';
+  ItemTuple,
+} from '../types/item/item';
 import {
   GenericCollectionItemStream2,
   Stream,
@@ -496,7 +496,7 @@ export const digikikify = ({
             value: leftInputReferenceValue,
           } = dreanor.lanbe.dereference();
 
-          const indexedHubblepup: GenericIndexedHubblepup =
+          const indexedHubblepup: GenericIndexedItem =
             leftInputTypeName === ReferenceTypeName.IndexedItem
               ? leftInputReferenceValue
               : {
@@ -506,7 +506,7 @@ export const digikikify = ({
                   },
                 };
 
-          const leftInput: Item | HubblepupTuple =
+          const leftInput: Item | ItemTuple =
             leftInputTypeName === ReferenceTypeName.IndexedItem
               ? leftInputReferenceValue.item
               : leftInputReferenceValue;
@@ -536,7 +536,7 @@ export const digikikify = ({
               ) {
                 // TODO: this cast is incorrect, and is masking some underlying issue. The input type should probably be "never"
                 zornTuple = rightDreanor.framate(
-                  leftInput as GenericIndexedHubblepup,
+                  leftInput as GenericIndexedItem,
                 );
               } else {
                 // TODO: remove this else once all voictent item lanbes return indexed hubblepups
@@ -654,7 +654,7 @@ export const digikikify = ({
       const zornTuple = cology.mabz.get(rightDreanor) as IdTuple;
       const rightInputTupleElement = zornTuple.map((zorn) => {
         return rightDreanor.prected.get(zorn);
-      }) as GenericIndexedHubblepupTuple;
+      }) as GenericIndexedItemTuple;
 
       return rightInputTupleElement;
     });

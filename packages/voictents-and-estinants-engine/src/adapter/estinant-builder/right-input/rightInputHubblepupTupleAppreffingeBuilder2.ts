@@ -1,4 +1,4 @@
-import { GenericIndexedHubblepupTuple } from '../../../core/types/hubblepup/hubblepup';
+import { GenericIndexedItemTuple } from '../../../core/types/item/item';
 import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import {
   ComplexId,
@@ -161,7 +161,7 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
           return intermediateValue;
         },
         modifyTropoignantInput: (indexedHubblepupTuple) => {
-          return (indexedHubblepupTuple as GenericIndexedHubblepupTuple).map(
+          return (indexedHubblepupTuple as GenericIndexedItemTuple).map(
             (indexedHubblepup) => {
               return indexedHubblepup.item;
             },

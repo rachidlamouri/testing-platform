@@ -1,7 +1,7 @@
 import { CollectionId } from '../../core/types/collection/collectionId';
 import { Collection2 } from '../../core/types/collection/collection2';
 import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
-import { GenericItem, Item } from '../../core/types/hubblepup/hubblepup';
+import { GenericItem, Item } from '../../core/types/item/item';
 import { ProgramFileCache, SerializedItem } from '../program/programFileCache';
 
 export type AbstractSerializableIndexByName = {

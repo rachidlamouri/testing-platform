@@ -1,5 +1,5 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
-import { Item, ItemIndexByName, IndexedItem } from '../hubblepup/hubblepup';
+import { Item, ItemIndexByName, IndexedItem } from '../item/item';
 import { CollectionId } from '../collection/collectionId';
 
 /**

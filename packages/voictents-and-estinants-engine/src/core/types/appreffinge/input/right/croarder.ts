@@ -1,5 +1,5 @@
 import { DeprecatedId } from '../../../../../package-agnostic-utilities/data-structure/id';
-import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
+import { GenericIndexedItem } from '../../../item/item';
 import { GenericRightInputItemTupleStreamConnectionMetatype } from '../../../stream-connection-metatype/rightInputStreamConnectionMetatype';
 
 /**
@@ -11,7 +11,7 @@ import { GenericRightInputItemTupleStreamConnectionMetatype } from '../../../str
  * @readableName KeyAccessor
  */
 export type Croarder = (
-  rightIndexedHubblepup: GenericIndexedHubblepup,
+  rightIndexedHubblepup: GenericIndexedItem,
 ) => DeprecatedId;
 
 export type Croarder3<

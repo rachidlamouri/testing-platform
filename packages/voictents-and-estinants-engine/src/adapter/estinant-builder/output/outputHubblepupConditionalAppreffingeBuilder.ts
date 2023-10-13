@@ -1,4 +1,4 @@
-import { Item } from '../../../core/types/hubblepup/hubblepup';
+import { Item } from '../../../core/types/item/item';
 import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { Predicate } from '../../../package-agnostic-utilities/function/predicate';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';

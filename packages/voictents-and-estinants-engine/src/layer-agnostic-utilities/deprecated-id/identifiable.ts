@@ -2,7 +2,7 @@ import { Merge } from 'type-fest';
 import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { AbstractSerializableIndexByName } from '../collection/abstractSerializableCollection';
 import { CollectionId } from '../../core/types/collection/collectionId';
-import { Item } from '../../core/types/hubblepup/hubblepup';
+import { Item } from '../../core/types/item/item';
 
 /**
  * An identifiable object.
