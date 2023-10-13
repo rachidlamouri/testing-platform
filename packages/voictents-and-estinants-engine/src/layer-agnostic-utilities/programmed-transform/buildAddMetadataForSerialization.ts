@@ -1,4 +1,4 @@
-import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
+import { ProgrammedTransform2 } from '../../core/types/programmed-transform/programmedTransform';
 import { LeftInputItemStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import {

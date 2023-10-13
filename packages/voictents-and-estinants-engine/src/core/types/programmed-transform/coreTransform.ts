@@ -13,16 +13,16 @@ import {
  *
  * @readableName CoreTransform
  */
-export type Tropoignant2<
-  TLeftVicken extends GenericLeftInputStreamConnectionMetatype,
-  TRightVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
-  TOutputVicken extends GenericOutputStreamConnectionMetatype,
+export type CoreTransform2<
+  TLeftStreamConnectionMetatype extends GenericLeftInputStreamConnectionMetatype,
+  TRightStreamConnectionMetatypeTuple extends GenericRightInputStreamConnectionMetatypeTuple,
+  TOutputStreamConnectionMetatype extends GenericOutputStreamConnectionMetatype,
 > = (
-  leftInput: TLeftVicken['coreTransformInput'],
-  ...rightInputTuple: RightInputStreamConnectionMetatypeTupleCoreTransformInputTuple<TRightVickenTuple>
-) => TOutputVicken['coreTransformOutput'];
+  leftInput: TLeftStreamConnectionMetatype['coreTransformInput'],
+  ...rightInputTuple: RightInputStreamConnectionMetatypeTupleCoreTransformInputTuple<TRightStreamConnectionMetatypeTuple>
+) => TOutputStreamConnectionMetatype['coreTransformOutput'];
 
-export type GenericTropoignant2 = Tropoignant2<
+export type GenericCoreTransform2 = CoreTransform2<
   GenericLeftInputStreamConnectionMetatype,
   GenericRightInputStreamConnectionMetatypeTuple,
   GenericOutputStreamConnectionMetatype

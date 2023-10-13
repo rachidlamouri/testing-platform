@@ -3,7 +3,7 @@ import {
   LeftDreanor,
   RightDreanorTuple,
 } from './dreanor/dreanor';
-import { GenericEstinant2 } from '../types/estinant/estinant';
+import { GenericProgrammedTransform2 } from '../types/programmed-transform/programmedTransform';
 import { Procody } from './procody/procody';
 import { CollectionIdSet } from '../types/collection/collectionId';
 import { GenericCollection2 } from '../types/collection/collection2';
@@ -16,7 +16,7 @@ import { GenericCollection2 } from '../types/collection/collection2';
  */
 export type Platomity2 = {
   version: 2;
-  programmedTransform: GenericEstinant2;
+  programmedTransform: GenericProgrammedTransform2;
   leftDreanor: LeftDreanor;
   rightDreanorTuple: RightDreanorTuple;
   outputGeppSet: CollectionIdSet;

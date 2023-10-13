@@ -4,12 +4,12 @@ import {
   digikikify as coreDigikikify,
 } from '../../core/engine/digikikify';
 import {
-  GenericEstinant2Tuple,
-  UnsafeEstinant2,
-  GenericEstinant2,
-  UnsafeEstinant2Tuple,
+  GenericProgrammedTransform2Tuple,
+  UnsafeProgrammedTransform2,
+  GenericProgrammedTransform2,
+  UnsafeProgrammedTransform2Tuple,
   ProgrammedTransform2,
-} from '../../core/types/estinant/estinant';
+} from '../../core/types/programmed-transform/programmedTransform';
 import {
   GenericLeftInputStreamConnectionMetatype,
   LeftInputStreamConnectionMetatype,
@@ -89,7 +89,7 @@ type VoqueUnionFromOutputVicken<
   TOutputVicken extends GenericOutputStreamConnectionMetatype,
 > = VoqueOptionTupleFromOutputVicken<TOutputVicken>[number];
 
-type VoqueUnionFromEstinant<TEstinant extends UnsafeEstinant2> =
+type VoqueUnionFromEstinant<TEstinant extends UnsafeProgrammedTransform2> =
   TEstinant extends ProgrammedTransform2<
     infer TLeftInputVicken,
     infer TRightInputVickenTuple,
@@ -102,11 +102,12 @@ type VoqueUnionFromEstinant<TEstinant extends UnsafeEstinant2> =
     : never;
 
 type EstinantUnionFromEstinantTuple<
-  TEstinantTuple extends UnsafeEstinant2Tuple,
+  TEstinantTuple extends UnsafeProgrammedTransform2Tuple,
 > = TEstinantTuple[number];
 
-type VoqueUnionFromEstinantTuple<TEstinantTuple extends UnsafeEstinant2Tuple> =
-  VoqueUnionFromEstinant<EstinantUnionFromEstinantTuple<TEstinantTuple>>;
+type VoqueUnionFromEstinantTuple<
+  TEstinantTuple extends UnsafeProgrammedTransform2Tuple,
+> = VoqueUnionFromEstinant<EstinantUnionFromEstinantTuple<TEstinantTuple>>;
 
 type GenericInferableVoque =
   | GenericInMemoryOdeshin2ListVoque
@@ -171,7 +172,7 @@ type ImplicitVoqueUnion<
 
 type DigikikifierInputFromAllComputedUnions<
   TExplicitVoictentTuple extends UnsafeCollection2Tuple,
-  TEstinantTuple extends UnsafeEstinant2Tuple,
+  TEstinantTuple extends UnsafeProgrammedTransform2Tuple,
   TAllVoqueUnion extends GenericStreamMetatype,
   TImplicitVoqueUnion extends GenericStreamMetatype,
 > = {
@@ -189,7 +190,7 @@ type DigikikifierInputFromAllComputedUnions<
 
 type DigikikifierInputFromPreliminaryComputedUnions<
   TExplicitVoictentTuple extends UnsafeCollection2Tuple,
-  TEstinantTuple extends UnsafeEstinant2Tuple,
+  TEstinantTuple extends UnsafeProgrammedTransform2Tuple,
   TExplicitVoictentTupleVoqueUnion extends GenericStreamMetatype,
   TEstinantTupleVoqueUnion extends GenericStreamMetatype,
 > = DigikikifierInputFromAllComputedUnions<
@@ -201,7 +202,7 @@ type DigikikifierInputFromPreliminaryComputedUnions<
 
 type DigikikifierInput<
   TExplicitVoictentTuple extends UnsafeCollection2Tuple,
-  TEstinantTuple extends UnsafeEstinant2Tuple,
+  TEstinantTuple extends UnsafeProgrammedTransform2Tuple,
 > = DigikikifierInputFromPreliminaryComputedUnions<
   TExplicitVoictentTuple,
   TEstinantTuple,
@@ -211,7 +212,7 @@ type DigikikifierInput<
 
 type Digikikifier = <
   TExplicitVoictentTuple extends UnsafeCollection2Tuple,
-  TEstinantTuple extends UnsafeEstinant2Tuple,
+  TEstinantTuple extends UnsafeProgrammedTransform2Tuple,
 >(
   input: DigikikifierInput<TExplicitVoictentTuple, TEstinantTuple>,
 ) => void;
@@ -232,12 +233,12 @@ const buildSerializableVoictent = (
 const buildSerializerEstinantTuple = (
   serializerGepp: CollectionId,
   serializeeGeppList: CollectionId[],
-): GenericEstinant2Tuple => {
+): GenericProgrammedTransform2Tuple => {
   const serializeeGeppSet = new Set(serializeeGeppList);
 
-  const serializerEstinantTuple: UnsafeEstinant2[] = [
+  const serializerEstinantTuple: UnsafeProgrammedTransform2[] = [
     ...serializeeGeppSet,
-  ].map<UnsafeEstinant2>((serializeeGepp) => {
+  ].map<UnsafeProgrammedTransform2>((serializeeGepp) => {
     return buildAddMetadataForSerialization({
       inputCollectionId: serializeeGepp,
       outputCollectionId: serializerGepp,
@@ -258,10 +259,10 @@ const getVoictentTupleGeppSet = (
 };
 
 const getEstinantTupleGeppSet = (
-  estinantTuple: GenericEstinant2Tuple,
+  estinantTuple: GenericProgrammedTransform2Tuple,
 ): CollectionId[] => {
   const estinantGeppList = estinantTuple.flatMap<CollectionId>(
-    (estinant: GenericEstinant2) => {
+    (estinant: GenericProgrammedTransform2) => {
       const leftInputGepp = estinant.leftInputStreamConfiguration.collectionId;
       const rightInputGeppTuple =
         estinant.rightInputStreamConfigurationTuple.map(
@@ -297,7 +298,7 @@ const getInferredFileSystemNodeVoictentTuple = (
 
 const getInferredInMemoryVoictentTuple = (
   voictentTuple: GenericCollection2Tuple,
-  estinantTuple: GenericEstinant2Tuple,
+  estinantTuple: GenericProgrammedTransform2Tuple,
 ): GenericCollection2Tuple => {
   const voictentTupleGeppSet = getVoictentTupleGeppSet(voictentTuple);
   const estinantTupleGeppSet = getEstinantTupleGeppSet(estinantTuple);
@@ -326,7 +327,7 @@ const getInferredInMemoryVoictentTuple = (
  */
 export const digikikify: Digikikifier = <
   TExplicitVoictentTuple extends UnsafeCollection2Tuple,
-  TEstinantTuple extends UnsafeEstinant2Tuple,
+  TEstinantTuple extends UnsafeProgrammedTransform2Tuple,
 >({
   explicitVoictentTuple: specificExplicitVoictentTuple,
   fileSystemNodeGeppCombination: specificFileSystemNodeGeppCombination,
@@ -359,7 +360,8 @@ export const digikikify: Digikikifier = <
       genericFileSystemNodeGeppCombination,
     );
 
-  const estinantTuple = specificEstinantTuple as GenericEstinant2Tuple;
+  const estinantTuple =
+    specificEstinantTuple as GenericProgrammedTransform2Tuple;
 
   const instantiatedVoictentTuple = [
     ...explicitVoictentTuple,

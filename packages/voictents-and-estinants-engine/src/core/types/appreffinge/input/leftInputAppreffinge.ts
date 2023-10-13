@@ -5,8 +5,10 @@ import { GenericLeftInputStreamConnectionMetatype } from '../../stream-connectio
  * input group. See the data types of its properties for more details.
  *
  * @readableName LeftInputStreamConfiguration
+ *
+ * @canonicalDeclaration
  */
-export type LeftInputAppreffinge<
+export type LeftInputStreamConfiguration<
   TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
 > = {
   collectionId: TLeftInputVicken['streamMetatype']['collectionId'];
@@ -14,4 +16,4 @@ export type LeftInputAppreffinge<
 };
 
 export type GenericLeftInputAppreffinge =
-  LeftInputAppreffinge<GenericLeftInputStreamConnectionMetatype>;
+  LeftInputStreamConfiguration<GenericLeftInputStreamConnectionMetatype>;

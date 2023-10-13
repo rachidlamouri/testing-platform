@@ -12,9 +12,9 @@ import {
   RightVoictentItem2Dreanor,
 } from './dreanor/dreanor';
 import {
-  GenericEstinant2,
-  UnsafeEstinant2Tuple,
-} from '../types/estinant/estinant';
+  GenericProgrammedTransform2,
+  UnsafeProgrammedTransform2Tuple,
+} from '../types/programmed-transform/programmedTransform';
 import {
   CollectionId,
   CollectionIdSet,
@@ -104,7 +104,7 @@ export type DigikikifierInput = {
   // TODO: remove "initialQuirmTuple" and make inputVoictentList required
   inputVoictentList?: GenericCollection2[];
   errorGepp?: CollectionId;
-  estinantTuple: Tuple<GenericEstinant2>;
+  estinantTuple: Tuple<GenericProgrammedTransform2>;
   /** @deprecated */
   onHubblepupAddedToVoictents?: OnHubblepupAddedToVoictentsHandler;
   onFinish?: RuntimeStatisticsHandler;
@@ -206,7 +206,10 @@ export const digikikify = ({
   });
 
   const invalidEstinantInputOutputList = estinantTuple
-    .filter((estinant): estinant is GenericEstinant2 => estinant.version === 2)
+    .filter(
+      (estinant): estinant is GenericProgrammedTransform2 =>
+        estinant.version === 2,
+    )
     .flatMap((estinant) => {
       return [
         {
@@ -236,7 +239,10 @@ export const digikikify = ({
 
   const estinantCountByName: Record<string, number> = {};
   estinantTuple
-    .filter((estinant): estinant is GenericEstinant2 => estinant.version === 2)
+    .filter(
+      (estinant): estinant is GenericProgrammedTransform2 =>
+        estinant.version === 2,
+    )
     .forEach((estinant) => {
       const currentCount = estinantCountByName[estinant.name] ?? 0;
       estinantCountByName[estinant.name] = currentCount + 1;
@@ -381,7 +387,7 @@ export const digikikify = ({
   };
 
   const createLanbe2 = (
-    estinant: GenericEstinant2,
+    estinant: GenericProgrammedTransform2,
     appreffinge: GenericInputAppreffinge,
   ): Stream => {
     const voictent = tabilly.get(appreffinge.collectionId);
@@ -1015,7 +1021,9 @@ export const digikikify = ({
   }
 };
 
-type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
+type DigikikifierInput2<
+  TEstinantTuple extends UnsafeProgrammedTransform2Tuple,
+> = {
   inputVoictentList: GenericCollection2[];
   errorGepp?: CollectionId;
   estinantTuple: TEstinantTuple;
@@ -1023,7 +1031,9 @@ type DigikikifierInput2<TEstinantTuple extends UnsafeEstinant2Tuple> = {
   failForEncounteredError?: boolean;
 };
 
-export const digikikify2 = <TEstinantTuple extends UnsafeEstinant2Tuple>({
+export const digikikify2 = <
+  TEstinantTuple extends UnsafeProgrammedTransform2Tuple,
+>({
   inputVoictentList = [],
   errorGepp,
   estinantTuple,

@@ -8,8 +8,10 @@ import { GenericOutputStreamConnectionMetatype } from '../../stream-connection-m
  * configuration to limit which output collections receive data.
  *
  * @readableName OutputStreamGroupConfiguration
+ *
+ * @canonicalDeclaration
  */
-export type OutputAppreffinge<
+export type OutputStreamConfiguration<
   TOutputVicken extends GenericOutputStreamConnectionMetatype,
 > = {
   collectionIdTuple: TOutputVicken['collectionIdTuple'];

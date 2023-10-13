@@ -43,7 +43,7 @@ export type GenericRightInputAppreffinge = RightInputAppreffinge<
   GenericRightInputStreamConnectionMetatype
 >;
 
-export type InputVickenTupleToRightInputAppreffingeTuple<
+export type InputStreamConnectionMetatypeTupleToRightInputStreamConfigurationTuple<
   TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
   TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
 > = {

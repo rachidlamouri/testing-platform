@@ -1,9 +1,9 @@
 import { RightInputAppreffinge } from '../../../core/types/appreffinge/input/right/rightInputAppreffinge';
 import {
   ProgrammedTransform2,
-  GenericEstinant2,
-} from '../../../core/types/estinant/estinant';
-import { GenericTropoignant2 } from '../../../core/types/estinant/tropoignant';
+  GenericProgrammedTransform2,
+} from '../../../core/types/programmed-transform/programmedTransform';
+import { GenericCoreTransform2 } from '../../../core/types/programmed-transform/coreTransform';
 import { GenericIndexedItem } from '../../../core/types/item/item';
 import { GenericLeftInputStreamConnectionMetatype } from '../../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import {
@@ -62,7 +62,10 @@ export const buildEstinantAssembler = <
       outputContext,
     } = assemblerContext;
 
-    const transform: GenericTropoignant2 = (leftInput, ...rightInputTuple) => {
+    const transform: GenericCoreTransform2 = (
+      leftInput,
+      ...rightInputTuple
+    ) => {
       let adaptedLeftInput: unknown;
       if (leftInputContext.isWibiz || leftInputContext.version === 2) {
         adaptedLeftInput = leftInput;
@@ -172,7 +175,7 @@ export const buildEstinantAssembler = <
         collectionIdTuple: outputContext.geppTuple,
       },
       transform,
-    } satisfies GenericEstinant2 as unknown as ProgrammedTransform2<
+    } satisfies GenericProgrammedTransform2 as unknown as ProgrammedTransform2<
       TLeftInputVicken,
       TRightInputVickenTuple,
       CoreOutputVickenFromAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple>

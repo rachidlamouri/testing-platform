@@ -7,7 +7,7 @@ import {
   CachedOnDiskStreamMetatype,
 } from '../layer-agnostic-utilities/collection/cachedOnDiskCollection';
 import { OutputStreamConnectionMetatype } from '../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
-import { ProgrammedTransform2 } from '../core/types/estinant/estinant';
+import { ProgrammedTransform2 } from '../core/types/programmed-transform/programmedTransform';
 import { LeftInputItemStreamConnectionMetatype } from '../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { StandardInMemoryStreamMetatype } from '../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 
