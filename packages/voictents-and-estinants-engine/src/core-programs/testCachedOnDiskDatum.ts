@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { digikikify2 } from '../core/engine/digikikify';
+import { runEngine2 } from '../core/engine/runEngine';
 import { InMemoryCollection } from '../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
   CacheableAccessor,
@@ -21,7 +21,7 @@ type CachedVoque = CachedOnDiskStreamMetatype<'cached', string>;
 const nameSpace = 'test-cached-on-disk-datum';
 
 const filePath =
-  'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts';
+  'packages/voictents-and-estinants-engine/src/core/engine/runEngine.ts';
 
 /**
  * Forwards each item in the input collection to the cached collection. We need
@@ -61,8 +61,8 @@ const writeDatumToCache: ProgrammedTransform2<
  *
  * @canonicalComment
  */
-digikikify2({
-  inputVoictentList: [
+runEngine2({
+  inputCollectionList: [
     new InMemoryCollection<InputVoque>({
       collectionId: 'input',
       initialItemEggTuple: [
@@ -81,5 +81,5 @@ digikikify2({
       collectionId: 'cached',
     }),
   ],
-  estinantTuple: [writeDatumToCache],
+  programmedTransformTuple: [writeDatumToCache],
 });

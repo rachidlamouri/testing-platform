@@ -4,7 +4,7 @@ import {
   LeftInputCollectionStreamConnectionMetatype,
 } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
-import { digikikify2 } from '../../core/engine/digikikify';
+import { runEngine2 } from '../../core/engine/runEngine';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
@@ -95,8 +95,8 @@ const forwardFrom2To3: ProgrammedTransform2<
  *
  * @readableName testReleasingALeftCollectionMultipleTimes
  */
-digikikify2({
-  inputVoictentList: [
+runEngine2({
+  inputCollectionList: [
     new InMemoryCollection<Voictent1Voque>({
       collectionId: 'voictent-1',
       initialItemEggTuple: ['a', 'b', 'c', 'SKIP', 'd', 'e', 'f'],
@@ -115,7 +115,7 @@ digikikify2({
       initialItemEggTuple: [],
     }),
   ],
-  estinantTuple: [
+  programmedTransformTuple: [
     forwardFrom1To2AndSkipAValue,
     forwardFrom2To3,
 

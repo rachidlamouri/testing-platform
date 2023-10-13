@@ -2,7 +2,7 @@ import { ProgrammedTransform2 } from '../../core/types/programmed-transform/prog
 import { LeftInputItemStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import { RightInputItemTupleStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/rightInputStreamConnectionMetatype';
-import { digikikify2 } from '../../core/engine/digikikify';
+import { runEngine2 } from '../../core/engine/runEngine';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
@@ -73,8 +73,8 @@ const joinCollectionsByValue: ProgrammedTransform2<
  *
  * @readableName testUntriggeredTransformInputKeyGroupError
  */
-digikikify2({
-  inputVoictentList: [
+runEngine2({
+  inputCollectionList: [
     new InMemoryCollection<Input1Voque>({
       collectionId: 'input-1',
       initialItemEggTuple: [1, 2, 3],
@@ -96,7 +96,7 @@ digikikify2({
       programFileCache,
     }),
   ],
-  errorGepp: 'engine-error',
-  estinantTuple: [joinCollectionsByValue],
+  errorCollectionId: 'engine-error',
+  programmedTransformTuple: [joinCollectionsByValue],
   failForEncounteredError: false,
 });

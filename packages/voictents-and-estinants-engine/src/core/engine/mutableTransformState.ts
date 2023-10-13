@@ -14,35 +14,35 @@ import { GenericCollection2 } from '../types/collection/collection2';
  *
  * @readableName MutableTransformState
  */
-export type Platomity2 = {
+export type MutableTransformState2 = {
   version: 2;
   programmedTransform: GenericProgrammedTransform2;
-  leftDreanor: LeftMutableStreamConnectionState;
-  rightDreanorTuple: RightMutableStreamConnectionStateTuple;
-  outputGeppSet: CollectionIdSet;
-  procody: TransformInputKeyGroupSetCacheCache;
+  leftMutableStreamConnectionState: LeftMutableStreamConnectionState;
+  rightMutableStreamConnectionStateTuple: RightMutableStreamConnectionStateTuple;
+  outputCollectionIdSet: CollectionIdSet;
+  transformInputKeyGroupSetCacheCache: TransformInputKeyGroupSetCacheCache;
   executionCount: number;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  dependencySet: Set<Virok>;
+  dependencySet: Set<MutableCollectionState>;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  mutableDependencySet: Set<Virok>;
+  mutableDependencySet: Set<MutableCollectionState>;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  dependentSet: Set<Virok>;
+  dependentSet: Set<MutableCollectionState>;
 };
 
-export const getDreanorTuple = (
-  platomity: Platomity2,
+export const getMutableStreamConnectionStateTuple = (
+  mutableTransformState: MutableTransformState2,
 ): MutableStreamConnectionStateTuple => [
-  platomity.leftDreanor,
-  ...platomity.rightDreanorTuple,
+  mutableTransformState.leftMutableStreamConnectionState,
+  ...mutableTransformState.rightMutableStreamConnectionStateTuple,
 ];
 
-export type Virok = {
-  voictent: GenericCollection2;
+export type MutableCollectionState = {
+  collection: GenericCollection2;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  dependencySet: Set<Platomity2>;
+  dependencySet: Set<MutableTransformState2>;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  mutableDependencySet: Set<Platomity2>;
+  mutableDependencySet: Set<MutableTransformState2>;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  dependentSet: Set<Platomity2>;
+  dependentSet: Set<MutableTransformState2>;
 };

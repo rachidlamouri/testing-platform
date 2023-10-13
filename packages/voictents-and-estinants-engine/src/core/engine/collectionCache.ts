@@ -6,4 +6,4 @@ import { GenericCollection2 } from '../types/collection/collection2';
  *
  * @readableName CollectionCache
  */
-export class Tabilly extends Map<CollectionId, GenericCollection2> {}
+export class CollectionCache extends Map<CollectionId, GenericCollection2> {}

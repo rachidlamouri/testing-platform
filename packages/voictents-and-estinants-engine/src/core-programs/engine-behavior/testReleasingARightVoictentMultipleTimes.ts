@@ -2,7 +2,7 @@ import { ProgrammedTransform2 } from '../../core/types/programmed-transform/prog
 import { LeftInputItemStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import { RightInputCollectionStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/rightInputStreamConnectionMetatype';
-import { digikikify2 } from '../../core/engine/digikikify';
+import { runEngine2 } from '../../core/engine/runEngine';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
@@ -106,8 +106,8 @@ const join1ToAllOf3: ProgrammedTransform2<
  *
  * @readableName testReleasingARightCollectionMultipleTimes
  */
-digikikify2({
-  inputVoictentList: [
+runEngine2({
+  inputCollectionList: [
     new InMemoryCollection<Voictent1Voque>({
       collectionId: 'voictent-1',
       initialItemEggTuple: [1, 2],
@@ -130,7 +130,7 @@ digikikify2({
       initialItemEggTuple: [],
     }),
   ],
-  estinantTuple: [
+  programmedTransformTuple: [
     forwardFrom2To3AndSkipAValue,
     join1ToAllOf3,
 

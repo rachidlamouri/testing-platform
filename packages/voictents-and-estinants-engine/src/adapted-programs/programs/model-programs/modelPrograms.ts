@@ -34,7 +34,7 @@ import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/prog
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
-import { DigikikifierStrategy } from '../../../core/engine/digikikify';
+import { EngineRunnerStrategy } from '../../../core/engine/runEngine';
 import { getEngineVoque2 } from '../../programmable-units/engine-program/getEngineVoque2';
 import { getEngineEstinant3 } from '../../programmable-units/engine-program/getEngineEstinant3';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
@@ -107,7 +107,7 @@ digikikify({
       programFileCache,
     }),
   ] as const),
-  errorGepp: PROGRAM_ERROR_GEPP,
+  errorCollectionId: PROGRAM_ERROR_GEPP,
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
@@ -160,5 +160,5 @@ digikikify({
     // note: keep this is a multiline list for easier debugging
     SANITY_SNAPSHOT_GEPP,
   ],
-  strategy: DigikikifierStrategy.WaitForAllDependencies,
+  strategy: EngineRunnerStrategy.WaitForAllDependencies,
 });

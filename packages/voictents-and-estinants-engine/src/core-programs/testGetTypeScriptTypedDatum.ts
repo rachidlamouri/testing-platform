@@ -1,7 +1,7 @@
 import { ProgrammedTransform2 } from '../core/types/programmed-transform/programmedTransform';
 import { LeftInputItemStreamConnectionMetatype } from '../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { OutputStreamConnectionMetatype } from '../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
-import { digikikify2 } from '../core/engine/digikikify';
+import { runEngine2 } from '../core/engine/runEngine';
 import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
@@ -69,8 +69,8 @@ const getTypedTestCaseInputTypeName: ProgrammedTransform2<
  *
  * @canonicalComment
  */
-digikikify2({
-  inputVoictentList: [
+runEngine2({
+  inputCollectionList: [
     new InMemoryOdeshin2ListVoictent<DatumTestCaseInputVoque>({
       collectionId: DATUM_TEST_CASE_INPUT_GEPP,
       initialItemEggTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
@@ -85,7 +85,7 @@ digikikify2({
       initialItemEggTuple: [],
     }),
   ],
-  estinantTuple: [
+  programmedTransformTuple: [
     getTypedTestCaseInputTypeName,
 
     buildAddMetadataForSerialization<

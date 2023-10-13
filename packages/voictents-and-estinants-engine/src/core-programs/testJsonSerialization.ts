@@ -1,4 +1,4 @@
-import { digikikify2 } from '../core/engine/digikikify';
+import { runEngine2 } from '../core/engine/runEngine';
 import {
   DATUM_TEST_CASE_INPUT_GEPP,
   DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
@@ -21,8 +21,8 @@ const programFileCache = new ProgramFileCache({
  *
  * @canonicalComment
  */
-digikikify2({
-  inputVoictentList: [
+runEngine2({
+  inputCollectionList: [
     new JsonSerializableCollection<SerializedConfiguration>({
       collectionId: 'serialized',
       programFileCache,
@@ -37,5 +37,5 @@ digikikify2({
       }),
     }),
   ],
-  estinantTuple: [],
+  programmedTransformTuple: [],
 });

@@ -1,5 +1,5 @@
 import { StreamTypeName } from '../../core/types/stream/stream';
-import { RuntimeStatistics } from '../../core/engine/digikikify';
+import { RuntimeStatistics } from '../../core/engine/runEngine';
 
 /**
  * Converts a RuntimeStatistics object into a comprehensive visual ascii

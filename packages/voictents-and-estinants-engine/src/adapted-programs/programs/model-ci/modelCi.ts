@@ -115,6 +115,6 @@ digikikify({
     reportErrorCount,
     signalError,
   ] as const,
-  errorGepp: PROGRAM_ERROR_GEPP,
+  errorCollectionId: PROGRAM_ERROR_GEPP,
   programFileCache,
 });

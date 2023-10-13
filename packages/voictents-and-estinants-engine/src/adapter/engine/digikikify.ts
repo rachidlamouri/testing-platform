@@ -1,8 +1,8 @@
 import { Simplify, UnionToIntersection } from 'type-fest';
 import {
-  DigikikifierInput as CoreDigikikifierInput,
-  digikikify as coreDigikikify,
-} from '../../core/engine/digikikify';
+  EngineRunnerInput as CoreDigikikifierInput,
+  runEngine as coreDigikikify,
+} from '../../core/engine/runEngine';
 import {
   GenericProgrammedTransform2Tuple,
   UnsafeProgrammedTransform2,
@@ -181,7 +181,7 @@ type DigikikifierInputFromAllComputedUnions<
     InferableVoqueUnion<TImplicitVoqueUnion, GenericFileSystemNodeVoque>
   >;
   uninferableVoictentByGepp: UninferableVoictentByGepp<TImplicitVoqueUnion>;
-  errorGepp?: ErrorGepp<TAllVoqueUnion>;
+  errorCollectionId?: ErrorGepp<TAllVoqueUnion>;
   estinantTuple: TEstinantTuple;
   serializeeGeppList?: SerializeeGepp<TAllVoqueUnion>[];
   programFileCache: ProgramFileCache;
@@ -332,7 +332,7 @@ export const digikikify: Digikikifier = <
   explicitVoictentTuple: specificExplicitVoictentTuple,
   fileSystemNodeGeppCombination: specificFileSystemNodeGeppCombination,
   uninferableVoictentByGepp: specificUninferableVoictentByGepp,
-  errorGepp,
+  errorCollectionId,
   estinantTuple: specificEstinantTuple,
   serializeeGeppList: specificSerializeeGeppList = [],
   programFileCache,
@@ -380,7 +380,7 @@ export const digikikify: Digikikifier = <
     serializeeGeppList,
   );
 
-  const inputVoictentTuple: GenericCollection2[] = [
+  const inputCollectionList: GenericCollection2[] = [
     ...explicitVoictentTuple,
     serializableVoictent,
     ...inferredFileSystemNodeVoictentTuple,
@@ -390,9 +390,9 @@ export const digikikify: Digikikifier = <
   const inputEstinantTuple = [...estinantTuple, ...serializerEstinantTuple];
 
   coreDigikikify({
-    inputVoictentList: inputVoictentTuple,
-    errorGepp,
-    estinantTuple: inputEstinantTuple,
+    inputCollectionList,
+    errorCollectionId,
+    programmedTransformTuple: inputEstinantTuple,
     onFinish: (statistics) => {
       if (programFileCache !== undefined) {
         programFileCache.writeRuntimeSnapshot(statistics);

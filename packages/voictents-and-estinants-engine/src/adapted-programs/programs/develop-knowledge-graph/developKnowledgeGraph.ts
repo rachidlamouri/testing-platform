@@ -50,7 +50,7 @@ digikikify({
       programFileCache,
     }),
   ] as const),
-  errorGepp: PROGRAM_ERROR_GEPP,
+  errorCollectionId: PROGRAM_ERROR_GEPP,
   estinantTuple: [
     // keep this as a multi-line list for easier debugging
     renderApp,

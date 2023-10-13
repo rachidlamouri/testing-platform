@@ -84,7 +84,7 @@ digikikify({
       ],
     }),
   ] as const),
-  errorGepp: PROGRAM_ERROR_GEPP,
+  errorCollectionId: PROGRAM_ERROR_GEPP,
   estinantTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,

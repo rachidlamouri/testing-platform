@@ -12,18 +12,18 @@ export enum EngineFunctionConfigurationTypeName {
 
 type CoreEngineFunctionConfiguration = {
   typeName: EngineFunctionConfigurationTypeName.Core;
-  filePath: 'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts';
+  filePath: 'packages/voictents-and-estinants-engine/src/core/engine/runEngine.ts';
   exportedIdentifier: 'digikikify';
 };
 
 export type CoreEngineFunction2Configuration = {
   typeName: EngineFunctionConfigurationTypeName.Core2;
-  filePath: 'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts';
-  exportedIdentifier: 'digikikify2';
-  estinantListKeyIdentifierName: 'estinantTuple';
-  voictentListKeyIdentifierName: 'inputVoictentList';
-  voictentGeppKeyIdentifierName: 'gepp';
-  initialHubblepupPelueTupleKeyIdentifierName: 'initialHubblepupPelueTuple';
+  filePath: 'packages/voictents-and-estinants-engine/src/core/engine/runEngine.ts';
+  exportedIdentifier: 'runEngine2';
+  estinantListKeyIdentifierName: 'programmedTransformTuple';
+  voictentListKeyIdentifierName: 'inputCollectionList';
+  voictentGeppKeyIdentifierName: 'collectionId';
+  initialHubblepupPelueTupleKeyIdentifierName: 'initialItemEggTuple';
 };
 
 export type AdaptedEngineFunctionConfiguration = {
@@ -59,7 +59,7 @@ export const CORE_ENGINE_FUNCTION_CONFIGURATION: CoreEngineFunctionConfiguration
   {
     typeName: EngineFunctionConfigurationTypeName.Core,
     filePath:
-      'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts',
+      'packages/voictents-and-estinants-engine/src/core/engine/runEngine.ts',
     exportedIdentifier: 'digikikify',
   };
 
@@ -67,12 +67,12 @@ export const CORE_ENGINE_FUNCTION_2_CONFIGURATION: CoreEngineFunction2Configurat
   {
     typeName: EngineFunctionConfigurationTypeName.Core2,
     filePath:
-      'packages/voictents-and-estinants-engine/src/core/engine/digikikify.ts',
-    exportedIdentifier: 'digikikify2',
-    estinantListKeyIdentifierName: 'estinantTuple',
-    voictentListKeyIdentifierName: 'inputVoictentList',
-    voictentGeppKeyIdentifierName: 'gepp',
-    initialHubblepupPelueTupleKeyIdentifierName: 'initialHubblepupPelueTuple',
+      'packages/voictents-and-estinants-engine/src/core/engine/runEngine.ts',
+    exportedIdentifier: 'runEngine2',
+    estinantListKeyIdentifierName: 'programmedTransformTuple',
+    voictentListKeyIdentifierName: 'inputCollectionList',
+    voictentGeppKeyIdentifierName: 'collectionId',
+    initialHubblepupPelueTupleKeyIdentifierName: 'initialItemEggTuple',
   };
 
 export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfiguration =

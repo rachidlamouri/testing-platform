@@ -1,9 +1,9 @@
 Some cologies were not triggered:  
 [
   {
-    "estinantName": "joinCollections",
-    "leftGepp": "input-1",
-    "cologySet": [
+    "programmedTransformName": "joinCollections",
+    "leftCollectionId": "input-1",
+    "transformInputKeyGroupSet": [
       {
         "leftInput": {
           "item": 1,
@@ -15,8 +15,8 @@ Some cologies were not triggered:
         "rightTupleState": [
           [
             {
-              "rightGepp": "input-2",
-              "zorn": 1,
+              "rightCollectionId": "input-2",
+              "id": 1,
               "hasItem": false
             }
           ]
@@ -33,8 +33,8 @@ Some cologies were not triggered:
         "rightTupleState": [
           [
             {
-              "rightGepp": "input-2",
-              "zorn": 3,
+              "rightCollectionId": "input-2",
+              "id": 3,
               "hasItem": false
             }
           ]

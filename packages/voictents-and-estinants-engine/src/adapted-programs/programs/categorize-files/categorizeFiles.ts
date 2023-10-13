@@ -55,7 +55,7 @@ digikikify({
     reportErrors,
     signalError,
   ] as const,
-  errorGepp: PROGRAM_ERROR_GEPP,
+  errorCollectionId: PROGRAM_ERROR_GEPP,
   serializeeGeppList: [
     // keep this as a multi-line list for easier debugging
     FILE_GEPP,

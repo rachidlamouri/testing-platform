@@ -1,4 +1,4 @@
-import { digikikify2 } from '../core/engine/digikikify';
+import { runEngine2 } from '../core/engine/runEngine';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import {
   SerializableErrorCollection,
@@ -19,8 +19,8 @@ const programFileCache = new ProgramFileCache({
  *
  * @canonicalComment
  */
-digikikify2({
-  inputVoictentList: [
+runEngine2({
+  inputCollectionList: [
     // TODO: make the type parameter a voque
     new SerializableErrorCollection<ErrorVoque>({
       collectionId: 'error',
@@ -31,5 +31,5 @@ digikikify2({
       ],
     }),
   ],
-  estinantTuple: [],
+  programmedTransformTuple: [],
 });

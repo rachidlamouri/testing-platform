@@ -1,7 +1,7 @@
 import { ProgrammedTransform2 } from '../../core/types/programmed-transform/programmedTransform';
 import { LeftInputItemStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
-import { digikikify2 } from '../../core/engine/digikikify';
+import { runEngine2 } from '../../core/engine/runEngine';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
@@ -47,8 +47,8 @@ const throwError: ProgrammedTransform2<
  *
  * @readableName testProgrammedTransformError
  */
-digikikify2({
-  inputVoictentList: [
+runEngine2({
+  inputCollectionList: [
     new InMemoryCollection<InputErrorVoque>({
       collectionId: 'input-error',
       initialItemEggTuple: [new Error('Custom error')],
@@ -59,7 +59,7 @@ digikikify2({
       programFileCache,
     }),
   ],
-  errorGepp: 'engine-error',
-  estinantTuple: [throwError],
+  errorCollectionId: 'engine-error',
+  programmedTransformTuple: [throwError],
   failForEncounteredError: false,
 });
