@@ -136,6 +136,8 @@ export const applyRenaming = buildProgrammedTransform({
         return;
       }
 
+      log(`Rename groups remaining: ${groupList.length}`);
+
       const {
         directory,
         directoryChange,
