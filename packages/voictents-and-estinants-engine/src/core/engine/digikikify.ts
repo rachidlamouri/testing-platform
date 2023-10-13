@@ -38,7 +38,7 @@ import { Prected } from './dreanor/prected';
 import { Procody } from './procody/procody';
 import { Tabilly } from './tabilly';
 import { GenericCollection2 } from '../types/collection/collection2';
-import { GenericInputAppreffinge } from '../types/appreffinge/input/inputAppreffinge';
+import { GenericInputStreamConfiguration } from '../types/appreffinge/input/inputStreamConfiguration';
 import { Tuple } from '../../package-agnostic-utilities/type/tuple';
 import { getIsRightInputItemTupleStreamConfiguration } from '../types/appreffinge/input/right/rightInputStreamConfiguration';
 import { ReferenceTypeName } from '../types/stream/referenceTypeName';
@@ -388,7 +388,7 @@ export const digikikify = ({
 
   const createLanbe2 = (
     estinant: GenericProgrammedTransform2,
-    appreffinge: GenericInputAppreffinge,
+    appreffinge: GenericInputStreamConfiguration,
   ): Stream => {
     const voictent = tabilly.get(appreffinge.collectionId);
     assertNotUndefined(

@@ -9,11 +9,11 @@ import { GenericLeftInputStreamConnectionMetatype } from '../../stream-connectio
  * @canonicalDeclaration
  */
 export type LeftInputStreamConfiguration<
-  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
+  TLeftInputStreamConnectionMetatype extends GenericLeftInputStreamConnectionMetatype,
 > = {
-  collectionId: TLeftInputVicken['streamMetatype']['collectionId'];
-  isCollectionStream: TLeftInputVicken['isCollectionStream'];
+  collectionId: TLeftInputStreamConnectionMetatype['streamMetatype']['collectionId'];
+  isCollectionStream: TLeftInputStreamConnectionMetatype['isCollectionStream'];
 };
 
-export type GenericLeftInputAppreffinge =
+export type GenericLeftInputStreamConfiguration =
   LeftInputStreamConfiguration<GenericLeftInputStreamConnectionMetatype>;

@@ -1,4 +1,4 @@
-import { GenericLeftInputAppreffinge } from './leftInputAppreffinge';
+import { GenericLeftInputStreamConfiguration } from './leftInputStreamConfiguration';
 import { GenericRightInputStreamConfiguration } from './right/rightInputStreamConfiguration';
 
 /**
@@ -6,6 +6,6 @@ import { GenericRightInputStreamConfiguration } from './right/rightInputStreamCo
  *
  * @readableName InputStreamConfiguration
  */
-export type GenericInputAppreffinge =
-  | GenericLeftInputAppreffinge
+export type GenericInputStreamConfiguration =
+  | GenericLeftInputStreamConfiguration
   | GenericRightInputStreamConfiguration;

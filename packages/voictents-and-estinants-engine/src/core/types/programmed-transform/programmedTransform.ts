@@ -1,6 +1,6 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
-import { LeftInputStreamConfiguration } from '../appreffinge/input/leftInputAppreffinge';
+import { LeftInputStreamConfiguration } from '../appreffinge/input/leftInputStreamConfiguration';
 import { OutputStreamConfiguration } from '../appreffinge/output/outputStreamConfiguration';
 import { InputStreamConnectionMetatypeTupleToRightInputStreamConfigurationTuple } from '../appreffinge/input/right/rightInputStreamConfiguration';
 import { GenericLeftInputStreamConnectionMetatype } from '../stream-connection-metatype/leftInputStreamConnectionMetatype';
