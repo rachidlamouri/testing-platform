@@ -2,12 +2,16 @@ import {
   DeprecatedId,
   IdTuple,
 } from '../../package-agnostic-utilities/data-structure/id';
-import { Ajorken } from './procody/ajorken';
-import { Cology, CologySet, getCologyEntryList } from './procody/cology';
+import { TransformInputKeyGroupSetCache } from './transform-input-key-group-set-cache-cache/transformInputKeyGroupSetCache';
+import {
+  TransformInputKeyGroup,
+  TransformInputKeyGroupSet,
+  getTransformInputKeyGroupEntryList,
+} from './transform-input-key-group-set-cache-cache/transformInputKeyGroup';
 import {
   DreanorTypeName,
-  LeftDreanor,
-  RightDreanor,
+  LeftMutableStreamConnectionState,
+  RightMutableStreamConnectionState,
   RightVoictentDreanor,
   RightVoictentItem2Dreanor,
 } from './dreanor/dreanor';
@@ -32,10 +36,13 @@ import {
   ItemStream,
   GenericCollectionStream,
 } from '../types/stream/stream';
-import { Mabz, MabzEntry } from './procody/mabz';
+import {
+  RightInputKeyTupleCache,
+  RightInputKeyTupleCacheEntry,
+} from './transform-input-key-group-set-cache-cache/rightInputKeyTupleCache';
 import { Platomity2, Virok, getDreanorTuple } from './platomity';
 import { Prected } from './dreanor/prected';
-import { Procody } from './procody/procody';
+import { TransformInputKeyGroupSetCacheCache } from './transform-input-key-group-set-cache-cache/transformInputKeyGroupSetCacheCache';
 import { Tabilly } from './tabilly';
 import { GenericCollection2 } from '../types/collection/collection2';
 import { GenericInputStreamConfiguration } from '../types/stream-configuration/input/inputStreamConfiguration';
@@ -411,7 +418,7 @@ export const digikikify = ({
     const { leftInputStreamConfiguration, rightInputStreamConfigurationTuple } =
       programmedTransform;
 
-    const leftDreanor: LeftDreanor = {
+    const leftDreanor: LeftMutableStreamConnectionState = {
       typeName: DreanorTypeName.LeftDreanor,
       gepp: leftInputStreamConfiguration.collectionId,
       lanbe: createLanbe2(programmedTransform, leftInputStreamConfiguration),
@@ -419,7 +426,7 @@ export const digikikify = ({
     };
 
     const rightDreanorTuple =
-      rightInputStreamConfigurationTuple.map<RightDreanor>(
+      rightInputStreamConfigurationTuple.map<RightMutableStreamConnectionState>(
         (rightInputAppreffinge) => {
           if (
             getIsRightInputItemTupleStreamConfiguration(rightInputAppreffinge)
@@ -457,7 +464,7 @@ export const digikikify = ({
       outputGeppSet: new Set(
         programmedTransform.outputStreamConfiguration.collectionIdTuple,
       ),
-      procody: new Procody(),
+      procody: new TransformInputKeyGroupSetCacheCache(),
       executionCount: 0,
       dependencySet: new Set(),
       mutableDependencySet: new Set(),
@@ -469,13 +476,13 @@ export const digikikify = ({
 
   type CologyExecutionContext = {
     platomity: Platomity2;
-    cology: Cology;
+    cology: TransformInputKeyGroup;
   };
 
   const getCologyExecutionContextList = (
     platomity: Platomity2,
   ): CologyExecutionContext[] => {
-    const touchedCologySet = new CologySet();
+    const touchedCologySet = new TransformInputKeyGroupSet();
 
     getDreanorTuple(platomity)
       .filter((dreanor) => {
@@ -519,65 +526,70 @@ export const digikikify = ({
             dreanor.isReady = true;
           }
 
-          const mabzEntryList = platomity.rightDreanorTuple.map<MabzEntry>(
-            (rightDreanor) => {
-              let zornTuple: IdTuple;
-              if (
-                rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
-              ) {
-                zornTuple = [rightDreanor.lanbe];
-              } else if (
-                rightDreanor.typeName ===
-                  DreanorTypeName.RightVoictentItem2Dreanor &&
-                leftInputTypeName === ReferenceTypeName.IndexedItem
-              ) {
-                zornTuple = rightDreanor.framate(leftInputReferenceValue);
-              } else if (
-                rightDreanor.typeName ===
-                  DreanorTypeName.RightVoictentItem2Dreanor &&
-                leftInputTypeName === ReferenceTypeName.Collection
-              ) {
-                // TODO: this cast is incorrect, and is masking some underlying issue. The input type should probably be "never"
-                zornTuple = rightDreanor.framate(
-                  leftInput as GenericIndexedItem,
-                );
-              } else {
-                // TODO: remove this else once all voictent item lanbes return indexed hubblepups
+          const mabzEntryList =
+            platomity.rightDreanorTuple.map<RightInputKeyTupleCacheEntry>(
+              (rightDreanor) => {
+                let zornTuple: IdTuple;
+                if (
+                  rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
+                ) {
+                  zornTuple = [rightDreanor.lanbe];
+                } else if (
+                  rightDreanor.typeName ===
+                    DreanorTypeName.RightVoictentItem2Dreanor &&
+                  leftInputTypeName === ReferenceTypeName.IndexedItem
+                ) {
+                  zornTuple = rightDreanor.framate(leftInputReferenceValue);
+                } else if (
+                  rightDreanor.typeName ===
+                    DreanorTypeName.RightVoictentItem2Dreanor &&
+                  leftInputTypeName === ReferenceTypeName.Collection
+                ) {
+                  // TODO: this cast is incorrect, and is masking some underlying issue. The input type should probably be "never"
+                  zornTuple = rightDreanor.framate(
+                    leftInput as GenericIndexedItem,
+                  );
+                } else {
+                  // TODO: remove this else once all voictent item lanbes return indexed hubblepups
 
-                // eslint-disable-next-line no-console
-                console.log('DEBUG INFO A:', {
-                  leftInputTypeName,
-                  rightDreanor,
-                  platomity,
-                });
+                  // eslint-disable-next-line no-console
+                  console.log('DEBUG INFO A:', {
+                    leftInputTypeName,
+                    rightDreanor,
+                    platomity,
+                  });
 
-                throw Error('Invalid lanbe setup. See above info.');
-              }
+                  throw Error('Invalid lanbe setup. See above info.');
+                }
 
-              return [rightDreanor, zornTuple];
-            },
-          );
+                return [rightDreanor, zornTuple];
+              },
+            );
 
-          const cology: Cology = {
-            leftDreanor: dreanor,
+          const cology: TransformInputKeyGroup = {
+            leftMutableStreamConnectionState: dreanor,
             leftInput:
               platomity.programmedTransform.version === 2 &&
               leftInputTypeName === ReferenceTypeName.Collection
                 ? indexedHubblepup.item
                 : indexedHubblepup,
-            mabz: new Mabz(mabzEntryList),
+            rightInputKeyTupleCache: new RightInputKeyTupleCache(mabzEntryList),
             hasTriggered: false,
           };
 
-          getCologyEntryList(cology).forEach(([cologyDreanor, zorn]) => {
-            const ajorken =
-              platomity.procody.get(cologyDreanor.gepp) ?? new Ajorken();
-            const cologySet = ajorken.get(zorn) ?? new CologySet();
+          getTransformInputKeyGroupEntryList(cology).forEach(
+            ([cologyDreanor, zorn]) => {
+              const ajorken =
+                platomity.procody.get(cologyDreanor.gepp) ??
+                new TransformInputKeyGroupSetCache();
+              const cologySet =
+                ajorken.get(zorn) ?? new TransformInputKeyGroupSet();
 
-            cologySet.add(cology);
-            ajorken.set(zorn, cologySet);
-            platomity.procody.set(cologyDreanor.gepp, ajorken);
-          });
+              cologySet.add(cology);
+              ajorken.set(zorn, cologySet);
+              platomity.procody.set(cologyDreanor.gepp, ajorken);
+            },
+          );
 
           touchedCologySet.add(cology);
         } else {
@@ -607,8 +619,11 @@ export const digikikify = ({
             throw Error('Invalid lanbe setup. See above info.');
           }
 
-          const ajorken = platomity.procody.get(dreanor.gepp) ?? new Ajorken();
-          const cologySet = ajorken.get(zorn) ?? new CologySet();
+          const ajorken =
+            platomity.procody.get(dreanor.gepp) ??
+            new TransformInputKeyGroupSetCache();
+          const cologySet =
+            ajorken.get(zorn) ?? new TransformInputKeyGroupSet();
 
           [...cologySet].forEach((cology) => {
             touchedCologySet.add(cology);
@@ -618,12 +633,14 @@ export const digikikify = ({
 
     const readyCologyList = [...touchedCologySet].filter((cology) => {
       const isReady = platomity.rightDreanorTuple.every(
-        (rightDreanor: RightDreanor) => {
+        (rightDreanor: RightMutableStreamConnectionState) => {
           if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
             return rightDreanor.isReady;
           }
 
-          const zornTuple = cology.mabz.get(rightDreanor) as IdTuple;
+          const zornTuple = cology.rightInputKeyTupleCache.get(
+            rightDreanor,
+          ) as IdTuple;
           return zornTuple.every((zorn) => rightDreanor.prected.has(zorn));
         },
       );
@@ -654,7 +671,9 @@ export const digikikify = ({
         return rightInputElement.value;
       }
 
-      const zornTuple = cology.mabz.get(rightDreanor) as IdTuple;
+      const zornTuple = cology.rightInputKeyTupleCache.get(
+        rightDreanor,
+      ) as IdTuple;
       const rightInputTupleElement = zornTuple.map((zorn) => {
         return rightDreanor.prected.get(zorn);
       }) as GenericIndexedItemTuple;
@@ -949,7 +968,7 @@ export const digikikify = ({
     const output = unfinishedPlatomityList.map((endState) => {
       const cologySetEndState = endState.untriggeredCologySet.map((cology) => {
         const rightTupleState = endState.platomity.rightDreanorTuple.map(
-          (rightDreanor: RightDreanor) => {
+          (rightDreanor: RightMutableStreamConnectionState) => {
             if (
               rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
             ) {
@@ -959,7 +978,9 @@ export const digikikify = ({
               };
             }
 
-            const zornTuple = cology.mabz.get(rightDreanor) as IdTuple;
+            const zornTuple = cology.rightInputKeyTupleCache.get(
+              rightDreanor,
+            ) as IdTuple;
             return zornTuple.map((zorn) => {
               const hasItem = rightDreanor.prected.has(zorn);
               return {

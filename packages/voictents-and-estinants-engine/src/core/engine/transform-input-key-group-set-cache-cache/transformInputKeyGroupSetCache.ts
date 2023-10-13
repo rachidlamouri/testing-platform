@@ -1,5 +1,5 @@
 import { DeprecatedId } from '../../../package-agnostic-utilities/data-structure/id';
-import { CologySet } from './cology';
+import { TransformInputKeyGroupSet } from './transformInputKeyGroup';
 
 /**
  * A set of transform input key groups keyed by item key (can be a left or right item key).
@@ -12,4 +12,7 @@ import { CologySet } from './cology';
  *
  * @readableName TransformInputKeyGroupSetCache
  */
-export class Ajorken extends Map<DeprecatedId, CologySet> {}
+export class TransformInputKeyGroupSetCache extends Map<
+  DeprecatedId,
+  TransformInputKeyGroupSet
+> {}

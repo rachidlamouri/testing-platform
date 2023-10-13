@@ -1,5 +1,5 @@
 import { CollectionId } from '../../types/collection/collectionId';
-import { Ajorken } from './ajorken';
+import { TransformInputKeyGroupSetCache } from './transformInputKeyGroupSetCache';
 
 /**
  * A cache of transform input key group caches where the key at this level is the
@@ -10,4 +10,7 @@ import { Ajorken } from './ajorken';
  *
  * @readableName TransformInputKeyGroupSetCacheCache
  */
-export class Procody extends Map<CollectionId, Ajorken> {}
+export class TransformInputKeyGroupSetCacheCache extends Map<
+  CollectionId,
+  TransformInputKeyGroupSetCache
+> {}

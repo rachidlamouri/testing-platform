@@ -25,7 +25,7 @@ export enum DreanorTypeName {
 /**
  * Contains the information needed to identify a Voictent, and to stream its Hubblepups
  */
-export type LeftDreanor = {
+export type LeftMutableStreamConnectionState = {
   typeName: DreanorTypeName.LeftDreanor;
   gepp: CollectionId;
   lanbe: Stream;
@@ -49,16 +49,22 @@ export type RightVoictentItem2Dreanor = {
   croard: RightKeyAccessor | GenericRightKeyAccessor3;
 };
 
-export type RightDreanor = RightVoictentDreanor | RightVoictentItem2Dreanor;
+export type RightMutableStreamConnectionState =
+  | RightVoictentDreanor
+  | RightVoictentItem2Dreanor;
 
-export type RightDreanorTuple = readonly RightDreanor[];
+export type RightDreanorTuple = readonly RightMutableStreamConnectionState[];
 
 /**
  * The information needed to identify a collection, to stream its contents, and
  * to track when a collection is ready to be streamed.
  *
  * @readableName MutableStreamConnectionState
+ *
+ * @canonicalDeclaration
  */
-export type Dreanor = LeftDreanor | RightDreanor;
+export type MutableStreamConnectionState =
+  | LeftMutableStreamConnectionState
+  | RightMutableStreamConnectionState;
 
-export type DreanorTuple = Tuple<Dreanor>;
+export type DreanorTuple = Tuple<MutableStreamConnectionState>;

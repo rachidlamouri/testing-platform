@@ -1,5 +1,5 @@
 import { IdTuple } from '../../../package-agnostic-utilities/data-structure/id';
-import { RightDreanor } from '../dreanor/dreanor';
+import { RightMutableStreamConnectionState } from '../dreanor/dreanor';
 
 /**
  * A cache of right input id tuples keyed by a reference to their respective stream connections.
@@ -7,6 +7,12 @@ import { RightDreanor } from '../dreanor/dreanor';
  *
  * @readableName RightInputKeyTupleCache
  */
-export class Mabz extends Map<RightDreanor, IdTuple> {}
+export class RightInputKeyTupleCache extends Map<
+  RightMutableStreamConnectionState,
+  IdTuple
+> {}
 
-export type MabzEntry = [RightDreanor, IdTuple];
+export type RightInputKeyTupleCacheEntry = [
+  RightMutableStreamConnectionState,
+  IdTuple,
+];
