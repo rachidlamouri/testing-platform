@@ -1,5 +1,5 @@
 import { CollectionId } from '../../../core/types/collection/collectionId';
-import { ItemStream2 } from '../../../core/types/lanbe/lanbe';
+import { ItemStream2 } from '../../../core/types/stream/stream';
 import {
   AbstractInMemoryCollection,
   DereferenceError,

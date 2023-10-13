@@ -8,16 +8,16 @@ import { ReferenceTypeName } from './referenceTypeName';
 
 export enum StreamTypeName {
   CollectionStream = 'VoictentPelieLanbe',
-  HubblepupPelieLanbe = 'HubblepupPelieLanbe',
+  ItemStream = 'HubblepupPelieLanbe',
   ItemStream2 = 'HubblepupPelieLanbe2',
 }
 
-type BaseLanbe<
-  TLanbeTypeName extends StreamTypeName,
+type BaseStream<
+  TStreamTypeName extends StreamTypeName,
   TReferenceTypeName extends ReferenceTypeName,
   TOutput,
 > = {
-  typeName: TLanbeTypeName;
+  typeName: TStreamTypeName;
   debugName: string;
   hasNext: () => boolean;
   advance: () => void;
@@ -27,36 +27,37 @@ type BaseLanbe<
   };
 };
 
-export type CollectionStream<TVoque extends GenericStreamMetatype> = Simplify<
-  BaseLanbe<
-    StreamTypeName.CollectionStream,
-    ReferenceTypeName.Collection,
-    TVoque['collectionStreamable']
-  > & {
-    isAccumulating: () => boolean;
-  }
->;
+export type CollectionStream<TStreamMetatype extends GenericStreamMetatype> =
+  Simplify<
+    BaseStream<
+      StreamTypeName.CollectionStream,
+      ReferenceTypeName.Collection,
+      TStreamMetatype['collectionStreamable']
+    > & {
+      isAccumulating: () => boolean;
+    }
+  >;
 
-export type GenericVoictentPelieLanbe = CollectionStream<GenericStreamMetatype>;
+export type GenericCollectionStream = CollectionStream<GenericStreamMetatype>;
 
-export type ItemStream = BaseLanbe<
-  StreamTypeName.HubblepupPelieLanbe,
-  ReferenceTypeName.HubblepupPelie,
+export type ItemStream = BaseStream<
+  StreamTypeName.ItemStream,
+  ReferenceTypeName.Item,
   Item
 >;
 
 export type ItemStream2<
-  TRestrictingVoque extends GenericStreamMetatype,
-  TVoque extends TRestrictingVoque,
-> = BaseLanbe<
+  TRestrictingStreamMetatype extends GenericStreamMetatype,
+  TStreamMetatype extends TRestrictingStreamMetatype,
+> = BaseStream<
   StreamTypeName.ItemStream2,
   ReferenceTypeName.IndexedItem,
   StreamMetatype<
-    TVoque['collectionId'],
-    TVoque['itemEggStreamable'],
-    TVoque['itemStreamable'],
-    TRestrictingVoque['indexByName'],
-    TRestrictingVoque['collectionStreamable']
+    TStreamMetatype['collectionId'],
+    TStreamMetatype['itemEggStreamable'],
+    TStreamMetatype['itemStreamable'],
+    TRestrictingStreamMetatype['indexByName'],
+    TRestrictingStreamMetatype['collectionStreamable']
   >['indexedItemStreamable']
 >;
 
@@ -73,7 +74,7 @@ export type GenericCollectionItemStream2 = ItemStream2<
  *
  * @readableName Stream
  */
-export type Lanbe =
-  | GenericVoictentPelieLanbe
+export type Stream =
+  | GenericCollectionStream
   | ItemStream
   | GenericCollectionItemStream2;

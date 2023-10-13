@@ -2,8 +2,8 @@ import {
   StreamTypeName,
   ItemStream2,
   CollectionStream,
-} from '../../../core/types/lanbe/lanbe';
-import { ReferenceTypeName } from '../../../core/types/lanbe/referenceTypeName';
+} from '../../../core/types/stream/stream';
+import { ReferenceTypeName } from '../../../core/types/stream/referenceTypeName';
 import { Collection2 } from '../../../core/types/collection/collection2';
 import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { InMemoryCache } from './inMemoryCache';

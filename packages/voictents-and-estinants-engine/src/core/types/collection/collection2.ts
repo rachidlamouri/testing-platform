@@ -1,5 +1,5 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
-import { ItemStream, ItemStream2, CollectionStream } from '../lanbe/lanbe';
+import { ItemStream, ItemStream2, CollectionStream } from '../stream/stream';
 import {
   GenericStreamMetatype,
   UnsafeStreamMetatype,

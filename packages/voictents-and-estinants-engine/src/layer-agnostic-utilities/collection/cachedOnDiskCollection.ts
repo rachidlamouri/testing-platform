@@ -8,11 +8,11 @@ import {
   StreamTypeName,
   ItemStream2,
   CollectionStream,
-} from '../../core/types/lanbe/lanbe';
+} from '../../core/types/stream/stream';
 import { Json, jsonUtils } from '../../package-agnostic-utilities/json/json';
 import { MissingStreamError, ItemEggState } from './abstractInMemoryCollection';
 import { AbstractSerializableIndexByName } from './abstractSerializableCollection';
-import { ReferenceTypeName } from '../../core/types/lanbe/referenceTypeName';
+import { ReferenceTypeName } from '../../core/types/stream/referenceTypeName';
 
 const createDirectory = (directoryPath: string): void => {
   if (!fs.existsSync(directoryPath)) {

@@ -27,11 +27,11 @@ import {
 } from '../types/hubblepup/hubblepup';
 import {
   GenericCollectionItemStream2,
-  Lanbe,
+  Stream,
   StreamTypeName,
   ItemStream,
-  GenericVoictentPelieLanbe,
-} from '../types/lanbe/lanbe';
+  GenericCollectionStream,
+} from '../types/stream/stream';
 import { Mabz, MabzEntry } from './procody/mabz';
 import { Platomity2, Virok, getDreanorTuple } from './platomity';
 import { Prected } from './dreanor/prected';
@@ -41,7 +41,7 @@ import { GenericCollection2 } from '../types/collection/collection2';
 import { GenericInputAppreffinge } from '../types/appreffinge/input/inputAppreffinge';
 import { Tuple } from '../../package-agnostic-utilities/type/tuple';
 import { getIsRightInputHubblepupTupleAppreffinge } from '../types/appreffinge/input/right/rightInputAppreffinge';
-import { ReferenceTypeName } from '../types/lanbe/referenceTypeName';
+import { ReferenceTypeName } from '../types/stream/referenceTypeName';
 import { assertIsError } from '../../package-agnostic-utilities/error/assertIsError';
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 
@@ -120,7 +120,7 @@ type TickSeries<TValue extends number | bigint> = TValue[];
 
 type VoictentTickSeriesConfiguration = {
   collectionId: CollectionId;
-  voictentLanbe: GenericVoictentPelieLanbe | null;
+  voictentLanbe: GenericCollectionStream | null;
   voictentItemLanbe: ItemStream | GenericCollectionItemStream2 | null;
   collectionTickSeries: TickSeries<number>;
   collectionItemTickSeries: TickSeries<number>;
@@ -128,7 +128,7 @@ type VoictentTickSeriesConfiguration = {
 
 type EstinantConnectionTickSeriesConfiguration = {
   collectionId: CollectionId;
-  stream: Lanbe;
+  stream: Stream;
   tickSeries: TickSeries<number>;
 };
 
@@ -383,7 +383,7 @@ export const digikikify = ({
   const createLanbe2 = (
     estinant: GenericEstinant2,
     appreffinge: GenericInputAppreffinge,
-  ): Lanbe => {
+  ): Stream => {
     const voictent = tabilly.get(appreffinge.collectionId);
     assertNotUndefined(
       voictent,
@@ -440,7 +440,7 @@ export const digikikify = ({
             lanbe: createLanbe2(
               programmedTransform,
               rightInputAppreffinge,
-            ) as GenericVoictentPelieLanbe,
+            ) as GenericCollectionStream,
             isReady: false,
           } satisfies RightVoictentDreanor;
         },

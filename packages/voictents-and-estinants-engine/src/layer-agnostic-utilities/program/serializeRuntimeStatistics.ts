@@ -1,4 +1,4 @@
-import { StreamTypeName } from '../../core/types/lanbe/lanbe';
+import { StreamTypeName } from '../../core/types/stream/stream';
 import { RuntimeStatistics } from '../../core/engine/digikikify';
 
 /**

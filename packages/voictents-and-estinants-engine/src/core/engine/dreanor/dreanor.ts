@@ -10,9 +10,9 @@ import {
 import { CollectionId } from '../../types/collection/collectionId';
 import {
   GenericCollectionItemStream2,
-  GenericVoictentPelieLanbe,
-  Lanbe,
-} from '../../types/lanbe/lanbe';
+  GenericCollectionStream,
+  Stream,
+} from '../../types/stream/stream';
 import { Prected } from './prected';
 
 export enum DreanorTypeName {
@@ -28,14 +28,14 @@ export enum DreanorTypeName {
 export type LeftDreanor = {
   typeName: DreanorTypeName.LeftDreanor;
   gepp: CollectionId;
-  lanbe: Lanbe;
+  lanbe: Stream;
   isReady: boolean;
 };
 
 export type RightVoictentDreanor = {
   typeName: DreanorTypeName.RightVoictentDreanor;
   gepp: CollectionId;
-  lanbe: GenericVoictentPelieLanbe;
+  lanbe: GenericCollectionStream;
   isReady: boolean;
   mutableReference?: unknown;
 };

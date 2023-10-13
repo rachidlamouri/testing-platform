@@ -3,10 +3,10 @@ import {
   StreamTypeName,
   ItemStream2,
   GenericCollectionItemStream2,
-} from '../../core/types/lanbe/lanbe';
+} from '../../core/types/stream/stream';
 import { Collection2 } from '../../core/types/collection/collection2';
 import { GenericInMemoryStreamMetatype } from '../stream-metatype/inMemoryStreamMetatype';
-import { ReferenceTypeName } from '../../core/types/lanbe/referenceTypeName';
+import { ReferenceTypeName } from '../../core/types/stream/referenceTypeName';
 
 export class DereferenceError extends Error {
   constructor(stream: GenericCollectionItemStream2) {
