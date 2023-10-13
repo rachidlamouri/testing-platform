@@ -11,7 +11,7 @@
 
 import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
-import { OutputStreamConnectionMetatype as CoreOutputVicken } from '../../../core/types/vicken/outputVicken';
+import { OutputStreamConnectionMetatype as CoreOutputVicken } from '../../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import { IdTuple } from '../../../package-agnostic-utilities/data-structure/id';
 
 enum AdaptedVickenTypeName {
@@ -24,9 +24,9 @@ type BaseLeftInputVicken<
   TIsWibiz extends boolean,
   TPinbetunf,
 > = {
-  voque: TVoque;
-  tropoignantInput: TTropoignantInput;
-  isWibiz: TIsWibiz;
+  streamMetatype: TVoque;
+  coreTransformInput: TTropoignantInput;
+  isCollectionStream: TIsWibiz;
   pinbetunfInput: TPinbetunf;
 };
 
@@ -75,16 +75,16 @@ export type AdaptedRightInputHubblepupTupleVicken<
   TRightInputVoque extends GenericStreamMetatype,
   TZornTuple extends IdTuple,
 > = {
-  voque: TRightInputVoque;
-  tropoignantInput: {
+  streamMetatype: TRightInputVoque;
+  coreTransformInput: {
     [Index in keyof TZornTuple]: TRightInputVoque['indexedItemStreamable'];
   };
-  isWibiz: false;
+  isCollectionStream: false;
   pinbetunfInput: {
     [Index in keyof TZornTuple]: TRightInputVoque['itemStreamable'];
   };
-  zornTuple: TZornTuple;
-  zornTupleOption: TZornTuple[number];
+  idTuple: TZornTuple;
+  idTupleOption: TZornTuple[number];
 };
 
 type GenericAdaptedRightInputHubblepupTupleVicken =
@@ -93,12 +93,12 @@ type GenericAdaptedRightInputHubblepupTupleVicken =
 export type AdaptedRightInputVoictentVicken<
   TRightInputVoque extends GenericStreamMetatype,
 > = {
-  voque: TRightInputVoque;
-  tropoignantInput: TRightInputVoque['collectionStreamable'];
-  isWibiz: true;
+  streamMetatype: TRightInputVoque;
+  coreTransformInput: TRightInputVoque['collectionStreamable'];
+  isCollectionStream: true;
   pinbetunfInput: TRightInputVoque['collectionStreamable'];
-  zornTuple: never;
-  zornTupleOption: never;
+  idTuple: never;
+  idTupleOption: never;
 };
 
 type GenericAdaptedRightInputVoictentVicken =

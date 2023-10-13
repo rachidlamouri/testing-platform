@@ -1,6 +1,6 @@
 import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
-import { LeftInputItemStreamConnectionMetatype } from '../../core/types/vicken/leftInputVicken';
-import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
+import { LeftInputItemStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
+import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';

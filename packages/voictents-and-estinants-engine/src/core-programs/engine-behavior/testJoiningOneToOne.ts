@@ -1,7 +1,7 @@
 import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
-import { LeftInputItemStreamConnectionMetatype } from '../../core/types/vicken/leftInputVicken';
-import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
-import { RightInputHubblepupTupleVicken } from '../../core/types/vicken/rightInputVicken';
+import { LeftInputItemStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
+import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
+import { RightInputItemTupleStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/rightInputStreamConnectionMetatype';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
@@ -24,7 +24,7 @@ const programFileCache = new ProgramFileCache({
  */
 const joinCollections: ProgrammedTransform2<
   LeftInputItemStreamConnectionMetatype<Voictent1Voque>,
-  [RightInputHubblepupTupleVicken<Voictent2Voque, [number]>],
+  [RightInputItemTupleStreamConnectionMetatype<Voictent2Voque, [number]>],
   OutputStreamConnectionMetatype<[Voictent3Voque]>
 > = {
   version: 2,

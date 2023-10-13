@@ -11,17 +11,17 @@ import {
   ProgrammedTransform2,
 } from '../../core/types/estinant/estinant';
 import {
-  GenericLeftInputVicken,
-  LeftInputVicken,
-} from '../../core/types/vicken/leftInputVicken';
+  GenericLeftInputStreamConnectionMetatype,
+  LeftInputStreamConnectionMetatype,
+} from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import {
-  GenericOutputVicken,
+  GenericOutputStreamConnectionMetatype,
   OutputStreamConnectionMetatype,
-} from '../../core/types/vicken/outputVicken';
+} from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import {
-  GenericRightInputVickenTuple,
-  RightInputVicken,
-} from '../../core/types/vicken/rightInputVicken';
+  GenericRightInputStreamConnectionMetatypeTuple,
+  RightInputStreamConnectionMetatype,
+} from '../../core/types/stream-connection-metatype/rightInputStreamConnectionMetatype';
 import {
   CollectionId,
   GenericCollectionIdCombination,
@@ -55,13 +55,16 @@ type VoqueUnionFromVoictentTuple<
   ? TVoque
   : never;
 
-type VoqueFromLeftInputVicken<TLeftInputVicken extends GenericLeftInputVicken> =
-  TLeftInputVicken extends LeftInputVicken<infer TVoque> ? TVoque : never;
+type VoqueFromLeftInputVicken<
+  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
+> = TLeftInputVicken extends LeftInputStreamConnectionMetatype<infer TVoque>
+  ? TVoque
+  : never;
 
 type VoqueTupleFromRightInputVickenTuple<
-  TRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
 > = {
-  [TIndex in keyof TRightInputVickenTuple]: TRightInputVickenTuple[TIndex] extends RightInputVicken<
+  [TIndex in keyof TRightInputVickenTuple]: TRightInputVickenTuple[TIndex] extends RightInputStreamConnectionMetatype<
     infer TVoque,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any
@@ -71,19 +74,20 @@ type VoqueTupleFromRightInputVickenTuple<
 };
 
 type VoqueUnionFromRightInputVickenTuple<
-  TRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
 > = VoqueTupleFromRightInputVickenTuple<TRightInputVickenTuple>[number];
 
 type VoqueOptionTupleFromOutputVicken<
-  TOutputVicken extends GenericOutputVicken,
+  TOutputVicken extends GenericOutputStreamConnectionMetatype,
 > = TOutputVicken extends OutputStreamConnectionMetatype<
   infer TVoqueOptionTuple
 >
   ? TVoqueOptionTuple
   : never;
 
-type VoqueUnionFromOutputVicken<TOutputVicken extends GenericOutputVicken> =
-  VoqueOptionTupleFromOutputVicken<TOutputVicken>[number];
+type VoqueUnionFromOutputVicken<
+  TOutputVicken extends GenericOutputStreamConnectionMetatype,
+> = VoqueOptionTupleFromOutputVicken<TOutputVicken>[number];
 
 type VoqueUnionFromEstinant<TEstinant extends UnsafeEstinant2> =
   TEstinant extends ProgrammedTransform2<

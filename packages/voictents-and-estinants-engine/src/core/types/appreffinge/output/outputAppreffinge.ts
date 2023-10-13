@@ -1,4 +1,4 @@
-import { GenericOutputVicken } from '../../vicken/outputVicken';
+import { GenericOutputStreamConnectionMetatype } from '../../stream-connection-metatype/outputStreamConnectionMetatype';
 
 /**
  * Determines zero or more collections that will receive data from the output of
@@ -9,6 +9,8 @@ import { GenericOutputVicken } from '../../vicken/outputVicken';
  *
  * @readableName OutputStreamGroupConfiguration
  */
-export type OutputAppreffinge<TOutputVicken extends GenericOutputVicken> = {
-  collectionIdTuple: TOutputVicken['geppTuple'];
+export type OutputAppreffinge<
+  TOutputVicken extends GenericOutputStreamConnectionMetatype,
+> = {
+  collectionIdTuple: TOutputVicken['collectionIdTuple'];
 };

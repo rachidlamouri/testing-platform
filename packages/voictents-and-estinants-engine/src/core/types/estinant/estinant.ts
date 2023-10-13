@@ -3,12 +3,12 @@ import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { LeftInputAppreffinge } from '../appreffinge/input/leftInputAppreffinge';
 import { OutputAppreffinge } from '../appreffinge/output/outputAppreffinge';
 import { InputVickenTupleToRightInputAppreffingeTuple } from '../appreffinge/input/right/rightInputAppreffinge';
-import { GenericLeftInputVicken } from '../vicken/leftInputVicken';
+import { GenericLeftInputStreamConnectionMetatype } from '../stream-connection-metatype/leftInputStreamConnectionMetatype';
 import {
-  GenericOutputVicken,
-  UnsafeOutputVicken,
-} from '../vicken/outputVicken';
-import { GenericRightInputVickenTuple } from '../vicken/rightInputVicken';
+  GenericOutputStreamConnectionMetatype,
+  UnsafeOutputStreamConnectionMetatype,
+} from '../stream-connection-metatype/outputStreamConnectionMetatype';
+import { GenericRightInputStreamConnectionMetatypeTuple } from '../stream-connection-metatype/rightInputStreamConnectionMetatype';
 import { Tropoignant2 } from './tropoignant';
 
 /**
@@ -19,9 +19,9 @@ import { Tropoignant2 } from './tropoignant';
  * @canonicalDeclaration
  */
 export type ProgrammedTransform2<
-  TLeftInputVicken extends GenericLeftInputVicken,
-  TRightInputVickenTuple extends GenericRightInputVickenTuple,
-  TOutputVicken extends UnsafeOutputVicken,
+  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
+  TOutputVicken extends UnsafeOutputStreamConnectionMetatype,
 > = {
   version: 2;
   name: string;
@@ -39,9 +39,9 @@ export type ProgrammedTransform2<
 };
 
 export type GenericEstinant2 = ProgrammedTransform2<
-  GenericLeftInputVicken,
-  GenericRightInputVickenTuple,
-  GenericOutputVicken
+  GenericLeftInputStreamConnectionMetatype,
+  GenericRightInputStreamConnectionMetatypeTuple,
+  GenericOutputStreamConnectionMetatype
 >;
 
 export type GenericEstinant2Tuple = Tuple<GenericEstinant2>;

@@ -5,12 +5,12 @@ import {
 } from '../../../core/types/estinant/estinant';
 import { GenericTropoignant2 } from '../../../core/types/estinant/tropoignant';
 import { GenericIndexedHubblepup } from '../../../core/types/hubblepup/hubblepup';
-import { GenericLeftInputVicken } from '../../../core/types/vicken/leftInputVicken';
+import { GenericLeftInputStreamConnectionMetatype } from '../../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import {
-  GenericRightInputHubblepupTupleVicken,
-  GenericRightInputVickenTuple,
-  GenericRightInputVoictentVicken,
-} from '../../../core/types/vicken/rightInputVicken';
+  GenericRightInputItemTupleStreamConnectionMetatype,
+  GenericRightInputStreamConnectionMetatypeTuple,
+  GenericRightInputCollectionStreamConnectionMetatype,
+} from '../../../core/types/stream-connection-metatype/rightInputStreamConnectionMetatype';
 import {
   DeprecatedId,
   IdTuple,
@@ -31,8 +31,8 @@ import {
  * @readableName ProgrammedTransformAssembler
  */
 type EstinantAssembler<
-  TLeftInputVicken extends GenericLeftInputVicken,
-  TRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = () => ProgrammedTransform2<
   TLeftInputVicken,
@@ -41,8 +41,8 @@ type EstinantAssembler<
 >;
 
 export const buildEstinantAssembler = <
-  TLeftInputVicken extends GenericLeftInputVicken,
-  TRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 >(
   assemblerContext: AssemblerContext,
@@ -132,8 +132,8 @@ export const buildEstinantAssembler = <
               framate: undefined,
               croard: undefined,
             } satisfies RightInputAppreffinge<
-              GenericLeftInputVicken,
-              GenericRightInputVoictentVicken
+              GenericLeftInputStreamConnectionMetatype,
+              GenericRightInputCollectionStreamConnectionMetatype
             >;
           }
 
@@ -164,8 +164,8 @@ export const buildEstinantAssembler = <
               return rightInputContext.croard(adaptedRightInput);
             },
           } satisfies RightInputAppreffinge<
-            GenericLeftInputVicken,
-            GenericRightInputHubblepupTupleVicken
+            GenericLeftInputStreamConnectionMetatype,
+            GenericRightInputItemTupleStreamConnectionMetatype
           >;
         },
       ),
@@ -185,8 +185,8 @@ export const buildEstinantAssembler = <
 };
 
 export type EstinantAssemblerParent<
-  TLeftInputVicken extends GenericLeftInputVicken,
-  TRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
 > = {
   assemble: EstinantAssembler<

@@ -1,9 +1,9 @@
 import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
 import {
   LeftInputItemStreamConnectionMetatype,
-  LeftInputVoictentVicken,
-} from '../../core/types/vicken/leftInputVicken';
-import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
+  LeftInputCollectionStreamConnectionMetatype,
+} from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
+import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
@@ -46,7 +46,7 @@ const forwardFrom1To2AndSkipAValue: ProgrammedTransform2<
   },
   transform(
     input,
-  ): OutputStreamConnectionMetatype<[Voictent2Voque]>['tropoignantOutput'] {
+  ): OutputStreamConnectionMetatype<[Voictent2Voque]>['coreTransformOutput'] {
     if (input.indexByName.listIndex === SKIP_INDEX) {
       return {
         'voictent-2': [],
@@ -64,7 +64,7 @@ const forwardFrom1To2AndSkipAValue: ProgrammedTransform2<
  * collection stops accumulating twice this transform is expected to run twice
  */
 const forwardFrom2To3: ProgrammedTransform2<
-  LeftInputVoictentVicken<Voictent2Voque>,
+  LeftInputCollectionStreamConnectionMetatype<Voictent2Voque>,
   [],
   OutputStreamConnectionMetatype<[Voictent3Voque]>
 > = {
@@ -80,7 +80,7 @@ const forwardFrom2To3: ProgrammedTransform2<
   },
   transform(
     input,
-  ): OutputStreamConnectionMetatype<[Voictent3Voque]>['tropoignantOutput'] {
+  ): OutputStreamConnectionMetatype<[Voictent3Voque]>['coreTransformOutput'] {
     return {
       'voictent-3': [input],
     };

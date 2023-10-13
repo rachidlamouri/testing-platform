@@ -1,6 +1,6 @@
 import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
-import { LeftInputItemStreamConnectionMetatype } from '../../core/types/vicken/leftInputVicken';
-import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
+import { LeftInputItemStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
+import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import {
   GenericAbstractSerializableSourceStreamMetatype,
   GenericAbstractSerializableStreamMetatype,

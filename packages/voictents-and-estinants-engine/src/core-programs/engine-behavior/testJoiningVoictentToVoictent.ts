@@ -1,7 +1,7 @@
 import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
-import { LeftInputVoictentVicken } from '../../core/types/vicken/leftInputVicken';
-import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
-import { RightInputVoictentVicken } from '../../core/types/vicken/rightInputVicken';
+import { LeftInputCollectionStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
+import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
+import { RightInputCollectionStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/rightInputStreamConnectionMetatype';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
@@ -23,8 +23,8 @@ const programFileCache = new ProgramFileCache({
  * Joins the entire left collection to the entire right collection
  */
 const gatherCollection: ProgrammedTransform2<
-  LeftInputVoictentVicken<Voictent1Voque>,
-  [RightInputVoictentVicken<Voictent2Voque>],
+  LeftInputCollectionStreamConnectionMetatype<Voictent1Voque>,
+  [RightInputCollectionStreamConnectionMetatype<Voictent2Voque>],
   OutputStreamConnectionMetatype<[Voictent3Voque]>
 > = {
   version: 2,
@@ -47,7 +47,9 @@ const gatherCollection: ProgrammedTransform2<
   transform: (
     leftInput,
     rightInput,
-  ): OutputStreamConnectionMetatype<[Voictent3Voque]>['tropoignantOutput'] => {
+  ): OutputStreamConnectionMetatype<
+    [Voictent3Voque]
+  >['coreTransformOutput'] => {
     const serializedLeftInput = `[${leftInput.join(', ')}]`;
     const serializedRightInput = `[${rightInput.join(', ')}]`;
 

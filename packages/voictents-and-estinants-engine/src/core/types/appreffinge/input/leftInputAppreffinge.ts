@@ -1,4 +1,4 @@
-import { GenericLeftInputVicken } from '../../vicken/leftInputVicken';
+import { GenericLeftInputStreamConnectionMetatype } from '../../stream-connection-metatype/leftInputStreamConnectionMetatype';
 
 /**
  * Determines how to stream a collection into the left input of a transform
@@ -7,11 +7,11 @@ import { GenericLeftInputVicken } from '../../vicken/leftInputVicken';
  * @readableName LeftInputStreamConfiguration
  */
 export type LeftInputAppreffinge<
-  TLeftInputVicken extends GenericLeftInputVicken,
+  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
 > = {
-  collectionId: TLeftInputVicken['voque']['collectionId'];
-  isCollectionStream: TLeftInputVicken['isWibiz'];
+  collectionId: TLeftInputVicken['streamMetatype']['collectionId'];
+  isCollectionStream: TLeftInputVicken['isCollectionStream'];
 };
 
 export type GenericLeftInputAppreffinge =
-  LeftInputAppreffinge<GenericLeftInputVicken>;
+  LeftInputAppreffinge<GenericLeftInputStreamConnectionMetatype>;

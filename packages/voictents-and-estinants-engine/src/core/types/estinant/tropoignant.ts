@@ -1,9 +1,9 @@
-import { GenericLeftInputVicken } from '../vicken/leftInputVicken';
-import { GenericOutputVicken } from '../vicken/outputVicken';
+import { GenericLeftInputStreamConnectionMetatype } from '../stream-connection-metatype/leftInputStreamConnectionMetatype';
+import { GenericOutputStreamConnectionMetatype } from '../stream-connection-metatype/outputStreamConnectionMetatype';
 import {
-  GenericRightInputVickenTuple,
-  RightInputVickenTupleTropoignantInputTuple,
-} from '../vicken/rightInputVicken';
+  GenericRightInputStreamConnectionMetatypeTuple,
+  RightInputStreamConnectionMetatypeTupleCoreTransformInputTuple,
+} from '../stream-connection-metatype/rightInputStreamConnectionMetatype';
 
 /**
  * A tranform with specific input and output datastructures that make it easy
@@ -14,16 +14,16 @@ import {
  * @readableName CoreTransform
  */
 export type Tropoignant2<
-  TLeftVicken extends GenericLeftInputVicken,
-  TRightVickenTuple extends GenericRightInputVickenTuple,
-  TOutputVicken extends GenericOutputVicken,
+  TLeftVicken extends GenericLeftInputStreamConnectionMetatype,
+  TRightVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
+  TOutputVicken extends GenericOutputStreamConnectionMetatype,
 > = (
-  leftInput: TLeftVicken['tropoignantInput'],
-  ...rightInputTuple: RightInputVickenTupleTropoignantInputTuple<TRightVickenTuple>
-) => TOutputVicken['tropoignantOutput'];
+  leftInput: TLeftVicken['coreTransformInput'],
+  ...rightInputTuple: RightInputStreamConnectionMetatypeTupleCoreTransformInputTuple<TRightVickenTuple>
+) => TOutputVicken['coreTransformOutput'];
 
 export type GenericTropoignant2 = Tropoignant2<
-  GenericLeftInputVicken,
-  GenericRightInputVickenTuple,
-  GenericOutputVicken
+  GenericLeftInputStreamConnectionMetatype,
+  GenericRightInputStreamConnectionMetatypeTuple,
+  GenericOutputStreamConnectionMetatype
 >;

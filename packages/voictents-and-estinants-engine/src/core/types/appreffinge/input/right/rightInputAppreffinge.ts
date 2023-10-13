@@ -1,12 +1,12 @@
 import { Merge } from 'type-fest';
 import {
-  GenericRightInputHubblepupTupleVicken,
-  GenericRightInputVicken,
-  GenericRightInputVickenTuple,
-} from '../../../vicken/rightInputVicken';
+  GenericRightInputItemTupleStreamConnectionMetatype,
+  GenericRightInputStreamConnectionMetatype,
+  GenericRightInputStreamConnectionMetatypeTuple,
+} from '../../../stream-connection-metatype/rightInputStreamConnectionMetatype';
 import { Croarder3 } from './croarder';
 import { Framation3 } from './framation';
-import { GenericLeftInputVicken } from '../../../vicken/leftInputVicken';
+import { GenericLeftInputStreamConnectionMetatype } from '../../../stream-connection-metatype/leftInputStreamConnectionMetatype';
 
 /**
  * Determines how to stream a collection into a single right input of a
@@ -15,14 +15,14 @@ import { GenericLeftInputVicken } from '../../../vicken/leftInputVicken';
  * @readableName RightInputStreamConfiguration
  */
 export type RightInputAppreffinge<
-  TLeftInputVicken extends GenericLeftInputVicken,
-  TRightInputVicken extends GenericRightInputVicken,
+  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputVicken extends GenericRightInputStreamConnectionMetatype,
 > = Merge<
   {
-    collectionId: TRightInputVicken['voque']['collectionId'];
-    isWibiz: TRightInputVicken['isWibiz'];
+    collectionId: TRightInputVicken['streamMetatype']['collectionId'];
+    isWibiz: TRightInputVicken['isCollectionStream'];
   },
-  TRightInputVicken extends GenericRightInputHubblepupTupleVicken
+  TRightInputVicken extends GenericRightInputItemTupleStreamConnectionMetatype
     ? {
         croard: Croarder3<TRightInputVicken>;
         framate: Framation3<TLeftInputVicken, TRightInputVicken>;
@@ -34,18 +34,18 @@ export type RightInputAppreffinge<
 >;
 
 type GenericRightInputHubblepupTupleAppreffinge = RightInputAppreffinge<
-  GenericLeftInputVicken,
-  GenericRightInputHubblepupTupleVicken
+  GenericLeftInputStreamConnectionMetatype,
+  GenericRightInputItemTupleStreamConnectionMetatype
 >;
 
 export type GenericRightInputAppreffinge = RightInputAppreffinge<
-  GenericLeftInputVicken,
-  GenericRightInputVicken
+  GenericLeftInputStreamConnectionMetatype,
+  GenericRightInputStreamConnectionMetatype
 >;
 
 export type InputVickenTupleToRightInputAppreffingeTuple<
-  TLeftInputVicken extends GenericLeftInputVicken,
-  TRightInputVickenTuple extends GenericRightInputVickenTuple,
+  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
 > = {
   [Index in keyof TRightInputVickenTuple]: RightInputAppreffinge<
     TLeftInputVicken,

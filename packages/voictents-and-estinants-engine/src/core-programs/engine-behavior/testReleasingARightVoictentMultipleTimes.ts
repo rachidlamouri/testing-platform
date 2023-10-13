@@ -1,7 +1,7 @@
 import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
-import { LeftInputItemStreamConnectionMetatype } from '../../core/types/vicken/leftInputVicken';
-import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
-import { RightInputVoictentVicken } from '../../core/types/vicken/rightInputVicken';
+import { LeftInputItemStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
+import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
+import { RightInputCollectionStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/rightInputStreamConnectionMetatype';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
@@ -44,7 +44,7 @@ const forwardFrom2To3AndSkipAValue: ProgrammedTransform2<
   },
   transform(
     input,
-  ): OutputStreamConnectionMetatype<[Voictent3Voque]>['tropoignantOutput'] {
+  ): OutputStreamConnectionMetatype<[Voictent3Voque]>['coreTransformOutput'] {
     if (input.indexByName.listIndex === SKIP_INDEX) {
       return {
         'voictent-3': [],
@@ -64,7 +64,7 @@ const forwardFrom2To3AndSkipAValue: ProgrammedTransform2<
  */
 const join1ToAllOf3: ProgrammedTransform2<
   LeftInputItemStreamConnectionMetatype<Voictent1Voque>,
-  [RightInputVoictentVicken<Voictent3Voque>],
+  [RightInputCollectionStreamConnectionMetatype<Voictent3Voque>],
   OutputStreamConnectionMetatype<[Voictent4Voque]>
 > = {
   version: 2,
@@ -87,7 +87,7 @@ const join1ToAllOf3: ProgrammedTransform2<
   transform(
     leftInput,
     rightInput,
-  ): OutputStreamConnectionMetatype<[Voictent4Voque]>['tropoignantOutput'] {
+  ): OutputStreamConnectionMetatype<[Voictent4Voque]>['coreTransformOutput'] {
     const serializedRightInput = `[${rightInput.join(', ')}]`;
 
     const output = `${leftInput.item}-${serializedRightInput}`;

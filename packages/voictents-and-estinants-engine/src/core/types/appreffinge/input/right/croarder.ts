@@ -1,6 +1,6 @@
 import { DeprecatedId } from '../../../../../package-agnostic-utilities/data-structure/id';
 import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
-import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInputVicken';
+import { GenericRightInputItemTupleStreamConnectionMetatype } from '../../../stream-connection-metatype/rightInputStreamConnectionMetatype';
 
 /**
  * A function that gets the key for an item. The engine does not assume the
@@ -15,9 +15,10 @@ export type Croarder = (
 ) => DeprecatedId;
 
 export type Croarder3<
-  TRightVicken extends GenericRightInputHubblepupTupleVicken,
+  TRightVicken extends GenericRightInputItemTupleStreamConnectionMetatype,
 > = (
-  rightTropoignantInputElement: TRightVicken['tropoignantInput'][number],
-) => TRightVicken['zornTupleOption'];
+  rightTropoignantInputElement: TRightVicken['coreTransformInput'][number],
+) => TRightVicken['idTupleOption'];
 
-export type GenericCroarder3 = Croarder3<GenericRightInputHubblepupTupleVicken>;
+export type GenericCroarder3 =
+  Croarder3<GenericRightInputItemTupleStreamConnectionMetatype>;

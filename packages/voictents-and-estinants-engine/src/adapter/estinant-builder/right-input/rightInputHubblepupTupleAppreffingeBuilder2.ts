@@ -139,7 +139,7 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
         version: 2,
         gepp: partialRightAppreffinge.gepp,
         isWibiz: false,
-        framate: (leftInput: TAdaptedLeftInputVicken['tropoignantInput']) => {
+        framate: (leftInput: TAdaptedLeftInputVicken['coreTransformInput']) => {
           const list = partialRightAppreffinge
             .framate(leftInput)
             .map((intermediateValue) => {

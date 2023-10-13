@@ -1,7 +1,7 @@
 import { IdTuple } from '../../../../../package-agnostic-utilities/data-structure/id';
 import { GenericIndexedHubblepup } from '../../../hubblepup/hubblepup';
-import { GenericLeftInputVicken } from '../../../vicken/leftInputVicken';
-import { GenericRightInputHubblepupTupleVicken } from '../../../vicken/rightInputVicken';
+import { GenericLeftInputStreamConnectionMetatype } from '../../../stream-connection-metatype/leftInputStreamConnectionMetatype';
+import { GenericRightInputItemTupleStreamConnectionMetatype } from '../../../stream-connection-metatype/rightInputStreamConnectionMetatype';
 
 /**
  * A function that takes the leftmost input of a transform input group and
@@ -16,13 +16,13 @@ export type Framation = (
 ) => IdTuple;
 
 export type Framation3<
-  TLeftInputVicken extends GenericLeftInputVicken,
-  TRightInputVicken extends GenericRightInputHubblepupTupleVicken,
+  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputVicken extends GenericRightInputItemTupleStreamConnectionMetatype,
 > = (
-  leftTropoignantInput: TLeftInputVicken['tropoignantInput'],
-) => TRightInputVicken['zornTuple'];
+  leftTropoignantInput: TLeftInputVicken['coreTransformInput'],
+) => TRightInputVicken['idTuple'];
 
 export type GenericFramation3 = Framation3<
-  GenericLeftInputVicken,
-  GenericRightInputHubblepupTupleVicken
+  GenericLeftInputStreamConnectionMetatype,
+  GenericRightInputItemTupleStreamConnectionMetatype
 >;

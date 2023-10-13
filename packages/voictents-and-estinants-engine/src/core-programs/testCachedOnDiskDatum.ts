@@ -6,9 +6,9 @@ import {
   CachedOnDiskCollection,
   CachedOnDiskStreamMetatype,
 } from '../layer-agnostic-utilities/collection/cachedOnDiskCollection';
-import { OutputStreamConnectionMetatype } from '../core/types/vicken/outputVicken';
+import { OutputStreamConnectionMetatype } from '../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import { ProgrammedTransform2 } from '../core/types/estinant/estinant';
-import { LeftInputItemStreamConnectionMetatype } from '../core/types/vicken/leftInputVicken';
+import { LeftInputItemStreamConnectionMetatype } from '../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { StandardInMemoryStreamMetatype } from '../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 
 type InputVoque = StandardInMemoryStreamMetatype<
@@ -49,7 +49,7 @@ const writeDatumToCache: ProgrammedTransform2<
   rightInputStreamConfigurationTuple: [],
   transform: (
     rawInput,
-  ): OutputStreamConnectionMetatype<[CachedVoque]>['tropoignantOutput'] => {
+  ): OutputStreamConnectionMetatype<[CachedVoque]>['coreTransformOutput'] => {
     return {
       cached: [rawInput.item],
     };

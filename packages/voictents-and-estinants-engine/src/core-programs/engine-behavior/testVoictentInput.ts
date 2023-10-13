@@ -1,6 +1,6 @@
 import { ProgrammedTransform2 } from '../../core/types/estinant/estinant';
-import { LeftInputVoictentVicken } from '../../core/types/vicken/leftInputVicken';
-import { OutputStreamConnectionMetatype } from '../../core/types/vicken/outputVicken';
+import { LeftInputCollectionStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
+import { OutputStreamConnectionMetatype } from '../../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import { digikikify2 } from '../../core/engine/digikikify';
 import { InMemoryCollection } from '../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { StandardInMemoryStreamMetatype } from '../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
@@ -21,7 +21,7 @@ const programFileCache = new ProgramFileCache({
  * Forwards collection 1 as a whole to collection 2.
  */
 const gatherCollection: ProgrammedTransform2<
-  LeftInputVoictentVicken<Voictent1Voque>,
+  LeftInputCollectionStreamConnectionMetatype<Voictent1Voque>,
   [],
   OutputStreamConnectionMetatype<[Voictent2Voque]>
 > = {
@@ -37,7 +37,9 @@ const gatherCollection: ProgrammedTransform2<
   },
   transform: (
     input,
-  ): OutputStreamConnectionMetatype<[Voictent2Voque]>['tropoignantOutput'] => {
+  ): OutputStreamConnectionMetatype<
+    [Voictent2Voque]
+  >['coreTransformOutput'] => {
     return {
       'voictent-2': [input],
     };

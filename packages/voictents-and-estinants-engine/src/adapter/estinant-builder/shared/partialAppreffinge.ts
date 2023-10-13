@@ -25,7 +25,7 @@ export type PartialRightHubblepupTupleAppreffinge<
 > = {
   gepp: TRightInputVoque['collectionId'];
   framate: (
-    leftInput: TAdaptedLeftInputVicken['tropoignantInput'],
+    leftInput: TAdaptedLeftInputVicken['coreTransformInput'],
   ) => TZornTuple;
   croard: (
     rightInput: TRightInputVoque['indexedItemStreamable'],
