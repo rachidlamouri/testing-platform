@@ -7,4 +7,4 @@ import { Item } from '../../types/item/item';
  *
  * @readableName ItemCache
  */
-export class Prected extends Map<DeprecatedId, Item> {}
+export class ItemCache extends Map<DeprecatedId, Item> {}

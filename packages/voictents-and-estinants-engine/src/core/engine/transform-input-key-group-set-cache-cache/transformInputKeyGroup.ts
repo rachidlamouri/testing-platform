@@ -2,7 +2,7 @@ import { DeprecatedId } from '../../../package-agnostic-utilities/data-structure
 import {
   MutableStreamConnectionState,
   LeftMutableStreamConnectionState,
-} from '../dreanor/dreanor';
+} from '../mutable-stream-connection-state/mutableStreamConnectionState';
 import { RightInputKeyTupleCache } from './rightInputKeyTupleCache';
 
 /**

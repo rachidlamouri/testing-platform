@@ -1,5 +1,5 @@
 import { IdTuple } from '../../../package-agnostic-utilities/data-structure/id';
-import { RightMutableStreamConnectionState } from '../dreanor/dreanor';
+import { RightMutableStreamConnectionState } from '../mutable-stream-connection-state/mutableStreamConnectionState';
 
 /**
  * A cache of right input id tuples keyed by a reference to their respective stream connections.

@@ -1,8 +1,8 @@
 import {
-  DreanorTuple,
+  MutableStreamConnectionStateTuple,
   LeftMutableStreamConnectionState,
-  RightDreanorTuple,
-} from './dreanor/dreanor';
+  RightMutableStreamConnectionStateTuple,
+} from './mutable-stream-connection-state/mutableStreamConnectionState';
 import { GenericProgrammedTransform2 } from '../types/programmed-transform/programmedTransform';
 import { TransformInputKeyGroupSetCacheCache } from './transform-input-key-group-set-cache-cache/transformInputKeyGroupSetCacheCache';
 import { CollectionIdSet } from '../types/collection/collectionId';
@@ -18,7 +18,7 @@ export type Platomity2 = {
   version: 2;
   programmedTransform: GenericProgrammedTransform2;
   leftDreanor: LeftMutableStreamConnectionState;
-  rightDreanorTuple: RightDreanorTuple;
+  rightDreanorTuple: RightMutableStreamConnectionStateTuple;
   outputGeppSet: CollectionIdSet;
   procody: TransformInputKeyGroupSetCacheCache;
   executionCount: number;
@@ -30,7 +30,9 @@ export type Platomity2 = {
   dependentSet: Set<Virok>;
 };
 
-export const getDreanorTuple = (platomity: Platomity2): DreanorTuple => [
+export const getDreanorTuple = (
+  platomity: Platomity2,
+): MutableStreamConnectionStateTuple => [
   platomity.leftDreanor,
   ...platomity.rightDreanorTuple,
 ];

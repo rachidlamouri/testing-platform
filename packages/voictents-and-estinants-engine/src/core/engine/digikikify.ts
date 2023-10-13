@@ -9,12 +9,12 @@ import {
   getTransformInputKeyGroupEntryList,
 } from './transform-input-key-group-set-cache-cache/transformInputKeyGroup';
 import {
-  DreanorTypeName,
+  MutableStreamConnectionStateTypeName,
   LeftMutableStreamConnectionState,
   RightMutableStreamConnectionState,
-  RightVoictentDreanor,
-  RightVoictentItem2Dreanor,
-} from './dreanor/dreanor';
+  RightCollectionMutableStreamConnectionState,
+  RightCollectionItem2MutableStreamConnectionState,
+} from './mutable-stream-connection-state/mutableStreamConnectionState';
 import {
   GenericProgrammedTransform2,
   UnsafeProgrammedTransform2Tuple,
@@ -41,7 +41,7 @@ import {
   RightInputKeyTupleCacheEntry,
 } from './transform-input-key-group-set-cache-cache/rightInputKeyTupleCache';
 import { Platomity2, Virok, getDreanorTuple } from './platomity';
-import { Prected } from './dreanor/prected';
+import { ItemCache } from './mutable-stream-connection-state/itemCache';
 import { TransformInputKeyGroupSetCacheCache } from './transform-input-key-group-set-cache-cache/transformInputKeyGroupSetCacheCache';
 import { Tabilly } from './tabilly';
 import { GenericCollection2 } from '../types/collection/collection2';
@@ -419,9 +419,10 @@ export const digikikify = ({
       programmedTransform;
 
     const leftDreanor: LeftMutableStreamConnectionState = {
-      typeName: DreanorTypeName.LeftDreanor,
-      gepp: leftInputStreamConfiguration.collectionId,
-      lanbe: createLanbe2(programmedTransform, leftInputStreamConfiguration),
+      typeName:
+        MutableStreamConnectionStateTypeName.LeftMutableStreamConnectionState,
+      collectionId: leftInputStreamConfiguration.collectionId,
+      stream: createLanbe2(programmedTransform, leftInputStreamConfiguration),
       isReady: false,
     };
 
@@ -432,27 +433,29 @@ export const digikikify = ({
             getIsRightInputItemTupleStreamConfiguration(rightInputAppreffinge)
           ) {
             return {
-              typeName: DreanorTypeName.RightVoictentItem2Dreanor,
-              gepp: rightInputAppreffinge.collectionId,
-              lanbe: createLanbe2(
+              typeName:
+                MutableStreamConnectionStateTypeName.RightCollectionItem2MutableStreamConnectionState,
+              collectionId: rightInputAppreffinge.collectionId,
+              stream: createLanbe2(
                 programmedTransform,
                 rightInputAppreffinge,
               ) as GenericCollectionItemStream2,
-              framate: rightInputAppreffinge.getRightKeyTuple,
-              croard: rightInputAppreffinge.getRightKey,
-              prected: new Prected(),
-            } satisfies RightVoictentItem2Dreanor;
+              getRightKeyTuple: rightInputAppreffinge.getRightKeyTuple,
+              getRightKey: rightInputAppreffinge.getRightKey,
+              itemCache: new ItemCache(),
+            } satisfies RightCollectionItem2MutableStreamConnectionState;
           }
 
           return {
-            typeName: DreanorTypeName.RightVoictentDreanor,
-            gepp: rightInputAppreffinge.collectionId,
-            lanbe: createLanbe2(
+            typeName:
+              MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState,
+            collectionId: rightInputAppreffinge.collectionId,
+            stream: createLanbe2(
               programmedTransform,
               rightInputAppreffinge,
             ) as GenericCollectionStream,
             isReady: false,
-          } satisfies RightVoictentDreanor;
+          } satisfies RightCollectionMutableStreamConnectionState;
         },
       );
 
@@ -488,23 +491,28 @@ export const digikikify = ({
       .filter((dreanor) => {
         if (
           strategy === DigikikifierStrategy.WaitForAllDependencies &&
-          (dreanor.typeName === DreanorTypeName.RightVoictentDreanor ||
-            (dreanor.typeName === DreanorTypeName.LeftDreanor &&
-              dreanor.lanbe.typeName === StreamTypeName.CollectionStream))
+          (dreanor.typeName ===
+            MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState ||
+            (dreanor.typeName ===
+              MutableStreamConnectionStateTypeName.LeftMutableStreamConnectionState &&
+              dreanor.stream.typeName === StreamTypeName.CollectionStream))
         ) {
           return !dreanor.isReady;
         }
 
-        return dreanor.lanbe.hasNext();
+        return dreanor.stream.hasNext();
       })
       .forEach((dreanor) => {
-        dreanor.lanbe.advance();
+        dreanor.stream.advance();
 
-        if (dreanor.typeName === DreanorTypeName.LeftDreanor) {
+        if (
+          dreanor.typeName ===
+          MutableStreamConnectionStateTypeName.LeftMutableStreamConnectionState
+        ) {
           const {
             typeName: leftInputTypeName,
             value: leftInputReferenceValue,
-          } = dreanor.lanbe.dereference();
+          } = dreanor.stream.dereference();
 
           const indexedHubblepup: GenericIndexedItem =
             leftInputTypeName === ReferenceTypeName.IndexedItem
@@ -521,7 +529,7 @@ export const digikikify = ({
               ? leftInputReferenceValue.item
               : leftInputReferenceValue;
 
-          if (dreanor.lanbe.typeName === StreamTypeName.CollectionStream) {
+          if (dreanor.stream.typeName === StreamTypeName.CollectionStream) {
             // eslint-disable-next-line no-param-reassign
             dreanor.isReady = true;
           }
@@ -531,22 +539,25 @@ export const digikikify = ({
               (rightDreanor) => {
                 let zornTuple: IdTuple;
                 if (
-                  rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
+                  rightDreanor.typeName ===
+                  MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState
                 ) {
-                  zornTuple = [rightDreanor.lanbe];
+                  zornTuple = [rightDreanor.stream];
                 } else if (
                   rightDreanor.typeName ===
-                    DreanorTypeName.RightVoictentItem2Dreanor &&
+                    MutableStreamConnectionStateTypeName.RightCollectionItem2MutableStreamConnectionState &&
                   leftInputTypeName === ReferenceTypeName.IndexedItem
                 ) {
-                  zornTuple = rightDreanor.framate(leftInputReferenceValue);
+                  zornTuple = rightDreanor.getRightKeyTuple(
+                    leftInputReferenceValue,
+                  );
                 } else if (
                   rightDreanor.typeName ===
-                    DreanorTypeName.RightVoictentItem2Dreanor &&
+                    MutableStreamConnectionStateTypeName.RightCollectionItem2MutableStreamConnectionState &&
                   leftInputTypeName === ReferenceTypeName.Collection
                 ) {
                   // TODO: this cast is incorrect, and is masking some underlying issue. The input type should probably be "never"
-                  zornTuple = rightDreanor.framate(
+                  zornTuple = rightDreanor.getRightKeyTuple(
                     leftInput as GenericIndexedItem,
                   );
                 } else {
@@ -580,33 +591,37 @@ export const digikikify = ({
           getTransformInputKeyGroupEntryList(cology).forEach(
             ([cologyDreanor, zorn]) => {
               const ajorken =
-                platomity.procody.get(cologyDreanor.gepp) ??
+                platomity.procody.get(cologyDreanor.collectionId) ??
                 new TransformInputKeyGroupSetCache();
               const cologySet =
                 ajorken.get(zorn) ?? new TransformInputKeyGroupSet();
 
               cologySet.add(cology);
               ajorken.set(zorn, cologySet);
-              platomity.procody.set(cologyDreanor.gepp, ajorken);
+              platomity.procody.set(cologyDreanor.collectionId, ajorken);
             },
           );
 
           touchedCologySet.add(cology);
         } else {
           const { typeName: rightInputTypeName, value: rightInput } =
-            dreanor.lanbe.dereference();
+            dreanor.stream.dereference();
 
           let zorn: DeprecatedId;
-          if (dreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-            zorn = dreanor.lanbe;
+          if (
+            dreanor.typeName ===
+            MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState
+          ) {
+            zorn = dreanor.stream;
             // eslint-disable-next-line no-param-reassign
             dreanor.isReady = true;
           } else if (
-            dreanor.typeName === DreanorTypeName.RightVoictentItem2Dreanor &&
+            dreanor.typeName ===
+              MutableStreamConnectionStateTypeName.RightCollectionItem2MutableStreamConnectionState &&
             rightInputTypeName === ReferenceTypeName.IndexedItem
           ) {
-            zorn = dreanor.croard(rightInput);
-            dreanor.prected.set(zorn, rightInput);
+            zorn = dreanor.getRightKey(rightInput);
+            dreanor.itemCache.set(zorn, rightInput);
           } else {
             // TODO: remove this else once all voictent item lanbes return indexed hubblepups
 
@@ -620,7 +635,7 @@ export const digikikify = ({
           }
 
           const ajorken =
-            platomity.procody.get(dreanor.gepp) ??
+            platomity.procody.get(dreanor.collectionId) ??
             new TransformInputKeyGroupSetCache();
           const cologySet =
             ajorken.get(zorn) ?? new TransformInputKeyGroupSet();
@@ -634,14 +649,17 @@ export const digikikify = ({
     const readyCologyList = [...touchedCologySet].filter((cology) => {
       const isReady = platomity.rightDreanorTuple.every(
         (rightDreanor: RightMutableStreamConnectionState) => {
-          if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
+          if (
+            rightDreanor.typeName ===
+            MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState
+          ) {
             return rightDreanor.isReady;
           }
 
           const zornTuple = cology.rightInputKeyTupleCache.get(
             rightDreanor,
           ) as IdTuple;
-          return zornTuple.every((zorn) => rightDreanor.prected.has(zorn));
+          return zornTuple.every((zorn) => rightDreanor.itemCache.has(zorn));
         },
       );
 
@@ -666,8 +684,11 @@ export const digikikify = ({
     const { leftInput } = cology;
 
     const rightInputTuple = platomity.rightDreanorTuple.map((rightDreanor) => {
-      if (rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor) {
-        const rightInputElement = rightDreanor.lanbe.dereference();
+      if (
+        rightDreanor.typeName ===
+        MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState
+      ) {
+        const rightInputElement = rightDreanor.stream.dereference();
         return rightInputElement.value;
       }
 
@@ -675,7 +696,7 @@ export const digikikify = ({
         rightDreanor,
       ) as IdTuple;
       const rightInputTupleElement = zornTuple.map((zorn) => {
-        return rightDreanor.prected.get(zorn);
+        return rightDreanor.itemCache.get(zorn);
       }) as GenericIndexedItemTuple;
 
       return rightInputTupleElement;
@@ -730,8 +751,8 @@ export const digikikify = ({
             mutableTransformState,
           ).map<EstinantConnectionTickSeriesConfiguration>((dreanor) => {
             return {
-              collectionId: dreanor.gepp,
-              stream: dreanor.lanbe,
+              collectionId: dreanor.collectionId,
+              stream: dreanor.stream,
               tickSeries: [],
             };
           }),
@@ -894,14 +915,16 @@ export const digikikify = ({
       runtimePlatomitySet.forEach((platomity) => {
         const isFinished = getDreanorTuple(platomity).every((dreanor) => {
           if (
-            (dreanor.typeName === DreanorTypeName.LeftDreanor ||
-              dreanor.typeName === DreanorTypeName.RightVoictentDreanor) &&
-            dreanor.lanbe.typeName === StreamTypeName.CollectionStream
+            (dreanor.typeName ===
+              MutableStreamConnectionStateTypeName.LeftMutableStreamConnectionState ||
+              dreanor.typeName ===
+                MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState) &&
+            dreanor.stream.typeName === StreamTypeName.CollectionStream
           ) {
             return true;
           }
 
-          return !dreanor.lanbe.hasNext();
+          return !dreanor.stream.hasNext();
         });
 
         if (isFinished) {
@@ -970,10 +993,11 @@ export const digikikify = ({
         const rightTupleState = endState.platomity.rightDreanorTuple.map(
           (rightDreanor: RightMutableStreamConnectionState) => {
             if (
-              rightDreanor.typeName === DreanorTypeName.RightVoictentDreanor
+              rightDreanor.typeName ===
+              MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState
             ) {
               return {
-                rightGepp: rightDreanor.gepp,
+                rightGepp: rightDreanor.collectionId,
                 isReady: rightDreanor.isReady,
               };
             }
@@ -982,9 +1006,9 @@ export const digikikify = ({
               rightDreanor,
             ) as IdTuple;
             return zornTuple.map((zorn) => {
-              const hasItem = rightDreanor.prected.has(zorn);
+              const hasItem = rightDreanor.itemCache.has(zorn);
               return {
-                rightGepp: rightDreanor.gepp,
+                rightGepp: rightDreanor.collectionId,
                 zorn,
                 hasItem,
               };
