@@ -9,18 +9,17 @@ import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { IdentifierNodeLocator } from './identifierNodeLocator';
 import { SensibleNameState } from './getSensibleNameState';
 
-const RENAME_CONFIGURATION_ZORN_TEMPLATE = [
+const RENAME_CONFIGURATION_ID_TEMPLATE = [
   'fileName',
   'oneBasedLineNumber',
   'oneBasedLineOffset',
   'originalName',
   'distinguisher',
 ] as const satisfies GenericComplexIdTemplate;
-type RenameConfigurationZornTemplate =
-  typeof RENAME_CONFIGURATION_ZORN_TEMPLATE;
-class RenameConfigurationZorn extends ComplexId<RenameConfigurationZornTemplate> {
-  get rawTemplate(): RenameConfigurationZornTemplate {
-    return RENAME_CONFIGURATION_ZORN_TEMPLATE;
+type RenameConfigurationIdTemplate = typeof RENAME_CONFIGURATION_ID_TEMPLATE;
+class RenameConfigurationId extends ComplexId<RenameConfigurationIdTemplate> {
+  get rawTemplate(): RenameConfigurationIdTemplate {
+    return RENAME_CONFIGURATION_ID_TEMPLATE;
   }
 }
 
@@ -40,7 +39,7 @@ type RenameConfigurationInput = {
 export type RenameConfiguration = SpreadN<
   [
     {
-      id: RenameConfigurationZorn;
+      id: RenameConfigurationId;
       absoluteFilePath: string;
     },
     RenameConfigurationInput,
@@ -84,7 +83,7 @@ export const { RenameConfigurationInstance } = buildNamedConstructorFunction({
       );
 
       return {
-        id: new RenameConfigurationZorn({
+        id: new RenameConfigurationId({
           fileName: identifierLocator.filePath.name.serialized,
           oneBasedLineNumber: `${oneBasedLineNumber}`,
           oneBasedLineOffset: `${oneBasedLineOffset}`,
@@ -98,12 +97,13 @@ export const { RenameConfigurationInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const RENAME_CONFIGURATION_GEPP = 'rename-configuration';
+export const RENAME_CONFIGURATION_COLLECTION_ID = 'rename-configuration';
 
-type RenameConfigurationGepp = typeof RENAME_CONFIGURATION_GEPP;
+type RenameConfigurationCollectionId =
+  typeof RENAME_CONFIGURATION_COLLECTION_ID;
 
-export type RenameConfigurationVoque =
+export type RenameConfigurationStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    RenameConfigurationGepp,
+    RenameConfigurationCollectionId,
     RenameConfiguration
   >;

@@ -27,8 +27,8 @@ import { filterFilePathLikeStringLiteral } from './filterFilePathLikeStringLiter
 import { assertFileSystemNodePathLiteralExists } from './assertFileSystemNodePathLiteralExists';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import {
-  LINT_ASSERTION_OMISSION_GEPP,
-  LintAssertionOmissionVoictent,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
+  LintAssertionOmissionCollection,
   LintAssertionOmissionVoque,
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
@@ -58,8 +58,8 @@ runEngine({
     new ProgramErrorCollection({
       programFileCache,
     }),
-    new LintAssertionOmissionVoictent<LintAssertionOmissionVoque>({
-      collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    new LintAssertionOmissionCollection<LintAssertionOmissionVoque>({
+      collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
       initialItemEggTuple: [
         // keep multiline
         NULL_OMISSION,

@@ -1,7 +1,7 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { LintAssertionZorn } from '../linting/lintAssertion';
 import {
-  LINT_ASSERTION_OMISSION_GEPP,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
   LintAssertionOmissionVoque,
 } from '../linting/lintAssertionOmission';
@@ -30,7 +30,7 @@ export const omitProgramCanonicalExportRequirement = buildProgrammedTransform({
     collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
   .toItem2<LintAssertionOmissionVoque>({
-    collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .onTransform((engineFile) => {
     return new LintAssertionOmissionInstance({

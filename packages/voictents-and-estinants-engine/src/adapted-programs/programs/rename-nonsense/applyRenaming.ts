@@ -10,14 +10,14 @@ import {
 import { applyFileSystemNodeChange } from './applyFileSystemNodeChange';
 import { applySymbolRename } from './applySymbolRename';
 import {
-  FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
+  FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID,
   FileSystemNodeRenameConfiguration,
-  FileSystemNodeRenameConfigurationVoque,
+  FileSystemNodeRenameConfigurationStreamMetatype,
 } from './fileSystemNodeRenameConfiguration';
 import {
-  RENAME_CONFIGURATION_GEPP,
+  RENAME_CONFIGURATION_COLLECTION_ID,
   RenameConfiguration,
-  RenameConfigurationVoque,
+  RenameConfigurationStreamMetatype,
 } from './renameConfiguration';
 import { progressLog } from './progressLog';
 import { formatTable } from '../../../package-agnostic-utilities/table-formatter/formatTable';
@@ -51,20 +51,20 @@ export const applyRenaming = buildProgrammedTransform({
   .fromCollection2<DirectoryStreamMetatype>({
     collectionId: DIRECTORY_COLLECTION_ID,
   })
-  .andFromCollection2<FileSystemNodeRenameConfigurationVoque>({
-    collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
+  .andFromCollection2<FileSystemNodeRenameConfigurationStreamMetatype>({
+    collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID,
   })
-  .andFromCollection2<RenameConfigurationVoque>({
-    collectionId: RENAME_CONFIGURATION_GEPP,
+  .andFromCollection2<RenameConfigurationStreamMetatype>({
+    collectionId: RENAME_CONFIGURATION_COLLECTION_ID,
   })
   .onTransform(
     (
-      directoryVoictent,
+      directoryCollection,
       fileSystemNodeConfigurationList,
       identifierConfigurationList,
     ) => {
-      const mutableGroupList: ConfigurationGroup[] = directoryVoictent.list.map(
-        (directory) => {
+      const mutableGroupList: ConfigurationGroup[] =
+        directoryCollection.list.map((directory) => {
           const group: ConfigurationGroup = {
             directory,
             directoryChange: null,
@@ -72,8 +72,7 @@ export const applyRenaming = buildProgrammedTransform({
             identifierChangeList: [],
           };
           return group;
-        },
-      );
+        });
 
       // note: sort from largest to smallest directories (most nested to least nested)
       mutableGroupList.sort((groupA, groupB) => {

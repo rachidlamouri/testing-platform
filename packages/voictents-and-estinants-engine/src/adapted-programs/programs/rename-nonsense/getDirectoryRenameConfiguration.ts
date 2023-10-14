@@ -1,9 +1,9 @@
 import { posix } from 'path';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
+  FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID,
   FileSystemNodeRenameConfigurationInstance,
-  FileSystemNodeRenameConfigurationVoque,
+  FileSystemNodeRenameConfigurationStreamMetatype,
 } from './fileSystemNodeRenameConfiguration';
 import { getSensibleNameState } from './getSensibleNameState';
 import {
@@ -22,24 +22,24 @@ import {
   DirectoryStreamMetatype,
 } from '../../programmable-units/file/directory';
 
-const ESTINANT_NAME = 'getDirectoryRenameConfiguration' as const;
+const PROGRAMMED_TRANSFORM_NAME = 'getDirectoryRenameConfiguration' as const;
 
 const linterSource = new ProgrammedTransformSourceInstance({
   filePath: posix.relative('', __filename),
-  programmedTransformName: ESTINANT_NAME,
+  programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
 });
 
 /**
  * Gathers sensible names for directories that need one, and ignores the rest.
  */
 export const getDirectoryRenameConfiguration = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
   .fromItem2<DirectoryStreamMetatype>({
     collectionId: DIRECTORY_COLLECTION_ID,
   })
-  .toItemTuple2<FileSystemNodeRenameConfigurationVoque>({
-    collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
+  .toItemTuple2<FileSystemNodeRenameConfigurationStreamMetatype>({
+    collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID,
   })
   .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
@@ -51,7 +51,7 @@ export const getDirectoryRenameConfiguration = buildProgrammedTransform({
 
     if (sensibleNameResult.isOriginalNameSensible) {
       return {
-        [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP]: [],
+        [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID]: [],
         [LINT_ASSERTION_COLLECTION_ID]: [],
       };
     }
@@ -65,7 +65,7 @@ export const getDirectoryRenameConfiguration = buildProgrammedTransform({
 
     if (sensibleNameResult.sensibleName === null) {
       return {
-        [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP]: [],
+        [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID]: [],
         [LINT_ASSERTION_COLLECTION_ID]: [
           new LintAssertion({
             rule: nonsenseIsDocumentedRule,
@@ -91,7 +91,7 @@ export const getDirectoryRenameConfiguration = buildProgrammedTransform({
     );
 
     return {
-      [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP]: [
+      [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID]: [
         new FileSystemNodeRenameConfigurationInstance({
           id: directory.id,
           isDirectory: true,

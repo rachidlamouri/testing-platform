@@ -1,7 +1,7 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  PARSED_TYPE_SCRIPT_FILE_GEPP,
-  ParsedTypeScriptFileVoque,
+  PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
+  ParsedTypeScriptFileStreamMetatype,
 } from './parsedTypeScriptFile';
 import { getIdentifiableProgramBodyStatementNode } from './getIdentifiableProgramBodyStatementNode';
 import {
@@ -45,8 +45,8 @@ const allowedCanonicalVariationDeclarationSuffixSet = [
 export const getCommentedProgramBodyDeclarationList = buildProgrammedTransform({
   name: 'getCommentedProgramBodyDeclarationList',
 })
-  .fromItem2<ParsedTypeScriptFileVoque>({
-    collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<ParsedTypeScriptFileStreamMetatype>({
+    collectionId: PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
   .andFromItemTuple2<TypeScriptFileStreamMetatype, [string]>({
     collectionId: TYPE_SCRIPT_FILE_COLLECTION_ID,

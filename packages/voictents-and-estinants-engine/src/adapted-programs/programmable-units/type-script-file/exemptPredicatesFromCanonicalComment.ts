@@ -3,7 +3,7 @@ import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { isPredicateFunctionish } from '../../../package-agnostic-utilities/type-script-ast/isPredicateFunctionish';
 import {
-  LINT_ASSERTION_OMISSION_GEPP,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
   LintAssertionOmissionVoque,
 } from '../linting/lintAssertionOmission';
@@ -32,7 +32,7 @@ export const exemptPredicatesFromCanonicalComment = buildProgrammedTransform({
     collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   })
   .toItemTuple2<LintAssertionOmissionVoque>({
-    collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .onTransform((declarationGroup) => {
     const { canonicalDeclaration } = declarationGroup;

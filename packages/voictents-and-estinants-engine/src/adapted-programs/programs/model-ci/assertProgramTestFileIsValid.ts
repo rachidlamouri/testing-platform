@@ -17,7 +17,7 @@ import { TypedRule } from '../../programmable-units/linting/rule';
 import { FileSourceInstance } from '../../programmable-units/linting/source/fileSource';
 import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import {
-  LINT_ASSERTION_OMISSION_GEPP,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
   LintAssertionOmissionVoque,
 } from '../../programmable-units/linting/lintAssertionOmission';
@@ -104,7 +104,7 @@ export const assertProgramTestFileIsValid = buildProgrammedTransform({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .toItemTuple2<LintAssertionOmissionVoque>({
-    collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .onTransform((expectedFile) => {
     const { programName } = expectedFile;
@@ -228,7 +228,7 @@ export const assertProgramTestFileIsValid = buildProgrammedTransform({
 
     return {
       [LINT_ASSERTION_COLLECTION_ID]: assertionList,
-      [LINT_ASSERTION_OMISSION_GEPP]: omissionList,
+      [LINT_ASSERTION_OMISSION_COLLECTION_ID]: omissionList,
     };
   })
   .assemble();

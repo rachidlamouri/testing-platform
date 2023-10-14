@@ -76,9 +76,9 @@ export const { LintAssertionOmissionInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const LINT_ASSERTION_OMISSION_GEPP = 'lint-assertion-omission';
+export const LINT_ASSERTION_OMISSION_COLLECTION_ID = 'lint-assertion-omission';
 
-type LintAssertionOmissionGepp = typeof LINT_ASSERTION_OMISSION_GEPP;
+type LintAssertionOmissionGepp = typeof LINT_ASSERTION_OMISSION_COLLECTION_ID;
 
 type LintAssertionOmissionVoictentPelie = {
   list: LintAssertionOmission[];
@@ -94,7 +94,7 @@ export type LintAssertionOmissionVoque = StreamMetatype<
 >;
 
 // TODO: update this class to not need a TVoque. you will need to update the program modeler
-export class LintAssertionOmissionVoictent<
+export class LintAssertionOmissionCollection<
   TVoque extends LintAssertionOmissionVoque,
 > extends AbstractInMemoryCollection<LintAssertionOmissionVoque, TVoque> {
   private omittedZornSet = new Set<string>();

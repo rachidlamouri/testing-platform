@@ -7,8 +7,8 @@ import {
 } from './stringLiteralNodeLocator';
 import {
   GenericAstNodeLocator,
-  AstNodeLocatorVoque,
-  AST_NODE_LOCATOR_GEPP,
+  AstNodeLocatorStreamMetatype,
+  AST_NODE_LOCATOR_COLLECTION_ID,
 } from '../rename-nonsense/astNodeLocator';
 
 const isStringLiteralLocator = (
@@ -26,8 +26,8 @@ const isStringLiteralLocator = (
 export const filterStringLiteral = buildProgrammedTransform({
   name: 'filterStringLiteral',
 })
-  .fromItem2<AstNodeLocatorVoque>({
-    collectionId: AST_NODE_LOCATOR_GEPP,
+  .fromItem2<AstNodeLocatorStreamMetatype>({
+    collectionId: AST_NODE_LOCATOR_COLLECTION_ID,
   })
   .toItemTuple2<StringLiteralNodeLocatorVoque>({
     collectionId: STRING_LITERAL_NODE_LOCATOR_GEPP,

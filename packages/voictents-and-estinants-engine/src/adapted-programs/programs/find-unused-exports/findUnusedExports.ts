@@ -18,8 +18,8 @@ import {
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { auditLintAssertionOmissions } from '../../programmable-units/linting/auditLintAssertionOmissions';
 import {
-  LINT_ASSERTION_OMISSION_GEPP,
-  LintAssertionOmissionVoictent,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
+  LintAssertionOmissionCollection,
   LintAssertionOmissionVoque,
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
@@ -54,8 +54,8 @@ runEngine({
         ],
       },
     ),
-    new LintAssertionOmissionVoictent<LintAssertionOmissionVoque>({
-      collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    new LintAssertionOmissionCollection<LintAssertionOmissionVoque>({
+      collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
       initialItemEggTuple: omittedUnusedExportList,
     }),
   ] as const,

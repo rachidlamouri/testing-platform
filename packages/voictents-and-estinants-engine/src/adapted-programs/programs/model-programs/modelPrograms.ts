@@ -56,8 +56,8 @@ import { assertNoCopyPasta } from './assertNoCopyPasta';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import {
-  LINT_ASSERTION_OMISSION_GEPP,
-  LintAssertionOmissionVoictent,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
+  LintAssertionOmissionCollection,
   LintAssertionOmissionVoque,
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
@@ -91,8 +91,8 @@ runEngine({
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
-    new LintAssertionOmissionVoictent<LintAssertionOmissionVoque>({
-      collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    new LintAssertionOmissionCollection<LintAssertionOmissionVoque>({
+      collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
       // TODO: fix and remove omissions
       initialItemEggTuple: [
         // keep this multiline

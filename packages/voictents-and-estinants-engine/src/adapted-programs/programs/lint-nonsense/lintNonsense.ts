@@ -40,8 +40,8 @@ import {
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import {
-  LintAssertionOmissionVoictent,
-  LINT_ASSERTION_OMISSION_GEPP,
+  LintAssertionOmissionCollection,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
 
@@ -78,8 +78,8 @@ runEngine({
     new ProgramErrorCollection({
       programFileCache,
     }),
-    new LintAssertionOmissionVoictent({
-      collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    new LintAssertionOmissionCollection({
+      collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
       initialItemEggTuple: [
         // keep multiline
         NULL_OMISSION,

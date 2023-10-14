@@ -39,8 +39,8 @@ import { assertFileExists } from '../../../layer-agnostic-utilities/assertion/as
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import {
-  LINT_ASSERTION_OMISSION_GEPP,
-  LintAssertionOmissionVoictent,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
+  LintAssertionOmissionCollection,
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { getExpectedProgramTestFile } from './getExpectedProgramTestFile';
@@ -83,8 +83,8 @@ runEngine({
     new ProgramErrorCollection({
       programFileCache,
     }),
-    new LintAssertionOmissionVoictent({
-      collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    new LintAssertionOmissionCollection({
+      collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
       initialItemEggTuple: [NULL_OMISSION],
     }),
   ] as const),

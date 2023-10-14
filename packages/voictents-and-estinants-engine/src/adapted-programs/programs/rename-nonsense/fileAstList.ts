@@ -52,11 +52,12 @@ export const { FileAstListInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const FILE_AST_LIST_GEPP = 'file-ast-list';
+export const FILE_AST_LIST_COLLECTION_ID = 'file-ast-list';
 
-type FileAstListGepp = typeof FILE_AST_LIST_GEPP;
+type FileAstListCollectionId = typeof FILE_AST_LIST_COLLECTION_ID;
 
-export type FileAstListVoque = InMemoryIdentifiableItem2ListStreamMetatype<
-  FileAstListGepp,
-  FileAstList
->;
+export type FileAstListStreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    FileAstListCollectionId,
+    FileAstList
+  >;

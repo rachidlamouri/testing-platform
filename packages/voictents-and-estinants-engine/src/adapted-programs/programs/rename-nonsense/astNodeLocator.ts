@@ -8,14 +8,14 @@ import {
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { FilePath } from '../../programmable-units/file/filePath';
 
-const AST_NODE_LOCATOR_ZORN_TEMPLATE = [
+const AST_NODE_LOCATOR_ID_TEMPLATE = [
   'filePath',
   'astPath',
 ] as const satisfies GenericComplexIdTemplate;
-type AstNodeLocatorZornTemplate = typeof AST_NODE_LOCATOR_ZORN_TEMPLATE;
-class AstNodeLocatorZorn extends ComplexId<AstNodeLocatorZornTemplate> {
-  get rawTemplate(): AstNodeLocatorZornTemplate {
-    return AST_NODE_LOCATOR_ZORN_TEMPLATE;
+type AstNodeLocatorIdTemplate = typeof AST_NODE_LOCATOR_ID_TEMPLATE;
+class AstNodeLocatorId extends ComplexId<AstNodeLocatorIdTemplate> {
+  get rawTemplate(): AstNodeLocatorIdTemplate {
+    return AST_NODE_LOCATOR_ID_TEMPLATE;
   }
 }
 
@@ -34,7 +34,7 @@ type GenericAstNodeLocatorConstructorInput =
 export type AstNodeLocator<TNode extends TSESTree.Node> = SimplifyN<
   [
     {
-      id: AstNodeLocatorZorn;
+      id: AstNodeLocatorId;
     },
     AstNodeLocatorConstructorInput<TNode>,
   ]
@@ -63,7 +63,7 @@ export const { AstNodeLocatorInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { filePath, astPath } = input;
 
-      const id = new AstNodeLocatorZorn({
+      const id = new AstNodeLocatorId({
         filePath: filePath.serialized,
         astPath,
       });
@@ -76,11 +76,12 @@ export const { AstNodeLocatorInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const AST_NODE_LOCATOR_GEPP = 'ast-node-locator';
+export const AST_NODE_LOCATOR_COLLECTION_ID = 'ast-node-locator';
 
-type AstNodeLocatorGepp = typeof AST_NODE_LOCATOR_GEPP;
+type AstNodeLocatorCollectionId = typeof AST_NODE_LOCATOR_COLLECTION_ID;
 
-export type AstNodeLocatorVoque = InMemoryIdentifiableItem2ListStreamMetatype<
-  AstNodeLocatorGepp,
-  GenericAstNodeLocator
->;
+export type AstNodeLocatorStreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    AstNodeLocatorCollectionId,
+    GenericAstNodeLocator
+  >;

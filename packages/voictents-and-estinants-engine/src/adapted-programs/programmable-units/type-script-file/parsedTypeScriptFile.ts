@@ -15,11 +15,11 @@ type ParsedTypeScriptFile = {
   program: TSESTree.Program;
 };
 
-export const PARSED_TYPE_SCRIPT_FILE_GEPP = 'parsed-type-script-file';
+export const PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID = 'parsed-type-script-file';
 
-type ParsedTypeScriptFileGepp = typeof PARSED_TYPE_SCRIPT_FILE_GEPP;
+type ParsedTypeScriptFileGepp = typeof PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID;
 
-export type ParsedTypeScriptFileVoque =
+export type ParsedTypeScriptFileStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     ParsedTypeScriptFileGepp,
     ParsedTypeScriptFile

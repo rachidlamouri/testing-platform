@@ -62,14 +62,14 @@ export const { FileSystemNodeRenameConfigurationInstance } =
     })
     .assemble();
 
-export const FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP =
+export const FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID =
   'file-system-node-rename-configuration';
 
-type FileSystemNodeRenameConfigurationGepp =
-  typeof FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP;
+type FileSystemNodeRenameConfigurationCollectionId =
+  typeof FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID;
 
-export type FileSystemNodeRenameConfigurationVoque =
+export type FileSystemNodeRenameConfigurationStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    FileSystemNodeRenameConfigurationGepp,
+    FileSystemNodeRenameConfigurationCollectionId,
     FileSystemNodeRenameConfiguration
   >;

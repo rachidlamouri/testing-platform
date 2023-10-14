@@ -21,8 +21,8 @@ import { associateTypeScriptFileToTypescriptConfiguration } from '../../programm
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { flattenAst } from './flattenAst';
 import {
-  LINT_ASSERTION_OMISSION_GEPP,
-  LintAssertionOmissionVoictent,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
+  LintAssertionOmissionCollection,
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
 import {
@@ -77,8 +77,8 @@ runEngine({
     new ProgramErrorCollection({
       programFileCache,
     }),
-    new LintAssertionOmissionVoictent({
-      collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    new LintAssertionOmissionCollection({
+      collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
       initialItemEggTuple: [
         // keep multiline
         NULL_OMISSION,

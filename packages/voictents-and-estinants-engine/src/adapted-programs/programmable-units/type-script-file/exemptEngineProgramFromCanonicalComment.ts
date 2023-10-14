@@ -6,7 +6,7 @@ import {
 } from '../engine-program/engineProgramLocator3';
 import { LintAssertionZorn } from '../linting/lintAssertion';
 import {
-  LINT_ASSERTION_OMISSION_GEPP,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
   LintAssertionOmissionVoque,
 } from '../linting/lintAssertionOmission';
@@ -35,7 +35,7 @@ export const exemptEngineProgramFromCanonicalComment = buildProgrammedTransform(
     collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
   .toItem2<LintAssertionOmissionVoque>({
-    collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .onTransform((programLocator) => {
     return new LintAssertionOmissionInstance({

@@ -1,14 +1,14 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  FILE_AST_LIST_GEPP,
+  FILE_AST_LIST_COLLECTION_ID,
   FileAstListInstance,
-  FileAstListVoque,
+  FileAstListStreamMetatype,
   AstListEntry,
 } from './fileAstList';
 import {
-  PARSED_TYPE_SCRIPT_FILE_GEPP,
-  ParsedTypeScriptFileVoque,
+  PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
+  ParsedTypeScriptFileStreamMetatype,
 } from '../../programmable-units/type-script-file/parsedTypeScriptFile';
 import {
   CustomDatumTypeName,
@@ -79,11 +79,11 @@ const flattenAstRoot = (rootNode: TSESTree.Node): AstListEntry[] => {
 export const flattenAst = buildProgrammedTransform({
   name: 'flattenAst',
 })
-  .fromItem2<ParsedTypeScriptFileVoque>({
-    collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<ParsedTypeScriptFileStreamMetatype>({
+    collectionId: PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
-  .toItem2<FileAstListVoque>({
-    collectionId: FILE_AST_LIST_GEPP,
+  .toItem2<FileAstListStreamMetatype>({
+    collectionId: FILE_AST_LIST_COLLECTION_ID,
   })
   .onTransform((parsedFile) => {
     const flattenedAst = flattenAstRoot(parsedFile.program);

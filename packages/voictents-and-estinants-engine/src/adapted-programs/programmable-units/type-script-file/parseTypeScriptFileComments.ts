@@ -5,8 +5,8 @@ import {
 import * as commentParser from 'comment-parser';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  PARSED_TYPE_SCRIPT_FILE_GEPP,
-  ParsedTypeScriptFileVoque,
+  PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
+  ParsedTypeScriptFileStreamMetatype,
 } from './parsedTypeScriptFile';
 import { CategorizedComment } from './comment/categorized/categorizedComment';
 import { assertHasZeroOrOneElements } from '../../../package-agnostic-utilities/array/assertHasZeroOrOneElements';
@@ -159,8 +159,8 @@ const getCategorizedComment = (
 export const parseTypeScriptFileComments = buildProgrammedTransform({
   name: 'parseTypeScriptFileComments',
 })
-  .fromItem2<ParsedTypeScriptFileVoque>({
-    collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<ParsedTypeScriptFileStreamMetatype>({
+    collectionId: PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
   .toItem2<FileParsedCommentGroupVoque>({
     collectionId: FILE_PARSED_COMMENT_GROUP_GEPP,

@@ -1,14 +1,14 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  AST_NODE_LOCATOR_GEPP,
-  AstNodeLocatorVoque,
+  AST_NODE_LOCATOR_COLLECTION_ID,
+  AstNodeLocatorStreamMetatype,
   GenericAstNodeLocator,
 } from './astNodeLocator';
 import {
-  IDENTIFIER_NODE_LOCATOR_GEPP,
+  IDENTIFIER_NODE_LOCATOR_COLLECTION_ID,
   IdentifierNodeLocator,
-  IdentifierNodeLocatorVoque,
+  IdentifierNodeLocatorStreamMetatype,
 } from './identifierNodeLocator';
 
 const isIdentifierLocator = (
@@ -23,11 +23,11 @@ const isIdentifierLocator = (
 export const filterIdentifier = buildProgrammedTransform({
   name: 'filterIdentifier',
 })
-  .fromItem2<AstNodeLocatorVoque>({
-    collectionId: AST_NODE_LOCATOR_GEPP,
+  .fromItem2<AstNodeLocatorStreamMetatype>({
+    collectionId: AST_NODE_LOCATOR_COLLECTION_ID,
   })
-  .toItemTuple2<IdentifierNodeLocatorVoque>({
-    collectionId: IDENTIFIER_NODE_LOCATOR_GEPP,
+  .toItemTuple2<IdentifierNodeLocatorStreamMetatype>({
+    collectionId: IDENTIFIER_NODE_LOCATOR_COLLECTION_ID,
   })
   .onTransform((nodeLocator) => {
     if (isIdentifierLocator(nodeLocator) && nodeLocator.node.name !== 'const') {

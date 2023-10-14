@@ -2,13 +2,13 @@ import Case from 'case';
 import { posix } from 'path';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  IDENTIFIER_NODE_LOCATOR_GEPP,
-  IdentifierNodeLocatorVoque,
+  IDENTIFIER_NODE_LOCATOR_COLLECTION_ID,
+  IdentifierNodeLocatorStreamMetatype,
 } from './identifierNodeLocator';
 import {
-  RENAME_CONFIGURATION_GEPP,
+  RENAME_CONFIGURATION_COLLECTION_ID,
   RenameConfigurationInstance,
-  RenameConfigurationVoque,
+  RenameConfigurationStreamMetatype,
 } from './renameConfiguration';
 import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
 import {
@@ -23,11 +23,11 @@ import { nonsenseIsDocumentedRule } from './nonsenseIsDocumentedRule';
 
 const literalAllowSet = new Set(['_']);
 
-const ESTINANT_NAME = 'getRenameConfiguration' as const;
+const PROGRAMMED_TRANSFORM_NAME = 'getRenameConfiguration' as const;
 
 const linterSource = new ProgrammedTransformSourceInstance({
   filePath: posix.relative('', __filename),
-  programmedTransformName: ESTINANT_NAME,
+  programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
 });
 
 /**
@@ -35,13 +35,13 @@ const linterSource = new ProgrammedTransformSourceInstance({
  * ones.
  */
 export const getRenameConfiguration = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
-  .fromItem2<IdentifierNodeLocatorVoque>({
-    collectionId: IDENTIFIER_NODE_LOCATOR_GEPP,
+  .fromItem2<IdentifierNodeLocatorStreamMetatype>({
+    collectionId: IDENTIFIER_NODE_LOCATOR_COLLECTION_ID,
   })
-  .toItemTuple2<RenameConfigurationVoque>({
-    collectionId: RENAME_CONFIGURATION_GEPP,
+  .toItemTuple2<RenameConfigurationStreamMetatype>({
+    collectionId: RENAME_CONFIGURATION_COLLECTION_ID,
   })
   .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
@@ -61,7 +61,7 @@ export const getRenameConfiguration = buildProgrammedTransform({
         'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/engine-program/getEngineProgramLocator3.ts'
     ) {
       return {
-        [RENAME_CONFIGURATION_GEPP]: [],
+        [RENAME_CONFIGURATION_COLLECTION_ID]: [],
         [LINT_ASSERTION_COLLECTION_ID]: [],
       };
     }
@@ -78,7 +78,7 @@ export const getRenameConfiguration = buildProgrammedTransform({
       literalAllowSet.has(originalName)
     ) {
       return {
-        [RENAME_CONFIGURATION_GEPP]: [],
+        [RENAME_CONFIGURATION_COLLECTION_ID]: [],
         [LINT_ASSERTION_COLLECTION_ID]: [],
       };
     }
@@ -95,7 +95,7 @@ export const getRenameConfiguration = buildProgrammedTransform({
 
     if (sensibleNameResult.sensibleName === null) {
       return {
-        [RENAME_CONFIGURATION_GEPP]: [],
+        [RENAME_CONFIGURATION_COLLECTION_ID]: [],
         [LINT_ASSERTION_COLLECTION_ID]: [
           new LintAssertion({
             rule: nonsenseIsDocumentedRule,
@@ -115,7 +115,7 @@ export const getRenameConfiguration = buildProgrammedTransform({
     }
 
     return {
-      [RENAME_CONFIGURATION_GEPP]: [
+      [RENAME_CONFIGURATION_COLLECTION_ID]: [
         new RenameConfigurationInstance({
           identifierLocator,
           originalName,

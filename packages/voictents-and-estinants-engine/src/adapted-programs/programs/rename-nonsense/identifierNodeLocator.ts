@@ -7,12 +7,13 @@ import { AstNodeLocator } from './astNodeLocator';
  */
 export type IdentifierNodeLocator = AstNodeLocator<TSESTree.Identifier>;
 
-export const IDENTIFIER_NODE_LOCATOR_GEPP = 'identifier-node-locator';
+export const IDENTIFIER_NODE_LOCATOR_COLLECTION_ID = 'identifier-node-locator';
 
-type IdentifierNodeLocatorGepp = typeof IDENTIFIER_NODE_LOCATOR_GEPP;
+type IdentifierNodeLocatorCollectionId =
+  typeof IDENTIFIER_NODE_LOCATOR_COLLECTION_ID;
 
-export type IdentifierNodeLocatorVoque =
+export type IdentifierNodeLocatorStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    IdentifierNodeLocatorGepp,
+    IdentifierNodeLocatorCollectionId,
     IdentifierNodeLocator
   >;

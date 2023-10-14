@@ -10,7 +10,7 @@ import {
   LintAssertionStreamMetatype,
 } from './lintAssertion';
 import {
-  LINT_ASSERTION_OMISSION_GEPP,
+  LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionVoque,
 } from './lintAssertionOmission';
 
@@ -40,7 +40,7 @@ export const reportFailedLintAssertion = buildProgrammedTransform({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .andFromCollection2<LintAssertionOmissionVoque>({
-    collectionId: LINT_ASSERTION_OMISSION_GEPP,
+    collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,

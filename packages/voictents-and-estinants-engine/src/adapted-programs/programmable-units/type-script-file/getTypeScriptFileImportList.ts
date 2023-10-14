@@ -4,8 +4,8 @@ import { resolveModuleFilePath } from '../../../package-agnostic-utilities/file/
 import { isImportDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isImportDeclaration';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  PARSED_TYPE_SCRIPT_FILE_GEPP,
-  ParsedTypeScriptFileVoque,
+  PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
+  ParsedTypeScriptFileStreamMetatype,
 } from './parsedTypeScriptFile';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
@@ -40,8 +40,8 @@ const reporterLocator: ReportingLocator = {
 export const getTypeScriptFileImportList = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromItem2<ParsedTypeScriptFileVoque>({
-    collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<ParsedTypeScriptFileStreamMetatype>({
+    collectionId: PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
   .toItem2<TypeScriptFileImportListStreamMetatype>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,

@@ -6,9 +6,9 @@ import {
   FileStreamMetatype,
 } from '../../programmable-units/file/file';
 import {
-  FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
+  FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID,
   FileSystemNodeRenameConfigurationInstance,
-  FileSystemNodeRenameConfigurationVoque,
+  FileSystemNodeRenameConfigurationStreamMetatype,
 } from './fileSystemNodeRenameConfiguration';
 import { getSensibleNameState } from './getSensibleNameState';
 import {
@@ -22,24 +22,24 @@ import { RequestSourceInstance } from '../../programmable-units/linting/source/r
 import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
 import { getPhraseSensibilityState } from '../../../layer-agnostic-utilities/nonsense/isSensiblePhrase';
 
-const ESTINANT_NAME = 'getFileRenameConfiguration' as const;
+const PROGRAMMED_TRANSFORM_NAME = 'getFileRenameConfiguration' as const;
 
 const linterSource = new ProgrammedTransformSourceInstance({
   filePath: posix.relative('', __filename),
-  programmedTransformName: ESTINANT_NAME,
+  programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
 });
 
 /**
  * Gathers sensible names for files that need one, and ignores the rest.
  */
 export const getFileRenameConfiguration = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
   .fromItem2<FileStreamMetatype>({
     collectionId: FILE_COLLECTION_ID,
   })
-  .toItemTuple2<FileSystemNodeRenameConfigurationVoque>({
-    collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
+  .toItemTuple2<FileSystemNodeRenameConfigurationStreamMetatype>({
+    collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID,
   })
   .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
@@ -51,7 +51,7 @@ export const getFileRenameConfiguration = buildProgrammedTransform({
 
     if (sensibleNameResult.isOriginalNameSensible) {
       return {
-        [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP]: [],
+        [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID]: [],
         [LINT_ASSERTION_COLLECTION_ID]: [],
       };
     }
@@ -65,7 +65,7 @@ export const getFileRenameConfiguration = buildProgrammedTransform({
 
     if (sensibleNameResult.sensibleName === null) {
       return {
-        [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP]: [],
+        [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID]: [],
         [LINT_ASSERTION_COLLECTION_ID]: [
           new LintAssertion({
             rule: nonsenseIsDocumentedRule,
@@ -91,7 +91,7 @@ export const getFileRenameConfiguration = buildProgrammedTransform({
     );
 
     return {
-      [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP]: [
+      [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID]: [
         new FileSystemNodeRenameConfigurationInstance({
           id: file.id,
           isDirectory: false,

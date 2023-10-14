@@ -7,8 +7,8 @@ import {
   TypeScriptFileConfigurationVoque,
 } from './associateTypeScriptFileToTypescriptConfiguration';
 import {
-  PARSED_TYPE_SCRIPT_FILE_GEPP,
-  ParsedTypeScriptFileVoque,
+  PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
+  ParsedTypeScriptFileStreamMetatype,
 } from './parsedTypeScriptFile';
 import {
   PROGRAM_ERROR_COLLECTION_ID,
@@ -40,8 +40,8 @@ export const parseTypeScriptFile = buildProgrammedTransform({
   .fromItem2<TypeScriptFileConfigurationVoque>({
     collectionId: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
   })
-  .toItemTuple2<ParsedTypeScriptFileVoque>({
-    collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
+  .toItemTuple2<ParsedTypeScriptFileStreamMetatype>({
+    collectionId: PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
@@ -64,7 +64,7 @@ export const parseTypeScriptFile = buildProgrammedTransform({
       });
 
       return {
-        [PARSED_TYPE_SCRIPT_FILE_GEPP]: [
+        [PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID]: [
           {
             id: typeScriptFileConfiguration.id,
             filePath: typeScriptFileConfiguration.sourceFilePath,
@@ -76,7 +76,7 @@ export const parseTypeScriptFile = buildProgrammedTransform({
       };
     } catch (error) {
       return {
-        [PARSED_TYPE_SCRIPT_FILE_GEPP]: [],
+        [PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID]: [],
         [PROGRAM_ERROR_COLLECTION_ID]: [
           {
             name: 'unparseable-file',
