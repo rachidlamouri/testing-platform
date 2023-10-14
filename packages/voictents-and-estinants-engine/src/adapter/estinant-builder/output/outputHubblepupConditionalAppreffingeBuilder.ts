@@ -3,8 +3,8 @@ import { GenericStreamMetatype } from '../../../core/types/stream-metatype/strea
 import { Predicate } from '../../../package-agnostic-utilities/function/predicate';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
-  buildEstinantAssembler,
-  EstinantAssemblerParent,
+  buildProgrammedTransformAssembler,
+  ProgrammedTransformAssemblerParent,
 } from '../assembler/estinantAssembler';
 import {
   buildInputOutputContextFromConstituentResultNormalizer,
@@ -62,7 +62,7 @@ type OutputHubblepupConditionalAppreffingeBuilder<
       TAdaptedLeftInputVicken,
       NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
     >,
-    EstinantAssemblerParent<
+    ProgrammedTransformAssemblerParent<
       TAdaptedLeftInputVicken,
       EmptyAdaptedRightInputVickenTuple,
       NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
@@ -116,7 +116,7 @@ export const buildOutputHubblepupConditionalAppreffingeBuilder = <
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
       >(nextContext),
 
-      assemble: buildEstinantAssembler<
+      assemble: buildProgrammedTransformAssembler<
         TAdaptedLeftInputVicken,
         EmptyAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>

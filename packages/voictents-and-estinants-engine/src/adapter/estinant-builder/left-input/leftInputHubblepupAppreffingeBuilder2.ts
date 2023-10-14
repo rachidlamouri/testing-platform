@@ -12,7 +12,7 @@ import { PartialLeftInputStreamConfiguration } from '../shared/partialStreamConf
 import {
   buildAdaptedTransformBuilder2,
   AdaptedTransformBuilderParent2,
-} from '../pinbetunf/pinbetunfBuilder2';
+} from '../adapted-transform/adaptedTransformBuilder2';
 import { AdaptedLeftInputItemStreamConnectionMetatype } from '../shared/streamConnectionMetatype';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {

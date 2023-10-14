@@ -21,7 +21,7 @@ import {
 import {
   buildAdaptedTransformBuilder2,
   AdaptedTransformBuilderParent2,
-} from '../pinbetunf/pinbetunfBuilder2';
+} from '../adapted-transform/adaptedTransformBuilder2';
 
 type NextAdaptedRightInputStreamConnectionMetatypeTuple<
   TAdaptedRightInputStreamConnectionMetatypeTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,

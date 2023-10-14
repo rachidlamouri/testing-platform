@@ -21,7 +21,7 @@ import { PartialRightItemTupleStreamConfiguration } from '../shared/partialStrea
 import {
   AdaptedTransformBuilderParent2,
   buildAdaptedTransformBuilder2,
-} from '../pinbetunf/pinbetunfBuilder2';
+} from '../adapted-transform/adaptedTransformBuilder2';
 import {
   buildRightInputCollectionStreamConfigurationBuilder2,
   RightInputCollectionStreamConfigurationBuilderParent2,

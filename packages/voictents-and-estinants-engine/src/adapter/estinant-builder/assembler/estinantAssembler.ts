@@ -40,7 +40,7 @@ type EstinantAssembler<
   CoreOutputStreamConnectionMetatypeFromAdaptedOutputStreamConnectionMetatypeTuple<TAdaptedOutputVickenTuple>
 >;
 
-export const buildEstinantAssembler = <
+export const buildProgrammedTransformAssembler = <
   TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
   TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
@@ -197,7 +197,7 @@ export const buildEstinantAssembler = <
   return assembleEstinant;
 };
 
-export type EstinantAssemblerParent<
+export type ProgrammedTransformAssemblerParent<
   TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
   TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
