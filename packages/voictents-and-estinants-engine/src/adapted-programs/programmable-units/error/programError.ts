@@ -56,7 +56,7 @@ export type ReportedProgramError<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > = ProgramErrorEgg<TReporterLocator>;
 
-export type GenericProgramErrorPelue =
+export type GenericProgramErrorEgg =
   ProgramErrorEgg<GenericProgramErrorReporterLocator>;
 
 /**

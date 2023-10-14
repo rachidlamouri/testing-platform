@@ -1,7 +1,10 @@
 import fs from 'fs';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
-import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
+import {
+  OUTPUT_FILE_COLLECTION_ID,
+  OutputFileStreamMetatype,
+} from '../output-file/outputFile';
 import {
   CustomDatumTypeName,
   getCustomTypedDatum,
@@ -83,8 +86,8 @@ export const addInteractivityToSvgDocument = buildProgrammedTransform({
     getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,
   })
-  .toItem2<OutputFileVoque>({
-    collectionId: OUTPUT_FILE_GEPP,
+  .toItem2<OutputFileStreamMetatype>({
+    collectionId: OUTPUT_FILE_COLLECTION_ID,
   })
   .onTransform(
     (leftInput, [templateFile], [{ subitem: directedGraphMetadataById }]) => {

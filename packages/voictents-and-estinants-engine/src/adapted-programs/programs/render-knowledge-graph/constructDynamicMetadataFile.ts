@@ -10,15 +10,15 @@ import {
   TypeScriptObjectInstance,
 } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import {
-  OUTPUT_FILE_GEPP,
+  OUTPUT_FILE_COLLECTION_ID,
   OutputFile,
-  OutputFileVoque,
+  OutputFileStreamMetatype,
 } from '../../programmable-units/output-file/outputFile';
 import { Metadata } from './app/browser/dynamicComponentTypes';
 import {
-  APP_RENDERER_DELAYER_GEPP,
+  APP_RENDERER_DELAYER_COLLECTION_ID,
   AppRendererDelayerInstance,
-  AppRendererDelayerVoque,
+  AppRendererDelayerStreamMetatype,
 } from './appRendererDelayer';
 import {
   FILE_FACT_2_COLLECTION_ID,
@@ -109,11 +109,11 @@ export const constructDynamicMetadataFile = buildProgrammedTransform({
   .andFromCollection2<FileFact2StreamMetatype>({
     collectionId: FILE_FACT_2_COLLECTION_ID,
   })
-  .toItem2<OutputFileVoque>({
-    collectionId: OUTPUT_FILE_GEPP,
+  .toItem2<OutputFileStreamMetatype>({
+    collectionId: OUTPUT_FILE_COLLECTION_ID,
   })
-  .toItem2<AppRendererDelayerVoque>({
-    collectionId: APP_RENDERER_DELAYER_GEPP,
+  .toItem2<AppRendererDelayerStreamMetatype>({
+    collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
   })
   .onTransform(
     (boundaryFactVoictent, [commonBoundaryRoot], fileFactVoictent) => {
@@ -157,8 +157,8 @@ export const constructDynamicMetadataFile = buildProgrammedTransform({
       };
 
       return {
-        [OUTPUT_FILE_GEPP]: outputFile,
-        [APP_RENDERER_DELAYER_GEPP]: new AppRendererDelayerInstance({
+        [OUTPUT_FILE_COLLECTION_ID]: outputFile,
+        [APP_RENDERER_DELAYER_COLLECTION_ID]: new AppRendererDelayerInstance({
           estinantName: 'constructDynamicMetadataFile',
         }),
       };

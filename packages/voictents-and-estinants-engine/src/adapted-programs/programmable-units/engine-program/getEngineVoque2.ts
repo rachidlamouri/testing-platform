@@ -2,7 +2,7 @@ import { buildProgrammedTransform } from '../../../adapter/programmed-transform-
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   GenericProgramErrorStreamMetatype,
-  GenericProgramErrorPelue,
+  GenericProgramErrorEgg,
   PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
   ReportingProgrammedTransformLocator,
@@ -71,7 +71,7 @@ export const getEngineVoque2 = buildProgrammedTransform({
     const commentText = hubblepupDeclaration?.commentText ?? null;
 
     // TODO: handle core voques
-    const parallelErrorList: GenericProgramErrorPelue[] =
+    const parallelErrorList: GenericProgramErrorEgg[] =
       voqueLocator.isCoreVoque || commentText !== null
         ? []
         : [

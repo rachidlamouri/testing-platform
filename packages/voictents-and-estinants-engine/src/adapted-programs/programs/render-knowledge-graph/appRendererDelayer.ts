@@ -72,11 +72,11 @@ export const { AppRendererDelayerInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const APP_RENDERER_DELAYER_GEPP = 'app-renderer-delayer';
+export const APP_RENDERER_DELAYER_COLLECTION_ID = 'app-renderer-delayer';
 
-type AppRendererDelayerGepp = typeof APP_RENDERER_DELAYER_GEPP;
+type AppRendererDelayerGepp = typeof APP_RENDERER_DELAYER_COLLECTION_ID;
 
-export type AppRendererDelayerVoque =
+export type AppRendererDelayerStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     AppRendererDelayerGepp,
     AppRendererDelayer

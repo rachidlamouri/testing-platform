@@ -2,17 +2,17 @@ import childProcessUtility from 'child_process';
 import fs from 'fs';
 import { buildProgrammedTransform } from '../../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  OUTPUT_FILE_GEPP,
-  OutputFileVoque,
+  OUTPUT_FILE_COLLECTION_ID,
+  OutputFileStreamMetatype,
 } from '../../../../programmable-units/output-file/outputFile';
 import {
-  GenericProgramErrorPelue,
+  GenericProgramErrorEgg,
   GenericProgramErrorStreamMetatype,
   PROGRAM_ERROR_COLLECTION_ID,
 } from '../../../../programmable-units/error/programError';
 import {
-  APP_RENDERER_DELAYER_GEPP,
-  AppRendererDelayerVoque,
+  APP_RENDERER_DELAYER_COLLECTION_ID,
+  AppRendererDelayerStreamMetatype,
 } from '../../appRendererDelayer';
 
 /**
@@ -24,11 +24,11 @@ import {
 export const renderApp = buildProgrammedTransform({
   name: 'renderApp',
 })
-  .fromCollection2<AppRendererDelayerVoque>({
-    collectionId: APP_RENDERER_DELAYER_GEPP,
+  .fromCollection2<AppRendererDelayerStreamMetatype>({
+    collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
   })
-  .toItem2<OutputFileVoque>({
-    collectionId: OUTPUT_FILE_GEPP,
+  .toItem2<OutputFileStreamMetatype>({
+    collectionId: OUTPUT_FILE_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
@@ -47,7 +47,7 @@ export const renderApp = buildProgrammedTransform({
       },
     );
 
-    let programErrorList: GenericProgramErrorPelue[];
+    let programErrorList: GenericProgramErrorEgg[];
     if (result.stderr !== '') {
       const error = Object.assign(
         new Error('Encountered an error in "renderApp"'),
@@ -73,7 +73,7 @@ export const renderApp = buildProgrammedTransform({
     ].join('\n');
 
     return {
-      [OUTPUT_FILE_GEPP]: {
+      [OUTPUT_FILE_COLLECTION_ID]: {
         fileName: 'rendered-knowledge-graph',
         fileExtensionSuffix: 'html',
         text: htmlContents,

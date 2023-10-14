@@ -2,13 +2,13 @@ import * as recast from 'recast';
 import Case from 'case';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  OUTPUT_FILE_GEPP,
-  OutputFileVoque,
+  OUTPUT_FILE_COLLECTION_ID,
+  OutputFileStreamMetatype,
 } from '../../programmable-units/output-file/outputFile';
 import {
-  APP_RENDERER_DELAYER_GEPP,
+  APP_RENDERER_DELAYER_COLLECTION_ID,
   AppRendererDelayerInstance,
-  AppRendererDelayerVoque,
+  AppRendererDelayerStreamMetatype,
 } from './appRendererDelayer';
 import {
   IdentifierConfiguration,
@@ -40,11 +40,11 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
   .andFromCollection2<PartitionFactStreamMetatype>({
     collectionId: PARTITION_FACT_COLLECTION_ID,
   })
-  .toItem2<OutputFileVoque>({
-    collectionId: OUTPUT_FILE_GEPP,
+  .toItem2<OutputFileStreamMetatype>({
+    collectionId: OUTPUT_FILE_COLLECTION_ID,
   })
-  .toItem2<AppRendererDelayerVoque>({
-    collectionId: APP_RENDERER_DELAYER_GEPP,
+  .toItem2<AppRendererDelayerStreamMetatype>({
+    collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
   })
   .onTransform((layerVoictent, partitionFactVoictent) => {
     const getPartitionComponentVariableName = (
@@ -143,12 +143,12 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
     `;
 
     return {
-      [OUTPUT_FILE_GEPP]: {
+      [OUTPUT_FILE_COLLECTION_ID]: {
         filePath:
           'packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/generated/index.tsx',
         text: programText,
       },
-      [APP_RENDERER_DELAYER_GEPP]: new AppRendererDelayerInstance({
+      [APP_RENDERER_DELAYER_COLLECTION_ID]: new AppRendererDelayerInstance({
         estinantName: 'constructDynamicIndexFile',
       }),
     };

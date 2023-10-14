@@ -1,5 +1,8 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
+import {
+  OUTPUT_FILE_COLLECTION_ID,
+  OutputFileStreamMetatype,
+} from '../output-file/outputFile';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
   EngineProgramFileVoque,
@@ -15,8 +18,8 @@ export const constructSnapshotScript = buildProgrammedTransform({
   .fromCollection2<EngineProgramFileVoque>({
     collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .toItem2<OutputFileVoque>({
-    collectionId: OUTPUT_FILE_GEPP,
+  .toItem2<OutputFileStreamMetatype>({
+    collectionId: OUTPUT_FILE_COLLECTION_ID,
   })
   .onTransform((inputList) => {
     const filePathSet = new Set(

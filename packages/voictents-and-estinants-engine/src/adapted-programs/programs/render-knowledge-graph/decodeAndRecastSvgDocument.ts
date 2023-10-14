@@ -15,14 +15,14 @@ import {
   ReportingProgrammedTransformLocator,
 } from '../../programmable-units/error/programError';
 import {
-  OUTPUT_FILE_GEPP,
+  OUTPUT_FILE_COLLECTION_ID,
   OutputFile,
-  OutputFileVoque,
+  OutputFileStreamMetatype,
 } from '../../programmable-units/output-file/outputFile';
 import {
-  APP_RENDERER_DELAYER_GEPP,
+  APP_RENDERER_DELAYER_COLLECTION_ID,
   AppRendererDelayerInstance,
-  AppRendererDelayerVoque,
+  AppRendererDelayerStreamMetatype,
 } from './appRendererDelayer';
 import {
   CustomDatumTypeName,
@@ -143,11 +143,11 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .toItemTuple2<OutputFileVoque>({
-    collectionId: OUTPUT_FILE_GEPP,
+  .toItemTuple2<OutputFileStreamMetatype>({
+    collectionId: OUTPUT_FILE_COLLECTION_ID,
   })
-  .toItemTuple2<AppRendererDelayerVoque>({
-    collectionId: APP_RENDERER_DELAYER_GEPP,
+  .toItemTuple2<AppRendererDelayerStreamMetatype>({
+    collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
   })
   .onTransform((svgDocument, factVoictent) => {
     const $ = cheerio.load(svgDocument.grition);
@@ -586,8 +586,8 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
             },
           },
         ],
-        [OUTPUT_FILE_GEPP]: [],
-        [APP_RENDERER_DELAYER_GEPP]: [],
+        [OUTPUT_FILE_COLLECTION_ID]: [],
+        [APP_RENDERER_DELAYER_COLLECTION_ID]: [],
       };
     }
 
@@ -639,8 +639,8 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
           context: null,
         };
       }),
-      [OUTPUT_FILE_GEPP]: [outputFile],
-      [APP_RENDERER_DELAYER_GEPP]: [
+      [OUTPUT_FILE_COLLECTION_ID]: [outputFile],
+      [APP_RENDERER_DELAYER_COLLECTION_ID]: [
         new AppRendererDelayerInstance({
           estinantName: 'decodeAndRecastSvgDocument',
           distinguisher: svgDocument.id,

@@ -1,8 +1,8 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   FileCacheOutputFile,
-  OUTPUT_FILE_GEPP,
-  OutputFileVoque,
+  OUTPUT_FILE_COLLECTION_ID,
+  OutputFileStreamMetatype,
 } from '../output-file/outputFile';
 import {
   SANITY_SNAPSHOT_COLLECTION_ID,
@@ -23,8 +23,8 @@ type OutputFileDigest = {
 export const captureOutputFileDigestList = buildProgrammedTransform({
   name: 'captureOutputFileDigestList',
 })
-  .fromCollection2<OutputFileVoque>({
-    collectionId: OUTPUT_FILE_GEPP,
+  .fromCollection2<OutputFileStreamMetatype>({
+    collectionId: OUTPUT_FILE_COLLECTION_ID,
   })
   .toItem2<SanitySnapshotVoque>({
     collectionId: SANITY_SNAPSHOT_COLLECTION_ID,

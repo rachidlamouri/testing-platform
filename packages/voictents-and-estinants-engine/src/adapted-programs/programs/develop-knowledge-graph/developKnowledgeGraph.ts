@@ -11,8 +11,8 @@ import { signalError } from '../../programmable-units/error/signalError';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileVoictent';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import {
-  APP_RENDERER_DELAYER_GEPP,
-  AppRendererDelayerVoque,
+  APP_RENDERER_DELAYER_COLLECTION_ID,
+  AppRendererDelayerStreamMetatype,
   AppRendererDelayerInstance,
 } from '../render-knowledge-graph/appRendererDelayer';
 import { renderApp } from '../render-knowledge-graph/app/node/renderApp';
@@ -32,8 +32,8 @@ const programFileCache = new ProgramFileCache({
  */
 runEngine({
   explicitCollectionTuple: [
-    new InMemoryCollection<AppRendererDelayerVoque>({
-      collectionId: APP_RENDERER_DELAYER_GEPP,
+    new InMemoryCollection<AppRendererDelayerStreamMetatype>({
+      collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
       initialItemEggTuple: [
         new AppRendererDelayerInstance({
           estinantName: 'n/a',

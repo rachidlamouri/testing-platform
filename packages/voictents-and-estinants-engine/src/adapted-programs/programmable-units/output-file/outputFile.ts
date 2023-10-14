@@ -20,11 +20,11 @@ type OutputFileWithFilePath = {
  */
 export type OutputFile = FileCacheOutputFile | OutputFileWithFilePath;
 
-export const OUTPUT_FILE_GEPP = 'output-file';
+export const OUTPUT_FILE_COLLECTION_ID = 'output-file';
 
-type OutputFileGepp = typeof OUTPUT_FILE_GEPP;
+type OutputFileGepp = typeof OUTPUT_FILE_COLLECTION_ID;
 
-export type OutputFileVoque = StreamMetatype<
+export type OutputFileStreamMetatype = StreamMetatype<
   OutputFileGepp,
   OutputFile,
   OutputFile,

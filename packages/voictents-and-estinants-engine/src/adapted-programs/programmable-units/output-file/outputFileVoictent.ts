@@ -5,7 +5,11 @@ import {
   getFileExtensionSuffixIdentifier,
 } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractAsymmetricInMemoryVoictent2';
-import { OUTPUT_FILE_GEPP, OutputFile, OutputFileVoque } from './outputFile';
+import {
+  OUTPUT_FILE_COLLECTION_ID,
+  OutputFile,
+  OutputFileStreamMetatype,
+} from './outputFile';
 
 type OutputFileVoictentConstructorInput = {
   programFileCache: ProgramFileCache;
@@ -21,14 +25,14 @@ type OutputFileVoictentConstructorInput = {
  * @canonicalDeclaration
  */
 export class OutputFileCollection extends AbstractAsymmetricInMemoryVoictent2<
-  OutputFileVoque,
-  OutputFileVoque
+  OutputFileStreamMetatype,
+  OutputFileStreamMetatype
 > {
   private programFileCache: ProgramFileCache;
 
   constructor({ programFileCache }: OutputFileVoictentConstructorInput) {
     super({
-      gepp: OUTPUT_FILE_GEPP,
+      gepp: OUTPUT_FILE_COLLECTION_ID,
       initialHubblepupPelueTuple: [],
     });
 
@@ -45,12 +49,12 @@ export class OutputFileCollection extends AbstractAsymmetricInMemoryVoictent2<
   }
 
   // eslint-disable-next-line class-methods-use-this
-  protected getIndexByName(): OutputFileVoque['indexByName'] {
+  protected getIndexByName(): OutputFileStreamMetatype['indexByName'] {
     throw new Error('Unsupported operation');
   }
 
   protected onTransformedHubblepup(
-    hubblepup: OutputFileVoque['itemStreamable'],
+    hubblepup: OutputFileStreamMetatype['itemStreamable'],
   ): void {
     if (hubblepup.filePath !== undefined) {
       fs.writeFileSync(hubblepup.filePath, hubblepup.text);
