@@ -10,7 +10,7 @@ import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemN
 import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
 import {
   PartitionFact,
-  PartitionFactZorn,
+  PartitionFactId,
 } from '../partition-fact/partitionFact';
 import { THEME } from '../theme';
 import { BoundedDirectory } from './boundedDirectory';
@@ -20,7 +20,7 @@ import { DirectedGraphElement2 } from '../../../programmable-units/graph-visuali
 import { FactTypeName } from '../fact/factTypeName';
 
 const DIRECTORY_FACT_2_ZORN_TEMPLATE = [
-  ['partitionFact', PartitionFactZorn],
+  ['partitionFact', PartitionFactId],
   ['directory', FileSystemNodeZorn],
 ] as const satisfies GenericComplexIdTemplate;
 type DirectoryFact2ZornTemplate = typeof DIRECTORY_FACT_2_ZORN_TEMPLATE;

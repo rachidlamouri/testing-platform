@@ -5,8 +5,8 @@ import {
   PartitionedBoundaryListTrieVoque,
 } from './partitionedBoundaryListTrie';
 import {
-  PARTITIONED_BOUNDARY_GEPP,
-  PartitionedBoundaryVoque,
+  PARTITIONED_BOUNDARY_COLLECTION_ID,
+  PartitionedBoundaryStreamMetatype,
 } from './partitionedBoundary';
 
 /**
@@ -16,8 +16,8 @@ import {
 export const getPartitionedBoundaryListTrie = buildProgrammedTransform({
   name: 'getPartitionedBoundaryListTrie',
 })
-  .fromCollection2<PartitionedBoundaryVoque>({
-    collectionId: PARTITIONED_BOUNDARY_GEPP,
+  .fromCollection2<PartitionedBoundaryStreamMetatype>({
+    collectionId: PARTITIONED_BOUNDARY_COLLECTION_ID,
   })
   .toItem2<PartitionedBoundaryListTrieVoque>({
     collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,

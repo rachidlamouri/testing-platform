@@ -28,11 +28,11 @@ export const { CommonBoundaryRootInstance } = buildConstructorFunctionWithName(
   },
 });
 
-export const COMMON_BOUNDARY_ROOT_GEPP = 'common-boundary-root';
+export const COMMON_BOUNDARY_ROOT_COLLECTION_ID = 'common-boundary-root';
 
-type CommonBoundaryRootGepp = typeof COMMON_BOUNDARY_ROOT_GEPP;
+type CommonBoundaryRootGepp = typeof COMMON_BOUNDARY_ROOT_COLLECTION_ID;
 
-export type CommonBoundaryRootVoque =
+export type CommonBoundaryRootStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     CommonBoundaryRootGepp,
     CommonBoundaryRoot

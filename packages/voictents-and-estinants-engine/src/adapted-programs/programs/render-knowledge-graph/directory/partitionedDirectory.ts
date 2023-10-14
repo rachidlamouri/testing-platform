@@ -8,12 +8,12 @@ import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify'
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
 import {
   PartitionFact,
-  PartitionFactZorn,
+  PartitionFactId,
 } from '../partition-fact/partitionFact';
 import { BoundedDirectory } from './boundedDirectory';
 
 const PARTITIONED_DIRECTORY_ZORN_TEMPLATE = [
-  ['partitionFact', PartitionFactZorn],
+  ['partitionFact', PartitionFactId],
   ['directory', FileSystemNodeZorn],
 ] as const satisfies GenericComplexIdTemplate;
 type PartitionedDirectoryZornTemplate =

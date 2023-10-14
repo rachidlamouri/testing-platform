@@ -4,11 +4,14 @@ import {
   DIRECTORY_GEPP,
   DirectoryVoque,
 } from '../../../programmable-units/file/directory';
-import { BOUNDARY_GEPP, BoundaryVoque } from '../boundary/boundary';
 import {
-  COMMON_BOUNDARY_ROOT_GEPP,
+  BOUNDARY_COLLECTION_ID,
+  BoundaryStreamMetatype,
+} from '../boundary/boundary';
+import {
+  COMMON_BOUNDARY_ROOT_COLLECTION_ID,
   CommonBoundaryRootInstance,
-  CommonBoundaryRootVoque,
+  CommonBoundaryRootStreamMetatype,
 } from './commonBoundaryRoot';
 import {
   BOUNDARY_FACT_GEPP,
@@ -22,14 +25,14 @@ import {
 export const getCommonBoundaryRoot = buildProgrammedTransform({
   name: 'getCommonBoundaryRoot',
 })
-  .fromCollection2<BoundaryVoque>({
-    collectionId: BOUNDARY_GEPP,
+  .fromCollection2<BoundaryStreamMetatype>({
+    collectionId: BOUNDARY_COLLECTION_ID,
   })
   .andFromCollection2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
-  .toItem2<CommonBoundaryRootVoque>({
-    collectionId: COMMON_BOUNDARY_ROOT_GEPP,
+  .toItem2<CommonBoundaryRootStreamMetatype>({
+    collectionId: COMMON_BOUNDARY_ROOT_COLLECTION_ID,
   })
   .toItemTuple2<BoundaryFactVoque>({
     collectionId: BOUNDARY_FACT_GEPP,
@@ -80,7 +83,7 @@ export const getCommonBoundaryRoot = buildProgrammedTransform({
     });
 
     return {
-      [COMMON_BOUNDARY_ROOT_GEPP]: commonBoundaryRoot,
+      [COMMON_BOUNDARY_ROOT_COLLECTION_ID]: commonBoundaryRoot,
       [BOUNDARY_FACT_GEPP]: boundaryFactList,
     };
   })

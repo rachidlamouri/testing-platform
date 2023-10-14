@@ -7,13 +7,13 @@ import {
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import {
   PartitionFact,
-  PartitionFactZorn,
+  PartitionFactId,
 } from '../partition-fact/partitionFact';
 import { FileDependency } from './fileDependency';
 import { FileDependencyZorn } from './fileDependencyZorn';
 
 const PARTITIONED_FILE_DEPENDENCY_ZORN_TEMPLATE = [
-  ['partitionFact', PartitionFactZorn],
+  ['partitionFact', PartitionFactId],
   ['fileDependency', FileDependencyZorn],
 ] as const satisfies GenericComplexIdTemplate;
 type PartitionedFileDependencyZornTemplate =

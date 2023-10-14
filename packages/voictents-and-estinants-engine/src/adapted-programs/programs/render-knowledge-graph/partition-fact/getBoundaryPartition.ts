@@ -1,21 +1,27 @@
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { BOUNDARY_GEPP, BoundaryVoque } from '../boundary/boundary';
 import {
-  PARTITIONED_BOUNDARY_GEPP,
+  BOUNDARY_COLLECTION_ID,
+  BoundaryStreamMetatype,
+} from '../boundary/boundary';
+import {
+  PARTITIONED_BOUNDARY_COLLECTION_ID,
   PartitionedBoundaryInstance,
-  PartitionedBoundaryVoque,
+  PartitionedBoundaryStreamMetatype,
 } from '../boundary/partitionedBoundary';
 import {
-  COMMON_BOUNDARY_ROOT_GEPP,
-  CommonBoundaryRootVoque,
+  COMMON_BOUNDARY_ROOT_COLLECTION_ID,
+  CommonBoundaryRootStreamMetatype,
 } from '../common-boundary-root/commonBoundaryRoot';
-import { LAYER_TRIE_GEPP, LayerTrieVoque } from '../layer/layerTrie';
 import {
-  PARTITION_FACT_GEPP,
+  LAYER_TRIE_COLLECTION_ID,
+  LayerTrieStreamMetatype,
+} from '../layer/layerTrie';
+import {
+  PARTITION_FACT_COLLECTION_ID,
   PartitionFactInstance,
-  PartitionFactVoque,
+  PartitionFactStreamMetatype,
 } from './partitionFact';
 
 /**
@@ -24,26 +30,26 @@ import {
 export const getBoundaryPartition = buildProgrammedTransform({
   name: 'getBoundaryPartition',
 })
-  .fromItem2<BoundaryVoque>({
-    collectionId: BOUNDARY_GEPP,
+  .fromItem2<BoundaryStreamMetatype>({
+    collectionId: BOUNDARY_COLLECTION_ID,
   })
-  .andFromItemTuple2<LayerTrieVoque, ['']>({
-    collectionId: LAYER_TRIE_GEPP,
+  .andFromItemTuple2<LayerTrieStreamMetatype, ['']>({
+    collectionId: LAYER_TRIE_COLLECTION_ID,
     // TODO: make a more readable pattern for singleton collections
     getRightKeyTuple: () => [''],
     getRightKey: () => '',
   })
-  .andFromItemTuple2<CommonBoundaryRootVoque, ['']>({
-    collectionId: COMMON_BOUNDARY_ROOT_GEPP,
+  .andFromItemTuple2<CommonBoundaryRootStreamMetatype, ['']>({
+    collectionId: COMMON_BOUNDARY_ROOT_COLLECTION_ID,
     // TODO: make a more readable pattern for singleton collections
     getRightKeyTuple: () => [''],
     getRightKey: () => '',
   })
-  .toItem2<PartitionFactVoque>({
-    collectionId: PARTITION_FACT_GEPP,
+  .toItem2<PartitionFactStreamMetatype>({
+    collectionId: PARTITION_FACT_COLLECTION_ID,
   })
-  .toItem2<PartitionedBoundaryVoque>({
-    collectionId: PARTITIONED_BOUNDARY_GEPP,
+  .toItem2<PartitionedBoundaryStreamMetatype>({
+    collectionId: PARTITIONED_BOUNDARY_COLLECTION_ID,
   })
   .onTransform((boundary, [layerTrie], [commonBoundaryRoot]) => {
     const layer = layerTrie.find(
@@ -63,8 +69,8 @@ export const getBoundaryPartition = buildProgrammedTransform({
     });
 
     return {
-      [PARTITION_FACT_GEPP]: partitionFact,
-      [PARTITIONED_BOUNDARY_GEPP]: new PartitionedBoundaryInstance({
+      [PARTITION_FACT_COLLECTION_ID]: partitionFact,
+      [PARTITIONED_BOUNDARY_COLLECTION_ID]: new PartitionedBoundaryInstance({
         partitionFact,
         boundary,
       }),

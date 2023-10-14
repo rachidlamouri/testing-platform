@@ -17,13 +17,13 @@ import { BoundedDirectory } from '../directory/boundedDirectory';
 import { FactTypeName } from '../fact/factTypeName';
 import {
   PartitionFact,
-  PartitionFactZorn,
+  PartitionFactId,
 } from '../partition-fact/partitionFact';
 import { THEME } from '../theme';
 import { BoundedFile } from './boundedFile';
 
 const FILE_FACT_2_ZORN_TEMPLATE = [
-  ['partitionFact', PartitionFactZorn],
+  ['partitionFact', PartitionFactId],
   ['boundedFile', FileSystemNodeZorn],
 ] as const satisfies GenericComplexIdTemplate;
 type FileFact2ZornTemplate = typeof FILE_FACT_2_ZORN_TEMPLATE;

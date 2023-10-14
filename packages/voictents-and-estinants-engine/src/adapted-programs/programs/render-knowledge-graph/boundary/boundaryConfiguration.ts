@@ -1,7 +1,7 @@
-import { InMemoryOdeshin3Voque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
-import { BoundaryZorn } from './boundary';
+import { BoundaryId } from './boundary';
 import { BoundaryTypeName } from './boundaryTypeName';
 
 type BoundaryConfigurationConstructorInput = {
@@ -16,7 +16,7 @@ type BoundaryConfigurationConstructorInput = {
 type BoundaryConfiguration = SimplifyN<
   [
     {
-      id: BoundaryZorn;
+      id: BoundaryId;
     },
     BoundaryConfigurationConstructorInput,
   ]
@@ -43,7 +43,7 @@ const { BoundaryConfigurationInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { displayName } = input;
 
-      const id = new BoundaryZorn({
+      const id = new BoundaryId({
         typeName: BoundaryTypeName.Unspecified,
         displayName,
       });
@@ -60,10 +60,11 @@ export const BOUNDARY_CONFIGURATION_GEPP = 'boundary-configuration';
 
 type BoundaryConfigurationGepp = typeof BOUNDARY_CONFIGURATION_GEPP;
 
-export type BoundaryConfigurationVoque = InMemoryOdeshin3Voque<
-  BoundaryConfigurationGepp,
-  BoundaryConfiguration
->;
+export type BoundaryConfigurationVoque =
+  InMemoryIdentifiableItem3StreamMetatype<
+    BoundaryConfigurationGepp,
+    BoundaryConfiguration
+  >;
 
 export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
   new BoundaryConfigurationInstance({

@@ -16,9 +16,9 @@ import {
 } from './decodeAndRecastSvgDocument';
 import { LAYER_GEPP, LayerVoque } from './layer/layer';
 import {
-  PARTITION_FACT_GEPP,
+  PARTITION_FACT_COLLECTION_ID,
   PartitionFact,
-  PartitionFactVoque,
+  PartitionFactStreamMetatype,
 } from './partition-fact/partitionFact';
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import {
@@ -37,8 +37,8 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
   .fromCollection2<LayerVoque>({
     collectionId: LAYER_GEPP,
   })
-  .andFromCollection2<PartitionFactVoque>({
-    collectionId: PARTITION_FACT_GEPP,
+  .andFromCollection2<PartitionFactStreamMetatype>({
+    collectionId: PARTITION_FACT_COLLECTION_ID,
   })
   .toItem2<OutputFileVoque>({
     collectionId: OUTPUT_FILE_GEPP,

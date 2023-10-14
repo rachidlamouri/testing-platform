@@ -1,4 +1,4 @@
-import { InMemoryOdeshin3Voque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { LayerZorn } from './layerZorn';
@@ -57,7 +57,7 @@ export const LAYER_CONFIGURATION_GEPP = 'layer-configuration';
 
 type LayerConfigurationGepp = typeof LAYER_CONFIGURATION_GEPP;
 
-export type LayerConfigurationVoque = InMemoryOdeshin3Voque<
+export type LayerConfigurationVoque = InMemoryIdentifiableItem3StreamMetatype<
   LayerConfigurationGepp,
   LayerConfiguration
 >;

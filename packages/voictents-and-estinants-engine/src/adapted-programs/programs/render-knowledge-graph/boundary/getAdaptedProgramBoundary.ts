@@ -8,7 +8,11 @@ import {
   DIRECTORY_GEPP,
   DirectoryVoque,
 } from '../../../programmable-units/file/directory';
-import { BOUNDARY_GEPP, BoundaryInstance, BoundaryVoque } from './boundary';
+import {
+  BOUNDARY_COLLECTION_ID,
+  BoundaryInstance,
+  BoundaryStreamMetatype,
+} from './boundary';
 import { BoundaryTypeName } from './boundaryTypeName';
 
 /**
@@ -27,8 +31,8 @@ export const getAdaptedProgramBoundary = buildProgrammedTransform({
     ],
     getRightKey: (directory) => directory.item.directoryPath.serialized,
   })
-  .toItemTuple2<BoundaryVoque>({
-    collectionId: BOUNDARY_GEPP,
+  .toItemTuple2<BoundaryStreamMetatype>({
+    collectionId: BOUNDARY_COLLECTION_ID,
   })
   .onTransform((programLocator, [directory]) => {
     if (programLocator.isCoreProgram) {

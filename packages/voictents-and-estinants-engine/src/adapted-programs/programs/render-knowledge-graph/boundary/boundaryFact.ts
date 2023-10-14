@@ -3,7 +3,7 @@ import { buildNamedConstructorFunction } from '../../../../package-agnostic-util
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { Metadata } from '../app/browser/dynamicComponentTypes';
 import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
-import { Boundary, BoundaryZorn } from './boundary';
+import { Boundary, BoundaryId } from './boundary';
 
 type BoundaryFactConstructorInput = {
   boundary: Boundary;
@@ -15,7 +15,7 @@ type BoundaryFactConstructorInput = {
  */
 type BoundaryFact = SimplifyN<
   [
-    { id: BoundaryZorn },
+    { id: BoundaryId },
     Pick<BoundaryFactConstructorInput, 'boundary'>,
     {
       graphMetadata: Metadata;

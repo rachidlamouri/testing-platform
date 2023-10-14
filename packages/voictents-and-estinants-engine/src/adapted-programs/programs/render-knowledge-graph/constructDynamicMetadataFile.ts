@@ -23,8 +23,8 @@ import {
 import { FILE_FACT_2_GEPP, FileFact2Voque } from './file/fileFact2';
 import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
 import {
-  COMMON_BOUNDARY_ROOT_GEPP,
-  CommonBoundaryRootVoque,
+  COMMON_BOUNDARY_ROOT_COLLECTION_ID,
+  CommonBoundaryRootStreamMetatype,
 } from './common-boundary-root/commonBoundaryRoot';
 
 const encodePrimitive = (
@@ -94,8 +94,8 @@ export const constructDynamicMetadataFile = buildProgrammedTransform({
   .fromCollection2<BoundaryFactVoque>({
     collectionId: BOUNDARY_FACT_GEPP,
   })
-  .andFromItemTuple2<CommonBoundaryRootVoque, ['']>({
-    collectionId: COMMON_BOUNDARY_ROOT_GEPP,
+  .andFromItemTuple2<CommonBoundaryRootStreamMetatype, ['']>({
+    collectionId: COMMON_BOUNDARY_ROOT_COLLECTION_ID,
     // TODO: make a more readable pattern for singleton collections
     getRightKeyTuple: () => [''],
     getRightKey: () => '',

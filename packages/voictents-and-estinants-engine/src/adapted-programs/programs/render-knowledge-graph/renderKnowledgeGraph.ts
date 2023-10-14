@@ -62,8 +62,8 @@ import { getAllFactGraphElements } from './getAllFactGraphElements';
 import { getBoundaryFromConfiguration } from './boundary/getBoundaryFromConfiguration';
 import { getBoundaryPartition } from './partition-fact/getBoundaryPartition';
 import {
-  PARTITION_FACT_GEPP,
-  PartitionFactVoque,
+  PARTITION_FACT_COLLECTION_ID,
+  PartitionFactStreamMetatype,
 } from './partition-fact/partitionFact';
 import {
   PARTITIONED_FILE_GEPP,
@@ -99,7 +99,10 @@ import {
   LAYER_LIST_TRIE_GEPP,
   LayerListTrieVoque,
 } from './layer/layerListTrie';
-import { LAYER_TRIE_GEPP, LayerTrieVoque } from './layer/layerTrie';
+import {
+  LAYER_TRIE_COLLECTION_ID,
+  LayerTrieStreamMetatype,
+} from './layer/layerTrie';
 import { getUtilityBoundary } from './boundary/getUtilityBoundary';
 import { getProgrammableUnitBoundary } from './boundary/getProgrammableUnitBoundary';
 
@@ -152,8 +155,8 @@ runEngine({
     new ProgramErrorVoictent({
       programFileCache,
     }),
-    new InMemoryOdeshin3Voictent<PartitionFactVoque>({
-      collectionId: PARTITION_FACT_GEPP,
+    new InMemoryOdeshin3Voictent<PartitionFactStreamMetatype>({
+      collectionId: PARTITION_FACT_COLLECTION_ID,
       initialItemEggTuple: [],
     }),
     new InMemoryCollection<PartitionedBoundaryListTrieVoque>({
@@ -177,8 +180,8 @@ runEngine({
       collectionId: LAYER_LIST_TRIE_GEPP,
       initialItemEggTuple: [],
     }),
-    new InMemoryCollection<LayerTrieVoque>({
-      collectionId: LAYER_TRIE_GEPP,
+    new InMemoryCollection<LayerTrieStreamMetatype>({
+      collectionId: LAYER_TRIE_COLLECTION_ID,
       initialItemEggTuple: [],
     }),
   ] as const),

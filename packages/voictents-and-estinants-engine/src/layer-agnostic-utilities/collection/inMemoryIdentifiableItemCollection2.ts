@@ -164,7 +164,7 @@ type InMemoryOdeshin3VoictentPelie<TOdeshinPelie> = {
   list: TOdeshinPelie[];
 };
 
-export type InMemoryOdeshin3Voque<
+export type InMemoryIdentifiableItem3StreamMetatype<
   TGepp extends CollectionId,
   TOdeshin extends GenericIdentifiableItem,
 > = InMemoryIdentifiableItem2StreamMetatype<
@@ -173,7 +173,7 @@ export type InMemoryOdeshin3Voque<
   InMemoryOdeshin3VoictentPelie<TOdeshin>
 >;
 
-type GenericInMemoryOdeshin3Voque = InMemoryOdeshin3Voque<
+type GenericInMemoryOdeshin3Voque = InMemoryIdentifiableItem3StreamMetatype<
   CollectionId,
   GenericIdentifiableItem
 >;

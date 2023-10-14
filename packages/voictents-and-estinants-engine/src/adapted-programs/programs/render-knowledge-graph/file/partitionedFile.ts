@@ -1,4 +1,4 @@
-import { InMemoryOdeshin3Voque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -9,12 +9,12 @@ import { FilePath } from '../../../programmable-units/file/filePath';
 import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
 import {
   PartitionFact,
-  PartitionFactZorn,
+  PartitionFactId,
 } from '../partition-fact/partitionFact';
 import { BoundedFile } from './boundedFile';
 
 const PARTITIONED_FILE_ZORN_TEMPLATE = [
-  ['partitionFact', PartitionFactZorn],
+  ['partitionFact', PartitionFactId],
   ['file', FileSystemNodeZorn],
 ] as const satisfies GenericComplexIdTemplate;
 type PartitionedFileZornTemplate = typeof PARTITIONED_FILE_ZORN_TEMPLATE;
@@ -85,7 +85,7 @@ export const PARTITIONED_FILE_GEPP = 'partitioned-file';
 
 type PartitionedFileGepp = typeof PARTITIONED_FILE_GEPP;
 
-export type PartitionedFileVoque = InMemoryOdeshin3Voque<
+export type PartitionedFileVoque = InMemoryIdentifiableItem3StreamMetatype<
   PartitionedFileGepp,
   PartitionedFile
 >;

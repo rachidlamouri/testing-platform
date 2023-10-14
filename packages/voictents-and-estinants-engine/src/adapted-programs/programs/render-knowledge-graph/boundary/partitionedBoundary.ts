@@ -2,7 +2,7 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-a
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { PartitionFact } from '../partition-fact/partitionFact';
-import { Boundary, BoundaryZorn } from './boundary';
+import { Boundary, BoundaryId } from './boundary';
 
 type PartitionedBoundaryConstructorInput = {
   partitionFact: PartitionFact;
@@ -15,7 +15,7 @@ type PartitionedBoundaryConstructorInput = {
 export type PartitionedBoundary = SimplifyN<
   [
     {
-      id: BoundaryZorn;
+      id: BoundaryId;
     },
     PartitionedBoundaryConstructorInput,
   ]
@@ -50,11 +50,11 @@ export const { PartitionedBoundaryInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const PARTITIONED_BOUNDARY_GEPP = 'partitioned-boundary';
+export const PARTITIONED_BOUNDARY_COLLECTION_ID = 'partitioned-boundary';
 
-type PartitionedBoundaryGepp = typeof PARTITIONED_BOUNDARY_GEPP;
+type PartitionedBoundaryGepp = typeof PARTITIONED_BOUNDARY_COLLECTION_ID;
 
-export type PartitionedBoundaryVoque =
+export type PartitionedBoundaryStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     PartitionedBoundaryGepp,
     PartitionedBoundary

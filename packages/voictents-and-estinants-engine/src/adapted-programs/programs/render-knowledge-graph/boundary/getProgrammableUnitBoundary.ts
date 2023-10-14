@@ -4,7 +4,11 @@ import {
   DIRECTORY_GEPP,
   DirectoryVoque,
 } from '../../../programmable-units/file/directory';
-import { BOUNDARY_GEPP, BoundaryInstance, BoundaryVoque } from './boundary';
+import {
+  BOUNDARY_COLLECTION_ID,
+  BoundaryInstance,
+  BoundaryStreamMetatype,
+} from './boundary';
 import { BoundaryTypeName } from './boundaryTypeName';
 
 /**
@@ -16,8 +20,8 @@ export const getProgrammableUnitBoundary = buildProgrammedTransform({
   .fromItem2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
-  .toItemTuple2<BoundaryVoque>({
-    collectionId: BOUNDARY_GEPP,
+  .toItemTuple2<BoundaryStreamMetatype>({
+    collectionId: BOUNDARY_COLLECTION_ID,
   })
   .onTransform((directory) => {
     // TODO: update the stream configuration to allow filtering the inputs

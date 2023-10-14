@@ -14,8 +14,8 @@ import {
   PartitionedBoundaryTrieVoque,
 } from '../boundary/partitionedBoundaryTrie';
 import {
-  CommonBoundaryRootVoque,
-  COMMON_BOUNDARY_ROOT_GEPP,
+  CommonBoundaryRootStreamMetatype,
+  COMMON_BOUNDARY_ROOT_COLLECTION_ID,
 } from '../common-boundary-root/commonBoundaryRoot';
 
 /**
@@ -27,8 +27,8 @@ export const getBoundedDirectory = buildProgrammedTransform({
   .fromItem2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
-  .andFromItemTuple2<CommonBoundaryRootVoque, ['']>({
-    collectionId: COMMON_BOUNDARY_ROOT_GEPP,
+  .andFromItemTuple2<CommonBoundaryRootStreamMetatype, ['']>({
+    collectionId: COMMON_BOUNDARY_ROOT_COLLECTION_ID,
     // TODO: make a more readable pattern for singleton collections
     getRightKeyTuple: () => [''],
     getRightKey: () => '',

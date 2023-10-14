@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { InMemoryOdeshin3Voque } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -14,19 +14,19 @@ import {
   RootGraphLocator,
   RootGraphLocatorInstance,
 } from '../../../programmable-units/graph-visualization/directed-graph/rootGraphLocator';
-import { Boundary, BoundaryZorn } from '../boundary/boundary';
+import { Boundary, BoundaryId } from '../boundary/boundary';
 import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
 import { THEME } from '../theme';
 import { FactTypeName } from '../fact/factTypeName';
 import { Layer } from '../layer/layer';
 
-const PARTITION_FACT_ZORN_TEMPLATE = [
-  ['boundary', BoundaryZorn],
+const PARTITION_FACT_ID_TEMPLATE = [
+  ['boundary', BoundaryId],
 ] as const satisfies GenericComplexIdTemplate;
-type PartitionFactZornTemplate = typeof PARTITION_FACT_ZORN_TEMPLATE;
-export class PartitionFactZorn extends ComplexId<PartitionFactZornTemplate> {
-  get rawTemplate(): PartitionFactZornTemplate {
-    return PARTITION_FACT_ZORN_TEMPLATE;
+type PartitionFactIdTemplate = typeof PARTITION_FACT_ID_TEMPLATE;
+export class PartitionFactId extends ComplexId<PartitionFactIdTemplate> {
+  get rawTemplate(): PartitionFactIdTemplate {
+    return PARTITION_FACT_ID_TEMPLATE;
   }
 }
 
@@ -43,7 +43,7 @@ export type PartitionFact = SimplifyN<
   [
     {
       typeName: FactTypeName.PartitionFact;
-      id: PartitionFactZorn;
+      id: PartitionFactId;
     },
     Pick<PartitionFactConstructorInput, 'layer' | 'boundary'>,
     {
@@ -78,7 +78,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { layer, boundary, commonBoundaryRoot } = input;
 
-      const id = new PartitionFactZorn({
+      const id = new PartitionFactId({
         boundary: boundary.id,
       });
 
@@ -112,11 +112,12 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const PARTITION_FACT_GEPP = 'partition-fact';
+export const PARTITION_FACT_COLLECTION_ID = 'partition-fact';
 
-type PartitionFactGepp = typeof PARTITION_FACT_GEPP;
+type PartitionFactCollectionId = typeof PARTITION_FACT_COLLECTION_ID;
 
-export type PartitionFactVoque = InMemoryOdeshin3Voque<
-  PartitionFactGepp,
-  PartitionFact
->;
+export type PartitionFactStreamMetatype =
+  InMemoryIdentifiableItem3StreamMetatype<
+    PartitionFactCollectionId,
+    PartitionFact
+  >;

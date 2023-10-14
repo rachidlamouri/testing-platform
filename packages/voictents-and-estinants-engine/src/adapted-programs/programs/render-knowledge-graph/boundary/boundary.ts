@@ -17,7 +17,7 @@ type BoundaryZornInput = {
   typeName: BoundaryTypeName;
   displayName: string;
 };
-export class BoundaryZorn extends ComplexId<BoundaryZornTemplate> {
+export class BoundaryId extends ComplexId<BoundaryZornTemplate> {
   constructor({ typeName, displayName }: BoundaryZornInput) {
     const normalizedDisplayName = displayName.replaceAll(/(:|\s+),'-'/g, '');
     super({
@@ -43,7 +43,7 @@ type BoundaryConstructorInput = {
 export type Boundary = SimplifyN<
   [
     {
-      id: BoundaryZorn;
+      id: BoundaryId;
     },
     BoundaryConstructorInput,
   ]
@@ -70,7 +70,7 @@ export const { BoundaryInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { typeName, displayName, directory } = input;
 
-      const id = new BoundaryZorn({ typeName, displayName });
+      const id = new BoundaryId({ typeName, displayName });
 
       return {
         id,
@@ -82,11 +82,9 @@ export const { BoundaryInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const BOUNDARY_GEPP = 'boundary';
+export const BOUNDARY_COLLECTION_ID = 'boundary';
 
-type BoundaryGepp = typeof BOUNDARY_GEPP;
+type BoundaryGepp = typeof BOUNDARY_COLLECTION_ID;
 
-export type BoundaryVoque = InMemoryIdentifiableItem2ListStreamMetatype<
-  BoundaryGepp,
-  Boundary
->;
+export type BoundaryStreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<BoundaryGepp, Boundary>;

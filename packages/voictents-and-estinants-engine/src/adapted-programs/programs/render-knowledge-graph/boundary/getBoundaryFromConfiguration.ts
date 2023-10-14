@@ -4,7 +4,11 @@ import {
   DirectoryVoque,
   DIRECTORY_GEPP,
 } from '../../../programmable-units/file/directory';
-import { BOUNDARY_GEPP, BoundaryInstance, BoundaryVoque } from './boundary';
+import {
+  BOUNDARY_COLLECTION_ID,
+  BoundaryInstance,
+  BoundaryStreamMetatype,
+} from './boundary';
 import {
   BOUNDARY_CONFIGURATION_GEPP,
   BoundaryConfigurationVoque,
@@ -24,8 +28,8 @@ export const getBoundaryFromConfiguration = buildProgrammedTransform({
     getRightKeyTuple: (locator) => [locator.item.directoryPath],
     getRightKey: (directory) => directory.item.directoryPath.serialized,
   })
-  .toItem2<BoundaryVoque>({
-    collectionId: BOUNDARY_GEPP,
+  .toItem2<BoundaryStreamMetatype>({
+    collectionId: BOUNDARY_COLLECTION_ID,
   })
   .onTransform((boundaryConfiguration, [directory]) => {
     return new BoundaryInstance({

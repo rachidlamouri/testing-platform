@@ -13,8 +13,8 @@ import {
 } from '../directory/directoryFact2';
 import { FILE_FACT_2_GEPP, FileFact2Voque } from '../file/fileFact2';
 import {
-  PARTITION_FACT_GEPP,
-  PartitionFactVoque,
+  PARTITION_FACT_COLLECTION_ID,
+  PartitionFactStreamMetatype,
 } from '../partition-fact/partitionFact';
 import { FACT_GEPP, FactVoque } from './fact';
 
@@ -24,8 +24,8 @@ import { FACT_GEPP, FactVoque } from './fact';
 export const aggregateFacts = buildProgrammedTransform({
   name: 'aggregateFacts',
 })
-  .fromCollection2<PartitionFactVoque>({
-    collectionId: PARTITION_FACT_GEPP,
+  .fromCollection2<PartitionFactStreamMetatype>({
+    collectionId: PARTITION_FACT_COLLECTION_ID,
   })
   .andFromCollection2<DirectoryFact2Voque>({
     collectionId: DIRECTORY_FACT_2_GEPP,

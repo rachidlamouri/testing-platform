@@ -1,7 +1,11 @@
 import { hasOneElement } from '../../../../package-agnostic-utilities/array/hasOneElement';
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { LAYER_LIST_TRIE_GEPP, LayerListTrieVoque } from './layerListTrie';
-import { LAYER_TRIE_GEPP, LayerTrie, LayerTrieVoque } from './layerTrie';
+import {
+  LAYER_TRIE_COLLECTION_ID,
+  LayerTrie,
+  LayerTrieStreamMetatype,
+} from './layerTrie';
 
 /**
  * Converts a layer list trie into a trie where each node can only have one
@@ -13,8 +17,8 @@ export const getLayerTrie = buildProgrammedTransform({
   .fromItem2<LayerListTrieVoque>({
     collectionId: LAYER_LIST_TRIE_GEPP,
   })
-  .toItem2<LayerTrieVoque>({
-    collectionId: LAYER_TRIE_GEPP,
+  .toItem2<LayerTrieStreamMetatype>({
+    collectionId: LAYER_TRIE_COLLECTION_ID,
   })
   .onTransform((layerListTrie) => {
     const layerTrie = new LayerTrie(null);

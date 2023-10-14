@@ -5,8 +5,8 @@ import {
   PartitionedFileVoque,
 } from './file/partitionedFile';
 import {
-  PARTITION_FACT_GEPP,
-  PartitionFactVoque,
+  PARTITION_FACT_COLLECTION_ID,
+  PartitionFactStreamMetatype,
 } from './partition-fact/partitionFact';
 import {
   FILE_DEPENDENCY_GEPP,
@@ -36,8 +36,8 @@ import { BOUNDED_FILE_GEPP, BoundedFileVoque } from './file/boundedFile';
 export const getPartitionedFileSystemNodes = buildProgrammedTransform({
   name: 'getPartitionedFileSystemNodes',
 })
-  .fromCollection2<PartitionFactVoque>({
-    collectionId: PARTITION_FACT_GEPP,
+  .fromCollection2<PartitionFactStreamMetatype>({
+    collectionId: PARTITION_FACT_COLLECTION_ID,
   })
   .andFromCollection2<BoundedDirectoryVoque>({
     collectionId: BOUNDED_DIRECTORY_GEPP,
