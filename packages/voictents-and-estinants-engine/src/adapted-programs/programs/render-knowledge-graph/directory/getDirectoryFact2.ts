@@ -5,9 +5,9 @@ import {
   BoundedDirectoryStreamMetatype,
 } from './boundedDirectory';
 import {
-  DIRECTORY_FACT_2_GEPP,
+  DIRECTORY_FACT_2_COLLECTION_ID,
   DirectoryFact2Instance,
-  DirectoryFact2Voque,
+  DirectoryFact2StreamMetatype,
 } from './directoryFact2';
 import {
   PARTITIONED_DIRECTORY_GEPP,
@@ -42,8 +42,8 @@ export const getDirectoryFact2 = buildProgrammedTransform({
       },
     },
   )
-  .toItem2<DirectoryFact2Voque>({
-    collectionId: DIRECTORY_FACT_2_GEPP,
+  .toItem2<DirectoryFact2StreamMetatype>({
+    collectionId: DIRECTORY_FACT_2_COLLECTION_ID,
   })
   .onTransform((childDirectory, [parentDirectory = null]) => {
     return new DirectoryFact2Instance({

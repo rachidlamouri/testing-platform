@@ -82,13 +82,13 @@ export const { FileDependencyPathNodeFactInstance } =
     })
     .assemble();
 
-export const FILE_DEPENDENCY_PATH_NODE_FACT_GEPP =
+export const FILE_DEPENDENCY_PATH_NODE_FACT_COLLECTION_ID =
   'file-dependency-path-node-fact';
 
 type FileDependencyPathNodeFactGepp =
-  typeof FILE_DEPENDENCY_PATH_NODE_FACT_GEPP;
+  typeof FILE_DEPENDENCY_PATH_NODE_FACT_COLLECTION_ID;
 
-export type FileDependencyPathNodeFactVoque =
+export type FileDependencyPathNodeFactStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     FileDependencyPathNodeFactGepp,
     FileDependencyPathNodeFact

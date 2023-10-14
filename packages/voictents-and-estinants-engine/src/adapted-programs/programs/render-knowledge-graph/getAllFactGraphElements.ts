@@ -3,7 +3,7 @@ import {
   DIRECTED_GRAPH_ELEMENT_2_GEPP,
   DirectedGraphElement2Voque,
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
-import { FACT_GEPP, FactVoque } from './fact/fact';
+import { FACT_COLLECTION_ID, FactStreamMetatype } from './fact/fact';
 
 /**
  * Acquires all graph elements (graphs, subgraphs, clusters, nodes, and edges)
@@ -12,8 +12,8 @@ import { FACT_GEPP, FactVoque } from './fact/fact';
 export const getAllFactGraphElements = buildProgrammedTransform({
   name: 'getAllFactGraphElements',
 })
-  .fromCollection2<FactVoque>({
-    collectionId: FACT_GEPP,
+  .fromCollection2<FactStreamMetatype>({
+    collectionId: FACT_COLLECTION_ID,
   })
   .toItemTuple2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,

@@ -75,7 +75,7 @@ const getIdLike = (identifiableItem: GenericIdentifiableItem): IdLike => {
   return result;
 };
 
-export abstract class BaseInMemoryOdeshin2Voictent<
+export abstract class BaseInMemoryIdentifiableItem2Collection<
   TRestrictingVoque extends GenericInMemoryIdentifiableItem2StreamMetatype,
   TVoque extends TRestrictingVoque,
 > extends AbstractInMemoryCollection<TRestrictingVoque, TVoque> {
@@ -150,7 +150,7 @@ export type GenericInMemoryIdentifiableItem2ListStreamMetatype =
 
 export class InMemoryIdentifiableItem2ListCollection<
   TVoque extends GenericInMemoryIdentifiableItem2ListStreamMetatype,
-> extends BaseInMemoryOdeshin2Voictent<
+> extends BaseInMemoryIdentifiableItem2Collection<
   GenericInMemoryIdentifiableItem2ListStreamMetatype,
   TVoque
 > {
@@ -180,7 +180,10 @@ type GenericInMemoryOdeshin3Voque = InMemoryIdentifiableItem3StreamMetatype<
 
 export class InMemoryOdeshin3Voictent<
   TVoque extends GenericInMemoryOdeshin3Voque,
-> extends BaseInMemoryOdeshin2Voictent<GenericInMemoryOdeshin3Voque, TVoque> {
+> extends BaseInMemoryIdentifiableItem2Collection<
+  GenericInMemoryOdeshin3Voque,
+  TVoque
+> {
   protected dereferenceCollection(): TVoque['collectionStreamable'] {
     return {
       byZorn: this.hubblepupPelueByZorn,

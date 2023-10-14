@@ -1,4 +1,4 @@
-import { BaseInMemoryOdeshin2Voictent } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { BaseInMemoryIdentifiableItem2Collection } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { BoundedFile } from '../file/boundedFile';
 import {
   FileDependency,
@@ -16,7 +16,7 @@ class BoundedFileCombination extends Map<string, BoundedFile> {}
  *
  * @readableName FileDependencyCollection
  */
-export class FileDependencyVoictent extends BaseInMemoryOdeshin2Voictent<
+export class FileDependencyVoictent extends BaseInMemoryIdentifiableItem2Collection<
   FileDependencyStreamMetatype,
   FileDependencyStreamMetatype
 > {

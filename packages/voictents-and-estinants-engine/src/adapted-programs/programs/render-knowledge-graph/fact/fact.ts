@@ -1,6 +1,6 @@
 import {
   InMemoryIdentifiableItem2IndexByName,
-  BaseInMemoryOdeshin2Voictent,
+  BaseInMemoryIdentifiableItem2Collection,
 } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 import { InMemoryStreamMetatype } from '../../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
@@ -21,26 +21,26 @@ export type Fact =
   | FileDependencyPathNodeFact
   | FileDependencyPathSegmentFact;
 
-type FactVoictentPelie = {
+type FactCollectionStreamable = {
   graphElementList: DirectedGraphElement2[];
   byLocalGraphElementId: Map<string, Fact>;
 };
 
-export const FACT_GEPP = 'fact';
+export const FACT_COLLECTION_ID = 'fact';
 
-type FactGepp = typeof FACT_GEPP;
+type FactCollectionId = typeof FACT_COLLECTION_ID;
 
-export type FactVoque = InMemoryStreamMetatype<
-  FactGepp,
+export type FactStreamMetatype = InMemoryStreamMetatype<
+  FactCollectionId,
   Fact,
   Fact,
   InMemoryIdentifiableItem2IndexByName,
-  FactVoictentPelie
+  FactCollectionStreamable
 >;
 
-export class FactVoictent extends BaseInMemoryOdeshin2Voictent<
-  FactVoque,
-  FactVoque
+export class FactCollection extends BaseInMemoryIdentifiableItem2Collection<
+  FactStreamMetatype,
+  FactStreamMetatype
 > {
   private graphElementList: DirectedGraphElement2[] = [];
 
@@ -48,22 +48,22 @@ export class FactVoictent extends BaseInMemoryOdeshin2Voictent<
 
   constructor() {
     super({
-      collectionId: FACT_GEPP,
+      collectionId: FACT_COLLECTION_ID,
       initialItemEggTuple: [],
     });
   }
 
-  addItem(hubblepup: Fact): void {
-    this.graphElementList.push(hubblepup.graphElement);
+  addItem(item: Fact): void {
+    this.graphElementList.push(item.graphElement);
 
     // TODO: the below note indicates that some concerns need to be separated. As in this collection shouldn't be at the "fact" level or that "fact" is no longer what we wanted it to be
     // Note: there will be multiple facts for the same element (one for each partition where the element should appear). That's ok for the purposes of this collection
-    this.byLocalGraphElementId.set(hubblepup.graphElement.oldId, hubblepup);
+    this.byLocalGraphElementId.set(item.graphElement.oldId, item);
 
-    super.addItem(hubblepup);
+    super.addItem(item);
   }
 
-  protected dereferenceCollection(): FactVoictentPelie {
+  protected dereferenceCollection(): FactCollectionStreamable {
     return {
       graphElementList: this.graphElementList,
       byLocalGraphElementId: this.byLocalGraphElementId,

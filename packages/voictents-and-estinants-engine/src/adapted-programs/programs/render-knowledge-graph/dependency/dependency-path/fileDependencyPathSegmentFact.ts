@@ -112,13 +112,13 @@ export const { FileDependencyPathSegmentFactInstance } =
     })
     .assemble();
 
-export const FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP =
+export const FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID =
   'file-dependency-path-segment-fact';
 
 type FileDependencyPathSegmentFactGepp =
-  typeof FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP;
+  typeof FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID;
 
-export type FileDependencyPathSegmentFactVoque =
+export type FileDependencyPathSegmentFactStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     FileDependencyPathSegmentFactGepp,
     FileDependencyPathSegmentFact

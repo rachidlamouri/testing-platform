@@ -2,8 +2,8 @@ import { ComplexMap } from '../../../../package-agnostic-utilities/data-structur
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { PartitionFact } from '../partition-fact/partitionFact';
 import {
-  FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,
-  FileDependencyPathSegmentFactVoque,
+  FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID,
+  FileDependencyPathSegmentFactStreamMetatype,
 } from './dependency-path/fileDependencyPathSegmentFact';
 import {
   PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
@@ -33,8 +33,8 @@ export const getPartitionedFileDependencyPathConstituents =
     .toItemTuple2<PartitionedFileDependencyPathNodeVoque>({
       collectionId: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
     })
-    .toItemTuple2<FileDependencyPathSegmentFactVoque>({
-      collectionId: FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,
+    .toItemTuple2<FileDependencyPathSegmentFactStreamMetatype>({
+      collectionId: FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID,
     })
     .onTransform((fileDependencyVoictent) => {
       type MappableFileDependency = {
@@ -96,7 +96,8 @@ export const getPartitionedFileDependencyPathConstituents =
 
       return {
         [PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP]: partitionedPathNodeSet,
-        [FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP]: partitionedPathSegmentSet,
+        [FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID]:
+          partitionedPathSegmentSet,
       };
     })
     .assemble();

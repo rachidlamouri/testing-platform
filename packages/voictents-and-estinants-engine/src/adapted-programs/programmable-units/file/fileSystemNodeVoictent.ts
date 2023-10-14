@@ -11,7 +11,7 @@ import {
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { GenericIdentifiableItem } from '../../../adapter/identifiable-item/identifiableItem';
 import { FileSystemNode } from './fileSystemNode';
-import { BaseInMemoryOdeshin2Voictent } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { BaseInMemoryIdentifiableItem2Collection } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 type FileSystemNodeIndexByName = SpreadN<
   [
@@ -56,7 +56,7 @@ export type GenericFileSystemNodeStreamMetatype = FileSystemNodeStreamMetatype<
  */
 export class FileSystemNodeCollection<
   TVoque extends GenericFileSystemNodeStreamMetatype,
-> extends BaseInMemoryOdeshin2Voictent<
+> extends BaseInMemoryIdentifiableItem2Collection<
   GenericFileSystemNodeStreamMetatype,
   TVoque
 > {

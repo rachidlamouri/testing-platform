@@ -4,9 +4,9 @@ import {
   BoundedDirectoryStreamMetatype,
 } from '../../directory/boundedDirectory';
 import {
-  FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
+  FILE_DEPENDENCY_PATH_NODE_FACT_COLLECTION_ID,
   FileDependencyPathNodeFactInstance,
-  FileDependencyPathNodeFactVoque,
+  FileDependencyPathNodeFactStreamMetatype,
 } from './fileDependencyPathNodeFact';
 import {
   PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
@@ -32,8 +32,8 @@ export const getFileDependencyPathNodeFact = buildProgrammedTransform({
       return directory.item.directory.directoryPath.serialized;
     },
   })
-  .toItem2<FileDependencyPathNodeFactVoque>({
-    collectionId: FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
+  .toItem2<FileDependencyPathNodeFactStreamMetatype>({
+    collectionId: FILE_DEPENDENCY_PATH_NODE_FACT_COLLECTION_ID,
   })
   .onTransform((pathNode, [directory]) => {
     return new FileDependencyPathNodeFactInstance({

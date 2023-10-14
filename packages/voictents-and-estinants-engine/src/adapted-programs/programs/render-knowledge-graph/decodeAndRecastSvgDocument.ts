@@ -28,7 +28,7 @@ import {
   CustomDatumTypeName,
   getCustomTypedDatum,
 } from '../../../package-agnostic-utilities/typed-datum/customTypedDatum';
-import { FACT_GEPP, Fact, FactVoque } from './fact/fact';
+import { FACT_COLLECTION_ID, Fact, FactStreamMetatype } from './fact/fact';
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { FactTypeName } from './fact/factTypeName';
 import {
@@ -136,8 +136,8 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
   .fromItem2<SvgDocumentVoque>({
     collectionId: SVG_DOCUMENT_GEPP,
   })
-  .andFromCollection2<FactVoque>({
-    collectionId: FACT_GEPP,
+  .andFromCollection2<FactStreamMetatype>({
+    collectionId: FACT_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

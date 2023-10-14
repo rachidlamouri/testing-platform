@@ -114,11 +114,12 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const DIRECTORY_FACT_2_GEPP = 'directory-fact-2';
+export const DIRECTORY_FACT_2_COLLECTION_ID = 'directory-fact-2';
 
-type DirectoryFact2Gepp = typeof DIRECTORY_FACT_2_GEPP;
+type DirectoryFact2Gepp = typeof DIRECTORY_FACT_2_COLLECTION_ID;
 
-export type DirectoryFact2Voque = InMemoryIdentifiableItem2ListStreamMetatype<
-  DirectoryFact2Gepp,
-  DirectoryFact2
->;
+export type DirectoryFact2StreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    DirectoryFact2Gepp,
+    DirectoryFact2
+  >;

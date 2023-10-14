@@ -1,15 +1,15 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
-  FileDependencyPathNodeFactVoque,
+  FILE_DEPENDENCY_PATH_NODE_FACT_COLLECTION_ID,
+  FileDependencyPathNodeFactStreamMetatype,
 } from '../dependency/dependency-path/fileDependencyPathNodeFact';
 import {
-  FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,
-  FileDependencyPathSegmentFactVoque,
+  FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID,
+  FileDependencyPathSegmentFactStreamMetatype,
 } from '../dependency/dependency-path/fileDependencyPathSegmentFact';
 import {
-  DIRECTORY_FACT_2_GEPP,
-  DirectoryFact2Voque,
+  DIRECTORY_FACT_2_COLLECTION_ID,
+  DirectoryFact2StreamMetatype,
 } from '../directory/directoryFact2';
 import {
   FILE_FACT_2_COLLECTION_ID,
@@ -19,7 +19,7 @@ import {
   PARTITION_FACT_COLLECTION_ID,
   PartitionFactStreamMetatype,
 } from '../partition-fact/partitionFact';
-import { FACT_GEPP, FactVoque } from './fact';
+import { FACT_COLLECTION_ID, FactStreamMetatype } from './fact';
 
 /**
  * Combines all knowledge graph facts into a single collection
@@ -30,35 +30,35 @@ export const aggregateFacts = buildProgrammedTransform({
   .fromCollection2<PartitionFactStreamMetatype>({
     collectionId: PARTITION_FACT_COLLECTION_ID,
   })
-  .andFromCollection2<DirectoryFact2Voque>({
-    collectionId: DIRECTORY_FACT_2_GEPP,
+  .andFromCollection2<DirectoryFact2StreamMetatype>({
+    collectionId: DIRECTORY_FACT_2_COLLECTION_ID,
   })
   .andFromCollection2<FileFact2StreamMetatype>({
     collectionId: FILE_FACT_2_COLLECTION_ID,
   })
-  .andFromCollection2<FileDependencyPathNodeFactVoque>({
-    collectionId: FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
+  .andFromCollection2<FileDependencyPathNodeFactStreamMetatype>({
+    collectionId: FILE_DEPENDENCY_PATH_NODE_FACT_COLLECTION_ID,
   })
-  .andFromCollection2<FileDependencyPathSegmentFactVoque>({
-    collectionId: FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,
+  .andFromCollection2<FileDependencyPathSegmentFactStreamMetatype>({
+    collectionId: FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID,
   })
-  .toItemTuple2<FactVoque>({
-    collectionId: FACT_GEPP,
+  .toItemTuple2<FactStreamMetatype>({
+    collectionId: FACT_COLLECTION_ID,
   })
   .onTransform(
     (
-      partitionFactVoictent,
-      directoryFact2Voictent,
-      fileFact2Voictent,
-      fileDependencyPathNodeFactVoictent,
-      fileDependencyPathSegmentFactVoictent,
+      partitionFactCollection,
+      directoryFact2Collection,
+      fileFact2Collection,
+      fileDependencyPathNodeFactCollection,
+      fileDependencyPathSegmentFactCollection,
     ) => {
       return [
-        ...partitionFactVoictent.list,
-        ...directoryFact2Voictent,
-        ...fileFact2Voictent,
-        ...fileDependencyPathNodeFactVoictent,
-        ...fileDependencyPathSegmentFactVoictent,
+        ...partitionFactCollection.list,
+        ...directoryFact2Collection,
+        ...fileFact2Collection,
+        ...fileDependencyPathNodeFactCollection,
+        ...fileDependencyPathSegmentFactCollection,
       ];
     },
   )
