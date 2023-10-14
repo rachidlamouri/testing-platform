@@ -30,10 +30,10 @@ export const { CommonBoundaryRootInstance } = buildConstructorFunctionWithName(
 
 export const COMMON_BOUNDARY_ROOT_COLLECTION_ID = 'common-boundary-root';
 
-type CommonBoundaryRootGepp = typeof COMMON_BOUNDARY_ROOT_COLLECTION_ID;
+type CommonBoundaryRootCollectionId = typeof COMMON_BOUNDARY_ROOT_COLLECTION_ID;
 
 export type CommonBoundaryRootStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    CommonBoundaryRootGepp,
+    CommonBoundaryRootCollectionId,
     CommonBoundaryRoot
   >;

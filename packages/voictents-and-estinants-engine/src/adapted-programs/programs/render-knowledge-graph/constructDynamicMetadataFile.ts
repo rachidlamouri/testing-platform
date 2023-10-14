@@ -24,7 +24,10 @@ import {
   FILE_FACT_2_COLLECTION_ID,
   FileFact2StreamMetatype,
 } from './file/fileFact2';
-import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
+import {
+  BOUNDARY_FACT_COLLECTION_ID,
+  BoundaryFactStreamMetatype,
+} from './boundary/boundaryFact';
 import {
   COMMON_BOUNDARY_ROOT_COLLECTION_ID,
   CommonBoundaryRootStreamMetatype,
@@ -94,8 +97,8 @@ const encodeDatum = (
 export const constructDynamicMetadataFile = buildProgrammedTransform({
   name: 'constructDynamicMetadataFile',
 })
-  .fromCollection2<BoundaryFactVoque>({
-    collectionId: BOUNDARY_FACT_GEPP,
+  .fromCollection2<BoundaryFactStreamMetatype>({
+    collectionId: BOUNDARY_FACT_COLLECTION_ID,
   })
   .andFromItemTuple2<CommonBoundaryRootStreamMetatype, ['']>({
     collectionId: COMMON_BOUNDARY_ROOT_COLLECTION_ID,

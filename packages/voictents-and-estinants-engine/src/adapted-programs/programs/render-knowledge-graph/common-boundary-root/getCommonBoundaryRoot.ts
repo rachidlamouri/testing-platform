@@ -14,9 +14,9 @@ import {
   CommonBoundaryRootStreamMetatype,
 } from './commonBoundaryRoot';
 import {
-  BOUNDARY_FACT_GEPP,
+  BOUNDARY_FACT_COLLECTION_ID,
   BoundaryFactInstance,
-  BoundaryFactVoque,
+  BoundaryFactStreamMetatype,
 } from '../boundary/boundaryFact';
 
 /**
@@ -34,12 +34,12 @@ export const getCommonBoundaryRoot = buildProgrammedTransform({
   .toItem2<CommonBoundaryRootStreamMetatype>({
     collectionId: COMMON_BOUNDARY_ROOT_COLLECTION_ID,
   })
-  .toItemTuple2<BoundaryFactVoque>({
-    collectionId: BOUNDARY_FACT_GEPP,
+  .toItemTuple2<BoundaryFactStreamMetatype>({
+    collectionId: BOUNDARY_FACT_COLLECTION_ID,
   })
-  .onTransform((boundaryList, directoryVoictent) => {
+  .onTransform((boundaryList, directoryCollection) => {
     const boundaryDirectoryList = boundaryList.map((boundary) => {
-      const directory = directoryVoictent.byNodePath.get(
+      const directory = directoryCollection.byNodePath.get(
         boundary.directory.directoryPath.serialized,
       );
       if (directory === undefined) {
@@ -84,7 +84,7 @@ export const getCommonBoundaryRoot = buildProgrammedTransform({
 
     return {
       [COMMON_BOUNDARY_ROOT_COLLECTION_ID]: commonBoundaryRoot,
-      [BOUNDARY_FACT_GEPP]: boundaryFactList,
+      [BOUNDARY_FACT_COLLECTION_ID]: boundaryFactList,
     };
   })
   .assemble();
