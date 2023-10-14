@@ -18,8 +18,8 @@ import { ProgrammedTransformSourceInstance } from '../../programmable-units/lint
 import { getPhraseSensibilityState } from '../../../layer-agnostic-utilities/nonsense/isSensiblePhrase';
 import { shishKebab } from '../../../package-agnostic-utilities/case/shishKebab';
 import {
-  DIRECTORY_GEPP,
-  DirectoryVoque,
+  DIRECTORY_COLLECTION_ID,
+  DirectoryStreamMetatype,
 } from '../../programmable-units/file/directory';
 
 const ESTINANT_NAME = 'getDirectoryRenameConfiguration' as const;
@@ -35,8 +35,8 @@ const linterSource = new ProgrammedTransformSourceInstance({
 export const getDirectoryRenameConfiguration = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromItem2<DirectoryVoque>({
-    collectionId: DIRECTORY_GEPP,
+  .fromItem2<DirectoryStreamMetatype>({
+    collectionId: DIRECTORY_COLLECTION_ID,
   })
   .toItemTuple2<FileSystemNodeRenameConfigurationVoque>({
     collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,

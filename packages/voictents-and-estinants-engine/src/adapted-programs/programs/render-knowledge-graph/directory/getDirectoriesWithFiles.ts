@@ -1,7 +1,7 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  DIRECTORY_GEPP,
-  DirectoryVoque,
+  DIRECTORY_COLLECTION_ID,
+  DirectoryStreamMetatype,
 } from '../../../programmable-units/file/directory';
 import {
   TYPE_SCRIPT_FILE_GEPP,
@@ -18,8 +18,8 @@ import {
 export const getDirectoriesWithFiles = buildProgrammedTransform({
   name: 'getDirectoriesWithFiles',
 })
-  .fromCollection2<DirectoryVoque>({
-    collectionId: DIRECTORY_GEPP,
+  .fromCollection2<DirectoryStreamMetatype>({
+    collectionId: DIRECTORY_COLLECTION_ID,
   })
   .andFromCollection2<TypeScriptFileVoque>({
     collectionId: TYPE_SCRIPT_FILE_GEPP,

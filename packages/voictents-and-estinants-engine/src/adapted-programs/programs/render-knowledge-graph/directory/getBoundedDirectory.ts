@@ -1,7 +1,7 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  DIRECTORY_GEPP,
-  DirectoryVoque,
+  DIRECTORY_COLLECTION_ID,
+  DirectoryStreamMetatype,
 } from '../../../programmable-units/file/directory';
 import {
   BOUNDED_DIRECTORY_GEPP,
@@ -24,8 +24,8 @@ import {
 export const getBoundedDirectory = buildProgrammedTransform({
   name: 'getBoundedDirectory',
 })
-  .fromItem2<DirectoryVoque>({
-    collectionId: DIRECTORY_GEPP,
+  .fromItem2<DirectoryStreamMetatype>({
+    collectionId: DIRECTORY_COLLECTION_ID,
   })
   .andFromItemTuple2<CommonBoundaryRootStreamMetatype, ['']>({
     collectionId: COMMON_BOUNDARY_ROOT_COLLECTION_ID,

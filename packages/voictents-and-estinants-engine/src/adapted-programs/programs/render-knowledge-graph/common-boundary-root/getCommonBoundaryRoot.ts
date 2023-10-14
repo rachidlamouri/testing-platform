@@ -1,8 +1,8 @@
 import { posix } from 'path';
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  DIRECTORY_GEPP,
-  DirectoryVoque,
+  DIRECTORY_COLLECTION_ID,
+  DirectoryStreamMetatype,
 } from '../../../programmable-units/file/directory';
 import {
   BOUNDARY_COLLECTION_ID,
@@ -28,8 +28,8 @@ export const getCommonBoundaryRoot = buildProgrammedTransform({
   .fromCollection2<BoundaryStreamMetatype>({
     collectionId: BOUNDARY_COLLECTION_ID,
   })
-  .andFromCollection2<DirectoryVoque>({
-    collectionId: DIRECTORY_GEPP,
+  .andFromCollection2<DirectoryStreamMetatype>({
+    collectionId: DIRECTORY_COLLECTION_ID,
   })
   .toItem2<CommonBoundaryRootStreamMetatype>({
     collectionId: COMMON_BOUNDARY_ROOT_COLLECTION_ID,

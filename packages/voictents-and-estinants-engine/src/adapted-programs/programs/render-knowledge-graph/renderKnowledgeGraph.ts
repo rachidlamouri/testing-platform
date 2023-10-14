@@ -88,16 +88,16 @@ import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHa
 import { getFileAncestorDirectoryPathSet } from '../../programmable-units/file/getFileAncestorDirectoryPathSet';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 import {
-  LAYER_CONFIGURATION_GEPP,
+  LAYER_CONFIGURATION_COLLECTION_ID,
   LAYER_CONFIGURATION_LIST,
-  LayerConfigurationVoque,
+  LayerConfigurationStreamMetatype,
 } from './layer/layerConfiguration';
 import { getLayer } from './layer/getLayer';
 import { getLayerListTrie } from './layer/getLayerListTrie';
 import { getLayerTrie } from './layer/getLayerTrie';
 import {
-  LAYER_LIST_TRIE_GEPP,
-  LayerListTrieVoque,
+  LAYER_LIST_TRIE_COLLECTION_ID,
+  LayerListTrieStreamMetatype,
 } from './layer/layerListTrie';
 import {
   LAYER_TRIE_COLLECTION_ID,
@@ -138,8 +138,8 @@ runEngine({
       collectionId: BOUNDARY_CONFIGURATION_GEPP,
       initialItemEggTuple: BOUNDARY_CONFIGURATION_LIST,
     }),
-    new InMemoryOdeshin3Voictent<LayerConfigurationVoque>({
-      collectionId: LAYER_CONFIGURATION_GEPP,
+    new InMemoryOdeshin3Voictent<LayerConfigurationStreamMetatype>({
+      collectionId: LAYER_CONFIGURATION_COLLECTION_ID,
       initialItemEggTuple: LAYER_CONFIGURATION_LIST,
     }),
   ] as const,
@@ -176,8 +176,8 @@ runEngine({
     }),
     new FactVoictent(),
     new FileDependencyVoictent(),
-    new InMemoryCollection<LayerListTrieVoque>({
-      collectionId: LAYER_LIST_TRIE_GEPP,
+    new InMemoryCollection<LayerListTrieStreamMetatype>({
+      collectionId: LAYER_LIST_TRIE_COLLECTION_ID,
       initialItemEggTuple: [],
     }),
     new InMemoryCollection<LayerTrieStreamMetatype>({

@@ -4,7 +4,11 @@ import {
 } from '../../../package-agnostic-utilities/file/getNestedFileSystemNodeMetadataList';
 import { splitList } from '../../../package-agnostic-utilities/array/splitList';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { DIRECTORY_GEPP, DirectoryInstance, DirectoryVoque } from './directory';
+import {
+  DIRECTORY_COLLECTION_ID,
+  DirectoryInstance,
+  DirectoryStreamMetatype,
+} from './directory';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
@@ -28,8 +32,8 @@ export const enumerateFileSystemObjects = buildProgrammedTransform({
   .fromItem2<FileSystemObjectEnumeratorConfigurationStreamMetatype>({
     collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
   })
-  .toItemTuple2<DirectoryVoque>({
-    collectionId: DIRECTORY_GEPP,
+  .toItemTuple2<DirectoryStreamMetatype>({
+    collectionId: DIRECTORY_COLLECTION_ID,
   })
   .toItemTuple2<FileStreamMetatype>({
     collectionId: FILE_COLLECTION_ID,
@@ -87,7 +91,7 @@ export const enumerateFileSystemObjects = buildProgrammedTransform({
       reorderByFileSuffixForDebugability(unorderedFileTuple);
 
     return {
-      [DIRECTORY_GEPP]: directoryOutputTuple,
+      [DIRECTORY_COLLECTION_ID]: directoryOutputTuple,
       [FILE_COLLECTION_ID]: orderedFileTuple,
     };
   })

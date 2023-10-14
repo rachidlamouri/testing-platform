@@ -1,12 +1,16 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  DIRECTORY_GEPP,
-  DirectoryVoque,
+  DIRECTORY_COLLECTION_ID,
+  DirectoryStreamMetatype,
 } from '../../../programmable-units/file/directory';
-import { LAYER_GEPP, LayerInstance, LayerVoque } from './layer';
 import {
-  LAYER_CONFIGURATION_GEPP,
-  LayerConfigurationVoque,
+  LAYER_COLLECTION_ID,
+  LayerInstance,
+  LayerStreamMetatype,
+} from './layer';
+import {
+  LAYER_CONFIGURATION_COLLECTION_ID,
+  LayerConfigurationStreamMetatype,
 } from './layerConfiguration';
 
 /**
@@ -15,11 +19,11 @@ import {
 export const getLayer = buildProgrammedTransform({
   name: 'getLayer',
 })
-  .fromItem2<LayerConfigurationVoque>({
-    collectionId: LAYER_CONFIGURATION_GEPP,
+  .fromItem2<LayerConfigurationStreamMetatype>({
+    collectionId: LAYER_CONFIGURATION_COLLECTION_ID,
   })
-  .andFromItemTuple2<DirectoryVoque, [string]>({
-    collectionId: DIRECTORY_GEPP,
+  .andFromItemTuple2<DirectoryStreamMetatype, [string]>({
+    collectionId: DIRECTORY_COLLECTION_ID,
     getRightKeyTuple: (layer) => {
       return [layer.item.directoryPath];
     },
@@ -27,8 +31,8 @@ export const getLayer = buildProgrammedTransform({
       return directory.item.directoryPath.serialized;
     },
   })
-  .toItem2<LayerVoque>({
-    collectionId: LAYER_GEPP,
+  .toItem2<LayerStreamMetatype>({
+    collectionId: LAYER_COLLECTION_ID,
   })
   .onTransform((layerConfiguration, [directory]) => {
     return new LayerInstance({

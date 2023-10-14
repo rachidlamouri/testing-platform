@@ -5,8 +5,8 @@ import {
   EngineProgramLocator3Voque,
 } from '../../../programmable-units/engine-program/engineProgramLocator3';
 import {
-  DIRECTORY_GEPP,
-  DirectoryVoque,
+  DIRECTORY_COLLECTION_ID,
+  DirectoryStreamMetatype,
 } from '../../../programmable-units/file/directory';
 import {
   BOUNDARY_COLLECTION_ID,
@@ -24,8 +24,8 @@ export const getAdaptedProgramBoundary = buildProgrammedTransform({
   .fromItem2<EngineProgramLocator3Voque>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromItemTuple2<DirectoryVoque, [OdeshinZorn]>({
-    collectionId: DIRECTORY_GEPP,
+  .andFromItemTuple2<DirectoryStreamMetatype, [OdeshinZorn]>({
+    collectionId: DIRECTORY_COLLECTION_ID,
     getRightKeyTuple: (locator) => [
       locator.item.engineProgramFile.filePath.parentDirectoryPath,
     ],

@@ -1,9 +1,9 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { LAYER_GEPP, LayerVoque } from './layer';
+import { LAYER_COLLECTION_ID, LayerStreamMetatype } from './layer';
 import {
-  LAYER_LIST_TRIE_GEPP,
+  LAYER_LIST_TRIE_COLLECTION_ID,
   LayerListTrie,
-  LayerListTrieVoque,
+  LayerListTrieStreamMetatype,
 } from './layerListTrie';
 
 /**
@@ -13,16 +13,16 @@ import {
 export const getLayerListTrie = buildProgrammedTransform({
   name: 'getLayerListTrie',
 })
-  .fromCollection2<LayerVoque>({
-    collectionId: LAYER_GEPP,
+  .fromCollection2<LayerStreamMetatype>({
+    collectionId: LAYER_COLLECTION_ID,
   })
-  .toItem2<LayerListTrieVoque>({
-    collectionId: LAYER_LIST_TRIE_GEPP,
+  .toItem2<LayerListTrieStreamMetatype>({
+    collectionId: LAYER_LIST_TRIE_COLLECTION_ID,
   })
-  .onTransform((layerVoictent) => {
+  .onTransform((layerCollection) => {
     const trie = new LayerListTrie([]);
 
-    layerVoictent.forEach((layer) => {
+    layerCollection.forEach((layer) => {
       trie.addSubtrie(
         layer.directory.directoryPath.partList,
         () => {

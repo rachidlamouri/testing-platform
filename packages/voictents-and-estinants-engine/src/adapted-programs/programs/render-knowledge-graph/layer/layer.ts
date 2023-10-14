@@ -52,11 +52,11 @@ export const { LayerInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const LAYER_GEPP = 'layer';
+export const LAYER_COLLECTION_ID = 'layer';
 
-type LayerGepp = typeof LAYER_GEPP;
+type LayerCollectionId = typeof LAYER_COLLECTION_ID;
 
-export type LayerVoque = InMemoryIdentifiableItem2ListStreamMetatype<
-  LayerGepp,
+export type LayerStreamMetatype = InMemoryIdentifiableItem2ListStreamMetatype<
+  LayerCollectionId,
   Layer
 >;

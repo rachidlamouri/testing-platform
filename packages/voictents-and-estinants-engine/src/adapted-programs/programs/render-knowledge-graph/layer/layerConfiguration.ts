@@ -1,7 +1,7 @@
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
-import { LayerZorn } from './layerZorn';
+import { LayerId } from './layerId';
 
 type LayerConfigurationConstructorInput = {
   directoryPath: string;
@@ -15,7 +15,7 @@ type LayerConfigurationConstructorInput = {
 export type LayerConfiguration = SimplifyN<
   [
     {
-      id: LayerZorn;
+      id: LayerId;
     },
     LayerConfigurationConstructorInput,
   ]
@@ -43,7 +43,7 @@ const { LayerConfigurationInstance } = buildNamedConstructorFunction({
       const { directoryPath, displayName } = input;
 
       return {
-        id: new LayerZorn({
+        id: new LayerId({
           directoryPath,
           displayName,
         }),
@@ -53,14 +53,15 @@ const { LayerConfigurationInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const LAYER_CONFIGURATION_GEPP = 'layer-configuration';
+export const LAYER_CONFIGURATION_COLLECTION_ID = 'layer-configuration';
 
-type LayerConfigurationGepp = typeof LAYER_CONFIGURATION_GEPP;
+type LayerConfigurationCollectionId = typeof LAYER_CONFIGURATION_COLLECTION_ID;
 
-export type LayerConfigurationVoque = InMemoryIdentifiableItem3StreamMetatype<
-  LayerConfigurationGepp,
-  LayerConfiguration
->;
+export type LayerConfigurationStreamMetatype =
+  InMemoryIdentifiableItem3StreamMetatype<
+    LayerConfigurationCollectionId,
+    LayerConfiguration
+  >;
 
 export const LAYER_CONFIGURATION_LIST: LayerConfiguration[] = [
   new LayerConfigurationInstance({

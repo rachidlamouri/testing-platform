@@ -3,9 +3,9 @@ import { SpawnSyncReturns } from 'child_process';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import {
-  DIRECTORY_GEPP,
+  DIRECTORY_COLLECTION_ID,
   Directory,
-  DirectoryVoque,
+  DirectoryStreamMetatype,
 } from '../../programmable-units/file/directory';
 import { applyFileSystemNodeChange } from './applyFileSystemNodeChange';
 import { applySymbolRename } from './applySymbolRename';
@@ -48,8 +48,8 @@ type ConfigurationGroup = {
 export const applyRenaming = buildProgrammedTransform({
   name: 'applyRenaming',
 })
-  .fromCollection2<DirectoryVoque>({
-    collectionId: DIRECTORY_GEPP,
+  .fromCollection2<DirectoryStreamMetatype>({
+    collectionId: DIRECTORY_COLLECTION_ID,
   })
   .andFromCollection2<FileSystemNodeRenameConfigurationVoque>({
     collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,

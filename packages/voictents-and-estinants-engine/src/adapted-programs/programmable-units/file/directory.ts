@@ -62,8 +62,11 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const DIRECTORY_GEPP = 'directory';
+export const DIRECTORY_COLLECTION_ID = 'directory';
 
-type DirectoryGepp = typeof DIRECTORY_GEPP;
+type DirectoryGepp = typeof DIRECTORY_COLLECTION_ID;
 
-export type DirectoryVoque = FileSystemNodeVoque<DirectoryGepp, Directory>;
+export type DirectoryStreamMetatype = FileSystemNodeVoque<
+  DirectoryGepp,
+  Directory
+>;

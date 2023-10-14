@@ -1,8 +1,8 @@
 import Case from 'case';
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  DIRECTORY_GEPP,
-  DirectoryVoque,
+  DIRECTORY_COLLECTION_ID,
+  DirectoryStreamMetatype,
 } from '../../../programmable-units/file/directory';
 import {
   BOUNDARY_COLLECTION_ID,
@@ -17,8 +17,8 @@ import { BoundaryTypeName } from './boundaryTypeName';
 export const getProgrammableUnitBoundary = buildProgrammedTransform({
   name: 'getProgrammableUnitBoundary',
 })
-  .fromItem2<DirectoryVoque>({
-    collectionId: DIRECTORY_GEPP,
+  .fromItem2<DirectoryStreamMetatype>({
+    collectionId: DIRECTORY_COLLECTION_ID,
   })
   .toItemTuple2<BoundaryStreamMetatype>({
     collectionId: BOUNDARY_COLLECTION_ID,

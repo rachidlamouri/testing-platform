@@ -7,11 +7,11 @@ import { Layer } from './layer';
  */
 export class LayerListTrie extends Trie<Layer[]> {}
 
-export const LAYER_LIST_TRIE_GEPP = 'layer-list-trie';
+export const LAYER_LIST_TRIE_COLLECTION_ID = 'layer-list-trie';
 
-type LayerListTrieGepp = typeof LAYER_LIST_TRIE_GEPP;
+type LayerListTrieCollectionId = typeof LAYER_LIST_TRIE_COLLECTION_ID;
 
-export type LayerListTrieVoque = StandardInMemoryStreamMetatype<
-  LayerListTrieGepp,
+export type LayerListTrieStreamMetatype = StandardInMemoryStreamMetatype<
+  LayerListTrieCollectionId,
   LayerListTrie
 >;

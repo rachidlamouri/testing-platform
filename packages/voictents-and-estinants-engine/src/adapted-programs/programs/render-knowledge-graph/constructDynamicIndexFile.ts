@@ -14,7 +14,7 @@ import {
   IdentifierConfiguration,
   treeifyDatum,
 } from './decodeAndRecastSvgDocument';
-import { LAYER_GEPP, LayerVoque } from './layer/layer';
+import { LAYER_COLLECTION_ID, LayerStreamMetatype } from './layer/layer';
 import {
   PARTITION_FACT_COLLECTION_ID,
   PartitionFact,
@@ -34,8 +34,8 @@ import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 export const constructDynamicIndexFile = buildProgrammedTransform({
   name: 'constructDynamicIndexFile',
 })
-  .fromCollection2<LayerVoque>({
-    collectionId: LAYER_GEPP,
+  .fromCollection2<LayerStreamMetatype>({
+    collectionId: LAYER_COLLECTION_ID,
   })
   .andFromCollection2<PartitionFactStreamMetatype>({
     collectionId: PARTITION_FACT_COLLECTION_ID,
