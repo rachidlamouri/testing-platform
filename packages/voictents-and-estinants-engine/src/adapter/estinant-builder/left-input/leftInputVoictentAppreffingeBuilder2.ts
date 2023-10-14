@@ -5,7 +5,7 @@ import {
 import {
   buildOutputItemStreamConfigurationBuilder2,
   OutputItemStreamConfigurationBuilderParent2,
-} from '../output/outputHubblepupAppreffingeBuilder2';
+} from '../output/outputItemStreamConfigurationBuilder2';
 import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { AdaptedLeftInputCollectionStreamConnectionMetatype } from '../shared/streamConnectionMetatype';
 import { PartialLeftInputStreamConfiguration } from '../shared/partialStreamConfiguration';
@@ -17,7 +17,7 @@ import {
 import {
   buildOutputItemTupleStreamConfigurationBuilder2,
   OutputItemTupleStreamConfigurationBuilderParent2,
-} from '../output/outputHubblepupTupleAppreffingeBuilder2';
+} from '../output/outputItemTupleStreamConfigurationBuilder2';
 import {
   buildRightInputItemTupleStreamConfigurationBuilder2,
   RightInputItemTupleStreamConfigurationBuilderParent2,

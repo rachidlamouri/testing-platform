@@ -7,11 +7,11 @@ import {
 import {
   buildOutputItemStreamConfigurationBuilder2,
   OutputItemStreamConfigurationBuilderParent2,
-} from '../output/outputHubblepupAppreffingeBuilder2';
+} from '../output/outputItemStreamConfigurationBuilder2';
 import {
   OutputItemTupleStreamConfigurationBuilderParent2,
   buildOutputItemTupleStreamConfigurationBuilder2,
-} from '../output/outputHubblepupTupleAppreffingeBuilder2';
+} from '../output/outputItemTupleStreamConfigurationBuilder2';
 import { PartialRightCollectionStreamConfiguration } from '../shared/partialStreamConfiguration';
 import {
   AdaptedRightInputCollectionStreamConnectionMetatype,

@@ -20,29 +20,29 @@ export const categorizeFiles = buildProgrammedTransform({
   .fromItem2<FileVoque>({
     collectionId: FILE_GEPP,
   })
-  .toHubblepupOnCondition<BashFileVoque>({
-    gepp: BASH_FILE_GEPP,
-    pinbe: (file): file is BashFile =>
+  .toItemOnCondition<BashFileVoque>({
+    collectionId: BASH_FILE_GEPP,
+    transform: (file): file is BashFile =>
       file.nodePath.name.extension.suffixIdentifier ===
       FileExtensionSuffixIdentifier.Bash,
   })
-  .toHubblepupOnCondition<HtmlFileVoque>({
-    gepp: HTML_FILE_GEPP,
-    pinbe: (file): file is HtmlFile =>
+  .toItemOnCondition<HtmlFileVoque>({
+    collectionId: HTML_FILE_GEPP,
+    transform: (file): file is HtmlFile =>
       file.nodePath.name.extension.suffixIdentifier ===
       FileExtensionSuffixIdentifier.Html,
   })
-  .toHubblepupOnCondition<TypeScriptFileVoque>({
-    gepp: TYPE_SCRIPT_FILE_GEPP,
-    pinbe: (file): file is TypeScriptFile =>
+  .toItemOnCondition<TypeScriptFileVoque>({
+    collectionId: TYPE_SCRIPT_FILE_GEPP,
+    transform: (file): file is TypeScriptFile =>
       file.nodePath.name.extension.suffixIdentifier ===
         FileExtensionSuffixIdentifier.TypeScript ||
       file.nodePath.name.extension.suffixIdentifier ===
         FileExtensionSuffixIdentifier.TypeScriptXml,
   })
-  .toHubblepupOnCondition<YamlFileVoque>({
-    gepp: YAML_FILE_GEPP,
-    pinbe: (file): file is YamlFile =>
+  .toItemOnCondition<YamlFileVoque>({
+    collectionId: YAML_FILE_GEPP,
+    transform: (file): file is YamlFile =>
       file.nodePath.name.extension.suffixIdentifier ===
       FileExtensionSuffixIdentifier.Yaml,
   })

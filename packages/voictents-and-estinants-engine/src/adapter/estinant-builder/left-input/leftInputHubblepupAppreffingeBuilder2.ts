@@ -7,7 +7,7 @@ import {
 import {
   buildOutputItemTupleStreamConfigurationBuilder2,
   OutputItemTupleStreamConfigurationBuilderParent2,
-} from '../output/outputHubblepupTupleAppreffingeBuilder2';
+} from '../output/outputItemTupleStreamConfigurationBuilder2';
 import { PartialLeftInputStreamConfiguration } from '../shared/partialStreamConfiguration';
 import {
   buildAdaptedTransformBuilder2,
@@ -16,13 +16,13 @@ import {
 import { AdaptedLeftInputItemStreamConnectionMetatype } from '../shared/streamConnectionMetatype';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
-  buildOutputHubblepupConditionalAppreffingeBuilder,
-  OutputHubblepupConditionalAppreffingeBuilderParent,
-} from '../output/outputHubblepupConditionalAppreffingeBuilder';
+  buildOutputItemConditionalStreamConfigurationBuilder,
+  OutputItemConditionalStreamConfigurationBuilderParent,
+} from '../output/outputItemConditionalStreamConfigurationBuilder';
 import {
   buildOutputItemStreamConfigurationBuilder2,
   OutputItemStreamConfigurationBuilderParent2,
-} from '../output/outputHubblepupAppreffingeBuilder2';
+} from '../output/outputItemStreamConfigurationBuilder2';
 import {
   buildRightInputItemTupleStreamConfigurationBuilder2,
   RightInputItemTupleStreamConfigurationBuilderParent2,
@@ -63,7 +63,7 @@ type LeftInputHubblepupAppreffingeBuilder2 = <
       EmptyAdaptedOutputVickenTuple
     >,
 
-    OutputHubblepupConditionalAppreffingeBuilderParent<
+    OutputItemConditionalStreamConfigurationBuilderParent<
       AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
       EmptyAdaptedOutputVickenTuple
     >,
@@ -116,11 +116,10 @@ export const buildLeftInputHubblepupAppreffingeBuilder2 = (
           EmptyAdaptedOutputVickenTuple
         >(nextContext),
 
-        toHubblepupOnCondition:
-          buildOutputHubblepupConditionalAppreffingeBuilder<
-            AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-            EmptyAdaptedOutputVickenTuple
-          >(nextContext),
+        toItemOnCondition: buildOutputItemConditionalStreamConfigurationBuilder<
+          AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
+          EmptyAdaptedOutputVickenTuple
+        >(nextContext),
 
         toItem2: buildOutputItemStreamConfigurationBuilder2<
           AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
