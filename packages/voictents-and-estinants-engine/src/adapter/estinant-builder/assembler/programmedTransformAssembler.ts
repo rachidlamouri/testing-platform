@@ -30,31 +30,31 @@ import {
  *
  * @readableName ProgrammedTransformAssembler
  */
-type EstinantAssembler<
-  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
-  TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
+type ProgrammedTransformAssembler<
+  TLeftInputStreamConnectionMetatype extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputStreamConnectionMetatypeTuple extends GenericRightInputStreamConnectionMetatypeTuple,
+  TAdaptedOutputStreamConnectionMetatypeTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = () => ProgrammedTransform2<
-  TLeftInputVicken,
-  TRightInputVickenTuple,
-  CoreOutputStreamConnectionMetatypeFromAdaptedOutputStreamConnectionMetatypeTuple<TAdaptedOutputVickenTuple>
+  TLeftInputStreamConnectionMetatype,
+  TRightInputStreamConnectionMetatypeTuple,
+  CoreOutputStreamConnectionMetatypeFromAdaptedOutputStreamConnectionMetatypeTuple<TAdaptedOutputStreamConnectionMetatypeTuple>
 >;
 
 export const buildProgrammedTransformAssembler = <
-  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
-  TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
+  TLeftInputStreamConnectionMetatype extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputStreamConnectionMetatypeTuple extends GenericRightInputStreamConnectionMetatypeTuple,
+  TAdaptedOutputStreamConnectionMetatypeTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 >(
   assemblerContext: AssemblerContext,
-): EstinantAssembler<
-  TLeftInputVicken,
-  TRightInputVickenTuple,
-  TAdaptedOutputVickenTuple
+): ProgrammedTransformAssembler<
+  TLeftInputStreamConnectionMetatype,
+  TRightInputStreamConnectionMetatypeTuple,
+  TAdaptedOutputStreamConnectionMetatypeTuple
 > => {
-  const assembleEstinant: EstinantAssembler<
-    TLeftInputVicken,
-    TRightInputVickenTuple,
-    TAdaptedOutputVickenTuple
+  const assembleProgrammedTransform: ProgrammedTransformAssembler<
+    TLeftInputStreamConnectionMetatype,
+    TRightInputStreamConnectionMetatypeTuple,
+    TAdaptedOutputStreamConnectionMetatypeTuple
   > = () => {
     const {
       instantiationContext,
@@ -124,7 +124,7 @@ export const buildProgrammedTransformAssembler = <
       return output;
     };
 
-    const estinant = {
+    const programmedTransform = {
       version: 2,
       name: instantiationContext.name,
       leftInputStreamConfiguration: {
@@ -187,24 +187,24 @@ export const buildProgrammedTransformAssembler = <
       },
       transform,
     } satisfies GenericProgrammedTransform2 as unknown as ProgrammedTransform2<
-      TLeftInputVicken,
-      TRightInputVickenTuple,
-      CoreOutputStreamConnectionMetatypeFromAdaptedOutputStreamConnectionMetatypeTuple<TAdaptedOutputVickenTuple>
+      TLeftInputStreamConnectionMetatype,
+      TRightInputStreamConnectionMetatypeTuple,
+      CoreOutputStreamConnectionMetatypeFromAdaptedOutputStreamConnectionMetatypeTuple<TAdaptedOutputStreamConnectionMetatypeTuple>
     >;
-    return estinant;
+    return programmedTransform;
   };
 
-  return assembleEstinant;
+  return assembleProgrammedTransform;
 };
 
 export type ProgrammedTransformAssemblerParent<
-  TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
-  TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
+  TLeftInputStreamConnectionMetatype extends GenericLeftInputStreamConnectionMetatype,
+  TRightInputStreamConnectionMetatypeTuple extends GenericRightInputStreamConnectionMetatypeTuple,
+  TAdaptedOutputStreamConnectionMetatypeTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = {
-  assemble: EstinantAssembler<
-    TLeftInputVicken,
-    TRightInputVickenTuple,
-    TAdaptedOutputVickenTuple
+  assemble: ProgrammedTransformAssembler<
+    TLeftInputStreamConnectionMetatype,
+    TRightInputStreamConnectionMetatypeTuple,
+    TAdaptedOutputStreamConnectionMetatypeTuple
   >;
 };

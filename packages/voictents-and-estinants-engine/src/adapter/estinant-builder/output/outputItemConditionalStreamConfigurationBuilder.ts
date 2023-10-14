@@ -5,7 +5,7 @@ import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
   buildProgrammedTransformAssembler,
   ProgrammedTransformAssemblerParent,
-} from '../assembler/estinantAssembler';
+} from '../assembler/programmedTransformAssembler';
 import {
   buildInputOutputContextFromConstituentResultNormalizer,
   ConstituentResultNormalizer,

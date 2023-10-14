@@ -2,7 +2,7 @@ import { Simplify, UnionToIntersection } from 'type-fest';
 import {
   buildProgrammedTransformAssembler,
   ProgrammedTransformAssemblerParent,
-} from '../assembler/estinantAssembler';
+} from '../assembler/programmedTransformAssembler';
 import {
   AssemblerContext,
   InputOutputContext,
