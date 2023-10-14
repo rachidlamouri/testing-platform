@@ -68,7 +68,7 @@ import {
   EngineVoqueLocator2Instance,
 } from './engineVoqueLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
-import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
+import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
 import { buildVoictentByGepp } from '../../../adapter/engine/digikikify';
 import { isArrayExpression } from '../../../package-agnostic-utilities/type-script-ast/isArrayExpression';
 import {

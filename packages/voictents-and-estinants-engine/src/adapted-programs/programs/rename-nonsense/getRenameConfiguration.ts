@@ -52,7 +52,7 @@ export const getRenameConfiguration = buildProgrammedTransform({
       identifierLocator.filePath.serialized ===
         'packages/voictents-and-estinants-engine/src/package-agnostic-utilities/data-structure/id.ts' ||
       identifierLocator.filePath.serialized ===
-        'packages/voictents-and-estinants-engine/src/adapter/odeshin/identifiableItem.ts' ||
+        'packages/voictents-and-estinants-engine/src/adapter/identifiable-item/identifiableItem.ts' ||
       identifierLocator.filePath.serialized ===
         'packages/voictents-and-estinants-engine/src/layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2.ts' ||
       identifierLocator.filePath.serialized ===

@@ -9,7 +9,7 @@ import {
   InMemoryStreamMetatype,
 } from '../../../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
-import { GenericIdentifiableItem } from '../../../adapter/odeshin/identifiableItem';
+import { GenericIdentifiableItem } from '../../../adapter/identifiable-item/identifiableItem';
 import { FileSystemNode } from './fileSystemNode';
 import { BaseInMemoryOdeshin2Voictent } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 

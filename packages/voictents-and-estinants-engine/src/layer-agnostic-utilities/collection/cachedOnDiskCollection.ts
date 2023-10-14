@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { posix } from 'path';
-import { Subitem } from '../../adapter/odeshin/subitem';
+import { Subitem } from '../../adapter/identifiable-item/subitem';
 import { CollectionId } from '../../core/types/collection/collectionId';
 import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { Collection2 } from '../../core/types/collection/collection2';

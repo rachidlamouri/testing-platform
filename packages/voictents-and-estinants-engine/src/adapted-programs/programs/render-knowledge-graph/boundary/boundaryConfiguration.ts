@@ -91,7 +91,7 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
     typeName: BoundaryTypeName.Utility,
     displayName: 'Odeshin',
     directoryPath:
-      'packages/voictents-and-estinants-engine/src/adapter/odeshin',
+      'packages/voictents-and-estinants-engine/src/adapter/identifiable-item',
   }),
   new BoundaryConfigurationInstance({
     typeName: BoundaryTypeName.TestProgram,

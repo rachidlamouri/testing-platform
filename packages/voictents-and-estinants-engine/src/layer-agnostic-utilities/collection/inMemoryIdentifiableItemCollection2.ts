@@ -12,7 +12,7 @@
 
 import { CollectionId } from '../../core/types/collection/collectionId';
 import { ItemStream2 } from '../../core/types/stream/stream';
-import { GenericIdentifiableItem } from '../../adapter/odeshin/identifiableItem';
+import { GenericIdentifiableItem } from '../../adapter/identifiable-item/identifiableItem';
 import {
   AbstractInMemoryCollection,
   DereferenceError,

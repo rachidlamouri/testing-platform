@@ -1,6 +1,6 @@
 import { NonEmptyTuple } from '../../../../package-agnostic-utilities/type/tuple';
 import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
+import { OdeshinZorn } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImportListVoque,

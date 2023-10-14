@@ -1,7 +1,7 @@
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
 import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
+import { OdeshinZorn } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
   FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
   FileAncestorDirectoryPathSetVoque,

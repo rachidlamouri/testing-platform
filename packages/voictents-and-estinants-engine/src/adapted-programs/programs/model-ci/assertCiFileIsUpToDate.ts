@@ -16,7 +16,7 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
-import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
+import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
 
 const ESTINANT_NAME = 'assertCiFileIsUpToDate' as const;
 type EstinantName = typeof ESTINANT_NAME;

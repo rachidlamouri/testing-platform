@@ -12,7 +12,7 @@ import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
   EngineProgramLocator3Voque,
 } from '../../programmable-units/engine-program/engineProgramLocator3';
-import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
+import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   EXPECTED_PROGRAM_TEST_FILE_GEPP,
   ExpectedProgramTestFileVoque,

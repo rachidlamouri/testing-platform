@@ -66,7 +66,7 @@ import {
   EstinantVoqueRelationship2Instance,
   EstinantVoqueRelationship2Voque,
 } from './estinantVoqueRelationship2';
-import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
+import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclaration';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,

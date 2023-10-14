@@ -11,7 +11,7 @@ import {
   DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   DirectedGraphMetadataByIdVoque,
 } from './directedGraphMetadataById';
-import { OdeshinZorn } from '../../../adapter/odeshin/identifiableItem';
+import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
 
 const INTERACTIVE_HTML_FILE_PATH =
   'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/interactiveSvg.html';

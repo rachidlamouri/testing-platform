@@ -1,5 +1,5 @@
 import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
+import { OdeshinZorn } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
   EngineProgramLocator3Voque,

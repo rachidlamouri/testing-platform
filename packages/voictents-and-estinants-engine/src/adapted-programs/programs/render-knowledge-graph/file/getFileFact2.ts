@@ -1,5 +1,5 @@
 import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
-import { OdeshinZorn } from '../../../../adapter/odeshin/identifiableItem';
+import { OdeshinZorn } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   FileCommentedProgramBodyDeclarationGroupVoque,
