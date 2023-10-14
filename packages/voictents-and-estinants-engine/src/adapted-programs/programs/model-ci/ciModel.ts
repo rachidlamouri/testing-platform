@@ -18,7 +18,7 @@ type ProgramTestGroup = {
  * @canonicalDeclaration
  */
 type CiModel = {
-  zorn: string;
+  id: string;
   initialCommandList: string[];
   finalCommandList: string[];
   programTestGroupList: ProgramTestGroup[];
@@ -33,7 +33,7 @@ export type CiModelVoque = StandardInMemoryStreamMetatype<CiModelGepp, CiModel>;
 export const CI_MODEL_ZORN = 'CI_MODEL';
 
 export const CI_MODEL: CiModel = {
-  zorn: CI_MODEL_ZORN,
+  id: CI_MODEL_ZORN,
   initialCommandList: ['set -e', '', 'echo "Starting ci.sh"', PRINT_NEW_LINE],
   finalCommandList: ['echo "Finished without errors!"'],
   programTestGroupList: [

@@ -1,5 +1,5 @@
 /**
- * Directed graph zorn types
+ * Directed graph id types
  * @noCanonicalDeclaration
  */
 
@@ -14,7 +14,7 @@ type FactoryInput = {
 
 const LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE = [
   'elementType',
-  // TODO: update the template parent type to allow this to be a string OR a Zorn
+  // TODO: update the template parent type to allow this to be a string OR an id
   'distinguisher',
 ] as const satisfies GenericComplexIdTemplate;
 type LocalDirectedGraphElement2ZornTemplate =

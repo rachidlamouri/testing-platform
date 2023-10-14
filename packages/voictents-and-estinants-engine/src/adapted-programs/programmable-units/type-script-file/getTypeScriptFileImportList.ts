@@ -121,7 +121,7 @@ export const getTypeScriptFileImportList = buildProgrammedTransform({
     return {
       [PROGRAM_ERROR_GEPP]: errorList,
       [TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP]: {
-        zorn: parsedTypeScriptFile.zorn,
+        id: parsedTypeScriptFile.id,
         filePath: parsedTypeScriptFile.filePath,
         list: importList,
       },

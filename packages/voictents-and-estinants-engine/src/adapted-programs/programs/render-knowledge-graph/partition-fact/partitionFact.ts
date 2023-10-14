@@ -43,7 +43,7 @@ export type PartitionFact = SimplifyN<
   [
     {
       typeName: FactTypeName.PartitionFact;
-      zorn: PartitionFactZorn;
+      id: PartitionFactZorn;
     },
     Pick<PartitionFactConstructorInput, 'layer' | 'boundary'>,
     {
@@ -59,7 +59,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'typeName',
-    'zorn',
+    'id',
     'layer',
     'boundary',
     'rootGraphLocator',
@@ -78,12 +78,12 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { layer, boundary, commonBoundaryRoot } = input;
 
-      const zorn = new PartitionFactZorn({
-        boundary: boundary.zorn,
+      const id = new PartitionFactZorn({
+        boundary: boundary.id,
       });
 
       const rootGraphLocator = new RootGraphLocatorInstance({
-        distinguisher: boundary.zorn.forHuman,
+        distinguisher: boundary.id.forHuman,
       });
 
       const directoryPathRelativeToCommonBoundary = posix.relative(
@@ -101,7 +101,7 @@ export const { PartitionFactInstance } = buildNamedConstructorFunction({
 
       return {
         typeName: FactTypeName.PartitionFact,
-        zorn,
+        id,
         layer,
         boundary,
         rootGraphLocator,

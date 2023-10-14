@@ -32,16 +32,16 @@ export const getDirectedGraphMetadataById2 = buildProgrammedTransform({
     entryList.forEach((entry) => {
       const metadataById: DirectedGraphMetadataById =
         metadataByIdByRootGraphDebugName.get(
-          entry.rootGraphLocator.zorn.forHuman,
+          entry.rootGraphLocator.id.forHuman,
         ) ?? {
-          id: entry.rootGraphLocator.zorn.forHuman,
+          id: entry.rootGraphLocator.id.forHuman,
           subitem: {},
         };
 
       metadataById.subitem[entry.elementId] = entry.metadata;
 
       metadataByIdByRootGraphDebugName.set(
-        entry.rootGraphLocator.zorn.forHuman,
+        entry.rootGraphLocator.id.forHuman,
         metadataById,
       );
     });

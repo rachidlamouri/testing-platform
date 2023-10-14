@@ -93,7 +93,7 @@ export const getDirectoryRenameConfiguration = buildProgrammedTransform({
     return {
       [FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP]: [
         new FileSystemNodeRenameConfigurationInstance({
-          zorn: directory.zorn,
+          id: directory.id,
           isDirectory: true,
           oldNodePath: directory.directoryPath,
           relativeNewPath,

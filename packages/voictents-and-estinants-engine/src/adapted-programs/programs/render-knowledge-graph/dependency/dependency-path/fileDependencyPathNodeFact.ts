@@ -24,7 +24,7 @@ export type FileDependencyPathNodeFact = SimplifyN<
   [
     {
       typeName: FactTypeName.FileDependencyPathNodeFact;
-      zorn: PartitionedFileDependencyPathNodeZorn;
+      id: PartitionedFileDependencyPathNodeZorn;
     },
     FileDependencyPathNodeFactConstructorInput,
     {
@@ -39,7 +39,7 @@ export const { FileDependencyPathNodeFactInstance } =
     instancePropertyNameTuple: [
       // keep this as a multiline list
       'typeName',
-      'zorn',
+      'id',
       'pathNode',
       'directory',
       'graphElement',
@@ -73,7 +73,7 @@ export const { FileDependencyPathNodeFactInstance } =
 
         return {
           typeName: FactTypeName.FileDependencyPathNodeFact,
-          zorn: pathNode.zorn,
+          id: pathNode.id,
           pathNode,
           directory,
           graphElement,

@@ -25,7 +25,7 @@ export const getFileDependencies = buildProgrammedTransform({
   .andFromItemTuple2<BoundedFileVoque, NonEmptyTuple<OdeshinZorn>>({
     collectionId: BOUNDED_FILE_GEPP,
     getRightKeyTuple: (importList) => {
-      const importingFileZorn = importList.item.zorn;
+      const importingFileZorn = importList.item.id;
       const importedFileZornList = importList.item.list
         .filter((importItem) => importItem.isInternal)
         .map((importItem) => importItem.sourcePath);

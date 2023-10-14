@@ -699,13 +699,13 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
     [OdeshinZorn]
   >({
     collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-    getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
-    getRightKey: (rightInput) => rightInput.item.zorn,
+    getRightKeyTuple: (leftInput) => [leftInput.item.id],
+    getRightKey: (rightInput) => rightInput.item.id,
   })
   .andFromItemTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
-    getRightKey: (rightInput) => rightInput.item.zorn,
+    getRightKeyTuple: (leftInput) => [leftInput.item.id],
+    getRightKey: (rightInput) => rightInput.item.id,
   })
   .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

@@ -15,7 +15,7 @@ type PartitionedBoundaryConstructorInput = {
 export type PartitionedBoundary = SimplifyN<
   [
     {
-      zorn: BoundaryZorn;
+      id: BoundaryZorn;
     },
     PartitionedBoundaryConstructorInput,
   ]
@@ -25,7 +25,7 @@ export const { PartitionedBoundaryInstance } = buildNamedConstructorFunction({
   constructorName: 'PartitionedBoundaryInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'partitionFact',
     'boundary',
   ],
@@ -42,7 +42,7 @@ export const { PartitionedBoundaryInstance } = buildNamedConstructorFunction({
       const { partitionFact, boundary } = input;
 
       return {
-        zorn: boundary.zorn,
+        id: boundary.id,
         partitionFact,
         boundary,
       };

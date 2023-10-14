@@ -31,7 +31,7 @@ type FileDependencyPathNodeConstructorInput = {
  */
 export type FileDependencyPathNode = SimplifyN<
   [
-    { zorn: FileDependencyPathNodeZorn },
+    { id: FileDependencyPathNodeZorn },
     Pick<FileDependencyPathNodeConstructorInput, 'directoryPath' | 'index'>,
   ]
 >;
@@ -41,7 +41,7 @@ export const { FileDependencyPathNodeInstance } = buildNamedConstructorFunction(
     constructorName: 'FileDependencyPathNodeInstance',
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'directoryPath',
       'index',
     ],
@@ -60,13 +60,13 @@ export const { FileDependencyPathNodeInstance } = buildNamedConstructorFunction(
 
       const twoDigitIndex = `${index}`.padStart(2, '0');
 
-      const zorn = new FileDependencyPathNodeZorn({
+      const id = new FileDependencyPathNodeZorn({
         fileDependency: fileDependencyZorn,
         index: twoDigitIndex,
       });
 
       return {
-        zorn,
+        id,
         ...input,
       } satisfies FileDependencyPathNode;
     },

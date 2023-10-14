@@ -66,7 +66,7 @@ export const renderGraphvizCodeToSvgDocument = buildProgrammedTransform({
 
     const modifiedDocument = $svg.toString() ?? '';
     return {
-      zorn: identifiableCode.zorn,
+      id: identifiableCode.id,
       grition: modifiedDocument,
     };
   })

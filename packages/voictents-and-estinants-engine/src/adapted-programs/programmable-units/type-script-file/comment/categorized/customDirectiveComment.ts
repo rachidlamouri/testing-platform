@@ -26,7 +26,7 @@ type CustomDirectiveCommentConstructorInput = {
  */
 export type CustomDirectiveComment = {
   typeName: CategorizedCommentTypeName.CustomDirective;
-  zorn: CommentZorn;
+  id: CommentZorn;
   subtypeName: CustomDirectiveTypeName;
   directiveDescription: string;
   text: string;
@@ -40,7 +40,7 @@ export const { CustomDirectiveCommentInstance } = buildNamedConstructorFunction(
     instancePropertyNameTuple: [
       // multiline-keep
       'typeName',
-      'zorn',
+      'id',
       'subtypeName',
       'directiveDescription',
       'text',
@@ -62,7 +62,7 @@ export const { CustomDirectiveCommentInstance } = buildNamedConstructorFunction(
 
       return {
         typeName: CategorizedCommentTypeName.CustomDirective,
-        zorn: adaptedComment.zorn,
+        id: adaptedComment.id,
         subtypeName,
         directiveDescription: descriptionByDirectiveTypeName[subtypeName],
         text: adaptedComment.text,

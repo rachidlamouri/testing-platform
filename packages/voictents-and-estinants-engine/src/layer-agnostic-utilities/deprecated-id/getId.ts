@@ -1,5 +1,5 @@
 /**
- *  An accessor for an obsolete zorn pattern
+ *  An accessor for an obsolete id pattern
  *
  *  @deprecated
  *

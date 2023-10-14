@@ -32,7 +32,7 @@ export type FileLineColumnSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.FileLineColumnSource;
-      zorn: FileLineColumnSourceZorn;
+      id: FileLineColumnSourceZorn;
     },
     FileLineColumnSourceConstructorInput,
   ]
@@ -43,7 +43,7 @@ export const { FileLineColumnSourceInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'typeName',
-    'zorn',
+    'id',
     'filePath',
     'lineNumber',
     'columnNumber',
@@ -60,7 +60,7 @@ export const { FileLineColumnSourceInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { filePath, lineNumber, columnNumber } = input;
 
-      const zorn = new FileLineColumnSourceZorn({
+      const id = new FileLineColumnSourceZorn({
         filePath,
         lineNumber: `${lineNumber}`,
         columnNumber: `${columnNumber}`,
@@ -68,7 +68,7 @@ export const { FileLineColumnSourceInstance } = buildNamedConstructorFunction({
 
       return {
         typeName: SourceTypeName.FileLineColumnSource,
-        zorn,
+        id,
         ...input,
       } satisfies FileLineColumnSource;
     },

@@ -19,7 +19,7 @@ type BoundedFileConstructorInput = {
  * boundary.
  */
 export type BoundedFile = {
-  zorn: FileSystemNodeZorn;
+  id: FileSystemNodeZorn;
   sourcePartitionFact: PartitionFact;
   boundary: Boundary;
   file: TypeScriptFile;
@@ -33,7 +33,7 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
   constructorName: 'BoundedFileInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'sourcePartitionFact',
     'boundary',
     'file',
@@ -78,7 +78,7 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
         });
 
       return {
-        zorn: file.zorn,
+        id: file.id,
         sourcePartitionFact: partitionFact,
         boundary,
         file,

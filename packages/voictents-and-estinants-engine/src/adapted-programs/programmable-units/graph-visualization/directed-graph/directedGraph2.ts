@@ -14,12 +14,12 @@ type BaseDirectedGraph2 = {
 };
 
 type DirectedGraph2Prototype = {
-  get zorn(): RootDirectedGraphElement2Zorn;
+  get id(): RootDirectedGraphElement2Zorn;
   /** @deprecated */
   get rootGraphLocator(): RootGraphLocator;
   get attributeByKey(): PartialGraphAttributeByKey;
   get isRoot(): true;
-  get id(): string;
+  get oldId(): string;
 };
 
 /**
@@ -38,20 +38,20 @@ export type DirectedGraph2 = ObjectWithPrototype<
 export const { DirectedGraph2Instance } = buildConstructorFunctionWithName(
   'DirectedGraph2Instance',
 )<BaseDirectedGraph2, DirectedGraph2Prototype, DirectedGraph2>({
-  zorn: (directedGraph) => {
-    return directedGraph.locator.zorn;
+  id: (directedGraph) => {
+    return directedGraph.locator.id;
   },
   rootGraphLocator: (directedGraph) => {
     return directedGraph.locator;
   },
   attributeByKey: (directedGraph) => {
     return {
-      id: directedGraph.locator.id,
+      id: directedGraph.locator.oldId,
       ...directedGraph.inputAttributeByKey,
     };
   },
   isRoot: () => true,
-  id: (directedGraph) => {
-    return directedGraph.locator.id;
+  oldId: (directedGraph) => {
+    return directedGraph.locator.oldId;
   },
 });

@@ -18,7 +18,7 @@ type FileAstListConstructorInput = {
 type FileAstList = SpreadN<
   [
     {
-      zorn: FileSystemNodeZorn;
+      id: FileSystemNodeZorn;
     },
     FileAstListConstructorInput,
   ]
@@ -28,7 +28,7 @@ export const { FileAstListInstance } = buildNamedConstructorFunction({
   constructorName: 'FileAstListInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'filePath',
     'flattenedAst',
   ] as const satisfies readonly (keyof FileAstList)[],
@@ -43,7 +43,7 @@ export const { FileAstListInstance } = buildNamedConstructorFunction({
     },
     transformInput: (input) => {
       return {
-        zorn: new FileSystemNodeZorn({
+        id: new FileSystemNodeZorn({
           nodePath: input.filePath.serialized,
         }),
         ...input,

@@ -15,7 +15,7 @@ export type UnknownComment = SimplifyN<
   [
     {
       typeName: CategorizedCommentTypeName.Unknown;
-      zorn: CommentZorn;
+      id: CommentZorn;
       startingLineNumber: number;
       endingLineNumber: number;
     },
@@ -28,7 +28,7 @@ export const { UnknownCommentInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // multiline-keep
     'typeName',
-    'zorn',
+    'id',
     'startingLineNumber',
     'endingLineNumber',
     'adaptedComment',
@@ -47,7 +47,7 @@ export const { UnknownCommentInstance } = buildNamedConstructorFunction({
 
       return {
         typeName: CategorizedCommentTypeName.Unknown,
-        zorn: adaptedComment.zorn,
+        id: adaptedComment.id,
         startingLineNumber: adaptedComment.startingLineNumber,
         endingLineNumber: adaptedComment.endingLineNumber,
         adaptedComment,

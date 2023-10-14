@@ -36,7 +36,7 @@ type PartitionedDirectoryConstructorInput = {
 type PartitionedDirectory = SimplifyN<
   [
     {
-      zorn: PartitionedDirectoryZorn;
+      id: PartitionedDirectoryZorn;
     },
     PartitionedDirectoryConstructorInput,
   ]
@@ -46,7 +46,7 @@ export const { PartitionedDirectoryInstance } = buildNamedConstructorFunction({
   constructorName: 'PartitionedDirectoryInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'partitionFact',
     'directory',
   ],
@@ -62,13 +62,13 @@ export const { PartitionedDirectoryInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { partitionFact, directory } = input;
 
-      const zorn = new PartitionedDirectoryZorn({
-        partitionFact: partitionFact.zorn,
-        directory: directory.zorn,
+      const id = new PartitionedDirectoryZorn({
+        partitionFact: partitionFact.id,
+        directory: directory.id,
       });
 
       return {
-        zorn,
+        id,
         partitionFact,
         directory,
       };

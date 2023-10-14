@@ -34,7 +34,7 @@ type GenericAstNodeLocatorConstructorInput =
 export type AstNodeLocator<TNode extends TSESTree.Node> = SimplifyN<
   [
     {
-      zorn: AstNodeLocatorZorn;
+      id: AstNodeLocatorZorn;
     },
     AstNodeLocatorConstructorInput<TNode>,
   ]
@@ -46,7 +46,7 @@ export const { AstNodeLocatorInstance } = buildNamedConstructorFunction({
   constructorName: 'AstNodeLocatorInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'filePath',
     'astPath',
     'node',
@@ -63,13 +63,13 @@ export const { AstNodeLocatorInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { filePath, astPath } = input;
 
-      const zorn = new AstNodeLocatorZorn({
+      const id = new AstNodeLocatorZorn({
         filePath: filePath.serialized,
         astPath,
       });
 
       return {
-        zorn,
+        id,
         ...input,
       } satisfies GenericAstNodeLocator;
     },

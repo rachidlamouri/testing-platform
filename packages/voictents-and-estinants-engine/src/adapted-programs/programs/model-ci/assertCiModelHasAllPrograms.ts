@@ -41,7 +41,7 @@ export const assertCiModelHasAllPrograms = buildProgrammedTransform({
     // TODO: make a better pattern for singletons
     collectionId: CI_MODEL_GEPP,
     getRightKeyTuple: () => [CI_MODEL_ZORN],
-    getRightKey: (rightInput) => rightInput.item.zorn,
+    getRightKey: (rightInput) => rightInput.item.id,
   })
   .andFromCollection2<ExpectedProgramTestFileVoque>({
     collectionId: EXPECTED_PROGRAM_TEST_FILE_GEPP,

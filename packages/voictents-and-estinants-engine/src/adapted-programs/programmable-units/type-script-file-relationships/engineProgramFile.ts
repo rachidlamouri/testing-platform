@@ -6,7 +6,7 @@ import { TypeScriptFile } from '../type-script-file/typeScriptFile';
  * A file that calls the core engine or the adapted engine
  */
 export type EngineProgramFile = {
-  zorn: string;
+  id: string;
   file: TypeScriptFile;
   engineFunctionConfiguration: EngineFunctionConfiguration;
 };

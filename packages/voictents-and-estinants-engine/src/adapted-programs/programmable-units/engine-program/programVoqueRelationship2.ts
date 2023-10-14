@@ -15,7 +15,7 @@ type BaseProgramVoqueRelationship2 = {
 };
 
 type ProgramVoqueRelationship2Prototype = {
-  get zorn(): string;
+  get id(): string;
 };
 
 /**
@@ -34,8 +34,8 @@ export const { ProgramVoqueRelationship2Instance } =
     BaseProgramVoqueRelationship2,
     ProgramVoqueRelationship2Prototype
   >({
-    zorn: (relationship) => {
-      return getId([relationship.voqueLocator.zorn, relationship.programName]);
+    id: (relationship) => {
+      return getId([relationship.voqueLocator.id, relationship.programName]);
     },
   });
 

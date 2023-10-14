@@ -29,8 +29,8 @@ export const filterEngineProgramFile = buildProgrammedTransform({
   })
   .andFromItemTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
-    getRightKey: (rightInput) => rightInput.item.zorn,
+    getRightKeyTuple: (leftInput) => [leftInput.item.id],
+    getRightKey: (rightInput) => rightInput.item.id,
   })
   .andFromCollection2<EngineFunctionConfigurationVoque>({
     collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
@@ -83,7 +83,7 @@ export const filterEngineProgramFile = buildProgrammedTransform({
 
       return [
         {
-          zorn: typeScriptFile.filePath.serialized,
+          id: typeScriptFile.filePath.serialized,
           file: typeScriptFile,
           engineFunctionConfiguration:
             engineFunctionImportCombination.engineFunctionConfiguration,

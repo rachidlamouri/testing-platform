@@ -43,7 +43,7 @@ type BoundaryConstructorInput = {
 export type Boundary = SimplifyN<
   [
     {
-      zorn: BoundaryZorn;
+      id: BoundaryZorn;
     },
     BoundaryConstructorInput,
   ]
@@ -53,7 +53,7 @@ export const { BoundaryInstance } = buildNamedConstructorFunction({
   constructorName: 'BoundaryInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'typeName',
     'displayName',
     'directory',
@@ -70,10 +70,10 @@ export const { BoundaryInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { typeName, displayName, directory } = input;
 
-      const zorn = new BoundaryZorn({ typeName, displayName });
+      const id = new BoundaryZorn({ typeName, displayName });
 
       return {
-        zorn,
+        id,
         typeName,
         displayName,
         directory,

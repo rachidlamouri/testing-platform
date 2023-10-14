@@ -31,7 +31,7 @@ export type EstinantSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.EstinantSource;
-      zorn: EstinantSourceZorn;
+      id: EstinantSourceZorn;
     },
     EstinantSourceConstructorInput,
   ]
@@ -43,7 +43,7 @@ export const { ProgrammedTransformSourceInstance } =
     instancePropertyNameTuple: [
       // keep this as a multiline list
       'typeName',
-      'zorn',
+      'id',
       'programmedTransformName',
       'filePath',
     ] as const satisfies readonly (keyof EstinantSource)[],
@@ -59,14 +59,14 @@ export const { ProgrammedTransformSourceInstance } =
       transformInput: (input) => {
         const { programmedTransformName, filePath } = input;
 
-        const zorn = new EstinantSourceZorn({
+        const id = new EstinantSourceZorn({
           filePath,
           programmedTransformName,
         });
 
         return {
           typeName: SourceTypeName.EstinantSource,
-          zorn,
+          id,
           ...input,
         } satisfies EstinantSource;
       },

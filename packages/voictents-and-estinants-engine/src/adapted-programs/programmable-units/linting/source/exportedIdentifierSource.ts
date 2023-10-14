@@ -33,7 +33,7 @@ export type ExportedIdentifierSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.ExportedIdentifierSource;
-      zorn: ExportedIdentifierSourceZorn;
+      id: ExportedIdentifierSourceZorn;
     },
     ExportedIdentifierSourceConstructorInput,
   ]
@@ -45,7 +45,7 @@ export const { ExportedIdentifierSourceInstance } =
     instancePropertyNameTuple: [
       // keep this as a multiline list
       'typeName',
-      'zorn',
+      'id',
       'filePath',
       'exportedIdentifier',
     ] as const satisfies readonly (keyof ExportedIdentifierSource)[],
@@ -64,14 +64,14 @@ export const { ExportedIdentifierSourceInstance } =
       transformInput: (input) => {
         const { filePath, exportedIdentifier } = input;
 
-        const zorn = new ExportedIdentifierSourceZorn({
+        const id = new ExportedIdentifierSourceZorn({
           filePath,
           exportedIdentifier,
         });
 
         return {
           typeName: SourceTypeName.ExportedIdentifierSource,
-          zorn,
+          id,
           ...input,
         } satisfies ExportedIdentifierSource;
       },

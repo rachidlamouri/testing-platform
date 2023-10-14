@@ -26,7 +26,7 @@ export type PartitionedFileDependencyGroupConstructorInput = {
  * partition. The same group will be associated with multiple partitions.
  */
 type PartitionedFileDependencyGroup = {
-  zorn: PartitionedFileDependencyGroupZorn;
+  id: PartitionedFileDependencyGroupZorn;
   partitionFact: PartitionFact;
   importedFile: BoundedFile;
   importingFileList: BoundedFile[];
@@ -39,7 +39,7 @@ export const { PartitionedFileDependencyGroupInstance } =
     constructorName: 'PartitionedFileDependencyGroupInstance',
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'partitionFact',
       'importedFile',
       'importingFileList',
@@ -67,9 +67,9 @@ export const { PartitionedFileDependencyGroupInstance } =
           ({ importingFile }) => importingFile,
         );
 
-        const zorn = new PartitionedFileDependencyGroupZorn({
-          partitionFact: partitionFact.zorn,
-          importedFile: importedFile.zorn,
+        const id = new PartitionedFileDependencyGroupZorn({
+          partitionFact: partitionFact.id,
+          importedFile: importedFile.id,
         });
 
         const pathNodeCombination = new Map(
@@ -84,7 +84,7 @@ export const { PartitionedFileDependencyGroupInstance } =
           (pathNode) => {
             return new PartitionedFileDependencyPathNodeInstance({
               partitionFact,
-              dependencyGroupZorn: zorn,
+              dependencyGroupZorn: id,
               pathNode,
               pathHeadId: importedFile.localGraphElementZorn.forMachine,
               pathTailIdSet: new Set(
@@ -157,7 +157,7 @@ export const { PartitionedFileDependencyGroupInstance } =
 
             return new FileDependencyPathSegmentFactInstance({
               partitionFact,
-              dependencyGroupZorn: zorn,
+              dependencyGroupZorn: id,
               tailGraphElementZorn: tailPathNode.localGraphElementZorn,
               headGraphElementZorn: headPathNode.localGraphElementZorn,
               pathHeadId,
@@ -181,7 +181,7 @@ export const { PartitionedFileDependencyGroupInstance } =
 
             return new FileDependencyPathSegmentFactInstance({
               partitionFact,
-              dependencyGroupZorn: zorn,
+              dependencyGroupZorn: id,
               tailGraphElementZorn:
                 fileDependency.importingFile.localGraphElementZorn,
               headGraphElementZorn: tailNode.localGraphElementZorn,
@@ -194,7 +194,7 @@ export const { PartitionedFileDependencyGroupInstance } =
           ...partialPathSegmentSet,
           new FileDependencyPathSegmentFactInstance({
             partitionFact,
-            dependencyGroupZorn: zorn,
+            dependencyGroupZorn: id,
             tailGraphElementZorn: headNode.localGraphElementZorn,
             headGraphElementZorn: importedFile.localGraphElementZorn,
             pathHeadId,
@@ -208,7 +208,7 @@ export const { PartitionedFileDependencyGroupInstance } =
         ];
 
         return {
-          zorn,
+          id,
           partitionFact,
           importedFile,
           importingFileList,

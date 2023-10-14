@@ -5,7 +5,7 @@ import { FileSystemNodeVoque } from './fileSystemNodeVoictent';
 
 type DirectoryConstructorInput = {
   /**
-   * @deprecated in favor of zorn.forMachine
+   * @deprecated in favor of id.forMachine
    * @todo remove after removing typescript-file-relationship program
    */
   instanceId: string;
@@ -16,8 +16,8 @@ type DirectoryConstructorInput = {
  * Represents a file system directory
  */
 export type Directory = {
-  zorn: FileSystemNodeZorn;
-  /** @deprecated in favor of zorn.forMachine */
+  id: FileSystemNodeZorn;
+  /** @deprecated in favor of id.forMachine */
   instanceId: string;
   directoryPath: DirectoryPath;
   nodePath: DirectoryPath;
@@ -27,7 +27,7 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
   constructorName: 'DirectoryInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'instanceId',
     'directoryPath',
     'nodePath',
@@ -44,7 +44,7 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { instanceId, nodePath: serializedDirectoryPath } = input;
 
-      const zorn = new FileSystemNodeZorn({
+      const id = new FileSystemNodeZorn({
         nodePath: serializedDirectoryPath,
       });
 
@@ -53,7 +53,7 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
       });
 
       return {
-        zorn,
+        id,
         instanceId,
         directoryPath,
         nodePath: directoryPath,

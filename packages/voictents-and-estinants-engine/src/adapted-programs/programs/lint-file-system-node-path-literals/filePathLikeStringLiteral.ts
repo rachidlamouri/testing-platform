@@ -35,7 +35,7 @@ type FilePathLikeStringLiteralConstructorInput = {
  */
 type FilePathLikeStringLiteral = SimplifyN<
   [
-    { zorn: FilePathLikeStringLiteralZorn },
+    { id: FilePathLikeStringLiteralZorn },
     FilePathLikeStringLiteralConstructorInput,
   ]
 >;
@@ -45,7 +45,7 @@ export const { FilePathLikeStringLiteralInstance } =
     constructorName: 'FilePathLikeStringLiteralInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'sourceFileFilePath',
       'referencedFilePath',
       'resolvedFilePath',
@@ -73,7 +73,7 @@ export const { FilePathLikeStringLiteralInstance } =
           columnNumber,
         } = input;
 
-        const zorn = new FilePathLikeStringLiteralZorn({
+        const id = new FilePathLikeStringLiteralZorn({
           sourceFileFilePath: sourceFileFilePath.serialized,
           referencedFilePath,
           lineNumber,
@@ -81,7 +81,7 @@ export const { FilePathLikeStringLiteralInstance } =
         });
 
         return {
-          zorn,
+          id,
           ...input,
           resolvedFilePath,
         } satisfies FilePathLikeStringLiteral;

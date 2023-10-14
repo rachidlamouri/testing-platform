@@ -96,10 +96,10 @@ export abstract class BaseInMemoryOdeshin2Voictent<
       assertNotUndefined(existingHubblepup);
       const existingZornLike = getIdLike(existingHubblepup);
 
-      const error = new Error(`Duplicate zorn: ${humanReadableZorn}`);
+      const error = new Error(`Duplicate id: ${humanReadableZorn}`);
       Object.assign(error, {
         gepp: this.collectionId,
-        zorn: humanReadableZorn,
+        id: humanReadableZorn,
         formatted: {
           existing: existingZornLike.forDebug,
           duplicate: existingZornLike.forDebug,

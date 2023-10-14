@@ -8,7 +8,7 @@ export type TypeScriptFileExport = {
  * A list of useful data for every export named declaration in a TypeScript file
  */
 type TypeScriptFileExportList = {
-  zorn: string;
+  id: string;
   filePath: string;
   list: TypeScriptFileExport[];
 };

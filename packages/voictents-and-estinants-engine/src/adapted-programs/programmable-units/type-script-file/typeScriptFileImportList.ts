@@ -12,7 +12,7 @@ export type TypeScriptFileImport = {
  * @todo fix this weird nested list type
  */
 export type TypeScriptFileImportList = {
-  zorn: string;
+  id: string;
   filePath: string;
   list: TypeScriptFileImport[];
 };

@@ -13,7 +13,7 @@ type AdaptedLineCommentConstructorInput = {
  */
 export type AdaptedLineComment = {
   typeName: AdaptedCommentTypeName.Line;
-  zorn: CommentZorn;
+  id: CommentZorn;
   text: string;
   lineNumber: number;
   startingLineNumber: number;
@@ -26,7 +26,7 @@ export const { AdaptedLineCommentInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // multiline-keep
     'typeName',
-    'zorn',
+    'id',
     'text',
     'lineNumber',
     'startingLineNumber',
@@ -48,7 +48,7 @@ export const { AdaptedLineCommentInstance } = buildNamedConstructorFunction({
 
       return {
         typeName: AdaptedCommentTypeName.Line,
-        zorn: CommentZorn.build(input),
+        id: CommentZorn.build(input),
         // eslint-side-effect spaced-comment
         text: rawComment.value.slice(1),
         lineNumber,

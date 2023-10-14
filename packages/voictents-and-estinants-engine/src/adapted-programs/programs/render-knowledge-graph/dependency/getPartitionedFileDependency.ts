@@ -39,8 +39,8 @@ export const getPartitionedFileDependency = buildProgrammedTransform({
             fileDependency.importedFile.sourcePartitionFact;
 
           const firstMappableFileDependencyInput = {
-            partitionFactZorn: importingSourcePartition.zorn.forHuman,
-            fileDependencyZorn: fileDependency.zorn.forHuman,
+            partitionFactZorn: importingSourcePartition.id.forHuman,
+            fileDependencyZorn: fileDependency.id.forHuman,
             fileDependencyInput: {
               partitionFact: importingSourcePartition,
               fileDependency,
@@ -48,8 +48,8 @@ export const getPartitionedFileDependency = buildProgrammedTransform({
           } satisfies MappableFileDependencyInput;
 
           const secondMappableFileDependencyInput = {
-            partitionFactZorn: importedSourcePartition.zorn.forHuman,
-            fileDependencyZorn: fileDependency.zorn.forHuman,
+            partitionFactZorn: importedSourcePartition.id.forHuman,
+            fileDependencyZorn: fileDependency.id.forHuman,
             fileDependencyInput: {
               partitionFact: importedSourcePartition,
               fileDependency,

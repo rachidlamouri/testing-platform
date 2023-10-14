@@ -6,7 +6,7 @@ import { FileSystemNodeZorn } from '../../programmable-units/file/fileSystemNode
 import { NodePath } from '../../programmable-units/file/nodePath';
 
 type FileSystemNodeRenameConfigurationInput = {
-  zorn: FileSystemNodeZorn;
+  id: FileSystemNodeZorn;
   isDirectory: boolean;
   oldNodePath: NodePath;
   relativeNewPath: string;
@@ -30,7 +30,7 @@ export const { FileSystemNodeRenameConfigurationInstance } =
     constructorName: 'FileSystemNodeRenameConfigurationInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'isDirectory',
       'oldNodePath',
       'relativeNewPath',

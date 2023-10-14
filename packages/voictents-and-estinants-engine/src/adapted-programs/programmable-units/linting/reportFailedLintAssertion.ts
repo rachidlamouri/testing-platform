@@ -47,7 +47,7 @@ export const reportFailedLintAssertion = buildProgrammedTransform({
   })
   .onTransform((lintAssertion, omissionVoictent) => {
     const isOmitted = omissionVoictent.omittedZornSet.has(
-      lintAssertion.zorn.forHuman,
+      lintAssertion.id.forHuman,
     );
 
     if (isOmitted || lintAssertion.result.isValid) {

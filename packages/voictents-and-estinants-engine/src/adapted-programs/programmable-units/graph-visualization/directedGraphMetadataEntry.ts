@@ -14,7 +14,7 @@ type BaseDirectedGraphMetadataEntry = {
 };
 
 type DirectedGraphMetadataEntryPrototype = {
-  get zorn(): string;
+  get id(): string;
 };
 
 /**
@@ -30,7 +30,7 @@ export const { DirectedGraphMetadataEntryInstance } =
     BaseDirectedGraphMetadataEntry,
     DirectedGraphMetadataEntryPrototype
   >({
-    zorn: (metadataEntry) => {
+    id: (metadataEntry) => {
       return getId([
         metadataEntry.rootGraphLocator.distinguisher,
         metadataEntry.elementId,

@@ -34,7 +34,7 @@ type PartitionedFileDependencyPathNodeConstructorInput = {
  * corresponds to one file dependency group and one directory.
  */
 export type PartitionedFileDependencyPathNode = {
-  zorn: PartitionedFileDependencyPathNodeZorn;
+  id: PartitionedFileDependencyPathNodeZorn;
   partitionFact: PartitionFact;
   directoryPath: string;
   localGraphElementZorn: LocalDirectedGraphElement2Zorn;
@@ -47,7 +47,7 @@ export const { PartitionedFileDependencyPathNodeInstance } =
     constructorName: 'PartitionedFileDependencyPathNodeInstance',
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'partitionFact',
       'directoryPath',
       'localGraphElementZorn',
@@ -75,18 +75,18 @@ export const { PartitionedFileDependencyPathNodeInstance } =
           pathTailIdSet,
         } = input;
 
-        const zorn = new PartitionedFileDependencyPathNodeZorn({
+        const id = new PartitionedFileDependencyPathNodeZorn({
           partitionedFileDependencyGroup: dependencyGroupZorn,
           directoryPath,
         });
 
         const localGraphElementZorn =
           LocalDirectedGraphElement2Zorn.buildNodeZorn({
-            distinguisher: zorn.forHuman,
+            distinguisher: id.forHuman,
           });
 
         return {
-          zorn,
+          id,
           partitionFact,
           directoryPath,
           localGraphElementZorn,

@@ -17,7 +17,7 @@ type ExpectedProgramTestFileConstructorInput = {
 type ExpectedProgramTestFile = SimplifyN<
   [
     {
-      zorn: FileSystemNodeZorn;
+      id: FileSystemNodeZorn;
     },
     ExpectedProgramTestFileConstructorInput,
   ]
@@ -28,7 +28,7 @@ export const { ExpectedProgramTestFileInstance } =
     constructorName: 'ExpectedProgramTestFileInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'programName',
       'programFile',
       'testFile',
@@ -49,7 +49,7 @@ export const { ExpectedProgramTestFileInstance } =
         const { testFile } = input;
 
         return {
-          zorn: testFile.zorn,
+          id: testFile.id,
           ...input,
         } satisfies ExpectedProgramTestFile;
       },

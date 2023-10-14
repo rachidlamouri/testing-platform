@@ -48,7 +48,7 @@ type RuleConstructorInput = {
 type Rule = SimplifyN<
   [
     {
-      zorn: RuleZorn;
+      id: RuleZorn;
     },
     RuleConstructorInput,
   ]
@@ -58,7 +58,7 @@ const { RuleInstance } = buildNamedConstructorFunction({
   constructorName: 'RuleInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'source',
     'name',
     'description',
@@ -75,13 +75,13 @@ const { RuleInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { source, name } = input;
 
-      const zorn = new RuleZorn({
-        source: source.zorn,
+      const id = new RuleZorn({
+        source: source.id,
         name,
       });
 
       return {
-        zorn,
+        id,
         ...input,
       } satisfies Rule;
     },

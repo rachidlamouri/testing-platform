@@ -44,7 +44,7 @@ export type DirectoryFact2 = SimplifyN<
   [
     {
       typeName: FactTypeName.DirectoryFact2;
-      zorn: DirectoryFact2Zorn;
+      id: DirectoryFact2Zorn;
     },
     Omit<DirectoryFact2ConstructorInput, 'parentDirectory'>,
     {
@@ -58,7 +58,7 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'typeName',
-    'zorn',
+    'id',
     'partitionFact',
     'directory',
     'graphElement',
@@ -75,15 +75,15 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { partitionFact, parentDirectory, directory } = input;
 
-      const zorn = new DirectoryFact2Zorn({
-        partitionFact: partitionFact.zorn,
-        directory: directory.zorn,
+      const id = new DirectoryFact2Zorn({
+        partitionFact: partitionFact.id,
+        directory: directory.id,
       });
 
       let parentId: string;
       let label: string;
       if (directory.isBoundaryDirectory) {
-        parentId = partitionFact.rootGraphLocator.id;
+        parentId = partitionFact.rootGraphLocator.oldId;
         label = directory.directoryPathFromCommonBoundaryRoot + posix.sep;
       } else {
         assertNotNull(parentDirectory);
@@ -105,7 +105,7 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
 
       return {
         typeName: FactTypeName.DirectoryFact2,
-        zorn,
+        id,
         partitionFact,
         directory,
         graphElement,

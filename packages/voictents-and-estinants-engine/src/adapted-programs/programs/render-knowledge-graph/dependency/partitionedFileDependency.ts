@@ -36,7 +36,7 @@ export type PartitionedFileDependencyConstructorInput = {
 type PartitionedFileDependency = SimplifyN<
   [
     {
-      zorn: PartitionedFileDependencyZorn;
+      id: PartitionedFileDependencyZorn;
     },
     PartitionedFileDependencyConstructorInput,
   ]
@@ -47,7 +47,7 @@ export const { PartitionedFileDependencyInstance } =
     constructorName: 'PartitionedFileDependencyInstance',
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'partitionFact',
       'fileDependency',
     ],
@@ -66,13 +66,13 @@ export const { PartitionedFileDependencyInstance } =
       transformInput: (input) => {
         const { partitionFact, fileDependency } = input;
 
-        const zorn = new PartitionedFileDependencyZorn({
-          partitionFact: partitionFact.zorn,
-          fileDependency: fileDependency.zorn,
+        const id = new PartitionedFileDependencyZorn({
+          partitionFact: partitionFact.id,
+          fileDependency: fileDependency.id,
         });
 
         return {
-          zorn,
+          id,
           partitionFact,
           fileDependency,
         };

@@ -27,7 +27,7 @@ export type FileSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.FileSource;
-      zorn: FileSourceZorn;
+      id: FileSourceZorn;
     },
     FileSourceConstructorInput,
   ]
@@ -38,7 +38,7 @@ export const { FileSourceInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'typeName',
-    'zorn',
+    'id',
     'filePath',
   ] as const satisfies readonly (keyof FileSource)[],
 })
@@ -53,13 +53,13 @@ export const { FileSourceInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { filePath } = input;
 
-      const zorn = new FileSourceZorn({
+      const id = new FileSourceZorn({
         filePath,
       });
 
       return {
         typeName: SourceTypeName.FileSource,
-        zorn,
+        id,
         ...input,
       } satisfies FileSource;
     },

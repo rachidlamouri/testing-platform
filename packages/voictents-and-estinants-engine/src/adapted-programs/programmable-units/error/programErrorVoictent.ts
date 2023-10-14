@@ -60,10 +60,10 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       return hubblepupPelue;
     }
 
-    let zorn: string;
+    let id: string;
     let sourceLocatorFilePath: string | null;
     if (hubblepupPelue instanceof LintAssertionError) {
-      zorn = hubblepupPelue.lintAssertion.zorn.forHuman;
+      id = hubblepupPelue.lintAssertion.id.forHuman;
 
       const { lintSource } = hubblepupPelue.lintAssertion;
 
@@ -95,7 +95,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
         }
       })(lintSource);
     } else {
-      zorn = getCollectionResourceLocator([
+      id = getCollectionResourceLocator([
         hubblepupPelue.reporterLocator.name,
         hubblepupPelue.name,
         hubblepupPelue.sourceLocator?.filePath ?? '',
@@ -104,7 +104,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       sourceLocatorFilePath = hubblepupPelue.sourceLocator?.filePath ?? '';
     }
 
-    const normalizedZorn = normalizeFilePathForFileName(zorn);
+    const normalizedZorn = normalizeFilePathForFileName(id);
     const normalizedReporterPath = normalizeFilePathForFileName(
       sourceLocatorFilePath,
     );
@@ -129,7 +129,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
     }
 
     const hubblepupPelie: GenericProgramErrorVoque['itemStreamable'] = {
-      zorn,
+      id,
       name: hubblepupPelue.name,
       message: hubblepupPelue.error.message,
       stackTrace: (hubblepupPelue.error.stack ?? '').split('\n').slice(1),
@@ -137,7 +137,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       sourceLocator: hubblepupPelue.sourceLocator,
       context: hubblepupPelue.context,
       serializedContextFilePath: `${this.programFileCache.collectionsDirectoryPath}/by-source/${normalizedSourcePath}`,
-      normalizedZorn,
+      normalizedId: normalizedZorn,
       byReporterDirectoryPath,
       bySourceDirectoryPath,
       contextFilePath,
@@ -183,7 +183,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       collectionCollectionId: this.collectionId,
       nestedPath: hubblepup.byReporterDirectoryPath,
       serializedItem: serializedHubblepup,
-      extensionlessFileName: hubblepup.normalizedZorn,
+      extensionlessFileName: hubblepup.normalizedId,
     });
 
     // TODO: again, put this logic in a utility or something
@@ -191,7 +191,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       collectionCollectionId: this.collectionId,
       nestedPath: hubblepup.bySourceDirectoryPath,
       serializedItem: serializedHubblepup,
-      extensionlessFileName: hubblepup.normalizedZorn,
+      extensionlessFileName: hubblepup.normalizedId,
     });
   }
 
@@ -201,13 +201,13 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
   ): GenericProgramErrorVoque['indexByName'] {
     if (hubblepup instanceof Error) {
       return {
-        // TODO: a zorn should not be random
-        zorn: uuid.v4(),
+        // TODO: an id should not be random
+        id: uuid.v4(),
       };
     }
 
     return {
-      zorn: hubblepup.zorn,
+      id: hubblepup.id,
     };
   }
 }

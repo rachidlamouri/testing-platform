@@ -36,7 +36,7 @@ type PartitionedFileConstructorInput = {
 type PartitionedFile = SimplifyN<
   [
     {
-      zorn: PartitionedFileZorn;
+      id: PartitionedFileZorn;
     },
     PartitionedFileConstructorInput,
     {
@@ -49,7 +49,7 @@ export const { PartitionedFileInstance } = buildNamedConstructorFunction({
   constructorName: 'PartitionedFileInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'partitionFact',
     'file',
     'nodePath',
@@ -66,13 +66,13 @@ export const { PartitionedFileInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { partitionFact, file } = input;
 
-      const zorn = new PartitionedFileZorn({
-        partitionFact: partitionFact.zorn,
-        file: file.zorn,
+      const id = new PartitionedFileZorn({
+        partitionFact: partitionFact.id,
+        file: file.id,
       });
 
       return {
-        zorn,
+        id,
         partitionFact,
         file,
         nodePath: file.nodePath,

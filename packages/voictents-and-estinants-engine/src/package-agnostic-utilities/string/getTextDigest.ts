@@ -6,7 +6,7 @@ import crypto from 'crypto';
  * have characters that don't work well with HTML. This utility is not
  * constrained to that use case.
  *
- * @todo make sure no file other than Zorn is using this for zorn purposes.
+ * @todo make sure no file other than Id is using this for id purposes.
  * [future me here] Why? I don't remember :shrug:
  */
 export const getTextDigest = (text: string): string => {

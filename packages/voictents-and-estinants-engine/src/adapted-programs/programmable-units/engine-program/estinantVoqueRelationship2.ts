@@ -15,7 +15,7 @@ type BaseEstinantVoqueRelationship2 = {
 };
 
 type EstinantVoqueRelationship2Prototype = {
-  get zorn(): string;
+  get id(): string;
 };
 
 /**
@@ -33,10 +33,10 @@ export const { EstinantVoqueRelationship2Instance } =
     BaseEstinantVoqueRelationship2,
     EstinantVoqueRelationship2Prototype
   >({
-    zorn: (relationship) => {
+    id: (relationship) => {
       return getId([
-        relationship.voqueLocator.zorn,
-        relationship.estinantLocator.zorn.forHuman,
+        relationship.voqueLocator.id,
+        relationship.estinantLocator.id.forHuman,
         relationship.distinguisher,
       ]);
     },

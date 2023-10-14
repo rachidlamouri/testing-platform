@@ -33,7 +33,7 @@ type FileParsedCommentGroupConstructorInput = {
 export type FileParsedCommentGroup = SimplifyN<
   [
     {
-      zorn: FileParsedCommentGroupZorn;
+      id: FileParsedCommentGroupZorn;
     },
     FileParsedCommentGroupConstructorInput,
     {
@@ -47,7 +47,7 @@ export const { FileParsedCommentGroupInstance } = buildNamedConstructorFunction(
     constructorName: 'FileParsedCommentGroupInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'filePath',
       'list',
       'fileComment',
@@ -66,7 +66,7 @@ export const { FileParsedCommentGroupInstance } = buildNamedConstructorFunction(
     transformInput: (input) => {
       const { filePath, list } = input;
 
-      const zorn = new FileParsedCommentGroupZorn({
+      const id = new FileParsedCommentGroupZorn({
         filePath,
       });
 
@@ -78,7 +78,7 @@ export const { FileParsedCommentGroupInstance } = buildNamedConstructorFunction(
         ) ?? null;
 
       return {
-        zorn,
+        id,
         ...input,
         explicitCanonicalComment,
       } satisfies FileParsedCommentGroup;

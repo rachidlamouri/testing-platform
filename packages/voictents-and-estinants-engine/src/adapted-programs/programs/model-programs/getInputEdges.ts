@@ -32,16 +32,16 @@ export const getInputEdges = buildProgrammedTransform({
   .andFromItemTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
     getRightKeyTuple: (relationship) => {
-      return [relationship.item.estinantLocator.zorn];
+      return [relationship.item.estinantLocator.id];
     },
-    getRightKey: (engineEstinant) => engineEstinant.item.locator.zorn,
+    getRightKey: (engineEstinant) => engineEstinant.item.locator.id,
   })
   .andFromItemTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
     collectionId: ESTINANT_INPUT_2_GEPP,
     getRightKeyTuple: (relationship) => {
-      return [relationship.item.estinantInput.zorn];
+      return [relationship.item.estinantInput.id];
     },
-    getRightKey: (estinantInput) => estinantInput.item.zorn,
+    getRightKey: (estinantInput) => estinantInput.item.id,
   })
   .toItemTuple2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
@@ -53,13 +53,13 @@ export const getInputEdges = buildProgrammedTransform({
     }
 
     const incomingEdge = new DirectedGraphEdge2Instance({
-      tailId: estinantInput.voqueLocator.id,
-      headId: estinantInput.id,
+      tailId: estinantInput.voqueLocator.oldId,
+      headId: estinantInput.oldId,
       rootGraphLocator: relationship.rootGraphLocator,
     });
 
     const outgoingEdge = new DirectedGraphEdge2Instance({
-      tailId: estinantInput.id,
+      tailId: estinantInput.oldId,
       headId: engineEstinant.digestibleId,
       rootGraphLocator: relationship.rootGraphLocator,
     });

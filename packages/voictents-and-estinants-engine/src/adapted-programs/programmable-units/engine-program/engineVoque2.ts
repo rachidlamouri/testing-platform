@@ -18,8 +18,8 @@ type BaseEngineVoque2 = {
 };
 
 type EngineVoque2Prototype = {
-  get zorn(): string;
   get id(): string;
+  get oldId(): string;
   get displayName(): string;
   get isCoreVoque(): boolean;
 };
@@ -39,8 +39,8 @@ type EngineVoque2 = ObjectWithPrototype<
 export const { EngineVoque2Instance } = buildConstructorFunctionWithName(
   'EngineVoque2Instance',
 )<BaseEngineVoque2, EngineVoque2Prototype>({
-  zorn: getVoqueLocatorZorn,
-  id: getVoqueLocatorId,
+  id: getVoqueLocatorZorn,
+  oldId: getVoqueLocatorId,
   displayName: getVoqueDisplayName,
   isCoreVoque: (engineVoque) => engineVoque.locator.isCoreVoque,
 });

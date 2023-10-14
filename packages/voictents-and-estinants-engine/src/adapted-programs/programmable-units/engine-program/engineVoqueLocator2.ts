@@ -13,8 +13,8 @@ type BaseEngineVoqueLocator2 = {
 };
 
 type EngineVoqueLocator2Prototype = {
-  get zorn(): string;
   get id(): string;
+  get oldId(): string;
   get displayName(): string;
 };
 
@@ -46,8 +46,8 @@ export const getVoqueDisplayName = (locator: EngineVoqueLocator2): string => {
 export const { EngineVoqueLocator2Instance } = buildConstructorFunctionWithName(
   'EngineVoqueLocator2Instance',
 )<BaseEngineVoqueLocator2, EngineVoqueLocator2Prototype>({
-  zorn: getVoqueLocatorZorn,
-  id: getVoqueLocatorId,
+  id: getVoqueLocatorZorn,
+  oldId: getVoqueLocatorId,
   displayName: getVoqueDisplayName,
 });
 

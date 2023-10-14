@@ -12,7 +12,7 @@ type BaseGraphElementGroup = {
 };
 
 type GraphElementGroupPrototype = {
-  get zorn(): string;
+  get id(): string;
 };
 
 /**
@@ -26,8 +26,8 @@ export type GraphElementGroup = ObjectWithPrototype<
 export const { GraphElementGroupInstance } = buildConstructorFunctionWithName(
   'GraphElementGroupInstance',
 )<BaseGraphElementGroup, GraphElementGroupPrototype>({
-  zorn: (group) => {
-    return group.rootGraphLocator.zorn.forHuman;
+  id: (group) => {
+    return group.rootGraphLocator.id.forHuman;
   },
 });
 

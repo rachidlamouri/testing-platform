@@ -26,7 +26,7 @@ export const groupGraphElements = buildProgrammedTransform({
     const elementGroupByRootLocatorZorn = new Map<string, GraphElementGroup>();
 
     allGraphElementList.forEach((element) => {
-      const key = element.rootGraphLocator.zorn.forHuman;
+      const key = element.rootGraphLocator.id.forHuman;
 
       const group =
         elementGroupByRootLocatorZorn.get(key) ??

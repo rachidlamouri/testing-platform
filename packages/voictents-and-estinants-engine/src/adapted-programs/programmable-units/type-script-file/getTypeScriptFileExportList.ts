@@ -38,7 +38,7 @@ export const getTypeScriptFileExportList = buildProgrammedTransform({
       }));
 
     return {
-      zorn: group.filePath,
+      id: group.filePath,
       filePath: group.filePath,
       list: exportList,
     };

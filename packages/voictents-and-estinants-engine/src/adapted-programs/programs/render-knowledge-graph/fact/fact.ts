@@ -58,7 +58,7 @@ export class FactVoictent extends BaseInMemoryOdeshin2Voictent<
 
     // TODO: the below note indicates that some concerns need to be separated. As in this collection shouldn't be at the "fact" level or that "fact" is no longer what we wanted it to be
     // Note: there will be multiple facts for the same element (one for each partition where the element should appear). That's ok for the purposes of this collection
-    this.byLocalGraphElementId.set(hubblepup.graphElement.id, hubblepup);
+    this.byLocalGraphElementId.set(hubblepup.graphElement.oldId, hubblepup);
 
     super.addItem(hubblepup);
   }

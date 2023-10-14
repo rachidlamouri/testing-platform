@@ -1,4 +1,4 @@
-"zorn": "output-file-digest-list"
+"id": "output-file-digest-list"
 "grition":
   - "fileName": "my-graph"
     "digest": "aa0f91d8637db4f67418d6a6af6b5c5bf0b32f0c"

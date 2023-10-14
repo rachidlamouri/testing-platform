@@ -13,7 +13,7 @@ type AdaptedNormalBlockCommentConstructorInput = {
  */
 export type AdaptedNormalBlockComment = {
   typeName: AdaptedCommentTypeName.NormalBlock;
-  zorn: CommentZorn;
+  id: CommentZorn;
   text: string;
   startingLineNumber: number;
   endingLineNumber: number;
@@ -27,7 +27,7 @@ export const { AdaptedNormalBlockCommentInstance } =
     instancePropertyNameTuple: [
       // multiline-keep
       'typeName',
-      'zorn',
+      'id',
       'text',
       'startingLineNumber',
       'endingLineNumber',
@@ -54,7 +54,7 @@ export const { AdaptedNormalBlockCommentInstance } =
 
         return {
           typeName: AdaptedCommentTypeName.NormalBlock,
-          zorn: CommentZorn.build(input),
+          id: CommentZorn.build(input),
           text: rawComment.value,
           startingLineNumber,
           endingLineNumber,

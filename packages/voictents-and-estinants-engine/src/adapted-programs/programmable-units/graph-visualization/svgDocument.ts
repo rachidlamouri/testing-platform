@@ -4,7 +4,7 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agno
  * HTML SVG representation of a Graphviz graph
  */
 type SvgDocument = {
-  zorn: string;
+  id: string;
   grition: string;
 };
 

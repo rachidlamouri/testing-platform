@@ -26,9 +26,9 @@ export const getInputMetadataEntry = buildProgrammedTransform({
   .andFromItemTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
     collectionId: ESTINANT_INPUT_2_GEPP,
     getRightKeyTuple: (relationship) => {
-      return [relationship.item.estinantInput.zorn];
+      return [relationship.item.estinantInput.id];
     },
-    getRightKey: (engineEstinant) => engineEstinant.item.zorn,
+    getRightKey: (engineEstinant) => engineEstinant.item.id,
   })
   .toItem2<DirectedGraphMetadataEntryVoque>({
     collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
@@ -40,7 +40,7 @@ export const getInputMetadataEntry = buildProgrammedTransform({
         : `Right Input ${estinantInput.index}`;
 
     const entry = new DirectedGraphMetadataEntryInstance({
-      elementId: estinantInput.id,
+      elementId: estinantInput.oldId,
       rootGraphLocator: relationship.rootGraphLocator,
       metadata: {
         title: `${estinantInput.estinantName}: ${inputName}`,

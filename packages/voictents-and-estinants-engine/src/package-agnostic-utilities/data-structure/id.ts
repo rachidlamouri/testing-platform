@@ -27,7 +27,7 @@ type TemplateKey<TTemplateKey extends string> = TTemplateKey;
 
 type GenericTemplateKey = TemplateKey<string>;
 
-/** The dot-delimited path of a key through one or more nested zorns */
+/** The dot-delimited path of a key through one or more nested ids */
 type TemplateKeyPath = string;
 
 type OutputValue = string;
@@ -42,7 +42,7 @@ type ComplexIdLike = {
 };
 
 // TODO: Replace "UnsafeInputValueByTemplateKey" with an object type like
-// Record<string, string | zorn instance>, and debug the resulting errors
+// Record<string, string | Id instance>, and debug the resulting errors
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type UnsafeInputValueByTemplateKey = any;
 

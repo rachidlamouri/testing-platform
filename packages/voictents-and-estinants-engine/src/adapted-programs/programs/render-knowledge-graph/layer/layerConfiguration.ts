@@ -15,7 +15,7 @@ type LayerConfigurationConstructorInput = {
 export type LayerConfiguration = SimplifyN<
   [
     {
-      zorn: LayerZorn;
+      id: LayerZorn;
     },
     LayerConfigurationConstructorInput,
   ]
@@ -25,7 +25,7 @@ const { LayerConfigurationInstance } = buildNamedConstructorFunction({
   constructorName: 'LayerConfigurationInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'directoryPath',
     'displayName',
     'sortOrder',
@@ -43,7 +43,7 @@ const { LayerConfigurationInstance } = buildNamedConstructorFunction({
       const { directoryPath, displayName } = input;
 
       return {
-        zorn: new LayerZorn({
+        id: new LayerZorn({
           directoryPath,
           displayName,
         }),

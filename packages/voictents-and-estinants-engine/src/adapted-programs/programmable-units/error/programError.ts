@@ -67,7 +67,7 @@ type ProgramErrorPelie<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > =
   | {
-      zorn: string;
+      id: string;
       name: string;
       message: string;
       stackTrace: string[];
@@ -75,7 +75,7 @@ type ProgramErrorPelie<
       sourceLocator: ProgramErrorSourceLocator;
       context: TypeScriptObjectInstance | null;
       serializedContextFilePath: string;
-      normalizedZorn: string;
+      normalizedId: string;
       byReporterDirectoryPath: string;
       bySourceDirectoryPath: string;
       contextFilePath: string;
@@ -93,7 +93,7 @@ type ProgramErrorVoque<
   ProgramErrorPelue<TReporterLocator>,
   ProgramErrorPelie<TReporterLocator>,
   {
-    zorn: string;
+    id: string;
   },
   ProgramErrorPelie<TReporterLocator>[]
 >;

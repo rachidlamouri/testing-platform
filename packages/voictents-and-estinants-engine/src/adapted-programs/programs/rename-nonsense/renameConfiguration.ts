@@ -40,7 +40,7 @@ type RenameConfigurationInput = {
 export type RenameConfiguration = SpreadN<
   [
     {
-      zorn: RenameConfigurationZorn;
+      id: RenameConfigurationZorn;
       absoluteFilePath: string;
     },
     RenameConfigurationInput,
@@ -52,7 +52,7 @@ export const { RenameConfigurationInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'identifierLocator',
-    'zorn',
+    'id',
     'absoluteFilePath',
     'originalName',
     'casing',
@@ -84,12 +84,12 @@ export const { RenameConfigurationInstance } = buildNamedConstructorFunction({
       );
 
       return {
-        zorn: new RenameConfigurationZorn({
+        id: new RenameConfigurationZorn({
           fileName: identifierLocator.filePath.name.serialized,
           oneBasedLineNumber: `${oneBasedLineNumber}`,
           oneBasedLineOffset: `${oneBasedLineOffset}`,
           originalName,
-          distinguisher: identifierLocator.zorn.forMachine,
+          distinguisher: identifierLocator.id.forMachine,
         }),
         absoluteFilePath,
         ...input,

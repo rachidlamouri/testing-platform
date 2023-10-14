@@ -221,7 +221,7 @@ export const assertProgramTestFileIsValid = buildProgrammedTransform({
       ? assertionList.map((assertion) => {
           return new LintAssertionOmissionInstance({
             omitterSource: ruleSource,
-            omittedAssertionZorn: assertion.zorn,
+            omittedAssertionZorn: assertion.id,
           });
         })
       : [];

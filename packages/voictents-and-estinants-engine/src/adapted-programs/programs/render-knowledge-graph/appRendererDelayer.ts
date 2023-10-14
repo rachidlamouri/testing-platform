@@ -31,7 +31,7 @@ type AppRendererDelayer = Required<
   SimplifyN<
     [
       {
-        zorn: AppRendererDelayerZorn;
+        id: AppRendererDelayerZorn;
       },
       AppRendererDelayerConstructorInput,
     ]
@@ -42,7 +42,7 @@ export const { AppRendererDelayerInstance } = buildNamedConstructorFunction({
   constructorName: 'AppRendererDelayerInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'estinantName',
     'distinguisher',
   ],
@@ -58,13 +58,13 @@ export const { AppRendererDelayerInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { estinantName, distinguisher = '' } = input;
 
-      const zorn = new AppRendererDelayerZorn({
+      const id = new AppRendererDelayerZorn({
         estinantName,
         distinguisher,
       });
 
       return {
-        zorn,
+        id,
         estinantName,
         distinguisher,
       };

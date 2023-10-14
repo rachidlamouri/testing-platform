@@ -50,7 +50,7 @@ export const captureOutputFileDigestList = buildProgrammedTransform({
     });
 
     return {
-      zorn: 'output-file-digest-list',
+      id: 'output-file-digest-list',
       grition: digestList,
     };
   })

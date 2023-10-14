@@ -77,7 +77,7 @@ export const addInteractivityToSvgDocument = buildProgrammedTransform({
   })
   .andFromItemTuple2<DirectedGraphMetadataByIdStreamMetatype, [OdeshinZorn]>({
     collectionId: DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,
-    getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
+    getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,
   })
   .toItem2<OutputFileVoque>({
@@ -102,7 +102,7 @@ export const addInteractivityToSvgDocument = buildProgrammedTransform({
         );
 
       // TODO: move this renaming responsibility elsewhere
-      const fileName = leftInput.zorn
+      const fileName = leftInput.id
         .replace(/^graph:/, '')
         .replaceAll(/\//g, '-');
 

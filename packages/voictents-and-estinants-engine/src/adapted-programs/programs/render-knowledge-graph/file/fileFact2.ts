@@ -50,7 +50,7 @@ export type FileFact2 = SimplifyN<
   [
     {
       typeName: FactTypeName.FileFact2;
-      zorn: FileFact2Zorn;
+      id: FileFact2Zorn;
     },
     Omit<
       FileFact2ConstructorInput,
@@ -68,7 +68,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'typeName',
-    'zorn',
+    'id',
     'partitionFact',
     'boundedFile',
     'graphElement',
@@ -95,9 +95,9 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         declarationGroup,
       } = input;
 
-      const zorn = new FileFact2Zorn({
-        partitionFact: partitionFact.zorn,
-        boundedFile: boundedFile.zorn,
+      const id = new FileFact2Zorn({
+        partitionFact: partitionFact.id,
+        boundedFile: boundedFile.id,
       });
 
       const {
@@ -157,7 +157,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
       );
 
       const graphMetadata: Metadata = {
-        id: graphElement.id,
+        id: graphElement.oldId,
         title: boundedFile.file.nodePath.name.serialized,
         fileSystemPath: boundedFile.file.filePath.serialized,
         fieldList: metadataFieldList,
@@ -165,7 +165,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
 
       return {
         typeName: FactTypeName.FileFact2,
-        zorn,
+        id,
         partitionFact,
         boundedFile,
         graphElement,

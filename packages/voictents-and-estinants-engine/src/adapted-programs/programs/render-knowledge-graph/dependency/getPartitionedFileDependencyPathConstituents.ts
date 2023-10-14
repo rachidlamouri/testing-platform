@@ -56,9 +56,9 @@ export const getPartitionedFileDependencyPathConstituents =
       fileDependencyVoictent
         .map<MappableFileDependency>((fileDependency) => {
           return {
-            partitionZorn: fileDependency.partitionFact.zorn.forHuman,
+            partitionZorn: fileDependency.partitionFact.id.forHuman,
             importedFileZorn:
-              fileDependency.fileDependency.importedFile.zorn.forHuman,
+              fileDependency.fileDependency.importedFile.id.forHuman,
             partitionFact: fileDependency.partitionFact,
             fileDependency: fileDependency.fileDependency,
           };

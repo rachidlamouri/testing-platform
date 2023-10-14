@@ -19,8 +19,8 @@ type BaseEstinantOutput2 = {
 };
 
 type EstinantOutput2Prototype = {
-  get zorn(): string;
   get id(): string;
+  get oldId(): string;
 };
 
 /**
@@ -36,15 +36,15 @@ export type EngineEstinantOutput2 = ObjectWithPrototype<
 export const { EstinantOutput2Instance } = buildConstructorFunctionWithName(
   'EstinantOutput2Instance',
 )<BaseEstinantOutput2, EstinantOutput2Prototype>({
-  zorn: (output) => {
+  id: (output) => {
     return getId([
       'output',
       output.voictentName,
-      output.estinantLocator.zorn.forHuman,
+      output.estinantLocator.id.forHuman,
     ]);
   },
-  id: (output) => {
-    return getTextDigest(output.zorn);
+  oldId: (output) => {
+    return getTextDigest(output.id);
   },
 });
 

@@ -28,9 +28,9 @@ export const getEngineEstinantMetadataEntry = buildProgrammedTransform({
   .andFromItemTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
     getRightKeyTuple: (relationship) => {
-      return [relationship.item.estinantLocator.zorn];
+      return [relationship.item.estinantLocator.id];
     },
-    getRightKey: (engineEstinant) => engineEstinant.item.locator.zorn,
+    getRightKey: (engineEstinant) => engineEstinant.item.locator.id,
   })
   .toItem2<DirectedGraphMetadataEntryVoque>({
     collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,

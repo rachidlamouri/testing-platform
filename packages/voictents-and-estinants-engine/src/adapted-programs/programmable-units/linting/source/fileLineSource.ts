@@ -29,7 +29,7 @@ export type FileLineSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.FileLineSource;
-      zorn: FileLineSourceZorn;
+      id: FileLineSourceZorn;
     },
     FileLineSourceConstructorInput,
     {
@@ -43,7 +43,7 @@ export const { FileLineSourceInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // multiline-keep
     'typeName',
-    'zorn',
+    'id',
     'filePath',
     'lineNumber',
     'serialized',
@@ -60,14 +60,14 @@ export const { FileLineSourceInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { filePath, lineNumber } = input;
 
-      const zorn = new FileLineSourceZorn({
+      const id = new FileLineSourceZorn({
         filePath,
         lineNumber: `${lineNumber}`,
       });
 
       return {
         typeName: SourceTypeName.FileLineSource,
-        zorn,
+        id,
         filePath,
         lineNumber,
         serialized: `${filePath}:${lineNumber}`,

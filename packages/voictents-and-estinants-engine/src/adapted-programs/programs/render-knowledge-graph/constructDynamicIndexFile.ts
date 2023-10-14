@@ -57,7 +57,7 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
 
     const partitionFactListByLayerZorn = new Map<string, PartitionFact[]>();
     partitionFactVoictent.list.forEach((partitionFact) => {
-      const key = partitionFact.layer.zorn.forHuman;
+      const key = partitionFact.layer.id.forHuman;
       const list = partitionFactListByLayerZorn.get(key) ?? [];
       list.push(partitionFact);
       partitionFactListByLayerZorn.set(key, list);
@@ -94,7 +94,7 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
     const navigationLayerList =
       sortedLayerVoictent.map<ModifiedNavigationLayer>((layer) => {
         const partitionList = partitionFactListByLayerZorn.get(
-          layer.zorn.forHuman,
+          layer.id.forHuman,
         );
         assertNotUndefined(
           partitionList,
@@ -108,7 +108,7 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
 
             return {
               boundaryTypeName: partitionFact.boundary.typeName,
-              boundaryId: partitionFact.boundary.zorn.forMachine,
+              boundaryId: partitionFact.boundary.id.forMachine,
               label: partitionFact.boundary.displayName,
               Component: new IdentifierConfiguration(componentVariableName),
             };

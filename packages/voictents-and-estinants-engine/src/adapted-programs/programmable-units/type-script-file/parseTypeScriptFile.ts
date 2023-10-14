@@ -65,7 +65,7 @@ export const parseTypeScriptFile = buildProgrammedTransform({
       return {
         [PARSED_TYPE_SCRIPT_FILE_GEPP]: [
           {
-            zorn: typeScriptFileConfiguration.zorn,
+            id: typeScriptFileConfiguration.id,
             filePath: typeScriptFileConfiguration.sourceFilePath,
             filePathObject: typeScriptFileConfiguration.sourceFilePathObject,
             program,

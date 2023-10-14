@@ -53,9 +53,9 @@ ${serializedImportLines}
 
 const ${idTemplateCodeName} = [
   'UPDATE_ME'
-] as const satisfies GenericComplexzornTemplate
+] as const satisfies GenericComplexIdTemplate
 type ${idTemplateTypeName} = typeof ${idTemplateCodeName}
-class ${idTemplateClassName} extends Complexzorn<${idTemplateTypeName}> {
+class ${idTemplateClassName} extends ComplexId<${idTemplateTypeName}> {
   get rawTemplate(): ${idTemplateTypeName} {
     return ${idTemplateCodeName}
   }
@@ -66,7 +66,7 @@ type ${constructorInputTypeName} = {
 }
 
 type ${itemTypeName} = SimplifyN<[
-  { zorn: ${idTemplateClassName} },
+  { id: ${idTemplateClassName} },
   ${constructorInputTypeName},
   {
     // TODO: UPDATE_ME
@@ -77,7 +77,7 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
   constructorName: '${constructorCodeName}' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'placeholderInputProperty',
   ] as const satisfies readonly (keyof ${itemTypeName})[],
 })
@@ -92,12 +92,12 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { placeholderInputProperty } = input;
 
-      const zorn = new ${idTemplateClassName}({
+      const id = new ${idTemplateClassName}({
         UPDATE_ME: placeholderInputProperty,
       });
 
       return {
-        zorn,
+        id,
         ...input,
       } satisfies ${itemTypeName}
     },

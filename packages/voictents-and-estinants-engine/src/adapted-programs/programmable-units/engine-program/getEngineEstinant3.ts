@@ -859,7 +859,7 @@ export const getEngineEstinant3 = buildProgrammedTransform({
   .andFromItemTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     getRightKeyTuple: (leftInput) => [leftInput.item.filePath],
-    getRightKey: (rightInput) => rightInput.item.zorn,
+    getRightKey: (rightInput) => rightInput.item.id,
   })
   .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
@@ -947,7 +947,7 @@ export const getEngineEstinant3 = buildProgrammedTransform({
 
       const voqueLocatorByZorn = new Map(
         (estinant?.allVoqueLocatorList ?? []).map((voqueLocator) => {
-          return [voqueLocator.zorn, voqueLocator];
+          return [voqueLocator.id, voqueLocator];
         }),
       );
 

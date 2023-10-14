@@ -7,7 +7,7 @@ import { FilePath } from '../file/filePath';
  * join it back to the source file or other related objects
  */
 type ParsedTypeScriptFile = {
-  zorn: string;
+  id: string;
   /** @deprecated */
   filePath: string;
   // TODO: remove the string file path and rename this object to filePath

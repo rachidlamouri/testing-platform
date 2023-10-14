@@ -27,7 +27,7 @@ export const { LayerInstance } = buildNamedConstructorFunction({
   constructorName: 'LayerInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'displayName',
     'directory',
     'sortOrder',

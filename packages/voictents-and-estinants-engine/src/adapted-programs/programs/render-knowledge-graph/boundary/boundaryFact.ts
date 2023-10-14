@@ -15,7 +15,7 @@ type BoundaryFactConstructorInput = {
  */
 type BoundaryFact = SimplifyN<
   [
-    { zorn: BoundaryZorn },
+    { id: BoundaryZorn },
     Pick<BoundaryFactConstructorInput, 'boundary'>,
     {
       graphMetadata: Metadata;
@@ -27,7 +27,7 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
   constructorName: 'BoundaryFactInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'boundary',
     'graphMetadata',
   ] as const satisfies readonly (keyof BoundaryFact)[],
@@ -43,12 +43,12 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { boundary, commonBoundaryRoot } = input;
 
-      const { zorn } = boundary;
+      const { id } = boundary;
 
       const graphMetadata: Metadata = {
         title: boundary.displayName,
         fileSystemPath: boundary.directory.directoryPath.serialized,
-        id: zorn.forMachine,
+        id: id.forMachine,
         fieldList: [
           {
             label: 'Directory Path',
@@ -61,7 +61,7 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
       };
 
       return {
-        zorn,
+        id,
         boundary,
         graphMetadata,
       } satisfies BoundaryFact;

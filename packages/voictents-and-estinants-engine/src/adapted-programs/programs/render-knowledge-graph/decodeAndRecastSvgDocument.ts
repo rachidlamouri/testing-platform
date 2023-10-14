@@ -384,9 +384,9 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       fact: DirectoryFact2,
     ): Exclude<DirectoryFactProps, 'children'> => {
       return {
-        factId: fact.graphElement.id,
+        factId: fact.graphElement.oldId,
         directoryPath: fact.directory.directory.directoryPath.serialized,
-        boundaryId: fact.directory.boundary.zorn.forMachine,
+        boundaryId: fact.directory.boundary.id.forMachine,
         isBoundaryDirectory: fact.directory.isBoundaryDirectory,
       };
     };
@@ -395,8 +395,8 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       fact: FileFact2,
     ): Exclude<FileFactProps, 'children'> => {
       return {
-        factId: fact.graphElement.id,
-        boundaryId: fact.boundedFile.boundary.zorn.forMachine,
+        factId: fact.graphElement.oldId,
+        boundaryId: fact.boundedFile.boundary.id.forMachine,
         fileName: fact.boundedFile.file.nodePath.name.serialized,
         importedNodeIdSet: fact.importedNodeIdSet,
         importingNodeIdSet: fact.importingNodeIdSet,
@@ -407,7 +407,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       fact: FileDependencyPathSegmentFact,
     ): Exclude<FileDependencyPathSegmentFactProps, 'children'> => {
       return {
-        factId: fact.graphElement.id,
+        factId: fact.graphElement.oldId,
         pathHeadId: fact.pathHeadId,
         pathTailIdSet: fact.pathTailIdSet,
       };
@@ -417,7 +417,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       fact: FileDependencyPathNodeFact,
     ): Exclude<FileDependencyPathNodeFactProps, 'children'> => {
       return {
-        factId: fact.graphElement.id,
+        factId: fact.graphElement.oldId,
         pathHeadId: fact.pathNode.pathHeadId,
         pathTailIdSet: fact.pathNode.pathTailIdSet,
       };
@@ -591,7 +591,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
     }
 
     // TODO: remove the need for this `graph:` logic by adding more metadata to svgDocument
-    const fileName = svgDocument.zorn.replace(/^graph:/, '');
+    const fileName = svgDocument.id.replace(/^graph:/, '');
     const filePath = `packages/voictents-and-estinants-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/generated/${fileName}.tsx`;
     const programCode = [
       'import React, { forwardRef } from "react"',
@@ -621,10 +621,10 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       [PROGRAM_ERROR_GEPP]: unknownNodeList.map((unknownNode) => {
         const error = unknownNode.isElement
           ? new Error(
-              `Unhandled element with tagname "${unknownNode.tagName}" for node path: ${svgDocument.zorn}${unknownNode.path}`,
+              `Unhandled element with tagname "${unknownNode.tagName}" for node path: ${svgDocument.id}${unknownNode.path}`,
             )
           : new Error(
-              `HTML node type "${unknownNode.nodeType}" is not handled for node path: ${svgDocument.zorn}${unknownNode.path}`,
+              `HTML node type "${unknownNode.nodeType}" is not handled for node path: ${svgDocument.id}${unknownNode.path}`,
             );
 
         return {
@@ -642,7 +642,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       [APP_RENDERER_DELAYER_GEPP]: [
         new AppRendererDelayerInstance({
           estinantName: 'decodeAndRecastSvgDocument',
-          distinguisher: svgDocument.zorn,
+          distinguisher: svgDocument.id,
         }),
       ],
     };

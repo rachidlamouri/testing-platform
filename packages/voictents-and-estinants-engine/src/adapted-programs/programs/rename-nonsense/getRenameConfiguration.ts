@@ -89,7 +89,7 @@ export const getRenameConfiguration = buildProgrammedTransform({
         filePath: identifierLocator.filePath.serialized,
         lineNumber: `${oneBasedLineNumber}:`,
         // TODO: figure out why we need the locator id
-        columnNumber: `${oneBasedLineOffset} ${identifierLocator.zorn.forMachine}`,
+        columnNumber: `${oneBasedLineOffset} ${identifierLocator.id.forMachine}`,
       }),
     });
 

@@ -5,7 +5,7 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agno
  * Graphviz's DOT language
  */
 type GraphvizCode = {
-  zorn: string;
+  id: string;
   grition: string;
 };
 

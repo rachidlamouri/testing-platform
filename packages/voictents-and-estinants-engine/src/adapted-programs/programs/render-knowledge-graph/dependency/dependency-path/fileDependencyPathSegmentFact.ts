@@ -43,7 +43,7 @@ export type FileDependencyPathSegmentFact = SimplifyN<
   [
     {
       typeName: FactTypeName.FileDependencyPathSegmentFact;
-      zorn: FileDependencyPathSegmentFactZorn;
+      id: FileDependencyPathSegmentFactZorn;
     },
     FileDependencyPathSegmentFactConstructorInput,
     {
@@ -58,7 +58,7 @@ export const { FileDependencyPathSegmentFactInstance } =
     instancePropertyNameTuple: [
       // keep this as a multiline list
       'typeName',
-      'zorn',
+      'id',
       'partitionFact',
       'dependencyGroupZorn',
       'tailGraphElementZorn',
@@ -87,7 +87,7 @@ export const { FileDependencyPathSegmentFactInstance } =
           headGraphElementZorn,
         } = input;
 
-        const zorn = new FileDependencyPathSegmentFactZorn({
+        const id = new FileDependencyPathSegmentFactZorn({
           partitionedFileDependencyGroup: dependencyGroupZorn,
           tail: tailGraphElementZorn,
           head: headGraphElementZorn,
@@ -104,7 +104,7 @@ export const { FileDependencyPathSegmentFactInstance } =
 
         return {
           typeName: FactTypeName.FileDependencyPathSegmentFact,
-          zorn,
+          id,
           ...input,
           graphElement,
         } satisfies FileDependencyPathSegmentFact;

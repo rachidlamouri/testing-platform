@@ -10,7 +10,7 @@ import { FilePath } from '../file/filePath';
  * that is part of the project defined by the config file
  */
 type TypeScriptFileConfiguration = {
-  zorn: string;
+  id: string;
   // TODO: remove string sourceFilePath and rename this to sourceFilePath
   sourceFilePathObject: FilePath;
   /** @deprecated */
@@ -74,7 +74,7 @@ export const associateTypeScriptFileToTypescriptConfiguration =
       const configurationRootDirectory = posix.dirname(configurationFilePath);
 
       const configuration: TypeScriptFileConfiguration = {
-        zorn: input.filePath.serialized,
+        id: input.filePath.serialized,
         sourceFilePath: input.filePath.serialized,
         sourceFilePathObject: input.filePath,
         filePath: configurationFilePath,

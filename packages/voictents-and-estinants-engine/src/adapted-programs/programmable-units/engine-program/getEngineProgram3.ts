@@ -47,11 +47,11 @@ export const getEngineProgram3 = buildProgrammedTransform({
     collectionId: ENGINE_ESTINANT_3_GEPP,
     getRightKeyTuple: (engineProgram) => {
       return engineProgram.item.estinantRelationshipList.map((relationship) => {
-        return relationship.estinantLocator.zorn;
+        return relationship.estinantLocator.id;
       });
     },
     getRightKey: (engineEstinant) => {
-      return engineEstinant.item.locator.zorn;
+      return engineEstinant.item.locator.id;
     },
   })
   .toItem2<EngineProgram3Voque>({
@@ -76,7 +76,7 @@ export const getEngineProgram3 = buildProgrammedTransform({
           return estinant.allVoqueLocatorList;
         }),
       ].map((voqueLocator) => {
-        return [voqueLocator.zorn, voqueLocator] as const;
+        return [voqueLocator.id, voqueLocator] as const;
       }),
     );
 
@@ -84,7 +84,7 @@ export const getEngineProgram3 = buildProgrammedTransform({
 
     const initializedVoqueLocatorIdSet = new Set(
       engineProgramLocator.initializedVoqueLocatorList.map((voqueLocator) => {
-        return voqueLocator.id;
+        return voqueLocator.oldId;
       }),
     );
 
@@ -97,7 +97,7 @@ export const getEngineProgram3 = buildProgrammedTransform({
           .filter((voqueLocator): voqueLocator is EngineVoqueLocator2 => {
             return voqueLocator !== undefined;
           })
-          .map((voqueLocator) => voqueLocator.id);
+          .map((voqueLocator) => voqueLocator.oldId);
       }),
     );
 
@@ -110,14 +110,16 @@ export const getEngineProgram3 = buildProgrammedTransform({
           .filter((voqueLocator): voqueLocator is EngineVoqueLocator2 => {
             return voqueLocator !== undefined;
           })
-          .map((voqueLocator) => voqueLocator.id);
+          .map((voqueLocator) => voqueLocator.oldId);
       }),
     );
 
     const categorizedVoqueList = allVoqueLocatorList.map((voqueLocator) => {
-      const isInitialized = initializedVoqueLocatorIdSet.has(voqueLocator.id);
-      const isConsumed = consumedVoqueIdSet.has(voqueLocator.id);
-      const isFed = fedVoqueIdSet.has(voqueLocator.id);
+      const isInitialized = initializedVoqueLocatorIdSet.has(
+        voqueLocator.oldId,
+      );
+      const isConsumed = consumedVoqueIdSet.has(voqueLocator.oldId);
+      const isFed = fedVoqueIdSet.has(voqueLocator.oldId);
 
       const isEndingVoque = !isConsumed;
 
@@ -137,7 +139,7 @@ export const getEngineProgram3 = buildProgrammedTransform({
         } else if (isEndingVoque) {
           parentId = engineProgramLocator.endingSubgraphId;
         } else {
-          parentId = rootGraphLocator.id;
+          parentId = rootGraphLocator.oldId;
         }
 
         return new ProgramVoqueRelationship2Instance({
@@ -182,7 +184,7 @@ export const getEngineProgram3 = buildProgrammedTransform({
       (engineEstinant) => {
         return engineEstinant.outputList.map((output) => {
           return new ProgramEstinantOutputRelationshipInstance({
-            outputZorn: output.zorn,
+            outputZorn: output.id,
             rootGraphLocator,
             estinantLocator: engineEstinant.locator,
           });

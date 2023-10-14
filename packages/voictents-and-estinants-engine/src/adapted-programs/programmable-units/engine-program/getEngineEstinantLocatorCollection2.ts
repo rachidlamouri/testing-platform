@@ -29,7 +29,7 @@ export const getEngineEstinantLocatorCollection2 = buildProgrammedTransform({
     const entries = relationshipList
       .map((relationship) => relationship.estinantLocator)
       .map((estinantLocator): [string, EngineEstinantLocator2] => [
-        estinantLocator.zorn.forHuman,
+        estinantLocator.id.forHuman,
         estinantLocator,
       ]);
 

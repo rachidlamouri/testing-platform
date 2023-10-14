@@ -9,7 +9,7 @@ type BaseCommonBoundaryRoot = {
 };
 
 type CommonBoundaryRootPrototype = {
-  get zorn(): string;
+  get id(): string;
 };
 
 /**
@@ -23,7 +23,7 @@ export type CommonBoundaryRoot = ObjectWithPrototype<
 export const { CommonBoundaryRootInstance } = buildConstructorFunctionWithName(
   'CommonBoundaryRootInstance',
 )<BaseCommonBoundaryRoot, CommonBoundaryRootPrototype, CommonBoundaryRoot>({
-  zorn: (root) => {
+  id: (root) => {
     return root.directoryPath;
   },
 });

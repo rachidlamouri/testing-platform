@@ -154,7 +154,7 @@ type FileCommentedProgramBodyDeclarationGroupConstructorInput = {
 export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
   [
     {
-      zorn: FileCommentedProgramBodyDeclarationGroupZorn;
+      id: FileCommentedProgramBodyDeclarationGroupZorn;
     },
     Omit<
       FileCommentedProgramBodyDeclarationGroupConstructorInput,
@@ -186,7 +186,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       'FileCommentedProgramBodyDeclarationGroupInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'filePath',
       'filePathObject',
       'list',
@@ -219,7 +219,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       transformInput: (input) => {
         const { filePath, filePathObject, list, commentGroup } = input;
 
-        const zorn = new FileCommentedProgramBodyDeclarationGroupZorn({
+        const id = new FileCommentedProgramBodyDeclarationGroupZorn({
           filePath,
         });
 
@@ -506,7 +506,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
             isSensiblePhrase(readableNameAnnotation));
 
         return {
-          zorn,
+          id,
           filePath,
           filePathObject,
           list,

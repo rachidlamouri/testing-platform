@@ -13,7 +13,7 @@ type EslintDirectiveCommentConstructorInput = {
  */
 export type EslintDirectiveComment = {
   typeName: CategorizedCommentTypeName.EslintDirective;
-  zorn: CommentZorn;
+  id: CommentZorn;
   text: string;
   startingLineNumber: number;
   endingLineNumber: number;
@@ -25,7 +25,7 @@ export const { EslintDirectiveCommentInstance } = buildNamedConstructorFunction(
     instancePropertyNameTuple: [
       // multiline-keep
       'typeName',
-      'zorn',
+      'id',
       'text',
       'startingLineNumber',
       'endingLineNumber',
@@ -45,7 +45,7 @@ export const { EslintDirectiveCommentInstance } = buildNamedConstructorFunction(
 
       return {
         typeName: CategorizedCommentTypeName.EslintDirective,
-        zorn: adaptedComment.zorn,
+        id: adaptedComment.id,
         text: adaptedComment.text,
         startingLineNumber: adaptedComment.startingLineNumber,
         endingLineNumber: adaptedComment.endingLineNumber,

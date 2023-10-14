@@ -21,7 +21,7 @@ export const encodeDirectedGraphAsGraphvizCode = buildProgrammedTransform({
   .onTransform((input) => {
     const code = getGraphvizCode(input);
     return {
-      zorn: input.id,
+      id: input.id,
       grition: code,
     };
   })

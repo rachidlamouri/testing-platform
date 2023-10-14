@@ -17,14 +17,14 @@ type FileSystemNodeIndexByName = SpreadN<
   [
     InMemoryIndexByName,
     {
-      zorn: GenericIdentifiableItem['id'];
+      id: GenericIdentifiableItem['id'];
       nodePath: string;
     },
   ]
 >;
 
 type FileVoictentPelie<THubblepupPelie> = {
-  byZorn: Map<string, THubblepupPelie>;
+  byId: Map<string, THubblepupPelie>;
   byNodePath: Map<string, THubblepupPelie>;
   list: THubblepupPelie[];
 };
@@ -61,13 +61,13 @@ export class FileSystemNodeCollection<
   TVoque
 > {
   private voictentPelie: TVoque['collectionStreamable'] = {
-    byZorn: new Map(),
+    byId: new Map(),
     byNodePath: new Map(),
     list: [],
   };
 
   addItem(hubblepup: TVoque['itemEggStreamable']): void {
-    this.voictentPelie.byZorn.set(hubblepup.zorn.forHuman, hubblepup);
+    this.voictentPelie.byId.set(hubblepup.id.forHuman, hubblepup);
     this.voictentPelie.byNodePath.set(hubblepup.nodePath.serialized, hubblepup);
     this.voictentPelie.list.push(hubblepup);
 
@@ -93,7 +93,7 @@ export class FileSystemNodeCollection<
       indexByName: {
         serializableId: `${listIndex}`,
         listIndex,
-        zorn: item.zorn,
+        id: item.id,
         nodePath: item.nodePath.serialized,
       },
     };

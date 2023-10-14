@@ -18,8 +18,8 @@ type BaseGraphConstituentLocator = {
 
 type GraphConstituentLocatorPrototype = {
   get isRoot(): false;
-  get zorn(): GlobalDirectedGraphElement2Zorn;
-  get id(): string;
+  get id(): GlobalDirectedGraphElement2Zorn;
+  get oldId(): string;
 };
 
 /**
@@ -39,13 +39,13 @@ export const { GraphConstituentLocatorInstance } =
     GraphConstituentLocator
   >({
     isRoot: () => false,
-    zorn: (locator) => {
+    id: (locator) => {
       return new GlobalDirectedGraphElement2Zorn({
-        root: locator.rootGraphLocator.zorn,
+        root: locator.rootGraphLocator.id,
         local: locator.localZorn,
       });
     },
-    id: (locator) => {
+    oldId: (locator) => {
       return locator.idOverride ?? locator.localZorn.forMachine;
     },
   });

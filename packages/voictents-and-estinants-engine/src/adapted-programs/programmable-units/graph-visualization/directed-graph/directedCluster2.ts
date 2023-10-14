@@ -14,8 +14,8 @@ type BaseDirectedCluster2 = {
 };
 
 type DirectedCluster2Prototype = {
-  get zorn(): GlobalDirectedGraphElement2Zorn;
-  get id(): string;
+  get id(): GlobalDirectedGraphElement2Zorn;
+  get oldId(): string;
   get parentId(): string;
   get rootGraphLocator(): RootGraphLocator;
   get attributeByKey(): PartialClusterAttributeByKey;
@@ -36,11 +36,11 @@ export const { DirectedCluster2Instance } = buildConstructorFunctionWithName(
   'DirectedCluster2Instance',
 )<BaseDirectedCluster2, DirectedCluster2Prototype, DirectedCluster2>({
   // TODO: rename arguments to "directedCluster"
-  zorn: (directedSubgraph) => {
-    return directedSubgraph.locator.zorn;
-  },
   id: (directedSubgraph) => {
     return directedSubgraph.locator.id;
+  },
+  oldId: (directedSubgraph) => {
+    return directedSubgraph.locator.oldId;
   },
   parentId: (directedSubgraph) => {
     return directedSubgraph.locator.parentId;
@@ -50,7 +50,7 @@ export const { DirectedCluster2Instance } = buildConstructorFunctionWithName(
   },
   attributeByKey: (directedSubgraph) => {
     return {
-      id: directedSubgraph.id,
+      id: directedSubgraph.oldId,
       ...directedSubgraph.inputAttributeByKey,
     };
   },

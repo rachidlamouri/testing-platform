@@ -53,8 +53,8 @@ type EngineEstinantLocator2Zorn = InstanceType<
 >;
 
 type EngineEstinantLocatorPrototype = {
-  get zorn(): EngineEstinantLocator2Zorn;
-  get id(): string;
+  get id(): EngineEstinantLocator2Zorn;
+  get oldId(): string;
 };
 
 export type EngineEstinantTopLevelDeclarationLocator = ObjectWithPrototype<
@@ -84,10 +84,10 @@ export const { EngineEstinantTopLevelDeclarationLocatorInstance } =
     BaseEngineEstinantTopLevelDeclarationLocator,
     EngineEstinantLocatorPrototype
   >({
-    zorn: memoizeGetter((locator) => {
+    id: memoizeGetter((locator) => {
       return ExportLocatorZorn.fromLocator(locator);
     }),
-    id: (locator) => locator.zorn.forMachine,
+    oldId: (locator) => locator.id.forMachine,
   });
 
 export const { EngineEstinantBuildAddMetadataForSerializationLocatorInstance } =
@@ -97,13 +97,13 @@ export const { EngineEstinantBuildAddMetadataForSerializationLocatorInstance } =
     BaseEngineEstinantBuildAddMetadataForSerializationLocator,
     EngineEstinantLocatorPrototype
   >({
-    zorn: memoizeGetter((locator) => {
+    id: memoizeGetter((locator) => {
       return new EngineEstinantBuildAddMetadataForSerializationLocatorZorn({
         filePath: locator.filePath,
         index: `${locator.index}`,
       });
     }),
-    id: (locator) => locator.zorn.forMachine,
+    oldId: (locator) => locator.id.forMachine,
   });
 
 export const ENGINE_ESTINANT_LOCATOR_2_GEPP = 'engine-estinant-locator-2';

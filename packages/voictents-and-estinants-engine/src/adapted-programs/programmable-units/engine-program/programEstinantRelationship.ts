@@ -14,7 +14,7 @@ type BaseProgramEstinantRelationship = {
 };
 
 type ProgramEstinantRelationshipPrototype = {
-  get zorn(): string;
+  get id(): string;
 };
 
 /**
@@ -33,9 +33,9 @@ export const { ProgramEstinantRelationshipInstance } =
     BaseProgramEstinantRelationship,
     ProgramEstinantRelationshipPrototype
   >({
-    zorn: (relationship) => {
+    id: (relationship) => {
       return getId([
-        relationship.estinantLocator.zorn.forHuman,
+        relationship.estinantLocator.id.forHuman,
         relationship.programName,
       ]);
     },

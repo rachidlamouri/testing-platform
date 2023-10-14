@@ -28,7 +28,7 @@ type FileAncestorDirectoryPathSetConstructorInput = {
  * the furthest ancestor to the parent directory.
  */
 type FileAncestorDirectoryPathSet = {
-  zorn: FileAncestorDirectoryPathSetZorn;
+  id: FileAncestorDirectoryPathSetZorn;
   filePath: string;
   set: string[];
 };
@@ -38,7 +38,7 @@ export const { FileAncestorDirectoryPathSetInstance } =
     constructorName: 'FileAncestorDirectoryPathSetInstance' as const,
     instancePropertyNameTuple: [
       // keep this as a multiline list
-      'zorn',
+      'id',
       'filePath',
       'set',
     ] as const satisfies readonly (keyof FileAncestorDirectoryPathSet)[],
@@ -58,7 +58,7 @@ export const { FileAncestorDirectoryPathSetInstance } =
         const { file } = input;
         const { filePath } = file;
 
-        const zorn = new FileAncestorDirectoryPathSetZorn({
+        const id = new FileAncestorDirectoryPathSetZorn({
           filePath: filePath.serialized,
         });
 
@@ -72,7 +72,7 @@ export const { FileAncestorDirectoryPathSetInstance } =
         ancestorDirectorySet.reverse();
 
         return {
-          zorn,
+          id,
           filePath: filePath.serialized,
           set: ancestorDirectorySet,
         } satisfies FileAncestorDirectoryPathSet;

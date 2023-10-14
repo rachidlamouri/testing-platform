@@ -34,7 +34,7 @@ type BaseProgramEstinantInputRelationship = {
 };
 
 type ProgramEstinantInputRelationshipPrototype = {
-  get zorn(): ProgramEstinantInputRelationshipZorn;
+  get id(): ProgramEstinantInputRelationshipZorn;
 };
 
 /**
@@ -52,10 +52,10 @@ export const { ProgramEstinantInputRelationshipInstance } =
     BaseProgramEstinantInputRelationship,
     ProgramEstinantInputRelationshipPrototype
   >({
-    zorn: (relationship) => {
+    id: (relationship) => {
       return new ProgramEstinantInputRelationshipZorn({
-        rootGraphLocator: relationship.rootGraphLocator.zorn,
-        estinantInput: relationship.estinantInput.zorn,
+        rootGraphLocator: relationship.rootGraphLocator.id,
+        estinantInput: relationship.estinantInput.id,
       });
     },
   });

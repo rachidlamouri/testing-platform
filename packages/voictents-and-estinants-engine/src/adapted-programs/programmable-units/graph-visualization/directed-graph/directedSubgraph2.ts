@@ -14,8 +14,8 @@ type BaseDirectedSubgraph2 = {
 };
 
 type DirectedSubgraph2Prototype = {
-  get zorn(): GlobalDirectedGraphElement2Zorn;
-  get id(): string;
+  get id(): GlobalDirectedGraphElement2Zorn;
+  get oldId(): string;
   get parentId(): string;
   get attributeByKey(): PartialSubgraphAttributeByKey;
   get isRoot(): false;
@@ -35,18 +35,18 @@ export type DirectedSubgraph2 = ObjectWithPrototype<
 export const { DirectedSubgraph2Instance } = buildConstructorFunctionWithName(
   'DirectedSubgraph2Instance',
 )<BaseDirectedSubgraph2, DirectedSubgraph2Prototype>({
-  zorn: (directedSubgraph) => {
-    return directedSubgraph.locator.zorn;
-  },
   id: (directedSubgraph) => {
     return directedSubgraph.locator.id;
+  },
+  oldId: (directedSubgraph) => {
+    return directedSubgraph.locator.oldId;
   },
   parentId: (directedSubgraph) => {
     return directedSubgraph.locator.parentId;
   },
   attributeByKey: (directedSubgraph) => {
     return {
-      id: directedSubgraph.id,
+      id: directedSubgraph.oldId,
       ...directedSubgraph.inputAttributeByKey,
     };
   },

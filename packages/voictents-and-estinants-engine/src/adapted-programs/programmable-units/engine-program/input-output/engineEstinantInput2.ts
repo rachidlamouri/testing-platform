@@ -38,8 +38,8 @@ type BaseEstinantInput2 = {
 };
 
 type EstinantInput2Prototype = {
-  get zorn(): EngineEstinantInput2Zorn;
-  get id(): string;
+  get id(): EngineEstinantInput2Zorn;
+  get oldId(): string;
 };
 
 /**
@@ -55,14 +55,14 @@ export type EngineEstinantInput2 = ObjectWithPrototype<
 export const { EstinantInput2Instance } = buildConstructorFunctionWithName(
   'EstinantInput2Instance',
 )<BaseEstinantInput2, EstinantInput2Prototype>({
-  zorn: memoizeGetter((input) => {
+  id: memoizeGetter((input) => {
     return new EngineEstinantInput2Zorn({
       inputIndex: `${input.index}`,
       voictentName: input.voictentName,
-      estinantLocator: input.estinantLocator.zorn,
+      estinantLocator: input.estinantLocator.id,
     });
   }),
-  id: (input) => input.zorn.forMachine,
+  oldId: (input) => input.id.forMachine,
 });
 
 export const ESTINANT_INPUT_2_GEPP = 'estinant-input-2';

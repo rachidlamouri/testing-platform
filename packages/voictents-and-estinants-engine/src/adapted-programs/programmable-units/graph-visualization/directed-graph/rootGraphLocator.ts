@@ -15,9 +15,9 @@ type BaseRootGraphLocator = {
 
 type RootGraphLocatorPrototype = {
   get isRoot(): true;
-  get zorn(): RootDirectedGraphElement2Zorn;
+  get id(): RootDirectedGraphElement2Zorn;
   get localZorn(): LocalDirectedGraphElement2Zorn;
-  get id(): string;
+  get oldId(): string;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   rootLocator: RootGraphLocator;
 };
@@ -35,16 +35,16 @@ export const { RootGraphLocatorInstance } = buildConstructorFunctionWithName(
   'RootGraphLocatorInstance',
 )<BaseRootGraphLocator, RootGraphLocatorPrototype, RootGraphLocator>({
   isRoot: () => true,
-  zorn: (locator) => {
+  id: (locator) => {
     return RootDirectedGraphElement2Zorn.build({
       distinguisher: locator.distinguisher,
     });
   },
   localZorn: (locator) => {
-    return locator.zorn;
+    return locator.id;
   },
-  id: (locator) => {
-    return locator.idOverride ?? locator.zorn.forMachine;
+  oldId: (locator) => {
+    return locator.idOverride ?? locator.id.forMachine;
   },
   rootLocator: (locator) => {
     return locator;

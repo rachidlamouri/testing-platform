@@ -73,7 +73,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
       if ('isRoot' in element) {
         if (element.isRoot) {
           allRootGraphList.push({
-            id: element.rootGraphLocator.zorn.forHuman,
+            id: element.rootGraphLocator.id.forHuman,
             isRoot: true,
             attributeByKey: element.attributeByKey,
             nodeList: [],
@@ -87,7 +87,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
         if (element.isCluster) {
           allSubgraphList.push({
             subgraph1: {
-              id: element.zorn.forHuman,
+              id: element.id.forHuman,
               isRoot: false,
               isCluster: element.isCluster,
               attributeByKey: element.attributeByKey,
@@ -100,7 +100,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
         } else {
           allSubgraphList.push({
             subgraph1: {
-              zorn: element.zorn.forHuman,
+              id: element.id.forHuman,
               isRoot: false,
               isCluster: element.isCluster,
               attributeByKey: element.attributeByKey,

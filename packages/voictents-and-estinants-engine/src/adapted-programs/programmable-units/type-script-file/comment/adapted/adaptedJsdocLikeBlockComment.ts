@@ -15,7 +15,7 @@ type AdaptedJsdocLikeBlockCommentConstructorInput = {
  */
 export type AdaptedJsdocLikeBlockComment = {
   typeName: AdaptedCommentTypeName.JsdocLikeBlock;
-  zorn: CommentZorn;
+  id: CommentZorn;
   startingLineNumber: number;
   endingLineNumber: number;
   parsedBlock: commentParser.Block;
@@ -29,7 +29,7 @@ export const { AdaptedJsdocLikeBlockCommentInstance } =
     instancePropertyNameTuple: [
       // multiline-keep
       'typeName',
-      'zorn',
+      'id',
       'startingLineNumber',
       'endingLineNumber',
       'parsedBlock',
@@ -53,7 +53,7 @@ export const { AdaptedJsdocLikeBlockCommentInstance } =
 
         return {
           typeName: AdaptedCommentTypeName.JsdocLikeBlock,
-          zorn: CommentZorn.build(input),
+          id: CommentZorn.build(input),
           startingLineNumber: rawComment.loc.start.line,
           endingLineNumber: rawComment.loc.end.line,
           parsedBlock,

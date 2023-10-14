@@ -22,7 +22,7 @@ type TagWithName = {
  */
 export type DescriptiveBlockComment = {
   typeName: CategorizedCommentTypeName.Descriptive;
-  zorn: CommentZorn;
+  id: CommentZorn;
   description: string;
   tagTuple: TagWithName[];
   tagIdSet: Set<string>;
@@ -36,7 +36,7 @@ export const { DescriptiveBlockCommentInstance } =
     instancePropertyNameTuple: [
       // multiline-keep
       'typeName',
-      'zorn',
+      'id',
       'description',
       'tagTuple',
       'tagIdSet',
@@ -75,7 +75,7 @@ export const { DescriptiveBlockCommentInstance } =
 
         return {
           typeName: CategorizedCommentTypeName.Descriptive,
-          zorn: adaptedComment.zorn,
+          id: adaptedComment.id,
           description,
           tagTuple,
           tagIdSet,

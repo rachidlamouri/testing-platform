@@ -26,7 +26,7 @@ export const renderGraphvizCodeToSvgDocument2 = buildProgrammedTransform({
       .join('');
 
     return {
-      zorn: identifiableCode.zorn,
+      id: identifiableCode.id,
       grition: originalDocument,
     };
   })

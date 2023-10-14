@@ -13,8 +13,8 @@ type BaseDirectedGraphNode2 = {
 };
 
 type DirectedGraphNode2Prototype = {
-  get zorn(): GlobalDirectedGraphElement2Zorn;
-  get id(): string;
+  get id(): GlobalDirectedGraphElement2Zorn;
+  get oldId(): string;
   get parentId(): string;
   get rootGraphLocator(): RootGraphLocator;
   get attributeByKey(): PartialNodeAttributeByKey;
@@ -32,11 +32,11 @@ export type DirectedGraphNode2 = ObjectWithPrototype<
 export const { DirectedGraphNode2Instance } = buildConstructorFunctionWithName(
   'DirectedGraphNode2Instance',
 )<BaseDirectedGraphNode2, DirectedGraphNode2Prototype, DirectedGraphNode2>({
-  zorn: (directedNode) => {
-    return directedNode.locator.zorn;
-  },
   id: (directedNode) => {
     return directedNode.locator.id;
+  },
+  oldId: (directedNode) => {
+    return directedNode.locator.oldId;
   },
   parentId: (directedNode) => {
     return directedNode.locator.parentId;
@@ -46,7 +46,7 @@ export const { DirectedGraphNode2Instance } = buildConstructorFunctionWithName(
   },
   attributeByKey: (directedNode) => {
     return {
-      id: directedNode.id,
+      id: directedNode.oldId,
       ...directedNode.inputAttributeByKey,
     };
   },

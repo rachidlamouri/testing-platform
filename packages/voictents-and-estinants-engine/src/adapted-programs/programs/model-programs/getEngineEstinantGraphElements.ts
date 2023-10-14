@@ -40,9 +40,9 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
   .andFromItemTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
     getRightKeyTuple: (relationship) => {
-      return [relationship.item.estinantLocator.zorn];
+      return [relationship.item.estinantLocator.id];
     },
-    getRightKey: (engineEstinant) => engineEstinant.item.locator.zorn,
+    getRightKey: (engineEstinant) => engineEstinant.item.locator.id,
   })
   .toItemTuple2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
@@ -63,7 +63,7 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
     const rootEstinantSubgraphLocator = new GraphConstituentLocatorInstance({
       localZorn: rootEstinantSubgraphLocalZorn,
       rootGraphLocator,
-      parentId: rootGraphLocator.id,
+      parentId: rootGraphLocator.oldId,
     });
 
     const estinantInputSubgraphDistinguisher = `${relationship.programName} | ${engineEstinant.estinantName} | estinant-input-subgraph`;
@@ -90,7 +90,7 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
     const estinantNode = new DirectedGraphNode2Instance({
       locator: new GraphConstituentLocatorInstance({
         rootGraphLocator,
-        parentId: rootEstinantSubgraph.id,
+        parentId: rootEstinantSubgraph.oldId,
         localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
           distinguisher: engineEstinant.identifierName,
         }),
@@ -107,7 +107,7 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
       const inputNode = new DirectedGraphNode2Instance({
         locator: new GraphConstituentLocatorInstance({
           rootGraphLocator,
-          parentId: estinantInputSubgraph.id,
+          parentId: estinantInputSubgraph.oldId,
           localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
             distinguisher: getId([engineEstinant.estinantName, label]),
           }),
@@ -131,8 +131,8 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
         const nextInput = list[index + 1];
 
         const edge = new DirectedGraphEdge2Instance({
-          tailId: input.id,
-          headId: nextInput.id,
+          tailId: input.oldId,
+          headId: nextInput.oldId,
           attributeByKey: {
             style: EdgeStyle.Invisible,
           },

@@ -37,7 +37,7 @@ type LintAssertionOmissionConstructorInput = {
 export type LintAssertionOmission = SimplifyN<
   [
     {
-      zorn: LintAssertionOmissionZorn;
+      id: LintAssertionOmissionZorn;
     },
     LintAssertionOmissionConstructorInput,
   ]
@@ -47,7 +47,7 @@ export const { LintAssertionOmissionInstance } = buildNamedConstructorFunction({
   constructorName: 'LintAssertionOmissionInstance' as const,
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'omitterSource',
     'omittedAssertionZorn',
   ] as const satisfies readonly (keyof LintAssertionOmission)[],
@@ -63,13 +63,13 @@ export const { LintAssertionOmissionInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { omitterSource, omittedAssertionZorn } = input;
 
-      const zorn = new LintAssertionOmissionZorn({
+      const id = new LintAssertionOmissionZorn({
         omitterSource,
         omittedAssertionZorn,
       });
 
       return {
-        zorn,
+        id,
         ...input,
       } satisfies LintAssertionOmission;
     },

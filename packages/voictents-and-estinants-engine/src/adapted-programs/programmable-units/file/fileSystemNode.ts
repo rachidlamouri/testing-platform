@@ -25,7 +25,7 @@ type FileSystemNodeConstructorInput = {
 export type FileSystemNode = SimplifyN<
   [
     {
-      zorn: FileSystemNodeZorn;
+      id: FileSystemNodeZorn;
     },
     FileSystemNodeConstructorInput,
   ]

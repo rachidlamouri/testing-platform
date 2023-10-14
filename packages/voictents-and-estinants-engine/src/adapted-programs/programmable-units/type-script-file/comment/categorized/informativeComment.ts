@@ -19,7 +19,7 @@ type InformativeCommentConstructorInput = {
  */
 export type InformativeComment = {
   typeName: CategorizedCommentTypeName.Informative;
-  zorn: CommentZorn;
+  id: CommentZorn;
   subtypeName: InformativeCommentTypeName;
   text: string;
   startingLineNumber: number;
@@ -31,7 +31,7 @@ export const { InformativeCommentInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // multiline-keep
     'typeName',
-    'zorn',
+    'id',
     'subtypeName',
     'text',
     'startingLineNumber',
@@ -51,7 +51,7 @@ export const { InformativeCommentInstance } = buildNamedConstructorFunction({
 
       return {
         typeName: CategorizedCommentTypeName.Informative,
-        zorn: adaptedComment.zorn,
+        id: adaptedComment.id,
         subtypeName,
         text: adaptedComment.text,
         startingLineNumber: adaptedComment.startingLineNumber,

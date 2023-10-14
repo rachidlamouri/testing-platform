@@ -29,8 +29,8 @@ export const getEngineVoqueMetadataEntry = buildProgrammedTransform({
   })
   .andFromItemTuple2<EngineVoque2Voque, [OdeshinZorn]>({
     collectionId: ENGINE_VOQUE_2_GEPP,
-    getRightKeyTuple: (relationship) => [relationship.item.voqueLocator.zorn],
-    getRightKey: (engineVoque) => engineVoque.item.zorn,
+    getRightKeyTuple: (relationship) => [relationship.item.voqueLocator.id],
+    getRightKey: (engineVoque) => engineVoque.item.id,
   })
   .toItem2<DirectedGraphMetadataEntryVoque>({
     collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
@@ -55,7 +55,7 @@ export const getEngineVoqueMetadataEntry = buildProgrammedTransform({
     }
 
     const entry = new DirectedGraphMetadataEntryInstance({
-      elementId: engineVoque.id,
+      elementId: engineVoque.oldId,
       rootGraphLocator: relationship.rootGraphLocator,
       metadata: {
         title: engineVoque.displayName,

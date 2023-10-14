@@ -52,7 +52,7 @@ type LintAssertionConstructorInput<TTypedRule extends UnsafeTypedRule> = {
  * report the issue.
  */
 export class LintAssertion<TTypedRule extends UnsafeTypedRule> {
-  public readonly zorn: LintAssertionZorn;
+  public readonly id: LintAssertionZorn;
 
   public readonly rule: TTypedRule;
 
@@ -78,7 +78,7 @@ export class LintAssertion<TTypedRule extends UnsafeTypedRule> {
       };
     }
 
-    this.zorn = new LintAssertionZorn({
+    this.id = new LintAssertionZorn({
       rule,
       lintSource,
     });

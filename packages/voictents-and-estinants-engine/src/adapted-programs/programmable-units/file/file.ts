@@ -7,7 +7,7 @@ import { FileSystemNodeVoque } from './fileSystemNodeVoictent';
 type FileConstructorInput = {
   nodePath: string;
   /**
-   * @deprecated in favor of zorn.forMachine
+   * @deprecated in favor of id.forMachine
    * @todo remove after removing typescript-file-relationship program
    */
   instanceId: string;
@@ -21,8 +21,8 @@ type FileConstructorInput = {
 export type File<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
 > = {
-  zorn: FileSystemNodeZorn;
-  /** @deprecated in favor of zorn.forMachine  */
+  id: FileSystemNodeZorn;
+  /** @deprecated in favor of id.forMachine  */
   instanceId: string;
   filePath: FilePath<TFileExtensionSuffixIdentifier>;
   nodePath: FilePath<TFileExtensionSuffixIdentifier>;
@@ -32,7 +32,7 @@ export const { FileInstance } = buildNamedConstructorFunction({
   constructorName: 'FileInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'instanceId',
     'filePath',
     'nodePath',
@@ -49,7 +49,7 @@ export const { FileInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { nodePath: serializedFilePath, ...otherInputFields } = input;
 
-      const zorn = new FileSystemNodeZorn({
+      const id = new FileSystemNodeZorn({
         nodePath: serializedFilePath,
       });
 
@@ -58,7 +58,7 @@ export const { FileInstance } = buildNamedConstructorFunction({
       });
 
       return {
-        zorn,
+        id,
         filePath,
         nodePath: filePath,
         ...otherInputFields,

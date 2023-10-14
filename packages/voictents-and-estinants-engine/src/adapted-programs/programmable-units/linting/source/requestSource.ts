@@ -32,7 +32,7 @@ export type RequestSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.RequestSource;
-      zorn: RequestSourceZorn;
+      id: RequestSourceZorn;
     },
     RequestSourceConstructorInput,
   ]
@@ -43,7 +43,7 @@ export const { RequestSourceInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'typeName',
-    'zorn',
+    'id',
     'requestor',
     'requestee',
   ] as const satisfies readonly (keyof RequestSource)[],
@@ -59,14 +59,14 @@ export const { RequestSourceInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { requestor, requestee } = input;
 
-      const zorn = new RequestSourceZorn({
+      const id = new RequestSourceZorn({
         requestor,
         requestee,
       });
 
       return {
         typeName: SourceTypeName.RequestSource,
-        zorn,
+        id,
         ...input,
       } satisfies RequestSource;
     },

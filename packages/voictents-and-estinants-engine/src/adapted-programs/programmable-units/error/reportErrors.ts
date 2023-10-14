@@ -51,7 +51,7 @@ export const reportErrors = buildProgrammedTransform({
         console.log(`    ${lintAssertion.rule.name}`);
         console.log('  Rule Source');
         console.log(
-          serialize(lintAssertion.rule.source.zorn.templateValueByKeyPath)
+          serialize(lintAssertion.rule.source.id.templateValueByKeyPath)
             .split('\n')
             .map((line) => `    ${line}`)
             .join('\n'),
@@ -62,7 +62,7 @@ export const reportErrors = buildProgrammedTransform({
           console.log(`    ${lintAssertion.lintSource.serialized}`);
         } else {
           console.log(
-            serialize(lintAssertion.lintSource.zorn.templateValueByKeyPath)
+            serialize(lintAssertion.lintSource.id.templateValueByKeyPath)
               .split('\n')
               .map((line) => `    ${line}`)
               .join('\n'),

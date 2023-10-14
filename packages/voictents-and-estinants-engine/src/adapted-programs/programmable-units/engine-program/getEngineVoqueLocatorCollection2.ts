@@ -38,7 +38,7 @@ export const getEngineVoqueLocatorCollection2 = buildProgrammedTransform({
       [...programRelationshipList, ...estinantVoqueRelationshipList].map(
         (relationship) => {
           return [
-            relationship.voqueLocator.zorn,
+            relationship.voqueLocator.id,
             relationship.voqueLocator,
           ] as const;
         },

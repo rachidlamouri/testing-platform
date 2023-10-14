@@ -21,7 +21,7 @@ type BoundedDirectoryConstructorInput = {
  */
 export type BoundedDirectory = SimplifyN<
   [
-    { zorn: FileSystemNodeZorn },
+    { id: FileSystemNodeZorn },
     Omit<BoundedDirectoryConstructorInput, 'commonBoundaryRoot'>,
     {
       nodePath: DirectoryPath;
@@ -36,7 +36,7 @@ export const { BoundedDirectoryInstance } = buildNamedConstructorFunction({
   constructorName: 'BoundedDirectoryInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'boundary',
     'directory',
     'nodePath',
@@ -71,7 +71,7 @@ export const { BoundedDirectoryInstance } = buildNamedConstructorFunction({
         });
 
       return {
-        zorn: directory.zorn,
+        id: directory.id,
         boundary,
         directory,
         nodePath: directory.nodePath,

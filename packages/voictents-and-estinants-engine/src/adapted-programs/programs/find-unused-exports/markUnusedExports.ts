@@ -80,11 +80,11 @@ export const markUnusedExports = buildProgrammedTransform({
 
     const outerMap = new OuterMap(
       exportListList.map((exportList) => {
-        const filePath = exportList.zorn;
+        const filePath = exportList.id;
         const stateList: MutableExportState[] = exportList.list.map(
           (exportItem) => {
             return {
-              filePath: exportList.zorn,
+              filePath: exportList.id,
               identifierName: exportItem.identifierName,
               isImported: false,
             };
@@ -107,7 +107,7 @@ export const markUnusedExports = buildProgrammedTransform({
         .flatMap((importItem) => {
           return importItem.specifierList.map((identifierName) => {
             return {
-              importingFilePath: importList.zorn,
+              importingFilePath: importList.id,
               importedFilePath: importItem.sourcePath,
               importedIdentifierName: identifierName,
             };

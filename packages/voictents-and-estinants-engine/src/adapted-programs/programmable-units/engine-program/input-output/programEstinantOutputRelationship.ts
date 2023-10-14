@@ -14,7 +14,7 @@ type BaseProgramEstinantOutputRelationship = {
 };
 
 type ProgramEstinantOutputRelationshipPrototype = {
-  get zorn(): string;
+  get id(): string;
 };
 
 /**
@@ -32,9 +32,9 @@ export const { ProgramEstinantOutputRelationshipInstance } =
     BaseProgramEstinantOutputRelationship,
     ProgramEstinantOutputRelationshipPrototype
   >({
-    zorn: (relationship) => {
+    id: (relationship) => {
       return getId([
-        relationship.rootGraphLocator.zorn.forHuman,
+        relationship.rootGraphLocator.id.forHuman,
         relationship.outputZorn,
       ]);
     },

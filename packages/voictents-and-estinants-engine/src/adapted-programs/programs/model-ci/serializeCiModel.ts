@@ -43,7 +43,7 @@ export const serializeCiModel = buildProgrammedTransform({
     ].join('\n');
 
     return {
-      zorn: ciModel.zorn,
+      id: ciModel.id,
       grition: serializedModelLineList,
     };
   })

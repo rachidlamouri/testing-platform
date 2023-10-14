@@ -56,7 +56,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
           distinguisher: `start-subgraph | ${rootGraphLocator.distinguisher}`,
         }),
         rootGraphLocator,
-        parentId: rootGraphLocator.id,
+        parentId: rootGraphLocator.oldId,
       }),
       inputAttributeByKey: {
         label: '',
@@ -69,7 +69,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
     const startNode = new DirectedGraphNode2Instance({
       locator: new GraphConstituentLocatorInstance({
         rootGraphLocator,
-        parentId: rootGraphLocator.id,
+        parentId: rootGraphLocator.oldId,
         localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
           distinguisher: startLabel,
         }),
@@ -86,7 +86,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
       (voqueLocator) => {
         const edge = new DirectedGraphEdge2Instance({
           tailId: engineProgram.locator.startingNodeId,
-          headId: voqueLocator.id,
+          headId: voqueLocator.oldId,
           rootGraphLocator,
         });
 
@@ -100,7 +100,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
           distinguisher: `end-subgraph | ${rootGraphLocator.distinguisher}`,
         }),
         rootGraphLocator,
-        parentId: rootGraphLocator.id,
+        parentId: rootGraphLocator.oldId,
       }),
       inputAttributeByKey: {
         label: '',
@@ -113,7 +113,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
     const endNode = new DirectedGraphNode2Instance({
       locator: new GraphConstituentLocatorInstance({
         rootGraphLocator,
-        parentId: rootGraphLocator.id,
+        parentId: rootGraphLocator.oldId,
         localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
           distinguisher: endLabel,
         }),
@@ -129,7 +129,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
     const endingVoqueEdgeList = engineProgram.endingVoqueLocatorList.map(
       (engineVoque) => {
         const edge = new DirectedGraphEdge2Instance({
-          tailId: engineVoque.id,
+          tailId: engineVoque.oldId,
           headId: engineProgram.locator.endingNodeId,
           rootGraphLocator,
         });

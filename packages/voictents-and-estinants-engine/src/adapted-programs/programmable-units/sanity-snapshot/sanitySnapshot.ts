@@ -5,7 +5,7 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agno
  * fundamentally changes.
  */
 type SanitySnapshot = {
-  zorn: string;
+  id: string;
   grition: unknown;
 };
 

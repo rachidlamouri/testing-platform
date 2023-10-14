@@ -108,8 +108,8 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
           ]);
 
           const partitionFactZornSet = new Set([
-            importingFile.sourcePartitionFact.zorn.forHuman,
-            importedFile.sourcePartitionFact.zorn.forHuman,
+            importingFile.sourcePartitionFact.id.forHuman,
+            importedFile.sourcePartitionFact.id.forHuman,
           ]);
 
           return {

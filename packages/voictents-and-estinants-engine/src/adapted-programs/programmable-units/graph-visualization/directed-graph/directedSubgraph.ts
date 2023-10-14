@@ -34,7 +34,7 @@ export type PartialSubgraphAttributeByKey =
  * serialized to graphviz code.
  */
 export type DirectedSubgraph = {
-  zorn: string;
+  id: string;
   isRoot: false;
   isCluster: false;
   attributeByKey: PartialSubgraphAttributeByKey;

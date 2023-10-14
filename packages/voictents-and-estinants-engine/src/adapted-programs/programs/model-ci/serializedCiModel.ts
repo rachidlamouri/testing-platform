@@ -4,7 +4,7 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agno
  * The expected ci.sh generated from the CI model
  */
 type SerializedCiModel = {
-  zorn: string;
+  id: string;
   grition: string;
 };
 

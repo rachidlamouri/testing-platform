@@ -26,7 +26,7 @@ type FileDependencyConstructorInput = {
 export type FileDependency = SimplifyN<
   [
     {
-      zorn: FileDependencyZorn;
+      id: FileDependencyZorn;
     },
     FileDependencyConstructorInput,
     {
@@ -42,7 +42,7 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
   constructorName: 'FileDependencyInstance',
   instancePropertyNameTuple: [
     // keep this as a multiline list
-    'zorn',
+    'id',
     'importingFile',
     'importedFile',
     'pathNodeSet',
@@ -62,14 +62,14 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { importingFile, importedFile } = input;
 
-      const zorn = new FileDependencyZorn({
-        importingFile: importingFile.zorn,
-        importedFile: importedFile.zorn,
+      const id = new FileDependencyZorn({
+        importingFile: importingFile.id,
+        importedFile: importedFile.id,
       });
 
       const isCrossBoundary =
-        importingFile.boundary.zorn.forHuman !==
-        importedFile.boundary.zorn.forHuman;
+        importingFile.boundary.id.forHuman !==
+        importedFile.boundary.id.forHuman;
 
       let dependencyPathDirectoryPathSet: Set<string>;
       if (isCrossBoundary) {
@@ -118,7 +118,7 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
       const pathNodeSet = dependencyPathDirectoryPathCombination.map(
         (directoryPath, index) => {
           return new FileDependencyPathNodeInstance({
-            fileDependencyZorn: zorn,
+            fileDependencyZorn: id,
             directoryPath,
             index,
           });
@@ -147,7 +147,7 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
         .filter(isNotNull);
 
       return {
-        zorn,
+        id,
         importingFile,
         importedFile,
         pathNodeSet,

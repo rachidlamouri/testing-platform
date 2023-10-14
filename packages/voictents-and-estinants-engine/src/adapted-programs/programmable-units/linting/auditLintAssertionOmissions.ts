@@ -50,14 +50,14 @@ export const auditLintAssertionOmissions = buildProgrammedTransform({
   .onTransform((omissionVoictent, assertionVoictent) => {
     const assertionSet = new Set(
       assertionVoictent.map((assertion) => {
-        return assertion.zorn.forHuman;
+        return assertion.id.forHuman;
       }),
     );
 
     const omissionCombination = [
       ...new Map(
         omissionVoictent.list.map((omission) => {
-          return [omission.zorn.forHuman, omission];
+          return [omission.id.forHuman, omission];
         }),
       ).values(),
     ];

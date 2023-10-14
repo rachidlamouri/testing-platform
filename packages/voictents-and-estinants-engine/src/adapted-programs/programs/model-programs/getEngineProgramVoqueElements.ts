@@ -32,8 +32,8 @@ export const getEngineProgramVoqueElements = buildProgrammedTransform({
   })
   .andFromItemTuple2<EngineVoque2Voque, [OdeshinZorn]>({
     collectionId: ENGINE_VOQUE_2_GEPP,
-    getRightKeyTuple: (relationship) => [relationship.item.voqueLocator.zorn],
-    getRightKey: (engineVoque) => engineVoque.item.locator.zorn,
+    getRightKeyTuple: (relationship) => [relationship.item.voqueLocator.id],
+    getRightKey: (engineVoque) => engineVoque.item.locator.id,
   })
   .toItem2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
