@@ -71,7 +71,10 @@ export const { BoundaryFactInstance } = buildNamedConstructorFunction({
 
 export const BOUNDARY_FACT_COLLECTION_ID = 'boundary-fact';
 
-type BoundaryFactGepp = typeof BOUNDARY_FACT_COLLECTION_ID;
+type BoundaryFactCollectionId = typeof BOUNDARY_FACT_COLLECTION_ID;
 
 export type BoundaryFactStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<BoundaryFactGepp, BoundaryFact>;
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    BoundaryFactCollectionId,
+    BoundaryFact
+  >;

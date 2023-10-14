@@ -7,17 +7,18 @@ import {
   ReportingProgrammedTransformLocator,
 } from '../../../programmable-units/error/programError';
 import {
-  PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
-  PartitionedBoundaryListTrieVoque,
+  PARTITIONED_BOUNDARY_LIST_TRIE_COLLECTION_ID,
+  PartitionedBoundaryListTrieStreamMetatype,
 } from './partitionedBoundaryListTrie';
 
-const ESTINANT_NAME = 'assertNoBoundaryOverlap' as const;
-type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
+const PROGRAMMED_TRANSFORM_NAME = 'assertNoBoundaryOverlap' as const;
+type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
+type ReportingLocator =
+  ReportingProgrammedTransformLocator<ProgrammedTransformName>;
 const reporterLocator: ReportingLocator = {
   typeName:
     ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
   filePath: __filename,
 };
 
@@ -26,10 +27,10 @@ const reporterLocator: ReportingLocator = {
  * another boundary
  */
 export const assertNoBoundaryOverlap = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
-  .fromItem2<PartitionedBoundaryListTrieVoque>({
-    collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+  .fromItem2<PartitionedBoundaryListTrieStreamMetatype>({
+    collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,

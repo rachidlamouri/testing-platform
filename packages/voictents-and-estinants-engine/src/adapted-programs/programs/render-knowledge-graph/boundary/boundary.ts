@@ -8,17 +8,17 @@ import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify'
 import { Directory } from '../../../programmable-units/file/directory';
 import { BoundaryTypeName } from './boundaryTypeName';
 
-const BOUNDARY_ZORN_TEMPLATE = [
+const BOUNDARY_ID_TEMPLATE = [
   'typeName',
   'normalizedDisplayName',
 ] as const satisfies GenericComplexIdTemplate;
-type BoundaryZornTemplate = typeof BOUNDARY_ZORN_TEMPLATE;
-type BoundaryZornInput = {
+type BoundaryIdTemplate = typeof BOUNDARY_ID_TEMPLATE;
+type BoundaryIdInput = {
   typeName: BoundaryTypeName;
   displayName: string;
 };
-export class BoundaryId extends ComplexId<BoundaryZornTemplate> {
-  constructor({ typeName, displayName }: BoundaryZornInput) {
+export class BoundaryId extends ComplexId<BoundaryIdTemplate> {
+  constructor({ typeName, displayName }: BoundaryIdInput) {
     const normalizedDisplayName = displayName.replaceAll(/(:|\s+),'-'/g, '');
     super({
       typeName,
@@ -26,8 +26,8 @@ export class BoundaryId extends ComplexId<BoundaryZornTemplate> {
     });
   }
 
-  get rawTemplate(): BoundaryZornTemplate {
-    return BOUNDARY_ZORN_TEMPLATE;
+  get rawTemplate(): BoundaryIdTemplate {
+    return BOUNDARY_ID_TEMPLATE;
   }
 }
 
@@ -84,7 +84,7 @@ export const { BoundaryInstance } = buildNamedConstructorFunction({
 
 export const BOUNDARY_COLLECTION_ID = 'boundary';
 
-type BoundaryGepp = typeof BOUNDARY_COLLECTION_ID;
+type BoundaryCollectionId = typeof BOUNDARY_COLLECTION_ID;
 
 export type BoundaryStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<BoundaryGepp, Boundary>;
+  InMemoryIdentifiableItem2ListStreamMetatype<BoundaryCollectionId, Boundary>;

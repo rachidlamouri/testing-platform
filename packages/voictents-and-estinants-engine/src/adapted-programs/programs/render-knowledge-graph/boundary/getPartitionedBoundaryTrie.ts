@@ -1,8 +1,8 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { hasOneElement } from '../../../../package-agnostic-utilities/array/hasOneElement';
 import {
-  PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
-  PartitionedBoundaryListTrieVoque,
+  PARTITIONED_BOUNDARY_LIST_TRIE_COLLECTION_ID,
+  PartitionedBoundaryListTrieStreamMetatype,
 } from './partitionedBoundaryListTrie';
 import {
   PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID,
@@ -18,8 +18,8 @@ import {
 export const getPartitionedBoundaryTrie = buildProgrammedTransform({
   name: 'getPartitionedBoundaryTrie',
 })
-  .fromItem2<PartitionedBoundaryListTrieVoque>({
-    collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+  .fromItem2<PartitionedBoundaryListTrieStreamMetatype>({
+    collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_COLLECTION_ID,
   })
   .toItem2<PartitionedBoundaryTrieStreamMetatype>({
     collectionId: PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID,

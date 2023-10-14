@@ -7,8 +7,8 @@ import {
 } from '../../../layer-agnostic-utilities/assertion/fileExistenceAsserterInput';
 import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
 import {
-  ENGINE_PROGRAM_LOCATOR_3_GEPP,
-  EngineProgramLocator3Voque,
+  ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
+  EngineProgramLocator3StreamMetatype,
 } from '../../programmable-units/engine-program/engineProgramLocator3';
 import {
   EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP,
@@ -31,8 +31,8 @@ export const getExpectedProgramTestFileConfiguration = buildProgrammedTransform(
     name: ESTINANT_NAME,
   },
 )
-  .fromItem2<EngineProgramLocator3Voque>({
-    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+  .fromItem2<EngineProgramLocator3StreamMetatype>({
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
   .toItem2<FileExistenceAsserterInputStreamMetatype>({
     collectionId: FILE_EXISTENCE_ASSERTER_INPUT_COLLECTION_ID,

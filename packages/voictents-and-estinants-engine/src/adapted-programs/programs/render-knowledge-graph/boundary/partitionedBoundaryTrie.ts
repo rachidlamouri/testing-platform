@@ -10,11 +10,11 @@ export class PartitionedBoundaryTrie extends Trie<PartitionedBoundary | null> {}
 export const PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID =
   'partitioned-boundary-trie';
 
-type PartitionedBoundaryTrieGepp =
+type PartitionedBoundaryTrieCollectionId =
   typeof PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID;
 
 export type PartitionedBoundaryTrieStreamMetatype =
   StandardInMemoryStreamMetatype<
-    PartitionedBoundaryTrieGepp,
+    PartitionedBoundaryTrieCollectionId,
     PartitionedBoundaryTrie
   >;

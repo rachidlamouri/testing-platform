@@ -65,11 +65,12 @@ export const { EngineProgramLocator3Instance } =
     },
   });
 
-export const ENGINE_PROGRAM_LOCATOR_3_GEPP = 'engine-program-locator-3';
+export const ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID =
+  'engine-program-locator-3';
 
-type EngineProgramLocator3Gepp = typeof ENGINE_PROGRAM_LOCATOR_3_GEPP;
+type EngineProgramLocator3Gepp = typeof ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID;
 
-export type EngineProgramLocator3Voque =
+export type EngineProgramLocator3StreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     EngineProgramLocator3Gepp,
     EngineProgramLocator3

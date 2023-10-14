@@ -9,8 +9,8 @@ import {
   ReportingProgrammedTransformLocator,
 } from '../../programmable-units/error/programError';
 import {
-  ENGINE_PROGRAM_LOCATOR_3_GEPP,
-  EngineProgramLocator3Voque,
+  ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
+  EngineProgramLocator3StreamMetatype,
 } from '../../programmable-units/engine-program/engineProgramLocator3';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
@@ -35,8 +35,8 @@ const reporterLocator: ReportingLocator = {
 export const assertCiModelHasAllPrograms = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromCollection2<EngineProgramLocator3Voque>({
-    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+  .fromCollection2<EngineProgramLocator3StreamMetatype>({
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
   .andFromItemTuple2<CiModelVoque, [IdentifiableItemId]>({
     // TODO: make a better pattern for singletons

@@ -1,8 +1,8 @@
 import { posix } from 'path';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  ENGINE_PROGRAM_LOCATOR_3_GEPP,
-  EngineProgramLocator3Voque,
+  ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
+  EngineProgramLocator3StreamMetatype,
 } from '../engine-program/engineProgramLocator3';
 import { LintAssertionZorn } from '../linting/lintAssertion';
 import {
@@ -31,8 +31,8 @@ export const exemptEngineProgramFromCanonicalComment = buildProgrammedTransform(
     name: ESTINANT_NAME,
   },
 )
-  .fromItem2<EngineProgramLocator3Voque>({
-    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+  .fromItem2<EngineProgramLocator3StreamMetatype>({
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
   .toItem2<LintAssertionOmissionVoque>({
     collectionId: LINT_ASSERTION_OMISSION_GEPP,

@@ -10,8 +10,8 @@ import {
   BoundaryStreamMetatype,
 } from './boundary';
 import {
-  BOUNDARY_CONFIGURATION_GEPP,
-  BoundaryConfigurationVoque,
+  BOUNDARY_CONFIGURATION_COLLECTION_ID,
+  BoundaryConfigurationStreamMetatype,
 } from './boundaryConfiguration';
 
 /**
@@ -20,8 +20,8 @@ import {
 export const getBoundaryFromConfiguration = buildProgrammedTransform({
   name: 'getBoundaryFromConfiguration',
 })
-  .fromItem2<BoundaryConfigurationVoque>({
-    collectionId: BOUNDARY_CONFIGURATION_GEPP,
+  .fromItem2<BoundaryConfigurationStreamMetatype>({
+    collectionId: BOUNDARY_CONFIGURATION_COLLECTION_ID,
   })
   .andFromItemTuple2<DirectoryStreamMetatype, [IdentifiableItemId]>({
     collectionId: DIRECTORY_COLLECTION_ID,

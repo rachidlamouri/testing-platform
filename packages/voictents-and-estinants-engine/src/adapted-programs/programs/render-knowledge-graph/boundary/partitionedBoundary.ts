@@ -52,10 +52,11 @@ export const { PartitionedBoundaryInstance } = buildNamedConstructorFunction({
 
 export const PARTITIONED_BOUNDARY_COLLECTION_ID = 'partitioned-boundary';
 
-type PartitionedBoundaryGepp = typeof PARTITIONED_BOUNDARY_COLLECTION_ID;
+type PartitionedBoundaryCollectionId =
+  typeof PARTITIONED_BOUNDARY_COLLECTION_ID;
 
 export type PartitionedBoundaryStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    PartitionedBoundaryGepp,
+    PartitionedBoundaryCollectionId,
     PartitionedBoundary
   >;

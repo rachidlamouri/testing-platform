@@ -10,8 +10,8 @@ import {
   EngineProgram3Voque,
 } from './engineProgram3';
 import {
-  ENGINE_PROGRAM_LOCATOR_3_GEPP,
-  EngineProgramLocator3Voque,
+  ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
+  EngineProgramLocator3StreamMetatype,
 } from './engineProgramLocator3';
 import {
   PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
@@ -40,8 +40,8 @@ import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifia
 export const getEngineProgram3 = buildProgrammedTransform({
   name: 'getEngineProgram3',
 })
-  .fromItem2<EngineProgramLocator3Voque>({
-    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+  .fromItem2<EngineProgramLocator3StreamMetatype>({
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
   .andFromItemTuple2<EngineEstinant3Voque, Tuple<IdentifiableItemId>>({
     collectionId: ENGINE_ESTINANT_3_GEPP,

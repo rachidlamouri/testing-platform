@@ -53,10 +53,10 @@ import {
   ReportingProgrammedTransformLocator,
 } from '../error/programError';
 import {
-  ENGINE_PROGRAM_LOCATOR_3_GEPP,
+  ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   EngineProgramLocator3,
   EngineProgramLocator3Instance,
-  EngineProgramLocator3Voque,
+  EngineProgramLocator3StreamMetatype,
 } from './engineProgramLocator3';
 import {
   PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
@@ -714,8 +714,8 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .toItemTuple2<EngineProgramLocator3Voque>({
-    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+  .toItemTuple2<EngineProgramLocator3StreamMetatype>({
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
   .toItemTuple2<ProgramEstinantRelationshipVoque>({
     collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
@@ -748,7 +748,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
               context: null,
             } satisfies ReportedProgramError<ReportingLocator>,
           ],
-          [ENGINE_PROGRAM_LOCATOR_3_GEPP]: [],
+          [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [],
           [PROGRAM_ESTINANT_RELATIONSHIP_GEPP]: [],
         };
       }
@@ -777,7 +777,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
                 context: null,
               } satisfies ReportedProgramError<ReportingLocator>,
             ],
-            [ENGINE_PROGRAM_LOCATOR_3_GEPP]: [],
+            [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [],
             [PROGRAM_ESTINANT_RELATIONSHIP_GEPP]: [],
           };
         case EngineFunctionConfigurationTypeName.Core2: {
@@ -792,7 +792,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
 
           return {
             [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
-            [ENGINE_PROGRAM_LOCATOR_3_GEPP]: [engineProgramLocator],
+            [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [engineProgramLocator],
             [PROGRAM_ESTINANT_RELATIONSHIP_GEPP]:
               engineProgramLocator.estinantRelationshipList,
           };
@@ -809,7 +809,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
 
           return {
             [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
-            [ENGINE_PROGRAM_LOCATOR_3_GEPP]: [engineProgramLocator],
+            [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [engineProgramLocator],
             [PROGRAM_ESTINANT_RELATIONSHIP_GEPP]:
               engineProgramLocator.estinantRelationshipList,
           };

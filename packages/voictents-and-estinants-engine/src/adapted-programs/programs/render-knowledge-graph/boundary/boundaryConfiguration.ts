@@ -56,13 +56,14 @@ const { BoundaryConfigurationInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const BOUNDARY_CONFIGURATION_GEPP = 'boundary-configuration';
+export const BOUNDARY_CONFIGURATION_COLLECTION_ID = 'boundary-configuration';
 
-type BoundaryConfigurationGepp = typeof BOUNDARY_CONFIGURATION_GEPP;
+type BoundaryConfigurationCollectionId =
+  typeof BOUNDARY_CONFIGURATION_COLLECTION_ID;
 
-export type BoundaryConfigurationVoque =
+export type BoundaryConfigurationStreamMetatype =
   InMemoryIdentifiableItem3StreamMetatype<
-    BoundaryConfigurationGepp,
+    BoundaryConfigurationCollectionId,
     BoundaryConfiguration
   >;
 

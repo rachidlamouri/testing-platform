@@ -29,8 +29,8 @@ import { getTypeScriptFileImportList } from '../../programmable-units/type-scrip
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getAdaptedProgramBoundary } from './boundary/getAdaptedProgramBoundary';
 import {
-  BOUNDARY_CONFIGURATION_GEPP,
-  BoundaryConfigurationVoque,
+  BOUNDARY_CONFIGURATION_COLLECTION_ID,
+  BoundaryConfigurationStreamMetatype,
   BOUNDARY_CONFIGURATION_LIST,
 } from './boundary/boundaryConfiguration';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
@@ -44,8 +44,8 @@ import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
 import { InMemoryOdeshin3Voictent } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { getCommonBoundaryRoot } from './common-boundary-root/getCommonBoundaryRoot';
 import {
-  PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
-  PartitionedBoundaryListTrieVoque,
+  PARTITIONED_BOUNDARY_LIST_TRIE_COLLECTION_ID,
+  PartitionedBoundaryListTrieStreamMetatype,
 } from './boundary/partitionedBoundaryListTrie';
 import { getPartitionedBoundaryListTrie } from './boundary/getPartitionedBoundaryListTrie';
 import {
@@ -134,8 +134,8 @@ runEngine({
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
-    new InMemoryOdeshin3Voictent<BoundaryConfigurationVoque>({
-      collectionId: BOUNDARY_CONFIGURATION_GEPP,
+    new InMemoryOdeshin3Voictent<BoundaryConfigurationStreamMetatype>({
+      collectionId: BOUNDARY_CONFIGURATION_COLLECTION_ID,
       initialItemEggTuple: BOUNDARY_CONFIGURATION_LIST,
     }),
     new InMemoryOdeshin3Voictent<LayerConfigurationStreamMetatype>({
@@ -159,8 +159,8 @@ runEngine({
       collectionId: PARTITION_FACT_COLLECTION_ID,
       initialItemEggTuple: [],
     }),
-    new InMemoryCollection<PartitionedBoundaryListTrieVoque>({
-      collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
+    new InMemoryCollection<PartitionedBoundaryListTrieStreamMetatype>({
+      collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_COLLECTION_ID,
       initialItemEggTuple: [],
     }),
     new InMemoryCollection<PartitionedBoundaryTrieStreamMetatype>({

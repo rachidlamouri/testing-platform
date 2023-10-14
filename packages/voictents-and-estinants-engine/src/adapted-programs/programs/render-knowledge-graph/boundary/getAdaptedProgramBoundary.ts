@@ -1,8 +1,8 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { IdentifiableItemId } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
-  ENGINE_PROGRAM_LOCATOR_3_GEPP,
-  EngineProgramLocator3Voque,
+  ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
+  EngineProgramLocator3StreamMetatype,
 } from '../../../programmable-units/engine-program/engineProgramLocator3';
 import {
   DIRECTORY_COLLECTION_ID,
@@ -21,8 +21,8 @@ import { BoundaryTypeName } from './boundaryTypeName';
 export const getAdaptedProgramBoundary = buildProgrammedTransform({
   name: 'getAdaptedProgramBoundary',
 })
-  .fromItem2<EngineProgramLocator3Voque>({
-    collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
+  .fromItem2<EngineProgramLocator3StreamMetatype>({
+    collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
   .andFromItemTuple2<DirectoryStreamMetatype, [IdentifiableItemId]>({
     collectionId: DIRECTORY_COLLECTION_ID,
