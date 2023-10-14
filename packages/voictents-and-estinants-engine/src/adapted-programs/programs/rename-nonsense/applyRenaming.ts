@@ -20,6 +20,7 @@ import {
   RenameConfigurationVoque,
 } from './renameConfiguration';
 import { progressLog } from './progressLog';
+import { formatTable } from '../../../package-agnostic-utilities/table-formatter/formatTable';
 
 const COMMON_ROOT = 'packages/voictents-and-estinants-engine/src' as const;
 
@@ -136,7 +137,35 @@ export const applyRenaming = buildProgrammedTransform({
         return;
       }
 
-      log(`Rename groups remaining: ${groupList.length}`);
+      const countOperations = (groupToCount: ConfigurationGroup): number => {
+        const count =
+          (groupToCount.directoryChange !== null ? 1 : 0) +
+          groupToCount.fileNameChangeList.length +
+          groupToCount.identifierChangeList.length;
+
+        return count;
+      };
+
+      const groupsRemaining = groupList.length;
+
+      let totalOperations = 0;
+      groupList.forEach((nextGroup) => {
+        totalOperations += countOperations(nextGroup);
+      });
+
+      const currentGroupOperationsRemaining = countOperations(group);
+
+      const table = formatTable([
+        ['Name', 'Count'],
+        ['Groups Remaining', `${groupsRemaining}`],
+        ['Total operations remaining', `${totalOperations}`],
+        [
+          'Current group operations remaining',
+          `${currentGroupOperationsRemaining}`,
+        ],
+      ]);
+      log();
+      log(table);
 
       const {
         directory,
