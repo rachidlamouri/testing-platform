@@ -3,7 +3,7 @@ import { ImportConfiguration, ScaffoldeeFileMetadata } from './types';
 const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/adapter/engine/digikikify.ts',
+      'packages/voictents-and-estinants-engine/src/adapter/engine/runEngine.ts',
     identifierList: ['digikikify', 'buildVoictentByGepp'],
   },
   {

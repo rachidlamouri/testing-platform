@@ -2,9 +2,9 @@ import fs from 'fs';
 import { posix } from 'path';
 import chalk from 'chalk';
 import {
-  buildVoictentByGepp,
-  digikikify,
-} from '../../../adapter/engine/digikikify';
+  buildCollectionByCollectionId,
+  runEngine,
+} from '../../../adapter/engine/runEngine';
 import {
   SCAFFOLD_CONFIGURATION_GEPP,
   ScaffoldConfiguration,
@@ -103,8 +103,8 @@ if (isDeprecatedFileTypeName(scriptInput.typeName)) {
  *
  * @canonicalComment
  */
-digikikify({
-  explicitVoictentTuple: [
+runEngine({
+  explicitCollectionTuple: [
     new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
       collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -119,9 +119,11 @@ digikikify({
       initialItemEggTuple: [scriptInput],
     }),
   ] as const,
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
-  uninferableVoictentByGepp: buildVoictentByGepp([] as const),
-  estinantTuple: [enumerateFileSystemObjects, scaffoldFile] as const,
+  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  uninferableCollectionByCollectionId: buildCollectionByCollectionId(
+    [] as const,
+  ),
+  programmedTransformTuple: [enumerateFileSystemObjects, scaffoldFile] as const,
   programFileCache: new ProgramFileCache({
     namespace: 'assembleScaffoldedFile',
   }),

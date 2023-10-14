@@ -1,8 +1,8 @@
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
-  buildVoictentByGepp,
-  digikikify,
-} from '../../../adapter/engine/digikikify';
+  buildCollectionByCollectionId,
+  runEngine,
+} from '../../../adapter/engine/runEngine';
 import {
   EngineFunctionConfigurationVoque,
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
@@ -56,8 +56,8 @@ const programFileCache = new ProgramFileCache({
  *
  * @canonicalComment
  */
-digikikify({
-  explicitVoictentTuple: [
+runEngine({
+  explicitCollectionTuple: [
     new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
       collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -77,7 +77,7 @@ digikikify({
       initialItemEggTuple: [CI_MODEL],
     }),
   ] as const,
-  uninferableVoictentByGepp: buildVoictentByGepp([
+  uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new ProgramErrorVoictent({
       programFileCache,
     }),
@@ -86,8 +86,8 @@ digikikify({
       initialItemEggTuple: [NULL_OMISSION],
     }),
   ] as const),
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
-  estinantTuple: [
+  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
 

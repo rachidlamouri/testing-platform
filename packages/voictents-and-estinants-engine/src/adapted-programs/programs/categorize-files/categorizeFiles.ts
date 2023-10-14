@@ -1,7 +1,7 @@
 import {
-  buildVoictentByGepp,
-  digikikify,
-} from '../../../adapter/engine/digikikify';
+  buildCollectionByCollectionId,
+  runEngine,
+} from '../../../adapter/engine/runEngine';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   FileSystemObjectEnumeratorConfigurationVoque,
@@ -31,8 +31,8 @@ const programFileCache = new ProgramFileCache({
  *
  * @todo rename to testCategorizeFiles and add this to ci.sh
  */
-digikikify({
-  explicitVoictentTuple: [
+runEngine({
+  explicitCollectionTuple: [
     new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
       collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -40,13 +40,13 @@ digikikify({
       ],
     }),
   ] as const,
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
-  uninferableVoictentByGepp: buildVoictentByGepp([
+  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new ProgramErrorVoictent({
       programFileCache,
     }),
   ] as const),
-  estinantTuple: [
+  programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
 
@@ -56,7 +56,7 @@ digikikify({
     signalError,
   ] as const,
   errorCollectionId: PROGRAM_ERROR_GEPP,
-  serializeeGeppList: [
+  serializeeCollectionIdList: [
     // keep this as a multi-line list for easier debugging
     FILE_GEPP,
   ],

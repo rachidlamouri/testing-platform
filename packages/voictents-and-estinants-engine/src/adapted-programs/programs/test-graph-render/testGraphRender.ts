@@ -1,7 +1,7 @@
 import {
-  buildVoictentByGepp,
-  digikikify,
-} from '../../../adapter/engine/digikikify';
+  buildCollectionByCollectionId,
+  runEngine,
+} from '../../../adapter/engine/runEngine';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
@@ -37,8 +37,8 @@ const programFileCache = new ProgramFileCache({
  *
  * @canonicalComment
  */
-digikikify({
-  explicitVoictentTuple: [
+runEngine({
+  explicitCollectionTuple: [
     new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
       collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -186,13 +186,13 @@ digikikify({
       },
     ),
   ] as const,
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
-  uninferableVoictentByGepp: buildVoictentByGepp([
+  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new OutputFileVoictent({
       programFileCache,
     }),
   ] as const),
-  estinantTuple: [
+  programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
 
@@ -202,6 +202,6 @@ digikikify({
 
     captureOutputFileDigestList,
   ] as const,
-  serializeeGeppList: [SANITY_SNAPSHOT_GEPP],
+  serializeeCollectionIdList: [SANITY_SNAPSHOT_GEPP],
   programFileCache,
 });

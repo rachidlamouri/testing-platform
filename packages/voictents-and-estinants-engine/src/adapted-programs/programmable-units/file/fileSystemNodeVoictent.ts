@@ -40,7 +40,7 @@ export type FileSystemNodeVoque<
   FileVoictentPelie<THubblepup>
 >;
 
-export type GenericFileSystemNodeVoque = FileSystemNodeVoque<
+export type GenericFileSystemNodeStreamMetatype = FileSystemNodeVoque<
   CollectionId,
   FileSystemNode
 >;
@@ -51,10 +51,15 @@ export type GenericFileSystemNodeVoque = FileSystemNodeVoque<
  * datastructures as the collection streamable
  *
  * @readableName FileSystemNodeCollection
+ *
+ * @canonicalDeclaration
  */
-export class FileSystemNodeVoictent<
-  TVoque extends GenericFileSystemNodeVoque,
-> extends BaseInMemoryOdeshin2Voictent<GenericFileSystemNodeVoque, TVoque> {
+export class FileSystemNodeCollection<
+  TVoque extends GenericFileSystemNodeStreamMetatype,
+> extends BaseInMemoryOdeshin2Voictent<
+  GenericFileSystemNodeStreamMetatype,
+  TVoque
+> {
   private voictentPelie: TVoque['collectionStreamable'] = {
     byZorn: new Map(),
     byNodePath: new Map(),
@@ -74,7 +79,7 @@ export class FileSystemNodeVoictent<
   }
 
   protected dereferenceItem(
-    lanbe: ItemStream2<GenericFileSystemNodeVoque, TVoque>,
+    lanbe: ItemStream2<GenericFileSystemNodeStreamMetatype, TVoque>,
   ): TVoque['indexedItemStreamable'] {
     const listIndex = this.getStreamIndex(lanbe);
 

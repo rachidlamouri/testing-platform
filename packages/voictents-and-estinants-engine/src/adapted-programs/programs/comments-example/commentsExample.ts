@@ -1,8 +1,8 @@
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
-  buildVoictentByGepp,
-  digikikify,
-} from '../../../adapter/engine/digikikify';
+  buildCollectionByCollectionId,
+  runEngine,
+} from '../../../adapter/engine/runEngine';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
@@ -27,8 +27,8 @@ const programFileCache = new ProgramFileCache({
  *
  * @canonicalComment
  */
-digikikify({
-  explicitVoictentTuple: [
+runEngine({
+  explicitCollectionTuple: [
     new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
       collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -36,13 +36,13 @@ digikikify({
       ],
     }),
   ] as const,
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
-  uninferableVoictentByGepp: buildVoictentByGepp([
+  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new ProgramErrorVoictent({
       programFileCache,
     }),
   ] as const),
-  estinantTuple: [
+  programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
 

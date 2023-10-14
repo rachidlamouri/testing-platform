@@ -84,12 +84,12 @@ type ProgramErrorPelie<
 
 export const PROGRAM_ERROR_GEPP = 'program-error';
 
-export type ProgramErrorGepp = typeof PROGRAM_ERROR_GEPP;
+export type ProgramErrorCollectionId = typeof PROGRAM_ERROR_GEPP;
 
 type ProgramErrorVoque<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > = StreamMetatype<
-  ProgramErrorGepp,
+  ProgramErrorCollectionId,
   ProgramErrorPelue<TReporterLocator>,
   ProgramErrorPelie<TReporterLocator>,
   {

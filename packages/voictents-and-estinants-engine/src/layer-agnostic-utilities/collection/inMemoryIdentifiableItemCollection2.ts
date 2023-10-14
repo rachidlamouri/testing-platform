@@ -142,16 +142,16 @@ export type InMemoryIdentifiableItem2ListStreamMetatype<
   TOdeshin extends GenericIdentifiableItem,
 > = InMemoryIdentifiableItem2StreamMetatype<TGepp, TOdeshin, TOdeshin[]>;
 
-export type GenericInMemoryOdeshin2ListVoque =
+export type GenericInMemoryIdentifiableItem2ListStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     CollectionId,
     GenericIdentifiableItem
   >;
 
 export class InMemoryIdentifiableItem2ListCollection<
-  TVoque extends GenericInMemoryOdeshin2ListVoque,
+  TVoque extends GenericInMemoryIdentifiableItem2ListStreamMetatype,
 > extends BaseInMemoryOdeshin2Voictent<
-  GenericInMemoryOdeshin2ListVoque,
+  GenericInMemoryIdentifiableItem2ListStreamMetatype,
   TVoque
 > {
   protected dereferenceCollection(): TVoque['collectionStreamable'] {

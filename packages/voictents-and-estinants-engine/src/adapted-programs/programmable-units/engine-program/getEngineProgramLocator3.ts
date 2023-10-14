@@ -69,7 +69,7 @@ import {
 } from './engineVoqueLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
 import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
-import { buildVoictentByGepp } from '../../../adapter/engine/digikikify';
+import { buildCollectionByCollectionId } from '../../../adapter/engine/runEngine';
 import { isArrayExpression } from '../../../package-agnostic-utilities/type-script-ast/isArrayExpression';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
@@ -497,7 +497,7 @@ const getAdaptedEngineProgramLocator = ({
   // TODO: rename these variables or move this code to its own function (I prefer the latter), because these are way too vague
   const keyName =
     engineFunctionConfiguration.uninferableVoictentByGeppKeyIdentifierName;
-  const functionName = buildVoictentByGepp.name;
+  const functionName = buildCollectionByCollectionId.name;
 
   const uninferableVoictentByGeppProperty =
     engineCallExpressionPropertyList.find((property) => {

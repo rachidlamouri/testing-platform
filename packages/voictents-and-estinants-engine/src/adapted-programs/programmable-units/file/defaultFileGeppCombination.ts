@@ -3,7 +3,7 @@ import {
   CollectionId,
   CollectionIdCombination,
 } from '../../../core/types/collection/collectionId';
-import { buildGeppCombination } from '../../../adapter/engine/digikikify';
+import { buildCollectionIdCombination } from '../../../adapter/engine/runEngine';
 import { BASH_FILE_GEPP } from '../bash-file/bashFile';
 import { HTML_FILE_GEPP } from '../html-file/htmlFile';
 import { YAML_FILE_GEPP } from '../yaml-file/yamlFile';
@@ -55,4 +55,4 @@ type DefaultFileGepp = ValueOf<
  * @readableName defaultFileCollectionIdCombination
  */
 export const defaultFileGeppCombination: CollectionIdCombination<DefaultFileGepp> =
-  buildGeppCombination(defaultFileGeppList);
+  buildCollectionIdCombination(defaultFileGeppList);

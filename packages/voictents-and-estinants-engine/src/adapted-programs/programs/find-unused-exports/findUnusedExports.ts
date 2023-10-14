@@ -1,8 +1,8 @@
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
-  buildVoictentByGepp,
-  digikikify,
-} from '../../../adapter/engine/digikikify';
+  buildCollectionByCollectionId,
+  runEngine,
+} from '../../../adapter/engine/runEngine';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
@@ -44,8 +44,8 @@ const programFileCache = new ProgramFileCache({
  *
  * @todo check if we still need to lint for unused files or if all current rules will catch that
  */
-digikikify({
-  explicitVoictentTuple: [
+runEngine({
+  explicitCollectionTuple: [
     new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
       collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -57,13 +57,13 @@ digikikify({
       initialItemEggTuple: omittedUnusedExportList,
     }),
   ] as const,
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
-  uninferableVoictentByGepp: buildVoictentByGepp([
+  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new ProgramErrorVoictent({
       programFileCache,
     }),
   ] as const),
-  estinantTuple: [
+  programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
 
@@ -83,7 +83,7 @@ digikikify({
     signalError,
   ] as const,
   errorCollectionId: PROGRAM_ERROR_GEPP,
-  serializeeGeppList: [
+  serializeeCollectionIdList: [
     // note: keep this is a multiline list for easier debugging
   ],
   programFileCache,

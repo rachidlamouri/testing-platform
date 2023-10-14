@@ -48,7 +48,7 @@ export const filterEngineProgramFile = buildProgrammedTransform({
       // TODO: this code is brittle. Tie it back to the source file if possible
       if (
         typeScriptFile.filePath.serialized ===
-        'packages/voictents-and-estinants-engine/src/adapter/engine/digikikify.ts'
+        'packages/voictents-and-estinants-engine/src/adapter/engine/runEngine.ts'
       ) {
         return [];
       }

@@ -1,8 +1,8 @@
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
-  buildVoictentByGepp,
-  digikikify,
-} from '../../../adapter/engine/digikikify';
+  buildCollectionByCollectionId,
+  runEngine,
+} from '../../../adapter/engine/runEngine';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
@@ -30,8 +30,8 @@ const programFileCache = new ProgramFileCache({
  *
  * @canonicalComment
  */
-digikikify({
-  explicitVoictentTuple: [
+runEngine({
+  explicitCollectionTuple: [
     new InMemoryCollection<AppRendererDelayerVoque>({
       collectionId: APP_RENDERER_DELAYER_GEPP,
       initialItemEggTuple: [
@@ -41,8 +41,8 @@ digikikify({
       ],
     }),
   ] as const,
-  fileSystemNodeGeppCombination: {},
-  uninferableVoictentByGepp: buildVoictentByGepp([
+  fileSystemNodeCollectionIdCombination: {},
+  uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new ProgramErrorVoictent({
       programFileCache,
     }),
@@ -51,7 +51,7 @@ digikikify({
     }),
   ] as const),
   errorCollectionId: PROGRAM_ERROR_GEPP,
-  estinantTuple: [
+  programmedTransformTuple: [
     // keep this as a multi-line list for easier debugging
     renderApp,
 
@@ -60,7 +60,7 @@ digikikify({
     signalError,
   ] as const,
   programFileCache,
-  serializeeGeppList: [
+  serializeeCollectionIdList: [
     // keep this as a multi-line list for easier debugging
   ],
 });

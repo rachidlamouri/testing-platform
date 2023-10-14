@@ -28,11 +28,11 @@ export type CoreEngineFunction2Configuration = {
 
 export type AdaptedEngineFunctionConfiguration = {
   typeName: EngineFunctionConfigurationTypeName.Adapted;
-  filePath: 'packages/voictents-and-estinants-engine/src/adapter/engine/digikikify.ts';
-  exportedIdentifier: 'digikikify';
-  estinantListKeyIdentifierName: 'estinantTuple';
-  explicitVoictentTupleKeyIdentifierName: 'explicitVoictentTuple';
-  uninferableVoictentByGeppKeyIdentifierName: 'uninferableVoictentByGepp';
+  filePath: 'packages/voictents-and-estinants-engine/src/adapter/engine/runEngine.ts';
+  exportedIdentifier: 'runEngine';
+  estinantListKeyIdentifierName: 'programmedTransformTuple';
+  explicitVoictentTupleKeyIdentifierName: 'explicitCollectionTuple';
+  uninferableVoictentByGeppKeyIdentifierName: 'uninferableCollectionByCollectionId';
 };
 
 /**
@@ -79,9 +79,10 @@ export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfigu
   {
     typeName: EngineFunctionConfigurationTypeName.Adapted,
     filePath:
-      'packages/voictents-and-estinants-engine/src/adapter/engine/digikikify.ts',
-    exportedIdentifier: 'digikikify',
-    estinantListKeyIdentifierName: 'estinantTuple',
-    explicitVoictentTupleKeyIdentifierName: 'explicitVoictentTuple',
-    uninferableVoictentByGeppKeyIdentifierName: 'uninferableVoictentByGepp',
+      'packages/voictents-and-estinants-engine/src/adapter/engine/runEngine.ts',
+    exportedIdentifier: 'runEngine',
+    estinantListKeyIdentifierName: 'programmedTransformTuple',
+    explicitVoictentTupleKeyIdentifierName: 'explicitCollectionTuple',
+    uninferableVoictentByGeppKeyIdentifierName:
+      'uninferableCollectionByCollectionId',
   };

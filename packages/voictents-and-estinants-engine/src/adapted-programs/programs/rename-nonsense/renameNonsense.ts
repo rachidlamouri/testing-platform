@@ -1,7 +1,7 @@
 import {
-  digikikify,
-  buildVoictentByGepp,
-} from '../../../adapter/engine/digikikify';
+  runEngine,
+  buildCollectionByCollectionId,
+} from '../../../adapter/engine/runEngine';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
@@ -53,8 +53,8 @@ const programFileCache = new ProgramFileCache({
  *
  * @canonicalComment
  */
-digikikify({
-  explicitVoictentTuple: [
+runEngine({
+  explicitCollectionTuple: [
     new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
       collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -70,8 +70,8 @@ digikikify({
       ],
     }),
   ] as const,
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
-  uninferableVoictentByGepp: buildVoictentByGepp([
+  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new ProgramErrorVoictent({
       programFileCache,
     }),
@@ -84,7 +84,7 @@ digikikify({
     }),
   ] as const),
   errorCollectionId: PROGRAM_ERROR_GEPP,
-  estinantTuple: [
+  programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
 
@@ -105,7 +105,7 @@ digikikify({
     reportErrorCount,
     signalError,
   ] as const,
-  serializeeGeppList: [
+  serializeeCollectionIdList: [
     // keep this as a multi-line list for easier debugging
   ],
   programFileCache,
