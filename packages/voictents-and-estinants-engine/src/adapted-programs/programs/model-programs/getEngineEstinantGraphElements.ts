@@ -14,8 +14,8 @@ import {
 import { EdgeStyle } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge';
 import { DirectedGraphEdge2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import {
-  DIRECTED_GRAPH_ELEMENT_2_GEPP,
-  DirectedGraphElement2Voque,
+  DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
+  DirectedGraphElement2StreamMetatype,
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { NodeShape } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
 import { DirectedGraphNode2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
@@ -44,8 +44,8 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
     },
     getRightKey: (engineEstinant) => engineEstinant.item.locator.id,
   })
-  .toItemTuple2<DirectedGraphElement2Voque>({
-    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+  .toItemTuple2<DirectedGraphElement2StreamMetatype>({
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   })
   .onTransform((relationship, [engineEstinant]) => {
     const { rootGraphLocator } = relationship;

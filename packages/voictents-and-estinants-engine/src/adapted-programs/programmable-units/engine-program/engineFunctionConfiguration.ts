@@ -44,16 +44,17 @@ export type EngineFunctionConfiguration =
   | CoreEngineFunction2Configuration
   | AdaptedEngineFunctionConfiguration;
 
-export const ENGINE_FUNCTION_CONFIGURATION_GEPP =
+export const ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID =
   'engine-function-configuration';
 
 type EngineFunctionConfigurationGepp =
-  typeof ENGINE_FUNCTION_CONFIGURATION_GEPP;
+  typeof ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID;
 
-export type EngineFunctionConfigurationVoque = StandardInMemoryStreamMetatype<
-  EngineFunctionConfigurationGepp,
-  EngineFunctionConfiguration
->;
+export type EngineFunctionConfigurationStreamMetatype =
+  StandardInMemoryStreamMetatype<
+    EngineFunctionConfigurationGepp,
+    EngineFunctionConfiguration
+  >;
 
 export const CORE_ENGINE_FUNCTION_CONFIGURATION: CoreEngineFunctionConfiguration =
   {

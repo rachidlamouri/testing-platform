@@ -14,8 +14,8 @@ import {
 } from '../../programmable-units/engine-program/input-output/programEstinantOutputRelationship';
 import { DirectedGraphEdge2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import {
-  DIRECTED_GRAPH_ELEMENT_2_GEPP,
-  DirectedGraphElement2Voque,
+  DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
+  DirectedGraphElement2StreamMetatype,
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 
 /**
@@ -42,8 +42,8 @@ export const getOutputEdge = buildProgrammedTransform({
     },
     getRightKey: (estinantOutput) => estinantOutput.item.id,
   })
-  .toItemTuple2<DirectedGraphElement2Voque>({
-    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+  .toItemTuple2<DirectedGraphElement2StreamMetatype>({
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   })
   .onTransform((relationship, [engineEstinant], [estinantOutput]) => {
     // TODO: make voqueLocator required

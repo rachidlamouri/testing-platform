@@ -4,8 +4,8 @@ import {
   runEngine,
 } from '../../../adapter/engine/runEngine';
 import {
-  EngineFunctionConfigurationVoque,
-  ENGINE_FUNCTION_CONFIGURATION_GEPP,
+  EngineFunctionConfigurationStreamMetatype,
+  ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   CORE_ENGINE_FUNCTION_2_CONFIGURATION,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
@@ -17,7 +17,7 @@ import { enumerateFileSystemObjects } from '../../programmable-units/file/enumer
 import {
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
-  VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+  COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
@@ -29,7 +29,7 @@ import { assertCiFileIsUpToDate } from './assertCiFileIsUpToDate';
 import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
-import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
@@ -62,12 +62,12 @@ runEngine({
       {
         collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
         initialItemEggTuple: [
-          VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+          COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
         ],
       },
     ),
-    new InMemoryCollection<EngineFunctionConfigurationVoque>({
-      collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
+    new InMemoryCollection<EngineFunctionConfigurationStreamMetatype>({
+      collectionId: ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
       initialItemEggTuple: [
         CORE_ENGINE_FUNCTION_CONFIGURATION,
         CORE_ENGINE_FUNCTION_2_CONFIGURATION,
@@ -80,7 +80,7 @@ runEngine({
     }),
   ] as const,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
-    new ProgramErrorVoictent({
+    new ProgramErrorCollection({
       programFileCache,
     }),
     new LintAssertionOmissionVoictent({

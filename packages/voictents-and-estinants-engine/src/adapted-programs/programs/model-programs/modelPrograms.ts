@@ -5,7 +5,7 @@ import {
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
-  VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+  COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
@@ -14,8 +14,8 @@ import {
   CORE_ENGINE_FUNCTION_2_CONFIGURATION,
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-  ENGINE_FUNCTION_CONFIGURATION_GEPP,
-  EngineFunctionConfigurationVoque,
+  ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
+  EngineFunctionConfigurationStreamMetatype,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
@@ -32,7 +32,7 @@ import { signalError } from '../../programmable-units/error/signalError';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_COLLECTION_ID } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
-import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileVoictent';
 import { EngineRunnerStrategy } from '../../../core/engine/runEngine';
 import { getEngineVoque2 } from '../../programmable-units/engine-program/getEngineVoque2';
@@ -79,12 +79,12 @@ runEngine({
       {
         collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
         initialItemEggTuple: [
-          VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+          COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
         ],
       },
     ),
-    new InMemoryCollection<EngineFunctionConfigurationVoque>({
-      collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
+    new InMemoryCollection<EngineFunctionConfigurationStreamMetatype>({
+      collectionId: ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
       initialItemEggTuple: [
         CORE_ENGINE_FUNCTION_CONFIGURATION,
         CORE_ENGINE_FUNCTION_2_CONFIGURATION,
@@ -102,7 +102,7 @@ runEngine({
   ] as const,
   fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
-    new ProgramErrorVoictent({
+    new ProgramErrorCollection({
       programFileCache,
     }),
     new OutputFileCollection({

@@ -11,8 +11,8 @@ import { DirectedCluster2Instance } from '../../programmable-units/graph-visuali
 import { DirectedGraph2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraph2';
 import { DirectedGraphEdge2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import {
-  DIRECTED_GRAPH_ELEMENT_2_GEPP,
-  DirectedGraphElement2Voque,
+  DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
+  DirectedGraphElement2StreamMetatype,
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { NodeShape } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
 import { DirectedGraphNode2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
@@ -34,8 +34,8 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
   .fromItem2<EngineProgram3Voque>({
     collectionId: ENGINE_PROGRAM_3_GEPP,
   })
-  .toItemTuple2<DirectedGraphElement2Voque>({
-    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+  .toItemTuple2<DirectedGraphElement2StreamMetatype>({
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   })
   .onTransform((engineProgram) => {
     const { rootGraphLocator } = engineProgram.locator;

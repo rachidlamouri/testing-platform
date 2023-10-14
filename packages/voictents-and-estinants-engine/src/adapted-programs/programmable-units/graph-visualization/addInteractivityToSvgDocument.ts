@@ -9,7 +9,10 @@ import {
   CustomDatumTypeName,
   getCustomTypedDatum,
 } from '../../../package-agnostic-utilities/typed-datum/customTypedDatum';
-import { SVG_DOCUMENT_GEPP, SvgDocumentVoque } from './svgDocument';
+import {
+  SVG_DOCUMENT_COLLECTION_ID,
+  SvgDocumentStreamMetatype,
+} from './svgDocument';
 import {
   DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,
   DirectedGraphMetadataByIdStreamMetatype,
@@ -69,8 +72,8 @@ const dataStructureToCode = (datum: unknown): string => {
 export const addInteractivityToSvgDocument = buildProgrammedTransform({
   name: 'addInteractivityToSvgDocument',
 })
-  .fromItem2<SvgDocumentVoque>({
-    collectionId: SVG_DOCUMENT_GEPP,
+  .fromItem2<SvgDocumentStreamMetatype>({
+    collectionId: SVG_DOCUMENT_COLLECTION_ID,
   })
   .andFromItemTuple2<HtmlFileVoque, [IdentifiableItemId]>({
     collectionId: HTML_FILE_GEPP,
@@ -91,7 +94,7 @@ export const addInteractivityToSvgDocument = buildProgrammedTransform({
   })
   .onTransform(
     (leftInput, [templateFile], [{ subitem: directedGraphMetadataById }]) => {
-      const svgText = leftInput.grition;
+      const svgText = leftInput.subitem;
 
       const templateText = fs.readFileSync(
         templateFile.filePath.serialized,

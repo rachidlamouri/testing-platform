@@ -116,10 +116,10 @@ export const constructDynamicMetadataFile = buildProgrammedTransform({
     collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
   })
   .onTransform(
-    (boundaryFactVoictent, [commonBoundaryRoot], fileFactVoictent) => {
+    (boundaryFactCollection, [commonBoundaryRoot], fileFactCollection) => {
       const metadataList: Metadata[] = [
-        ...boundaryFactVoictent,
-        ...fileFactVoictent,
+        ...boundaryFactCollection,
+        ...fileFactCollection,
       ].map((fact) => fact.graphMetadata);
 
       const metadataById = Object.fromEntries(
@@ -159,7 +159,7 @@ export const constructDynamicMetadataFile = buildProgrammedTransform({
       return {
         [OUTPUT_FILE_COLLECTION_ID]: outputFile,
         [APP_RENDERER_DELAYER_COLLECTION_ID]: new AppRendererDelayerInstance({
-          estinantName: 'constructDynamicMetadataFile',
+          programmedTransformName: 'constructDynamicMetadataFile',
         }),
       };
     },

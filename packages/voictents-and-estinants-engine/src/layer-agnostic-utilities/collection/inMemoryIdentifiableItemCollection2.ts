@@ -160,7 +160,7 @@ export class InMemoryIdentifiableItem2ListCollection<
 }
 
 type InMemoryOdeshin3VoictentPelie<TOdeshinPelie> = {
-  byZorn: Map<string, TOdeshinPelie>;
+  byId: Map<string, TOdeshinPelie>;
   list: TOdeshinPelie[];
 };
 
@@ -178,7 +178,7 @@ type GenericInMemoryOdeshin3Voque = InMemoryIdentifiableItem3StreamMetatype<
   GenericIdentifiableItem
 >;
 
-export class InMemoryOdeshin3Voictent<
+export class InMemoryIdentifiableItem3Collection<
   TVoque extends GenericInMemoryOdeshin3Voque,
 > extends BaseInMemoryIdentifiableItem2Collection<
   GenericInMemoryOdeshin3Voque,
@@ -186,7 +186,7 @@ export class InMemoryOdeshin3Voictent<
 > {
   protected dereferenceCollection(): TVoque['collectionStreamable'] {
     return {
-      byZorn: this.hubblepupPelueByZorn,
+      byId: this.hubblepupPelueByZorn,
       list: this.itemTuple,
     };
   }

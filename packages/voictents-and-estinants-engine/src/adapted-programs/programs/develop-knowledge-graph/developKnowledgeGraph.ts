@@ -5,7 +5,7 @@ import {
 } from '../../../adapter/engine/runEngine';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
-import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileVoictent';
@@ -36,14 +36,14 @@ runEngine({
       collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
       initialItemEggTuple: [
         new AppRendererDelayerInstance({
-          estinantName: 'n/a',
+          programmedTransformName: 'n/a',
         }),
       ],
     }),
   ] as const,
   fileSystemNodeCollectionIdCombination: {},
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
-    new ProgramErrorVoictent({
+    new ProgramErrorCollection({
       programFileCache,
     }),
     new OutputFileCollection({

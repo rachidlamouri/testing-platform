@@ -68,21 +68,6 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
   },
   {
     importedFilePath:
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/directedGraphElement2.ts',
-    importedIdentifierName: 'DirectedGraphElement2',
-  },
-  {
-    importedFilePath:
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/directedGraphElement2.ts',
-    importedIdentifierName: 'DIRECTED_GRAPH_ELEMENT_2_GEPP',
-  },
-  {
-    importedFilePath:
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/directedGraphElement2.ts',
-    importedIdentifierName: 'DirectedGraphElement2Voque',
-  },
-  {
-    importedFilePath:
       'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/rootGraphLocator.ts',
     importedIdentifierName: 'RootGraphLocator',
   },

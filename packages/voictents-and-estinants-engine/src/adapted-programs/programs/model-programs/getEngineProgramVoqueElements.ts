@@ -9,8 +9,8 @@ import {
   ProgramVoqueRelationship2Voque,
 } from '../../programmable-units/engine-program/programVoqueRelationship2';
 import {
-  DIRECTED_GRAPH_ELEMENT_2_GEPP,
-  DirectedGraphElement2Voque,
+  DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
+  DirectedGraphElement2StreamMetatype,
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { NodeShape } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
 import { DirectedGraphNode2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
@@ -35,8 +35,8 @@ export const getEngineProgramVoqueElements = buildProgrammedTransform({
     getRightKeyTuple: (relationship) => [relationship.item.voqueLocator.id],
     getRightKey: (engineVoque) => engineVoque.item.locator.id,
   })
-  .toItem2<DirectedGraphElement2Voque>({
-    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+  .toItem2<DirectedGraphElement2StreamMetatype>({
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   })
   .onTransform((relationship, [engineVoque]) => {
     const label =

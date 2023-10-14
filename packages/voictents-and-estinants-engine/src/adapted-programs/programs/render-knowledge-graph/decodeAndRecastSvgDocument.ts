@@ -4,8 +4,8 @@ import * as recast from 'recast';
 import Case from 'case';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  SVG_DOCUMENT_GEPP,
-  SvgDocumentVoque,
+  SVG_DOCUMENT_COLLECTION_ID,
+  SvgDocumentStreamMetatype,
 } from '../../programmable-units/graph-visualization/svgDocument';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import {
@@ -43,13 +43,14 @@ import { FileDependencyPathSegmentFact } from './dependency/dependency-path/file
 import { DirectoryFact2 } from './directory/directoryFact2';
 import { FileDependencyPathNodeFact } from './dependency/dependency-path/fileDependencyPathNodeFact';
 
-const ESTINANT_NAME = 'decodeAndRecastSvgDocument' as const;
-type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
+const PROGRAMMED_TRANSFORM_NAME = 'decodeAndRecastSvgDocument' as const;
+type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
+type ReportingLocator =
+  ReportingProgrammedTransformLocator<ProgrammedTransformName>;
 const reporterLocator: ReportingLocator = {
   typeName:
     ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
   filePath: __filename,
 };
 
@@ -132,10 +133,10 @@ export const treeifyDatum = (datum: unknown): TreeifiedDatumNode => {
  * finally JSX code
  */
 export const decodeAndRecastSvgDocument = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
-  .fromItem2<SvgDocumentVoque>({
-    collectionId: SVG_DOCUMENT_GEPP,
+  .fromItem2<SvgDocumentStreamMetatype>({
+    collectionId: SVG_DOCUMENT_COLLECTION_ID,
   })
   .andFromCollection2<FactStreamMetatype>({
     collectionId: FACT_COLLECTION_ID,
@@ -149,8 +150,8 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
   .toItemTuple2<AppRendererDelayerStreamMetatype>({
     collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
   })
-  .onTransform((svgDocument, factVoictent) => {
-    const $ = cheerio.load(svgDocument.grition);
+  .onTransform((svgDocument, factCollection) => {
+    const $ = cheerio.load(svgDocument.subitem);
 
     const svgNode = $('svg')[0];
 
@@ -462,7 +463,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       id: string,
       childElement: n.JSXElement,
     ): n.JSXElement | n.JSXFragment | null => {
-      const fact = factVoictent.byLocalGraphElementId.get(id);
+      const fact = factCollection.byLocalGraphElementId.get(id);
       assertNotUndefined(fact);
 
       const wrapperConfiguration = getWrapperConfiguration(fact);
@@ -642,7 +643,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       [OUTPUT_FILE_COLLECTION_ID]: [outputFile],
       [APP_RENDERER_DELAYER_COLLECTION_ID]: [
         new AppRendererDelayerInstance({
-          estinantName: 'decodeAndRecastSvgDocument',
+          programmedTransformName: 'decodeAndRecastSvgDocument',
           distinguisher: svgDocument.id,
         }),
       ],

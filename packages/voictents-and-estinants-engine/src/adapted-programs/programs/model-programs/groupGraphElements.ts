@@ -1,7 +1,7 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  DIRECTED_GRAPH_ELEMENT_2_GEPP,
-  DirectedGraphElement2Voque,
+  DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
+  DirectedGraphElement2StreamMetatype,
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import {
   GRAPH_ELEMENT_GROUP_GEPP,
@@ -16,8 +16,8 @@ import {
 export const groupGraphElements = buildProgrammedTransform({
   name: 'groupGraphElements',
 })
-  .fromCollection2<DirectedGraphElement2Voque>({
-    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+  .fromCollection2<DirectedGraphElement2StreamMetatype>({
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   })
   .toItemTuple2<GraphElementGroupVoque>({
     collectionId: GRAPH_ELEMENT_GROUP_GEPP,

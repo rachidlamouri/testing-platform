@@ -29,8 +29,10 @@ type ProgramErrorVoictentConstructorInput = {
  * transforms can emit where to find more error context
  *
  * @readableName ProgramErrorCollection
+ *
+ * @canonicalDeclaration
  */
-export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
+export class ProgramErrorCollection extends AbstractAsymmetricInMemoryVoictent2<
   UnsafeProgramErrorVoque,
   UnsafeProgramErrorVoque
 > {

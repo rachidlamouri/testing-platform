@@ -59,15 +59,15 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
   })
   .onTransform(
     (
-      partitionFactVoictent,
-      directoryVoictent,
-      fileVoictent,
-      fileDependencyVoictent,
+      partitionFactCollection,
+      directoryCollection,
+      fileCollection,
+      fileDependencyCollection,
     ) => {
       type LocalFileSystemNodeMetadata = {
         isDirectory: boolean;
         nodePath: string;
-        partitionFactZornSet: Set<string>;
+        partitionFactIdSet: Set<string>;
       };
 
       const localMetadataByNodePath = new Map<
@@ -75,13 +75,13 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
         LocalFileSystemNodeMetadata
       >(
         [
-          ...directoryVoictent.list.map((directory) => {
+          ...directoryCollection.list.map((directory) => {
             return {
               isDirectory: true,
               fileSystemNode: directory,
             };
           }),
-          ...fileVoictent.list.map((file) => {
+          ...fileCollection.list.map((file) => {
             return {
               isDirectory: false,
               fileSystemNode: file,
@@ -95,13 +95,13 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
             {
               isDirectory,
               nodePath,
-              partitionFactZornSet: new Set<string>(),
+              partitionFactIdSet: new Set<string>(),
             },
           ];
         }),
       );
 
-      fileDependencyVoictent.list
+      fileDependencyCollection.list
         .map(({ importingFile, importedFile }) => {
           const nodePathSet = new Set([
             importingFile.nodePath.serialized,
@@ -110,31 +110,31 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
             ...importedFile.directoryPathSetFromBoundary,
           ]);
 
-          const partitionFactZornSet = new Set([
+          const partitionFactIdSet = new Set([
             importingFile.sourcePartitionFact.id.forHuman,
             importedFile.sourcePartitionFact.id.forHuman,
           ]);
 
           return {
             nodePathSet,
-            partitionFactZornSet,
+            partitionFactIdSet,
           };
         })
-        .flatMap(({ nodePathSet, partitionFactZornSet }) => {
+        .flatMap(({ nodePathSet, partitionFactIdSet }) => {
           return [...nodePathSet].flatMap((nodePath) => {
-            return [...partitionFactZornSet].map((partitionFactZorn) => {
+            return [...partitionFactIdSet].map((partitionFactId) => {
               return {
                 nodePath,
-                partitionFactZorn,
+                partitionFactId,
               };
             });
           });
         })
-        .forEach(({ nodePath, partitionFactZorn }) => {
+        .forEach(({ nodePath, partitionFactId }) => {
           const localMetadata = localMetadataByNodePath.get(nodePath);
           assertNotUndefined(localMetadata);
 
-          localMetadata.partitionFactZornSet.add(partitionFactZorn);
+          localMetadata.partitionFactIdSet.add(partitionFactId);
         });
 
       const allMetadataList = [...localMetadataByNodePath.values()];
@@ -148,20 +148,20 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
       );
 
       const partitionedDirectoryList = directoryMetadataList
-        .flatMap(({ nodePath, partitionFactZornSet }) => {
-          const directory = directoryVoictent.byNodePath.get(nodePath);
+        .flatMap(({ nodePath, partitionFactIdSet }) => {
+          const directory = directoryCollection.byNodePath.get(nodePath);
           assertNotUndefined(directory);
 
-          return [...partitionFactZornSet].map((partitionFactZorn) => {
+          return [...partitionFactIdSet].map((partitionFactId) => {
             return {
               directory,
-              partitionFactZorn,
+              partitionFactId,
             };
           });
         })
-        .map(({ directory, partitionFactZorn }) => {
+        .map(({ directory, partitionFactId }) => {
           const partitionFact =
-            partitionFactVoictent.byZorn.get(partitionFactZorn);
+            partitionFactCollection.byId.get(partitionFactId);
           assertNotUndefined(partitionFact);
 
           return new PartitionedDirectoryInstance({
@@ -171,20 +171,20 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
         });
 
       const partitionedFileList = fileMetadataList
-        .flatMap(({ nodePath, partitionFactZornSet }) => {
-          const file = fileVoictent.byNodePath.get(nodePath);
+        .flatMap(({ nodePath, partitionFactIdSet }) => {
+          const file = fileCollection.byNodePath.get(nodePath);
           assertNotUndefined(file);
 
-          return [...partitionFactZornSet].map((partitionFactZorn) => {
+          return [...partitionFactIdSet].map((partitionFactId) => {
             return {
               file,
-              partitionFactZorn,
+              partitionFactId,
             };
           });
         })
-        .map(({ file, partitionFactZorn }) => {
+        .map(({ file, partitionFactId }) => {
           const partitionFact =
-            partitionFactVoictent.byZorn.get(partitionFactZorn);
+            partitionFactCollection.byId.get(partitionFactId);
           assertNotUndefined(partitionFact);
 
           return new PartitionedFileInstance({

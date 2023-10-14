@@ -15,11 +15,12 @@ export type DirectedGraphElement2 =
   | DirectedGraphNode2
   | DirectedGraphEdge2;
 
-export const DIRECTED_GRAPH_ELEMENT_2_GEPP = 'directed-graph-element-2';
+export const DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID =
+  'directed-graph-element-2';
 
-type DirectedGraphElement2Gepp = typeof DIRECTED_GRAPH_ELEMENT_2_GEPP;
+type DirectedGraphElement2Gepp = typeof DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID;
 
-export type DirectedGraphElement2Voque =
+export type DirectedGraphElement2StreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     DirectedGraphElement2Gepp,
     DirectedGraphElement2

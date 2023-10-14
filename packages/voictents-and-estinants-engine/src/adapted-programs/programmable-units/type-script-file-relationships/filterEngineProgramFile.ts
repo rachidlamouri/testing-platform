@@ -1,8 +1,8 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
-  ENGINE_FUNCTION_CONFIGURATION_GEPP,
-  EngineFunctionConfigurationVoque,
+  ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
+  EngineFunctionConfigurationStreamMetatype,
 } from '../engine-program/engineFunctionConfiguration';
 import {
   TYPE_SCRIPT_FILE_COLLECTION_ID,
@@ -35,8 +35,8 @@ export const filterEngineProgramFile = buildProgrammedTransform({
     getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,
   })
-  .andFromCollection2<EngineFunctionConfigurationVoque>({
-    collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
+  .andFromCollection2<EngineFunctionConfigurationStreamMetatype>({
+    collectionId: ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
   })
   .toItemTuple2<EngineProgramFileVoque>({
     collectionId: ENGINE_PROGRAM_FILE_GEPP,

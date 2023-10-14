@@ -1,7 +1,7 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  DIRECTED_GRAPH_ELEMENT_2_GEPP,
-  DirectedGraphElement2Voque,
+  DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
+  DirectedGraphElement2StreamMetatype,
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { FACT_COLLECTION_ID, FactStreamMetatype } from './fact/fact';
 
@@ -15,10 +15,10 @@ export const getAllFactGraphElements = buildProgrammedTransform({
   .fromCollection2<FactStreamMetatype>({
     collectionId: FACT_COLLECTION_ID,
   })
-  .toItemTuple2<DirectedGraphElement2Voque>({
-    collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
+  .toItemTuple2<DirectedGraphElement2StreamMetatype>({
+    collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   })
-  .onTransform((factVoictent) => {
-    return factVoictent.graphElementList;
+  .onTransform((factCollection) => {
+    return factCollection.graphElementList;
   })
   .assemble();

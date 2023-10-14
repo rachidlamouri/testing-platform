@@ -6,19 +6,19 @@ import {
 } from '../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 
-const APP_RENDERER_DELAYER_ZORN_TEMPLATE = [
-  'estinantName',
+const APP_RENDERER_DELAYER_ID_TEMPLATE = [
+  'programmedTransformName',
   'distinguisher',
 ] as const satisfies GenericComplexIdTemplate;
-type AppRendererDelayerZornTemplate = typeof APP_RENDERER_DELAYER_ZORN_TEMPLATE;
-class AppRendererDelayerZorn extends ComplexId<AppRendererDelayerZornTemplate> {
-  get rawTemplate(): AppRendererDelayerZornTemplate {
-    return APP_RENDERER_DELAYER_ZORN_TEMPLATE;
+type AppRendererDelayerIdTemplate = typeof APP_RENDERER_DELAYER_ID_TEMPLATE;
+class AppRendererDelayerId extends ComplexId<AppRendererDelayerIdTemplate> {
+  get rawTemplate(): AppRendererDelayerIdTemplate {
+    return APP_RENDERER_DELAYER_ID_TEMPLATE;
   }
 }
 
 type AppRendererDelayerConstructorInput = {
-  estinantName: string;
+  programmedTransformName: string;
   distinguisher?: string;
 };
 
@@ -31,7 +31,7 @@ type AppRendererDelayer = Required<
   SimplifyN<
     [
       {
-        id: AppRendererDelayerZorn;
+        id: AppRendererDelayerId;
       },
       AppRendererDelayerConstructorInput,
     ]
@@ -43,7 +43,7 @@ export const { AppRendererDelayerInstance } = buildNamedConstructorFunction({
   instancePropertyNameTuple: [
     // keep this as a multiline list
     'id',
-    'estinantName',
+    'programmedTransformName',
     'distinguisher',
   ],
 } as const)
@@ -56,16 +56,16 @@ export const { AppRendererDelayerInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { estinantName, distinguisher = '' } = input;
+      const { programmedTransformName, distinguisher = '' } = input;
 
-      const id = new AppRendererDelayerZorn({
-        estinantName,
+      const id = new AppRendererDelayerId({
+        programmedTransformName,
         distinguisher,
       });
 
       return {
         id,
-        estinantName,
+        programmedTransformName,
         distinguisher,
       };
     },
@@ -74,10 +74,10 @@ export const { AppRendererDelayerInstance } = buildNamedConstructorFunction({
 
 export const APP_RENDERER_DELAYER_COLLECTION_ID = 'app-renderer-delayer';
 
-type AppRendererDelayerGepp = typeof APP_RENDERER_DELAYER_COLLECTION_ID;
+type AppRendererDelayerCollectionId = typeof APP_RENDERER_DELAYER_COLLECTION_ID;
 
 export type AppRendererDelayerStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    AppRendererDelayerGepp,
+    AppRendererDelayerCollectionId,
     AppRendererDelayer
   >;

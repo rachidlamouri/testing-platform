@@ -6,21 +6,21 @@ import {
 } from '../../../adapter/engine/runEngine';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import {
-  EngineFunctionConfigurationVoque,
-  ENGINE_FUNCTION_CONFIGURATION_GEPP,
+  EngineFunctionConfigurationStreamMetatype,
+  ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   CORE_ENGINE_FUNCTION_2_CONFIGURATION,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
-import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
-  VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+  COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
@@ -41,7 +41,7 @@ import { OutputFileCollection } from '../../programmable-units/output-file/outpu
 import { getDirectedGraphFromGraphElementGroup } from '../model-programs/getDirectedGraphFromGraphElementGroup';
 import { groupGraphElements } from '../model-programs/groupGraphElements';
 import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
-import { InMemoryOdeshin3Voictent } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3Collection } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { getCommonBoundaryRoot } from './common-boundary-root/getCommonBoundaryRoot';
 import {
   PARTITIONED_BOUNDARY_LIST_TRIE_COLLECTION_ID,
@@ -122,23 +122,25 @@ runEngine({
       {
         collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
         initialItemEggTuple: [
-          VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+          COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
         ],
       },
     ),
-    new InMemoryCollection<EngineFunctionConfigurationVoque>({
-      collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
+    new InMemoryCollection<EngineFunctionConfigurationStreamMetatype>({
+      collectionId: ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
       initialItemEggTuple: [
         CORE_ENGINE_FUNCTION_CONFIGURATION,
         CORE_ENGINE_FUNCTION_2_CONFIGURATION,
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
-    new InMemoryOdeshin3Voictent<BoundaryConfigurationStreamMetatype>({
-      collectionId: BOUNDARY_CONFIGURATION_COLLECTION_ID,
-      initialItemEggTuple: BOUNDARY_CONFIGURATION_LIST,
-    }),
-    new InMemoryOdeshin3Voictent<LayerConfigurationStreamMetatype>({
+    new InMemoryIdentifiableItem3Collection<BoundaryConfigurationStreamMetatype>(
+      {
+        collectionId: BOUNDARY_CONFIGURATION_COLLECTION_ID,
+        initialItemEggTuple: BOUNDARY_CONFIGURATION_LIST,
+      },
+    ),
+    new InMemoryIdentifiableItem3Collection<LayerConfigurationStreamMetatype>({
       collectionId: LAYER_CONFIGURATION_COLLECTION_ID,
       initialItemEggTuple: LAYER_CONFIGURATION_LIST,
     }),
@@ -152,10 +154,10 @@ runEngine({
     ] as const),
   },
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
-    new ProgramErrorVoictent({
+    new ProgramErrorCollection({
       programFileCache,
     }),
-    new InMemoryOdeshin3Voictent<PartitionFactStreamMetatype>({
+    new InMemoryIdentifiableItem3Collection<PartitionFactStreamMetatype>({
       collectionId: PARTITION_FACT_COLLECTION_ID,
       initialItemEggTuple: [],
     }),
@@ -167,7 +169,7 @@ runEngine({
       collectionId: PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID,
       initialItemEggTuple: [],
     }),
-    new InMemoryOdeshin3Voictent<PartitionedFileStreamMetatype>({
+    new InMemoryIdentifiableItem3Collection<PartitionedFileStreamMetatype>({
       collectionId: PARTITIONED_FILE_COLLECTION_ID,
       initialItemEggTuple: [],
     }),

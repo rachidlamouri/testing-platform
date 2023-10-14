@@ -46,7 +46,7 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
   .toItem2<AppRendererDelayerStreamMetatype>({
     collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
   })
-  .onTransform((layerVoictent, partitionFactVoictent) => {
+  .onTransform((layerCollection, partitionFactCollection) => {
     const getPartitionComponentVariableName = (
       partitionFact: PartitionFact,
     ): string => {
@@ -55,15 +55,15 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
       )}`;
     };
 
-    const partitionFactListByLayerZorn = new Map<string, PartitionFact[]>();
-    partitionFactVoictent.list.forEach((partitionFact) => {
+    const partitionFactListByLayerId = new Map<string, PartitionFact[]>();
+    partitionFactCollection.list.forEach((partitionFact) => {
       const key = partitionFact.layer.id.forHuman;
-      const list = partitionFactListByLayerZorn.get(key) ?? [];
+      const list = partitionFactListByLayerId.get(key) ?? [];
       list.push(partitionFact);
-      partitionFactListByLayerZorn.set(key, list);
+      partitionFactListByLayerId.set(key, list);
     });
 
-    const importStatementList = partitionFactVoictent.list.map(
+    const importStatementList = partitionFactCollection.list.map(
       (partitionFact) => {
         const componentVariableName =
           getPartitionComponentVariableName(partitionFact);
@@ -87,15 +87,15 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
       ]
     >;
 
-    const sortedLayerVoictent = layerVoictent.slice().sort((layerA, layerB) => {
-      return layerA.sortOrder - layerB.sortOrder;
-    });
+    const sortedLayerCollection = layerCollection
+      .slice()
+      .sort((layerA, layerB) => {
+        return layerA.sortOrder - layerB.sortOrder;
+      });
 
     const navigationLayerList =
-      sortedLayerVoictent.map<ModifiedNavigationLayer>((layer) => {
-        const partitionList = partitionFactListByLayerZorn.get(
-          layer.id.forHuman,
-        );
+      sortedLayerCollection.map<ModifiedNavigationLayer>((layer) => {
+        const partitionList = partitionFactListByLayerId.get(layer.id.forHuman);
         assertNotUndefined(
           partitionList,
           `Unable to find partition list for layer: ${layer.displayName}`,
@@ -149,7 +149,7 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
         text: programText,
       },
       [APP_RENDERER_DELAYER_COLLECTION_ID]: new AppRendererDelayerInstance({
-        estinantName: 'constructDynamicIndexFile',
+        programmedTransformName: 'constructDynamicIndexFile',
       }),
     };
   })

@@ -5,14 +5,12 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agno
  */
 type SvgDocument = {
   id: string;
-  grition: string;
+  subitem: string;
 };
 
-export const SVG_DOCUMENT_GEPP = 'svg-document';
+export const SVG_DOCUMENT_COLLECTION_ID = 'svg-document';
 
-type SvgDocumentGepp = typeof SVG_DOCUMENT_GEPP;
+type SvgDocumentGepp = typeof SVG_DOCUMENT_COLLECTION_ID;
 
-export type SvgDocumentVoque = InMemoryIdentifiableItem2ListStreamMetatype<
-  SvgDocumentGepp,
-  SvgDocument
->;
+export type SvgDocumentStreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<SvgDocumentGepp, SvgDocument>;
