@@ -100,10 +100,10 @@ export const assertProgramTestFileIsValid = buildProgrammedTransform({
   .fromItem2<ExpectedProgramTestFileVoque>({
     collectionId: EXPECTED_PROGRAM_TEST_FILE_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionStreamMetatype>({
+  .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .toHubblepupTuple2<LintAssertionOmissionVoque>({
+  .toItemTuple2<LintAssertionOmissionVoque>({
     collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
   .onTransform((expectedFile) => {

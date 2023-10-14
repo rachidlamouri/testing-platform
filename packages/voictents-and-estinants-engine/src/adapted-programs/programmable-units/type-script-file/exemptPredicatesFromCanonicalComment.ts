@@ -31,7 +31,7 @@ export const exemptPredicatesFromCanonicalComment = buildProgrammedTransform({
   .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
     collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionOmissionVoque>({
+  .toItemTuple2<LintAssertionOmissionVoque>({
     collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
   .onTransform((declarationGroup) => {

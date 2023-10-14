@@ -37,14 +37,14 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
   .fromItem2<ProgramEstinantRelationshipVoque>({
     collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
   })
-  .andFromHubblepupTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
     getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantLocator.zorn];
     },
     getRightKey: (engineEstinant) => engineEstinant.item.locator.zorn,
   })
-  .toHubblepupTuple2<DirectedGraphElement2Voque>({
+  .toItemTuple2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
   .onTransform((relationship, [engineEstinant]) => {

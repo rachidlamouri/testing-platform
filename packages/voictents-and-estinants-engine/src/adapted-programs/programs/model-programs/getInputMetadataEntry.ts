@@ -23,7 +23,7 @@ export const getInputMetadataEntry = buildProgrammedTransform({
   .fromItem2<ProgramEstinantInputRelationshipVoque>({
     collectionId: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
   })
-  .andFromHubblepupTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
     collectionId: ESTINANT_INPUT_2_GEPP,
     getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantInput.zorn];

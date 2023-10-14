@@ -20,14 +20,14 @@ export const getAdaptedProgramBoundary = buildProgrammedTransform({
   .fromItem2<EngineProgramLocator3Voque>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromHubblepupTuple2<DirectoryVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<DirectoryVoque, [OdeshinZorn]>({
     collectionId: DIRECTORY_GEPP,
     getRightKeyTuple: (locator) => [
       locator.item.engineProgramFile.filePath.parentDirectoryPath,
     ],
     getRightKey: (directory) => directory.item.directoryPath.serialized,
   })
-  .toHubblepupTuple2<BoundaryVoque>({
+  .toItemTuple2<BoundaryVoque>({
     collectionId: BOUNDARY_GEPP,
   })
   .onTransform((programLocator, [directory]) => {

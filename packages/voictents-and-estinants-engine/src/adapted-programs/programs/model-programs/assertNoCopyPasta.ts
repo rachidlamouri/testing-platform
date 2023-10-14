@@ -41,13 +41,13 @@ export const assertNoCopyPasta = buildProgrammedTransform({
   .fromVoictent2<EngineProgram3Voque>({
     collectionId: ENGINE_PROGRAM_3_GEPP,
   })
-  .andFromVoictent2<EngineVoque2Voque>({
+  .andFromCollection2<EngineVoque2Voque>({
     collectionId: ENGINE_VOQUE_2_GEPP,
   })
-  .andFromVoictent2<EngineEstinant3Voque>({
+  .andFromCollection2<EngineEstinant3Voque>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((programList, voqueList, estinantList) => {

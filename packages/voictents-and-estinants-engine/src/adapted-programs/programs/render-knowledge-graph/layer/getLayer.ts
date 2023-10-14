@@ -18,7 +18,7 @@ export const getLayer = buildProgrammedTransform({
   .fromItem2<LayerConfigurationVoque>({
     collectionId: LAYER_CONFIGURATION_GEPP,
   })
-  .andFromHubblepupTuple2<DirectoryVoque, [string]>({
+  .andFromItemTuple2<DirectoryVoque, [string]>({
     collectionId: DIRECTORY_GEPP,
     getRightKeyTuple: (layer) => {
       return [layer.item.directoryPath];

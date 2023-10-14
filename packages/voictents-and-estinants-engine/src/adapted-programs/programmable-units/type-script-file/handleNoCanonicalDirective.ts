@@ -31,7 +31,7 @@ export const handleNoCanonicalDirective = buildProgrammedTransform({
   .fromItem2<FileParsedCommentGroupVoque>({
     collectionId: FILE_PARSED_COMMENT_GROUP_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionOmissionVoque>({
+  .toItemTuple2<LintAssertionOmissionVoque>({
     collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
   .onTransform((commentGroup) => {

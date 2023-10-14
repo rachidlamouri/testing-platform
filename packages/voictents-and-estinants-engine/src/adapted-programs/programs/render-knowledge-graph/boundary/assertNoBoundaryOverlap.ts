@@ -30,7 +30,7 @@ export const assertNoBoundaryOverlap = buildProgrammedTransform({
   .fromItem2<PartitionedBoundaryListTrieVoque>({
     collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((partitionedBoundaryListTrie) => {

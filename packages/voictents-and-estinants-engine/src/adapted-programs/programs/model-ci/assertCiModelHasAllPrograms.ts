@@ -37,16 +37,16 @@ export const assertCiModelHasAllPrograms = buildProgrammedTransform({
   .fromVoictent2<EngineProgramLocator3Voque>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromHubblepupTuple2<CiModelVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<CiModelVoque, [OdeshinZorn]>({
     // TODO: make a better pattern for singletons
     collectionId: CI_MODEL_GEPP,
     getRightKeyTuple: () => [CI_MODEL_ZORN],
     getRightKey: (rightInput) => rightInput.item.zorn,
   })
-  .andFromVoictent2<ExpectedProgramTestFileVoque>({
+  .andFromCollection2<ExpectedProgramTestFileVoque>({
     collectionId: EXPECTED_PROGRAM_TEST_FILE_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((programLocatorList, [ciModel], expectedTestFileVoictent) => {

@@ -30,7 +30,7 @@ export const renderApp = buildProgrammedTransform({
   .toItem2<OutputFileVoque>({
     collectionId: OUTPUT_FILE_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform(() => {

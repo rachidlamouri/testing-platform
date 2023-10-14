@@ -78,7 +78,7 @@ type PinbetunfBuilder2<
   TAdaptedOutputVickenTuple
 >;
 
-export const buildPinbetunfBuilder2 = <
+export const buildAdaptedTransformBuilder2 = <
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
@@ -124,7 +124,7 @@ export const buildPinbetunfBuilder2 = <
   return buildPinbetunf;
 };
 
-export type PinbetunfBuilderParent2<
+export type AdaptedTransformBuilderParent2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,

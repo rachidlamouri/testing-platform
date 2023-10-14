@@ -15,7 +15,7 @@ export const enumerateNodeLocators = buildProgrammedTransform({
   .fromItem2<FileAstListVoque>({
     collectionId: FILE_AST_LIST_GEPP,
   })
-  .toHubblepupTuple2<AstNodeLocatorVoque>({
+  .toItemTuple2<AstNodeLocatorVoque>({
     collectionId: AST_NODE_LOCATOR_GEPP,
   })
   .onTransform((fileAstList) => {

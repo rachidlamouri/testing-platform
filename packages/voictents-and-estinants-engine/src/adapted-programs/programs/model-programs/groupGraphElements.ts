@@ -19,7 +19,7 @@ export const groupGraphElements = buildProgrammedTransform({
   .fromVoictent2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
-  .toHubblepupTuple2<GraphElementGroupVoque>({
+  .toItemTuple2<GraphElementGroupVoque>({
     collectionId: GRAPH_ELEMENT_GROUP_GEPP,
   })
   .onTransform((allGraphElementList) => {

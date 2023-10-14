@@ -29,7 +29,7 @@ export const filterStringLiteral = buildProgrammedTransform({
   .fromItem2<AstNodeLocatorVoque>({
     collectionId: AST_NODE_LOCATOR_GEPP,
   })
-  .toHubblepupTuple2<StringLiteralNodeLocatorVoque>({
+  .toItemTuple2<StringLiteralNodeLocatorVoque>({
     collectionId: STRING_LITERAL_NODE_LOCATOR_GEPP,
   })
   .onTransform((nodeLocator) => {

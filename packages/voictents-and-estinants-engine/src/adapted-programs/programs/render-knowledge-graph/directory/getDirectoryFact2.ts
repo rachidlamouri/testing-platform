@@ -24,7 +24,7 @@ export const getDirectoryFact2 = buildProgrammedTransform({
   .fromItem2<PartitionedDirectoryVoque>({
     collectionId: PARTITIONED_DIRECTORY_GEPP,
   })
-  .andFromHubblepupTuple2<BoundedDirectoryVoque, [] | [OdeshinZorn]>({
+  .andFromItemTuple2<BoundedDirectoryVoque, [] | [OdeshinZorn]>({
     collectionId: BOUNDED_DIRECTORY_GEPP,
     getRightKeyTuple: (childDirectory) => {
       if (childDirectory.item.directory.isBoundaryDirectory) {

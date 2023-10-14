@@ -41,7 +41,7 @@ export const getEngineVoque2 = buildProgrammedTransform({
   .fromItem2<EngineVoqueLocator2Voque>({
     collectionId: ENGINE_VOQUE_LOCATOR_2_GEPP,
   })
-  .andFromHubblepupTuple2<
+  .andFromItemTuple2<
     FileCommentedProgramBodyDeclarationGroupVoque,
     [OdeshinZorn]
   >({
@@ -52,7 +52,7 @@ export const getEngineVoque2 = buildProgrammedTransform({
   .toItem2<EngineVoque2Voque>({
     collectionId: ENGINE_VOQUE_2_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((voqueLocator, [{ declarationByIdentifier }]) => {

@@ -22,7 +22,7 @@ export const getFileDependencies = buildProgrammedTransform({
   .fromItem2<TypeScriptFileImportListVoque>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
-  .andFromHubblepupTuple2<BoundedFileVoque, NonEmptyTuple<OdeshinZorn>>({
+  .andFromItemTuple2<BoundedFileVoque, NonEmptyTuple<OdeshinZorn>>({
     collectionId: BOUNDED_FILE_GEPP,
     getRightKeyTuple: (importList) => {
       const importingFileZorn = importList.item.zorn;
@@ -36,7 +36,7 @@ export const getFileDependencies = buildProgrammedTransform({
       return partitionedFile.item.file.filePath.serialized;
     },
   })
-  .toHubblepupTuple2<FileDependencyVoque>({
+  .toItemTuple2<FileDependencyVoque>({
     collectionId: FILE_DEPENDENCY_GEPP,
   })
   .onTransform((importList, [importingFile, ...importedFileList]) => {

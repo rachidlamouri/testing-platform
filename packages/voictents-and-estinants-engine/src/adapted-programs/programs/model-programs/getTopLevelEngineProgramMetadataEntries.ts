@@ -21,7 +21,7 @@ export const getTopLevelEngineProgramMetadataEntries = buildProgrammedTransform(
   .fromItem2<EngineProgram3Voque>({
     collectionId: ENGINE_PROGRAM_3_GEPP,
   })
-  .toHubblepupTuple2<DirectedGraphMetadataEntryVoque>({
+  .toItemTuple2<DirectedGraphMetadataEntryVoque>({
     collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
   })
   .onTransform((engineProgram) => {

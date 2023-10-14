@@ -50,10 +50,10 @@ export const applyRenaming = buildProgrammedTransform({
   .fromVoictent2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
-  .andFromVoictent2<FileSystemNodeRenameConfigurationVoque>({
+  .andFromCollection2<FileSystemNodeRenameConfigurationVoque>({
     collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
   })
-  .andFromVoictent2<RenameConfigurationVoque>({
+  .andFromCollection2<RenameConfigurationVoque>({
     collectionId: RENAME_CONFIGURATION_GEPP,
   })
   .onTransform(

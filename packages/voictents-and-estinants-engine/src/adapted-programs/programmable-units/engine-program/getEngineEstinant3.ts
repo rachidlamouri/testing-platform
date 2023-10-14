@@ -848,7 +848,7 @@ export const getEngineEstinant3 = buildProgrammedTransform({
   .fromItem2<EngineEstinantLocator2Voque>({
     collectionId: ENGINE_ESTINANT_LOCATOR_2_GEPP,
   })
-  .andFromHubblepupTuple2<
+  .andFromItemTuple2<
     FileCommentedProgramBodyDeclarationGroupVoque,
     [OdeshinZorn]
   >({
@@ -856,24 +856,24 @@ export const getEngineEstinant3 = buildProgrammedTransform({
     getRightKeyTuple: (leftInput) => [leftInput.item.filePath],
     getRightKey: (rightInput) => rightInput.item.filePath,
   })
-  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     getRightKeyTuple: (leftInput) => [leftInput.item.filePath],
     getRightKey: (rightInput) => rightInput.item.zorn,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
-  .toHubblepupTuple2<EngineEstinant3Voque>({
+  .toItemTuple2<EngineEstinant3Voque>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
   })
-  .toHubblepupTuple2<EngineEstinantInput2Voque>({
+  .toItemTuple2<EngineEstinantInput2Voque>({
     collectionId: ESTINANT_INPUT_2_GEPP,
   })
-  .toHubblepupTuple2<EngineEstinantOutput2Voque>({
+  .toItemTuple2<EngineEstinantOutput2Voque>({
     collectionId: ESTINANT_OUTPUT_2_GEPP,
   })
-  .toHubblepupTuple2<EstinantVoqueRelationship2Voque>({
+  .toItemTuple2<EstinantVoqueRelationship2Voque>({
     collectionId: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .onTransform(

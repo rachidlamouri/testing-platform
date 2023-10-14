@@ -23,7 +23,7 @@ export const scaffoldFile = buildProgrammedTransform({
   .fromItem2<ScaffoldConfigurationVoque>({
     collectionId: SCAFFOLD_CONFIGURATION_GEPP,
   })
-  .andFromHubblepupTuple2<FileVoque, [string]>({
+  .andFromItemTuple2<FileVoque, [string]>({
     collectionId: FILE_GEPP,
     getRightKeyTuple: (configuration) => {
       return [configuration.item.filePath];

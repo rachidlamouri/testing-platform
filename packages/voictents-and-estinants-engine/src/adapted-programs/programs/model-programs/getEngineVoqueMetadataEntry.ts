@@ -27,7 +27,7 @@ export const getEngineVoqueMetadataEntry = buildProgrammedTransform({
   .fromItem2<ProgramVoqueRelationship2Voque>({
     collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
-  .andFromHubblepupTuple2<EngineVoque2Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineVoque2Voque, [OdeshinZorn]>({
     collectionId: ENGINE_VOQUE_2_GEPP,
     getRightKeyTuple: (relationship) => [relationship.item.voqueLocator.zorn],
     getRightKey: (engineVoque) => engineVoque.item.zorn,

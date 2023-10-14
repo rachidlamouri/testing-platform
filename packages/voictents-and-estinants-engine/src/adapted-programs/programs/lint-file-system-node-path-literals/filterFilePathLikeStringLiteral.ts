@@ -26,7 +26,7 @@ export const filterFilePathLikeStringLiteral = buildProgrammedTransform({
   .fromItem2<StringLiteralNodeLocatorVoque>({
     collectionId: STRING_LITERAL_NODE_LOCATOR_GEPP,
   })
-  .toHubblepupTuple2<FilePathLikeStringLiteralVoque>({
+  .toItemTuple2<FilePathLikeStringLiteralVoque>({
     collectionId: FILE_PATH_LIKE_STRING_LITERAL_GEPP,
   })
   .onTransform((nodeLocator) => {

@@ -136,16 +136,16 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
   .fromItem2<SvgDocumentVoque>({
     collectionId: SVG_DOCUMENT_GEPP,
   })
-  .andFromVoictent2<FactVoque>({
+  .andFromCollection2<FactVoque>({
     collectionId: FACT_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
-  .toHubblepupTuple2<OutputFileVoque>({
+  .toItemTuple2<OutputFileVoque>({
     collectionId: OUTPUT_FILE_GEPP,
   })
-  .toHubblepupTuple2<AppRendererDelayerVoque>({
+  .toItemTuple2<AppRendererDelayerVoque>({
     collectionId: APP_RENDERER_DELAYER_GEPP,
   })
   .onTransform((svgDocument, factVoictent) => {

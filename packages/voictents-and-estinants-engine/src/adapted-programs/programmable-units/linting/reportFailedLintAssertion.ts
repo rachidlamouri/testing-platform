@@ -39,10 +39,10 @@ export const reportFailedLintAssertion = buildProgrammedTransform({
   .fromItem2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .andFromVoictent2<LintAssertionOmissionVoque>({
+  .andFromCollection2<LintAssertionOmissionVoque>({
     collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((lintAssertion, omissionVoictent) => {

@@ -39,10 +39,10 @@ export const parseTypeScriptFile = buildProgrammedTransform({
   .fromItem2<TypeScriptFileConfigurationVoque>({
     collectionId: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple2<ParsedTypeScriptFileVoque>({
+  .toItemTuple2<ParsedTypeScriptFileVoque>({
     collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((typeScriptFileConfiguration) => {

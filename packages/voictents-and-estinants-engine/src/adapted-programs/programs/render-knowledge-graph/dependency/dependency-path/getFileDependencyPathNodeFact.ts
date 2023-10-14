@@ -23,7 +23,7 @@ export const getFileDependencyPathNodeFact = buildProgrammedTransform({
   .fromItem2<PartitionedFileDependencyPathNodeVoque>({
     collectionId: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
   })
-  .andFromHubblepupTuple2<BoundedDirectoryVoque, [string]>({
+  .andFromItemTuple2<BoundedDirectoryVoque, [string]>({
     collectionId: BOUNDED_DIRECTORY_GEPP,
     getRightKeyTuple: (pathNode) => {
       return [pathNode.item.directoryPath];

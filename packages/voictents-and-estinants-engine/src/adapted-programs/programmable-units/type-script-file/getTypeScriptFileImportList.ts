@@ -45,7 +45,7 @@ export const getTypeScriptFileImportList = buildProgrammedTransform({
   .toItem2<TypeScriptFileImportListVoque>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((parsedTypeScriptFile) => {

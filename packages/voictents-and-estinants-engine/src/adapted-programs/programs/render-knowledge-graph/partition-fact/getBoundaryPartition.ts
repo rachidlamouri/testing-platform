@@ -27,13 +27,13 @@ export const getBoundaryPartition = buildProgrammedTransform({
   .fromItem2<BoundaryVoque>({
     collectionId: BOUNDARY_GEPP,
   })
-  .andFromHubblepupTuple2<LayerTrieVoque, ['']>({
+  .andFromItemTuple2<LayerTrieVoque, ['']>({
     collectionId: LAYER_TRIE_GEPP,
     // TODO: make a more readable pattern for singleton collections
     getRightKeyTuple: () => [''],
     getRightKey: () => '',
   })
-  .andFromHubblepupTuple2<CommonBoundaryRootVoque, ['']>({
+  .andFromItemTuple2<CommonBoundaryRootVoque, ['']>({
     collectionId: COMMON_BOUNDARY_ROOT_GEPP,
     // TODO: make a more readable pattern for singleton collections
     getRightKeyTuple: () => [''],

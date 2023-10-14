@@ -69,13 +69,13 @@ export const addInteractivityToSvgDocument = buildProgrammedTransform({
   .fromItem2<SvgDocumentVoque>({
     collectionId: SVG_DOCUMENT_GEPP,
   })
-  .andFromHubblepupTuple2<HtmlFileVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<HtmlFileVoque, [OdeshinZorn]>({
     collectionId: HTML_FILE_GEPP,
     getRightKeyTuple: () => [INTERACTIVE_HTML_FILE_PATH],
     // TODO: add filepath to index
     getRightKey: (rightInput) => rightInput.item.filePath.serialized,
   })
-  .andFromHubblepupTuple2<DirectedGraphMetadataByIdVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<DirectedGraphMetadataByIdVoque, [OdeshinZorn]>({
     collectionId: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
     getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
     getRightKey: (rightInput) => rightInput.item.zorn,

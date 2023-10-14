@@ -43,10 +43,10 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
   .fromItem2<GraphElementGroupVoque>({
     collectionId: GRAPH_ELEMENT_GROUP_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
-  .toHubblepupTuple2<DirectedGraphVoque>({
+  .toItemTuple2<DirectedGraphVoque>({
     collectionId: DIRECTED_GRAPH_GEPP,
   })
   .onTransform((graphElementGroup) => {

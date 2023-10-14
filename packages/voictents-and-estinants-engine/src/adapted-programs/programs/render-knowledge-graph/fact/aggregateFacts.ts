@@ -27,19 +27,19 @@ export const aggregateFacts = buildProgrammedTransform({
   .fromVoictent2<PartitionFactVoque>({
     collectionId: PARTITION_FACT_GEPP,
   })
-  .andFromVoictent2<DirectoryFact2Voque>({
+  .andFromCollection2<DirectoryFact2Voque>({
     collectionId: DIRECTORY_FACT_2_GEPP,
   })
-  .andFromVoictent2<FileFact2Voque>({
+  .andFromCollection2<FileFact2Voque>({
     collectionId: FILE_FACT_2_GEPP,
   })
-  .andFromVoictent2<FileDependencyPathNodeFactVoque>({
+  .andFromCollection2<FileDependencyPathNodeFactVoque>({
     collectionId: FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
   })
-  .andFromVoictent2<FileDependencyPathSegmentFactVoque>({
+  .andFromCollection2<FileDependencyPathSegmentFactVoque>({
     collectionId: FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,
   })
-  .toHubblepupTuple2<FactVoque>({
+  .toItemTuple2<FactVoque>({
     collectionId: FACT_GEPP,
   })
   .onTransform(

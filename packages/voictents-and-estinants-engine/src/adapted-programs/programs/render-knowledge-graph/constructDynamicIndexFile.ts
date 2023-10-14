@@ -37,7 +37,7 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
   .fromVoictent2<LayerVoque>({
     collectionId: LAYER_GEPP,
   })
-  .andFromVoictent2<PartitionFactVoque>({
+  .andFromCollection2<PartitionFactVoque>({
     collectionId: PARTITION_FACT_GEPP,
   })
   .toItem2<OutputFileVoque>({

@@ -35,10 +35,10 @@ export const assertDirectoriesHaveBoundaries = buildProgrammedTransform({
   .fromVoictent2<DirectoryWithFileVoque>({
     collectionId: DIRECTORY_WITH_FILE_GEPP,
   })
-  .andFromVoictent2<BoundedDirectoryVoque>({
+  .andFromCollection2<BoundedDirectoryVoque>({
     collectionId: BOUNDED_DIRECTORY_GEPP,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((directoryWithFileVoictent, boundedDirectoryVoictent) => {

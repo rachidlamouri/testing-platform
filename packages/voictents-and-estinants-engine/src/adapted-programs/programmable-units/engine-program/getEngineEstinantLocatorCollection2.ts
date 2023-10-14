@@ -22,7 +22,7 @@ export const getEngineEstinantLocatorCollection2 = buildProgrammedTransform({
   .fromVoictent2<ProgramEstinantRelationshipVoque>({
     collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
   })
-  .toHubblepupTuple2<EngineEstinantLocator2Voque>({
+  .toItemTuple2<EngineEstinantLocator2Voque>({
     collectionId: ENGINE_ESTINANT_LOCATOR_2_GEPP,
   })
   .onTransform((relationshipList) => {

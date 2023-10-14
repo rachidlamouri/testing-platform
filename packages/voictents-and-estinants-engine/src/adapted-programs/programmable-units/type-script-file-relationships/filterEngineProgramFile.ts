@@ -27,15 +27,15 @@ export const filterEngineProgramFile = buildProgrammedTransform({
   .fromItem2<TypeScriptFileVoque>({
     collectionId: TYPE_SCRIPT_FILE_GEPP,
   })
-  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
     getRightKey: (rightInput) => rightInput.item.zorn,
   })
-  .andFromVoictent2<EngineFunctionConfigurationVoque>({
+  .andFromCollection2<EngineFunctionConfigurationVoque>({
     collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple2<EngineProgramFileVoque>({
+  .toItemTuple2<EngineProgramFileVoque>({
     collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
   .onTransform(

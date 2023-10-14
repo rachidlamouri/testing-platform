@@ -15,7 +15,7 @@ export const getAllFactGraphElements = buildProgrammedTransform({
   .fromVoictent2<FactVoque>({
     collectionId: FACT_GEPP,
   })
-  .toHubblepupTuple2<DirectedGraphElement2Voque>({
+  .toItemTuple2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
   .onTransform((factVoictent) => {

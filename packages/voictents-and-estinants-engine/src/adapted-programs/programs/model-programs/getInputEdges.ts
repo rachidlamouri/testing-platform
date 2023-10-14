@@ -29,21 +29,21 @@ export const getInputEdges = buildProgrammedTransform({
     collectionId: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
   })
   // TODO: locator and estinant ids for buildAddMetadtaForSerialization can have different ids. Remove this when that issue is fixed
-  .andFromHubblepupTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
     getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantLocator.zorn];
     },
     getRightKey: (engineEstinant) => engineEstinant.item.locator.zorn,
   })
-  .andFromHubblepupTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
     collectionId: ESTINANT_INPUT_2_GEPP,
     getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantInput.zorn];
     },
     getRightKey: (estinantInput) => estinantInput.item.zorn,
   })
-  .toHubblepupTuple2<DirectedGraphElement2Voque>({
+  .toItemTuple2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
   .onTransform((relationship, [engineEstinant], [estinantInput]) => {

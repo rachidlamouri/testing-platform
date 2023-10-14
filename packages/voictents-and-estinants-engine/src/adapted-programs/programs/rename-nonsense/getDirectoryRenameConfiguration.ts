@@ -38,10 +38,10 @@ export const getDirectoryRenameConfiguration = buildProgrammedTransform({
   .fromItem2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
-  .toHubblepupTuple2<FileSystemNodeRenameConfigurationVoque>({
+  .toItemTuple2<FileSystemNodeRenameConfigurationVoque>({
     collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionStreamMetatype>({
+  .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .onTransform((directory) => {

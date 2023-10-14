@@ -22,7 +22,7 @@ export const getExpectedProgramTestFile = buildProgrammedTransform({
   .fromItem2<ExpectedProgramTestFileConfigurationVoque>({
     collectionId: EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP,
   })
-  .andFromHubblepupTuple2<BashFileVoque, [string]>({
+  .andFromItemTuple2<BashFileVoque, [string]>({
     collectionId: BASH_FILE_GEPP,
     getRightKeyTuple: (expectedProgram) => {
       return [expectedProgram.item.testFilePath];

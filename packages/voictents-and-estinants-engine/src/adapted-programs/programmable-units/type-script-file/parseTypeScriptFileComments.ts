@@ -165,7 +165,7 @@ export const parseTypeScriptFileComments = buildProgrammedTransform({
   .toItem2<FileParsedCommentGroupVoque>({
     collectionId: FILE_PARSED_COMMENT_GROUP_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionStreamMetatype>({
+  .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .onTransform((parsedTypeScriptFile) => {

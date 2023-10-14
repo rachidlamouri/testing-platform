@@ -19,7 +19,7 @@ export const getBoundaryFromConfiguration = buildProgrammedTransform({
   .fromItem2<BoundaryConfigurationVoque>({
     collectionId: BOUNDARY_CONFIGURATION_GEPP,
   })
-  .andFromHubblepupTuple2<DirectoryVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<DirectoryVoque, [OdeshinZorn]>({
     collectionId: DIRECTORY_GEPP,
     getRightKeyTuple: (locator) => [locator.item.directoryPath],
     getRightKey: (directory) => directory.item.directoryPath.serialized,

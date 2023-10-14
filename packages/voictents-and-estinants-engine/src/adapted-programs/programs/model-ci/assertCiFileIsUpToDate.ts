@@ -38,12 +38,12 @@ export const assertCiFileIsUpToDate = buildProgrammedTransform({
   .fromItem2<SerializedCiModelVoque>({
     collectionId: SERIALIZED_CI_MODEL_GEPP,
   })
-  .andFromHubblepupTuple2<BashFileVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<BashFileVoque, [OdeshinZorn]>({
     collectionId: BASH_FILE_GEPP,
     getRightKeyTuple: () => [CI_FILE_PATH],
     getRightKey: (leftInput) => leftInput.item.filePath.serialized,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((serializeCiModel, [ciFile]) => {

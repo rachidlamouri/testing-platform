@@ -694,7 +694,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
   .fromItem2<EngineProgramFileVoque>({
     collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .andFromHubblepupTuple2<
+  .andFromItemTuple2<
     FileCommentedProgramBodyDeclarationGroupVoque,
     [OdeshinZorn]
   >({
@@ -702,18 +702,18 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
     getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
     getRightKey: (rightInput) => rightInput.item.zorn,
   })
-  .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
     getRightKey: (rightInput) => rightInput.item.zorn,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
-  .toHubblepupTuple2<EngineProgramLocator3Voque>({
+  .toItemTuple2<EngineProgramLocator3Voque>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .toHubblepupTuple2<ProgramEstinantRelationshipVoque>({
+  .toItemTuple2<ProgramEstinantRelationshipVoque>({
     collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
   })
   .onTransform(

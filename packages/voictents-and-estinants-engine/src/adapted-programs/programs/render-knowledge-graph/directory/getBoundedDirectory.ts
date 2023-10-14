@@ -27,19 +27,19 @@ export const getBoundedDirectory = buildProgrammedTransform({
   .fromItem2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
-  .andFromHubblepupTuple2<CommonBoundaryRootVoque, ['']>({
+  .andFromItemTuple2<CommonBoundaryRootVoque, ['']>({
     collectionId: COMMON_BOUNDARY_ROOT_GEPP,
     // TODO: make a more readable pattern for singleton collections
     getRightKeyTuple: () => [''],
     getRightKey: () => '',
   })
-  .andFromHubblepupTuple2<PartitionedBoundaryTrieVoque, ['']>({
+  .andFromItemTuple2<PartitionedBoundaryTrieVoque, ['']>({
     // TODO: make a more readable pattern for singletons
     collectionId: PARTITIONED_BOUNDARY_TRIE_GEPP,
     getRightKeyTuple: () => [''],
     getRightKey: () => '',
   })
-  .toHubblepupTuple2<BoundedDirectoryVoque>({
+  .toItemTuple2<BoundedDirectoryVoque>({
     collectionId: BOUNDED_DIRECTORY_GEPP,
   })
   .onTransform((directory, [commonBoundaryRoot], [partitionedBoundaryTrie]) => {

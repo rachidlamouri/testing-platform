@@ -41,10 +41,10 @@ export const auditLintAssertionOmissions = buildProgrammedTransform({
   .fromVoictent2<LintAssertionOmissionVoque>({
     collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
-  .andFromVoictent2<LintAssertionStreamMetatype>({
+  .andFromCollection2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .toHubblepupTuple2<GenericProgramErrorVoque>({
+  .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((omissionVoictent, assertionVoictent) => {

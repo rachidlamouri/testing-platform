@@ -16,7 +16,7 @@ export const getProgrammableUnitBoundary = buildProgrammedTransform({
   .fromItem2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
-  .toHubblepupTuple2<BoundaryVoque>({
+  .toItemTuple2<BoundaryVoque>({
     collectionId: BOUNDARY_GEPP,
   })
   .onTransform((directory) => {

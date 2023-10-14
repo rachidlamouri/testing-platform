@@ -20,7 +20,7 @@ export const getPartitionedFileDependency = buildProgrammedTransform({
   .fromVoictent2<FileDependencyVoque>({
     collectionId: FILE_DEPENDENCY_GEPP,
   })
-  .toHubblepupTuple2<PartitionedFileDependencyVoque>({
+  .toItemTuple2<PartitionedFileDependencyVoque>({
     collectionId: PARTITIONED_FILE_DEPENDENCY_GEPP,
   })
   .onTransform((fileDependencyVoictent) => {

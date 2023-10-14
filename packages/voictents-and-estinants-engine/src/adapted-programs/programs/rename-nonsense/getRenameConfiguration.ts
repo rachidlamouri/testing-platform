@@ -40,10 +40,10 @@ export const getRenameConfiguration = buildProgrammedTransform({
   .fromItem2<IdentifierNodeLocatorVoque>({
     collectionId: IDENTIFIER_NODE_LOCATOR_GEPP,
   })
-  .toHubblepupTuple2<RenameConfigurationVoque>({
+  .toItemTuple2<RenameConfigurationVoque>({
     collectionId: RENAME_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionStreamMetatype>({
+  .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .onTransform((identifierLocator) => {

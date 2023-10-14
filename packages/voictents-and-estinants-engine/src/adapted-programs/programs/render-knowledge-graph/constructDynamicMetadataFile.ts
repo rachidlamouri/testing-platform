@@ -94,13 +94,13 @@ export const constructDynamicMetadataFile = buildProgrammedTransform({
   .fromVoictent2<BoundaryFactVoque>({
     collectionId: BOUNDARY_FACT_GEPP,
   })
-  .andFromHubblepupTuple2<CommonBoundaryRootVoque, ['']>({
+  .andFromItemTuple2<CommonBoundaryRootVoque, ['']>({
     collectionId: COMMON_BOUNDARY_ROOT_GEPP,
     // TODO: make a more readable pattern for singleton collections
     getRightKeyTuple: () => [''],
     getRightKey: () => '',
   })
-  .andFromVoictent2<FileFact2Voque>({
+  .andFromCollection2<FileFact2Voque>({
     collectionId: FILE_FACT_2_GEPP,
   })
   .toItem2<OutputFileVoque>({

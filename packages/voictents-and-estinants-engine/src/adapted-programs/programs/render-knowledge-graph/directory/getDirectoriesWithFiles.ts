@@ -21,10 +21,10 @@ export const getDirectoriesWithFiles = buildProgrammedTransform({
   .fromVoictent2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
-  .andFromVoictent2<TypeScriptFileVoque>({
+  .andFromCollection2<TypeScriptFileVoque>({
     collectionId: TYPE_SCRIPT_FILE_GEPP,
   })
-  .toHubblepupTuple2<DirectoryWithFileVoque>({
+  .toItemTuple2<DirectoryWithFileVoque>({
     collectionId: DIRECTORY_WITH_FILE_GEPP,
   })
   .onTransform((directoryVoictent, typeScriptFileVoictent) => {

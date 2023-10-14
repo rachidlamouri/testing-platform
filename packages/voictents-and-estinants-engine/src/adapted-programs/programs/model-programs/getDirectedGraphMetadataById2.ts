@@ -20,7 +20,7 @@ export const getDirectedGraphMetadataById2 = buildProgrammedTransform({
   .fromVoictent2<DirectedGraphMetadataEntryVoque>({
     collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
   })
-  .toHubblepupTuple2<DirectedGraphMetadataByIdVoque>({
+  .toItemTuple2<DirectedGraphMetadataByIdVoque>({
     collectionId: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
   })
   .onTransform((entryList) => {

@@ -43,7 +43,7 @@ export const getEngineProgram3 = buildProgrammedTransform({
   .fromItem2<EngineProgramLocator3Voque>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromHubblepupTuple2<EngineEstinant3Voque, Tuple<OdeshinZorn>>({
+  .andFromItemTuple2<EngineEstinant3Voque, Tuple<OdeshinZorn>>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
     getRightKeyTuple: (engineProgram) => {
       return engineProgram.item.estinantRelationshipList.map((relationship) => {
@@ -57,13 +57,13 @@ export const getEngineProgram3 = buildProgrammedTransform({
   .toItem2<EngineProgram3Voque>({
     collectionId: ENGINE_PROGRAM_3_GEPP,
   })
-  .toHubblepupTuple2<ProgramVoqueRelationship2Voque>({
+  .toItemTuple2<ProgramVoqueRelationship2Voque>({
     collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
-  .toHubblepupTuple2<ProgramEstinantInputRelationshipVoque>({
+  .toItemTuple2<ProgramEstinantInputRelationshipVoque>({
     collectionId: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
   })
-  .toHubblepupTuple2<ProgramEstinantOutputRelationshipVoque>({
+  .toItemTuple2<ProgramEstinantOutputRelationshipVoque>({
     collectionId: PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
   })
   .onTransform((engineProgramLocator, estinantList) => {

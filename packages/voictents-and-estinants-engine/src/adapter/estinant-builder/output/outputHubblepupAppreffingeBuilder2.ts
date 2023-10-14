@@ -5,8 +5,8 @@ import {
 } from '../shared/programmedTransformBuilderContext';
 import { PartialOutputStreamConfiguration } from '../shared/partialStreamConfiguration';
 import {
-  PinbetunfBuilderParent2,
-  buildPinbetunfBuilder2,
+  AdaptedTransformBuilderParent2,
+  buildAdaptedTransformBuilder2,
 } from '../pinbetunf/pinbetunfBuilder2';
 import {
   AdaptedOutputStreamConnectionMetatype,
@@ -16,8 +16,8 @@ import {
 } from '../shared/streamConnectionMetatype';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
-  buildOutputHubblepupTupleAppreffingeBuilder2,
-  OutputHubblepupTupleAppreffingeBuilderParent2,
+  buildOutputItemTupleStreamConfigurationBuilder2,
+  OutputItemTupleStreamConfigurationBuilderParent2,
 } from './outputHubblepupTupleAppreffingeBuilder2';
 
 type NextAdaptedOutputVickenTuple<
@@ -44,18 +44,18 @@ type OutputHubblepupAppreffingeBuilder2<
   partialOutputAppreffinge: PartialOutputStreamConfiguration<TOutputVoque>,
 ) => SpreadN<
   [
-    PinbetunfBuilderParent2<
+    AdaptedTransformBuilderParent2<
       TAdaptedLeftInputVicken,
       TAdaptedRightInputVickenTuple,
       NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
     >,
 
-    OutputHubblepupAppreffingeBuilderParent2<
+    OutputItemStreamConfigurationBuilderParent2<
       TAdaptedLeftInputVicken,
       TAdaptedRightInputVickenTuple,
       NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
     >,
-    OutputHubblepupTupleAppreffingeBuilderParent2<
+    OutputItemTupleStreamConfigurationBuilderParent2<
       TAdaptedLeftInputVicken,
       TAdaptedRightInputVickenTuple,
       NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
@@ -63,7 +63,7 @@ type OutputHubblepupAppreffingeBuilder2<
   ]
 >;
 
-export const buildOutputHubblepupAppreffingeBuilder2 = <
+export const buildOutputItemStreamConfigurationBuilder2 = <
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
@@ -94,18 +94,18 @@ export const buildOutputHubblepupAppreffingeBuilder2 = <
     });
 
     return {
-      onTransform: buildPinbetunfBuilder2<
+      onTransform: buildAdaptedTransformBuilder2<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
       >(nextContext),
 
-      toItem2: buildOutputHubblepupAppreffingeBuilder2<
+      toItem2: buildOutputItemStreamConfigurationBuilder2<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
       >(nextContext),
-      toHubblepupTuple2: buildOutputHubblepupTupleAppreffingeBuilder2<
+      toItemTuple2: buildOutputItemTupleStreamConfigurationBuilder2<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple,
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
@@ -116,7 +116,7 @@ export const buildOutputHubblepupAppreffingeBuilder2 = <
   return buildOutputHubblepupAppreffinge2;
 };
 
-export type OutputHubblepupAppreffingeBuilderParent2<
+export type OutputItemStreamConfigurationBuilderParent2<
   TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
   TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
   TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,

@@ -29,7 +29,7 @@ export const getBoundedFile = buildProgrammedTransform({
   .fromItem2<TypeScriptFileVoque>({
     collectionId: TYPE_SCRIPT_FILE_GEPP,
   })
-  .andFromHubblepupTuple2<FileAncestorDirectoryPathSetVoque, [string]>({
+  .andFromItemTuple2<FileAncestorDirectoryPathSetVoque, [string]>({
     collectionId: FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
     getRightKeyTuple: (file) => {
       return [file.item.filePath.serialized];
@@ -38,7 +38,7 @@ export const getBoundedFile = buildProgrammedTransform({
       return file.item.filePath;
     },
   })
-  .andFromHubblepupTuple2<PartitionedBoundaryTrieVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<PartitionedBoundaryTrieVoque, [OdeshinZorn]>({
     // TODO: make a more readable pattern for singletons
     collectionId: PARTITIONED_BOUNDARY_TRIE_GEPP,
     getRightKeyTuple: () => [''],

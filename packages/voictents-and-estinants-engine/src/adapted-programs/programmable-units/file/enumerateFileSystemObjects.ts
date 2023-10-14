@@ -23,10 +23,10 @@ export const enumerateFileSystemObjects = buildProgrammedTransform({
   .fromItem2<FileSystemObjectEnumeratorConfigurationVoque>({
     collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
   })
-  .toHubblepupTuple2<DirectoryVoque>({
+  .toItemTuple2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
-  .toHubblepupTuple2<FileVoque>({
+  .toItemTuple2<FileVoque>({
     collectionId: FILE_GEPP,
   })
   .onTransform((input) => {

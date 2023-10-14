@@ -26,7 +26,7 @@ export const filterIdentifier = buildProgrammedTransform({
   .fromItem2<AstNodeLocatorVoque>({
     collectionId: AST_NODE_LOCATOR_GEPP,
   })
-  .toHubblepupTuple2<IdentifierNodeLocatorVoque>({
+  .toItemTuple2<IdentifierNodeLocatorVoque>({
     collectionId: IDENTIFIER_NODE_LOCATOR_GEPP,
   })
   .onTransform((nodeLocator) => {

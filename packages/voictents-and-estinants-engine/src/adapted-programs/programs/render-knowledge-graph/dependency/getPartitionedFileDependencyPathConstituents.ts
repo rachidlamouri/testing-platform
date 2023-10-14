@@ -30,10 +30,10 @@ export const getPartitionedFileDependencyPathConstituents =
     .fromVoictent2<PartitionedFileDependencyVoque>({
       collectionId: PARTITIONED_FILE_DEPENDENCY_GEPP,
     })
-    .toHubblepupTuple2<PartitionedFileDependencyPathNodeVoque>({
+    .toItemTuple2<PartitionedFileDependencyPathNodeVoque>({
       collectionId: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
     })
-    .toHubblepupTuple2<FileDependencyPathSegmentFactVoque>({
+    .toItemTuple2<FileDependencyPathSegmentFactVoque>({
       collectionId: FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,
     })
     .onTransform((fileDependencyVoictent) => {

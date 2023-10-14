@@ -58,10 +58,10 @@ export const markUnusedExports = buildProgrammedTransform({
   .fromVoictent2<TypeScriptFileImportListVoque>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
-  .andFromVoictent2<TypeScriptFileExportListVoque>({
+  .andFromCollection2<TypeScriptFileExportListVoque>({
     collectionId: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
   })
-  .toHubblepupTuple2<LintAssertionStreamMetatype>({
+  .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .onTransform((importListList, exportListList) => {
