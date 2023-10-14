@@ -31,9 +31,9 @@ export const getEngineProgramVoqueElements = buildProgrammedTransform({
     collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .andFromHubblepupTuple2<EngineVoque2Voque, [OdeshinZorn]>({
-    gepp: ENGINE_VOQUE_2_GEPP,
-    framate: (relationship) => [relationship.item.voqueLocator.zorn],
-    croard: (engineVoque) => engineVoque.item.locator.zorn,
+    collectionId: ENGINE_VOQUE_2_GEPP,
+    getRightKeyTuple: (relationship) => [relationship.item.voqueLocator.zorn],
+    getRightKey: (engineVoque) => engineVoque.item.locator.zorn,
   })
   .toItem2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,

@@ -23,8 +23,8 @@ export const getFileDependencies = buildProgrammedTransform({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
   .andFromHubblepupTuple2<BoundedFileVoque, NonEmptyTuple<OdeshinZorn>>({
-    gepp: BOUNDED_FILE_GEPP,
-    framate: (importList) => {
+    collectionId: BOUNDED_FILE_GEPP,
+    getRightKeyTuple: (importList) => {
       const importingFileZorn = importList.item.zorn;
       const importedFileZornList = importList.item.list
         .filter((importItem) => importItem.isInternal)
@@ -32,7 +32,7 @@ export const getFileDependencies = buildProgrammedTransform({
 
       return [importingFileZorn, ...importedFileZornList];
     },
-    croard: (partitionedFile) => {
+    getRightKey: (partitionedFile) => {
       return partitionedFile.item.file.filePath.serialized;
     },
   })

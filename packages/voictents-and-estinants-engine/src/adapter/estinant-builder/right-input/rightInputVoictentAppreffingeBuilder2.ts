@@ -3,7 +3,7 @@ import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
   buildInputOutputContextFromRightInputContext,
   InputOutputContext,
-} from '../shared/estinantBuilderContext';
+} from '../shared/programmedTransformBuilderContext';
 import {
   buildOutputHubblepupAppreffingeBuilder2,
   OutputHubblepupAppreffingeBuilderParent2,
@@ -12,23 +12,23 @@ import {
   OutputHubblepupTupleAppreffingeBuilderParent2,
   buildOutputHubblepupTupleAppreffingeBuilder2,
 } from '../output/outputHubblepupTupleAppreffingeBuilder2';
-import { PartialRightVoictentAppreffinge } from '../shared/partialAppreffinge';
+import { PartialRightCollectionStreamConfiguration } from '../shared/partialStreamConfiguration';
 import {
-  AdaptedRightInputVoictentVicken,
-  GenericAdaptedLeftInputVicken,
-  GenericAdaptedRightInputVickenTuple,
-} from '../shared/vicken';
+  AdaptedRightInputCollectionStreamConnectionMetatype,
+  GenericAdaptedLeftInputStreamConnectionMetatype,
+  GenericAdaptedRightInputStreamConnectionMetatypeTuple,
+} from '../shared/streamConnectionMetatype';
 import {
   buildPinbetunfBuilder2,
   PinbetunfBuilderParent2,
 } from '../pinbetunf/pinbetunfBuilder2';
 
 type NextAdaptedRightInputVickenTuple<
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
   TRightInputVoque extends GenericStreamMetatype,
 > = [
   ...TAdaptedRightInputVickenTuple,
-  AdaptedRightInputVoictentVicken<TRightInputVoque>,
+  AdaptedRightInputCollectionStreamConnectionMetatype<TRightInputVoque>,
 ];
 
 type EmptyAdaptedOutputVickenTuple = [];
@@ -40,10 +40,10 @@ type EmptyAdaptedOutputVickenTuple = [];
  * @readableName RightInputCollectionStreamConfigurationBuilder
  */
 type RightInputVoictentAppreffingeBuilder2<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
 > = <TRightInputVoque extends GenericStreamMetatype>(
-  partialRightAppreffinge: PartialRightVoictentAppreffinge<TRightInputVoque>,
+  partialRightAppreffinge: PartialRightCollectionStreamConfiguration<TRightInputVoque>,
 ) => SpreadN<
   [
     RightInputVoictentAppreffingeBuilderParent2<
@@ -83,8 +83,8 @@ type RightInputVoictentAppreffingeBuilder2<
 >;
 
 export const buildRightInputVoictentAppreffingeBuilder2 = <
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
 >(
   inputOutputContext: InputOutputContext,
 ): RightInputVoictentAppreffingeBuilder2<
@@ -95,14 +95,14 @@ export const buildRightInputVoictentAppreffingeBuilder2 = <
     TAdaptedLeftInputVicken,
     TAdaptedRightInputVickenTuple
   > = <TRightInputVoque extends GenericStreamMetatype>(
-    partialRightAppreffinge: PartialRightVoictentAppreffinge<TRightInputVoque>,
+    partialRightAppreffinge: PartialRightCollectionStreamConfiguration<TRightInputVoque>,
   ) => {
     const nextContext = buildInputOutputContextFromRightInputContext({
       previousContext: inputOutputContext,
       rightInputContext: {
-        gepp: partialRightAppreffinge.gepp,
-        isWibiz: true,
-        modifyTropoignantInput: (rightInput) => rightInput as unknown,
+        collectionId: partialRightAppreffinge.collectionId,
+        isCollectionStream: true,
+        modifyCoreTransformInput: (rightInput) => rightInput as unknown,
       },
     });
 
@@ -147,8 +147,8 @@ export const buildRightInputVoictentAppreffingeBuilder2 = <
 };
 
 export type RightInputVoictentAppreffingeBuilderParent2<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
 > = {
   andFromVoictent2: RightInputVoictentAppreffingeBuilder2<
     TAdaptedLeftInputVicken,

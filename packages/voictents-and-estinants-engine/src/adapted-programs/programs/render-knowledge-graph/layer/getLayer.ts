@@ -19,11 +19,11 @@ export const getLayer = buildProgrammedTransform({
     collectionId: LAYER_CONFIGURATION_GEPP,
   })
   .andFromHubblepupTuple2<DirectoryVoque, [string]>({
-    gepp: DIRECTORY_GEPP,
-    framate: (layer) => {
+    collectionId: DIRECTORY_GEPP,
+    getRightKeyTuple: (layer) => {
       return [layer.item.directoryPath];
     },
-    croard: (directory) => {
+    getRightKey: (directory) => {
       return directory.item.directoryPath.serialized;
     },
   })

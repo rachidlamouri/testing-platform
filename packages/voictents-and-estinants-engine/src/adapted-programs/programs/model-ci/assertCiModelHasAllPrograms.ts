@@ -39,12 +39,12 @@ export const assertCiModelHasAllPrograms = buildProgrammedTransform({
   })
   .andFromHubblepupTuple2<CiModelVoque, [OdeshinZorn]>({
     // TODO: make a better pattern for singletons
-    gepp: CI_MODEL_GEPP,
-    framate: () => [CI_MODEL_ZORN],
-    croard: (rightInput) => rightInput.item.zorn,
+    collectionId: CI_MODEL_GEPP,
+    getRightKeyTuple: () => [CI_MODEL_ZORN],
+    getRightKey: (rightInput) => rightInput.item.zorn,
   })
   .andFromVoictent2<ExpectedProgramTestFileVoque>({
-    gepp: EXPECTED_PROGRAM_TEST_FILE_GEPP,
+    collectionId: EXPECTED_PROGRAM_TEST_FILE_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

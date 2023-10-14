@@ -22,7 +22,7 @@ export const getDirectoriesWithFiles = buildProgrammedTransform({
     collectionId: DIRECTORY_GEPP,
   })
   .andFromVoictent2<TypeScriptFileVoque>({
-    gepp: TYPE_SCRIPT_FILE_GEPP,
+    collectionId: TYPE_SCRIPT_FILE_GEPP,
   })
   .toHubblepupTuple2<DirectoryWithFileVoque>({
     collectionId: DIRECTORY_WITH_FILE_GEPP,

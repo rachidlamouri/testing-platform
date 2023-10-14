@@ -39,9 +39,9 @@ export const assertCiFileIsUpToDate = buildProgrammedTransform({
     collectionId: SERIALIZED_CI_MODEL_GEPP,
   })
   .andFromHubblepupTuple2<BashFileVoque, [OdeshinZorn]>({
-    gepp: BASH_FILE_GEPP,
-    framate: () => [CI_FILE_PATH],
-    croard: (leftInput) => leftInput.item.filePath.serialized,
+    collectionId: BASH_FILE_GEPP,
+    getRightKeyTuple: () => [CI_FILE_PATH],
+    getRightKey: (leftInput) => leftInput.item.filePath.serialized,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

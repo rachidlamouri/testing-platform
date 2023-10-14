@@ -28,12 +28,12 @@ export const filterEngineProgramFile = buildProgrammedTransform({
     collectionId: TYPE_SCRIPT_FILE_GEPP,
   })
   .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
-    gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    framate: (leftInput) => [leftInput.item.zorn],
-    croard: (rightInput) => rightInput.item.zorn,
+    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+    getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
+    getRightKey: (rightInput) => rightInput.item.zorn,
   })
   .andFromVoictent2<EngineFunctionConfigurationVoque>({
-    gepp: ENGINE_FUNCTION_CONFIGURATION_GEPP,
+    collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
   })
   .toHubblepupTuple2<EngineProgramFileVoque>({
     collectionId: ENGINE_PROGRAM_FILE_GEPP,

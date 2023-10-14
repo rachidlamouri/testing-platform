@@ -26,7 +26,7 @@ export const getCommonBoundaryRoot = buildProgrammedTransform({
     collectionId: BOUNDARY_GEPP,
   })
   .andFromVoictent2<DirectoryVoque>({
-    gepp: DIRECTORY_GEPP,
+    collectionId: DIRECTORY_GEPP,
   })
   .toItem2<CommonBoundaryRootVoque>({
     collectionId: COMMON_BOUNDARY_ROOT_GEPP,

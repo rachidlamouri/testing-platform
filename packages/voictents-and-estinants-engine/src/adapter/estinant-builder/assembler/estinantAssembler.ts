@@ -18,11 +18,11 @@ import {
 import {
   AssemblerContext,
   CoreConstituentOutputEntry,
-} from '../shared/estinantBuilderContext';
+} from '../shared/programmedTransformBuilderContext';
 import {
-  CoreOutputVickenFromAdaptedOutputVickenTuple,
-  GenericAdaptedOutputVickenTuple,
-} from '../shared/vicken';
+  CoreOutputStreamConnectionMetatypeFromAdaptedOutputStreamConnectionMetatypeTuple,
+  GenericAdaptedOutputStreamConnectionMetatypeTuple,
+} from '../shared/streamConnectionMetatype';
 
 /**
  * Constructs an estinant given all of the context accumulated by the builder
@@ -33,17 +33,17 @@ import {
 type EstinantAssembler<
   TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
   TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = () => ProgrammedTransform2<
   TLeftInputVicken,
   TRightInputVickenTuple,
-  CoreOutputVickenFromAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple>
+  CoreOutputStreamConnectionMetatypeFromAdaptedOutputStreamConnectionMetatypeTuple<TAdaptedOutputVickenTuple>
 >;
 
 export const buildEstinantAssembler = <
   TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
   TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 >(
   assemblerContext: AssemblerContext,
 ): EstinantAssembler<
@@ -67,7 +67,10 @@ export const buildEstinantAssembler = <
       ...rightInputTuple
     ) => {
       let adaptedLeftInput: unknown;
-      if (leftInputContext.isWibiz || leftInputContext.version === 2) {
+      if (
+        leftInputContext.isCollectionStream ||
+        leftInputContext.version === 2
+      ) {
         adaptedLeftInput = leftInput;
       } else {
         adaptedLeftInput = (leftInput as GenericIndexedItem).item;
@@ -75,12 +78,15 @@ export const buildEstinantAssembler = <
 
       /* eslint-disable @typescript-eslint/no-unsafe-assignment */
       const modifiedLeftInput =
-        leftInputContext.modifyTropoignantInput(adaptedLeftInput);
+        leftInputContext.modifyCoreTransformInput(adaptedLeftInput);
 
       const modifiedRightInputTuple = rightInputContextTuple.map(
         (rightInputContext, index) => {
           let adaptedRightInput: unknown;
-          if (rightInputContext.isWibiz || rightInputContext.version === 2) {
+          if (
+            rightInputContext.isCollectionStream ||
+            rightInputContext.version === 2
+          ) {
             adaptedRightInput = rightInputTuple[index];
           } else {
             adaptedRightInput = (rightInputTuple[index] as GenericIndexedItem)
@@ -88,17 +94,17 @@ export const buildEstinantAssembler = <
           }
 
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-          return rightInputContext.modifyTropoignantInput(adaptedRightInput);
+          return rightInputContext.modifyCoreTransformInput(adaptedRightInput);
         },
       );
-      const modifiedOutput = assemblerContext.pinbe(
+      const modifiedOutput = assemblerContext.transform(
         modifiedLeftInput,
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         ...modifiedRightInputTuple,
       );
 
       const aggregatedOutput =
-        outputContext.aggregatePinbetunfOutput(modifiedOutput);
+        outputContext.aggregateAdaptedTransformOutput(modifiedOutput);
 
       const outputEntryList =
         outputContext.constituentResultNormalizerList.map<CoreConstituentOutputEntry>(
@@ -122,15 +128,15 @@ export const buildEstinantAssembler = <
       version: 2,
       name: instantiationContext.name,
       leftInputStreamConfiguration: {
-        collectionId: leftInputContext.gepp,
-        isCollectionStream: leftInputContext.isWibiz,
+        collectionId: leftInputContext.collectionId,
+        isCollectionStream: leftInputContext.isCollectionStream,
       },
       rightInputStreamConfigurationTuple: rightInputContextTuple.map(
         (rightInputContext) => {
-          if (rightInputContext.isWibiz) {
+          if (rightInputContext.isCollectionStream) {
             return {
-              collectionId: rightInputContext.gepp,
-              isCollectionStream: rightInputContext.isWibiz,
+              collectionId: rightInputContext.collectionId,
+              isCollectionStream: rightInputContext.isCollectionStream,
               getRightKeyTuple: undefined,
               getRightKey: undefined,
             } satisfies RightInputStreamConfiguration<
@@ -140,22 +146,27 @@ export const buildEstinantAssembler = <
           }
 
           return {
-            collectionId: rightInputContext.gepp,
-            isCollectionStream: rightInputContext.isWibiz,
+            collectionId: rightInputContext.collectionId,
+            isCollectionStream: rightInputContext.isCollectionStream,
             getRightKeyTuple: (leftInput): IdTuple => {
               let adaptedLeftInput: unknown;
-              if (leftInputContext.isWibiz || leftInputContext.version === 2) {
+              if (
+                leftInputContext.isCollectionStream ||
+                leftInputContext.version === 2
+              ) {
                 adaptedLeftInput = leftInput;
               } else {
                 adaptedLeftInput = (leftInput as GenericIndexedItem).item;
               }
 
-              return rightInputContext.framate(adaptedLeftInput) as IdTuple;
+              return rightInputContext.getRightKeyTuple(
+                adaptedLeftInput,
+              ) as IdTuple;
             },
             getRightKey: (indexedRightInput): DeprecatedId => {
               let adaptedRightInput: unknown;
               if (
-                rightInputContext.isWibiz ||
+                rightInputContext.isCollectionStream ||
                 rightInputContext.version === 2
               ) {
                 adaptedRightInput = indexedRightInput;
@@ -163,7 +174,7 @@ export const buildEstinantAssembler = <
                 adaptedRightInput = indexedRightInput.item;
               }
 
-              return rightInputContext.croard(adaptedRightInput);
+              return rightInputContext.getRightKey(adaptedRightInput);
             },
           } satisfies RightInputStreamConfiguration<
             GenericLeftInputStreamConnectionMetatype,
@@ -172,13 +183,13 @@ export const buildEstinantAssembler = <
         },
       ),
       outputStreamConfiguration: {
-        collectionIdTuple: outputContext.geppTuple,
+        collectionIdTuple: outputContext.collectionIdTuple,
       },
       transform,
     } satisfies GenericProgrammedTransform2 as unknown as ProgrammedTransform2<
       TLeftInputVicken,
       TRightInputVickenTuple,
-      CoreOutputVickenFromAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple>
+      CoreOutputStreamConnectionMetatypeFromAdaptedOutputStreamConnectionMetatypeTuple<TAdaptedOutputVickenTuple>
     >;
     return estinant;
   };
@@ -189,7 +200,7 @@ export const buildEstinantAssembler = <
 export type EstinantAssemblerParent<
   TLeftInputVicken extends GenericLeftInputStreamConnectionMetatype,
   TRightInputVickenTuple extends GenericRightInputStreamConnectionMetatypeTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = {
   assemble: EstinantAssembler<
     TLeftInputVicken,

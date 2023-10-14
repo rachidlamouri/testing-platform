@@ -19,34 +19,34 @@ type AnyRightInputAccessor = (leftInput: any) => any;
 
 type LeftInputContext = {
   version?: 2;
-  gepp: CollectionId;
-  isWibiz: boolean;
-  modifyTropoignantInput: AnyLeftInputAccessor;
+  collectionId: CollectionId;
+  isCollectionStream: boolean;
+  modifyCoreTransformInput: AnyLeftInputAccessor;
 };
 
-type RightInputVoictentContext = {
+type RightInputCollectionContext = {
   version?: 2;
-  gepp: CollectionId;
-  isWibiz: true;
-  modifyTropoignantInput: AnyRightInputAccessor;
+  collectionId: CollectionId;
+  isCollectionStream: true;
+  modifyCoreTransformInput: AnyRightInputAccessor;
 };
 
-type RightInputHubblepupContext = {
+type RightInputItemContext = {
   version?: 2;
-  gepp: CollectionId;
-  isWibiz: false;
-  framate: AnyLeftInputAccessor;
-  croard: AnyRightInputAccessor;
-  modifyTropoignantInput: AnyRightInputAccessor;
+  collectionId: CollectionId;
+  isCollectionStream: false;
+  getRightKeyTuple: AnyLeftInputAccessor;
+  getRightKey: AnyRightInputAccessor;
+  modifyCoreTransformInput: AnyRightInputAccessor;
 };
 
-type RightInputContext = RightInputVoictentContext | RightInputHubblepupContext;
+type RightInputContext = RightInputCollectionContext | RightInputItemContext;
 
 type RightInputContextTuple = Tuple<RightInputContext>;
 
 type AggregatedOutput = Record<CollectionId, unknown>;
 
-type PinbetunfOutputAggregator<> = (
+type AdaptedTransformOutputAggregator<> = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   modifiedOutput: any,
 ) => AggregatedOutput;
@@ -62,17 +62,17 @@ export type ConstituentResultNormalizer = (
 ) => CoreConstituentOutputEntry;
 
 type AggregatedOutputContext = {
-  aggregatePinbetunfOutput: PinbetunfOutputAggregator;
+  aggregateAdaptedTransformOutput: AdaptedTransformOutputAggregator;
   constituentResultNormalizerList: ConstituentResultNormalizer[];
-  geppTuple: CollectionId[];
+  collectionIdTuple: CollectionId[];
 };
 
-type Pinbetunf<TInputTuple extends Tuple<unknown>, TOutput> = (
+type AdaptedTransform<TInputTuple extends Tuple<unknown>, TOutput> = (
   ...input: TInputTuple
 ) => TOutput;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AnyPinbetunf = Pinbetunf<any, any>;
+type AnyAdaptedTransform = AdaptedTransform<any, any>;
 
 export type InstantiationContext = {
   name: string;
@@ -93,22 +93,22 @@ export type AssemblerContext = {
   instantiationContext: InstantiationContext;
   inputContext: InputContext;
   outputContext: AggregatedOutputContext;
-  pinbe: AnyPinbetunf;
+  transform: AnyAdaptedTransform;
 };
 
-const buildEmptyAggregatedOutput: PinbetunfOutputAggregator = () => {
+const buildEmptyAggregatedOutput: AdaptedTransformOutputAggregator = () => {
   const aggregatedOutput: AggregatedOutput = {};
   return aggregatedOutput;
 };
 
 const buildSingleValueAggregatedOutputBuilder = (
-  outputGepp: CollectionId,
-): PinbetunfOutputAggregator => {
-  const buildSingleValueAggregatedOutput: PinbetunfOutputAggregator = (
+  outputCollectionId: CollectionId,
+): AdaptedTransformOutputAggregator => {
+  const buildSingleValueAggregatedOutput: AdaptedTransformOutputAggregator = (
     modifiedOutput: unknown,
   ) => {
     const aggregatedOutput: AggregatedOutput = {
-      [outputGepp]: modifiedOutput,
+      [outputCollectionId]: modifiedOutput,
     };
     return aggregatedOutput;
   };
@@ -116,7 +116,7 @@ const buildSingleValueAggregatedOutputBuilder = (
   return buildSingleValueAggregatedOutput;
 };
 
-const passthroughAggregatedOutput: PinbetunfOutputAggregator = (
+const passthroughAggregatedOutput: AdaptedTransformOutputAggregator = (
   modifiedOutput: unknown,
 ) => {
   const aggregatedOutput = modifiedOutput as AggregatedOutput;
@@ -139,9 +139,9 @@ export const buildInputOutputContextFromLeftInputContext = ({
       rightInputContextTuple: [],
     },
     outputContext: {
-      aggregatePinbetunfOutput: buildEmptyAggregatedOutput,
+      aggregateAdaptedTransformOutput: buildEmptyAggregatedOutput,
       constituentResultNormalizerList: [],
-      geppTuple: [],
+      collectionIdTuple: [],
     },
   };
 };
@@ -180,7 +180,7 @@ export const buildInputOutputContextFromRightInputContext = ({
 type InputOutputContextFromOutputContextBuilderInput = {
   previousContext: InputOutputContext;
   normalizeResult: ConstituentResultNormalizer;
-  outputGepp: CollectionId;
+  outputCollectionId: CollectionId;
 };
 
 export const buildInputOutputContextFromConstituentResultNormalizer = ({
@@ -189,29 +189,29 @@ export const buildInputOutputContextFromConstituentResultNormalizer = ({
     inputContext,
     outputContext: {
       constituentResultNormalizerList: previousConstituentResultNormalizerList,
-      geppTuple: previousGeppTuple,
+      collectionIdTuple: previousCollectionIdTuple,
     },
   },
   normalizeResult,
-  outputGepp,
+  outputCollectionId,
 }: InputOutputContextFromOutputContextBuilderInput): InputOutputContext => {
   const nextConstituentResultNormalizerList = [
     ...previousConstituentResultNormalizerList,
     normalizeResult,
   ];
 
-  const aggregatePinbetunfOutput: PinbetunfOutputAggregator =
+  const aggregateAdaptedTransformOutput: AdaptedTransformOutputAggregator =
     nextConstituentResultNormalizerList.length === 1
-      ? buildSingleValueAggregatedOutputBuilder(outputGepp)
+      ? buildSingleValueAggregatedOutputBuilder(outputCollectionId)
       : passthroughAggregatedOutput;
 
   return {
     instantiationContext,
     inputContext,
     outputContext: {
-      aggregatePinbetunfOutput,
+      aggregateAdaptedTransformOutput,
       constituentResultNormalizerList: nextConstituentResultNormalizerList,
-      geppTuple: [...previousGeppTuple, outputGepp],
+      collectionIdTuple: [...previousCollectionIdTuple, outputCollectionId],
     },
   };
 };

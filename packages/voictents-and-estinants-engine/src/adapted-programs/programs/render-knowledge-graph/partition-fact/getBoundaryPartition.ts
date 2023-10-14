@@ -28,16 +28,16 @@ export const getBoundaryPartition = buildProgrammedTransform({
     collectionId: BOUNDARY_GEPP,
   })
   .andFromHubblepupTuple2<LayerTrieVoque, ['']>({
-    gepp: LAYER_TRIE_GEPP,
+    collectionId: LAYER_TRIE_GEPP,
     // TODO: make a more readable pattern for singleton collections
-    framate: () => [''],
-    croard: () => '',
+    getRightKeyTuple: () => [''],
+    getRightKey: () => '',
   })
   .andFromHubblepupTuple2<CommonBoundaryRootVoque, ['']>({
-    gepp: COMMON_BOUNDARY_ROOT_GEPP,
+    collectionId: COMMON_BOUNDARY_ROOT_GEPP,
     // TODO: make a more readable pattern for singleton collections
-    framate: () => [''],
-    croard: () => '',
+    getRightKeyTuple: () => [''],
+    getRightKey: () => '',
   })
   .toItem2<PartitionFactVoque>({
     collectionId: PARTITION_FACT_GEPP,

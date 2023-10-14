@@ -29,11 +29,11 @@ export const getFileFact2 = buildProgrammedTransform({
     collectionId: PARTITIONED_FILE_GEPP,
   })
   .andFromHubblepupTuple2<BoundedDirectoryVoque, [OdeshinZorn]>({
-    gepp: BOUNDED_DIRECTORY_GEPP,
-    framate: (partitionedFile) => {
+    collectionId: BOUNDED_DIRECTORY_GEPP,
+    getRightKeyTuple: (partitionedFile) => {
       return [partitionedFile.item.file.file.filePath.parentDirectoryPath];
     },
-    croard: (boundedDirectory) => {
+    getRightKey: (boundedDirectory) => {
       return boundedDirectory.item.directory.directoryPath.serialized;
     },
   })
@@ -41,16 +41,16 @@ export const getFileFact2 = buildProgrammedTransform({
     FileCommentedProgramBodyDeclarationGroupVoque,
     [OdeshinZorn]
   >({
-    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-    framate: (partitionedFile) => {
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+    getRightKeyTuple: (partitionedFile) => {
       return [partitionedFile.item.file.file.filePath.serialized];
     },
-    croard: (declarationGroup) => {
+    getRightKey: (declarationGroup) => {
       return declarationGroup.item.filePath;
     },
   })
   .andFromVoictent2<FileDependencyVoque>({
-    gepp: FILE_DEPENDENCY_GEPP,
+    collectionId: FILE_DEPENDENCY_GEPP,
   })
   .toItem2<FileFact2Voque>({
     collectionId: FILE_FACT_2_GEPP,

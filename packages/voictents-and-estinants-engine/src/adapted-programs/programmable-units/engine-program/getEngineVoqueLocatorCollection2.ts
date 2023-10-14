@@ -28,7 +28,7 @@ export const getEngineVoqueLocatorCollection2 = buildProgrammedTransform({
     collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .andFromVoictent2<EstinantVoqueRelationship2Voque>({
-    gepp: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
+    collectionId: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .toHubblepupTuple2<EngineVoqueLocator2Voque>({
     collectionId: ENGINE_VOQUE_LOCATOR_2_GEPP,

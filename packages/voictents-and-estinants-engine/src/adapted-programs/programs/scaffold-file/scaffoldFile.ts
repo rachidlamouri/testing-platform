@@ -24,11 +24,11 @@ export const scaffoldFile = buildProgrammedTransform({
     collectionId: SCAFFOLD_CONFIGURATION_GEPP,
   })
   .andFromHubblepupTuple2<FileVoque, [string]>({
-    gepp: FILE_GEPP,
-    framate: (configuration) => {
+    collectionId: FILE_GEPP,
+    getRightKeyTuple: (configuration) => {
       return [configuration.item.filePath];
     },
-    croard: (file) => {
+    getRightKey: (file) => {
       return file.item.filePath.serialized;
     },
   })

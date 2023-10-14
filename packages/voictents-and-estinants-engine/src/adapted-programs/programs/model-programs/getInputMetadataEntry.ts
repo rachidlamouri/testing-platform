@@ -24,11 +24,11 @@ export const getInputMetadataEntry = buildProgrammedTransform({
     collectionId: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
   })
   .andFromHubblepupTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
-    gepp: ESTINANT_INPUT_2_GEPP,
-    framate: (relationship) => {
+    collectionId: ESTINANT_INPUT_2_GEPP,
+    getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantInput.zorn];
     },
-    croard: (engineEstinant) => engineEstinant.item.zorn,
+    getRightKey: (engineEstinant) => engineEstinant.item.zorn,
   })
   .toItem2<DirectedGraphMetadataEntryVoque>({
     collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,

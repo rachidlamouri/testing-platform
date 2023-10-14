@@ -28,16 +28,16 @@ export const aggregateFacts = buildProgrammedTransform({
     collectionId: PARTITION_FACT_GEPP,
   })
   .andFromVoictent2<DirectoryFact2Voque>({
-    gepp: DIRECTORY_FACT_2_GEPP,
+    collectionId: DIRECTORY_FACT_2_GEPP,
   })
   .andFromVoictent2<FileFact2Voque>({
-    gepp: FILE_FACT_2_GEPP,
+    collectionId: FILE_FACT_2_GEPP,
   })
   .andFromVoictent2<FileDependencyPathNodeFactVoque>({
-    gepp: FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
+    collectionId: FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
   })
   .andFromVoictent2<FileDependencyPathSegmentFactVoque>({
-    gepp: FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,
+    collectionId: FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,
   })
   .toHubblepupTuple2<FactVoque>({
     collectionId: FACT_GEPP,

@@ -38,11 +38,11 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
     collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
   })
   .andFromHubblepupTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
-    gepp: ENGINE_ESTINANT_3_GEPP,
-    framate: (relationship) => {
+    collectionId: ENGINE_ESTINANT_3_GEPP,
+    getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantLocator.zorn];
     },
-    croard: (engineEstinant) => engineEstinant.item.locator.zorn,
+    getRightKey: (engineEstinant) => engineEstinant.item.locator.zorn,
   })
   .toHubblepupTuple2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,

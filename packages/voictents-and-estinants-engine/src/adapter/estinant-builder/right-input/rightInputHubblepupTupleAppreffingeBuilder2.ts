@@ -8,7 +8,7 @@ import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import {
   buildInputOutputContextFromRightInputContext,
   InputOutputContext,
-} from '../shared/estinantBuilderContext';
+} from '../shared/programmedTransformBuilderContext';
 import {
   buildOutputHubblepupAppreffingeBuilder2,
   OutputHubblepupAppreffingeBuilderParent2,
@@ -17,7 +17,7 @@ import {
   buildOutputHubblepupTupleAppreffingeBuilder2,
   OutputHubblepupTupleAppreffingeBuilderParent2,
 } from '../output/outputHubblepupTupleAppreffingeBuilder2';
-import { PartialRightHubblepupTupleAppreffinge } from '../shared/partialAppreffinge';
+import { PartialRightItemTupleStreamConfiguration } from '../shared/partialStreamConfiguration';
 import {
   PinbetunfBuilderParent2,
   buildPinbetunfBuilder2,
@@ -27,18 +27,21 @@ import {
   RightInputVoictentAppreffingeBuilderParent2,
 } from './rightInputVoictentAppreffingeBuilder2';
 import {
-  AdaptedRightInputHubblepupTupleVicken,
-  GenericAdaptedLeftInputVicken,
-  GenericAdaptedRightInputVickenTuple,
-} from '../shared/vicken';
+  AdaptedRightInputItemTupleStreamConnectionMetatype,
+  GenericAdaptedLeftInputStreamConnectionMetatype,
+  GenericAdaptedRightInputStreamConnectionMetatypeTuple,
+} from '../shared/streamConnectionMetatype';
 
 type NextAdaptedRightInputVickenTuple<
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
   TRightInputVoque extends GenericStreamMetatype,
   TZornTuple extends IdTuple2,
 > = [
   ...TAdaptedRightInputVickenTuple,
-  AdaptedRightInputHubblepupTupleVicken<TRightInputVoque, TZornTuple>,
+  AdaptedRightInputItemTupleStreamConnectionMetatype<
+    TRightInputVoque,
+    TZornTuple
+  >,
 ];
 
 type EmptyAdaptedOutputVickenTuple = [];
@@ -50,13 +53,13 @@ type EmptyAdaptedOutputVickenTuple = [];
  * @readableName RightInputItemTupleStreamConfigurationBuilder
  */
 type RightInputHubblepupTupleAppreffingeBuilder2<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
 > = <
   TRightInputVoque extends GenericStreamMetatype,
   TZornTuple extends IdTuple2,
 >(
-  partialRightAppreffinge: PartialRightHubblepupTupleAppreffinge<
+  partialRightAppreffinge: PartialRightItemTupleStreamConfiguration<
     TAdaptedLeftInputVicken,
     TRightInputVoque,
     TZornTuple
@@ -112,8 +115,8 @@ type RightInputHubblepupTupleAppreffingeBuilder2<
 >;
 
 export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
 >(
   inputOutputContext: InputOutputContext,
 ): RightInputHubblepupTupleAppreffingeBuilder2<
@@ -127,7 +130,7 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
     TRightInputVoque extends GenericStreamMetatype,
     TZornTuple extends IdTuple2,
   >(
-    partialRightAppreffinge: PartialRightHubblepupTupleAppreffinge<
+    partialRightAppreffinge: PartialRightItemTupleStreamConfiguration<
       TAdaptedLeftInputVicken,
       TRightInputVoque,
       TZornTuple
@@ -137,11 +140,13 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
       previousContext: inputOutputContext,
       rightInputContext: {
         version: 2,
-        gepp: partialRightAppreffinge.gepp,
-        isWibiz: false,
-        framate: (leftInput: TAdaptedLeftInputVicken['coreTransformInput']) => {
+        collectionId: partialRightAppreffinge.collectionId,
+        isCollectionStream: false,
+        getRightKeyTuple: (
+          leftInput: TAdaptedLeftInputVicken['coreTransformInput'],
+        ) => {
           const list = partialRightAppreffinge
-            .framate(leftInput)
+            .getRightKeyTuple(leftInput)
             .map((intermediateValue) => {
               if (intermediateValue instanceof ComplexId) {
                 return intermediateValue.forHuman;
@@ -152,15 +157,18 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
 
           return list;
         },
-        croard: (rightInput: TRightInputVoque['indexedItemStreamable']) => {
-          const intermediateValue = partialRightAppreffinge.croard(rightInput);
+        getRightKey: (
+          rightInput: TRightInputVoque['indexedItemStreamable'],
+        ) => {
+          const intermediateValue =
+            partialRightAppreffinge.getRightKey(rightInput);
           if (intermediateValue instanceof ComplexId) {
             return intermediateValue.forHuman;
           }
 
           return intermediateValue;
         },
-        modifyTropoignantInput: (indexedHubblepupTuple) => {
+        modifyCoreTransformInput: (indexedHubblepupTuple) => {
           return (indexedHubblepupTuple as GenericIndexedItemTuple).map(
             (indexedHubblepup) => {
               return indexedHubblepup.item;
@@ -223,8 +231,8 @@ export const buildRightInputHubblepupTupleAppreffingeBuilder2 = <
 };
 
 export type RightInputHubblepupTupleAppreffingeBuilderParent2<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
 > = {
   andFromHubblepupTuple2: RightInputHubblepupTupleAppreffingeBuilder2<
     TAdaptedLeftInputVicken,

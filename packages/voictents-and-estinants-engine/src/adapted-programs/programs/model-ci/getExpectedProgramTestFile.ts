@@ -23,11 +23,11 @@ export const getExpectedProgramTestFile = buildProgrammedTransform({
     collectionId: EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP,
   })
   .andFromHubblepupTuple2<BashFileVoque, [string]>({
-    gepp: BASH_FILE_GEPP,
-    framate: (expectedProgram) => {
+    collectionId: BASH_FILE_GEPP,
+    getRightKeyTuple: (expectedProgram) => {
       return [expectedProgram.item.testFilePath];
     },
-    croard: (file) => {
+    getRightKey: (file) => {
       return file.item.filePath.serialized;
     },
   })

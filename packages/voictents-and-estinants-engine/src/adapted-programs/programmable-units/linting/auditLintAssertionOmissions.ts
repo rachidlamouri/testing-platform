@@ -42,7 +42,7 @@ export const auditLintAssertionOmissions = buildProgrammedTransform({
     collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
   .andFromVoictent2<LintAssertionStreamMetatype>({
-    gepp: LINT_ASSERTION_COLLECTION_ID,
+    collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

@@ -10,30 +10,34 @@ import {
   buildInputOutputContextFromConstituentResultNormalizer,
   ConstituentResultNormalizer,
   InputOutputContext,
-} from '../shared/estinantBuilderContext';
+} from '../shared/programmedTransformBuilderContext';
 import {
-  AdaptedOutputVicken,
-  GenericAdaptedLeftInputHubblepupVicken,
-  GenericAdaptedOutputVickenTuple,
-} from '../shared/vicken';
+  AdaptedOutputStreamConnectionMetatype,
+  GenericAdaptedLeftInputItemStreamConnectionMetatype,
+  GenericAdaptedOutputStreamConnectionMetatypeTuple,
+} from '../shared/streamConnectionMetatype';
 
 type EmptyAdaptedRightInputVickenTuple = [];
 
 type NextAdaptedOutputVickenTuple<
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
   TOutputVoque extends GenericStreamMetatype,
 > = [
   ...TAdaptedOutputVickenTuple,
-  AdaptedOutputVicken<TOutputVoque, TOutputVoque['itemEggStreamable']>,
+  AdaptedOutputStreamConnectionMetatype<
+    TOutputVoque,
+    TOutputVoque['itemEggStreamable']
+  >,
 ];
 
+// TODO: this one
 type PartialOutputAppreffinge<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputItemStreamConnectionMetatype,
   TOutputVoque extends GenericStreamMetatype,
 > = {
   gepp: TOutputVoque['collectionId'];
   pinbe: Predicate<
-    TAdaptedLeftInputVicken['pinbetunfInput'],
+    TAdaptedLeftInputVicken['adaptedTransformInput'],
     TOutputVoque['itemEggStreamable']
   >;
 };
@@ -45,8 +49,8 @@ type PartialOutputAppreffinge<
  * @readableName OutputItemConditionalStreamConfigurationBuilder
  */
 type OutputHubblepupConditionalAppreffingeBuilder<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputItemStreamConnectionMetatype,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = <TOutputVoque extends GenericStreamMetatype>(
   partialOutputAppreffinge: PartialOutputAppreffinge<
     TAdaptedLeftInputVicken,
@@ -67,8 +71,8 @@ type OutputHubblepupConditionalAppreffingeBuilder<
 >;
 
 export const buildOutputHubblepupConditionalAppreffingeBuilder = <
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputItemStreamConnectionMetatype,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 >(
   inputOutputContext: InputOutputContext,
 ): OutputHubblepupConditionalAppreffingeBuilder<
@@ -103,7 +107,7 @@ export const buildOutputHubblepupConditionalAppreffingeBuilder = <
     const nextContext = buildInputOutputContextFromConstituentResultNormalizer({
       previousContext: inputOutputContext,
       normalizeResult,
-      outputGepp: partialOutputAppreffinge.gepp,
+      outputCollectionId: partialOutputAppreffinge.gepp,
     });
 
     return {
@@ -118,7 +122,7 @@ export const buildOutputHubblepupConditionalAppreffingeBuilder = <
         NextAdaptedOutputVickenTuple<TAdaptedOutputVickenTuple, TOutputVoque>
       >({
         ...nextContext,
-        pinbe: () => {
+        transform: () => {
           // no op
         },
       }),
@@ -129,8 +133,8 @@ export const buildOutputHubblepupConditionalAppreffingeBuilder = <
 };
 
 export type OutputHubblepupConditionalAppreffingeBuilderParent<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputHubblepupVicken,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputItemStreamConnectionMetatype,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = {
   toHubblepupOnCondition: OutputHubblepupConditionalAppreffingeBuilder<
     TAdaptedLeftInputVicken,

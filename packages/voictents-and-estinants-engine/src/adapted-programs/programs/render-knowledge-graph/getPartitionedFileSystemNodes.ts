@@ -40,13 +40,13 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
     collectionId: PARTITION_FACT_GEPP,
   })
   .andFromVoictent2<BoundedDirectoryVoque>({
-    gepp: BOUNDED_DIRECTORY_GEPP,
+    collectionId: BOUNDED_DIRECTORY_GEPP,
   })
   .andFromVoictent2<BoundedFileVoque>({
-    gepp: BOUNDED_FILE_GEPP,
+    collectionId: BOUNDED_FILE_GEPP,
   })
   .andFromVoictent2<FileDependencyVoque>({
-    gepp: FILE_DEPENDENCY_GEPP,
+    collectionId: FILE_DEPENDENCY_GEPP,
   })
   .toHubblepupTuple2<PartitionedDirectoryVoque>({
     collectionId: PARTITIONED_DIRECTORY_GEPP,

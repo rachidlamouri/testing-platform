@@ -70,15 +70,15 @@ export const addInteractivityToSvgDocument = buildProgrammedTransform({
     collectionId: SVG_DOCUMENT_GEPP,
   })
   .andFromHubblepupTuple2<HtmlFileVoque, [OdeshinZorn]>({
-    gepp: HTML_FILE_GEPP,
-    framate: () => [INTERACTIVE_HTML_FILE_PATH],
+    collectionId: HTML_FILE_GEPP,
+    getRightKeyTuple: () => [INTERACTIVE_HTML_FILE_PATH],
     // TODO: add filepath to index
-    croard: (rightInput) => rightInput.item.filePath.serialized,
+    getRightKey: (rightInput) => rightInput.item.filePath.serialized,
   })
   .andFromHubblepupTuple2<DirectedGraphMetadataByIdVoque, [OdeshinZorn]>({
-    gepp: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-    framate: (leftInput) => [leftInput.item.zorn],
-    croard: (rightInput) => rightInput.item.zorn,
+    collectionId: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+    getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
+    getRightKey: (rightInput) => rightInput.item.zorn,
   })
   .toItem2<OutputFileVoque>({
     collectionId: OUTPUT_FILE_GEPP,

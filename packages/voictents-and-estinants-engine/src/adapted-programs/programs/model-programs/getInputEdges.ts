@@ -30,18 +30,18 @@ export const getInputEdges = buildProgrammedTransform({
   })
   // TODO: locator and estinant ids for buildAddMetadtaForSerialization can have different ids. Remove this when that issue is fixed
   .andFromHubblepupTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
-    gepp: ENGINE_ESTINANT_3_GEPP,
-    framate: (relationship) => {
+    collectionId: ENGINE_ESTINANT_3_GEPP,
+    getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantLocator.zorn];
     },
-    croard: (engineEstinant) => engineEstinant.item.locator.zorn,
+    getRightKey: (engineEstinant) => engineEstinant.item.locator.zorn,
   })
   .andFromHubblepupTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
-    gepp: ESTINANT_INPUT_2_GEPP,
-    framate: (relationship) => {
+    collectionId: ESTINANT_INPUT_2_GEPP,
+    getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantInput.zorn];
     },
-    croard: (estinantInput) => estinantInput.item.zorn,
+    getRightKey: (estinantInput) => estinantInput.item.zorn,
   })
   .toHubblepupTuple2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,

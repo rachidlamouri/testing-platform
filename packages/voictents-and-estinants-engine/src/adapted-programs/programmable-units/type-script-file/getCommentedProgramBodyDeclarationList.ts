@@ -46,20 +46,20 @@ export const getCommentedProgramBodyDeclarationList = buildProgrammedTransform({
     collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
   .andFromHubblepupTuple2<TypeScriptFileVoque, [string]>({
-    gepp: TYPE_SCRIPT_FILE_GEPP,
-    framate: (parsedFile) => {
+    collectionId: TYPE_SCRIPT_FILE_GEPP,
+    getRightKeyTuple: (parsedFile) => {
       return [parsedFile.item.filePath];
     },
-    croard: (file) => {
+    getRightKey: (file) => {
       return file.item.filePath.serialized;
     },
   })
   .andFromHubblepupTuple2<FileParsedCommentGroupVoque, [string]>({
-    gepp: FILE_PARSED_COMMENT_GROUP_GEPP,
-    framate: (parsedFile) => {
+    collectionId: FILE_PARSED_COMMENT_GROUP_GEPP,
+    getRightKeyTuple: (parsedFile) => {
       return [parsedFile.item.filePath];
     },
-    croard: (file) => {
+    getRightKey: (file) => {
       return file.item.filePath;
     },
   })

@@ -137,7 +137,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
     collectionId: SVG_DOCUMENT_GEPP,
   })
   .andFromVoictent2<FactVoque>({
-    gepp: FACT_GEPP,
+    collectionId: FACT_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

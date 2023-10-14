@@ -3,25 +3,28 @@ import { GenericStreamMetatype } from '../../../core/types/stream-metatype/strea
 import {
   buildInputOutputContextFromConstituentResultNormalizer,
   InputOutputContext,
-} from '../shared/estinantBuilderContext';
-import { PartialOutputAppreffinge } from '../shared/partialAppreffinge';
+} from '../shared/programmedTransformBuilderContext';
+import { PartialOutputStreamConfiguration } from '../shared/partialStreamConfiguration';
 import {
   PinbetunfBuilderParent2,
   buildPinbetunfBuilder2,
 } from '../pinbetunf/pinbetunfBuilder2';
 import {
-  AdaptedOutputVicken,
-  GenericAdaptedLeftInputVicken,
-  GenericAdaptedOutputVickenTuple,
-  GenericAdaptedRightInputVickenTuple,
-} from '../shared/vicken';
+  AdaptedOutputStreamConnectionMetatype,
+  GenericAdaptedLeftInputStreamConnectionMetatype,
+  GenericAdaptedOutputStreamConnectionMetatypeTuple,
+  GenericAdaptedRightInputStreamConnectionMetatypeTuple,
+} from '../shared/streamConnectionMetatype';
 
 type NextAdaptedOutputVickenTuple<
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
   TOutputVoque extends GenericStreamMetatype,
 > = [
   ...TAdaptedOutputVickenTuple,
-  AdaptedOutputVicken<TOutputVoque, TOutputVoque['itemEggStreamable'][]>,
+  AdaptedOutputStreamConnectionMetatype<
+    TOutputVoque,
+    TOutputVoque['itemEggStreamable'][]
+  >,
 ];
 
 /**
@@ -30,11 +33,11 @@ type NextAdaptedOutputVickenTuple<
  * @readableName OutputItemTupleStreamConfigurationBuilder
  */
 type OutputHubblepupTupleAppreffingeBuilder2<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = <TOutputVoque extends GenericStreamMetatype>(
-  partialOutputAppreffinge: PartialOutputAppreffinge<TOutputVoque>,
+  partialOutputAppreffinge: PartialOutputStreamConfiguration<TOutputVoque>,
 ) => Spread<
   OutputHubblepupTupleAppreffingeBuilderParent2<
     TAdaptedLeftInputVicken,
@@ -49,9 +52,9 @@ type OutputHubblepupTupleAppreffingeBuilder2<
 >;
 
 export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 >(
   inputOutputContext: InputOutputContext,
 ): OutputHubblepupTupleAppreffingeBuilder2<
@@ -64,7 +67,7 @@ export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
     TAdaptedRightInputVickenTuple,
     TAdaptedOutputVickenTuple
   > = <TOutputVoque extends GenericStreamMetatype>(
-    outputAppreffinge: PartialOutputAppreffinge<TOutputVoque>,
+    outputAppreffinge: PartialOutputStreamConfiguration<TOutputVoque>,
   ) => {
     const nextContext = buildInputOutputContextFromConstituentResultNormalizer({
       previousContext: inputOutputContext,
@@ -75,7 +78,7 @@ export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
 
         return [outputAppreffinge.collectionId, hubblepupTuple];
       },
-      outputGepp: outputAppreffinge.collectionId,
+      outputCollectionId: outputAppreffinge.collectionId,
     });
 
     return {
@@ -96,9 +99,9 @@ export const buildOutputHubblepupTupleAppreffingeBuilder2 = <
 };
 
 export type OutputHubblepupTupleAppreffingeBuilderParent2<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = {
   toHubblepupTuple2: OutputHubblepupTupleAppreffingeBuilder2<
     TAdaptedLeftInputVicken,

@@ -59,7 +59,7 @@ export const markUnusedExports = buildProgrammedTransform({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
   .andFromVoictent2<TypeScriptFileExportListVoque>({
-    gepp: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
+    collectionId: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
   })
   .toHubblepupTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,

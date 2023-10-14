@@ -20,9 +20,9 @@ export const getBoundaryFromConfiguration = buildProgrammedTransform({
     collectionId: BOUNDARY_CONFIGURATION_GEPP,
   })
   .andFromHubblepupTuple2<DirectoryVoque, [OdeshinZorn]>({
-    gepp: DIRECTORY_GEPP,
-    framate: (locator) => [locator.item.directoryPath],
-    croard: (directory) => directory.item.directoryPath.serialized,
+    collectionId: DIRECTORY_GEPP,
+    getRightKeyTuple: (locator) => [locator.item.directoryPath],
+    getRightKey: (directory) => directory.item.directoryPath.serialized,
   })
   .toItem2<BoundaryVoque>({
     collectionId: BOUNDARY_GEPP,

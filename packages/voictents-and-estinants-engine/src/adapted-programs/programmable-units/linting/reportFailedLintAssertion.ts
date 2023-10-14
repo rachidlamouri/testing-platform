@@ -40,7 +40,7 @@ export const reportFailedLintAssertion = buildProgrammedTransform({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .andFromVoictent2<LintAssertionOmissionVoque>({
-    gepp: LINT_ASSERTION_OMISSION_GEPP,
+    collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

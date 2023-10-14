@@ -28,16 +28,16 @@ export const getBoundedDirectory = buildProgrammedTransform({
     collectionId: DIRECTORY_GEPP,
   })
   .andFromHubblepupTuple2<CommonBoundaryRootVoque, ['']>({
-    gepp: COMMON_BOUNDARY_ROOT_GEPP,
+    collectionId: COMMON_BOUNDARY_ROOT_GEPP,
     // TODO: make a more readable pattern for singleton collections
-    framate: () => [''],
-    croard: () => '',
+    getRightKeyTuple: () => [''],
+    getRightKey: () => '',
   })
   .andFromHubblepupTuple2<PartitionedBoundaryTrieVoque, ['']>({
     // TODO: make a more readable pattern for singletons
-    gepp: PARTITIONED_BOUNDARY_TRIE_GEPP,
-    framate: () => [''],
-    croard: () => '',
+    collectionId: PARTITIONED_BOUNDARY_TRIE_GEPP,
+    getRightKeyTuple: () => [''],
+    getRightKey: () => '',
   })
   .toHubblepupTuple2<BoundedDirectoryVoque>({
     collectionId: BOUNDED_DIRECTORY_GEPP,

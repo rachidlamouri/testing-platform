@@ -45,9 +45,9 @@ export const getEngineVoque2 = buildProgrammedTransform({
     FileCommentedProgramBodyDeclarationGroupVoque,
     [OdeshinZorn]
   >({
-    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-    framate: (left) => [left.item.filePath],
-    croard: (right) => right.item.filePath,
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+    getRightKeyTuple: (left) => [left.item.filePath],
+    getRightKey: (right) => right.item.filePath,
   })
   .toItem2<EngineVoque2Voque>({
     collectionId: ENGINE_VOQUE_2_GEPP,

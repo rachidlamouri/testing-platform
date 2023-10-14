@@ -30,19 +30,19 @@ export const getBoundedFile = buildProgrammedTransform({
     collectionId: TYPE_SCRIPT_FILE_GEPP,
   })
   .andFromHubblepupTuple2<FileAncestorDirectoryPathSetVoque, [string]>({
-    gepp: FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
-    framate: (file) => {
+    collectionId: FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
+    getRightKeyTuple: (file) => {
       return [file.item.filePath.serialized];
     },
-    croard: (file) => {
+    getRightKey: (file) => {
       return file.item.filePath;
     },
   })
   .andFromHubblepupTuple2<PartitionedBoundaryTrieVoque, [OdeshinZorn]>({
     // TODO: make a more readable pattern for singletons
-    gepp: PARTITIONED_BOUNDARY_TRIE_GEPP,
-    framate: () => [''],
-    croard: () => '',
+    collectionId: PARTITIONED_BOUNDARY_TRIE_GEPP,
+    getRightKeyTuple: () => [''],
+    getRightKey: () => '',
   })
   .toItem2<BoundedFileVoque>({
     collectionId: BOUNDED_FILE_GEPP,

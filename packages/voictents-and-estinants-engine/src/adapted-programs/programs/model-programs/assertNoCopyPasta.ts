@@ -42,10 +42,10 @@ export const assertNoCopyPasta = buildProgrammedTransform({
     collectionId: ENGINE_PROGRAM_3_GEPP,
   })
   .andFromVoictent2<EngineVoque2Voque>({
-    gepp: ENGINE_VOQUE_2_GEPP,
+    collectionId: ENGINE_VOQUE_2_GEPP,
   })
   .andFromVoictent2<EngineEstinant3Voque>({
-    gepp: ENGINE_ESTINANT_3_GEPP,
+    collectionId: ENGINE_ESTINANT_3_GEPP,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

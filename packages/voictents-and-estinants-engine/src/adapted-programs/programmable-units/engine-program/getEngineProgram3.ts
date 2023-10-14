@@ -44,13 +44,13 @@ export const getEngineProgram3 = buildProgrammedTransform({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
   .andFromHubblepupTuple2<EngineEstinant3Voque, Tuple<OdeshinZorn>>({
-    gepp: ENGINE_ESTINANT_3_GEPP,
-    framate: (engineProgram) => {
+    collectionId: ENGINE_ESTINANT_3_GEPP,
+    getRightKeyTuple: (engineProgram) => {
       return engineProgram.item.estinantRelationshipList.map((relationship) => {
         return relationship.estinantLocator.zorn;
       });
     },
-    croard: (engineEstinant) => {
+    getRightKey: (engineEstinant) => {
       return engineEstinant.item.locator.zorn;
     },
   })

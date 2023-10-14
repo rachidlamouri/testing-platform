@@ -25,8 +25,8 @@ export const getDirectoryFact2 = buildProgrammedTransform({
     collectionId: PARTITIONED_DIRECTORY_GEPP,
   })
   .andFromHubblepupTuple2<BoundedDirectoryVoque, [] | [OdeshinZorn]>({
-    gepp: BOUNDED_DIRECTORY_GEPP,
-    framate: (childDirectory) => {
+    collectionId: BOUNDED_DIRECTORY_GEPP,
+    getRightKeyTuple: (childDirectory) => {
       if (childDirectory.item.directory.isBoundaryDirectory) {
         return [];
       }
@@ -36,7 +36,7 @@ export const getDirectoryFact2 = buildProgrammedTransform({
 
       return [parentDirectoryPath];
     },
-    croard: (potentialParentDirectory) => {
+    getRightKey: (potentialParentDirectory) => {
       return potentialParentDirectory.item.directory.directoryPath.serialized;
     },
   })

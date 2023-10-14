@@ -852,14 +852,14 @@ export const getEngineEstinant3 = buildProgrammedTransform({
     FileCommentedProgramBodyDeclarationGroupVoque,
     [OdeshinZorn]
   >({
-    gepp: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-    framate: (leftInput) => [leftInput.item.filePath],
-    croard: (rightInput) => rightInput.item.filePath,
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+    getRightKeyTuple: (leftInput) => [leftInput.item.filePath],
+    getRightKey: (rightInput) => rightInput.item.filePath,
   })
   .andFromHubblepupTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
-    gepp: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-    framate: (leftInput) => [leftInput.item.filePath],
-    croard: (rightInput) => rightInput.item.zorn,
+    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+    getRightKeyTuple: (leftInput) => [leftInput.item.filePath],
+    getRightKey: (rightInput) => rightInput.item.zorn,
   })
   .toHubblepupTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

@@ -6,13 +6,13 @@ import {
 import {
   AssemblerContext,
   InputOutputContext,
-} from '../shared/estinantBuilderContext';
+} from '../shared/programmedTransformBuilderContext';
 import {
-  GenericAdaptedLeftInputVicken,
-  GenericAdaptedOutputVicken,
-  GenericAdaptedOutputVickenTuple,
-  GenericAdaptedRightInputVickenTuple,
-} from '../shared/vicken';
+  GenericAdaptedLeftInputStreamConnectionMetatype,
+  GenericAdaptedOutputStreamConnectionMetatype,
+  GenericAdaptedOutputStreamConnectionMetatypeTuple,
+  GenericAdaptedRightInputStreamConnectionMetatypeTuple,
+} from '../shared/streamConnectionMetatype';
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 
 /**
@@ -25,31 +25,31 @@ type Pinbetunf2<TInputTuple extends Tuple<unknown>, TOutput> = (
 
 // TODO: clean up the constraint on this type
 type PinbetunfInputTuple2<
-  TAdaptedInputVickenTuple extends { pinbetunfInput: unknown }[],
+  TAdaptedInputVickenTuple extends { adaptedTransformInput: unknown }[],
 > = {
-  [Index in keyof TAdaptedInputVickenTuple]: TAdaptedInputVickenTuple[Index]['pinbetunfInput'];
+  [Index in keyof TAdaptedInputVickenTuple]: TAdaptedInputVickenTuple[Index]['adaptedTransformInput'];
 };
 
 type PinbetunfInputTuple1<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
 > = PinbetunfInputTuple2<
   [TAdaptedLeftInputVicken, ...TAdaptedRightInputVickenTuple]
 >;
 
 type PinbetunfOutput<
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = TAdaptedOutputVickenTuple extends []
   ? void
   : TAdaptedOutputVickenTuple extends [
-      infer TAdaptedOutputVicken extends GenericAdaptedOutputVicken,
+      infer TAdaptedOutputVicken extends GenericAdaptedOutputStreamConnectionMetatype,
     ]
-  ? TAdaptedOutputVicken['pinbetunfOutput']
+  ? TAdaptedOutputVicken['adaptedTransformOutput']
   : Simplify<
       UnionToIntersection<
         {
           [Index in keyof TAdaptedOutputVickenTuple]: {
-            [Key in TAdaptedOutputVickenTuple[Index]['voque']['collectionId']]: TAdaptedOutputVickenTuple[Index]['pinbetunfOutput'];
+            [Key in TAdaptedOutputVickenTuple[Index]['streamMetatype']['collectionId']]: TAdaptedOutputVickenTuple[Index]['adaptedTransformOutput'];
           };
         }[number]
       >
@@ -61,9 +61,9 @@ type PinbetunfOutput<
  * @readableName AdaptedTransformBuilder
  */
 type PinbetunfBuilder2<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = (
   pinbe: Pinbetunf2<
     PinbetunfInputTuple1<
@@ -79,9 +79,9 @@ type PinbetunfBuilder2<
 >;
 
 export const buildPinbetunfBuilder2 = <
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 >(
   inputOutputContext: InputOutputContext,
 ): PinbetunfBuilder2<
@@ -94,7 +94,7 @@ export const buildPinbetunfBuilder2 = <
     TAdaptedRightInputVickenTuple,
     TAdaptedOutputVickenTuple
   > = (
-    pinbe: Pinbetunf2<
+    transform: Pinbetunf2<
       PinbetunfInputTuple1<
         TAdaptedLeftInputVicken,
         TAdaptedRightInputVickenTuple
@@ -109,7 +109,7 @@ export const buildPinbetunfBuilder2 = <
       instantiationContext,
       inputContext,
       outputContext,
-      pinbe,
+      transform,
     };
 
     return {
@@ -125,9 +125,9 @@ export const buildPinbetunfBuilder2 = <
 };
 
 export type PinbetunfBuilderParent2<
-  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputVicken,
-  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputVickenTuple,
-  TAdaptedOutputVickenTuple extends GenericAdaptedOutputVickenTuple,
+  TAdaptedLeftInputVicken extends GenericAdaptedLeftInputStreamConnectionMetatype,
+  TAdaptedRightInputVickenTuple extends GenericAdaptedRightInputStreamConnectionMetatypeTuple,
+  TAdaptedOutputVickenTuple extends GenericAdaptedOutputStreamConnectionMetatypeTuple,
 > = {
   onTransform: PinbetunfBuilder2<
     TAdaptedLeftInputVicken,
