@@ -1,6 +1,9 @@
 import { ComplexMap } from '../../../../package-agnostic-utilities/data-structure/complexMap';
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { FILE_DEPENDENCY_GEPP, FileDependencyVoque } from './fileDependency';
+import {
+  FILE_DEPENDENCY_COLLECTION_ID,
+  FileDependencyStreamMetatype,
+} from './fileDependency';
 import {
   PARTITIONED_FILE_DEPENDENCY_GEPP,
   PartitionedFileDependencyConstructorInput,
@@ -17,8 +20,8 @@ import {
 export const getPartitionedFileDependency = buildProgrammedTransform({
   name: 'getPartitionedFileDependency',
 })
-  .fromCollection2<FileDependencyVoque>({
-    collectionId: FILE_DEPENDENCY_GEPP,
+  .fromCollection2<FileDependencyStreamMetatype>({
+    collectionId: FILE_DEPENDENCY_COLLECTION_ID,
   })
   .toItemTuple2<PartitionedFileDependencyVoque>({
     collectionId: PARTITIONED_FILE_DEPENDENCY_GEPP,

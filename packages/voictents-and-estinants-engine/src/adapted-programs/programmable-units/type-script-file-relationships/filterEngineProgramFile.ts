@@ -1,12 +1,12 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   ENGINE_FUNCTION_CONFIGURATION_GEPP,
   EngineFunctionConfigurationVoque,
 } from '../engine-program/engineFunctionConfiguration';
 import {
-  TYPE_SCRIPT_FILE_GEPP,
-  TypeScriptFileVoque,
+  TYPE_SCRIPT_FILE_COLLECTION_ID,
+  TypeScriptFileStreamMetatype,
 } from '../type-script-file/typeScriptFile';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
@@ -24,10 +24,10 @@ import {
 export const filterEngineProgramFile = buildProgrammedTransform({
   name: 'filterEngineProgramFile',
 })
-  .fromItem2<TypeScriptFileVoque>({
-    collectionId: TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<TypeScriptFileStreamMetatype>({
+    collectionId: TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
-  .andFromItemTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<TypeScriptFileImportListVoque, [IdentifiableItemId]>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,

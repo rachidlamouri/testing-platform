@@ -65,6 +65,7 @@ const parsePhrase = (analyzedPhrase: AnalyzedPhrase): ParsedPhrase => {
  */
 const isSensibleWord = (word: string): boolean => {
   return (
+    word === '' ||
     wordSet.has(word) ||
     customWordSet.has(word) ||
     /^[a-z]$/.test(word) ||

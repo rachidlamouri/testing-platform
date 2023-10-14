@@ -2,12 +2,12 @@ import {
   GenericComplexIdTemplate,
   ComplexId,
 } from '../../../../package-agnostic-utilities/data-structure/id';
-import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
+import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNode';
 import { PartitionFactId } from '../partition-fact/partitionFact';
 
 const PARTITIONED_FILE_DEPENDENCY_GROUP_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactId],
-  ['importedFile', FileSystemNodeZorn],
+  ['importedFile', FileSystemNodeId],
 ] as const satisfies GenericComplexIdTemplate;
 type PartitionedFileDependencyGroupZornTemplate =
   typeof PARTITIONED_FILE_DEPENDENCY_GROUP_ZORN_TEMPLATE;

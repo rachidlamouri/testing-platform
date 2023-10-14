@@ -1,6 +1,9 @@
 import { posix } from 'path';
 import fs from 'fs';
-import { TYPE_SCRIPT_FILE_GEPP, TypeScriptFileVoque } from './typeScriptFile';
+import {
+  TYPE_SCRIPT_FILE_COLLECTION_ID,
+  TypeScriptFileStreamMetatype,
+} from './typeScriptFile';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { FilePath } from '../file/filePath';
@@ -61,8 +64,8 @@ export const associateTypeScriptFileToTypescriptConfiguration =
   buildProgrammedTransform({
     name: 'associateTypeScriptFileToTypescriptConfiguration',
   })
-    .fromItem2<TypeScriptFileVoque>({
-      collectionId: TYPE_SCRIPT_FILE_GEPP,
+    .fromItem2<TypeScriptFileStreamMetatype>({
+      collectionId: TYPE_SCRIPT_FILE_COLLECTION_ID,
     })
     .toItem2<TypeScriptFileConfigurationVoque>({
       collectionId: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,

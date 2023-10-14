@@ -1,7 +1,7 @@
 import { buildProgrammedTransform } from '../../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  BOUNDED_DIRECTORY_GEPP,
-  BoundedDirectoryVoque,
+  BOUNDED_DIRECTORY_COLLECTION_ID,
+  BoundedDirectoryStreamMetatype,
 } from '../../directory/boundedDirectory';
 import {
   FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
@@ -23,8 +23,8 @@ export const getFileDependencyPathNodeFact = buildProgrammedTransform({
   .fromItem2<PartitionedFileDependencyPathNodeVoque>({
     collectionId: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
   })
-  .andFromItemTuple2<BoundedDirectoryVoque, [string]>({
-    collectionId: BOUNDED_DIRECTORY_GEPP,
+  .andFromItemTuple2<BoundedDirectoryStreamMetatype, [string]>({
+    collectionId: BOUNDED_DIRECTORY_COLLECTION_ID,
     getRightKeyTuple: (pathNode) => {
       return [pathNode.item.directoryPath];
     },

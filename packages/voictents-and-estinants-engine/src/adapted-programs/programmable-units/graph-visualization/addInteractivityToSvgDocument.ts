@@ -11,7 +11,7 @@ import {
   DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,
   DirectedGraphMetadataByIdStreamMetatype,
 } from './directedGraphMetadataById';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 
 const INTERACTIVE_HTML_FILE_PATH =
   'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/graph-visualization/interactiveSvg.html';
@@ -69,13 +69,16 @@ export const addInteractivityToSvgDocument = buildProgrammedTransform({
   .fromItem2<SvgDocumentVoque>({
     collectionId: SVG_DOCUMENT_GEPP,
   })
-  .andFromItemTuple2<HtmlFileVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<HtmlFileVoque, [IdentifiableItemId]>({
     collectionId: HTML_FILE_GEPP,
     getRightKeyTuple: () => [INTERACTIVE_HTML_FILE_PATH],
     // TODO: add filepath to index
     getRightKey: (rightInput) => rightInput.item.filePath.serialized,
   })
-  .andFromItemTuple2<DirectedGraphMetadataByIdStreamMetatype, [OdeshinZorn]>({
+  .andFromItemTuple2<
+    DirectedGraphMetadataByIdStreamMetatype,
+    [IdentifiableItemId]
+  >({
     collectionId: DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,
     getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,

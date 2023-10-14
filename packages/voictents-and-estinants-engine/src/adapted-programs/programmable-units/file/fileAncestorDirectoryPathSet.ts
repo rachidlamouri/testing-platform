@@ -80,13 +80,13 @@ export const { FileAncestorDirectoryPathSetInstance } =
     })
     .assemble();
 
-export const FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP =
+export const FILE_ANCESTOR_DIRECTORY_PATH_SET_COLLECTION_ID =
   'file-ancestor-directory-path-set';
 
 type FileAncestorDirectoryPathSetGepp =
-  typeof FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP;
+  typeof FILE_ANCESTOR_DIRECTORY_PATH_SET_COLLECTION_ID;
 
-export type FileAncestorDirectoryPathSetVoque =
+export type FileAncestorDirectoryPathSetStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     FileAncestorDirectoryPathSetGepp,
     FileAncestorDirectoryPathSet

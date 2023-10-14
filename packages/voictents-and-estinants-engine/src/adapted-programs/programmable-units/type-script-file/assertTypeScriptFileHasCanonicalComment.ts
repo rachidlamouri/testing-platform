@@ -10,8 +10,8 @@ import { TypedRule } from '../linting/rule';
 import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import {
   CanonicalCommentLintMetadata,
-  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-  FileCommentedProgramBodyDeclarationGroupVoque,
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
+  FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { FileSourceInstance } from '../linting/source/fileSource';
 
@@ -69,8 +69,8 @@ export const assertTypeScriptFileHasCanonicalComment = buildProgrammedTransform(
     name: ESTINANT_NAME,
   },
 )
-  .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   })
   .toItem2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,

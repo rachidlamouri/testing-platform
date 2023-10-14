@@ -1,7 +1,7 @@
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { DirectoryPath, DirectoryPathInstance } from './directoryPath';
-import { FileSystemNodeZorn } from './fileSystemNode';
-import { FileSystemNodeVoque } from './fileSystemNodeVoictent';
+import { FileSystemNodeId } from './fileSystemNode';
+import { FileSystemNodeStreamMetatype } from './fileSystemNodeVoictent';
 
 type DirectoryConstructorInput = {
   /**
@@ -16,7 +16,7 @@ type DirectoryConstructorInput = {
  * Represents a file system directory
  */
 export type Directory = {
-  id: FileSystemNodeZorn;
+  id: FileSystemNodeId;
   /** @deprecated in favor of id.forMachine */
   instanceId: string;
   directoryPath: DirectoryPath;
@@ -44,7 +44,7 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { instanceId, nodePath: serializedDirectoryPath } = input;
 
-      const id = new FileSystemNodeZorn({
+      const id = new FileSystemNodeId({
         nodePath: serializedDirectoryPath,
       });
 
@@ -66,7 +66,7 @@ export const DIRECTORY_COLLECTION_ID = 'directory';
 
 type DirectoryGepp = typeof DIRECTORY_COLLECTION_ID;
 
-export type DirectoryStreamMetatype = FileSystemNodeVoque<
+export type DirectoryStreamMetatype = FileSystemNodeStreamMetatype<
   DirectoryGepp,
   Directory
 >;

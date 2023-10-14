@@ -20,7 +20,10 @@ import {
   AppRendererDelayerInstance,
   AppRendererDelayerVoque,
 } from './appRendererDelayer';
-import { FILE_FACT_2_GEPP, FileFact2Voque } from './file/fileFact2';
+import {
+  FILE_FACT_2_COLLECTION_ID,
+  FileFact2StreamMetatype,
+} from './file/fileFact2';
 import { BOUNDARY_FACT_GEPP, BoundaryFactVoque } from './boundary/boundaryFact';
 import {
   COMMON_BOUNDARY_ROOT_COLLECTION_ID,
@@ -100,8 +103,8 @@ export const constructDynamicMetadataFile = buildProgrammedTransform({
     getRightKeyTuple: () => [''],
     getRightKey: () => '',
   })
-  .andFromCollection2<FileFact2Voque>({
-    collectionId: FILE_FACT_2_GEPP,
+  .andFromCollection2<FileFact2StreamMetatype>({
+    collectionId: FILE_FACT_2_COLLECTION_ID,
   })
   .toItem2<OutputFileVoque>({
     collectionId: OUTPUT_FILE_GEPP,

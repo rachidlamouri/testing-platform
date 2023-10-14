@@ -17,7 +17,7 @@ import {
 import { NodeShape } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
 import { DirectedGraphNode2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { GraphConstituentLocatorInstance } from '../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
-import { LocalDirectedGraphElement2Zorn } from '../../programmable-units/graph-visualization/directed-graph/types';
+import { LocalDirectedGraphElement2Id } from '../../programmable-units/graph-visualization/directed-graph/types';
 import {
   COMMON_ATTRIBUTE_BY_KEY,
   FONT_SIZE,
@@ -52,7 +52,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
 
     const startingSubgraph = new DirectedCluster2Instance({
       locator: new GraphConstituentLocatorInstance({
-        localZorn: LocalDirectedGraphElement2Zorn.buildClusterZorn({
+        localId: LocalDirectedGraphElement2Id.buildClusterZorn({
           distinguisher: `start-subgraph | ${rootGraphLocator.distinguisher}`,
         }),
         rootGraphLocator,
@@ -70,7 +70,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
       locator: new GraphConstituentLocatorInstance({
         rootGraphLocator,
         parentId: rootGraphLocator.oldId,
-        localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+        localId: LocalDirectedGraphElement2Id.buildNodeId({
           distinguisher: startLabel,
         }),
       }),
@@ -96,7 +96,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
 
     const endingSubgraph = new DirectedCluster2Instance({
       locator: new GraphConstituentLocatorInstance({
-        localZorn: LocalDirectedGraphElement2Zorn.buildClusterZorn({
+        localId: LocalDirectedGraphElement2Id.buildClusterZorn({
           distinguisher: `end-subgraph | ${rootGraphLocator.distinguisher}`,
         }),
         rootGraphLocator,
@@ -114,7 +114,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
       locator: new GraphConstituentLocatorInstance({
         rootGraphLocator,
         parentId: rootGraphLocator.oldId,
-        localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+        localId: LocalDirectedGraphElement2Id.buildNodeId({
           distinguisher: endLabel,
         }),
       }),

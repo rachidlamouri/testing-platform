@@ -1,7 +1,7 @@
 import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { FilePath } from '../../programmable-units/file/filePath';
-import { FileSystemNodeZorn } from '../../programmable-units/file/fileSystemNode';
+import { FileSystemNodeId } from '../../programmable-units/file/fileSystemNode';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { GenericAstNodeLocator } from './astNodeLocator';
 
@@ -18,7 +18,7 @@ type FileAstListConstructorInput = {
 type FileAstList = SpreadN<
   [
     {
-      id: FileSystemNodeZorn;
+      id: FileSystemNodeId;
     },
     FileAstListConstructorInput,
   ]
@@ -43,7 +43,7 @@ export const { FileAstListInstance } = buildNamedConstructorFunction({
     },
     transformInput: (input) => {
       return {
-        id: new FileSystemNodeZorn({
+        id: new FileSystemNodeId({
           nodePath: input.filePath.serialized,
         }),
         ...input,

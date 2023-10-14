@@ -4,14 +4,14 @@ import {
   DirectoryStreamMetatype,
 } from '../../../programmable-units/file/directory';
 import {
-  BOUNDED_DIRECTORY_GEPP,
+  BOUNDED_DIRECTORY_COLLECTION_ID,
   BoundedDirectoryInstance,
-  BoundedDirectoryVoque,
+  BoundedDirectoryStreamMetatype,
 } from './boundedDirectory';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
 import {
-  PARTITIONED_BOUNDARY_TRIE_GEPP,
-  PartitionedBoundaryTrieVoque,
+  PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID,
+  PartitionedBoundaryTrieStreamMetatype,
 } from '../boundary/partitionedBoundaryTrie';
 import {
   CommonBoundaryRootStreamMetatype,
@@ -33,14 +33,14 @@ export const getBoundedDirectory = buildProgrammedTransform({
     getRightKeyTuple: () => [''],
     getRightKey: () => '',
   })
-  .andFromItemTuple2<PartitionedBoundaryTrieVoque, ['']>({
+  .andFromItemTuple2<PartitionedBoundaryTrieStreamMetatype, ['']>({
     // TODO: make a more readable pattern for singletons
-    collectionId: PARTITIONED_BOUNDARY_TRIE_GEPP,
+    collectionId: PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID,
     getRightKeyTuple: () => [''],
     getRightKey: () => '',
   })
-  .toItemTuple2<BoundedDirectoryVoque>({
-    collectionId: BOUNDED_DIRECTORY_GEPP,
+  .toItemTuple2<BoundedDirectoryStreamMetatype>({
+    collectionId: BOUNDED_DIRECTORY_COLLECTION_ID,
   })
   .onTransform((directory, [commonBoundaryRoot], [partitionedBoundaryTrie]) => {
     const partitionedBoundary = partitionedBoundaryTrie.find(

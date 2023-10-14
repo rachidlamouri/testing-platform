@@ -2,11 +2,11 @@ import { posix } from 'path';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { Directory } from '../../../programmable-units/file/directory';
-import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
-import { LocalDirectedGraphElement2Zorn } from '../../../programmable-units/graph-visualization/directed-graph/types';
+import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNode';
+import { LocalDirectedGraphElement2Id } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import { Boundary } from '../boundary/boundary';
 import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
-import { FileSystemNodeVoque } from '../../../programmable-units/file/fileSystemNodeVoictent';
+import { FileSystemNodeStreamMetatype } from '../../../programmable-units/file/fileSystemNodeVoictent';
 import { DirectoryPath } from '../../../programmable-units/file/directoryPath';
 
 type BoundedDirectoryConstructorInput = {
@@ -21,13 +21,13 @@ type BoundedDirectoryConstructorInput = {
  */
 export type BoundedDirectory = SimplifyN<
   [
-    { id: FileSystemNodeZorn },
+    { id: FileSystemNodeId },
     Omit<BoundedDirectoryConstructorInput, 'commonBoundaryRoot'>,
     {
       nodePath: DirectoryPath;
       isBoundaryDirectory: boolean;
       directoryPathFromCommonBoundaryRoot: string;
-      localGraphElementZorn: LocalDirectedGraphElement2Zorn;
+      localGraphElementId: LocalDirectedGraphElement2Id;
     },
   ]
 >;
@@ -42,7 +42,7 @@ export const { BoundedDirectoryInstance } = buildNamedConstructorFunction({
     'nodePath',
     'isBoundaryDirectory',
     'directoryPathFromCommonBoundaryRoot',
-    'localGraphElementZorn',
+    'localGraphElementId',
   ],
 } as const)
   .withTypes<BoundedDirectoryConstructorInput, BoundedDirectory>({
@@ -65,8 +65,8 @@ export const { BoundedDirectoryInstance } = buildNamedConstructorFunction({
         boundary.directory.directoryPath.serialized,
       );
 
-      const localGraphElementZorn =
-        LocalDirectedGraphElement2Zorn.buildSubgraphZorn({
+      const localGraphElementId =
+        LocalDirectedGraphElement2Id.buildSubgraphZorn({
           distinguisher: directory.directoryPath.serialized,
         });
 
@@ -77,17 +77,17 @@ export const { BoundedDirectoryInstance } = buildNamedConstructorFunction({
         nodePath: directory.nodePath,
         isBoundaryDirectory,
         directoryPathFromCommonBoundaryRoot,
-        localGraphElementZorn,
+        localGraphElementId,
       };
     },
   })
   .assemble();
 
-export const BOUNDED_DIRECTORY_GEPP = 'bounded-directory';
+export const BOUNDED_DIRECTORY_COLLECTION_ID = 'bounded-directory';
 
-type BoundedDirectoryGepp = typeof BOUNDED_DIRECTORY_GEPP;
+type BoundedDirectoryGepp = typeof BOUNDED_DIRECTORY_COLLECTION_ID;
 
-export type BoundedDirectoryVoque = FileSystemNodeVoque<
+export type BoundedDirectoryStreamMetatype = FileSystemNodeStreamMetatype<
   BoundedDirectoryGepp,
   BoundedDirectory
 >;

@@ -1,5 +1,5 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   ENGINE_VOQUE_2_GEPP,
   EngineVoque2Voque,
@@ -15,7 +15,7 @@ import {
 import { NodeShape } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
 import { DirectedGraphNode2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { GraphConstituentLocatorInstance } from '../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
-import { LocalDirectedGraphElement2Zorn } from '../../programmable-units/graph-visualization/directed-graph/types';
+import { LocalDirectedGraphElement2Id } from '../../programmable-units/graph-visualization/directed-graph/types';
 import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-file-relationships/graph-element/commonAttributeByKey';
 
 /**
@@ -30,7 +30,7 @@ export const getEngineProgramVoqueElements = buildProgrammedTransform({
   .fromItem2<ProgramVoqueRelationship2Voque>({
     collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
-  .andFromItemTuple2<EngineVoque2Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineVoque2Voque, [IdentifiableItemId]>({
     collectionId: ENGINE_VOQUE_2_GEPP,
     getRightKeyTuple: (relationship) => [relationship.item.voqueLocator.id],
     getRightKey: (engineVoque) => engineVoque.item.locator.id,
@@ -48,7 +48,7 @@ export const getEngineProgramVoqueElements = buildProgrammedTransform({
       locator: new GraphConstituentLocatorInstance({
         rootGraphLocator: relationship.rootGraphLocator,
         parentId: relationship.parentId,
-        localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+        localId: LocalDirectedGraphElement2Id.buildNodeId({
           distinguisher: label,
         }),
       }),

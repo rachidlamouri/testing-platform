@@ -1,16 +1,16 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  PARTITIONED_FILE_GEPP,
+  PARTITIONED_FILE_COLLECTION_ID,
   PartitionedFileInstance,
-  PartitionedFileVoque,
+  PartitionedFileStreamMetatype,
 } from './file/partitionedFile';
 import {
   PARTITION_FACT_COLLECTION_ID,
   PartitionFactStreamMetatype,
 } from './partition-fact/partitionFact';
 import {
-  FILE_DEPENDENCY_GEPP,
-  FileDependencyVoque,
+  FILE_DEPENDENCY_COLLECTION_ID,
+  FileDependencyStreamMetatype,
 } from './dependency/fileDependency';
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import {
@@ -19,10 +19,13 @@ import {
   PartitionedDirectoryVoque,
 } from './directory/partitionedDirectory';
 import {
-  BOUNDED_DIRECTORY_GEPP,
-  BoundedDirectoryVoque,
+  BOUNDED_DIRECTORY_COLLECTION_ID,
+  BoundedDirectoryStreamMetatype,
 } from './directory/boundedDirectory';
-import { BOUNDED_FILE_GEPP, BoundedFileVoque } from './file/boundedFile';
+import {
+  BOUNDED_FILE_COLLECTION_ID,
+  BoundedFileStreamMetatype,
+} from './file/boundedFile';
 
 /**
  * Uses file dependencies to associate partitions to bounded files and bounded
@@ -39,20 +42,20 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
   .fromCollection2<PartitionFactStreamMetatype>({
     collectionId: PARTITION_FACT_COLLECTION_ID,
   })
-  .andFromCollection2<BoundedDirectoryVoque>({
-    collectionId: BOUNDED_DIRECTORY_GEPP,
+  .andFromCollection2<BoundedDirectoryStreamMetatype>({
+    collectionId: BOUNDED_DIRECTORY_COLLECTION_ID,
   })
-  .andFromCollection2<BoundedFileVoque>({
-    collectionId: BOUNDED_FILE_GEPP,
+  .andFromCollection2<BoundedFileStreamMetatype>({
+    collectionId: BOUNDED_FILE_COLLECTION_ID,
   })
-  .andFromCollection2<FileDependencyVoque>({
-    collectionId: FILE_DEPENDENCY_GEPP,
+  .andFromCollection2<FileDependencyStreamMetatype>({
+    collectionId: FILE_DEPENDENCY_COLLECTION_ID,
   })
   .toItemTuple2<PartitionedDirectoryVoque>({
     collectionId: PARTITIONED_DIRECTORY_GEPP,
   })
-  .toItemTuple2<PartitionedFileVoque>({
-    collectionId: PARTITIONED_FILE_GEPP,
+  .toItemTuple2<PartitionedFileStreamMetatype>({
+    collectionId: PARTITIONED_FILE_COLLECTION_ID,
   })
   .onTransform(
     (
@@ -192,7 +195,7 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
 
       return {
         [PARTITIONED_DIRECTORY_GEPP]: partitionedDirectoryList,
-        [PARTITIONED_FILE_GEPP]: partitionedFileList,
+        [PARTITIONED_FILE_COLLECTION_ID]: partitionedFileList,
       };
     },
   )

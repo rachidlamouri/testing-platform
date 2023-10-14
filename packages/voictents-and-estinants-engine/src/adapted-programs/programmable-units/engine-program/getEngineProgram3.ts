@@ -29,7 +29,7 @@ import {
   ProgramEstinantOutputRelationshipInstance,
 } from './input-output/programEstinantOutputRelationship';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 
 /**
  * Joins the program locator to its transforms in order to
@@ -43,7 +43,7 @@ export const getEngineProgram3 = buildProgrammedTransform({
   .fromItem2<EngineProgramLocator3Voque>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromItemTuple2<EngineEstinant3Voque, Tuple<OdeshinZorn>>({
+  .andFromItemTuple2<EngineEstinant3Voque, Tuple<IdentifiableItemId>>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
     getRightKeyTuple: (engineProgram) => {
       return engineProgram.item.estinantRelationshipList.map((relationship) => {

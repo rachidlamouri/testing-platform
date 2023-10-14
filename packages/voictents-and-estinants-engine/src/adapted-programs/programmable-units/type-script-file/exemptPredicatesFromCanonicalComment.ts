@@ -9,8 +9,8 @@ import {
 } from '../linting/lintAssertionOmission';
 import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import {
-  FileCommentedProgramBodyDeclarationGroupVoque,
-  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  FileCommentedProgramBodyDeclarationGroupStreamMetatype,
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { LintAssertionZorn } from '../linting/lintAssertion';
 import { typeScriptFileHasCanonicalCommentRule } from './assertTypeScriptFileHasCanonicalComment';
@@ -28,8 +28,8 @@ const ESTINANT_NAME = 'exemptPredicatesFromCanonicalComment' as const;
 export const exemptPredicatesFromCanonicalComment = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   })
   .toItemTuple2<LintAssertionOmissionVoque>({
     collectionId: LINT_ASSERTION_OMISSION_GEPP,

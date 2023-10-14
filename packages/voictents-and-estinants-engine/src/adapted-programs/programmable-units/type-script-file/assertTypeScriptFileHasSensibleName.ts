@@ -10,8 +10,8 @@ import { EmptyMessageContext, TypedRule } from '../linting/rule';
 import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import { CommentTagId } from './comment/commentTagId';
 import {
-  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-  FileCommentedProgramBodyDeclarationGroupVoque,
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
+  FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { FileSourceInstance } from '../linting/source/fileSource';
 import { getPhraseSensibilityState } from '../../../layer-agnostic-utilities/nonsense/isSensiblePhrase';
@@ -39,8 +39,8 @@ const typeScriptFileHasSensibleNameRule = new TypedRule<EmptyMessageContext>({
 export const assertTypeScriptFileHasSensibleName = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   })
   .toItem2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,

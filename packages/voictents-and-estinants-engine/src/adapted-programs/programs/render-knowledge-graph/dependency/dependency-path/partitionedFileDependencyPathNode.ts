@@ -4,7 +4,7 @@ import {
   GenericComplexIdTemplate,
   ComplexId,
 } from '../../../../../package-agnostic-utilities/data-structure/id';
-import { LocalDirectedGraphElement2Zorn } from '../../../../programmable-units/graph-visualization/directed-graph/types';
+import { LocalDirectedGraphElement2Id } from '../../../../programmable-units/graph-visualization/directed-graph/types';
 import { PartitionFact } from '../../partition-fact/partitionFact';
 import { PartitionedFileDependencyGroupZorn } from '../partitionedFileDependencyGroupZorn';
 import { FileDependencyPathNode } from './fileDependencyPathNode';
@@ -37,7 +37,7 @@ export type PartitionedFileDependencyPathNode = {
   id: PartitionedFileDependencyPathNodeZorn;
   partitionFact: PartitionFact;
   directoryPath: string;
-  localGraphElementZorn: LocalDirectedGraphElement2Zorn;
+  localGraphElementId: LocalDirectedGraphElement2Id;
   pathHeadId: string;
   pathTailIdSet: Set<string>;
 };
@@ -50,7 +50,7 @@ export const { PartitionedFileDependencyPathNodeInstance } =
       'id',
       'partitionFact',
       'directoryPath',
-      'localGraphElementZorn',
+      'localGraphElementId',
       'pathHeadId',
       'pathTailIdSet',
     ],
@@ -80,16 +80,15 @@ export const { PartitionedFileDependencyPathNodeInstance } =
           directoryPath,
         });
 
-        const localGraphElementZorn =
-          LocalDirectedGraphElement2Zorn.buildNodeZorn({
-            distinguisher: id.forHuman,
-          });
+        const localGraphElementId = LocalDirectedGraphElement2Id.buildNodeId({
+          distinguisher: id.forHuman,
+        });
 
         return {
           id,
           partitionFact,
           directoryPath,
-          localGraphElementZorn,
+          localGraphElementId,
           pathHeadId,
           pathTailIdSet,
         } satisfies PartitionedFileDependencyPathNode;

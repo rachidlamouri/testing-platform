@@ -1,8 +1,8 @@
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { FilePath, FilePathInstance } from './filePath';
-import { FileSystemNodeZorn } from './fileSystemNode';
-import { FileSystemNodeVoque } from './fileSystemNodeVoictent';
+import { FileSystemNodeId } from './fileSystemNode';
+import { FileSystemNodeStreamMetatype } from './fileSystemNodeVoictent';
 
 type FileConstructorInput = {
   nodePath: string;
@@ -21,7 +21,7 @@ type FileConstructorInput = {
 export type File<
   TFileExtensionSuffixIdentifier extends FileExtensionSuffixIdentifier = FileExtensionSuffixIdentifier,
 > = {
-  id: FileSystemNodeZorn;
+  id: FileSystemNodeId;
   /** @deprecated in favor of id.forMachine  */
   instanceId: string;
   filePath: FilePath<TFileExtensionSuffixIdentifier>;
@@ -49,7 +49,7 @@ export const { FileInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { nodePath: serializedFilePath, ...otherInputFields } = input;
 
-      const id = new FileSystemNodeZorn({
+      const id = new FileSystemNodeId({
         nodePath: serializedFilePath,
       });
 
@@ -71,4 +71,4 @@ export const FILE_COLLECTION_ID = 'file';
 
 type FileGepp = typeof FILE_COLLECTION_ID;
 
-export type FileStreamMetatype = FileSystemNodeVoque<FileGepp, File>;
+export type FileStreamMetatype = FileSystemNodeStreamMetatype<FileGepp, File>;

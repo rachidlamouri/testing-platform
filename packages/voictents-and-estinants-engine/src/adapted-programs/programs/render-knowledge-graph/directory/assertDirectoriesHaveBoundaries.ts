@@ -11,8 +11,8 @@ import {
   DirectoryWithFileVoque,
 } from './directoryWithFile';
 import {
-  BOUNDED_DIRECTORY_GEPP,
-  BoundedDirectoryVoque,
+  BOUNDED_DIRECTORY_COLLECTION_ID,
+  BoundedDirectoryStreamMetatype,
 } from './boundedDirectory';
 
 const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
@@ -35,8 +35,8 @@ export const assertDirectoriesHaveBoundaries = buildProgrammedTransform({
   .fromCollection2<DirectoryWithFileVoque>({
     collectionId: DIRECTORY_WITH_FILE_GEPP,
   })
-  .andFromCollection2<BoundedDirectoryVoque>({
-    collectionId: BOUNDED_DIRECTORY_GEPP,
+  .andFromCollection2<BoundedDirectoryStreamMetatype>({
+    collectionId: BOUNDED_DIRECTORY_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

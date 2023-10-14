@@ -1,12 +1,12 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  TYPE_SCRIPT_FILE_GEPP,
-  TypeScriptFileVoque,
+  TYPE_SCRIPT_FILE_COLLECTION_ID,
+  TypeScriptFileStreamMetatype,
 } from '../type-script-file/typeScriptFile';
 import {
-  FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
+  FILE_ANCESTOR_DIRECTORY_PATH_SET_COLLECTION_ID,
   FileAncestorDirectoryPathSetInstance,
-  FileAncestorDirectoryPathSetVoque,
+  FileAncestorDirectoryPathSetStreamMetatype,
 } from './fileAncestorDirectoryPathSet';
 
 /**
@@ -15,11 +15,11 @@ import {
 export const getFileAncestorDirectoryPathSet = buildProgrammedTransform({
   name: 'getFileAncestorDirectoryPathSet',
 })
-  .fromItem2<TypeScriptFileVoque>({
-    collectionId: TYPE_SCRIPT_FILE_GEPP,
+  .fromItem2<TypeScriptFileStreamMetatype>({
+    collectionId: TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
-  .toItem2<FileAncestorDirectoryPathSetVoque>({
-    collectionId: FILE_ANCESTOR_DIRECTORY_PATH_SET_GEPP,
+  .toItem2<FileAncestorDirectoryPathSetStreamMetatype>({
+    collectionId: FILE_ANCESTOR_DIRECTORY_PATH_SET_COLLECTION_ID,
   })
   .onTransform((file) => {
     return new FileAncestorDirectoryPathSetInstance({

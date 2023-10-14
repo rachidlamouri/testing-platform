@@ -6,21 +6,21 @@ import {
 } from '../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { FilePath } from '../../../programmable-units/file/filePath';
-import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
+import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNode';
 import {
   PartitionFact,
   PartitionFactId,
 } from '../partition-fact/partitionFact';
 import { BoundedFile } from './boundedFile';
 
-const PARTITIONED_FILE_ZORN_TEMPLATE = [
+const PARTITIONED_FILE_ID_TEMPLATE = [
   ['partitionFact', PartitionFactId],
-  ['file', FileSystemNodeZorn],
+  ['file', FileSystemNodeId],
 ] as const satisfies GenericComplexIdTemplate;
-type PartitionedFileZornTemplate = typeof PARTITIONED_FILE_ZORN_TEMPLATE;
-class PartitionedFileZorn extends ComplexId<PartitionedFileZornTemplate> {
-  get rawTemplate(): PartitionedFileZornTemplate {
-    return PARTITIONED_FILE_ZORN_TEMPLATE;
+type PartitionedFileIdTemplate = typeof PARTITIONED_FILE_ID_TEMPLATE;
+class PartitionedFileId extends ComplexId<PartitionedFileIdTemplate> {
+  get rawTemplate(): PartitionedFileIdTemplate {
+    return PARTITIONED_FILE_ID_TEMPLATE;
   }
 }
 
@@ -36,7 +36,7 @@ type PartitionedFileConstructorInput = {
 type PartitionedFile = SimplifyN<
   [
     {
-      id: PartitionedFileZorn;
+      id: PartitionedFileId;
     },
     PartitionedFileConstructorInput,
     {
@@ -66,7 +66,7 @@ export const { PartitionedFileInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { partitionFact, file } = input;
 
-      const id = new PartitionedFileZorn({
+      const id = new PartitionedFileId({
         partitionFact: partitionFact.id,
         file: file.id,
       });
@@ -81,11 +81,12 @@ export const { PartitionedFileInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const PARTITIONED_FILE_GEPP = 'partitioned-file';
+export const PARTITIONED_FILE_COLLECTION_ID = 'partitioned-file';
 
-type PartitionedFileGepp = typeof PARTITIONED_FILE_GEPP;
+type PartitionedFileCollectionId = typeof PARTITIONED_FILE_COLLECTION_ID;
 
-export type PartitionedFileVoque = InMemoryIdentifiableItem3StreamMetatype<
-  PartitionedFileGepp,
-  PartitionedFile
->;
+export type PartitionedFileStreamMetatype =
+  InMemoryIdentifiableItem3StreamMetatype<
+    PartitionedFileCollectionId,
+    PartitionedFile
+  >;

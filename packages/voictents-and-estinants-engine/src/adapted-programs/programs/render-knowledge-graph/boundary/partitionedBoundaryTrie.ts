@@ -7,11 +7,14 @@ import { PartitionedBoundary } from './partitionedBoundary';
  */
 export class PartitionedBoundaryTrie extends Trie<PartitionedBoundary | null> {}
 
-export const PARTITIONED_BOUNDARY_TRIE_GEPP = 'partitioned-boundary-trie';
+export const PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID =
+  'partitioned-boundary-trie';
 
-type PartitionedBoundaryTrieGepp = typeof PARTITIONED_BOUNDARY_TRIE_GEPP;
+type PartitionedBoundaryTrieGepp =
+  typeof PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID;
 
-export type PartitionedBoundaryTrieVoque = StandardInMemoryStreamMetatype<
-  PartitionedBoundaryTrieGepp,
-  PartitionedBoundaryTrie
->;
+export type PartitionedBoundaryTrieStreamMetatype =
+  StandardInMemoryStreamMetatype<
+    PartitionedBoundaryTrieGepp,
+    PartitionedBoundaryTrie
+  >;

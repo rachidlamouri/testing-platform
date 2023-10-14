@@ -9,7 +9,7 @@ const FILE_SYSTEM_NODE_ZORN_TEMPLATE = [
   'nodePath',
 ] as const satisfies GenericComplexIdTemplate;
 type FileSystemNodeZornTemplate = typeof FILE_SYSTEM_NODE_ZORN_TEMPLATE;
-export class FileSystemNodeZorn extends ComplexId<FileSystemNodeZornTemplate> {
+export class FileSystemNodeId extends ComplexId<FileSystemNodeZornTemplate> {
   get rawTemplate(): FileSystemNodeZornTemplate {
     return FILE_SYSTEM_NODE_ZORN_TEMPLATE;
   }
@@ -25,7 +25,7 @@ type FileSystemNodeConstructorInput = {
 export type FileSystemNode = SimplifyN<
   [
     {
-      id: FileSystemNodeZorn;
+      id: FileSystemNodeId;
     },
     FileSystemNodeConstructorInput,
   ]

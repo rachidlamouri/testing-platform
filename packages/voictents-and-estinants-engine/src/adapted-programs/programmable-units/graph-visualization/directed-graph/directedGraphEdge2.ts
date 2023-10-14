@@ -10,7 +10,7 @@ import {
 import { RootGraphLocator } from './rootGraphLocator';
 import {
   GlobalDirectedGraphElement2Zorn,
-  LocalDirectedGraphElement2Zorn,
+  LocalDirectedGraphElement2Id,
 } from './types';
 
 type BaseDirectedGraphEdge2 = {
@@ -50,7 +50,7 @@ export const { DirectedGraphEdge2Instance } = buildConstructorFunctionWithName(
       idOverride: directedEdge.oldId,
       rootGraphLocator: directedEdge.rootGraphLocator,
       parentId: directedEdge.rootGraphLocator.oldId,
-      localZorn: LocalDirectedGraphElement2Zorn.buildEdgeZorn({
+      localId: LocalDirectedGraphElement2Id.buildEdgeZorn({
         distinguisher: directedEdge.oldId,
       }),
     });

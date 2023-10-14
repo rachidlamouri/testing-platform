@@ -5,7 +5,7 @@ import {
   ComplexId,
 } from '../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
-import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
+import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNode';
 import {
   PartitionFact,
   PartitionFactId,
@@ -14,7 +14,7 @@ import { BoundedDirectory } from './boundedDirectory';
 
 const PARTITIONED_DIRECTORY_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactId],
-  ['directory', FileSystemNodeZorn],
+  ['directory', FileSystemNodeId],
 ] as const satisfies GenericComplexIdTemplate;
 type PartitionedDirectoryZornTemplate =
   typeof PARTITIONED_DIRECTORY_ZORN_TEMPLATE;

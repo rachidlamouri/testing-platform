@@ -6,7 +6,7 @@ import {
 /**
  * @todo consider eliminating string literals and just going with complex identifiers
  */
-export type OdeshinZorn = SimpleId | UnsafeComplexId;
+export type IdentifiableItemId = SimpleId | UnsafeComplexId;
 
 /**
  * An identifiable item
@@ -15,10 +15,10 @@ export type OdeshinZorn = SimpleId | UnsafeComplexId;
  */
 export type GenericIdentifiableItem =
   | {
-      id: OdeshinZorn;
-      zorn?: OdeshinZorn;
+      id: IdentifiableItemId;
+      zorn?: IdentifiableItemId;
     }
   | {
-      id?: OdeshinZorn;
-      zorn: OdeshinZorn;
+      id?: IdentifiableItemId;
+      zorn: IdentifiableItemId;
     };

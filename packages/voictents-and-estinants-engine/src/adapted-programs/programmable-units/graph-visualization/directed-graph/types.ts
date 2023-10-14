@@ -19,11 +19,11 @@ const LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE = [
 ] as const satisfies GenericComplexIdTemplate;
 type LocalDirectedGraphElement2ZornTemplate =
   typeof LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;
-export class LocalDirectedGraphElement2Zorn extends ComplexId<LocalDirectedGraphElement2ZornTemplate> {
+export class LocalDirectedGraphElement2Id extends ComplexId<LocalDirectedGraphElement2ZornTemplate> {
   static buildSubgraphZorn({
     distinguisher,
-  }: FactoryInput): LocalDirectedGraphElement2Zorn {
-    return new LocalDirectedGraphElement2Zorn({
+  }: FactoryInput): LocalDirectedGraphElement2Id {
+    return new LocalDirectedGraphElement2Id({
       elementType: 'subgraph',
       distinguisher,
     });
@@ -31,17 +31,17 @@ export class LocalDirectedGraphElement2Zorn extends ComplexId<LocalDirectedGraph
 
   static buildClusterZorn({
     distinguisher,
-  }: FactoryInput): LocalDirectedGraphElement2Zorn {
-    return new LocalDirectedGraphElement2Zorn({
+  }: FactoryInput): LocalDirectedGraphElement2Id {
+    return new LocalDirectedGraphElement2Id({
       elementType: 'cluster',
       distinguisher,
     });
   }
 
-  static buildNodeZorn({
+  static buildNodeId({
     distinguisher,
-  }: FactoryInput): LocalDirectedGraphElement2Zorn {
-    return new LocalDirectedGraphElement2Zorn({
+  }: FactoryInput): LocalDirectedGraphElement2Id {
+    return new LocalDirectedGraphElement2Id({
       elementType: 'node',
       distinguisher,
     });
@@ -49,8 +49,8 @@ export class LocalDirectedGraphElement2Zorn extends ComplexId<LocalDirectedGraph
 
   static buildEdgeZorn({
     distinguisher,
-  }: FactoryInput): LocalDirectedGraphElement2Zorn {
-    return new LocalDirectedGraphElement2Zorn({
+  }: FactoryInput): LocalDirectedGraphElement2Id {
+    return new LocalDirectedGraphElement2Id({
       elementType: 'edge',
       distinguisher,
     });
@@ -61,7 +61,7 @@ export class LocalDirectedGraphElement2Zorn extends ComplexId<LocalDirectedGraph
   }
 }
 
-export class RootDirectedGraphElement2Zorn extends LocalDirectedGraphElement2Zorn {
+export class RootDirectedGraphElement2Zorn extends LocalDirectedGraphElement2Id {
   static build({ distinguisher }: FactoryInput): RootDirectedGraphElement2Zorn {
     return new RootDirectedGraphElement2Zorn({
       elementType: 'graph',
@@ -72,7 +72,7 @@ export class RootDirectedGraphElement2Zorn extends LocalDirectedGraphElement2Zor
 
 const GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE = [
   ['root', RootDirectedGraphElement2Zorn],
-  ['local', LocalDirectedGraphElement2Zorn],
+  ['local', LocalDirectedGraphElement2Id],
 ] as const satisfies GenericComplexIdTemplate;
 type GlobalDirectedGraphElement2ZornTemplate =
   typeof GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;

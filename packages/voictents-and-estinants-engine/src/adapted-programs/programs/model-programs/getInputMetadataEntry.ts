@@ -1,5 +1,5 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   ESTINANT_INPUT_2_GEPP,
   EngineEstinantInput2Voque,
@@ -23,7 +23,7 @@ export const getInputMetadataEntry = buildProgrammedTransform({
   .fromItem2<ProgramEstinantInputRelationshipVoque>({
     collectionId: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
   })
-  .andFromItemTuple2<EngineEstinantInput2Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineEstinantInput2Voque, [IdentifiableItemId]>({
     collectionId: ESTINANT_INPUT_2_GEPP,
     getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantInput.id];

@@ -2,11 +2,11 @@ import { posix } from 'path';
 import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
-import { FileSystemNodeZorn } from '../../programmable-units/file/fileSystemNode';
+import { FileSystemNodeId } from '../../programmable-units/file/fileSystemNode';
 import { NodePath } from '../../programmable-units/file/nodePath';
 
 type FileSystemNodeRenameConfigurationInput = {
-  id: FileSystemNodeZorn;
+  id: FileSystemNodeId;
   isDirectory: boolean;
   oldNodePath: NodePath;
   relativeNewPath: string;

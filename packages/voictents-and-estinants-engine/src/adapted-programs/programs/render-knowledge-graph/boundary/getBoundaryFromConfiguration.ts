@@ -1,5 +1,5 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
   DirectoryStreamMetatype,
   DIRECTORY_COLLECTION_ID,
@@ -23,7 +23,7 @@ export const getBoundaryFromConfiguration = buildProgrammedTransform({
   .fromItem2<BoundaryConfigurationVoque>({
     collectionId: BOUNDARY_CONFIGURATION_GEPP,
   })
-  .andFromItemTuple2<DirectoryStreamMetatype, [OdeshinZorn]>({
+  .andFromItemTuple2<DirectoryStreamMetatype, [IdentifiableItemId]>({
     collectionId: DIRECTORY_COLLECTION_ID,
     getRightKeyTuple: (locator) => [locator.item.directoryPath],
     getRightKey: (directory) => directory.item.directoryPath.serialized,

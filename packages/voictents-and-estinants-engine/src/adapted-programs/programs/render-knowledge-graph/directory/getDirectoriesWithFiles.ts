@@ -4,8 +4,8 @@ import {
   DirectoryStreamMetatype,
 } from '../../../programmable-units/file/directory';
 import {
-  TYPE_SCRIPT_FILE_GEPP,
-  TypeScriptFileVoque,
+  TYPE_SCRIPT_FILE_COLLECTION_ID,
+  TypeScriptFileStreamMetatype,
 } from '../../../programmable-units/type-script-file/typeScriptFile';
 import {
   DIRECTORY_WITH_FILE_GEPP,
@@ -21,8 +21,8 @@ export const getDirectoriesWithFiles = buildProgrammedTransform({
   .fromCollection2<DirectoryStreamMetatype>({
     collectionId: DIRECTORY_COLLECTION_ID,
   })
-  .andFromCollection2<TypeScriptFileVoque>({
-    collectionId: TYPE_SCRIPT_FILE_GEPP,
+  .andFromCollection2<TypeScriptFileStreamMetatype>({
+    collectionId: TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
   .toItemTuple2<DirectoryWithFileVoque>({
     collectionId: DIRECTORY_WITH_FILE_GEPP,

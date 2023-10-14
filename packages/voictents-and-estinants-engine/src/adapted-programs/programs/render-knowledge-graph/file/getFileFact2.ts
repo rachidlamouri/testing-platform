@@ -1,23 +1,26 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
-  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-  FileCommentedProgramBodyDeclarationGroupVoque,
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
+  FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from '../../../programmable-units/type-script-file/fileCommentedProgramBodyDeclarationGroup';
 import {
-  FILE_DEPENDENCY_GEPP,
-  FileDependencyVoque,
+  FILE_DEPENDENCY_COLLECTION_ID,
+  FileDependencyStreamMetatype,
 } from '../dependency/fileDependency';
 import {
-  BOUNDED_DIRECTORY_GEPP,
-  BoundedDirectoryVoque,
+  BOUNDED_DIRECTORY_COLLECTION_ID,
+  BoundedDirectoryStreamMetatype,
 } from '../directory/boundedDirectory';
 import {
-  FILE_FACT_2_GEPP,
+  FILE_FACT_2_COLLECTION_ID,
   FileFact2Instance,
-  FileFact2Voque,
+  FileFact2StreamMetatype,
 } from './fileFact2';
-import { PARTITIONED_FILE_GEPP, PartitionedFileVoque } from './partitionedFile';
+import {
+  PARTITIONED_FILE_COLLECTION_ID,
+  PartitionedFileStreamMetatype,
+} from './partitionedFile';
 
 /**
  * Associates a partitioned file to its parent bounded directory
@@ -25,11 +28,11 @@ import { PARTITIONED_FILE_GEPP, PartitionedFileVoque } from './partitionedFile';
 export const getFileFact2 = buildProgrammedTransform({
   name: 'getFileFact2',
 })
-  .fromItem2<PartitionedFileVoque>({
-    collectionId: PARTITIONED_FILE_GEPP,
+  .fromItem2<PartitionedFileStreamMetatype>({
+    collectionId: PARTITIONED_FILE_COLLECTION_ID,
   })
-  .andFromItemTuple2<BoundedDirectoryVoque, [OdeshinZorn]>({
-    collectionId: BOUNDED_DIRECTORY_GEPP,
+  .andFromItemTuple2<BoundedDirectoryStreamMetatype, [IdentifiableItemId]>({
+    collectionId: BOUNDED_DIRECTORY_COLLECTION_ID,
     getRightKeyTuple: (partitionedFile) => {
       return [partitionedFile.item.file.file.filePath.parentDirectoryPath];
     },
@@ -38,10 +41,10 @@ export const getFileFact2 = buildProgrammedTransform({
     },
   })
   .andFromItemTuple2<
-    FileCommentedProgramBodyDeclarationGroupVoque,
-    [OdeshinZorn]
+    FileCommentedProgramBodyDeclarationGroupStreamMetatype,
+    [IdentifiableItemId]
   >({
-    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
     getRightKeyTuple: (partitionedFile) => {
       return [partitionedFile.item.file.file.filePath.serialized];
     },
@@ -49,37 +52,37 @@ export const getFileFact2 = buildProgrammedTransform({
       return declarationGroup.item.filePath;
     },
   })
-  .andFromCollection2<FileDependencyVoque>({
-    collectionId: FILE_DEPENDENCY_GEPP,
+  .andFromCollection2<FileDependencyStreamMetatype>({
+    collectionId: FILE_DEPENDENCY_COLLECTION_ID,
   })
-  .toItem2<FileFact2Voque>({
-    collectionId: FILE_FACT_2_GEPP,
+  .toItem2<FileFact2StreamMetatype>({
+    collectionId: FILE_FACT_2_COLLECTION_ID,
   })
   .onTransform(
     (
       partitionedFile,
       [parentBoundedDirectory],
       [declarationGroup],
-      fileDependencyVoictent,
+      fileDependencyCollection,
     ) => {
       const importedFileList =
-        fileDependencyVoictent.importedFileListByImportingFilePath.get(
+        fileDependencyCollection.importedFileListByImportingFilePath.get(
           partitionedFile.file.file.filePath.serialized,
         ) ?? [];
       const importingFileList =
-        fileDependencyVoictent.importingFileListByImportedFilePath.get(
+        fileDependencyCollection.importingFileListByImportedFilePath.get(
           partitionedFile.file.file.filePath.serialized,
         ) ?? [];
 
       const importedNodeIdSet = new Set(
         importingFileList.map((importedFile) => {
-          return importedFile.localGraphElementZorn.forMachine;
+          return importedFile.localGraphElementId.forMachine;
         }),
       );
 
       const importingNodeIdSet = new Set(
         importedFileList.map((importingFile) => {
-          return importingFile.localGraphElementZorn.forMachine;
+          return importingFile.localGraphElementId.forMachine;
         }),
       );
 

@@ -1,5 +1,5 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   ENGINE_VOQUE_2_GEPP,
   EngineVoque2Voque,
@@ -27,7 +27,7 @@ export const getEngineVoqueMetadataEntry = buildProgrammedTransform({
   .fromItem2<ProgramVoqueRelationship2Voque>({
     collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
-  .andFromItemTuple2<EngineVoque2Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineVoque2Voque, [IdentifiableItemId]>({
     collectionId: ENGINE_VOQUE_2_GEPP,
     getRightKeyTuple: (relationship) => [relationship.item.voqueLocator.id],
     getRightKey: (engineVoque) => engineVoque.item.id,

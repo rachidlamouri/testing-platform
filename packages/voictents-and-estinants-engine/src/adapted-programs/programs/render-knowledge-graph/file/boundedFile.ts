@@ -1,8 +1,8 @@
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { FilePath } from '../../../programmable-units/file/filePath';
-import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
-import { FileSystemNodeVoque } from '../../../programmable-units/file/fileSystemNodeVoictent';
-import { LocalDirectedGraphElement2Zorn } from '../../../programmable-units/graph-visualization/directed-graph/types';
+import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNode';
+import { FileSystemNodeStreamMetatype } from '../../../programmable-units/file/fileSystemNodeVoictent';
+import { LocalDirectedGraphElement2Id } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import { TypeScriptFile } from '../../../programmable-units/type-script-file/typeScriptFile';
 import { Boundary } from '../boundary/boundary';
 import { PartitionedBoundary } from '../boundary/partitionedBoundary';
@@ -19,14 +19,14 @@ type BoundedFileConstructorInput = {
  * boundary.
  */
 export type BoundedFile = {
-  id: FileSystemNodeZorn;
+  id: FileSystemNodeId;
   sourcePartitionFact: PartitionFact;
   boundary: Boundary;
   file: TypeScriptFile;
   nodePath: FilePath;
   directoryPathSetFromBoundary: string[];
   directoryPathSetToBoundary: string[];
-  localGraphElementZorn: LocalDirectedGraphElement2Zorn;
+  localGraphElementId: LocalDirectedGraphElement2Id;
 };
 
 export const { BoundedFileInstance } = buildNamedConstructorFunction({
@@ -40,7 +40,7 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
     'nodePath',
     'directoryPathSetFromBoundary',
     'directoryPathSetToBoundary',
-    'localGraphElementZorn',
+    'localGraphElementId',
   ],
 } as const)
   .withTypes<BoundedFileConstructorInput, BoundedFile>({
@@ -72,10 +72,9 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
         .slice()
         .reverse();
 
-      const localGraphElementZorn =
-        LocalDirectedGraphElement2Zorn.buildNodeZorn({
-          distinguisher: file.filePath.serialized,
-        });
+      const localGraphElementId = LocalDirectedGraphElement2Id.buildNodeId({
+        distinguisher: file.filePath.serialized,
+      });
 
       return {
         id: file.id,
@@ -85,17 +84,17 @@ export const { BoundedFileInstance } = buildNamedConstructorFunction({
         nodePath: file.nodePath,
         directoryPathSetFromBoundary,
         directoryPathSetToBoundary,
-        localGraphElementZorn,
+        localGraphElementId,
       };
     },
   })
   .assemble();
 
-export const BOUNDED_FILE_GEPP = 'bounded-file';
+export const BOUNDED_FILE_COLLECTION_ID = 'bounded-file';
 
-type BoundedFileGepp = typeof BOUNDED_FILE_GEPP;
+type BoundedFileCollectionId = typeof BOUNDED_FILE_COLLECTION_ID;
 
-export type BoundedFileVoque = FileSystemNodeVoque<
-  BoundedFileGepp,
+export type BoundedFileStreamMetatype = FileSystemNodeStreamMetatype<
+  BoundedFileCollectionId,
   BoundedFile
 >;

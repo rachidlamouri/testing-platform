@@ -62,8 +62,8 @@ export const { FileDependencyPathNodeFactInstance } =
         const graphElement = new DirectedGraphNode2Instance({
           locator: new GraphConstituentLocatorInstance({
             rootGraphLocator: pathNode.partitionFact.rootGraphLocator,
-            parentId: directory.localGraphElementZorn.forMachine,
-            localZorn: pathNode.localGraphElementZorn,
+            parentId: directory.localGraphElementId.forMachine,
+            localId: pathNode.localGraphElementId,
           }),
           inputAttributeByKey: {
             label: 'X',

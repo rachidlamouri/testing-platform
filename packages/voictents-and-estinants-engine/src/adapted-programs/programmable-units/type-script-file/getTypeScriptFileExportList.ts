@@ -7,8 +7,8 @@ import {
 } from './typeScriptFileExportList';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import {
-  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-  FileCommentedProgramBodyDeclarationGroupVoque,
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
+  FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from './fileCommentedProgramBodyDeclarationGroup';
 
 /**
@@ -17,8 +17,8 @@ import {
 export const getTypeScriptFileExportList = buildProgrammedTransform({
   name: 'getTypeScriptFileExportList',
 })
-  .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   })
   .toItem2<TypeScriptFileExportListVoque>({
     collectionId: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,

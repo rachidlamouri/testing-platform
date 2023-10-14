@@ -2,9 +2,9 @@ import { BaseInMemoryOdeshin2Voictent } from '../../../../layer-agnostic-utiliti
 import { BoundedFile } from '../file/boundedFile';
 import {
   FileDependency,
-  FILE_DEPENDENCY_GEPP,
+  FILE_DEPENDENCY_COLLECTION_ID,
   FileDependencyVoictentPelie,
-  FileDependencyVoque,
+  FileDependencyStreamMetatype,
 } from './fileDependency';
 
 class BoundedFileCombination extends Map<string, BoundedFile> {}
@@ -17,8 +17,8 @@ class BoundedFileCombination extends Map<string, BoundedFile> {}
  * @readableName FileDependencyCollection
  */
 export class FileDependencyVoictent extends BaseInMemoryOdeshin2Voictent<
-  FileDependencyVoque,
-  FileDependencyVoque
+  FileDependencyStreamMetatype,
+  FileDependencyStreamMetatype
 > {
   private importedFileListByImportingFilePath = new Map<
     string,
@@ -32,7 +32,7 @@ export class FileDependencyVoictent extends BaseInMemoryOdeshin2Voictent<
 
   constructor() {
     super({
-      collectionId: FILE_DEPENDENCY_GEPP,
+      collectionId: FILE_DEPENDENCY_COLLECTION_ID,
       initialItemEggTuple: [],
     });
   }

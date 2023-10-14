@@ -2,11 +2,11 @@ import {
   GenericComplexIdTemplate,
   ComplexId,
 } from '../../../../package-agnostic-utilities/data-structure/id';
-import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
+import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNode';
 
 const FILE_DEPENDENCY_ZORN_TEMPLATE = [
-  ['importingFile', FileSystemNodeZorn],
-  ['importedFile', FileSystemNodeZorn],
+  ['importingFile', FileSystemNodeId],
+  ['importedFile', FileSystemNodeId],
 ] as const satisfies GenericComplexIdTemplate;
 type FileDependencyZornTemplate = typeof FILE_DEPENDENCY_ZORN_TEMPLATE;
 

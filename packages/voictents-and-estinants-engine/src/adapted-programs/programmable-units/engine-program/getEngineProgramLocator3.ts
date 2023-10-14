@@ -68,12 +68,12 @@ import {
   EngineVoqueLocator2Instance,
 } from './engineVoqueLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import { buildCollectionByCollectionId } from '../../../adapter/engine/runEngine';
 import { isArrayExpression } from '../../../package-agnostic-utilities/type-script-ast/isArrayExpression';
 import {
-  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-  FileCommentedProgramBodyDeclarationGroupVoque,
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
+  FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclaration';
 import { CategorizedCommentTypeName } from '../type-script-file/comment/categorized/categorizedCommentTypeName';
@@ -695,14 +695,14 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
     collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
   .andFromItemTuple2<
-    FileCommentedProgramBodyDeclarationGroupVoque,
-    [OdeshinZorn]
+    FileCommentedProgramBodyDeclarationGroupStreamMetatype,
+    [IdentifiableItemId]
   >({
-    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
     getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,
   })
-  .andFromItemTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<TypeScriptFileImportListVoque, [IdentifiableItemId]>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,

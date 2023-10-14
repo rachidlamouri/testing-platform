@@ -5,9 +5,9 @@ import {
   PartitionedBoundaryListTrieVoque,
 } from './partitionedBoundaryListTrie';
 import {
-  PARTITIONED_BOUNDARY_TRIE_GEPP,
+  PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID,
   PartitionedBoundaryTrie,
-  PartitionedBoundaryTrieVoque,
+  PartitionedBoundaryTrieStreamMetatype,
 } from './partitionedBoundaryTrie';
 
 /**
@@ -21,8 +21,8 @@ export const getPartitionedBoundaryTrie = buildProgrammedTransform({
   .fromItem2<PartitionedBoundaryListTrieVoque>({
     collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
   })
-  .toItem2<PartitionedBoundaryTrieVoque>({
-    collectionId: PARTITIONED_BOUNDARY_TRIE_GEPP,
+  .toItem2<PartitionedBoundaryTrieStreamMetatype>({
+    collectionId: PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID,
   })
   .onTransform((partitionedBoundaryListTrie) => {
     const partitionedBoundaryTrie = new PartitionedBoundaryTrie(null);

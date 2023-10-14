@@ -66,12 +66,12 @@ import {
   EstinantVoqueRelationship2Instance,
   EstinantVoqueRelationship2Voque,
 } from './estinantVoqueRelationship2';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedProgramBodyDeclaration';
 import {
-  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   FileCommentedProgramBodyDeclarationGroup,
-  FileCommentedProgramBodyDeclarationGroupVoque,
+  FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
 
 const ESTINANT_NAME = 'getEngineEstinant3' as const;
@@ -849,14 +849,14 @@ export const getEngineEstinant3 = buildProgrammedTransform({
     collectionId: ENGINE_ESTINANT_LOCATOR_2_GEPP,
   })
   .andFromItemTuple2<
-    FileCommentedProgramBodyDeclarationGroupVoque,
-    [OdeshinZorn]
+    FileCommentedProgramBodyDeclarationGroupStreamMetatype,
+    [IdentifiableItemId]
   >({
-    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
     getRightKeyTuple: (leftInput) => [leftInput.item.filePath],
     getRightKey: (rightInput) => rightInput.item.filePath,
   })
-  .andFromItemTuple2<TypeScriptFileImportListVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<TypeScriptFileImportListVoque, [IdentifiableItemId]>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
     getRightKeyTuple: (leftInput) => [leftInput.item.filePath],
     getRightKey: (rightInput) => rightInput.item.id,

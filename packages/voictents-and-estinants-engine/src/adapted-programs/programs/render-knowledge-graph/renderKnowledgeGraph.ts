@@ -49,8 +49,8 @@ import {
 } from './boundary/partitionedBoundaryListTrie';
 import { getPartitionedBoundaryListTrie } from './boundary/getPartitionedBoundaryListTrie';
 import {
-  PARTITIONED_BOUNDARY_TRIE_GEPP,
-  PartitionedBoundaryTrieVoque,
+  PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID,
+  PartitionedBoundaryTrieStreamMetatype,
 } from './boundary/partitionedBoundaryTrie';
 import { getPartitionedBoundaryTrie } from './boundary/getPartitionedBoundaryTrie';
 import { renderApp } from './app/node/renderApp';
@@ -66,8 +66,8 @@ import {
   PartitionFactStreamMetatype,
 } from './partition-fact/partitionFact';
 import {
-  PARTITIONED_FILE_GEPP,
-  PartitionedFileVoque,
+  PARTITIONED_FILE_COLLECTION_ID,
+  PartitionedFileStreamMetatype,
 } from './file/partitionedFile';
 import { getFileDependencies } from './dependency/getFileDependencies';
 import { getBoundedFile } from './file/getBoundedFile';
@@ -75,8 +75,8 @@ import { getPartitionedFileSystemNodes } from './getPartitionedFileSystemNodes';
 import { getBoundedDirectory } from './directory/getBoundedDirectory';
 import { getDirectoryFact2 } from './directory/getDirectoryFact2';
 import { getFileFact2 } from './file/getFileFact2';
-import { BOUNDED_DIRECTORY_GEPP } from './directory/boundedDirectory';
-import { BOUNDED_FILE_GEPP } from './file/boundedFile';
+import { BOUNDED_DIRECTORY_COLLECTION_ID } from './directory/boundedDirectory';
+import { BOUNDED_FILE_COLLECTION_ID } from './file/boundedFile';
 import { getPartitionedFileDependency } from './dependency/getPartitionedFileDependency';
 import { getPartitionedFileDependencyPathConstituents } from './dependency/getPartitionedFileDependencyPathConstituents';
 import { getFileDependencyPathNodeFact } from './dependency/dependency-path/getFileDependencyPathNodeFact';
@@ -147,8 +147,8 @@ runEngine({
     ...defaultFileCollectionIdCombination,
     ...buildCollectionIdCombination([
       // keep as multiline list
-      BOUNDED_DIRECTORY_GEPP,
-      BOUNDED_FILE_GEPP,
+      BOUNDED_DIRECTORY_COLLECTION_ID,
+      BOUNDED_FILE_COLLECTION_ID,
     ] as const),
   },
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
@@ -163,12 +163,12 @@ runEngine({
       collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,
       initialItemEggTuple: [],
     }),
-    new InMemoryCollection<PartitionedBoundaryTrieVoque>({
-      collectionId: PARTITIONED_BOUNDARY_TRIE_GEPP,
+    new InMemoryCollection<PartitionedBoundaryTrieStreamMetatype>({
+      collectionId: PARTITIONED_BOUNDARY_TRIE_COLLECTION_ID,
       initialItemEggTuple: [],
     }),
-    new InMemoryOdeshin3Voictent<PartitionedFileVoque>({
-      collectionId: PARTITIONED_FILE_GEPP,
+    new InMemoryOdeshin3Voictent<PartitionedFileStreamMetatype>({
+      collectionId: PARTITIONED_FILE_COLLECTION_ID,
       initialItemEggTuple: [],
     }),
     new OutputFileCollection({

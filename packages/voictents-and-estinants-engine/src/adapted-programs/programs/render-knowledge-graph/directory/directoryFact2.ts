@@ -6,7 +6,7 @@ import {
   ComplexId,
 } from '../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
-import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
+import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNode';
 import { GraphConstituentLocatorInstance } from '../../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
 import {
   PartitionFact,
@@ -21,7 +21,7 @@ import { FactTypeName } from '../fact/factTypeName';
 
 const DIRECTORY_FACT_2_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactId],
-  ['directory', FileSystemNodeZorn],
+  ['directory', FileSystemNodeId],
 ] as const satisfies GenericComplexIdTemplate;
 type DirectoryFact2ZornTemplate = typeof DIRECTORY_FACT_2_ZORN_TEMPLATE;
 class DirectoryFact2Zorn extends ComplexId<DirectoryFact2ZornTemplate> {
@@ -87,7 +87,7 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
         label = directory.directoryPathFromCommonBoundaryRoot + posix.sep;
       } else {
         assertNotNull(parentDirectory);
-        parentId = parentDirectory.localGraphElementZorn.forMachine;
+        parentId = parentDirectory.localGraphElementId.forMachine;
         label = directory.directory.directoryPath.name.serialized + posix.sep;
       }
 
@@ -95,7 +95,7 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
         locator: new GraphConstituentLocatorInstance({
           rootGraphLocator: partitionFact.rootGraphLocator,
           parentId,
-          localZorn: directory.localGraphElementZorn,
+          localId: directory.localGraphElementId,
         }),
         inputAttributeByKey: {
           label,

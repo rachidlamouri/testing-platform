@@ -16,7 +16,7 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 
 const ESTINANT_NAME = 'assertCiFileIsUpToDate' as const;
 type EstinantName = typeof ESTINANT_NAME;
@@ -38,7 +38,7 @@ export const assertCiFileIsUpToDate = buildProgrammedTransform({
   .fromItem2<SerializedCiModelVoque>({
     collectionId: SERIALIZED_CI_MODEL_GEPP,
   })
-  .andFromItemTuple2<BashFileVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<BashFileVoque, [IdentifiableItemId]>({
     collectionId: BASH_FILE_GEPP,
     getRightKeyTuple: () => [CI_FILE_PATH],
     getRightKey: (leftInput) => leftInput.item.filePath.serialized,

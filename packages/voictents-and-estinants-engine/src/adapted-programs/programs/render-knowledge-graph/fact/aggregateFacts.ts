@@ -11,7 +11,10 @@ import {
   DIRECTORY_FACT_2_GEPP,
   DirectoryFact2Voque,
 } from '../directory/directoryFact2';
-import { FILE_FACT_2_GEPP, FileFact2Voque } from '../file/fileFact2';
+import {
+  FILE_FACT_2_COLLECTION_ID,
+  FileFact2StreamMetatype,
+} from '../file/fileFact2';
 import {
   PARTITION_FACT_COLLECTION_ID,
   PartitionFactStreamMetatype,
@@ -30,8 +33,8 @@ export const aggregateFacts = buildProgrammedTransform({
   .andFromCollection2<DirectoryFact2Voque>({
     collectionId: DIRECTORY_FACT_2_GEPP,
   })
-  .andFromCollection2<FileFact2Voque>({
-    collectionId: FILE_FACT_2_GEPP,
+  .andFromCollection2<FileFact2StreamMetatype>({
+    collectionId: FILE_FACT_2_COLLECTION_ID,
   })
   .andFromCollection2<FileDependencyPathNodeFactVoque>({
     collectionId: FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,

@@ -5,12 +5,15 @@ import {
 } from './parsedTypeScriptFile';
 import { getIdentifiableProgramBodyStatementNode } from './getIdentifiableProgramBodyStatementNode';
 import {
-  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   FileCommentedProgramBodyDeclarationGroupInstance,
-  FileCommentedProgramBodyDeclarationGroupVoque,
+  FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { CommentedProgramBodyDeclarationInstance } from './commentedProgramBodyDeclaration';
-import { TypeScriptFileVoque, TYPE_SCRIPT_FILE_GEPP } from './typeScriptFile';
+import {
+  TypeScriptFileStreamMetatype,
+  TYPE_SCRIPT_FILE_COLLECTION_ID,
+} from './typeScriptFile';
 import {
   FILE_PARSED_COMMENT_GROUP_GEPP,
   FileParsedCommentGroupVoque,
@@ -45,8 +48,8 @@ export const getCommentedProgramBodyDeclarationList = buildProgrammedTransform({
   .fromItem2<ParsedTypeScriptFileVoque>({
     collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .andFromItemTuple2<TypeScriptFileVoque, [string]>({
-    collectionId: TYPE_SCRIPT_FILE_GEPP,
+  .andFromItemTuple2<TypeScriptFileStreamMetatype, [string]>({
+    collectionId: TYPE_SCRIPT_FILE_COLLECTION_ID,
     getRightKeyTuple: (parsedFile) => {
       return [parsedFile.item.filePath];
     },
@@ -63,8 +66,8 @@ export const getCommentedProgramBodyDeclarationList = buildProgrammedTransform({
       return file.item.filePath;
     },
   })
-  .toItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
-    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+  .toItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   })
   .onTransform((parsedTypeScriptFile, [typescriptFile], [commentGroup]) => {
     const normalizedFileName = shishKebab(

@@ -1,5 +1,5 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   GenericProgramErrorVoque,
   GenericProgramErrorPelue,
@@ -8,8 +8,8 @@ import {
   ReportingEstinantLocator,
 } from '../error/programError';
 import {
-  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-  FileCommentedProgramBodyDeclarationGroupVoque,
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
+  FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
 import {
   ENGINE_VOQUE_2_GEPP,
@@ -42,10 +42,10 @@ export const getEngineVoque2 = buildProgrammedTransform({
     collectionId: ENGINE_VOQUE_LOCATOR_2_GEPP,
   })
   .andFromItemTuple2<
-    FileCommentedProgramBodyDeclarationGroupVoque,
-    [OdeshinZorn]
+    FileCommentedProgramBodyDeclarationGroupStreamMetatype,
+    [IdentifiableItemId]
   >({
-    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+    collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
     getRightKeyTuple: (left) => [left.item.filePath],
     getRightKey: (right) => right.item.filePath,
   })

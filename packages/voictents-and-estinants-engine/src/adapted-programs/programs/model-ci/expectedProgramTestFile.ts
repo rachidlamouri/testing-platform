@@ -2,7 +2,7 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agno
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { BashFile } from '../../programmable-units/bash-file/bashFile';
-import { FileSystemNodeZorn } from '../../programmable-units/file/fileSystemNode';
+import { FileSystemNodeId } from '../../programmable-units/file/fileSystemNode';
 import { TypeScriptFile } from '../../programmable-units/type-script-file/typeScriptFile';
 
 type ExpectedProgramTestFileConstructorInput = {
@@ -17,7 +17,7 @@ type ExpectedProgramTestFileConstructorInput = {
 type ExpectedProgramTestFile = SimplifyN<
   [
     {
-      id: FileSystemNodeZorn;
+      id: FileSystemNodeId;
     },
     ExpectedProgramTestFileConstructorInput,
   ]

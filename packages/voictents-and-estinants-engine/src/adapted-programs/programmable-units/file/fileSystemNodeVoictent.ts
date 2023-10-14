@@ -29,7 +29,7 @@ type FileVoictentPelie<THubblepupPelie> = {
   list: THubblepupPelie[];
 };
 
-export type FileSystemNodeVoque<
+export type FileSystemNodeStreamMetatype<
   TGepp extends CollectionId,
   THubblepup extends FileSystemNode,
 > = InMemoryStreamMetatype<
@@ -40,7 +40,7 @@ export type FileSystemNodeVoque<
   FileVoictentPelie<THubblepup>
 >;
 
-export type GenericFileSystemNodeStreamMetatype = FileSystemNodeVoque<
+export type GenericFileSystemNodeStreamMetatype = FileSystemNodeStreamMetatype<
   CollectionId,
   FileSystemNode
 >;

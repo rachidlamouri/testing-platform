@@ -1,5 +1,5 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
   EngineProgramLocator3Voque,
@@ -24,7 +24,7 @@ export const getAdaptedProgramBoundary = buildProgrammedTransform({
   .fromItem2<EngineProgramLocator3Voque>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromItemTuple2<DirectoryStreamMetatype, [OdeshinZorn]>({
+  .andFromItemTuple2<DirectoryStreamMetatype, [IdentifiableItemId]>({
     collectionId: DIRECTORY_COLLECTION_ID,
     getRightKeyTuple: (locator) => [
       locator.item.engineProgramFile.filePath.parentDirectoryPath,

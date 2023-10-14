@@ -159,9 +159,9 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const FILE_DEPENDENCY_GEPP = 'file-dependency';
+export const FILE_DEPENDENCY_COLLECTION_ID = 'file-dependency';
 
-type FileDependencyGepp = typeof FILE_DEPENDENCY_GEPP;
+type FileDependencyGepp = typeof FILE_DEPENDENCY_COLLECTION_ID;
 
 export type FileDependencyVoictentPelie = {
   importedFileListByImportingFilePath: Map<string, BoundedFile[]>;
@@ -169,7 +169,7 @@ export type FileDependencyVoictentPelie = {
   list: FileDependency[];
 };
 
-export type FileDependencyVoque = InMemoryStreamMetatype<
+export type FileDependencyStreamMetatype = InMemoryStreamMetatype<
   FileDependencyGepp,
   FileDependency,
   FileDependency,

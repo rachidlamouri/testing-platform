@@ -1,8 +1,8 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
-  BOUNDED_DIRECTORY_GEPP,
-  BoundedDirectoryVoque,
+  BOUNDED_DIRECTORY_COLLECTION_ID,
+  BoundedDirectoryStreamMetatype,
 } from './boundedDirectory';
 import {
   DIRECTORY_FACT_2_GEPP,
@@ -24,22 +24,24 @@ export const getDirectoryFact2 = buildProgrammedTransform({
   .fromItem2<PartitionedDirectoryVoque>({
     collectionId: PARTITIONED_DIRECTORY_GEPP,
   })
-  .andFromItemTuple2<BoundedDirectoryVoque, [] | [OdeshinZorn]>({
-    collectionId: BOUNDED_DIRECTORY_GEPP,
-    getRightKeyTuple: (childDirectory) => {
-      if (childDirectory.item.directory.isBoundaryDirectory) {
-        return [];
-      }
+  .andFromItemTuple2<BoundedDirectoryStreamMetatype, [] | [IdentifiableItemId]>(
+    {
+      collectionId: BOUNDED_DIRECTORY_COLLECTION_ID,
+      getRightKeyTuple: (childDirectory) => {
+        if (childDirectory.item.directory.isBoundaryDirectory) {
+          return [];
+        }
 
-      const { parentDirectoryPath } =
-        childDirectory.item.directory.directory.nodePath;
+        const { parentDirectoryPath } =
+          childDirectory.item.directory.directory.nodePath;
 
-      return [parentDirectoryPath];
+        return [parentDirectoryPath];
+      },
+      getRightKey: (potentialParentDirectory) => {
+        return potentialParentDirectory.item.directory.directoryPath.serialized;
+      },
     },
-    getRightKey: (potentialParentDirectory) => {
-      return potentialParentDirectory.item.directory.directoryPath.serialized;
-    },
-  })
+  )
   .toItem2<DirectoryFact2Voque>({
     collectionId: DIRECTORY_FACT_2_GEPP,
   })

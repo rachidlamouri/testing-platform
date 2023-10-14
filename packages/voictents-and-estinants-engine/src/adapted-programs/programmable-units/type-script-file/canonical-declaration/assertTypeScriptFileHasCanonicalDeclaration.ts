@@ -10,8 +10,8 @@ import { ProgrammedTransformSourceInstance } from '../../linting/source/estinant
 import { FileSourceInstance } from '../../linting/source/fileSource';
 import {
   CanonicalDeclarationLintMetadata,
-  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
-  FileCommentedProgramBodyDeclarationGroupVoque,
+  FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
+  FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from '../fileCommentedProgramBodyDeclarationGroup';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
 import { shishKebab } from '../../../../package-agnostic-utilities/case/shishKebab';
@@ -60,8 +60,8 @@ export const assertTypeScriptFileHasCanonicalDeclaration =
   buildProgrammedTransform({
     name: ESTINANT_NAME,
   })
-    .fromItem2<FileCommentedProgramBodyDeclarationGroupVoque>({
-      collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP,
+    .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
+      collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
     })
     .toItem2<LintAssertionStreamMetatype>({
       collectionId: LINT_ASSERTION_COLLECTION_ID,

@@ -12,7 +12,7 @@ import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
   EngineProgramLocator3Voque,
 } from '../../programmable-units/engine-program/engineProgramLocator3';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   EXPECTED_PROGRAM_TEST_FILE_GEPP,
   ExpectedProgramTestFileVoque,
@@ -37,7 +37,7 @@ export const assertCiModelHasAllPrograms = buildProgrammedTransform({
   .fromCollection2<EngineProgramLocator3Voque>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
-  .andFromItemTuple2<CiModelVoque, [OdeshinZorn]>({
+  .andFromItemTuple2<CiModelVoque, [IdentifiableItemId]>({
     // TODO: make a better pattern for singletons
     collectionId: CI_MODEL_GEPP,
     getRightKeyTuple: () => [CI_MODEL_ZORN],

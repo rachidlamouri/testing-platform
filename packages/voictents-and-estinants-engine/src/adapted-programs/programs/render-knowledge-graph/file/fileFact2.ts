@@ -5,7 +5,7 @@ import {
   ComplexId,
 } from '../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
-import { FileSystemNodeZorn } from '../../../programmable-units/file/fileSystemNode';
+import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNode';
 import {
   DirectedGraphNode2,
   DirectedGraphNode2Instance,
@@ -22,14 +22,14 @@ import {
 import { THEME } from '../theme';
 import { BoundedFile } from './boundedFile';
 
-const FILE_FACT_2_ZORN_TEMPLATE = [
+const FILE_FACT_2_ID_TEMPLATE = [
   ['partitionFact', PartitionFactId],
-  ['boundedFile', FileSystemNodeZorn],
+  ['boundedFile', FileSystemNodeId],
 ] as const satisfies GenericComplexIdTemplate;
-type FileFact2ZornTemplate = typeof FILE_FACT_2_ZORN_TEMPLATE;
-class FileFact2Zorn extends ComplexId<FileFact2ZornTemplate> {
-  get rawTemplate(): FileFact2ZornTemplate {
-    return FILE_FACT_2_ZORN_TEMPLATE;
+type FileFact2IdTemplate = typeof FILE_FACT_2_ID_TEMPLATE;
+class FileFact2Id extends ComplexId<FileFact2IdTemplate> {
+  get rawTemplate(): FileFact2IdTemplate {
+    return FILE_FACT_2_ID_TEMPLATE;
   }
 }
 
@@ -50,7 +50,7 @@ export type FileFact2 = SimplifyN<
   [
     {
       typeName: FactTypeName.FileFact2;
-      id: FileFact2Zorn;
+      id: FileFact2Id;
     },
     Omit<
       FileFact2ConstructorInput,
@@ -95,7 +95,7 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
         declarationGroup,
       } = input;
 
-      const id = new FileFact2Zorn({
+      const id = new FileFact2Id({
         partitionFact: partitionFact.id,
         boundedFile: boundedFile.id,
       });
@@ -119,8 +119,8 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
       const graphElement = new DirectedGraphNode2Instance({
         locator: new GraphConstituentLocatorInstance({
           rootGraphLocator: partitionFact.rootGraphLocator,
-          parentId: parentBoundedDirectory.localGraphElementZorn.forMachine,
-          localZorn: boundedFile.localGraphElementZorn,
+          parentId: parentBoundedDirectory.localGraphElementId.forMachine,
+          localId: boundedFile.localGraphElementId,
         }),
         inputAttributeByKey: {
           label,
@@ -177,11 +177,9 @@ export const { FileFact2Instance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const FILE_FACT_2_GEPP = 'file-fact-2';
+export const FILE_FACT_2_COLLECTION_ID = 'file-fact-2';
 
-type FileFact2Gepp = typeof FILE_FACT_2_GEPP;
+type FileFact2CollectionId = typeof FILE_FACT_2_COLLECTION_ID;
 
-export type FileFact2Voque = InMemoryIdentifiableItem2ListStreamMetatype<
-  FileFact2Gepp,
-  FileFact2
->;
+export type FileFact2StreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<FileFact2CollectionId, FileFact2>;

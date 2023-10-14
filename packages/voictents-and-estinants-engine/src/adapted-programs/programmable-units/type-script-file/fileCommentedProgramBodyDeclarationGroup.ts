@@ -531,13 +531,13 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
     })
     .assemble();
 
-export const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP =
+export const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID =
   'file-commented-program-body-declaration-group';
 
 type FileCommentedProgramBodyDeclarationGroupGepp =
-  typeof FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_GEPP;
+  typeof FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID;
 
-export type FileCommentedProgramBodyDeclarationGroupVoque =
+export type FileCommentedProgramBodyDeclarationGroupStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     FileCommentedProgramBodyDeclarationGroupGepp,
     FileCommentedProgramBodyDeclarationGroup

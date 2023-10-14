@@ -4,7 +4,7 @@ import {
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { RootGraphLocator } from './rootGraphLocator';
 import {
-  LocalDirectedGraphElement2Zorn,
+  LocalDirectedGraphElement2Id,
   GlobalDirectedGraphElement2Zorn,
 } from './types';
 
@@ -12,7 +12,7 @@ type BaseGraphConstituentLocator = {
   // TODO: deprecate "idOverride"
   idOverride?: string;
   rootGraphLocator: RootGraphLocator;
-  localZorn: LocalDirectedGraphElement2Zorn;
+  localId: LocalDirectedGraphElement2Id;
   parentId: string;
 };
 
@@ -42,10 +42,10 @@ export const { GraphConstituentLocatorInstance } =
     id: (locator) => {
       return new GlobalDirectedGraphElement2Zorn({
         root: locator.rootGraphLocator.id,
-        local: locator.localZorn,
+        local: locator.localId,
       });
     },
     oldId: (locator) => {
-      return locator.idOverride ?? locator.localZorn.forMachine;
+      return locator.idOverride ?? locator.localId.forMachine;
     },
   });

@@ -7,7 +7,7 @@ import {
 import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
 import { DirectedGraphEdge2Instance } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import { DirectedGraphElement2 } from '../../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
-import { LocalDirectedGraphElement2Zorn } from '../../../../programmable-units/graph-visualization/directed-graph/types';
+import { LocalDirectedGraphElement2Id } from '../../../../programmable-units/graph-visualization/directed-graph/types';
 import { FactTypeName } from '../../fact/factTypeName';
 import { PartitionFact } from '../../partition-fact/partitionFact';
 import { THEME } from '../../theme';
@@ -15,8 +15,8 @@ import { PartitionedFileDependencyGroupZorn } from '../partitionedFileDependency
 
 const FILE_DEPENDENCY_PATH_SEGMENT_FACT_ZORN_TEMPLATE = [
   ['partitionedFileDependencyGroup', PartitionedFileDependencyGroupZorn],
-  ['tail', LocalDirectedGraphElement2Zorn],
-  ['head', LocalDirectedGraphElement2Zorn],
+  ['tail', LocalDirectedGraphElement2Id],
+  ['head', LocalDirectedGraphElement2Id],
 ] as const satisfies GenericComplexIdTemplate;
 type FileDependencyPathSegmentFactZornTemplate =
   typeof FILE_DEPENDENCY_PATH_SEGMENT_FACT_ZORN_TEMPLATE;
@@ -29,8 +29,8 @@ class FileDependencyPathSegmentFactZorn extends ComplexId<FileDependencyPathSegm
 type FileDependencyPathSegmentFactConstructorInput = {
   partitionFact: PartitionFact;
   dependencyGroupZorn: PartitionedFileDependencyGroupZorn;
-  tailGraphElementZorn: LocalDirectedGraphElement2Zorn;
-  headGraphElementZorn: LocalDirectedGraphElement2Zorn;
+  tailGraphElementZorn: LocalDirectedGraphElement2Id;
+  headGraphElementZorn: LocalDirectedGraphElement2Id;
   pathHeadId: string;
   pathTailIdSet: Set<string>;
 };

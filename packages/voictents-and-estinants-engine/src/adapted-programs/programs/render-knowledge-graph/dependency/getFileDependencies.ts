@@ -1,15 +1,18 @@
 import { NonEmptyTuple } from '../../../../package-agnostic-utilities/type/tuple';
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   TypeScriptFileImportListVoque,
 } from '../../../programmable-units/type-script-file/typeScriptFileImportList';
-import { BOUNDED_FILE_GEPP, BoundedFileVoque } from '../file/boundedFile';
+import {
+  BOUNDED_FILE_COLLECTION_ID,
+  BoundedFileStreamMetatype,
+} from '../file/boundedFile';
 import {
   FileDependencyInstance,
-  FileDependencyVoque,
-  FILE_DEPENDENCY_GEPP,
+  FileDependencyStreamMetatype,
+  FILE_DEPENDENCY_COLLECTION_ID,
 } from './fileDependency';
 
 /**
@@ -22,8 +25,11 @@ export const getFileDependencies = buildProgrammedTransform({
   .fromItem2<TypeScriptFileImportListVoque>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
-  .andFromItemTuple2<BoundedFileVoque, NonEmptyTuple<OdeshinZorn>>({
-    collectionId: BOUNDED_FILE_GEPP,
+  .andFromItemTuple2<
+    BoundedFileStreamMetatype,
+    NonEmptyTuple<IdentifiableItemId>
+  >({
+    collectionId: BOUNDED_FILE_COLLECTION_ID,
     getRightKeyTuple: (importList) => {
       const importingFileZorn = importList.item.id;
       const importedFileZornList = importList.item.list
@@ -36,8 +42,8 @@ export const getFileDependencies = buildProgrammedTransform({
       return partitionedFile.item.file.filePath.serialized;
     },
   })
-  .toItemTuple2<FileDependencyVoque>({
-    collectionId: FILE_DEPENDENCY_GEPP,
+  .toItemTuple2<FileDependencyStreamMetatype>({
+    collectionId: FILE_DEPENDENCY_COLLECTION_ID,
   })
   .onTransform((importList, [importingFile, ...importedFileList]) => {
     return importedFileList.map((importedFile) => {

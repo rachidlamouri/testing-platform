@@ -1,5 +1,5 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   ENGINE_ESTINANT_3_GEPP,
   EngineEstinant3Voque,
@@ -28,14 +28,14 @@ export const getOutputEdge = buildProgrammedTransform({
     collectionId: PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
   })
   // TODO: locator and estinant ids for buildAddMetadtaForSerialization can have different ids. Remove this when that issue is fixed
-  .andFromItemTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineEstinant3Voque, [IdentifiableItemId]>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
     getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantLocator.id];
     },
     getRightKey: (engineEstinant) => engineEstinant.item.locator.id,
   })
-  .andFromItemTuple2<EngineEstinantOutput2Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineEstinantOutput2Voque, [IdentifiableItemId]>({
     collectionId: ESTINANT_OUTPUT_2_GEPP,
     getRightKeyTuple: (relationship) => {
       return [relationship.item.outputZorn];

@@ -2,7 +2,7 @@ import { getTextDigest } from '../../../package-agnostic-utilities/string/getTex
 import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
+import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   ENGINE_ESTINANT_3_GEPP,
   EngineEstinant3Voque,
@@ -22,7 +22,7 @@ import { DirectedGraphNode2Instance } from '../../programmable-units/graph-visua
 import { RankType } from '../../programmable-units/graph-visualization/directed-graph/directedSubgraph';
 import { DirectedSubgraph2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedSubgraph2';
 import { GraphConstituentLocatorInstance } from '../../programmable-units/graph-visualization/directed-graph/graphConstituentLocator';
-import { LocalDirectedGraphElement2Zorn } from '../../programmable-units/graph-visualization/directed-graph/types';
+import { LocalDirectedGraphElement2Id } from '../../programmable-units/graph-visualization/directed-graph/types';
 import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-file-relationships/graph-element/commonAttributeByKey';
 
 /**
@@ -37,7 +37,7 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
   .fromItem2<ProgramEstinantRelationshipVoque>({
     collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
   })
-  .andFromItemTuple2<EngineEstinant3Voque, [OdeshinZorn]>({
+  .andFromItemTuple2<EngineEstinant3Voque, [IdentifiableItemId]>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
     getRightKeyTuple: (relationship) => {
       return [relationship.item.estinantLocator.id];
@@ -56,19 +56,19 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
     );
 
     const rootEstinantSubgraphLocalZorn =
-      LocalDirectedGraphElement2Zorn.buildSubgraphZorn({
+      LocalDirectedGraphElement2Id.buildSubgraphZorn({
         distinguisher: rootEstinantSubgraphDistinguisher,
       });
 
     const rootEstinantSubgraphLocator = new GraphConstituentLocatorInstance({
-      localZorn: rootEstinantSubgraphLocalZorn,
+      localId: rootEstinantSubgraphLocalZorn,
       rootGraphLocator,
       parentId: rootGraphLocator.oldId,
     });
 
     const estinantInputSubgraphDistinguisher = `${relationship.programName} | ${engineEstinant.estinantName} | estinant-input-subgraph`;
     const estinantInputSubgraphLocator = new GraphConstituentLocatorInstance({
-      localZorn: LocalDirectedGraphElement2Zorn.buildSubgraphZorn({
+      localId: LocalDirectedGraphElement2Id.buildSubgraphZorn({
         distinguisher: estinantInputSubgraphDistinguisher,
       }),
       rootGraphLocator,
@@ -91,7 +91,7 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
       locator: new GraphConstituentLocatorInstance({
         rootGraphLocator,
         parentId: rootEstinantSubgraph.oldId,
-        localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+        localId: LocalDirectedGraphElement2Id.buildNodeId({
           distinguisher: engineEstinant.identifierName,
         }),
       }),
@@ -108,7 +108,7 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
         locator: new GraphConstituentLocatorInstance({
           rootGraphLocator,
           parentId: estinantInputSubgraph.oldId,
-          localZorn: LocalDirectedGraphElement2Zorn.buildNodeZorn({
+          localId: LocalDirectedGraphElement2Id.buildNodeId({
             distinguisher: getId([engineEstinant.estinantName, label]),
           }),
         }),

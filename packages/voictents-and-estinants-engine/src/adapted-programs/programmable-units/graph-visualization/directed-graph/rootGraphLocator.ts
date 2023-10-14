@@ -3,7 +3,7 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import {
-  LocalDirectedGraphElement2Zorn,
+  LocalDirectedGraphElement2Id,
   RootDirectedGraphElement2Zorn,
 } from './types';
 
@@ -16,7 +16,7 @@ type BaseRootGraphLocator = {
 type RootGraphLocatorPrototype = {
   get isRoot(): true;
   get id(): RootDirectedGraphElement2Zorn;
-  get localZorn(): LocalDirectedGraphElement2Zorn;
+  get localZorn(): LocalDirectedGraphElement2Id;
   get oldId(): string;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   rootLocator: RootGraphLocator;
