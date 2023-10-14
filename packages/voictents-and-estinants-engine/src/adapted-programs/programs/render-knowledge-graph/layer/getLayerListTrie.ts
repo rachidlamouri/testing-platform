@@ -1,4 +1,4 @@
-import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { LAYER_GEPP, LayerVoque } from './layer';
 import {
   LAYER_LIST_TRIE_GEPP,

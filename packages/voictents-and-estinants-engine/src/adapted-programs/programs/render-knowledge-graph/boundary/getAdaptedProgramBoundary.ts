@@ -1,4 +1,4 @@
-import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { OdeshinZorn } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,

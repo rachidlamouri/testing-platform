@@ -1,6 +1,6 @@
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
-import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { BOUNDARY_GEPP, BoundaryVoque } from '../boundary/boundary';
 import {
   PARTITIONED_BOUNDARY_GEPP,

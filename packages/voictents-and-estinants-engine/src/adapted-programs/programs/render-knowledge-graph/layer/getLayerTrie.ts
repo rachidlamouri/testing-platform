@@ -1,5 +1,5 @@
 import { hasOneElement } from '../../../../package-agnostic-utilities/array/hasOneElement';
-import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { LAYER_LIST_TRIE_GEPP, LayerListTrieVoque } from './layerListTrie';
 import { LAYER_TRIE_GEPP, LayerTrie, LayerTrieVoque } from './layerTrie';
 

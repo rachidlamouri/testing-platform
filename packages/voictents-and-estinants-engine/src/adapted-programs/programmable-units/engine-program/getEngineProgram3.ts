@@ -1,5 +1,5 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   EngineEstinant3Voque,
   ENGINE_ESTINANT_3_GEPP,

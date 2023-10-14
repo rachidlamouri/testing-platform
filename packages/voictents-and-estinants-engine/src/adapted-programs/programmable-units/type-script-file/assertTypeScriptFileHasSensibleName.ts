@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { posix } from 'path';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,

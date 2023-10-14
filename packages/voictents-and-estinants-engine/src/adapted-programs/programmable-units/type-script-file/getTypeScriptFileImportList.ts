@@ -2,7 +2,7 @@ import { posix } from 'path';
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
 import { resolveModuleFilePath } from '../../../package-agnostic-utilities/file/resolveModuleFilePath';
 import { isImportDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isImportDeclaration';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   PARSED_TYPE_SCRIPT_FILE_GEPP,
   ParsedTypeScriptFileVoque,

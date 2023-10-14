@@ -1,6 +1,6 @@
 import { posix } from 'path';
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { isPredicateFunctionish } from '../../../package-agnostic-utilities/type-script-ast/isPredicateFunctionish';
 import {
   LINT_ASSERTION_OMISSION_GEPP,

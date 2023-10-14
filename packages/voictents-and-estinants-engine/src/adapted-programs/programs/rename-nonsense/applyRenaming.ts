@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { SpawnSyncReturns } from 'child_process';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import {
   DIRECTORY_GEPP,

@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   ENGINE_ESTINANT_3_GEPP,
   EngineEstinant3Voque,

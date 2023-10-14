@@ -1,5 +1,5 @@
 import { assertNotNull } from '../../../package-agnostic-utilities/nil/assertNotNull';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   GenericProgramErrorVoque,
   PROGRAM_ERROR_GEPP,

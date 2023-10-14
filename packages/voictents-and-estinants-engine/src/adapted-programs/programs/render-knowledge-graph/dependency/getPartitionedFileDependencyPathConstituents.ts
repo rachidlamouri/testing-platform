@@ -1,5 +1,5 @@
 import { ComplexMap } from '../../../../package-agnostic-utilities/data-structure/complexMap';
-import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { PartitionFact } from '../partition-fact/partitionFact';
 import {
   FILE_DEPENDENCY_PATH_SEGMENT_FACT_GEPP,

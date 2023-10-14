@@ -1,4 +1,4 @@
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { GRAPHVIZ_CODE_GEPP, GraphvizCodeVoque } from './graphvizCode';
 import {
   DIRECTED_GRAPH_GEPP,

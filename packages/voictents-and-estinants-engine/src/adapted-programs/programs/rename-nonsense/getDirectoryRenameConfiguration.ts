@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
   FileSystemNodeRenameConfigurationInstance,

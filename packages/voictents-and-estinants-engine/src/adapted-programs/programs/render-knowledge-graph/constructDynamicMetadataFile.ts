@@ -1,6 +1,6 @@
 import { namedTypes as n, builders as b } from 'ast-types';
 import * as recast from 'recast';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   CustomDatumTypeName,
   getCustomTypedDatum,

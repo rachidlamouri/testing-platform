@@ -1,6 +1,6 @@
 import { posix } from 'path';
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { isRelativeFilePath } from '../../../package-agnostic-utilities/file/isRelativeFilePath';
 import {
   FILE_PATH_LIKE_STRING_LITERAL_GEPP,

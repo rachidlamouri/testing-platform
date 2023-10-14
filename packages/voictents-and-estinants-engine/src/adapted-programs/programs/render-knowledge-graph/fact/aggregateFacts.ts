@@ -1,4 +1,4 @@
-import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   FILE_DEPENDENCY_PATH_NODE_FACT_GEPP,
   FileDependencyPathNodeFactVoque,

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { posix } from 'path';
 import chalk from 'chalk';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   GenericLintAssertion,
   LINT_ASSERTION_COLLECTION_ID,

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
 import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
 import {

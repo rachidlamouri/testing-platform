@@ -7,7 +7,7 @@ import {
 } from '../../adapted-programs/programmable-units/linting/lintAssertion';
 import { TypedRule } from '../../adapted-programs/programmable-units/linting/rule';
 import { ProgrammedTransformSourceInstance } from '../../adapted-programs/programmable-units/linting/source/estinantSource';
-import { buildProgrammedTransform } from '../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   FILE_EXISTENCE_ASSERTER_INPUT_COLLECTION_ID,
   FileExistenceAsserterInputStreamMetatype,

@@ -85,7 +85,7 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
     typeName: BoundaryTypeName.Utility,
     displayName: 'Estinant Builder',
     directoryPath:
-      'packages/voictents-and-estinants-engine/src/adapter/estinant-builder',
+      'packages/voictents-and-estinants-engine/src/adapter/programmed-transform-builder',
   }),
   new BoundaryConfigurationInstance({
     typeName: BoundaryTypeName.Utility,

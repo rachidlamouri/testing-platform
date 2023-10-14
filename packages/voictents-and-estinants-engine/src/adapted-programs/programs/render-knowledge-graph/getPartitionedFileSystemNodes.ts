@@ -1,4 +1,4 @@
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   PARTITIONED_FILE_GEPP,
   PartitionedFileInstance,

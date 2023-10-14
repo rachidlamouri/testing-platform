@@ -1,6 +1,6 @@
 import childProcessUtility from 'child_process';
 import fs from 'fs';
-import { buildProgrammedTransform } from '../../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,

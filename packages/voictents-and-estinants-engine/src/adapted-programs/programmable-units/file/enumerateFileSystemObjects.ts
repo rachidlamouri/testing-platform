@@ -3,7 +3,7 @@ import {
   getNestedFileSystemNodeMetadataList,
 } from '../../../package-agnostic-utilities/file/getNestedFileSystemNodeMetadataList';
 import { splitList } from '../../../package-agnostic-utilities/array/splitList';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { DIRECTORY_GEPP, DirectoryInstance, DirectoryVoque } from './directory';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,

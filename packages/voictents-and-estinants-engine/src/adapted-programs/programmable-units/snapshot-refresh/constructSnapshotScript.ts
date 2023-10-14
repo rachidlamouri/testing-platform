@@ -1,4 +1,4 @@
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { OUTPUT_FILE_GEPP, OutputFileVoque } from '../output-file/outputFile';
 import {
   ENGINE_PROGRAM_FILE_GEPP,

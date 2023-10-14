@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { CI_MODEL_GEPP, CI_MODEL_ZORN, CiModelVoque } from './ciModel';
 import {
   PROGRAM_ERROR_GEPP,

@@ -1,6 +1,6 @@
 import Case from 'case';
 import { posix } from 'path';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   IDENTIFIER_NODE_LOCATOR_GEPP,
   IdentifierNodeLocatorVoque,

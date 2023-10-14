@@ -3,8 +3,8 @@ import { ImportConfiguration, ScaffoldeeFileMetadata } from './types';
 const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/adapter/estinant-builder/buildEstinant.ts',
-    identifierList: ['buildEstinant'],
+      'packages/voictents-and-estinants-engine/src/adapter/programmed-transform-builder/buildProgrammedTransform.ts',
+    identifierList: ['buildProgrammedTransform'],
   },
   {
     filePath:

@@ -1,6 +1,6 @@
 import childProcessUtilities from 'child_process';
 import * as cheerio from 'cheerio';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { GRAPHVIZ_CODE_GEPP, GraphvizCodeVoque } from './graphvizCode';
 import { SVG_DOCUMENT_GEPP, SvgDocumentVoque } from './svgDocument';
 

@@ -1,5 +1,5 @@
 import { serialize } from '../../../package-agnostic-utilities/one-way-serializer/serialize';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { LintAssertionError } from '../linting/reportFailedLintAssertion';
 import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 

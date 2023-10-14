@@ -1,4 +1,4 @@
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { CI_MODEL_GEPP, CiModelVoque } from './ciModel';
 import {
   SERIALIZED_CI_MODEL_GEPP,

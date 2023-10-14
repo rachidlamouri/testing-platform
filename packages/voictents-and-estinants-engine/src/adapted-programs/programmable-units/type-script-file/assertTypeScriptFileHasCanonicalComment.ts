@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { assertNotNull } from '../../../package-agnostic-utilities/nil/assertNotNull';
 import {
   LINT_ASSERTION_COLLECTION_ID,

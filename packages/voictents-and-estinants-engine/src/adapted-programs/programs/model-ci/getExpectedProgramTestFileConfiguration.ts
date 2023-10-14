@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   FileExistenceAsserterInputStreamMetatype,
   FILE_EXISTENCE_ASSERTER_INPUT_COLLECTION_ID,

@@ -1,4 +1,4 @@
-import { buildProgrammedTransform } from '../../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { hasOneElement } from '../../../../package-agnostic-utilities/array/hasOneElement';
 import {
   PARTITIONED_BOUNDARY_LIST_TRIE_GEPP,

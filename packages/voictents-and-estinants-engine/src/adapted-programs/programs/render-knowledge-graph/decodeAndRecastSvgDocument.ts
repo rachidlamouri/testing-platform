@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import { builders as b, namedTypes as n } from 'ast-types';
 import * as recast from 'recast';
 import Case from 'case';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   SVG_DOCUMENT_GEPP,
   SvgDocumentVoque,

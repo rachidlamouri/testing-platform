@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { posix } from 'path';
 import Case from 'case';
-import { buildProgrammedTransform } from '../../../adapter/estinant-builder/buildEstinant';
+import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   FileTypeName,
   SCAFFOLD_CONFIGURATION_GEPP,
