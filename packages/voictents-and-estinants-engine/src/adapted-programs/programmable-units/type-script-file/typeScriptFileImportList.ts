@@ -17,11 +17,13 @@ export type TypeScriptFileImportList = {
   list: TypeScriptFileImport[];
 };
 
-export const TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP = 'type-script-file-import-list';
+export const TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID =
+  'type-script-file-import-list';
 
-type TypeScriptFileImportListGepp = typeof TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP;
+type TypeScriptFileImportListGepp =
+  typeof TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID;
 
-export type TypeScriptFileImportListVoque =
+export type TypeScriptFileImportListStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     TypeScriptFileImportListGepp,
     TypeScriptFileImportList

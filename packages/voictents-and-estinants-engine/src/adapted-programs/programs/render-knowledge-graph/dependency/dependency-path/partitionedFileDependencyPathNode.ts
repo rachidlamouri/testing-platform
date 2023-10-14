@@ -6,7 +6,7 @@ import {
 } from '../../../../../package-agnostic-utilities/data-structure/id';
 import { LocalDirectedGraphElement2Id } from '../../../../programmable-units/graph-visualization/directed-graph/types';
 import { PartitionFact } from '../../partition-fact/partitionFact';
-import { PartitionedFileDependencyGroupId } from '../partitionedFileDependencyGroupZorn';
+import { PartitionedFileDependencyGroupId } from '../partitionedFileDependencyGroupId';
 import { FileDependencyPathNode } from './fileDependencyPathNode';
 
 const PARTITIONED_FILE_DEPENDENCY_PATH_NODE_ID_TEMPLATE = [

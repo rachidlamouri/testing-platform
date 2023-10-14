@@ -14,7 +14,7 @@ import {
   PartitionedFileDependencyPathNodeInstance,
 } from './dependency-path/partitionedFileDependencyPathNode';
 import { FileDependency } from './fileDependency';
-import { PartitionedFileDependencyGroupId } from './partitionedFileDependencyGroupZorn';
+import { PartitionedFileDependencyGroupId } from './partitionedFileDependencyGroupId';
 
 export type PartitionedFileDependencyGroupConstructorInput = {
   partitionFact: PartitionFact;

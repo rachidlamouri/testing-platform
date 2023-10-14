@@ -13,7 +13,7 @@ import {
   FileDependencyPathSegment,
   FileDependencyPathSegmentInstance,
 } from './dependency-path/fileDependencyPathSegment';
-import { FileDependencyId } from './fileDependencyZorn';
+import { FileDependencyId } from './fileDependencyId';
 
 type FileDependencyConstructorInput = {
   importingFile: BoundedFile;
@@ -161,18 +161,18 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
 
 export const FILE_DEPENDENCY_COLLECTION_ID = 'file-dependency';
 
-type FileDependencyGepp = typeof FILE_DEPENDENCY_COLLECTION_ID;
+type FileDependencyCollectionId = typeof FILE_DEPENDENCY_COLLECTION_ID;
 
-export type FileDependencyVoictentPelie = {
+export type FileDependencyCollectionStreamable = {
   importedFileListByImportingFilePath: Map<string, BoundedFile[]>;
   importingFileListByImportedFilePath: Map<string, BoundedFile[]>;
   list: FileDependency[];
 };
 
 export type FileDependencyStreamMetatype = InMemoryStreamMetatype<
-  FileDependencyGepp,
+  FileDependencyCollectionId,
   FileDependency,
   FileDependency,
   InMemoryIdentifiableItem2IndexByName,
-  FileDependencyVoictentPelie
+  FileDependencyCollectionStreamable
 >;

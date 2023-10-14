@@ -82,7 +82,7 @@ import { getPartitionedFileDependencyPathConstituents } from './dependency/getPa
 import { getFileDependencyPathNodeFact } from './dependency/dependency-path/getFileDependencyPathNodeFact';
 import { aggregateFacts } from './fact/aggregateFacts';
 import { FactCollection } from './fact/fact';
-import { FileDependencyVoictent } from './dependency/fileDependencyVoictent';
+import { FileDependencyCollection } from './dependency/fileDependencyCollection';
 import { getDirectoriesWithFiles } from './directory/getDirectoriesWithFiles';
 import { assertDirectoriesHaveBoundaries } from './directory/assertDirectoriesHaveBoundaries';
 import { getFileAncestorDirectoryPathSet } from '../../programmable-units/file/getFileAncestorDirectoryPathSet';
@@ -175,7 +175,7 @@ runEngine({
       programFileCache,
     }),
     new FactCollection(),
-    new FileDependencyVoictent(),
+    new FileDependencyCollection(),
     new InMemoryCollection<LayerListTrieStreamMetatype>({
       collectionId: LAYER_LIST_TRIE_COLLECTION_ID,
       initialItemEggTuple: [],

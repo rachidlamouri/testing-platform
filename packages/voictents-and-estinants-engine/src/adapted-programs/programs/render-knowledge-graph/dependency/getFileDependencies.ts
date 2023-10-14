@@ -2,8 +2,8 @@ import { NonEmptyTuple } from '../../../../package-agnostic-utilities/type/tuple
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { IdentifiableItemId } from '../../../../adapter/identifiable-item/identifiableItem';
 import {
-  TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-  TypeScriptFileImportListVoque,
+  TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
+  TypeScriptFileImportListStreamMetatype,
 } from '../../../programmable-units/type-script-file/typeScriptFileImportList';
 import {
   BOUNDED_FILE_COLLECTION_ID,
@@ -22,8 +22,8 @@ import {
 export const getFileDependencies = buildProgrammedTransform({
   name: 'getFileDependencies',
 })
-  .fromItem2<TypeScriptFileImportListVoque>({
-    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+  .fromItem2<TypeScriptFileImportListStreamMetatype>({
+    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
   })
   .andFromItemTuple2<
     BoundedFileStreamMetatype,
@@ -31,12 +31,12 @@ export const getFileDependencies = buildProgrammedTransform({
   >({
     collectionId: BOUNDED_FILE_COLLECTION_ID,
     getRightKeyTuple: (importList) => {
-      const importingFileZorn = importList.item.id;
-      const importedFileZornList = importList.item.list
+      const importingFileId = importList.item.id;
+      const importedFileIdList = importList.item.list
         .filter((importItem) => importItem.isInternal)
         .map((importItem) => importItem.sourcePath);
 
-      return [importingFileZorn, ...importedFileZornList];
+      return [importingFileId, ...importedFileIdList];
     },
     getRightKey: (partitionedFile) => {
       return partitionedFile.item.file.filePath.serialized;

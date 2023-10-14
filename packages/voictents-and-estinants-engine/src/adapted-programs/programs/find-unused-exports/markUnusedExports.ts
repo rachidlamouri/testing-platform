@@ -15,8 +15,8 @@ import {
   TypeScriptFileExportListVoque,
 } from '../../programmable-units/type-script-file/typeScriptFileExportList';
 import {
-  TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-  TypeScriptFileImportListVoque,
+  TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
+  TypeScriptFileImportListStreamMetatype,
 } from '../../programmable-units/type-script-file/typeScriptFileImportList';
 
 const ESTINANT_NAME = 'markUnusedExports' as const;
@@ -55,8 +55,8 @@ export const noUnusedExportRule =
 export const markUnusedExports = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromCollection2<TypeScriptFileImportListVoque>({
-    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+  .fromCollection2<TypeScriptFileImportListStreamMetatype>({
+    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
   })
   .andFromCollection2<TypeScriptFileExportListVoque>({
     collectionId: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,

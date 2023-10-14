@@ -5,10 +5,10 @@ import {
   FileDependencyStreamMetatype,
 } from './fileDependency';
 import {
-  PARTITIONED_FILE_DEPENDENCY_GEPP,
+  PARTITIONED_FILE_DEPENDENCY_COLLECTION_ID,
   PartitionedFileDependencyConstructorInput,
   PartitionedFileDependencyInstance,
-  PartitionedFileDependencyVoque,
+  PartitionedFileDependencyStreamMetatype,
 } from './partitionedFileDependency';
 
 /**
@@ -23,18 +23,18 @@ export const getPartitionedFileDependency = buildProgrammedTransform({
   .fromCollection2<FileDependencyStreamMetatype>({
     collectionId: FILE_DEPENDENCY_COLLECTION_ID,
   })
-  .toItemTuple2<PartitionedFileDependencyVoque>({
-    collectionId: PARTITIONED_FILE_DEPENDENCY_GEPP,
+  .toItemTuple2<PartitionedFileDependencyStreamMetatype>({
+    collectionId: PARTITIONED_FILE_DEPENDENCY_COLLECTION_ID,
   })
-  .onTransform((fileDependencyVoictent) => {
+  .onTransform((fileDependencyCollection) => {
     type MappableFileDependencyInput = {
-      partitionFactZorn: string;
-      fileDependencyZorn: string;
+      partitionFactId: string;
+      fileDependencyId: string;
       fileDependencyInput: PartitionedFileDependencyConstructorInput;
     };
 
     const mappableFileDependencyInputList =
-      fileDependencyVoictent.list.flatMap<MappableFileDependencyInput>(
+      fileDependencyCollection.list.flatMap<MappableFileDependencyInput>(
         (fileDependency) => {
           const importingSourcePartition =
             fileDependency.importingFile.sourcePartitionFact;
@@ -42,8 +42,8 @@ export const getPartitionedFileDependency = buildProgrammedTransform({
             fileDependency.importedFile.sourcePartitionFact;
 
           const firstMappableFileDependencyInput = {
-            partitionFactZorn: importingSourcePartition.id.forHuman,
-            fileDependencyZorn: fileDependency.id.forHuman,
+            partitionFactId: importingSourcePartition.id.forHuman,
+            fileDependencyId: fileDependency.id.forHuman,
             fileDependencyInput: {
               partitionFact: importingSourcePartition,
               fileDependency,
@@ -51,8 +51,8 @@ export const getPartitionedFileDependency = buildProgrammedTransform({
           } satisfies MappableFileDependencyInput;
 
           const secondMappableFileDependencyInput = {
-            partitionFactZorn: importedSourcePartition.id.forHuman,
-            fileDependencyZorn: fileDependency.id.forHuman,
+            partitionFactId: importedSourcePartition.id.forHuman,
+            fileDependencyId: fileDependency.id.forHuman,
             fileDependencyInput: {
               partitionFact: importedSourcePartition,
               fileDependency,
@@ -67,7 +67,7 @@ export const getPartitionedFileDependency = buildProgrammedTransform({
       );
 
     const fileDependencyInputCombination = new ComplexMap({
-      keyTemplate: ['partitionFactZorn', 'fileDependencyZorn'],
+      keyTemplate: ['partitionFactId', 'fileDependencyId'],
       initialList: mappableFileDependencyInputList.map(
         (fileDependencyInput) => {
           return [fileDependencyInput, fileDependencyInput] as const;

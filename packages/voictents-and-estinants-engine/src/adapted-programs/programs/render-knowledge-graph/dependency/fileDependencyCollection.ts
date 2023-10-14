@@ -3,7 +3,7 @@ import { BoundedFile } from '../file/boundedFile';
 import {
   FileDependency,
   FILE_DEPENDENCY_COLLECTION_ID,
-  FileDependencyVoictentPelie,
+  FileDependencyCollectionStreamable,
   FileDependencyStreamMetatype,
 } from './fileDependency';
 
@@ -16,7 +16,7 @@ class BoundedFileCombination extends Map<string, BoundedFile> {}
  *
  * @readableName FileDependencyCollection
  */
-export class FileDependencyVoictent extends BaseInMemoryIdentifiableItem2Collection<
+export class FileDependencyCollection extends BaseInMemoryIdentifiableItem2Collection<
   FileDependencyStreamMetatype,
   FileDependencyStreamMetatype
 > {
@@ -37,11 +37,11 @@ export class FileDependencyVoictent extends BaseInMemoryIdentifiableItem2Collect
     });
   }
 
-  addItem(hubblepup: FileDependency): void {
-    const { importingFile } = hubblepup;
+  addItem(item: FileDependency): void {
+    const { importingFile } = item;
     const importingFilePath = importingFile.file.filePath.serialized;
 
-    const { importedFile } = hubblepup;
+    const { importedFile } = item;
     const importedFilePath = importedFile.file.filePath.serialized;
 
     {
@@ -66,10 +66,10 @@ export class FileDependencyVoictent extends BaseInMemoryIdentifiableItem2Collect
       );
     }
 
-    super.addItem(hubblepup);
+    super.addItem(item);
   }
 
-  protected dereferenceCollection(): FileDependencyVoictentPelie {
+  protected dereferenceCollection(): FileDependencyCollectionStreamable {
     const importedFileListByImportingFilePath = new Map(
       [...this.importedFileListByImportingFilePath.entries()].map(
         ([importingFilePath, combination]) => {

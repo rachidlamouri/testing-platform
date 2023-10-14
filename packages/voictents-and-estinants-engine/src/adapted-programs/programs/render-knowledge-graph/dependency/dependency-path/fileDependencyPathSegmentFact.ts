@@ -11,7 +11,7 @@ import { LocalDirectedGraphElement2Id } from '../../../../programmable-units/gra
 import { FactTypeName } from '../../fact/factTypeName';
 import { PartitionFact } from '../../partition-fact/partitionFact';
 import { THEME } from '../../theme';
-import { PartitionedFileDependencyGroupId } from '../partitionedFileDependencyGroupZorn';
+import { PartitionedFileDependencyGroupId } from '../partitionedFileDependencyGroupId';
 
 const FILE_DEPENDENCY_PATH_SEGMENT_FACT_ID_TEMPLATE = [
   ['partitionedFileDependencyGroup', PartitionedFileDependencyGroupId],

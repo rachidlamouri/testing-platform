@@ -4,7 +4,7 @@ import {
   ComplexId,
 } from '../../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
-import { FileDependencyId } from '../fileDependencyZorn';
+import { FileDependencyId } from '../fileDependencyId';
 
 const FILE_DEPENDENCY_PATH_NODE_ID_TEMPLATE = [
   ['fileDependency', FileDependencyId],

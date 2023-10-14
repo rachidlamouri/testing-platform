@@ -4,11 +4,11 @@ import {
 } from '../../../../package-agnostic-utilities/data-structure/id';
 import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNode';
 
-const FILE_DEPENDENCY_ZORN_TEMPLATE = [
+const FILE_DEPENDENCY_ID_TEMPLATE = [
   ['importingFile', FileSystemNodeId],
   ['importedFile', FileSystemNodeId],
 ] as const satisfies GenericComplexIdTemplate;
-type FileDependencyZornTemplate = typeof FILE_DEPENDENCY_ZORN_TEMPLATE;
+type FileDependencyIdTemplate = typeof FILE_DEPENDENCY_ID_TEMPLATE;
 
 /**
  * The complex identifier of a FileDependency
@@ -17,8 +17,8 @@ type FileDependencyZornTemplate = typeof FILE_DEPENDENCY_ZORN_TEMPLATE;
  *
  * @canonicalDeclaration
  */
-export class FileDependencyId extends ComplexId<FileDependencyZornTemplate> {
-  get rawTemplate(): FileDependencyZornTemplate {
-    return FILE_DEPENDENCY_ZORN_TEMPLATE;
+export class FileDependencyId extends ComplexId<FileDependencyIdTemplate> {
+  get rawTemplate(): FileDependencyIdTemplate {
+    return FILE_DEPENDENCY_ID_TEMPLATE;
   }
 }

@@ -11,8 +11,8 @@ import {
 } from './dependency-path/partitionedFileDependencyPathNode';
 import { FileDependency } from './fileDependency';
 import {
-  PARTITIONED_FILE_DEPENDENCY_GEPP,
-  PartitionedFileDependencyVoque,
+  PARTITIONED_FILE_DEPENDENCY_COLLECTION_ID,
+  PartitionedFileDependencyStreamMetatype,
 } from './partitionedFileDependency';
 import {
   PartitionedFileDependencyGroupConstructorInput,
@@ -27,8 +27,8 @@ export const getPartitionedFileDependencyPathConstituents =
   buildProgrammedTransform({
     name: 'getPartitionedFileDependencyPathConstituents',
   })
-    .fromCollection2<PartitionedFileDependencyVoque>({
-      collectionId: PARTITIONED_FILE_DEPENDENCY_GEPP,
+    .fromCollection2<PartitionedFileDependencyStreamMetatype>({
+      collectionId: PARTITIONED_FILE_DEPENDENCY_COLLECTION_ID,
     })
     .toItemTuple2<PartitionedFileDependencyPathNodeStreamMetatype>({
       collectionId: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_COLLECTION_ID,
@@ -36,15 +36,15 @@ export const getPartitionedFileDependencyPathConstituents =
     .toItemTuple2<FileDependencyPathSegmentFactStreamMetatype>({
       collectionId: FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID,
     })
-    .onTransform((fileDependencyVoictent) => {
+    .onTransform((fileDependencyCollection) => {
       type MappableFileDependency = {
-        partitionZorn: string;
-        importedFileZorn: string;
+        partitionId: string;
+        importedFileId: string;
         partitionFact: PartitionFact;
         fileDependency: FileDependency;
       };
 
-      const keyTemplate = ['partitionZorn', 'importedFileZorn'] as const;
+      const keyTemplate = ['partitionId', 'importedFileId'] as const;
       const groupInputByPartitionByImportedFile = new ComplexMap<
         MappableFileDependency,
         PartitionedFileDependencyGroupConstructorInput,
@@ -53,11 +53,11 @@ export const getPartitionedFileDependencyPathConstituents =
         keyTemplate,
       });
 
-      fileDependencyVoictent
+      fileDependencyCollection
         .map<MappableFileDependency>((fileDependency) => {
           return {
-            partitionZorn: fileDependency.partitionFact.id.forHuman,
-            importedFileZorn:
+            partitionId: fileDependency.partitionFact.id.forHuman,
+            importedFileId:
               fileDependency.fileDependency.importedFile.id.forHuman,
             partitionFact: fileDependency.partitionFact,
             fileDependency: fileDependency.fileDependency,

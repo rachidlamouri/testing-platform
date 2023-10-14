@@ -13,10 +13,10 @@ import {
   isSpecificIdentifiableProperty,
 } from '../../../package-agnostic-utilities/type-script-ast/isObjectExpressionWithIdentifiableProperties';
 import {
-  TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+  TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
   TypeScriptFileImport,
   TypeScriptFileImportList,
-  TypeScriptFileImportListVoque,
+  TypeScriptFileImportListStreamMetatype,
 } from '../type-script-file/typeScriptFileImportList';
 import {
   ArrayExpressionOfIdentifiers,
@@ -703,8 +703,11 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
     getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,
   })
-  .andFromItemTuple2<TypeScriptFileImportListVoque, [IdentifiableItemId]>({
-    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+  .andFromItemTuple2<
+    TypeScriptFileImportListStreamMetatype,
+    [IdentifiableItemId]
+  >({
+    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
     getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,
   })

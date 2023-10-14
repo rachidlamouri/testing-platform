@@ -45,8 +45,8 @@ import {
 import { isIdentifier } from '../../../package-agnostic-utilities/type-script-ast/isIdentifier';
 import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isSpecificConstantTypeScriptAsExpression';
 import {
-  TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-  TypeScriptFileImportListVoque,
+  TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
+  TypeScriptFileImportListStreamMetatype,
 } from '../type-script-file/typeScriptFileImportList';
 import {
   ESTINANT_OUTPUT_2_GEPP,
@@ -857,8 +857,11 @@ export const getEngineEstinant3 = buildProgrammedTransform({
     getRightKeyTuple: (leftInput) => [leftInput.item.filePath],
     getRightKey: (rightInput) => rightInput.item.filePath,
   })
-  .andFromItemTuple2<TypeScriptFileImportListVoque, [IdentifiableItemId]>({
-    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+  .andFromItemTuple2<
+    TypeScriptFileImportListStreamMetatype,
+    [IdentifiableItemId]
+  >({
+    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
     getRightKeyTuple: (leftInput) => [leftInput.item.filePath],
     getRightKey: (rightInput) => rightInput.item.id,
   })

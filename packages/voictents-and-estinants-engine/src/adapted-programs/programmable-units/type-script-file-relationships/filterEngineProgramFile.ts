@@ -9,8 +9,8 @@ import {
   TypeScriptFileStreamMetatype,
 } from '../type-script-file/typeScriptFile';
 import {
-  TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
-  TypeScriptFileImportListVoque,
+  TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
+  TypeScriptFileImportListStreamMetatype,
 } from '../type-script-file/typeScriptFileImportList';
 import {
   ENGINE_PROGRAM_FILE_GEPP,
@@ -27,8 +27,11 @@ export const filterEngineProgramFile = buildProgrammedTransform({
   .fromItem2<TypeScriptFileStreamMetatype>({
     collectionId: TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
-  .andFromItemTuple2<TypeScriptFileImportListVoque, [IdentifiableItemId]>({
-    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+  .andFromItemTuple2<
+    TypeScriptFileImportListStreamMetatype,
+    [IdentifiableItemId]
+  >({
+    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
     getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,
   })

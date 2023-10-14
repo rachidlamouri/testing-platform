@@ -8,9 +8,9 @@ import {
   ParsedTypeScriptFileVoque,
 } from './parsedTypeScriptFile';
 import {
-  TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+  TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
   TypeScriptFileImport,
-  TypeScriptFileImportListVoque,
+  TypeScriptFileImportListStreamMetatype,
 } from './typeScriptFileImportList';
 import { splitList } from '../../../package-agnostic-utilities/array/splitList';
 import {
@@ -43,8 +43,8 @@ export const getTypeScriptFileImportList = buildProgrammedTransform({
   .fromItem2<ParsedTypeScriptFileVoque>({
     collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toItem2<TypeScriptFileImportListVoque>({
-    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
+  .toItem2<TypeScriptFileImportListStreamMetatype>({
+    collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
@@ -121,7 +121,7 @@ export const getTypeScriptFileImportList = buildProgrammedTransform({
 
     return {
       [PROGRAM_ERROR_COLLECTION_ID]: errorList,
-      [TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP]: {
+      [TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID]: {
         id: parsedTypeScriptFile.id,
         filePath: parsedTypeScriptFile.filePath,
         list: importList,

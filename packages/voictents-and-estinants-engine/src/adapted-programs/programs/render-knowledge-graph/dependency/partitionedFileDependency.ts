@@ -10,17 +10,17 @@ import {
   PartitionFactId,
 } from '../partition-fact/partitionFact';
 import { FileDependency } from './fileDependency';
-import { FileDependencyId } from './fileDependencyZorn';
+import { FileDependencyId } from './fileDependencyId';
 
-const PARTITIONED_FILE_DEPENDENCY_ZORN_TEMPLATE = [
+const PARTITIONED_FILE_DEPENDENCY_ID_TEMPLATE = [
   ['partitionFact', PartitionFactId],
   ['fileDependency', FileDependencyId],
 ] as const satisfies GenericComplexIdTemplate;
-type PartitionedFileDependencyZornTemplate =
-  typeof PARTITIONED_FILE_DEPENDENCY_ZORN_TEMPLATE;
-class PartitionedFileDependencyZorn extends ComplexId<PartitionedFileDependencyZornTemplate> {
-  get rawTemplate(): PartitionedFileDependencyZornTemplate {
-    return PARTITIONED_FILE_DEPENDENCY_ZORN_TEMPLATE;
+type PartitionedFileDependencyIdTemplate =
+  typeof PARTITIONED_FILE_DEPENDENCY_ID_TEMPLATE;
+class PartitionedFileDependencyId extends ComplexId<PartitionedFileDependencyIdTemplate> {
+  get rawTemplate(): PartitionedFileDependencyIdTemplate {
+    return PARTITIONED_FILE_DEPENDENCY_ID_TEMPLATE;
   }
 }
 
@@ -36,7 +36,7 @@ export type PartitionedFileDependencyConstructorInput = {
 type PartitionedFileDependency = SimplifyN<
   [
     {
-      id: PartitionedFileDependencyZorn;
+      id: PartitionedFileDependencyId;
     },
     PartitionedFileDependencyConstructorInput,
   ]
@@ -66,7 +66,7 @@ export const { PartitionedFileDependencyInstance } =
       transformInput: (input) => {
         const { partitionFact, fileDependency } = input;
 
-        const id = new PartitionedFileDependencyZorn({
+        const id = new PartitionedFileDependencyId({
           partitionFact: partitionFact.id,
           fileDependency: fileDependency.id,
         });
@@ -80,12 +80,14 @@ export const { PartitionedFileDependencyInstance } =
     })
     .assemble();
 
-export const PARTITIONED_FILE_DEPENDENCY_GEPP = 'partitioned-file-dependency';
+export const PARTITIONED_FILE_DEPENDENCY_COLLECTION_ID =
+  'partitioned-file-dependency';
 
-type PartitionedFileDependencyGepp = typeof PARTITIONED_FILE_DEPENDENCY_GEPP;
+type PartitionedFileDependencyCollectionId =
+  typeof PARTITIONED_FILE_DEPENDENCY_COLLECTION_ID;
 
-export type PartitionedFileDependencyVoque =
+export type PartitionedFileDependencyStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    PartitionedFileDependencyGepp,
+    PartitionedFileDependencyCollectionId,
     PartitionedFileDependency
   >;
