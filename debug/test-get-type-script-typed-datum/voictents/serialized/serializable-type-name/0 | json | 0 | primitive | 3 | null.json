@@ -1,6 +1,6 @@
 {
-  "zorn": "0/json/0/primitive/3/null",
-  "grition": {
+  "id": "0/json/0/primitive/3/null",
+  "subitem": {
     "typeName": "object"
   }
 }

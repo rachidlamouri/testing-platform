@@ -5,7 +5,7 @@ import {
   SerializableErrorStreamMetatype,
 } from '../layer-agnostic-utilities/collection/serializableErrorCollection';
 
-type ErrorVoque = SerializableErrorStreamMetatype<'error'>;
+type ErrorStreamMetatype = SerializableErrorStreamMetatype<'error'>;
 
 const programFileCache = new ProgramFileCache({
   namespace: 'test-error-serialization',
@@ -22,7 +22,7 @@ const programFileCache = new ProgramFileCache({
 runEngine2({
   inputCollectionList: [
     // TODO: make the type parameter a voque
-    new SerializableErrorCollection<ErrorVoque>({
+    new SerializableErrorCollection<ErrorStreamMetatype>({
       collectionId: 'error',
       programFileCache,
       initialItemEggTuple: [

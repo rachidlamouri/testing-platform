@@ -6,19 +6,20 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../layer-agnostic-u
  * because it bloats the snapshot.
  */
 type SerializableTypeName = {
-  zorn: string;
+  id: string;
   // TODO: this structure is dumb but it will break a snapshot test, so fix it later
-  grition: {
+  subitem: {
     typeName: string;
   };
 };
 
-export const SERIALIZABLE_TYPE_NAME_GEPP = 'serializable-type-name';
+export const SERIALIZABLE_TYPE_NAME_COLLECTION_ID = 'serializable-type-name';
 
-type SerializableTypeNameGepp = typeof SERIALIZABLE_TYPE_NAME_GEPP;
+type SerializableTypeNameCollectionId =
+  typeof SERIALIZABLE_TYPE_NAME_COLLECTION_ID;
 
-export type SerializableTypeNameVoque =
+export type SerializableTypeNameStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    SerializableTypeNameGepp,
+    SerializableTypeNameCollectionId,
     SerializableTypeName
   >;

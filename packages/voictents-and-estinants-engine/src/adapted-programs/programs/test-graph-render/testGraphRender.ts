@@ -21,7 +21,7 @@ import {
   DirectedGraphMetadataByIdVoque,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
-import { InMemoryOdeshin2ListVoictent } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListCollection } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_GEPP } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
@@ -49,7 +49,7 @@ digikikify({
         },
       ],
     }),
-    new InMemoryOdeshin2ListVoictent<DirectedGraphVoque>({
+    new InMemoryIdentifiableItem2ListCollection<DirectedGraphVoque>({
       collectionId: DIRECTED_GRAPH_GEPP,
       initialItemEggTuple: [
         {
@@ -128,61 +128,63 @@ digikikify({
         },
       ],
     }),
-    new InMemoryOdeshin2ListVoictent<DirectedGraphMetadataByIdVoque>({
-      collectionId: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-      initialItemEggTuple: [
-        {
-          zorn: 'my-graph',
-          grition: {
-            mySubgraph: {
-              title: 'My Subgraph',
-              fieldList: [
-                {
-                  label: 'About My Subgraph',
-                  value: 'It is the best!',
-                },
-              ],
-            },
-            a: {
-              title: 'My Node A',
-              fieldList: [
-                {
-                  label: 'Letter',
-                  value: 'a',
-                },
-              ],
-            },
-            b: {
-              title: 'My Node B',
-              fieldList: [
-                {
-                  label: 'Letter',
-                  value: 'b',
-                },
-              ],
-            },
-            c: {
-              title: 'My Node C',
-              fieldList: [
-                {
-                  label: 'Letter',
-                  value: 'c',
-                },
-              ],
-            },
-            d: {
-              title: 'My Node D',
-              fieldList: [
-                {
-                  label: 'Letter',
-                  value: 'd',
-                },
-              ],
+    new InMemoryIdentifiableItem2ListCollection<DirectedGraphMetadataByIdVoque>(
+      {
+        collectionId: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+        initialItemEggTuple: [
+          {
+            zorn: 'my-graph',
+            grition: {
+              mySubgraph: {
+                title: 'My Subgraph',
+                fieldList: [
+                  {
+                    label: 'About My Subgraph',
+                    value: 'It is the best!',
+                  },
+                ],
+              },
+              a: {
+                title: 'My Node A',
+                fieldList: [
+                  {
+                    label: 'Letter',
+                    value: 'a',
+                  },
+                ],
+              },
+              b: {
+                title: 'My Node B',
+                fieldList: [
+                  {
+                    label: 'Letter',
+                    value: 'b',
+                  },
+                ],
+              },
+              c: {
+                title: 'My Node C',
+                fieldList: [
+                  {
+                    label: 'Letter',
+                    value: 'c',
+                  },
+                ],
+              },
+              d: {
+                title: 'My Node D',
+                fieldList: [
+                  {
+                    label: 'Letter',
+                    value: 'd',
+                  },
+                ],
+              },
             },
           },
-        },
-      ],
-    }),
+        ],
+      },
+    ),
   ] as const,
   fileSystemNodeGeppCombination: defaultFileGeppCombination,
   uninferableVoictentByGepp: buildVoictentByGepp([

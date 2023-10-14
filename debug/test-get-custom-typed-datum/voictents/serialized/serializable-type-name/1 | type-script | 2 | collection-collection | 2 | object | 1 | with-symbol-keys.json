@@ -1,6 +1,6 @@
 {
-  "zorn": "1/type-script/2/collection-collection/2/object/1/with-symbol-keys",
-  "grition": {
+  "id": "1/type-script/2/collection-collection/2/object/1/with-symbol-keys",
+  "subitem": {
     "typeName": "RootObjectInstance"
   }
 }

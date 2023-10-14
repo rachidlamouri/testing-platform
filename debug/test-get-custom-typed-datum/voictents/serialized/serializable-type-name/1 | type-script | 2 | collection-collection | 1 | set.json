@@ -1,6 +1,6 @@
 {
-  "zorn": "1/type-script/2/collection-collection/1/set",
-  "grition": {
+  "id": "1/type-script/2/collection-collection/1/set",
+  "subitem": {
     "typeName": "Set"
   }
 }

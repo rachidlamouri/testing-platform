@@ -1,6 +1,6 @@
 {
-  "zorn": "1/type-script/3/circular-reference/3/map",
-  "grition": {
+  "id": "1/type-script/3/circular-reference/3/map",
+  "subitem": {
     "typeName": "Map"
   }
 }

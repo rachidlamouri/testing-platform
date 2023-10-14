@@ -11,12 +11,12 @@ import { ProgrammedTransform2 } from '../core/types/programmed-transform/program
 import { LeftInputItemStreamConnectionMetatype } from '../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { StandardInMemoryStreamMetatype } from '../layer-agnostic-utilities/stream-metatype/inMemoryStreamMetatype';
 
-type InputVoque = StandardInMemoryStreamMetatype<
+type InputStreamMetatype = StandardInMemoryStreamMetatype<
   'input',
   CacheableAccessor<string>
 >;
 
-type CachedVoque = CachedOnDiskStreamMetatype<'cached', string>;
+type CachedStreamMetatype = CachedOnDiskStreamMetatype<'cached', string>;
 
 const nameSpace = 'test-cached-on-disk-datum';
 
@@ -33,9 +33,9 @@ const filePath =
  * the above description accordingly
  */
 const writeDatumToCache: ProgrammedTransform2<
-  LeftInputItemStreamConnectionMetatype<InputVoque>,
+  LeftInputItemStreamConnectionMetatype<InputStreamMetatype>,
   [],
-  OutputStreamConnectionMetatype<[CachedVoque]>
+  OutputStreamConnectionMetatype<[CachedStreamMetatype]>
 > = {
   version: 2,
   name: 'writeDatumToCache',
@@ -49,7 +49,9 @@ const writeDatumToCache: ProgrammedTransform2<
   rightInputStreamConfigurationTuple: [],
   transform: (
     rawInput,
-  ): OutputStreamConnectionMetatype<[CachedVoque]>['coreTransformOutput'] => {
+  ): OutputStreamConnectionMetatype<
+    [CachedStreamMetatype]
+  >['coreTransformOutput'] => {
     return {
       cached: [rawInput.item],
     };
@@ -63,20 +65,20 @@ const writeDatumToCache: ProgrammedTransform2<
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryCollection<InputVoque>({
+    new InMemoryCollection<InputStreamMetatype>({
       collectionId: 'input',
       initialItemEggTuple: [
         {
           id: filePath.replaceAll('/', ' | '),
           lastModified: fs.statSync(filePath).mtime.toISOString(),
-          subitem: (): CachedVoque['itemStreamable']['subitem'] => {
+          subitem: (): CachedStreamMetatype['itemStreamable']['subitem'] => {
             const text = fs.readFileSync(filePath, 'utf8');
             return text;
           },
         },
       ],
     }),
-    new CachedOnDiskCollection<CachedVoque>({
+    new CachedOnDiskCollection<CachedStreamMetatype>({
       nameSpace,
       collectionId: 'cached',
     }),

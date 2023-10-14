@@ -148,7 +148,7 @@ export type GenericInMemoryOdeshin2ListVoque =
     GenericIdentifiableItem
   >;
 
-export class InMemoryOdeshin2ListVoictent<
+export class InMemoryIdentifiableItem2ListCollection<
   TVoque extends GenericInMemoryOdeshin2ListVoque,
 > extends BaseInMemoryOdeshin2Voictent<
   GenericInMemoryOdeshin2ListVoque,

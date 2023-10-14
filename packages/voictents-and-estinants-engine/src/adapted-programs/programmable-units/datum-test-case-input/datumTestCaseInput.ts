@@ -5,15 +5,15 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agno
  * readable identifier for the particular datum, which in itself is a test case
  */
 type DatumTestCaseInput = {
-  zorn: string;
-  grition: unknown;
+  id: string;
+  subitem: unknown;
 };
 
-export const DATUM_TEST_CASE_INPUT_GEPP = 'datum-test-case-input';
+export const DATUM_TEST_CASE_INPUT_COLLECTION_ID = 'datum-test-case-input';
 
-type DatumTestCaseInputGepp = typeof DATUM_TEST_CASE_INPUT_GEPP;
+type DatumTestCaseInputGepp = typeof DATUM_TEST_CASE_INPUT_COLLECTION_ID;
 
-export type DatumTestCaseInputVoque =
+export type DatumTestCaseInputStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     DatumTestCaseInputGepp,
     DatumTestCaseInput
@@ -25,55 +25,55 @@ class CustomObject {
 
 const jsonTestCaseList: DatumTestCaseInput[] = [
   {
-    zorn: '0/json/0/primitive/0/string',
-    grition: 'foo',
+    id: '0/json/0/primitive/0/string',
+    subitem: 'foo',
   },
   {
-    zorn: '0/json/0/primitive/1/number',
-    grition: 123,
+    id: '0/json/0/primitive/1/number',
+    subitem: 123,
   },
   {
-    zorn: '0/json/0/primitive/2/boolean/0/true',
-    grition: true,
+    id: '0/json/0/primitive/2/boolean/0/true',
+    subitem: true,
   },
   {
-    zorn: '0/json/0/primitive/2/boolean/1/false',
-    grition: false,
+    id: '0/json/0/primitive/2/boolean/1/false',
+    subitem: false,
   },
   {
-    zorn: '0/json/0/primitive/3/null',
-    grition: null,
+    id: '0/json/0/primitive/3/null',
+    subitem: null,
   },
 ];
 
 const jsonTestCaseListGritionList = jsonTestCaseList.map(
-  (odeshin) => odeshin.grition,
+  (odeshin) => odeshin.subitem,
 );
 
 const jsonPrimitiveCollectionTestCaseList: DatumTestCaseInput[] = [
   {
-    zorn: '0/json/1/primitive-collection/0/array',
-    grition: jsonTestCaseListGritionList,
+    id: '0/json/1/primitive-collection/0/array',
+    subitem: jsonTestCaseListGritionList,
   },
   {
-    zorn: '0/json/1/primitive-collection/1/object',
-    grition: Object.fromEntries(
-      jsonTestCaseList.map(({ zorn, grition }) => [zorn, grition]),
+    id: '0/json/1/primitive-collection/1/object',
+    subitem: Object.fromEntries(
+      jsonTestCaseList.map(({ id, subitem }) => [id, subitem]),
     ),
   },
 ];
 
 const jsonPrimitiveCollectionTestCaseListGritionList =
-  jsonPrimitiveCollectionTestCaseList.map((odeshin) => odeshin.grition);
+  jsonPrimitiveCollectionTestCaseList.map((odeshin) => odeshin.subitem);
 
 const jsonCollectionCollectionTestCaseList: DatumTestCaseInput[] = [
   {
-    zorn: '0/json/2/collection-collection/0/array',
-    grition: jsonPrimitiveCollectionTestCaseListGritionList,
+    id: '0/json/2/collection-collection/0/array',
+    subitem: jsonPrimitiveCollectionTestCaseListGritionList,
   },
   {
-    zorn: '0/json/2/collection-collection/1/object',
-    grition: Object.fromEntries(
+    id: '0/json/2/collection-collection/1/object',
+    subitem: Object.fromEntries(
       jsonPrimitiveCollectionTestCaseListGritionList.map((datum, index) => [
         `key-${index}`,
         datum,
@@ -84,137 +84,137 @@ const jsonCollectionCollectionTestCaseList: DatumTestCaseInput[] = [
 
 const primitiveTestCaseList: DatumTestCaseInput[] = [
   {
-    zorn: '1/type-script/0/primitive/0/empty/0/null',
-    grition: null,
+    id: '1/type-script/0/primitive/0/empty/0/null',
+    subitem: null,
   },
   {
-    zorn: '1/type-script/0/primitive/0/empty/1/undefined',
-    grition: undefined,
+    id: '1/type-script/0/primitive/0/empty/1/undefined',
+    subitem: undefined,
   },
   {
-    zorn: '1/type-script/0/primitive/1/string/0/single-line',
-    grition: 'this is a single line string',
+    id: '1/type-script/0/primitive/1/string/0/single-line',
+    subitem: 'this is a single line string',
   },
   {
-    zorn: '1/type-script/0/primitive/1/string/1/multiline',
-    grition: `this
+    id: '1/type-script/0/primitive/1/string/1/multiline',
+    subitem: `this
   is
 a multiline
   string`,
   },
   {
-    zorn: '1/type-script/0/primitive/2/number/3/bigint',
-    grition: 99999999999999999999999999n,
+    id: '1/type-script/0/primitive/2/number/3/bigint',
+    subitem: 99999999999999999999999999n,
   },
   {
-    zorn: '1/type-script/0/primitive/2/number/1/float',
-    grition: 12.34,
+    id: '1/type-script/0/primitive/2/number/1/float',
+    subitem: 12.34,
   },
   {
-    zorn: '1/type-script/0/primitive/2/number/0/integer',
-    grition: 123,
+    id: '1/type-script/0/primitive/2/number/0/integer',
+    subitem: 123,
   },
   {
-    zorn: '1/type-script/0/primitive/2/number/2/leading-decimal',
+    id: '1/type-script/0/primitive/2/number/2/leading-decimal',
     // eslint-disable-next-line prettier/prettier
-    grition: .123,
+    subitem: .123,
   },
   {
-    zorn: '1/type-script/0/primitive/3/boolean/0/true',
-    grition: true,
+    id: '1/type-script/0/primitive/3/boolean/0/true',
+    subitem: true,
   },
   {
-    zorn: '1/type-script/0/primitive/3/boolean/1/false',
-    grition: false,
+    id: '1/type-script/0/primitive/3/boolean/1/false',
+    subitem: false,
   },
   {
-    zorn: '1/type-script/0/primitive/4/symbol/0/without-description',
+    id: '1/type-script/0/primitive/4/symbol/0/without-description',
     // eslint-disable-next-line symbol-description
-    grition: Symbol(),
+    subitem: Symbol(),
   },
   {
-    zorn: '1/type-script/0/primitive/4/symbol/1/with-description',
+    id: '1/type-script/0/primitive/4/symbol/1/with-description',
     // eslint-disable-next-line symbol-description
-    grition: Symbol('this is a symbol description'),
+    subitem: Symbol('this is a symbol description'),
   },
 ];
 
 const primitiveTestCaseListGritionList = primitiveTestCaseList.map(
-  ({ grition }) => grition,
+  ({ subitem }) => subitem,
 );
 
 const primitiveCollectionTestCaseList: DatumTestCaseInput[] = [
   {
-    zorn: '1/type-script/1/primitive-collection/0/list',
-    grition: primitiveTestCaseListGritionList,
+    id: '1/type-script/1/primitive-collection/0/list',
+    subitem: primitiveTestCaseListGritionList,
   },
   {
-    zorn: '1/type-script/1/primitive-collection/1/set',
-    grition: new Set(primitiveTestCaseListGritionList),
+    id: '1/type-script/1/primitive-collection/1/set',
+    subitem: new Set(primitiveTestCaseListGritionList),
   },
   {
-    zorn: '1/type-script/1/primitive-collection/2/object/0/with-string-keys',
-    grition: Object.fromEntries(
+    id: '1/type-script/1/primitive-collection/2/object/0/with-string-keys',
+    subitem: Object.fromEntries(
       primitiveTestCaseListGritionList.map<[string, unknown]>(
         (grition, index) => [`key-${index}`, grition],
       ),
     ),
   },
   {
-    zorn: '1/type-script/1/primitive-collection/2/object/1/with-symbol-keys',
-    grition: Object.fromEntries(
+    id: '1/type-script/1/primitive-collection/2/object/1/with-symbol-keys',
+    subitem: Object.fromEntries(
       primitiveTestCaseListGritionList.map<[symbol, unknown]>(
         (grition, index) => [Symbol(`key-${index}`), grition],
       ),
     ),
   },
   {
-    zorn: '1/type-script/1/primitive-collection/2/object/2/custom',
-    grition: new CustomObject(primitiveTestCaseListGritionList),
+    id: '1/type-script/1/primitive-collection/2/object/2/custom',
+    subitem: new CustomObject(primitiveTestCaseListGritionList),
   },
   {
-    zorn: '1/type-script/1/primitive-collection/3/map',
-    grition: new Map(
-      primitiveTestCaseList.map(({ grition }) => [grition, grition]),
+    id: '1/type-script/1/primitive-collection/3/map',
+    subitem: new Map(
+      primitiveTestCaseList.map(({ subitem }) => [subitem, subitem]),
     ),
   },
 ];
 
 const primitiveCollectionTestCaseListGritionList =
-  primitiveCollectionTestCaseList.map(({ grition }) => grition);
+  primitiveCollectionTestCaseList.map(({ subitem }) => subitem);
 
 const collectionCollectionTestCaseList: DatumTestCaseInput[] = [
   {
-    zorn: '1/type-script/2/collection-collection/0/list',
-    grition: primitiveCollectionTestCaseListGritionList,
+    id: '1/type-script/2/collection-collection/0/list',
+    subitem: primitiveCollectionTestCaseListGritionList,
   },
   {
-    zorn: '1/type-script/2/collection-collection/1/set',
-    grition: new Set(primitiveCollectionTestCaseListGritionList),
+    id: '1/type-script/2/collection-collection/1/set',
+    subitem: new Set(primitiveCollectionTestCaseListGritionList),
   },
   {
-    zorn: '1/type-script/2/collection-collection/2/object/0/with-string-keys',
-    grition: Object.fromEntries(
+    id: '1/type-script/2/collection-collection/2/object/0/with-string-keys',
+    subitem: Object.fromEntries(
       primitiveCollectionTestCaseListGritionList.map<[string, unknown]>(
         (grition, index) => [`key-${index}`, grition],
       ),
     ),
   },
   {
-    zorn: '1/type-script/2/collection-collection/2/object/1/with-symbol-keys',
-    grition: Object.fromEntries(
+    id: '1/type-script/2/collection-collection/2/object/1/with-symbol-keys',
+    subitem: Object.fromEntries(
       primitiveCollectionTestCaseListGritionList.map<[symbol, unknown]>(
         (grition, index) => [Symbol(`key-${index}`), grition],
       ),
     ),
   },
   {
-    zorn: '1/type-script/2/collection-collection/2/object/2/custom',
-    grition: new CustomObject(primitiveCollectionTestCaseListGritionList),
+    id: '1/type-script/2/collection-collection/2/object/2/custom',
+    subitem: new CustomObject(primitiveCollectionTestCaseListGritionList),
   },
   {
-    zorn: '1/type-script/2/collection-collection/3/map',
-    grition: new Map(
+    id: '1/type-script/2/collection-collection/3/map',
+    subitem: new Map(
       primitiveCollectionTestCaseListGritionList.map((grition) => [
         grition,
         grition,
@@ -234,29 +234,30 @@ circularMap.set(circularMap, circularMap);
 
 const circularReferenceTestCaseList: DatumTestCaseInput[] = [
   {
-    zorn: '1/type-script/3/circular-reference/0/object',
-    grition: circularObject,
+    id: '1/type-script/3/circular-reference/0/object',
+    subitem: circularObject,
   },
   {
-    zorn: '1/type-script/3/circular-reference/1/array',
-    grition: circularArray,
+    id: '1/type-script/3/circular-reference/1/array',
+    subitem: circularArray,
   },
   {
-    zorn: '1/type-script/3/circular-reference/2/set',
-    grition: circularSet,
+    id: '1/type-script/3/circular-reference/2/set',
+    subitem: circularSet,
   },
   {
-    zorn: '1/type-script/3/circular-reference/3/map',
-    grition: circularMap,
+    id: '1/type-script/3/circular-reference/3/map',
+    subitem: circularMap,
   },
 ];
 
-export const DATUM_TEST_CASE_INPUT_ODESHIN_LIST: DatumTestCaseInput[] = [
-  ...jsonTestCaseList,
-  ...jsonPrimitiveCollectionTestCaseList,
-  ...jsonCollectionCollectionTestCaseList,
-  ...primitiveTestCaseList,
-  ...primitiveCollectionTestCaseList,
-  ...collectionCollectionTestCaseList,
-  ...circularReferenceTestCaseList,
-];
+export const DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST: DatumTestCaseInput[] =
+  [
+    ...jsonTestCaseList,
+    ...jsonPrimitiveCollectionTestCaseList,
+    ...jsonCollectionCollectionTestCaseList,
+    ...primitiveTestCaseList,
+    ...primitiveCollectionTestCaseList,
+    ...collectionCollectionTestCaseList,
+    ...circularReferenceTestCaseList,
+  ];

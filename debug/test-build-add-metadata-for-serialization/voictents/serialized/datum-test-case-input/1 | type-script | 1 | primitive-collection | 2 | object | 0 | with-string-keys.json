@@ -1,6 +1,6 @@
 {
-  "zorn": "1/type-script/1/primitive-collection/2/object/0/with-string-keys",
-  "grition": {
+  "id": "1/type-script/1/primitive-collection/2/object/0/with-string-keys",
+  "subitem": {
     "key-0": null,
     "key-2": "this is a single line string",
     "key-3": "this\n  is\na multiline\n  string",

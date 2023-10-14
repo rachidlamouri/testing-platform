@@ -29,7 +29,7 @@ import {
 } from '../../core/types/collection/collectionId';
 import {
   GenericInMemoryOdeshin2ListVoque,
-  InMemoryOdeshin2ListVoictent,
+  InMemoryIdentifiableItem2ListCollection,
 } from '../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   GenericCollection2,
@@ -308,7 +308,7 @@ const getInferredInMemoryVoictentTuple = (
   );
 
   const inferredVoictentTuple = missingGeppList.map((collectionId) => {
-    return new InMemoryOdeshin2ListVoictent({
+    return new InMemoryIdentifiableItem2ListCollection({
       collectionId,
       initialItemEggTuple: [],
     });

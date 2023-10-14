@@ -1,7 +1,7 @@
 import { runEngine2 } from '../core/engine/runEngine';
 import {
-  DATUM_TEST_CASE_INPUT_GEPP,
-  DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
+  DATUM_TEST_CASE_INPUT_COLLECTION_ID,
+  DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import { JsonSerializableCollection } from '../layer-agnostic-utilities/collection/jsonSerializableCollection';
@@ -26,13 +26,13 @@ runEngine2({
     new JsonSerializableCollection<SerializedConfiguration>({
       collectionId: 'serialized',
       programFileCache,
-      initialItemEggTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST.map<
+      initialItemEggTuple: DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST.map<
         SerializedConfiguration['itemEggStreamable']
       >((datumTestCaseInput) => {
         return {
-          sourceCollectionId: DATUM_TEST_CASE_INPUT_GEPP,
-          serializableId: datumTestCaseInput.zorn,
-          datum: datumTestCaseInput.grition,
+          sourceCollectionId: DATUM_TEST_CASE_INPUT_COLLECTION_ID,
+          serializableId: datumTestCaseInput.id,
+          datum: datumTestCaseInput.subitem,
         };
       }),
     }),

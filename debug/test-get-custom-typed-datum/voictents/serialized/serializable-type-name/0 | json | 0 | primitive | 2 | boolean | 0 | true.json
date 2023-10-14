@@ -1,6 +1,6 @@
 {
-  "zorn": "0/json/0/primitive/2/boolean/0/true",
-  "grition": {
+  "id": "0/json/0/primitive/2/boolean/0/true",
+  "subitem": {
     "typeName": "Boolean"
   }
 }

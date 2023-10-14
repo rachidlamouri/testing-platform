@@ -1,9 +1,9 @@
 import { runEngine2 } from '../core/engine/runEngine';
-import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListCollection } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
-  DATUM_TEST_CASE_INPUT_GEPP,
-  DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
-  DatumTestCaseInputVoque,
+  DATUM_TEST_CASE_INPUT_COLLECTION_ID,
+  DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
+  DatumTestCaseInputStreamMetatype,
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
@@ -24,10 +24,12 @@ const programFileCache = new ProgramFileCache({
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryOdeshin2ListVoictent<DatumTestCaseInputVoque>({
-      collectionId: DATUM_TEST_CASE_INPUT_GEPP,
-      initialItemEggTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
-    }),
+    new InMemoryIdentifiableItem2ListCollection<DatumTestCaseInputStreamMetatype>(
+      {
+        collectionId: DATUM_TEST_CASE_INPUT_COLLECTION_ID,
+        initialItemEggTuple: DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
+      },
+    ),
     new JsonSerializableCollection<SerializedConfiguration>({
       collectionId: 'serialized',
       programFileCache,
@@ -36,10 +38,10 @@ runEngine2({
   ],
   programmedTransformTuple: [
     buildAddMetadataForSerialization<
-      DatumTestCaseInputVoque,
+      DatumTestCaseInputStreamMetatype,
       SerializedConfiguration
     >({
-      inputCollectionId: DATUM_TEST_CASE_INPUT_GEPP,
+      inputCollectionId: DATUM_TEST_CASE_INPUT_COLLECTION_ID,
       outputCollectionId: 'serialized',
     }),
   ],

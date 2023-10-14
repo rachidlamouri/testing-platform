@@ -2,11 +2,11 @@ import { ProgrammedTransform2 } from '../core/types/programmed-transform/program
 import { LeftInputItemStreamConnectionMetatype } from '../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { OutputStreamConnectionMetatype } from '../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import { runEngine2 } from '../core/engine/runEngine';
-import { InMemoryOdeshin2ListVoictent } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem2ListCollection } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
-  DATUM_TEST_CASE_INPUT_GEPP,
-  DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
-  DatumTestCaseInputVoque,
+  DATUM_TEST_CASE_INPUT_COLLECTION_ID,
+  DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
+  DatumTestCaseInputStreamMetatype,
 } from '../adapted-programs/programmable-units/datum-test-case-input/datumTestCaseInput';
 import { ProgramFileCache } from '../layer-agnostic-utilities/program/programFileCache';
 import { getCustomTypedDatum } from '../package-agnostic-utilities/typed-datum/customTypedDatum';
@@ -14,8 +14,8 @@ import { AbstractSerializableStreamMetatype } from '../layer-agnostic-utilities/
 import { buildAddMetadataForSerialization } from '../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { JsonSerializableCollection } from '../layer-agnostic-utilities/collection/jsonSerializableCollection';
 import {
-  SerializableTypeNameVoque,
-  SERIALIZABLE_TYPE_NAME_GEPP,
+  SerializableTypeNameStreamMetatype,
+  SERIALIZABLE_TYPE_NAME_COLLECTION_ID,
 } from './serializableTypeName';
 
 type SerializedConfiguration = AbstractSerializableStreamMetatype<'serialized'>;
@@ -30,35 +30,35 @@ const programFileCache = new ProgramFileCache({
  * manual verification, since the input datum and output datum are the same.
  */
 const getCustomTypedTestCaseInputTypeName: ProgrammedTransform2<
-  LeftInputItemStreamConnectionMetatype<DatumTestCaseInputVoque>,
+  LeftInputItemStreamConnectionMetatype<DatumTestCaseInputStreamMetatype>,
   [],
-  OutputStreamConnectionMetatype<[SerializableTypeNameVoque]>
+  OutputStreamConnectionMetatype<[SerializableTypeNameStreamMetatype]>
 > = {
   version: 2,
   name: 'getCustomTypedTestCaseInputTypeName',
   leftInputStreamConfiguration: {
-    collectionId: DATUM_TEST_CASE_INPUT_GEPP,
+    collectionId: DATUM_TEST_CASE_INPUT_COLLECTION_ID,
     isCollectionStream: false,
   },
   rightInputStreamConfigurationTuple: [],
   outputStreamConfiguration: {
-    collectionIdTuple: [SERIALIZABLE_TYPE_NAME_GEPP],
+    collectionIdTuple: [SERIALIZABLE_TYPE_NAME_COLLECTION_ID],
   },
   transform: (input) => {
-    const inputOdeshin = input.item;
-    const testCaseInput = inputOdeshin.grition;
+    const inputIdentifiableItem = input.item;
+    const testCaseInput = inputIdentifiableItem.subitem;
 
     const typedDatum = getCustomTypedDatum(testCaseInput);
 
     const output = {
-      zorn: inputOdeshin.zorn,
-      grition: {
+      id: inputIdentifiableItem.id,
+      subitem: {
         typeName: typedDatum.typeName,
       },
     };
 
     return {
-      [SERIALIZABLE_TYPE_NAME_GEPP]: [output],
+      [SERIALIZABLE_TYPE_NAME_COLLECTION_ID]: [output],
     };
   },
 };
@@ -71,14 +71,18 @@ const getCustomTypedTestCaseInputTypeName: ProgrammedTransform2<
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryOdeshin2ListVoictent<DatumTestCaseInputVoque>({
-      collectionId: DATUM_TEST_CASE_INPUT_GEPP,
-      initialItemEggTuple: DATUM_TEST_CASE_INPUT_ODESHIN_LIST,
-    }),
-    new InMemoryOdeshin2ListVoictent<SerializableTypeNameVoque>({
-      collectionId: SERIALIZABLE_TYPE_NAME_GEPP,
-      initialItemEggTuple: [],
-    }),
+    new InMemoryIdentifiableItem2ListCollection<DatumTestCaseInputStreamMetatype>(
+      {
+        collectionId: DATUM_TEST_CASE_INPUT_COLLECTION_ID,
+        initialItemEggTuple: DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
+      },
+    ),
+    new InMemoryIdentifiableItem2ListCollection<SerializableTypeNameStreamMetatype>(
+      {
+        collectionId: SERIALIZABLE_TYPE_NAME_COLLECTION_ID,
+        initialItemEggTuple: [],
+      },
+    ),
     new JsonSerializableCollection<SerializedConfiguration>({
       collectionId: 'serialized',
       programFileCache,
@@ -89,10 +93,10 @@ runEngine2({
     getCustomTypedTestCaseInputTypeName,
 
     buildAddMetadataForSerialization<
-      SerializableTypeNameVoque,
+      SerializableTypeNameStreamMetatype,
       SerializedConfiguration
     >({
-      inputCollectionId: SERIALIZABLE_TYPE_NAME_GEPP,
+      inputCollectionId: SERIALIZABLE_TYPE_NAME_COLLECTION_ID,
       outputCollectionId: 'serialized',
     }),
   ],
