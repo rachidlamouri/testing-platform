@@ -24,7 +24,7 @@ import {
 export const getEngineVoqueLocatorCollection2 = buildProgrammedTransform({
   name: 'getEngineVoqueLocatorCollection2',
 })
-  .fromVoictent2<ProgramVoqueRelationship2Voque>({
+  .fromCollection2<ProgramVoqueRelationship2Voque>({
     collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
   })
   .andFromCollection2<EstinantVoqueRelationship2Voque>({

@@ -55,7 +55,7 @@ export const noUnusedExportRule =
 export const markUnusedExports = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromVoictent2<TypeScriptFileImportListVoque>({
+  .fromCollection2<TypeScriptFileImportListVoque>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
   .andFromCollection2<TypeScriptFileExportListVoque>({

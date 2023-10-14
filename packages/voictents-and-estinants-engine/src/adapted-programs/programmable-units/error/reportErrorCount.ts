@@ -7,7 +7,7 @@ import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 export const reportErrorCount = buildProgrammedTransform({
   name: 'reportErrorCount',
 })
-  .fromVoictent2<GenericProgramErrorVoque>({
+  .fromCollection2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
   .onTransform((errorVoictent) => {

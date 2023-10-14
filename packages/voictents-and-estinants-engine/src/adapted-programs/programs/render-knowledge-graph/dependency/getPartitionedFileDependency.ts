@@ -17,7 +17,7 @@ import {
 export const getPartitionedFileDependency = buildProgrammedTransform({
   name: 'getPartitionedFileDependency',
 })
-  .fromVoictent2<FileDependencyVoque>({
+  .fromCollection2<FileDependencyVoque>({
     collectionId: FILE_DEPENDENCY_GEPP,
   })
   .toItemTuple2<PartitionedFileDependencyVoque>({

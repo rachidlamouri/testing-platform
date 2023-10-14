@@ -24,7 +24,7 @@ import {
 export const renderApp = buildProgrammedTransform({
   name: 'renderApp',
 })
-  .fromVoictent2<AppRendererDelayerVoque>({
+  .fromCollection2<AppRendererDelayerVoque>({
     collectionId: APP_RENDERER_DELAYER_GEPP,
   })
   .toItem2<OutputFileVoque>({

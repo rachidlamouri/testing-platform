@@ -16,7 +16,7 @@ import {
 export const groupGraphElements = buildProgrammedTransform({
   name: 'groupGraphElements',
 })
-  .fromVoictent2<DirectedGraphElement2Voque>({
+  .fromCollection2<DirectedGraphElement2Voque>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_GEPP,
   })
   .toItemTuple2<GraphElementGroupVoque>({

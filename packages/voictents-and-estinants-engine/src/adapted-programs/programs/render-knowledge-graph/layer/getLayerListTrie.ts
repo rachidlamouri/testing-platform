@@ -13,7 +13,7 @@ import {
 export const getLayerListTrie = buildProgrammedTransform({
   name: 'getLayerListTrie',
 })
-  .fromVoictent2<LayerVoque>({
+  .fromCollection2<LayerVoque>({
     collectionId: LAYER_GEPP,
   })
   .toItem2<LayerListTrieVoque>({

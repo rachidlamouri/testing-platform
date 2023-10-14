@@ -36,7 +36,7 @@ import { BOUNDED_FILE_GEPP, BoundedFileVoque } from './file/boundedFile';
 export const getPartitionedFileSystemNodes = buildProgrammedTransform({
   name: 'getPartitionedFileSystemNodes',
 })
-  .fromVoictent2<PartitionFactVoque>({
+  .fromCollection2<PartitionFactVoque>({
     collectionId: PARTITION_FACT_GEPP,
   })
   .andFromCollection2<BoundedDirectoryVoque>({

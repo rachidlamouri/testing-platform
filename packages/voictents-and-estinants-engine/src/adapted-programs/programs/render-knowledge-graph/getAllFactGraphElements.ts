@@ -12,7 +12,7 @@ import { FACT_GEPP, FactVoque } from './fact/fact';
 export const getAllFactGraphElements = buildProgrammedTransform({
   name: 'getAllFactGraphElements',
 })
-  .fromVoictent2<FactVoque>({
+  .fromCollection2<FactVoque>({
     collectionId: FACT_GEPP,
   })
   .toItemTuple2<DirectedGraphElement2Voque>({

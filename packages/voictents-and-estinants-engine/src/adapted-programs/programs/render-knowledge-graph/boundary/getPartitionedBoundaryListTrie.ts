@@ -16,7 +16,7 @@ import {
 export const getPartitionedBoundaryListTrie = buildProgrammedTransform({
   name: 'getPartitionedBoundaryListTrie',
 })
-  .fromVoictent2<PartitionedBoundaryVoque>({
+  .fromCollection2<PartitionedBoundaryVoque>({
     collectionId: PARTITIONED_BOUNDARY_GEPP,
   })
   .toItem2<PartitionedBoundaryListTrieVoque>({

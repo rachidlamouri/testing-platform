@@ -34,7 +34,7 @@ import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 export const constructDynamicIndexFile = buildProgrammedTransform({
   name: 'constructDynamicIndexFile',
 })
-  .fromVoictent2<LayerVoque>({
+  .fromCollection2<LayerVoque>({
     collectionId: LAYER_GEPP,
   })
   .andFromCollection2<PartitionFactVoque>({

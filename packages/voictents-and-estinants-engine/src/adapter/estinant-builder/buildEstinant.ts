@@ -1,13 +1,13 @@
 import { InstantiationContext } from './shared/programmedTransformBuilderContext';
 import {
-  buildLeftInputHubblepupAppreffingeBuilder2,
-  LeftInputHubblepupAppreffingeBuilderParent2,
-} from './left-input/leftInputHubblepupAppreffingeBuilder2';
+  buildLeftInputItemStreamConfigurationBuilder2,
+  LeftInputItemStreamConfigurationBuilderParent2,
+} from './left-input/leftInputItemStreamConfigurationBuilder2';
 import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
 import {
-  buildLeftInputVoictentAppreffingeBuilder2,
-  LeftInputVoictentAppreffingeBuilderParent2,
-} from './left-input/leftInputVoictentAppreffingeBuilder2';
+  buildLeftInputCollectionStreamConfigurationBuilder2,
+  LeftInputCollectionStreamConfigurationBuilderParent2,
+} from './left-input/leftInputCollectionStreamConfigurationBuilder2';
 
 /**
  * A utility function for building an estinant with the builder pattern. This is
@@ -23,12 +23,13 @@ export const buildProgrammedTransform = (
   context: InstantiationContext,
 ): SpreadN<
   [
-    LeftInputHubblepupAppreffingeBuilderParent2,
-    LeftInputVoictentAppreffingeBuilderParent2,
+    LeftInputItemStreamConfigurationBuilderParent2,
+    LeftInputCollectionStreamConfigurationBuilderParent2,
   ]
 > => {
   return {
-    fromItem2: buildLeftInputHubblepupAppreffingeBuilder2(context),
-    fromVoictent2: buildLeftInputVoictentAppreffingeBuilder2(context),
+    fromItem2: buildLeftInputItemStreamConfigurationBuilder2(context),
+    fromCollection2:
+      buildLeftInputCollectionStreamConfigurationBuilder2(context),
   };
 };

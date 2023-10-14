@@ -12,7 +12,7 @@ import {
 export const constructSnapshotScript = buildProgrammedTransform({
   name: 'constructSnapshotScript',
 })
-  .fromVoictent2<EngineProgramFileVoque>({
+  .fromCollection2<EngineProgramFileVoque>({
     collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
   .toItem2<OutputFileVoque>({

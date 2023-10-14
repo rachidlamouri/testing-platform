@@ -38,7 +38,7 @@ const omissionIsValidRule = new TypedRule<OmissionIsValidRuleMessageContext>({
 export const auditLintAssertionOmissions = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromVoictent2<LintAssertionOmissionVoque>({
+  .fromCollection2<LintAssertionOmissionVoque>({
     collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
   .andFromCollection2<LintAssertionStreamMetatype>({

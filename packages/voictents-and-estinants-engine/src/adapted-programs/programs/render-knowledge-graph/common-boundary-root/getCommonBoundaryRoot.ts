@@ -22,7 +22,7 @@ import {
 export const getCommonBoundaryRoot = buildProgrammedTransform({
   name: 'getCommonBoundaryRoot',
 })
-  .fromVoictent2<BoundaryVoque>({
+  .fromCollection2<BoundaryVoque>({
     collectionId: BOUNDARY_GEPP,
   })
   .andFromCollection2<DirectoryVoque>({

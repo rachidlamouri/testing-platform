@@ -91,7 +91,7 @@ const encodeDatum = (
 export const constructDynamicMetadataFile = buildProgrammedTransform({
   name: 'constructDynamicMetadataFile',
 })
-  .fromVoictent2<BoundaryFactVoque>({
+  .fromCollection2<BoundaryFactVoque>({
     collectionId: BOUNDARY_FACT_GEPP,
   })
   .andFromItemTuple2<CommonBoundaryRootVoque, ['']>({

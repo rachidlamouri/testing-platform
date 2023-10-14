@@ -27,7 +27,7 @@ export const getPartitionedFileDependencyPathConstituents =
   buildProgrammedTransform({
     name: 'getPartitionedFileDependencyPathConstituents',
   })
-    .fromVoictent2<PartitionedFileDependencyVoque>({
+    .fromCollection2<PartitionedFileDependencyVoque>({
       collectionId: PARTITIONED_FILE_DEPENDENCY_GEPP,
     })
     .toItemTuple2<PartitionedFileDependencyPathNodeVoque>({

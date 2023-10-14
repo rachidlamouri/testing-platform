@@ -38,7 +38,7 @@ const reporterLocator: ReportingLocator = {
 export const assertNoCopyPasta = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromVoictent2<EngineProgram3Voque>({
+  .fromCollection2<EngineProgram3Voque>({
     collectionId: ENGINE_PROGRAM_3_GEPP,
   })
   .andFromCollection2<EngineVoque2Voque>({

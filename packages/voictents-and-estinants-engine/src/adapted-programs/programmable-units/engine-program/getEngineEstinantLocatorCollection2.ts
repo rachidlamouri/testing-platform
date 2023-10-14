@@ -19,7 +19,7 @@ import {
 export const getEngineEstinantLocatorCollection2 = buildProgrammedTransform({
   name: 'getEngineEstinantLocatorCollection2',
 })
-  .fromVoictent2<ProgramEstinantRelationshipVoque>({
+  .fromCollection2<ProgramEstinantRelationshipVoque>({
     collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
   })
   .toItemTuple2<EngineEstinantLocator2Voque>({

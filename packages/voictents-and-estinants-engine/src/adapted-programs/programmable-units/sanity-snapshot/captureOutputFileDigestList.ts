@@ -20,7 +20,7 @@ type OutputFileDigest = {
 export const captureOutputFileDigestList = buildProgrammedTransform({
   name: 'captureOutputFileDigestList',
 })
-  .fromVoictent2<OutputFileVoque>({
+  .fromCollection2<OutputFileVoque>({
     collectionId: OUTPUT_FILE_GEPP,
   })
   .toItem2<SanitySnapshotVoque>({

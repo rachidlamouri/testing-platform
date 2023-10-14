@@ -32,7 +32,7 @@ const reporterLocator: ReportingLocator = {
 export const assertDirectoriesHaveBoundaries = buildProgrammedTransform({
   name: 'assertDirectoriesHaveBoundaries',
 })
-  .fromVoictent2<DirectoryWithFileVoque>({
+  .fromCollection2<DirectoryWithFileVoque>({
     collectionId: DIRECTORY_WITH_FILE_GEPP,
   })
   .andFromCollection2<BoundedDirectoryVoque>({

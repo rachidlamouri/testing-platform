@@ -34,7 +34,7 @@ const reporterLocator: ReportingLocator = {
 export const assertCiModelHasAllPrograms = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromVoictent2<EngineProgramLocator3Voque>({
+  .fromCollection2<EngineProgramLocator3Voque>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
   })
   .andFromItemTuple2<CiModelVoque, [OdeshinZorn]>({

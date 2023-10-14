@@ -47,7 +47,7 @@ type ConfigurationGroup = {
 export const applyRenaming = buildProgrammedTransform({
   name: 'applyRenaming',
 })
-  .fromVoictent2<DirectoryVoque>({
+  .fromCollection2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
   .andFromCollection2<FileSystemNodeRenameConfigurationVoque>({

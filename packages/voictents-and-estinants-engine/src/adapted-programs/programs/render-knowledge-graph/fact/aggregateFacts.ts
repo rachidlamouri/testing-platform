@@ -24,7 +24,7 @@ import { FACT_GEPP, FactVoque } from './fact';
 export const aggregateFacts = buildProgrammedTransform({
   name: 'aggregateFacts',
 })
-  .fromVoictent2<PartitionFactVoque>({
+  .fromCollection2<PartitionFactVoque>({
     collectionId: PARTITION_FACT_GEPP,
   })
   .andFromCollection2<DirectoryFact2Voque>({

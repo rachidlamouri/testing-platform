@@ -17,7 +17,7 @@ import {
 export const getDirectedGraphMetadataById2 = buildProgrammedTransform({
   name: 'getDirectedGraphMetadataById2',
 })
-  .fromVoictent2<DirectedGraphMetadataEntryVoque>({
+  .fromCollection2<DirectedGraphMetadataEntryVoque>({
     collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
   })
   .toItemTuple2<DirectedGraphMetadataByIdVoque>({

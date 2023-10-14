@@ -32,9 +32,9 @@ import {
   RightInputCollectionStreamConfigurationBuilderParent2,
 } from '../right-input/rightInputCollectionStreamConfigurationBuilder2';
 
-type EmptyAdaptedRightInputVickenTuple = [];
+type EmptyAdaptedRightInputStreamConnectionMetatypeTuple = [];
 
-type EmptyAdaptedOutputVickenTuple = [];
+type EmptyAdaptedOutputStreamConnectionMetatypeTuple = [];
 
 /**
  * Builds the left input context for an estinant that consumes each item
@@ -42,101 +42,101 @@ type EmptyAdaptedOutputVickenTuple = [];
  *
  * @readableName LeftInputItemStreamConfigurationBuilder
  */
-type LeftInputHubblepupAppreffingeBuilder2 = <
-  TInputVoque extends GenericStreamMetatype,
+type LeftInputItemStreamConfigurationBuilder2 = <
+  TInputStreamMetatype extends GenericStreamMetatype,
 >(
-  partialLeftInputAppreffinge: PartialLeftInputStreamConfiguration<TInputVoque>,
+  partialLeftInputStreamConfiguration: PartialLeftInputStreamConfiguration<TInputStreamMetatype>,
 ) => SpreadN<
   [
     RightInputItemTupleStreamConfigurationBuilderParent2<
-      AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-      EmptyAdaptedRightInputVickenTuple
+      AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+      EmptyAdaptedRightInputStreamConnectionMetatypeTuple
     >,
     RightInputCollectionStreamConfigurationBuilderParent2<
-      AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-      EmptyAdaptedRightInputVickenTuple
+      AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+      EmptyAdaptedRightInputStreamConnectionMetatypeTuple
     >,
 
     AdaptedTransformBuilderParent2<
-      AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-      EmptyAdaptedRightInputVickenTuple,
-      EmptyAdaptedOutputVickenTuple
+      AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+      EmptyAdaptedRightInputStreamConnectionMetatypeTuple,
+      EmptyAdaptedOutputStreamConnectionMetatypeTuple
     >,
 
     OutputItemConditionalStreamConfigurationBuilderParent<
-      AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-      EmptyAdaptedOutputVickenTuple
+      AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+      EmptyAdaptedOutputStreamConnectionMetatypeTuple
     >,
     OutputItemStreamConfigurationBuilderParent2<
-      AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-      EmptyAdaptedRightInputVickenTuple,
-      EmptyAdaptedOutputVickenTuple
+      AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+      EmptyAdaptedRightInputStreamConnectionMetatypeTuple,
+      EmptyAdaptedOutputStreamConnectionMetatypeTuple
     >,
     OutputItemTupleStreamConfigurationBuilderParent2<
-      AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-      EmptyAdaptedRightInputVickenTuple,
-      EmptyAdaptedOutputVickenTuple
+      AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+      EmptyAdaptedRightInputStreamConnectionMetatypeTuple,
+      EmptyAdaptedOutputStreamConnectionMetatypeTuple
     >,
   ]
 >;
 
-export const buildLeftInputHubblepupAppreffingeBuilder2 = (
+export const buildLeftInputItemStreamConfigurationBuilder2 = (
   instantiationContext: InstantiationContext,
-): LeftInputHubblepupAppreffingeBuilder2 => {
-  const buildLeftInputHubblepupAppreffinge: LeftInputHubblepupAppreffingeBuilder2 =
-    <TInputVoque extends GenericStreamMetatype>(
-      partialLeftInputAppreffinge: PartialLeftInputStreamConfiguration<TInputVoque>,
+): LeftInputItemStreamConfigurationBuilder2 => {
+  const buildLeftInputItemStreamConfiguration: LeftInputItemStreamConfigurationBuilder2 =
+    <TInputStreamMetatype extends GenericStreamMetatype>(
+      partialLeftInputStreamConfiguration: PartialLeftInputStreamConfiguration<TInputStreamMetatype>,
     ) => {
       const nextContext = buildInputOutputContextFromLeftInputContext({
         instantiationContext,
         leftInputContext: {
           version: 2,
-          collectionId: partialLeftInputAppreffinge.collectionId,
+          collectionId: partialLeftInputStreamConfiguration.collectionId,
           isCollectionStream: false,
-          modifyCoreTransformInput: (indexedHubblepup: GenericIndexedItem) => {
-            return indexedHubblepup.item;
+          modifyCoreTransformInput: (indexedItem: GenericIndexedItem) => {
+            return indexedItem.item;
           },
         },
       });
 
       return {
         andFromItemTuple2: buildRightInputItemTupleStreamConfigurationBuilder2<
-          AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-          EmptyAdaptedRightInputVickenTuple
+          AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+          EmptyAdaptedRightInputStreamConnectionMetatypeTuple
         >(nextContext),
         andFromCollection2:
           buildRightInputCollectionStreamConfigurationBuilder2<
-            AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-            EmptyAdaptedRightInputVickenTuple
+            AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+            EmptyAdaptedRightInputStreamConnectionMetatypeTuple
           >(nextContext),
 
         onTransform: buildAdaptedTransformBuilder2<
-          AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-          EmptyAdaptedRightInputVickenTuple,
-          EmptyAdaptedOutputVickenTuple
+          AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+          EmptyAdaptedRightInputStreamConnectionMetatypeTuple,
+          EmptyAdaptedOutputStreamConnectionMetatypeTuple
         >(nextContext),
 
         toItemOnCondition: buildOutputItemConditionalStreamConfigurationBuilder<
-          AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-          EmptyAdaptedOutputVickenTuple
+          AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+          EmptyAdaptedOutputStreamConnectionMetatypeTuple
         >(nextContext),
 
         toItem2: buildOutputItemStreamConfigurationBuilder2<
-          AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-          EmptyAdaptedRightInputVickenTuple,
-          EmptyAdaptedOutputVickenTuple
+          AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+          EmptyAdaptedRightInputStreamConnectionMetatypeTuple,
+          EmptyAdaptedOutputStreamConnectionMetatypeTuple
         >(nextContext),
         toItemTuple2: buildOutputItemTupleStreamConfigurationBuilder2<
-          AdaptedLeftInputItemStreamConnectionMetatype<TInputVoque>,
-          EmptyAdaptedRightInputVickenTuple,
-          EmptyAdaptedOutputVickenTuple
+          AdaptedLeftInputItemStreamConnectionMetatype<TInputStreamMetatype>,
+          EmptyAdaptedRightInputStreamConnectionMetatypeTuple,
+          EmptyAdaptedOutputStreamConnectionMetatypeTuple
         >(nextContext),
       };
     };
 
-  return buildLeftInputHubblepupAppreffinge;
+  return buildLeftInputItemStreamConfiguration;
 };
 
-export type LeftInputHubblepupAppreffingeBuilderParent2 = {
-  fromItem2: LeftInputHubblepupAppreffingeBuilder2;
+export type LeftInputItemStreamConfigurationBuilderParent2 = {
+  fromItem2: LeftInputItemStreamConfigurationBuilder2;
 };

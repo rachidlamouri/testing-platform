@@ -18,7 +18,7 @@ import {
 export const getDirectoriesWithFiles = buildProgrammedTransform({
   name: 'getDirectoriesWithFiles',
 })
-  .fromVoictent2<DirectoryVoque>({
+  .fromCollection2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
   .andFromCollection2<TypeScriptFileVoque>({
