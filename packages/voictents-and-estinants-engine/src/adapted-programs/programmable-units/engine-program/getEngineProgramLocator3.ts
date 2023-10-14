@@ -46,11 +46,11 @@ import { isTypeScriptTypeParameterInstantiationWithParameterTuple } from '../../
 import { isIdentifiableTypeScriptTypeReference } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableTypeScriptTypeReference';
 import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isSpecificConstantTypeScriptAsExpression';
 import {
-  PROGRAM_ERROR_GEPP,
+  PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
-  GenericProgramErrorVoque,
+  GenericProgramErrorStreamMetatype,
   ReportedProgramError,
-  ReportingEstinantLocator,
+  ReportingProgrammedTransformLocator,
 } from '../error/programError';
 import {
   ENGINE_PROGRAM_LOCATOR_3_GEPP,
@@ -81,9 +81,10 @@ import { CommentTagId } from '../type-script-file/comment/commentTagId';
 
 const ESTINANT_NAME = 'getEngineProgramLocator' as const;
 type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -707,8 +708,8 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
     getRightKeyTuple: (leftInput) => [leftInput.item.id],
     getRightKey: (rightInput) => rightInput.item.id,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .toItemTuple2<EngineProgramLocator3Voque>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_GEPP,
@@ -732,7 +733,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
 
       if (engineCallDeclaration === undefined) {
         return {
-          [PROGRAM_ERROR_GEPP]: [
+          [PROGRAM_ERROR_COLLECTION_ID]: [
             {
               name: `missing-engine-call`,
               error: new Error('Unable to find engine call declaration'),
@@ -758,7 +759,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
       switch (engineFunctionConfiguration.typeName) {
         case EngineFunctionConfigurationTypeName.Core:
           return {
-            [PROGRAM_ERROR_GEPP]: [
+            [PROGRAM_ERROR_COLLECTION_ID]: [
               {
                 name: `unhandled-engine-call`,
                 error: new Error(
@@ -787,7 +788,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
             });
 
           return {
-            [PROGRAM_ERROR_GEPP]: parallelErrorList,
+            [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_3_GEPP]: [engineProgramLocator],
             [PROGRAM_ESTINANT_RELATIONSHIP_GEPP]:
               engineProgramLocator.estinantRelationshipList,
@@ -804,7 +805,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
             });
 
           return {
-            [PROGRAM_ERROR_GEPP]: parallelErrorList,
+            [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_3_GEPP]: [engineProgramLocator],
             [PROGRAM_ESTINANT_RELATIONSHIP_GEPP]:
               engineProgramLocator.estinantRelationshipList,

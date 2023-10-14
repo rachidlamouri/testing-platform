@@ -36,11 +36,11 @@ import {
   isTypeScriptTypeParameterInstantiationWithParameterTuple,
 } from '../../../package-agnostic-utilities/type-script-ast/isTypeScriptTypeParameterInstantiation';
 import {
-  PROGRAM_ERROR_GEPP,
+  PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
-  GenericProgramErrorVoque,
+  GenericProgramErrorStreamMetatype,
   ReportedProgramError,
-  ReportingEstinantLocator,
+  ReportingProgrammedTransformLocator,
 } from '../error/programError';
 import { isIdentifier } from '../../../package-agnostic-utilities/type-script-ast/isIdentifier';
 import { isSpecificConstantTypeScriptAsExpression } from '../../../package-agnostic-utilities/type-script-ast/isSpecificConstantTypeScriptAsExpression';
@@ -76,9 +76,10 @@ import {
 
 const ESTINANT_NAME = 'getEngineEstinant3' as const;
 type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -861,8 +862,8 @@ export const getEngineEstinant3 = buildProgrammedTransform({
     getRightKeyTuple: (leftInput) => [leftInput.item.filePath],
     getRightKey: (rightInput) => rightInput.item.id,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .toItemTuple2<EngineEstinant3Voque>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
@@ -962,7 +963,7 @@ export const getEngineEstinant3 = buildProgrammedTransform({
       });
 
       return {
-        [PROGRAM_ERROR_GEPP]: errorList,
+        [PROGRAM_ERROR_COLLECTION_ID]: errorList,
         [ENGINE_ESTINANT_3_GEPP]: estinantList,
         [ESTINANT_INPUT_2_GEPP]: estinantList.flatMap((nextEstinant) => {
           return nextEstinant.inputList;

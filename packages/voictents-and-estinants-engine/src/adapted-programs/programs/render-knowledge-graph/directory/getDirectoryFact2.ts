@@ -10,8 +10,8 @@ import {
   DirectoryFact2StreamMetatype,
 } from './directoryFact2';
 import {
-  PARTITIONED_DIRECTORY_GEPP,
-  PartitionedDirectoryVoque,
+  PARTITIONED_DIRECTORY_COLLECTION_ID,
+  PartitionedDirectoryStreamMetatype,
 } from './partitionedDirectory';
 
 /**
@@ -21,8 +21,8 @@ import {
 export const getDirectoryFact2 = buildProgrammedTransform({
   name: 'getDirectoryFact2',
 })
-  .fromItem2<PartitionedDirectoryVoque>({
-    collectionId: PARTITIONED_DIRECTORY_GEPP,
+  .fromItem2<PartitionedDirectoryStreamMetatype>({
+    collectionId: PARTITIONED_DIRECTORY_COLLECTION_ID,
   })
   .andFromItemTuple2<BoundedDirectoryStreamMetatype, [] | [IdentifiableItemId]>(
     {

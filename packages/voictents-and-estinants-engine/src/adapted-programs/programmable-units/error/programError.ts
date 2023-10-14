@@ -3,7 +3,7 @@ import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/ob
 
 export enum ProgramErrorElementLocatorTypeName {
   SourceFileLocator = 'SourceFileLocator',
-  ReportingEstinantLocator = 'ReportingEstinantLocator',
+  ReportingProgrammedTransformLocator = 'ReportingEstinantLocator',
 }
 
 type FileErrorLocator = {
@@ -11,16 +11,18 @@ type FileErrorLocator = {
   filePath: string;
 };
 
-export type ReportingEstinantLocator<TEstinantName extends string> = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator;
-  name: TEstinantName;
-  filePath: string;
-};
+export type ReportingProgrammedTransformLocator<TEstinantName extends string> =
+  {
+    typeName: ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator;
+    name: TEstinantName;
+    filePath: string;
+  };
 
-type GenericReportingEstinantLocator = ReportingEstinantLocator<string>;
+type GenericReportingEstinantLocator =
+  ReportingProgrammedTransformLocator<string>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type UnsafeReportingEstinantLocator = ReportingEstinantLocator<any>;
+type UnsafeReportingEstinantLocator = ReportingProgrammedTransformLocator<any>;
 
 // TODO: add more locator types as needed
 type ProgramErrorSourceLocator = FileErrorLocator | null;
@@ -38,7 +40,7 @@ type UnsafeProgramErrorReporterLocator = UnsafeReportingEstinantLocator;
  *
  * @todo Convert ProgramError to a subclass of Error or just get rid of it
  */
-export type ProgramErrorPelue<
+export type ProgramErrorEgg<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > =
   | {
@@ -52,16 +54,18 @@ export type ProgramErrorPelue<
 
 export type ReportedProgramError<
   TReporterLocator extends GenericProgramErrorReporterLocator,
-> = ProgramErrorPelue<TReporterLocator>;
+> = ProgramErrorEgg<TReporterLocator>;
 
 export type GenericProgramErrorPelue =
-  ProgramErrorPelue<GenericProgramErrorReporterLocator>;
+  ProgramErrorEgg<GenericProgramErrorReporterLocator>;
 
 /**
  * The information needed to identify the source of an error, the reporter of an
  * error and any surrounding context
  *
  * @readableName ProgramError
+ *
+ * @canonicalDeclaration
  */
 type ProgramErrorPelie<
   TReporterLocator extends GenericProgramErrorReporterLocator,
@@ -82,15 +86,15 @@ type ProgramErrorPelie<
     }
   | Error;
 
-export const PROGRAM_ERROR_GEPP = 'program-error';
+export const PROGRAM_ERROR_COLLECTION_ID = 'program-error';
 
-export type ProgramErrorCollectionId = typeof PROGRAM_ERROR_GEPP;
+export type ProgramErrorCollectionId = typeof PROGRAM_ERROR_COLLECTION_ID;
 
 type ProgramErrorVoque<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > = StreamMetatype<
   ProgramErrorCollectionId,
-  ProgramErrorPelue<TReporterLocator>,
+  ProgramErrorEgg<TReporterLocator>,
   ProgramErrorPelie<TReporterLocator>,
   {
     id: string;
@@ -98,7 +102,7 @@ type ProgramErrorVoque<
   ProgramErrorPelie<TReporterLocator>[]
 >;
 
-export type GenericProgramErrorVoque =
+export type GenericProgramErrorStreamMetatype =
   ProgramErrorVoque<GenericProgramErrorReporterLocator>;
 
 export type UnsafeProgramErrorVoque =

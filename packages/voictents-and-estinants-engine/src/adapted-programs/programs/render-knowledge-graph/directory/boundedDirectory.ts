@@ -65,10 +65,9 @@ export const { BoundedDirectoryInstance } = buildNamedConstructorFunction({
         boundary.directory.directoryPath.serialized,
       );
 
-      const localGraphElementId =
-        LocalDirectedGraphElement2Id.buildSubgraphZorn({
-          distinguisher: directory.directoryPath.serialized,
-        });
+      const localGraphElementId = LocalDirectedGraphElement2Id.buildSubgraphId({
+        distinguisher: directory.directoryPath.serialized,
+      });
 
       return {
         id: directory.id,
@@ -85,9 +84,9 @@ export const { BoundedDirectoryInstance } = buildNamedConstructorFunction({
 
 export const BOUNDED_DIRECTORY_COLLECTION_ID = 'bounded-directory';
 
-type BoundedDirectoryGepp = typeof BOUNDED_DIRECTORY_COLLECTION_ID;
+type BoundedDirectoryCollectionId = typeof BOUNDED_DIRECTORY_COLLECTION_ID;
 
 export type BoundedDirectoryStreamMetatype = FileSystemNodeStreamMetatype<
-  BoundedDirectoryGepp,
+  BoundedDirectoryCollectionId,
   BoundedDirectory
 >;

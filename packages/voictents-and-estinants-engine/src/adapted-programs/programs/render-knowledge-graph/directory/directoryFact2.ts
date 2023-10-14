@@ -19,14 +19,14 @@ import { DirectedCluster2Instance } from '../../../programmable-units/graph-visu
 import { DirectedGraphElement2 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { FactTypeName } from '../fact/factTypeName';
 
-const DIRECTORY_FACT_2_ZORN_TEMPLATE = [
+const DIRECTORY_FACT_2_ID_TEMPLATE = [
   ['partitionFact', PartitionFactId],
   ['directory', FileSystemNodeId],
 ] as const satisfies GenericComplexIdTemplate;
-type DirectoryFact2ZornTemplate = typeof DIRECTORY_FACT_2_ZORN_TEMPLATE;
-class DirectoryFact2Zorn extends ComplexId<DirectoryFact2ZornTemplate> {
-  get rawTemplate(): DirectoryFact2ZornTemplate {
-    return DIRECTORY_FACT_2_ZORN_TEMPLATE;
+type DirectoryFact2IdTemplate = typeof DIRECTORY_FACT_2_ID_TEMPLATE;
+class DirectoryFact2Id extends ComplexId<DirectoryFact2IdTemplate> {
+  get rawTemplate(): DirectoryFact2IdTemplate {
+    return DIRECTORY_FACT_2_ID_TEMPLATE;
   }
 }
 
@@ -44,7 +44,7 @@ export type DirectoryFact2 = SimplifyN<
   [
     {
       typeName: FactTypeName.DirectoryFact2;
-      id: DirectoryFact2Zorn;
+      id: DirectoryFact2Id;
     },
     Omit<DirectoryFact2ConstructorInput, 'parentDirectory'>,
     {
@@ -75,7 +75,7 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { partitionFact, parentDirectory, directory } = input;
 
-      const id = new DirectoryFact2Zorn({
+      const id = new DirectoryFact2Id({
         partitionFact: partitionFact.id,
         directory: directory.id,
       });
@@ -116,10 +116,10 @@ export const { DirectoryFact2Instance } = buildNamedConstructorFunction({
 
 export const DIRECTORY_FACT_2_COLLECTION_ID = 'directory-fact-2';
 
-type DirectoryFact2Gepp = typeof DIRECTORY_FACT_2_COLLECTION_ID;
+type DirectoryFact2CollectionId = typeof DIRECTORY_FACT_2_COLLECTION_ID;
 
 export type DirectoryFact2StreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    DirectoryFact2Gepp,
+    DirectoryFact2CollectionId,
     DirectoryFact2
   >;

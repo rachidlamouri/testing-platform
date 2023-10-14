@@ -36,7 +36,7 @@ import { parseTypeScriptFileComments } from '../../programmable-units/type-scrip
 import { getExpectedProgramTestFileConfiguration } from './getExpectedProgramTestFileConfiguration';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import { assertFileExists } from '../../../layer-agnostic-utilities/assertion/assertFileExists';
-import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
+import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import {
   LINT_ASSERTION_OMISSION_GEPP,
@@ -117,6 +117,6 @@ runEngine({
     reportErrorCount,
     signalError,
   ] as const,
-  errorCollectionId: PROGRAM_ERROR_GEPP,
+  errorCollectionId: PROGRAM_ERROR_COLLECTION_ID,
   programFileCache,
 });

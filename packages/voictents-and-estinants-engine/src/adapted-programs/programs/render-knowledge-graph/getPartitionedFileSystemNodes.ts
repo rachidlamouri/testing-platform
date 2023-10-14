@@ -14,9 +14,9 @@ import {
 } from './dependency/fileDependency';
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import {
-  PARTITIONED_DIRECTORY_GEPP,
+  PARTITIONED_DIRECTORY_COLLECTION_ID,
   PartitionedDirectoryInstance,
-  PartitionedDirectoryVoque,
+  PartitionedDirectoryStreamMetatype,
 } from './directory/partitionedDirectory';
 import {
   BOUNDED_DIRECTORY_COLLECTION_ID,
@@ -51,8 +51,8 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
   .andFromCollection2<FileDependencyStreamMetatype>({
     collectionId: FILE_DEPENDENCY_COLLECTION_ID,
   })
-  .toItemTuple2<PartitionedDirectoryVoque>({
-    collectionId: PARTITIONED_DIRECTORY_GEPP,
+  .toItemTuple2<PartitionedDirectoryStreamMetatype>({
+    collectionId: PARTITIONED_DIRECTORY_COLLECTION_ID,
   })
   .toItemTuple2<PartitionedFileStreamMetatype>({
     collectionId: PARTITIONED_FILE_COLLECTION_ID,
@@ -194,7 +194,7 @@ export const getPartitionedFileSystemNodes = buildProgrammedTransform({
         });
 
       return {
-        [PARTITIONED_DIRECTORY_GEPP]: partitionedDirectoryList,
+        [PARTITIONED_DIRECTORY_COLLECTION_ID]: partitionedDirectoryList,
         [PARTITIONED_FILE_COLLECTION_ID]: partitionedFileList,
       };
     },

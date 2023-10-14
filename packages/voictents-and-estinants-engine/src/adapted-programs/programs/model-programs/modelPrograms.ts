@@ -51,7 +51,7 @@ import { getOutputEdge } from './getOutputEdge';
 import { groupGraphElements } from './groupGraphElements';
 import { getDirectedGraphFromGraphElementGroup } from './getDirectedGraphFromGraphElementGroup';
 import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProgramMetadataEntries';
-import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
+import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { assertNoCopyPasta } from './assertNoCopyPasta';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
@@ -109,7 +109,7 @@ runEngine({
       programFileCache,
     }),
   ] as const),
-  errorCollectionId: PROGRAM_ERROR_GEPP,
+  errorCollectionId: PROGRAM_ERROR_COLLECTION_ID,
   programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,

@@ -16,7 +16,7 @@ import { ProgramErrorVoictent } from '../../programmable-units/error/programErro
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { FILE_COLLECTION_ID } from '../../programmable-units/file/file';
-import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
+import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const programFileCache = new ProgramFileCache({
@@ -57,7 +57,7 @@ runEngine({
     reportErrors,
     signalError,
   ] as const,
-  errorCollectionId: PROGRAM_ERROR_GEPP,
+  errorCollectionId: PROGRAM_ERROR_COLLECTION_ID,
   serializeeCollectionIdList: [
     // keep this as a multi-line list for easier debugging
     FILE_COLLECTION_ID,

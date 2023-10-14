@@ -1,7 +1,10 @@
 import { serialize } from '../../../package-agnostic-utilities/one-way-serializer/serialize';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { LintAssertionError } from '../linting/reportFailedLintAssertion';
-import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
+import {
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
+} from './programError';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;
@@ -16,8 +19,8 @@ let isLimitReached = false;
 export const reportErrors = buildProgrammedTransform({
   name: 'reportErrors',
 })
-  .fromItem2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .fromItem2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform((programError) => {
     errorCount += 1;

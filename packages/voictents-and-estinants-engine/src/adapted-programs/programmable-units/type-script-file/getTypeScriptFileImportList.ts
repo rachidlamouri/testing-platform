@@ -14,19 +14,20 @@ import {
 } from './typeScriptFileImportList';
 import { splitList } from '../../../package-agnostic-utilities/array/splitList';
 import {
-  PROGRAM_ERROR_GEPP,
+  PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
-  GenericProgramErrorVoque,
+  GenericProgramErrorStreamMetatype,
   ReportedProgramError,
-  ReportingEstinantLocator,
+  ReportingProgrammedTransformLocator,
 } from '../error/programError';
 import { isRelativeFilePath } from '../../../package-agnostic-utilities/file/isRelativeFilePath';
 
 const ESTINANT_NAME = 'getTypeScriptFileImportList' as const;
 type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -45,8 +46,8 @@ export const getTypeScriptFileImportList = buildProgrammedTransform({
   .toItem2<TypeScriptFileImportListVoque>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform((parsedTypeScriptFile) => {
     const importAndErrorList = parsedTypeScriptFile.program.body
@@ -119,7 +120,7 @@ export const getTypeScriptFileImportList = buildProgrammedTransform({
     });
 
     return {
-      [PROGRAM_ERROR_GEPP]: errorList,
+      [PROGRAM_ERROR_COLLECTION_ID]: errorList,
       [TYPE_SCRIPT_FILE_IMPORT_LIST_GEPP]: {
         id: parsedTypeScriptFile.id,
         filePath: parsedTypeScriptFile.filePath,

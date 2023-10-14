@@ -1,5 +1,8 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
+import {
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
+} from './programError';
 
 /**
  * Reports the size of the error collection
@@ -7,8 +10,8 @@ import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 export const reportErrorCount = buildProgrammedTransform({
   name: 'reportErrorCount',
 })
-  .fromCollection2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .fromCollection2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform((errorVoictent) => {
     if (errorVoictent.length > 0) {

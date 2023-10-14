@@ -56,7 +56,7 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
     );
 
     const rootEstinantSubgraphLocalZorn =
-      LocalDirectedGraphElement2Id.buildSubgraphZorn({
+      LocalDirectedGraphElement2Id.buildSubgraphId({
         distinguisher: rootEstinantSubgraphDistinguisher,
       });
 
@@ -68,7 +68,7 @@ export const getEngineEstinantGraphElements = buildProgrammedTransform({
 
     const estinantInputSubgraphDistinguisher = `${relationship.programName} | ${engineEstinant.estinantName} | estinant-input-subgraph`;
     const estinantInputSubgraphLocator = new GraphConstituentLocatorInstance({
-      localId: LocalDirectedGraphElement2Id.buildSubgraphZorn({
+      localId: LocalDirectedGraphElement2Id.buildSubgraphId({
         distinguisher: estinantInputSubgraphDistinguisher,
       }),
       rootGraphLocator,

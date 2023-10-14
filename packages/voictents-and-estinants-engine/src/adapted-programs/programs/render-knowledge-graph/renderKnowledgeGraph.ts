@@ -13,7 +13,7 @@ import {
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
-import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
+import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
@@ -185,7 +185,7 @@ runEngine({
       initialItemEggTuple: [],
     }),
   ] as const),
-  errorCollectionId: PROGRAM_ERROR_GEPP,
+  errorCollectionId: PROGRAM_ERROR_COLLECTION_ID,
   programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,

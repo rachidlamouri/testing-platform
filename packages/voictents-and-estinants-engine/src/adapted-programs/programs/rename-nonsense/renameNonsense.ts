@@ -9,7 +9,7 @@ import {
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
-import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
+import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
@@ -85,7 +85,7 @@ runEngine({
       ],
     }),
   ] as const),
-  errorCollectionId: PROGRAM_ERROR_GEPP,
+  errorCollectionId: PROGRAM_ERROR_COLLECTION_ID,
   programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,

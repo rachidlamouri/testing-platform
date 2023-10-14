@@ -1,11 +1,11 @@
 import { hasOneElement } from '../../../package-agnostic-utilities/array/hasOneElement';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  GenericProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
-  ProgramErrorPelue,
-  ReportingEstinantLocator,
+  ProgramErrorEgg,
+  ReportingProgrammedTransformLocator,
 } from '../../programmable-units/error/programError';
 import {
   DIRECTED_GRAPH_COLLECTION_ID,
@@ -27,9 +27,10 @@ import {
 
 const ESTINANT_NAME = 'getDirectedGraphFromGraphElementGroup' as const;
 type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -43,8 +44,8 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
   .fromItem2<GraphElementGroupVoque>({
     collectionId: GRAPH_ELEMENT_GROUP_GEPP,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .toItemTuple2<DirectedGraphStreamMetatype>({
     collectionId: DIRECTED_GRAPH_COLLECTION_ID,
@@ -66,7 +67,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
     const allNodeList: Node3[] = [];
     const allEdgeList: DirectedGraphEdge[] = [];
     const allSubgraphList: SubgraphLike3[] = [];
-    const parallelErrorList: ProgramErrorPelue<ReportingLocator>[] = [];
+    const parallelErrorList: ProgramErrorEgg<ReportingLocator>[] = [];
 
     // TODO: make it easier to differentiate DirectedGraphElement2 items
     graphElementGroup.elementList.forEach((element) => {
@@ -136,7 +137,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
 
     if (!hasOneElement(allRootGraphList)) {
       return {
-        [PROGRAM_ERROR_GEPP]: [
+        [PROGRAM_ERROR_COLLECTION_ID]: [
           {
             name: 'invalid-root-graph-list',
             error: new Error(
@@ -147,7 +148,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
             context: {
               graphElementGroup,
             },
-          } satisfies ProgramErrorPelue<ReportingLocator>,
+          } satisfies ProgramErrorEgg<ReportingLocator>,
         ],
         [DIRECTED_GRAPH_COLLECTION_ID]: [],
         [DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID]: [],
@@ -167,7 +168,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
 
     const getParentGraph = (childElement: {
       parentId: string;
-    }): GraphLike | ProgramErrorPelue<ReportingLocator> => {
+    }): GraphLike | ProgramErrorEgg<ReportingLocator> => {
       const graph = graphById.get(childElement.parentId);
 
       if (graph === undefined) {
@@ -180,7 +181,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
             childElement,
             graphById,
           },
-        } satisfies ProgramErrorPelue<ReportingLocator>;
+        } satisfies ProgramErrorEgg<ReportingLocator>;
       }
 
       return graph;
@@ -210,7 +211,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
     mutateGraphLikeElementListOrder(rootDirectedGraph);
 
     return {
-      [PROGRAM_ERROR_GEPP]: parallelErrorList,
+      [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
       [DIRECTED_GRAPH_COLLECTION_ID]: [rootDirectedGraph],
     };
   })

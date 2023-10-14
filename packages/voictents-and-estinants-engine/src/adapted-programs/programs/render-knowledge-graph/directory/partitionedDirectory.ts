@@ -12,15 +12,14 @@ import {
 } from '../partition-fact/partitionFact';
 import { BoundedDirectory } from './boundedDirectory';
 
-const PARTITIONED_DIRECTORY_ZORN_TEMPLATE = [
+const PARTITIONED_DIRECTORY_ID_TEMPLATE = [
   ['partitionFact', PartitionFactId],
   ['directory', FileSystemNodeId],
 ] as const satisfies GenericComplexIdTemplate;
-type PartitionedDirectoryZornTemplate =
-  typeof PARTITIONED_DIRECTORY_ZORN_TEMPLATE;
-class PartitionedDirectoryZorn extends ComplexId<PartitionedDirectoryZornTemplate> {
-  get rawTemplate(): PartitionedDirectoryZornTemplate {
-    return PARTITIONED_DIRECTORY_ZORN_TEMPLATE;
+type PartitionedDirectoryIdTemplate = typeof PARTITIONED_DIRECTORY_ID_TEMPLATE;
+class PartitionedDirectoryId extends ComplexId<PartitionedDirectoryIdTemplate> {
+  get rawTemplate(): PartitionedDirectoryIdTemplate {
+    return PARTITIONED_DIRECTORY_ID_TEMPLATE;
   }
 }
 
@@ -36,7 +35,7 @@ type PartitionedDirectoryConstructorInput = {
 type PartitionedDirectory = SimplifyN<
   [
     {
-      id: PartitionedDirectoryZorn;
+      id: PartitionedDirectoryId;
     },
     PartitionedDirectoryConstructorInput,
   ]
@@ -62,7 +61,7 @@ export const { PartitionedDirectoryInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { partitionFact, directory } = input;
 
-      const id = new PartitionedDirectoryZorn({
+      const id = new PartitionedDirectoryId({
         partitionFact: partitionFact.id,
         directory: directory.id,
       });
@@ -76,12 +75,13 @@ export const { PartitionedDirectoryInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const PARTITIONED_DIRECTORY_GEPP = 'partitioned-directory';
+export const PARTITIONED_DIRECTORY_COLLECTION_ID = 'partitioned-directory';
 
-type PartitionedDirectoryGepp = typeof PARTITIONED_DIRECTORY_GEPP;
+type PartitionedDirectoryCollectionId =
+  typeof PARTITIONED_DIRECTORY_COLLECTION_ID;
 
-export type PartitionedDirectoryVoque =
+export type PartitionedDirectoryStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    PartitionedDirectoryGepp,
+    PartitionedDirectoryCollectionId,
     PartitionedDirectory
   >;

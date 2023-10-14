@@ -11,18 +11,19 @@ import {
   ParsedTypeScriptFileVoque,
 } from './parsedTypeScriptFile';
 import {
-  PROGRAM_ERROR_GEPP,
+  PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
-  GenericProgramErrorVoque,
-  ReportingEstinantLocator,
+  GenericProgramErrorStreamMetatype,
+  ReportingProgrammedTransformLocator,
 } from '../error/programError';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 
 const ESTINANT_NAME = 'parseTypeScriptFile' as const;
 type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -42,8 +43,8 @@ export const parseTypeScriptFile = buildProgrammedTransform({
   .toItemTuple2<ParsedTypeScriptFileVoque>({
     collectionId: PARSED_TYPE_SCRIPT_FILE_GEPP,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform((typeScriptFileConfiguration) => {
     const fileContents = fs.readFileSync(
@@ -71,12 +72,12 @@ export const parseTypeScriptFile = buildProgrammedTransform({
             program,
           },
         ],
-        [PROGRAM_ERROR_GEPP]: [],
+        [PROGRAM_ERROR_COLLECTION_ID]: [],
       };
     } catch (error) {
       return {
         [PARSED_TYPE_SCRIPT_FILE_GEPP]: [],
-        [PROGRAM_ERROR_GEPP]: [
+        [PROGRAM_ERROR_COLLECTION_ID]: [
           {
             name: 'unparseable-file',
             error: new Error('Failed to parse file'),

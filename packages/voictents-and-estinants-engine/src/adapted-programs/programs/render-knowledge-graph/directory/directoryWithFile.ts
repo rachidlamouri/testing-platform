@@ -6,12 +6,12 @@ import { Directory } from '../../../programmable-units/file/directory';
  */
 type DirectoryWithFile = Directory;
 
-export const DIRECTORY_WITH_FILE_GEPP = 'directory-with-file';
+export const DIRECTORY_WITH_FILE_COLLECTION_ID = 'directory-with-file';
 
-type DirectoryWithFileGepp = typeof DIRECTORY_WITH_FILE_GEPP;
+type DirectoryWithFileCollectionId = typeof DIRECTORY_WITH_FILE_COLLECTION_ID;
 
-export type DirectoryWithFileVoque =
+export type DirectoryWithFileStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    DirectoryWithFileGepp,
+    DirectoryWithFileCollectionId,
     DirectoryWithFile
   >;

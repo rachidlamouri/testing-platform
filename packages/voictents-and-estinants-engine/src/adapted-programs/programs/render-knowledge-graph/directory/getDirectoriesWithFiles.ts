@@ -8,8 +8,8 @@ import {
   TypeScriptFileStreamMetatype,
 } from '../../../programmable-units/type-script-file/typeScriptFile';
 import {
-  DIRECTORY_WITH_FILE_GEPP,
-  DirectoryWithFileVoque,
+  DIRECTORY_WITH_FILE_COLLECTION_ID,
+  DirectoryWithFileStreamMetatype,
 } from './directoryWithFile';
 
 /**
@@ -24,12 +24,12 @@ export const getDirectoriesWithFiles = buildProgrammedTransform({
   .andFromCollection2<TypeScriptFileStreamMetatype>({
     collectionId: TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
-  .toItemTuple2<DirectoryWithFileVoque>({
-    collectionId: DIRECTORY_WITH_FILE_GEPP,
+  .toItemTuple2<DirectoryWithFileStreamMetatype>({
+    collectionId: DIRECTORY_WITH_FILE_COLLECTION_ID,
   })
-  .onTransform((directoryVoictent, typeScriptFileVoictent) => {
+  .onTransform((directoryCollection, typeScriptFileCollection) => {
     const mutableDirectoryStateByDirectoryPath = new Map(
-      directoryVoictent.list.map((directory) => {
+      directoryCollection.list.map((directory) => {
         const mutableState = {
           directory,
           hasFile: false,
@@ -39,7 +39,7 @@ export const getDirectoriesWithFiles = buildProgrammedTransform({
       }),
     );
 
-    typeScriptFileVoictent.list.forEach((typeScriptFile) => {
+    typeScriptFileCollection.list.forEach((typeScriptFile) => {
       const directoryState = mutableDirectoryStateByDirectoryPath.get(
         typeScriptFile.filePath.parentDirectoryPath,
       );

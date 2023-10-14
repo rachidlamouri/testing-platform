@@ -20,7 +20,7 @@ const LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE = [
 type LocalDirectedGraphElement2ZornTemplate =
   typeof LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;
 export class LocalDirectedGraphElement2Id extends ComplexId<LocalDirectedGraphElement2ZornTemplate> {
-  static buildSubgraphZorn({
+  static buildSubgraphId({
     distinguisher,
   }: FactoryInput): LocalDirectedGraphElement2Id {
     return new LocalDirectedGraphElement2Id({

@@ -1,10 +1,10 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  GenericProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
   ReportedProgramError,
-  ReportingEstinantLocator,
+  ReportingProgrammedTransformLocator,
 } from '../../programmable-units/error/programError';
 import {
   FILE_COLLECTION_ID,
@@ -14,9 +14,10 @@ import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utiliti
 
 const ESTINANT_NAME = 'assertFileExtensionIsKnown' as const;
 type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -30,8 +31,8 @@ export const assertFileExtensionIsKnown = buildProgrammedTransform({
   .fromItem2<FileStreamMetatype>({
     collectionId: FILE_COLLECTION_ID,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform((file) => {
     const { suffixIdentifier, suffix } = file.nodePath.name.extension;

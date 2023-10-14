@@ -1,26 +1,28 @@
 import { buildProgrammedTransform } from '../../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  ReportingEstinantLocator,
+  ReportingProgrammedTransformLocator,
   ProgramErrorElementLocatorTypeName,
-  GenericProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
-  ProgramErrorPelue,
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
+  ProgramErrorEgg,
 } from '../../../programmable-units/error/programError';
 import {
-  DIRECTORY_WITH_FILE_GEPP,
-  DirectoryWithFileVoque,
+  DIRECTORY_WITH_FILE_COLLECTION_ID,
+  DirectoryWithFileStreamMetatype,
 } from './directoryWithFile';
 import {
   BOUNDED_DIRECTORY_COLLECTION_ID,
   BoundedDirectoryStreamMetatype,
 } from './boundedDirectory';
 
-const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
-type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+const PROGRAMMED_TRANSFORM_NAME = 'assertCiModelHasAllPrograms' as const;
+type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
+type ReportingLocator =
+  ReportingProgrammedTransformLocator<ProgrammedTransformName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
-  name: ESTINANT_NAME,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
+  name: PROGRAMMED_TRANSFORM_NAME,
   filePath: __filename,
 };
 
@@ -32,19 +34,19 @@ const reporterLocator: ReportingLocator = {
 export const assertDirectoriesHaveBoundaries = buildProgrammedTransform({
   name: 'assertDirectoriesHaveBoundaries',
 })
-  .fromCollection2<DirectoryWithFileVoque>({
-    collectionId: DIRECTORY_WITH_FILE_GEPP,
+  .fromCollection2<DirectoryWithFileStreamMetatype>({
+    collectionId: DIRECTORY_WITH_FILE_COLLECTION_ID,
   })
   .andFromCollection2<BoundedDirectoryStreamMetatype>({
     collectionId: BOUNDED_DIRECTORY_COLLECTION_ID,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .onTransform((directoryWithFileVoictent, boundedDirectoryVoictent) => {
-    const unboundedDirectoryList = directoryWithFileVoictent.filter(
+  .onTransform((directoryWithFileCollection, boundedDirectoryCollection) => {
+    const unboundedDirectoryList = directoryWithFileCollection.filter(
       (directory) => {
-        const boundedDirectory = boundedDirectoryVoictent.byNodePath.get(
+        const boundedDirectory = boundedDirectoryCollection.byNodePath.get(
           directory.directoryPath.serialized,
         );
         return boundedDirectory === undefined;
@@ -66,7 +68,7 @@ export const assertDirectoriesHaveBoundaries = buildProgrammedTransform({
           directoryPath: directory.directoryPath.serialized,
           directory,
         },
-      } satisfies ProgramErrorPelue<ReportingLocator>;
+      } satisfies ProgramErrorEgg<ReportingLocator>;
     });
 
     return outputList;

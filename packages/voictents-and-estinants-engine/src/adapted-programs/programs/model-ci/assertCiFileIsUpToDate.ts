@@ -10,19 +10,20 @@ import {
   SerializedCiModelVoque,
 } from './serializedCiModel';
 import {
-  PROGRAM_ERROR_GEPP,
+  PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
-  GenericProgramErrorVoque,
+  GenericProgramErrorStreamMetatype,
   ReportedProgramError,
-  ReportingEstinantLocator,
+  ReportingProgrammedTransformLocator,
 } from '../../programmable-units/error/programError';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 
 const ESTINANT_NAME = 'assertCiFileIsUpToDate' as const;
 type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -43,8 +44,8 @@ export const assertCiFileIsUpToDate = buildProgrammedTransform({
     getRightKeyTuple: () => [CI_FILE_PATH],
     getRightKey: (leftInput) => leftInput.item.filePath.serialized,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform((serializeCiModel, [ciFile]) => {
     const onDiskContents = fs.readFileSync(ciFile.filePath.serialized, 'utf-8');

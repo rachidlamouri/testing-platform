@@ -1,8 +1,8 @@
 import { assertNotNull } from '../../../package-agnostic-utilities/nil/assertNotNull';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  GenericProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
 } from '../error/programError';
 import {
   GenericLintAssertion,
@@ -42,8 +42,8 @@ export const reportFailedLintAssertion = buildProgrammedTransform({
   .andFromCollection2<LintAssertionOmissionVoque>({
     collectionId: LINT_ASSERTION_OMISSION_GEPP,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform((lintAssertion, omissionVoictent) => {
     const isOmitted = omissionVoictent.omittedZornSet.has(

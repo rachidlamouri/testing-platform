@@ -7,8 +7,8 @@ import {
 } from '../../../../programmable-units/output-file/outputFile';
 import {
   GenericProgramErrorPelue,
-  GenericProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
 } from '../../../../programmable-units/error/programError';
 import {
   APP_RENDERER_DELAYER_GEPP,
@@ -30,8 +30,8 @@ export const renderApp = buildProgrammedTransform({
   .toItem2<OutputFileVoque>({
     collectionId: OUTPUT_FILE_GEPP,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform(() => {
     const result = childProcessUtility.spawnSync(
@@ -78,7 +78,7 @@ export const renderApp = buildProgrammedTransform({
         fileExtensionSuffix: 'html',
         text: htmlContents,
       },
-      [PROGRAM_ERROR_GEPP]: programErrorList,
+      [PROGRAM_ERROR_COLLECTION_ID]: programErrorList,
     };
   })
   .assemble();

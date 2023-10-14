@@ -9,8 +9,8 @@ import { serialize } from '../../../package-agnostic-utilities/one-way-serialize
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractAsymmetricInMemoryVoictent2';
 import {
-  GenericProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
   UnsafeProgramErrorVoque,
 } from './programError';
 import { LintAssertionError } from '../linting/reportFailedLintAssertion';
@@ -38,7 +38,7 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
   constructor({ programFileCache }: ProgramErrorVoictentConstructorInput) {
     super({
-      gepp: PROGRAM_ERROR_GEPP,
+      gepp: PROGRAM_ERROR_COLLECTION_ID,
       initialHubblepupPelueTuple: [],
     });
 
@@ -51,8 +51,8 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
   // eslint-disable-next-line class-methods-use-this
   protected transformHubblepup(
-    hubblepupPelue: GenericProgramErrorVoque['itemEggStreamable'],
-  ): GenericProgramErrorVoque['itemStreamable'] {
+    hubblepupPelue: GenericProgramErrorStreamMetatype['itemEggStreamable'],
+  ): GenericProgramErrorStreamMetatype['itemStreamable'] {
     if (
       !(hubblepupPelue instanceof LintAssertionError) &&
       hubblepupPelue instanceof Error
@@ -128,26 +128,27 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
       return hubblepupPelue;
     }
 
-    const hubblepupPelie: GenericProgramErrorVoque['itemStreamable'] = {
-      id,
-      name: hubblepupPelue.name,
-      message: hubblepupPelue.error.message,
-      stackTrace: (hubblepupPelue.error.stack ?? '').split('\n').slice(1),
-      reporterLocator: hubblepupPelue.reporterLocator,
-      sourceLocator: hubblepupPelue.sourceLocator,
-      context: hubblepupPelue.context,
-      serializedContextFilePath: `${this.programFileCache.collectionsDirectoryPath}/by-source/${normalizedSourcePath}`,
-      normalizedId: normalizedZorn,
-      byReporterDirectoryPath,
-      bySourceDirectoryPath,
-      contextFilePath,
-    };
+    const hubblepupPelie: GenericProgramErrorStreamMetatype['itemStreamable'] =
+      {
+        id,
+        name: hubblepupPelue.name,
+        message: hubblepupPelue.error.message,
+        stackTrace: (hubblepupPelue.error.stack ?? '').split('\n').slice(1),
+        reporterLocator: hubblepupPelue.reporterLocator,
+        sourceLocator: hubblepupPelue.sourceLocator,
+        context: hubblepupPelue.context,
+        serializedContextFilePath: `${this.programFileCache.collectionsDirectoryPath}/by-source/${normalizedSourcePath}`,
+        normalizedId: normalizedZorn,
+        byReporterDirectoryPath,
+        bySourceDirectoryPath,
+        contextFilePath,
+      };
 
     return hubblepupPelie;
   }
 
   protected onTransformedHubblepup(
-    hubblepup: GenericProgramErrorVoque['itemStreamable'],
+    hubblepup: GenericProgramErrorStreamMetatype['itemStreamable'],
     index: number,
   ): void {
     const serializedHubblepup: SerializedItem = {
@@ -197,8 +198,8 @@ export class ProgramErrorVoictent extends AbstractAsymmetricInMemoryVoictent2<
 
   // eslint-disable-next-line class-methods-use-this
   protected getIndexByName(
-    hubblepup: GenericProgramErrorVoque['itemStreamable'],
-  ): GenericProgramErrorVoque['indexByName'] {
+    hubblepup: GenericProgramErrorStreamMetatype['itemStreamable'],
+  ): GenericProgramErrorStreamMetatype['indexByName'] {
     if (hubblepup instanceof Error) {
       return {
         // TODO: an id should not be random

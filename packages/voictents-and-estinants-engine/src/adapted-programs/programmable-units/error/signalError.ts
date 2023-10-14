@@ -1,5 +1,8 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
+import {
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
+} from './programError';
 
 /**
  * Sets a non-zero exit code if there is a program error.
@@ -7,8 +10,8 @@ import { GenericProgramErrorVoque, PROGRAM_ERROR_GEPP } from './programError';
 export const signalError = buildProgrammedTransform({
   name: 'signalError',
 })
-  .fromItem2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .fromItem2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform(() => {
     process.exitCode = 1;

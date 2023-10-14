@@ -1,11 +1,11 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
-  GenericProgramErrorVoque,
+  GenericProgramErrorStreamMetatype,
   GenericProgramErrorPelue,
-  PROGRAM_ERROR_GEPP,
+  PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
-  ReportingEstinantLocator,
+  ReportingProgrammedTransformLocator,
 } from '../error/programError';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
@@ -23,9 +23,10 @@ import {
 
 const ESTINANT_NAME = 'getEngineVoque2' as const;
 type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -52,8 +53,8 @@ export const getEngineVoque2 = buildProgrammedTransform({
   .toItem2<EngineVoque2Voque>({
     collectionId: ENGINE_VOQUE_2_GEPP,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform((voqueLocator, [{ declarationByIdentifier }]) => {
     // TODO: move these naming conventions elsewhere
@@ -98,7 +99,7 @@ export const getEngineVoque2 = buildProgrammedTransform({
         commentText: commentText ?? '',
         locator: voqueLocator,
       }),
-      [PROGRAM_ERROR_GEPP]: parallelErrorList,
+      [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
     };
   })
   .assemble();

@@ -9,10 +9,10 @@ import {
 } from '../../programmable-units/graph-visualization/svgDocument';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import {
-  GenericProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
-  ReportingEstinantLocator,
+  ReportingProgrammedTransformLocator,
 } from '../../programmable-units/error/programError';
 import {
   OUTPUT_FILE_GEPP,
@@ -45,9 +45,10 @@ import { FileDependencyPathNodeFact } from './dependency/dependency-path/fileDep
 
 const ESTINANT_NAME = 'decodeAndRecastSvgDocument' as const;
 type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -139,8 +140,8 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
   .andFromCollection2<FactStreamMetatype>({
     collectionId: FACT_COLLECTION_ID,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .toItemTuple2<OutputFileVoque>({
     collectionId: OUTPUT_FILE_GEPP,
@@ -570,7 +571,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
 
     if (jsxNode === null) {
       return {
-        [PROGRAM_ERROR_GEPP]: [
+        [PROGRAM_ERROR_COLLECTION_ID]: [
           {
             name: 'svg-node-decode-error',
             error: new Error(`Unable to decode svg`),
@@ -618,7 +619,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
     };
 
     return {
-      [PROGRAM_ERROR_GEPP]: unknownNodeList.map((unknownNode) => {
+      [PROGRAM_ERROR_COLLECTION_ID]: unknownNodeList.map((unknownNode) => {
         const error = unknownNode.isElement
           ? new Error(
               `Unhandled element with tagname "${unknownNode.tagName}" for node path: ${svgDocument.id}${unknownNode.path}`,

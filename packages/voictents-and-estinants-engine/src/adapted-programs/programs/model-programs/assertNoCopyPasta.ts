@@ -13,19 +13,20 @@ import {
   EngineVoque2Voque,
 } from '../../programmable-units/engine-program/engineVoque2';
 import {
-  GenericProgramErrorVoque,
-  PROGRAM_ERROR_GEPP,
+  GenericProgramErrorStreamMetatype,
+  PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
-  ProgramErrorPelue,
-  ReportingEstinantLocator,
+  ProgramErrorEgg,
+  ReportingProgrammedTransformLocator,
 } from '../../programmable-units/error/programError';
 import { EngineEstinantLocator2TypeName } from '../../programmable-units/engine-program/engineEstinantLocator2';
 
 const ESTINANT_NAME = 'assertNoCopyPasta' as const;
 type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingEstinantLocator<EstinantName>;
+type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
 const reporterLocator: ReportingLocator = {
-  typeName: ProgramErrorElementLocatorTypeName.ReportingEstinantLocator,
+  typeName:
+    ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
   name: ESTINANT_NAME,
   filePath: __filename,
 };
@@ -47,8 +48,8 @@ export const assertNoCopyPasta = buildProgrammedTransform({
   .andFromCollection2<EngineEstinant3Voque>({
     collectionId: ENGINE_ESTINANT_3_GEPP,
   })
-  .toItemTuple2<GenericProgramErrorVoque>({
-    collectionId: PROGRAM_ERROR_GEPP,
+  .toItemTuple2<GenericProgramErrorStreamMetatype>({
+    collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform((programList, voqueList, estinantList) => {
     const describedProgramEntryList = programList.map((program) => {
@@ -103,7 +104,7 @@ export const assertNoCopyPasta = buildProgrammedTransform({
             description,
             duplicateDescriptionGroup,
           },
-        } satisfies ProgramErrorPelue<ReportingLocator>;
+        } satisfies ProgramErrorEgg<ReportingLocator>;
       });
 
     return errorList;
