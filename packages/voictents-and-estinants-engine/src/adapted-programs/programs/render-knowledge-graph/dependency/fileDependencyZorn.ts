@@ -14,8 +14,10 @@ type FileDependencyZornTemplate = typeof FILE_DEPENDENCY_ZORN_TEMPLATE;
  * The complex identifier of a FileDependency
  *
  * @readableName FileDependencyComplexId
+ *
+ * @canonicalDeclaration
  */
-export class FileDependencyZorn extends ComplexId<FileDependencyZornTemplate> {
+export class FileDependencyId extends ComplexId<FileDependencyZornTemplate> {
   get rawTemplate(): FileDependencyZornTemplate {
     return FILE_DEPENDENCY_ZORN_TEMPLATE;
   }

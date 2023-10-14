@@ -6,24 +6,24 @@ import {
 } from '../../../../../package-agnostic-utilities/data-structure/id';
 import { LocalDirectedGraphElement2Id } from '../../../../programmable-units/graph-visualization/directed-graph/types';
 import { PartitionFact } from '../../partition-fact/partitionFact';
-import { PartitionedFileDependencyGroupZorn } from '../partitionedFileDependencyGroupZorn';
+import { PartitionedFileDependencyGroupId } from '../partitionedFileDependencyGroupZorn';
 import { FileDependencyPathNode } from './fileDependencyPathNode';
 
-const PARTITIONED_FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE = [
-  ['partitionedFileDependencyGroup', PartitionedFileDependencyGroupZorn],
+const PARTITIONED_FILE_DEPENDENCY_PATH_NODE_ID_TEMPLATE = [
+  ['partitionedFileDependencyGroup', PartitionedFileDependencyGroupId],
   'directoryPath',
 ] as const satisfies GenericComplexIdTemplate;
-type PartitionedFileDependencyPathNodeZornTemplate =
-  typeof PARTITIONED_FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE;
-export class PartitionedFileDependencyPathNodeZorn extends ComplexId<PartitionedFileDependencyPathNodeZornTemplate> {
-  get rawTemplate(): PartitionedFileDependencyPathNodeZornTemplate {
-    return PARTITIONED_FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE;
+type PartitionedFileDependencyPathNodeIdTemplate =
+  typeof PARTITIONED_FILE_DEPENDENCY_PATH_NODE_ID_TEMPLATE;
+export class PartitionedFileDependencyPathNodeId extends ComplexId<PartitionedFileDependencyPathNodeIdTemplate> {
+  get rawTemplate(): PartitionedFileDependencyPathNodeIdTemplate {
+    return PARTITIONED_FILE_DEPENDENCY_PATH_NODE_ID_TEMPLATE;
   }
 }
 
 type PartitionedFileDependencyPathNodeConstructorInput = {
   partitionFact: PartitionFact;
-  dependencyGroupZorn: PartitionedFileDependencyGroupZorn;
+  dependencyGroupId: PartitionedFileDependencyGroupId;
   pathNode: FileDependencyPathNode;
   pathHeadId: string;
   pathTailIdSet: Set<string>;
@@ -34,7 +34,7 @@ type PartitionedFileDependencyPathNodeConstructorInput = {
  * corresponds to one file dependency group and one directory.
  */
 export type PartitionedFileDependencyPathNode = {
-  id: PartitionedFileDependencyPathNodeZorn;
+  id: PartitionedFileDependencyPathNodeId;
   partitionFact: PartitionFact;
   directoryPath: string;
   localGraphElementId: LocalDirectedGraphElement2Id;
@@ -69,14 +69,14 @@ export const { PartitionedFileDependencyPathNodeInstance } =
       transformInput: (input) => {
         const {
           partitionFact,
-          dependencyGroupZorn,
+          dependencyGroupId,
           pathNode: { directoryPath },
           pathHeadId,
           pathTailIdSet,
         } = input;
 
-        const id = new PartitionedFileDependencyPathNodeZorn({
-          partitionedFileDependencyGroup: dependencyGroupZorn,
+        const id = new PartitionedFileDependencyPathNodeId({
+          partitionedFileDependencyGroup: dependencyGroupId,
           directoryPath,
         });
 
@@ -96,14 +96,14 @@ export const { PartitionedFileDependencyPathNodeInstance } =
     })
     .assemble();
 
-export const PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP =
+export const PARTITIONED_FILE_DEPENDENCY_PATH_NODE_COLLECTION_ID =
   'partitioned-file-dependency-path-node';
 
-type PartitionedFileDependencyPathNodeGepp =
-  typeof PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP;
+type PartitionedFileDependencyPathNodeCollectionId =
+  typeof PARTITIONED_FILE_DEPENDENCY_PATH_NODE_COLLECTION_ID;
 
-export type PartitionedFileDependencyPathNodeVoque =
+export type PartitionedFileDependencyPathNodeStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    PartitionedFileDependencyPathNodeGepp,
+    PartitionedFileDependencyPathNodeCollectionId,
     PartitionedFileDependencyPathNode
   >;

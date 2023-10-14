@@ -11,26 +11,26 @@ import { LocalDirectedGraphElement2Id } from '../../../../programmable-units/gra
 import { FactTypeName } from '../../fact/factTypeName';
 import { PartitionFact } from '../../partition-fact/partitionFact';
 import { THEME } from '../../theme';
-import { PartitionedFileDependencyGroupZorn } from '../partitionedFileDependencyGroupZorn';
+import { PartitionedFileDependencyGroupId } from '../partitionedFileDependencyGroupZorn';
 
-const FILE_DEPENDENCY_PATH_SEGMENT_FACT_ZORN_TEMPLATE = [
-  ['partitionedFileDependencyGroup', PartitionedFileDependencyGroupZorn],
+const FILE_DEPENDENCY_PATH_SEGMENT_FACT_ID_TEMPLATE = [
+  ['partitionedFileDependencyGroup', PartitionedFileDependencyGroupId],
   ['tail', LocalDirectedGraphElement2Id],
   ['head', LocalDirectedGraphElement2Id],
 ] as const satisfies GenericComplexIdTemplate;
-type FileDependencyPathSegmentFactZornTemplate =
-  typeof FILE_DEPENDENCY_PATH_SEGMENT_FACT_ZORN_TEMPLATE;
-class FileDependencyPathSegmentFactZorn extends ComplexId<FileDependencyPathSegmentFactZornTemplate> {
-  get rawTemplate(): FileDependencyPathSegmentFactZornTemplate {
-    return FILE_DEPENDENCY_PATH_SEGMENT_FACT_ZORN_TEMPLATE;
+type FileDependencyPathSegmentFactIdTemplate =
+  typeof FILE_DEPENDENCY_PATH_SEGMENT_FACT_ID_TEMPLATE;
+class FileDependencyPathSegmentFactId extends ComplexId<FileDependencyPathSegmentFactIdTemplate> {
+  get rawTemplate(): FileDependencyPathSegmentFactIdTemplate {
+    return FILE_DEPENDENCY_PATH_SEGMENT_FACT_ID_TEMPLATE;
   }
 }
 
 type FileDependencyPathSegmentFactConstructorInput = {
   partitionFact: PartitionFact;
-  dependencyGroupZorn: PartitionedFileDependencyGroupZorn;
-  tailGraphElementZorn: LocalDirectedGraphElement2Id;
-  headGraphElementZorn: LocalDirectedGraphElement2Id;
+  dependencyGroupId: PartitionedFileDependencyGroupId;
+  tailGraphElementId: LocalDirectedGraphElement2Id;
+  headGraphElementId: LocalDirectedGraphElement2Id;
   pathHeadId: string;
   pathTailIdSet: Set<string>;
 };
@@ -43,7 +43,7 @@ export type FileDependencyPathSegmentFact = SimplifyN<
   [
     {
       typeName: FactTypeName.FileDependencyPathSegmentFact;
-      id: FileDependencyPathSegmentFactZorn;
+      id: FileDependencyPathSegmentFactId;
     },
     FileDependencyPathSegmentFactConstructorInput,
     {
@@ -60,9 +60,9 @@ export const { FileDependencyPathSegmentFactInstance } =
       'typeName',
       'id',
       'partitionFact',
-      'dependencyGroupZorn',
-      'tailGraphElementZorn',
-      'headGraphElementZorn',
+      'dependencyGroupId',
+      'tailGraphElementId',
+      'headGraphElementId',
       'graphElement',
       'pathHeadId',
       'pathTailIdSet',
@@ -81,22 +81,22 @@ export const { FileDependencyPathSegmentFactInstance } =
       },
       transformInput: (input) => {
         const {
-          dependencyGroupZorn,
+          dependencyGroupId,
           partitionFact,
-          tailGraphElementZorn,
-          headGraphElementZorn,
+          tailGraphElementId,
+          headGraphElementId,
         } = input;
 
-        const id = new FileDependencyPathSegmentFactZorn({
-          partitionedFileDependencyGroup: dependencyGroupZorn,
-          tail: tailGraphElementZorn,
-          head: headGraphElementZorn,
+        const id = new FileDependencyPathSegmentFactId({
+          partitionedFileDependencyGroup: dependencyGroupId,
+          tail: tailGraphElementId,
+          head: headGraphElementId,
         });
 
         const graphElement = new DirectedGraphEdge2Instance({
           rootGraphLocator: partitionFact.rootGraphLocator,
-          tailId: tailGraphElementZorn.forMachine,
-          headId: headGraphElementZorn.forMachine,
+          tailId: tailGraphElementId.forMachine,
+          headId: headGraphElementId.forMachine,
           attributeByKey: {
             ...THEME.dependencyEdge,
           },
@@ -115,11 +115,11 @@ export const { FileDependencyPathSegmentFactInstance } =
 export const FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID =
   'file-dependency-path-segment-fact';
 
-type FileDependencyPathSegmentFactGepp =
+type FileDependencyPathSegmentFactCollectionId =
   typeof FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID;
 
 export type FileDependencyPathSegmentFactStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    FileDependencyPathSegmentFactGepp,
+    FileDependencyPathSegmentFactCollectionId,
     FileDependencyPathSegmentFact
   >;

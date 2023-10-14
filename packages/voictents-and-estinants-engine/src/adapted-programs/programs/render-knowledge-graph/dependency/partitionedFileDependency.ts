@@ -10,11 +10,11 @@ import {
   PartitionFactId,
 } from '../partition-fact/partitionFact';
 import { FileDependency } from './fileDependency';
-import { FileDependencyZorn } from './fileDependencyZorn';
+import { FileDependencyId } from './fileDependencyZorn';
 
 const PARTITIONED_FILE_DEPENDENCY_ZORN_TEMPLATE = [
   ['partitionFact', PartitionFactId],
-  ['fileDependency', FileDependencyZorn],
+  ['fileDependency', FileDependencyId],
 ] as const satisfies GenericComplexIdTemplate;
 type PartitionedFileDependencyZornTemplate =
   typeof PARTITIONED_FILE_DEPENDENCY_ZORN_TEMPLATE;

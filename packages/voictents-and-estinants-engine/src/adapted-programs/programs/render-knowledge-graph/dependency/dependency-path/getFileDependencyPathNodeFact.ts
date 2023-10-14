@@ -9,8 +9,8 @@ import {
   FileDependencyPathNodeFactStreamMetatype,
 } from './fileDependencyPathNodeFact';
 import {
-  PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
-  PartitionedFileDependencyPathNodeVoque,
+  PARTITIONED_FILE_DEPENDENCY_PATH_NODE_COLLECTION_ID,
+  PartitionedFileDependencyPathNodeStreamMetatype,
 } from './partitionedFileDependencyPathNode';
 
 /**
@@ -20,8 +20,8 @@ import {
 export const getFileDependencyPathNodeFact = buildProgrammedTransform({
   name: 'getFileDependencyPathNodeFact',
 })
-  .fromItem2<PartitionedFileDependencyPathNodeVoque>({
-    collectionId: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
+  .fromItem2<PartitionedFileDependencyPathNodeStreamMetatype>({
+    collectionId: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_COLLECTION_ID,
   })
   .andFromItemTuple2<BoundedDirectoryStreamMetatype, [string]>({
     collectionId: BOUNDED_DIRECTORY_COLLECTION_ID,

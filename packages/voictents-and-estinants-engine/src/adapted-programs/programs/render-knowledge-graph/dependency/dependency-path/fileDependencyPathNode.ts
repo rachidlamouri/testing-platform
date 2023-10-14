@@ -4,22 +4,22 @@ import {
   ComplexId,
 } from '../../../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
-import { FileDependencyZorn } from '../fileDependencyZorn';
+import { FileDependencyId } from '../fileDependencyZorn';
 
-const FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE = [
-  ['fileDependency', FileDependencyZorn],
+const FILE_DEPENDENCY_PATH_NODE_ID_TEMPLATE = [
+  ['fileDependency', FileDependencyId],
   'index',
 ] as const satisfies GenericComplexIdTemplate;
-type FileDependencyPathNodeZornTemplate =
-  typeof FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE;
-class FileDependencyPathNodeZorn extends ComplexId<FileDependencyPathNodeZornTemplate> {
-  get rawTemplate(): FileDependencyPathNodeZornTemplate {
-    return FILE_DEPENDENCY_PATH_NODE_ZORN_TEMPLATE;
+type FileDependencyPathNodeIdTemplate =
+  typeof FILE_DEPENDENCY_PATH_NODE_ID_TEMPLATE;
+class FileDependencyPathNodeId extends ComplexId<FileDependencyPathNodeIdTemplate> {
+  get rawTemplate(): FileDependencyPathNodeIdTemplate {
+    return FILE_DEPENDENCY_PATH_NODE_ID_TEMPLATE;
   }
 }
 
 type FileDependencyPathNodeConstructorInput = {
-  fileDependencyZorn: FileDependencyZorn;
+  fileDependencyId: FileDependencyId;
   directoryPath: string;
   index: number;
 };
@@ -31,7 +31,7 @@ type FileDependencyPathNodeConstructorInput = {
  */
 export type FileDependencyPathNode = SimplifyN<
   [
-    { id: FileDependencyPathNodeZorn },
+    { id: FileDependencyPathNodeId },
     Pick<FileDependencyPathNodeConstructorInput, 'directoryPath' | 'index'>,
   ]
 >;
@@ -56,12 +56,12 @@ export const { FileDependencyPathNodeInstance } = buildNamedConstructorFunction(
       },
     },
     transformInput: (input) => {
-      const { fileDependencyZorn, index } = input;
+      const { fileDependencyId, index } = input;
 
       const twoDigitIndex = `${index}`.padStart(2, '0');
 
-      const id = new FileDependencyPathNodeZorn({
-        fileDependency: fileDependencyZorn,
+      const id = new FileDependencyPathNodeId({
+        fileDependency: fileDependencyId,
         index: twoDigitIndex,
       });
 

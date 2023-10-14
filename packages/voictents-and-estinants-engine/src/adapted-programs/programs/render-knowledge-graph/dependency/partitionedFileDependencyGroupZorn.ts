@@ -16,8 +16,10 @@ type PartitionedFileDependencyGroupZornTemplate =
  * The complex identifier of a PartitionedFileDependencyGroup
  *
  * @readableName PartitionedFileDependencyGroupComplexId
+ *
+ * @canonicalDeclaration
  */
-export class PartitionedFileDependencyGroupZorn extends ComplexId<PartitionedFileDependencyGroupZornTemplate> {
+export class PartitionedFileDependencyGroupId extends ComplexId<PartitionedFileDependencyGroupZornTemplate> {
   get rawTemplate(): PartitionedFileDependencyGroupZornTemplate {
     return PARTITIONED_FILE_DEPENDENCY_GROUP_ZORN_TEMPLATE;
   }

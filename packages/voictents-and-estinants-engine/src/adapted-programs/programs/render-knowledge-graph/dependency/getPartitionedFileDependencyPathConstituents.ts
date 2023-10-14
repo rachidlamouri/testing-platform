@@ -6,8 +6,8 @@ import {
   FileDependencyPathSegmentFactStreamMetatype,
 } from './dependency-path/fileDependencyPathSegmentFact';
 import {
-  PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
-  PartitionedFileDependencyPathNodeVoque,
+  PARTITIONED_FILE_DEPENDENCY_PATH_NODE_COLLECTION_ID,
+  PartitionedFileDependencyPathNodeStreamMetatype,
 } from './dependency-path/partitionedFileDependencyPathNode';
 import { FileDependency } from './fileDependency';
 import {
@@ -30,8 +30,8 @@ export const getPartitionedFileDependencyPathConstituents =
     .fromCollection2<PartitionedFileDependencyVoque>({
       collectionId: PARTITIONED_FILE_DEPENDENCY_GEPP,
     })
-    .toItemTuple2<PartitionedFileDependencyPathNodeVoque>({
-      collectionId: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP,
+    .toItemTuple2<PartitionedFileDependencyPathNodeStreamMetatype>({
+      collectionId: PARTITIONED_FILE_DEPENDENCY_PATH_NODE_COLLECTION_ID,
     })
     .toItemTuple2<FileDependencyPathSegmentFactStreamMetatype>({
       collectionId: FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID,
@@ -95,7 +95,8 @@ export const getPartitionedFileDependencyPathConstituents =
       );
 
       return {
-        [PARTITIONED_FILE_DEPENDENCY_PATH_NODE_GEPP]: partitionedPathNodeSet,
+        [PARTITIONED_FILE_DEPENDENCY_PATH_NODE_COLLECTION_ID]:
+          partitionedPathNodeSet,
         [FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID]:
           partitionedPathSegmentSet,
       };

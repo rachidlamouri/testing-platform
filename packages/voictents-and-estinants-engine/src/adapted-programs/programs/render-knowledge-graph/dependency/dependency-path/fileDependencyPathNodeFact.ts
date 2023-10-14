@@ -9,7 +9,7 @@ import { FactTypeName } from '../../fact/factTypeName';
 import { THEME } from '../../theme';
 import {
   PartitionedFileDependencyPathNode,
-  PartitionedFileDependencyPathNodeZorn,
+  PartitionedFileDependencyPathNodeId,
 } from './partitionedFileDependencyPathNode';
 
 type FileDependencyPathNodeFactConstructorInput = {
@@ -24,7 +24,7 @@ export type FileDependencyPathNodeFact = SimplifyN<
   [
     {
       typeName: FactTypeName.FileDependencyPathNodeFact;
-      id: PartitionedFileDependencyPathNodeZorn;
+      id: PartitionedFileDependencyPathNodeId;
     },
     FileDependencyPathNodeFactConstructorInput,
     {
@@ -85,11 +85,11 @@ export const { FileDependencyPathNodeFactInstance } =
 export const FILE_DEPENDENCY_PATH_NODE_FACT_COLLECTION_ID =
   'file-dependency-path-node-fact';
 
-type FileDependencyPathNodeFactGepp =
+type FileDependencyPathNodeFactCollectionId =
   typeof FILE_DEPENDENCY_PATH_NODE_FACT_COLLECTION_ID;
 
 export type FileDependencyPathNodeFactStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    FileDependencyPathNodeFactGepp,
+    FileDependencyPathNodeFactCollectionId,
     FileDependencyPathNodeFact
   >;

@@ -13,7 +13,7 @@ import {
   FileDependencyPathSegment,
   FileDependencyPathSegmentInstance,
 } from './dependency-path/fileDependencyPathSegment';
-import { FileDependencyZorn } from './fileDependencyZorn';
+import { FileDependencyId } from './fileDependencyZorn';
 
 type FileDependencyConstructorInput = {
   importingFile: BoundedFile;
@@ -26,7 +26,7 @@ type FileDependencyConstructorInput = {
 export type FileDependency = SimplifyN<
   [
     {
-      id: FileDependencyZorn;
+      id: FileDependencyId;
     },
     FileDependencyConstructorInput,
     {
@@ -62,7 +62,7 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { importingFile, importedFile } = input;
 
-      const id = new FileDependencyZorn({
+      const id = new FileDependencyId({
         importingFile: importingFile.id,
         importedFile: importedFile.id,
       });
@@ -118,7 +118,7 @@ export const { FileDependencyInstance } = buildNamedConstructorFunction({
       const pathNodeSet = dependencyPathDirectoryPathCombination.map(
         (directoryPath, index) => {
           return new FileDependencyPathNodeInstance({
-            fileDependencyZorn: id,
+            fileDependencyId: id,
             directoryPath,
             index,
           });
