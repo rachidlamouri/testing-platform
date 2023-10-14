@@ -3,8 +3,8 @@ import {
   runEngine,
 } from '../../../adapter/engine/runEngine';
 import {
-  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-  FileSystemObjectEnumeratorConfigurationVoque,
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+  FileSystemObjectEnumeratorConfigurationStreamMetatype,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
@@ -17,7 +17,7 @@ import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { FILE_GEPP } from '../../programmable-units/file/file';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
-import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'categorizeFiles',
@@ -33,14 +33,16 @@ const programFileCache = new ProgramFileCache({
  */
 runEngine({
   explicitCollectionTuple: [
-    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
-      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialItemEggTuple: [
-        VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
-      ],
-    }),
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationStreamMetatype>(
+      {
+        collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+        initialItemEggTuple: [
+          VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+        ],
+      },
+    ),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new ProgramErrorVoictent({
       programFileCache,

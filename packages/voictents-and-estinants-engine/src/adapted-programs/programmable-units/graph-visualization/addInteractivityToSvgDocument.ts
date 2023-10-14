@@ -8,8 +8,8 @@ import {
 } from '../../../package-agnostic-utilities/typed-datum/customTypedDatum';
 import { SVG_DOCUMENT_GEPP, SvgDocumentVoque } from './svgDocument';
 import {
-  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
-  DirectedGraphMetadataByIdVoque,
+  DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,
+  DirectedGraphMetadataByIdStreamMetatype,
 } from './directedGraphMetadataById';
 import { OdeshinZorn } from '../../../adapter/identifiable-item/identifiableItem';
 
@@ -75,16 +75,16 @@ export const addInteractivityToSvgDocument = buildProgrammedTransform({
     // TODO: add filepath to index
     getRightKey: (rightInput) => rightInput.item.filePath.serialized,
   })
-  .andFromItemTuple2<DirectedGraphMetadataByIdVoque, [OdeshinZorn]>({
-    collectionId: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+  .andFromItemTuple2<DirectedGraphMetadataByIdStreamMetatype, [OdeshinZorn]>({
+    collectionId: DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,
     getRightKeyTuple: (leftInput) => [leftInput.item.zorn],
-    getRightKey: (rightInput) => rightInput.item.zorn,
+    getRightKey: (rightInput) => rightInput.item.id,
   })
   .toItem2<OutputFileVoque>({
     collectionId: OUTPUT_FILE_GEPP,
   })
   .onTransform(
-    (leftInput, [templateFile], [{ grition: directedGraphMetadataById }]) => {
+    (leftInput, [templateFile], [{ subitem: directedGraphMetadataById }]) => {
       const svgText = leftInput.grition;
 
       const templateText = fs.readFileSync(

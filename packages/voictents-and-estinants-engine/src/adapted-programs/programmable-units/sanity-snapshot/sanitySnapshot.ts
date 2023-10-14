@@ -9,9 +9,9 @@ type SanitySnapshot = {
   grition: unknown;
 };
 
-export const SANITY_SNAPSHOT_GEPP = 'sanity-snapshot';
+export const SANITY_SNAPSHOT_COLLECTION_ID = 'sanity-snapshot';
 
-type SanitySnapshotGepp = typeof SANITY_SNAPSHOT_GEPP;
+type SanitySnapshotGepp = typeof SANITY_SNAPSHOT_COLLECTION_ID;
 
 export type SanitySnapshotVoque = InMemoryIdentifiableItem2ListStreamMetatype<
   SanitySnapshotGepp,

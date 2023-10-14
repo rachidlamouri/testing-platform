@@ -50,7 +50,7 @@ export const mutateGraphLikeElementListOrder = (graphLike: GraphLike): void => {
 export const mutateDirectedGraphMetadataById = (
   directedGraphById: DirectedGraphMetadataById,
 ): void => {
-  const sortedEntryList = Object.entries(directedGraphById.grition).sort(
+  const sortedEntryList = Object.entries(directedGraphById.subitem).sort(
     ([keyA], [keyB]) => {
       if (keyA < keyB) {
         return -1;
@@ -65,5 +65,5 @@ export const mutateDirectedGraphMetadataById = (
   );
 
   // eslint-disable-next-line no-param-reassign
-  directedGraphById.grition = Object.fromEntries(sortedEntryList);
+  directedGraphById.subitem = Object.fromEntries(sortedEntryList);
 };

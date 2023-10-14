@@ -15,8 +15,8 @@ import { signalError } from '../../programmable-units/error/signalError';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
-  FileSystemObjectEnumeratorConfigurationVoque,
-  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  FileSystemObjectEnumeratorConfigurationStreamMetatype,
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
@@ -31,7 +31,7 @@ import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
-import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 import { getExpectedProgramTestFileConfiguration } from './getExpectedProgramTestFileConfiguration';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
@@ -58,12 +58,14 @@ const programFileCache = new ProgramFileCache({
  */
 runEngine({
   explicitCollectionTuple: [
-    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
-      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialItemEggTuple: [
-        VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
-      ],
-    }),
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationStreamMetatype>(
+      {
+        collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+        initialItemEggTuple: [
+          VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+        ],
+      },
+    ),
     new InMemoryCollection<EngineFunctionConfigurationVoque>({
       collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -86,7 +88,7 @@ runEngine({
       initialItemEggTuple: [NULL_OMISSION],
     }),
   ] as const),
-  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,

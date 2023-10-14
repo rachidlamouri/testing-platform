@@ -15,16 +15,17 @@ export type DirectedGraphMetadata = {
  * the selected graph element
  */
 export type DirectedGraphMetadataById = {
-  zorn: string;
-  grition: Record<string, DirectedGraphMetadata>;
+  id: string;
+  subitem: Record<string, DirectedGraphMetadata>;
 };
 
-export const DIRECTED_GRAPH_METADATA_BY_ID_GEPP =
+export const DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID =
   'directed-graph-metadata-by-id';
 
-type DirectedGraphMetadataByIdGepp = typeof DIRECTED_GRAPH_METADATA_BY_ID_GEPP;
+type DirectedGraphMetadataByIdGepp =
+  typeof DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID;
 
-export type DirectedGraphMetadataByIdVoque =
+export type DirectedGraphMetadataByIdStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     DirectedGraphMetadataByIdGepp,
     DirectedGraphMetadataById

@@ -8,9 +8,9 @@ import {
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
 import {
-  DIRECTED_GRAPH_GEPP,
+  DIRECTED_GRAPH_COLLECTION_ID,
   DirectedGraph,
-  DirectedGraphVoque,
+  DirectedGraphStreamMetatype,
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraph';
 import { DirectedGraphEdge } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge';
 import { DirectedGraphNode } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
@@ -19,7 +19,7 @@ import { SubgraphLike } from '../../programmable-units/graph-visualization/direc
 import { GraphLike } from '../../programmable-units/graph-visualization/directed-graph/graphLike';
 import { mutateGraphLikeElementListOrder } from '../../programmable-units/graph-visualization/directed-graph/mutateGraphLikeElementListOrder';
 import { SubgraphLike2 } from '../../programmable-units/graph-visualization/directed-graph/subgraphLike2';
-import { DIRECTED_GRAPH_METADATA_BY_ID_GEPP } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
+import { DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import {
   GRAPH_ELEMENT_GROUP_GEPP,
   GraphElementGroupVoque,
@@ -46,8 +46,8 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,
   })
-  .toItemTuple2<DirectedGraphVoque>({
-    collectionId: DIRECTED_GRAPH_GEPP,
+  .toItemTuple2<DirectedGraphStreamMetatype>({
+    collectionId: DIRECTED_GRAPH_COLLECTION_ID,
   })
   .onTransform((graphElementGroup) => {
     // TODO: update DirectedGraphNode to have a parentId and replace this with DirectedGraphNode
@@ -73,7 +73,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
       if ('isRoot' in element) {
         if (element.isRoot) {
           allRootGraphList.push({
-            zorn: element.rootGraphLocator.zorn.forHuman,
+            id: element.rootGraphLocator.zorn.forHuman,
             isRoot: true,
             attributeByKey: element.attributeByKey,
             nodeList: [],
@@ -87,7 +87,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
         if (element.isCluster) {
           allSubgraphList.push({
             subgraph1: {
-              zorn: element.zorn.forHuman,
+              id: element.zorn.forHuman,
               isRoot: false,
               isCluster: element.isCluster,
               attributeByKey: element.attributeByKey,
@@ -149,8 +149,8 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
             },
           } satisfies ProgramErrorPelue<ReportingLocator>,
         ],
-        [DIRECTED_GRAPH_GEPP]: [],
-        [DIRECTED_GRAPH_METADATA_BY_ID_GEPP]: [],
+        [DIRECTED_GRAPH_COLLECTION_ID]: [],
+        [DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID]: [],
       };
     }
 
@@ -211,7 +211,7 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
 
     return {
       [PROGRAM_ERROR_GEPP]: parallelErrorList,
-      [DIRECTED_GRAPH_GEPP]: [rootDirectedGraph],
+      [DIRECTED_GRAPH_COLLECTION_ID]: [rootDirectedGraph],
     };
   })
   .assemble();

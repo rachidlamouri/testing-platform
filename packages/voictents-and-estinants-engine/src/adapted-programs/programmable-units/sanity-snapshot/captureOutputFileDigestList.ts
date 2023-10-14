@@ -4,7 +4,10 @@ import {
   OUTPUT_FILE_GEPP,
   OutputFileVoque,
 } from '../output-file/outputFile';
-import { SANITY_SNAPSHOT_GEPP, SanitySnapshotVoque } from './sanitySnapshot';
+import {
+  SANITY_SNAPSHOT_COLLECTION_ID,
+  SanitySnapshotVoque,
+} from './sanitySnapshot';
 import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
 
 type OutputFileDigest = {
@@ -24,7 +27,7 @@ export const captureOutputFileDigestList = buildProgrammedTransform({
     collectionId: OUTPUT_FILE_GEPP,
   })
   .toItem2<SanitySnapshotVoque>({
-    collectionId: SANITY_SNAPSHOT_GEPP,
+    collectionId: SANITY_SNAPSHOT_COLLECTION_ID,
   })
   .onTransform((list) => {
     const digestList = list

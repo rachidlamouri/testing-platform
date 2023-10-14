@@ -16,11 +16,11 @@ import {
 import { scaffoldFile } from './scaffoldFile';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
-import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
-  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-  FileSystemObjectEnumeratorConfigurationVoque,
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+  FileSystemObjectEnumeratorConfigurationStreamMetatype,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 
 type ScriptInput = {
@@ -105,21 +105,23 @@ if (isDeprecatedFileTypeName(scriptInput.typeName)) {
  */
 runEngine({
   explicitCollectionTuple: [
-    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
-      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialItemEggTuple: [
-        {
-          directoryPath: posix.dirname(filePath),
-          ignoredNodePathConfigurationList: [],
-        },
-      ],
-    }),
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationStreamMetatype>(
+      {
+        collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+        initialItemEggTuple: [
+          {
+            directoryPath: posix.dirname(filePath),
+            ignoredNodePathConfigurationList: [],
+          },
+        ],
+      },
+    ),
     new InMemoryCollection<ScaffoldConfigurationVoque>({
       collectionId: SCAFFOLD_CONFIGURATION_GEPP,
       initialItemEggTuple: [scriptInput],
     }),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId(
     [] as const,
   ),

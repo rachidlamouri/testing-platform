@@ -1,9 +1,9 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { mutateDirectedGraphMetadataById } from '../../programmable-units/graph-visualization/directed-graph/mutateGraphLikeElementListOrder';
 import {
-  DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+  DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,
   DirectedGraphMetadataById,
-  DirectedGraphMetadataByIdVoque,
+  DirectedGraphMetadataByIdStreamMetatype,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import {
   DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
@@ -20,8 +20,8 @@ export const getDirectedGraphMetadataById2 = buildProgrammedTransform({
   .fromCollection2<DirectedGraphMetadataEntryVoque>({
     collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
   })
-  .toItemTuple2<DirectedGraphMetadataByIdVoque>({
-    collectionId: DIRECTED_GRAPH_METADATA_BY_ID_GEPP,
+  .toItemTuple2<DirectedGraphMetadataByIdStreamMetatype>({
+    collectionId: DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,
   })
   .onTransform((entryList) => {
     const metadataByIdByRootGraphDebugName = new Map<
@@ -34,11 +34,11 @@ export const getDirectedGraphMetadataById2 = buildProgrammedTransform({
         metadataByIdByRootGraphDebugName.get(
           entry.rootGraphLocator.zorn.forHuman,
         ) ?? {
-          zorn: entry.rootGraphLocator.zorn.forHuman,
-          grition: {},
+          id: entry.rootGraphLocator.zorn.forHuman,
+          subitem: {},
         };
 
-      metadataById.grition[entry.elementId] = entry.metadata;
+      metadataById.subitem[entry.elementId] = entry.metadata;
 
       metadataByIdByRootGraphDebugName.set(
         entry.rootGraphLocator.zorn.forHuman,

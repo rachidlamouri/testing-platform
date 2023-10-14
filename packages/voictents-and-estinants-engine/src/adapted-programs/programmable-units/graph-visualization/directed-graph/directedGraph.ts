@@ -23,7 +23,7 @@ export type PartialGraphAttributeByKey =
  * technically this object gets generated from DirectedGraph2
  */
 export type DirectedGraph = {
-  zorn: string;
+  id: string;
   isRoot: true;
   isCluster?: never;
   attributeByKey: PartialGraphAttributeByKey;
@@ -33,11 +33,9 @@ export type DirectedGraph = {
   subgraphList: SubgraphLike[];
 };
 
-export const DIRECTED_GRAPH_GEPP = 'directed-graph';
+export const DIRECTED_GRAPH_COLLECTION_ID = 'directed-graph';
 
-type DirectedGraphGepp = typeof DIRECTED_GRAPH_GEPP;
+type DirectedGraphGepp = typeof DIRECTED_GRAPH_COLLECTION_ID;
 
-export type DirectedGraphVoque = InMemoryIdentifiableItem2ListStreamMetatype<
-  DirectedGraphGepp,
-  DirectedGraph
->;
+export type DirectedGraphStreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<DirectedGraphGepp, DirectedGraph>;

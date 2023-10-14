@@ -8,7 +8,7 @@ import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError'
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
-import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+import { OutputFileCollection } from '../../programmable-units/output-file/outputFileVoictent';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import {
   APP_RENDERER_DELAYER_GEPP,
@@ -46,7 +46,7 @@ runEngine({
     new ProgramErrorVoictent({
       programFileCache,
     }),
-    new OutputFileVoictent({
+    new OutputFileCollection({
       programFileCache,
     }),
   ] as const),

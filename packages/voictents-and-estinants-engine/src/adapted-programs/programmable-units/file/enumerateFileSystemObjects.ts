@@ -6,8 +6,8 @@ import { splitList } from '../../../package-agnostic-utilities/array/splitList';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { DIRECTORY_GEPP, DirectoryInstance, DirectoryVoque } from './directory';
 import {
-  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-  FileSystemObjectEnumeratorConfigurationVoque,
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+  FileSystemObjectEnumeratorConfigurationStreamMetatype,
 } from './fileSystemObjectEnumeratorConfiguration';
 import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
 import { FILE_GEPP, File, FileInstance, FileVoque } from './file';
@@ -20,8 +20,8 @@ import { FILE_GEPP, File, FileInstance, FileVoque } from './file';
 export const enumerateFileSystemObjects = buildProgrammedTransform({
   name: 'enumerateFileSystemObjects',
 })
-  .fromItem2<FileSystemObjectEnumeratorConfigurationVoque>({
-    collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  .fromItem2<FileSystemObjectEnumeratorConfigurationStreamMetatype>({
+    collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
   })
   .toItemTuple2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,

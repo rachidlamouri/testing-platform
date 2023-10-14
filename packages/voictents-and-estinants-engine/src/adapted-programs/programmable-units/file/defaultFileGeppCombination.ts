@@ -53,6 +53,8 @@ type DefaultFileGepp = ValueOf<
  * @todo remove this so that the adapted engine doesn't have to know about FileSystemNode collections and instead provide a builder for a default set of collections
  *
  * @readableName defaultFileCollectionIdCombination
+ *
+ * @canonicalDeclaration
  */
-export const defaultFileGeppCombination: CollectionIdCombination<DefaultFileGepp> =
+export const defaultFileCollectionIdCombination: CollectionIdCombination<DefaultFileGepp> =
   buildCollectionIdCombination(defaultFileGeppList);

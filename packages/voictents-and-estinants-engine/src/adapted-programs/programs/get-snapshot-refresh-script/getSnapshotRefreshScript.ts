@@ -12,14 +12,14 @@ import {
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
-import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
-  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-  FileSystemObjectEnumeratorConfigurationVoque,
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+  FileSystemObjectEnumeratorConfigurationStreamMetatype,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+import { OutputFileCollection } from '../../programmable-units/output-file/outputFileVoictent';
 import { constructSnapshotScript } from '../../programmable-units/snapshot-refresh/constructSnapshotScript';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
@@ -37,12 +37,14 @@ const programFileCache = new ProgramFileCache({
  */
 runEngine({
   explicitCollectionTuple: [
-    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
-      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialItemEggTuple: [
-        VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
-      ],
-    }),
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationStreamMetatype>(
+      {
+        collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+        initialItemEggTuple: [
+          VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+        ],
+      },
+    ),
     new InMemoryCollection<EngineFunctionConfigurationVoque>({
       collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -51,12 +53,12 @@ runEngine({
       ],
     }),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new ProgramErrorVoictent({
       programFileCache,
     }),
-    new OutputFileVoictent({
+    new OutputFileCollection({
       programFileCache,
     }),
   ] as const),

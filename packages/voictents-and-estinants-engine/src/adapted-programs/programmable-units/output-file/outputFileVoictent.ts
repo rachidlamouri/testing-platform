@@ -17,8 +17,10 @@ type OutputFileVoictentConstructorInput = {
  * and it handles all OutputFile types; see OutputFile for more details.
  *
  * @readableName OutputFileCollection
+ *
+ * @canonicalDeclaration
  */
-export class OutputFileVoictent extends AbstractAsymmetricInMemoryVoictent2<
+export class OutputFileCollection extends AbstractAsymmetricInMemoryVoictent2<
   OutputFileVoque,
   OutputFileVoque
 > {

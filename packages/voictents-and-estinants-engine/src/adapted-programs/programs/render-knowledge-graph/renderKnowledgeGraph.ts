@@ -18,8 +18,8 @@ import { ProgramErrorVoictent } from '../../programmable-units/error/programErro
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
-  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-  FileSystemObjectEnumeratorConfigurationVoque,
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+  FileSystemObjectEnumeratorConfigurationStreamMetatype,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
@@ -37,7 +37,7 @@ import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { renderGraphvizCodeToSvgDocument2 } from '../../programmable-units/graph-visualization/renderGraphvizCodeToSvgDocument2';
-import { OutputFileVoictent } from '../../programmable-units/output-file/outputFileVoictent';
+import { OutputFileCollection } from '../../programmable-units/output-file/outputFileVoictent';
 import { getDirectedGraphFromGraphElementGroup } from '../model-programs/getDirectedGraphFromGraphElementGroup';
 import { groupGraphElements } from '../model-programs/groupGraphElements';
 import { assertNoBoundaryOverlap } from './boundary/assertNoBoundaryOverlap';
@@ -57,7 +57,7 @@ import { renderApp } from './app/node/renderApp';
 import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
-import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { getAllFactGraphElements } from './getAllFactGraphElements';
 import { getBoundaryFromConfiguration } from './boundary/getBoundaryFromConfiguration';
 import { getBoundaryPartition } from './partition-fact/getBoundaryPartition';
@@ -115,12 +115,14 @@ const programFileCache = new ProgramFileCache({
  */
 runEngine({
   explicitCollectionTuple: [
-    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
-      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialItemEggTuple: [
-        VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
-      ],
-    }),
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationStreamMetatype>(
+      {
+        collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+        initialItemEggTuple: [
+          VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+        ],
+      },
+    ),
     new InMemoryCollection<EngineFunctionConfigurationVoque>({
       collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -139,7 +141,7 @@ runEngine({
     }),
   ] as const,
   fileSystemNodeCollectionIdCombination: {
-    ...defaultFileGeppCombination,
+    ...defaultFileCollectionIdCombination,
     ...buildCollectionIdCombination([
       // keep as multiline list
       BOUNDED_DIRECTORY_GEPP,
@@ -166,7 +168,7 @@ runEngine({
       collectionId: PARTITIONED_FILE_GEPP,
       initialItemEggTuple: [],
     }),
-    new OutputFileVoictent({
+    new OutputFileCollection({
       programFileCache,
     }),
     new FactVoictent(),

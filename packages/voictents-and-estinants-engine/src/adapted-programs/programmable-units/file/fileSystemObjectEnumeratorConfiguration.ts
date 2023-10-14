@@ -9,13 +9,13 @@ import { StandardInMemoryStreamMetatype } from '../../../layer-agnostic-utilitie
  */
 type FileSystemObjectEnumeratorConfiguration = FilePathAccessorInput;
 
-export const FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP =
+export const FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID =
   'file-system-object-enumerator-configuration';
 
 type FileSystemObjectEnumeratorConfigurationGepp =
-  typeof FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP;
+  typeof FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID;
 
-export type FileSystemObjectEnumeratorConfigurationVoque =
+export type FileSystemObjectEnumeratorConfigurationStreamMetatype =
   StandardInMemoryStreamMetatype<
     FileSystemObjectEnumeratorConfigurationGepp,
     FileSystemObjectEnumeratorConfiguration

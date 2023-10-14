@@ -4,11 +4,11 @@ import {
 } from '../../../adapter/engine/runEngine';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
-  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
+  FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
   VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
-  FileSystemObjectEnumeratorConfigurationVoque,
+  FileSystemObjectEnumeratorConfigurationStreamMetatype,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import { defaultFileGeppCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
@@ -55,12 +55,14 @@ const programFileCache = new ProgramFileCache({
  */
 runEngine({
   explicitCollectionTuple: [
-    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationVoque>({
-      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialItemEggTuple: [
-        VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
-      ],
-    }),
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationStreamMetatype>(
+      {
+        collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+        initialItemEggTuple: [
+          VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+        ],
+      },
+    ),
     new InMemoryCollection<EngineFunctionConfigurationVoque>({
       collectionId: ENGINE_FUNCTION_CONFIGURATION_GEPP,
       initialItemEggTuple: [
@@ -70,7 +72,7 @@ runEngine({
       ],
     }),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileGeppCombination,
+  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new ProgramErrorVoictent({
       programFileCache,

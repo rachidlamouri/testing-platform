@@ -64,7 +64,7 @@ export type PartialClusterAttributeByKey =
  * serialized to graphviz code.
  */
 export type DirectedCluster = {
-  zorn: string;
+  id: string;
   isRoot: false;
   isCluster: true;
   attributeByKey: PartialClusterAttributeByKey;
