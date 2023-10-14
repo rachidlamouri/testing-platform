@@ -4,13 +4,16 @@ import Case from 'case';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   FileTypeName,
-  SCAFFOLD_CONFIGURATION_GEPP,
-  ScaffoldConfigurationVoque,
+  SCAFFOLD_CONFIGURATION_COLLECTION_ID,
+  ScaffoldConfigurationStreamMetatype,
 } from './scaffoldConfiguration';
 import { ImportConfiguration, ScaffoldeeFileMetadata } from './types';
-import { getHubblepupFileContents } from './getHubblepupFileContents';
-import { getEstinantFileContents } from './getEstinantFileContents';
-import { FILE_GEPP, FileVoque } from '../../programmable-units/file/file';
+import { getItemFileContents } from './getItemFileContents';
+import { getProgrammedTransformFileContents } from './getProgrammedTransformFileContents';
+import {
+  FILE_COLLECTION_ID,
+  FileStreamMetatype,
+} from '../../programmable-units/file/file';
 import { getProgramFileContents } from './getProgramFileContents';
 
 /**
@@ -20,11 +23,11 @@ import { getProgramFileContents } from './getProgramFileContents';
 export const scaffoldFile = buildProgrammedTransform({
   name: 'scaffoldFile',
 })
-  .fromItem2<ScaffoldConfigurationVoque>({
-    collectionId: SCAFFOLD_CONFIGURATION_GEPP,
+  .fromItem2<ScaffoldConfigurationStreamMetatype>({
+    collectionId: SCAFFOLD_CONFIGURATION_COLLECTION_ID,
   })
-  .andFromItemTuple2<FileVoque, [string]>({
-    collectionId: FILE_GEPP,
+  .andFromItemTuple2<FileStreamMetatype, [string]>({
+    collectionId: FILE_COLLECTION_ID,
     getRightKeyTuple: (configuration) => {
       return [configuration.item.filePath];
     },
@@ -59,11 +62,9 @@ export const scaffoldFile = buildProgrammedTransform({
     const prependedContent = ((): string => {
       switch (scaffoldConfiguration.typeName) {
         case FileTypeName.ProgrammedTransform:
-        case FileTypeName.Estinant:
-          return getEstinantFileContents(relevantFileMetadata);
-        case FileTypeName.Streamable:
-        case FileTypeName.Hubblepup:
-          return getHubblepupFileContents(relevantFileMetadata);
+          return getProgrammedTransformFileContents(relevantFileMetadata);
+        case FileTypeName.Item:
+          return getItemFileContents(relevantFileMetadata);
         case FileTypeName.Program:
           return getProgramFileContents(relevantFileMetadata);
       }

@@ -18,20 +18,20 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
  *
  * @readableName getProgrammedTransformFileContents
  */
-export const getEstinantFileContents = ({
+export const getProgrammedTransformFileContents = ({
   getImportStatement,
   camelCaseName,
 }: ScaffoldeeFileMetadata): string => {
   const serializedImportLines =
     IMPORT_CONFIGURATION_LIST.map(getImportStatement).join('\n');
 
-  const estinantCodeName = camelCaseName;
+  const programmedTransformCodeName = camelCaseName;
 
   const fileContents = `
 ${serializedImportLines}
 
-export const ${estinantCodeName} = buildEstinant({
-  name: '${estinantCodeName}',
+export const ${programmedTransformCodeName} = buildEstinant({
+  name: '${programmedTransformCodeName}',
 })
   .fromHubblepup2<UnsafeVoque>({
     gepp: ''

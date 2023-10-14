@@ -10,7 +10,12 @@ import {
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
 } from './fileSystemObjectEnumeratorConfiguration';
 import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
-import { FILE_GEPP, File, FileInstance, FileVoque } from './file';
+import {
+  FILE_COLLECTION_ID,
+  File,
+  FileInstance,
+  FileStreamMetatype,
+} from './file';
 
 /**
  * Traverses the file system starting from a given directory path, and outputs
@@ -26,8 +31,8 @@ export const enumerateFileSystemObjects = buildProgrammedTransform({
   .toItemTuple2<DirectoryVoque>({
     collectionId: DIRECTORY_GEPP,
   })
-  .toItemTuple2<FileVoque>({
-    collectionId: FILE_GEPP,
+  .toItemTuple2<FileStreamMetatype>({
+    collectionId: FILE_COLLECTION_ID,
   })
   .onTransform((input) => {
     const nodeMetadataList = getNestedFileSystemNodeMetadataList(input);
@@ -83,7 +88,7 @@ export const enumerateFileSystemObjects = buildProgrammedTransform({
 
     return {
       [DIRECTORY_GEPP]: directoryOutputTuple,
-      [FILE_GEPP]: orderedFileTuple,
+      [FILE_COLLECTION_ID]: orderedFileTuple,
     };
   })
   .assemble();

@@ -8,7 +8,7 @@ import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utiliti
 import { HtmlFile, HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { BASH_FILE_GEPP, BashFile, BashFileVoque } from '../bash-file/bashFile';
-import { FILE_GEPP, FileVoque } from './file';
+import { FILE_COLLECTION_ID, FileStreamMetatype } from './file';
 
 /**
  * Places a file into zero or more collections without modifying the file. Uses
@@ -17,8 +17,8 @@ import { FILE_GEPP, FileVoque } from './file';
 export const categorizeFiles = buildProgrammedTransform({
   name: 'categorizeFiles',
 })
-  .fromItem2<FileVoque>({
-    collectionId: FILE_GEPP,
+  .fromItem2<FileStreamMetatype>({
+    collectionId: FILE_COLLECTION_ID,
   })
   .toItemOnCondition<BashFileVoque>({
     collectionId: BASH_FILE_GEPP,

@@ -6,7 +6,10 @@ import {
   ReportedProgramError,
   ReportingEstinantLocator,
 } from '../../programmable-units/error/programError';
-import { FILE_GEPP, FileVoque } from '../../programmable-units/file/file';
+import {
+  FILE_COLLECTION_ID,
+  FileStreamMetatype,
+} from '../../programmable-units/file/file';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 
 const ESTINANT_NAME = 'assertFileExtensionIsKnown' as const;
@@ -24,8 +27,8 @@ const reporterLocator: ReportingLocator = {
 export const assertFileExtensionIsKnown = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromItem2<FileVoque>({
-    collectionId: FILE_GEPP,
+  .fromItem2<FileStreamMetatype>({
+    collectionId: FILE_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorVoque>({
     collectionId: PROGRAM_ERROR_GEPP,

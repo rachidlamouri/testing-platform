@@ -6,11 +6,9 @@ import {
   runEngine,
 } from '../../../adapter/engine/runEngine';
 import {
-  SCAFFOLD_CONFIGURATION_GEPP,
+  SCAFFOLD_CONFIGURATION_COLLECTION_ID,
   ScaffoldConfiguration,
-  ScaffoldConfigurationVoque,
-  fileTypeNameByDeprecatedFileTypeName,
-  isDeprecatedFileTypeName,
+  ScaffoldConfigurationStreamMetatype,
   validTypeNameList,
 } from './scaffoldConfiguration';
 import { scaffoldFile } from './scaffoldFile';
@@ -70,33 +68,6 @@ const scriptInput: ScriptInput = {
 
 assertScriptInputIsValid(scriptInput);
 
-if (isDeprecatedFileTypeName(scriptInput.typeName)) {
-  const formattedExclamation = chalk.yellow('AYE YAI YAI');
-
-  const formattedInputTypeName = chalk.cyan(scriptInput.typeName);
-
-  const replacementName =
-    fileTypeNameByDeprecatedFileTypeName[scriptInput.typeName];
-
-  const formattedSuggestion = chalk.green(replacementName);
-
-  /* eslint-disable no-console */
-  console.log();
-  console.log(
-    '=============================================================================',
-  );
-  console.log();
-  console.log(
-    `${formattedExclamation}: the option ${formattedInputTypeName} is deprecated, use ${formattedSuggestion} instead.`,
-  );
-  console.log();
-  console.log(
-    '=============================================================================',
-  );
-  console.log();
-  /* eslint-enable no-console */
-}
-
 /**
  * Given a file path, it populates that file with a template for defining a
  * collection type and all related types
@@ -116,8 +87,8 @@ runEngine({
         ],
       },
     ),
-    new InMemoryCollection<ScaffoldConfigurationVoque>({
-      collectionId: SCAFFOLD_CONFIGURATION_GEPP,
+    new InMemoryCollection<ScaffoldConfigurationStreamMetatype>({
+      collectionId: SCAFFOLD_CONFIGURATION_COLLECTION_ID,
       initialItemEggTuple: [scriptInput],
     }),
   ] as const,

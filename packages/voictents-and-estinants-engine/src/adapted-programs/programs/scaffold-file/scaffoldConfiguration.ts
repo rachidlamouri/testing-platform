@@ -3,49 +3,26 @@ import { StandardInMemoryStreamMetatype } from '../../../layer-agnostic-utilitie
 export enum FileTypeName {
   Program = 'program',
   ProgrammedTransform = 'transform',
-  Estinant = 'estinant',
-  Streamable = 'streamable',
-  Hubblepup = 'hubblepup',
+  Item = 'item',
 }
-
-const deprecatedFileTypeNameOptionTuple = [
-  FileTypeName.Estinant,
-  FileTypeName.Hubblepup,
-] as const;
-
-type DeprecatedFileTypeName = typeof deprecatedFileTypeNameOptionTuple[number];
-
-export const fileTypeNameByDeprecatedFileTypeName: Record<
-  DeprecatedFileTypeName,
-  FileTypeName
-> = {
-  [FileTypeName.Estinant]: FileTypeName.ProgrammedTransform,
-  [FileTypeName.Hubblepup]: FileTypeName.Streamable,
-};
-
-export const isDeprecatedFileTypeName = (
-  name: FileTypeName,
-): name is DeprecatedFileTypeName => {
-  return (deprecatedFileTypeNameOptionTuple as readonly string[]).includes(
-    name,
-  );
-};
 
 export const validTypeNameList = Object.values(FileTypeName) as string[];
 
 /**
- * The filePath to create a Voque outline within
+ * The filePath that will receive the generated text
  */
 export type ScaffoldConfiguration = {
   typeName: FileTypeName;
   filePath: string;
 };
 
-export const SCAFFOLD_CONFIGURATION_GEPP = 'scaffold-configuration';
+export const SCAFFOLD_CONFIGURATION_COLLECTION_ID = 'scaffold-configuration';
 
-type ScaffoldConfigurationGepp = typeof SCAFFOLD_CONFIGURATION_GEPP;
+type ScaffoldConfigurationCollectionId =
+  typeof SCAFFOLD_CONFIGURATION_COLLECTION_ID;
 
-export type ScaffoldConfigurationVoque = StandardInMemoryStreamMetatype<
-  ScaffoldConfigurationGepp,
-  ScaffoldConfiguration
->;
+export type ScaffoldConfigurationStreamMetatype =
+  StandardInMemoryStreamMetatype<
+    ScaffoldConfigurationCollectionId,
+    ScaffoldConfiguration
+  >;

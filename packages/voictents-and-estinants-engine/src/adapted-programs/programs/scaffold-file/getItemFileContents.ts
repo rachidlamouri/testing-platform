@@ -28,7 +28,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
  *
  * @readableName getStreamableFileContents
  */
-export const getHubblepupFileContents = ({
+export const getItemFileContents = ({
   getImportStatement,
   pascalCaseName,
   kebabCaseName,
@@ -37,27 +37,27 @@ export const getHubblepupFileContents = ({
   const serializedImportLines =
     IMPORT_CONFIGURATION_LIST.map(getImportStatement).join('\n');
 
-  const zornTemplateCodeName = `${screamingSnakeCaseName}_ZORN_TEMPLATE`;
-  const zornTemplateTypeName = `${pascalCaseName}ZornTemplate`;
-  const zornTemplateClassName = `${pascalCaseName}Zorn`;
+  const idTemplateCodeName = `${screamingSnakeCaseName}_ZORN_TEMPLATE`;
+  const idTemplateTypeName = `${pascalCaseName}ZornTemplate`;
+  const idTemplateClassName = `${pascalCaseName}Zorn`;
   const constructorInputTypeName = `${pascalCaseName}ConstructorInput`;
-  const hubblepupTypeName = pascalCaseName;
-  const constructorCodeName = `${hubblepupTypeName}Instance`;
-  const geppCodeName = `${screamingSnakeCaseName}_GEPP`;
-  const geppLiteral = kebabCaseName;
-  const geppTypeName = `${hubblepupTypeName}Gepp`;
-  const voqueTypeName = `${hubblepupTypeName}Voque`;
+  const itemTypeName = pascalCaseName;
+  const constructorCodeName = `${itemTypeName}Instance`;
+  const collectionIdCodeName = `${screamingSnakeCaseName}_GEPP`;
+  const collectionIdLiteral = kebabCaseName;
+  const collectionIdTypeName = `${itemTypeName}Gepp`;
+  const streamMetatypeTypeName = `${itemTypeName}Voque`;
 
   const fileContents = `
 ${serializedImportLines}
 
-const ${zornTemplateCodeName} = [
+const ${idTemplateCodeName} = [
   'UPDATE_ME'
 ] as const satisfies GenericComplexzornTemplate
-type ${zornTemplateTypeName} = typeof ${zornTemplateCodeName}
-class ${zornTemplateClassName} extends Complexzorn<${zornTemplateTypeName}> {
-  get rawTemplate(): ${zornTemplateTypeName} {
-    return ${zornTemplateCodeName}
+type ${idTemplateTypeName} = typeof ${idTemplateCodeName}
+class ${idTemplateClassName} extends Complexzorn<${idTemplateTypeName}> {
+  get rawTemplate(): ${idTemplateTypeName} {
+    return ${idTemplateCodeName}
   }
 }
 
@@ -65,8 +65,8 @@ type ${constructorInputTypeName} = {
   placeholderInputProperty: never;
 }
 
-type ${hubblepupTypeName} = SimplifyN<[
-  { zorn: ${zornTemplateClassName} },
+type ${itemTypeName} = SimplifyN<[
+  { zorn: ${idTemplateClassName} },
   ${constructorInputTypeName},
   {
     // TODO: UPDATE_ME
@@ -79,9 +79,9 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
     // keep this as a multiline list
     'zorn',
     'placeholderInputProperty',
-  ] as const satisfies readonly (keyof ${hubblepupTypeName})[],
+  ] as const satisfies readonly (keyof ${itemTypeName})[],
 })
-  .withTypes<${constructorInputTypeName}, ${hubblepupTypeName}>({
+  .withTypes<${constructorInputTypeName}, ${itemTypeName}>({
     typeCheckErrorMesssages: {
       initialization: '',
       instancePropertyNameTuple: {
@@ -92,23 +92,23 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { placeholderInputProperty } = input;
 
-      const zorn = new ${zornTemplateClassName}({
+      const zorn = new ${idTemplateClassName}({
         UPDATE_ME: placeholderInputProperty,
       });
 
       return {
         zorn,
         ...input,
-      } satisfies ${hubblepupTypeName}
+      } satisfies ${itemTypeName}
     },
   })
   .assemble()
 
-  export const ${geppCodeName} = '${geppLiteral}'
+  export const ${collectionIdCodeName} = '${collectionIdLiteral}'
 
-  type ${geppTypeName} = typeof ${geppCodeName}
+  type ${collectionIdTypeName} = typeof ${collectionIdCodeName}
 
-  export type ${voqueTypeName} = InMemoryOdeshin2ListVoque<${geppTypeName}, ${hubblepupTypeName}>
+  export type ${streamMetatypeTypeName} = InMemoryOdeshin2ListVoque<${collectionIdTypeName}, ${itemTypeName}>
 `;
 
   return fileContents;

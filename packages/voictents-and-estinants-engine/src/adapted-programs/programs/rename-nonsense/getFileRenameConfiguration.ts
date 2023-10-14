@@ -1,7 +1,10 @@
 import Case from 'case';
 import { posix } from 'path';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { FILE_GEPP, FileVoque } from '../../programmable-units/file/file';
+import {
+  FILE_COLLECTION_ID,
+  FileStreamMetatype,
+} from '../../programmable-units/file/file';
 import {
   FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,
   FileSystemNodeRenameConfigurationInstance,
@@ -32,8 +35,8 @@ const linterSource = new ProgrammedTransformSourceInstance({
 export const getFileRenameConfiguration = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromItem2<FileVoque>({
-    collectionId: FILE_GEPP,
+  .fromItem2<FileStreamMetatype>({
+    collectionId: FILE_COLLECTION_ID,
   })
   .toItemTuple2<FileSystemNodeRenameConfigurationVoque>({
     collectionId: FILE_SYSTEM_NODE_RENAME_CONFIGURATION_GEPP,

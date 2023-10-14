@@ -15,7 +15,7 @@ import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/prog
 import { ProgramErrorVoictent } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
-import { FILE_GEPP } from '../../programmable-units/file/file';
+import { FILE_COLLECTION_ID } from '../../programmable-units/file/file';
 import { PROGRAM_ERROR_GEPP } from '../../programmable-units/error/programError';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 
@@ -60,7 +60,7 @@ runEngine({
   errorCollectionId: PROGRAM_ERROR_GEPP,
   serializeeCollectionIdList: [
     // keep this as a multi-line list for easier debugging
-    FILE_GEPP,
+    FILE_COLLECTION_ID,
   ],
   programFileCache,
 });

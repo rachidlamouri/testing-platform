@@ -67,8 +67,8 @@ export const { FileInstance } = buildNamedConstructorFunction({
   })
   .assemble();
 
-export const FILE_GEPP = 'file';
+export const FILE_COLLECTION_ID = 'file';
 
-type FileGepp = typeof FILE_GEPP;
+type FileGepp = typeof FILE_COLLECTION_ID;
 
-export type FileVoque = FileSystemNodeVoque<FileGepp, File>;
+export type FileStreamMetatype = FileSystemNodeVoque<FileGepp, File>;
