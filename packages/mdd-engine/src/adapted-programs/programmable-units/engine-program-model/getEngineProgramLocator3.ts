@@ -764,26 +764,6 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
       const { engineFunctionConfiguration } = engineProgramFile;
 
       switch (engineFunctionConfiguration.typeName) {
-        case EngineFunctionConfigurationTypeName.Core:
-          return {
-            [PROGRAM_ERROR_COLLECTION_ID]: [
-              {
-                name: `unhandled-engine-call`,
-                error: new Error(
-                  `Engine function configuration "${engineProgramFile.engineFunctionConfiguration.typeName}" is not currently supported by the program modeler`,
-                ),
-                reporterLocator,
-                sourceLocator: {
-                  typeName:
-                    ProgramErrorElementLocatorTypeName.SourceFileLocator,
-                  filePath: engineProgramFile.file.filePath.serialized,
-                },
-                context: null,
-              } satisfies ReportedProgramError<ReportingLocator>,
-            ],
-            [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [],
-            [PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID]: [],
-          };
         case EngineFunctionConfigurationTypeName.Core2: {
           const { parallelErrorList, engineProgramLocator } =
             getCore2EngineProgramLocator({

@@ -6,8 +6,7 @@ import {
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import {
   ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
-  ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-  CORE_ENGINE_FUNCTION_CONFIGURATION,
+  ENGINE_FUNCTION_CONFIGURATION_LIST,
   EngineFunctionConfigurationStreamMetatype,
 } from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
@@ -47,10 +46,7 @@ runEngine({
     ),
     new InMemoryCollection<EngineFunctionConfigurationStreamMetatype>({
       collectionId: ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
-      initialItemEggTuple: [
-        ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-        CORE_ENGINE_FUNCTION_CONFIGURATION,
-      ],
+      initialItemEggTuple: ENGINE_FUNCTION_CONFIGURATION_LIST,
     }),
   ] as const,
   fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,

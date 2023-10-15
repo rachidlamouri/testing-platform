@@ -11,9 +11,7 @@ import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import {
-  CORE_ENGINE_FUNCTION_2_CONFIGURATION,
-  CORE_ENGINE_FUNCTION_CONFIGURATION,
-  ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+  ENGINE_FUNCTION_CONFIGURATION_LIST,
   ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
   EngineFunctionConfigurationStreamMetatype,
 } from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
@@ -85,11 +83,7 @@ runEngine({
     ),
     new InMemoryCollection<EngineFunctionConfigurationStreamMetatype>({
       collectionId: ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
-      initialItemEggTuple: [
-        CORE_ENGINE_FUNCTION_CONFIGURATION,
-        CORE_ENGINE_FUNCTION_2_CONFIGURATION,
-        ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-      ],
+      initialItemEggTuple: ENGINE_FUNCTION_CONFIGURATION_LIST,
     }),
     new LintAssertionOmissionCollection<LintAssertionOmissionStreamMetatype>({
       collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,

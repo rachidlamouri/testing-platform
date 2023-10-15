@@ -35,9 +35,7 @@ import { parseTypeScriptFileComments } from '../../programmable-units/type-scrip
 import {
   EngineFunctionConfigurationStreamMetatype,
   ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
-  CORE_ENGINE_FUNCTION_CONFIGURATION,
-  CORE_ENGINE_FUNCTION_2_CONFIGURATION,
-  ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+  ENGINE_FUNCTION_CONFIGURATION_LIST,
 } from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
 import {
   LintAssertionOmissionCollection,
@@ -66,11 +64,7 @@ runEngine({
     ),
     new InMemoryCollection<EngineFunctionConfigurationStreamMetatype>({
       collectionId: ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
-      initialItemEggTuple: [
-        CORE_ENGINE_FUNCTION_CONFIGURATION,
-        CORE_ENGINE_FUNCTION_2_CONFIGURATION,
-        ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-      ],
+      initialItemEggTuple: ENGINE_FUNCTION_CONFIGURATION_LIST,
     }),
   ] as const,
   fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,

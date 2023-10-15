@@ -6,9 +6,7 @@ import {
 import {
   EngineFunctionConfigurationStreamMetatype,
   ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
-  CORE_ENGINE_FUNCTION_CONFIGURATION,
-  CORE_ENGINE_FUNCTION_2_CONFIGURATION,
-  ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+  ENGINE_FUNCTION_CONFIGURATION_LIST,
 } from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
@@ -72,11 +70,7 @@ runEngine({
     ),
     new InMemoryCollection<EngineFunctionConfigurationStreamMetatype>({
       collectionId: ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
-      initialItemEggTuple: [
-        CORE_ENGINE_FUNCTION_CONFIGURATION,
-        CORE_ENGINE_FUNCTION_2_CONFIGURATION,
-        ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-      ],
+      initialItemEggTuple: ENGINE_FUNCTION_CONFIGURATION_LIST,
     }),
     new InMemoryCollection<CiModelStreamMetatype>({
       collectionId: CI_MODEL_COLLECTION_ID,

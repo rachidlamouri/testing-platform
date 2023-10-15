@@ -8,9 +8,7 @@ import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/prog
 import {
   EngineFunctionConfigurationStreamMetatype,
   ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
-  CORE_ENGINE_FUNCTION_CONFIGURATION,
-  CORE_ENGINE_FUNCTION_2_CONFIGURATION,
-  ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+  ENGINE_FUNCTION_CONFIGURATION_LIST,
 } from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program-model/getEngineProgramLocator3';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
@@ -128,11 +126,7 @@ runEngine({
     ),
     new InMemoryCollection<EngineFunctionConfigurationStreamMetatype>({
       collectionId: ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
-      initialItemEggTuple: [
-        CORE_ENGINE_FUNCTION_CONFIGURATION,
-        CORE_ENGINE_FUNCTION_2_CONFIGURATION,
-        ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-      ],
+      initialItemEggTuple: ENGINE_FUNCTION_CONFIGURATION_LIST,
     }),
     new InMemoryIdentifiableItem3Collection<BoundaryConfigurationStreamMetatype>(
       {
