@@ -2,7 +2,7 @@ import { buildNamedConstructorFunction } from '../../../../../package-agnostic-u
 import { AdaptedLineComment } from '../adapted/adaptedLineComment';
 import { AdaptedNormalBlockComment } from '../adapted/adaptedNormalBlockComment';
 import { CategorizedCommentTypeName } from './categorizedCommentTypeName';
-import { CommentZorn } from '../commentZorn';
+import { CommentId } from '../commentZorn';
 
 type EslintDirectiveCommentConstructorInput = {
   adaptedComment: AdaptedLineComment | AdaptedNormalBlockComment;
@@ -13,7 +13,7 @@ type EslintDirectiveCommentConstructorInput = {
  */
 export type EslintDirectiveComment = {
   typeName: CategorizedCommentTypeName.EslintDirective;
-  id: CommentZorn;
+  id: CommentId;
   text: string;
   startingLineNumber: number;
   endingLineNumber: number;

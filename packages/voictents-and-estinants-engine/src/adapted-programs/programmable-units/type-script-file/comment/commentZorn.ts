@@ -19,10 +19,12 @@ type CommentZornTemplate = typeof COMMENT_ZORN_TEMPLATE;
  * The complex identifier for a comment
  *
  * @readableName CommentComplexId
+ *
+ * @canonicalDeclaration
  */
-export class CommentZorn extends ComplexId<CommentZornTemplate> {
-  static build({ filePath, rawComment }: CommentZornContext): CommentZorn {
-    return new CommentZorn({
+export class CommentId extends ComplexId<CommentZornTemplate> {
+  static build({ filePath, rawComment }: CommentZornContext): CommentId {
+    return new CommentId({
       filePath,
       lineNumber: `${rawComment.loc.start.line}`,
     });

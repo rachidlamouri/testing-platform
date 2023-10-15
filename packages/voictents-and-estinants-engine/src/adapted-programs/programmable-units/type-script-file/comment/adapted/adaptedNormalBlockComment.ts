@@ -1,7 +1,7 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { AdaptedCommentTypeName } from './adaptedCommentTypeName';
-import { CommentZorn } from '../commentZorn';
+import { CommentId } from '../commentZorn';
 
 type AdaptedNormalBlockCommentConstructorInput = {
   filePath: string;
@@ -13,7 +13,7 @@ type AdaptedNormalBlockCommentConstructorInput = {
  */
 export type AdaptedNormalBlockComment = {
   typeName: AdaptedCommentTypeName.NormalBlock;
-  id: CommentZorn;
+  id: CommentId;
   text: string;
   startingLineNumber: number;
   endingLineNumber: number;
@@ -54,7 +54,7 @@ export const { AdaptedNormalBlockCommentInstance } =
 
         return {
           typeName: AdaptedCommentTypeName.NormalBlock,
-          id: CommentZorn.build(input),
+          id: CommentId.build(input),
           text: rawComment.value,
           startingLineNumber,
           endingLineNumber,

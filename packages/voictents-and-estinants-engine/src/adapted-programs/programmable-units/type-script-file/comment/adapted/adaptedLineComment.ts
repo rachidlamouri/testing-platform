@@ -1,6 +1,6 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
-import { CommentZorn } from '../commentZorn';
+import { CommentId } from '../commentZorn';
 import { AdaptedCommentTypeName } from './adaptedCommentTypeName';
 
 type AdaptedLineCommentConstructorInput = {
@@ -13,7 +13,7 @@ type AdaptedLineCommentConstructorInput = {
  */
 export type AdaptedLineComment = {
   typeName: AdaptedCommentTypeName.Line;
-  id: CommentZorn;
+  id: CommentId;
   text: string;
   lineNumber: number;
   startingLineNumber: number;
@@ -48,7 +48,7 @@ export const { AdaptedLineCommentInstance } = buildNamedConstructorFunction({
 
       return {
         typeName: AdaptedCommentTypeName.Line,
-        id: CommentZorn.build(input),
+        id: CommentId.build(input),
         // eslint-side-effect spaced-comment
         text: rawComment.value.slice(1),
         lineNumber,

@@ -1,6 +1,6 @@
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { AdaptedJsdocLikeBlockComment } from '../adapted/adaptedJsdocLikeBlockComment';
-import { CommentZorn } from '../commentZorn';
+import { CommentId } from '../commentZorn';
 import { CategorizedCommentTypeName } from './categorizedCommentTypeName';
 
 type DescriptiveBlockCommentConstructorInput = {
@@ -22,7 +22,7 @@ type TagWithName = {
  */
 export type DescriptiveBlockComment = {
   typeName: CategorizedCommentTypeName.Descriptive;
-  id: CommentZorn;
+  id: CommentId;
   description: string;
   tagTuple: TagWithName[];
   tagIdSet: Set<string>;

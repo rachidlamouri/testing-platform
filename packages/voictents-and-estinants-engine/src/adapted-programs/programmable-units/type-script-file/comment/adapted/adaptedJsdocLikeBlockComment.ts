@@ -1,7 +1,7 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import * as commentParser from 'comment-parser';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
-import { CommentZorn } from '../commentZorn';
+import { CommentId } from '../commentZorn';
 import { AdaptedCommentTypeName } from './adaptedCommentTypeName';
 
 type AdaptedJsdocLikeBlockCommentConstructorInput = {
@@ -15,7 +15,7 @@ type AdaptedJsdocLikeBlockCommentConstructorInput = {
  */
 export type AdaptedJsdocLikeBlockComment = {
   typeName: AdaptedCommentTypeName.JsdocLikeBlock;
-  id: CommentZorn;
+  id: CommentId;
   startingLineNumber: number;
   endingLineNumber: number;
   parsedBlock: commentParser.Block;
@@ -53,7 +53,7 @@ export const { AdaptedJsdocLikeBlockCommentInstance } =
 
         return {
           typeName: AdaptedCommentTypeName.JsdocLikeBlock,
-          id: CommentZorn.build(input),
+          id: CommentId.build(input),
           startingLineNumber: rawComment.loc.start.line,
           endingLineNumber: rawComment.loc.end.line,
           parsedBlock,

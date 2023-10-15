@@ -1,5 +1,5 @@
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
-import { CommentZorn } from '../commentZorn';
+import { CommentId } from '../commentZorn';
 import { AdaptedLineComment } from '../adapted/adaptedLineComment';
 import { CategorizedCommentTypeName } from './categorizedCommentTypeName';
 
@@ -26,7 +26,7 @@ type CustomDirectiveCommentConstructorInput = {
  */
 export type CustomDirectiveComment = {
   typeName: CategorizedCommentTypeName.CustomDirective;
-  id: CommentZorn;
+  id: CommentId;
   subtypeName: CustomDirectiveTypeName;
   directiveDescription: string;
   text: string;
