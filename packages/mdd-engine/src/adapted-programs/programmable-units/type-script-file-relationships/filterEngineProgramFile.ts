@@ -16,6 +16,11 @@ import {
   ENGINE_PROGRAM_FILE_COLLECTION_ID,
   EngineProgramFileStreamMetatype,
 } from './engineProgramFile';
+import {
+  PROGRAM_MODEL_4_LOCATOR_COLLECTION_ID,
+  ProgramModel4LocatorInstance,
+  ProgramModel4LocatorStreamMetatype,
+} from '../engine-program-model/programModel4Locator';
 
 /**
  * Filters the collection of TypeScript files to those that are an engine program.
@@ -41,6 +46,9 @@ export const filterEngineProgramFile = buildProgrammedTransform({
   .toItemTuple2<EngineProgramFileStreamMetatype>({
     collectionId: ENGINE_PROGRAM_FILE_COLLECTION_ID,
   })
+  .toItemTuple2<ProgramModel4LocatorStreamMetatype>({
+    collectionId: PROGRAM_MODEL_4_LOCATOR_COLLECTION_ID,
+  })
   .onTransform(
     (
       typeScriptFile,
@@ -53,7 +61,10 @@ export const filterEngineProgramFile = buildProgrammedTransform({
         typeScriptFile.filePath.serialized ===
         'packages/mdd-engine/src/adapter/engine/runEngine.ts'
       ) {
-        return [];
+        return {
+          [ENGINE_PROGRAM_FILE_COLLECTION_ID]: [],
+          [PROGRAM_MODEL_4_LOCATOR_COLLECTION_ID]: [],
+        };
       }
 
       const combinationList = importList.flatMap((fileImport) => {
@@ -81,17 +92,29 @@ export const filterEngineProgramFile = buildProgrammedTransform({
       );
 
       if (engineFunctionImportCombination === undefined) {
-        return [];
+        return {
+          [ENGINE_PROGRAM_FILE_COLLECTION_ID]: [],
+          [PROGRAM_MODEL_4_LOCATOR_COLLECTION_ID]: [],
+        };
       }
 
-      return [
-        {
-          id: typeScriptFile.filePath.serialized,
-          file: typeScriptFile,
-          engineFunctionConfiguration:
-            engineFunctionImportCombination.engineFunctionConfiguration,
-        },
-      ];
+      return {
+        [ENGINE_PROGRAM_FILE_COLLECTION_ID]: [
+          {
+            id: typeScriptFile.filePath.serialized,
+            file: typeScriptFile,
+            engineFunctionConfiguration:
+              engineFunctionImportCombination.engineFunctionConfiguration,
+          },
+        ],
+        [PROGRAM_MODEL_4_LOCATOR_COLLECTION_ID]: [
+          new ProgramModel4LocatorInstance({
+            file: typeScriptFile,
+            engineFunctionConfiguration:
+              engineFunctionImportCombination.engineFunctionConfiguration,
+          }),
+        ],
+      };
     },
   )
   .assemble();

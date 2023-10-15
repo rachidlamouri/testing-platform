@@ -23,6 +23,7 @@ type MessageContext = {
   canonicalCommentLintMetadata: CanonicalCommentLintMetadata;
 };
 
+// TODO: add exemption for files that export ComplexId subclasses
 export const typeScriptFileHasCanonicalCommentRule =
   new TypedRule<MessageContext>({
     name: 'typescript-file-has-canonical-comment',
