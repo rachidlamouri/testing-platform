@@ -31,14 +31,14 @@ type PartialEngineProgramLocator2 = ObjectWithPrototype<
   EngineProgramLocator2Prototype
 >;
 
-export const getEngineProgramZorn = getFileId;
+export const getEngineProgramId = getFileId;
 
 export const { PartialEngineProgramLocator2Instance } =
   buildConstructorFunctionWithName('PartialEngineProgramLocator2Instance')<
     BasePartialEngineProgramLocator2,
     EngineProgramLocator2Prototype
   >({
-    id: getEngineProgramZorn,
+    id: getEngineProgramId,
     digestibleId: getIdentifiableId,
     rootGraphLocator: (
       locator: PartialEngineProgramLocator2,

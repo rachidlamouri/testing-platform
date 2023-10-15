@@ -9,7 +9,7 @@ import {
 } from '../../../../package-agnostic-utilities/data-structure/id';
 import { RootGraphLocator } from '../../graph-visualization/directed-graph/rootGraphLocator';
 import { RootDirectedGraphElement2Id } from '../../graph-visualization/directed-graph/types';
-import { EngineProgrammedTransformLocator2 } from '../engineEstinantLocator2';
+import { EngineProgrammedTransformLocator2 } from '../engineProgrammedTransformLocator2';
 import {
   EngineProgrammedTransformInput2Id,
   EngineProgrammedTransformInput2,

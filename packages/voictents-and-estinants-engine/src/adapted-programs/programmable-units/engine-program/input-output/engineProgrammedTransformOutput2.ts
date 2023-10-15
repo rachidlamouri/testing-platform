@@ -5,8 +5,8 @@ import {
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getTextDigest } from '../../../../package-agnostic-utilities/string/getTextDigest';
 import { getId } from '../../../../layer-agnostic-utilities/deprecated-id/getId';
-import { EngineProgrammedTransformLocator2 } from '../engineEstinantLocator2';
-import { EngineStreamMetatypeLocator2 } from '../engineVoqueLocator2';
+import { EngineProgrammedTransformLocator2 } from '../engineProgrammedTransformLocator2';
+import { EngineStreamMetatypeLocator2 } from '../engineStreamMetatypeLocator2';
 
 type BaseProgrammedTransformOutput2 = {
   // TODO: delete "voictentName" in favor of "voqueLocator"

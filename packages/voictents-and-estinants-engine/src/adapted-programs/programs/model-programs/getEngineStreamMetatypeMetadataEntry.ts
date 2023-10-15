@@ -3,11 +3,11 @@ import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifia
 import {
   ENGINE_STREAM_METATYPE_2_COLLECTION_ID,
   EngineStreamMetatype2StreamMetatype,
-} from '../../programmable-units/engine-program/engineVoque2';
+} from '../../programmable-units/engine-program/engineStreamMetatype2';
 import {
   PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,
   ProgramStreamMetatypeRelationship2StreamMetatype,
-} from '../../programmable-units/engine-program/programVoqueRelationship2';
+} from '../../programmable-units/engine-program/programStreamMetatypeRelationship2';
 import { DirectedGraphMetadatumField } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import {
   DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID,

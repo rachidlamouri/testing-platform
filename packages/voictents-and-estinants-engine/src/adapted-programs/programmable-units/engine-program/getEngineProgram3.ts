@@ -3,7 +3,7 @@ import { buildProgrammedTransform } from '../../../adapter/programmed-transform-
 import {
   EngineProgrammedTransform3StreamMetatype,
   ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
-} from './engineEstinant3';
+} from './engineProgrammedTransform3';
 import {
   ENGINE_PROGRAM_3_COLLECTION_ID,
   EngineProgram3Instance,
@@ -15,9 +15,9 @@ import {
 } from './engineProgramLocator3';
 import {
   PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,
-  ProgramVoqueRelationship2Instance,
+  ProgramStreamMetatypeRelationship2Instance,
   ProgramStreamMetatypeRelationship2StreamMetatype,
-} from './programVoqueRelationship2';
+} from './programStreamMetatypeRelationship2';
 import {
   PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID,
   ProgramProgrammedTransformInputRelationshipInstance,
@@ -28,7 +28,7 @@ import {
   PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID,
   ProgramProgrammedTransformOutputRelationshipInstance,
 } from './input-output/programProgrammedTransformOutputRelationship';
-import { EngineStreamMetatypeLocator2 } from './engineVoqueLocator2';
+import { EngineStreamMetatypeLocator2 } from './engineStreamMetatypeLocator2';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 
 /**
@@ -49,12 +49,14 @@ export const getEngineProgram3 = buildProgrammedTransform({
   >({
     collectionId: ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
     getRightKeyTuple: (engineProgram) => {
-      return engineProgram.item.estinantRelationshipList.map((relationship) => {
-        return relationship.programmedTransformLocator.id;
-      });
+      return engineProgram.item.programmedTransformRelationshipList.map(
+        (relationship) => {
+          return relationship.programmedTransformLocator.id;
+        },
+      );
     },
-    getRightKey: (engineEstinant) => {
-      return engineEstinant.item.locator.id;
+    getRightKey: (engineProgrammedTransform) => {
+      return engineProgrammedTransform.item.locator.id;
     },
   })
   .toItem2<EngineProgram3StreamMetatype>({
@@ -73,86 +75,101 @@ export const getEngineProgram3 = buildProgrammedTransform({
   .onTransform((engineProgramLocator, programmedTransformList) => {
     const { rootGraphLocator } = engineProgramLocator;
 
-    const voqueLocatorByZorn = new Map(
+    const streamMetatypeLocatorById = new Map(
       [
-        ...engineProgramLocator.initializedVoqueLocatorList,
-        ...programmedTransformList.flatMap((estinant) => {
-          return estinant.allVoqueLocatorList;
+        ...engineProgramLocator.initializedStreamMetatypeLocatorList,
+        ...programmedTransformList.flatMap((programmedTransform) => {
+          return programmedTransform.allStreamMetatypeLocatorList;
         }),
-      ].map((voqueLocator) => {
-        return [voqueLocator.id, voqueLocator] as const;
+      ].map((streamMetatypeLocator) => {
+        return [streamMetatypeLocator.id, streamMetatypeLocator] as const;
       }),
     );
 
-    const allVoqueLocatorList = [...voqueLocatorByZorn.values()];
+    const allStreamMetatypeLocatorList = [
+      ...streamMetatypeLocatorById.values(),
+    ];
 
-    const initializedVoqueLocatorIdSet = new Set(
-      engineProgramLocator.initializedVoqueLocatorList.map((voqueLocator) => {
-        return voqueLocator.oldId;
-      }),
+    const initializedStreamMetatypeLocatorIdSet = new Set(
+      engineProgramLocator.initializedStreamMetatypeLocatorList.map(
+        (streamMetatypeLocator) => {
+          return streamMetatypeLocator.oldId;
+        },
+      ),
     );
 
-    const consumedVoqueIdSet = new Set(
-      programmedTransformList.flatMap((engineEstinant) => {
-        return engineEstinant.inputList
+    const consumedStreamMetatypeIdSet = new Set(
+      programmedTransformList.flatMap((engineProgrammedTransform) => {
+        return engineProgrammedTransform.inputList
           .map((input) => {
             return input.streamMetatypeLocator;
           })
           .filter(
-            (voqueLocator): voqueLocator is EngineStreamMetatypeLocator2 => {
-              return voqueLocator !== undefined;
+            (
+              streamMetatypeLocator,
+            ): streamMetatypeLocator is EngineStreamMetatypeLocator2 => {
+              return streamMetatypeLocator !== undefined;
             },
           )
-          .map((voqueLocator) => voqueLocator.oldId);
+          .map((streamMetatypeLocator) => streamMetatypeLocator.oldId);
       }),
     );
 
-    const fedVoqueIdSet = new Set(
-      programmedTransformList.flatMap((engineEstinant) => {
-        return engineEstinant.outputList
+    const fedStreamMetatypeIdSet = new Set(
+      programmedTransformList.flatMap((engineProgrammedTransform) => {
+        return engineProgrammedTransform.outputList
           .map((output) => {
             return output.streamMetatypeLocator;
           })
           .filter(
-            (voqueLocator): voqueLocator is EngineStreamMetatypeLocator2 => {
-              return voqueLocator !== undefined;
+            (
+              streamMetatypeLocator,
+            ): streamMetatypeLocator is EngineStreamMetatypeLocator2 => {
+              return streamMetatypeLocator !== undefined;
             },
           )
-          .map((voqueLocator) => voqueLocator.oldId);
+          .map((streamMetatypeLocator) => streamMetatypeLocator.oldId);
       }),
     );
 
-    const categorizedVoqueList = allVoqueLocatorList.map(
+    const categorizedStreamMetatypeList = allStreamMetatypeLocatorList.map(
       (streamMetatypeLocator) => {
-        const isInitialized = initializedVoqueLocatorIdSet.has(
+        const isInitialized = initializedStreamMetatypeLocatorIdSet.has(
           streamMetatypeLocator.oldId,
         );
-        const isConsumed = consumedVoqueIdSet.has(streamMetatypeLocator.oldId);
-        const isFed = fedVoqueIdSet.has(streamMetatypeLocator.oldId);
+        const isConsumed = consumedStreamMetatypeIdSet.has(
+          streamMetatypeLocator.oldId,
+        );
+        const isFed = fedStreamMetatypeIdSet.has(streamMetatypeLocator.oldId);
 
-        const isEndingVoque = !isConsumed;
+        const isEndingStreamMetatype = !isConsumed;
 
         return {
           streamMetatypeLocator,
           isInitialized,
           isFed,
-          isEndingVoque,
+          isEndingStreamMetatype,
         };
       },
     );
 
-    const voqueRelationshipList = categorizedVoqueList.map(
-      ({ streamMetatypeLocator, isInitialized, isFed, isEndingVoque }) => {
+    const streamMetatypeRelationshipList = categorizedStreamMetatypeList.map(
+      ({
+        streamMetatypeLocator,
+        isInitialized,
+        isFed,
+        isEndingStreamMetatype,
+      }) => {
         let parentId: string;
         if (isInitialized && !isFed) {
           parentId = engineProgramLocator.startingSubgraphId;
-        } else if (isEndingVoque) {
+        } else if (isEndingStreamMetatype) {
           parentId = engineProgramLocator.endingSubgraphId;
         } else {
           parentId = rootGraphLocator.oldId;
         }
 
-        return new ProgramVoqueRelationship2Instance({
+        return new ProgramStreamMetatypeRelationship2Instance({
           programName: engineProgramLocator.programName,
           streamMetatypeLocator,
           rootGraphLocator,
@@ -161,11 +178,14 @@ export const getEngineProgram3 = buildProgrammedTransform({
       },
     );
 
-    const endingStreamMetatypeLocatorList = categorizedVoqueList
-      .filter((categorizedVoque) => {
-        return categorizedVoque.isEndingVoque;
+    const endingStreamMetatypeLocatorList = categorizedStreamMetatypeList
+      .filter((categorizedStreamMetatype) => {
+        return categorizedStreamMetatype.isEndingStreamMetatype;
       })
-      .map((categorizedVoque) => categorizedVoque.streamMetatypeLocator);
+      .map(
+        (categorizedStreamMetatype) =>
+          categorizedStreamMetatype.streamMetatypeLocator,
+      );
 
     const engineProgram = new EngineProgram3Instance({
       programName: engineProgramLocator.programName,
@@ -173,38 +193,42 @@ export const getEngineProgram3 = buildProgrammedTransform({
       filePath: engineProgramLocator.filePath,
       programmedTransformList,
       initializedStreamMetatypeLocatorList:
-        engineProgramLocator.initializedVoqueLocatorList,
+        engineProgramLocator.initializedStreamMetatypeLocatorList,
       endingStreamMetatypeLocatorList,
       locator: engineProgramLocator,
     });
 
     const inputRelationshipList = engineProgram.programmedTransformList.flatMap(
-      (engineEstinant) => {
-        return engineEstinant.inputList.map((programmedTransformInput) => {
-          return new ProgramProgrammedTransformInputRelationshipInstance({
-            programmedTransformInput,
-            rootGraphLocator,
-            programmedTransformLocator: engineEstinant.locator,
-          });
-        });
+      (engineProgrammedTransform) => {
+        return engineProgrammedTransform.inputList.map(
+          (programmedTransformInput) => {
+            return new ProgramProgrammedTransformInputRelationshipInstance({
+              programmedTransformInput,
+              rootGraphLocator,
+              programmedTransformLocator: engineProgrammedTransform.locator,
+            });
+          },
+        );
       },
     );
 
     const outputRelationshipList =
-      engineProgram.programmedTransformList.flatMap((engineEstinant) => {
-        return engineEstinant.outputList.map((output) => {
-          return new ProgramProgrammedTransformOutputRelationshipInstance({
-            outputId: output.id,
-            rootGraphLocator,
-            programmedTransformLocator: engineEstinant.locator,
+      engineProgram.programmedTransformList.flatMap(
+        (engineProgrammedTransform) => {
+          return engineProgrammedTransform.outputList.map((output) => {
+            return new ProgramProgrammedTransformOutputRelationshipInstance({
+              outputId: output.id,
+              rootGraphLocator,
+              programmedTransformLocator: engineProgrammedTransform.locator,
+            });
           });
-        });
-      });
+        },
+      );
 
     return {
       [ENGINE_PROGRAM_3_COLLECTION_ID]: engineProgram,
       [PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID]:
-        voqueRelationshipList,
+        streamMetatypeRelationshipList,
       [PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID]:
         inputRelationshipList,
       [PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID]:

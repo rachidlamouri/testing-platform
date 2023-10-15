@@ -6,13 +6,13 @@ import {
 import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
 import { getExportLocatorId } from '../type-script-file/getExportLocatorId';
 
-type BaseEngineVoqueLocator2 = {
+type BaseEngineStreamMetatypeLocator2 = {
   identifierName: string;
   filePath: string;
-  isCoreVoque: boolean;
+  isCoreStreamMetatype: boolean;
 };
 
-type EngineVoqueLocator2Prototype = {
+type EngineStreamMetatypeLocator2Prototype = {
   get id(): string;
   get oldId(): string;
   get displayName(): string;
@@ -27,42 +27,46 @@ type EngineVoqueLocator2Prototype = {
  * @canonicalDeclaration
  */
 export type EngineStreamMetatypeLocator2 = ObjectWithPrototype<
-  BaseEngineVoqueLocator2,
-  EngineVoqueLocator2Prototype
+  BaseEngineStreamMetatypeLocator2,
+  EngineStreamMetatypeLocator2Prototype
 >;
 
-export const getVoqueLocatorZorn = getExportLocatorId;
+export const oldGetStreamMetatypeLocatorId = getExportLocatorId;
 
-export const getVoqueLocatorId = (
+export const getStreamMetatypeLocatorId = (
   locator: EngineStreamMetatypeLocator2,
 ): string => {
   return getTextDigest(locator.displayName);
 };
 
-export const getVoqueDisplayName = (
+export const getStreamMetatypeDisplayName = (
   locator: EngineStreamMetatypeLocator2,
 ): string => {
-  const hubblepupName = locator.identifierName
+  const itemName = locator.identifierName
     .replace(/^Generic/, '')
     .replace(/Voque$/, '');
 
-  return hubblepupName;
+  return itemName;
 };
 
-export const { EngineVoqueLocator2Instance } = buildConstructorFunctionWithName(
-  'EngineVoqueLocator2Instance',
-)<BaseEngineVoqueLocator2, EngineVoqueLocator2Prototype>({
-  id: getVoqueLocatorZorn,
-  oldId: getVoqueLocatorId,
-  displayName: getVoqueDisplayName,
-});
+export const { EngineStreamMetatypeLocator2Instance } =
+  buildConstructorFunctionWithName('EngineVoqueLocator2Instance')<
+    BaseEngineStreamMetatypeLocator2,
+    EngineStreamMetatypeLocator2Prototype
+  >({
+    id: getStreamMetatypeLocatorId,
+    oldId: getStreamMetatypeLocatorId,
+    displayName: getStreamMetatypeDisplayName,
+  });
 
-export const ENGINE_VOQUE_LOCATOR_2_GEPP = 'engine-voque-locator-2';
+export const ENGINE_STREAM_METATYPE_LOCATOR_2_COLLECTION_ID =
+  'engine-voque-locator-2';
 
-type EngineVoqueLocatorGepp = typeof ENGINE_VOQUE_LOCATOR_2_GEPP;
+type EngineStreamMetatypeLocatorCollectionId =
+  typeof ENGINE_STREAM_METATYPE_LOCATOR_2_COLLECTION_ID;
 
-export type EngineVoqueLocator2Voque =
+export type EngineStreamMetatypeLocator2StreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    EngineVoqueLocatorGepp,
+    EngineStreamMetatypeLocatorCollectionId,
     EngineStreamMetatypeLocator2
   >;

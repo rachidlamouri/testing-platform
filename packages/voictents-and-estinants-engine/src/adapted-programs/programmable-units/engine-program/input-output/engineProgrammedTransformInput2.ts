@@ -11,8 +11,8 @@ import {
 import {
   EngineProgrammedTransformLocator2,
   EngineProgrammedTransformLocator2IdClassSet,
-} from '../engineEstinantLocator2';
-import { EngineStreamMetatypeLocator2 } from '../engineVoqueLocator2';
+} from '../engineProgrammedTransformLocator2';
+import { EngineStreamMetatypeLocator2 } from '../engineStreamMetatypeLocator2';
 
 const ENGINE_PROGRAMMED_TRANSFORM_INPUT_2_ID_TEMPLATE = [
   'inputIndex',

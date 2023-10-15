@@ -3,7 +3,7 @@ import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifia
 import {
   ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
   EngineProgrammedTransform3StreamMetatype,
-} from '../../programmable-units/engine-program/engineEstinant3';
+} from '../../programmable-units/engine-program/engineProgrammedTransform3';
 import {
   PROGRAMMED_TRANSFORM_OUTPUT_2_COLLECTION_ID,
   EngineProgrammedTransformOutput2StreamMetatype,

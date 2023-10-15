@@ -13,21 +13,22 @@ import {
 } from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
 import {
   ENGINE_STREAM_METATYPE_2_COLLECTION_ID,
-  EngineVoque2Instance,
+  EngineStreamMetatype2Instance,
   EngineStreamMetatype2StreamMetatype,
-} from './engineVoque2';
+} from './engineStreamMetatype2';
 import {
-  ENGINE_VOQUE_LOCATOR_2_GEPP,
-  EngineVoqueLocator2Voque,
-} from './engineVoqueLocator2';
+  ENGINE_STREAM_METATYPE_LOCATOR_2_COLLECTION_ID,
+  EngineStreamMetatypeLocator2StreamMetatype,
+} from './engineStreamMetatypeLocator2';
 
-const ESTINANT_NAME = 'getEngineVoque2' as const;
-type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
+const PROGRAMMED_TRANSFORM_NAME = 'getEngineVoque2' as const;
+type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
+type ReportingLocator =
+  ReportingProgrammedTransformLocator<ProgrammedTransformName>;
 const reporterLocator: ReportingLocator = {
   typeName:
     ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
   filePath: __filename,
 };
 
@@ -39,10 +40,10 @@ const reporterLocator: ReportingLocator = {
  * @canonicalDeclaration
  */
 export const getEngineStreamMetatype2 = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
-  .fromItem2<EngineVoqueLocator2Voque>({
-    collectionId: ENGINE_VOQUE_LOCATOR_2_GEPP,
+  .fromItem2<EngineStreamMetatypeLocator2StreamMetatype>({
+    collectionId: ENGINE_STREAM_METATYPE_LOCATOR_2_COLLECTION_ID,
   })
   .andFromItemTuple2<
     FileCommentedProgramBodyDeclarationGroupStreamMetatype,
@@ -58,23 +59,23 @@ export const getEngineStreamMetatype2 = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .onTransform((voqueLocator, [{ declarationByIdentifier }]) => {
+  .onTransform((streamMetatypeLocator, [{ declarationByIdentifier }]) => {
     // TODO: move these naming conventions elsewhere
-    const hubblepupIdentifierName = voqueLocator.identifierName
+    const itemIdentifierName = streamMetatypeLocator.identifierName
       .replace(/Voque$/, '')
       .replace(/^Generic/, '');
 
-    const hubblepupPelieIdentifierName = `${hubblepupIdentifierName}Pelie`;
+    const itemIdentifierStreamableName = `${itemIdentifierName}Pelie`;
 
-    const hubblepupDeclaration =
-      declarationByIdentifier.get(hubblepupIdentifierName) ??
-      declarationByIdentifier.get(hubblepupPelieIdentifierName);
+    const itemDeclaration =
+      declarationByIdentifier.get(itemIdentifierName) ??
+      declarationByIdentifier.get(itemIdentifierStreamableName);
 
-    const commentText = hubblepupDeclaration?.commentText ?? null;
+    const commentText = itemDeclaration?.commentText ?? null;
 
     // TODO: handle core voques
     const parallelErrorList: GenericProgramErrorEgg[] =
-      voqueLocator.isCoreVoque || commentText !== null
+      streamMetatypeLocator.isCoreStreamMetatype || commentText !== null
         ? []
         : [
             {
@@ -85,22 +86,23 @@ export const getEngineStreamMetatype2 = buildProgrammedTransform({
               reporterLocator,
               sourceLocator: {
                 typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-                filePath: voqueLocator.filePath,
+                filePath: streamMetatypeLocator.filePath,
               },
               context: {
-                hubblepupIdentifierName,
-                voqueLocator,
+                itemIdentifierName,
+                streamMetatypeLocator,
               },
             },
           ];
 
     return {
-      [ENGINE_STREAM_METATYPE_2_COLLECTION_ID]: new EngineVoque2Instance({
-        filePath: voqueLocator.filePath,
-        identifierName: voqueLocator.identifierName,
-        commentText: commentText ?? '',
-        locator: voqueLocator,
-      }),
+      [ENGINE_STREAM_METATYPE_2_COLLECTION_ID]:
+        new EngineStreamMetatype2Instance({
+          filePath: streamMetatypeLocator.filePath,
+          identifierName: streamMetatypeLocator.identifierName,
+          commentText: commentText ?? '',
+          locator: streamMetatypeLocator,
+        }),
       [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
     };
   })

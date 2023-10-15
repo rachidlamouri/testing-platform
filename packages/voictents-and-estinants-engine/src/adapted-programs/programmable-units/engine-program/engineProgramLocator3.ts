@@ -7,9 +7,9 @@ import { getTextDigest } from '../../../package-agnostic-utilities/string/getTex
 import { getIdentifiableId } from '../../../layer-agnostic-utilities/deprecated-id/getIdentifiableId';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
 import { TypeScriptFile } from '../type-script-file/typeScriptFile';
-import { EngineStreamMetatypeLocator2 } from './engineVoqueLocator2';
-import { getEngineProgramZorn } from './partialEngineProgramLocator2';
-import { ProgramEstinantRelationship } from './programEstinantRelationship';
+import { EngineStreamMetatypeLocator2 } from './engineStreamMetatypeLocator2';
+import { getEngineProgramId } from './partialEngineProgramLocator2';
+import { ProgramProgrammedTransformRelationship } from './programProgrammedTransformRelationship';
 
 type BaseEngineProgramLocator3 = {
   isCoreProgram: boolean;
@@ -18,8 +18,8 @@ type BaseEngineProgramLocator3 = {
   filePath: string;
   // TODO: show if a collection is manually instantiated, part of the uninferred
   // collection list, and if it is initialized
-  initializedVoqueLocatorList: EngineStreamMetatypeLocator2[];
-  estinantRelationshipList: ProgramEstinantRelationship[];
+  initializedStreamMetatypeLocatorList: EngineStreamMetatypeLocator2[];
+  programmedTransformRelationshipList: ProgramProgrammedTransformRelationship[];
   rootGraphLocator: RootGraphLocator;
   engineProgramFile: TypeScriptFile;
 };
@@ -49,7 +49,7 @@ export const { EngineProgramLocator3Instance } =
     BaseEngineProgramLocator3,
     EngineProgramLocator3Prototype
   >({
-    id: getEngineProgramZorn,
+    id: getEngineProgramId,
     digestibleId: getIdentifiableId,
     startingSubgraphId: (locator) => {
       return getTextDigest(`start-subgraph | ${locator.programName}`);
@@ -68,10 +68,11 @@ export const { EngineProgramLocator3Instance } =
 export const ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID =
   'engine-program-locator-3';
 
-type EngineProgramLocator3Gepp = typeof ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID;
+type EngineProgramLocator3CollectionId =
+  typeof ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID;
 
 export type EngineProgramLocator3StreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    EngineProgramLocator3Gepp,
+    EngineProgramLocator3CollectionId,
     EngineProgramLocator3
   >;

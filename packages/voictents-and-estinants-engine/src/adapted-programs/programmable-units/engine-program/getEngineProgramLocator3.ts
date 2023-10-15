@@ -29,11 +29,11 @@ import {
   EngineFunctionConfigurationTypeName,
 } from './engineFunctionConfiguration';
 import {
-  EngineEstinantBuildAddMetadataForSerializationLocatorInstance,
+  EngineProgrammedTransformBuildAddMetadataForSerializationLocatorInstance,
   EngineProgrammedTransformLocator2,
   EngineProgrammedTransformLocator2TypeName,
-  EngineEstinantTopLevelDeclarationLocatorInstance,
-} from './engineEstinantLocator2';
+  EngineProgrammedTransformTopLevelDeclarationLocatorInstance,
+} from './engineProgrammedTransformLocator2';
 import { isIdentifier } from '../../../package-agnostic-utilities/type-script-ast/isIdentifier';
 import {
   isNewExpression,
@@ -60,13 +60,13 @@ import {
 } from './engineProgramLocator3';
 import {
   PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID,
-  ProgramEstinantRelationshipInstance,
+  ProgramProgrammedTransformRelationshipInstance,
   ProgramProgrammedTransformRelationshipStreamMetatype,
-} from './programEstinantRelationship';
+} from './programProgrammedTransformRelationship';
 import {
   EngineStreamMetatypeLocator2,
-  EngineVoqueLocator2Instance,
-} from './engineVoqueLocator2';
+  EngineStreamMetatypeLocator2Instance,
+} from './engineStreamMetatypeLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import { buildCollectionByCollectionId } from '../../../adapter/engine/runEngine';
@@ -167,7 +167,7 @@ const getCore2EngineProgramLocator = ({
   const voictentListGeppProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
-      engineFunctionConfiguration.voictentListKeyIdentifierName,
+      engineFunctionConfiguration.collectionListKeyIdentifierName,
   );
 
   const initialVoictentListValueNode = voictentListGeppProperty?.value;
@@ -214,7 +214,7 @@ const getCore2EngineProgramLocator = ({
         (node): node is IdentifiableProperty => {
           return isSpecificIdentifiableProperty(
             node,
-            engineFunctionConfiguration.initialHubblepupPelueTupleKeyIdentifierName,
+            engineFunctionConfiguration.initialItemEggTupleKeyIdentifierName,
           );
         },
       );
@@ -235,10 +235,10 @@ const getCore2EngineProgramLocator = ({
 
     if (hasInitialInput) {
       initialVoqueLocatorList.push(
-        new EngineVoqueLocator2Instance({
+        new EngineStreamMetatypeLocator2Instance({
           identifierName: voqueName,
           filePath: engineProgramFile.filePath.serialized,
-          isCoreVoque: true,
+          isCoreStreamMetatype: true,
         }),
       );
     }
@@ -247,7 +247,7 @@ const getCore2EngineProgramLocator = ({
   const estinantListProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
-      engineFunctionConfiguration.estinantListKeyIdentifierName,
+      engineFunctionConfiguration.programmedTransformListKeyIdentifierName,
   );
 
   const estinantListValueNode = estinantListProperty?.value;
@@ -266,12 +266,12 @@ const getCore2EngineProgramLocator = ({
         engineProgramFile.filePath.serialized;
 
       engineEstinantLocatorList.push(
-        new EngineEstinantTopLevelDeclarationLocatorInstance({
+        new EngineProgrammedTransformTopLevelDeclarationLocatorInstance({
           typeName:
             EngineProgrammedTransformLocator2TypeName.TopLevelDeclaration,
           identifierName,
           filePath,
-          isCoreEstinant: true,
+          isCoreProgrammedTransform: true,
         }),
       );
     } else if (
@@ -281,14 +281,16 @@ const getCore2EngineProgramLocator = ({
       )
     ) {
       engineEstinantLocatorList.push(
-        new EngineEstinantBuildAddMetadataForSerializationLocatorInstance({
-          typeName:
-            EngineProgrammedTransformLocator2TypeName.BuildAddMetadataForSerialization,
-          callExpression: element,
-          index,
-          isCoreEstinant: true,
-          filePath: engineProgramFile.filePath.serialized,
-        }),
+        new EngineProgrammedTransformBuildAddMetadataForSerializationLocatorInstance(
+          {
+            typeName:
+              EngineProgrammedTransformLocator2TypeName.BuildAddMetadataForSerialization,
+            callExpression: element,
+            index,
+            isCoreProgrammedTransform: true,
+            filePath: engineProgramFile.filePath.serialized,
+          },
+        ),
       );
     } else {
       parallelErrorList.push({
@@ -347,9 +349,9 @@ const getCore2EngineProgramLocator = ({
     filePath: engineProgramFile.filePath.serialized,
   });
 
-  const estinantRelationshipList = engineEstinantLocatorList.map(
+  const programmedTransformRelationshipList = engineEstinantLocatorList.map(
     (programmedTransformLocator) => {
-      return new ProgramEstinantRelationshipInstance({
+      return new ProgramProgrammedTransformRelationshipInstance({
         programName,
         programmedTransformLocator,
         rootGraphLocator: partialProgramLocator.rootGraphLocator,
@@ -362,8 +364,8 @@ const getCore2EngineProgramLocator = ({
     programName,
     description: engineCallCommentText ?? '',
     filePath: engineProgramFile.filePath.serialized,
-    initializedVoqueLocatorList: initialVoqueLocatorList,
-    estinantRelationshipList,
+    initializedStreamMetatypeLocatorList: initialVoqueLocatorList,
+    programmedTransformRelationshipList,
     rootGraphLocator: partialProgramLocator.rootGraphLocator,
     engineProgramFile,
   });
@@ -400,7 +402,7 @@ const getAdaptedEngineProgramLocator = ({
   const explicitVoictentTupleProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
-      engineFunctionConfiguration.explicitVoictentTupleKeyIdentifierName,
+      engineFunctionConfiguration.explicitCollectionTupleKeyIdentifierName,
   );
 
   const explicitVoictentTupleValueNode = explicitVoictentTupleProperty?.value;
@@ -487,10 +489,10 @@ const getAdaptedEngineProgramLocator = ({
         engineProgramFile.filePath.serialized;
 
       engineVoqueLocatorList.push(
-        new EngineVoqueLocator2Instance({
+        new EngineStreamMetatypeLocator2Instance({
           identifierName: voqueIdentifierName,
           filePath: voqueFilePath,
-          isCoreVoque: false,
+          isCoreStreamMetatype: false,
         }),
       );
     });
@@ -498,7 +500,7 @@ const getAdaptedEngineProgramLocator = ({
 
   // TODO: rename these variables or move this code to its own function (I prefer the latter), because these are way too vague
   const keyName =
-    engineFunctionConfiguration.uninferableVoictentByGeppKeyIdentifierName;
+    engineFunctionConfiguration.uninferableCollectionByCollectionIdKeyIdentifierName;
   const functionName = buildCollectionByCollectionId.name;
 
   const uninferableVoictentByGeppProperty =
@@ -547,7 +549,7 @@ const getAdaptedEngineProgramLocator = ({
   const estinantListProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
-      engineFunctionConfiguration.estinantListKeyIdentifierName,
+      engineFunctionConfiguration.programmedTransformListKeyIdentifierName,
   );
 
   const estinantListValueNode = estinantListProperty?.value;
@@ -589,23 +591,23 @@ const getAdaptedEngineProgramLocator = ({
 
     if (fileImport === undefined) {
       engineEstinantLocatorList.push(
-        new EngineEstinantTopLevelDeclarationLocatorInstance({
+        new EngineProgrammedTransformTopLevelDeclarationLocatorInstance({
           typeName:
             EngineProgrammedTransformLocator2TypeName.TopLevelDeclaration,
           identifierName,
           filePath: engineProgramFile.filePath.serialized,
-          isCoreEstinant: false,
+          isCoreProgrammedTransform: false,
         }),
       );
       return;
     }
 
     engineEstinantLocatorList.push(
-      new EngineEstinantTopLevelDeclarationLocatorInstance({
+      new EngineProgrammedTransformTopLevelDeclarationLocatorInstance({
         typeName: EngineProgrammedTransformLocator2TypeName.TopLevelDeclaration,
         identifierName,
         filePath: fileImport.sourcePath,
-        isCoreEstinant: false,
+        isCoreProgrammedTransform: false,
       }),
     );
   });
@@ -658,9 +660,9 @@ const getAdaptedEngineProgramLocator = ({
     filePath: engineProgramFile.filePath.serialized,
   });
 
-  const estinantRelationshipList = engineEstinantLocatorList.map(
+  const programmedTransformRelationshipList = engineEstinantLocatorList.map(
     (programmedTransformLocator) => {
-      return new ProgramEstinantRelationshipInstance({
+      return new ProgramProgrammedTransformRelationshipInstance({
         programName,
         programmedTransformLocator,
         rootGraphLocator: partialProgramLocator.rootGraphLocator,
@@ -673,8 +675,8 @@ const getAdaptedEngineProgramLocator = ({
     programName,
     description: engineCallCommentText ?? '',
     filePath: engineProgramFile.filePath.serialized,
-    initializedVoqueLocatorList: engineVoqueLocatorList,
-    estinantRelationshipList,
+    initializedStreamMetatypeLocatorList: engineVoqueLocatorList,
+    programmedTransformRelationshipList,
     rootGraphLocator: partialProgramLocator.rootGraphLocator,
     engineProgramFile,
   });
@@ -796,7 +798,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
             [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [engineProgramLocator],
             [PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID]:
-              engineProgramLocator.estinantRelationshipList,
+              engineProgramLocator.programmedTransformRelationshipList,
           };
         }
         case EngineFunctionConfigurationTypeName.Adapted: {
@@ -813,7 +815,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
             [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [engineProgramLocator],
             [PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID]:
-              engineProgramLocator.estinantRelationshipList,
+              engineProgramLocator.programmedTransformRelationshipList,
           };
         }
       }

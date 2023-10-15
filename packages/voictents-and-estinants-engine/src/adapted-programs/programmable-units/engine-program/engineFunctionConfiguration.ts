@@ -20,19 +20,19 @@ export type CoreEngineFunction2Configuration = {
   typeName: EngineFunctionConfigurationTypeName.Core2;
   filePath: 'packages/voictents-and-estinants-engine/src/core/engine/runEngine.ts';
   exportedIdentifier: 'runEngine2';
-  estinantListKeyIdentifierName: 'programmedTransformTuple';
-  voictentListKeyIdentifierName: 'inputCollectionList';
-  voictentGeppKeyIdentifierName: 'collectionId';
-  initialHubblepupPelueTupleKeyIdentifierName: 'initialItemEggTuple';
+  programmedTransformListKeyIdentifierName: 'programmedTransformTuple';
+  collectionListKeyIdentifierName: 'inputCollectionList';
+  collectionCollectionIdKeyIdentifierName: 'collectionId';
+  initialItemEggTupleKeyIdentifierName: 'initialItemEggTuple';
 };
 
 export type AdaptedEngineFunctionConfiguration = {
   typeName: EngineFunctionConfigurationTypeName.Adapted;
   filePath: 'packages/voictents-and-estinants-engine/src/adapter/engine/runEngine.ts';
   exportedIdentifier: 'runEngine';
-  estinantListKeyIdentifierName: 'programmedTransformTuple';
-  explicitVoictentTupleKeyIdentifierName: 'explicitCollectionTuple';
-  uninferableVoictentByGeppKeyIdentifierName: 'uninferableCollectionByCollectionId';
+  programmedTransformListKeyIdentifierName: 'programmedTransformTuple';
+  explicitCollectionTupleKeyIdentifierName: 'explicitCollectionTuple';
+  uninferableCollectionByCollectionIdKeyIdentifierName: 'uninferableCollectionByCollectionId';
 };
 
 /**
@@ -47,12 +47,12 @@ export type EngineFunctionConfiguration =
 export const ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID =
   'engine-function-configuration';
 
-type EngineFunctionConfigurationGepp =
+type EngineFunctionConfigurationCollectionId =
   typeof ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID;
 
 export type EngineFunctionConfigurationStreamMetatype =
   StandardInMemoryStreamMetatype<
-    EngineFunctionConfigurationGepp,
+    EngineFunctionConfigurationCollectionId,
     EngineFunctionConfiguration
   >;
 
@@ -70,10 +70,10 @@ export const CORE_ENGINE_FUNCTION_2_CONFIGURATION: CoreEngineFunction2Configurat
     filePath:
       'packages/voictents-and-estinants-engine/src/core/engine/runEngine.ts',
     exportedIdentifier: 'runEngine2',
-    estinantListKeyIdentifierName: 'programmedTransformTuple',
-    voictentListKeyIdentifierName: 'inputCollectionList',
-    voictentGeppKeyIdentifierName: 'collectionId',
-    initialHubblepupPelueTupleKeyIdentifierName: 'initialItemEggTuple',
+    programmedTransformListKeyIdentifierName: 'programmedTransformTuple',
+    collectionListKeyIdentifierName: 'inputCollectionList',
+    collectionCollectionIdKeyIdentifierName: 'collectionId',
+    initialItemEggTupleKeyIdentifierName: 'initialItemEggTuple',
   };
 
 export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfiguration =
@@ -82,8 +82,8 @@ export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfigu
     filePath:
       'packages/voictents-and-estinants-engine/src/adapter/engine/runEngine.ts',
     exportedIdentifier: 'runEngine',
-    estinantListKeyIdentifierName: 'programmedTransformTuple',
-    explicitVoictentTupleKeyIdentifierName: 'explicitCollectionTuple',
-    uninferableVoictentByGeppKeyIdentifierName:
+    programmedTransformListKeyIdentifierName: 'programmedTransformTuple',
+    explicitCollectionTupleKeyIdentifierName: 'explicitCollectionTuple',
+    uninferableCollectionByCollectionIdKeyIdentifierName:
       'uninferableCollectionByCollectionId',
   };

@@ -6,11 +6,11 @@ import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifia
 import {
   ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
   EngineProgrammedTransform3StreamMetatype,
-} from '../../programmable-units/engine-program/engineEstinant3';
+} from '../../programmable-units/engine-program/engineProgrammedTransform3';
 import {
   ProgramProgrammedTransformRelationshipStreamMetatype,
   PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID,
-} from '../../programmable-units/engine-program/programEstinantRelationship';
+} from '../../programmable-units/engine-program/programProgrammedTransformRelationship';
 import { EdgeStyle } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge';
 import { DirectedGraphEdge2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import {

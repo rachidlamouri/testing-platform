@@ -3,7 +3,7 @@ import { buildProgrammedTransform } from '../../../adapter/programmed-transform-
 import {
   ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
   EngineProgrammedTransform3StreamMetatype,
-} from '../../programmable-units/engine-program/engineEstinant3';
+} from '../../programmable-units/engine-program/engineProgrammedTransform3';
 import {
   ENGINE_PROGRAM_3_COLLECTION_ID,
   EngineProgram3StreamMetatype,
@@ -11,7 +11,7 @@ import {
 import {
   ENGINE_STREAM_METATYPE_2_COLLECTION_ID,
   EngineStreamMetatype2StreamMetatype,
-} from '../../programmable-units/engine-program/engineVoque2';
+} from '../../programmable-units/engine-program/engineStreamMetatype2';
 import {
   GenericProgramErrorStreamMetatype,
   PROGRAM_ERROR_COLLECTION_ID,
@@ -19,7 +19,7 @@ import {
   ProgramErrorEgg,
   ReportingProgrammedTransformLocator,
 } from '../../programmable-units/error/programError';
-import { EngineProgrammedTransformLocator2TypeName } from '../../programmable-units/engine-program/engineEstinantLocator2';
+import { EngineProgrammedTransformLocator2TypeName } from '../../programmable-units/engine-program/engineProgrammedTransformLocator2';
 
 const PROGRAMMED_TRANSFORM_NAME = 'assertNoCopyPasta' as const;
 type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;

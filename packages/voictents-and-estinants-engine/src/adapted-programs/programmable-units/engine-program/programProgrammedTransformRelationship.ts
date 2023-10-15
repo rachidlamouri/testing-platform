@@ -5,15 +5,15 @@ import {
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
-import { EngineProgrammedTransformLocator2 } from './engineEstinantLocator2';
+import { EngineProgrammedTransformLocator2 } from './engineProgrammedTransformLocator2';
 
-type BaseProgramEstinantRelationship = {
+type BaseProgramProgrammedTransformRelationship = {
   programName: string;
   programmedTransformLocator: EngineProgrammedTransformLocator2;
   rootGraphLocator: RootGraphLocator;
 };
 
-type ProgramEstinantRelationshipPrototype = {
+type ProgramProgrammedTransformRelationshipPrototype = {
   get id(): string;
 };
 
@@ -23,15 +23,15 @@ type ProgramEstinantRelationshipPrototype = {
  *
  * @readableName ProgramProgrammedTransformRelationship
  */
-export type ProgramEstinantRelationship = ObjectWithPrototype<
-  BaseProgramEstinantRelationship,
-  ProgramEstinantRelationshipPrototype
+export type ProgramProgrammedTransformRelationship = ObjectWithPrototype<
+  BaseProgramProgrammedTransformRelationship,
+  ProgramProgrammedTransformRelationshipPrototype
 >;
 
-export const { ProgramEstinantRelationshipInstance } =
+export const { ProgramProgrammedTransformRelationshipInstance } =
   buildConstructorFunctionWithName('ProgramEstinantRelationshipInstance')<
-    BaseProgramEstinantRelationship,
-    ProgramEstinantRelationshipPrototype
+    BaseProgramProgrammedTransformRelationship,
+    ProgramProgrammedTransformRelationshipPrototype
   >({
     id: (relationship) => {
       return getId([
@@ -44,11 +44,11 @@ export const { ProgramEstinantRelationshipInstance } =
 export const PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID =
   'program-estinant-relationship';
 
-type ProgramEstinantRelationshipGepp =
+type ProgramProgrammedTransformRelationshipCollectionId =
   typeof PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID;
 
 export type ProgramProgrammedTransformRelationshipStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    ProgramEstinantRelationshipGepp,
-    ProgramEstinantRelationship
+    ProgramProgrammedTransformRelationshipCollectionId,
+    ProgramProgrammedTransformRelationship
   >;

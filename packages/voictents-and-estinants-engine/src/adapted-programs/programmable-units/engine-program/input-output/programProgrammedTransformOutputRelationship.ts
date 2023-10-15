@@ -5,7 +5,7 @@ import {
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getId } from '../../../../layer-agnostic-utilities/deprecated-id/getId';
 import { RootGraphLocator } from '../../graph-visualization/directed-graph/rootGraphLocator';
-import { EngineProgrammedTransformLocator2 } from '../engineEstinantLocator2';
+import { EngineProgrammedTransformLocator2 } from '../engineProgrammedTransformLocator2';
 
 type BaseProgramProgrammedTransformOutputRelationship = {
   outputId: string;

@@ -5,16 +5,16 @@ import {
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
-import { EngineStreamMetatypeLocator2 } from './engineVoqueLocator2';
+import { EngineStreamMetatypeLocator2 } from './engineStreamMetatypeLocator2';
 
-type BaseProgramVoqueRelationship2 = {
+type BaseProgramStreamMetatypeRelationship2 = {
   programName: string;
   streamMetatypeLocator: EngineStreamMetatypeLocator2;
   rootGraphLocator: RootGraphLocator;
   parentId: string;
 };
 
-type ProgramVoqueRelationship2Prototype = {
+type ProgramStreamMetatypeRelationship2Prototype = {
   get id(): string;
 };
 
@@ -24,15 +24,15 @@ type ProgramVoqueRelationship2Prototype = {
  *
  * @readableName ProgramStreamMetatypeRelationship
  */
-type ProgramVoqueRelationship2 = ObjectWithPrototype<
-  BaseProgramVoqueRelationship2,
-  ProgramVoqueRelationship2Prototype
+type ProgramStreamMetatypeRelationship2 = ObjectWithPrototype<
+  BaseProgramStreamMetatypeRelationship2,
+  ProgramStreamMetatypeRelationship2Prototype
 >;
 
-export const { ProgramVoqueRelationship2Instance } =
+export const { ProgramStreamMetatypeRelationship2Instance } =
   buildConstructorFunctionWithName('ProgramVoqueRelationship2Instance')<
-    BaseProgramVoqueRelationship2,
-    ProgramVoqueRelationship2Prototype
+    BaseProgramStreamMetatypeRelationship2,
+    ProgramStreamMetatypeRelationship2Prototype
   >({
     id: (relationship) => {
       return getId([
@@ -45,11 +45,11 @@ export const { ProgramVoqueRelationship2Instance } =
 export const PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID =
   'program-voque-relationship-2';
 
-type ProgramVoqueRelationship2Gepp =
+type ProgramStreamMetatypeRelationship2CollectionId =
   typeof PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID;
 
 export type ProgramStreamMetatypeRelationship2StreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    ProgramVoqueRelationship2Gepp,
-    ProgramVoqueRelationship2
+    ProgramStreamMetatypeRelationship2CollectionId,
+    ProgramStreamMetatypeRelationship2
   >;
