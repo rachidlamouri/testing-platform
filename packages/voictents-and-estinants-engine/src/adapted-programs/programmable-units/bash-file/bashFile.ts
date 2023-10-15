@@ -9,9 +9,9 @@ export type BashFile = File<FileExtensionSuffixIdentifier.Bash>;
 
 export const BASH_FILE_COLLECTION_ID = 'bash-file';
 
-type BashFileGepp = typeof BASH_FILE_COLLECTION_ID;
+type BashFileCollectionId = typeof BASH_FILE_COLLECTION_ID;
 
 export type BashFileStreamMetatype = FileSystemNodeStreamMetatype<
-  BashFileGepp,
+  BashFileCollectionId,
   BashFile
 >;
