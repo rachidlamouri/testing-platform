@@ -30,16 +30,16 @@ export const getProgrammedTransformFileContents = ({
   const fileContents = `
 ${serializedImportLines}
 
-export const ${programmedTransformCodeName} = buildEstinant({
+export const ${programmedTransformCodeName} = buildProgrammedTransform({
   name: '${programmedTransformCodeName}',
 })
-  .fromHubblepup2<UnsafeVoque>({
-    gepp: ''
+  .fromItem2<UnsafeStreamMetatype>({
+    collectionId: ''
   })
-  .toHubblepup2<UnsafeVoque>({
-    gepp: ''
+  .toItem2<UnsafeStreamMetatype>({
+    collectionId: ''
   })
-  .onPinbe((RENAME_ME) => {
+  .onTransform((RENAME_ME) => {
     // TODO: implement me
   })
   .assemble();
