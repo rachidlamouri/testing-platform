@@ -3,6 +3,10 @@ import fs from 'fs';
 const filePath =
   'packages/mdd-engine/src/adapted-programs/programs/rename-nonsense/progressLog.txt';
 
+if (!fs.existsSync(filePath)) {
+  fs.writeFileSync(filePath, '');
+}
+
 const contents = fs.readFileSync(filePath, 'utf-8');
 const [firstLine = ''] = contents.split('\n');
 

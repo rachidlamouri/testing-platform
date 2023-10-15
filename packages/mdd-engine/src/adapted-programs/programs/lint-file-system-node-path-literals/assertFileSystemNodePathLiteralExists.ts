@@ -19,17 +19,18 @@ import { FileLineColumnSourceInstance } from '../../programmable-units/linting/s
 const PROGRAMMED_TRANSFORM_NAME =
   'assertFileSystemNodePathLiteralExists' as const;
 
-const fileSystemNodePathLiteralExistsRule = new TypedRule<EmptyMessageContext>({
-  name: 'file-system-node-path-literal-exists',
-  description: `Any string literal that looks like a file system node path should reference an existing file system node.`,
-  source: new ProgrammedTransformSourceInstance({
-    filePath: posix.relative('', __filename),
-    programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
-  }),
-  getErrorMessage: (): string => {
-    return `A string literal that looks like a file system node path does not reference a real path`;
-  },
-});
+export const fileSystemNodePathLiteralExistsRule =
+  new TypedRule<EmptyMessageContext>({
+    name: 'file-system-node-path-literal-exists',
+    description: `Any string literal that looks like a file system node path should reference an existing file system node.`,
+    source: new ProgrammedTransformSourceInstance({
+      filePath: posix.relative('', __filename),
+      programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
+    }),
+    getErrorMessage: (): string => {
+      return `A string literal that looks like a file system node path does not reference a real path`;
+    },
+  });
 
 /**
  * Checks that a string literal with a file system path-like value has one or

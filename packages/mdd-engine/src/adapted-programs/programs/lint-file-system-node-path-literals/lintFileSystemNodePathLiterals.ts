@@ -1,3 +1,4 @@
+import { posix } from 'path';
 import {
   runEngine,
   buildCollectionByCollectionId,
@@ -24,17 +25,28 @@ import { enumerateNodeLocators } from '../rename-nonsense/enumerateNodeLocators'
 import { flattenAst } from '../rename-nonsense/flattenAst';
 import { filterStringLiteral } from './filterStringLiteral';
 import { filterFilePathLikeStringLiteral } from './filterFilePathLikeStringLiteral';
-import { assertFileSystemNodePathLiteralExists } from './assertFileSystemNodePathLiteralExists';
+import {
+  assertFileSystemNodePathLiteralExists,
+  fileSystemNodePathLiteralExistsRule,
+} from './assertFileSystemNodePathLiteralExists';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionCollection,
+  LintAssertionOmissionInstance,
   LintAssertionOmissionStreamMetatype,
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
+import { LintAssertionId } from '../../programmable-units/linting/lintAssertion';
+import { FileSourceInstance } from '../../programmable-units/linting/source/fileSource';
+import { FileLineColumnSourceInstance } from '../../programmable-units/linting/source/fileLineColumnSource';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'lint-file-system-node-path-literals',
+});
+
+const programSource = new FileSourceInstance({
+  filePath: posix.relative('', __filename),
 });
 
 /**
@@ -63,6 +75,30 @@ runEngine({
       initialItemEggTuple: [
         // keep multiline
         NULL_OMISSION,
+        new LintAssertionOmissionInstance({
+          omitterSource: programSource,
+          omittedAssertionId: new LintAssertionId({
+            rule: fileSystemNodePathLiteralExistsRule,
+            lintSource: new FileLineColumnSourceInstance({
+              filePath:
+                'packages/mdd-engine/src/adapted-programs/programs/rename-nonsense/renameAllNonsense.ts',
+              lineNumber: 70,
+              columnNumber: 6,
+            }),
+          }),
+        }),
+        new LintAssertionOmissionInstance({
+          omitterSource: programSource,
+          omittedAssertionId: new LintAssertionId({
+            rule: fileSystemNodePathLiteralExistsRule,
+            lintSource: new FileLineColumnSourceInstance({
+              filePath:
+                'packages/mdd-engine/src/adapted-programs/programs/rename-nonsense/progressLog.ts',
+              lineNumber: 4,
+              columnNumber: 2,
+            }),
+          }),
+        }),
       ],
     }),
   ] as const),
