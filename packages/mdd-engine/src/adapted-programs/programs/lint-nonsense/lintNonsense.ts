@@ -17,7 +17,7 @@ import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import { signalError } from '../../programmable-units/error/signalError';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
-import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
+import { getEngineProgramLocator3 } from '../../programmable-units/engine-program-model/getEngineProgramLocator3';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
 import { assertTypeScriptFileHasCanonicalComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonicalComment';
@@ -38,7 +38,7 @@ import {
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   CORE_ENGINE_FUNCTION_2_CONFIGURATION,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-} from '../../programmable-units/engine-program/engineFunctionConfiguration';
+} from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
 import {
   LintAssertionOmissionCollection,
   LINT_ASSERTION_OMISSION_COLLECTION_ID,

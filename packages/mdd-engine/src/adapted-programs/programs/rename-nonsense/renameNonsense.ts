@@ -31,7 +31,7 @@ import {
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   CORE_ENGINE_FUNCTION_2_CONFIGURATION,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-} from '../../programmable-units/engine-program/engineFunctionConfiguration';
+} from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import { filterIdentifier } from './filterIdentifier';
 import { getRenameConfiguration } from './getRenameConfiguration';

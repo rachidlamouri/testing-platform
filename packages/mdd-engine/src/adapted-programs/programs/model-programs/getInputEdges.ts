@@ -3,15 +3,15 @@ import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifia
 import {
   EngineProgrammedTransform3StreamMetatype,
   ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
-} from '../../programmable-units/engine-program/engineProgrammedTransform3';
+} from '../../programmable-units/engine-program-model/engineProgrammedTransform3';
 import {
   PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID,
   EngineProgrammedTransformInput2StreamMetatype,
-} from '../../programmable-units/engine-program/input-output/engineProgrammedTransformInput2';
+} from '../../programmable-units/engine-program-model/input-output/engineProgrammedTransformInput2';
 import {
   PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID,
   ProgramProgrammedTransformInputRelationshipStreamMetatype,
-} from '../../programmable-units/engine-program/input-output/programProgrammedTransformInputRelationship';
+} from '../../programmable-units/engine-program-model/input-output/programProgrammedTransformInputRelationship';
 import { DirectedGraphEdge2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import {
   DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,

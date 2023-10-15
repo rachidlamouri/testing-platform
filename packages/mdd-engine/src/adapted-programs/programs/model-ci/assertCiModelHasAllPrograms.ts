@@ -15,7 +15,7 @@ import {
 import {
   ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   EngineProgramLocator3StreamMetatype,
-} from '../../programmable-units/engine-program/engineProgramLocator3';
+} from '../../programmable-units/engine-program-model/engineProgramLocator3';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
   EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID,

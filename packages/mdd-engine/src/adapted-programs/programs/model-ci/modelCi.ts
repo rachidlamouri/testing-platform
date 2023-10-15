@@ -9,7 +9,7 @@ import {
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   CORE_ENGINE_FUNCTION_2_CONFIGURATION,
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
-} from '../../programmable-units/engine-program/engineFunctionConfiguration';
+} from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
@@ -34,7 +34,7 @@ import {
 import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
-import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
+import { getEngineProgramLocator3 } from '../../programmable-units/engine-program-model/getEngineProgramLocator3';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 import { getExpectedProgramTestFileConfiguration } from './getExpectedProgramTestFileConfiguration';

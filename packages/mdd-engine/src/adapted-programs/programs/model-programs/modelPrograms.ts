@@ -16,7 +16,7 @@ import {
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
   ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
   EngineFunctionConfigurationStreamMetatype,
-} from '../../programmable-units/engine-program/engineFunctionConfiguration';
+} from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
@@ -25,8 +25,8 @@ import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
-import { getEngineProgrammedTransformLocatorCollection2 } from '../../programmable-units/engine-program/getEngineProgrammedTransformLocatorCollection2';
-import { getEngineProgram3 } from '../../programmable-units/engine-program/getEngineProgram3';
+import { getEngineProgrammedTransformLocatorCollection2 } from '../../programmable-units/engine-program-model/getEngineProgrammedTransformLocatorCollection2';
+import { getEngineProgram3 } from '../../programmable-units/engine-program-model/getEngineProgram3';
 import { captureOutputFileDigestList } from '../../programmable-units/sanity-snapshot/captureOutputFileDigestList';
 import { signalError } from '../../programmable-units/error/signalError';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
@@ -35,10 +35,10 @@ import { SANITY_SNAPSHOT_COLLECTION_ID } from '../../programmable-units/sanity-s
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
 import { EngineRunnerStrategy } from '../../../core/engine/runEngine';
-import { getEngineStreamMetatype2 } from '../../programmable-units/engine-program/getEngineStreamMetatype2';
-import { getEngineProgrammedTransform3 } from '../../programmable-units/engine-program/getEngineProgrammedTransform3';
-import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
-import { getEngineStreamMetatypeLocatorCollection2 } from '../../programmable-units/engine-program/getEngineStreamMetatypeLocatorCollection2';
+import { getEngineStreamMetatype2 } from '../../programmable-units/engine-program-model/getEngineStreamMetatype2';
+import { getEngineProgrammedTransform3 } from '../../programmable-units/engine-program-model/getEngineProgrammedTransform3';
+import { getEngineProgramLocator3 } from '../../programmable-units/engine-program-model/getEngineProgramLocator3';
+import { getEngineStreamMetatypeLocatorCollection2 } from '../../programmable-units/engine-program-model/getEngineStreamMetatypeLocatorCollection2';
 import { getEngineProgrammedTransformGraphElements } from './getEngineProgrammedTransformGraphElements';
 import { getEngineProgramStreamMetatypeElements } from './getEngineProgramStreamMetatypeElements';
 import { getDirectedGraphMetadataById2 } from './getDirectedGraphMetadataById2';

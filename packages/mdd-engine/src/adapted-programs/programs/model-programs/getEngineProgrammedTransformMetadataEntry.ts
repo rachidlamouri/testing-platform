@@ -3,11 +3,11 @@ import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifia
 import {
   ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
   EngineProgrammedTransform3StreamMetatype,
-} from '../../programmable-units/engine-program/engineProgrammedTransform3';
+} from '../../programmable-units/engine-program-model/engineProgrammedTransform3';
 import {
   PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID,
   ProgramProgrammedTransformRelationshipStreamMetatype,
-} from '../../programmable-units/engine-program/programProgrammedTransformRelationship';
+} from '../../programmable-units/engine-program-model/programProgrammedTransformRelationship';
 import {
   DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID,
   DirectedGraphMetadataEntryInstance,

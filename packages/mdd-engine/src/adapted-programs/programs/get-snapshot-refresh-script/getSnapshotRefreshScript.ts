@@ -9,7 +9,7 @@ import {
   ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   EngineFunctionConfigurationStreamMetatype,
-} from '../../programmable-units/engine-program/engineFunctionConfiguration';
+} from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
