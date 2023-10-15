@@ -8,7 +8,7 @@ import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
 import { EngineEstinant3 } from './engineEstinant3';
 import { EngineProgramLocator3 } from './engineProgramLocator3';
-import { EngineVoqueLocator2 } from './engineVoqueLocator2';
+import { EngineStreamMetatypeLocator2 } from './engineVoqueLocator2';
 import { getEngineProgramZorn } from './partialEngineProgramLocator2';
 
 type BaseEngineProgram3 = {
@@ -16,8 +16,8 @@ type BaseEngineProgram3 = {
   description: string;
   filePath: string;
   programmedTransformList: Tuple<EngineEstinant3>;
-  initializedStreamMetatypeLocatorList: EngineVoqueLocator2[];
-  endingStreamMetatypeLocatorList: EngineVoqueLocator2[];
+  initializedStreamMetatypeLocatorList: EngineStreamMetatypeLocator2[];
+  endingStreamMetatypeLocatorList: EngineStreamMetatypeLocator2[];
   locator: EngineProgramLocator3;
 };
 

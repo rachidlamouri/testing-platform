@@ -5,15 +5,15 @@ import {
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getId } from '../../../../layer-agnostic-utilities/deprecated-id/getId';
 import { RootGraphLocator } from '../../graph-visualization/directed-graph/rootGraphLocator';
-import { EngineEstinantLocator2 } from '../engineEstinantLocator2';
+import { EngineProgrammedTransformLocator2 } from '../engineEstinantLocator2';
 
-type BaseProgramEstinantOutputRelationship = {
+type BaseProgramProgrammedTransformOutputRelationship = {
   outputId: string;
-  programmedTransformLocator: EngineEstinantLocator2;
+  programmedTransformLocator: EngineProgrammedTransformLocator2;
   rootGraphLocator: RootGraphLocator;
 };
 
-type ProgramEstinantOutputRelationshipPrototype = {
+type ProgramProgrammedTransformOutputRelationshipPrototype = {
   get id(): string;
 };
 
@@ -22,15 +22,15 @@ type ProgramEstinantOutputRelationshipPrototype = {
  *
  * @readableName ProgramTransformOutputStreamRelationship
  */
-type ProgramEstinantOutputRelationship = ObjectWithPrototype<
-  BaseProgramEstinantOutputRelationship,
-  ProgramEstinantOutputRelationshipPrototype
+type ProgramProgrammedTransformOutputRelationship = ObjectWithPrototype<
+  BaseProgramProgrammedTransformOutputRelationship,
+  ProgramProgrammedTransformOutputRelationshipPrototype
 >;
 
-export const { ProgramEstinantOutputRelationshipInstance } =
+export const { ProgramProgrammedTransformOutputRelationshipInstance } =
   buildConstructorFunctionWithName('ProgramEstinantOutputRelationshipInstance')<
-    BaseProgramEstinantOutputRelationship,
-    ProgramEstinantOutputRelationshipPrototype
+    BaseProgramProgrammedTransformOutputRelationship,
+    ProgramProgrammedTransformOutputRelationshipPrototype
   >({
     id: (relationship) => {
       return getId([
@@ -43,11 +43,11 @@ export const { ProgramEstinantOutputRelationshipInstance } =
 export const PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID =
   'program-estinant-output-relationship';
 
-type ProgramEstinantOutputRelationshipGepp =
+type ProgramProgrammedTransformOutputRelationshipCollectionId =
   typeof PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID;
 
 export type ProgramProgrammedTransformOutputRelationshipStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    ProgramEstinantOutputRelationshipGepp,
-    ProgramEstinantOutputRelationship
+    ProgramProgrammedTransformOutputRelationshipCollectionId,
+    ProgramProgrammedTransformOutputRelationship
   >;

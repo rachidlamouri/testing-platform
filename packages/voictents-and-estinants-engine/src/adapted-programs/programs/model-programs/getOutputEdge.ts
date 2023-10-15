@@ -7,11 +7,11 @@ import {
 import {
   PROGRAMMED_TRANSFORM_OUTPUT_2_COLLECTION_ID,
   EngineProgrammedTransformOutput2StreamMetatype,
-} from '../../programmable-units/engine-program/input-output/engineEstinantOutput2';
+} from '../../programmable-units/engine-program/input-output/engineProgrammedTransformOutput2';
 import {
   PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID,
   ProgramProgrammedTransformOutputRelationshipStreamMetatype,
-} from '../../programmable-units/engine-program/input-output/programEstinantOutputRelationship';
+} from '../../programmable-units/engine-program/input-output/programProgrammedTransformOutputRelationship';
 import { DirectedGraphEdge2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import {
   DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,

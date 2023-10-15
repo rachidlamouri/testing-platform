@@ -4,12 +4,12 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
-import { EngineEstinantLocator2 } from './engineEstinantLocator2';
-import { EngineVoqueLocator2 } from './engineVoqueLocator2';
+import { EngineProgrammedTransformLocator2 } from './engineEstinantLocator2';
+import { EngineStreamMetatypeLocator2 } from './engineVoqueLocator2';
 
 type BaseEstinantVoqueRelationship2 = {
-  estinantLocator: EngineEstinantLocator2;
-  streamMetatypeLocator: EngineVoqueLocator2;
+  estinantLocator: EngineProgrammedTransformLocator2;
+  streamMetatypeLocator: EngineStreamMetatypeLocator2;
   // An estinant can reference a voque multiple times
   distinguisher: string;
 };

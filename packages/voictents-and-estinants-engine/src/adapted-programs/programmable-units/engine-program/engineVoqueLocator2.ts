@@ -23,19 +23,25 @@ type EngineVoqueLocator2Prototype = {
  * hubblepup definition
  *
  * @readableName StreamMetatypeLocator
+ *
+ * @canonicalDeclaration
  */
-export type EngineVoqueLocator2 = ObjectWithPrototype<
+export type EngineStreamMetatypeLocator2 = ObjectWithPrototype<
   BaseEngineVoqueLocator2,
   EngineVoqueLocator2Prototype
 >;
 
 export const getVoqueLocatorZorn = getExportLocatorId;
 
-export const getVoqueLocatorId = (locator: EngineVoqueLocator2): string => {
+export const getVoqueLocatorId = (
+  locator: EngineStreamMetatypeLocator2,
+): string => {
   return getTextDigest(locator.displayName);
 };
 
-export const getVoqueDisplayName = (locator: EngineVoqueLocator2): string => {
+export const getVoqueDisplayName = (
+  locator: EngineStreamMetatypeLocator2,
+): string => {
   const hubblepupName = locator.identifierName
     .replace(/^Generic/, '')
     .replace(/Voque$/, '');
@@ -58,5 +64,5 @@ type EngineVoqueLocatorGepp = typeof ENGINE_VOQUE_LOCATOR_2_GEPP;
 export type EngineVoqueLocator2Voque =
   InMemoryIdentifiableItem2ListStreamMetatype<
     EngineVoqueLocatorGepp,
-    EngineVoqueLocator2
+    EngineStreamMetatypeLocator2
   >;

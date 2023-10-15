@@ -30,7 +30,7 @@ import {
 } from './engineFunctionConfiguration';
 import {
   EngineEstinantBuildAddMetadataForSerializationLocatorInstance,
-  EngineEstinantLocator2,
+  EngineProgrammedTransformLocator2,
   EngineProgrammedTransformLocator2TypeName,
   EngineEstinantTopLevelDeclarationLocatorInstance,
 } from './engineEstinantLocator2';
@@ -64,7 +64,7 @@ import {
   ProgramProgrammedTransformRelationshipStreamMetatype,
 } from './programEstinantRelationship';
 import {
-  EngineVoqueLocator2,
+  EngineStreamMetatypeLocator2,
   EngineVoqueLocator2Instance,
 } from './engineVoqueLocator2';
 import { PartialEngineProgramLocator2Instance } from './partialEngineProgramLocator2';
@@ -177,7 +177,7 @@ const getCore2EngineProgramLocator = ({
       ? initialVoictentListValueNode?.elements
       : [];
 
-  const initialVoqueLocatorList: EngineVoqueLocator2[] = [];
+  const initialVoqueLocatorList: EngineStreamMetatypeLocator2[] = [];
   const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
 
   initialVoictentGeppIdentifierList.forEach((element) => {
@@ -255,7 +255,7 @@ const getCore2EngineProgramLocator = ({
     estinantListValueNode?.type === AST_NODE_TYPES.ArrayExpression
       ? estinantListValueNode?.elements
       : [];
-  const engineEstinantLocatorList: EngineEstinantLocator2[] = [];
+  const engineEstinantLocatorList: EngineProgrammedTransformLocator2[] = [];
 
   estinantReferenceElementList.forEach((element, index) => {
     if (isIdentifier(element)) {
@@ -413,7 +413,7 @@ const getAdaptedEngineProgramLocator = ({
     : [];
 
   const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
-  const engineVoqueLocatorList: EngineVoqueLocator2[] = [];
+  const engineVoqueLocatorList: EngineStreamMetatypeLocator2[] = [];
 
   const fileImportsByImportedIdentifier = new Map<
     string,
@@ -582,7 +582,7 @@ const getAdaptedEngineProgramLocator = ({
     (identifier) => identifier.name,
   );
 
-  const engineEstinantLocatorList: EngineEstinantLocator2[] = [];
+  const engineEstinantLocatorList: EngineProgrammedTransformLocator2[] = [];
 
   estinantIdentifierList.forEach((identifierName) => {
     const fileImport = fileImportsByImportedIdentifier.get(identifierName);

@@ -3,28 +3,28 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
-import { EngineEstinantLocator2 } from './engineEstinantLocator2';
+import { EngineProgrammedTransformLocator2 } from './engineEstinantLocator2';
 import { getExportLocatorId } from '../type-script-file/getExportLocatorId';
 import { getIdentifiableId } from '../../../layer-agnostic-utilities/deprecated-id/getIdentifiableId';
-import { EngineEstinantInput2 } from './input-output/engineEstinantInput2';
-import { EngineEstinantOutput2 } from './input-output/engineEstinantOutput2';
+import { EngineProgrammedTransformInput2 } from './input-output/engineProgrammedTransformInput2';
+import { EngineProgrammedTransformOutput2 } from './input-output/engineProgrammedTransformOutput2';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
-import { EngineVoqueLocator2 } from './engineVoqueLocator2';
+import { EngineStreamMetatypeLocator2 } from './engineVoqueLocator2';
 
 type BaseEngineEstinant3 = {
   programmedTransformName: string;
   filePath: string;
   identifierName: string;
   commentText: string;
-  inputList: EngineEstinantInput2[];
-  outputList: EngineEstinantOutput2[];
-  locator: EngineEstinantLocator2;
+  inputList: EngineProgrammedTransformInput2[];
+  outputList: EngineProgrammedTransformOutput2[];
+  locator: EngineProgrammedTransformLocator2;
 };
 
 type EngineEstinant3Prototype = {
   get id(): string;
   get digestibleId(): string;
-  get allVoqueLocatorList(): EngineVoqueLocator2[];
+  get allVoqueLocatorList(): EngineStreamMetatypeLocator2[];
 };
 
 /**

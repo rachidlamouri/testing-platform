@@ -7,7 +7,7 @@ import { getTextDigest } from '../../../package-agnostic-utilities/string/getTex
 import { getIdentifiableId } from '../../../layer-agnostic-utilities/deprecated-id/getIdentifiableId';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
 import { TypeScriptFile } from '../type-script-file/typeScriptFile';
-import { EngineVoqueLocator2 } from './engineVoqueLocator2';
+import { EngineStreamMetatypeLocator2 } from './engineVoqueLocator2';
 import { getEngineProgramZorn } from './partialEngineProgramLocator2';
 import { ProgramEstinantRelationship } from './programEstinantRelationship';
 
@@ -18,7 +18,7 @@ type BaseEngineProgramLocator3 = {
   filePath: string;
   // TODO: show if a collection is manually instantiated, part of the uninferred
   // collection list, and if it is initialized
-  initializedVoqueLocatorList: EngineVoqueLocator2[];
+  initializedVoqueLocatorList: EngineStreamMetatypeLocator2[];
   estinantRelationshipList: ProgramEstinantRelationship[];
   rootGraphLocator: RootGraphLocator;
   engineProgramFile: TypeScriptFile;

@@ -5,11 +5,11 @@ import {
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import { RootGraphLocator } from '../graph-visualization/directed-graph/rootGraphLocator';
-import { EngineVoqueLocator2 } from './engineVoqueLocator2';
+import { EngineStreamMetatypeLocator2 } from './engineVoqueLocator2';
 
 type BaseProgramVoqueRelationship2 = {
   programName: string;
-  streamMetatypeLocator: EngineVoqueLocator2;
+  streamMetatypeLocator: EngineStreamMetatypeLocator2;
   rootGraphLocator: RootGraphLocator;
   parentId: string;
 };

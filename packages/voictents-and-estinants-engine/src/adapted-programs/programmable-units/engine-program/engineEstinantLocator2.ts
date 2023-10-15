@@ -23,7 +23,7 @@ class EngineEstinantBuildAddMetadataForSerializationLocatorZorn extends ComplexI
   }
 }
 
-export const EngineEstinantLocator2ZornClassSet = [
+export const EngineProgrammedTransformLocator2IdClassSet = [
   EngineEstinantBuildAddMetadataForSerializationLocatorZorn,
   ExportLocatorId,
 ] as const;
@@ -49,7 +49,7 @@ type BaseEngineEstinantBuildAddMetadataForSerializationLocator = {
 };
 
 type EngineEstinantLocator2Zorn = InstanceType<
-  typeof EngineEstinantLocator2ZornClassSet[number]
+  typeof EngineProgrammedTransformLocator2IdClassSet[number]
 >;
 
 type EngineEstinantLocatorPrototype = {
@@ -72,8 +72,10 @@ export type EngineEstinantBuildAddMetadataForSerializationLocator =
  * The information needed to find a transform definition
  *
  * @readableName ProgrammedTransformLocator
+ *
+ * @canonicalDeclaration
  */
-export type EngineEstinantLocator2 =
+export type EngineProgrammedTransformLocator2 =
   | EngineEstinantTopLevelDeclarationLocator
   | EngineEstinantBuildAddMetadataForSerializationLocator;
 
@@ -113,5 +115,5 @@ type EngineEstinantLocator2Gepp = typeof ENGINE_ESTINANT_LOCATOR_2_GEPP;
 export type EngineEstinantLocator2Voque =
   InMemoryIdentifiableItem2ListStreamMetatype<
     EngineEstinantLocator2Gepp,
-    EngineEstinantLocator2
+    EngineProgrammedTransformLocator2
   >;

@@ -4,7 +4,7 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import {
-  EngineVoqueLocator2,
+  EngineStreamMetatypeLocator2,
   getVoqueDisplayName,
   getVoqueLocatorId,
   getVoqueLocatorZorn,
@@ -14,7 +14,7 @@ type BaseEngineVoque2 = {
   filePath: string;
   identifierName: string;
   commentText: string;
-  locator: EngineVoqueLocator2;
+  locator: EngineStreamMetatypeLocator2;
 };
 
 type EngineVoque2Prototype = {

@@ -78,16 +78,18 @@ type ConstructorFunctionBuilderInput<
 };
 
 type ConstructorFunctionParent<
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   TConstructorName extends string,
   TBaseObject extends object,
   TPrototype extends object,
   TObjectInstance extends object,
 > = {
-  [Key in TConstructorName]: ConstructorFunction<
-    TBaseObject,
-    TPrototype,
-    TObjectInstance
-  >;
+  // [Key in TConstructorName]: ConstructorFunction<
+  //   TBaseObject,
+  //   TPrototype,
+  //   TObjectInstance
+  // >;
+  [key: string]: ConstructorFunction<TBaseObject, TPrototype, TObjectInstance>;
 };
 
 const CONSTRUCTOR_KEY_NAME = 'constructor';
@@ -154,20 +156,44 @@ const buildConstructorFunction = <
     { prototype },
   );
 
-  const constructorFunctionParent = {
-    [constructorName]: constructorFunction as unknown as ConstructorFunction<
-      TBaseObject,
-      TPrototype,
-      TObjectInstance
-    >,
-  } as ConstructorFunctionParent<
+  // TODO: remove proxy after mass refactor. We are destructuring based on a string name that isn't automatically refactored
+  const result = new Proxy(
+    {},
+    {
+      get: (): ConstructorFunction<
+        TBaseObject,
+        TPrototype,
+        TObjectInstance
+      > => {
+        return constructorFunction as unknown as ConstructorFunction<
+          TBaseObject,
+          TPrototype,
+          TObjectInstance
+        >;
+      },
+    },
+  );
+
+  return result as ConstructorFunctionParent<
     TConstructorName,
     TBaseObject,
     TPrototype,
     TObjectInstance
   >;
+  // const constructorFunctionParent = {
+  //   [constructorName]: constructorFunction as unknown as ConstructorFunction<
+  //     TBaseObject,
+  //     TPrototype,
+  //     TObjectInstance
+  //   >,
+  // } as ConstructorFunctionParent<
+  //   TConstructorName,
+  //   TBaseObject,
+  //   TPrototype,
+  //   TObjectInstance
+  // >;
 
-  return constructorFunctionParent;
+  // return constructorFunctionParent;
 };
 
 export const buildConstructorFunctionWithName = <

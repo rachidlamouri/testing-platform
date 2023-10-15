@@ -50,16 +50,16 @@ import {
 } from '../type-script-file/typeScriptFileImportList';
 import {
   PROGRAMMED_TRANSFORM_OUTPUT_2_COLLECTION_ID,
-  EngineEstinantOutput2,
-  EstinantOutput2Instance,
+  EngineProgrammedTransformOutput2,
+  ProgrammedTransformOutput2Instance,
   EngineProgrammedTransformOutput2StreamMetatype,
-} from './input-output/engineEstinantOutput2';
+} from './input-output/engineProgrammedTransformOutput2';
 import {
   PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID,
-  EngineEstinantInput2,
-  EstinantInput2Instance,
+  EngineProgrammedTransformInput2,
+  ProgrammedTransformInput2Instance,
   EngineProgrammedTransformInput2StreamMetatype,
-} from './input-output/engineEstinantInput2';
+} from './input-output/engineProgrammedTransformInput2';
 import { EngineVoqueLocator2Instance } from './engineVoqueLocator2';
 import {
   ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
@@ -87,7 +87,7 @@ const reporterLocator: ReportingLocator = {
 type IdentifierOriginFilePathAccessor = (identifierName: string) => string;
 
 type CoreEstinantAccessorInput = {
-  estinantLocator: EngineEstinantTopLevelDeclarationLocator;
+  programmedTransformLocator: EngineEstinantTopLevelDeclarationLocator;
   estinantDeclaration: CommentedProgramBodyDeclaration | undefined;
 };
 
@@ -97,14 +97,14 @@ type CoreEstinantAccessorResult = {
 };
 
 const getBuildAddMetadataForSerializationEstinant = (
-  estinantLocator: EngineEstinantBuildAddMetadataForSerializationLocator,
+  programmedTransformLocator: EngineEstinantBuildAddMetadataForSerializationLocator,
 ): CoreEstinantAccessorResult => {
   const typeParameterTuple =
     isTypeScriptTypeParameterInstantiationWithParameterTuple(
-      estinantLocator.callExpression.typeParameters,
+      programmedTransformLocator.callExpression.typeParameters,
       [AST_NODE_TYPES.TSTypeReference, AST_NODE_TYPES.TSTypeReference] as const,
     )
-      ? estinantLocator.callExpression.typeParameters.params
+      ? programmedTransformLocator.callExpression.typeParameters.params
       : null;
 
   const parameterNameTuple = typeParameterTuple?.every(
@@ -126,7 +126,7 @@ const getBuildAddMetadataForSerializationEstinant = (
           reporterLocator,
           sourceLocator: {
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: estinantLocator.filePath,
+            filePath: programmedTransformLocator.filePath,
           },
           context: {
             parameterNameTuple,
@@ -138,11 +138,11 @@ const getBuildAddMetadataForSerializationEstinant = (
         // TODO: why do we include both of these?
         programmedTransformName: 'UNKNOWN',
         identifierName: 'UNKNOWN',
-        filePath: estinantLocator.filePath,
+        filePath: programmedTransformLocator.filePath,
         commentText: '',
         inputList: [],
         outputList: [],
-        locator: estinantLocator,
+        locator: programmedTransformLocator,
       }),
     };
   }
@@ -156,13 +156,13 @@ const getBuildAddMetadataForSerializationEstinant = (
   const programmedTransformName = `serialize/${inputVoictentName}`;
 
   const inputVoqueLocator = new EngineVoqueLocator2Instance({
-    filePath: estinantLocator.filePath,
+    filePath: programmedTransformLocator.filePath,
     identifierName: inputVoqueName,
     isCoreVoque: true,
   });
 
   const outputVoqueLocator = new EngineVoqueLocator2Instance({
-    filePath: estinantLocator.filePath,
+    filePath: programmedTransformLocator.filePath,
     identifierName: outputVoqueName,
     isCoreVoque: true,
   });
@@ -173,38 +173,38 @@ const getBuildAddMetadataForSerializationEstinant = (
       // TODO: why do we include both of these?
       programmedTransformName,
       identifierName: programmedTransformName,
-      filePath: estinantLocator.filePath,
+      filePath: programmedTransformLocator.filePath,
       commentText:
         'Prepares each item in one collection to be sent to a serialized collection',
       inputList: [
-        new EstinantInput2Instance({
+        new ProgrammedTransformInput2Instance({
           collectionName: inputVoictentName,
           isInput: true,
           index: 0,
-          estinantLocator,
+          programmedTransformLocator,
           programmedTransformName,
           streamMetatypeLocator: inputVoqueLocator,
         }),
       ],
       outputList: [
-        new EstinantOutput2Instance({
+        new ProgrammedTransformOutput2Instance({
           collectionName: outputVoictentName,
           isInput: false,
-          estinantLocator,
-          estinantName: programmedTransformName,
+          programmedTransformLocator,
+          programmedTransformName,
           streamMetatypeLocator: outputVoqueLocator,
         }),
       ],
-      locator: estinantLocator,
+      locator: programmedTransformLocator,
     }),
   };
 };
 
 const getCoreEstinant = ({
-  estinantLocator,
+  programmedTransformLocator,
   estinantDeclaration,
 }: CoreEstinantAccessorInput): CoreEstinantAccessorResult => {
-  const programmedTransformName = estinantLocator.identifierName;
+  const programmedTransformName = programmedTransformLocator.identifierName;
 
   const typeNode =
     estinantDeclaration !== undefined &&
@@ -239,7 +239,7 @@ const getCoreEstinant = ({
           reporterLocator,
           sourceLocator: {
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: estinantLocator.filePath,
+            filePath: programmedTransformLocator.filePath,
           },
           context: {
             typeNode,
@@ -248,13 +248,13 @@ const getCoreEstinant = ({
         } satisfies ReportedProgramError<ReportingLocator>,
       ],
       estinant: new EngineEstinant3Instance({
-        filePath: estinantLocator.filePath,
-        identifierName: estinantLocator.identifierName,
+        filePath: programmedTransformLocator.filePath,
+        identifierName: programmedTransformLocator.identifierName,
         programmedTransformName,
         commentText: estinantDeclaration?.commentText ?? '',
         inputList: [],
         outputList: [],
-        locator: estinantLocator,
+        locator: programmedTransformLocator,
       }),
     };
   }
@@ -325,7 +325,7 @@ const getCoreEstinant = ({
       reporterLocator,
       sourceLocator: {
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-        filePath: estinantLocator.filePath,
+        filePath: programmedTransformLocator.filePath,
       },
       context: {
         leftVoqueName,
@@ -341,7 +341,7 @@ const getCoreEstinant = ({
       reporterLocator,
       sourceLocator: {
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-        filePath: estinantLocator.filePath,
+        filePath: programmedTransformLocator.filePath,
       },
       context: {
         rightVoqueNameTuple,
@@ -359,7 +359,7 @@ const getCoreEstinant = ({
       reporterLocator,
       sourceLocator: {
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-        filePath: estinantLocator.filePath,
+        filePath: programmedTransformLocator.filePath,
       },
       context: {
         outputVoqueNameTuple,
@@ -379,35 +379,37 @@ const getCoreEstinant = ({
 
       const streamMetatypeLocator = new EngineVoqueLocator2Instance({
         identifierName: voqueName,
-        filePath: estinantLocator.filePath,
+        filePath: programmedTransformLocator.filePath,
         isCoreVoque: true,
       });
 
-      return new EstinantInput2Instance({
+      return new ProgrammedTransformInput2Instance({
         collectionName,
         isInput: true,
         index,
-        estinantLocator,
+        programmedTransformLocator,
         programmedTransformName,
         streamMetatypeLocator,
       });
     })
-    .filter((input): input is EngineEstinantInput2 => input !== null);
+    .filter(
+      (input): input is EngineProgrammedTransformInput2 => input !== null,
+    );
 
   const outputList = (outputVoqueNameTuple ?? []).map((voqueName) => {
     const collectionName = voqueName.replace(/Voque$/, '');
 
     const voqueLocator = new EngineVoqueLocator2Instance({
       identifierName: voqueName,
-      filePath: estinantLocator.filePath,
+      filePath: programmedTransformLocator.filePath,
       isCoreVoque: true,
     });
 
-    return new EstinantOutput2Instance({
+    return new ProgrammedTransformOutput2Instance({
       collectionName,
       isInput: false,
-      estinantLocator,
-      estinantName: programmedTransformName,
+      programmedTransformLocator,
+      programmedTransformName,
       streamMetatypeLocator: voqueLocator,
     });
   });
@@ -415,19 +417,19 @@ const getCoreEstinant = ({
   return {
     errorList: parallelErrorList,
     estinant: new EngineEstinant3Instance({
-      filePath: estinantLocator.filePath,
-      identifierName: estinantLocator.identifierName,
+      filePath: programmedTransformLocator.filePath,
+      identifierName: programmedTransformLocator.identifierName,
       programmedTransformName,
       commentText: estinantDeclaration?.commentText ?? '',
       inputList,
       outputList,
-      locator: estinantLocator,
+      locator: programmedTransformLocator,
     }),
   };
 };
 
 type AdaptedEstinantAccessorInput = {
-  estinantLocator: EngineEstinantTopLevelDeclarationLocator;
+  programmedTransformLocator: EngineEstinantTopLevelDeclarationLocator;
   estinantDeclaration: CommentedProgramBodyDeclaration | undefined;
   bodyDeclarationGroup: FileCommentedProgramBodyDeclarationGroup;
   getIdentifierOriginFilePath: IdentifierOriginFilePathAccessor;
@@ -439,7 +441,7 @@ type AdaptedEstinantAccessorResult = {
 };
 
 const getAdaptedEstinant = ({
-  estinantLocator,
+  programmedTransformLocator,
   estinantDeclaration,
   bodyDeclarationGroup,
   getIdentifierOriginFilePath,
@@ -455,17 +457,17 @@ const getAdaptedEstinant = ({
     : null;
 
   if (callExpression === null) {
-    const programmedTransformName = estinantLocator.identifierName;
+    const programmedTransformName = programmedTransformLocator.identifierName;
 
     let error: ReportedProgramError<ReportingLocator>;
-    if (estinantLocator.isCoreEstinant) {
+    if (programmedTransformLocator.isCoreEstinant) {
       error = {
         name: `unhandled-core-estinant`,
         error: new Error('Parsing core engine estinants is not handled yet'),
         reporterLocator,
         sourceLocator: {
           typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-          filePath: estinantLocator.filePath,
+          filePath: programmedTransformLocator.filePath,
         },
         context: null,
       };
@@ -476,7 +478,7 @@ const getAdaptedEstinant = ({
         reporterLocator,
         sourceLocator: {
           typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-          filePath: estinantLocator.filePath,
+          filePath: programmedTransformLocator.filePath,
         },
         context: {
           hasIdentifiableNode:
@@ -491,13 +493,13 @@ const getAdaptedEstinant = ({
     return {
       errorList: [error],
       estinant: new EngineEstinant3Instance({
-        filePath: estinantLocator.filePath,
-        identifierName: estinantLocator.identifierName,
+        filePath: programmedTransformLocator.filePath,
+        identifierName: programmedTransformLocator.identifierName,
         programmedTransformName,
         commentText: '',
         inputList: [],
         outputList: [],
-        locator: estinantLocator,
+        locator: programmedTransformLocator,
       }),
     };
   }
@@ -530,7 +532,7 @@ const getAdaptedEstinant = ({
           reporterLocator,
           sourceLocator: {
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: estinantLocator.filePath,
+            filePath: programmedTransformLocator.filePath,
           },
           context: {
             error,
@@ -623,7 +625,7 @@ const getAdaptedEstinant = ({
           reporterLocator,
           sourceLocator: {
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: estinantLocator.filePath,
+            filePath: programmedTransformLocator.filePath,
           },
           context: {
             parsedFlattenedCallExpressionList,
@@ -650,7 +652,7 @@ const getAdaptedEstinant = ({
           reporterLocator,
           sourceLocator: {
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: estinantLocator.filePath,
+            filePath: programmedTransformLocator.filePath,
           },
           context: {
             parsedFlattenedCallExpressionList,
@@ -690,7 +692,7 @@ const getAdaptedEstinant = ({
           reporterLocator,
           sourceLocator: {
             typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: estinantLocator.filePath,
+            filePath: programmedTransformLocator.filePath,
           },
           context: {
             parsedExpression,
@@ -701,10 +703,10 @@ const getAdaptedEstinant = ({
     };
   }
 
-  const programmedTransformName = estinantLocator.identifierName;
+  const programmedTransformName = programmedTransformLocator.identifierName;
 
   const estinantInputOutputList = inputOutputCallExpressionList.map<
-    EngineEstinantInput2 | EngineEstinantOutput2
+    EngineProgrammedTransformInput2 | EngineProgrammedTransformOutput2
   >(({ isInput, typeNode }, index) => {
     // TODO: make the convention where we chop off the suffix more discoverable
     const voqueName = typeNode.typeName.name;
@@ -723,33 +725,35 @@ const getAdaptedEstinant = ({
     });
 
     if (isInput) {
-      return new EstinantInput2Instance({
+      return new ProgrammedTransformInput2Instance({
         collectionName,
         streamMetatypeLocator,
         isInput,
         index,
-        estinantLocator,
+        programmedTransformLocator,
         programmedTransformName,
       });
     }
 
-    return new EstinantOutput2Instance({
+    return new ProgrammedTransformOutput2Instance({
       collectionName,
       streamMetatypeLocator,
       isInput,
-      estinantLocator,
-      estinantName: programmedTransformName,
+      programmedTransformLocator,
+      programmedTransformName,
     });
   });
 
-  const inputList = estinantInputOutputList.filter<EngineEstinantInput2>(
-    (inputOrOutput): inputOrOutput is EngineEstinantInput2 =>
-      inputOrOutput.isInput,
-  );
-  const outputList = estinantInputOutputList.filter<EngineEstinantOutput2>(
-    (inputOrOutput): inputOrOutput is EngineEstinantOutput2 =>
-      !inputOrOutput.isInput,
-  );
+  const inputList =
+    estinantInputOutputList.filter<EngineProgrammedTransformInput2>(
+      (inputOrOutput): inputOrOutput is EngineProgrammedTransformInput2 =>
+        inputOrOutput.isInput,
+    );
+  const outputList =
+    estinantInputOutputList.filter<EngineProgrammedTransformOutput2>(
+      (inputOrOutput): inputOrOutput is EngineProgrammedTransformOutput2 =>
+        !inputOrOutput.isInput,
+    );
 
   const instantiationExpression = flattenedCallExpressionList[0];
   const instantiationArgument = isCallExpression(instantiationExpression)
@@ -801,11 +805,11 @@ const getAdaptedEstinant = ({
       reporterLocator,
       sourceLocator: {
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-        filePath: estinantLocator.filePath,
+        filePath: programmedTransformLocator.filePath,
       },
       context: null,
     });
-  } else if (instantiatedName !== estinantLocator.identifierName) {
+  } else if (instantiatedName !== programmedTransformLocator.identifierName) {
     parallelErrorList.push({
       name: `invalid-estinant-name`,
       error: new Error(
@@ -814,10 +818,10 @@ const getAdaptedEstinant = ({
       reporterLocator,
       sourceLocator: {
         typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-        filePath: estinantLocator.filePath,
+        filePath: programmedTransformLocator.filePath,
       },
       context: {
-        expected: estinantLocator.identifierName,
+        expected: programmedTransformLocator.identifierName,
         actual: instantiatedName,
       },
     });
@@ -826,13 +830,13 @@ const getAdaptedEstinant = ({
   return {
     errorList: parallelErrorList,
     estinant: new EngineEstinant3Instance({
-      filePath: estinantLocator.filePath,
-      identifierName: estinantLocator.identifierName,
+      filePath: programmedTransformLocator.filePath,
+      identifierName: programmedTransformLocator.identifierName,
       programmedTransformName,
       commentText: estinantDeclaration?.commentText ?? '',
       inputList,
       outputList,
-      locator: estinantLocator,
+      locator: programmedTransformLocator,
     }),
   };
 };
@@ -918,12 +922,12 @@ export const getEngineProgrammedTransform3 = buildProgrammedTransform({
           );
         if (estinantLocator.isCoreEstinant) {
           ({ errorList, estinant } = getCoreEstinant({
-            estinantLocator,
+            programmedTransformLocator: estinantLocator,
             estinantDeclaration,
           }));
         } else {
           ({ errorList, estinant } = getAdaptedEstinant({
-            estinantLocator,
+            programmedTransformLocator: estinantLocator,
             estinantDeclaration,
             bodyDeclarationGroup,
             getIdentifierOriginFilePath,
