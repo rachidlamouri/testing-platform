@@ -28,9 +28,9 @@ class ProgramEstinantInputRelationshipZorn extends ComplexId<ProgramEstinantInpu
 }
 
 type BaseProgramEstinantInputRelationship = {
-  estinantInput: EngineEstinantInput2;
+  programmedTransformInput: EngineEstinantInput2;
   rootGraphLocator: RootGraphLocator;
-  estinantLocator: EngineEstinantLocator2;
+  programmedTransformLocator: EngineEstinantLocator2;
 };
 
 type ProgramEstinantInputRelationshipPrototype = {
@@ -55,18 +55,18 @@ export const { ProgramEstinantInputRelationshipInstance } =
     id: (relationship) => {
       return new ProgramEstinantInputRelationshipZorn({
         rootGraphLocator: relationship.rootGraphLocator.id,
-        estinantInput: relationship.estinantInput.id,
+        estinantInput: relationship.programmedTransformInput.id,
       });
     },
   });
 
-export const PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP =
+export const PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID =
   'program-estinant-input-relationship';
 
 type ProgramEstinantInputRelationshipGepp =
-  typeof PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP;
+  typeof PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID;
 
-export type ProgramEstinantInputRelationshipVoque =
+export type ProgramProgrammedTransformInputRelationshipStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     ProgramEstinantInputRelationshipGepp,
     ProgramEstinantInputRelationship

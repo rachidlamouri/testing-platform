@@ -10,8 +10,8 @@ import { EngineVoqueLocator2 } from '../engineVoqueLocator2';
 
 type BaseEstinantOutput2 = {
   // TODO: delete "voictentName" in favor of "voqueLocator"
-  voictentName: string;
-  voqueLocator?: EngineVoqueLocator2;
+  collectionName: string;
+  streamMetatypeLocator?: EngineVoqueLocator2;
   isInput: false;
   index?: never;
   estinantLocator: EngineEstinantLocator2;
@@ -39,7 +39,7 @@ export const { EstinantOutput2Instance } = buildConstructorFunctionWithName(
   id: (output) => {
     return getId([
       'output',
-      output.voictentName,
+      output.collectionName,
       output.estinantLocator.id.forHuman,
     ]);
   },
@@ -48,11 +48,11 @@ export const { EstinantOutput2Instance } = buildConstructorFunctionWithName(
   },
 });
 
-export const ESTINANT_OUTPUT_2_GEPP = 'estinant-output-2';
+export const PROGRAMMED_TRANSFORM_OUTPUT_2_COLLECTION_ID = 'estinant-output-2';
 
-type EstinantOutput2Gepp = typeof ESTINANT_OUTPUT_2_GEPP;
+type EstinantOutput2Gepp = typeof PROGRAMMED_TRANSFORM_OUTPUT_2_COLLECTION_ID;
 
-export type EngineEstinantOutput2Voque =
+export type EngineProgrammedTransformOutput2StreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     EstinantOutput2Gepp,
     EngineEstinantOutput2

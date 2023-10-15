@@ -19,7 +19,7 @@ import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/ob
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
-  LintAssertionOmissionVoque,
+  LintAssertionOmissionStreamMetatype,
 } from '../../programmable-units/linting/lintAssertionOmission';
 
 const ESTINANT_NAME = 'assertProgramTestFileIsValid' as const;
@@ -103,7 +103,7 @@ export const assertProgramTestFileIsValid = buildProgrammedTransform({
   .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .toItemTuple2<LintAssertionOmissionVoque>({
+  .toItemTuple2<LintAssertionOmissionStreamMetatype>({
     collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .onTransform((expectedFile) => {

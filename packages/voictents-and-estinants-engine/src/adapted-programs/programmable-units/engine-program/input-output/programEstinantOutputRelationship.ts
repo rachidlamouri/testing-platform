@@ -8,8 +8,8 @@ import { RootGraphLocator } from '../../graph-visualization/directed-graph/rootG
 import { EngineEstinantLocator2 } from '../engineEstinantLocator2';
 
 type BaseProgramEstinantOutputRelationship = {
-  outputZorn: string;
-  estinantLocator: EngineEstinantLocator2;
+  outputId: string;
+  programmedTransformLocator: EngineEstinantLocator2;
   rootGraphLocator: RootGraphLocator;
 };
 
@@ -35,18 +35,18 @@ export const { ProgramEstinantOutputRelationshipInstance } =
     id: (relationship) => {
       return getId([
         relationship.rootGraphLocator.id.forHuman,
-        relationship.outputZorn,
+        relationship.outputId,
       ]);
     },
   });
 
-export const PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP =
+export const PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID =
   'program-estinant-output-relationship';
 
 type ProgramEstinantOutputRelationshipGepp =
-  typeof PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP;
+  typeof PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID;
 
-export type ProgramEstinantOutputRelationshipVoque =
+export type ProgramProgrammedTransformOutputRelationshipStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     ProgramEstinantOutputRelationshipGepp,
     ProgramEstinantOutputRelationship

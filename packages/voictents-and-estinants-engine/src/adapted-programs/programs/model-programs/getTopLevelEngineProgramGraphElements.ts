@@ -1,7 +1,7 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  EngineProgram3Voque,
-  ENGINE_PROGRAM_3_GEPP,
+  EngineProgram3StreamMetatype,
+  ENGINE_PROGRAM_3_COLLECTION_ID,
 } from '../../programmable-units/engine-program/engineProgram3';
 import {
   GraphLikeLabelLocation,
@@ -31,8 +31,8 @@ import {
 export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
   name: 'getTopLevelEngineProgramGraphElements',
 })
-  .fromItem2<EngineProgram3Voque>({
-    collectionId: ENGINE_PROGRAM_3_GEPP,
+  .fromItem2<EngineProgram3StreamMetatype>({
+    collectionId: ENGINE_PROGRAM_3_COLLECTION_ID,
   })
   .toItemTuple2<DirectedGraphElement2StreamMetatype>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
@@ -52,7 +52,7 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
 
     const startingSubgraph = new DirectedCluster2Instance({
       locator: new GraphConstituentLocatorInstance({
-        localId: LocalDirectedGraphElement2Id.buildClusterZorn({
+        localId: LocalDirectedGraphElement2Id.buildClusterId({
           distinguisher: `start-subgraph | ${rootGraphLocator.distinguisher}`,
         }),
         rootGraphLocator,
@@ -82,21 +82,22 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
       },
     });
 
-    const startingVoqueEdgeList = engineProgram.initializedVoqueLocatorList.map(
-      (voqueLocator) => {
-        const edge = new DirectedGraphEdge2Instance({
-          tailId: engineProgram.locator.startingNodeId,
-          headId: voqueLocator.oldId,
-          rootGraphLocator,
-        });
+    const startingStreamMetatypeEdgeList =
+      engineProgram.initializedStreamMetatypeLocatorList.map(
+        (streamMetatypeLocator) => {
+          const edge = new DirectedGraphEdge2Instance({
+            tailId: engineProgram.locator.startingNodeId,
+            headId: streamMetatypeLocator.oldId,
+            rootGraphLocator,
+          });
 
-        return edge;
-      },
-    );
+          return edge;
+        },
+      );
 
     const endingSubgraph = new DirectedCluster2Instance({
       locator: new GraphConstituentLocatorInstance({
-        localId: LocalDirectedGraphElement2Id.buildClusterZorn({
+        localId: LocalDirectedGraphElement2Id.buildClusterId({
           distinguisher: `end-subgraph | ${rootGraphLocator.distinguisher}`,
         }),
         rootGraphLocator,
@@ -126,39 +127,44 @@ export const getTopLevelEngineProgramGraphElements = buildProgrammedTransform({
       },
     });
 
-    const endingVoqueEdgeList = engineProgram.endingVoqueLocatorList.map(
-      (engineVoque) => {
-        const edge = new DirectedGraphEdge2Instance({
-          tailId: engineVoque.oldId,
-          headId: engineProgram.locator.endingNodeId,
-          rootGraphLocator,
+    const endingStreamMetatypeEdgeList =
+      engineProgram.endingStreamMetatypeLocatorList.map(
+        (engineStreamMetatype) => {
+          const edge = new DirectedGraphEdge2Instance({
+            tailId: engineStreamMetatype.oldId,
+            headId: engineProgram.locator.endingNodeId,
+            rootGraphLocator,
+          });
+
+          return edge;
+        },
+      );
+
+    const endingProgrammedTransformEdgeList =
+      engineProgram.programmedTransformList
+        .filter(
+          (engineProgrammedTransform) =>
+            engineProgrammedTransform.outputList.length === 0,
+        )
+        .map((engineProgrammedTransform) => {
+          const edge = new DirectedGraphEdge2Instance({
+            tailId: engineProgrammedTransform.digestibleId,
+            headId: engineProgram.locator.endingNodeId,
+            rootGraphLocator,
+          });
+
+          return edge;
         });
-
-        return edge;
-      },
-    );
-
-    const endingEstinantEdgeList = engineProgram.estinantList
-      .filter((engineEstinant) => engineEstinant.outputList.length === 0)
-      .map((engineEstinant) => {
-        const edge = new DirectedGraphEdge2Instance({
-          tailId: engineEstinant.digestibleId,
-          headId: engineProgram.locator.endingNodeId,
-          rootGraphLocator,
-        });
-
-        return edge;
-      });
 
     return [
       rootGraph,
       startingSubgraph,
       startNode,
-      ...startingVoqueEdgeList,
+      ...startingStreamMetatypeEdgeList,
       endingSubgraph,
       endNode,
-      ...endingVoqueEdgeList,
-      ...endingEstinantEdgeList,
+      ...endingStreamMetatypeEdgeList,
+      ...endingProgrammedTransformEdgeList,
     ];
   })
   .assemble();

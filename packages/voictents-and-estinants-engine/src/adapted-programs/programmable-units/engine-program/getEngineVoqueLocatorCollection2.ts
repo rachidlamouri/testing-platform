@@ -8,8 +8,8 @@ import {
   EstinantVoqueRelationship2Voque,
 } from './estinantVoqueRelationship2';
 import {
-  PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
-  ProgramVoqueRelationship2Voque,
+  PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,
+  ProgramStreamMetatypeRelationship2StreamMetatype,
 } from './programVoqueRelationship2';
 
 /**
@@ -20,33 +20,36 @@ import {
  * @readableName getStreamMetatypeLocatorCollection
  *
  * @todo move the responsibility of uniqueness to a collection
+ *
+ * @canonicalDeclaration
  */
-export const getEngineVoqueLocatorCollection2 = buildProgrammedTransform({
-  name: 'getEngineVoqueLocatorCollection2',
-})
-  .fromCollection2<ProgramVoqueRelationship2Voque>({
-    collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
+export const getEngineStreamMetatypeLocatorCollection2 =
+  buildProgrammedTransform({
+    name: 'getEngineVoqueLocatorCollection2',
   })
-  .andFromCollection2<EstinantVoqueRelationship2Voque>({
-    collectionId: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
-  })
-  .toItemTuple2<EngineVoqueLocator2Voque>({
-    collectionId: ENGINE_VOQUE_LOCATOR_2_GEPP,
-  })
-  .onTransform((programRelationshipList, estinantVoqueRelationshipList) => {
-    const voqueLocatorByZorn = new Map(
-      [...programRelationshipList, ...estinantVoqueRelationshipList].map(
-        (relationship) => {
-          return [
-            relationship.voqueLocator.id,
-            relationship.voqueLocator,
-          ] as const;
-        },
-      ),
-    );
+    .fromCollection2<ProgramStreamMetatypeRelationship2StreamMetatype>({
+      collectionId: PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,
+    })
+    .andFromCollection2<EstinantVoqueRelationship2Voque>({
+      collectionId: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
+    })
+    .toItemTuple2<EngineVoqueLocator2Voque>({
+      collectionId: ENGINE_VOQUE_LOCATOR_2_GEPP,
+    })
+    .onTransform((programRelationshipList, estinantVoqueRelationshipList) => {
+      const voqueLocatorByZorn = new Map(
+        [...programRelationshipList, ...estinantVoqueRelationshipList].map(
+          (relationship) => {
+            return [
+              relationship.streamMetatypeLocator.id,
+              relationship.streamMetatypeLocator,
+            ] as const;
+          },
+        ),
+      );
 
-    const uniqueLocatorList = [...voqueLocatorByZorn.values()];
+      const uniqueLocatorList = [...voqueLocatorByZorn.values()];
 
-    return uniqueLocatorList;
-  })
-  .assemble();
+      return uniqueLocatorList;
+    })
+    .assemble();

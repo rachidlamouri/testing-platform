@@ -8,7 +8,7 @@ import { LintAssertionZorn } from '../linting/lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
-  LintAssertionOmissionVoque,
+  LintAssertionOmissionStreamMetatype,
 } from '../linting/lintAssertionOmission';
 import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import { FileSourceInstance } from '../linting/source/fileSource';
@@ -34,7 +34,7 @@ export const exemptEngineProgramFromCanonicalComment = buildProgrammedTransform(
   .fromItem2<EngineProgramLocator3StreamMetatype>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
-  .toItem2<LintAssertionOmissionVoque>({
+  .toItem2<LintAssertionOmissionStreamMetatype>({
     collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .onTransform((programLocator) => {

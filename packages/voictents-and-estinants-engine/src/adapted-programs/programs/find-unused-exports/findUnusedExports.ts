@@ -20,7 +20,7 @@ import { auditLintAssertionOmissions } from '../../programmable-units/linting/au
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionCollection,
-  LintAssertionOmissionVoque,
+  LintAssertionOmissionStreamMetatype,
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
@@ -54,7 +54,7 @@ runEngine({
         ],
       },
     ),
-    new LintAssertionOmissionCollection<LintAssertionOmissionVoque>({
+    new LintAssertionOmissionCollection<LintAssertionOmissionStreamMetatype>({
       collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
       initialItemEggTuple: omittedUnusedExportList,
     }),

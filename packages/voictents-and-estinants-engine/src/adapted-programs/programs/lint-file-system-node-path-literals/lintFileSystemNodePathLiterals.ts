@@ -29,7 +29,7 @@ import { reportFailedLintAssertion } from '../../programmable-units/linting/repo
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionCollection,
-  LintAssertionOmissionVoque,
+  LintAssertionOmissionStreamMetatype,
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
 
@@ -58,7 +58,7 @@ runEngine({
     new ProgramErrorCollection({
       programFileCache,
     }),
-    new LintAssertionOmissionCollection<LintAssertionOmissionVoque>({
+    new LintAssertionOmissionCollection<LintAssertionOmissionStreamMetatype>({
       collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
       initialItemEggTuple: [
         // keep multiline

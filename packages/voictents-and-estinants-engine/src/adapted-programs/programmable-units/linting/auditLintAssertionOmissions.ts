@@ -10,7 +10,7 @@ import {
 } from './lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
-  LintAssertionOmissionVoque,
+  LintAssertionOmissionStreamMetatype,
 } from './lintAssertionOmission';
 import { LintAssertionError } from './reportFailedLintAssertion';
 import { TypedRule } from './rule';
@@ -38,7 +38,7 @@ const omissionIsValidRule = new TypedRule<OmissionIsValidRuleMessageContext>({
 export const auditLintAssertionOmissions = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromCollection2<LintAssertionOmissionVoque>({
+  .fromCollection2<LintAssertionOmissionStreamMetatype>({
     collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .andFromCollection2<LintAssertionStreamMetatype>({

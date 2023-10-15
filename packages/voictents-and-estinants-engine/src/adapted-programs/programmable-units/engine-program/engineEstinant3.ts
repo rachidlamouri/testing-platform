@@ -12,7 +12,7 @@ import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
 
 type BaseEngineEstinant3 = {
-  estinantName: string;
+  programmedTransformName: string;
   filePath: string;
   identifierName: string;
   commentText: string;
@@ -45,7 +45,7 @@ export const { EngineEstinant3Instance } = buildConstructorFunctionWithName(
   allVoqueLocatorList: (engineEstinant) => {
     const list = [...engineEstinant.inputList, ...engineEstinant.outputList]
       .map((inputOutput) => {
-        return inputOutput.voqueLocator ?? null;
+        return inputOutput.streamMetatypeLocator ?? null;
       })
       .filter(isNotNull);
 
@@ -53,11 +53,12 @@ export const { EngineEstinant3Instance } = buildConstructorFunctionWithName(
   },
 });
 
-export const ENGINE_ESTINANT_3_GEPP = 'engine-estinant-3';
+export const ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID = 'engine-estinant-3';
 
-type EngineEstinant3Gepp = typeof ENGINE_ESTINANT_3_GEPP;
+type EngineEstinant3Gepp = typeof ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID;
 
-export type EngineEstinant3Voque = InMemoryIdentifiableItem2ListStreamMetatype<
-  EngineEstinant3Gepp,
-  EngineEstinant3
->;
+export type EngineProgrammedTransform3StreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    EngineEstinant3Gepp,
+    EngineEstinant3
+  >;

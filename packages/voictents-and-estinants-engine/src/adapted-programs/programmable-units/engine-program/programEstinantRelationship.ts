@@ -9,7 +9,7 @@ import { EngineEstinantLocator2 } from './engineEstinantLocator2';
 
 type BaseProgramEstinantRelationship = {
   programName: string;
-  estinantLocator: EngineEstinantLocator2;
+  programmedTransformLocator: EngineEstinantLocator2;
   rootGraphLocator: RootGraphLocator;
 };
 
@@ -35,19 +35,19 @@ export const { ProgramEstinantRelationshipInstance } =
   >({
     id: (relationship) => {
       return getId([
-        relationship.estinantLocator.id.forHuman,
+        relationship.programmedTransformLocator.id.forHuman,
         relationship.programName,
       ]);
     },
   });
 
-export const PROGRAM_ESTINANT_RELATIONSHIP_GEPP =
+export const PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID =
   'program-estinant-relationship';
 
 type ProgramEstinantRelationshipGepp =
-  typeof PROGRAM_ESTINANT_RELATIONSHIP_GEPP;
+  typeof PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID;
 
-export type ProgramEstinantRelationshipVoque =
+export type ProgramProgrammedTransformRelationshipStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     ProgramEstinantRelationshipGepp,
     ProgramEstinantRelationship

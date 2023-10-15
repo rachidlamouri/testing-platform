@@ -1,12 +1,12 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  EngineProgram3Voque,
-  ENGINE_PROGRAM_3_GEPP,
+  EngineProgram3StreamMetatype,
+  ENGINE_PROGRAM_3_COLLECTION_ID,
 } from '../../programmable-units/engine-program/engineProgram3';
 import {
-  DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
+  DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID,
   DirectedGraphMetadataEntryInstance,
-  DirectedGraphMetadataEntryVoque,
+  DirectedGraphMetadataEntryStreamMetatype,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataEntry';
 
 /**
@@ -18,11 +18,11 @@ export const getTopLevelEngineProgramMetadataEntries = buildProgrammedTransform(
     name: 'getTopLevelEngineProgramMetadataEntries',
   },
 )
-  .fromItem2<EngineProgram3Voque>({
-    collectionId: ENGINE_PROGRAM_3_GEPP,
+  .fromItem2<EngineProgram3StreamMetatype>({
+    collectionId: ENGINE_PROGRAM_3_COLLECTION_ID,
   })
-  .toItemTuple2<DirectedGraphMetadataEntryVoque>({
-    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
+  .toItemTuple2<DirectedGraphMetadataEntryStreamMetatype>({
+    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID,
   })
   .onTransform((engineProgram) => {
     const programEntry = new DirectedGraphMetadataEntryInstance({
@@ -60,8 +60,8 @@ export const getTopLevelEngineProgramMetadataEntries = buildProgrammedTransform(
           },
           {
             label: 'Starting Collections',
-            value: engineProgram.initializedVoqueLocatorList
-              .map((voqueLocator) => voqueLocator.displayName)
+            value: engineProgram.initializedStreamMetatypeLocatorList
+              .map((streamMetatypeLocator) => streamMetatypeLocator.displayName)
               .join(', '),
           },
         ],
@@ -69,9 +69,10 @@ export const getTopLevelEngineProgramMetadataEntries = buildProgrammedTransform(
     });
 
     // TODO: this logic is duplicated in getEngineProgram as well
-    const terminatingEstinantList = engineProgram.estinantList.filter(
-      (estinant) => estinant.outputList.length === 0,
-    );
+    const terminatingProgrammedTransformList =
+      engineProgram.programmedTransformList.filter(
+        (programmedTransform) => programmedTransform.outputList.length === 0,
+      );
 
     const endNodeEntry = new DirectedGraphMetadataEntryInstance({
       elementId: engineProgram.locator.endingNodeId,
@@ -86,14 +87,17 @@ export const getTopLevelEngineProgramMetadataEntries = buildProgrammedTransform(
           },
           {
             label: 'Unused Collections',
-            value: engineProgram.endingVoqueLocatorList
-              .map((voqueLocator) => voqueLocator.displayName)
+            value: engineProgram.endingStreamMetatypeLocatorList
+              .map((streamMetatypeLocator) => streamMetatypeLocator.displayName)
               .join(', '),
           },
           {
             label: 'Terminating Transforms',
-            value: terminatingEstinantList
-              .map((estinant) => estinant.estinantName)
+            value: terminatingProgrammedTransformList
+              .map(
+                (programmedTransform) =>
+                  programmedTransform.programmedTransformName,
+              )
               .join(', '),
           },
         ],

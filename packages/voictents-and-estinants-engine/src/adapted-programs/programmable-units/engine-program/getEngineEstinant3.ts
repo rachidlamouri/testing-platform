@@ -20,13 +20,13 @@ import { buildProgrammedTransform } from '../../../adapter/programmed-transform-
 import {
   ENGINE_ESTINANT_LOCATOR_2_GEPP,
   EngineEstinantBuildAddMetadataForSerializationLocator,
-  EngineEstinantLocator2TypeName,
+  EngineProgrammedTransformLocator2TypeName,
   EngineEstinantLocator2Voque,
   EngineEstinantTopLevelDeclarationLocator,
 } from './engineEstinantLocator2';
 import {
-  ENGINE_ESTINANT_3_GEPP,
-  EngineEstinant3Voque,
+  ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
+  EngineProgrammedTransform3StreamMetatype,
   EngineEstinant3,
   EngineEstinant3Instance,
 } from './engineEstinant3';
@@ -49,16 +49,16 @@ import {
   TypeScriptFileImportListStreamMetatype,
 } from '../type-script-file/typeScriptFileImportList';
 import {
-  ESTINANT_OUTPUT_2_GEPP,
+  PROGRAMMED_TRANSFORM_OUTPUT_2_COLLECTION_ID,
   EngineEstinantOutput2,
   EstinantOutput2Instance,
-  EngineEstinantOutput2Voque,
+  EngineProgrammedTransformOutput2StreamMetatype,
 } from './input-output/engineEstinantOutput2';
 import {
-  ESTINANT_INPUT_2_GEPP,
+  PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID,
   EngineEstinantInput2,
   EstinantInput2Instance,
-  EngineEstinantInput2Voque,
+  EngineProgrammedTransformInput2StreamMetatype,
 } from './input-output/engineEstinantInput2';
 import { EngineVoqueLocator2Instance } from './engineVoqueLocator2';
 import {
@@ -136,7 +136,7 @@ const getBuildAddMetadataForSerializationEstinant = (
       ],
       estinant: new EngineEstinant3Instance({
         // TODO: why do we include both of these?
-        estinantName: 'UNKNOWN',
+        programmedTransformName: 'UNKNOWN',
         identifierName: 'UNKNOWN',
         filePath: estinantLocator.filePath,
         commentText: '',
@@ -153,7 +153,7 @@ const getBuildAddMetadataForSerializationEstinant = (
   const outputVoictentName = outputVoqueName.replace(/Voque$/, '');
 
   // TODO: tie this logic back to the helper function itself
-  const estinantName = `serialize/${inputVoictentName}`;
+  const programmedTransformName = `serialize/${inputVoictentName}`;
 
   const inputVoqueLocator = new EngineVoqueLocator2Instance({
     filePath: estinantLocator.filePath,
@@ -171,28 +171,28 @@ const getBuildAddMetadataForSerializationEstinant = (
     errorList: [],
     estinant: new EngineEstinant3Instance({
       // TODO: why do we include both of these?
-      estinantName,
-      identifierName: estinantName,
+      programmedTransformName,
+      identifierName: programmedTransformName,
       filePath: estinantLocator.filePath,
       commentText:
         'Prepares each item in one collection to be sent to a serialized collection',
       inputList: [
         new EstinantInput2Instance({
-          voictentName: inputVoictentName,
+          collectionName: inputVoictentName,
           isInput: true,
           index: 0,
           estinantLocator,
-          estinantName,
-          voqueLocator: inputVoqueLocator,
+          programmedTransformName,
+          streamMetatypeLocator: inputVoqueLocator,
         }),
       ],
       outputList: [
         new EstinantOutput2Instance({
-          voictentName: outputVoictentName,
+          collectionName: outputVoictentName,
           isInput: false,
           estinantLocator,
-          estinantName,
-          voqueLocator: outputVoqueLocator,
+          estinantName: programmedTransformName,
+          streamMetatypeLocator: outputVoqueLocator,
         }),
       ],
       locator: estinantLocator,
@@ -204,7 +204,7 @@ const getCoreEstinant = ({
   estinantLocator,
   estinantDeclaration,
 }: CoreEstinantAccessorInput): CoreEstinantAccessorResult => {
-  const estinantName = estinantLocator.identifierName;
+  const programmedTransformName = estinantLocator.identifierName;
 
   const typeNode =
     estinantDeclaration !== undefined &&
@@ -250,7 +250,7 @@ const getCoreEstinant = ({
       estinant: new EngineEstinant3Instance({
         filePath: estinantLocator.filePath,
         identifierName: estinantLocator.identifierName,
-        estinantName,
+        programmedTransformName,
         commentText: estinantDeclaration?.commentText ?? '',
         inputList: [],
         outputList: [],
@@ -375,27 +375,27 @@ const getCoreEstinant = ({
         return null;
       }
 
-      const voictentName = voqueName.replace(/Voque$/, '');
+      const collectionName = voqueName.replace(/Voque$/, '');
 
-      const voqueLocator = new EngineVoqueLocator2Instance({
+      const streamMetatypeLocator = new EngineVoqueLocator2Instance({
         identifierName: voqueName,
         filePath: estinantLocator.filePath,
         isCoreVoque: true,
       });
 
       return new EstinantInput2Instance({
-        voictentName,
+        collectionName,
         isInput: true,
         index,
         estinantLocator,
-        estinantName,
-        voqueLocator,
+        programmedTransformName,
+        streamMetatypeLocator,
       });
     })
     .filter((input): input is EngineEstinantInput2 => input !== null);
 
   const outputList = (outputVoqueNameTuple ?? []).map((voqueName) => {
-    const voictentName = voqueName.replace(/Voque$/, '');
+    const collectionName = voqueName.replace(/Voque$/, '');
 
     const voqueLocator = new EngineVoqueLocator2Instance({
       identifierName: voqueName,
@@ -404,11 +404,11 @@ const getCoreEstinant = ({
     });
 
     return new EstinantOutput2Instance({
-      voictentName,
+      collectionName,
       isInput: false,
       estinantLocator,
-      estinantName,
-      voqueLocator,
+      estinantName: programmedTransformName,
+      streamMetatypeLocator: voqueLocator,
     });
   });
 
@@ -417,7 +417,7 @@ const getCoreEstinant = ({
     estinant: new EngineEstinant3Instance({
       filePath: estinantLocator.filePath,
       identifierName: estinantLocator.identifierName,
-      estinantName,
+      programmedTransformName,
       commentText: estinantDeclaration?.commentText ?? '',
       inputList,
       outputList,
@@ -455,7 +455,7 @@ const getAdaptedEstinant = ({
     : null;
 
   if (callExpression === null) {
-    const estinantName = estinantLocator.identifierName;
+    const programmedTransformName = estinantLocator.identifierName;
 
     let error: ReportedProgramError<ReportingLocator>;
     if (estinantLocator.isCoreEstinant) {
@@ -493,7 +493,7 @@ const getAdaptedEstinant = ({
       estinant: new EngineEstinant3Instance({
         filePath: estinantLocator.filePath,
         identifierName: estinantLocator.identifierName,
-        estinantName,
+        programmedTransformName,
         commentText: '',
         inputList: [],
         outputList: [],
@@ -701,7 +701,7 @@ const getAdaptedEstinant = ({
     };
   }
 
-  const estinantName = estinantLocator.identifierName;
+  const programmedTransformName = estinantLocator.identifierName;
 
   const estinantInputOutputList = inputOutputCallExpressionList.map<
     EngineEstinantInput2 | EngineEstinantOutput2
@@ -709,14 +709,14 @@ const getAdaptedEstinant = ({
     // TODO: make the convention where we chop off the suffix more discoverable
     const voqueName = typeNode.typeName.name;
 
-    let voictentName: string;
+    let collectionName: string;
     if (voqueName === 'GenericProgramErrorVoque') {
-      voictentName = 'ProgramError';
+      collectionName = 'ProgramError';
     } else {
-      voictentName = voqueName.replace(/Voque$/, '');
+      collectionName = voqueName.replace(/Voque$/, '');
     }
 
-    const voqueLocator = new EngineVoqueLocator2Instance({
+    const streamMetatypeLocator = new EngineVoqueLocator2Instance({
       filePath: getIdentifierOriginFilePath(voqueName),
       identifierName: voqueName,
       isCoreVoque: false,
@@ -724,21 +724,21 @@ const getAdaptedEstinant = ({
 
     if (isInput) {
       return new EstinantInput2Instance({
-        voictentName,
-        voqueLocator,
+        collectionName,
+        streamMetatypeLocator,
         isInput,
         index,
         estinantLocator,
-        estinantName,
+        programmedTransformName,
       });
     }
 
     return new EstinantOutput2Instance({
-      voictentName,
-      voqueLocator,
+      collectionName,
+      streamMetatypeLocator,
       isInput,
       estinantLocator,
-      estinantName,
+      estinantName: programmedTransformName,
     });
   });
 
@@ -828,7 +828,7 @@ const getAdaptedEstinant = ({
     estinant: new EngineEstinant3Instance({
       filePath: estinantLocator.filePath,
       identifierName: estinantLocator.identifierName,
-      estinantName,
+      programmedTransformName,
       commentText: estinantDeclaration?.commentText ?? '',
       inputList,
       outputList,
@@ -842,8 +842,10 @@ const getAdaptedEstinant = ({
  * estinant. This includes the input and output information for each estinant.
  *
  * @readableName getProgrammedTransformModel
+ *
+ * @canonicalDeclaration
  */
-export const getEngineEstinant3 = buildProgrammedTransform({
+export const getEngineProgrammedTransform3 = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
   .fromItem2<EngineEstinantLocator2Voque>({
@@ -868,14 +870,14 @@ export const getEngineEstinant3 = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .toItemTuple2<EngineEstinant3Voque>({
-    collectionId: ENGINE_ESTINANT_3_GEPP,
+  .toItemTuple2<EngineProgrammedTransform3StreamMetatype>({
+    collectionId: ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
   })
-  .toItemTuple2<EngineEstinantInput2Voque>({
-    collectionId: ESTINANT_INPUT_2_GEPP,
+  .toItemTuple2<EngineProgrammedTransformInput2StreamMetatype>({
+    collectionId: PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID,
   })
-  .toItemTuple2<EngineEstinantOutput2Voque>({
-    collectionId: ESTINANT_OUTPUT_2_GEPP,
+  .toItemTuple2<EngineProgrammedTransformOutput2StreamMetatype>({
+    collectionId: PROGRAMMED_TRANSFORM_OUTPUT_2_COLLECTION_ID,
   })
   .toItemTuple2<EstinantVoqueRelationship2Voque>({
     collectionId: ESTINANT_VOQUE_RELATIONSHIP_2_GEPP,
@@ -905,7 +907,7 @@ export const getEngineEstinant3 = buildProgrammedTransform({
 
       if (
         estinantLocator.typeName ===
-        EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization
+        EngineProgrammedTransformLocator2TypeName.BuildAddMetadataForSerialization
       ) {
         ({ errorList, estinant } =
           getBuildAddMetadataForSerializationEstinant(estinantLocator));
@@ -960,20 +962,24 @@ export const getEngineEstinant3 = buildProgrammedTransform({
       ].map((voqueLocator, index) => {
         return new EstinantVoqueRelationship2Instance({
           estinantLocator,
-          voqueLocator,
+          streamMetatypeLocator: voqueLocator,
           distinguisher: `${index}`,
         });
       });
 
       return {
         [PROGRAM_ERROR_COLLECTION_ID]: errorList,
-        [ENGINE_ESTINANT_3_GEPP]: estinantList,
-        [ESTINANT_INPUT_2_GEPP]: estinantList.flatMap((nextEstinant) => {
-          return nextEstinant.inputList;
-        }),
-        [ESTINANT_OUTPUT_2_GEPP]: estinantList.flatMap((nextEstinant) => {
-          return nextEstinant.outputList;
-        }),
+        [ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID]: estinantList,
+        [PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID]: estinantList.flatMap(
+          (nextEstinant) => {
+            return nextEstinant.inputList;
+          },
+        ),
+        [PROGRAMMED_TRANSFORM_OUTPUT_2_COLLECTION_ID]: estinantList.flatMap(
+          (nextEstinant) => {
+            return nextEstinant.outputList;
+          },
+        ),
         [ESTINANT_VOQUE_RELATIONSHIP_2_GEPP]: estinantVoqueRelationshipList,
       };
     },

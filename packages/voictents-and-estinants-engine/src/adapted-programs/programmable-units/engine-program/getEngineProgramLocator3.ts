@@ -31,7 +31,7 @@ import {
 import {
   EngineEstinantBuildAddMetadataForSerializationLocatorInstance,
   EngineEstinantLocator2,
-  EngineEstinantLocator2TypeName,
+  EngineProgrammedTransformLocator2TypeName,
   EngineEstinantTopLevelDeclarationLocatorInstance,
 } from './engineEstinantLocator2';
 import { isIdentifier } from '../../../package-agnostic-utilities/type-script-ast/isIdentifier';
@@ -59,9 +59,9 @@ import {
   EngineProgramLocator3StreamMetatype,
 } from './engineProgramLocator3';
 import {
-  PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
+  PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID,
   ProgramEstinantRelationshipInstance,
-  ProgramEstinantRelationshipVoque,
+  ProgramProgrammedTransformRelationshipStreamMetatype,
 } from './programEstinantRelationship';
 import {
   EngineVoqueLocator2,
@@ -267,7 +267,8 @@ const getCore2EngineProgramLocator = ({
 
       engineEstinantLocatorList.push(
         new EngineEstinantTopLevelDeclarationLocatorInstance({
-          typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
+          typeName:
+            EngineProgrammedTransformLocator2TypeName.TopLevelDeclaration,
           identifierName,
           filePath,
           isCoreEstinant: true,
@@ -282,7 +283,7 @@ const getCore2EngineProgramLocator = ({
       engineEstinantLocatorList.push(
         new EngineEstinantBuildAddMetadataForSerializationLocatorInstance({
           typeName:
-            EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization,
+            EngineProgrammedTransformLocator2TypeName.BuildAddMetadataForSerialization,
           callExpression: element,
           index,
           isCoreEstinant: true,
@@ -347,10 +348,10 @@ const getCore2EngineProgramLocator = ({
   });
 
   const estinantRelationshipList = engineEstinantLocatorList.map(
-    (estinantLocator) => {
+    (programmedTransformLocator) => {
       return new ProgramEstinantRelationshipInstance({
         programName,
-        estinantLocator,
+        programmedTransformLocator,
         rootGraphLocator: partialProgramLocator.rootGraphLocator,
       });
     },
@@ -589,7 +590,8 @@ const getAdaptedEngineProgramLocator = ({
     if (fileImport === undefined) {
       engineEstinantLocatorList.push(
         new EngineEstinantTopLevelDeclarationLocatorInstance({
-          typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
+          typeName:
+            EngineProgrammedTransformLocator2TypeName.TopLevelDeclaration,
           identifierName,
           filePath: engineProgramFile.filePath.serialized,
           isCoreEstinant: false,
@@ -600,7 +602,7 @@ const getAdaptedEngineProgramLocator = ({
 
     engineEstinantLocatorList.push(
       new EngineEstinantTopLevelDeclarationLocatorInstance({
-        typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration,
+        typeName: EngineProgrammedTransformLocator2TypeName.TopLevelDeclaration,
         identifierName,
         filePath: fileImport.sourcePath,
         isCoreEstinant: false,
@@ -657,10 +659,10 @@ const getAdaptedEngineProgramLocator = ({
   });
 
   const estinantRelationshipList = engineEstinantLocatorList.map(
-    (estinantLocator) => {
+    (programmedTransformLocator) => {
       return new ProgramEstinantRelationshipInstance({
         programName,
-        estinantLocator,
+        programmedTransformLocator,
         rootGraphLocator: partialProgramLocator.rootGraphLocator,
       });
     },
@@ -717,8 +719,8 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
   .toItemTuple2<EngineProgramLocator3StreamMetatype>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
-  .toItemTuple2<ProgramEstinantRelationshipVoque>({
-    collectionId: PROGRAM_ESTINANT_RELATIONSHIP_GEPP,
+  .toItemTuple2<ProgramProgrammedTransformRelationshipStreamMetatype>({
+    collectionId: PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID,
   })
   .onTransform(
     (
@@ -749,7 +751,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
             } satisfies ReportedProgramError<ReportingLocator>,
           ],
           [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [],
-          [PROGRAM_ESTINANT_RELATIONSHIP_GEPP]: [],
+          [PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID]: [],
         };
       }
 
@@ -778,7 +780,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
               } satisfies ReportedProgramError<ReportingLocator>,
             ],
             [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [],
-            [PROGRAM_ESTINANT_RELATIONSHIP_GEPP]: [],
+            [PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID]: [],
           };
         case EngineFunctionConfigurationTypeName.Core2: {
           const { parallelErrorList, engineProgramLocator } =
@@ -793,7 +795,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
           return {
             [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [engineProgramLocator],
-            [PROGRAM_ESTINANT_RELATIONSHIP_GEPP]:
+            [PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID]:
               engineProgramLocator.estinantRelationshipList,
           };
         }
@@ -810,7 +812,7 @@ export const getEngineProgramLocator3 = buildProgrammedTransform({
           return {
             [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
             [ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID]: [engineProgramLocator],
-            [PROGRAM_ESTINANT_RELATIONSHIP_GEPP]:
+            [PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID]:
               engineProgramLocator.estinantRelationshipList,
           };
         }

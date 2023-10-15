@@ -21,17 +21,19 @@ import { mutateGraphLikeElementListOrder } from '../../programmable-units/graph-
 import { SubgraphLike2 } from '../../programmable-units/graph-visualization/directed-graph/subgraphLike2';
 import { DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import {
-  GRAPH_ELEMENT_GROUP_GEPP,
-  GraphElementGroupVoque,
+  GRAPH_ELEMENT_GROUP_COLLECTION_ID,
+  GraphElementGroupStreamMetatype,
 } from './graphElementGroup';
 
-const ESTINANT_NAME = 'getDirectedGraphFromGraphElementGroup' as const;
-type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
+const PROGRAMMED_TRANSFORM_NAME =
+  'getDirectedGraphFromGraphElementGroup' as const;
+type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
+type ReportingLocator =
+  ReportingProgrammedTransformLocator<ProgrammedTransformName>;
 const reporterLocator: ReportingLocator = {
   typeName:
     ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
   filePath: __filename,
 };
 
@@ -39,10 +41,10 @@ const reporterLocator: ReportingLocator = {
  * Converts a list of directed graph elements for one graph id into a single DirectedGraph object
  */
 export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
-  .fromItem2<GraphElementGroupVoque>({
-    collectionId: GRAPH_ELEMENT_GROUP_GEPP,
+  .fromItem2<GraphElementGroupStreamMetatype>({
+    collectionId: GRAPH_ELEMENT_GROUP_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,

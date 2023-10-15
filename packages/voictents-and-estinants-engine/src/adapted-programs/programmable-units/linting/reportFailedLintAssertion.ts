@@ -11,7 +11,7 @@ import {
 } from './lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
-  LintAssertionOmissionVoque,
+  LintAssertionOmissionStreamMetatype,
 } from './lintAssertionOmission';
 
 export class LintAssertionError extends Error {
@@ -39,7 +39,7 @@ export const reportFailedLintAssertion = buildProgrammedTransform({
   .fromItem2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .andFromCollection2<LintAssertionOmissionVoque>({
+  .andFromCollection2<LintAssertionOmissionStreamMetatype>({
     collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({

@@ -25,7 +25,7 @@ import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-
 import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/encodeDirectedGraphAsGraphvizCode';
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
 import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
-import { getEngineEstinantLocatorCollection2 } from '../../programmable-units/engine-program/getEngineEstinantLocatorCollection2';
+import { getEngineProgrammedTransformLocatorCollection2 } from '../../programmable-units/engine-program/getEngineEstinantLocatorCollection2';
 import { getEngineProgram3 } from '../../programmable-units/engine-program/getEngineProgram3';
 import { captureOutputFileDigestList } from '../../programmable-units/sanity-snapshot/captureOutputFileDigestList';
 import { signalError } from '../../programmable-units/error/signalError';
@@ -35,16 +35,16 @@ import { SANITY_SNAPSHOT_COLLECTION_ID } from '../../programmable-units/sanity-s
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileVoictent';
 import { EngineRunnerStrategy } from '../../../core/engine/runEngine';
-import { getEngineVoque2 } from '../../programmable-units/engine-program/getEngineVoque2';
-import { getEngineEstinant3 } from '../../programmable-units/engine-program/getEngineEstinant3';
+import { getEngineStreamMetatype2 } from '../../programmable-units/engine-program/getEngineVoque2';
+import { getEngineProgrammedTransform3 } from '../../programmable-units/engine-program/getEngineEstinant3';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
-import { getEngineVoqueLocatorCollection2 } from '../../programmable-units/engine-program/getEngineVoqueLocatorCollection2';
-import { getEngineEstinantGraphElements } from './getEngineEstinantGraphElements';
-import { getEngineProgramVoqueElements } from './getEngineProgramVoqueElements';
+import { getEngineStreamMetatypeLocatorCollection2 } from '../../programmable-units/engine-program/getEngineVoqueLocatorCollection2';
+import { getEngineProgrammedTransformGraphElements } from './getEngineProgrammedTransformGraphElements';
+import { getEngineProgramStreamMetatypeElements } from './getEngineProgramStreamMetatypeElements';
 import { getDirectedGraphMetadataById2 } from './getDirectedGraphMetadataById2';
-import { getEngineEstinantMetadataEntry } from './getEngineEstinantMetadataEntry';
+import { getEngineProgrammedTransformMetadataEntry } from './getEngineProgrammedTransformMetadataEntry';
 import { getInputMetadataEntry } from './getInputMetadataEntry';
-import { getEngineVoqueMetadataEntry } from './getEngineVoqueMetadataEntry';
+import { getEngineStreamMetatypeMetadataEntry } from './getEngineStreamMetatypeMetadataEntry';
 import { getTopLevelEngineProgramGraphElements } from './getTopLevelEngineProgramGraphElements';
 import { getInputEdges } from './getInputEdges';
 import { getOutputEdge } from './getOutputEdge';
@@ -58,7 +58,7 @@ import { reportFailedLintAssertion } from '../../programmable-units/linting/repo
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionCollection,
-  LintAssertionOmissionVoque,
+  LintAssertionOmissionStreamMetatype,
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
@@ -91,7 +91,7 @@ runEngine({
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
-    new LintAssertionOmissionCollection<LintAssertionOmissionVoque>({
+    new LintAssertionOmissionCollection<LintAssertionOmissionStreamMetatype>({
       collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
       // TODO: fix and remove omissions
       initialItemEggTuple: [
@@ -122,23 +122,23 @@ runEngine({
 
     filterEngineProgramFile,
     getEngineProgramLocator3,
-    getEngineEstinantLocatorCollection2,
-    getEngineEstinant3,
+    getEngineProgrammedTransformLocatorCollection2,
+    getEngineProgrammedTransform3,
     getEngineProgram3,
-    getEngineVoqueLocatorCollection2,
-    getEngineVoque2,
+    getEngineStreamMetatypeLocatorCollection2,
+    getEngineStreamMetatype2,
 
     getTopLevelEngineProgramGraphElements,
-    getEngineProgramVoqueElements,
-    getEngineEstinantGraphElements,
+    getEngineProgramStreamMetatypeElements,
+    getEngineProgrammedTransformGraphElements,
     getInputEdges,
     getOutputEdge,
     groupGraphElements,
     getDirectedGraphFromGraphElementGroup,
 
     getTopLevelEngineProgramMetadataEntries,
-    getEngineVoqueMetadataEntry,
-    getEngineEstinantMetadataEntry,
+    getEngineStreamMetatypeMetadataEntry,
+    getEngineProgrammedTransformMetadataEntry,
     getInputMetadataEntry,
     getDirectedGraphMetadataById2,
 

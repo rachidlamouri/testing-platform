@@ -4,10 +4,10 @@ import {
   DirectedGraphElement2StreamMetatype,
 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import {
-  GRAPH_ELEMENT_GROUP_GEPP,
+  GRAPH_ELEMENT_GROUP_COLLECTION_ID,
   GraphElementGroup,
   GraphElementGroupInstance,
-  GraphElementGroupVoque,
+  GraphElementGroupStreamMetatype,
 } from './graphElementGroup';
 
 /**
@@ -19,17 +19,17 @@ export const groupGraphElements = buildProgrammedTransform({
   .fromCollection2<DirectedGraphElement2StreamMetatype>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   })
-  .toItemTuple2<GraphElementGroupVoque>({
-    collectionId: GRAPH_ELEMENT_GROUP_GEPP,
+  .toItemTuple2<GraphElementGroupStreamMetatype>({
+    collectionId: GRAPH_ELEMENT_GROUP_COLLECTION_ID,
   })
   .onTransform((allGraphElementList) => {
-    const elementGroupByRootLocatorZorn = new Map<string, GraphElementGroup>();
+    const elementGroupByRootLocatorId = new Map<string, GraphElementGroup>();
 
     allGraphElementList.forEach((element) => {
       const key = element.rootGraphLocator.id.forHuman;
 
       const group =
-        elementGroupByRootLocatorZorn.get(key) ??
+        elementGroupByRootLocatorId.get(key) ??
         new GraphElementGroupInstance({
           rootGraphLocator: element.rootGraphLocator,
           elementList: [],
@@ -37,10 +37,10 @@ export const groupGraphElements = buildProgrammedTransform({
 
       group.elementList.push(element);
 
-      elementGroupByRootLocatorZorn.set(key, group);
+      elementGroupByRootLocatorId.set(key, group);
     });
 
-    const outputList = [...elementGroupByRootLocatorZorn.values()];
+    const outputList = [...elementGroupByRootLocatorId.values()];
 
     return outputList;
   })

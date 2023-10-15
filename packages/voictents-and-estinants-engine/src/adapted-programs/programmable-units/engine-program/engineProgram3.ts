@@ -15,9 +15,9 @@ type BaseEngineProgram3 = {
   programName: string;
   description: string;
   filePath: string;
-  estinantList: Tuple<EngineEstinant3>;
-  initializedVoqueLocatorList: EngineVoqueLocator2[];
-  endingVoqueLocatorList: EngineVoqueLocator2[];
+  programmedTransformList: Tuple<EngineEstinant3>;
+  initializedStreamMetatypeLocatorList: EngineVoqueLocator2[];
+  endingStreamMetatypeLocatorList: EngineVoqueLocator2[];
   locator: EngineProgramLocator3;
 };
 
@@ -47,11 +47,12 @@ export const { EngineProgram3Instance } = buildConstructorFunctionWithName(
   },
 });
 
-export const ENGINE_PROGRAM_3_GEPP = 'engine-program-3';
+export const ENGINE_PROGRAM_3_COLLECTION_ID = 'engine-program-3';
 
-type EngineProgram3Gepp = typeof ENGINE_PROGRAM_3_GEPP;
+type EngineProgram3Gepp = typeof ENGINE_PROGRAM_3_COLLECTION_ID;
 
-export type EngineProgram3Voque = InMemoryIdentifiableItem2ListStreamMetatype<
-  EngineProgram3Gepp,
-  EngineProgram3
->;
+export type EngineProgram3StreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    EngineProgram3Gepp,
+    EngineProgram3
+  >;

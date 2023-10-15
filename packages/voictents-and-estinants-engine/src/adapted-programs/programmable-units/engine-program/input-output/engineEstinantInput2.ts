@@ -29,12 +29,12 @@ export class EngineEstinantInput2Zorn extends ComplexId<EngineEstinantInput2Zorn
 
 type BaseEstinantInput2 = {
   // TODO: delete "voictentName" in favor of "voqueLocator"
-  voictentName: string;
-  voqueLocator?: EngineVoqueLocator2;
+  collectionName: string;
+  streamMetatypeLocator?: EngineVoqueLocator2;
   isInput: true;
   index: number;
   estinantLocator: EngineEstinantLocator2;
-  estinantName: string;
+  programmedTransformName: string;
 };
 
 type EstinantInput2Prototype = {
@@ -58,18 +58,18 @@ export const { EstinantInput2Instance } = buildConstructorFunctionWithName(
   id: memoizeGetter((input) => {
     return new EngineEstinantInput2Zorn({
       inputIndex: `${input.index}`,
-      voictentName: input.voictentName,
+      voictentName: input.collectionName,
       estinantLocator: input.estinantLocator.id,
     });
   }),
   oldId: (input) => input.id.forMachine,
 });
 
-export const ESTINANT_INPUT_2_GEPP = 'estinant-input-2';
+export const PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID = 'estinant-input-2';
 
-type EstinantInput2Gepp = typeof ESTINANT_INPUT_2_GEPP;
+type EstinantInput2Gepp = typeof PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID;
 
-export type EngineEstinantInput2Voque =
+export type EngineProgrammedTransformInput2StreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     EstinantInput2Gepp,
     EngineEstinantInput2

@@ -5,7 +5,7 @@ import { isPredicateFunctionish } from '../../../package-agnostic-utilities/type
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
-  LintAssertionOmissionVoque,
+  LintAssertionOmissionStreamMetatype,
 } from '../linting/lintAssertionOmission';
 import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import {
@@ -31,7 +31,7 @@ export const exemptPredicatesFromCanonicalComment = buildProgrammedTransform({
   .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
     collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   })
-  .toItemTuple2<LintAssertionOmissionVoque>({
+  .toItemTuple2<LintAssertionOmissionStreamMetatype>({
     collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .onTransform((declarationGroup) => {

@@ -3,7 +3,7 @@ import { LintAssertionZorn } from '../linting/lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
-  LintAssertionOmissionVoque,
+  LintAssertionOmissionStreamMetatype,
 } from '../linting/lintAssertionOmission';
 import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import { FileSourceInstance } from '../linting/source/fileSource';
@@ -29,7 +29,7 @@ export const omitProgramCanonicalExportRequirement = buildProgrammedTransform({
   .fromItem2<EngineProgramFileVoque>({
     collectionId: ENGINE_PROGRAM_FILE_GEPP,
   })
-  .toItem2<LintAssertionOmissionVoque>({
+  .toItem2<LintAssertionOmissionStreamMetatype>({
     collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .onTransform((engineFile) => {

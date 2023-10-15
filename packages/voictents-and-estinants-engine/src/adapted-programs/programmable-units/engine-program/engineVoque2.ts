@@ -45,11 +45,9 @@ export const { EngineVoque2Instance } = buildConstructorFunctionWithName(
   isCoreVoque: (engineVoque) => engineVoque.locator.isCoreVoque,
 });
 
-export const ENGINE_VOQUE_2_GEPP = 'engine-voque-2';
+export const ENGINE_STREAM_METATYPE_2_COLLECTION_ID = 'engine-voque-2';
 
-type EngineVoque2Gepp = typeof ENGINE_VOQUE_2_GEPP;
+type EngineVoque2Gepp = typeof ENGINE_STREAM_METATYPE_2_COLLECTION_ID;
 
-export type EngineVoque2Voque = InMemoryIdentifiableItem2ListStreamMetatype<
-  EngineVoque2Gepp,
-  EngineVoque2
->;
+export type EngineStreamMetatype2StreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<EngineVoque2Gepp, EngineVoque2>;

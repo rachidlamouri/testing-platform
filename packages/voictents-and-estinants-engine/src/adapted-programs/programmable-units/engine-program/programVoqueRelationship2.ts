@@ -9,7 +9,7 @@ import { EngineVoqueLocator2 } from './engineVoqueLocator2';
 
 type BaseProgramVoqueRelationship2 = {
   programName: string;
-  voqueLocator: EngineVoqueLocator2;
+  streamMetatypeLocator: EngineVoqueLocator2;
   rootGraphLocator: RootGraphLocator;
   parentId: string;
 };
@@ -35,15 +35,20 @@ export const { ProgramVoqueRelationship2Instance } =
     ProgramVoqueRelationship2Prototype
   >({
     id: (relationship) => {
-      return getId([relationship.voqueLocator.id, relationship.programName]);
+      return getId([
+        relationship.streamMetatypeLocator.id,
+        relationship.programName,
+      ]);
     },
   });
 
-export const PROGRAM_VOQUE_RELATIONSHIP_2_GEPP = 'program-voque-relationship-2';
+export const PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID =
+  'program-voque-relationship-2';
 
-type ProgramVoqueRelationship2Gepp = typeof PROGRAM_VOQUE_RELATIONSHIP_2_GEPP;
+type ProgramVoqueRelationship2Gepp =
+  typeof PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID;
 
-export type ProgramVoqueRelationship2Voque =
+export type ProgramStreamMetatypeRelationship2StreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     ProgramVoqueRelationship2Gepp,
     ProgramVoqueRelationship2

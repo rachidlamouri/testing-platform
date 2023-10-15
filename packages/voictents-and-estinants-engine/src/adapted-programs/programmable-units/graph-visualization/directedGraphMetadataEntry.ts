@@ -38,12 +38,13 @@ export const { DirectedGraphMetadataEntryInstance } =
     },
   });
 
-export const DIRECTED_GRAPH_METADATA_ENTRY_GEPP =
+export const DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID =
   'directed-graph-metadata-entry';
 
-type DirectedGraphMetadataEntryGepp = typeof DIRECTED_GRAPH_METADATA_ENTRY_GEPP;
+type DirectedGraphMetadataEntryGepp =
+  typeof DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID;
 
-export type DirectedGraphMetadataEntryVoque =
+export type DirectedGraphMetadataEntryStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
     DirectedGraphMetadataEntryGepp,
     DirectedGraphMetadataEntry

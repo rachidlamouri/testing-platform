@@ -12,9 +12,9 @@ import {
   FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
 import {
-  ENGINE_VOQUE_2_GEPP,
+  ENGINE_STREAM_METATYPE_2_COLLECTION_ID,
   EngineVoque2Instance,
-  EngineVoque2Voque,
+  EngineStreamMetatype2StreamMetatype,
 } from './engineVoque2';
 import {
   ENGINE_VOQUE_LOCATOR_2_GEPP,
@@ -35,8 +35,10 @@ const reporterLocator: ReportingLocator = {
  * Associates a comment with a voque definition
  *
  * @readableName getStreamMetatypeModel
+ *
+ * @canonicalDeclaration
  */
-export const getEngineVoque2 = buildProgrammedTransform({
+export const getEngineStreamMetatype2 = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
   .fromItem2<EngineVoqueLocator2Voque>({
@@ -50,8 +52,8 @@ export const getEngineVoque2 = buildProgrammedTransform({
     getRightKeyTuple: (left) => [left.item.filePath],
     getRightKey: (right) => right.item.filePath,
   })
-  .toItem2<EngineVoque2Voque>({
-    collectionId: ENGINE_VOQUE_2_GEPP,
+  .toItem2<EngineStreamMetatype2StreamMetatype>({
+    collectionId: ENGINE_STREAM_METATYPE_2_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
@@ -93,7 +95,7 @@ export const getEngineVoque2 = buildProgrammedTransform({
           ];
 
     return {
-      [ENGINE_VOQUE_2_GEPP]: new EngineVoque2Instance({
+      [ENGINE_STREAM_METATYPE_2_COLLECTION_ID]: new EngineVoque2Instance({
         filePath: voqueLocator.filePath,
         identifierName: voqueLocator.identifierName,
         commentText: commentText ?? '',

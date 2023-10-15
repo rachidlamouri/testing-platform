@@ -1,16 +1,16 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
-  ENGINE_ESTINANT_3_GEPP,
-  EngineEstinant3Voque,
+  ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
+  EngineProgrammedTransform3StreamMetatype,
 } from '../../programmable-units/engine-program/engineEstinant3';
 import {
-  ESTINANT_OUTPUT_2_GEPP,
-  EngineEstinantOutput2Voque,
+  PROGRAMMED_TRANSFORM_OUTPUT_2_COLLECTION_ID,
+  EngineProgrammedTransformOutput2StreamMetatype,
 } from '../../programmable-units/engine-program/input-output/engineEstinantOutput2';
 import {
-  PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
-  ProgramEstinantOutputRelationshipVoque,
+  PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID,
+  ProgramProgrammedTransformOutputRelationshipStreamMetatype,
 } from '../../programmable-units/engine-program/input-output/programEstinantOutputRelationship';
 import { DirectedGraphEdge2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import {
@@ -24,39 +24,54 @@ import {
 export const getOutputEdge = buildProgrammedTransform({
   name: 'getOutputEdge',
 })
-  .fromItem2<ProgramEstinantOutputRelationshipVoque>({
-    collectionId: PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
+  .fromItem2<ProgramProgrammedTransformOutputRelationshipStreamMetatype>({
+    collectionId:
+      PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID,
   })
   // TODO: locator and estinant ids for buildAddMetadtaForSerialization can have different ids. Remove this when that issue is fixed
-  .andFromItemTuple2<EngineEstinant3Voque, [IdentifiableItemId]>({
-    collectionId: ENGINE_ESTINANT_3_GEPP,
+  .andFromItemTuple2<
+    EngineProgrammedTransform3StreamMetatype,
+    [IdentifiableItemId]
+  >({
+    collectionId: ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
     getRightKeyTuple: (relationship) => {
-      return [relationship.item.estinantLocator.id];
+      return [relationship.item.programmedTransformLocator.id];
     },
-    getRightKey: (engineEstinant) => engineEstinant.item.locator.id,
+    getRightKey: (engineProgrammedTransform) =>
+      engineProgrammedTransform.item.locator.id,
   })
-  .andFromItemTuple2<EngineEstinantOutput2Voque, [IdentifiableItemId]>({
-    collectionId: ESTINANT_OUTPUT_2_GEPP,
+  .andFromItemTuple2<
+    EngineProgrammedTransformOutput2StreamMetatype,
+    [IdentifiableItemId]
+  >({
+    collectionId: PROGRAMMED_TRANSFORM_OUTPUT_2_COLLECTION_ID,
     getRightKeyTuple: (relationship) => {
-      return [relationship.item.outputZorn];
+      return [relationship.item.outputId];
     },
-    getRightKey: (estinantOutput) => estinantOutput.item.id,
+    getRightKey: (programmedTransformOutput) =>
+      programmedTransformOutput.item.id,
   })
   .toItemTuple2<DirectedGraphElement2StreamMetatype>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   })
-  .onTransform((relationship, [engineEstinant], [estinantOutput]) => {
-    // TODO: make voqueLocator required
-    if (estinantOutput.voqueLocator === undefined) {
-      throw Error('Voque locator is required');
-    }
+  .onTransform(
+    (
+      relationship,
+      [engineProgrammedTransform],
+      [programmedTransformOutput],
+    ) => {
+      // TODO: make voqueLocator required
+      if (programmedTransformOutput.streamMetatypeLocator === undefined) {
+        throw Error('Voque locator is required');
+      }
 
-    const edge = new DirectedGraphEdge2Instance({
-      tailId: engineEstinant.digestibleId,
-      headId: estinantOutput.voqueLocator.oldId,
-      rootGraphLocator: relationship.rootGraphLocator,
-    });
+      const edge = new DirectedGraphEdge2Instance({
+        tailId: engineProgrammedTransform.digestibleId,
+        headId: programmedTransformOutput.streamMetatypeLocator.oldId,
+        rootGraphLocator: relationship.rootGraphLocator,
+      });
 
-    return [edge];
-  })
+      return [edge];
+    },
+  )
   .assemble();

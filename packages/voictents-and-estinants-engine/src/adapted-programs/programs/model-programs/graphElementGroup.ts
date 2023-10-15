@@ -31,12 +31,12 @@ export const { GraphElementGroupInstance } = buildConstructorFunctionWithName(
   },
 });
 
-export const GRAPH_ELEMENT_GROUP_GEPP = 'graph-element-group';
+export const GRAPH_ELEMENT_GROUP_COLLECTION_ID = 'graph-element-group';
 
-type GraphElementGroupGepp = typeof GRAPH_ELEMENT_GROUP_GEPP;
+type GraphElementGroupCollectionId = typeof GRAPH_ELEMENT_GROUP_COLLECTION_ID;
 
-export type GraphElementGroupVoque =
+export type GraphElementGroupStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    GraphElementGroupGepp,
+    GraphElementGroupCollectionId,
     GraphElementGroup
   >;

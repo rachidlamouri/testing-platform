@@ -1,16 +1,16 @@
 import * as uuid from 'uuid';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  ENGINE_ESTINANT_3_GEPP,
-  EngineEstinant3Voque,
+  ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
+  EngineProgrammedTransform3StreamMetatype,
 } from '../../programmable-units/engine-program/engineEstinant3';
 import {
-  ENGINE_PROGRAM_3_GEPP,
-  EngineProgram3Voque,
+  ENGINE_PROGRAM_3_COLLECTION_ID,
+  EngineProgram3StreamMetatype,
 } from '../../programmable-units/engine-program/engineProgram3';
 import {
-  ENGINE_VOQUE_2_GEPP,
-  EngineVoque2Voque,
+  ENGINE_STREAM_METATYPE_2_COLLECTION_ID,
+  EngineStreamMetatype2StreamMetatype,
 } from '../../programmable-units/engine-program/engineVoque2';
 import {
   GenericProgramErrorStreamMetatype,
@@ -19,15 +19,16 @@ import {
   ProgramErrorEgg,
   ReportingProgrammedTransformLocator,
 } from '../../programmable-units/error/programError';
-import { EngineEstinantLocator2TypeName } from '../../programmable-units/engine-program/engineEstinantLocator2';
+import { EngineProgrammedTransformLocator2TypeName } from '../../programmable-units/engine-program/engineEstinantLocator2';
 
-const ESTINANT_NAME = 'assertNoCopyPasta' as const;
-type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
+const PROGRAMMED_TRANSFORM_NAME = 'assertNoCopyPasta' as const;
+type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
+type ReportingLocator =
+  ReportingProgrammedTransformLocator<ProgrammedTransformName>;
 const reporterLocator: ReportingLocator = {
   typeName:
     ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
   filePath: __filename,
 };
 
@@ -37,44 +38,53 @@ const reporterLocator: ReportingLocator = {
  * description was not changed
  */
 export const assertNoCopyPasta = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
-  .fromCollection2<EngineProgram3Voque>({
-    collectionId: ENGINE_PROGRAM_3_GEPP,
+  .fromCollection2<EngineProgram3StreamMetatype>({
+    collectionId: ENGINE_PROGRAM_3_COLLECTION_ID,
   })
-  .andFromCollection2<EngineVoque2Voque>({
-    collectionId: ENGINE_VOQUE_2_GEPP,
+  .andFromCollection2<EngineStreamMetatype2StreamMetatype>({
+    collectionId: ENGINE_STREAM_METATYPE_2_COLLECTION_ID,
   })
-  .andFromCollection2<EngineEstinant3Voque>({
-    collectionId: ENGINE_ESTINANT_3_GEPP,
+  .andFromCollection2<EngineProgrammedTransform3StreamMetatype>({
+    collectionId: ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .onTransform((programList, voqueList, estinantList) => {
+  .onTransform((programList, streamMetatypeList, programmedTransformList) => {
     const describedProgramEntryList = programList.map((program) => {
       return [program.description, { program }] as const;
     });
 
-    const describedVoqueEntryList = voqueList.map((voque) => {
-      return [voque.commentText, { voque }] as const;
-    });
+    const describedStreamMetatypeEntryList = streamMetatypeList.map(
+      (streamMetatype) => {
+        return [streamMetatype.commentText, { streamMetatype }] as const;
+      },
+    );
 
-    const describedEstinantEntryList = estinantList.map((estinant) => {
-      return [estinant.commentText, { estinant }] as const;
-    });
+    const describedProgrammedTransformEntryList = programmedTransformList.map(
+      (programmedTransform) => {
+        return [
+          programmedTransform.commentText,
+          { programmedTransform },
+        ] as const;
+      },
+    );
 
     const duplicateDescribedDatumByDescription = new Map<string, unknown[]>();
 
     [
       ...describedProgramEntryList,
-      ...describedVoqueEntryList,
-      ...describedEstinantEntryList.filter(([, { estinant }]) => {
-        return (
-          estinant.locator.typeName !==
-          EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization
-        );
-      }),
+      ...describedStreamMetatypeEntryList,
+      ...describedProgrammedTransformEntryList.filter(
+        ([, { programmedTransform }]) => {
+          return (
+            programmedTransform.locator.typeName !==
+            EngineProgrammedTransformLocator2TypeName.BuildAddMetadataForSerialization
+          );
+        },
+      ),
     ]
       .filter(([description]) => {
         return description !== '';

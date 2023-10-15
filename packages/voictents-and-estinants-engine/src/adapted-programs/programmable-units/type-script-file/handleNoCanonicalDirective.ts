@@ -3,7 +3,7 @@ import { LintAssertionZorn } from '../linting/lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
-  LintAssertionOmissionVoque,
+  LintAssertionOmissionStreamMetatype,
 } from '../linting/lintAssertionOmission';
 import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import { FileSourceInstance } from '../linting/source/fileSource';
@@ -31,7 +31,7 @@ export const handleNoCanonicalDirective = buildProgrammedTransform({
   .fromItem2<FileParsedCommentGroupVoque>({
     collectionId: FILE_PARSED_COMMENT_GROUP_GEPP,
   })
-  .toItemTuple2<LintAssertionOmissionVoque>({
+  .toItemTuple2<LintAssertionOmissionStreamMetatype>({
     collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
   })
   .onTransform((commentGroup) => {

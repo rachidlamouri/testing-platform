@@ -1,17 +1,17 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
-  ESTINANT_INPUT_2_GEPP,
-  EngineEstinantInput2Voque,
+  PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID,
+  EngineProgrammedTransformInput2StreamMetatype,
 } from '../../programmable-units/engine-program/input-output/engineEstinantInput2';
 import {
-  PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
-  ProgramEstinantInputRelationshipVoque,
+  PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID,
+  ProgramProgrammedTransformInputRelationshipStreamMetatype,
 } from '../../programmable-units/engine-program/input-output/programEstinantInputRelationship';
 import {
-  DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
+  DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID,
   DirectedGraphMetadataEntryInstance,
-  DirectedGraphMetadataEntryVoque,
+  DirectedGraphMetadataEntryStreamMetatype,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataEntry';
 
 /**
@@ -20,30 +20,34 @@ import {
 export const getInputMetadataEntry = buildProgrammedTransform({
   name: 'getInputMetadataEntry',
 })
-  .fromItem2<ProgramEstinantInputRelationshipVoque>({
-    collectionId: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
+  .fromItem2<ProgramProgrammedTransformInputRelationshipStreamMetatype>({
+    collectionId: PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID,
   })
-  .andFromItemTuple2<EngineEstinantInput2Voque, [IdentifiableItemId]>({
-    collectionId: ESTINANT_INPUT_2_GEPP,
+  .andFromItemTuple2<
+    EngineProgrammedTransformInput2StreamMetatype,
+    [IdentifiableItemId]
+  >({
+    collectionId: PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID,
     getRightKeyTuple: (relationship) => {
-      return [relationship.item.estinantInput.id];
+      return [relationship.item.programmedTransformInput.id];
     },
-    getRightKey: (engineEstinant) => engineEstinant.item.id,
+    getRightKey: (engineProgrammedTransform) =>
+      engineProgrammedTransform.item.id,
   })
-  .toItem2<DirectedGraphMetadataEntryVoque>({
-    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
+  .toItem2<DirectedGraphMetadataEntryStreamMetatype>({
+    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID,
   })
-  .onTransform((relationship, [estinantInput]) => {
+  .onTransform((relationship, [programmedTransformInput]) => {
     const inputName =
-      estinantInput.index === 0
+      programmedTransformInput.index === 0
         ? 'Left Input'
-        : `Right Input ${estinantInput.index}`;
+        : `Right Input ${programmedTransformInput.index}`;
 
     const entry = new DirectedGraphMetadataEntryInstance({
-      elementId: estinantInput.oldId,
+      elementId: programmedTransformInput.oldId,
       rootGraphLocator: relationship.rootGraphLocator,
       metadata: {
-        title: `${estinantInput.estinantName}: ${inputName}`,
+        title: `${programmedTransformInput.programmedTransformName}: ${inputName}`,
         fieldList: [
           {
             label: 'Type',
@@ -51,7 +55,7 @@ export const getInputMetadataEntry = buildProgrammedTransform({
           },
           {
             label: 'Source Collection',
-            value: estinantInput.voictentName,
+            value: programmedTransformInput.collectionName,
           },
         ],
       },

@@ -1,12 +1,12 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
-  ENGINE_VOQUE_2_GEPP,
-  EngineVoque2Voque,
+  ENGINE_STREAM_METATYPE_2_COLLECTION_ID,
+  EngineStreamMetatype2StreamMetatype,
 } from '../../programmable-units/engine-program/engineVoque2';
 import {
-  PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
-  ProgramVoqueRelationship2Voque,
+  PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,
+  ProgramStreamMetatypeRelationship2StreamMetatype,
 } from '../../programmable-units/engine-program/programVoqueRelationship2';
 import {
   DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
@@ -24,25 +24,30 @@ import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-fi
  *
  * @readableName getStreamMetatypeModelGraphElement
  */
-export const getEngineProgramVoqueElements = buildProgrammedTransform({
+export const getEngineProgramStreamMetatypeElements = buildProgrammedTransform({
   name: 'getEngineProgramVoqueElements',
 })
-  .fromItem2<ProgramVoqueRelationship2Voque>({
-    collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
+  .fromItem2<ProgramStreamMetatypeRelationship2StreamMetatype>({
+    collectionId: PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,
   })
-  .andFromItemTuple2<EngineVoque2Voque, [IdentifiableItemId]>({
-    collectionId: ENGINE_VOQUE_2_GEPP,
-    getRightKeyTuple: (relationship) => [relationship.item.voqueLocator.id],
-    getRightKey: (engineVoque) => engineVoque.item.locator.id,
-  })
+  .andFromItemTuple2<EngineStreamMetatype2StreamMetatype, [IdentifiableItemId]>(
+    {
+      collectionId: ENGINE_STREAM_METATYPE_2_COLLECTION_ID,
+      getRightKeyTuple: (relationship) => [
+        relationship.item.streamMetatypeLocator.id,
+      ],
+      getRightKey: (engineStreamMetatype) =>
+        engineStreamMetatype.item.locator.id,
+    },
+  )
   .toItem2<DirectedGraphElement2StreamMetatype>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   })
-  .onTransform((relationship, [engineVoque]) => {
+  .onTransform((relationship, [engineStreamMetatype]) => {
     const label =
-      engineVoque.displayName === 'GenericProgramError'
+      engineStreamMetatype.displayName === 'GenericProgramError'
         ? 'ProgramError'
-        : engineVoque.displayName;
+        : engineStreamMetatype.displayName;
 
     const node = new DirectedGraphNode2Instance({
       locator: new GraphConstituentLocatorInstance({

@@ -9,7 +9,7 @@ import { EngineVoqueLocator2 } from './engineVoqueLocator2';
 
 type BaseEstinantVoqueRelationship2 = {
   estinantLocator: EngineEstinantLocator2;
-  voqueLocator: EngineVoqueLocator2;
+  streamMetatypeLocator: EngineVoqueLocator2;
   // An estinant can reference a voque multiple times
   distinguisher: string;
 };
@@ -35,7 +35,7 @@ export const { EstinantVoqueRelationship2Instance } =
   >({
     id: (relationship) => {
       return getId([
-        relationship.voqueLocator.id,
+        relationship.streamMetatypeLocator.id,
         relationship.estinantLocator.id.forHuman,
         relationship.distinguisher,
       ]);

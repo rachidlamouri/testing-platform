@@ -6,8 +6,8 @@ import {
   DirectedGraphMetadataByIdStreamMetatype,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import {
-  DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
-  DirectedGraphMetadataEntryVoque,
+  DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID,
+  DirectedGraphMetadataEntryStreamMetatype,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataEntry';
 
 /**
@@ -17,8 +17,8 @@ import {
 export const getDirectedGraphMetadataById2 = buildProgrammedTransform({
   name: 'getDirectedGraphMetadataById2',
 })
-  .fromCollection2<DirectedGraphMetadataEntryVoque>({
-    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_GEPP,
+  .fromCollection2<DirectedGraphMetadataEntryStreamMetatype>({
+    collectionId: DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID,
   })
   .toItemTuple2<DirectedGraphMetadataByIdStreamMetatype>({
     collectionId: DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,

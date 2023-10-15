@@ -1,16 +1,16 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
-  EngineEstinant3Voque,
-  ENGINE_ESTINANT_3_GEPP,
+  EngineProgrammedTransform3StreamMetatype,
+  ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
 } from '../../programmable-units/engine-program/engineEstinant3';
 import {
-  ESTINANT_INPUT_2_GEPP,
-  EngineEstinantInput2Voque,
+  PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID,
+  EngineProgrammedTransformInput2StreamMetatype,
 } from '../../programmable-units/engine-program/input-output/engineEstinantInput2';
 import {
-  PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
-  ProgramEstinantInputRelationshipVoque,
+  PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID,
+  ProgramProgrammedTransformInputRelationshipStreamMetatype,
 } from '../../programmable-units/engine-program/input-output/programEstinantInputRelationship';
 import { DirectedGraphEdge2Instance } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge2';
 import {
@@ -25,45 +25,54 @@ import {
 export const getInputEdges = buildProgrammedTransform({
   name: 'getInputEdges',
 })
-  .fromItem2<ProgramEstinantInputRelationshipVoque>({
-    collectionId: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
+  .fromItem2<ProgramProgrammedTransformInputRelationshipStreamMetatype>({
+    collectionId: PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID,
   })
   // TODO: locator and estinant ids for buildAddMetadtaForSerialization can have different ids. Remove this when that issue is fixed
-  .andFromItemTuple2<EngineEstinant3Voque, [IdentifiableItemId]>({
-    collectionId: ENGINE_ESTINANT_3_GEPP,
+  .andFromItemTuple2<
+    EngineProgrammedTransform3StreamMetatype,
+    [IdentifiableItemId]
+  >({
+    collectionId: ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
     getRightKeyTuple: (relationship) => {
-      return [relationship.item.estinantLocator.id];
+      return [relationship.item.programmedTransformLocator.id];
     },
-    getRightKey: (engineEstinant) => engineEstinant.item.locator.id,
+    getRightKey: (engineProgrammedTransform) =>
+      engineProgrammedTransform.item.locator.id,
   })
-  .andFromItemTuple2<EngineEstinantInput2Voque, [IdentifiableItemId]>({
-    collectionId: ESTINANT_INPUT_2_GEPP,
+  .andFromItemTuple2<
+    EngineProgrammedTransformInput2StreamMetatype,
+    [IdentifiableItemId]
+  >({
+    collectionId: PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID,
     getRightKeyTuple: (relationship) => {
-      return [relationship.item.estinantInput.id];
+      return [relationship.item.programmedTransformInput.id];
     },
-    getRightKey: (estinantInput) => estinantInput.item.id,
+    getRightKey: (programmedTransformInput) => programmedTransformInput.item.id,
   })
   .toItemTuple2<DirectedGraphElement2StreamMetatype>({
     collectionId: DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   })
-  .onTransform((relationship, [engineEstinant], [estinantInput]) => {
-    // TODO: make voqueLocator required
-    if (estinantInput.voqueLocator === undefined) {
-      throw Error('Voque locator is required');
-    }
+  .onTransform(
+    (relationship, [engineProgrammedTransform], [programmedTransformInput]) => {
+      // TODO: make voqueLocator required
+      if (programmedTransformInput.streamMetatypeLocator === undefined) {
+        throw Error('Voque locator is required');
+      }
 
-    const incomingEdge = new DirectedGraphEdge2Instance({
-      tailId: estinantInput.voqueLocator.oldId,
-      headId: estinantInput.oldId,
-      rootGraphLocator: relationship.rootGraphLocator,
-    });
+      const incomingEdge = new DirectedGraphEdge2Instance({
+        tailId: programmedTransformInput.streamMetatypeLocator.oldId,
+        headId: programmedTransformInput.oldId,
+        rootGraphLocator: relationship.rootGraphLocator,
+      });
 
-    const outgoingEdge = new DirectedGraphEdge2Instance({
-      tailId: estinantInput.oldId,
-      headId: engineEstinant.digestibleId,
-      rootGraphLocator: relationship.rootGraphLocator,
-    });
+      const outgoingEdge = new DirectedGraphEdge2Instance({
+        tailId: programmedTransformInput.oldId,
+        headId: engineProgrammedTransform.digestibleId,
+        rootGraphLocator: relationship.rootGraphLocator,
+      });
 
-    return [incomingEdge, outgoingEdge];
-  })
+      return [incomingEdge, outgoingEdge];
+    },
+  )
   .assemble();

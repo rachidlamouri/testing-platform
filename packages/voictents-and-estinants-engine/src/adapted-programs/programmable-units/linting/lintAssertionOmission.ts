@@ -85,7 +85,7 @@ type LintAssertionOmissionVoictentPelie = {
   omittedZornSet: Set<string>;
 };
 
-export type LintAssertionOmissionVoque = StreamMetatype<
+export type LintAssertionOmissionStreamMetatype = StreamMetatype<
   LintAssertionOmissionGepp,
   LintAssertionOmission,
   LintAssertionOmission,
@@ -95,8 +95,11 @@ export type LintAssertionOmissionVoque = StreamMetatype<
 
 // TODO: update this class to not need a TVoque. you will need to update the program modeler
 export class LintAssertionOmissionCollection<
-  TVoque extends LintAssertionOmissionVoque,
-> extends AbstractInMemoryCollection<LintAssertionOmissionVoque, TVoque> {
+  TVoque extends LintAssertionOmissionStreamMetatype,
+> extends AbstractInMemoryCollection<
+  LintAssertionOmissionStreamMetatype,
+  TVoque
+> {
   private omittedZornSet = new Set<string>();
 
   addItem(hubblepup: LintAssertionOmission): void {

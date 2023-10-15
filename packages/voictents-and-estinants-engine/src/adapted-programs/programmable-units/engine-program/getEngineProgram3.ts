@@ -1,31 +1,31 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  EngineEstinant3Voque,
-  ENGINE_ESTINANT_3_GEPP,
+  EngineProgrammedTransform3StreamMetatype,
+  ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
 } from './engineEstinant3';
 import {
-  ENGINE_PROGRAM_3_GEPP,
+  ENGINE_PROGRAM_3_COLLECTION_ID,
   EngineProgram3Instance,
-  EngineProgram3Voque,
+  EngineProgram3StreamMetatype,
 } from './engineProgram3';
 import {
   ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   EngineProgramLocator3StreamMetatype,
 } from './engineProgramLocator3';
 import {
-  PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
+  PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,
   ProgramVoqueRelationship2Instance,
-  ProgramVoqueRelationship2Voque,
+  ProgramStreamMetatypeRelationship2StreamMetatype,
 } from './programVoqueRelationship2';
 import {
-  PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
+  PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID,
   ProgramEstinantInputRelationshipInstance,
-  ProgramEstinantInputRelationshipVoque,
+  ProgramProgrammedTransformInputRelationshipStreamMetatype,
 } from './input-output/programEstinantInputRelationship';
 import {
-  ProgramEstinantOutputRelationshipVoque,
-  PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
+  ProgramProgrammedTransformOutputRelationshipStreamMetatype,
+  PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID,
   ProgramEstinantOutputRelationshipInstance,
 } from './input-output/programEstinantOutputRelationship';
 import { EngineVoqueLocator2 } from './engineVoqueLocator2';
@@ -43,36 +43,40 @@ export const getEngineProgram3 = buildProgrammedTransform({
   .fromItem2<EngineProgramLocator3StreamMetatype>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
-  .andFromItemTuple2<EngineEstinant3Voque, Tuple<IdentifiableItemId>>({
-    collectionId: ENGINE_ESTINANT_3_GEPP,
+  .andFromItemTuple2<
+    EngineProgrammedTransform3StreamMetatype,
+    Tuple<IdentifiableItemId>
+  >({
+    collectionId: ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID,
     getRightKeyTuple: (engineProgram) => {
       return engineProgram.item.estinantRelationshipList.map((relationship) => {
-        return relationship.estinantLocator.id;
+        return relationship.programmedTransformLocator.id;
       });
     },
     getRightKey: (engineEstinant) => {
       return engineEstinant.item.locator.id;
     },
   })
-  .toItem2<EngineProgram3Voque>({
-    collectionId: ENGINE_PROGRAM_3_GEPP,
+  .toItem2<EngineProgram3StreamMetatype>({
+    collectionId: ENGINE_PROGRAM_3_COLLECTION_ID,
   })
-  .toItemTuple2<ProgramVoqueRelationship2Voque>({
-    collectionId: PROGRAM_VOQUE_RELATIONSHIP_2_GEPP,
+  .toItemTuple2<ProgramStreamMetatypeRelationship2StreamMetatype>({
+    collectionId: PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,
   })
-  .toItemTuple2<ProgramEstinantInputRelationshipVoque>({
-    collectionId: PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP,
+  .toItemTuple2<ProgramProgrammedTransformInputRelationshipStreamMetatype>({
+    collectionId: PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID,
   })
-  .toItemTuple2<ProgramEstinantOutputRelationshipVoque>({
-    collectionId: PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP,
+  .toItemTuple2<ProgramProgrammedTransformOutputRelationshipStreamMetatype>({
+    collectionId:
+      PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID,
   })
-  .onTransform((engineProgramLocator, estinantList) => {
+  .onTransform((engineProgramLocator, programmedTransformList) => {
     const { rootGraphLocator } = engineProgramLocator;
 
     const voqueLocatorByZorn = new Map(
       [
         ...engineProgramLocator.initializedVoqueLocatorList,
-        ...estinantList.flatMap((estinant) => {
+        ...programmedTransformList.flatMap((estinant) => {
           return estinant.allVoqueLocatorList;
         }),
       ].map((voqueLocator) => {
@@ -89,10 +93,10 @@ export const getEngineProgram3 = buildProgrammedTransform({
     );
 
     const consumedVoqueIdSet = new Set(
-      estinantList.flatMap((engineEstinant) => {
+      programmedTransformList.flatMap((engineEstinant) => {
         return engineEstinant.inputList
           .map((input) => {
-            return input.voqueLocator;
+            return input.streamMetatypeLocator;
           })
           .filter((voqueLocator): voqueLocator is EngineVoqueLocator2 => {
             return voqueLocator !== undefined;
@@ -102,10 +106,10 @@ export const getEngineProgram3 = buildProgrammedTransform({
     );
 
     const fedVoqueIdSet = new Set(
-      estinantList.flatMap((engineEstinant) => {
+      programmedTransformList.flatMap((engineEstinant) => {
         return engineEstinant.outputList
           .map((output) => {
-            return output.voqueLocator;
+            return output.streamMetatypeLocator;
           })
           .filter((voqueLocator): voqueLocator is EngineVoqueLocator2 => {
             return voqueLocator !== undefined;
@@ -114,25 +118,27 @@ export const getEngineProgram3 = buildProgrammedTransform({
       }),
     );
 
-    const categorizedVoqueList = allVoqueLocatorList.map((voqueLocator) => {
-      const isInitialized = initializedVoqueLocatorIdSet.has(
-        voqueLocator.oldId,
-      );
-      const isConsumed = consumedVoqueIdSet.has(voqueLocator.oldId);
-      const isFed = fedVoqueIdSet.has(voqueLocator.oldId);
+    const categorizedVoqueList = allVoqueLocatorList.map(
+      (streamMetatypeLocator) => {
+        const isInitialized = initializedVoqueLocatorIdSet.has(
+          streamMetatypeLocator.oldId,
+        );
+        const isConsumed = consumedVoqueIdSet.has(streamMetatypeLocator.oldId);
+        const isFed = fedVoqueIdSet.has(streamMetatypeLocator.oldId);
 
-      const isEndingVoque = !isConsumed;
+        const isEndingVoque = !isConsumed;
 
-      return {
-        voqueLocator,
-        isInitialized,
-        isFed,
-        isEndingVoque,
-      };
-    });
+        return {
+          streamMetatypeLocator,
+          isInitialized,
+          isFed,
+          isEndingVoque,
+        };
+      },
+    );
 
     const voqueRelationshipList = categorizedVoqueList.map(
-      ({ voqueLocator, isInitialized, isFed, isEndingVoque }) => {
+      ({ streamMetatypeLocator, isInitialized, isFed, isEndingVoque }) => {
         let parentId: string;
         if (isInitialized && !isFed) {
           parentId = engineProgramLocator.startingSubgraphId;
@@ -144,59 +150,61 @@ export const getEngineProgram3 = buildProgrammedTransform({
 
         return new ProgramVoqueRelationship2Instance({
           programName: engineProgramLocator.programName,
-          voqueLocator,
+          streamMetatypeLocator,
           rootGraphLocator,
           parentId,
         });
       },
     );
 
-    const endingVoqueLocatorList = categorizedVoqueList
+    const endingStreamMetatypeLocatorList = categorizedVoqueList
       .filter((categorizedVoque) => {
         return categorizedVoque.isEndingVoque;
       })
-      .map((categorizedVoque) => categorizedVoque.voqueLocator);
+      .map((categorizedVoque) => categorizedVoque.streamMetatypeLocator);
 
     const engineProgram = new EngineProgram3Instance({
       programName: engineProgramLocator.programName,
       description: engineProgramLocator.description,
       filePath: engineProgramLocator.filePath,
-      estinantList,
-      initializedVoqueLocatorList:
+      programmedTransformList,
+      initializedStreamMetatypeLocatorList:
         engineProgramLocator.initializedVoqueLocatorList,
-      endingVoqueLocatorList,
+      endingStreamMetatypeLocatorList,
       locator: engineProgramLocator,
     });
 
-    const inputRelationshipList = engineProgram.estinantList.flatMap(
+    const inputRelationshipList = engineProgram.programmedTransformList.flatMap(
       (engineEstinant) => {
-        return engineEstinant.inputList.map((estinantInput) => {
+        return engineEstinant.inputList.map((programmedTransformInput) => {
           return new ProgramEstinantInputRelationshipInstance({
-            estinantInput,
+            programmedTransformInput,
             rootGraphLocator,
-            estinantLocator: engineEstinant.locator,
+            programmedTransformLocator: engineEstinant.locator,
           });
         });
       },
     );
 
-    const outputRelationshipList = engineProgram.estinantList.flatMap(
-      (engineEstinant) => {
+    const outputRelationshipList =
+      engineProgram.programmedTransformList.flatMap((engineEstinant) => {
         return engineEstinant.outputList.map((output) => {
           return new ProgramEstinantOutputRelationshipInstance({
-            outputZorn: output.id,
+            outputId: output.id,
             rootGraphLocator,
-            estinantLocator: engineEstinant.locator,
+            programmedTransformLocator: engineEstinant.locator,
           });
         });
-      },
-    );
+      });
 
     return {
-      [ENGINE_PROGRAM_3_GEPP]: engineProgram,
-      [PROGRAM_VOQUE_RELATIONSHIP_2_GEPP]: voqueRelationshipList,
-      [PROGRAM_ESTINANT_INPUT_RELATIONSHIP_GEPP]: inputRelationshipList,
-      [PROGRAM_ESTINANT_OUTPUT_RELATIONSHIP_GEPP]: outputRelationshipList,
+      [ENGINE_PROGRAM_3_COLLECTION_ID]: engineProgram,
+      [PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID]:
+        voqueRelationshipList,
+      [PROGRAM_PROGRAMMED_TRANSFORM_INPUT_RELATIONSHIP_COLLECTION_ID]:
+        inputRelationshipList,
+      [PROGRAM_PROGRAMMED_TRANSFORM_OUTPUT_RELATIONSHIP_COLLECTION_ID]:
+        outputRelationshipList,
     };
   })
   .assemble();

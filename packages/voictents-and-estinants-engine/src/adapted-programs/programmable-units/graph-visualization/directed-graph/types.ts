@@ -29,7 +29,7 @@ export class LocalDirectedGraphElement2Id extends ComplexId<LocalDirectedGraphEl
     });
   }
 
-  static buildClusterZorn({
+  static buildClusterId({
     distinguisher,
   }: FactoryInput): LocalDirectedGraphElement2Id {
     return new LocalDirectedGraphElement2Id({

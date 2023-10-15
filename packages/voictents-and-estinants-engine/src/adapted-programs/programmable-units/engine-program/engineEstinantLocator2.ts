@@ -28,20 +28,20 @@ export const EngineEstinantLocator2ZornClassSet = [
   ExportLocatorZorn,
 ] as const;
 
-export enum EngineEstinantLocator2TypeName {
+export enum EngineProgrammedTransformLocator2TypeName {
   TopLevelDeclaration = 'TopLevelDeclaration',
   BuildAddMetadataForSerialization = 'buildAddMetadataForSerialization',
 }
 
 type BaseEngineEstinantTopLevelDeclarationLocator = {
-  typeName: EngineEstinantLocator2TypeName.TopLevelDeclaration;
+  typeName: EngineProgrammedTransformLocator2TypeName.TopLevelDeclaration;
   identifierName: string;
   filePath: string;
   isCoreEstinant: boolean;
 };
 
 type BaseEngineEstinantBuildAddMetadataForSerializationLocator = {
-  typeName: EngineEstinantLocator2TypeName.BuildAddMetadataForSerialization;
+  typeName: EngineProgrammedTransformLocator2TypeName.BuildAddMetadataForSerialization;
   callExpression: TSESTree.CallExpression;
   filePath: string;
   isCoreEstinant: true;
