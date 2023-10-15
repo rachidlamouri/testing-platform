@@ -9,7 +9,11 @@ import {
   YamlFileStreamMetatype,
 } from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { HtmlFile, HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
+import {
+  HtmlFile,
+  HTML_FILE_COLLECTION_ID,
+  HtmlFileStreamMetatype,
+} from '../html-file/htmlFile';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   BASH_FILE_COLLECTION_ID,
@@ -34,8 +38,8 @@ export const categorizeFiles = buildProgrammedTransform({
       file.nodePath.name.extension.suffixIdentifier ===
       FileExtensionSuffixIdentifier.Bash,
   })
-  .toItemOnCondition<HtmlFileVoque>({
-    collectionId: HTML_FILE_GEPP,
+  .toItemOnCondition<HtmlFileStreamMetatype>({
+    collectionId: HTML_FILE_COLLECTION_ID,
     transform: (file): file is HtmlFile =>
       file.nodePath.name.extension.suffixIdentifier ===
       FileExtensionSuffixIdentifier.Html,

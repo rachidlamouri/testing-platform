@@ -1,6 +1,9 @@
 import fs from 'fs';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
+import {
+  HTML_FILE_COLLECTION_ID,
+  HtmlFileStreamMetatype,
+} from '../html-file/htmlFile';
 import {
   OUTPUT_FILE_COLLECTION_ID,
   OutputFileStreamMetatype,
@@ -75,8 +78,8 @@ export const addInteractivityToSvgDocument = buildProgrammedTransform({
   .fromItem2<SvgDocumentStreamMetatype>({
     collectionId: SVG_DOCUMENT_COLLECTION_ID,
   })
-  .andFromItemTuple2<HtmlFileVoque, [IdentifiableItemId]>({
-    collectionId: HTML_FILE_GEPP,
+  .andFromItemTuple2<HtmlFileStreamMetatype, [IdentifiableItemId]>({
+    collectionId: HTML_FILE_COLLECTION_ID,
     getRightKeyTuple: () => [INTERACTIVE_HTML_FILE_PATH],
     // TODO: add filepath to index
     getRightKey: (rightInput) => rightInput.item.filePath.serialized,

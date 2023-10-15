@@ -7,11 +7,11 @@ import { FileSystemNodeStreamMetatype } from '../file/fileSystemNodeVoictent';
  */
 export type HtmlFile = File<FileExtensionSuffixIdentifier.Html>;
 
-export const HTML_FILE_GEPP = 'html-file';
+export const HTML_FILE_COLLECTION_ID = 'html-file';
 
-type HtmlFileGepp = typeof HTML_FILE_GEPP;
+type HtmlFileCollectionId = typeof HTML_FILE_COLLECTION_ID;
 
-export type HtmlFileVoque = FileSystemNodeStreamMetatype<
-  HtmlFileGepp,
+export type HtmlFileStreamMetatype = FileSystemNodeStreamMetatype<
+  HtmlFileCollectionId,
   HtmlFile
 >;
