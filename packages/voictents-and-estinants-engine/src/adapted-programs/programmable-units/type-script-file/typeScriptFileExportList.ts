@@ -16,11 +16,11 @@ type TypeScriptFileExportList = {
 export const TYPE_SCRIPT_FILE_EXPORT_LIST_COLLECTION_ID =
   'type-script-file-export-list';
 
-type TypeScriptFileExportListGepp =
+type TypeScriptFileExportListCollectionId =
   typeof TYPE_SCRIPT_FILE_EXPORT_LIST_COLLECTION_ID;
 
 export type TypeScriptFileExportListStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    TypeScriptFileExportListGepp,
+    TypeScriptFileExportListCollectionId,
     TypeScriptFileExportList
   >;

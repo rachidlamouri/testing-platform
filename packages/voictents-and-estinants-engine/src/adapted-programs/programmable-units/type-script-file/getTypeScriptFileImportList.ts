@@ -22,13 +22,14 @@ import {
 } from '../error/programError';
 import { isRelativeFilePath } from '../../../package-agnostic-utilities/file/isRelativeFilePath';
 
-const ESTINANT_NAME = 'getTypeScriptFileImportList' as const;
-type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
+const PROGRAMMED_TRANSFORM_NAME = 'getTypeScriptFileImportList' as const;
+type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
+type ReportingLocator =
+  ReportingProgrammedTransformLocator<ProgrammedTransformName>;
 const reporterLocator: ReportingLocator = {
   typeName:
     ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
   filePath: __filename,
 };
 
@@ -38,7 +39,7 @@ const reporterLocator: ReportingLocator = {
  * don't need to resolve file paths.
  */
 export const getTypeScriptFileImportList = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
   .fromItem2<ParsedTypeScriptFileStreamMetatype>({
     collectionId: PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,

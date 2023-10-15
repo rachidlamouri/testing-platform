@@ -19,14 +19,15 @@ import { isExportNamedFunctionDeclaration } from '../../../package-agnostic-util
 import { IdentifiableFunctionDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isIdentifiableFunctionDeclaration';
 import { IdentifiableProgramBodyStatementNode } from './getIdentifiableProgramBodyStatementNode';
 
-const ESTINANT_NAME = 'exemptPredicatesFromCanonicalComment' as const;
+const PROGRAMMED_TRANSFORM_NAME =
+  'exemptPredicatesFromCanonicalComment' as const;
 
 /**
  * Predicates (which includes assertions) should have fairly literal names, so a
  * canonical comment is rather redundant.
  */
 export const exemptPredicatesFromCanonicalComment = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
   .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
     collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
@@ -85,7 +86,7 @@ export const exemptPredicatesFromCanonicalComment = buildProgrammedTransform({
       new LintAssertionOmissionInstance({
         omitterSource: new ProgrammedTransformSourceInstance({
           filePath: posix.resolve('', __filename),
-          programmedTransformName: ESTINANT_NAME,
+          programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
         }),
         omittedAssertionId: new LintAssertionId({
           rule: typeScriptFileHasCanonicalCommentRule,

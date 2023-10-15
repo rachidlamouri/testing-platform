@@ -32,9 +32,9 @@ import { UnknownCommentInstance } from './comment/categorized/unknownComment';
 import { EslintDirectiveCommentInstance } from './comment/categorized/eslintDirectiveComment';
 import { DescriptiveBlockCommentInstance } from './comment/categorized/descriptiveBlockComment';
 import {
-  FILE_PARSED_COMMENT_GROUP_GEPP,
+  FILE_PARSED_COMMENT_GROUP_COLLECTION_ID,
   FileParsedCommentGroupInstance,
-  FileParsedCommentGroupVoque,
+  FileParsedCommentGroupStreamMetatype,
 } from './fileParsedCommentGroup';
 import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 
@@ -162,8 +162,8 @@ export const parseTypeScriptFileComments = buildProgrammedTransform({
   .fromItem2<ParsedTypeScriptFileStreamMetatype>({
     collectionId: PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
   })
-  .toItem2<FileParsedCommentGroupVoque>({
-    collectionId: FILE_PARSED_COMMENT_GROUP_GEPP,
+  .toItem2<FileParsedCommentGroupStreamMetatype>({
+    collectionId: FILE_PARSED_COMMENT_GROUP_COLLECTION_ID,
   })
   .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
@@ -215,11 +215,12 @@ export const parseTypeScriptFileComments = buildProgrammedTransform({
 
     return {
       [LINT_ASSERTION_COLLECTION_ID]: lintAssertionList,
-      [FILE_PARSED_COMMENT_GROUP_GEPP]: new FileParsedCommentGroupInstance({
-        filePath,
-        list: categorizedCommentList,
-        fileComment,
-      }),
+      [FILE_PARSED_COMMENT_GROUP_COLLECTION_ID]:
+        new FileParsedCommentGroupInstance({
+          filePath,
+          list: categorizedCommentList,
+          fileComment,
+        }),
     };
   })
   .assemble();

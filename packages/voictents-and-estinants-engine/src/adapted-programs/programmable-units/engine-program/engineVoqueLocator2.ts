@@ -4,7 +4,7 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
-import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
+import { getExportLocatorId } from '../type-script-file/getExportLocatorId';
 
 type BaseEngineVoqueLocator2 = {
   identifierName: string;
@@ -29,7 +29,7 @@ export type EngineVoqueLocator2 = ObjectWithPrototype<
   EngineVoqueLocator2Prototype
 >;
 
-export const getVoqueLocatorZorn = getExportLocatorZorn;
+export const getVoqueLocatorZorn = getExportLocatorId;
 
 export const getVoqueLocatorId = (locator: EngineVoqueLocator2): string => {
   return getTextDigest(locator.displayName);

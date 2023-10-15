@@ -20,11 +20,11 @@ export type TypeScriptFileImportList = {
 export const TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID =
   'type-script-file-import-list';
 
-type TypeScriptFileImportListGepp =
+type TypeScriptFileImportListCollectionId =
   typeof TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID;
 
 export type TypeScriptFileImportListStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    TypeScriptFileImportListGepp,
+    TypeScriptFileImportListCollectionId,
     TypeScriptFileImportList
   >;

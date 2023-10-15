@@ -14,7 +14,8 @@ import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSou
 import { FileSourceInstance } from '../linting/source/fileSource';
 import { typeScriptFileHasCanonicalCommentRule } from './assertTypeScriptFileHasCanonicalComment';
 
-const ESTINANT_NAME = 'exemptEngineProgramFromCanonicalComment' as const;
+const PROGRAMMED_TRANSFORM_NAME =
+  'exemptEngineProgramFromCanonicalComment' as const;
 
 /**
  * The call to the engine is the canonical statement for an engine program
@@ -28,7 +29,7 @@ const ESTINANT_NAME = 'exemptEngineProgramFromCanonicalComment' as const;
  */
 export const exemptEngineProgramFromCanonicalComment = buildProgrammedTransform(
   {
-    name: ESTINANT_NAME,
+    name: PROGRAMMED_TRANSFORM_NAME,
   },
 )
   .fromItem2<EngineProgramLocator3StreamMetatype>({
@@ -41,7 +42,7 @@ export const exemptEngineProgramFromCanonicalComment = buildProgrammedTransform(
     return new LintAssertionOmissionInstance({
       omitterSource: new ProgrammedTransformSourceInstance({
         filePath: posix.resolve('', __filename),
-        programmedTransformName: ESTINANT_NAME,
+        programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
       }),
       omittedAssertionId: new LintAssertionId({
         rule: typeScriptFileHasCanonicalCommentRule,

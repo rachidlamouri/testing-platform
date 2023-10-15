@@ -12,9 +12,9 @@ export type TypeScriptFile = File<
 
 export const TYPE_SCRIPT_FILE_COLLECTION_ID = 'type-script-file';
 
-type TypeScriptFileGepp = typeof TYPE_SCRIPT_FILE_COLLECTION_ID;
+type TypeScriptFileCollectionId = typeof TYPE_SCRIPT_FILE_COLLECTION_ID;
 
 export type TypeScriptFileStreamMetatype = FileSystemNodeStreamMetatype<
-  TypeScriptFileGepp,
+  TypeScriptFileCollectionId,
   TypeScriptFile
 >;

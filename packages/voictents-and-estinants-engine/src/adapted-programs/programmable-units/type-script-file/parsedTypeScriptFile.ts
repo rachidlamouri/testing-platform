@@ -17,10 +17,11 @@ type ParsedTypeScriptFile = {
 
 export const PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID = 'parsed-type-script-file';
 
-type ParsedTypeScriptFileGepp = typeof PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID;
+type ParsedTypeScriptFileCollectionId =
+  typeof PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID;
 
 export type ParsedTypeScriptFileStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    ParsedTypeScriptFileGepp,
+    ParsedTypeScriptFileCollectionId,
     ParsedTypeScriptFile
   >;

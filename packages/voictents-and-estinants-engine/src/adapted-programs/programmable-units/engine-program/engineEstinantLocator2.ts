@@ -5,7 +5,7 @@ import {
   buildConstructorFunctionWithName,
   memoizeGetter,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
-import { ExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
+import { ExportLocatorId } from '../type-script-file/getExportLocatorId';
 import {
   GenericComplexIdTemplate,
   ComplexId,
@@ -25,7 +25,7 @@ class EngineEstinantBuildAddMetadataForSerializationLocatorZorn extends ComplexI
 
 export const EngineEstinantLocator2ZornClassSet = [
   EngineEstinantBuildAddMetadataForSerializationLocatorZorn,
-  ExportLocatorZorn,
+  ExportLocatorId,
 ] as const;
 
 export enum EngineProgrammedTransformLocator2TypeName {
@@ -85,7 +85,7 @@ export const { EngineEstinantTopLevelDeclarationLocatorInstance } =
     EngineEstinantLocatorPrototype
   >({
     id: memoizeGetter((locator) => {
-      return ExportLocatorZorn.fromLocator(locator);
+      return ExportLocatorId.fromLocator(locator);
     }),
     oldId: (locator) => locator.id.forMachine,
   });

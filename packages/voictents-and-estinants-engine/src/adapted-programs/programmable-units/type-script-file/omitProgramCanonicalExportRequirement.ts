@@ -13,18 +13,19 @@ import {
 } from '../type-script-file-relationships/engineProgramFile';
 import { typeScriptFileHasCanonicalDeclarationRule } from './canonical-declaration/assertTypeScriptFileHasCanonicalDeclaration';
 
-const ESTINANT_NAME = 'omitProgramCanonicalExportRequirement' as const;
+const PROGRAMMED_TRANSFORM_NAME =
+  'omitProgramCanonicalExportRequirement' as const;
 
 const omitterSource = new ProgrammedTransformSourceInstance({
   filePath: __filename,
-  programmedTransformName: ESTINANT_NAME,
+  programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
 });
 
 /**
  * Creates an assertion omission for program files
  */
 export const omitProgramCanonicalExportRequirement = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
   .fromItem2<EngineProgramFileStreamMetatype>({
     collectionId: ENGINE_PROGRAM_FILE_COLLECTION_ID,

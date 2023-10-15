@@ -22,15 +22,15 @@ type TypeScriptFileConfiguration = {
   rootDirectory: string;
 };
 
-export const TYPE_SCRIPT_FILE_CONFIGURATION_GEPP =
+export const TYPE_SCRIPT_FILE_CONFIGURATION_COLLECTION_ID =
   'type-script-file-configuration';
 
-type TypeScriptFileConfigurationGepp =
-  typeof TYPE_SCRIPT_FILE_CONFIGURATION_GEPP;
+type TypeScriptFileConfigurationCollectionId =
+  typeof TYPE_SCRIPT_FILE_CONFIGURATION_COLLECTION_ID;
 
-export type TypeScriptFileConfigurationVoque =
+export type TypeScriptFileConfigurationStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    TypeScriptFileConfigurationGepp,
+    TypeScriptFileConfigurationCollectionId,
     TypeScriptFileConfiguration
   >;
 
@@ -67,8 +67,8 @@ export const associateTypeScriptFileToTypescriptConfiguration =
     .fromItem2<TypeScriptFileStreamMetatype>({
       collectionId: TYPE_SCRIPT_FILE_COLLECTION_ID,
     })
-    .toItem2<TypeScriptFileConfigurationVoque>({
-      collectionId: TYPE_SCRIPT_FILE_CONFIGURATION_GEPP,
+    .toItem2<TypeScriptFileConfigurationStreamMetatype>({
+      collectionId: TYPE_SCRIPT_FILE_CONFIGURATION_COLLECTION_ID,
     })
     .onTransform((input) => {
       const configurationFilePath = getConfigurationFilePath(

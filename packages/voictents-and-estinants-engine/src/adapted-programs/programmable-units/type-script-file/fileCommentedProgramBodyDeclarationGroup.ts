@@ -32,14 +32,14 @@ enum CanonicalDeclarationState {
   MissingCanonicalDeclaration = 'MissingCanonicalDeclaration',
 }
 
-const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE = [
+const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ID_TEMPLATE = [
   'filePath',
 ] as const satisfies GenericComplexIdTemplate;
-type FileCommentedProgramBodyDeclarationGroupZornTemplate =
-  typeof FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE;
-class FileCommentedProgramBodyDeclarationGroupZorn extends ComplexId<FileCommentedProgramBodyDeclarationGroupZornTemplate> {
-  get rawTemplate(): FileCommentedProgramBodyDeclarationGroupZornTemplate {
-    return FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ZORN_TEMPLATE;
+type FileCommentedProgramBodyDeclarationGroupIdTemplate =
+  typeof FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ID_TEMPLATE;
+class FileCommentedProgramBodyDeclarationGroupId extends ComplexId<FileCommentedProgramBodyDeclarationGroupIdTemplate> {
+  get rawTemplate(): FileCommentedProgramBodyDeclarationGroupIdTemplate {
+    return FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_ID_TEMPLATE;
   }
 }
 
@@ -154,7 +154,7 @@ type FileCommentedProgramBodyDeclarationGroupConstructorInput = {
 export type FileCommentedProgramBodyDeclarationGroup = SimplifyN<
   [
     {
-      id: FileCommentedProgramBodyDeclarationGroupZorn;
+      id: FileCommentedProgramBodyDeclarationGroupId;
     },
     Omit<
       FileCommentedProgramBodyDeclarationGroupConstructorInput,
@@ -219,7 +219,7 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
       transformInput: (input) => {
         const { filePath, filePathObject, list, commentGroup } = input;
 
-        const id = new FileCommentedProgramBodyDeclarationGroupZorn({
+        const id = new FileCommentedProgramBodyDeclarationGroupId({
           filePath,
         });
 
@@ -534,11 +534,11 @@ export const { FileCommentedProgramBodyDeclarationGroupInstance } =
 export const FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID =
   'file-commented-program-body-declaration-group';
 
-type FileCommentedProgramBodyDeclarationGroupGepp =
+type FileCommentedProgramBodyDeclarationGroupCollectionId =
   typeof FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID;
 
 export type FileCommentedProgramBodyDeclarationGroupStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    FileCommentedProgramBodyDeclarationGroupGepp,
+    FileCommentedProgramBodyDeclarationGroupCollectionId,
     FileCommentedProgramBodyDeclarationGroup
   >;

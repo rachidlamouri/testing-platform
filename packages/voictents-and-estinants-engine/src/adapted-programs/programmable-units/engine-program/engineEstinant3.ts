@@ -4,7 +4,7 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { EngineEstinantLocator2 } from './engineEstinantLocator2';
-import { getExportLocatorZorn } from '../type-script-file/getExportLocatorZorn';
+import { getExportLocatorId } from '../type-script-file/getExportLocatorId';
 import { getIdentifiableId } from '../../../layer-agnostic-utilities/deprecated-id/getIdentifiableId';
 import { EngineEstinantInput2 } from './input-output/engineEstinantInput2';
 import { EngineEstinantOutput2 } from './input-output/engineEstinantOutput2';
@@ -40,7 +40,7 @@ export type EngineEstinant3 = ObjectWithPrototype<
 export const { EngineEstinant3Instance } = buildConstructorFunctionWithName(
   'EngineEstinant3Instance',
 )<BaseEngineEstinant3, EngineEstinant3Prototype>({
-  id: getExportLocatorZorn,
+  id: getExportLocatorId,
   digestibleId: getIdentifiableId,
   allVoqueLocatorList: (engineEstinant) => {
     const list = [...engineEstinant.inputList, ...engineEstinant.outputList]

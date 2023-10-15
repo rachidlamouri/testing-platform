@@ -10,14 +10,14 @@ import { CategorizedCommentTypeName } from './comment/categorized/categorizedCom
 import { DescriptiveBlockComment } from './comment/categorized/descriptiveBlockComment';
 import { CommentTagId } from './comment/commentTagId';
 
-const FILE_PARSED_COMMENT_GROUP_ZORN_TEMPLATE = [
+const FILE_PARSED_COMMENT_GROUP_ID_TEMPLATE = [
   'filePath',
 ] as const satisfies GenericComplexIdTemplate;
-type FileParsedCommentGroupZornTemplate =
-  typeof FILE_PARSED_COMMENT_GROUP_ZORN_TEMPLATE;
-class FileParsedCommentGroupZorn extends ComplexId<FileParsedCommentGroupZornTemplate> {
-  get rawTemplate(): FileParsedCommentGroupZornTemplate {
-    return FILE_PARSED_COMMENT_GROUP_ZORN_TEMPLATE;
+type FileParsedCommentGroupIdTemplate =
+  typeof FILE_PARSED_COMMENT_GROUP_ID_TEMPLATE;
+class FileParsedCommentGroupId extends ComplexId<FileParsedCommentGroupIdTemplate> {
+  get rawTemplate(): FileParsedCommentGroupIdTemplate {
+    return FILE_PARSED_COMMENT_GROUP_ID_TEMPLATE;
   }
 }
 
@@ -33,7 +33,7 @@ type FileParsedCommentGroupConstructorInput = {
 export type FileParsedCommentGroup = SimplifyN<
   [
     {
-      id: FileParsedCommentGroupZorn;
+      id: FileParsedCommentGroupId;
     },
     FileParsedCommentGroupConstructorInput,
     {
@@ -66,7 +66,7 @@ export const { FileParsedCommentGroupInstance } = buildNamedConstructorFunction(
     transformInput: (input) => {
       const { filePath, list } = input;
 
-      const id = new FileParsedCommentGroupZorn({
+      const id = new FileParsedCommentGroupId({
         filePath,
       });
 
@@ -86,12 +86,14 @@ export const { FileParsedCommentGroupInstance } = buildNamedConstructorFunction(
   })
   .assemble();
 
-export const FILE_PARSED_COMMENT_GROUP_GEPP = 'file-parsed-comment-group';
+export const FILE_PARSED_COMMENT_GROUP_COLLECTION_ID =
+  'file-parsed-comment-group';
 
-type FileParsedCommentGroupGepp = typeof FILE_PARSED_COMMENT_GROUP_GEPP;
+type FileParsedCommentGroupCollectionId =
+  typeof FILE_PARSED_COMMENT_GROUP_COLLECTION_ID;
 
-export type FileParsedCommentGroupVoque =
+export type FileParsedCommentGroupStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    FileParsedCommentGroupGepp,
+    FileParsedCommentGroupCollectionId,
     FileParsedCommentGroup
   >;

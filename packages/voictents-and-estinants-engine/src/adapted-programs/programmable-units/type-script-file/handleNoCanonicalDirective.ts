@@ -10,15 +10,15 @@ import { FileSourceInstance } from '../linting/source/fileSource';
 import { typeScriptFileHasCanonicalDeclarationRule } from './canonical-declaration/assertTypeScriptFileHasCanonicalDeclaration';
 import { CommentTagId } from './comment/commentTagId';
 import {
-  FILE_PARSED_COMMENT_GROUP_GEPP,
-  FileParsedCommentGroupVoque,
+  FILE_PARSED_COMMENT_GROUP_COLLECTION_ID,
+  FileParsedCommentGroupStreamMetatype,
 } from './fileParsedCommentGroup';
 
-const ESTINANT_NAME = 'handleNoCanonicalDirective' as const;
+const PROGRAMMED_TRANSFORM_NAME = 'handleNoCanonicalDirective' as const;
 
 const omitterSource = new ProgrammedTransformSourceInstance({
   filePath: __filename,
-  programmedTransformName: ESTINANT_NAME,
+  programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
 });
 
 /**
@@ -26,10 +26,10 @@ const omitterSource = new ProgrammedTransformSourceInstance({
  * comment
  */
 export const handleNoCanonicalDirective = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
-  .fromItem2<FileParsedCommentGroupVoque>({
-    collectionId: FILE_PARSED_COMMENT_GROUP_GEPP,
+  .fromItem2<FileParsedCommentGroupStreamMetatype>({
+    collectionId: FILE_PARSED_COMMENT_GROUP_COLLECTION_ID,
   })
   .toItemTuple2<LintAssertionOmissionStreamMetatype>({
     collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,

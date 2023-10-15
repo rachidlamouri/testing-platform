@@ -16,14 +16,15 @@ import {
 import { FileSourceInstance } from '../linting/source/fileSource';
 import { getPhraseSensibilityState } from '../../../layer-agnostic-utilities/nonsense/isSensiblePhrase';
 
-const ESTINANT_NAME = 'assertTypeScriptFileHasSensibleName' as const;
+const PROGRAMMED_TRANSFORM_NAME =
+  'assertTypeScriptFileHasSensibleName' as const;
 
 const typeScriptFileHasSensibleNameRule = new TypedRule<EmptyMessageContext>({
   name: 'type-script-file-has-sensible-name',
   description: `TypeScript files must have a name without nonsense words, or a @${CommentTagId.ReadableName} annotation in their canonical comment with a readable name.`,
   source: new ProgrammedTransformSourceInstance({
     filePath: posix.relative('', __filename),
-    programmedTransformName: ESTINANT_NAME,
+    programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
   }),
   getErrorMessage: (): string => {
     const emphasizedTag = chalk.cyan(`@${CommentTagId.ReadableName}`);
@@ -37,7 +38,7 @@ const typeScriptFileHasSensibleNameRule = new TypedRule<EmptyMessageContext>({
  * sensible name or a sensible name annotation
  */
 export const assertTypeScriptFileHasSensibleName = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
   .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
     collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,

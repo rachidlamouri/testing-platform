@@ -15,8 +15,8 @@ import {
   TYPE_SCRIPT_FILE_COLLECTION_ID,
 } from './typeScriptFile';
 import {
-  FILE_PARSED_COMMENT_GROUP_GEPP,
-  FileParsedCommentGroupVoque,
+  FILE_PARSED_COMMENT_GROUP_COLLECTION_ID,
+  FileParsedCommentGroupStreamMetatype,
 } from './fileParsedCommentGroup';
 import { CategorizedCommentTypeName } from './comment/categorized/categorizedCommentTypeName';
 import { shishKebab } from '../../../package-agnostic-utilities/case/shishKebab';
@@ -57,8 +57,8 @@ export const getCommentedProgramBodyDeclarationList = buildProgrammedTransform({
       return file.item.filePath.serialized;
     },
   })
-  .andFromItemTuple2<FileParsedCommentGroupVoque, [string]>({
-    collectionId: FILE_PARSED_COMMENT_GROUP_GEPP,
+  .andFromItemTuple2<FileParsedCommentGroupStreamMetatype, [string]>({
+    collectionId: FILE_PARSED_COMMENT_GROUP_COLLECTION_ID,
     getRightKeyTuple: (parsedFile) => {
       return [parsedFile.item.filePath];
     },

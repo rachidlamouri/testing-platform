@@ -15,25 +15,25 @@ type ExportLocator = {
  *
  * @readableName getExportLocatorId
  */
-export const getExportLocatorZorn = (locator: ExportLocator): string => {
+export const getExportLocatorId = (locator: ExportLocator): string => {
   return getId([locator.filePath, locator.identifierName]);
 };
 
-const EXPORT_LOCATOR_ZORN_TEMPLATE = [
+const EXPORT_LOCATOR_ID_TEMPLATE = [
   'filePath',
   'identifierName',
 ] as const satisfies GenericComplexIdTemplate;
-type ExportLocatorZornTemplate = typeof EXPORT_LOCATOR_ZORN_TEMPLATE;
+type ExportLocatorIdTemplate = typeof EXPORT_LOCATOR_ID_TEMPLATE;
 
-export class ExportLocatorZorn extends ComplexId<ExportLocatorZornTemplate> {
-  static fromLocator(locator: ExportLocator): ExportLocatorZorn {
-    return new ExportLocatorZorn({
+export class ExportLocatorId extends ComplexId<ExportLocatorIdTemplate> {
+  static fromLocator(locator: ExportLocator): ExportLocatorId {
+    return new ExportLocatorId({
       filePath: locator.filePath,
       identifierName: locator.identifierName,
     });
   }
 
-  get rawTemplate(): ExportLocatorZornTemplate {
-    return EXPORT_LOCATOR_ZORN_TEMPLATE;
+  get rawTemplate(): ExportLocatorIdTemplate {
+    return EXPORT_LOCATOR_ID_TEMPLATE;
   }
 }

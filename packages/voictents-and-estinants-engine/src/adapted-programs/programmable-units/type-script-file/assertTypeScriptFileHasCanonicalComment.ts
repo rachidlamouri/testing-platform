@@ -15,7 +15,8 @@ import {
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { FileSourceInstance } from '../linting/source/fileSource';
 
-const ESTINANT_NAME = 'assertTypeScriptFileHasCanonicalComment' as const;
+const PROGRAMMED_TRANSFORM_NAME =
+  'assertTypeScriptFileHasCanonicalComment' as const;
 
 type MessageContext = {
   trimmedCanonicalCommentText: string | null;
@@ -27,7 +28,7 @@ export const typeScriptFileHasCanonicalCommentRule =
     name: 'typescript-file-has-canonical-comment',
     source: new ProgrammedTransformSourceInstance({
       filePath: posix.relative('', __filename),
-      programmedTransformName: ESTINANT_NAME,
+      programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
     }),
     description:
       'All TypeScript files must have a canonical comment with a description.',
@@ -66,7 +67,7 @@ export const typeScriptFileHasCanonicalCommentRule =
  */
 export const assertTypeScriptFileHasCanonicalComment = buildProgrammedTransform(
   {
-    name: ESTINANT_NAME,
+    name: PROGRAMMED_TRANSFORM_NAME,
   },
 )
   .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
