@@ -7,12 +7,14 @@ import { AstNodeLocator } from '../rename-nonsense/astNodeLocator';
  */
 export type StringLiteralNodeLocator = AstNodeLocator<TSESTree.StringLiteral>;
 
-export const STRING_LITERAL_NODE_LOCATOR_GEPP = 'string-literal-node-locator';
+export const STRING_LITERAL_NODE_LOCATOR_COLLECTION_ID =
+  'string-literal-node-locator';
 
-type StringLiteralNodeLocatorGepp = typeof STRING_LITERAL_NODE_LOCATOR_GEPP;
+type StringLiteralNodeLocatorCollectionId =
+  typeof STRING_LITERAL_NODE_LOCATOR_COLLECTION_ID;
 
-export type StringLiteralNodeLocatorVoque =
+export type StringLiteralNodeLocatorStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    StringLiteralNodeLocatorGepp,
+    StringLiteralNodeLocatorCollectionId,
     StringLiteralNodeLocator
   >;

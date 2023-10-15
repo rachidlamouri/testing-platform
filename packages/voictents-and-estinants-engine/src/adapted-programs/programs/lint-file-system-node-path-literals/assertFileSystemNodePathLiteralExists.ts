@@ -11,19 +11,20 @@ import {
 } from '../../programmable-units/linting/rule';
 import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
 import {
-  FILE_PATH_LIKE_STRING_LITERAL_GEPP,
-  FilePathLikeStringLiteralVoque,
+  FILE_PATH_LIKE_STRING_LITERAL_COLLECTION_ID,
+  FilePathLikeStringLiteralStreamMetatype,
 } from './filePathLikeStringLiteral';
 import { FileLineColumnSourceInstance } from '../../programmable-units/linting/source/fileLineColumnSource';
 
-const ESTINANT_NAME = 'assertFileSystemNodePathLiteralExists' as const;
+const PROGRAMMED_TRANSFORM_NAME =
+  'assertFileSystemNodePathLiteralExists' as const;
 
 const fileSystemNodePathLiteralExistsRule = new TypedRule<EmptyMessageContext>({
   name: 'file-system-node-path-literal-exists',
   description: `Any string literal that looks like a file system node path should reference an existing file system node.`,
   source: new ProgrammedTransformSourceInstance({
     filePath: posix.relative('', __filename),
-    programmedTransformName: ESTINANT_NAME,
+    programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
   }),
   getErrorMessage: (): string => {
     return `A string literal that looks like a file system node path does not reference a real path`;
@@ -37,8 +38,8 @@ const fileSystemNodePathLiteralExistsRule = new TypedRule<EmptyMessageContext>({
 export const assertFileSystemNodePathLiteralExists = buildProgrammedTransform({
   name: 'assertFileSystemNodePathLiteralExists',
 })
-  .fromItem2<FilePathLikeStringLiteralVoque>({
-    collectionId: FILE_PATH_LIKE_STRING_LITERAL_GEPP,
+  .fromItem2<FilePathLikeStringLiteralStreamMetatype>({
+    collectionId: FILE_PATH_LIKE_STRING_LITERAL_COLLECTION_ID,
   })
   .toItem2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,

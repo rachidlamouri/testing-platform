@@ -3,13 +3,13 @@ import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { isRelativeFilePath } from '../../../package-agnostic-utilities/file/isRelativeFilePath';
 import {
-  FILE_PATH_LIKE_STRING_LITERAL_GEPP,
+  FILE_PATH_LIKE_STRING_LITERAL_COLLECTION_ID,
   FilePathLikeStringLiteralInstance,
-  FilePathLikeStringLiteralVoque,
+  FilePathLikeStringLiteralStreamMetatype,
 } from './filePathLikeStringLiteral';
 import {
-  STRING_LITERAL_NODE_LOCATOR_GEPP,
-  StringLiteralNodeLocatorVoque,
+  STRING_LITERAL_NODE_LOCATOR_COLLECTION_ID,
+  StringLiteralNodeLocatorStreamMetatype,
 } from './stringLiteralNodeLocator';
 import { resolveFileSystemNodePath } from '../../../package-agnostic-utilities/file/resolveFileSystemNodePath';
 
@@ -23,11 +23,11 @@ const IS_SINGLE_PATH_LIKE_REGEX = /^[^/]*$/;
 export const filterFilePathLikeStringLiteral = buildProgrammedTransform({
   name: 'filterFilePathLikeStringLiteral',
 })
-  .fromItem2<StringLiteralNodeLocatorVoque>({
-    collectionId: STRING_LITERAL_NODE_LOCATOR_GEPP,
+  .fromItem2<StringLiteralNodeLocatorStreamMetatype>({
+    collectionId: STRING_LITERAL_NODE_LOCATOR_COLLECTION_ID,
   })
-  .toItemTuple2<FilePathLikeStringLiteralVoque>({
-    collectionId: FILE_PATH_LIKE_STRING_LITERAL_GEPP,
+  .toItemTuple2<FilePathLikeStringLiteralStreamMetatype>({
+    collectionId: FILE_PATH_LIKE_STRING_LITERAL_COLLECTION_ID,
   })
   .onTransform((nodeLocator) => {
     const sourceFileFilePath = nodeLocator.filePath;

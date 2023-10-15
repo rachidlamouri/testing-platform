@@ -7,17 +7,17 @@ import {
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { FilePath } from '../../programmable-units/file/filePath';
 
-const FILE_PATH_LIKE_STRING_LITERAL_ZORN_TEMPLATE = [
+const FILE_PATH_LIKE_STRING_LITERAL_ID_TEMPLATE = [
   'sourceFileFilePath',
   'referencedFilePath',
   'lineNumber',
   'columnNumber',
 ] as const satisfies GenericComplexIdTemplate;
-type FilePathLikeStringLiteralZornTemplate =
-  typeof FILE_PATH_LIKE_STRING_LITERAL_ZORN_TEMPLATE;
-class FilePathLikeStringLiteralZorn extends ComplexId<FilePathLikeStringLiteralZornTemplate> {
-  get rawTemplate(): FilePathLikeStringLiteralZornTemplate {
-    return FILE_PATH_LIKE_STRING_LITERAL_ZORN_TEMPLATE;
+type FilePathLikeStringLiteralIdTemplate =
+  typeof FILE_PATH_LIKE_STRING_LITERAL_ID_TEMPLATE;
+class FilePathLikeStringLiteralId extends ComplexId<FilePathLikeStringLiteralIdTemplate> {
+  get rawTemplate(): FilePathLikeStringLiteralIdTemplate {
+    return FILE_PATH_LIKE_STRING_LITERAL_ID_TEMPLATE;
   }
 }
 
@@ -35,7 +35,7 @@ type FilePathLikeStringLiteralConstructorInput = {
  */
 type FilePathLikeStringLiteral = SimplifyN<
   [
-    { id: FilePathLikeStringLiteralZorn },
+    { id: FilePathLikeStringLiteralId },
     FilePathLikeStringLiteralConstructorInput,
   ]
 >;
@@ -73,7 +73,7 @@ export const { FilePathLikeStringLiteralInstance } =
           columnNumber,
         } = input;
 
-        const id = new FilePathLikeStringLiteralZorn({
+        const id = new FilePathLikeStringLiteralId({
           sourceFileFilePath: sourceFileFilePath.serialized,
           referencedFilePath,
           lineNumber,
@@ -89,13 +89,14 @@ export const { FilePathLikeStringLiteralInstance } =
     })
     .assemble();
 
-export const FILE_PATH_LIKE_STRING_LITERAL_GEPP =
+export const FILE_PATH_LIKE_STRING_LITERAL_COLLECTION_ID =
   'file-path-like-string-literal';
 
-type FilePathLikeStringLiteralGepp = typeof FILE_PATH_LIKE_STRING_LITERAL_GEPP;
+type FilePathLikeStringLiteralCollectionId =
+  typeof FILE_PATH_LIKE_STRING_LITERAL_COLLECTION_ID;
 
-export type FilePathLikeStringLiteralVoque =
+export type FilePathLikeStringLiteralStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    FilePathLikeStringLiteralGepp,
+    FilePathLikeStringLiteralCollectionId,
     FilePathLikeStringLiteral
   >;

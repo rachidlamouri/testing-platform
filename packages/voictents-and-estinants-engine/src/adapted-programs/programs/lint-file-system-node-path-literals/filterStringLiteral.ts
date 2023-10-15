@@ -1,9 +1,9 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  STRING_LITERAL_NODE_LOCATOR_GEPP,
+  STRING_LITERAL_NODE_LOCATOR_COLLECTION_ID,
   StringLiteralNodeLocator,
-  StringLiteralNodeLocatorVoque,
+  StringLiteralNodeLocatorStreamMetatype,
 } from './stringLiteralNodeLocator';
 import {
   GenericAstNodeLocator,
@@ -29,8 +29,8 @@ export const filterStringLiteral = buildProgrammedTransform({
   .fromItem2<AstNodeLocatorStreamMetatype>({
     collectionId: AST_NODE_LOCATOR_COLLECTION_ID,
   })
-  .toItemTuple2<StringLiteralNodeLocatorVoque>({
-    collectionId: STRING_LITERAL_NODE_LOCATOR_GEPP,
+  .toItemTuple2<StringLiteralNodeLocatorStreamMetatype>({
+    collectionId: STRING_LITERAL_NODE_LOCATOR_COLLECTION_ID,
   })
   .onTransform((nodeLocator) => {
     if (isStringLiteralLocator(nodeLocator)) {
