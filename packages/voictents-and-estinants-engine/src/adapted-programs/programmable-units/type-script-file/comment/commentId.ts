@@ -4,16 +4,16 @@ import {
   ComplexId,
 } from '../../../../package-agnostic-utilities/data-structure/id';
 
-type CommentZornContext = {
+type CommentIdContext = {
   filePath: string;
   rawComment: TSESTree.Comment;
 };
 
-const COMMENT_ZORN_TEMPLATE = [
+const COMMENT_ID_TEMPLATE = [
   'filePath',
   'lineNumber',
 ] as const satisfies GenericComplexIdTemplate;
-type CommentZornTemplate = typeof COMMENT_ZORN_TEMPLATE;
+type CommentIdTemplate = typeof COMMENT_ID_TEMPLATE;
 
 /**
  * The complex identifier for a comment
@@ -22,15 +22,15 @@ type CommentZornTemplate = typeof COMMENT_ZORN_TEMPLATE;
  *
  * @canonicalDeclaration
  */
-export class CommentId extends ComplexId<CommentZornTemplate> {
-  static build({ filePath, rawComment }: CommentZornContext): CommentId {
+export class CommentId extends ComplexId<CommentIdTemplate> {
+  static build({ filePath, rawComment }: CommentIdContext): CommentId {
     return new CommentId({
       filePath,
       lineNumber: `${rawComment.loc.start.line}`,
     });
   }
 
-  get rawTemplate(): CommentZornTemplate {
-    return COMMENT_ZORN_TEMPLATE;
+  get rawTemplate(): CommentIdTemplate {
+    return COMMENT_ID_TEMPLATE;
   }
 }

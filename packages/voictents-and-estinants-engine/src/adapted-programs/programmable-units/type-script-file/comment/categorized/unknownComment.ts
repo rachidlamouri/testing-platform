@@ -1,7 +1,7 @@
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../../package-agnostic-utilities/type/simplify';
 import { CategorizedCommentTypeName } from './categorizedCommentTypeName';
-import { CommentId } from '../commentZorn';
+import { CommentId } from '../commentId';
 import { AdaptedComment } from '../adapted/adaptedComment';
 
 type UnknownCommentConstructorInput = {

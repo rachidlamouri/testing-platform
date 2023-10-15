@@ -1,7 +1,7 @@
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { AdaptedLineComment } from '../adapted/adaptedLineComment';
 import { CategorizedCommentTypeName } from './categorizedCommentTypeName';
-import { CommentId } from '../commentZorn';
+import { CommentId } from '../commentId';
 
 export enum InformativeCommentTypeName {
   Note = 'Note',

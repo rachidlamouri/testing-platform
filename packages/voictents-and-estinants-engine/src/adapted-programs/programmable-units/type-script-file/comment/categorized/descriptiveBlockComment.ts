@@ -1,6 +1,6 @@
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { AdaptedJsdocLikeBlockComment } from '../adapted/adaptedJsdocLikeBlockComment';
-import { CommentId } from '../commentZorn';
+import { CommentId } from '../commentId';
 import { CategorizedCommentTypeName } from './categorizedCommentTypeName';
 
 type DescriptiveBlockCommentConstructorInput = {

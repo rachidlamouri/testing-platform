@@ -1,7 +1,7 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import * as commentParser from 'comment-parser';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
-import { CommentId } from '../commentZorn';
+import { CommentId } from '../commentId';
 import { AdaptedCommentTypeName } from './adaptedCommentTypeName';
 
 type AdaptedJsdocLikeBlockCommentConstructorInput = {

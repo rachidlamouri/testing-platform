@@ -1,7 +1,7 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { AdaptedCommentTypeName } from './adaptedCommentTypeName';
-import { CommentId } from '../commentZorn';
+import { CommentId } from '../commentId';
 
 type AdaptedNormalBlockCommentConstructorInput = {
   filePath: string;
