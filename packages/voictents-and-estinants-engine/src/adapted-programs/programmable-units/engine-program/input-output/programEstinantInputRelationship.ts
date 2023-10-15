@@ -8,7 +8,7 @@ import {
   ComplexId,
 } from '../../../../package-agnostic-utilities/data-structure/id';
 import { RootGraphLocator } from '../../graph-visualization/directed-graph/rootGraphLocator';
-import { RootDirectedGraphElement2Zorn } from '../../graph-visualization/directed-graph/types';
+import { RootDirectedGraphElement2Id } from '../../graph-visualization/directed-graph/types';
 import { EngineEstinantLocator2 } from '../engineEstinantLocator2';
 import {
   EngineEstinantInput2Zorn,
@@ -16,7 +16,7 @@ import {
 } from './engineEstinantInput2';
 
 const PROGRAM_ESTINANT_INPUT_RELATIONSHIP_ZORN_TEMPLATE = [
-  ['rootGraphLocator', RootDirectedGraphElement2Zorn],
+  ['rootGraphLocator', RootDirectedGraphElement2Id],
   ['estinantInput', EngineEstinantInput2Zorn],
 ] as const satisfies GenericComplexIdTemplate;
 type ProgramEstinantInputRelationshipZornTemplate =

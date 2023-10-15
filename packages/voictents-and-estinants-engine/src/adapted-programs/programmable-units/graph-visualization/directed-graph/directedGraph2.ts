@@ -4,7 +4,7 @@ import {
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { PartialGraphAttributeByKey } from './directedGraph';
 import { RootGraphLocator } from './rootGraphLocator';
-import { RootDirectedGraphElement2Zorn } from './types';
+import { RootDirectedGraphElement2Id } from './types';
 
 type BaseDirectedGraph2 = {
   locator: RootGraphLocator;
@@ -14,7 +14,7 @@ type BaseDirectedGraph2 = {
 };
 
 type DirectedGraph2Prototype = {
-  get id(): RootDirectedGraphElement2Zorn;
+  get id(): RootDirectedGraphElement2Id;
   /** @deprecated */
   get rootGraphLocator(): RootGraphLocator;
   get attributeByKey(): PartialGraphAttributeByKey;

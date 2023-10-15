@@ -5,7 +5,7 @@ import {
 import { RootGraphLocator } from './rootGraphLocator';
 import {
   LocalDirectedGraphElement2Id,
-  GlobalDirectedGraphElement2Zorn,
+  GlobalDirectedGraphElement2Id,
 } from './types';
 
 type BaseGraphConstituentLocator = {
@@ -18,7 +18,7 @@ type BaseGraphConstituentLocator = {
 
 type GraphConstituentLocatorPrototype = {
   get isRoot(): false;
-  get id(): GlobalDirectedGraphElement2Zorn;
+  get id(): GlobalDirectedGraphElement2Id;
   get oldId(): string;
 };
 
@@ -40,7 +40,7 @@ export const { GraphConstituentLocatorInstance } =
   >({
     isRoot: () => false,
     id: (locator) => {
-      return new GlobalDirectedGraphElement2Zorn({
+      return new GlobalDirectedGraphElement2Id({
         root: locator.rootGraphLocator.id,
         local: locator.localId,
       });

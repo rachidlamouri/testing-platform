@@ -4,7 +4,7 @@ import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
-import { GlobalDirectedGraphElement2Zorn } from './types';
+import { GlobalDirectedGraphElement2Id } from './types';
 import { GraphConstituentLocator } from './graphConstituentLocator';
 
 type BaseDirectedSubgraph2 = {
@@ -14,7 +14,7 @@ type BaseDirectedSubgraph2 = {
 };
 
 type DirectedSubgraph2Prototype = {
-  get id(): GlobalDirectedGraphElement2Zorn;
+  get id(): GlobalDirectedGraphElement2Id;
   get oldId(): string;
   get parentId(): string;
   get attributeByKey(): PartialSubgraphAttributeByKey;

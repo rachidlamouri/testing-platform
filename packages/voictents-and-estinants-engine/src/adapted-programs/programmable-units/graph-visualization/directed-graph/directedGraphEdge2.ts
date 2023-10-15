@@ -9,7 +9,7 @@ import {
 } from './graphConstituentLocator';
 import { RootGraphLocator } from './rootGraphLocator';
 import {
-  GlobalDirectedGraphElement2Zorn,
+  GlobalDirectedGraphElement2Id,
   LocalDirectedGraphElement2Id,
 } from './types';
 
@@ -21,7 +21,7 @@ type BaseDirectedGraphEdge2 = {
 };
 
 type DirectedGraphEdge2Prototype = {
-  get id(): GlobalDirectedGraphElement2Zorn;
+  get id(): GlobalDirectedGraphElement2Id;
   get oldId(): string;
   get locator(): GraphConstituentLocator;
 };
@@ -50,7 +50,7 @@ export const { DirectedGraphEdge2Instance } = buildConstructorFunctionWithName(
       idOverride: directedEdge.oldId,
       rootGraphLocator: directedEdge.rootGraphLocator,
       parentId: directedEdge.rootGraphLocator.oldId,
-      localId: LocalDirectedGraphElement2Id.buildEdgeZorn({
+      localId: LocalDirectedGraphElement2Id.buildEdgeId({
         distinguisher: directedEdge.oldId,
       }),
     });

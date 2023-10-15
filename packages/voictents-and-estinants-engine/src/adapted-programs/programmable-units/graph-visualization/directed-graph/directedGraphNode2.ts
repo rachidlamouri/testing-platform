@@ -4,7 +4,7 @@ import {
   buildConstructorFunctionWithName,
 } from '../../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { GraphConstituentLocator } from './graphConstituentLocator';
-import { GlobalDirectedGraphElement2Zorn } from './types';
+import { GlobalDirectedGraphElement2Id } from './types';
 import { RootGraphLocator } from './rootGraphLocator';
 
 type BaseDirectedGraphNode2 = {
@@ -13,7 +13,7 @@ type BaseDirectedGraphNode2 = {
 };
 
 type DirectedGraphNode2Prototype = {
-  get id(): GlobalDirectedGraphElement2Zorn;
+  get id(): GlobalDirectedGraphElement2Id;
   get oldId(): string;
   get parentId(): string;
   get rootGraphLocator(): RootGraphLocator;

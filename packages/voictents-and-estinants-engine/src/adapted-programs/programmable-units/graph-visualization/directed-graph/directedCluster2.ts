@@ -5,7 +5,7 @@ import {
 import { PartialClusterAttributeByKey } from './directedSubgraph';
 import { GraphConstituentLocator } from './graphConstituentLocator';
 import { RootGraphLocator } from './rootGraphLocator';
-import { GlobalDirectedGraphElement2Zorn } from './types';
+import { GlobalDirectedGraphElement2Id } from './types';
 
 type BaseDirectedCluster2 = {
   locator: GraphConstituentLocator;
@@ -14,7 +14,7 @@ type BaseDirectedCluster2 = {
 };
 
 type DirectedCluster2Prototype = {
-  get id(): GlobalDirectedGraphElement2Zorn;
+  get id(): GlobalDirectedGraphElement2Id;
   get oldId(): string;
   get parentId(): string;
   get rootGraphLocator(): RootGraphLocator;

@@ -35,7 +35,10 @@ export type DirectedGraph = {
 
 export const DIRECTED_GRAPH_COLLECTION_ID = 'directed-graph';
 
-type DirectedGraphGepp = typeof DIRECTED_GRAPH_COLLECTION_ID;
+type DirectedGraphCollectionId = typeof DIRECTED_GRAPH_COLLECTION_ID;
 
 export type DirectedGraphStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<DirectedGraphGepp, DirectedGraph>;
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    DirectedGraphCollectionId,
+    DirectedGraph
+  >;

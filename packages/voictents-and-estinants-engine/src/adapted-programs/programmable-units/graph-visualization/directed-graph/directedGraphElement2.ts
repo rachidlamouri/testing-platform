@@ -18,10 +18,11 @@ export type DirectedGraphElement2 =
 export const DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID =
   'directed-graph-element-2';
 
-type DirectedGraphElement2Gepp = typeof DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID;
+type DirectedGraphElement2CollectionId =
+  typeof DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID;
 
 export type DirectedGraphElement2StreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    DirectedGraphElement2Gepp,
+    DirectedGraphElement2CollectionId,
     DirectedGraphElement2
   >;

@@ -12,14 +12,14 @@ type FactoryInput = {
   distinguisher: string;
 };
 
-const LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE = [
+const LOCAL_DIRECTED_GRAPH_ELEMENT_2_ID_TEMPLATE = [
   'elementType',
   // TODO: update the template parent type to allow this to be a string OR an id
   'distinguisher',
 ] as const satisfies GenericComplexIdTemplate;
-type LocalDirectedGraphElement2ZornTemplate =
-  typeof LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;
-export class LocalDirectedGraphElement2Id extends ComplexId<LocalDirectedGraphElement2ZornTemplate> {
+type LocalDirectedGraphElement2IdTemplate =
+  typeof LOCAL_DIRECTED_GRAPH_ELEMENT_2_ID_TEMPLATE;
+export class LocalDirectedGraphElement2Id extends ComplexId<LocalDirectedGraphElement2IdTemplate> {
   static buildSubgraphId({
     distinguisher,
   }: FactoryInput): LocalDirectedGraphElement2Id {
@@ -47,7 +47,7 @@ export class LocalDirectedGraphElement2Id extends ComplexId<LocalDirectedGraphEl
     });
   }
 
-  static buildEdgeZorn({
+  static buildEdgeId({
     distinguisher,
   }: FactoryInput): LocalDirectedGraphElement2Id {
     return new LocalDirectedGraphElement2Id({
@@ -56,29 +56,29 @@ export class LocalDirectedGraphElement2Id extends ComplexId<LocalDirectedGraphEl
     });
   }
 
-  get rawTemplate(): LocalDirectedGraphElement2ZornTemplate {
-    return LOCAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;
+  get rawTemplate(): LocalDirectedGraphElement2IdTemplate {
+    return LOCAL_DIRECTED_GRAPH_ELEMENT_2_ID_TEMPLATE;
   }
 }
 
-export class RootDirectedGraphElement2Zorn extends LocalDirectedGraphElement2Id {
-  static build({ distinguisher }: FactoryInput): RootDirectedGraphElement2Zorn {
-    return new RootDirectedGraphElement2Zorn({
+export class RootDirectedGraphElement2Id extends LocalDirectedGraphElement2Id {
+  static build({ distinguisher }: FactoryInput): RootDirectedGraphElement2Id {
+    return new RootDirectedGraphElement2Id({
       elementType: 'graph',
       distinguisher,
     });
   }
 }
 
-const GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE = [
-  ['root', RootDirectedGraphElement2Zorn],
+const GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ID_TEMPLATE = [
+  ['root', RootDirectedGraphElement2Id],
   ['local', LocalDirectedGraphElement2Id],
 ] as const satisfies GenericComplexIdTemplate;
-type GlobalDirectedGraphElement2ZornTemplate =
-  typeof GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;
+type GlobalDirectedGraphElement2IdTemplate =
+  typeof GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ID_TEMPLATE;
 
-export class GlobalDirectedGraphElement2Zorn extends ComplexId<GlobalDirectedGraphElement2ZornTemplate> {
-  get rawTemplate(): GlobalDirectedGraphElement2ZornTemplate {
-    return GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ZORN_TEMPLATE;
+export class GlobalDirectedGraphElement2Id extends ComplexId<GlobalDirectedGraphElement2IdTemplate> {
+  get rawTemplate(): GlobalDirectedGraphElement2IdTemplate {
+    return GLOBAL_DIRECTED_GRAPH_ELEMENT_2_ID_TEMPLATE;
   }
 }
