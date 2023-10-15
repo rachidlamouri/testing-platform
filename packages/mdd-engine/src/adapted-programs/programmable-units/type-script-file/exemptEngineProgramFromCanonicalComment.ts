@@ -3,7 +3,7 @@ import { buildProgrammedTransform } from '../../../adapter/programmed-transform-
 import {
   ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   EngineProgramLocator3StreamMetatype,
-} from '../engine-program/engineProgramLocator3';
+} from '../engine-program-model/engineProgramLocator3';
 import { LintAssertionId } from '../linting/lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,

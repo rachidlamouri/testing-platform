@@ -10,12 +10,6 @@ export enum EngineFunctionConfigurationTypeName {
   Adapted = 'Adapted',
 }
 
-type CoreEngineFunctionConfiguration = {
-  typeName: EngineFunctionConfigurationTypeName.Core;
-  filePath: 'packages/mdd-engine/src/core/engine/runEngine.ts';
-  exportedIdentifier: 'digikikify';
-};
-
 export type CoreEngineFunction2Configuration = {
   typeName: EngineFunctionConfigurationTypeName.Core2;
   filePath: 'packages/mdd-engine/src/core/engine/runEngine.ts';
@@ -40,7 +34,6 @@ export type AdaptedEngineFunctionConfiguration = {
  * call
  */
 export type EngineFunctionConfiguration =
-  | CoreEngineFunctionConfiguration
   | CoreEngineFunction2Configuration
   | AdaptedEngineFunctionConfiguration;
 
@@ -56,25 +49,17 @@ export type EngineFunctionConfigurationStreamMetatype =
     EngineFunctionConfiguration
   >;
 
-export const CORE_ENGINE_FUNCTION_CONFIGURATION: CoreEngineFunctionConfiguration =
-  {
-    typeName: EngineFunctionConfigurationTypeName.Core,
-    filePath: 'packages/mdd-engine/src/core/engine/runEngine.ts',
-    exportedIdentifier: 'digikikify',
-  };
+const CORE_ENGINE_FUNCTION_2_CONFIGURATION: CoreEngineFunction2Configuration = {
+  typeName: EngineFunctionConfigurationTypeName.Core2,
+  filePath: 'packages/mdd-engine/src/core/engine/runEngine.ts',
+  exportedIdentifier: 'runEngine2',
+  programmedTransformListKeyIdentifierName: 'programmedTransformTuple',
+  collectionListKeyIdentifierName: 'inputCollectionList',
+  collectionCollectionIdKeyIdentifierName: 'collectionId',
+  initialItemEggTupleKeyIdentifierName: 'initialItemEggTuple',
+};
 
-export const CORE_ENGINE_FUNCTION_2_CONFIGURATION: CoreEngineFunction2Configuration =
-  {
-    typeName: EngineFunctionConfigurationTypeName.Core2,
-    filePath: 'packages/mdd-engine/src/core/engine/runEngine.ts',
-    exportedIdentifier: 'runEngine2',
-    programmedTransformListKeyIdentifierName: 'programmedTransformTuple',
-    collectionListKeyIdentifierName: 'inputCollectionList',
-    collectionCollectionIdKeyIdentifierName: 'collectionId',
-    initialItemEggTupleKeyIdentifierName: 'initialItemEggTuple',
-  };
-
-export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfiguration =
+const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfiguration =
   {
     typeName: EngineFunctionConfigurationTypeName.Adapted,
     filePath: 'packages/mdd-engine/src/adapter/engine/runEngine.ts',
@@ -84,3 +69,8 @@ export const ADAPTED_ENGINE_FUNCTION_CONFIGURATION: AdaptedEngineFunctionConfigu
     uninferableCollectionByCollectionIdKeyIdentifierName:
       'uninferableCollectionByCollectionId',
   };
+
+export const ENGINE_FUNCTION_CONFIGURATION_LIST = [
+  CORE_ENGINE_FUNCTION_2_CONFIGURATION,
+  ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
+];

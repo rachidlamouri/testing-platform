@@ -9,7 +9,7 @@ import { ProgrammedTransformSourceInstance } from '../../programmable-units/lint
 import {
   ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   EngineProgramLocator3StreamMetatype,
-} from '../../programmable-units/engine-program/engineProgramLocator3';
+} from '../../programmable-units/engine-program-model/engineProgramLocator3';
 import {
   EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_COLLECTION_ID,
   ExpectedProgramTestFileConfigurationInstance,

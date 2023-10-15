@@ -74,7 +74,7 @@ import {
   FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from '../type-script-file/fileCommentedProgramBodyDeclarationGroup';
 
-const PROGRAMMED_TRANSFORM_NAME = 'getEngineEstinant3' as const;
+const PROGRAMMED_TRANSFORM_NAME = 'getEngineProgrammedTransform3' as const;
 type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
 type ReportingLocator =
   ReportingProgrammedTransformLocator<ProgrammedTransformName>;
@@ -151,8 +151,14 @@ const getBuildAddMetadataForSerializationProgrammedTransform = (
   const [inputStreamMetatypeName, outputStreamMetatypeName] =
     parameterNameTuple;
 
-  const inputCollectionName = inputStreamMetatypeName.replace(/Voque$/, '');
-  const outputCollectionName = outputStreamMetatypeName.replace(/Voque$/, '');
+  const inputCollectionName = inputStreamMetatypeName.replace(
+    /StreamMetatype$/,
+    '',
+  );
+  const outputCollectionName = outputStreamMetatypeName.replace(
+    /StreamMetatype$/,
+    '',
+  );
 
   // TODO: tie this logic back to the helper function itself
   const programmedTransformName = `serialize/${inputCollectionName}`;
@@ -377,7 +383,7 @@ const getCoreProgrammedTransform = ({
         return null;
       }
 
-      const collectionName = streamMetatypeName.replace(/Voque$/, '');
+      const collectionName = streamMetatypeName.replace(/StreamMetatype$/, '');
 
       const streamMetatypeLocator = new EngineStreamMetatypeLocator2Instance({
         identifierName: streamMetatypeName,
@@ -400,7 +406,7 @@ const getCoreProgrammedTransform = ({
 
   const outputList = (outputStreamMetatypeNameTuple ?? []).map(
     (streamMetatypeName) => {
-      const collectionName = streamMetatypeName.replace(/Voque$/, '');
+      const collectionName = streamMetatypeName.replace(/StreamMetatype$/, '');
 
       const streamMetatypeLocator = new EngineStreamMetatypeLocator2Instance({
         identifierName: streamMetatypeName,
@@ -670,7 +676,7 @@ const getAdaptedProgrammedTransform = ({
   const inputOutputExpressionList = parsedFlattenedCallExpressionList.filter(
     (parsedExpression) =>
       // TODO: tie these function names back to the estinant builder function names
-      !['buildEstinant', 'onPinbe', 'assemble'].includes(
+      !['buildProgrammedTransform', 'onTransform', 'assemble'].includes(
         parsedExpression.functionName,
       ),
   );
@@ -719,7 +725,7 @@ const getAdaptedProgrammedTransform = ({
     if (streamMetatypeName === 'GenericProgramErrorVoque') {
       collectionName = 'ProgramError';
     } else {
-      collectionName = streamMetatypeName.replace(/Voque$/, '');
+      collectionName = streamMetatypeName.replace(/StreamMetatype$/, '');
     }
 
     const streamMetatypeLocator = new EngineStreamMetatypeLocator2Instance({

@@ -21,7 +21,7 @@ import {
   EngineStreamMetatypeLocator2StreamMetatype,
 } from './engineStreamMetatypeLocator2';
 
-const PROGRAMMED_TRANSFORM_NAME = 'getEngineVoque2' as const;
+const PROGRAMMED_TRANSFORM_NAME = 'getEngineStreamMetatype2' as const;
 type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
 type ReportingLocator =
   ReportingProgrammedTransformLocator<ProgrammedTransformName>;
@@ -62,7 +62,7 @@ export const getEngineStreamMetatype2 = buildProgrammedTransform({
   .onTransform((streamMetatypeLocator, [{ declarationByIdentifier }]) => {
     // TODO: move these naming conventions elsewhere
     const itemIdentifierName = streamMetatypeLocator.identifierName
-      .replace(/Voque$/, '')
+      .replace(/StreamMetatype$/, '')
       .replace(/^Generic/, '');
 
     const itemIdentifierStreamableName = `${itemIdentifierName}Pelie`;

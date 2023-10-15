@@ -4,7 +4,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   {
     filePath:
       'packages/mdd-engine/src/layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2.ts',
-    identifierList: ['InMemoryOdeshin2ListVoque'],
+    identifierList: ['InMemoryIdentifiableItem2ListStreamMetatype'],
   },
   {
     filePath:
@@ -37,16 +37,16 @@ export const getItemFileContents = ({
   const serializedImportLines =
     IMPORT_CONFIGURATION_LIST.map(getImportStatement).join('\n');
 
-  const idTemplateCodeName = `${screamingSnakeCaseName}_ZORN_TEMPLATE`;
-  const idTemplateTypeName = `${pascalCaseName}ZornTemplate`;
-  const idTemplateClassName = `${pascalCaseName}Zorn`;
+  const idTemplateCodeName = `${screamingSnakeCaseName}_ID_TEMPLATE`;
+  const idTemplateTypeName = `${pascalCaseName}IdTemplate`;
+  const idTemplateClassName = `${pascalCaseName}Id`;
   const constructorInputTypeName = `${pascalCaseName}ConstructorInput`;
   const itemTypeName = pascalCaseName;
   const constructorCodeName = `${itemTypeName}Instance`;
-  const collectionIdCodeName = `${screamingSnakeCaseName}_GEPP`;
+  const collectionIdCodeName = `${screamingSnakeCaseName}_COLLECTION_ID`;
   const collectionIdLiteral = kebabCaseName;
-  const collectionIdTypeName = `${itemTypeName}Gepp`;
-  const streamMetatypeTypeName = `${itemTypeName}Voque`;
+  const collectionIdTypeName = `${itemTypeName}CollectionId`;
+  const streamMetatypeTypeName = `${itemTypeName}StreamMetatype`;
 
   const fileContents = `
 ${serializedImportLines}
@@ -82,7 +82,7 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
   ] as const satisfies readonly (keyof ${itemTypeName})[],
 })
   .withTypes<${constructorInputTypeName}, ${itemTypeName}>({
-    typeCheckErrorMesssages: {
+    typeCheckErrorMessage: {
       initialization: '',
       instancePropertyNameTuple: {
         missingProperties: '',
@@ -108,7 +108,7 @@ export const { ${constructorCodeName} } = buildNamedConstructorFunction({
 
   type ${collectionIdTypeName} = typeof ${collectionIdCodeName}
 
-  export type ${streamMetatypeTypeName} = InMemoryOdeshin2ListVoque<${collectionIdTypeName}, ${itemTypeName}>
+  export type ${streamMetatypeTypeName} = InMemoryIdentifiableItem2ListStreamMetatype<${collectionIdTypeName}, ${itemTypeName}>
 `;
 
   return fileContents;

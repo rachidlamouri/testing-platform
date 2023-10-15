@@ -25,7 +25,7 @@ import {
  */
 export const getEngineStreamMetatypeLocatorCollection2 =
   buildProgrammedTransform({
-    name: 'getEngineVoqueLocatorCollection2',
+    name: 'getEngineStreamMetatypeLocatorCollection2',
   })
     .fromCollection2<ProgramStreamMetatypeRelationship2StreamMetatype>({
       collectionId: PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,

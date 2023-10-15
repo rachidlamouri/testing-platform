@@ -3,11 +3,11 @@ import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifia
 import {
   ENGINE_STREAM_METATYPE_2_COLLECTION_ID,
   EngineStreamMetatype2StreamMetatype,
-} from '../../programmable-units/engine-program/engineStreamMetatype2';
+} from '../../programmable-units/engine-program-model/engineStreamMetatype2';
 import {
   PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,
   ProgramStreamMetatypeRelationship2StreamMetatype,
-} from '../../programmable-units/engine-program/programStreamMetatypeRelationship2';
+} from '../../programmable-units/engine-program-model/programStreamMetatypeRelationship2';
 import {
   DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID,
   DirectedGraphElement2StreamMetatype,
@@ -25,7 +25,7 @@ import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-fi
  * @readableName getStreamMetatypeModelGraphElement
  */
 export const getEngineProgramStreamMetatypeElements = buildProgrammedTransform({
-  name: 'getEngineProgramVoqueElements',
+  name: 'getEngineProgramStreamMetatypeElements',
 })
   .fromItem2<ProgramStreamMetatypeRelationship2StreamMetatype>({
     collectionId: PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,

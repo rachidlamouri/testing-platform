@@ -2,7 +2,7 @@ import { buildProgrammedTransform } from '../../../adapter/programmed-transform-
 import {
   EngineProgram3StreamMetatype,
   ENGINE_PROGRAM_3_COLLECTION_ID,
-} from '../../programmable-units/engine-program/engineProgram3';
+} from '../../programmable-units/engine-program-model/engineProgram3';
 import {
   DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID,
   DirectedGraphMetadataEntryInstance,
