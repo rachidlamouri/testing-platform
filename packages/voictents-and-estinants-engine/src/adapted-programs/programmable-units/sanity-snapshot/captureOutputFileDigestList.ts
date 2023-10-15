@@ -6,7 +6,7 @@ import {
 } from '../output-file/outputFile';
 import {
   SANITY_SNAPSHOT_COLLECTION_ID,
-  SanitySnapshotVoque,
+  SanitySnapshotStreamMetatype,
 } from './sanitySnapshot';
 import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
 
@@ -26,7 +26,7 @@ export const captureOutputFileDigestList = buildProgrammedTransform({
   .fromCollection2<OutputFileStreamMetatype>({
     collectionId: OUTPUT_FILE_COLLECTION_ID,
   })
-  .toItem2<SanitySnapshotVoque>({
+  .toItem2<SanitySnapshotStreamMetatype>({
     collectionId: SANITY_SNAPSHOT_COLLECTION_ID,
   })
   .onTransform((list) => {
@@ -51,7 +51,7 @@ export const captureOutputFileDigestList = buildProgrammedTransform({
 
     return {
       id: 'output-file-digest-list',
-      grition: digestList,
+      subitem: digestList,
     };
   })
   .assemble();

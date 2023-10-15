@@ -6,14 +6,15 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agno
  */
 type SanitySnapshot = {
   id: string;
-  grition: unknown;
+  subitem: unknown;
 };
 
 export const SANITY_SNAPSHOT_COLLECTION_ID = 'sanity-snapshot';
 
-type SanitySnapshotGepp = typeof SANITY_SNAPSHOT_COLLECTION_ID;
+type SanitySnapshotCollectionId = typeof SANITY_SNAPSHOT_COLLECTION_ID;
 
-export type SanitySnapshotVoque = InMemoryIdentifiableItem2ListStreamMetatype<
-  SanitySnapshotGepp,
-  SanitySnapshot
->;
+export type SanitySnapshotStreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    SanitySnapshotCollectionId,
+    SanitySnapshot
+  >;
