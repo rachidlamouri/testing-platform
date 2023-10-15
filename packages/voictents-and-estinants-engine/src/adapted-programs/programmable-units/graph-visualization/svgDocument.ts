@@ -10,7 +10,10 @@ type SvgDocument = {
 
 export const SVG_DOCUMENT_COLLECTION_ID = 'svg-document';
 
-type SvgDocumentGepp = typeof SVG_DOCUMENT_COLLECTION_ID;
+type SvgDocumentCollectionId = typeof SVG_DOCUMENT_COLLECTION_ID;
 
 export type SvgDocumentStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<SvgDocumentGepp, SvgDocument>;
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    SvgDocumentCollectionId,
+    SvgDocument
+  >;

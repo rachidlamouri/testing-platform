@@ -41,11 +41,11 @@ export const { DirectedGraphMetadataEntryInstance } =
 export const DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID =
   'directed-graph-metadata-entry';
 
-type DirectedGraphMetadataEntryGepp =
+type DirectedGraphMetadataEntryCollectionId =
   typeof DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID;
 
 export type DirectedGraphMetadataEntryStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    DirectedGraphMetadataEntryGepp,
+    DirectedGraphMetadataEntryCollectionId,
     DirectedGraphMetadataEntry
   >;

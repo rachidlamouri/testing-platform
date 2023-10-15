@@ -6,14 +6,15 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agno
  */
 type GraphvizCode = {
   id: string;
-  grition: string;
+  subitem: string;
 };
 
-export const GRAPHVIZ_CODE_GEPP = 'graphviz-code';
+export const GRAPHVIZ_CODE_COLLECTION_ID = 'graphviz-code';
 
-type GraphvizCodeGepp = typeof GRAPHVIZ_CODE_GEPP;
+type GraphvizCodeCollectionId = typeof GRAPHVIZ_CODE_COLLECTION_ID;
 
-export type GraphvizCodeVoque = InMemoryIdentifiableItem2ListStreamMetatype<
-  GraphvizCodeGepp,
-  GraphvizCode
->;
+export type GraphvizCodeStreamMetatype =
+  InMemoryIdentifiableItem2ListStreamMetatype<
+    GraphvizCodeCollectionId,
+    GraphvizCode
+  >;

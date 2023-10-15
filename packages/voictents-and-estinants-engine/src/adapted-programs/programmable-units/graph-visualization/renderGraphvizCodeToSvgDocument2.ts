@@ -1,6 +1,9 @@
 import childProcessUtilities from 'child_process';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { GRAPHVIZ_CODE_GEPP, GraphvizCodeVoque } from './graphvizCode';
+import {
+  GRAPHVIZ_CODE_COLLECTION_ID,
+  GraphvizCodeStreamMetatype,
+} from './graphvizCode';
 import {
   SVG_DOCUMENT_COLLECTION_ID,
   SvgDocumentStreamMetatype,
@@ -12,8 +15,8 @@ import {
 export const renderGraphvizCodeToSvgDocument2 = buildProgrammedTransform({
   name: 'renderGraphvizCodeToSvgDocument2',
 })
-  .fromItem2<GraphvizCodeVoque>({
-    collectionId: GRAPHVIZ_CODE_GEPP,
+  .fromItem2<GraphvizCodeStreamMetatype>({
+    collectionId: GRAPHVIZ_CODE_COLLECTION_ID,
   })
   .toItem2<SvgDocumentStreamMetatype>({
     collectionId: SVG_DOCUMENT_COLLECTION_ID,
@@ -21,7 +24,7 @@ export const renderGraphvizCodeToSvgDocument2 = buildProgrammedTransform({
   .onTransform((identifiableCode) => {
     const result = childProcessUtilities.spawnSync('dot', ['-Tsvg'], {
       encoding: 'utf8',
-      input: identifiableCode.grition,
+      input: identifiableCode.subitem,
     });
 
     const originalDocument = result.output

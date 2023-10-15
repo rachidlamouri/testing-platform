@@ -1,5 +1,8 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { GRAPHVIZ_CODE_GEPP, GraphvizCodeVoque } from './graphvizCode';
+import {
+  GRAPHVIZ_CODE_COLLECTION_ID,
+  GraphvizCodeStreamMetatype,
+} from './graphvizCode';
 import {
   DIRECTED_GRAPH_COLLECTION_ID,
   DirectedGraphStreamMetatype,
@@ -15,14 +18,14 @@ export const encodeDirectedGraphAsGraphvizCode = buildProgrammedTransform({
   .fromItem2<DirectedGraphStreamMetatype>({
     collectionId: DIRECTED_GRAPH_COLLECTION_ID,
   })
-  .toItem2<GraphvizCodeVoque>({
-    collectionId: GRAPHVIZ_CODE_GEPP,
+  .toItem2<GraphvizCodeStreamMetatype>({
+    collectionId: GRAPHVIZ_CODE_COLLECTION_ID,
   })
   .onTransform((input) => {
     const code = getGraphvizCode(input);
     return {
       id: input.id,
-      grition: code,
+      subitem: code,
     };
   })
   .assemble();
