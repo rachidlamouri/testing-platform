@@ -7,7 +7,7 @@ import {
 } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { serialize } from '../../../package-agnostic-utilities/one-way-serializer/serialize';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { AbstractAsymmetricInMemoryCollection2 } from '../in-memory-cache/abstractAsymmetricInMemoryVoictent2';
+import { AbstractAsymmetricInMemoryCollection2 } from '../in-memory-cache/abstractAsymmetricInMemoryCollection2';
 import {
   GenericProgramErrorStreamMetatype,
   PROGRAM_ERROR_COLLECTION_ID,

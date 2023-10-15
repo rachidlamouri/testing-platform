@@ -10,7 +10,7 @@ class DuplicatePointerError extends Error {
   }
 }
 
-type DatumStatePelue = {
+type DatumStateEgg = {
   twoTicksAgo: boolean;
   oneTickAgo: boolean;
   thisTick: boolean | null;
@@ -77,7 +77,7 @@ export class InMemoryCache<TDatum> {
   private pointerByName = new Map<string, InMemoryCachePointer<TDatum>>();
   // private datumIndexByPointerName: Map<string, number> = new Map();
 
-  private datumStatePelue: DatumStatePelue = {
+  private datumStateEgg: DatumStateEgg = {
     twoTicksAgo: false,
     oneTickAgo: false,
     thisTick: null,
@@ -89,15 +89,15 @@ export class InMemoryCache<TDatum> {
 
   onTickStart(): void {
     // eslint-disable-next-line prefer-destructuring
-    this.datumStatePelue = {
-      twoTicksAgo: this.datumStatePelue.oneTickAgo,
-      oneTickAgo: this.datumStatePelue.thisTick ?? false,
+    this.datumStateEgg = {
+      twoTicksAgo: this.datumStateEgg.oneTickAgo,
+      oneTickAgo: this.datumStateEgg.thisTick ?? false,
       thisTick: null,
     };
   }
 
   addDatum(datum: TDatum): void {
-    this.datumStatePelue.thisTick = true;
+    this.datumStateEgg.thisTick = true;
 
     this.datumTuple.push(datum);
   }
@@ -116,14 +116,14 @@ export class InMemoryCache<TDatum> {
   }
 
   get didStopAccumulating(): boolean {
-    return this.datumStatePelue.twoTicksAgo && !this.datumStatePelue.oneTickAgo;
+    return this.datumStateEgg.twoTicksAgo && !this.datumStateEgg.oneTickAgo;
   }
 
   get isAccumulating(): boolean {
     return (
-      this.datumStatePelue.twoTicksAgo ||
-      this.datumStatePelue.oneTickAgo ||
-      (this.datumStatePelue.thisTick ?? false)
+      this.datumStateEgg.twoTicksAgo ||
+      this.datumStateEgg.oneTickAgo ||
+      (this.datumStateEgg.thisTick ?? false)
     );
   }
 

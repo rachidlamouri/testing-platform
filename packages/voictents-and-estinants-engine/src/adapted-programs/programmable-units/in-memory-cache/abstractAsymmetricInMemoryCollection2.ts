@@ -8,11 +8,11 @@ import { Collection2 } from '../../../core/types/collection/collection2';
 import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
 import { InMemoryCache } from './inMemoryCache';
 
-type AbstractInMemoryVoictent2ConstructorInput<
-  TVoque extends GenericStreamMetatype,
+type AbstractInMemoryCollection2ConstructorInput<
+  TStreamMetatype extends GenericStreamMetatype,
 > = {
-  collectionId: TVoque['collectionId'];
-  initialItemEggTuple: TVoque['itemEggStreamable'][];
+  collectionId: TStreamMetatype['collectionId'];
+  initialItemEggTuple: TStreamMetatype['itemEggStreamable'][];
 };
 
 /**
@@ -25,53 +25,53 @@ type AbstractInMemoryVoictent2ConstructorInput<
  * @canonicalDeclaration
  */
 export abstract class AbstractAsymmetricInMemoryCollection2<
-    TRestrictingVoque extends GenericStreamMetatype,
-    TVoque extends TRestrictingVoque,
+    TRestrictingStreamMetatype extends GenericStreamMetatype,
+    TStreamMetatype extends TRestrictingStreamMetatype,
   >
-  extends InMemoryCache<TVoque['itemStreamable']>
-  implements Collection2<TRestrictingVoque, TVoque>
+  extends InMemoryCache<TStreamMetatype['itemStreamable']>
+  implements Collection2<TRestrictingStreamMetatype, TStreamMetatype>
 {
-  public readonly collectionId: TVoque['collectionId'];
+  public readonly collectionId: TStreamMetatype['collectionId'];
 
-  private initialHubblepupPelueTuple: TVoque['itemStreamable'][];
+  private initialItemEggTuple: TStreamMetatype['itemStreamable'][];
 
   constructor({
     collectionId,
     initialItemEggTuple,
-  }: AbstractInMemoryVoictent2ConstructorInput<TVoque>) {
+  }: AbstractInMemoryCollection2ConstructorInput<TStreamMetatype>) {
     super();
 
     this.collectionId = collectionId;
-    this.initialHubblepupPelueTuple = initialItemEggTuple;
+    this.initialItemEggTuple = initialItemEggTuple;
   }
 
   initialize(): void {
-    this.initialHubblepupPelueTuple.forEach((hubblepup) => {
-      this.addItem(hubblepup);
+    this.initialItemEggTuple.forEach((item) => {
+      this.addItem(item);
     });
   }
 
-  addItem(hubblepup: TVoque['itemEggStreamable']): void {
-    const transformedHubblepup = this.transformItem(hubblepup);
-    this.addDatum(transformedHubblepup);
-    this.onTransformedItem(transformedHubblepup, this.datumTuple.length - 1);
+  addItem(item: TStreamMetatype['itemEggStreamable']): void {
+    const transformedItem = this.transformItem(item);
+    this.addDatum(transformedItem);
+    this.onTransformedItem(transformedItem, this.datumTuple.length - 1);
   }
 
   protected abstract transformItem(
-    hubblepup: TVoque['itemEggStreamable'],
-  ): TVoque['itemStreamable'];
+    item: TStreamMetatype['itemEggStreamable'],
+  ): TStreamMetatype['itemStreamable'];
 
   protected abstract getIndexByName(
-    hubblepup: TVoque['itemStreamable'],
-  ): TVoque['indexByName'];
+    item: TStreamMetatype['itemStreamable'],
+  ): TStreamMetatype['indexByName'];
 
   protected abstract onTransformedItem(
-    hubblepup: TVoque['itemStreamable'],
+    item: TStreamMetatype['itemStreamable'],
     index: number,
   ): void;
 
-  createCollectionStream(debugName: string): CollectionStream<TVoque> {
-    const lanbe: CollectionStream<TVoque> = {
+  createCollectionStream(debugName: string): CollectionStream<TStreamMetatype> {
+    const stream: CollectionStream<TStreamMetatype> = {
       typeName: StreamTypeName.CollectionStream,
       debugName,
       hasNext: () => {
@@ -89,15 +89,15 @@ export abstract class AbstractAsymmetricInMemoryCollection2<
       },
     };
 
-    return lanbe;
+    return stream;
   }
 
   createCollectionItemStream(
     debugName: string,
-  ): ItemStream2<TRestrictingVoque, TVoque> {
+  ): ItemStream2<TRestrictingStreamMetatype, TStreamMetatype> {
     const pointer = this.createPointer(debugName);
 
-    const lanbe: ItemStream2<TRestrictingVoque, TVoque> = {
+    const stream: ItemStream2<TRestrictingStreamMetatype, TStreamMetatype> = {
       typeName: StreamTypeName.ItemStream2,
       debugName,
       hasNext: () => {
@@ -109,18 +109,18 @@ export abstract class AbstractAsymmetricInMemoryCollection2<
       dereference: () => {
         const item = pointer.dereference();
 
-        const indexedHubblepup = {
+        const indexedItem = {
           indexByName: this.getIndexByName(item),
           item,
         };
 
         return {
           typeName: ReferenceTypeName.IndexedItem,
-          value: indexedHubblepup,
+          value: indexedItem,
         };
       },
     };
 
-    return lanbe;
+    return stream;
   }
 }

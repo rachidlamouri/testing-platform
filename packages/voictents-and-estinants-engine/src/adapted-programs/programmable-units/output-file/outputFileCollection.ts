@@ -4,7 +4,7 @@ import {
   KnownFileExtensionSuffixIdentifier,
   getFileExtensionSuffixIdentifier,
 } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { AbstractAsymmetricInMemoryCollection2 } from '../in-memory-cache/abstractAsymmetricInMemoryVoictent2';
+import { AbstractAsymmetricInMemoryCollection2 } from '../in-memory-cache/abstractAsymmetricInMemoryCollection2';
 import {
   OUTPUT_FILE_COLLECTION_ID,
   OutputFile,
