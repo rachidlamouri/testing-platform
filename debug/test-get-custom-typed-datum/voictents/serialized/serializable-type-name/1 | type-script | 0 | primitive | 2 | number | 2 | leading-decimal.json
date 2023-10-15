@@ -1,6 +1,6 @@
 {
-  "zorn": "1/type-script/0/primitive/2/number/2/leading-decimal",
-  "grition": {
+  "id": "1/type-script/0/primitive/2/number/2/leading-decimal",
+  "subitem": {
     "typeName": "Number"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "zorn": "1/type-script/1/primitive-collection/0/list",
-  "grition": {
+  "id": "1/type-script/1/primitive-collection/0/list",
+  "subitem": {
     "typeName": "object"
   }
 }

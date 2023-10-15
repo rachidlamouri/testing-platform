@@ -1,6 +1,6 @@
 {
-  "zorn": "1/type-script/3/circular-reference/1/array",
-  "grition": {
+  "id": "1/type-script/3/circular-reference/1/array",
+  "subitem": {
     "typeName": "object"
   }
 }

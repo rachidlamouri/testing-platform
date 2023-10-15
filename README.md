@@ -27,7 +27,7 @@ in mind, so that it can not only model a codebase, but it can also model itself.
 
 ### Engines
 
-**note**: This is currently the [voictents-and-estinants-engine](./packages/voictents-and-estinants-engine/)
+**note**: This is currently the [mdd-engine](./packages/mdd-engine/)
 
 A tool that helps developers apply MDD is called an mdd-engine. Note the emphasis on **an** engine, as there is no
 singular engine that will work for every team.

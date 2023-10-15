@@ -1,6 +1,6 @@
 {
-  "zorn": "1/type-script/0/primitive/1/string/0/single-line",
-  "grition": {
+  "id": "1/type-script/0/primitive/1/string/0/single-line",
+  "subitem": {
     "typeName": "string"
   }
 }

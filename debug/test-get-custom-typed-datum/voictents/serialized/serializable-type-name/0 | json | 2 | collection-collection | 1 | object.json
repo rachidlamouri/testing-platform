@@ -1,6 +1,6 @@
 {
-  "zorn": "0/json/2/collection-collection/1/object",
-  "grition": {
+  "id": "0/json/2/collection-collection/1/object",
+  "subitem": {
     "typeName": "RootObjectInstance"
   }
 }
