@@ -30,12 +30,12 @@ const mutableColorList = colorList.slice();
 
 const subprocessConfigurationList: SubprocessConfiguration[] = (
   [
-    // {
-    //   label: 'model-programs',
-    //   script:
-    //     'npm run program packages/mdd-engine/src/adapted-programs/programs/model-programs/modelPrograms.ts',
-    //   isInitiallyVisible: true,
-    // },
+    {
+      label: 'model-programs',
+      script:
+        'npm run program packages/mdd-engine/src/adapted-programs/programs/model-programs/modelPrograms.ts',
+      isInitiallyVisible: true,
+    },
     // {
     //   label: knowledgeGraphProgramLabel,
     //   script: runKnowledgeGraph,
