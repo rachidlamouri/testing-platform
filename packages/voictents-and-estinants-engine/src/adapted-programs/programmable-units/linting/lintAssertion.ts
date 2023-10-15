@@ -6,19 +6,19 @@ import {
 import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import {
   MessageAccessorInputFromAccessor,
-  RuleZorn,
+  RuleId,
   UnsafeTypedRule,
 } from './rule';
 import { Source } from './source/source';
 
-const LINT_ASSERTION_ZORN_TEMPLATE = [
-  ['rule', RuleZorn],
+const LINT_ASSERTION_ID_TEMPLATE = [
+  ['rule', RuleId],
   ['lintSource', ComplexId.ANY],
 ] as const satisfies GenericComplexIdTemplate;
-type LintAssertionZornTemplate = typeof LINT_ASSERTION_ZORN_TEMPLATE;
-export class LintAssertionId extends ComplexId<LintAssertionZornTemplate> {
-  get rawTemplate(): LintAssertionZornTemplate {
-    return LINT_ASSERTION_ZORN_TEMPLATE;
+type LintAssertionIdTemplate = typeof LINT_ASSERTION_ID_TEMPLATE;
+export class LintAssertionId extends ComplexId<LintAssertionIdTemplate> {
+  get rawTemplate(): LintAssertionIdTemplate {
+    return LINT_ASSERTION_ID_TEMPLATE;
   }
 }
 
@@ -93,10 +93,10 @@ export type GenericLintAssertion = LintAssertion<UnsafeTypedRule>;
 
 export const LINT_ASSERTION_COLLECTION_ID = 'lint-assertion';
 
-type LintAssertionGepp = typeof LINT_ASSERTION_COLLECTION_ID;
+type LintAssertionCollectionId = typeof LINT_ASSERTION_COLLECTION_ID;
 
 export type LintAssertionStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    LintAssertionGepp,
+    LintAssertionCollectionId,
     GenericLintAssertion
   >;

@@ -16,14 +16,14 @@ import { LintAssertionError } from './reportFailedLintAssertion';
 import { TypedRule } from './rule';
 import { ProgrammedTransformSourceInstance } from './source/programmedTransformSource';
 
-const ESTINANT_NAME = 'auditLintAssertionOmissions' as const;
+const PROGRAMMED_TRANSFORM_NAME = 'auditLintAssertionOmissions' as const;
 
 type OmissionIsValidRuleMessageContext = Record<string, never>;
 const omissionIsValidRule = new TypedRule<OmissionIsValidRuleMessageContext>({
   name: 'omission-is-valid',
   source: new ProgrammedTransformSourceInstance({
     filePath: __filename,
-    programmedTransformName: ESTINANT_NAME,
+    programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
   }),
   description:
     'All lint assertion omissions must target an existing lint assertion',
@@ -36,7 +36,7 @@ const omissionIsValidRule = new TypedRule<OmissionIsValidRuleMessageContext>({
  * Lints linter omissions for non-existent assertions
  */
 export const auditLintAssertionOmissions = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
   .fromCollection2<LintAssertionOmissionStreamMetatype>({
     collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
@@ -47,16 +47,16 @@ export const auditLintAssertionOmissions = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .onTransform((omissionVoictent, assertionVoictent) => {
+  .onTransform((omissionCollection, assertionCollection) => {
     const assertionSet = new Set(
-      assertionVoictent.map((assertion) => {
+      assertionCollection.map((assertion) => {
         return assertion.id.forHuman;
       }),
     );
 
     const omissionCombination = [
       ...new Map(
-        omissionVoictent.list.map((omission) => {
+        omissionCollection.list.map((omission) => {
           return [omission.id.forHuman, omission];
         }),
       ).values(),

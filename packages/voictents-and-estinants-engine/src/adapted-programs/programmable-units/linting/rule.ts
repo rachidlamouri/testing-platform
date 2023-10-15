@@ -7,14 +7,14 @@ import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { TypeScriptObject } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import { Source } from './source/source';
 
-const RULE_ZORN_TEMPLATE = [
+const RULE_ID_TEMPLATE = [
   ['source', ComplexId.ANY],
   'name',
 ] as const satisfies GenericComplexIdTemplate;
-type RuleZornTemplate = typeof RULE_ZORN_TEMPLATE;
-export class RuleZorn extends ComplexId<RuleZornTemplate> {
-  get rawTemplate(): RuleZornTemplate {
-    return RULE_ZORN_TEMPLATE;
+type RuleIdTemplate = typeof RULE_ID_TEMPLATE;
+export class RuleId extends ComplexId<RuleIdTemplate> {
+  get rawTemplate(): RuleIdTemplate {
+    return RULE_ID_TEMPLATE;
   }
 }
 
@@ -48,7 +48,7 @@ type RuleConstructorInput = {
 type Rule = SimplifyN<
   [
     {
-      id: RuleZorn;
+      id: RuleId;
     },
     RuleConstructorInput,
   ]
@@ -75,7 +75,7 @@ const { RuleInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { source, name } = input;
 
-      const id = new RuleZorn({
+      const id = new RuleId({
         source: source.id,
         name,
       });

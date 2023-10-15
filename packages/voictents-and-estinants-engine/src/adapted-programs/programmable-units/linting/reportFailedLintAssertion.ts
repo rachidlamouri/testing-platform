@@ -45,8 +45,8 @@ export const reportFailedLintAssertion = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .onTransform((lintAssertion, omissionVoictent) => {
-    const isOmitted = omissionVoictent.omittedZornSet.has(
+  .onTransform((lintAssertion, omissionCollection) => {
+    const isOmitted = omissionCollection.omittedIdSet.has(
       lintAssertion.id.forHuman,
     );
 

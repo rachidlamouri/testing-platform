@@ -12,15 +12,15 @@ import { TypedRule } from './rule';
 import { FileSourceInstance } from './source/fileSource';
 import { Source } from './source/source';
 
-const LINT_ASSERTION_OMISSION_ZORN_TEMPLATE = [
+const LINT_ASSERTION_OMISSION_ID_TEMPLATE = [
   ['omitterSource', ComplexId.ANY],
   ['omittedAssertionId', LintAssertionId],
 ] as const satisfies GenericComplexIdTemplate;
-type LintAssertionOmissionZornTemplate =
-  typeof LINT_ASSERTION_OMISSION_ZORN_TEMPLATE;
-class LintAssertionOmissionZorn extends ComplexId<LintAssertionOmissionZornTemplate> {
-  get rawTemplate(): LintAssertionOmissionZornTemplate {
-    return LINT_ASSERTION_OMISSION_ZORN_TEMPLATE;
+type LintAssertionOmissionIdTemplate =
+  typeof LINT_ASSERTION_OMISSION_ID_TEMPLATE;
+class LintAssertionOmissionId extends ComplexId<LintAssertionOmissionIdTemplate> {
+  get rawTemplate(): LintAssertionOmissionIdTemplate {
+    return LINT_ASSERTION_OMISSION_ID_TEMPLATE;
   }
 }
 
@@ -37,7 +37,7 @@ type LintAssertionOmissionConstructorInput = {
 export type LintAssertionOmission = SimplifyN<
   [
     {
-      id: LintAssertionOmissionZorn;
+      id: LintAssertionOmissionId;
     },
     LintAssertionOmissionConstructorInput,
   ]
@@ -63,7 +63,7 @@ export const { LintAssertionOmissionInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { omitterSource, omittedAssertionId } = input;
 
-      const id = new LintAssertionOmissionZorn({
+      const id = new LintAssertionOmissionId({
         omitterSource,
         omittedAssertionId,
       });
@@ -78,40 +78,41 @@ export const { LintAssertionOmissionInstance } = buildNamedConstructorFunction({
 
 export const LINT_ASSERTION_OMISSION_COLLECTION_ID = 'lint-assertion-omission';
 
-type LintAssertionOmissionGepp = typeof LINT_ASSERTION_OMISSION_COLLECTION_ID;
+type LintAssertionOmissionCollectionId =
+  typeof LINT_ASSERTION_OMISSION_COLLECTION_ID;
 
-type LintAssertionOmissionVoictentPelie = {
+type LintAssertionOmissionCollectionStreamable = {
   list: LintAssertionOmission[];
-  omittedZornSet: Set<string>;
+  omittedIdSet: Set<string>;
 };
 
 export type LintAssertionOmissionStreamMetatype = StreamMetatype<
-  LintAssertionOmissionGepp,
+  LintAssertionOmissionCollectionId,
   LintAssertionOmission,
   LintAssertionOmission,
   InMemoryIndexByName,
-  LintAssertionOmissionVoictentPelie
+  LintAssertionOmissionCollectionStreamable
 >;
 
 // TODO: update this class to not need a TVoque. you will need to update the program modeler
 export class LintAssertionOmissionCollection<
-  TVoque extends LintAssertionOmissionStreamMetatype,
+  TStreamMetatype extends LintAssertionOmissionStreamMetatype,
 > extends AbstractInMemoryCollection<
   LintAssertionOmissionStreamMetatype,
-  TVoque
+  TStreamMetatype
 > {
-  private omittedZornSet = new Set<string>();
+  private omittedIdSet = new Set<string>();
 
-  addItem(hubblepup: LintAssertionOmission): void {
-    this.omittedZornSet.add(hubblepup.omittedAssertionId.forHuman);
+  addItem(item: LintAssertionOmission): void {
+    this.omittedIdSet.add(item.omittedAssertionId.forHuman);
 
-    super.addItem(hubblepup);
+    super.addItem(item);
   }
 
-  protected dereferenceCollection(): LintAssertionOmissionVoictentPelie {
+  protected dereferenceCollection(): LintAssertionOmissionCollectionStreamable {
     return {
       list: this.itemTuple,
-      omittedZornSet: this.omittedZornSet,
+      omittedIdSet: this.omittedIdSet,
     };
   }
 
