@@ -11,12 +11,12 @@ export type EngineProgramFile = {
   engineFunctionConfiguration: EngineFunctionConfiguration;
 };
 
-export const ENGINE_PROGRAM_FILE_GEPP = 'engine-program-file';
+export const ENGINE_PROGRAM_FILE_COLLECTION_ID = 'engine-program-file';
 
-type EngineProgramFileGepp = typeof ENGINE_PROGRAM_FILE_GEPP;
+type EngineProgramFileCollectionId = typeof ENGINE_PROGRAM_FILE_COLLECTION_ID;
 
-export type EngineProgramFileVoque =
+export type EngineProgramFileStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    EngineProgramFileGepp,
+    EngineProgramFileCollectionId,
     EngineProgramFile
   >;

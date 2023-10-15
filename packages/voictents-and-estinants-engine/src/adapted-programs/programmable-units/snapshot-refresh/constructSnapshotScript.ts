@@ -4,8 +4,8 @@ import {
   OutputFileStreamMetatype,
 } from '../output-file/outputFile';
 import {
-  ENGINE_PROGRAM_FILE_GEPP,
-  EngineProgramFileVoque,
+  ENGINE_PROGRAM_FILE_COLLECTION_ID,
+  EngineProgramFileStreamMetatype,
 } from '../type-script-file-relationships/engineProgramFile';
 
 /**
@@ -15,8 +15,8 @@ import {
 export const constructSnapshotScript = buildProgrammedTransform({
   name: 'constructSnapshotScript',
 })
-  .fromCollection2<EngineProgramFileVoque>({
-    collectionId: ENGINE_PROGRAM_FILE_GEPP,
+  .fromCollection2<EngineProgramFileStreamMetatype>({
+    collectionId: ENGINE_PROGRAM_FILE_COLLECTION_ID,
   })
   .toItem2<OutputFileStreamMetatype>({
     collectionId: OUTPUT_FILE_COLLECTION_ID,

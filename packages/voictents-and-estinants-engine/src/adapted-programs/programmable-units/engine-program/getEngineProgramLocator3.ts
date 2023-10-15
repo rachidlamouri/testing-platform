@@ -2,9 +2,9 @@ import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
 import Case from 'case';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  ENGINE_PROGRAM_FILE_GEPP,
+  ENGINE_PROGRAM_FILE_COLLECTION_ID,
   EngineProgramFile,
-  EngineProgramFileVoque,
+  EngineProgramFileStreamMetatype,
 } from '../type-script-file-relationships/engineProgramFile';
 import {
   IdentifiableProperty,
@@ -694,8 +694,8 @@ const getAdaptedEngineProgramLocator = ({
 export const getEngineProgramLocator3 = buildProgrammedTransform({
   name: 'getEngineProgramLocator3',
 })
-  .fromItem2<EngineProgramFileVoque>({
-    collectionId: ENGINE_PROGRAM_FILE_GEPP,
+  .fromItem2<EngineProgramFileStreamMetatype>({
+    collectionId: ENGINE_PROGRAM_FILE_COLLECTION_ID,
   })
   .andFromItemTuple2<
     FileCommentedProgramBodyDeclarationGroupStreamMetatype,

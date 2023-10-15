@@ -13,8 +13,8 @@ import {
   TypeScriptFileImportListStreamMetatype,
 } from '../type-script-file/typeScriptFileImportList';
 import {
-  ENGINE_PROGRAM_FILE_GEPP,
-  EngineProgramFileVoque,
+  ENGINE_PROGRAM_FILE_COLLECTION_ID,
+  EngineProgramFileStreamMetatype,
 } from './engineProgramFile';
 
 /**
@@ -38,8 +38,8 @@ export const filterEngineProgramFile = buildProgrammedTransform({
   .andFromCollection2<EngineFunctionConfigurationStreamMetatype>({
     collectionId: ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
   })
-  .toItemTuple2<EngineProgramFileVoque>({
-    collectionId: ENGINE_PROGRAM_FILE_GEPP,
+  .toItemTuple2<EngineProgramFileStreamMetatype>({
+    collectionId: ENGINE_PROGRAM_FILE_COLLECTION_ID,
   })
   .onTransform(
     (

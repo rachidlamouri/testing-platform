@@ -8,8 +8,8 @@ import {
 import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
 import { FileSourceInstance } from '../linting/source/fileSource';
 import {
-  ENGINE_PROGRAM_FILE_GEPP,
-  EngineProgramFileVoque,
+  ENGINE_PROGRAM_FILE_COLLECTION_ID,
+  EngineProgramFileStreamMetatype,
 } from '../type-script-file-relationships/engineProgramFile';
 import { typeScriptFileHasCanonicalDeclarationRule } from './canonical-declaration/assertTypeScriptFileHasCanonicalDeclaration';
 
@@ -26,8 +26,8 @@ const omitterSource = new ProgrammedTransformSourceInstance({
 export const omitProgramCanonicalExportRequirement = buildProgrammedTransform({
   name: ESTINANT_NAME,
 })
-  .fromItem2<EngineProgramFileVoque>({
-    collectionId: ENGINE_PROGRAM_FILE_GEPP,
+  .fromItem2<EngineProgramFileStreamMetatype>({
+    collectionId: ENGINE_PROGRAM_FILE_COLLECTION_ID,
   })
   .toItem2<LintAssertionOmissionStreamMetatype>({
     collectionId: LINT_ASSERTION_OMISSION_COLLECTION_ID,
