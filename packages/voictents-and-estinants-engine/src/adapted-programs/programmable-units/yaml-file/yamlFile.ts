@@ -7,11 +7,11 @@ import { FileSystemNodeStreamMetatype } from '../file/fileSystemNodeVoictent';
  */
 export type YamlFile = File<FileExtensionSuffixIdentifier.Yaml>;
 
-export const YAML_FILE_GEPP = 'yaml-file-a';
+export const YAML_FILE_COLLECTION_ID = 'yaml-file-a';
 
-type YamlFileGepp = typeof YAML_FILE_GEPP;
+type YamlFileCollectionId = typeof YAML_FILE_COLLECTION_ID;
 
-export type YamlFileVoque = FileSystemNodeStreamMetatype<
-  YamlFileGepp,
+export type YamlFileStreamMetatype = FileSystemNodeStreamMetatype<
+  YamlFileCollectionId,
   YamlFile
 >;

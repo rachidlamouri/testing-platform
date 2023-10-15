@@ -3,7 +3,11 @@ import {
   TYPE_SCRIPT_FILE_COLLECTION_ID,
   TypeScriptFileStreamMetatype,
 } from '../type-script-file/typeScriptFile';
-import { YAML_FILE_GEPP, YamlFile, YamlFileVoque } from '../yaml-file/yamlFile';
+import {
+  YAML_FILE_COLLECTION_ID,
+  YamlFile,
+  YamlFileStreamMetatype,
+} from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { HtmlFile, HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
@@ -44,8 +48,8 @@ export const categorizeFiles = buildProgrammedTransform({
       file.nodePath.name.extension.suffixIdentifier ===
         FileExtensionSuffixIdentifier.TypeScriptXml,
   })
-  .toItemOnCondition<YamlFileVoque>({
-    collectionId: YAML_FILE_GEPP,
+  .toItemOnCondition<YamlFileStreamMetatype>({
+    collectionId: YAML_FILE_COLLECTION_ID,
     transform: (file): file is YamlFile =>
       file.nodePath.name.extension.suffixIdentifier ===
       FileExtensionSuffixIdentifier.Yaml,
