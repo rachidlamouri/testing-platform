@@ -20,7 +20,7 @@ import {
  */
 export const getEngineProgrammedTransformLocatorCollection2 =
   buildProgrammedTransform({
-    name: 'getEngineEstinantLocatorCollection2',
+    name: 'getEngineProgrammedTransformLocatorCollection2',
   })
     .fromCollection2<ProgramProgrammedTransformRelationshipStreamMetatype>({
       collectionId: PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID,

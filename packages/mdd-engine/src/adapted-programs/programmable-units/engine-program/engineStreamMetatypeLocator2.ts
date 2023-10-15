@@ -44,7 +44,7 @@ export const getStreamMetatypeDisplayName = (
 ): string => {
   const itemName = locator.identifierName
     .replace(/^Generic/, '')
-    .replace(/Voque$/, '');
+    .replace(/StreamMetatype$/, '');
 
   return itemName;
 };

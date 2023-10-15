@@ -33,7 +33,7 @@ import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-fi
  */
 export const getEngineProgrammedTransformGraphElements =
   buildProgrammedTransform({
-    name: 'getEngineEstinantGraphElements',
+    name: 'getEngineProgrammedTransformGraphElements',
   })
     .fromItem2<ProgramProgrammedTransformRelationshipStreamMetatype>({
       collectionId: PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID,

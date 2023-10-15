@@ -25,7 +25,7 @@ import { COMMON_ATTRIBUTE_BY_KEY } from '../../programmable-units/type-script-fi
  * @readableName getStreamMetatypeModelGraphElement
  */
 export const getEngineProgramStreamMetatypeElements = buildProgrammedTransform({
-  name: 'getEngineProgramVoqueElements',
+  name: 'getEngineProgramStreamMetatypeElements',
 })
   .fromItem2<ProgramStreamMetatypeRelationship2StreamMetatype>({
     collectionId: PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,

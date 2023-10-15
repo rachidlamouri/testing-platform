@@ -22,7 +22,7 @@ import {
  * @readableName getStreamMetatypeModelMetadataEntry
  */
 export const getEngineStreamMetatypeMetadataEntry = buildProgrammedTransform({
-  name: 'getEngineVoqueMetadataEntry',
+  name: 'getEngineStreamMetatypeMetadataEntry',
 })
   .fromItem2<ProgramStreamMetatypeRelationship2StreamMetatype>({
     collectionId: PROGRAM_STREAM_METATYPE_RELATIONSHIP_2_COLLECTION_ID,

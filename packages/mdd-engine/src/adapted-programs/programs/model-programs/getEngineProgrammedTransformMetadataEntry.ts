@@ -21,7 +21,7 @@ import {
  */
 export const getEngineProgrammedTransformMetadataEntry =
   buildProgrammedTransform({
-    name: 'getEngineEstinantMetadataEntry',
+    name: 'getEngineProgrammedTransformMetadataEntry',
   })
     .fromItem2<ProgramProgrammedTransformRelationshipStreamMetatype>({
       collectionId: PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID,
