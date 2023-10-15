@@ -1,7 +1,7 @@
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { FilePath } from '../../../programmable-units/file/filePath';
 import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNode';
-import { FileSystemNodeStreamMetatype } from '../../../programmable-units/file/fileSystemNodeVoictent';
+import { FileSystemNodeStreamMetatype } from '../../../programmable-units/file/fileSystemNodeCollection';
 import { LocalDirectedGraphElement2Id } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import { TypeScriptFile } from '../../../programmable-units/type-script-file/typeScriptFile';
 import { Boundary } from '../boundary/boundary';

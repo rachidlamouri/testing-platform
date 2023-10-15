@@ -5,13 +5,13 @@ import {
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { NodePath } from './nodePath';
 
-const FILE_SYSTEM_NODE_ZORN_TEMPLATE = [
+const FILE_SYSTEM_NODE_ID_TEMPLATE = [
   'nodePath',
 ] as const satisfies GenericComplexIdTemplate;
-type FileSystemNodeZornTemplate = typeof FILE_SYSTEM_NODE_ZORN_TEMPLATE;
-export class FileSystemNodeId extends ComplexId<FileSystemNodeZornTemplate> {
-  get rawTemplate(): FileSystemNodeZornTemplate {
-    return FILE_SYSTEM_NODE_ZORN_TEMPLATE;
+type FileSystemNodeIdTemplate = typeof FILE_SYSTEM_NODE_ID_TEMPLATE;
+export class FileSystemNodeId extends ComplexId<FileSystemNodeIdTemplate> {
+  get rawTemplate(): FileSystemNodeIdTemplate {
+    return FILE_SYSTEM_NODE_ID_TEMPLATE;
   }
 }
 

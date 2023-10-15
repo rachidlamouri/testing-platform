@@ -24,26 +24,26 @@ type FileExtensionSuffixIdentifierOfInterest =
   | 'BaseFile'
   | 'Directory';
 
-type DefaultGeppByFileExtensionSuffixIdentifier = Record<
+type DefaultCollectionIdByFileExtensionSuffixIdentifier = Record<
   FileExtensionSuffixIdentifierOfInterest,
   CollectionId
 >;
 
-const defaultFileGeppByFileExtensionSuffixIdentifier = {
+const defaultFileCollectionIdByFileExtensionSuffixIdentifier = {
   [FileExtensionSuffixIdentifier.Bash]: BASH_FILE_COLLECTION_ID,
   [FileExtensionSuffixIdentifier.Html]: HTML_FILE_COLLECTION_ID,
   [FileExtensionSuffixIdentifier.TypeScript]: TYPE_SCRIPT_FILE_COLLECTION_ID,
   [FileExtensionSuffixIdentifier.Yaml]: YAML_FILE_COLLECTION_ID,
   BaseFile: FILE_COLLECTION_ID,
   Directory: DIRECTORY_COLLECTION_ID,
-} as const satisfies DefaultGeppByFileExtensionSuffixIdentifier;
+} as const satisfies DefaultCollectionIdByFileExtensionSuffixIdentifier;
 
-const defaultFileGeppList = Object.values(
-  defaultFileGeppByFileExtensionSuffixIdentifier,
+const defaultFileCollectionIdList = Object.values(
+  defaultFileCollectionIdByFileExtensionSuffixIdentifier,
 );
 
-type DefaultFileGepp = ValueOf<
-  typeof defaultFileGeppByFileExtensionSuffixIdentifier
+type DefaultFileCollectionId = ValueOf<
+  typeof defaultFileCollectionIdByFileExtensionSuffixIdentifier
 >;
 
 /**
@@ -56,5 +56,5 @@ type DefaultFileGepp = ValueOf<
  *
  * @canonicalDeclaration
  */
-export const defaultFileCollectionIdCombination: CollectionIdCombination<DefaultFileGepp> =
-  buildCollectionIdCombination(defaultFileGeppList);
+export const defaultFileCollectionIdCombination: CollectionIdCombination<DefaultFileCollectionId> =
+  buildCollectionIdCombination(defaultFileCollectionIdList);

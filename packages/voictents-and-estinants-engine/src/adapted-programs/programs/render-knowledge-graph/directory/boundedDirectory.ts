@@ -6,7 +6,7 @@ import { FileSystemNodeId } from '../../../programmable-units/file/fileSystemNod
 import { LocalDirectedGraphElement2Id } from '../../../programmable-units/graph-visualization/directed-graph/types';
 import { Boundary } from '../boundary/boundary';
 import { CommonBoundaryRoot } from '../common-boundary-root/commonBoundaryRoot';
-import { FileSystemNodeStreamMetatype } from '../../../programmable-units/file/fileSystemNodeVoictent';
+import { FileSystemNodeStreamMetatype } from '../../../programmable-units/file/fileSystemNodeCollection';
 import { DirectoryPath } from '../../../programmable-units/file/directoryPath';
 
 type BoundedDirectoryConstructorInput = {

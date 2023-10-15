@@ -22,8 +22,8 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/file/defaultFileGeppCombination.ts',
-    identifierList: ['defaultFileGeppCombination'],
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/file/defaultFileCollectionIdCombination.ts',
+    identifierList: ['defaultFileCollectionIdCombination'],
   },
   {
     filePath:

@@ -8,7 +8,7 @@ import {
   COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';

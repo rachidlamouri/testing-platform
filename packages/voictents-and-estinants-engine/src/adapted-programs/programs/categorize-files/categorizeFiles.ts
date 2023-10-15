@@ -17,7 +17,7 @@ import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { FILE_COLLECTION_ID } from '../../programmable-units/file/file';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'categorizeFiles',

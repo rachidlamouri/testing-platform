@@ -57,7 +57,7 @@ import { renderApp } from './app/node/renderApp';
 import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { getAllFactGraphElements } from './getAllFactGraphElements';
 import { getBoundaryFromConfiguration } from './boundary/getBoundaryFromConfiguration';
 import { getBoundaryPartition } from './partition-fact/getBoundaryPartition';

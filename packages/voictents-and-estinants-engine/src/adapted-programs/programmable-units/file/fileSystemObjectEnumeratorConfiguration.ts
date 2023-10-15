@@ -12,12 +12,12 @@ type FileSystemObjectEnumeratorConfiguration = FilePathAccessorInput;
 export const FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID =
   'file-system-object-enumerator-configuration';
 
-type FileSystemObjectEnumeratorConfigurationGepp =
+type FileSystemObjectEnumeratorConfigurationCollectionId =
   typeof FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID;
 
 export type FileSystemObjectEnumeratorConfigurationStreamMetatype =
   StandardInMemoryStreamMetatype<
-    FileSystemObjectEnumeratorConfigurationGepp,
+    FileSystemObjectEnumeratorConfigurationCollectionId,
     FileSystemObjectEnumeratorConfiguration
   >;
 

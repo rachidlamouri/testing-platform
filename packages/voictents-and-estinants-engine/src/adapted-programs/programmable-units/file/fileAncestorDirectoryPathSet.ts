@@ -7,14 +7,14 @@ import {
 } from '../../../package-agnostic-utilities/data-structure/id';
 import { File } from './file';
 
-const FILE_ANCESTOR_DIRECTORY_PATH_SET_ZORN_TEMPLATE = [
+const FILE_ANCESTOR_DIRECTORY_PATH_SET_ID_TEMPLATE = [
   'filePath',
 ] as const satisfies GenericComplexIdTemplate;
-type FileAncestorDirectoryPathSetZornTemplate =
-  typeof FILE_ANCESTOR_DIRECTORY_PATH_SET_ZORN_TEMPLATE;
-class FileAncestorDirectoryPathSetZorn extends ComplexId<FileAncestorDirectoryPathSetZornTemplate> {
-  get rawTemplate(): FileAncestorDirectoryPathSetZornTemplate {
-    return FILE_ANCESTOR_DIRECTORY_PATH_SET_ZORN_TEMPLATE;
+type FileAncestorDirectoryPathSetIdTemplate =
+  typeof FILE_ANCESTOR_DIRECTORY_PATH_SET_ID_TEMPLATE;
+class FileAncestorDirectoryPathSetId extends ComplexId<FileAncestorDirectoryPathSetIdTemplate> {
+  get rawTemplate(): FileAncestorDirectoryPathSetIdTemplate {
+    return FILE_ANCESTOR_DIRECTORY_PATH_SET_ID_TEMPLATE;
   }
 }
 
@@ -28,7 +28,7 @@ type FileAncestorDirectoryPathSetConstructorInput = {
  * the furthest ancestor to the parent directory.
  */
 type FileAncestorDirectoryPathSet = {
-  id: FileAncestorDirectoryPathSetZorn;
+  id: FileAncestorDirectoryPathSetId;
   filePath: string;
   set: string[];
 };
@@ -58,7 +58,7 @@ export const { FileAncestorDirectoryPathSetInstance } =
         const { file } = input;
         const { filePath } = file;
 
-        const id = new FileAncestorDirectoryPathSetZorn({
+        const id = new FileAncestorDirectoryPathSetId({
           filePath: filePath.serialized,
         });
 
@@ -83,11 +83,11 @@ export const { FileAncestorDirectoryPathSetInstance } =
 export const FILE_ANCESTOR_DIRECTORY_PATH_SET_COLLECTION_ID =
   'file-ancestor-directory-path-set';
 
-type FileAncestorDirectoryPathSetGepp =
+type FileAncestorDirectoryPathSetCollectionId =
   typeof FILE_ANCESTOR_DIRECTORY_PATH_SET_COLLECTION_ID;
 
 export type FileAncestorDirectoryPathSetStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    FileAncestorDirectoryPathSetGepp,
+    FileAncestorDirectoryPathSetCollectionId,
     FileAncestorDirectoryPathSet
   >;

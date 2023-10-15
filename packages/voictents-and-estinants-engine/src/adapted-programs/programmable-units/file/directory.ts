@@ -1,7 +1,7 @@
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { DirectoryPath, DirectoryPathInstance } from './directoryPath';
 import { FileSystemNodeId } from './fileSystemNode';
-import { FileSystemNodeStreamMetatype } from './fileSystemNodeVoictent';
+import { FileSystemNodeStreamMetatype } from './fileSystemNodeCollection';
 
 type DirectoryConstructorInput = {
   /**
@@ -64,9 +64,9 @@ export const { DirectoryInstance } = buildNamedConstructorFunction({
 
 export const DIRECTORY_COLLECTION_ID = 'directory';
 
-type DirectoryGepp = typeof DIRECTORY_COLLECTION_ID;
+type DirectoryCollectionId = typeof DIRECTORY_COLLECTION_ID;
 
 export type DirectoryStreamMetatype = FileSystemNodeStreamMetatype<
-  DirectoryGepp,
+  DirectoryCollectionId,
   Directory
 >;

@@ -53,7 +53,7 @@ import { getDirectedGraphFromGraphElementGroup } from './getDirectedGraphFromGra
 import { getTopLevelEngineProgramMetadataEntries } from './getTopLevelEngineProgramMetadataEntries';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { assertNoCopyPasta } from './assertNoCopyPasta';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,

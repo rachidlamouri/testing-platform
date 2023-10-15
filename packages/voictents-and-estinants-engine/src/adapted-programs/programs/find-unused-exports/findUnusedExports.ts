@@ -9,7 +9,7 @@ import { ProgramErrorCollection } from '../../programmable-units/error/programEr
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FileSystemObjectEnumeratorConfigurationStreamMetatype,

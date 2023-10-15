@@ -46,7 +46,7 @@ import { ProgramFileCache } from '../../layer-agnostic-utilities/program/program
 import {
   FileSystemNodeCollection,
   GenericFileSystemNodeStreamMetatype,
-} from '../../adapted-programs/programmable-units/file/fileSystemNodeVoictent';
+} from '../../adapted-programs/programmable-units/file/fileSystemNodeCollection';
 
 type StreamMetatypeUnionFromCollectionTuple<
   TCollectionTuple extends UnsafeCollection2Tuple,

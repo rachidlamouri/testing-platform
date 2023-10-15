@@ -23,21 +23,21 @@ type FileSystemNodeIndexByName = SpreadN<
   ]
 >;
 
-type FileVoictentPelie<THubblepupPelie> = {
-  byId: Map<string, THubblepupPelie>;
-  byNodePath: Map<string, THubblepupPelie>;
-  list: THubblepupPelie[];
+type FileCollection<TItem> = {
+  byId: Map<string, TItem>;
+  byNodePath: Map<string, TItem>;
+  list: TItem[];
 };
 
 export type FileSystemNodeStreamMetatype<
-  TGepp extends CollectionId,
-  THubblepup extends FileSystemNode,
+  TCollectionId extends CollectionId,
+  TItem extends FileSystemNode,
 > = InMemoryStreamMetatype<
-  TGepp,
-  THubblepup,
-  THubblepup,
+  TCollectionId,
+  TItem,
+  TItem,
   FileSystemNodeIndexByName,
-  FileVoictentPelie<THubblepup>
+  FileCollection<TItem>
 >;
 
 export type GenericFileSystemNodeStreamMetatype = FileSystemNodeStreamMetatype<
@@ -55,36 +55,36 @@ export type GenericFileSystemNodeStreamMetatype = FileSystemNodeStreamMetatype<
  * @canonicalDeclaration
  */
 export class FileSystemNodeCollection<
-  TVoque extends GenericFileSystemNodeStreamMetatype,
+  TStreamMetatype extends GenericFileSystemNodeStreamMetatype,
 > extends BaseInMemoryIdentifiableItem2Collection<
   GenericFileSystemNodeStreamMetatype,
-  TVoque
+  TStreamMetatype
 > {
-  private voictentPelie: TVoque['collectionStreamable'] = {
+  private collection: TStreamMetatype['collectionStreamable'] = {
     byId: new Map(),
     byNodePath: new Map(),
     list: [],
   };
 
-  addItem(hubblepup: TVoque['itemEggStreamable']): void {
-    this.voictentPelie.byId.set(hubblepup.id.forHuman, hubblepup);
-    this.voictentPelie.byNodePath.set(hubblepup.nodePath.serialized, hubblepup);
-    this.voictentPelie.list.push(hubblepup);
+  addItem(item: TStreamMetatype['itemEggStreamable']): void {
+    this.collection.byId.set(item.id.forHuman, item);
+    this.collection.byNodePath.set(item.nodePath.serialized, item);
+    this.collection.list.push(item);
 
-    super.addItem(hubblepup);
+    super.addItem(item);
   }
 
-  protected dereferenceCollection(): TVoque['collectionStreamable'] {
-    return this.voictentPelie;
+  protected dereferenceCollection(): TStreamMetatype['collectionStreamable'] {
+    return this.collection;
   }
 
   protected dereferenceItem(
-    lanbe: ItemStream2<GenericFileSystemNodeStreamMetatype, TVoque>,
-  ): TVoque['indexedItemStreamable'] {
-    const listIndex = this.getStreamIndex(lanbe);
+    stream: ItemStream2<GenericFileSystemNodeStreamMetatype, TStreamMetatype>,
+  ): TStreamMetatype['indexedItemStreamable'] {
+    const listIndex = this.getStreamIndex(stream);
 
     if (listIndex === AbstractInMemoryCollection.minimumInclusiveIndex) {
-      throw new DereferenceError(lanbe);
+      throw new DereferenceError(stream);
     }
 
     const item = this.itemTuple[listIndex];

@@ -1,6 +1,6 @@
 import { File } from '../file/file';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { FileSystemNodeStreamMetatype } from '../file/fileSystemNodeVoictent';
+import { FileSystemNodeStreamMetatype } from '../file/fileSystemNodeCollection';
 
 /**
  * A File object with the extension narrowed down to a TypeScript file

@@ -14,7 +14,7 @@ import {
 import { scaffoldFile } from './scaffoldFile';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,

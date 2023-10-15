@@ -6,7 +6,7 @@ import {
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
+import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,

@@ -2,7 +2,7 @@ import { buildNamedConstructorFunction } from '../../../package-agnostic-utiliti
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { FilePath, FilePathInstance } from './filePath';
 import { FileSystemNodeId } from './fileSystemNode';
-import { FileSystemNodeStreamMetatype } from './fileSystemNodeVoictent';
+import { FileSystemNodeStreamMetatype } from './fileSystemNodeCollection';
 
 type FileConstructorInput = {
   nodePath: string;
@@ -69,6 +69,9 @@ export const { FileInstance } = buildNamedConstructorFunction({
 
 export const FILE_COLLECTION_ID = 'file';
 
-type FileGepp = typeof FILE_COLLECTION_ID;
+type FileCollectionId = typeof FILE_COLLECTION_ID;
 
-export type FileStreamMetatype = FileSystemNodeStreamMetatype<FileGepp, File>;
+export type FileStreamMetatype = FileSystemNodeStreamMetatype<
+  FileCollectionId,
+  File
+>;
