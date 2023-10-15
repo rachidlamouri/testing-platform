@@ -5,7 +5,7 @@
       "request": "launch",
       "runtimeArgs": [
         "ts-node",
-        "${workspaceFolder}/packages/voictents-and-estinants-engine/src/custom/programs/model-programs/modelPrograms.ts"
+        "${workspaceFolder}/packages/mdd-engine/src/custom/programs/model-programs/modelPrograms.ts"
       ],
       "runtimeExecutable": "npx",
       "skipFiles": [
@@ -18,7 +18,7 @@
       "request": "launch",
       "runtimeArgs": [
         "ts-node",
-        "${workspaceFolder}/packages/voictents-and-estinants-engine/src/custom/programs/render-knowledge-graph/renderKnowledgeGraph.ts"
+        "${workspaceFolder}/packages/mdd-engine/src/custom/programs/render-knowledge-graph/renderKnowledgeGraph.ts"
       ],
       "runtimeExecutable": "npx",
       "skipFiles": [

@@ -1,5 +1,5 @@
 
-import { buildEstinant } from '../../../packages/voictents-and-estinants-engine/src/adapter/estinant-builder/estinantBuilder'
+import { buildEstinant } from '../../../packages/mdd-engine/src/adapter/estinant-builder/estinantBuilder'
 
 const UPDATE_ME_INPUT_GEPP: any = 'UPDATE_ME';
 type UpdateMeInputVoque = any;
@@ -20,4 +20,4 @@ export const estinantSnapshot = buildEstinant({
     // TODO: implement me
   })
   .assemble();
-  
+

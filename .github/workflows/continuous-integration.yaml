@@ -30,11 +30,11 @@ jobs:
       # - name: Run base-tsconfig Tests
       #   run: pwd && bash packages/base-tsconfig/scripts/runTests.sh
 
-      # voictents-and-estinants-engine
-      - name: Lint voictents-and-estinants-engine Types
-        run: pwd && cd packages/voictents-and-estinants-engine && pwd && npx tsc
+      # mdd-engine
+      - name: Lint mdd-engine Types
+        run: pwd && cd packages/mdd-engine && pwd && npx tsc
       - name: Run CI script
-        run: bash packages/voictents-and-estinants-engine/ci.sh
+        run: bash packages/mdd-engine/ci.sh
 
       # # constraint-engine
       # - name: Lint constraint-engine Types
