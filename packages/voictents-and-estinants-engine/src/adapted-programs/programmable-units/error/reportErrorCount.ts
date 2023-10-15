@@ -13,13 +13,13 @@ export const reportErrorCount = buildProgrammedTransform({
   .fromCollection2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .onTransform((errorVoictent) => {
-    if (errorVoictent.length > 0) {
+  .onTransform((errorCollection) => {
+    if (errorCollection.length > 0) {
       setImmediate(() => {
         /* eslint-disable no-console */
         console.log();
         console.log(
-          `\x1b[31mTotal Error Count\x1b[0m: ${errorVoictent.length}`,
+          `\x1b[31mTotal Error Count\x1b[0m: ${errorCollection.length}`,
         );
         console.log();
         /* eslint-enable no-console */

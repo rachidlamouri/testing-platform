@@ -33,7 +33,7 @@ import {
 } from './ciModel';
 import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
-import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';

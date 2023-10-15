@@ -11,13 +11,13 @@ import { AbstractAsymmetricInMemoryCollection2 } from '../in-memory-cache/abstra
 import {
   GenericProgramErrorStreamMetatype,
   PROGRAM_ERROR_COLLECTION_ID,
-  UnsafeProgramErrorVoque,
+  UnsafeProgramErrorStreamMetatype,
 } from './programError';
 import { LintAssertionError } from '../linting/reportFailedLintAssertion';
 import { SourceTypeName } from '../linting/source/sourceTypeName';
 import { Source } from '../linting/source/source';
 
-type ProgramErrorVoictentConstructorInput = {
+type ProgramErrorCollectionConstructorInput = {
   programFileCache: ProgramFileCache;
 };
 
@@ -33,12 +33,12 @@ type ProgramErrorVoictentConstructorInput = {
  * @canonicalDeclaration
  */
 export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection2<
-  UnsafeProgramErrorVoque,
-  UnsafeProgramErrorVoque
+  UnsafeProgramErrorStreamMetatype,
+  UnsafeProgramErrorStreamMetatype
 > {
   private programFileCache: ProgramFileCache;
 
-  constructor({ programFileCache }: ProgramErrorVoictentConstructorInput) {
+  constructor({ programFileCache }: ProgramErrorCollectionConstructorInput) {
     super({
       collectionId: PROGRAM_ERROR_COLLECTION_ID,
       initialItemEggTuple: [],
@@ -53,21 +53,18 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection
 
   // eslint-disable-next-line class-methods-use-this
   protected transformItem(
-    hubblepupPelue: GenericProgramErrorStreamMetatype['itemEggStreamable'],
+    itemEgg: GenericProgramErrorStreamMetatype['itemEggStreamable'],
   ): GenericProgramErrorStreamMetatype['itemStreamable'] {
-    if (
-      !(hubblepupPelue instanceof LintAssertionError) &&
-      hubblepupPelue instanceof Error
-    ) {
-      return hubblepupPelue;
+    if (!(itemEgg instanceof LintAssertionError) && itemEgg instanceof Error) {
+      return itemEgg;
     }
 
     let id: string;
     let sourceLocatorFilePath: string | null;
-    if (hubblepupPelue instanceof LintAssertionError) {
-      id = hubblepupPelue.lintAssertion.id.forHuman;
+    if (itemEgg instanceof LintAssertionError) {
+      id = itemEgg.lintAssertion.id.forHuman;
 
-      const { lintSource } = hubblepupPelue.lintAssertion;
+      const { lintSource } = itemEgg.lintAssertion;
 
       sourceLocatorFilePath = (function getSourceLocatorFilePath(
         source: Source,
@@ -98,15 +95,15 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection
       })(lintSource);
     } else {
       id = getCollectionResourceLocator([
-        hubblepupPelue.reporterLocator.name,
-        hubblepupPelue.name,
-        hubblepupPelue.sourceLocator?.filePath ?? '',
+        itemEgg.reporterLocator.name,
+        itemEgg.name,
+        itemEgg.sourceLocator?.filePath ?? '',
       ]);
 
-      sourceLocatorFilePath = hubblepupPelue.sourceLocator?.filePath ?? '';
+      sourceLocatorFilePath = itemEgg.sourceLocator?.filePath ?? '';
     }
 
-    const normalizedZorn = normalizeFilePathForFileName(id);
+    const normalizedId = normalizeFilePathForFileName(id);
     const normalizedReporterPath = normalizeFilePathForFileName(
       sourceLocatorFilePath,
     );
@@ -121,52 +118,51 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection
       this.programFileCache.getNamespacedCollectionsFilePath({
         collectionCollectionId: this.collectionId,
         nestedPath: bySourceDirectoryPath,
-        extensionlessFileName: normalizedZorn,
+        extensionlessFileName: normalizedId,
         fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
       });
 
-    if (hubblepupPelue instanceof LintAssertionError) {
+    if (itemEgg instanceof LintAssertionError) {
       // hubblepupPelue.setContextFilePath(contextFilePath);
-      return hubblepupPelue;
+      return itemEgg;
     }
 
-    const hubblepupPelie: GenericProgramErrorStreamMetatype['itemStreamable'] =
-      {
-        id,
-        name: hubblepupPelue.name,
-        message: hubblepupPelue.error.message,
-        stackTrace: (hubblepupPelue.error.stack ?? '').split('\n').slice(1),
-        reporterLocator: hubblepupPelue.reporterLocator,
-        sourceLocator: hubblepupPelue.sourceLocator,
-        context: hubblepupPelue.context,
-        serializedContextFilePath: `${this.programFileCache.collectionsDirectoryPath}/by-source/${normalizedSourcePath}`,
-        normalizedId: normalizedZorn,
-        byReporterDirectoryPath,
-        bySourceDirectoryPath,
-        contextFilePath,
-      };
+    const item: GenericProgramErrorStreamMetatype['itemStreamable'] = {
+      id,
+      name: itemEgg.name,
+      message: itemEgg.error.message,
+      stackTrace: (itemEgg.error.stack ?? '').split('\n').slice(1),
+      reporterLocator: itemEgg.reporterLocator,
+      sourceLocator: itemEgg.sourceLocator,
+      context: itemEgg.context,
+      serializedContextFilePath: `${this.programFileCache.collectionsDirectoryPath}/by-source/${normalizedSourcePath}`,
+      normalizedId,
+      byReporterDirectoryPath,
+      bySourceDirectoryPath,
+      contextFilePath,
+    };
 
-    return hubblepupPelie;
+    return item;
   }
 
   protected onTransformedItem(
-    hubblepup: GenericProgramErrorStreamMetatype['itemStreamable'],
+    item: GenericProgramErrorStreamMetatype['itemStreamable'],
     index: number,
   ): void {
-    const serializedHubblepup: SerializedItem = {
-      text: serialize(hubblepup),
+    const serializedItem: SerializedItem = {
+      text: serialize(item),
       fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
     };
 
-    if (hubblepup instanceof Error) {
+    if (item instanceof Error) {
       this.programFileCache.writeSerializedItem({
         collectionCollectionId: this.collectionId,
         nestedPath: 'error',
-        serializedItem: serializedHubblepup,
+        serializedItem,
         extensionlessFileName: `${index}`.padStart(2, '0'),
       });
 
-      if (hubblepup instanceof LintAssertionError) {
+      if (item instanceof LintAssertionError) {
         const contextFilePath =
           this.programFileCache.getNamespacedCollectionsFilePath({
             collectionCollectionId: this.collectionId,
@@ -175,7 +171,7 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection
             fileExtensionSuffixIdentifier: FileExtensionSuffixIdentifier.Yaml,
           });
 
-        hubblepup.setContextFilePath(contextFilePath);
+        item.setContextFilePath(contextFilePath);
       }
 
       // TODO: serialize all errors
@@ -184,25 +180,25 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection
 
     this.programFileCache.writeSerializedItem({
       collectionCollectionId: this.collectionId,
-      nestedPath: hubblepup.byReporterDirectoryPath,
-      serializedItem: serializedHubblepup,
-      extensionlessFileName: hubblepup.normalizedId,
+      nestedPath: item.byReporterDirectoryPath,
+      serializedItem,
+      extensionlessFileName: item.normalizedId,
     });
 
     // TODO: again, put this logic in a utility or something
     this.programFileCache.writeSerializedItem({
       collectionCollectionId: this.collectionId,
-      nestedPath: hubblepup.bySourceDirectoryPath,
-      serializedItem: serializedHubblepup,
-      extensionlessFileName: hubblepup.normalizedId,
+      nestedPath: item.bySourceDirectoryPath,
+      serializedItem,
+      extensionlessFileName: item.normalizedId,
     });
   }
 
   // eslint-disable-next-line class-methods-use-this
   protected getIndexByName(
-    hubblepup: GenericProgramErrorStreamMetatype['itemStreamable'],
+    item: GenericProgramErrorStreamMetatype['itemStreamable'],
   ): GenericProgramErrorStreamMetatype['indexByName'] {
-    if (hubblepup instanceof Error) {
+    if (item instanceof Error) {
       return {
         // TODO: an id should not be random
         id: uuid.v4(),
@@ -210,7 +206,7 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection
     }
 
     return {
-      id: hubblepup.id,
+      id: item.id,
     };
   }
 }

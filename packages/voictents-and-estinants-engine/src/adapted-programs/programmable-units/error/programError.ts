@@ -11,26 +11,30 @@ type FileErrorLocator = {
   filePath: string;
 };
 
-export type ReportingProgrammedTransformLocator<TEstinantName extends string> =
-  {
-    typeName: ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator;
-    name: TEstinantName;
-    filePath: string;
-  };
+export type ReportingProgrammedTransformLocator<
+  TProgrammedTransformName extends string,
+> = {
+  typeName: ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator;
+  name: TProgrammedTransformName;
+  filePath: string;
+};
 
-type GenericReportingEstinantLocator =
+type GenericReportingProgrammedTransformLocator =
   ReportingProgrammedTransformLocator<string>;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type UnsafeReportingEstinantLocator = ReportingProgrammedTransformLocator<any>;
+type UnsafeReportingProgrammedTransformLocator =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ReportingProgrammedTransformLocator<any>;
 
 // TODO: add more locator types as needed
 type ProgramErrorSourceLocator = FileErrorLocator | null;
 
 // TODO: add more locator types as needed
-type GenericProgramErrorReporterLocator = GenericReportingEstinantLocator;
+type GenericProgramErrorReporterLocator =
+  GenericReportingProgrammedTransformLocator;
 
-type UnsafeProgramErrorReporterLocator = UnsafeReportingEstinantLocator;
+type UnsafeProgramErrorReporterLocator =
+  UnsafeReportingProgrammedTransformLocator;
 
 /**
  * Represents an error that occurred while a program is running. Errors can be
@@ -67,43 +71,42 @@ export type GenericProgramErrorEgg =
  *
  * @canonicalDeclaration
  */
-type ProgramErrorPelie<
-  TReporterLocator extends GenericProgramErrorReporterLocator,
-> =
-  | {
-      id: string;
-      name: string;
-      message: string;
-      stackTrace: string[];
-      reporterLocator: TReporterLocator;
-      sourceLocator: ProgramErrorSourceLocator;
-      context: TypeScriptObjectInstance | null;
-      serializedContextFilePath: string;
-      normalizedId: string;
-      byReporterDirectoryPath: string;
-      bySourceDirectoryPath: string;
-      contextFilePath: string;
-    }
-  | Error;
+type ProgramError<TReporterLocator extends GenericProgramErrorReporterLocator> =
+
+    | {
+        id: string;
+        name: string;
+        message: string;
+        stackTrace: string[];
+        reporterLocator: TReporterLocator;
+        sourceLocator: ProgramErrorSourceLocator;
+        context: TypeScriptObjectInstance | null;
+        serializedContextFilePath: string;
+        normalizedId: string;
+        byReporterDirectoryPath: string;
+        bySourceDirectoryPath: string;
+        contextFilePath: string;
+      }
+    | Error;
 
 export const PROGRAM_ERROR_COLLECTION_ID = 'program-error';
 
 export type ProgramErrorCollectionId = typeof PROGRAM_ERROR_COLLECTION_ID;
 
-type ProgramErrorVoque<
+type ProgramErrorStreamMetatype<
   TReporterLocator extends GenericProgramErrorReporterLocator,
 > = StreamMetatype<
   ProgramErrorCollectionId,
   ProgramErrorEgg<TReporterLocator>,
-  ProgramErrorPelie<TReporterLocator>,
+  ProgramError<TReporterLocator>,
   {
     id: string;
   },
-  ProgramErrorPelie<TReporterLocator>[]
+  ProgramError<TReporterLocator>[]
 >;
 
 export type GenericProgramErrorStreamMetatype =
-  ProgramErrorVoque<GenericProgramErrorReporterLocator>;
+  ProgramErrorStreamMetatype<GenericProgramErrorReporterLocator>;
 
-export type UnsafeProgramErrorVoque =
-  ProgramErrorVoque<UnsafeProgramErrorReporterLocator>;
+export type UnsafeProgramErrorStreamMetatype =
+  ProgramErrorStreamMetatype<UnsafeProgramErrorReporterLocator>;

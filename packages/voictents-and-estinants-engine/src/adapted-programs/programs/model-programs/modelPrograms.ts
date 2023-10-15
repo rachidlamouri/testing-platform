@@ -32,7 +32,7 @@ import { signalError } from '../../programmable-units/error/signalError';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_COLLECTION_ID } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
-import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
 import { EngineRunnerStrategy } from '../../../core/engine/runEngine';
 import { getEngineStreamMetatype2 } from '../../programmable-units/engine-program/getEngineVoque2';

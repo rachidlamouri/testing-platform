@@ -14,7 +14,7 @@ import {
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program/getEngineProgramLocator3';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
-import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {

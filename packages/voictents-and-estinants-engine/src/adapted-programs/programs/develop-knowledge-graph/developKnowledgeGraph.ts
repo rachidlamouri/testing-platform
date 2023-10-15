@@ -5,7 +5,7 @@ import {
 } from '../../../adapter/engine/runEngine';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
-import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';

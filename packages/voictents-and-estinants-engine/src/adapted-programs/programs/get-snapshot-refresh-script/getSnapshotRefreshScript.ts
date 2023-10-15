@@ -10,7 +10,7 @@ import {
   CORE_ENGINE_FUNCTION_CONFIGURATION,
   EngineFunctionConfigurationStreamMetatype,
 } from '../../programmable-units/engine-program/engineFunctionConfiguration';
-import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';

@@ -32,8 +32,8 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
   {
     filePath:
-      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/error/programErrorVoictent.ts',
-    identifierList: ['ProgramErrorVoictent'],
+      'packages/voictents-and-estinants-engine/src/adapted-programs/programmable-units/error/programErrorCollection.ts',
+    identifierList: ['ProgramErrorCollection'],
   },
   {
     filePath:

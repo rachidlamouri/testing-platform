@@ -10,7 +10,7 @@ import {
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
-import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
 import { reportErrors } from '../../programmable-units/error/reportErrors';

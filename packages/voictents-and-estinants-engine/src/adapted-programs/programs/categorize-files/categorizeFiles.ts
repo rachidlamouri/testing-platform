@@ -12,7 +12,7 @@ import { enumerateFileSystemObjects } from '../../programmable-units/file/enumer
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { assertFileExtensionIsKnown } from './assertFileExtensionIsKnown';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
-import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
+import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { FILE_COLLECTION_ID } from '../../programmable-units/file/file';
