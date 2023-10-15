@@ -17,7 +17,8 @@ import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull'
 import { shishKebab } from '../../../../package-agnostic-utilities/case/shishKebab';
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
 
-const ESTINANT_NAME = 'assertTypeScriptFileHasCanonicalDeclaration' as const;
+const PROGRAMMED_TRANSFORM_NAME =
+  'assertTypeScriptFileHasCanonicalDeclaration' as const;
 
 type TypeScriptFileHasCanonicalDeclarationMessageContext = {
   filePath: string;
@@ -28,7 +29,7 @@ export const typeScriptFileHasCanonicalDeclarationRule =
     name: 'typescript-file-has-canonical-declaration',
     source: new ProgrammedTransformSourceInstance({
       filePath: posix.relative('', __filename),
-      programmedTransformName: ESTINANT_NAME,
+      programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
     }),
     description:
       'All TypeScript files must have at least one top level declaration whose name matches the file name regardless of casing',
@@ -58,7 +59,7 @@ export const typeScriptFileHasCanonicalDeclarationRule =
  */
 export const assertTypeScriptFileHasCanonicalDeclaration =
   buildProgrammedTransform({
-    name: ESTINANT_NAME,
+    name: PROGRAMMED_TRANSFORM_NAME,
   })
     .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
       collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
