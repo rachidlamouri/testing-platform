@@ -12,7 +12,7 @@ import {
   EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID,
   ExpectedProgramTestFileStreamMetatype,
 } from './expectedProgramTestFile';
-import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/programmedTransformSource';
 import { TypedRule } from '../../programmable-units/linting/rule';
 import { FileSourceInstance } from '../../programmable-units/linting/source/fileSource';
 import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/object/typeScriptObject';

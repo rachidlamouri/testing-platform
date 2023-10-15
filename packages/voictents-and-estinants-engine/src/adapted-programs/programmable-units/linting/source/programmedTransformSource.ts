@@ -6,18 +6,19 @@ import {
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
-const ESTINANT_SOURCE_ZORN_TEMPLATE = [
+const PROGRAMMED_TRANSFORM_SOURCE_ID_TEMPLATE = [
   'filePath',
   'programmedTransformName',
 ] as const satisfies GenericComplexIdTemplate;
-type EstinantSourceZornTemplate = typeof ESTINANT_SOURCE_ZORN_TEMPLATE;
-class EstinantSourceZorn extends ComplexId<EstinantSourceZornTemplate> {
-  get rawTemplate(): EstinantSourceZornTemplate {
-    return ESTINANT_SOURCE_ZORN_TEMPLATE;
+type ProgrammedTransformSourceIdTemplate =
+  typeof PROGRAMMED_TRANSFORM_SOURCE_ID_TEMPLATE;
+class ProgrammedTransformSourceId extends ComplexId<ProgrammedTransformSourceIdTemplate> {
+  get rawTemplate(): ProgrammedTransformSourceIdTemplate {
+    return PROGRAMMED_TRANSFORM_SOURCE_ID_TEMPLATE;
   }
 }
 
-type EstinantSourceConstructorInput = {
+type ProgrammedTransformSourceConstructorInput = {
   filePath: string;
   programmedTransformName: string;
 };
@@ -27,13 +28,13 @@ type EstinantSourceConstructorInput = {
  *
  * @readableName ProgrammedTransformSource
  */
-export type EstinantSource = SimplifyN<
+export type ProgrammedTransformSource = SimplifyN<
   [
     {
-      typeName: SourceTypeName.EstinantSource;
-      id: EstinantSourceZorn;
+      typeName: SourceTypeName.ProgrammedTransformSource;
+      id: ProgrammedTransformSourceId;
     },
-    EstinantSourceConstructorInput,
+    ProgrammedTransformSourceConstructorInput,
   ]
 >;
 
@@ -46,9 +47,12 @@ export const { ProgrammedTransformSourceInstance } =
       'id',
       'programmedTransformName',
       'filePath',
-    ] as const satisfies readonly (keyof EstinantSource)[],
+    ] as const satisfies readonly (keyof ProgrammedTransformSource)[],
   })
-    .withTypes<EstinantSourceConstructorInput, EstinantSource>({
+    .withTypes<
+      ProgrammedTransformSourceConstructorInput,
+      ProgrammedTransformSource
+    >({
       typeCheckErrorMessage: {
         initialization: '',
         instancePropertyNameTuple: {
@@ -59,16 +63,16 @@ export const { ProgrammedTransformSourceInstance } =
       transformInput: (input) => {
         const { programmedTransformName, filePath } = input;
 
-        const id = new EstinantSourceZorn({
+        const id = new ProgrammedTransformSourceId({
           filePath,
           programmedTransformName,
         });
 
         return {
-          typeName: SourceTypeName.EstinantSource,
+          typeName: SourceTypeName.ProgrammedTransformSource,
           id,
           ...input,
-        } satisfies EstinantSource;
+        } satisfies ProgrammedTransformSource;
       },
     })
     .assemble();

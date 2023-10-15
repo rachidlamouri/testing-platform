@@ -6,14 +6,14 @@ import {
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
-const FILE_LINE_SOURCE_ZORN_TEMPLATE = [
+const FILE_LINE_SOURCE_ID_TEMPLATE = [
   'filePath',
   'lineNumber',
 ] as const satisfies GenericComplexIdTemplate;
-type FileLineSourceZornTemplate = typeof FILE_LINE_SOURCE_ZORN_TEMPLATE;
-class FileLineSourceZorn extends ComplexId<FileLineSourceZornTemplate> {
-  get rawTemplate(): FileLineSourceZornTemplate {
-    return FILE_LINE_SOURCE_ZORN_TEMPLATE;
+type FileLineSourceIdTemplate = typeof FILE_LINE_SOURCE_ID_TEMPLATE;
+class FileLineSourceId extends ComplexId<FileLineSourceIdTemplate> {
+  get rawTemplate(): FileLineSourceIdTemplate {
+    return FILE_LINE_SOURCE_ID_TEMPLATE;
   }
 }
 
@@ -29,7 +29,7 @@ export type FileLineSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.FileLineSource;
-      id: FileLineSourceZorn;
+      id: FileLineSourceId;
     },
     FileLineSourceConstructorInput,
     {
@@ -60,7 +60,7 @@ export const { FileLineSourceInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { filePath, lineNumber } = input;
 
-      const id = new FileLineSourceZorn({
+      const id = new FileLineSourceId({
         filePath,
         lineNumber: `${lineNumber}`,
       });

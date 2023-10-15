@@ -6,13 +6,13 @@ import {
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
-const FILE_SOURCE_ZORN_TEMPLATE = [
+const FILE_SOURCE_ID_TEMPLATE = [
   'filePath',
 ] as const satisfies GenericComplexIdTemplate;
-type FileSourceZornTemplate = typeof FILE_SOURCE_ZORN_TEMPLATE;
-class FileSourceZorn extends ComplexId<FileSourceZornTemplate> {
-  get rawTemplate(): FileSourceZornTemplate {
-    return FILE_SOURCE_ZORN_TEMPLATE;
+type FileSourceIdTemplate = typeof FILE_SOURCE_ID_TEMPLATE;
+class FileSourceId extends ComplexId<FileSourceIdTemplate> {
+  get rawTemplate(): FileSourceIdTemplate {
+    return FILE_SOURCE_ID_TEMPLATE;
   }
 }
 
@@ -27,7 +27,7 @@ export type FileSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.FileSource;
-      id: FileSourceZorn;
+      id: FileSourceId;
     },
     FileSourceConstructorInput,
   ]
@@ -53,7 +53,7 @@ export const { FileSourceInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { filePath } = input;
 
-      const id = new FileSourceZorn({
+      const id = new FileSourceId({
         filePath,
       });
 

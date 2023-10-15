@@ -7,7 +7,7 @@ import {
   LintAssertionStreamMetatype,
 } from '../../programmable-units/linting/lintAssertion';
 import { TypedRule } from '../../programmable-units/linting/rule';
-import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/programmedTransformSource';
 import { ExportedIdentifierSourceInstance } from '../../programmable-units/linting/source/exportedIdentifierSource';
 import { ImportedIdentifierSourceInstance } from '../../programmable-units/linting/source/importedIdentifierSource';
 import {

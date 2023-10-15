@@ -6,16 +6,16 @@ import {
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
-const FILE_LINE_COLUMN_SOURCE_ZORN_TEMPLATE = [
+const FILE_LINE_COLUMN_SOURCE_ID_TEMPLATE = [
   'filePath',
   'lineNumber',
   'columnNumber',
 ] as const satisfies GenericComplexIdTemplate;
-type FileLineColumnSourceZornTemplate =
-  typeof FILE_LINE_COLUMN_SOURCE_ZORN_TEMPLATE;
-class FileLineColumnSourceZorn extends ComplexId<FileLineColumnSourceZornTemplate> {
-  get rawTemplate(): FileLineColumnSourceZornTemplate {
-    return FILE_LINE_COLUMN_SOURCE_ZORN_TEMPLATE;
+type FileLineColumnSourceIdTemplate =
+  typeof FILE_LINE_COLUMN_SOURCE_ID_TEMPLATE;
+class FileLineColumnSourceId extends ComplexId<FileLineColumnSourceIdTemplate> {
+  get rawTemplate(): FileLineColumnSourceIdTemplate {
+    return FILE_LINE_COLUMN_SOURCE_ID_TEMPLATE;
   }
 }
 
@@ -32,7 +32,7 @@ export type FileLineColumnSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.FileLineColumnSource;
-      id: FileLineColumnSourceZorn;
+      id: FileLineColumnSourceId;
     },
     FileLineColumnSourceConstructorInput,
   ]
@@ -60,7 +60,7 @@ export const { FileLineColumnSourceInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { filePath, lineNumber, columnNumber } = input;
 
-      const id = new FileLineColumnSourceZorn({
+      const id = new FileLineColumnSourceId({
         filePath,
         lineNumber: `${lineNumber}`,
         columnNumber: `${columnNumber}`,

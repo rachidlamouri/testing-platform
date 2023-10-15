@@ -5,7 +5,7 @@ import {
   FILE_EXISTENCE_ASSERTER_INPUT_COLLECTION_ID,
   FileExistenceAsserterInputInstance,
 } from '../../../layer-agnostic-utilities/assertion/fileExistenceAsserterInput';
-import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/programmedTransformSource';
 import {
   ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   EngineProgramLocator3StreamMetatype,

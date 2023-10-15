@@ -7,7 +7,7 @@ import {
   LintAssertionStreamMetatype,
 } from '../linting/lintAssertion';
 import { EmptyMessageContext, TypedRule } from '../linting/rule';
-import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../linting/source/programmedTransformSource';
 import { CommentTagId } from './comment/commentTagId';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,

@@ -5,7 +5,7 @@ import {
   LintAssertionOmissionInstance,
   LintAssertionOmissionStreamMetatype,
 } from '../linting/lintAssertionOmission';
-import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../linting/source/programmedTransformSource';
 import { FileSourceInstance } from '../linting/source/fileSource';
 import {
   ENGINE_PROGRAM_FILE_COLLECTION_ID,

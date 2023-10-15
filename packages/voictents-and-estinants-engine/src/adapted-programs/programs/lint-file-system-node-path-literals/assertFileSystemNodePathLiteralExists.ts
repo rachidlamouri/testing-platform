@@ -9,7 +9,7 @@ import {
   TypedRule,
   EmptyMessageContext,
 } from '../../programmable-units/linting/rule';
-import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/programmedTransformSource';
 import {
   FILE_PATH_LIKE_STRING_LITERAL_COLLECTION_ID,
   FilePathLikeStringLiteralStreamMetatype,

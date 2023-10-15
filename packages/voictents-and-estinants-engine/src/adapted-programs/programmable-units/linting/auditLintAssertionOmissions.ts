@@ -14,7 +14,7 @@ import {
 } from './lintAssertionOmission';
 import { LintAssertionError } from './reportFailedLintAssertion';
 import { TypedRule } from './rule';
-import { ProgrammedTransformSourceInstance } from './source/estinantSource';
+import { ProgrammedTransformSourceInstance } from './source/programmedTransformSource';
 
 const ESTINANT_NAME = 'auditLintAssertionOmissions' as const;
 

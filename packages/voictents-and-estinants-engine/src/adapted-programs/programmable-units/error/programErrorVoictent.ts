@@ -88,7 +88,7 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection
           case SourceTypeName.ExportedIdentifierSource: {
             return source.filePath;
           }
-          case SourceTypeName.EstinantSource: {
+          case SourceTypeName.ProgrammedTransformSource: {
             return source.filePath;
           }
           case SourceTypeName.RequestSource: {

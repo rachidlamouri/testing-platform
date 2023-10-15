@@ -6,7 +6,7 @@ import {
   LintAssertionStreamMetatype,
 } from '../../linting/lintAssertion';
 import { TypedRule } from '../../linting/rule';
-import { ProgrammedTransformSourceInstance } from '../../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../linting/source/programmedTransformSource';
 import { FileSourceInstance } from '../../linting/source/fileSource';
 import {
   CanonicalDeclarationLintMetadata,

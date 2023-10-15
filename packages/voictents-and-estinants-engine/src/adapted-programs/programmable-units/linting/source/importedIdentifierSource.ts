@@ -6,15 +6,15 @@ import {
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
-const IMPORTED_IDENTIFIER_SOURCE_ZORN_TEMPLATE = [
+const IMPORTED_IDENTIFIER_SOURCE_ID_TEMPLATE = [
   'importingFilePath',
   'importedIdentifierName',
 ] as const satisfies GenericComplexIdTemplate;
-type ImportedIdentifierSourceZornTemplate =
-  typeof IMPORTED_IDENTIFIER_SOURCE_ZORN_TEMPLATE;
-class ImportedIdentifierSourceZorn extends ComplexId<ImportedIdentifierSourceZornTemplate> {
-  get rawTemplate(): ImportedIdentifierSourceZornTemplate {
-    return IMPORTED_IDENTIFIER_SOURCE_ZORN_TEMPLATE;
+type ImportedIdentifierSourceIdTemplate =
+  typeof IMPORTED_IDENTIFIER_SOURCE_ID_TEMPLATE;
+class ImportedIdentifierSourceId extends ComplexId<ImportedIdentifierSourceIdTemplate> {
+  get rawTemplate(): ImportedIdentifierSourceIdTemplate {
+    return IMPORTED_IDENTIFIER_SOURCE_ID_TEMPLATE;
   }
 }
 
@@ -34,7 +34,7 @@ export type ImportedIdentifierSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.ImportedIdentifierSource;
-      id: ImportedIdentifierSourceZorn;
+      id: ImportedIdentifierSourceId;
     },
     ImportedIdentifierSourceConstructorInput,
   ]
@@ -65,7 +65,7 @@ export const { ImportedIdentifierSourceInstance } =
       transformInput: (input) => {
         const { importingFilePath, importedIdentifierName } = input;
 
-        const id = new ImportedIdentifierSourceZorn({
+        const id = new ImportedIdentifierSourceId({
           importingFilePath,
           importedIdentifierName,
         });

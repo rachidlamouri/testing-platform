@@ -1,4 +1,4 @@
-import { EstinantSource } from './estinantSource';
+import { ProgrammedTransformSource } from './programmedTransformSource';
 import { ExportedIdentifierSource } from './exportedIdentifierSource';
 import { FileLineColumnSource } from './fileLineColumnSource';
 import { FileLineSource } from './fileLineSource';
@@ -14,4 +14,4 @@ export type LeafSource =
   | FileLineColumnSource
   | ImportedIdentifierSource
   | ExportedIdentifierSource
-  | EstinantSource;
+  | ProgrammedTransformSource;

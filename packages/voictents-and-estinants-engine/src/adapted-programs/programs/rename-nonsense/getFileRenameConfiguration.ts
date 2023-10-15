@@ -19,7 +19,7 @@ import {
 import { nonsenseIsDocumentedRule } from './nonsenseIsDocumentedRule';
 import { FileSourceInstance } from '../../programmable-units/linting/source/fileSource';
 import { RequestSourceInstance } from '../../programmable-units/linting/source/requestSource';
-import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/programmedTransformSource';
 import { getPhraseSensibilityState } from '../../../layer-agnostic-utilities/nonsense/isSensiblePhrase';
 
 const PROGRAMMED_TRANSFORM_NAME = 'getFileRenameConfiguration' as const;

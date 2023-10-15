@@ -10,7 +10,7 @@ import {
   RenameConfigurationInstance,
   RenameConfigurationStreamMetatype,
 } from './renameConfiguration';
-import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/programmedTransformSource';
 import {
   LINT_ASSERTION_COLLECTION_ID,
   LintAssertion,

@@ -7,7 +7,7 @@ import {
   LintAssertionOmissionInstance,
   LintAssertionOmissionStreamMetatype,
 } from '../linting/lintAssertionOmission';
-import { ProgrammedTransformSourceInstance } from '../linting/source/estinantSource';
+import { ProgrammedTransformSourceInstance } from '../linting/source/programmedTransformSource';
 import {
   FileCommentedProgramBodyDeclarationGroupStreamMetatype,
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,

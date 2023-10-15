@@ -7,14 +7,14 @@ import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify'
 import { LeafSource } from './leafSource';
 import { SourceTypeName } from './sourceTypeName';
 
-const REQUEST_SOURCE_ZORN_TEMPLATE = [
+const REQUEST_SOURCE_ID_TEMPLATE = [
   'requestor',
   'requestee',
 ] as const satisfies GenericComplexIdTemplate;
-type RequestSourceZornTemplate = typeof REQUEST_SOURCE_ZORN_TEMPLATE;
-class RequestSourceZorn extends ComplexId<RequestSourceZornTemplate> {
-  get rawTemplate(): RequestSourceZornTemplate {
-    return REQUEST_SOURCE_ZORN_TEMPLATE;
+type RequestSourceIdTemplate = typeof REQUEST_SOURCE_ID_TEMPLATE;
+class RequestSourceId extends ComplexId<RequestSourceIdTemplate> {
+  get rawTemplate(): RequestSourceIdTemplate {
+    return REQUEST_SOURCE_ID_TEMPLATE;
   }
 }
 
@@ -32,7 +32,7 @@ export type RequestSource = SimplifyN<
   [
     {
       typeName: SourceTypeName.RequestSource;
-      id: RequestSourceZorn;
+      id: RequestSourceId;
     },
     RequestSourceConstructorInput,
   ]
@@ -59,7 +59,7 @@ export const { RequestSourceInstance } = buildNamedConstructorFunction({
     transformInput: (input) => {
       const { requestor, requestee } = input;
 
-      const id = new RequestSourceZorn({
+      const id = new RequestSourceId({
         requestor,
         requestee,
       });
