@@ -7,7 +7,7 @@ import {
 } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { serialize } from '../../../package-agnostic-utilities/one-way-serializer/serialize';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractAsymmetricInMemoryVoictent2';
+import { AbstractAsymmetricInMemoryCollection2 } from '../in-memory-cache/abstractAsymmetricInMemoryVoictent2';
 import {
   GenericProgramErrorStreamMetatype,
   PROGRAM_ERROR_COLLECTION_ID,
@@ -32,7 +32,7 @@ type ProgramErrorVoictentConstructorInput = {
  *
  * @canonicalDeclaration
  */
-export class ProgramErrorCollection extends AbstractAsymmetricInMemoryVoictent2<
+export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection2<
   UnsafeProgramErrorVoque,
   UnsafeProgramErrorVoque
 > {
@@ -40,8 +40,8 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryVoictent2<
 
   constructor({ programFileCache }: ProgramErrorVoictentConstructorInput) {
     super({
-      gepp: PROGRAM_ERROR_COLLECTION_ID,
-      initialHubblepupPelueTuple: [],
+      collectionId: PROGRAM_ERROR_COLLECTION_ID,
+      initialItemEggTuple: [],
     });
 
     this.programFileCache = programFileCache;
@@ -52,7 +52,7 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryVoictent2<
   }
 
   // eslint-disable-next-line class-methods-use-this
-  protected transformHubblepup(
+  protected transformItem(
     hubblepupPelue: GenericProgramErrorStreamMetatype['itemEggStreamable'],
   ): GenericProgramErrorStreamMetatype['itemStreamable'] {
     if (
@@ -149,7 +149,7 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryVoictent2<
     return hubblepupPelie;
   }
 
-  protected onTransformedHubblepup(
+  protected onTransformedItem(
     hubblepup: GenericProgramErrorStreamMetatype['itemStreamable'],
     index: number,
   ): void {

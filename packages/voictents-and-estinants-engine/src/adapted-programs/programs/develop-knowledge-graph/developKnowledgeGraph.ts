@@ -8,7 +8,7 @@ import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/prog
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
-import { OutputFileCollection } from '../../programmable-units/output-file/outputFileVoictent';
+import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import {
   APP_RENDERER_DELAYER_COLLECTION_ID,

@@ -33,7 +33,7 @@ import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_COLLECTION_ID } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
-import { OutputFileCollection } from '../../programmable-units/output-file/outputFileVoictent';
+import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
 import { EngineRunnerStrategy } from '../../../core/engine/runEngine';
 import { getEngineStreamMetatype2 } from '../../programmable-units/engine-program/getEngineVoque2';
 import { getEngineProgrammedTransform3 } from '../../programmable-units/engine-program/getEngineEstinant3';

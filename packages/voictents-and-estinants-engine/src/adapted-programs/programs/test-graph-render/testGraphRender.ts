@@ -24,7 +24,7 @@ import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection
 import { InMemoryIdentifiableItem2ListCollection } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_COLLECTION_ID } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
-import { OutputFileCollection } from '../../programmable-units/output-file/outputFileVoictent';
+import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
 import { GraphLikeLabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
 import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileGeppCombination';
 

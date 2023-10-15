@@ -22,10 +22,10 @@ export type OutputFile = FileCacheOutputFile | OutputFileWithFilePath;
 
 export const OUTPUT_FILE_COLLECTION_ID = 'output-file';
 
-type OutputFileGepp = typeof OUTPUT_FILE_COLLECTION_ID;
+type OutputFileCollectionId = typeof OUTPUT_FILE_COLLECTION_ID;
 
 export type OutputFileStreamMetatype = StreamMetatype<
-  OutputFileGepp,
+  OutputFileCollectionId,
   OutputFile,
   OutputFile,
   never,

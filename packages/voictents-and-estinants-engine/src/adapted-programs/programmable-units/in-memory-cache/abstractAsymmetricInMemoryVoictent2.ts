@@ -11,8 +11,8 @@ import { InMemoryCache } from './inMemoryCache';
 type AbstractInMemoryVoictent2ConstructorInput<
   TVoque extends GenericStreamMetatype,
 > = {
-  gepp: TVoque['collectionId'];
-  initialHubblepupPelueTuple: TVoque['itemEggStreamable'][];
+  collectionId: TVoque['collectionId'];
+  initialItemEggTuple: TVoque['itemEggStreamable'][];
 };
 
 /**
@@ -21,8 +21,10 @@ type AbstractInMemoryVoictent2ConstructorInput<
  * also support symmetric collections.
  *
  * @readableName AbstractAsymmetricInMemoryCollection
+ *
+ * @canonicalDeclaration
  */
-export abstract class AbstractAsymmetricInMemoryVoictent2<
+export abstract class AbstractAsymmetricInMemoryCollection2<
     TRestrictingVoque extends GenericStreamMetatype,
     TVoque extends TRestrictingVoque,
   >
@@ -34,13 +36,13 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
   private initialHubblepupPelueTuple: TVoque['itemStreamable'][];
 
   constructor({
-    gepp,
-    initialHubblepupPelueTuple,
+    collectionId,
+    initialItemEggTuple,
   }: AbstractInMemoryVoictent2ConstructorInput<TVoque>) {
     super();
 
-    this.collectionId = gepp;
-    this.initialHubblepupPelueTuple = initialHubblepupPelueTuple;
+    this.collectionId = collectionId;
+    this.initialHubblepupPelueTuple = initialItemEggTuple;
   }
 
   initialize(): void {
@@ -50,15 +52,12 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
   }
 
   addItem(hubblepup: TVoque['itemEggStreamable']): void {
-    const transformedHubblepup = this.transformHubblepup(hubblepup);
+    const transformedHubblepup = this.transformItem(hubblepup);
     this.addDatum(transformedHubblepup);
-    this.onTransformedHubblepup(
-      transformedHubblepup,
-      this.datumTuple.length - 1,
-    );
+    this.onTransformedItem(transformedHubblepup, this.datumTuple.length - 1);
   }
 
-  protected abstract transformHubblepup(
+  protected abstract transformItem(
     hubblepup: TVoque['itemEggStreamable'],
   ): TVoque['itemStreamable'];
 
@@ -66,7 +65,7 @@ export abstract class AbstractAsymmetricInMemoryVoictent2<
     hubblepup: TVoque['itemStreamable'],
   ): TVoque['indexByName'];
 
-  protected abstract onTransformedHubblepup(
+  protected abstract onTransformedItem(
     hubblepup: TVoque['itemStreamable'],
     index: number,
   ): void;

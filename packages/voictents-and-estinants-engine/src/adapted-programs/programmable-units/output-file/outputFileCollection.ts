@@ -4,14 +4,14 @@ import {
   KnownFileExtensionSuffixIdentifier,
   getFileExtensionSuffixIdentifier,
 } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { AbstractAsymmetricInMemoryVoictent2 } from '../in-memory-cache/abstractAsymmetricInMemoryVoictent2';
+import { AbstractAsymmetricInMemoryCollection2 } from '../in-memory-cache/abstractAsymmetricInMemoryVoictent2';
 import {
   OUTPUT_FILE_COLLECTION_ID,
   OutputFile,
   OutputFileStreamMetatype,
 } from './outputFile';
 
-type OutputFileVoictentConstructorInput = {
+type OutputFileCollectionConstructorInput = {
   programFileCache: ProgramFileCache;
 };
 
@@ -24,16 +24,16 @@ type OutputFileVoictentConstructorInput = {
  *
  * @canonicalDeclaration
  */
-export class OutputFileCollection extends AbstractAsymmetricInMemoryVoictent2<
+export class OutputFileCollection extends AbstractAsymmetricInMemoryCollection2<
   OutputFileStreamMetatype,
   OutputFileStreamMetatype
 > {
   private programFileCache: ProgramFileCache;
 
-  constructor({ programFileCache }: OutputFileVoictentConstructorInput) {
+  constructor({ programFileCache }: OutputFileCollectionConstructorInput) {
     super({
-      gepp: OUTPUT_FILE_COLLECTION_ID,
-      initialHubblepupPelueTuple: [],
+      collectionId: OUTPUT_FILE_COLLECTION_ID,
+      initialItemEggTuple: [],
     });
 
     this.programFileCache = programFileCache;
@@ -44,8 +44,8 @@ export class OutputFileCollection extends AbstractAsymmetricInMemoryVoictent2<
   }
 
   // eslint-disable-next-line class-methods-use-this
-  protected transformHubblepup(hubblepup: OutputFile): OutputFile {
-    return hubblepup;
+  protected transformItem(item: OutputFile): OutputFile {
+    return item;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -53,24 +53,24 @@ export class OutputFileCollection extends AbstractAsymmetricInMemoryVoictent2<
     throw new Error('Unsupported operation');
   }
 
-  protected onTransformedHubblepup(
-    hubblepup: OutputFileStreamMetatype['itemStreamable'],
+  protected onTransformedItem(
+    item: OutputFileStreamMetatype['itemStreamable'],
   ): void {
-    if (hubblepup.filePath !== undefined) {
-      fs.writeFileSync(hubblepup.filePath, hubblepup.text);
+    if (item.filePath !== undefined) {
+      fs.writeFileSync(item.filePath, item.text);
       return;
     }
 
     this.programFileCache.writeSerializedItem({
       collectionCollectionId: this.collectionId,
       nestedPath: '',
-      extensionlessFileName: hubblepup.fileName,
+      extensionlessFileName: item.fileName,
       serializedItem: {
         // TODO: update OutputFile to store the suffix identifier and remove this backwards logic
         fileExtensionSuffixIdentifier: getFileExtensionSuffixIdentifier(
-          hubblepup.fileExtensionSuffix,
+          item.fileExtensionSuffix,
         ) as KnownFileExtensionSuffixIdentifier,
-        text: hubblepup.text,
+        text: item.text,
       },
     });
   }
