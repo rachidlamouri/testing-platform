@@ -11,11 +11,12 @@ type DatumTestCaseInput = {
 
 export const DATUM_TEST_CASE_INPUT_COLLECTION_ID = 'datum-test-case-input';
 
-type DatumTestCaseInputGepp = typeof DATUM_TEST_CASE_INPUT_COLLECTION_ID;
+type DatumTestCaseInputCollectionId =
+  typeof DATUM_TEST_CASE_INPUT_COLLECTION_ID;
 
 export type DatumTestCaseInputStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    DatumTestCaseInputGepp,
+    DatumTestCaseInputCollectionId,
     DatumTestCaseInput
   >;
 
@@ -46,14 +47,14 @@ const jsonTestCaseList: DatumTestCaseInput[] = [
   },
 ];
 
-const jsonTestCaseListGritionList = jsonTestCaseList.map(
-  (odeshin) => odeshin.subitem,
+const jsonTestCaseListSubitemList = jsonTestCaseList.map(
+  (identifiableItem) => identifiableItem.subitem,
 );
 
 const jsonPrimitiveCollectionTestCaseList: DatumTestCaseInput[] = [
   {
     id: '0/json/1/primitive-collection/0/array',
-    subitem: jsonTestCaseListGritionList,
+    subitem: jsonTestCaseListSubitemList,
   },
   {
     id: '0/json/1/primitive-collection/1/object',
@@ -63,18 +64,20 @@ const jsonPrimitiveCollectionTestCaseList: DatumTestCaseInput[] = [
   },
 ];
 
-const jsonPrimitiveCollectionTestCaseListGritionList =
-  jsonPrimitiveCollectionTestCaseList.map((odeshin) => odeshin.subitem);
+const jsonPrimitiveCollectionTestCaseListSubitemList =
+  jsonPrimitiveCollectionTestCaseList.map(
+    (identifiableItem) => identifiableItem.subitem,
+  );
 
 const jsonCollectionCollectionTestCaseList: DatumTestCaseInput[] = [
   {
     id: '0/json/2/collection-collection/0/array',
-    subitem: jsonPrimitiveCollectionTestCaseListGritionList,
+    subitem: jsonPrimitiveCollectionTestCaseListSubitemList,
   },
   {
     id: '0/json/2/collection-collection/1/object',
     subitem: Object.fromEntries(
-      jsonPrimitiveCollectionTestCaseListGritionList.map((datum, index) => [
+      jsonPrimitiveCollectionTestCaseListSubitemList.map((datum, index) => [
         `key-${index}`,
         datum,
       ]),
@@ -139,38 +142,38 @@ a multiline
   },
 ];
 
-const primitiveTestCaseListGritionList = primitiveTestCaseList.map(
+const primitiveTestCaseListSubitemList = primitiveTestCaseList.map(
   ({ subitem }) => subitem,
 );
 
 const primitiveCollectionTestCaseList: DatumTestCaseInput[] = [
   {
     id: '1/type-script/1/primitive-collection/0/list',
-    subitem: primitiveTestCaseListGritionList,
+    subitem: primitiveTestCaseListSubitemList,
   },
   {
     id: '1/type-script/1/primitive-collection/1/set',
-    subitem: new Set(primitiveTestCaseListGritionList),
+    subitem: new Set(primitiveTestCaseListSubitemList),
   },
   {
     id: '1/type-script/1/primitive-collection/2/object/0/with-string-keys',
     subitem: Object.fromEntries(
-      primitiveTestCaseListGritionList.map<[string, unknown]>(
-        (grition, index) => [`key-${index}`, grition],
+      primitiveTestCaseListSubitemList.map<[string, unknown]>(
+        (subitem, index) => [`key-${index}`, subitem],
       ),
     ),
   },
   {
     id: '1/type-script/1/primitive-collection/2/object/1/with-symbol-keys',
     subitem: Object.fromEntries(
-      primitiveTestCaseListGritionList.map<[symbol, unknown]>(
-        (grition, index) => [Symbol(`key-${index}`), grition],
+      primitiveTestCaseListSubitemList.map<[symbol, unknown]>(
+        (subitem, index) => [Symbol(`key-${index}`), subitem],
       ),
     ),
   },
   {
     id: '1/type-script/1/primitive-collection/2/object/2/custom',
-    subitem: new CustomObject(primitiveTestCaseListGritionList),
+    subitem: new CustomObject(primitiveTestCaseListSubitemList),
   },
   {
     id: '1/type-script/1/primitive-collection/3/map',
@@ -180,44 +183,44 @@ const primitiveCollectionTestCaseList: DatumTestCaseInput[] = [
   },
 ];
 
-const primitiveCollectionTestCaseListGritionList =
+const primitiveCollectionTestCaseListSubitemList =
   primitiveCollectionTestCaseList.map(({ subitem }) => subitem);
 
 const collectionCollectionTestCaseList: DatumTestCaseInput[] = [
   {
     id: '1/type-script/2/collection-collection/0/list',
-    subitem: primitiveCollectionTestCaseListGritionList,
+    subitem: primitiveCollectionTestCaseListSubitemList,
   },
   {
     id: '1/type-script/2/collection-collection/1/set',
-    subitem: new Set(primitiveCollectionTestCaseListGritionList),
+    subitem: new Set(primitiveCollectionTestCaseListSubitemList),
   },
   {
     id: '1/type-script/2/collection-collection/2/object/0/with-string-keys',
     subitem: Object.fromEntries(
-      primitiveCollectionTestCaseListGritionList.map<[string, unknown]>(
-        (grition, index) => [`key-${index}`, grition],
+      primitiveCollectionTestCaseListSubitemList.map<[string, unknown]>(
+        (subitem, index) => [`key-${index}`, subitem],
       ),
     ),
   },
   {
     id: '1/type-script/2/collection-collection/2/object/1/with-symbol-keys',
     subitem: Object.fromEntries(
-      primitiveCollectionTestCaseListGritionList.map<[symbol, unknown]>(
-        (grition, index) => [Symbol(`key-${index}`), grition],
+      primitiveCollectionTestCaseListSubitemList.map<[symbol, unknown]>(
+        (subitem, index) => [Symbol(`key-${index}`), subitem],
       ),
     ),
   },
   {
     id: '1/type-script/2/collection-collection/2/object/2/custom',
-    subitem: new CustomObject(primitiveCollectionTestCaseListGritionList),
+    subitem: new CustomObject(primitiveCollectionTestCaseListSubitemList),
   },
   {
     id: '1/type-script/2/collection-collection/3/map',
     subitem: new Map(
-      primitiveCollectionTestCaseListGritionList.map((grition) => [
-        grition,
-        grition,
+      primitiveCollectionTestCaseListSubitemList.map((subitem) => [
+        subitem,
+        subitem,
       ]),
     ),
   },
