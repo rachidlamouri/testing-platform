@@ -7,14 +7,14 @@ import {
   ComplexId,
 } from '../../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
-import { LintAssertionZorn } from './lintAssertion';
+import { LintAssertionId } from './lintAssertion';
 import { TypedRule } from './rule';
 import { FileSourceInstance } from './source/fileSource';
 import { Source } from './source/source';
 
 const LINT_ASSERTION_OMISSION_ZORN_TEMPLATE = [
   ['omitterSource', ComplexId.ANY],
-  ['omittedAssertionId', LintAssertionZorn],
+  ['omittedAssertionId', LintAssertionId],
 ] as const satisfies GenericComplexIdTemplate;
 type LintAssertionOmissionZornTemplate =
   typeof LINT_ASSERTION_OMISSION_ZORN_TEMPLATE;
@@ -26,7 +26,7 @@ class LintAssertionOmissionZorn extends ComplexId<LintAssertionOmissionZornTempl
 
 type LintAssertionOmissionConstructorInput = {
   omitterSource: Source;
-  omittedAssertionId: LintAssertionZorn;
+  omittedAssertionId: LintAssertionId;
 };
 
 /**
@@ -129,7 +129,7 @@ const fileSource = new FileSourceInstance({
   filePath: __filename,
 });
 export const NULL_OMISSION = new LintAssertionOmissionInstance({
-  omittedAssertionId: new LintAssertionZorn({
+  omittedAssertionId: new LintAssertionId({
     rule: new TypedRule({
       name: 'null-omission-rule',
       source: fileSource,

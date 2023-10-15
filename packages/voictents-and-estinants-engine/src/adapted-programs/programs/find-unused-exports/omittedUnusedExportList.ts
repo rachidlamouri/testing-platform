@@ -1,4 +1,4 @@
-import { LintAssertionZorn } from '../../programmable-units/linting/lintAssertion';
+import { LintAssertionId } from '../../programmable-units/linting/lintAssertion';
 import {
   LintAssertionOmission,
   LintAssertionOmissionInstance,
@@ -194,7 +194,7 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
 ].map(({ importedFilePath, importedIdentifierName }) => {
   return new LintAssertionOmissionInstance({
     omitterSource,
-    omittedAssertionId: new LintAssertionZorn({
+    omittedAssertionId: new LintAssertionId({
       rule: noUnusedExportRule,
       lintSource: new ExportedIdentifierSourceInstance({
         filePath: importedFilePath,

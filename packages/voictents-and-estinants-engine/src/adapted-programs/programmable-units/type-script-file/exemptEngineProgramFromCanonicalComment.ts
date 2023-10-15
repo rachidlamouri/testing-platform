@@ -4,7 +4,7 @@ import {
   ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   EngineProgramLocator3StreamMetatype,
 } from '../engine-program/engineProgramLocator3';
-import { LintAssertionZorn } from '../linting/lintAssertion';
+import { LintAssertionId } from '../linting/lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
@@ -43,7 +43,7 @@ export const exemptEngineProgramFromCanonicalComment = buildProgrammedTransform(
         filePath: posix.resolve('', __filename),
         programmedTransformName: ESTINANT_NAME,
       }),
-      omittedAssertionId: new LintAssertionZorn({
+      omittedAssertionId: new LintAssertionId({
         rule: typeScriptFileHasCanonicalCommentRule,
         lintSource: new FileSourceInstance({
           filePath: programLocator.filePath,

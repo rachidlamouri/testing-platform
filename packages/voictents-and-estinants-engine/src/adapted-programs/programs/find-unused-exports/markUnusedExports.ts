@@ -11,17 +11,17 @@ import { ProgrammedTransformSourceInstance } from '../../programmable-units/lint
 import { ExportedIdentifierSourceInstance } from '../../programmable-units/linting/source/exportedIdentifierSource';
 import { ImportedIdentifierSourceInstance } from '../../programmable-units/linting/source/importedIdentifierSource';
 import {
-  TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
-  TypeScriptFileExportListVoque,
+  TYPE_SCRIPT_FILE_EXPORT_LIST_COLLECTION_ID,
+  TypeScriptFileExportListStreamMetatype,
 } from '../../programmable-units/type-script-file/typeScriptFileExportList';
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
   TypeScriptFileImportListStreamMetatype,
 } from '../../programmable-units/type-script-file/typeScriptFileImportList';
 
-const ESTINANT_NAME = 'markUnusedExports' as const;
+const PROGRAMMED_TRANSFORM_NAME = 'markUnusedExports' as const;
 const ruleSource = new ProgrammedTransformSourceInstance({
-  programmedTransformName: ESTINANT_NAME,
+  programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
   filePath: posix.relative('', __filename),
 });
 
@@ -53,13 +53,13 @@ export const noUnusedExportRule =
  * @todo export { x } from  'y' is not being seen as "import" syntax and isn't counting as an import
  */
 export const markUnusedExports = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
   .fromCollection2<TypeScriptFileImportListStreamMetatype>({
     collectionId: TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
   })
-  .andFromCollection2<TypeScriptFileExportListVoque>({
-    collectionId: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
+  .andFromCollection2<TypeScriptFileExportListStreamMetatype>({
+    collectionId: TYPE_SCRIPT_FILE_EXPORT_LIST_COLLECTION_ID,
   })
   .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,

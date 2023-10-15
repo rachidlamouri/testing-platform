@@ -16,7 +16,7 @@ const LINT_ASSERTION_ZORN_TEMPLATE = [
   ['lintSource', ComplexId.ANY],
 ] as const satisfies GenericComplexIdTemplate;
 type LintAssertionZornTemplate = typeof LINT_ASSERTION_ZORN_TEMPLATE;
-export class LintAssertionZorn extends ComplexId<LintAssertionZornTemplate> {
+export class LintAssertionId extends ComplexId<LintAssertionZornTemplate> {
   get rawTemplate(): LintAssertionZornTemplate {
     return LINT_ASSERTION_ZORN_TEMPLATE;
   }
@@ -52,7 +52,7 @@ type LintAssertionConstructorInput<TTypedRule extends UnsafeTypedRule> = {
  * report the issue.
  */
 export class LintAssertion<TTypedRule extends UnsafeTypedRule> {
-  public readonly id: LintAssertionZorn;
+  public readonly id: LintAssertionId;
 
   public readonly rule: TTypedRule;
 
@@ -78,7 +78,7 @@ export class LintAssertion<TTypedRule extends UnsafeTypedRule> {
       };
     }
 
-    this.id = new LintAssertionZorn({
+    this.id = new LintAssertionId({
       rule,
       lintSource,
     });

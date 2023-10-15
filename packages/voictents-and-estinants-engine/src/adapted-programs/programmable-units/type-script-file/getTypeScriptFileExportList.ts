@@ -1,9 +1,9 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/typescript-estree';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
+  TYPE_SCRIPT_FILE_EXPORT_LIST_COLLECTION_ID,
   TypeScriptFileExport,
-  TypeScriptFileExportListVoque,
+  TypeScriptFileExportListStreamMetatype,
 } from './typeScriptFileExportList';
 import { isNotNull } from '../../../package-agnostic-utilities/nil/isNotNull';
 import {
@@ -20,8 +20,8 @@ export const getTypeScriptFileExportList = buildProgrammedTransform({
   .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
     collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   })
-  .toItem2<TypeScriptFileExportListVoque>({
-    collectionId: TYPE_SCRIPT_FILE_EXPORT_LIST_GEPP,
+  .toItem2<TypeScriptFileExportListStreamMetatype>({
+    collectionId: TYPE_SCRIPT_FILE_EXPORT_LIST_COLLECTION_ID,
   })
   .onTransform((group) => {
     const exportList = group.list

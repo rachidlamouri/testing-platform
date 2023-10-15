@@ -12,7 +12,7 @@ import {
   FileCommentedProgramBodyDeclarationGroupStreamMetatype,
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
 } from './fileCommentedProgramBodyDeclarationGroup';
-import { LintAssertionZorn } from '../linting/lintAssertion';
+import { LintAssertionId } from '../linting/lintAssertion';
 import { typeScriptFileHasCanonicalCommentRule } from './assertTypeScriptFileHasCanonicalComment';
 import { FileSourceInstance } from '../linting/source/fileSource';
 import { isExportNamedFunctionDeclaration } from '../../../package-agnostic-utilities/type-script-ast/isExportNamedFunctionDeclaration';
@@ -87,7 +87,7 @@ export const exemptPredicatesFromCanonicalComment = buildProgrammedTransform({
           filePath: posix.resolve('', __filename),
           programmedTransformName: ESTINANT_NAME,
         }),
-        omittedAssertionId: new LintAssertionZorn({
+        omittedAssertionId: new LintAssertionId({
           rule: typeScriptFileHasCanonicalCommentRule,
           lintSource: new FileSourceInstance({
             filePath: declarationGroup.filePath,

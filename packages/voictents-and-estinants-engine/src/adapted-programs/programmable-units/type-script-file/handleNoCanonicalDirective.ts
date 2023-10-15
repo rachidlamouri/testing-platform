@@ -1,5 +1,5 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { LintAssertionZorn } from '../linting/lintAssertion';
+import { LintAssertionId } from '../linting/lintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   LintAssertionOmissionInstance,
@@ -43,7 +43,7 @@ export const handleNoCanonicalDirective = buildProgrammedTransform({
     ) {
       return [
         new LintAssertionOmissionInstance({
-          omittedAssertionId: new LintAssertionZorn({
+          omittedAssertionId: new LintAssertionId({
             rule: typeScriptFileHasCanonicalDeclarationRule,
             lintSource: new FileSourceInstance({
               filePath: commentGroup.filePath,
