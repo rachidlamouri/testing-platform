@@ -35,7 +35,7 @@ export const omitProgramCanonicalExportRequirement = buildProgrammedTransform({
   .onTransform((engineFile) => {
     return new LintAssertionOmissionInstance({
       omitterSource,
-      omittedAssertionZorn: new LintAssertionZorn({
+      omittedAssertionId: new LintAssertionZorn({
         rule: typeScriptFileHasCanonicalDeclarationRule,
         lintSource: new FileSourceInstance({
           filePath: engineFile.file.filePath.serialized,

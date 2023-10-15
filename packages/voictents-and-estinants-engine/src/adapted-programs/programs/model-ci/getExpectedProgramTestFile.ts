@@ -1,16 +1,16 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  BASH_FILE_GEPP,
-  BashFileVoque,
+  BASH_FILE_COLLECTION_ID,
+  BashFileStreamMetatype,
 } from '../../programmable-units/bash-file/bashFile';
 import {
-  EXPECTED_PROGRAM_TEST_FILE_GEPP,
+  EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID,
   ExpectedProgramTestFileInstance,
-  ExpectedProgramTestFileVoque,
+  ExpectedProgramTestFileStreamMetatype,
 } from './expectedProgramTestFile';
 import {
-  EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP,
-  ExpectedProgramTestFileConfigurationVoque,
+  EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_COLLECTION_ID,
+  ExpectedProgramTestFileConfigurationStreamMetatype,
 } from './expectedProgramTestFileConfiguration';
 
 /**
@@ -19,11 +19,11 @@ import {
 export const getExpectedProgramTestFile = buildProgrammedTransform({
   name: 'getExpectedProgramTestFile',
 })
-  .fromItem2<ExpectedProgramTestFileConfigurationVoque>({
-    collectionId: EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP,
+  .fromItem2<ExpectedProgramTestFileConfigurationStreamMetatype>({
+    collectionId: EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_COLLECTION_ID,
   })
-  .andFromItemTuple2<BashFileVoque, [string]>({
-    collectionId: BASH_FILE_GEPP,
+  .andFromItemTuple2<BashFileStreamMetatype, [string]>({
+    collectionId: BASH_FILE_COLLECTION_ID,
     getRightKeyTuple: (expectedProgram) => {
       return [expectedProgram.item.testFilePath];
     },
@@ -31,8 +31,8 @@ export const getExpectedProgramTestFile = buildProgrammedTransform({
       return file.item.filePath.serialized;
     },
   })
-  .toItem2<ExpectedProgramTestFileVoque>({
-    collectionId: EXPECTED_PROGRAM_TEST_FILE_GEPP,
+  .toItem2<ExpectedProgramTestFileStreamMetatype>({
+    collectionId: EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID,
   })
   .onTransform((configuration, [testFile]) => {
     return new ExpectedProgramTestFileInstance({

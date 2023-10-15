@@ -7,14 +7,14 @@ import {
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { TypeScriptFile } from '../../programmable-units/type-script-file/typeScriptFile';
 
-const EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ZORN_TEMPLATE = [
+const EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ID_TEMPLATE = [
   'testFilePath',
 ] as const satisfies GenericComplexIdTemplate;
-type ExpectedProgramTestFileConfigurationZornTemplate =
-  typeof EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ZORN_TEMPLATE;
-class ExpectedProgramTestFileConfigurationZorn extends ComplexId<ExpectedProgramTestFileConfigurationZornTemplate> {
-  get rawTemplate(): ExpectedProgramTestFileConfigurationZornTemplate {
-    return EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ZORN_TEMPLATE;
+type ExpectedProgramTestFileConfigurationIdTemplate =
+  typeof EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ID_TEMPLATE;
+class ExpectedProgramTestFileConfigurationId extends ComplexId<ExpectedProgramTestFileConfigurationIdTemplate> {
+  get rawTemplate(): ExpectedProgramTestFileConfigurationIdTemplate {
+    return EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_ID_TEMPLATE;
   }
 }
 
@@ -30,7 +30,7 @@ type ExpectedProgramTestFileConfigurationConstructorInput = {
 type ExpectedProgramTestFileConfiguration = SimplifyN<
   [
     {
-      id: ExpectedProgramTestFileConfigurationZorn;
+      id: ExpectedProgramTestFileConfigurationId;
     },
     ExpectedProgramTestFileConfigurationConstructorInput,
   ]
@@ -61,7 +61,7 @@ export const { ExpectedProgramTestFileConfigurationInstance } =
       transformInput: (input) => {
         const { testFilePath } = input;
 
-        const id = new ExpectedProgramTestFileConfigurationZorn({
+        const id = new ExpectedProgramTestFileConfigurationId({
           testFilePath,
         });
 
@@ -73,14 +73,14 @@ export const { ExpectedProgramTestFileConfigurationInstance } =
     })
     .assemble();
 
-export const EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP =
+export const EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_COLLECTION_ID =
   'expected-program-test-file-configuration';
 
-type ExpectedProgramTestFileConfigurationGepp =
-  typeof EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP;
+type ExpectedProgramTestFileConfigurationCollectionId =
+  typeof EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_COLLECTION_ID;
 
-export type ExpectedProgramTestFileConfigurationVoque =
+export type ExpectedProgramTestFileConfigurationStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    ExpectedProgramTestFileConfigurationGepp,
+    ExpectedProgramTestFileConfigurationCollectionId,
     ExpectedProgramTestFileConfiguration
   >;

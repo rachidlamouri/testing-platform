@@ -9,8 +9,8 @@ import {
   LintAssertionStreamMetatype,
 } from '../../programmable-units/linting/lintAssertion';
 import {
-  EXPECTED_PROGRAM_TEST_FILE_GEPP,
-  ExpectedProgramTestFileVoque,
+  EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID,
+  ExpectedProgramTestFileStreamMetatype,
 } from './expectedProgramTestFile';
 import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/estinantSource';
 import { TypedRule } from '../../programmable-units/linting/rule';
@@ -22,11 +22,11 @@ import {
   LintAssertionOmissionStreamMetatype,
 } from '../../programmable-units/linting/lintAssertionOmission';
 
-const ESTINANT_NAME = 'assertProgramTestFileIsValid' as const;
+const PROGRAMMED_TRANSFORM_NAME = 'assertProgramTestFileIsValid' as const;
 
 const ruleSource = new ProgrammedTransformSourceInstance({
   filePath: posix.relative('', __filename),
-  programmedTransformName: ESTINANT_NAME,
+  programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
 });
 
 const programTestFileExitsImmediately = new TypedRule<{ testFilePath: string }>(
@@ -95,10 +95,10 @@ const programTestFileMakesAnAssertion = new TypedRule<MessageContext>({
  * Enforces the structure of a program test file
  */
 export const assertProgramTestFileIsValid = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
-  .fromItem2<ExpectedProgramTestFileVoque>({
-    collectionId: EXPECTED_PROGRAM_TEST_FILE_GEPP,
+  .fromItem2<ExpectedProgramTestFileStreamMetatype>({
+    collectionId: EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID,
   })
   .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
@@ -221,7 +221,7 @@ export const assertProgramTestFileIsValid = buildProgrammedTransform({
       ? assertionList.map((assertion) => {
           return new LintAssertionOmissionInstance({
             omitterSource: ruleSource,
-            omittedAssertionZorn: assertion.id,
+            omittedAssertionId: assertion.id,
           });
         })
       : [];

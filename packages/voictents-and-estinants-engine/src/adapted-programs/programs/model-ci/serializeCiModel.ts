@@ -1,8 +1,8 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { CI_MODEL_GEPP, CiModelVoque } from './ciModel';
+import { CI_MODEL_COLLECTION_ID, CiModelStreamMetatype } from './ciModel';
 import {
-  SERIALIZED_CI_MODEL_GEPP,
-  SerializedCiModelVoque,
+  SERIALIZED_CI_MODEL_COLLECTION_ID,
+  SerializedCiModelStreamMetatype,
 } from './serializedCiModel';
 
 const PRINT_NEW_LINE = 'printf "\\n"';
@@ -13,11 +13,11 @@ const PRINT_NEW_LINE = 'printf "\\n"';
 export const serializeCiModel = buildProgrammedTransform({
   name: 'serializeCiModel',
 })
-  .fromItem2<CiModelVoque>({
-    collectionId: CI_MODEL_GEPP,
+  .fromItem2<CiModelStreamMetatype>({
+    collectionId: CI_MODEL_COLLECTION_ID,
   })
-  .toItem2<SerializedCiModelVoque>({
-    collectionId: SERIALIZED_CI_MODEL_GEPP,
+  .toItem2<SerializedCiModelStreamMetatype>({
+    collectionId: SERIALIZED_CI_MODEL_COLLECTION_ID,
   })
   .onTransform((ciModel) => {
     const serializedModelLineList = [
@@ -44,7 +44,7 @@ export const serializeCiModel = buildProgrammedTransform({
 
     return {
       id: ciModel.id,
-      grition: serializedModelLineList,
+      subitem: serializedModelLineList,
     };
   })
   .assemble();

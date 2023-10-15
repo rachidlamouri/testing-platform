@@ -11,16 +11,17 @@ import {
   EngineProgramLocator3StreamMetatype,
 } from '../../programmable-units/engine-program/engineProgramLocator3';
 import {
-  EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP,
+  EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_COLLECTION_ID,
   ExpectedProgramTestFileConfigurationInstance,
-  ExpectedProgramTestFileConfigurationVoque,
+  ExpectedProgramTestFileConfigurationStreamMetatype,
 } from './expectedProgramTestFileConfiguration';
 
-const ESTINANT_NAME = 'getExpectedProgramTestFileConfiguration' as const;
+const PROGRAMMED_TRANSFORM_NAME =
+  'getExpectedProgramTestFileConfiguration' as const;
 
 const requestor = new ProgrammedTransformSourceInstance({
   filePath: posix.relative('', __filename),
-  programmedTransformName: ESTINANT_NAME,
+  programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
 });
 
 /**
@@ -28,7 +29,7 @@ const requestor = new ProgrammedTransformSourceInstance({
  */
 export const getExpectedProgramTestFileConfiguration = buildProgrammedTransform(
   {
-    name: ESTINANT_NAME,
+    name: PROGRAMMED_TRANSFORM_NAME,
   },
 )
   .fromItem2<EngineProgramLocator3StreamMetatype>({
@@ -37,8 +38,8 @@ export const getExpectedProgramTestFileConfiguration = buildProgrammedTransform(
   .toItem2<FileExistenceAsserterInputStreamMetatype>({
     collectionId: FILE_EXISTENCE_ASSERTER_INPUT_COLLECTION_ID,
   })
-  .toItem2<ExpectedProgramTestFileConfigurationVoque>({
-    collectionId: EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP,
+  .toItem2<ExpectedProgramTestFileConfigurationStreamMetatype>({
+    collectionId: EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_COLLECTION_ID,
   })
   .onTransform((programLocator) => {
     const extensionlessFileName =
@@ -53,7 +54,7 @@ export const getExpectedProgramTestFileConfiguration = buildProgrammedTransform(
           filePath: expectedTestFilePath,
           requestor,
         }),
-      [EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_GEPP]:
+      [EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_COLLECTION_ID]:
         new ExpectedProgramTestFileConfigurationInstance({
           programName: programLocator.programName,
           programFile: programLocator.engineProgramFile,

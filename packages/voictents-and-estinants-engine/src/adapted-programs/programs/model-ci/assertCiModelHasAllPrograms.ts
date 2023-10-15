@@ -1,6 +1,10 @@
 import assert from 'assert';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { CI_MODEL_GEPP, CI_MODEL_ZORN, CiModelVoque } from './ciModel';
+import {
+  CI_MODEL_COLLECTION_ID,
+  CI_MODEL_ID,
+  CiModelStreamMetatype,
+} from './ciModel';
 import {
   PROGRAM_ERROR_COLLECTION_ID,
   ProgramErrorElementLocatorTypeName,
@@ -14,17 +18,18 @@ import {
 } from '../../programmable-units/engine-program/engineProgramLocator3';
 import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifiableItem';
 import {
-  EXPECTED_PROGRAM_TEST_FILE_GEPP,
-  ExpectedProgramTestFileVoque,
+  EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID,
+  ExpectedProgramTestFileStreamMetatype,
 } from './expectedProgramTestFile';
 
-const ESTINANT_NAME = 'assertCiModelHasAllPrograms' as const;
-type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
+const PROGRAMMED_TRANSFORM_NAME = 'assertCiModelHasAllPrograms' as const;
+type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
+type ReportingLocator =
+  ReportingProgrammedTransformLocator<ProgrammedTransformName>;
 const reporterLocator: ReportingLocator = {
   typeName:
     ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
   filePath: __filename,
 };
 
@@ -33,26 +38,26 @@ const reporterLocator: ReportingLocator = {
  * each engine program identified by the engine program locator
  */
 export const assertCiModelHasAllPrograms = buildProgrammedTransform({
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
 })
   .fromCollection2<EngineProgramLocator3StreamMetatype>({
     collectionId: ENGINE_PROGRAM_LOCATOR_3_COLLECTION_ID,
   })
-  .andFromItemTuple2<CiModelVoque, [IdentifiableItemId]>({
+  .andFromItemTuple2<CiModelStreamMetatype, [IdentifiableItemId]>({
     // TODO: make a better pattern for singletons
-    collectionId: CI_MODEL_GEPP,
-    getRightKeyTuple: () => [CI_MODEL_ZORN],
+    collectionId: CI_MODEL_COLLECTION_ID,
+    getRightKeyTuple: () => [CI_MODEL_ID],
     getRightKey: (rightInput) => rightInput.item.id,
   })
-  .andFromCollection2<ExpectedProgramTestFileVoque>({
-    collectionId: EXPECTED_PROGRAM_TEST_FILE_GEPP,
+  .andFromCollection2<ExpectedProgramTestFileStreamMetatype>({
+    collectionId: EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .onTransform((programLocatorList, [ciModel], expectedTestFileVoictent) => {
+  .onTransform((programLocatorList, [ciModel], expectedTestFileCollection) => {
     const testFilePathByProgramFilePath = new Map(
-      expectedTestFileVoictent.map((expectedTestFile) => {
+      expectedTestFileCollection.map((expectedTestFile) => {
         return [
           expectedTestFile.programFile.filePath.serialized,
           expectedTestFile.testFile.filePath.serialized,

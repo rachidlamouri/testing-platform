@@ -63,7 +63,7 @@ export const auditLintAssertionOmissions = buildProgrammedTransform({
     ];
 
     const invalidOmissionList = omissionCombination.filter((omission) => {
-      return !assertionSet.has(omission.omittedAssertionZorn.forHuman);
+      return !assertionSet.has(omission.omittedAssertionId.forHuman);
     });
 
     const outputList = invalidOmissionList.map((omission) => {

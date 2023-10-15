@@ -24,16 +24,19 @@ type CiModel = {
   programTestGroupList: ProgramTestGroup[];
 };
 
-export const CI_MODEL_GEPP = 'ci-model';
+export const CI_MODEL_COLLECTION_ID = 'ci-model';
 
-type CiModelGepp = typeof CI_MODEL_GEPP;
+type CiModelCollectionId = typeof CI_MODEL_COLLECTION_ID;
 
-export type CiModelVoque = StandardInMemoryStreamMetatype<CiModelGepp, CiModel>;
+export type CiModelStreamMetatype = StandardInMemoryStreamMetatype<
+  CiModelCollectionId,
+  CiModel
+>;
 
-export const CI_MODEL_ZORN = 'CI_MODEL';
+export const CI_MODEL_ID = 'CI_MODEL';
 
 export const CI_MODEL: CiModel = {
-  id: CI_MODEL_ZORN,
+  id: CI_MODEL_ID,
   initialCommandList: ['set -e', '', 'echo "Starting ci.sh"', PRINT_NEW_LINE],
   finalCommandList: ['echo "Finished without errors!"'],
   programTestGroupList: [

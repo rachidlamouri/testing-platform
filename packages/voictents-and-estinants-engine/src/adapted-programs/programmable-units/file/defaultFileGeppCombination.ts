@@ -4,7 +4,7 @@ import {
   CollectionIdCombination,
 } from '../../../core/types/collection/collectionId';
 import { buildCollectionIdCombination } from '../../../adapter/engine/runEngine';
-import { BASH_FILE_GEPP } from '../bash-file/bashFile';
+import { BASH_FILE_COLLECTION_ID } from '../bash-file/bashFile';
 import { HTML_FILE_GEPP } from '../html-file/htmlFile';
 import { YAML_FILE_GEPP } from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
@@ -30,7 +30,7 @@ type DefaultGeppByFileExtensionSuffixIdentifier = Record<
 >;
 
 const defaultFileGeppByFileExtensionSuffixIdentifier = {
-  [FileExtensionSuffixIdentifier.Bash]: BASH_FILE_GEPP,
+  [FileExtensionSuffixIdentifier.Bash]: BASH_FILE_COLLECTION_ID,
   [FileExtensionSuffixIdentifier.Html]: HTML_FILE_GEPP,
   [FileExtensionSuffixIdentifier.TypeScript]: TYPE_SCRIPT_FILE_COLLECTION_ID,
   [FileExtensionSuffixIdentifier.Yaml]: YAML_FILE_GEPP,

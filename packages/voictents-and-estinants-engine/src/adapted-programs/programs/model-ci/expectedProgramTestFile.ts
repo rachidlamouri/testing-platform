@@ -56,12 +56,14 @@ export const { ExpectedProgramTestFileInstance } =
     })
     .assemble();
 
-export const EXPECTED_PROGRAM_TEST_FILE_GEPP = 'expected-program-test-file';
+export const EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID =
+  'expected-program-test-file';
 
-type ExpectedProgramTestFileGepp = typeof EXPECTED_PROGRAM_TEST_FILE_GEPP;
+type ExpectedProgramTestFileCollectionId =
+  typeof EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID;
 
-export type ExpectedProgramTestFileVoque =
+export type ExpectedProgramTestFileStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    ExpectedProgramTestFileGepp,
+    ExpectedProgramTestFileCollectionId,
     ExpectedProgramTestFile
   >;

@@ -14,7 +14,7 @@ import { Source } from './source/source';
 
 const LINT_ASSERTION_OMISSION_ZORN_TEMPLATE = [
   ['omitterSource', ComplexId.ANY],
-  ['omittedAssertionZorn', LintAssertionZorn],
+  ['omittedAssertionId', LintAssertionZorn],
 ] as const satisfies GenericComplexIdTemplate;
 type LintAssertionOmissionZornTemplate =
   typeof LINT_ASSERTION_OMISSION_ZORN_TEMPLATE;
@@ -26,7 +26,7 @@ class LintAssertionOmissionZorn extends ComplexId<LintAssertionOmissionZornTempl
 
 type LintAssertionOmissionConstructorInput = {
   omitterSource: Source;
-  omittedAssertionZorn: LintAssertionZorn;
+  omittedAssertionId: LintAssertionZorn;
 };
 
 /**
@@ -49,7 +49,7 @@ export const { LintAssertionOmissionInstance } = buildNamedConstructorFunction({
     // keep this as a multiline list
     'id',
     'omitterSource',
-    'omittedAssertionZorn',
+    'omittedAssertionId',
   ] as const satisfies readonly (keyof LintAssertionOmission)[],
 })
   .withTypes<LintAssertionOmissionConstructorInput, LintAssertionOmission>({
@@ -61,11 +61,11 @@ export const { LintAssertionOmissionInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { omitterSource, omittedAssertionZorn } = input;
+      const { omitterSource, omittedAssertionId } = input;
 
       const id = new LintAssertionOmissionZorn({
         omitterSource,
-        omittedAssertionZorn,
+        omittedAssertionId,
       });
 
       return {
@@ -103,7 +103,7 @@ export class LintAssertionOmissionCollection<
   private omittedZornSet = new Set<string>();
 
   addItem(hubblepup: LintAssertionOmission): void {
-    this.omittedZornSet.add(hubblepup.omittedAssertionZorn.forHuman);
+    this.omittedZornSet.add(hubblepup.omittedAssertionId.forHuman);
 
     super.addItem(hubblepup);
   }
@@ -129,7 +129,7 @@ const fileSource = new FileSourceInstance({
   filePath: __filename,
 });
 export const NULL_OMISSION = new LintAssertionOmissionInstance({
-  omittedAssertionZorn: new LintAssertionZorn({
+  omittedAssertionId: new LintAssertionZorn({
     rule: new TypedRule({
       name: 'null-omission-rule',
       source: fileSource,

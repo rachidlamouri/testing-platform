@@ -43,7 +43,7 @@ export const handleNoCanonicalDirective = buildProgrammedTransform({
     ) {
       return [
         new LintAssertionOmissionInstance({
-          omittedAssertionZorn: new LintAssertionZorn({
+          omittedAssertionId: new LintAssertionZorn({
             rule: typeScriptFileHasCanonicalDeclarationRule,
             lintSource: new FileSourceInstance({
               filePath: commentGroup.filePath,

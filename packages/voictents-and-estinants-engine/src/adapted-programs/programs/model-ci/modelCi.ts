@@ -26,7 +26,11 @@ import { getTypeScriptFileImportList } from '../../programmable-units/type-scrip
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { assertCiModelHasAllPrograms } from './assertCiModelHasAllPrograms';
 import { assertCiFileIsUpToDate } from './assertCiFileIsUpToDate';
-import { CI_MODEL, CI_MODEL_GEPP, CiModelVoque } from './ciModel';
+import {
+  CI_MODEL,
+  CI_MODEL_COLLECTION_ID,
+  CiModelStreamMetatype,
+} from './ciModel';
 import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorVoictent';
@@ -74,8 +78,8 @@ runEngine({
         ADAPTED_ENGINE_FUNCTION_CONFIGURATION,
       ],
     }),
-    new InMemoryCollection<CiModelVoque>({
-      collectionId: CI_MODEL_GEPP,
+    new InMemoryCollection<CiModelStreamMetatype>({
+      collectionId: CI_MODEL_COLLECTION_ID,
       initialItemEggTuple: [CI_MODEL],
     }),
   ] as const,

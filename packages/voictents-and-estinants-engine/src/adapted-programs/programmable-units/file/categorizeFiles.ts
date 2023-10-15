@@ -7,7 +7,11 @@ import { YAML_FILE_GEPP, YamlFile, YamlFileVoque } from '../yaml-file/yamlFile';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
 import { HtmlFile, HTML_FILE_GEPP, HtmlFileVoque } from '../html-file/htmlFile';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
-import { BASH_FILE_GEPP, BashFile, BashFileVoque } from '../bash-file/bashFile';
+import {
+  BASH_FILE_COLLECTION_ID,
+  BashFile,
+  BashFileStreamMetatype,
+} from '../bash-file/bashFile';
 import { FILE_COLLECTION_ID, FileStreamMetatype } from './file';
 
 /**
@@ -20,8 +24,8 @@ export const categorizeFiles = buildProgrammedTransform({
   .fromItem2<FileStreamMetatype>({
     collectionId: FILE_COLLECTION_ID,
   })
-  .toItemOnCondition<BashFileVoque>({
-    collectionId: BASH_FILE_GEPP,
+  .toItemOnCondition<BashFileStreamMetatype>({
+    collectionId: BASH_FILE_COLLECTION_ID,
     transform: (file): file is BashFile =>
       file.nodePath.name.extension.suffixIdentifier ===
       FileExtensionSuffixIdentifier.Bash,

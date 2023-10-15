@@ -194,7 +194,7 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
 ].map(({ importedFilePath, importedIdentifierName }) => {
   return new LintAssertionOmissionInstance({
     omitterSource,
-    omittedAssertionZorn: new LintAssertionZorn({
+    omittedAssertionId: new LintAssertionZorn({
       rule: noUnusedExportRule,
       lintSource: new ExportedIdentifierSourceInstance({
         filePath: importedFilePath,

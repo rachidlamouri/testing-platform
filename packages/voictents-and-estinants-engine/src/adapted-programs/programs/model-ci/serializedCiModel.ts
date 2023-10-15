@@ -5,15 +5,15 @@ import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agno
  */
 type SerializedCiModel = {
   id: string;
-  grition: string;
+  subitem: string;
 };
 
-export const SERIALIZED_CI_MODEL_GEPP = 'serialized-ci-model';
+export const SERIALIZED_CI_MODEL_COLLECTION_ID = 'serialized-ci-model';
 
-type SerializedCiModelGepp = typeof SERIALIZED_CI_MODEL_GEPP;
+type SerializedCiModelCollectionId = typeof SERIALIZED_CI_MODEL_COLLECTION_ID;
 
-export type SerializedCiModelVoque =
+export type SerializedCiModelStreamMetatype =
   InMemoryIdentifiableItem2ListStreamMetatype<
-    SerializedCiModelGepp,
+    SerializedCiModelCollectionId,
     SerializedCiModel
   >;

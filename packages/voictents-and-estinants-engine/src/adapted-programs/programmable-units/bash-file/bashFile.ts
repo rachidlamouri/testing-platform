@@ -7,11 +7,11 @@ import { FileSystemNodeStreamMetatype } from '../file/fileSystemNodeVoictent';
  */
 export type BashFile = File<FileExtensionSuffixIdentifier.Bash>;
 
-export const BASH_FILE_GEPP = 'bash-file';
+export const BASH_FILE_COLLECTION_ID = 'bash-file';
 
-type BashFileGepp = typeof BASH_FILE_GEPP;
+type BashFileGepp = typeof BASH_FILE_COLLECTION_ID;
 
-export type BashFileVoque = FileSystemNodeStreamMetatype<
+export type BashFileStreamMetatype = FileSystemNodeStreamMetatype<
   BashFileGepp,
   BashFile
 >;

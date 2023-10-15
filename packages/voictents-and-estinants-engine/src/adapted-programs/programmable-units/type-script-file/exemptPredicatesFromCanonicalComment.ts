@@ -87,7 +87,7 @@ export const exemptPredicatesFromCanonicalComment = buildProgrammedTransform({
           filePath: posix.resolve('', __filename),
           programmedTransformName: ESTINANT_NAME,
         }),
-        omittedAssertionZorn: new LintAssertionZorn({
+        omittedAssertionId: new LintAssertionZorn({
           rule: typeScriptFileHasCanonicalCommentRule,
           lintSource: new FileSourceInstance({
             filePath: declarationGroup.filePath,
