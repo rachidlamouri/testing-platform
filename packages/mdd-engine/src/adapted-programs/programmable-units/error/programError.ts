@@ -67,6 +67,8 @@ export type GenericProgramErrorEgg =
  * The information needed to identify the source of an error, the reporter of an
  * error and any surrounding context
  *
+ * @todo remove the ReporterLocator concept in favor of the source concept. You can use LocatableError as well
+ *
  * @readableName ProgramError
  *
  * @canonicalDeclaration

@@ -252,6 +252,7 @@ const buildSerializableCollection = (
     collectionId: serializerCollectionId,
     programFileCache,
     initialItemEggTuple: [],
+    continueOnDuplicate: true,
   });
 
   return serializableCollection;
@@ -325,6 +326,7 @@ const getInferredFileSystemNodeCollectionTuple = (
     return new FileSystemNodeCollection({
       collectionId,
       initialItemEggTuple: [],
+      continueOnDuplicate: false,
     });
   });
 

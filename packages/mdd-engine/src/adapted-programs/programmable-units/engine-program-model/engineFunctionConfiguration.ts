@@ -32,6 +32,8 @@ export type AdaptedEngineFunctionConfiguration = {
 /**
  * The information needed to identify an engine program and to parse a program
  * call
+ *
+ * @todo rename to EngineRunnerConfiguration
  */
 export type EngineFunctionConfiguration =
   | CoreEngineFunction2Configuration

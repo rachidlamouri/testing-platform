@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree';
-import { TypeScriptNode, isNode } from './isNode';
+import { TypeScriptNode, isNode, NullishableTypeScriptNode } from './isNode';
 import {
   ObjectExpressionWithIdentifierProperties,
   isObjectExpressionWithIdentifiableProperties,
@@ -9,6 +9,8 @@ import {
   TypeScriptTypeParameterNodeTypeTuple,
   isTypeScriptTypeParameterInstantiationWithParameterTuple,
 } from './isTypeScriptTypeParameterInstantiation';
+import { isNotNullish } from '../nil/isNotNullish';
+import { isIdentifier } from './isIdentifier';
 
 export const isNewExpression = (
   node: TypeScriptNode,
@@ -46,3 +48,12 @@ export const isNewExpressionWithSpecificTypeParameters = <
     node.typeParameters,
     parameterNodeTypeTuple,
   );
+
+export type IdentifiableNewExpression = TSESTree.NewExpression & {
+  callee: TSESTree.Identifier;
+};
+
+export const isIdentifiableNewExpression = (
+  node: NullishableTypeScriptNode,
+): node is IdentifiableNewExpression =>
+  isNotNullish(node) && isNewExpression(node) && isIdentifier(node.callee);

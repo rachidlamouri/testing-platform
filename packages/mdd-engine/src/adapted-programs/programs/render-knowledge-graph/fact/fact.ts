@@ -50,6 +50,7 @@ export class FactCollection extends BaseInMemoryIdentifiableItem2Collection<
     super({
       collectionId: FACT_COLLECTION_ID,
       initialItemEggTuple: [],
+      continueOnDuplicate: false,
     });
   }
 

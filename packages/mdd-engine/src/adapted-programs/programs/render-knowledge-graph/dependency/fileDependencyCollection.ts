@@ -34,6 +34,7 @@ export class FileDependencyCollection extends BaseInMemoryIdentifiableItem2Colle
     super({
       collectionId: FILE_DEPENDENCY_COLLECTION_ID,
       initialItemEggTuple: [],
+      continueOnDuplicate: false,
     });
   }
 

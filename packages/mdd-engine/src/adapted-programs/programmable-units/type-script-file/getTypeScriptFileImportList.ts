@@ -10,6 +10,7 @@ import {
 import {
   TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
   TypeScriptFileImport,
+  TypeScriptFileImportList,
   TypeScriptFileImportListStreamMetatype,
 } from './typeScriptFileImportList';
 import { splitList } from '../../../package-agnostic-utilities/array/splitList';
@@ -122,11 +123,12 @@ export const getTypeScriptFileImportList = buildProgrammedTransform({
 
     return {
       [PROGRAM_ERROR_COLLECTION_ID]: errorList,
-      [TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID]: {
-        id: parsedTypeScriptFile.id,
-        filePath: parsedTypeScriptFile.filePath,
-        list: importList,
-      },
+      [TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID]:
+        new TypeScriptFileImportList({
+          id: parsedTypeScriptFile.id,
+          filePath: parsedTypeScriptFile.filePath,
+          list: importList,
+        }),
     };
   })
   .assemble();

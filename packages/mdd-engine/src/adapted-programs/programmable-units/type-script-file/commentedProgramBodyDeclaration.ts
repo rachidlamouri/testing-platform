@@ -5,6 +5,8 @@ import { CategorizedComment } from './comment/categorized/categorizedComment';
 
 /**
  * A top level declaration of a file and its associated comment
+ *
+ * @todo rename this to CommentedProgramBodyStatement
  */
 export type CommentedProgramBodyDeclaration<
   TBodyStatement extends TSESTree.ProgramStatement = TSESTree.ProgramStatement,

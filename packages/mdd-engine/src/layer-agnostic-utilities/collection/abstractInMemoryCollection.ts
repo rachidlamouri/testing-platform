@@ -26,11 +26,11 @@ export type ItemEggState = {
   thisTick: boolean | null;
 };
 
-type InMemoryCollectionConstructorInput<
+export type InMemoryCollectionConstructorInput<
   TStreamMetatype extends GenericInMemoryStreamMetatype,
 > = {
   collectionId: TStreamMetatype['collectionId'];
-  initialItemEggTuple: TStreamMetatype['itemEggStreamable'][];
+  initialItemEggTuple?: TStreamMetatype['itemEggStreamable'][];
 };
 
 /**
@@ -70,7 +70,7 @@ export abstract class AbstractInMemoryCollection<
 
   constructor({
     collectionId,
-    initialItemEggTuple,
+    initialItemEggTuple = [],
   }: InMemoryCollectionConstructorInput<TStreamMetatype>) {
     this.collectionId = collectionId;
     this.initialItemEggTuple = initialItemEggTuple;
