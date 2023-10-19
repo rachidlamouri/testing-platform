@@ -13,6 +13,7 @@ type ParsedTypeScriptFile = {
   // TODO: remove the string file path and rename this object to filePath
   filePathObject: FilePath;
   program: TSESTree.Program;
+  hasCode: boolean;
 };
 
 export const PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID = 'parsed-type-script-file';

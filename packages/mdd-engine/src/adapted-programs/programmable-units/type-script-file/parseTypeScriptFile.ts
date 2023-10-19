@@ -71,6 +71,7 @@ export const parseTypeScriptFile = buildProgrammedTransform({
             filePath: typeScriptFileConfiguration.sourceFilePath,
             filePathObject: typeScriptFileConfiguration.sourceFilePathObject,
             program,
+            hasCode: program.body.length > 0,
           },
         ],
         [PROGRAM_ERROR_COLLECTION_ID]: [],

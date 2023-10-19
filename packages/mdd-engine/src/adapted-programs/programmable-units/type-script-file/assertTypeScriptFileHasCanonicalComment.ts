@@ -14,6 +14,10 @@ import {
   FileCommentedProgramBodyDeclarationGroupStreamMetatype,
 } from './fileCommentedProgramBodyDeclarationGroup';
 import { FileSourceInstance } from '../linting/source/fileSource';
+import {
+  PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
+  ParsedTypeScriptFileStreamMetatype,
+} from './parsedTypeScriptFile';
 
 const PROGRAMMED_TRANSFORM_NAME =
   'assertTypeScriptFileHasCanonicalComment' as const;
@@ -71,13 +75,25 @@ export const assertTypeScriptFileHasCanonicalComment = buildProgrammedTransform(
     name: PROGRAMMED_TRANSFORM_NAME,
   },
 )
-  .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
+  .fromItem2<ParsedTypeScriptFileStreamMetatype>({
+    collectionId: PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
+  })
+  .andFromItemTuple2<
+    FileCommentedProgramBodyDeclarationGroupStreamMetatype,
+    [string]
+  >({
     collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
+    getRightKeyTuple: (file) => {
+      return [file.item.filePathObject.serialized];
+    },
+    getRightKey: (file) => {
+      return file.item.filePathObject.serialized;
+    },
   })
   .toItem2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .onTransform((declarationGroup) => {
+  .onTransform((parsedFile, [declarationGroup]) => {
     const { filePath } = declarationGroup;
     const trimmedCanonicalCommentText =
       declarationGroup.canonicalComment?.description?.trim() ?? null;
@@ -93,8 +109,9 @@ export const assertTypeScriptFileHasCanonicalComment = buildProgrammedTransform(
         filePath: declarationGroup.filePath,
       }),
       isValid:
-        trimmedCanonicalCommentText !== null &&
-        trimmedCanonicalCommentText !== '',
+        !parsedFile.hasCode ||
+        (trimmedCanonicalCommentText !== null &&
+          trimmedCanonicalCommentText !== ''),
       errorMessageContext,
       context: {
         filePath,
