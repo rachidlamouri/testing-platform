@@ -8,6 +8,8 @@ import { isNotNullish } from '../../../../../package-agnostic-utilities/nil/isNo
 import { parseExplicitCollectionInstanceTuple } from './collection-instance/parseExplicitCollectionInstanceTuple';
 import { isNullish } from '../../../../../package-agnostic-utilities/nil/isNullish';
 import { parseUninferableCollectionByCollectionId } from './collection-instance/parseUninferableCollectionByCollectionId';
+import { parseProgrammedTransformTuple } from './programmed-transform/parseProgrammedTransformTuple';
+import { ProgrammedTransformLocator } from '../../programmed-transform/programmedTransformLocator';
 
 const reporterSource = new FileSourceInstance({
   absoluteFilePath: __filename,
@@ -18,6 +20,7 @@ type AdaptedProgramFileParserOutput = {
   collectionDefinitionLocatorList: CollectionDefinitionLocator[];
   itemDefinitionLocatorList: ItemDefinitionLocator[];
   collectionInstanceSkeletonList: CollectionInstanceSkeleton[];
+  programmedTransformLocatorList: ProgrammedTransformLocator[];
 };
 
 /**
@@ -128,10 +131,54 @@ export const parseAdaptedProgramFile = (
       });
     });
 
+  const nullableParsedProgramTransformTuple =
+    parseProgrammedTransformTuple(adaptedParserContext);
+
+  const parsedProgramTransformTuple = nullableParsedProgramTransformTuple ?? [];
+
+  const unparseableProgrammedTransformTupleError =
+    nullableParsedProgramTransformTuple === null
+      ? [
+          new LocatableError({
+            message: `Unable able to parse programmed transform tuple. Expected an array literal with "as const"`,
+            reporterSource,
+            errorSource: programLocator.programFile.source,
+            context: {
+              programLocator,
+            },
+          }),
+        ]
+      : [];
+
+  const programmedTransformLocatorList =
+    parsedProgramTransformTuple.filter(isNotNullish);
+
+  const unparseableProgrammedTransformErrorList = programmedTransformLocatorList
+    .map((result, originalIndex) => {
+      return {
+        result,
+        originalIndex,
+      };
+    })
+    .filter(({ result }) => result === null)
+    .map(({ originalIndex }) => {
+      return new LocatableError({
+        message: `Unable to parse programmed transform entry ${originalIndex}`,
+        reporterSource,
+        errorSource: programLocator.programFile.source,
+        context: {
+          programLocator,
+          originalIndex,
+        },
+      });
+    });
+
   const errorList: LocatableError[] = [
     ...unparseableCollectionInstanceTupleError,
     ...unparseableUninferableCollectionByCollectionIdError,
     ...unparseableCollectionInstanceErrorList,
+    ...unparseableProgrammedTransformTupleError,
+    ...unparseableProgrammedTransformErrorList,
   ];
 
   return {
@@ -139,6 +186,7 @@ export const parseAdaptedProgramFile = (
     collectionDefinitionLocatorList,
     itemDefinitionLocatorList,
     collectionInstanceSkeletonList,
+    programmedTransformLocatorList,
   };
 
   // const engineCallCommentText = engineCallExpression?.commentText ?? null;

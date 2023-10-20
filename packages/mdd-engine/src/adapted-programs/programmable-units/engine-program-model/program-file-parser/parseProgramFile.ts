@@ -32,6 +32,10 @@ import {
   PROGRAM_LOCATOR_COLLECTION_ID,
   ProgramLocatorStreamMetatype,
 } from '../program/programLocator';
+import {
+  PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID,
+  ProgrammedTransformLocatorStreamMetatype,
+} from '../programmed-transform/programmedTransformLocator';
 import { parseAdaptedProgramFile } from './adapted-program-parser/parseAdaptedProgramFile';
 
 /**
@@ -76,6 +80,9 @@ export const parseProgramFile = buildProgrammedTransform({
   .toItemTuple2<CollectionInstanceSkeletonStreamMetatype>({
     collectionId: COLLECTION_INSTANCE_SKELETON_COLLECTION_ID,
   })
+  .toItemTuple2<ProgrammedTransformLocatorStreamMetatype>({
+    collectionId: PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID,
+  })
   .onTransform(
     (
       // keep multiline
@@ -93,6 +100,7 @@ export const parseProgramFile = buildProgrammedTransform({
           [COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID]: [],
           [ITEM_DEFINITION_LOCATOR_COLLECTION_ID]: [],
           [COLLECTION_INSTANCE_SKELETON_COLLECTION_ID]: [],
+          [PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID]: [],
           [PROGRAM_ERROR_COLLECTION_ID]: [
             new LocatableError({
               message: 'Unable to find engine call expression',
@@ -119,6 +127,7 @@ export const parseProgramFile = buildProgrammedTransform({
             [COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID]: [],
             [ITEM_DEFINITION_LOCATOR_COLLECTION_ID]: [],
             [COLLECTION_INSTANCE_SKELETON_COLLECTION_ID]: [],
+            [PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID]: [],
             [PROGRAM_ERROR_COLLECTION_ID]: [],
           };
         }
@@ -128,11 +137,13 @@ export const parseProgramFile = buildProgrammedTransform({
             itemDefinitionLocatorList,
             collectionInstanceSkeletonList,
             errorList,
+            programmedTransformLocatorList,
           } = parseAdaptedProgramFile({
             programLocator,
             fileImportGroup,
             engineCallExpression,
             engineCallParameterList,
+            bodyStatementGroup,
           });
           return {
             [COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID]:
@@ -141,6 +152,8 @@ export const parseProgramFile = buildProgrammedTransform({
             [COLLECTION_INSTANCE_SKELETON_COLLECTION_ID]:
               collectionInstanceSkeletonList,
             [PROGRAM_ERROR_COLLECTION_ID]: errorList,
+            [PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID]:
+              programmedTransformLocatorList,
           };
         }
       }
