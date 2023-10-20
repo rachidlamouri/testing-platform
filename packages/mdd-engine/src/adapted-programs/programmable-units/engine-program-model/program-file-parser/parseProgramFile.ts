@@ -33,6 +33,10 @@ import {
   ProgramLocatorStreamMetatype,
 } from '../program/programLocator';
 import {
+  PROGRAM_SKELETON_COLLECTION_ID,
+  ProgramSkeletonStreamMetatype,
+} from '../program/programSkeleton';
+import {
   PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID,
   ProgrammedTransformLocatorStreamMetatype,
 } from '../programmed-transform/programmedTransformLocator';
@@ -83,6 +87,9 @@ export const parseProgramFile = buildProgrammedTransform({
   .toItemTuple2<ProgrammedTransformLocatorStreamMetatype>({
     collectionId: PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID,
   })
+  .toItemTuple2<ProgramSkeletonStreamMetatype>({
+    collectionId: PROGRAM_SKELETON_COLLECTION_ID,
+  })
   .onTransform(
     (
       // keep multiline
@@ -111,6 +118,7 @@ export const parseProgramFile = buildProgrammedTransform({
               context: null,
             }),
           ],
+          [PROGRAM_SKELETON_COLLECTION_ID]: [],
         };
       }
 
@@ -129,6 +137,7 @@ export const parseProgramFile = buildProgrammedTransform({
             [COLLECTION_INSTANCE_SKELETON_COLLECTION_ID]: [],
             [PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID]: [],
             [PROGRAM_ERROR_COLLECTION_ID]: [],
+            [PROGRAM_SKELETON_COLLECTION_ID]: [],
           };
         }
         case EngineFunctionConfigurationTypeName.Adapted: {
@@ -138,6 +147,7 @@ export const parseProgramFile = buildProgrammedTransform({
             collectionInstanceSkeletonList,
             errorList,
             programmedTransformLocatorList,
+            programSkeleton,
           } = parseAdaptedProgramFile({
             programLocator,
             fileImportGroup,
@@ -154,6 +164,7 @@ export const parseProgramFile = buildProgrammedTransform({
             [PROGRAM_ERROR_COLLECTION_ID]: errorList,
             [PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID]:
               programmedTransformLocatorList,
+            [PROGRAM_SKELETON_COLLECTION_ID]: [programSkeleton],
           };
         }
       }

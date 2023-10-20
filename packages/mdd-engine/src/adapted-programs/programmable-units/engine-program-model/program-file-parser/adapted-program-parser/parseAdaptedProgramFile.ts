@@ -10,6 +10,7 @@ import { isNullish } from '../../../../../package-agnostic-utilities/nil/isNulli
 import { parseUninferableCollectionByCollectionId } from './collection-instance/parseUninferableCollectionByCollectionId';
 import { parseProgrammedTransformTuple } from './programmed-transform/parseProgrammedTransformTuple';
 import { ProgrammedTransformLocator } from '../../programmed-transform/programmedTransformLocator';
+import { ProgramSkeleton } from '../../program/programSkeleton';
 
 const reporterSource = new FileSourceInstance({
   absoluteFilePath: __filename,
@@ -21,6 +22,7 @@ type AdaptedProgramFileParserOutput = {
   itemDefinitionLocatorList: ItemDefinitionLocator[];
   collectionInstanceSkeletonList: CollectionInstanceSkeleton[];
   programmedTransformLocatorList: ProgrammedTransformLocator[];
+  programSkeleton: ProgramSkeleton;
 };
 
 /**
@@ -181,12 +183,20 @@ export const parseAdaptedProgramFile = (
     ...unparseableProgrammedTransformErrorList,
   ];
 
+  const programSkeleton = new ProgramSkeleton({
+    programLocator,
+    collectionDefinitionLocatorList,
+    collectionInstanceSkeletonList,
+    programmedTransformLocatorList,
+  });
+
   return {
     errorList,
     collectionDefinitionLocatorList,
     itemDefinitionLocatorList,
     collectionInstanceSkeletonList,
     programmedTransformLocatorList,
+    programSkeleton,
   };
 
   // const engineCallCommentText = engineCallExpression?.commentText ?? null;
