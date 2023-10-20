@@ -111,8 +111,6 @@ export abstract class BaseInMemoryIdentifiableItem2Collection<
   }
 
   addItem(hubblepup: TVoque['itemEggStreamable']): void {
-    super.addItem(hubblepup);
-
     const hubblepupZornLike = getIdLike(hubblepup);
     const humanReadableZorn = hubblepupZornLike.forHuman;
 
@@ -140,6 +138,7 @@ export abstract class BaseInMemoryIdentifiableItem2Collection<
 
       throw error;
     } else {
+      super.addItem(hubblepup);
       this.hubblepupPelueByZorn.set(humanReadableZorn, hubblepup);
     }
   }
