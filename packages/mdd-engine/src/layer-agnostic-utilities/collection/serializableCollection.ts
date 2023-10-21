@@ -13,6 +13,7 @@ type SerializableCollectionConstructorInput<
   collectionId: TStreamMetatype['collectionId'];
   initialItemEggTuple: TStreamMetatype['itemEggStreamable'][];
   programFileCache: ProgramFileCache;
+  continueOnDuplicate?: boolean;
 };
 
 /**
@@ -29,11 +30,13 @@ export class SerializableCollection<
     collectionId,
     initialItemEggTuple,
     programFileCache,
+    continueOnDuplicate,
   }: SerializableCollectionConstructorInput<TStreamMetatype>) {
     super({
       collectionId,
       initialItemEggTuple,
       programFileCache,
+      continueOnDuplicate,
     });
   }
 

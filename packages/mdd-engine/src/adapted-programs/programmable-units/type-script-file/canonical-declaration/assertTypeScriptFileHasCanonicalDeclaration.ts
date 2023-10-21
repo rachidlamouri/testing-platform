@@ -16,6 +16,10 @@ import {
 import { isNotNull } from '../../../../package-agnostic-utilities/nil/isNotNull';
 import { shishKebab } from '../../../../package-agnostic-utilities/case/shishKebab';
 import { assertNotNull } from '../../../../package-agnostic-utilities/nil/assertNotNull';
+import {
+  PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
+  ParsedTypeScriptFileStreamMetatype,
+} from '../parsedTypeScriptFile';
 
 const PROGRAMMED_TRANSFORM_NAME =
   'assertTypeScriptFileHasCanonicalDeclaration' as const;
@@ -61,19 +65,31 @@ export const assertTypeScriptFileHasCanonicalDeclaration =
   buildProgrammedTransform({
     name: PROGRAMMED_TRANSFORM_NAME,
   })
-    .fromItem2<FileCommentedProgramBodyDeclarationGroupStreamMetatype>({
+    .fromItem2<ParsedTypeScriptFileStreamMetatype>({
+      collectionId: PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
+    })
+    .andFromItemTuple2<
+      FileCommentedProgramBodyDeclarationGroupStreamMetatype,
+      [string]
+    >({
       collectionId: FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
+      getRightKeyTuple: (file) => {
+        return [file.item.filePathObject.serialized];
+      },
+      getRightKey: (file) => {
+        return file.item.filePathObject.serialized;
+      },
     })
     .toItem2<LintAssertionStreamMetatype>({
       collectionId: LINT_ASSERTION_COLLECTION_ID,
     })
-    .onTransform((group) => {
+    .onTransform((parsedFile, [group]) => {
       return new LintAssertion({
         rule: typeScriptFileHasCanonicalDeclarationRule,
         lintSource: new FileSourceInstance({
           filePath: group.filePath,
         }),
-        isValid: group.canonicalDeclaration !== null,
+        isValid: !parsedFile.hasCode || group.canonicalDeclaration !== null,
         errorMessageContext: {
           filePath: group.filePath,
           canonicalDeclarationLintMetadata:

@@ -15,6 +15,7 @@ import {
   FileStreamMetatype,
 } from '../../programmable-units/file/file';
 import { getProgramFileContents } from './getProgramFileContents';
+import { getFunctionFileContents } from './getFunctionFileContents';
 
 /**
  * Populates export declarations for a collection and all related types. It uses
@@ -67,6 +68,8 @@ export const scaffoldFile = buildProgrammedTransform({
           return getItemFileContents(relevantFileMetadata);
         case FileTypeName.Program:
           return getProgramFileContents(relevantFileMetadata);
+        case FileTypeName.Function:
+          return getFunctionFileContents(relevantFileMetadata);
       }
     })();
 

@@ -1,9 +1,9 @@
+import { posix } from 'path';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
   ComplexId,
 } from '../../../../package-agnostic-utilities/data-structure/id';
-import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { SourceTypeName } from './sourceTypeName';
 
 const FILE_SOURCE_ID_TEMPLATE = [
@@ -16,22 +16,20 @@ class FileSourceId extends ComplexId<FileSourceIdTemplate> {
   }
 }
 
-type FileSourceConstructorInput = {
-  filePath: string;
-};
+type FileSourceConstructorInput =
+  | {
+      filePath: string;
+    }
+  | { absoluteFilePath: string };
 
 /**
  * The information needed to find a file (which is just a filepath)
  */
-export type FileSource = SimplifyN<
-  [
-    {
-      typeName: SourceTypeName.FileSource;
-      id: FileSourceId;
-    },
-    FileSourceConstructorInput,
-  ]
->;
+export type FileSource = {
+  typeName: SourceTypeName.FileSource;
+  id: FileSourceId;
+  filePath: string;
+};
 
 export const { FileSourceInstance } = buildNamedConstructorFunction({
   constructorName: 'FileSourceInstance' as const,
@@ -51,7 +49,10 @@ export const { FileSourceInstance } = buildNamedConstructorFunction({
       },
     },
     transformInput: (input) => {
-      const { filePath } = input;
+      const filePath =
+        'absoluteFilePath' in input
+          ? posix.relative('', input.absoluteFilePath)
+          : input.filePath;
 
       const id = new FileSourceId({
         filePath,
@@ -60,7 +61,7 @@ export const { FileSourceInstance } = buildNamedConstructorFunction({
       return {
         typeName: SourceTypeName.FileSource,
         id,
-        ...input,
+        filePath,
       } satisfies FileSource;
     },
   })

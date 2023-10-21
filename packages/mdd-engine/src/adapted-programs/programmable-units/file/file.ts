@@ -1,5 +1,6 @@
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
+import { FileSource, FileSourceInstance } from '../linting/source/fileSource';
 import { FilePath, FilePathInstance } from './filePath';
 import { FileSystemNodeId } from './fileSystemNode';
 import { FileSystemNodeStreamMetatype } from './fileSystemNodeCollection';
@@ -26,6 +27,7 @@ export type File<
   instanceId: string;
   filePath: FilePath<TFileExtensionSuffixIdentifier>;
   nodePath: FilePath<TFileExtensionSuffixIdentifier>;
+  source: FileSource;
 };
 
 export const { FileInstance } = buildNamedConstructorFunction({
@@ -36,6 +38,7 @@ export const { FileInstance } = buildNamedConstructorFunction({
     'instanceId',
     'filePath',
     'nodePath',
+    'source',
   ],
 } as const)
   .withTypes<FileConstructorInput, File>({
@@ -62,6 +65,9 @@ export const { FileInstance } = buildNamedConstructorFunction({
         filePath,
         nodePath: filePath,
         ...otherInputFields,
+        source: new FileSourceInstance({
+          filePath: serializedFilePath,
+        }),
       } satisfies File;
     },
   })

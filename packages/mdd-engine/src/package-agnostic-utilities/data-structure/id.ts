@@ -57,7 +57,13 @@ enum IdTemplateKeyword {
   ANY = 'any',
 }
 
-type Subid = IdTemplateKeyword | GenericComplexIdLikeConstructor;
+type SpecificLabelList<TLabel extends string> = NonEmptyTuple<TLabel>;
+type GenericLableList = SpecificLabelList<string>;
+
+type Subid =
+  | IdTemplateKeyword
+  | GenericLableList
+  | GenericComplexIdLikeConstructor;
 
 type SubidTuple<TSubidTuple extends Tuple<Subid>> = TSubidTuple;
 type GenericSubidTuple = SubidTuple<Tuple<Subid>>;
@@ -93,6 +99,8 @@ type InputValue<TSubid extends Subid> = TSubid extends IdTemplateKeyword.LITERAL
   ? OutputValue
   : TSubid extends IdTemplateKeyword.ANY
   ? ComplexIdLike | { id: ComplexIdLike } | { zorn: ComplexIdLike }
+  : TSubid extends SpecificLabelList<infer TLabel>
+  ? TLabel
   : TSubid extends ComplexIdLikeConstructor<infer TComplexIdLike>
   ? TComplexIdLike | { id: TComplexIdLike } | { zorn: TComplexIdLike }
   : never;

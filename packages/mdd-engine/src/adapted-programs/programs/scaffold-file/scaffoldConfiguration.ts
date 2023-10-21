@@ -4,6 +4,7 @@ export enum FileTypeName {
   Program = 'program',
   ProgrammedTransform = 'transform',
   Item = 'item',
+  Function = 'function',
 }
 
 export const validTypeNameList = Object.values(FileTypeName) as string[];

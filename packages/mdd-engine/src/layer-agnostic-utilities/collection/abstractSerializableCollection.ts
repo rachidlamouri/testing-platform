@@ -3,6 +3,7 @@ import { Collection2 } from '../../core/types/collection/collection2';
 import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 import { GenericItem, Item } from '../../core/types/item/item';
 import { ProgramFileCache, SerializedItem } from '../program/programFileCache';
+import { getTextDigest } from '../../package-agnostic-utilities/string/getTextDigest';
 
 export type AbstractSerializableIndexByName = {
   serializableId: string;
@@ -44,6 +45,7 @@ type AbstractSerializableCollectionConstructorInput<
 > = {
   collectionId: TStreamMetatype['collectionId'];
   programFileCache: ProgramFileCache;
+  continueOnDuplicate?: boolean;
   initialItemEggTuple: TStreamMetatype['itemEggStreamable'][];
 };
 
@@ -60,6 +62,8 @@ export abstract class AbstractSerializableCollection<
 > implements
     Collection2<GenericAbstractSerializableStreamMetatype, TStreamMetatype>
 {
+  continueOnDuplicate: boolean;
+
   public readonly collectionId: TStreamMetatype['collectionId'];
 
   public readonly programFileCache: ProgramFileCache;
@@ -73,10 +77,12 @@ export abstract class AbstractSerializableCollection<
   constructor({
     collectionId,
     programFileCache,
+    continueOnDuplicate = false,
     initialItemEggTuple,
   }: AbstractSerializableCollectionConstructorInput<TStreamMetatype>) {
     this.collectionId = collectionId;
     this.programFileCache = programFileCache;
+    this.continueOnDuplicate = continueOnDuplicate;
     this.initialItemEggTuple = initialItemEggTuple;
   }
 
@@ -128,6 +134,10 @@ export abstract class AbstractSerializableCollection<
     this.duplicateCountByCheckId.set(duplicateCheckId, nextCount);
 
     if (nextCount > 1) {
+      if (this.continueOnDuplicate) {
+        return;
+      }
+
       const fileName = this.programFileCache.getNamespacedCollectionsFilePath({
         collectionCollectionId: metacollectionCollectionId,
         nestedPath: serializedItemCollectionId,
@@ -150,12 +160,26 @@ export abstract class AbstractSerializableCollection<
       // eslint-disable-next-line no-console
       console.log();
     } else {
-      this.programFileCache.writeSerializedItem({
-        collectionCollectionId: metacollectionCollectionId,
-        nestedPath: serializedItemCollectionId,
-        extensionlessFileName,
-        serializedItem,
-      });
+      try {
+        this.programFileCache.writeSerializedItem({
+          collectionCollectionId: metacollectionCollectionId,
+          nestedPath: serializedItemCollectionId,
+          extensionlessFileName,
+          serializedItem,
+        });
+      } catch (e) {
+        const error = e as Error;
+        if ('code' in error && error.code === 'ENAMETOOLONG') {
+          this.programFileCache.writeSerializedItem({
+            collectionCollectionId: metacollectionCollectionId,
+            nestedPath: serializedItemCollectionId,
+            extensionlessFileName: getTextDigest(extensionlessFileName),
+            serializedItem,
+          });
+          return;
+        }
+        throw error;
+      }
     }
   }
 

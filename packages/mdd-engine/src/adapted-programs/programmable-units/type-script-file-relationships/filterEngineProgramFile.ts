@@ -3,6 +3,7 @@ import { IdentifiableItemId } from '../../../adapter/identifiable-item/identifia
 import {
   ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
   EngineFunctionConfigurationStreamMetatype,
+  EngineFunctionConfigurationTypeName,
 } from '../engine-program-model/engineFunctionConfiguration';
 import {
   TYPE_SCRIPT_FILE_COLLECTION_ID,
@@ -17,10 +18,12 @@ import {
   EngineProgramFileStreamMetatype,
 } from './engineProgramFile';
 import {
-  PROGRAM_MODEL_4_LOCATOR_COLLECTION_ID,
-  ProgramModel4LocatorInstance,
-  ProgramModel4LocatorStreamMetatype,
-} from '../engine-program-model/programModel4Locator';
+  PROGRAM_LOCATOR_COLLECTION_ID,
+  ProgramLocatorStreamMetatype,
+  ProgramLocator,
+  CoreProgramLocator,
+  AdaptedProgramLocator,
+} from '../engine-program-model/program/programLocator';
 
 /**
  * Filters the collection of TypeScript files to those that are an engine program.
@@ -46,8 +49,8 @@ export const filterEngineProgramFile = buildProgrammedTransform({
   .toItemTuple2<EngineProgramFileStreamMetatype>({
     collectionId: ENGINE_PROGRAM_FILE_COLLECTION_ID,
   })
-  .toItemTuple2<ProgramModel4LocatorStreamMetatype>({
-    collectionId: PROGRAM_MODEL_4_LOCATOR_COLLECTION_ID,
+  .toItemTuple2<ProgramLocatorStreamMetatype>({
+    collectionId: PROGRAM_LOCATOR_COLLECTION_ID,
   })
   .onTransform(
     (
@@ -63,7 +66,7 @@ export const filterEngineProgramFile = buildProgrammedTransform({
       ) {
         return {
           [ENGINE_PROGRAM_FILE_COLLECTION_ID]: [],
-          [PROGRAM_MODEL_4_LOCATOR_COLLECTION_ID]: [],
+          [PROGRAM_LOCATOR_COLLECTION_ID]: [],
         };
       }
 
@@ -94,8 +97,26 @@ export const filterEngineProgramFile = buildProgrammedTransform({
       if (engineFunctionImportCombination === undefined) {
         return {
           [ENGINE_PROGRAM_FILE_COLLECTION_ID]: [],
-          [PROGRAM_MODEL_4_LOCATOR_COLLECTION_ID]: [],
+          [PROGRAM_LOCATOR_COLLECTION_ID]: [],
         };
+      }
+
+      let locator: ProgramLocator;
+      if (
+        engineFunctionImportCombination.engineFunctionConfiguration.typeName ===
+        EngineFunctionConfigurationTypeName.Core2
+      ) {
+        locator = new CoreProgramLocator({
+          programFile: typeScriptFile,
+          engineFunctionConfiguration:
+            engineFunctionImportCombination.engineFunctionConfiguration,
+        });
+      } else {
+        locator = new AdaptedProgramLocator({
+          programFile: typeScriptFile,
+          engineFunctionConfiguration:
+            engineFunctionImportCombination.engineFunctionConfiguration,
+        });
       }
 
       return {
@@ -107,13 +128,7 @@ export const filterEngineProgramFile = buildProgrammedTransform({
               engineFunctionImportCombination.engineFunctionConfiguration,
           },
         ],
-        [PROGRAM_MODEL_4_LOCATOR_COLLECTION_ID]: [
-          new ProgramModel4LocatorInstance({
-            file: typeScriptFile,
-            engineFunctionConfiguration:
-              engineFunctionImportCombination.engineFunctionConfiguration,
-          }),
-        ],
+        [PROGRAM_LOCATOR_COLLECTION_ID]: [locator],
       };
     },
   )

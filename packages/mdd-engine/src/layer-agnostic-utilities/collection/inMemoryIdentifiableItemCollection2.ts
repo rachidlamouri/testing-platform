@@ -16,6 +16,7 @@ import { GenericIdentifiableItem } from '../../adapter/identifiable-item/identif
 import {
   AbstractInMemoryCollection,
   DereferenceError,
+  InMemoryCollectionConstructorInput,
 } from './abstractInMemoryCollection';
 import {
   InMemoryIndexByName,
@@ -23,6 +24,7 @@ import {
 } from '../stream-metatype/inMemoryStreamMetatype';
 import { OutputValueByTemplateKeyPath } from '../../package-agnostic-utilities/data-structure/id';
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
+import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
 
 export type InMemoryIdentifiableItem2IndexByName = InMemoryIndexByName &
   // TODO: REMOVE UNDEFINED after mass refactor
@@ -75,22 +77,48 @@ const getIdLike = (identifiableItem: GenericIdentifiableItem): IdLike => {
   return result;
 };
 
+type BaseInMemoryIdentifiableItem2CollectionInput<
+  TVoque extends GenericInMemoryIdentifiableItem2StreamMetatype,
+> = SpreadN<
+  [
+    InMemoryCollectionConstructorInput<TVoque>,
+    {
+      continueOnDuplicate?: boolean;
+    },
+  ]
+>;
+
 export abstract class BaseInMemoryIdentifiableItem2Collection<
   TRestrictingVoque extends GenericInMemoryIdentifiableItem2StreamMetatype,
   TVoque extends TRestrictingVoque,
 > extends AbstractInMemoryCollection<TRestrictingVoque, TVoque> {
+  continueOnDuplicate: boolean;
+
   protected hubblepupPelueByZorn = new Map<
     string,
     TVoque['itemEggStreamable']
   >();
 
-  addItem(hubblepup: TVoque['itemEggStreamable']): void {
-    super.addItem(hubblepup);
+  constructor({
+    continueOnDuplicate = false,
+    ...input
+  }: BaseInMemoryIdentifiableItem2CollectionInput<TVoque> & {
+    continueOnDuplicate: boolean;
+  }) {
+    super(input);
 
+    this.continueOnDuplicate = continueOnDuplicate;
+  }
+
+  addItem(hubblepup: TVoque['itemEggStreamable']): void {
     const hubblepupZornLike = getIdLike(hubblepup);
     const humanReadableZorn = hubblepupZornLike.forHuman;
 
     if (this.hubblepupPelueByZorn.has(humanReadableZorn)) {
+      if (this.continueOnDuplicate) {
+        return;
+      }
+
       const existingHubblepup =
         this.hubblepupPelueByZorn.get(humanReadableZorn);
       assertNotUndefined(existingHubblepup);
@@ -110,6 +138,7 @@ export abstract class BaseInMemoryIdentifiableItem2Collection<
 
       throw error;
     } else {
+      super.addItem(hubblepup);
       this.hubblepupPelueByZorn.set(humanReadableZorn, hubblepup);
     }
   }
@@ -154,6 +183,16 @@ export class InMemoryIdentifiableItem2ListCollection<
   GenericInMemoryIdentifiableItem2ListStreamMetatype,
   TVoque
 > {
+  constructor({
+    continueOnDuplicate = false,
+    ...input
+  }: BaseInMemoryIdentifiableItem2CollectionInput<TVoque>) {
+    super({
+      continueOnDuplicate,
+      ...input,
+    });
+  }
+
   protected dereferenceCollection(): TVoque['collectionStreamable'] {
     return this.itemTuple;
   }
@@ -184,6 +223,16 @@ export class InMemoryIdentifiableItem3Collection<
   GenericInMemoryOdeshin3Voque,
   TVoque
 > {
+  constructor({
+    continueOnDuplicate = true,
+    ...input
+  }: BaseInMemoryIdentifiableItem2CollectionInput<TVoque>) {
+    super({
+      continueOnDuplicate,
+      ...input,
+    });
+  }
+
   protected dereferenceCollection(): TVoque['collectionStreamable'] {
     return {
       byId: this.hubblepupPelueByZorn,

@@ -4,7 +4,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   {
     filePath:
       'packages/mdd-engine/src/layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2.ts',
-    identifierList: ['InMemoryIdentifiableItem2ListStreamMetatype'],
+    identifierList: ['InMemoryIdentifiableItem3StreamMetatype'],
   },
   {
     filePath:
@@ -40,9 +40,8 @@ export const getItemFileContents = ({
   const idTemplateCodeName = `${screamingSnakeCaseName}_ID_TEMPLATE`;
   const idTemplateTypeName = `${pascalCaseName}IdTemplate`;
   const idTemplateClassName = `${pascalCaseName}Id`;
-  const constructorInputTypeName = `${pascalCaseName}ConstructorInput`;
+  const constructorInputTypeName = `${pascalCaseName}Input`;
   const itemTypeName = pascalCaseName;
-  const constructorCodeName = `${itemTypeName}Instance`;
   const collectionIdCodeName = `${screamingSnakeCaseName}_COLLECTION_ID`;
   const collectionIdLiteral = kebabCaseName;
   const collectionIdTypeName = `${itemTypeName}CollectionId`;
@@ -62,53 +61,26 @@ class ${idTemplateClassName} extends ComplexId<${idTemplateTypeName}> {
 }
 
 type ${constructorInputTypeName} = {
-  placeholderInputProperty: never;
+  // TODO: define constructor input
 }
 
-type ${itemTypeName} = SimplifyN<[
-  { id: ${idTemplateClassName} },
-  ${constructorInputTypeName},
-  {
-    // TODO: UPDATE_ME
+export class ${itemTypeName} implements ${constructorInputTypeName} {
+  id: ${idTemplateClassName}
+
+  constructor(input: ${constructorInputTypeName}) {
+    // TODO: define class
+
+    this.id = new ${idTemplateClassName}({
+      // TODO: define id
+    })
   }
-]>
-
-export const { ${constructorCodeName} } = buildNamedConstructorFunction({
-  constructorName: '${constructorCodeName}' as const,
-  instancePropertyNameTuple: [
-    // keep this as a multiline list
-    'id',
-    'placeholderInputProperty',
-  ] as const satisfies readonly (keyof ${itemTypeName})[],
-})
-  .withTypes<${constructorInputTypeName}, ${itemTypeName}>({
-    typeCheckErrorMessage: {
-      initialization: '',
-      instancePropertyNameTuple: {
-        missingProperties: '',
-        extraneousProperties: '',
-      },
-    },
-    transformInput: (input) => {
-      const { placeholderInputProperty } = input;
-
-      const id = new ${idTemplateClassName}({
-        UPDATE_ME: placeholderInputProperty,
-      });
-
-      return {
-        id,
-        ...input,
-      } satisfies ${itemTypeName}
-    },
-  })
-  .assemble()
+}
 
   export const ${collectionIdCodeName} = '${collectionIdLiteral}'
 
   type ${collectionIdTypeName} = typeof ${collectionIdCodeName}
 
-  export type ${streamMetatypeTypeName} = InMemoryIdentifiableItem2ListStreamMetatype<${collectionIdTypeName}, ${itemTypeName}>
+  export type ${streamMetatypeTypeName} = InMemoryIdentifiableItem3StreamMetatype<${collectionIdTypeName}, ${itemTypeName}>
 `;
 
   return fileContents;
