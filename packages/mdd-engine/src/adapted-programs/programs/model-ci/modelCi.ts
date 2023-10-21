@@ -33,7 +33,6 @@ import { serializeCiModel } from './serializeCiModel';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program-model/getEngineProgramLocator3';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 import { getExpectedProgramTestFileConfiguration } from './getExpectedProgramTestFileConfiguration';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
@@ -47,6 +46,7 @@ import {
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { getExpectedProgramTestFile } from './getExpectedProgramTestFile';
 import { assertProgramTestFileIsValid } from './assertProgramTestFileIsValid';
+import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelCi',
@@ -78,6 +78,7 @@ runEngine({
     }),
   ] as const,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
     new ProgramErrorCollection({
       programFileCache,
     }),
@@ -86,7 +87,6 @@ runEngine({
       initialItemEggTuple: [NULL_OMISSION],
     }),
   ] as const),
-  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,

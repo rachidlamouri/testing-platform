@@ -11,7 +11,6 @@ import {
 } from '../../programmable-units/engine-program-model/engineFunctionConfiguration';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
@@ -24,6 +23,7 @@ import { filterEngineProgramFile } from '../../programmable-units/type-script-fi
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
+import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'getSnapshotRefreshScript',
@@ -49,8 +49,8 @@ runEngine({
       initialItemEggTuple: ENGINE_FUNCTION_CONFIGURATION_LIST,
     }),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
     new ProgramErrorCollection({
       programFileCache,
     }),

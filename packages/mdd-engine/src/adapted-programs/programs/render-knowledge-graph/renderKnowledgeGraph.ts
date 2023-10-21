@@ -1,6 +1,5 @@
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
-  buildCollectionIdCombination,
   buildCollectionByCollectionId,
   runEngine,
 } from '../../../adapter/engine/runEngine';
@@ -55,7 +54,6 @@ import { renderApp } from './app/node/renderApp';
 import { constructDynamicIndexFile } from './constructDynamicIndexFile';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import { constructDynamicMetadataFile } from './constructDynamicMetadataFile';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { getAllFactGraphElements } from './getAllFactGraphElements';
 import { getBoundaryFromConfiguration } from './boundary/getBoundaryFromConfiguration';
 import { getBoundaryPartition } from './partition-fact/getBoundaryPartition';
@@ -73,8 +71,14 @@ import { getPartitionedFileSystemNodes } from './getPartitionedFileSystemNodes';
 import { getBoundedDirectory } from './directory/getBoundedDirectory';
 import { getDirectoryFact2 } from './directory/getDirectoryFact2';
 import { getFileFact2 } from './file/getFileFact2';
-import { BOUNDED_DIRECTORY_COLLECTION_ID } from './directory/boundedDirectory';
-import { BOUNDED_FILE_COLLECTION_ID } from './file/boundedFile';
+import {
+  BOUNDED_DIRECTORY_COLLECTION_ID,
+  BoundedDirectoryStreamMetatype,
+} from './directory/boundedDirectory';
+import {
+  BOUNDED_FILE_COLLECTION_ID,
+  BoundedFileStreamMetatype,
+} from './file/boundedFile';
 import { getPartitionedFileDependency } from './dependency/getPartitionedFileDependency';
 import { getPartitionedFileDependencyPathConstituents } from './dependency/getPartitionedFileDependencyPathConstituents';
 import { getFileDependencyPathNodeFact } from './dependency/dependency-path/getFileDependencyPathNodeFact';
@@ -103,6 +107,8 @@ import {
 } from './layer/layerTrie';
 import { getUtilityBoundary } from './boundary/getUtilityBoundary';
 import { getProgrammableUnitBoundary } from './boundary/getProgrammableUnitBoundary';
+import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
+import { FileSystemNodeCollection } from '../../programmable-units/file/fileSystemNodeCollection';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -139,15 +145,8 @@ runEngine({
       initialItemEggTuple: LAYER_CONFIGURATION_LIST,
     }),
   ] as const,
-  fileSystemNodeCollectionIdCombination: {
-    ...defaultFileCollectionIdCombination,
-    ...buildCollectionIdCombination([
-      // keep as multiline list
-      BOUNDED_DIRECTORY_COLLECTION_ID,
-      BOUNDED_FILE_COLLECTION_ID,
-    ] as const),
-  },
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
     new ProgramErrorCollection({
       programFileCache,
     }),
@@ -179,6 +178,14 @@ runEngine({
     new InMemoryCollection<LayerTrieStreamMetatype>({
       collectionId: LAYER_TRIE_COLLECTION_ID,
       initialItemEggTuple: [],
+    }),
+    new FileSystemNodeCollection<BoundedDirectoryStreamMetatype>({
+      collectionId: BOUNDED_DIRECTORY_COLLECTION_ID,
+      continueOnDuplicate: false,
+    }),
+    new FileSystemNodeCollection<BoundedFileStreamMetatype>({
+      collectionId: BOUNDED_FILE_COLLECTION_ID,
+      continueOnDuplicate: false,
     }),
   ] as const),
   errorCollectionId: PROGRAM_ERROR_COLLECTION_ID,

@@ -9,7 +9,6 @@ import { ProgramErrorCollection } from '../../programmable-units/error/programEr
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { signalError } from '../../programmable-units/error/signalError';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
@@ -32,6 +31,7 @@ import { markUnusedExports } from './markUnusedExports';
 import { omittedUnusedExportList } from './omittedUnusedExportList';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
+import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'findUnusedExports',
@@ -59,8 +59,8 @@ runEngine({
       initialItemEggTuple: omittedUnusedExportList,
     }),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
     new ProgramErrorCollection({
       programFileCache,
     }),

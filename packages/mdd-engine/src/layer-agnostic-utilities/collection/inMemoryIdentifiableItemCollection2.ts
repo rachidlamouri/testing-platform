@@ -25,6 +25,7 @@ import {
 import { OutputValueByTemplateKeyPath } from '../../package-agnostic-utilities/data-structure/id';
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
 import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
+import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 
 export type InMemoryIdentifiableItem2IndexByName = InMemoryIndexByName &
   // TODO: REMOVE UNDEFINED after mass refactor
@@ -219,6 +220,15 @@ export type GenericInMemoryIdentifiableItem3StreamMetatype =
     CollectionId,
     GenericIdentifiableItem
   >;
+
+export type UnsafeInMemoryIdentifiableItem3StreamMetatype = StreamMetatype<
+  CollectionId,
+  GenericIdentifiableItem,
+  GenericIdentifiableItem,
+  InMemoryIdentifiableItem2IndexByName,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  InMemoryIdentifiableItem3CollectionStreamable<any>
+>;
 
 export class InMemoryIdentifiableItem3Collection<
   TVoque extends GenericInMemoryIdentifiableItem3StreamMetatype,

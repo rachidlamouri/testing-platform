@@ -11,6 +11,7 @@ import { parseUninferableCollectionByCollectionId } from './collection-instance/
 import { parseProgrammedTransformTuple } from './programmed-transform/parseProgrammedTransformTuple';
 import { ProgrammedTransformLocator } from '../../programmed-transform/programmedTransformLocator';
 import { ProgramSkeleton } from '../../program/programSkeleton';
+import { ParsedCollectionStatus } from './collection-instance/parseCollectionInstanceListNode';
 
 const reporterSource = new FileSourceInstance({
   absoluteFilePath: __filename,
@@ -92,15 +93,15 @@ export const parseAdaptedProgramFile = (
   ];
 
   const collectionDefinitionLocatorList = combinedParsedCollectionInstanceList
-    .map(({ result }) => result?.collectionDefinitionLocator)
+    .map(({ result }) => result?.parsedNode?.collectionDefinitionLocator)
     .filter(isNotNullish);
 
   const itemDefinitionLocatorList = combinedParsedCollectionInstanceList
-    .map(({ result }) => result?.itemDefinitionLocator)
+    .map(({ result }) => result?.parsedNode?.itemDefinitionLocator)
     .filter(isNotNullish);
 
   const collectionInstanceSkeletonList = combinedParsedCollectionInstanceList
-    .map(({ result }) => result?.collectionInstanceSkeleton)
+    .map(({ result }) => result?.parsedNode?.collectionInstanceSkeleton)
     .filter(isNotNullish);
 
   const unparseableCollectionInstanceErrorList = [
@@ -119,7 +120,12 @@ export const parseAdaptedProgramFile = (
       };
     }),
   ]
-    .filter(({ result }) => isNullish(result?.collectionDefinitionLocator))
+    .filter(({ result }) => {
+      return (
+        result?.status !== ParsedCollectionStatus.PendingParserImplementation &&
+        isNullish(result?.parsedNode?.collectionDefinitionLocator)
+      );
+    })
     .map(({ listTypeName, originalIndex }) => {
       return new LocatableError({
         message: `Unable to parse ${listTypeName} collection tuple definition`,

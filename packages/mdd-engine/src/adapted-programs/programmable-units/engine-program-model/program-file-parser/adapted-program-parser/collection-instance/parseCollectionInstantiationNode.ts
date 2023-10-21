@@ -17,7 +17,7 @@ type CollectionInstantiationNodeParserInput = {
 
 export type ParsedCollectionInstantiationNode = {
   collectionDefinitionLocator: CollectionDefinitionLocator | null;
-  itemDefinitionLocator: CollectionDefinitionLocator | null;
+  itemDefinitionLocator: ItemDefinitionLocator | null;
   collectionInstanceSkeleton: CollectionInstanceSkeleton | null;
 };
 

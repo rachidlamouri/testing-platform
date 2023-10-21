@@ -14,12 +14,12 @@ import {
 import { scaffoldFile } from './scaffoldFile';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
+import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 
 type ScriptInput = {
   typeName: string | undefined;
@@ -92,10 +92,9 @@ runEngine({
       initialItemEggTuple: [scriptInput],
     }),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
-  uninferableCollectionByCollectionId: buildCollectionByCollectionId(
-    [] as const,
-  ),
+  uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
+  ] as const),
   programmedTransformTuple: [enumerateFileSystemObjects, scaffoldFile] as const,
   programFileCache: new ProgramFileCache({
     namespace: 'assembleScaffoldedFile',

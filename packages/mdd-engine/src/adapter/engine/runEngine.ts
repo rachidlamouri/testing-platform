@@ -24,12 +24,11 @@ import {
 } from '../../core/types/stream-connection-metatype/rightInputStreamConnectionMetatype';
 import {
   CollectionId,
-  GenericCollectionIdCombination,
   CollectionIdTuple,
 } from '../../core/types/collection/collectionId';
 import {
-  GenericInMemoryIdentifiableItem3StreamMetatype,
   InMemoryIdentifiableItem3Collection,
+  UnsafeInMemoryIdentifiableItem3StreamMetatype,
 } from '../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   GenericCollection2,
@@ -37,16 +36,15 @@ import {
   UnsafeCollection2Tuple,
   Collection2,
 } from '../../core/types/collection/collection2';
-import { GenericStreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
+import {
+  GenericStreamMetatype,
+  StreamMetatype,
+} from '../../core/types/stream-metatype/streamMetatype';
 import { ProgramErrorCollectionId } from '../../adapted-programs/programmable-units/error/programError';
 import { GenericAbstractSerializableSourceStreamMetatype } from '../../layer-agnostic-utilities/collection/abstractSerializableCollection';
 import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities/programmed-transform/buildAddMetadataForSerialization';
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 import { ProgramFileCache } from '../../layer-agnostic-utilities/program/programFileCache';
-import {
-  FileSystemNodeCollection,
-  GenericFileSystemNodeStreamMetatype,
-} from '../../adapted-programs/programmable-units/file/fileSystemNodeCollection';
 
 type StreamMetatypeUnionFromCollectionTuple<
   TCollectionTuple extends UnsafeCollection2Tuple,
@@ -117,31 +115,44 @@ type StreamMetatypeUnionFromProgrammedTransformTuple<
   ProgrammedTransformUnionFromProgrammedTransformTuple<TProgrammedTransformTuple>
 >;
 
-type GenericInferableStreamMetatype =
-  | GenericInMemoryIdentifiableItem3StreamMetatype
-  | GenericFileSystemNodeStreamMetatype;
+/*
+    A extends B means A is a superset of B:
+    - the specific collectionId must extend the generic collectionId ("string") ("string" does not extend a specific string)
+
+    Properties defined on an item must be compatible with the stream metatype of the collection
+    - the specific itemEggStreamable must have every field in the generic itemEggStreamable
+    - the specific itemStreamable must have every field in the generic itemStreamable
+
+    Properties defined by the collection must satisfy the stream metatype of the item
+    - the generic indexByName must have every field in the specific indexByName
+    - the generic collectionStreamable must have every field in the specific collectionStreamable
+*/
+export type IsInferrableStreamMetatype<
+  TStreamMetatype extends GenericStreamMetatype,
+> = StreamMetatype<
+  TStreamMetatype['collectionId'],
+  TStreamMetatype['itemEggStreamable'],
+  TStreamMetatype['itemStreamable'],
+  UnsafeInMemoryIdentifiableItem3StreamMetatype['indexByName'],
+  UnsafeInMemoryIdentifiableItem3StreamMetatype['collectionStreamable']
+> extends StreamMetatype<
+  UnsafeInMemoryIdentifiableItem3StreamMetatype['collectionId'],
+  UnsafeInMemoryIdentifiableItem3StreamMetatype['itemEggStreamable'],
+  UnsafeInMemoryIdentifiableItem3StreamMetatype['itemStreamable'],
+  TStreamMetatype['indexByName'],
+  TStreamMetatype['collectionStreamable']
+>
+  ? true
+  : false;
 
 type UninferableStreamMetatypeUnion<
   TImplicitStreamMetatypeUnion extends GenericStreamMetatype,
-> = Exclude<TImplicitStreamMetatypeUnion, GenericInferableStreamMetatype>;
-
-type InferableStreamMetatypeUnion<
-  TImplicitStreamMetatypeUnion extends GenericStreamMetatype,
-  TInferableStreamMetatype extends GenericInferableStreamMetatype,
-> = Extract<TImplicitStreamMetatypeUnion, TInferableStreamMetatype>;
-
-type CollectionIdCombinationFromStreamMetatypeUnion<
-  TStreamMetatype extends GenericStreamMetatype,
-> = Simplify<
-  UnionToIntersection<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    TStreamMetatype extends any
-      ? {
-          [TCollectionId in TStreamMetatype['collectionId']]: null;
-        }
-      : never
-  >
->;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+> = TImplicitStreamMetatypeUnion extends any
+  ? IsInferrableStreamMetatype<TImplicitStreamMetatypeUnion> extends true
+    ? never
+    : TImplicitStreamMetatypeUnion
+  : never;
 
 type CollectionByCollectionIdFromStreamMetatypeUnion<
   TStreamMetatype extends GenericStreamMetatype,
@@ -195,12 +206,6 @@ type EngineRunnerInputFromAllComputedUnions<
   TImplicitStreamMetatypeUnion extends GenericStreamMetatype,
 > = {
   explicitCollectionTuple: TExplicitCollectionTuple;
-  fileSystemNodeCollectionIdCombination: CollectionIdCombinationFromStreamMetatypeUnion<
-    InferableStreamMetatypeUnion<
-      TImplicitStreamMetatypeUnion,
-      GenericFileSystemNodeStreamMetatype
-    >
-  >;
   uninferableCollectionByCollectionId: UninferableCollectionByCollectionId<TImplicitStreamMetatypeUnion>;
   errorCollectionId?: ErrorCollectionId<TAllStreamMetatypeUnion>;
   programmedTransformTuple: TProgrammedTransformTuple;
@@ -318,21 +323,6 @@ const getProgrammedTransformTupleCollectionIdSet = (
   return result;
 };
 
-const getInferredFileSystemNodeCollectionTuple = (
-  fileSystemNodeCollectionIdCombination: GenericCollectionIdCombination,
-): GenericCollection2Tuple => {
-  const collectionIdList = Object.keys(fileSystemNodeCollectionIdCombination);
-  const collectionList = collectionIdList.map((collectionId) => {
-    return new FileSystemNodeCollection({
-      collectionId,
-      initialItemEggTuple: [],
-      continueOnDuplicate: false,
-    });
-  });
-
-  return collectionList;
-};
-
 const getInferredInMemoryCollectionTuple = (
   collectionTuple: GenericCollection2Tuple,
   programmedTransformTuple: GenericProgrammedTransform2Tuple,
@@ -372,8 +362,6 @@ export const runEngine: EngineRunner = <
   TProgrammedTransformTuple extends UnsafeProgrammedTransform2Tuple,
 >({
   explicitCollectionTuple: specificExplicitCollectionTuple,
-  fileSystemNodeCollectionIdCombination:
-    specificFileSystemNodeCollectionIdCombination,
   uninferableCollectionByCollectionId:
     specificUninferableCollectionByCollectionId,
   errorCollectionId,
@@ -399,24 +387,11 @@ export const runEngine: EngineRunner = <
     programFileCache,
   );
 
-  const genericFileSystemNodeCollectionIdCombination =
-    specificFileSystemNodeCollectionIdCombination as GenericCollectionIdCombination;
-
-  const inferredFileSystemNodeCollectionTuple =
-    getInferredFileSystemNodeCollectionTuple(
-      genericFileSystemNodeCollectionIdCombination,
-    );
-
   const programmedTransformTuple =
     specificProgrammedTransformTuple as GenericProgrammedTransform2Tuple;
 
-  const instantiatedCollectionTuple = [
-    ...explicitCollectionTuple,
-    ...inferredFileSystemNodeCollectionTuple,
-  ];
-
   const inferredCollectionTuple = getInferredInMemoryCollectionTuple(
-    instantiatedCollectionTuple,
+    explicitCollectionTuple,
     programmedTransformTuple,
   );
 
@@ -432,7 +407,6 @@ export const runEngine: EngineRunner = <
   const inputCollectionList: GenericCollection2[] = [
     ...explicitCollectionTuple,
     serializableCollection,
-    ...inferredFileSystemNodeCollectionTuple,
     ...inferredCollectionTuple,
   ];
 

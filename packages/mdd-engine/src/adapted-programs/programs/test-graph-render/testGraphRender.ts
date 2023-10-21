@@ -26,7 +26,7 @@ import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/prog
 import { SANITY_SNAPSHOT_COLLECTION_ID } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
 import { GraphLikeLabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
+import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'testGraphRender',
@@ -188,8 +188,8 @@ runEngine({
       },
     ),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
     new OutputFileCollection({
       programFileCache,
     }),
