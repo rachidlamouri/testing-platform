@@ -7,6 +7,9 @@ type ParseProgrammedTransformInstanceReferenceInput = {
   node: TSESTree.Identifier;
 };
 
+/**
+ * Parses a reference to a programmed transform within an adapted program
+ */
 export const parseProgrammedTransformInstanceReference = ({
   adaptedParserContext,
   node,

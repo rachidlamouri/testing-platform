@@ -5,6 +5,11 @@ import { isArrayExpression } from '../../../../../../package-agnostic-utilities/
 import { parseProgrammedTransformTupleNode } from './parseProgrammedTransformTupleNode';
 import { ProgrammedTransformLocator } from '../../../programmed-transform/programmedTransformLocator';
 
+/**
+ * The root ProgrammedTransform tuple parser. It delegates to an adapted parser.
+ *
+ * @todo add a core parser as well
+ */
 export const parseProgrammedTransformTuple = (
   adaptedParserContext: AdaptedProgramFileParserInput,
 ): (ProgrammedTransformLocator | null)[] | null => {

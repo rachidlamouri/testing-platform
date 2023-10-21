@@ -9,6 +9,11 @@ type ParseProgrammedTransformTupleNodeInput = {
   node: ArrayExpressionElement;
 };
 
+/**
+ * The root ProgrammedTransform parser for the program parser. It delegates to an adapted parser
+ *
+ * @todo delegate to a core parser as well
+ */
 export const parseProgrammedTransformTupleNode = ({
   adaptedParserContext,
   node,
