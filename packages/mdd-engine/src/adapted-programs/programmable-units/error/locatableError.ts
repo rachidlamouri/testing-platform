@@ -12,6 +12,9 @@ type LocatableErrorInput = {
  * errorSource (the entity that caused the error)
  */
 export class LocatableError extends Error {
+  // TODO: this is being used in a hacky way. Maybe apply it as an interface?
+  contextFilePath?: string;
+
   reporterSource: Source;
 
   errorSource: Source;
@@ -24,5 +27,9 @@ export class LocatableError extends Error {
     this.reporterSource = input.reporterSource;
     this.errorSource = input.errorSource;
     this.context = input.context;
+  }
+
+  setContextFilePath(filePath: string): void {
+    this.contextFilePath = filePath;
   }
 }

@@ -5,11 +5,27 @@ import {
   GenericProgramErrorStreamMetatype,
   PROGRAM_ERROR_COLLECTION_ID,
 } from './programError';
+import { LocatableError } from './locatableError';
+import { Source } from '../linting/source/source';
 
 // TODO: allow an estinant instance to have its own state so that this state is not shared
 let errorCount = 0;
 const errorLimit = 5;
 let isLimitReached = false;
+
+/* eslint-disable no-console */
+const serializeSource = (source: Source): void => {
+  if ('serialized' in source) {
+    console.log(`    ${source.serialized}`);
+  } else {
+    console.log(
+      serialize(source.id.templateValueByKeyPath)
+        .split('\n')
+        .map((line) => `    ${line}`)
+        .join('\n'),
+    );
+  }
+};
 
 /**
  * Logs a ProgramError's id, message, and locator information to the console.
@@ -30,7 +46,6 @@ export const reportErrors = buildProgrammedTransform({
     // TODO: create an abstract subclass of Error that requires a function that serializes metadata including program file cache file paths
 
     if (errorCount <= errorLimit) {
-      /* eslint-disable no-console */
       console.log();
       console.log(
         `\x1b[31mError\x1b[0m ${errorCount}: ${programError.message}`,
@@ -47,30 +62,25 @@ export const reportErrors = buildProgrammedTransform({
         }
         console.log(`  Context Path  - ${programError.contextFilePath}`);
         console.log();
+      } else if (programError instanceof LocatableError) {
+        console.log('  Reporter Source');
+        serializeSource(programError.reporterSource);
+        console.log('  Error Source');
+        serializeSource(programError.errorSource);
+        const contextPath = programError.contextFilePath ?? 'n/a';
+
+        console.log('  Context Path');
+        console.log(`    ${contextPath}`);
       } else if (programError instanceof LintAssertionError) {
         const { lintAssertion } = programError;
 
         console.log('  Rule Name');
         console.log(`    ${lintAssertion.rule.name}`);
         console.log('  Rule Source');
-        console.log(
-          serialize(lintAssertion.rule.source.id.templateValueByKeyPath)
-            .split('\n')
-            .map((line) => `    ${line}`)
-            .join('\n'),
-        );
+        serializeSource(lintAssertion.rule.source);
 
         console.log('  Lint Source');
-        if ('serialized' in lintAssertion.lintSource) {
-          console.log(`    ${lintAssertion.lintSource.serialized}`);
-        } else {
-          console.log(
-            serialize(lintAssertion.lintSource.id.templateValueByKeyPath)
-              .split('\n')
-              .map((line) => `    ${line}`)
-              .join('\n'),
-          );
-        }
+        serializeSource(lintAssertion.lintSource);
 
         const contextPath = programError.contextFilePath ?? 'n/a';
 

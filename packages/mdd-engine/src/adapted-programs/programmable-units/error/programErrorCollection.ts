@@ -16,6 +16,7 @@ import {
 import { LintAssertionError } from '../linting/reportFailedLintAssertion';
 import { SourceTypeName } from '../linting/source/sourceTypeName';
 import { Source } from '../linting/source/source';
+import { LocatableError } from './locatableError';
 
 type ProgramErrorCollectionConstructorInput = {
   programFileCache: ProgramFileCache;
@@ -162,7 +163,10 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection
         extensionlessFileName: `${index}`.padStart(2, '0'),
       });
 
-      if (item instanceof LintAssertionError) {
+      if (
+        item instanceof LintAssertionError ||
+        item instanceof LocatableError
+      ) {
         const contextFilePath =
           this.programFileCache.getNamespacedCollectionsFilePath({
             collectionCollectionId: this.collectionId,
