@@ -41,7 +41,7 @@ export const parseItemDefinition = buildProgrammedTransform({
       return file.item.filePathObject.serialized;
     },
   })
-  .toItemTuple2<ItemDefinitionModelStreamMetatype>({
+  .toItem2<ItemDefinitionModelStreamMetatype>({
     collectionId: ITEM_DEFINITION_MODEL_COLLECTION_ID,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
@@ -97,15 +97,13 @@ export const parseItemDefinition = buildProgrammedTransform({
         : [];
 
     return {
-      [ITEM_DEFINITION_MODEL_COLLECTION_ID]: [
-        new ItemDefinitionModel({
-          locator: itemDefinitionLocator,
-          name:
-            itemDeclaration?.identifiableNode.id.name ??
-            itemDefinitionLocator.identifierName,
-          description: description ?? '',
-        }),
-      ],
+      [ITEM_DEFINITION_MODEL_COLLECTION_ID]: new ItemDefinitionModel({
+        locator: itemDefinitionLocator,
+        name:
+          itemDeclaration?.identifiableNode.id.name ??
+          itemDefinitionLocator.identifierName,
+        description: description ?? '',
+      }),
       [PROGRAM_ERROR_COLLECTION_ID]: [
         ...missingDeclarationError,
         ...missingDescriptionError,
