@@ -198,29 +198,32 @@ export class InMemoryIdentifiableItem2ListCollection<
   }
 }
 
-type InMemoryOdeshin3VoictentPelie<TOdeshinPelie> = {
-  byId: Map<string, TOdeshinPelie>;
-  list: TOdeshinPelie[];
+type InMemoryIdentifiableItem3CollectionStreamable<
+  TIdentifiableItemStreamable,
+> = {
+  byId: Map<string, TIdentifiableItemStreamable>;
+  list: TIdentifiableItemStreamable[];
 };
 
 export type InMemoryIdentifiableItem3StreamMetatype<
   TGepp extends CollectionId,
-  TOdeshin extends GenericIdentifiableItem,
+  TIdentifiableItem extends GenericIdentifiableItem,
 > = InMemoryIdentifiableItem2StreamMetatype<
   TGepp,
-  TOdeshin,
-  InMemoryOdeshin3VoictentPelie<TOdeshin>
+  TIdentifiableItem,
+  InMemoryIdentifiableItem3CollectionStreamable<TIdentifiableItem>
 >;
 
-type GenericInMemoryOdeshin3Voque = InMemoryIdentifiableItem3StreamMetatype<
-  CollectionId,
-  GenericIdentifiableItem
->;
+export type GenericInMemoryIdentifiableItem3StreamMetatype =
+  InMemoryIdentifiableItem3StreamMetatype<
+    CollectionId,
+    GenericIdentifiableItem
+  >;
 
 export class InMemoryIdentifiableItem3Collection<
-  TVoque extends GenericInMemoryOdeshin3Voque,
+  TVoque extends GenericInMemoryIdentifiableItem3StreamMetatype,
 > extends BaseInMemoryIdentifiableItem2Collection<
-  GenericInMemoryOdeshin3Voque,
+  GenericInMemoryIdentifiableItem3StreamMetatype,
   TVoque
 > {
   constructor({
