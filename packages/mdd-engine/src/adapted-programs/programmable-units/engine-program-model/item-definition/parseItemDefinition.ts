@@ -19,6 +19,9 @@ import {
   ItemDefinitionModelStreamMetatype,
 } from './itemDefinitionModel';
 
+/**
+ * Parses the type or class definition of a streamable item
+ */
 export const parseItemDefinition = buildProgrammedTransform({
   name: 'parseItemDefinition',
 })

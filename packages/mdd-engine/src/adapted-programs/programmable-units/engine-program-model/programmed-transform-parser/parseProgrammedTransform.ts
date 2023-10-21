@@ -63,6 +63,10 @@ const reporterSource = new FileSourceInstance({
   absoluteFilePath: __filename,
 });
 
+/**
+ * Parses a programmed transform declaration by analyzing its name, description
+ * and input and output stream metatypes.
+ */
 export const parseProgrammedTransform = buildProgrammedTransform({
   name: 'parseProgrammedTransform',
 })

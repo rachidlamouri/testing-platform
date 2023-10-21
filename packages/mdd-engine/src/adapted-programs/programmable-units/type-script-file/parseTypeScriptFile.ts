@@ -3,10 +3,6 @@ import fs from 'fs';
 import * as parser from '@typescript-eslint/typescript-estree';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
-  TYPE_SCRIPT_FILE_CONFIGURATION_COLLECTION_ID,
-  TypeScriptFileConfigurationStreamMetatype,
-} from './associateTypeScriptFileToTypescriptConfiguration';
-import {
   PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID,
   ParsedTypeScriptFileStreamMetatype,
 } from './parsedTypeScriptFile';
@@ -17,6 +13,10 @@ import {
   ReportingProgrammedTransformLocator,
 } from '../error/programError';
 import { FileExtensionSuffixIdentifier } from '../../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
+import {
+  TypeScriptFileConfigurationStreamMetatype,
+  TYPE_SCRIPT_FILE_CONFIGURATION_COLLECTION_ID,
+} from './typeScriptConfiguration';
 
 const PROGRAMMED_TRANSFORM_NAME = 'parseTypeScriptFile' as const;
 type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
