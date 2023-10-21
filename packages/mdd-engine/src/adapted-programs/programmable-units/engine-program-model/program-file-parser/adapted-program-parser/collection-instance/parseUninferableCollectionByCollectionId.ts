@@ -11,7 +11,7 @@ import {
 
 type ParsedUninferableCollectionByCollectionId = {
   expectedBuilderFunctionName: string;
-  parsedCollectionList: (ParsedCollectionInstanceListNode | null)[] | null;
+  parsedCollectionList: ParsedCollectionInstanceListNode[] | null;
 };
 
 /**
