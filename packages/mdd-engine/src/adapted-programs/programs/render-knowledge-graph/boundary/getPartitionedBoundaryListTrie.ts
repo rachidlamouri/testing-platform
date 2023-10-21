@@ -22,10 +22,10 @@ export const getPartitionedBoundaryListTrie = buildProgrammedTransform({
   .toItem2<PartitionedBoundaryListTrieStreamMetatype>({
     collectionId: PARTITIONED_BOUNDARY_LIST_TRIE_COLLECTION_ID,
   })
-  .onTransform((partitionedBoundaryList) => {
+  .onTransform((partitionedBoundaryCollection) => {
     const trie = new PartitionedBoundaryListTrie([]);
 
-    partitionedBoundaryList.forEach((partitionedBoundary) => {
+    partitionedBoundaryCollection.list.forEach((partitionedBoundary) => {
       trie.addSubtrie(
         partitionedBoundary.boundary.directory.directoryPath.partList,
         () => {

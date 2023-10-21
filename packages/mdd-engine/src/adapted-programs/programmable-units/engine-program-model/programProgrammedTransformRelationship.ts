@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -48,7 +48,7 @@ type ProgramProgrammedTransformRelationshipCollectionId =
   typeof PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID;
 
 export type ProgramProgrammedTransformRelationshipStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     ProgramProgrammedTransformRelationshipCollectionId,
     ProgramProgrammedTransformRelationship
   >;

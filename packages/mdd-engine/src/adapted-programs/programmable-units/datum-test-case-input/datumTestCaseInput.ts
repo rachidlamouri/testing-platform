@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * Used for testing serialization. It contains a datum of any type, and a
@@ -15,7 +15,7 @@ type DatumTestCaseInputCollectionId =
   typeof DATUM_TEST_CASE_INPUT_COLLECTION_ID;
 
 export type DatumTestCaseInputStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     DatumTestCaseInputCollectionId,
     DatumTestCaseInput
   >;

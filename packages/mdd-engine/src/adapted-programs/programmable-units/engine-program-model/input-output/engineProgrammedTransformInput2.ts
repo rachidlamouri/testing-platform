@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -76,7 +76,7 @@ type ProgrammedTransformInput2CollectionId =
   typeof PROGRAMMED_TRANSFORM_INPUT_2_COLLECTION_ID;
 
 export type EngineProgrammedTransformInput2StreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     ProgrammedTransformInput2CollectionId,
     EngineProgrammedTransformInput2
   >;

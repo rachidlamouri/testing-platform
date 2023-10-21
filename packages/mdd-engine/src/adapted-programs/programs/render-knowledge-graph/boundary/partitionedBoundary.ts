@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { PartitionFact } from '../partition-fact/partitionFact';
@@ -56,7 +56,7 @@ type PartitionedBoundaryCollectionId =
   typeof PARTITIONED_BOUNDARY_COLLECTION_ID;
 
 export type PartitionedBoundaryStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     PartitionedBoundaryCollectionId,
     PartitionedBoundary
   >;

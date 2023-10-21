@@ -53,7 +53,7 @@ export const getPartitionedFileDependencyPathConstituents =
         keyTemplate,
       });
 
-      fileDependencyCollection
+      fileDependencyCollection.list
         .map<MappableFileDependency>((fileDependency) => {
           return {
             partitionId: fileDependency.partitionFact.id.forHuman,

@@ -1,6 +1,6 @@
 import { DirectedGraphEdge } from './directedGraphEdge';
 import { DirectedGraphNode } from './directedGraphNode';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { SpreadN } from '../../../../package-agnostic-utilities/type/spreadN';
 import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
 import { AttributeByKeyGSC } from './attributeByKeyGSC';
@@ -38,7 +38,7 @@ export const DIRECTED_GRAPH_COLLECTION_ID = 'directed-graph';
 type DirectedGraphCollectionId = typeof DIRECTED_GRAPH_COLLECTION_ID;
 
 export type DirectedGraphStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     DirectedGraphCollectionId,
     DirectedGraph
   >;

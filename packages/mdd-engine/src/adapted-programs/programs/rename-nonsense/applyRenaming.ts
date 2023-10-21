@@ -60,8 +60,8 @@ export const applyRenaming = buildProgrammedTransform({
   .onTransform(
     (
       directoryCollection,
-      fileSystemNodeConfigurationList,
-      identifierConfigurationList,
+      fileSystemNodeConfigurationCollection,
+      identifierConfigurationCollection,
     ) => {
       const mutableGroupList: ConfigurationGroup[] =
         directoryCollection.list.map((directory) => {
@@ -94,7 +94,7 @@ export const applyRenaming = buildProgrammedTransform({
         }),
       );
 
-      fileSystemNodeConfigurationList.forEach((configuration) => {
+      fileSystemNodeConfigurationCollection.list.forEach((configuration) => {
         const key = configuration.isDirectory
           ? configuration.oldNodePath.serialized
           : configuration.oldNodePath.parentDirectoryPath;
@@ -109,7 +109,7 @@ export const applyRenaming = buildProgrammedTransform({
         }
       });
 
-      identifierConfigurationList.forEach((configuration) => {
+      identifierConfigurationCollection.list.forEach((configuration) => {
         const key =
           configuration.identifierLocator.filePath.parentDirectoryPath;
 

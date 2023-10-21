@@ -2,7 +2,7 @@ import { ProgrammedTransform2 } from '../core/types/programmed-transform/program
 import { LeftInputItemStreamConnectionMetatype } from '../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import { OutputStreamConnectionMetatype } from '../core/types/stream-connection-metatype/outputStreamConnectionMetatype';
 import { runEngine2 } from '../core/engine/runEngine';
-import { InMemoryIdentifiableItem2ListCollection } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3Collection } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   DATUM_TEST_CASE_INPUT_COLLECTION_ID,
   DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
@@ -71,13 +71,11 @@ const getCustomTypedTestCaseInputTypeName: ProgrammedTransform2<
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryIdentifiableItem2ListCollection<DatumTestCaseInputStreamMetatype>(
-      {
-        collectionId: DATUM_TEST_CASE_INPUT_COLLECTION_ID,
-        initialItemEggTuple: DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
-      },
-    ),
-    new InMemoryIdentifiableItem2ListCollection<SerializableTypeNameStreamMetatype>(
+    new InMemoryIdentifiableItem3Collection<DatumTestCaseInputStreamMetatype>({
+      collectionId: DATUM_TEST_CASE_INPUT_COLLECTION_ID,
+      initialItemEggTuple: DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
+    }),
+    new InMemoryIdentifiableItem3Collection<SerializableTypeNameStreamMetatype>(
       {
         collectionId: SERIALIZABLE_TYPE_NAME_COLLECTION_ID,
         initialItemEggTuple: [],

@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -36,7 +36,7 @@ export const GRAPH_ELEMENT_GROUP_COLLECTION_ID = 'graph-element-group';
 type GraphElementGroupCollectionId = typeof GRAPH_ELEMENT_GROUP_COLLECTION_ID;
 
 export type GraphElementGroupStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     GraphElementGroupCollectionId,
     GraphElementGroup
   >;

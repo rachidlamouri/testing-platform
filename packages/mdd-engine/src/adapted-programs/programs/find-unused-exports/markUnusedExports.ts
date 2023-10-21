@@ -64,7 +64,7 @@ export const markUnusedExports = buildProgrammedTransform({
   .toItemTuple2<LintAssertionStreamMetatype>({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
-  .onTransform((importListList, exportListList) => {
+  .onTransform((importListCollection, exportListCollection) => {
     type FilePath = string;
     type IdentifierName = string;
 
@@ -79,7 +79,7 @@ export const markUnusedExports = buildProgrammedTransform({
     class OuterMap extends Map<FilePath, InnerMap> {}
 
     const outerMap = new OuterMap(
-      exportListList.map((exportList) => {
+      exportListCollection.list.map((exportList) => {
         const filePath = exportList.id;
         const stateList: MutableExportState[] = exportList.list.map(
           (exportItem) => {
@@ -101,7 +101,7 @@ export const markUnusedExports = buildProgrammedTransform({
       }),
     );
 
-    const importItemList = importListList.flatMap((importList) => {
+    const importItemList = importListCollection.list.flatMap((importList) => {
       return importList.list
         .filter((importItem) => importItem.isInternal)
         .flatMap((importItem) => {

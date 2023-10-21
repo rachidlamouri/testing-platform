@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * Information to be committed that is expected to change if a program
@@ -14,7 +14,7 @@ export const SANITY_SNAPSHOT_COLLECTION_ID = 'sanity-snapshot';
 type SanitySnapshotCollectionId = typeof SANITY_SNAPSHOT_COLLECTION_ID;
 
 export type SanitySnapshotStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     SanitySnapshotCollectionId,
     SanitySnapshot
   >;

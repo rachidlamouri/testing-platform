@@ -21,7 +21,7 @@ import {
   DirectedGraphMetadataByIdStreamMetatype,
 } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
-import { InMemoryIdentifiableItem2ListCollection } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3Collection } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { SANITY_SNAPSHOT_COLLECTION_ID } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
@@ -51,7 +51,7 @@ runEngine({
         ],
       },
     ),
-    new InMemoryIdentifiableItem2ListCollection<DirectedGraphStreamMetatype>({
+    new InMemoryIdentifiableItem3Collection<DirectedGraphStreamMetatype>({
       collectionId: DIRECTED_GRAPH_COLLECTION_ID,
       initialItemEggTuple: [
         {
@@ -130,7 +130,7 @@ runEngine({
         },
       ],
     }),
-    new InMemoryIdentifiableItem2ListCollection<DirectedGraphMetadataByIdStreamMetatype>(
+    new InMemoryIdentifiableItem3Collection<DirectedGraphMetadataByIdStreamMetatype>(
       {
         collectionId: DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,
         initialItemEggTuple: [

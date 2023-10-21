@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -54,7 +54,7 @@ type EngineStreamMetatype2CollectionId =
   typeof ENGINE_STREAM_METATYPE_2_COLLECTION_ID;
 
 export type EngineStreamMetatype2StreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     EngineStreamMetatype2CollectionId,
     EngineStreamMetatype2
   >;

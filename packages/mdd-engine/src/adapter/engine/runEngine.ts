@@ -28,8 +28,8 @@ import {
   CollectionIdTuple,
 } from '../../core/types/collection/collectionId';
 import {
-  GenericInMemoryIdentifiableItem2ListStreamMetatype,
-  InMemoryIdentifiableItem2ListCollection,
+  GenericInMemoryIdentifiableItem3StreamMetatype,
+  InMemoryIdentifiableItem3Collection,
 } from '../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   GenericCollection2,
@@ -118,7 +118,7 @@ type StreamMetatypeUnionFromProgrammedTransformTuple<
 >;
 
 type GenericInferableStreamMetatype =
-  | GenericInMemoryIdentifiableItem2ListStreamMetatype
+  | GenericInMemoryIdentifiableItem3StreamMetatype
   | GenericFileSystemNodeStreamMetatype;
 
 type UninferableStreamMetatypeUnion<
@@ -349,7 +349,7 @@ const getInferredInMemoryCollectionTuple = (
 
   const inferredCollectionTuple = missingCollectionIdList.map(
     (collectionId) => {
-      return new InMemoryIdentifiableItem2ListCollection({
+      return new InMemoryIdentifiableItem3Collection({
         collectionId,
         initialItemEggTuple: [],
       });

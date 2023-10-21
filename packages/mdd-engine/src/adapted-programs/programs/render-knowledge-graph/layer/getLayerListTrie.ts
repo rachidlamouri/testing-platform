@@ -22,7 +22,7 @@ export const getLayerListTrie = buildProgrammedTransform({
   .onTransform((layerCollection) => {
     const trie = new LayerListTrie([]);
 
-    layerCollection.forEach((layer) => {
+    layerCollection.list.forEach((layer) => {
       trie.addSubtrie(
         layer.directory.directoryPath.partList,
         () => {

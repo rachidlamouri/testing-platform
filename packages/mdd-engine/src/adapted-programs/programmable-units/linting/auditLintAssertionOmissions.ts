@@ -49,7 +49,7 @@ export const auditLintAssertionOmissions = buildProgrammedTransform({
   })
   .onTransform((omissionCollection, assertionCollection) => {
     const assertionSet = new Set(
-      assertionCollection.map((assertion) => {
+      assertionCollection.list.map((assertion) => {
         return assertion.id.forHuman;
       }),
     );

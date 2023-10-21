@@ -55,10 +55,10 @@ export const aggregateFacts = buildProgrammedTransform({
     ) => {
       return [
         ...partitionFactCollection.list,
-        ...directoryFact2Collection,
-        ...fileFact2Collection,
-        ...fileDependencyPathNodeFactCollection,
-        ...fileDependencyPathSegmentFactCollection,
+        ...directoryFact2Collection.list,
+        ...fileFact2Collection.list,
+        ...fileDependencyPathNodeFactCollection.list,
+        ...fileDependencyPathSegmentFactCollection.list,
       ];
     },
   )

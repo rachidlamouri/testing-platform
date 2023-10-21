@@ -44,7 +44,7 @@ export const assertDirectoriesHaveBoundaries = buildProgrammedTransform({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
   .onTransform((directoryWithFileCollection, boundedDirectoryCollection) => {
-    const unboundedDirectoryList = directoryWithFileCollection.filter(
+    const unboundedDirectoryList = directoryWithFileCollection.list.filter(
       (directory) => {
         const boundedDirectory = boundedDirectoryCollection.byNodePath.get(
           directory.directoryPath.serialized,

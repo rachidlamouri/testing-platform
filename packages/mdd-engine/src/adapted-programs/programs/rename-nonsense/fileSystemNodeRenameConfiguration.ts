@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SpreadN } from '../../../package-agnostic-utilities/type/spreadN';
 import { FileSystemNodeId } from '../../programmable-units/file/fileSystemNode';
@@ -69,7 +69,7 @@ type FileSystemNodeRenameConfigurationCollectionId =
   typeof FILE_SYSTEM_NODE_RENAME_CONFIGURATION_COLLECTION_ID;
 
 export type FileSystemNodeRenameConfigurationStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     FileSystemNodeRenameConfigurationCollectionId,
     FileSystemNodeRenameConfiguration
   >;

@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * See https://graphviz.org/doc/info/lang.html for the specification of
@@ -14,7 +14,7 @@ export const GRAPHVIZ_CODE_COLLECTION_ID = 'graphviz-code';
 type GraphvizCodeCollectionId = typeof GRAPHVIZ_CODE_COLLECTION_ID;
 
 export type GraphvizCodeStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     GraphvizCodeCollectionId,
     GraphvizCode
   >;

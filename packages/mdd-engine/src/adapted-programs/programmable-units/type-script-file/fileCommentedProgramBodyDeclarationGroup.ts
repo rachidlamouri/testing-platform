@@ -1,5 +1,5 @@
 import Case from 'case';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -538,7 +538,7 @@ type FileCommentedProgramBodyDeclarationGroupCollectionId =
   typeof FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID;
 
 export type FileCommentedProgramBodyDeclarationGroupStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     FileCommentedProgramBodyDeclarationGroupCollectionId,
     FileCommentedProgramBodyDeclarationGroup
   >;

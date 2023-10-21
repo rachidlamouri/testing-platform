@@ -55,80 +55,82 @@ export const assertCiModelHasAllPrograms = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .onTransform((programLocatorList, [ciModel], expectedTestFileCollection) => {
-    const testFilePathByProgramFilePath = new Map(
-      expectedTestFileCollection.map((expectedTestFile) => {
+  .onTransform(
+    (programLocatorCollection, [ciModel], expectedTestFileCollection) => {
+      const testFilePathByProgramFilePath = new Map(
+        expectedTestFileCollection.list.map((expectedTestFile) => {
+          return [
+            expectedTestFile.programFile.filePath.serialized,
+            expectedTestFile.testFile.filePath.serialized,
+          ];
+        }),
+      );
+
+      type ComparisonDatum = {
+        name: string;
+        filePath?: string;
+      };
+
+      const compareNames = (a: ComparisonDatum, b: ComparisonDatum): number => {
+        if (a.name === b.name) {
+          return 0;
+        }
+
+        if (a.name < b.name) {
+          return -1;
+        }
+
+        return 1;
+      };
+
+      const actualList = ciModel.programTestGroupList
+        .flatMap((programTestGroup) => {
+          return programTestGroup.programTestList.map<ComparisonDatum>(
+            (programTest) => {
+              return {
+                name: programTest.programName,
+                filePath: programTest.testFilePath,
+              };
+            },
+          );
+        })
+        .sort(compareNames);
+
+      const expectedList = programLocatorCollection.list
+        .map<ComparisonDatum>((locator) => {
+          const testFilePath = testFilePathByProgramFilePath.get(
+            locator.filePath,
+          );
+
+          return {
+            name: locator.programName,
+            filePath: testFilePath,
+          };
+        })
+        .sort(compareNames);
+
+      try {
+        assert.deepStrictEqual(actualList, expectedList);
+        return [];
+      } catch (error) {
         return [
-          expectedTestFile.programFile.filePath.serialized,
-          expectedTestFile.testFile.filePath.serialized,
+          {
+            name: 'missing-program-test-list',
+            error: new Error(
+              'ciModel.ts program name list does not match expected list',
+            ),
+            reporterLocator,
+            sourceLocator: {
+              typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
+              filePath:
+                'packages/mdd-engine/src/adapted-programs/programs/model-ci/ciModel.ts',
+            },
+            context: {
+              error,
+            },
+          } satisfies ReportedProgramError<ReportingLocator>,
         ];
-      }),
-    );
-
-    type ComparisonDatum = {
-      name: string;
-      filePath?: string;
-    };
-
-    const compareNames = (a: ComparisonDatum, b: ComparisonDatum): number => {
-      if (a.name === b.name) {
-        return 0;
       }
-
-      if (a.name < b.name) {
-        return -1;
-      }
-
-      return 1;
-    };
-
-    const actualList = ciModel.programTestGroupList
-      .flatMap((programTestGroup) => {
-        return programTestGroup.programTestList.map<ComparisonDatum>(
-          (programTest) => {
-            return {
-              name: programTest.programName,
-              filePath: programTest.testFilePath,
-            };
-          },
-        );
-      })
-      .sort(compareNames);
-
-    const expectedList = programLocatorList
-      .map<ComparisonDatum>((locator) => {
-        const testFilePath = testFilePathByProgramFilePath.get(
-          locator.filePath,
-        );
-
-        return {
-          name: locator.programName,
-          filePath: testFilePath,
-        };
-      })
-      .sort(compareNames);
-
-    try {
-      assert.deepStrictEqual(actualList, expectedList);
-      return [];
-    } catch (error) {
-      return [
-        {
-          name: 'missing-program-test-list',
-          error: new Error(
-            'ciModel.ts program name list does not match expected list',
-          ),
-          reporterLocator,
-          sourceLocator: {
-            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath:
-              'packages/mdd-engine/src/adapted-programs/programs/model-ci/ciModel.ts',
-          },
-          context: {
-            error,
-          },
-        } satisfies ReportedProgramError<ReportingLocator>,
-      ];
-    }
-  })
+    },
+  )
   .assemble();

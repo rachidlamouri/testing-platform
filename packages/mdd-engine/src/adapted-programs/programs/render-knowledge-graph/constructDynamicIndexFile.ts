@@ -87,7 +87,7 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
       ]
     >;
 
-    const sortedLayerCollection = layerCollection
+    const sortedLayerCollection = layerCollection.list
       .slice()
       .sort((layerA, layerB) => {
         return layerA.sortOrder - layerB.sortOrder;

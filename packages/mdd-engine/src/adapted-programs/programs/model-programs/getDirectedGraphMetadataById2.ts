@@ -23,13 +23,13 @@ export const getDirectedGraphMetadataById2 = buildProgrammedTransform({
   .toItemTuple2<DirectedGraphMetadataByIdStreamMetatype>({
     collectionId: DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID,
   })
-  .onTransform((entryList) => {
+  .onTransform((entryCollection) => {
     const metadataByIdByRootGraphDebugName = new Map<
       string,
       DirectedGraphMetadataById
     >();
 
-    entryList.forEach((entry) => {
+    entryCollection.list.forEach((entry) => {
       const metadataById: DirectedGraphMetadataById =
         metadataByIdByRootGraphDebugName.get(
           entry.rootGraphLocator.id.forHuman,

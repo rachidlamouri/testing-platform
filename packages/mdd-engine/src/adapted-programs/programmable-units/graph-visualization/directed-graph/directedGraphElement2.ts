@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { DirectedCluster2 } from './directedCluster2';
 import { DirectedGraph2 } from './directedGraph2';
 import { DirectedGraphEdge2 } from './directedGraphEdge2';
@@ -22,7 +22,7 @@ type DirectedGraphElement2CollectionId =
   typeof DIRECTED_GRAPH_ELEMENT_2_COLLECTION_ID;
 
 export type DirectedGraphElement2StreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     DirectedGraphElement2CollectionId,
     DirectedGraphElement2
   >;

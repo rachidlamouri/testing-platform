@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -96,7 +96,7 @@ type FilePathLikeStringLiteralCollectionId =
   typeof FILE_PATH_LIKE_STRING_LITERAL_COLLECTION_ID;
 
 export type FilePathLikeStringLiteralStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     FilePathLikeStringLiteralCollectionId,
     FilePathLikeStringLiteral
   >;

@@ -14,7 +14,7 @@ import {
 } from '../partition-fact/partitionFact';
 import { THEME } from '../theme';
 import { BoundedDirectory } from './boundedDirectory';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { DirectedCluster2Instance } from '../../../programmable-units/graph-visualization/directed-graph/directedCluster2';
 import { DirectedGraphElement2 } from '../../../programmable-units/graph-visualization/directed-graph/directedGraphElement2';
 import { FactTypeName } from '../fact/factTypeName';
@@ -119,7 +119,7 @@ export const DIRECTORY_FACT_2_COLLECTION_ID = 'directory-fact-2';
 type DirectoryFact2CollectionId = typeof DIRECTORY_FACT_2_COLLECTION_ID;
 
 export type DirectoryFact2StreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     DirectoryFact2CollectionId,
     DirectoryFact2
   >;

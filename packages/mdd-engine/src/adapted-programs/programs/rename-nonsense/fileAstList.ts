@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { FilePath } from '../../programmable-units/file/filePath';
 import { FileSystemNodeId } from '../../programmable-units/file/fileSystemNode';
@@ -56,8 +56,7 @@ export const FILE_AST_LIST_COLLECTION_ID = 'file-ast-list';
 
 type FileAstListCollectionId = typeof FILE_AST_LIST_COLLECTION_ID;
 
-export type FileAstListStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
-    FileAstListCollectionId,
-    FileAstList
-  >;
+export type FileAstListStreamMetatype = InMemoryIdentifiableItem3StreamMetatype<
+  FileAstListCollectionId,
+  FileAstList
+>;

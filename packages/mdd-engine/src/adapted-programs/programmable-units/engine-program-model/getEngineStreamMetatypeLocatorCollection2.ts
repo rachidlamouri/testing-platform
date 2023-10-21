@@ -41,13 +41,13 @@ export const getEngineStreamMetatypeLocatorCollection2 =
     })
     .onTransform(
       (
-        programRelationshipList,
-        programmedTransformStreamMetatypeRelationshipList,
+        programRelationshipCollection,
+        programmedTransformStreamMetatypeRelationshipCollection,
       ) => {
         const streamMetatypeLocatorById = new Map(
           [
-            ...programRelationshipList,
-            ...programmedTransformStreamMetatypeRelationshipList,
+            ...programRelationshipCollection.list,
+            ...programmedTransformStreamMetatypeRelationshipCollection.list,
           ].map((relationship) => {
             return [
               relationship.streamMetatypeLocator.id,

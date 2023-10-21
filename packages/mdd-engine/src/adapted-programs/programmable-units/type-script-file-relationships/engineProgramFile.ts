@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { EngineFunctionConfiguration } from '../engine-program-model/engineFunctionConfiguration';
 import { TypeScriptFile } from '../type-script-file/typeScriptFile';
 
@@ -16,7 +16,7 @@ export const ENGINE_PROGRAM_FILE_COLLECTION_ID = 'engine-program-file';
 type EngineProgramFileCollectionId = typeof ENGINE_PROGRAM_FILE_COLLECTION_ID;
 
 export type EngineProgramFileStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     EngineProgramFileCollectionId,
     EngineProgramFile
   >;

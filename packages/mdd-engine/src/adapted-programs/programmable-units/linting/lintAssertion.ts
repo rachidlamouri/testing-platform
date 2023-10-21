@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   GenericComplexIdTemplate,
   ComplexId,
@@ -96,7 +96,7 @@ export const LINT_ASSERTION_COLLECTION_ID = 'lint-assertion';
 type LintAssertionCollectionId = typeof LINT_ASSERTION_COLLECTION_ID;
 
 export type LintAssertionStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     LintAssertionCollectionId,
     GenericLintAssertion
   >;

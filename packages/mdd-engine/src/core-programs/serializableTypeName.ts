@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 /**
  * A data structure to snapshot when testing if a utility can detect the right
@@ -19,7 +19,7 @@ type SerializableTypeNameCollectionId =
   typeof SERIALIZABLE_TYPE_NAME_COLLECTION_ID;
 
 export type SerializableTypeNameStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     SerializableTypeNameCollectionId,
     SerializableTypeName
   >;
