@@ -12,6 +12,9 @@ type ProgramSkeletonInput = {
   programmedTransformLocatorList: ProgrammedTransformLocator[];
 };
 
+/**
+ * The information needed to gather everything needed to assemble a ProgramModel
+ */
 export class ProgramSkeleton implements ProgramSkeletonInput {
   get id(): ProgramId {
     return this.programLocator.id;

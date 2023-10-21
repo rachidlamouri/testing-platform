@@ -10,7 +10,8 @@ type ProgrammedTransformInputSkeletonInput = {
 };
 
 /**
- * The information needed to find all of the pieces to build an input
+ * The informationed needed to gather everything required to assemble a
+ * ProgrammedTransformInputModel
  */
 export class ProgrammedTransformInputSkeleton
   implements ProgrammedTransformInputSkeletonInput

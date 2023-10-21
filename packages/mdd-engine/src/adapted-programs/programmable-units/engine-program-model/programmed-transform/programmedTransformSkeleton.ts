@@ -12,6 +12,10 @@ type ProgrammedTransformSkeletonInput = {
   outputSkeletonList: ProgrammedTransformOutputSkeleton[];
 };
 
+/**
+ * The informationed needed to gather everything to assemble a
+ * ProgrammedTransformModel
+ */
 export class ProgrammedTransformSkeleton
   implements ProgrammedTransformSkeletonInput
 {

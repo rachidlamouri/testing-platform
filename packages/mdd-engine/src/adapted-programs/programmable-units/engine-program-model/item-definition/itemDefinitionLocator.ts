@@ -12,10 +12,10 @@ export class ItemDefinitionLocator extends ExportLocator {
   static fromStreamMetatypeLocator(
     streamMetatypeLocator: StreamMetatypeLocator,
   ): ItemDefinitionLocator {
-    const itemIdentifierName = streamMetatypeLocator.identifierName.replace(
-      /StreamMetatype$/,
-      '',
-    );
+    const itemIdentifierName = streamMetatypeLocator.identifierName
+      .replace(/StreamMetatype$/, '')
+      // TODO: this one is specifically for GenericProgramError, which is hacky
+      .replace(/^Generic/, '');
 
     return new ItemDefinitionLocator({
       filePath: streamMetatypeLocator.filePath,
