@@ -1152,14 +1152,12 @@ export const runEngine = ({
     });
 
     class UntriggeredTransformInputKeyGroupError extends Error {
+      context: unknown;
+
       constructor(public metadata: unknown) {
-        super(
-          `Some cologies were not triggered:  \n${JSON.stringify(
-            metadata,
-            null,
-            2,
-          )}`,
-        );
+        super('Some transform input key groups were not triggered');
+
+        this.context = metadata;
       }
     }
 
