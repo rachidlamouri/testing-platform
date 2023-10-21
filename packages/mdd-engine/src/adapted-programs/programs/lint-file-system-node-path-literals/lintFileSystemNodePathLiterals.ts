@@ -9,7 +9,6 @@ import {
   COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
@@ -40,6 +39,7 @@ import {
 import { LintAssertionId } from '../../programmable-units/linting/lintAssertion';
 import { FileSourceInstance } from '../../programmable-units/linting/source/fileSource';
 import { FileLineColumnSourceInstance } from '../../programmable-units/linting/source/fileLineColumnSource';
+import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'lint-file-system-node-path-literals',
@@ -65,8 +65,8 @@ runEngine({
       },
     ),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
     new ProgramErrorCollection({
       programFileCache,
     }),

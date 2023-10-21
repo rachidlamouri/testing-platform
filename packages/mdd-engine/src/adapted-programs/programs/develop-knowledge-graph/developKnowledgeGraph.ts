@@ -41,7 +41,6 @@ runEngine({
       ],
     }),
   ] as const,
-  fileSystemNodeCollectionIdCombination: {},
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     new ProgramErrorCollection({
       programFileCache,

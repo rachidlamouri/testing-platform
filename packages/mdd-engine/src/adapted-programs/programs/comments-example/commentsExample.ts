@@ -6,7 +6,6 @@ import {
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { categorizeFiles } from '../../programmable-units/file/categorizeFiles';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
@@ -17,6 +16,7 @@ import { associateTypeScriptFileToTypescriptConfiguration } from '../../programm
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
+import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'commentsExample',
@@ -38,8 +38,8 @@ runEngine({
       },
     ),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
     new ProgramErrorCollection({
       programFileCache,
     }),

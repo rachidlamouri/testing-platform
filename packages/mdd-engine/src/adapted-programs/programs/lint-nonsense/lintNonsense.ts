@@ -8,7 +8,6 @@ import {
   COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { ProgramErrorCollection } from '../../programmable-units/error/programErrorCollection';
 import { enumerateFileSystemObjects } from '../../programmable-units/file/enumerateFileSystemObjects';
@@ -42,6 +41,7 @@ import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
+import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'lint-nonsense',
@@ -67,8 +67,8 @@ runEngine({
       initialItemEggTuple: ENGINE_FUNCTION_CONFIGURATION_LIST,
     }),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
     new ProgramErrorCollection({
       programFileCache,
     }),

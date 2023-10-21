@@ -21,11 +21,6 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
   {
     filePath:
-      'packages/mdd-engine/src/adapted-programs/programmable-units/file/defaultFileCollectionIdCombination.ts',
-    identifierList: ['defaultFileCollectionIdCombination'],
-  },
-  {
-    filePath:
       'packages/mdd-engine/src/adapted-programs/programmable-units/error/programError.ts',
     identifierList: ['PROGRAM_ERROR_GEPP'],
   },

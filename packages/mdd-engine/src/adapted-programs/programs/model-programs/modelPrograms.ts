@@ -27,7 +27,7 @@ import { ProgramErrorCollection } from '../../programmable-units/error/programEr
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
 import { EngineRunnerStrategy } from '../../../core/engine/runEngine';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
-import { defaultFileCollectionIdCombination } from '../../programmable-units/file/defaultFileCollectionIdCombination';
+import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
@@ -187,8 +187,8 @@ runEngine({
       },
     ),
   ] as const,
-  fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
     new ProgramErrorCollection({
       programFileCache,
     }),
