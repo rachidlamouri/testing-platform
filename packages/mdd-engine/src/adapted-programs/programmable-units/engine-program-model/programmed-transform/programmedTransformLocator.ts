@@ -4,6 +4,9 @@ import { ProgrammedTransformId } from './programmedTransformId';
 
 type ItemDefinitionLocatorInput = ExportLocatorSubclassInput;
 
+/**
+ * The information needed to find a ProgrammedTransform declaration
+ */
 export class ProgrammedTransformLocator extends ExportLocator {
   constructor(input: ItemDefinitionLocatorInput) {
     super({

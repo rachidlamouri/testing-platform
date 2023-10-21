@@ -9,6 +9,10 @@ type ProgrammedTransformOutputSkeletonInput = {
   itemDefinitionLocator: ItemDefinitionLocator;
 };
 
+/**
+ * The informationed needed to gather everything to assemble a
+ * ProgrammedTransformOutputModel
+ */
 export class ProgrammedTransformOutputSkeleton
   implements ProgrammedTransformOutputSkeletonInput
 {
