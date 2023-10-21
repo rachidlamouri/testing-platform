@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -181,5 +181,7 @@ export const FILE_FACT_2_COLLECTION_ID = 'file-fact-2';
 
 type FileFact2CollectionId = typeof FILE_FACT_2_COLLECTION_ID;
 
-export type FileFact2StreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<FileFact2CollectionId, FileFact2>;
+export type FileFact2StreamMetatype = InMemoryIdentifiableItem3StreamMetatype<
+  FileFact2CollectionId,
+  FileFact2
+>;

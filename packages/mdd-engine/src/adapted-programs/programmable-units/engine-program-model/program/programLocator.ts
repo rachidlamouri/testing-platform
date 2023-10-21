@@ -1,5 +1,5 @@
 import Case from 'case';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 import { TypeScriptFile } from '../../type-script-file/typeScriptFile';
 import {
@@ -111,7 +111,7 @@ export const PROGRAM_LOCATOR_COLLECTION_ID = 'program-locator';
 type ProgramLocatorCollectionId = typeof PROGRAM_LOCATOR_COLLECTION_ID;
 
 export type ProgramLocatorStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     ProgramLocatorCollectionId,
     ProgramLocator
   >;

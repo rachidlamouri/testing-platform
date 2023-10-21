@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { Directory } from '../../../programmable-units/file/directory';
@@ -56,7 +56,7 @@ export const LAYER_COLLECTION_ID = 'layer';
 
 type LayerCollectionId = typeof LAYER_COLLECTION_ID;
 
-export type LayerStreamMetatype = InMemoryIdentifiableItem2ListStreamMetatype<
+export type LayerStreamMetatype = InMemoryIdentifiableItem3StreamMetatype<
   LayerCollectionId,
   Layer
 >;

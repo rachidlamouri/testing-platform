@@ -1,5 +1,5 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -117,7 +117,7 @@ type EngineProgrammedTransformLocator2CollectionId =
   typeof ENGINE_PROGRAMMED_TRANSFORM_LOCATOR_2_COLLECTION_ID;
 
 export type EngineProgrammedTransformLocator2StreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     EngineProgrammedTransformLocator2CollectionId,
     EngineProgrammedTransformLocator2
   >;

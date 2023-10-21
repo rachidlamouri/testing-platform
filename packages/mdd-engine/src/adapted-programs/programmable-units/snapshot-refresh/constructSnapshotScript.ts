@@ -21,9 +21,9 @@ export const constructSnapshotScript = buildProgrammedTransform({
   .toItem2<OutputFileStreamMetatype>({
     collectionId: OUTPUT_FILE_COLLECTION_ID,
   })
-  .onTransform((inputList) => {
+  .onTransform((programFileCollection) => {
     const filePathSet = new Set(
-      inputList.map((input) => input.file.filePath.serialized),
+      programFileCollection.list.map((input) => input.file.filePath.serialized),
     );
 
     const text = [...filePathSet]

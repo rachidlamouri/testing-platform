@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -64,7 +64,7 @@ type EngineProgrammedTransform3CollectionId =
   typeof ENGINE_PROGRAMMED_TRANSFORM_3_COLLECTION_ID;
 
 export type EngineProgrammedTransform3StreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     EngineProgrammedTransform3CollectionId,
     EngineProgrammedTransform3
   >;

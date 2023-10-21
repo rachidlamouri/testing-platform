@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -103,7 +103,7 @@ type PartitionedFileDependencyPathNodeCollectionId =
   typeof PARTITIONED_FILE_DEPENDENCY_PATH_NODE_COLLECTION_ID;
 
 export type PartitionedFileDependencyPathNodeStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     PartitionedFileDependencyPathNodeCollectionId,
     PartitionedFileDependencyPathNode
   >;

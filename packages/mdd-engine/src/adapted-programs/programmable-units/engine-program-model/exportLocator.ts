@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   GenericComplexIdTemplate,
   ComplexId,
@@ -61,7 +61,7 @@ export const EXPORT_LOCATOR_COLLECTION_ID = 'export-locator';
 type ExportLocatorCollectionId = typeof EXPORT_LOCATOR_COLLECTION_ID;
 
 export type ExportLocatorStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     ExportLocatorCollectionId,
     ExportLocator
   >;

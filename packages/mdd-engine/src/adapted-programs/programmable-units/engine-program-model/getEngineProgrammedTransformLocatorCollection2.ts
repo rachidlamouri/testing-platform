@@ -28,8 +28,8 @@ export const getEngineProgrammedTransformLocatorCollection2 =
     .toItemTuple2<EngineProgrammedTransformLocator2StreamMetatype>({
       collectionId: ENGINE_PROGRAMMED_TRANSFORM_LOCATOR_2_COLLECTION_ID,
     })
-    .onTransform((relationshipList) => {
-      const entries = relationshipList
+    .onTransform((relationshipCollection) => {
+      const entries = relationshipCollection.list
         .map((relationship) => relationship.programmedTransformLocator)
         .map(
           (

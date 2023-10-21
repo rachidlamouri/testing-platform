@@ -1,5 +1,5 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -81,7 +81,7 @@ export const AST_NODE_LOCATOR_COLLECTION_ID = 'ast-node-locator';
 type AstNodeLocatorCollectionId = typeof AST_NODE_LOCATOR_COLLECTION_ID;
 
 export type AstNodeLocatorStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     AstNodeLocatorCollectionId,
     GenericAstNodeLocator
   >;

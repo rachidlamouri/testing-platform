@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -45,7 +45,7 @@ type DirectedGraphMetadataEntryCollectionId =
   typeof DIRECTED_GRAPH_METADATA_ENTRY_COLLECTION_ID;
 
 export type DirectedGraphMetadataEntryStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     DirectedGraphMetadataEntryCollectionId,
     DirectedGraphMetadataEntry
   >;

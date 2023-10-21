@@ -1,5 +1,5 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { AstNodeLocator } from '../rename-nonsense/astNodeLocator';
 
 /**
@@ -14,7 +14,7 @@ type StringLiteralNodeLocatorCollectionId =
   typeof STRING_LITERAL_NODE_LOCATOR_COLLECTION_ID;
 
 export type StringLiteralNodeLocatorStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     StringLiteralNodeLocatorCollectionId,
     StringLiteralNodeLocator
   >;

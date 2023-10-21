@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 export type TypeScriptFileImport = {
   isInternal: boolean;
@@ -54,7 +54,7 @@ type TypeScriptFileImportListCollectionId =
   typeof TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID;
 
 export type TypeScriptFileImportListStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     TypeScriptFileImportListCollectionId,
     TypeScriptFileImportList
   >;

@@ -118,8 +118,8 @@ export const constructDynamicMetadataFile = buildProgrammedTransform({
   .onTransform(
     (boundaryFactCollection, [commonBoundaryRoot], fileFactCollection) => {
       const metadataList: Metadata[] = [
-        ...boundaryFactCollection,
-        ...fileFactCollection,
+        ...boundaryFactCollection.list,
+        ...fileFactCollection.list,
       ].map((fact) => fact.graphMetadata);
 
       const metadataById = Object.fromEntries(

@@ -52,71 +52,77 @@ export const assertNoCopyPasta = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .onTransform((programList, streamMetatypeList, programmedTransformList) => {
-    const describedProgramEntryList = programList.map((program) => {
-      return [program.description, { program }] as const;
-    });
-
-    const describedStreamMetatypeEntryList = streamMetatypeList.map(
-      (streamMetatype) => {
-        return [streamMetatype.commentText, { streamMetatype }] as const;
-      },
-    );
-
-    const describedProgrammedTransformEntryList = programmedTransformList.map(
-      (programmedTransform) => {
-        return [
-          programmedTransform.commentText,
-          { programmedTransform },
-        ] as const;
-      },
-    );
-
-    const duplicateDescribedDatumByDescription = new Map<string, unknown[]>();
-
-    [
-      ...describedProgramEntryList,
-      ...describedStreamMetatypeEntryList,
-      ...describedProgrammedTransformEntryList.filter(
-        ([, { programmedTransform }]) => {
-          return (
-            programmedTransform.locator.typeName !==
-            EngineProgrammedTransformLocator2TypeName.BuildAddMetadataForSerialization
-          );
+  .onTransform(
+    (
+      programCollection,
+      streamMetatypeCollection,
+      programmedTransformCollection,
+    ) => {
+      const describedProgramEntryList = programCollection.list.map(
+        (program) => {
+          return [program.description, { program }] as const;
         },
-      ),
-    ]
-      .filter(([description]) => {
-        return description !== '';
-      })
-      .forEach(([description, datum]) => {
-        const group =
-          duplicateDescribedDatumByDescription.get(description) ?? [];
-        group.push(datum);
-        duplicateDescribedDatumByDescription.set(description, group);
-      });
+      );
 
-    const errorList = [...duplicateDescribedDatumByDescription.entries()]
-      .filter(([, group]) => group.length > 1)
-      .map(([description, duplicateDescriptionGroup]) => {
-        return {
-          // TODO: remove the need for this unique identfier
-          name: `no-copy-pasta/${uuid.v4()}`,
-          error: new Error(
-            'Encountered two or more program elements with the same description',
-          ),
-          reporterLocator,
-          sourceLocator: {
-            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: '',
-          },
-          context: {
-            description,
-            duplicateDescriptionGroup,
-          },
-        } satisfies ProgramErrorEgg<ReportingLocator>;
-      });
+      const describedStreamMetatypeEntryList =
+        streamMetatypeCollection.list.map((streamMetatype) => {
+          return [streamMetatype.commentText, { streamMetatype }] as const;
+        });
 
-    return errorList;
-  })
+      const describedProgrammedTransformEntryList =
+        programmedTransformCollection.list.map((programmedTransform) => {
+          return [
+            programmedTransform.commentText,
+            { programmedTransform },
+          ] as const;
+        });
+
+      const duplicateDescribedDatumByDescription = new Map<string, unknown[]>();
+
+      [
+        ...describedProgramEntryList,
+        ...describedStreamMetatypeEntryList,
+        ...describedProgrammedTransformEntryList.filter(
+          ([, { programmedTransform }]) => {
+            return (
+              programmedTransform.locator.typeName !==
+              EngineProgrammedTransformLocator2TypeName.BuildAddMetadataForSerialization
+            );
+          },
+        ),
+      ]
+        .filter(([description]) => {
+          return description !== '';
+        })
+        .forEach(([description, datum]) => {
+          const group =
+            duplicateDescribedDatumByDescription.get(description) ?? [];
+          group.push(datum);
+          duplicateDescribedDatumByDescription.set(description, group);
+        });
+
+      const errorList = [...duplicateDescribedDatumByDescription.entries()]
+        .filter(([, group]) => group.length > 1)
+        .map(([description, duplicateDescriptionGroup]) => {
+          return {
+            // TODO: remove the need for this unique identfier
+            name: `no-copy-pasta/${uuid.v4()}`,
+            error: new Error(
+              'Encountered two or more program elements with the same description',
+            ),
+            reporterLocator,
+            sourceLocator: {
+              typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
+              filePath: '',
+            },
+            context: {
+              description,
+              duplicateDescriptionGroup,
+            },
+          } satisfies ProgramErrorEgg<ReportingLocator>;
+        });
+
+      return errorList;
+    },
+  )
   .assemble();

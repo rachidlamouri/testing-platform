@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { CollectionDefinitionId } from './collectionDefinitionId';
 import { CollectionDefinitionLocator } from './collectionDefinitionLocator';
 
@@ -43,7 +43,7 @@ type CollectionDefinitionModelCollectionId =
   typeof COLLECTION_DEFINITION_MODEL_COLLECTION_ID;
 
 export type CollectionDefinitionModelStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     CollectionDefinitionModelCollectionId,
     CollectionDefinitionModel
   >;

@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { BashFile } from '../../programmable-units/bash-file/bashFile';
@@ -63,7 +63,7 @@ type ExpectedProgramTestFileCollectionId =
   typeof EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID;
 
 export type ExpectedProgramTestFileStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     ExpectedProgramTestFileCollectionId,
     ExpectedProgramTestFile
   >;

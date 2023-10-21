@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { FilePath } from '../file/filePath';
 
 /**
@@ -22,7 +22,7 @@ type TypeScriptFileConfigurationCollectionId =
   typeof TYPE_SCRIPT_FILE_CONFIGURATION_COLLECTION_ID;
 
 export type TypeScriptFileConfigurationStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     TypeScriptFileConfigurationCollectionId,
     TypeScriptFileConfiguration
   >;

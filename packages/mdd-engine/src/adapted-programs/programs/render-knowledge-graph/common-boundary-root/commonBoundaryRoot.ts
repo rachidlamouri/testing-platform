@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -33,7 +33,7 @@ export const COMMON_BOUNDARY_ROOT_COLLECTION_ID = 'common-boundary-root';
 type CommonBoundaryRootCollectionId = typeof COMMON_BOUNDARY_ROOT_COLLECTION_ID;
 
 export type CommonBoundaryRootStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     CommonBoundaryRootCollectionId,
     CommonBoundaryRoot
   >;

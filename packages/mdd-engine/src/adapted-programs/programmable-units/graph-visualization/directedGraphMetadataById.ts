@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 export type DirectedGraphMetadatumField = {
   label: string;
@@ -26,7 +26,7 @@ type DirectedGraphMetadataByIdCollectionId =
   typeof DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID;
 
 export type DirectedGraphMetadataByIdStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     DirectedGraphMetadataByIdCollectionId,
     DirectedGraphMetadataById
   >;

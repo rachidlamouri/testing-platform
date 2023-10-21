@@ -1,5 +1,5 @@
 import { runEngine2 } from '../core/engine/runEngine';
-import { InMemoryIdentifiableItem2ListCollection } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3Collection } from '../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   DATUM_TEST_CASE_INPUT_COLLECTION_ID,
   DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
@@ -24,12 +24,10 @@ const programFileCache = new ProgramFileCache({
  */
 runEngine2({
   inputCollectionList: [
-    new InMemoryIdentifiableItem2ListCollection<DatumTestCaseInputStreamMetatype>(
-      {
-        collectionId: DATUM_TEST_CASE_INPUT_COLLECTION_ID,
-        initialItemEggTuple: DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
-      },
-    ),
+    new InMemoryIdentifiableItem3Collection<DatumTestCaseInputStreamMetatype>({
+      collectionId: DATUM_TEST_CASE_INPUT_COLLECTION_ID,
+      initialItemEggTuple: DATUM_TEST_CASE_INPUT_IDENTIFIABLE_ITEM_LIST,
+    }),
     new JsonSerializableCollection<SerializedConfiguration>({
       collectionId: 'serialized',
       programFileCache,

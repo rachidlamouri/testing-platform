@@ -1,5 +1,5 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { FilePath } from '../file/filePath';
 
 /**
@@ -22,7 +22,7 @@ type ParsedTypeScriptFileCollectionId =
   typeof PARSED_TYPE_SCRIPT_FILE_COLLECTION_ID;
 
 export type ParsedTypeScriptFileStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     ParsedTypeScriptFileCollectionId,
     ParsedTypeScriptFile
   >;

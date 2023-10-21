@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import { SimplifyN } from '../../../../package-agnostic-utilities/type/simplify';
 import { Metadata } from '../app/browser/dynamicComponentTypes';
@@ -74,7 +74,7 @@ export const BOUNDARY_FACT_COLLECTION_ID = 'boundary-fact';
 type BoundaryFactCollectionId = typeof BOUNDARY_FACT_COLLECTION_ID;
 
 export type BoundaryFactStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     BoundaryFactCollectionId,
     BoundaryFact
   >;

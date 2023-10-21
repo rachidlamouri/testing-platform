@@ -22,10 +22,10 @@ export const groupGraphElements = buildProgrammedTransform({
   .toItemTuple2<GraphElementGroupStreamMetatype>({
     collectionId: GRAPH_ELEMENT_GROUP_COLLECTION_ID,
   })
-  .onTransform((allGraphElementList) => {
+  .onTransform((allGraphElementCollection) => {
     const elementGroupByRootLocatorId = new Map<string, GraphElementGroup>();
 
-    allGraphElementList.forEach((element) => {
+    allGraphElementCollection.list.forEach((element) => {
       const key = element.rootGraphLocator.id.forHuman;
 
       const group =

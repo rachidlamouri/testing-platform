@@ -10,7 +10,7 @@ import {
   ComplexId,
 } from '../../package-agnostic-utilities/data-structure/id';
 import { SimplifyN } from '../../package-agnostic-utilities/type/simplify';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../collection/inMemoryIdentifiableItemCollection2';
 
 const FILE_EXISTENCE_ASSERTER_INPUT_ID_TEMPLATE = [
   ['requestor', ComplexId.ANY],
@@ -97,7 +97,7 @@ type FileExistenceAsserterInputCollectionId =
   typeof FILE_EXISTENCE_ASSERTER_INPUT_COLLECTION_ID;
 
 export type FileExistenceAsserterInputStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     FileExistenceAsserterInputCollectionId,
     FileExistenceAsserterInput
   >;

@@ -1,5 +1,5 @@
 import { posix } from 'path';
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -87,7 +87,7 @@ type FileAncestorDirectoryPathSetCollectionId =
   typeof FILE_ANCESTOR_DIRECTORY_PATH_SET_COLLECTION_ID;
 
 export type FileAncestorDirectoryPathSetStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     FileAncestorDirectoryPathSetCollectionId,
     FileAncestorDirectoryPathSet
   >;

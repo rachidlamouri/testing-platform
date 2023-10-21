@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -86,5 +86,7 @@ export const BOUNDARY_COLLECTION_ID = 'boundary';
 
 type BoundaryCollectionId = typeof BOUNDARY_COLLECTION_ID;
 
-export type BoundaryStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<BoundaryCollectionId, Boundary>;
+export type BoundaryStreamMetatype = InMemoryIdentifiableItem3StreamMetatype<
+  BoundaryCollectionId,
+  Boundary
+>;

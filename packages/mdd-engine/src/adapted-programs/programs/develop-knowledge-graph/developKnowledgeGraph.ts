@@ -1,4 +1,3 @@
-import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
   buildCollectionByCollectionId,
   runEngine,
@@ -16,6 +15,7 @@ import {
   AppRendererDelayerInstance,
 } from '../render-knowledge-graph/appRendererDelayer';
 import { renderApp } from '../render-knowledge-graph/app/node/renderApp';
+import { InMemoryIdentifiableItem3Collection } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'develop-knowledge-graph',
@@ -32,7 +32,7 @@ const programFileCache = new ProgramFileCache({
  */
 runEngine({
   explicitCollectionTuple: [
-    new InMemoryCollection<AppRendererDelayerStreamMetatype>({
+    new InMemoryIdentifiableItem3Collection<AppRendererDelayerStreamMetatype>({
       collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
       initialItemEggTuple: [
         new AppRendererDelayerInstance({

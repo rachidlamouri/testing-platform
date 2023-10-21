@@ -37,8 +37,8 @@ export const getCommonBoundaryRoot = buildProgrammedTransform({
   .toItemTuple2<BoundaryFactStreamMetatype>({
     collectionId: BOUNDARY_FACT_COLLECTION_ID,
   })
-  .onTransform((boundaryList, directoryCollection) => {
-    const boundaryDirectoryList = boundaryList.map((boundary) => {
+  .onTransform((boundaryCollection, directoryCollection) => {
+    const boundaryDirectoryList = boundaryCollection.list.map((boundary) => {
       const directory = directoryCollection.byNodePath.get(
         boundary.directory.directoryPath.serialized,
       );
@@ -75,7 +75,7 @@ export const getCommonBoundaryRoot = buildProgrammedTransform({
       directoryPath: partListCopy.join(posix.sep),
     });
 
-    const boundaryFactList = boundaryList.map((boundary) => {
+    const boundaryFactList = boundaryCollection.list.map((boundary) => {
       return new BoundaryFactInstance({
         boundary,
         commonBoundaryRoot,

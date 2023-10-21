@@ -1,4 +1,4 @@
-import { InMemoryIdentifiableItem2ListStreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { buildNamedConstructorFunction } from '../../../../../package-agnostic-utilities/constructor-function/buildNamedConstructorFunction';
 import {
   GenericComplexIdTemplate,
@@ -119,7 +119,7 @@ type FileDependencyPathSegmentFactCollectionId =
   typeof FILE_DEPENDENCY_PATH_SEGMENT_FACT_COLLECTION_ID;
 
 export type FileDependencyPathSegmentFactStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
+  InMemoryIdentifiableItem3StreamMetatype<
     FileDependencyPathSegmentFactCollectionId,
     FileDependencyPathSegmentFact
   >;
