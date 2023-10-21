@@ -5,6 +5,7 @@ import {
   PROGRAM_ERROR_COLLECTION_ID,
 } from '../../error/programError';
 import { FileSourceInstance } from '../../linting/source/fileSource';
+import { CategorizedCommentTypeName } from '../../type-script-file/comment/categorized/categorizedCommentTypeName';
 import {
   FILE_COMMENTED_PROGRAM_BODY_DECLARATION_GROUP_COLLECTION_ID,
   FileCommentedProgramBodyDeclarationGroupStreamMetatype,
@@ -51,36 +52,64 @@ export const parseItemDefinition = buildProgrammedTransform({
       itemDefinitionLocator.identifierName,
     );
 
-    if (itemDeclaration === undefined) {
-      return {
-        [ITEM_DEFINITION_MODEL_COLLECTION_ID]: [],
-        [PROGRAM_ERROR_COLLECTION_ID]: [
-          new LocatableError({
-            message: `Unable to locate item "${itemDefinitionLocator.identifierName}"`,
-            reporterSource: new FileSourceInstance({
-              absoluteFilePath: __filename,
+    const missingDeclarationError =
+      itemDeclaration === undefined
+        ? [
+            new LocatableError({
+              message: `Unable to locate item "${itemDefinitionLocator.identifierName}"`,
+              reporterSource: new FileSourceInstance({
+                absoluteFilePath: __filename,
+              }),
+              errorSource: new FileSourceInstance({
+                filePath: itemDefinitionLocator.filePath,
+              }),
+              context: {
+                itemDefinitionLocator,
+                declarationGroup,
+              },
             }),
-            errorSource: new FileSourceInstance({
-              filePath: itemDefinitionLocator.filePath,
+          ]
+        : [];
+
+    const description =
+      itemDeclaration?.comment?.typeName ===
+      CategorizedCommentTypeName.Descriptive
+        ? itemDeclaration.comment.description
+        : null;
+
+    const missingDescriptionError =
+      description === null
+        ? [
+            new LocatableError({
+              message: `Item "${itemDefinitionLocator.identifierName}" is missing a description`,
+              reporterSource: new FileSourceInstance({
+                absoluteFilePath: __filename,
+              }),
+              errorSource: new FileSourceInstance({
+                filePath: itemDefinitionLocator.filePath,
+              }),
+              context: {
+                itemDefinitionLocator,
+                declarationGroup,
+              },
             }),
-            context: {
-              itemDefinitionLocator,
-              declarationGroup,
-            },
-          }),
-        ],
-      };
-    }
+          ]
+        : [];
 
     return {
       [ITEM_DEFINITION_MODEL_COLLECTION_ID]: [
         new ItemDefinitionModel({
           locator: itemDefinitionLocator,
-          name: itemDeclaration.identifiableNode.id.name,
-          description: itemDeclaration.commentText ?? '',
+          name:
+            itemDeclaration?.identifiableNode.id.name ??
+            itemDefinitionLocator.identifierName,
+          description: description ?? '',
         }),
       ],
-      [PROGRAM_ERROR_COLLECTION_ID]: [],
+      [PROGRAM_ERROR_COLLECTION_ID]: [
+        ...missingDeclarationError,
+        ...missingDescriptionError,
+      ],
     };
   })
   .assemble();
