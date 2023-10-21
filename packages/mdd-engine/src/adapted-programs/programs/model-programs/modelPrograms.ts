@@ -61,6 +61,59 @@ import {
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
+import { PROGRAM_LOCATOR_COLLECTION_ID } from '../../programmable-units/engine-program-model/program/programLocator';
+import {
+  COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID,
+  CollectionDefinitionLocatorStreamMetatype,
+} from '../../programmable-units/engine-program-model/collection-definition/collectionDefinitionLocator';
+import {
+  ITEM_DEFINITION_LOCATOR_COLLECTION_ID,
+  ItemDefinitionLocatorStreamMetatype,
+} from '../../programmable-units/engine-program-model/item-definition/itemDefinitionLocator';
+import {
+  COLLECTION_INSTANCE_SKELETON_COLLECTION_ID,
+  CollectionInstanceSkeletonStreamMetatype,
+} from '../../programmable-units/engine-program-model/collection-instance/collectionInstanceSkeleton';
+import { parseProgramFile } from '../../programmable-units/engine-program-model/program-file-parser/parseProgramFile';
+import { InMemoryIdentifiableItem3Collection } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import {
+  PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID,
+  ProgrammedTransformLocatorStreamMetatype,
+} from '../../programmable-units/engine-program-model/programmed-transform/programmedTransformLocator';
+import {
+  PROGRAM_SKELETON_COLLECTION_ID,
+  ProgramSkeletonStreamMetatype,
+} from '../../programmable-units/engine-program-model/program/programSkeleton';
+import { parseItemDefinition } from '../../programmable-units/engine-program-model/item-definition/parseItemDefinition';
+import { ITEM_DEFINITION_MODEL_COLLECTION_ID } from '../../programmable-units/engine-program-model/item-definition/itemDefinitionModel';
+import { parseProgrammedTransform } from '../../programmable-units/engine-program-model/programmed-transform-parser/parseProgrammedTransform';
+import {
+  PROGRAMMED_TRANSFORM_SKELETON_COLLECTION_ID,
+  ProgrammedTransformSkeletonStreamMetatype,
+} from '../../programmable-units/engine-program-model/programmed-transform/programmedTransformSkeleton';
+import {
+  PROGRAMMED_TRANSFORM_INPUT_SKELETON_COLLECTION_ID,
+  ProgrammedTransformInputSkeletonStreamMetatype,
+} from '../../programmable-units/engine-program-model/programmed-transform/input/programmedTransformInputSkeleton';
+import {
+  PROGRAMMED_TRANSFORM_OUTPUT_SKELETON_COLLECTION_ID,
+  ProgrammedTransformOutputSkeletonStreamMetatype,
+} from '../../programmable-units/engine-program-model/programmed-transform/output/programmedTransformOutputSkeleton';
+import {
+  PROGRAMMED_TRANSFORM_INPUT_MODEL_COLLECTION_ID,
+  ProgrammedTransformInputModelStreamMetatype,
+} from '../../programmable-units/engine-program-model/programmed-transform/input/programmedTransformInputModel';
+import {
+  PROGRAMMED_TRANSFORM_OUTPUT_MODEL_COLLECTION_ID,
+  ProgrammedTransformOutputModelStreamMetatype,
+} from '../../programmable-units/engine-program-model/programmed-transform/output/programmedTransformOutputModel';
+import { buildProgrammedTransformInputModel } from '../../programmable-units/engine-program-model/programmed-transform/input/buildProgrammedTransformInputModel';
+import { buildProgrammedTransformOutputModel } from '../../programmable-units/engine-program-model/programmed-transform/output/buildProgrammedTransformOutputModel';
+import { buildProgrammedTransformModel } from '../../programmable-units/engine-program-model/programmed-transform/buildProgrammedTransformModel';
+import {
+  PROGRAMMED_TRANSFORM_MODEL_COLLECTION_ID,
+  ProgrammedTransformModelStreamMetatype,
+} from '../../programmable-units/engine-program-model/programmed-transform/programmedTransformModel';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -93,6 +146,70 @@ runEngine({
         NULL_OMISSION,
       ],
     }),
+    new InMemoryIdentifiableItem3Collection<CollectionDefinitionLocatorStreamMetatype>(
+      {
+        collectionId: COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID,
+        continueOnDuplicate: true,
+      },
+    ),
+    new InMemoryIdentifiableItem3Collection<ItemDefinitionLocatorStreamMetatype>(
+      {
+        collectionId: ITEM_DEFINITION_LOCATOR_COLLECTION_ID,
+        continueOnDuplicate: true,
+      },
+    ),
+    new InMemoryIdentifiableItem3Collection<CollectionInstanceSkeletonStreamMetatype>(
+      {
+        collectionId: COLLECTION_INSTANCE_SKELETON_COLLECTION_ID,
+        continueOnDuplicate: false,
+      },
+    ),
+    new InMemoryIdentifiableItem3Collection<ProgrammedTransformLocatorStreamMetatype>(
+      {
+        collectionId: PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID,
+        continueOnDuplicate: true,
+      },
+    ),
+    new InMemoryIdentifiableItem3Collection<ProgramSkeletonStreamMetatype>({
+      collectionId: PROGRAM_SKELETON_COLLECTION_ID,
+      continueOnDuplicate: false,
+    }),
+    new InMemoryIdentifiableItem3Collection<ProgrammedTransformSkeletonStreamMetatype>(
+      {
+        collectionId: PROGRAMMED_TRANSFORM_SKELETON_COLLECTION_ID,
+        continueOnDuplicate: false,
+      },
+    ),
+    new InMemoryIdentifiableItem3Collection<ProgrammedTransformInputSkeletonStreamMetatype>(
+      {
+        collectionId: PROGRAMMED_TRANSFORM_INPUT_SKELETON_COLLECTION_ID,
+        continueOnDuplicate: false,
+      },
+    ),
+    new InMemoryIdentifiableItem3Collection<ProgrammedTransformOutputSkeletonStreamMetatype>(
+      {
+        collectionId: PROGRAMMED_TRANSFORM_OUTPUT_SKELETON_COLLECTION_ID,
+        continueOnDuplicate: false,
+      },
+    ),
+    new InMemoryIdentifiableItem3Collection<ProgrammedTransformInputModelStreamMetatype>(
+      {
+        collectionId: PROGRAMMED_TRANSFORM_INPUT_MODEL_COLLECTION_ID,
+        continueOnDuplicate: false,
+      },
+    ),
+    new InMemoryIdentifiableItem3Collection<ProgrammedTransformOutputModelStreamMetatype>(
+      {
+        collectionId: PROGRAMMED_TRANSFORM_OUTPUT_MODEL_COLLECTION_ID,
+        continueOnDuplicate: false,
+      },
+    ),
+    new InMemoryIdentifiableItem3Collection<ProgrammedTransformModelStreamMetatype>(
+      {
+        collectionId: PROGRAMMED_TRANSFORM_MODEL_COLLECTION_ID,
+        continueOnDuplicate: false,
+      },
+    ),
   ] as const,
   fileSystemNodeCollectionIdCombination: defaultFileCollectionIdCombination,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
@@ -115,34 +232,40 @@ runEngine({
     getTypeScriptFileImportList,
 
     filterEngineProgramFile,
-    getEngineProgramLocator3,
-    getEngineProgrammedTransformLocatorCollection2,
-    getEngineProgrammedTransform3,
-    getEngineProgram3,
-    getEngineStreamMetatypeLocatorCollection2,
-    getEngineStreamMetatype2,
+    parseProgramFile,
+    parseItemDefinition,
+    parseProgrammedTransform,
+    buildProgrammedTransformInputModel,
+    buildProgrammedTransformOutputModel,
+    buildProgrammedTransformModel,
+    // getEngineProgramLocator3,
+    // getEngineProgrammedTransformLocatorCollection2,
+    // getEngineProgrammedTransform3,
+    // getEngineProgram3,
+    // getEngineStreamMetatypeLocatorCollection2,
+    // getEngineStreamMetatype2,
 
-    getTopLevelEngineProgramGraphElements,
-    getEngineProgramStreamMetatypeElements,
-    getEngineProgrammedTransformGraphElements,
-    getInputEdges,
-    getOutputEdge,
-    groupGraphElements,
-    getDirectedGraphFromGraphElementGroup,
+    // getTopLevelEngineProgramGraphElements,
+    // getEngineProgramStreamMetatypeElements,
+    // getEngineProgrammedTransformGraphElements,
+    // getInputEdges,
+    // getOutputEdge,
+    // groupGraphElements,
+    // getDirectedGraphFromGraphElementGroup,
 
-    getTopLevelEngineProgramMetadataEntries,
-    getEngineStreamMetatypeMetadataEntry,
-    getEngineProgrammedTransformMetadataEntry,
-    getInputMetadataEntry,
-    getDirectedGraphMetadataById2,
+    // getTopLevelEngineProgramMetadataEntries,
+    // getEngineStreamMetatypeMetadataEntry,
+    // getEngineProgrammedTransformMetadataEntry,
+    // getInputMetadataEntry,
+    // getDirectedGraphMetadataById2,
 
-    encodeDirectedGraphAsGraphvizCode,
-    renderGraphvizCodeToSvgDocument,
-    addInteractivityToSvgDocument,
+    // encodeDirectedGraphAsGraphvizCode,
+    // renderGraphvizCodeToSvgDocument,
+    // addInteractivityToSvgDocument,
 
-    captureOutputFileDigestList,
+    // captureOutputFileDigestList,
 
-    assertNoCopyPasta,
+    // assertNoCopyPasta,
 
     // TODO: add the audit back in when we don't need the NULL_OMISSION
     // auditLintAssertionOmissions,
@@ -154,7 +277,18 @@ runEngine({
   programFileCache,
   serializeeCollectionIdList: [
     // note: keep this is a multiline list for easier debugging
-    SANITY_SNAPSHOT_COLLECTION_ID,
+    // SANITY_SNAPSHOT_COLLECTION_ID,
+    PROGRAM_LOCATOR_COLLECTION_ID,
+    COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID,
+    ITEM_DEFINITION_LOCATOR_COLLECTION_ID,
+    COLLECTION_INSTANCE_SKELETON_COLLECTION_ID,
+    PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID,
+    PROGRAM_SKELETON_COLLECTION_ID,
+    ITEM_DEFINITION_MODEL_COLLECTION_ID,
+    PROGRAMMED_TRANSFORM_SKELETON_COLLECTION_ID,
+    PROGRAMMED_TRANSFORM_INPUT_SKELETON_COLLECTION_ID,
+    PROGRAMMED_TRANSFORM_OUTPUT_SKELETON_COLLECTION_ID,
+    PROGRAMMED_TRANSFORM_MODEL_COLLECTION_ID,
   ],
   strategy: EngineRunnerStrategy.WaitForAllDependencies,
 });
