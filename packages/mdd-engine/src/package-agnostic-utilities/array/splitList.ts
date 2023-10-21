@@ -14,6 +14,8 @@ type ListSplitterParameter<TElementA, TElementB> = {
  * more than one accumulator, and a version that takes 2+ predicates and and
  * throws if an element would be in two accumulators. These variants should also
  * throw if an element cannot be placed in one of the 2+ accumulators
+ *
+ * @deprecated use splitList2
  */
 export const splitList = <TElementA, TElementB>({
   list,

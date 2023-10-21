@@ -60,7 +60,7 @@ export const parseProgramFile = buildProgrammedTransform({
     getRightKeyTuple: (leftInput) => [
       leftInput.item.programFile.filePath.serialized,
     ],
-    getRightKey: (rightInput) => rightInput.item.id,
+    getRightKey: (rightInput) => rightInput.item.filePathObject.serialized,
   })
   .andFromItemTuple2<
     TypeScriptFileImportListStreamMetatype,
@@ -70,7 +70,7 @@ export const parseProgramFile = buildProgrammedTransform({
     getRightKeyTuple: (leftInput) => [
       leftInput.item.programFile.filePath.serialized,
     ],
-    getRightKey: (rightInput) => rightInput.item.id,
+    getRightKey: (rightInput) => rightInput.item.filePath,
   })
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
