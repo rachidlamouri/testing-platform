@@ -109,6 +109,11 @@ import { getUtilityBoundary } from './boundary/getUtilityBoundary';
 import { getProgrammableUnitBoundary } from './boundary/getProgrammableUnitBoundary';
 import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 import { FileSystemNodeCollection } from '../../programmable-units/file/fileSystemNodeCollection';
+import {
+  APPLICATION_CONFIGURATION_COLLECTION_ID,
+  ApplicationConfigurationStreamMetatype,
+} from './app/node/applicationConfiguration';
+import { applicationConfiguration } from './applicationConfiguration';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-knowledge-graph',
@@ -143,6 +148,10 @@ runEngine({
     new InMemoryIdentifiableItem3Collection<LayerConfigurationStreamMetatype>({
       collectionId: LAYER_CONFIGURATION_COLLECTION_ID,
       initialItemEggTuple: LAYER_CONFIGURATION_LIST,
+    }),
+    new InMemoryCollection<ApplicationConfigurationStreamMetatype>({
+      collectionId: APPLICATION_CONFIGURATION_COLLECTION_ID,
+      initialItemEggTuple: [applicationConfiguration],
     }),
   ] as const,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([

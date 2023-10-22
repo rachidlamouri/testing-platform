@@ -16,6 +16,12 @@ import {
 } from '../render-knowledge-graph/appRendererDelayer';
 import { renderApp } from '../render-knowledge-graph/app/node/renderApp';
 import { InMemoryIdentifiableItem3Collection } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import {
+  APPLICATION_CONFIGURATION_COLLECTION_ID,
+  ApplicationConfigurationStreamMetatype,
+} from '../render-knowledge-graph/app/node/applicationConfiguration';
+import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
+import { applicationConfiguration } from '../render-knowledge-graph/applicationConfiguration';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'develop-knowledge-graph',
@@ -39,6 +45,10 @@ runEngine({
           programmedTransformName: 'n/a',
         }),
       ],
+    }),
+    new InMemoryCollection<ApplicationConfigurationStreamMetatype>({
+      collectionId: APPLICATION_CONFIGURATION_COLLECTION_ID,
+      initialItemEggTuple: [applicationConfiguration],
     }),
   ] as const,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([

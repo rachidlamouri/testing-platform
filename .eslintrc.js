@@ -61,6 +61,10 @@ module.exports = {
           ),
           posix.join(
             __dirname,
+            'packages/mdd-engine/src/adapted-programs/programs/model-programs/app/tsconfig.json',
+          ),
+          posix.join(
+            __dirname,
             'packages',
             'vscode-language-server',
             'client',

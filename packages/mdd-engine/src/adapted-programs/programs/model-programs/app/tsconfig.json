@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": ["ES6", "DOM"],
+    "target": "es5",
+    "sourceMap": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+  },
+  "include": ["./", "../../render-knowledge-graph/app/browser/"]
+}

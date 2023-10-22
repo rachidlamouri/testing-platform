@@ -90,6 +90,17 @@ import {
   PROGRAMMED_TRANSFORM_MODEL_COLLECTION_ID,
   ProgrammedTransformModelStreamMetatype,
 } from '../../programmable-units/engine-program-model/programmed-transform/programmedTransformModel';
+import { renderApp } from '../render-knowledge-graph/app/node/renderApp';
+import {
+  APPLICATION_CONFIGURATION_COLLECTION_ID,
+  ApplicationConfiguration,
+  ApplicationConfigurationStreamMetatype,
+} from '../render-knowledge-graph/app/node/applicationConfiguration';
+import {
+  AppRendererDelayerStreamMetatype,
+  APP_RENDERER_DELAYER_COLLECTION_ID,
+  AppRendererDelayerInstance,
+} from '../render-knowledge-graph/appRendererDelayer';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -186,6 +197,24 @@ runEngine({
         continueOnDuplicate: false,
       },
     ),
+    new InMemoryCollection<ApplicationConfigurationStreamMetatype>({
+      collectionId: APPLICATION_CONFIGURATION_COLLECTION_ID,
+      initialItemEggTuple: [
+        new ApplicationConfiguration({
+          inputTypeScriptFilePath:
+            'packages/mdd-engine/src/adapted-programs/programs/model-programs/app/index.tsx',
+          outputHtmlFileName: 'program-models',
+        }),
+      ],
+    }),
+    new InMemoryIdentifiableItem3Collection<AppRendererDelayerStreamMetatype>({
+      collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
+      initialItemEggTuple: [
+        new AppRendererDelayerInstance({
+          programmedTransformName: 'n/a',
+        }),
+      ],
+    }),
   ] as const,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     ...buildDefaultFileCollectionTuple(),
@@ -242,6 +271,8 @@ runEngine({
     // captureOutputFileDigestList,
 
     // assertNoCopyPasta,
+
+    renderApp,
 
     // TODO: add the audit back in when we don't need the NULL_OMISSION
     // auditLintAssertionOmissions,
