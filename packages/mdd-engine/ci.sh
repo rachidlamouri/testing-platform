@@ -79,6 +79,10 @@ printf "\n"
 bash packages/mdd-engine/src/adapted-programs/programs/test-graph-render/testGraphRender.test.sh
 printf "\n"
 
+## test-graph-assembly
+bash packages/mdd-engine/src/adapted-programs/programs/test-graph-assembly/testGraphAssembly.test.sh
+printf "\n"
+
 ## model-programs
 bash packages/mdd-engine/src/adapted-programs/programs/model-programs/modelPrograms.test.sh
 printf "\n"

@@ -7,6 +7,9 @@ type SvgDocumentInput = {
   graph: DirectedGraph;
 };
 
+/**
+ * A text blob of HTML for an svg
+ */
 export class SvgDocument implements SvgDocumentInput {
   get id(): DirectedGraphId {
     return this.graph.localComplexId;

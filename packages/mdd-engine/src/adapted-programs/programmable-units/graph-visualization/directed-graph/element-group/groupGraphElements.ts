@@ -25,6 +25,9 @@ const reporterSource = new FileSourceInstance({
   absoluteFilePath: __filename,
 });
 
+/**
+ * Groups graph elements by root directed graph
+ */
 export const groupGraphElements = buildProgrammedTransform({
   name: 'groupGraphElements',
 })

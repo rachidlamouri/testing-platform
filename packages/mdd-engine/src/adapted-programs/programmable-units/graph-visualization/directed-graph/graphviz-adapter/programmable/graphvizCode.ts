@@ -7,6 +7,9 @@ type GraphvizCodeInput = {
   graph: DirectedGraph;
 };
 
+/**
+ * See the Graphviz DOT language for more details: https://graphviz.org/doc/info/lang.html
+ */
 export class GraphvizCode implements GraphvizCodeInput {
   get id(): DirectedGraphId {
     return this.graph.localComplexId;

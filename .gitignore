@@ -23,6 +23,14 @@ debug/testGraphRender/voictents/*
 debug/testGraphRender/voictents/serialized/*
 !debug/testGraphRender/voictents/serialized/sanity-snapshot
 
+!debug/testGraphAssembly
+debug/testGraphAssembly/*
+!debug/testGraphAssembly/voictents/
+debug/testGraphAssembly/voictents/*
+!debug/testGraphAssembly/voictents/serialized/
+debug/testGraphAssembly/voictents/serialized/*
+!debug/testGraphAssembly/voictents/serialized/sanity-snapshot
+
 !debug/assembleScaffoldedFile
 debug/assembleScaffoldedFile/*
 !debug/assembleScaffoldedFile/test

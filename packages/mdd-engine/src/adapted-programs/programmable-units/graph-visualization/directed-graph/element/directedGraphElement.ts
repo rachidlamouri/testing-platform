@@ -5,6 +5,10 @@ import { DirectedGraph } from './directedGraph';
 import { DirectedGraphNode } from './directedGraphNode';
 import { DirectedSubgraph } from './directedSubgraph';
 
+/**
+ * A custom directed graph object. These should be constructed individually and
+ * assembled later.
+ */
 export type DirectedGraphElement =
   | DirectedGraph
   | DirectedSubgraph

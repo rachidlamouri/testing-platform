@@ -10,6 +10,9 @@ import {
   GraphvizCodeStreamMetatype,
 } from './graphvizCode';
 
+/**
+ * Converts a custom DirectedGraph object into Graphviz code
+ */
 export const encodeDirectedGraphAsGraphvizCode = buildProgrammedTransform({
   name: 'encodeDirectedGraphAsGraphvizCode',
 })
