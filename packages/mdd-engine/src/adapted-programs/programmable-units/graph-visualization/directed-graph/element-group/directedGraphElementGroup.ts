@@ -1,7 +1,7 @@
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { DirectedGraphConstituent } from '../element/directedGraphElement';
 import { DirectedGraph } from '../element/directedGraph';
-import { GlobalDirectedGraphId } from '../id/derived/global/globalDirectedGraph';
+import { GlobalDirectedGraphId } from '../id/derived/global/globalDirectedGraphId';
 import { isDirectedEdge, isDirectedSubgraphLike } from '../element/utilities';
 import { splitList2 } from '../../../../../package-agnostic-utilities/array/splitList2';
 import { RootGroup, RootGroupInput } from './rootGroup';

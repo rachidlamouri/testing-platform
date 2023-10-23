@@ -1,3 +1,7 @@
+/**
+ * Enables throwing a single error for multiple simultaneous errors.
+ * "Aggregate" here is not a verb
+ */
 export class AggregateEngineError extends Error {
   constructor(errorList: (string | Error)[]) {
     const stackTraceList = errorList.map((value) => {

@@ -4,7 +4,7 @@ import { DirectedCluster } from '../element/directedCluster';
 import { PartialClusterAttributeByKey } from './element-attribute-by-key/partialClusterAttributeByKey';
 import {
   GraphvizDirectedGraphLikeInput,
-  GraphvizGraphLike,
+  GraphvizDirectedGraphLike,
 } from './graphvizDirectedGraphLike';
 
 type GraphvizDirectedClusterInput = SpreadN<
@@ -19,7 +19,10 @@ type GraphvizDirectedClusterInput = SpreadN<
   ]
 >;
 
-export class GraphvizDirectedCluster extends GraphvizGraphLike<PartialClusterAttributeByKey> {
+/**
+ * Encodable Graphviz directed cluster object
+ */
+export class GraphvizDirectedCluster extends GraphvizDirectedGraphLike<PartialClusterAttributeByKey> {
   sourceCluster: DirectedCluster;
 
   constructor(input: GraphvizDirectedClusterInput) {

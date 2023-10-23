@@ -57,6 +57,9 @@ type CollectionTickSeriesInput = {
   mutableTransformStateList: MutableTransformState2[];
 };
 
+/**
+ * Encapsulates gathering runtime statistics for the engine
+ */
 export class TickSeriesManager {
   collectionTickSeriesConfigurationList: CollectionTickSeriesConfiguration[];
 

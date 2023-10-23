@@ -7,6 +7,8 @@ import { PartialAttributeByKey } from '../../partialAttributeByKey';
 type GraphAttributeByKey = SpreadN<
   [AttributeByKeyGSCNE, AttributeByKeyGSC, AttributeByKeyGS]
 >;
-
+/**
+ * Graphviz graph attributes
+ */
 export type PartialGraphAttributeByKey =
   PartialAttributeByKey<GraphAttributeByKey>;

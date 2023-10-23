@@ -7,7 +7,7 @@ import { DirectedSubgraph } from './directedSubgraph';
 
 /**
  * A custom directed graph object. These should be constructed individually and
- * assembled later.
+ * assembled later. They can be turned into graphviz objects.
  */
 export type DirectedGraphElement =
   | DirectedGraph

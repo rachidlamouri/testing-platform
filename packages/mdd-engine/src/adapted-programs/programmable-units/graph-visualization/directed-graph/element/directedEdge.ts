@@ -2,7 +2,7 @@ import { PartialEdgeAttributeByKey } from '../directedGraphEdge';
 import { DirectedEdgeId } from '../id/directedEdgeId';
 import { DirectedGraphId } from '../id/directedGraphId';
 import { DirectedGraphElementLocator } from '../locator/directedGraphElementLocator';
-import { GlobalDirectedEdgeId } from '../id/derived/global/globalDirectedEdge';
+import { GlobalDirectedEdgeId } from '../id/derived/global/globalDirectedEdgeId';
 import { DirectedGraphNode } from './directedGraphNode';
 import { Source } from '../../../linting/source/source';
 import { IdLike } from '../../../../../package-agnostic-utilities/data-structure/id';
@@ -17,6 +17,9 @@ type DirectedEdgeInput = {
   attributeByKey?: Omit<PartialEdgeAttributeByKey, 'id'>;
 };
 
+/**
+ * Custom object that can be turned into a graphviz directed edge
+ */
 export class DirectedEdge extends DirectedGraphElementLocator<
   DirectedEdgeId,
   DirectedGraphId,

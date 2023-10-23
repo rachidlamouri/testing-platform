@@ -1,3 +1,10 @@
+/**
+ * Graphviz code serialization utilities. Contins custom types for Graphviz DOT
+ * code, as well as common functions for generating code.
+ *
+ * @noCanonicalDeclaration
+ */
+
 import { PartialElementAttributeByKey } from './element-attribute-by-key/derived/partialElementAttributeByKey';
 
 type QuotedText = `"${string}"`;

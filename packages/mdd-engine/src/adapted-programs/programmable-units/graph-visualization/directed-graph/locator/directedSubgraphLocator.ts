@@ -1,7 +1,7 @@
 import { IdLike } from '../../../../../package-agnostic-utilities/data-structure/id';
 import { Source } from '../../../linting/source/source';
 import { DirectedGraphLikeId } from '../id/derived/directedGraphLikeId';
-import { GlobalDirectedSubgraphId } from '../id/derived/global/globalDirectedSubgraph';
+import { GlobalDirectedSubgraphId } from '../id/derived/global/globalDirectedSubgraphId';
 import { DirectedSubgraphId } from '../id/directedSubgraphId';
 import { DirectedGraphElementLocator } from './directedGraphElementLocator';
 import {
@@ -17,6 +17,9 @@ type DirectedSubgraphLocatorInput = {
   distinguisher?: IdLike;
 };
 
+/**
+ * The information needed to find a subgraph in a graph
+ */
 export class DirectedSubgraphLocator
   extends DirectedGraphElementLocator<
     DirectedSubgraphId,

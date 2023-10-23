@@ -17,4 +17,7 @@ type EdgeAttributeByKey = SpreadN<
   ]
 >;
 
+/**
+ * Graphviz edge attributes
+ */
 export type PartialEdgeAttributeByKey = Partial<EdgeAttributeByKey>;

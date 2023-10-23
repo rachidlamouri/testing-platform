@@ -17,6 +17,10 @@ type DirectedGraphElementLocatorInput<
   globalId: TGlobalId;
 };
 
+/**
+ * The information needed to find a graph element object within a specific
+ * graph, and under a specific parent
+ */
 export abstract class DirectedGraphElementLocator<
   TLocalId extends DirectedGraphElementId,
   TParentId extends DirectedGraphLikeId,

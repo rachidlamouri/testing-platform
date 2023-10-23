@@ -7,6 +7,9 @@ import {
 } from './codeUtilities';
 import { PartialNodeAttributeByKey } from './element-attribute-by-key/partialNodeAttributeByKey';
 
+/**
+ * Encodable Graphviz node object
+ */
 export class GraphvizDirectedGraphNode {
   sourceNode: DirectedGraphNode;
 

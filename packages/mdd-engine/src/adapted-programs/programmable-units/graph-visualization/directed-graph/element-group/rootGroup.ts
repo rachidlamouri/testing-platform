@@ -10,6 +10,10 @@ export type RootGroupInput = {
   subgroupInputList: SubgroupInput[];
 };
 
+/**
+ * Contains all of the nested custom directed graph objects needed to make a
+ * graphviz directed graph
+ */
 export class RootGroup implements Omit<RootGroupInput, 'subgroupInputList'> {
   graphLike: DirectedGraph;
 

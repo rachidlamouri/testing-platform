@@ -39,6 +39,8 @@ type NodeAttributeByKey = SpreadN<
     },
   ]
 >;
-
+/**
+ * Graphviz node attributes
+ */
 export type PartialNodeAttributeByKey =
   PartialAttributeByKey<NodeAttributeByKey>;

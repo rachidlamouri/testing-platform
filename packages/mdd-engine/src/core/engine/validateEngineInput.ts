@@ -188,6 +188,11 @@ type ValidatedEngineInput = {
   isCritical: boolean;
 };
 
+/**
+ * Checks for duplicate collection ids, duplicate programmed transform names,
+ * programmed transforms that will never get inputs, and if the error collection
+ * is invalid
+ */
 export const validateEngineInput = ({
   inputCollectionList,
   programmedTransformTuple,

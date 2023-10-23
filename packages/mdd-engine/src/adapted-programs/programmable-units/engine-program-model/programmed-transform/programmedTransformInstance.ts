@@ -36,6 +36,9 @@ type ProgrammedTransformInstanceInput = {
   collectionInstanceList: CollectionInstanceModel[];
 };
 
+/**
+ * A programmed transform within the context of a specific program
+ */
 export class ProgrammedTransformInstance
   implements ProgrammedTransformInstanceInput
 {

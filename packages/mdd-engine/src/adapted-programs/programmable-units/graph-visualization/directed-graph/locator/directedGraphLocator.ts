@@ -1,6 +1,6 @@
 import { IdLike } from '../../../../../package-agnostic-utilities/data-structure/id';
 import { Source } from '../../../linting/source/source';
-import { GlobalDirectedGraphId } from '../id/derived/global/globalDirectedGraph';
+import { GlobalDirectedGraphId } from '../id/derived/global/globalDirectedGraphId';
 import { DirectedGraphId } from '../id/directedGraphId';
 import { DirectedGraphElementLocator } from './directedGraphElementLocator';
 import { DirectedGraphLocatorInterface } from './directedGraphLikeLocatorInterface';
@@ -10,6 +10,9 @@ type DirectedGraphLocatorInput = {
   distinguisher?: IdLike;
 };
 
+/**
+ * The information needed to find a graph
+ */
 export class DirectedGraphLocator
   extends DirectedGraphElementLocator<
     DirectedGraphId,

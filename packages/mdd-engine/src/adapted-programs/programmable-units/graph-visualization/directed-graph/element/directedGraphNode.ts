@@ -2,7 +2,7 @@ import { PartialNodeAttributeByKey } from '../directedGraphNode';
 import { DirectedGraphLikeId } from '../id/derived/directedGraphLikeId';
 import { DirectedGraphNodeId } from '../id/directedGraphNodeId';
 import { DirectedGraphElementLocator } from '../locator/directedGraphElementLocator';
-import { GlobalDirectedGraphNodeId } from '../id/derived/global/globalDirectedGraphNode';
+import { GlobalDirectedGraphNodeId } from '../id/derived/global/globalDirectedGraphNodeId';
 import { DirectedGraphLikeLocator } from '../locator/directedGraphLikeLocator';
 import { DirectedGraphLocator } from '../locator/directedGraphLocator';
 import { Source } from '../../../linting/source/source';
@@ -16,6 +16,9 @@ type DirectedGraphNodeInput = {
   inputAttributeByKey: Omit<PartialNodeAttributeByKey, 'id'>;
 };
 
+/**
+ * Custom object that can be turned into a graphviz node
+ */
 export class DirectedGraphNode extends DirectedGraphElementLocator<
   DirectedGraphNodeId,
   DirectedGraphLikeId,
