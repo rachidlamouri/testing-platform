@@ -19,10 +19,7 @@ import {
   GenericProgrammedTransform2,
   UnsafeProgrammedTransform2Tuple,
 } from '../types/programmed-transform/programmedTransform';
-import {
-  CollectionId,
-  CollectionIdSet,
-} from '../types/collection/collectionId';
+import { CollectionId } from '../types/collection/collectionId';
 import {
   GenericIndexedItem,
   GenericIndexedItemTuple,
@@ -33,7 +30,6 @@ import {
   GenericCollectionItemStream2,
   Stream,
   StreamTypeName,
-  ItemStream,
   GenericCollectionStream,
 } from '../types/stream/stream';
 import {
@@ -53,60 +49,24 @@ import { GenericInputStreamConfiguration } from '../types/stream-configuration/i
 import { Tuple } from '../../package-agnostic-utilities/type/tuple';
 import { getIsRightInputItemTupleStreamConfiguration } from '../types/stream-configuration/input/right/rightInputStreamConfiguration';
 import { ReferenceTypeName } from '../types/stream/referenceTypeName';
-import { assertIsError } from '../../package-agnostic-utilities/error/assertIsError';
 import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertNotUndefined';
+import { ErrorHandler } from './errorHandler';
+import { AggregateEngineError } from './aggregateEngineError';
+import { validateEngineInput } from './validateEngineInput';
+import {
+  TickSeriesManager,
+  RuntimeStatisticsHandler,
+} from './tickSeriesManager';
+import { validateEngineEndState } from './validateEngineEndState';
 
 type CollectableItem = {
   collectionId: CollectionId;
   item: Item;
 };
 
-type CollectableItemTuple = Tuple<CollectableItem>;
-
-class AggregateEngineError extends Error {
-  constructor(errorList: (string | Error)[]) {
-    const stackTraceList = errorList.map((value) => {
-      if (typeof value === 'string') {
-        return value;
-      }
-
-      return value.stack ?? 'NO STACK TRACE';
-    });
-
-    const aggregateMessage = [
-      `Encountered ${errorList.length} errors:`,
-      ...stackTraceList.slice(0, 100).map((stackTrace, index) => {
-        const [firstLine, ...otherLineList] = stackTrace.split('\n');
-
-        const truncatedOtherLineList = otherLineList.slice(0, 19);
-
-        const messageSegmentLineList = [
-          // 4 accounts for 2 spaces and then a 2 digit number
-          `${`${index}`.padStart(4, ' ')}: ${firstLine}`,
-          ...truncatedOtherLineList.map((line) => `        ${line}`),
-        ];
-
-        const lineDifference =
-          otherLineList.length - truncatedOtherLineList.length;
-
-        if (lineDifference > 0) {
-          messageSegmentLineList.push(`        +${lineDifference} more lines`);
-        }
-
-        const messageSegment = messageSegmentLineList.join('\n');
-        return messageSegment;
-      }),
-    ].join('\n');
-
-    super(aggregateMessage);
-  }
-}
-
 type OnItemAddedToCollectionsHandler = (
   collectableItem: CollectableItem,
 ) => void;
-
-type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 
 export enum EngineRunnerStrategy {
   WaitForAllDependencies = 'WaitForAllDependencies',
@@ -116,52 +76,13 @@ export enum EngineRunnerStrategy {
 export type EngineRunnerInput = {
   // TODO: remove "initialQuirmTuple" and make inputVoictentList required
   inputCollectionList?: GenericCollection2[];
-  errorCollectionId?: CollectionId;
+  errorCollectionId?: CollectionId | null;
   programmedTransformTuple: Tuple<GenericProgrammedTransform2>;
   /** @deprecated */
   onItemAddedToCollections?: OnItemAddedToCollectionsHandler;
   onFinish?: RuntimeStatisticsHandler;
   strategy?: EngineRunnerStrategy;
   failForEncounteredError?: boolean;
-};
-
-const nanosecondsToSeconds = (nanoseconds: bigint): bigint =>
-  nanoseconds / 1000000000n;
-
-// A series of values by engine tick
-type TickSeries<TValue extends number | bigint> = TValue[];
-
-type CollectionTickSeriesConfiguration = {
-  collectionId: CollectionId;
-  collectionStream: GenericCollectionStream | null;
-  collectionItemStream: ItemStream | GenericCollectionItemStream2 | null;
-  collectionTickSeries: TickSeries<number>;
-  collectionItemTickSeries: TickSeries<number>;
-};
-
-type ProgrammedTransformConnectionTickSeriesConfiguration = {
-  collectionId: CollectionId;
-  stream: Stream;
-  tickSeries: TickSeries<number>;
-};
-
-type ProgrammedTransformTickSeriesConfiguration = {
-  mutableTransformState: MutableTransformState2;
-  connectionList: ProgrammedTransformConnectionTickSeriesConfiguration[];
-  cumulativeExecutionCountTickSeries: TickSeries<number>;
-  relativeExecutionCountTickSeries: TickSeries<number>;
-};
-
-type TimeSeriesConfiguration = {
-  timestampSeries: TickSeries<bigint>;
-  cumulativeElapsedSecondsTickSeries: TickSeries<number>;
-  relativeElapsedSecondsTickSeries: TickSeries<number>;
-};
-
-export type RuntimeStatistics = {
-  collectionList: CollectionTickSeriesConfiguration[];
-  programmedTransformList: ProgrammedTransformTickSeriesConfiguration[];
-  time: TimeSeriesConfiguration;
 };
 
 /**
@@ -179,7 +100,7 @@ export type RuntimeStatistics = {
  */
 export const runEngine = ({
   inputCollectionList = [],
-  errorCollectionId,
+  errorCollectionId = null,
   programmedTransformTuple,
   onItemAddedToCollections,
   onFinish,
@@ -190,222 +111,37 @@ export const runEngine = ({
     collection.initialize();
   });
 
-  let isInitialErrorCritical = false;
-
-  const inputCollectionIdSet: CollectionIdSet = new Set(
+  const collectionCache = new CollectionCache(
     inputCollectionList.map((collection) => {
-      return collection.collectionId;
+      return [collection.collectionId, collection] as const;
     }),
   );
 
-  const errorMessageList: string[] = [];
-
-  const collectionCountByCollectionId: Record<string, number> = {};
-  inputCollectionList.forEach((collection) => {
-    const currentCount =
-      collectionCountByCollectionId[collection.collectionId] ?? 0;
-    collectionCountByCollectionId[collection.collectionId] = currentCount + 1;
-  });
-
-  const duplicateCollectionIdList = Object.entries(
-    collectionCountByCollectionId,
-  )
-    .filter(([, count]) => count > 1)
-    .map(([collectionId]) => collectionId);
-
-  duplicateCollectionIdList.forEach((collectionId) => {
-    errorMessageList.push(
-      `Voictents must have a unique gepp per program. Found duplicate gepp: ${collectionId}`,
-    );
-
-    isInitialErrorCritical = true;
-  });
-
-  const invalidProgrammedTransformInputOutputList = programmedTransformTuple
-    .filter(
-      (
-        programmedTransform,
-      ): programmedTransform is GenericProgrammedTransform2 =>
-        programmedTransform.version === 2,
-    )
-    .flatMap((programmedTransform) => {
-      return [
-        {
-          programmedTransformName: programmedTransform.name,
-          collectionId:
-            programmedTransform.leftInputStreamConfiguration.collectionId,
-          isInput: true,
-        },
-        ...programmedTransform.rightInputStreamConfigurationTuple.map(
-          (rightStreamConfiguration) => {
-            return {
-              programmedTransformName: programmedTransform.name,
-              collectionId: rightStreamConfiguration.collectionId,
-              isInput: true,
-            };
-          },
-        ),
-        ...programmedTransform.outputStreamConfiguration.collectionIdTuple.map(
-          (collectionId) => {
-            return {
-              programmedTransformName: programmedTransform.name,
-              collectionId,
-              isInput: false,
-            };
-          },
-        ),
-      ];
-    })
-    .filter(({ collectionId }) => !inputCollectionIdSet.has(collectionId));
-
-  const programmedTransformCountByName: Record<string, number> = {};
-  programmedTransformTuple
-    .filter(
-      (
-        programmedTransform,
-      ): programmedTransform is GenericProgrammedTransform2 =>
-        programmedTransform.version === 2,
-    )
-    .forEach((programmedTransform) => {
-      const currentCount =
-        programmedTransformCountByName[programmedTransform.name] ?? 0;
-      programmedTransformCountByName[programmedTransform.name] =
-        currentCount + 1;
-    });
-
-  const duplicateProgrammedTransformNameList = Object.entries(
-    collectionCountByCollectionId,
-  )
-    .filter(([, count]) => count > 1)
-    .map(([name]) => name);
-
-  duplicateProgrammedTransformNameList.forEach((name) => {
-    errorMessageList.push(
-      `Estinant names must be unique per program. Found duplicate name: ${name}`,
-    );
-
-    isInitialErrorCritical = true;
-  });
-
-  invalidProgrammedTransformInputOutputList.forEach(
-    ({ programmedTransformName, collectionId, isInput }) => {
-      const label = isInput ? 'input' : 'output';
-
-      errorMessageList.push(
-        `Estinant inputs and outputs must have a corresponding voictent. Estinant "${programmedTransformName}" has an ${label} gepp "${collectionId}" without a corresponding voictent.`,
-      );
-
-      isInitialErrorCritical = true;
-    },
-  );
-
-  const fedCollectionCollectionIdSet = new Set([
-    ...inputCollectionList
-      .filter((collection) => {
-        // note: It's important that this check comes after all collections are initialized
-        return !collection.isEmpty;
-      })
-      .map((collection) => collection.collectionId),
-    ...programmedTransformTuple.flatMap(
-      (programmedTransform) =>
-        programmedTransform.outputStreamConfiguration.collectionIdTuple,
-    ),
-  ]);
-
-  const consumedCollectionCollectionIdSet = new Set(
-    programmedTransformTuple
-      .flatMap((programmedTransform) => {
-        return [
-          programmedTransform.leftInputStreamConfiguration,
-          ...programmedTransform.rightInputStreamConfigurationTuple,
-        ];
-      })
-      .map((streamConfiguration) => streamConfiguration.collectionId),
-  );
-
-  // note: downstream estinants are gonna be so hungies
-  const unfedCollectionList = inputCollectionList.filter((collection) => {
-    const isConsumed = consumedCollectionCollectionIdSet.has(
-      collection.collectionId,
-    );
-    const isFed = fedCollectionCollectionIdSet.has(collection.collectionId);
-    return isConsumed && !isFed;
-  });
-
-  if (unfedCollectionList.length > 0) {
-    unfedCollectionList.forEach((collection) => {
-      errorMessageList.push(
-        `Voictent with gepp "${collection.collectionId}" is consumed by an estinant, but is not initialized nor the output of an estinant`,
-      );
-    });
-
-    // note: this is not a critical error
-  }
-
-  const initialCollectionCacheEntryList = inputCollectionList.map(
-    (collection) => {
-      return [collection.collectionId, collection] as const;
-    },
-  );
-
-  const collectionCache = new CollectionCache(initialCollectionCacheEntryList);
-
   const errorCollection =
-    errorCollectionId !== undefined
-      ? collectionCache.get(errorCollectionId) ?? null
-      : null;
+    errorCollectionId === null
+      ? errorCollectionId
+      : collectionCache.get(errorCollectionId) ?? null;
 
-  if (errorCollectionId !== undefined && errorCollection === null) {
-    errorMessageList.push(
-      `Error gepp "${errorCollectionId}" has no corresponding voictent`,
-    );
+  const { errorMessageList, isCritical } = validateEngineInput({
+    inputCollectionList,
+    programmedTransformTuple,
+    errorCollection,
+    errorCollectionId,
+  });
 
-    isInitialErrorCritical = true;
-  }
-
-  let encounteredError = false;
-
-  type ErrorHandlerInput = {
-    error: Error;
-    isCritical: boolean;
-  };
-  const onError = ({ error, isCritical }: ErrorHandlerInput): void => {
-    encounteredError = true;
-
-    if (errorCollection === null) {
-      throw new AggregateEngineError([
-        'The engine encountered an error, but no error voictent was specified',
-        error.message,
-      ]);
-    }
-
-    try {
-      errorCollection.addItem(error);
-    } catch (secondError) {
-      assertIsError(secondError);
-      throw new AggregateEngineError([
-        `The engine encountered a critical error. The error voictent "${errorCollection.collectionId}" threw an error while handling an error`,
-        error.message,
-        secondError.message,
-      ]);
-    }
-
-    if (isCritical) {
-      throw new Error(
-        `The engine encountered a critical error. See the error voictent with gepp "${errorCollection.collectionId}" for more details`,
-      );
-    }
-  };
+  const errorHandler = new ErrorHandler({
+    errorCollection,
+  });
 
   if (errorMessageList.length > 0) {
-    onError({
+    errorHandler.onError({
       error: new AggregateEngineError(errorMessageList),
-      isCritical: isInitialErrorCritical,
+      isCritical,
     });
   }
 
   const addToCollectionCache = (
-    collectableItemTuple: CollectableItemTuple,
+    collectableItemTuple: Tuple<CollectableItem>,
   ): void => {
     collectableItemTuple.forEach((collectableItem) => {
       const collection = collectionCache.get(collectableItem.collectionId);
@@ -554,6 +290,7 @@ export const runEngine = ({
           mutableStreamConnectionState.typeName ===
           MutableStreamConnectionStateTypeName.LeftMutableStreamConnectionState
         ) {
+          // TODO: we no longer need to destructure these fields since there are now only 2 stream references. This will simplify this logic, but comes with additional challenges
           const {
             typeName: leftInputTypeName,
             value: leftInputReferenceValue,
@@ -659,6 +396,7 @@ export const runEngine = ({
 
           touchedTransformInputKeyGroupSet.add(transformInputKeyGroup);
         } else {
+          // TODO: we no longer need to destructure these fields since there are now only 2 stream references. This will simplify this logic, but comes with additional challenges
           const { typeName: rightInputTypeName, value: rightInput } =
             mutableStreamConnectionState.stream.dereference();
 
@@ -793,7 +531,7 @@ export const runEngine = ({
 
       addToCollectionCache(outputCollectableItemTuple);
     } catch (error) {
-      onError({
+      errorHandler.onError({
         error: error as Error,
         isCritical: false,
       });
@@ -806,126 +544,10 @@ export const runEngine = ({
     transformInputKeyGroup.hasTriggered = true;
   };
 
-  // TODO: create a class or something to encapsulate tracking runtime stats
-  const collectionTickSeriesConfigurationByCollection = new Map<
-    GenericCollection2,
-    CollectionTickSeriesConfiguration
-  >();
-
-  const programmedTransformTickSeriesConfigurationList =
-    mutableTransformStateList.map<ProgrammedTransformTickSeriesConfiguration>(
-      (mutableTransformState) => {
-        return {
-          mutableTransformState,
-          connectionList: getMutableStreamConnectionStateTuple(
-            mutableTransformState,
-          ).map<ProgrammedTransformConnectionTickSeriesConfiguration>(
-            (mutableStreamConnectionState) => {
-              return {
-                collectionId: mutableStreamConnectionState.collectionId,
-                stream: mutableStreamConnectionState.stream,
-                tickSeries: [],
-              };
-            },
-          ),
-          cumulativeExecutionCountTickSeries: [],
-          relativeExecutionCountTickSeries: [],
-        };
-      },
-    );
-
-  const timeConfiguration: TimeSeriesConfiguration = {
-    timestampSeries: [],
-    cumulativeElapsedSecondsTickSeries: [],
-    relativeElapsedSecondsTickSeries: [],
-  };
-
-  const startTime = process.hrtime.bigint();
-  let previousTickTime = startTime;
-
-  let tickCount = 0;
-
-  const onTopOfLoop = (): void => {
-    [...collectionCache.values()].forEach((collection) => {
-      collection.onTickStart();
-    });
-
-    // TODO: make estinant input output gepps static so that the list of possible gepps/voictents is known from the start
-    // eslint-disable-next-line @typescript-eslint/no-loop-func
-    [...collectionCache.entries()].forEach(([collectionId, collection]) => {
-      const configuration: CollectionTickSeriesConfiguration =
-        collectionTickSeriesConfigurationByCollection.get(collection) ?? {
-          collectionId,
-          collectionStream: collection.createCollectionStream(collectionId),
-          collectionItemStream:
-            collection.createCollectionItemStream(collectionId),
-          collectionTickSeries: Array.from({ length: tickCount }).map(() => 0),
-          collectionItemTickSeries: Array.from({ length: tickCount }).map(
-            () => 0,
-          ),
-        };
-
-      collectionTickSeriesConfigurationByCollection.set(
-        collection,
-        configuration,
-      );
-
-      configuration.collectionTickSeries.push(
-        configuration.collectionStream?.hasNext() ? 1 : 0,
-      );
-
-      configuration.collectionItemTickSeries.push(
-        configuration.collectionItemStream?.hasNext() ? 1 : 0,
-      );
-
-      if (configuration.collectionItemStream?.hasNext()) {
-        configuration.collectionItemStream.advance();
-      }
-    });
-
-    programmedTransformTickSeriesConfigurationList.forEach((configuration) => {
-      configuration.connectionList.forEach((connection) => {
-        connection.tickSeries.push(connection.stream.hasNext() ? 1 : 0);
-      });
-    });
-  };
-
-  const onBottomOfLoop = (): void => {
-    programmedTransformTickSeriesConfigurationList.forEach((configuration) => {
-      const lastExecutionCount =
-        configuration.cumulativeExecutionCountTickSeries[
-          configuration.cumulativeExecutionCountTickSeries.length - 1
-        ] ?? 0;
-
-      configuration.cumulativeExecutionCountTickSeries.push(
-        configuration.mutableTransformState.executionCount,
-      );
-
-      const relativeExecutionCount =
-        configuration.mutableTransformState.executionCount - lastExecutionCount;
-      configuration.relativeExecutionCountTickSeries.push(
-        relativeExecutionCount,
-      );
-    });
-
-    const tickTime = process.hrtime.bigint();
-    timeConfiguration.timestampSeries.push(tickTime);
-
-    const cumulativeElapsedSeconds = nanosecondsToSeconds(tickTime - startTime);
-    timeConfiguration.cumulativeElapsedSecondsTickSeries.push(
-      Number(cumulativeElapsedSeconds),
-    );
-
-    const relativeElapsedSeconds = nanosecondsToSeconds(
-      tickTime - previousTickTime,
-    );
-    timeConfiguration.relativeElapsedSecondsTickSeries.push(
-      Number(relativeElapsedSeconds),
-    );
-
-    previousTickTime = tickTime;
-    tickCount += 1;
-  };
+  const tickSeriesManager = new TickSeriesManager({
+    collectionCache,
+    mutableTransformStateList,
+  });
 
   const executeWaitForAllDependenciesStrategy = (): void => {
     const mutableCollectionStateByCollectionId = new Map<
@@ -990,7 +612,7 @@ export const runEngine = ({
 
     // This is a do-while because estinants cannot have direct inputs so there will be 0 estinants ready to run at the very start
     do {
-      onTopOfLoop();
+      tickSeriesManager.onTopOfLoop();
 
       [...runtimeMutableTransformStateSet]
         .flatMap((mutableTransformState) => {
@@ -1052,7 +674,7 @@ export const runEngine = ({
         runtimeMutableCollectionStateSet.delete(mutableCollectionState);
       });
 
-      onBottomOfLoop();
+      tickSeriesManager.onBottomOfLoop();
     } while (runtimeMutableTransformStateSet.size > 0);
   };
 
@@ -1064,124 +686,23 @@ export const runEngine = ({
       throw Error('Not implemented');
   }
 
-  const mutableTransformStateEndStateList = mutableTransformStateList.flatMap(
-    (mutableTransformState) => {
-      const transformInputKeyGroupSet = new Set(
-        [
-          ...mutableTransformState.transformInputKeyGroupSetCacheCache.values(),
-        ].flatMap((transformInputKeyGroupSetCache) => {
-          return [...transformInputKeyGroupSetCache.values()].flatMap(
-            (transformInputKeyGroupSubset) => {
-              return [...transformInputKeyGroupSubset];
-            },
-          );
-        }),
-      );
+  const endError = validateEngineEndState(mutableTransformStateList);
 
-      const untriggeredTransformInputKeyGroupSet = [
-        ...transformInputKeyGroupSet,
-      ].filter(
-        (transformInputKeyGroup) => !transformInputKeyGroup.hasTriggered,
-      );
-
-      return {
-        mutableTransformState,
-        untriggeredTransformInputKeyGroupSet,
-      };
-    },
-  );
-
-  const unfinishedMutableTransformStateList =
-    mutableTransformStateEndStateList.filter(
-      (endState) => endState.untriggeredTransformInputKeyGroupSet.length > 0,
-    );
-
-  if (unfinishedMutableTransformStateList.length > 0) {
-    const output = unfinishedMutableTransformStateList.map((endState) => {
-      const transformInputKeyGroupSetEndState =
-        endState.untriggeredTransformInputKeyGroupSet.map(
-          (transformInputKeyGroup) => {
-            const rightTupleState =
-              endState.mutableTransformState.rightMutableStreamConnectionStateTuple.map(
-                (
-                  rightMutableStreamConnectionState: RightMutableStreamConnectionState,
-                ) => {
-                  if (
-                    rightMutableStreamConnectionState.typeName ===
-                    MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState
-                  ) {
-                    return {
-                      rightCollectionId:
-                        rightMutableStreamConnectionState.collectionId,
-                      isReady: rightMutableStreamConnectionState.isReady,
-                    };
-                  }
-
-                  const idTuple =
-                    transformInputKeyGroup.rightInputKeyTupleCache.get(
-                      rightMutableStreamConnectionState,
-                    ) as IdTuple;
-                  return idTuple.map((id) => {
-                    const hasItem =
-                      rightMutableStreamConnectionState.itemCache.has(id);
-                    return {
-                      rightCollectionId:
-                        rightMutableStreamConnectionState.collectionId,
-                      id,
-                      hasItem,
-                    };
-                  });
-                },
-              );
-
-            return {
-              leftInput: transformInputKeyGroup.leftInput,
-              rightTupleState,
-            };
-          },
-        );
-
-      return {
-        programmedTransformName:
-          endState.mutableTransformState.programmedTransform.name,
-        leftCollectionId:
-          endState.mutableTransformState.programmedTransform
-            .leftInputStreamConfiguration.collectionId,
-        transformInputKeyGroupSet: transformInputKeyGroupSetEndState,
-      };
-    });
-
-    class UntriggeredTransformInputKeyGroupError extends Error {
-      constructor(public metadata: unknown) {
-        super(
-          `Some cologies were not triggered:  \n${JSON.stringify(
-            metadata,
-            null,
-            2,
-          )}`,
-        );
-      }
-    }
-
-    onError({
-      error: new UntriggeredTransformInputKeyGroupError(output),
+  if (endError !== null) {
+    errorHandler.onError({
+      error: endError,
       isCritical: false,
     });
   }
 
-  const statistics: RuntimeStatistics = {
-    collectionList: [...collectionTickSeriesConfigurationByCollection.values()],
-    programmedTransformList: programmedTransformTickSeriesConfigurationList,
-    time: timeConfiguration,
-  };
-
-  if (encounteredError && failForEncounteredError) {
+  if (errorHandler.encounteredError && failForEncounteredError) {
     throw new Error(
       'The engine encountered an error. See the designated error collection for more details.',
     );
   }
 
   if (onFinish) {
+    const statistics = tickSeriesManager.getRuntimeStatistics();
     onFinish(statistics);
   }
 };

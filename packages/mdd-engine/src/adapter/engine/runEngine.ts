@@ -161,6 +161,7 @@ type CollectionByCollectionIdFromStreamMetatypeUnion<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     TStreamMetatype extends any
       ? {
+          // NOTE: I'm not 100% certain that this does what I want it to do. I want it to infer the uninferable collection type. Idk if changing the restricting type to the restricted type is a bad thing or not :shrug:
           [TCollectionId in TStreamMetatype['collectionId']]: Collection2<
             TStreamMetatype,
             TStreamMetatype
