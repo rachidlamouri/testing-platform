@@ -30,7 +30,6 @@ import {
   GenericCollectionItemStream2,
   Stream,
   StreamTypeName,
-  ItemStream,
   GenericCollectionStream,
 } from '../types/stream/stream';
 import {
@@ -54,19 +53,19 @@ import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertN
 import { ErrorHandler } from './errorHandler';
 import { AggregateEngineError } from './aggregateEngineError';
 import { validateEngineInput } from './validateEngineInput';
+import {
+  TickSeriesManager,
+  RuntimeStatisticsHandler,
+} from './tickSeriesManager';
 
 type CollectableItem = {
   collectionId: CollectionId;
   item: Item;
 };
 
-type CollectableItemTuple = Tuple<CollectableItem>;
-
 type OnItemAddedToCollectionsHandler = (
   collectableItem: CollectableItem,
 ) => void;
-
-type RuntimeStatisticsHandler = (statistics: RuntimeStatistics) => void;
 
 export enum EngineRunnerStrategy {
   WaitForAllDependencies = 'WaitForAllDependencies',
@@ -83,45 +82,6 @@ export type EngineRunnerInput = {
   onFinish?: RuntimeStatisticsHandler;
   strategy?: EngineRunnerStrategy;
   failForEncounteredError?: boolean;
-};
-
-const nanosecondsToSeconds = (nanoseconds: bigint): bigint =>
-  nanoseconds / 1000000000n;
-
-// A series of values by engine tick
-type TickSeries<TValue extends number | bigint> = TValue[];
-
-type CollectionTickSeriesConfiguration = {
-  collectionId: CollectionId;
-  collectionStream: GenericCollectionStream | null;
-  collectionItemStream: ItemStream | GenericCollectionItemStream2 | null;
-  collectionTickSeries: TickSeries<number>;
-  collectionItemTickSeries: TickSeries<number>;
-};
-
-type ProgrammedTransformConnectionTickSeriesConfiguration = {
-  collectionId: CollectionId;
-  stream: Stream;
-  tickSeries: TickSeries<number>;
-};
-
-type ProgrammedTransformTickSeriesConfiguration = {
-  mutableTransformState: MutableTransformState2;
-  connectionList: ProgrammedTransformConnectionTickSeriesConfiguration[];
-  cumulativeExecutionCountTickSeries: TickSeries<number>;
-  relativeExecutionCountTickSeries: TickSeries<number>;
-};
-
-type TimeSeriesConfiguration = {
-  timestampSeries: TickSeries<bigint>;
-  cumulativeElapsedSecondsTickSeries: TickSeries<number>;
-  relativeElapsedSecondsTickSeries: TickSeries<number>;
-};
-
-export type RuntimeStatistics = {
-  collectionList: CollectionTickSeriesConfiguration[];
-  programmedTransformList: ProgrammedTransformTickSeriesConfiguration[];
-  time: TimeSeriesConfiguration;
 };
 
 /**
@@ -180,7 +140,7 @@ export const runEngine = ({
   }
 
   const addToCollectionCache = (
-    collectableItemTuple: CollectableItemTuple,
+    collectableItemTuple: Tuple<CollectableItem>,
   ): void => {
     collectableItemTuple.forEach((collectableItem) => {
       const collection = collectionCache.get(collectableItem.collectionId);
@@ -581,126 +541,10 @@ export const runEngine = ({
     transformInputKeyGroup.hasTriggered = true;
   };
 
-  // TODO: create a class or something to encapsulate tracking runtime stats
-  const collectionTickSeriesConfigurationByCollection = new Map<
-    GenericCollection2,
-    CollectionTickSeriesConfiguration
-  >();
-
-  const programmedTransformTickSeriesConfigurationList =
-    mutableTransformStateList.map<ProgrammedTransformTickSeriesConfiguration>(
-      (mutableTransformState) => {
-        return {
-          mutableTransformState,
-          connectionList: getMutableStreamConnectionStateTuple(
-            mutableTransformState,
-          ).map<ProgrammedTransformConnectionTickSeriesConfiguration>(
-            (mutableStreamConnectionState) => {
-              return {
-                collectionId: mutableStreamConnectionState.collectionId,
-                stream: mutableStreamConnectionState.stream,
-                tickSeries: [],
-              };
-            },
-          ),
-          cumulativeExecutionCountTickSeries: [],
-          relativeExecutionCountTickSeries: [],
-        };
-      },
-    );
-
-  const timeConfiguration: TimeSeriesConfiguration = {
-    timestampSeries: [],
-    cumulativeElapsedSecondsTickSeries: [],
-    relativeElapsedSecondsTickSeries: [],
-  };
-
-  const startTime = process.hrtime.bigint();
-  let previousTickTime = startTime;
-
-  let tickCount = 0;
-
-  const onTopOfLoop = (): void => {
-    [...collectionCache.values()].forEach((collection) => {
-      collection.onTickStart();
-    });
-
-    // TODO: make estinant input output gepps static so that the list of possible gepps/voictents is known from the start
-    // eslint-disable-next-line @typescript-eslint/no-loop-func
-    [...collectionCache.entries()].forEach(([collectionId, collection]) => {
-      const configuration: CollectionTickSeriesConfiguration =
-        collectionTickSeriesConfigurationByCollection.get(collection) ?? {
-          collectionId,
-          collectionStream: collection.createCollectionStream(collectionId),
-          collectionItemStream:
-            collection.createCollectionItemStream(collectionId),
-          collectionTickSeries: Array.from({ length: tickCount }).map(() => 0),
-          collectionItemTickSeries: Array.from({ length: tickCount }).map(
-            () => 0,
-          ),
-        };
-
-      collectionTickSeriesConfigurationByCollection.set(
-        collection,
-        configuration,
-      );
-
-      configuration.collectionTickSeries.push(
-        configuration.collectionStream?.hasNext() ? 1 : 0,
-      );
-
-      configuration.collectionItemTickSeries.push(
-        configuration.collectionItemStream?.hasNext() ? 1 : 0,
-      );
-
-      if (configuration.collectionItemStream?.hasNext()) {
-        configuration.collectionItemStream.advance();
-      }
-    });
-
-    programmedTransformTickSeriesConfigurationList.forEach((configuration) => {
-      configuration.connectionList.forEach((connection) => {
-        connection.tickSeries.push(connection.stream.hasNext() ? 1 : 0);
-      });
-    });
-  };
-
-  const onBottomOfLoop = (): void => {
-    programmedTransformTickSeriesConfigurationList.forEach((configuration) => {
-      const lastExecutionCount =
-        configuration.cumulativeExecutionCountTickSeries[
-          configuration.cumulativeExecutionCountTickSeries.length - 1
-        ] ?? 0;
-
-      configuration.cumulativeExecutionCountTickSeries.push(
-        configuration.mutableTransformState.executionCount,
-      );
-
-      const relativeExecutionCount =
-        configuration.mutableTransformState.executionCount - lastExecutionCount;
-      configuration.relativeExecutionCountTickSeries.push(
-        relativeExecutionCount,
-      );
-    });
-
-    const tickTime = process.hrtime.bigint();
-    timeConfiguration.timestampSeries.push(tickTime);
-
-    const cumulativeElapsedSeconds = nanosecondsToSeconds(tickTime - startTime);
-    timeConfiguration.cumulativeElapsedSecondsTickSeries.push(
-      Number(cumulativeElapsedSeconds),
-    );
-
-    const relativeElapsedSeconds = nanosecondsToSeconds(
-      tickTime - previousTickTime,
-    );
-    timeConfiguration.relativeElapsedSecondsTickSeries.push(
-      Number(relativeElapsedSeconds),
-    );
-
-    previousTickTime = tickTime;
-    tickCount += 1;
-  };
+  const tickSeriesManager = new TickSeriesManager({
+    collectionCache,
+    mutableTransformStateList,
+  });
 
   const executeWaitForAllDependenciesStrategy = (): void => {
     const mutableCollectionStateByCollectionId = new Map<
@@ -765,7 +609,7 @@ export const runEngine = ({
 
     // This is a do-while because estinants cannot have direct inputs so there will be 0 estinants ready to run at the very start
     do {
-      onTopOfLoop();
+      tickSeriesManager.onTopOfLoop();
 
       [...runtimeMutableTransformStateSet]
         .flatMap((mutableTransformState) => {
@@ -827,7 +671,7 @@ export const runEngine = ({
         runtimeMutableCollectionStateSet.delete(mutableCollectionState);
       });
 
-      onBottomOfLoop();
+      tickSeriesManager.onBottomOfLoop();
     } while (runtimeMutableTransformStateSet.size > 0);
   };
 
@@ -944,12 +788,6 @@ export const runEngine = ({
     });
   }
 
-  const statistics: RuntimeStatistics = {
-    collectionList: [...collectionTickSeriesConfigurationByCollection.values()],
-    programmedTransformList: programmedTransformTickSeriesConfigurationList,
-    time: timeConfiguration,
-  };
-
   if (errorHandler.encounteredError && failForEncounteredError) {
     throw new Error(
       'The engine encountered an error. See the designated error collection for more details.',
@@ -957,6 +795,7 @@ export const runEngine = ({
   }
 
   if (onFinish) {
+    const statistics = tickSeriesManager.getRuntimeStatistics();
     onFinish(statistics);
   }
 };

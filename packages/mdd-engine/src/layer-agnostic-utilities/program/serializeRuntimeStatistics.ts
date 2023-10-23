@@ -1,5 +1,5 @@
+import { RuntimeStatistics } from '../../core/engine/tickSeriesManager';
 import { StreamTypeName } from '../../core/types/stream/stream';
-import { RuntimeStatistics } from '../../core/engine/runEngine';
 
 /**
  * Converts a RuntimeStatistics object into a comprehensive visual ascii
@@ -46,7 +46,7 @@ export const serializeRuntimeStatistics = (
         value === 1 ? TRIGGER_CHARACTER : IDLE_CHARACTER,
       );
 
-      lineList.push(`    ${c.collectionId}`);
+      lineList.push(`    ${c.collection.collectionId}`);
       lineList.push(`      I: |${serializedCollectionItemSeries.join('')}|`);
       lineList.push(`      C: |${serializedCollectionSeries.join('')}|`);
       lineList.push('');

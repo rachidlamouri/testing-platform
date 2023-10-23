@@ -4,9 +4,9 @@ import {
   FileExtensionSuffixIdentifier,
   KnownFileExtensionSuffixIdentifier,
 } from '../../package-agnostic-utilities/file/fileExtensionSuffixIdentifier';
-import { RuntimeStatistics } from '../../core/engine/runEngine';
 import { serializeRuntimeStatistics } from './serializeRuntimeStatistics';
 import { FileCache } from '../../package-agnostic-utilities/file/fileCache';
+import { RuntimeStatistics } from '../../core/engine/tickSeriesManager';
 
 enum TopLevelDirectoryName {
   Root = '',
