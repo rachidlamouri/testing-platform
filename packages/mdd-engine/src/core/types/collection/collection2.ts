@@ -1,5 +1,5 @@
 import { Tuple } from '../../../package-agnostic-utilities/type/tuple';
-import { ItemStream, ItemStream2, CollectionStream } from '../stream/stream';
+import { ItemStream2, CollectionStream } from '../stream/stream';
 import {
   GenericStreamMetatype,
   UnsafeStreamMetatype,
@@ -27,10 +27,7 @@ export type Collection2<
   ): CollectionStream<TStreamMetatype> | null;
   createCollectionItemStream(
     debugName: string,
-  ):
-    | ItemStream2<TRestrictingStreamMetatype, TStreamMetatype>
-    | ItemStream
-    | null;
+  ): ItemStream2<TRestrictingStreamMetatype, TStreamMetatype> | null;
   onTickStart(): void;
   /**
    * This is for collections whose constructor accepts initial hubblepups. This

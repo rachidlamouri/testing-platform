@@ -7,7 +7,6 @@ import { GenericCollection2 } from '../types/collection/collection2';
 import { CollectionId } from '../types/collection/collectionId';
 import {
   GenericCollectionStream,
-  ItemStream,
   GenericCollectionItemStream2,
   Stream,
 } from '../types/stream/stream';
@@ -21,7 +20,7 @@ type TickSeries<TValue extends number | bigint> = TValue[];
 type CollectionTickSeriesConfiguration = {
   collection: GenericCollection2;
   collectionStream: GenericCollectionStream | null;
-  collectionItemStream: ItemStream | GenericCollectionItemStream2 | null;
+  collectionItemStream: GenericCollectionItemStream2 | null;
   collectionTickSeries: TickSeries<number>;
   collectionItemTickSeries: TickSeries<number>;
 };

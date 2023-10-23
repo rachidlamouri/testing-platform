@@ -290,6 +290,7 @@ export const runEngine = ({
           mutableStreamConnectionState.typeName ===
           MutableStreamConnectionStateTypeName.LeftMutableStreamConnectionState
         ) {
+          // TODO: we no longer need to destructure these fields since there are now only 2 stream references. This will simplify this logic, but comes with additional challenges
           const {
             typeName: leftInputTypeName,
             value: leftInputReferenceValue,
@@ -395,6 +396,7 @@ export const runEngine = ({
 
           touchedTransformInputKeyGroupSet.add(transformInputKeyGroup);
         } else {
+          // TODO: we no longer need to destructure these fields since there are now only 2 stream references. This will simplify this logic, but comes with additional challenges
           const { typeName: rightInputTypeName, value: rightInput } =
             mutableStreamConnectionState.stream.dereference();
 

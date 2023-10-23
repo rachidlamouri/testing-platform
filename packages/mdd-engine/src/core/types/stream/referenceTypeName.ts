@@ -5,6 +5,5 @@
  */
 export enum ReferenceTypeName {
   Collection = 'Voictent',
-  Item = 'VoictentItem',
   IndexedItem = 'IndexedVoictentItem',
 }

@@ -1,5 +1,4 @@
 import { Simplify } from 'type-fest';
-import { Item } from '../item/item';
 import {
   GenericStreamMetatype,
   StreamMetatype,
@@ -40,12 +39,6 @@ export type CollectionStream<TStreamMetatype extends GenericStreamMetatype> =
 
 export type GenericCollectionStream = CollectionStream<GenericStreamMetatype>;
 
-export type ItemStream = BaseStream<
-  StreamTypeName.ItemStream,
-  ReferenceTypeName.Item,
-  Item
->;
-
 export type ItemStream2<
   TRestrictingStreamMetatype extends GenericStreamMetatype,
   TStreamMetatype extends TRestrictingStreamMetatype,
@@ -56,8 +49,9 @@ export type ItemStream2<
     TStreamMetatype['collectionId'],
     TStreamMetatype['itemEggStreamable'],
     TStreamMetatype['itemStreamable'],
-    TRestrictingStreamMetatype['indexByName'],
-    TRestrictingStreamMetatype['collectionStreamable']
+    // NOTE: I'm not 100% certain that this does what I want it to do. The two last ones used to be "TRestrictingStreamMetatype". Idk if changing the restricting type to the restricted type is a bad thing or not :shrug:
+    TStreamMetatype['indexByName'],
+    TStreamMetatype['collectionStreamable']
   >['indexedItemStreamable']
 >;
 
@@ -74,7 +68,4 @@ export type GenericCollectionItemStream2 = ItemStream2<
  *
  * @readableName Stream
  */
-export type Stream =
-  | GenericCollectionStream
-  | ItemStream
-  | GenericCollectionItemStream2;
+export type Stream = GenericCollectionStream | GenericCollectionItemStream2;
