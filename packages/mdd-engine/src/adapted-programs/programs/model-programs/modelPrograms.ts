@@ -101,6 +101,12 @@ import {
   APP_RENDERER_DELAYER_COLLECTION_ID,
   AppRendererDelayerInstance,
 } from '../render-knowledge-graph/appRendererDelayer';
+import { getAllGraphElements } from '../../programmable-units/engine-program-model/getAllGraphElements';
+import { groupGraphElements } from '../../programmable-units/graph-visualization/directed-graph/element-group/groupGraphElements';
+import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/directed-graph/graphviz-adapter/programmable/encodeDirectedGraphAsGraphvizCode';
+import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/svg-adapter/renderGraphvizCodeToSvgDocument';
+import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/base-interactivity/addInteractivityToSvgDocument';
+import { buildProgramModel } from '../../programmable-units/engine-program-model/program/buildProgramModel';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -240,9 +246,19 @@ runEngine({
     parseProgramFile,
     parseItemDefinition,
     parseProgrammedTransform,
+
     buildProgrammedTransformInputModel,
     buildProgrammedTransformOutputModel,
     buildProgrammedTransformModel,
+    buildProgramModel,
+
+    getAllGraphElements,
+
+    groupGraphElements,
+    encodeDirectedGraphAsGraphvizCode,
+    renderGraphvizCodeToSvgDocument,
+    addInteractivityToSvgDocument,
+
     // getEngineProgramLocator3,
     // getEngineProgrammedTransformLocatorCollection2,
     // getEngineProgrammedTransform3,
