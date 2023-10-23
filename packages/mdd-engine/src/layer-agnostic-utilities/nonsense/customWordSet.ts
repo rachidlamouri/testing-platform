@@ -371,6 +371,10 @@ const customDefinitionSet: CustomDefinition[] = [
     word: 'renamer',
     description: 'One who renames',
   },
+  {
+    word: 'locatee',
+    description: "One whoms't is located",
+  },
 
   {
     word: 'tomahto',

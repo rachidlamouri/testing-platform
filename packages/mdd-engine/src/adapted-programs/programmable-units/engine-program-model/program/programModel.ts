@@ -1,14 +1,20 @@
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { GraphLikeLabelLocation } from '../../graph-visualization/directed-graph/attributeByKeyGSC';
+import { DirectedEdge } from '../../graph-visualization/directed-graph/element/directedEdge';
 import { DirectedGraph } from '../../graph-visualization/directed-graph/element/directedGraph';
 import { DirectedGraphElement } from '../../graph-visualization/directed-graph/element/directedGraphElement';
 import { DirectedGraphNode } from '../../graph-visualization/directed-graph/element/directedGraphNode';
-import { FileSourceInstance } from '../../linting/source/fileSource';
+import { CollectionInstanceModel } from '../collection-instance/collectionInstanceModel';
+import { ProgrammedTransformInstance } from '../programmed-transform/programmedTransformInstance';
 import { ProgramId } from './programId';
 import { ProgramSkeleton } from './programSkeleton';
 
 type ProgramModelInput = {
   skeleton: ProgramSkeleton;
+  collectionInstanceList: CollectionInstanceModel[];
+  transformInstanceList: ProgrammedTransformInstance[];
+  unconsumedCollectionInstanceList: CollectionInstanceModel[];
+  unfedCollectionInstanceList: CollectionInstanceModel[];
 };
 
 /**
@@ -21,6 +27,14 @@ export class ProgramModel implements ProgramModelInput {
 
   skeleton: ProgramSkeleton;
 
+  transformInstanceList: ProgrammedTransformInstance[];
+
+  collectionInstanceList: CollectionInstanceModel[];
+
+  unconsumedCollectionInstanceList: CollectionInstanceModel[];
+
+  unfedCollectionInstanceList: CollectionInstanceModel[];
+
   graphElementList: DirectedGraphElement[];
 
   constructor(input: ProgramModelInput) {
@@ -28,26 +42,97 @@ export class ProgramModel implements ProgramModelInput {
     const { programName } = programLocator;
 
     this.skeleton = input.skeleton;
+    this.collectionInstanceList = input.collectionInstanceList;
+    this.transformInstanceList = input.transformInstanceList;
+    this.unconsumedCollectionInstanceList =
+      input.unconsumedCollectionInstanceList;
+    this.unfedCollectionInstanceList = input.unfedCollectionInstanceList;
+
+    const programSource = programLocator.programFile.source;
+
+    const graph = new DirectedGraph({
+      locator: graphLocator,
+      inputAttributeByKey: {
+        labelloc: GraphLikeLabelLocation.Top,
+        label: programName,
+      },
+      outputFileName: programName,
+    });
+
+    const startNode = new DirectedGraphNode({
+      graphLocator,
+      parentLocator: graphLocator,
+      source: programSource,
+      distinguisher: 'start',
+      inputAttributeByKey: {
+        label: 'start',
+        color: 'green',
+      },
+    });
+
+    const startingEdgeList = input.unfedCollectionInstanceList.map(
+      (instance) => {
+        return new DirectedEdge({
+          graphLocator,
+          tail: startNode,
+          head: instance.node,
+          source: programSource,
+        });
+      },
+    );
+
+    const endNode = new DirectedGraphNode({
+      graphLocator,
+      parentLocator: graphLocator,
+      source: programSource,
+      distinguisher: 'end',
+      inputAttributeByKey: {
+        label: 'end',
+        color: 'blue',
+      },
+    });
+
+    const endingCollectionEdgeList = input.unconsumedCollectionInstanceList.map(
+      (instance) => {
+        return new DirectedEdge({
+          graphLocator,
+          tail: instance.node,
+          head: endNode,
+          source: programSource,
+        });
+      },
+    );
+
+    const endingTransformEdgeList = input.transformInstanceList
+      .filter((instance) => instance.model.outputModelList.length === 0)
+      .map((instance) => {
+        return new DirectedEdge({
+          graphLocator,
+          tail: instance.outputNode,
+          head: endNode,
+          source: programSource,
+        });
+      });
 
     this.graphElementList = [
-      new DirectedGraph({
-        locator: graphLocator,
-        inputAttributeByKey: {
-          labelloc: GraphLikeLabelLocation.Top,
-          label: programName,
-        },
-        outputFileName: programName,
+      // keep multiline
+      graph,
+      startNode,
+      ...startingEdgeList,
+      endNode,
+      ...endingCollectionEdgeList,
+      ...endingTransformEdgeList,
+    ];
+  }
+
+  allGraphElementList(): DirectedGraphElement[] {
+    return [
+      ...this.graphElementList,
+      ...this.collectionInstanceList.map((instance) => {
+        return instance.node;
       }),
-      new DirectedGraphNode({
-        graphLocator,
-        parentLocator: graphLocator,
-        source: new FileSourceInstance({
-          absoluteFilePath: __filename,
-        }),
-        distinguisher: programName,
-        inputAttributeByKey: {
-          label: 'placeholder',
-        },
+      ...this.transformInstanceList.flatMap((instance) => {
+        return instance.graphElementList;
       }),
     ];
   }

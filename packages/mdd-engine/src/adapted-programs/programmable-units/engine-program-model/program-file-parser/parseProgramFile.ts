@@ -14,14 +14,7 @@ import {
   TypeScriptFileImportListStreamMetatype,
   TYPE_SCRIPT_FILE_IMPORT_LIST_COLLECTION_ID,
 } from '../../type-script-file/typeScriptFileImportList';
-import {
-  COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID,
-  CollectionDefinitionLocatorStreamMetatype,
-} from '../collection-definition/collectionDefinitionLocator';
-import {
-  COLLECTION_INSTANCE_SKELETON_COLLECTION_ID,
-  CollectionInstanceSkeletonStreamMetatype,
-} from '../collection-instance/collectionInstanceSkeleton';
+import { COLLECTION_INSTANCE_SKELETON_COLLECTION_ID } from '../collection-instance/collectionInstanceSkeleton';
 import { findEngineCallExpression } from '../engine-call-expression/findEngineCallExpression';
 import { EngineFunctionConfigurationTypeName } from '../engineFunctionConfiguration';
 import {
@@ -75,14 +68,8 @@ export const parseProgramFile = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .toItemTuple2<CollectionDefinitionLocatorStreamMetatype>({
-    collectionId: COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID,
-  })
   .toItemTuple2<ItemDefinitionLocatorStreamMetatype>({
     collectionId: ITEM_DEFINITION_LOCATOR_COLLECTION_ID,
-  })
-  .toItemTuple2<CollectionInstanceSkeletonStreamMetatype>({
-    collectionId: COLLECTION_INSTANCE_SKELETON_COLLECTION_ID,
   })
   .toItemTuple2<ProgrammedTransformLocatorStreamMetatype>({
     collectionId: PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID,
@@ -104,7 +91,6 @@ export const parseProgramFile = buildProgrammedTransform({
 
       if (result === null) {
         return {
-          [COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID]: [],
           [ITEM_DEFINITION_LOCATOR_COLLECTION_ID]: [],
           [COLLECTION_INSTANCE_SKELETON_COLLECTION_ID]: [],
           [PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID]: [],
@@ -132,7 +118,6 @@ export const parseProgramFile = buildProgrammedTransform({
           //   engineCallParameterList,
           // });
           return {
-            [COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID]: [],
             [ITEM_DEFINITION_LOCATOR_COLLECTION_ID]: [],
             [COLLECTION_INSTANCE_SKELETON_COLLECTION_ID]: [],
             [PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID]: [],
@@ -156,8 +141,7 @@ export const parseProgramFile = buildProgrammedTransform({
             bodyStatementGroup,
           });
           return {
-            [COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID]:
-              collectionDefinitionLocatorList,
+            collectionDefinitionLocatorList,
             [ITEM_DEFINITION_LOCATOR_COLLECTION_ID]: itemDefinitionLocatorList,
             [COLLECTION_INSTANCE_SKELETON_COLLECTION_ID]:
               collectionInstanceSkeletonList,

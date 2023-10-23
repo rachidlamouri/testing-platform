@@ -9,6 +9,7 @@ import { PartialSubgraphAttributeByKey } from '../directedSubgraph';
 type DirectedSubgraphInput = {
   locator: DirectedSubgraphLocator;
   inputAttributeByKey: Omit<PartialSubgraphAttributeByKey, 'id'>;
+  rankGroupList?: string[][];
 };
 
 export class DirectedSubgraph extends DirectedGraphElementLocator<
@@ -18,10 +19,13 @@ export class DirectedSubgraph extends DirectedGraphElementLocator<
 > {
   inputAttributeByKey: Omit<PartialSubgraphAttributeByKey, 'id'>;
 
+  rankGroupList?: string[][];
+
   constructor(input: DirectedSubgraphInput) {
     super(input.locator);
 
     this.inputAttributeByKey = input.inputAttributeByKey;
+    this.rankGroupList = input.rankGroupList;
   }
 }
 

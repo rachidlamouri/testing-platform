@@ -1,5 +1,6 @@
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { Tuple } from '../../../../package-agnostic-utilities/type/tuple';
+import { ItemDefinitionModel } from '../item-definition/itemDefinitionModel';
 import { ProgrammedTransformInputModel } from './input/programmedTransformInputModel';
 import { ProgrammedTransformOutputModel } from './output/programmedTransformOutputModel';
 import { ProgrammedTransformId } from './programmedTransformId';
@@ -37,6 +38,13 @@ export class ProgrammedTransformModel implements ProgrammedTransformModelInput {
     this.skeleton = input.skeleton;
     this.inputModelList = input.inputModelList;
     this.outputModelList = input.outputModelList;
+  }
+
+  getAllItemDefinitionModelList(): ItemDefinitionModel[] {
+    return [
+      ...this.inputModelList.map((input) => input.itemDefinition),
+      ...this.outputModelList.map((output) => output.itemDefinition),
+    ];
   }
 }
 

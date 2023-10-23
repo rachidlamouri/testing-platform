@@ -27,7 +27,7 @@ export class CollectionInstanceSkeleton
   constructor(input: CollectionInstanceModelSkeletonInput) {
     this.id = new CollectionInstanceId({
       program: input.programLocator,
-      collection: input.collectionDefinitionLocator,
+      // collection: input.collectionDefinitionLocator,
       item: input.itemDefinitionLocator ?? '',
     });
     this.programLocator = input.programLocator;

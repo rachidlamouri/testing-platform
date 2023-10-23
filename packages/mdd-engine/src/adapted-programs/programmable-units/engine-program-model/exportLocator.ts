@@ -3,6 +3,10 @@ import {
   GenericComplexIdTemplate,
   ComplexId,
 } from '../../../package-agnostic-utilities/data-structure/id';
+import {
+  ExportedIdentifierSource,
+  ExportedIdentifierSourceInstance,
+} from '../linting/source/exportedIdentifierSource';
 
 const EXPORT_LOCATOR_ID_TEMPLATE = [
   'distinguisher',
@@ -42,6 +46,8 @@ export class ExportLocator
 
   identifierName: string;
 
+  locateeSource: ExportedIdentifierSource;
+
   constructor(input: ExportLocatorInput) {
     const { IdConstructor, distinguisher, filePath, identifierName } = input;
 
@@ -53,6 +59,10 @@ export class ExportLocator
     this.distinguisher = input.distinguisher;
     this.filePath = input.filePath;
     this.identifierName = input.identifierName;
+    this.locateeSource = new ExportedIdentifierSourceInstance({
+      filePath: input.filePath,
+      exportedIdentifier: input.identifierName,
+    });
   }
 }
 

@@ -22,8 +22,8 @@ export const getAllGraphElements = buildProgrammedTransform({
     collectionId: DIRECTED_GRAPH_ELEMENT_COLLECTION_ID,
   })
   .onTransform((programModelCollection) => {
-    return [
-      ...programModelCollection.list.flatMap((model) => model.graphElementList),
-    ];
+    return programModelCollection.list.flatMap((model) =>
+      model.allGraphElementList(),
+    );
   })
   .assemble();
