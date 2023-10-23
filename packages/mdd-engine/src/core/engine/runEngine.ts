@@ -57,6 +57,7 @@ import {
   TickSeriesManager,
   RuntimeStatisticsHandler,
 } from './tickSeriesManager';
+import { validateEngineEndState } from './validateEngineEndState';
 
 type CollectableItem = {
   collectionId: CollectionId;
@@ -683,107 +684,11 @@ export const runEngine = ({
       throw Error('Not implemented');
   }
 
-  const mutableTransformStateEndStateList = mutableTransformStateList.flatMap(
-    (mutableTransformState) => {
-      const transformInputKeyGroupSet = new Set(
-        [
-          ...mutableTransformState.transformInputKeyGroupSetCacheCache.values(),
-        ].flatMap((transformInputKeyGroupSetCache) => {
-          return [...transformInputKeyGroupSetCache.values()].flatMap(
-            (transformInputKeyGroupSubset) => {
-              return [...transformInputKeyGroupSubset];
-            },
-          );
-        }),
-      );
+  const endError = validateEngineEndState(mutableTransformStateList);
 
-      const untriggeredTransformInputKeyGroupSet = [
-        ...transformInputKeyGroupSet,
-      ].filter(
-        (transformInputKeyGroup) => !transformInputKeyGroup.hasTriggered,
-      );
-
-      return {
-        mutableTransformState,
-        untriggeredTransformInputKeyGroupSet,
-      };
-    },
-  );
-
-  const unfinishedMutableTransformStateList =
-    mutableTransformStateEndStateList.filter(
-      (endState) => endState.untriggeredTransformInputKeyGroupSet.length > 0,
-    );
-
-  if (unfinishedMutableTransformStateList.length > 0) {
-    const output = unfinishedMutableTransformStateList.map((endState) => {
-      const transformInputKeyGroupSetEndState =
-        endState.untriggeredTransformInputKeyGroupSet.map(
-          (transformInputKeyGroup) => {
-            const rightTupleState =
-              endState.mutableTransformState.rightMutableStreamConnectionStateTuple.map(
-                (
-                  rightMutableStreamConnectionState: RightMutableStreamConnectionState,
-                ) => {
-                  if (
-                    rightMutableStreamConnectionState.typeName ===
-                    MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState
-                  ) {
-                    return {
-                      rightCollectionId:
-                        rightMutableStreamConnectionState.collectionId,
-                      isReady: rightMutableStreamConnectionState.isReady,
-                    };
-                  }
-
-                  const idTuple =
-                    transformInputKeyGroup.rightInputKeyTupleCache.get(
-                      rightMutableStreamConnectionState,
-                    ) as IdTuple;
-                  return idTuple.map((id) => {
-                    const hasItem =
-                      rightMutableStreamConnectionState.itemCache.has(id);
-                    return {
-                      rightCollectionId:
-                        rightMutableStreamConnectionState.collectionId,
-                      id,
-                      hasItem,
-                    };
-                  });
-                },
-              );
-
-            return {
-              leftInput: transformInputKeyGroup.leftInput,
-              rightTupleState,
-            };
-          },
-        );
-
-      return {
-        programmedTransformName:
-          endState.mutableTransformState.programmedTransform.name,
-        leftCollectionId:
-          endState.mutableTransformState.programmedTransform
-            .leftInputStreamConfiguration.collectionId,
-        transformInputKeyGroupSet: transformInputKeyGroupSetEndState,
-      };
-    });
-
-    class UntriggeredTransformInputKeyGroupError extends Error {
-      constructor(public metadata: unknown) {
-        super(
-          `Some cologies were not triggered:  \n${JSON.stringify(
-            metadata,
-            null,
-            2,
-          )}`,
-        );
-      }
-    }
-
+  if (endError !== null) {
     errorHandler.onError({
-      error: new UntriggeredTransformInputKeyGroupError(output),
+      error: endError,
       isCritical: false,
     });
   }
