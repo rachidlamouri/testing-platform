@@ -64,6 +64,11 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
       'packages/mdd-engine/src/adapted-programs/programs/categorize-files/assertFileExtensionIsKnown.ts',
     identifierList: ['assertFileExtensionIsKnown'],
   },
+  {
+    filePath:
+      'packages/mdd-engine/src/adapted-programs/programmable-units/file/buildDefaultFileCollectionTuple.ts',
+    identifierList: ['buildDefaultFileCollectionTuple'],
+  },
 ];
 
 /**

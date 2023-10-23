@@ -8,18 +8,8 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   },
   {
     filePath:
-      'packages/mdd-engine/src/package-agnostic-utilities/constructor-function/buildNamedConstructorFunction.ts',
-    identifierList: ['buildNamedConstructorFunction'],
-  },
-  {
-    filePath:
       'packages/mdd-engine/src/package-agnostic-utilities/data-structure/id.ts',
     identifierList: ['GenericComplexIdTemplate', 'ComplexId'],
-  },
-  {
-    filePath:
-      'packages/mdd-engine/src/package-agnostic-utilities/type/simplify.ts',
-    identifierList: ['SimplifyN'],
   },
 ];
 
