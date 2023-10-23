@@ -13,9 +13,6 @@ type DirectedSubgraphIdTemplate = typeof DIRECTED_SUBGRAPH_ID_TEMPLATE;
 
 type DirectedSubgraphIdInput = BaseDirectedGraphConstituentIdInput;
 
-/**
- * See name
- */
 export class DirectedSubgraphId extends ComplexId<DirectedSubgraphIdTemplate> {
   constructor({ source, distinguisher }: DirectedSubgraphIdInput) {
     super({

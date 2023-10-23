@@ -16,9 +16,6 @@ type DirectedGraphIdInput = Pick<
   'source' | 'distinguisher'
 >;
 
-/**
- * See name
- */
 export class DirectedGraphId extends ComplexId<DirectedGraphIdTemplate> {
   constructor({ source, distinguisher }: DirectedGraphIdInput) {
     super({

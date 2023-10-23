@@ -11,9 +11,7 @@ const PROGRAMMED_TRANSFORM_INPUT_ID_TEMPLATE = [
 ] as const satisfies GenericComplexIdTemplate;
 type ProgrammedTransformInputIdTemplate =
   typeof PROGRAMMED_TRANSFORM_INPUT_ID_TEMPLATE;
-/**
- * See name.
- */
+
 export class ProgrammedTransformInputId extends ComplexId<ProgrammedTransformInputIdTemplate> {
   get rawTemplate(): ProgrammedTransformInputIdTemplate {
     return PROGRAMMED_TRANSFORM_INPUT_ID_TEMPLATE;

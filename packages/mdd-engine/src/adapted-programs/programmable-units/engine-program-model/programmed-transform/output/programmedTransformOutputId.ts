@@ -11,9 +11,7 @@ const PROGRAMMED_TRANSFORM_OUTPUT_ID_TEMPLATE = [
 ] as const satisfies GenericComplexIdTemplate;
 type ProgrammedTransformOutputIdTemplate =
   typeof PROGRAMMED_TRANSFORM_OUTPUT_ID_TEMPLATE;
-/**
- * See name.
- */
+
 export class ProgrammedTransformOutputId extends ComplexId<ProgrammedTransformOutputIdTemplate> {
   get rawTemplate(): ProgrammedTransformOutputIdTemplate {
     return PROGRAMMED_TRANSFORM_OUTPUT_ID_TEMPLATE;

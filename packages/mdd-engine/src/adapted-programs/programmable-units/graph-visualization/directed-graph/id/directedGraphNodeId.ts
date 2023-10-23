@@ -13,9 +13,6 @@ type DirectedGraphNodeIdTemplate = typeof DIRECTED_GRAPH_NODE_ID_TEMPLATE;
 
 type DirectedGraphNodeIdInput = BaseDirectedGraphConstituentIdInput;
 
-/**
- * See name
- */
 export class DirectedGraphNodeId extends ComplexId<DirectedGraphNodeIdTemplate> {
   constructor({ source, distinguisher }: DirectedGraphNodeIdInput) {
     super({
