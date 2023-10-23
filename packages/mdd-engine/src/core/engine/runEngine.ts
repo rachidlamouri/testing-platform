@@ -70,11 +70,11 @@ type OnItemAddedToCollectionsHandler = (
 
 export enum EngineRunnerStrategy {
   WaitForAllDependencies = 'WaitForAllDependencies',
-  OnlyWaitForCollectionDependency = 'OnlyWaitForVoictentDependency',
+  OnlyWaitForCollectionDependency = 'OnlyWaitForCollectionDependency',
 }
 
 export type EngineRunnerInput = {
-  // TODO: remove "initialQuirmTuple" and make inputVoictentList required
+  // TODO: make inputCollectionList required
   inputCollectionList?: GenericCollection2[];
   errorCollectionId?: CollectionId | null;
   programmedTransformTuple: Tuple<GenericProgrammedTransform2>;
@@ -93,10 +93,8 @@ export type EngineRunnerInput = {
  * @readableName runCoreEngine
  *
  * @param input (see individual properties)
- * @param input.estinantTuple the collection of Estinants to register in the
+ * @param input.programmedTransformTuple the collection of ProgrammedTransforms to register in the
  * engine
- * @param input.initialQuirmTuple the starting collection of Quirms to kickstart
- * the engine
  */
 export const runEngine = ({
   inputCollectionList = [],
@@ -147,7 +145,7 @@ export const runEngine = ({
       const collection = collectionCache.get(collectableItem.collectionId);
       assertNotUndefined(
         collection,
-        `Unable to find voictent for gepp: ${collectableItem.collectionId}`,
+        `Unable to find collection for collection id: ${collectableItem.collectionId}`,
       );
 
       collection.addItem(collectableItem.item);
@@ -167,7 +165,7 @@ export const runEngine = ({
     const collection = collectionCache.get(streamConfiguration.collectionId);
     assertNotUndefined(
       collection,
-      `Unable to find voictent for gepp: ${streamConfiguration.collectionId}`,
+      `Unable to find collection for collection id: ${streamConfiguration.collectionId}`,
     );
 
     const stream = streamConfiguration.isCollectionStream
@@ -175,7 +173,7 @@ export const runEngine = ({
       : collection.createCollectionItemStream(programmedTransform.name);
 
     if (stream === null) {
-      throw Error('Unexpected null Lanbe');
+      throw Error('Unexpected null stream');
     }
 
     return stream;
@@ -346,7 +344,7 @@ export const runEngine = ({
                     leftInput as GenericIndexedItem,
                   );
                 } else {
-                  // TODO: remove this else once all voictent item lanbes return indexed hubblepups
+                  // TODO: remove this else once all collection item streams return indexed items
 
                   // eslint-disable-next-line no-console
                   console.log('DEBUG INFO A:', {
@@ -355,7 +353,7 @@ export const runEngine = ({
                     mutableTransformState,
                   });
 
-                  throw Error('Invalid lanbe setup. See above info.');
+                  throw Error('Invalid stream setup. See above info.');
                 }
 
                 return [rightMutableStreamConnectionState, idTuple];
@@ -416,7 +414,7 @@ export const runEngine = ({
             id = mutableStreamConnectionState.getRightKey(rightInput);
             mutableStreamConnectionState.itemCache.set(id, rightInput);
           } else {
-            // TODO: remove this else once all voictent item lanbes return indexed hubblepups
+            // TODO: remove this else once all collection item streams return indexed items
 
             // eslint-disable-next-line no-console
             console.log('DEBUG INFO B:', {
@@ -424,7 +422,7 @@ export const runEngine = ({
               mutableStreamConnectionState,
             });
 
-            throw Error('Invalid lanbe setup. See above info.');
+            throw Error('Invalid stream setup. See above info.');
           }
 
           const transformInputKeyGroupSetCache =
@@ -607,10 +605,10 @@ export const runEngine = ({
       ),
     );
 
-    // estinants cannot have direct inputs, so they won't be ready immediately
+    // programmed transforms cannot have direct inputs, so they won't be ready immediately
     const runtimeMutableTransformStateSet = new Set<MutableTransformState2>();
 
-    // This is a do-while because estinants cannot have direct inputs so there will be 0 estinants ready to run at the very start
+    // This is a do-while because programmed transforms cannot have direct inputs so there will be 0 programmed transforms ready to run at the very start
     do {
       tickSeriesManager.onTopOfLoop();
 
@@ -621,7 +619,7 @@ export const runEngine = ({
           );
         })
         .forEach((context) => {
-          // Note: it's important that execution is separated from evaluation since executing a platomity can affect other platomities
+          // Note: it's important that execution is separated from evaluation since executing a MutableTransformState can affect other platomities
           executeContext(context);
         });
 

@@ -11,19 +11,19 @@ import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
 type Collection1StreamMetatype = StandardInMemoryStreamMetatype<
-  'voictent-1',
+  'collection-1',
   number
 >;
 type Collection2StreamMetatype = StandardInMemoryStreamMetatype<
-  'voictent-2',
+  'collection-2',
   string
 >;
 type Collection3StreamMetatype = StandardInMemoryStreamMetatype<
-  'voictent-3',
+  'collection-3',
   string
 >;
 type Collection4StreamMetatype = StandardInMemoryStreamMetatype<
-  'voictent-4',
+  'collection-4',
   string
 >;
 
@@ -31,7 +31,7 @@ type SerializedStreamMetatype =
   AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
-  namespace: 'test-releasing-a-right-voictent-multiple-timesy',
+  namespace: 'test-releasing-a-right-collection-multiple-timesy',
 });
 
 const SKIP_INDEX = 2;
@@ -48,12 +48,12 @@ const forwardFrom2To3AndSkipAValue: ProgrammedTransform2<
   version: 2,
   name: 'forwardFrom2To3AndSkipAValue',
   leftInputStreamConfiguration: {
-    collectionId: 'voictent-2',
+    collectionId: 'collection-2',
     isCollectionStream: false,
   },
   rightInputStreamConfigurationTuple: [],
   outputStreamConfiguration: {
-    collectionIdTuple: ['voictent-3'],
+    collectionIdTuple: ['collection-3'],
   },
   transform(
     input,
@@ -62,12 +62,12 @@ const forwardFrom2To3AndSkipAValue: ProgrammedTransform2<
   >['coreTransformOutput'] {
     if (input.indexByName.listIndex === SKIP_INDEX) {
       return {
-        'voictent-3': [],
+        'collection-3': [],
       };
     }
 
     return {
-      'voictent-3': [input.item],
+      'collection-3': [input.item],
     };
   },
 };
@@ -85,19 +85,19 @@ const join1ToAllOf3: ProgrammedTransform2<
   version: 2,
   name: 'join1ToAllOf3',
   leftInputStreamConfiguration: {
-    collectionId: 'voictent-1',
+    collectionId: 'collection-1',
     isCollectionStream: false,
   },
   rightInputStreamConfigurationTuple: [
     {
-      collectionId: 'voictent-3',
+      collectionId: 'collection-3',
       isCollectionStream: true,
       getRightKey: undefined,
       getRightKeyTuple: undefined,
     },
   ],
   outputStreamConfiguration: {
-    collectionIdTuple: ['voictent-4'],
+    collectionIdTuple: ['collection-4'],
   },
   transform(
     leftInput,
@@ -110,7 +110,7 @@ const join1ToAllOf3: ProgrammedTransform2<
     const output = `${leftInput.item}-${serializedRightInput}`;
 
     return {
-      'voictent-4': [output],
+      'collection-4': [output],
     };
   },
 };
@@ -126,19 +126,19 @@ const join1ToAllOf3: ProgrammedTransform2<
 runEngine2({
   inputCollectionList: [
     new InMemoryCollection<Collection1StreamMetatype>({
-      collectionId: 'voictent-1',
+      collectionId: 'collection-1',
       initialItemEggTuple: [1, 2],
     }),
     new InMemoryCollection<Collection2StreamMetatype>({
-      collectionId: 'voictent-2',
+      collectionId: 'collection-2',
       initialItemEggTuple: ['a', 'b', 'SKIP', 'c', 'd'],
     }),
     new InMemoryCollection<Collection3StreamMetatype>({
-      collectionId: 'voictent-3',
+      collectionId: 'collection-3',
       initialItemEggTuple: [],
     }),
     new InMemoryCollection<Collection4StreamMetatype>({
-      collectionId: 'voictent-4',
+      collectionId: 'collection-4',
       initialItemEggTuple: [],
     }),
     new SerializableCollection<SerializedStreamMetatype>({
@@ -155,7 +155,7 @@ runEngine2({
       Collection4StreamMetatype,
       SerializedStreamMetatype
     >({
-      inputCollectionId: 'voictent-4',
+      inputCollectionId: 'collection-4',
       outputCollectionId: 'serialized',
     }),
   ],

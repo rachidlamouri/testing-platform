@@ -17,7 +17,7 @@ type AbstractInMemoryCollection2ConstructorInput<
 
 /**
  * The base class for in memory collections. It supports asymmetric collections
- * (collections where the pelue and pelie are different) since that means it can
+ * (collections where the item egg streamable and item streamable are different) since that means it can
  * also support symmetric collections.
  *
  * @readableName AbstractAsymmetricInMemoryCollection

@@ -173,7 +173,7 @@ type UninferableCollectionByCollectionId<
   UninferableStreamMetatypeUnion<TImplicitStreamMetatypeUnion>
 >;
 
-// TODO: change this to extract any voque whose receieved hubblepup includes Error (I tried this and couldn't get it to work :sad-face:)
+// TODO: change this to extract any stream metatype whose receieved item includes Error (I tried this and couldn't get it to work :sad-face:)
 type ErrorCollectionId<TAllStreamMetatypeUnion extends GenericStreamMetatype> =
   Extract<TAllStreamMetatypeUnion['collectionId'], ProgramErrorCollectionId>;
 
@@ -376,7 +376,7 @@ export const runEngine: EngineRunner = <
   ] as GenericCollection2Tuple;
 
   // TODO: consider making this an input argument
-  // note: The core engine will provide a signal if someone passes in a collection with the same Gepp
+  // note: The core engine will provide a signal if someone passes in a collection with the same CollectionId
   const serializerCollectionId = 'serialized';
 
   const serializableCollection = buildSerializableCollection(

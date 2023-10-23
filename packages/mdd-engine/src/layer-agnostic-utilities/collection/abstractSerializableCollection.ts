@@ -50,7 +50,7 @@ type AbstractSerializableCollectionConstructorInput<
 };
 
 /**
- * A collection that can take a serializeable hubblepup and write it to a
+ * A collection that can take a serializeable item and write it to a
  * program file cache.
  *
  * @readableName AbstractSerializableCollection

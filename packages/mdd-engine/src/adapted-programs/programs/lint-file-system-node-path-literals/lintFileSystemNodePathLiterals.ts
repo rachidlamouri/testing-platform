@@ -6,7 +6,7 @@ import {
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
-  COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+  ENGINE_PACKAGE_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
@@ -60,7 +60,7 @@ runEngine({
       {
         collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
         initialItemEggTuple: [
-          COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+          ENGINE_PACKAGE_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
         ],
       },
     ),

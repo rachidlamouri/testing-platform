@@ -15,7 +15,7 @@ import { enumerateFileSystemObjects } from '../../programmable-units/file/enumer
 import {
   FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
   FileSystemObjectEnumeratorConfigurationStreamMetatype,
-  COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+  ENGINE_PACKAGE_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
 import { constructSnapshotScript } from '../../programmable-units/snapshot-refresh/constructSnapshotScript';
@@ -40,7 +40,7 @@ runEngine({
       {
         collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
         initialItemEggTuple: [
-          COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+          ENGINE_PACKAGE_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
         ],
       },
     ),

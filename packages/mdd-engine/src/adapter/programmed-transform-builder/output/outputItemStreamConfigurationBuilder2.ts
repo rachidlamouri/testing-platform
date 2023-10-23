@@ -32,7 +32,7 @@ type NextAdaptedOutputStreamConnectionMetatypeTuple<
 ];
 
 /**
- * Builds the context needed to enable outputing a single hubblepup
+ * Builds the context needed to enable outputing a single item
  *
  * @readableName OutputItemStreamConfigurationBuilder
  */

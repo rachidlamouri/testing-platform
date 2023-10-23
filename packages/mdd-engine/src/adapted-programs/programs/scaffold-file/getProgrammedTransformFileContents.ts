@@ -14,7 +14,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
 ];
 
 /**
- * Constructs the boilerplate text for an estinant file
+ * Constructs the boilerplate text for a programmed transform file
  *
  * @readableName getProgrammedTransformFileContents
  */

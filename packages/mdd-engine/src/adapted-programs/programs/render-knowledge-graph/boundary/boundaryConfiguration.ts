@@ -85,7 +85,7 @@ export const BOUNDARY_CONFIGURATION_LIST: BoundaryConfiguration[] = [
   }),
   new BoundaryConfigurationInstance({
     typeName: BoundaryTypeName.Utility,
-    displayName: 'Estinant Builder',
+    displayName: 'ProgrammedTransform Builder',
     directoryPath:
       'packages/mdd-engine/src/adapter/programmed-transform-builder',
   }),

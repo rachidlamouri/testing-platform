@@ -29,7 +29,9 @@ export type ProgramProgrammedTransformRelationship = ObjectWithPrototype<
 >;
 
 export const { ProgramProgrammedTransformRelationshipInstance } =
-  buildConstructorFunctionWithName('ProgramEstinantRelationshipInstance')<
+  buildConstructorFunctionWithName(
+    'ProgramProgrammedTransformRelationshipInstance',
+  )<
     BaseProgramProgrammedTransformRelationship,
     ProgramProgrammedTransformRelationshipPrototype
   >({
@@ -42,7 +44,7 @@ export const { ProgramProgrammedTransformRelationshipInstance } =
   });
 
 export const PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID =
-  'program-estinant-relationship';
+  'program-programmed-transform-relationship';
 
 type ProgramProgrammedTransformRelationshipCollectionId =
   typeof PROGRAM_PROGRAMMED_TRANSFORM_RELATIONSHIP_COLLECTION_ID;

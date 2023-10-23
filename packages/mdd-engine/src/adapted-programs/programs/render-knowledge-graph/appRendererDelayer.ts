@@ -23,7 +23,7 @@ type AppRendererDelayerConstructorInput = {
 };
 
 /**
- * Allows an estinant to guarantee that it runs before "renderApp". "renderApp"
+ * Allows a programmed transform to guarantee that it runs before "renderApp". "renderApp"
  * triggers off the collection of this item, so it will have to wait until the
  * entire collection is ready
  */

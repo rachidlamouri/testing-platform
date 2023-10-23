@@ -23,7 +23,7 @@ const checkForDuplicateCollections = (
     .map(([collectionId]) => collectionId);
 
   const messageList = duplicateCollectionIdList.map((collectionId) => {
-    return `Voictents must have a unique gepp per program. Found duplicate gepp: ${collectionId}`;
+    return `Collections must have a unique collection id per program. Found duplicate collection id: ${collectionId}`;
   });
 
   return messageList;
@@ -80,7 +80,7 @@ const validateProgrammedTransformCollectionIds = (
     ({ programmedTransformName, collectionId, isInput }) => {
       const label = isInput ? 'input' : 'output';
 
-      return `Estinant inputs and outputs must have a corresponding voictent. Estinant "${programmedTransformName}" has an ${label} gepp "${collectionId}" without a corresponding voictent.`;
+      return `ProgrammedTransform inputs and outputs must have a corresponding collection. ProgrammedTransform "${programmedTransformName}" has an ${label} collection id "${collectionId}" without a corresponding collection.`;
     },
   );
 
@@ -112,7 +112,7 @@ const checkForDuplicateProgrammedTransformNames = (
     .map(([name]) => name);
 
   const messageList = duplicateProgrammedTransformNameList.map((name) => {
-    return `Estinant names must be unique per program. Found duplicate name: ${name}`;
+    return `ProgrammedTransform names must be unique per program. Found duplicate name: ${name}`;
   });
 
   return messageList;
@@ -146,7 +146,7 @@ const checkForHungryProgrammedTransforms = (
       .map((streamConfiguration) => streamConfiguration.collectionId),
   );
 
-  // note: downstream estinants are gonna be so hungies
+  // note: downstream programmed transforms are gonna be so hungies
   const unfedCollectionList = inputCollectionList.filter((collection) => {
     const isConsumed = consumedCollectionCollectionIdSet.has(
       collection.collectionId,
@@ -156,7 +156,7 @@ const checkForHungryProgrammedTransforms = (
   });
 
   const messageList = unfedCollectionList.map((collection) => {
-    return `Voictent with gepp "${collection.collectionId}" is consumed by an estinant, but is not initialized nor the output of an estinant`;
+    return `Collection with collection id "${collection.collectionId}" is consumed by a programmed transform, but is not initialized nor the output of a programmed transform`;
   });
 
   return messageList;
@@ -168,7 +168,9 @@ const validateErrorCollection = (
 ): string[] => {
   const messageList =
     errorCollectionId !== null && errorCollection === null
-      ? [`Error gepp "${errorCollectionId}" has no corresponding voictent`]
+      ? [
+          `Error collection id "${errorCollectionId}" has no corresponding collection`,
+        ]
       : [];
 
   return messageList;
@@ -198,7 +200,7 @@ export const validateEngineInput = ({
   const duplicateProgrammedTransformNameErrorMessageList =
     checkForDuplicateProgrammedTransformNames(programmedTransformTuple);
 
-  const programmedTransformCollectinIdErrorMessageList =
+  const programmedTransformCollectionIdErrorMessageList =
     validateProgrammedTransformCollectionIds(
       inputCollectionList,
       programmedTransformTuple,
@@ -212,7 +214,7 @@ export const validateEngineInput = ({
   const criticalErrorMessageList = [
     ...duplicateCollectionIdErrorMessageList,
     ...duplicateProgrammedTransformNameErrorMessageList,
-    ...programmedTransformCollectinIdErrorMessageList,
+    ...programmedTransformCollectionIdErrorMessageList,
     ...invalidErrorCollectionErrorMessageList,
   ];
 

@@ -94,7 +94,7 @@ export type LintAssertionOmissionStreamMetatype = StreamMetatype<
   LintAssertionOmissionCollectionStreamable
 >;
 
-// TODO: update this class to not need a TVoque. you will need to update the program modeler
+// TODO: update this class to not need a TStreamMetatype. you will need to update the program modeler
 export class LintAssertionOmissionCollection<
   TStreamMetatype extends LintAssertionOmissionStreamMetatype,
 > extends AbstractInMemoryCollection<

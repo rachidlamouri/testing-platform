@@ -10,13 +10,13 @@ import { ReferenceTypeName } from '../../core/types/stream/referenceTypeName';
 
 export class DereferenceError extends Error {
   constructor(stream: GenericCollectionItemStream2) {
-    super(`Lanbe "${stream.debugName}" has nothing to dereference`);
+    super(`Stream "${stream.debugName}" has nothing to dereference`);
   }
 }
 
 export class MissingStreamError extends Error {
   constructor(stream: GenericCollectionItemStream2) {
-    super(`Lanbe "${stream.debugName}" does not exist`);
+    super(`Stream "${stream.debugName}" does not exist`);
   }
 }
 

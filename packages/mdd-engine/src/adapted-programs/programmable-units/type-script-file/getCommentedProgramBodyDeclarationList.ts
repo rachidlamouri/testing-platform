@@ -31,7 +31,7 @@ const allowedCanonicalVariationDeclarationSuffixSet = [
   // keep as multiline list
   '2',
   '3',
-  'pelue',
+  'egg',
 ] as const;
 
 /**

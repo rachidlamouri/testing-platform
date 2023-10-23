@@ -58,7 +58,7 @@ const writeDatumToCache: ProgrammedTransform2<
 };
 
 /**
- * An example program to demonstrate "CachedOnDiskVoictent"
+ * An example program to demonstrate "CachedOnDiskCollection"
  *
  * @canonicalComment
  */

@@ -13,12 +13,6 @@ export type IdentifiableItemId = SimpleId | UnsafeComplexId;
  *
  * @readableName GenericIdentifiableItem
  */
-export type GenericIdentifiableItem =
-  | {
-      id: IdentifiableItemId;
-      zorn?: IdentifiableItemId;
-    }
-  | {
-      id?: IdentifiableItemId;
-      zorn: IdentifiableItemId;
-    };
+export type GenericIdentifiableItem = {
+  id: IdentifiableItemId;
+};

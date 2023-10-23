@@ -25,7 +25,7 @@ import {
 } from '../shared/streamConnectionMetatype';
 
 /**
- * Constructs an estinant given all of the context accumulated by the builder
+ * Constructs a programmed transform given all of the context accumulated by the builder
  * chain
  *
  * @readableName ProgrammedTransformAssembler

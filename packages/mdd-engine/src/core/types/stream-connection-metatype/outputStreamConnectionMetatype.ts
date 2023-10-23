@@ -42,7 +42,7 @@ export type OutputStreamConnectionMetatype<
 export type GenericOutputStreamConnectionMetatype =
   OutputStreamConnectionMetatype<GenericStreamMetatypeTuple>;
 
-// TODO: tie this type back to OutputVicken
+// TODO: tie this type back to OutputStreamConnectionMetatype
 export type UnsafeOutputStreamConnectionMetatype = {
   outputStreamMetatypeOptionTuple: UnsafeStreamMetatypeTuple;
   collectionIdTuple: OutputCollectionIdTuple<UnsafeStreamMetatypeTuple>;

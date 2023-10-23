@@ -18,7 +18,7 @@ type EngineErrorStreamMetatype =
   SerializableErrorStreamMetatype<'engine-error'>;
 
 const programFileCache = new ProgramFileCache({
-  namespace: 'test-estinant-error',
+  namespace: 'test-programmed-transform-error',
 });
 
 /** Throws the input error */

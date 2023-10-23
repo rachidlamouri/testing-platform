@@ -100,11 +100,11 @@ export type GenericComplexIdTemplate =
 type InputValue<TSubid extends Subid> = TSubid extends IdTemplateKeyword.LITERAL
   ? OutputValue
   : TSubid extends IdTemplateKeyword.ANY
-  ? ComplexIdLike | { id: ComplexIdLike } | { zorn: ComplexIdLike }
+  ? ComplexIdLike | { id: ComplexIdLike }
   : TSubid extends SpecificLabelList<infer TLabel>
   ? TLabel
   : TSubid extends ComplexIdLikeConstructor<infer TComplexIdLike>
-  ? TComplexIdLike | { id: TComplexIdLike } | { zorn: TComplexIdLike }
+  ? TComplexIdLike | { id: TComplexIdLike }
   : never;
 
 type InputValueFromSubidTuple<TSubidTuple extends GenericSubidTuple> =
@@ -199,8 +199,6 @@ export abstract class ComplexId<TTemplate extends GenericComplexIdTemplate>
         let subid: ComplexIdLike;
         if ('id' in value) {
           subid = value.id;
-        } else if ('zorn' in value) {
-          subid = value.zorn;
         } else {
           subid = value;
         }
@@ -216,11 +214,11 @@ export abstract class ComplexId<TTemplate extends GenericComplexIdTemplate>
    */
   private get safeValueByTemplateKey(): Record<
     string,
-    string | ComplexIdLike | { id: ComplexIdLike } | { zorn: ComplexIdLike }
+    string | ComplexIdLike | { id: ComplexIdLike }
   > {
     return this.valueByTemplateKey as Record<
       string,
-      string | ComplexIdLike | { id: ComplexIdLike } | { zorn: ComplexIdLike }
+      string | ComplexIdLike | { id: ComplexIdLike }
     >;
   }
 
@@ -241,8 +239,6 @@ export abstract class ComplexId<TTemplate extends GenericComplexIdTemplate>
       let subid: ComplexIdLike;
       if ('id' in value) {
         subid = value.id;
-      } else if ('zorn' in value) {
-        subid = value.zorn;
       } else {
         subid = value;
       }
@@ -276,9 +272,4 @@ export abstract class ComplexId<TTemplate extends GenericComplexIdTemplate>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type UnsafeComplexId = ComplexIdInterface<NonEmptyTuple<any>>;
 
-export type IdLike =
-  | SimpleId
-  | ComplexIdLike
-  | { id: ComplexIdLike }
-  /** @deprecated */
-  | { zorn: ComplexIdLike };
+export type IdLike = SimpleId | ComplexIdLike | { id: ComplexIdLike };

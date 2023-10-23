@@ -25,8 +25,8 @@ const runKnowledgeGraph = useKnowledgeGraphDeveloper
   ? 'npm run program packages/mdd-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts'
   : 'npm run program packages/mdd-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts';
 const serveKnowledgeGraph = useKnowledgeGraphDeveloper
-  ? 'npx http-server debug/develop-knowledge-graph/voictents/output-file'
-  : 'npx http-server debug/render-knowledge-graph/voictents/output-file';
+  ? 'npx http-server debug/develop-knowledge-graph/collections/output-file'
+  : 'npx http-server debug/render-knowledge-graph/collections/output-file';
 
 const subprocessConfigurationList: SubprocessConfiguration[] = (
   [

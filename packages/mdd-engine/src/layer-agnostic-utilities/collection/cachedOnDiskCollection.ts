@@ -23,7 +23,7 @@ const createDirectory = (directoryPath: string): void => {
   fs.mkdirSync(directoryPath, { recursive: true });
 };
 
-// TODO: make the root a generic on-disk cache location that is shared by any on-disk voictent
+// TODO: make the root a generic on-disk cache location that is shared by any on-disk collection
 const ROOT_DIRECTORY = 'debug';
 createDirectory(ROOT_DIRECTORY);
 

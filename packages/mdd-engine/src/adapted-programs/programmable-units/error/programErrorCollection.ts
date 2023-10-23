@@ -124,7 +124,7 @@ export class ProgramErrorCollection extends AbstractAsymmetricInMemoryCollection
       });
 
     if (itemEgg instanceof LintAssertionError) {
-      // hubblepupPelue.setContextFilePath(contextFilePath);
+      // itemEgg.setContextFilePath(contextFilePath);
       return itemEgg;
     }
 

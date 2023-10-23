@@ -24,7 +24,7 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
 ];
 
 /**
- * Constructs the boilerplate text for a hubblepup file
+ * Constructs the boilerplate text for a item file
  *
  * @readableName getStreamableFileContents
  */

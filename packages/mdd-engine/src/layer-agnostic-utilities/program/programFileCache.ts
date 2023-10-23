@@ -10,7 +10,7 @@ import { RuntimeStatistics } from '../../core/engine/tickSeriesManager';
 
 enum TopLevelDirectoryName {
   Root = '',
-  Collections = 'voictents',
+  Collections = 'collections',
 }
 
 const RUNTIME_SNAPSHOT_FILE_BASE_NAME = 'runtimeSnapshot';
@@ -67,7 +67,7 @@ type NamespacedFilePathWriterInput = {
 export class ProgramFileCache extends FileCache {
   static CACHE_DIRECTORY_PATH = 'debug';
 
-  // public readonly voictentsDirectory;
+  // public readonly collectionsDirectory;
 
   // public readonly runtimeSnapshotFilePath;
 

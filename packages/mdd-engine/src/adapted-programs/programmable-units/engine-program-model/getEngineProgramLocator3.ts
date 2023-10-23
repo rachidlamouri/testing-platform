@@ -79,13 +79,14 @@ import { CommentedProgramBodyDeclaration } from '../type-script-file/commentedPr
 import { CategorizedCommentTypeName } from '../type-script-file/comment/categorized/categorizedCommentTypeName';
 import { CommentTagId } from '../type-script-file/comment/commentTagId';
 
-const ESTINANT_NAME = 'getEngineProgramLocator' as const;
-type EstinantName = typeof ESTINANT_NAME;
-type ReportingLocator = ReportingProgrammedTransformLocator<EstinantName>;
+const PROGRAMMED_TRANSFORM_NAME = 'getEngineProgramLocator' as const;
+type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
+type ReportingLocator =
+  ReportingProgrammedTransformLocator<ProgrammedTransformName>;
 const reporterLocator: ReportingLocator = {
   typeName:
     ProgramErrorElementLocatorTypeName.ReportingProgrammedTransformLocator,
-  name: ESTINANT_NAME,
+  name: PROGRAMMED_TRANSFORM_NAME,
   filePath: __filename,
 };
 
@@ -133,7 +134,7 @@ const getCore2EngineProgramLocator = ({
 }: Core2EngineProgramLocatorAccessorInput): Core2EngineProgramLocatorAccessorResult => {
   const engineCallCommentText = engineCallDeclaration?.commentText;
 
-  // TODO: move this to its own hubblepup
+  // TODO: move this to its own item
   const fileImportsByImportedIdentifier = new Map<
     string,
     TypeScriptFileImport
@@ -164,24 +165,26 @@ const getCore2EngineProgramLocator = ({
 
   const programName = Case.kebab(engineProgramFile.nodePath.name.extensionless);
 
-  const voictentListGeppProperty = engineCallExpressionPropertyList.find(
-    (property) =>
-      property.key.name ===
-      engineFunctionConfiguration.collectionListKeyIdentifierName,
-  );
+  const collectionListCollectionIdProperty =
+    engineCallExpressionPropertyList.find(
+      (property) =>
+        property.key.name ===
+        engineFunctionConfiguration.collectionListKeyIdentifierName,
+    );
 
-  const initialVoictentListValueNode = voictentListGeppProperty?.value;
+  const initialCollectionListValueNode =
+    collectionListCollectionIdProperty?.value;
 
-  const initialVoictentGeppIdentifierList =
-    initialVoictentListValueNode?.type === AST_NODE_TYPES.ArrayExpression
-      ? initialVoictentListValueNode?.elements
+  const initialCollectionCollectionIdIdentifierList =
+    initialCollectionListValueNode?.type === AST_NODE_TYPES.ArrayExpression
+      ? initialCollectionListValueNode?.elements
       : [];
 
-  const initialVoqueLocatorList: EngineStreamMetatypeLocator2[] = [];
+  const initialStreamMetatypeLocatorList: EngineStreamMetatypeLocator2[] = [];
   const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
 
-  initialVoictentGeppIdentifierList.forEach((element) => {
-    const voqueName =
+  initialCollectionCollectionIdIdentifierList.forEach((element) => {
+    const streamMetatypeName =
       isNewExpression(element) &&
       isTypeScriptTypeParameterInstantiationWithParameterTuple(
         element.typeParameters,
@@ -191,11 +194,11 @@ const getCore2EngineProgramLocator = ({
         ? element.typeParameters.params[0].typeName.name
         : null;
 
-    if (voqueName === null) {
+    if (streamMetatypeName === null) {
       parallelErrorList.push({
-        name: `missing-voictent-type-parameter`,
+        name: `missing-collection-type-parameter`,
         error: new Error(
-          'New expressions for voictent instances must have a type parameter for the corresponding voque',
+          'New expressions for collection instances must have a type parameter for the corresponding stream metatype',
         ),
         reporterLocator,
         sourceLocator: {
@@ -208,9 +211,9 @@ const getCore2EngineProgramLocator = ({
       return;
     }
 
-    let initialHubblepupPelueTupleProperty: IdentifiableProperty | undefined;
+    let initialItemEggTupleProperty: IdentifiableProperty | undefined;
     if (isNewExpressionWithObjectExpressionArgument(element)) {
-      initialHubblepupPelueTupleProperty = element.arguments[0].properties.find(
+      initialItemEggTupleProperty = element.arguments[0].properties.find(
         (node): node is IdentifiableProperty => {
           return isSpecificIdentifiableProperty(
             node,
@@ -219,24 +222,23 @@ const getCore2EngineProgramLocator = ({
         },
       );
     } else {
-      initialHubblepupPelueTupleProperty = undefined;
+      initialItemEggTupleProperty = undefined;
     }
 
     let hasInitialInput: boolean;
-    if (initialHubblepupPelueTupleProperty === undefined) {
+    if (initialItemEggTupleProperty === undefined) {
       hasInitialInput = false;
-    } else if (isArrayExpression(initialHubblepupPelueTupleProperty.value)) {
-      hasInitialInput =
-        initialHubblepupPelueTupleProperty.value.elements.length > 0;
+    } else if (isArrayExpression(initialItemEggTupleProperty.value)) {
+      hasInitialInput = initialItemEggTupleProperty.value.elements.length > 0;
     } else {
       // We are defaulting to true since this implies that some potentially non-empty array was passed in
       hasInitialInput = true;
     }
 
     if (hasInitialInput) {
-      initialVoqueLocatorList.push(
+      initialStreamMetatypeLocatorList.push(
         new EngineStreamMetatypeLocator2Instance({
-          identifierName: voqueName,
+          identifierName: streamMetatypeName,
           filePath: engineProgramFile.filePath.serialized,
           isCoreStreamMetatype: true,
         }),
@@ -244,20 +246,22 @@ const getCore2EngineProgramLocator = ({
     }
   });
 
-  const estinantListProperty = engineCallExpressionPropertyList.find(
+  const programmedTransformListProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
       engineFunctionConfiguration.programmedTransformListKeyIdentifierName,
   );
 
-  const estinantListValueNode = estinantListProperty?.value;
-  const estinantReferenceElementList =
-    estinantListValueNode?.type === AST_NODE_TYPES.ArrayExpression
-      ? estinantListValueNode?.elements
+  const programmedTransformListValueNode =
+    programmedTransformListProperty?.value;
+  const programmedTransformReferenceElementList =
+    programmedTransformListValueNode?.type === AST_NODE_TYPES.ArrayExpression
+      ? programmedTransformListValueNode?.elements
       : [];
-  const engineEstinantLocatorList: EngineProgrammedTransformLocator2[] = [];
+  const engineProgrammedTransformLocatorList: EngineProgrammedTransformLocator2[] =
+    [];
 
-  estinantReferenceElementList.forEach((element, index) => {
+  programmedTransformReferenceElementList.forEach((element, index) => {
     if (isIdentifier(element)) {
       const identifierName = element.name;
 
@@ -265,7 +269,7 @@ const getCore2EngineProgramLocator = ({
         getImportPathFromIdentifier(identifierName) ??
         engineProgramFile.filePath.serialized;
 
-      engineEstinantLocatorList.push(
+      engineProgrammedTransformLocatorList.push(
         new EngineProgrammedTransformTopLevelDeclarationLocatorInstance({
           typeName:
             EngineProgrammedTransformLocator2TypeName.TopLevelDeclaration,
@@ -280,7 +284,7 @@ const getCore2EngineProgramLocator = ({
         buildAddMetadataForSerialization.name,
       )
     ) {
-      engineEstinantLocatorList.push(
+      engineProgrammedTransformLocatorList.push(
         new EngineProgrammedTransformBuildAddMetadataForSerializationLocatorInstance(
           {
             typeName:
@@ -294,9 +298,9 @@ const getCore2EngineProgramLocator = ({
       );
     } else {
       parallelErrorList.push({
-        name: `unparseable-estinant`,
+        name: `unparseable-programmed-transform`,
         error: new Error(
-          `Engine program has an unparseable estinant. Expected an identifier or a call expression to "${buildAddMetadataForSerialization.name}".`,
+          `Engine program has an unparseable programmedTransform. Expected an identifier or a call expression to "${buildAddMetadataForSerialization.name}".`,
         ),
         reporterLocator,
         sourceLocator: {
@@ -349,22 +353,21 @@ const getCore2EngineProgramLocator = ({
     filePath: engineProgramFile.filePath.serialized,
   });
 
-  const programmedTransformRelationshipList = engineEstinantLocatorList.map(
-    (programmedTransformLocator) => {
+  const programmedTransformRelationshipList =
+    engineProgrammedTransformLocatorList.map((programmedTransformLocator) => {
       return new ProgramProgrammedTransformRelationshipInstance({
         programName,
         programmedTransformLocator,
         rootGraphLocator: partialProgramLocator.rootGraphLocator,
       });
-    },
-  );
+    });
 
   const engineProgramLocator = new EngineProgramLocator3Instance({
     isCoreProgram: true,
     programName,
     description: engineCallCommentText ?? '',
     filePath: engineProgramFile.filePath.serialized,
-    initializedStreamMetatypeLocatorList: initialVoqueLocatorList,
+    initializedStreamMetatypeLocatorList: initialStreamMetatypeLocatorList,
     programmedTransformRelationshipList,
     rootGraphLocator: partialProgramLocator.rootGraphLocator,
     engineProgramFile,
@@ -399,23 +402,25 @@ const getAdaptedEngineProgramLocator = ({
   const programName = Case.kebab(engineProgramFile.nodePath.name.extensionless);
   const engineCallCommentText = engineCallDeclaration?.commentText ?? null;
 
-  const explicitVoictentTupleProperty = engineCallExpressionPropertyList.find(
+  const explicitCollectionTupleProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
       engineFunctionConfiguration.explicitCollectionTupleKeyIdentifierName,
   );
 
-  const explicitVoictentTupleValueNode = explicitVoictentTupleProperty?.value;
+  const explicitCollectionTupleValueNode =
+    explicitCollectionTupleProperty?.value;
 
-  const explicitVoictentInstanceList = isSpecificConstantTypeScriptAsExpression(
-    explicitVoictentTupleValueNode,
-    isArrayExpression,
-  )
-    ? explicitVoictentTupleValueNode.expression.elements
-    : [];
+  const explicitCollectionInstanceList =
+    isSpecificConstantTypeScriptAsExpression(
+      explicitCollectionTupleValueNode,
+      isArrayExpression,
+    )
+      ? explicitCollectionTupleValueNode.expression.elements
+      : [];
 
   const parallelErrorList: ReportedProgramError<ReportingLocator>[] = [];
-  const engineVoqueLocatorList: EngineStreamMetatypeLocator2[] = [];
+  const engineStreamMetatypeLocatorList: EngineStreamMetatypeLocator2[] = [];
 
   const fileImportsByImportedIdentifier = new Map<
     string,
@@ -433,11 +438,11 @@ const getAdaptedEngineProgramLocator = ({
       fileImportsByImportedIdentifier.set(specifier, fileImport);
     });
 
-  if (explicitVoictentInstanceList.length === 0) {
+  if (explicitCollectionInstanceList.length === 0) {
     parallelErrorList.push({
-      name: 'unparseable-explicit-voictent-list',
+      name: 'unparseable-explicit-collection-list',
       error: new Error(
-        'Unable able to parse explicit input voictent list. Expected an array expression with "as const"',
+        'Unable able to parse explicit input collection list. Expected an array expression with "as const"',
       ),
       reporterLocator,
       sourceLocator: {
@@ -446,56 +451,58 @@ const getAdaptedEngineProgramLocator = ({
       },
       context: {
         reason: 'A program without inputs will not do anything',
-        explicitVoictentTupleProperty,
-        explicitVoictentTupleValueNode,
+        explicitCollectionTupleProperty,
+        explicitCollectionTupleValueNode,
       },
     });
   } else {
-    explicitVoictentInstanceList.forEach((voictentInstance, originalIndex) => {
-      const voqueTypeReferenceNode = isNewExpressionWithSpecificTypeParameters<
-        [AST_NODE_TYPES.TSTypeReference]
-      >(voictentInstance, [AST_NODE_TYPES.TSTypeReference])
-        ? voictentInstance.typeParameters.params[0]
-        : null;
+    explicitCollectionInstanceList.forEach(
+      (collectionInstance, originalIndex) => {
+        const streamMetatypeTypeReferenceNode =
+          isNewExpressionWithSpecificTypeParameters<
+            [AST_NODE_TYPES.TSTypeReference]
+          >(collectionInstance, [AST_NODE_TYPES.TSTypeReference])
+            ? collectionInstance.typeParameters.params[0]
+            : null;
 
-      const voqueIdentifierName = isIdentifiableTypeScriptTypeReference(
-        voqueTypeReferenceNode,
-      )
-        ? voqueTypeReferenceNode.typeName.name
-        : null;
+        const streamMetatypeIdentifierName =
+          isIdentifiableTypeScriptTypeReference(streamMetatypeTypeReferenceNode)
+            ? streamMetatypeTypeReferenceNode.typeName.name
+            : null;
 
-      if (voqueIdentifierName === null) {
-        parallelErrorList.push({
-          name: 'unparseable-explicit-voictent',
-          error: new Error(
-            'Unable to parse explicit input voictent. Expected a new expression with at least one type parameter',
-          ),
-          reporterLocator,
-          sourceLocator: {
-            typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
-            filePath: engineProgramFile.filePath.serialized,
-          },
-          context: {
-            originalIndex,
-            voqueTypeReferenceNode,
-            voictentInstance,
-          },
-        });
-        return;
-      }
+        if (streamMetatypeIdentifierName === null) {
+          parallelErrorList.push({
+            name: 'unparseable-explicit-collection',
+            error: new Error(
+              'Unable to parse explicit input collection. Expected a new expression with at least one type parameter',
+            ),
+            reporterLocator,
+            sourceLocator: {
+              typeName: ProgramErrorElementLocatorTypeName.SourceFileLocator,
+              filePath: engineProgramFile.filePath.serialized,
+            },
+            context: {
+              originalIndex,
+              streamMetatypeTypeReferenceNode,
+              collectionInstance,
+            },
+          });
+          return;
+        }
 
-      const voqueFilePath =
-        fileImportsByImportedIdentifier.get(voqueIdentifierName)?.sourcePath ??
-        engineProgramFile.filePath.serialized;
+        const streamMetatypeFilePath =
+          fileImportsByImportedIdentifier.get(streamMetatypeIdentifierName)
+            ?.sourcePath ?? engineProgramFile.filePath.serialized;
 
-      engineVoqueLocatorList.push(
-        new EngineStreamMetatypeLocator2Instance({
-          identifierName: voqueIdentifierName,
-          filePath: voqueFilePath,
-          isCoreStreamMetatype: false,
-        }),
-      );
-    });
+        engineStreamMetatypeLocatorList.push(
+          new EngineStreamMetatypeLocator2Instance({
+            identifierName: streamMetatypeIdentifierName,
+            filePath: streamMetatypeFilePath,
+            isCoreStreamMetatype: false,
+          }),
+        );
+      },
+    );
   }
 
   // TODO: rename these variables or move this code to its own function (I prefer the latter), because these are way too vague
@@ -503,32 +510,32 @@ const getAdaptedEngineProgramLocator = ({
     engineFunctionConfiguration.uninferableCollectionByCollectionIdKeyIdentifierName;
   const functionName = buildCollectionByCollectionId.name;
 
-  const uninferableVoictentByGeppProperty =
+  const uninferableCollectionByCollectionIdProperty =
     engineCallExpressionPropertyList.find((property) => {
       return property.key.name === keyName;
     });
 
-  const uninferableVoictentByGeppValueNode =
-    uninferableVoictentByGeppProperty?.value;
+  const uninferableCollectionByCollectionIdValueNode =
+    uninferableCollectionByCollectionIdProperty?.value;
 
-  const buildVoictentByGeppCallExpression =
+  const buildCollectionByCollectionIdCallExpression =
     isSpecificIdentifiableCallExpression(
-      uninferableVoictentByGeppValueNode,
+      uninferableCollectionByCollectionIdValueNode,
       functionName,
     )
-      ? uninferableVoictentByGeppValueNode
+      ? uninferableCollectionByCollectionIdValueNode
       : null;
 
   const hasConstantListOfArguments =
-    buildVoictentByGeppCallExpression !== null &&
+    buildCollectionByCollectionIdCallExpression !== null &&
     isSpecificConstantTypeScriptAsExpression<TSESTree.ArrayExpression>(
-      buildVoictentByGeppCallExpression.arguments[0],
+      buildCollectionByCollectionIdCallExpression.arguments[0],
       isArrayExpression,
     );
 
   if (!hasConstantListOfArguments) {
     parallelErrorList.push({
-      name: 'unparseable-uninferable-voictent-by-gepp',
+      name: 'unparseable-uninferable-collection-by-collection-id',
       error: new Error(
         `Unable to parse ${keyName} property. Expected a call expression to ${functionName} with a single array literal parameter ending in "as const"`,
       ),
@@ -539,34 +546,35 @@ const getAdaptedEngineProgramLocator = ({
       },
       context: {
         hasConstantListOfArguments,
-        buildVoictentByGeppCallExpression,
-        uninferableVoictentByGeppValueNode,
-        uninferableVoictentByGeppProperty,
+        buildCollectionByCollectionIdCallExpression,
+        uninferableCollectionByCollectionIdValueNode,
+        uninferableCollectionByCollectionIdProperty,
       },
     });
   }
 
-  const estinantListProperty = engineCallExpressionPropertyList.find(
+  const programmedTransformListProperty = engineCallExpressionPropertyList.find(
     (property) =>
       property.key.name ===
       engineFunctionConfiguration.programmedTransformListKeyIdentifierName,
   );
 
-  const estinantListValueNode = estinantListProperty?.value;
+  const programmedTransformListValueNode =
+    programmedTransformListProperty?.value;
 
-  const estinantNodeList: TSESTree.Identifier[] =
+  const programmedTransformNodeList: TSESTree.Identifier[] =
     isSpecificConstantTypeScriptAsExpression<ArrayExpressionOfIdentifiers>(
-      estinantListValueNode,
+      programmedTransformListValueNode,
       isArrayExpressionOfIdentifiers,
     )
-      ? estinantListValueNode.expression.elements
+      ? programmedTransformListValueNode.expression.elements
       : [];
 
-  if (estinantNodeList.length === 0) {
+  if (programmedTransformNodeList.length === 0) {
     parallelErrorList.push({
-      name: 'unparseable-estinant-tuple',
+      name: 'unparseable-programmed-transform-tuple',
       error: new Error(
-        'Unable able to parse input estinant tuple. Expected an array literal of identifiers with "as const"',
+        'Unable able to parse input programmedTransform tuple. Expected an array literal of identifiers with "as const"',
       ),
       reporterLocator,
       sourceLocator: {
@@ -574,23 +582,24 @@ const getAdaptedEngineProgramLocator = ({
         filePath: engineProgramFile.filePath.serialized,
       },
       context: {
-        estinantListProperty,
-        estinantListValueNode,
+        programmedTransformListProperty,
+        programmedTransformListValueNode,
       },
     });
   }
 
-  const estinantIdentifierList = estinantNodeList.map(
+  const programmedTransformIdentifierList = programmedTransformNodeList.map(
     (identifier) => identifier.name,
   );
 
-  const engineEstinantLocatorList: EngineProgrammedTransformLocator2[] = [];
+  const engineProgrammedTransformLocatorList: EngineProgrammedTransformLocator2[] =
+    [];
 
-  estinantIdentifierList.forEach((identifierName) => {
+  programmedTransformIdentifierList.forEach((identifierName) => {
     const fileImport = fileImportsByImportedIdentifier.get(identifierName);
 
     if (fileImport === undefined) {
-      engineEstinantLocatorList.push(
+      engineProgrammedTransformLocatorList.push(
         new EngineProgrammedTransformTopLevelDeclarationLocatorInstance({
           typeName:
             EngineProgrammedTransformLocator2TypeName.TopLevelDeclaration,
@@ -602,7 +611,7 @@ const getAdaptedEngineProgramLocator = ({
       return;
     }
 
-    engineEstinantLocatorList.push(
+    engineProgrammedTransformLocatorList.push(
       new EngineProgrammedTransformTopLevelDeclarationLocatorInstance({
         typeName: EngineProgrammedTransformLocator2TypeName.TopLevelDeclaration,
         identifierName,
@@ -660,22 +669,21 @@ const getAdaptedEngineProgramLocator = ({
     filePath: engineProgramFile.filePath.serialized,
   });
 
-  const programmedTransformRelationshipList = engineEstinantLocatorList.map(
-    (programmedTransformLocator) => {
+  const programmedTransformRelationshipList =
+    engineProgrammedTransformLocatorList.map((programmedTransformLocator) => {
       return new ProgramProgrammedTransformRelationshipInstance({
         programName,
         programmedTransformLocator,
         rootGraphLocator: partialProgramLocator.rootGraphLocator,
       });
-    },
-  );
+    });
 
   const engineProgramLocator = new EngineProgramLocator3Instance({
     isCoreProgram: false,
     programName,
     description: engineCallCommentText ?? '',
     filePath: engineProgramFile.filePath.serialized,
-    initializedStreamMetatypeLocatorList: engineVoqueLocatorList,
+    initializedStreamMetatypeLocatorList: engineStreamMetatypeLocatorList,
     programmedTransformRelationshipList,
     rootGraphLocator: partialProgramLocator.rootGraphLocator,
     engineProgramFile,

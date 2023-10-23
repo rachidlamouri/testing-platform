@@ -21,7 +21,7 @@ type EngineProgramLocator2Prototype = {
 };
 
 /**
- * The part of an EngineProgramLocator that is required to build the estinant
+ * The part of an EngineProgramLocator that is required to build the ProgrammedTransform
  * relationships for the actual EngineProgramLocator
  *
  * @readableName PartialProgramLocator

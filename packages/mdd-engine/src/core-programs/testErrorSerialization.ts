@@ -12,7 +12,7 @@ const programFileCache = new ProgramFileCache({
 });
 
 /**
- * Tests the "ErrorVoictent" by initializing it with data.
+ * Tests the "ErrorCollection" by initializing it with data.
  *
  * @note Running the collection through the engine is technically unnecessary,
  * but it allows the program modeler to construct a snapshot digest of this file
@@ -21,7 +21,7 @@ const programFileCache = new ProgramFileCache({
  */
 runEngine2({
   inputCollectionList: [
-    // TODO: make the type parameter a voque
+    // TODO: make the type parameter a stream metatype
     new SerializableErrorCollection<ErrorStreamMetatype>({
       collectionId: 'error',
       programFileCache,

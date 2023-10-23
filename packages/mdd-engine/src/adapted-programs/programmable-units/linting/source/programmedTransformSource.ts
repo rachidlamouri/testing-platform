@@ -24,7 +24,7 @@ type ProgrammedTransformSourceConstructorInput = {
 };
 
 /**
- * The information needed to locate an estinant definition
+ * The information needed to locate a programmed transform definition
  *
  * @readableName ProgrammedTransformSource
  */

@@ -51,7 +51,7 @@ type AdaptedTransformOutputAggregator<> = (
   modifiedOutput: any,
 ) => AggregatedOutput;
 
-// TODO: the entry value should be TVoque['collectionStreamable']
+// TODO: the entry value should be TStreamMetatype['collectionStreamable']
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CoreConstituentOutputEntry = [CollectionId, any];
 

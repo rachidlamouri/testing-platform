@@ -6,7 +6,7 @@ import {
 import { GenericStandardInMemoryStreamMetatype } from '../stream-metatype/inMemoryStreamMetatype';
 
 /**
- * A collection that can store any hubblepup in an in-memory array.
+ * A collection that can store any item in an in-memory array.
  *
  * @readableName InMemoryCollection
  *
