@@ -1,4 +1,6 @@
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
+import { DirectedGraphLocator } from '../../graph-visualization/directed-graph/locator/directedGraphLocator';
+import { FileSourceInstance } from '../../linting/source/fileSource';
 import { CollectionDefinitionLocator } from '../collection-definition/collectionDefinitionLocator';
 import { CollectionInstanceSkeleton } from '../collection-instance/collectionInstanceSkeleton';
 import { ProgrammedTransformLocator } from '../programmed-transform/programmedTransformLocator';
@@ -28,12 +30,21 @@ export class ProgramSkeleton implements ProgramSkeletonInput {
 
   programmedTransformLocatorList: ProgrammedTransformLocator[];
 
+  graphLocator: DirectedGraphLocator;
+
   constructor(input: ProgramSkeletonInput) {
     this.programLocator = input.programLocator;
     this.collectionDefinitionLocatorList =
       input.collectionDefinitionLocatorList;
     this.collectionInstanceSkeletonList = input.collectionInstanceSkeletonList;
     this.programmedTransformLocatorList = input.programmedTransformLocatorList;
+
+    this.graphLocator = new DirectedGraphLocator({
+      source: new FileSourceInstance({
+        absoluteFilePath: __filename,
+      }),
+      distinguisher: input.programLocator.programName,
+    });
   }
 }
 

@@ -1,6 +1,8 @@
 /**
  * A rudimentary script that polls the dev server to see if the last-modified
  * header has changed
+ *
+ * @todo move this to programmable-units
  */
 const hotReload = (): void => {
   setTimeout(() => {

@@ -14,6 +14,10 @@ import {
   APP_RENDERER_DELAYER_COLLECTION_ID,
   AppRendererDelayerStreamMetatype,
 } from '../../appRendererDelayer';
+import {
+  APPLICATION_CONFIGURATION_COLLECTION_ID,
+  ApplicationConfigurationStreamMetatype,
+} from './applicationConfiguration';
 
 /**
  * Generates the knowledge graph js bundle with esbuild and merges it with an
@@ -24,7 +28,10 @@ import {
 export const renderApp = buildProgrammedTransform({
   name: 'renderApp',
 })
-  .fromCollection2<AppRendererDelayerStreamMetatype>({
+  .fromItem2<ApplicationConfigurationStreamMetatype>({
+    collectionId: APPLICATION_CONFIGURATION_COLLECTION_ID,
+  })
+  .andFromCollection2<AppRendererDelayerStreamMetatype>({
     collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
   })
   .toItem2<OutputFileStreamMetatype>({
@@ -33,14 +40,10 @@ export const renderApp = buildProgrammedTransform({
   .toItemTuple2<GenericProgramErrorStreamMetatype>({
     collectionId: PROGRAM_ERROR_COLLECTION_ID,
   })
-  .onTransform(() => {
+  .onTransform((applicationConfiguration) => {
     const result = childProcessUtility.spawnSync(
       'npx',
-      [
-        'esbuild',
-        '--bundle',
-        'packages/mdd-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/index.tsx',
-      ],
+      ['esbuild', '--bundle', applicationConfiguration.inputTypeScriptFilePath],
       {
         encoding: 'utf-8',
         maxBuffer: 1000000000,
@@ -60,6 +63,7 @@ export const renderApp = buildProgrammedTransform({
 
     const jsContents = result.stdout;
 
+    // TODO: move the index file to programmable-units
     const startingHtmlContents = fs.readFileSync(
       'packages/mdd-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/index.html',
       { encoding: 'utf-8' },
@@ -74,7 +78,7 @@ export const renderApp = buildProgrammedTransform({
 
     return {
       [OUTPUT_FILE_COLLECTION_ID]: {
-        fileName: 'rendered-knowledge-graph',
+        fileName: applicationConfiguration.outputHtmlFileName,
         fileExtensionSuffix: 'html',
         text: htmlContents,
       },

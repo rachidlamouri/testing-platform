@@ -54,7 +54,9 @@ type GenericComplexIdLikeConstructor = ComplexIdLikeConstructor<ComplexIdLike>;
 
 enum IdTemplateKeyword {
   LITERAL = 'literal',
+  /** @deprecated use AnyComplexId */
   ANY = 'any',
+  AnyComplexId = 'AnyComplexId',
 }
 
 type SpecificLabelList<TLabel extends string> = NonEmptyTuple<TLabel>;
@@ -115,7 +117,7 @@ type InputValueFromSubidTuple<TSubidTuple extends GenericSubidTuple> =
     ? InputValue<TFirstSubid> | InputValueFromSubidTuple<TRestSubidTuple>
     : never;
 
-type InputValueByTemplateKey<
+export type InputValueByTemplateKey<
   TComplexIdTemplate extends GenericComplexIdTemplate,
 > = Simplify<
   UnionToIntersection<
@@ -174,7 +176,12 @@ export abstract class ComplexId<TTemplate extends GenericComplexIdTemplate>
 {
   static LITERAL = IdTemplateKeyword.LITERAL;
 
+  /**
+   * @deprecated in favor of COMPLEX_ID
+   */
   static ANY = IdTemplateKeyword.ANY;
+
+  static AnyComplexId = IdTemplateKeyword.AnyComplexId;
 
   constructor(
     public readonly valueByTemplateKey: InputValueByTemplateKey<TTemplate>,
@@ -268,3 +275,10 @@ export abstract class ComplexId<TTemplate extends GenericComplexIdTemplate>
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type UnsafeComplexId = ComplexIdInterface<NonEmptyTuple<any>>;
+
+export type IdLike =
+  | SimpleId
+  | ComplexIdLike
+  | { id: ComplexIdLike }
+  /** @deprecated */
+  | { zorn: ComplexIdLike };

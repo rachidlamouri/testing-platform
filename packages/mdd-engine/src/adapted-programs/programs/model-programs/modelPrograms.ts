@@ -37,7 +37,6 @@ import {
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
-import { PROGRAM_LOCATOR_COLLECTION_ID } from '../../programmable-units/engine-program-model/program/programLocator';
 import {
   COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID,
   CollectionDefinitionLocatorStreamMetatype,
@@ -61,8 +60,6 @@ import {
   ProgramSkeletonStreamMetatype,
 } from '../../programmable-units/engine-program-model/program/programSkeleton';
 import { parseItemDefinition } from '../../programmable-units/engine-program-model/item-definition/parseItemDefinition';
-import { ITEM_DEFINITION_MODEL_COLLECTION_ID } from '../../programmable-units/engine-program-model/item-definition/itemDefinitionModel';
-import { parseProgrammedTransform } from '../../programmable-units/engine-program-model/programmed-transform-parser/parseProgrammedTransform';
 import {
   PROGRAMMED_TRANSFORM_SKELETON_COLLECTION_ID,
   ProgrammedTransformSkeletonStreamMetatype,
@@ -90,6 +87,26 @@ import {
   PROGRAMMED_TRANSFORM_MODEL_COLLECTION_ID,
   ProgrammedTransformModelStreamMetatype,
 } from '../../programmable-units/engine-program-model/programmed-transform/programmedTransformModel';
+import { renderApp } from '../render-knowledge-graph/app/node/renderApp';
+import {
+  APPLICATION_CONFIGURATION_COLLECTION_ID,
+  ApplicationConfiguration,
+  ApplicationConfigurationStreamMetatype,
+} from '../render-knowledge-graph/app/node/applicationConfiguration';
+import {
+  AppRendererDelayerStreamMetatype,
+  APP_RENDERER_DELAYER_COLLECTION_ID,
+  AppRendererDelayerInstance,
+} from '../render-knowledge-graph/appRendererDelayer';
+import { getAllGraphElements } from '../../programmable-units/engine-program-model/getAllGraphElements';
+import { groupGraphElements } from '../../programmable-units/graph-visualization/directed-graph/element-group/groupGraphElements';
+import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/directed-graph/graphviz-adapter/programmable/encodeDirectedGraphAsGraphvizCode';
+import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/svg-adapter/renderGraphvizCodeToSvgDocument';
+import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/base-interactivity/addInteractivityToSvgDocument';
+import { buildProgramModel } from '../../programmable-units/engine-program-model/program/buildProgramModel';
+import { parseProgrammedTransform } from '../../programmable-units/engine-program-model/programmed-transform-parser/parseProgrammedTransform';
+import { captureOutputFileDigestList } from '../../programmable-units/sanity-snapshot/captureOutputFileDigestList';
+import { SANITY_SNAPSHOT_COLLECTION_ID } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -186,6 +203,24 @@ runEngine({
         continueOnDuplicate: false,
       },
     ),
+    new InMemoryCollection<ApplicationConfigurationStreamMetatype>({
+      collectionId: APPLICATION_CONFIGURATION_COLLECTION_ID,
+      initialItemEggTuple: [
+        new ApplicationConfiguration({
+          inputTypeScriptFilePath:
+            'packages/mdd-engine/src/adapted-programs/programs/model-programs/app/index.tsx',
+          outputHtmlFileName: 'program-models',
+        }),
+      ],
+    }),
+    new InMemoryIdentifiableItem3Collection<AppRendererDelayerStreamMetatype>({
+      collectionId: APP_RENDERER_DELAYER_COLLECTION_ID,
+      initialItemEggTuple: [
+        new AppRendererDelayerInstance({
+          programmedTransformName: 'n/a',
+        }),
+      ],
+    }),
   ] as const,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     ...buildDefaultFileCollectionTuple(),
@@ -211,37 +246,22 @@ runEngine({
     parseProgramFile,
     parseItemDefinition,
     parseProgrammedTransform,
+
     buildProgrammedTransformInputModel,
     buildProgrammedTransformOutputModel,
     buildProgrammedTransformModel,
-    // getEngineProgramLocator3,
-    // getEngineProgrammedTransformLocatorCollection2,
-    // getEngineProgrammedTransform3,
-    // getEngineProgram3,
-    // getEngineStreamMetatypeLocatorCollection2,
-    // getEngineStreamMetatype2,
+    buildProgramModel,
 
-    // getTopLevelEngineProgramGraphElements,
-    // getEngineProgramStreamMetatypeElements,
-    // getEngineProgrammedTransformGraphElements,
-    // getInputEdges,
-    // getOutputEdge,
-    // groupGraphElements,
-    // getDirectedGraphFromGraphElementGroup,
+    getAllGraphElements,
 
-    // getTopLevelEngineProgramMetadataEntries,
-    // getEngineStreamMetatypeMetadataEntry,
-    // getEngineProgrammedTransformMetadataEntry,
-    // getInputMetadataEntry,
-    // getDirectedGraphMetadataById2,
+    groupGraphElements,
+    encodeDirectedGraphAsGraphvizCode,
+    renderGraphvizCodeToSvgDocument,
+    addInteractivityToSvgDocument,
 
-    // encodeDirectedGraphAsGraphvizCode,
-    // renderGraphvizCodeToSvgDocument,
-    // addInteractivityToSvgDocument,
+    captureOutputFileDigestList,
 
-    // captureOutputFileDigestList,
-
-    // assertNoCopyPasta,
+    renderApp,
 
     // TODO: add the audit back in when we don't need the NULL_OMISSION
     // auditLintAssertionOmissions,
@@ -253,18 +273,7 @@ runEngine({
   programFileCache,
   serializeeCollectionIdList: [
     // note: keep this is a multiline list for easier debugging
-    // SANITY_SNAPSHOT_COLLECTION_ID,
-    PROGRAM_LOCATOR_COLLECTION_ID,
-    COLLECTION_DEFINITION_LOCATOR_COLLECTION_ID,
-    ITEM_DEFINITION_LOCATOR_COLLECTION_ID,
-    COLLECTION_INSTANCE_SKELETON_COLLECTION_ID,
-    PROGRAMMED_TRANSFORM_LOCATOR_COLLECTION_ID,
-    PROGRAM_SKELETON_COLLECTION_ID,
-    ITEM_DEFINITION_MODEL_COLLECTION_ID,
-    PROGRAMMED_TRANSFORM_SKELETON_COLLECTION_ID,
-    PROGRAMMED_TRANSFORM_INPUT_SKELETON_COLLECTION_ID,
-    PROGRAMMED_TRANSFORM_OUTPUT_SKELETON_COLLECTION_ID,
-    PROGRAMMED_TRANSFORM_MODEL_COLLECTION_ID,
+    SANITY_SNAPSHOT_COLLECTION_ID,
   ],
   strategy: EngineRunnerStrategy.WaitForAllDependencies,
 });

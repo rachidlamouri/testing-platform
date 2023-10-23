@@ -1,13 +1,16 @@
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
-import { CollectionDefinitionModel } from '../collection-definition/collectionDefinitionModel';
+import { NodeShape } from '../../graph-visualization/directed-graph/directedGraphNode';
+import { DirectedGraphNode } from '../../graph-visualization/directed-graph/element/directedGraphNode';
+import { FileSourceInstance } from '../../linting/source/fileSource';
 import { ItemDefinitionModel } from '../item-definition/itemDefinitionModel';
-import { ProgramLocator } from '../program/programLocator';
+import { ProgramSkeleton } from '../program/programSkeleton';
 import { CollectionInstanceId } from './collectionInstanceId';
 
 type CollectionInstanceModelInput = {
-  programLocator: ProgramLocator;
-  collectionDefinition: CollectionDefinitionModel;
-  item: ItemDefinitionModel;
+  programSkeleton: ProgramSkeleton;
+  // TODO: add this information back in
+  // collectionDefinition: CollectionDefinitionModel;
+  itemDefinition: ItemDefinitionModel;
 };
 
 /**
@@ -16,21 +19,38 @@ type CollectionInstanceModelInput = {
 export class CollectionInstanceModel implements CollectionInstanceModelInput {
   id: CollectionInstanceId;
 
-  programLocator: ProgramLocator;
+  programSkeleton: ProgramSkeleton;
 
-  collectionDefinition: CollectionDefinitionModel;
+  // collectionDefinition: CollectionDefinitionModel;
 
-  item: ItemDefinitionModel;
+  itemDefinition: ItemDefinitionModel;
+
+  node: DirectedGraphNode;
 
   constructor(input: CollectionInstanceModelInput) {
     this.id = new CollectionInstanceId({
-      program: input.programLocator,
-      collection: input.collectionDefinition,
-      item: input.item,
+      program: input.programSkeleton,
+      // collection: input.collectionDefinition,
+      item: input.itemDefinition,
     });
-    this.programLocator = input.programLocator;
-    this.collectionDefinition = input.collectionDefinition;
-    this.item = input.item;
+    this.programSkeleton = input.programSkeleton;
+    // this.collectionDefinition = input.collectionDefinition;
+    this.itemDefinition = input.itemDefinition;
+
+    const { graphLocator } = input.programSkeleton;
+
+    this.node = new DirectedGraphNode({
+      graphLocator,
+      parentLocator: graphLocator,
+      source: new FileSourceInstance({
+        absoluteFilePath: __filename,
+      }),
+      distinguisher: this.itemDefinition.name,
+      inputAttributeByKey: {
+        label: this.itemDefinition.name,
+        shape: NodeShape.Box,
+      },
+    });
   }
 }
 
