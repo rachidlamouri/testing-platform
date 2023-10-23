@@ -139,11 +139,6 @@ export const CI_MODEL: CiModel = {
             'packages/mdd-engine/src/adapted-programs/programs/categorize-files/categorizeFiles.test.sh',
         },
         {
-          programName: 'test-graph-render',
-          testFilePath:
-            'packages/mdd-engine/src/adapted-programs/programs/test-graph-render/testGraphRender.test.sh',
-        },
-        {
           programName: 'test-graph-assembly',
           testFilePath:
             'packages/mdd-engine/src/adapted-programs/programs/test-graph-assembly/testGraphAssembly.test.sh',

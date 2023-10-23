@@ -1,4 +1,3 @@
-import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { PartialEdgeAttributeByKey } from '../directedGraphEdge';
 import { DirectedEdgeId } from '../id/directedEdgeId';
 import { DirectedGraphId } from '../id/directedGraphId';
@@ -59,13 +58,3 @@ export class DirectedEdge extends DirectedGraphElementLocator<
     this.attributeByKey = input.attributeByKey ?? {};
   }
 }
-
-export const DIRECTED_EDGE_COLLECTION_ID = 'directed-edge';
-
-type DirectedEdgeCollectionId = typeof DIRECTED_EDGE_COLLECTION_ID;
-
-export type DirectedEdgeStreamMetatype =
-  InMemoryIdentifiableItem3StreamMetatype<
-    DirectedEdgeCollectionId,
-    DirectedEdge
-  >;

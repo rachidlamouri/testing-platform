@@ -4,7 +4,7 @@ import {
   ENGINE_FUNCTION_CONFIGURATION_COLLECTION_ID,
   EngineFunctionConfigurationStreamMetatype,
   EngineFunctionConfigurationTypeName,
-} from '../engine-program-model/engineFunctionConfiguration';
+} from './engineFunctionConfiguration';
 import {
   TYPE_SCRIPT_FILE_COLLECTION_ID,
   TypeScriptFileStreamMetatype,
@@ -23,7 +23,7 @@ import {
   ProgramLocator,
   CoreProgramLocator,
   AdaptedProgramLocator,
-} from '../engine-program-model/program/programLocator';
+} from './program/programLocator';
 
 /**
  * Filters the collection of TypeScript files to those that are an engine program.

@@ -10,7 +10,7 @@ import { FileSourceInstance } from '../linting/source/fileSource';
 import {
   ENGINE_PROGRAM_FILE_COLLECTION_ID,
   EngineProgramFileStreamMetatype,
-} from '../type-script-file-relationships/engineProgramFile';
+} from '../engine-program-model/engineProgramFile';
 import { typeScriptFileHasCanonicalDeclarationRule } from './canonical-declaration/assertTypeScriptFileHasCanonicalDeclaration';
 
 const PROGRAMMED_TRANSFORM_NAME =

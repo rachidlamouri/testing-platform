@@ -18,7 +18,7 @@ import { signalError } from '../../programmable-units/error/signalError';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
 import { getEngineProgramLocator3 } from '../../programmable-units/engine-program-model/getEngineProgramLocator3';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
-import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
+import { filterEngineProgramFile } from '../../programmable-units/engine-program-model/filterEngineProgramFile';
 import { assertTypeScriptFileHasCanonicalComment } from '../../programmable-units/type-script-file/assertTypeScriptFileHasCanonicalComment';
 import { assertTypeScriptFileHasSensibleName } from '../../programmable-units/type-script-file/assertTypeScriptFileHasSensibleName';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';

@@ -19,7 +19,7 @@ import { parseTypeScriptFile } from '../../programmable-units/type-script-file/p
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { getCommentedProgramBodyDeclarationList } from '../../programmable-units/type-script-file/getCommentedProgramBodyDeclarationList';
-import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
+import { filterEngineProgramFile } from '../../programmable-units/engine-program-model/filterEngineProgramFile';
 import { signalError } from '../../programmable-units/error/signalError';
 import { InMemoryCollection } from '../../../layer-agnostic-utilities/collection/inMemoryCollection';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';

@@ -7,7 +7,7 @@ import {
   GraphvizGraphLike,
 } from './graphvizDirectedGraphLike';
 
-export type GraphvizDirectedClusterInput = SpreadN<
+type GraphvizDirectedClusterInput = SpreadN<
   [
     {
       cluster: DirectedCluster;

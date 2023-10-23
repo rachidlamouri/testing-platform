@@ -1,10 +1,8 @@
-import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
 import { getTextDigest } from '../../../package-agnostic-utilities/string/getTextDigest';
-import { getExportLocatorId } from '../type-script-file/getExportLocatorId';
 
 type BaseEngineStreamMetatypeLocator2 = {
   identifierName: string;
@@ -31,15 +29,13 @@ export type EngineStreamMetatypeLocator2 = ObjectWithPrototype<
   EngineStreamMetatypeLocator2Prototype
 >;
 
-export const oldGetStreamMetatypeLocatorId = getExportLocatorId;
-
-export const getStreamMetatypeLocatorId = (
+const getStreamMetatypeLocatorId = (
   locator: EngineStreamMetatypeLocator2,
 ): string => {
   return getTextDigest(locator.displayName);
 };
 
-export const getStreamMetatypeDisplayName = (
+const getStreamMetatypeDisplayName = (
   locator: EngineStreamMetatypeLocator2,
 ): string => {
   const itemName = locator.identifierName
@@ -58,15 +54,3 @@ export const { EngineStreamMetatypeLocator2Instance } =
     oldId: getStreamMetatypeLocatorId,
     displayName: getStreamMetatypeDisplayName,
   });
-
-export const ENGINE_STREAM_METATYPE_LOCATOR_2_COLLECTION_ID =
-  'engine-voque-locator-2';
-
-type EngineStreamMetatypeLocatorCollectionId =
-  typeof ENGINE_STREAM_METATYPE_LOCATOR_2_COLLECTION_ID;
-
-export type EngineStreamMetatypeLocator2StreamMetatype =
-  InMemoryIdentifiableItem3StreamMetatype<
-    EngineStreamMetatypeLocatorCollectionId,
-    EngineStreamMetatypeLocator2
-  >;

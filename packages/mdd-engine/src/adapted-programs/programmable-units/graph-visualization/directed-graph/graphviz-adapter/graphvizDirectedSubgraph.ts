@@ -7,7 +7,7 @@ import {
   GraphvizGraphLike,
 } from './graphvizDirectedGraphLike';
 
-export type GraphvizDirectedSubgraphInput = SpreadN<
+type GraphvizDirectedSubgraphInput = SpreadN<
   [
     {
       subgraph: DirectedSubgraph;

@@ -2,7 +2,7 @@ import { AttributeByKeyGSCNE } from './attributeByKeyGSCNE';
 import { SpreadN } from '../../../../package-agnostic-utilities/type/spreadN';
 import { AttributeByKeyCNE } from './attributeByKeyCNE';
 
-export enum EdgeStyle {
+enum EdgeStyle {
   Invisible = 'invis',
 }
 

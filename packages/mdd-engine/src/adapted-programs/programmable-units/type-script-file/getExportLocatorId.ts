@@ -1,4 +1,3 @@
-import { getId } from '../../../layer-agnostic-utilities/deprecated-id/getId';
 import {
   GenericComplexIdTemplate,
   ComplexId,
@@ -7,16 +6,6 @@ import {
 type ExportLocator = {
   filePath: string;
   identifierName: string;
-};
-
-/**
- * This is part of an outdated identifier pattern. Use the Zorn class instead.
- * @deprecated
- *
- * @readableName getExportLocatorId
- */
-export const getExportLocatorId = (locator: ExportLocator): string => {
-  return getId([locator.filePath, locator.identifierName]);
 };
 
 const EXPORT_LOCATOR_ID_TEMPLATE = [

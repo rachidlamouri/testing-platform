@@ -1,17 +1,16 @@
-import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ComplexId,
   GenericComplexIdTemplate,
 } from '../../../../package-agnostic-utilities/data-structure/id';
 import { assertNotUndefined } from '../../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { isNotNullish } from '../../../../package-agnostic-utilities/nil/isNotNullish';
-import { NodeShape } from '../../graph-visualization/directed-graph/directedGraphNode';
-import { RankType } from '../../graph-visualization/directed-graph/directedSubgraph';
 import { DirectedEdge } from '../../graph-visualization/directed-graph/element/directedEdge';
 import { DirectedGraphElement } from '../../graph-visualization/directed-graph/element/directedGraphElement';
 import { DirectedGraphNode } from '../../graph-visualization/directed-graph/element/directedGraphNode';
 import { DirectedSubgraph } from '../../graph-visualization/directed-graph/element/directedSubgraph';
 import { EdgeStyle } from '../../graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialEdgeAttributeByKey';
+import { NodeShape } from '../../graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialNodeAttributeByKey';
+import { RankType } from '../../graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialSubgraphAttributeByKey';
 import { DirectedSubgraphLocator } from '../../graph-visualization/directed-graph/locator/directedSubgraphLocator';
 import { CollectionInstanceModel } from '../collection-instance/collectionInstanceModel';
 import { ProgramId } from '../program/programId';
@@ -221,15 +220,3 @@ export class ProgrammedTransformInstance
     ];
   }
 }
-
-export const PROGRAMMED_TRANSFORM_INSTANCE_COLLECTION_ID =
-  'programmed-transform-instance';
-
-type ProgrammedTransformInstanceCollectionId =
-  typeof PROGRAMMED_TRANSFORM_INSTANCE_COLLECTION_ID;
-
-export type ProgrammedTransformInstanceStreamMetatype =
-  InMemoryIdentifiableItem3StreamMetatype<
-    ProgrammedTransformInstanceCollectionId,
-    ProgrammedTransformInstance
-  >;

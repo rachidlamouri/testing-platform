@@ -22,10 +22,7 @@ import {
   GenericRightInputStreamConnectionMetatypeTuple,
   RightInputStreamConnectionMetatype,
 } from '../../core/types/stream-connection-metatype/rightInputStreamConnectionMetatype';
-import {
-  CollectionId,
-  CollectionIdTuple,
-} from '../../core/types/collection/collectionId';
+import { CollectionId } from '../../core/types/collection/collectionId';
 import {
   InMemoryIdentifiableItem3Collection,
   UnsafeInMemoryIdentifiableItem3StreamMetatype,
@@ -127,23 +124,22 @@ type StreamMetatypeUnionFromProgrammedTransformTuple<
     - the generic indexByName must have every field in the specific indexByName
     - the generic collectionStreamable must have every field in the specific collectionStreamable
 */
-export type IsInferrableStreamMetatype<
-  TStreamMetatype extends GenericStreamMetatype,
-> = StreamMetatype<
-  TStreamMetatype['collectionId'],
-  TStreamMetatype['itemEggStreamable'],
-  TStreamMetatype['itemStreamable'],
-  UnsafeInMemoryIdentifiableItem3StreamMetatype['indexByName'],
-  UnsafeInMemoryIdentifiableItem3StreamMetatype['collectionStreamable']
-> extends StreamMetatype<
-  UnsafeInMemoryIdentifiableItem3StreamMetatype['collectionId'],
-  UnsafeInMemoryIdentifiableItem3StreamMetatype['itemEggStreamable'],
-  UnsafeInMemoryIdentifiableItem3StreamMetatype['itemStreamable'],
-  TStreamMetatype['indexByName'],
-  TStreamMetatype['collectionStreamable']
->
-  ? true
-  : false;
+type IsInferrableStreamMetatype<TStreamMetatype extends GenericStreamMetatype> =
+  StreamMetatype<
+    TStreamMetatype['collectionId'],
+    TStreamMetatype['itemEggStreamable'],
+    TStreamMetatype['itemStreamable'],
+    UnsafeInMemoryIdentifiableItem3StreamMetatype['indexByName'],
+    UnsafeInMemoryIdentifiableItem3StreamMetatype['collectionStreamable']
+  > extends StreamMetatype<
+    UnsafeInMemoryIdentifiableItem3StreamMetatype['collectionId'],
+    UnsafeInMemoryIdentifiableItem3StreamMetatype['itemEggStreamable'],
+    UnsafeInMemoryIdentifiableItem3StreamMetatype['itemStreamable'],
+    TStreamMetatype['indexByName'],
+    TStreamMetatype['collectionStreamable']
+  >
+    ? true
+    : false;
 
 type UninferableStreamMetatypeUnion<
   TImplicitStreamMetatypeUnion extends GenericStreamMetatype,
@@ -459,31 +455,4 @@ export const buildCollectionByCollectionId = <
   ) as CollectionByCollectionIdFromCollectionTuple<TCollectionTuple>;
 
   return result;
-};
-
-type CollectionIdCombinationFromCollectionIdUnion<
-  TCollectionIdUnion extends CollectionId,
-> = Simplify<
-  UnionToIntersection<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    TCollectionIdUnion extends any
-      ? { [TCollectionId in TCollectionIdUnion]: null }
-      : never
-  >
->;
-
-export const buildCollectionIdCombination = <
-  TCollectionIdTuple extends CollectionIdTuple,
->(
-  collectionIdTuple: TCollectionIdTuple,
-): CollectionIdCombinationFromCollectionIdUnion<TCollectionIdTuple[number]> => {
-  const entryList = collectionIdTuple.map((collectionId) => {
-    return [collectionId, null] as const;
-  });
-
-  const guaranteedCollectionIdSet = Object.fromEntries(
-    entryList,
-  ) as CollectionIdCombinationFromCollectionIdUnion<TCollectionIdTuple[number]>;
-
-  return guaranteedCollectionIdSet;
 };

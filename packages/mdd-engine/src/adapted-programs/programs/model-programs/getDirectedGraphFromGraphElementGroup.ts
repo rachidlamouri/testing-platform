@@ -17,7 +17,6 @@ import { DirectedGraphNode } from '../../programmable-units/graph-visualization/
 import { DirectedGraphNode2 } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode2';
 import { SubgraphLike } from '../../programmable-units/graph-visualization/directed-graph/directedSubgraph';
 import { GraphLike } from '../../programmable-units/graph-visualization/directed-graph/graphLike';
-import { mutateGraphLikeElementListOrder } from '../../programmable-units/graph-visualization/directed-graph/mutateGraphLikeElementListOrder';
 import { SubgraphLike2 } from '../../programmable-units/graph-visualization/directed-graph/subgraphLike2';
 import { DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import {
@@ -209,8 +208,6 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
         parallelErrorList.push(parentGraph);
       }
     });
-
-    mutateGraphLikeElementListOrder(rootDirectedGraph);
 
     return {
       [PROGRAM_ERROR_COLLECTION_ID]: parallelErrorList,
