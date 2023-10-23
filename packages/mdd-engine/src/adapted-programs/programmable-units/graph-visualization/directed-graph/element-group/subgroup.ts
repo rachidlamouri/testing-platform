@@ -7,6 +7,10 @@ export type SubgroupInput = {
   subgroupInputList: SubgroupInput[];
 };
 
+/**
+ * Contains all of the nested custom directed graph objects needed to make a
+ * graphviz directed subgraph-like object
+ */
 export class Subgroup implements Omit<SubgroupInput, 'subgroupInputList'> {
   graphLike: DirectedSubgraphLike;
 

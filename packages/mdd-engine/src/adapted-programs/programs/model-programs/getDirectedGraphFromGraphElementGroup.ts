@@ -18,7 +18,6 @@ import { DirectedGraphNode2 } from '../../programmable-units/graph-visualization
 import { SubgraphLike } from '../../programmable-units/graph-visualization/directed-graph/directedSubgraph';
 import { GraphLike } from '../../programmable-units/graph-visualization/directed-graph/graphLike';
 import { SubgraphLike2 } from '../../programmable-units/graph-visualization/directed-graph/subgraphLike2';
-import { DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID } from '../../programmable-units/graph-visualization/directedGraphMetadataById';
 import {
   GRAPH_ELEMENT_GROUP_COLLECTION_ID,
   GraphElementGroupStreamMetatype,
@@ -152,7 +151,6 @@ export const getDirectedGraphFromGraphElementGroup = buildProgrammedTransform({
           } satisfies ProgramErrorEgg<ReportingLocator>,
         ],
         [DIRECTED_GRAPH_COLLECTION_ID]: [],
-        [DIRECTED_GRAPH_METADATA_BY_ID_COLLECTION_ID]: [],
       };
     }
 

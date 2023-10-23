@@ -4,7 +4,7 @@ import { DirectedGraph } from '../element/directedGraph';
 import { DirectedGraphId } from '../id/directedGraphId';
 import {
   GraphvizDirectedGraphLikeInput,
-  GraphvizGraphLike,
+  GraphvizDirectedGraphLike,
 } from './graphvizDirectedGraphLike';
 
 type GraphvizDirectedGraphInput = SpreadN<
@@ -19,7 +19,10 @@ type GraphvizDirectedGraphInput = SpreadN<
   ]
 >;
 
-export class GraphvizDirectedGraph extends GraphvizGraphLike<PartialGraphAttributeByKey> {
+/**
+ * Encodable Graphviz directed graph object
+ */
+export class GraphvizDirectedGraph extends GraphvizDirectedGraphLike<PartialGraphAttributeByKey> {
   id: DirectedGraphId;
 
   sourceGraph: DirectedGraph;

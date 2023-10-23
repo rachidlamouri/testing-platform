@@ -25,9 +25,6 @@ type DirectedEdgeIdInput = SpreadN<
   ]
 >;
 
-/**
- * See name
- */
 export class DirectedEdgeId extends ComplexId<DirectedEdgeIdTemplate> {
   constructor({ tailId, headId, source, distinguisher }: DirectedEdgeIdInput) {
     super({

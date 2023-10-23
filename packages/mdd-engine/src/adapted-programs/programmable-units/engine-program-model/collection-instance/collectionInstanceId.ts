@@ -12,9 +12,6 @@ const COLLECTION_INSTANCE_ID_TEMPLATE = [
 ] as const satisfies GenericComplexIdTemplate;
 type CollectionInstanceIdTemplate = typeof COLLECTION_INSTANCE_ID_TEMPLATE;
 
-/**
- * See name.
- */
 export class CollectionInstanceId extends ComplexId<CollectionInstanceIdTemplate> {
   get rawTemplate(): CollectionInstanceIdTemplate {
     return COLLECTION_INSTANCE_ID_TEMPLATE;

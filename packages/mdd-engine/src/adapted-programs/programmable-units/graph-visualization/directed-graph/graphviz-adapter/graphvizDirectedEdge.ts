@@ -8,6 +8,9 @@ import {
   quote,
 } from './codeUtilities';
 
+/**
+ * Encodable Graphviz directed edge object
+ */
 export class GraphvizDirectedEdge {
   sourceEdge: DirectedEdge;
 

@@ -17,6 +17,9 @@ type DirectedClusterLocatorInput = {
   distinguisher?: IdLike;
 };
 
+/**
+ * The information needed to find a cluster in a graph
+ */
 export class DirectedClusterLocator
   extends DirectedGraphElementLocator<
     DirectedClusterId,

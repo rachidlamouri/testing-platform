@@ -42,6 +42,7 @@ import {
   NULL_OMISSION,
 } from '../../programmable-units/linting/lintAssertionOmission';
 import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
+import { exemptIdFileFromCanonicalComment } from '../../programmable-units/type-script-file/exemptIdFileFromCanonicalComment';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'lint-nonsense',
@@ -99,6 +100,7 @@ runEngine({
     handleNoCanonicalDirective,
     exemptEngineProgramFromCanonicalComment,
     exemptPredicatesFromCanonicalComment,
+    exemptIdFileFromCanonicalComment,
     omitProgramCanonicalExportRequirement,
     assertTypeScriptFileHasSensibleName,
 

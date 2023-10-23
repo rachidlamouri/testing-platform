@@ -11,6 +11,10 @@ type ErrorHandlerInput = {
   errorCollection: GenericCollection2 | null;
 };
 
+/**
+ * Encapsulates engine error handling including checking if an error collection
+ * exists, and failing fast when the engine encounters a critical error
+ */
 export class ErrorHandler {
   encounteredError = false;
 

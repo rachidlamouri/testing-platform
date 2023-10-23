@@ -17,6 +17,9 @@ class UntriggeredTransformInputKeyGroupError extends Error {
   }
 }
 
+/**
+ * Looks for untriggered transform input key groups
+ */
 export const validateEngineEndState = (
   mutableTransformStateList: MutableTransformState2[],
 ): UntriggeredTransformInputKeyGroupError | null => {

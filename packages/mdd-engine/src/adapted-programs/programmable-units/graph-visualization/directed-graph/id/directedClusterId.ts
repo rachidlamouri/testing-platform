@@ -13,9 +13,6 @@ type DirectedClusterIdTemplate = typeof DIRECTED_CLUSTER_ID_TEMPLATE;
 
 type DirectedClusterIdInput = BaseDirectedGraphConstituentIdInput;
 
-/**
- * See name
- */
 export class DirectedClusterId extends ComplexId<DirectedClusterIdTemplate> {
   constructor({ source, distinguisher }: DirectedClusterIdInput) {
     super({

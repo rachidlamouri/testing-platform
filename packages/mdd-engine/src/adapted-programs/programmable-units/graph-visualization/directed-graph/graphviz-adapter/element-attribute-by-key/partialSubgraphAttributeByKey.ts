@@ -22,6 +22,8 @@ type SubgraphAttributeByKey = SpreadN<
     },
   ]
 >;
-
+/**
+ * Graphviz subgraph attributes
+ */
 export type PartialSubgraphAttributeByKey =
   PartialAttributeByKey<SubgraphAttributeByKey>;

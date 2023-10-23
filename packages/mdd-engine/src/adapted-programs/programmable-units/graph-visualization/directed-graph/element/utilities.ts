@@ -1,3 +1,9 @@
+/**
+ * Directed graph object utilities for narrowing object types
+ *
+ * @noCanonicalDeclaration
+ */
+
 import { DirectedCluster } from './directedCluster';
 import { DirectedEdge } from './directedEdge';
 import { DirectedGraphElement } from './directedGraphElement';

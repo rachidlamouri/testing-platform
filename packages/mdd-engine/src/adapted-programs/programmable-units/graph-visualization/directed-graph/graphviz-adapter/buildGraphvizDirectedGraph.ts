@@ -35,6 +35,9 @@ const buildSubgraphLike = (
   });
 };
 
+/**
+ * Constructs a GraphvizDirectedGraph from a tree of custom graph objects
+ */
 export const buildGraphvizDirectedGraph = ({
   rootGroup,
 }: BuildGraphvizDirectedGraphInput): GraphvizDirectedGraph => {

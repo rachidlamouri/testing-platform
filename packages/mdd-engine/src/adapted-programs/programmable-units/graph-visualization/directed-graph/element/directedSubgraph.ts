@@ -2,7 +2,7 @@ import { DirectedGraphLikeId } from '../id/derived/directedGraphLikeId';
 import { DirectedSubgraphId } from '../id/directedSubgraphId';
 import { DirectedSubgraphLocator } from '../locator/directedSubgraphLocator';
 import { DirectedGraphElementLocator } from '../locator/directedGraphElementLocator';
-import { GlobalDirectedSubgraphId } from '../id/derived/global/globalDirectedSubgraph';
+import { GlobalDirectedSubgraphId } from '../id/derived/global/globalDirectedSubgraphId';
 import { PartialSubgraphAttributeByKey } from '../directedSubgraph';
 
 type DirectedSubgraphInput = {
@@ -11,6 +11,9 @@ type DirectedSubgraphInput = {
   rankGroupList?: string[][];
 };
 
+/**
+ * Custom object that can be turned into graphviz directed subgraph
+ */
 export class DirectedSubgraph extends DirectedGraphElementLocator<
   DirectedSubgraphId,
   DirectedGraphLikeId,

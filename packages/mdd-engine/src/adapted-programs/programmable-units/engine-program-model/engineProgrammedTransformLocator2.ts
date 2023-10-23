@@ -4,7 +4,7 @@ import {
   buildConstructorFunctionWithName,
   memoizeGetter,
 } from '../../../package-agnostic-utilities/deprecated-constructor-function/buildConstructorFunction';
-import { ExportLocatorId } from '../type-script-file/getExportLocatorId';
+import { ExportLocatorId } from '../type-script-file/exportLocatorId';
 import {
   GenericComplexIdTemplate,
   ComplexId,

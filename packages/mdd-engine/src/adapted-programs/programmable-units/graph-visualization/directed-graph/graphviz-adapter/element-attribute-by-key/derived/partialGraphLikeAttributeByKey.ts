@@ -1,7 +1,9 @@
 import { PartialGraphAttributeByKey } from '../partialGraphAttributeByKey';
 import { PartialSubgraphLikeAttributeByKey } from './partialSubgraphLikeAttributeByKey';
 
-// TODO: move this definition to element-attributes/
+/**
+ * All graphviz graph-like attributes
+ */
 export type PartialGraphLikeAttributeByKey =
   | PartialGraphAttributeByKey
   | PartialSubgraphLikeAttributeByKey;

@@ -17,12 +17,16 @@ export type GraphvizDirectedGraphLikeInput<
   nodeList: GraphvizDirectedGraphNode[];
   edgeList: GraphvizDirectedEdge[];
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  subgraphList: GraphvizGraphLike<
+  subgraphList: GraphvizDirectedGraphLike<
     PartialSubgraphAttributeByKey | PartialClusterAttributeByKey
   >[];
 };
 
-export class GraphvizGraphLike<
+/**
+ * Base class for encodable Graphviz graph-like objects (graph, subgraph, and
+ * cluster)
+ */
+export abstract class GraphvizDirectedGraphLike<
   TAttributeByKey extends PartialGraphLikeAttributeByKey,
 > implements GraphvizDirectedGraphLikeInput<TAttributeByKey>
 {
@@ -38,7 +42,7 @@ export class GraphvizGraphLike<
 
   edgeList: GraphvizDirectedEdge[];
 
-  subgraphList: GraphvizGraphLike<
+  subgraphList: GraphvizDirectedGraphLike<
     PartialSubgraphAttributeByKey | PartialClusterAttributeByKey
   >[];
 

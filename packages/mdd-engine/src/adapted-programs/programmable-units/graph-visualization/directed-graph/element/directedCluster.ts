@@ -10,6 +10,9 @@ type DirectedClusterInput = {
   inputAttributeByKey: Omit<PartialClusterAttributeByKey, 'id'>;
 };
 
+/**
+ * Custom object that can be turned into a graphviz directed cluster
+ */
 export class DirectedCluster
   extends DirectedGraphElementLocator<
     DirectedClusterId,

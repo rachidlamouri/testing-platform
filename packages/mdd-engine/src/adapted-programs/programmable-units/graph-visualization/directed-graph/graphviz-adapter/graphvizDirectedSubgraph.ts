@@ -4,7 +4,7 @@ import { DirectedSubgraph } from '../element/directedSubgraph';
 import { PartialSubgraphAttributeByKey } from './element-attribute-by-key/partialSubgraphAttributeByKey';
 import {
   GraphvizDirectedGraphLikeInput,
-  GraphvizGraphLike,
+  GraphvizDirectedGraphLike,
 } from './graphvizDirectedGraphLike';
 
 type GraphvizDirectedSubgraphInput = SpreadN<
@@ -20,7 +20,10 @@ type GraphvizDirectedSubgraphInput = SpreadN<
   ]
 >;
 
-export class GraphvizDirectedSubgraph extends GraphvizGraphLike<PartialSubgraphAttributeByKey> {
+/**
+ * Encodable Graphviz directed subgraph object
+ */
+export class GraphvizDirectedSubgraph extends GraphvizDirectedGraphLike<PartialSubgraphAttributeByKey> {
   sourceSubgraph: DirectedSubgraph;
 
   constructor(input: GraphvizDirectedSubgraphInput) {

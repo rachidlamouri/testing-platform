@@ -14,6 +14,8 @@ type ClusterAttributeByKey = SpreadN<
     },
   ]
 >;
-
+/**
+ * Graphviz cluster attributes
+ */
 export type PartialClusterAttributeByKey =
   PartialAttributeByKey<ClusterAttributeByKey>;
