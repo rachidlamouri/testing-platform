@@ -3,14 +3,14 @@ import {
   GraphLikeLabelLocation,
   GraphLikeStyle,
 } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
-import { PartialGraphAttributeByKey } from '../../programmable-units/graph-visualization/directed-graph/directedGraph';
-import { PartialEdgeAttributeByKey } from '../../programmable-units/graph-visualization/directed-graph/directedGraphEdge';
+import { PartialClusterAttributeByKey } from '../../programmable-units/graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialClusterAttributeByKey';
+import { PartialEdgeAttributeByKey } from '../../programmable-units/graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialEdgeAttributeByKey';
+import { PartialGraphAttributeByKey } from '../../programmable-units/graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialGraphAttributeByKey';
 import {
   NodeShape,
   NodeStyle,
   PartialNodeAttributeByKey,
-} from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
-import { PartialClusterAttributeByKey } from '../../programmable-units/graph-visualization/directed-graph/directedSubgraph';
+} from '../../programmable-units/graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialNodeAttributeByKey';
 
 const fontname = 'Helvetica';
 const penwidth = 0.2;

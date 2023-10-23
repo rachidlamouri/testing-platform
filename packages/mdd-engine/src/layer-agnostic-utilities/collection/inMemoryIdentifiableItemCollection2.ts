@@ -167,38 +167,6 @@ export abstract class BaseInMemoryIdentifiableItem2Collection<
   }
 }
 
-export type InMemoryIdentifiableItem2ListStreamMetatype<
-  TGepp extends CollectionId,
-  TOdeshin extends GenericIdentifiableItem,
-> = InMemoryIdentifiableItem2StreamMetatype<TGepp, TOdeshin, TOdeshin[]>;
-
-export type GenericInMemoryIdentifiableItem2ListStreamMetatype =
-  InMemoryIdentifiableItem2ListStreamMetatype<
-    CollectionId,
-    GenericIdentifiableItem
-  >;
-
-export class InMemoryIdentifiableItem2ListCollection<
-  TVoque extends GenericInMemoryIdentifiableItem2ListStreamMetatype,
-> extends BaseInMemoryIdentifiableItem2Collection<
-  GenericInMemoryIdentifiableItem2ListStreamMetatype,
-  TVoque
-> {
-  constructor({
-    continueOnDuplicate = false,
-    ...input
-  }: BaseInMemoryIdentifiableItem2CollectionInput<TVoque>) {
-    super({
-      continueOnDuplicate,
-      ...input,
-    });
-  }
-
-  protected dereferenceCollection(): TVoque['collectionStreamable'] {
-    return this.itemTuple;
-  }
-}
-
 type InMemoryIdentifiableItem3CollectionStreamable<
   TIdentifiableItemStreamable,
 > = {
@@ -215,7 +183,7 @@ export type InMemoryIdentifiableItem3StreamMetatype<
   InMemoryIdentifiableItem3CollectionStreamable<TIdentifiableItem>
 >;
 
-export type GenericInMemoryIdentifiableItem3StreamMetatype =
+type GenericInMemoryIdentifiableItem3StreamMetatype =
   InMemoryIdentifiableItem3StreamMetatype<
     CollectionId,
     GenericIdentifiableItem

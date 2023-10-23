@@ -1,4 +1,3 @@
-import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { DirectedClusterId } from '../id/directedClusterId';
 import { DirectedGraphLikeId } from '../id/derived/directedGraphLikeId';
 import { DirectedClusterLocator } from '../locator/directedClusterLocator';
@@ -30,13 +29,3 @@ export class DirectedCluster
     this.inputAttributeByKey = input.inputAttributeByKey;
   }
 }
-
-export const DIRECTED_CLUSTER_COLLECTION_ID = 'directed-cluster';
-
-type DirectedClusterCollectionId = typeof DIRECTED_CLUSTER_COLLECTION_ID;
-
-export type DirectedClusterStreamMetatype =
-  InMemoryIdentifiableItem3StreamMetatype<
-    DirectedClusterCollectionId,
-    DirectedCluster
-  >;

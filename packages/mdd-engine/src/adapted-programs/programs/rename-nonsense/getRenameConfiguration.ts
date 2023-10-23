@@ -56,7 +56,7 @@ export const getRenameConfiguration = buildProgrammedTransform({
       identifierLocator.filePath.serialized ===
         'packages/mdd-engine/src/layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2.ts' ||
       identifierLocator.filePath.serialized ===
-        'packages/mdd-engine/src/adapted-programs/programmable-units/type-script-file-relationships/filterEngineProgramFile.ts' ||
+        'packages/mdd-engine/src/adapted-programs/programmable-units/engine-program-model/filterEngineProgramFile.ts' ||
       identifierLocator.filePath.serialized ===
         'packages/mdd-engine/src/adapted-programs/programmable-units/engine-program-model/getEngineProgramLocator3.ts' ||
       identifierLocator.filePath.serialized ===

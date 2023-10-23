@@ -1,5 +1,4 @@
 import { TSESTree } from '@typescript-eslint/typescript-estree';
-import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   ObjectWithPrototype,
   buildConstructorFunctionWithName,
@@ -21,7 +20,7 @@ class EngineProgrammedTransformBuildAddMetadataForSerializationLocatorId extends
   }
 }
 
-export const EngineProgrammedTransformLocator2IdClassSet = [
+const EngineProgrammedTransformLocator2IdClassSet = [
   EngineProgrammedTransformBuildAddMetadataForSerializationLocatorId,
   ExportLocatorId,
 ] as const;
@@ -55,13 +54,12 @@ type EngineProgrammedTransformLocatorPrototype = {
   get oldId(): string;
 };
 
-export type EngineProgrammedTransformTopLevelDeclarationLocator =
-  ObjectWithPrototype<
-    BaseEngineProgrammedTransformTopLevelDeclarationLocator,
-    EngineProgrammedTransformLocatorPrototype
-  >;
+type EngineProgrammedTransformTopLevelDeclarationLocator = ObjectWithPrototype<
+  BaseEngineProgrammedTransformTopLevelDeclarationLocator,
+  EngineProgrammedTransformLocatorPrototype
+>;
 
-export type EngineProgrammedTransformBuildAddMetadataForSerializationLocator =
+type EngineProgrammedTransformBuildAddMetadataForSerializationLocator =
   ObjectWithPrototype<
     BaseEngineProgrammedTransformBuildAddMetadataForSerializationLocator,
     EngineProgrammedTransformLocatorPrototype
@@ -109,15 +107,3 @@ export const {
   }),
   oldId: (locator) => locator.id.forMachine,
 });
-
-export const ENGINE_PROGRAMMED_TRANSFORM_LOCATOR_2_COLLECTION_ID =
-  'engine-estinant-locator-2';
-
-type EngineProgrammedTransformLocator2CollectionId =
-  typeof ENGINE_PROGRAMMED_TRANSFORM_LOCATOR_2_COLLECTION_ID;
-
-export type EngineProgrammedTransformLocator2StreamMetatype =
-  InMemoryIdentifiableItem3StreamMetatype<
-    EngineProgrammedTransformLocator2CollectionId,
-    EngineProgrammedTransformLocator2
-  >;

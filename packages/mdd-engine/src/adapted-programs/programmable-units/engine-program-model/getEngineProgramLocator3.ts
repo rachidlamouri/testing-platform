@@ -5,7 +5,7 @@ import {
   ENGINE_PROGRAM_FILE_COLLECTION_ID,
   EngineProgramFile,
   EngineProgramFileStreamMetatype,
-} from '../type-script-file-relationships/engineProgramFile';
+} from './engineProgramFile';
 import {
   IdentifiableProperty,
   ObjectExpressionWithIdentifierProperties,

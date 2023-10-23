@@ -34,7 +34,7 @@ import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/grap
 import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/svg-adapter/renderGraphvizCodeToSvgDocument';
 import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/base-interactivity/addInteractivityToSvgDocument';
 import { GraphLikeLabelLocation } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
-import { NodeShape } from '../../programmable-units/graph-visualization/directed-graph/directedGraphNode';
+import { NodeShape } from '../../programmable-units/graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialNodeAttributeByKey';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'testGraphAssembly',

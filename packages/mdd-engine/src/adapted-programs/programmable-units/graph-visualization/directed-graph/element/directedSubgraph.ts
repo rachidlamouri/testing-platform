@@ -1,4 +1,3 @@
-import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { DirectedGraphLikeId } from '../id/derived/directedGraphLikeId';
 import { DirectedSubgraphId } from '../id/directedSubgraphId';
 import { DirectedSubgraphLocator } from '../locator/directedSubgraphLocator';
@@ -28,13 +27,3 @@ export class DirectedSubgraph extends DirectedGraphElementLocator<
     this.rankGroupList = input.rankGroupList;
   }
 }
-
-export const DIRECTED_SUBGRAPH_COLLECTION_ID = 'directed-subgraph';
-
-type DirectedSubgraphCollectionId = typeof DIRECTED_SUBGRAPH_COLLECTION_ID;
-
-export type DirectedSubgraphStreamMetatype =
-  InMemoryIdentifiableItem3StreamMetatype<
-    DirectedSubgraphCollectionId,
-    DirectedSubgraph
-  >;

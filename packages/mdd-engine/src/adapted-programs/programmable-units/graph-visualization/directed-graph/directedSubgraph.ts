@@ -7,7 +7,7 @@ import { DirectedGraphEdge } from './directedGraphEdge';
 import { DirectedGraphNode } from './directedGraphNode';
 import { PartialAttributeByKey } from './partialAttributeByKey';
 
-export enum RankType {
+enum RankType {
   Same = 'same',
   Minimum = 'min',
   Source = 'source',

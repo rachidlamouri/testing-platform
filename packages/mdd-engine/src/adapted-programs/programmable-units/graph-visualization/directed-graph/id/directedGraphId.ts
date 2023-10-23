@@ -11,7 +11,7 @@ const DIRECTED_GRAPH_ID_TEMPLATE = [
 ] as const satisfies GenericComplexIdTemplate;
 type DirectedGraphIdTemplate = typeof DIRECTED_GRAPH_ID_TEMPLATE;
 
-export type DirectedGraphIdInput = Pick<
+type DirectedGraphIdInput = Pick<
   InputValueByTemplateKey<DirectedGraphIdTemplate>,
   'source' | 'distinguisher'
 >;

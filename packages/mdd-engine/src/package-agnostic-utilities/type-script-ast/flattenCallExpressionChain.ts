@@ -8,7 +8,7 @@ import {
   isIdentifiableMemberExpressionCallExpression,
 } from './isMemberExpressionCallExpression';
 
-export type FlattenedCallExpressionOrError =
+type FlattenedCallExpressionOrError =
   | IdentifiableCallExpression
   | IdentifiableMemberExpressionCallExpression
   | Error;

@@ -1,6 +1,5 @@
-import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
-import { NodeShape } from '../../graph-visualization/directed-graph/directedGraphNode';
 import { DirectedGraphNode } from '../../graph-visualization/directed-graph/element/directedGraphNode';
+import { NodeShape } from '../../graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialNodeAttributeByKey';
 import { FileSourceInstance } from '../../linting/source/fileSource';
 import { ItemDefinitionModel } from '../item-definition/itemDefinitionModel';
 import { ProgramSkeleton } from '../program/programSkeleton';
@@ -53,15 +52,3 @@ export class CollectionInstanceModel implements CollectionInstanceModelInput {
     });
   }
 }
-
-export const COLLECTION_INSTANCE_MODEL_COLLECTION_ID =
-  'collection-instance-model';
-
-type CollectionInstanceModelCollectionId =
-  typeof COLLECTION_INSTANCE_MODEL_COLLECTION_ID;
-
-export type CollectionInstanceModelStreamMetatype =
-  InMemoryIdentifiableItem3StreamMetatype<
-    CollectionInstanceModelCollectionId,
-    CollectionInstanceModel
-  >;

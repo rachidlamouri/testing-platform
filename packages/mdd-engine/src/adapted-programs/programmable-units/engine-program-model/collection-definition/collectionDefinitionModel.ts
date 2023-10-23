@@ -1,4 +1,3 @@
-import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { CollectionDefinitionId } from './collectionDefinitionId';
 import { CollectionDefinitionLocator } from './collectionDefinitionLocator';
 
@@ -35,15 +34,3 @@ export class CollectionDefinitionModel
     this.description = input.description;
   }
 }
-
-export const COLLECTION_DEFINITION_MODEL_COLLECTION_ID =
-  'collection-definition-model';
-
-type CollectionDefinitionModelCollectionId =
-  typeof COLLECTION_DEFINITION_MODEL_COLLECTION_ID;
-
-export type CollectionDefinitionModelStreamMetatype =
-  InMemoryIdentifiableItem3StreamMetatype<
-    CollectionDefinitionModelCollectionId,
-    CollectionDefinitionModel
-  >;

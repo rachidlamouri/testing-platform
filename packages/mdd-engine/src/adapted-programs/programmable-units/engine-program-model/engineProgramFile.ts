@@ -1,5 +1,5 @@
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
-import { EngineFunctionConfiguration } from '../engine-program-model/engineFunctionConfiguration';
+import { EngineFunctionConfiguration } from './engineFunctionConfiguration';
 import { TypeScriptFile } from '../type-script-file/typeScriptFile';
 
 /**

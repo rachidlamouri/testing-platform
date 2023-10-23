@@ -191,6 +191,22 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
       'packages/mdd-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/wrappers/textWrapper.tsx',
     importedIdentifierName: 'TextWrapper',
   },
+  {
+    importedFilePath:
+      'packages/mdd-engine/src/adapted-programs/programmable-units/engine-program-model/collection-definition/collectionDefinitionModel.ts',
+    importedIdentifierName: 'CollectionDefinitionModel',
+  },
+  {
+    importedFilePath:
+      'packages/mdd-engine/src/package-agnostic-utilities/type/combination.ts',
+    importedIdentifierName: 'Combination',
+  },
+  {
+    importedFilePath:
+      'packages/mdd-engine/src/package-agnostic-utilities/type-script-ast/isTypeScriptTypeParameterInstantiation.ts',
+    importedIdentifierName:
+      'buildIsTypeScriptTypeParameterInstantiationWithSpecificParameterTuple',
+  },
 ].map(({ importedFilePath, importedIdentifierName }) => {
   return new LintAssertionOmissionInstance({
     omitterSource,

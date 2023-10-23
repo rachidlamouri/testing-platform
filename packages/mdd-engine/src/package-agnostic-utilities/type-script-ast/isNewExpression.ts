@@ -49,7 +49,7 @@ export const isNewExpressionWithSpecificTypeParameters = <
     parameterNodeTypeTuple,
   );
 
-export type IdentifiableNewExpression = TSESTree.NewExpression & {
+type IdentifiableNewExpression = TSESTree.NewExpression & {
   callee: TSESTree.Identifier;
 };
 

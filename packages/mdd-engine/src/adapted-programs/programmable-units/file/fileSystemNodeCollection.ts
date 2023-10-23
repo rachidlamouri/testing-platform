@@ -40,7 +40,7 @@ export type FileSystemNodeStreamMetatype<
   FileCollection<TItem>
 >;
 
-export type GenericFileSystemNodeStreamMetatype = FileSystemNodeStreamMetatype<
+type GenericFileSystemNodeStreamMetatype = FileSystemNodeStreamMetatype<
   CollectionId,
   FileSystemNode
 >;

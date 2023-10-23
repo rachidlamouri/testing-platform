@@ -18,7 +18,7 @@ type BaseProgramLocatorInput<
   engineFunctionConfiguration: TEngineFunctionConfiguration;
 };
 
-export abstract class BaseProgramLocator<
+abstract class BaseProgramLocator<
   TProgramTypeName extends ProgramTypeName,
   TEngineFunctionConfiguration extends EngineFunctionConfiguration,
 > {

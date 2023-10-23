@@ -19,7 +19,7 @@ import {
 } from '../../programmable-units/file/fileSystemObjectEnumeratorConfiguration';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
 import { constructSnapshotScript } from '../../programmable-units/snapshot-refresh/constructSnapshotScript';
-import { filterEngineProgramFile } from '../../programmable-units/type-script-file-relationships/filterEngineProgramFile';
+import { filterEngineProgramFile } from '../../programmable-units/engine-program-model/filterEngineProgramFile';
 import { associateTypeScriptFileToTypescriptConfiguration } from '../../programmable-units/type-script-file/associateTypeScriptFileToTypescriptConfiguration';
 import { getTypeScriptFileImportList } from '../../programmable-units/type-script-file/getTypeScriptFileImportList';
 import { parseTypeScriptFile } from '../../programmable-units/type-script-file/parseTypeScriptFile';

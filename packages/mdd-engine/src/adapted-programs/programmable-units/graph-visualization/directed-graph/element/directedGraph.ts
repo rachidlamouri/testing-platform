@@ -1,4 +1,3 @@
-import { InMemoryIdentifiableItem3StreamMetatype } from '../../../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { PartialGraphAttributeByKey } from '../directedGraph';
 import { GlobalDirectedGraphId } from '../id/derived/global/globalDirectedGraph';
 import { DirectedGraphId } from '../id/directedGraphId';
@@ -27,13 +26,3 @@ export class DirectedGraph extends DirectedGraphElementLocator<
     this.inputAttributeByKey = input.inputAttributeByKey;
   }
 }
-
-export const DIRECTED_GRAPH_COLLECTION_ID = 'directed-graph';
-
-type DirectedGraphCollectionId = typeof DIRECTED_GRAPH_COLLECTION_ID;
-
-export type DirectedGraphStreamMetatype =
-  InMemoryIdentifiableItem3StreamMetatype<
-    DirectedGraphCollectionId,
-    DirectedGraph
-  >;

@@ -9,7 +9,7 @@ enum NodeLabelLocation {
   Center = 'c',
 }
 
-export enum NodeShape {
+enum NodeShape {
   Box = 'box',
   Circle = 'circle',
   Ellipse = 'ellipse',
@@ -20,7 +20,7 @@ export enum NodeShape {
   Point = 'point',
 }
 
-export enum NodeStyle {
+enum NodeStyle {
   Rounded = 'rounded',
   Filled = 'filled',
 }

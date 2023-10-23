@@ -10,8 +10,3 @@ export type DirectedGraphElementId =
   | DirectedClusterId
   | DirectedGraphNodeId
   | DirectedEdgeId;
-
-export type GraphConstituentId = Exclude<
-  DirectedGraphElementId,
-  DirectedGraphId
->;
