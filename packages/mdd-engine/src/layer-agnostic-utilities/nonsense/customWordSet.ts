@@ -400,6 +400,10 @@ const customDefinitionSet: CustomDefinition[] = [
     word: 'mdd',
     description: 'Model driven development',
   },
+  {
+    word: 'validator',
+    description: 'One who validates',
+  },
 ];
 
 /**

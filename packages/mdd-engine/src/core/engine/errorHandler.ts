@@ -27,7 +27,7 @@ export class ErrorHandler {
 
     if (this.errorCollection === null) {
       throw new AggregateEngineError([
-        'The engine encountered an error, but no error voictent was specified',
+        'The engine encountered an error, but no error collection was specified',
         error.message,
       ]);
     }
@@ -37,7 +37,7 @@ export class ErrorHandler {
     } catch (secondError) {
       assertIsError(secondError);
       throw new AggregateEngineError([
-        `The engine encountered a critical error. The error voictent "${this.errorCollection.collectionId}" threw an error while handling an error`,
+        `The engine encountered a critical error. The error collection "${this.errorCollection.collectionId}" threw an error while handling an error`,
         error.message,
         secondError.message,
       ]);
@@ -45,7 +45,7 @@ export class ErrorHandler {
 
     if (isCritical) {
       throw new Error(
-        `The engine encountered a critical error. See the error voictent with gepp "${this.errorCollection.collectionId}" for more details`,
+        `The engine encountered a critical error. See the error collection with collection id "${this.errorCollection.collectionId}" for more details`,
       );
     }
   }

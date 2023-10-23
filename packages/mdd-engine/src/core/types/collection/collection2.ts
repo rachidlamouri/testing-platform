@@ -14,7 +14,7 @@ import {
  *
  * @canonicalDeclaration
  *
- * @todo make "addHubblepup" private, and create a stream connection for sending
+ * @todo make "addItem" private, and create a stream connection for sending
  * data to a collection
  */
 export type Collection2<
@@ -30,9 +30,9 @@ export type Collection2<
   ): ItemStream2<TRestrictingStreamMetatype, TStreamMetatype> | null;
   onTickStart(): void;
   /**
-   * This is for collections whose constructor accepts initial hubblepups. This
-   * allows you to defer adding the initial hubblepups to the collection until
-   * the engine starts running. This way, all hubblepups are added to their
+   * This is for collections whose constructor accepts initial items. This
+   * allows you to defer adding the initial items to the collection until
+   * the engine starts running. This way, all items are added to their
    * collections with the proper error handling in place.
    */
   initialize(): void;

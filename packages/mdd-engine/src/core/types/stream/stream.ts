@@ -6,9 +6,9 @@ import {
 import { ReferenceTypeName } from './referenceTypeName';
 
 export enum StreamTypeName {
-  CollectionStream = 'VoictentPelieLanbe',
-  ItemStream = 'HubblepupPelieLanbe',
-  ItemStream2 = 'HubblepupPelieLanbe2',
+  CollectionStream = 'CollectionStream',
+  ItemStream = 'ItemStream',
+  ItemStream2 = 'ItemStream2',
 }
 
 type BaseStream<

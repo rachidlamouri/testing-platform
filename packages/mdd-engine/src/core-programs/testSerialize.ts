@@ -14,7 +14,7 @@ const programFileCache = new ProgramFileCache({
 });
 
 /**
- * Tests the "SerializableVoictent" by initializing it with data.
+ * Tests the "SerializableCollection" by initializing it with data.
  *
  * @note Running the collection through the engine is technically unnecessary,
  * but it allows the program modeler to construct a snapshot digest of this file

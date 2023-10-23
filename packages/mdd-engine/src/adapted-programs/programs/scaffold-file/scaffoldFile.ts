@@ -50,7 +50,9 @@ export const scaffoldFile = buildProgrammedTransform({
           importConfiguration.filePath,
         );
 
-        const extensionlessRelativePath = relativePath.replace(/\.[^.]+$/, '');
+        const extensionlessRelativePath = relativePath
+          .replace(/\.[^.]+$/, '')
+          .replace(/^([^.])/, './$1');
 
         return `import { ${identifierText} } from '${extensionlessRelativePath}'`;
       },

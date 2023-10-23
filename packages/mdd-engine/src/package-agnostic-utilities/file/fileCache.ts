@@ -48,7 +48,7 @@ export class FileCache {
 
   public readonly namespace: string;
 
-  // public readonly voictentsDirectory;
+  // public readonly collectionsDirectory;
 
   // public readonly runtimeSnapshotFilePath;
 

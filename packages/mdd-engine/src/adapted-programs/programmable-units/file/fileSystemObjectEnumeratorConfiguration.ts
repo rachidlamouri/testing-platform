@@ -40,7 +40,7 @@ export const FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectE
     ],
   };
 
-export const COLLECTIONS_AND_PROGRAMMED_TRANSFORMS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfiguration =
+export const ENGINE_PACKAGE_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION: FileSystemObjectEnumeratorConfiguration =
   {
     directoryPath: 'packages/mdd-engine',
     ignoredNodePathConfigurationList: [

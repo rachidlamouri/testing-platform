@@ -48,7 +48,7 @@ export type GenericProgrammedTransform2Tuple =
   Tuple<GenericProgrammedTransform2>;
 
 // TODO: figure out which one of these don't need to be "any"
-// TODO: Tie this type back to "Estinant2" somehow
+// TODO: Tie this type back to "ProgrammedTransform2" somehow
 export type UnsafeProgrammedTransform2 = {
   version: 2;
   name: string;

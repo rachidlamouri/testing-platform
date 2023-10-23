@@ -3,26 +3,26 @@ import { ImportConfiguration, ScaffoldeeFileMetadata } from './types';
 const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
   {
     filePath: 'packages/mdd-engine/src/adapter/engine/runEngine.ts',
-    identifierList: ['digikikify', 'buildVoictentByGepp'],
+    identifierList: ['runEngine', 'buildCollectionByCollectionId'],
   },
   {
     filePath:
       'packages/mdd-engine/src/layer-agnostic-utilities/collection/inMemoryCollection.ts',
-    identifierList: ['InMemoryVoictent'],
+    identifierList: ['InMemoryCollection'],
   },
   {
     filePath:
       'packages/mdd-engine/src/adapted-programs/programmable-units/file/fileSystemObjectEnumeratorConfiguration.ts',
     identifierList: [
-      'FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP',
-      'VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION',
-      'FileSystemObjectEnumeratorConfigurationVoque',
+      'FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID',
+      'ENGINE_PACKAGE_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION',
+      'FileSystemObjectEnumeratorConfigurationStreamMetatype',
     ],
   },
   {
     filePath:
       'packages/mdd-engine/src/adapted-programs/programmable-units/error/programError.ts',
-    identifierList: ['PROGRAM_ERROR_GEPP'],
+    identifierList: ['PROGRAM_ERROR_COLLECTION_ID'],
   },
   {
     filePath:
@@ -64,6 +64,11 @@ const IMPORT_CONFIGURATION_LIST: ImportConfiguration[] = [
       'packages/mdd-engine/src/adapted-programs/programs/categorize-files/assertFileExtensionIsKnown.ts',
     identifierList: ['assertFileExtensionIsKnown'],
   },
+  {
+    filePath:
+      'packages/mdd-engine/src/adapted-programs/programmable-units/file/buildDefaultFileCollectionTuple.ts',
+    identifierList: ['buildDefaultFileCollectionTuple'],
+  },
 ];
 
 /**
@@ -88,23 +93,23 @@ const programFileCache = new ProgramFileCache({
 /**
  *
  */
-digikikify({
-  explicitVoictentTuple: [
-    new InMemoryVoictent<FileSystemObjectEnumeratorConfigurationVoque>({
-      gepp: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_GEPP,
-      initialHubblepupPelueTuple: [
-        VOICTENTS_AND_ESTINANTS_FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
+runEngine({
+  explicitCollectionTuple: [
+    new InMemoryCollection<FileSystemObjectEnumeratorConfigurationStreamMetatype>({
+      collectionId: FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION_COLLECTION_ID,
+      initialItemEggTuple: [
+        ENGINE_PACKAGE_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION,
       ],
     }),
   ] as const,
-  fileSystemNodeGeppCombination: defaultFileGeppCombination,
-  uninferableVoictentByGepp: buildVoictentByGepp([
-    new ProgramErrorVoictent({
+  uninferableCollectionByCollectionId: buildCollectionByCollectionId([
+    ...buildDefaultFileCollectionTuple(),
+    new ProgramErrorCollection({
       programFileCache,
     }),
   ] as const),
-  errorGepp: PROGRAM_ERROR_GEPP,
-  estinantTuple: [
+  errorCollectionId: PROGRAM_ERROR_COLLECTION_ID,
+  programmedTransformTuple: [
     enumerateFileSystemObjects,
     categorizeFiles,
 
@@ -114,7 +119,7 @@ digikikify({
     reportErrorCount,
     signalError,
   ] as const,
-  serializeeGeppList: [
+  serializeeCollectionIdList: [
     // keep this as a multi-line list for easier debugging
   ],
   programFileCache,

@@ -20,7 +20,7 @@ type SerializableErrorCollectionInput<
 };
 
 /**
- * A collection that writes errors to disk. It's not as complex as ProgramErrorVoictent
+ * A collection that writes errors to disk. It's not as complex as ProgramErrorCollection
  *
  * @readableName SerializableErrorCollection
  *

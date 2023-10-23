@@ -2,7 +2,7 @@
  * Enumeration of type names to differentiate sources
  */
 export enum SourceTypeName {
-  ProgrammedTransformSource = 'EstinantSource',
+  ProgrammedTransformSource = 'ProgrammedTransformSource',
   ExportedIdentifierSource = 'ExportedIdentifierSource',
   FileSource = 'FileSource',
   FileLineSource = 'FileLineSource',

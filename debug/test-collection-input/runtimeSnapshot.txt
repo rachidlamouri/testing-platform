@@ -1,10 +1,10 @@
 Collections:
 
-    voictent-1
+    collection-1
       I: |XXX|
       C: |-X-|
 
-    voictent-2
+    collection-2
       I: |--X|
       C: |---|
 
@@ -15,13 +15,13 @@ Collections:
 Transforms:
 
   gatherCollection
-    voictent-1
+    collection-1
       C: |-X-|
          |___|
       E: |-1-|
 
-  serialize/voictent-2
-    voictent-2
+  serialize/collection-2
+    collection-2
       I: |--X|
          |___|
       E: |--1|

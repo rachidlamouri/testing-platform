@@ -16,14 +16,14 @@ import {
 import { ItemCache } from './itemCache';
 
 export enum MutableStreamConnectionStateTypeName {
-  LeftMutableStreamConnectionState = 'LeftDreanor',
-  RightCollectionMutableStreamConnectionState = 'RightVoictentDreanor',
-  RightCollectionItemMutableStreamConnectionState = 'RightVoictentItemDreanor',
-  RightCollectionItem2MutableStreamConnectionState = 'RightVoictentItem2Dreanor',
+  LeftMutableStreamConnectionState = 'LeftMutableStreamConnectionState',
+  RightCollectionMutableStreamConnectionState = 'RightCollectionMutableStreamConnectionState',
+  RightCollectionItemMutableStreamConnectionState = 'RightCollectionItemMutableStreamConnectionState',
+  RightCollectionItem2MutableStreamConnectionState = 'RightCollectionItem2MutableStreamConnectionState',
 }
 
 /**
- * Contains the information needed to identify a Voictent, and to stream its Hubblepups
+ * Contains the information needed to identify a Collection, and to stream its Items
  */
 export type LeftMutableStreamConnectionState = {
   typeName: MutableStreamConnectionStateTypeName.LeftMutableStreamConnectionState;

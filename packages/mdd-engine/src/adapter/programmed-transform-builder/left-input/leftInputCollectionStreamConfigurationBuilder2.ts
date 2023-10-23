@@ -32,7 +32,7 @@ type EmptyAdaptedRightInputStreamConnectionMetatypeTuple = [];
 type EmptyAdaptedOutputStreamConnectionMetatypeTuple = [];
 
 /**
- * Builds the left input context for an estinant that consumes the entire left
+ * Builds the left input context for a programmed transform that consumes the entire left
  * collection
  *
  * @readableName LeftInputCollectionStreamConfigurationBuilder

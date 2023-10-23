@@ -28,7 +28,7 @@ type NextAdaptedOutputStreamConnectionMetatypeTuple<
 ];
 
 /**
- * Builds the context needed to output zero or more hubblepups
+ * Builds the context needed to output zero or more items
  *
  * @readableName OutputItemTupleStreamConfigurationBuilder
  */

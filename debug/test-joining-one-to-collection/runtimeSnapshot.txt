@@ -1,14 +1,14 @@
 Collections:
 
-    voictent-1
+    collection-1
       I: |XX---|
       C: |-X---|
 
-    voictent-2
+    collection-2
       I: |XXXX-|
       C: |-X---|
 
-    voictent-3
+    collection-3
       I: |--XX-|
       C: |----X|
 
@@ -19,15 +19,15 @@ Collections:
 Transforms:
 
   gatherCollection
-    voictent-1
+    collection-1
       I: |XXX--|
-    voictent-2
+    collection-2
       C: |-X---|
          |_____|
       E: |-11--|
 
-  serialize/voictent-3
-    voictent-3
+  serialize/collection-3
+    collection-3
       I: |--XXX|
          |_____|
       E: |---11|

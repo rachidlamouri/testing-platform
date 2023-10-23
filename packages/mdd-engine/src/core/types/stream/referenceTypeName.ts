@@ -4,6 +4,6 @@
  * @readableName StreamableTypeName
  */
 export enum ReferenceTypeName {
-  Collection = 'Voictent',
-  IndexedItem = 'IndexedVoictentItem',
+  Collection = 'Collection',
+  IndexedItem = 'IndexedCollectionItem',
 }

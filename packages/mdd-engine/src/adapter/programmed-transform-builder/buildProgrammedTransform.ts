@@ -10,10 +10,10 @@ import {
 } from './left-input/leftInputCollectionStreamConfigurationBuilder2';
 
 /**
- * A utility function for building an estinant with the builder pattern. This is
+ * A utility function for building a programmed transform with the builder pattern. This is
  * essential to the adapter layer as it guides the programmer's types, allows
  * the programmer to ignore engine-specific concerns, and it constructs an
- * engine-compatiable estinant.
+ * engine-compatiable programmed transform.
  *
  * @readableName BuildProgrammedTransform
  *

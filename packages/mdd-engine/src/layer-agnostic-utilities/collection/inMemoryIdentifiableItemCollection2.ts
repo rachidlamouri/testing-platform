@@ -27,17 +27,10 @@ import { assertNotUndefined } from '../../package-agnostic-utilities/nil/assertN
 import { SpreadN } from '../../package-agnostic-utilities/type/spreadN';
 import { StreamMetatype } from '../../core/types/stream-metatype/streamMetatype';
 
-export type InMemoryIdentifiableItem2IndexByName = InMemoryIndexByName &
+export type InMemoryIdentifiableItem2IndexByName = InMemoryIndexByName & {
   // TODO: REMOVE UNDEFINED after mass refactor
-  (| {
-        id: GenericIdentifiableItem['id'];
-        zorn?: GenericIdentifiableItem['id'];
-      }
-    | {
-        id?: GenericIdentifiableItem['id'];
-        zorn: GenericIdentifiableItem['id'];
-      }
-  );
+  id: GenericIdentifiableItem['id'];
+};
 
 type InMemoryIdentifiableItem2StreamMetatype<
   TCollectionId extends CollectionId,
@@ -64,8 +57,7 @@ type IdLike = {
 };
 
 const getIdLike = (identifiableItem: GenericIdentifiableItem): IdLike => {
-  const id = identifiableItem.id ?? identifiableItem.zorn;
-  assertNotUndefined(id);
+  const { id } = identifiableItem;
 
   const result =
     typeof id === 'string'
@@ -79,10 +71,10 @@ const getIdLike = (identifiableItem: GenericIdentifiableItem): IdLike => {
 };
 
 type BaseInMemoryIdentifiableItem2CollectionInput<
-  TVoque extends GenericInMemoryIdentifiableItem2StreamMetatype,
+  TStreamMetatype extends GenericInMemoryIdentifiableItem2StreamMetatype,
 > = SpreadN<
   [
-    InMemoryCollectionConstructorInput<TVoque>,
+    InMemoryCollectionConstructorInput<TStreamMetatype>,
     {
       continueOnDuplicate?: boolean;
     },
@@ -90,20 +82,23 @@ type BaseInMemoryIdentifiableItem2CollectionInput<
 >;
 
 export abstract class BaseInMemoryIdentifiableItem2Collection<
-  TRestrictingVoque extends GenericInMemoryIdentifiableItem2StreamMetatype,
-  TVoque extends TRestrictingVoque,
-> extends AbstractInMemoryCollection<TRestrictingVoque, TVoque> {
+  TRestrictingStreamMetatype extends GenericInMemoryIdentifiableItem2StreamMetatype,
+  TStreamMetatype extends TRestrictingStreamMetatype,
+> extends AbstractInMemoryCollection<
+  TRestrictingStreamMetatype,
+  TStreamMetatype
+> {
   continueOnDuplicate: boolean;
 
-  protected hubblepupPelueByZorn = new Map<
+  protected itemEggById = new Map<
     string,
-    TVoque['itemEggStreamable']
+    TStreamMetatype['itemEggStreamable']
   >();
 
   constructor({
     continueOnDuplicate = false,
     ...input
-  }: BaseInMemoryIdentifiableItem2CollectionInput<TVoque> & {
+  }: BaseInMemoryIdentifiableItem2CollectionInput<TStreamMetatype> & {
     continueOnDuplicate: boolean;
   }) {
     super(input);
@@ -111,57 +106,56 @@ export abstract class BaseInMemoryIdentifiableItem2Collection<
     this.continueOnDuplicate = continueOnDuplicate;
   }
 
-  addItem(hubblepup: TVoque['itemEggStreamable']): void {
-    const hubblepupZornLike = getIdLike(hubblepup);
-    const humanReadableZorn = hubblepupZornLike.forHuman;
+  addItem(item: TStreamMetatype['itemEggStreamable']): void {
+    const itemIdLike = getIdLike(item);
+    const humanReadableId = itemIdLike.forHuman;
 
-    if (this.hubblepupPelueByZorn.has(humanReadableZorn)) {
+    if (this.itemEggById.has(humanReadableId)) {
       if (this.continueOnDuplicate) {
         return;
       }
 
-      const existingHubblepup =
-        this.hubblepupPelueByZorn.get(humanReadableZorn);
-      assertNotUndefined(existingHubblepup);
-      const existingZornLike = getIdLike(existingHubblepup);
+      const existingItem = this.itemEggById.get(humanReadableId);
+      assertNotUndefined(existingItem);
+      const existingIdLike = getIdLike(existingItem);
 
-      const error = new Error(`Duplicate id: ${humanReadableZorn}`);
+      const error = new Error(`Duplicate id: ${humanReadableId}`);
       Object.assign(error, {
-        gepp: this.collectionId,
-        id: humanReadableZorn,
+        collectionId: this.collectionId,
+        id: humanReadableId,
         formatted: {
-          existing: existingZornLike.forDebug,
-          duplicate: existingZornLike.forDebug,
+          existing: existingIdLike.forDebug,
+          duplicate: existingIdLike.forDebug,
         },
-        existingHubblepup,
-        duplicateHubblepup: hubblepup,
+        existingItem,
+        duplicateItem: item,
       });
 
       throw error;
     } else {
-      super.addItem(hubblepup);
-      this.hubblepupPelueByZorn.set(humanReadableZorn, hubblepup);
+      super.addItem(item);
+      this.itemEggById.set(humanReadableId, item);
     }
   }
 
   protected dereferenceItem(
-    lanbe: ItemStream2<TRestrictingVoque, TVoque>,
-  ): TVoque['indexedItemStreamable'] {
-    const listIndex = this.getStreamIndex(lanbe);
+    stream: ItemStream2<TRestrictingStreamMetatype, TStreamMetatype>,
+  ): TStreamMetatype['indexedItemStreamable'] {
+    const listIndex = this.getStreamIndex(stream);
 
     if (listIndex === AbstractInMemoryCollection.minimumInclusiveIndex) {
-      throw new DereferenceError(lanbe);
+      throw new DereferenceError(stream);
     }
 
-    const odeshin = this.itemTuple[listIndex];
-    const humanReadableZorn = getIdLike(odeshin).forHuman;
+    const identifiableItem = this.itemTuple[listIndex];
+    const humanReadableId = getIdLike(identifiableItem).forHuman;
 
     return {
-      item: odeshin,
+      item: identifiableItem,
       indexByName: {
-        serializableId: humanReadableZorn.replaceAll('/', ' | '),
+        serializableId: humanReadableId.replaceAll('/', ' | '),
         listIndex,
-        id: odeshin.id,
+        id: identifiableItem.id,
       },
     };
   }
@@ -175,10 +169,10 @@ type InMemoryIdentifiableItem3CollectionStreamable<
 };
 
 export type InMemoryIdentifiableItem3StreamMetatype<
-  TGepp extends CollectionId,
+  TCollectionId extends CollectionId,
   TIdentifiableItem extends GenericIdentifiableItem,
 > = InMemoryIdentifiableItem2StreamMetatype<
-  TGepp,
+  TCollectionId,
   TIdentifiableItem,
   InMemoryIdentifiableItem3CollectionStreamable<TIdentifiableItem>
 >;
@@ -199,24 +193,24 @@ export type UnsafeInMemoryIdentifiableItem3StreamMetatype = StreamMetatype<
 >;
 
 export class InMemoryIdentifiableItem3Collection<
-  TVoque extends GenericInMemoryIdentifiableItem3StreamMetatype,
+  TStreamMetatype extends GenericInMemoryIdentifiableItem3StreamMetatype,
 > extends BaseInMemoryIdentifiableItem2Collection<
   GenericInMemoryIdentifiableItem3StreamMetatype,
-  TVoque
+  TStreamMetatype
 > {
   constructor({
     continueOnDuplicate = true,
     ...input
-  }: BaseInMemoryIdentifiableItem2CollectionInput<TVoque>) {
+  }: BaseInMemoryIdentifiableItem2CollectionInput<TStreamMetatype>) {
     super({
       continueOnDuplicate,
       ...input,
     });
   }
 
-  protected dereferenceCollection(): TVoque['collectionStreamable'] {
+  protected dereferenceCollection(): TStreamMetatype['collectionStreamable'] {
     return {
-      byId: this.hubblepupPelueByZorn,
+      byId: this.itemEggById,
       list: this.itemTuple,
     };
   }

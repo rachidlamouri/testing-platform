@@ -43,8 +43,8 @@ type PartialOutputStreamConfiguration<
 };
 
 /**
- * Builds the context needed to output the input hubblepup based on a condition.
- * Each conditional appreffinge is independent of the others.
+ * Builds the context needed to output the input item based on a condition.
+ * Each conditional stream configuration is independent of the others.
  *
  * @readableName OutputItemConditionalStreamConfigurationBuilder
  */

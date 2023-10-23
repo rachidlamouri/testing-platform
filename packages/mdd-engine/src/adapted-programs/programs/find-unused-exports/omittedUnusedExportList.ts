@@ -12,7 +12,7 @@ const omitterSource = new FileSourceInstance({
 });
 
 /**
- * Exemptions for unused exports. For example: "Strif" hasn't been integrated
+ * Exemptions for unused exports. For example: "FeatureId" hasn't been integrated
  * with the project yet, "FULL_FILE_SYSTEM_OBJECT_ENUMERATOR_CONFIGURATION" is a
  * convenience configuration for debugging, and "EDGE_WIDTH" appears as unused
  * because tsx files aren't linted correctly

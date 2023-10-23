@@ -9,27 +9,27 @@ debug/*
 !debug/test-serialize
 !debug/test-joining-one-to-one
 !debug/test-joining-one-to-many
-!debug/test-voictent-input
-!debug/test-joining-one-to-voictent
-!debug/test-joining-voictent-to-voictent
-!debug/test-releasing-a-left-voictent-multiple-times
-!debug/test-releasing-a-right-voictent-multiple-times
+!debug/test-collection-input
+!debug/test-joining-one-to-collection
+!debug/test-joining-collection-to-collection
+!debug/test-releasing-a-left-collection-multiple-times
+!debug/test-releasing-a-right-collection-multiple-times
 
 !debug/testGraphRender
 debug/testGraphRender/*
-!debug/testGraphRender/voictents/
-debug/testGraphRender/voictents/*
-!debug/testGraphRender/voictents/serialized/
-debug/testGraphRender/voictents/serialized/*
-!debug/testGraphRender/voictents/serialized/sanity-snapshot
+!debug/testGraphRender/collections/
+debug/testGraphRender/collections/*
+!debug/testGraphRender/collections/serialized/
+debug/testGraphRender/collections/serialized/*
+!debug/testGraphRender/collections/serialized/sanity-snapshot
 
 !debug/testGraphAssembly
 debug/testGraphAssembly/*
-!debug/testGraphAssembly/voictents/
-debug/testGraphAssembly/voictents/*
-!debug/testGraphAssembly/voictents/serialized/
-debug/testGraphAssembly/voictents/serialized/*
-!debug/testGraphAssembly/voictents/serialized/sanity-snapshot
+!debug/testGraphAssembly/collections/
+debug/testGraphAssembly/collections/*
+!debug/testGraphAssembly/collections/serialized/
+debug/testGraphAssembly/collections/serialized/*
+!debug/testGraphAssembly/collections/serialized/sanity-snapshot
 
 !debug/assembleScaffoldedFile
 debug/assembleScaffoldedFile/*
@@ -37,34 +37,34 @@ debug/assembleScaffoldedFile/*
 
 !debug/modelPrograms
 debug/modelPrograms/*
-!debug/modelPrograms/voictents/
-debug/modelPrograms/voictents/*
-!debug/modelPrograms/voictents/serialized/
-debug/modelPrograms/voictents/serialized/*
-!debug/modelPrograms/voictents/serialized/sanity-snapshot
+!debug/modelPrograms/collections/
+debug/modelPrograms/collections/*
+!debug/modelPrograms/collections/serialized/
+debug/modelPrograms/collections/serialized/*
+!debug/modelPrograms/collections/serialized/sanity-snapshot
 
 !debug/renderTypeScriptFileRelationships
 debug/renderTypeScriptFileRelationships/*
-!debug/renderTypeScriptFileRelationships/voictents/
-debug/renderTypeScriptFileRelationships/voictents/*
-!debug/renderTypeScriptFileRelationships/voictents/serialized/
-debug/renderTypeScriptFileRelationships/voictents/serialized/*
-!debug/renderTypeScriptFileRelationships/voictents/serialized/sanity-snapshot
+!debug/renderTypeScriptFileRelationships/collections/
+debug/renderTypeScriptFileRelationships/collections/*
+!debug/renderTypeScriptFileRelationships/collections/serialized/
+debug/renderTypeScriptFileRelationships/collections/serialized/*
+!debug/renderTypeScriptFileRelationships/collections/serialized/sanity-snapshot
 
 !debug/test-error-serialization
 debug/test-error-serialization/*
-!debug/test-error-serialization/voictents/
-debug/test-error-serialization/voictents/*
-!debug/test-error-serialization/voictents/error/
+!debug/test-error-serialization/collections/
+debug/test-error-serialization/collections/*
+!debug/test-error-serialization/collections/error/
 
-!debug/test-estinant-error
-debug/test-estinant-error/*
-!debug/test-estinant-error/voictents/
-debug/test-estinant-error/voictents/*
-!debug/test-estinant-error/voictents/engine-error/
+!debug/test-programmed-transform-error
+debug/test-programmed-transform-error/*
+!debug/test-programmed-transform-error/collections/
+debug/test-programmed-transform-error/collections/*
+!debug/test-programmed-transform-error/collections/engine-error/
 
-!debug/test-untriggered-cology-error
-debug/test-untriggered-cology-error/*
-!debug/test-untriggered-cology-error/voictents/
-debug/test-untriggered-cology-error/voictents/*
-!debug/test-untriggered-cology-error/voictents/engine-error/
+!debug/test-untriggeredtransform-input-key-group-error
+debug/test-untriggeredtransform-input-key-group-error/*
+!debug/test-untriggeredtransform-input-key-group-error/collections/
+debug/test-untriggeredtransform-input-key-group-error/collections/*
+!debug/test-untriggeredtransform-input-key-group-error/collections/engine-error/

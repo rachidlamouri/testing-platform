@@ -47,27 +47,6 @@ export const getRenameConfiguration = buildProgrammedTransform({
     collectionId: LINT_ASSERTION_COLLECTION_ID,
   })
   .onTransform((identifierLocator) => {
-    // TODO: identifiers are heavily integrated everywhere in the project. There are only a few instances left in the file to update. Do so when all other objects are renamed.
-    if (
-      identifierLocator.filePath.serialized ===
-        'packages/mdd-engine/src/package-agnostic-utilities/data-structure/id.ts' ||
-      identifierLocator.filePath.serialized ===
-        'packages/mdd-engine/src/adapter/identifiable-item/identifiableItem.ts' ||
-      identifierLocator.filePath.serialized ===
-        'packages/mdd-engine/src/layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2.ts' ||
-      identifierLocator.filePath.serialized ===
-        'packages/mdd-engine/src/adapted-programs/programmable-units/engine-program-model/filterEngineProgramFile.ts' ||
-      identifierLocator.filePath.serialized ===
-        'packages/mdd-engine/src/adapted-programs/programmable-units/engine-program-model/getEngineProgramLocator3.ts' ||
-      identifierLocator.filePath.serialized ===
-        'packages/mdd-engine/src/core/engine/validateEngineInput.ts'
-    ) {
-      return {
-        [RENAME_CONFIGURATION_COLLECTION_ID]: [],
-        [LINT_ASSERTION_COLLECTION_ID]: [],
-      };
-    }
-
     const originalName = identifierLocator.node.name;
     const oneBasedLineNumber = identifierLocator.node.loc.start.line;
     const oneBasedLineOffset = identifierLocator.node.loc.start.column + 1;

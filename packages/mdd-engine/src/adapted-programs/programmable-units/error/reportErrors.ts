@@ -8,7 +8,7 @@ import {
 import { LocatableError } from './locatableError';
 import { Source } from '../linting/source/source';
 
-// TODO: allow an estinant instance to have its own state so that this state is not shared
+// TODO: allow a programmed transform instance to have its own state so that this state is not shared
 let errorCount = 0;
 const errorLimit = 5;
 let isLimitReached = false;

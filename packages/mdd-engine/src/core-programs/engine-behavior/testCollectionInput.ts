@@ -10,18 +10,18 @@ import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
 type Collection1StreamMetatype = StandardInMemoryStreamMetatype<
-  'voictent-1',
+  'collection-1',
   string
 >;
 type Collection2StreamMetatype = StandardInMemoryStreamMetatype<
-  'voictent-2',
+  'collection-2',
   string[]
 >;
 type SerializedStreamMetatype =
   AbstractSerializableStreamMetatype<'serialized'>;
 
 const programFileCache = new ProgramFileCache({
-  namespace: 'test-voictent-input',
+  namespace: 'test-collection-input',
 });
 
 /**
@@ -35,12 +35,12 @@ const gatherCollection: ProgrammedTransform2<
   version: 2,
   name: 'gatherCollection',
   leftInputStreamConfiguration: {
-    collectionId: 'voictent-1',
+    collectionId: 'collection-1',
     isCollectionStream: true,
   },
   rightInputStreamConfigurationTuple: [],
   outputStreamConfiguration: {
-    collectionIdTuple: ['voictent-2'],
+    collectionIdTuple: ['collection-2'],
   },
   transform: (
     input,
@@ -48,7 +48,7 @@ const gatherCollection: ProgrammedTransform2<
     [Collection2StreamMetatype]
   >['coreTransformOutput'] => {
     return {
-      'voictent-2': [input],
+      'collection-2': [input],
     };
   },
 };
@@ -63,11 +63,11 @@ const gatherCollection: ProgrammedTransform2<
 runEngine2({
   inputCollectionList: [
     new InMemoryCollection<Collection1StreamMetatype>({
-      collectionId: 'voictent-1',
+      collectionId: 'collection-1',
       initialItemEggTuple: ['a', 'b', 'c', 'd'],
     }),
     new InMemoryCollection<Collection2StreamMetatype>({
-      collectionId: 'voictent-2',
+      collectionId: 'collection-2',
       initialItemEggTuple: [],
     }),
     new SerializableCollection<SerializedStreamMetatype>({
@@ -83,7 +83,7 @@ runEngine2({
       Collection2StreamMetatype,
       SerializedStreamMetatype
     >({
-      inputCollectionId: 'voictent-2',
+      inputCollectionId: 'collection-2',
       outputCollectionId: 'serialized',
     }),
   ],

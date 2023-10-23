@@ -11,18 +11,18 @@ import { buildAddMetadataForSerialization } from '../../layer-agnostic-utilities
 import { SerializableCollection } from '../../layer-agnostic-utilities/collection/serializableCollection';
 
 type Collection1StreamMetatype = StandardInMemoryStreamMetatype<
-  'voictent-1',
+  'collection-1',
   {
     value: number;
     joinIndexList: number[];
   }
 >;
 type Collection2StreamMetatype = StandardInMemoryStreamMetatype<
-  'voictent-2',
+  'collection-2',
   string
 >;
 type Collection3StreamMetatype = StandardInMemoryStreamMetatype<
-  'voictent-3',
+  'collection-3',
   string
 >;
 type SerializedStreamMetatype =
@@ -49,19 +49,19 @@ const joinCollections: ProgrammedTransform2<
   version: 2,
   name: 'joinCollections',
   leftInputStreamConfiguration: {
-    collectionId: 'voictent-1',
+    collectionId: 'collection-1',
     isCollectionStream: false,
   },
   rightInputStreamConfigurationTuple: [
     {
-      collectionId: 'voictent-2',
+      collectionId: 'collection-2',
       isCollectionStream: false,
       getRightKeyTuple: (leftInput) => leftInput.item.joinIndexList,
       getRightKey: (rightInput) => rightInput.indexByName.listIndex,
     },
   ],
   outputStreamConfiguration: {
-    collectionIdTuple: ['voictent-3'],
+    collectionIdTuple: ['collection-3'],
   },
   transform: (leftInput, rightInputTuple) => {
     const rightInputValueList = rightInputTuple.map((input) => input.item);
@@ -70,7 +70,7 @@ const joinCollections: ProgrammedTransform2<
     const output = `${leftInput.item.value}-${serializedRightInput}`;
 
     return {
-      'voictent-3': [output],
+      'collection-3': [output],
     };
   },
 };
@@ -84,7 +84,7 @@ const joinCollections: ProgrammedTransform2<
 runEngine2({
   inputCollectionList: [
     new InMemoryCollection<Collection1StreamMetatype>({
-      collectionId: 'voictent-1',
+      collectionId: 'collection-1',
       initialItemEggTuple: [
         {
           value: 1,
@@ -97,11 +97,11 @@ runEngine2({
       ],
     }),
     new InMemoryCollection<Collection2StreamMetatype>({
-      collectionId: 'voictent-2',
+      collectionId: 'collection-2',
       initialItemEggTuple: ['a', 'b', 'c', 'd'],
     }),
     new InMemoryCollection<Collection3StreamMetatype>({
-      collectionId: 'voictent-3',
+      collectionId: 'collection-3',
       initialItemEggTuple: [],
     }),
     new SerializableCollection<SerializedStreamMetatype>({
@@ -117,7 +117,7 @@ runEngine2({
       Collection3StreamMetatype,
       SerializedStreamMetatype
     >({
-      inputCollectionId: 'voictent-3',
+      inputCollectionId: 'collection-3',
       outputCollectionId: 'serialized',
     }),
   ],

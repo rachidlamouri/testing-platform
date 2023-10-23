@@ -17,8 +17,8 @@ type EngineStreamMetatypeLocator2Prototype = {
 };
 
 /**
- * The information needed to find a Voque definition, and subsequently a
- * hubblepup definition
+ * The information needed to find a stream metatype definition, and subsequently a
+ * item definition
  *
  * @readableName StreamMetatypeLocator
  *
@@ -46,7 +46,7 @@ const getStreamMetatypeDisplayName = (
 };
 
 export const { EngineStreamMetatypeLocator2Instance } =
-  buildConstructorFunctionWithName('EngineVoqueLocator2Instance')<
+  buildConstructorFunctionWithName('EngineStreamMetatypeLocator2Instance')<
     BaseEngineStreamMetatypeLocator2,
     EngineStreamMetatypeLocator2Prototype
   >({

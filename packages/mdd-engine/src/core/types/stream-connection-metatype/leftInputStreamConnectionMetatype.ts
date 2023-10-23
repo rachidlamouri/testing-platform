@@ -10,7 +10,7 @@ type BaseLeftInputStreamConnectionMetatype<
   isCollectionStream: TIsCollectionStream;
 };
 
-// TODO: rename this to "LeftInputIndexedHubblepupVicken"
+// TODO: rename this to "LeftInputIndexedItemStreamConnectionMetatype"
 export type LeftInputItemStreamConnectionMetatype<
   TStreamMetatype extends GenericStreamMetatype,
 > = BaseLeftInputStreamConnectionMetatype<

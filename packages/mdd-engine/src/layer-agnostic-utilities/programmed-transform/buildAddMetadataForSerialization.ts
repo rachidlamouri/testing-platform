@@ -17,7 +17,7 @@ type SerializerBuilderInput<
 };
 
 /**
- * Constructs an estinant that takes a serializeable input, normalizes it, and
+ * Constructs a programmed transform that takes a serializeable input, normalizes it, and
  * sends it to a compatible output stream
  */
 export const buildAddMetadataForSerialization = <

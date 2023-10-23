@@ -4,9 +4,9 @@
  *
  * @noCanonicalDeclaration
  *
- * @readableName AdaptedStreamConnectionMetatype
+ * @readableName StreamConnectionMetatype
  *
- * @todo split this file into left, right tuple, and output vicken files
+ * @todo split this file into left, right tuple, and output stream connection metatype files
  */
 
 import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';

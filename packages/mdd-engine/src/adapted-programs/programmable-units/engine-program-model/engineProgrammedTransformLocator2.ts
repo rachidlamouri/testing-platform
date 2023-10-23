@@ -78,7 +78,7 @@ export type EngineProgrammedTransformLocator2 =
 
 export const { EngineProgrammedTransformTopLevelDeclarationLocatorInstance } =
   buildConstructorFunctionWithName(
-    'EngineEstinantTopLevelDeclarationLocatorInstance',
+    'EngineProgrammedTransformTopLevelDeclarationLocatorInstance',
   )<
     BaseEngineProgrammedTransformTopLevelDeclarationLocator,
     EngineProgrammedTransformLocatorPrototype
@@ -92,7 +92,7 @@ export const { EngineProgrammedTransformTopLevelDeclarationLocatorInstance } =
 export const {
   EngineProgrammedTransformBuildAddMetadataForSerializationLocatorInstance,
 } = buildConstructorFunctionWithName(
-  'EngineEstinantBuildAddMetadataForSerializationLocatorInstance',
+  'EngineProgrammedTransformBuildAddMetadataForSerializationLocatorInstance',
 )<
   BaseEngineProgrammedTransformBuildAddMetadataForSerializationLocator,
   EngineProgrammedTransformLocatorPrototype

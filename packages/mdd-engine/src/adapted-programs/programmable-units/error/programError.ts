@@ -3,7 +3,7 @@ import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/ob
 
 export enum ProgramErrorElementLocatorTypeName {
   SourceFileLocator = 'SourceFileLocator',
-  ReportingProgrammedTransformLocator = 'ReportingEstinantLocator',
+  ReportingProgrammedTransformLocator = 'ReportingProgrammedTransformLocator',
 }
 
 type FileErrorLocator = {

@@ -12,7 +12,7 @@ class BoundedFileCombination extends Map<string, BoundedFile> {}
 /**
  * Creates mappings between files and the files they import, and between files
  * and the files that import them. These mappings are available via the
- * collection pelie
+ * collection streamable
  *
  * @readableName FileDependencyCollection
  */

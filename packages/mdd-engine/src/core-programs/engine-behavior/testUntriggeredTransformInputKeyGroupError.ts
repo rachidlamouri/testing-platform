@@ -12,7 +12,7 @@ import {
 } from '../../layer-agnostic-utilities/collection/serializableErrorCollection';
 
 const programFileCache = new ProgramFileCache({
-  namespace: 'test-untriggered-cology-error',
+  namespace: 'test-untriggeredtransform-input-key-group-error',
 });
 
 type Input1StreamMetatype = StandardInMemoryStreamMetatype<'input-1', number>;

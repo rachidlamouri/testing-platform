@@ -1,11 +1,11 @@
 /**
- * An appreffinge without isWibiz
+ * An stream configuration without "isCollectionStream"
  *
  * @noCanonicalDeclaration
  *
  * @readableName PartialStreamConfiguration
  *
- * @todo split this file into left and right appreffinges
+ * @todo split this file into left and right stream configuration
  */
 
 import { GenericStreamMetatype } from '../../../core/types/stream-metatype/streamMetatype';
