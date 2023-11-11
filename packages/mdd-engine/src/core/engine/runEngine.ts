@@ -20,12 +20,7 @@ import {
   UnsafeProgrammedTransform2Tuple,
 } from '../types/programmed-transform/programmedTransform';
 import { CollectionId } from '../types/collection/collectionId';
-import {
-  GenericIndexedItem,
-  GenericIndexedItemTuple,
-  Item,
-  ItemTuple,
-} from '../types/item/item';
+import { GenericIndexedItemTuple, Item } from '../types/item/item';
 import {
   GenericCollectionItemStream2,
   Stream,
@@ -58,6 +53,7 @@ import {
   RuntimeStatisticsHandler,
 } from './tickSeriesManager';
 import { validateEngineEndState } from './validateEngineEndState';
+import { assertNotNull } from '../../package-agnostic-utilities/nil/assertNotNull';
 
 type CollectableItem = {
   collectionId: CollectionId;
@@ -172,9 +168,7 @@ export const runEngine = ({
       ? collection.createCollectionStream(programmedTransform.name)
       : collection.createCollectionItemStream(programmedTransform.name);
 
-    if (stream === null) {
-      throw Error('Unexpected null stream');
-    }
+    assertNotNull(stream);
 
     return stream;
   };
@@ -288,26 +282,7 @@ export const runEngine = ({
           mutableStreamConnectionState.typeName ===
           MutableStreamConnectionStateTypeName.LeftMutableStreamConnectionState
         ) {
-          // TODO: we no longer need to destructure these fields since there are now only 2 stream references. This will simplify this logic, but comes with additional challenges
-          const {
-            typeName: leftInputTypeName,
-            value: leftInputReferenceValue,
-          } = mutableStreamConnectionState.stream.dereference();
-
-          const indexedItem: GenericIndexedItem =
-            leftInputTypeName === ReferenceTypeName.IndexedItem
-              ? leftInputReferenceValue
-              : {
-                  item: leftInputReferenceValue,
-                  indexByName: {
-                    serializeableId: '',
-                  },
-                };
-
-          const leftInput: Item | ItemTuple =
-            leftInputTypeName === ReferenceTypeName.IndexedItem
-              ? leftInputReferenceValue.item
-              : leftInputReferenceValue;
+          const leftInput = mutableStreamConnectionState.stream.dereference();
 
           if (
             mutableStreamConnectionState.stream.typeName ===
@@ -320,41 +295,18 @@ export const runEngine = ({
           const rightInputKeyTupleCacheEntryList =
             mutableTransformState.rightMutableStreamConnectionStateTuple.map<RightInputKeyTupleCacheEntry>(
               (rightMutableStreamConnectionState) => {
-                let idTuple: IdTuple;
-                if (
-                  rightMutableStreamConnectionState.typeName ===
-                  MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState
-                ) {
-                  idTuple = [rightMutableStreamConnectionState.stream];
-                } else if (
-                  rightMutableStreamConnectionState.typeName ===
-                    MutableStreamConnectionStateTypeName.RightCollectionItem2MutableStreamConnectionState &&
-                  leftInputTypeName === ReferenceTypeName.IndexedItem
-                ) {
-                  idTuple = rightMutableStreamConnectionState.getRightKeyTuple(
-                    leftInputReferenceValue,
-                  );
-                } else if (
-                  rightMutableStreamConnectionState.typeName ===
-                    MutableStreamConnectionStateTypeName.RightCollectionItem2MutableStreamConnectionState &&
-                  leftInputTypeName === ReferenceTypeName.Collection
-                ) {
-                  // TODO: this cast is incorrect, and is masking some underlying issue. The input type should probably be "never"
-                  idTuple = rightMutableStreamConnectionState.getRightKeyTuple(
-                    leftInput as GenericIndexedItem,
-                  );
-                } else {
-                  // TODO: remove this else once all collection item streams return indexed items
-
-                  // eslint-disable-next-line no-console
-                  console.log('DEBUG INFO A:', {
-                    leftInputTypeName,
-                    rightMutableStreamConnectionState,
-                    mutableTransformState,
-                  });
-
-                  throw Error('Invalid stream setup. See above info.');
-                }
+                const idTuple = ((): IdTuple => {
+                  switch (rightMutableStreamConnectionState.typeName) {
+                    case MutableStreamConnectionStateTypeName.RightCollectionMutableStreamConnectionState: {
+                      return [rightMutableStreamConnectionState.stream];
+                    }
+                    case MutableStreamConnectionStateTypeName.RightCollectionItem2MutableStreamConnectionState: {
+                      return rightMutableStreamConnectionState.getRightKeyTuple(
+                        leftInput.value,
+                      );
+                    }
+                  }
+                })();
 
                 return [rightMutableStreamConnectionState, idTuple];
               },
@@ -362,11 +314,7 @@ export const runEngine = ({
 
           const transformInputKeyGroup: TransformInputKeyGroup = {
             leftMutableStreamConnectionState: mutableStreamConnectionState,
-            leftInput:
-              mutableTransformState.programmedTransform.version === 2 &&
-              leftInputTypeName === ReferenceTypeName.Collection
-                ? indexedItem.item
-                : indexedItem,
+            leftInput: leftInput.value,
             rightInputKeyTupleCache: new RightInputKeyTupleCache(
               rightInputKeyTupleCacheEntryList,
             ),

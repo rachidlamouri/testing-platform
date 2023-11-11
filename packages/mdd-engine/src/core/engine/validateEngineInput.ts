@@ -40,12 +40,6 @@ const validateProgrammedTransformCollectionIds = (
   );
 
   const invalidInputOutputList = programmedTransformTuple
-    .filter(
-      (
-        programmedTransform,
-      ): programmedTransform is GenericProgrammedTransform2 =>
-        programmedTransform.version === 2,
-    )
     .flatMap((programmedTransform) => {
       return [
         {
@@ -91,19 +85,11 @@ const checkForDuplicateProgrammedTransformNames = (
   programmedTransformTuple: Tuple<GenericProgrammedTransform2>,
 ): string[] => {
   const programmedTransformCountByName: Record<string, number> = {};
-  programmedTransformTuple
-    .filter(
-      (
-        programmedTransform,
-      ): programmedTransform is GenericProgrammedTransform2 =>
-        programmedTransform.version === 2,
-    )
-    .forEach((programmedTransform) => {
-      const currentCount =
-        programmedTransformCountByName[programmedTransform.name] ?? 0;
-      programmedTransformCountByName[programmedTransform.name] =
-        currentCount + 1;
-    });
+  programmedTransformTuple.forEach((programmedTransform) => {
+    const currentCount =
+      programmedTransformCountByName[programmedTransform.name] ?? 0;
+    programmedTransformCountByName[programmedTransform.name] = currentCount + 1;
+  });
 
   const duplicateProgrammedTransformNameList = Object.entries(
     programmedTransformCountByName,

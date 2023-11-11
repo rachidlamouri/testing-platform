@@ -3,10 +3,7 @@ import {
   RightKeyAccessor,
   GenericRightKeyAccessor3,
 } from '../../types/stream-configuration/input/right/rightKeyAccessor';
-import {
-  RightKeyTupleAccessor,
-  GenericRightKeyTupleAccessor3,
-} from '../../types/stream-configuration/input/right/rightKeyTupleAccessor';
+import { GenericRightKeyTupleAccessor3 } from '../../types/stream-configuration/input/right/rightKeyTupleAccessor';
 import { CollectionId } from '../../types/collection/collectionId';
 import {
   GenericCollectionItemStream2,
@@ -45,7 +42,7 @@ export type RightCollectionItem2MutableStreamConnectionState = {
   collectionId: CollectionId;
   stream: GenericCollectionItemStream2;
   itemCache: ItemCache;
-  getRightKeyTuple: RightKeyTupleAccessor | GenericRightKeyTupleAccessor3;
+  getRightKeyTuple: GenericRightKeyTupleAccessor3;
   getRightKey: RightKeyAccessor | GenericRightKeyAccessor3;
 };
 
