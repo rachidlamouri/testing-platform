@@ -34,7 +34,6 @@ const getTypedTestCaseInputTypeName: ProgrammedTransform2<
   [],
   OutputStreamConnectionMetatype<[SerializableTypeNameStreamMetatype]>
 > = {
-  version: 2,
   name: 'getTypedTestCaseInputTypeName',
   leftInputStreamConfiguration: {
     collectionId: DATUM_TEST_CASE_INPUT_COLLECTION_ID,

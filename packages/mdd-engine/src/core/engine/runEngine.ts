@@ -230,7 +230,6 @@ export const runEngine = ({
           );
 
         const mutableTransformState: MutableTransformState2 = {
-          version: 2,
           programmedTransform,
           leftMutableStreamConnectionState,
           rightMutableStreamConnectionStateTuple,

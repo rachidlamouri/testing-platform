@@ -44,7 +44,6 @@ const forwardFrom1To2AndSkipAValue: ProgrammedTransform2<
   [],
   OutputStreamConnectionMetatype<[Collection2StreamMetatype]>
 > = {
-  version: 2,
   name: 'forwardFrom1To2AndSkipAValue',
   leftInputStreamConfiguration: {
     collectionId: 'collection-1',
@@ -80,7 +79,6 @@ const forwardFrom2To3: ProgrammedTransform2<
   [],
   OutputStreamConnectionMetatype<[Collection3StreamMetatype]>
 > = {
-  version: 2,
   name: 'forwardFrom2To3',
   leftInputStreamConfiguration: {
     collectionId: 'collection-2',

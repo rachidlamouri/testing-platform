@@ -105,7 +105,6 @@ export const buildProgrammedTransformAssembler = <
     };
 
     const programmedTransform = {
-      version: 2,
       name: instantiationContext.name,
       leftInputStreamConfiguration: {
         collectionId: leftInputContext.collectionId,

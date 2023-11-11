@@ -36,7 +36,6 @@ const writeDatumToCache: ProgrammedTransform2<
   [],
   OutputStreamConnectionMetatype<[CachedStreamMetatype]>
 > = {
-  version: 2,
   name: 'writeDatumToCache',
   leftInputStreamConfiguration: {
     collectionId: 'input',

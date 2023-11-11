@@ -46,7 +46,6 @@ const joinCollections: ProgrammedTransform2<
   ],
   OutputStreamConnectionMetatype<[Collection3StreamMetatype]>
 > = {
-  version: 2,
   name: 'joinCollections',
   leftInputStreamConfiguration: {
     collectionId: 'collection-1',

@@ -90,7 +90,6 @@ export const buildLeftInputItemStreamConfigurationBuilder2 = (
       const nextContext = buildInputOutputContextFromLeftInputContext({
         instantiationContext,
         leftInputContext: {
-          version: 2,
           collectionId: partialLeftInputStreamConfiguration.collectionId,
           isCollectionStream: false,
           modifyCoreTransformInput: (indexedItem: GenericIndexedItem) => {
