@@ -27,7 +27,6 @@ const throwError: ProgrammedTransform2<
   [],
   OutputStreamConnectionMetatype<[]>
 > = {
-  version: 2,
   name: 'throwError',
   leftInputStreamConfiguration: {
     isCollectionStream: false,

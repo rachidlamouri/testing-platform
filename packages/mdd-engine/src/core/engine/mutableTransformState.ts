@@ -15,7 +15,6 @@ import { GenericCollection2 } from '../types/collection/collection2';
  * @readableName MutableTransformState
  */
 export type MutableTransformState2 = {
-  version: 2;
   programmedTransform: GenericProgrammedTransform2;
   leftMutableStreamConnectionState: LeftMutableStreamConnectionState;
   rightMutableStreamConnectionStateTuple: RightMutableStreamConnectionStateTuple;

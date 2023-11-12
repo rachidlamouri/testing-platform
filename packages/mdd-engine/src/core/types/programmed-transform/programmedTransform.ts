@@ -23,7 +23,6 @@ export type ProgrammedTransform2<
   TRightInputStreamConnectionMetatypeTuple extends GenericRightInputStreamConnectionMetatypeTuple,
   TOutputStreamConnectionMetatype extends UnsafeOutputStreamConnectionMetatype,
 > = {
-  version: 2;
   name: string;
   leftInputStreamConfiguration: LeftInputStreamConfiguration<TLeftInputStreamConnectionMetatype>;
   rightInputStreamConfigurationTuple: InputStreamConnectionMetatypeTupleToRightInputStreamConfigurationTuple<
@@ -50,7 +49,6 @@ export type GenericProgrammedTransform2Tuple =
 // TODO: figure out which one of these don't need to be "any"
 // TODO: Tie this type back to "ProgrammedTransform2" somehow
 export type UnsafeProgrammedTransform2 = {
-  version: 2;
   name: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   leftInputStreamConfiguration: any;

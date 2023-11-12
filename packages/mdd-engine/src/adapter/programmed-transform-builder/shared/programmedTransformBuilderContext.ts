@@ -18,21 +18,18 @@ type AnyLeftInputAccessor = (leftInput: any) => any;
 type AnyRightInputAccessor = (leftInput: any) => any;
 
 type LeftInputContext = {
-  version?: 2;
   collectionId: CollectionId;
   isCollectionStream: boolean;
   modifyCoreTransformInput: AnyLeftInputAccessor;
 };
 
 type RightInputCollectionContext = {
-  version?: 2;
   collectionId: CollectionId;
   isCollectionStream: true;
   modifyCoreTransformInput: AnyRightInputAccessor;
 };
 
 type RightInputItemContext = {
-  version?: 2;
   collectionId: CollectionId;
   isCollectionStream: false;
   getRightKeyTuple: AnyLeftInputAccessor;

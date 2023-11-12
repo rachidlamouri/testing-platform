@@ -18,8 +18,6 @@ type Item2<TItem> = TItem;
 
 export type GenericItem = Item2<unknown>;
 
-export type ItemTuple = readonly Item[];
-
 export type ItemIndexByName = TypeScriptObject;
 
 export type IndexedItem<

@@ -7,7 +7,6 @@ import { ReferenceTypeName } from './referenceTypeName';
 
 export enum StreamTypeName {
   CollectionStream = 'CollectionStream',
-  ItemStream = 'ItemStream',
   ItemStream2 = 'ItemStream2',
 }
 

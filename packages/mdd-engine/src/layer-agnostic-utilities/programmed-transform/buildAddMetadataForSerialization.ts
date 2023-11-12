@@ -39,7 +39,6 @@ export const buildAddMetadataForSerialization = <
     [],
     OutputStreamConnectionMetatype<[GenericAbstractSerializableStreamMetatype]>
   > = {
-    version: 2,
     name: `serialize/${inputCollectionId}`,
     leftInputStreamConfiguration: {
       collectionId: inputCollectionId,

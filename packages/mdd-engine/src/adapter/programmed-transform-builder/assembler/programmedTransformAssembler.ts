@@ -4,7 +4,6 @@ import {
   GenericProgrammedTransform2,
 } from '../../../core/types/programmed-transform/programmedTransform';
 import { GenericCoreTransform2 } from '../../../core/types/programmed-transform/coreTransform';
-import { GenericIndexedItem } from '../../../core/types/item/item';
 import { GenericLeftInputStreamConnectionMetatype } from '../../../core/types/stream-connection-metatype/leftInputStreamConnectionMetatype';
 import {
   GenericRightInputItemTupleStreamConnectionMetatype,
@@ -66,32 +65,13 @@ export const buildProgrammedTransformAssembler = <
       leftInput,
       ...rightInputTuple
     ) => {
-      let adaptedLeftInput: unknown;
-      if (
-        leftInputContext.isCollectionStream ||
-        leftInputContext.version === 2
-      ) {
-        adaptedLeftInput = leftInput;
-      } else {
-        adaptedLeftInput = (leftInput as GenericIndexedItem).item;
-      }
-
       /* eslint-disable @typescript-eslint/no-unsafe-assignment */
       const modifiedLeftInput =
-        leftInputContext.modifyCoreTransformInput(adaptedLeftInput);
+        leftInputContext.modifyCoreTransformInput(leftInput);
 
       const modifiedRightInputTuple = rightInputContextTuple.map(
         (rightInputContext, index) => {
-          let adaptedRightInput: unknown;
-          if (
-            rightInputContext.isCollectionStream ||
-            rightInputContext.version === 2
-          ) {
-            adaptedRightInput = rightInputTuple[index];
-          } else {
-            adaptedRightInput = (rightInputTuple[index] as GenericIndexedItem)
-              .item;
-          }
+          const adaptedRightInput = rightInputTuple[index];
 
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           return rightInputContext.modifyCoreTransformInput(adaptedRightInput);
@@ -110,7 +90,7 @@ export const buildProgrammedTransformAssembler = <
         outputContext.constituentResultNormalizerList.map<CoreConstituentOutputEntry>(
           (normalizeResult) => {
             const outputEntry = normalizeResult(
-              adaptedLeftInput,
+              leftInput,
               modifiedLeftInput,
               aggregatedOutput,
             );
@@ -125,7 +105,6 @@ export const buildProgrammedTransformAssembler = <
     };
 
     const programmedTransform = {
-      version: 2,
       name: instantiationContext.name,
       leftInputStreamConfiguration: {
         collectionId: leftInputContext.collectionId,
@@ -149,32 +128,10 @@ export const buildProgrammedTransformAssembler = <
             collectionId: rightInputContext.collectionId,
             isCollectionStream: rightInputContext.isCollectionStream,
             getRightKeyTuple: (leftInput): IdTuple => {
-              let adaptedLeftInput: unknown;
-              if (
-                leftInputContext.isCollectionStream ||
-                leftInputContext.version === 2
-              ) {
-                adaptedLeftInput = leftInput;
-              } else {
-                adaptedLeftInput = (leftInput as GenericIndexedItem).item;
-              }
-
-              return rightInputContext.getRightKeyTuple(
-                adaptedLeftInput,
-              ) as IdTuple;
+              return rightInputContext.getRightKeyTuple(leftInput) as IdTuple;
             },
-            getRightKey: (indexedRightInput): DeprecatedId => {
-              let adaptedRightInput: unknown;
-              if (
-                rightInputContext.isCollectionStream ||
-                rightInputContext.version === 2
-              ) {
-                adaptedRightInput = indexedRightInput;
-              } else {
-                adaptedRightInput = indexedRightInput.item;
-              }
-
-              return rightInputContext.getRightKey(adaptedRightInput);
+            getRightKey: (rightInput): DeprecatedId => {
+              return rightInputContext.getRightKey(rightInput);
             },
           } satisfies RightInputStreamConfiguration<
             GenericLeftInputStreamConnectionMetatype,

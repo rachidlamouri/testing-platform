@@ -32,7 +32,6 @@ const gatherCollection: ProgrammedTransform2<
   [],
   OutputStreamConnectionMetatype<[Collection2StreamMetatype]>
 > = {
-  version: 2,
   name: 'gatherCollection',
   leftInputStreamConfiguration: {
     collectionId: 'collection-1',

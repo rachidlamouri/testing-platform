@@ -139,7 +139,6 @@ export const buildRightInputItemTupleStreamConfigurationBuilder2 = <
     const nextContext = buildInputOutputContextFromRightInputContext({
       previousContext: inputOutputContext,
       rightInputContext: {
-        version: 2,
         collectionId: partialRightStreamConfiguration.collectionId,
         isCollectionStream: false,
         getRightKeyTuple: (

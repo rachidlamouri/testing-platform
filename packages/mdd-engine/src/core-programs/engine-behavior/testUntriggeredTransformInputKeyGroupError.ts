@@ -34,7 +34,6 @@ const joinCollectionsByValue: ProgrammedTransform2<
   [RightInputItemTupleStreamConnectionMetatype<Input2StreamMetatype, [number]>],
   OutputStreamConnectionMetatype<[OutputStreamMetatype]>
 > = {
-  version: 2,
   name: 'joinCollections',
   leftInputStreamConfiguration: {
     collectionId: 'input-1',
