@@ -1,13 +1,26 @@
 import React, { useEffect } from 'react';
 import { Layout } from '../../render-knowledge-graph/app/browser/layout';
+import { useGeneratedData } from './contexts/generatedDataContext';
+import { ActiveContent } from './activeContent';
+import { useSelection } from './contexts/selectionContext';
+import { NavigationButton } from './navigationButton';
 
 /**
  * The Program Modeler React application
  */
 export const App: React.FC = () => {
+  const { programList } = useGeneratedData();
+  const { onSelectProgram } = useSelection();
+
   useEffect(() => {
     document.body.style.fontFamily = 'Helvetica';
   });
+
+  useEffect(() => {
+    if (programList.length > 0) {
+      onSelectProgram(programList[0].programName);
+    }
+  }, [programList]);
 
   return (
     <Layout
@@ -21,8 +34,10 @@ export const App: React.FC = () => {
           Program Models
         </h1>
       }
-      leftPanelContent={'Left Panel'}
-      mainContent={<>Main Content</>}
+      leftPanelContent={programList.map((programMetadata) => {
+        return <NavigationButton programMetadata={programMetadata} />;
+      })}
+      mainContent={<ActiveContent />}
     />
   );
 };
