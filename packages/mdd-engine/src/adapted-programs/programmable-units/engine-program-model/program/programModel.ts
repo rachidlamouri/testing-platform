@@ -54,7 +54,6 @@ export class ProgramModel implements ProgramModelInput {
       locator: graphLocator,
       inputAttributeByKey: {
         labelloc: GraphLikeLabelLocation.Top,
-        label: programName,
       },
       outputFileName: programName,
     });

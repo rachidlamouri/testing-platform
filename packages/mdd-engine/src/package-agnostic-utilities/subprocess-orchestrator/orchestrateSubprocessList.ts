@@ -87,6 +87,12 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       script: serveKnowledgeGraph,
       isInitiallyVisible: false,
     },
+    {
+      label: 'server-program-models',
+      script:
+        'npx http-server -p 8081 debug/modelPrograms/collections/output-file',
+      isInitiallyVisible: false,
+    },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
 ).map((partialConfiguration) => {
   const color = mutableColorList.pop();

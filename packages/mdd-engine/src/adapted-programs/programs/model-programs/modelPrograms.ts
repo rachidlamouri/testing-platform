@@ -107,6 +107,8 @@ import { buildProgramModel } from '../../programmable-units/engine-program-model
 import { parseProgrammedTransform } from '../../programmable-units/engine-program-model/programmed-transform-parser/parseProgrammedTransform';
 import { captureOutputFileDigestList } from '../../programmable-units/sanity-snapshot/captureOutputFileDigestList';
 import { SANITY_SNAPSHOT_COLLECTION_ID } from '../../programmable-units/sanity-snapshot/sanitySnapshot';
+import { constructDynamicIndexFile } from './constructDynamicIndexFile';
+import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'modelPrograms',
@@ -261,6 +263,8 @@ runEngine({
 
     captureOutputFileDigestList,
 
+    decodeAndRecastSvgDocument,
+    constructDynamicIndexFile,
     renderApp,
 
     // TODO: add the audit back in when we don't need the NULL_OMISSION
