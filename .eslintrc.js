@@ -57,6 +57,10 @@ module.exports = {
             ),
           posix.join(
             __dirname,
+            'packages/mdd-engine/src/adapted-programs/programs/render-rocket-league-knowledge-graph/app/browser/tsconfig.json',
+          ),
+          posix.join(
+            __dirname,
             'packages/mdd-engine/src/adapted-programs/programs/render-knowledge-graph/app/browser/tsconfig.json',
           ),
           posix.join(

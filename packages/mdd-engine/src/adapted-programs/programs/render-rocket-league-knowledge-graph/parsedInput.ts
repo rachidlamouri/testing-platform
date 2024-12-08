@@ -7,10 +7,14 @@ export type LinkConfig = {
 
 type Note = string | LinkConfig;
 
-type Skill = {
+export type Skill = {
+  id: string;
   title: string;
   notes: Note[];
+  prerequisites: string[];
   isRecommended: boolean;
+  isUnnecessary: boolean;
+  isDisabled?: boolean;
 };
 
 export type Section = {

@@ -11,9 +11,13 @@ import {
   ParsedInput,
   ParsedInputStreamMetatype,
   Section,
+  Skill,
 } from './parsedInput';
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { assertNotNull } from '../../../package-agnostic-utilities/nil/assertNotNull';
+import rawSkillMetadata from './skillMetadata.json';
+
+const skillMetadata = new Map(Object.entries(rawSkillMetadata));
 
 /**
  * Converts the input HTML into a more manageable object
@@ -92,6 +96,25 @@ export const parseInput = buildProgrammedTransform({
 
     parseChildNodes('', root);
 
+    const getSkill = (id: string, isRecommended: boolean): Skill => {
+      const metadata = skillMetadata.get(id);
+
+      if (!metadata) {
+        throw new Error(`Missing metadata for "${id}"`);
+      }
+
+      return {
+        id,
+        title: id,
+        notes: [],
+        prerequisites: metadata.prerequisites,
+        isRecommended,
+        isUnnecessary:
+          'isUnnecessary' in metadata ? metadata.isUnnecessary : false,
+        isDisabled: 'isDisabled' in metadata && metadata.isDisabled,
+      };
+    };
+
     flattenedNodes.forEach(({ node }) => {
       const text = $(node).text().trim();
 
@@ -112,11 +135,13 @@ export const parseInput = buildProgrammedTransform({
 
           const section = sections.at(-1);
           assertNotUndefined(section);
-          section.skills.push({
-            title: title.trim(),
-            notes: [],
-            isRecommended: recommended === '#',
-          });
+
+          const id = title.trim();
+          const skill = getSkill(id, recommended === '#');
+          if (!skill.isDisabled) {
+            section.skills.push();
+          }
+
           break;
         }
         case 'p': {
@@ -154,6 +179,29 @@ export const parseInput = buildProgrammedTransform({
         }
         default:
           throw new Error(`Unknown tagName: ${node.tagName}`);
+      }
+    });
+
+    const sectionByTitle = new Map(
+      sections.map((section) => {
+        return [section.title, section];
+      }),
+    );
+
+    [...skillMetadata.values()].forEach((skillMetadatum) => {
+      const section = sectionByTitle.get(skillMetadatum.section);
+      assertNotUndefined(section);
+      if (section.skills.some((value) => value.id === skillMetadatum.id)) {
+        return;
+      }
+
+      const skill = getSkill(
+        skillMetadatum.id,
+        'isRecommended' in skillMetadatum && skillMetadatum.isRecommended,
+      );
+
+      if (!skill.isDisabled) {
+        section.skills.push(skill);
       }
     });
 

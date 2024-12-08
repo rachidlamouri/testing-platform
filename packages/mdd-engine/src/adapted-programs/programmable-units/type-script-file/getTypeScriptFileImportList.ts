@@ -54,6 +54,9 @@ export const getTypeScriptFileImportList = buildProgrammedTransform({
   .onTransform((parsedTypeScriptFile) => {
     const importAndErrorList = parsedTypeScriptFile.program.body
       .filter(isImportDeclaration)
+      .filter((declaration) => {
+        return !declaration.source.value.endsWith('.json');
+      })
       .map<TypeScriptFileImport | ReportedProgramError<ReportingLocator>>(
         (inputImportDeclaration) => {
           const sourcePath = inputImportDeclaration.source.value;

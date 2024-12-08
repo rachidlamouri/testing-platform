@@ -31,6 +31,11 @@ import {
   APP_RENDERER_DELAYER_COLLECTION_ID,
   AppRendererDelayerInstance,
 } from '../render-knowledge-graph/appRendererDelayer';
+import { groupGraphElements } from '../../programmable-units/graph-visualization/directed-graph/element-group/groupGraphElements';
+import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/graph-visualization/directed-graph/graphviz-adapter/programmable/encodeDirectedGraphAsGraphvizCode';
+import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/svg-adapter/renderGraphvizCodeToSvgDocument';
+import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/base-interactivity/addInteractivityToSvgDocument';
+import { buildGraphElements } from './buildGraphElements';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-rocket-league-knowledge-graph',
@@ -45,6 +50,11 @@ runEngine({
           {
             directoryPath:
               'packages/mdd-engine/src/adapted-programs/programs/render-rocket-league-knowledge-graph',
+            ignoredNodePathConfigurationList: [],
+          },
+          {
+            directoryPath:
+              'packages/mdd-engine/src/adapted-programs/programmable-units/graph-visualization/directed-graph/base-interactivity',
             ignoredNodePathConfigurationList: [],
           },
         ],
@@ -86,6 +96,12 @@ runEngine({
     assertFileExtensionIsKnown,
 
     parseInput,
+    buildGraphElements,
+
+    groupGraphElements,
+    encodeDirectedGraphAsGraphvizCode,
+    renderGraphvizCodeToSvgDocument,
+    addInteractivityToSvgDocument,
 
     renderApp,
 

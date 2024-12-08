@@ -1,0 +1,892 @@
+{
+  "Leveling out": {
+    "id": "Leveling out",
+    "description": "Orienting the car so the wheels are down when in the air",
+    "section": "Air control",
+    "isRecommended": true,
+    "prerequisites": [
+      "Wall driving"
+    ]
+  },
+  "Wave dash": {
+    "id": "Wave dash",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Flipping"
+    ]
+  },
+  "Zap dash": {
+    "id": "Zap dash",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Speed flipping",
+      "Wave dash"
+    ]
+  },
+  "Momentum conservation recovery": {
+    "id": "Leveling out",
+    "description": "Orienting the car so it's facing the direction of travel while in the air to maintain speed when landing",
+    "section": "Recovery",
+    "isRecommended": true,
+    "prerequisites": [
+      "Basic aeriels"
+    ]
+  },
+  "Wall driving": {
+    "id": "Wall driving",
+    "description": "Driving on the wall without getting disoriented",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Driving"
+    ]
+  },
+  "Wall positioning": {
+    "id": "Wall driving",
+    "description": "Keeping the car pointed within 90 degrees of 'straight up' for better wall control",
+    "section": "Mental Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Positioning",
+      "Wall driving"
+    ]
+  },
+  "Ball camera control": {
+    "id": "Ball camera control",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Jumping"
+    ]
+  },
+  "Joystick air roll": {
+    "id": "Joystick air roll",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Jumping"
+    ]
+  },
+  "Directional air roll": {
+    "id": "Directional air roll",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Jumping"
+    ]
+  },
+  "Tornado spin": {
+    "id": "Tornado spin",
+    "section": "Air control",
+    "isRecommended": true,
+    "prerequisites": [
+      "Directional air roll",
+      "Backwards aerials",
+      "Sideways aerials"
+    ]
+  },
+  "Jumping": {
+    "id": "Jumping",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Driving"
+    ]
+  },
+  "Turning": {
+    "id": "Turning",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Driving"
+    ]
+  },
+  "Driving": {
+    "id": "Driving",
+    "section": "Core Skills",
+    "prerequisites": []
+  },
+  "Double Jumping": {
+    "id": "Double Jumping",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Jumping"
+    ]
+  },
+  "Flipping": {
+    "id": "Flipping",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Jumping"
+    ]
+  },
+  "Flip window": {
+    "id": "Flip window",
+    "description": "Understanding how long you have to flip, and when your flip is avaialable again (resets)",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Jumping"
+    ]
+  },
+  "Diagonal Flipping": {
+    "id": "Diagonal Flipping",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Flipping"
+    ]
+  },
+  "Speed flipping": {
+    "id": "Speed flipping",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Flipping",
+      "Directional air roll"
+    ]
+  },
+  "Braking": {
+    "id": "Braking",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Driving"
+    ]
+  },
+  "Boosting": {
+    "id": "Boosting",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Driving"
+    ]
+  },
+  "50/50’s + Kickoffs": {
+    "id": "50/50’s + Kickoffs",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Flipping",
+      "Boosting"
+    ]
+  },
+  "Powershot + Powerclears": {
+    "id": "Powershot + Powerclears",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Driving",
+      "Boosting",
+      "Turning"
+    ]
+  },
+  "Bounce Powershots": {
+    "id": "Bounce Powershots",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Powershot + Powerclears",
+      "Jumping"
+    ]
+  },
+  "Powerslide Turning": {
+    "id": "Powerslide Turning",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Driving"
+    ]
+  },
+  "Redirects": {
+    "id": "Redirects",
+    "section": "Core Skills",
+    "prerequisites": [
+      "Turning",
+      "Boosting"
+    ]
+  },
+  "Backflip shot": {
+    "id": "Backflip shot",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Flipping"
+    ]
+  },
+  "Flip resets": {
+    "id": "Flip resets",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Flip window"
+    ],
+    "isUnnecessary": true
+  },
+  "Popping": {
+    "id": "Popping",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Jumping"
+    ]
+  },
+  "Doinking": {
+    "id": "Doinking",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Popping"
+    ]
+  },
+  "Stalling": {
+    "id": "Stalling",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Directional air roll"
+    ],
+    "isUnnecessary": true
+  },
+  "Pinching": {
+    "id": "Pinching",
+    "section": "Miscellaneous",
+    "prerequisites": [],
+    "isDisabled": true
+  },
+  "Ground pinch": {
+    "id": "Pinching",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Game Awareness",
+      "Basic aerials"
+    ]
+  },
+  "Team pinch": {
+    "id": "Team pinch",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Teammate Awareness"
+    ]
+  },
+  "Wall pinch": {
+    "id": "Wall pinch",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Jumping",
+      "Boosting",
+      "Joystick air roll"
+    ]
+  },
+  "Kuxir pinch": {
+    "id": "Kuxir pinch",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Wall pinch"
+    ]
+  },
+  "Tilted drift": {
+    "id": "Tilted drift",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Flipping",
+      "Boosting"
+    ],
+    "isUnnecessary": true,
+    "isSilly": true
+  },
+  "Turtling": {
+    "id": "Turtling",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Joystick air roll"
+    ],
+    "isUnnecessary": true,
+    "isSilly": true
+  },
+  "Fast Kickoffs": {
+    "id": "Fast Kickoffs",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "50/50’s + Kickoffs"
+    ]
+  },
+  "Nose Spinning": {
+    "id": "Nose Spinning",
+    "section": "Miscellaneous",
+    "prerequisites": [],
+    "isDisabled": true
+  },
+  "Wavedash Kickoff": {
+    "id": "Wavedash Kickoff",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Fast Kickoffs"
+    ]
+  },
+  "Flip canceling": {
+    "id": "Flip canceling",
+    "section": "Miscellaneous",
+    "prerequisites": [
+      "Flipping"
+    ]
+  },
+  "Game Awareness": {
+    "id": "Game Awareness",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Prediction",
+      "Rotation",
+      "Teammate Awareness",
+      "Game Speed"
+    ]
+  },
+  "Positioning": {
+    "id": "Positioning",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Driving"
+    ]
+  },
+  "Shadowing": {
+    "id": "Shadowing",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Positioning",
+      "Game Awareness"
+    ]
+  },
+  "Teammate Awareness": {
+    "id": "Teammate Awareness",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Positioning"
+    ]
+  },
+  "Rotation": {
+    "id": "Rotation",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Positioning",
+      "Teammate Awareness"
+    ]
+  },
+  "Game Speed": {
+    "id": "Game Speed",
+    "section": "Mental Skills",
+    "prerequisites": []
+  },
+  "Prediction": {
+    "id": "Prediction",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Driving"
+    ]
+  },
+  "Pre-Jumping": {
+    "id": "Pre-Jumping",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Prediction"
+    ]
+  },
+  "Dunking": {
+    "id": "Dunking",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Pre-Jumping"
+    ]
+  },
+  "Opponent Boost Management": {
+    "id": "Opponent Boost Management",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Cutting": {
+    "id": "Cutting",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Prediction"
+    ]
+  },
+  "Faking": {
+    "id": "Faking",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Prediction"
+    ]
+  },
+  "Possession Prediction": {
+    "id": "Possession Prediction",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Game Awareness",
+      "Powershot + Powerclears"
+    ]
+  },
+  "Playstyle Reading": {
+    "id": "Playstyle Reading",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Softblock": {
+    "id": "Softblock",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Prediction"
+    ]
+  },
+  "Self Boost Management": {
+    "id": "Self Boost Management",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Rotation"
+    ]
+  },
+  "Kickoff prediction": {
+    "id": "Kickoff prediction",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Opponent prediction": {
+    "id": "Opponent prediction",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Boost Stealing": {
+    "id": "Boost Stealing",
+    "section": "Aggressive plays",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Basic Demos": {
+    "id": "Basic Demos",
+    "section": "Aggressive plays",
+    "prerequisites": [
+      "Boosting",
+      "Turning"
+    ]
+  },
+  "Goalie Demos": {
+    "id": "Goalie Demos",
+    "section": "Aggressive plays",
+    "prerequisites": [
+      "Basic Demos"
+    ]
+  },
+  "Air Demos": {
+    "id": "Air Demos",
+    "section": "Aggressive plays",
+    "prerequisites": [
+      "Basic Demos",
+      "Basic aerials"
+    ]
+  },
+  "Clear Prevention": {
+    "id": "Clear Prevention",
+    "section": "Aggressive plays",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Air Dribble to Demo": {
+    "id": "Air Dribble to Demo",
+    "section": "Aggressive plays",
+    "prerequisites": [
+      "Air Demos",
+      "Air dribbling"
+    ]
+  },
+  "Catching": {
+    "id": "Catching",
+    "section": "Recovery",
+    "prerequisites": [
+      "Prediction"
+    ]
+  },
+  "Powerslide Recovery": {
+    "id": "Powerslide Recovery",
+    "section": "Recovery",
+    "prerequisites": [
+      "Powerslide Turning"
+    ]
+  },
+  "Bunny hopping": {
+    "id": "Bunny hopping",
+    "section": "Recovery",
+    "prerequisites": [
+      "Directional air roll"
+    ],
+    "isUnnecessary": true
+  },
+  "Half flipping": {
+    "id": "Half flipping",
+    "section": "Recovery",
+    "prerequisites": [
+      "Flip canceling"
+    ]
+  },
+  "Forward half flipping": {
+    "id": "Forward half flipping",
+    "section": "Recovery",
+    "prerequisites": [
+      "Half flipping"
+    ]
+  },
+  "Hel-jump": {
+    "id": "Hel-jump",
+    "section": "Recovery",
+    "prerequisites": [
+      "Wave dash",
+      "Boosting"
+    ],
+    "isUnnecessary": true
+  },
+  "Hel-dash": {
+    "id": "Hel-dash",
+    "comment": "Replaced by zap dash",
+    "section": "Recovery",
+    "prerequisites": [],
+    "isUnnecessary": true,
+    "isDisabled": true
+  },
+  "Basic aerials": {
+    "id": "Basic aerials",
+    "section": "Air control",
+    "prerequisites": [
+      "Jumping",
+      "Boosting"
+    ]
+  },
+  "Aerial Powershot": {
+    "id": "Aerial Powershot",
+    "section": "Air control",
+    "prerequisites": [
+      "Basic aerials",
+      "Powershot + Powerclears"
+    ]
+  },
+  "Double jump aerials": {
+    "id": "Double jump aerials",
+    "section": "Air control",
+    "prerequisites": [
+      "Basic aerials",
+      "Double Jumping"
+    ]
+  },
+  "Fast aerials": {
+    "id": "Fast aerials",
+    "section": "Air control",
+    "prerequisites": [
+      "Basic aerials",
+      "Double Jumping"
+    ]
+  },
+  "Air dribbling": {
+    "id": "Air dribbling",
+    "section": "Air control",
+    "prerequisites": []
+  },
+  "Air roll shots": {
+    "id": "Air roll shots",
+    "section": "Air control",
+    "prerequisites": [
+      "Joystick air roll",
+      "Powershot + Powerclears",
+      "Bounce Powershots"
+    ]
+  },
+  "Backwards aerials": {
+    "id": "Backwards aerials",
+    "section": "Air control",
+    "prerequisites": [
+      "Basic aerials",
+      "Joystick air roll"
+    ]
+  },
+  "Sideways aerials": {
+    "id": "Sideways aerials",
+    "section": "Air control",
+    "prerequisites": [
+      "Basic aerials",
+      "Air roll shots"
+    ]
+  },
+  "Rebound shots": {
+    "id": "Rebound shots",
+    "section": "Air control",
+    "prerequisites": [
+      "Prediction",
+      "Basic aerials",
+      "Redirects"
+    ]
+  },
+  "Cherry picking": {
+    "id": "Cherry picking",
+    "section": "Air control",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Corner pass": {
+    "id": "Corner pass",
+    "section": "Passing plays",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Powershot passing": {
+    "id": "Powershot passing",
+    "section": "Passing plays",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Backboard passing": {
+    "id": "Backboard passing",
+    "section": "Passing plays",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Back-passing": {
+    "id": "Back-passing",
+    "section": "Passing plays",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Infield passing": {
+    "id": "Infield passing",
+    "section": "Passing plays",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Double touches": {
+    "id": "Double touches",
+    "section": "Passing plays",
+    "prerequisites": [
+      "Popping"
+    ]
+  },
+  "Guillotine passing": {
+    "id": "Guillotine passing",
+    "section": "Passing plays",
+    "prerequisites": [
+      "Game Awareness",
+      "Powershot + Powerclears"
+    ]
+  },
+  "Push dribbling": {
+    "id": "Push dribbling",
+    "section": "Dribbling",
+    "prerequisites": [
+      "Ball camera control"
+    ]
+  },
+  "Hood dribble": {
+    "id": "Hood dribble",
+    "section": "Dribbling",
+    "prerequisites": [
+      "Push dribbling"
+    ]
+  },
+  "Bounce dribbling": {
+    "id": "Bounce dribbling",
+    "section": "Dribbling",
+    "prerequisites": [
+      "Prediction",
+      "Push dribbling"
+    ]
+  },
+  "Turtle Dribbling": {
+    "id": "Turtle Dribbling",
+    "section": "Dribbling",
+    "prerequisites": [
+      "Push dribbling",
+      "Turtling"
+    ]
+  },
+  "Spring Roll": {
+    "id": "Spring Roll",
+    "section": "Dribbling",
+    "prerequisites": [
+      "Game Awareness",
+      "Double Jumping",
+      "Doinking"
+    ]
+  },
+  "Turtle to Air Dribble": {
+    "id": "Turtle to Air Dribble",
+    "section": "Dribbling",
+    "prerequisites": [
+      "Turtle Dribbling",
+      "Wall Air dribble"
+    ],
+    "isDisabled": true
+  },
+  "hood to air dribble": {
+    "id": "hood to air dribble",
+    "section": "Dribbling",
+    "prerequisites": [
+      "Hood dribble",
+      "Air dribbling"
+    ]
+  },
+  "Bounce to air dribble": {
+    "id": "Bounce to air dribble",
+    "section": "Dribbling",
+    "prerequisites": [
+      "Bounce dribbling",
+      "Air dribbling"
+    ]
+  },
+  "Power Slide Dribble": {
+    "id": "Power Slide Dribble",
+    "section": "Dribbling",
+    "prerequisites": [
+      "Hood dribble",
+      "Powerslide Turning"
+    ]
+  },
+  "Wall Air dribble": {
+    "id": "Wall Air dribble",
+    "section": "Wall shots",
+    "prerequisites": [
+      "Air dribbling"
+    ]
+  },
+  "Wall Clears": {
+    "id": "Wall Clears",
+    "section": "Wall shots",
+    "prerequisites": [
+      "Wall driving",
+      "Powershot + Powerclears",
+      "Prediction"
+    ]
+  },
+  "Wall catch": {
+    "id": "Wall catch",
+    "section": "Wall shots",
+    "prerequisites": [
+      "Wall driving",
+      "Catching"
+    ]
+  },
+  "Doomsee dish": {
+    "id": "Doomsee dish",
+    "section": "Wall shots",
+    "prerequisites": [
+      "Wall driving",
+      "Basic aerials",
+      "Game Awareness"
+    ]
+  },
+  "Ceiling shots": {
+    "id": "Ceiling shots",
+    "section": "Ceiling plays",
+    "prerequisites": [
+      "Wall driving",
+      "Basic aerials",
+      "Game Awareness"
+    ]
+  },
+  "Ceiling shuffle": {
+    "id": "Ceiling shuffle",
+    "section": "Ceiling plays",
+    "prerequisites": [
+      "Wall driving"
+    ],
+    "isUnnecessary": true
+  },
+  "Directional Flick": {
+    "id": "Directional Flick",
+    "section": "Flicks",
+    "prerequisites": [
+      "Hood dribble",
+      "Flipping"
+    ],
+    "isRecommended": true
+  },
+  "45 degree flick": {
+    "id": "45 degree flick",
+    "section": "Flicks",
+    "prerequisites": [
+      "Popping",
+      "Directional Flick"
+    ],
+    "isUnnecessary": true
+  },
+  "Musty Flick": {
+    "id": "Musty Flick",
+    "section": "Flicks",
+    "prerequisites": [
+      "Directional Flick"
+    ],
+    "isUnnecessary": true
+  },
+  "Tornado Flick / Spin": {
+    "id": "Tornado Flick / Spin",
+    "section": "Flicks",
+    "prerequisites": [
+      "Tornado spin",
+      "Bounce dribbling"
+    ],
+    "isUnnecessary": true
+  },
+  "Turtle Flick": {
+    "id": "Turtle Flick",
+    "section": "Flicks",
+    "prerequisites": [
+      "Turtling"
+    ],
+    "isUnnecessary": true
+  },
+  "Breezi Flick": {
+    "id": "Breezi Flick",
+    "section": "Flicks",
+    "prerequisites": [
+      "Tornado spin",
+      "Bounce dribbling"
+    ],
+    "isUnnecessary": true
+  },
+  "Delayed Flicks": {
+    "id": "Delayed Flicks",
+    "section": "Flicks",
+    "prerequisites": [
+      "Directional Flick"
+    ],
+    "isRecommended": true
+  },
+  "Mognus Flick (180 backflip flick)": {
+    "id": "Mognus Flick (180 backflip flick)",
+    "section": "Flicks",
+    "prerequisites": [
+      "Delayed Flicks"
+    ]
+  },
+  "Rumble - Spike Flicks": {
+    "id": "Rumble - Spike Flicks",
+    "section": "Extra-mode Exclusive",
+    "prerequisites": [
+      "Flipping"
+    ]
+  },
+  "Rumble - UFO Shots": {
+    "id": "Rumble - UFO Shots",
+    "section": "Extra-mode Exclusive",
+    "prerequisites": [
+      "Flip window"
+    ]
+  },
+  "Hoops - Friendship / fusion Kickoff": {
+    "id": "Hoops - Friendship / fusion Kickoff",
+    "section": "Extra-mode Exclusive",
+    "prerequisites": [
+      "Jumping",
+      "Teammate Awareness"
+    ]
+  },
+  "Hoops - Basket Pinch": {
+    "id": "Hoops - Basket Pinch",
+    "section": "Extra-mode Exclusive",
+    "prerequisites": [
+      "Kuxir pinch"
+    ]
+  }
+}

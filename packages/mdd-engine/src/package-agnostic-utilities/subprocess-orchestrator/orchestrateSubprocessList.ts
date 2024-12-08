@@ -93,6 +93,12 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
         'npx http-server -p 8081 debug/modelPrograms/collections/output-file',
       isInitiallyVisible: false,
     },
+    {
+      label: 'serve-rlkg',
+      script:
+        'npx http-server -p 8082 debug/render-rocket-league-knowledge-graph/collections/output-file',
+      isInitiallyVisible: false,
+    },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
 ).map((partialConfiguration) => {
   const color = mutableColorList.pop();
