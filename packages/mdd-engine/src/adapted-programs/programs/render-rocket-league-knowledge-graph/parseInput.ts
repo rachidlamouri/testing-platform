@@ -6,16 +6,15 @@ import {
   HtmlFileStreamMetatype,
 } from '../../programmable-units/html-file/htmlFile';
 import {
-  LinkConfig,
   PARSED_INPUT_COLLECTION_ID,
   ParsedInput,
   ParsedInputStreamMetatype,
   Section,
-  Skill,
 } from './parsedInput';
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { assertNotNull } from '../../../package-agnostic-utilities/nil/assertNotNull';
 import rawSkillMetadata from './skillMetadata.json';
+import { Skill, LinkConfig } from './skill';
 
 const skillMetadata = new Map(Object.entries(rawSkillMetadata));
 
@@ -103,8 +102,7 @@ export const parseInput = buildProgrammedTransform({
         throw new Error(`Missing metadata for "${id}"`);
       }
 
-      return {
-        id,
+      return new Skill({
         title: id,
         notes: [],
         prerequisites: metadata.prerequisites,
@@ -112,7 +110,7 @@ export const parseInput = buildProgrammedTransform({
         isUnnecessary:
           'isUnnecessary' in metadata ? metadata.isUnnecessary : false,
         isDisabled: 'isDisabled' in metadata && metadata.isDisabled,
-      };
+      });
     };
 
     flattenedNodes.forEach(({ node }) => {
@@ -191,7 +189,11 @@ export const parseInput = buildProgrammedTransform({
     [...skillMetadata.values()].forEach((skillMetadatum) => {
       const section = sectionByTitle.get(skillMetadatum.section);
       assertNotUndefined(section);
-      if (section.skills.some((value) => value.id === skillMetadatum.id)) {
+      if (
+        section.skills.some((value) => {
+          return value.id.templateValueByKeyPath.title === skillMetadatum.id;
+        })
+      ) {
         return;
       }
 

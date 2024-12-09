@@ -7,5 +7,5 @@
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
   },
-  "include": ["./", "../../render-knowledge-graph/app/browser/"]
+  "include": ["./", "../../render-knowledge-graph/app/browser/", "../parsedInput.ts"]
 }

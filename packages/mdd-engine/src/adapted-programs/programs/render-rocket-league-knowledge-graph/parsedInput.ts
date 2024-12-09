@@ -1,21 +1,5 @@
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
-
-export type LinkConfig = {
-  text: string;
-  url: string;
-};
-
-type Note = string | LinkConfig;
-
-export type Skill = {
-  id: string;
-  title: string;
-  notes: Note[];
-  prerequisites: string[];
-  isRecommended: boolean;
-  isUnnecessary: boolean;
-  isDisabled?: boolean;
-};
+import { Note, Skill } from './skill';
 
 export type Section = {
   title: string;

@@ -36,6 +36,7 @@ import { encodeDirectedGraphAsGraphvizCode } from '../../programmable-units/grap
 import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/svg-adapter/renderGraphvizCodeToSvgDocument';
 import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/base-interactivity/addInteractivityToSvgDocument';
 import { buildGraphElements } from './buildGraphElements';
+import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-rocket-league-knowledge-graph',
@@ -101,6 +102,7 @@ runEngine({
     groupGraphElements,
     encodeDirectedGraphAsGraphvizCode,
     renderGraphvizCodeToSvgDocument,
+    decodeAndRecastSvgDocument,
     addInteractivityToSvgDocument,
 
     renderApp,
@@ -111,7 +113,6 @@ runEngine({
   ] as const,
   serializeeCollectionIdList: [
     // keep this as a multi-line list for easier debugging
-    'parsed-input',
   ],
   programFileCache,
 });

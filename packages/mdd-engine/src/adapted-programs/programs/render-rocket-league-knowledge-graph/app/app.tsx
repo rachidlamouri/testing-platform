@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Layout } from '../../render-knowledge-graph/app/browser/layout';
+import { ActiveContent } from './wrappers/activeContent';
 
 export const App: React.FC = () => {
   useEffect(() => {
@@ -19,7 +20,7 @@ export const App: React.FC = () => {
         </h1>
       }
       leftPanelContent={<div></div>}
-      mainContent={<div></div>}
+      mainContent={<ActiveContent />}
     />
   );
 };
