@@ -26,7 +26,7 @@ export class GraphvizDirectedEdge {
 
   getCode(): EdgeStatement {
     const attributeStatementList = getAttributeStatementList(
-      this.sourceEdge.attributeByKey,
+      this.attributeByKey,
     );
 
     const attributeListStatement = joinAttributeListSingleLine(

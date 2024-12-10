@@ -1,21 +1,28 @@
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { DirectedGraphElement } from '../../programmable-units/graph-visualization/directed-graph/element/directedGraphElement';
+import { Prerequisite } from './prerequisite';
 import { Skill } from './skill';
 
-export type Item = Skill;
-
-type NewType = DirectedGraphElement;
+export type Item = Skill | Prerequisite;
 
 type InteractableInput = {
   item: Item;
-  element: NewType;
+  element: DirectedGraphElement;
 };
 
 /**
  * A graph element tied to a concept
  */
 export class Interactable implements InteractableInput {
-  get id(): Item['id'] {
+  get id(): string {
+    return this.svgId;
+  }
+
+  get svgId(): string {
+    return this.element.localIdDigest;
+  }
+
+  get itemId(): Item['id'] {
     return this.item.id;
   }
 

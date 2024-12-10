@@ -24,6 +24,8 @@ import {
   PARSED_INPUT_COLLECTION_ID,
   ParsedInputStreamMetatype,
 } from './parsedInput';
+import { Prerequisite } from './prerequisite';
+import { Skill } from './skill';
 
 const PROGRAMMED_TRANSFORM_NAME = 'buildGraphElements' as const;
 
@@ -65,6 +67,13 @@ export const buildGraphElements = buildProgrammedTransform({
     graphElements.push(root);
 
     const skillNodeById = new Map<string, DirectedGraphNode>();
+    const skillById = new Map<string, Skill>(
+      input.sections.flatMap((section) => {
+        return section.skills.map((skill) => {
+          return [skill.id.forHuman, skill];
+        });
+      }),
+    );
 
     input.sections.forEach((section) => {
       section.skills.forEach((skill) => {
@@ -83,11 +92,12 @@ export const buildGraphElements = buildProgrammedTransform({
           source: transformSource,
           distinguisher: skill.title,
           inputAttributeByKey: {
-            label: `${sentenceLabel}\n `,
+            label: sentenceLabel,
             shape: NodeShape.Box,
             style: NodeStyle.Rounded,
           },
         });
+
         graphElements.push(node);
         interactables.push(
           new Interactable({
@@ -102,20 +112,36 @@ export const buildGraphElements = buildProgrammedTransform({
 
     input.sections.forEach((section) => {
       section.skills.forEach((skill) => {
-        const head = skillNodeById.get(skill.id.forHuman);
+        const headId = skill.id.forHuman;
+        const head = skillNodeById.get(headId);
         assertNotUndefined(head);
 
         skill.prerequisites.forEach((prerequisite) => {
-          const tail = skillNodeById.get(prerequisite);
-          assertNotUndefined(tail, `Invalid prerequisite "${prerequisite}"`);
+          const tailNode = skillNodeById.get(prerequisite);
+          const tailSkill = skillById.get(prerequisite);
+          assertNotUndefined(
+            tailNode,
+            `Invalid prerequisite "${prerequisite}"`,
+          );
+          assertNotUndefined(tailSkill);
 
           const edge = new DirectedEdge({
             graphLocator,
-            tail,
+            tail: tailNode,
             head,
             source: transformSource,
           });
+
           graphElements.push(edge);
+          interactables.push(
+            new Interactable({
+              item: new Prerequisite({
+                tailId: tailSkill.id.forHuman,
+                headId,
+              }),
+              element: edge,
+            }),
+          );
         });
       });
     });

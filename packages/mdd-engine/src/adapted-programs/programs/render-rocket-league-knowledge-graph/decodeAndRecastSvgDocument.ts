@@ -29,13 +29,14 @@ import {
   getCustomTypedDatum,
   CustomDatumTypeName,
 } from '../../../package-agnostic-utilities/typed-datum/customTypedDatum';
-import { SkillProps } from './app/props';
+import { PrerequisiteProps, SkillProps } from './app/props';
 import { Skill } from './skill';
 import {
   INTERACTABLE_COLLECTION_ID,
   InteractableStreamMetatype,
   Item,
 } from './interactable';
+import { Prerequisite } from './prerequisite';
 
 const PROGRAMMED_TRANSFORM_NAME = 'decodeAndRecastSvgDocument' as const;
 type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
@@ -375,9 +376,9 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       throw Error('Invalid or missing starting node');
     }
 
-    const interactableByElementId = new Map(
+    const interactableBySvgId = new Map(
       interactableCollection.list.map((interactable) => {
-        return [interactable.element.localIdDigest, interactable];
+        return [interactable.svgId, interactable];
       }),
     );
 
@@ -388,6 +389,15 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
         isRecommended: skill.isRecommended,
         notes: skill.notes,
         title: skill.title,
+      };
+    };
+
+    const getPrerequisiteProps = (
+      prerequisite: Prerequisite,
+    ): Exclude<PrerequisiteProps, 'children'> => {
+      return {
+        headId: prerequisite.headId,
+        tailId: prerequisite.tailId,
       };
     };
 
@@ -406,6 +416,13 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
         };
       }
 
+      if (item instanceof Prerequisite) {
+        return {
+          componentName: 'Prerequisite',
+          props: getPrerequisiteProps(item),
+        };
+      }
+
       return null;
     };
 
@@ -413,7 +430,8 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       id: string,
       childElement: n.JSXElement,
     ): n.JSXElement | n.JSXFragment | null => {
-      const interactable = interactableByElementId.get(id);
+      const parsedId = id.replace(/_edge\d+$/, '');
+      const interactable = interactableBySvgId.get(parsedId);
 
       const wrapperConfiguration =
         interactable !== undefined
@@ -555,6 +573,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       'import { SvgWrapper } from "../wrappers/svgWrapper"',
       'import { TextWrapper } from "../wrappers/textWrapper"',
       'import { Skill } from "../providers/skill"',
+      'import { Prerequisite } from "../providers/prerequisite"',
       '',
       `export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
         recast.print(jsxNode).code

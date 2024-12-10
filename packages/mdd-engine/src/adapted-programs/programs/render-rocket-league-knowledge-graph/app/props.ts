@@ -8,3 +8,8 @@ export type SkillProps = PropsWithChildren<{
   notes: Note[];
   title: string;
 }>;
+
+export type PrerequisiteProps = PropsWithChildren<{
+  tailId: string;
+  headId: string;
+}>;
