@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { Layout } from '../../render-knowledge-graph/app/browser/layout';
 import { ActiveContent } from './wrappers/activeContent';
+import { THEME } from './theme';
 
 export const App: React.FC = () => {
   useEffect(() => {
-    document.body.style.fontFamily = 'Helvetica';
+    document.body.style.backgroundColor = THEME.page.background;
   });
 
   return (
@@ -14,9 +15,10 @@ export const App: React.FC = () => {
           style={{
             fontSize: '28px',
             margin: '0px',
+            color: THEME.page.text,
           }}
         >
-          Rocket League
+          Rocket League Skills
         </h1>
       }
       leftPanelContent={<div></div>}

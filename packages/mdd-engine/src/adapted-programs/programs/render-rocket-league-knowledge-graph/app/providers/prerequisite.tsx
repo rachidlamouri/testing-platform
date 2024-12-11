@@ -6,6 +6,10 @@ import { PrerequisiteProps } from '../props';
 export const Prerequisite: FunctionComponent<PrerequisiteProps> = ({
   children,
 }) => {
+  const lineColor = THEME.prerequisite.deselected;
+  const arrowBorderColor = THEME.prerequisite.deselected;
+  const arrowColor = THEME.prerequisite.deselected;
+  const borderThickness = '.5';
   // const strokeColor: string = THEME.colors.tomahto;
   // const strokeWidth = '2';
   // let strokeColor: string;
@@ -30,16 +34,16 @@ export const Prerequisite: FunctionComponent<PrerequisiteProps> = ({
         onTextClicked: (): void => {},
         hasInteractiveText: false,
         styleByElement: {
-          // edge
+          // line
           path: {
-            stroke: THEME.colors.graphite,
-            strokeWidth: '.5',
+            stroke: lineColor,
+            strokeWidth: borderThickness,
           },
           // arrowhead
           polygon: {
-            fill: THEME.colors.graphite,
-            stroke: THEME.colors.plum,
-            strokeWidth: '.5',
+            fill: arrowColor,
+            stroke: arrowBorderColor,
+            strokeWidth: borderThickness,
           },
         },
       }}

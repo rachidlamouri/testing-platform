@@ -4,8 +4,6 @@ import { THEME } from '../theme';
 import { SkillProps } from '../props';
 
 export const Skill: FunctionComponent<SkillProps> = ({ children }) => {
-  const strokeColor: string = THEME.colors.tomahto;
-  const strokeWidth = '2';
   // let strokeColor: string;
   // let strokeWidth: string;
   // if (isSelected) {
@@ -18,8 +16,11 @@ export const Skill: FunctionComponent<SkillProps> = ({ children }) => {
   //   strokeColor = THEME.file.importedBySelectedFile;
   //   strokeWidth = '2';
   // } else {
-  //   strokeColor = THEME.file.deselected;
-  //   strokeWidth = '1';
+
+  const borderColor: string = THEME.skill.border.deselected;
+  const borderThickness = '1.5';
+  const backgroundColor: string = THEME.skill.background.deselected;
+  const textColor: string = THEME.skill.text.deselected;
   // }
 
   return (
@@ -32,9 +33,12 @@ export const Skill: FunctionComponent<SkillProps> = ({ children }) => {
         hasInteractiveText: true,
         styleByElement: {
           path: {
-            stroke: strokeColor,
-            fill: 'none',
-            strokeWidth,
+            stroke: borderColor,
+            fill: backgroundColor,
+            strokeWidth: borderThickness,
+          },
+          text: {
+            fill: textColor,
           },
         },
       }}

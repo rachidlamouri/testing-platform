@@ -1,5 +1,6 @@
 import React, { SVGProps, FunctionComponent } from 'react';
 import { usePresentationContext } from '../presentationContext';
+import { THEME } from '../theme';
 
 type PolygonWrapperProps = React.PropsWithChildren<SVGProps<SVGPolygonElement>>;
 
@@ -15,6 +16,7 @@ export const PolygonWrapper: FunctionComponent<PolygonWrapperProps> = (
   const combinedProps = {
     ...props,
     ...style,
+    fill: THEME.page.background,
     ...styleByElement.polygon,
   };
 
