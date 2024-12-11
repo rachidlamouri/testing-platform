@@ -2,31 +2,38 @@ import React, { FunctionComponent } from 'react';
 import { PresentationContext } from '../presentationContext';
 import { THEME } from '../theme';
 import { PrerequisiteProps } from '../props';
+import { useAppContext } from '../appContext';
 
 export const Prerequisite: FunctionComponent<PrerequisiteProps> = ({
+  tailId,
+  headId,
   children,
 }) => {
-  const lineColor = THEME.prerequisite.deselected;
-  const arrowBorderColor = THEME.prerequisite.deselected;
-  const arrowColor = THEME.prerequisite.deselected;
-  const borderThickness = '.5';
-  // const strokeColor: string = THEME.colors.tomahto;
-  // const strokeWidth = '2';
-  // let strokeColor: string;
-  // let strokeWidth: string;
-  // if (isSelected) {
-  //   strokeColor = THEME.file.selected;
-  //   strokeWidth = '2';
-  // } else if (isImportingNodeSelected) {
-  //   strokeColor = THEME.file.importsSelectedFile;
-  //   strokeWidth = '2';
-  // } else if (isImportedNodeSelected) {
-  //   strokeColor = THEME.file.importedBySelectedFile;
-  //   strokeWidth = '2';
-  // } else {
-  //   strokeColor = THEME.file.deselected;
-  //   strokeWidth = '1';
-  // }
+  const { selectedSkill } = useAppContext();
+  const isUpstream = selectedSkill.id === headId;
+  const isDownstream = selectedSkill.id === tailId;
+
+  let lineColor: string;
+  let arrowBorderColor: string;
+  let arrowColor: string;
+  let borderThickness: string;
+
+  if (isUpstream) {
+    lineColor = THEME.prerequisite.upstream;
+    arrowBorderColor = THEME.prerequisite.upstream;
+    arrowColor = THEME.prerequisite.upstream;
+    borderThickness = '2';
+  } else if (isDownstream) {
+    lineColor = THEME.prerequisite.downstream;
+    arrowBorderColor = THEME.prerequisite.downstream;
+    arrowColor = THEME.prerequisite.downstream;
+    borderThickness = '2';
+  } else {
+    lineColor = THEME.prerequisite.deselected;
+    arrowBorderColor = THEME.prerequisite.deselected;
+    arrowColor = THEME.prerequisite.deselected;
+    borderThickness = '.5';
+  }
 
   return (
     <PresentationContext.Provider

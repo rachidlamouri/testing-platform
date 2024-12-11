@@ -191,7 +191,7 @@ export const parseInput = buildProgrammedTransform({
       assertNotUndefined(section);
       if (
         section.skills.some((value) => {
-          return value.id.templateValueByKeyPath.title === skillMetadatum.id;
+          return value.id === skillMetadatum.id;
         })
       ) {
         return;

@@ -26,7 +26,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Wave dash"
+                    title: "Wave dash",
+                    upstreamSkills: ["Flipping"],
+                    downstreamSkills: ["Zap dash", "Hel-jump"]
                 }}><GroupWrapper id="6cb36788737e9a90942aaa184711d31caae1f598" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -41,7 +43,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Zap dash"
+                    title: "Zap dash",
+                    upstreamSkills: ["Wave dash", "Speed flipping"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="07d5091b56cc1a310bf61efd2a9f4bd39c2a4adf" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -66,7 +70,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Hel-jump"
+                    title: "Hel-jump",
+                    upstreamSkills: ["Wave dash", "Boosting"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="3c95c68cc3736c6dfaa388c5aadcd341c5b0a21f" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -91,7 +97,17 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: true,
                     notes: [],
-                    title: "Wall driving"
+                    title: "Wall driving",
+                    upstreamSkills: ["Driving"],
+
+                    downstreamSkills: [
+                        "Leveling out",
+                        "Wall Clears",
+                        "Wall catch",
+                        "Doomsee dish",
+                        "Ceiling shots",
+                        "Ceiling shuffle"
+                    ]
                 }}><GroupWrapper id="a96c2cb142aa6ac2c936a4cff11f97ee24f1e5f2" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -106,7 +122,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: true,
                     notes: [],
-                    title: "Leveling out"
+                    title: "Leveling out",
+                    upstreamSkills: ["Wall driving"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="6b3d365b50e70756bdc414d32fafc2220ef76880" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -131,7 +149,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Wall Clears"
+                    title: "Wall Clears",
+                    upstreamSkills: ["Wall driving", "Powershot + Powerclears", "Prediction"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="b92bb096f87c33e3f2fe965b18a4ebdd7374756c" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -156,7 +176,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Wall catch"
+                    title: "Wall catch",
+                    upstreamSkills: ["Wall driving", "Catching"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="7ab8dbca628402320020496ca2e50eb5a9962b06" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -181,7 +203,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Doomsee dish"
+                    title: "Doomsee dish",
+                    upstreamSkills: ["Wall driving", "Game Awareness", "Basic aerials"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="e1b011f80eecc4d250648c956021f50aeb0878ae" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -206,7 +230,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Ceiling shots"
+                    title: "Ceiling shots",
+                    upstreamSkills: ["Wall driving", "Game Awareness", "Basic aerials"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="17cc0c6cbc3f34d99fbd108905d9e1c36913221b" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -231,7 +257,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Ceiling shuffle"
+                    title: "Ceiling shuffle",
+                    upstreamSkills: ["Wall driving"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="45e3dafb9b0a08bbd8690727d4bf6066b874978e" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -256,7 +284,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: true,
                     notes: [],
-                    title: "Ball camera control"
+                    title: "Ball camera control",
+                    upstreamSkills: ["Jumping"],
+                    downstreamSkills: ["Push dribbling"]
                 }}><GroupWrapper id="57d57fd83c40caa7d68b83b1572e094e8324684b" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -271,7 +301,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Push dribbling"
+                    title: "Push dribbling",
+                    upstreamSkills: ["Ball camera control"],
+                    downstreamSkills: ["Hood dribble", "Bounce dribbling", "Turtle Dribbling"]
                 }}><GroupWrapper id="1f89633229d14b505f218fdea712129e5d18d1dd" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -296,7 +328,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: true,
                     notes: [],
-                    title: "Joystick air roll"
+                    title: "Joystick air roll",
+                    upstreamSkills: ["Jumping"],
+                    downstreamSkills: ["Wall pinch", "Turtling", "Air roll shots", "Backwards aerials"]
                 }}><GroupWrapper id="52c4080efca8c754eb74746d4fdb5ec0eda02d2a" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -311,7 +345,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Wall pinch"
+                    title: "Wall pinch",
+                    upstreamSkills: ["Joystick air roll", "Jumping", "Boosting"],
+                    downstreamSkills: ["Kuxir pinch"]
                 }}><GroupWrapper id="0cafa4b4135ad0c10019301e85c42bbcf18d737f" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -336,7 +372,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Turtling"
+                    title: "Turtling",
+                    upstreamSkills: ["Joystick air roll"],
+                    downstreamSkills: ["Turtle Dribbling", "Turtle Flick"]
                 }}><GroupWrapper id="f6ef1ec4e3cdd633da3819f1cb20f1feee3902c0" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -361,7 +399,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Air roll shots"
+                    title: "Air roll shots",
+                    upstreamSkills: ["Joystick air roll", "Powershot + Powerclears", "Bounce Powershots"],
+                    downstreamSkills: ["Sideways aerials"]
                 }}><GroupWrapper id="8ed889690f1cbd15c45145c524af7e835735526a" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -386,7 +426,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Backwards aerials"
+                    title: "Backwards aerials",
+                    upstreamSkills: ["Joystick air roll", "Basic aerials"],
+                    downstreamSkills: ["Tornado spin"]
                 }}><GroupWrapper id="dea8a431dbfc07fac1a133f50b3af766ad88409c" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -411,7 +453,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: true,
                     notes: [],
-                    title: "Directional air roll"
+                    title: "Directional air roll",
+                    upstreamSkills: ["Jumping"],
+                    downstreamSkills: ["Speed flipping", "Stalling", "Bunny hopping", "Tornado spin"]
                 }}><GroupWrapper id="1ab2ed97bb359c4ddc5161fefbace20b74ebb447" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -426,7 +470,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Speed flipping"
+                    title: "Speed flipping",
+                    upstreamSkills: ["Directional air roll", "Flipping"],
+                    downstreamSkills: ["Zap dash"]
                 }}><GroupWrapper id="a4dfc80ce8e6927ad97338af954e64a2369ec1cd" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -451,7 +497,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Stalling"
+                    title: "Stalling",
+                    upstreamSkills: ["Directional air roll"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="a9f7b99a1949e67ad3915822fb4c785629eab00c" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -476,7 +524,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Bunny hopping"
+                    title: "Bunny hopping",
+                    upstreamSkills: ["Directional air roll"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="da8643db0fba88c2799215c0b1b595c0b8e3c51a" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -501,7 +551,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: true,
                     notes: [],
-                    title: "Tornado spin"
+                    title: "Tornado spin",
+                    upstreamSkills: ["Directional air roll", "Backwards aerials", "Sideways aerials"],
+                    downstreamSkills: ["Tornado Flick / Spin", "Breezi Flick"]
                 }}><GroupWrapper id="494f28b9703c3cb93e33db4ff93b223fb4e23e00" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -526,7 +578,22 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Jumping"
+                    title: "Jumping",
+                    upstreamSkills: ["Driving"],
+
+                    downstreamSkills: [
+                        "Ball camera control",
+                        "Joystick air roll",
+                        "Directional air roll",
+                        "Double Jumping",
+                        "Flipping",
+                        "Flip window",
+                        "Bounce Powershots",
+                        "Popping",
+                        "Wall pinch",
+                        "Basic aerials",
+                        "Hoops - Friendship / fusion Kickoff"
+                    ]
                 }}><GroupWrapper id="38d0bb0d896dbbec2e35ed651df7e15babe319b5" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -571,7 +638,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Double Jumping"
+                    title: "Double Jumping",
+                    upstreamSkills: ["Jumping"],
+                    downstreamSkills: ["Double jump aerials", "Fast aerials", "Spring Roll"]
                 }}><GroupWrapper id="03c645b9ea53657cc27a20182e7610dcc89b94ee" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -596,7 +665,20 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Flipping"
+                    title: "Flipping",
+                    upstreamSkills: ["Jumping"],
+
+                    downstreamSkills: [
+                        "Wave dash",
+                        "Diagonal Flipping",
+                        "Speed flipping",
+                        "50/50’s + Kickoffs",
+                        "Backflip shot",
+                        "Tilted drift",
+                        "Flip canceling",
+                        "Directional Flick",
+                        "Rumble - Spike Flicks"
+                    ]
                 }}><GroupWrapper id="61b9cf036213209cd135a592fa61c15f6a53072e" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -621,7 +703,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Flip window"
+                    title: "Flip window",
+                    upstreamSkills: ["Jumping"],
+                    downstreamSkills: ["Flip resets", "Rumble - UFO Shots"]
                 }}><GroupWrapper id="7441b6c43e96a03b31594525e70e57de9c88c53b" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -646,7 +730,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Bounce Powershots"
+                    title: "Bounce Powershots",
+                    upstreamSkills: ["Jumping", "Powershot + Powerclears"],
+                    downstreamSkills: ["Air roll shots"]
                 }}><GroupWrapper id="b209979857f96555ea66ffe9ffcb87645ccec92f" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -671,7 +757,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Popping"
+                    title: "Popping",
+                    upstreamSkills: ["Jumping"],
+                    downstreamSkills: ["Doinking", "Double touches", "45 degree flick"]
                 }}><GroupWrapper id="91a3270cb0d1d83b450b4ded0b087df6325a3148" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -706,7 +794,20 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Basic aerials"
+                    title: "Basic aerials",
+                    upstreamSkills: ["Jumping", "Boosting"],
+
+                    downstreamSkills: [
+                        "Air Demos",
+                        "Aerial Powershot",
+                        "Double jump aerials",
+                        "Fast aerials",
+                        "Backwards aerials",
+                        "Sideways aerials",
+                        "Rebound shots",
+                        "Doomsee dish",
+                        "Ceiling shots"
+                    ]
                 }}><GroupWrapper id="2c45eae6dd207b555f843560a51016dd135f5b07" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -731,7 +832,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Hoops - Friendship / fusion Kickoff"
+                    title: "Hoops - Friendship / fusion Kickoff",
+                    upstreamSkills: ["Jumping", "Teammate Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="4c97e91301b9bb257aceb3aa8119334ea2d99a2f" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -756,7 +859,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Turning"
+                    title: "Turning",
+                    upstreamSkills: ["Driving"],
+                    downstreamSkills: ["Powershot + Powerclears", "Redirects", "Basic Demos"]
                 }}><GroupWrapper id="b0f78a0f574630800e6d978b85363ff41bd7ad8f" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -771,7 +876,17 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Powershot + Powerclears"
+                    title: "Powershot + Powerclears",
+                    upstreamSkills: ["Turning", "Driving", "Boosting"],
+
+                    downstreamSkills: [
+                        "Bounce Powershots",
+                        "Possession Prediction",
+                        "Aerial Powershot",
+                        "Air roll shots",
+                        "Guillotine passing",
+                        "Wall Clears"
+                    ]
                 }}><GroupWrapper id="3c3b4b9344db3ee02350c34a2e0a00b2d87168d2" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -796,7 +911,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Redirects"
+                    title: "Redirects",
+                    upstreamSkills: ["Turning", "Boosting"],
+                    downstreamSkills: ["Rebound shots"]
                 }}><GroupWrapper id="fd69be653321b291759b25bacb9d457fe645abae" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -821,7 +938,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Basic Demos"
+                    title: "Basic Demos",
+                    upstreamSkills: ["Turning", "Boosting"],
+                    downstreamSkills: ["Goalie Demos", "Air Demos"]
                 }}><GroupWrapper id="7336660793449ed1297223c8aefa547b3bea0a96" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -846,7 +965,20 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Driving"
+                    title: "Driving",
+                    upstreamSkills: [],
+
+                    downstreamSkills: [
+                        "Wall driving",
+                        "Jumping",
+                        "Turning",
+                        "Braking",
+                        "Boosting",
+                        "Powershot + Powerclears",
+                        "Powerslide Turning",
+                        "Positioning",
+                        "Prediction"
+                    ]
                 }}><GroupWrapper id="ff52a774cad89d125cacf645052cfe567096d753" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -891,7 +1023,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Braking"
+                    title: "Braking",
+                    upstreamSkills: ["Driving"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="eaa44d00fe236ab417d0738ebd452e912564166a" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -916,7 +1050,19 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Boosting"
+                    title: "Boosting",
+                    upstreamSkills: ["Driving"],
+
+                    downstreamSkills: [
+                        "50/50’s + Kickoffs",
+                        "Powershot + Powerclears",
+                        "Redirects",
+                        "Wall pinch",
+                        "Tilted drift",
+                        "Basic Demos",
+                        "Hel-jump",
+                        "Basic aerials"
+                    ]
                 }}><GroupWrapper id="537c9a929ccd9e9add13b15ba512c096d2fd52c4" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -951,7 +1097,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Powerslide Turning"
+                    title: "Powerslide Turning",
+                    upstreamSkills: ["Driving"],
+                    downstreamSkills: ["Powerslide Recovery", "Power Slide Dribble"]
                 }}><GroupWrapper id="0fbaf27e68e4e8e34b42a9e74352bce7299da410" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -976,7 +1124,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Positioning"
+                    title: "Positioning",
+                    upstreamSkills: ["Driving"],
+                    downstreamSkills: ["Shadowing", "Teammate Awareness", "Rotation"]
                 }}><GroupWrapper id="a712a04c933abf5a931bcfdc872cedc3542e0268" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1001,7 +1151,20 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Prediction"
+                    title: "Prediction",
+                    upstreamSkills: ["Driving"],
+
+                    downstreamSkills: [
+                        "Game Awareness",
+                        "Pre-Jumping",
+                        "Cutting",
+                        "Faking",
+                        "Softblock",
+                        "Catching",
+                        "Rebound shots",
+                        "Bounce dribbling",
+                        "Wall Clears"
+                    ]
                 }}><GroupWrapper id="ee38cfee82eaaaaee93464fde8775d2369d8d404" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1026,7 +1189,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Double jump aerials"
+                    title: "Double jump aerials",
+                    upstreamSkills: ["Double Jumping", "Basic aerials"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="d7a2f6ed1c0ab39bbe8fd25a89d2e285f02074b5" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1051,7 +1216,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Fast aerials"
+                    title: "Fast aerials",
+                    upstreamSkills: ["Double Jumping", "Basic aerials"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="f38a452faec31adb27135b563ce6b43880be5c7b" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1076,7 +1243,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Spring Roll"
+                    title: "Spring Roll",
+                    upstreamSkills: ["Double Jumping", "Doinking", "Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="76e9558e859ffe4b4d74c25a894bb587785133d0" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1111,7 +1280,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Diagonal Flipping"
+                    title: "Diagonal Flipping",
+                    upstreamSkills: ["Flipping"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="1e85eff77e89770205d9c74e3c78f5034b966ad0" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1146,7 +1317,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "50/50’s + Kickoffs"
+                    title: "50/50’s + Kickoffs",
+                    upstreamSkills: ["Flipping", "Boosting"],
+                    downstreamSkills: ["Fast Kickoffs"]
                 }}><GroupWrapper id="a2b936491d4b9c3849b428df5f3f16a31cc9d59d" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1171,7 +1344,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Backflip shot"
+                    title: "Backflip shot",
+                    upstreamSkills: ["Flipping"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="ea54f7ee4b0949603f1aa4df4dd85877d59eafb6" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1196,7 +1371,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Tilted drift"
+                    title: "Tilted drift",
+                    upstreamSkills: ["Flipping", "Boosting"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="bc39cc9f4f8933fa4c939aea82d280f199742478" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1221,7 +1398,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Flip canceling"
+                    title: "Flip canceling",
+                    upstreamSkills: ["Flipping"],
+                    downstreamSkills: ["Half flipping"]
                 }}><GroupWrapper id="7b29daf22ac71cf45cefd3252bbdb88fe8895ce6" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1246,7 +1425,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: true,
                     notes: [],
-                    title: "Directional Flick"
+                    title: "Directional Flick",
+                    upstreamSkills: ["Flipping", "Hood dribble"],
+                    downstreamSkills: ["45 degree flick", "Musty Flick", "Delayed Flicks"]
                 }}><GroupWrapper id="19641b3805579dd37624bf66b09257f750974774" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1271,7 +1452,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Rumble - Spike Flicks"
+                    title: "Rumble - Spike Flicks",
+                    upstreamSkills: ["Flipping"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="147dbe8bf54f7f867d98ea39b01f66d718271304" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1296,7 +1479,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Flip resets"
+                    title: "Flip resets",
+                    upstreamSkills: ["Flip window"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="0fe3247bc2c9e35723c70886c2da1c9b57cf642b" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1321,7 +1506,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Rumble - UFO Shots"
+                    title: "Rumble - UFO Shots",
+                    upstreamSkills: ["Flip window"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="17075a55ee3dc99408922e99aa3b9d8397b11618" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1436,7 +1623,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Fast Kickoffs"
+                    title: "Fast Kickoffs",
+                    upstreamSkills: ["50/50’s + Kickoffs"],
+                    downstreamSkills: ["Wavedash Kickoff"]
                 }}><GroupWrapper id="70ae9f10a1ebfc1c3e2894c6b3cf99364f1eab4e" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1471,7 +1660,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Possession Prediction"
+                    title: "Possession Prediction",
+                    upstreamSkills: ["Powershot + Powerclears", "Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="8b5a1709bd001cb3cd9bee3c80300276e4531ff4" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1496,7 +1687,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Aerial Powershot"
+                    title: "Aerial Powershot",
+                    upstreamSkills: ["Powershot + Powerclears", "Basic aerials"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="95db5dbea9d6dd0b9b333735ed54b07d0bd15896" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1531,7 +1724,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Guillotine passing"
+                    title: "Guillotine passing",
+                    upstreamSkills: ["Powershot + Powerclears", "Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="d38b4a8b07534956531b0f922440a52ab564a50b" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1576,7 +1771,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Powerslide Recovery"
+                    title: "Powerslide Recovery",
+                    upstreamSkills: ["Powerslide Turning"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="ccfc412c31f61c5e442aacee30a71f358100b194" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1601,7 +1798,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Power Slide Dribble"
+                    title: "Power Slide Dribble",
+                    upstreamSkills: ["Powerslide Turning", "Hood dribble"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="a9cae66b7d691f1ffdcd0d4bd94e7a9313f8dfad" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1626,7 +1825,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Rebound shots"
+                    title: "Rebound shots",
+                    upstreamSkills: ["Redirects", "Prediction", "Basic aerials"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="97cc5b3e3e1b1e8bdeef9ae11de24d6cc3b84c24" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1651,7 +1852,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Doinking"
+                    title: "Doinking",
+                    upstreamSkills: ["Popping"],
+                    downstreamSkills: ["Spring Roll"]
                 }}><GroupWrapper id="22b7d554e91104658d1fd7dd53c5509ac0553f92" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1676,7 +1879,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Double touches"
+                    title: "Double touches",
+                    upstreamSkills: ["Popping"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="f0e48d8570476a93f9304a0346a5f0cbf9687edc" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1701,7 +1906,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "45 degree flick"
+                    title: "45 degree flick",
+                    upstreamSkills: ["Popping", "Directional Flick"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="a44c3fda54c2848638e74852c4edfad6b48b6a7b" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1736,7 +1943,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Team pinch"
+                    title: "Team pinch",
+                    upstreamSkills: ["Teammate Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="762c743dd4e9d3683cda58f1199d93c5a7edce1d" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1751,7 +1960,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Kuxir pinch"
+                    title: "Kuxir pinch",
+                    upstreamSkills: ["Wall pinch"],
+                    downstreamSkills: ["Hoops - Basket Pinch"]
                 }}><GroupWrapper id="19f714137c3551fd679698d1528df94f691d1694" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1776,7 +1987,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Hoops - Basket Pinch"
+                    title: "Hoops - Basket Pinch",
+                    upstreamSkills: ["Kuxir pinch"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="9d18007d3de438d638a68348f5957c2bde716b8f" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1801,7 +2014,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Turtle Dribbling"
+                    title: "Turtle Dribbling",
+                    upstreamSkills: ["Turtling", "Push dribbling"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="0a0ec5499fd29060e4849605f069cc89d07aebab" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1826,7 +2041,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Turtle Flick"
+                    title: "Turtle Flick",
+                    upstreamSkills: ["Turtling"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="d694e122c43be2d97de647a2a32990e547b54583" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1851,7 +2068,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Wavedash Kickoff"
+                    title: "Wavedash Kickoff",
+                    upstreamSkills: ["Fast Kickoffs"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="46cec1e55d05a6e20e991106ff55c5e0d10bbe29" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1876,7 +2095,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Half flipping"
+                    title: "Half flipping",
+                    upstreamSkills: ["Flip canceling"],
+                    downstreamSkills: ["Forward half flipping"]
                 }}><GroupWrapper id="6e456ff83a6fb39702fb4818a12508833212f04e" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1901,7 +2122,29 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Game Awareness"
+                    title: "Game Awareness",
+                    upstreamSkills: ["Teammate Awareness", "Rotation", "Game Speed", "Prediction"],
+
+                    downstreamSkills: [
+                        "Shadowing",
+                        "Opponent Boost Management",
+                        "Possession Prediction",
+                        "Playstyle Reading",
+                        "Kickoff prediction",
+                        "Opponent prediction",
+                        "Boost Stealing",
+                        "Clear Prevention",
+                        "Cherry picking",
+                        "Corner pass",
+                        "Powershot passing",
+                        "Backboard passing",
+                        "Back-passing",
+                        "Infield passing",
+                        "Guillotine passing",
+                        "Spring Roll",
+                        "Doomsee dish",
+                        "Ceiling shots"
+                    ]
                 }}><GroupWrapper id="0bda27abf75b1ff6c7b200711164e200d08d66c9" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1916,7 +2159,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Shadowing"
+                    title: "Shadowing",
+                    upstreamSkills: ["Game Awareness", "Positioning"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="e53555343e30299d84ed9ce47681c9d59614d7fc" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1941,7 +2186,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Opponent Boost Management"
+                    title: "Opponent Boost Management",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="706e36a274b1cefd87f6a0b56902596027196f36" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -1976,7 +2223,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Playstyle Reading"
+                    title: "Playstyle Reading",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="6e557670f4bc0f5c3a2d75244514eca81de801ad" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2001,7 +2250,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Kickoff prediction"
+                    title: "Kickoff prediction",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="f739d0f6e6e90379c4c56d3ccfe6c0f612094445" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2026,7 +2277,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Opponent prediction"
+                    title: "Opponent prediction",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="b358190da5082ad2e952824b0c66563b8bf3b812" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2051,7 +2304,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Boost Stealing"
+                    title: "Boost Stealing",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="4dc40bb7caf9fed2ed66bb13f46fbb1df2387ff2" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2076,7 +2331,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Clear Prevention"
+                    title: "Clear Prevention",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="5ea77ad958d862ae971aa72ce8101208cc8fd5b6" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2101,7 +2358,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Cherry picking"
+                    title: "Cherry picking",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="b18dcf1bf8d0f5cecb3079a28bfad5b15164a811" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2126,7 +2385,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Corner pass"
+                    title: "Corner pass",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="51a5e5c46fb1d44a5bf47841bef257507504eff4" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2151,7 +2412,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Powershot passing"
+                    title: "Powershot passing",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="04c45cc997fa47189f5c85cf56f1bfcad9a0654f" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2176,7 +2439,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Backboard passing"
+                    title: "Backboard passing",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="7c745c1619ce496adb98ad777a43ffab482afad4" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2201,7 +2466,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Back-passing"
+                    title: "Back-passing",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="6dbb66d80f6a9020c7a2bd3cd6e334226b358b0d" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2226,7 +2493,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Infield passing"
+                    title: "Infield passing",
+                    upstreamSkills: ["Game Awareness"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="19ffb85246b85d1c44fbe34397993326cba4856e" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2301,7 +2570,15 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Teammate Awareness"
+                    title: "Teammate Awareness",
+                    upstreamSkills: ["Positioning"],
+
+                    downstreamSkills: [
+                        "Team pinch",
+                        "Game Awareness",
+                        "Rotation",
+                        "Hoops - Friendship / fusion Kickoff"
+                    ]
                 }}><GroupWrapper id="783469932a61ca943eee27536e95aa94b4fbef7e" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2326,7 +2603,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Rotation"
+                    title: "Rotation",
+                    upstreamSkills: ["Positioning", "Teammate Awareness"],
+                    downstreamSkills: ["Game Awareness", "Self Boost Management"]
                 }}><GroupWrapper id="96df7e6ae52ce92ca621526e553a7673744a55f2" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2401,7 +2680,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Self Boost Management"
+                    title: "Self Boost Management",
+                    upstreamSkills: ["Rotation"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="e6eb7a78d9abbbc4245ab4f3ab258b6f827e13ff" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2426,7 +2707,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Game Speed"
+                    title: "Game Speed",
+                    upstreamSkills: [],
+                    downstreamSkills: ["Game Awareness"]
                 }}><GroupWrapper id="c47f3d4df7d8556cd1bf2b526a12ce140a896a94" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2461,7 +2744,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Pre-Jumping"
+                    title: "Pre-Jumping",
+                    upstreamSkills: ["Prediction"],
+                    downstreamSkills: ["Dunking"]
                 }}><GroupWrapper id="31b1c68d0c763bd78d74aa80fa015f89ca816635" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2486,7 +2771,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Cutting"
+                    title: "Cutting",
+                    upstreamSkills: ["Prediction"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="750fe6eb4a39e4f1fd5ae30f1e7e0384a489c056" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2511,7 +2798,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Faking"
+                    title: "Faking",
+                    upstreamSkills: ["Prediction"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="cb7144819d80f8b5b3a7e0d5f75f4e1a9642b668" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2536,7 +2825,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Softblock"
+                    title: "Softblock",
+                    upstreamSkills: ["Prediction"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="69add1126959a35c36aa060f4a758a5e3ff23617" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2561,7 +2852,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Catching"
+                    title: "Catching",
+                    upstreamSkills: ["Prediction"],
+                    downstreamSkills: ["Wall catch"]
                 }}><GroupWrapper id="2b9bcf7bbecd708379dfee8a9b9b2044a98476b3" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2596,7 +2889,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Bounce dribbling"
+                    title: "Bounce dribbling",
+                    upstreamSkills: ["Prediction", "Push dribbling"],
+                    downstreamSkills: ["Bounce to air dribble", "Tornado Flick / Spin", "Breezi Flick"]
                 }}><GroupWrapper id="cb5f223c0110f96fa41789e4d7d0a30e93b35cd5" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2631,7 +2926,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Dunking"
+                    title: "Dunking",
+                    upstreamSkills: ["Pre-Jumping"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="1ce809bfee8fa8ad999a8fad944514ab2a193edd" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2656,7 +2953,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Goalie Demos"
+                    title: "Goalie Demos",
+                    upstreamSkills: ["Basic Demos"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="4a28cafe911bf4ae8e044789441ae3d4cd2c6576" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2681,7 +2980,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Air Demos"
+                    title: "Air Demos",
+                    upstreamSkills: ["Basic Demos", "Basic aerials"],
+                    downstreamSkills: ["Air Dribble to Demo"]
                 }}><GroupWrapper id="bad725340e6b5269093a4ee7bb2589b16cb4b07c" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2706,7 +3007,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Air Dribble to Demo"
+                    title: "Air Dribble to Demo",
+                    upstreamSkills: ["Air Demos", "Air dribbling"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="cc0f8509ac5d9e08c6be164a987b56555f0b2005" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2741,7 +3044,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Forward half flipping"
+                    title: "Forward half flipping",
+                    upstreamSkills: ["Half flipping"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="d4e2f4dd965ce87f034484e11bc002c0f51b4cad" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2766,7 +3071,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Tornado Flick / Spin"
+                    title: "Tornado Flick / Spin",
+                    upstreamSkills: ["Tornado spin", "Bounce dribbling"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="58c831a400d054a656225db6965364b2dbd9ba76" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2791,7 +3098,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Breezi Flick"
+                    title: "Breezi Flick",
+                    upstreamSkills: ["Tornado spin", "Bounce dribbling"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="78c633192e33640847f65ab13614156fc4721a49" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2866,7 +3175,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Sideways aerials"
+                    title: "Sideways aerials",
+                    upstreamSkills: ["Basic aerials", "Air roll shots"],
+                    downstreamSkills: ["Tornado spin"]
                 }}><GroupWrapper id="bcfeb56f9d582050fe5b94a3c8328133136aba87" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2921,7 +3232,15 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Air dribbling"
+                    title: "Air dribbling",
+                    upstreamSkills: [],
+
+                    downstreamSkills: [
+                        "Air Dribble to Demo",
+                        "hood to air dribble",
+                        "Bounce to air dribble",
+                        "Wall Air dribble"
+                    ]
                 }}><GroupWrapper id="647de96687b5f1b73867a507ae74b6096b467c45" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2946,7 +3265,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "hood to air dribble"
+                    title: "hood to air dribble",
+                    upstreamSkills: ["Air dribbling", "Hood dribble"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="ba2dc3a69ab1146a34f6909c21e4ef807b14ad37" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2971,7 +3292,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Bounce to air dribble"
+                    title: "Bounce to air dribble",
+                    upstreamSkills: ["Air dribbling", "Bounce dribbling"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="9354bfe67d752a0f523ec603919747179ff365a8" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -2996,7 +3319,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Wall Air dribble"
+                    title: "Wall Air dribble",
+                    upstreamSkills: ["Air dribbling"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="c2a8946dd0dab510c518dda78067266ecd466515" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -3051,7 +3376,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Hood dribble"
+                    title: "Hood dribble",
+                    upstreamSkills: ["Push dribbling"],
+                    downstreamSkills: ["hood to air dribble", "Power Slide Dribble", "Directional Flick"]
                 }}><GroupWrapper id="4c61f86edb9a6722edee939ef919a0f3f51681a3" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -3166,7 +3493,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: true,
                     isRecommended: false,
                     notes: [],
-                    title: "Musty Flick"
+                    title: "Musty Flick",
+                    upstreamSkills: ["Directional Flick"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="2f919bdec851e293a32953373f2fe7249af39cab" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -3191,7 +3520,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: true,
                     notes: [],
-                    title: "Delayed Flicks"
+                    title: "Delayed Flicks",
+                    upstreamSkills: ["Directional Flick"],
+                    downstreamSkills: ["Mognus Flick (180 backflip flick)"]
                 }}><GroupWrapper id="f98ade5cba23fdc5ba98b6019d8a6c89885d1eca" className="node"><PathWrapper
                         fill="none"
                         stroke="black"
@@ -3216,7 +3547,9 @@ export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) 
                     isUnnecessary: false,
                     isRecommended: false,
                     notes: [],
-                    title: "Mognus Flick (180 backflip flick)"
+                    title: "Mognus Flick (180 backflip flick)",
+                    upstreamSkills: ["Delayed Flicks"],
+                    downstreamSkills: []
                 }}><GroupWrapper id="8acee1c4e2c55e829ffa2d1fb40445ac3bd2b84a" className="node"><PathWrapper
                         fill="none"
                         stroke="black"

@@ -2,33 +2,51 @@ import React, { FunctionComponent } from 'react';
 import { PresentationContext } from '../presentationContext';
 import { THEME } from '../theme';
 import { SkillProps } from '../props';
+import { useAppContext } from '../appContext';
 
-export const Skill: FunctionComponent<SkillProps> = ({ children }) => {
-  // let strokeColor: string;
-  // let strokeWidth: string;
-  // if (isSelected) {
-  //   strokeColor = THEME.file.selected;
-  //   strokeWidth = '2';
-  // } else if (isImportingNodeSelected) {
-  //   strokeColor = THEME.file.importsSelectedFile;
-  //   strokeWidth = '2';
-  // } else if (isImportedNodeSelected) {
-  //   strokeColor = THEME.file.importedBySelectedFile;
-  //   strokeWidth = '2';
-  // } else {
+export const Skill: FunctionComponent<SkillProps> = ({
+  id,
+  upstreamSkills,
+  downstreamSkills,
+  children,
+}) => {
+  const { selectedSkill } = useAppContext();
+  const isSelected = selectedSkill.id === id;
+  const isUpstreamOfSelection = downstreamSkills.includes(selectedSkill.id);
+  const isDownstreamOfSelection = upstreamSkills.includes(selectedSkill.id);
 
-  const borderColor: string = THEME.skill.border.deselected;
-  const borderThickness = '1.5';
-  const backgroundColor: string = THEME.skill.background.deselected;
-  const textColor: string = THEME.skill.text.deselected;
-  // }
+  let borderColor: string;
+  let borderThickness: string;
+  let backgroundColor: string;
+  let textColor: string;
+
+  if (isSelected) {
+    borderColor = THEME.skill.border.selected;
+    borderThickness = '2';
+    backgroundColor = THEME.skill.background.selected;
+    textColor = THEME.skill.text.selected;
+  } else if (isUpstreamOfSelection) {
+    borderColor = THEME.skill.border.upstream;
+    borderThickness = '2';
+    backgroundColor = THEME.skill.background.upstream;
+    textColor = THEME.skill.text.upstream;
+  } else if (isDownstreamOfSelection) {
+    borderColor = THEME.skill.border.downstream;
+    borderThickness = '2';
+    backgroundColor = THEME.skill.background.downstream;
+    textColor = THEME.skill.text.downstream;
+  } else {
+    borderColor = THEME.skill.border.deselected;
+    borderThickness = '1.5';
+    backgroundColor = THEME.skill.background.deselected;
+    textColor = THEME.skill.text.deselected;
+  }
 
   return (
     <PresentationContext.Provider
       value={{
         onTextClicked: (): void => {
-          // onToggleOrSelectId(factId);
-          // onToggleSecondaryBoundaryId(boundaryId);
+          selectedSkill.setOrToggle(id);
         },
         hasInteractiveText: true,
         styleByElement: {

@@ -70,7 +70,7 @@ export const buildGraphElements = buildProgrammedTransform({
     const skillById = new Map<string, Skill>(
       input.sections.flatMap((section) => {
         return section.skills.map((skill) => {
-          return [skill.id.forHuman, skill];
+          return [skill.id, skill];
         });
       }),
     );
@@ -106,13 +106,13 @@ export const buildGraphElements = buildProgrammedTransform({
           }),
         );
 
-        skillNodeById.set(skill.id.forHuman, node);
+        skillNodeById.set(skill.id, node);
       });
     });
 
     input.sections.forEach((section) => {
       section.skills.forEach((skill) => {
-        const headId = skill.id.forHuman;
+        const headId = skill.id;
         const head = skillNodeById.get(headId);
         assertNotUndefined(head);
 
@@ -136,7 +136,7 @@ export const buildGraphElements = buildProgrammedTransform({
           interactables.push(
             new Interactable({
               item: new Prerequisite({
-                tailId: tailSkill.id.forHuman,
+                tailId: tailSkill.id,
                 headId,
               }),
               element: edge,

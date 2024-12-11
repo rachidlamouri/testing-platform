@@ -382,13 +382,31 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       }),
     );
 
+    const skills = interactableCollection.list
+      .map((interactable) => interactable.item)
+      .filter((item): item is Skill => item instanceof Skill);
+
     const getSkillProps = (skill: Skill): Exclude<SkillProps, 'children'> => {
+      const upstreamSkills = skills
+        .filter((otherSkill) => {
+          return skill.prerequisites.includes(otherSkill.id);
+        })
+        .map((otherSkill) => otherSkill.id);
+
+      const downstreamSkills = skills
+        .filter((otherSkill) => {
+          return otherSkill.prerequisites.includes(skill.id);
+        })
+        .map((otherSkill) => otherSkill.id);
+
       return {
-        id: skill.id.forHuman,
+        id: skill.id,
         isUnnecessary: skill.isUnnecessary,
         isRecommended: skill.isRecommended,
         notes: skill.notes,
         title: skill.title,
+        upstreamSkills,
+        downstreamSkills,
       };
     };
 

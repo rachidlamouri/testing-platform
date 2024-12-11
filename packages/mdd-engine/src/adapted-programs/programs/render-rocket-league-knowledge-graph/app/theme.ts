@@ -30,25 +30,37 @@
 //   '#543A64',
 // ];
 
+const upstream = '#35A3AF';
+const downstream = '#C0C1CF';
+
 export const THEME = {
   page: {
     background: '#151b23',
     text: '#C0C1CF',
   },
   skill: {
-    border: {
-      // deselected: '#1E1835',
-      deselected: '#231C46',
-      selected: '#4E1E50',
-    },
     background: {
       deselected: '#263055',
+      selected: '#231C46',
+      upstream: '#263055',
+      downstream: '#263055',
+    },
+    border: {
+      deselected: '#231C46',
+      selected: '#27506C',
+      upstream,
+      downstream,
     },
     text: {
       deselected: '#C0C1CF',
+      selected: '#C0C1CF',
+      upstream: '#C0C1CF',
+      downstream: '#C0C1CF',
     },
   },
   prerequisite: {
     deselected: '#27506C',
+    upstream,
+    downstream,
   },
 } as const;
