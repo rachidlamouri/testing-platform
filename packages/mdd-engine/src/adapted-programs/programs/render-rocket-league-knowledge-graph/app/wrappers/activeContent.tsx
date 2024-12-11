@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import svgPanZoom from 'svg-pan-zoom';
-import { Main } from '../generated/graph';
+import { RootGraph } from '../generated/graph';
 
 /**
  * The main section of the knowledge graph. It loads the svg for the selected
@@ -18,5 +18,5 @@ export const ActiveContent: React.FunctionComponent = () => {
     }
   }, []);
 
-  return <Main ref={svgReference} />;
+  return <RootGraph ref={svgReference} />;
 };

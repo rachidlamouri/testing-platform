@@ -38,6 +38,9 @@ export const THEME = {
     background: '#151b23',
     text: '#C0C1CF',
   },
+  metadata: {
+    text: '#C0C1CF',
+  },
   skill: {
     background: {
       deselected: '#263055',

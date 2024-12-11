@@ -1,5 +1,9 @@
 import { PropsWithChildren } from 'react';
-import { Note } from '../skill';
+import { Note, Skill } from '../skill';
+
+export type Metadata = {
+  skillById: Record<string, Skill>;
+};
 
 export type SkillProps = PropsWithChildren<{
   id: string;

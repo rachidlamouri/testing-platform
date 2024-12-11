@@ -593,7 +593,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       'import { Skill } from "../providers/skill"',
       'import { Prerequisite } from "../providers/prerequisite"',
       '',
-      `export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
+      `export const RootGraph: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
         recast.print(jsxNode).code
       })})`,
     ].join('\n');

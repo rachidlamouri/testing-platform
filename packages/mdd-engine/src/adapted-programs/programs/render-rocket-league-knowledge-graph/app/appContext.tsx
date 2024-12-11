@@ -5,17 +5,24 @@ import React, {
   useContext,
   useState,
 } from 'react';
+import { Note } from '../skill';
+
+type SkillDisplay = {
+  id: string;
+  title: string;
+  notes: Note[];
+};
 
 type AppCtx = {
   selectedSkill: {
-    id: string | null;
-    setOrToggle: (id: string | null) => void;
+    data: SkillDisplay | null;
+    setOrToggle: (skill: SkillDisplay | null) => void;
   };
 };
 
 const AppContext = createContext<AppCtx>({
   selectedSkill: {
-    id: null,
+    data: null,
     setOrToggle: () => {},
   },
 });
@@ -23,20 +30,19 @@ const AppContext = createContext<AppCtx>({
 export const AppContextProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
-  const [selectedSkillId, setOrToggleSelectedSkillId] = useState<
-    string | null
-  >();
+  const [selectedSkill, setOrToggleSelectedSkill] =
+    useState<SkillDisplay | null>();
 
   return (
     <AppContext.Provider
       value={{
         selectedSkill: {
-          id: selectedSkillId,
-          setOrToggle: (id: string): void => {
-            if (id !== selectedSkillId) {
-              setOrToggleSelectedSkillId(id);
+          data: selectedSkill,
+          setOrToggle: (skill: SkillDisplay): void => {
+            if (skill.id !== selectedSkill?.id) {
+              setOrToggleSelectedSkill(skill);
             } else {
-              setOrToggleSelectedSkillId(null);
+              setOrToggleSelectedSkill(null);
             }
           },
         },

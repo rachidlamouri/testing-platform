@@ -6,14 +6,20 @@ import { useAppContext } from '../appContext';
 
 export const Skill: FunctionComponent<SkillProps> = ({
   id,
+  title,
+  notes,
   upstreamSkills,
   downstreamSkills,
   children,
 }) => {
   const { selectedSkill } = useAppContext();
-  const isSelected = selectedSkill.id === id;
-  const isUpstreamOfSelection = downstreamSkills.includes(selectedSkill.id);
-  const isDownstreamOfSelection = upstreamSkills.includes(selectedSkill.id);
+  const isSelected = selectedSkill.data?.id === id;
+  const isUpstreamOfSelection = downstreamSkills.includes(
+    selectedSkill.data?.id,
+  );
+  const isDownstreamOfSelection = upstreamSkills.includes(
+    selectedSkill.data?.id,
+  );
 
   let borderColor: string;
   let borderThickness: string;
@@ -46,7 +52,11 @@ export const Skill: FunctionComponent<SkillProps> = ({
     <PresentationContext.Provider
       value={{
         onTextClicked: (): void => {
-          selectedSkill.setOrToggle(id);
+          selectedSkill.setOrToggle({
+            id,
+            title,
+            notes,
+          });
         },
         hasInteractiveText: true,
         styleByElement: {

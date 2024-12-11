@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Layout } from '../../render-knowledge-graph/app/browser/layout';
 import { ActiveContent } from './wrappers/activeContent';
 import { THEME } from './theme';
+import { DataDisplay } from './dataDisplay';
 
 export const App: React.FC = () => {
   useEffect(() => {
@@ -21,7 +22,7 @@ export const App: React.FC = () => {
           Rocket League Skills
         </h1>
       }
-      leftPanelContent={<div></div>}
+      leftPanelContent={<DataDisplay />}
       mainContent={<ActiveContent />}
     />
   );

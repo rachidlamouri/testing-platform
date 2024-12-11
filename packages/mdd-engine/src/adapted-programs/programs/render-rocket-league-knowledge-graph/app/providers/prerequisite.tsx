@@ -10,8 +10,8 @@ export const Prerequisite: FunctionComponent<PrerequisiteProps> = ({
   children,
 }) => {
   const { selectedSkill } = useAppContext();
-  const isUpstream = selectedSkill.id === headId;
-  const isDownstream = selectedSkill.id === tailId;
+  const isUpstream = selectedSkill.data?.id === headId;
+  const isDownstream = selectedSkill.data?.id === tailId;
 
   let lineColor: string;
   let arrowBorderColor: string;

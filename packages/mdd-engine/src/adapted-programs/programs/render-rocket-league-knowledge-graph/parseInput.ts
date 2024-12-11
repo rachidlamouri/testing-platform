@@ -137,7 +137,7 @@ export const parseInput = buildProgrammedTransform({
           const id = title.trim();
           const skill = getSkill(id, recommended === '#');
           if (!skill.isDisabled) {
-            section.skills.push();
+            section.skills.push(skill);
           }
 
           break;
