@@ -16,7 +16,8 @@ const NoteDisplay: FunctionComponent<{ note: Note }> = ({ note }) => {
 };
 
 export const DataDisplay: FunctionComponent = () => {
-  const { selectedSkill } = useAppContext();
+  const { selectedSkill, skillState } = useAppContext();
+  const isDone = skillState.byId[selectedSkill.data?.id] ?? false;
 
   if (!selectedSkill.data) {
     return null;
@@ -29,8 +30,31 @@ export const DataDisplay: FunctionComponent = () => {
         color: THEME.metadata.text,
       }}
     >
-      <h2>{selectedSkill.data.title}</h2>
-      <ul>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
+        <input
+          type="checkbox"
+          style={{ width: 18, height: 18, marginRight: 10 }}
+          checked={isDone}
+          onChange={(event): void => {
+            skillState.setIsChecked(
+              selectedSkill.data.id,
+              event.target.checked,
+            );
+          }}
+        />
+        <h2>{selectedSkill.data.title}</h2>
+      </div>
+      <ul
+        style={{
+          margin: 0,
+        }}
+      >
         {selectedSkill.data.notes.map((note, index) => {
           return (
             <li
