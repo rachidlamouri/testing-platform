@@ -1,4 +1,76 @@
 {
+  "Crossing": {
+    "id": "Crossing",
+    "description": "",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Driving"
+    ]
+  },
+  "Calculated clears": {
+    "id": "Calculated clears",
+    "description": "",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Close touch": {
+    "id": "Close touch",
+    "description": "",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
+  "Chipping": {
+    "id": "Chipping",
+    "description": "Driving into a grounded ball without jumping",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Boosting"
+    ]
+  },
+  "Chip shot": {
+    "id": "Chip shot",
+    "description": "Using boost to control how hard you chip the ball towards the goal",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Chipping"
+    ]
+  },
+  "Bait shot": {
+    "id": "Bait shot",
+    "description": "Intentionally missing the goal to draw out a defender",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Chip shot"
+    ]
+  },
+  "Chip clear": {
+    "id": "Chip clear",
+    "description": "Using boost to make a strong clear with a chip",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Chipping"
+    ]
+  },
+  "Chip double touch": {
+    "id": "Chip double touch",
+    "description": "",
+    "section": "Core Skills",
+    "isRecommended": true,
+    "prerequisites": [
+      "Chipping"
+    ]
+  },
   "Leveling out": {
     "id": "Leveling out",
     "description": "Orienting the car so the wheels are down when in the air",

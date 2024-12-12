@@ -7,6 +7,7 @@ import { useAppContext } from '../appContext';
 export const Skill: FunctionComponent<SkillProps> = ({
   id,
   title,
+  description,
   notes,
   upstreamSkills,
   downstreamSkills,
@@ -55,6 +56,7 @@ export const Skill: FunctionComponent<SkillProps> = ({
           selectedSkill.setOrToggle({
             id,
             title,
+            description,
             notes,
           });
         },

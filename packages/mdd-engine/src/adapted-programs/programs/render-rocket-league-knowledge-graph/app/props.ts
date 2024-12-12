@@ -11,6 +11,7 @@ export type SkillProps = PropsWithChildren<{
   isUnnecessary: boolean;
   notes: Note[];
   title: string;
+  description?: string;
   upstreamSkills: string[];
   downstreamSkills: string[];
 }>;

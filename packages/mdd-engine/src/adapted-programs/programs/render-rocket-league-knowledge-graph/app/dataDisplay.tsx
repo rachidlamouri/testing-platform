@@ -50,6 +50,9 @@ export const DataDisplay: FunctionComponent = () => {
         />
         <h2>{selectedSkill.data.title}</h2>
       </div>
+      {selectedSkill.data.description !== undefined && (
+        <p>{selectedSkill.data.description}</p>
+      )}
       <ul
         style={{
           margin: 0,

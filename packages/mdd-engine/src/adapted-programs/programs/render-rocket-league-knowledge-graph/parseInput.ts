@@ -149,8 +149,10 @@ export const parseInput = buildProgrammedTransform({
 
           if (skill === undefined) {
             section.notes.push(text);
-          } else {
+          } else if (skill.description) {
             skill.notes.push(text);
+          } else {
+            skill.setDescription(text);
           }
 
           break;

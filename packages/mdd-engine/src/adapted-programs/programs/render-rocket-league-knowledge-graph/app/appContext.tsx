@@ -10,6 +10,7 @@ import { Note } from '../skill';
 type SkillDisplay = {
   id: string;
   title: string;
+  description: string;
   notes: Note[];
 };
 

@@ -21,6 +21,8 @@ export class Skill implements SkillInput {
 
   title: string;
 
+  description?: string;
+
   notes: Note[];
 
   prerequisites: string[];
@@ -40,6 +42,10 @@ export class Skill implements SkillInput {
     this.isRecommended = input.isRecommended;
     this.isUnnecessary = input.isUnnecessary;
     this.isDisabled = input.isDisabled;
+  }
+
+  setDescription(description: string): void {
+    this.description = description;
   }
 }
 
