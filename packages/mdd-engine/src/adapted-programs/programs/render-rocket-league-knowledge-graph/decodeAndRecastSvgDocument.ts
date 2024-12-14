@@ -403,9 +403,11 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
         id: skill.id,
         isUnnecessary: skill.isUnnecessary,
         isRecommended: skill.isRecommended,
+        isSilly: skill.isSilly,
         notes: skill.notes,
         title: skill.title,
         description: skill.description,
+        rank: skill.rank,
         upstreamSkills,
         downstreamSkills,
       };

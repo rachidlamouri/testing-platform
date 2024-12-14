@@ -30,6 +30,8 @@
 //   '#543A64',
 // ];
 
+// '#578413'
+
 const upstream = '#35A3AF';
 const downstream = '#C0C1CF';
 
@@ -42,6 +44,27 @@ export const THEME = {
     text: '#C0C1CF',
   },
   skill: {
+    checkmark: {
+      outlineOn: 'black',
+      on: '#70aa18',
+      off: '#C0C1CF',
+    },
+    rank: {
+      bronze: '#bf6f1a',
+      silver: '#afafad',
+      gold: '#b97d1f',
+      platinum: '#82cae5',
+      diamond: '#003b97',
+      champion: '#6f49ae',
+      grandChampion: '#690b2f',
+      ssl: '#670365',
+    },
+    auxiliary: {
+      stroke: 'black',
+      recommended: '#27506C',
+      unnecessary: '#350518',
+      silly: '#350518',
+    },
     background: {
       deselected: '#263055',
       selected: '#231C46',

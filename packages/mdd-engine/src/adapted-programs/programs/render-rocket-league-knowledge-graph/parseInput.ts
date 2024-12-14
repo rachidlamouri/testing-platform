@@ -106,9 +106,11 @@ export const parseInput = buildProgrammedTransform({
         title: id,
         notes: [],
         prerequisites: metadata.prerequisites,
+        rank: 'rank' in metadata ? metadata.rank : '',
         isRecommended,
         isUnnecessary:
           'isUnnecessary' in metadata ? metadata.isUnnecessary : false,
+        isSilly: 'isSilly' in metadata ? metadata.isSilly : false,
         isDisabled: 'isDisabled' in metadata && metadata.isDisabled,
       });
     };

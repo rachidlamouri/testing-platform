@@ -9,11 +9,13 @@ export type SkillProps = PropsWithChildren<{
   id: string;
   isRecommended: boolean;
   isUnnecessary: boolean;
+  isSilly: boolean;
   notes: Note[];
   title: string;
   description?: string;
   upstreamSkills: string[];
   downstreamSkills: string[];
+  rank: string;
 }>;
 
 export type PrerequisiteProps = PropsWithChildren<{

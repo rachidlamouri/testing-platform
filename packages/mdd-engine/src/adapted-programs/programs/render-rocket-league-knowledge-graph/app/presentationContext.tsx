@@ -1,9 +1,11 @@
 import { createContext, useContext } from 'react';
 
-type ElementStyle = {
+export type ElementStyle = {
   fill?: string;
   stroke?: string;
   strokeWidth?: string;
+  fontSize?: number;
+  opacity?: number;
 };
 
 type ProvidedPresentationContext = {
@@ -19,9 +21,9 @@ type ProvidedPresentationContext = {
     ellipse?: ElementStyle;
     text?: ElementStyle;
   };
-  onTextClicked: () => void;
+  onTextClicked?: () => void;
   onTextHoverChange?: (isHovered: boolean) => void;
-  hasInteractiveText: boolean;
+  partitionText?: (text: string) => TextPartition[];
 };
 
 /**
@@ -30,10 +32,14 @@ type ProvidedPresentationContext = {
  * nested svg wrapper subcomponents.
  */
 export const PresentationContext = createContext<ProvidedPresentationContext>({
-  onTextClicked: () => {},
   onTextHoverChange: () => {},
-  hasInteractiveText: false,
 });
+
+export type TextPartition = {
+  text: string;
+  style: ElementStyle;
+  onTextClicked?: () => void;
+};
 
 type ConsumedPresentationContext = {
   style: ElementStyle;
@@ -44,9 +50,9 @@ type ConsumedPresentationContext = {
     ellipse: ElementStyle;
     text: ElementStyle;
   };
-  onTextClicked: () => void;
+  onTextClicked?: () => void;
   onTextHoverChange?: (isHovered: boolean) => void;
-  hasInteractiveText: boolean;
+  partitionText?: (text: string) => TextPartition[];
 };
 
 export const usePresentationContext = (): ConsumedPresentationContext => {

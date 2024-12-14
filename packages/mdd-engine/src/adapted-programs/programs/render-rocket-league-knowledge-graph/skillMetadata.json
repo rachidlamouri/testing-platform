@@ -58,6 +58,7 @@
     "description": "Using boost to make a strong clear with a chip",
     "section": "Core Skills",
     "isRecommended": true,
+    "rank": "S",
     "prerequisites": [
       "Chipping"
     ]
@@ -174,6 +175,7 @@
   "Driving": {
     "id": "Driving",
     "section": "Core Skills",
+    "rank": "B",
     "prerequisites": []
   },
   "Double Jumping": {
@@ -503,6 +505,13 @@
       "Rotation"
     ]
   },
+  "Advanced boost management": {
+    "id": "Advanced boost management",
+    "section": "Mental Skills",
+    "prerequisites": [
+      "Game Awareness"
+    ]
+  },
   "Kickoff prediction": {
     "id": "Kickoff prediction",
     "section": "Mental Skills",
@@ -618,6 +627,7 @@
   "Basic aerials": {
     "id": "Basic aerials",
     "section": "Air control",
+    "rank": "G",
     "prerequisites": [
       "Jumping",
       "Boosting"
@@ -723,6 +733,7 @@
   },
   "Infield passing": {
     "id": "Infield passing",
+    "rank": "D",
     "section": "Passing plays",
     "prerequisites": [
       "Game Awareness"
@@ -737,6 +748,7 @@
   },
   "Guillotine passing": {
     "id": "Guillotine passing",
+    "rank": "C",
     "section": "Passing plays",
     "prerequisites": [
       "Game Awareness",
@@ -753,6 +765,7 @@
   "Hood dribble": {
     "id": "Hood dribble",
     "section": "Dribbling",
+    "rank": "P",
     "prerequisites": [
       "Push dribbling"
     ]
@@ -776,6 +789,7 @@
   "Spring Roll": {
     "id": "Spring Roll",
     "section": "Dribbling",
+    "rank": "GC",
     "prerequisites": [
       "Game Awareness",
       "Double Jumping",
@@ -859,6 +873,7 @@
   },
   "Ceiling shuffle": {
     "id": "Ceiling shuffle",
+    "rank": "SSL",
     "section": "Ceiling plays",
     "prerequisites": [
       "Wall driving"

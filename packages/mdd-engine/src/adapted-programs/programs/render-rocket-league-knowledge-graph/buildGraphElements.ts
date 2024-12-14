@@ -86,15 +86,30 @@ export const buildGraphElements = buildProgrammedTransform({
           })
           .join(' ');
 
+        const rankIcon =
+          {
+            B: '○',
+            S: '⬣',
+            G: '△',
+            P: '✩',
+            D: '▽',
+            C: '♢',
+            GC: '♢',
+            SSL: '▿',
+          }[skill.rank] ?? '•';
+
         const node = new DirectedGraphNode({
           graphLocator,
           parentLocator: graphLocator,
           source: transformSource,
           distinguisher: skill.title,
           inputAttributeByKey: {
-            label: sentenceLabel,
+            // Done, Rank, Recommended, Silly, Unnecessary, Useless
+            label: `${sentenceLabel}\n_✓ ${rankIcon} ! ¿¡ x`,
             shape: NodeShape.Box,
             style: NodeStyle.Rounded,
+            margin: '0.15,0.1',
+            fontsize: 36,
           },
         });
 

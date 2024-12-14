@@ -10,9 +10,11 @@ export type Note = string | LinkConfig;
 type SkillInput = {
   title: string;
   notes: Note[];
+  rank: string;
   prerequisites: string[];
   isRecommended: boolean;
   isUnnecessary: boolean;
+  isSilly: boolean;
   isDisabled?: boolean;
 };
 
@@ -25,11 +27,15 @@ export class Skill implements SkillInput {
 
   notes: Note[];
 
+  rank: string;
+
   prerequisites: string[];
 
   isRecommended: boolean;
 
   isUnnecessary: boolean;
+
+  isSilly: boolean;
 
   isDisabled?: boolean;
 
@@ -38,9 +44,11 @@ export class Skill implements SkillInput {
 
     this.title = input.title;
     this.notes = input.notes;
+    this.rank = input.rank;
     this.prerequisites = input.prerequisites;
     this.isRecommended = input.isRecommended;
     this.isUnnecessary = input.isUnnecessary;
+    this.isSilly = input.isSilly;
     this.isDisabled = input.isDisabled;
   }
 
