@@ -1,3 +1,4 @@
+import fs from 'fs';
 import {
   runEngine,
   buildCollectionByCollectionId,
@@ -40,6 +41,28 @@ import { Skill, SKILL_COLLECTION_ID, SkillStreamMetatype } from './skill';
 import { validatePrerequisites } from './validatePrerequisites';
 
 const skillMetadataList = Object.values(rawSkillMetadata);
+
+const sortedSkillMetadata = Object.fromEntries(
+  skillMetadataList
+    .sort((a, b) => {
+      if (a.id < b.id) {
+        return -1;
+      }
+
+      if (a.id === b.id) {
+        return 0;
+      }
+
+      return 1;
+    })
+    .map((skill) => {
+      return [skill.id, skill];
+    }),
+);
+fs.writeFileSync(
+  'packages/mdd-engine/src/adapted-programs/programs/render-rocket-league-knowledge-graph/skillMetadata.json',
+  `${JSON.stringify(sortedSkillMetadata, null, 2)}\n`,
+);
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-rocket-league-knowledge-graph',

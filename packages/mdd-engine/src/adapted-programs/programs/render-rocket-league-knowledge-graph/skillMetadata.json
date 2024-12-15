@@ -177,6 +177,45 @@
     "isUnnecessary": false,
     "isSilly": false
   },
+  "Backboard Prediction": {
+    "id": "Backboard Prediction",
+    "title": "Backboard Prediction",
+    "description": "Knowing the general area that a ball will bounce to after hitting the flat part of the backboard",
+    "notes": [],
+    "rank": "G",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Backboard Read (Awkward Camera)": {
+    "id": "Backboard Read (Awkward Camera)",
+    "title": "Backboard Read (Awkward Camera)",
+    "description": "A backboard read where your car is facing an incoming ball. This will cause your camera to swivel behind you, and you must intercept the ball after the bounce without being able to see where it will go.",
+    "notes": [],
+    "rank": "P",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Backboard Read (Normal Camera)": {
+    "id": "Backboard Read (Normal Camera)",
+    "title": "Backboard Read (Normal Camera)",
+    "description": "Anticipating where the ball will bounce to after after hitting the flat part of the backboard, and intercepting it before the apex of its drop. In this version, your car and camera are always facing the same direction",
+    "notes": [],
+    "rank": "G",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
   "Backflip Shot": {
     "id": "Backflip Shot",
     "title": "Backflip Shot",
@@ -542,19 +581,6 @@
     "isUnnecessary": false,
     "isSilly": false
   },
-  "Clears": {
-    "id": "Clears",
-    "title": "Clears",
-    "description": "",
-    "notes": [],
-    "rank": "B",
-    "prerequisites": [
-      "Driving"
-    ],
-    "isRecommended": false,
-    "isUnnecessary": false,
-    "isSilly": false
-  },
   "Clear Prevention": {
     "id": "Clear Prevention",
     "title": "Clear Prevention",
@@ -563,6 +589,19 @@
     "rank": "D",
     "prerequisites": [
       "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Clears": {
+    "id": "Clears",
+    "title": "Clears",
+    "description": "",
+    "notes": [],
+    "rank": "B",
+    "prerequisites": [
+      "Driving"
     ],
     "isRecommended": false,
     "isUnnecessary": false,
@@ -978,6 +1017,32 @@
       "Basic Demos"
     ],
     "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Ground Wall Curve Prediction": {
+    "id": "Ground Wall Curve Prediction",
+    "title": "Ground Wall Curve Prediction",
+    "description": "Knowing how the ball will behave when it hits the intersection of the wall and ground. Will it bounce? Will it roll? Will it defy the laws of phyics? Who knows? Hopefully you.",
+    "notes": [],
+    "rank": "P",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Ground Wall Curve Read": {
+    "id": "Ground Wall Curve Read",
+    "title": "Ground Wall Curve Read",
+    "description": "Anticipating where a ball will go after hitting the intersection of the wall and ground, so that you can quickly intercept it.",
+    "notes": [],
+    "rank": "D",
+    "prerequisites": [
+      "Ground Wall Curve Prediction"
+    ],
+    "isRecommended": true,
     "isUnnecessary": false,
     "isSilly": false
   },
@@ -1624,6 +1689,32 @@
     "isUnnecessary": false,
     "isSilly": false
   },
+  "Side Wall Bounce Prediction": {
+    "id": "Side Wall Bounce Prediction",
+    "title": "Side Wall Bounce Prediction",
+    "description": "Knowing the general area that a ball will bounce to after hitting the flat part of the side wall",
+    "notes": [],
+    "rank": "G",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Side Wall Read": {
+    "id": "Side Wall Read",
+    "title": "Side Wall Read",
+    "description": "Anticipating where the ball will bounce to after after hitting the flat part of the side wall, and intercepting it before the apex of its drop.",
+    "notes": [],
+    "rank": "P",
+    "prerequisites": [
+      "Flipping"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
   "Sideways Aerials": {
     "id": "Sideways Aerials",
     "title": "Sideways Aerials",
@@ -1725,7 +1816,7 @@
     "isUnnecessary": false,
     "isSilly": false
   },
-  "Team Pinch Clear / Shot": {
+  "Team Pinch Shot": {
     "id": "Team Pinch Shot",
     "title": "Team Pinch Shot",
     "description": "",
