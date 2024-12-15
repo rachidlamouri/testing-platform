@@ -52,6 +52,7 @@ type ClusterAttributeByKey = SpreadN<
     AttributeByKeyGSC,
     {
       color: string;
+      margin: string;
     },
   ]
 >;

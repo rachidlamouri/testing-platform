@@ -22,12 +22,12 @@ export const Prerequisite: FunctionComponent<PrerequisiteProps> = ({
     lineColor = THEME.prerequisite.upstream;
     arrowBorderColor = THEME.prerequisite.upstream;
     arrowColor = THEME.prerequisite.upstream;
-    borderThickness = '2';
+    borderThickness = '5';
   } else if (isDownstream) {
     lineColor = THEME.prerequisite.downstream;
     arrowBorderColor = THEME.prerequisite.downstream;
     arrowColor = THEME.prerequisite.downstream;
-    borderThickness = '2';
+    borderThickness = '5';
   } else {
     lineColor = THEME.prerequisite.deselected;
     arrowBorderColor = THEME.prerequisite.deselected;
@@ -39,7 +39,6 @@ export const Prerequisite: FunctionComponent<PrerequisiteProps> = ({
     <PresentationContext.Provider
       value={{
         onTextClicked: (): void => {},
-        hasInteractiveText: false,
         styleByElement: {
           // line
           path: {

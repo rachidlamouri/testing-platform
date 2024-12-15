@@ -29,7 +29,7 @@ import {
   getCustomTypedDatum,
   CustomDatumTypeName,
 } from '../../../package-agnostic-utilities/typed-datum/customTypedDatum';
-import { PrerequisiteProps, SkillProps } from './app/props';
+import { PrerequisiteProps, RankGroupProps, SkillProps } from './app/props';
 import { Skill } from './skill';
 import {
   INTERACTABLE_COLLECTION_ID,
@@ -37,6 +37,7 @@ import {
   Item,
 } from './interactable';
 import { Prerequisite } from './prerequisite';
+import { RankGroup } from './rankGroup';
 
 const PROGRAMMED_TRANSFORM_NAME = 'decodeAndRecastSvgDocument' as const;
 type ProgrammedTransformName = typeof PROGRAMMED_TRANSFORM_NAME;
@@ -382,6 +383,14 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       }),
     );
 
+    const getRankGroupProps = (
+      rankGroup: RankGroup,
+    ): Exclude<RankGroupProps, 'children'> => {
+      return {
+        id: rankGroup.id,
+      };
+    };
+
     const skills = interactableCollection.list
       .map((interactable) => interactable.item)
       .filter((item): item is Skill => item instanceof Skill);
@@ -430,6 +439,13 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
     const getWrapperConfiguration = (
       item: Item,
     ): WrapperConfiguration | null => {
+      if (item instanceof RankGroup) {
+        return {
+          componentName: 'RankGroup',
+          props: getRankGroupProps(item),
+        };
+      }
+
       if (item instanceof Skill) {
         return {
           componentName: 'Skill',
@@ -593,6 +609,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       'import { PolygonWrapper } from "../wrappers/polygonWrapper"',
       'import { SvgWrapper } from "../wrappers/svgWrapper"',
       'import { TextWrapper } from "../wrappers/textWrapper"',
+      'import { RankGroup } from "../providers/rankGroup"',
       'import { Skill } from "../providers/skill"',
       'import { Prerequisite } from "../providers/prerequisite"',
       '',

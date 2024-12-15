@@ -1,6 +1,8 @@
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import { assertNotUndefined } from '../../../package-agnostic-utilities/nil/assertNotUndefined';
 import { RankDirection } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGS';
+import { GraphLikeStyle } from '../../programmable-units/graph-visualization/directed-graph/attributeByKeyGSC';
+import { DirectedCluster } from '../../programmable-units/graph-visualization/directed-graph/element/directedCluster';
 import { DirectedEdge } from '../../programmable-units/graph-visualization/directed-graph/element/directedEdge';
 import { DirectedGraph } from '../../programmable-units/graph-visualization/directed-graph/element/directedGraph';
 import {
@@ -13,6 +15,7 @@ import {
   NodeShape,
   NodeStyle,
 } from '../../programmable-units/graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialNodeAttributeByKey';
+import { DirectedClusterLocator } from '../../programmable-units/graph-visualization/directed-graph/locator/directedClusterLocator';
 import { DirectedGraphLocator } from '../../programmable-units/graph-visualization/directed-graph/locator/directedGraphLocator';
 import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/programmedTransformSource';
 import {
@@ -21,6 +24,7 @@ import {
   InteractableStreamMetatype,
 } from './interactable';
 import { Prerequisite } from './prerequisite';
+import { RankGroup } from './rankGroup';
 import { SKILL_COLLECTION_ID, SkillStreamMetatype } from './skill';
 
 const PROGRAMMED_TRANSFORM_NAME = 'buildGraphElements' as const;
@@ -62,6 +66,34 @@ export const buildGraphElements = buildProgrammedTransform({
     });
     graphElements.push(root);
 
+    const clusterByRank = new Map(
+      ['B', 'S', 'G', 'P', 'D', 'C', 'GC', 'SSL'].map((rank) => {
+        const cluster = new DirectedCluster({
+          locator: new DirectedClusterLocator({
+            graphLocator,
+            parentLocator: graphLocator,
+            source: transformSource,
+            distinguisher: rank,
+          }),
+          inputAttributeByKey: {
+            margin: '100',
+            style: GraphLikeStyle.Rounded,
+          },
+        });
+        graphElements.push(cluster);
+        interactables.push(
+          new Interactable({
+            item: new RankGroup({
+              id: rank,
+            }),
+            element: cluster,
+          }),
+        );
+
+        return [rank, cluster];
+      }),
+    );
+
     const skillNodeById = new Map<string, DirectedGraphNode>();
 
     skillCollection.list.forEach((skill) => {
@@ -86,9 +118,11 @@ export const buildGraphElements = buildProgrammedTransform({
           SSL: '▿',
         }[skill.rank] ?? '•';
 
+      const cluster = clusterByRank.get(skill.rank);
+
       const node = new DirectedGraphNode({
         graphLocator,
-        parentLocator: graphLocator,
+        parentLocator: cluster ?? graphLocator,
         source: transformSource,
         distinguisher: skill.title,
         inputAttributeByKey: {

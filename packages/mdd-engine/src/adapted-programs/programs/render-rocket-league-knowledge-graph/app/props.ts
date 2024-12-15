@@ -22,3 +22,7 @@ export type PrerequisiteProps = PropsWithChildren<{
   tailId: string;
   headId: string;
 }>;
+
+export type RankGroupProps = PropsWithChildren<{
+  id: string;
+}>;

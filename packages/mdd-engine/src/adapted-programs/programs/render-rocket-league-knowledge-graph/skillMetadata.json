@@ -14,7 +14,7 @@
         "url": "http://dignitas.gg/articles/blogs/rocket-league/12789/how-to-master-the-45-degree-flick"
       }
     ],
-    "rank": "",
+    "rank": "GC",
     "prerequisites": [
       "Popping",
       "Directional Flick"
@@ -26,9 +26,9 @@
   "50/50’s + Kickoffs": {
     "id": "50/50’s + Kickoffs",
     "title": "50/50’s + Kickoffs",
-    "description": "",
+    "description": "P",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Flipping",
       "Boosting"
@@ -42,7 +42,7 @@
     "title": "Advanced Boost Management",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -60,7 +60,7 @@
         "url": "http://dignitas.gg/articles/blogs/rocket-league/13229/take-your-rocket-league-gameplay-to-the-next-level-powershots"
       }
     ],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Basic Aerials",
       "Powershot + Powerclears"
@@ -69,9 +69,9 @@
     "isUnnecessary": false,
     "isSilly": false
   },
-  "Air Demos": {
-    "id": "Air Demos",
-    "title": "Air Demos",
+  "Air Bumps / Demos": {
+    "id": "Air Bumps / Demos",
+    "title": "Air Bumps / Demos",
     "description": "Demo’s (demolishing and / or bumping) an opponent during their aerial or in the air.",
     "notes": [
       {
@@ -79,7 +79,7 @@
         "url": "https://www.youtube.com/watch?v=XIG84V6ERCA"
       }
     ],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Basic Demos",
       "Basic Aerials"
@@ -99,9 +99,9 @@
       },
       "Being able to get back into position after a failed shot, aerial, or block."
     ],
-    "rank": "",
+    "rank": "C",
     "prerequisites": [
-      "Air Demos",
+      "Air Bumps / Demos",
       "Air Dribbling"
     ],
     "isRecommended": false,
@@ -130,7 +130,7 @@
         "url": "https://www.youtube.com/watch?v=3VyjtI_fGsg"
       }
     ],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [],
     "isRecommended": false,
     "isUnnecessary": false,
@@ -141,7 +141,7 @@
     "title": "Air Roll Shots",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Joystick Air Roll",
       "Powershot + Powerclears",
@@ -156,7 +156,7 @@
     "title": "Back-passing",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -169,7 +169,7 @@
     "title": "Backboard Passing",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -187,7 +187,7 @@
         "url": "https://www.youtube.com/watch?v=0ohM0iPynUI&feature=youtu.be"
       }
     ],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Flipping"
     ],
@@ -200,7 +200,7 @@
     "title": "Backwards Aerials",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Basic Aerials",
       "Joystick Air Roll"
@@ -214,7 +214,7 @@
     "title": "Bait Shot",
     "description": "Intentionally missing the goal to draw out a defender",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Chip Shot"
     ],
@@ -227,7 +227,7 @@
     "title": "Ball Camera Control",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Jumping"
     ],
@@ -240,7 +240,7 @@
     "title": "Basic Aerials",
     "description": "",
     "notes": [],
-    "rank": "G",
+    "rank": "S",
     "prerequisites": [
       "Jumping",
       "Boosting"
@@ -267,7 +267,7 @@
         "url": "https://www.youtube.com/watch?v=YGUSrDHKi-Q"
       }
     ],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Boosting",
       "Turning"
@@ -281,7 +281,7 @@
     "title": "Boost Stealing",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -294,7 +294,7 @@
     "title": "Boosting",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "B",
     "prerequisites": [
       "Driving"
     ],
@@ -316,7 +316,7 @@
         "url": "https://www.youtube.com/watch?v=UZNsoMdDj5Y"
       }
     ],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Prediction",
       "Push Dribbling"
@@ -335,7 +335,7 @@
         "url": "http://dignitas.gg/articles/blogs/rocket-league/13229/take-your-rocket-league-gameplay-to-the-next-level-powershots"
       }
     ],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Powershot + Powerclears",
       "Jumping"
@@ -354,7 +354,7 @@
         "url": "https://www.youtube.com/watch?v=UZNsoMdDj5Y"
       }
     ],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Bounce Dribbling",
       "Air Dribbling"
@@ -368,7 +368,7 @@
     "title": "Braking",
     "description": "Slows the car down by letting go of accelerate and pressing reverse.",
     "notes": [],
-    "rank": "",
+    "rank": "B",
     "prerequisites": [
       "Driving"
     ],
@@ -386,7 +386,7 @@
         "url": "https://www.youtube.com/watch?v=WZu8wYja770"
       }
     ],
-    "rank": "",
+    "rank": "GC",
     "prerequisites": [
       "Tornado Spin",
       "Bounce Dribbling"
@@ -405,7 +405,7 @@
         "url": "https://www.youtube.com/watch?v=p2PkJ3OyjXU"
       }
     ],
-    "rank": "",
+    "rank": "SSL",
     "prerequisites": [
       "Directional Air Roll"
     ],
@@ -418,7 +418,7 @@
     "title": "Calculated Clears",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -431,7 +431,7 @@
     "title": "Catching",
     "description": "Stopping and slowing the ball with a dribble when it hits the ground after being in the air.",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Prediction"
     ],
@@ -444,7 +444,7 @@
     "title": "Ceiling Shots",
     "description": "Having the ball near or bounce off or around the ceiling for a shot on goal.",
     "notes": [],
-    "rank": "",
+    "rank": "GC",
     "prerequisites": [
       "Wall Driving",
       "Basic Aerials",
@@ -482,7 +482,7 @@
         "url": "https://www.reddit.com/r/RocketLeague/comments/ab9490/playing_the_first_man_role_a_guide_for_all_skill/?st=JQFHERHK&sh=9ac03a3b"
       }
     ],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -508,7 +508,7 @@
     "title": "Chip Double Touch",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Chipping"
     ],
@@ -521,7 +521,7 @@
     "title": "Chip Shot",
     "description": "Using boost to control how hard you chip the ball towards the goal",
     "notes": [],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Chipping"
     ],
@@ -534,11 +534,24 @@
     "title": "Chipping",
     "description": "Driving into a grounded ball without jumping",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Boosting"
     ],
     "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Clears": {
+    "id": "Clears",
+    "title": "Clears",
+    "description": "",
+    "notes": [],
+    "rank": "B",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": false,
     "isUnnecessary": false,
     "isSilly": false
   },
@@ -547,7 +560,7 @@
     "title": "Clear Prevention",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -560,7 +573,7 @@
     "title": "Close Touch",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -571,9 +584,9 @@
   "Corner Pass": {
     "id": "Corner Pass",
     "title": "Corner Pass",
-    "description": "",
+    "description": "Pasing the ball around the corner to try and center it close to the goal",
     "notes": [],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -586,7 +599,7 @@
     "title": "Crossing",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Driving"
     ],
@@ -599,7 +612,7 @@
     "title": "Cutting",
     "description": "When an opponent is dribbling (keeping the ball close to oneself), the player comes at an angle to the dribble and forces it out of the opponent's possession.",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Prediction"
     ],
@@ -617,7 +630,7 @@
         "url": "https://www.youtube.com/watch?v=hOarxtWuZ5E"
       }
     ],
-    "rank": "",
+    "rank": "C",
     "prerequisites": [
       "Directional Flick"
     ],
@@ -630,9 +643,22 @@
     "title": "Diagonal Flipping",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Flipping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Directed Wall Pinch": {
+    "id": "Directed Wall Pinch",
+    "title": "Directed Wall Pinch",
+    "description": "",
+    "notes": [],
+    "rank": "D",
+    "prerequisites": [
+      "Wall Punch"
     ],
     "isRecommended": false,
     "isUnnecessary": false,
@@ -643,7 +669,7 @@
     "title": "Directional Air Roll",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Jumping"
     ],
@@ -665,7 +691,7 @@
         "url": "http://dignitas.gg/articles/blogs/rocket-league/12789/how-to-master-the-45-degree-flick"
       }
     ],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Hood Dribble",
       "Flipping"
@@ -684,7 +710,7 @@
         "url": "https://www.youtube.com/watch?v=0ohM0iPynUI&feature=youtu.be"
       }
     ],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Popping"
     ],
@@ -699,7 +725,7 @@
     "notes": [
       "Hitting the ball up the wall up near the ceiling to allow for a wall shot or an air dribble."
     ],
-    "rank": "",
+    "rank": "C",
     "prerequisites": [
       "Wall Driving",
       "Basic Aerials",
@@ -719,7 +745,7 @@
         "url": "https://youtu.be/0ohM0iPynUI?t=62"
       }
     ],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Basic Aerials",
       "Double Jumping"
@@ -733,7 +759,7 @@
     "title": "Double Jumping",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "B",
     "prerequisites": [
       "Jumping"
     ],
@@ -755,7 +781,7 @@
         "url": "http://dignitas.gg/articles/blogs/rocket-league/12633/air-rolling-a-rocket-league-guide-on-effective-aerials"
       }
     ],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Popping"
     ],
@@ -779,7 +805,7 @@
     "title": "Dunking",
     "description": "Jumping before an opponent's pop (Hitting the ball in a way where it allows the player to hit it again) to get the ball over their head and in the players possession.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Pre-Jumping"
     ],
@@ -792,7 +818,7 @@
     "title": "Faking",
     "description": "Being able to predict a opponent's movements and stop yours in reaction to that prediction.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Prediction"
     ],
@@ -805,7 +831,7 @@
     "title": "Fast Aerials",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Basic Aerials",
       "Double Jumping"
@@ -824,7 +850,7 @@
         "url": "http://dignitas.gg/articles/blogs/rocket-league/12642/take-your-rocket-league-gameplay-to-the-next-level-kickoffs"
       }
     ],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "50/50’s + Kickoffs"
     ],
@@ -842,7 +868,7 @@
         "url": "http://dignitas.gg/articles/blogs/rocket-league/12628/half-flips-where-when-and-how"
       }
     ],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Flipping"
     ],
@@ -868,7 +894,7 @@
         "url": "https://www.youtube.com/watch?v=kDhYkOlXrxM&t=24s"
       }
     ],
-    "rank": "",
+    "rank": "GC",
     "prerequisites": [
       "Flip Window"
     ],
@@ -879,9 +905,9 @@
   "Flip Window": {
     "id": "Flip Window",
     "title": "Flip Window",
-    "description": "Understanding how long you have to flip, and when your flip is avaialable again (resets)",
+    "description": "Understanding how long you have to flip, and when your flip is avaialable again (when it resets)",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Jumping"
     ],
@@ -894,7 +920,7 @@
     "title": "Flipping",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "B",
     "prerequisites": [
       "Jumping"
     ],
@@ -907,7 +933,7 @@
     "title": "Forward Half Flipping",
     "description": "A back flip that is canceled when parallel with the ground. Then air roll to have the wheels hit the ground.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Half Flipping"
     ],
@@ -920,7 +946,7 @@
     "title": "Game Awareness",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Prediction",
       "Rotation",
@@ -936,7 +962,7 @@
     "title": "Game Speed",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [],
     "isRecommended": false,
     "isUnnecessary": false,
@@ -947,7 +973,7 @@
     "title": "Goalie Demos",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Basic Demos"
     ],
@@ -974,7 +1000,7 @@
     "title": "Half Flipping",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Flip Canceling"
     ],
@@ -992,11 +1018,12 @@
         "url": "https://gfycat.com/LiquidBaggyDoe"
       }
     ],
-    "rank": "",
+    "rank": "n/a",
     "prerequisites": [],
     "isRecommended": false,
     "isUnnecessary": true,
     "isSilly": false,
+    "comment": "Replaced by zapdash",
     "isDisabled": true
   },
   "Hel-jump": {
@@ -1009,7 +1036,7 @@
         "url": "https://www.youtube.com/watch?v=p1KxjeQT5As"
       }
     ],
-    "rank": "",
+    "rank": "SSL",
     "prerequisites": [
       "Wave Dash",
       "Boosting"
@@ -1054,7 +1081,7 @@
         "url": "https://www.reddit.com/r/RocketLeague/comments/9z063d/comment/ea6fkn9/?st=JORGHW4X&sh=a3097bd5"
       }
     ],
-    "rank": "",
+    "rank": "C",
     "prerequisites": [
       "Hood Dribble",
       "Air Dribbling"
@@ -1073,7 +1100,7 @@
         "url": "https://streamable.com/y3nme"
       }
     ],
-    "rank": "",
+    "rank": "GC",
     "prerequisites": [
       "Kuxir Pinch"
     ],
@@ -1099,7 +1126,7 @@
         "url": "https://www.reddit.com/r/RocketLeagueHoops/comments/6ths26/the_friendship_kickoff_in_hoops_im_here_to/?st=jaki6yvh&sh=a7e9c3ec"
       }
     ],
-    "rank": "",
+    "rank": "C",
     "prerequisites": [
       "Jumping",
       "Teammate Awareness"
@@ -1126,7 +1153,7 @@
     "title": "Joystick Air Roll",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Jumping"
     ],
@@ -1139,7 +1166,7 @@
     "title": "Jumping",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "B",
     "prerequisites": [
       "Driving"
     ],
@@ -1152,7 +1179,7 @@
     "title": "Kickoff Prediction",
     "description": "Reading the opponent in a 50/50 but during kickoff.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -1170,9 +1197,9 @@
         "url": "https://www.youtube.com/watch?v=aYuTibfTZ4M"
       }
     ],
-    "rank": "",
+    "rank": "C",
     "prerequisites": [
-      "Wall Pinch"
+      "Directed Wall Pinch"
     ],
     "isRecommended": false,
     "isUnnecessary": false,
@@ -1183,7 +1210,7 @@
     "title": "Leveling Out",
     "description": "Orienting the car so it's facing the direction of travel while in the air to maintain speed when landing",
     "notes": [],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Basic Aerials"
     ],
@@ -1218,7 +1245,7 @@
         "url": "https://www.youtube.com/watch?v=K1EqEm33jT0"
       }
     ],
-    "rank": "",
+    "rank": "GC",
     "prerequisites": [
       "Delayed Flicks"
     ],
@@ -1236,7 +1263,7 @@
         "url": "https://www.youtube.com/watch?v=96tNxK5vTsQ"
       }
     ],
-    "rank": "",
+    "rank": "C",
     "prerequisites": [
       "Directional Flick"
     ],
@@ -1258,11 +1285,12 @@
         "url": "/user/redbull123/"
       }
     ],
-    "rank": "",
+    "rank": "n/a",
     "prerequisites": [],
     "isRecommended": false,
     "isUnnecessary": false,
     "isSilly": false,
+    "comment": "No reference, and pretty useless",
     "isDisabled": true
   },
   "Opponent Boost Management": {
@@ -1270,7 +1298,7 @@
     "title": "Opponent Boost Management",
     "description": "Mostly used in one verses one games and an advanced version of self boost management; It is the practice of knowing how much boost the opponent currently has at any moment.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -1283,7 +1311,7 @@
     "title": "Opponent Prediction",
     "description": "Understanding what the opponent will do from experience and responding beforehand.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -1305,7 +1333,7 @@
         "url": "https://www.youtube.com/watch?v=47wUzrUmNHQ"
       }
     ],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Game Awareness",
       "Basic Aerials"
@@ -1319,7 +1347,7 @@
     "title": "Playstyle Reading",
     "description": "Being able to watch a player and understand their weaknesses and play against them.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -1332,7 +1360,7 @@
     "title": "Popping",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Jumping"
     ],
@@ -1345,7 +1373,7 @@
     "title": "Positioning",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Driving"
     ],
@@ -1358,7 +1386,7 @@
     "title": "Possession Prediction",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Game Awareness",
       "Powershot + Powerclears"
@@ -1377,7 +1405,7 @@
         "url": "http://dignitas.gg/articles/blogs/rocket-league/13015/advanced-dribbling-techniques-in-rocket-league"
       }
     ],
-    "rank": "",
+    "rank": "C",
     "prerequisites": [
       "Hood Dribble",
       "Powerslide Turning"
@@ -1389,13 +1417,14 @@
   "Powershot + Powerclears": {
     "id": "Powershot + Powerclears",
     "title": "Powershot + Powerclears",
-    "description": "",
+    "description": "G",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Driving",
       "Boosting",
-      "Turning"
+      "Turning",
+      "Clears"
     ],
     "isRecommended": false,
     "isUnnecessary": false,
@@ -1406,7 +1435,7 @@
     "title": "Powershot Passing",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Game Awareness"
     ],
@@ -1419,7 +1448,7 @@
     "title": "Powerslide Recovery",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Powerslide Turning"
     ],
@@ -1432,7 +1461,7 @@
     "title": "Powerslide Turning",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Driving"
     ],
@@ -1445,7 +1474,7 @@
     "title": "Pre-Jumping",
     "description": "Jumping in expectation of an opponents shot, clear, or save.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Prediction"
     ],
@@ -1458,7 +1487,7 @@
     "title": "Prediction",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Driving"
     ],
@@ -1476,7 +1505,7 @@
         "url": "https://www.youtube.com/watch?v=eBmgRPOmh98"
       }
     ],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Ball Camera Control"
     ],
@@ -1489,7 +1518,7 @@
     "title": "Rebound Shots",
     "description": "When the ball hits a wall hard enough to start going towards midfield and the player uses prediction, aerials, and air rolls to score it.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Prediction",
       "Basic Aerials",
@@ -1504,7 +1533,7 @@
     "title": "Redirects",
     "description": "Hitting the ball in a way to cause the direction of the ball to change for a pass, clear, or goal.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Turning",
       "Boosting"
@@ -1518,7 +1547,7 @@
     "title": "Rotation",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Positioning",
       "Teammate Awareness"
@@ -1537,13 +1566,13 @@
         "url": "https://clips.twitch.tv/CleanAbnegateWrenchKappaWealth"
       }
     ],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Flipping"
     ],
     "isRecommended": false,
-    "isUnnecessary": false,
-    "isSilly": false
+    "isUnnecessary": true,
+    "isSilly": true
   },
   "Rumble - UFO Shots": {
     "id": "Rumble - UFO Shots",
@@ -1555,20 +1584,20 @@
         "url": "https://www.youtube.com/watch?v=fI1Qry4LqKY"
       }
     ],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Flip Window"
     ],
     "isRecommended": false,
-    "isUnnecessary": false,
-    "isSilly": false
+    "isUnnecessary": true,
+    "isSilly": true
   },
   "Self Boost Management": {
     "id": "Self Boost Management",
     "title": "Self Boost Management",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Rotation"
     ],
@@ -1586,7 +1615,7 @@
         "url": "https://www.youtube.com/watch?v=2aZA-NCRRgI&vl=en"
       }
     ],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Positioning",
       "Game Awareness"
@@ -1600,7 +1629,7 @@
     "title": "Sideways Aerials",
     "description": "Hitting the ball in an aerial but, having either side of the car towards the floor.",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Basic Aerials",
       "Air Roll Shots"
@@ -1619,7 +1648,7 @@
         "url": "https://www.reddit.com/r/RocketLeague/comments/ab9490/playing_the_first_man_role_a_guide_for_all_skill/?st=JQFHERHK&sh=9ac03a3b"
       }
     ],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Prediction"
     ],
@@ -1632,7 +1661,7 @@
     "title": "Speed Flipping",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Flipping",
       "Directional Air Roll"
@@ -1675,7 +1704,7 @@
         "url": "https://www.youtube.com/watch?v=xokXElyi1zo"
       }
     ],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Directional Air Roll"
     ],
@@ -1688,7 +1717,20 @@
     "title": "Team Pinch",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "G",
+    "prerequisites": [
+      "Teammate Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Team Pinch Clear / Shot": {
+    "id": "Team Pinch Shot",
+    "title": "Team Pinch Shot",
+    "description": "",
+    "notes": [],
+    "rank": "P",
     "prerequisites": [
       "Teammate Awareness"
     ],
@@ -1701,7 +1743,7 @@
     "title": "Teammate Awareness",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Positioning"
     ],
@@ -1719,7 +1761,7 @@
         "url": "https://www.youtube.com/watch?v=y2isfCJfPps"
       }
     ],
-    "rank": "",
+    "rank": "GC",
     "prerequisites": [
       "Flipping",
       "Boosting"
@@ -1739,7 +1781,7 @@
       },
       "Mertzy’s custom training code, 59D5-1411-36A2-8B76."
     ],
-    "rank": "",
+    "rank": "GC",
     "prerequisites": [
       "Tornado Spin",
       "Bounce Dribbling"
@@ -1753,7 +1795,7 @@
     "title": "Tornado Spin",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Directional Air Roll",
       "Backwards Aerials",
@@ -1768,11 +1810,11 @@
     "title": "Turning",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "B",
     "prerequisites": [
       "Driving"
     ],
-    "isRecommended": false,
+    "isRecommended": true,
     "isUnnecessary": false,
     "isSilly": false
   },
@@ -1781,7 +1823,7 @@
     "title": "Turtle Dribbling",
     "description": "A type of push dribble, where the player is turtling while dribbling.",
     "notes": [],
-    "rank": "",
+    "rank": "GC",
     "prerequisites": [
       "Push Dribbling",
       "Turtling"
@@ -1800,7 +1842,7 @@
         "url": "https://www.youtube.com/watch?v=JFRvlROxcCQ"
       }
     ],
-    "rank": "",
+    "rank": "SSL",
     "prerequisites": [
       "Turtling"
     ],
@@ -1818,7 +1860,7 @@
         "url": "https://www.youtube.com/watch?v=_pOs0oZMXFU"
       }
     ],
-    "rank": "",
+    "rank": "SSL",
     "prerequisites": [
       "Turtle Dribbling",
       "Wall Air Dribble"
@@ -1832,7 +1874,7 @@
     "title": "Turtling",
     "description": "After a jump, turning the car upside down so that it lands on the hood of the car is turtling. Players can score a goal while doing this and get the turtle shot award.",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Joystick Air Roll"
     ],
@@ -1850,7 +1892,7 @@
         "url": "https://www.youtube.com/watch?v=UZNsoMdDj5Y"
       }
     ],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Air Dribbling"
     ],
@@ -1868,7 +1910,7 @@
         "url": "http://dignitas.gg/articles/blogs/rocket-league/13015/advanced-dribbling-techniques-in-rocket-league"
       }
     ],
-    "rank": "",
+    "rank": "D",
     "prerequisites": [
       "Wall Driving",
       "Catching"
@@ -1887,7 +1929,7 @@
         "url": "https://www.reddit.com/user/waypr0tein"
       }
     ],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Wall Driving",
       "Powershot + Powerclears",
@@ -1902,7 +1944,7 @@
     "title": "Wall Driving",
     "description": "Keeping the car pointed within 90 degrees of 'straight up' for better wall control",
     "notes": [],
-    "rank": "",
+    "rank": "S",
     "prerequisites": [
       "Positioning",
       "Wall Driving"
@@ -1916,7 +1958,7 @@
     "title": "Wall Pinch",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Jumping",
       "Boosting",
@@ -1931,7 +1973,7 @@
     "title": "Wave Dash",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "G",
     "prerequisites": [
       "Flipping"
     ],
@@ -1949,7 +1991,7 @@
         "url": "http://dignitas.gg/articles/blogs/rocket-league/12642/take-your-rocket-league-gameplay-to-the-next-level-kickoffs"
       }
     ],
-    "rank": "",
+    "rank": "P",
     "prerequisites": [
       "Fast Kickoffs"
     ],
@@ -1962,7 +2004,7 @@
     "title": "Zap Dash",
     "description": "",
     "notes": [],
-    "rank": "",
+    "rank": "GC",
     "prerequisites": [
       "Speed Flipping",
       "Wave Dash"

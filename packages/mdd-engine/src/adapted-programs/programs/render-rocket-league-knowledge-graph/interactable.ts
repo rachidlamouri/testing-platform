@@ -1,9 +1,10 @@
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { DirectedGraphElement } from '../../programmable-units/graph-visualization/directed-graph/element/directedGraphElement';
 import { Prerequisite } from './prerequisite';
+import { RankGroup } from './rankGroup';
 import { Skill } from './skill';
 
-export type Item = Skill | Prerequisite;
+export type Item = RankGroup | Skill | Prerequisite;
 
 type InteractableInput = {
   item: Item;
