@@ -37,6 +37,7 @@ import { buildGraphElements } from './buildGraphElements';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
 import rawSkillMetadata from './skillMetadata.json';
 import { Skill, SKILL_COLLECTION_ID, SkillStreamMetatype } from './skill';
+import { validatePrerequisites } from './validatePrerequisites';
 
 const skillMetadataList = Object.values(rawSkillMetadata);
 
@@ -108,6 +109,7 @@ runEngine({
     enumerateFileSystemObjects,
     categorizeFiles,
 
+    validatePrerequisites,
     buildGraphElements,
 
     groupGraphElements,
