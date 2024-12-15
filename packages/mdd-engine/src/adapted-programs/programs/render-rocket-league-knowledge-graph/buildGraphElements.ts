@@ -20,12 +20,8 @@ import {
   INTERACTABLE_COLLECTION_ID,
   InteractableStreamMetatype,
 } from './interactable';
-import {
-  PARSED_INPUT_COLLECTION_ID,
-  ParsedInputStreamMetatype,
-} from './parsedInput';
 import { Prerequisite } from './prerequisite';
-import { Skill } from './skill';
+import { SKILL_COLLECTION_ID, SkillStreamMetatype } from './skill';
 
 const PROGRAMMED_TRANSFORM_NAME = 'buildGraphElements' as const;
 
@@ -40,8 +36,8 @@ const transformSource = new ProgrammedTransformSourceInstance({
 export const buildGraphElements = buildProgrammedTransform({
   name: PROGRAMMED_TRANSFORM_NAME,
 })
-  .fromItem2<ParsedInputStreamMetatype>({
-    collectionId: PARSED_INPUT_COLLECTION_ID,
+  .fromCollection2<SkillStreamMetatype>({
+    collectionId: SKILL_COLLECTION_ID,
   })
   .toItemTuple2<DirectedGraphElementStreamMetatype>({
     collectionId: DIRECTED_GRAPH_ELEMENT_COLLECTION_ID,
@@ -49,7 +45,7 @@ export const buildGraphElements = buildProgrammedTransform({
   .toItemTuple2<InteractableStreamMetatype>({
     collectionId: INTERACTABLE_COLLECTION_ID,
   })
-  .onTransform((input) => {
+  .onTransform((skillCollection) => {
     const graphElements: DirectedGraphElement[] = [];
     const interactables: Interactable[] = [];
 
@@ -67,97 +63,83 @@ export const buildGraphElements = buildProgrammedTransform({
     graphElements.push(root);
 
     const skillNodeById = new Map<string, DirectedGraphNode>();
-    const skillById = new Map<string, Skill>(
-      input.sections.flatMap((section) => {
-        return section.skills.map((skill) => {
-          return [skill.id, skill];
-        });
-      }),
-    );
 
-    input.sections.forEach((section) => {
-      section.skills.forEach((skill) => {
-        const sentenceLabel = skill.title
-          .split(' ')
-          .map((word) => {
-            const firstLetter = word.at(0);
-            assertNotUndefined(firstLetter);
-            return firstLetter.toUpperCase() + word.substring(1);
-          })
-          .join(' ');
+    skillCollection.list.forEach((skill) => {
+      const sentenceLabel = skill.title
+        .split(' ')
+        .map((word) => {
+          const firstLetter = word.at(0);
+          assertNotUndefined(firstLetter);
+          return firstLetter.toUpperCase() + word.substring(1);
+        })
+        .join(' ');
 
-        const rankIcon =
-          {
-            B: '○',
-            S: '⬣',
-            G: '△',
-            P: '✩',
-            D: '▽',
-            C: '♢',
-            GC: '♢',
-            SSL: '▿',
-          }[skill.rank] ?? '•';
+      const rankIcon =
+        {
+          B: '○',
+          S: '⬣',
+          G: '△',
+          P: '✩',
+          D: '▽',
+          C: '♢',
+          GC: '♢',
+          SSL: '▿',
+        }[skill.rank] ?? '•';
 
-        const node = new DirectedGraphNode({
-          graphLocator,
-          parentLocator: graphLocator,
-          source: transformSource,
-          distinguisher: skill.title,
-          inputAttributeByKey: {
-            // Done, Rank, Recommended, Silly, Unnecessary, Useless
-            label: `${sentenceLabel}\n_✓ ${rankIcon} ! ¿¡ x`,
-            shape: NodeShape.Box,
-            style: NodeStyle.Rounded,
-            margin: '0.15,0.1',
-            fontsize: 36,
-          },
-        });
-
-        graphElements.push(node);
-        interactables.push(
-          new Interactable({
-            item: skill,
-            element: node,
-          }),
-        );
-
-        skillNodeById.set(skill.id, node);
+      const node = new DirectedGraphNode({
+        graphLocator,
+        parentLocator: graphLocator,
+        source: transformSource,
+        distinguisher: skill.title,
+        inputAttributeByKey: {
+          // Done, Rank, Recommended, Silly, Unnecessary, Useless
+          label: `${sentenceLabel}\n_✓ ${rankIcon} ! ¿¡ x`,
+          shape: NodeShape.Box,
+          style: NodeStyle.Rounded,
+          margin: '0.15,0.1',
+          fontsize: 36,
+        },
       });
+
+      graphElements.push(node);
+      interactables.push(
+        new Interactable({
+          item: skill,
+          element: node,
+        }),
+      );
+
+      skillNodeById.set(skill.id, node);
     });
 
-    input.sections.forEach((section) => {
-      section.skills.forEach((skill) => {
-        const headId = skill.id;
-        const head = skillNodeById.get(headId);
-        assertNotUndefined(head);
+    skillCollection.list.forEach((skill) => {
+      const headId = skill.id;
+      const head = skillNodeById.get(headId);
+      assertNotUndefined(head);
 
-        skill.prerequisites.forEach((prerequisite) => {
-          const tailNode = skillNodeById.get(prerequisite);
-          const tailSkill = skillById.get(prerequisite);
-          assertNotUndefined(
-            tailNode,
-            `Invalid prerequisite "${prerequisite}"`,
-          );
-          assertNotUndefined(tailSkill);
+      skill.prerequisites.forEach((prerequisite) => {
+        const tailNode = skillNodeById.get(prerequisite);
+        const tailSkill = skillCollection.byId.get(prerequisite);
+        assertNotUndefined(tailNode, `Invalid prerequisite "${prerequisite}"`);
+        assertNotUndefined(tailSkill);
 
-          const edge = new DirectedEdge({
-            graphLocator,
-            tail: tailNode,
-            head,
-            source: transformSource,
-          });
-
-          graphElements.push(edge);
-          interactables.push(
-            new Interactable({
-              item: new Prerequisite({
-                tailId: tailSkill.id,
-                headId,
-              }),
-              element: edge,
-            }),
-          );
+        const edge = new DirectedEdge({
+          graphLocator,
+          tail: tailNode,
+          head,
+          source: transformSource,
         });
+
+        graphElements.push(edge);
+        interactables.push(
+          new Interactable({
+            item: new Prerequisite({
+              tailId: tailSkill.id,
+              headId,
+            }),
+            element: edge,
+          }),
+        );
       });
     });
 

@@ -1,979 +1,1974 @@
 {
-  "Crossing": {
-    "id": "Crossing",
-    "description": "",
-    "section": "Core Skills",
-    "isRecommended": true,
+  "45 Degree Flick": {
+    "id": "45 Degree Flick",
+    "title": "45 Degree Flick",
+    "description": "Usually during a hood dribble, the player pops (Hitting the ball in a way where it allows the player to hit it again) the ball then angles their car to hit the",
+    "notes": [
+      "ball with the corner of their car for power.",
+      {
+        "text": "Avatarmanz 45 Degree Flick Tutorial.",
+        "url": "https://www.youtube.com/watch?v=bmnALGzj_LE"
+      },
+      {
+        "text": "Dignitas 45-Degree flick guide",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/12789/how-to-master-the-45-degree-flick"
+      }
+    ],
+    "rank": "",
     "prerequisites": [
-      "Driving"
-    ]
-  },
-  "Calculated clears": {
-    "id": "Calculated clears",
-    "description": "",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Close touch": {
-    "id": "Close touch",
-    "description": "",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Chipping": {
-    "id": "Chipping",
-    "description": "Driving into a grounded ball without jumping",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Boosting"
-    ]
-  },
-  "Chip shot": {
-    "id": "Chip shot",
-    "description": "Using boost to control how hard you chip the ball towards the goal",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Chipping"
-    ]
-  },
-  "Bait shot": {
-    "id": "Bait shot",
-    "description": "Intentionally missing the goal to draw out a defender",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Chip shot"
-    ]
-  },
-  "Chip clear": {
-    "id": "Chip clear",
-    "description": "Using boost to make a strong clear with a chip",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "rank": "S",
-    "prerequisites": [
-      "Chipping"
-    ]
-  },
-  "Chip double touch": {
-    "id": "Chip double touch",
-    "description": "",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Chipping"
-    ]
-  },
-  "Leveling out": {
-    "id": "Leveling out",
-    "description": "Orienting the car so the wheels are down when in the air",
-    "section": "Air control",
-    "isRecommended": true,
-    "prerequisites": [
-      "Wall driving"
-    ]
-  },
-  "Wave dash": {
-    "id": "Wave dash",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Flipping"
-    ]
-  },
-  "Zap dash": {
-    "id": "Zap dash",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Speed flipping",
-      "Wave dash"
-    ]
-  },
-  "Momentum conservation recovery": {
-    "id": "Leveling out",
-    "description": "Orienting the car so it's facing the direction of travel while in the air to maintain speed when landing",
-    "section": "Recovery",
-    "isRecommended": true,
-    "prerequisites": [
-      "Basic aeriels"
-    ]
-  },
-  "Wall driving": {
-    "id": "Wall driving",
-    "description": "Driving on the wall without getting disoriented",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Driving"
-    ]
-  },
-  "Wall positioning": {
-    "id": "Wall driving",
-    "description": "Keeping the car pointed within 90 degrees of 'straight up' for better wall control",
-    "section": "Mental Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Positioning",
-      "Wall driving"
-    ]
-  },
-  "Ball camera control": {
-    "id": "Ball camera control",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Jumping"
-    ]
-  },
-  "Joystick air roll": {
-    "id": "Joystick air roll",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Jumping"
-    ]
-  },
-  "Directional air roll": {
-    "id": "Directional air roll",
-    "section": "Core Skills",
-    "isRecommended": true,
-    "prerequisites": [
-      "Jumping"
-    ]
-  },
-  "Tornado spin": {
-    "id": "Tornado spin",
-    "section": "Air control",
-    "isRecommended": true,
-    "prerequisites": [
-      "Directional air roll",
-      "Backwards aerials",
-      "Sideways aerials"
-    ]
-  },
-  "Jumping": {
-    "id": "Jumping",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Driving"
-    ]
-  },
-  "Turning": {
-    "id": "Turning",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Driving"
-    ]
-  },
-  "Driving": {
-    "id": "Driving",
-    "section": "Core Skills",
-    "rank": "B",
-    "prerequisites": []
-  },
-  "Double Jumping": {
-    "id": "Double Jumping",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Jumping"
-    ]
-  },
-  "Flipping": {
-    "id": "Flipping",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Jumping"
-    ]
-  },
-  "Flip window": {
-    "id": "Flip window",
-    "description": "Understanding how long you have to flip, and when your flip is avaialable again (resets)",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Jumping"
-    ]
-  },
-  "Diagonal Flipping": {
-    "id": "Diagonal Flipping",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Flipping"
-    ]
-  },
-  "Speed flipping": {
-    "id": "Speed flipping",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Flipping",
-      "Directional air roll"
-    ]
-  },
-  "Braking": {
-    "id": "Braking",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Driving"
-    ]
-  },
-  "Boosting": {
-    "id": "Boosting",
-    "section": "Core Skills",
-    "prerequisites": [
-      "Driving"
-    ]
+      "Popping",
+      "Directional Flick"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false
   },
   "50/50’s + Kickoffs": {
     "id": "50/50’s + Kickoffs",
-    "section": "Core Skills",
+    "title": "50/50’s + Kickoffs",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
       "Flipping",
       "Boosting"
-    ]
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Powershot + Powerclears": {
-    "id": "Powershot + Powerclears",
-    "section": "Core Skills",
+  "Advanced Boost Management": {
+    "id": "Advanced Boost Management",
+    "title": "Advanced Boost Management",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
-      "Driving",
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Aerial Powershot": {
+    "id": "Aerial Powershot",
+    "title": "Aerial Powershot",
+    "description": "Positioning the car to go with the ball's momentum to powershot it.",
+    "notes": [
+      {
+        "text": "Dignitas’s Power shot guide",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/13229/take-your-rocket-league-gameplay-to-the-next-level-powershots"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Basic Aerials",
+      "Powershot + Powerclears"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Air Demos": {
+    "id": "Air Demos",
+    "title": "Air Demos",
+    "description": "Demo’s (demolishing and / or bumping) an opponent during their aerial or in the air.",
+    "notes": [
+      {
+        "text": "Amustycow’s air demo tutorial.",
+        "url": "https://www.youtube.com/watch?v=XIG84V6ERCA"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Basic Demos",
+      "Basic Aerials"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Air Dribble To Demo": {
+    "id": "Air Dribble To Demo",
+    "title": "Air Dribble To Demo",
+    "description": "Usually a one verses one move, after an air dribble, the player goes towards the opponent to demolish or bump.",
+    "notes": [
+      {
+        "text": "Amustycow’s air demo tutorial.",
+        "url": "https://www.youtube.com/watch?v=XIG84V6ERCA"
+      },
+      "Being able to get back into position after a failed shot, aerial, or block."
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Air Demos",
+      "Air Dribbling"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Air Dribbling": {
+    "id": "Air Dribbling",
+    "title": "Air Dribbling",
+    "description": "Keeping the ball close to the car in the air while pushing it towards a push or goal.",
+    "notes": [
+      {
+        "text": "Sir Timbers AirDribble Tutorial.",
+        "url": "https://www.youtube.com/watch?v=UZNsoMdDj5Y"
+      },
+      {
+        "text": "Jhzer’s air dribbling tutorial.",
+        "url": "https://www.youtube.com/watch?v=eU4hUqS5IS4"
+      },
+      {
+        "text": "FLuuMP’s Air dribble tutorial.",
+        "url": "https://www.youtube.com/watch?v=6Cy-LwvNpkI"
+      },
+      {
+        "text": "Iridium ground to Air Dribble tutorial.",
+        "url": "https://www.youtube.com/watch?v=3VyjtI_fGsg"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Air Roll Shots": {
+    "id": "Air Roll Shots",
+    "title": "Air Roll Shots",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Joystick Air Roll",
+      "Powershot + Powerclears",
+      "Bounce Powershots"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Back-passing": {
+    "id": "Back-passing",
+    "title": "Back-passing",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Backboard Passing": {
+    "id": "Backboard Passing",
+    "title": "Backboard Passing",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Backflip Shot": {
+    "id": "Backflip Shot",
+    "title": "Backflip Shot",
+    "description": "Hitting the ball normally and backflipping after the shot to keep the players position and be able to hit the ball again.",
+    "notes": [
+      {
+        "text": "SuParButinHd’s 10 pro skills video.",
+        "url": "https://www.youtube.com/watch?v=0ohM0iPynUI&feature=youtu.be"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Flipping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Backwards Aerials": {
+    "id": "Backwards Aerials",
+    "title": "Backwards Aerials",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Basic Aerials",
+      "Joystick Air Roll"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Bait Shot": {
+    "id": "Bait Shot",
+    "title": "Bait Shot",
+    "description": "Intentionally missing the goal to draw out a defender",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Chip Shot"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Ball Camera Control": {
+    "id": "Ball Camera Control",
+    "title": "Ball Camera Control",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Jumping"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Basic Aerials": {
+    "id": "Basic Aerials",
+    "title": "Basic Aerials",
+    "description": "",
+    "notes": [],
+    "rank": "G",
+    "prerequisites": [
+      "Jumping",
+      "Boosting"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Basic Demos": {
+    "id": "Basic Demos",
+    "title": "Basic Demos",
+    "description": "Basic demo’s (demolishing and / or bumping) are usually done at lower levels without a real purpose in mind.",
+    "notes": [
+      {
+        "text": "Rocket Sledge’s Basic Demo’s tutorial.",
+        "url": "https://www.youtube.com/watch?v=AkBbjnay4oY"
+      },
+      {
+        "text": "Rocket Sledge’s Demo tutorial series.",
+        "url": "https://www.youtube.com/playlist?list=PLBVtR-e9dDtxGSbZ-AtzsV1h5EN3SsfYj"
+      },
+      {
+        "text": "Rocket Sledge’s Defensive Demos tutorial.",
+        "url": "https://www.youtube.com/watch?v=YGUSrDHKi-Q"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
       "Boosting",
       "Turning"
-    ]
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Boost Stealing": {
+    "id": "Boost Stealing",
+    "title": "Boost Stealing",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Boosting": {
+    "id": "Boosting",
+    "title": "Boosting",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Bounce Dribbling": {
+    "id": "Bounce Dribbling",
+    "title": "Bounce Dribbling",
+    "description": "Popping (Hitting the ball in a way where it allows the player to hit it again)  the ball multiple times in a row.",
+    "notes": [
+      {
+        "text": "Dignitas’s dribbling guide",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/13015/advanced-dribbling-techniques-in-rocket-league"
+      },
+      {
+        "text": "Sir Timbers AirDribble Tutorial.",
+        "url": "https://www.youtube.com/watch?v=UZNsoMdDj5Y"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Prediction",
+      "Push Dribbling"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
   "Bounce Powershots": {
     "id": "Bounce Powershots",
-    "section": "Core Skills",
+    "title": "Bounce Powershots",
+    "description": "While the ball is boucing, powershot the ball after it bounces back off of the ground.",
+    "notes": [
+      {
+        "text": "Dignitas’s Power shot guide",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/13229/take-your-rocket-league-gameplay-to-the-next-level-powershots"
+      }
+    ],
+    "rank": "",
     "prerequisites": [
       "Powershot + Powerclears",
       "Jumping"
-    ]
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Powerslide Turning": {
-    "id": "Powerslide Turning",
-    "section": "Core Skills",
+  "Bounce To Air Dribble": {
+    "id": "Bounce To Air Dribble",
+    "title": "Bounce To Air Dribble",
+    "description": "Starting an air dribble after popping the ball up in a bounce dribble.",
+    "notes": [
+      {
+        "text": "Sir Timbers AirDribble Tutorial.",
+        "url": "https://www.youtube.com/watch?v=UZNsoMdDj5Y"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Bounce Dribbling",
+      "Air Dribbling"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Braking": {
+    "id": "Braking",
+    "title": "Braking",
+    "description": "Slows the car down by letting go of accelerate and pressing reverse.",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
       "Driving"
-    ]
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Redirects": {
-    "id": "Redirects",
-    "section": "Core Skills",
+  "Breezi Flick": {
+    "id": "Breezi Flick",
+    "title": "Breezi Flick",
+    "description": "An advanced version of the tornado spin, musty flick, and hood dribbling all combined into one shot.",
+    "notes": [
+      {
+        "text": "NeXL Breezi Flick Tutorial",
+        "url": "https://www.youtube.com/watch?v=WZu8wYja770"
+      }
+    ],
+    "rank": "",
     "prerequisites": [
-      "Turning",
-      "Boosting"
-    ]
+      "Tornado Spin",
+      "Bounce Dribbling"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false
   },
-  "Backflip shot": {
-    "id": "Backflip shot",
-    "section": "Miscellaneous",
+  "Bunny Hopping": {
+    "id": "Bunny Hopping",
+    "title": "Bunny Hopping",
+    "description": "An advanced version of wave dashing but, when landing holding air roll when flipping allowing for wave dashing in faster succession.",
+    "notes": [
+      {
+        "text": "Shippotv’s bunny hop tutorial.",
+        "url": "https://www.youtube.com/watch?v=p2PkJ3OyjXU"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Directional Air Roll"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false
+  },
+  "Calculated Clears": {
+    "id": "Calculated Clears",
+    "title": "Calculated Clears",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Catching": {
+    "id": "Catching",
+    "title": "Catching",
+    "description": "Stopping and slowing the ball with a dribble when it hits the ground after being in the air.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Prediction"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Ceiling Shots": {
+    "id": "Ceiling Shots",
+    "title": "Ceiling Shots",
+    "description": "Having the ball near or bounce off or around the ceiling for a shot on goal.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Wall Driving",
+      "Basic Aerials",
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Ceiling Shuffle": {
+    "id": "Ceiling Shuffle",
+    "title": "Ceiling Shuffle",
+    "description": "Having the car stay on the ceiling by turning in a way that keeps enough friction that it doesn’t fall.",
+    "notes": [
+      {
+        "text": "Mondo’s ceiling shuffle tutorial.",
+        "url": "https://www.youtube.com/watch?v=bnNrwTKuh3c"
+      }
+    ],
+    "rank": "SSL",
+    "prerequisites": [
+      "Wall Driving"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false
+  },
+  "Cherry Picking": {
+    "id": "Cherry Picking",
+    "title": "Cherry Picking",
+    "description": "Usually during infield passes, the player angles a powershot during an aerial for a shot on goal.",
+    "notes": [
+      {
+        "text": "Ytzi13 Lead offence 3v3 guide",
+        "url": "https://www.reddit.com/r/RocketLeague/comments/ab9490/playing_the_first_man_role_a_guide_for_all_skill/?st=JQFHERHK&sh=9ac03a3b"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Chip Clear": {
+    "id": "Chip Clear",
+    "title": "Chip Clear",
+    "description": "Using boost to make a strong clear with a chip",
+    "notes": [],
+    "rank": "S",
+    "prerequisites": [
+      "Chipping"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Chip Double Touch": {
+    "id": "Chip Double Touch",
+    "title": "Chip Double Touch",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Chipping"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Chip Shot": {
+    "id": "Chip Shot",
+    "title": "Chip Shot",
+    "description": "Using boost to control how hard you chip the ball towards the goal",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Chipping"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Chipping": {
+    "id": "Chipping",
+    "title": "Chipping",
+    "description": "Driving into a grounded ball without jumping",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Boosting"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Clear Prevention": {
+    "id": "Clear Prevention",
+    "title": "Clear Prevention",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Close Touch": {
+    "id": "Close Touch",
+    "title": "Close Touch",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Corner Pass": {
+    "id": "Corner Pass",
+    "title": "Corner Pass",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Crossing": {
+    "id": "Crossing",
+    "title": "Crossing",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Cutting": {
+    "id": "Cutting",
+    "title": "Cutting",
+    "description": "When an opponent is dribbling (keeping the ball close to oneself), the player comes at an angle to the dribble and forces it out of the opponent's possession.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Prediction"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Delayed Flicks": {
+    "id": "Delayed Flicks",
+    "title": "Delayed Flicks",
+    "description": "Slowing down the pace of the game during a flick.",
+    "notes": [
+      {
+        "text": "KevPert’s tutorial on Delayed Flicks.",
+        "url": "https://www.youtube.com/watch?v=hOarxtWuZ5E"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Directional Flick"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Diagonal Flipping": {
+    "id": "Diagonal Flipping",
+    "title": "Diagonal Flipping",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
       "Flipping"
-    ]
-  },
-  "Flip resets": {
-    "id": "Flip resets",
-    "section": "Miscellaneous",
-    "prerequisites": [
-      "Flip window"
     ],
-    "isUnnecessary": true
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Popping": {
-    "id": "Popping",
-    "section": "Miscellaneous",
+  "Directional Air Roll": {
+    "id": "Directional Air Roll",
+    "title": "Directional Air Roll",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
       "Jumping"
-    ]
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Directional Flick": {
+    "id": "Directional Flick",
+    "title": "Directional Flick",
+    "description": "The standard type of flick that players use when directional flipping into the ball.",
+    "notes": [
+      {
+        "text": "Sir Classy Flicks tutorial.",
+        "url": "https://www.youtube.com/watch?v=O2H9yQJrEJQ"
+      },
+      {
+        "text": "Dignitas 45-Degree flick guide",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/12789/how-to-master-the-45-degree-flick"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Hood Dribble",
+      "Flipping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
   "Doinking": {
     "id": "Doinking",
-    "section": "Miscellaneous",
+    "title": "Doinking",
+    "description": "When you are under the ball and just kind of 'pop it', not so much a new direction, but adding speed to the ball by doing so.",
+    "notes": [
+      {
+        "text": "SuParButinHd’s 10 pro skills video.",
+        "url": "https://www.youtube.com/watch?v=0ohM0iPynUI&feature=youtu.be"
+      }
+    ],
+    "rank": "",
     "prerequisites": [
       "Popping"
-    ]
-  },
-  "Stalling": {
-    "id": "Stalling",
-    "section": "Miscellaneous",
-    "prerequisites": [
-      "Directional air roll"
     ],
-    "isUnnecessary": true
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Pinching": {
-    "id": "Pinching",
-    "section": "Miscellaneous",
+  "Doomsee Dish": {
+    "id": "Doomsee Dish",
+    "title": "Doomsee Dish",
+    "description": "When a player push dribbles the ball into the opponent's corner then pops (Hitting the ball in a way where it allows the player to hit it again) it away from the wall to hit it in a way to attempt a shot on goal.",
+    "notes": [
+      "Hitting the ball up the wall up near the ceiling to allow for a wall shot or an air dribble."
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Wall Driving",
+      "Basic Aerials",
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Double Jump Aerials": {
+    "id": "Double Jump Aerials",
+    "title": "Double Jump Aerials",
+    "description": "Jumping twice for maximum height, then going for an aerial.",
+    "notes": [
+      {
+        "text": "SuParButinHd’s 10 pro skills video.",
+        "url": "https://youtu.be/0ohM0iPynUI?t=62"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Basic Aerials",
+      "Double Jumping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Double Jumping": {
+    "id": "Double Jumping",
+    "title": "Double Jumping",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Jumping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Double Touches": {
+    "id": "Double Touches",
+    "title": "Double Touches",
+    "description": "Usually after a pop (Hitting the ball in a way where it allows the player to hit it again,) a double touch is where the player hits the ball off the wall to pass to themselves.",
+    "notes": [
+      {
+        "text": "Ytzi13 Air roll usage comment",
+        "url": "https://www.reddit.com/r/RocketLeague/comments/9z063d/comment/ea6fkn9/?st=JORGHW4X&sh=a3097bd5"
+      },
+      {
+        "text": "Dignitas air rolling guide",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/12633/air-rolling-a-rocket-league-guide-on-effective-aerials"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Popping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Driving": {
+    "id": "Driving",
+    "title": "Driving",
+    "description": "",
+    "notes": [],
+    "rank": "B",
     "prerequisites": [],
-    "isDisabled": true
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Ground pinch": {
-    "id": "Pinching",
-    "section": "Miscellaneous",
+  "Dunking": {
+    "id": "Dunking",
+    "title": "Dunking",
+    "description": "Jumping before an opponent's pop (Hitting the ball in a way where it allows the player to hit it again) to get the ball over their head and in the players possession.",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
-      "Game Awareness",
-      "Basic aerials"
-    ]
-  },
-  "Team pinch": {
-    "id": "Team pinch",
-    "section": "Miscellaneous",
-    "prerequisites": [
-      "Teammate Awareness"
-    ]
-  },
-  "Wall pinch": {
-    "id": "Wall pinch",
-    "section": "Miscellaneous",
-    "prerequisites": [
-      "Jumping",
-      "Boosting",
-      "Joystick air roll"
-    ]
-  },
-  "Kuxir pinch": {
-    "id": "Kuxir pinch",
-    "section": "Miscellaneous",
-    "prerequisites": [
-      "Wall pinch"
-    ]
-  },
-  "Tilted drift": {
-    "id": "Tilted drift",
-    "section": "Miscellaneous",
-    "prerequisites": [
-      "Flipping",
-      "Boosting"
+      "Pre-Jumping"
     ],
-    "isUnnecessary": true,
-    "isSilly": true
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Turtling": {
-    "id": "Turtling",
-    "section": "Miscellaneous",
+  "Faking": {
+    "id": "Faking",
+    "title": "Faking",
+    "description": "Being able to predict a opponent's movements and stop yours in reaction to that prediction.",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
-      "Joystick air roll"
+      "Prediction"
     ],
-    "isUnnecessary": true,
-    "isSilly": true
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Fast Aerials": {
+    "id": "Fast Aerials",
+    "title": "Fast Aerials",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Basic Aerials",
+      "Double Jumping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
   "Fast Kickoffs": {
     "id": "Fast Kickoffs",
-    "section": "Miscellaneous",
+    "title": "Fast Kickoffs",
+    "description": "During the kickoff, the player diagonal flips to gain speed.",
+    "notes": [
+      {
+        "text": "Dignitas’s guide to kickoffs",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/12642/take-your-rocket-league-gameplay-to-the-next-level-kickoffs"
+      }
+    ],
+    "rank": "",
     "prerequisites": [
       "50/50’s + Kickoffs"
-    ]
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Nose Spinning": {
-    "id": "Nose Spinning",
-    "section": "Miscellaneous",
-    "prerequisites": [],
-    "isDisabled": true
-  },
-  "Wavedash Kickoff": {
-    "id": "Wavedash Kickoff",
-    "section": "Miscellaneous",
-    "prerequisites": [
-      "Fast Kickoffs"
-    ]
-  },
-  "Flip canceling": {
-    "id": "Flip canceling",
-    "section": "Miscellaneous",
+  "Flip Canceling": {
+    "id": "Flip Canceling",
+    "title": "Flip Canceling",
+    "description": "During a flip, the player rotates the car in the opposite direction the flip is going to stop the car from turning. Used to gain speed.",
+    "notes": [
+      {
+        "text": "Dignitas’s half-flip guide",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/12628/half-flips-where-when-and-how"
+      }
+    ],
+    "rank": "",
     "prerequisites": [
       "Flipping"
-    ]
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Flip Resets": {
+    "id": "Flip Resets",
+    "title": "Flip Resets",
+    "description": "Hitting anything with the bottom of the car on all of the wheels at once to reset the flip timer on the car. Mainly used for ceiling shots, flip resets can also be used with dribbling and redirects.",
+    "notes": [
+      {
+        "text": "Sir Classy Flip Reset Tutorial.",
+        "url": "https://www.youtube.com/watch?v=TFNzBRRda7k"
+      },
+      {
+        "text": "Kronovi Ceiling shot & Flip reset tutorial.",
+        "url": "https://www.youtube.com/watch?v=TbIqMoPTvEA&t=301s"
+      },
+      {
+        "text": "FLuuMP flip reset tutorial.",
+        "url": "https://www.youtube.com/watch?v=kDhYkOlXrxM&t=24s"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Flip Window"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false
+  },
+  "Flip Window": {
+    "id": "Flip Window",
+    "title": "Flip Window",
+    "description": "Understanding how long you have to flip, and when your flip is avaialable again (resets)",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Jumping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Flipping": {
+    "id": "Flipping",
+    "title": "Flipping",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Jumping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Forward Half Flipping": {
+    "id": "Forward Half Flipping",
+    "title": "Forward Half Flipping",
+    "description": "A back flip that is canceled when parallel with the ground. Then air roll to have the wheels hit the ground.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Half Flipping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
   "Game Awareness": {
     "id": "Game Awareness",
-    "section": "Mental Skills",
+    "title": "Game Awareness",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
       "Prediction",
       "Rotation",
       "Teammate Awareness",
       "Game Speed"
-    ]
-  },
-  "Positioning": {
-    "id": "Positioning",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Driving"
-    ]
-  },
-  "Shadowing": {
-    "id": "Shadowing",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Positioning",
-      "Game Awareness"
-    ]
-  },
-  "Teammate Awareness": {
-    "id": "Teammate Awareness",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Positioning"
-    ]
-  },
-  "Rotation": {
-    "id": "Rotation",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Positioning",
-      "Teammate Awareness"
-    ]
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
   "Game Speed": {
     "id": "Game Speed",
-    "section": "Mental Skills",
-    "prerequisites": []
-  },
-  "Prediction": {
-    "id": "Prediction",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Driving"
-    ]
-  },
-  "Pre-Jumping": {
-    "id": "Pre-Jumping",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Prediction"
-    ]
-  },
-  "Dunking": {
-    "id": "Dunking",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Pre-Jumping"
-    ]
-  },
-  "Opponent Boost Management": {
-    "id": "Opponent Boost Management",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Cutting": {
-    "id": "Cutting",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Prediction"
-    ]
-  },
-  "Faking": {
-    "id": "Faking",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Prediction"
-    ]
-  },
-  "Possession Prediction": {
-    "id": "Possession Prediction",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Game Awareness",
-      "Powershot + Powerclears"
-    ]
-  },
-  "Playstyle Reading": {
-    "id": "Playstyle Reading",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Softblock": {
-    "id": "Softblock",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Prediction"
-    ]
-  },
-  "Self Boost Management": {
-    "id": "Self Boost Management",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Rotation"
-    ]
-  },
-  "Advanced boost management": {
-    "id": "Advanced boost management",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Kickoff prediction": {
-    "id": "Kickoff prediction",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Opponent prediction": {
-    "id": "Opponent prediction",
-    "section": "Mental Skills",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Boost Stealing": {
-    "id": "Boost Stealing",
-    "section": "Aggressive plays",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Basic Demos": {
-    "id": "Basic Demos",
-    "section": "Aggressive plays",
-    "prerequisites": [
-      "Boosting",
-      "Turning"
-    ]
+    "title": "Game Speed",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
   "Goalie Demos": {
     "id": "Goalie Demos",
-    "section": "Aggressive plays",
+    "title": "Goalie Demos",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
       "Basic Demos"
-    ]
-  },
-  "Air Demos": {
-    "id": "Air Demos",
-    "section": "Aggressive plays",
-    "prerequisites": [
-      "Basic Demos",
-      "Basic aerials"
-    ]
-  },
-  "Clear Prevention": {
-    "id": "Clear Prevention",
-    "section": "Aggressive plays",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Air Dribble to Demo": {
-    "id": "Air Dribble to Demo",
-    "section": "Aggressive plays",
-    "prerequisites": [
-      "Air Demos",
-      "Air dribbling"
-    ]
-  },
-  "Catching": {
-    "id": "Catching",
-    "section": "Recovery",
-    "prerequisites": [
-      "Prediction"
-    ]
-  },
-  "Powerslide Recovery": {
-    "id": "Powerslide Recovery",
-    "section": "Recovery",
-    "prerequisites": [
-      "Powerslide Turning"
-    ]
-  },
-  "Bunny hopping": {
-    "id": "Bunny hopping",
-    "section": "Recovery",
-    "prerequisites": [
-      "Directional air roll"
     ],
-    "isUnnecessary": true
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Half flipping": {
-    "id": "Half flipping",
-    "section": "Recovery",
-    "prerequisites": [
-      "Flip canceling"
-    ]
-  },
-  "Forward half flipping": {
-    "id": "Forward half flipping",
-    "section": "Recovery",
-    "prerequisites": [
-      "Half flipping"
-    ]
-  },
-  "Hel-jump": {
-    "id": "Hel-jump",
-    "section": "Recovery",
-    "prerequisites": [
-      "Wave dash",
-      "Boosting"
-    ],
-    "isUnnecessary": true
-  },
-  "Hel-dash": {
-    "id": "Hel-dash",
-    "comment": "Replaced by zap dash",
-    "section": "Recovery",
-    "prerequisites": [],
-    "isUnnecessary": true,
-    "isDisabled": true
-  },
-  "Basic aerials": {
-    "id": "Basic aerials",
-    "section": "Air control",
-    "rank": "G",
-    "prerequisites": [
-      "Jumping",
-      "Boosting"
-    ]
-  },
-  "Aerial Powershot": {
-    "id": "Aerial Powershot",
-    "section": "Air control",
-    "prerequisites": [
-      "Basic aerials",
-      "Powershot + Powerclears"
-    ]
-  },
-  "Double jump aerials": {
-    "id": "Double jump aerials",
-    "section": "Air control",
-    "prerequisites": [
-      "Basic aerials",
-      "Double Jumping"
-    ]
-  },
-  "Fast aerials": {
-    "id": "Fast aerials",
-    "section": "Air control",
-    "prerequisites": [
-      "Basic aerials",
-      "Double Jumping"
-    ]
-  },
-  "Air dribbling": {
-    "id": "Air dribbling",
-    "section": "Air control",
-    "prerequisites": []
-  },
-  "Air roll shots": {
-    "id": "Air roll shots",
-    "section": "Air control",
-    "prerequisites": [
-      "Joystick air roll",
-      "Powershot + Powerclears",
-      "Bounce Powershots"
-    ]
-  },
-  "Backwards aerials": {
-    "id": "Backwards aerials",
-    "section": "Air control",
-    "prerequisites": [
-      "Basic aerials",
-      "Joystick air roll"
-    ]
-  },
-  "Sideways aerials": {
-    "id": "Sideways aerials",
-    "section": "Air control",
-    "prerequisites": [
-      "Basic aerials",
-      "Air roll shots"
-    ]
-  },
-  "Rebound shots": {
-    "id": "Rebound shots",
-    "section": "Air control",
-    "prerequisites": [
-      "Prediction",
-      "Basic aerials",
-      "Redirects"
-    ]
-  },
-  "Cherry picking": {
-    "id": "Cherry picking",
-    "section": "Air control",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Corner pass": {
-    "id": "Corner pass",
-    "section": "Passing plays",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Powershot passing": {
-    "id": "Powershot passing",
-    "section": "Passing plays",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Backboard passing": {
-    "id": "Backboard passing",
-    "section": "Passing plays",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Back-passing": {
-    "id": "Back-passing",
-    "section": "Passing plays",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Infield passing": {
-    "id": "Infield passing",
-    "rank": "D",
-    "section": "Passing plays",
-    "prerequisites": [
-      "Game Awareness"
-    ]
-  },
-  "Double touches": {
-    "id": "Double touches",
-    "section": "Passing plays",
-    "prerequisites": [
-      "Popping"
-    ]
-  },
-  "Guillotine passing": {
-    "id": "Guillotine passing",
+  "Guillotine Passing": {
+    "id": "Guillotine Passing",
+    "title": "Guillotine Passing",
+    "description": "An advanced form of the backboard pass, the guillotine pass or bevel pass, is where a player aims higher up on the backboard towards the curve between the ceiling and wall to send the ball straight down, like a guillotine’s blade.",
+    "notes": [],
     "rank": "C",
-    "section": "Passing plays",
     "prerequisites": [
       "Game Awareness",
       "Powershot + Powerclears"
-    ]
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Push dribbling": {
-    "id": "Push dribbling",
-    "section": "Dribbling",
+  "Half Flipping": {
+    "id": "Half Flipping",
+    "title": "Half Flipping",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
-      "Ball camera control"
-    ]
+      "Flip Canceling"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Hood dribble": {
-    "id": "Hood dribble",
-    "section": "Dribbling",
+  "Hel-dash": {
+    "id": "Hel-dash",
+    "title": "Hel-dash",
+    "description": "A combination of a hel-jump and a wave dash; The hel-dash allows the player to hit max speed in a very short amount of time and boost.",
+    "notes": [
+      {
+        "text": "https://gfycat.com/LiquidBaggyDoe",
+        "url": "https://gfycat.com/LiquidBaggyDoe"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false,
+    "isDisabled": true
+  },
+  "Hel-jump": {
+    "id": "Hel-jump",
+    "title": "Hel-jump",
+    "description": "A form of wave dashing, the hel-jump has the player jump instead of flip when they hit the ground with the use of powerslide and boost to start an aerial that keeps their flip to be used whenever they wanted. Also known as a Wave jump.",
+    "notes": [
+      {
+        "text": "Hel-Jump Tutorial by  HelvetiaGaming",
+        "url": "https://www.youtube.com/watch?v=p1KxjeQT5As"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Wave Dash",
+      "Boosting"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false
+  },
+  "Hood Dribble": {
+    "id": "Hood Dribble",
+    "title": "Hood Dribble",
+    "description": "Being able to keep the ball on the top of the players car. Normally just called dribbling.",
+    "notes": [
+      {
+        "text": "Sir Timbers Dribbling Tutorial.",
+        "url": "https://www.youtube.com/watch?v=eBmgRPOmh98"
+      }
+    ],
     "rank": "P",
     "prerequisites": [
-      "Push dribbling"
-    ]
+      "Push Dribbling"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Bounce dribbling": {
-    "id": "Bounce dribbling",
-    "section": "Dribbling",
+  "Hood To Air Dribble": {
+    "id": "Hood To Air Dribble",
+    "title": "Hood To Air Dribble",
+    "description": "Popping (Hitting the ball in a way where it allows the player to hit it again) the ball while hood dribbling then air dribbling it with the purpose of a goal.",
+    "notes": [
+      {
+        "text": "Iridium ground to Air Dribble tutorial.",
+        "url": "https://www.youtube.com/watch?v=3VyjtI_fGsg"
+      },
+      {
+        "text": "Sir Timbers AirDribble Tutorial.",
+        "url": "https://www.youtube.com/watch?v=UZNsoMdDj5Y"
+      },
+      {
+        "text": "Ytzi13 Air roll usage comment",
+        "url": "https://www.reddit.com/r/RocketLeague/comments/9z063d/comment/ea6fkn9/?st=JORGHW4X&sh=a3097bd5"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Hood Dribble",
+      "Air Dribbling"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Hoops - Basket Pinch": {
+    "id": "Hoops - Basket Pinch",
+    "title": "Hoops - Basket Pinch",
+    "description": "Pinching the ball against the rim of the goal to kuxir pinch and attempt to score.",
+    "notes": [
+      {
+        "text": "Hoops net pinch example",
+        "url": "https://streamable.com/y3nme"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Kuxir Pinch"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Hoops - Friendship / Fusion Kickoff": {
+    "id": "Hoops - Friendship / Fusion Kickoff",
+    "title": "Hoops - Friendship / Fusion Kickoff",
+    "description": "Hitting the teammate in a way to boost them faster to the ball.",
+    "notes": [
+      {
+        "text": "Example by Patrick Burks.",
+        "url": "https://www.youtube.com/watch?v=SVojeSnfIs0"
+      },
+      {
+        "text": "Clip of a johnnyboi_i Stream.",
+        "url": "https://www.twitch.tv/johnnyboi_i/clip/FineOpenLionNerfRedBlaster"
+      },
+      {
+        "text": "Friendship Kickoff tutorial.",
+        "url": "https://www.reddit.com/r/RocketLeagueHoops/comments/6ths26/the_friendship_kickoff_in_hoops_im_here_to/?st=jaki6yvh&sh=a7e9c3ec"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Jumping",
+      "Teammate Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Infield Passing": {
+    "id": "Infield Passing",
+    "title": "Infield Passing",
+    "description": "",
+    "notes": [],
+    "rank": "D",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Joystick Air Roll": {
+    "id": "Joystick Air Roll",
+    "title": "Joystick Air Roll",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Jumping"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Jumping": {
+    "id": "Jumping",
+    "title": "Jumping",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Kickoff Prediction": {
+    "id": "Kickoff Prediction",
+    "title": "Kickoff Prediction",
+    "description": "Reading the opponent in a 50/50 but during kickoff.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Kuxir Pinch": {
+    "id": "Kuxir Pinch",
+    "title": "Kuxir Pinch",
+    "description": "Pinching the ball against the wall to make a shot on goal.",
+    "notes": [
+      {
+        "text": "Helvetiagaming's kuxir pinch tutorial.",
+        "url": "https://www.youtube.com/watch?v=aYuTibfTZ4M"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Wall Pinch"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Leveling Out": {
+    "id": "Leveling Out",
+    "title": "Leveling Out",
+    "description": "Orienting the car so it's facing the direction of travel while in the air to maintain speed when landing",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Basic Aerials"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Mognus Flick (180 Backflip Flick)": {
+    "id": "Mognus Flick (180 Backflip Flick)",
+    "title": "Mognus Flick (180 Backflip Flick)",
+    "description": "After popping the ball into the air with a hood dribble. The player spins around (180) then backflips into the ball, causing power and some delay to the ball. Also known as the 180 backflip flick.",
+    "notes": [
+      {
+        "text": "Jonniboi_i's mognus flick only 1v1 video.",
+        "url": "https://www.youtube.com/watch?v=QXUo6bARX1Y"
+      },
+      "When the player goes for a shot but turns their car more than 360* to hit the ball.",
+      {
+        "text": "Sir Timbers freestyle tutorial.",
+        "url": "https://www.youtube.com/watch?v=AY1K5Z1OSEI"
+      },
+      {
+        "text": "Kevpert freestyle tutorial",
+        "url": "https://www.youtube.com/watch?v=eAO1sqr135c"
+      },
+      {
+        "text": ".",
+        "url": "https://www.youtube.com/watch?v=eAO1sqr135c"
+      },
+      {
+        "text": "Jhzer’s freestyle tutorial.",
+        "url": "https://www.youtube.com/watch?v=K1EqEm33jT0"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Delayed Flicks"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Musty Flick": {
+    "id": "Musty Flick",
+    "title": "Musty Flick",
+    "description": "After popping (Hitting the ball in a way where it allows the player to hit it again)  the ball during a hood dribble, angling the car to be upside down, then backflipping to delay and flick the ball. Also known as an underflip.",
+    "notes": [
+      {
+        "text": "Amustycow’s musty flick tutorial.",
+        "url": "https://www.youtube.com/watch?v=96tNxK5vTsQ"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Directional Flick"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false
+  },
+  "Nose Spinning": {
+    "id": "Nose Spinning",
+    "title": "Nose Spinning",
+    "description": "Where the player has the nose of the car stable on the ground, the player spins around.",
+    "notes": [
+      {
+        "text": "Popular clip",
+        "url": "https://www.reddit.com/r/RocketLeague/comments/7od65p/found_this_in_my_saved_replays_as_calculus_maxima/"
+      },
+      {
+        "text": "u/redbull123",
+        "url": "/user/redbull123/"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false,
+    "isDisabled": true
+  },
+  "Opponent Boost Management": {
+    "id": "Opponent Boost Management",
+    "title": "Opponent Boost Management",
+    "description": "Mostly used in one verses one games and an advanced version of self boost management; It is the practice of knowing how much boost the opponent currently has at any moment.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Opponent Prediction": {
+    "id": "Opponent Prediction",
+    "title": "Opponent Prediction",
+    "description": "Understanding what the opponent will do from experience and responding beforehand.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Pinching": {
+    "id": "Pinching",
+    "title": "Pinching",
+    "description": "Hitting the ball against the floor or wall of the arena in a way that “pinches” the ball in a direction.",
+    "notes": [
+      {
+        "text": "SuParButinHd’s 10 pro skills video.",
+        "url": "https://www.youtube.com/watch?v=0ohM0iPynUI&feature=youtu.be"
+      },
+      {
+        "text": "Rocket League Academy pinch shot tutorial.",
+        "url": "https://www.youtube.com/watch?v=47wUzrUmNHQ"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness",
+      "Basic Aerials"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Playstyle Reading": {
+    "id": "Playstyle Reading",
+    "title": "Playstyle Reading",
+    "description": "Being able to watch a player and understand their weaknesses and play against them.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Popping": {
+    "id": "Popping",
+    "title": "Popping",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Jumping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Positioning": {
+    "id": "Positioning",
+    "title": "Positioning",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Possession Prediction": {
+    "id": "Possession Prediction",
+    "title": "Possession Prediction",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness",
+      "Powershot + Powerclears"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Power Slide Dribble": {
+    "id": "Power Slide Dribble",
+    "title": "Power Slide Dribble",
+    "description": "While hood dribbling, start to have the ball turn but, drift back into the ball for a fake.",
+    "notes": [
+      {
+        "text": "Dignitas’s dribbling guide",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/13015/advanced-dribbling-techniques-in-rocket-league"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Hood Dribble",
+      "Powerslide Turning"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Powershot + Powerclears": {
+    "id": "Powershot + Powerclears",
+    "title": "Powershot + Powerclears",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Driving",
+      "Boosting",
+      "Turning"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Powershot Passing": {
+    "id": "Powershot Passing",
+    "title": "Powershot Passing",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Powerslide Recovery": {
+    "id": "Powerslide Recovery",
+    "title": "Powerslide Recovery",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Powerslide Turning"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Powerslide Turning": {
+    "id": "Powerslide Turning",
+    "title": "Powerslide Turning",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Pre-Jumping": {
+    "id": "Pre-Jumping",
+    "title": "Pre-Jumping",
+    "description": "Jumping in expectation of an opponents shot, clear, or save.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Prediction"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Prediction": {
+    "id": "Prediction",
+    "title": "Prediction",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Push Dribbling": {
+    "id": "Push Dribbling",
+    "title": "Push Dribbling",
+    "description": "Having the ball on the ground and pushing it with the front of the players car.",
+    "notes": [
+      {
+        "text": "Sir Timbers Dribbling Tutorial.",
+        "url": "https://www.youtube.com/watch?v=eBmgRPOmh98"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Ball Camera Control"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Rebound Shots": {
+    "id": "Rebound Shots",
+    "title": "Rebound Shots",
+    "description": "When the ball hits a wall hard enough to start going towards midfield and the player uses prediction, aerials, and air rolls to score it.",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
       "Prediction",
-      "Push dribbling"
-    ]
+      "Basic Aerials",
+      "Redirects"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Turtle Dribbling": {
-    "id": "Turtle Dribbling",
-    "section": "Dribbling",
+  "Redirects": {
+    "id": "Redirects",
+    "title": "Redirects",
+    "description": "Hitting the ball in a way to cause the direction of the ball to change for a pass, clear, or goal.",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
-      "Push dribbling",
-      "Turtling"
-    ]
+      "Turning",
+      "Boosting"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Rotation": {
+    "id": "Rotation",
+    "title": "Rotation",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Positioning",
+      "Teammate Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Rumble - Spike Flicks": {
+    "id": "Rumble - Spike Flicks",
+    "title": "Rumble - Spike Flicks",
+    "description": "While spikes have the ball stuck to your car, flip right before they let go to flick the ball.",
+    "notes": [
+      {
+        "text": "Johnniboi_i stream with kronovi.",
+        "url": "https://clips.twitch.tv/CleanAbnegateWrenchKappaWealth"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Flipping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Rumble - UFO Shots": {
+    "id": "Rumble - UFO Shots",
+    "title": "Rumble - UFO Shots",
+    "description": "When using spikes in rumble, the player spikes the ball with all four of their wheels, allowing for infinite flip resets.",
+    "notes": [
+      {
+        "text": "Likuru’s video on UFO shots.",
+        "url": "https://www.youtube.com/watch?v=fI1Qry4LqKY"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Flip Window"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Self Boost Management": {
+    "id": "Self Boost Management",
+    "title": "Self Boost Management",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Rotation"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Shadowing": {
+    "id": "Shadowing",
+    "title": "Shadowing",
+    "description": "When falling back on defense, shadowing allows the player to slow the pace of the game down by staying a moderate distance away from the ball while mimicking the opponent who has control of the ball. Also known as shadow defence.",
+    "notes": [
+      {
+        "text": "Video by SunlessKhan about shadow defence.",
+        "url": "https://www.youtube.com/watch?v=2aZA-NCRRgI&vl=en"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Positioning",
+      "Game Awareness"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Sideways Aerials": {
+    "id": "Sideways Aerials",
+    "title": "Sideways Aerials",
+    "description": "Hitting the ball in an aerial but, having either side of the car towards the floor.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Basic Aerials",
+      "Air Roll Shots"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Softblock": {
+    "id": "Softblock",
+    "title": "Softblock",
+    "description": "Blocking the ball after an opponent shot with the wheels to slow the ball down.",
+    "notes": [
+      {
+        "text": "Ytzi13 Lead offence 3v3 guide",
+        "url": "https://www.reddit.com/r/RocketLeague/comments/ab9490/playing_the_first_man_role_a_guide_for_all_skill/?st=JQFHERHK&sh=9ac03a3b"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Prediction"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Speed Flipping": {
+    "id": "Speed Flipping",
+    "title": "Speed Flipping",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Flipping",
+      "Directional Air Roll"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
   "Spring Roll": {
     "id": "Spring Roll",
-    "section": "Dribbling",
+    "title": "Spring Roll",
+    "description": "A move where the player pops the ball up for another touch but, uses the car’s jump to go back down to the ground faster to fake the opponent.",
+    "notes": [
+      {
+        "text": "The Spring Roll",
+        "url": "https://www.reddit.com/r/RocketLeague/comments/9df4av/someone_come_up_with_a_new_mechanic_and_name_it/e5hemz8/"
+      }
+    ],
     "rank": "GC",
     "prerequisites": [
       "Game Awareness",
       "Double Jumping",
       "Doinking"
-    ]
-  },
-  "Turtle to Air Dribble": {
-    "id": "Turtle to Air Dribble",
-    "section": "Dribbling",
-    "prerequisites": [
-      "Turtle Dribbling",
-      "Wall Air dribble"
     ],
-    "isDisabled": true
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "hood to air dribble": {
-    "id": "hood to air dribble",
-    "section": "Dribbling",
-    "prerequisites": [
-      "Hood dribble",
-      "Air dribbling"
-    ]
-  },
-  "Bounce to air dribble": {
-    "id": "Bounce to air dribble",
-    "section": "Dribbling",
-    "prerequisites": [
-      "Bounce dribbling",
-      "Air dribbling"
-    ]
-  },
-  "Power Slide Dribble": {
-    "id": "Power Slide Dribble",
-    "section": "Dribbling",
-    "prerequisites": [
-      "Hood dribble",
-      "Powerslide Turning"
-    ]
-  },
-  "Wall Air dribble": {
-    "id": "Wall Air dribble",
-    "section": "Wall shots",
-    "prerequisites": [
-      "Air dribbling"
-    ]
-  },
-  "Wall Clears": {
-    "id": "Wall Clears",
-    "section": "Wall shots",
-    "prerequisites": [
-      "Wall driving",
-      "Powershot + Powerclears",
-      "Prediction"
-    ]
-  },
-  "Wall catch": {
-    "id": "Wall catch",
-    "section": "Wall shots",
-    "prerequisites": [
-      "Wall driving",
-      "Catching"
-    ]
-  },
-  "Doomsee dish": {
-    "id": "Doomsee dish",
-    "section": "Wall shots",
-    "prerequisites": [
-      "Wall driving",
-      "Basic aerials",
-      "Game Awareness"
-    ]
-  },
-  "Ceiling shots": {
-    "id": "Ceiling shots",
-    "section": "Ceiling plays",
-    "prerequisites": [
-      "Wall driving",
-      "Basic aerials",
-      "Game Awareness"
-    ]
-  },
-  "Ceiling shuffle": {
-    "id": "Ceiling shuffle",
-    "rank": "SSL",
-    "section": "Ceiling plays",
-    "prerequisites": [
-      "Wall driving"
+  "Stalling": {
+    "id": "Stalling",
+    "title": "Stalling",
+    "description": "Using the air roll left button to cancel a flip.",
+    "notes": [
+      {
+        "text": "Squishy Muffinz stalling  tutorial",
+        "url": "https://www.youtube.com/watch?v=jASrhGw4QYU"
+      },
+      {
+        "text": "Kronovi’s stalling tutorial.",
+        "url": "https://www.youtube.com/watch?v=xokXElyi1zo"
+      }
     ],
-    "isUnnecessary": true
-  },
-  "Directional Flick": {
-    "id": "Directional Flick",
-    "section": "Flicks",
+    "rank": "",
     "prerequisites": [
-      "Hood dribble",
-      "Flipping"
+      "Directional Air Roll"
     ],
-    "isRecommended": true
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false
   },
-  "45 degree flick": {
-    "id": "45 degree flick",
-    "section": "Flicks",
+  "Team Pinch": {
+    "id": "Team Pinch",
+    "title": "Team Pinch",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
-      "Popping",
-      "Directional Flick"
+      "Teammate Awareness"
     ],
-    "isUnnecessary": true
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Musty Flick": {
-    "id": "Musty Flick",
-    "section": "Flicks",
+  "Teammate Awareness": {
+    "id": "Teammate Awareness",
+    "title": "Teammate Awareness",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
-      "Directional Flick"
+      "Positioning"
     ],
-    "isUnnecessary": true
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Tilted Drift": {
+    "id": "Tilted Drift",
+    "title": "Tilted Drift",
+    "description": "A skill where a player will forward diagonal flip then land on the left or right two wheels whilst proceeding to continuously boost and turn.",
+    "notes": [
+      {
+        "text": "Tilted Drift tutorial by HelvetiaGaming",
+        "url": "https://www.youtube.com/watch?v=y2isfCJfPps"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Flipping",
+      "Boosting"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": true
   },
   "Tornado Flick / Spin": {
     "id": "Tornado Flick / Spin",
-    "section": "Flicks",
-    "prerequisites": [
-      "Tornado spin",
-      "Bounce dribbling"
+    "title": "Tornado Flick / Spin",
+    "description": "A mix of the tornado spin, upside down aerials, and bounce dribbling.",
+    "notes": [
+      {
+        "text": "Mertzy’s Tornado Flick Tutorial.",
+        "url": "https://www.youtube.com/watch?v=On02SxAppfY"
+      },
+      "Mertzy’s custom training code, 59D5-1411-36A2-8B76."
     ],
-    "isUnnecessary": true
+    "rank": "",
+    "prerequisites": [
+      "Tornado Spin",
+      "Bounce Dribbling"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false
+  },
+  "Tornado Spin": {
+    "id": "Tornado Spin",
+    "title": "Tornado Spin",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Directional Air Roll",
+      "Backwards Aerials",
+      "Sideways Aerials"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Turning": {
+    "id": "Turning",
+    "title": "Turning",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Turtle Dribbling": {
+    "id": "Turtle Dribbling",
+    "title": "Turtle Dribbling",
+    "description": "A type of push dribble, where the player is turtling while dribbling.",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Push Dribbling",
+      "Turtling"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
   "Turtle Flick": {
     "id": "Turtle Flick",
-    "section": "Flicks",
+    "title": "Turtle Flick",
+    "description": "After popping the ball into the air, the player starts turtling then jumps when the ball almost hits the ground to flick it.",
+    "notes": [
+      {
+        "text": "R.C Freestylers Reuben Turtle Flick tutorial",
+        "url": "https://www.youtube.com/watch?v=JFRvlROxcCQ"
+      }
+    ],
+    "rank": "",
     "prerequisites": [
       "Turtling"
     ],
-    "isUnnecessary": true
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": false
   },
-  "Breezi Flick": {
-    "id": "Breezi Flick",
-    "section": "Flicks",
-    "prerequisites": [
-      "Tornado spin",
-      "Bounce dribbling"
+  "Turtle To Air Dribble": {
+    "id": "Turtle To Air Dribble",
+    "title": "Turtle To Air Dribble",
+    "description": "While turtle dribbling, push the ball up the wall and start air dribbling.",
+    "notes": [
+      {
+        "text": "FLuuMP Turtle AirDribble tutorial.",
+        "url": "https://www.youtube.com/watch?v=_pOs0oZMXFU"
+      }
     ],
-    "isUnnecessary": true
-  },
-  "Delayed Flicks": {
-    "id": "Delayed Flicks",
-    "section": "Flicks",
+    "rank": "",
     "prerequisites": [
-      "Directional Flick"
+      "Turtle Dribbling",
+      "Wall Air Dribble"
     ],
-    "isRecommended": true
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Mognus Flick (180 backflip flick)": {
-    "id": "Mognus Flick (180 backflip flick)",
-    "section": "Flicks",
+  "Turtling": {
+    "id": "Turtling",
+    "title": "Turtling",
+    "description": "After a jump, turning the car upside down so that it lands on the hood of the car is turtling. Players can score a goal while doing this and get the turtle shot award.",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
-      "Delayed Flicks"
-    ]
+      "Joystick Air Roll"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": true,
+    "isSilly": true
   },
-  "Rumble - Spike Flicks": {
-    "id": "Rumble - Spike Flicks",
-    "section": "Extra-mode Exclusive",
+  "Wall Air Dribble": {
+    "id": "Wall Air Dribble",
+    "title": "Wall Air Dribble",
+    "description": "Rolling the ball up the wall then popping it then jumping from the wall to push it mid-air into goal or onto the backboard to set up a backboard pass.",
+    "notes": [
+      {
+        "text": "Sir Timbers AirDribble Tutorial.",
+        "url": "https://www.youtube.com/watch?v=UZNsoMdDj5Y"
+      }
+    ],
+    "rank": "",
     "prerequisites": [
-      "Flipping"
-    ]
+      "Air Dribbling"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Rumble - UFO Shots": {
-    "id": "Rumble - UFO Shots",
-    "section": "Extra-mode Exclusive",
+  "Wall Catch": {
+    "id": "Wall Catch",
+    "title": "Wall Catch",
+    "description": "Stopping or slowing the ball on the wall by dribbling.",
+    "notes": [
+      {
+        "text": "Dignitas’s dribbling guide",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/13015/advanced-dribbling-techniques-in-rocket-league"
+      }
+    ],
+    "rank": "",
     "prerequisites": [
-      "Flip window"
-    ]
+      "Wall Driving",
+      "Catching"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Hoops - Friendship / fusion Kickoff": {
-    "id": "Hoops - Friendship / fusion Kickoff",
-    "section": "Extra-mode Exclusive",
+  "Wall Clears": {
+    "id": "Wall Clears",
+    "title": "Wall Clears",
+    "description": "Hitting the ball hard enough while off of the wall to clear the ball to the other side of the field.",
+    "notes": [
+      {
+        "text": "waypr0tein",
+        "url": "https://www.reddit.com/user/waypr0tein"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Wall Driving",
+      "Powershot + Powerclears",
+      "Prediction"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Wall Driving": {
+    "id": "Wall Driving",
+    "title": "Wall Driving",
+    "description": "Keeping the car pointed within 90 degrees of 'straight up' for better wall control",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Positioning",
+      "Wall Driving"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Wall Pinch": {
+    "id": "Wall Pinch",
+    "title": "Wall Pinch",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
       "Jumping",
-      "Teammate Awareness"
-    ]
+      "Boosting",
+      "Joystick Air Roll"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   },
-  "Hoops - Basket Pinch": {
-    "id": "Hoops - Basket Pinch",
-    "section": "Extra-mode Exclusive",
+  "Wave Dash": {
+    "id": "Wave Dash",
+    "title": "Wave Dash",
+    "description": "",
+    "notes": [],
+    "rank": "",
     "prerequisites": [
-      "Kuxir pinch"
-    ]
+      "Flipping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Wavedash Kickoff": {
+    "id": "Wavedash Kickoff",
+    "title": "Wavedash Kickoff",
+    "description": "During the kickoff, the player wavedashes to gain speed.",
+    "notes": [
+      {
+        "text": "Dignitas’s guide to kickoffs",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/12642/take-your-rocket-league-gameplay-to-the-next-level-kickoffs"
+      }
+    ],
+    "rank": "",
+    "prerequisites": [
+      "Fast Kickoffs"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Zap Dash": {
+    "id": "Zap Dash",
+    "title": "Zap Dash",
+    "description": "",
+    "notes": [],
+    "rank": "",
+    "prerequisites": [
+      "Speed Flipping",
+      "Wave Dash"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
   }
 }

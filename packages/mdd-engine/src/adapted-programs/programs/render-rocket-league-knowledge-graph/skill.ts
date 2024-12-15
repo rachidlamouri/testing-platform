@@ -8,22 +8,26 @@ export type LinkConfig = {
 export type Note = string | LinkConfig;
 
 type SkillInput = {
+  id: string;
   title: string;
+  description: string;
   notes: Note[];
   rank: string;
   prerequisites: string[];
   isRecommended: boolean;
   isUnnecessary: boolean;
   isSilly: boolean;
-  isDisabled?: boolean;
 };
 
+/**
+ * Something to learn
+ */
 export class Skill implements SkillInput {
   id: string;
 
   title: string;
 
-  description?: string;
+  description: string;
 
   notes: Note[];
 
@@ -37,23 +41,16 @@ export class Skill implements SkillInput {
 
   isSilly: boolean;
 
-  isDisabled?: boolean;
-
   constructor(input: SkillInput) {
-    this.id = input.title;
-
+    this.id = input.id;
     this.title = input.title;
+    this.description = input.description;
     this.notes = input.notes;
     this.rank = input.rank;
     this.prerequisites = input.prerequisites;
     this.isRecommended = input.isRecommended;
     this.isUnnecessary = input.isUnnecessary;
     this.isSilly = input.isSilly;
-    this.isDisabled = input.isDisabled;
-  }
-
-  setDescription(description: string): void {
-    this.description = description;
   }
 }
 

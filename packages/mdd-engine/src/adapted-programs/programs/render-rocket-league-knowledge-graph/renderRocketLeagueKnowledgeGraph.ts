@@ -15,7 +15,6 @@ import { reportErrors } from '../../programmable-units/error/reportErrors';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
 import { signalError } from '../../programmable-units/error/signalError';
 import { ProgramFileCache } from '../../../layer-agnostic-utilities/program/programFileCache';
-import { assertFileExtensionIsKnown } from '../categorize-files/assertFileExtensionIsKnown';
 import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/buildDefaultFileCollectionTuple';
 import { renderApp } from '../render-knowledge-graph/app/node/renderApp';
 import {
@@ -24,7 +23,6 @@ import {
   ApplicationConfiguration,
 } from '../render-knowledge-graph/app/node/applicationConfiguration';
 import { OutputFileCollection } from '../../programmable-units/output-file/outputFileCollection';
-import { parseInput } from './parseInput';
 import { InMemoryIdentifiableItem3Collection } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import {
   AppRendererDelayerStreamMetatype,
@@ -37,6 +35,10 @@ import { renderGraphvizCodeToSvgDocument } from '../../programmable-units/graph-
 import { addInteractivityToSvgDocument } from '../../programmable-units/graph-visualization/directed-graph/base-interactivity/addInteractivityToSvgDocument';
 import { buildGraphElements } from './buildGraphElements';
 import { decodeAndRecastSvgDocument } from './decodeAndRecastSvgDocument';
+import rawSkillMetadata from './skillMetadata.json';
+import { Skill, SKILL_COLLECTION_ID, SkillStreamMetatype } from './skill';
+
+const skillMetadataList = Object.values(rawSkillMetadata);
 
 const programFileCache = new ProgramFileCache({
   namespace: 'render-rocket-league-knowledge-graph',
@@ -82,6 +84,18 @@ runEngine({
         }),
       ],
     }),
+    new InMemoryIdentifiableItem3Collection<SkillStreamMetatype>({
+      collectionId: SKILL_COLLECTION_ID,
+      initialItemEggTuple: skillMetadataList
+        .filter((metadata) => {
+          const isDisabled =
+            'isDisabled' in metadata ? metadata.isDisabled : false;
+          return !isDisabled;
+        })
+        .map((metadata) => {
+          return new Skill(metadata);
+        }),
+    }),
   ] as const,
   uninferableCollectionByCollectionId: buildCollectionByCollectionId([
     ...buildDefaultFileCollectionTuple(),
@@ -94,9 +108,6 @@ runEngine({
     enumerateFileSystemObjects,
     categorizeFiles,
 
-    assertFileExtensionIsKnown,
-
-    parseInput,
     buildGraphElements,
 
     groupGraphElements,
