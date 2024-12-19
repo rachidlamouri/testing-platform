@@ -50,6 +50,25 @@
     "isUnnecessary": false,
     "isSilly": false
   },
+  "Advanced Kickoff 50/50s and Positioning": {
+    "id": "Advanced Kickoff 50/50s and Positioning",
+    "title": "Advanced Kickoff 50/50s and Positioning",
+    "description": "Watch how your opponent approaches the ball and try to position yourself to counter.",
+    "notes": [
+      "You should be able to tell if they are doing a fast kickoff",
+      "You should notice if they mess up their flip",
+      "If they keep faking kickoffs then try sending the ball to the side",
+      "Some players will half flip towards the corner boost during the outer kickoffs. Pay attention so that you don't feed them the ball. You also might not want to immediately go for a shot since they will have the momentum and boost to save it."
+    ],
+    "rank": "D",
+    "prerequisites": [
+      "Diagonal Flip Kickoff",
+      "Intermediate Kickoff 50/50s and Positioning"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
   "Aerial Powershot": {
     "id": "Aerial Powershot",
     "title": "Aerial Powershot",
@@ -261,14 +280,27 @@
     "isUnnecessary": false,
     "isSilly": false
   },
+  "Ball Camera": {
+    "id": "Ball Camera",
+    "title": "Ball Camera",
+    "description": "You need to learn to play with ball cam on if you want to improve.",
+    "notes": [],
+    "rank": "B",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
   "Ball Camera Control": {
     "id": "Ball Camera Control",
     "title": "Ball Camera Control",
-    "description": "",
+    "description": "Get comfortable turning ball cam on and off. It should be on most of the time, but you can turn it off to see where your teammates are or to align yourself with a boost pad. You should only briefly turn off ball cam and turn it back on immediately.",
     "notes": [],
     "rank": "S",
     "prerequisites": [
-      "Jumping"
+      "Ball Camera"
     ],
     "isRecommended": true,
     "isUnnecessary": false,
@@ -277,8 +309,13 @@
   "Basic Aerials": {
     "id": "Basic Aerials",
     "title": "Basic Aerials",
-    "description": "",
-    "notes": [],
+    "description": "Hold back on the joystick, jump and boost!",
+    "notes": [
+      "It's ok if you don't hit the ball right away",
+      "Getting in the air is a great start",
+      "Getting near the ball is better",
+      "Consistently making contact is the end goal for this skill"
+    ],
     "rank": "S",
     "prerequisites": [
       "Jumping",
@@ -315,6 +352,45 @@
     "isUnnecessary": false,
     "isSilly": false
   },
+  "Basic Kickoff 50/50": {
+    "id": "Basic Kickoff 50/50",
+    "title": "Basic Kickoff 50/50",
+    "description": "Flip towards the ball slightly before you reach the ball.",
+    "notes": [],
+    "rank": "B",
+    "prerequisites": [
+      "Boost Kickoff"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Basic Kickoff 50/50 Positioning": {
+    "id": "Basic Kickoff 50/50 Positioning",
+    "title": "Basic Kickoff 50/50 Positioning",
+    "description": "Adjust your kickoff so that you arrive at the ball closer to the center; especially for kick offs on the wing.",
+    "notes": [],
+    "rank": "S",
+    "prerequisites": [
+      "Basic Kickoff 50/50"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Boost Kickoff": {
+    "id": "Boost Kickoff",
+    "title": "Boost Kickoff",
+    "description": "Boost towards the ball on kickoff. Pretty simple.",
+    "notes": [],
+    "rank": "B",
+    "prerequisites": [
+      "Boosting"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
   "Boost Stealing": {
     "id": "Boost Stealing",
     "title": "Boost Stealing",
@@ -331,7 +407,7 @@
   "Boosting": {
     "id": "Boosting",
     "title": "Boosting",
-    "description": "",
+    "description": "Weeeeeeeee.",
     "notes": [],
     "rank": "B",
     "prerequisites": [
@@ -478,14 +554,32 @@
     "isUnnecessary": false,
     "isSilly": false
   },
-  "Ceiling Shots": {
-    "id": "Ceiling Shots",
-    "title": "Ceiling Shots",
-    "description": "Having the ball near or bounce off or around the ceiling for a shot on goal.",
+  "Ceiling Reset": {
+    "id": "Ceiling Reset",
+    "title": "Ceiling Reset",
+    "description": "(Without the ball), drive up the wall and jump onto the ceiling, you will then fall off the ceiling and have unlimited time to flip. Compare this to simply driving up the wall and onto the ceiling. In the latter, your car will stick to the ceiling longer.",
     "notes": [],
-    "rank": "GC",
+    "rank": "D",
     "prerequisites": [
-      "Wall Driving",
+      "Flip Window"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Ceiling Shot": {
+    "id": "Ceiling Shot",
+    "title": "Ceiling Shot",
+    "description": "Hit the ball off of the side wall and use a ceiling reset to be able to follow the ball and flip into it at your leisure.",
+    "notes": [
+      {
+        "text": "Kronovi Ceiling shot & Flip reset tutorial.",
+        "url": "https://www.youtube.com/watch?v=TbIqMoPTvEA&t=301s"
+      }
+    ],
+    "rank": "C",
+    "prerequisites": [
+      "Ceiling Reset",
       "Basic Aerials",
       "Game Awareness"
     ],
@@ -571,11 +665,12 @@
   "Chipping": {
     "id": "Chipping",
     "title": "Chipping",
-    "description": "Driving into a grounded ball without jumping",
+    "description": "Drive into a grounded ball without jumping to pop it pop it up in the air. Bronze players don't know how to deal with an airborne ball.",
     "notes": [],
     "rank": "S",
     "prerequisites": [
-      "Boosting"
+      "Boosting",
+      "Turning"
     ],
     "isRecommended": true,
     "isUnnecessary": false,
@@ -597,7 +692,7 @@
   "Clears": {
     "id": "Clears",
     "title": "Clears",
-    "description": "",
+    "description": "Make the ball go away from your goal",
     "notes": [],
     "rank": "B",
     "prerequisites": [
@@ -615,6 +710,19 @@
     "rank": "D",
     "prerequisites": [
       "Game Awareness"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Controlled Boosting": {
+    "id": "Controlled Boosting",
+    "title": "Controlled Boosting",
+    "description": "You don't have to boost at max speed all the time. Sometimes its better to get your car aligned and then boost. It's hard to turn and boost at the same time.",
+    "notes": [],
+    "rank": "S",
+    "prerequisites": [
+      "Boosting"
     ],
     "isRecommended": true,
     "isUnnecessary": false,
@@ -677,6 +785,26 @@
     "isUnnecessary": false,
     "isSilly": false
   },
+  "Diagonal Flip Kickoff": {
+    "id": "Diagonal Flip Kickoff",
+    "title": "Diagonal Flip Kickoff",
+    "description": "At the start of the kickoff, turn slightly and then diagonal flip. You should be able to flip directly into the ball with good positioning.",
+    "notes": [
+      {
+        "text": "Dignitas’s guide to kickoffs",
+        "url": "http://dignitas.gg/articles/blogs/rocket-league/12642/take-your-rocket-league-gameplay-to-the-next-level-kickoffs"
+      }
+    ],
+    "rank": "G",
+    "prerequisites": [
+      "Diagonal Flipping",
+      "Front Flip Kickoff",
+      "Basic Kickoff 50/50 Positioning"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "i0sSilly": false
+  },
   "Diagonal Flipping": {
     "id": "Diagonal Flipping",
     "title": "Diagonal Flipping",
@@ -687,6 +815,21 @@
       "Flipping"
     ],
     "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Directed Reverse Touch": {
+    "id": "Directed Reverse Touch",
+    "title": "Directed Reverse Touch",
+    "description": "Purposefully hit the ball in an intended direction while going in reverse. You will need to turn in the correct direction and hit the ball with the back corners of the car.",
+    "notes": [
+      "This can be useful when in an awkward position in the goal, and the ball is rolling in."
+    ],
+    "rank": "P",
+    "prerequisites": [
+      "Reverse Touch"
+    ],
+    "isRecommended": true,
     "isUnnecessary": false,
     "isSilly": false
   },
@@ -706,7 +849,7 @@
   "Directional Air Roll": {
     "id": "Directional Air Roll",
     "title": "Directional Air Roll",
-    "description": "",
+    "description": "Jump and use 'air roll left' or 'air roll right' to rotate your car. You can use this to recover, but having at least one of these two buttons bound will enable important mechanis later.",
     "notes": [],
     "rank": "S",
     "prerequisites": [
@@ -742,13 +885,8 @@
   "Doinking": {
     "id": "Doinking",
     "title": "Doinking",
-    "description": "When you are under the ball and just kind of 'pop it', not so much a new direction, but adding speed to the ball by doing so.",
-    "notes": [
-      {
-        "text": "SuParButinHd’s 10 pro skills video.",
-        "url": "https://www.youtube.com/watch?v=0ohM0iPynUI&feature=youtu.be"
-      }
-    ],
+    "description": "",
+    "notes": [],
     "rank": "G",
     "prerequisites": [
       "Popping"
@@ -796,7 +934,7 @@
   "Double Jumping": {
     "id": "Double Jumping",
     "title": "Double Jumping",
-    "description": "",
+    "description": "Boing boing! You can jump again by leaving the left stick in the neutral position",
     "notes": [],
     "rank": "B",
     "prerequisites": [
@@ -831,7 +969,7 @@
   "Driving": {
     "id": "Driving",
     "title": "Driving",
-    "description": "",
+    "description": "Vroom vroom MF",
     "notes": [],
     "rank": "B",
     "prerequisites": [],
@@ -879,34 +1017,11 @@
     "isUnnecessary": false,
     "isSilly": false
   },
-  "Fast Kickoffs": {
-    "id": "Fast Kickoffs",
-    "title": "Fast Kickoffs",
-    "description": "During the kickoff, the player diagonal flips to gain speed.",
-    "notes": [
-      {
-        "text": "Dignitas’s guide to kickoffs",
-        "url": "http://dignitas.gg/articles/blogs/rocket-league/12642/take-your-rocket-league-gameplay-to-the-next-level-kickoffs"
-      }
-    ],
-    "rank": "G",
-    "prerequisites": [
-      "50/50’s + Kickoffs"
-    ],
-    "isRecommended": false,
-    "isUnnecessary": false,
-    "isSilly": false
-  },
   "Flip Canceling": {
     "id": "Flip Canceling",
     "title": "Flip Canceling",
-    "description": "During a flip, the player rotates the car in the opposite direction the flip is going to stop the car from turning. Used to gain speed.",
-    "notes": [
-      {
-        "text": "Dignitas’s half-flip guide",
-        "url": "http://dignitas.gg/articles/blogs/rocket-league/12628/half-flips-where-when-and-how"
-      }
-    ],
+    "description": "Shortly after flipping, push the joystick in the opposite direction of the flip. The car should get stuck upside down. This is and important mechanic for the half flip.",
+    "notes": [],
     "rank": "G",
     "prerequisites": [
       "Flipping"
@@ -915,9 +1030,9 @@
     "isUnnecessary": false,
     "isSilly": false
   },
-  "Flip Resets": {
-    "id": "Flip Resets",
-    "title": "Flip Resets",
+  "Flip Reset": {
+    "id": "Flip Reset",
+    "title": "Flip Reset",
     "description": "Hitting anything with the bottom of the car on all of the wheels at once to reset the flip timer on the car. Mainly used for ceiling shots, flip resets can also be used with dribbling and redirects.",
     "notes": [
       {
@@ -935,7 +1050,8 @@
     ],
     "rank": "GC",
     "prerequisites": [
-      "Flip Window"
+      "Flip Window",
+      "Tornado Spin"
     ],
     "isRecommended": false,
     "isUnnecessary": true,
@@ -944,8 +1060,12 @@
   "Flip Window": {
     "id": "Flip Window",
     "title": "Flip Window",
-    "description": "Understanding how long you have to flip, and when your flip is avaialable again (when it resets)",
-    "notes": [],
+    "description": "How long you haved to use your second jump after going in the air",
+    "notes": [
+      "Jumping off of any surface gives you 1.5 seconds before you can jump again",
+      "Being thrown into the air without jumping gives you unlimited time to jump",
+      "If all four tires touch a surface even if you don't land, then you get your flip back. This includes the ball and other cars"
+    ],
     "rank": "S",
     "prerequisites": [
       "Jumping"
@@ -957,7 +1077,7 @@
   "Flipping": {
     "id": "Flipping",
     "title": "Flipping",
-    "description": "",
+    "description": "After jumping hold a direction and jump again. You can use this to gain speed or hit the ball harder.",
     "notes": [],
     "rank": "B",
     "prerequisites": [
@@ -975,6 +1095,19 @@
     "rank": "D",
     "prerequisites": [
       "Half Flipping"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Front Flip Kickoff": {
+    "id": "Front Flip Kickoff",
+    "title": "Front Flip Kickoff",
+    "description": "Boost and immediately frontflip on the kickoff. Do not boost while your jets are pointed backwards. Flip again when you get near the ball.",
+    "notes": [],
+    "rank": "S",
+    "prerequisites": [
+      "Boost Kickoff"
     ],
     "isRecommended": false,
     "isUnnecessary": false,
@@ -1057,6 +1190,20 @@
       "Powershot + Powerclears"
     ],
     "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Half Flip to Push Dribble": {
+    "id": "Half Flip to Push Dribble",
+    "title": "Half Flip to Push Dribble",
+    "description": "Half flip into the ball to change its direction (or give it speed), and to maintain momentum into the ball to keep possession.",
+    "notes": [],
+    "rank": "D",
+    "prerequisites": [
+      "Half Flipping",
+      "Directed Reverse Touch"
+    ],
+    "isRecommended": true,
     "isUnnecessary": false,
     "isSilly": false
   },
@@ -1213,10 +1360,26 @@
     "isUnnecessary": false,
     "isSilly": false
   },
+  "Intermediate Kickoff 50/50s and Positioning": {
+    "id": "Intermediate Kickoff 50/50s and Positioning",
+    "title": "Intermediate Kickoff 50/50s and Positioning",
+    "description": "When contesting a kickoff do not front flip or attack the center of the ball. Instead, hit the ball off-center and barrel roll towards the other side of the ball.",
+    "notes": [
+      ""
+    ],
+    "rank": "P",
+    "prerequisites": [
+      "Diagonal Flip Kickoff",
+      "Basic Kickoff 50/50 Positioning"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
   "Joystick Air Roll": {
     "id": "Joystick Air Roll",
     "title": "Joystick Air Roll",
-    "description": "",
+    "description": "Press and hold 'air roll' and use the left stick to rotate your car. Use this for recovering when your car ends up in the air. Joystick air roll gives you better control for small adjustment versus directional air roll.",
     "notes": [],
     "rank": "S",
     "prerequisites": [
@@ -1229,7 +1392,7 @@
   "Jumping": {
     "id": "Jumping",
     "title": "Jumping",
-    "description": "",
+    "description": "Boing! The longer you hold jump, the higher you go.",
     "notes": [],
     "rank": "B",
     "prerequisites": [
@@ -1336,6 +1499,19 @@
     "isUnnecessary": true,
     "isSilly": false
   },
+  "No Boost Block Jump": {
+    "id": "No Boost Block Jump",
+    "title": "No Boost Block Jump",
+    "description": "If you're defending without boost and someone is about to hit the ball directly towards you then simply hold jump and tilt back. You can double jump if needed, but don't flip as flipping will reduce the amount of space you're covering. You don't need a powerful clear as the ball will already have momentum and just bounce off of you.",
+    "notes": [],
+    "rank": "B",
+    "prerequisites": [
+      "Driving"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
   "Nose Spinning": {
     "id": "Nose Spinning",
     "title": "Nose Spinning",
@@ -1423,8 +1599,10 @@
   "Popping": {
     "id": "Popping",
     "title": "Popping",
-    "description": "",
-    "notes": [],
+    "description": "Jump under the ball without flipping to pop it up in the air. Hit it with the top of your car if possible.",
+    "notes": [
+      "Quickly popping the ball when an opponent is fast approaching can easily make them whiff while you maintain possession"
+    ],
     "rank": "S",
     "prerequisites": [
       "Jumping"
@@ -1436,8 +1614,10 @@
   "Positioning": {
     "id": "Positioning",
     "title": "Positioning",
-    "description": "",
-    "notes": [],
+    "description": "Good positioning makes it easier to hit the ball. For basic positioning you want the back of your car towards your side of the field and the front of the car pointing towards the ball and the opponents side.",
+    "notes": [
+      "Bad positioning: If the ball is moving towards your side of the field and you are chasing the ball with the nose of your car facing your side of the field (regardless of what angle) then you are probably in a bad position. See 'Rotation' for fixing it"
+    ],
     "rank": "S",
     "prerequisites": [
       "Driving"
@@ -1449,8 +1629,10 @@
   "Possession Prediction": {
     "id": "Possession Prediction",
     "title": "Possession Prediction",
-    "description": "",
-    "notes": [],
+    "description": "Given the position and speed of the ball and players, you should know which team has possession of the ball, or who is more likely to gain posession on the next hit or 50/50.",
+    "notes": [
+      "Not all 50/50s are actually 50/50. Sometimes you get a 60/40 or the short end of an 80/20, but you can still influence the direction of the ball"
+    ],
     "rank": "G",
     "prerequisites": [
       "Game Awareness",
@@ -1511,7 +1693,7 @@
   "Powerslide Recovery": {
     "id": "Powerslide Recovery",
     "title": "Powerslide Recovery",
-    "description": "",
+    "description": "If your car lands sideways (usually after going for an aeriel or getting bumped), it will kill all of your momentum. Hold powerslide when landing to preserve your momentum and re-orient your car.",
     "notes": [],
     "rank": "G",
     "prerequisites": [
@@ -1524,11 +1706,11 @@
   "Powerslide Turning": {
     "id": "Powerslide Turning",
     "title": "Powerslide Turning",
-    "description": "",
+    "description": "You turn faster when holding powerslide, and even faster if boosting while holding powerslide. Just don't kill your momentum by sliding too much.",
     "notes": [],
     "rank": "S",
     "prerequisites": [
-      "Driving"
+      "Turning"
     ],
     "isRecommended": false,
     "isUnnecessary": false,
@@ -1604,6 +1786,33 @@
       "Boosting"
     ],
     "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Reverse Touch": {
+    "id": "Reverse Touch",
+    "title": "Reverse Touch",
+    "description": "Hit the ball with the back of your car while going in reverse (usually when in an awkward position). You don't need to flip into the ball, just make consistent contact",
+    "notes": [],
+    "rank": "G",
+    "prerequisites": [
+      "Braking"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Reverse Touch to Half Flip": {
+    "id": "Reverse Touch to Half Flip",
+    "title": "Reverse Touch to Half Flip",
+    "description": "Drive into the ball in reverse, send it in an intended direction, and half flip towards the ball to maintain posession.",
+    "notes": [],
+    "rank": "D",
+    "prerequisites": [
+      "Half Flipping",
+      "Directed Reverse Touch"
+    ],
+    "isRecommended": true,
     "isUnnecessary": false,
     "isSilly": false
   },
@@ -1747,6 +1956,20 @@
     "isUnnecessary": false,
     "isSilly": false
   },
+  "Speed Flip Kickoff": {
+    "id": "Speed Flip Kickoff",
+    "title": "Speed Flip Kickoff",
+    "description": "Perform a speed flip to get to the ball faster",
+    "notes": [],
+    "rank": "D",
+    "prerequisites": [
+      "Speed Flipping",
+      "Advanced Kickoff 50/50s and Positioning"
+    ],
+    "isRecommended": false,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
   "Speed Flipping": {
     "id": "Speed Flipping",
     "title": "Speed Flipping",
@@ -1803,14 +2026,28 @@
     "isUnnecessary": true,
     "isSilly": false
   },
-  "Team Pinch": {
-    "id": "Team Pinch",
-    "title": "Team Pinch",
-    "description": "",
+  "Swipe Shot": {
+    "id": "Swipe Shot",
+    "title": "Swipe Shot",
+    "description": "When the ball is rolling fast towards the oponents side, and you're following it: Drive/boost away from the line of the ball's travel, and arc back into the ball to make a powerful shot.",
     "notes": [],
     "rank": "G",
     "prerequisites": [
-      "Teammate Awareness"
+      "Controlled Boosting"
+    ],
+    "isRecommended": true,
+    "isUnnecessary": false,
+    "isSilly": false
+  },
+  "Team Pinch": {
+    "id": "Team Pinch",
+    "title": "Team Pinch",
+    "description": "Intentionally (and consentually) pinch a ball against a teammate",
+    "notes": [],
+    "rank": "G",
+    "prerequisites": [
+      "Teammate Awareness",
+      "Pinching"
     ],
     "isRecommended": false,
     "isUnnecessary": false,
@@ -1832,8 +2069,12 @@
   "Teammate Awareness": {
     "id": "Teammate Awareness",
     "title": "Teammate Awareness",
-    "description": "",
-    "notes": [],
+    "description": "You should have a general idea of the position of your teammates even when they are off screen. When a teammate is off screen the uncertainty in their position can vary significantly based on how much boost they had, and how they rotated.",
+    "notes": [
+      "Communication makes this so much easier",
+      "Use the right stick to control the camera and get more information about the field",
+      "Turn off ball cam when rotating to make sure you don't run into a teammate"
+    ],
     "rank": "G",
     "prerequisites": [
       "Positioning"
@@ -1899,7 +2140,7 @@
   "Turning": {
     "id": "Turning",
     "title": "Turning",
-    "description": "",
+    "description": "[Racecar noises]",
     "notes": [],
     "rank": "B",
     "prerequisites": [
@@ -2062,8 +2303,10 @@
   "Wave Dash": {
     "id": "Wave Dash",
     "title": "Wave Dash",
-    "description": "",
-    "notes": [],
+    "description": "Tap jump and hold back on the joystick. When the back wheels touch the ground do a front flip. The front of your car should slam against the ground converting the flip into forward momentum. You car won't actually flip.",
+    "notes": [
+      "Use this to gain speed when you are low on boost or want to conserve boost"
+    ],
     "rank": "G",
     "prerequisites": [
       "Flipping"
@@ -2084,7 +2327,7 @@
     ],
     "rank": "P",
     "prerequisites": [
-      "Fast Kickoffs"
+      "Diagonal Flip Kickoff"
     ],
     "isRecommended": false,
     "isUnnecessary": false,

@@ -40,6 +40,20 @@ import rawSkillMetadata from './skillMetadata.json';
 import { Skill, SKILL_COLLECTION_ID, SkillStreamMetatype } from './skill';
 import { validatePrerequisites } from './validatePrerequisites';
 
+const invalidSkillEntries = Object.entries(rawSkillMetadata).filter(
+  ([key, value]) => {
+    return key !== value.id || key !== value.title;
+  },
+);
+
+if (invalidSkillEntries.length > 0) {
+  throw new Error(
+    `Invalid skill metadata: ${invalidSkillEntries
+      .map((entry) => `"${entry[0]}"`)
+      .join(', ')}`,
+  );
+}
+
 const skillMetadataList = Object.values(rawSkillMetadata);
 
 const sortedSkillMetadata = Object.fromEntries(
@@ -117,7 +131,10 @@ runEngine({
           return !isDisabled;
         })
         .map((metadata) => {
-          return new Skill(metadata);
+          return new Skill({
+            ...metadata,
+            isSilly: false,
+          });
         }),
     }),
   ] as const,
