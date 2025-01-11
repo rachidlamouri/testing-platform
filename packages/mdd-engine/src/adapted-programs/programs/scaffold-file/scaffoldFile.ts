@@ -16,6 +16,7 @@ import {
 } from '../../programmable-units/file/file';
 import { getProgramFileContents } from './getProgramFileContents';
 import { getFunctionFileContents } from './getFunctionFileContents';
+import { getFeatureFileContents } from './getFeatureFileContents';
 
 /**
  * Populates export declarations for a collection and all related types. It uses
@@ -72,6 +73,9 @@ export const scaffoldFile = buildProgrammedTransform({
           return getProgramFileContents(relevantFileMetadata);
         case FileTypeName.Function:
           return getFunctionFileContents(relevantFileMetadata);
+        case FileTypeName.Feature: {
+          return getFeatureFileContents(scaffoldConfiguration.args);
+        }
       }
     })();
 
