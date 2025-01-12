@@ -1,7 +1,15 @@
 EGTE:
-  name: Feature Ids
+  title: Feature Ids
   localId: EGTE
   globalId: dcc6b0aa-d1ed-48c8-9c02-ed096ad5fb9e
   createdAt: 2025-01-11T21:52:22.795Z
   description: |
     Generate a UUID and a local ID hash that corresponds to a feature name, creation date, and description.
+  children:
+    EKW8:
+      title: Nested Features
+      localId: EKW8
+      globalId: d86a25ba-fc16-4ba0-bd24-398013e70700
+      createdAt: 2025-01-12T16:36:27.774Z
+      description: |
+        Features can be defined within parent features

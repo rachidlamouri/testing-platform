@@ -1,11 +1,9 @@
 import fs from 'fs';
 import yaml from 'yaml';
-import { z } from 'zod';
 import { buildProgrammedTransform } from '../../../adapter/programmed-transform-builder/buildProgrammedTransform';
 import {
   FEATURE_DEFINITION_COLLECTION_ID,
   FeatureDefinition,
-  FeatureDefinitionInputSchema,
   FeatureDefinitionStreamMetatype,
 } from './featureDefinition';
 import {
@@ -21,6 +19,12 @@ import { TypedRule } from '../../programmable-units/linting/rule';
 import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/programmedTransformSource';
 import { FileSourceInstance } from '../../programmable-units/linting/source/fileSource';
 import { uuidToLocalId } from '../../../package-agnostic-utilities/feature-id/featureId';
+import {
+  SerializedFeatureDefinition,
+  SerializedFeatureDefinitionById,
+  SerializedFeatureDefinitionByIdSchema,
+} from './serializedFeatureDefinition';
+import { isNotUndefined } from '../../../package-agnostic-utilities/nil/isNotUndefined';
 
 const PROGRAMMED_TRANSFORM_NAME = 'loadFeatureDefinitions' as const;
 
@@ -48,8 +52,6 @@ const featureDefinitionKeyIsConsistentRule =
     },
   });
 
-const FeaturesInputSchema = z.record(z.string(), FeatureDefinitionInputSchema);
-
 /**
  * Parses features.yaml
  */
@@ -71,9 +73,38 @@ export const loadFeatureDefinitions = buildProgrammedTransform({
       'utf8',
     );
     const rawFeaturesInput: unknown = yaml.parse(featuresText);
-    const featuresInput = FeaturesInputSchema.parse(rawFeaturesInput);
+    const featuresInput =
+      SerializedFeatureDefinitionByIdSchema.parse(rawFeaturesInput);
 
-    const assertionDataList = Object.entries(featuresInput).map(
+    const flattenSerializedDefinitions = (
+      serializedDefinitionById: SerializedFeatureDefinitionById,
+      accumulator: Map<string, SerializedFeatureDefinition>,
+    ): void => {
+      Object.entries(serializedDefinitionById).forEach(
+        ([localId, serializedDefinition]) => {
+          if (serializedDefinition.children) {
+            flattenSerializedDefinitions(
+              serializedDefinition.children,
+              accumulator,
+            );
+          }
+
+          if (accumulator.has(localId)) {
+            throw new Error(`Duplicate local id ${localId}`);
+          }
+
+          accumulator.set(localId, serializedDefinition);
+        },
+      );
+    };
+
+    const serializedDefinitionMap = new Map<
+      string,
+      SerializedFeatureDefinition
+    >();
+    flattenSerializedDefinitions(featuresInput, serializedDefinitionMap);
+
+    const assertionDataList = [...serializedDefinitionMap.entries()].map(
       ([indexKey, featureInput]) => {
         const expectedLocalId = uuidToLocalId(featureInput.globalId);
 
@@ -103,9 +134,25 @@ export const loadFeatureDefinitions = buildProgrammedTransform({
       },
     );
 
+    const definitionMap = new Map<string, FeatureDefinition>();
     const features = assertionDataList
       .filter(({ assertion }) => assertion.result.isValid)
-      .map(({ featureInput }) => new FeatureDefinition(featureInput));
+      .map(({ featureInput }) => {
+        const childFeatures = Object.keys(featureInput.children ?? {})
+          .map((key) => {
+            return definitionMap.get(key);
+          })
+          .filter(isNotUndefined);
+
+        const feature = new FeatureDefinition({
+          ...featureInput,
+          children: childFeatures,
+        });
+
+        definitionMap.set(feature.id.local, feature);
+
+        return feature;
+      });
 
     const assertions = assertionDataList.map(({ assertion }) => assertion);
 

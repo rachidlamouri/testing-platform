@@ -404,6 +404,10 @@ const customDefinitionSet: CustomDefinition[] = [
     word: 'validator',
     description: 'One who validates',
   },
+  {
+    word: 'zod',
+    description: 'An npm library',
+  },
 ];
 
 /**
