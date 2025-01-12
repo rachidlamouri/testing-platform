@@ -103,6 +103,10 @@ printf "\n"
 bash packages/mdd-engine/src/adapted-programs/programs/rename-nonsense/renameNonsense.test.sh
 printf "\n"
 
+## lint-features
+bash packages/mdd-engine/src/adapted-programs/programs/lint-features/lintFeatures.test.sh
+printf "\n"
+
 # WIP Adapted Programs
 
 ## render-knowledge-graph

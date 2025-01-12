@@ -5,6 +5,7 @@ export enum FileTypeName {
   ProgrammedTransform = 'transform',
   Item = 'item',
   Function = 'function',
+  Feature = 'feature',
 }
 
 export const validTypeNameList = Object.values(FileTypeName) as string[];
@@ -15,6 +16,7 @@ export const validTypeNameList = Object.values(FileTypeName) as string[];
 export type ScaffoldConfiguration = {
   typeName: FileTypeName;
   filePath: string;
+  args: string[];
 };
 
 export const SCAFFOLD_CONFIGURATION_COLLECTION_ID = 'scaffold-configuration';

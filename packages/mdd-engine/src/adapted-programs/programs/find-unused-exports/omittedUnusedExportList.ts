@@ -38,11 +38,6 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
   },
   {
     importedFilePath:
-      'packages/mdd-engine/src/package-agnostic-utilities/feature-id/featureId.ts',
-    importedIdentifierName: 'createFeatureId',
-  },
-  {
-    importedFilePath:
       'packages/mdd-engine/src/package-agnostic-utilities/type-script-ast/isIdentifiableTypeScriptTypeReference.ts',
     importedIdentifierName: 'isSpecificIdentifiableTypeScriptTypeReference',
   },

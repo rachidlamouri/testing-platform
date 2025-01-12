@@ -6,6 +6,7 @@ import {
   runEngine,
 } from '../../../adapter/engine/runEngine';
 import {
+  FileTypeName,
   SCAFFOLD_CONFIGURATION_COLLECTION_ID,
   ScaffoldConfiguration,
   ScaffoldConfigurationStreamMetatype,
@@ -24,6 +25,7 @@ import { buildDefaultFileCollectionTuple } from '../../programmable-units/file/b
 type ScriptInput = {
   typeName: string | undefined;
   filePath: string | undefined;
+  args: string[];
 };
 
 function assertScriptInputIsValid(
@@ -60,10 +62,15 @@ function assertScriptInputIsValid(
   }
 }
 
-const [typeName, filePath] = process.argv.slice(2);
+const [typeName, ...args] = process.argv.slice(2);
+const filePath =
+  typeName === FileTypeName.Feature
+    ? 'packages/mdd-engine/features.yaml'
+    : args[0];
 const scriptInput: ScriptInput = {
   typeName,
   filePath,
+  args: typeName === FileTypeName.Feature ? args : args.slice(1),
 };
 
 assertScriptInputIsValid(scriptInput);

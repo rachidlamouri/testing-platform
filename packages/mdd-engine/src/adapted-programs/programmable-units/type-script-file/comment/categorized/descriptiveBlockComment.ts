@@ -11,6 +11,7 @@ type DescriptiveBlockCommentConstructorInput = {
 type TagWithName = {
   tag: string;
   name: string;
+  raw: string;
 };
 
 /**
@@ -61,9 +62,13 @@ export const { DescriptiveBlockCommentInstance } =
         const tagList = adaptedComment.parsedBlock.tags;
 
         const tagTuple = tagList.map((tag) => {
+          const raw =
+            tag.name + (tag.name.length > 0 ? ' ' : '') + tag.description;
+
           return {
             tag: tag.tag,
             name: tag.name,
+            raw,
           };
         });
 

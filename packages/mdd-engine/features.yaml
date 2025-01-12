@@ -1,0 +1,7 @@
+EGTE:
+  name: Feature Ids
+  localId: EGTE
+  globalId: dcc6b0aa-d1ed-48c8-9c02-ed096ad5fb9e
+  createdAt: 2025-01-11T21:52:22.795Z
+  description: |
+    Generate a UUID and a local ID hash that corresponds to a feature name, creation date, and description.
