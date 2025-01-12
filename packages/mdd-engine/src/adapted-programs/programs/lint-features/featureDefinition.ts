@@ -1,30 +1,33 @@
-import { z } from 'zod';
+import { Merge } from 'type-fest';
 import { InMemoryIdentifiableItem3StreamMetatype } from '../../../layer-agnostic-utilities/collection/inMemoryIdentifiableItemCollection2';
 import { FeatureId } from '../../../package-agnostic-utilities/feature-id/featureId';
+import { BaseSerializedFeatureDefinition } from './serializedFeatureDefinition';
 
-export const FeatureDefinitionInputSchema = z.object({
-  localId: z.string(),
-  globalId: z.string(),
-  name: z.string(),
-  description: z.string(),
-  createdAt: z.string(),
-});
-
-type FeatureDefinitionInput = z.infer<typeof FeatureDefinitionInputSchema>;
+type FeatureDefinitionInput = Merge<
+  BaseSerializedFeatureDefinition,
+  {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    children: FeatureDefinition[];
+  }
+>;
 
 /**
  * A parsed object from features.yaml
+ *
+ * @implements EKW8
  */
 export class FeatureDefinition
   implements Omit<FeatureDefinitionInput, 'localId' | 'globalId'>
 {
   id: FeatureId;
 
-  name: string;
+  title: string;
 
   description: string;
 
   createdAt: string;
+
+  children: FeatureDefinition[];
 
   constructor(input: FeatureDefinitionInput) {
     this.id = new FeatureId({
@@ -32,9 +35,10 @@ export class FeatureDefinition
       globalId: input.globalId,
     });
 
-    this.name = input.name;
+    this.title = input.title;
     this.description = input.description;
     this.createdAt = input.createdAt;
+    this.children = input.children;
   }
 }
 

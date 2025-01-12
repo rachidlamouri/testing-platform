@@ -21,6 +21,7 @@ const PROGRAMMED_TRANSFORM_NAME = 'getFeatureLintAssertions' as const;
 
 type FeatureIsImplementedMessageContext = {
   localId: string;
+  title: string;
 };
 const featureIsImplemented = new TypedRule<FeatureIsImplementedMessageContext>({
   name: 'feature-is-implemented',
@@ -29,8 +30,8 @@ const featureIsImplemented = new TypedRule<FeatureIsImplementedMessageContext>({
     programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
   }),
   description: 'All features must be implemented',
-  getErrorMessage: ({ localId }): string => {
-    return `Feature "${localId}" is not implemented`;
+  getErrorMessage: ({ localId, title }): string => {
+    return `Feature "${localId}" "${title}" is not implemented`;
   },
 });
 
@@ -62,6 +63,7 @@ export const getFeatureLintAssertions = buildProgrammedTransform({
       ),
       errorMessageContext: {
         localId: featureDefinition.id.local,
+        title: featureDefinition.title,
       },
       context: {
         featureDefinition,

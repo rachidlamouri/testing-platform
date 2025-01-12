@@ -4,13 +4,13 @@ import { FeatureId } from '../../../package-agnostic-utilities/feature-id/featur
  * Constructs the boilerplate text for a new feature definition
  */
 export const getFeatureFileContents = (args: string[]): string => {
-  const [featureName] = args;
+  const [featureTitle] = args;
 
   const featureId = FeatureId.create();
 
   const fileContents = `
 ${featureId.local}:
-  name: ${featureName}
+  title: ${featureTitle}
   localId: ${featureId.local}
   globalId: ${featureId.global}
   createdAt: ${new Date().toISOString()}
