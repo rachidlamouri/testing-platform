@@ -46,6 +46,8 @@ const programFileCache = new ProgramFileCache({
  * Runs assertions against features and their implementations
  *
  * @canonicalComment
+ *
+ * @implements X7EW
  */
 runEngine({
   explicitCollectionTuple: [
