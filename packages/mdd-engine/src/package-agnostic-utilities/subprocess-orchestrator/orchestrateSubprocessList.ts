@@ -1,5 +1,6 @@
-import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
+import { spawn, ChildProcess } from 'child_process';
 import chalk from 'chalk';
+import fs from 'fs';
 import { SubprocessConfiguration } from './subprocessConfiguration';
 import { ForegroundColor, colorList } from '../color/colorList';
 import { assertNotUndefined } from '../nil/assertNotUndefined';
@@ -8,6 +9,12 @@ import { TextSanitizer } from './transforms/textSanitizer';
 import { TextTransform } from './transforms/textTransform';
 import { formatTable } from '../table-formatter/formatTable';
 import { Valve } from './transforms/valve';
+import { assertNotNull } from '../nil/assertNotNull';
+
+// TODO: make this cast more robust
+const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8')) as {
+  scripts: { program: string };
+};
 
 const EMPTY_WHITESPACE_REGEX = /^\s*$/;
 const SPACE_DELIMITED_INTEGERS_REGEX = /^(\d+\s*)+$/;
@@ -18,12 +25,14 @@ const mutableColorList = colorList.slice();
 
 const useKnowledgeGraphDeveloper = process.env.DEV_KG !== undefined;
 
+const runProgram = packageJson.scripts.program;
+
 const knowledgeGraphProgramLabel = useKnowledgeGraphDeveloper
   ? 'develop-knowledge-graph'
   : 'render-knowledge-graph';
 const runKnowledgeGraph = useKnowledgeGraphDeveloper
-  ? 'npm run program packages/mdd-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts'
-  : 'npm run program packages/mdd-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts';
+  ? `${runProgram} packages/mdd-engine/src/adapted-programs/programs/develop-knowledge-graph/developKnowledgeGraph.ts`
+  : `${runProgram} packages/mdd-engine/src/adapted-programs/programs/render-knowledge-graph/renderKnowledgeGraph.ts`;
 const serveKnowledgeGraph = useKnowledgeGraphDeveloper
   ? 'npx http-server debug/develop-knowledge-graph/collections/output-file'
   : 'npx http-server debug/render-knowledge-graph/collections/output-file';
@@ -32,8 +41,7 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
   [
     {
       label: 'model-programs',
-      script:
-        'npm run program packages/mdd-engine/src/adapted-programs/programs/model-programs/modelPrograms.ts',
+      script: `${runProgram} packages/mdd-engine/src/adapted-programs/programs/model-programs/modelPrograms.ts`,
       isInitiallyVisible: true,
     },
     {
@@ -43,43 +51,38 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
     },
     {
       label: 'lint-nonsense',
-      script:
-        'npm run program packages/mdd-engine/src/adapted-programs/programs/lint-nonsense/lintNonsense.ts',
+      script: `${runProgram} packages/mdd-engine/src/adapted-programs/programs/lint-nonsense/lintNonsense.ts`,
       isInitiallyVisible: true,
     },
     {
       label: 'rename-nonsense',
-      script:
-        'npm run program packages/mdd-engine/src/adapted-programs/programs/rename-nonsense/renameNonsense.ts',
+      script: `${runProgram} packages/mdd-engine/src/adapted-programs/programs/rename-nonsense/renameNonsense.ts`,
       isInitiallyVisible: true,
     },
     {
       label: 'find-unused-exports',
-      script:
-        'npm run program packages/mdd-engine/src/adapted-programs/programs/find-unused-exports/findUnusedExports.ts',
+      script: `nodemon --ext html,ts,tsx,sh --ignore debug --ignore **/generated/** packages/mdd-engine/src/adapted-programs/programs/find-unused-exports/findUnusedExports.ts`,
       isInitiallyVisible: true,
     },
     {
       label: 'model-ci',
-      script:
-        'npm run program packages/mdd-engine/src/adapted-programs/programs/model-ci/modelCi.ts',
+      script: `${runProgram} packages/mdd-engine/src/adapted-programs/programs/model-ci/modelCi.ts`,
       isInitiallyVisible: true,
     },
     {
       label: 'lint-file-system-node-path-literals',
-      script:
-        'npm run program packages/mdd-engine/src/adapted-programs/programs/lint-file-system-node-path-literals/lintFileSystemNodePathLiterals.ts',
+      script: `${runProgram} packages/mdd-engine/src/adapted-programs/programs/lint-file-system-node-path-literals/lintFileSystemNodePathLiterals.ts`,
       isInitiallyVisible: true,
     },
     {
       label: 'typecheck',
-      script: 'npx tsc --pretty -p packages/mdd-engine --watch',
+      script:
+        'nodemon --ext ts,tsx --ignore debug --ignore **/generated/** --exec tsc --pretty -p packages/mdd-engine',
       isInitiallyVisible: true,
     },
     {
       label: 'lint',
-      script:
-        'nodemon --ext ts,tsx --ignore debug --ignore **/generated/** --exec npm run lint:ts:engine',
+      script: `nodemon --ext ts,tsx --ignore debug --ignore **/generated/** --exec npm run lint:ts:engine`,
       isInitiallyVisible: true,
     },
     {
@@ -89,8 +92,7 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
     },
     {
       label: 'server-program-models',
-      script:
-        'npx http-server -p 8081 debug/modelPrograms/collections/output-file',
+      script: `npx http-server -p 8081 debug/modelPrograms/collections/output-file`,
       isInitiallyVisible: false,
     },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
@@ -104,10 +106,20 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
   };
 });
 
+enum SubprocessStatus {
+  Unknown = 'Unknown',
+  Running = 'Running',
+  Failed = 'Failed',
+  Done = 'Done',
+}
+
 type SubprocessState = {
   configuration: SubprocessConfiguration;
-  childProcess: ChildProcessWithoutNullStreams;
+  childProcess: ChildProcess;
   valve: Valve;
+  status: {
+    value: SubprocessStatus;
+  };
 };
 
 const maxLabelLength = Math.max(
@@ -125,9 +137,13 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
         ...process.env,
         FORCE_COLOR: '1',
       },
+      stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
     });
 
     const valve = new Valve();
+
+    assertNotNull(childProcess.stdout);
+    assertNotNull(childProcess.stderr);
 
     childProcess.stdout.pipe(valve);
     childProcess.stderr.pipe(valve);
@@ -142,10 +158,33 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
       .pipe(new TextSanitizer())
       .pipe(process.stdout);
 
+    const mutableStatus = {
+      value: SubprocessStatus.Unknown,
+    };
+
+    childProcess.on('message', (event) => {
+      if (
+        typeof event !== 'object' ||
+        !('type' in event) ||
+        typeof event.type !== 'string'
+      ) {
+        throw new Error('Unknown message');
+      }
+
+      if (event.type === 'start') {
+        mutableStatus.value = SubprocessStatus.Running;
+      } else if (event.type === 'exit') {
+        mutableStatus.value = SubprocessStatus.Done;
+      } else if (event.type === 'crash') {
+        mutableStatus.value = SubprocessStatus.Failed;
+      }
+    });
+
     return {
       configuration,
       childProcess,
       valve,
+      status: mutableStatus,
     };
   },
 );
@@ -211,6 +250,7 @@ const orchestrateSubprocessList = (): void => {
     label: string;
     isVisible: boolean;
     color: ForegroundColor;
+    status: SubprocessStatus;
   };
 
   let cachedSubprocessStateList: CachedSubprocessState[] = [];
@@ -233,6 +273,7 @@ const orchestrateSubprocessList = (): void => {
           label: state.configuration.label,
           isVisible: state.valve.isVisible,
           color: state.configuration.color,
+          status: state.status.value,
         };
       });
 
@@ -243,13 +284,32 @@ const orchestrateSubprocessList = (): void => {
     }
 
     const table = formatTable([
-      ['Index', 'Label', 'Is Visible'],
+      ['Index', 'Status', 'Label', 'Is Visible'],
       ...cachedSubprocessStateList.map((cachedState, index) => {
         const isVisibleColor: ForegroundColor | undefined =
           cachedState.isVisible ? 'green' : undefined;
 
         return [
           `${index}`,
+          {
+            text: cachedState.status,
+            color: ((): ForegroundColor => {
+              switch (cachedState.status) {
+                case SubprocessStatus.Unknown: {
+                  return 'cyan';
+                }
+                case SubprocessStatus.Running: {
+                  return 'yellow';
+                }
+                case SubprocessStatus.Failed: {
+                  return 'red';
+                }
+                case SubprocessStatus.Done: {
+                  return 'green';
+                }
+              }
+            })(),
+          },
           {
             text: cachedState.label,
             color: cachedState.color,
