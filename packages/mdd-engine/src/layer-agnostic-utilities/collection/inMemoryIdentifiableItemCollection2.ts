@@ -199,7 +199,7 @@ export class InMemoryIdentifiableItem3Collection<
   TStreamMetatype
 > {
   constructor({
-    continueOnDuplicate = true,
+    continueOnDuplicate = false,
     ...input
   }: BaseInMemoryIdentifiableItem2CollectionInput<TStreamMetatype>) {
     super({

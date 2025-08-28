@@ -114,7 +114,7 @@ export const loadFeatureDefinitions = buildProgrammedTransform({
           assertion: new LintAssertion({
             rule: featureDefinitionKeyIsConsistentRule,
             lintSource: new FileSourceInstance({
-              filePath: 'packages/mdd-engine/features.yaml',
+              filePath: `packages/mdd-engine/features.yaml ${indexKey}`,
             }),
             context: {
               indexKey,

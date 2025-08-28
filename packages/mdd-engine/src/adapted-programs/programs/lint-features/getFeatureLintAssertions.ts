@@ -53,8 +53,9 @@ export const getFeatureLintAssertions = buildProgrammedTransform({
   .onTransform((featureDefinition, implementations) => {
     return new LintAssertion({
       rule: featureIsImplemented,
+      // TODO: add a uniquely identifiable source class
       lintSource: new FileSourceInstance({
-        filePath: 'packages/mdd-engine/features.yaml',
+        filePath: `packages/mdd-engine/features.yaml ${featureDefinition.id.local}`,
       }),
       isValid: implementations.byId.has(
         new FeatureImplementationId({

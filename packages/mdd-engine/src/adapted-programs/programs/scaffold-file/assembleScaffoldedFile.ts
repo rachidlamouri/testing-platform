@@ -80,6 +80,8 @@ assertScriptInputIsValid(scriptInput);
  * collection type and all related types
  *
  * @canonicalComment
+ *
+ * @implements Y8RO
  */
 runEngine({
   explicitCollectionTuple: [
