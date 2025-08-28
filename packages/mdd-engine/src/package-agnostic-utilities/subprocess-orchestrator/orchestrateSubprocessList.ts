@@ -16,10 +16,11 @@ const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8')) as {
   scripts: { program: string };
 };
 
-const EMPTY_WHITESPACE_REGEX = /^\s*$/;
+const EMPTY_WHITESPACE_REGEX = /^$/;
 const SPACE_DELIMITED_INTEGERS_REGEX = /^(\d+\s*)+$/;
-const FOCUS_ONE_REGEX = /^f\d$/;
+const FOCUS_ONE_REGEX = /^f\d+$/;
 const FOCUS_ALL_REGEX = /^a$/;
+const RETURN_REGEX = /^x$/;
 
 const mutableColorList = colorList.slice();
 
@@ -250,7 +251,7 @@ const orchestrateSubprocessList = (): void => {
     label: string;
     isVisible: boolean;
     color: ForegroundColor;
-    status: SubprocessStatus;
+    status: { value: SubprocessStatus };
   };
 
   let cachedSubprocessStateList: CachedSubprocessState[] = [];
@@ -273,7 +274,7 @@ const orchestrateSubprocessList = (): void => {
           label: state.configuration.label,
           isVisible: state.valve.isVisible,
           color: state.configuration.color,
-          status: state.status.value,
+          status: state.status,
         };
       });
 
@@ -292,9 +293,9 @@ const orchestrateSubprocessList = (): void => {
         return [
           `${index}`,
           {
-            text: cachedState.status,
+            text: cachedState.status.value,
             color: ((): ForegroundColor => {
-              switch (cachedState.status) {
+              switch (cachedState.status.value) {
                 case SubprocessStatus.Unknown: {
                   return 'cyan';
                 }
@@ -322,6 +323,8 @@ const orchestrateSubprocessList = (): void => {
       }),
     ]);
 
+    const returnRegexText = chalk.blue(RETURN_REGEX.toString());
+
     const emptyWhitespaceRegexText = chalk.blue(
       EMPTY_WHITESPACE_REGEX.toString(),
     );
@@ -338,7 +341,8 @@ const orchestrateSubprocessList = (): void => {
       ...table.split('\n'),
       '',
       'Options',
-      `    - enter text matching ${emptyWhitespaceRegexText} to continue`,
+      `    - enter text matching ${returnRegexText} to continue`,
+      `    - enter text matching ${emptyWhitespaceRegexText} to refresh`,
       `    - enter text with indices matching ${spaceDelimitedIntegersRegexText} to toggle subprocess visibility`,
       `    - enter text with one index matching ${focusOneRegexText} to enable visibility for one subprocess`,
       `    - enter text matching ${focusAllRegexText} to enable visibility for all subprocesses`,
@@ -349,6 +353,10 @@ const orchestrateSubprocessList = (): void => {
 
   const onMenuInput = (input: NormalizedInput): StdinState => {
     if (input.isBlank) {
+      return StdinState.Menu;
+    }
+
+    if (RETURN_REGEX.test(input.text)) {
       return StdinState.Idle;
     }
 
