@@ -169,6 +169,11 @@ export const CI_MODEL: CiModel = {
             'packages/mdd-engine/src/adapted-programs/programs/lint-nonsense/lintNonsense.test.sh',
         },
         {
+          programName: 'lint-project-node-version',
+          testFilePath:
+            'packages/mdd-engine/src/adapted-programs/programs/lint-project-node-version/lintProjectNodeVersion.test.sh',
+        },
+        {
           programName: 'rename-nonsense',
           testFilePath:
             'packages/mdd-engine/src/adapted-programs/programs/rename-nonsense/renameNonsense.test.sh',

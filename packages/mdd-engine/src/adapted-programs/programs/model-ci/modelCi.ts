@@ -36,7 +36,6 @@ import { getEngineProgramLocator3 } from '../../programmable-units/engine-progra
 import { parseTypeScriptFileComments } from '../../programmable-units/type-script-file/parseTypeScriptFileComments';
 import { getExpectedProgramTestFileConfiguration } from './getExpectedProgramTestFileConfiguration';
 import { reportErrorCount } from '../../programmable-units/error/reportErrorCount';
-import { assertFileExists } from '../../../layer-agnostic-utilities/assertion/assertFileExists';
 import { PROGRAM_ERROR_COLLECTION_ID } from '../../programmable-units/error/programError';
 import { reportFailedLintAssertion } from '../../programmable-units/linting/reportFailedLintAssertion';
 import {
@@ -106,7 +105,6 @@ runEngine({
 
     serializeCiModel,
 
-    assertFileExists,
     assertCiFileIsUpToDate,
     assertCiModelHasAllPrograms,
 

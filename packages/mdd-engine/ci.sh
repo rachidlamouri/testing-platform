@@ -99,6 +99,10 @@ printf "\n"
 bash packages/mdd-engine/src/adapted-programs/programs/lint-nonsense/lintNonsense.test.sh
 printf "\n"
 
+## lint-project-node-version
+bash packages/mdd-engine/src/adapted-programs/programs/lint-project-node-version/lintProjectNodeVersion.test.sh
+printf "\n"
+
 ## rename-nonsense
 bash packages/mdd-engine/src/adapted-programs/programs/rename-nonsense/renameNonsense.test.sh
 printf "\n"

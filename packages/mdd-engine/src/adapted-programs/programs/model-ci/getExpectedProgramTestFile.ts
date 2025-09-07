@@ -22,23 +22,16 @@ export const getExpectedProgramTestFile = buildProgrammedTransform({
   .fromItem2<ExpectedProgramTestFileConfigurationStreamMetatype>({
     collectionId: EXPECTED_PROGRAM_TEST_FILE_CONFIGURATION_COLLECTION_ID,
   })
-  .andFromItemTuple2<BashFileStreamMetatype, [string]>({
+  .andFromCollection2<BashFileStreamMetatype>({
     collectionId: BASH_FILE_COLLECTION_ID,
-    getRightKeyTuple: (expectedProgram) => {
-      return [expectedProgram.item.testFilePath];
-    },
-    getRightKey: (file) => {
-      return file.item.filePath.serialized;
-    },
   })
   .toItem2<ExpectedProgramTestFileStreamMetatype>({
     collectionId: EXPECTED_PROGRAM_TEST_FILE_COLLECTION_ID,
   })
-  .onTransform((configuration, [testFile]) => {
+  .onTransform((configuration, bashFileCollection) => {
     return new ExpectedProgramTestFileInstance({
-      programName: configuration.programName,
-      programFile: configuration.programFile,
-      testFile,
+      configuration,
+      testFile: bashFileCollection.byNodePath.get(configuration.testFilePath),
     });
   })
   .assemble();

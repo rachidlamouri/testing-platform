@@ -91,7 +91,7 @@ export class FileSystemNodeCollection<
     return {
       item,
       indexByName: {
-        serializableId: `${listIndex}`,
+        serializableId: item.id.forHuman,
         listIndex,
         id: item.id,
         nodePath: item.nodePath.serialized,
