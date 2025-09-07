@@ -63,10 +63,10 @@ export const reportErrors = buildProgrammedTransform({
         console.log(`  Context Path  - ${programError.contextFilePath}`);
         console.log();
       } else if (programError instanceof LocatableError) {
-        console.log('  Reporter Source');
-        serializeSource(programError.reporterSource);
         console.log('  Error Source');
         serializeSource(programError.errorSource);
+        console.log('  Reporter Source');
+        serializeSource(programError.reporterSource);
         const contextPath = programError.contextFilePath ?? 'n/a';
 
         console.log('  Context Path');
@@ -76,11 +76,10 @@ export const reportErrors = buildProgrammedTransform({
 
         console.log('  Rule Name');
         console.log(`    ${lintAssertion.rule.name}`);
-        console.log('  Rule Source');
-        serializeSource(lintAssertion.rule.source);
-
         console.log('  Lint Source');
         serializeSource(lintAssertion.lintSource);
+        console.log('  Rule Source');
+        serializeSource(lintAssertion.rule.source);
 
         const contextPath = programError.contextFilePath ?? 'n/a';
 

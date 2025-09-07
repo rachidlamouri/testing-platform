@@ -61,7 +61,7 @@ export const assertCiModelHasAllPrograms = buildProgrammedTransform({
         expectedTestFileCollection.list.map((expectedTestFile) => {
           return [
             expectedTestFile.programFile.filePath.serialized,
-            expectedTestFile.testFile.filePath.serialized,
+            expectedTestFile.expectedTestFilePath,
           ];
         }),
       );

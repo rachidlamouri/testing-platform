@@ -14,7 +14,6 @@ import {
 } from './expectedProgramTestFile';
 import { ProgrammedTransformSourceInstance } from '../../programmable-units/linting/source/programmedTransformSource';
 import { TypedRule } from '../../programmable-units/linting/rule';
-import { FileSourceInstance } from '../../programmable-units/linting/source/fileSource';
 import { TypeScriptObjectInstance } from '../../../package-agnostic-utilities/object/typeScriptObject';
 import {
   LINT_ASSERTION_OMISSION_COLLECTION_ID,
@@ -27,6 +26,15 @@ const PROGRAMMED_TRANSFORM_NAME = 'assertProgramTestFileIsValid' as const;
 const ruleSource = new ProgrammedTransformSourceInstance({
   filePath: posix.relative('', __filename),
   programmedTransformName: PROGRAMMED_TRANSFORM_NAME,
+});
+
+const programTestFileExists = new TypedRule<{ testFilePath: string }>({
+  name: 'program-test-file-exists',
+  source: ruleSource,
+  description: 'Program files should have an associated bash test file',
+  getErrorMessage: ({ testFilePath }): string => {
+    return `Test file ${testFilePath} does not exist`;
+  },
 });
 
 const programTestFileExitsImmediately = new TypedRule<{ testFilePath: string }>(
@@ -110,16 +118,19 @@ export const assertProgramTestFileIsValid = buildProgrammedTransform({
     const { programName } = expectedFile;
     const programFilePath = expectedFile.programFile.filePath.serialized;
 
-    const testFilePath = expectedFile.testFile.filePath.serialized;
-    const fileContents = fs.readFileSync(testFilePath, 'utf8');
+    const doesTestFileExist = fs.existsSync(expectedFile.expectedTestFilePath);
+    const fileContents = doesTestFileExist
+      ? fs.readFileSync(expectedFile.expectedTestFilePath, 'utf8')
+      : null;
 
-    const lintSource = new FileSourceInstance({
-      filePath: testFilePath,
-    });
+    const lintSource =
+      expectedFile.testFile?.source !== undefined
+        ? expectedFile.testFile.source
+        : expectedFile.programFile.source;
 
     const errorMessageContext: MessageContext = {
       programName,
-      testFilePath,
+      testFilePath: expectedFile.expectedTestFilePath,
       programFilePath,
     };
 
@@ -128,8 +139,16 @@ export const assertProgramTestFileIsValid = buildProgrammedTransform({
       fileContents,
     };
 
+    const programTestFileExistsAssertion = new LintAssertion({
+      rule: programTestFileExists,
+      lintSource,
+      isValid: doesTestFileExist,
+      errorMessageContext,
+      context: assertionContext,
+    });
+
     // note: reversing so we can use "pop" to traverse lines in order
-    const mutableLineList = fileContents.split('\n').reverse();
+    const mutableLineList = fileContents?.split('\n').reverse() ?? [];
 
     const firstLine = mutableLineList.pop();
     const isSkipped = firstLine === '# skip';
@@ -209,7 +228,7 @@ export const assertProgramTestFileIsValid = buildProgrammedTransform({
       context: assertionContext,
     });
 
-    const assertionList: GenericLintAssertion[] = [
+    const dependentAssertionList: GenericLintAssertion[] = [
       programTestFileExitsImmediatelyAssertion,
       programTestFileEmitsProgramNameAssertion,
       programTestFileEmitsDescriptionAssertion,
@@ -217,17 +236,21 @@ export const assertProgramTestFileIsValid = buildProgrammedTransform({
       programTestFileMakesAnAssertionAssertion,
     ];
 
-    const omissionList = isSkipped
-      ? assertionList.map((assertion) => {
-          return new LintAssertionOmissionInstance({
-            omitterSource: ruleSource,
-            omittedAssertionId: assertion.id,
-          });
-        })
-      : [];
+    const omissionList =
+      isSkipped || !programTestFileExistsAssertion.result.isValid
+        ? dependentAssertionList.map((assertion) => {
+            return new LintAssertionOmissionInstance({
+              omitterSource: ruleSource,
+              omittedAssertionId: assertion.id,
+            });
+          })
+        : [];
 
     return {
-      [LINT_ASSERTION_COLLECTION_ID]: assertionList,
+      [LINT_ASSERTION_COLLECTION_ID]: [
+        programTestFileExistsAssertion,
+        ...dependentAssertionList,
+      ],
       [LINT_ASSERTION_OMISSION_COLLECTION_ID]: omissionList,
     };
   })

@@ -3,12 +3,11 @@ import { buildNamedConstructorFunction } from '../../../package-agnostic-utiliti
 import { SimplifyN } from '../../../package-agnostic-utilities/type/simplify';
 import { BashFile } from '../../programmable-units/bash-file/bashFile';
 import { FileSystemNodeId } from '../../programmable-units/file/fileSystemNode';
-import { TypeScriptFile } from '../../programmable-units/type-script-file/typeScriptFile';
+import { ExpectedProgramTestFileConfiguration } from './expectedProgramTestFileConfiguration';
 
 type ExpectedProgramTestFileConstructorInput = {
-  programName: string;
-  programFile: TypeScriptFile;
-  testFile: BashFile;
+  configuration: ExpectedProgramTestFileConfiguration;
+  testFile?: BashFile;
 };
 
 /**
@@ -19,7 +18,12 @@ type ExpectedProgramTestFile = SimplifyN<
     {
       id: FileSystemNodeId;
     },
-    ExpectedProgramTestFileConstructorInput,
+    Omit<ExpectedProgramTestFileConstructorInput, 'configuration'>,
+    // TODO: upgrade type-fest and use SetFieldType
+    Omit<ExpectedProgramTestFileConfiguration, 'testFilePath' | 'id'>,
+    {
+      expectedTestFilePath: ExpectedProgramTestFileConfiguration['testFilePath'];
+    },
   ]
 >;
 
@@ -32,6 +36,7 @@ export const { ExpectedProgramTestFileInstance } =
       'programName',
       'programFile',
       'testFile',
+      'expectedTestFilePath',
     ] as const satisfies readonly (keyof ExpectedProgramTestFile)[],
   })
     .withTypes<
@@ -46,11 +51,15 @@ export const { ExpectedProgramTestFileInstance } =
         },
       },
       transformInput: (input) => {
-        const { testFile } = input;
+        const { configuration, testFile } = input;
+        const { testFilePath, programFile, programName } = configuration;
 
         return {
-          id: testFile.id,
-          ...input,
+          id: testFile?.id ?? configuration.programFile.id,
+          programName,
+          programFile,
+          testFile,
+          expectedTestFilePath: testFilePath,
         } satisfies ExpectedProgramTestFile;
       },
     })

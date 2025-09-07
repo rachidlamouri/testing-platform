@@ -27,7 +27,7 @@ type ExpectedProgramTestFileConfigurationConstructorInput = {
 /**
  * The expected file path of a program's test file
  */
-type ExpectedProgramTestFileConfiguration = SimplifyN<
+export type ExpectedProgramTestFileConfiguration = SimplifyN<
   [
     {
       id: ExpectedProgramTestFileConfigurationId;
