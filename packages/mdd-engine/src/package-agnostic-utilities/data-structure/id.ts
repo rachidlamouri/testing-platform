@@ -10,6 +10,8 @@ import { TupleToUnion, UnionToIntersection, Simplify } from 'type-fest';
 import { getTextDigest } from '../string/getTextDigest';
 import { NonEmptyTuple, Tuple } from '../type/tuple';
 
+export const SINGLETON_ID = 'SINGLETON';
+
 /**
  * An arbitrary identifier.
  * @deprecated use SimpleId or ComplexId instead
