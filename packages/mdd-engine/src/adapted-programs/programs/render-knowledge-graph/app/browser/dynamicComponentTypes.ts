@@ -10,7 +10,7 @@ import React from 'react';
 import { BoundaryTypeName } from '../../boundary/boundaryTypeName';
 
 export type SvgWrapperComponent = React.FunctionComponent<{
-  ref: React.ForwardedRef<SVGSVGElement>;
+  ref: React.LegacyRef<SVGSVGElement>;
 }>;
 
 export type MetadataField = {
