@@ -1,15 +1,19 @@
 import { spawn, ChildProcess } from 'child_process';
 import chalk from 'chalk';
 import fs from 'fs';
+import { posix } from 'path';
+import { glob } from 'glob';
+import { Merge } from 'type-fest';
 import { SubprocessConfiguration } from './subprocessConfiguration';
 import { ForegroundColor, colorList } from '../color/colorList';
 import { assertNotUndefined } from '../nil/assertNotUndefined';
 import { LineLabeler } from './transforms/lineLabeler';
 import { TextSanitizer } from './transforms/textSanitizer';
 import { TextTransform } from './transforms/textTransform';
-import { formatTable } from '../table-formatter/formatTable';
+import { Cell, Row, formatTable } from '../table-formatter/formatTable';
 import { Valve } from './transforms/valve';
 import { assertNotNull } from '../nil/assertNotNull';
+import { getFileSystemNodePathPartList } from '../../adapted-programs/programmable-units/file/getFileSystemNodePathPartList';
 
 // TODO: make this cast more robust
 const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8')) as {
@@ -22,11 +26,59 @@ const FOCUS_ONE_REGEX = /^f\d+$/;
 const FOCUS_ALL_REGEX = /^a$/;
 const RETURN_REGEX = /^x$/;
 
-const mutableColorList = colorList.slice();
+class ColorNode {
+  private nextNode?: ColorNode;
+
+  constructor(public color: ForegroundColor) {}
+
+  setNextNode(nextNode: ColorNode): void {
+    this.nextNode = nextNode;
+  }
+
+  getNextNode(): ColorNode {
+    assertNotUndefined(this.nextNode);
+    return this.nextNode;
+  }
+}
+
+const colorNodeList = colorList.slice().map((color) => {
+  return new ColorNode(color);
+});
+
+const [firstColorNode] = colorNodeList;
+colorNodeList.forEach((colorNode, index) => {
+  const nextNode = colorNodeList[index + 1];
+
+  if (nextNode !== undefined) {
+    colorNode.setNextNode(nextNode);
+  } else {
+    colorNode.setNextNode(firstColorNode);
+  }
+});
 
 const useKnowledgeGraphDeveloper = process.env.DEV_KG !== undefined;
 
 const runProgram = packageJson.scripts.program;
+
+const typescriptConfigurationJsonFilePaths = glob.sync(
+  'packages/mdd-engine/**/tsconfig.json',
+);
+const typeCheckSubprocessConfigurationList =
+  typescriptConfigurationJsonFilePaths.map(
+    (typeScriptConfigurationFilePath) => {
+      const pathPartList = getFileSystemNodePathPartList(
+        typeScriptConfigurationFilePath,
+      );
+
+      const parentDirectories = pathPartList.slice(-4, -1);
+
+      return {
+        label: `type-check | ${posix.join(...parentDirectories)}`,
+        script: `nodemon --ext ts,tsx,json --ignore debug --ignore **/generated/** --exec tsc --pretty -p ${typeScriptConfigurationFilePath}`,
+        isInitiallyVisible: true,
+      };
+    },
+  );
 
 const knowledgeGraphProgramLabel = useKnowledgeGraphDeveloper
   ? 'develop-knowledge-graph'
@@ -38,6 +90,7 @@ const serveKnowledgeGraph = useKnowledgeGraphDeveloper
   ? 'npx http-server debug/develop-knowledge-graph/collections/output-file'
   : 'npx http-server debug/render-knowledge-graph/collections/output-file';
 
+let colorListPointer = firstColorNode;
 const subprocessConfigurationList: SubprocessConfiguration[] = (
   [
     {
@@ -75,12 +128,7 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       script: `${runProgram} packages/mdd-engine/src/adapted-programs/programs/lint-file-system-node-path-literals/lintFileSystemNodePathLiterals.ts`,
       isInitiallyVisible: true,
     },
-    {
-      label: 'typecheck',
-      script:
-        'nodemon --ext ts,tsx --ignore debug --ignore **/generated/** --exec tsc --pretty -p packages/mdd-engine',
-      isInitiallyVisible: true,
-    },
+    ...typeCheckSubprocessConfigurationList,
     {
       label: 'lint',
       script: `nodemon --ext ts,tsx --ignore debug --ignore **/generated/** --exec npm run lint:ts:engine`,
@@ -98,13 +146,13 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
     },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
 ).map((partialConfiguration) => {
-  const color = mutableColorList.pop();
-  assertNotUndefined(color);
+  const nextColorNode = colorListPointer;
+  colorListPointer = colorListPointer.getNextNode();
 
   return {
     ...partialConfiguration,
-    color,
-  };
+    color: nextColorNode.color,
+  } satisfies SubprocessConfiguration;
 });
 
 enum SubprocessStatus {
@@ -114,14 +162,136 @@ enum SubprocessStatus {
   Done = 'Done',
 }
 
-type SubprocessState = {
+const nanosecondsToSeconds = (value: bigint): number => {
+  return Number(value / 1000000000n);
+};
+
+const getElapsedTimeSeconds = (
+  earlierTime: bigint,
+  laterTime: bigint,
+): number => {
+  return Math.round(nanosecondsToSeconds(laterTime - earlierTime));
+};
+
+class RuntimeTracker {
+  private startTime: bigint | null = null;
+
+  private dataPoints: number[] = [];
+
+  restart(): void {
+    this.startTime = process.hrtime.bigint();
+  }
+
+  stop(): void {
+    assertNotNull(this.startTime);
+
+    const endTime = process.hrtime.bigint();
+    const elapsedTime = getElapsedTimeSeconds(this.startTime, endTime);
+
+    this.startTime = null;
+    this.dataPoints.push(elapsedTime);
+  }
+
+  getIsRunning(): this is Merge<RuntimeTracker, { startTime: bigint }> {
+    return this.startTime !== null;
+  }
+
+  private get average(): number | null {
+    if (this.dataPoints.length === 0) {
+      return null;
+    }
+
+    let sum = 0;
+    this.dataPoints.forEach((value) => {
+      sum += value;
+    });
+
+    const result = Math.round(sum / this.dataPoints.length);
+    return result;
+  }
+
+  get elapsedPercentage(): string | null {
+    if (this.average === null || this.elapsedTimeSeconds === null) {
+      return null;
+    }
+
+    const result = `${Math.round(
+      (100 * this.elapsedTimeSeconds) / this.average,
+    )}`;
+    return result;
+  }
+
+  get elapsedTimeSeconds(): number | null {
+    const now = process.hrtime.bigint();
+    const latestDataPoint = this.dataPoints.at(-1);
+
+    let result: number | null;
+    if (this.getIsRunning()) {
+      result = getElapsedTimeSeconds(this.startTime, now);
+    } else if (latestDataPoint !== undefined) {
+      result = latestDataPoint;
+    } else {
+      result = null;
+    }
+
+    return result;
+  }
+}
+
+type SubprocessStateInput = {
   configuration: SubprocessConfiguration;
   childProcess: ChildProcess;
   valve: Valve;
-  status: {
-    value: SubprocessStatus;
-  };
 };
+
+class SubprocessState implements SubprocessStateInput {
+  configuration: SubprocessConfiguration;
+
+  childProcess: ChildProcess;
+
+  valve: Valve;
+
+  private $status = SubprocessStatus.Unknown;
+
+  runtimeTracker = new RuntimeTracker();
+
+  cachedVisibility: boolean;
+
+  constructor(input: SubprocessStateInput) {
+    this.configuration = input.configuration;
+    this.childProcess = input.childProcess;
+    this.valve = input.valve;
+    this.cachedVisibility = this.configuration.isInitiallyVisible;
+  }
+
+  get status(): SubprocessStatus {
+    return this.$status;
+  }
+
+  set status(status: SubprocessStatus) {
+    this.$status = status;
+  }
+
+  setCachedVisibility(isVisible: boolean): void {
+    this.cachedVisibility = isVisible;
+  }
+
+  toggleVisibility(): void {
+    this.setCachedVisibility(!this.cachedVisibility);
+  }
+
+  applyCachedVisibility(): void {
+    this.valve.isVisible = this.cachedVisibility;
+  }
+
+  cacheVisibility(): void {
+    this.cachedVisibility = this.valve.isVisible;
+  }
+
+  get isVisibleInCache(): boolean {
+    return this.cachedVisibility;
+  }
+}
 
 const maxLabelLength = Math.max(
   ...subprocessConfigurationList.map((configuration) => {
@@ -159,9 +329,11 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
       .pipe(new TextSanitizer())
       .pipe(process.stdout);
 
-    const mutableStatus = {
-      value: SubprocessStatus.Unknown,
-    };
+    const state = new SubprocessState({
+      configuration,
+      childProcess,
+      valve,
+    });
 
     childProcess.on('message', (event) => {
       if (
@@ -173,20 +345,18 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
       }
 
       if (event.type === 'start') {
-        mutableStatus.value = SubprocessStatus.Running;
+        state.status = SubprocessStatus.Running;
+        state.runtimeTracker.restart();
       } else if (event.type === 'exit') {
-        mutableStatus.value = SubprocessStatus.Done;
+        state.status = SubprocessStatus.Done;
+        state.runtimeTracker.stop();
       } else if (event.type === 'crash') {
-        mutableStatus.value = SubprocessStatus.Failed;
+        state.status = SubprocessStatus.Failed;
+        state.runtimeTracker.stop();
       }
     });
 
-    return {
-      configuration,
-      childProcess,
-      valve,
-      status: mutableStatus,
-    };
+    return state;
   },
 );
 
@@ -247,21 +417,9 @@ const orchestrateSubprocessList = (): void => {
 
   let currentStdInState: StdinState = StdinState.Idle;
 
-  type CachedSubprocessState = {
-    label: string;
-    isVisible: boolean;
-    color: ForegroundColor;
-    status: { value: SubprocessStatus };
-  };
-
-  let cachedSubprocessStateList: CachedSubprocessState[] = [];
-
   const onIdle = (): string | null => {
-    cachedSubprocessStateList.forEach((cachedState) => {
-      const subprocessState = subprocessStateByLabel.get(cachedState.label);
-      assertNotUndefined(subprocessState);
-
-      subprocessState.valve.isVisible = cachedState.isVisible;
+    subprocessStateList.forEach((state) => {
+      state.applyCachedVisibility();
     });
 
     return null;
@@ -269,15 +427,6 @@ const orchestrateSubprocessList = (): void => {
 
   const onMenu = (previousStdInState: StdinState): string => {
     if (previousStdInState !== StdinState.Menu) {
-      cachedSubprocessStateList = subprocessStateList.map((state) => {
-        return {
-          label: state.configuration.label,
-          isVisible: state.valve.isVisible,
-          color: state.configuration.color,
-          status: state.status,
-        };
-      });
-
       subprocessStateList.forEach((state) => {
         // eslint-disable-next-line no-param-reassign
         state.valve.isVisible = false;
@@ -285,17 +434,32 @@ const orchestrateSubprocessList = (): void => {
     }
 
     const table = formatTable([
-      ['Index', 'Status', 'Label', 'Is Visible'],
-      ...cachedSubprocessStateList.map((cachedState, index) => {
+      ['Index', 'Status', 'Time', 'Label', 'Is Visible'],
+      ...subprocessStateList.map<Row>((state, index) => {
         const isVisibleColor: ForegroundColor | undefined =
-          cachedState.isVisible ? 'green' : undefined;
+          state.isVisibleInCache ? 'green' : undefined;
+
+        const hasFinished = state.status !== SubprocessStatus.Running;
+
+        let timeText: string;
+        if (state.status === SubprocessStatus.Unknown) {
+          timeText = ' -- ';
+        } else if (
+          state.runtimeTracker.elapsedPercentage !== null &&
+          state.runtimeTracker.getIsRunning()
+        ) {
+          timeText = `${state.runtimeTracker.elapsedPercentage}%`;
+        } else {
+          assertNotNull(state.runtimeTracker.elapsedTimeSeconds);
+          timeText = `${state.runtimeTracker.elapsedTimeSeconds}s`;
+        }
 
         return [
-          `${index}`,
+          `${index}`.padStart(5, ' '),
           {
-            text: cachedState.status.value,
+            text: state.status,
             color: ((): ForegroundColor => {
-              switch (cachedState.status.value) {
+              switch (state.status) {
                 case SubprocessStatus.Unknown: {
                   return 'cyan';
                 }
@@ -312,14 +476,18 @@ const orchestrateSubprocessList = (): void => {
             })(),
           },
           {
-            text: cachedState.label,
-            color: cachedState.color,
+            text: timeText.padStart(4, ' '),
+            color: hasFinished ? 'gray' : 'white',
+          } satisfies Cell,
+          {
+            text: state.configuration.label,
+            color: state.configuration.color,
           },
           {
-            text: cachedState.isVisible.toString(),
+            text: state.isVisibleInCache.toString(),
             color: isVisibleColor,
           },
-        ];
+        ] satisfies Row;
       }),
     ]);
 
@@ -364,28 +532,24 @@ const orchestrateSubprocessList = (): void => {
       const indexList = input.text
         .split(/\s+/)
         .map((text) => parseInt(text, 10))
-        .filter(
-          (index) => index >= 0 && index < cachedSubprocessStateList.length,
-        );
+        .filter((index) => index >= 0 && index < subprocessStateList.length);
 
       indexList.forEach((index) => {
-        const cachedSubprocessState = cachedSubprocessStateList[index];
-        assertNotUndefined(cachedSubprocessState);
+        const state = subprocessStateList[index];
+        assertNotUndefined(state);
 
-        cachedSubprocessState.isVisible = !cachedSubprocessState.isVisible;
+        state.toggleVisibility();
       });
     } else if (FOCUS_ONE_REGEX.test(input.text)) {
       const numericText = input.text.slice(1);
       const selectedIndex = Number.parseInt(numericText, 10);
 
-      cachedSubprocessStateList.forEach((cachedSubprocessState, index) => {
-        // eslint-disable-next-line no-param-reassign
-        cachedSubprocessState.isVisible = index === selectedIndex;
+      subprocessStateList.forEach((state, index) => {
+        state.setCachedVisibility(index === selectedIndex);
       });
     } else if (FOCUS_ALL_REGEX.test(input.text)) {
-      cachedSubprocessStateList.forEach((cachedSubprocessState) => {
-        // eslint-disable-next-line no-param-reassign
-        cachedSubprocessState.isVisible = true;
+      subprocessStateList.forEach((state) => {
+        state.setCachedVisibility(true);
       });
     }
 

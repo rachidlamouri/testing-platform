@@ -4,7 +4,7 @@
   "description": "Testing frameworks on testing frameworks",
   "private": true,
   "scripts": {
-    "dev": "nodemon --watch packages/mdd-engine/src/utilities/subprocess-orchestrator packages/mdd-engine/src/package-agnostic-utilities/subprocess-orchestrator/orchestrateSubprocessList.ts",
+    "dev": "nodemon --watch packages/mdd-engine/src/package-agnostic-utilities/subprocess-orchestrator packages/mdd-engine/src/package-agnostic-utilities/subprocess-orchestrator/orchestrateSubprocessList.ts",
     "program": "nodemon --ext html,ts,tsx,sh --ignore debug --ignore **/generated/**",
     "scaffold": "npx ts-node packages/mdd-engine/src/adapted-programs/programs/scaffold-file/assembleScaffoldedFile.ts",
     "example-core": "ts-node packages/open-schema-type-script/src/example/core/exampleCore.ts",
