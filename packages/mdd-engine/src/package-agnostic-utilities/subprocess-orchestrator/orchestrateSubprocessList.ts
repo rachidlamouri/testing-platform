@@ -1,4 +1,5 @@
 import { spawn, ChildProcess } from 'child_process';
+import { Readable } from 'stream';
 import chalk from 'chalk';
 import fs from 'fs';
 import { posix } from 'path';
@@ -14,6 +15,24 @@ import { Cell, Row, formatTable } from '../table-formatter/formatTable';
 import { Valve } from './transforms/valve';
 import { assertNotNull } from '../nil/assertNotNull';
 import { getFileSystemNodePathPartList } from '../../adapted-programs/programmable-units/file/getFileSystemNodePathPartList';
+import { MemoryUsageStream } from './memoryUsageStream';
+import { MemoryUsageEmitter, MemoryUsageEventName } from './memoryUsageEmitter';
+import { bytes } from '../byte/bytes';
+import { Nanoseconds } from '../time/nanoseconds';
+import { Seconds } from '../time/seconds';
+import { getCurrentTimeInNanoseconds } from '../time/getCurrentTimeInNanoseconds';
+import { convertNanosecondsToSeconds } from '../time/convertNanosecondsToSeconds';
+import { isNotNull } from '../nil/isNotNull';
+
+const memoryUsageEmitter = new MemoryUsageEmitter(bytes`10GB`);
+
+memoryUsageEmitter.on(MemoryUsageEventName.LimitReached, (usage, limit) => {
+  process.stdout.write(chalk.red(`MEMORY USAGE EXCEEDS LIMIT: ${limit}\n`));
+  process.stdout.write(usage);
+  process.exit(1);
+});
+
+memoryUsageEmitter.start();
 
 // TODO: make this cast more robust
 const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8')) as {
@@ -144,6 +163,11 @@ const subprocessConfigurationList: SubprocessConfiguration[] = (
       script: `npx http-server -p 8081 debug/modelPrograms/collections/output-file`,
       isInitiallyVisible: false,
     },
+    {
+      label: 'memory-usage',
+      stream: new MemoryUsageStream(memoryUsageEmitter),
+      isInitiallyVisible: true,
+    },
   ] satisfies Omit<SubprocessConfiguration, 'color'>[]
 ).map((partialConfiguration) => {
   const nextColorNode = colorListPointer;
@@ -162,31 +186,31 @@ enum SubprocessStatus {
   Done = 'Done',
 }
 
-const nanosecondsToSeconds = (value: bigint): number => {
-  return Number(value / 1000000000n);
-};
-
-const getElapsedTimeSeconds = (
-  earlierTime: bigint,
-  laterTime: bigint,
-): number => {
-  return Math.round(nanosecondsToSeconds(laterTime - earlierTime));
+const getElapsedSeconds = (
+  earlierTime: Nanoseconds,
+  laterTime: Nanoseconds,
+): Seconds => {
+  const elapsedNanoseconds = new Nanoseconds(
+    laterTime.value - earlierTime.value,
+  );
+  const elapsedSeconds = convertNanosecondsToSeconds(elapsedNanoseconds);
+  return new Seconds(Math.round(elapsedSeconds.value));
 };
 
 class RuntimeTracker {
-  private startTime: bigint | null = null;
+  private startTime: Nanoseconds | null = null;
 
-  private dataPoints: number[] = [];
+  private dataPoints: Seconds[] = [];
 
   restart(): void {
-    this.startTime = process.hrtime.bigint();
+    this.startTime = getCurrentTimeInNanoseconds();
   }
 
   stop(): void {
     assertNotNull(this.startTime);
 
-    const endTime = process.hrtime.bigint();
-    const elapsedTime = getElapsedTimeSeconds(this.startTime, endTime);
+    const endTime = getCurrentTimeInNanoseconds();
+    const elapsedTime = getElapsedSeconds(this.startTime, endTime);
 
     this.startTime = null;
     this.dataPoints.push(elapsedTime);
@@ -202,32 +226,33 @@ class RuntimeTracker {
     }
 
     let sum = 0;
-    this.dataPoints.forEach((value) => {
-      sum += value;
+    this.dataPoints.forEach((seconds) => {
+      sum += seconds.value;
     });
 
     const result = Math.round(sum / this.dataPoints.length);
     return result;
   }
 
-  get elapsedPercentage(): string | null {
+  get elapsedPercentage(): number | null {
     if (this.average === null || this.elapsedTimeSeconds === null) {
       return null;
     }
 
-    const result = `${Math.round(
-      (100 * this.elapsedTimeSeconds) / this.average,
-    )}`;
+    const result = Math.round(
+      (100 * this.elapsedTimeSeconds.value) / this.average,
+    );
+
     return result;
   }
 
-  get elapsedTimeSeconds(): number | null {
-    const now = process.hrtime.bigint();
+  get elapsedTimeSeconds(): Seconds | null {
+    const now = getCurrentTimeInNanoseconds();
     const latestDataPoint = this.dataPoints.at(-1);
 
-    let result: number | null;
+    let result: Seconds | null;
     if (this.getIsRunning()) {
-      result = getElapsedTimeSeconds(this.startTime, now);
+      result = getElapsedSeconds(this.startTime, now);
     } else if (latestDataPoint !== undefined) {
       result = latestDataPoint;
     } else {
@@ -240,14 +265,12 @@ class RuntimeTracker {
 
 type SubprocessStateInput = {
   configuration: SubprocessConfiguration;
-  childProcess: ChildProcess;
   valve: Valve;
+  processId: null | number;
 };
 
 class SubprocessState implements SubprocessStateInput {
   configuration: SubprocessConfiguration;
-
-  childProcess: ChildProcess;
 
   valve: Valve;
 
@@ -257,11 +280,13 @@ class SubprocessState implements SubprocessStateInput {
 
   cachedVisibility: boolean;
 
+  processId: null | number;
+
   constructor(input: SubprocessStateInput) {
     this.configuration = input.configuration;
-    this.childProcess = input.childProcess;
     this.valve = input.valve;
     this.cachedVisibility = this.configuration.isInitiallyVisible;
+    this.processId = input.processId;
   }
 
   get status(): SubprocessStatus {
@@ -301,23 +326,7 @@ const maxLabelLength = Math.max(
 
 const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
   (configuration) => {
-    const [command, ...args] = configuration.script.split(' ');
-
-    const childProcess = spawn(command, args, {
-      env: {
-        ...process.env,
-        FORCE_COLOR: '1',
-      },
-      stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
-    });
-
     const valve = new Valve();
-
-    assertNotNull(childProcess.stdout);
-    assertNotNull(childProcess.stderr);
-
-    childProcess.stdout.pipe(valve);
-    childProcess.stderr.pipe(valve);
 
     valve
       .pipe(
@@ -329,13 +338,35 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
       .pipe(new TextSanitizer())
       .pipe(process.stdout);
 
+    let childProcess: ChildProcess | null;
+    let readableList: [Readable, ...Readable[]];
+    if (configuration.script !== undefined) {
+      const [command, ...args] = configuration.script.split(' ');
+
+      childProcess = spawn(command, args, {
+        env: {
+          ...process.env,
+          FORCE_COLOR: '1',
+        },
+        stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
+      });
+
+      assertNotNull(childProcess.stdout);
+      assertNotNull(childProcess.stderr);
+
+      readableList = [childProcess.stdout, childProcess.stderr];
+    } else {
+      childProcess = null;
+      readableList = [configuration.stream];
+    }
+
     const state = new SubprocessState({
       configuration,
-      childProcess,
       valve,
+      processId: childProcess?.pid ?? null,
     });
 
-    childProcess.on('message', (event) => {
+    childProcess?.on('message', (event) => {
       if (
         typeof event !== 'object' ||
         !('type' in event) ||
@@ -348,17 +379,31 @@ const subprocessStateList: SubprocessState[] = subprocessConfigurationList.map(
         state.status = SubprocessStatus.Running;
         state.runtimeTracker.restart();
       } else if (event.type === 'exit') {
+        if (!('data' in event) || event.data !== 'SIGUSR2') {
+          state.runtimeTracker.stop();
+        }
+
         state.status = SubprocessStatus.Done;
-        state.runtimeTracker.stop();
       } else if (event.type === 'crash') {
         state.status = SubprocessStatus.Failed;
         state.runtimeTracker.stop();
       }
     });
 
+    readableList.forEach((readable) => {
+      readable.pipe(valve);
+    });
+
     return state;
   },
 );
+
+subprocessStateList
+  .map((state) => state.processId)
+  .filter(isNotNull)
+  .forEach((processId) => {
+    memoryUsageEmitter.watchSubprocess(processId);
+  });
 
 const subprocessStateByLabel = new Map(
   subprocessStateList.map((state) => {
@@ -441,17 +486,29 @@ const orchestrateSubprocessList = (): void => {
 
         const hasFinished = state.status !== SubprocessStatus.Running;
 
+        let color: ForegroundColor;
         let timeText: string;
         if (state.status === SubprocessStatus.Unknown) {
+          color = 'gray';
           timeText = ' -- ';
         } else if (
           state.runtimeTracker.elapsedPercentage !== null &&
           state.runtimeTracker.getIsRunning()
         ) {
+          if (state.runtimeTracker.elapsedPercentage < 100) {
+            color = 'white';
+          } else if (state.runtimeTracker.elapsedPercentage === 100) {
+            color = 'gray';
+          } else if (state.runtimeTracker.elapsedPercentage <= 125) {
+            color = 'yellow';
+          } else {
+            color = 'red';
+          }
           timeText = `${state.runtimeTracker.elapsedPercentage}%`;
         } else {
+          color = hasFinished ? 'gray' : 'white';
           assertNotNull(state.runtimeTracker.elapsedTimeSeconds);
-          timeText = `${state.runtimeTracker.elapsedTimeSeconds}s`;
+          timeText = `${state.runtimeTracker.elapsedTimeSeconds.value}s`;
         }
 
         return [
@@ -477,7 +534,7 @@ const orchestrateSubprocessList = (): void => {
           },
           {
             text: timeText.padStart(4, ' '),
-            color: hasFinished ? 'gray' : 'white',
+            color,
           } satisfies Cell,
           {
             text: state.configuration.label,
