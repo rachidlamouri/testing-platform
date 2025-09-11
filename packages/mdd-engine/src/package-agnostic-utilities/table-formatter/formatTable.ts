@@ -4,9 +4,9 @@ type NormalizedCell = {
   text: string;
   color?: ForegroundColor;
 };
-type Cell = string | NormalizedCell;
+export type Cell = string | NormalizedCell;
 
-type Row = Cell[];
+export type Row = Cell[];
 type NormalizedRow = NormalizedCell[];
 
 type Table = Row[];

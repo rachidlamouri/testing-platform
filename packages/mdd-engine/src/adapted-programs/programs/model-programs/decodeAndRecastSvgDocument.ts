@@ -405,7 +405,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
     const filePath = `packages/mdd-engine/src/adapted-programs/programs/model-programs/app/generated/${fileName}.tsx`;
     const programCode = [
       'import React, { forwardRef } from "react"',
-      'import { SvgWrapperComponent } from "../dynamicComponentTypes"',
+      'import { SvgWrapperComponent } from "../../../render-knowledge-graph/app/browser/dynamicComponentTypes"',
       'import { EllipseWrapper } from "../../../render-knowledge-graph/app/browser/wrappers/ellipseWrapper"',
       'import { GroupWrapper } from "../../../render-knowledge-graph/app/browser/wrappers/groupWrapper"',
       'import { PathWrapper } from "../../../render-knowledge-graph/app/browser/wrappers/pathWrapper"',

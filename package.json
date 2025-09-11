@@ -4,7 +4,7 @@
   "description": "Testing frameworks on testing frameworks",
   "private": true,
   "scripts": {
-    "dev": "nodemon --watch packages/mdd-engine/src/utilities/subprocess-orchestrator packages/mdd-engine/src/package-agnostic-utilities/subprocess-orchestrator/orchestrateSubprocessList.ts",
+    "dev": "nodemon --watch packages/mdd-engine/src/package-agnostic-utilities/subprocess-orchestrator packages/mdd-engine/src/package-agnostic-utilities/subprocess-orchestrator/orchestrateSubprocessList.ts",
     "program": "nodemon --ext html,ts,tsx,sh --ignore debug --ignore **/generated/**",
     "scaffold": "npx ts-node packages/mdd-engine/src/adapted-programs/programs/scaffold-file/assembleScaffoldedFile.ts",
     "example-core": "ts-node packages/open-schema-type-script/src/example/core/exampleCore.ts",
@@ -39,7 +39,6 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-jsdoc": "^39.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-unicorn": "^45.0.2",
     "http-server": "^14.1.1",

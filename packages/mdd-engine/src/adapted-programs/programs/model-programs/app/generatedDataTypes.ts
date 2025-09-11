@@ -9,7 +9,7 @@
 import React from 'react';
 
 type SvgWrapperComponent = React.FunctionComponent<{
-  ref: React.ForwardedRef<SVGSVGElement>;
+  ref: React.LegacyRef<SVGSVGElement>;
 }>;
 
 export type ProgramMetadata = {

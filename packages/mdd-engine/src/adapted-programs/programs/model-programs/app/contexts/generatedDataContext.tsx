@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import { GeneratedIndex } from '../generatedDataTypes';
 
+// @ts-no-check
 const generatedDataPromise = import('../generated') as Promise<{
   default: GeneratedIndex;
 }>;

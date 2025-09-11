@@ -59,10 +59,18 @@ type TreeifiedDatumNode =
   | n.Literal
   | n.ArrayExpression
   | n.ObjectExpression
-  | n.NewExpression;
+  | n.NewExpression
+  | n.MemberExpression;
 
 export class IdentifierConfiguration {
   constructor(public readonly name: string) {}
+}
+
+export class EnumReferenceConfiguration {
+  constructor(
+    public readonly enumName: string,
+    public readonly keyName: string,
+  ) {}
 }
 
 export const treeifyDatum = (datum: unknown): TreeifiedDatumNode => {
@@ -73,6 +81,14 @@ export const treeifyDatum = (datum: unknown): TreeifiedDatumNode => {
     case CustomDatumTypeName.CustomObjectInstance: {
       if (typedDatum.datum instanceof IdentifierConfiguration) {
         const result = b.identifier(typedDatum.datum.name);
+        return result;
+      }
+
+      if (typedDatum.datum instanceof EnumReferenceConfiguration) {
+        const result = b.memberExpression(
+          b.identifier(typedDatum.datum.enumName),
+          b.identifier(typedDatum.datum.keyName),
+        );
         return result;
       }
 

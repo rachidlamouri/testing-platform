@@ -408,6 +408,18 @@ const customDefinitionSet: CustomDefinition[] = [
     word: 'zod',
     description: 'An npm library',
   },
+  {
+    word: 'hrtime',
+    description: 'High-Resolution time measured in nanoseconds',
+  },
+  {
+    word: 'rss',
+    description: 'Resident Set Size: A measure of memory usage',
+  },
+  {
+    word: 'pid',
+    description: 'Process Id',
+  },
 ];
 
 /**

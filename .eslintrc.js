@@ -49,9 +49,6 @@ module.exports = {
         project: [
           ...fs
             .readdirSync('packages')
-            .filter(
-              (directoryName) => directoryName !== 'vscode-language-server',
-            )
             .map((directoryName) =>
               posix.join(__dirname, 'packages', directoryName, 'tsconfig.json'),
             ),
@@ -63,31 +60,7 @@ module.exports = {
             __dirname,
             'packages/mdd-engine/src/adapted-programs/programs/model-programs/app/tsconfig.json',
           ),
-          posix.join(
-            __dirname,
-            'packages',
-            'vscode-language-server',
-            'client',
-            'tsconfig.json',
-          ),
-          posix.join(
-            __dirname,
-            'packages',
-            'vscode-language-server',
-            'server',
-            'tsconfig.json',
-          ),
         ],
-      },
-    },
-    {
-      files: './packages/open-schema-type-script/src/**/*.ts',
-      plugins: ['jsdoc'],
-      extends: ['plugin:jsdoc/recommended'],
-      rules: {
-        'jsdoc/check-indentation': 'warn',
-        'jsdoc/require-param-type': 'off',
-        'jsdoc/require-returns-type': 'off',
       },
     },
   ],

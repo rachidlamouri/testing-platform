@@ -11,6 +11,7 @@ import {
   AppRendererDelayerStreamMetatype,
 } from './appRendererDelayer';
 import {
+  EnumReferenceConfiguration,
   IdentifierConfiguration,
   treeifyDatum,
 } from './decodeAndRecastSvgDocument';
@@ -75,8 +76,11 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
 
     type ModifiedNavigationPartition = SpreadN<
       [
-        Omit<NavigationPartition, 'Component'>,
-        { Component: IdentifierConfiguration },
+        Omit<NavigationPartition, 'Component' | 'boundaryTypeName'>,
+        {
+          Component: IdentifierConfiguration;
+          boundaryTypeName: EnumReferenceConfiguration;
+        },
       ]
     >;
 
@@ -107,7 +111,10 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
               getPartitionComponentVariableName(partitionFact);
 
             return {
-              boundaryTypeName: partitionFact.boundary.typeName,
+              boundaryTypeName: new EnumReferenceConfiguration(
+                'BoundaryTypeName',
+                partitionFact.boundary.typeName,
+              ),
               boundaryId: partitionFact.boundary.id.forMachine,
               label: partitionFact.boundary.displayName,
               Component: new IdentifierConfiguration(componentVariableName),
@@ -137,6 +144,7 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
 
     const programText = `
       ${importStatementText}
+      import { BoundaryTypeName } from "../../../boundary/boundaryTypeName";
       import { GeneratedIndex } from '../dynamicComponentTypes';
 
       export default ${dynamicIndexCode} satisfies GeneratedIndex

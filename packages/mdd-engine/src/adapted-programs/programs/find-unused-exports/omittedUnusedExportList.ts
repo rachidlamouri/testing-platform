@@ -202,6 +202,11 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
     importedIdentifierName:
       'buildIsTypeScriptTypeParameterInstantiationWithSpecificParameterTuple',
   },
+  {
+    importedFilePath:
+      'packages/mdd-engine/src/package-agnostic-utilities/file-logger/fileLogger.ts',
+    importedIdentifierName: 'FileLogger',
+  },
 ].map(({ importedFilePath, importedIdentifierName }) => {
   return new LintAssertionOmissionInstance({
     omitterSource,
