@@ -26,7 +26,8 @@ export class FileLogger {
     return posix.join(LOG_DIRECTORY, this.identifier);
   }
 
-  log(text: string): void {
+  log(...textList: (string | number | boolean)[]): void {
+    const text = textList.map((value) => value.toString()).join(' ');
     fs.appendFileSync(this.relativeFilePath, `${text}\n`);
   }
 }
