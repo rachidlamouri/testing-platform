@@ -43,7 +43,7 @@ const EMPTY_WHITESPACE_REGEX = /^$/;
 const SPACE_DELIMITED_INTEGERS_REGEX = /^(\d+\s*)+$/;
 const FOCUS_ONE_REGEX = /^f\d+$/;
 const FOCUS_ALL_REGEX = /^a$/;
-const RETURN_REGEX = /^x$/;
+const RETURN_REGEX = EMPTY_WHITESPACE_REGEX;
 
 class ColorNode {
   private nextNode?: ColorNode;
@@ -411,12 +411,6 @@ const subprocessStateByLabel = new Map(
   }),
 );
 
-function assertEndsInNewLine(text: string): void {
-  if (!/\n$/.test(text)) {
-    throw Error(`Expected text "${text}" to end in new line`);
-  }
-}
-
 // this clears away more than console.clear
 const obliterateConsole = (): void => {
   process.stdout.write('\x1bc');
@@ -470,14 +464,17 @@ const orchestrateSubprocessList = (): void => {
     return null;
   };
 
-  const onMenu = (previousStdInState: StdinState): string => {
+  const onMenu = (previousStdInState: StdinState): void => {
     if (previousStdInState !== StdinState.Menu) {
       subprocessStateList.forEach((state) => {
         // eslint-disable-next-line no-param-reassign
         state.valve.isVisible = false;
       });
     }
+  };
 
+  let accumulatedInput = '';
+  const renderMenu = (): void => {
     const table = formatTable([
       ['Index', 'Status', 'Time', 'Label', 'Is Visible'],
       ...subprocessStateList.map<Row>((state, index) => {
@@ -550,10 +547,6 @@ const orchestrateSubprocessList = (): void => {
 
     const returnRegexText = chalk.blue(RETURN_REGEX.toString());
 
-    const emptyWhitespaceRegexText = chalk.blue(
-      EMPTY_WHITESPACE_REGEX.toString(),
-    );
-
     const spaceDelimitedIntegersRegexText = chalk.blue(
       SPACE_DELIMITED_INTEGERS_REGEX.toString(),
     );
@@ -567,20 +560,17 @@ const orchestrateSubprocessList = (): void => {
       '',
       'Options',
       `    - enter text matching ${returnRegexText} to continue`,
-      `    - enter text matching ${emptyWhitespaceRegexText} to refresh`,
       `    - enter text with indices matching ${spaceDelimitedIntegersRegexText} to toggle subprocess visibility`,
       `    - enter text with one index matching ${focusOneRegexText} to enable visibility for one subprocess`,
       `    - enter text matching ${focusAllRegexText} to enable visibility for all subprocesses`,
     ].join('\n');
 
-    return outputText;
+    obliterateConsole();
+    process.stdout.write(`${outputText}\n`);
+    process.stdout.write(accumulatedInput);
   };
 
   const onMenuInput = (input: NormalizedInput): StdinState => {
-    if (input.isBlank) {
-      return StdinState.Menu;
-    }
-
     if (RETURN_REGEX.test(input.text)) {
       return StdinState.Idle;
     }
@@ -613,6 +603,12 @@ const orchestrateSubprocessList = (): void => {
     return StdinState.Menu;
   };
 
+  setInterval(() => {
+    if (currentStdInState === StdinState.Menu) {
+      renderMenu();
+    }
+  }, 33);
+
   const onStdIn = (input: NormalizedInput): void => {
     const previousStdInState = currentStdInState;
     let nextStdInState: StdinState;
@@ -637,7 +633,8 @@ const orchestrateSubprocessList = (): void => {
         break;
       }
       case StdinState.Menu: {
-        outputText = onMenu(currentStdInState);
+        onMenu(currentStdInState);
+        outputText = null;
         break;
       }
     }
@@ -650,23 +647,36 @@ const orchestrateSubprocessList = (): void => {
     currentStdInState = nextStdInState;
   };
 
+  process.stdin.setRawMode(true);
+
   process.stdin.pipe(
     new TextTransform({
-      onTransform: (text): string => {
-        assertEndsInNewLine(text);
+      onTransform: (nextText): string => {
+        if (nextText.includes('\u0003')) {
+          process.exit(0);
+        }
 
-        const input = text.slice(0, text.length - 1).toLowerCase();
+        const [textBeforeReturn, textAfterReturn] = nextText.split('\r');
+        const hasReturn = textAfterReturn !== undefined;
 
-        const normalizedText = input.trim();
+        if (hasReturn) {
+          accumulatedInput += textBeforeReturn;
 
-        const normalizedInput: NormalizedInput = {
-          isBlank: EMPTY_WHITESPACE_REGEX.test(normalizedText),
-          text: normalizedText,
-        };
+          const normalizedText = accumulatedInput.trim();
+          const normalizedInput: NormalizedInput = {
+            isBlank: EMPTY_WHITESPACE_REGEX.test(normalizedText),
+            text: normalizedText,
+          };
 
-        onStdIn(normalizedInput);
+          onStdIn(normalizedInput);
 
-        return text;
+          accumulatedInput = '';
+        } else {
+          accumulatedInput += nextText;
+          accumulatedInput = accumulatedInput.replaceAll(/.[\u007F]/g, '');
+        }
+
+        return nextText;
       },
     }),
   );
