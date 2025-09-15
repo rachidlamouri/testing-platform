@@ -35,7 +35,12 @@ export const App: React.FC = () => {
         </h1>
       }
       leftPanelContent={programList.map((programMetadata) => {
-        return <NavigationButton programMetadata={programMetadata} />;
+        return (
+          <NavigationButton
+            key={programMetadata.programName}
+            programMetadata={programMetadata}
+          />
+        );
       })}
       mainContent={<ActiveContent />}
     />

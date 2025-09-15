@@ -6,19 +6,21 @@ type ElementStyle = {
   strokeWidth?: string;
 };
 
+export type StyleByElement = {
+  group?: ElementStyle;
+  path?: ElementStyle;
+  polygon?: ElementStyle;
+  ellipse?: ElementStyle;
+  text?: ElementStyle;
+};
+
 type ProvidedPresentationContext = {
   style?: {
     // TODO: use or remove these
     fill?: string;
     stroke?: string;
   };
-  styleByElement?: {
-    group?: ElementStyle;
-    path?: ElementStyle;
-    polygon?: ElementStyle;
-    ellipse?: ElementStyle;
-    text?: ElementStyle;
-  };
+  styleByElement?: StyleByElement;
   onTextClicked: () => void;
   onTextHoverChange?: (isHovered: boolean) => void;
   hasInteractiveText: boolean;

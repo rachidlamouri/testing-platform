@@ -48,6 +48,7 @@ export class CollectionInstanceModel implements CollectionInstanceModelInput {
       inputAttributeByKey: {
         label: this.itemDefinition.name,
         shape: NodeShape.Box,
+        fontname: 'Helvetica',
       },
     });
   }

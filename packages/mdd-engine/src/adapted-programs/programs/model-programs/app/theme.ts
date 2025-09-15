@@ -15,6 +15,12 @@ const colors = {
  */
 export const THEME = {
   colors,
+  deselected: colors.graphite,
+  selection: colors.grass,
+  downstreamOfSelection: colors.plum,
+  upstreamOfSelection: colors.tomahto,
+  collection: colors.graphite,
+  transform: colors.graphite,
   navigation: {
     selected: colors.blurple,
     hovered: colors.lightBlurple,

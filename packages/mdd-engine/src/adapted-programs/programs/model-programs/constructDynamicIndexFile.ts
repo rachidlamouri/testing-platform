@@ -14,7 +14,7 @@ import { GeneratedIndex, ProgramMetadata } from './app/generatedDataTypes';
 import {
   IdentifierConfiguration,
   treeifyDatum,
-} from '../render-knowledge-graph/decodeAndRecastSvgDocument';
+} from '../render-knowledge-graph/treeifyDatum';
 import {
   APP_RENDERER_DELAYER_COLLECTION_ID,
   AppRendererDelayerInstance,
@@ -58,6 +58,7 @@ export const constructDynamicIndexFile = buildProgrammedTransform({
 
         return {
           programName,
+          description: programModel.skeleton.description,
           Component: new IdentifierConfiguration(Case.pascal(programName)),
         };
       })

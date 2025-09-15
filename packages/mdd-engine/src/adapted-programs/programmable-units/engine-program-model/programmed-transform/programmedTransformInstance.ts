@@ -9,7 +9,10 @@ import { DirectedGraphElement } from '../../graph-visualization/directed-graph/e
 import { DirectedGraphNode } from '../../graph-visualization/directed-graph/element/directedGraphNode';
 import { DirectedSubgraph } from '../../graph-visualization/directed-graph/element/directedSubgraph';
 import { EdgeStyle } from '../../graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialEdgeAttributeByKey';
-import { NodeShape } from '../../graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialNodeAttributeByKey';
+import {
+  NodeShape,
+  NodeStyle,
+} from '../../graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialNodeAttributeByKey';
 import { RankType } from '../../graph-visualization/directed-graph/graphviz-adapter/element-attribute-by-key/partialSubgraphAttributeByKey';
 import { DirectedSubgraphLocator } from '../../graph-visualization/directed-graph/locator/directedSubgraphLocator';
 import { CollectionInstanceModel } from '../collection-instance/collectionInstanceModel';
@@ -52,7 +55,19 @@ export class ProgrammedTransformInstance
 
   collectionInstanceList: CollectionInstanceModel[];
 
+  primaryNode: DirectedGraphNode;
+
+  inputNodeList: DirectedGraphNode[];
+
   outputNode: DirectedGraphNode;
+
+  inputToTransformEdgeList: DirectedEdge[];
+
+  transformToOutputNodeEdge: DirectedEdge;
+
+  outputNodeToCollectionEdgeList: DirectedEdge[];
+
+  collectionToInputEdgeList: DirectedEdge[];
 
   constructor(input: ProgrammedTransformInstanceInput) {
     this.id = new ProgrammedTransformInstanceId({
@@ -95,6 +110,7 @@ export class ProgrammedTransformInstance
       inputAttributeByKey: {
         label: transformName,
         shape: NodeShape.InvertedHouse,
+        fontname: 'Helvetica',
       },
     });
 
@@ -105,6 +121,18 @@ export class ProgrammedTransformInstance
       distinguisher: 'input-subgraph',
     });
 
+    const inputAndOutputNodeAttributes = {
+      label: 'X',
+      shape: NodeShape.Circle,
+      color: '#888888',
+      fillcolor: '#aaaaaa',
+      style: NodeStyle.Filled,
+      width: 0.05,
+      height: 0.05,
+      fontsize: 4,
+      fixedsize: true,
+    };
+
     const inputModelAndNodeList = model.inputModelList.map((inputModel) => {
       return {
         inputModel,
@@ -113,9 +141,7 @@ export class ProgrammedTransformInstance
           parentLocator: inputSubgraphLocator,
           source: transformSource,
           distinguisher: `input-subgraph/${inputModel.index}`,
-          inputAttributeByKey: {
-            shape: NodeShape.Point,
-          },
+          inputAttributeByKey: inputAndOutputNodeAttributes,
         }),
       };
     });
@@ -180,11 +206,8 @@ export class ProgrammedTransformInstance
       parentLocator: rootSubgraphLocator,
       source: transformSource,
       distinguisher: `output-node`,
-      inputAttributeByKey: {
-        shape: NodeShape.Point,
-      },
+      inputAttributeByKey: inputAndOutputNodeAttributes,
     });
-    this.outputNode = outputNode;
 
     const transformToOutputNodeEdge = new DirectedEdge({
       graphLocator,
@@ -208,6 +231,20 @@ export class ProgrammedTransformInstance
         });
       },
     );
+
+    this.collectionToInputEdgeList = collectionToInputEdgeList;
+
+    this.inputNodeList = inputNodeList;
+
+    this.inputToTransformEdgeList = inputToTransformEdgeList;
+
+    this.primaryNode = primaryTransformNode;
+
+    this.transformToOutputNodeEdge = transformToOutputNodeEdge;
+
+    this.outputNode = outputNode;
+
+    this.outputNodeToCollectionEdgeList = outputNodeToCollectionEdgeList;
 
     this.graphElementList = [
       rootSubgraph,

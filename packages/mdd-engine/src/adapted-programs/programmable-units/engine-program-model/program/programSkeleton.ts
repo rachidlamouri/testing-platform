@@ -9,6 +9,7 @@ import { ProgramLocator } from './programLocator';
 
 type ProgramSkeletonInput = {
   programLocator: ProgramLocator;
+  description: string;
   collectionDefinitionLocatorList: CollectionDefinitionLocator[];
   collectionInstanceSkeletonList: CollectionInstanceSkeleton[];
   programmedTransformLocatorList: ProgrammedTransformLocator[];
@@ -24,6 +25,8 @@ export class ProgramSkeleton implements ProgramSkeletonInput {
 
   programLocator: ProgramLocator;
 
+  description: string;
+
   collectionDefinitionLocatorList: CollectionDefinitionLocator[];
 
   collectionInstanceSkeletonList: CollectionInstanceSkeleton[];
@@ -34,6 +37,7 @@ export class ProgramSkeleton implements ProgramSkeletonInput {
 
   constructor(input: ProgramSkeletonInput) {
     this.programLocator = input.programLocator;
+    this.description = input.description;
     this.collectionDefinitionLocatorList =
       input.collectionDefinitionLocatorList;
     this.collectionInstanceSkeletonList = input.collectionInstanceSkeletonList;

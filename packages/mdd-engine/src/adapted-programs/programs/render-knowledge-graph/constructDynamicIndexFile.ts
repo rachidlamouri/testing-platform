@@ -14,7 +14,7 @@ import {
   EnumReferenceConfiguration,
   IdentifierConfiguration,
   treeifyDatum,
-} from './decodeAndRecastSvgDocument';
+} from './treeifyDatum';
 import { LAYER_COLLECTION_ID, LayerStreamMetatype } from './layer/layer';
 import {
   PARTITION_FACT_COLLECTION_ID,

@@ -207,6 +207,11 @@ export const omittedUnusedExportList: LintAssertionOmission[] = [
       'packages/mdd-engine/src/package-agnostic-utilities/file-logger/fileLogger.ts',
     importedIdentifierName: 'FileLogger',
   },
+  {
+    importedFilePath:
+      'packages/mdd-engine/src/adapted-programs/programs/model-programs/app/providers/RenderablePart.tsx',
+    importedIdentifierName: 'RenderablePart',
+  },
 ].map(({ importedFilePath, importedIdentifierName }) => {
   return new LintAssertionOmissionInstance({
     omitterSource,
