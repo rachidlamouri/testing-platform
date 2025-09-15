@@ -64,7 +64,7 @@ const getEdgeStatement = (edge: DirectedGraphEdge): EdgeStatement => {
   const modifiedEdge = {
     ...edge,
     attributeByKey: {
-      id: `${edge.tailId}:${edge.headId}`,
+      id: id ?? `${edge.tailId}:${edge.headId}`,
       ...otherAttributeByKey,
     },
   };

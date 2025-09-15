@@ -29,6 +29,8 @@ import {
   SVG_DOCUMENT_COLLECTION_ID,
   SvgDocumentStreamMetatype,
 } from '../../programmable-units/graph-visualization/directed-graph/svg-adapter/svgDocument';
+import { RenderablePartProps } from './app/modelPartProps';
+import { treeifyDatum } from '../render-knowledge-graph/treeifyDatum';
 
 const PROGRAMMED_TRANSFORM_NAME = 'decodeAndRecastSvgDocument' as const;
 const programmedTransformSource = new ProgrammedTransformSourceInstance({
@@ -302,6 +304,309 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       throw Error('Invalid or missing starting node');
     }
 
+    const renderablePartPropsById = new Map<string, RenderablePartProps>(
+      [
+        ...programModel.collectionInstanceList.map((collection) => {
+          return {
+            element: collection.node,
+            isCollection: true,
+            isStartOrEnd: false,
+            isTransform: false,
+            isProxyNode: false,
+            isEdge: false,
+            info: {
+              title: collection.itemDefinition.name,
+              description: collection.itemDefinition.description,
+            },
+          };
+        }),
+        ...programModel.transformInstanceList.map((transform) => {
+          return {
+            element: transform.primaryNode,
+            isTransform: true,
+            isStartOrEnd: false,
+            isCollection: false,
+            isProxyNode: false,
+            isEdge: false,
+            info: {
+              title: transform.model.name,
+              description: transform.model.description,
+            },
+          };
+        }),
+        ...programModel.transformInstanceList
+          .flatMap((transform) => {
+            return [...transform.inputNodeList, transform.outputNode];
+          })
+          .map((element) => {
+            return {
+              element,
+              isProxyNode: true,
+              isStartOrEnd: false,
+              isCollection: false,
+              isTransform: false,
+              isEdge: false,
+              info: undefined,
+            };
+          }),
+        {
+          element: programModel.startNode,
+          isStartOrEnd: true,
+          isCollection: false,
+          isTransform: false,
+          isProxyNode: false,
+          isEdge: false,
+          info: undefined,
+        },
+        {
+          element: programModel.endNode,
+          isStartOrEnd: true,
+          isCollection: false,
+          isTransform: false,
+          isProxyNode: false,
+          isEdge: false,
+          info: undefined,
+        },
+        ...[
+          ...programModel.startingEdgeList,
+          ...programModel.endingCollectionEdgeList,
+          ...programModel.endingTransformEdgeList,
+          ...programModel.transformInstanceList.flatMap((transform) => {
+            return [
+              ...transform.collectionToInputEdgeList,
+              ...transform.inputToTransformEdgeList,
+              transform.transformToOutputNodeEdge,
+              ...transform.outputNodeToCollectionEdgeList,
+            ];
+          }),
+        ].map((element) => {
+          return {
+            element,
+            isEdge: true,
+            isStartOrEnd: false,
+            isCollection: false,
+            isTransform: false,
+            isProxyNode: false,
+            info: undefined,
+          };
+        }),
+      ].map(
+        ({
+          element,
+          isStartOrEnd,
+          isCollection,
+          isTransform,
+          isProxyNode,
+          isEdge,
+          info,
+        }) => {
+          const partId = element.localIdDigest;
+          const source = element.source.id.forHuman;
+
+          return [
+            partId,
+            {
+              partId,
+              source,
+              upstreamIdSet: new Set<string>(),
+              downstreamIdSet: new Set<string>(),
+              isStartOrEnd,
+              isCollection,
+              isTransform,
+              isProxyNode,
+              isEdge,
+              info,
+            } satisfies RenderablePartProps,
+          ];
+        },
+      ),
+    );
+
+    const collectionInstanceByItemId = new Map(
+      programModel.collectionInstanceList.map((instance) => {
+        return [instance.itemDefinition.id.forHuman, instance];
+      }),
+    );
+
+    const getRenderablePart = (partId: string): RenderablePartProps => {
+      const part = renderablePartPropsById.get(partId);
+      assertNotUndefined(part);
+      return part;
+    };
+
+    const startNodePart = getRenderablePart(
+      programModel.startNode.localIdDigest,
+    );
+    const endNodePart = getRenderablePart(programModel.endNode.localIdDigest);
+
+    programModel.unfedCollectionInstanceList.forEach((collection, index) => {
+      const collectionPart = getRenderablePart(collection.node.localIdDigest);
+      const startingEdge = programModel.startingEdgeList[index];
+      const startingEdgePart = getRenderablePart(startingEdge.localIdDigest);
+
+      startNodePart.downstreamIdSet.add(collectionPart.partId);
+
+      startingEdgePart.proxyId = collectionPart.partId;
+      startingEdgePart.upstreamIdSet.add(startNodePart.partId);
+
+      collectionPart.upstreamIdSet.add(startNodePart.partId);
+    });
+
+    programModel.unconsumedCollectionInstanceList.forEach(
+      (collection, index) => {
+        const collectionPart = getRenderablePart(collection.node.localIdDigest);
+        const endingEdge = programModel.endingCollectionEdgeList[index];
+        const endingEdgePart = getRenderablePart(endingEdge.localIdDigest);
+
+        endingEdgePart.proxyId = collectionPart.partId;
+        endingEdgePart.downstreamIdSet.add(endNodePart.partId);
+
+        collectionPart.downstreamIdSet.add(endNodePart.partId);
+
+        endNodePart.upstreamIdSet.add(collectionPart.partId);
+      },
+    );
+
+    programModel.endingTransformList.forEach((transform, index) => {
+      const transformPart = getRenderablePart(
+        transform.primaryNode.localIdDigest,
+      );
+      const endingEdge = programModel.endingTransformEdgeList[index];
+      const endingEdgePart = getRenderablePart(endingEdge.localIdDigest);
+
+      endingEdgePart.proxyId = endNodePart.partId;
+      endingEdgePart.upstreamIdSet.add(transformPart.partId);
+
+      transformPart.downstreamIdSet.add(endNodePart.partId);
+
+      endNodePart.upstreamIdSet.add(transformPart.partId);
+    });
+
+    programModel.transformInstanceList.forEach((transform) => {
+      const transformPart = getRenderablePart(
+        transform.primaryNode.localIdDigest,
+      );
+      assertNotUndefined(transformPart);
+
+      transform.collectionToInputEdgeList.forEach((edge) => {
+        const edgePart = getRenderablePart(edge.localIdDigest);
+        assertNotUndefined(edgePart);
+        transformPart.upstreamIdSet.add(edge.localIdDigest);
+        edgePart.downstreamIdSet.add(transform.primaryNode.localIdDigest);
+      });
+
+      transform.model.inputModelList.forEach((inputModel) => {
+        const inputCollectionInstance = collectionInstanceByItemId.get(
+          inputModel.itemDefinition.id.forHuman,
+        );
+        assertNotUndefined(inputCollectionInstance);
+        const inputCollectionPart = getRenderablePart(
+          inputCollectionInstance.node.localIdDigest,
+        );
+
+        const collectionToInputEdge =
+          transform.collectionToInputEdgeList[inputModel.index];
+        const collectionToInputEdgePart = getRenderablePart(
+          collectionToInputEdge.localIdDigest,
+        );
+
+        const inputNode = transform.inputNodeList[inputModel.index];
+        const inputNodePart = getRenderablePart(inputNode.localIdDigest);
+
+        const inputToTransformEdge =
+          transform.inputToTransformEdgeList[inputModel.index];
+        const inputToTransformEdgePart = getRenderablePart(
+          inputToTransformEdge.localIdDigest,
+        );
+
+        inputCollectionPart.downstreamIdSet.add(transformPart.partId);
+
+        collectionToInputEdgePart.proxyId = inputCollectionPart.partId;
+        collectionToInputEdgePart.downstreamIdSet.add(transformPart.partId);
+
+        inputNodePart.proxyId = inputCollectionPart.partId;
+        inputNodePart.downstreamIdSet.add(transformPart.partId);
+
+        inputToTransformEdgePart.proxyId = inputCollectionPart.partId;
+        inputToTransformEdgePart.downstreamIdSet.add(transformPart.partId);
+
+        transformPart.upstreamIdSet.add(
+          inputCollectionInstance.node.localIdDigest,
+        );
+      });
+
+      const transformToOutputNodeEdge = getRenderablePart(
+        transform.transformToOutputNodeEdge.localIdDigest,
+      );
+      transformToOutputNodeEdge.proxyId = transformPart.partId;
+
+      const outputNodePart = getRenderablePart(
+        transform.outputNode.localIdDigest,
+      );
+      outputNodePart.proxyId = transformPart.partId;
+
+      transform.model.outputModelList.forEach((outputModel, index) => {
+        const outputNodeToCollectionEdge =
+          transform.outputNodeToCollectionEdgeList[index];
+        const outputNodeToCollectionEdgePart = getRenderablePart(
+          outputNodeToCollectionEdge.localIdDigest,
+        );
+
+        const outputCollectionInstance = collectionInstanceByItemId.get(
+          outputModel.itemDefinition.id.forHuman,
+        );
+        assertNotUndefined(outputCollectionInstance);
+        const outputCollectionPart = getRenderablePart(
+          outputCollectionInstance.node.localIdDigest,
+        );
+
+        transformPart.downstreamIdSet.add(
+          outputCollectionInstance.node.localIdDigest,
+        );
+
+        transformToOutputNodeEdge.downstreamIdSet.add(
+          outputCollectionPart.partId,
+        );
+
+        outputNodePart.downstreamIdSet.add(outputCollectionPart.partId);
+
+        outputNodeToCollectionEdgePart.proxyId = outputCollectionPart.partId;
+        outputNodeToCollectionEdgePart.upstreamIdSet.add(transformPart.partId);
+
+        outputCollectionPart.upstreamIdSet.add(transformPart.partId);
+      });
+    });
+
+    const recastProgramModelPart = (
+      id: string,
+      childElement: n.JSXElement,
+    ): n.JSXElement | n.JSXFragment => {
+      const renderablePart = renderablePartPropsById.get(id);
+
+      const wrapperConfiguration =
+        renderablePart !== undefined
+          ? {
+              componentName: 'RenderablePart',
+              props: renderablePart,
+            }
+          : null;
+      if (wrapperConfiguration === null) {
+        return b.jsxFragment(b.jsxOpeningFragment(), b.jsxClosingFragment(), [
+          childElement,
+        ]);
+      }
+
+      const { componentName, props } = wrapperConfiguration;
+
+      return b.jsxElement(
+        b.jsxOpeningElement(b.jsxIdentifier(componentName), [
+          b.jsxSpreadAttribute(treeifyDatum(props)),
+        ]),
+        b.jsxClosingElement(b.jsxIdentifier(componentName)),
+        [childElement],
+      );
+    };
+
     const recastElementNode = (
       decodedNode: DecodedElementNode,
     ): n.JSXElement | n.JSXFragment | null => {
@@ -352,7 +657,12 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
         childJsxList,
       );
 
-      return element;
+      const parentElement =
+        decodedNode.id !== null
+          ? recastProgramModelPart(decodedNode.id, element)
+          : element;
+
+      return parentElement;
     };
 
     const recastTextNode = (
@@ -412,6 +722,7 @@ export const decodeAndRecastSvgDocument = buildProgrammedTransform({
       'import { PolygonWrapper } from "../../../render-knowledge-graph/app/browser/wrappers/polygonWrapper"',
       'import { SvgWrapper } from "../../../render-knowledge-graph/app/browser/wrappers/svgWrapper"',
       'import { TextWrapper } from "../../../render-knowledge-graph/app/browser/wrappers/textWrapper"',
+      'import { RenderablePart } from "../providers/RenderablePart"',
       '',
       `export const Main: SvgWrapperComponent = forwardRef<SVGSVGElement>((props, ref) => { return  (${
         recast.print(jsxNode).code

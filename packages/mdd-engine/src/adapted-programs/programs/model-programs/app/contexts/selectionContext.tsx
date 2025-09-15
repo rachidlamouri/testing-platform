@@ -9,6 +9,9 @@ import React, {
 type SelectionCtx = {
   selectedProgramName: string | null;
   onSelectProgram: (programName: string) => void;
+
+  selectedPartId: string | null;
+  onSelectPart: (partId: string) => void;
 };
 
 /**
@@ -17,11 +20,14 @@ type SelectionCtx = {
 const SelectionContext = createContext<SelectionCtx>({
   selectedProgramName: null,
   onSelectProgram: () => {},
+  selectedPartId: null,
+  onSelectPart: () => {},
 });
 
 export const SelectionProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
+  const [selectedPartId, setSelectedPartId] = useState<string | null>(null);
   const [selectedProgramName, setSelectedProgramName] = useState<string | null>(
     null,
   );
@@ -32,6 +38,14 @@ export const SelectionProvider: FunctionComponent<PropsWithChildren> = ({
         selectedProgramName,
         onSelectProgram: (programName): void => {
           setSelectedProgramName(programName);
+        },
+        selectedPartId,
+        onSelectPart: (partId): void => {
+          if (selectedPartId === partId) {
+            setSelectedPartId(null);
+          } else {
+            setSelectedPartId(partId);
+          }
         },
       }}
     >

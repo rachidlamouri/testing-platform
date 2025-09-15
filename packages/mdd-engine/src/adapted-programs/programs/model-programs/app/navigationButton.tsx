@@ -45,6 +45,10 @@ export const NavigationButton: React.FunctionComponent<
         onSelectProgram(programName);
       }}
       onMouseEnter={(): void => {
+        // eslint-disable-next-line no-console
+        console.log(
+          `${programMetadata.programName}:\n${programMetadata.description}`,
+        );
         setIsHovered(true);
       }}
       onMouseLeave={(): void => {

@@ -29,7 +29,7 @@ export class DirectedEdge extends DirectedGraphElementLocator<
 
   head: DirectedGraphNode;
 
-  attributeByKey: Omit<PartialEdgeAttributeByKey, 'id'>;
+  attributeByKey: PartialEdgeAttributeByKey;
 
   constructor(input: DirectedEdgeInput) {
     const tailId = input.tail.localComplexId;
@@ -58,6 +58,9 @@ export class DirectedEdge extends DirectedGraphElementLocator<
 
     this.tail = input.tail;
     this.head = input.head;
-    this.attributeByKey = input.attributeByKey ?? {};
+    this.attributeByKey = {
+      id: localId.forMachine,
+      ...(input.attributeByKey ?? {}),
+    };
   }
 }

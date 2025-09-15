@@ -12,6 +12,7 @@ import { parseProgrammedTransformTuple } from './programmed-transform/parseProgr
 import { ProgrammedTransformLocator } from '../../programmed-transform/programmedTransformLocator';
 import { ProgramSkeleton } from '../../program/programSkeleton';
 import { ParsedCollectionStatus } from './collection-instance/parseCollectionInstanceListNode';
+import { CategorizedCommentTypeName } from '../../../type-script-file/comment/categorized/categorizedCommentTypeName';
 
 const reporterSource = new FileSourceInstance({
   absoluteFilePath: __filename,
@@ -189,8 +190,15 @@ export const parseAdaptedProgramFile = (
     ...unparseableProgrammedTransformErrorList,
   ];
 
+  const { comment } = adaptedParserContext.engineCallExpression;
+  const description =
+    comment?.typeName === CategorizedCommentTypeName.Descriptive
+      ? comment.description
+      : '';
+
   const programSkeleton = new ProgramSkeleton({
     programLocator,
+    description,
     collectionDefinitionLocatorList,
     collectionInstanceSkeletonList,
     programmedTransformLocatorList,

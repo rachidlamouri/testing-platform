@@ -14,6 +14,7 @@ type SvgWrapperComponent = React.FunctionComponent<{
 
 export type ProgramMetadata = {
   programName: string;
+  description: string;
   Component: SvgWrapperComponent;
 };
 

@@ -35,6 +35,18 @@ export class ProgramModel implements ProgramModelInput {
 
   unfedCollectionInstanceList: CollectionInstanceModel[];
 
+  startNode: DirectedGraphNode;
+
+  endNode: DirectedGraphNode;
+
+  startingEdgeList: DirectedEdge[];
+
+  endingCollectionEdgeList: DirectedEdge[];
+
+  endingTransformList: ProgrammedTransformInstance[];
+
+  endingTransformEdgeList: DirectedEdge[];
+
   graphElementList: DirectedGraphElement[];
 
   constructor(input: ProgramModelInput) {
@@ -50,10 +62,13 @@ export class ProgramModel implements ProgramModelInput {
 
     const programSource = programLocator.programFile.source;
 
+    const fontname = 'Helvetica';
+
     const graph = new DirectedGraph({
       locator: graphLocator,
       inputAttributeByKey: {
         labelloc: GraphLikeLabelLocation.Top,
+        fontname,
       },
       outputFileName: programName,
     });
@@ -64,8 +79,8 @@ export class ProgramModel implements ProgramModelInput {
       source: programSource,
       distinguisher: 'start',
       inputAttributeByKey: {
-        label: 'start',
-        color: 'green',
+        label: 'START',
+        fontname,
       },
     });
 
@@ -86,8 +101,8 @@ export class ProgramModel implements ProgramModelInput {
       source: programSource,
       distinguisher: 'end',
       inputAttributeByKey: {
-        label: 'end',
-        color: 'blue',
+        label: 'END',
+        fontname,
       },
     });
 
@@ -102,16 +117,26 @@ export class ProgramModel implements ProgramModelInput {
       },
     );
 
-    const endingTransformEdgeList = input.transformInstanceList
-      .filter((instance) => instance.model.outputModelList.length === 0)
-      .map((instance) => {
-        return new DirectedEdge({
-          graphLocator,
-          tail: instance.outputNode,
-          head: endNode,
-          source: programSource,
-        });
+    const endingTransformList = input.transformInstanceList.filter(
+      (instance) => instance.model.outputModelList.length === 0,
+    );
+
+    const endingTransformEdgeList = endingTransformList.map((instance) => {
+      return new DirectedEdge({
+        graphLocator,
+        tail: instance.outputNode,
+        head: endNode,
+        source: programSource,
       });
+    });
+
+    this.endingTransformList = endingTransformList;
+
+    this.startNode = startNode;
+    this.endNode = endNode;
+    this.startingEdgeList = startingEdgeList;
+    this.endingCollectionEdgeList = endingCollectionEdgeList;
+    this.endingTransformEdgeList = endingTransformEdgeList;
 
     this.graphElementList = [
       // keep multiline
